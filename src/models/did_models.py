@@ -24,7 +24,12 @@ class DIDDocument(db.Model):
     #   - 'client': 客户（业主/住户）
     #   - 'temporary': 临时人员（如访客、施工人员）
     #   - 'employee': 员工（如保安、保洁）
-    did_type = db.Column(db.Enum('root', 'property', 'client', 'temporary', 'employee'), nullable=False)
+    #   - 'device': 物联网设备（如传感器、摄像头、执行器）
+    #   - 'area': 区域/空间（如小区、楼栋、楼层、房间）
+    # did_type = db.Column(db.Enum('root', 'property', 'client', 'temporary', 'employee'), nullable=False)
+    did_type = db.Column(
+        db.Enum('root', 'property', 'client', 'temporary', 'employee', 'device', 'area', name='did_type_enum'),
+        nullable=False)
 
     # 该 DID 对应的公钥（用于验证签名），通常为 JWK 或 PEM 格式字符串
     public_key = db.Column(db.Text, nullable=False)

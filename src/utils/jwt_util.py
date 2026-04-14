@@ -60,15 +60,15 @@ def jwt_required(func):
     def wrapper(*args, **kwargs):
         auth_header = request.headers.get('Authorization', '')
         if not auth_header.startswith('Bearer '):
-            return jsonify(Result.failure(message="Missing or invalid Authorization header")), 401
+            return jsonify(Result.error(message="Missing or invalid Authorization header")), 401
 
         token = auth_header.split(' ')[1]
         try:
             payload = decode_jwt(token)
         except jwt.ExpiredSignatureError:
-            return jsonify(Result.failure(message="Token has expired")), 401
+            return jsonify(Result.error(message="Token has expired")), 401
         except jwt.InvalidTokenError:
-            return jsonify(Result.failure(message="Invalid token")), 401
+            return jsonify(Result.error(message="Invalid token")), 401
 
         # 将解析出的信息存入 Flask 的全局对象 g 中，方便后续获取
         g.jwt_payload = payload

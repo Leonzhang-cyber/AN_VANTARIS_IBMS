@@ -5,10 +5,10 @@ from cryptography.hazmat.primitives.asymmetric import ed25519
 # ==============================
 # 🔑 请在这里填写你的参数
 # ==============================
-DID = "did:ibms:employee:3c00dfe4-1090-4e9f-8e59-99c16d50776b"
-VC_ID = "43ce8396-9621-4a68-836e-ddb6c0bd3bb3"
-PRIVATE_KEY_HEX = "632783d7d79047a2304bc117c447e836f6f468bfaa9cb9d1b0a5d0c991cb2980"
-CHALLENGE = "221d539732a6f30718d5411c4cfba093"
+DID = "did:ibms:area:0bdf6af2-0ba2-4c85-b3c6-63f02f3dc31e"
+VC_ID = "0b29870f-702b-49b3-abbd-c2e77e262788"
+PRIVATE_KEY_HEX = "e05d6fa2c4dbfde2b2efe0bf71bca8cf7f264878ec29b2286003f8c7c243cc52"
+CHALLENGE = "9b44f3410ffaaea8a2c59eb9b0c2c5be"
 
 # ==============================
 # 🧮 自动生成 VP

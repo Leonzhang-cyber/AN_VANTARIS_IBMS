@@ -173,7 +173,7 @@ class DIDService:
 
         else:
             # --- 旧：Challenge 模式（完全保留原逻辑）---
-            did = login_data.get('did')
+            did = login_data.get('')
             challenge = login_data.get('challenge')
             signature_hex = login_data.get('signature')
 
@@ -207,33 +207,7 @@ class DIDService:
         }
         jwt_token = create_jwt(payload)
         return jwt_token
-    # @staticmethod
-    # def login(did: str, signature_hex: str, challenge: str) -> Optional[str]:
-    #     # 1. 验证挑战码
-    #     if not DIDService.verify_challenge(did, challenge):
-    #         return None
-    #     # 2. 验证签名
-    #     doc = DIDDocumentDAO.find_by_did(did)
-    #     if not doc:
-    #         return None
-    #     public_key = ed25519.Ed25519PublicKey.from_public_bytes(bytes.fromhex(doc.public_key))
-    #     try:
-    #         public_key.verify(bytes.fromhex(signature_hex), challenge.encode())
-    #     except:
-    #         return None
-    #     # 3. 获取有效 VC
-    #     vc = VCCredentialDAO.find_valid_by_subject(did)
-    #     if not vc:
-    #         return None
-    #     # 4. 生成 JWT
-    #     payload = {
-    #         'sub': did,
-    #         'frontend_perms': vc.frontend_permissions,
-    #         'api_perms': vc.api_permissions,
-    #         'exp': datetime.utcnow() + timedelta(hours=8)
-    #     }
-    #     jwt_token = create_jwt(payload)
-    #     return jwt_token
+
 
     # ---------- 撤销凭证 ----------
     @staticmethod
@@ -264,6 +238,7 @@ class DIDService:
             }
         }
 
+    # ---------- VC 重构 ----------
     @staticmethod
     def update_employee(
             issuer_did, issuer_private_key, subject_did,
@@ -314,3 +289,123 @@ class DIDService:
         )
 
         return new_vc_id_full
+
+    @staticmethod
+    def get_subordinates(requester_did: str, signature_hex: str, challenge: str = None) -> dict:
+        """
+        验证请求者身份并返回其签发的所有下属 DID
+        :param requester_did: 请求者 DID
+        :param signature_hex: 对挑战码的签名（十六进制）
+        :param challenge: 挑战码，若为 None 则使用内置的固定挑战方式（如当前时间戳）
+        :return: 下属列表
+        """
+        # 1. 查找 DID 文档
+        doc = DIDDocumentDAO.find_by_did(requester_did)
+        if not doc:
+            raise ValueError("DID not found")
+
+        # 2. 验证签名（此处使用 challenge 方式）
+        if not challenge:
+            # 若未提供挑战码，可约定使用固定字符串 "subordinates_query" 或当前时间戳
+            challenge = f"query:{int(datetime.utcnow().timestamp())}"
+        public_key = ed25519.Ed25519PublicKey.from_public_bytes(bytes.fromhex(doc.public_key))
+        try:
+            public_key.verify(bytes.fromhex(signature_hex), challenge.encode())
+        except Exception:
+            raise PermissionError("Invalid signature")
+
+        # 3. 验证通过，查询该 DID 作为 issuer 签发的所有 DID 文档（下属）
+        subordinates = DIDDocumentDAO.find_by_issuer(requester_did)
+
+        # 4. 格式化返回
+        sub_list = []
+        for sub in subordinates:
+            sub_list.append({
+                'did': sub.did,
+                'did_type': sub.did_type,
+                'metadata': sub.extra_metadata,
+                'created_at': sub.created_at.isoformat() + 'Z' if sub.created_at else None
+            })
+
+        return {
+            'issuer_did': requester_did,
+            'total': len(sub_list),
+            'subordinates': sub_list
+        }
+
+    @staticmethod
+    def create_entity(issuer_did: str, issuer_private_key_hex: str,
+                      did_type: str, metadata: dict,
+                      frontend_perms: List[str], api_perms: List[str],
+                      valid_days: int = 365) -> dict:
+        """
+        统一实体创建方法，支持任意 DID 类型
+        :param did_type: DID 类型，如 'property','employee','device','area'
+        :param valid_days: 默认365天
+        """
+        # 1. 检查签发者是否存在
+        issuer_doc = DIDDocumentDAO.find_by_did(issuer_did)
+        if not issuer_doc:
+            raise PermissionError("签发者 DID 不存在")
+
+        # 2. 根 DID 特殊处理：无需 VC，拥有全部权限，可创建任意类型
+        if issuer_doc.did_type == 'root':
+            # 根 DID 直接放行，不进行后续 VC 校验
+            pass
+        else:
+            # 3. 非根签发者：必须持有有效 VC，且请求权限必须在其权限范围内
+            issuer_vc = VCCredentialDAO.find_valid_by_subject(issuer_did)
+            if not issuer_vc:
+                raise PermissionError("签发者没有有效的权限凭证")
+
+            # 权限子集校验
+            if not set(frontend_perms).issubset(set(issuer_vc.frontend_permissions or [])):
+                raise PermissionError("请求的前端权限超出签发者权限范围")
+            if not set(api_perms).issubset(set(issuer_vc.api_permissions or [])):
+                raise PermissionError("请求的API权限超出签发者权限范围")
+
+            # 额外业务约束：创建 property 类型必须是根 DID（由于前面已过滤非根，这里直接拒绝）
+            if did_type == 'property':
+                raise PermissionError("只有根 DID 可以创建机构")
+
+        # 4. 生成公私钥
+        private_key = ed25519.Ed25519PrivateKey.generate()
+        public_key = private_key.public_key()
+
+        # 5. 构造 DID
+        entity_did = f"did:ibms:{did_type}:{uuid.uuid4()}"
+
+        # 6. 存储 DIDDocument
+        DIDDocumentDAO.create(
+            did=entity_did,
+            did_type=did_type,
+            public_key=public_key.public_bytes_raw().hex(),
+            issuer_did=issuer_did,
+            extra_metadata=metadata
+        )
+
+        # 7. 构建 VC
+        vc_id = str(uuid.uuid4())
+        valid_from = datetime.utcnow()
+        valid_until = valid_from + timedelta(days=valid_days)
+        vc_json = DIDService._build_vc(vc_id, issuer_did, entity_did,
+                                       frontend_perms, api_perms,
+                                       valid_from, valid_until)
+
+        # 8. 签名
+        issuer_private_key = ed25519.Ed25519PrivateKey.from_private_bytes(
+            bytes.fromhex(issuer_private_key_hex)
+        )
+        signature = issuer_private_key.sign(json.dumps(vc_json, sort_keys=True).encode())
+        vc_json['proof'] = {'signature': signature.hex()}
+
+        # 9. 保存 VC
+        VCCredentialDAO.create(vc_id=vc_id, issuer_did=issuer_did, subject_did=entity_did,
+                               frontend_perms=frontend_perms, api_perms=api_perms,
+                               valid_from=valid_from, valid_until=valid_until, vc_json=vc_json)
+
+        return {
+            'did': entity_did,
+            'private_key': private_key.private_bytes_raw().hex(),
+            'vc_id': vc_id
+        }

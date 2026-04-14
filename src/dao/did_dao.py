@@ -46,6 +46,15 @@ class VCCredentialDAO:
         return VCCredential.query.filter_by(vc_id=vc_id).first()
 
     @staticmethod
+    def find_by_issuer(issuer_did: str) -> List[VCCredential]:
+        """
+        查询某个 issuer DID 签发的所有 VC（包括有效和已撤销的）
+        :param issuer_did: 签发者 DID
+        :return: VCCredential 对象列表
+        """
+        return VCCredential.query.filter_by(issuer_did=issuer_did).all()
+
+    @staticmethod
     def create(vc_id: str, issuer_did: str, subject_did: str,
                frontend_perms: list, api_perms: list,
                valid_from: datetime, valid_until: datetime,
