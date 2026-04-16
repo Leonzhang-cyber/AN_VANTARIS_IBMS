@@ -3,10 +3,9 @@ from typing import Optional, Tuple, List
 import json
 import secrets
 from cryptography.hazmat.primitives.asymmetric import ed25519
-from src.utils.jwt_util import create_jwt
+from src.common.utils.jwt_util import create_jwt
 from datetime import datetime, timedelta
-from src.models.did_models import DIDDocument, VCCredential
-from src.dao.did_dao import DIDDocumentDAO, VCCredentialDAO, EmployeeDAO
+from src.DID.dao.did_dao import DIDDocumentDAO, VCCredentialDAO, EmployeeDAO
 import uuid
 
 
@@ -149,7 +148,7 @@ class DIDService:
                 "presentation": { ... }  # VerifiablePresentation 对象
             }
         """
-        from src.utils.vp_util import verify_vp  # 假设你已创建 vp_util.py
+        from src.common.utils.vp_util import verify_vp  # 假设你已创建 vp_util.py
 
         holder_did = None
         vc = None

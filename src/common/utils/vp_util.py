@@ -1,8 +1,7 @@
 # src/utils/vp_util.py
 import json
-from datetime import datetime
 from cryptography.hazmat.primitives.asymmetric import ed25519
-from src.dao.did_dao import DIDDocumentDAO
+from src.DID.dao.did_dao import DIDDocumentDAO
 
 
 def verify_vp(vp: dict) -> tuple[bool, str, str]:

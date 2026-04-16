@@ -3,7 +3,7 @@ import jwt
 from functools import wraps
 from flask import request, current_app, g, jsonify
 from datetime import datetime, timedelta
-from src.models.response import Result
+from src.common.models.response import Result
 
 
 def _get_secret() -> str:

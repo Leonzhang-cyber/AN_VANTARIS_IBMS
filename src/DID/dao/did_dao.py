@@ -1,8 +1,8 @@
 # src/dao/did_dao.py
 from typing import Optional, List
 from datetime import datetime  # 添加导入
-from src.models.did_models import DIDDocument, VCCredential, PermissionDefinition
-from src.core.database import db
+from src.DID.models.did_models import DIDDocument, VCCredential, PermissionDefinition
+from src.common.core.database import db
 
 
 class DIDDocumentDAO:
@@ -133,7 +133,7 @@ class EmployeeDAO:
 
         print(">>> EmployeeDAO.update_employee_credential 被调用")
 
-        from src.models.did_models import DIDDocument, VCCredential
+        from src.DID.models.did_models import DIDDocument, VCCredential
         from datetime import datetime, timedelta
         import uuid
 

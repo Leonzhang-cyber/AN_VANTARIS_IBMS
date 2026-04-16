@@ -1,5 +1,5 @@
 # src/models/did_models.py
-from src.core.database import db
+from src.common.core.database import db
 from datetime import datetime
 
 

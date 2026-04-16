@@ -1,10 +1,10 @@
 # src/api/did/did_api.py
 from flask import request
 from src.api import api_bp
-from src.services.did.did_service import DIDService
-from src.models.response import Result
-from src.utils.jwt_util import jwt_required, get_current_did  # 待实现
-from src.dao.did_dao import VCCredentialDAO, DIDDocumentDAO   # 添加 DIDDocumentDAO
+from src.DID.services.did_service import DIDService
+from src.common.models.response import Result
+from src.common.utils.jwt_util import jwt_required, get_current_did  # 待实现
+from src.DID.dao.did_dao import VCCredentialDAO, DIDDocumentDAO   # 添加 DIDDocumentDAO
 
 """
     初始化根DID

@@ -2,8 +2,8 @@
 from flask import Flask
 from flask_cors import CORS
 from src.api import api_bp
-from src.core.database import init_database
-from src.config.default import Config
+from src.common.core.database import init_database
+from src.common.config.default import Config
 
 def create_app():
     app = Flask(__name__)
@@ -15,4 +15,4 @@ def create_app():
 
 if __name__ == '__main__':
     app = create_app()
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=Flask , host='0.0.0.0', port=5000)

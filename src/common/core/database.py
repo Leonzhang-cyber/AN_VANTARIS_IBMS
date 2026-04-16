@@ -1,11 +1,9 @@
 # src/core/database.py
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import text
-import sys
 
 # 导入应用配置（确保路径正确）
 try:
-    from src.config.default import Config as AppConfig
+    from src.common.config.default import Config as AppConfig
 except ImportError:
     raise RuntimeError("❌ 无法导入配置类：src.config.default.Config，请检查项目路径。")
 
