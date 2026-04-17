@@ -37,7 +37,7 @@ class ErrorCode:
     UNAUTHORIZED = 40001
     FORBIDDEN = 40003
 
-    # DID 模块专用
+    # DID_Back 模块专用
     DID_INVALID = 41001
     DID_RESOLVE_FAILED = 41002
     VC_INVALID = 41003

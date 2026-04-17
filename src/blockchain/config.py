@@ -58,3 +58,34 @@ DEFAULT_GAS_PRICE: int = 0
 #   - 21000 是以太坊标准转账的最低 gas 消耗
 # ============================================================
 DEFAULT_GAS_LIMIT: int = 21000
+
+"""
+DID 模块专用配置
+包含锚定智能合约的地址和 ABI
+"""
+
+# ======================== 锚定合约配置 ========================
+# 说明：
+#   - 合约部署后，将返回的地址填入此处
+#   - ABI 可从 Remix 编译后的 JSON 中复制，或从 solc 编译输出获取
+# 注意：
+#   - 合约地址必须以 0x 开头，长度为 42 个字符
+#   - ABI 是一个 JSON 数组，直接粘贴即可
+# ============================================================
+# ======================== 锚定合约配置 ========================
+ANCHOR_CONTRACT_ADDRESS = "0x9987F69DC654E3d2905dD23e3E40923565ca4Aa3"
+ANCHOR_CONTRACT_ABI = [
+    {"anonymous": False, "inputs": [{"indexed": True, "internalType": "string", "name": "did", "type": "string"}, {"indexed": False, "internalType": "string", "name": "metadataHash", "type": "string"}, {"indexed": True, "internalType": "address", "name": "operator", "type": "address"}, {"indexed": False, "internalType": "uint256", "name": "timestamp", "type": "uint256"}], "name": "EntityAnchored", "type": "event"},
+    {"anonymous": False, "inputs": [{"indexed": True, "internalType": "string", "name": "vcId", "type": "string"}, {"indexed": False, "internalType": "string", "name": "vcHash", "type": "string"}, {"indexed": True, "internalType": "string", "name": "issuerDid", "type": "string"}, {"indexed": True, "internalType": "string", "name": "subjectDid", "type": "string"}, {"indexed": False, "internalType": "uint256", "name": "timestamp", "type": "uint256"}], "name": "VCIssuedAnchored", "type": "event"},
+    {"anonymous": False, "inputs": [{"indexed": True, "internalType": "string", "name": "vcId", "type": "string"}, {"indexed": True, "internalType": "address", "name": "operator", "type": "address"}, {"indexed": False, "internalType": "uint256", "name": "timestamp", "type": "uint256"}], "name": "VCRevoked", "type": "event"},
+    {"inputs": [{"internalType": "string", "name": "did", "type": "string"}, {"internalType": "string", "name": "metadataHash", "type": "string"}], "name": "anchorEntity", "outputs": [], "stateMutability": "nonpayable", "type": "function"},
+    {"inputs": [{"internalType": "string", "name": "vcId", "type": "string"}, {"internalType": "string", "name": "_vcHash", "type": "string"}, {"internalType": "string", "name": "issuerDid", "type": "string"}, {"internalType": "string", "name": "subjectDid", "type": "string"}], "name": "anchorVC", "outputs": [], "stateMutability": "nonpayable", "type": "function"},
+    {"inputs": [{"internalType": "string", "name": "", "type": "string"}], "name": "entityMetadataHash", "outputs": [{"internalType": "string", "name": "", "type": "string"}], "stateMutability": "view", "type": "function"},
+    {"inputs": [{"internalType": "string", "name": "did", "type": "string"}], "name": "getEntityHash", "outputs": [{"internalType": "string", "name": "", "type": "string"}], "stateMutability": "view", "type": "function"},
+    {"inputs": [{"internalType": "string", "name": "vcId", "type": "string"}], "name": "getVCHash", "outputs": [{"internalType": "string", "name": "", "type": "string"}], "stateMutability": "view", "type": "function"},
+    {"inputs": [{"internalType": "string", "name": "vcId", "type": "string"}], "name": "isVCRevoked", "outputs": [{"internalType": "bool", "name": "", "type": "bool"}], "stateMutability": "view", "type": "function"},
+    {"inputs": [{"internalType": "string", "name": "vcId", "type": "string"}], "name": "revokeVC", "outputs": [], "stateMutability": "nonpayable", "type": "function"},
+    {"inputs": [{"internalType": "string", "name": "did", "type": "string"}, {"internalType": "string", "name": "newMetadataHash", "type": "string"}], "name": "updateEntity", "outputs": [], "stateMutability": "nonpayable", "type": "function"},
+    {"inputs": [{"internalType": "string", "name": "", "type": "string"}], "name": "vcHash", "outputs": [{"internalType": "string", "name": "", "type": "string"}], "stateMutability": "view", "type": "function"},
+    {"inputs": [{"internalType": "string", "name": "", "type": "string"}], "name": "vcRevoked", "outputs": [{"internalType": "bool", "name": "", "type": "bool"}], "stateMutability": "view", "type": "function"},
+]

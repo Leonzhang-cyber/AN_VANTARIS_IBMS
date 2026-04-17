@@ -18,7 +18,7 @@ def _get_secret() -> str:
 def create_jwt(payload: dict, expires_in_hours: int = None) -> str:
     """
     生成 JWT token
-    :param payload: 需要编码的载荷（必须包含 sub 字段作为用户 DID）
+    :param payload: 需要编码的载荷（必须包含 sub 字段作为用户 DID_Back）
     :param expires_in_hours: 过期小时数，默认使用配置中的值
     :return: JWT 字符串
     """
@@ -48,14 +48,7 @@ def decode_jwt(token: str) -> dict:
     payload = jwt.decode(token, secret, algorithms=[algorithm])
     return payload
 
-
 def jwt_required(func):
-    """
-    装饰器：要求请求携带有效的 JWT（放在 Authorization Header 中）
-    使用方式：@jwt_required
-    验证后会将解码后的 payload 存入 g.jwt_payload，并将 did 存入 g.current_did
-    """
-
     @wraps(func)
     def wrapper(*args, **kwargs):
         auth_header = request.headers.get('Authorization', '')
@@ -70,19 +63,38 @@ def jwt_required(func):
         except jwt.InvalidTokenError:
             return jsonify(Result.error(message="Invalid token")), 401
 
-        # 将解析出的信息存入 Flask 的全局对象 g 中，方便后续获取
         g.jwt_payload = payload
         g.current_did = payload.get('sub')
+        # 从载荷中提取权限信息，存入 g
+        g.user_permissions = payload.get('perms', [])
+        # 兼容旧字段名
         g.frontend_perms = payload.get('frontend_perms', [])
         g.api_perms = payload.get('api_perms', [])
 
-        return func(*args, **kwargs)
+        # ✅ 在这里添加打印输出，显示解析出的用户信息
+        print("=" * 50)
+        print(f"[JWT] 请求路径: {request.path}")
+        print(f"[JWT] 当前用户 DID: {g.current_did}")
+        print(f"[JWT] 用户权限: {g.user_permissions}")
+        print(f"[JWT] 完整载荷: {payload}")
+        print("=" * 50)
 
+        return func(*args, **kwargs)
     return wrapper
+
+def get_current_permissions() -> list:
+    """获取当前用户的权限编码列表"""
+    return getattr(g, 'user_permissions', [])
+
+def get_current_frontend_perms() -> list:
+    return getattr(g, 'frontend_perms', [])
+
+def get_current_api_perms() -> list:
+    return getattr(g, 'api_perms', [])
 
 
 def get_current_did() -> str:
-    """获取当前请求中的 DID（必须在 @jwt_required 装饰器之后调用）"""
+    """获取当前请求中的 DID_Back（必须在 @jwt_required 装饰器之后调用）"""
     return getattr(g, 'current_did', None)
 
 
