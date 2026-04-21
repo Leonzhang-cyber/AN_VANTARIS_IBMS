@@ -1,4 +1,4 @@
-# src/model/response.py
+# src/common/models/response.py
 from dataclasses import dataclass, asdict
 from typing import Optional, Any
 from flask import jsonify

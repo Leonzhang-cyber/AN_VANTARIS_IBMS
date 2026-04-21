@@ -1,4 +1,4 @@
-# src/utils/jwt_util.py
+# src/common/utils/jwt_util.py
 import jwt
 from functools import wraps
 from flask import request, current_app, g, jsonify

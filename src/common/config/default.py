@@ -1,4 +1,4 @@
-# config/default.py
+# src/common/config/default.py
 
 class Config:
     # 🔒 直接写死数据库连接信息（仅限本地/私有开发！）

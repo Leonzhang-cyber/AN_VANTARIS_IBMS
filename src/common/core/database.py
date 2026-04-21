@@ -1,4 +1,4 @@
-# src/core/database.py
+# src/common/core/database.py
 from flask_sqlalchemy import SQLAlchemy
 
 # 导入应用配置（确保路径正确）
