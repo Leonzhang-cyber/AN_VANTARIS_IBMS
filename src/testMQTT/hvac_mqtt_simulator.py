@@ -89,9 +89,19 @@ def get_next_data():
                 return 0
         return 0
 
+    # 🆕 从 CSV 中获取原始时间戳，如果没有则使用当前时间
+    original_timestamp = row.get('timestamp', '')
+    if original_timestamp:
+        # 保留原始时间戳
+        final_timestamp = original_timestamp
+    else:
+        # 如果没有原始时间戳，使用当前时间
+        final_timestamp = datetime.now().isoformat()
+
     data = {
         "device_id": MQTT_CLIENT_ID,
-        "timestamp": datetime.now().isoformat(),
+        # "timestamp": datetime.now().isoformat(),
+        "timestamp": final_timestamp,
         "seq": get_next_data.index,
         "power_kw": safe_float('chiller_A_power_kW'),
         "setpoint_c": safe_float('chilled_water_temp_setpoint'),

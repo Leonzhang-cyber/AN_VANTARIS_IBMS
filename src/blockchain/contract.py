@@ -59,11 +59,11 @@ class ContractManager:
             # 等待出块就绪
             start_block = self.client.w3.eth.block_number
             waited = 0
-            while self.client.w3.eth.block_number == start_block and waited < 15:
+            while self.client.w3.eth.block_number == start_block and waited < 60:
                 time.sleep(1)
                 waited += 1
             if self.client.w3.eth.block_number == start_block:
-                raise Exception("挖矿启动超时，未能在15秒内产生新区块")
+                raise Exception("挖矿启动超时，未能在60秒内产生新区块")
             print(f"✅ [Contract] 挖矿已就绪，当前高度: {self.client.w3.eth.block_number}")
 
         self.scheduler.start(start_func)

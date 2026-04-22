@@ -11,6 +11,10 @@ from src.Iot.drivers.base_driver import BaseProtocolDriver
 from src.Iot.exceptions import DeviceNotFoundError
 from src.api.iot.sse_api import push_to_device
 
+# 🆕 导入数据建模模块
+from src.data_modeling.csv_storage import csv_storage
+from src.data_modeling.config import DATA_MODELING_CONFIG
+
 
 class DeviceManager:
     """设备管理器 - 单例模式"""
@@ -78,14 +82,63 @@ class DeviceManager:
                         mapped_result[mapping.standard_field] = value
 
         # 添加设备信息
-        mapped_result['_device_code'] = device_code
-        mapped_result['_device_did'] = device_did
-        mapped_result['_timestamp'] = datetime.now().isoformat()
+        mapped_result['device_code'] = device_code
+        mapped_result['device_did'] = device_did
+        if 'timestamp' in payload:
+            mapped_result['timestamp'] = payload['timestamp']
+        else:
+            mapped_result['timestamp'] = datetime.now().isoformat()
 
         if 'seq' in payload:
             mapped_result['seq'] = payload['seq']
 
         return mapped_result
+
+    def _save_to_csv_for_analysis(self, device_did: str, mapped_data: Dict):
+        """将数据保存到CSV用于数据分析"""
+        try:
+            if not self.app:
+                return
+
+            with self.app.app_context():
+                # 1. 获取设备信息
+                device = DeviceDAO.get_device_by_did(device_did)
+                if not device:
+                    return
+
+                # 2. 获取 device_code（必须存在）
+                if hasattr(device, 'device_code') and device.device_code:
+                    device_code = device.device_code
+                else:
+                    print(f"[CSV] 错误: 设备 {device_did} 没有 device_code，无法创建CSV文件")
+                    return
+
+                # 2. 检查 extra 中的数据分析标识
+                extra = device.extra or {}
+                enable_data_analysis = extra.get('enable_data_analysis', False)
+
+                if not enable_data_analysis:
+                    print(device_did + ":不采用数据存储模式")
+                    return
+
+                # 采用数据存储模式
+                print(device_did + ":采用数据存储模式")
+                print(f"数据: {mapped_data}")
+
+                # 3. 直接存储所有映射后的数据（排除系统内部字段）
+                # 需要存储的字段：所有不以 _ 开头的字段
+                filtered_data = {}
+                for key, value in mapped_data.items():
+                    # 不存储系统内部字段（以 _ 开头）
+                    if not key.startswith('_'):
+                        filtered_data[key] = value
+
+                if filtered_data:
+                    csv_storage.append_data(device_code, filtered_data)
+                    print(f"[CSV] {device_did} 已加入队列，字段: {list(filtered_data.keys())}")
+
+        except Exception as e:
+            print(f"[CSV] 异常: {e}")
 
     def _on_device_data(self, device_did: str, raw_data: Any, protocol: str):
         """设备数据回调 - 先做字段映射，再通过 SSE 推送到前端"""
@@ -97,8 +150,19 @@ class DeviceManager:
         else:
             payload = raw_data
 
+        # 🆕 打印映射前原始数据
+        print("=" * 20)
+        print(f"\n[映射前] device_did: {device_did}")
+        print(f"[映射前] protocol: {protocol}")
+        print(f"[映射前] payload: {payload}")
+
         # 1. 标准字段映射
         mapped_data = self._apply_field_mapping(device_did, device_code, protocol, payload)
+
+        # 🆕 1.5 保存到CSV用于数据分析
+        self._save_to_csv_for_analysis(device_did, mapped_data)
+
+        print("=" * 20)
 
         # 2. 构建 SSE 推送数据
         push_data = {

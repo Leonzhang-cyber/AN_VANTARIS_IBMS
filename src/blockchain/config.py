@@ -73,7 +73,7 @@ DID 模块专用配置
 #   - ABI 是一个 JSON 数组，直接粘贴即可
 # ============================================================
 # ======================== 锚定合约配置 ========================
-ANCHOR_CONTRACT_ADDRESS = "0x9987F69DC654E3d2905dD23e3E40923565ca4Aa3"
+ANCHOR_CONTRACT_ADDRESS = "0x257fF6Ec9b026E50AA340FDe7A607bA0C665A49b"
 ANCHOR_CONTRACT_ABI = [
     {"anonymous": False, "inputs": [{"indexed": True, "internalType": "string", "name": "did", "type": "string"}, {"indexed": False, "internalType": "string", "name": "metadataHash", "type": "string"}, {"indexed": True, "internalType": "address", "name": "operator", "type": "address"}, {"indexed": False, "internalType": "uint256", "name": "timestamp", "type": "uint256"}], "name": "EntityAnchored", "type": "event"},
     {"anonymous": False, "inputs": [{"indexed": True, "internalType": "string", "name": "vcId", "type": "string"}, {"indexed": False, "internalType": "string", "name": "vcHash", "type": "string"}, {"indexed": True, "internalType": "string", "name": "issuerDid", "type": "string"}, {"indexed": True, "internalType": "string", "name": "subjectDid", "type": "string"}, {"indexed": False, "internalType": "uint256", "name": "timestamp", "type": "uint256"}], "name": "VCIssuedAnchored", "type": "event"},
