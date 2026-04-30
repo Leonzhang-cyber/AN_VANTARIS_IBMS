@@ -117,11 +117,42 @@ class DIDService:
         :param expected_address: 期望的以太坊地址
         :return: 验证是否通过
         """
+        print("=" * 60)
+        print("_verify_signature 调试信息")
+        print("=" * 60)
+        print("_verify_signature")
         try:
+            # 打印原始消息
+            print(f"原始 message: {message}")
+            print(f"message 类型: {type(message)}")
+            print(f"message 长度: {len(message)}")
+
+            # 打印签名
+            print(f"signature: {signature}")
+            print(f"signature 长度: {len(signature)}")
+
+            # 打印期望地址
+            print(f"expected_address: {expected_address}")
+
+            # 编码消息
             msg = encode_defunct(text=message)
+            print(f"编码后的消息: {msg}")
+
+            # 恢复地址
             recovered = w3.eth.account.recover_message(msg, signature=signature)
-            return recovered.lower() == expected_address.lower()
+            print(f"recovered 地址: {recovered}")
+
+            # 比较结果
+            result = recovered.lower() == expected_address.lower()
+            print(f"比较结果: {result}")
+
+            if not result:
+                print(f"recovered lower: {recovered.lower()}")
+                print(f"expected lower: {expected_address.lower()}")
+
+            return result
         except Exception:
+            print("_verify_signature_Exception")
             return False
 
     # ==================== 内部辅助方法 ====================
@@ -512,28 +543,35 @@ class DIDService:
     # ==================== VP 验证与信息提取 ====================
     def verify_vp(self, vp: Dict, challenge: str) -> bool:
         """验证 VP 的签名与完整性"""
+
         try:
             vcs = vp.get("verifiableCredential", [])
+
             for vc in vcs:
                 if not self.verify_vc(vc):
+                    print("verify_vc判断false")
                     return False
 
             proof = vp.get("proof", {})
             if proof.get("challenge") != challenge:
+                print("challenge不一致")
                 return False
 
             signing_input = proof.get("signingInput")
             if not signing_input:
+                print("signingInput")
                 return False
 
             message = json.dumps(signing_input, sort_keys=True)
             holder_did = proof["verificationMethod"].split("#")[0]
             holder = self.user_dao.get_by_did(holder_did)
             if not holder or holder.active == 0:
+                print("holder or holder.active")
                 return False
 
             return self._verify_signature(message, proof["signatureValue"], holder.public_key)
         except Exception:
+            print("Exception"+Exception)
             return False
 
     def verify_and_extract_vp(self, vp: Dict, challenge: str) -> Tuple[bool, Optional[Dict]]:
@@ -542,10 +580,12 @@ class DIDService:
         :return: (验证是否成功, 提取的用户信息字典)
         """
         if not self.verify_vp(vp, challenge):
+            print("verify_vp,判断false")
             return False, None
 
         vcs = vp.get("verifiableCredential", [])
         if not vcs:
+            print("vcs,判断false")
             return False, None
 
         # 提取第一个 VC 的主体信息

@@ -13,3 +13,15 @@ class VCInvalidError(DIDError):
 
 class VPInvalidError(DIDError):
     pass
+
+
+class PermissionDenied:
+    pass
+
+
+class NotFoundError:
+    pass
+
+
+class DuplicateError:
+    pass

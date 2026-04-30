@@ -429,6 +429,7 @@ def login():
     # VP 模式
     if 'vp' in data:
         valid, subject_info = service.verify_and_extract_vp(data['vp'], data.get('challenge', ''))
+        print("vp valid最后:", valid)
         if valid:
             did = subject_info.get('id')
             user = service.get_entity(did)
