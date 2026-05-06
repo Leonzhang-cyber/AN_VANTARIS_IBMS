@@ -6,6 +6,7 @@
     <button @click="switchLang('en')">English</button>
   </div>
 </template>
+<!--测试-->
 
 <script setup>
 import { useI18n } from 'vue-i18n'
