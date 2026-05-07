@@ -2,6 +2,15 @@ import { createI18n } from 'vue-i18n'
 
 const messages = {
     en: {
+        menu: {
+            dashboard: 'Dashboard',
+            device: 'Device',
+            energy:'Energy',
+            alarm:'Alarm',
+            maintain:'Maintain',
+            report:'Report',
+            settings:'Settings'
+        },
         dashboard: 'Dashboard',
         deviceTotal: 'Total Devices',
         deviceOnline: 'Online Devices',

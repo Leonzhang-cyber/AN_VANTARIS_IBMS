@@ -18,13 +18,62 @@
           router
           style="border-right:none"
       >
-        <el-menu-item index="/"><el-icon><Home-filled /></el-icon><span>{{ $t('dashboard') }}</span></el-menu-item>
-        <el-menu-item index="/device"><el-icon><Box /></el-icon><span>{{ $t('device') }}</span></el-menu-item>
-        <el-menu-item index="/energy"><el-icon><DataAnalysis /></el-icon><span>{{ $t('energy') }}</span></el-menu-item>
-        <el-menu-item index="/alarm"><el-icon><Warning /></el-icon><span>{{ $t('alarm') }}</span></el-menu-item>
-        <el-menu-item index="/maintain"><el-icon><Tools /></el-icon><span>{{ $t('maintain') }}</span></el-menu-item>
-        <el-menu-item index="/report"><el-icon><Document /></el-icon><span>{{ $t('report') }}</span></el-menu-item>
-        <el-menu-item index="/settings"><el-icon><Setting /></el-icon><span>{{ $t('settings') }}</span></el-menu-item>
+        <el-sub-menu index="/">
+          <template #title>
+            <el-icon><Box /></el-icon>
+            <span>{{ $t('menu.dashboard') }}</span>
+          </template>
+          <el-menu-item index="/Factory">
+            <span>Factory</span>
+          </el-menu-item>
+        </el-sub-menu>
+
+        <!-- 设备管理（带子菜单） -->
+        <el-sub-menu index="/device">
+          <template #title>
+            <el-icon><Box /></el-icon>
+            <span>{{ $t('menu.device') }}</span>
+          </template>
+          <el-menu-item index="/device/hvac">
+            <span>HVAC</span>
+          </el-menu-item>
+          <el-menu-item index="/device/sas">
+            <span>SAS (Security)</span>
+          </el-menu-item>
+          <el-menu-item index="/device/fas">
+            <span>FAS (Fire)</span>
+          </el-menu-item>
+          <el-menu-item index="/device/lighting">
+            <span>Lighting Control</span>
+          </el-menu-item>
+          <el-menu-item index="/device/plumbing">
+            <span>Plumbing</span>
+          </el-menu-item>
+          <el-menu-item index="/device/energy">
+            <span>Energy</span>
+          </el-menu-item>
+        </el-sub-menu>
+
+        <el-menu-item index="/energy">
+          <el-icon><DataAnalysis /></el-icon>
+          <span>{{ $t('menu.energy') }}</span>
+        </el-menu-item>
+        <el-menu-item index="/alarm">
+          <el-icon><Warning /></el-icon>
+          <span>{{ $t('menu.alarm') }}</span>
+        </el-menu-item>
+        <el-menu-item index="/maintain">
+          <el-icon><Tools /></el-icon>
+          <span>{{ $t('menu.maintain') }}</span>
+        </el-menu-item>
+        <el-menu-item index="/report">
+          <el-icon><Document /></el-icon>
+          <span>{{ $t('menu.report') }}</span>
+        </el-menu-item>
+        <el-menu-item index="/settings">
+          <el-icon><Setting /></el-icon>
+          <span>{{ $t('menu.settings') }}</span>
+        </el-menu-item>
       </el-menu>
     </el-aside>
 
@@ -50,7 +99,7 @@
       <!-- 内容区域 -->
       <el-main
           class="main-content"
-          :style="{ padding: isFullscreen ? '0' : '20px' }"
+          :style="{ padding: isFullscreen ? '0' : '0px' }"
       >
         <router-view v-slot="{ Component }">
           <transition name="fade" mode="out-in">
@@ -64,26 +113,53 @@
 
 <script setup>
 import { computed, ref, onMounted, onUnmounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
+import {
+  HomeFilled, Box, DataAnalysis, Warning, Tools, Document, Setting, FullScreen
+} from '@element-plus/icons-vue'
 
 const route = useRoute()
+const router = useRouter()
 const { locale } = useI18n()
 const isFullscreen = ref(false)
 const setLang = (l) => (locale.value = l)
 
+// 菜单路径（上下键切换顺序，包含所有子路由）
+const menuPaths = [
+  '/',
+  '/device/hvac',
+  '/device/sas',
+  '/device/fas',
+  '/device/lighting',
+  '/device/plumbing',
+  '/device/energy',
+  '/energy',
+  '/alarm',
+  '/maintain',
+  '/report',
+  '/settings'
+]
+
+// 当前菜单名称映射（支持子路由）
 const currentMenuName = computed(() => {
   const map = {
-    '/': 'Dashboard',
-    '/device': 'Device Management',
+    // '/': 'Dashboard',
+    '/Factory': 'Dashboard - Factory',
+    '/device/hvac': 'Device Management - HVAC',
+    '/device/sas': 'Device Management - SAS',
+    '/device/fas': 'Device Management - FAS',
+    '/device/lighting': 'Device Management - Lighting',
+    '/device/plumbing': 'Device Management - Plumbing',
+    '/device/energy': 'Device Management - Energy',
     '/energy': 'Energy Analysis',
     '/alarm': 'Alarm Center',
     '/maintain': 'Maintenance Management',
     '/report': 'Data Reports',
     '/settings': 'System Settings'
   }
-  return map[route.path] || 'Dashboard'
+  return map[route.path] || 'IBMS Platform'
 })
 
 const toggleFullScreen = () => {
@@ -100,12 +176,34 @@ const onFullScreenChange = () => {
   isFullscreen.value = !!document.fullscreenElement
 }
 
+// 全屏模式下上下键切换路由
+const onKeydown = (e) => {
+  if (!isFullscreen.value) return
+
+  const currentIndex = menuPaths.findIndex(p => p === route.path)
+  if (currentIndex === -1) return
+
+  if (e.key === 'ArrowUp') {
+    e.preventDefault()
+    const prevIndex = currentIndex <= 0 ? menuPaths.length - 1 : currentIndex - 1
+    router.push(menuPaths[prevIndex])
+  }
+
+  if (e.key === 'ArrowDown') {
+    e.preventDefault()
+    const nextIndex = currentIndex >= menuPaths.length - 1 ? 0 : currentIndex + 1
+    router.push(menuPaths[nextIndex])
+  }
+}
+
 onMounted(() => {
   document.addEventListener('fullscreenchange', onFullScreenChange)
+  window.addEventListener('keydown', onKeydown)
 })
 
 onUnmounted(() => {
   document.removeEventListener('fullscreenchange', onFullScreenChange)
+  window.removeEventListener('keydown', onKeydown)
 })
 </script>
 
@@ -153,7 +251,7 @@ onUnmounted(() => {
   align-items: center;
 }
 
-/* 全屏图标样式（可点击、友好、大区域） */
+/* 全屏图标样式 */
 .fullscreen-icon {
   width: 32px;
   height: 32px;
@@ -161,13 +259,10 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  //border-radius: 6px;
-  //color: #333;
   transition: all 0.2s;
 }
 
 .fullscreen-icon:hover {
-  //background-color: #f0f2f5;
   color: #409eff;
 }
 
