@@ -1,131 +1,202 @@
-<!-- DeviceHSAS.vue -->
 <template>
   <div class="hvac-page">
-    <h1 class="page-title">SAS System</h1>
-
     <div class="main-view">
       <div class="three-columns">
-        <!-- 左侧：关键指标 + 事件趋势图 -->
+        <!-- Left Column: Key Metrics + System Status + Recent Events + Device Health -->
         <div class="col-left">
+          <!-- Key Metrics -->
           <el-card class="card glass-card" shadow="hover">
             <div class="card-header">📈 Key Metrics</div>
-            <div class="metrics-grid">
-              <div class="metric-card">
-                <div class="metric-icon">🔐</div>
-                <div class="metric-info">
-                  <div class="metric-label">Devices</div>
-                  <div class="metric-value">{{ totalDevices }}</div>
-                </div>
+            <div class="metrics-list">
+              <div class="metric-row">
+                <div class="metric-icon">📷</div>
+                <div class="metric-label">Total Cameras</div>
+                <div class="metric-value">{{ totalCameras }}</div>
               </div>
-              <div class="metric-card">
-                <div class="metric-icon">📶</div>
-                <div class="metric-info">
-                  <div class="metric-label">Online</div>
-                  <div class="metric-value">{{ onlineRate }}%</div>
-                </div>
+              <div class="metric-row">
+                <div class="metric-icon">✅</div>
+                <div class="metric-label">Online Rate</div>
+                <div class="metric-value">{{ onlineRate }}%</div>
               </div>
-              <div class="metric-card">
-                <div class="metric-icon">⚠️</div>
-                <div class="metric-info">
-                  <div class="metric-label">Events</div>
-                  <div class="metric-value">{{ totalEvents }}</div>
-                </div>
+              <div class="metric-row">
+                <div class="metric-icon">🚪</div>
+                <div class="metric-label">Access Points</div>
+                <div class="metric-value">{{ accessPoints }}</div>
               </div>
-              <div class="metric-card">
+              <div class="metric-row">
+                <div class="metric-icon">📊</div>
+                <div class="metric-label">Today Events</div>
+                <div class="metric-value">{{ todayEvents }}</div>
+              </div>
+              <div class="metric-row">
                 <div class="metric-icon">🚨</div>
-                <div class="metric-info">
-                  <div class="metric-label">Alerts</div>
-                  <div class="metric-value">{{ activeAlerts }}</div>
-                </div>
+                <div class="metric-label">Active Alarms</div>
+                <div class="metric-value">{{ activeAlarms }}</div>
               </div>
             </div>
           </el-card>
 
-          <!-- 安防事件趋势图 -->
+          <!-- Access Control Status -->
           <el-card class="card glass-card" shadow="hover">
-            <div class="card-header">📉 Security Event Trend</div>
-            <div ref="trendChartRef" style="height: 300px; width: 100%"></div>
+            <div class="card-header">🔄 Access Control</div>
+            <div class="mode-list">
+              <div class="mode-row" v-for="item in accessControl" :key="item.name">
+                <div class="mode-name">{{ item.name }}</div>
+                <div class="mode-bar-bg">
+                  <div class="mode-bar-fill" :style="{ width: item.throughput + '%', background: item.color }"></div>
+                </div>
+                <div class="mode-value">{{ item.throughput }}%</div>
+                <div class="mode-power">{{ item.status }}</div>
+              </div>
+            </div>
+          </el-card>
+
+          <!-- Recent Security Events -->
+          <el-card class="card glass-card" shadow="hover">
+            <div class="card-header">🚨 Recent Events</div>
+            <div class="alert-list">
+              <div class="alert-item" v-for="event in recentEvents" :key="event.id">
+                <div class="alert-header">
+                  <span class="alert-tag" :class="event.severity">{{ event.severity }}</span>
+                  <span class="alert-device">{{ event.location }}</span>
+                </div>
+                <div class="alert-msg">{{ event.description }}</div>
+                <div class="alert-time">{{ event.timestamp }}</div>
+              </div>
+            </div>
+          </el-card>
+
+          <!-- Device Health Status -->
+          <el-card class="card glass-card" shadow="hover">
+            <div class="card-header">💚 Device Health</div>
+            <div class="health-list">
+              <div class="health-row" v-for="item in deviceHealth" :key="item.subsystem">
+                <div class="health-dot" :class="item.status"></div>
+                <div class="health-name">{{ item.subsystem }}</div>
+                <div class="health-status" :class="item.status">{{ item.statusText }}</div>
+              </div>
+            </div>
           </el-card>
         </div>
 
-        <!-- 中间：图片 + 子系统表格 -->
+        <!-- Center Column: Image + Charts -->
         <div class="col-center">
-          <div class="card-img">
-            <img src="../images/1778147271130.png" alt="Security 3D View" />
+          <div class="title-row">
+            <h1 class="page-title">SAS</h1>
+            <span class="live-time">{{ currentTime }}</span>
           </div>
-          <el-card class="card glass-card" shadow="hover">
-            <div class="card-header">📊 Core Subsystems Overview</div>
-            <div class="custom-table subsystem-table">
-              <div class="table-header">
-                <div class="th">Subsystem</div>
-                <div class="th">Total</div>
-                <div class="th">Online</div>
-                <div class="th">Alert</div>
-                <div class="th">Efficiency</div>
-                <div class="th">Status</div>
-              </div>
-              <div class="table-body">
-                <div v-for="sub in subsystems" :key="sub.name" class="table-row">
-                  <div class="td">{{ sub.name }}</div>
-                  <div class="td">{{ sub.total }}</div>
-                  <div class="td td-online">{{ sub.online }}</div>
-                  <div class="td td-alert">{{ sub.alert }}</div>
-                  <div class="td">{{ sub.efficiency }}%</div>
-                  <div class="td">{{ sub.status }}</div>
-                </div>
-              </div>
-            </div>
-          </el-card>
+          <div class="card-img">
+            <img src="../images/1778228250340.png" alt="Security 3D View" />
+          </div>
+          <div class="cart-view">
+            <!-- Event Trend Analysis -->
+            <el-card class="card glass-card chart-card" shadow="hover">
+              <div class="card-header">📊 Event Trend (Hourly)</div>
+              <div ref="eventTrendChartRef" class="chart-box"></div>
+            </el-card>
+            <!-- Access Throughput Monitor -->
+            <el-card class="card glass-card chart-card" shadow="hover">
+              <div class="card-header">⚡ Access Throughput (Last 10 min)</div>
+              <div ref="throughputChartRef" class="chart-box"></div>
+            </el-card>
+          </div>
         </div>
 
-        <!-- 右侧：环境指标 + KPI（内含迷你趋势图） -->
+        <!-- Right Column: KPIs + Zone Status + Door Status + Tips -->
         <div class="col-right">
+          <!-- Security KPIs -->
           <el-card class="card glass-card" shadow="hover">
-            <div class="card-header">🌡️ Environmental Metrics</div>
+            <div class="card-header">📊 Security KPIs</div>
+            <div class="kpi-row">
+              <span>Avg. Response Time</span>
+              <strong>{{ avgResponseTime }}s</strong>
+              <span class="trend stable">Target < 30s</span>
+            </div>
+            <div class="kpi-row">
+              <span>Unauthorized Attempts</span>
+              <strong>{{ unauthorizedAttempts }}</strong>
+              <span class="trend up">{{ unauthorizedTrend }}</span>
+            </div>
+            <div class="kpi-row">
+              <span>Visitor Count</span>
+              <strong>{{ visitorCount }}</strong>
+              <span class="trend stable">Today</span>
+            </div>
+            <div class="kpi-row">
+              <span>System Uptime</span>
+              <strong>{{ systemUptime }}%</strong>
+              <span class="trend up">99.9% SLA</span>
+            </div>
+          </el-card>
+
+          <!-- Zone Status Gauges -->
+          <el-card class="card glass-card" shadow="hover">
+            <div class="card-header">🌡️ Zone Security Status</div>
             <div class="gauges-grid">
               <div class="gauge-item">
-                <el-progress type="dashboard" :percentage="tempPercent" :color="tempColor" :width="100" :stroke-width="8" />
-                <div class="gauge-label">Temperature</div>
-                <div class="gauge-value">{{ tempValue }} °C</div>
+                <el-progress type="dashboard" :percentage="lobbyOccupancy" :color="zoneColor" :width="90" :stroke-width="4">
+                  <template #default>
+                    <span class="percentage-label">{{ lobbyCount }} ppl</span>
+                  </template>
+                </el-progress>
+                <div class="gauge-label">Main Lobby</div>
               </div>
               <div class="gauge-item">
-                <el-progress type="dashboard" :percentage="humPercent" :color="humColor" :width="100" :stroke-width="8" />
-                <div class="gauge-label">Humidity</div>
-                <div class="gauge-value">{{ humValue }} %</div>
+                <el-progress type="dashboard" :percentage="parkingOccupancy" :color="zoneColor" :width="90" :stroke-width="4">
+                  <template #default>
+                    <span class="percentage-label">{{ parkingCount }} cars</span>
+                  </template>
+                </el-progress>
+                <div class="gauge-label">Parking</div>
               </div>
               <div class="gauge-item">
-                <el-progress type="dashboard" :percentage="co2Percent" :color="co2Color" :width="100" :stroke-width="8" />
-                <div class="gauge-label">CO₂</div>
-                <div class="gauge-value">{{ co2Value }} ppm</div>
+                <el-progress type="dashboard" :percentage="serverRoomSecurity" :color="serverRoomColor" :width="90" :stroke-width="4">
+                  <template #default>
+                    <span class="percentage-label">{{ serverRoomStatus }}</span>
+                  </template>
+                </el-progress>
+                <div class="gauge-label">Server Room</div>
               </div>
               <div class="gauge-item">
-                <el-progress type="dashboard" :percentage="presPercent" :color="presColor" :width="100" :stroke-width="8" />
-                <div class="gauge-label">Air Pressure</div>
-                <div class="gauge-value">{{ presValue }} hPa</div>
+                <el-progress type="dashboard" :percentage="perimeterIntegrity" :color="perimeterColor" :width="90" :stroke-width="4">
+                  <template #default>
+                    <span class="percentage-label">{{ perimeterStatus }}</span>
+                  </template>
+                </el-progress>
+                <div class="gauge-label">Perimeter</div>
               </div>
             </div>
           </el-card>
 
-          <!-- KPI Dashboard + 迷你趋势图 -->
+          <!-- Door Status -->
           <el-card class="card glass-card" shadow="hover">
-            <div class="card-header">📊 KPI Dashboard</div>
-            <div class="kpi-row">
-              <span>Total Events</span>
-              <strong>{{ totalEvents }} /day</strong>
-              <span class="trend up">↑8.3%</span>
+            <div class="card-header">🎯 Door Status</div>
+            <div class="setpoint-list">
+              <div class="setpoint-row" v-for="item in doorStatus" :key="item.label">
+                <div class="sp-label">{{ item.label }}</div>
+                <div class="sp-values">
+                  <span class="sp-set">Status: {{ item.status }}</span>
+                  <span class="sp-actual">Last: {{ item.lastAccess }}</span>
+                </div>
+                <div class="sp-deviation" :class="item.alarmClass">
+                  {{ item.alarm }}
+                </div>
+              </div>
             </div>
-            <div class="kpi-row">
-              <span>Response Time</span>
-              <strong>2.4 min</strong>
-              <span class="trend stable">-0.2</span>
-            </div>
-            <div class="kpi-row">
-              <span>Incident Rate</span>
-              <strong>0.8%</strong>
-              <span class="trend up">↑0.1%</span>
-            </div>
-            <div class="mini-chart-container">
-              <div ref="kpiTrendChartRef" style="height: 100%; width: 100%"></div>
+          </el-card>
+
+          <!-- Security Tips -->
+          <el-card class="card glass-card" shadow="hover">
+            <div class="card-header">💡 Security Advisory</div>
+            <div class="tips-list">
+              <div class="tip-item" v-for="(tip, idx) in securityTips" :key="idx">
+                <div class="tip-icon">{{ tip.icon }}</div>
+                <div class="tip-content">
+                  <div class="tip-title">{{ tip.title }}</div>
+                  <div class="tip-desc">{{ tip.desc }}</div>
+                  <div class="tip-saving">{{ tip.priority }}</div>
+                </div>
+              </div>
             </div>
           </el-card>
         </div>
@@ -135,174 +206,442 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref, onMounted, onBeforeUnmount, nextTick, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import * as echarts from 'echarts'
 
-// 安防子系统数据
-const subsystems = ref([
-  { name: 'Access Control', total: 45, online: 43, alert: 1, efficiency: 96, status: 'Healthy' },
-  { name: 'CCTV', total: 128, online: 124, alert: 2, efficiency: 94, status: 'Degraded' },
-  { name: 'Intrusion Detection', total: 32, online: 30, alert: 0, efficiency: 98, status: 'Healthy' },
-  { name: 'Visitor Management', total: 12, online: 12, alert: 0, efficiency: 99, status: 'Healthy' },
-  { name: 'Patrol System', total: 8, online: 7, alert: 1, efficiency: 87, status: 'Alert' },
-  { name: 'Emergency Comm', total: 15, online: 15, alert: 0, efficiency: 95, status: 'Healthy' }
+const route = useRoute()
+
+// ==================== Real-time Clock ====================
+const currentTime = ref('')
+
+const updateTime = () => {
+  const now = new Date()
+  const year = now.getFullYear()
+  const month = String(now.getMonth() + 1).padStart(2, '0')
+  const day = String(now.getDate()).padStart(2, '0')
+  const hours = String(now.getHours()).padStart(2, '0')
+  const minutes = String(now.getMinutes()).padStart(2, '0')
+  const seconds = String(now.getSeconds()).padStart(2, '0')
+  const milliseconds = String(now.getMilliseconds()).padStart(3, '0')
+  currentTime.value = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${milliseconds}`
+}
+
+let clockTimer = null
+
+// ==================== Core Security Data ====================
+// Key metrics
+const totalCameras = ref(256)
+const onlineRate = ref(98.4)
+const accessPoints = ref(48)
+const todayEvents = ref(1523)
+const activeAlarms = ref(2)
+
+// Security KPIs
+const avgResponseTime = ref(12)
+const unauthorizedAttempts = ref(7)
+const unauthorizedTrend = ref('↓15% vs Yesterday')
+const visitorCount = ref(89)
+const systemUptime = ref(99.97)
+
+// Zone status
+const lobbyCount = ref(45)
+const parkingCount = ref(128)
+const serverRoomStatus = ref('Locked')
+const perimeterStatus = ref('Secure')
+
+const lobbyOccupancy = ref(45)
+const parkingOccupancy = ref(64)
+const serverRoomSecurity = ref(95)
+const perimeterIntegrity = ref(98)
+
+// Zone colors
+const zoneColor = [
+  { color: '#10b981', percentage: 50 },
+  { color: '#f59e0b', percentage: 80 },
+  { color: '#ef4444', percentage: 100 }
+]
+const serverRoomColor = [
+  { color: '#10b981', percentage: 90 },
+  { color: '#ef4444', percentage: 100 }
+]
+const perimeterColor = [
+  { color: '#10b981', percentage: 90 },
+  { color: '#ef4444', percentage: 100 }
+]
+
+// Access control throughput
+const accessControl = ref([
+  { name: 'Main Entrance', throughput: 85, status: 'Peak', color: '#fbbf24' },
+  { name: 'Staff Gate', throughput: 62, status: 'Normal', color: '#3b82f6' },
+  { name: 'Parking Gate', throughput: 78, status: 'Busy', color: '#60a5fa' },
+  { name: 'Delivery Bay', throughput: 35, status: 'Low', color: '#34d399' }
 ])
 
-// 全局统计
-const totalDevices = ref(240)
-const onlineRate = ref(95.2)
-const totalEvents = ref(186)
-const activeAlerts = ref(4)
+// Recent security events
+const recentEvents = ref([
+  { id: 1, severity: 'Warning', location: 'Parking Level B2', description: 'Unauthorized vehicle detected at fire lane', timestamp: '2 min ago' },
+  { id: 2, severity: 'Critical', location: 'Server Room Door', description: 'Multiple invalid badge attempts (5x)', timestamp: '8 min ago' },
+  { id: 3, severity: 'Warning', location: 'Emergency Exit 3F', description: 'Door held open > 60 seconds', timestamp: '22 min ago' }
+])
 
-// 环境指标（可保持不变）
-const tempValue = ref(23.8)
-const humValue = ref(52)
-const co2Value = ref(398)
-const presValue = ref(1015)
-const tempPercent = ref(60)
-const humPercent = ref(52)
-const co2Percent = ref(28)
-const presPercent = ref(58)
+// Device health
+const deviceHealth = ref([
+  { subsystem: 'CCTV Network', status: 'normal', statusText: 'Online' },
+  { subsystem: 'Access Controllers', status: 'warning', statusText: '1 Offline' },
+  { subsystem: 'Alarm System', status: 'normal', statusText: 'Armed' },
+  { subsystem: 'Intercom Panels', status: 'normal', statusText: 'Normal' },
+  { subsystem: 'Storage (NVR)', status: 'normal', statusText: '72% Free' }
+])
 
-// 颜色配置（沿用）
-const tempColor = [
-  { color: '#3b82f6', percentage: 50 },
-  { color: '#f59e0b', percentage: 75 },
-  { color: '#ef4444', percentage: 100 }
-]
-const humColor = '#34d399'
-const co2Color = [
-  { color: '#10b981', percentage: 40 },
-  { color: '#f97316', percentage: 70 },
-  { color: '#ef4444', percentage: 100 }
-]
-const presColor = '#8b5cf6'
+// Door status
+const doorStatus = ref([
+  { label: 'Main Entrance', status: 'Locked', lastAccess: '08:45:22', alarm: 'Normal', alarmClass: 'normal' },
+  { label: 'Server Room', status: 'Locked', lastAccess: '07:30:15', alarm: 'Alert', alarmClass: 'high' },
+  { label: 'Fire Exit 2F', status: 'Closed', lastAccess: '--', alarm: 'Normal', alarmClass: 'normal' },
+  { label: 'Loading Dock', status: 'Open', lastAccess: '09:12:08', alarm: 'Warning', alarmClass: 'low' }
+])
 
-// 图表实例
-const trendChartRef = ref(null)
-const kpiTrendChartRef = ref(null)
-let trendChart = null
-let kpiTrendChart = null
+// Security tips
+const securityTips = ref([
+  { icon: '🔐', title: 'Review Badge Access', desc: '3 badges with expired clearance detected today', priority: 'High Priority' },
+  // { icon: '📹', title: 'Storage Check', desc: 'NVR retention remaining: 12 days at current bitrate', priority: 'Medium Priority' }
+])
 
-// 事件趋势（24小时数据）
-const fullTimeLabels = [
-  '00:00','01:00','02:00','03:00','04:00','05:00',
-  '06:00','07:00','08:00','09:00','10:00','11:00',
-  '12:00','13:00','14:00','15:00','16:00','17:00',
-  '18:00','19:00','20:00','21:00','22:00','23:00'
-];
-const fullData = [
-  12, 8, 5, 3, 2, 4,
-  15, 28, 42, 55, 48, 52,
-  46, 38, 44, 52, 48, 45,
-  38, 32, 28, 22, 18, 14
-];
+// ==================== Charts ====================
+const eventTrendChartRef = ref(null)
+const throughputChartRef = ref(null)
+let eventTrendChart = null
+let throughputChart = null
 
-// 迷你图数据（8个点）
-const miniTimeLabels = ['00:00','02:00','04:00','06:00','08:00','10:00','12:00','14:00']
-const miniData = [15, 10, 6, 8, 22, 38, 45, 42]
+// 12-hour event history
+const eventHistoryLength = 12
+const eventHistory = ref([])
+const eventHourLabels = ref([])
 
-// 初始化左侧趋势图
-const initTrendChart = () => {
-  if (trendChartRef.value) {
-    trendChart = echarts.init(trendChartRef.value)
-    trendChart.setOption({
-      tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-      grid: { top: 10, bottom: 0, left: 0, right: 0, containLabel: true },
-      xAxis: { type: 'category', data: fullTimeLabels, axisLabel: { color: '#cbd5e1', rotate: 30, interval: 2 }, axisLine: { lineStyle: { color: '#334155' } } },
-      yAxis: { type: 'value', name: 'Events', nameTextStyle: { color: '#94a3b8' }, axisLabel: { color: '#cbd5e1' }, splitLine: { lineStyle: { color: '#1e293b' } } },
-      series: [{ type: 'line', smooth: true, lineStyle: { width: 3, color: '#ef4444' }, areaStyle: { opacity: 0.2, color: '#ef4444' }, symbol: 'circle', symbolSize: 6, itemStyle: { color: '#ef4444', borderColor: '#fff', borderWidth: 1 }, data: fullData }]
+const initEventHistory = () => {
+  eventHistory.value = []
+  eventHourLabels.value = []
+  const now = new Date()
+  for (let i = eventHistoryLength - 1; i >= 0; i--) {
+    const t = new Date(now - i * 3600000)
+    eventHourLabels.value.push(t.toTimeString().slice(0, 5))
+    eventHistory.value.push({
+      'Access Granted': 80 + Math.random() * 40,
+      'Access Denied': 3 + Math.random() * 8,
+      'Alarm Triggered': 1 + Math.random() * 3,
+      'Door Forced': Math.random() > 0.7 ? 1 : 0
     })
   }
 }
 
-// 初始化迷你趋势图
-const initKpiTrendChart = () => {
-  if (kpiTrendChartRef.value) {
-    kpiTrendChart = echarts.init(kpiTrendChartRef.value)
-    kpiTrendChart.setOption({
-      tooltip: { trigger: 'axis' },
-      grid: { top: 0, left: 0, right: 0, bottom: 0, containLabel: false },
-      xAxis: { type: 'category', data: miniTimeLabels, axisLabel: { color: '#94a3b8', fontSize: 9, rotate: 20 }, axisLine: { show: false }, axisTick: { show: false } },
-      yAxis: { type: 'value', show: false, min: 0, max: 80 },
-      series: [{ type: 'line', smooth: true, lineStyle: { width: 2, color: '#facc15' }, symbol: 'circle', symbolSize: 4, areaStyle: { opacity: 0.2, color: '#facc15' }, data: miniData }]
+// 10-minute throughput history
+const throughputHistoryLength = 10
+const throughputHistory = ref([])
+const throughputTimeLabels = ref([])
+
+const initThroughputHistory = () => {
+  const now = new Date()
+  throughputHistory.value = []
+  throughputTimeLabels.value = []
+  for (let i = throughputHistoryLength - 1; i >= 0; i--) {
+    const t = new Date(now - i * 60000)
+    throughputTimeLabels.value.push(t.toTimeString().slice(0, 5))
+    throughputHistory.value.push({
+      'Main Entrance': 25 + Math.random() * 15,
+      'Staff Gate': 18 + Math.random() * 12,
+      'Parking': 12 + Math.random() * 10,
+      'Delivery': 3 + Math.random() * 5
     })
   }
 }
 
-// 更新左侧大图数据
-const updateTrendChart = () => {
-  if (trendChart) {
-    const newData = fullData.map(v => Math.max(0, v + (Math.random() - 0.5) * 10))
-    trendChart.setOption({ series: [{ data: newData }] })
+// Event trend bar chart option (hourly)
+const getEventTrendOption = () => {
+  const categories = ['Access Granted', 'Access Denied', 'Alarm Triggered', 'Door Forced']
+  const colors = ['#34d399', '#fbbf24', '#f97316', '#ef4444']
+
+  return {
+    backgroundColor: 'transparent',
+    grid: { left: '3%', right: '4%', bottom: '0%', top: '20%', containLabel: true },
+    tooltip: {
+      trigger: 'axis',
+      backgroundColor: 'rgba(15,25,45,0.9)',
+      borderColor: '#3b82f6',
+      textStyle: { color: '#e2e8f0' }
+    },
+    legend: { textStyle: { color: '#94a3b8', fontSize: 9 }, top: 0 },
+    xAxis: {
+      type: 'category',
+      data: eventHourLabels.value,
+      axisLabel: { color: '#94a3b8', fontSize: 9, rotate: 15 },
+      axisLine: { lineStyle: { color: '#334155' } }
+    },
+    yAxis: {
+      type: 'value',
+      name: 'Events',
+      nameTextStyle: { color: '#64748b', fontSize: 10 },
+      axisLabel: { color: '#94a3b8', fontSize: 10 },
+      splitLine: { lineStyle: { color: '#1e293b', type: 'dashed' } }
+    },
+    series: categories.map((name, i) => ({
+      name,
+      type: 'bar',
+      stack: 'total',
+      data: eventHistory.value.map(d => d[name]),
+      itemStyle: {
+        color: colors[i],
+        borderRadius: i === categories.length - 1 ? [6, 6, 0, 0] : 0,
+        borderWidth: 0
+      },
+      emphasis: {
+        focus: 'series'
+      }
+    }))
   }
 }
 
-// 更新迷你图数据
-const updateKpiTrendChart = () => {
-  if (kpiTrendChart) {
-    const newData = miniData.map(v => Math.max(0, v + (Math.random() - 0.5) * 12))
-    kpiTrendChart.setOption({ series: [{ data: newData }] })
+// Access throughput line chart option
+const getThroughputOption = () => {
+  const categories = ['Main Entrance', 'Staff Gate', 'Parking', 'Delivery']
+  const colors = ['#60a5fa', '#34d399', '#fbbf24', '#f97316']
+
+  const seriesData = categories.map((name, i) => ({
+    name,
+    type: 'line',
+    data: throughputHistory.value.map(d => d[name]),
+    smooth: true,
+    symbol: 'circle',
+    symbolSize: 5,
+    lineStyle: { width: 2, color: colors[i] },
+    itemStyle: { color: colors[i] },
+    areaStyle: {
+      color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+        { offset: 0, color: colors[i] + '30' },
+        { offset: 1, color: colors[i] + '00' }
+      ])
+    }
+  }))
+
+  return {
+    backgroundColor: 'transparent',
+    tooltip: {
+      trigger: 'axis',
+      backgroundColor: 'rgba(15,25,45,0.9)',
+      borderColor: '#3b82f6',
+      textStyle: { color: '#e2e8f0' },
+      valueFormatter: (value) => value + ' persons'
+    },
+    legend: { textStyle: { color: '#94a3b8', fontSize: 9 }, top: 0 },
+    grid: { left: '3%', right: '4%', bottom: '0%', top: '20%', containLabel: true },
+    xAxis: {
+      type: 'category',
+      data: throughputTimeLabels.value,
+      axisLabel: { color: '#94a3b8', fontSize: 9 },
+      axisLine: { lineStyle: { color: '#334155' } }
+    },
+    yAxis: {
+      type: 'value',
+      name: 'Persons/min',
+      nameTextStyle: { color: '#64748b', fontSize: 10 },
+      axisLabel: { color: '#94a3b8', fontSize: 10 },
+      splitLine: { lineStyle: { color: '#1e293b', type: 'dashed' } }
+    },
+    series: seriesData
   }
 }
 
-// 更新关键指标
-const updateStats = () => {
-  totalDevices.value = Math.floor(220 + Math.random() * 30)
-  onlineRate.value = parseFloat((92 + Math.random() * 5).toFixed(1))
-  totalEvents.value = Math.floor(150 + Math.random() * 60)
-  activeAlerts.value = Math.floor(Math.random() * 6)
+// ==================== Chart Lifecycle ====================
+const disposeCharts = () => {
+  if (eventTrendChart) {
+    eventTrendChart.dispose()
+    eventTrendChart = null
+  }
+  if (throughputChart) {
+    throughputChart.dispose()
+    throughputChart = null
+  }
 }
 
-// 环境指标转换
-const valueToPercent = (val, min, max) => {
-  const percent = ((val - min) / (max - min)) * 100
-  return Math.round(percent * 10) / 10
+const initCharts = async () => {
+  await nextTick()
+
+  for (let attempt = 0; attempt < 5; attempt++) {
+    await new Promise(resolve => setTimeout(resolve, 100))
+
+    const evtDom = eventTrendChartRef.value
+    const thrDom = throughputChartRef.value
+
+    if (!evtDom || !thrDom) continue
+    if (evtDom.clientWidth === 0 || evtDom.clientHeight === 0) continue
+    if (thrDom.clientWidth === 0 || thrDom.clientHeight === 0) continue
+
+    disposeCharts()
+
+    try {
+      eventTrendChart = echarts.init(evtDom)
+      throughputChart = echarts.init(thrDom)
+
+      eventTrendChart.setOption(getEventTrendOption())
+      throughputChart.setOption(getThroughputOption())
+
+      return
+    } catch (e) {
+      console.error('[initCharts] Error:', e)
+    }
+  }
 }
 
-const updatePercentages = () => {
-  tempPercent.value = valueToPercent(tempValue.value, 0, 40)
-  humPercent.value = humValue.value
-  co2Percent.value = valueToPercent(co2Value.value, 300, 800)
-  presPercent.value = valueToPercent(presValue.value, 980, 1040)
+const handleResize = () => {
+  eventTrendChart?.resize()
+  throughputChart?.resize()
 }
 
-// 定时刷新
-let intervalId = null
-const startMockUpdate = () => {
-  intervalId = setInterval(() => {
-    tempValue.value = parseFloat((18 + Math.random() * 10).toFixed(1))
-    humValue.value = Math.round(35 + Math.random() * 30)
-    co2Value.value = Math.round(380 + Math.random() * 80)
-    presValue.value = Math.round(1005 + Math.random() * 20)
-    updatePercentages()
-    updateStats()
-    updateTrendChart()
-    updateKpiTrendChart()
-  }, 5000)
+let fullscreenTimer = null
+const onFullscreenChange = () => {
+  clearTimeout(fullscreenTimer)
+  fullscreenTimer = setTimeout(handleResize, 350)
 }
 
-onMounted(() => {
-  initTrendChart()
-  initKpiTrendChart()
-  updatePercentages()
-  startMockUpdate()
-  window.addEventListener('resize', () => {
-    trendChart?.resize()
-    kpiTrendChart?.resize()
+// ==================== Live Update ====================
+let updateTimer = null
+
+const updateAllData = () => {
+  // KPIs
+  totalCameras.value = 254 + Math.floor(Math.random() * 5)
+  onlineRate.value = parseFloat((97.8 + Math.random() * 1.2).toFixed(1))
+  todayEvents.value = todayEvents.value + Math.floor(Math.random() * 3)
+  activeAlarms.value = Math.floor(Math.random() * 4)
+  avgResponseTime.value = Math.floor(10 + Math.random() * 8)
+  unauthorizedAttempts.value = Math.floor(5 + Math.random() * 6)
+  visitorCount.value = visitorCount.value + Math.floor(Math.random() * 2)
+
+  // Zone counts
+  lobbyCount.value = Math.floor(35 + Math.random() * 20)
+  parkingCount.value = Math.floor(110 + Math.random() * 30)
+  lobbyOccupancy.value = Math.round((lobbyCount.value / 100) * 100)
+  parkingOccupancy.value = Math.round((parkingCount.value / 200) * 100)
+  serverRoomSecurity.value = Math.random() > 0.9 ? 85 : 95
+  serverRoomStatus.value = serverRoomSecurity.value > 90 ? 'Locked' : 'Alert'
+  perimeterIntegrity.value = Math.random() > 0.95 ? 90 : 98
+  perimeterStatus.value = perimeterIntegrity.value > 95 ? 'Secure' : 'Breach'
+
+  // Access control
+  accessControl.value = [
+    { name: 'Main Entrance', throughput: 75 + Math.floor(Math.random() * 20), status: Math.random() > 0.3 ? 'Peak' : 'Busy', color: '#fbbf24' },
+    { name: 'Staff Gate', throughput: 55 + Math.floor(Math.random() * 15), status: 'Normal', color: '#3b82f6' },
+    { name: 'Parking Gate', throughput: 70 + Math.floor(Math.random() * 15), status: 'Busy', color: '#60a5fa' },
+    { name: 'Delivery Bay', throughput: 28 + Math.floor(Math.random() * 12), status: 'Low', color: '#34d399' }
+  ]
+
+  // Device health
+  deviceHealth.value = [
+    { subsystem: 'CCTV Network', status: Math.random() > 0.98 ? 'warning' : 'normal', statusText: Math.random() > 0.98 ? 'Lag' : 'Online' },
+    { subsystem: 'Access Controllers', status: Math.random() > 0.85 ? 'warning' : 'normal', statusText: Math.random() > 0.85 ? '1 Offline' : 'Normal' },
+    { subsystem: 'Alarm System', status: 'normal', statusText: 'Armed' },
+    { subsystem: 'Intercom Panels', status: 'normal', statusText: 'Normal' },
+    { subsystem: 'Storage (NVR)', status: 'normal', statusText: '72% Free' }
+  ]
+
+  // Door status
+  doorStatus.value = [
+    { label: 'Main Entrance', status: 'Locked', lastAccess: new Date().toTimeString().slice(0, 8), alarm: 'Normal', alarmClass: 'normal' },
+    { label: 'Server Room', status: Math.random() > 0.9 ? 'Unlocked' : 'Locked', lastAccess: '07:30:15', alarm: Math.random() > 0.9 ? 'Alert' : 'Normal', alarmClass: Math.random() > 0.9 ? 'high' : 'normal' },
+    { label: 'Fire Exit 2F', status: 'Closed', lastAccess: '--', alarm: 'Normal', alarmClass: 'normal' },
+    { label: 'Loading Dock', status: Math.random() > 0.6 ? 'Open' : 'Closed', lastAccess: '09:12:08', alarm: Math.random() > 0.6 ? 'Warning' : 'Normal', alarmClass: Math.random() > 0.6 ? 'low' : 'normal' }
+  ]
+
+  // Tips
+  const tipPool = [
+    { icon: '🔐', title: 'Review Badge Access', desc: '3 badges with expired clearance detected today', priority: 'High Priority' },
+    { icon: '📹', title: 'Storage Check', desc: 'NVR retention remaining: 12 days at current bitrate', priority: 'Medium Priority' },
+    { icon: '🚪', title: 'Door Audit', desc: 'Loading dock door open 2+ hours today', priority: 'Low Priority' },
+    { icon: '📋', title: 'Visitor Log', desc: '5 visitors still checked in after 18:00', priority: 'Medium Priority' }
+  ]
+  securityTips.value = tipPool.sort(() => Math.random() - 0.5).slice(0, 1)
+
+  // Update charts
+  if (eventTrendChart && throughputChart) {
+    // Update event history
+    const now = new Date()
+    eventHourLabels.value.push(now.toTimeString().slice(0, 5))
+    if (eventHourLabels.value.length > eventHistoryLength) eventHourLabels.value.shift()
+
+    eventHistory.value.push({
+      'Access Granted': 80 + Math.random() * 40,
+      'Access Denied': 3 + Math.random() * 8,
+      'Alarm Triggered': 1 + Math.random() * 3,
+      'Door Forced': Math.random() > 0.7 ? 1 : 0
+    })
+    if (eventHistory.value.length > eventHistoryLength) eventHistory.value.shift()
+
+    eventTrendChart.setOption({
+      xAxis: { data: eventHourLabels.value },
+      series: ['Access Granted', 'Access Denied', 'Alarm Triggered', 'Door Forced'].map(name => ({
+        data: eventHistory.value.map(d => d[name])
+      }))
+    })
+
+    // Update throughput history
+    throughputTimeLabels.value.push(now.toTimeString().slice(0, 5))
+    if (throughputTimeLabels.value.length > throughputHistoryLength) throughputTimeLabels.value.shift()
+
+    throughputHistory.value.push({
+      'Main Entrance': 25 + Math.random() * 15,
+      'Staff Gate': 18 + Math.random() * 12,
+      'Parking': 12 + Math.random() * 10,
+      'Delivery': 3 + Math.random() * 5
+    })
+    if (throughputHistory.value.length > throughputHistoryLength) throughputHistory.value.shift()
+
+    throughputChart.setOption({
+      xAxis: { data: throughputTimeLabels.value },
+      series: ['Main Entrance', 'Staff Gate', 'Parking', 'Delivery'].map(name => ({
+        data: throughputHistory.value.map(d => d[name])
+      }))
+    })
+  }
+}
+
+let routeWatch = null
+
+onMounted(async () => {
+  updateTime()
+  clockTimer = setInterval(updateTime, 1000)
+
+  initEventHistory()
+  initThroughputHistory()
+  await initCharts()
+
+  if (eventTrendChart && throughputChart) {
+    updateTimer = setInterval(updateAllData, 5000)
+  }
+
+  window.addEventListener('resize', handleResize)
+  document.addEventListener('fullscreenchange', onFullscreenChange)
+
+  routeWatch = watch(() => route.fullPath, async () => {
+    initEventHistory()
+    initThroughputHistory()
+    await initCharts()
+    if (eventTrendChart && throughputChart && !updateTimer) {
+      updateTimer = setInterval(updateAllData, 5000)
+    }
   })
 })
 
 onBeforeUnmount(() => {
-  if (intervalId) clearInterval(intervalId)
-  window.removeEventListener('resize', () => {})
-  trendChart?.dispose()
-  kpiTrendChart?.dispose()
+  clearInterval(clockTimer)
+  clearInterval(updateTimer)
+  clearTimeout(fullscreenTimer)
+  window.removeEventListener('resize', handleResize)
+  document.removeEventListener('fullscreenchange', onFullscreenChange)
+  if (routeWatch) routeWatch()
+  disposeCharts()
 })
 </script>
 
 <style scoped>
-/* 全部样式保持原有，仅补充迷你图表容器优化 */
 .hvac-page {
   height: 100%;
   background: radial-gradient(circle at 10% 20%, #0a1620, #03060c);
@@ -311,9 +650,16 @@ onBeforeUnmount(() => {
   flex-direction: column;
   box-sizing: border-box;
 }
+
+.title-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+}
+
 .page-title {
-  text-align: center;
-  margin-bottom: 12px;
   font-size: 32px;
   font-weight: 800;
   background: linear-gradient(135deg, #e2e8f0, #60a5fa);
@@ -322,14 +668,32 @@ onBeforeUnmount(() => {
   color: transparent;
   letter-spacing: 1px;
   text-shadow: 0 0 8px rgba(96,165,250,0.4);
-  flex-shrink: 0;
+  margin: 0;
 }
+
+.live-time {
+  position: absolute;
+  right: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #facc15;
+  font-family: monospace;
+  letter-spacing: 1px;
+  text-shadow: 0 0 6px rgba(250, 204, 21, 0.3);
+  padding: 6px 14px;
+  background: rgba(15, 25, 45, 0.6);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 10px;
+  backdrop-filter: blur(8px);
+}
+
 .main-view {
   flex: 1;
   display: flex;
   flex-direction: column;
   min-height: 0;
 }
+
 .three-columns {
   flex: 1;
   display: flex;
@@ -337,13 +701,23 @@ onBeforeUnmount(() => {
   align-items: stretch;
   min-height: 0;
 }
+
 .col-left, .col-right {
-  width: 320px;
+  width: 300px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  min-height: 0;
 }
+.col-left::-webkit-scrollbar,
+.col-right::-webkit-scrollbar {
+  display: none;
+}
+
 .col-center {
   flex: 1;
   display: flex;
@@ -351,6 +725,7 @@ onBeforeUnmount(() => {
   gap: 20px;
   min-height: 0;
 }
+
 .glass-card, .card-img {
   background: rgba(15,25,45,0.6);
   backdrop-filter: blur(12px);
@@ -373,118 +748,320 @@ onBeforeUnmount(() => {
 .card-img img {
   width: 100%;
   display: block;
-  border-radius: 20px;
+  height: auto;
+  border-radius: 10px;
 }
+
 .card-header {
   font-weight: 600;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
   font-size: 16px;
   color: #e2e8f0;
   border-left: 4px solid #3b82f6;
   padding-left: 10px;
 }
-.metrics-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 5px;
+
+.metrics-list {
+  display: flex;
+  flex-direction: column;
 }
-.metric-card {
+.metric-row {
   display: flex;
   align-items: center;
-  gap: 2px;
-  background: rgba(0,0,0,0.3);
-  border-radius: 16px;
-  padding: 12px;
+  justify-content: space-between;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
 }
-.metric-icon {
-  font-size: 22px;
-  margin-right: 5px;
+.metric-row .metric-icon {
+  font-size: 24px;
+  width: 36px;
+  opacity: 0.9;
 }
-.metric-label {
-  font-size: 15px;
+.metric-row .metric-label {
+  flex: 1;
+  font-size: 14px;
   color: #94a3b8;
+  padding-left: 12px;
+  letter-spacing: 0.3px;
 }
-.metric-value {
-  margin-top: 5px;
+.metric-row .metric-value {
+  font-size: 18px;
+  font-weight: 600;
+  color: #facc15;
+  text-align: right;
+  font-family: monospace;
+}
+
+.mode-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.mode-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 12px;
-  font-weight: 700;
+  color: #cbd5e1;
+}
+.mode-name {
+  width: 80px;
+  flex-shrink: 0;
+}
+.mode-bar-bg {
+  flex: 1;
+  height: 6px;
+  background: rgba(148, 163, 184, 0.15);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.mode-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.5s;
+}
+.mode-value {
+  width: 35px;
+  text-align: right;
   color: #facc15;
 }
-.custom-table {
-  width: 100%;
-  font-size: 13px;
+.mode-power {
+  width: 55px;
+  text-align: right;
+  color: #94a3b8;
 }
-.subsystem-table .table-header,
-.subsystem-table .table-row {
-  grid-template-columns: 1.3fr 0.6fr 0.6fr 0.6fr 0.8fr 0.8fr;
+
+.alert-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
-.table-header {
-  display: grid;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(59,130,246,0.4);
-  color: #a0b3c9;
+.alert-item {
+  background: rgba(239, 68, 68, 0.05);
+  border-radius: 8px;
+  padding: 4px 10px;
+  border-left: 3px solid #ef4444;
+}
+.alert-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.alert-tag {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.alert-tag.Warning {
+  background: rgba(251, 191, 36, 0.2);
+  color: #fbbf24;
+}
+.alert-tag.Critical {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+.alert-device {
+  font-size: 12px;
   font-weight: 600;
-  background: rgba(0,0,0,0.2);
-  border-radius: 12px 12px 0 0;
+  color: #e2e8f0;
 }
-.th, .td { padding: 0 6px; text-align: center; }
-.td { color: #ccc9cd; }
-.table-body { display: flex; flex-direction: column; }
-.table-row {
-  display: grid;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  transition: all 0.2s;
+.alert-msg {
+  font-size: 11px;
+  color: #94a3b8;
+  margin-bottom: 2px;
 }
-.table-row:hover {
-  background: rgba(59,130,246,0.1);
-  border-radius: 12px;
-  transform: translateX(4px);
+.alert-time {
+  font-size: 10px;
+  color: #64748b;
 }
-.td-online { color: #34d399; font-weight: 600; }
-.td-alert { color: #fbbf24; font-weight: 600; }
+
+.health-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.health-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+}
+.health-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.health-dot.normal { background: #34d399; box-shadow: 0 0 6px #34d399; }
+.health-dot.warning { background: #fbbf24; box-shadow: 0 0 6px #fbbf24; }
+.health-dot.critical { background: #ef4444; box-shadow: 0 0 6px #ef4444; }
+.health-name {
+  flex: 1;
+  color: #cbd5e1;
+}
+.health-status {
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.health-status.normal { color: #34d399; }
+.health-status.warning { color: #fbbf24; }
+.health-status.critical { color: #ef4444; }
+
+.cart-view {
+  width: 100%;
+  display: flex;
+  flex: 1;
+  background: transparent;
+  overflow-y: auto;
+  gap: 10px;
+  min-height: 0;
+}
+.chart-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.chart-card .card-header {
+  flex-shrink: 0;
+}
+.chart-box {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  overflow: hidden;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
 .gauges-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  margin-bottom: 8px;
+  gap: 10px;
 }
 .gauge-item { text-align: center; }
-.gauge-label { font-size: 13px; color: #cbd5e1; margin-top: 8px; }
-.gauge-value { font-size: 14px; font-weight: 700; color: #facc15; margin-top: 4px; }
+.gauge-label { font-size: 13px; color: #cbd5e1; margin-top: 0px; height: 20px; text-align: center; align-items: center; }
+
 .kpi-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
   font-size: 13px;
   color: #cbd5e6;
+}
+.kpi-row span {
+  width: 50%;
+  text-align: left;
 }
 .kpi-row strong {
   font-size: 16px;
   color: #facc15;
+  text-align: center;
 }
 .trend {
-  font-size: 12px;
+  width: 20%;
+  font-size: 11px;
   margin-left: 8px;
+  text-align: right;
 }
-.trend.up { color: #34d399; }
-.trend.stable { color: #fbbf24; }
-.mini-chart-container {
-  margin-top: 20px;
-  width: 100%;
-  border-top: 1px solid rgba(59,130,246,0.2);
+.trend.up { color: #34d399; text-align: right; }
+.trend.stable { color: #fbbf24; text-align: right; }
+
+.setpoint-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
-.mini-chart-label {
-  text-align: center;
+.setpoint-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   font-size: 12px;
-  color: #a0b3c9;
-  margin-top: 8px;
-  letter-spacing: 0.5px;
 }
-.glass-card::-webkit-scrollbar,
-.el-card__body::-webkit-scrollbar {
-  display: none;
+.sp-label {
+  flex: 1;
+  color: #94a3b8;
+}
+.sp-values {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  margin-right: 8px;
+}
+.sp-set {
+  font-size: 10px;
+  color: #cbd5e1;
+}
+.sp-actual {
+  font-weight: 600;
+  color: #fbbf24;
+}
+.sp-deviation {
+  width: 60px;
+  text-align: right;
+  font-weight: 700;
+  font-size: 12px;
+}
+.sp-deviation.high { color: #ef4444; }
+.sp-deviation.low { color: #3b82f6; }
+.sp-deviation.normal { color: #34d399; }
+
+.tips-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.tip-item {
+  display: flex;
+  gap: 10px;
+  padding: 8px 10px;
+  background: rgba(59,130,246,0.08);
+  border-radius: 8px;
+  border-left: 3px solid #3b82f6;
+  margin-top: 5px;
+}
+.tip-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.tip-content {
+  flex: 1;
+}
+.tip-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #e2e8f0;
+  margin-bottom: 2px;
+}
+.tip-desc {
+  font-size: 11px;
+  color: #94a3b8;
+  line-height: 1.4;
+  margin-bottom: 2px;
+}
+.tip-saving {
+  font-size: 10px;
+  color: #facc15;
+  font-weight: 600;
+}
+
+.percentage-value {
+  display: block;
+  margin-top: 10px;
+  font-size: 18px;
+}
+.percentage-label {
+  display: block;
+  margin-top: 10px;
+  font-size: 12px;
+  color: #facc15;
+  font-weight: bold;
 }
 </style>
 
@@ -492,5 +1069,17 @@ onBeforeUnmount(() => {
 .el-card__body {
   scrollbar-width: none;
   -ms-overflow-style: none;
+  overflow: visible !important;
+}
+.col-left .el-card,
+.col-right .el-card {
+  overflow: visible;
+  height: auto;
+  flex-shrink: 0;
+}
+.chart-card .el-card__body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 </style>

@@ -1,130 +1,202 @@
 <template>
   <div class="hvac-page">
-    <h1 class="page-title">HVAC System</h1>
-
     <div class="main-view">
       <div class="three-columns">
-        <!-- 左侧：关键指标 + 能耗趋势图 -->
+        <!-- Left Column: Key Metrics + Operation Modes + Alerts + System Health -->
         <div class="col-left">
+          <!-- Key Metrics -->
           <el-card class="card glass-card" shadow="hover">
             <div class="card-header">📈 Key Metrics</div>
-            <div class="metrics-grid">
-              <div class="metric-card">
-                <div class="metric-icon">🏭</div>
-                <div class="metric-info">
-                  <div class="metric-label">Devices</div>
-                  <div class="metric-value">{{ totalDevices }}</div>
-                </div>
+            <div class="metrics-list">
+              <div class="metric-row">
+                <div class="metric-icon">❄️</div>
+                <div class="metric-label">Chilled Water ΔT</div>
+                <div class="metric-value">{{ chwDeltaT }}°C</div>
               </div>
-              <div class="metric-card">
-                <div class="metric-icon">📶</div>
-                <div class="metric-info">
-                  <div class="metric-label">Online</div>
-                  <div class="metric-value">{{ onlineRate }}%</div>
-                </div>
+              <div class="metric-row">
+                <div class="metric-icon">🌡️</div>
+                <div class="metric-label">Cooling Load</div>
+                <div class="metric-value">{{ coolingLoad }} RT</div>
               </div>
-              <div class="metric-card">
+              <div class="metric-row">
                 <div class="metric-icon">⚡</div>
-                <div class="metric-info">
-                  <div class="metric-label">Energy</div>
-                  <div class="metric-value">{{ totalEnergy }} kWh</div>
-                </div>
+                <div class="metric-label">System kW/Ton</div>
+                <div class="metric-value">{{ kwPerTon }}</div>
               </div>
-              <div class="metric-card">
+              <div class="metric-row">
+                <div class="metric-icon">📊</div>
+                <div class="metric-label">Total Energy</div>
+                <div class="metric-value">{{ totalEnergy }} kWh</div>
+              </div>
+              <div class="metric-row">
                 <div class="metric-icon">⚠️</div>
-                <div class="metric-info">
-                  <div class="metric-label">Alerts</div>
-                  <div class="metric-value">{{ activeAlerts }}</div>
-                </div>
+                <div class="metric-label">Active Alarms</div>
+                <div class="metric-value">{{ activeAlerts }}</div>
               </div>
             </div>
           </el-card>
 
-          <!-- 能耗趋势图（扩展时间范围到22点） -->
+          <!-- Operation Modes Distribution -->
           <el-card class="card glass-card" shadow="hover">
-            <div class="card-header">📉 Energy Trend (kWh)</div>
-            <div ref="trendChartRef" style="height: 300px; width: 100%"></div>
+            <div class="card-header">🔄 Operating Strategy</div>
+            <div class="mode-list">
+              <div class="mode-row" v-for="mode in operationModes" :key="mode.name">
+                <div class="mode-name">{{ mode.name }}</div>
+                <div class="mode-bar-bg">
+                  <div class="mode-bar-fill" :style="{ width: mode.loadPercent + '%', background: mode.color }"></div>
+                </div>
+                <div class="mode-value">{{ mode.loadPercent }}%</div>
+                <div class="mode-power">{{ mode.status }}</div>
+              </div>
+            </div>
+          </el-card>
+
+          <!-- Recent Alerts -->
+          <el-card class="card glass-card" shadow="hover">
+            <div class="card-header">🚨 Active Alarms</div>
+            <div class="alert-list">
+              <div class="alert-item" v-for="alert in recentAlerts" :key="alert.id">
+                <div class="alert-header">
+                  <span class="alert-tag" :class="alert.severity">{{ alert.severity }}</span>
+                  <span class="alert-device">{{ alert.equipment }}</span>
+                </div>
+                <div class="alert-msg">{{ alert.description }}</div>
+                <div class="alert-time">{{ alert.timestamp }}</div>
+              </div>
+            </div>
+          </el-card>
+
+          <!-- System Health Status -->
+          <el-card class="card glass-card" shadow="hover">
+            <div class="card-header">💚 System Health</div>
+            <div class="health-list">
+              <div class="health-row" v-for="item in systemHealth" :key="item.subsystem">
+                <div class="health-dot" :class="item.status"></div>
+                <div class="health-name">{{ item.subsystem }}</div>
+                <div class="health-status" :class="item.status">{{ item.statusText }}</div>
+              </div>
+            </div>
           </el-card>
         </div>
 
-        <!-- 中间：图片 + 子系统表格 -->
+        <!-- Center Column: Image + Charts -->
         <div class="col-center">
+          <div class="title-row">
+            <h1 class="page-title">HVAC</h1>
+            <span class="live-time">{{ currentTime }}</span>
+          </div>
           <div class="card-img">
             <img src="../images/1778147036078.png" alt="HVAC 3D View" />
           </div>
+          <div class="cart-view">
+            <!-- Chiller Plant COP Comparison -->
+            <el-card class="card glass-card chart-card" shadow="hover">
+              <div class="card-header">📊 Equipment Efficiency</div>
+              <div ref="efficiencyChartRef" class="chart-box"></div>
+            </el-card>
+            <!-- System Power Trend -->
+            <el-card class="card glass-card chart-card" shadow="hover">
+              <div class="card-header">⚡ System Power Distribution (Last 10 min)</div>
+              <div ref="energyChartRef" class="chart-box"></div>
+            </el-card>
+          </div>
+        </div>
+
+        <!-- Right Column: KPI + Environment + Setpoints + Optimization -->
+        <div class="col-right">
+          <!-- KPI Dashboard -->
           <el-card class="card glass-card" shadow="hover">
-            <div class="card-header">📊 Core Subsystems Overview</div>
-            <div class="custom-table subsystem-table">
-              <div class="table-header">
-                <div class="th">Subsystem</div>
-                <div class="th">Total</div>
-                <div class="th">Online</div>
-                <div class="th">Alert</div>
-                <div class="th">Efficiency</div>
-                <div class="th">Power (kW)</div>
+            <div class="card-header">📊 Plant KPIs</div>
+            <div class="kpi-row">
+              <span>Avg. CHW Supply Temp</span>
+              <strong>{{ chwSupplyTemp }}°C</strong>
+              <span class="trend stable">Set 7.0°C</span>
+            </div>
+            <div class="kpi-row">
+              <span>Avg. CHW Return Temp</span>
+              <strong>{{ chwReturnTemp }}°C</strong>
+              <span class="trend up">ΔT {{ chwDeltaT }}°C</span>
+            </div>
+            <div class="kpi-row">
+              <span>Condenser Water Temp</span>
+              <strong>{{ cwTemp }}°C</strong>
+              <span class="trend stable">Approach {{ approachTemp }}°C</span>
+            </div>
+            <div class="kpi-row">
+              <span>System Efficiency</span>
+              <strong>{{ kwPerTon }} kW/Ton</strong>
+              <span class="trend up">Target < 0.6</span>
+            </div>
+          </el-card>
+
+          <!-- Environmental Gauges -->
+          <el-card class="card glass-card" shadow="hover">
+            <div class="card-header">🌡️ Zone Conditions</div>
+            <div class="gauges-grid">
+              <div class="gauge-item">
+                <el-progress type="dashboard" :percentage="tempPercent" :color="tempColor" :width="90" :stroke-width="4">
+                  <template #default="{ percentage }">
+                    <span class="percentage-label">{{ indoorTemp }} °C</span>
+                  </template>
+                </el-progress>
+                <div class="gauge-label">Indoor Temp</div>
               </div>
-              <div class="table-body">
-                <div v-for="sub in subsystems" :key="sub.name" class="table-row">
-                  <div class="td">{{ sub.name }}</div>
-                  <div class="td">{{ sub.total }}</div>
-                  <div class="td td-online">{{ sub.online }}</div>
-                  <div class="td td-alert">{{ sub.alert }}</div>
-                  <div class="td">{{ sub.efficiency }}%</div>
-                  <div class="td">{{ sub.power }}</div>
+              <div class="gauge-item">
+                <el-progress type="dashboard" :percentage="humPercent" :color="humColor" :width="90" :stroke-width="4">
+                  <template #default="{ percentage }">
+                    <span class="percentage-label">{{ indoorHum }} %</span>
+                  </template>
+                </el-progress>
+                <div class="gauge-label">Indoor RH</div>
+              </div>
+              <div class="gauge-item">
+                <el-progress type="dashboard" :percentage="co2Percent" :color="co2Color" :width="90" :stroke-width="4">
+                  <template #default="{ percentage }">
+                    <span class="percentage-label">{{ co2Value }} ppm</span>
+                  </template>
+                </el-progress>
+                <div class="gauge-label">CO₂ Level</div>
+              </div>
+              <div class="gauge-item">
+                <el-progress type="dashboard" :percentage="outdoorTempPercent" :color="outdoorTempColor" :width="90" :stroke-width="4">
+                  <template #default="{ percentage }">
+                    <span class="percentage-label">{{ outdoorTemp }} °C</span>
+                  </template>
+                </el-progress>
+                <div class="gauge-label">Outdoor Temp</div>
+              </div>
+            </div>
+          </el-card>
+
+          <!-- Setpoint Deviation -->
+          <el-card class="card glass-card" shadow="hover">
+            <div class="card-header">🎯 Control Parameters</div>
+            <div class="setpoint-list">
+              <div class="setpoint-row" v-for="item in controlParams" :key="item.label">
+                <div class="sp-label">{{ item.label }}</div>
+                <div class="sp-values">
+                  <span class="sp-set">SP: {{ item.setpoint }}{{ item.unit }}</span>
+                  <span class="sp-actual">PV: {{ item.actual }}{{ item.unit }}</span>
+                </div>
+                <div class="sp-deviation" :class="item.status">
+                  {{ item.deviation }}
                 </div>
               </div>
             </div>
           </el-card>
-        </div>
 
-        <!-- 右侧：环境仪表盘 + KPI（内含迷你趋势图） -->
-        <div class="col-right">
+          <!-- Optimization Suggestions -->
           <el-card class="card glass-card" shadow="hover">
-            <div class="card-header">🌡️ Environmental Metrics</div>
-            <div class="gauges-grid">
-              <div class="gauge-item">
-                <el-progress type="dashboard" :percentage="tempPercent" :color="tempColor" :width="100" :stroke-width="8" />
-                <div class="gauge-label">Temperature</div>
-                <div class="gauge-value">{{ tempValue }} °C</div>
+            <div class="card-header">💡 Energy Saving Tips</div>
+            <div class="tips-list">
+              <div class="tip-item" v-for="(tip, idx) in optimizationTips" :key="idx">
+                <div class="tip-icon">{{ tip.icon }}</div>
+                <div class="tip-content">
+                  <div class="tip-title">{{ tip.title }}</div>
+                  <div class="tip-desc">{{ tip.desc }}</div>
+                  <div class="tip-saving">{{ tip.saving }}</div>
+                </div>
               </div>
-              <div class="gauge-item">
-                <el-progress type="dashboard" :percentage="humPercent" :color="humColor" :width="100" :stroke-width="8" />
-                <div class="gauge-label">Humidity</div>
-                <div class="gauge-value">{{ humValue }} %</div>
-              </div>
-              <div class="gauge-item">
-                <el-progress type="dashboard" :percentage="co2Percent" :color="co2Color" :width="100" :stroke-width="8" />
-                <div class="gauge-label">CO₂</div>
-                <div class="gauge-value">{{ co2Value }} ppm</div>
-              </div>
-              <div class="gauge-item">
-                <el-progress type="dashboard" :percentage="presPercent" :color="presColor" :width="100" :stroke-width="8" />
-                <div class="gauge-label">Air Pressure</div>
-                <div class="gauge-value">{{ presValue }} hPa</div>
-              </div>
-            </div>
-          </el-card>
-
-          <!-- KPI Dashboard + 迷你趋势图（扩展时间） -->
-          <el-card class="card glass-card" shadow="hover">
-            <div class="card-header">📊 KPI Dashboard</div>
-            <div class="kpi-row">
-              <span>Total Energy</span>
-              <strong>12,480 kWh</strong>
-              <span class="trend up">↑5.2%</span>
-            </div>
-            <div class="kpi-row">
-              <span>COP (Efficiency)</span>
-              <strong>4.2</strong>
-              <span class="trend stable">+0.3</span>
-            </div>
-            <div class="kpi-row">
-              <span>Carbon Saved</span>
-              <strong>1,284 kg</strong>
-              <span class="trend up">↑12%</span>
-            </div>
-            <div class="mini-chart-container">
-              <div ref="kpiTrendChartRef" style="height: 100%; width: 100%"></div>
             </div>
           </el-card>
         </div>
@@ -134,178 +206,515 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref, onMounted, onBeforeUnmount, nextTick, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import * as echarts from 'echarts'
 
-// 子系统数据（包含负载字段，但未使用饼图，保留）
-const subsystems = ref([
-  { name: 'Chiller Plant', total: 12, online: 10, alert: 1, efficiency: 88, power: 320, load: 75 },
-  { name: 'AHU', total: 23, online: 22, alert: 0, efficiency: 92, power: 145, load: 62 },
-  { name: 'FAU (PAU)', total: 8, online: 8, alert: 0, efficiency: 94, power: 67, load: 48 },
-  { name: 'FCU', total: 45, online: 42, alert: 2, efficiency: 86, power: 210, load: 55 },
-  { name: 'VAV Terminals', total: 67, online: 65, alert: 1, efficiency: 90, power: 98, load: 70 },
-  { name: 'Cooling Tower', total: 4, online: 4, alert: 0, efficiency: 92, power: 55, load: 82 }
-])
+const route = useRoute()
 
-// 全局统计
-const totalDevices = ref(159)
-const onlineRate = ref(91.8)
+// ==================== Real-time Clock ====================
+const currentTime = ref('')
+
+const updateTime = () => {
+  const now = new Date()
+  const year = now.getFullYear()
+  const month = String(now.getMonth() + 1).padStart(2, '0')
+  const day = String(now.getDate()).padStart(2, '0')
+  const hours = String(now.getHours()).padStart(2, '0')
+  const minutes = String(now.getMinutes()).padStart(2, '0')
+  const seconds = String(now.getSeconds()).padStart(2, '0')
+  const milliseconds = String(now.getMilliseconds()).padStart(3, '0')
+  currentTime.value = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${milliseconds}`
+}
+
+let clockTimer = null
+
+// ==================== Core HVAC Data ====================
+// Chilled water system
+const chwSupplyTemp = ref(6.8)
+const chwReturnTemp = ref(12.3)
+const chwDeltaT = ref(5.5)
+const cwTemp = ref(29.5)
+const approachTemp = ref(3.2)
+
+// Load & Efficiency
+const coolingLoad = ref(850)
+const kwPerTon = ref(0.62)
 const totalEnergy = ref(12480)
-const activeAlerts = ref(4)
+const activeAlerts = ref(3)
 
-// 环境指标
-const tempValue = ref(24.5)
-const humValue = ref(58)
-const co2Value = ref(412)
-const presValue = ref(1013)
-const tempPercent = ref(61)
-const humPercent = ref(58)
-const co2Percent = ref(32)
-const presPercent = ref(55)
+// Zone conditions
+const indoorTemp = ref(23.8)
+const indoorHum = ref(55)
+const outdoorTemp = ref(32.5)
+const co2Value = ref(520)
 
-// 颜色配置
+// Gauge percentages
+const tempPercent = ref(60)
+const humPercent = ref(55)
+const co2Percent = ref(44)
+const outdoorTempPercent = ref(65)
+
+// Gauge colors
 const tempColor = [
-  { color: '#3b82f6', percentage: 50 },
+  { color: '#10b981', percentage: 60 },
+  { color: '#f59e0b', percentage: 80 },
+  { color: '#ef4444', percentage: 100 }
+]
+const humColor = '#60a5fa'
+const co2Color = [
+  { color: '#10b981', percentage: 50 },
   { color: '#f59e0b', percentage: 75 },
   { color: '#ef4444', percentage: 100 }
 ]
-const humColor = '#34d399'
-const co2Color = [
-  { color: '#10b981', percentage: 40 },
-  { color: '#f97316', percentage: 70 },
-  { color: '#ef4444', percentage: 100 }
+const outdoorTempColor = [
+  { color: '#f59e0b', percentage: 60 },
+  { color: '#ef4444', percentage: 80 },
+  { color: '#dc2626', percentage: 100 }
 ]
-const presColor = '#8b5cf6'
 
-// 图表实例
-const trendChartRef = ref(null)
-const kpiTrendChartRef = ref(null)
-let trendChart = null
-let kpiTrendChart = null
+// Operation modes
+const operationModes = ref([
+  { name: 'Chiller #1', loadPercent: 78, status: 'Running', color: '#3b82f6' },
+  { name: 'Chiller #2', loadPercent: 65, status: 'Running', color: '#60a5fa' },
+  { name: 'Cooling Tower', loadPercent: 82, status: 'Running', color: '#34d399' },
+  { name: 'CHW Pump Set', loadPercent: 72, status: 'Running', color: '#fbbf24' }
+])
 
-// 扩展时间范围：00:00 ~ 22:00 (每2小时一个点, 共12个点)
-// const fullTimeLabels = ['00:00','02:00','04:00','06:00','08:00','10:00','12:00','14:00','16:00','18:00','20:00','22:00']
-// 左侧大图初始数据
-// const fullData = [320, 380, 540, 780, 920, 860, 750, 690, 580, 490, 430, 380]
-const fullTimeLabels = [
-  '00:00','01:00','02:00','03:00','04:00','05:00',
-  '06:00','07:00','08:00','09:00','10:00','11:00',
-  '12:00','13:00','14:00','15:00','16:00','17:00',
-  '18:00','19:00','20:00','21:00','22:00','23:00'
-];
+// Recent alarms
+const recentAlerts = ref([
+  { id: 1, severity: 'Critical', equipment: 'CHWP-02', description: 'High bearing temperature (78°C)', timestamp: '3 min ago' },
+  { id: 2, severity: 'Warning', equipment: 'CT-01 Fan', description: 'Vibration level exceeds 4.5 mm/s', timestamp: '15 min ago' },
+  { id: 3, severity: 'Warning', equipment: 'AHU-05', description: 'Filter differential pressure high', timestamp: '28 min ago' }
+])
 
-const fullData = [
-  310, 300, 290, 280, 290, 300,
-  350, 420, 520, 650, 780, 850,
-  890, 860, 800, 730, 670, 620,
-  580, 540, 500, 460, 420, 380
-];
+// System health
+const systemHealth = ref([
+  { subsystem: 'Chiller Plant', status: 'normal', statusText: 'Optimal' },
+  { subsystem: 'Cooling Tower', status: 'warning', statusText: 'Check' },
+  { subsystem: 'CHW Distribution', status: 'normal', statusText: 'Normal' },
+  { subsystem: 'AHU Systems', status: 'normal', statusText: 'Normal' },
+  { subsystem: 'BAS Network', status: 'normal', statusText: 'Online' }
+])
 
-// 迷你图使用8个点（00:00 ~ 14:00）
-const miniTimeLabels = ['00:00','02:00','04:00','06:00','08:00','10:00','12:00','14:00']
-const miniData = [400, 360, 520, 760, 900, 840, 720, 650]
+// Control parameters
+const controlParams = ref([
+  { label: 'CHW Supply Temp', setpoint: '7.0', actual: '6.8', unit: '°C', deviation: '-0.2 ✓', status: 'normal' },
+  { label: 'CHW Return Temp', setpoint: '12.0', actual: '12.3', unit: '°C', deviation: '+0.3 ⚠', status: 'high' },
+  { label: 'Condenser Water', setpoint: '30.0', actual: '29.5', unit: '°C', deviation: '-0.5 ✓', status: 'low' },
+  { label: 'CHW Diff Pressure', setpoint: '150', actual: '142', unit: 'kPa', deviation: '-8 ⚠', status: 'low' }
+])
 
-// 初始化左侧能耗趋势图（12个点）
-const initTrendChart = () => {
-  if (trendChartRef.value) {
-    trendChart = echarts.init(trendChartRef.value)
-    trendChart.setOption({
-      tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-      grid: { top: 10, bottom: 0, left: 0, right: 0, containLabel: true },
-      xAxis: { type: 'category', data: fullTimeLabels, axisLabel: { color: '#cbd5e1', rotate: 30, interval: 2 }, axisLine: { lineStyle: { color: '#334155' } } },
-      yAxis: { type: 'value', name: 'kWh', nameTextStyle: { color: '#94a3b8' }, axisLabel: { color: '#cbd5e1' }, splitLine: { lineStyle: { color: '#1e293b' } } },
-      series: [{ type: 'line', smooth: true, lineStyle: { width: 3, color: '#3b82f6' }, areaStyle: { opacity: 0.2, color: '#3b82f6' }, symbol: 'circle', symbolSize: 6, itemStyle: { color: '#3b82f6', borderColor: '#fff', borderWidth: 1 }, data: fullData }]
+// Optimization tips
+const optimizationTips = ref([
+  { icon: '🔧', title: 'Raise CHW Setpoint', desc: 'Increase to 8°C to improve chiller efficiency', saving: '~8% energy savings' },
+  // { icon: '🌬️', title: 'Optimize Tower Fan Speed', desc: 'Reduce fan speed from 100% to 85%', saving: '~5% fan energy savings' }
+])
+
+// ==================== Charts ====================
+const efficiencyChartRef = ref(null)
+const energyChartRef = ref(null)
+let efficiencyChart = null
+let energyChart = null
+
+// 10-minute history
+const historyLength = 10
+const powerHistory = ref([])
+const timeLabels = ref([])
+
+const initPowerHistory = () => {
+  const now = new Date()
+  powerHistory.value = []
+  timeLabels.value = []
+  for (let i = historyLength - 1; i >= 0; i--) {
+    const t = new Date(now - i * 60000)
+    timeLabels.value.push(t.toTimeString().slice(0, 5))
+    powerHistory.value.push({
+      'Chillers': 420 + Math.random() * 40,
+      'Pumps': 85 + Math.random() * 15,
+      'Cooling Towers': 45 + Math.random() * 10,
+      'AHUs': 120 + Math.random() * 20,
+      'Others': 55 + Math.random() * 10
     })
   }
 }
 
-// 初始化 KPI 卡片内的迷你趋势图（8个点）
-const initKpiTrendChart = () => {
-  if (kpiTrendChartRef.value) {
-    kpiTrendChart = echarts.init(kpiTrendChartRef.value)
-    kpiTrendChart.setOption({
-      tooltip: { trigger: 'axis' },
-      grid: { top: 0, left: 0, right: 0, bottom: 0, containLabel: false },
-      xAxis: { type: 'category', data: miniTimeLabels, axisLabel: { color: '#94a3b8', fontSize: 9, rotate: 20 }, axisLine: { show: false }, axisTick: { show: false } },
-      yAxis: { type: 'value', show: false, min: 200, max: 1000 },
-      series: [{ type: 'line', smooth: true, lineStyle: { width: 2, color: '#facc15' }, symbol: 'circle', symbolSize: 4, areaStyle: { opacity: 0.2, color: '#facc15' }, data: miniData }]
+// Chiller efficiency data
+const getChillerData = () => {
+  return [
+    { name: 'CH-01', cop: 5.8, load: 78, type: 'Chiller', status: 'normal' },
+    { name: 'CH-02', cop: 5.2, load: 65, type: 'Chiller', status: 'normal' },
+    { name: 'CH-03', cop: 4.1, load: 45, type: 'Chiller', status: 'warning' },
+    { name: 'CT System', cop: 3.8, load: 82, type: 'Tower', status: 'normal' },
+    { name: 'Pump Set', cop: 2.5, load: 72, type: 'Pump', status: 'warning' },
+    { name: 'AHU Array', cop: 3.2, load: 68, type: 'AHU', status: 'normal' }
+  ]
+}
+
+// Bar chart option
+const getEfficiencyOption = (data) => {
+  const typeColors = {
+    'Chiller': '#3b82f6',
+    'Tower': '#34d399',
+    'Pump': '#fbbf24',
+    'AHU': '#f97316'
+  }
+  const colors = data.map(d => d.status === 'warning' ? '#ef4444' : typeColors[d.type] || '#3b82f6')
+
+  return {
+    backgroundColor: 'transparent',
+    grid: { left: '3%', right: '4%', bottom: '0%', top: '20%', containLabel: true },
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: { type: 'shadow' },
+      backgroundColor: 'rgba(15,25,45,0.9)',
+      borderColor: '#3b82f6',
+      textStyle: { color: '#e2e8f0' },
+      formatter: (params) => {
+        const d = params[0]
+        const item = data[d.dataIndex]
+        return `<div style="padding:4px 8px">
+          <b>${d.name}</b> (${item.type})<br/>
+          Efficiency: <span style="color:#facc15;font-weight:bold">${d.value}</span><br/>
+          Load: <span style="color:#60a5fa">${item.load}%</span><br/>
+          ${item.status === 'warning' ? '<span style="color:#ef4444">⚠ Below target</span>' : '<span style="color:#34d399">✓ Normal</span>'}
+        </div>`
+      }
+    },
+    xAxis: {
+      type: 'category',
+      data: data.map(d => d.name),
+      axisLabel: { color: '#94a3b8', fontSize: 10 },
+      axisLine: { lineStyle: { color: '#334155' } }
+    },
+    yAxis: {
+      type: 'value',
+      name: 'COP / EER',
+      nameTextStyle: { color: '#64748b', fontSize: 10 },
+      axisLabel: { color: '#94a3b8', fontSize: 10 },
+      splitLine: { lineStyle: { color: '#1e293b', type: 'dashed' } },
+      min: 1,
+      max: 7
+    },
+    series: [
+      {
+        name: 'Efficiency',
+        type: 'bar',
+        data: data.map((d, i) => ({
+          value: d.cop,
+          itemStyle: {
+            borderRadius: [6, 6, 0, 0],
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              { offset: 0, color: colors[i] },
+              { offset: 1, color: colors[i] + '60' }
+            ]),
+            shadowBlur: 8,
+            shadowColor: colors[i]
+          }
+        })),
+        barWidth: '38%',
+        label: {
+          show: true,
+          position: 'top',
+          color: '#facc15',
+          fontSize: 11,
+          fontWeight: 'bold'
+        },
+        markPoint: {
+          silent: true,
+          symbol: 'circle',
+          symbolSize: 8,
+          label: { show: false },
+          data: data.map((d, i) => ({
+            coord: [d.name, d.cop],
+            itemStyle: { color: colors[i], shadowBlur: 10, shadowColor: colors[i] }
+          }))
+        }
+      },
+      {
+        type: 'line',
+        data: [],
+        markLine: {
+          silent: true,
+          symbol: 'none',
+          lineStyle: { color: '#94a3b8', type: 'dashed', width: 1 },
+          label: { show: true, position: 'end', color: '#94a3b8', fontSize: 9, formatter: 'Target 4.5' },
+          data: [
+            { yAxis: 4.5, name: 'Minimum COP Target' }
+          ]
+        }
+      }
+    ]
+  }
+}
+
+// Line chart option
+const getEnergyOption = () => {
+  const categories = ['Chillers', 'Pumps', 'Cooling Towers', 'AHUs', 'Others']
+  const colors = ['#3b82f6', '#34d399', '#fbbf24', '#f97316', '#94a3b8']
+
+  const seriesData = categories.map((name, i) => ({
+    name,
+    type: 'line',
+    data: powerHistory.value.map(d => d[name]),
+    smooth: true,
+    symbol: 'circle',
+    symbolSize: 5,
+    lineStyle: { width: 2, color: colors[i] },
+    itemStyle: { color: colors[i] },
+    areaStyle: {
+      color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+        { offset: 0, color: colors[i] + '30' },
+        { offset: 1, color: colors[i] + '00' }
+      ])
+    }
+  }))
+
+  return {
+    backgroundColor: 'transparent',
+    tooltip: {
+      trigger: 'axis',
+      backgroundColor: 'rgba(15,25,45,0.9)',
+      borderColor: '#3b82f6',
+      textStyle: { color: '#e2e8f0' },
+      valueFormatter: (value) => value + ' kW'
+    },
+    legend: { textStyle: { color: '#94a3b8', fontSize: 9 }, top: 0 },
+    grid: { left: '3%', right: '4%', bottom: '0%', top: '20%', containLabel: true },
+    xAxis: {
+      type: 'category',
+      data: timeLabels.value,
+      axisLabel: { color: '#94a3b8', fontSize: 9 },
+      axisLine: { lineStyle: { color: '#334155' } }
+    },
+    yAxis: {
+      type: 'value',
+      name: 'kW',
+      nameTextStyle: { color: '#64748b', fontSize: 10 },
+      axisLabel: { color: '#94a3b8', fontSize: 10 },
+      splitLine: { lineStyle: { color: '#1e293b', type: 'dashed' } }
+    },
+    series: seriesData
+  }
+}
+
+// ==================== Chart Lifecycle ====================
+// 更可靠的等待尺寸方法
+const waitForSize = (el, timeout = 5000) => {
+  return new Promise((resolve, reject) => {
+    if (!el) return reject('el is null')
+    const start = Date.now()
+    const check = () => {
+      const w = el.clientWidth
+      const h = el.clientHeight
+      if (w > 0 && h > 0) {
+        console.log(`[waitForSize] success - w:${w} h:${h}`)
+        resolve()
+      } else if (Date.now() - start > timeout) {
+        console.warn(`[waitForSize] Timeout, force resolve. Current size: ${w}x${h}`)
+        resolve()
+      } else {
+        requestAnimationFrame(check)
+      }
+    }
+    check()
+  })
+}
+
+// 销毁图表
+const disposeCharts = () => {
+  if (efficiencyChart) {
+    efficiencyChart.dispose()
+    efficiencyChart = null
+  }
+  if (energyChart) {
+    energyChart.dispose()
+    energyChart = null
+  }
+}
+
+// 初始化图表（带重试机制）
+const initCharts = async () => {
+  await nextTick()
+
+  // 多次尝试，确保DOM完全渲染
+  for (let attempt = 0; attempt < 5; attempt++) {
+    await new Promise(resolve => setTimeout(resolve, 100))
+
+    const effDom = efficiencyChartRef.value
+    const eneDom = energyChartRef.value
+
+    if (!effDom || !eneDom) {
+      console.warn(`[initCharts] attempt ${attempt}: refs not ready`)
+      continue
+    }
+
+    if (effDom.clientWidth === 0 || effDom.clientHeight === 0) {
+      console.warn(`[initCharts] attempt ${attempt}: container size is 0`)
+      continue
+    }
+
+    // 尺寸正常，开始初始化
+    disposeCharts()
+
+    try {
+      efficiencyChart = echarts.init(effDom)
+      energyChart = echarts.init(eneDom)
+
+      efficiencyChart.setOption(getEfficiencyOption(getChillerData()))
+      energyChart.setOption(getEnergyOption())
+
+      console.log('[initCharts] Charts rendered successfully')
+      return
+    } catch (e) {
+      console.error('[initCharts] Error during init:', e)
+    }
+  }
+
+  console.error('[initCharts] Failed after 5 attempts')
+}
+
+const handleResize = () => {
+  efficiencyChart?.resize()
+  energyChart?.resize()
+}
+
+// Fullscreen fix
+let fullscreenTimer = null
+const onFullscreenChange = () => {
+  clearTimeout(fullscreenTimer)
+  fullscreenTimer = setTimeout(handleResize, 350)
+}
+
+// ==================== Live Update ====================
+let updateTimer = null
+
+const updateAllData = () => {
+  // Update chilled water temps
+  chwSupplyTemp.value = parseFloat((6.5 + Math.random() * 1.0).toFixed(1))
+  chwReturnTemp.value = parseFloat((11.5 + Math.random() * 1.5).toFixed(1))
+  chwDeltaT.value = parseFloat((chwReturnTemp.value - chwSupplyTemp.value).toFixed(1))
+
+  // Update cooling load & efficiency
+  coolingLoad.value = Math.floor(800 + Math.random() * 100)
+  kwPerTon.value = parseFloat((0.58 + Math.random() * 0.12).toFixed(2))
+  totalEnergy.value = totalEnergy.value + Math.floor(Math.random() * 5)
+  activeAlerts.value = Math.floor(Math.random() * 5)
+
+  // Environmental
+  indoorTemp.value = parseFloat((23.3 + Math.random() * 1.2).toFixed(1))
+  indoorHum.value = Math.floor(53 + Math.random() * 8)
+  outdoorTemp.value = parseFloat((31.5 + Math.random() * 2.5).toFixed(1))
+  co2Value.value = Math.floor(480 + Math.random() * 80)
+
+  // Gauge percentages
+  tempPercent.value = Math.round((indoorTemp.value / 30) * 100)
+  humPercent.value = indoorHum.value
+  co2Percent.value = Math.round(((co2Value.value - 400) / 600) * 100)
+  outdoorTempPercent.value = Math.round((outdoorTemp.value / 40) * 100)
+
+  // Operation modes
+  operationModes.value = [
+    { name: 'Chiller #1', loadPercent: 70 + Math.floor(Math.random() * 20), status: 'Running', color: '#3b82f6' },
+    { name: 'Chiller #2', loadPercent: 55 + Math.floor(Math.random() * 20), status: 'Running', color: '#60a5fa' },
+    { name: 'Cooling Tower', loadPercent: 75 + Math.floor(Math.random() * 15), status: 'Running', color: '#34d399' },
+    { name: 'CHW Pump Set', loadPercent: 65 + Math.floor(Math.random() * 15), status: 'Running', color: '#fbbf24' }
+  ]
+
+  // System health
+  systemHealth.value = [
+    { subsystem: 'Chiller Plant', status: Math.random() > 0.95 ? 'warning' : 'normal', statusText: Math.random() > 0.95 ? 'Check' : 'Optimal' },
+    { subsystem: 'Cooling Tower', status: Math.random() > 0.85 ? 'warning' : 'normal', statusText: Math.random() > 0.85 ? 'Check' : 'Normal' },
+    { subsystem: 'CHW Distribution', status: Math.random() > 0.9 ? 'warning' : 'normal', statusText: Math.random() > 0.9 ? 'Check' : 'Normal' },
+    { subsystem: 'AHU Systems', status: 'normal', statusText: 'Normal' },
+    { subsystem: 'BAS Network', status: 'normal', statusText: 'Online' }
+  ]
+
+  // Control parameters
+  controlParams.value = [
+    { label: 'CHW Supply Temp', setpoint: '7.0', actual: (6.5 + Math.random()).toFixed(1), unit: '°C', deviation: (Math.random() > 0.5 ? '+' : '-') + (Math.random() * 0.8).toFixed(1) + ' ' + (Math.random() > 0.6 ? '⚠' : '✓'), status: Math.random() > 0.7 ? 'high' : 'normal' },
+    { label: 'CHW Return Temp', setpoint: '12.0', actual: (11.5 + Math.random() * 1.5).toFixed(1), unit: '°C', deviation: '+' + (Math.random() * 1).toFixed(1) + ' ⚠', status: 'high' },
+    { label: 'Condenser Water', setpoint: '30.0', actual: (29 + Math.random() * 2).toFixed(1), unit: '°C', deviation: (Math.random() > 0.5 ? '-' : '+') + (Math.random() * 1).toFixed(1) + ' ✓', status: 'low' },
+    { label: 'CHW Diff Pressure', setpoint: '150', actual: Math.floor(138 + Math.random() * 15), unit: 'kPa', deviation: (Math.random() > 0.5 ? '-' : '+') + Math.floor(Math.random() * 12) + ' ⚠', status: 'low' }
+  ]
+
+  // Tips
+  const tipPool = [
+    { icon: '🔧', title: 'Raise CHW Setpoint', desc: 'Increase from 7°C to 8°C when outdoor temp < 30°C', saving: '~8% energy savings' },
+    { icon: '🌬️', title: 'Reset SAT Based on Load', desc: 'Adjust supply air temp by 2°C in low occupancy', saving: '~5% AHU energy' },
+    { icon: '📊', title: 'Stagger Chiller Start', desc: 'Delay 2nd chiller start by 15 min to avoid peak', saving: '~12% demand charge' },
+    { icon: '⚙️', title: 'Optimize Condenser Water', desc: 'Reset CW setpoint based on wet bulb approach', saving: '~3% chiller savings' }
+  ]
+  optimizationTips.value = tipPool.sort(() => Math.random() - 0.5).slice(0, 1)
+
+  // Update charts
+  if (efficiencyChart && energyChart) {
+    efficiencyChart.setOption(getEfficiencyOption(getChillerData()))
+
+    // Update power trend
+    const now = new Date()
+    timeLabels.value.push(now.toTimeString().slice(0, 5))
+    if (timeLabels.value.length > historyLength) timeLabels.value.shift()
+
+    powerHistory.value.push({
+      'Chillers': 410 + Math.random() * 50,
+      'Pumps': 80 + Math.random() * 20,
+      'Cooling Towers': 42 + Math.random() * 12,
+      'AHUs': 115 + Math.random() * 25,
+      'Others': 52 + Math.random() * 12
+    })
+    if (powerHistory.value.length > historyLength) powerHistory.value.shift()
+
+    energyChart.setOption({
+      xAxis: { data: timeLabels.value },
+      series: ['Chillers', 'Pumps', 'Cooling Towers', 'AHUs', 'Others'].map(name => ({
+        data: powerHistory.value.map(d => d[name])
+      }))
     })
   }
 }
 
-// 更新左侧大图数据（随机波动）
-const updateTrendChart = () => {
-  if (trendChart) {
-    const newData = fullData.map(v => Math.max(200, v + (Math.random() - 0.5) * 80))
-    trendChart.setOption({ series: [{ data: newData }] })
+let routeWatch = null
+
+onMounted(async () => {
+  updateTime()
+  clockTimer = setInterval(updateTime, 1000)
+
+  initPowerHistory()
+
+  // 延迟初始化图表，确保DOM完全渲染
+  await initCharts()
+
+  // 初始化成功后启动数据更新
+  if (efficiencyChart && energyChart) {
+    updateTimer = setInterval(updateAllData, 5000)
   }
-}
 
-// 更新迷你图数据
-const updateKpiTrendChart = () => {
-  if (kpiTrendChart) {
-    const newData = miniData.map(v => Math.max(200, v + (Math.random() - 0.5) * 80))
-    kpiTrendChart.setOption({ series: [{ data: newData }] })
-  }
-}
+  window.addEventListener('resize', handleResize)
+  document.addEventListener('fullscreenchange', onFullscreenChange)
 
-// 更新关键指标
-const updateStats = () => {
-  totalDevices.value = Math.floor(150 + Math.random() * 30)
-  onlineRate.value = parseFloat((85 + Math.random() * 10).toFixed(1))
-  totalEnergy.value = Math.floor(11000 + Math.random() * 3000)
-  activeAlerts.value = Math.floor(Math.random() * 8)
-}
-
-// 环境指标百分比转换
-const valueToPercent = (val, min, max) => {
-  const percent = ((val - min) / (max - min)) * 100
-  return Math.round(percent * 10) / 10
-}
-
-const updatePercentages = () => {
-  tempPercent.value = valueToPercent(tempValue.value, 0, 40)
-  humPercent.value = humValue.value
-  co2Percent.value = valueToPercent(co2Value.value, 300, 800)
-  presPercent.value = valueToPercent(presValue.value, 980, 1040)
-}
-
-// 定时刷新所有数据
-let intervalId = null
-const startMockUpdate = () => {
-  intervalId = setInterval(() => {
-    tempValue.value = parseFloat((20 + Math.random() * 10).toFixed(1))
-    humValue.value = Math.round(40 + Math.random() * 30)
-    co2Value.value = Math.round(380 + Math.random() * 200)
-    presValue.value = Math.round(1000 + Math.random() * 30)
-    updatePercentages()
-    updateStats()
-    updateTrendChart()
-    updateKpiTrendChart()
-  }, 5000)
-}
-
-onMounted(() => {
-  initTrendChart()
-  initKpiTrendChart()
-  updatePercentages()
-  startMockUpdate()
-  window.addEventListener('resize', () => {
-    trendChart?.resize()
-    kpiTrendChart?.resize()
+  // 路由变化时重新初始化图表
+  routeWatch = watch(() => route.fullPath, async () => {
+    initPowerHistory()
+    await initCharts()
+    if (efficiencyChart && energyChart && !updateTimer) {
+      updateTimer = setInterval(updateAllData, 5000)
+    }
   })
 })
 
 onBeforeUnmount(() => {
-  if (intervalId) clearInterval(intervalId)
-  window.removeEventListener('resize', () => {})
-  trendChart?.dispose()
-  kpiTrendChart?.dispose()
+  clearInterval(clockTimer)
+  clearInterval(updateTimer)
+  clearTimeout(fullscreenTimer)
+  window.removeEventListener('resize', handleResize)
+  document.removeEventListener('fullscreenchange', onFullscreenChange)
+  if (routeWatch) routeWatch()
+  disposeCharts()
 })
 </script>
 
 <style scoped>
-/* 全部样式保持原有，仅补充迷你图表容器优化 */
 .hvac-page {
   height: 100%;
   background: radial-gradient(circle at 10% 20%, #0a1620, #03060c);
@@ -314,9 +723,16 @@ onBeforeUnmount(() => {
   flex-direction: column;
   box-sizing: border-box;
 }
+
+.title-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+}
+
 .page-title {
-  text-align: center;
-  margin-bottom: 12px;
   font-size: 32px;
   font-weight: 800;
   background: linear-gradient(135deg, #e2e8f0, #60a5fa);
@@ -325,14 +741,32 @@ onBeforeUnmount(() => {
   color: transparent;
   letter-spacing: 1px;
   text-shadow: 0 0 8px rgba(96,165,250,0.4);
-  flex-shrink: 0;
+  margin: 0;
 }
+
+.live-time {
+  position: absolute;
+  right: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #facc15;
+  font-family: monospace;
+  letter-spacing: 1px;
+  text-shadow: 0 0 6px rgba(250, 204, 21, 0.3);
+  padding: 6px 14px;
+  background: rgba(15, 25, 45, 0.6);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 10px;
+  backdrop-filter: blur(8px);
+}
+
 .main-view {
   flex: 1;
   display: flex;
   flex-direction: column;
   min-height: 0;
 }
+
 .three-columns {
   flex: 1;
   display: flex;
@@ -340,13 +774,24 @@ onBeforeUnmount(() => {
   align-items: stretch;
   min-height: 0;
 }
+
+/* Left & Right columns */
 .col-left, .col-right {
-  width: 320px;
+  width: 300px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  min-height: 0;
 }
+.col-left::-webkit-scrollbar,
+.col-right::-webkit-scrollbar {
+  display: none;
+}
+
 .col-center {
   flex: 1;
   display: flex;
@@ -354,6 +799,8 @@ onBeforeUnmount(() => {
   gap: 20px;
   min-height: 0;
 }
+
+/* Glass card effect */
 .glass-card, .card-img {
   background: rgba(15,25,45,0.6);
   backdrop-filter: blur(12px);
@@ -376,118 +823,331 @@ onBeforeUnmount(() => {
 .card-img img {
   width: 100%;
   display: block;
-  border-radius: 20px;
+  height: auto;
+  border-radius: 10px;
 }
+
 .card-header {
   font-weight: 600;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
   font-size: 16px;
   color: #e2e8f0;
   border-left: 4px solid #3b82f6;
   padding-left: 10px;
 }
-.metrics-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 5px;
+
+/* Key Metrics */
+.metrics-list {
+  display: flex;
+  flex-direction: column;
 }
-.metric-card {
+.metric-row {
   display: flex;
   align-items: center;
-  gap: 2px;
-  background: rgba(0,0,0,0.3);
-  border-radius: 16px;
-  padding: 12px;
+  justify-content: space-between;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
 }
-.metric-icon {
-  font-size: 22px;
-  margin-right: 5px;
+.metric-row .metric-icon {
+  font-size: 24px;
+  width: 36px;
+  opacity: 0.9;
 }
-.metric-label {
-  font-size: 15px;
+.metric-row .metric-label {
+  flex: 1;
+  font-size: 14px;
   color: #94a3b8;
+  padding-left: 12px;
+  letter-spacing: 0.3px;
 }
-.metric-value {
-  margin-top: 5px;
+.metric-row .metric-value {
+  font-size: 18px;
+  font-weight: 600;
+  color: #facc15;
+  text-align: right;
+  font-family: monospace;
+}
+
+/* Operation Modes */
+.mode-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.mode-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 12px;
-  font-weight: 700;
+  color: #cbd5e1;
+}
+.mode-name {
+  width: 80px;
+  flex-shrink: 0;
+}
+.mode-bar-bg {
+  flex: 1;
+  height: 6px;
+  background: rgba(148, 163, 184, 0.15);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.mode-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.5s;
+}
+.mode-value {
+  width: 35px;
+  text-align: right;
   color: #facc15;
 }
-.custom-table {
-  width: 100%;
-  font-size: 13px;
+.mode-power {
+  width: 55px;
+  text-align: right;
+  color: #94a3b8;
 }
-.subsystem-table .table-header,
-.subsystem-table .table-row {
-  grid-template-columns: 1.3fr 0.6fr 0.6fr 0.6fr 0.8fr 0.8fr;
+
+/* Recent Alerts */
+.alert-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
-.table-header {
-  display: grid;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(59,130,246,0.4);
-  color: #a0b3c9;
+.alert-item {
+  background: rgba(239, 68, 68, 0.05);
+  border-radius: 8px;
+  padding: 4px 10px;
+  border-left: 3px solid #ef4444;
+}
+.alert-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.alert-tag {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.alert-tag.Critical {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+.alert-tag.Warning {
+  background: rgba(251, 191, 36, 0.2);
+  color: #fbbf24;
+}
+.alert-device {
+  font-size: 12px;
   font-weight: 600;
-  background: rgba(0,0,0,0.2);
-  border-radius: 12px 12px 0 0;
+  color: #e2e8f0;
 }
-.th, .td { padding: 0 6px; text-align: center; }
-.td { color: #ccc9cd; }
-.table-body { display: flex; flex-direction: column; }
-.table-row {
-  display: grid;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  transition: all 0.2s;
+.alert-msg {
+  font-size: 11px;
+  color: #94a3b8;
+  margin-bottom: 2px;
 }
-.table-row:hover {
-  background: rgba(59,130,246,0.1);
-  border-radius: 12px;
-  transform: translateX(4px);
+.alert-time {
+  font-size: 10px;
+  color: #64748b;
 }
-.td-online { color: #34d399; font-weight: 600; }
-.td-alert { color: #fbbf24; font-weight: 600; }
+
+/* System Health */
+.health-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.health-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+}
+.health-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.health-dot.normal { background: #34d399; box-shadow: 0 0 6px #34d399; }
+.health-dot.warning { background: #fbbf24; box-shadow: 0 0 6px #fbbf24; }
+.health-dot.critical { background: #ef4444; box-shadow: 0 0 6px #ef4444; }
+.health-name {
+  flex: 1;
+  color: #cbd5e1;
+}
+.health-status {
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.health-status.normal { color: #34d399; }
+.health-status.warning { color: #fbbf24; }
+.health-status.critical { color: #ef4444; }
+
+/* Center Charts */
+.cart-view {
+  width: 100%;
+  display: flex;
+  flex: 1;
+  background: transparent;
+  overflow-y: auto;
+  gap: 10px;
+  min-height: 0;
+}
+.chart-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.chart-card .card-header {
+  flex-shrink: 0;
+}
+.chart-box {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  overflow: hidden;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+/* Gauges */
 .gauges-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  margin-bottom: 8px;
+  gap: 10px;
 }
 .gauge-item { text-align: center; }
-.gauge-label { font-size: 13px; color: #cbd5e1; margin-top: 8px; }
-.gauge-value { font-size: 14px; font-weight: 700; color: #facc15; margin-top: 4px; }
+.gauge-label { font-size: 13px; color: #cbd5e1; margin-top: 0px; height: 20px; text-align: center; align-items: center; }
+
+/* KPI rows */
 .kpi-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
   font-size: 13px;
   color: #cbd5e6;
+}
+.kpi-row span {
+  width: 50%;
+  text-align: left;
 }
 .kpi-row strong {
   font-size: 16px;
   color: #facc15;
+  text-align: center;
 }
 .trend {
-  font-size: 12px;
+  width: 20%;
+  font-size: 11px;
   margin-left: 8px;
+  text-align: right;
 }
-.trend.up { color: #34d399; }
-.trend.stable { color: #fbbf24; }
-.mini-chart-container {
-  margin-top: 20px;
-  width: 100%;
-  border-top: 1px solid rgba(59,130,246,0.2);
+.trend.up { color: #34d399;text-align: right; }
+.trend.stable { color: #fbbf24;text-align: right; }
+
+/* Setpoint Deviation */
+.setpoint-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
-.mini-chart-label {
-  text-align: center;
+.setpoint-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   font-size: 12px;
-  color: #a0b3c9;
-  margin-top: 8px;
-  letter-spacing: 0.5px;
 }
-.glass-card::-webkit-scrollbar,
-.el-card__body::-webkit-scrollbar {
-  display: none;
+.sp-label {
+  flex: 1;
+  color: #94a3b8;
+}
+.sp-values {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  margin-right: 8px;
+}
+.sp-set {
+  color: #64748b;
+  font-size: 10px;
+  color: #cbd5e1;
+}
+.sp-actual {
+  color: #cbd5e1;
+  font-weight: 600;
+  color: #fbbf24;
+}
+.sp-deviation {
+  width: 60px;
+  text-align: right;
+  font-weight: 700;
+  font-size: 12px;
+}
+.sp-deviation.high { color: #ef4444; }
+.sp-deviation.low { color: #3b82f6; }
+.sp-deviation.normal { color: #34d399; }
+
+/* Optimization Tips */
+.tips-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.tip-item {
+  display: flex;
+  gap: 10px;
+  padding: 8px 10px;
+  background: rgba(59,130,246,0.08);
+  border-radius: 8px;
+  border-left: 3px solid #3b82f6;
+  margin-top: 5px;
+}
+.tip-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.tip-content {
+  flex: 1;
+}
+.tip-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #e2e8f0;
+  margin-bottom: 2px;
+}
+.tip-desc {
+  font-size: 11px;
+  color: #94a3b8;
+  line-height: 1.4;
+  margin-bottom: 2px;
+}
+.tip-saving {
+  font-size: 10px;
+  color: #facc15;
+  font-weight: 600;
+}
+
+.percentage-value {
+  display: block;
+  margin-top: 10px;
+  font-size: 18px;
+}
+.percentage-label {
+  display: block;
+  margin-top: 10px;
+  font-size: 12px;
+  color: #facc15;
+  font-weight: bold;
 }
 </style>
 
@@ -495,5 +1155,17 @@ onBeforeUnmount(() => {
 .el-card__body {
   scrollbar-width: none;
   -ms-overflow-style: none;
+  overflow: visible !important;
+}
+.col-left .el-card,
+.col-right .el-card {
+  overflow: visible;
+  height: auto;
+  flex-shrink: 0;
+}
+.chart-card .el-card__body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 </style>

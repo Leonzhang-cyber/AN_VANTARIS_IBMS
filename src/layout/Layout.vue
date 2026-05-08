@@ -1,6 +1,6 @@
 <template>
   <el-container style="height:100vh;overflow:hidden">
-    <!-- 左侧菜单（全屏隐藏） -->
+    <!-- 左侧菜单（全屏时隐藏） -->
     <el-aside
         width="230px"
         class="sidebar"
@@ -10,14 +10,17 @@
         <el-icon size="26" color="#409eff" class="logo-icon"><Home-filled /></el-icon>
         IBMS IoT Platform
       </div>
+
       <el-menu
           background-color="#0a1629"
           text-color="#e5eaf3"
           active-text-color="#409eff"
-          :default-active="$route.path"
-          router
+          :default-active="activeMenu"
+          v-model:default-openeds="openedMenus"
+          @select="handleMenuSelect"
           style="border-right:none"
       >
+        <!-- 仪表盘子菜单 -->
         <el-sub-menu index="/">
           <template #title>
             <el-icon><Box /></el-icon>
@@ -25,6 +28,9 @@
           </template>
           <el-menu-item index="/Factory">
             <span>Factory</span>
+          </el-menu-item>
+          <el-menu-item index="/Building">
+            <span>Building</span>
           </el-menu-item>
         </el-sub-menu>
 
@@ -49,11 +55,12 @@
           <el-menu-item index="/device/plumbing">
             <span>Plumbing</span>
           </el-menu-item>
-          <el-menu-item index="/device/energy">
+<!--          <el-menu-item index="/device/energy">
             <span>Energy</span>
-          </el-menu-item>
+          </el-menu-item>-->
         </el-sub-menu>
 
+        <!-- 一级菜单 -->
         <el-menu-item index="/energy">
           <el-icon><DataAnalysis /></el-icon>
           <span>{{ $t('menu.energy') }}</span>
@@ -78,7 +85,7 @@
     </el-aside>
 
     <el-container>
-      <!-- 顶部栏（全屏隐藏） -->
+      <!-- 顶部栏（全屏时隐藏） -->
       <el-header
           class="header-bar"
           :style="{ height: isFullscreen ? '0' : '60px', opacity: isFullscreen ? 0 : 1, padding: isFullscreen ? 0 : '0 20px' }"
@@ -88,23 +95,24 @@
           <el-tooltip :content="isFullscreen ? 'Exit Full Screen' : 'Full Screen'" placement="bottom">
             <FullScreen class="fullscreen-icon" @click="toggleFullScreen" />
           </el-tooltip>
-
           <el-button-group>
-            <el-button size="small" @click="setLang('zh')" :type="locale=='zh'?'primary':''">中文</el-button>
-            <el-button size="small" @click="setLang('en')" :type="locale=='en'?'primary':''">English</el-button>
+            <el-button size="small" @click="setLang('zh')" :type="locale === 'zh' ? 'primary' : ''">中文</el-button>
+            <el-button size="small" @click="setLang('en')" :type="locale === 'en' ? 'primary' : ''">English</el-button>
           </el-button-group>
         </div>
       </el-header>
 
-      <!-- 内容区域 -->
-      <el-main
-          class="main-content"
-          :style="{ padding: isFullscreen ? '0' : '0px' }"
-      >
-        <router-view v-slot="{ Component }">
-          <transition name="fade" mode="out-in">
-            <component :is="Component" />
-          </transition>
+      <!-- 内容区域：使用 key 强制刷新，捕获错误 -->
+      <el-main class="main-content" :style="{ padding: isFullscreen ? '0' : '0px' }">
+        <div v-if="hasError" class="error-placeholder">
+          <el-result icon="error" title="页面加载失败" :sub-title="errorMessage">
+            <template #extra>
+              <el-button type="primary" @click="reloadRoute">重新加载</el-button>
+            </template>
+          </el-result>
+        </div>
+        <router-view v-else :key="$route.fullPath" v-slot="{ Component }">
+          <component :is="Component" />
         </router-view>
       </el-main>
     </el-container>
@@ -112,7 +120,7 @@
 </template>
 
 <script setup>
-import { computed, ref, onMounted, onUnmounted } from 'vue'
+import { computed, ref, onMounted, onUnmounted, watch, onErrorCaptured } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
@@ -124,17 +132,76 @@ const route = useRoute()
 const router = useRouter()
 const { locale } = useI18n()
 const isFullscreen = ref(false)
-const setLang = (l) => (locale.value = l)
 
-// 菜单路径（上下键切换顺序，包含所有子路由）
+// 错误边界状态
+const hasError = ref(false)
+const errorMessage = ref('')
+
+// 捕获子组件渲染错误，避免页面静默空白
+onErrorCaptured((err, instance, info) => {
+  console.error('组件渲染错误:', err, info)
+  hasError.value = true
+  errorMessage.value = err.message || '未知错误'
+  return false // 阻止错误继续向上传播
+})
+
+// 重新加载当前路由（强制刷新）
+const reloadRoute = async () => {
+  hasError.value = false
+  errorMessage.value = ''
+  try {
+    await router.replace({ path: route.fullPath })
+  } catch (err) {
+    console.error('重新加载失败:', err)
+    ElMessage.error('重新加载失败，请刷新页面')
+  }
+}
+
+// 高亮菜单项
+const activeMenu = computed(() => route.path)
+
+// 动态控制父菜单展开
+const openedMenus = ref([])
+
+const updateOpenedMenus = () => {
+  const path = route.path
+  if (path.startsWith('/device/')) {
+    openedMenus.value = ['/device']
+  } else {
+    // 可根据需要添加其他父菜单，例如未来可能有的 '/report/xxx'
+    openedMenus.value = []
+  }
+}
+
+watch(() => route.path, updateOpenedMenus, { immediate: true })
+
+// 手动处理菜单点击（避免 el-menu 的 router 模式不可控）
+const handleMenuSelect = (index) => {
+  if (index && index !== route.path) {
+    router.push(index).catch(err => {
+      if (err.name !== 'NavigationDuplicated') {
+        console.error('路由跳转失败:', err)
+        ElMessage.error(`页面跳转失败: ${err.message}`)
+      }
+    })
+  }
+}
+
+// 语言切换
+const setLang = (l) => {
+  locale.value = l
+}
+
+// 菜单路径映射（用于全屏上下键切换）
 const menuPaths = [
-  '/',
+  '/Factory',
+  '/Building',
   '/device/hvac',
   '/device/sas',
   '/device/fas',
   '/device/lighting',
   '/device/plumbing',
-  '/device/energy',
+  // '/device/energy',
   '/energy',
   '/alarm',
   '/maintain',
@@ -142,17 +209,17 @@ const menuPaths = [
   '/settings'
 ]
 
-// 当前菜单名称映射（支持子路由）
+// 当前菜单名称映射
 const currentMenuName = computed(() => {
   const map = {
-    // '/': 'Dashboard',
     '/Factory': 'Dashboard - Factory',
+    '/Building': 'Dashboard - Building',
     '/device/hvac': 'Device Management - HVAC',
     '/device/sas': 'Device Management - SAS',
     '/device/fas': 'Device Management - FAS',
     '/device/lighting': 'Device Management - Lighting',
     '/device/plumbing': 'Device Management - Plumbing',
-    '/device/energy': 'Device Management - Energy',
+    // '/device/energy': 'Device Management - Energy',
     '/energy': 'Energy Analysis',
     '/alarm': 'Alarm Center',
     '/maintain': 'Maintenance Management',
@@ -162,10 +229,11 @@ const currentMenuName = computed(() => {
   return map[route.path] || 'IBMS Platform'
 })
 
+// 全屏控制
 const toggleFullScreen = () => {
   if (!document.fullscreenElement) {
     document.documentElement.requestFullscreen().catch(() => {
-      ElMessage.warning('Fullscreen failed')
+      ElMessage.warning('全屏失败')
     })
   } else {
     document.exitFullscreen()
@@ -186,13 +254,15 @@ const onKeydown = (e) => {
   if (e.key === 'ArrowUp') {
     e.preventDefault()
     const prevIndex = currentIndex <= 0 ? menuPaths.length - 1 : currentIndex - 1
-    router.push(menuPaths[prevIndex])
-  }
-
-  if (e.key === 'ArrowDown') {
+    router.push(menuPaths[prevIndex]).catch(err => {
+      if (err.name !== 'NavigationDuplicated') console.error(err)
+    })
+  } else if (e.key === 'ArrowDown') {
     e.preventDefault()
     const nextIndex = currentIndex >= menuPaths.length - 1 ? 0 : currentIndex + 1
-    router.push(menuPaths[nextIndex])
+    router.push(menuPaths[nextIndex]).catch(err => {
+      if (err.name !== 'NavigationDuplicated') console.error(err)
+    })
   }
 }
 
@@ -208,13 +278,12 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-/* 侧边栏 */
 .sidebar {
   background: #0a1629;
   transition: all 0.3s;
+  overflow-x: hidden;
 }
 
-/* LOGO */
 .logo-box {
   height: 60px;
   display: flex;
@@ -229,7 +298,6 @@ onUnmounted(() => {
   margin-right: 10px;
 }
 
-/* 顶部栏 */
 .header-bar {
   display: flex;
   justify-content: space-between;
@@ -251,7 +319,6 @@ onUnmounted(() => {
   align-items: center;
 }
 
-/* 全屏图标样式 */
 .fullscreen-icon {
   width: 32px;
   height: 32px;
@@ -266,25 +333,18 @@ onUnmounted(() => {
   color: #409eff;
 }
 
-/* 内容区域 */
 .main-content {
   background: #f5f7fa;
   overflow: auto;
-  transition: all 0.3s;
+  padding: 0 !important;
+  position: relative;
 }
 
-/* 切换动画 */
-.fade-enter-active,
-.fade-leave-active {
-  transition: all 0.3s;
-}
-
-.fade-enter-from {
-  opacity: 0;
-  transform: translateY(10px);
-}
-
-.fade-leave-to {
-  opacity: 0;
+.error-placeholder {
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 </style>

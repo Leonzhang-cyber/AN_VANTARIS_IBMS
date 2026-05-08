@@ -12,7 +12,8 @@ const routes = [
         redirect: '/Factory',
         // component: () => import('../views/Factory.vue'),
         children: [
-          { path: 'Factory', name: 'Factory', component: () => import('../views/Factory.vue') }
+          { path: 'Factory', name: 'Factory', component: () => import('../views/Factory.vue') },
+          { path: 'Building', name: 'Building', component: () => import('../views/Building.vue') }
         ]
       },
       {
