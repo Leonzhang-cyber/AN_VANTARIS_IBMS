@@ -88,7 +88,7 @@
 
         <!-- 员工仪表盘 -->
         <div class="glass-card employee-dashboard">
-          <div class="card-title">👥 Workforce Dashboard</div>
+          <div class="card-title">🧑‍🤝‍🧑 Workforce Dashboard</div>
           <div ref="employeeGauge" style="height: 110px; width: 100%"></div>
           <div class="role-breakdown">
             <div v-for="emp in employeeStats" :key="emp.role" class="role-item">

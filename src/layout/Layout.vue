@@ -32,6 +32,18 @@
           <el-menu-item index="/Building">
             <span>Building</span>
           </el-menu-item>
+          <el-menu-item index="/Airport">
+            <span>Airport</span>
+          </el-menu-item>
+          <el-menu-item index="/Shopping">
+            <span>Shopping</span>
+          </el-menu-item>
+          <el-menu-item index="/Hospital">
+            <span>Hospital</span>
+          </el-menu-item>
+          <el-menu-item index="/Hotel">
+            <span>Hotel</span>
+          </el-menu-item>
         </el-sub-menu>
 
         <!-- 设备管理（带子菜单） -->
@@ -61,10 +73,23 @@
         </el-sub-menu>
 
         <!-- 一级菜单 -->
-        <el-menu-item index="/energy">
-          <el-icon><DataAnalysis /></el-icon>
-          <span>{{ $t('menu.energy') }}</span>
-        </el-menu-item>
+
+        <el-sub-menu index="/energy">
+          <template #title>
+            <el-icon><Box /></el-icon>
+            <span>{{ $t('menu.energy') }}</span>
+          </template>
+          <el-menu-item index="/energy/wind">
+            <span>Wind Energy</span>
+          </el-menu-item>
+        </el-sub-menu>
+
+<!--        <el-menu-item index="/energy">-->
+<!--          <el-icon><DataAnalysis /></el-icon>-->
+<!--          <span>{{ $t('menu.energy') }}</span>-->
+<!--        </el-menu-item>-->
+
+
         <el-menu-item index="/alarm">
           <el-icon><Warning /></el-icon>
           <span>{{ $t('menu.alarm') }}</span>
@@ -196,13 +221,17 @@ const setLang = (l) => {
 const menuPaths = [
   '/Factory',
   '/Building',
+  '/Airport',
+  '/Shopping',
+  '/Hospital',
+  '/Hotel',
   '/device/hvac',
   '/device/sas',
   '/device/fas',
   '/device/lighting',
   '/device/plumbing',
   // '/device/energy',
-  '/energy',
+  '/energy/wind',
   '/alarm',
   '/maintain',
   '/report',
@@ -214,13 +243,17 @@ const currentMenuName = computed(() => {
   const map = {
     '/Factory': 'Dashboard - Factory',
     '/Building': 'Dashboard - Building',
+    '/Airport': 'Dashboard - Airport',
+    '/Shopping': 'Dashboard - Shopping',
+    '/Hospital': 'Dashboard - Hospital',
+    '/Hotel': 'Dashboard - Hotel',
     '/device/hvac': 'Device Management - HVAC',
     '/device/sas': 'Device Management - SAS',
     '/device/fas': 'Device Management - FAS',
     '/device/lighting': 'Device Management - Lighting',
     '/device/plumbing': 'Device Management - Plumbing',
     // '/device/energy': 'Device Management - Energy',
-    '/energy': 'Energy Analysis',
+    '/energy/wind': 'Wind Energy Analysis',
     '/alarm': 'Alarm Center',
     '/maintain': 'Maintenance Management',
     '/report': 'Data Reports',

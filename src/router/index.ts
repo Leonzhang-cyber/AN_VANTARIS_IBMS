@@ -20,6 +20,30 @@ const routes = [
         meta: { title: 'Building Dashboard' }
       },
       {
+        path: 'Airport',
+        name: 'Airport',
+        component: () => import('../views/Airport.vue'),
+        meta: { title: 'Airport Dashboard' }
+      },
+      {
+        path: 'Shopping',
+        name: 'Shopping',
+        component: () => import('../views/Shopping.vue'),
+        meta: { title: 'Shopping Dashboard' }
+      },
+      {
+        path: 'Hospital',
+        name: 'Hospital',
+        component: () => import('../views/Hospital.vue'),
+        meta: { title: 'Hospital Dashboard' }
+      },
+      {
+        path: 'Hotel',
+        name: 'Hotel',
+        component: () => import('../views/Hotel.vue'),
+        meta: { title: 'Hotel Dashboard' }
+      },
+      {
         path: 'device',
         name: 'Device',
         redirect: '/device/hvac',
@@ -59,9 +83,22 @@ const routes = [
       {
         path: 'energy',
         name: 'Energy',
-        component: () => import('../views/Energy.vue'),
-        meta: { title: 'Energy Analysis' }
+        redirect: '/energy/wind',
+        children: [
+          {
+            path: 'wind',
+            name: 'Wind',
+            component: () => import('../views/Wind.vue'),
+            meta: { title: 'Wind Energy Analysis' }
+          }
+        ]
       },
+      // {
+      //   path: 'energy',
+      //   name: 'Energy',
+      //   component: () => import('../views/Wind.vue'),
+      //   meta: { title: 'Energy Analysis' }
+      // },
       {
         path: 'alarm',
         name: 'Alarm',
