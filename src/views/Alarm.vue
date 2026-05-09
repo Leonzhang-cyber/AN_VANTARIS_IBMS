@@ -190,15 +190,15 @@ onMounted(() => {
   })
 
   // 🔥 只保留右上角轻量提示
-  setTimeout(() => {
-    ElMessage({
-      type: 'error',
-      message: '⚠️ Critical Alarm: AHU-01 discharge air temperature over limit',
-      duration: 5000,
-      showClose: true,
-      offset: 60
-    })
-  }, 2500)
+  // setTimeout(() => {
+  //   ElMessage({
+  //     type: 'error',
+  //     message: '⚠️ Critical Alarm: AHU-01 discharge air temperature over limit',
+  //     duration: 5000,
+  //     showClose: true,
+  //     offset: 60
+  //   })
+  // }, 2500)
 })
 
 onUnmounted(() => {

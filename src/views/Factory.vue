@@ -1,5 +1,5 @@
 <template>
-  <div class="dashboard">
+  <div v-if="isBackgroundLoaded" class="dashboard">
     <!-- 顶部标题区 -->
     <div class="top-header">
       <div class="header-left"></div>
@@ -141,6 +141,29 @@
       </div>
     </div>
   </div>
+
+  <div v-else class="loading-container">
+    <div class="loading-overlay">
+      <div class="loading-content">
+        <div class="loading-spinner">
+          <div class="spinner-ring"></div>
+          <div class="spinner-ring"></div>
+          <div class="spinner-ring"></div>
+        </div>
+        <div class="loading-text">
+          <span class="loading-title">Loading</span>
+          <span class="loading-dots">
+            <span>.</span><span>.</span><span>.</span>
+          </span>
+        </div>
+        <div class="loading-progress">
+          <div class="progress-bar" :style="{ width: loadingProgress + '%' }"></div>
+        </div>
+        <div class="loading-tip">Initializing Smart Factory System</div>
+        <div class="loading-subtip">{{ loadingMessage }}</div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -149,6 +172,9 @@ import * as echarts from 'echarts'
 
 // ==================== 实时数据定义 ====================
 const currentTime = ref('')
+const isBackgroundLoaded = ref(false)
+const loadingProgress = ref(0)
+const loadingMessage = ref('Preparing assets...')
 
 // 关键指标
 const deviceTotal = ref(246)
@@ -177,6 +203,16 @@ const costBreakdown = ref([
   { item: 'Electricity', cost: 0, trend: 0 },
   { item: 'Gas', cost: 0, trend: 0 }
 ])
+
+// Loading messages sequence
+const loadingMessages = [
+  'Preparing assets...',
+  'Loading background...',
+  'Initializing modules...',
+  'Connecting to sensors...',
+  'Starting dashboard...',
+  'Almost ready...'
+]
 
 function formatNumber(value) {
   return parseFloat(value).toFixed(2)
@@ -268,8 +304,6 @@ const updateTime = () => {
   const tzSign = tzOffset >= 0 ? '+' : ''
   currentTime.value = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${ms} UTC${tzSign}${tzOffset}`
 }
-updateTime()
-timeTimer = setInterval(updateTime, 1000)
 
 function randomVariation(base, rangePercent = 0.05) {
   const change = base * (Math.random() - 0.5) * rangePercent * 2
@@ -278,6 +312,67 @@ function randomVariation(base, rangePercent = 0.05) {
 
 function getEnergyColor(change) {
   return change >= 0 ? '#f59e0b' : '#10b981'
+}
+
+// Preload background image
+const preloadBackground = () => {
+  return new Promise((resolve) => {
+    const img = new Image()
+    const backgroundUrl = 'https://aegisnx.com/wp-content/uploads/2026/05/1778117712687.png'
+
+    let progress = 0
+    let messageIndex = 0
+
+    // Update loading message periodically
+    const messageInterval = setInterval(() => {
+      if (messageIndex < loadingMessages.length - 1) {
+        messageIndex++
+        loadingMessage.value = loadingMessages[messageIndex]
+      }
+    }, 800)
+
+    // Simulate progress update
+    const progressInterval = setInterval(() => {
+      if (progress < 90) {
+        progress += Math.random() * 10
+        loadingProgress.value = Math.min(progress, 90)
+
+        // Update message based on progress
+        if (progress > 80 && loadingMessage.value !== loadingMessages[4]) {
+          loadingMessage.value = loadingMessages[4]
+        } else if (progress > 60 && loadingMessage.value !== loadingMessages[3]) {
+          loadingMessage.value = loadingMessages[3]
+        } else if (progress > 40 && loadingMessage.value !== loadingMessages[2]) {
+          loadingMessage.value = loadingMessages[2]
+        } else if (progress > 20 && loadingMessage.value !== loadingMessages[1]) {
+          loadingMessage.value = loadingMessages[1]
+        }
+      }
+    }, 100)
+
+    img.onload = () => {
+      clearInterval(messageInterval)
+      clearInterval(progressInterval)
+      loadingMessage.value = 'Ready!'
+      loadingProgress.value = 100
+      setTimeout(() => {
+        resolve()
+      }, 500)
+    }
+
+    img.onerror = () => {
+      console.warn('Background image load failed, using fallback')
+      clearInterval(messageInterval)
+      clearInterval(progressInterval)
+      loadingMessage.value = 'Loading complete'
+      loadingProgress.value = 100
+      setTimeout(() => {
+        resolve()
+      }, 300)
+    }
+
+    img.src = backgroundUrl
+  })
 }
 
 // 刷新所有实时数据
@@ -397,7 +492,18 @@ const initCharts = () => {
   }
 }
 
-onMounted(() => {
+onMounted(async () => {
+  updateTime()
+  timeTimer = setInterval(updateTime, 1000)
+
+  // Preload background image before showing dashboard
+  await preloadBackground()
+
+  isBackgroundLoaded.value = true
+
+  // Wait for DOM update
+  await new Promise(resolve => setTimeout(resolve, 50))
+
   initCharts()
   refreshRealTimeData()
   dataInterval = setInterval(refreshRealTimeData, 3000)
@@ -415,19 +521,215 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
+/* 加载页面样式 */
+.loading-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-overlay {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(2px);
+}
+
+.loading-content {
+  text-align: center;
+  padding: 40px;
+  border-radius: 32px;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* 三环旋转动画 */
+.loading-spinner {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 24px;
+}
+
+.spinner-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  animation: spin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+}
+
+.spinner-ring:nth-child(1) {
+  border-top-color: #3b82f6;
+  animation-delay: 0s;
+}
+
+.spinner-ring:nth-child(2) {
+  border-right-color: #f59e0b;
+  animation-delay: 0.2s;
+  width: 70%;
+  height: 70%;
+  top: 15%;
+  left: 15%;
+}
+
+.spinner-ring:nth-child(3) {
+  border-bottom-color: #10b981;
+  animation-delay: 0.4s;
+  width: 40%;
+  height: 40%;
+  top: 30%;
+  left: 30%;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  margin-bottom: 24px;
+  font-size: 28px;
+  font-weight: 700;
+  color: #e2e8f0;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.loading-dots {
+  display: inline-flex;
+  gap: 2px;
+}
+
+.loading-dots span {
+  animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.loading-dots span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.loading-dots span:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+    opacity: 0.3;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.loading-progress {
+  width: 280px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 0 auto 16px;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec489a);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  background-size: 200% auto;
+  animation: shimmer 2s linear infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 200% 0%;
+  }
+}
+
+.loading-tip {
+  font-size: 13px;
+  color: #94a3b8;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.loading-subtip {
+  font-size: 11px;
+  color: #64748b;
+  letter-spacing: 0.5px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* 整体背景不变，仅修改新增样式 */
 .dashboard {
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
-  background-image: url('@/images/1778117712687.png');
+  background-image: url('https://aegisnx.com/wp-content/uploads/2026/05/1778117712687.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
   font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  animation: fadeIn 0.5s ease-out;
 }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .top-header {
   display: flex;
   justify-content: space-between;
@@ -551,47 +853,6 @@ onBeforeUnmount(() => {
   color: #a5f3fc;
   margin-top: 4px;
   font-weight: 500;
-}
-/* 费用明细行内样式 */
-.cost-summary {
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px dashed rgba(59,130,246,0.4);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-}
-.cost-summary-item {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  background: rgba(0,0,0,0.3);
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-}
-.cost-name {
-  color: #cbd5e1;
-}
-.cost-amount {
-  font-weight: bold;
-  color: #facc15;
-}
-.cost-trend {
-  font-size: 11px;
-}
-.cost-trend.up { color: #ef4444; }
-.cost-trend.down { color: #10b981; }
-.total-cost {
-  margin-left: auto;
-  font-size: 13px;
-  color: #e2e8f0;
-}
-.total-cost strong {
-  color: #facc15;
-  font-size: 16px;
 }
 .parking-stats { margin-top: 5px; }
 .parking-info {
