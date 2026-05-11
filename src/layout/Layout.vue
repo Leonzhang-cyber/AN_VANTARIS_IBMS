@@ -12,6 +12,7 @@
       </div>
 
       <el-menu
+          :key="route.path"
           background-color="#0a1629"
           text-color="#e5eaf3"
           active-text-color="#409eff"
@@ -82,6 +83,24 @@
           <el-menu-item index="/energy/wind">
             <span>Wind Energy</span>
           </el-menu-item>
+          <el-menu-item index="/energy/solar">
+            <span>Solar Energy</span>
+          </el-menu-item>
+          <el-menu-item index="/energy/electricity">
+            <span>Electricity Energy</span>
+          </el-menu-item>
+          <el-menu-item index="/energy/waste">
+            <span>Waste-to-Energy</span>
+          </el-menu-item>
+          <el-menu-item index="/energy/hydrogen">
+            <span>Hydrogen Energy</span>
+          </el-menu-item>
+          <el-menu-item index="/energy/storage">
+            <span>Energy Storage</span>
+          </el-menu-item>
+          <el-menu-item index="/energy/geothermal">
+            <span>Geothermal Energy</span>
+          </el-menu-item>
         </el-sub-menu>
 
 <!--        <el-menu-item index="/energy">-->
@@ -145,7 +164,7 @@
 </template>
 
 <script setup>
-import { computed, ref, onMounted, onUnmounted, watch, onErrorCaptured } from 'vue'
+import { computed, ref, onMounted, onUnmounted, watch, onErrorCaptured, nextTick } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
@@ -185,20 +204,46 @@ const reloadRoute = async () => {
 // 高亮菜单项
 const activeMenu = computed(() => route.path)
 
-// 动态控制父菜单展开
+// 动态控制父菜单展开：根据当前路由返回应该展开的父菜单（唯一）
 const openedMenus = ref([])
 
-const updateOpenedMenus = () => {
-  const path = route.path
-  if (path.startsWith('/device/')) {
-    openedMenus.value = ['/device']
-  } else {
-    // 可根据需要添加其他父菜单，例如未来可能有的 '/report/xxx'
-    openedMenus.value = []
+/**
+ * 根据路由路径获取需要展开的父菜单 index
+ * @param {string} path - 当前路由路径
+ * @returns {string|null} 父菜单的 index，如果没有父菜单则返回 null
+ */
+const getParentMenuForPath = (path) => {
+  // 仪表盘子菜单
+  const dashboardChildren = ['/Factory', '/Building', '/Airport', '/Shopping', '/Hospital', '/Hotel']
+  if (dashboardChildren.includes(path)) {
+    return '/'
   }
+  // 设备管理子菜单
+  if (path.startsWith('/device/')) {
+    return '/device'
+  }
+  // 能源子菜单
+  if (path.startsWith('/energy/')) {
+    return '/energy'
+  }
+  // 其他没有子菜单的顶层菜单（如 alarm, maintain, report, settings）不展开任何父菜单
+  return null
 }
 
-watch(() => route.path, updateOpenedMenus, { immediate: true })
+// 更新父菜单展开状态（强制刷新，先清空再设置新值）
+const updateOpenedMenus = async () => {
+  const parent = getParentMenuForPath(route.path)
+  // 先全部关闭
+  openedMenus.value = []
+  // 等待 DOM 更新后再展开需要的父菜单
+  await nextTick()
+  openedMenus.value = parent ? [parent] : []
+}
+
+// 监听路由变化，自动更新父菜单展开状态
+watch(() => route.path, () => {
+  updateOpenedMenus()
+}, { immediate: true })
 
 // 手动处理菜单点击（避免 el-menu 的 router 模式不可控）
 const handleMenuSelect = (index) => {
@@ -210,6 +255,7 @@ const handleMenuSelect = (index) => {
       }
     })
   }
+  // 注意：watch 会自动更新 openedMenus，无需在此处理
 }
 
 // 语言切换
@@ -230,8 +276,13 @@ const menuPaths = [
   '/device/fas',
   '/device/lighting',
   '/device/plumbing',
-  // '/device/energy',
   '/energy/wind',
+  '/energy/solar',
+  '/energy/electricity',
+  '/energy/waste',
+  '/energy/hydrogen',
+  '/energy/storage',
+  '/energy/geothermal',
   '/alarm',
   '/maintain',
   '/report',
@@ -252,8 +303,13 @@ const currentMenuName = computed(() => {
     '/device/fas': 'Device Management - FAS',
     '/device/lighting': 'Device Management - Lighting',
     '/device/plumbing': 'Device Management - Plumbing',
-    // '/device/energy': 'Device Management - Energy',
     '/energy/wind': 'Wind Energy Analysis',
+    '/energy/solar': 'Solar Energy Analysis',
+    '/energy/electricity': 'Power Grid & Consumption',
+    '/energy/waste': 'Waste-to-Energy Recovery',
+    '/energy/hydrogen': 'Hydrogen Energy Production',
+    '/energy/storage': 'Energy Storage Systems',
+    '/energy/geothermal': 'Geothermal Energy',
     '/alarm': 'Alarm Center',
     '/maintain': 'Maintenance Management',
     '/report': 'Data Reports',
@@ -316,6 +372,34 @@ onUnmounted(() => {
   transition: all 0.3s;
   overflow-x: hidden;
 }
+/* 侧边栏滚动条美化 */
+.sidebar {
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;  /* Firefox 细滚动条 */
+  scrollbar-color: #409eff #1e2a3a; /* 滑块颜色、轨道颜色 */
+}
+
+/* WebKit 浏览器滚动条样式（Chrome, Safari, Edge） */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.sidebar::-webkit-scrollbar-track {
+  background: #1e2a3a;
+  border-radius: 6px;
+}
+.sidebar::-webkit-scrollbar-thumb {
+  background: #409eff;
+  border-radius: 6px;
+}
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: #66b1ff;
+}
+
+
+
+
 
 .logo-box {
   height: 60px;
@@ -335,14 +419,14 @@ onUnmounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #fff;
-  border-bottom: 1px solid #e4e7ed;
+  background: #0a1629;
+  border-bottom: 1px solid #0a1629;
   transition: all 0.3s;
 }
 
 .header-title {
   font-size: 16px;
-  color: #333;
+  color: #fff;
   font-weight: 500;
 }
 
@@ -360,6 +444,8 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   transition: all 0.2s;
+  color: white;
+  font-weight: bold;
 }
 
 .fullscreen-icon:hover {
@@ -368,7 +454,7 @@ onUnmounted(() => {
 
 .main-content {
   background: #f5f7fa;
-  overflow: auto;
+  overflow: hidden;
   padding: 0 !important;
   position: relative;
 }

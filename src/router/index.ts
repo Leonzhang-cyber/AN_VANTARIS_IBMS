@@ -90,15 +90,45 @@ const routes = [
             name: 'Wind',
             component: () => import('../views/Wind.vue'),
             meta: { title: 'Wind Energy Analysis' }
+          },
+          {
+            path: 'solar',
+            name: 'Solar',
+            component: () => import('../views/Solar.vue'),
+            meta: { title: 'Solar Energy Analysis' }
+          },
+          {
+            path: 'electricity',
+            name: 'Electricity',
+            component: () => import('../views/Electricity.vue'),
+            meta: { title: 'Power Grid & Consumption' }
+          },
+          {
+            path: 'waste',
+            name: 'WasteToEnergy',
+            component: () => import('../views/WasteToEnergy.vue'),
+            meta: { title: 'Waste-to-Energy Recovery' }
+          },
+          {
+            path: 'hydrogen',
+            name: 'Hydrogen',
+            component: () => import('../views/Hydrogen.vue'),
+            meta: { title: 'Hydrogen Energy Production' }
+          },
+          {
+            path: 'storage',
+            name: 'Storage',
+            component: () => import('../views/EnergyStorage.vue'),
+            meta: { title: 'Energy Storage Systems' }
+          },
+          {
+            path: 'geothermal',
+            name: 'Geothermal',
+            component: () => import('../views/Geothermal.vue'),
+            meta: { title: 'Geothermal Energy' }
           }
         ]
       },
-      // {
-      //   path: 'energy',
-      //   name: 'Energy',
-      //   component: () => import('../views/Wind.vue'),
-      //   meta: { title: 'Energy Analysis' }
-      // },
       {
         path: 'alarm',
         name: 'Alarm',

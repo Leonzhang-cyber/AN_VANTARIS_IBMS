@@ -120,7 +120,7 @@
             <div class="kpi-row">
               <span>Condenser Water Temp</span>
               <strong>{{ cwTemp }}°C</strong>
-              <span class="trend stable">Approach {{ approachTemp }}°C</span>
+              <span class="trend stable">≈ {{ approachTemp }}°C</span>
             </div>
             <div class="kpi-row">
               <span>System Efficiency</span>
@@ -1329,7 +1329,7 @@ onBeforeUnmount(() => {
   color: #cbd5e6;
 }
 .kpi-row span {
-  width: 50%;
+  max-width: 100px;
   text-align: left;
 }
 .kpi-row strong {
@@ -1338,9 +1338,9 @@ onBeforeUnmount(() => {
   text-align: center;
 }
 .trend {
-  width: 20%;
   font-size: 11px;
   margin-left: 8px;
+  min-width: 65px;
   text-align: right;
 }
 .trend.up { color: #34d399;text-align: right; }
