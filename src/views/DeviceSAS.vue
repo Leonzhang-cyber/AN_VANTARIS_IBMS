@@ -108,22 +108,22 @@
           <el-card class="card glass-card" shadow="hover">
             <div class="card-header">📊 Security KPIs</div>
             <div class="kpi-row">
-              <span>Avg. Response Time</span>
+              <span class="kpi-row-left">Avg. Response Time</span>
               <strong>{{ avgResponseTime }}s</strong>
               <span class="trend stable">Target < 30s</span>
             </div>
             <div class="kpi-row">
-              <span>Unauthorized Attempts</span>
+              <span class="kpi-row-left">Unauthorized Attempts</span>
               <strong>{{ unauthorizedAttempts }}</strong>
               <span class="trend up">{{ unauthorizedTrend }}</span>
             </div>
             <div class="kpi-row">
-              <span>Visitor Count</span>
+              <span class="kpi-row-left">Visitor Count</span>
               <strong>{{ visitorCount }}</strong>
               <span class="trend stable">Today</span>
             </div>
             <div class="kpi-row">
-              <span>System Uptime</span>
+              <span class="kpi-row-left">System Uptime</span>
               <strong>{{ systemUptime }}%</strong>
               <span class="trend up">99.9% SLA</span>
             </div>
@@ -319,14 +319,19 @@ const currentTime = ref('')
 
 const updateTime = () => {
   const now = new Date()
-  const year = now.getFullYear()
-  const month = String(now.getMonth() + 1).padStart(2, '0')
-  const day = String(now.getDate()).padStart(2, '0')
-  const hours = String(now.getHours()).padStart(2, '0')
-  const minutes = String(now.getMinutes()).padStart(2, '0')
-  const seconds = String(now.getSeconds()).padStart(2, '0')
-  const milliseconds = String(now.getMilliseconds()).padStart(3, '0')
-  currentTime.value = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${milliseconds}`
+  // 获取 UTC 毫秒数并转换为新加坡时间 (UTC+8，无夏令时)
+  const utc = now.getTime() + (now.getTimezoneOffset() * 60000)
+  const sgTime = new Date(utc + (8 * 3600000))
+
+  const year = sgTime.getFullYear()
+  const month = String(sgTime.getMonth() + 1).padStart(2, '0')
+  const day = String(sgTime.getDate()).padStart(2, '0')
+  const hours = String(sgTime.getHours()).padStart(2, '0')
+  const minutes = String(sgTime.getMinutes()).padStart(2, '0')
+  const seconds = String(sgTime.getSeconds()).padStart(2, '0')
+  const ms = String(sgTime.getMilliseconds()).padStart(3, '0')
+
+  currentTime.value = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${ms} SGT`
 }
 
 let clockTimer = null
@@ -1250,7 +1255,11 @@ onBeforeUnmount(() => {
   color: #cbd5e6;
 }
 .kpi-row span {
-  width: 50%;
+  text-align: left;
+}
+.kpi-row-left {
+  min-width: 100px;
+  max-width: 100px;
   text-align: left;
 }
 .kpi-row strong {
@@ -1259,10 +1268,11 @@ onBeforeUnmount(() => {
   text-align: center;
 }
 .trend {
-  width: 20%;
+  width: 70px;
   font-size: 11px;
   margin-left: 8px;
   text-align: right;
+  font-weight: bold;
 }
 .trend.up { color: #34d399; text-align: right; }
 .trend.stable { color: #fbbf24; text-align: right; }
@@ -1281,20 +1291,26 @@ onBeforeUnmount(() => {
 .sp-label {
   flex: 1;
   color: #94a3b8;
+  font-size: 13px;
+  font-weight: bold;
 }
 .sp-values {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  justify-content: center;
+  align-items: center;
   gap: 2px;
   margin-right: 8px;
 }
 .sp-set {
   font-size: 10px;
   color: #cbd5e1;
+  font-weight: bold;
 }
 .sp-actual {
   font-weight: 600;
+  text-align: center;
   color: #fbbf24;
 }
 .sp-deviation {

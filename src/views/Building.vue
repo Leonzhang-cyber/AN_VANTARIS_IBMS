@@ -10,9 +10,7 @@
 
     <div class="content-area">
       <div class="left-panel">
-
-        <!-- ========== 厕所占用卡片 ========== -->
-        <!-- ========== 厕所占用卡片（高级简洁版） ========== -->
+        <!-- 厕所占用卡片 -->
         <div class="glass-card restroom-card">
           <div class="card-title">🚻 Restroom Availability</div>
           <div class="restroom-table">
@@ -25,12 +23,13 @@
               <span class="floor-name">{{ r.floor }}</span>
               <span class="status-badge" :class="r.statusClass">{{ r.statusText }}</span>
               <span class="available-count">
-        <span class="count-number">{{ r.free }}</span>
-        <span class="count-total">/{{ r.total }}</span>
-      </span>
+                <span class="count-number">{{ r.free }}</span>
+                <span class="count-total">/{{ r.total }}</span>
+              </span>
             </div>
           </div>
         </div>
+
         <!-- Building Energy 卡片 -->
         <div class="glass-card resources">
           <div class="card-title">💧⚡❄️ Building Energy</div>
@@ -56,33 +55,17 @@
           </div>
         </div>
 
-        <!-- Floor Occupancy 卡片 -->
-<!--        <div class="glass-card parking">-->
-<!--          <div class="card-title">👥 Floor Occupancy</div>-->
-<!--          <div class="parking-stats">-->
-<!--            <div class="parking-info">-->
-<!--              <span>Current: <strong>{{ floorPeople }}</strong> / {{ floorMax }}</span>-->
-<!--              <span>Capacity: <strong>{{ floorPercent }}%</strong></span>-->
-<!--            </div>-->
-<!--            <el-progress :percentage="floorPercent" :stroke-width="12" color="#8b5cf6" />-->
-<!--          </div>-->
-<!--        </div>-->
-
         <!-- Equipment Proportion 图表 -->
         <div class="glass-card device-list">
           <div class="card-title">📊 Equipment Proportion</div>
           <div ref="deviceBarChart" style="height: 220px; width: 100%"></div>
         </div>
-
-
       </div>
 
       <div class="center-void"></div>
 
       <div class="right-panel">
-
-        <!-- ========== 电梯运行卡片 ========== -->
-        <!-- ========== 电梯运行卡片（极简版） ========== -->
+        <!-- 电梯运行卡片 -->
         <div class="glass-card elevator-card">
           <div class="card-title">🚪 Lift Status</div>
           <div class="elevator-list">
@@ -99,20 +82,6 @@
             <span>{{ totalElevatorEnergy }} kWh</span>
           </div>
         </div>
-        <!-- Alert 列表 -->
-<!--        <div class="glass-card alert-list-fixed">-->
-<!--          <div class="card-header-line">-->
-<!--            <span class="card-title">🔔 Building Alerts</span>-->
-<!--            <el-tag type="danger" size="small" effect="dark">{{ alerts.length }} unresolved</el-tag>-->
-<!--          </div>-->
-<!--          <div class="alert-items-fixed">-->
-<!--            <div v-for="(alert, idx) in alerts" :key="idx" class="alert-item">-->
-<!--              <div class="alert-device">{{ alert.device }}</div>-->
-<!--              <div class="alert-content">{{ alert.content }}</div>-->
-<!--              <div class="alert-time">{{ alert.time }}</div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
 
         <!-- Environment Trend 图表 -->
         <div class="glass-card employee-dashboard">
@@ -125,7 +94,6 @@
           <div class="card-title">📈 24h Energy Trend</div>
           <div ref="energyLineChart" style="height: 180px; width: 100%"></div>
         </div>
-
       </div>
     </div>
 
@@ -206,7 +174,7 @@ const floorMax = 350
 const floorPeople = ref(210)
 const floorPercent = ref(60)
 
-// ========== 厕所数据（占用/总数） ==========
+// 厕所数据（占用/总数）
 const restrooms = ref([
   { floor: '1F Lobby', total: 8, occupied: 3, statusText: 'Available', statusClass: 'available' },
   { floor: '2F Office', total: 6, occupied: 2, statusText: 'Available', statusClass: 'available' },
@@ -215,7 +183,6 @@ const restrooms = ref([
   { floor: 'B1 Parking', total: 8, occupied: 6, statusText: 'Limited', statusClass: 'limited' }
 ])
 
-// 计算扩展属性
 const computedRestrooms = computed(() => {
   return restrooms.value.map(r => ({
     ...r,
@@ -224,7 +191,7 @@ const computedRestrooms = computed(() => {
   }))
 })
 
-// ========== 电梯数据 ==========
+// 电梯数据
 const elevators = ref([
   { id: 1, name: 'A', currentFloor: 5, passengers: 8, capacity: 15, tripCount: 78, statusText: 'Moving', statusClass: 'moving', callFloor: 9, callDirection: 'up', eta: 12 },
   { id: 2, name: 'B', currentFloor: 1, passengers: 0, capacity: 15, tripCount: 45, statusText: 'Idle', statusClass: 'idle', callFloor: null, callDirection: null, eta: 0 },
@@ -232,13 +199,16 @@ const elevators = ref([
   { id: 4, name: 'D', currentFloor: 1, passengers: 0, capacity: 15, tripCount: 12, statusText: 'Maint', statusClass: 'maint', callFloor: null, callDirection: null, eta: 0 }
 ])
 
+// 计算总行程和能耗（示例）
+const totalTripsToday = computed(() => elevators.value.reduce((sum, e) => sum + e.tripCount, 0))
+const totalElevatorEnergy = computed(() => (totalTripsToday.value * 0.35).toFixed(1))
+
 // 图表相关
 const deviceBarChart = ref(null)
 const envLineChart = ref(null)
 const energyLineChart = ref(null)
 let deviceBarIns = null, envLineIns = null, energyLineIns = null
 
-// 图表数据
 const envLineData = ref({
   time: ['00:00','04:00','08:00','12:00','16:00','20:00','24:00'],
   temp: [22,23,25,27,26,24,23],
@@ -257,7 +227,6 @@ const deviceBarData = ref({
 })
 const barColor = ['#3b82f6','#f59e0b','#10b981','#8b5cf6','#ef4444']
 
-// 告警数据
 const alerts = ref([
   { device: 'Floor 5 HVAC', content: 'Temperature abnormal', time: '09:32' },
   { device: 'Floor 2 Light', content: 'Over current', time: '09:15' },
@@ -286,7 +255,16 @@ const preloadBackground = () => new Promise((resolve) => {
 
 const updateTime = () => {
   const now = new Date()
-  currentTime.value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}.${String(now.getMilliseconds()).padStart(3,'0')} UTC+8`
+  const utc = now.getTime() + (now.getTimezoneOffset() * 60000)
+  const sgTime = new Date(utc + (8 * 3600000))
+  const year = sgTime.getFullYear()
+  const month = String(sgTime.getMonth() + 1).padStart(2, '0')
+  const day = String(sgTime.getDate()).padStart(2, '0')
+  const hours = String(sgTime.getHours()).padStart(2, '0')
+  const minutes = String(sgTime.getMinutes()).padStart(2, '0')
+  const seconds = String(sgTime.getSeconds()).padStart(2, '0')
+  const ms = String(sgTime.getMilliseconds()).padStart(3, '0')
+  currentTime.value = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${ms} SGT`
 }
 
 function randomVariation(base, range = 0.05) {
@@ -301,7 +279,6 @@ function updateCosts() {
   totalCost.value = (parseFloat(waterCost.value) + parseFloat(elecCost.value) + parseFloat(hvacCost.value)).toFixed(2)
 }
 
-// 更新厕所数据
 function updateRestroomData() {
   restrooms.value.forEach(r => {
     let delta = (Math.random() > 0.65 ? (Math.random() > 0.5 ? 1 : -1) : 0)
@@ -313,9 +290,7 @@ function updateRestroomData() {
   })
 }
 
-// 更新电梯数据
 function updateElevatorData() {
-  const floors = [1,2,3,4,5,6,7,8,9,10,11,12]
   elevators.value.forEach(e => {
     if (e.statusText !== 'Maint' && Math.random() > 0.6) {
       const move = Math.random() > 0.5 ? 1 : -1
@@ -325,8 +300,8 @@ function updateElevatorData() {
       e.currentFloor = newFloor
       e.statusText = 'Moving'
       e.statusClass = 'moving'
-
       if (Math.random() > 0.85) {
+        const floors = [1,2,3,4,5,6,7,8,9,10,11,12]
         e.callFloor = floors[Math.floor(Math.random() * floors.length)]
         e.callDirection = e.callFloor > e.currentFloor ? 'up' : (e.callFloor < e.currentFloor ? 'down' : null)
         e.eta = Math.floor(Math.random() * 25) + 5
@@ -352,7 +327,6 @@ function updateElevatorData() {
   })
 }
 
-// 刷新图表和实时数据
 function updateAllCharts() {
   if (!deviceBarIns || !envLineIns || !energyLineIns) return
   deviceBarIns.setOption({
@@ -363,104 +337,23 @@ function updateAllCharts() {
     series: [{ type: 'bar', data: deviceBarData.value.valueList.map((val, idx) => ({ value: val, itemStyle: { color: new echarts.graphic.LinearGradient(0,0,0,1, [{ offset: 0, color: barColor[idx] },{ offset: 1, color: 'rgba(0,0,0,0.3)' }]) } })), barWidth: '40%', borderRadius: [6,6,0,6] }]
   })
   envLineIns.setOption({
-    tooltip: {
-      trigger: 'axis',
-      axisPointer: { type: 'shadow' },
-      backgroundColor: 'rgba(0,0,0,0.7)',
-      borderColor: '#3b82f6'
-    },
-    legend: {
-      data: ['Temperature (℃)', 'Humidity (%)', 'CO₂ (ppm)'],
-      textStyle: { color: '#94a3b8' },
-      top: 0,
-      right: 0,
-      itemWidth: 20,
-      itemHeight: 10
-    },
+    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, backgroundColor: 'rgba(0,0,0,0.7)', borderColor: '#3b82f6' },
+    legend: { data: ['Temperature (℃)', 'Humidity (%)', 'CO₂ (ppm)'], textStyle: { color: '#94a3b8' }, top: 0, right: 0, itemWidth: 20, itemHeight: 10 },
     grid: { left: '8%', right: '8%', bottom: '5%', top: '15%', containLabel: true },
-    xAxis: {
-      type: 'category',
-      boundaryGap: false,
-      data: envLineData.value.time,
-      axisLine: { lineStyle: { color: '#334155' } },
-      axisLabel: { color: '#94a3b8', fontSize: 10 }
-    },
+    xAxis: { type: 'category', boundaryGap: false, data: envLineData.value.time, axisLine: { lineStyle: { color: '#334155' } }, axisLabel: { color: '#94a3b8', fontSize: 10 } },
     yAxis: [
-      {
-        type: 'value',
-        name: 'CO₂ (ppm)',
-        nameTextStyle: { color: '#64748b', fontSize: 10 },
-        axisLabel: { color: '#94a3b8' },
-        splitLine: { lineStyle: { color: '#1e293b', type: 'dashed' } },
-        min: 400,
-        max: 800
-      },
-      {
-        type: 'value',
-        name: 'Temperature (℃) / Humidity (%)',
-        nameTextStyle: { color: '#64748b', fontSize: 10 },
-        axisLabel: { color: '#94a3b8' },
-        splitLine: { show: false },
-        min: 0,
-        max: 100
-      }
+      { type: 'value', name: 'CO₂ (ppm)', nameTextStyle: { color: '#64748b', fontSize: 10 }, axisLabel: { color: '#94a3b8' }, splitLine: { lineStyle: { color: '#1e293b', type: 'dashed' } }, min: 400, max: 800 },
+      { type: 'value', name: 'Temperature (℃) / Humidity (%)', nameTextStyle: { color: '#64748b', fontSize: 10 }, axisLabel: { color: '#94a3b8' }, splitLine: { show: false }, min: 0, max: 100 }
     ],
     series: [
-      {
-        name: 'CO₂ (ppm)',
-        type: 'line',
-        data: envLineData.value.co2,
-        smooth: true,
-        symbol: 'circle',
-        symbolSize: 6,
-        lineStyle: { width: 2, color: '#10b981', shadowBlur: 10, shadowColor: '#10b981' },
-        areaStyle: {
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            { offset: 0, color: 'rgba(16, 185, 129, 0.4)' },
-            { offset: 1, color: 'rgba(16, 185, 129, 0.02)' }
-          ])
-        },
-        yAxisIndex: 0,
-        tooltip: { valueFormatter: (value) => value + ' ppm' }
-      },
-      {
-        name: 'Temperature (℃)',
-        type: 'line',
-        data: envLineData.value.temp,
-        smooth: true,
-        symbol: 'diamond',
-        symbolSize: 8,
-        lineStyle: { width: 2.5, color: '#f59e0b', shadowBlur: 10, shadowColor: '#f59e0b' },
-        areaStyle: {
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            { offset: 0, color: 'rgba(245, 158, 11, 0.35)' },
-            { offset: 1, color: 'rgba(245, 158, 11, 0.02)' }
-          ])
-        },
-        yAxisIndex: 1,
-        tooltip: { valueFormatter: (value) => value + ' ℃' }
-      },
-      {
-        name: 'Humidity (%)',
-        type: 'line',
-        data: envLineData.value.humidity,
-        smooth: true,
-        symbol: 'roundRect',
-        symbolSize: 6,
-        lineStyle: { width: 2, color: '#3b82f6', type: 'dashed', shadowBlur: 10, shadowColor: '#3b82f6' },
-        areaStyle: {
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            { offset: 0, color: 'rgba(59, 130, 246, 0.3)' },
-            { offset: 1, color: 'rgba(59, 130, 246, 0.01)' }
-          ])
-        },
-        yAxisIndex: 1,
-        tooltip: { valueFormatter: (value) => value + ' %' }
-      }
+      { name: 'CO₂ (ppm)', type: 'line', data: envLineData.value.co2, smooth: true, symbol: 'circle', symbolSize: 6, lineStyle: { width: 2, color: '#10b981', shadowBlur: 10, shadowColor: '#10b981' }, areaStyle: { color: new echarts.graphic.LinearGradient(0,0,0,1, [{ offset: 0, color: 'rgba(16,185,129,0.4)' },{ offset: 1, color: 'rgba(16,185,129,0.02)' }]) }, yAxisIndex: 0, tooltip: { valueFormatter: (value) => value + ' ppm' } },
+      { name: 'Temperature (℃)', type: 'line', data: envLineData.value.temp, smooth: true, symbol: 'diamond', symbolSize: 8, lineStyle: { width: 2.5, color: '#f59e0b', shadowBlur: 10, shadowColor: '#f59e0b' }, areaStyle: { color: new echarts.graphic.LinearGradient(0,0,0,1, [{ offset: 0, color: 'rgba(245,158,11,0.35)' },{ offset: 1, color: 'rgba(245,158,11,0.02)' }]) }, yAxisIndex: 1, tooltip: { valueFormatter: (value) => value + ' ℃' } },
+      { name: 'Humidity (%)', type: 'line', data: envLineData.value.humidity, smooth: true, symbol: 'roundRect', symbolSize: 6, lineStyle: { width: 2, color: '#3b82f6', type: 'dashed', shadowBlur: 10, shadowColor: '#3b82f6' }, areaStyle: { color: new echarts.graphic.LinearGradient(0,0,0,1, [{ offset: 0, color: 'rgba(59,130,246,0.3)' },{ offset: 1, color: 'rgba(59,130,246,0.01)' }]) }, yAxisIndex: 1, tooltip: { valueFormatter: (value) => value + ' %' } }
     ]
   })
   energyLineIns.setOption({
-    tooltip: { trigger: 'axis' }, grid: { left: '3%', right: '4%', bottom: '3%', top: '15%', containLabel: true },
+    tooltip: { trigger: 'axis' },
+    grid: { left: '3%', right: '4%', bottom: '3%', top: '15%', containLabel: true },
     xAxis: { type: 'category', boundaryGap: false, data: energyLineData.value.time },
     yAxis: { type: 'value', name: 'kW' },
     series: [{ name: 'Power(kWh)', type: 'line', data: energyLineData.value.power, smooth: true, color: '#8b5cf6', areaStyle: { color: 'rgba(139,92,246,0.2)' } }]
@@ -569,58 +462,43 @@ onBeforeUnmount(() => {
 .glass-card:hover { background: rgba(8,16,28,0.6); backdrop-filter: blur(8px); transform: translateY(-4px); border-color: rgba(59,130,246,0.6); }
 .card-title { font-size: 18px; font-weight: 700; color: #e2e8f0; margin-bottom: 10px; padding-left: 8px; border-left: 4px solid #3b82f6; }
 .resource-grid { display: flex; justify-content: space-around; text-align: center; }
-.resource-item .resource-label { margin-top: 8px; font-size: 13px; color: #cbd5e1; }
+.resource-item .resource-label { margin-top: 8px; font-size: 13px; color: #fff; font-weight: bold }
 .resource-value { font-size: 14px; font-weight: bold; color: #facc15; }
 .resource-cost { font-size: 12px; color: #a5f3fc; margin-top: 4px; }
 .parking-info { display: flex; justify-content: space-between; margin-bottom: 10px; color: #cbd5e1; font-size: 14px; }
 .parking-info strong { color: #facc15; }
 
 /* 厕所卡片样式 */
-.restroom-list { display: flex; flex-direction: column; gap: 14px; }
-.restroom-item { background: rgba(0,0,0,0.25); border-radius: 16px; padding: 12px; transition: 0.2s; }
-.restroom-item:hover { background: rgba(0,0,0,0.4); transform: translateX(4px); }
-.restroom-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-.restroom-floor { font-weight: 600; color: #e2e8f0; }
-.restroom-stats { display: flex; gap: 12px; }
-.stat-badge { font-size: 12px; display: flex; align-items: center; gap: 4px; color: #94a3b8; }
-.stat-dot { width: 8px; height: 8px; border-radius: 50%; }
-.stat-dot.occupied { background: #ef4444; box-shadow: 0 0 4px #ef4444; }
-.free-dot { background: #10b981; }
-.restroom-bar { height: 4px; background: rgba(255,255,255,0.15); border-radius: 2px; overflow: hidden; margin: 8px 0; }
-.restroom-bar-fill { height: 100%; border-radius: 2px; transition: width 0.3s; }
-.restroom-status { font-size: 10px; text-align: right; }
-.restroom-status.available { color: #10b981; }
-.restroom-status.moderate { color: #f59e0b; }
-.restroom-status.limited { color: #ef4444; }
+.restroom-table { width: 100%; }
+.restroom-row-header { display: flex; justify-content: space-between; padding: 8px 4px; font-size: 11px; color: #fff; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid rgba(59,130,246,0.3); margin-bottom: 8px; font-weight: bold; }
+.restroom-row-header span { flex: 1; }
+.restroom-row-header span:first-child { text-align: left; }
+.restroom-row-header span:nth-child(2) { text-align: center; }
+.restroom-row-header span:last-child { text-align: right; }
+.restroom-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 4px; border-bottom: 1px solid rgba(255,255,255,0.05); transition: all 0.2s; }
+.restroom-row:hover { background: rgba(59,130,246,0.1); border-radius: 8px; transform: translateX(4px); }
+.floor-name { flex: 1; font-size: 13px; font-weight: 500; color: #e2e8f0; }
+.status-badge { flex: 1; text-align: center; font-size: 11px; font-weight: 600; padding: 4px 8px; border-radius: 20px; width: fit-content; margin: 0 auto; }
+.status-badge.available { background: rgba(16,185,129,0.15); color: #10b981; }
+.status-badge.moderate { background: rgba(245,158,11,0.15); color: #f59e0b; }
+.status-badge.limited { background: rgba(239,68,68,0.15); color: #ef4444; }
+.available-count { flex: 1; text-align: right; font-family: monospace; }
+.count-number { font-size: 16px; font-weight: 700; color: #facc15; }
+.count-total { font-size: 11px; color: #64748b; margin-left: 2px; }
 
 /* 电梯卡片样式 */
-.elevator-list { display: flex; flex-direction: column; gap: 16px; }
-.elevator-item { background: rgba(0,0,0,0.25); border-radius: 16px; padding: 12px; transition: 0.2s; }
-.elevator-item:hover { background: rgba(0,0,0,0.4); transform: translateX(-4px); }
-.elevator-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-.elevator-name { font-weight: 700; font-size: 16px; color: #e2e8f0; }
-.elevator-position { font-size: 20px; font-weight: 700; color: #facc15; font-family: monospace; }
-.elevator-status-badge { font-size: 10px; padding: 2px 8px; border-radius: 12px; }
-.elevator-status-badge.moving { background: rgba(59,130,246,0.2); color: #60a5fa; }
-.elevator-status-badge.idle { background: rgba(148,163,184,0.2); color: #94a3b8; }
-.elevator-status-badge.maint { background: rgba(239,68,68,0.2); color: #ef4444; }
+.elevator-list { display: flex; flex-direction: column; }
+.elevator-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.lift-name { width: 30px; font-weight: 600; color: #e2e8f0; }
+.lift-floor { width: 45px; font-weight: 600; color: #facc15; font-family: monospace; }
+.lift-status { width: 65px; font-size: 12px; }
+.lift-status.moving { color: #60a5fa; }
+.lift-status.idle { color: #94a3b8; }
+.lift-status.maint { color: #ef4444; }
+.lift-call { flex: 1; text-align: right; font-size: 11px; color: #f59e0b; font-family: monospace; }
+.elevator-footer { display: flex; justify-content: space-between; margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba(59,130,246,0.3); font-size: 11px; color: #64748b; }
 
-/* 楼层指示器 */
-.floor-indicator { margin: 10px 0; }
-.floor-track { display: flex; justify-content: space-between; margin-bottom: 4px; }
-.floor-dot { width: 20px; height: 20px; border-radius: 50%; background: rgba(255,255,255,0.15); transition: all 0.2s; }
-.floor-dot.active { background: #10b981; box-shadow: 0 0 8px #10b981; }
-.floor-dot.call-up { background: #f59e0b; box-shadow: 0 0 8px #f59e0b; }
-.floor-dot.call-down { background: #f97316; box-shadow: 0 0 8px #f97316; }
-.floor-numbers { display: flex; justify-content: space-between; font-size: 9px; color: #64748b; }
-.call-info { display: flex; justify-content: space-between; align-items: center; margin: 8px 0; padding: 6px 10px; background: rgba(0,0,0,0.3); border-radius: 20px; }
-.call-badge { font-size: 12px; font-weight: 600; padding: 2px 10px; border-radius: 16px; }
-.call-badge.call-up { background: rgba(245,158,11,0.2); color: #f59e0b; }
-.call-badge.call-down { background: rgba(249,115,22,0.2); color: #f97316; }
-.eta { font-size: 11px; color: #60a5fa; font-family: monospace; }
-.elevator-meta { display: flex; justify-content: space-between; font-size: 11px; color: #94a3b8; padding-top: 6px; border-top: 1px solid rgba(255,255,255,0.1); }
-
-/* 告警列表等已有样式保留 */
+/* 告警列表样式（未使用但保留） */
 .alert-list-fixed { height: 180px; display: flex; flex-direction: column; }
 .alert-items-fixed { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; scrollbar-width: none; }
 .alert-items-fixed::-webkit-scrollbar { display: none; }
@@ -629,255 +507,143 @@ onBeforeUnmount(() => {
 .alert-device { font-weight: 600; color: #facc15; font-size: 12px; }
 .alert-content { flex: 1; margin: 0 10px; font-size: 12px; color: #e2e8f0; }
 .alert-time { font-size: 11px; color: #94a3b8; font-family: monospace; }
+
 .content-area::-webkit-scrollbar { width: 5px; }
 .content-area::-webkit-scrollbar-track { background: rgba(15,23,42,0.5); border-radius: 4px; }
 .content-area::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 4px; }
 :deep(.el-progress-circle__track) { stroke: rgba(255,255,255,0.2); }
 :deep(.el-progress__text) { color: #fff; font-weight: bold; }
 
-/* 高级简洁版厕所卡片样式 */
-.restroom-table {
-  width: 100%;
-}
-.restroom-row-header {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 4px;
-  font-size: 11px;
-  color: #64748b;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  border-bottom: 1px solid rgba(59,130,246,0.3);
-  margin-bottom: 8px;
-}
-.restroom-row-header span {
-  flex: 1;
-}
-.restroom-row-header span:first-child { text-align: left; }
-.restroom-row-header span:nth-child(2) { text-align: center; }
-.restroom-row-header span:last-child { text-align: right; }
-
-.restroom-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 4px;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  transition: all 0.2s;
-}
-.restroom-row:hover {
-  background: rgba(59,130,246,0.1);
-  border-radius: 8px;
-  transform: translateX(4px);
-}
-.floor-name {
-  flex: 1;
-  font-size: 13px;
-  font-weight: 500;
-  color: #e2e8f0;
-}
-.status-badge {
-  flex: 1;
-  text-align: center;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 4px 8px;
-  border-radius: 20px;
-  width: fit-content;
-  margin: 0 auto;
-}
-.status-badge.available {
-  background: rgba(16, 185, 129, 0.15);
-  color: #10b981;
-}
-.status-badge.moderate {
-  background: rgba(245, 158, 11, 0.15);
-  color: #f59e0b;
-}
-.status-badge.limited {
-  background: rgba(239, 68, 68, 0.15);
-  color: #ef4444;
-}
-.available-count {
-  flex: 1;
-  text-align: right;
-  font-family: monospace;
-}
-.count-number {
-  font-size: 16px;
-  font-weight: 700;
-  color: #facc15;
-}
-.count-total {
-  font-size: 11px;
-  color: #64748b;
-  margin-left: 2px;
-}
-/* 高级简洁版电梯卡片样式 */
-.elevator-table {
-  width: 100%;
-}
-.elevator-row-header {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 4px;
-  font-size: 11px;
-  color: #64748b;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  border-bottom: 1px solid rgba(59,130,246,0.3);
-  margin-bottom: 8px;
-}
-.elevator-row-header span {
-  flex: 1;
-  text-align: center;
-}
-.elevator-row-header span:first-child { text-align: left; }
-.elevator-row-header span:last-child { text-align: right; }
-
-.elevator-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 4px;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  transition: all 0.2s;
-}
-.elevator-row:hover {
-  background: rgba(59,130,246,0.1);
-  border-radius: 8px;
-  transform: translateX(-4px);
-}
-.lift-name {
-  flex: 1;
-  font-size: 14px;
-  font-weight: 700;
-  color: #e2e8f0;
-  text-align: left;
-}
-.lift-floor {
-  flex: 1;
-  text-align: center;
-  font-size: 16px;
-  font-weight: 700;
-  color: #facc15;
-  font-family: monospace;
-}
-.lift-status-badge {
-  flex: 1;
-  text-align: center;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 4px 8px;
-  border-radius: 20px;
-  width: fit-content;
-  margin: 0 auto;
-}
-.lift-status-badge.moving {
-  background: rgba(59, 130, 246, 0.15);
-  color: #60a5fa;
-}
-.lift-status-badge.idle {
-  background: rgba(148, 163, 184, 0.15);
-  color: #94a3b8;
-}
-.lift-status-badge.maint {
-  background: rgba(239, 68, 68, 0.15);
-  color: #ef4444;
-}
-.lift-call {
-  flex: 1;
-  text-align: right;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 8px;
-}
-.call-badge {
-  font-size: 11px;
-  font-weight: 600;
-  padding: 3px 10px;
-  border-radius: 16px;
-}
-.call-badge.call-up {
-  background: rgba(245, 158, 11, 0.15);
-  color: #f59e0b;
-}
-.call-badge.call-down {
-  background: rgba(249, 115, 22, 0.15);
-  color: #f97316;
-}
-.call-eta {
-  font-size: 10px;
-  color: #60a5fa;
-  font-family: monospace;
-  background: rgba(0,0,0,0.3);
-  padding: 2px 6px;
-  border-radius: 12px;
-}
-.idle-call {
-  color: #475569;
-  font-size: 12px;
-}
-.elevator-footer {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 12px;
-  padding-top: 10px;
-  border-top: 1px solid rgba(59,130,246,0.3);
-  font-size: 11px;
-  color: #64748b;
-}
-/* 极简电梯样式 */
-.elevator-list {
-  display: flex;
-  flex-direction: column;
-}
-
-.elevator-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.lift-name {
-  width: 30px;
-  font-weight: 600;
-  color: #e2e8f0;
-}
-
-.lift-floor {
-  width: 45px;
-  font-weight: 600;
-  color: #facc15;
-  font-family: monospace;
-}
-
-.lift-status {
-  width: 65px;
-  font-size: 12px;
-}
-.lift-status.moving { color: #60a5fa; }
-.lift-status.idle { color: #94a3b8; }
-.lift-status.maint { color: #ef4444; }
-
-.lift-call {
-  flex: 1;
-  text-align: right;
-  font-size: 11px;
-  color: #f59e0b;
-  font-family: monospace;
-}
-
-.elevator-footer {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 12px;
-  padding-top: 10px;
-  border-top: 1px solid rgba(59,130,246,0.3);
-  font-size: 11px;
-  color: #64748b;
+/* ========== 移动端适配 (屏幕宽度 <= 768px) ========== */
+@media (max-width: 768px) {
+  .top-header {
+    flex-direction: column;
+    padding: 12px 16px 8px;
+    margin: 0 12px;
+    gap: 8px;
+  }
+  .header-left { display: none; }
+  .main-title {
+    font-size: 24px;
+    letter-spacing: 1px;
+  }
+  .datetime {
+    font-size: 10px;
+    padding: 4px 12px;
+    min-width: auto;
+    width: auto;
+    border-radius: 20px;
+    box-shadow: 0 0 5px rgba(0,255,255,0.3);
+  }
+  .kpi-strip {
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 8px 16px 16px;
+    padding: 12px;
+    justify-content: center;
+  }
+  .kpi-item {
+    flex: 1 1 40%;
+    justify-content: space-between;
+    gap: 6px;
+  }
+  .kpi-value {
+    font-size: 18px;
+  }
+  .content-area {
+    flex-direction: column;
+    padding: 0 16px 16px;
+    gap: 0;
+  }
+  .left-panel,
+  .right-panel {
+    width: 100%;
+    flex-shrink: 1;
+  }
+  .center-void {
+    display: none;
+  }
+  .glass-card {
+    border-radius: 20px;
+    padding: 14px;
+    margin-bottom: 16px;
+  }
+  .card-title {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+  .resource-grid {
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .resource-item {
+    flex: 1 1 30%;
+    min-width: 90px;
+  }
+  .resource-item .resource-label {
+    font-size: 12px;
+  }
+  .resource-value {
+    font-size: 12px;
+  }
+  .resource-cost {
+    font-size: 10px;
+  }
+  /* 环形进度条尺寸缩小 */
+  :deep(.el-progress-circle) {
+    width: 70px !important;
+    height: 70px !important;
+  }
+  :deep(.el-progress__text) {
+    font-size: 12px !important;
+  }
+  /* 厕所卡片调整 */
+  .restroom-row {
+    padding: 8px 0;
+  }
+  .floor-name {
+    font-size: 12px;
+  }
+  .status-badge {
+    font-size: 10px;
+    padding: 2px 6px;
+  }
+  .count-number {
+    font-size: 14px;
+  }
+  .count-total {
+    font-size: 10px;
+  }
+  /* 电梯卡片调整 */
+  .lift-name {
+    width: 25px;
+    font-size: 13px;
+  }
+  .lift-floor {
+    width: 35px;
+    font-size: 14px;
+  }
+  .lift-status {
+    width: 55px;
+    font-size: 10px;
+  }
+  .lift-call {
+    font-size: 10px;
+  }
+  .elevator-footer {
+    font-size: 10px;
+  }
+  /* 图表容器高度缩小 */
+  .device-list [ref="deviceBarChart"],
+  .employee-dashboard [ref="envLineChart"],
+  .energy-report [ref="energyLineChart"] {
+    height: 160px !important;
+  }
+  /* 修正图表容器实际高度（因为是用ref动态渲染，需覆盖内联样式） */
+  .device-list div[style*="height: 220px"],
+  .employee-dashboard div[style*="height: 180px"],
+  .energy-report div[style*="height: 180px"] {
+    height: 160px !important;
+  }
 }
 </style>

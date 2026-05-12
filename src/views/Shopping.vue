@@ -437,7 +437,19 @@ const preloadBackground = () => new Promise((resolve) => {
 
 const updateTime = () => {
   const now = new Date()
-  currentTime.value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}.${String(now.getMilliseconds()).padStart(3,'0')} UTC+8`
+  // 获取 UTC 毫秒数并转换为新加坡时间 (UTC+8，无夏令时)
+  const utc = now.getTime() + (now.getTimezoneOffset() * 60000)
+  const sgTime = new Date(utc + (8 * 3600000))
+
+  const year = sgTime.getFullYear()
+  const month = String(sgTime.getMonth() + 1).padStart(2, '0')
+  const day = String(sgTime.getDate()).padStart(2, '0')
+  const hours = String(sgTime.getHours()).padStart(2, '0')
+  const minutes = String(sgTime.getMinutes()).padStart(2, '0')
+  const seconds = String(sgTime.getSeconds()).padStart(2, '0')
+  const ms = String(sgTime.getMilliseconds()).padStart(3, '0')
+
+  currentTime.value = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${ms} SGT`
 }
 
 function randomVariation(base, range = 0.05) {
@@ -707,4 +719,193 @@ onBeforeUnmount(() => {
 :deep(.el-progress__text) { color: #fff !important; font-weight: 700 !important; font-size: 14px !important; text-shadow: 0 0 4px rgba(0,0,0,0.5); }
 :deep(.el-progress-bar__outer) { background-color: rgba(255,255,255,0.1); }
 :deep(.el-progress-bar__inner) { border-radius: 10px; }
+
+/* ========== 移动端适配 (宽度 ≤ 768px) ========== */
+@media (max-width: 768px) {
+  .top-header {
+    flex-direction: column;
+    padding: 12px 16px 8px;
+    margin: 0 12px;
+    gap: 8px;
+  }
+  .header-left { display: none; }
+  .main-title {
+    font-size: 28px;
+    letter-spacing: 1px;
+  }
+  .datetime {
+    font-size: 11px;
+    padding: 4px 12px;
+    min-width: auto;
+    width: auto;
+    border-radius: 20px;
+    backdrop-filter: blur(4px);
+  }
+
+  .kpi-strip {
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 8px 16px 16px;
+    padding: 12px;
+    justify-content: center;
+  }
+  .kpi-item {
+    flex: 1 1 40%;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .kpi-label {
+    font-size: 12px;
+  }
+  .kpi-value {
+    font-size: 18px;
+  }
+
+  .content-area {
+    flex-direction: column;
+    padding: 0 16px 16px;
+    gap: 0;
+  }
+  .left-panel,
+  .right-panel {
+    width: 100%;
+    flex-shrink: 1;
+  }
+  .center-void {
+    display: none;
+  }
+
+  .glass-card {
+    border-radius: 20px;
+    padding: 14px;
+    margin-bottom: 16px;
+  }
+  .glass-card:hover {
+    transform: none; /* 手机端禁用上浮效果 */
+    backdrop-filter: blur(8px);
+  }
+  .card-title {
+    font-size: 16px;
+    margin-bottom: 12px;
+    padding-left: 8px;
+  }
+
+  /* 资源卡片：6个环形进度条自动换行，调整尺寸 */
+  .resource-grid {
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+  .resource-item {
+    flex: 1 1 30%;
+    min-width: 90px;
+  }
+  .resource-item .resource-label {
+    font-size: 11px;
+    margin-top: 6px;
+  }
+  .resource-value {
+    font-size: 12px;
+  }
+  .resource-cost {
+    font-size: 10px;
+  }
+  :deep(.el-progress-circle) {
+    width: 70px !important;
+    height: 70px !important;
+  }
+  :deep(.el-progress__text) {
+    font-size: 11px !important;
+  }
+
+  /* 客流统计 + 车流量 */
+  .flow-section .parking-info {
+    font-size: 12px;
+  }
+  .traffic-details {
+    gap: 8px;
+  }
+  .traffic-item {
+    font-size: 10px;
+  }
+  .traffic-item strong {
+    font-size: 12px;
+  }
+
+  /* 门店销售 Top 5 */
+  .sales-bar-list {
+    gap: 10px;
+  }
+  .sales-rank {
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+  }
+  .sales-name {
+    font-size: 12px;
+  }
+  .sales-category {
+    font-size: 9px;
+    padding: 1px 4px;
+  }
+  .sales-value {
+    font-size: 11px;
+  }
+  .sales-trend {
+    font-size: 9px;
+    padding: 1px 4px;
+  }
+
+  /* 区域人流卡片 */
+  .flow-zone {
+    width: 80px;
+    font-size: 11px;
+  }
+  .flow-count {
+    width: 55px;
+    font-size: 10px;
+  }
+  .flow-status {
+    width: 55px;
+    font-size: 10px;
+  }
+  .people-flow-footer {
+    font-size: 10px;
+  }
+
+  /* 店铺营业数据 */
+  .store-compact-name {
+    font-size: 12px;
+  }
+  .store-open-badge {
+    font-size: 10px;
+    padding: 2px 6px;
+  }
+  .store-rate-value {
+    font-size: 11px;
+  }
+
+  /* 厕所卡片 */
+  .restroom-row {
+    padding: 8px 0;
+  }
+  .floor-name {
+    font-size: 12px;
+  }
+  .status-badge {
+    font-size: 10px;
+    padding: 3px 6px;
+  }
+  .count-number {
+    font-size: 14px;
+  }
+  .count-total {
+    font-size: 10px;
+  }
+
+  /* 滚动条更细 */
+  .content-area::-webkit-scrollbar {
+    width: 3px;
+  }
+}
 </style>

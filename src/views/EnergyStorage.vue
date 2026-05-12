@@ -26,7 +26,7 @@
     <!-- Left Panel -->
     <div class="left-panel">
       <div class="page-header">
-        <h1 class="page-title">Energy Storage Analytics</h1>
+        <h1 class="page-title">Energy Storage</h1>
         <div class="current-time">{{ currentTime }}</div>
       </div>
 
@@ -227,14 +227,19 @@ const formatNumber = (num) => num.toLocaleString()
 // ---------- 更新时间（带毫秒）----------
 const updateCurrentTime = () => {
   const now = new Date()
-  const year = now.getFullYear()
-  const month = (now.getMonth() + 1).toString().padStart(2, '0')
-  const day = now.getDate().toString().padStart(2, '0')
-  const hours = now.getHours().toString().padStart(2, '0')
-  const minutes = now.getMinutes().toString().padStart(2, '0')
-  const seconds = now.getSeconds().toString().padStart(2, '0')
-  const milliseconds = now.getMilliseconds().toString().padStart(3, '0')
-  currentTime.value = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${milliseconds}`
+  // 获取 UTC 毫秒数并转换为新加坡时间 (UTC+8，无夏令时)
+  const utc = now.getTime() + (now.getTimezoneOffset() * 60000)
+  const sgTime = new Date(utc + (8 * 3600000))
+
+  const year = sgTime.getFullYear()
+  const month = String(sgTime.getMonth() + 1).padStart(2, '0')
+  const day = String(sgTime.getDate()).padStart(2, '0')
+  const hours = String(sgTime.getHours()).padStart(2, '0')
+  const minutes = String(sgTime.getMinutes()).padStart(2, '0')
+  const seconds = String(sgTime.getSeconds()).padStart(2, '0')
+  const ms = String(sgTime.getMilliseconds()).padStart(3, '0')
+
+  currentTime.value = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${ms} SGT`
 }
 
 // ---------- 加载动画 ----------

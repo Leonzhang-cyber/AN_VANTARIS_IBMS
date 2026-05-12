@@ -109,22 +109,22 @@
           <el-card class="card glass-card" shadow="hover">
             <div class="card-header">📊 Lighting KPIs</div>
             <div class="kpi-row">
-              <span>Daylight Harvesting</span>
+              <span class="kpi-row-left">Daylight Harvesting</span>
               <strong>{{ daylightHarvesting }}%</strong>
               <span class="trend up">Active</span>
             </div>
             <div class="kpi-row">
-              <span>Occupancy Savings</span>
+              <span class="kpi-row-left">Occupancy Savings</span>
               <strong>{{ occupancySavings }}%</strong>
               <span class="trend up">↑3.2%</span>
             </div>
             <div class="kpi-row">
-              <span>Scheduled Zones</span>
+              <span class="kpi-row-left">Scheduled Zones</span>
               <strong>{{ scheduledZones }}</strong>
               <span class="trend stable">On Time</span>
             </div>
             <div class="kpi-row">
-              <span>System Efficiency</span>
+              <span class="kpi-row-left">System Efficiency</span>
               <strong>{{ systemEfficiency }}%</strong>
               <span class="trend up">Target > 85%</span>
             </div>
@@ -320,14 +320,19 @@ const currentTime = ref('')
 
 const updateTime = () => {
   const now = new Date()
-  const year = now.getFullYear()
-  const month = String(now.getMonth() + 1).padStart(2, '0')
-  const day = String(now.getDate()).padStart(2, '0')
-  const hours = String(now.getHours()).padStart(2, '0')
-  const minutes = String(now.getMinutes()).padStart(2, '0')
-  const seconds = String(now.getSeconds()).padStart(2, '0')
-  const milliseconds = String(now.getMilliseconds()).padStart(3, '0')
-  currentTime.value = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${milliseconds}`
+  // 获取 UTC 毫秒数并转换为新加坡时间 (UTC+8，无夏令时)
+  const utc = now.getTime() + (now.getTimezoneOffset() * 60000)
+  const sgTime = new Date(utc + (8 * 3600000))
+
+  const year = sgTime.getFullYear()
+  const month = String(sgTime.getMonth() + 1).padStart(2, '0')
+  const day = String(sgTime.getDate()).padStart(2, '0')
+  const hours = String(sgTime.getHours()).padStart(2, '0')
+  const minutes = String(sgTime.getMinutes()).padStart(2, '0')
+  const seconds = String(sgTime.getSeconds()).padStart(2, '0')
+  const ms = String(sgTime.getMilliseconds()).padStart(3, '0')
+
+  currentTime.value = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${ms} SGT`
 }
 
 let clockTimer = null
@@ -1266,10 +1271,17 @@ onBeforeUnmount(() => {
   width: 50%;
   text-align: left;
 }
+
+.kpi-row-left {
+  min-width: 100px;
+  max-width: 110px;
+  text-align: left;
+}
 .kpi-row strong {
   font-size: 16px;
   color: #facc15;
   text-align: center;
+  min-width: 80px;
 }
 .trend {
   width: 20%;

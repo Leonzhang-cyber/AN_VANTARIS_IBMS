@@ -616,7 +616,7 @@ const loadingMessages = ['Preparing assets...', 'Loading background...', 'Initia
 
 const preloadBackground = () => new Promise((resolve) => {
   const img = new Image()
-  img.src = 'https://aegisnx.com/wp-content/uploads/2026/05/1778315064681.png'
+  img.src = 'https://aegisnx.com/wp-content/uploads/2026/05/1778552359468.png'
   let progress = 0, msgIdx = 0
   const msgInterval = setInterval(() => { if (msgIdx < loadingMessages.length - 1) loadingMessage.value = loadingMessages[++msgIdx] }, 800)
   const progInterval = setInterval(() => { if (progress < 90) loadingProgress.value = Math.min(progress += Math.random() * 10, 90) }, 100)
@@ -630,7 +630,19 @@ const preloadBackground = () => new Promise((resolve) => {
 
 const updateTime = () => {
   const now = new Date()
-  currentTime.value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`
+  // 获取 UTC 毫秒数并转换为新加坡时间 (UTC+8，无夏令时)
+  const utc = now.getTime() + (now.getTimezoneOffset() * 60000)
+  const sgTime = new Date(utc + (8 * 3600000))
+
+  const year = sgTime.getFullYear()
+  const month = String(sgTime.getMonth() + 1).padStart(2, '0')
+  const day = String(sgTime.getDate()).padStart(2, '0')
+  const hours = String(sgTime.getHours()).padStart(2, '0')
+  const minutes = String(sgTime.getMinutes()).padStart(2, '0')
+  const seconds = String(sgTime.getSeconds()).padStart(2, '0')
+  const ms = String(sgTime.getMilliseconds()).padStart(3, '0')
+
+  currentTime.value = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${ms} SGT`
 }
 
 onMounted(async () => {
@@ -668,7 +680,7 @@ onBeforeUnmount(() => {
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
 /* 主页面 */
-.dashboard { height: 100%; width: 100%; display: flex; flex-direction: column; background-image: url('https://aegisnx.com/wp-content/uploads/2026/05/1778315064681.png'); background-size: cover; background-position: center; background-attachment: fixed; animation: fadeIn 0.5s; }
+.dashboard { height: 100%; width: 100%; display: flex; flex-direction: column; background-image: url('https://aegisnx.com/wp-content/uploads/2026/05/1778552359468.png'); background-size: cover; background-position: center; background-attachment: fixed; animation: fadeIn 0.5s; }
 .top-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 28px 8px; margin: 0 24px; }
 .header-left { width: 140px; }
 .header-title { text-align: center; flex: 1; }
@@ -693,7 +705,7 @@ onBeforeUnmount(() => {
 .occupancy-item { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.05); border-radius: 12px; padding: 0px; }
 .occupancy-icon { font-size: 28px; }
 .occupancy-info { display: flex; flex-direction: column; }
-.occupancy-label { font-size: 14px; color: #343e4c;font-weight: bold; }
+.occupancy-label { font-size: 14px; color: #343e4c; font-weight: bold; }
 .occupancy-value { font-size: 22px; font-weight: 800; color: #facc15; line-height: 1.2; }
 .occupancy-sub { font-size: 10px; color: #64748b; }
 .occupancy-footer { display: flex; justify-content: space-between; margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba(59,130,246,0.35); font-size: 11px; font-weight: 600; color: #94a3b8; }
@@ -785,4 +797,231 @@ onBeforeUnmount(() => {
 /* Element Plus 进度条 */
 :deep(.el-progress-circle__track) { stroke: rgba(255,255,255,0.2); }
 :deep(.el-progress__text) { color: #fff !important; font-weight: 700 !important; font-size: 12px !important; text-shadow: 0 0 4px rgba(0,0,0,0.5); }
+
+/* ========== 移动端适配 (屏幕宽度 ≤ 768px) ========== */
+@media (max-width: 768px) {
+  .top-header {
+    flex-direction: column;
+    padding: 12px 16px 8px;
+    margin: 0 12px;
+    gap: 8px;
+  }
+  .header-left { display: none; }
+  .main-title {
+    font-size: 28px;
+    letter-spacing: 1px;
+  }
+  .datetime {
+    font-size: 11px;
+    padding: 4px 12px;
+    min-width: auto;
+    width: auto;
+    border-radius: 20px;
+    backdrop-filter: blur(4px);
+  }
+
+  .kpi-strip {
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 8px 16px 16px;
+    padding: 12px;
+    justify-content: center;
+  }
+  .kpi-item {
+    flex: 1 1 40%;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .kpi-label {
+    font-size: 12px;
+  }
+  .kpi-value {
+    font-size: 18px;
+  }
+
+  .content-area {
+    flex-direction: column;
+    padding: 0 16px 16px;
+    gap: 0;
+  }
+  .left-panel,
+  .right-panel {
+    width: 100%;
+    flex-shrink: 1;
+  }
+  .center-void {
+    display: none;
+  }
+
+  .glass-card {
+    border-radius: 20px;
+    padding: 14px;
+    margin-bottom: 16px;
+  }
+  .glass-card:hover {
+    transform: none; /* 手机端禁用上浮效果 */
+    backdrop-filter: blur(8px);
+  }
+  .card-title {
+    font-size: 15px;
+    margin-bottom: 10px;
+    padding-left: 8px;
+  }
+
+  /* 客房入住率卡片 */
+  .occupancy-grid {
+    gap: 8px;
+  }
+  .occupancy-item {
+    padding: 6px;
+    gap: 6px;
+  }
+  .occupancy-icon {
+    font-size: 22px;
+  }
+  .occupancy-value {
+    font-size: 18px;
+  }
+  .occupancy-label, .occupancy-sub {
+    font-size: 10px;
+  }
+
+  /* 能耗卡片 */
+  .resource-grid {
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+  .resource-item {
+    flex: 1 1 30%;
+    min-width: 90px;
+  }
+  :deep(.el-progress-circle) {
+    width: 70px !important;
+    height: 70px !important;
+  }
+  :deep(.el-progress__text) {
+    font-size: 10px !important;
+  }
+  .resource-label {
+    font-size: 10px;
+    margin-top: 6px;
+  }
+  .resource-value {
+    font-size: 11px;
+  }
+  .resource-cost {
+    font-size: 9px;
+  }
+
+  /* 餐厅卡片 */
+  .restaurant-name {
+    width: 85px;
+    font-size: 11px;
+  }
+  .restaurant-occupancy {
+    font-size: 10px;
+  }
+  .restaurant-footer {
+    font-size: 10px;
+  }
+
+  /* 人流/车流卡片 */
+  .traffic-label {
+    font-size: 11px;
+  }
+  .traffic-value {
+    font-size: 16px;
+  }
+  .parking-progress {
+    width: 110px;
+  }
+  .parking-percent {
+    font-size: 11px;
+  }
+
+  /* 环境仪表盘 */
+  .env-dashboard-row {
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+  .env-item {
+    flex: 1 1 30%;
+    min-width: 90px;
+  }
+  .env-label {
+    font-size: 9px;
+  }
+  .env-value {
+    font-size: 12px;
+  }
+  .env-status {
+    font-size: 8px;
+    padding: 1px 4px;
+  }
+  .env-footer {
+    font-size: 9px;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+  }
+
+  /* 员工卡片 */
+  .staff-grid {
+    gap: 8px;
+  }
+  .staff-role {
+    font-size: 10px;
+  }
+  .staff-count {
+    font-size: 14px;
+  }
+  .staff-footer {
+    font-size: 10px;
+  }
+
+  /* 房源详细信息卡片 */
+  .room-details-list {
+    max-height: 300px;
+  }
+  .room-icon {
+    font-size: 18px;
+  }
+  .room-name {
+    font-size: 13px;
+  }
+  .room-badge {
+    font-size: 8px;
+    padding: 1px 6px;
+  }
+  .room-summary {
+    flex-direction: column;
+    gap: 4px;
+  }
+  .room-stats {
+    font-size: 10px;
+  }
+  .room-price {
+    font-size: 12px;
+  }
+  .detail-label {
+    width: 65px;
+    font-size: 10px;
+  }
+  .detail-value {
+    font-size: 10px;
+  }
+  .detail-value.amenities {
+    font-size: 9px;
+  }
+  .room-footer {
+    font-size: 10px;
+  }
+
+  /* 滚动条更细 */
+  .content-area::-webkit-scrollbar {
+    width: 3px;
+  }
+}
 </style>

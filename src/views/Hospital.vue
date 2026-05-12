@@ -373,7 +373,19 @@ const preloadBackground = () => new Promise((resolve) => {
 
 const updateTime = () => {
   const now = new Date()
-  currentTime.value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}.${String(now.getMilliseconds()).padStart(3,'0')} UTC+8`
+  // 获取 UTC 毫秒数并转换为新加坡时间 (UTC+8，无夏令时)
+  const utc = now.getTime() + (now.getTimezoneOffset() * 60000)
+  const sgTime = new Date(utc + (8 * 3600000))
+
+  const year = sgTime.getFullYear()
+  const month = String(sgTime.getMonth() + 1).padStart(2, '0')
+  const day = String(sgTime.getDate()).padStart(2, '0')
+  const hours = String(sgTime.getHours()).padStart(2, '0')
+  const minutes = String(sgTime.getMinutes()).padStart(2, '0')
+  const seconds = String(sgTime.getSeconds()).padStart(2, '0')
+  const ms = String(sgTime.getMilliseconds()).padStart(3, '0')
+
+  currentTime.value = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${ms} SGT`
 }
 
 function randomVariation(base, range = 0.05) {
@@ -620,10 +632,10 @@ onBeforeUnmount(() => {
 .emergency-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .emergency-item { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.05); border-radius: 12px; padding: 10px; }
 .emergency-icon { font-size: 28px; }
-.emergency-info { display: flex; flex-direction: column; }
-.emergency-label { font-size: 11px; color: #94a3b8; }
+.emergency-info { display: flex; flex-direction: column; font-weight: bold; }
+.emergency-label { font-size: 11px; color: #f0f9ff; }
 .emergency-value { font-size: 22px; font-weight: 800; color: #facc15; line-height: 1.2; }
-.emergency-sub { font-size: 10px; color: #64748b; }
+.emergency-sub { font-size: 10px; color: #f0f9ff; }
 .emergency-footer { display: flex; justify-content: space-between; margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba(59,130,246,0.35); font-size: 11px; font-weight: 600; color: #94a3b8; }
 
 /* 救护车卡片 */
@@ -660,8 +672,8 @@ onBeforeUnmount(() => {
 /* 抽血检查卡片 */
 .blood-stats { display: flex; flex-direction: column; gap: 10px; }
 .blood-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
-.blood-label { font-size: 12px; font-weight: 600; color: #cbd5e1;width: 140px; }
-.blood-value { font-size: 18px; font-weight: 800; color: #facc15; font-family: monospace;text-align: center;width: 60px }
+.blood-label { font-size: 12px; font-weight: 600; color: #cbd5e1; width: 140px; }
+.blood-value { font-size: 18px; font-weight: 800; color: #facc15; font-family: monospace; text-align: center; width: 60px; }
 .blood-trend { font-size: 11px; font-weight: 700; padding: 2px 6px; border-radius: 12px; }
 .blood-trend.up { background: rgba(16,185,129,0.2); color: #34d399; }
 .blood-trend.down { background: rgba(239,68,68,0.2); color: #f87171; }
@@ -691,4 +703,195 @@ onBeforeUnmount(() => {
 /* Element Plus 进度条 */
 :deep(.el-progress-circle__track) { stroke: rgba(255,255,255,0.2); }
 :deep(.el-progress__text) { color: #fff !important; font-weight: 700 !important; font-size: 12px !important; text-shadow: 0 0 4px rgba(0,0,0,0.5); }
+
+/* ========== 移动端适配 (屏幕宽度 ≤ 768px) ========== */
+@media (max-width: 768px) {
+  .top-header {
+    flex-direction: column;
+    padding: 12px 16px 8px;
+    margin: 0 12px;
+    gap: 8px;
+  }
+  .header-left { display: none; }
+  .main-title {
+    font-size: 28px;
+    letter-spacing: 1px;
+  }
+  .datetime {
+    font-size: 11px;
+    padding: 4px 12px;
+    min-width: auto;
+    width: auto;
+    border-radius: 20px;
+    backdrop-filter: blur(4px);
+  }
+
+  .kpi-strip {
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 8px 16px 16px;
+    padding: 12px;
+    justify-content: center;
+  }
+  .kpi-item {
+    flex: 1 1 40%;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .kpi-label {
+    font-size: 12px;
+  }
+  .kpi-value {
+    font-size: 18px;
+  }
+
+  .content-area {
+    flex-direction: column;
+    padding: 0 16px 16px;
+    gap: 0;
+  }
+  .left-panel,
+  .right-panel {
+    width: 100%;
+    flex-shrink: 1;
+  }
+  .center-void {
+    display: none;
+  }
+
+  .glass-card {
+    border-radius: 20px;
+    padding: 14px;
+    margin-bottom: 16px;
+  }
+  .glass-card:hover {
+    transform: none; /* 手机端禁用上浮效果 */
+    backdrop-filter: blur(8px);
+  }
+  .card-title {
+    font-size: 15px;
+    margin-bottom: 10px;
+    padding-left: 8px;
+  }
+
+  /* 急诊卡片 */
+  .emergency-grid {
+    gap: 8px;
+  }
+  .emergency-item {
+    padding: 6px;
+    gap: 6px;
+  }
+  .emergency-icon {
+    font-size: 22px;
+  }
+  .emergency-value {
+    font-size: 18px;
+  }
+  .emergency-label, .emergency-sub {
+    font-size: 10px;
+  }
+
+  /* 救护车卡片 */
+  .ambulance-row {
+    padding: 6px 0;
+  }
+  .ambulance-name {
+    font-size: 11px;
+  }
+  .ambulance-location {
+    font-size: 10px;
+  }
+  .ambulance-status {
+    font-size: 10px;
+    padding: 2px 6px;
+  }
+
+  /* 电梯卡片 */
+  .lift-name-simple {
+    width: 90px;
+    font-size: 11px;
+  }
+  .lift-occupancy {
+    font-size: 10px;
+  }
+
+  /* 人流/车流卡片 */
+  .traffic-label {
+    font-size: 11px;
+  }
+  .traffic-value {
+    font-size: 16px;
+  }
+  .parking-progress {
+    width: 110px;
+  }
+  .parking-percent {
+    font-size: 11px;
+  }
+
+  /* 抽血检查卡片 */
+  .blood-label {
+    width: 110px;
+    font-size: 11px;
+  }
+  .blood-value {
+    font-size: 16px;
+    width: 50px;
+  }
+  .blood-trend {
+    font-size: 10px;
+  }
+  .blood-status {
+    font-size: 10px;
+  }
+
+  /* 环境仪表盘卡片 */
+  .env-dashboard-row {
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+  .env-item {
+    flex: 1 1 30%;
+    min-width: 90px;
+  }
+  :deep(.el-progress-circle) {
+    width: 70px !important;
+    height: 70px !important;
+  }
+  :deep(.el-progress__text) {
+    font-size: 10px !important;
+  }
+  .env-label {
+    font-size: 10px;
+    margin-top: 6px;
+  }
+  .env-value {
+    font-size: 12px;
+  }
+  .env-cost {
+    font-size: 9px;
+  }
+  .env-status {
+    font-size: 9px;
+    padding: 1px 4px;
+  }
+
+  /* 抽血检查图表高度微调 */
+  [ref="bloodTestChart"] {
+    height: 90px !important;
+  }
+  .blood-footer {
+    font-size: 10px;
+  }
+  .ambulance-footer, .emergency-footer, .traffic-footer, .elevator-footer-simple {
+    font-size: 10px;
+  }
+
+  /* 滚动条更细 */
+  .content-area::-webkit-scrollbar {
+    width: 3px;
+  }
+}
 </style>

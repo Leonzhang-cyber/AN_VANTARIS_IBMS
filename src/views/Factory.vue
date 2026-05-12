@@ -293,16 +293,19 @@ let dataInterval = null
 
 const updateTime = () => {
   const now = new Date()
-  const year = now.getFullYear()
-  const month = String(now.getMonth() + 1).padStart(2, '0')
-  const day = String(now.getDate()).padStart(2, '0')
-  const hours = String(now.getHours()).padStart(2, '0')
-  const minutes = String(now.getMinutes()).padStart(2, '0')
-  const seconds = String(now.getSeconds()).padStart(2, '0')
-  const ms = String(now.getMilliseconds()).padStart(3, '0')
-  const tzOffset = -now.getTimezoneOffset() / 60
-  const tzSign = tzOffset >= 0 ? '+' : ''
-  currentTime.value = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${ms} UTC${tzSign}${tzOffset}`
+  // 获取 UTC 毫秒数并转换为新加坡时间 (UTC+8，无夏令时)
+  const utc = now.getTime() + (now.getTimezoneOffset() * 60000)
+  const sgTime = new Date(utc + (8 * 3600000))
+
+  const year = sgTime.getFullYear()
+  const month = String(sgTime.getMonth() + 1).padStart(2, '0')
+  const day = String(sgTime.getDate()).padStart(2, '0')
+  const hours = String(sgTime.getHours()).padStart(2, '0')
+  const minutes = String(sgTime.getMinutes()).padStart(2, '0')
+  const seconds = String(sgTime.getSeconds()).padStart(2, '0')
+  const ms = String(sgTime.getMilliseconds()).padStart(3, '0')
+
+  currentTime.value = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${ms} SGT`
 }
 
 function randomVariation(base, rangePercent = 0.05) {
@@ -521,7 +524,7 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
-/* 加载页面样式 */
+/* 加载页面样式保持不变 */
 .loading-container {
   position: fixed;
   top: 0;
@@ -840,8 +843,9 @@ onBeforeUnmount(() => {
 }
 .resource-item .resource-label {
   margin-top: 8px;
-  font-size: 13px;
+  font-size: 16px;
   color: #cbd5e1;
+  font-weight: bold;
 }
 .resource-value {
   font-size: 14px;
@@ -1061,5 +1065,164 @@ onBeforeUnmount(() => {
 .content-area::-webkit-scrollbar-thumb {
   background: #3b82f6;
   border-radius: 4px;
+}
+
+/* ========== 移动端适配 (max-width: 768px) ========== */
+@media (max-width: 768px) {
+  .top-header {
+    flex-direction: column;
+    padding: 12px 16px 8px;
+    margin: 0 12px;
+    gap: 8px;
+  }
+  .header-left {
+    display: none;
+  }
+  .main-title {
+    font-size: 24px;
+    letter-spacing: 1px;
+  }
+  .datetime {
+    font-size: 10px;
+    padding: 4px 12px;
+    min-width: auto;
+    width: auto;
+    border-radius: 20px;
+    box-shadow: 0 0 5px rgba(0,255,255,0.3);
+  }
+  .kpi-strip {
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 8px 16px 16px;
+    padding: 12px;
+    justify-content: center;
+  }
+  .kpi-item {
+    flex: 1 1 40%;
+    justify-content: space-between;
+    gap: 6px;
+  }
+  .kpi-value {
+    font-size: 18px;
+  }
+  .content-area {
+    flex-direction: column;
+    padding: 0 16px 16px;
+    gap: 0;
+  }
+  .left-panel,
+  .right-panel {
+    width: 100%;
+    flex-shrink: 1;
+  }
+  .center-void {
+    display: none;
+  }
+  .glass-card {
+    border-radius: 20px;
+    padding: 14px;
+    margin-bottom: 16px;
+  }
+  .card-title {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+  .resource-grid {
+    gap: 12px;
+  }
+  .resource-item .resource-label {
+    font-size: 14px;
+  }
+  .resource-value {
+    font-size: 12px;
+  }
+  .resource-cost {
+    font-size: 11px;
+  }
+  .parking-info {
+    font-size: 12px;
+  }
+  .alert-list-fixed {
+    height: auto;
+    max-height: 180px;
+  }
+  .alert-item {
+    padding: 8px 12px;
+    flex-wrap: wrap;
+  }
+  .alert-device {
+    width: 70px;
+    font-size: 11px;
+  }
+  .alert-content {
+    font-size: 11px;
+    margin: 0 6px;
+  }
+  .alert-time {
+    font-size: 10px;
+  }
+  .employee-dashboard .role-name {
+    width: 70px;
+    font-size: 12px;
+  }
+  .employee-dashboard .role-count {
+    width: 30px;
+    font-size: 12px;
+  }
+  .role-item {
+    gap: 6px;
+  }
+  .device-item {
+    padding: 8px 12px;
+  }
+  .device-name {
+    font-size: 12px;
+  }
+  .device-count {
+    font-size: 12px;
+  }
+  .energy-item {
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 8px;
+  }
+  .time-badge {
+    width: 100%;
+    text-align: left;
+    font-size: 10px;
+    background: transparent;
+    padding-left: 0;
+  }
+  .energy-value {
+    width: auto;
+    flex: 1;
+    font-size: 12px;
+  }
+  .energy-change {
+    width: auto;
+    font-size: 11px;
+  }
+  .energy-bar-container {
+    width: 100%;
+    margin-top: 4px;
+  }
+  .role-breakdown {
+    padding-top: 8px;
+  }
+  .resource-grid {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .resource-item {
+    flex: 1 1 30%;
+    min-width: 90px;
+  }
+  :deep(.el-progress-circle) {
+    width: 70px !important;
+    height: 70px !important;
+  }
+  :deep(.el-progress__text) {
+    font-size: 12px !important;
+  }
 }
 </style>

@@ -305,9 +305,26 @@ const preloadBackground = () => new Promise((resolve) => {
   img.onerror = () => { clearInterval(msgInterval); clearInterval(progInterval); loadingProgress.value = 100; setTimeout(resolve, 300) }
 })
 
+// const updateTime = () => {
+//   const now = new Date()
+//   currentTime.value = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}.${String(now.getMilliseconds()).padStart(3, '0')} UTC+8`
+// }
+
 const updateTime = () => {
   const now = new Date()
-  currentTime.value = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}.${String(now.getMilliseconds()).padStart(3, '0')} UTC+8`
+  // 获取 UTC 毫秒数并转换为新加坡时间 (UTC+8，无夏令时)
+  const utc = now.getTime() + (now.getTimezoneOffset() * 60000)
+  const sgTime = new Date(utc + (8 * 3600000))
+
+  const year = sgTime.getFullYear()
+  const month = String(sgTime.getMonth() + 1).padStart(2, '0')
+  const day = String(sgTime.getDate()).padStart(2, '0')
+  const hours = String(sgTime.getHours()).padStart(2, '0')
+  const minutes = String(sgTime.getMinutes()).padStart(2, '0')
+  const seconds = String(sgTime.getSeconds()).padStart(2, '0')
+  const ms = String(sgTime.getMilliseconds()).padStart(3, '0')
+
+  currentTime.value = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${ms} SGT`
 }
 
 function randomVariation(base, range = 0.05) {
@@ -539,7 +556,7 @@ onBeforeUnmount(() => {
 .security-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
 .lane-name { width: 100px; font-weight: 700; color: #e2e8f0; font-size: 13px; }
 .lane-queue { width: 100px; display: flex; gap: 12px; }
-.queue-count, .queue-time { font-size: 12px; font-weight: 600; color: #a5f3fc;width: 20px;text-align: center }
+.queue-count, .queue-time { font-size: 12px; font-weight: 600; color: #a5f3fc; width: 20px; text-align: center }
 .lane-status { width: 70px; text-align: center; font-size: 12px; font-weight: 800; padding: 4px 10px; border-radius: 20px; }
 .security-fast { background: rgba(16,185,129,0.2); color: #34d399; }
 .security-moderate { background: rgba(59,130,246,0.2); color: #60a5fa; }
@@ -590,4 +607,203 @@ onBeforeUnmount(() => {
 /* 图表文字颜色 */
 :deep(.xaxis-label), :deep(.yaxis-label) { fill: #94a3b8 !important; font-weight: 500 !important; }
 :deep(.legend-text) { color: #cbd5e1 !important; font-weight: 600 !important; }
+
+/* ========== 移动端适配 (屏幕宽度 <= 768px) ========== */
+@media (max-width: 768px) {
+  /* 顶部区域 */
+  .top-header {
+    flex-direction: column;
+    padding: 12px 16px 8px;
+    margin: 0 12px;
+    gap: 10px;
+  }
+  .header-left {
+    display: none;
+  }
+  .main-title {
+    font-size: 28px;
+    letter-spacing: 1px;
+    text-shadow: 0 0 15px rgba(96,165,250,0.4);
+  }
+  .datetime {
+    font-size: 11px;
+    padding: 4px 12px;
+    min-width: auto;
+    width: auto;
+    border-radius: 20px;
+    backdrop-filter: blur(4px);
+  }
+
+  /* KPI 条 */
+  .kpi-strip {
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 8px 16px 16px;
+    padding: 12px;
+    justify-content: center;
+  }
+  .kpi-item {
+    flex: 1 1 40%;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .kpi-label {
+    font-size: 12px;
+  }
+  .kpi-value {
+    font-size: 18px;
+  }
+
+  /* 主内容区改为垂直排列 */
+  .content-area {
+    flex-direction: column;
+    padding: 0 16px 16px;
+    gap: 0;
+  }
+  .left-panel,
+  .right-panel {
+    width: 100%;
+    flex-shrink: 1;
+  }
+  .center-void {
+    display: none;
+  }
+
+  /* 卡片通用调整 */
+  .glass-card {
+    border-radius: 20px;
+    padding: 14px;
+    margin-bottom: 16px;
+  }
+  .glass-card:hover {
+    transform: none; /* 移动端禁用上浮效果 */
+    backdrop-filter: blur(8px);
+  }
+  .card-title {
+    font-size: 16px;
+    margin-bottom: 12px;
+    padding-left: 8px;
+  }
+
+  /* 资源卡片环形进度条缩小 */
+  .resource-grid {
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .resource-item {
+    flex: 1 1 30%;
+    min-width: 90px;
+  }
+  .resource-item .resource-label {
+    font-size: 12px;
+    margin-top: 6px;
+  }
+  .resource-value {
+    font-size: 13px;
+  }
+  .resource-cost {
+    font-size: 10px;
+  }
+  :deep(.el-progress-circle) {
+    width: 70px !important;
+    height: 70px !important;
+  }
+  :deep(.el-progress__text) {
+    font-size: 12px !important;
+  }
+
+  /* 厕所卡片 */
+  .restroom-row {
+    padding: 8px 0;
+  }
+  .floor-name {
+    font-size: 12px;
+  }
+  .status-badge {
+    font-size: 10px;
+    padding: 3px 6px;
+  }
+  .count-number {
+    font-size: 14px;
+  }
+  .count-total {
+    font-size: 10px;
+  }
+
+  /* 候机区域卡片 */
+  .waiting-row {
+    gap: 8px;
+    padding: 5px 0;
+  }
+  .waiting-name {
+    width: 50px;
+    font-size: 11px;
+  }
+  .waiting-progress-wrapper {
+    min-width: 80px;
+  }
+  .waiting-count {
+    width: 55px;
+    font-size: 10px;
+  }
+  .waiting-status {
+    width: 65px;
+    font-size: 10px;
+  }
+
+  /* 安检通道卡片 */
+  .security-row {
+    padding: 8px 0;
+  }
+  .lane-name {
+    width: 70px;
+    font-size: 12px;
+  }
+  .lane-queue {
+    width: 70px;
+    gap: 6px;
+  }
+  .queue-count, .queue-time {
+    font-size: 11px;
+    width: auto;
+  }
+  .lane-status {
+    width: 60px;
+    font-size: 10px;
+    padding: 3px 6px;
+  }
+  .security-footer {
+    font-size: 10px;
+    margin-top: 8px;
+    padding-top: 8px;
+  }
+
+  /* 航班卡片 */
+  .elevator-row {
+    padding: 8px 0;
+  }
+  .lift-name {
+    width: 55px;
+    font-size: 13px;
+  }
+  .lift-floor {
+    width: 50px;
+    font-size: 11px;
+  }
+  .lift-status {
+    width: 70px;
+    font-size: 11px;
+  }
+  .lift-call {
+    font-size: 11px;
+  }
+  .elevator-footer {
+    font-size: 10px;
+  }
+
+  /* 滚动条保持细条，但可忽略 */
+  .content-area::-webkit-scrollbar {
+    width: 3px;
+  }
+}
 </style>
