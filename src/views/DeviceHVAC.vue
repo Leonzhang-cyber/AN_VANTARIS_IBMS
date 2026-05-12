@@ -4,6 +4,14 @@
       <div class="three-columns">
         <!-- Left Column: Key Metrics + Operation Modes + Environment + System Health -->
         <div class="col-left">
+
+          <div class="title-row" v-if="isMobile">
+            <h1 class="page-title">HVAC</h1>
+            <span class="live-time">{{ currentTime }}</span>
+          </div>
+          <div class="card-img" v-if="isMobile">
+            <img :src="hvacImageUrl" alt="HVAC 3D View" />
+          </div>
           <!-- Key Metrics -->
           <el-card class="card glass-card" shadow="hover">
             <div class="card-header">📈 Key Metrics</div>
@@ -83,11 +91,11 @@
 
         <!-- Center Column: Image + Charts -->
         <div class="col-center">
-          <div class="title-row">
+          <div class="title-row" v-if="!isMobile">
             <h1 class="page-title">HVAC</h1>
             <span class="live-time">{{ currentTime }}</span>
           </div>
-          <div class="card-img">
+          <div class="card-img" v-if="!isMobile">
             <img :src="hvacImageUrl" alt="HVAC 3D View" />
           </div>
           <div class="cart-view">
@@ -811,7 +819,13 @@ const updateAllData = () => {
 
 let routeWatch = null
 
+const isMobile = ref(false)
+const checkMobile = () => {
+  isMobile.value = window.innerWidth < 768
+}
+
 onMounted(async () => {
+  checkMobile()
   updateTime()
   clockTimer = setInterval(updateTime, 1000)
 

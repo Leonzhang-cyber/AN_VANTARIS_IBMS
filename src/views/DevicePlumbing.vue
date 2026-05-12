@@ -5,6 +5,13 @@
       <div class="three-columns">
         <!-- Left Column: Key Metrics + Pump Status + Recent Alerts + System Health -->
         <div class="col-left">
+          <div class="title-row" v-if="isMobile">
+            <h1 class="page-title">Plumbing</h1>
+            <span class="live-time">{{ currentTime }}</span>
+          </div>
+          <div class="card-img" v-if="isMobile">
+            <img :src="plumbingImageUrl" alt="Plumbing 3D View" />
+          </div>
           <!-- Key Metrics -->
           <el-card class="card glass-card" shadow="hover">
             <div class="card-header">📈 Key Metrics</div>
@@ -82,11 +89,11 @@
 
         <!-- Center Column: Image + Charts -->
         <div class="col-center">
-          <div class="title-row">
+          <div class="title-row" v-if="!isMobile">
             <h1 class="page-title">Plumbing</h1>
             <span class="live-time">{{ currentTime }}</span>
           </div>
-          <div class="card-img">
+          <div class="card-img" v-if="!isMobile">
             <img :src="plumbingImageUrl" alt="Plumbing 3D View" />
           </div>
           <div class="cart-view">
@@ -728,8 +735,12 @@ const updateAllData = () => {
 }
 
 let routeWatch = null
-
+const isMobile = ref(false)
+const checkMobile = () => {
+  isMobile.value = window.innerWidth < 768
+}
 onMounted(async () => {
+  checkMobile()
   updateTime()
   clockTimer = setInterval(updateTime, 1000)
 
@@ -1390,6 +1401,176 @@ onBeforeUnmount(() => {
   font-size: 12px;
   color: #facc15;
   font-weight: bold;
+}
+/* ========== 移动端适配 (屏幕宽度 ≤ 768px) ========== */
+@media (max-width: 768px) {
+  .hvac-page {
+    padding: 16px;
+    overflow-y: auto;   /* 关键：让整个页面可以滚动 */
+    height: 100%;       /* 改为自动，以适应内容高度 */
+  }
+  .title-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-shrink: 0;
+  }
+  .page-title {
+    font-size: 26px;
+    text-align: center;
+  }
+  .live-time {
+    position: static;
+    text-align: center;
+    width: fit-content;
+    margin: 0 auto;
+    font-size: 12px;
+    padding: 4px 12px;
+  }
+  .three-columns {
+    flex-direction: column;
+    gap: 16px;
+    flex: none;         /* 取消 flex 伸缩，由滚动决定 */
+  }
+  .col-left, .col-right {
+    width: 100%;
+    overflow-y: visible;   /* 取消内部滚动，让整体滚动 */
+    gap: 16px;
+  }
+  .col-center {
+    gap: 16px;
+  }
+  .glass-card, .card-img {
+    border-radius: 16px;
+  }
+  .glass-card:hover {
+    transform: none;
+  }
+  .card-header {
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+  .metric-row .metric-icon {
+    font-size: 20px;
+    width: 28px;
+  }
+  .metric-row .metric-label {
+    font-size: 12px;
+    padding-left: 8px;
+  }
+  .metric-row .metric-value {
+    font-size: 16px;
+  }
+  .mode-name {
+    width: 70px;
+    font-size: 11px;
+  }
+  .mode-value {
+    width: 30px;
+    font-size: 11px;
+  }
+  .mode-power {
+    width: 50px;
+    font-size: 10px;
+  }
+  .env-grid {
+    gap: 8px;
+  }
+  .env-item {
+    padding: 6px 8px;
+  }
+  .env-icon-box {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+  }
+  .env-label {
+    font-size: 8px;
+  }
+  .env-value {
+    font-size: 12px;
+  }
+  .env-value small {
+    font-size: 9px;
+  }
+  .health-row {
+    font-size: 11px;
+  }
+  .health-name {
+    font-size: 11px;
+  }
+  .health-status {
+    font-size: 10px;
+  }
+  .cart-view {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .chart-card {
+    min-height: 220px;
+  }
+  .chart-box {
+    height: 180px;
+    min-height: 0;
+  }
+  .gauges-grid {
+    gap: 8px;
+  }
+  .gauge-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .gauge-label {
+    font-size: 11px;
+    margin-top: 2px;
+  }
+  :deep(.el-progress-circle) {
+    width: 80px !important;
+    height: 80px !important;
+  }
+  :deep(.el-progress__text) {
+    font-size: 10px !important;
+  }
+  .kpi-row {
+    font-size: 12px;
+  }
+  .kpi-row strong {
+    font-size: 14px;
+  }
+  .trend {
+    font-size: 10px;
+    min-width: 55px;
+  }
+  .setpoint-row {
+    font-size: 11px;
+  }
+  .sp-label {
+    font-size: 11px;
+  }
+  .sp-set, .sp-actual {
+    font-size: 9px;
+  }
+  .sp-deviation {
+    font-size: 10px;
+    width: 50px;
+  }
+  .tip-title {
+    font-size: 11px;
+  }
+  .tip-desc {
+    font-size: 10px;
+  }
+  .tip-saving {
+    font-size: 9px;
+  }
+  .card-img img {
+    width: 100%;
+    height: auto;
+    max-height: 160px;
+    object-fit: cover;
+  }
 }
 </style>
 
