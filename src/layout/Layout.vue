@@ -141,7 +141,7 @@
     </el-aside>
 
     <el-container>
-      <!-- 顶部栏（全屏时隐藏） -->
+      <!-- 顶部栏（全屏时隐藏 + 手机端直接隐藏） -->
       <el-header
           class="header-bar"
           :style="{ height: isFullscreen ? '0' : '60px', opacity: isFullscreen ? 0 : 1, padding: isFullscreen ? 0 : '0 20px' }"
@@ -153,12 +153,15 @@
           </el-icon>
           <div class="header-title">{{ currentMenuName }}</div>
         </div>
-        <div class="header-tools">
+        <div class="header-tools" v-if="!isMobile">
           <!-- 新加坡时间（移动端简化显示） -->
           <div class="singapore-time">{{ mobileTimeDisplay }}</div>
-          <el-tooltip :content="isFullscreen ? 'Exit Full Screen' : 'Full Screen'" placement="bottom">
+
+          <!-- 全屏按钮：手机端不渲染 -->
+          <el-tooltip :content="isFullscreen ? 'Exit Full Screen' : 'Full Screen'" placement="bottom" v-if="!isMobile">
             <FullScreen class="fullscreen-icon" @click="toggleFullScreen" />
           </el-tooltip>
+
           <el-button-group class="lang-group">
             <el-button size="small" @click="setLang('zh')" :type="locale === 'zh' ? 'primary' : ''">中文</el-button>
             <el-button size="small" @click="setLang('en')" :type="locale === 'en' ? 'primary' : ''">English</el-button>
