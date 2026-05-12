@@ -1264,8 +1264,7 @@ onBeforeUnmount(() => {
   .hvac-page {
     padding: 16px;
     overflow-y: auto;   /* 关键：让整个页面可以滚动 */
-    height: auto;       /* 改为自动，以适应内容高度 */
-    min-height: 100%;   /* 确保至少占满视口 */
+    height: 100%;       /* 改为自动，以适应内容高度 */
   }
   .title-row {
     flex-direction: column;
@@ -1428,43 +1427,6 @@ onBeforeUnmount(() => {
     height: auto;
     max-height: 160px;
     object-fit: cover;
-  }
-}
-
-/* 针对小平板设备 (宽度 768px - 1024px) 微调 */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .col-left, .col-right {
-    width: 260px;
-  }
-  .chart-box {
-    min-height: 200px;
-  }
-  .env-label {
-    font-size: 8px;
-  }
-  .env-value {
-    font-size: 11px;
-  }
-}
-
-/* 确保所有内嵌元素在窄屏不溢出 */
-@media (max-width: 480px) {
-  .mode-row {
-    gap: 4px;
-  }
-  .mode-name {
-    width: 60px;
-  }
-  .mode-value {
-    width: 28px;
-    font-size: 10px;
-  }
-  .mode-power {
-    width: 45px;
-    font-size: 9px;
-  }
-  .kpi-row span {
-    max-width: 80px;
   }
 }
 </style>
