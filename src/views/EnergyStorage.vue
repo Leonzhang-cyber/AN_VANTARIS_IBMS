@@ -759,4 +759,59 @@ onUnmounted(() => {
   color: #cbd5e1;
   font-weight: 600;
 }
+
+/* ========== 移动端适配 (屏幕宽度 ≤ 768px) ========== */
+/* ========== 移动端适配 (屏幕宽度 ≤ 768px) ========== */
+@media (max-width: 768px) {
+  /* 根容器：强制占满屏幕高度 + 允许纵向滚动 */
+  .wind-energy-page {
+    flex-direction: column;
+    width: 100%;
+    height: 100vh !important;
+    overflow-y: auto !important;
+    overflow-x: hidden;
+    display: block;
+  }
+
+  /* 左侧面板：取消固定高度、取消右侧边框、自适应高度 */
+  .left-panel {
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    border-right: none;
+    border-bottom: 1px dashed rgba(59, 130, 246, 0.3);
+  }
+
+  /* 右侧面板：取消固定高度、正常滚动 */
+  .right-panel {
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    flex: none;
+    padding-bottom: 140px;
+  }
+
+  /* 头部标题换行 */
+  .page-header {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  /* 数据卡片：手机端 2列布局（更美观） */
+  .data-row {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  /* 图表容器：取消最小高度限制 */
+  .charts-container {
+    overflow: visible !important;
+  }
+  .chart-item {
+    overflow: visible !important;
+    min-height: 200px !important;
+  }
+}
 </style>
