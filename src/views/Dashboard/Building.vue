@@ -1,11 +1,44 @@
 <template>
   <div v-if="isBackgroundLoaded" class="dashboard">
     <div class="top-header">
-      <div class="header-left"></div>
+      <div class="header-left">
+        <div class="button-group">
+          <!-- 节能模式 -->
+          <div class="switch-item">
+            <span class="switch-label">Energy Saving</span>
+            <el-switch
+                v-model="isEnergySavingActive"
+                size="large"
+                :active-value="true"
+                :inactive-value="false"
+                @change="handleEnergySavingToggle"
+                class="energy-saving-switch"
+                active-color="#10b981"
+                inactive-color="#475569"
+            />
+          </div>
+
+          <!-- 报告 -->
+          <div class="switch-item">
+            <span class="switch-label">Report</span>
+            <el-switch
+                v-model="showEnergyReport"
+                size="large"
+                :active-value="true"
+                :inactive-value="false"
+                :disabled="!isEnergySavingActive"
+                class="report-switch"
+                active-color="#3b82f6"
+                inactive-color="#475569"
+            />
+          </div>
+        </div>
+      </div>
       <div class="header-title">
         <div class="main-title">SMART BUILDING<br></div>
       </div>
       <div class="datetime" v-if="isFullscreen">{{ currentTime }}</div>
+      <div class="datetimeview1" v-if="!isFullscreen"></div>
     </div>
 
     <div class="content-area">
@@ -113,9 +146,123 @@
       </div>
       <div class="kpi-item">
         <span class="kpi-label">💰 Total Cost</span>
-        <span class="kpi-value">{{ totalCost }}</span>
+        <span class="kpi-value">{{ totalCostDisplay }}</span>
+      </div>
+      <div class="kpi-item">
+        <span class="kpi-label">🌿 Saved Cost</span>
+        <span class="kpi-value">${{ savedCostDisplay }}</span>
+      </div>
+      <div class="kpi-item">
+        <span class="kpi-label">💵 Carbon Revenue</span>
+        <span class="kpi-value">${{ carbonRevenueDisplay }}</span>
       </div>
     </div>
+
+    <!-- Energy Savings Report Drawer - Building Edition -->
+    <el-drawer
+        v-model="showEnergyReport"
+        direction="rtl"
+        size="400px"
+        :with-header="true"
+        class="energy-report-drawer"
+        :close-on-click-modal="true"
+    >
+      <template #header>
+        <div class="drawer-header">
+          <div class="drawer-title-section">
+            <span class="drawer-icon">🏢</span>
+            <div class="drawer-title-wrapper">
+              <span class="drawer-title">Building Energy Savings Report</span>
+            </div>
+          </div>
+          <div class="drawer-location-wrapper">
+            <div class="drawer-location">
+              <el-tag type="success" size="small" effect="plain" round style="margin-right: 10px">Live Data</el-tag>
+              <el-icon><Location /></el-icon>
+              <span>Singapore</span>
+            </div>
+          </div>
+        </div>
+      </template>
+      <div class="report-content">
+        <!-- Core Stats -->
+        <div class="report-core-stats">
+          <div class="core-stat-card">
+            <div class="stat-icon">⚡</div>
+            <div class="stat-info">
+              <div class="stat-label">Total Energy Saved</div>
+              <div class="stat-value">{{ buildingSavedEnergy }} kWh</div>
+            </div>
+          </div>
+          <div class="core-stat-card">
+            <div class="stat-icon">💰</div>
+            <div class="stat-info">
+              <div class="stat-label">Cost Saved</div>
+              <div class="stat-value">${{ buildingSavedCost }}</div>
+              <div class="stat-rate">@ $0.238/kWh</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Carbon & Revenue Section -->
+        <div class="carbon-section">
+          <div class="section-title">🌍 Carbon Reduction & Revenue</div>
+          <div class="carbon-grid">
+            <div class="carbon-item">
+              <div class="carbon-icon">🏢</div>
+              <div class="carbon-info">
+                <div class="carbon-label">CO₂ Reduction</div>
+                <div class="carbon-value">{{ buildingCarbonReduction }} kg</div>
+                <div class="carbon-sub">≈ {{ buildingTreesOffset }} trees/year</div>
+              </div>
+            </div>
+            <div class="carbon-item">
+              <div class="carbon-icon">💵</div>
+              <div class="carbon-info">
+                <div class="carbon-label">Carbon Credit Revenue</div>
+                <div class="carbon-value">${{ buildingCarbonRevenue }}</div>
+                <div class="carbon-sub">@ $50/ton CO₂</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Annual Goal Progress -->
+        <div class="goal-section">
+          <div class="goal-header">
+            <span>🎯 Annual Savings Target</span>
+            <span class="goal-percent">{{ buildingSavingPercent }}%</span>
+          </div>
+          <el-progress :percentage="buildingSavingPercent" :stroke-width="10" color="#10b981" :show-text="false" />
+          <div class="goal-detail">
+            <span>Achieved: {{ buildingSavedEnergy }} / {{ buildingAnnualTarget }} kWh</span>
+            <span>Remaining: {{ buildingRemainingTarget }} kWh</span>
+          </div>
+          <div class="goal-days-info">Continuous operation: {{ buildingContinuousDays }} days</div>
+        </div>
+
+        <!-- Monthly Trend Chart -->
+        <div class="trend-chart">
+          <div class="trend-header">📈 Monthly Savings Trend</div>
+          <div ref="buildingReportChartRef" style="height: 200px; width: 100%"></div>
+        </div>
+
+        <!-- Building System Contribution Ranking -->
+        <div class="ranking-section">
+          <div class="ranking-header">🏆 Top Energy Saving Systems</div>
+          <div class="ranking-list">
+            <div v-for="(item, idx) in buildingDeviceRanking" :key="idx" class="ranking-item">
+              <div class="ranking-rank" :class="{ 'top-three': idx < 3 }">{{ idx + 1 }}</div>
+              <div class="ranking-name">{{ item.name }}</div>
+              <div class="ranking-bar-wrap">
+                <div class="ranking-bar" :style="{ width: item.percent + '%', background: idx < 3 ? '#10b981' : '#3b82f6' }"></div>
+              </div>
+              <div class="ranking-value">{{ item.saved }} kWh</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </el-drawer>
   </div>
 
   <!-- Loading 页面 -->
@@ -142,31 +289,81 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount, nextTick, watch } from 'vue'
 import * as echarts from 'echarts'
+import { ElMessage } from 'element-plus'
+import { Location } from '@element-plus/icons-vue'
 import { useCounterStore } from '@/stores/counter.js'
 import { getCurrentInstance } from 'vue'
+
 const getStore = () => {
   const instance = getCurrentInstance()
   if (!instance) {
     throw new Error('useStore() must be called within a setup function')
   }
-  // 尝试获取根组件上的 pinia 实例
   const pinia = instance.appContext.config.globalProperties.$pinia
   if (!pinia) {
     throw new Error('Pinia instance not found. Did you forget to call app.use(pinia)?')
   }
-  return useCounterStore(pinia) // 手动传入 pinia 实例
+  return useCounterStore(pinia)
 }
 const counterStore = getStore()
 const isFullscreen = computed(() => counterStore.isFullscreen)
+
+// ==================== 节能模式状态 ====================
+const isEnergySavingActive = ref(true)
+const showEnergyReport = ref(false)
+
+// ==================== 节能数据 ====================
+let buildingSavingStartTime = null
+let buildingBaselineHourlyConsumption = 0
+let buildingActualConsumption = 0
+let buildingLastTrackedElec = 0
+const buildingStartSavedEnergy = 18520 // 初始节电量 (kWh)
+const SGD_ELECTRICITY_RATE = 0.238
+const CARBON_FACTOR = 0.4
+const CARBON_CREDIT_PRICE_SGD = 50
+
+// Building 节能响应式数据
+const buildingSavedEnergy = ref(18520)
+const buildingSavedCost = ref(4407.76)
+const buildingCarbonReduction = ref(7408)
+const buildingCarbonRevenue = ref(370.40)
+const buildingSavingPercent = ref(4.63)
+const buildingContinuousDays = ref(12)
+const buildingAnnualTarget = ref(400000)
+
+// KPI 栏格式化
+const savedCostDisplay = computed(() => buildingSavedCost.value.toFixed(2))
+const carbonRevenueDisplay = computed(() => buildingCarbonRevenue.value.toFixed(2))
+const totalCostDisplay = computed(() => {
+  const originalCost = parseFloat(waterCost.value) + parseFloat(elecCost.value) + parseFloat(hvacCost.value)
+  return originalCost.toFixed(2)
+})
+
+// Building 系统贡献排名
+const buildingDeviceRanking = ref([
+  { name: 'HVAC System', saved: 8750, percent: 47 },
+  { name: 'Lighting System', saved: 5120, percent: 28 },
+  { name: 'Elevator System', saved: 2380, percent: 13 },
+  { name: 'Water Pump', saved: 1420, percent: 8 },
+  { name: 'Other Systems', saved: 850, percent: 4 }
+])
+
+// 剩余目标
+const buildingRemainingTarget = computed(() => Math.max(0, Math.round(buildingAnnualTarget.value - buildingSavedEnergy.value)))
+const buildingTreesOffset = computed(() => Math.round(buildingCarbonReduction.value / 22))
+
+// 报告图表
+let buildingReportChart = null
+const buildingReportChartRef = ref(null)
+
 // ==================== 响应式数据 ====================
 const currentTime = ref('')
 const isBackgroundLoaded = ref(false)
 const loadingProgress = ref(0)
 const loadingMessage = ref('Preparing assets...')
 
-// 能耗数据
 const deviceTotal = ref(186)
 const onlineRate = ref(97.2)
 const avgTemp = ref(25.2)
@@ -182,14 +379,8 @@ const hvacPercent = ref(61.4)
 const waterCost = ref(0)
 const elecCost = ref(0)
 const hvacCost = ref(0)
-const totalCost = ref(0)
 
-// 楼层占用
-const floorMax = 350
-const floorPeople = ref(210)
-const floorPercent = ref(60)
-
-// 厕所数据（占用/总数）
+// 厕所数据
 const restrooms = ref([
   { floor: '1F Lobby', total: 8, occupied: 3, statusText: 'Available', statusClass: 'available' },
   { floor: '2F Office', total: 6, occupied: 2, statusText: 'Available', statusClass: 'available' },
@@ -214,11 +405,10 @@ const elevators = ref([
   { id: 4, name: 'D', currentFloor: 1, passengers: 0, capacity: 15, tripCount: 12, statusText: 'Maint', statusClass: 'maint', callFloor: null, callDirection: null, eta: 0 }
 ])
 
-// 计算总行程和能耗（示例）
 const totalTripsToday = computed(() => elevators.value.reduce((sum, e) => sum + e.tripCount, 0))
 const totalElevatorEnergy = computed(() => (totalTripsToday.value * 0.35).toFixed(1))
 
-// 图表相关
+// 图表
 const deviceBarChart = ref(null)
 const envLineChart = ref(null)
 const energyLineChart = ref(null)
@@ -242,14 +432,141 @@ const deviceBarData = ref({
 })
 const barColor = ['#3b82f6','#f59e0b','#10b981','#8b5cf6','#ef4444']
 
-const alerts = ref([
-  { device: 'Floor 5 HVAC', content: 'Temperature abnormal', time: '09:32' },
-  { device: 'Floor 2 Light', content: 'Over current', time: '09:15' },
-  { device: 'Pump Room', content: 'Water pressure low', time: '08:50' },
-  { device: 'Parking Gate', content: 'Communication lost', time: '08:20' }
-])
-
 let timeTimer = null, dataInterval = null
+
+// ==================== 节能模式逻辑 ====================
+function handleEnergySavingToggle(val) {
+  if (val) {
+    startBuildingEnergySavingModel()
+    ElMessage.success({
+      message: '🏢 Building energy saving mode activated',
+      duration: 2000,
+      type: 'success'
+    })
+  } else {
+    stopBuildingEnergySavingModel()
+    showEnergyReport.value = false
+    ElMessage.info({
+      message: 'Building energy saving mode deactivated',
+      duration: 2000,
+      type: 'info'
+    })
+  }
+}
+
+function startBuildingEnergySavingModel() {
+  buildingBaselineHourlyConsumption = elecUsage.value + hvacUsage.value
+  buildingSavingStartTime = Date.now()
+  buildingActualConsumption = 0
+  buildingLastTrackedElec = elecUsage.value + hvacUsage.value
+  window._buildingEnergySavingBoost = 0.82
+
+  buildingSavedEnergy.value = buildingStartSavedEnergy
+  buildingSavedCost.value = buildingStartSavedEnergy * SGD_ELECTRICITY_RATE
+  buildingCarbonReduction.value = Math.round(buildingStartSavedEnergy * CARBON_FACTOR)
+  buildingCarbonRevenue.value = parseFloat(((buildingCarbonReduction.value / 1000) * CARBON_CREDIT_PRICE_SGD).toFixed(2))
+
+  const dailyAvgSaving = buildingStartSavedEnergy / buildingContinuousDays.value
+  buildingAnnualTarget.value = Math.round(dailyAvgSaving * 360)
+  buildingSavingPercent.value = Math.min(100, Math.round((buildingStartSavedEnergy / buildingAnnualTarget.value) * 100 * 10) / 10)
+}
+
+function stopBuildingEnergySavingModel() {
+  buildingSavingStartTime = null
+  window._buildingEnergySavingBoost = null
+  buildingActualConsumption = 0
+  buildingLastTrackedElec = 0
+  buildingSavedEnergy.value = 0
+  buildingSavedCost.value = 0
+  buildingCarbonReduction.value = 0
+  buildingCarbonRevenue.value = 0
+  buildingSavingPercent.value = 0
+  buildingContinuousDays.value = 0
+  buildingAnnualTarget.value = 0
+}
+
+function updateBuildingEnergySavings() {
+  if (!isEnergySavingActive.value || !buildingSavingStartTime) return
+
+  const hoursElapsed = (Date.now() - buildingSavingStartTime) / (1000 * 60 * 60)
+  const baselineTotal = buildingBaselineHourlyConsumption * hoursElapsed
+  const actualTotal = buildingActualConsumption || 0
+
+  buildingContinuousDays.value = Math.max(buildingContinuousDays.value, Math.floor(hoursElapsed / 24) + 12)
+
+  const newSavedEnergy = buildingStartSavedEnergy + Math.max(0, baselineTotal - actualTotal)
+  buildingSavedEnergy.value = Math.round(newSavedEnergy * 10) / 10
+  buildingSavedCost.value = parseFloat((buildingSavedEnergy.value * SGD_ELECTRICITY_RATE).toFixed(2))
+  buildingCarbonReduction.value = Math.round(buildingSavedEnergy.value * CARBON_FACTOR * 10) / 10
+  const carbonReductionTonnes = buildingCarbonReduction.value / 1000
+  buildingCarbonRevenue.value = parseFloat((carbonReductionTonnes * CARBON_CREDIT_PRICE_SGD).toFixed(2))
+
+  const dailyAvgSaving = buildingSavedEnergy.value / buildingContinuousDays.value
+  buildingAnnualTarget.value = Math.round(dailyAvgSaving * 360)
+  buildingSavingPercent.value = Math.min(100, Math.round((buildingSavedEnergy.value / buildingAnnualTarget.value) * 100 * 10) / 10)
+}
+
+function trackBuildingEnergyConsumption() {
+  if (!isEnergySavingActive.value || !buildingSavingStartTime) return
+
+  if (buildingLastTrackedElec === 0) {
+    buildingLastTrackedElec = elecUsage.value + hvacUsage.value
+    buildingActualConsumption = 0
+    return
+  }
+
+  const currentTotal = elecUsage.value + hvacUsage.value
+  const delta = Math.max(0, currentTotal - buildingLastTrackedElec)
+  if (delta > 0) {
+    buildingActualConsumption += delta
+  }
+  buildingLastTrackedElec = currentTotal
+}
+
+// 初始化报告图表
+function initBuildingReportChart() {
+  if (buildingReportChartRef.value) {
+    if (buildingReportChart) buildingReportChart.dispose()
+    buildingReportChart = echarts.init(buildingReportChartRef.value)
+    const currentWeekSaving = Math.max(0, Math.round(buildingSavedEnergy.value - buildingStartSavedEnergy))
+    buildingReportChart.setOption({
+      tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+      grid: { top: 20, left: 45, right: 10, bottom: 20 },
+      xAxis: {
+        type: 'category',
+        data: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'This Week'],
+        axisLabel: { color: '#94a3b8', fontSize: 10 }
+      },
+      yAxis: {
+        type: 'value',
+        name: 'Saved Energy (kWh)',
+        nameTextStyle: { color: '#94a3b8', fontSize: 10 },
+        axisLabel: { color: '#94a3b8' }
+      },
+      series: [{
+        type: 'bar',
+        data: [3120, 4280, 5150, 5980, currentWeekSaving > 0 ? currentWeekSaving : 1220],
+        itemStyle: {
+          borderRadius: [8, 8, 0, 0],
+          color: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1, colorStops: [{ offset: 0, color: '#10b981' }, { offset: 1, color: '#34d399' }] }
+        },
+        label: { show: true, position: 'top', color: '#94a3b8', fontSize: 10 }
+      }]
+    })
+  }
+}
+
+// Watch report drawer
+watch(showEnergyReport, (newVal) => {
+  if (newVal) {
+    nextTick(() => {
+      initBuildingReportChart()
+    })
+  } else if (buildingReportChart) {
+    buildingReportChart.dispose()
+    buildingReportChart = null
+  }
+})
 
 // ==================== 辅助函数 ====================
 const loadingMessages = ['Preparing assets...', 'Loading background...', 'Initializing modules...', 'Establishing connection...', 'Starting dashboard...', 'Almost ready...']
@@ -291,7 +608,6 @@ function updateCosts() {
   waterCost.value = (waterUsage.value * 0.5).toFixed(2)
   elecCost.value = (elecUsage.value * 0.13).toFixed(2)
   hvacCost.value = (hvacUsage.value * 0.15).toFixed(2)
-  totalCost.value = (parseFloat(waterCost.value) + parseFloat(elecCost.value) + parseFloat(hvacCost.value)).toFixed(2)
 }
 
 function updateRestroomData() {
@@ -385,8 +701,13 @@ function refreshData() {
   hvacUsage.value = Math.floor(randomVariation(2150, 0.07))
   hvacPercent.value = parseFloat(((hvacUsage.value / hvacTarget) * 100).toFixed(1))
   updateCosts()
-  floorPeople.value = Math.min(floorMax, Math.max(50, Math.floor(randomVariation(210, 0.1))))
-  floorPercent.value = parseFloat(((floorPeople.value / floorMax) * 100).toFixed(1))
+
+  // 节能追踪
+  if (isEnergySavingActive.value) {
+    trackBuildingEnergyConsumption()
+    updateBuildingEnergySavings()
+  }
+
   updateRestroomData()
   updateElevatorData()
 
@@ -397,12 +718,6 @@ function refreshData() {
   energyLineData.value.power = energyLineData.value.power.map(v => Math.max(100, randomVariation(v, 0.12)))
   deviceBarData.value.valueList = deviceBarData.value.valueList.map(v => Math.floor(randomVariation(v, 0.06)))
 
-  if (Math.random() > 0.65) {
-    const devices = ['Floor 3 AC', 'Parking Light', 'Elevator 2', 'Fire Alarm']
-    const contents = ['High temp', 'Power surge', 'Door abnormal', 'Sensor fault']
-    alerts.value.unshift({ device: devices[Math.floor(Math.random()*4)], content: contents[Math.floor(Math.random()*4)], time: new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}) })
-    if (alerts.value.length > 6) alerts.value.pop()
-  }
   updateAllCharts()
 }
 
@@ -420,7 +735,12 @@ function initCharts() {
   } catch(e) { return false }
 }
 
-function resizeCharts() { deviceBarIns?.resize(); envLineIns?.resize(); energyLineIns?.resize() }
+function resizeCharts() {
+  deviceBarIns?.resize()
+  envLineIns?.resize()
+  energyLineIns?.resize()
+  if (buildingReportChart) buildingReportChart.resize()
+}
 
 onMounted(async () => {
   updateTime()
@@ -428,13 +748,28 @@ onMounted(async () => {
   await preloadBackground()
   isBackgroundLoaded.value = true
   await nextTick()
-  setTimeout(() => { initCharts(); refreshData(); dataInterval = setInterval(refreshData, 3000) }, 100)
+  setTimeout(() => {
+    initCharts()
+    refreshData()
+
+    // 启动节能模式
+    if (isEnergySavingActive.value) {
+      startBuildingEnergySavingModel()
+    }
+
+    dataInterval = setInterval(refreshData, 3000)
+  }, 100)
   window.addEventListener('resize', resizeCharts)
 })
 
 onBeforeUnmount(() => {
-  clearInterval(timeTimer); clearInterval(dataInterval); window.removeEventListener('resize', resizeCharts)
-  deviceBarIns?.dispose(); envLineIns?.dispose(); energyLineIns?.dispose()
+  clearInterval(timeTimer)
+  clearInterval(dataInterval)
+  window.removeEventListener('resize', resizeCharts)
+  deviceBarIns?.dispose()
+  envLineIns?.dispose()
+  energyLineIns?.dispose()
+  if (buildingReportChart) buildingReportChart.dispose()
 })
 </script>
 
@@ -459,16 +794,16 @@ onBeforeUnmount(() => {
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
 /* 主页面 */
-.dashboard { height: 100%; width: 100%; display: flex; flex-direction: column; background-image: url('https://aegisnx.com/wp-content/uploads/2026/05/1778231064187.png'); background-size: cover; background-position: center; background-attachment: fixed; animation: fadeIn 0.5s; }
+.dashboard { height: 100%; width: 100%; display: flex; flex-direction: column; background-image: url('https://aegisnx.com/wp-content/uploads/2026/05/1778231064187.png'); background-size: cover; background-position: center; background-attachment: fixed; animation: fadeIn 0.5s; font-family: 'Inter', 'Segoe UI', system-ui, sans-serif; }
 .top-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 28px 8px; margin: 0 24px; }
-.header-left { width: 140px; }
+.header-left { width: auto; display: flex; align-items: center; }
 .header-title { text-align: center; flex: 1; }
 .main-title { font-size: 44px; font-weight: 800; background: linear-gradient(135deg, #e0f2fe, #bae6fd); -webkit-background-clip: text; background-clip: text; color: transparent; letter-spacing: 3px; }
 .datetime { font-size: 16px; color: #0ff; font-weight: 600; background: transparent; padding: 8px 20px; border-radius: 12px; backdrop-filter: blur(8px); min-width: 280px; text-align: center; font-family: monospace; border: 1px solid rgba(0,255,255,0.5); box-shadow: 0 0 10px rgba(0,255,255,0.3); }
-.kpi-strip { display: flex; justify-content: space-around; gap: 20px; margin: 10px 24px 20px; padding: 12px 20px; }
-.kpi-item { display: flex; gap: 12px; align-items: baseline; }
-.kpi-label { color: #94a3b8; }
-.kpi-value { font-size: 24px; font-weight: 800; color: #facc15; font-family: monospace; }
+.kpi-strip { display: flex; justify-content: space-around; gap: 20px; margin: 10px 24px 20px; padding: 12px 20px; flex-wrap: wrap; }
+.kpi-item { display: flex; gap: 12px; align-items: baseline; font-size: 15px; }
+.kpi-label { color: #94a3b8; font-weight: 500; }
+.kpi-value { font-size: 24px; font-weight: 800; color: #facc15; font-family: monospace; text-shadow: 0 0 5px rgba(250,204,21,0.5); }
 .content-area { flex: 1; display: flex; padding: 0 24px 24px; gap: 32px; overflow-y: auto; }
 .left-panel { width: 320px; flex-shrink: 0; }
 .right-panel { width: 380px; flex-shrink: 0; }
@@ -480,10 +815,16 @@ onBeforeUnmount(() => {
 .resource-item .resource-label { margin-top: 8px; font-size: 13px; color: #fff; font-weight: bold }
 .resource-value { font-size: 14px; font-weight: bold; color: #facc15; }
 .resource-cost { font-size: 12px; color: #a5f3fc; margin-top: 4px; }
-.parking-info { display: flex; justify-content: space-between; margin-bottom: 10px; color: #cbd5e1; font-size: 14px; }
-.parking-info strong { color: #facc15; }
 
-/* 厕所卡片样式 */
+/* 开关组 */
+.button-group { display: flex; align-items: center; justify-content: center;gap: 10px; }
+.switch-item { display: flex; align-items: center; gap: 5px; }
+.switch-label { font-size: 14px; font-weight: 600; color: #fff; white-space: nowrap; font-weight: bold; }
+.energy-saving-switch { --el-switch-on-color: #10b981; --el-switch-off-color: #475569; }
+.report-switch { --el-switch-on-color: #3b82f6; --el-switch-off-color: #475569; }
+:deep(.el-switch__label) { display: none !important; }
+
+/* 厕所 */
 .restroom-table { width: 100%; }
 .restroom-row-header { display: flex; justify-content: space-between; padding: 8px 4px; font-size: 11px; color: #fff; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid rgba(59,130,246,0.3); margin-bottom: 8px; font-weight: bold; }
 .restroom-row-header span { flex: 1; }
@@ -501,7 +842,7 @@ onBeforeUnmount(() => {
 .count-number { font-size: 16px; font-weight: 700; color: #facc15; }
 .count-total { font-size: 11px; color: #64748b; margin-left: 2px; }
 
-/* 电梯卡片样式 */
+/* 电梯 */
 .elevator-list { display: flex; flex-direction: column; }
 .elevator-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
 .lift-name { width: 30px; font-weight: 600; color: #e2e8f0; }
@@ -513,23 +854,90 @@ onBeforeUnmount(() => {
 .lift-call { flex: 1; text-align: right; font-size: 11px; color: #f59e0b; font-family: monospace; }
 .elevator-footer { display: flex; justify-content: space-between; margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba(59,130,246,0.3); font-size: 11px; color: #64748b; }
 
-/* 告警列表样式（未使用但保留） */
-.alert-list-fixed { height: 180px; display: flex; flex-direction: column; }
-.alert-items-fixed { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; scrollbar-width: none; }
-.alert-items-fixed::-webkit-scrollbar { display: none; }
-.alert-item { background: rgba(0,0,0,0.3); border-radius: 16px; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; transition: 0.2s; }
-.alert-item:hover { background: rgba(239,68,68,0.2); border-left: 2px solid #ef4444; }
-.alert-device { font-weight: 600; color: #facc15; font-size: 12px; }
-.alert-content { flex: 1; margin: 0 10px; font-size: 12px; color: #e2e8f0; }
-.alert-time { font-size: 11px; color: #94a3b8; font-family: monospace; }
-
 .content-area::-webkit-scrollbar { width: 5px; }
 .content-area::-webkit-scrollbar-track { background: rgba(15,23,42,0.5); border-radius: 4px; }
 .content-area::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 4px; }
 :deep(.el-progress-circle__track) { stroke: rgba(255,255,255,0.2); }
 :deep(.el-progress__text) { color: #fff; font-weight: bold; }
 
-/* ========== 移动端适配 (屏幕宽度 <= 768px) ========== */
+/* Drawer 样式 - 跟 Factory 完全一致 */
+.energy-report-drawer :deep(.el-drawer__header) {
+  margin-bottom: 0;
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+  background: rgba(8, 16, 28, 0.95);
+}
+.energy-report-drawer :deep(.el-drawer__body) {
+  padding: 0;
+  background: linear-gradient(180deg, #0f172a 0%, #0a0f1a 100%);
+  overflow: hidden;
+  scrollbar-width: none;
+}
+.drawer-header { display: flex; flex-direction: column; width: 100%; flex-wrap: wrap; gap: 12px; }
+.drawer-title-section { display: flex; align-items: center; gap: 10px; }
+.drawer-title-wrapper { display: flex; flex-direction: column; gap: 4px; }
+.drawer-title-wrapper .drawer-title { font-size: 18px; font-weight: 700; color: green; letter-spacing: 1px; }
+.drawer-location-wrapper { text-align: right; }
+.drawer-location { display: flex; align-items: center; gap: 4px; font-size: 15px; color: #94a3b8; font-weight: bold; }
+.drawer-icon { font-size: 22px; }
+.report-content { padding: 0px; display: flex; flex-direction: column; gap: 20px; max-height: calc(100vh - 70px); overflow-y: auto; }
+.report-content::-webkit-scrollbar { width: 4px; display: none; }
+.report-content::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); border-radius: 4px; }
+.report-content::-webkit-scrollbar-thumb { background: #10b981; border-radius: 4px; }
+
+.report-core-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.core-stat-card { background: rgba(16, 185, 129, 0.08); border-radius: 20px; padding: 6px; display: flex; align-items: center; gap: 12px; border: 1px solid rgba(16, 185, 129, 0.2); }
+.stat-icon { font-size: 32px; }
+.stat-info { flex: 1; }
+.stat-label { font-size: 11px; color: #94a3b8; display: block; margin-bottom: 4px; font-weight: bold; }
+.stat-value { font-size: 22px; font-weight: 800; color: #facc15; font-family: monospace; }
+.stat-rate { font-size: 11px; color: green; margin-top: 4px; font-weight: bold; }
+
+.carbon-section { background: rgba(16, 185, 129, 0.08); border-radius: 20px; padding: 14px 16px; border: 1px solid rgba(59, 130, 246, 0.2); }
+.section-title { font-size: 14px; color: #94a3b8; font-weight: bold; margin-bottom: 12px; }
+.carbon-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.carbon-item { display: flex; align-items: center; gap: 10px; background: rgba(16, 185, 129, 0.08); border-radius: 16px; padding: 5px; }
+.carbon-icon { font-size: 24px; }
+.carbon-info { flex: 1; }
+.carbon-label { font-size: 11px; font-weight: bold; color: #94a3b8; display: block; }
+.carbon-value { font-size: 16px; font-weight: 700; color: #facc15; font-family: monospace; }
+.carbon-sub { font-size: 9px; color: green; font-weight: bold; font-size: 11px; }
+
+.goal-section { background: rgba(16, 185, 129, 0.08); border-radius: 20px; padding: 14px 16px; border: 1px solid rgba(16, 185, 129, 0.2); }
+.goal-header { display: flex; justify-content: space-between; font-size: 13px; color: #94a3b8; font-weight: bold; margin-bottom: 10px; }
+.goal-percent { font-size: 18px; font-weight: 700; color: #10b981; }
+.goal-detail { display: flex; justify-content: space-between; font-size: 10px; color: #94a3b8; font-weight: bold; margin-top: 8px; }
+.goal-days-info { font-size: 11px; color: #10b981; margin-top: 8px; text-align: center; font-weight: bold; }
+
+.trend-chart { background: rgba(16, 185, 129, 0.08); border-radius: 20px; padding: 12px; }
+.trend-header { font-size: 13px; font-weight: 600; color: #94a3b8; margin-bottom: 12px; font-weight: bold; }
+
+.ranking-section { background: rgba(16, 185, 129, 0.08); border-radius: 20px; padding: 14px; }
+.ranking-header { font-size: 13px; font-weight: 600; color: #94a3b8; margin-bottom: 12px; font-weight: bold; }
+.ranking-list { display: flex; flex-direction: column; gap: 10px; }
+.ranking-item { display: flex; align-items: center; gap: 10px; }
+.ranking-rank { width: 26px; height: 26px; background: rgba(255, 255, 255, 0.08); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: #94a3b8; }
+.ranking-rank.top-three { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+.ranking-name { width: 120px; font-size: 11px; color: #cbd5e1; font-weight: bold; }
+.ranking-bar-wrap { flex: 1; height: 6px; background: rgba(255, 255, 255, 0.1); border-radius: 10px; overflow: hidden; background-color: #1e293b; }
+.ranking-bar { height: 100%; border-radius: 10px; }
+.ranking-value { width: 65px; font-size: 12px; font-family: monospace; color: #facc15; font-weight: bold; text-align: right; }
+.datetimeview1 {
+  font-size: 16px;
+  color: #0ff;
+  font-weight: 600;
+  background: transparent;
+  padding: 8px 20px;
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  width: auto;
+  min-width: 280px;
+  text-align: center;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  letter-spacing: 1px;
+}
+
+/* ========== 移动端适配 ========== */
 @media (max-width: 768px) {
   .top-header {
     flex-direction: column;
@@ -537,7 +945,7 @@ onBeforeUnmount(() => {
     margin: 0 12px;
     gap: 8px;
   }
-  .header-left { display: none; }
+  .header-left { width: 100%; justify-content: center; }
   .main-title {
     font-size: 24px;
     letter-spacing: 1px;
@@ -604,7 +1012,6 @@ onBeforeUnmount(() => {
   .resource-cost {
     font-size: 10px;
   }
-  /* 环形进度条尺寸缩小 */
   :deep(.el-progress-circle) {
     width: 70px !important;
     height: 70px !important;
@@ -612,7 +1019,6 @@ onBeforeUnmount(() => {
   :deep(.el-progress__text) {
     font-size: 12px !important;
   }
-  /* 厕所卡片调整 */
   .restroom-row {
     padding: 8px 0;
   }
@@ -629,7 +1035,6 @@ onBeforeUnmount(() => {
   .count-total {
     font-size: 10px;
   }
-  /* 电梯卡片调整 */
   .lift-name {
     width: 25px;
     font-size: 13px;
@@ -648,17 +1053,34 @@ onBeforeUnmount(() => {
   .elevator-footer {
     font-size: 10px;
   }
-  /* 图表容器高度缩小 */
-  .device-list [ref="deviceBarChart"],
-  .employee-dashboard [ref="envLineChart"],
-  .energy-report [ref="energyLineChart"] {
-    height: 160px !important;
-  }
-  /* 修正图表容器实际高度（因为是用ref动态渲染，需覆盖内联样式） */
   .device-list div[style*="height: 220px"],
   .employee-dashboard div[style*="height: 180px"],
   .energy-report div[style*="height: 180px"] {
     height: 160px !important;
   }
+
+  .energy-report-drawer :deep(.el-drawer) {
+    width: 100% !important;
+  }
+  .report-core-stats {
+    grid-template-columns: 1fr;
+  }
+  .carbon-grid {
+    grid-template-columns: 1fr;
+  }
+  .ranking-name {
+    width: 100px;
+    font-size: 10px;
+  }
+}
+</style>
+
+
+<style>
+.el-drawer__body {
+  scrollbar-width: none; /* Firefox */
+}
+.el-drawer__header {
+  margin-bottom: 5px;
 }
 </style>

@@ -1040,7 +1040,7 @@ onBeforeUnmount(() => {
 .button-group {
   display: flex;
   align-items: center;
-  gap: 0px;
+  gap: 10px;
 }
 
 .energy-saving-switch {
