@@ -194,11 +194,14 @@ import { ElMessage } from 'element-plus'
 import {
   Box, Warning, Tools, Document, Setting, FullScreen, Menu
 } from '@element-plus/icons-vue'
+// 引入 store
+import { useCounterStore } from '@/stores/counter'  // 或者使用 fullscreen store
 
 const route = useRoute()
 const router = useRouter()
 const { locale } = useI18n()
 const isFullscreen = ref(false)
+const counterStore = useCounterStore()
 
 // 移动端适配状态
 const isMobile = ref(false)
@@ -375,7 +378,12 @@ const toggleFullScreen = () => {
 }
 
 const onFullScreenChange = () => {
+  const previousState = isFullscreen.value
   isFullscreen.value = !!document.fullscreenElement
+  counterStore.setFullscreen(isFullscreen.value)
+  // 增加这两行打印
+  console.log(`[FullScreen] 状态变更: ${previousState ? '全屏' : '窗口模式'} -> ${isFullscreen.value ? '全屏' : '窗口模式'}`)
+  console.log(`[FullScreen] 当前全屏元素:`,counterStore.isFullscreen)
 }
 
 const onKeydown = (e) => {

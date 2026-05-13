@@ -28,7 +28,16 @@
       <!-- 页面标题区域（增加右侧时间） -->
       <div class="page-header">
         <h1 class="page-title">Wind Energy Analytics</h1>
-        <div class="current-time">{{ currentTime }}</div>
+        <div class="current-time" v-if="isFullscreen || isMobile">{{ currentTime }}</div>
+      </div>
+
+      <div class="image-container" v-if="isMobile">
+        <el-image
+            src="https://aegisnx.com/wp-content/uploads/2026/05/1778317798669.png"
+            fit="cover"
+            class="wind-image"
+        />
+        <div class="image-overlay"></div>
       </div>
 
       <div class="charts-container">
@@ -72,7 +81,7 @@
 
     <!-- Right Panel -->
     <div class="right-panel">
-      <div class="image-container">
+      <div class="image-container" v-if="!isMobile">
         <el-image
             src="https://aegisnx.com/wp-content/uploads/2026/05/1778317798669.png"
             fit="cover"
@@ -163,8 +172,24 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, nextTick } from 'vue'
+import {ref, onMounted, onUnmounted, nextTick, computed} from 'vue'
 import * as echarts from 'echarts'
+import { useCounterStore } from '@/stores/counter'
+import { getCurrentInstance } from 'vue'
+const getStore = () => {
+  const instance = getCurrentInstance()
+  if (!instance) {
+    throw new Error('useStore() must be called within a setup function')
+  }
+  // 尝试获取根组件上的 pinia 实例
+  const pinia = instance.appContext.config.globalProperties.$pinia
+  if (!pinia) {
+    throw new Error('Pinia instance not found. Did you forget to call app.use(pinia)?')
+  }
+  return useCounterStore(pinia) // 手动传入 pinia 实例
+}
+const counterStore = getStore()
+const isFullscreen = computed(() => counterStore.isFullscreen)
 
 // ---------- 加载状态 ----------
 const isBackgroundLoaded = ref(false)
@@ -303,7 +328,7 @@ const initCharts = () => {
     powerChart = echarts.init(powerTrendChart.value)
     powerChart.setOption({
       tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, backgroundColor: 'rgba(0,0,0,0.8)', borderColor: '#10b981', borderWidth: 1 },
-      grid: { left: '8%', right: '5%', top: 20, bottom: 10, containLabel: true },
+      grid: { left: '0%', right: '0%', top: 50, bottom: 0, containLabel: true },
       xAxis: { type: 'category', data: ['00', '04', '08', '12', '16', '20', '24'], axisLabel: { color: '#cbd5e1', fontSize: 10, fontWeight: 500 }, axisLine: { lineStyle: { color: '#334155' } }, axisTick: { show: false } },
       yAxis: { type: 'value', name: 'kW', nameTextStyle: { color: '#94a3b8', fontSize: 10 }, axisLabel: { color: '#cbd5e1' }, splitLine: { lineStyle: { color: '#1e293b', type: 'dashed' } } },
       series: [{
@@ -321,7 +346,7 @@ const initCharts = () => {
     windChart = echarts.init(windSpeedChart.value)
     windChart.setOption({
       tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, backgroundColor: 'rgba(0,0,0,0.8)' },
-      grid: { left: '8%', right: '5%', top: 25, bottom: 10, containLabel: true },
+      grid: { left: '0%', right: '0%', top: 50, bottom: 0, containLabel: true },
       xAxis: { type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], axisLabel: { color: '#cbd5e1', fontSize: 10 }, axisLine: { show: false }, axisTick: { show: false } },
       yAxis: { type: 'value', name: 'm/s', nameTextStyle: { color: '#94a3b8', fontSize: 10 }, axisLabel: { color: '#cbd5e1' }, splitLine: { lineStyle: { color: '#1e293b', type: 'dashed' } } },
       series: [{
@@ -337,7 +362,7 @@ const initCharts = () => {
     const directions = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW']
     directionChart.setOption({
       tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, backgroundColor: 'rgba(0,0,0,0.8)' },
-      grid: { left: '10%', right: '5%', top: 20, bottom: 20, containLabel: true },
+      grid: { left: '0%', right: '0%', top: 50, bottom: 0, containLabel: true },
       xAxis: { type: 'category', data: directions, axisLabel: { rotate: 45, color: '#cbd5e1', fontSize: 9, interval: 0 }, axisLine: { lineStyle: { color: '#334155' } } },
       yAxis: { type: 'value', name: 'Frequency', nameTextStyle: { color: '#94a3b8', fontSize: 10 }, axisLabel: { color: '#cbd5e1' }, splitLine: { lineStyle: { color: '#1e293b', type: 'dashed' } } },
       series: [{
@@ -352,7 +377,7 @@ const initCharts = () => {
     generationChartIns.setOption({
       tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, backgroundColor: 'rgba(0,0,0,0.8)' },
       legend: { data: ['Actual Generation'], textStyle: { color: '#cbd5e1' }, right: 10, top: 0 },
-      grid: { left: '8%', right: '5%', top: 40, bottom: 10, containLabel: true },
+      grid: { left: '0%', right: '0%', top: 50, bottom: 0, containLabel: true },
       xAxis: { type: 'category', data: ['Week 1', 'Week 2', 'Week 3', 'Week 4'], axisLabel: { color: '#cbd5e1', fontSize: 10 }, axisLine: { lineStyle: { color: '#334155' } } },
       yAxis: { type: 'value', name: 'MWh', nameTextStyle: { color: '#94a3b8', fontSize: 10 }, axisLabel: { color: '#cbd5e1' }, splitLine: { lineStyle: { color: '#1e293b', type: 'dashed' } } },
       series: [{
@@ -393,8 +418,14 @@ const handleResize = () => {
   }, 100)
 }
 
+const isMobile = ref(false)
+const checkMobile = () => {
+  isMobile.value = window.innerWidth < 768
+}
+
 // ---------- 生命周期 ----------
 onMounted(async () => {
+  checkMobile();
   await preloadBackground()
   isBackgroundLoaded.value = true
   await nextTick()

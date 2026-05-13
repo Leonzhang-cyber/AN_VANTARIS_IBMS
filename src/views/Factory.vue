@@ -6,7 +6,7 @@
       <div class="header-title">
         <div class="main-title">SMART FACTORY<br></div>
       </div>
-      <div class="datetime">{{ currentTime }}</div>
+      <div class="datetime" v-if="isFullscreen">{{ currentTime }}</div>
     </div>
 
     <!-- 主内容区 -->
@@ -167,8 +167,24 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref, onMounted, onBeforeUnmount, computed } from 'vue'
 import * as echarts from 'echarts'
+import { useCounterStore } from '@/stores/counter'
+import { getCurrentInstance } from 'vue'
+const getStore = () => {
+  const instance = getCurrentInstance()
+  if (!instance) {
+    throw new Error('useStore() must be called within a setup function')
+  }
+  // 尝试获取根组件上的 pinia 实例
+  const pinia = instance.appContext.config.globalProperties.$pinia
+  if (!pinia) {
+    throw new Error('Pinia instance not found. Did you forget to call app.use(pinia)?')
+  }
+  return useCounterStore(pinia) // 手动传入 pinia 实例
+}
+const counterStore = getStore()
+const isFullscreen = computed(() => counterStore.isFullscreen)
 
 // ==================== 实时数据定义 ====================
 const currentTime = ref('')

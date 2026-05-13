@@ -91,7 +91,7 @@
         <div class="col-center">
           <div class="title-row" v-if="!isMobile">
             <h1 class="page-title">Lighting Control</h1>
-            <span class="live-time">{{ currentTime }}</span>
+            <span class="live-time" v-if="isFullscreen">{{ currentTime }}</span>
           </div>
           <div class="card-img" v-if="!isMobile">
             <img :src="lightingImageUrl" alt="Lighting 3D View" />
@@ -237,9 +237,25 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount, nextTick, watch } from 'vue'
+import { ref, onMounted, onBeforeUnmount, nextTick, watch,computed } from 'vue'
 import { useRoute } from 'vue-router'
 import * as echarts from 'echarts'
+import { useCounterStore } from '@/stores/counter'
+import { getCurrentInstance } from 'vue'
+const getStore = () => {
+  const instance = getCurrentInstance()
+  if (!instance) {
+    throw new Error('useStore() must be called within a setup function')
+  }
+  // 尝试获取根组件上的 pinia 实例
+  const pinia = instance.appContext.config.globalProperties.$pinia
+  if (!pinia) {
+    throw new Error('Pinia instance not found. Did you forget to call app.use(pinia)?')
+  }
+  return useCounterStore(pinia) // 手动传入 pinia 实例
+}
+const counterStore = getStore()
+const isFullscreen = computed(() => counterStore.isFullscreen)
 
 const route = useRoute()
 
@@ -474,7 +490,7 @@ const getIlluminanceOption = () => {
 
   return {
     backgroundColor: 'transparent',
-    grid: { left: '3%', right: '4%', bottom: '0%', top: '20%', containLabel: true },
+    grid: { left: '0%', right: '0%', bottom: 0, top: 25, containLabel: true },
     tooltip: {
       trigger: 'axis',
       backgroundColor: 'rgba(15,25,45,0.9)',
@@ -547,8 +563,8 @@ const getPowerOption = () => {
       textStyle: { color: '#e2e8f0' },
       valueFormatter: (value) => value + ' kW'
     },
-    legend: { textStyle: { color: '#94a3b8', fontSize: 9 }, top: 0 },
-    grid: { left: '3%', right: '4%', bottom: '0%', top: '20%', containLabel: true },
+    legend: { textStyle: { color: '#94a3b8', fontSize: 8 }, top: 0 },
+    grid: { left: '0%', right: '0%', bottom: 0, top: 45, containLabel: true },
     xAxis: {
       type: 'category',
       data: powerTimeLabels.value,

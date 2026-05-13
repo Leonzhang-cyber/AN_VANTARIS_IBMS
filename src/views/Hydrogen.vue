@@ -27,7 +27,16 @@
     <div class="left-panel">
       <div class="page-header">
         <h1 class="page-title">Hydrogen Energy</h1>
-        <div class="current-time">{{ currentTime }}</div>
+        <div class="current-time" v-if="isMobile || isFullscreen">{{ currentTime }}</div>
+      </div>
+
+      <div class="image-container" v-if="isMobile">
+        <el-image
+            src="https://aegisnx.com/wp-content/uploads/2026/05/1778480950258.png"
+            fit="cover"
+            class="wind-image"
+        />
+        <div class="image-overlay"></div>
       </div>
 
       <div class="charts-container">
@@ -121,7 +130,7 @@
 
     <!-- Right Panel -->
     <div class="right-panel">
-      <div class="image-container">
+      <div class="image-container" v-if="!isMobile">
         <el-image
             src="https://aegisnx.com/wp-content/uploads/2026/05/1778480950258.png"
             fit="cover"
@@ -206,8 +215,25 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, nextTick } from 'vue'
+import {ref, onMounted, onUnmounted, nextTick, computed} from 'vue'
 import * as echarts from 'echarts'
+
+import { useCounterStore } from '@/stores/counter'
+import { getCurrentInstance } from 'vue'
+const getStore = () => {
+  const instance = getCurrentInstance()
+  if (!instance) {
+    throw new Error('useStore() must be called within a setup function')
+  }
+  // 尝试获取根组件上的 pinia 实例
+  const pinia = instance.appContext.config.globalProperties.$pinia
+  if (!pinia) {
+    throw new Error('Pinia instance not found. Did you forget to call app.use(pinia)?')
+  }
+  return useCounterStore(pinia) // 手动传入 pinia 实例
+}
+const counterStore = getStore()
+const isFullscreen = computed(() => counterStore.isFullscreen)
 
 // ---------- 加载状态 ----------
 const isBackgroundLoaded = ref(false)
@@ -348,7 +374,7 @@ const initCharts = () => {
     productionEChart = echarts.init(productionChart.value)
     productionEChart.setOption({
       tooltip: { trigger: 'axis', valueFormatter: (value) => value + ' kg' },
-      grid: { left: '8%', right: '5%', top: 20, bottom: 10, containLabel: true },
+      grid: { left: '0%', right: '0%', top: 40, bottom: 0, containLabel: true },
       xAxis: { type: 'category', data: ['0', '4', '8', '12', '16', '20', '24'], axisLabel: { color: '#cbd5e1' }, axisLine: { lineStyle: { color: '#334155' } } },
       yAxis: { type: 'value', name: 'kg', nameTextStyle: { color: '#94a3b8' }, axisLabel: { color: '#cbd5e1' }, splitLine: { lineStyle: { color: '#1e293b', type: 'dashed' } } },
       series: [{
@@ -365,7 +391,7 @@ const initCharts = () => {
     applicationEChart = echarts.init(applicationChart.value)
     applicationEChart.setOption({
       tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-      grid: { left: '20%', right: '5%', top: 20, bottom: 10, containLabel: true },
+      grid: { left: '0%', right: '5%', top: 20, bottom: 0, containLabel: true },
       xAxis: { type: 'value', name: 'Hydrogen (kg)', nameTextStyle: { color: '#94a3b8' }, axisLabel: { color: '#cbd5e1' }, splitLine: { lineStyle: { color: '#1e293b', type: 'dashed' } } },
       yAxis: { type: 'category', data: ['Industrial', 'Transport', 'Power Gen', 'Export'], axisLabel: { color: '#cbd5e1' }, axisLine: { show: false }, axisTick: { show: false } },
       series: [{
@@ -382,7 +408,7 @@ const initCharts = () => {
     costEChart.setOption({
       tooltip: { trigger: 'axis' },
       legend: { data: ['H₂ Cost ($/kg)', 'Electricity Price (¢/kWh)'], textStyle: { color: '#cbd5e1' }, right: 10, top: 0 },
-      grid: { left: '8%', right: '8%', top: 40, bottom: 10, containLabel: true },
+      grid: { left: '0%', right: '0%', top: 60, bottom: 0, containLabel: true },
       xAxis: { type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], axisLabel: { color: '#cbd5e1' }, axisLine: { lineStyle: { color: '#334155' } } },
       yAxis: [
         { type: 'value', name: '$ / kg', nameTextStyle: { color: '#94a3b8' }, axisLabel: { color: '#cbd5e1' }, splitLine: { lineStyle: { color: '#1e293b', type: 'dashed' } } },
@@ -421,9 +447,13 @@ const handleResize = () => {
     costEChart?.resize()
   }, 100)
 }
-
+const isMobile = ref(false)
+const checkMobile = () => {
+  isMobile.value = window.innerWidth < 768
+}
 // ---------- 生命周期 ----------
 onMounted(async () => {
+  checkMobile();
   await preloadBackground()
   isBackgroundLoaded.value = true
   await nextTick()
