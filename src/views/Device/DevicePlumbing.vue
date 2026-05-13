@@ -1,75 +1,75 @@
-<!-- DeviceLighting.vue -->
+<!-- DeviceHVAC.vue -->
 <template>
   <div v-if="isPageLoaded" class="hvac-page">
     <div class="main-view">
       <div class="three-columns">
-        <!-- Left Column: Key Metrics + Lighting Mode + Recent Events + System Health -->
+        <!-- Left Column: Key Metrics + Pump Status + Recent Alerts + System Health -->
         <div class="col-left">
           <div class="title-row" v-if="isMobile">
-            <h1 class="page-title">Lighting Control</h1>
+            <h1 class="page-title">Plumbing</h1>
             <span class="live-time">{{ currentTime }}</span>
           </div>
           <div class="card-img" v-if="isMobile">
-            <img :src="lightingImageUrl" alt="Lighting 3D View" />
+            <img :src="plumbingImageUrl" alt="Plumbing 3D View" />
           </div>
           <!-- Key Metrics -->
           <el-card class="card glass-card" shadow="hover">
             <div class="card-header">📈 Key Metrics</div>
             <div class="metrics-list">
               <div class="metric-row">
-                <div class="metric-icon">💡</div>
-                <div class="metric-label">Total Luminaires</div>
-                <div class="metric-value">{{ totalLuminaires }}</div>
+                <div class="metric-icon">💧</div>
+                <div class="metric-label">Water Pressure</div>
+                <div class="metric-value">{{ waterPressure }} bar</div>
               </div>
               <div class="metric-row">
-                <div class="metric-icon">✅</div>
-                <div class="metric-label">Online Rate</div>
-                <div class="metric-value">{{ onlineRate }}%</div>
+                <div class="metric-icon">🔄</div>
+                <div class="metric-label">Flow Rate</div>
+                <div class="metric-value">{{ flowRate }} m³/h</div>
               </div>
               <div class="metric-row">
-                <div class="metric-icon">⚡</div>
-                <div class="metric-label">Active Power</div>
-                <div class="metric-value">{{ activePower }} kW</div>
+                <div class="metric-icon">📊</div>
+                <div class="metric-label">Daily Consumption</div>
+                <div class="metric-value">{{ dailyConsumption }} m³</div>
               </div>
               <div class="metric-row">
-                <div class="metric-icon">🌿</div>
-                <div class="metric-label">Energy Saved Today</div>
-                <div class="metric-value">{{ energySaved }} kWh</div>
+                <div class="metric-icon">🌡️</div>
+                <div class="metric-label">Hot Water Temp</div>
+                <div class="metric-value">{{ hotWaterTemp }}°C</div>
               </div>
               <div class="metric-row">
-                <div class="metric-icon">🔆</div>
-                <div class="metric-label">Avg. Dim Level</div>
-                <div class="metric-value">{{ avgDimLevel }}%</div>
+                <div class="metric-icon">⚠️</div>
+                <div class="metric-label">Active Alarms</div>
+                <div class="metric-value">{{ activeAlarms }}</div>
               </div>
             </div>
           </el-card>
 
-          <!-- Lighting Mode Distribution -->
+          <!-- Pump Operation Status -->
           <el-card class="card glass-card" shadow="hover">
-            <div class="card-header">🔄 Lighting Mode</div>
+            <div class="card-header">🔄 Pump Status</div>
             <div class="mode-list">
-              <div class="mode-row" v-for="item in lightingModes" :key="item.name">
+              <div class="mode-row" v-for="item in pumpStatus" :key="item.name">
                 <div class="mode-name">{{ item.name }}</div>
                 <div class="mode-bar-bg">
                   <div class="mode-bar-fill" :style="{ width: item.loadPercent + '%', background: item.color }"></div>
                 </div>
                 <div class="mode-value">{{ item.loadPercent }}%</div>
-                <div class="mode-power">{{ item.power }}kW</div>
+                <div class="mode-power">{{ item.status }}</div>
               </div>
             </div>
           </el-card>
 
-          <!-- Recent Events -->
+          <!-- Recent Alarms -->
           <el-card class="card glass-card" shadow="hover">
-            <div class="card-header">📋 Recent Events</div>
+            <div class="card-header">🚨 Recent Alarms</div>
             <div class="alert-list">
-              <div class="alert-item" v-for="event in recentEvents" :key="event.id">
+              <div class="alert-item" v-for="alarm in recentAlarms" :key="alarm.id">
                 <div class="alert-header">
-                  <span class="alert-tag" :class="event.severity">{{ event.severity }}</span>
-                  <span class="alert-device">{{ event.zone }}</span>
+                  <span class="alert-tag" :class="alarm.severity">{{ alarm.severity }}</span>
+                  <span class="alert-device">{{ alarm.location }}</span>
                 </div>
-                <div class="alert-msg">{{ event.description }}</div>
-                <div class="alert-time">{{ event.timestamp }}</div>
+                <div class="alert-msg">{{ alarm.description }}</div>
+                <div class="alert-time">{{ alarm.timestamp }}</div>
               </div>
             </div>
           </el-card>
@@ -90,114 +90,114 @@
         <!-- Center Column: Image + Charts -->
         <div class="col-center">
           <div class="title-row" v-if="!isMobile">
-            <h1 class="page-title">Lighting Control</h1>
+            <h1 class="page-title">Plumbing</h1>
             <span class="live-time" v-if="isFullscreen">{{ currentTime }}</span>
           </div>
           <div class="card-img" v-if="!isMobile">
-            <img :src="lightingImageUrl" alt="Lighting 3D View" />
+            <img :src="plumbingImageUrl" alt="Plumbing 3D View" />
           </div>
           <div class="cart-view">
-            <!-- Zone Illuminance Chart -->
+            <!-- Water Pressure Trend -->
             <el-card class="card glass-card chart-card" shadow="hover">
-              <div class="card-header">📊 Zone Illuminance (Lux)</div>
-              <div ref="illuminanceChartRef" class="chart-box"></div>
+              <div class="card-header">📊 Water Pressure Trend (Hourly)</div>
+              <div ref="pressureChartRef" class="chart-box"></div>
             </el-card>
-            <!-- Real-time Power Consumption -->
+            <!-- Flow Rate Monitor -->
             <el-card class="card glass-card chart-card" shadow="hover">
-              <div class="card-header">⚡ Power Consumption Trend (Last 10 min)</div>
-              <div ref="powerChartRef" class="chart-box"></div>
+              <div class="card-header">💧 Flow Rate Monitor (Last 10 min)</div>
+              <div ref="flowChartRef" class="chart-box"></div>
             </el-card>
           </div>
         </div>
 
-        <!-- Right Column: KPIs + Environmental + Dimming Status + Tips -->
+        <!-- Right Column: KPIs + Tank Levels + Valve Status + Tips -->
         <div class="col-right">
-          <!-- Lighting KPIs -->
+          <!-- Plumbing KPIs -->
           <el-card class="card glass-card" shadow="hover">
-            <div class="card-header">📊 Lighting KPIs</div>
+            <div class="card-header">📊 Plumbing KPIs</div>
             <div class="kpi-row">
-              <span class="kpi-row-left">Daylight Harvesting</span>
-              <strong>{{ daylightHarvesting }}%</strong>
-              <span class="trend up">Active</span>
+              <span>Water Pressure</span>
+              <strong>{{ waterPressure }} bar</strong>
+              <span class="trend stable">Target > 4.5</span>
             </div>
             <div class="kpi-row">
-              <span class="kpi-row-left">Occupancy Savings</span>
-              <strong>{{ occupancySavings }}%</strong>
-              <span class="trend up">↑3.2%</span>
+              <span>Leak Detection</span>
+              <strong>{{ leakStatus }}</strong>
+              <span class="trend up">Normal</span>
             </div>
             <div class="kpi-row">
-              <span class="kpi-row-left">Scheduled Zones</span>
-              <strong>{{ scheduledZones }}</strong>
-              <span class="trend stable">On Time</span>
+              <span>Pump Efficiency</span>
+              <strong>{{ pumpEfficiency }}%</strong>
+              <span class="trend up">Target > 80%</span>
             </div>
             <div class="kpi-row">
-              <span class="kpi-row-left">System Efficiency</span>
-              <strong>{{ systemEfficiency }}%</strong>
-              <span class="trend up">Target > 85%</span>
+              <span>System Uptime</span>
+              <strong>{{ systemUptime }}%</strong>
+              <span class="trend up">99.9% SLA</span>
             </div>
           </el-card>
 
-          <!-- Zone Light Level Gauges -->
+          <!-- Tank Level Gauges -->
           <el-card class="card glass-card" shadow="hover">
-            <div class="card-header">🌞 Zone Light Levels</div>
+            <div class="card-header">🪣 Tank Levels</div>
             <div class="gauges-grid">
               <div class="gauge-item">
-                <el-progress type="dashboard" :percentage="officeLuxPercent" :color="luxColor" :width="90" :stroke-width="4">
+                <el-progress type="dashboard" :percentage="freshWaterLevel" :color="tankColor" :width="90" :stroke-width="4">
                   <template #default>
-                    <span class="percentage-label">{{ officeLux }} lux</span>
+                    <span class="percentage-label">{{ freshWaterPercent }}%</span>
                   </template>
                 </el-progress>
-                <div class="gauge-label">Office Area</div>
+                <div class="gauge-label">Fresh Water</div>
               </div>
               <div class="gauge-item">
-                <el-progress type="dashboard" :percentage="lobbyLuxPercent" :color="luxColor" :width="90" :stroke-width="4">
+                <el-progress type="dashboard" :percentage="hotWaterLevel" :color="tankColorHot" :width="90" :stroke-width="4">
                   <template #default>
-                    <span class="percentage-label">{{ lobbyLux }} lux</span>
+                    <span class="percentage-label">{{ hotWaterPercent }}%</span>
                   </template>
                 </el-progress>
-                <div class="gauge-label">Main Lobby</div>
+                <div class="gauge-label">Hot Water</div>
               </div>
               <div class="gauge-item">
-                <el-progress type="dashboard" :percentage="parkingLuxPercent" :color="luxColorLow" :width="90" :stroke-width="4">
+                <el-progress type="dashboard" :percentage="greyWaterLevel" :color="tankColorLow" :width="90" :stroke-width="4">
                   <template #default>
-                    <span class="percentage-label">{{ parkingLux }} lux</span>
+                    <span class="percentage-label">{{ greyWaterPercent }}%</span>
                   </template>
                 </el-progress>
-                <div class="gauge-label">Parking</div>
+                <div class="gauge-label">Grey Water</div>
               </div>
               <div class="gauge-item">
-                <el-progress type="dashboard" :percentage="corridorLuxPercent" :color="luxColorLow" :width="90" :stroke-width="4">
+                <el-progress type="dashboard" :percentage="fireReserveLevel" :color="fireTankColor" :width="90" :stroke-width="4">
                   <template #default>
-                    <span class="percentage-label">{{ corridorLux }} lux</span>
+                    <span class="percentage-label">{{ fireReservePercent }}%</span>
                   </template>
                 </el-progress>
-                <div class="gauge-label">Corridor</div>
+                <div class="gauge-label">Fire Reserve</div>
               </div>
             </div>
           </el-card>
 
-          <!-- Dimming Zone Status -->
+          <!-- Valve Status -->
           <el-card class="card glass-card" shadow="hover">
-            <div class="card-header">🎯 Dimming Zone Status</div>
+            <div class="card-header">🎯 Valve Status</div>
             <div class="setpoint-list">
-              <div class="setpoint-row" v-for="item in dimmingZones" :key="item.label">
+              <div class="setpoint-row" v-for="item in valveStatus" :key="item.label">
                 <div class="sp-label">{{ item.label }}</div>
                 <div class="sp-values">
-                  <span class="sp-set">Target: {{ item.target }}%</span>
-                  <span class="sp-actual">Actual: {{ item.actual }}%</span>
+                  <span class="sp-set">Position: {{ item.position }}%</span>
+                  <span class="sp-actual">Flow: {{ item.flow }} m³/h</span>
                 </div>
-                <div class="sp-deviation" :class="item.status">
-                  {{ item.deviation }}
+                <div class="sp-deviation" :class="item.alarmClass">
+                  {{ item.status }}
                 </div>
               </div>
             </div>
           </el-card>
 
-          <!-- Energy Saving Tips -->
+          <!-- Plumbing Tips -->
           <el-card class="card glass-card" shadow="hover">
-            <div class="card-header">💡 Energy Saving Tips</div>
+            <div class="card-header">💡 Water Saving Tips</div>
             <div class="tips-list">
-              <div class="tip-item" v-for="(tip, idx) in lightingTips" :key="idx">
+              <div class="tip-item" v-for="(tip, idx) in plumbingTips" :key="idx">
                 <div class="tip-icon">{{ tip.icon }}</div>
                 <div class="tip-content">
                   <div class="tip-title">{{ tip.title }}</div>
@@ -229,7 +229,7 @@
         <div class="loading-progress">
           <div class="progress-bar" :style="{ width: loadingProgress + '%' }"></div>
         </div>
-        <div class="loading-tip">Initializing Lighting Control System</div>
+        <div class="loading-tip">Initializing Plumbing System</div>
         <div class="loading-subtip">{{ loadingMessage }}</div>
       </div>
     </div>
@@ -237,10 +237,10 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount, nextTick, watch,computed } from 'vue'
+import { ref, onMounted, onBeforeUnmount, nextTick, watch, computed  } from 'vue'
 import { useRoute } from 'vue-router'
 import * as echarts from 'echarts'
-import { useCounterStore } from '@/stores/counter'
+import { useCounterStore } from '@/stores/counter.js'
 import { getCurrentInstance } from 'vue'
 const getStore = () => {
   const instance = getCurrentInstance()
@@ -263,33 +263,33 @@ const route = useRoute()
 const isPageLoaded = ref(false)
 const loadingProgress = ref(0)
 const loadingMessage = ref('Preparing assets...')
-const lightingImageUrl = ref('')
+const plumbingImageUrl = ref('')
 
 // Loading messages sequence
 const loadingMessages = [
   'Preparing assets...',
   'Loading background...',
-  'Loading lighting model...',
+  'Loading plumbing model...',
   'Initializing modules...',
-  'Connecting to DALI buses...',
+  'Connecting to sensors...',
   'Starting dashboard...',
   'Almost ready...'
 ]
 
 // ==================== Preload Assets ====================
-const preloadLightingImage = () => {
+const preloadPlumbingImage = () => {
   return new Promise((resolve) => {
     const img = new Image()
-    const imageUrl = 'https://aegisnx.com/wp-content/uploads/2026/05/1778229518177.png'
+    const imageUrl = 'https://aegisnx.com/wp-content/uploads/2026/05/1778554341809.png'
 
     img.onload = () => {
-      lightingImageUrl.value = imageUrl
+      plumbingImageUrl.value = imageUrl
       resolve()
     }
 
     img.onerror = () => {
-      console.warn('Lighting image load failed, using fallback')
-      lightingImageUrl.value = imageUrl
+      console.warn('Plumbing image load failed, using fallback')
+      plumbingImageUrl.value = imageUrl
       resolve()
     }
 
@@ -327,7 +327,7 @@ const preloadAssets = async () => {
     }
   }, 100)
 
-  await preloadLightingImage()
+  await preloadPlumbingImage()
 
   clearInterval(messageInterval)
   clearInterval(progressInterval)
@@ -360,133 +360,162 @@ const updateTime = () => {
 
 let clockTimer = null
 
-// ==================== Core Lighting Data ====================
+// ==================== Core Plumbing Data ====================
 // Key metrics
-const totalLuminaires = ref(1248)
-const onlineRate = ref(97.8)
-const activePower = ref(86.5)
-const energySaved = ref(342)
-const avgDimLevel = ref(68)
+const waterPressure = ref(5.2)
+const flowRate = ref(42.8)
+const dailyConsumption = ref(185)
+const hotWaterTemp = ref(62)
+const activeAlarms = ref(2)
 
-// Lighting KPIs
-const daylightHarvesting = ref(42)
-const occupancySavings = ref(28)
-const scheduledZones = ref(18)
-const systemEfficiency = ref(89.5)
+// Plumbing KPIs
+const leakStatus = ref('No Leak')
+const pumpEfficiency = ref(87.5)
+const systemUptime = ref(99.95)
 
-// Zone light levels
-const officeLux = ref(520)
-const lobbyLux = ref(380)
-const parkingLux = ref(120)
-const corridorLux = ref(180)
+// Tank levels
+const freshWaterPercent = ref(78)
+const hotWaterPercent = ref(65)
+const greyWaterPercent = ref(32)
+const fireReservePercent = ref(95)
 
-const officeLuxPercent = ref(65)
-const lobbyLuxPercent = ref(48)
-const parkingLuxPercent = ref(15)
-const corridorLuxPercent = ref(23)
+const freshWaterLevel = ref(78)
+const hotWaterLevel = ref(65)
+const greyWaterLevel = ref(32)
+const fireReserveLevel = ref(95)
 
-// Gauge colors
-const luxColor = [
-  { color: '#10b981', percentage: 40 },
+// Tank colors
+const tankColor = [
+  { color: '#10b981', percentage: 30 },
   { color: '#60a5fa', percentage: 70 },
   { color: '#facc15', percentage: 100 }
 ]
-const luxColorLow = [
-  { color: '#10b981', percentage: 20 },
-  { color: '#60a5fa', percentage: 40 },
-  { color: '#facc15', percentage: 100 }
+const tankColorHot = [
+  { color: '#f97316', percentage: 30 },
+  { color: '#ef4444', percentage: 70 },
+  { color: '#dc2626', percentage: 100 }
+]
+const tankColorLow = [
+  { color: '#94a3b8', percentage: 50 },
+  { color: '#64748b', percentage: 100 }
+]
+const fireTankColor = [
+  { color: '#10b981', percentage: 80 },
+  { color: '#ef4444', percentage: 100 }
 ]
 
-// Lighting modes
-const lightingModes = ref([
-  { name: 'Daylighting', loadPercent: 42, power: 36.3, color: '#facc15' },
-  { name: 'Scheduled', loadPercent: 35, power: 30.3, color: '#3b82f6' },
-  { name: 'Occupancy', loadPercent: 18, power: 15.6, color: '#34d399' },
-  { name: 'Manual', loadPercent: 5, power: 4.3, color: '#f97316' }
+// Pump status
+const pumpStatus = ref([
+  { name: 'Booster #1', loadPercent: 72, status: 'Running', color: '#3b82f6' },
+  { name: 'Booster #2', loadPercent: 0, status: 'Standby', color: '#60a5fa' },
+  { name: 'Hot Water Circ', loadPercent: 58, status: 'Running', color: '#f97316' },
+  { name: 'Sump Pump', loadPercent: 15, status: 'Idle', color: '#34d399' }
 ])
 
-// Recent events
-const recentEvents = ref([
-  { id: 1, severity: 'Info', zone: 'Office 3F East', description: 'Schedule activated - Evening dimming to 30%', timestamp: '2 min ago' },
-  { id: 2, severity: 'Warning', zone: 'Parking B1', description: 'Motion sensor #P12 no response for 15 min', timestamp: '8 min ago' },
-  { id: 3, severity: 'Info', zone: 'Main Lobby', description: 'Daylight harvesting increased to 65%', timestamp: '15 min ago' }
+// Recent alarms
+const recentAlarms = ref([
+  { id: 1, severity: 'Warning', location: 'Booster Pump #1', description: 'Pressure fluctuation detected (±0.3 bar)', timestamp: '4 min ago' },
+  { id: 2, severity: 'Critical', location: 'Hot Water Tank', description: 'Temperature dropped below 55°C threshold', timestamp: '12 min ago' },
+  { id: 3, severity: 'Warning', location: 'Grey Water Tank', description: 'Level approaching overflow (78% capacity)', timestamp: '25 min ago' }
 ])
 
 // System health
 const systemHealth = ref([
-  { subsystem: 'DALI Bus A', status: 'normal', statusText: 'Online' },
-  { subsystem: 'DALI Bus B', status: 'normal', statusText: 'Online' },
-  { subsystem: 'Motion Sensors', status: 'warning', statusText: '1 Fault' },
-  { subsystem: 'Light Sensors', status: 'normal', statusText: 'Normal' },
-  { subsystem: 'Control Panel', status: 'normal', statusText: 'Online' }
+  { subsystem: 'Booster Pumps', status: 'warning', statusText: 'Check #1' },
+  { subsystem: 'Hot Water System', status: 'normal', statusText: 'Normal' },
+  { subsystem: 'Cold Water Supply', status: 'normal', statusText: 'Normal' },
+  { subsystem: 'Drainage System', status: 'normal', statusText: 'Normal' },
+  { subsystem: 'Leak Detection', status: 'normal', statusText: 'Active' }
 ])
 
-// Dimming zones
-const dimmingZones = ref([
-  { label: 'Office 3F East', target: '60', actual: '58', deviation: '-2% ✓', status: 'normal' },
-  { label: 'Office 3F West', target: '70', actual: '72', deviation: '+2% ⚠', status: 'low' },
-  { label: 'Main Lobby', target: '45', actual: '42', deviation: '-3% ✓', status: 'normal' },
-  { label: 'Parking B1', target: '30', actual: '28', deviation: '-2% ✓', status: 'low' }
+// Valve status
+const valveStatus = ref([
+  { label: 'Main Supply Valve', position: '85', flow: '36.5', status: 'Open', alarmClass: 'normal' },
+  { label: 'Hot Water Supply', position: '70', flow: '12.8', status: 'Open', alarmClass: 'normal' },
+  { label: 'Grey Water Inlet', position: '45', flow: '5.2', status: 'Open', alarmClass: 'low' },
+  { label: 'Bypass Valve', position: '0', flow: '0.0', status: 'Closed', alarmClass: 'normal' }
 ])
 
-// Lighting tips
-const lightingTips = ref([
-  { icon: '🌞', title: 'Optimize Daylight Zones', desc: 'Raise blinds in office 3F East to increase daylight harvesting', saving: '~12% energy savings' },
+// Plumbing tips
+const plumbingTips = ref([
+  { icon: '💧', title: 'Pressure Optimization', desc: 'Reduce booster pump setpoint from 5.5 to 5.0 bar during off-peak', saving: '~10% pump energy' },
 ])
 
 // ==================== Charts ====================
-const illuminanceChartRef = ref(null)
-const powerChartRef = ref(null)
-let illuminanceChart = null
-let powerChart = null
+const pressureChartRef = ref(null)
+const flowChartRef = ref(null)
+let pressureChart = null
+let flowChart = null
 
-// 12-hour illuminance history
-const illuminanceHistoryLength = 12
-const illuminanceHistory = ref([])
-const illuminanceHourLabels = ref([])
+// 12-hour pressure history
+const pressureHistoryLength = 12
+const pressureHistory = ref([])
+const pressureHourLabels = ref([])
 
-const initIlluminanceHistory = () => {
-  illuminanceHistory.value = []
-  illuminanceHourLabels.value = []
+const initPressureHistory = () => {
+  pressureHistory.value = []
+  pressureHourLabels.value = []
   const now = new Date()
-  for (let i = illuminanceHistoryLength - 1; i >= 0; i--) {
+  for (let i = pressureHistoryLength - 1; i >= 0; i--) {
     const t = new Date(now - i * 3600000)
-    illuminanceHourLabels.value.push(t.toTimeString().slice(0, 5))
-    illuminanceHistory.value.push({
-      'Office Area': 450 + Math.random() * 100,
-      'Main Lobby': 320 + Math.random() * 80,
-      'Parking': 100 + Math.random() * 40,
-      'Corridor': 150 + Math.random() * 50
+    pressureHourLabels.value.push(t.toTimeString().slice(0, 5))
+    pressureHistory.value.push({
+      'Supply Main': 5.0 + Math.random() * 0.6,
+      'Hot Water': 4.5 + Math.random() * 0.8,
+      'Grey Water': 2.0 + Math.random() * 0.5,
+      'Fire Line': 6.5 + Math.random() * 0.3
     })
   }
 }
 
-// 10-minute power history
-const powerHistoryLength = 10
-const powerHistory = ref([])
-const powerTimeLabels = ref([])
+// 10-minute flow history
+const flowHistoryLength = 10
+const flowHistory = ref([])
+const flowTimeLabels = ref([])
 
-const initPowerHistory = () => {
+const initFlowHistory = () => {
   const now = new Date()
-  powerHistory.value = []
-  powerTimeLabels.value = []
-  for (let i = powerHistoryLength - 1; i >= 0; i--) {
+  flowHistory.value = []
+  flowTimeLabels.value = []
+  for (let i = flowHistoryLength - 1; i >= 0; i--) {
     const t = new Date(now - i * 60000)
-    powerTimeLabels.value.push(t.toTimeString().slice(0, 5))
-    powerHistory.value.push({
-      'Office Lighting': 35 + Math.random() * 10,
-      'Lobby Lighting': 18 + Math.random() * 5,
-      'Parking Lighting': 12 + Math.random() * 4,
-      'Corridor Lighting': 8 + Math.random() * 3,
-      'Emergency Lighting': 5 + Math.random() * 1
+    flowTimeLabels.value.push(t.toTimeString().slice(0, 5))
+    flowHistory.value.push({
+      'Cold Water': 30 + Math.random() * 10,
+      'Hot Water': 10 + Math.random() * 5,
+      'Grey Water': 4 + Math.random() * 3,
+      'Irrigation': 2 + Math.random() * 2
     })
   }
 }
 
-// Illuminance bar chart option
-const getIlluminanceOption = () => {
-  const categories = ['Office Area', 'Main Lobby', 'Parking', 'Corridor']
-  const colors = ['#60a5fa', '#facc15', '#34d399', '#f97316']
+// Water pressure line chart option (hourly)
+const getPressureOption = () => {
+  const categories = ['Supply Main', 'Hot Water', 'Grey Water', 'Fire Line']
+  const colors = ['#3b82f6', '#f97316', '#94a3b8', '#ef4444']
+
+  const seriesData = categories.map((name, i) => ({
+    name,
+    type: 'line',
+    data: pressureHistory.value.map(d => d[name]),
+    smooth: true,
+    symbol: 'circle',
+    symbolSize: 5,
+    lineStyle: { width: 2, color: colors[i] },
+    itemStyle: { color: colors[i] },
+    areaStyle: {
+      color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+        { offset: 0, color: colors[i] + '30' },
+        { offset: 1, color: colors[i] + '00' }
+      ])
+    },
+    markLine: i === 0 ? {
+      silent: true,
+      lineStyle: { color: '#94a3b8', type: 'dashed', width: 1 },
+      label: { show: true, position: 'end', color: '#94a3b8', fontSize: 8, formatter: 'Min 4.5' },
+      data: [{ yAxis: 4.5 }]
+    } : undefined
+  }))
 
   return {
     backgroundColor: 'transparent',
@@ -496,50 +525,37 @@ const getIlluminanceOption = () => {
       backgroundColor: 'rgba(15,25,45,0.9)',
       borderColor: '#3b82f6',
       textStyle: { color: '#e2e8f0' },
-      valueFormatter: (value) => value + ' lux'
+      valueFormatter: (value) => value + ' bar'
     },
     legend: { textStyle: { color: '#94a3b8', fontSize: 9 }, top: 0 },
     xAxis: {
       type: 'category',
-      data: illuminanceHourLabels.value,
+      data: pressureHourLabels.value,
       axisLabel: { color: '#94a3b8', fontSize: 9, rotate: 15 },
       axisLine: { lineStyle: { color: '#334155' } }
     },
     yAxis: {
       type: 'value',
-      name: 'Lux',
+      name: 'bar',
       nameTextStyle: { color: '#64748b', fontSize: 10 },
       axisLabel: { color: '#94a3b8', fontSize: 10 },
-      splitLine: { lineStyle: { color: '#1e293b', type: 'dashed' } }
+      splitLine: { lineStyle: { color: '#1e293b', type: 'dashed' } },
+      min: 1,
+      max: 7.5
     },
-    series: categories.map((name, i) => ({
-      name,
-      type: 'line',
-      data: illuminanceHistory.value.map(d => d[name]),
-      smooth: true,
-      symbol: 'circle',
-      symbolSize: 5,
-      lineStyle: { width: 2, color: colors[i] },
-      itemStyle: { color: colors[i] },
-      areaStyle: {
-        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-          { offset: 0, color: colors[i] + '30' },
-          { offset: 1, color: colors[i] + '00' }
-        ])
-      }
-    }))
+    series: seriesData
   }
 }
 
-// Power consumption area chart option
-const getPowerOption = () => {
-  const categories = ['Office Lighting', 'Lobby Lighting', 'Parking Lighting', 'Corridor Lighting', 'Emergency Lighting']
-  const colors = ['#3b82f6', '#facc15', '#34d399', '#f97316', '#94a3b8']
+// Flow rate monitor option
+const getFlowOption = () => {
+  const categories = ['Cold Water', 'Hot Water', 'Grey Water', 'Irrigation']
+  const colors = ['#3b82f6', '#f97316', '#94a3b8', '#34d399']
 
   const seriesData = categories.map((name, i) => ({
     name,
     type: 'line',
-    data: powerHistory.value.map(d => d[name]),
+    data: flowHistory.value.map(d => d[name]),
     smooth: true,
     symbol: 'circle',
     symbolSize: 4,
@@ -550,8 +566,7 @@ const getPowerOption = () => {
         { offset: 0, color: colors[i] + '40' },
         { offset: 1, color: colors[i] + '00' }
       ])
-    },
-    stack: 'total'
+    }
   }))
 
   return {
@@ -561,19 +576,19 @@ const getPowerOption = () => {
       backgroundColor: 'rgba(15,25,45,0.9)',
       borderColor: '#3b82f6',
       textStyle: { color: '#e2e8f0' },
-      valueFormatter: (value) => value + ' kW'
+      valueFormatter: (value) => value + ' m³/h'
     },
-    legend: { textStyle: { color: '#94a3b8', fontSize: 8 }, top: 0 },
-    grid: { left: '0%', right: '0%', bottom: 0, top: 45, containLabel: true },
+    legend: { textStyle: { color: '#94a3b8', fontSize: 9 }, top: 0 },
+    grid: { left: '0%', right: '0%', bottom: 0, top: 25, containLabel: true },
     xAxis: {
       type: 'category',
-      data: powerTimeLabels.value,
+      data: flowTimeLabels.value,
       axisLabel: { color: '#94a3b8', fontSize: 9 },
       axisLine: { lineStyle: { color: '#334155' } }
     },
     yAxis: {
       type: 'value',
-      name: 'kW',
+      name: 'm³/h',
       nameTextStyle: { color: '#64748b', fontSize: 10 },
       axisLabel: { color: '#94a3b8', fontSize: 10 },
       splitLine: { lineStyle: { color: '#1e293b', type: 'dashed' } }
@@ -584,13 +599,13 @@ const getPowerOption = () => {
 
 // ==================== Chart Lifecycle ====================
 const disposeCharts = () => {
-  if (illuminanceChart) {
-    illuminanceChart.dispose()
-    illuminanceChart = null
+  if (pressureChart) {
+    pressureChart.dispose()
+    pressureChart = null
   }
-  if (powerChart) {
-    powerChart.dispose()
-    powerChart = null
+  if (flowChart) {
+    flowChart.dispose()
+    flowChart = null
   }
 }
 
@@ -600,21 +615,21 @@ const initCharts = async () => {
   for (let attempt = 0; attempt < 5; attempt++) {
     await new Promise(resolve => setTimeout(resolve, 100))
 
-    const illDom = illuminanceChartRef.value
-    const pwrDom = powerChartRef.value
+    const presDom = pressureChartRef.value
+    const flowDom = flowChartRef.value
 
-    if (!illDom || !pwrDom) continue
-    if (illDom.clientWidth === 0 || illDom.clientHeight === 0) continue
-    if (pwrDom.clientWidth === 0 || pwrDom.clientHeight === 0) continue
+    if (!presDom || !flowDom) continue
+    if (presDom.clientWidth === 0 || presDom.clientHeight === 0) continue
+    if (flowDom.clientWidth === 0 || flowDom.clientHeight === 0) continue
 
     disposeCharts()
 
     try {
-      illuminanceChart = echarts.init(illDom)
-      powerChart = echarts.init(pwrDom)
+      pressureChart = echarts.init(presDom)
+      flowChart = echarts.init(flowDom)
 
-      illuminanceChart.setOption(getIlluminanceOption())
-      powerChart.setOption(getPowerOption())
+      pressureChart.setOption(getPressureOption())
+      flowChart.setOption(getFlowOption())
 
       return
     } catch (e) {
@@ -624,8 +639,8 @@ const initCharts = async () => {
 }
 
 const handleResize = () => {
-  illuminanceChart?.resize()
-  powerChart?.resize()
+  pressureChart?.resize()
+  flowChart?.resize()
 }
 
 let fullscreenTimer = null
@@ -639,101 +654,97 @@ let updateTimer = null
 
 const updateAllData = () => {
   // KPIs
-  totalLuminaires.value = 1245 + Math.floor(Math.random() * 8)
-  onlineRate.value = parseFloat((97.2 + Math.random() * 1.8).toFixed(1))
-  activePower.value = parseFloat((82 + Math.random() * 12).toFixed(1))
-  energySaved.value = energySaved.value + Math.floor(Math.random() * 3)
-  avgDimLevel.value = Math.floor(65 + Math.random() * 10)
-  daylightHarvesting.value = Math.floor(38 + Math.random() * 10)
-  occupancySavings.value = Math.floor(25 + Math.random() * 8)
-  systemEfficiency.value = parseFloat((87 + Math.random() * 5).toFixed(1))
+  waterPressure.value = parseFloat((4.8 + Math.random() * 0.8).toFixed(1))
+  flowRate.value = parseFloat((38 + Math.random() * 12).toFixed(1))
+  dailyConsumption.value = dailyConsumption.value + Math.floor(Math.random() * 1)
+  hotWaterTemp.value = Math.floor(60 + Math.random() * 5)
+  activeAlarms.value = Math.floor(Math.random() * 3)
+  pumpEfficiency.value = parseFloat((85 + Math.random() * 6).toFixed(1))
+  leakStatus.value = Math.random() > 0.95 ? 'Suspected' : 'No Leak'
 
-  // Zone lux levels
-  officeLux.value = Math.floor(480 + Math.random() * 80)
-  lobbyLux.value = Math.floor(350 + Math.random() * 60)
-  parkingLux.value = Math.floor(100 + Math.random() * 40)
-  corridorLux.value = Math.floor(160 + Math.random() * 40)
+  // Tank levels
+  freshWaterPercent.value = Math.floor(75 + Math.random() * 8)
+  hotWaterPercent.value = Math.floor(62 + Math.random() * 8)
+  greyWaterPercent.value = Math.floor(28 + Math.random() * 10)
+  fireReservePercent.value = Math.floor(93 + Math.random() * 4)
 
-  officeLuxPercent.value = Math.round((officeLux.value / 800) * 100)
-  lobbyLuxPercent.value = Math.round((lobbyLux.value / 800) * 100)
-  parkingLuxPercent.value = Math.round((parkingLux.value / 800) * 100)
-  corridorLuxPercent.value = Math.round((corridorLux.value / 800) * 100)
+  freshWaterLevel.value = freshWaterPercent.value
+  hotWaterLevel.value = hotWaterPercent.value
+  greyWaterLevel.value = greyWaterPercent.value
+  fireReserveLevel.value = fireReservePercent.value
 
-  // Lighting modes
-  lightingModes.value = [
-    { name: 'Daylighting', loadPercent: 38 + Math.floor(Math.random() * 10), power: parseFloat((32 + Math.random() * 8).toFixed(1)), color: '#facc15' },
-    { name: 'Scheduled', loadPercent: 30 + Math.floor(Math.random() * 10), power: parseFloat((28 + Math.random() * 6).toFixed(1)), color: '#3b82f6' },
-    { name: 'Occupancy', loadPercent: 15 + Math.floor(Math.random() * 8), power: parseFloat((13 + Math.random() * 5).toFixed(1)), color: '#34d399' },
-    { name: 'Manual', loadPercent: 3 + Math.floor(Math.random() * 5), power: parseFloat((3 + Math.random() * 3).toFixed(1)), color: '#f97316' }
+  // Pump status
+  pumpStatus.value = [
+    { name: 'Booster #1', loadPercent: 65 + Math.floor(Math.random() * 15), status: 'Running', color: '#3b82f6' },
+    { name: 'Booster #2', loadPercent: Math.random() > 0.8 ? 30 + Math.floor(Math.random() * 20) : 0, status: Math.random() > 0.8 ? 'Running' : 'Standby', color: '#60a5fa' },
+    { name: 'Hot Water Circ', loadPercent: 50 + Math.floor(Math.random() * 15), status: 'Running', color: '#f97316' },
+    { name: 'Sump Pump', loadPercent: 10 + Math.floor(Math.random() * 15), status: Math.random() > 0.3 ? 'Idle' : 'Running', color: '#34d399' }
   ]
-  const sum = lightingModes.value.reduce((a, b) => a + b.loadPercent, 0)
-  lightingModes.value[0].loadPercent += (100 - sum)
 
   // System health
   systemHealth.value = [
-    { subsystem: 'DALI Bus A', status: 'normal', statusText: 'Online' },
-    { subsystem: 'DALI Bus B', status: Math.random() > 0.96 ? 'warning' : 'normal', statusText: Math.random() > 0.96 ? 'Lag' : 'Online' },
-    { subsystem: 'Motion Sensors', status: Math.random() > 0.88 ? 'warning' : 'normal', statusText: Math.random() > 0.88 ? '1 Fault' : 'Normal' },
-    { subsystem: 'Light Sensors', status: 'normal', statusText: 'Normal' },
-    { subsystem: 'Control Panel', status: 'normal', statusText: 'Online' }
+    { subsystem: 'Booster Pumps', status: Math.random() > 0.9 ? 'warning' : 'normal', statusText: Math.random() > 0.9 ? 'Check #1' : 'Normal' },
+    { subsystem: 'Hot Water System', status: 'normal', statusText: 'Normal' },
+    { subsystem: 'Cold Water Supply', status: 'normal', statusText: 'Normal' },
+    { subsystem: 'Drainage System', status: Math.random() > 0.95 ? 'warning' : 'normal', statusText: Math.random() > 0.95 ? 'Clog Risk' : 'Normal' },
+    { subsystem: 'Leak Detection', status: 'normal', statusText: 'Active' }
   ]
 
-  // Dimming zones
-  dimmingZones.value = [
-    { label: 'Office 3F East', target: '60', actual: String(56 + Math.floor(Math.random() * 8)), deviation: (Math.random() > 0.5 ? '-' : '+') + Math.floor(Math.random() * 3) + '% ✓', status: 'normal' },
-    { label: 'Office 3F West', target: '70', actual: String(68 + Math.floor(Math.random() * 8)), deviation: (Math.random() > 0.5 ? '-' : '+') + Math.floor(Math.random() * 3) + '% ⚠', status: 'low' },
-    { label: 'Main Lobby', target: '45', actual: String(40 + Math.floor(Math.random() * 8)), deviation: (Math.random() > 0.5 ? '-' : '+') + Math.floor(Math.random() * 3) + '% ✓', status: 'normal' },
-    { label: 'Parking B1', target: '30', actual: String(26 + Math.floor(Math.random() * 8)), deviation: (Math.random() > 0.5 ? '-' : '+') + Math.floor(Math.random() * 3) + '% ✓', status: 'low' }
+  // Valve status
+  valveStatus.value = [
+    { label: 'Main Supply Valve', position: String(80 + Math.floor(Math.random() * 15)), flow: (34 + Math.random() * 6).toFixed(1), status: 'Open', alarmClass: 'normal' },
+    { label: 'Hot Water Supply', position: String(65 + Math.floor(Math.random() * 15)), flow: (11 + Math.random() * 4).toFixed(1), status: 'Open', alarmClass: 'normal' },
+    { label: 'Grey Water Inlet', position: String(40 + Math.floor(Math.random() * 15)), flow: (4 + Math.random() * 3).toFixed(1), status: 'Open', alarmClass: 'low' },
+    { label: 'Bypass Valve', position: '0', flow: '0.0', status: 'Closed', alarmClass: 'normal' }
   ]
 
   // Tips
   const tipPool = [
-    { icon: '🌞', title: 'Optimize Daylight Zones', desc: 'Raise blinds in office 3F East to increase daylight harvesting', saving: '~12% energy savings' },
-    { icon: '⏰', title: 'Adjust Evening Schedule', desc: 'Extend dimming schedule to include weekend after-hours', saving: '~8% energy savings' },
-    { icon: '🔌', title: 'Motion Sensor Calibration', desc: 'Reduce timeout from 15min to 10min in low-traffic corridors', saving: '~6% energy savings' },
-    { icon: '📊', title: 'LED Retrofit Analysis', desc: 'Parking B2 still has 45 fluorescent fixtures, consider LED upgrade', saving: '~15% energy savings' }
+    { icon: '💧', title: 'Pressure Optimization', desc: 'Reduce booster pump setpoint from 5.5 to 5.0 bar during off-peak', saving: '~10% pump energy' },
+    { icon: '🌡️', title: 'Hot Water Schedule', desc: 'Lower hot water temp to 55°C during weekend low occupancy', saving: '~15% heating energy' },
+    { icon: '🔍', title: 'Leak Inspection', desc: 'Minor flow anomaly detected in 3F restroom, schedule inspection', saving: 'Prevent water waste' },
+    { icon: '🌧️', title: 'Rainwater Harvesting', desc: 'Connect rainwater tank to irrigation system for additional savings', saving: '~20% outdoor water' }
   ]
-  lightingTips.value = tipPool.sort(() => Math.random() - 0.5).slice(0, 1)
+  plumbingTips.value = tipPool.sort(() => Math.random() - 0.5).slice(0, 1)
 
   // Update charts
-  if (illuminanceChart && powerChart) {
-    // Update illuminance history
+  if (pressureChart && flowChart) {
+    // Update pressure history
     const now = new Date()
-    illuminanceHourLabels.value.push(now.toTimeString().slice(0, 5))
-    if (illuminanceHourLabels.value.length > illuminanceHistoryLength) illuminanceHourLabels.value.shift()
+    pressureHourLabels.value.push(now.toTimeString().slice(0, 5))
+    if (pressureHourLabels.value.length > pressureHistoryLength) pressureHourLabels.value.shift()
 
-    illuminanceHistory.value.push({
-      'Office Area': 450 + Math.random() * 100,
-      'Main Lobby': 320 + Math.random() * 80,
-      'Parking': 100 + Math.random() * 40,
-      'Corridor': 150 + Math.random() * 50
+    pressureHistory.value.push({
+      'Supply Main': 5.0 + Math.random() * 0.6,
+      'Hot Water': 4.5 + Math.random() * 0.8,
+      'Grey Water': 2.0 + Math.random() * 0.5,
+      'Fire Line': 6.5 + Math.random() * 0.3
     })
-    if (illuminanceHistory.value.length > illuminanceHistoryLength) illuminanceHistory.value.shift()
+    if (pressureHistory.value.length > pressureHistoryLength) pressureHistory.value.shift()
 
-    illuminanceChart.setOption({
-      xAxis: { data: illuminanceHourLabels.value },
-      series: ['Office Area', 'Main Lobby', 'Parking', 'Corridor'].map(name => ({
-        data: illuminanceHistory.value.map(d => d[name])
+    pressureChart.setOption({
+      xAxis: { data: pressureHourLabels.value },
+      series: ['Supply Main', 'Hot Water', 'Grey Water', 'Fire Line'].map(name => ({
+        data: pressureHistory.value.map(d => d[name])
       }))
     })
 
-    // Update power history
-    powerTimeLabels.value.push(now.toTimeString().slice(0, 5))
-    if (powerTimeLabels.value.length > powerHistoryLength) powerTimeLabels.value.shift()
+    // Update flow history
+    flowTimeLabels.value.push(now.toTimeString().slice(0, 5))
+    if (flowTimeLabels.value.length > flowHistoryLength) flowTimeLabels.value.shift()
 
-    powerHistory.value.push({
-      'Office Lighting': 35 + Math.random() * 10,
-      'Lobby Lighting': 18 + Math.random() * 5,
-      'Parking Lighting': 12 + Math.random() * 4,
-      'Corridor Lighting': 8 + Math.random() * 3,
-      'Emergency Lighting': 5 + Math.random() * 1
+    flowHistory.value.push({
+      'Cold Water': 30 + Math.random() * 10,
+      'Hot Water': 10 + Math.random() * 5,
+      'Grey Water': 4 + Math.random() * 3,
+      'Irrigation': 2 + Math.random() * 2
     })
-    if (powerHistory.value.length > powerHistoryLength) powerHistory.value.shift()
+    if (flowHistory.value.length > flowHistoryLength) flowHistory.value.shift()
 
-    powerChart.setOption({
-      xAxis: { data: powerTimeLabels.value },
-      series: ['Office Lighting', 'Lobby Lighting', 'Parking Lighting', 'Corridor Lighting', 'Emergency Lighting'].map(name => ({
-        data: powerHistory.value.map(d => d[name])
+    flowChart.setOption({
+      xAxis: { data: flowTimeLabels.value },
+      series: ['Cold Water', 'Hot Water', 'Grey Water', 'Irrigation'].map(name => ({
+        data: flowHistory.value.map(d => d[name])
       }))
     })
   }
@@ -751,11 +762,11 @@ onMounted(async () => {
 
   await preloadAssets()
 
-  initIlluminanceHistory()
-  initPowerHistory()
+  initPressureHistory()
+  initFlowHistory()
   await initCharts()
 
-  if (illuminanceChart && powerChart) {
+  if (pressureChart && flowChart) {
     updateTimer = setInterval(updateAllData, 5000)
   }
 
@@ -763,10 +774,10 @@ onMounted(async () => {
   document.addEventListener('fullscreenchange', onFullscreenChange)
 
   routeWatch = watch(() => route.fullPath, async () => {
-    initIlluminanceHistory()
-    initPowerHistory()
+    initPressureHistory()
+    initFlowHistory()
     await initCharts()
-    if (illuminanceChart && powerChart && !updateTimer) {
+    if (pressureChart && flowChart && !updateTimer) {
       updateTimer = setInterval(updateAllData, 5000)
     }
   })
@@ -968,7 +979,7 @@ onBeforeUnmount(() => {
   }
 }
 
-/* Main Lighting Page Styles */
+/* Main Plumbing Page Styles */
 .hvac-page {
   height: 100%;
   background: radial-gradient(circle at 10% 20%, #0a1620, #03060c);
@@ -1177,7 +1188,7 @@ onBeforeUnmount(() => {
   background: rgba(239, 68, 68, 0.05);
   border-radius: 8px;
   padding: 4px 10px;
-  border-left: 3px solid #60a5fa;
+  border-left: 3px solid #ef4444;
 }
 .alert-header {
   display: flex;
@@ -1191,10 +1202,6 @@ onBeforeUnmount(() => {
   text-transform: uppercase;
   padding: 2px 6px;
   border-radius: 4px;
-}
-.alert-tag.Info {
-  background: rgba(96, 165, 250, 0.2);
-  color: #60a5fa;
 }
 .alert-tag.Warning {
   background: rgba(251, 191, 36, 0.2);
@@ -1411,7 +1418,6 @@ onBeforeUnmount(() => {
   color: #facc15;
   font-weight: bold;
 }
-
 /* ========== 移动端适配 (屏幕宽度 ≤ 768px) ========== */
 @media (max-width: 768px) {
   .hvac-page {

@@ -10,37 +10,37 @@ const routes = [
       {
         path: 'Factory',
         name: 'Factory',
-        component: () => import('../views/Factory.vue'),
+        component: () => import('../views/Dashboard/Factory.vue'),
         meta: { title: 'Factory Dashboard' }
       },
       {
         path: 'Building',
         name: 'Building',
-        component: () => import('../views/Building.vue'),
+        component: () => import('../views/Dashboard/Building.vue'),
         meta: { title: 'Building Dashboard' }
       },
       {
         path: 'Airport',
         name: 'Airport',
-        component: () => import('../views/Airport.vue'),
+        component: () => import('../views/Dashboard/Airport.vue'),
         meta: { title: 'Airport Dashboard' }
       },
       {
         path: 'Shopping',
         name: 'Shopping',
-        component: () => import('../views/Shopping.vue'),
+        component: () => import('../views/Dashboard/Shopping.vue'),
         meta: { title: 'Shopping Dashboard' }
       },
       {
         path: 'Hospital',
         name: 'Hospital',
-        component: () => import('../views/Hospital.vue'),
+        component: () => import('../views/Dashboard/Hospital.vue'),
         meta: { title: 'Hospital Dashboard' }
       },
       {
         path: 'Hotel',
         name: 'Hotel',
-        component: () => import('../views/Hotel.vue'),
+        component: () => import('../views/Dashboard/Hotel.vue'),
         meta: { title: 'Hotel Dashboard' }
       },
       {
@@ -51,31 +51,31 @@ const routes = [
           {
             path: 'hvac',
             name: 'DeviceHVAC',
-            component: () => import('../views/DeviceHVAC.vue'),
+            component: () => import('../views/Device/DeviceHVAC.vue'),
             meta: { title: 'HVAC Management' }
           },
           {
             path: 'sas',
             name: 'DeviceSAS',
-            component: () => import('../views/DeviceSAS.vue'),
+            component: () => import('../views/Device/DeviceSAS.vue'),
             meta: { title: 'Security Access System' }
           },
           {
             path: 'fas',
             name: 'DeviceFAS',
-            component: () => import('../views/DeviceFAS.vue'),
+            component: () => import('../views/Device/DeviceFAS.vue'),
             meta: { title: 'Fire Alarm System' }
           },
           {
             path: 'lighting',
             name: 'DeviceLighting',
-            component: () => import('../views/DeviceLighting.vue'),
+            component: () => import('../views/Device/DeviceLighting.vue'),
             meta: { title: 'Lighting Control System' }
           },
           {
             path: 'plumbing',
             name: 'DevicePlumbing',
-            component: () => import('../views/DevicePlumbing.vue'),
+            component: () => import('../views/Device/DevicePlumbing.vue'),
             meta: { title: 'Plumbing System' }
           }
         ]
@@ -88,43 +88,43 @@ const routes = [
           {
             path: 'wind',
             name: 'Wind',
-            component: () => import('../views/Wind.vue'),
+            component: () => import('../views/Energy/Wind.vue'),
             meta: { title: 'Wind Energy Analysis' }
           },
           {
             path: 'solar',
             name: 'Solar',
-            component: () => import('../views/Solar.vue'),
+            component: () => import('../views/Energy/Solar.vue'),
             meta: { title: 'Solar Energy Analysis' }
           },
           {
             path: 'electricity',
             name: 'Electricity',
-            component: () => import('../views/Electricity.vue'),
+            component: () => import('../views/Energy/Electricity.vue'),
             meta: { title: 'Power Grid & Consumption' }
           },
           {
             path: 'waste',
             name: 'WasteToEnergy',
-            component: () => import('../views/WasteToEnergy.vue'),
+            component: () => import('../views/Energy/WasteToEnergy.vue'),
             meta: { title: 'Waste-to-Energy Recovery' }
           },
           {
             path: 'hydrogen',
             name: 'Hydrogen',
-            component: () => import('../views/Hydrogen.vue'),
+            component: () => import('../views/Energy/Hydrogen.vue'),
             meta: { title: 'Hydrogen Energy Production' }
           },
           {
             path: 'storage',
             name: 'Storage',
-            component: () => import('../views/EnergyStorage.vue'),
+            component: () => import('../views/Energy/EnergyStorage.vue'),
             meta: { title: 'Energy Storage Systems' }
           },
           {
             path: 'geothermal',
             name: 'Geothermal',
-            component: () => import('../views/Geothermal.vue'),
+            component: () => import('../views/Energy/Geothermal.vue'),
             meta: { title: 'Geothermal Energy' }
           }
         ]
@@ -132,25 +132,25 @@ const routes = [
       {
         path: 'alarm',
         name: 'Alarm',
-        component: () => import('../views/Alarm.vue'),
+        component: () => import('../views/Alarm/Alarm.vue'),
         meta: { title: 'Alarm Center' }
       },
       {
         path: 'maintain',
         name: 'Maintain',
-        component: () => import('../views/Maintain.vue'),
+        component: () => import('../views/Maintain/Maintain.vue'),
         meta: { title: 'Maintenance Management' }
       },
       {
         path: 'report',
         name: 'Report',
-        component: () => import('../views/Report.vue'),
+        component: () => import('../views/Report/Report.vue'),
         meta: { title: 'Data Reports' }
       },
       {
         path: 'settings',
         name: 'Settings',
-        component: () => import('../views/Settings.vue'),
+        component: () => import('../views/Setting/Settings.vue'),
         meta: { title: 'System Settings' }
       },
       // 404 处理 - 必须放在最后

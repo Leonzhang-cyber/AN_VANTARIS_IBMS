@@ -174,7 +174,7 @@
 <script setup>
 import {ref, onMounted, onUnmounted, nextTick, computed} from 'vue'
 import * as echarts from 'echarts'
-import { useCounterStore } from '@/stores/counter'
+import { useCounterStore } from '@/stores/counter.js'
 import { getCurrentInstance } from 'vue'
 const getStore = () => {
   const instance = getCurrentInstance()

@@ -1,84 +1,83 @@
-<!-- DeviceHVAC.vue -->
 <template>
   <div v-if="isPageLoaded" class="hvac-page">
     <div class="main-view">
       <div class="three-columns">
-        <!-- Left Column: Key Metrics + Pump Status + Recent Alerts + System Health -->
+        <!-- Left Column: Key Metrics + System Status + Recent Events + Device Health -->
         <div class="col-left">
           <div class="title-row" v-if="isMobile">
-            <h1 class="page-title">Plumbing</h1>
+            <h1 class="page-title">SAS</h1>
             <span class="live-time">{{ currentTime }}</span>
           </div>
           <div class="card-img" v-if="isMobile">
-            <img :src="plumbingImageUrl" alt="Plumbing 3D View" />
+            <img :src="securityImageUrl" alt="Security 3D View" />
           </div>
           <!-- Key Metrics -->
           <el-card class="card glass-card" shadow="hover">
             <div class="card-header">📈 Key Metrics</div>
             <div class="metrics-list">
               <div class="metric-row">
-                <div class="metric-icon">💧</div>
-                <div class="metric-label">Water Pressure</div>
-                <div class="metric-value">{{ waterPressure }} bar</div>
+                <div class="metric-icon">📷</div>
+                <div class="metric-label">Total Cameras</div>
+                <div class="metric-value">{{ totalCameras }}</div>
               </div>
               <div class="metric-row">
-                <div class="metric-icon">🔄</div>
-                <div class="metric-label">Flow Rate</div>
-                <div class="metric-value">{{ flowRate }} m³/h</div>
+                <div class="metric-icon">✅</div>
+                <div class="metric-label">Online Rate</div>
+                <div class="metric-value">{{ onlineRate }}%</div>
+              </div>
+              <div class="metric-row">
+                <div class="metric-icon">🚪</div>
+                <div class="metric-label">Access Points</div>
+                <div class="metric-value">{{ accessPoints }}</div>
               </div>
               <div class="metric-row">
                 <div class="metric-icon">📊</div>
-                <div class="metric-label">Daily Consumption</div>
-                <div class="metric-value">{{ dailyConsumption }} m³</div>
+                <div class="metric-label">Today Events</div>
+                <div class="metric-value">{{ todayEvents }}</div>
               </div>
               <div class="metric-row">
-                <div class="metric-icon">🌡️</div>
-                <div class="metric-label">Hot Water Temp</div>
-                <div class="metric-value">{{ hotWaterTemp }}°C</div>
-              </div>
-              <div class="metric-row">
-                <div class="metric-icon">⚠️</div>
+                <div class="metric-icon">🚨</div>
                 <div class="metric-label">Active Alarms</div>
                 <div class="metric-value">{{ activeAlarms }}</div>
               </div>
             </div>
           </el-card>
 
-          <!-- Pump Operation Status -->
+          <!-- Access Control Status -->
           <el-card class="card glass-card" shadow="hover">
-            <div class="card-header">🔄 Pump Status</div>
+            <div class="card-header">🔄 Access Control</div>
             <div class="mode-list">
-              <div class="mode-row" v-for="item in pumpStatus" :key="item.name">
+              <div class="mode-row" v-for="item in accessControl" :key="item.name">
                 <div class="mode-name">{{ item.name }}</div>
                 <div class="mode-bar-bg">
-                  <div class="mode-bar-fill" :style="{ width: item.loadPercent + '%', background: item.color }"></div>
+                  <div class="mode-bar-fill" :style="{ width: item.throughput + '%', background: item.color }"></div>
                 </div>
-                <div class="mode-value">{{ item.loadPercent }}%</div>
+                <div class="mode-value">{{ item.throughput }}%</div>
                 <div class="mode-power">{{ item.status }}</div>
               </div>
             </div>
           </el-card>
 
-          <!-- Recent Alarms -->
+          <!-- Recent Security Events -->
           <el-card class="card glass-card" shadow="hover">
-            <div class="card-header">🚨 Recent Alarms</div>
+            <div class="card-header">🚨 Recent Events</div>
             <div class="alert-list">
-              <div class="alert-item" v-for="alarm in recentAlarms" :key="alarm.id">
+              <div class="alert-item" v-for="event in recentEvents" :key="event.id">
                 <div class="alert-header">
-                  <span class="alert-tag" :class="alarm.severity">{{ alarm.severity }}</span>
-                  <span class="alert-device">{{ alarm.location }}</span>
+                  <span class="alert-tag" :class="event.severity">{{ event.severity }}</span>
+                  <span class="alert-device">{{ event.location }}</span>
                 </div>
-                <div class="alert-msg">{{ alarm.description }}</div>
-                <div class="alert-time">{{ alarm.timestamp }}</div>
+                <div class="alert-msg">{{ event.description }}</div>
+                <div class="alert-time">{{ event.timestamp }}</div>
               </div>
             </div>
           </el-card>
 
-          <!-- System Health Status -->
+          <!-- Device Health Status -->
           <el-card class="card glass-card" shadow="hover">
-            <div class="card-header">💚 System Health</div>
+            <div class="card-header">💚 Device Health</div>
             <div class="health-list">
-              <div class="health-row" v-for="item in systemHealth" :key="item.subsystem">
+              <div class="health-row" v-for="item in deviceHealth" :key="item.subsystem">
                 <div class="health-dot" :class="item.status"></div>
                 <div class="health-name">{{ item.subsystem }}</div>
                 <div class="health-status" :class="item.status">{{ item.statusText }}</div>
@@ -90,119 +89,119 @@
         <!-- Center Column: Image + Charts -->
         <div class="col-center">
           <div class="title-row" v-if="!isMobile">
-            <h1 class="page-title">Plumbing</h1>
+            <h1 class="page-title">SAS</h1>
             <span class="live-time" v-if="isFullscreen">{{ currentTime }}</span>
           </div>
           <div class="card-img" v-if="!isMobile">
-            <img :src="plumbingImageUrl" alt="Plumbing 3D View" />
+            <img :src="securityImageUrl" alt="Security 3D View" />
           </div>
           <div class="cart-view">
-            <!-- Water Pressure Trend -->
+            <!-- Event Trend Analysis -->
             <el-card class="card glass-card chart-card" shadow="hover">
-              <div class="card-header">📊 Water Pressure Trend (Hourly)</div>
-              <div ref="pressureChartRef" class="chart-box"></div>
+              <div class="card-header">📊 Event Trend (Hourly)</div>
+              <div ref="eventTrendChartRef" class="chart-box"></div>
             </el-card>
-            <!-- Flow Rate Monitor -->
+            <!-- Access Throughput Monitor -->
             <el-card class="card glass-card chart-card" shadow="hover">
-              <div class="card-header">💧 Flow Rate Monitor (Last 10 min)</div>
-              <div ref="flowChartRef" class="chart-box"></div>
+              <div class="card-header">⚡ Access Throughput (Last 10 min)</div>
+              <div ref="throughputChartRef" class="chart-box"></div>
             </el-card>
           </div>
         </div>
 
-        <!-- Right Column: KPIs + Tank Levels + Valve Status + Tips -->
+        <!-- Right Column: KPIs + Zone Status + Door Status + Tips -->
         <div class="col-right">
-          <!-- Plumbing KPIs -->
+          <!-- Security KPIs -->
           <el-card class="card glass-card" shadow="hover">
-            <div class="card-header">📊 Plumbing KPIs</div>
+            <div class="card-header">📊 Security KPIs</div>
             <div class="kpi-row">
-              <span>Water Pressure</span>
-              <strong>{{ waterPressure }} bar</strong>
-              <span class="trend stable">Target > 4.5</span>
+              <span class="kpi-row-left">Avg. Response Time</span>
+              <strong>{{ avgResponseTime }}s</strong>
+              <span class="trend stable">Target < 30s</span>
             </div>
             <div class="kpi-row">
-              <span>Leak Detection</span>
-              <strong>{{ leakStatus }}</strong>
-              <span class="trend up">Normal</span>
+              <span class="kpi-row-left">Unauthorized Attempts</span>
+              <strong>{{ unauthorizedAttempts }}</strong>
+              <span class="trend up">{{ unauthorizedTrend }}</span>
             </div>
             <div class="kpi-row">
-              <span>Pump Efficiency</span>
-              <strong>{{ pumpEfficiency }}%</strong>
-              <span class="trend up">Target > 80%</span>
+              <span class="kpi-row-left">Visitor Count</span>
+              <strong>{{ visitorCount }}</strong>
+              <span class="trend stable">Today</span>
             </div>
             <div class="kpi-row">
-              <span>System Uptime</span>
+              <span class="kpi-row-left">System Uptime</span>
               <strong>{{ systemUptime }}%</strong>
               <span class="trend up">99.9% SLA</span>
             </div>
           </el-card>
 
-          <!-- Tank Level Gauges -->
+          <!-- Zone Status Gauges -->
           <el-card class="card glass-card" shadow="hover">
-            <div class="card-header">🪣 Tank Levels</div>
+            <div class="card-header">🌡️ Zone Security Status</div>
             <div class="gauges-grid">
               <div class="gauge-item">
-                <el-progress type="dashboard" :percentage="freshWaterLevel" :color="tankColor" :width="90" :stroke-width="4">
+                <el-progress type="dashboard" :percentage="lobbyOccupancy" :color="zoneColor" :width="90" :stroke-width="4">
                   <template #default>
-                    <span class="percentage-label">{{ freshWaterPercent }}%</span>
+                    <span class="percentage-label">{{ lobbyCount }} ppl</span>
                   </template>
                 </el-progress>
-                <div class="gauge-label">Fresh Water</div>
+                <div class="gauge-label">Main Lobby</div>
               </div>
               <div class="gauge-item">
-                <el-progress type="dashboard" :percentage="hotWaterLevel" :color="tankColorHot" :width="90" :stroke-width="4">
+                <el-progress type="dashboard" :percentage="parkingOccupancy" :color="zoneColor" :width="90" :stroke-width="4">
                   <template #default>
-                    <span class="percentage-label">{{ hotWaterPercent }}%</span>
+                    <span class="percentage-label">{{ parkingCount }} cars</span>
                   </template>
                 </el-progress>
-                <div class="gauge-label">Hot Water</div>
+                <div class="gauge-label">Parking</div>
               </div>
               <div class="gauge-item">
-                <el-progress type="dashboard" :percentage="greyWaterLevel" :color="tankColorLow" :width="90" :stroke-width="4">
+                <el-progress type="dashboard" :percentage="serverRoomSecurity" :color="serverRoomColor" :width="90" :stroke-width="4">
                   <template #default>
-                    <span class="percentage-label">{{ greyWaterPercent }}%</span>
+                    <span class="percentage-label">{{ serverRoomStatus }}</span>
                   </template>
                 </el-progress>
-                <div class="gauge-label">Grey Water</div>
+                <div class="gauge-label">Server Room</div>
               </div>
               <div class="gauge-item">
-                <el-progress type="dashboard" :percentage="fireReserveLevel" :color="fireTankColor" :width="90" :stroke-width="4">
+                <el-progress type="dashboard" :percentage="perimeterIntegrity" :color="perimeterColor" :width="90" :stroke-width="4">
                   <template #default>
-                    <span class="percentage-label">{{ fireReservePercent }}%</span>
+                    <span class="percentage-label">{{ perimeterStatus }}</span>
                   </template>
                 </el-progress>
-                <div class="gauge-label">Fire Reserve</div>
+                <div class="gauge-label">Perimeter</div>
               </div>
             </div>
           </el-card>
 
-          <!-- Valve Status -->
+          <!-- Door Status -->
           <el-card class="card glass-card" shadow="hover">
-            <div class="card-header">🎯 Valve Status</div>
+            <div class="card-header">🎯 Door Status</div>
             <div class="setpoint-list">
-              <div class="setpoint-row" v-for="item in valveStatus" :key="item.label">
+              <div class="setpoint-row" v-for="item in doorStatus" :key="item.label">
                 <div class="sp-label">{{ item.label }}</div>
                 <div class="sp-values">
-                  <span class="sp-set">Position: {{ item.position }}%</span>
-                  <span class="sp-actual">Flow: {{ item.flow }} m³/h</span>
+                  <span class="sp-set">Status: {{ item.status }}</span>
+                  <span class="sp-actual">Last: {{ item.lastAccess }}</span>
                 </div>
                 <div class="sp-deviation" :class="item.alarmClass">
-                  {{ item.status }}
+                  {{ item.alarm }}
                 </div>
               </div>
             </div>
           </el-card>
 
-          <!-- Plumbing Tips -->
+          <!-- Security Tips -->
           <el-card class="card glass-card" shadow="hover">
-            <div class="card-header">💡 Water Saving Tips</div>
+            <div class="card-header">💡 Security Advisory</div>
             <div class="tips-list">
-              <div class="tip-item" v-for="(tip, idx) in plumbingTips" :key="idx">
+              <div class="tip-item" v-for="(tip, idx) in securityTips" :key="idx">
                 <div class="tip-icon">{{ tip.icon }}</div>
                 <div class="tip-content">
                   <div class="tip-title">{{ tip.title }}</div>
                   <div class="tip-desc">{{ tip.desc }}</div>
-                  <div class="tip-saving">{{ tip.saving }}</div>
+                  <div class="tip-saving">{{ tip.priority }}</div>
                 </div>
               </div>
             </div>
@@ -229,7 +228,7 @@
         <div class="loading-progress">
           <div class="progress-bar" :style="{ width: loadingProgress + '%' }"></div>
         </div>
-        <div class="loading-tip">Initializing Plumbing System</div>
+        <div class="loading-tip">Initializing Security Access System</div>
         <div class="loading-subtip">{{ loadingMessage }}</div>
       </div>
     </div>
@@ -237,10 +236,13 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount, nextTick, watch, computed  } from 'vue'
+import {ref, onMounted, onBeforeUnmount, nextTick, watch, computed} from 'vue'
 import { useRoute } from 'vue-router'
 import * as echarts from 'echarts'
-import { useCounterStore } from '@/stores/counter'
+
+
+
+import { useCounterStore } from '@/stores/counter.js'
 import { getCurrentInstance } from 'vue'
 const getStore = () => {
   const instance = getCurrentInstance()
@@ -263,33 +265,33 @@ const route = useRoute()
 const isPageLoaded = ref(false)
 const loadingProgress = ref(0)
 const loadingMessage = ref('Preparing assets...')
-const plumbingImageUrl = ref('')
+const securityImageUrl = ref('')
 
 // Loading messages sequence
 const loadingMessages = [
   'Preparing assets...',
   'Loading background...',
-  'Loading plumbing model...',
+  'Loading security model...',
   'Initializing modules...',
-  'Connecting to sensors...',
+  'Connecting to cameras...',
   'Starting dashboard...',
   'Almost ready...'
 ]
 
 // ==================== Preload Assets ====================
-const preloadPlumbingImage = () => {
+const preloadSecurityImage = () => {
   return new Promise((resolve) => {
     const img = new Image()
-    const imageUrl = 'https://aegisnx.com/wp-content/uploads/2026/05/1778554341809.png'
+    const imageUrl = 'https://aegisnx.com/wp-content/uploads/2026/05/1778228250340.png'
 
     img.onload = () => {
-      plumbingImageUrl.value = imageUrl
+      securityImageUrl.value = imageUrl
       resolve()
     }
 
     img.onerror = () => {
-      console.warn('Plumbing image load failed, using fallback')
-      plumbingImageUrl.value = imageUrl
+      console.warn('Security image load failed, using fallback')
+      securityImageUrl.value = imageUrl
       resolve()
     }
 
@@ -327,7 +329,7 @@ const preloadAssets = async () => {
     }
   }, 100)
 
-  await preloadPlumbingImage()
+  await preloadSecurityImage()
 
   clearInterval(messageInterval)
   clearInterval(progressInterval)
@@ -360,144 +362,186 @@ const updateTime = () => {
 
 let clockTimer = null
 
-// ==================== Core Plumbing Data ====================
+// ==================== Core Security Data ====================
 // Key metrics
-const waterPressure = ref(5.2)
-const flowRate = ref(42.8)
-const dailyConsumption = ref(185)
-const hotWaterTemp = ref(62)
+const totalCameras = ref(256)
+const onlineRate = ref(98.4)
+const accessPoints = ref(48)
+const todayEvents = ref(1523)
 const activeAlarms = ref(2)
 
-// Plumbing KPIs
-const leakStatus = ref('No Leak')
-const pumpEfficiency = ref(87.5)
-const systemUptime = ref(99.95)
+// Security KPIs
+const avgResponseTime = ref(12)
+const unauthorizedAttempts = ref(7)
+const unauthorizedTrend = ref('↓15% vs Yesterday')
+const visitorCount = ref(89)
+const systemUptime = ref(99.97)
 
-// Tank levels
-const freshWaterPercent = ref(78)
-const hotWaterPercent = ref(65)
-const greyWaterPercent = ref(32)
-const fireReservePercent = ref(95)
+// Zone status
+const lobbyCount = ref(45)
+const parkingCount = ref(128)
+const serverRoomStatus = ref('Locked')
+const perimeterStatus = ref('Secure')
 
-const freshWaterLevel = ref(78)
-const hotWaterLevel = ref(65)
-const greyWaterLevel = ref(32)
-const fireReserveLevel = ref(95)
+const lobbyOccupancy = ref(45)
+const parkingOccupancy = ref(64)
+const serverRoomSecurity = ref(95)
+const perimeterIntegrity = ref(98)
 
-// Tank colors
-const tankColor = [
-  { color: '#10b981', percentage: 30 },
-  { color: '#60a5fa', percentage: 70 },
-  { color: '#facc15', percentage: 100 }
+// Zone colors
+const zoneColor = [
+  { color: '#10b981', percentage: 50 },
+  { color: '#f59e0b', percentage: 80 },
+  { color: '#ef4444', percentage: 100 }
 ]
-const tankColorHot = [
-  { color: '#f97316', percentage: 30 },
-  { color: '#ef4444', percentage: 70 },
-  { color: '#dc2626', percentage: 100 }
+const serverRoomColor = [
+  { color: '#10b981', percentage: 90 },
+  { color: '#ef4444', percentage: 100 }
 ]
-const tankColorLow = [
-  { color: '#94a3b8', percentage: 50 },
-  { color: '#64748b', percentage: 100 }
-]
-const fireTankColor = [
-  { color: '#10b981', percentage: 80 },
+const perimeterColor = [
+  { color: '#10b981', percentage: 90 },
   { color: '#ef4444', percentage: 100 }
 ]
 
-// Pump status
-const pumpStatus = ref([
-  { name: 'Booster #1', loadPercent: 72, status: 'Running', color: '#3b82f6' },
-  { name: 'Booster #2', loadPercent: 0, status: 'Standby', color: '#60a5fa' },
-  { name: 'Hot Water Circ', loadPercent: 58, status: 'Running', color: '#f97316' },
-  { name: 'Sump Pump', loadPercent: 15, status: 'Idle', color: '#34d399' }
+// Access control throughput
+const accessControl = ref([
+  { name: 'Main Entrance', throughput: 85, status: 'Peak', color: '#fbbf24' },
+  { name: 'Staff Gate', throughput: 62, status: 'Normal', color: '#3b82f6' },
+  { name: 'Parking Gate', throughput: 78, status: 'Busy', color: '#60a5fa' },
+  { name: 'Delivery Bay', throughput: 35, status: 'Low', color: '#34d399' }
 ])
 
-// Recent alarms
-const recentAlarms = ref([
-  { id: 1, severity: 'Warning', location: 'Booster Pump #1', description: 'Pressure fluctuation detected (±0.3 bar)', timestamp: '4 min ago' },
-  { id: 2, severity: 'Critical', location: 'Hot Water Tank', description: 'Temperature dropped below 55°C threshold', timestamp: '12 min ago' },
-  { id: 3, severity: 'Warning', location: 'Grey Water Tank', description: 'Level approaching overflow (78% capacity)', timestamp: '25 min ago' }
+// Recent security events
+const recentEvents = ref([
+  { id: 1, severity: 'Warning', location: 'Parking Level B2', description: 'Unauthorized vehicle detected at fire lane', timestamp: '2 min ago' },
+  { id: 2, severity: 'Critical', location: 'Server Room Door', description: 'Multiple invalid badge attempts (5x)', timestamp: '8 min ago' },
+  { id: 3, severity: 'Warning', location: 'Emergency Exit 3F', description: 'Door held open > 60 seconds', timestamp: '22 min ago' }
 ])
 
-// System health
-const systemHealth = ref([
-  { subsystem: 'Booster Pumps', status: 'warning', statusText: 'Check #1' },
-  { subsystem: 'Hot Water System', status: 'normal', statusText: 'Normal' },
-  { subsystem: 'Cold Water Supply', status: 'normal', statusText: 'Normal' },
-  { subsystem: 'Drainage System', status: 'normal', statusText: 'Normal' },
-  { subsystem: 'Leak Detection', status: 'normal', statusText: 'Active' }
+// Device health
+const deviceHealth = ref([
+  { subsystem: 'CCTV Network', status: 'normal', statusText: 'Online' },
+  { subsystem: 'Access Controllers', status: 'warning', statusText: '1 Offline' },
+  { subsystem: 'Alarm System', status: 'normal', statusText: 'Armed' },
+  { subsystem: 'Intercom Panels', status: 'normal', statusText: 'Normal' },
+  { subsystem: 'Storage (NVR)', status: 'normal', statusText: '72% Free' }
 ])
 
-// Valve status
-const valveStatus = ref([
-  { label: 'Main Supply Valve', position: '85', flow: '36.5', status: 'Open', alarmClass: 'normal' },
-  { label: 'Hot Water Supply', position: '70', flow: '12.8', status: 'Open', alarmClass: 'normal' },
-  { label: 'Grey Water Inlet', position: '45', flow: '5.2', status: 'Open', alarmClass: 'low' },
-  { label: 'Bypass Valve', position: '0', flow: '0.0', status: 'Closed', alarmClass: 'normal' }
+// Door status
+const doorStatus = ref([
+  { label: 'Main Entrance', status: 'Locked', lastAccess: '08:45:22', alarm: 'Normal', alarmClass: 'normal' },
+  { label: 'Server Room', status: 'Locked', lastAccess: '07:30:15', alarm: 'Alert', alarmClass: 'high' },
+  { label: 'Fire Exit 2F', status: 'Closed', lastAccess: '--', alarm: 'Normal', alarmClass: 'normal' },
+  { label: 'Loading Dock', status: 'Open', lastAccess: '09:12:08', alarm: 'Warning', alarmClass: 'low' }
 ])
 
-// Plumbing tips
-const plumbingTips = ref([
-  { icon: '💧', title: 'Pressure Optimization', desc: 'Reduce booster pump setpoint from 5.5 to 5.0 bar during off-peak', saving: '~10% pump energy' },
+// Security tips
+const securityTips = ref([
+  { icon: '🔐', title: 'Review Badge Access', desc: '3 badges with expired clearance detected today', priority: 'High Priority' },
 ])
 
 // ==================== Charts ====================
-const pressureChartRef = ref(null)
-const flowChartRef = ref(null)
-let pressureChart = null
-let flowChart = null
+const eventTrendChartRef = ref(null)
+const throughputChartRef = ref(null)
+let eventTrendChart = null
+let throughputChart = null
 
-// 12-hour pressure history
-const pressureHistoryLength = 12
-const pressureHistory = ref([])
-const pressureHourLabels = ref([])
+// 12-hour event history
+const eventHistoryLength = 12
+const eventHistory = ref([])
+const eventHourLabels = ref([])
 
-const initPressureHistory = () => {
-  pressureHistory.value = []
-  pressureHourLabels.value = []
+const initEventHistory = () => {
+  eventHistory.value = []
+  eventHourLabels.value = []
   const now = new Date()
-  for (let i = pressureHistoryLength - 1; i >= 0; i--) {
+  for (let i = eventHistoryLength - 1; i >= 0; i--) {
     const t = new Date(now - i * 3600000)
-    pressureHourLabels.value.push(t.toTimeString().slice(0, 5))
-    pressureHistory.value.push({
-      'Supply Main': 5.0 + Math.random() * 0.6,
-      'Hot Water': 4.5 + Math.random() * 0.8,
-      'Grey Water': 2.0 + Math.random() * 0.5,
-      'Fire Line': 6.5 + Math.random() * 0.3
+    eventHourLabels.value.push(t.toTimeString().slice(0, 5))
+    eventHistory.value.push({
+      'Access Granted': 80 + Math.random() * 40,
+      'Access Denied': 3 + Math.random() * 8,
+      'Alarm Triggered': 1 + Math.random() * 3,
+      'Door Forced': Math.random() > 0.7 ? 1 : 0
     })
   }
 }
 
-// 10-minute flow history
-const flowHistoryLength = 10
-const flowHistory = ref([])
-const flowTimeLabels = ref([])
+// 10-minute throughput history
+const throughputHistoryLength = 10
+const throughputHistory = ref([])
+const throughputTimeLabels = ref([])
 
-const initFlowHistory = () => {
+const initThroughputHistory = () => {
   const now = new Date()
-  flowHistory.value = []
-  flowTimeLabels.value = []
-  for (let i = flowHistoryLength - 1; i >= 0; i--) {
+  throughputHistory.value = []
+  throughputTimeLabels.value = []
+  for (let i = throughputHistoryLength - 1; i >= 0; i--) {
     const t = new Date(now - i * 60000)
-    flowTimeLabels.value.push(t.toTimeString().slice(0, 5))
-    flowHistory.value.push({
-      'Cold Water': 30 + Math.random() * 10,
-      'Hot Water': 10 + Math.random() * 5,
-      'Grey Water': 4 + Math.random() * 3,
-      'Irrigation': 2 + Math.random() * 2
+    throughputTimeLabels.value.push(t.toTimeString().slice(0, 5))
+    throughputHistory.value.push({
+      'Main Entrance': 25 + Math.random() * 15,
+      'Staff Gate': 18 + Math.random() * 12,
+      'Parking': 12 + Math.random() * 10,
+      'Delivery': 3 + Math.random() * 5
     })
   }
 }
 
-// Water pressure line chart option (hourly)
-const getPressureOption = () => {
-  const categories = ['Supply Main', 'Hot Water', 'Grey Water', 'Fire Line']
-  const colors = ['#3b82f6', '#f97316', '#94a3b8', '#ef4444']
+// Event trend bar chart option (hourly)
+const getEventTrendOption = () => {
+  const categories = ['Access Granted', 'Access Denied', 'Alarm Triggered', 'Door Forced']
+  const colors = ['#34d399', '#fbbf24', '#f97316', '#ef4444']
+
+  return {
+    backgroundColor: 'transparent',
+    grid: { left: '0%', right: '0%', bottom: 0, top: 48, containLabel: true },
+    tooltip: {
+      trigger: 'axis',
+      backgroundColor: 'rgba(15,25,45,0.9)',
+      borderColor: '#3b82f6',
+      textStyle: { color: '#e2e8f0' }
+    },
+    legend: { textStyle: { color: '#94a3b8', fontSize: 9 }, top: 0 },
+    xAxis: {
+      type: 'category',
+      data: eventHourLabels.value,
+      axisLabel: { color: '#94a3b8', fontSize: 9, rotate: 15 },
+      axisLine: { lineStyle: { color: '#334155' } }
+    },
+    yAxis: {
+      type: 'value',
+      name: 'Events',
+      nameTextStyle: { color: '#64748b', fontSize: 10 },
+      axisLabel: { color: '#94a3b8', fontSize: 10 },
+      splitLine: { lineStyle: { color: '#1e293b', type: 'dashed' } }
+    },
+    series: categories.map((name, i) => ({
+      name,
+      type: 'bar',
+      stack: 'total',
+      data: eventHistory.value.map(d => d[name]),
+      itemStyle: {
+        color: colors[i],
+        borderRadius: i === categories.length - 1 ? [6, 6, 0, 0] : 0,
+        borderWidth: 0
+      },
+      emphasis: {
+        focus: 'series'
+      }
+    }))
+  }
+}
+
+// Access throughput line chart option
+const getThroughputOption = () => {
+  const categories = ['Main Entrance', 'Staff Gate', 'Parking', 'Delivery']
+  const colors = ['#60a5fa', '#34d399', '#fbbf24', '#f97316']
 
   const seriesData = categories.map((name, i) => ({
     name,
     type: 'line',
-    data: pressureHistory.value.map(d => d[name]),
+    data: throughputHistory.value.map(d => d[name]),
     smooth: true,
     symbol: 'circle',
     symbolSize: 5,
@@ -508,64 +552,6 @@ const getPressureOption = () => {
         { offset: 0, color: colors[i] + '30' },
         { offset: 1, color: colors[i] + '00' }
       ])
-    },
-    markLine: i === 0 ? {
-      silent: true,
-      lineStyle: { color: '#94a3b8', type: 'dashed', width: 1 },
-      label: { show: true, position: 'end', color: '#94a3b8', fontSize: 8, formatter: 'Min 4.5' },
-      data: [{ yAxis: 4.5 }]
-    } : undefined
-  }))
-
-  return {
-    backgroundColor: 'transparent',
-    grid: { left: '0%', right: '0%', bottom: 0, top: 25, containLabel: true },
-    tooltip: {
-      trigger: 'axis',
-      backgroundColor: 'rgba(15,25,45,0.9)',
-      borderColor: '#3b82f6',
-      textStyle: { color: '#e2e8f0' },
-      valueFormatter: (value) => value + ' bar'
-    },
-    legend: { textStyle: { color: '#94a3b8', fontSize: 9 }, top: 0 },
-    xAxis: {
-      type: 'category',
-      data: pressureHourLabels.value,
-      axisLabel: { color: '#94a3b8', fontSize: 9, rotate: 15 },
-      axisLine: { lineStyle: { color: '#334155' } }
-    },
-    yAxis: {
-      type: 'value',
-      name: 'bar',
-      nameTextStyle: { color: '#64748b', fontSize: 10 },
-      axisLabel: { color: '#94a3b8', fontSize: 10 },
-      splitLine: { lineStyle: { color: '#1e293b', type: 'dashed' } },
-      min: 1,
-      max: 7.5
-    },
-    series: seriesData
-  }
-}
-
-// Flow rate monitor option
-const getFlowOption = () => {
-  const categories = ['Cold Water', 'Hot Water', 'Grey Water', 'Irrigation']
-  const colors = ['#3b82f6', '#f97316', '#94a3b8', '#34d399']
-
-  const seriesData = categories.map((name, i) => ({
-    name,
-    type: 'line',
-    data: flowHistory.value.map(d => d[name]),
-    smooth: true,
-    symbol: 'circle',
-    symbolSize: 4,
-    lineStyle: { width: 2, color: colors[i] },
-    itemStyle: { color: colors[i] },
-    areaStyle: {
-      color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-        { offset: 0, color: colors[i] + '40' },
-        { offset: 1, color: colors[i] + '00' }
-      ])
     }
   }))
 
@@ -576,19 +562,19 @@ const getFlowOption = () => {
       backgroundColor: 'rgba(15,25,45,0.9)',
       borderColor: '#3b82f6',
       textStyle: { color: '#e2e8f0' },
-      valueFormatter: (value) => value + ' m³/h'
+      valueFormatter: (value) => value + ' persons'
     },
     legend: { textStyle: { color: '#94a3b8', fontSize: 9 }, top: 0 },
     grid: { left: '0%', right: '0%', bottom: 0, top: 25, containLabel: true },
     xAxis: {
       type: 'category',
-      data: flowTimeLabels.value,
+      data: throughputTimeLabels.value,
       axisLabel: { color: '#94a3b8', fontSize: 9 },
       axisLine: { lineStyle: { color: '#334155' } }
     },
     yAxis: {
       type: 'value',
-      name: 'm³/h',
+      name: 'Persons/min',
       nameTextStyle: { color: '#64748b', fontSize: 10 },
       axisLabel: { color: '#94a3b8', fontSize: 10 },
       splitLine: { lineStyle: { color: '#1e293b', type: 'dashed' } }
@@ -599,13 +585,13 @@ const getFlowOption = () => {
 
 // ==================== Chart Lifecycle ====================
 const disposeCharts = () => {
-  if (pressureChart) {
-    pressureChart.dispose()
-    pressureChart = null
+  if (eventTrendChart) {
+    eventTrendChart.dispose()
+    eventTrendChart = null
   }
-  if (flowChart) {
-    flowChart.dispose()
-    flowChart = null
+  if (throughputChart) {
+    throughputChart.dispose()
+    throughputChart = null
   }
 }
 
@@ -615,21 +601,21 @@ const initCharts = async () => {
   for (let attempt = 0; attempt < 5; attempt++) {
     await new Promise(resolve => setTimeout(resolve, 100))
 
-    const presDom = pressureChartRef.value
-    const flowDom = flowChartRef.value
+    const evtDom = eventTrendChartRef.value
+    const thrDom = throughputChartRef.value
 
-    if (!presDom || !flowDom) continue
-    if (presDom.clientWidth === 0 || presDom.clientHeight === 0) continue
-    if (flowDom.clientWidth === 0 || flowDom.clientHeight === 0) continue
+    if (!evtDom || !thrDom) continue
+    if (evtDom.clientWidth === 0 || evtDom.clientHeight === 0) continue
+    if (thrDom.clientWidth === 0 || thrDom.clientHeight === 0) continue
 
     disposeCharts()
 
     try {
-      pressureChart = echarts.init(presDom)
-      flowChart = echarts.init(flowDom)
+      eventTrendChart = echarts.init(evtDom)
+      throughputChart = echarts.init(thrDom)
 
-      pressureChart.setOption(getPressureOption())
-      flowChart.setOption(getFlowOption())
+      eventTrendChart.setOption(getEventTrendOption())
+      throughputChart.setOption(getThroughputOption())
 
       return
     } catch (e) {
@@ -639,8 +625,8 @@ const initCharts = async () => {
 }
 
 const handleResize = () => {
-  pressureChart?.resize()
-  flowChart?.resize()
+  eventTrendChart?.resize()
+  throughputChart?.resize()
 }
 
 let fullscreenTimer = null
@@ -654,97 +640,94 @@ let updateTimer = null
 
 const updateAllData = () => {
   // KPIs
-  waterPressure.value = parseFloat((4.8 + Math.random() * 0.8).toFixed(1))
-  flowRate.value = parseFloat((38 + Math.random() * 12).toFixed(1))
-  dailyConsumption.value = dailyConsumption.value + Math.floor(Math.random() * 1)
-  hotWaterTemp.value = Math.floor(60 + Math.random() * 5)
-  activeAlarms.value = Math.floor(Math.random() * 3)
-  pumpEfficiency.value = parseFloat((85 + Math.random() * 6).toFixed(1))
-  leakStatus.value = Math.random() > 0.95 ? 'Suspected' : 'No Leak'
+  totalCameras.value = 254 + Math.floor(Math.random() * 5)
+  onlineRate.value = parseFloat((97.8 + Math.random() * 1.2).toFixed(1))
+  todayEvents.value = todayEvents.value + Math.floor(Math.random() * 3)
+  activeAlarms.value = Math.floor(Math.random() * 4)
+  avgResponseTime.value = Math.floor(10 + Math.random() * 8)
+  unauthorizedAttempts.value = Math.floor(5 + Math.random() * 6)
+  visitorCount.value = visitorCount.value + Math.floor(Math.random() * 2)
 
-  // Tank levels
-  freshWaterPercent.value = Math.floor(75 + Math.random() * 8)
-  hotWaterPercent.value = Math.floor(62 + Math.random() * 8)
-  greyWaterPercent.value = Math.floor(28 + Math.random() * 10)
-  fireReservePercent.value = Math.floor(93 + Math.random() * 4)
+  // Zone counts
+  lobbyCount.value = Math.floor(35 + Math.random() * 20)
+  parkingCount.value = Math.floor(110 + Math.random() * 30)
+  lobbyOccupancy.value = Math.round((lobbyCount.value / 100) * 100)
+  parkingOccupancy.value = Math.round((parkingCount.value / 200) * 100)
+  serverRoomSecurity.value = Math.random() > 0.9 ? 85 : 95
+  serverRoomStatus.value = serverRoomSecurity.value > 90 ? 'Locked' : 'Alert'
+  perimeterIntegrity.value = Math.random() > 0.95 ? 90 : 98
+  perimeterStatus.value = perimeterIntegrity.value > 95 ? 'Secure' : 'Breach'
 
-  freshWaterLevel.value = freshWaterPercent.value
-  hotWaterLevel.value = hotWaterPercent.value
-  greyWaterLevel.value = greyWaterPercent.value
-  fireReserveLevel.value = fireReservePercent.value
-
-  // Pump status
-  pumpStatus.value = [
-    { name: 'Booster #1', loadPercent: 65 + Math.floor(Math.random() * 15), status: 'Running', color: '#3b82f6' },
-    { name: 'Booster #2', loadPercent: Math.random() > 0.8 ? 30 + Math.floor(Math.random() * 20) : 0, status: Math.random() > 0.8 ? 'Running' : 'Standby', color: '#60a5fa' },
-    { name: 'Hot Water Circ', loadPercent: 50 + Math.floor(Math.random() * 15), status: 'Running', color: '#f97316' },
-    { name: 'Sump Pump', loadPercent: 10 + Math.floor(Math.random() * 15), status: Math.random() > 0.3 ? 'Idle' : 'Running', color: '#34d399' }
+  // Access control
+  accessControl.value = [
+    { name: 'Main Entrance', throughput: 75 + Math.floor(Math.random() * 20), status: Math.random() > 0.3 ? 'Peak' : 'Busy', color: '#fbbf24' },
+    { name: 'Staff Gate', throughput: 55 + Math.floor(Math.random() * 15), status: 'Normal', color: '#3b82f6' },
+    { name: 'Parking Gate', throughput: 70 + Math.floor(Math.random() * 15), status: 'Busy', color: '#60a5fa' },
+    { name: 'Delivery Bay', throughput: 28 + Math.floor(Math.random() * 12), status: 'Low', color: '#34d399' }
   ]
 
-  // System health
-  systemHealth.value = [
-    { subsystem: 'Booster Pumps', status: Math.random() > 0.9 ? 'warning' : 'normal', statusText: Math.random() > 0.9 ? 'Check #1' : 'Normal' },
-    { subsystem: 'Hot Water System', status: 'normal', statusText: 'Normal' },
-    { subsystem: 'Cold Water Supply', status: 'normal', statusText: 'Normal' },
-    { subsystem: 'Drainage System', status: Math.random() > 0.95 ? 'warning' : 'normal', statusText: Math.random() > 0.95 ? 'Clog Risk' : 'Normal' },
-    { subsystem: 'Leak Detection', status: 'normal', statusText: 'Active' }
+  // Device health
+  deviceHealth.value = [
+    { subsystem: 'CCTV Network', status: Math.random() > 0.98 ? 'warning' : 'normal', statusText: Math.random() > 0.98 ? 'Lag' : 'Online' },
+    { subsystem: 'Access Controllers', status: Math.random() > 0.85 ? 'warning' : 'normal', statusText: Math.random() > 0.85 ? '1 Offline' : 'Normal' },
+    { subsystem: 'Alarm System', status: 'normal', statusText: 'Armed' },
+    { subsystem: 'Intercom Panels', status: 'normal', statusText: 'Normal' },
+    { subsystem: 'Storage (NVR)', status: 'normal', statusText: '72% Free' }
   ]
 
-  // Valve status
-  valveStatus.value = [
-    { label: 'Main Supply Valve', position: String(80 + Math.floor(Math.random() * 15)), flow: (34 + Math.random() * 6).toFixed(1), status: 'Open', alarmClass: 'normal' },
-    { label: 'Hot Water Supply', position: String(65 + Math.floor(Math.random() * 15)), flow: (11 + Math.random() * 4).toFixed(1), status: 'Open', alarmClass: 'normal' },
-    { label: 'Grey Water Inlet', position: String(40 + Math.floor(Math.random() * 15)), flow: (4 + Math.random() * 3).toFixed(1), status: 'Open', alarmClass: 'low' },
-    { label: 'Bypass Valve', position: '0', flow: '0.0', status: 'Closed', alarmClass: 'normal' }
+  // Door status
+  doorStatus.value = [
+    { label: 'Main Entrance', status: 'Locked', lastAccess: new Date().toTimeString().slice(0, 8), alarm: 'Normal', alarmClass: 'normal' },
+    { label: 'Server Room', status: Math.random() > 0.9 ? 'Unlocked' : 'Locked', lastAccess: '07:30:15', alarm: Math.random() > 0.9 ? 'Alert' : 'Normal', alarmClass: Math.random() > 0.9 ? 'high' : 'normal' },
+    { label: 'Fire Exit 2F', status: 'Closed', lastAccess: '--', alarm: 'Normal', alarmClass: 'normal' },
+    { label: 'Loading Dock', status: Math.random() > 0.6 ? 'Open' : 'Closed', lastAccess: '09:12:08', alarm: Math.random() > 0.6 ? 'Warning' : 'Normal', alarmClass: Math.random() > 0.6 ? 'low' : 'normal' }
   ]
 
   // Tips
   const tipPool = [
-    { icon: '💧', title: 'Pressure Optimization', desc: 'Reduce booster pump setpoint from 5.5 to 5.0 bar during off-peak', saving: '~10% pump energy' },
-    { icon: '🌡️', title: 'Hot Water Schedule', desc: 'Lower hot water temp to 55°C during weekend low occupancy', saving: '~15% heating energy' },
-    { icon: '🔍', title: 'Leak Inspection', desc: 'Minor flow anomaly detected in 3F restroom, schedule inspection', saving: 'Prevent water waste' },
-    { icon: '🌧️', title: 'Rainwater Harvesting', desc: 'Connect rainwater tank to irrigation system for additional savings', saving: '~20% outdoor water' }
+    { icon: '🔐', title: 'Review Badge Access', desc: '3 badges with expired clearance detected today', priority: 'High Priority' },
+    { icon: '📹', title: 'Storage Check', desc: 'NVR retention remaining: 12 days at current bitrate', priority: 'Medium Priority' },
+    { icon: '🚪', title: 'Door Audit', desc: 'Loading dock door open 2+ hours today', priority: 'Low Priority' },
+    { icon: '📋', title: 'Visitor Log', desc: '5 visitors still checked in after 18:00', priority: 'Medium Priority' }
   ]
-  plumbingTips.value = tipPool.sort(() => Math.random() - 0.5).slice(0, 1)
+  securityTips.value = tipPool.sort(() => Math.random() - 0.5).slice(0, 1)
 
   // Update charts
-  if (pressureChart && flowChart) {
-    // Update pressure history
+  if (eventTrendChart && throughputChart) {
     const now = new Date()
-    pressureHourLabels.value.push(now.toTimeString().slice(0, 5))
-    if (pressureHourLabels.value.length > pressureHistoryLength) pressureHourLabels.value.shift()
+    eventHourLabels.value.push(now.toTimeString().slice(0, 5))
+    if (eventHourLabels.value.length > eventHistoryLength) eventHourLabels.value.shift()
 
-    pressureHistory.value.push({
-      'Supply Main': 5.0 + Math.random() * 0.6,
-      'Hot Water': 4.5 + Math.random() * 0.8,
-      'Grey Water': 2.0 + Math.random() * 0.5,
-      'Fire Line': 6.5 + Math.random() * 0.3
+    eventHistory.value.push({
+      'Access Granted': 80 + Math.random() * 40,
+      'Access Denied': 3 + Math.random() * 8,
+      'Alarm Triggered': 1 + Math.random() * 3,
+      'Door Forced': Math.random() > 0.7 ? 1 : 0
     })
-    if (pressureHistory.value.length > pressureHistoryLength) pressureHistory.value.shift()
+    if (eventHistory.value.length > eventHistoryLength) eventHistory.value.shift()
 
-    pressureChart.setOption({
-      xAxis: { data: pressureHourLabels.value },
-      series: ['Supply Main', 'Hot Water', 'Grey Water', 'Fire Line'].map(name => ({
-        data: pressureHistory.value.map(d => d[name])
+    eventTrendChart.setOption({
+      xAxis: { data: eventHourLabels.value },
+      series: ['Access Granted', 'Access Denied', 'Alarm Triggered', 'Door Forced'].map(name => ({
+        data: eventHistory.value.map(d => d[name])
       }))
     })
 
-    // Update flow history
-    flowTimeLabels.value.push(now.toTimeString().slice(0, 5))
-    if (flowTimeLabels.value.length > flowHistoryLength) flowTimeLabels.value.shift()
+    throughputTimeLabels.value.push(now.toTimeString().slice(0, 5))
+    if (throughputTimeLabels.value.length > throughputHistoryLength) throughputTimeLabels.value.shift()
 
-    flowHistory.value.push({
-      'Cold Water': 30 + Math.random() * 10,
-      'Hot Water': 10 + Math.random() * 5,
-      'Grey Water': 4 + Math.random() * 3,
-      'Irrigation': 2 + Math.random() * 2
+    throughputHistory.value.push({
+      'Main Entrance': 25 + Math.random() * 15,
+      'Staff Gate': 18 + Math.random() * 12,
+      'Parking': 12 + Math.random() * 10,
+      'Delivery': 3 + Math.random() * 5
     })
-    if (flowHistory.value.length > flowHistoryLength) flowHistory.value.shift()
+    if (throughputHistory.value.length > throughputHistoryLength) throughputHistory.value.shift()
 
-    flowChart.setOption({
-      xAxis: { data: flowTimeLabels.value },
-      series: ['Cold Water', 'Hot Water', 'Grey Water', 'Irrigation'].map(name => ({
-        data: flowHistory.value.map(d => d[name])
+    throughputChart.setOption({
+      xAxis: { data: throughputTimeLabels.value },
+      series: ['Main Entrance', 'Staff Gate', 'Parking', 'Delivery'].map(name => ({
+        data: throughputHistory.value.map(d => d[name])
       }))
     })
   }
@@ -762,11 +745,11 @@ onMounted(async () => {
 
   await preloadAssets()
 
-  initPressureHistory()
-  initFlowHistory()
+  initEventHistory()
+  initThroughputHistory()
   await initCharts()
 
-  if (pressureChart && flowChart) {
+  if (eventTrendChart && throughputChart) {
     updateTimer = setInterval(updateAllData, 5000)
   }
 
@@ -774,10 +757,10 @@ onMounted(async () => {
   document.addEventListener('fullscreenchange', onFullscreenChange)
 
   routeWatch = watch(() => route.fullPath, async () => {
-    initPressureHistory()
-    initFlowHistory()
+    initEventHistory()
+    initThroughputHistory()
     await initCharts()
-    if (pressureChart && flowChart && !updateTimer) {
+    if (eventTrendChart && throughputChart && !updateTimer) {
       updateTimer = setInterval(updateAllData, 5000)
     }
   })
@@ -979,7 +962,7 @@ onBeforeUnmount(() => {
   }
 }
 
-/* Main Plumbing Page Styles */
+/* Main SAS Page Styles */
 .hvac-page {
   height: 100%;
   background: radial-gradient(circle at 10% 20%, #0a1620, #03060c);
@@ -1302,26 +1285,24 @@ onBeforeUnmount(() => {
   color: #cbd5e6;
 }
 .kpi-row span {
-  width: 50%;
   text-align: left;
 }
-
 .kpi-row-left {
   min-width: 100px;
-  max-width: 110px;
+  max-width: 100px;
   text-align: left;
 }
 .kpi-row strong {
   font-size: 16px;
   color: #facc15;
   text-align: center;
-  min-width: 80px;
 }
 .trend {
-  width: 20%;
+  width: 70px;
   font-size: 11px;
   margin-left: 8px;
   text-align: right;
+  font-weight: bold;
 }
 .trend.up { color: #34d399; text-align: right; }
 .trend.stable { color: #fbbf24; text-align: right; }
@@ -1340,20 +1321,26 @@ onBeforeUnmount(() => {
 .sp-label {
   flex: 1;
   color: #94a3b8;
+  font-size: 13px;
+  font-weight: bold;
 }
 .sp-values {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  justify-content: center;
+  align-items: center;
   gap: 2px;
   margin-right: 8px;
 }
 .sp-set {
   font-size: 10px;
   color: #cbd5e1;
+  font-weight: bold;
 }
 .sp-actual {
   font-weight: 600;
+  text-align: center;
   color: #fbbf24;
 }
 .sp-deviation {
@@ -1418,6 +1405,7 @@ onBeforeUnmount(() => {
   color: #facc15;
   font-weight: bold;
 }
+
 /* ========== 移动端适配 (屏幕宽度 ≤ 768px) ========== */
 @media (max-width: 768px) {
   .hvac-page {

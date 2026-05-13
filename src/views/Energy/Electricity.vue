@@ -1,5 +1,4 @@
 <template>
-  <!-- Loading 页面 -->
   <div v-if="!isBackgroundLoaded" class="loading-container">
     <div class="loading-overlay">
       <div class="loading-content">
@@ -9,159 +8,180 @@
           <div class="spinner-ring"></div>
         </div>
         <div class="loading-text">
-          <span class="loading-title">Loading Geothermal Energy</span>
+          <span class="loading-title">Loading Power Grid</span>
           <span class="loading-dots">...</span>
         </div>
         <div class="loading-progress">
           <div class="progress-bar" :style="{ width: loadingProgress + '%' }"></div>
         </div>
-        <div class="loading-tip">Initializing Geothermal System</div>
+        <div class="loading-tip">Initializing Energy System</div>
         <div class="loading-subtip">{{ loadingMessage }}</div>
       </div>
     </div>
   </div>
 
-  <!-- Main Page -->
   <div v-else class="wind-energy-page">
-    <!-- Left Panel -->
+    <!-- 左侧图表区域 -->
     <div class="left-panel">
+      <!-- 页面标题区域，包含主标题和右侧时间 -->
       <div class="page-header">
-        <h1 class="page-title">Geothermal Analytics</h1>
+        <h1 class="page-title">Power Grid</h1>
         <div class="current-time" v-if="isFullscreen || isMobile">{{ currentTime }}</div>
       </div>
 
       <div class="image-container" v-if="isMobile">
-        <el-image src="https://aegisnx.com/wp-content/uploads/2026/05/1778491413316.png" fit="cover" class="wind-image" />
+        <el-image src="https://aegisnx.com/wp-content/uploads/2026/05/1778479404932.png" fit="cover" class="wind-image" />
         <div class="image-overlay"></div>
       </div>
 
       <div class="charts-container">
-        <!-- 1. 地热井温度趋势（折线图 + 面积） -->
-        <div class="chart-item">
-          <div class="chart-header">
-            <span class="chart-icon">🌡️</span>
-            <span class="chart-title">Wellhead Temperature</span>
-            <el-tag size="small" type="success">24h</el-tag>
-          </div>
-          <div ref="tempChart" class="chart-box"></div>
-        </div>
-
-        <!-- 2. 发电功率柱状图（每日） -->
+        <!-- 1. 电网负荷趋势 -->
         <div class="chart-item">
           <div class="chart-header">
             <span class="chart-icon">⚡</span>
-            <span class="chart-title">Power Generation</span>
-            <el-tag size="small" type="info">Daily</el-tag>
+            <span class="chart-title">Grid Load Trend</span>
+            <el-tag size="small" type="success">24h</el-tag>
           </div>
-          <div ref="powerChart" class="chart-box"></div>
+          <div ref="loadChart" class="chart-box"></div>
         </div>
 
-        <!-- 3. 热储层压力趋势（面积填充图） -->
+        <!-- 2. 实时电价柱状图 -->
+        <div class="chart-item">
+          <div class="chart-header">
+            <span class="chart-icon">💲</span>
+            <span class="chart-title">Electricity Price</span>
+            <el-tag size="small" type="info">Daily</el-tag>
+          </div>
+          <div ref="priceChart" class="chart-box"></div>
+        </div>
+
+        <!-- 3. 四个并排环形仪表盘 -->
+        <div class="chart-item">
+          <div class="chart-header">
+            <span class="chart-icon">📐</span>
+            <span class="chart-title">Key Performance Indicators</span>
+            <el-tag size="small" type="warning">Live</el-tag>
+          </div>
+          <div class="gauges-row">
+            <div class="gauge-card">
+              <el-progress
+                  type="circle"
+                  :percentage="powerFactor"
+                  :stroke-width="6"
+                  color="#10b981"
+                  class="mini-gauge"
+              >
+                <template #default="{ percentage }">
+                  <span class="gauge-value">{{ percentage }}<span class="gauge-unit">%</span></span>
+                </template>
+              </el-progress>
+              <div class="gauge-title">Power Factor</div>
+              <div class="gauge-desc">{{ powerFactor }}%</div>
+            </div>
+            <div class="gauge-card">
+              <el-progress
+                  type="circle"
+                  :percentage="frequencyStability"
+                  :stroke-width="6"
+                  color="#f59e0b"
+                  class="mini-gauge"
+              >
+                <template #default="{ percentage }">
+                  <span class="gauge-value">{{ percentage }}<span class="gauge-unit">%</span></span>
+                </template>
+              </el-progress>
+              <div class="gauge-title">Freq Stability</div>
+              <div class="gauge-desc">{{ frequency }} Hz</div>
+            </div>
+            <div class="gauge-card">
+              <el-progress
+                  type="circle"
+                  :percentage="efficiency"
+                  :stroke-width="6"
+                  color="#3b82f6"
+                  class="mini-gauge"
+              >
+                <template #default="{ percentage }">
+                  <span class="gauge-value">{{ percentage }}<span class="gauge-unit">%</span></span>
+                </template>
+              </el-progress>
+              <div class="gauge-title">Sys Efficiency</div>
+              <div class="gauge-desc">{{ efficiency }}%</div>
+            </div>
+            <div class="gauge-card">
+              <el-progress
+                  type="circle"
+                  :percentage="loadRatio"
+                  :stroke-width="6"
+                  color="#8b5cf6"
+                  class="mini-gauge"
+              >
+                <template #default="{ percentage }">
+                  <span class="gauge-value">{{ percentage }}<span class="gauge-unit">%</span></span>
+                </template>
+              </el-progress>
+              <div class="gauge-title">Load Ratio</div>
+              <div class="gauge-desc">{{ loadRatio }}%</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. 雷达图（替代原来的 Key Metrics 卡片） -->
         <div class="chart-item">
           <div class="chart-header">
             <span class="chart-icon">📊</span>
-            <span class="chart-title">Reservoir Pressure</span>
-            <el-tag size="small" type="warning">Weekly</el-tag>
-          </div>
-          <div ref="pressureChart" class="chart-box"></div>
-        </div>
-
-        <!-- 4. 四个指标卡片（热效率、热回收率、温差、蒸汽品质） -->
-        <div class="chart-item">
-          <div class="chart-header">
-            <span class="chart-icon">📈</span>
-            <span class="chart-title">Performance Metrics</span>
+            <span class="chart-title">Grid Health Radar</span>
             <el-tag size="small" type="primary">Real-time</el-tag>
           </div>
-          <div class="metrics-row">
-            <div class="metric-card">
-              <div class="metric-icon">⚙️</div>
-              <div class="metric-info">
-                <span class="metric-label">Thermal Efficiency</span>
-                <span class="metric-value">{{ thermalEfficiency }}<span class="metric-unit">%</span></span>
-                <el-progress :percentage="thermalEfficiency" :stroke-width="6" color="#f97316" class="metric-progress" />
-              </div>
-            </div>
-            <div class="metric-card">
-              <div class="metric-icon">♨️</div>
-              <div class="metric-info">
-                <span class="metric-label">Heat Recovery Rate</span>
-                <span class="metric-value">{{ heatRecovery }}<span class="metric-unit">%</span></span>
-                <el-progress :percentage="heatRecovery" :stroke-width="6" color="#10b981" class="metric-progress" />
-              </div>
-            </div>
-            <div class="metric-card">
-              <div class="metric-icon">🌡️</div>
-              <div class="metric-info">
-                <span class="metric-label">Temp. Difference</span>
-                <span class="metric-value">{{ tempDiff }}<span class="metric-unit">°C</span></span>
-                <div class="metric-trend up">↑ {{ tempDiffTrend }}%</div>
-              </div>
-            </div>
-            <div class="metric-card">
-              <div class="metric-icon">💨</div>
-              <div class="metric-info">
-                <span class="metric-label">Steam Quality</span>
-                <span class="metric-value">{{ steamQuality }}<span class="metric-unit">%</span></span>
-                <el-progress :percentage="steamQuality" :stroke-width="6" color="#06b6d4" class="metric-progress" />
-              </div>
-            </div>
-          </div>
+          <div ref="radarChart" class="chart-box"></div>
         </div>
       </div>
     </div>
 
-    <!-- Right Panel -->
+    <!-- 右侧数据卡片 -->
     <div class="right-panel">
       <div class="image-container" v-if="!isMobile">
-        <el-image src="https://aegisnx.com/wp-content/uploads/2026/05/1778491413316.png" fit="cover" class="wind-image" />
+        <el-image src="https://aegisnx.com/wp-content/uploads/2026/05/1778479404932.png" fit="cover" class="wind-image" />
         <div class="image-overlay"></div>
       </div>
 
       <div class="data-fields-container">
         <div class="data-row">
           <div class="data-field-card">
-            <div class="field-icon">🌋</div>
-            <div class="field-info">
-              <span class="field-label">Active Wells</span>
-              <span class="field-value">{{ activeWells }} <span class="field-unit">wells</span></span>
-              <span class="field-trend up">↑ {{ wellsTrend }}%</span>
-            </div>
-          </div>
-          <div class="data-field-card">
             <div class="field-icon">⚡</div>
             <div class="field-info">
-              <span class="field-label">Current Power</span>
-              <span class="field-value">{{ formatNumber(currentPower) }} <span class="field-unit">kW</span></span>
-              <span class="field-trend up">↑ {{ powerTrend }}%</span>
+              <span class="field-label">Current Load</span>
+              <span class="field-value">{{ formatNumber(currentLoad) }} <span class="field-unit">MW</span></span>
+              <span class="field-trend up">↑ {{ loadTrend }}%</span>
             </div>
           </div>
           <div class="data-field-card">
-            <div class="field-icon">🌡️</div>
+            <div class="field-icon">📉</div>
             <div class="field-info">
-              <span class="field-label">Wellhead Temp</span>
-              <span class="field-value">{{ wellheadTemp }} <span class="field-unit">°C</span></span>
-              <span class="field-trend">{{ tempTrend === 'up' ? '↑' : '↓' }} {{ tempChange }}%</span>
+              <span class="field-label">Today Consumption</span>
+              <span class="field-value">{{ formatNumber(todayConsumption) }} <span class="field-unit">MWh</span></span>
+              <span class="field-trend up">↑ {{ consumptionTrend }}%</span>
             </div>
           </div>
           <div class="data-field-card">
-            <div class="field-icon">💨</div>
+            <div class="field-icon">💸</div>
             <div class="field-info">
-              <span class="field-label">Steam Flow Rate</span>
-              <span class="field-value">{{ steamFlow }} <span class="field-unit">t/h</span></span>
-              <span class="field-trend up">↑ {{ steamTrend }}%</span>
+              <span class="field-label">Spot Price</span>
+              <span class="field-value">${{ spotPrice }} <span class="field-unit">/MWh</span></span>
+              <span class="field-trend">{{ priceTrend === 'up' ? '↑' : '↓' }} {{ priceChange }}%</span>
+            </div>
+          </div>
+          <div class="data-field-card">
+            <div class="field-icon">📏</div>
+            <div class="field-info">
+              <span class="field-label">Power Factor</span>
+              <span class="field-value">{{ powerFactor }}<span class="field-unit">%</span></span>
+              <span class="field-trend up">↑ {{ pfTrend }}%</span>
             </div>
           </div>
         </div>
+
         <div class="data-row">
-          <div class="data-field-card">
-            <div class="field-icon">📈</div>
-            <div class="field-info">
-              <span class="field-label">Reservoir Pressure</span>
-              <span class="field-value">{{ reservoirPressure }} <span class="field-unit">bar</span></span>
-              <span class="field-trend">{{ pressureTrend === 'up' ? '↑' : '↓' }} {{ pressureChange }}%</span>
-            </div>
-          </div>
           <div class="data-field-card">
             <div class="field-icon">💰</div>
             <div class="field-info">
@@ -179,10 +199,18 @@
             </div>
           </div>
           <div class="data-field-card">
+            <div class="field-icon">🔋</div>
+            <div class="field-info">
+              <span class="field-label">Grid Frequency</span>
+              <span class="field-value">{{ frequency }} <span class="field-unit">Hz</span></span>
+              <span class="field-trend">{{ freqTrend === 'up' ? '↑' : '↓' }} {{ freqChange }}%</span>
+            </div>
+          </div>
+          <div class="data-field-card">
             <div class="field-icon">⚙️</div>
             <div class="field-info">
-              <span class="field-label">Thermal Efficiency</span>
-              <span class="field-value">{{ thermalEfficiency }}<span class="field-unit">%</span></span>
+              <span class="field-label">Efficiency</span>
+              <span class="field-value">{{ efficiency }}<span class="field-unit">%</span></span>
               <span class="field-trend up">↑ {{ effTrend }}%</span>
             </div>
           </div>
@@ -193,10 +221,11 @@
 </template>
 
 <script setup>
-import {ref, onMounted, onUnmounted, nextTick, computed} from 'vue'
+import { ref, onMounted, onUnmounted, nextTick, computed } from 'vue'
 import * as echarts from 'echarts'
 
-import { useCounterStore } from '@/stores/counter'
+
+import { useCounterStore } from '@/stores/counter.js'
 import { getCurrentInstance } from 'vue'
 const getStore = () => {
   const instance = getCurrentInstance()
@@ -213,56 +242,67 @@ const getStore = () => {
 const counterStore = getStore()
 const isFullscreen = computed(() => counterStore.isFullscreen)
 
+
 // ---------- 加载状态 ----------
 const isBackgroundLoaded = ref(false)
 const loadingProgress = ref(0)
 const loadingMessage = ref('Preparing assets...')
 
-// ---------- 右侧数据 ----------
-const activeWells = ref(12)
-const wellsTrend = ref(5.2)
-const currentPower = ref(18500)
-const powerTrend = ref(3.8)
-const wellheadTemp = ref(182)
-const tempTrend = ref('up')
-const tempChange = ref(1.2)
-const steamFlow = ref(85)
-const steamTrend = ref(4.5)
-const reservoirPressure = ref(24.5)
-const pressureTrend = ref('down')
-const pressureChange = ref(1.5)
-const revenue = ref(42.6)
-const revTrend = ref(6.8)
-const co2 = ref(125.3)
-const co2Trend = ref(9.2)
-const thermalEfficiency = ref(78.5)
+// ---------- 基础数据 ----------
+const currentLoad = ref(1250)
+const loadTrend = ref(3.2)
+const todayConsumption = ref(28500)
+const consumptionTrend = ref(5.1)
+const spotPrice = ref(42.5)
+const priceTrend = ref('up')
+const priceChange = ref(2.3)
+const powerFactor = ref(92)
+const pfTrend = ref(1.1)
+const frequency = ref(50.02)
+const freqTrend = ref('down')
+const freqChange = ref(0.05)
+const efficiency = ref(94.2)
 const effTrend = ref(2.3)
+const revenue = ref(18.6)
+const revTrend = ref(7.4)
+const co2 = ref(32.5)
+const co2Trend = ref(9.2)
 
-// 第四个卡片新增指标
-const heatRecovery = ref(68.4)
-const tempDiff = ref(42.5)
-const tempDiffTrend = ref(2.1)
-const steamQuality = ref(95.2)
+// 额定最大负荷（假设2000 MW）
+const maxLoadCapacity = 2000
 
-// ---------- 当前时间 ----------
+// 负载率
+const loadRatio = computed(() => {
+  let ratio = (currentLoad.value / maxLoadCapacity) * 100
+  return Math.min(100, Math.max(0, Math.floor(ratio)))
+})
+
+// 频率稳定性（0-100）
+const frequencyStability = computed(() => {
+  let deviation = Math.abs(frequency.value - 50)
+  let stability = 100 - deviation * 2
+  return Math.min(100, Math.max(80, Math.floor(stability)))
+})
+
+// 当前时间（带年月日时分秒毫秒）
 const currentTime = ref('')
 let timeInterval = null
 
-// ---------- 图表实例 ----------
-const tempChart = ref(null)
-const powerChart = ref(null)
-const pressureChart = ref(null)
-let tempEChart = null
-let powerEChart = null
-let pressureEChart = null
+// ECharts 实例
+const loadChart = ref(null)
+const priceChart = ref(null)
+const radarChart = ref(null)
+let loadEChart = null
+let priceEChart = null
+let radarEChart = null
 
 let dataInterval = null
 let chartInterval = null
 
-// ---------- 辅助函数 ----------
+// 辅助函数
 const formatNumber = (num) => num.toLocaleString()
 
-// ---------- 更新时间（带毫秒）----------
+// 更新当前时间（YYYY-MM-DD HH:MM:SS.ms）
 const updateCurrentTime = () => {
   const now = new Date()
   // 获取 UTC 毫秒数并转换为新加坡时间 (UTC+8，无夏令时)
@@ -279,150 +319,138 @@ const updateCurrentTime = () => {
 
   currentTime.value = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${ms} SGT`
 }
-// ---------- 加载动画 ----------
-const loadingMessages = [
-  'Preparing assets...',
-  'Loading geothermal data...',
-  'Analyzing reservoirs...',
-  'Establishing connection...',
-  'Starting dashboard...',
-  'Almost ready...'
-]
 
-const preloadBackground = () => new Promise((resolve) => {
-  const img = new Image()
-  img.src = 'https://aegisnx.com/wp-content/uploads/2026/05/1778491413316.png'
-  let progress = 0
-  let msgIdx = 0
-
-  const msgInterval = setInterval(() => {
-    if (msgIdx < loadingMessages.length - 1) {
-      loadingMessage.value = loadingMessages[++msgIdx]
-    }
-  }, 800)
-
-  const progInterval = setInterval(() => {
-    if (progress < 90) {
-      progress += Math.random() * 10
-      loadingProgress.value = Math.min(progress, 90)
-    }
-  }, 100)
-
-  img.onload = () => {
-    clearInterval(msgInterval)
-    clearInterval(progInterval)
-    loadingMessage.value = 'Ready!'
-    loadingProgress.value = 100
-    setTimeout(resolve, 500)
-  }
-
-  img.onerror = () => {
-    clearInterval(msgInterval)
-    clearInterval(progInterval)
-    loadingProgress.value = 100
-    setTimeout(resolve, 300)
-  }
-})
-
-// ---------- 模拟数据更新 ----------
+// 模拟数据更新（保留小数点）
 const updateRealTimeData = () => {
-  activeWells.value = 10 + Math.floor(Math.random() * 6)
-  wellsTrend.value = +(3 + Math.random() * 6).toFixed(1)
-  currentPower.value = 16000 + Math.floor(Math.random() * 5000)
-  powerTrend.value = +(2 + Math.random() * 7).toFixed(1)
-  wellheadTemp.value = 170 + Math.floor(Math.random() * 25)
-  tempTrend.value = wellheadTemp.value > 185 ? 'up' : 'down'
-  tempChange.value = +(0.5 + Math.random() * 3).toFixed(1)
-  steamFlow.value = 75 + Math.floor(Math.random() * 20)
-  steamTrend.value = +(2 + Math.random() * 6).toFixed(1)
-  reservoirPressure.value = +(22 + Math.random() * 6).toFixed(1)
-  pressureTrend.value = reservoirPressure.value > 25 ? 'down' : 'up'
-  pressureChange.value = +(0.8 + Math.random() * 2).toFixed(1)
-  revenue.value = +(38 + Math.random() * 12).toFixed(1)
-  revTrend.value = +(4 + Math.random() * 8).toFixed(1)
-  co2.value = +(110 + Math.random() * 35).toFixed(1)
-  co2Trend.value = +(5 + Math.random() * 11).toFixed(1)
-  thermalEfficiency.value = +(74 + Math.random() * 9).toFixed(1)
-  effTrend.value = +(1.2 + Math.random() * 3).toFixed(1)
-
-  // 卡片专用数据更新
-  heatRecovery.value = +(62 + Math.random() * 12).toFixed(1)
-  tempDiff.value = +(38 + Math.random() * 12).toFixed(1)
-  tempDiffTrend.value = +(1 + Math.random() * 3).toFixed(1)
-  steamQuality.value = +(92 + Math.random() * 6).toFixed(1)
+  currentLoad.value = Math.floor(1000 + Math.random() * 800)
+  loadTrend.value = +(1 + Math.random() * 6).toFixed(1)
+  todayConsumption.value = 25000 + Math.floor(Math.random() * 8000)
+  consumptionTrend.value = +(2 + Math.random() * 8).toFixed(1)
+  spotPrice.value = +(35 + Math.random() * 20).toFixed(1)
+  priceTrend.value = Math.random() > 0.5 ? 'up' : 'down'
+  priceChange.value = +(1 + Math.random() * 5).toFixed(1)
+  powerFactor.value = Math.floor(85 + Math.random() * 13)
+  pfTrend.value = +(0.5 + Math.random() * 3).toFixed(1)
+  let newFreq = +(49.9 + Math.random() * 0.2).toFixed(2)
+  frequency.value = newFreq
+  freqTrend.value = newFreq > 50 ? 'up' : 'down'
+  freqChange.value = +(Math.abs(newFreq - 50) * 100 / 50).toFixed(2)
+  efficiency.value = +(91 + Math.random() * 7).toFixed(1)
+  effTrend.value = +(0.8 + Math.random() * 4).toFixed(1)
+  revenue.value = +(12 + Math.random() * 12).toFixed(2)
+  revTrend.value = +(3 + Math.random() * 9).toFixed(1)
+  co2.value = +(25 + Math.random() * 18).toFixed(1)
+  co2Trend.value = +(5 + Math.random() * 12).toFixed(1)
 }
 
-// ---------- 初始化图表 ----------
+// 初始化 ECharts 图表
 const initCharts = () => {
-  if (tempChart.value) {
-    tempEChart = echarts.init(tempChart.value)
-    tempEChart.setOption({
-      tooltip: { trigger: 'axis', valueFormatter: (value) => value + ' °C' },
-      grid: { left: '0%', right: '0%', top:40, bottom: 0, containLabel: true },
+  // 负荷趋势图
+  if (loadChart.value) {
+    loadEChart = echarts.init(loadChart.value)
+    loadEChart.setOption({
+      tooltip: { trigger: 'axis', valueFormatter: (value) => value?.toFixed(1) + ' MW' },
+      grid: { left: '0%', right: '0%', top: 50, bottom: 0, containLabel: true },
       xAxis: { type: 'category', data: ['0', '4', '8', '12', '16', '20', '24'], axisLabel: { color: '#cbd5e1' }, axisLine: { lineStyle: { color: '#334155' } } },
-      yAxis: { type: 'value', name: '°C', nameTextStyle: { color: '#94a3b8' }, axisLabel: { color: '#cbd5e1' }, splitLine: { lineStyle: { color: '#1e293b', type: 'dashed' } } },
+      yAxis: { type: 'value', name: 'MW', nameTextStyle: { color: '#94a3b8' }, axisLabel: { color: '#cbd5e1', formatter: (value) => value.toFixed(1) }, splitLine: { lineStyle: { color: '#1e293b', type: 'dashed' } } },
       series: [{
-        data: [175, 178, 182, 185, 184, 181, 177], type: 'line', smooth: true,
-        lineStyle: { width: 3, color: '#f97316', shadowBlur: 12, shadowColor: '#f97316' },
-        areaStyle: { opacity: 0.3, color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{ offset: 0, color: '#f97316' }, { offset: 1, color: '#0f172a' }]) },
-        symbol: 'circle', symbolSize: 6, itemStyle: { color: '#f97316', borderColor: '#fff', borderWidth: 1 },
-        label: { show: true, position: 'top', color: '#e2e8f0', fontSize: 9, formatter: '{c}°C' }
-      }]
-    })
-  }
-  if (powerChart.value) {
-    powerEChart = echarts.init(powerChart.value)
-    powerEChart.setOption({
-      tooltip: { trigger: 'axis', valueFormatter: (value) => value + ' kW' },
-      grid: { left: '0%', right: '0%', top:40, bottom: 0, containLabel: true },
-      xAxis: { type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], axisLabel: { color: '#cbd5e1' }, axisLine: { lineStyle: { color: '#334155' } } },
-      yAxis: { type: 'value', name: 'kW', nameTextStyle: { color: '#94a3b8' }, axisLabel: { color: '#cbd5e1' }, splitLine: { lineStyle: { color: '#1e293b', type: 'dashed' } } },
-      series: [{
-        data: [16800, 17200, 17800, 18200, 18000, 17500, 17000], type: 'bar', barWidth: '55%', borderRadius: [8, 8, 0, 0],
-        itemStyle: { color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{ offset: 0, color: '#10b981' }, { offset: 1, color: '#059669' }]), shadowBlur: 8, shadowColor: '#10b981' },
-        label: { show: true, position: 'top', color: '#e2e8f0', formatter: '{c} kW' }
-      }]
-    })
-  }
-  if (pressureChart.value) {
-    pressureEChart = echarts.init(pressureChart.value)
-    pressureEChart.setOption({
-      tooltip: { trigger: 'axis', valueFormatter: (value) => value + ' bar' },
-      grid: { left: '0%', right: '0%', top:40, bottom: 0, containLabel: true },
-      xAxis: { type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], axisLabel: { color: '#cbd5e1' }, axisLine: { lineStyle: { color: '#334155' } } },
-      yAxis: { type: 'value', name: 'bar', nameTextStyle: { color: '#94a3b8' }, axisLabel: { color: '#cbd5e1' }, splitLine: { lineStyle: { color: '#1e293b', type: 'dashed' } } },
-      series: [{
-        data: [25.1, 24.8, 24.5, 24.2, 23.9, 23.6, 23.8], type: 'line', smooth: true,
-        lineStyle: { width: 2, color: '#3b82f6' },
+        data: [850, 780, 920, 1350, 1420, 1280, 980], type: 'line', smooth: true,
+        lineStyle: { width: 3, color: '#3b82f6', shadowBlur: 12, shadowColor: '#3b82f6' },
         areaStyle: { opacity: 0.3, color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{ offset: 0, color: '#3b82f6' }, { offset: 1, color: '#0f172a' }]) },
-        symbol: 'circle', symbolSize: 6, label: { show: true, position: 'bottom', color: '#e2e8f0', formatter: '{c} bar' }
+        symbol: 'circle', symbolSize: 6, itemStyle: { color: '#3b82f6', borderColor: '#fff', borderWidth: 1 }
+      }]
+    })
+  }
+  // 电价柱状图
+  if (priceChart.value) {
+    priceEChart = echarts.init(priceChart.value)
+    priceEChart.setOption({
+      tooltip: { trigger: 'axis', valueFormatter: (value) => '$' + value?.toFixed(1) + '/MWh' },
+      grid: { left: '0%', right: '0%', top: 50, bottom: 0, containLabel: true },
+      xAxis: { type: 'category', data: ['Off-peak', 'Mid-peak', 'Peak', 'Evening'], axisLabel: { color: '#cbd5e1' }, axisLine: { lineStyle: { color: '#334155' } } },
+      yAxis: { type: 'value', name: '$/MWh', nameTextStyle: { color: '#94a3b8' }, axisLabel: { color: '#cbd5e1', formatter: (value) => value.toFixed(1) }, splitLine: { lineStyle: { color: '#1e293b', type: 'dashed' } } },
+      series: [{
+        data: [28, 45, 68, 52], type: 'bar', barWidth: '55%',
+        itemStyle: { borderRadius: [8, 8, 0, 0], color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{ offset: 0, color: '#f59e0b' }, { offset: 1, color: '#d97706' }]), shadowBlur: 8, shadowColor: '#f59e0b' },
+        label: { show: true, position: 'top', color: '#e2e8f0', formatter: '${c}' }
+      }]
+    })
+  }
+  // 雷达图
+  if (radarChart.value) {
+    radarEChart = echarts.init(radarChart.value)
+    radarEChart.setOption({
+      tooltip: { trigger: 'item' },
+      radar: {
+        indicator: [
+          { name: 'Power Factor', max: 100 },
+          { name: 'Freq Stability', max: 100 },
+          { name: 'System Efficiency', max: 100 },
+          { name: 'Load Ratio', max: 100 },
+          { name: 'Response Capability', max: 100 }
+        ],
+        shape: 'circle',
+        center: ['50%', '50%'],
+        radius: '60%',
+        name: { textStyle: { color: '#cbd5e1', fontSize: 8 } },
+        splitArea: { areaStyle: { color: ['rgba(59,130,246,0.1)', 'rgba(59,130,246,0.2)'] } },
+        axisLine: { lineStyle: { color: '#334155' } }
+      },
+      series: [{
+        type: 'radar',
+        data: [{ value: [92, 98, 94, 62, 85], name: 'Current Status' }],
+        areaStyle: { color: 'rgba(16,185,129,0.3)' },
+        lineStyle: { width: 2, color: '#10b981' },
+        itemStyle: { color: '#facc15' }
       }]
     })
   }
 }
 
-// ---------- 动态更新图表数据 ----------
+// 动态更新图表数据
 const updateCharts = () => {
-  if (tempEChart) {
-    const newTemp = [170 + Math.random() * 10, 175 + Math.random() * 10, 180 + Math.random() * 8, 183 + Math.random() * 6, 181 + Math.random() * 8, 178 + Math.random() * 8, 174 + Math.random() * 8].map(v => +v.toFixed(1))
-    tempEChart.setOption({ series: [{ data: newTemp }] })
+  if (loadEChart) {
+    const newLoad = [
+      +(800 + Math.random() * 200).toFixed(1),
+      +(750 + Math.random() * 200).toFixed(1),
+      +(900 + Math.random() * 200).toFixed(1),
+      +(1300 + Math.random() * 200).toFixed(1),
+      +(1400 + Math.random() * 200).toFixed(1),
+      +(1250 + Math.random() * 200).toFixed(1),
+      +(950 + Math.random() * 200).toFixed(1)
+    ]
+    loadEChart.setOption({ series: [{ data: newLoad }] })
   }
-  if (powerEChart) {
-    const newPower = [16500 + Math.random() * 1000, 17000 + Math.random() * 1200, 17600 + Math.random() * 1000, 18000 + Math.random() * 800, 17800 + Math.random() * 1000, 17300 + Math.random() * 1000, 16800 + Math.random() * 1000].map(v => Math.floor(v))
-    powerEChart.setOption({ series: [{ data: newPower }] })
+  if (priceEChart) {
+    const newPrices = [
+      +(25 + Math.random() * 10).toFixed(1),
+      +(40 + Math.random() * 15).toFixed(1),
+      +(65 + Math.random() * 15).toFixed(1),
+      +(48 + Math.random() * 12).toFixed(1)
+    ]
+    priceEChart.setOption({ series: [{ data: newPrices }] })
   }
-  if (pressureEChart) {
-    const newPressure = [25.0 + Math.random() * 0.6, 24.6 + Math.random() * 0.6, 24.3 + Math.random() * 0.5, 24.0 + Math.random() * 0.5, 23.7 + Math.random() * 0.5, 23.4 + Math.random() * 0.6, 23.6 + Math.random() * 0.7].map(v => +v.toFixed(1))
-    pressureEChart.setOption({ series: [{ data: newPressure }] })
+  if (radarEChart) {
+    const responseCapability = Math.floor(60 + Math.random() * 40)
+    const newRadarData = [
+      powerFactor.value,
+      frequencyStability.value,
+      efficiency.value,
+      loadRatio.value,
+      responseCapability
+    ]
+    radarEChart.setOption({
+      series: [{ data: [{ value: newRadarData, name: 'Current Status' }] }]
+    })
   }
 }
 
-// ---------- 窗口/全屏自适应 ----------
+// 窗口/全屏自适应
 const handleResize = () => {
   setTimeout(() => {
-    tempEChart?.resize()
-    powerEChart?.resize()
-    pressureEChart?.resize()
+    loadEChart?.resize()
+    priceEChart?.resize()
+    radarEChart?.resize()
   }, 100)
 }
 const isMobile = ref(false)
@@ -432,18 +460,37 @@ const checkMobile = () => {
 // ---------- 生命周期 ----------
 onMounted(async () => {
   checkMobile();
-  await preloadBackground()
-  isBackgroundLoaded.value = true
-  await nextTick()
+  // 预加载图片
+  const img = new Image()
+  img.src = 'https://aegisnx.com/wp-content/uploads/2026/05/1778479404932.png'
+  let progress = 0, msgIdx = 0
+  const loadingMessages = ['Preparing assets...', 'Loading grid data...', 'Syncing SCADA...', 'Establishing connection...', 'Starting dashboard...', 'Almost ready...']
+  const msgInterval = setInterval(() => { if (msgIdx < loadingMessages.length - 1) loadingMessage.value = loadingMessages[++msgIdx] }, 800)
+  const progInterval = setInterval(() => { if (progress < 90) { progress += Math.random() * 10; loadingProgress.value = Math.min(progress, 90) } }, 100)
+  img.onload = () => {
+    clearInterval(msgInterval); clearInterval(progInterval)
+    loadingMessage.value = 'Ready!'; loadingProgress.value = 100
+    setTimeout(async () => {
+      isBackgroundLoaded.value = true
+      await nextTick()
+      setTimeout(initCharts, 100)
+    }, 500)
+  }
+  img.onerror = () => {
+    clearInterval(msgInterval); clearInterval(progInterval)
+    loadingProgress.value = 100
+    setTimeout(async () => {
+      isBackgroundLoaded.value = true
+      await nextTick()
+      setTimeout(initCharts, 100)
+    }, 300)
+  }
 
-  setTimeout(() => initCharts(), 100)
-
+  // 启动定时器
   updateCurrentTime()
   timeInterval = setInterval(updateCurrentTime, 100)
-
   dataInterval = setInterval(updateRealTimeData, 3000)
   chartInterval = setInterval(updateCharts, 5000)
-
   window.addEventListener('resize', handleResize)
   document.addEventListener('fullscreenchange', handleResize)
 })
@@ -454,14 +501,14 @@ onUnmounted(() => {
   if (chartInterval) clearInterval(chartInterval)
   window.removeEventListener('resize', handleResize)
   document.removeEventListener('fullscreenchange', handleResize)
-  tempEChart?.dispose()
-  powerEChart?.dispose()
-  pressureEChart?.dispose()
+  loadEChart?.dispose()
+  priceEChart?.dispose()
+  radarEChart?.dispose()
 })
 </script>
 
 <style scoped>
-/* ===== 完全复用 Wind.vue 的样式（包括 loading、布局、卡片等）并添加卡片进度条样式 ===== */
+/* ===== Loading 样式 ===== */
 .loading-container {
   position: fixed;
   inset: 0;
@@ -511,6 +558,7 @@ onUnmounted(() => {
 @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
+/* ===== 主页面布局 ===== */
 .wind-energy-page {
   display: flex;
   width: 100%;
@@ -549,9 +597,10 @@ onUnmounted(() => {
   letter-spacing: 1px;
   margin: 0;
 }
+/* 美化后的时间样式 */
 .current-time {
   font-size: 13px;
-  font-family: 'Monaco', 'Monospace', 'monospace';
+  font-family: 'Monaco', 'Monospace', monospace;
   color: #a5f3c3;
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(4px);
@@ -561,6 +610,7 @@ onUnmounted(() => {
   border: 1px solid rgba(16, 185, 129, 0.3);
   box-shadow: 0 0 8px rgba(16, 185, 129, 0.2);
   transition: all 0.2s;
+  font-weight: bold;
 }
 .current-time:hover {
   border-color: #10b981;
@@ -733,84 +783,52 @@ onUnmounted(() => {
   display: none;
 }
 
-/* 第四个图表：一排四个指标卡片（与太阳能页面卡片样式一致） */
-.metrics-row {
+/* 第三个图表：一排四个环形进度条 */
+.gauges-row {
   flex: 1;
   display: flex;
-  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
   gap: 12px;
   padding: 8px 0;
-  min-height: 0;
 }
-.metric-card {
+.gauge-card {
   flex: 1;
-  background: rgba(15, 23, 42, 0.5);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(59, 130, 246, 0.3);
+  text-align: center;
+  background: rgba(15, 23, 42, 0.4);
   border-radius: 16px;
-  padding: 12px 8px;
+  padding: 8px 4px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  transition: all 0.3s ease;
+  gap: 6px;
 }
-.metric-card:hover {
-  background: rgba(59, 130, 246, 0.1);
-  border-color: rgba(59, 130, 246, 0.6);
-  transform: translateY(-2px);
+.mini-gauge {
+  width: 70px;
+  height: 70px;
 }
-.metric-icon {
-  font-size: 28px;
-  margin-bottom: 8px;
+.mini-gauge :deep(.el-progress-circle) {
+  width: 70px !important;
+  height: 70px !important;
 }
-.metric-info {
-  width: 100%;
-}
-.metric-label {
-  font-size: 12px;
-  color: #94a3b8;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 4px;
-  font-weight: 500;
-  min-height: 35px;
+.gauge-value {
+  font-size: 16px;
   font-weight: bold;
-}
-.metric-value {
-  font-size: 20px;
-  font-weight: 800;
   color: #facc15;
-  font-family: monospace;
-  line-height: 1.2;
 }
-.metric-unit {
-  font-size: 12px;
-  font-weight: 500;
-  color: #64748b;
-  margin-left: 2px;
-}
-.metric-trend {
+.gauge-unit {
   font-size: 10px;
+  color: #64748b;
+}
+.gauge-title {
+  font-size: 11px;
+  color: #94a3b8;
+  font-weight: 500;
+}
+.gauge-desc {
+  font-size: 12px;
+  color: #cbd5e1;
   font-weight: 600;
-  display: inline-block;
-  margin-top: 6px;
-  padding: 2px 6px;
-  border-radius: 20px;
-}
-.metric-trend.up {
-  background: rgba(16, 185, 129, 0.15);
-  color: #34d399;
-}
-.metric-progress {
-  margin: auto;
-  margin-top: 8px;
-  width: 90%;
-}
-.metric-progress :deep(.el-progress-bar__outer) {
-  background-color: rgba(255,255,255,0.1);
 }
 
 /* ========== 移动端适配 (屏幕宽度 ≤ 768px) ========== */

@@ -241,7 +241,7 @@ import {ref, onMounted, onBeforeUnmount, nextTick, watch, computed} from 'vue'
 import { useRoute } from 'vue-router'
 import * as echarts from 'echarts'
 
-import { useCounterStore } from '@/stores/counter'
+import { useCounterStore } from '@/stores/counter.js'
 import { getCurrentInstance } from 'vue'
 const getStore = () => {
   const instance = getCurrentInstance()
