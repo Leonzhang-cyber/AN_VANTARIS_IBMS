@@ -9,7 +9,8 @@ const messages = {
             alarm:'Alarm',
             maintain:'Maintain',
             report:'Report',
-            settings:'Settings'
+            settings:'Settings',
+            carbon: 'Carbon Credit'
         },
         dashboard: 'Dashboard',
         deviceTotal: 'Total Devices',

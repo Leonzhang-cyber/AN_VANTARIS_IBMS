@@ -17,7 +17,7 @@
         'mobile-sidebar': isMobile,
         'open': isMobile && mobileSidebarVisible
       }"
-        :style="{ width: isFullscreen ? '0' : (isMobile ? '260px' : '230px'), opacity: isFullscreen ? 0 : 1 }"
+        :style="{ width: isFullscreen ? '0' : (isMobile ? '260px' : '260px'), opacity: isFullscreen ? 0 : 1 }"
     >
       <!-- Logo 固定 -->
       <div class="logo-box">
@@ -35,7 +35,7 @@
             :default-active="activeMenu"
             v-model:default-openeds="openedMenus"
             @select="handleMenuSelect"
-            style="border-right:none"
+            style="border-right:none;"
         >
           <!-- 仪表盘子菜单 -->
           <el-sub-menu index="/">
@@ -115,6 +115,12 @@
             </el-menu-item>
           </el-sub-menu>
 
+
+          <el-menu-item index="/carbon">
+            <el-icon><HelpFilled /></el-icon>
+            <span>{{ $t('menu.carbon') }}</span>
+          </el-menu-item>
+
           <el-menu-item index="/alarm">
             <el-icon><Warning /></el-icon>
             <span>{{ $t('menu.alarm') }}</span>
@@ -136,7 +142,7 @@
 
       <!-- 版权固定底部 -->
       <div class="sidebar-footer">
-        <span>© {{ new Date().getFullYear() }} AegisNexus</span>
+        <span>© {{ new Date().getFullYear() }} AegisNexus All rights reserved.</span>
       </div>
     </el-aside>
 
@@ -195,7 +201,7 @@ import {
   Box, Warning, Tools, Document, Setting, FullScreen, Menu
 } from '@element-plus/icons-vue'
 // 引入 store
-import { useCounterStore } from '@/stores/counter'  // 或者使用 fullscreen store
+import { useCounterStore } from '@/stores/counter.js'  // 或者使用 fullscreen store
 
 const route = useRoute()
 const router = useRouter()
@@ -335,7 +341,7 @@ const setLang = (l) => {
 const menuPaths = [
   '/Factory','/Building','/Airport','/Shopping','/Hospital','/Hotel',
   '/device/hvac','/device/sas','/device/fas','/device/lighting','/device/plumbing',
-  '/energy/wind','/energy/solar','/energy/electricity','/energy/waste','/energy/hydrogen','/energy/storage','/energy/geothermal',
+  '/energy/wind','/energy/solar','/energy/electricity','/energy/waste','/energy/hydrogen','/energy/storage','/energy/geothermal','/carbon',
   '/alarm','/maintain','/report','/settings'
 ]
 
@@ -359,6 +365,7 @@ const currentMenuName = computed(() => {
     '/energy/hydrogen': 'Hydrogen Energy Production',
     '/energy/storage': 'Energy Storage Systems',
     '/energy/geothermal': 'Geothermal Energy',
+    '/carbon': 'Carbon Credit',
     '/alarm': 'Alarm Center',
     '/maintain': 'Maintenance Management',
     '/report': 'Data Reports',
@@ -492,6 +499,7 @@ onUnmounted(() => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
   background: #0a1629;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   color: #8899aa;

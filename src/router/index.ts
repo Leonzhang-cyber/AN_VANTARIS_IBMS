@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Layout from '../layout/Layout.vue'
+import Layout from '@/views/layout/Layout.vue'
 
 const routes = [
   {
@@ -128,6 +128,12 @@ const routes = [
             meta: { title: 'Geothermal Energy' }
           }
         ]
+      },
+      {
+        path: 'carbon',
+        name: 'Carbon',
+        component: () => import('../views/Carbon/Carbon.vue'),
+        meta: { title: 'Carbon Credit' }
       },
       {
         path: 'alarm',
