@@ -802,7 +802,7 @@ onBeforeUnmount(() => {
 .datetime { font-size: 16px; color: #0ff; font-weight: 600; background: transparent; padding: 8px 20px; border-radius: 12px; backdrop-filter: blur(8px); min-width: 280px; text-align: center; font-family: monospace; border: 1px solid rgba(0,255,255,0.5); box-shadow: 0 0 10px rgba(0,255,255,0.3); }
 .kpi-strip { display: flex; justify-content: space-around; gap: 20px; margin: 10px 24px 20px; padding: 12px 20px; flex-wrap: wrap; }
 .kpi-item { display: flex; gap: 12px; align-items: baseline; font-size: 15px; }
-.kpi-label { color: #94a3b8; font-weight: 500; }
+.kpi-label { color: #ffffff; font-weight: 500; }
 .kpi-value { font-size: 24px; font-weight: 800; color: #facc15; font-family: monospace; text-shadow: 0 0 5px rgba(250,204,21,0.5); }
 .content-area { flex: 1; display: flex; padding: 0 24px 24px; gap: 32px; overflow-y: auto; }
 .left-panel { width: 320px; flex-shrink: 0; }

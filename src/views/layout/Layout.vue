@@ -8,7 +8,6 @@
           @click="closeMobileSidebar"
       ></div>
     </transition>
-
     <!-- 左侧菜单（全屏时隐藏，移动端作为抽屉） -->
     <el-aside
         width="230px"
@@ -69,6 +68,9 @@
               <el-icon><Box /></el-icon>
               <span>{{ $t('menu.device') }}</span>
             </template>
+            <el-menu-item index="/device/area-topology">
+              <span>Area Device Topology</span>
+            </el-menu-item>
             <el-menu-item index="/device/hvac">
               <span>HVAC</span>
             </el-menu-item>
@@ -116,23 +118,118 @@
           </el-sub-menu>
 
 
-          <el-menu-item index="/carbon">
-            <el-icon><HelpFilled /></el-icon>
-            <span>{{ $t('menu.carbon') }}</span>
-          </el-menu-item>
+          <!-- 仪表盘子菜单 -->
+          <el-sub-menu index="/property">
+            <template #title>
+              <el-icon><Box /></el-icon>
+              <span>Smart Property</span>
+            </template>
+            <el-menu-item index="/property/parking">
+              <span>Parking Management</span>
+            </el-menu-item>
+            <el-menu-item index="/property/visitor">
+              <span>Visitor Management</span>
+            </el-menu-item>
+            <el-menu-item index="/property/space">
+              <span>Space Management</span>
+            </el-menu-item>
+            <el-menu-item index="/property/waste">
+              <span>Waste Management</span>
+            </el-menu-item>
+          </el-sub-menu>
+
+          <!-- 仪表盘子菜单 -->
+          <el-sub-menu index="/blockchain">
+            <template #title>
+              <el-icon><Box /></el-icon>
+              <span>Blockchain Services</span>
+            </template>
+            <el-menu-item index="/blockchain/node">
+              <span>Node Management</span>
+            </el-menu-item>
+            <el-menu-item index="/blockchain/web3">
+              <span>Web3 Services</span>
+            </el-menu-item>
+            <el-menu-item index="/blockchain/did">
+              <span>DID Management</span>
+            </el-menu-item>
+          </el-sub-menu>
 
           <el-menu-item index="/alarm">
             <el-icon><Warning /></el-icon>
             <span>{{ $t('menu.alarm') }}</span>
           </el-menu-item>
-          <el-menu-item index="/maintain">
-            <el-icon><Tools /></el-icon>
-            <span>{{ $t('menu.maintain') }}</span>
-          </el-menu-item>
+
+          <!-- 仪表盘子菜单 -->
+          <el-sub-menu index="/maintain">
+            <template #title>
+              <el-icon><Box /></el-icon>
+              <span>Maintenance</span>
+            </template>
+            <el-menu-item index="/maintain/predictive">
+              <span>Predictive Maintenance</span>
+            </el-menu-item>
+          </el-sub-menu>
+
+          <!-- 仪表盘子菜单 -->
+          <el-sub-menu index="/carbon">
+            <template #title>
+              <el-icon><Box /></el-icon>
+              <span>Carbon Credit</span>
+            </template>
+            <el-menu-item index="/carbon/realtime">
+              <span>Carbon Emission</span>
+            </el-menu-item>
+          </el-sub-menu>
+
+          <!--          <el-menu-item index="/carbon">-->
+          <!--            <el-icon><HelpFilled /></el-icon>-->
+          <!--            <span>{{ $t('menu.carbon') }}</span>-->
+          <!--          </el-menu-item>-->
+
+          <!--          <el-menu-item index="/maintain">-->
+          <!--            <el-icon><Tools /></el-icon>-->
+          <!--            <span>{{ $t('menu.maintain') }}</span>-->
+          <!--          </el-menu-item>-->
+
           <el-menu-item index="/report">
             <el-icon><Document /></el-icon>
-            <span>{{ $t('menu.report') }}</span>
+            <span>Data Reports</span>
           </el-menu-item>
+
+          <!-- 仪表盘子菜单 -->
+          <el-sub-menu index="/support">
+            <template #title>
+              <el-icon><Box /></el-icon>
+              <span>System Support</span>
+            </template>
+            <el-menu-item index="/support/mobile">
+              <span>Mobile Terminal</span>
+            </el-menu-item>
+            <el-menu-item index="/support/notify">
+              <span>Multi‑dim Notification</span>
+            </el-menu-item>
+          </el-sub-menu>
+
+          <el-sub-menu index="/settings">
+            <template #title>
+              <el-icon><Box /></el-icon>
+              <span>System Settings</span>
+            </template>
+            <el-menu-item index="/settings/voice-cmd">
+              <span>Voice Command Settings</span>
+            </el-menu-item>
+            <el-menu-item index="/settings/tts-rule">
+              <span>TTS Broadcast Rules</span>
+            </el-menu-item>
+            <el-menu-item index="/settings/lang">
+              <span>Multi‑language Pack</span>
+            </el-menu-item>
+            <el-menu-item index="/settings/voice-log">
+              <span>Voice Training Logs</span>
+            </el-menu-item>
+          </el-sub-menu>
+
           <el-menu-item index="/settings">
             <el-icon><Setting /></el-icon>
             <span>{{ $t('menu.settings') }}</span>
@@ -140,12 +237,12 @@
         </el-menu>
       </div>
 
+
       <!-- 版权固定底部 -->
       <div class="sidebar-footer">
         <span>© {{ new Date().getFullYear() }} AegisNexus All rights reserved.</span>
       </div>
     </el-aside>
-
     <el-container>
       <!-- 顶部栏（全屏时隐藏 + 手机端直接隐藏） -->
       <el-header
@@ -159,11 +256,105 @@
           </el-icon>
           <div class="header-title">{{ currentMenuName }}</div>
         </div>
-        <div class="header-tools" v-if="!isMobile">
-          <!-- 新加坡时间（移动端简化显示） -->
-          <div class="singapore-time">{{ mobileTimeDisplay }}</div>
 
-          <!-- 全屏按钮：手机端不渲染 -->
+        <!-- 快捷控制按钮组（仅桌面端显示） -->
+        <div class="header-controls" v-if="!isMobile">
+          <!-- 开门控制 -->
+          <el-dropdown trigger="click" @command="handleDoorOpen">
+            <el-button size="small" type="success" :icon="Lock">
+              开门控制
+              <el-icon class="el-icon--right"><ArrowDown /></el-icon>
+            </el-button>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item command="lobby">
+                  <el-icon><OfficeBuilding /></el-icon>
+                  大堂区域
+                </el-dropdown-item>
+                <el-dropdown-item command="parking">
+                  <el-icon><Van /></el-icon>
+                  停车场区域
+                </el-dropdown-item>
+                <el-dropdown-item command="office">
+                  <el-icon><Grid /></el-icon>
+                  办公区域
+                </el-dropdown-item>
+                <el-dropdown-item command="warehouse">
+                  <el-icon><Box /></el-icon>
+                  仓库区域
+                </el-dropdown-item>
+                <el-dropdown-item divided command="all">
+                  <el-icon><Key /></el-icon>
+                  全部开门
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
+
+          <!-- 灯光控制 -->
+          <el-dropdown trigger="click" @command="handleLightControl">
+            <el-button size="small" type="warning" :icon="Sunny">
+              灯光控制
+              <el-icon class="el-icon--right"><ArrowDown /></el-icon>
+            </el-button>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item command="lobby-on">大堂 - 开灯</el-dropdown-item>
+                <el-dropdown-item command="lobby-off">大堂 - 关灯</el-dropdown-item>
+                <el-dropdown-item command="parking-on">停车场 - 开灯</el-dropdown-item>
+                <el-dropdown-item command="parking-off">停车场 - 关灯</el-dropdown-item>
+                <el-dropdown-item divided command="all-on">全部开灯</el-dropdown-item>
+                <el-dropdown-item command="all-off">全部关灯</el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
+
+          <!-- 空调控制 -->
+          <el-dropdown trigger="click" @command="handleACControl">
+            <el-button size="small" type="primary" :icon="ColdDrink">
+              空调控制
+              <el-icon class="el-icon--right"><ArrowDown /></el-icon>
+            </el-button>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item command="temp-24">温度 24°C</el-dropdown-item>
+                <el-dropdown-item command="temp-26">温度 26°C</el-dropdown-item>
+                <el-dropdown-item command="temp-28">温度 28°C</el-dropdown-item>
+                <el-dropdown-item divided command="mode-cool">制冷模式</el-dropdown-item>
+                <el-dropdown-item command="mode-fan">送风模式</el-dropdown-item>
+                <el-dropdown-item divided command="all-off">全部关闭</el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
+
+          <!-- 场景模式 -->
+          <el-dropdown trigger="click" @command="handleSceneMode">
+            <el-button size="small" :icon="MagicStick">
+              场景模式
+              <el-icon class="el-icon--right"><ArrowDown /></el-icon>
+            </el-button>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item command="work">工作模式</el-dropdown-item>
+                <el-dropdown-item command="meeting">会议模式</el-dropdown-item>
+                <el-dropdown-item command="rest">休息模式</el-dropdown-item>
+                <el-dropdown-item command="energy">节能模式</el-dropdown-item>
+                <el-dropdown-item divided command="security">安防模式</el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
+
+          <!-- 紧急按钮 -->
+          <el-button size="small" type="danger" :icon="Bell" @click="handleEmergency">
+            紧急处置
+          </el-button>
+        </div>
+
+        <div class="header-tools">
+          <!-- 新加坡时间 -->
+          <div class="singapore-time" v-if="!isMobile">{{ mobileTimeDisplay }}</div>
+
+          <!-- 全屏按钮 -->
           <el-tooltip :content="isFullscreen ? 'Exit Full Screen' : 'Full Screen'" placement="bottom" v-if="!isMobile">
             <FullScreen class="fullscreen-icon" @click="toggleFullScreen" />
           </el-tooltip>
@@ -196,9 +387,11 @@
 import { computed, ref, onMounted, onUnmounted, watch, onErrorCaptured, nextTick } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import {
-  Box, Warning, Tools, Document, Setting, FullScreen, Menu
+  Box, Warning, Tools, Document, Setting, FullScreen, Menu,
+  Lock, ArrowDown, OfficeBuilding, Van, Grid, Key,
+  Sunny, ColdDrink, MagicStick, Bell
 } from '@element-plus/icons-vue'
 // 引入 store
 import { useCounterStore } from '@/stores/counter.js'  // 或者使用 fullscreen store
@@ -244,6 +437,134 @@ const updateSingaporeTime = () => {
   const ms = String(sgTime.getMilliseconds()).padStart(3, '0')
 
   singaporeTime.value = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${ms} SGT`
+}
+
+// ============ 快捷控制方法 ============
+// 开门控制
+const handleDoorOpen = async (area) => {
+  const areaNames = {
+    lobby: '大堂区域',
+    parking: '停车场区域',
+    office: '办公区域',
+    warehouse: '仓库区域',
+    all: '所有区域'
+  }
+
+  try {
+    await ElMessageBox.confirm(
+        `确认打开 ${areaNames[area]} 的门禁？`,
+        '开门确认',
+        {
+          confirmButtonText: '确认开门',
+          cancelButtonText: '取消',
+          type: 'warning',
+        }
+    )
+    // 这里调用实际的开门 API
+    ElMessage.success(`${areaNames[area]} 门禁已打开`)
+    // await api.openDoor(area)
+  } catch (error) {
+    if (error !== 'cancel') {
+      ElMessage.error(`开门失败: ${error.message}`)
+    }
+  }
+}
+
+// 灯光控制
+const handleLightControl = (command) => {
+  const commands = {
+    'lobby-on': { area: '大堂', action: '开灯', status: 'on' },
+    'lobby-off': { area: '大堂', action: '关灯', status: 'off' },
+    'parking-on': { area: '停车场', action: '开灯', status: 'on' },
+    'parking-off': { area: '停车场', action: '关灯', status: 'off' },
+    'all-on': { area: '所有区域', action: '开灯', status: 'on' },
+    'all-off': { area: '所有区域', action: '关灯', status: 'off' }
+  }
+
+  const cmd = commands[command]
+  if (cmd) {
+    // 这里调用实际的灯光控制 API
+    ElMessage.success(`${cmd.area}${cmd.action}成功`)
+    // await api.controlLight(cmd.area, cmd.status)
+  }
+}
+
+// 空调控制
+const handleACControl = (command) => {
+  if (command.startsWith('temp-')) {
+    const temp = command.split('-')[1]
+    ElMessage.success(`空调温度已设置为 ${temp}°C`)
+    // await api.setACTemperature(temp)
+  } else if (command.startsWith('mode-')) {
+    const modes = {
+      'mode-cool': '制冷模式',
+      'mode-fan': '送风模式'
+    }
+    ElMessage.success(`空调已切换为${modes[command]}`)
+    // await api.setACMode(command)
+  } else if (command === 'all-off') {
+    ElMessage.success('所有空调已关闭')
+    // await api.turnOffAllAC()
+  }
+}
+
+// 场景模式
+const handleSceneMode = async (mode) => {
+  const modeNames = {
+    work: { name: '工作模式', desc: '灯光100%, 空调24°C, 门禁正常' },
+    meeting: { name: '会议模式', desc: '灯光80%, 空调26°C, 投影仪开启' },
+    rest: { name: '休息模式', desc: '灯光50%, 空调28°C, 背景音乐' },
+    energy: { name: '节能模式', desc: '灯光30%, 空调关闭, 设备休眠' },
+    security: { name: '安防模式', desc: '灯光关闭, 门禁锁定, 监控全开' }
+  }
+
+  const modeInfo = modeNames[mode]
+  if (modeInfo) {
+    try {
+      await ElMessageBox.confirm(
+          `${modeInfo.name}: ${modeInfo.desc}`,
+          '场景模式确认',
+          {
+            confirmButtonText: '启动',
+            cancelButtonText: '取消',
+            type: 'info',
+          }
+      )
+      ElMessage.success(`已启动${modeInfo.name}`)
+      // await api.activateScene(mode)
+    } catch (error) {
+      if (error !== 'cancel') {
+        ElMessage.error('场景启动失败')
+      }
+    }
+  }
+}
+
+// 紧急处置
+const handleEmergency = async () => {
+  try {
+    await ElMessageBox.confirm(
+        '确认启动紧急处置程序？\n这将立即锁定所有门禁并触发警报系统。',
+        '紧急处置确认',
+        {
+          confirmButtonText: '确认启动',
+          cancelButtonText: '取消',
+          type: 'error',
+          confirmButtonClass: 'el-button--danger',
+        }
+    )
+    ElMessage({
+      message: '紧急处置程序已启动！所有门禁已锁定，警报已触发',
+      type: 'error',
+      duration: 5000,
+      showClose: true
+    })
+    // await api.emergencyLockdown()
+  } catch (error) {
+    if (error !== 'cancel') {
+      ElMessage.error('紧急处置启动失败')
+    }
+  }
 }
 
 // 移动端方法
@@ -339,9 +660,13 @@ const setLang = (l) => {
 }
 
 const menuPaths = [
-  '/Factory','/Building','/Airport','/Shopping','/Hospital','/Hotel',
+  '/Factory','/Building','/Airport','/Shopping','/Hospital','/Hotel','/device/area-topology',
   '/device/hvac','/device/sas','/device/fas','/device/lighting','/device/plumbing',
-  '/energy/wind','/energy/solar','/energy/electricity','/energy/waste','/energy/hydrogen','/energy/storage','/energy/geothermal','/carbon',
+  '/property/parking','/property/visitor','/property/space','/property/waste',
+  '/blockchain/node','/blockchain/web3','/blockchain/did',
+  '/maintain/predictive',
+  '/energy/wind','/energy/solar','/energy/electricity','/energy/waste','/energy/hydrogen','/energy/storage','/energy/geothermal',
+  '/carbon/realtime',
   '/alarm','/maintain','/report','/settings'
 ]
 
@@ -353,11 +678,18 @@ const currentMenuName = computed(() => {
     '/Shopping': 'Dashboard - Shopping',
     '/Hospital': 'Dashboard - Hospital',
     '/Hotel': 'Dashboard - Hotel',
+    '/device/area-topology': 'Device Management - Area Topology',
     '/device/hvac': 'Device Management - HVAC',
     '/device/sas': 'Device Management - SAS',
     '/device/fas': 'Device Management - FAS',
     '/device/lighting': 'Device Management - Lighting',
     '/device/plumbing': 'Device Management - Plumbing',
+
+    '/property/parking': 'Property Management - Parking',
+    '/property/visitor': 'Property Management - Visitor',
+    '/property/space': 'Property Management - Space',
+    '/property/waste': 'Property Management - Waste',
+
     '/energy/wind': 'Wind Energy Analysis',
     '/energy/solar': 'Solar Energy Analysis',
     '/energy/electricity': 'Power Grid & Consumption',
@@ -365,7 +697,14 @@ const currentMenuName = computed(() => {
     '/energy/hydrogen': 'Hydrogen Energy Production',
     '/energy/storage': 'Energy Storage Systems',
     '/energy/geothermal': 'Geothermal Energy',
-    '/carbon': 'Carbon Credit',
+
+    '/maintain/predictive': 'Predictive Maintenance',
+
+    '/blockchain/node': 'Blockchain - Node Management',
+    '/blockchain/web3': 'Blockchain - Web3',
+    '/blockchain/did': 'Blockchain - DID',
+
+    '/carbon/realtime': 'Carbon Emission',
     '/alarm': 'Alarm Center',
     '/maintain': 'Maintenance Management',
     '/report': 'Data Reports',
@@ -516,12 +855,31 @@ onUnmounted(() => {
   background: #0a1629;
   border-bottom: 1px solid #0a1629;
   transition: all 0.3s;
+  gap: 12px;
 }
 
 .header-left {
   display: flex;
   align-items: center;
   gap: 12px;
+  flex-shrink: 0;
+}
+
+/* 快捷控制按钮组 */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  justify-content: center;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+.header-controls .el-button {
+  white-space: nowrap;
+  font-size: 13px;
+  padding: 8px 12px;
 }
 
 .menu-icon {
@@ -538,12 +896,14 @@ onUnmounted(() => {
   font-size: 16px;
   color: #fff;
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .header-tools {
   display: flex;
-  gap: 16px;
+  gap: 12px;
   align-items: center;
+  flex-shrink: 0;
 }
 
 /* 新加坡时间样式 */
@@ -636,6 +996,10 @@ onUnmounted(() => {
     text-overflow: ellipsis;
   }
 
+  .header-controls {
+    display: none; /* 移动端隐藏快捷控制按钮 */
+  }
+
   .singapore-time {
     font-size: 11px;
     padding: 2px 6px;
@@ -673,6 +1037,11 @@ onUnmounted(() => {
 
 /* 平板竖屏适配 */
 @media (min-width: 768px) and (max-width: 1024px) {
+  .header-controls .el-button {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
   .singapore-time {
     font-size: 12px;
     padding: 4px 8px;
@@ -680,6 +1049,18 @@ onUnmounted(() => {
 
   .header-title {
     font-size: 14px;
+  }
+}
+
+/* 中等屏幕优化（1024-1280） */
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .header-controls {
+    gap: 6px;
+  }
+
+  .header-controls .el-button {
+    font-size: 12px;
+    padding: 7px 10px;
   }
 }
 </style>

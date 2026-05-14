@@ -1121,7 +1121,7 @@ onBeforeUnmount(() => {
   font-size: 15px;
 }
 .kpi-label {
-  color: #3a3e45;
+  color: #ffffff;
   font-weight: 500;
 }
 .kpi-value {

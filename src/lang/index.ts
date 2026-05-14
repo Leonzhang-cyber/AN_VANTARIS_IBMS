@@ -6,7 +6,7 @@ const messages = {
             dashboard: 'Dashboard',
             device: 'Device',
             energy:'Energy',
-            alarm:'Alarm',
+            alarm:'Alert Event Center',
             maintain:'Maintain',
             report:'Report',
             settings:'Settings',

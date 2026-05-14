@@ -49,6 +49,12 @@ const routes = [
         redirect: '/device/hvac',
         children: [
           {
+            path: 'area-topology',
+            name: 'AreaTopology',
+            component: () => import('../views/Device/AreaTopology.vue'),
+            meta: { title: 'Area Topology' }
+          },
+          {
             path: 'hvac',
             name: 'DeviceHVAC',
             component: () => import('../views/Device/DeviceHVAC.vue'),
@@ -130,10 +136,60 @@ const routes = [
         ]
       },
       {
-        path: 'carbon',
-        name: 'Carbon',
-        component: () => import('../views/Carbon/Carbon.vue'),
-        meta: { title: 'Carbon Credit' }
+        path: 'property',
+        name: 'Smart Property',
+        redirect: '/property/parking',
+        children: [
+          {
+            path: 'parking',
+            name: 'Parking',
+            component: () => import('../views/Property/Parking.vue'),
+            meta: { title: 'Parking Management' }
+          },
+          {
+            path: 'visitor',
+            name: 'Visitor',
+            component: () => import('../views/Property/Visitor.vue'),
+            meta: { title: 'Visitor Management' }
+          },
+          {
+            path: 'space',
+            name: 'Space',
+            component: () => import('../views/Property/Space.vue'),
+            meta: { title: 'Space & Workspace Management' }
+          },
+          {
+            path: 'waste',
+            name: 'Waste',
+            component: () => import('../views/Property/Waste.vue'),
+            meta: { title: 'Waste Collection Management' }
+          }
+        ]
+      },
+      {
+        path: 'blockchain',
+        name: 'Blockchain Services',
+        redirect: '/blockchain/node',
+        children: [
+          {
+            path: 'node',
+            name: 'NodeDetail',
+            component: () => import('../views/Blockchain/NodeDetail.vue'),
+            meta: { title: 'Node Management' }
+          },
+          {
+            path: 'web3',
+            name: 'Web3Services',
+            component: () => import('../views/Blockchain/Web3Services.vue'),
+            meta: { title: 'Web3 Services' }
+          },
+          {
+            path: 'did',
+            name: 'DIDManagement',
+            component: () => import('../views/Blockchain/DIDManagement.vue'),
+            meta: { title: 'DID Management' }
+          }
+        ]
       },
       {
         path: 'alarm',
@@ -143,9 +199,29 @@ const routes = [
       },
       {
         path: 'maintain',
-        name: 'Maintain',
-        component: () => import('../views/Maintain/Maintain.vue'),
-        meta: { title: 'Maintenance Management' }
+        name: 'Maintenance Management',
+        redirect: '/maintain/predictive',
+        children: [
+          {
+            path: 'predictive',
+            name: 'Predictive',
+            component: () => import('../views/Maintain/Predictive.vue'),
+            meta: { title: 'Predictive Maintenance' }
+          }
+        ]
+      },
+      {
+        path: 'carbon',
+        name: 'Carbon Credit',
+        redirect: '/carbon/realtime',
+        children: [
+          {
+            path: 'realtime',
+            name: 'Carbon Emission',
+            component: () => import('../views/Carbon/Carbon.vue'),
+            meta: { title: 'Carbon Emission' }
+          }
+        ]
       },
       {
         path: 'report',
@@ -153,10 +229,61 @@ const routes = [
         component: () => import('../views/Report/Report.vue'),
         meta: { title: 'Data Reports' }
       },
+
+      {
+        path: 'support',
+        name: 'System Support',
+        redirect: '/support/mobile',
+        children: [
+          {
+            path: 'mobile',
+            name: 'Mobile Terminal',
+            component: () => import('../views/Support/Mobile.vue'),
+            meta: { title: 'Mobile Terminal' }
+          },
+          {
+            path: 'notify',
+            name: 'Multi-dimensional Notification',
+            component: () => import('../views/Support/Notification.vue'),
+            meta: { title: 'Multi-dimensional Notification' }
+          }
+        ]
+      },
+      {
+        path: 'settings',
+        name: 'System Settings',
+        redirect: '/settings/voice-cmd',
+        children: [
+          {
+            path: 'voice-cmd',
+            name: 'Voice Command Settings',
+            component: () => import('../views/Settings/Voice.vue'),
+            meta: { title: 'Voice Command Settings' }
+          },
+          {
+            path: 'tts-rule',
+            name: 'TTS Broadcast Rules',
+            component: () => import('../views/Settings/Rules.vue'),
+            meta: { title: 'TTS Broadcast Rulesn' }
+          },
+          {
+            path: 'lang',
+            name: 'Multi-language Pack',
+            component: () => import('../views/Settings/Language.vue'),
+            meta: { title: 'Multi-language Pack' }
+          },
+          {
+            path: 'voice-log',
+            name: 'Voice Training Logs',
+            component: () => import('../views/Settings/VoiceTraining.vue'),
+            meta: { title: 'Voice Training Logs' }
+          }
+        ]
+      },
       {
         path: 'settings',
         name: 'Settings',
-        component: () => import('../views/Setting/Settings.vue'),
+        component: () => import('../views/Settings/Settings.vue'),
         meta: { title: 'System Settings' }
       },
       // 404 处理 - 必须放在最后

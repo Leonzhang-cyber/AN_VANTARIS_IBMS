@@ -9,7 +9,7 @@ import { View } from "@element-plus/icons-vue";
         <View size="80" color="#c0c4cc" />
       </template>
       <template #description>
-        <span style="font-size: 16px; color: #909399;"> Not Developed Yet</span>
+        <span style="font-size: 16px; color: #909399;">Area Topology Not Developed Yet</span>
       </template>
     </el-empty>
   </div>
