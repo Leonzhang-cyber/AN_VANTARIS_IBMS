@@ -2,7 +2,8 @@
   <div v-if="isBackgroundLoaded" class="dashboard">
     <div class="top-header">
       <div class="header-left">
-        <div class="button-group">
+        <div class="button-group1" v-if="!isMobile"></div>
+        <div class="button-group" v-if="isMobile">
           <!-- 节能模式 -->
           <div class="switch-item">
             <span class="switch-label">Energy Saving</span>
@@ -357,8 +358,16 @@ const counterStore = getStore()
 const isFullscreen = computed(() => counterStore.isFullscreen)
 
 // ==================== 节能模式状态 ====================
-const isEnergySavingActive = ref(true)
-const showEnergyReport = ref(false)
+// Energy saving mode state - default ON
+const isEnergySavingActive = computed({
+  get: () => counterStore.isEnergySavingActive,
+  set: (val) => counterStore.setEnergySavingActive(val)
+})
+// Report drawer visibility - default OFF
+const showEnergyReport = computed({
+  get: () => counterStore.showEnergyReport,
+  set: (val) => counterStore.setShowEnergyReport(val)
+})
 
 // ==================== 机场节能数据 ====================
 let airportSavingStartTime = null
@@ -773,7 +782,12 @@ function resizeCharts() {
   if (airportReportChart) airportReportChart.resize()
 }
 
+const isMobile = ref(false)
+const checkMobile = () => {
+  isMobile.value = window.innerWidth < 768
+}
 onMounted(async () => {
+  checkMobile();
   updateTime()
   timeTimer = setInterval(updateTime, 1000)
   await preloadBackground()
@@ -838,6 +852,9 @@ onBeforeUnmount(() => {
 
 /* 开关组 */
 .button-group { display: flex; align-items: center; justify-content: center;gap: 10px; }
+.button-group1 {
+  width: 160px;
+}
 .switch-item { display: flex; align-items: center; gap: 5px; }
 .switch-label { font-size: 14px; font-weight: 600; color: #fff; white-space: nowrap; font-weight: bold; }
 .energy-saving-switch { --el-switch-on-color: #10b981; --el-switch-off-color: #475569; }

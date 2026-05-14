@@ -1,0 +1,595 @@
+<style>
+    /* 横条弹窗样式 - 底部全宽，半透明毛玻璃，紧凑高度 */
+    .privacy-banner {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        background: #ffffff;
+        background: rgba(10, 15, 25, 0.95);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+        transition: all 0.3s ease;
+        animation: slideUp 0.4s ease-out;
+        padding: 8px 20px;
+        border-radius: 0;
+        max-width: none;
+    }
+
+    .privacy-banner-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 0;
+    }
+
+    .privacy-banner p {
+        font-size: 14px;
+        font-weight: 600;
+        margin: 0;
+        color: #1e293b;
+        color: #f0f4f8;
+        line-height: 1.3;
+    }
+
+    .privacy-banner .description {
+        font-size: 12px;
+        color: #475569;
+        color: #94a3b8;
+        margin: 2px 0 0 0;
+        line-height: 1.35;
+    }
+
+    .button-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        margin-left: auto;
+    }
+
+    .btn {
+        padding: 6px 18px;
+        border-radius: 40px;
+        font-weight: 600;
+        font-size: 12px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border: 1px solid;
+        font-family: inherit;
+        background: transparent;
+    }
+
+    .btn-customise {
+        background: #ffffff;
+        color: #3b82f6;
+        border-color: #cbd5e1;
+    }
+    .btn-customise:hover {
+        background: #f8fafc;
+        border-color: #3b82f6;
+    }
+
+    /* 按钮样式更新 */
+    .btn-customise {
+        background: rgba(255, 255, 255, 0.05);
+        color: #94a3b8;
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+    .btn-customise:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.2);
+        color: #cbd5e0;
+    }
+
+
+    .btn-reject {
+        background: #ffffff;
+        color: #64748b;
+        border-color: #cbd5e1;
+    }
+    .btn-reject:hover {
+        background: #f1f5f9;
+        border-color: #94a3b8;
+        color: #475569;
+    }
+
+    .btn-accept {
+        background: #3b82f6;
+        color: white;
+        border-color: #3b82f6;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .btn-accept:hover {
+        background: #2563eb;
+        border-color: #2563eb;
+    }
+
+    .btn-reject {
+        background: rgba(255, 255, 255, 0.05);
+        color: #cbd5e0;
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+    .btn-reject:hover {
+        background: rgba(255, 255, 255, 0.12);
+        border-color: rgba(255, 255, 255, 0.2);
+        color: #f0f4f8;
+    }
+
+    .btn-accept {
+        background: #3b82f6;
+        color: white;
+        border-color: #3b82f6;
+        box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+    }
+    .btn-accept:hover {
+        background: #2563eb;
+        border-color: #2563eb;
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+    }
+
+    @keyframes slideUp {
+        from {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .privacy-banner.hide-banner {
+        display: none;
+    }
+
+    /* 移动端适配 */
+    @media (max-width: 768px) {
+        .privacy-banner {
+            padding: 10px 16px;
+        }
+        .privacy-banner-content {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 8px;
+        }
+        .button-group {
+            margin-left: 0;
+            justify-content: flex-end;
+        }
+        .privacy-banner p {
+            font-size: 13px;
+        }
+        .privacy-banner .description {
+            font-size: 11px;
+        }
+        .btn {
+            padding: 5px 14px;
+            font-size: 11px;
+        }
+    }
+    }
+</style>
+<style>
+    footer {
+        background: #1a202c;
+        color: #e2e8f0;
+        padding: 70px 0 50px;
+        border-top: 1px solid #2d3748;
+    }
+
+    .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 40px;
+        display: grid;
+        grid-template-columns: 2fr 2fr;
+        gap: 80px;
+        align-items: start;
+    }
+
+    .company-info h3 {
+        font-size: 24px;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 20px;
+        letter-spacing: -0.5px;
+    }
+
+    .company-info p {
+        font-size: 15px;
+        line-height: 1.7;
+        color: #cbd5e0;
+        margin-bottom: 30px;
+        max-width: 90%;
+    }
+
+    .contact-details {
+        margin-top: 25px;
+    }
+
+    .contact-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 16px;
+        font-size: 15px;
+        line-height: 1.6;
+        color: #a0aec0;
+    }
+
+    .contact-item i {
+        margin-right: 12px;
+        color: #63b3ed;
+        width: 18px;
+        font-size: 16px;
+        margin-top: 2px;
+    }
+
+    .contact-item span {
+        flex: 1;
+    }
+
+    .pages-section {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        gap: 60px;
+    }
+
+    .pages-column h4 {
+        color: white;
+        font-size: 15px;
+        font-weight: 600;
+        margin-bottom: 22px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .pages-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .pages-list li {
+        margin-bottom: 14px;
+        transition: transform 0.2s ease;
+    }
+
+    .pages-list li:hover {
+        transform: translateX(4px);
+    }
+
+    .pages-list a {
+        color: #cbd5e0;
+        text-decoration: none;
+        font-size: 15px;
+        transition: all 0.2s;
+        display: inline-block;
+        padding: 2px 0;
+    }
+
+    .pages-list a:hover {
+        color: #63b3ed;
+        text-decoration: underline;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 4px;
+    }
+
+    .solutions-list a {
+        font-size: 14px;
+        letter-spacing: 0.5px;
+    }
+
+    .footer-bottom {
+        max-width: 1200px;
+        margin: 80px auto 0;
+        padding: 25px 40px 0;
+        border-top: 1px solid #2d3748;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #a0aec0;
+        font-size: 14px;
+    }
+
+    .footer-bottom div:first-child {
+        font-weight: 500;
+    }
+
+    .footer-bottom div:last-child {
+        font-style: italic;
+        color: #cbd5e0;
+    }
+
+    @media (max-width: 1024px) {
+        .footer-container {
+            gap: 60px;
+            padding: 0 30px;
+        }
+
+        .pages-section {
+            gap: 40px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .footer-container {
+            grid-template-columns: 1fr;
+            gap: 50px;
+            padding: 0 25px;
+        }
+
+        .company-info p {
+            max-width: 100%;
+        }
+
+        .pages-section {
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        .footer-bottom {
+            margin-top: 60px;
+            padding: 25px 25px 0;
+            flex-direction: column;
+            text-align: center;
+            gap: 15px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        footer {
+            padding: 50px 0 40px;
+        }
+
+        .footer-container {
+            padding: 0 20px;
+        }
+
+        .company-info h3 {
+            font-size: 22px;
+        }
+
+        .contact-item {
+            font-size: 14px;
+        }
+
+        .pages-list a {
+            font-size: 14px;
+        }
+
+        .footer-bottom {
+            padding: 20px 20px 0;
+            font-size: 13px;
+        }
+    }
+</style>
+
+<footer>
+    <div class="footer-container">
+        <div class="company-info">
+            <h3>WitHive</h3>
+            <p>True intelligence lies in understanding the essence of each scenario and focusing on the subtle needs of people.
+
+
+            </p>
+
+            <div class="contact-details">
+                <div class="contact-item">
+                    <i>📍</i>
+                    <span>RM 8017, FLAT B, 8/F., ACRO IND BUILDING, 19 YUK YAT STREET, TO KWA WAN, KOWLOON, HK</span>
+                </div>
+                <div class="contact-item">
+                    <i>📞</i>
+                    <span>+852 84936949</span>
+                </div>
+                <div class="contact-item">
+                    <i>✉️</i>
+                    <span>sales@hx-smartlife.com
+</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="pages-section">
+            <div class="pages-column">
+                <h4>Pages</h4>
+                <ul class="pages-list solutions-list">
+                    <li><a href="/our-product">Our Product</a></li>
+                    <li><a href="/our-scene">Our Scene</a></li>
+                    <li><a href="/our-service">Our Service</a></li>
+                    <li><a href="/our-case">Our Case</a></li>
+                </ul>
+            </div>
+
+            <div class="pages-column">
+                <h4>Company</h4>
+                <ul class="pages-list">
+                    <li><a href="/about-us">About Us</a></li>
+                    <li><a href="/contact-us">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <div>© WitHive 2025 All rights reserved.</div>
+    </div>
+</footer>
+
+<div id="privacyBanner" class="privacy-banner">
+    <div class="privacy-banner-content">
+        <p>🍪 We value your privacy</p>
+        <div class="description">
+            We use cookies to enhance your browsing experience, serve personalised ads or content, and analyse our traffic. By clicking "Accept All", you consent to our use of cookies.
+        </div>
+        <div class="button-group">
+            <button id="customiseBtn" class="btn btn-customise">Customise</button>
+            <button id="rejectAllBtn" class="btn btn-reject">Reject All</button>
+            <button id="acceptAllBtn" class="btn btn-accept">Accept All</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        // ---------- 缓存 key 定义 ----------
+        const STORAGE_KEY = 'aegis_privacy_consent';
+
+        // 辅助函数: 获取当前时间戳 (毫秒)
+        function getCurrentTimestamp() {
+            return Date.now();
+        }
+
+        // 存储点击状态: 同时记录时间戳和clicked=true
+        function storeConsent() {
+            const consentData = {
+                timestamp: getCurrentTimestamp(),
+                clicked: true   // 表示用户已经做出选择 (无论点哪个按钮)
+            };
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(consentData));
+                console.log('[Privacy] 用户已选择，存储状态:', consentData);
+            } catch (e) {
+                console.warn('localStorage 存储失败', e);
+            }
+        }
+
+        // 检查缓存，判断是否在12小时内并且已经点击过
+        // 返回 true 表示不应该显示弹窗 (已同意/已选择且在有效期内)
+        function shouldSuppressPopup() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (!raw) return false;   // 无记录，需要弹窗
+
+                const data = JSON.parse(raw);
+                // 兼容老数据格式: 需要有 timestamp 和 clicked === true
+                if (!data || typeof data.timestamp !== 'number' || data.clicked !== true) {
+                    return false;
+                }
+
+                const now = getCurrentTimestamp();
+                const elapsedMs = now - data.timestamp;
+                const twelveHoursMs = 12 * 60 * 60 * 1000; // 12小时毫秒数
+
+                // 若时间差小于12小时，且clicked为true => 不弹窗
+                if (elapsedMs < twelveHoursMs) {
+                    console.log(`[Privacy] 上次选择在 ${(elapsedMs / 3600000).toFixed(1)} 小时前，在12小时内，保持隐藏弹窗`);
+                    return true;
+                } else {
+                    // 超过12小时，清除旧缓存避免无限堆积，重新要求交互
+                    console.log('[Privacy] 缓存已超过12小时，清除旧记录并准备重新弹窗');
+                    localStorage.removeItem(STORAGE_KEY);
+                    return false;
+                }
+            } catch (err) {
+                console.error('解析存储数据出错', err);
+                // 出错时安全降级：删除可能的异常记录，重新弹窗
+                localStorage.removeItem(STORAGE_KEY);
+                return false;
+            }
+        }
+
+        // 隐藏弹窗 (添加hide类)
+        function hideBanner() {
+            const banner = document.getElementById('privacyBanner');
+            if (banner) {
+                banner.classList.add('hide-banner');
+            }
+        }
+
+        // 处理用户任一按钮点击: 存储 + 隐藏弹窗 + (可选任意后续逻辑)
+        function onUserAction() {
+            // 存入时间戳和点击状态
+            storeConsent();
+            // 隐藏弹窗
+            hideBanner();
+        }
+
+        // 初始化弹窗逻辑：检测是否满足显示条件，若不满足则直接隐藏；若满足则显示
+        function initPrivacyBanner() {
+            const banner = document.getElementById('privacyBanner');
+            if (!banner) return;
+
+            const suppress = shouldSuppressPopup();
+            if (suppress) {
+                // 已经点击过且在12小时内 -> 不显示
+                banner.classList.add('hide-banner');
+            } else {
+                // 需要显示弹窗: 确保显示 (移除隐藏类)
+                banner.classList.remove('hide-banner');
+                // 确保弹窗可见（如果之前有隐藏类，现在强制显示）
+            }
+        }
+
+        // 绑定按钮事件 (一旦点击，无论哪个选项，都存储并隐藏)
+        function bindEvents() {
+            const customiseBtn = document.getElementById('customiseBtn');
+            const rejectBtn = document.getElementById('rejectAllBtn');
+            const acceptBtn = document.getElementById('acceptAllBtn');
+
+            if (customiseBtn) {
+                customiseBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    // 此处可添加自定义逻辑 (例如记录用户偏好设置等)
+                    console.log('[Action] 用户点击 Customise');
+                    onUserAction();
+                });
+            }
+
+            if (rejectBtn) {
+                rejectBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    console.log('[Action] 用户点击 Reject All');
+                    onUserAction();
+                });
+            }
+
+            if (acceptBtn) {
+                acceptBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    console.log('[Action] 用户点击 Accept All');
+                    onUserAction();
+                });
+            }
+        }
+
+        // 额外兼容: 假如页面动态改变，确保在页面完全加载时执行
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                initPrivacyBanner();
+                bindEvents();
+            });
+        } else {
+            initPrivacyBanner();
+            bindEvents();
+        }
+
+        // 可选: 监听 localStorage 变化 (跨标签页同步? 根据需求可以不做额外处理，但为了防止多个标签页同时打开弹窗，
+        // 增加一个storage事件，如果其他页面更新了缓存，当前页面如果弹窗展示则需要根据新缓存决定隐藏)
+        window.addEventListener('storage', (event) => {
+            if (event.key === STORAGE_KEY) {
+                // 当其他页面更新了隐私缓存时，重新评估当前弹窗是否需要隐藏
+                const shouldHide = shouldSuppressPopup();
+                const banner = document.getElementById('privacyBanner');
+                if (banner && shouldHide) {
+                    banner.classList.add('hide-banner');
+                } else if (banner && !shouldHide) {
+                    // 但注意如果其他页面清除或者过期重新显示逻辑，应当保持规则同步, 但较少场景出现跨页过期, 简单逻辑确保一致性:
+                    // 若新存储内容无效（例如被清除），重置显示；但为了避免混乱，重新评估
+                    if (!shouldSuppressPopup()) {
+                        banner.classList.remove('hide-banner');
+                    }
+                }
+            }
+        });
+    })();
+</script>

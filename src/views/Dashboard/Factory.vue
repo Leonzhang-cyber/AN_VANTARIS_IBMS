@@ -3,8 +3,8 @@
     <!-- Top Header - with switch buttons -->
     <div class="top-header">
       <div class="header-left">
-
-        <div class="button-group">
+        <div class="button-group1" v-if="!isMobile"></div>
+        <div class="button-group" v-if="isMobile">
           <!-- 节能模式 -->
           <div class="switch-item">
             <span class="switch-label">Energy Saving</span>
@@ -337,9 +337,15 @@ const loadingProgress = ref(0)
 const loadingMessage = ref('Preparing assets...')
 
 // Energy saving mode state - default ON
-const isEnergySavingActive = ref(true)
+const isEnergySavingActive = computed({
+  get: () => counterStore.isEnergySavingActive,
+  set: (val) => counterStore.setEnergySavingActive(val)
+})
 // Report drawer visibility - default OFF
-const showEnergyReport = ref(false)
+const showEnergyReport = computed({
+  get: () => counterStore.showEnergyReport,
+  set: (val) => counterStore.setShowEnergyReport(val)
+})
 
 // Energy saving accumulation data
 let savingStartTime = null
@@ -812,8 +818,12 @@ watch(showEnergyReport, (newVal) => {
     reportChart = null
   }
 })
-
+const isMobile = ref(false)
+const checkMobile = () => {
+  isMobile.value = window.innerWidth < 768
+}
 onMounted(async () => {
+  checkMobile()
   updateTime()
   timeTimer = setInterval(updateTime, 1000)
 
@@ -1041,6 +1051,10 @@ onBeforeUnmount(() => {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.button-group1 {
+  width: 160px;
 }
 
 .energy-saving-switch {
