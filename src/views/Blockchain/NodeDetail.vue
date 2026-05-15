@@ -1,6 +1,6 @@
 <template>
   <div class="simple-dashboard">
-    <!-- Header -->
+    <!-- Header1-->
     <div class="dashboard-header">
       <div class="title-section">
         <h1>Blockchain Private Chain</h1>
