@@ -229,10 +229,10 @@
       <el-header
           class="header-bar"
           :style="{
-            height: isFullscreen ? '0' : (isMobile ? '48px' : '60px'),
-            opacity: isFullscreen ? 0 : 1,
-            padding: isFullscreen ? 0 : (isMobile ? '0 8px' : '0 16px')
-          }"
+      height: isFullscreen ? '0' : (isMobile ? '48px' : '60px'),
+      opacity: isFullscreen ? 0 : 1,
+      padding: isFullscreen ? 0 : (isMobile ? '0 8px' : '0 16px')
+    }"
       >
         <!-- 移动端顶部 -->
         <div class="header-mobile" v-if="isMobile && !isFullscreen">
@@ -248,13 +248,13 @@
               size="small"
               :type="isListening ? 'danger' : ''"
               :icon="Microphone"
-              class="control-btn voice-btn"
+              class="control-btn voice-btn pill-btn"
               :class="{ 'is-recording': isListening }"
               @click="toggleVoiceAssistant"
           >
             <span v-if="!isMobile && visibleButtons.voice">Voice</span>
             <span v-if="isListening" class="recording-wave">
-              <span class="wave-bar" v-for="i in 5" :key="i" :style="{ animationDelay: `${i * 0.1}s` }"></span>
+                <span class="wave-bar" v-for="i in 5" :key="i" :style="{ animationDelay: `${i * 0.1}s` }"></span>
             </span>
           </el-button>
 
@@ -263,7 +263,7 @@
             <el-button
                 size="small"
                 :icon="Bell"
-                class="control-btn"
+                class="control-btn pill-btn"
                 @click="openAlarmDrawer"
             >
               <span v-if="!isMobile && visibleButtons.alarm">Alarm</span>
@@ -275,7 +275,7 @@
             <el-button
                 size="small"
                 :icon="Tickets"
-                class="control-btn"
+                class="control-btn pill-btn"
                 @click="openWorkOrderDialog"
             >
               <span v-if="!isMobile && visibleButtons.orders">Orders</span>
@@ -288,7 +288,7 @@
               v-show="visibleButtons.inspection"
               size="small"
               :icon="Camera"
-              class="control-btn"
+              class="control-btn pill-btn"
               @click="startScanInspection"
           >
             <span v-if="!isMobile">Inspection</span>
@@ -300,7 +300,7 @@
               trigger="click"
               @command="handleDoorOpen"
           >
-            <el-button size="small" class="highlight-btn highlight-door" :icon="Lock">
+            <el-button size="small" class="highlight-btn highlight-door pill-btn" :icon="Lock">
               Door
               <el-icon class="el-icon--right"><ArrowDown /></el-icon>
             </el-button>
@@ -332,7 +332,7 @@
               trigger="click"
               @command="handleLightControl"
           >
-            <el-button size="small" class="highlight-btn highlight-light" :icon="Sunny">
+            <el-button size="small" class="highlight-btn highlight-light pill-btn" :icon="Sunny">
               Light
               <el-icon class="el-icon--right"><ArrowDown /></el-icon>
             </el-button>
@@ -354,7 +354,7 @@
               trigger="click"
               @command="handleACControl"
           >
-            <el-button size="small" class="highlight-btn highlight-hvac" :icon="ColdDrink">
+            <el-button size="small" class="highlight-btn highlight-hvac pill-btn" :icon="ColdDrink">
               HVAC
               <el-icon class="el-icon--right"><ArrowDown /></el-icon>
             </el-button>
@@ -374,7 +374,7 @@
           <el-button
               v-show="visibleButtons.repair"
               size="small"
-              class="highlight-btn highlight-repair"
+              class="highlight-btn highlight-repair pill-btn"
               :icon="Tools"
               @click="openQuickRepair"
           >
@@ -386,7 +386,7 @@
               v-show="visibleButtons.search"
               size="small"
               :icon="Search"
-              class="control-btn"
+              class="control-btn pill-btn"
               @click="openGlobalSearch"
           >
             <span v-if="!isMobile">Search</span>
@@ -399,7 +399,7 @@
               :hidden="unreadNotifications === 0"
               class="control-badge"
           >
-            <el-button size="small" :icon="Message" class="control-btn" @click="openNotificationCenter">
+            <el-button size="small" :icon="Message" class="control-btn pill-btn" @click="openNotificationCenter">
               <span v-if="!isMobile">Notify</span>
             </el-button>
           </el-badge>
@@ -410,38 +410,13 @@
               size="small"
               type="danger"
               :icon="WarningFilled"
-              class="control-btn emergency-btn"
+              class="control-btn emergency-btn pill-btn"
               @click="handleEmergency"
           >
             <span v-if="!isMobile">Emergency</span>
           </el-button>
 
           <!-- 节能模式按钮组 - 仅在 Dashboard 子页面显示 -->
-<!--          <template v-if="isInDashboardChildren && !isMobile">-->
-<!--            <div class="switch-item">-->
-<!--              <span class="switch-label">Energy Saving</span>-->
-<!--              <el-switch-->
-<!--                  v-model="isEnergySavingActive"-->
-<!--                  size="small"-->
-<!--                  @change="handleEnergySavingToggle"-->
-<!--                  class="energy-saving-switch"-->
-<!--                  active-color="#10b981"-->
-<!--                  inactive-color="#475569"-->
-<!--              />-->
-<!--            </div>-->
-
-<!--            <div class="switch-item">-->
-<!--              <span class="switch-label">Report</span>-->
-<!--              <el-switch-->
-<!--                  v-model="showEnergyReport"-->
-<!--                  size="small"-->
-<!--                  :disabled="!isEnergySavingActive"-->
-<!--                  class="report-switch"-->
-<!--                  active-color="#3b82f6"-->
-<!--                  inactive-color="#475569"-->
-<!--              />-->
-<!--            </div>-->
-<!--          </template>-->
           <template v-if="isInDashboardChildren && !isMobile">
             <!-- 原生 Switch：Energy Saving -->
             <div class="switch-item">
@@ -452,7 +427,7 @@
                     v-model="isEnergySavingActive"
                     @change="handleEnergySavingToggle"
                 />
-                <span class="slider"></span>
+                <span class="slider round-slider"></span>
               </label>
             </div>
 
@@ -465,7 +440,7 @@
                     v-model="showEnergyReport"
                     :disabled="!isEnergySavingActive"
                 />
-                <span class="slider"></span>
+                <span class="slider round-slider"></span>
               </label>
             </div>
           </template>
@@ -476,7 +451,7 @@
               trigger="click"
               @command="handleMoreCommand"
           >
-            <el-button size="small" :icon="MoreFilled" class="control-btn">
+            <el-button size="small" :icon="MoreFilled" class="control-btn pill-btn">
               <span v-if="!isMobile">More ({{ foldedButtonsList.length }})</span>
               <el-icon class="el-icon--right"><ArrowDown /></el-icon>
             </el-button>
@@ -503,23 +478,23 @@
                 size="small"
                 :icon="isMuted ? Mute : Microphone"
                 circle
-                class="mute-btn"
+                class="mute-btn pill-btn"
                 @click="toggleMute"
             />
           </el-tooltip>
 
           <!-- 时间显示 - 完整格式 -->
-          <div class="singapore-time" v-if="!isMobile">{{ singaporeTime }}</div>
-          <div class="singapore-time mobile-time" v-if="isMobile">{{ mobileTimeDisplay }}</div>
+          <div class="singapore-time glass-time" v-if="!isMobile">{{ singaporeTime }}</div>
+          <div class="singapore-time mobile-time glass-time" v-if="isMobile">{{ mobileTimeDisplay }}</div>
 
           <el-tooltip v-if="!isMobile" :content="isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'" placement="bottom">
-            <FullScreen class="fullscreen-icon" @click="toggleFullScreen" />
+            <FullScreen class="fullscreen-icon hover-glow" @click="toggleFullScreen" />
           </el-tooltip>
 
           <el-dropdown trigger="click" @command="handleUserCommand" class="user-dropdown">
-            <span class="user-avatar">
-              <el-avatar :size="isMobile ? 28 : 32" :src="userAvatar" />
-<!--              <span class="user-name" v-if="!isMobile">{{ userName }}</span>-->
+            <span class="user-avatar glass-avatar">
+                <el-avatar :size="isMobile ? 28 : 32" :src="userAvatar" />
+              <!-- <span class="user-name" v-if="!isMobile">{{ userName }}</span> -->
             </span>
             <template #dropdown>
               <el-dropdown-menu>
@@ -1325,7 +1300,6 @@ onUnmounted(() => {
 /* ============ 顶部栏 ============ */
 .header-bar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   background: #0a1629;
   border-bottom: 1px solid rgba(255,255,255,0.1);
@@ -1359,7 +1333,7 @@ onUnmounted(() => {
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
   height: 100%;
-  padding-left: 20px;
+  padding-left: 0px;
   scrollbar-width:thin;
   scrollbar-color:rgba(255, 255, 255, 0.2) transparent;
 }
@@ -1935,6 +1909,122 @@ input:disabled + .slider {
   cursor: not-allowed;
 }
 
+
+/* ========== 新增立体感样式 ========== */
+
+/* 通用圆角药丸形状，替代方方正正 */
+.pill-btn {
+  border-radius: 20px !important;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 普通按钮增加立体投影和背景 */
+.control-btn.pill-btn {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 100%) !important;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-weight: 500;
+}
+
+.control-btn.pill-btn:hover {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.08) 100%) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.control-btn.pill-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* 高亮按钮专用药丸样式，增强立体感 */
+.highlight-btn.pill-btn {
+  border-radius: 24px !important;
+  padding-left: 18px !important;
+  padding-right: 18px !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.8px;
+}
+
+.highlight-btn.pill-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+/* 紧急按钮保持红色调但增加立体感 */
+.emergency-btn.pill-btn {
+  background: linear-gradient(135deg, #ff4444, #cc0000) !important;
+  border-color: #ff6666 !important;
+  box-shadow: 0 3px 12px rgba(255, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  animation: emergencyGlow 2s infinite;
+}
+
+/* 时间显示玻璃质感 */
+.glass-time {
+  backdrop-filter: blur(8px);
+  background: rgba(0, 255, 204, 0.12) !important;
+  border: 1px solid rgba(0, 255, 204, 0.3) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  border-radius: 20px !important;
+  padding: 4px 14px !important;
+}
+
+/* 用户头像玻璃效果 */
+.glass-avatar {
+  background: rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(5px);
+  border-radius: 24px !important;
+  padding: 2px 8px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.glass-avatar:hover {
+  background: rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* 全屏图标悬停光晕 */
+.hover-glow {
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.hover-glow:hover {
+  color: #409eff;
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 8px rgba(64, 158, 255, 0.7));
+}
+
+/* 静音按钮药丸化 */
+.mute-btn.pill-btn {
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 50% !important;
+  padding: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 原生开关滑块圆润化 */
+.round-slider {
+  border-radius: 18px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.round-slider:before {
+  border-radius: 50%;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+
 /* ============ 响应式 ============ */
 @media (max-width: 767px) {
   .sidebar.mobile-sidebar {
@@ -1994,5 +2084,29 @@ input:disabled + .slider {
     font-size: 10px;
     height: 32px;
   }
+
+  .pill-btn {
+    border-radius: 16px !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  .highlight-btn.pill-btn {
+    border-radius: 20px !important;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  .glass-time {
+    padding: 2px 8px !important;
+  }
+}
+</style>
+
+<style>
+element.style {
+  height: 60px;
+  opacity: 1;
+  padding: 0px 2px;
 }
 </style>
