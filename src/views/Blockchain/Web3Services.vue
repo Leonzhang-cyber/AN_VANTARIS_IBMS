@@ -67,40 +67,22 @@
     </div>
 
     <!-- Two Column Layout -->
-    <el-row :gutter="24">
-      <!-- Left Column: Architecture & Specs -->
-      <el-col :xs="24" :md="12">
-        <!-- Architecture Diagram -->
+    <el-row :gutter="16">
+      <!-- Left Column: Architecture Tree -->
+      <el-col :xs="24" :md="14">
         <el-card class="arch-card" shadow="hover">
           <template #header>
             <div class="card-header">
               <span>🏗️ System Architecture</span>
-              <el-tag size="small" type="info">Clique PoA Consensus</el-tag>
+              <el-tag size="small" type="info">Vertical Tree · Clique PoA</el-tag>
             </div>
           </template>
-          <div class="arch-diagram">
-            <pre class="ascii-art">
-┌─────────────────────────────────────────────────────────────┐
-│                      Web3.0 Service Layer                    │
-├─────────────────────────────────────────────────────────────┤
-│   DID Service  │   VC Service   │   Anchor Service           │
-├─────────────────────────────────────────────────────────────┤
-│                 Blockchain Client (Web3.py)                  │
-│                    RPC Connection Pool                       │
-├─────────────────────────────────────────────────────────────┤
-│              Geth Private Chain (3 Nodes)                    │
-│            Clique PoA · Round-Robin Sealing                  │
-│   Node1(RPC:8545)  Node2(RPC:8546)  Node3(RPC:8547)         │
-└─────────────────────────────────────────────────────────────┘
-            </pre>
-            <div class="arch-note">
-              <el-icon><Connection /></el-icon>
-              <span>P2P Full-mesh · On-demand Mining · Auto-failover</span>
-            </div>
-          </div>
+          <div ref="chartContainer" class="tree-chart-container"></div>
         </el-card>
+      </el-col>
 
-        <!-- Technical Specifications -->
+      <!-- Right Column: Technical Specifications -->
+      <el-col :xs="24" :md="10">
         <el-card class="specs-card" shadow="hover">
           <template #header>
             <div class="card-header">
@@ -108,7 +90,7 @@
               <el-tag size="small" type="success">Production Ready</el-tag>
             </div>
           </template>
-          <el-descriptions :column="1" border>
+          <el-descriptions :column="1" border size="small">
             <el-descriptions-item label="Consensus">
               <el-tag size="small" type="success">Clique (PoA)</el-tag>
             </el-descriptions-item>
@@ -122,10 +104,11 @@
           </el-descriptions>
         </el-card>
       </el-col>
+    </el-row>
 
-      <!-- Right Column: Contracts & API -->
+    <!-- Smart Contracts & API Endpoints Row -->
+    <el-row :gutter="16" style="margin-top: 16px;">
       <el-col :xs="24" :md="12">
-        <!-- Smart Contracts -->
         <el-card class="contracts-card" shadow="hover">
           <template #header>
             <div class="card-header">
@@ -139,8 +122,9 @@
             <el-table-column prop="description" label="Description" />
           </el-table>
         </el-card>
+      </el-col>
 
-        <!-- API Endpoints -->
+      <el-col :xs="24" :md="12">
         <el-card class="api-card" shadow="hover">
           <template #header>
             <div class="card-header">
@@ -148,48 +132,19 @@
               <el-tag size="small" type="info">RESTful · JSON-RPC</el-tag>
             </div>
           </template>
-          <el-table :data="apiEndpoints" stripe size="small">
-            <el-table-column prop="method" label="Method" width="80">
-              <template #default="{ row }">
-                <el-tag :type="row.method === 'POST' ? 'success' : 'info'" size="small">{{ row.method }}</el-tag>
-              </template>
-            </el-table-column>
-            <el-table-column prop="endpoint" label="Endpoint" />
-            <el-table-column prop="description" label="Description" />
-          </el-table>
-        </el-card>
-
-        <!-- Quick Start -->
-        <el-card class="quickstart-card" shadow="hover">
-          <template #header>
-            <div class="card-header">
-              <span>🚀 Quick Start</span>
-              <el-tag size="small" type="success">Copy & Paste</el-tag>
+          <div class="api-list">
+            <div v-for="(api, idx) in apiEndpoints" :key="idx" class="api-item">
+              <el-tag :type="api.method === 'POST' ? 'success' : 'info'" size="small">{{ api.method }}</el-tag>
+              <span class="api-endpoint">{{ api.endpoint }}</span>
+              <span class="api-desc">{{ api.description }}</span>
             </div>
-          </template>
-          <div class="code-block">
-            <pre><code># Connect to private chain RPC
-export RPC_URL=http://your-server:8545
-
-# Query chain status
-curl -X POST $RPC_URL \
-  -H "Content-Type: application/json" \
-  -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}'
-
-# Register a DID entity
-curl -X POST /api/did/register \
-  -H "Content-Type: application/json" \
-  -d '{"entityId":"user123","publicKey":"0x..."}'</code></pre>
-            <el-button size="small" text @click="copyCode">
-              <el-icon><CopyDocument /></el-icon> Copy Code
-            </el-button>
           </div>
         </el-card>
       </el-col>
     </el-row>
 
     <!-- Features Section -->
-    <el-card class="features-card" shadow="hover">
+    <el-card class="features-card" shadow="hover" style="margin-top: 16px;">
       <template #header>
         <div class="card-header">
           <span>✨ Key Features</span>
@@ -231,7 +186,7 @@ curl -X POST /api/did/register \
     </el-card>
 
     <!-- Recent Anchoring Records -->
-    <el-card class="records-card" shadow="hover">
+    <el-card class="records-card" shadow="hover" style="margin-top: 16px;">
       <template #header>
         <div class="card-header">
           <span>📋 Recent Anchoring Records</span>
@@ -246,19 +201,12 @@ curl -X POST /api/did/register \
         <el-table-column prop="timestamp" label="Timestamp" width="170" />
       </el-table>
     </el-card>
-
-    <!-- Footer -->
-    <div class="footer">
-      <p>© 2025 Web3.0 Technical Services | Private Blockchain · DID · Verifiable Credentials</p>
-      <p class="version">Geth v1.13.15 | Clique PoA | Chain ID: 9527</p>
-    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { Connection, CopyDocument } from '@element-plus/icons-vue'
-import { ElMessage } from 'element-plus'
+import { ref, onMounted, onUnmounted, nextTick } from 'vue'
+import * as echarts from 'echarts'
 
 // ============ Mock Data ============
 
@@ -281,22 +229,97 @@ const contracts = ref([
 
 // API endpoints
 const apiEndpoints = ref([
-  { method: 'POST', endpoint: '/api/did/register', description: 'Register a new DID entity' },
-  { method: 'POST', endpoint: '/api/vc/issue', description: 'Issue a Verifiable Credential' },
-  { method: 'POST', endpoint: '/api/vc/verify', description: 'Verify a Verifiable Credential' },
-  { method: 'GET', endpoint: '/api/anchor/record', description: 'Query anchoring records' },
-  { method: 'GET', endpoint: '/api/chain/status', description: 'Get blockchain status' },
-  { method: 'POST', endpoint: '/api/contract/anchor', description: 'Anchor data hash to chain' },
+  { method: 'POST', endpoint: '/api/did/entity', description: 'Register DID entity' },
+  { method: 'POST', endpoint: '/api/did/vc/issue', description: 'Issue VC' },
+  { method: 'POST', endpoint: '/api/did/vp/verify', description: 'Verify VP' },
+  { method: 'GET', endpoint: '/api/iot/device/register', description: 'Register IoT device' },
+  { method: 'POST', endpoint: '/api/iot/device/command', description: 'Send device command' },
+  { method: 'GET', endpoint: '/api/modeling/predict', description: 'Energy prediction' },
 ])
 
 // Anchoring records
 const anchoringRecords = ref([
-  { operation: 'DID Registration', entityId: 'did:example:alice123', txHash: '0x1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p', blockNumber: 124, timestamp: '2025-04-17 14:23:10' },
-  { operation: 'VC Issuance', entityId: 'did:example:bob456', txHash: '0x2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q', blockNumber: 129, timestamp: '2025-04-17 14:25:30' },
-  { operation: 'Entity Update', entityId: 'did:example:carol789', txHash: '0x3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r', blockNumber: 135, timestamp: '2025-04-17 14:28:15' },
-  { operation: 'DID Registration', entityId: 'did:example:david012', txHash: '0x4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s', blockNumber: 142, timestamp: '2025-04-17 14:32:40' },
-  { operation: 'Data Anchoring', entityId: 'document:hash:abc123', txHash: '0x5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t', blockNumber: 148, timestamp: '2025-04-17 14:36:20' },
+  { operation: 'DID Registration', entityId: 'did:imbs:system:root', txHash: '0x1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p', blockNumber: 124, timestamp: '2025-04-17 14:23:10' },
+  { operation: 'VC Issuance', entityId: 'did:imbs:device:hvac_001', txHash: '0x2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q', blockNumber: 129, timestamp: '2025-04-17 14:25:30' },
+  { operation: 'Device Metadata', entityId: 'did:imbs:device:hvac_002', txHash: '0x3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r', blockNumber: 135, timestamp: '2025-04-17 14:28:15' },
+  { operation: 'DID Registration', entityId: 'did:imbs:person:admin', txHash: '0x4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s', blockNumber: 142, timestamp: '2025-04-17 14:32:40' },
+  { operation: 'Data Anchoring', entityId: 'critical:alert:power_outage', txHash: '0x5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t', blockNumber: 148, timestamp: '2025-04-17 14:36:20' },
 ])
+
+// ECharts 纵向树状图数据
+const treeData = {
+  name: '🏛️ System Root',
+  symbolSize: 40,
+  itemStyle: { color: '#409eff' },
+  children: [
+    {
+      name: '🔐 DID Service',
+      symbolSize: 32,
+      itemStyle: { color: '#67c23a' },
+      children: [
+        { name: 'Entity Registration', symbolSize: 24, itemStyle: { color: '#e6a23c' } },
+        { name: 'VC Issuance', symbolSize: 24, itemStyle: { color: '#e6a23c' } },
+        { name: 'VP Verification', symbolSize: 24, itemStyle: { color: '#e6a23c' } },
+        { name: 'Permission Inheritance', symbolSize: 24, itemStyle: { color: '#e6a23c' } }
+      ]
+    },
+    {
+      name: '📡 IoT Digital Base',
+      symbolSize: 32,
+      itemStyle: { color: '#f56c6c' },
+      children: [
+        { name: 'MQTT Driver', symbolSize: 24, itemStyle: { color: '#ffaa44' } },
+        { name: 'HTTP Driver', symbolSize: 24, itemStyle: { color: '#ffaa44' } },
+        { name: 'Modbus Driver', symbolSize: 24, itemStyle: { color: '#ffaa44' } },
+        { name: 'Field/Method Mapping', symbolSize: 24, itemStyle: { color: '#ffaa44' } }
+      ]
+    },
+    {
+      name: '📊 Data Modeling',
+      symbolSize: 32,
+      itemStyle: { color: '#909399' },
+      children: [
+        { name: 'XGBoost Training', symbolSize: 24, itemStyle: { color: '#00d4ff' } },
+        { name: 'Energy Prediction', symbolSize: 24, itemStyle: { color: '#00d4ff' } },
+        { name: 'CSV Storage', symbolSize: 24, itemStyle: { color: '#00d4ff' } },
+        { name: 'Savings Simulation', symbolSize: 24, itemStyle: { color: '#00d4ff' } }
+      ]
+    },
+    {
+      name: '⛓️ Blockchain',
+      symbolSize: 32,
+      itemStyle: { color: '#00ff88' },
+      children: [
+        {
+          name: 'Geth Private Chain',
+          symbolSize: 28,
+          itemStyle: { color: '#00ff88' },
+          children: [
+            { name: 'Node 1 (RPC:8545)', symbolSize: 22, itemStyle: { color: '#67c23a' } },
+            { name: 'Node 2 (RPC:8546)', symbolSize: 22, itemStyle: { color: '#67c23a' } },
+            { name: 'Node 3 (RPC:8547)', symbolSize: 22, itemStyle: { color: '#67c23a' } }
+          ]
+        },
+        { name: 'IMBSAnchor Contract', symbolSize: 24, itemStyle: { color: '#ffaa44' } },
+        { name: 'Mining Scheduler', symbolSize: 24, itemStyle: { color: '#ffaa44' } }
+      ]
+    },
+    {
+      name: '🌐 API Layer',
+      symbolSize: 32,
+      itemStyle: { color: '#e6a23c' },
+      children: [
+        { name: 'DID API (15)', symbolSize: 24, itemStyle: { color: '#67c23a' } },
+        { name: 'IoT API (27)', symbolSize: 24, itemStyle: { color: '#f56c6c' } },
+        { name: 'Modeling API (6)', symbolSize: 24, itemStyle: { color: '#00d4ff' } },
+        { name: 'SSE Push', symbolSize: 24, itemStyle: { color: '#e6a23c' } }
+      ]
+    }
+  ]
+}
+
+const chartContainer = ref<HTMLElement | null>(null)
+let chart: echarts.ECharts | null = null
 
 // Helper functions
 const shortenAddress = (addr: string, len = 6) => {
@@ -304,47 +327,106 @@ const shortenAddress = (addr: string, len = 6) => {
   return `${addr.slice(0, len)}...${addr.slice(-4)}`
 }
 
-const copyCode = async () => {
-  const code = `# Connect to private chain RPC
-export RPC_URL=http://your-server:8545
+// 初始化纵向树状图
+const initTreeChart = () => {
+  if (!chartContainer.value) return
 
-# Query chain status
-curl -X POST $RPC_URL \\
-  -H "Content-Type: application/json" \\
-  -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}'
+  chart = echarts.init(chartContainer.value)
 
-# Register a DID entity
-curl -X POST /api/did/register \\
-  -H "Content-Type: application/json" \\
-  -d '{"entityId":"user123","publicKey":"0x..."}'`
-
-  try {
-    await navigator.clipboard.writeText(code)
-    ElMessage.success('Code copied to clipboard!')
-  } catch {
-    ElMessage.error('Failed to copy')
+  const option = {
+    tooltip: {
+      trigger: 'item',
+      triggerOn: 'mousemove',
+      formatter: (params: any) => {
+        return `<strong>${params.name}</strong>`
+      },
+      backgroundColor: 'rgba(50,50,50,0.9)',
+      borderColor: '#00d4ff',
+      borderWidth: 1,
+      textStyle: { color: '#fff', fontSize: 11 }
+    },
+    series: [{
+      type: 'tree',
+      data: [treeData],
+      left: '8%',
+      right: '8%',
+      top: '5%',
+      bottom: '5%',
+      symbol: 'circle',
+      symbolSize: 16,
+      orient: 'TB',  // 纵向布局：从上到下
+      expandAndCollapse: true,
+      initialTreeDepth: 2,
+      lineStyle: {
+        color: '#00d4ff',
+        width: 1.5,
+        curveness: 0.5,
+        type: 'solid'
+      },
+      label: {
+        position: 'bottom',
+        verticalAlign: 'middle',
+        align: 'center',
+        fontSize: 10,
+        fontWeight: '500',
+        color: '#303133',
+        offset: [0, 8]
+      },
+      leaves: {
+        label: {
+          position: 'bottom',
+          verticalAlign: 'middle',
+          align: 'center',
+          offset: [0, 8]
+        }
+      },
+      itemStyle: {
+        borderColor: '#00d4ff',
+        borderWidth: 1.5
+      },
+      emphasis: {
+        focus: 'descendant',
+        lineStyle: {
+          color: '#00ff88',
+          width: 2
+        }
+      },
+      roam: true,
+      animationDuration: 550,
+      animationDurationUpdate: 750
+    }]
   }
+
+  chart.setOption(option)
+
+  window.addEventListener('resize', () => {
+    chart?.resize()
+  })
 }
 
 // Simulate dynamic data updates
 let updateInterval: ReturnType<typeof setInterval>
 
 onMounted(() => {
-  // Simulate real-time stats updates
+  nextTick(() => {
+    initTreeChart()
+  })
+
   updateInterval = setInterval(() => {
     stats.value.chainHeight += Math.floor(Math.random() * 3) + 1
     stats.value.miningActive = !stats.value.miningActive
-    // Randomly toggle mining status for demo
     setTimeout(() => {
       stats.value.miningActive = true
     }, 5000)
   }, 30000)
 })
 
-// Cleanup
-import { onUnmounted } from 'vue'
 onUnmounted(() => {
   if (updateInterval) clearInterval(updateInterval)
+  if (chart) {
+    chart.dispose()
+    chart = null
+  }
 })
 </script>
 
@@ -352,15 +434,15 @@ onUnmounted(() => {
 .web3-service-page {
   background: #f5f7fa;
   min-height: 100vh;
-  padding: 24px;
+  padding: 20px;
 }
 
 /* Hero Section */
 .hero-section {
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-  border-radius: 20px;
-  padding: 48px 32px;
-  margin-bottom: 32px;
+  border-radius: 16px;
+  padding: 32px 24px;
+  margin-bottom: 20px;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -380,12 +462,12 @@ onUnmounted(() => {
 .hero-icon {
   position: relative;
   display: inline-block;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .hex-bg {
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   background: linear-gradient(135deg, #00d4ff, #00ff88);
   clip-path: polygon(25% 0%, 75% 0%, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0% 75%, 0% 25%);
   opacity: 0.3;
@@ -395,31 +477,31 @@ onUnmounted(() => {
 }
 
 .hero-icon .icon {
-  font-size: 40px;
-  line-height: 80px;
+  font-size: 36px;
+  line-height: 70px;
   display: inline-block;
-  width: 80px;
+  width: 70px;
   position: relative;
   z-index: 1;
 }
 
 .hero-section h1 {
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 700;
   color: #ffffff;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   letter-spacing: 1px;
 }
 
 .subtitle {
-  font-size: 16px;
+  font-size: 14px;
   color: #a0aec0;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .badges {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   justify-content: center;
   flex-wrap: wrap;
 }
@@ -427,36 +509,36 @@ onUnmounted(() => {
 /* Stats Grid */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 16px;
-  margin-bottom: 32px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
 }
 
 .stat-card {
   background: white;
-  border-radius: 16px;
-  padding: 20px;
+  border-radius: 12px;
+  padding: 14px 16px;
   display: flex;
   align-items: center;
-  gap: 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  gap: 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .stat-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .stat-icon {
-  font-size: 32px;
-  width: 56px;
-  height: 56px;
+  font-size: 28px;
+  width: 48px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: #f5f7fa;
-  border-radius: 14px;
+  border-radius: 12px;
 }
 
 .stat-icon.green { background: #e6f7e6; }
@@ -471,7 +553,7 @@ onUnmounted(() => {
 }
 
 .stat-value {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 700;
   color: #303133;
   line-height: 1.2;
@@ -482,7 +564,7 @@ onUnmounted(() => {
 }
 
 .stat-label {
-  font-size: 12px;
+  font-size: 11px;
   color: #909399;
   margin-top: 4px;
 }
@@ -494,75 +576,91 @@ onUnmounted(() => {
   align-items: center;
   font-weight: 600;
   color: #303133;
+  font-size: 14px;
 }
 
 /* Architecture Card */
-.arch-card, .specs-card, .contracts-card, .api-card, .quickstart-card, .features-card, .records-card {
-  margin-bottom: 24px;
+.arch-card, .specs-card, .contracts-card, .api-card, .features-card, .records-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
 }
 
-.arch-diagram {
-  text-align: center;
+:deep(.el-card__header) {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e4e7ed;
+  background: #fafafa;
 }
 
-.ascii-art {
-  font-family: monospace;
-  font-size: 10px;
-  background: #1a1e24;
-  color: #6e8f6e;
+:deep(.el-card__body) {
   padding: 16px;
-  border-radius: 8px;
-  margin: 0 0 12px 0;
-  text-align: left;
-  line-height: 1.4;
-  overflow-x: auto;
 }
 
-.arch-note {
+.tree-chart-container {
+  width: 100%;
+  height: 460px;
+  background: #ffffff;
+}
+
+/* Technical Specifications */
+.specs-card :deep(.el-descriptions) {
+  --el-descriptions-title-color: #303133;
+}
+
+.specs-card :deep(.el-descriptions__label) {
+  width: 120px;
+  background: #f5f7fa;
+  font-size: 12px;
+}
+
+.specs-card :deep(.el-descriptions__content) {
+  font-size: 12px;
+}
+
+/* API List */
+.api-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.api-item {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.api-item:last-child {
+  border-bottom: none;
+}
+
+.api-endpoint {
+  font-family: monospace;
+  font-size: 12px;
+  color: #409eff;
+  min-width: 160px;
+}
+
+.api-desc {
   font-size: 12px;
   color: #606266;
-  padding-top: 8px;
-  border-top: 1px solid #e4e7ed;
-}
-
-/* Code Block */
-.code-block {
-  background: #1a1e24;
-  border-radius: 8px;
-  padding: 16px;
-  position: relative;
-}
-
-.code-block pre {
-  margin: 0 0 12px 0;
-  overflow-x: auto;
-}
-
-.code-block code {
-  font-family: 'Courier New', 'Fira Code', monospace;
-  font-size: 12px;
-  color: #e2e8f0;
-  line-height: 1.5;
-  white-space: pre-wrap;
-  word-break: break-all;
+  flex: 1;
 }
 
 /* Features Grid */
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
 }
 
 .feature-item {
   text-align: center;
-  padding: 20px;
+  padding: 16px;
   background: #f5f7fa;
-  border-radius: 12px;
+  border-radius: 10px;
   transition: all 0.2s;
 }
 
@@ -572,66 +670,79 @@ onUnmounted(() => {
 }
 
 .feature-icon {
-  font-size: 36px;
-  margin-bottom: 12px;
-}
-
-.feature-title {
-  font-size: 16px;
-  font-weight: 600;
-  color: #303133;
+  font-size: 32px;
   margin-bottom: 8px;
 }
 
+.feature-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #303133;
+  margin-bottom: 6px;
+}
+
 .feature-desc {
-  font-size: 12px;
+  font-size: 11px;
   color: #909399;
-  line-height: 1.5;
+  line-height: 1.4;
 }
 
-/* Footer */
-.footer {
-  text-align: center;
-  padding: 24px 0 16px;
-  border-top: 1px solid #e4e7ed;
-  margin-top: 16px;
-}
-
-.footer p {
+/* Table Styles */
+:deep(.el-table) {
   font-size: 12px;
-  color: #909399;
-  margin: 4px 0;
 }
 
-.version {
-  font-family: monospace;
+:deep(.el-table th) {
+  background: #f5f7fa;
+  font-size: 12px;
+}
+
+:deep(.el-table td) {
   font-size: 11px;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
   .web3-service-page {
-    padding: 16px;
+    padding: 12px;
   }
 
   .hero-section {
-    padding: 32px 20px;
+    padding: 24px 16px;
   }
 
   .hero-section h1 {
-    font-size: 24px;
+    font-size: 22px;
   }
 
   .subtitle {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .stat-card {
+    padding: 10px 12px;
+  }
+
+  .stat-value {
+    font-size: 20px;
   }
 
   .features-grid {
     grid-template-columns: 1fr;
+  }
+
+  .api-endpoint {
+    min-width: 120px;
+    font-size: 10px;
+  }
+
+  .tree-chart-container {
+    height: 380px;
   }
 }
 </style>
