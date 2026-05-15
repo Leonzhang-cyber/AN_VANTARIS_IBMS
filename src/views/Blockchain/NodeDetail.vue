@@ -32,7 +32,7 @@
       </div>
     </div>
 
-    <!-- Three Nodes - All show SAME block height -->
+    <!-- Three Nodes -->
     <div class="nodes-container">
       <el-card
           v-for="node in nodes"
@@ -82,74 +82,75 @@
     </div>
 
     <!-- Scheduler & Recent Blocks -->
-    <el-row :gutter="20" class="info-row">
-      <el-col :span="12">
-        <el-card class="scheduler-card">
-          <template #header>
-            <span>⛏️ Mining Scheduler</span>
-          </template>
-          <div class="scheduler-content">
-            <div class="timer-section">
-              <div class="timer-label">Idle Timer</div>
-              <el-progress
-                  :percentage="scheduler.idleProgress"
-                  :format="() => `${scheduler.idleSeconds}s / 600s`"
-                  :color="scheduler.idleSeconds > 500 ? '#f56c6c' : '#67c23a'"
-              />
+    <div class="info-row-grid">
+      <el-card class="scheduler-card">
+        <template #header>
+          <span>⛏️ Mining Scheduler</span>
+        </template>
+        <div class="scheduler-content">
+          <div class="timer-section">
+            <div class="timer-label">Idle Timer</div>
+            <el-progress
+                :percentage="scheduler.idleProgress"
+                :format="() => `${scheduler.idleSeconds}s / 600s`"
+                :color="scheduler.idleSeconds > 500 ? '#f56c6c' : '#67c23a'"
+            />
+          </div>
+          <div class="scheduler-info">
+            <div class="info-item">
+              <span>Status:</span>
+              <el-tag :type="scheduler.isRunning ? 'success' : 'info'" size="small">
+                {{ scheduler.isRunning ? 'Running' : 'Stopped' }}
+              </el-tag>
             </div>
-            <div class="scheduler-info">
-              <div class="info-item">
-                <span>Status:</span>
-                <el-tag :type="scheduler.isRunning ? 'success' : 'info'" size="small">
-                  {{ scheduler.isRunning ? 'Running' : 'Stopped' }}
-                </el-tag>
-              </div>
-              <div class="info-item">
-                <span>Last Write Request:</span>
-                <span class="mono">{{ scheduler.lastWriteRequest || 'None' }}</span>
-              </div>
-              <div class="info-item">
-                <span>Auto-start:</span>
-                <span>On write request</span>
-              </div>
-              <div class="info-item">
-                <span>Auto-stop:</span>
-                <span>After 10 minutes idle</span>
-              </div>
+            <div class="info-item">
+              <span>Last Write Request:</span>
+              <span class="mono">{{ scheduler.lastWriteRequest || 'None' }}</span>
+            </div>
+            <div class="info-item">
+              <span>Auto-start:</span>
+              <span>On write request</span>
+            </div>
+            <div class="info-item">
+              <span>Auto-stop:</span>
+              <span>After 10 minutes idle</span>
             </div>
           </div>
-        </el-card>
-      </el-col>
-      <el-col :span="12">
-        <el-card class="blocks-card">
-          <template #header>
-            <span>🔄 Recent Blocks (Round-Robin)</span>
-          </template>
-          <div class="blocks-list">
-            <div v-for="block in recentBlocks" :key="block.number" class="block-item">
-              <div class="block-number">#{{ block.number }}</div>
-              <div class="block-sealer">{{ block.sealerName }}</div>
-              <div class="block-time">{{ block.time }}</div>
-            </div>
+        </div>
+      </el-card>
+
+      <el-card class="blocks-card">
+        <template #header>
+          <span>🔄 Recent Blocks (Round-Robin)</span>
+        </template>
+        <div class="blocks-list">
+          <div v-for="block in recentBlocks" :key="block.number" class="block-item">
+            <div class="block-number">#{{ block.number }}</div>
+            <div class="block-sealer">{{ block.sealerName }}</div>
+            <div class="block-time">{{ block.time }}</div>
           </div>
-        </el-card>
-      </el-col>
-    </el-row>
+        </div>
+      </el-card>
+    </div>
 
     <!-- Anchoring Records -->
     <el-card class="anchoring-card">
       <template #header>
         <span>📜 Anchoring Records · IMBSAnchor.sol</span>
       </template>
-      <el-table :data="anchoringRecords" stripe size="small">
-        <el-table-column prop="operation" label="Operation" />
-        <el-table-column prop="txHash" label="Transaction Hash" :formatter="(row) => shortenAddress(row.txHash, 12)" />
-        <el-table-column prop="blockNumber" label="Block" width="100" />
-        <el-table-column prop="timestamp" label="Timestamp" width="170" />
-      </el-table>
+      <div class="records-list">
+        <div v-for="(record, idx) in anchoringRecords" :key="idx" class="record-item">
+          <div class="record-operation">{{ record.operation }}</div>
+          <div class="record-details">
+            <span class="record-tx">{{ shortenAddress(record.txHash, 12) }}</span>
+            <span class="record-block">Block #{{ record.blockNumber }}</span>
+          </div>
+          <div class="record-time">{{ record.timestamp }}</div>
+        </div>
+      </div>
     </el-card>
 
-    <!-- Blockchain Logs Console - White background -->
+    <!-- Blockchain Logs Console -->
     <el-card class="logs-card">
       <template #header>
         <div class="logs-header">
@@ -157,11 +158,13 @@
           <el-tag size="small" type="info">Live</el-tag>
         </div>
       </template>
-      <div class="logs-container-white" ref="logsContainer">
-        <div v-for="(log, idx) in blockchainLogs" :key="idx" class="log-entry-white" :class="log.type">
-          <span class="log-time-white">{{ log.timestamp }}</span>
-          <span class="log-level-white" :class="log.type">[{{ log.level }}]</span>
-          <span class="log-message-white">{{ log.message }}</span>
+      <div class="logs-container" ref="logsContainer">
+        <div v-for="(log, idx) in blockchainLogs" :key="idx" class="log-entry" :class="log.type">
+          <div class="log-header">
+            <span class="log-time">{{ log.timestamp }}</span>
+            <span class="log-level" :class="log.type">[{{ log.level }}]</span>
+          </div>
+          <div class="log-message">{{ log.message }}</div>
         </div>
       </div>
     </el-card>
@@ -211,13 +214,12 @@ const blockchainLogs = ref<LogEntry[]>([])
 const logsContainer = ref<HTMLElement | null>(null)
 
 const scheduler = ref({
-  isRunning: true,  // 默认运行，模拟正常挖矿
+  isRunning: true,
   idleSeconds: 0,
   idleProgress: 0,
   lastWriteRequest: new Date().toLocaleTimeString(),
 })
 
-// 所有节点正常，始终可出块
 const canProduceBlocks = computed(() => true)
 
 const anchoringRecords = ref([
@@ -270,7 +272,6 @@ const addRecentBlock = (blockNum: number, sealerAddr: string, sealerName: string
   if (recentBlocks.value.length > 8) recentBlocks.value.pop()
 }
 
-// 轮流出块
 const sealNewBlock = () => {
   const runningNodes = nodes.value
   const currentIdx = runningNodes.findIndex(n => n.address === currentSealer.value)
@@ -286,7 +287,6 @@ const sealNewBlock = () => {
   scheduler.value.idleProgress = 0
 }
 
-// 模拟写请求
 const simulateWriteRequest = async () => {
   if (!scheduler.value.isRunning) {
     scheduler.value.isRunning = true
@@ -317,9 +317,10 @@ const simulateWriteRequest = async () => {
     blockNumber: currentBlockHeight.value,
     timestamp: new Date().toLocaleString(),
   })
+
+  if (anchoringRecords.value.length > 10) anchoringRecords.value.pop()
 }
 
-// 空闲计时器
 let idleInterval: ReturnType<typeof setInterval>
 let miningInterval: ReturnType<typeof setInterval>
 let writeRequestInterval: ReturnType<typeof setInterval>
@@ -375,15 +376,11 @@ const initData = () => {
 onMounted(() => {
   initData()
   startIdleTimer()
-
-  // 自动出块（每6秒）
   miningInterval = setInterval(() => {
     if (scheduler.value.isRunning) {
       sealNewBlock()
     }
   }, 6000)
-
-  // 模拟写请求（每35秒）
   writeRequestInterval = setInterval(() => {
     simulateWriteRequest()
   }, 35000)
@@ -398,36 +395,36 @@ onUnmounted(() => {
 
 <style scoped>
 .simple-dashboard {
-  padding: 24px;
+  padding: 12px;
   background: #ffffff;
   min-height: 100vh;
 }
 
+/* Header */
 .dashboard-header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
-  flex-wrap: wrap;
-  gap: 16px;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
 }
 
 .title-section h1 {
-  margin: 0 0 8px 0;
-  font-size: 24px;
+  margin: 0 0 6px 0;
+  font-size: 20px;
   color: #303133;
 }
 
 .badges {
   display: flex;
-  gap: 8px;
+  gap: 6px;
+  flex-wrap: wrap;
 }
 
 .stats {
   display: flex;
-  gap: 32px;
+  justify-content: space-around;
   background: #f5f7fa;
-  padding: 12px 24px;
+  padding: 10px 12px;
   border-radius: 8px;
 }
 
@@ -436,7 +433,7 @@ onUnmounted(() => {
 }
 
 .stat-value {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
   color: #909399;
 }
@@ -446,16 +443,17 @@ onUnmounted(() => {
 }
 
 .stat-label {
-  font-size: 12px;
+  font-size: 10px;
   color: #909399;
-  margin-top: 4px;
+  margin-top: 2px;
 }
 
+/* Nodes Container */
 .nodes-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
 }
 
 .node-card {
@@ -465,61 +463,64 @@ onUnmounted(() => {
 
 .node-card.node-sealing {
   border-top-color: #409eff;
-  box-shadow: 0 2px 12px 0 rgba(64, 158, 255, 0.2);
+  box-shadow: 0 2px 8px 0 rgba(64, 158, 255, 0.2);
 }
 
 .node-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
 }
 
 .node-name {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
+  font-size: 14px;
 }
 
 .node-ports {
   display: flex;
-  gap: 12px;
-  font-size: 12px;
+  gap: 8px;
+  font-size: 10px;
   color: #909399;
 }
 
 .node-body {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .info-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: 12px;
 }
 
 .label {
-  font-size: 13px;
+  font-size: 12px;
   color: #606266;
 }
 
 .value {
-  font-size: 13px;
+  font-size: 12px;
   color: #303133;
 }
 
 .mono {
   font-family: monospace;
+  font-size: 10px;
 }
 
 .sealing-badge {
-  margin-top: 12px;
+  margin-top: 10px;
   text-align: center;
-  font-size: 12px;
+  font-size: 11px;
   color: #409eff;
   font-weight: 500;
   padding: 4px;
@@ -527,26 +528,28 @@ onUnmounted(() => {
   border-radius: 4px;
 }
 
+/* Info Row Grid */
+.info-row-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
 .scheduler-card, .blocks-card, .anchoring-card, .logs-card {
-  margin-bottom: 20px;
+  margin-bottom: 0;
 }
 
 .scheduler-content {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  min-height: 180px;
-  max-height: 180px;
-}
-
-.timer-section {
-  width: 100%;
+  gap: 12px;
 }
 
 .timer-label {
-  font-size: 13px;
+  font-size: 12px;
   color: #606266;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .scheduler-info {
@@ -558,41 +561,36 @@ onUnmounted(() => {
 .info-item {
   display: flex;
   justify-content: space-between;
-  font-size: 13px;
+  font-size: 11px;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
 .info-item span:first-child {
   color: #909399;
 }
 
-.mono {
-  font-family: monospace;
-  color: #303133;
-}
-
+/* Blocks List */
 .blocks-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  max-height: 180px;
-  min-height: 180px;
+  gap: 6px;
+  max-height: 200px;
   overflow-y: auto;
 }
 
-/* 隐藏滚动条但保留滚动功能 - WebKit浏览器 (Chrome, Safari, Edge) */
 .blocks-list::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-  display: none;
+  width: 3px;
 }
 
 .block-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 12px;
+  padding: 8px 10px;
   background: #f5f7fa;
   border-radius: 6px;
+  font-size: 11px;
 }
 
 .block-number {
@@ -602,112 +600,202 @@ onUnmounted(() => {
 }
 
 .block-sealer {
-  font-size: 13px;
+  font-size: 11px;
   color: #606266;
 }
 
 .block-time {
-  font-size: 12px;
+  font-size: 10px;
   color: #909399;
 }
 
-/* Logs Console - White Background Styles */
+/* Records List */
+.records-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.record-item {
+  padding: 10px;
+  background: #f5f7fa;
+  border-radius: 8px;
+}
+
+.record-operation {
+  font-weight: 600;
+  font-size: 12px;
+  color: #303133;
+  margin-bottom: 6px;
+}
+
+.record-details {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+  font-size: 10px;
+}
+
+.record-tx {
+  font-family: monospace;
+  color: #409eff;
+}
+
+.record-block {
+  color: #909399;
+}
+
+.record-time {
+  font-size: 10px;
+  color: #c0c4cc;
+}
+
+/* Logs */
 .logs-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.logs-container-white {
-  height: 280px;
+.logs-container {
+  height: 260px;
   overflow-y: auto;
   background: #ffffff;
   border: 1px solid #e4e7ed;
   border-radius: 6px;
-  padding: 12px;
-  font-family: 'Courier New', 'Fira Code', monospace;
-  font-size: 12px;
+  padding: 10px;
+  font-size: 11px;
 }
 
-.log-entry-white {
-  display: flex;
-  gap: 12px;
-  padding: 6px 8px;
+.log-entry {
+  padding: 8px;
   border-bottom: 1px solid #f0f0f0;
-  font-family: monospace;
-  font-size: 12px;
 }
 
-.log-entry-white:last-child {
+.log-entry:last-child {
   border-bottom: none;
 }
 
-.log-time-white {
+.log-header {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+}
+
+.log-time {
   color: #909399;
-  min-width: 70px;
-  flex-shrink: 0;
+  font-size: 10px;
+  font-family: monospace;
 }
 
-.log-level-white {
-  min-width: 60px;
-  flex-shrink: 0;
+.log-level {
   font-weight: 600;
+  font-size: 11px;
 }
 
-.log-message-white {
-  color: #303133;
+.log-message {
+  color: #606266;
   word-break: break-all;
-  flex: 1;
+  line-height: 1.4;
+  font-size: 11px;
 }
 
-.log-entry-white.log-info .log-level-white {
+.log-entry.log-info .log-level {
   color: #409eff;
 }
-
-.log-entry-white.log-success .log-level-white {
+.log-entry.log-success .log-level {
   color: #67c23a;
 }
-
-.log-entry-white.log-warn .log-level-white {
+.log-entry.log-warn .log-level {
   color: #e6a23c;
 }
-
-.log-entry-white.log-error .log-level-white {
+.log-entry.log-error .log-level {
   color: #f56c6c;
 }
 
-.log-message-white {
-  color: #606266;
-}
-
-.log-entry-white.log-success .log-message-white {
+.log-entry.log-success .log-message {
   color: #529b2e;
 }
-
-.log-entry-white.log-warn .log-message-white {
+.log-entry.log-warn .log-message {
   color: #c28c1f;
 }
-
-.log-entry-white.log-error .log-message-white {
+.log-entry.log-error .log-message {
   color: #c45656;
 }
 
-/* Custom scrollbar for logs */
-.logs-container-white::-webkit-scrollbar {
-  width: 6px;
+.logs-container::-webkit-scrollbar {
+  width: 4px;
 }
 
-.logs-container-white::-webkit-scrollbar-track {
-  background: #f0f0f0;
-  border-radius: 3px;
-}
+/* Desktop */
+@media (min-width: 768px) {
+  .simple-dashboard {
+    padding: 24px;
+  }
 
-.logs-container-white::-webkit-scrollbar-thumb {
-  background: #c0c4cc;
-  border-radius: 3px;
-}
+  .dashboard-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-.logs-container-white::-webkit-scrollbar-thumb:hover {
-  background: #909399;
+  .stats {
+    gap: 32px;
+    padding: 12px 24px;
+  }
+
+  .stat-value {
+    font-size: 20px;
+  }
+
+  .nodes-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .info-row-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    flex-direction: row;
+  }
+
+  .node-ports {
+    font-size: 12px;
+  }
+
+  .mono {
+    font-size: 12px;
+  }
+
+  .info-item {
+    font-size: 13px;
+  }
+
+  .record-operation {
+    font-size: 13px;
+  }
+
+  .record-details {
+    font-size: 12px;
+  }
+
+  .log-entry {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .log-header {
+    flex-shrink: 0;
+    min-width: 130px;
+    margin-bottom: 0;
+  }
+
+  .log-message {
+    flex: 1;
+  }
 }
 </style>

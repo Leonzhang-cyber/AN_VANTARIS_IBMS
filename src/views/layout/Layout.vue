@@ -416,33 +416,47 @@
             <span v-if="!isMobile">Emergency</span>
           </el-button>
 
-          <!-- 节能模式按钮组 - 仅在 Dashboard 子页面显示 -->
+          <!-- 节能模式下拉按钮组 - 紧凑版 -->
           <template v-if="isInDashboardChildren && !isMobile">
-            <!-- 原生 Switch：Energy Saving -->
-            <div class="switch-item">
-              <span class="switch-label">Energy Saving</span>
-              <label class="native-switch">
-                <input
-                    type="checkbox"
-                    v-model="isEnergySavingActive"
-                    @change="handleEnergySavingToggle"
-                />
-                <span class="slider round-slider"></span>
-              </label>
-            </div>
+            <el-dropdown trigger="click" @command="handleEnergyCommand" class="energy-dropdown">
+              <el-button size="small" class="energy-btn pill-btn">
+                <span class="energy-icon">⚡</span>
+                <span class="energy-text">Eco</span>
+                <el-icon class="el-icon--right"><ArrowDown /></el-icon>
+              </el-button>
+              <template #dropdown>
+                <el-dropdown-menu class="energy-dropdown-menu">
+                  <div class="energy-dropdown-header">
+                    <span>Energy Controls</span>
+                  </div>
 
-            <!-- 原生 Switch：Report -->
-            <div class="switch-item">
-              <span class="switch-label">Report</span>
-              <label class="native-switch">
-                <input
-                    type="checkbox"
-                    v-model="showEnergyReport"
-                    :disabled="!isEnergySavingActive"
-                />
-                <span class="slider round-slider"></span>
-              </label>
-            </div>
+                  <el-dropdown-item command="toggle-saving" class="energy-item">
+                    <div class="energy-item-content">
+                      <span class="energy-item-icon">{{ isEnergySavingActive ? '🟢' : '⚪' }}</span>
+                      <span class="energy-item-label">Energy Saving</span>
+                      <span class="energy-item-status" :class="{ 'status-on': isEnergySavingActive }">
+                        {{ isEnergySavingActive ? 'ON' : 'OFF' }}
+                      </span>
+                    </div>
+                  </el-dropdown-item>
+
+                  <el-dropdown-item
+                      command="toggle-report"
+                      :disabled="!isEnergySavingActive"
+                      class="energy-item"
+                      :class="{ 'disabled-item': !isEnergySavingActive }"
+                  >
+                    <div class="energy-item-content">
+                      <span class="energy-item-icon">{{ showEnergyReport ? '🟢' : '⚪' }}</span>
+                      <span class="energy-item-label">Report</span>
+                      <span class="energy-item-status" :class="{ 'status-on': showEnergyReport }">
+                        {{ showEnergyReport ? 'ON' : 'OFF' }}
+                      </span>
+                    </div>
+                  </el-dropdown-item>
+                </el-dropdown-menu>
+              </template>
+            </el-dropdown>
           </template>
 
           <!-- 更多菜单 - 显示被折叠的按钮 -->
@@ -838,6 +852,22 @@ const handleEnergySavingToggle = (value) => {
   }
 }
 
+// 处理节能模式下拉命令
+const handleEnergyCommand = (command) => {
+  switch (command) {
+    case 'toggle-saving':
+      isEnergySavingActive.value = !isEnergySavingActive.value
+      handleEnergySavingToggle(isEnergySavingActive.value)
+      break
+    case 'toggle-report':
+      if (isEnergySavingActive.value) {
+        showEnergyReport.value = !showEnergyReport.value
+        ElMessage.success(`Report ${showEnergyReport.value ? 'enabled' : 'disabled'}`)
+      }
+      break
+  }
+}
+
 const updateSingaporeTime = () => {
   const now = new Date()
   const utc = now.getTime() + (now.getTimezoneOffset() * 60000)
@@ -1100,7 +1130,6 @@ const closeMobileSidebar = () => {
 }
 
 // 响应式布局检测和按钮折叠逻辑
-// 响应式布局检测和按钮折叠逻辑
 const checkResponsiveLayout = () => {
   const width = window.innerWidth
   const wasMobile = isMobile.value
@@ -1108,14 +1137,14 @@ const checkResponsiveLayout = () => {
 
   // 根据宽度决定按钮可见性 - 所有宽度都会触发折叠
   if (width >= 850) {
-    // 较小屏幕：隐藏紧急、通知、搜索
+    // 较大屏幕：显示所有按钮
     visibleButtons.value = {
       voice: true, alarm: true, orders: true,
       inspection: true, door: true, light: true, hvac: true,
       repair: true, search: true, notify: true, emergency: true
     }
   } else if (width >= 768) {
-    // 平板横屏：只保留核心按钮
+    // 平板横屏：隐藏部分按钮
     visibleButtons.value = {
       voice: true, alarm: true, orders: true,
       inspection: false, door: true, light: true, hvac: true,
@@ -1214,7 +1243,7 @@ const onKeydown = (e) => {
 }
 
 const handleResize = () => {
-  // 使用 requestAnimationFrame 优化性能，并立即执行
+  // 使用 requestAnimationFrame 优化性能
   requestAnimationFrame(() => {
     checkResponsiveLayout()
   })
@@ -1228,7 +1257,7 @@ onMounted(() => {
   window.addEventListener('resize', handleResize)
   checkResponsiveLayout()
 
-  // 添加一个延迟检查，确保初始加载时正确
+  // 添加延迟检查，确保初始加载时正确
   setTimeout(() => {
     checkResponsiveLayout()
   }, 100)
@@ -1257,7 +1286,7 @@ onUnmounted(() => {
   height: 60px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
   color: #fff;
   gap: 10px;
   font-weight: bold;
@@ -1325,7 +1354,6 @@ onUnmounted(() => {
 }
 
 /* ===== 快捷按钮组 ===== */
-/* ===== 快捷按钮组 ===== */
 .header-controls {
   display: flex;
   align-items: center;
@@ -1342,7 +1370,7 @@ onUnmounted(() => {
 
 /* Chrome / Edge / Safari 横向滚动条美化 */
 .header-controls::-webkit-scrollbar {
-  height: 1px; /* 横向条高度 */
+  height: 1px;
 }
 .header-controls::-webkit-scrollbar-track {
   background: transparent;
@@ -1517,6 +1545,122 @@ onUnmounted(() => {
 @keyframes emergencyGlow {
   0%, 100% { box-shadow: 0 0 5px rgba(255,59,48,0.3); }
   50% { box-shadow: 0 0 15px rgba(255,59,48,0.5); }
+}
+
+/* ============ 节能模式下拉按钮 ============ */
+
+/* 紧凑的下拉按钮 */
+.energy-btn {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.1)) !important;
+  border: 1px solid rgba(16, 185, 129, 0.3) !important;
+  color: #10b981 !important;
+  font-weight: 600;
+  font-size: 11px;
+  padding: 4px 10px;
+  min-height: 30px;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+}
+
+.energy-btn:hover {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(5, 150, 105, 0.2)) !important;
+  border-color: rgba(16, 185, 129, 0.5) !important;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.3);
+  transform: translateY(-1px);
+}
+
+.energy-icon {
+  font-size: 13px;
+  margin-right: 3px;
+}
+
+.energy-text {
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* 下拉菜单样式 */
+.energy-dropdown-menu {
+  min-width: 220px !important;
+  padding: 4px 0 !important;
+}
+
+.energy-dropdown-header {
+  padding: 8px 16px 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #909399;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  margin-bottom: 4px;
+}
+
+.energy-item {
+  padding: 0 !important;
+}
+
+.energy-item-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  width: 100%;
+  transition: all 0.2s ease;
+}
+
+.energy-item:hover .energy-item-content {
+  background: rgba(16, 185, 129, 0.05);
+}
+
+.energy-item-icon {
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.energy-item-label {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 500;
+  color: #303133;
+}
+
+.energy-item-status {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 10px;
+  background: rgba(144, 147, 153, 0.1);
+  color: #909399;
+  min-width: 36px;
+  text-align: center;
+}
+
+.energy-item-status.status-on {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.2);
+}
+
+/* 禁用状态 */
+.disabled-item {
+  opacity: 0.45;
+  cursor: not-allowed !important;
+}
+
+.disabled-item:hover {
+  background: none !important;
+}
+
+.disabled-item .energy-item-content {
+  cursor: not-allowed;
+}
+
+.disabled-item .energy-item-status {
+  background: rgba(144, 147, 153, 0.08) !important;
+  color: #909399 !important;
+  box-shadow: none !important;
 }
 
 /* ===== 右侧工具 ===== */
@@ -1805,117 +1949,12 @@ onUnmounted(() => {
   perspective: 1000px;
 }
 
-.switch-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-left: 0px;
-  padding: 0 0px;
-  height: 32px;
-  border-radius: 16px;
-}
-
-.switch-label {
-  font-size: 12px;
-  color: #e5eaf3;
-  white-space: nowrap;
-  font-weight: 500;
-}
-
-.energy-saving-switch :deep(.el-switch__core) {
-  background-color: #475569;
-  border-color: #475569;
-  transition: all 0.3s ease;
-}
-
-.energy-saving-switch :deep(.el-switch__core .el-switch__action) {
-  background-color: #fff;
-}
-
-.report-switch :deep(.el-switch__core) {
-  background-color: #475569;
-  border-color: #475569;
-}
-
-.report-switch :deep(.el-switch.is-disabled) {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-
-/* 开关整体布局 */
-.switch-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-right: 12px;
-}
-.switch-label {
-  font-size: 14px;
-  color: #ffffff;
-}
-
-/* 原生 switch 核心样式 */
-.native-switch {
-  position: relative;
-  display: inline-block;
-  width: 32px;
-  height: 18px;
-}
-.native-switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-/* 滑块轨道 */
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #475569; /* 关闭颜色 */
-  transition: 0.2s;
-  border-radius: 18px;
-}
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 14px;
-  width: 14px;
-  left: 2px;
-  bottom: 2px;
-  background-color: white;
-  transition: 0.2s;
-  border-radius: 50%;
-}
-
-/* 选中状态 */
-input:checked + .slider {
-  background-color: #10b981; /* Energy Saving 开启色 */
-}
-input:checked + .slider:before {
-  transform: translateX(14px);
-}
-
-/* Report 开关单独覆盖开启色 */
-.switch-item:last-child input:checked + .slider {
-  background-color: #3b82f6;
-}
-
-/* 禁用状态 */
-input:disabled + .slider {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-/* 通用圆角药丸形状，替代方方正正 */
+/* 通用圆角药丸形状 */
 .pill-btn {
   border-radius: 20px !important;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 /* 普通按钮增加立体投影和背景 */
 .control-btn.pill-btn {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 100%) !important;
@@ -1995,6 +2034,24 @@ input:disabled + .slider {
   .sidebar-footer {
     font-size: 10px;
     height: 32px;
+  }
+
+  .energy-btn {
+    font-size: 10px;
+    padding: 3px 8px;
+    min-height: 26px;
+  }
+
+  .energy-icon {
+    font-size: 11px;
+  }
+
+  .energy-text {
+    font-size: 10px;
+  }
+
+  .energy-dropdown-menu {
+    min-width: 200px !important;
   }
 }
 </style>
