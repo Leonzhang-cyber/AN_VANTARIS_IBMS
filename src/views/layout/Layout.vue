@@ -483,13 +483,15 @@
             />
           </el-tooltip>
 
+          <el-tooltip v-if="!isMobile" :content="isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'" placement="bottom">
+            <FullScreen class="fullscreen-icon hover-glow" @click="toggleFullScreen" />
+          </el-tooltip>
+
           <!-- 时间显示 - 完整格式 -->
           <div class="singapore-time glass-time" v-if="!isMobile">{{ singaporeTime }}</div>
           <div class="singapore-time mobile-time glass-time" v-if="isMobile">{{ mobileTimeDisplay }}</div>
 
-          <el-tooltip v-if="!isMobile" :content="isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'" placement="bottom">
-            <FullScreen class="fullscreen-icon hover-glow" @click="toggleFullScreen" />
-          </el-tooltip>
+
 
           <el-dropdown trigger="click" @command="handleUserCommand" class="user-dropdown">
             <span class="user-avatar glass-avatar">
@@ -1909,17 +1911,11 @@ input:disabled + .slider {
   cursor: not-allowed;
 }
 
-
-/* ========== 新增立体感样式 ========== */
-
 /* 通用圆角药丸形状，替代方方正正 */
 .pill-btn {
   border-radius: 20px !important;
-  padding-left: 16px !important;
-  padding-right: 16px !important;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 /* 普通按钮增加立体投影和背景 */
 .control-btn.pill-btn {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 100%) !important;
@@ -1939,90 +1935,6 @@ input:disabled + .slider {
 .control-btn.pill-btn:active {
   transform: translateY(1px);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-}
-
-/* 高亮按钮专用药丸样式，增强立体感 */
-.highlight-btn.pill-btn {
-  border-radius: 24px !important;
-  padding-left: 18px !important;
-  padding-right: 18px !important;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-  letter-spacing: 0.8px;
-}
-
-.highlight-btn.pill-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
-}
-
-/* 紧急按钮保持红色调但增加立体感 */
-.emergency-btn.pill-btn {
-  background: linear-gradient(135deg, #ff4444, #cc0000) !important;
-  border-color: #ff6666 !important;
-  box-shadow: 0 3px 12px rgba(255, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  animation: emergencyGlow 2s infinite;
-}
-
-/* 时间显示玻璃质感 */
-.glass-time {
-  backdrop-filter: blur(8px);
-  background: rgba(0, 255, 204, 0.12) !important;
-  border: 1px solid rgba(0, 255, 204, 0.3) !important;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  border-radius: 20px !important;
-  padding: 4px 14px !important;
-}
-
-/* 用户头像玻璃效果 */
-.glass-avatar {
-  background: rgba(255, 255, 255, 0.15) !important;
-  backdrop-filter: blur(5px);
-  border-radius: 24px !important;
-  padding: 2px 8px !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
-}
-
-.glass-avatar:hover {
-  background: rgba(255, 255, 255, 0.25) !important;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
-
-/* 全屏图标悬停光晕 */
-.hover-glow {
-  transition: all 0.3s ease;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-}
-
-.hover-glow:hover {
-  color: #409eff;
-  transform: scale(1.15);
-  filter: drop-shadow(0 0 8px rgba(64, 158, 255, 0.7));
-}
-
-/* 静音按钮药丸化 */
-.mute-btn.pill-btn {
-  width: 32px !important;
-  height: 32px !important;
-  border-radius: 50% !important;
-  padding: 0 !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* 原生开关滑块圆润化 */
-.round-slider {
-  border-radius: 18px;
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
-}
-
-.round-slider:before {
-  border-radius: 50%;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
 }
 
 /* ============ 响应式 ============ */
@@ -2084,29 +1996,5 @@ input:disabled + .slider {
     font-size: 10px;
     height: 32px;
   }
-
-  .pill-btn {
-    border-radius: 16px !important;
-    padding-left: 12px !important;
-    padding-right: 12px !important;
-  }
-
-  .highlight-btn.pill-btn {
-    border-radius: 20px !important;
-    padding-left: 14px !important;
-    padding-right: 14px !important;
-  }
-
-  .glass-time {
-    padding: 2px 8px !important;
-  }
-}
-</style>
-
-<style>
-element.style {
-  height: 60px;
-  opacity: 1;
-  padding: 0px 2px;
 }
 </style>
