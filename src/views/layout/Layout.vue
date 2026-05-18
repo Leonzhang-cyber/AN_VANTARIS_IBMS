@@ -186,14 +186,14 @@
               <el-icon><Headset /></el-icon>
               <span>System</span>
             </template>
+            <el-menu-item index="/support/introduction">
+              <span>Web3 Introduction</span>
+            </el-menu-item>
             <el-menu-item index="/support/mobile">
               <span>Mobile Terminal</span>
             </el-menu-item>
             <el-menu-item index="/support/notify">
               <span>Multi‑dim Notification</span>
-            </el-menu-item>
-            <el-menu-item index="/support/introduction">
-              <span>Web3 Introduction</span>
             </el-menu-item>
           </el-sub-menu>
 
