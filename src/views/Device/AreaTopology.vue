@@ -1,6 +1,31 @@
 <!-- src/views/device/AreaTopology.vue -->
 <template>
-  <div class="topology-page">
+  <!-- ==================== Loading Screen ==================== -->
+  <div v-if="!isAssetsLoaded" class="loading-container">
+    <div class="loading-overlay">
+      <div class="loading-content">
+        <div class="loading-spinner">
+          <div class="spinner-ring"></div>
+          <div class="spinner-ring"></div>
+          <div class="spinner-ring"></div>
+        </div>
+        <div class="loading-text">
+          <span class="loading-title">Loading</span>
+          <span class="loading-dots">
+            <span>.</span><span>.</span><span>.</span>
+          </span>
+        </div>
+        <div class="loading-progress">
+          <div class="progress-bar" :style="{ width: loadingProgress + '%' }"></div>
+        </div>
+        <div class="loading-tip">Initializing Area Topology</div>
+        <div class="loading-subtip">{{ loadingMessage }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Main Content ==================== -->
+  <div v-else class="topology-page">
     <!-- 左侧区域拓扑树 -->
     <div class="topology-left-panel" :style="{ width: leftPanelWidth + 'px' }">
       <div class="panel-header">
@@ -461,6 +486,135 @@ import {
   Bell, MagicStick
 } from '@element-plus/icons-vue'
 
+// ==================== Loading State ====================
+const isAssetsLoaded = ref(false)
+const loadingProgress = ref(0)
+const loadingMessage = ref('Preparing assets...')
+
+const loadingMessages = [
+  'Preparing assets...',
+  'Loading device images...',
+  'Initializing topology tree...',
+  'Configuring canvas...',
+  'Starting real-time updates...',
+  'Almost ready...'
+]
+
+// ==================== Device Image URL Map ====================
+const deviceImageUrls: Record<string, string> = {
+  'dev-ahu-b2-01': 'https://aegisnx.com/wp-content/uploads/2026/05/1779084477643.png',
+  'dev-fcu-b2-01': 'https://aegisnx.com/wp-content/uploads/2026/05/1779087586931.png',
+  'dev-light-b2-01': 'https://aegisnx.com/wp-content/uploads/2026/05/131452023.png',
+  'dev-smoke-b2-01': 'https://aegisnx.com/wp-content/uploads/2026/05/1314520123.webp',
+  'dev-smoke-b2-02': 'https://aegisnx.com/wp-content/uploads/2026/05/5201314411.jpg',
+  'dev-pump-b2-01': 'https://aegisnx.com/wp-content/uploads/2026/05/52013145201235.jpg',
+  'dev-pump-b2-02': 'https://aegisnx.com/wp-content/uploads/2026/05/1779089059996.png',
+  'dev-ahu-b1-01': 'https://aegisnx.com/wp-content/uploads/2026/05/1779084477643.png',
+  'dev-light-b1-01': 'https://aegisnx.com/wp-content/uploads/2026/05/1779088451396.png',
+  'dev-access-b1-01': 'https://aegisnx.com/wp-content/uploads/2026/05/52013144321.webp',
+  'dev-camera-b1-01': 'https://aegisnx.com/wp-content/uploads/2026/05/5201314211.jpg',
+  'dev-smoke-b1-01': 'https://aegisnx.com/wp-content/uploads/2026/05/5201314411.jpg',
+  'dev-pump-b1-01': 'https://aegisnx.com/wp-content/uploads/2026/05/1779084477643.png',
+  'dev-ahu-1f-01': 'https://aegisnx.com/wp-content/uploads/2026/05/1779087586931.png',
+  'dev-fcu-1f-01': 'https://aegisnx.com/wp-content/uploads/2026/05/1779084477643.png',
+  'dev-vav-1f-01': 'https://aegisnx.com/wp-content/uploads/2026/05/1779084477643.png',
+  'dev-light-1f-01': 'https://aegisnx.com/wp-content/uploads/2026/05/1779088451396.png',
+  'dev-light-1f-02': 'https://aegisnx.com/wp-content/uploads/2026/05/1779088451396.png',
+  'dev-access-1f-01': 'https://aegisnx.com/wp-content/uploads/2026/05/1314520123.jpg',
+  'dev-camera-1f-01': 'https://aegisnx.com/wp-content/uploads/2026/05/5201314411.jpg',
+  'dev-smoke-1f-01': 'https://aegisnx.com/wp-content/uploads/2026/05/1779084477643.png',
+  'dev-heat-1f-01': 'https://aegisnx.com/wp-content/uploads/2026/05/1779084477643.png',
+  'dev-ahu-2f-01': 'https://aegisnx.com/wp-content/uploads/2026/05/1779084477643.png',
+  'dev-fcu-2f-01': 'https://aegisnx.com/wp-content/uploads/2026/05/1779084477643.png',
+  'dev-light-2f-01': 'https://aegisnx.com/wp-content/uploads/2026/05/1779084477643.png',
+  'dev-access-2f-01': 'https://aegisnx.com/wp-content/uploads/2026/05/1779084477643.png',
+  'dev-camera-2f-01': 'https://aegisnx.com/wp-content/uploads/2026/05/1779084477643.png',
+  'dev-smoke-2f-01': 'https://aegisnx.com/wp-content/uploads/2026/05/1779084477643.png',
+  'dev-pump-2f-01': 'https://aegisnx.com/wp-content/uploads/2026/05/1779084477643.png',
+  'dev-ahu-3f-01': 'https://aegisnx.com/wp-content/uploads/2026/05/1779084477643.png',
+  'dev-vav-3f-01': 'https://aegisnx.com/wp-content/uploads/2026/05/1779084477643.png',
+  'dev-light-3f-01': 'https://aegisnx.com/wp-content/uploads/2026/05/1779084477643.png',
+  'dev-access-3f-01': 'https://aegisnx.com/wp-content/uploads/2026/05/1779084477643.png',
+  'dev-camera-3f-01': 'https://aegisnx.com/wp-content/uploads/2026/05/1779084477643.png',
+  'dev-smoke-3f-01': 'https://aegisnx.com/wp-content/uploads/2026/05/1779084477643.png',
+  'dev-pump-3f-01': 'https://aegisnx.com/wp-content/uploads/2026/05/1779084477643.png',
+  'dev-chiller-roof-01': 'https://aegisnx.com/wp-content/uploads/2026/05/1779084477643.png',
+  'dev-cooling-roof-01': 'https://aegisnx.com/wp-content/uploads/2026/05/1779084477643.png',
+  'dev-smoke-roof-01': 'https://aegisnx.com/wp-content/uploads/2026/05/1779084477643.png',
+  'dev-tank-roof-01': 'https://aegisnx.com/wp-content/uploads/2026/05/1779084477643.png',
+}
+
+const defaultDeviceImage = 'https://aegisnx.com/wp-content/uploads/2026/05/1779084477643.png'
+
+// ==================== Preload All Device Images ====================
+const preloadAllImages = (): Promise<void> => {
+  return new Promise((resolve) => {
+    const allUrls = [...new Set([
+      ...Object.values(deviceImageUrls),
+      defaultDeviceImage
+    ])]
+
+    const totalImages = allUrls.length
+    let loadedCount = 0
+    let messageIndex = 0
+
+    const messageInterval = setInterval(() => {
+      if (messageIndex < loadingMessages.length - 1) {
+        messageIndex++
+        loadingMessage.value = loadingMessages[messageIndex]
+      }
+    }, 600)
+
+    if (totalImages === 0) {
+      clearInterval(messageInterval)
+      loadingProgress.value = 100
+      loadingMessage.value = 'Ready!'
+      setTimeout(() => resolve(), 400)
+      return
+    }
+
+    allUrls.forEach((url) => {
+      const img = new Image()
+
+      img.onload = () => {
+        loadedCount++
+        loadingProgress.value = Math.round((loadedCount / totalImages) * 100)
+
+        if (loadingProgress.value > 80) {
+          loadingMessage.value = loadingMessages[4]
+        } else if (loadingProgress.value > 60) {
+          loadingMessage.value = loadingMessages[3]
+        } else if (loadingProgress.value > 40) {
+          loadingMessage.value = loadingMessages[2]
+        } else if (loadingProgress.value > 20) {
+          loadingMessage.value = loadingMessages[1]
+        }
+
+        if (loadedCount >= totalImages) {
+          clearInterval(messageInterval)
+          loadingMessage.value = 'Ready!'
+          loadingProgress.value = 100
+          setTimeout(() => resolve(), 500)
+        }
+      }
+
+      img.onerror = () => {
+        loadedCount++
+        loadingProgress.value = Math.round((loadedCount / totalImages) * 100)
+
+        if (loadedCount >= totalImages) {
+          clearInterval(messageInterval)
+          loadingMessage.value = 'Loading complete'
+          loadingProgress.value = 100
+          setTimeout(() => resolve(), 300)
+        }
+      }
+
+      img.src = url
+    })
+  })
+}
+
 // ==================== Type Definitions ====================
 interface DeviceMetrics {
   temperature: number
@@ -512,24 +666,22 @@ interface AreaNode {
   children: SystemNode[]
 }
 
+// ==================== Helper function to get device image ====================
+const getDeviceImageUrl = (deviceId: string): string => {
+  return deviceImageUrls[deviceId] || defaultDeviceImage
+}
+
 // ==================== Helper to create devices ====================
 const createHVACDevice = (
     id: string, name: string, model: string, manufacturer: string,
-    serial: string, status: DeviceNode['status'], imageIdx: number,
+    serial: string, status: DeviceNode['status'],
     metrics: Partial<DeviceMetrics>, maintenance: { last: string; next: string },
     install: string, pos: { x: number; y: number; z: number }
 ): DeviceNode => {
-  const hvacImages = [
-    'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1594322436404-5a0526db4d13?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1590959651373-a3db0f38c3d3?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1631545806604-3ba9d8e9a3f5?w=800&h=600&fit=crop'
-  ]
   return {
     id, name, type: 'device', status, model, manufacturer,
     serialNumber: serial, systemType: 'hvac',
-    imageUrl: hvacImages[imageIdx % hvacImages.length],
+    imageUrl: getDeviceImageUrl(id),
     metrics: {
       temperature: metrics.temperature ?? 24,
       humidity: metrics.humidity ?? 55,
@@ -551,19 +703,14 @@ const createHVACDevice = (
 
 const createLightingDevice = (
     id: string, name: string, model: string, manufacturer: string,
-    serial: string, status: DeviceNode['status'], imageIdx: number,
+    serial: string, status: DeviceNode['status'],
     metrics: Partial<DeviceMetrics>, maintenance: { last: string; next: string },
     install: string, pos: { x: number; y: number; z: number }
 ): DeviceNode => {
-  const lightingImages = [
-    'https://images.unsplash.com/photo-1565814636199-ae8133055c1c?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1517999144091-3d9dca6d1e43?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1507477338202-487c5f0ed3d3?w=800&h=600&fit=crop'
-  ]
   return {
     id, name, type: 'device', status, model, manufacturer,
     serialNumber: serial, systemType: 'lighting',
-    imageUrl: lightingImages[imageIdx % lightingImages.length],
+    imageUrl: getDeviceImageUrl(id),
     metrics: {
       temperature: metrics.temperature ?? 27,
       humidity: metrics.humidity ?? 45,
@@ -581,18 +728,14 @@ const createLightingDevice = (
 
 const createSASDevice = (
     id: string, name: string, model: string, manufacturer: string,
-    serial: string, status: DeviceNode['status'], imageIdx: number,
+    serial: string, status: DeviceNode['status'],
     metrics: Partial<DeviceMetrics>, maintenance: { last: string; next: string },
     install: string, pos: { x: number; y: number; z: number }
 ): DeviceNode => {
-  const sasImages = [
-    'https://images.unsplash.com/photo-1558002038-1055907df827?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&h=600&fit=crop'
-  ]
   return {
     id, name, type: 'device', status, model, manufacturer,
     serialNumber: serial, systemType: 'sas',
-    imageUrl: sasImages[imageIdx % sasImages.length],
+    imageUrl: getDeviceImageUrl(id),
     metrics: {
       temperature: metrics.temperature ?? 35,
       humidity: metrics.humidity ?? 40,
@@ -610,18 +753,14 @@ const createSASDevice = (
 
 const createFASDevice = (
     id: string, name: string, model: string, manufacturer: string,
-    serial: string, status: DeviceNode['status'], imageIdx: number,
+    serial: string, status: DeviceNode['status'],
     metrics: Partial<DeviceMetrics>, maintenance: { last: string; next: string },
     install: string, pos: { x: number; y: number; z: number }
 ): DeviceNode => {
-  const fasImages = [
-    'https://images.unsplash.com/photo-1582139329536-e7284fece509?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&h=600&fit=crop'
-  ]
   return {
     id, name, type: 'device', status, model, manufacturer,
     serialNumber: serial, systemType: 'fas',
-    imageUrl: fasImages[imageIdx % fasImages.length],
+    imageUrl: getDeviceImageUrl(id),
     metrics: {
       temperature: metrics.temperature ?? 22,
       humidity: metrics.humidity ?? 65,
@@ -641,18 +780,14 @@ const createFASDevice = (
 
 const createPlumbingDevice = (
     id: string, name: string, model: string, manufacturer: string,
-    serial: string, status: DeviceNode['status'], imageIdx: number,
+    serial: string, status: DeviceNode['status'],
     metrics: Partial<DeviceMetrics>, maintenance: { last: string; next: string },
     install: string, pos: { x: number; y: number; z: number }
 ): DeviceNode => {
-  const plumbingImages = [
-    'https://images.unsplash.com/photo-1604004555489-723a93d6ce74?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1624969862644-791f3dc98927?w=800&h=600&fit=crop'
-  ]
   return {
     id, name, type: 'device', status, model, manufacturer,
     serialNumber: serial, systemType: 'plumbing',
-    imageUrl: plumbingImages[imageIdx % plumbingImages.length],
+    imageUrl: getDeviceImageUrl(id),
     metrics: {
       temperature: metrics.temperature ?? 30,
       humidity: metrics.humidity ?? 60,
@@ -670,7 +805,7 @@ const createPlumbingDevice = (
   }
 }
 
-// ==================== Mock Data - All floors with all systems ====================
+// ==================== Mock Data ====================
 const generateMockData = (): AreaNode[] => {
   return [
     {
@@ -684,10 +819,10 @@ const generateMockData = (): AreaNode[] => {
           id: 'sys-hvac-b2', name: 'HVAC System', label: 'HVAC System',
           type: 'system', systemType: 'hvac', status: 'online',
           children: [
-            createHVACDevice('dev-ahu-b2-01', 'AHU-B2-01 Air Handler', 'Carrier 39G', 'Carrier', 'CA-2024-B201', 'online', 0,
+            createHVACDevice('dev-ahu-b2-01', 'AHU-B2-01 Air Handler', 'Carrier 39G', 'Carrier', 'CA-2024-B201', 'online',
                 { temperature: 23.0, humidity: 50, power: 18.5, energy: 15200, efficiency: 94, pressure: 280, flowRate: 15000, noiseLevel: 62 },
                 { last: '2026-04-15', next: '2026-07-15' }, '2024-01-10', { x: 10, y: -6, z: 4 }),
-            createHVACDevice('dev-fcu-b2-01', 'FCU-B2-01 Fan Coil', 'Daikin FXMQ', 'Daikin', 'DK-2024-B201', 'online', 1,
+            createHVACDevice('dev-fcu-b2-01', 'FCU-B2-01 Fan Coil', 'Daikin FXMQ', 'Daikin', 'DK-2024-B201', 'online',
                 { temperature: 22.5, humidity: 48, power: 6.8, energy: 5400, efficiency: 91, pressure: 160, flowRate: 1800, noiseLevel: 38 },
                 { last: '2026-05-01', next: '2026-08-01' }, '2024-02-15', { x: 15, y: -5.5, z: 6 })
           ]
@@ -696,7 +831,7 @@ const generateMockData = (): AreaNode[] => {
           id: 'sys-lighting-b2', name: 'Lighting System', label: 'Lighting System',
           type: 'system', systemType: 'lighting', status: 'online',
           children: [
-            createLightingDevice('dev-light-b2-01', 'LIGHT-B2-01 Smart Controller', 'Philips Dynalite', 'Philips', 'PH-2024-B201', 'online', 0,
+            createLightingDevice('dev-light-b2-01', 'LIGHT-B2-01 Smart Controller', 'Philips Dynalite', 'Philips', 'PH-2024-B201', 'online',
                 { temperature: 26.5, humidity: 42, power: 4.2, energy: 3200, efficiency: 96 },
                 { last: '2026-05-15', next: '2026-08-15' }, '2024-01-20', { x: 8, y: -5, z: 8 })
           ]
@@ -705,10 +840,10 @@ const generateMockData = (): AreaNode[] => {
           id: 'sys-fas-b2', name: 'Fire Alarm System', label: 'Fire Alarm System',
           type: 'system', systemType: 'fas', status: 'online',
           children: [
-            createFASDevice('dev-smoke-b2-01', 'SD-B2-01 Smoke Detector', 'Honeywell XLS', 'Honeywell', 'HW-2024-B201', 'online', 0,
+            createFASDevice('dev-smoke-b2-01', 'SD-B2-01 Smoke Detector', 'Honeywell XLS', 'Honeywell', 'HW-2024-B201', 'online',
                 { temperature: 21.5, humidity: 62, power: 0.3, energy: 240, efficiency: 99, co2Level: 420, noiseLevel: 12 },
                 { last: '2026-04-10', next: '2026-07-10' }, '2024-01-01', { x: 12, y: -5.8, z: 10 }),
-            createFASDevice('dev-smoke-b2-02', 'SD-B2-02 Smoke Detector', 'Honeywell XLS', 'Honeywell', 'HW-2024-B202', 'online', 1,
+            createFASDevice('dev-smoke-b2-02', 'SD-B2-02 Smoke Detector', 'Honeywell XLS', 'Honeywell', 'HW-2024-B202', 'online',
                 { temperature: 21.8, humidity: 63, power: 0.3, energy: 238, efficiency: 99, co2Level: 430, noiseLevel: 11 },
                 { last: '2026-04-10', next: '2026-07-10' }, '2024-01-01', { x: 20, y: -5.8, z: 14 })
           ]
@@ -717,10 +852,10 @@ const generateMockData = (): AreaNode[] => {
           id: 'sys-plumbing-b2', name: 'Plumbing System', label: 'Plumbing System',
           type: 'system', systemType: 'plumbing', status: 'warning',
           children: [
-            createPlumbingDevice('dev-pump-b2-01', 'PUMP-B2-01 Sump Pump', 'Grundfos SE', 'Grundfos', 'GF-2024-B201', 'online', 0,
+            createPlumbingDevice('dev-pump-b2-01', 'PUMP-B2-01 Sump Pump', 'Grundfos SE', 'Grundfos', 'GF-2024-B201', 'online',
                 { temperature: 32.0, humidity: 70, power: 11.0, energy: 8800, efficiency: 88, pressure: 380, flowRate: 60 },
                 { last: '2026-03-20', next: '2026-06-20' }, '2023-12-15', { x: 5, y: -6.5, z: 12 }),
-            createPlumbingDevice('dev-pump-b2-02', 'PUMP-B2-02 Booster Pump', 'Grundfos CR', 'Grundfos', 'GF-2024-B202', 'warning', 1,
+            createPlumbingDevice('dev-pump-b2-02', 'PUMP-B2-02 Booster Pump', 'Grundfos CR', 'Grundfos', 'GF-2024-B202', 'warning',
                 { temperature: 38.0, humidity: 72, power: 9.5, energy: 7600, efficiency: 76, pressure: 320, flowRate: 42, vibration: 3.8 },
                 { last: '2024-02-28', next: '2026-04-28' }, '2023-11-20', { x: 5, y: -6.5, z: 14 })
           ]
@@ -738,7 +873,7 @@ const generateMockData = (): AreaNode[] => {
           id: 'sys-hvac-b1', name: 'HVAC System', label: 'HVAC System',
           type: 'system', systemType: 'hvac', status: 'online',
           children: [
-            createHVACDevice('dev-ahu-b1-01', 'AHU-B1-01 Ventilation Unit', 'Trane IntelliPak', 'Trane', 'TR-2024-B101', 'online', 3,
+            createHVACDevice('dev-ahu-b1-01', 'AHU-B1-01 Ventilation Unit', 'Trane IntelliPak', 'Trane', 'TR-2024-B101', 'online',
                 { temperature: 25.0, humidity: 58, power: 20.0, energy: 16000, efficiency: 89, pressure: 260, flowRate: 18000, noiseLevel: 68 },
                 { last: '2026-04-20', next: '2026-07-20' }, '2024-01-15', { x: 18, y: -3, z: 5 })
           ]
@@ -747,7 +882,7 @@ const generateMockData = (): AreaNode[] => {
           id: 'sys-lighting-b1', name: 'Lighting System', label: 'Lighting System',
           type: 'system', systemType: 'lighting', status: 'online',
           children: [
-            createLightingDevice('dev-light-b1-01', 'LIGHT-B1-01 Parking Control', 'Schneider KNX', 'Schneider Electric', 'SE-2024-B101', 'online', 1,
+            createLightingDevice('dev-light-b1-01', 'LIGHT-B1-01 Parking Control', 'Schneider KNX', 'Schneider Electric', 'SE-2024-B101', 'online',
                 { temperature: 28.0, humidity: 46, power: 5.5, energy: 4400, efficiency: 94 },
                 { last: '2026-05-10', next: '2026-08-10' }, '2024-01-25', { x: 10, y: -2.5, z: 8 })
           ]
@@ -756,10 +891,10 @@ const generateMockData = (): AreaNode[] => {
           id: 'sys-sas-b1', name: 'Security System', label: 'Security System',
           type: 'system', systemType: 'sas', status: 'online',
           children: [
-            createSASDevice('dev-access-b1-01', 'ACS-B1-01 Gate Controller', 'HID VertX', 'HID Global', 'HD-2024-B101', 'online', 0,
+            createSASDevice('dev-access-b1-01', 'ACS-B1-01 Gate Controller', 'HID VertX', 'HID Global', 'HD-2024-B101', 'online',
                 { temperature: 34.0, humidity: 42, power: 0.6, energy: 480, efficiency: 99 },
                 { last: '2026-06-01', next: '2026-09-01' }, '2024-01-05', { x: 22, y: -2.8, z: 3 }),
-            createSASDevice('dev-camera-b1-01', 'CAM-B1-01 PTZ Camera', 'Hikvision DS-2DE', 'Hikvision', 'HK-2024-B101', 'online', 1,
+            createSASDevice('dev-camera-b1-01', 'CAM-B1-01 PTZ Camera', 'Hikvision DS-2DE', 'Hikvision', 'HK-2024-B101', 'online',
                 { temperature: 36.0, humidity: 38, power: 1.2, energy: 960, efficiency: 98 },
                 { last: '2026-05-20', next: '2026-08-20' }, '2024-02-01', { x: 24, y: -2.5, z: 5 })
           ]
@@ -768,7 +903,7 @@ const generateMockData = (): AreaNode[] => {
           id: 'sys-fas-b1', name: 'Fire Alarm System', label: 'Fire Alarm System',
           type: 'system', systemType: 'fas', status: 'online',
           children: [
-            createFASDevice('dev-smoke-b1-01', 'SD-B1-01 Smoke Detector', 'Honeywell XLS', 'Honeywell', 'HW-2024-B101', 'online', 1,
+            createFASDevice('dev-smoke-b1-01', 'SD-B1-01 Smoke Detector', 'Honeywell XLS', 'Honeywell', 'HW-2024-B101', 'online',
                 { temperature: 22.2, humidity: 64, power: 0.3, energy: 240, efficiency: 98, co2Level: 480, noiseLevel: 14 },
                 { last: '2026-04-10', next: '2026-07-10' }, '2024-01-01', { x: 8, y: -2.8, z: 10 })
           ]
@@ -777,7 +912,7 @@ const generateMockData = (): AreaNode[] => {
           id: 'sys-plumbing-b1', name: 'Plumbing System', label: 'Plumbing System',
           type: 'system', systemType: 'plumbing', status: 'online',
           children: [
-            createPlumbingDevice('dev-pump-b1-01', 'PUMP-B1-01 Drainage Pump', 'Grundfos CRE', 'Grundfos', 'GF-2024-B101', 'online', 0,
+            createPlumbingDevice('dev-pump-b1-01', 'PUMP-B1-01 Drainage Pump', 'Grundfos CRE', 'Grundfos', 'GF-2024-B101', 'online',
                 { temperature: 31.0, humidity: 65, power: 8.0, energy: 6400, efficiency: 90, pressure: 340, flowRate: 50 },
                 { last: '2026-05-15', next: '2026-08-15' }, '2023-12-20', { x: 6, y: -3, z: 12 })
           ]
@@ -795,13 +930,13 @@ const generateMockData = (): AreaNode[] => {
           id: 'sys-hvac-1f', name: 'HVAC System', label: 'HVAC System',
           type: 'system', systemType: 'hvac', status: 'online',
           children: [
-            createHVACDevice('dev-ahu-1f-01', 'AHU-1F-01 Air Handler', 'Carrier 39G', 'Carrier', 'CA-2024-1F01', 'online', 0,
+            createHVACDevice('dev-ahu-1f-01', 'AHU-1F-01 Air Handler', 'Carrier 39G', 'Carrier', 'CA-2024-1F01', 'online',
                 { temperature: 23.5, humidity: 52, power: 12.8, energy: 10240, efficiency: 93, pressure: 245, flowRate: 11500, noiseLevel: 58 },
                 { last: '2026-04-20', next: '2026-07-20' }, '2024-01-15', { x: 5, y: 2.5, z: 3 }),
-            createHVACDevice('dev-fcu-1f-01', 'FCU-1F-01 Fan Coil', 'Daikin FXMQ', 'Daikin', 'DK-2024-1F01', 'warning', 1,
+            createHVACDevice('dev-fcu-1f-01', 'FCU-1F-01 Fan Coil', 'Daikin FXMQ', 'Daikin', 'DK-2024-1F01', 'warning',
                 { temperature: 25.8, humidity: 58, power: 8.2, energy: 6540, efficiency: 87, pressure: 180, flowRate: 2200, noiseLevel: 42 },
                 { last: '2024-03-10', next: '2026-05-10' }, '2023-06-20', { x: 8, y: 2.8, z: 5 }),
-            createHVACDevice('dev-vav-1f-01', 'VAV-1F-01 VAV Terminal', 'Johnson Controls VAV', 'Johnson Controls', 'JC-2024-1F01', 'online', 2,
+            createHVACDevice('dev-vav-1f-01', 'VAV-1F-01 VAV Terminal', 'Johnson Controls VAV', 'Johnson Controls', 'JC-2024-1F01', 'online',
                 { temperature: 22.0, humidity: 50, power: 1.5, energy: 1200, efficiency: 96, pressure: 120, flowRate: 800 },
                 { last: '2026-04-25', next: '2026-07-25' }, '2024-02-01', { x: 12, y: 2.5, z: 3 })
           ]
@@ -810,10 +945,10 @@ const generateMockData = (): AreaNode[] => {
           id: 'sys-lighting-1f', name: 'Lighting System', label: 'Lighting System',
           type: 'system', systemType: 'lighting', status: 'online',
           children: [
-            createLightingDevice('dev-light-1f-01', 'LIGHT-1F-01 Smart Control', 'Philips Dynalite', 'Philips', 'PH-2024-1F01', 'online', 0,
+            createLightingDevice('dev-light-1f-01', 'LIGHT-1F-01 Smart Control', 'Philips Dynalite', 'Philips', 'PH-2024-1F01', 'online',
                 { temperature: 28.0, humidity: 45, power: 3.5, energy: 2800, efficiency: 95 },
                 { last: '2026-05-15', next: '2026-08-15' }, '2024-01-20', { x: 4, y: 3.2, z: 7 }),
-            createLightingDevice('dev-light-1f-02', 'LIGHT-1F-02 Emergency Light', 'Schneider KNX', 'Schneider Electric', 'SE-2024-1F02', 'online', 1,
+            createLightingDevice('dev-light-1f-02', 'LIGHT-1F-02 Emergency Light', 'Schneider KNX', 'Schneider Electric', 'SE-2024-1F02', 'online',
                 { temperature: 27.0, humidity: 44, power: 1.2, energy: 960, efficiency: 98 },
                 { last: '2026-05-20', next: '2026-08-20' }, '2024-01-25', { x: 16, y: 3.2, z: 7 })
           ]
@@ -822,10 +957,10 @@ const generateMockData = (): AreaNode[] => {
           id: 'sys-sas-1f', name: 'Security System', label: 'Security System',
           type: 'system', systemType: 'sas', status: 'online',
           children: [
-            createSASDevice('dev-access-1f-01', 'ACS-1F-01 Access Controller', 'HID VertX', 'HID Global', 'HD-2024-1F01', 'online', 0,
+            createSASDevice('dev-access-1f-01', 'ACS-1F-01 Access Controller', 'HID VertX', 'HID Global', 'HD-2024-1F01', 'online',
                 { temperature: 35.0, humidity: 40, power: 0.5, energy: 400, efficiency: 99 },
                 { last: '2026-06-01', next: '2026-09-01' }, '2024-01-05', { x: 3, y: 3.0, z: 2 }),
-            createSASDevice('dev-camera-1f-01', 'CAM-1F-01 Dome Camera', 'Hikvision DS-2CD', 'Hikvision', 'HK-2024-1F01', 'online', 1,
+            createSASDevice('dev-camera-1f-01', 'CAM-1F-01 Dome Camera', 'Hikvision DS-2CD', 'Hikvision', 'HK-2024-1F01', 'online',
                 { temperature: 36.5, humidity: 38, power: 0.8, energy: 640, efficiency: 98 },
                 { last: '2026-05-25', next: '2026-08-25' }, '2024-02-05', { x: 20, y: 3.2, z: 2 })
           ]
@@ -834,10 +969,10 @@ const generateMockData = (): AreaNode[] => {
           id: 'sys-fas-1f', name: 'Fire Alarm System', label: 'Fire Alarm System',
           type: 'system', systemType: 'fas', status: 'online',
           children: [
-            createFASDevice('dev-smoke-1f-01', 'SD-1F-01 Smoke Detector', 'Honeywell XLS', 'Honeywell', 'HW-2024-1F01', 'online', 0,
+            createFASDevice('dev-smoke-1f-01', 'SD-1F-01 Smoke Detector', 'Honeywell XLS', 'Honeywell', 'HW-2024-1F01', 'online',
                 { temperature: 22.0, humidity: 55, power: 0.3, energy: 240, efficiency: 99, co2Level: 440, noiseLevel: 13 },
                 { last: '2026-04-10', next: '2026-07-10' }, '2024-01-01', { x: 10, y: 3.5, z: 10 }),
-            createFASDevice('dev-heat-1f-01', 'HD-1F-01 Heat Detector', 'Siemens Cerberus', 'Siemens', 'SM-2024-1F01', 'online', 1,
+            createFASDevice('dev-heat-1f-01', 'HD-1F-01 Heat Detector', 'Siemens Cerberus', 'Siemens', 'SM-2024-1F01', 'online',
                 { temperature: 23.0, humidity: 54, power: 0.2, energy: 160, efficiency: 99, noiseLevel: 10 },
                 { last: '2026-04-12', next: '2026-07-12' }, '2024-01-02', { x: 18, y: 3.5, z: 10 })
           ]
@@ -855,10 +990,10 @@ const generateMockData = (): AreaNode[] => {
           id: 'sys-hvac-2f', name: 'HVAC System', label: 'HVAC System',
           type: 'system', systemType: 'hvac', status: 'warning',
           children: [
-            createHVACDevice('dev-ahu-2f-01', 'AHU-2F-01 Air Handler', 'Trane IntelliPak', 'Trane', 'TR-2024-2F01', 'error', 3,
+            createHVACDevice('dev-ahu-2f-01', 'AHU-2F-01 Air Handler', 'Trane IntelliPak', 'Trane', 'TR-2024-2F01', 'error',
                 { temperature: 31.2, humidity: 72, power: 22.5, energy: 18500, efficiency: 72, pressure: 195, flowRate: 9800, noiseLevel: 78, vibration: 4.2 },
                 { last: '2024-02-28', next: '2026-04-28' }, '2023-08-10', { x: 15, y: 5, z: 4 }),
-            createHVACDevice('dev-fcu-2f-01', 'FCU-2F-01 Fan Coil', 'Daikin FXMQ', 'Daikin', 'DK-2024-2F01', 'online', 1,
+            createHVACDevice('dev-fcu-2f-01', 'FCU-2F-01 Fan Coil', 'Daikin FXMQ', 'Daikin', 'DK-2024-2F01', 'online',
                 { temperature: 24.0, humidity: 55, power: 7.0, energy: 5600, efficiency: 90, pressure: 170, flowRate: 2000, noiseLevel: 40 },
                 { last: '2026-05-05', next: '2026-08-05' }, '2024-02-10', { x: 20, y: 5.2, z: 6 })
           ]
@@ -867,7 +1002,7 @@ const generateMockData = (): AreaNode[] => {
           id: 'sys-lighting-2f', name: 'Lighting System', label: 'Lighting System',
           type: 'system', systemType: 'lighting', status: 'online',
           children: [
-            createLightingDevice('dev-light-2f-01', 'LIGHT-2F-01 Office Control', 'Lutron Quantum', 'Lutron', 'LT-2024-2F01', 'online', 2,
+            createLightingDevice('dev-light-2f-01', 'LIGHT-2F-01 Office Control', 'Lutron Quantum', 'Lutron', 'LT-2024-2F01', 'online',
                 { temperature: 27.5, humidity: 43, power: 2.8, energy: 2240, efficiency: 97 },
                 { last: '2026-05-18', next: '2026-08-18' }, '2024-01-22', { x: 8, y: 5.5, z: 8 })
           ]
@@ -876,10 +1011,10 @@ const generateMockData = (): AreaNode[] => {
           id: 'sys-sas-2f', name: 'Security System', label: 'Security System',
           type: 'system', systemType: 'sas', status: 'online',
           children: [
-            createSASDevice('dev-access-2f-01', 'ACS-2F-01 Access Controller', 'HID VertX', 'HID Global', 'HD-2024-2F01', 'online', 0,
+            createSASDevice('dev-access-2f-01', 'ACS-2F-01 Access Controller', 'HID VertX', 'HID Global', 'HD-2024-2F01', 'online',
                 { temperature: 34.5, humidity: 41, power: 0.5, energy: 400, efficiency: 99 },
                 { last: '2026-06-05', next: '2026-09-05' }, '2024-01-08', { x: 2, y: 5.2, z: 2 }),
-            createSASDevice('dev-camera-2f-01', 'CAM-2F-01 Bullet Camera', 'Hikvision DS-2CD', 'Hikvision', 'HK-2024-2F01', 'warning', 0,
+            createSASDevice('dev-camera-2f-01', 'CAM-2F-01 Bullet Camera', 'Hikvision DS-2CD', 'Hikvision', 'HK-2024-2F01', 'warning',
                 { temperature: 40.0, humidity: 35, power: 1.0, energy: 800, efficiency: 95 },
                 { last: '2026-05-22', next: '2026-08-22' }, '2024-02-08', { x: 25, y: 5.5, z: 2 })
           ]
@@ -888,7 +1023,7 @@ const generateMockData = (): AreaNode[] => {
           id: 'sys-fas-2f', name: 'Fire Alarm System', label: 'Fire Alarm System',
           type: 'system', systemType: 'fas', status: 'online',
           children: [
-            createFASDevice('dev-smoke-2f-01', 'SD-2F-01 Smoke Detector', 'Siemens Cerberus', 'Siemens', 'SM-2024-2F01', 'online', 0,
+            createFASDevice('dev-smoke-2f-01', 'SD-2F-01 Smoke Detector', 'Siemens Cerberus', 'Siemens', 'SM-2024-2F01', 'online',
                 { temperature: 22.5, humidity: 53, power: 0.2, energy: 160, efficiency: 99, co2Level: 460, noiseLevel: 11 },
                 { last: '2026-04-15', next: '2026-07-15' }, '2024-01-03', { x: 10, y: 5.8, z: 10 })
           ]
@@ -897,7 +1032,7 @@ const generateMockData = (): AreaNode[] => {
           id: 'sys-plumbing-2f', name: 'Plumbing System', label: 'Plumbing System',
           type: 'system', systemType: 'plumbing', status: 'online',
           children: [
-            createPlumbingDevice('dev-pump-2f-01', 'PUMP-2F-01 Water Supply', 'Grundfos CME', 'Grundfos', 'GF-2024-2F01', 'online', 0,
+            createPlumbingDevice('dev-pump-2f-01', 'PUMP-2F-01 Water Supply', 'Grundfos CME', 'Grundfos', 'GF-2024-2F01', 'online',
                 { temperature: 30.5, humidity: 58, power: 5.5, energy: 4400, efficiency: 93, pressure: 300, flowRate: 30 },
                 { last: '2026-05-12', next: '2026-08-12' }, '2023-12-18', { x: 4, y: 5.0, z: 12 })
           ]
@@ -915,10 +1050,10 @@ const generateMockData = (): AreaNode[] => {
           id: 'sys-hvac-3f', name: 'HVAC System', label: 'HVAC System',
           type: 'system', systemType: 'hvac', status: 'online',
           children: [
-            createHVACDevice('dev-ahu-3f-01', 'AHU-3F-01 Precision AC', 'Stulz CyberAir', 'Stulz', 'ST-2024-3F01', 'online', 4,
+            createHVACDevice('dev-ahu-3f-01', 'AHU-3F-01 Precision AC', 'Stulz CyberAir', 'Stulz', 'ST-2024-3F01', 'online',
                 { temperature: 22.0, humidity: 48, power: 25.0, energy: 20000, efficiency: 95, pressure: 300, flowRate: 20000, noiseLevel: 55 },
                 { last: '2026-04-30', next: '2026-07-30' }, '2024-01-05', { x: 10, y: 8, z: 5 }),
-            createHVACDevice('dev-vav-3f-01', 'VAV-3F-01 VAV Terminal', 'Johnson Controls VAV', 'Johnson Controls', 'JC-2024-3F01', 'online', 2,
+            createHVACDevice('dev-vav-3f-01', 'VAV-3F-01 VAV Terminal', 'Johnson Controls VAV', 'Johnson Controls', 'JC-2024-3F01', 'online',
                 { temperature: 21.5, humidity: 47, power: 1.2, energy: 960, efficiency: 97, pressure: 110, flowRate: 700 },
                 { last: '2026-05-02', next: '2026-08-02' }, '2024-02-05', { x: 15, y: 8, z: 7 })
           ]
@@ -927,7 +1062,7 @@ const generateMockData = (): AreaNode[] => {
           id: 'sys-lighting-3f', name: 'Lighting System', label: 'Lighting System',
           type: 'system', systemType: 'lighting', status: 'online',
           children: [
-            createLightingDevice('dev-light-3f-01', 'LIGHT-3F-01 Exec Control', 'Lutron HomeWorks', 'Lutron', 'LT-2024-3F01', 'online', 2,
+            createLightingDevice('dev-light-3f-01', 'LIGHT-3F-01 Exec Control', 'Lutron HomeWorks', 'Lutron', 'LT-2024-3F01', 'online',
                 { temperature: 26.0, humidity: 42, power: 2.0, energy: 1600, efficiency: 98 },
                 { last: '2026-05-20', next: '2026-08-20' }, '2024-01-30', { x: 6, y: 8.5, z: 9 })
           ]
@@ -936,10 +1071,10 @@ const generateMockData = (): AreaNode[] => {
           id: 'sys-sas-3f', name: 'Security System', label: 'Security System',
           type: 'system', systemType: 'sas', status: 'online',
           children: [
-            createSASDevice('dev-access-3f-01', 'ACS-3F-01 Biometric Access', 'HID Signo', 'HID Global', 'HD-2024-3F01', 'online', 0,
+            createSASDevice('dev-access-3f-01', 'ACS-3F-01 Biometric Access', 'HID Signo', 'HID Global', 'HD-2024-3F01', 'online',
                 { temperature: 33.0, humidity: 39, power: 0.8, energy: 640, efficiency: 99 },
                 { last: '2026-06-10', next: '2026-09-10' }, '2024-01-10', { x: 2, y: 8.2, z: 2 }),
-            createSASDevice('dev-camera-3f-01', 'CAM-3F-01 4K Camera', 'Axis P1448', 'Axis Communications', 'AX-2024-3F01', 'online', 1,
+            createSASDevice('dev-camera-3f-01', 'CAM-3F-01 4K Camera', 'Axis P1448', 'Axis Communications', 'AX-2024-3F01', 'online',
                 { temperature: 35.0, humidity: 37, power: 1.5, energy: 1200, efficiency: 97 },
                 { last: '2026-05-28', next: '2026-08-28' }, '2024-02-10', { x: 24, y: 8.5, z: 2 })
           ]
@@ -948,7 +1083,7 @@ const generateMockData = (): AreaNode[] => {
           id: 'sys-fas-3f', name: 'Fire Alarm System', label: 'Fire Alarm System',
           type: 'system', systemType: 'fas', status: 'online',
           children: [
-            createFASDevice('dev-smoke-3f-01', 'SD-3F-01 Smoke Detector', 'Siemens Cerberus', 'Siemens', 'SM-2024-3F01', 'online', 0,
+            createFASDevice('dev-smoke-3f-01', 'SD-3F-01 Smoke Detector', 'Siemens Cerberus', 'Siemens', 'SM-2024-3F01', 'online',
                 { temperature: 21.8, humidity: 52, power: 0.2, energy: 160, efficiency: 99, co2Level: 450, noiseLevel: 10 },
                 { last: '2026-04-18', next: '2026-07-18' }, '2024-01-05', { x: 8, y: 8.8, z: 11 })
           ]
@@ -957,7 +1092,7 @@ const generateMockData = (): AreaNode[] => {
           id: 'sys-plumbing-3f', name: 'Plumbing System', label: 'Plumbing System',
           type: 'system', systemType: 'plumbing', status: 'online',
           children: [
-            createPlumbingDevice('dev-pump-3f-01', 'PUMP-3F-01 Hot Water Pump', 'Grundfos UPS', 'Grundfos', 'GF-2024-3F01', 'online', 1,
+            createPlumbingDevice('dev-pump-3f-01', 'PUMP-3F-01 Hot Water Pump', 'Grundfos UPS', 'Grundfos', 'GF-2024-3F01', 'online',
                 { temperature: 45.0, humidity: 55, power: 4.0, energy: 3200, efficiency: 92, pressure: 280, flowRate: 25 },
                 { last: '2026-05-08', next: '2026-08-08' }, '2023-12-22', { x: 4, y: 8.0, z: 13 })
           ]
@@ -975,10 +1110,10 @@ const generateMockData = (): AreaNode[] => {
           id: 'sys-hvac-roof', name: 'HVAC System', label: 'HVAC System',
           type: 'system', systemType: 'hvac', status: 'online',
           children: [
-            createHVACDevice('dev-chiller-roof-01', 'CH-RF-01 Chiller', 'Carrier AquaEdge', 'Carrier', 'CA-2024-RF01', 'online', 4,
+            createHVACDevice('dev-chiller-roof-01', 'CH-RF-01 Chiller', 'Carrier AquaEdge', 'Carrier', 'CA-2024-RF01', 'online',
                 { temperature: 35.0, humidity: 75, power: 150.0, energy: 120000, efficiency: 88, pressure: 450, flowRate: 80000, noiseLevel: 85 },
                 { last: '2026-04-01', next: '2026-07-01' }, '2024-01-01', { x: 10, y: 12, z: 5 }),
-            createHVACDevice('dev-cooling-roof-01', 'CT-RF-01 Cooling Tower', 'BAC 3000', 'Baltimore Aircoil', 'BA-2024-RF01', 'online', 0,
+            createHVACDevice('dev-cooling-roof-01', 'CT-RF-01 Cooling Tower', 'BAC 3000', 'Baltimore Aircoil', 'BA-2024-RF01', 'online',
                 { temperature: 38.0, humidity: 80, power: 45.0, energy: 36000, efficiency: 85, pressure: 200, flowRate: 60000, noiseLevel: 90 },
                 { last: '2026-04-05', next: '2026-07-05' }, '2024-01-01', { x: 20, y: 12, z: 5 })
           ]
@@ -987,7 +1122,7 @@ const generateMockData = (): AreaNode[] => {
           id: 'sys-fas-roof', name: 'Fire Alarm System', label: 'Fire Alarm System',
           type: 'system', systemType: 'fas', status: 'online',
           children: [
-            createFASDevice('dev-smoke-roof-01', 'SD-RF-01 Smoke Detector', 'Honeywell XLS', 'Honeywell', 'HW-2024-RF01', 'online', 1,
+            createFASDevice('dev-smoke-roof-01', 'SD-RF-01 Smoke Detector', 'Honeywell XLS', 'Honeywell', 'HW-2024-RF01', 'online',
                 { temperature: 30.0, humidity: 70, power: 0.3, energy: 240, efficiency: 98, co2Level: 500, noiseLevel: 18 },
                 { last: '2026-04-20', next: '2026-07-20' }, '2024-01-05', { x: 15, y: 12.5, z: 12 })
           ]
@@ -996,7 +1131,7 @@ const generateMockData = (): AreaNode[] => {
           id: 'sys-plumbing-roof', name: 'Plumbing System', label: 'Plumbing System',
           type: 'system', systemType: 'plumbing', status: 'online',
           children: [
-            createPlumbingDevice('dev-tank-roof-01', 'TANK-RF-01 Water Tank', 'GRP Modular', 'ZCL Composites', 'ZC-2024-RF01', 'online', 0,
+            createPlumbingDevice('dev-tank-roof-01', 'TANK-RF-01 Water Tank', 'GRP Modular', 'ZCL Composites', 'ZC-2024-RF01', 'online',
                 { temperature: 28.0, humidity: 75, power: 2.0, energy: 1600, efficiency: 95, pressure: 150, flowRate: 100 },
                 { last: '2026-05-01', next: '2026-08-01' }, '2024-01-01', { x: 5, y: 12, z: 15 })
           ]
@@ -1055,7 +1190,6 @@ const selectedSystem = ref<SystemNode | null>(null)
 const hoveredDevice = ref<DeviceNode | null>(null)
 const lastUpdateTime = ref('')
 
-// Focus mode
 const focusedDevice = ref<DeviceNode | null>(null)
 const focusChartRef = ref<HTMLElement>()
 let focusChartInstance: echarts.ECharts | null = null
@@ -1210,7 +1344,6 @@ const filterNode = (value: string, data: any) => {
 
 const handleNodeClick = (data: any) => {
   if (data.type === 'device') {
-    // Enter focus mode
     focusedDevice.value = data as DeviceNode
     selectedDevice.value = data as DeviceNode
     nextTick(() => {
@@ -1447,7 +1580,6 @@ const handleResize = () => {
   }
 }
 
-// Real-time data updates
 let updateTimer: number
 const startRealtimeUpdates = () => {
   updateTimer = window.setInterval(() => {
@@ -1485,7 +1617,6 @@ const startRealtimeUpdates = () => {
   }, 3000)
 }
 
-// Watch for focus mode to init chart
 watch(focusedDevice, (newVal) => {
   if (newVal) {
     nextTick(() => initFocusChart())
@@ -1493,7 +1624,11 @@ watch(focusedDevice, (newVal) => {
 })
 
 // ==================== Lifecycle ====================
-onMounted(() => {
+onMounted(async () => {
+  await preloadAllImages()
+  isAssetsLoaded.value = true
+  await nextTick()
+
   startRealtimeUpdates()
   window.addEventListener('resize', handleResize)
   lastUpdateTime.value = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' })
@@ -1517,13 +1652,175 @@ watch(viewMode, () => {
 </script>
 
 <style scoped>
-/* ==================== Layout ==================== */
+/* ==================== Loading Screen Styles ==================== */
+.loading-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #0a1629 0%, #0d1930 100%);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-overlay {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(2px);
+}
+
+.loading-content {
+  text-align: center;
+  padding: 40px;
+  border-radius: 32px;
+  background: rgba(13, 25, 48, 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(64, 158, 255, 0.3);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.loading-spinner {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 24px;
+}
+
+.spinner-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  animation: spin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+}
+
+.spinner-ring:nth-child(1) {
+  border-top-color: #409eff;
+  animation-delay: 0s;
+}
+
+.spinner-ring:nth-child(2) {
+  border-right-color: #e6a23c;
+  animation-delay: 0.2s;
+  width: 70%;
+  height: 70%;
+  top: 15%;
+  left: 15%;
+}
+
+.spinner-ring:nth-child(3) {
+  border-bottom-color: #67c23a;
+  animation-delay: 0.4s;
+  width: 40%;
+  height: 40%;
+  top: 30%;
+  left: 30%;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  margin-bottom: 24px;
+  font-size: 28px;
+  font-weight: 700;
+  color: #e5eaf3;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.loading-dots {
+  display: inline-flex;
+  gap: 2px;
+}
+
+.loading-dots span {
+  animation: bounce 1.4s infinite ease-in-out both;
+  color: #409eff;
+}
+
+.loading-dots span:nth-child(1) { animation-delay: -0.32s; }
+.loading-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0); opacity: 0.3; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+.loading-progress {
+  width: 280px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 0 auto 16px;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #409eff, #67c23a, #e6a23c);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  background-size: 200% auto;
+  animation: shimmer 2s linear infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
+}
+
+.loading-tip {
+  font-size: 14px;
+  color: #8899aa;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.loading-subtip {
+  font-size: 12px;
+  color: #64748b;
+  letter-spacing: 0.5px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==================== Main Page Fade In ==================== */
 .topology-page {
   display: flex;
   height: 100%;
   background: #0a1629;
   overflow: hidden;
   position: relative;
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* ==================== Left Panel ==================== */
@@ -1764,7 +2061,6 @@ watch(viewMode, () => {
   to { opacity: 1; transform: scale(1); }
 }
 
-/* Background layer */
 .focus-background {
   position: absolute;
   top: 0;
@@ -1791,7 +2087,6 @@ watch(viewMode, () => {
   background: linear-gradient(135deg, rgba(10, 22, 41, 0.85) 0%, rgba(10, 22, 41, 0.6) 50%, rgba(10, 22, 41, 0.85) 100%);
 }
 
-/* Top bar */
 .focus-top-bar {
   position: relative;
   display: flex;
@@ -1834,7 +2129,6 @@ watch(viewMode, () => {
   border-color: rgba(64, 158, 255, 0.4);
 }
 
-/* Main content */
 .focus-main-content {
   position: relative;
   flex: 1;
@@ -1845,7 +2139,6 @@ watch(viewMode, () => {
   overflow: hidden;
 }
 
-/* Left: Device Image */
 .focus-image-section {
   flex: 0 0 45%;
   display: flex;
@@ -1928,7 +2221,6 @@ watch(viewMode, () => {
   margin: 0;
 }
 
-/* Right: Metrics */
 .focus-metrics-section {
   flex: 1;
   display: flex;
@@ -2024,7 +2316,6 @@ watch(viewMode, () => {
   background: linear-gradient(90deg, #e6a23c, #f56c6c);
 }
 
-/* Bottom panel */
 .focus-bottom-panel {
   position: relative;
   display: flex;
@@ -2076,7 +2367,6 @@ watch(viewMode, () => {
   height: 220px;
 }
 
-/* Maintenance timeline */
 .maintenance-timeline {
   display: flex;
   flex-direction: column;
@@ -2147,7 +2437,6 @@ watch(viewMode, () => {
   .device-image-wrapper { height: 120px; }
   .canvas-toolbar { flex-direction: column; gap: 8px; padding: 8px; }
   .toolbar-left, .toolbar-right { width: 100%; justify-content: center; }
-
   .focus-top-bar { flex-direction: column; gap: 10px; padding: 10px 14px; }
   .focus-breadcrumb { margin: 0; }
   .focus-main-content { padding: 14px; gap: 14px; }
