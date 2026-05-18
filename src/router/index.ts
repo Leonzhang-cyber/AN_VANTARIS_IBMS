@@ -250,7 +250,7 @@ const routes = [
           {
             path: 'introduction',
             name: 'Web3 Introduction',
-            component: () => import('../views/Support/introduction.vue'),
+            component: () => import('../views/Support/Introduction.vue'),
             meta: { title: 'Web3 Introduction' }
           }
         ]
