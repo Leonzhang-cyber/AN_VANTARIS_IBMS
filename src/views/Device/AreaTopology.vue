@@ -100,340 +100,353 @@
     <div class="resize-handle" @mousedown="startResizeLeft"></div>
 
     <!-- 中间渲染画布 -->
-    <div class="topology-canvas">
-      <div class="canvas-toolbar">
-        <div class="toolbar-left">
-          <el-radio-group v-model="viewMode" size="small">
-            <el-radio-button value="grid">
-              <el-icon><Grid /></el-icon>
-              Grid
-            </el-radio-button>
-            <el-radio-button value="list">
-              <el-icon><List /></el-icon>
-              List
-            </el-radio-button>
-          </el-radio-group>
-
-          <el-divider direction="vertical" />
-
-          <el-button-group size="small">
-            <el-button
-                :type="showHeatmap ? 'primary' : 'default'"
-                @click="showHeatmap = !showHeatmap"
-            >
-              <el-icon><DataAnalysis /></el-icon>
-              Heatmap
-            </el-button>
-          </el-button-group>
-        </div>
-
-        <div class="toolbar-right">
-          <el-select
-              v-model="currentFloor"
-              size="small"
-              style="width: 140px; margin-left: 8px"
-              @change="changeFloor"
-          >
-            <el-option v-for="floor in floors" :key="floor" :label="floor" :value="floor" />
-          </el-select>
-        </div>
-      </div>
-
-      <div class="canvas-container">
-        <!-- 设备网格视图 -->
-        <div v-if="viewMode === 'grid'" class="device-grid-view">
-          <div v-if="displayDevices.length === 0" class="empty-canvas-hint">
-            <el-icon :size="48"><View /></el-icon>
-            <p>Select an area or system to view devices</p>
-          </div>
-
-          <div v-else class="device-grid">
-            <div
-                v-for="device in displayDevices"
-                :key="device.id"
-                class="device-card"
-                :class="{
-                'is-selected': selectedDevice?.id === device.id,
-                [`status-${device.status}`]: true
-              }"
-                @click="handleNodeClick(device)"
-                @mouseenter="hoveredDevice = device"
-                @mouseleave="hoveredDevice = null"
-            >
-              <div class="device-image-wrapper">
-                <el-image
-                    :src="device.imageUrl"
-                    fit="contain"
-                    class="device-image"
-                    :alt="device.name"
-                >
-                  <template #error>
-                    <div class="image-fallback">
-                      <el-icon :size="40"><Cpu /></el-icon>
-                      <span>No Image</span>
-                    </div>
-                  </template>
-                  <template #placeholder>
-                    <div class="image-loading">
-                      <el-icon class="is-loading" :size="24"><Loading /></el-icon>
-                    </div>
-                  </template>
-                </el-image>
-
-                <el-tag
-                    class="device-status-tag"
-                    :type="getStatusType(device.status)"
-                    size="small"
-                    effect="dark"
-                >
-                  {{ device.status.toUpperCase() }}
-                </el-tag>
-
-                <div
-                    v-if="showHeatmap"
-                    class="heatmap-overlay"
-                    :style="{ opacity: getHeatmapOpacity(device) }"
-                ></div>
-              </div>
-
-              <div class="device-info">
-                <h5 class="device-name">{{ device.name }}</h5>
-                <span class="device-model">{{ device.model }}</span>
-                <div class="device-metrics-mini">
-                  <span class="metric-mini" :class="{ warning: device.metrics.temperature > 28 }">
-                    {{ device.metrics.temperature }}°C
-                  </span>
-                  <span class="metric-mini" :class="{ warning: device.metrics.power > 20 }">
-                    {{ device.metrics.power }} kW
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 设备列表视图 -->
-        <div v-else class="device-list-view">
-          <el-table
-              :data="displayDevices"
-              style="width: 100%"
-              height="100%"
-              highlight-current-row
-              @row-click="handleNodeClick"
-              :row-class-name="tableRowClassName"
-          >
-            <el-table-column width="60">
-              <template #default="{ row }">
-                <el-avatar :src="row.imageUrl" :size="40" shape="square" fit="cover">
-                  <template #error>
-                    <el-icon :size="24"><Cpu /></el-icon>
-                  </template>
-                </el-avatar>
-              </template>
-            </el-table-column>
-            <el-table-column prop="name" label="Device Name" min-width="150">
-              <template #default="{ row }">
-                <span class="table-device-name">{{ row.name }}</span>
-              </template>
-            </el-table-column>
-            <el-table-column prop="model" label="Model" width="130" />
-            <el-table-column prop="status" label="Status" width="100">
-              <template #default="{ row }">
-                <el-tag :type="getStatusType(row.status)" size="small" effect="dark">
-                  {{ row.status.toUpperCase() }}
-                </el-tag>
-              </template>
-            </el-table-column>
-            <el-table-column label="Temp" width="80">
-              <template #default="{ row }">
-                <span :class="{ 'text-warning': row.metrics.temperature > 28 }">
-                  {{ row.metrics.temperature }}°C
-                </span>
-              </template>
-            </el-table-column>
-            <el-table-column label="Power" width="80">
-              <template #default="{ row }">
-                <span :class="{ 'text-warning': row.metrics.power > 20 }">
-                  {{ row.metrics.power }} kW
-                </span>
-              </template>
-            </el-table-column>
-            <el-table-column label="Efficiency" width="90">
-              <template #default="{ row }">
-                <span :class="{ 'text-danger': row.metrics.efficiency < 80 }">
-                  {{ row.metrics.efficiency }}%
-                </span>
-              </template>
-            </el-table-column>
-            <el-table-column label="Actions" width="120" fixed="right">
-              <template #default="{ row }">
-                <el-button size="small" :icon="Switch" @click.stop="handleDeviceControl(row)">
-                  Control
-                </el-button>
-              </template>
-            </el-table-column>
-          </el-table>
-        </div>
-
-        <div class="canvas-legend">
-          <div class="legend-item"><span class="dot online"></span> Online</div>
-          <div class="legend-item"><span class="dot warning"></span> Warning</div>
-          <div class="legend-item"><span class="dot error"></span> Error</div>
-          <div class="legend-item"><span class="dot offline"></span> Offline</div>
-        </div>
-      </div>
-    </div>
-
-    <div
-        class="resize-handle right-handle"
-        @mousedown="startResizeRight"
-        v-if="selectedDevice"
-    ></div>
-
-    <!-- 右侧设备详情面板 -->
-    <transition name="slide-right">
-      <div
-          v-if="selectedDevice"
-          class="detail-panel"
-          :style="{ width: rightPanelWidth + 'px' }"
-      >
-        <div class="panel-header">
-          <el-icon><InfoFilled /></el-icon>
-          <span>Device Details</span>
-          <el-button
-              :icon="Close"
-              circle
-              size="small"
-              class="toggle-btn"
-              @click="clearSelection"
+    <div class="topology-canvas" :class="{ 'focused-mode': focusedDevice }">
+      <!-- ===== 设备聚焦大屏模式 ===== -->
+      <div v-if="focusedDevice" class="device-focus-screen">
+        <!-- 背景图片层 -->
+        <div class="focus-background">
+          <el-image
+              :src="focusedDevice.imageUrl"
+              fit="cover"
+              class="focus-bg-image"
           />
+          <div class="focus-bg-overlay"></div>
         </div>
 
-        <!-- 设备大图 -->
-        <div class="detail-section">
-          <div class="device-hero-image">
-            <el-image
-                :src="selectedDevice.imageUrl"
-                fit="contain"
-                class="hero-image"
-                :preview-src-list="[selectedDevice.imageUrl]"
-                preview-teleported
-                :initial-index="0"
-            >
-              <template #error>
-                <div class="image-fallback large">
-                  <el-icon :size="64"><Cpu /></el-icon>
-                  <span>No Image Available</span>
+        <!-- 顶部导航 -->
+        <div class="focus-top-bar">
+          <el-button
+              :icon="ArrowLeft"
+              size="default"
+              class="back-btn"
+              @click="exitFocusMode"
+          >
+            Back to {{ selectedSystem?.name || 'Overview' }}
+          </el-button>
+          <div class="focus-breadcrumb">
+            <el-breadcrumb separator="/">
+              <el-breadcrumb-item>
+                <span style="color: #8899aa; cursor: pointer" @click="exitFocusMode">Topology</span>
+              </el-breadcrumb-item>
+              <el-breadcrumb-item>
+                <span style="color: #409eff">{{ focusedDevice.name }}</span>
+              </el-breadcrumb-item>
+            </el-breadcrumb>
+          </div>
+          <div class="focus-actions">
+            <el-button-group>
+              <el-button :icon="Switch" @click="handleDeviceControl(focusedDevice)">
+                Control
+              </el-button>
+              <el-button :icon="Tools" type="warning" @click="handleQuickRepair">
+                Repair
+              </el-button>
+              <el-button :icon="Download" @click="exportDeviceData">
+                Export
+              </el-button>
+            </el-button-group>
+          </div>
+        </div>
+
+        <!-- 主内容区域 -->
+        <div class="focus-main-content">
+          <!-- 左侧：设备大图 -->
+          <div class="focus-image-section">
+            <div class="focus-image-container">
+              <el-image
+                  :src="focusedDevice.imageUrl"
+                  fit="contain"
+                  class="focus-main-image"
+                  :preview-src-list="[focusedDevice.imageUrl]"
+                  preview-teleported
+              >
+                <template #error>
+                  <div class="image-fallback focus-fallback">
+                    <el-icon :size="80"><Cpu /></el-icon>
+                    <span>No Image Available</span>
+                  </div>
+                </template>
+              </el-image>
+            </div>
+            <div class="focus-image-info">
+              <div class="focus-device-status">
+                <span class="status-indicator" :class="`status-${focusedDevice.status}`"></span>
+                <el-tag :type="getStatusType(focusedDevice.status)" size="large" effect="dark">
+                  {{ focusedDevice.status.toUpperCase() }}
+                </el-tag>
+              </div>
+              <h2 class="focus-device-name">{{ focusedDevice.name }}</h2>
+              <p class="focus-device-model">{{ focusedDevice.model }} - {{ focusedDevice.manufacturer }}</p>
+              <p class="focus-device-serial">S/N: {{ focusedDevice.serialNumber }}</p>
+            </div>
+          </div>
+
+          <!-- 右侧：实时指标面板 -->
+          <div class="focus-metrics-section">
+            <div class="focus-metrics-grid">
+              <div
+                  v-for="metric in displayMetrics"
+                  :key="metric.key"
+                  class="focus-metric-card"
+                  :class="{ 'metric-warning': metric.warning }"
+              >
+                <div class="focus-metric-icon">
+                  <el-icon :size="24">
+                    <component :is="metric.icon" />
+                  </el-icon>
                 </div>
-              </template>
-            </el-image>
-            <span class="image-hint">Click to preview full size</span>
-          </div>
-        </div>
-
-        <!-- 基本信息 -->
-        <div class="detail-section">
-          <h4 class="section-title">
-            <el-icon><Document /></el-icon>
-            Basic Information
-          </h4>
-          <div class="info-grid">
-            <div class="info-item">
-              <label>Name</label>
-              <span>{{ selectedDevice.name }}</span>
-            </div>
-            <div class="info-item">
-              <label>Model</label>
-              <span>{{ selectedDevice.model }}</span>
-            </div>
-            <div class="info-item">
-              <label>Serial Number</label>
-              <span class="mono">{{ selectedDevice.serialNumber }}</span>
-            </div>
-            <div class="info-item">
-              <label>Manufacturer</label>
-              <span>{{ selectedDevice.manufacturer }}</span>
-            </div>
-            <div class="info-item">
-              <label>Status</label>
-              <el-tag :type="getStatusType(selectedDevice.status)" size="small" effect="dark">
-                {{ selectedDevice.status.toUpperCase() }}
-              </el-tag>
-            </div>
-            <div class="info-item">
-              <label>Installation</label>
-              <span>{{ selectedDevice.installationDate }}</span>
-            </div>
-            <div class="info-item">
-              <label>Last Maintenance</label>
-              <span>{{ selectedDevice.lastMaintenance }}</span>
-            </div>
-            <div class="info-item">
-              <label>Next Maintenance</label>
-              <span :class="{ 'overdue': isMaintenanceOverdue }">
-                {{ selectedDevice.nextMaintenance }}
-                <el-tag v-if="isMaintenanceOverdue" type="danger" size="small">Overdue</el-tag>
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <!-- 实时指标 -->
-        <div class="detail-section">
-          <h4 class="section-title">
-            <el-icon><Odometer /></el-icon>
-            Real-time Metrics
-            <el-tag size="small" type="info" class="refresh-tag">
-              Updated {{ lastUpdateTime }}
-            </el-tag>
-          </h4>
-          <div class="metrics-grid">
-            <div
-                v-for="metric in displayMetrics"
-                :key="metric.key"
-                class="metric-card"
-                :class="{ 'metric-warning': metric.warning }"
-            >
-              <div class="metric-icon">
-                <el-icon :size="18">
-                  <component :is="metric.icon" />
-                </el-icon>
-              </div>
-              <div class="metric-info">
-                <span class="metric-value">
-                  {{ metric.value }}
-                  <span class="metric-unit">{{ metric.unit }}</span>
-                </span>
-                <span class="metric-label">{{ metric.label }}</span>
+                <div class="focus-metric-data">
+                  <span class="focus-metric-value">
+                    {{ metric.value }}
+                    <span class="focus-metric-unit">{{ metric.unit }}</span>
+                  </span>
+                  <span class="focus-metric-label">{{ metric.label }}</span>
+                </div>
+                <div class="focus-metric-bar">
+                  <div
+                      class="focus-metric-fill"
+                      :style="{ width: getMetricPercentage(metric) + '%' }"
+                      :class="{ 'fill-warning': metric.warning }"
+                  ></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- ===== Trend Analysis Chart ===== -->
-        <div class="detail-section">
-          <h4 class="section-title">
-            <el-icon><TrendCharts /></el-icon>
-            Trend Analysis
-            <span class="chart-subtitle">Last 24 Hours</span>
-          </h4>
-          <div ref="trendChartRef" class="chart-container trend-chart"></div>
-        </div>
+        <!-- 底部：趋势图 + 详细信息 -->
+        <div class="focus-bottom-panel">
+          <!-- 趋势图 -->
+          <div class="focus-chart-section">
+            <h4 class="focus-section-title">
+              <el-icon><TrendCharts /></el-icon>
+              Trend Analysis - Last 24 Hours
+              <span class="chart-update-time">Updated {{ lastUpdateTime }}</span>
+            </h4>
+            <div ref="focusChartRef" class="focus-chart-container"></div>
+          </div>
 
-        <!-- 操作按钮 -->
-        <div class="detail-actions">
-          <el-button type="primary" :icon="Switch" @click="handleDeviceControl(selectedDevice)">
-            Control
-          </el-button>
-          <el-button type="warning" :icon="Tools" @click="handleQuickRepair">
-            Quick Repair
-          </el-button>
-          <el-button :icon="Download" @click="exportDeviceData">
-            Export Data
-          </el-button>
+          <!-- 维护信息 -->
+          <div class="focus-maintenance-section">
+            <h4 class="focus-section-title">
+              <el-icon><Document /></el-icon>
+              Maintenance Info
+            </h4>
+            <div class="maintenance-timeline">
+              <div class="timeline-item">
+                <div class="timeline-dot installed"></div>
+                <div class="timeline-content">
+                  <span class="timeline-date">{{ focusedDevice.installationDate }}</span>
+                  <span class="timeline-label">Installation Date</span>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot maintenance"></div>
+                <div class="timeline-content">
+                  <span class="timeline-date">{{ focusedDevice.lastMaintenance }}</span>
+                  <span class="timeline-label">Last Maintenance</span>
+                </div>
+              </div>
+              <div class="timeline-item" :class="{ overdue: isMaintenanceOverdue }">
+                <div class="timeline-dot" :class="isMaintenanceOverdue ? 'overdue' : 'scheduled'"></div>
+                <div class="timeline-content">
+                  <span class="timeline-date">
+                    {{ focusedDevice.nextMaintenance }}
+                    <el-tag v-if="isMaintenanceOverdue" type="danger" size="small">Overdue</el-tag>
+                  </span>
+                  <span class="timeline-label">Next Maintenance</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </transition>
+
+      <!-- ===== 普通模式 ===== -->
+      <template v-else>
+        <div class="canvas-toolbar">
+          <div class="toolbar-left">
+            <el-radio-group v-model="viewMode" size="small">
+              <el-radio-button value="grid">
+                <el-icon><Grid /></el-icon>
+                Grid
+              </el-radio-button>
+              <el-radio-button value="list">
+                <el-icon><List /></el-icon>
+                List
+              </el-radio-button>
+            </el-radio-group>
+
+            <el-divider direction="vertical" />
+
+            <el-button-group size="small">
+              <el-button
+                  :type="showHeatmap ? 'primary' : 'default'"
+                  @click="showHeatmap = !showHeatmap"
+              >
+                <el-icon><DataAnalysis /></el-icon>
+                Heatmap
+              </el-button>
+            </el-button-group>
+          </div>
+
+          <div class="toolbar-right">
+            <el-select
+                v-model="currentFloor"
+                size="small"
+                style="width: 140px; margin-left: 8px"
+                @change="changeFloor"
+            >
+              <el-option v-for="floor in floors" :key="floor" :label="floor" :value="floor" />
+            </el-select>
+          </div>
+        </div>
+
+        <div class="canvas-container">
+          <!-- 设备网格视图 -->
+          <div v-if="viewMode === 'grid'" class="device-grid-view">
+            <div v-if="displayDevices.length === 0" class="empty-canvas-hint">
+              <el-icon :size="48"><View /></el-icon>
+              <p>Select an area or system to view devices</p>
+            </div>
+
+            <div v-else class="device-grid">
+              <div
+                  v-for="device in displayDevices"
+                  :key="device.id"
+                  class="device-card"
+                  :class="{
+                  'is-selected': selectedDevice?.id === device.id,
+                  [`status-${device.status}`]: true
+                }"
+                  @click="handleNodeClick(device)"
+                  @mouseenter="hoveredDevice = device"
+                  @mouseleave="hoveredDevice = null"
+              >
+                <div class="device-image-wrapper">
+                  <el-image
+                      :src="device.imageUrl"
+                      fit="contain"
+                      class="device-image"
+                      :alt="device.name"
+                  >
+                    <template #error>
+                      <div class="image-fallback">
+                        <el-icon :size="40"><Cpu /></el-icon>
+                        <span>No Image</span>
+                      </div>
+                    </template>
+                    <template #placeholder>
+                      <div class="image-loading">
+                        <el-icon class="is-loading" :size="24"><Loading /></el-icon>
+                      </div>
+                    </template>
+                  </el-image>
+
+                  <el-tag
+                      class="device-status-tag"
+                      :type="getStatusType(device.status)"
+                      size="small"
+                      effect="dark"
+                  >
+                    {{ device.status.toUpperCase() }}
+                  </el-tag>
+
+                  <div
+                      v-if="showHeatmap"
+                      class="heatmap-overlay"
+                      :style="{ opacity: getHeatmapOpacity(device) }"
+                  ></div>
+                </div>
+
+                <div class="device-info">
+                  <h5 class="device-name">{{ device.name }}</h5>
+                  <span class="device-model">{{ device.model }}</span>
+                  <div class="device-metrics-mini">
+                    <span class="metric-mini" :class="{ warning: device.metrics.temperature > 28 }">
+                      {{ device.metrics.temperature }}°C
+                    </span>
+                    <span class="metric-mini" :class="{ warning: device.metrics.power > 20 }">
+                      {{ device.metrics.power }} kW
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 设备列表视图 -->
+          <div v-else class="device-list-view">
+            <el-table
+                :data="displayDevices"
+                style="width: 100%"
+                height="100%"
+                highlight-current-row
+                @row-click="handleNodeClick"
+                :row-class-name="tableRowClassName"
+            >
+              <el-table-column width="60">
+                <template #default="{ row }">
+                  <el-avatar :src="row.imageUrl" :size="40" shape="square" fit="cover">
+                    <template #error>
+                      <el-icon :size="24"><Cpu /></el-icon>
+                    </template>
+                  </el-avatar>
+                </template>
+              </el-table-column>
+              <el-table-column prop="name" label="Device Name" min-width="150">
+                <template #default="{ row }">
+                  <span class="table-device-name">{{ row.name }}</span>
+                </template>
+              </el-table-column>
+              <el-table-column prop="model" label="Model" width="130" />
+              <el-table-column prop="status" label="Status" width="100">
+                <template #default="{ row }">
+                  <el-tag :type="getStatusType(row.status)" size="small" effect="dark">
+                    {{ row.status.toUpperCase() }}
+                  </el-tag>
+                </template>
+              </el-table-column>
+              <el-table-column label="Temp" width="80">
+                <template #default="{ row }">
+                  <span :class="{ 'text-warning': row.metrics.temperature > 28 }">
+                    {{ row.metrics.temperature }}°C
+                  </span>
+                </template>
+              </el-table-column>
+              <el-table-column label="Power" width="80">
+                <template #default="{ row }">
+                  <span :class="{ 'text-warning': row.metrics.power > 20 }">
+                    {{ row.metrics.power }} kW
+                  </span>
+                </template>
+              </el-table-column>
+              <el-table-column label="Efficiency" width="90">
+                <template #default="{ row }">
+                  <span :class="{ 'text-danger': row.metrics.efficiency < 80 }">
+                    {{ row.metrics.efficiency }}%
+                  </span>
+                </template>
+              </el-table-column>
+              <el-table-column label="Actions" width="120" fixed="right">
+                <template #default="{ row }">
+                  <el-button size="small" :icon="Switch" @click.stop="handleDeviceControl(row)">
+                    Control
+                  </el-button>
+                </template>
+              </el-table-column>
+            </el-table>
+          </div>
+
+          <div class="canvas-legend">
+            <div class="legend-item"><span class="dot online"></span> Online</div>
+            <div class="legend-item"><span class="dot warning"></span> Warning</div>
+            <div class="legend-item"><span class="dot error"></span> Error</div>
+            <div class="legend-item"><span class="dot offline"></span> Offline</div>
+          </div>
+        </div>
+      </template>
+    </div>
   </div>
 </template>
 
@@ -507,11 +520,11 @@ const createHVACDevice = (
     install: string, pos: { x: number; y: number; z: number }
 ): DeviceNode => {
   const hvacImages = [
-    'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1594322436404-5a0526db4d13?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1590959651373-a3db0f38c3d3?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1631545806604-3ba9d8e9a3f5?w=400&h=300&fit=crop'
+    'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=800&h=600&fit=crop',
+    'https://images.unsplash.com/photo-1594322436404-5a0526db4d13?w=800&h=600&fit=crop',
+    'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&h=600&fit=crop',
+    'https://images.unsplash.com/photo-1590959651373-a3db0f38c3d3?w=800&h=600&fit=crop',
+    'https://images.unsplash.com/photo-1631545806604-3ba9d8e9a3f5?w=800&h=600&fit=crop'
   ]
   return {
     id, name, type: 'device', status, model, manufacturer,
@@ -543,9 +556,9 @@ const createLightingDevice = (
     install: string, pos: { x: number; y: number; z: number }
 ): DeviceNode => {
   const lightingImages = [
-    'https://images.unsplash.com/photo-1565814636199-ae8133055c1c?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1517999144091-3d9dca6d1e43?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1507477338202-487c5f0ed3d3?w=400&h=300&fit=crop'
+    'https://images.unsplash.com/photo-1565814636199-ae8133055c1c?w=800&h=600&fit=crop',
+    'https://images.unsplash.com/photo-1517999144091-3d9dca6d1e43?w=800&h=600&fit=crop',
+    'https://images.unsplash.com/photo-1507477338202-487c5f0ed3d3?w=800&h=600&fit=crop'
   ]
   return {
     id, name, type: 'device', status, model, manufacturer,
@@ -573,8 +586,8 @@ const createSASDevice = (
     install: string, pos: { x: number; y: number; z: number }
 ): DeviceNode => {
   const sasImages = [
-    'https://images.unsplash.com/photo-1558002038-1055907df827?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=400&h=300&fit=crop'
+    'https://images.unsplash.com/photo-1558002038-1055907df827?w=800&h=600&fit=crop',
+    'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&h=600&fit=crop'
   ]
   return {
     id, name, type: 'device', status, model, manufacturer,
@@ -602,8 +615,8 @@ const createFASDevice = (
     install: string, pos: { x: number; y: number; z: number }
 ): DeviceNode => {
   const fasImages = [
-    'https://images.unsplash.com/photo-1582139329536-e7284fece509?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&h=300&fit=crop'
+    'https://images.unsplash.com/photo-1582139329536-e7284fece509?w=800&h=600&fit=crop',
+    'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&h=600&fit=crop'
   ]
   return {
     id, name, type: 'device', status, model, manufacturer,
@@ -633,8 +646,8 @@ const createPlumbingDevice = (
     install: string, pos: { x: number; y: number; z: number }
 ): DeviceNode => {
   const plumbingImages = [
-    'https://images.unsplash.com/photo-1604004555489-723a93d6ce74?w=400&h=300&fit=crop',
-    'https://images.unsplash.com/photo-1624969862644-791f3dc98927?w=400&h=300&fit=crop'
+    'https://images.unsplash.com/photo-1604004555489-723a93d6ce74?w=800&h=600&fit=crop',
+    'https://images.unsplash.com/photo-1624969862644-791f3dc98927?w=800&h=600&fit=crop'
   ]
   return {
     id, name, type: 'device', status, model, manufacturer,
@@ -660,7 +673,6 @@ const createPlumbingDevice = (
 // ==================== Mock Data - All floors with all systems ====================
 const generateMockData = (): AreaNode[] => {
   return [
-    // ======== B2 - Basement 2 ========
     {
       id: 'area-b2',
       name: 'Basement B2',
@@ -715,7 +727,6 @@ const generateMockData = (): AreaNode[] => {
         }
       ]
     },
-    // ======== B1 - Basement 1 / Parking ========
     {
       id: 'area-b1',
       name: 'Parking B1',
@@ -773,7 +784,6 @@ const generateMockData = (): AreaNode[] => {
         }
       ]
     },
-    // ======== 1F - Lobby ========
     {
       id: 'area-1f',
       name: 'Lobby 1F',
@@ -834,7 +844,6 @@ const generateMockData = (): AreaNode[] => {
         }
       ]
     },
-    // ======== 2F - Office ========
     {
       id: 'area-2f',
       name: 'Office 2F',
@@ -895,7 +904,6 @@ const generateMockData = (): AreaNode[] => {
         }
       ]
     },
-    // ======== 3F - Executive Floor ========
     {
       id: 'area-3f',
       name: 'Executive 3F',
@@ -956,7 +964,6 @@ const generateMockData = (): AreaNode[] => {
         }
       ]
     },
-    // ======== Roof - Mechanical ========
     {
       id: 'area-roof',
       name: 'Roof Mechanical',
@@ -1020,7 +1027,6 @@ const generateTrendData = (device: DeviceNode) => {
       return +(baseTemp + hourEffect + random).toFixed(1)
     }),
     power: hours.map((_, i) => {
-      // Power peaks during business hours (8-18)
       const hour = i
       const businessEffect = (hour >= 8 && hour <= 18) ? 5 : 0
       const random = (Math.random() - 0.5) * 3
@@ -1049,15 +1055,15 @@ const selectedSystem = ref<SystemNode | null>(null)
 const hoveredDevice = ref<DeviceNode | null>(null)
 const lastUpdateTime = ref('')
 
+// Focus mode
+const focusedDevice = ref<DeviceNode | null>(null)
+const focusChartRef = ref<HTMLElement>()
+let focusChartInstance: echarts.ECharts | null = null
+
 const leftPanelWidth = ref(300)
-const rightPanelWidth = ref(380)
 const isResizingLeft = ref(false)
-const isResizingRight = ref(false)
 
 const treeRef = ref()
-const trendChartRef = ref<HTMLElement>()
-let trendChartInstance: echarts.ECharts | null = null
-
 const topologyData = ref<AreaNode[]>(generateMockData())
 
 // ==================== Computed ====================
@@ -1081,9 +1087,6 @@ const filteredTreeData = computed(() => {
 const displayDevices = computed(() => {
   if (selectedSystem.value) {
     return selectedSystem.value.children || []
-  }
-  if (selectedDevice.value) {
-    return [selectedDevice.value]
   }
   const devices: DeviceNode[] = []
   const currentData = currentFloor.value === 'All Floors'
@@ -1126,21 +1129,23 @@ const defaultExpandedKeys = computed(() => {
 const treeProps = { children: 'children', label: 'label' }
 
 const displayMetrics = computed(() => {
-  if (!selectedDevice.value) return []
-  const m = selectedDevice.value.metrics
+  const device = focusedDevice.value || selectedDevice.value
+  if (!device) return []
+  const m = device.metrics
   return [
-    { key: 'temperature', label: 'Temperature', value: m.temperature, unit: '°C', icon: ColdDrink, warning: m.temperature > 28 },
-    { key: 'humidity', label: 'Humidity', value: m.humidity, unit: '%', icon: Sunny, warning: m.humidity > 65 },
-    { key: 'power', label: 'Power', value: m.power, unit: 'kW', icon: Odometer, warning: m.power > 20 },
-    { key: 'energy', label: 'Energy', value: m.energy.toLocaleString(), unit: 'kWh', icon: TrendCharts, warning: false },
-    { key: 'efficiency', label: 'Efficiency', value: m.efficiency, unit: '%', icon: MagicStick, warning: m.efficiency < 80 },
-    { key: 'uptime', label: 'Uptime', value: Math.floor(m.uptime / 24), unit: 'days', icon: Switch, warning: false }
+    { key: 'temperature', label: 'Temperature', value: m.temperature, unit: '°C', icon: ColdDrink, warning: m.temperature > 28, max: 50 },
+    { key: 'humidity', label: 'Humidity', value: m.humidity, unit: '%', icon: Sunny, warning: m.humidity > 65, max: 100 },
+    { key: 'power', label: 'Power', value: m.power, unit: 'kW', icon: Odometer, warning: m.power > 20, max: 200 },
+    { key: 'energy', label: 'Energy', value: m.energy.toLocaleString(), unit: 'kWh', icon: TrendCharts, warning: false, max: 200000 },
+    { key: 'efficiency', label: 'Efficiency', value: m.efficiency, unit: '%', icon: MagicStick, warning: m.efficiency < 80, max: 100 },
+    { key: 'uptime', label: 'Uptime', value: Math.floor(m.uptime / 24), unit: 'days', icon: Switch, warning: false, max: 365 }
   ]
 })
 
 const isMaintenanceOverdue = computed(() => {
-  if (!selectedDevice.value) return false
-  return new Date(selectedDevice.value.nextMaintenance) < new Date()
+  const device = focusedDevice.value || selectedDevice.value
+  if (!device) return false
+  return new Date(device.nextMaintenance) < new Date()
 })
 
 // ==================== Methods ====================
@@ -1161,6 +1166,11 @@ const getStatusType = (status: string) => {
 
 const getChildrenCount = (data: any) => data.children?.length || 0
 
+const getMetricPercentage = (metric: any) => {
+  if (!metric.max) return 50
+  return Math.min(100, (metric.value / metric.max) * 100)
+}
+
 const getHeatmapOpacity = (device: DeviceNode) => {
   if (device.status === 'error') return 0.5
   if (device.status === 'warning') return 0.3
@@ -1169,9 +1179,7 @@ const getHeatmapOpacity = (device: DeviceNode) => {
   return 0.1
 }
 
-const tableRowClassName = ({ row }: { row: DeviceNode }) => {
-  return `row-${row.status}`
-}
+const tableRowClassName = ({ row }: { row: DeviceNode }) => `row-${row.status}`
 
 const filterTreeData = (data: AreaNode[], keyword: string): AreaNode[] => {
   return data.reduce((acc: AreaNode[], area) => {
@@ -1202,32 +1210,42 @@ const filterNode = (value: string, data: any) => {
 
 const handleNodeClick = (data: any) => {
   if (data.type === 'device') {
+    // Enter focus mode
+    focusedDevice.value = data as DeviceNode
     selectedDevice.value = data as DeviceNode
-    selectedSystem.value = null
     nextTick(() => {
-      initTrendChart()
+      initFocusChart()
     })
   } else if (data.type === 'system') {
     selectedSystem.value = data as SystemNode
     selectedDevice.value = null
-    destroyChart()
+    focusedDevice.value = null
+    destroyFocusChart()
   } else {
     selectedSystem.value = null
     selectedDevice.value = null
-    destroyChart()
+    focusedDevice.value = null
+    destroyFocusChart()
   }
+}
+
+const exitFocusMode = () => {
+  focusedDevice.value = null
+  selectedDevice.value = null
+  destroyFocusChart()
 }
 
 const clearSelection = () => {
   selectedDevice.value = null
   selectedSystem.value = null
-  destroyChart()
+  focusedDevice.value = null
+  destroyFocusChart()
 }
 
-const destroyChart = () => {
-  if (trendChartInstance) {
-    trendChartInstance.dispose()
-    trendChartInstance = null
+const destroyFocusChart = () => {
+  if (focusChartInstance) {
+    focusChartInstance.dispose()
+    focusChartInstance = null
   }
 }
 
@@ -1252,23 +1270,6 @@ const stopResizeLeft = () => {
   document.removeEventListener('mouseup', stopResizeLeft)
 }
 
-const startResizeRight = (e: MouseEvent) => {
-  isResizingRight.value = true
-  document.addEventListener('mousemove', handleResizeRight)
-  document.addEventListener('mouseup', stopResizeRight)
-}
-
-const handleResizeRight = (e: MouseEvent) => {
-  if (!isResizingRight.value) return
-  rightPanelWidth.value = Math.max(280, Math.min(600, window.innerWidth - e.clientX))
-}
-
-const stopResizeRight = () => {
-  isResizingRight.value = false
-  document.removeEventListener('mousemove', handleResizeRight)
-  document.removeEventListener('mouseup', stopResizeRight)
-}
-
 const changeFloor = (floor: string) => {
   ElMessage.success(`Switched to ${floor}`)
 }
@@ -1278,29 +1279,27 @@ const handleDeviceControl = (device: DeviceNode) => {
 }
 
 const handleQuickRepair = () => {
-  if (!selectedDevice.value) return
-  ElMessage.warning(`Creating repair order for ${selectedDevice.value.name}`)
+  if (!focusedDevice.value) return
+  ElMessage.warning(`Creating repair order for ${focusedDevice.value.name}`)
 }
 
 const exportDeviceData = () => {
-  if (!selectedDevice.value) return
+  if (!focusedDevice.value) return
   ElMessage.success('Exporting device data to CSV...')
 }
 
-// ==================== ECharts Trend Chart ====================
-const initTrendChart = () => {
-  // Destroy previous instance
-  destroyChart()
+// ==================== ECharts Focus Chart ====================
+const initFocusChart = () => {
+  destroyFocusChart()
 
-  if (!trendChartRef.value || !selectedDevice.value) return
+  if (!focusChartRef.value || !focusedDevice.value) return
 
-  // Wait for DOM to be ready
   nextTick(() => {
-    if (!trendChartRef.value || !selectedDevice.value) return
+    if (!focusChartRef.value || !focusedDevice.value) return
 
     try {
-      trendChartInstance = echarts.init(trendChartRef.value, 'dark')
-      const trendData = generateTrendData(selectedDevice.value)
+      focusChartInstance = echarts.init(focusChartRef.value, 'dark')
+      const trendData = generateTrendData(focusedDevice.value)
 
       const option: echarts.EChartsOption = {
         backgroundColor: 'transparent',
@@ -1308,15 +1307,7 @@ const initTrendChart = () => {
           trigger: 'axis',
           backgroundColor: 'rgba(13, 25, 48, 0.95)',
           borderColor: 'rgba(64, 158, 255, 0.3)',
-          textStyle: { color: '#e5eaf3', fontSize: 12 },
-          axisPointer: {
-            type: 'cross',
-            crossStyle: { color: '#8899aa' },
-            label: {
-              backgroundColor: 'rgba(13, 25, 48, 0.9)',
-              color: '#e5eaf3'
-            }
-          }
+          textStyle: { color: '#e5eaf3', fontSize: 12 }
         },
         legend: {
           data: ['Temperature (°C)', 'Power (kW)', 'Humidity (%)', 'Efficiency (%)'],
@@ -1328,21 +1319,17 @@ const initTrendChart = () => {
           itemGap: 12
         },
         grid: {
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0
+          top: 8,
+          right: 55,
+          bottom: 35,
+          left: 50
         },
         xAxis: {
           type: 'category',
           data: trendData.xAxis,
           axisLine: { lineStyle: { color: 'rgba(255,255,255,0.15)' } },
           axisTick: { show: false },
-          axisLabel: {
-            color: '#8899aa',
-            fontSize: 10,
-            interval: 3
-          },
+          axisLabel: { color: '#8899aa', fontSize: 10, interval: 3 },
           boundaryGap: false
         },
         yAxis: [
@@ -1447,21 +1434,16 @@ const initTrendChart = () => {
         ]
       }
 
-      trendChartInstance.setOption(option)
+      focusChartInstance.setOption(option)
     } catch (error) {
-      console.error('Failed to initialize trend chart:', error)
+      console.error('Failed to initialize focus chart:', error)
     }
   })
 }
 
-// Handle window resize for chart
 const handleResize = () => {
-  if (trendChartInstance) {
-    try {
-      trendChartInstance.resize()
-    } catch (e) {
-      // ignore resize errors during disposal
-    }
+  if (focusChartInstance) {
+    try { focusChartInstance.resize() } catch (e) {}
   }
 }
 
@@ -1471,42 +1453,44 @@ const startRealtimeUpdates = () => {
   updateTimer = window.setInterval(() => {
     lastUpdateTime.value = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' })
 
-    if (selectedDevice.value) {
-      const m = selectedDevice.value.metrics
+    const device = focusedDevice.value
+    if (device) {
+      const m = device.metrics
       m.temperature += (Math.random() - 0.5) * 0.3
       m.power += (Math.random() - 0.5) * 0.5
       m.temperature = Math.round(m.temperature * 10) / 10
       m.power = Math.round(m.power * 10) / 10
 
-      // Update chart with new data point
-      if (trendChartInstance && !trendChartInstance.isDisposed()) {
+      if (focusChartInstance && !focusChartInstance.isDisposed()) {
         try {
           const now = new Date()
           const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`
-          const option = trendChartInstance.getOption()
+          const option = focusChartInstance.getOption()
           if (option && (option.xAxis as any[])?.[0]?.data) {
             const xData = [...(option.xAxis as any[])[0].data, timeStr]
             if (xData.length > 24) xData.shift()
-
             const series = option.series as any[]
             const tempData = [...series[0].data, +(m.temperature + (Math.random() - 0.5) * 0.5).toFixed(1)]
             if (tempData.length > 24) tempData.shift()
-
             const powerData = [...series[1].data, +(m.power + (Math.random() - 0.5) * 1).toFixed(1)]
             if (powerData.length > 24) powerData.shift()
-
-            trendChartInstance.setOption({
+            focusChartInstance.setOption({
               xAxis: [{ data: xData }],
               series: [{ data: tempData }, { data: powerData }]
             })
           }
-        } catch (e) {
-          // ignore update errors
-        }
+        } catch (e) {}
       }
     }
   }, 3000)
 }
+
+// Watch for focus mode to init chart
+watch(focusedDevice, (newVal) => {
+  if (newVal) {
+    nextTick(() => initFocusChart())
+  }
+})
 
 // ==================== Lifecycle ====================
 onMounted(() => {
@@ -1518,33 +1502,17 @@ onMounted(() => {
 onUnmounted(() => {
   clearInterval(updateTimer)
   window.removeEventListener('resize', handleResize)
-  destroyChart()
+  destroyFocusChart()
   document.removeEventListener('mousemove', handleResizeLeft)
   document.removeEventListener('mouseup', stopResizeLeft)
-  document.removeEventListener('mousemove', handleResizeRight)
-  document.removeEventListener('mouseup', stopResizeRight)
 })
 
 watch(searchKeyword, async (val) => {
-  if (treeRef.value) {
-    treeRef.value.filter(val)
-  }
+  if (treeRef.value) treeRef.value.filter(val)
 })
 
-// Watch for device selection to init chart
-watch(selectedDevice, (newVal) => {
-  if (newVal) {
-    nextTick(() => {
-      initTrendChart()
-    })
-  }
-})
-
-// Watch view mode for chart resize
 watch(viewMode, () => {
-  nextTick(() => {
-    handleResize()
-  })
+  nextTick(() => handleResize())
 })
 </script>
 
@@ -1568,6 +1536,7 @@ watch(viewMode, () => {
   transition: width 0.3s ease;
   overflow: hidden;
   flex-shrink: 0;
+  z-index: 10;
 }
 
 .panel-header {
@@ -1581,10 +1550,7 @@ watch(viewMode, () => {
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.panel-header .el-icon {
-  color: #409eff;
-  font-size: 18px;
-}
+.panel-header .el-icon { color: #409eff; font-size: 18px; }
 
 .toggle-btn {
   margin-left: auto;
@@ -1595,19 +1561,13 @@ watch(viewMode, () => {
   color: #e5eaf3;
 }
 
-.search-box {
-  padding: 12px;
-}
-
+.search-box { padding: 12px; }
 .search-box :deep(.el-input__wrapper) {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: none;
 }
-
-.search-box :deep(.el-input__inner) {
-  color: #e5eaf3;
-}
+.search-box :deep(.el-input__inner) { color: #e5eaf3; }
 
 /* ==================== Topology Tree ==================== */
 .topology-tree {
@@ -1616,78 +1576,27 @@ watch(viewMode, () => {
   overflow-x: hidden;
   padding: 0 4px;
 }
+.topology-tree::-webkit-scrollbar { width: 4px; }
+.topology-tree::-webkit-scrollbar-thumb { background: rgba(64, 158, 255, 0.3); border-radius: 2px; }
 
-.topology-tree::-webkit-scrollbar {
-  width: 4px;
-}
-
-.topology-tree::-webkit-scrollbar-thumb {
-  background: rgba(64, 158, 255, 0.3);
-  border-radius: 2px;
-}
-
-.topology-tree :deep(.el-tree) {
-  background: transparent;
-  color: #e5eaf3;
-}
-
+.topology-tree :deep(.el-tree) { background: transparent; color: #e5eaf3; }
 .topology-tree :deep(.el-tree-node__content) {
-  height: 40px;
-  border-radius: 6px;
-  margin: 2px 4px;
-  transition: all 0.2s;
+  height: 40px; border-radius: 6px; margin: 2px 4px; transition: all 0.2s;
 }
-
-.topology-tree :deep(.el-tree-node__content:hover) {
-  background: rgba(64, 158, 255, 0.1);
-}
-
+.topology-tree :deep(.el-tree-node__content:hover) { background: rgba(64, 158, 255, 0.1); }
 .topology-tree :deep(.el-tree-node.is-current > .el-tree-node__content) {
-  background: rgba(64, 158, 255, 0.2);
-  border: 1px solid rgba(64, 158, 255, 0.3);
+  background: rgba(64, 158, 255, 0.2); border: 1px solid rgba(64, 158, 255, 0.3);
 }
 
-.tree-node-content {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex: 1;
-  padding-right: 8px;
-}
-
-.device-thumb {
-  flex-shrink: 0;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 4px;
-}
-
-.node-icon {
-  font-size: 16px;
-  flex-shrink: 0;
-}
-
+.tree-node-content { display: flex; align-items: center; gap: 8px; flex: 1; padding-right: 8px; }
+.device-thumb { flex-shrink: 0; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 4px; }
+.node-icon { font-size: 16px; flex-shrink: 0; }
 .area-icon { color: #409eff; }
 .system-icon { color: #67c23a; }
+.node-label { flex: 1; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.node-label.is-selected { color: #409eff; }
 
-.node-label {
-  flex: 1;
-  font-size: 13px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.node-label.is-selected {
-  color: #409eff;
-}
-
-.status-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
+.status-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
 .status-dot.status-online { background: #67c23a; box-shadow: 0 0 6px rgba(103, 194, 58, 0.6); }
 .status-dot.status-warning { background: #e6a23c; box-shadow: 0 0 6px rgba(230, 162, 60, 0.6); animation: pulse 2s infinite; }
 .status-dot.status-error { background: #f56c6c; box-shadow: 0 0 6px rgba(245, 108, 108, 0.6); animation: pulse 1s infinite; }
@@ -1699,660 +1608,554 @@ watch(viewMode, () => {
 }
 
 .count-badge :deep(.el-badge__content) {
-  background: rgba(64, 158, 255, 0.3);
-  border: none;
-  font-size: 10px;
-  height: 16px;
-  line-height: 16px;
+  background: rgba(64, 158, 255, 0.3); border: none; font-size: 10px; height: 16px; line-height: 16px;
 }
 
-/* ==================== Stats Overview ==================== */
+/* ==================== Stats ==================== */
 .stats-overview {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 4px;
-  padding: 8px 12px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px;
+  padding: 8px 12px; border-top: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(0, 0, 0, 0.2);
 }
-
-.stat-item {
-  text-align: center;
-  padding: 6px 4px;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.04);
-}
-
-.stat-value {
-  display: block;
-  font-size: 16px;
-  font-weight: 700;
-  color: #409eff;
-}
-
+.stat-item { text-align: center; padding: 6px 4px; border-radius: 6px; background: rgba(255, 255, 255, 0.04); }
+.stat-value { display: block; font-size: 16px; font-weight: 700; color: #409eff; }
 .stat-value.online { color: #67c23a; }
-
-.stat-label {
-  font-size: 10px;
-  color: #8899aa;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
+.stat-label { font-size: 10px; color: #8899aa; text-transform: uppercase; letter-spacing: 0.5px; }
 
 /* ==================== Resize Handle ==================== */
 .resize-handle {
-  width: 4px;
-  background: rgba(64, 158, 255, 0.1);
-  cursor: col-resize;
-  transition: background 0.2s;
-  flex-shrink: 0;
+  width: 4px; background: rgba(64, 158, 255, 0.1); cursor: col-resize;
+  transition: background 0.2s; flex-shrink: 0; z-index: 10;
 }
-
-.resize-handle:hover {
-  background: rgba(64, 158, 255, 0.4);
-}
+.resize-handle:hover { background: rgba(64, 158, 255, 0.4); }
 
 /* ==================== Canvas ==================== */
 .topology-canvas {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  position: relative;
+  flex: 1; display: flex; flex-direction: column; overflow: hidden; position: relative;
 }
+.topology-canvas.focused-mode { overflow: hidden; }
 
 .canvas-toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 16px;
-  background: rgba(13, 25, 48, 0.9);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 16px; background: rgba(13, 25, 48, 0.9);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
-
-.toolbar-left,
-.toolbar-right {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
+.toolbar-left, .toolbar-right { display: flex; align-items: center; gap: 8px; }
 .toolbar-left :deep(.el-radio-button__inner),
 .toolbar-right :deep(.el-button),
 .canvas-toolbar :deep(.el-button) {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.15);
-  color: #e5eaf3;
+  background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.15); color: #e5eaf3;
 }
-
 .toolbar-left :deep(.el-radio-button__inner:hover),
 .toolbar-right :deep(.el-button:hover),
 .canvas-toolbar :deep(.el-button:hover) {
-  background: rgba(64, 158, 255, 0.2);
-  border-color: rgba(64, 158, 255, 0.4);
+  background: rgba(64, 158, 255, 0.2); border-color: rgba(64, 158, 255, 0.4);
 }
 
 .canvas-container {
-  flex: 1;
-  position: relative;
-  overflow: hidden;
+  flex: 1; position: relative; overflow: hidden;
   background: radial-gradient(ellipse at center, #0d1930 0%, #070e1a 100%);
 }
 
 /* ==================== Device Grid View ==================== */
-.device-grid-view {
-  height: 100%;
-  overflow-y: auto;
-  padding: 16px;
-}
-
-.device-grid-view::-webkit-scrollbar {
-  width: 4px;
-}
-
-.device-grid-view::-webkit-scrollbar-thumb {
-  background: rgba(64, 158, 255, 0.3);
-  border-radius: 2px;
-}
+.device-grid-view { height: 100%; overflow-y: auto; padding: 16px; }
+.device-grid-view::-webkit-scrollbar { width: 4px; }
+.device-grid-view::-webkit-scrollbar-thumb { background: rgba(64, 158, 255, 0.3); border-radius: 2px; }
 
 .empty-canvas-hint {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: #8899aa;
-  z-index: 5;
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  text-align: center; color: #8899aa; z-index: 5;
 }
+.empty-canvas-hint p { margin-top: 12px; font-size: 14px; }
 
-.empty-canvas-hint p {
-  margin-top: 12px;
-  font-size: 14px;
-}
-
-.device-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 16px;
-}
+.device-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
 
 .device-card {
-  background: rgba(13, 25, 48, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  background: rgba(13, 25, 48, 0.8); border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px; overflow: hidden; cursor: pointer; transition: all 0.3s ease;
 }
-
 .device-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   border-color: rgba(64, 158, 255, 0.3);
 }
-
 .device-card.is-selected {
-  border-color: #409eff;
-  box-shadow: 0 0 0 2px rgba(64, 158, 255, 0.4);
+  border-color: #409eff; box-shadow: 0 0 0 2px rgba(64, 158, 255, 0.4);
   background: rgba(64, 158, 255, 0.08);
 }
+.device-card.status-warning { border-left: 3px solid #e6a23c; }
+.device-card.status-error { border-left: 3px solid #f56c6c; }
+.device-card.status-offline { opacity: 0.6; }
 
-.device-card.status-warning {
-  border-left: 3px solid #e6a23c;
-}
-
-.device-card.status-error {
-  border-left: 3px solid #f56c6c;
-}
-
-.device-card.status-offline {
-  opacity: 0.6;
-}
-
-.device-image-wrapper {
-  position: relative;
-  width: 100%;
-  height: 160px;
-  background: rgba(0, 0, 0, 0.3);
-  overflow: hidden;
-}
-
-.device-image {
-  width: 100%;
-  height: 100%;
-}
-
-.device-image :deep(.el-image__inner) {
-  object-fit: contain;
-  transition: transform 0.3s ease;
-}
-
-.device-card:hover .device-image :deep(.el-image__inner) {
-  transform: scale(1.05);
-}
+.device-image-wrapper { position: relative; width: 100%; height: 160px; background: rgba(0, 0, 0, 0.3); overflow: hidden; }
+.device-image { width: 100%; height: 100%; }
+.device-image :deep(.el-image__inner) { object-fit: contain; transition: transform 0.3s ease; }
+.device-card:hover .device-image :deep(.el-image__inner) { transform: scale(1.05); }
 
 .image-fallback {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0.5);
-  color: #8899aa;
-  gap: 8px;
-  font-size: 12px;
+  width: 100%; height: 100%; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.5);
+  color: #8899aa; gap: 8px; font-size: 12px;
 }
-
 .image-loading {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0.3);
-  color: #8899aa;
+  width: 100%; height: 100%; display: flex; align-items: center;
+  justify-content: center; background: rgba(0, 0, 0, 0.3); color: #8899aa;
 }
 
-.device-status-tag {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-}
+.device-status-tag { position: absolute; top: 8px; right: 8px; }
 
 .heatmap-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
   background: linear-gradient(135deg, rgba(245, 108, 108, 0.5), rgba(230, 162, 60, 0.3));
-  pointer-events: none;
-  transition: opacity 0.3s ease;
+  pointer-events: none; transition: opacity 0.3s ease;
 }
 
-.device-info {
-  padding: 12px;
-}
-
-.device-name {
-  margin: 0 0 4px 0;
-  font-size: 13px;
-  color: #e5eaf3;
-  font-weight: 600;
-}
-
-.device-model {
-  font-size: 11px;
-  color: #8899aa;
-  display: block;
-  margin-bottom: 8px;
-}
-
-.device-metrics-mini {
-  display: flex;
-  gap: 12px;
-}
-
-.metric-mini {
-  font-size: 11px;
-  color: #8899aa;
-  font-family: 'JetBrains Mono', monospace;
-}
-
-.metric-mini.warning {
-  color: #e6a23c;
-}
+.device-info { padding: 12px; }
+.device-name { margin: 0 0 4px 0; font-size: 13px; color: #e5eaf3; font-weight: 600; }
+.device-model { font-size: 11px; color: #8899aa; display: block; margin-bottom: 8px; }
+.device-metrics-mini { display: flex; gap: 12px; }
+.metric-mini { font-size: 11px; color: #8899aa; font-family: 'JetBrains Mono', monospace; }
+.metric-mini.warning { color: #e6a23c; }
 
 /* ==================== Device List View ==================== */
-.device-list-view {
-  height: 100%;
-  overflow: hidden;
-}
-
+.device-list-view { height: 100%; overflow: hidden; }
 .device-list-view :deep(.el-table) {
-  background: transparent;
-  --el-table-bg-color: transparent;
-  --el-table-tr-bg-color: transparent;
-  --el-table-header-bg-color: rgba(13, 25, 48, 0.95);
-  --el-table-border-color: rgba(255, 255, 255, 0.06);
-  --el-table-text-color: #e5eaf3;
-  --el-table-header-text-color: #8899aa;
+  background: transparent; --el-table-bg-color: transparent; --el-table-tr-bg-color: transparent;
+  --el-table-header-bg-color: rgba(13, 25, 48, 0.95); --el-table-border-color: rgba(255, 255, 255, 0.06);
+  --el-table-text-color: #e5eaf3; --el-table-header-text-color: #8899aa;
 }
-
-.device-list-view :deep(.el-table th) {
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.device-list-view :deep(.el-table tr) {
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.device-list-view :deep(.el-table tr:hover > td) {
-  background: rgba(64, 158, 255, 0.08) !important;
-}
-
-.device-list-view :deep(.el-table .row-warning) {
-  border-left: 3px solid #e6a23c;
-}
-
-.device-list-view :deep(.el-table .row-error) {
-  border-left: 3px solid #f56c6c;
-  background: rgba(245, 108, 108, 0.05) !important;
-}
-
-.device-list-view :deep(.el-table .row-offline) {
-  opacity: 0.5;
-}
-
-.table-device-name {
-  font-weight: 500;
-}
-
+.device-list-view :deep(.el-table th) { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+.device-list-view :deep(.el-table tr) { cursor: pointer; transition: background 0.2s; }
+.device-list-view :deep(.el-table tr:hover > td) { background: rgba(64, 158, 255, 0.08) !important; }
+.device-list-view :deep(.el-table .row-warning) { border-left: 3px solid #e6a23c; }
+.device-list-view :deep(.el-table .row-error) { border-left: 3px solid #f56c6c; background: rgba(245, 108, 108, 0.05) !important; }
+.device-list-view :deep(.el-table .row-offline) { opacity: 0.5; }
+.table-device-name { font-weight: 500; }
 .text-warning { color: #e6a23c; }
 .text-danger { color: #f56c6c; }
 
 /* ==================== Legend ==================== */
 .canvas-legend {
-  position: absolute;
-  bottom: 16px;
-  left: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  background: rgba(13, 25, 48, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  padding: 10px 14px;
-  z-index: 10;
+  position: absolute; bottom: 16px; left: 16px; display: flex; flex-direction: column;
+  gap: 6px; background: rgba(13, 25, 48, 0.8); border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px; padding: 10px 14px; z-index: 10;
 }
-
-.legend-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 11px;
-  color: #8899aa;
-}
-
-.dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-}
-
+.legend-item { display: flex; align-items: center; gap: 8px; font-size: 11px; color: #8899aa; }
+.dot { width: 10px; height: 10px; border-radius: 50%; }
 .dot.online { background: #67c23a; box-shadow: 0 0 8px rgba(103, 194, 58, 0.5); }
 .dot.warning { background: #e6a23c; box-shadow: 0 0 8px rgba(230, 162, 60, 0.5); }
 .dot.error { background: #f56c6c; box-shadow: 0 0 8px rgba(245, 108, 108, 0.5); }
 .dot.offline { background: #909399; }
 
-/* ==================== Right Detail Panel ==================== */
-.detail-panel {
+/* ==================== FOCUS SCREEN MODE ==================== */
+.device-focus-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
   flex-direction: column;
-  background: rgba(13, 25, 48, 0.95);
-  border-left: 1px solid rgba(64, 158, 255, 0.15);
-  backdrop-filter: blur(10px);
-  overflow-y: auto;
-  flex-shrink: 0;
+  z-index: 20;
+  animation: focusIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.detail-panel::-webkit-scrollbar {
-  width: 4px;
+@keyframes focusIn {
+  from { opacity: 0; transform: scale(1.05); }
+  to { opacity: 1; transform: scale(1); }
 }
 
-.detail-panel::-webkit-scrollbar-thumb {
-  background: rgba(64, 158, 255, 0.3);
-  border-radius: 2px;
+/* Background layer */
+.focus-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
 }
 
-.slide-right-enter-active,
-.slide-right-leave-active {
-  transition: all 0.3s ease;
+.focus-bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(20px) brightness(0.15);
+  transform: scale(1.1);
 }
 
-.slide-right-enter-from,
-.slide-right-leave-to {
-  width: 0 !important;
-  opacity: 0;
+.focus-bg-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(10, 22, 41, 0.85) 0%, rgba(10, 22, 41, 0.6) 50%, rgba(10, 22, 41, 0.85) 100%);
 }
 
-.detail-section {
-  padding: 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.section-title {
+/* Top bar */
+.focus-top-bar {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 6px;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background: rgba(13, 25, 48, 0.7);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 2;
+}
+
+.back-btn {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: #e5eaf3 !important;
+  font-weight: 500;
+}
+
+.back-btn:hover {
+  background: rgba(64, 158, 255, 0.2) !important;
+  border-color: rgba(64, 158, 255, 0.4) !important;
+}
+
+.focus-breadcrumb {
+  flex: 1;
+  margin: 0 24px;
+}
+
+.focus-breadcrumb :deep(.el-breadcrumb__inner) { color: #8899aa; }
+.focus-breadcrumb :deep(.el-breadcrumb__separator) { color: rgba(255,255,255,0.2); }
+
+.focus-actions :deep(.el-button) {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
   color: #e5eaf3;
-  font-size: 14px;
-  margin: 0 0 12px 0;
-  font-weight: 600;
+}
+.focus-actions :deep(.el-button:hover) {
+  background: rgba(64, 158, 255, 0.2);
+  border-color: rgba(64, 158, 255, 0.4);
 }
 
-.section-title .el-icon {
-  color: #409eff;
-}
-
-.refresh-tag {
-  margin-left: auto;
-  font-size: 10px;
-}
-
-.chart-subtitle {
-  margin-left: auto;
-  font-size: 10px;
-  color: #8899aa;
-  font-weight: 400;
-}
-
-/* Device Hero Image */
-.device-hero-image {
+/* Main content */
+.focus-main-content {
   position: relative;
-  width: 100%;
-  height: 200px;
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 8px;
+  flex: 1;
+  display: flex;
+  gap: 24px;
+  padding: 24px;
+  z-index: 2;
   overflow: hidden;
-  cursor: pointer;
 }
 
-.hero-image {
+/* Left: Device Image */
+.focus-image-section {
+  flex: 0 0 45%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.focus-image-container {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  position: relative;
+  min-height: 300px;
+}
+
+.focus-main-image {
   width: 100%;
   height: 100%;
 }
 
-.hero-image :deep(.el-image__inner) {
+.focus-main-image :deep(.el-image__inner) {
   object-fit: contain;
-  transition: transform 0.3s ease;
+  cursor: pointer;
 }
 
-.device-hero-image:hover .hero-image :deep(.el-image__inner) {
-  transform: scale(1.05);
-}
-
-.image-fallback.large {
+.focus-fallback {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.5);
+  gap: 16px;
   color: #8899aa;
-  gap: 12px;
+}
+
+.focus-image-info {
+  padding: 0 8px;
+}
+
+.focus-device-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.status-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+.status-indicator.status-online { background: #67c23a; box-shadow: 0 0 12px rgba(103, 194, 58, 0.6); }
+.status-indicator.status-warning { background: #e6a23c; box-shadow: 0 0 12px rgba(230, 162, 60, 0.6); }
+.status-indicator.status-error { background: #f56c6c; box-shadow: 0 0 12px rgba(245, 108, 108, 0.6); }
+.status-indicator.status-offline { background: #909399; }
+
+.focus-device-name {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 6px 0;
+  letter-spacing: -0.5px;
+}
+
+.focus-device-model {
   font-size: 14px;
-}
-
-.image-hint {
-  display: block;
-  text-align: center;
-  font-size: 10px;
   color: #8899aa;
-  margin-top: 6px;
+  margin: 0 0 4px 0;
 }
 
-/* Info Grid */
-.info-grid {
+.focus-device-serial {
+  font-size: 12px;
+  color: #409eff;
+  font-family: 'JetBrains Mono', monospace;
+  margin: 0;
+}
+
+/* Right: Metrics */
+.focus-metrics-section {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+}
+
+.focus-metrics-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 12px;
+  width: 100%;
 }
 
-.info-item {
+.focus-metric-card {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 8px;
+  padding: 16px;
+  background: rgba(13, 25, 48, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  transition: all 0.3s;
 }
 
-.info-item label {
-  font-size: 10px;
+.focus-metric-card:hover {
+  background: rgba(64, 158, 255, 0.1);
+  border-color: rgba(64, 158, 255, 0.3);
+}
+
+.focus-metric-card.metric-warning {
+  border-color: rgba(245, 108, 108, 0.3);
+  background: rgba(245, 108, 108, 0.08);
+}
+
+.focus-metric-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(64, 158, 255, 0.15);
+  border-radius: 10px;
+  color: #409eff;
+}
+
+.metric-warning .focus-metric-icon {
+  background: rgba(245, 108, 108, 0.15);
+  color: #f56c6c;
+}
+
+.focus-metric-data {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.focus-metric-value {
+  font-size: 26px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.focus-metric-unit {
+  font-size: 12px;
+  color: #8899aa;
+  font-weight: 400;
+}
+
+.focus-metric-label {
+  font-size: 11px;
   color: #8899aa;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
-.info-item span {
-  font-size: 12px;
-  color: #e5eaf3;
+.focus-metric-bar {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 2px;
+  overflow: hidden;
 }
 
-.info-item .mono {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  color: #409eff;
+.focus-metric-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #409eff, #67c23a);
+  border-radius: 2px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.info-item .overdue {
-  color: #f56c6c;
+.focus-metric-fill.fill-warning {
+  background: linear-gradient(90deg, #e6a23c, #f56c6c);
+}
+
+/* Bottom panel */
+.focus-bottom-panel {
+  position: relative;
   display: flex;
-  align-items: center;
-  gap: 4px;
+  gap: 24px;
+  padding: 0 24px 24px;
+  z-index: 2;
 }
 
-/* Metrics Grid */
-.metrics-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-}
-
-.metric-card {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px;
-  background: rgba(255, 255, 255, 0.04);
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  transition: all 0.3s;
-}
-
-.metric-card:hover {
-  background: rgba(64, 158, 255, 0.08);
-  border-color: rgba(64, 158, 255, 0.2);
-}
-
-.metric-card.metric-warning {
-  border-color: rgba(245, 108, 108, 0.3);
-  background: rgba(245, 108, 108, 0.05);
-}
-
-.metric-icon {
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(64, 158, 255, 0.15);
-  border-radius: 8px;
-  color: #409eff;
-  flex-shrink: 0;
-}
-
-.metric-warning .metric-icon {
-  background: rgba(245, 108, 108, 0.15);
-  color: #f56c6c;
-}
-
-.metric-info {
+.focus-chart-section {
   flex: 1;
-  min-width: 0;
+  background: rgba(13, 25, 48, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 16px;
 }
 
-.metric-value {
-  display: block;
-  font-size: 16px;
-  font-weight: 700;
+.focus-maintenance-section {
+  width: 280px;
+  flex-shrink: 0;
+  background: rgba(13, 25, 48, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.focus-section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   color: #e5eaf3;
+  font-size: 14px;
+  margin: 0 0 14px 0;
+  font-weight: 600;
 }
 
-.metric-unit {
+.focus-section-title .el-icon { color: #409eff; }
+
+.chart-update-time {
+  margin-left: auto;
   font-size: 10px;
   color: #8899aa;
   font-weight: 400;
-  margin-left: 2px;
 }
 
-.metric-label {
+.focus-chart-container {
+  width: 100%;
+  height: 220px;
+}
+
+/* Maintenance timeline */
+.maintenance-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-left: 8px;
+}
+
+.timeline-item {
+  display: flex;
+  gap: 12px;
+  position: relative;
+}
+
+.timeline-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+.timeline-dot.installed { background: #409eff; box-shadow: 0 0 8px rgba(64, 158, 255, 0.5); }
+.timeline-dot.maintenance { background: #67c23a; box-shadow: 0 0 8px rgba(103, 194, 58, 0.5); }
+.timeline-dot.scheduled { background: #e6a23c; box-shadow: 0 0 8px rgba(230, 162, 60, 0.5); }
+.timeline-dot.overdue { background: #f56c6c; box-shadow: 0 0 8px rgba(245, 108, 108, 0.5); animation: pulse 1s infinite; }
+
+.timeline-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.timeline-date {
+  font-size: 12px;
+  color: #e5eaf3;
+  font-family: 'JetBrains Mono', monospace;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.timeline-label {
   font-size: 10px;
   color: #8899aa;
+  text-transform: uppercase;
 }
 
-/* Chart Container */
-.chart-container {
-  width: 100%;
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.trend-chart {
-  height: 260px;
-  min-height: 260px;
-}
-
-/* Action Buttons */
-.detail-actions {
-  padding: 16px;
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.detail-actions .el-button {
-  flex: 1;
-  min-width: 80px;
+.timeline-item.overdue .timeline-date {
+  color: #f56c6c;
 }
 
 /* ==================== Responsive ==================== */
 @media (max-width: 1200px) {
-  .device-grid {
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 12px;
-  }
-
-  .device-image-wrapper {
-    height: 130px;
-  }
-
-  .metrics-grid {
-    grid-template-columns: 1fr;
-  }
+  .device-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+  .device-image-wrapper { height: 130px; }
+  .focus-main-content { flex-direction: column; }
+  .focus-image-section { flex: 0 0 auto; }
+  .focus-image-container { min-height: 250px; max-height: 350px; }
+  .focus-metrics-grid { grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 1fr 1fr; }
+  .focus-bottom-panel { flex-direction: column; }
+  .focus-maintenance-section { width: 100%; }
+  .focus-chart-container { height: 200px; }
 }
 
 @media (max-width: 768px) {
-  .topology-left-panel {
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 100;
-    width: 280px !important;
-  }
+  .topology-left-panel { position: absolute; left: 0; top: 0; bottom: 0; z-index: 100; width: 280px !important; }
+  .device-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+  .device-image-wrapper { height: 120px; }
+  .canvas-toolbar { flex-direction: column; gap: 8px; padding: 8px; }
+  .toolbar-left, .toolbar-right { width: 100%; justify-content: center; }
 
-  .detail-panel {
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 100;
-    width: 320px !important;
-  }
-
-  .device-grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 10px;
-  }
-
-  .device-image-wrapper {
-    height: 120px;
-  }
-
-  .info-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .canvas-toolbar {
-    flex-direction: column;
-    gap: 8px;
-    padding: 8px;
-  }
-
-  .toolbar-left,
-  .toolbar-right {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .trend-chart {
-    height: 220px;
-    min-height: 220px;
-  }
+  .focus-top-bar { flex-direction: column; gap: 10px; padding: 10px 14px; }
+  .focus-breadcrumb { margin: 0; }
+  .focus-main-content { padding: 14px; gap: 14px; }
+  .focus-image-container { min-height: 200px; max-height: 280px; }
+  .focus-device-name { font-size: 22px; }
+  .focus-metrics-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+  .focus-metric-value { font-size: 20px; }
+  .focus-bottom-panel { padding: 0 14px 14px; gap: 14px; }
+  .focus-chart-container { height: 180px; }
 }
 </style>

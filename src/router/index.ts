@@ -246,6 +246,12 @@ const routes = [
             name: 'Multi-dimensional Notification',
             component: () => import('../views/Support/Notification.vue'),
             meta: { title: 'Multi-dimensional Notification' }
+          },
+          {
+            path: 'introduction',
+            name: 'Web3 Introduction',
+            component: () => import('../views/Support/introduction.vue'),
+            meta: { title: 'Web3 Introduction' }
           }
         ]
       },

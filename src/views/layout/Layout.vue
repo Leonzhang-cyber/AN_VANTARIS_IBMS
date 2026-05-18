@@ -34,7 +34,6 @@
             v-model:default-openeds="openedMenus"
             @select="handleMenuSelect"
             style="border-right:none;"
-
             :collapse="false"
             :collapse-transition="true"
         >
@@ -66,7 +65,7 @@
           <el-sub-menu index="/device">
             <template #title>
               <el-icon><Cpu /></el-icon>
-              <span>Device Management</span>
+              <span>Device</span>
             </template>
             <el-menu-item index="/device/area-topology">
               <span>Area Device Topology</span>
@@ -91,7 +90,7 @@
           <el-sub-menu index="/energy">
             <template #title>
               <el-icon><TrendCharts /></el-icon>
-              <span>Energy Management</span>
+              <span>Energy</span>
             </template>
             <el-menu-item index="/energy/wind">
               <span>Wind Energy</span>
@@ -171,18 +170,30 @@
             </el-menu-item>
           </el-sub-menu>
 
+          <el-menu-item index="/alarm">
+            <el-icon><Bell /></el-icon>
+            <span>Alarm Center</span>
+          </el-menu-item>
+
+          <el-menu-item index="/report">
+            <el-icon><DataLine /></el-icon>
+            <span>Data Reports</span>
+          </el-menu-item>
 
 
           <el-sub-menu index="/support">
             <template #title>
               <el-icon><Headset /></el-icon>
-              <span>System Support</span>
+              <span>System</span>
             </template>
             <el-menu-item index="/support/mobile">
               <span>Mobile Terminal</span>
             </el-menu-item>
             <el-menu-item index="/support/notify">
               <span>Multi‑dim Notification</span>
+            </el-menu-item>
+            <el-menu-item index="/support/introduction">
+              <span>Web3 Introduction</span>
             </el-menu-item>
           </el-sub-menu>
 
@@ -205,17 +216,6 @@
               <span>Voice Training Logs</span>
             </el-menu-item>
           </el-sub-menu>
-
-
-          <el-menu-item index="/alarm">
-            <el-icon><Bell /></el-icon>
-            <span>Alarm Center</span>
-          </el-menu-item>
-
-          <el-menu-item index="/report">
-            <el-icon><DataLine /></el-icon>
-            <span>Data Reports</span>
-          </el-menu-item>
         </el-menu>
       </div>
 
@@ -381,16 +381,7 @@
             <span>Repair</span>
           </el-button>
 
-          <!-- 全局搜索 -->
-          <el-button
-              v-show="visibleButtons.search"
-              size="small"
-              :icon="Search"
-              class="control-btn pill-btn"
-              @click="openGlobalSearch"
-          >
-            <span v-if="!isMobile">Search</span>
-          </el-button>
+
 
           <!-- 通知中心 -->
           <el-badge
@@ -414,6 +405,18 @@
               @click="handleEmergency"
           >
             <span v-if="!isMobile">Emergency</span>
+          </el-button>
+
+          <!-- 全局搜索 -->
+          <el-button
+              v-show="visibleButtons.search"
+              size="small"
+              :icon="Search"
+              class="control-btn pill-btn"
+              @click="openGlobalSearch"
+              style="margin-left: 0px;"
+          >
+            <span v-if="!isMobile">Search</span>
           </el-button>
 
           <!-- 节能模式下拉按钮组 - 紧凑版 -->
@@ -1738,6 +1741,7 @@ onUnmounted(() => {
   background: rgba(255,255,255,0.1);
   white-space: nowrap;
   transition: all 0.3s;
+  margin-left: 10px;
 }
 
 .user-avatar:hover {
@@ -2053,5 +2057,14 @@ onUnmounted(() => {
   .energy-dropdown-menu {
     min-width: 200px !important;
   }
+}
+</style>
+
+
+<style>
+/* 全局字体统一为 Arial */
+* {
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif !important;
+  font-weight: bold;
 }
 </style>
