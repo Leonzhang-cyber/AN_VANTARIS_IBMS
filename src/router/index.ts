@@ -46,7 +46,7 @@ const routes = [
       {
         path: 'device',
         name: 'Device',
-        redirect: '/device/hvac',
+        redirect: '/device/area-topology',
         children: [
           {
             path: 'area-topology',
