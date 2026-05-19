@@ -5,8 +5,20 @@ const routes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/sites/Factory',  // 直接重定向，不要嵌套 children 的重定向
+    redirect: '/',  // 直接重定向，不要嵌套 children 的重定向
     children: [
+      {
+        path: '',
+        name: 'Dashboard',
+        component: () => import('../views/Dashboard/Dashboard.vue'),
+        meta: { title: 'Dashboard' }
+      },
+      {
+        path: 'control',
+        name: 'Quick Control',
+        component: () => import('../views/Control/Control.vue'),
+        meta: { title: 'Quick Control' }
+      },
       {
         path: 'sites',
         name: 'Sites',
@@ -139,6 +151,18 @@ const routes = [
             name: 'Geothermal',
             component: () => import('../views/Energy/Geothermal.vue'),
             meta: { title: 'Geothermal Energy' }
+          },
+          {
+            path: 'carbon',
+            name: 'Carbon Emission',
+            component: () => import('../views/Energy/Carbon.vue'),
+            meta: { title: 'Carbon Emission' }
+          },
+          {
+            path: 'savings',
+            name: 'Energy Savings',
+            component: () => import('../views/Energy/Savings.vue'),
+            meta: { title: 'Energy Savings' }
           }
         ]
       },
@@ -237,15 +261,33 @@ const routes = [
         ]
       },
       {
-        path: 'carbon',
-        name: 'Carbon Credit',
-        redirect: '/carbon/realtime',
+        path: 'report',
+        name: 'Report',
+        redirect: '/report/energy',
         children: [
           {
-            path: 'realtime',
-            name: 'Carbon Emission',
-            component: () => import('../views/Carbon/Carbon.vue'),
-            meta: { title: 'Carbon Emission' }
+            path: 'energy',
+            name: 'Energy Reports',
+            component: () => import('../views/Report/Energy.vue'),
+            meta: { title: 'Energy Reports' }
+          },
+          {
+            path: 'device',
+            name: 'Device Reports',
+            component: () => import('../views/Report/Device.vue'),
+            meta: { title: 'Device Reports' }
+          },
+          {
+            path: 'maintenance',
+            name: ' Maintenance Reports',
+            component: () => import('../views/Report/Maintenance.vue'),
+            meta: { title: 'Maintenance Reports' }
+          },
+          {
+            path: 'carbon',
+            name: 'Carbon Reports',
+            component: () => import('../views/Report/Carbon.vue'),
+            meta: { title: 'Carbon Reports' }
           }
         ]
       },
@@ -255,7 +297,6 @@ const routes = [
         component: () => import('../views/Report/Report.vue'),
         meta: { title: 'Data Reports' }
       },
-
       {
         path: 'support',
         name: 'System Support',
@@ -266,6 +307,86 @@ const routes = [
             name: 'Mobile Terminal',
             component: () => import('../views/Support/Mobile.vue'),
             meta: { title: 'Mobile Terminal' }
+          }
+        ]
+      },
+      {
+        path: 'administration',
+        name: 'Administration',
+        redirect: '/administration/mobile',
+        children: [
+          {
+            path: 'user-role',
+            name: 'User & Role',
+            component: () => import('../views/Administration/User-role.vue'),
+            meta: { title: 'User & Role' }
+          },
+          {
+            path: 'system-logs',
+            name: 'System Logs',
+            component: () => import('../views/Administration/System-logs.vue'),
+            meta: { title: 'System Logs' }
+          },
+          {
+            path: 'multi-language',
+            name: 'Multi‑language',
+            component: () => import('../views/Administration/Multi‑language.vue'),
+            meta: { title: 'Multi‑language' }
+          },
+          {
+            path: 'theme',
+            name: 'Theme & Language',
+            component: () => import('../views/Administration/Theme.vue'),
+            meta: { title: 'Theme & Language' }
+          },
+          {
+            path: 'license',
+            name: 'License & Upgrade',
+            component: () => import('../views/Administration/License.vue'),
+            meta: { title: 'Theme & Language' }
+          }
+        ]
+      },
+      {
+        path: 'prediction',
+        name: 'AI Prediction',
+        redirect: '/prediction/hvac',
+        children: [
+          {
+            path: 'hvac',
+            name: 'Hvac Prediction',
+            component: () => import('../views/Prediction/Hvac.vue'),
+            meta: { title: 'Hvac Prediction' }
+          },
+          {
+            path: 'lighting',
+            name: 'Lighting Prediction',
+            component: () => import('../views/Prediction/Lighting.vue'),
+            meta: { title: 'Lighting Prediction' }
+          },
+          {
+            path: 'power-socket',
+            name: 'Power & Socket',
+            component: () => import('../views/Prediction/Power.vue'),
+            meta: { title: 'Power & Socket' }
+          },
+          {
+            path: 'ev-charging',
+            name: 'EV Charging',
+            component: () => import('../views/Prediction/EVCharging.vue'),
+            meta: { title: 'EV Charging' }
+          },
+          {
+            path: 'renewable',
+            name: 'Renewable Generation',
+            component: () => import('../views/Prediction/Renewable.vue'),
+            meta: { title: 'Renewable Generation' }
+          },
+          {
+            path: 'storage',
+            name: 'Storage Strategy',
+            component: () => import('../views/Prediction/Storage.vue'),
+            meta: { title: 'Storage Strategy' }
           }
         ]
       },

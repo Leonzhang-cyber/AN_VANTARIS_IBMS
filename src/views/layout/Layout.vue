@@ -37,6 +37,18 @@
             :collapse="false"
             :collapse-transition="true"
         >
+
+
+          <el-menu-item index="/">
+            <el-icon><View /></el-icon>
+            <span>Dashboard</span>
+          </el-menu-item>
+
+          <el-menu-item index="/control">
+            <el-icon><Coordinate /></el-icon>
+            <span>Quick Control</span>
+          </el-menu-item>
+
           <el-sub-menu index="/sites">
             <template #title>
               <el-icon><Odometer /></el-icon>
@@ -113,31 +125,98 @@
             <el-menu-item index="/energy/geothermal">
               <span>Geothermal Energy</span>
             </el-menu-item>
+
+
+            <el-menu-item index="/energy/carbon">
+              <span>Carbon Emission</span>
+            </el-menu-item>
+
+            <el-menu-item index="/energy/savings">
+              <span>Energy Savings</span>
+            </el-menu-item>
+          </el-sub-menu>
+
+
+          <el-sub-menu index="/prediction">
+            <template #title>
+              <!-- 使用一个代表趋势或AI的图标 -->
+              <el-icon><MagicStick /></el-icon>
+              <span>Prediction</span>
+            </template>
+            <!-- 预测中心的二级子菜单 -->
+            <el-menu-item index="/prediction/hvac">
+              <span>HVAC Prediction</span>
+            </el-menu-item>
+            <el-menu-item index="/prediction/lighting">
+              <span>Lighting Prediction</span>
+            </el-menu-item>
+            <el-menu-item index="/prediction/power-socket">
+              <span>Power & Socket</span>
+            </el-menu-item>
+            <el-menu-item index="/prediction/ev-charging">
+              <span>EV Charging</span>
+            </el-menu-item>
+            <el-menu-item index="/prediction/renewable">
+              <span>Renewable Generation</span>
+            </el-menu-item>
+            <el-menu-item index="/prediction/storage">
+              <span>Storage Strategy</span>
+            </el-menu-item>
           </el-sub-menu>
 
           <el-sub-menu index="/property">
             <template #title>
-              <el-icon><House /></el-icon>
+              <el-icon><SwitchFilled /></el-icon>
               <span>Smart Facility</span>
             </template>
             <el-menu-item index="/property/parking">
-              <span>Parking Management</span>
+              <span>Parking</span>
             </el-menu-item>
             <el-menu-item index="/property/visitor">
-              <span>Visitor Management</span>
+              <span>Visitor</span>
             </el-menu-item>
             <el-menu-item index="/property/space">
-              <span>Space Management</span>
+              <span>Space</span>
             </el-menu-item>
             <el-menu-item index="/property/waste">
-              <span>Waste Management</span>
+              <span>Waste</span>
             </el-menu-item>
           </el-sub-menu>
+
+
+
+          <el-sub-menu index="/maintain">
+            <template #title>
+              <el-icon><SetUp /></el-icon>
+              <span>Maintenance</span>
+            </template>
+            <el-menu-item index="/maintain/predictive">
+              <span>Predictive Maintenance</span>
+            </el-menu-item>
+          </el-sub-menu>
+
+
+
+          <el-sub-menu index="/alarm">
+            <template #title>
+              <el-icon><BellFilled /></el-icon>
+              <span>Alarm Center</span>
+            </template>
+            <el-menu-item index="/alarm/index">
+              <span>Alarm Center</span>
+            </el-menu-item>
+            <el-menu-item index="/alarm/notify">
+              <span>Multi‑dim Notification</span>
+            </el-menu-item>
+          </el-sub-menu>
+
+
+
 
           <el-sub-menu index="/blockchain">
             <template #title>
               <el-icon><Connection /></el-icon>
-              <span>Blockchain Services</span>
+              <span>Integrations & Web3</span>
             </template>
             <el-menu-item index="/blockchain/node">
               <span>Node Management</span>
@@ -153,53 +232,34 @@
             </el-menu-item>
           </el-sub-menu>
 
-          <el-sub-menu index="/maintain">
+
+          <el-sub-menu index="/report">
             <template #title>
-              <el-icon><SetUp /></el-icon>
-              <span>Maintenance</span>
+              <el-icon><Reading /></el-icon>
+              <span>Data Reports</span>
             </template>
-            <el-menu-item index="/maintain/predictive">
-              <span>Predictive Maintenance</span>
+            <el-menu-item index="/report/energy">
+              <span>Energy Reports</span>
             </el-menu-item>
+
+            <el-menu-item index="/report/device">
+              <span>Device Reports</span>
+            </el-menu-item>
+
+            <el-menu-item index="/report/maintenance">
+              <span>Maintenance Reports</span>
+            </el-menu-item>
+
+            <el-menu-item index="/report/carbon">
+              <span>Carbon Reports</span>
+            </el-menu-item>
+
           </el-sub-menu>
-
-          <el-sub-menu index="/carbon">
-            <template #title>
-              <el-icon><PieChart /></el-icon>
-              <span>Carbon Credit</span>
-            </template>
-            <el-menu-item index="/carbon/realtime">
-              <span>Carbon Emission</span>
-            </el-menu-item>
-          </el-sub-menu>
-
-          <el-sub-menu index="/alarm">
-            <template #title>
-              <el-icon><PieChart /></el-icon>
-              <span>Alarm Center</span>
-            </template>
-            <el-menu-item index="/alarm/index">
-              <span>Alarm Center</span>
-            </el-menu-item>
-            <el-menu-item index="/alarm/notify">
-              <span>Multi‑dim Notification</span>
-            </el-menu-item>
-          </el-sub-menu>
-
-
-
-
-
-
-          <el-menu-item index="/report">
-            <el-icon><DataLine /></el-icon>
-            <span>Data Reports</span>
-          </el-menu-item>
 
 
           <el-sub-menu index="/support">
             <template #title>
-              <el-icon><Headset /></el-icon>
+              <el-icon><Platform /></el-icon>
               <span>Terminal</span>
             </template>
             <el-menu-item index="/support/mobile">
@@ -210,23 +270,48 @@
 
           <el-sub-menu index="/settings">
             <template #title>
-              <el-icon><Setting /></el-icon>
-              <span>System Settings</span>
+              <el-icon><Mic /></el-icon>
+              <span>Voice & AI</span>
             </template>
             <el-menu-item index="/settings/voice-cmd">
-              <span>Voice Command Settings</span>
+              <span>Voice Commands</span>
             </el-menu-item>
             <el-menu-item index="/settings/tts-rule">
               <span>TTS Broadcast Rules</span>
             </el-menu-item>
-
-            <el-menu-item index="/settings/lang">
-              <span>Multi-language Pack</span>
-            </el-menu-item>
             <el-menu-item index="/settings/voice-log">
               <span>Voice Training Logs</span>
             </el-menu-item>
+            <el-menu-item index="/settings/lang">
+              <span>Multi-language Pack</span>
+            </el-menu-item>
+
           </el-sub-menu>
+
+
+          <el-sub-menu index="/administration">
+            <template #title>
+              <el-icon><Setting /></el-icon>
+              <span>Administration</span>
+            </template>
+            <el-menu-item index="/administration/user-role">
+              <span>User & Role</span>
+            </el-menu-item>
+            <el-menu-item index="/administration/system-logs">
+              <span>System Logs</span>
+            </el-menu-item>
+            <el-menu-item index="/administration/multi-language">
+              <span>Multi‑language</span>
+            </el-menu-item>
+            <el-menu-item index="/administration/theme">
+              <span>Theme & Language</span>
+            </el-menu-item>
+            <el-menu-item index="/administration/license">
+              <span>License & Upgrade</span>
+            </el-menu-item>
+          </el-sub-menu>
+
+
         </el-menu>
       </div>
 
