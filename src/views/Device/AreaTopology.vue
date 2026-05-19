@@ -489,7 +489,7 @@ import {
 // ==================== Loading State ====================
 const isAssetsLoaded = ref(false)
 const loadingProgress = ref(0)
-const loadingMessage = ref('Preparing assets...')
+const loadingMessage = ref<string>('Preparing assets...')
 
 const loadingMessages = [
   'Preparing assets...',
@@ -561,7 +561,10 @@ const preloadAllImages = (): Promise<void> => {
     const messageInterval = setInterval(() => {
       if (messageIndex < loadingMessages.length - 1) {
         messageIndex++
-        loadingMessage.value = loadingMessages[messageIndex]
+        const msg = loadingMessages[messageIndex]
+        if (msg) {
+          loadingMessage.value = msg
+        }
       }
     }, 600)
 
@@ -581,13 +584,13 @@ const preloadAllImages = (): Promise<void> => {
         loadingProgress.value = Math.round((loadedCount / totalImages) * 100)
 
         if (loadingProgress.value > 80) {
-          loadingMessage.value = loadingMessages[4]
+          loadingMessage.value = loadingMessages[4] || ''
         } else if (loadingProgress.value > 60) {
-          loadingMessage.value = loadingMessages[3]
+          loadingMessage.value = loadingMessages[3] || ''
         } else if (loadingProgress.value > 40) {
-          loadingMessage.value = loadingMessages[2]
+          loadingMessage.value = loadingMessages[2] || ''
         } else if (loadingProgress.value > 20) {
-          loadingMessage.value = loadingMessages[1]
+          loadingMessage.value = loadingMessages[1] || ''
         }
 
         if (loadedCount >= totalImages) {
