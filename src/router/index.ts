@@ -5,43 +5,50 @@ const routes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/Factory',  // 直接重定向，不要嵌套 children 的重定向
+    redirect: '/sites/Factory',  // 直接重定向，不要嵌套 children 的重定向
     children: [
       {
-        path: 'Factory',
-        name: 'Factory',
-        component: () => import('../views/Dashboard/Factory.vue'),
-        meta: { title: 'Factory Dashboard' }
-      },
-      {
-        path: 'Building',
-        name: 'Building',
-        component: () => import('../views/Dashboard/Building.vue'),
-        meta: { title: 'Building Dashboard' }
-      },
-      {
-        path: 'Airport',
-        name: 'Airport',
-        component: () => import('../views/Dashboard/Airport.vue'),
-        meta: { title: 'Airport Dashboard' }
-      },
-      {
-        path: 'Shopping',
-        name: 'Shopping',
-        component: () => import('../views/Dashboard/Shopping.vue'),
-        meta: { title: 'Shopping Dashboard' }
-      },
-      {
-        path: 'Hospital',
-        name: 'Hospital',
-        component: () => import('../views/Dashboard/Hospital.vue'),
-        meta: { title: 'Hospital Dashboard' }
-      },
-      {
-        path: 'Hotel',
-        name: 'Hotel',
-        component: () => import('../views/Dashboard/Hotel.vue'),
-        meta: { title: 'Hotel Dashboard' }
+        path: 'sites',
+        name: 'Sites',
+        redirect: '/sites/Factory',
+        children: [
+          {
+            path: 'Factory',
+            name: 'Factory',
+            component: () => import('@/views/Sites/Factory.vue'),
+            meta: { title: 'Factory Sites' }
+          },
+          {
+            path: 'Building',
+            name: 'Building',
+            component: () => import('@/views/Sites/Building.vue'),
+            meta: { title: 'Building Sites' }
+          },
+          {
+            path: 'Airport',
+            name: 'Airport',
+            component: () => import('@/views/Sites/Airport.vue'),
+            meta: { title: 'Airport Sites' }
+          },
+          {
+            path: 'Shopping',
+            name: 'Shopping',
+            component: () => import('@/views/Sites/Shopping.vue'),
+            meta: { title: 'Shopping Sites' }
+          },
+          {
+            path: 'Hospital',
+            name: 'Hospital',
+            component: () => import('@/views/Sites/Hospital.vue'),
+            meta: { title: 'Hospital Sites' }
+          },
+          {
+            path: 'Hotel',
+            name: 'Hotel',
+            component: () => import('@/views/Sites/Hotel.vue'),
+            meta: { title: 'Hotel Sites' }
+          }
+        ]
       },
       {
         path: 'device',

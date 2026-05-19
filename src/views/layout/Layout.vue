@@ -37,27 +37,27 @@
             :collapse="false"
             :collapse-transition="true"
         >
-          <el-sub-menu index="/">
+          <el-sub-menu index="/sites">
             <template #title>
               <el-icon><Odometer /></el-icon>
-              <span>Dashboard</span>
+              <span>Sites</span>
             </template>
-            <el-menu-item index="/Factory">
+            <el-menu-item index="/sites/Factory">
               <span>Factory</span>
             </el-menu-item>
-            <el-menu-item index="/Building">
+            <el-menu-item index="/sites/Building">
               <span>Building</span>
             </el-menu-item>
-            <el-menu-item index="/Airport">
+            <el-menu-item index="/sites/Airport">
               <span>Airport</span>
             </el-menu-item>
-            <el-menu-item index="/Shopping">
+            <el-menu-item index="/sites/Shopping">
               <span>Shopping Mall</span>
             </el-menu-item>
-            <el-menu-item index="/Hospital">
+            <el-menu-item index="/sites/Hospital">
               <span>Hospital</span>
             </el-menu-item>
-            <el-menu-item index="/Hotel">
+            <el-menu-item index="/sites/Hotel">
               <span>Hotel</span>
             </el-menu-item>
           </el-sub-menu>
@@ -90,7 +90,7 @@
           <el-sub-menu index="/energy">
             <template #title>
               <el-icon><TrendCharts /></el-icon>
-              <span>Energy</span>
+              <span>Energy & Carbon</span>
             </template>
             <el-menu-item index="/energy/wind">
               <span>Wind Energy</span>
@@ -845,7 +845,7 @@ const showEnergyReport = computed({
   set: (val) => counterStore.setShowEnergyReport(val)
 })
 
-// 添加判断是否在 Dashboard 子页面的计算属性
+// 添加判断是否在 Sites 子页面的计算属性
 const isInDashboardChildren = computed(() => {
   const dashboardChildren = [
     '/Factory',

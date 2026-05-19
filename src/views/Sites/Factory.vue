@@ -1011,7 +1011,7 @@ onBeforeUnmount(() => {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Dashboard */
+/* Sites */
 .dashboard {
   height: 100%;
   width: 100%;

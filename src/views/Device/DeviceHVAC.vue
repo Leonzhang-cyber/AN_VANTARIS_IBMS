@@ -112,7 +112,7 @@
 
         <!-- Right Column: KPI + Environment + Setpoints + Optimization -->
         <div class="col-right">
-          <!-- KPI Dashboard -->
+          <!-- KPI Sites -->
           <el-card class="card glass-card" shadow="hover">
             <div class="card-header">📊 Plant KPIs</div>
             <div class="kpi-row">

@@ -3,7 +3,7 @@ import { createI18n } from 'vue-i18n'
 const messages = {
     en: {
         menu: {
-            dashboard: 'Dashboard',
+            dashboard: 'Sites',
             device: 'Device',
             energy:'Energy',
             alarm:'Alert Event Center',
@@ -12,7 +12,7 @@ const messages = {
             settings:'Settings',
             carbon: 'Carbon Credit'
         },
-        dashboard: 'Dashboard',
+        dashboard: 'Sites',
         deviceTotal: 'Total Devices',
         deviceOnline: 'Online Devices',
         energyConsumption: 'Energy Consumption',
