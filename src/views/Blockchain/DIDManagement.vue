@@ -327,10 +327,10 @@ interface EntityNode {
 const buildHierarchyData = (): EntityNode[] => {
   const flatData: any[] = [
     // ========== 系统根 ==========
-    { id: 1, name: 'IMBS System Root', did: 'did:imbs:system:root', type: 'system', typeDisplay: 'System Root', status: 'active', balance: '500.00', publicKey: '0x9AA128582b17C0c0143690F24012C8DBCf24767f', createdAt: '2025-01-01 00:00:00', vcId: null, parentDid: null, level: 0 },
+    { id: 1, name: 'IBMS System Root', did: 'did:imbs:system:root', type: 'system', typeDisplay: 'System Root', status: 'active', balance: '500.00', publicKey: '0x9AA128582b17C0c0143690F24012C8DBCf24767f', createdAt: '2025-01-01 00:00:00', vcId: null, parentDid: null, level: 0 },
 
-    // ========== 公司 A：IMBS Technology ==========
-    { id: 2, name: 'IMBS Technology Co., Ltd.', did: 'did:imbs:company:tech', type: 'company', typeDisplay: 'Company', status: 'active', balance: '200.00', publicKey: '0x7f3a4BA632Bc3a88a9c3489613b1CF529C8371Ca', createdAt: '2025-01-15 10:30:00', vcId: 'vc:imbs:company:tech:001', parentDid: 'did:imbs:system:root', level: 1 },
+    // ========== 公司 A：IBMS Technology ==========
+    { id: 2, name: 'IBMS Technology Co., Ltd.', did: 'did:imbs:company:tech', type: 'company', typeDisplay: 'Company', status: 'active', balance: '200.00', publicKey: '0x7f3a4BA632Bc3a88a9c3489613b1CF529C8371Ca', createdAt: '2025-01-15 10:30:00', vcId: 'vc:imbs:company:tech:001', parentDid: 'did:imbs:system:root', level: 1 },
 
     // 公司A - 上海总部区域
     { id: 3, name: 'Shanghai HQ - 1F Lobby', did: 'did:imbs:zone:shanghai_1f', type: 'zone', typeDisplay: 'Zone', status: 'active', balance: '15.00', publicKey: '0x1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r', createdAt: '2025-02-10 09:00:00', vcId: null, parentDid: 'did:imbs:company:tech', level: 2 },
@@ -380,8 +380,8 @@ const buildHierarchyData = (): EntityNode[] => {
     { id: 33, name: 'Parking Gate Barrier', did: 'did:imbs:device:barrier_b1', type: 'device', typeDisplay: 'IoT Device', status: 'active', balance: '0.20', publicKey: '0x1e2f3g4h5i6j7k8l9m0n1o2p3q4r5s6t7u8v', createdAt: '2025-03-09 10:00:00', vcId: 'vc:imbs:device:barrier_b1', parentDid: 'did:imbs:system:parking_b1', level: 4 },
     { id: 34, name: 'Parking Camera #01', did: 'did:imbs:device:park_cam_01', type: 'device', typeDisplay: 'IoT Device', status: 'active', balance: '0.10', publicKey: '0x2f3g4h5i6j7k8l9m0n1o2p3q4r5s6t7u8v9w', createdAt: '2025-03-09 10:30:00', vcId: null, parentDid: 'did:imbs:system:parking_b1', level: 4 },
 
-    // ========== 公司 B：IMBS Energy Solutions（工厂） ==========
-    { id: 35, name: 'IMBS Energy Solutions', did: 'did:imbs:company:energy', type: 'company', typeDisplay: 'Company', status: 'active', balance: '150.00', publicKey: '0x0a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r', createdAt: '2025-01-20 10:00:00', vcId: 'vc:imbs:company:energy:001', parentDid: 'did:imbs:system:root', level: 1 },
+    // ========== 公司 B：IBMS Energy Solutions（工厂） ==========
+    { id: 35, name: 'IBMS Energy Solutions', did: 'did:imbs:company:energy', type: 'company', typeDisplay: 'Company', status: 'active', balance: '150.00', publicKey: '0x0a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r', createdAt: '2025-01-20 10:00:00', vcId: 'vc:imbs:company:energy:001', parentDid: 'did:imbs:system:root', level: 1 },
 
     // 工厂 - 东区厂房
     { id: 36, name: 'East Factory - Production Line A', did: 'did:imbs:zone:east_line_a', type: 'zone', typeDisplay: 'Zone', status: 'active', balance: '20.00', publicKey: '0x3g4h5i6j7k8l9m0n1o2p3q4r5s6t7u8v9w0x', createdAt: '2025-02-15 09:00:00', vcId: null, parentDid: 'did:imbs:company:energy', level: 2 },

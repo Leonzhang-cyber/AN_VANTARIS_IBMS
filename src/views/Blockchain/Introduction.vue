@@ -154,7 +154,7 @@
             <div class="exp-icon">📜</div>
             <div class="exp-content">
               <h4>Smart Contract Layer</h4>
-              <p>IMBSAnchor contract provides immutable on-chain storage for entity metadata hashes and VC credentials. All anchoring operations emit events for complete audit trails.</p>
+              <p>IBMSAnchor contract provides immutable on-chain storage for entity metadata hashes and VC credentials. All anchoring operations emit events for complete audit trails.</p>
             </div>
           </div>
         </div>
@@ -370,12 +370,6 @@ const IMAGE_URLS = {
   dataProvenance: 'https://aegisnx.com/wp-content/uploads/2026/05/1779094802455.png'
 }
 
-const FALLBACK_IMAGES = {
-  architecture: 'https://picsum.photos/id/104/1200/600?random=1',
-  registration: 'https://picsum.photos/id/26/1200/600?random=2',
-  dataProvenance: 'https://picsum.photos/id/30/1200/600?random=3'
-}
-
 // ============ Loading State ============
 const isLoaded = ref(false)
 const loadingProgress = ref(0)
@@ -426,7 +420,12 @@ const verifyKey = () => {
 const updateLoadingProgress = () => {
   loadingProgress.value = (imagesLoadedCount.value / totalImages) * 100
   const idx = Math.min(Math.floor(imagesLoadedCount.value / totalImages * loadingMessages.length), loadingMessages.length - 1)
-  loadingMessage.value = loadingMessages[idx]
+  const numb = loadingMessages[idx]
+  if (numb) {
+    loadingMessage.value = numb
+  }else {
+    loadingMessage.value = ''
+  }
 
   if (imagesLoadedCount.value === totalImages) {
     if (loadingTimeout) clearTimeout(loadingTimeout)
@@ -495,14 +494,14 @@ const layers = [
   { name: 'Application Layer', description: 'Business logic for DID, IoT and AI modeling', icon: 'Monitor', color: '#10b981', techs: ['DID Service', 'IoT Service', 'Modeling'] },
   { name: 'Web3 Integration', description: 'Unified blockchain interface and contract routing', icon: 'Connection', color: '#3b82f6', techs: ['Blockchain Entry', 'ContractManager', 'MiningScheduler'] },
   { name: 'Blockchain Layer', description: 'Three-node Geth cluster with PoA consensus', icon: 'Link', color: '#f59e0b', techs: ['Node-1', 'Node-2', 'Node-3'] },
-  { name: 'Smart Contract', description: 'IMBSAnchor for immutable data anchoring', icon: 'Document', color: '#ef4444', techs: ['anchorEntity', 'anchorVC', 'Events'] }
+  { name: 'Smart Contract', description: 'IBMSAnchor for immutable data anchoring', icon: 'Document', color: '#ef4444', techs: ['anchorEntity', 'anchorVC', 'Events'] }
 ]
 
 const registrationSteps = [
   { title: 'Submit Request', description: 'Administrator submits device information via REST API' },
   { title: 'Generate Identity', description: 'DID module creates unique DID, keypair and VC' },
   { title: 'Start Mining', description: 'MiningScheduler activates Geth nodes if idle' },
-  { title: 'Anchor on Chain', description: 'IMBSAnchor contract stores metadata hash' },
+  { title: 'Anchor on Chain', description: 'IBMSAnchor contract stores metadata hash' },
   { title: 'Store Proof', description: 'Transaction hash saved to MySQL for audit trail' }
 ]
 
@@ -517,7 +516,7 @@ const provenanceStages = [
   { title: 'Data Ingestion', description: 'MQTT/HTTP data reception from IoT devices', icon: 'Download', type: 'ingest' },
   { title: 'Standardization', description: 'Field mapping and data transformation', icon: 'Refresh', type: 'process' },
   { title: 'Critical Check', description: 'Determine if data requires on-chain anchoring', icon: 'Warning', type: 'decision' },
-  { title: 'Hash & Anchor', description: 'SHA256 hash stored on IMBSAnchor contract', icon: 'Lock', type: 'blockchain' },
+  { title: 'Hash & Anchor', description: 'SHA256 hash stored on IBMSAnchor contract', icon: 'Lock', type: 'blockchain' },
   { title: 'Off-Chain Storage', description: 'Full time-series data saved to CSV', icon: 'Document', type: 'storage' },
   { title: 'Real-time Push', description: 'SSE streams data to frontend dashboards', icon: 'Share', type: 'output' }
 ]
@@ -526,7 +525,7 @@ const techStack = [
   { name: 'Geth', description: 'Go Ethereum client running private PoA network with three signer nodes', icon: 'Coin', version: 'v1.13.15', color: '#62688f' },
   { name: 'Web3.py', description: 'Python library for blockchain interaction, transaction signing and event monitoring', icon: 'Connection', version: '7.15.0', color: '#3b82f6' },
   { name: 'Clique PoA', description: 'Proof-of-Authority consensus with 5-second block time and no energy waste', icon: 'User', version: 'Clique', color: '#f59e0b' },
-  { name: 'IMBSAnchor', description: 'Custom Solidity contract for entity and VC hash anchoring', icon: 'Document', version: 'Solidity 0.8', color: '#ef4444' },
+  { name: 'IBMSAnchor', description: 'Custom Solidity contract for entity and VC hash anchoring', icon: 'Document', version: 'Solidity 0.8', color: '#ef4444' },
   { name: 'MiningScheduler', description: 'Intelligent on-demand mining with 10-minute idle timeout', icon: 'Timer', version: 'Custom', color: '#8b5cf6' },
   { name: 'DID Module', description: 'W3C DID standard implementation with VC/VP support', icon: 'Key', version: 'DID Core', color: '#06b6d4' }
 ]

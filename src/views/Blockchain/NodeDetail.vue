@@ -136,7 +136,7 @@
     <!-- Anchoring Records -->
     <el-card class="anchoring-card">
       <template #header>
-        <span>📜 Anchoring Records · IMBSAnchor.sol</span>
+        <span>📜 Anchoring Records · IBMSAnchor.sol</span>
       </template>
       <div class="records-list">
         <div v-for="(record, idx) in anchoringRecords" :key="idx" class="record-item">

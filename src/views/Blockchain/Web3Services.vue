@@ -315,7 +315,7 @@ const architectureModules = ref([
           { name: 'Node 3 (RPC:8547)', icon: '🖥️' }
         ]
       },
-      { name: 'IMBSAnchor Contract', icon: '📜', children: null },
+      { name: 'IBMSAnchor Contract', icon: '📜', children: null },
       { name: 'Mining Scheduler', icon: '⏰', children: null }
     ]
   },
@@ -341,7 +341,7 @@ const networkNodes = ref([
 
 // Smart contracts
 const contracts = ref([
-  { name: 'IMBSAnchor', address: '0x3a4Bc5De6f7G8h9I0j1K2l3M4n5O6p7Q8r9S0t', description: 'Data Anchoring' },
+  { name: 'IBMSAnchor', address: '0x3a4Bc5De6f7G8h9I0j1K2l3M4n5O6p7Q8r9S0t', description: 'Data Anchoring' },
   { name: 'DIDRegistry', address: '0x4b5Cd6Ef7g8H9i0J1k2L3m4N5o6P7q8R9s0T1u', description: 'DID Management' },
   { name: 'VCManager', address: '0x5c6De7f8g9H0i1J2k3L4m5N6o7P8q9R0s1T2uV', description: 'VC Issuance' },
 ])
