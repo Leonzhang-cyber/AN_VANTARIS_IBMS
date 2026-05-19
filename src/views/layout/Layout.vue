@@ -118,7 +118,7 @@
           <el-sub-menu index="/property">
             <template #title>
               <el-icon><House /></el-icon>
-              <span>Smart Property</span>
+              <span>Smart Facility</span>
             </template>
             <el-menu-item index="/property/parking">
               <span>Parking Management</span>
@@ -148,6 +148,9 @@
             <el-menu-item index="/blockchain/did">
               <span>DID Management</span>
             </el-menu-item>
+            <el-menu-item index="/blockchain/introduction">
+              <span>Introduction</span>
+            </el-menu-item>
           </el-sub-menu>
 
           <el-sub-menu index="/maintain">
@@ -170,10 +173,23 @@
             </el-menu-item>
           </el-sub-menu>
 
-          <el-menu-item index="/alarm">
-            <el-icon><Bell /></el-icon>
-            <span>Alarm Center</span>
-          </el-menu-item>
+          <el-sub-menu index="/alarm">
+            <template #title>
+              <el-icon><PieChart /></el-icon>
+              <span>Alarm Center</span>
+            </template>
+            <el-menu-item index="/alarm/index">
+              <span>Alarm Center</span>
+            </el-menu-item>
+            <el-menu-item index="/alarm/notify">
+              <span>Multi‑dim Notification</span>
+            </el-menu-item>
+          </el-sub-menu>
+
+
+
+
+
 
           <el-menu-item index="/report">
             <el-icon><DataLine /></el-icon>
@@ -184,17 +200,12 @@
           <el-sub-menu index="/support">
             <template #title>
               <el-icon><Headset /></el-icon>
-              <span>System</span>
+              <span>Terminal</span>
             </template>
-            <el-menu-item index="/support/introduction">
-              <span>Web3 Introduction</span>
-            </el-menu-item>
             <el-menu-item index="/support/mobile">
               <span>Mobile Terminal</span>
             </el-menu-item>
-            <el-menu-item index="/support/notify">
-              <span>Multi‑dim Notification</span>
-            </el-menu-item>
+
           </el-sub-menu>
 
           <el-sub-menu index="/settings">

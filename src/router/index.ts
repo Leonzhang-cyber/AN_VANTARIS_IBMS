@@ -188,14 +188,33 @@ const routes = [
             name: 'DIDManagement',
             component: () => import('../views/Blockchain/DIDManagement.vue'),
             meta: { title: 'DID Management' }
+          },
+          {
+            path: 'introduction',
+            name: 'Introduction',
+            component: () => import('../views/Blockchain/Introduction.vue'),
+            meta: { title: 'Web3 Introduction' }
           }
         ]
       },
       {
         path: 'alarm',
-        name: 'Alarm',
-        component: () => import('../views/Alarm/Alarm.vue'),
-        meta: { title: 'Alarm Center' }
+        name: 'Alarm Center',
+        redirect: '/maintain/predictive',
+        children: [
+          {
+            path: 'index',
+            name: 'Alarm',
+            component: () => import('../views/Alarm/Alarm.vue'),
+            meta: { title: 'Alarm Center' }
+          },
+          {
+            path: 'notify',
+            name: 'Notify',
+            component: () => import('../views/Alarm/Notification.vue'),
+            meta: { title: 'Multi‑dim Notification' }
+          }
+        ]
       },
       {
         path: 'maintain',
@@ -240,18 +259,6 @@ const routes = [
             name: 'Mobile Terminal',
             component: () => import('../views/Support/Mobile.vue'),
             meta: { title: 'Mobile Terminal' }
-          },
-          {
-            path: 'notify',
-            name: 'Multi-dimensional Notification',
-            component: () => import('../views/Support/Notification.vue'),
-            meta: { title: 'Multi-dimensional Notification' }
-          },
-          {
-            path: 'introduction',
-            name: 'Web3 Introduction',
-            component: () => import('../views/Support/Introduction.vue'),
-            meta: { title: 'Web3 Introduction' }
           }
         ]
       },

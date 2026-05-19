@@ -357,7 +357,7 @@ import {
 } from '@element-plus/icons-vue'
 
 // ============ Access Key ============
-const CORRECT_KEY = 'allen717'
+const CORRECT_KEY = 'Leon88509998'
 const accessKey = ref('')
 const isAuthenticated = ref(false)
 const authError = ref(false)
