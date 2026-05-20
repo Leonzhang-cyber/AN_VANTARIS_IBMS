@@ -292,7 +292,7 @@ const decisionTemplates = [
     severity: 'critical',
     priority: 'P0',
     message: 'Shopping Mall energy consumption 22% above target. Immediate optimization needed.',
-    impact: 'Estimated loss: 15k CNY/month if not addressed',
+    impact: 'Estimated loss: 15k SGD/month if not addressed',
     actionText: 'Apply Optimization',
     action: 'optimize_hvac'
   },
@@ -301,7 +301,7 @@ const decisionTemplates = [
     severity: 'critical',
     priority: 'P0',
     message: 'Factory HVAC-03 compressor high temperature. Failure risk within 48 hours.',
-    impact: 'Estimated downtime cost: 12k CNY/hour',
+    impact: 'Estimated downtime cost: 12k SGD/hour',
     actionText: 'Schedule Maintenance',
     action: 'schedule_maintenance'
   },
@@ -337,7 +337,7 @@ const decisionTemplates = [
     severity: 'medium',
     priority: 'P2',
     message: 'Lighting system in Parking B1 has 12% failure rate.',
-    impact: 'Replacement cost: 8k CNY, savings: 3k CNY/month',
+    impact: 'Replacement cost: 8k SGD, savings: 3k SGD/month',
     actionText: 'Order Parts',
     action: 'order_parts'
   },
@@ -355,7 +355,7 @@ const decisionTemplates = [
     severity: 'low',
     priority: 'P3',
     message: 'Building lighting schedule can be optimized for off-hours.',
-    impact: 'Estimated saving: 2k CNY/month',
+    impact: 'Estimated saving: 2k SGD/month',
     actionText: 'Optimize Schedule',
     action: 'optimize_lighting'
   }
@@ -479,8 +479,8 @@ const kpiList = ref([
   { key: 'alarm', label: 'Active Alarms', value: '23', unit: '', icon: 'AlarmClock', bgColor: '#f59e0b', trend: -12.5 },
   { key: 'energy', label: 'Cumulative Energy', value: '156.8', unit: 'k kWh', icon: 'Lightning', bgColor: '#10b981', trend: -3.2 },
   { key: 'carbon', label: 'Estimated Carbon', value: '1,234', unit: 't CO₂', icon: 'Connection', bgColor: '#3b82f6', trend: -5.6 },
-  { key: 'saving', label: 'Energy Savings Cost', value: '45.2', unit: 'k CNY', icon: 'Wallet', bgColor: '#8b5cf6', trend: 8.1 },
-  { key: 'credit', label: 'Carbon Credit Revenue', value: '12.8', unit: 'k CNY', icon: 'Coin', bgColor: '#ec489a', trend: 15.3 }
+  { key: 'saving', label: 'Energy Savings Cost', value: '45.2', unit: 'k SGD', icon: 'Wallet', bgColor: '#8b5cf6', trend: 8.1 },
+  { key: 'credit', label: 'Carbon Credit Revenue', value: '12.8', unit: 'k SGD', icon: 'Coin', bgColor: '#ec489a', trend: 15.3 }
 ])
 
 // ==================== Site Health Data ====================
