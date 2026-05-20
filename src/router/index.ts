@@ -74,10 +74,22 @@ const routes = [
             meta: { title: 'Area Topology' }
           },
           {
+            path: 'protocol',
+            name: 'Protocol Hub',
+            component: () => import('../views/Device/ProtocolHub.vue'),
+            meta: { title: 'Protocol Hub' }
+          },
+          {
             path: 'hvac',
             name: 'DeviceHVAC',
             component: () => import('../views/Device/DeviceHVAC.vue'),
             meta: { title: 'HVAC Management' }
+          },
+          {
+            path: 'access',
+            name: 'Access',
+            component: () => import('../views/Device/DeviceAccess.vue'),
+            meta: { title: 'Access Management' }
           },
           {
             path: 'sas',
@@ -110,6 +122,13 @@ const routes = [
         name: 'Energy',
         redirect: '/energy/wind',
         children: [
+
+          {
+            path: 'overview',
+            name: 'Energy Overview',
+            component: () => import('../views/Energy/Overview.vue'),
+            meta: { title: 'Energy Overview' }
+          },
           {
             path: 'wind',
             name: 'Wind',
@@ -225,6 +244,30 @@ const routes = [
             name: 'Introduction',
             component: () => import('../views/Blockchain/Introduction.vue'),
             meta: { title: 'Web3 Introduction' }
+          },
+          {
+            path: 'contracts',
+            name: 'Smart Contracts',
+            component: () => import('../views/Blockchain/Contracts.vue'),
+            meta: { title: 'Smart Contracts' }
+          },
+          {
+            path: 'anchoring',
+            name: 'Blockchain Anchoring',
+            component: () => import('../views/Blockchain/Anchoring.vue'),
+            meta: { title: 'Blockchain Anchoring' }
+          },
+          {
+            path: 'api',
+            name: 'API Management',
+            component: () => import('../views/Blockchain/APIManagement.vue'),
+            meta: { title: 'API Management' }
+          },
+          {
+            path: 'edge-nodes',
+            name: 'Edge Nodes',
+            component: () => import('../views/Blockchain/EdgeNodes.vue'),
+            meta: { title: 'Edge Nodes' }
           }
         ]
       },
@@ -244,6 +287,12 @@ const routes = [
             name: 'Notify',
             component: () => import('../views/Alarm/Notification.vue'),
             meta: { title: 'Multi‑dim Notification' }
+          },
+          {
+            path: 'history',
+            name: 'History',
+            component: () => import('../views/Alarm/History.vue'),
+            meta: { title: 'History' }
           }
         ]
       },

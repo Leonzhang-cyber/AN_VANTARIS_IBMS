@@ -80,10 +80,16 @@
               <span>Device</span>
             </template>
             <el-menu-item index="/device/area-topology">
-              <span>Area Device Topology</span>
+              <span>Area Topology</span>
+            </el-menu-item>
+            <el-menu-item index="/device/protocol">
+              <span>Protocol Hub</span>
             </el-menu-item>
             <el-menu-item index="/device/hvac">
               <span>HVAC</span>
+            </el-menu-item>
+            <el-menu-item index="/device/access">
+              <span>Access</span>
             </el-menu-item>
             <el-menu-item index="/device/sas">
               <span>SAS (Security)</span>
@@ -104,6 +110,9 @@
               <el-icon><TrendCharts /></el-icon>
               <span>Energy & Carbon</span>
             </template>
+            <el-menu-item index="/energy/overview">
+              <span>Energy Overview</span>
+            </el-menu-item>
             <el-menu-item index="/energy/wind">
               <span>Wind Energy</span>
             </el-menu-item>
@@ -205,8 +214,12 @@
             <el-menu-item index="/alarm/index">
               <span>Alarm Center</span>
             </el-menu-item>
+
             <el-menu-item index="/alarm/notify">
               <span>Multi‑dim Notification</span>
+            </el-menu-item>
+            <el-menu-item index="/alarm/history">
+              <span>Alarm History</span>
             </el-menu-item>
           </el-sub-menu>
 
@@ -218,14 +231,26 @@
               <el-icon><Connection /></el-icon>
               <span>Integrations & Web3</span>
             </template>
+            <el-menu-item index="/blockchain/did">
+              <span>DID</span>
+            </el-menu-item>
+            <el-menu-item index="/blockchain/contracts">
+              <span>Smart Contracts</span>
+            </el-menu-item>
+            <el-menu-item index="/blockchain/anchoring">
+              <span>Blockchain Anchoring</span>
+            </el-menu-item>
+            <el-menu-item index="/blockchain/api">
+              <span>API Management</span>
+            </el-menu-item>
             <el-menu-item index="/blockchain/node">
               <span>Node Management</span>
             </el-menu-item>
+            <el-menu-item index="/blockchain/edge-nodes">
+              <span>Edge Nodes</span>
+            </el-menu-item>
             <el-menu-item index="/blockchain/web3">
               <span>Web3 Services</span>
-            </el-menu-item>
-            <el-menu-item index="/blockchain/did">
-              <span>DID Management</span>
             </el-menu-item>
             <el-menu-item index="/blockchain/introduction">
               <span>Introduction</span>
