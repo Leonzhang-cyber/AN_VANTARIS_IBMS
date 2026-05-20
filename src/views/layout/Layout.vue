@@ -37,306 +37,24 @@
             :collapse="false"
             :collapse-transition="true"
         >
-
-
-          <el-menu-item index="/">
-            <el-icon><View /></el-icon>
-            <span>Dashboard</span>
-          </el-menu-item>
-
-          <el-menu-item index="/control">
-            <el-icon><Coordinate /></el-icon>
-            <span>Quick Control</span>
-          </el-menu-item>
-
-          <el-sub-menu index="/sites">
-            <template #title>
-              <el-icon><Odometer /></el-icon>
-              <span>Sites</span>
-            </template>
-            <el-menu-item index="/sites/Factory">
-              <span>Factory</span>
+          <!-- 动态渲染菜单 -->
+          <template v-for="item in menuConfig" :key="item.index">
+            <!-- 子菜单 -->
+            <el-sub-menu v-if="item.children && item.children.length" :index="item.index">
+              <template #title>
+                <el-icon v-if="item.icon"><component :is="item.icon" /></el-icon>
+                <span>{{ item.title }}</span>
+              </template>
+              <el-menu-item v-for="child in item.children" :key="child.index" :index="child.index">
+                <span>{{ child.title }}</span>
+              </el-menu-item>
+            </el-sub-menu>
+            <!-- 普通菜单项 -->
+            <el-menu-item v-else :index="item.index">
+              <el-icon v-if="item.icon"><component :is="item.icon" /></el-icon>
+              <span>{{ item.title }}</span>
             </el-menu-item>
-            <el-menu-item index="/sites/Building">
-              <span>Building</span>
-            </el-menu-item>
-            <el-menu-item index="/sites/Airport">
-              <span>Airport</span>
-            </el-menu-item>
-            <el-menu-item index="/sites/Shopping">
-              <span>Shopping Mall</span>
-            </el-menu-item>
-            <el-menu-item index="/sites/Hospital">
-              <span>Hospital</span>
-            </el-menu-item>
-            <el-menu-item index="/sites/Hotel">
-              <span>Hotel</span>
-            </el-menu-item>
-          </el-sub-menu>
-
-          <el-sub-menu index="/device">
-            <template #title>
-              <el-icon><Cpu /></el-icon>
-              <span>Device</span>
-            </template>
-            <el-menu-item index="/device/area-topology">
-              <span>Area Topology</span>
-            </el-menu-item>
-            <el-menu-item index="/device/protocol">
-              <span>Protocol Hub</span>
-            </el-menu-item>
-            <el-menu-item index="/device/hvac">
-              <span>HVAC</span>
-            </el-menu-item>
-            <el-menu-item index="/device/access">
-              <span>Access</span>
-            </el-menu-item>
-            <el-menu-item index="/device/sas">
-              <span>SAS (Security)</span>
-            </el-menu-item>
-            <el-menu-item index="/device/fas">
-              <span>FAS (Fire)</span>
-            </el-menu-item>
-            <el-menu-item index="/device/lighting">
-              <span>Lighting Control</span>
-            </el-menu-item>
-            <el-menu-item index="/device/plumbing">
-              <span>Plumbing</span>
-            </el-menu-item>
-          </el-sub-menu>
-
-          <el-sub-menu index="/energy">
-            <template #title>
-              <el-icon><TrendCharts /></el-icon>
-              <span>Energy & Carbon</span>
-            </template>
-            <el-menu-item index="/energy/overview">
-              <span>Energy Overview</span>
-            </el-menu-item>
-            <el-menu-item index="/energy/wind">
-              <span>Wind Energy</span>
-            </el-menu-item>
-            <el-menu-item index="/energy/solar">
-              <span>Solar Energy</span>
-            </el-menu-item>
-            <el-menu-item index="/energy/electricity">
-              <span>Electricity Energy</span>
-            </el-menu-item>
-            <el-menu-item index="/energy/waste">
-              <span>Waste to Energy</span>
-            </el-menu-item>
-            <el-menu-item index="/energy/hydrogen">
-              <span>Hydrogen Energy</span>
-            </el-menu-item>
-            <el-menu-item index="/energy/storage">
-              <span>Energy Storage</span>
-            </el-menu-item>
-            <el-menu-item index="/energy/geothermal">
-              <span>Geothermal Energy</span>
-            </el-menu-item>
-
-
-            <el-menu-item index="/energy/carbon">
-              <span>Carbon Emission</span>
-            </el-menu-item>
-
-            <el-menu-item index="/energy/savings">
-              <span>Energy Savings</span>
-            </el-menu-item>
-          </el-sub-menu>
-
-
-          <el-sub-menu index="/prediction">
-            <template #title>
-              <!-- 使用一个代表趋势或AI的图标 -->
-              <el-icon><MagicStick /></el-icon>
-              <span>Prediction</span>
-            </template>
-            <!-- 预测中心的二级子菜单 -->
-            <el-menu-item index="/prediction/hvac">
-              <span>HVAC Prediction</span>
-            </el-menu-item>
-            <el-menu-item index="/prediction/lighting">
-              <span>Lighting Prediction</span>
-            </el-menu-item>
-            <el-menu-item index="/prediction/power-socket">
-              <span>Power & Socket</span>
-            </el-menu-item>
-            <el-menu-item index="/prediction/ev-charging">
-              <span>EV Charging</span>
-            </el-menu-item>
-            <el-menu-item index="/prediction/renewable">
-              <span>Renewable Generation</span>
-            </el-menu-item>
-            <el-menu-item index="/prediction/storage">
-              <span>Storage Strategy</span>
-            </el-menu-item>
-          </el-sub-menu>
-
-          <el-sub-menu index="/property">
-            <template #title>
-              <el-icon><SwitchFilled /></el-icon>
-              <span>Smart Facility</span>
-            </template>
-            <el-menu-item index="/property/parking">
-              <span>Parking</span>
-            </el-menu-item>
-            <el-menu-item index="/property/visitor">
-              <span>Visitor</span>
-            </el-menu-item>
-            <el-menu-item index="/property/space">
-              <span>Space</span>
-            </el-menu-item>
-            <el-menu-item index="/property/waste">
-              <span>Waste</span>
-            </el-menu-item>
-          </el-sub-menu>
-
-
-
-          <el-sub-menu index="/maintain">
-            <template #title>
-              <el-icon><SetUp /></el-icon>
-              <span>Maintenance</span>
-            </template>
-            <el-menu-item index="/maintain/predictive">
-              <span>Predictive Maintenance</span>
-            </el-menu-item>
-          </el-sub-menu>
-
-
-
-          <el-sub-menu index="/alarm">
-            <template #title>
-              <el-icon><BellFilled /></el-icon>
-              <span>Alarm Center</span>
-            </template>
-            <el-menu-item index="/alarm/index">
-              <span>Alarm Center</span>
-            </el-menu-item>
-
-            <el-menu-item index="/alarm/notify">
-              <span>Multi‑dim Notification</span>
-            </el-menu-item>
-            <el-menu-item index="/alarm/history">
-              <span>Alarm History</span>
-            </el-menu-item>
-          </el-sub-menu>
-
-
-
-
-          <el-sub-menu index="/blockchain">
-            <template #title>
-              <el-icon><Connection /></el-icon>
-              <span>Integrations & Web3</span>
-            </template>
-            <el-menu-item index="/blockchain/did">
-              <span>DID</span>
-            </el-menu-item>
-            <el-menu-item index="/blockchain/contracts">
-              <span>Smart Contracts</span>
-            </el-menu-item>
-            <el-menu-item index="/blockchain/anchoring">
-              <span>Blockchain Anchoring</span>
-            </el-menu-item>
-            <el-menu-item index="/blockchain/api">
-              <span>API Management</span>
-            </el-menu-item>
-            <el-menu-item index="/blockchain/node">
-              <span>Node Management</span>
-            </el-menu-item>
-            <el-menu-item index="/blockchain/edge-nodes">
-              <span>Edge Nodes</span>
-            </el-menu-item>
-            <el-menu-item index="/blockchain/web3">
-              <span>Web3 Services</span>
-            </el-menu-item>
-            <el-menu-item index="/blockchain/introduction">
-              <span>Introduction</span>
-            </el-menu-item>
-          </el-sub-menu>
-
-
-          <el-sub-menu index="/report">
-            <template #title>
-              <el-icon><Reading /></el-icon>
-              <span>Data Reports</span>
-            </template>
-            <el-menu-item index="/report/energy">
-              <span>Energy Reports</span>
-            </el-menu-item>
-
-            <el-menu-item index="/report/device">
-              <span>Device Reports</span>
-            </el-menu-item>
-
-            <el-menu-item index="/report/maintenance">
-              <span>Maintenance Reports</span>
-            </el-menu-item>
-
-            <el-menu-item index="/report/carbon">
-              <span>Carbon Reports</span>
-            </el-menu-item>
-
-          </el-sub-menu>
-
-
-          <el-sub-menu index="/support">
-            <template #title>
-              <el-icon><Platform /></el-icon>
-              <span>Terminal</span>
-            </template>
-            <el-menu-item index="/support/mobile">
-              <span>Mobile Terminal</span>
-            </el-menu-item>
-
-          </el-sub-menu>
-
-          <el-sub-menu index="/settings">
-            <template #title>
-              <el-icon><Mic /></el-icon>
-              <span>Voice & AI</span>
-            </template>
-            <el-menu-item index="/settings/voice-cmd">
-              <span>Voice Commands</span>
-            </el-menu-item>
-            <el-menu-item index="/settings/tts-rule">
-              <span>TTS Broadcast Rules</span>
-            </el-menu-item>
-            <el-menu-item index="/settings/voice-log">
-              <span>Voice Training Logs</span>
-            </el-menu-item>
-            <el-menu-item index="/settings/lang">
-              <span>Multi-language Pack</span>
-            </el-menu-item>
-
-          </el-sub-menu>
-
-
-          <el-sub-menu index="/administration">
-            <template #title>
-              <el-icon><Setting /></el-icon>
-              <span>Administration</span>
-            </template>
-            <el-menu-item index="/administration/user-role">
-              <span>User & Role</span>
-            </el-menu-item>
-            <el-menu-item index="/administration/system-logs">
-              <span>System Logs</span>
-            </el-menu-item>
-            <el-menu-item index="/administration/multi-language">
-              <span>Multi‑language</span>
-            </el-menu-item>
-            <el-menu-item index="/administration/theme">
-              <span>Theme & Language</span>
-            </el-menu-item>
-            <el-menu-item index="/administration/license">
-              <span>License & Upgrade</span>
-            </el-menu-item>
-          </el-sub-menu>
-
-
+          </template>
         </el-menu>
       </div>
 
@@ -346,7 +64,7 @@
     </el-aside>
 
     <el-container class="main-container">
-      <!-- 顶部栏 -->
+      <!-- 顶部栏（保持原有代码不变） -->
       <el-header
           class="header-bar"
           :style="{
@@ -502,8 +220,6 @@
             <span>Repair</span>
           </el-button>
 
-
-
           <!-- 通知中心 -->
           <el-badge
               v-show="visibleButtons.notify"
@@ -629,8 +345,6 @@
           <div class="singapore-time glass-time" v-if="!isMobile">{{ singaporeTime }}</div>
           <div class="singapore-time mobile-time glass-time" v-if="isMobile">{{ mobileTimeDisplay }}</div>
 
-
-
           <el-dropdown trigger="click" @command="handleUserCommand" class="user-dropdown">
             <span class="user-avatar glass-avatar">
                 <el-avatar :size="isMobile ? 28 : 32" :src="userAvatar" />
@@ -667,7 +381,7 @@
         </div>
       </el-header>
 
-      <!-- 弹窗组件保持不变 -->
+      <!-- 弹窗组件（保持原有代码不变） -->
       <el-drawer
           v-model="alarmDrawerVisible"
           title="Alarm Center"
@@ -864,7 +578,8 @@ import {
   DataLine, Headset, Setting, FullScreen, Expand, Lock, ArrowDown,
   Sunny, ColdDrink, Microphone, Camera, Search, Message, Tickets,
   MoreFilled, User, Switch, ChatLineSquare, SwitchButton, Plus,
-  Mute, Tools, WarningFilled, OfficeBuilding, Van, Grid, Key
+  Mute, Tools, WarningFilled, OfficeBuilding, Van, Grid, Key, View, Coordinate,
+  MagicStick, SwitchFilled, Reading, Platform, Mic, BellFilled, Cpu as CpuIcon
 } from '@element-plus/icons-vue'
 import { useCounterStore } from '@/stores/counter.js'
 
@@ -874,6 +589,209 @@ const { locale } = useI18n()
 const isFullscreen = ref(false)
 const counterStore = useCounterStore()
 
+// ==================== 菜单配置（可配置化） ====================
+const menuConfig = ref([
+  {
+    index: '/',
+    title: 'Dashboard',
+    icon: 'View'
+  },
+  {
+    index: '/control',
+    title: 'Quick Control',
+    icon: 'Coordinate'
+  },
+  {
+    index: '/sites',
+    title: 'Sites',
+    icon: 'Odometer',
+    children: [
+      { index: '/sites/Factory', title: 'Factory' },
+      { index: '/sites/Building', title: 'Building' },
+      { index: '/sites/Airport', title: 'Airport' },
+      { index: '/sites/Shopping', title: 'Shopping Mall' },
+      { index: '/sites/Hospital', title: 'Hospital' },
+      { index: '/sites/Hotel', title: 'Hotel' }
+    ]
+  },
+  {
+    index: '/device',
+    title: 'Device',
+    icon: 'Cpu',
+    children: [
+      { index: '/device/area-topology', title: 'Area Topology' },
+      { index: '/device/protocol', title: 'Protocol Hub' },
+      { index: '/device/hvac', title: 'HVAC' },
+      { index: '/device/access', title: 'Access' },
+      { index: '/device/sas', title: 'SAS (Security)' },
+      { index: '/device/fas', title: 'FAS (Fire)' },
+      { index: '/device/lighting', title: 'Lighting Control' },
+      { index: '/device/plumbing', title: 'Plumbing' }
+    ]
+  },
+  {
+    index: '/energy',
+    title: 'Energy & Carbon',
+    icon: 'TrendCharts',
+    children: [
+      { index: '/energy/overview', title: 'Energy Overview' },
+      { index: '/energy/wind', title: 'Wind Energy' },
+      { index: '/energy/solar', title: 'Solar Energy' },
+      { index: '/energy/electricity', title: 'Electricity Energy' },
+      { index: '/energy/waste', title: 'Waste to Energy' },
+      { index: '/energy/hydrogen', title: 'Hydrogen Energy' },
+      { index: '/energy/storage', title: 'Energy Storage' },
+      { index: '/energy/geothermal', title: 'Geothermal Energy' },
+      { index: '/energy/carbon', title: 'Carbon Emission' },
+      { index: '/energy/savings', title: 'Energy Savings' }
+    ]
+  },
+  {
+    index: '/prediction',
+    title: 'Prediction',
+    icon: 'MagicStick',
+    children: [
+      { index: '/prediction/hvac', title: 'HVAC Prediction' },
+      { index: '/prediction/lighting', title: 'Lighting Prediction' },
+      { index: '/prediction/power-socket', title: 'Power & Socket' },
+      { index: '/prediction/ev-charging', title: 'EV Charging' },
+      { index: '/prediction/renewable', title: 'Renewable Generation' },
+      { index: '/prediction/storage', title: 'Storage Strategy' }
+    ]
+  },
+  {
+    index: '/property',
+    title: 'Smart Facility',
+    icon: 'SwitchFilled',
+    children: [
+      { index: '/property/parking', title: 'Parking' },
+      { index: '/property/visitor', title: 'Visitor' },
+      { index: '/property/space', title: 'Space' },
+      { index: '/property/waste', title: 'Waste' }
+    ]
+  },
+  {
+    index: '/maintain',
+    title: 'Maintenance',
+    icon: 'SetUp',
+    children: [
+      { index: '/maintain/predictive', title: 'Predictive Maintenance' }
+    ]
+  },
+  {
+    index: '/alarm',
+    title: 'Alarm Center',
+    icon: 'BellFilled',
+    children: [
+      { index: '/alarm/index', title: 'Alarm Center' },
+      { index: '/alarm/notify', title: 'Multi‑dim Notification' },
+      { index: '/alarm/history', title: 'Alarm History' }
+    ]
+  },
+  {
+    index: '/blockchain',
+    title: 'Integrations & Web3',
+    icon: 'Connection',
+    children: [
+      { index: '/blockchain/did', title: 'DID' },
+      { index: '/blockchain/contracts', title: 'Smart Contracts' },
+      { index: '/blockchain/anchoring', title: 'Blockchain Anchoring' },
+      { index: '/blockchain/api', title: 'API Management' },
+      { index: '/blockchain/node', title: 'Node Management' },
+      { index: '/blockchain/edge-nodes', title: 'Edge Nodes' },
+      { index: '/blockchain/web3', title: 'Web3 Services' },
+      { index: '/blockchain/introduction', title: 'Introduction' }
+    ]
+  },
+  {
+    index: '/report',
+    title: 'Data Reports',
+    icon: 'Reading',
+    children: [
+      { index: '/report/energy', title: 'Energy Reports' },
+      { index: '/report/device', title: 'Device Reports' },
+      { index: '/report/maintenance', title: 'Maintenance Reports' },
+      { index: '/report/carbon', title: 'Carbon Reports' }
+    ]
+  },
+  {
+    index: '/support',
+    title: 'Terminal',
+    icon: 'Platform',
+    children: [
+      { index: '/support/mobile', title: 'Mobile Terminal' }
+    ]
+  },
+  {
+    index: '/settings',
+    title: 'Voice & AI',
+    icon: 'Mic',
+    children: [
+      { index: '/settings/voice-cmd', title: 'Voice Commands' },
+      { index: '/settings/tts-rule', title: 'TTS Broadcast Rules' },
+      { index: '/settings/voice-log', title: 'Voice Training Logs' },
+      { index: '/settings/lang', title: 'Multi-language Pack' }
+    ]
+  },
+  {
+    index: '/administration',
+    title: 'Administration',
+    icon: 'Setting',
+    children: [
+      { index: '/administration/user-role', title: 'User & Role' },
+      { index: '/administration/system-logs', title: 'System Logs' },
+      { index: '/administration/multi-language', title: 'Multi‑language' },
+      { index: '/administration/theme', title: 'Theme & Language' },
+      { index: '/administration/license', title: 'License & Upgrade' }
+    ]
+  }
+])
+
+// 图标映射（用于动态渲染）
+const iconMap = {
+  View, Coordinate, Odometer, Cpu: CpuIcon, TrendCharts, MagicStick,
+  SwitchFilled, SetUp, Connection, BellFilled, Reading, Platform, Mic,
+  Setting, House, PieChart, DataLine, Headset
+}
+
+// 添加菜单项动态配置的方法
+const addMenuItem = (parentIndex, newItem) => {
+  const findAndAdd = (items, targetIndex) => {
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].index === targetIndex) {
+        if (!items[i].children) items[i].children = []
+        items[i].children.push(newItem)
+        return true
+      }
+      if (items[i].children && findAndAdd(items[i].children, targetIndex)) return true
+    }
+    return false
+  }
+  findAndAdd(menuConfig.value, parentIndex)
+}
+
+const removeMenuItem = (itemIndex) => {
+  const remove = (items) => {
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].index === itemIndex) {
+        items.splice(i, 1)
+        return true
+      }
+      if (items[i].children && remove(items[i].children)) return true
+    }
+    return false
+  }
+  remove(menuConfig.value)
+}
+
+// 导出菜单配置供外部使用
+defineExpose({
+  menuConfig,
+  addMenuItem,
+  removeMenuItem
+})
+
+// 其他原有代码保持不变...
 const isMobile = ref(false)
 const mobileSidebarVisible = ref(false)
 const controlsRef = ref(null)
@@ -1302,11 +1220,15 @@ const reloadRoute = async () => {
 const activeMenu = computed(() => route.path)
 const openedMenus = ref([])
 
+// 获取父菜单路径
 const getParentMenuForPath = (path) => {
-  const children = ['/Factory','/Building','/Airport','/Shopping','/Hospital','/Hotel']
-  if (children.includes(path)) return '/'
-  if (path.startsWith('/device/')) return '/device'
-  if (path.startsWith('/energy/')) return '/energy'
+  for (const item of menuConfig.value) {
+    if (item.children) {
+      if (item.children.some(child => child.index === path)) {
+        return item.index
+      }
+    }
+  }
   return null
 }
 
@@ -1346,15 +1268,20 @@ const onFullScreenChange = () => {
 
 const onKeydown = (e) => {
   if (!isFullscreen.value || isMobile.value) return
-  const menuPaths = [
-    '/Factory','/Building','/Airport','/Shopping','/Hospital','/Hotel',
-    '/device/area-topology','/device/hvac','/device/sas','/device/fas','/device/lighting','/device/plumbing',
-    '/property/parking','/property/visitor','/property/space','/property/waste',
-    '/blockchain/node','/blockchain/web3','/blockchain/did',
-    '/maintain/predictive',
-    '/energy/wind','/energy/solar','/energy/electricity','/energy/waste','/energy/hydrogen','/energy/storage','/energy/geothermal',
-    '/carbon/realtime','/alarm','/maintain','/report','/settings'
-  ]
+
+  // 收集所有菜单路径
+  const collectPaths = (items, paths = []) => {
+    for (const item of items) {
+      if (item.children) {
+        collectPaths(item.children, paths)
+      } else {
+        paths.push(item.index)
+      }
+    }
+    return paths
+  }
+
+  const menuPaths = collectPaths(menuConfig.value)
   const idx = menuPaths.findIndex(p => p === route.path)
   if (idx === -1) return
   if (e.key === 'ArrowUp') {
@@ -1397,7 +1324,8 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-/* ============ 侧边栏 ============ */
+/* ============ 所有样式保持原有不变 ============ */
+/* 侧边栏 */
 .sidebar {
   background: #0a1629;
   transition: all 0.3s;
@@ -1452,7 +1380,7 @@ onUnmounted(() => {
   flex-shrink: 0;
 }
 
-/* ============ 顶部栏 ============ */
+/* 顶部栏 */
 .header-bar {
   display: flex;
   align-items: center;
@@ -1477,7 +1405,7 @@ onUnmounted(() => {
   padding: 4px;
 }
 
-/* ===== 快捷按钮组 ===== */
+/* 快捷按钮组 */
 .header-controls {
   display: flex;
   align-items: center;
@@ -1525,7 +1453,7 @@ onUnmounted(() => {
   border-color: rgba(255,255,255,0.4);
 }
 
-/* ===== 高亮按钮通用样式 ===== */
+/* 高亮按钮通用样式 */
 .highlight-btn {
   position: relative;
   font-weight: 600;
@@ -1562,7 +1490,7 @@ onUnmounted(() => {
   transform: translateY(0);
 }
 
-/* ===== Door 按钮 - 翠绿色 ===== */
+/* Door 按钮 - 翠绿色 */
 .highlight-door {
   background: linear-gradient(135deg, #00b894, #00cec9) !important;
   border-color: #00b894 !important;
@@ -1576,7 +1504,7 @@ onUnmounted(() => {
   border-color: #00dfa2 !important;
 }
 
-/* ===== Light 按钮 - 琥珀金橙色 ===== */
+/* Light 按钮 - 琥珀金橙色 */
 .highlight-light {
   background: linear-gradient(135deg, #f39c12, #f1c40f) !important;
   border-color: #f39c12 !important;
@@ -1590,7 +1518,7 @@ onUnmounted(() => {
   border-color: #ffbe76 !important;
 }
 
-/* ===== HVAC 按钮 - 科技蓝 ===== */
+/* HVAC 按钮 - 科技蓝 */
 .highlight-hvac {
   background: linear-gradient(135deg, #0984e3, #74b9ff) !important;
   border-color: #0984e3 !important;
@@ -1604,7 +1532,7 @@ onUnmounted(() => {
   border-color: #6c5ce7 !important;
 }
 
-/* ===== Repair 按钮 - 紫罗兰渐变 ===== */
+/* Repair 按钮 - 紫罗兰渐变 */
 .highlight-repair {
   background: linear-gradient(135deg, #6c5ce7, #a29bfe) !important;
   border-color: #6c5ce7 !important;
@@ -1671,9 +1599,7 @@ onUnmounted(() => {
   50% { box-shadow: 0 0 15px rgba(255,59,48,0.5); }
 }
 
-/* ============ 节能模式下拉按钮 ============ */
-
-/* 紧凑的下拉按钮 */
+/* 节能模式下拉按钮 */
 .energy-btn {
   background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.1)) !important;
   border: 1px solid rgba(16, 185, 129, 0.3) !important;
@@ -1787,7 +1713,7 @@ onUnmounted(() => {
   box-shadow: none !important;
 }
 
-/* ===== 右侧工具 ===== */
+/* 右侧工具 */
 .header-tools {
   display: flex;
   gap: 6px;
@@ -1804,7 +1730,7 @@ onUnmounted(() => {
   padding: 0;
 }
 
-/* ===== 时间显示 ===== */
+/* 时间显示 */
 .singapore-time {
   font-family: 'JetBrains Mono', 'Consolas', 'Monaco', monospace;
   font-size: 12px;
@@ -1889,7 +1815,7 @@ onUnmounted(() => {
 .user-display-name { font-weight: 600; font-size: 12px; }
 .user-role { font-size: 10px; color: #909399; }
 
-/* ============ 弹窗样式 ============ */
+/* 弹窗样式 */
 .alarm-list {
   max-height: calc(100vh - 140px);
   overflow-y: auto;
@@ -2101,7 +2027,7 @@ onUnmounted(() => {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* ============ 响应式 ============ */
+/* 响应式 */
 @media (max-width: 767px) {
   .sidebar.mobile-sidebar {
     position: fixed;
@@ -2180,7 +2106,6 @@ onUnmounted(() => {
   }
 }
 </style>
-
 
 <style>
 /* 全局字体统一为 Arial */
