@@ -1,5 +1,30 @@
 <template>
-  <div class="simple-dashboard">
+  <!-- Loading Screen -->
+  <div v-if="!isPageLoaded" class="loading-container">
+    <div class="loading-overlay">
+      <div class="loading-content">
+        <div class="loading-spinner">
+          <div class="spinner-ring"></div>
+          <div class="spinner-ring"></div>
+          <div class="spinner-ring"></div>
+        </div>
+        <div class="loading-text">
+          <span class="loading-title">Loading</span>
+          <span class="loading-dots">
+            <span>.</span><span>.</span><span>.</span>
+          </span>
+        </div>
+        <div class="loading-progress">
+          <div class="progress-bar" :style="{ width: loadingProgress + '%' }"></div>
+        </div>
+        <div class="loading-tip">Blockchain Private Chain</div>
+        <div class="loading-subtip">{{ loadingMessage }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div v-else class="simple-dashboard">
     <!-- Header -->
     <div class="dashboard-header">
       <div class="title-section">
@@ -22,7 +47,7 @@
           <div class="stat-label">Production</div>
         </div>
         <div class="stat">
-          <div class="stat-value">3/3</div>
+          <div class="stat-value">6/6</div>
           <div class="stat-label">Healthy Nodes</div>
         </div>
         <div class="stat">
@@ -32,7 +57,64 @@
       </div>
     </div>
 
-    <!-- Three Nodes -->
+    <!-- 拓扑图 - 节点关系可视化（可拖拽） -->
+    <div class="topology-section">
+      <div class="topology-header">
+        <span>🔗 Blockchain Node Topology</span>
+        <div class="topology-legend">
+          <span class="legend-dot sealer"></span><span>Current Sealer</span>
+          <span class="legend-dot peer"></span><span>P2P Connection</span>
+          <span class="legend-dot mining"></span><span>Mining Node</span>
+        </div>
+        <div class="topology-controls">
+          <el-button size="small" text @click="resetTopologyView">
+            <el-icon><Refresh /></el-icon> Reset View
+          </el-button>
+        </div>
+      </div>
+      <div class="topology-canvas" ref="topologyRef">
+        <VueFlow
+            v-model="flowNodes"
+            v-model:edges="flowEdges"
+            class="vue-flow-wrapper"
+            :default-viewport="{ zoom: 0.8, x: 50, y: 50 }"
+            :fit-view-on-init="true"
+            :nodes-draggable="true"
+            :zoom-on-scroll="true"
+            :pan-on-scroll="false"
+            :min-zoom="0.5"
+            :max-zoom="1.5"
+            @node-drag-start="handleNodeDragStart"
+            @node-drag-stop="handleNodeDragStop"
+        >
+          <template #node-custom="nodeProps">
+            <div
+                class="topology-node"
+                :class="{
+                  'is-sealer': nodeProps.data.isCurrentSealer,
+                  'is-mining': nodeProps.data.isMining
+                }"
+            >
+              <div class="node-icon">⛓️</div>
+              <div class="node-name">{{ nodeProps.data.label }}</div>
+              <div class="node-address">{{ shortenAddress(nodeProps.data.address, 8) }}</div>
+              <div class="node-status">
+                <span class="status-dot online"></span>
+                <span>Online</span>
+              </div>
+              <div v-if="nodeProps.data.isCurrentSealer" class="sealer-badge">
+                ⛏️ Sealing
+              </div>
+              <div v-else-if="nodeProps.data.isMining" class="mining-badge">
+                ⚙️ Mining
+              </div>
+            </div>
+          </template>
+        </VueFlow>
+      </div>
+    </div>
+
+    <!-- Six Nodes -->
     <div class="nodes-container">
       <el-card
           v-for="node in nodes"
@@ -66,7 +148,7 @@
           </div>
           <div class="info-row">
             <span class="label">Peers</span>
-            <span class="value">{{ node.peers }}</span>
+            <span class="value">{{ node.peers }}/5</span>
           </div>
           <div class="info-row">
             <span class="label">Mining</span>
@@ -172,9 +254,42 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
+import { ref, onMounted, onUnmounted, nextTick, watch } from 'vue'
+import { VueFlow, useVueFlow } from '@vue-flow/core'
+import type { Node, Edge } from '@vue-flow/core'
+import '@vue-flow/core/dist/style.css'
+import '@vue-flow/core/dist/theme-default.css'
+import { Refresh } from '@element-plus/icons-vue'
 
-interface Node {
+// ==================== Loading State ====================
+const isPageLoaded = ref(false)
+const loadingProgress = ref(0)
+const loadingMessage = ref('Preparing assets...')
+
+const loadingMessages = [
+  'Preparing assets...',
+  'Initializing blockchain...',
+  'Connecting to nodes...',
+  'Starting consensus...',
+  'Loading dashboard...',
+  'Almost ready...'
+]
+
+// ==================== 6个节点数据 ====================
+const nodeAddresses = [
+  '0x9AA128582b17C0c0143690F24012C8DBCf24767f',
+  '0x7f3a4BA632Bc3a88a9c3489613b1CF529C8371Ca',
+  '0x1f2d638ebe2fB97082c804213f9ED4ddA423cA43',
+  '0x3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b',
+  '0x4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c',
+  '0x5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d'
+]
+const nodeNames = [
+  'geth-node1', 'geth-node2', 'geth-node3',
+  'geth-node4', 'geth-node5', 'geth-node6'
+]
+
+interface NodeData {
   id: number
   name: string
   rpcPort: number
@@ -199,19 +314,18 @@ interface LogEntry {
   type: string
 }
 
-const nodeAddresses = [
-  '0x9AA128582b17C0c0143690F24012C8DBCf24767f',
-  '0x7f3a4BA632Bc3a88a9c3489613b1CF529C8371Ca',
-  '0x1f2d638ebe2fB97082c804213f9ED4ddA423cA43',
-]
-const nodeNames = ['geth-node1', 'geth-node2', 'geth-node3']
-
-const nodes = ref<Node[]>([])
+const nodes = ref<NodeData[]>([])
 const currentSealer = ref('')
-const currentBlockHeight = ref(121)
+const currentBlockHeight = ref(148)
 const recentBlocks = ref<BlockRecord[]>([])
 const blockchainLogs = ref<LogEntry[]>([])
 const logsContainer = ref<HTMLElement | null>(null)
+
+// 拓扑图相关
+const topologyRef = ref<HTMLElement | null>(null)
+const flowNodes = ref<Node[]>([])
+const flowEdges = ref<Edge[]>([])
+const nodePositionsCache = ref<Map<string, { x: number; y: number }>>(new Map())
 
 const scheduler = ref({
   isRunning: true,
@@ -219,8 +333,6 @@ const scheduler = ref({
   idleProgress: 0,
   lastWriteRequest: new Date().toLocaleTimeString(),
 })
-
-const canProduceBlocks = computed(() => true)
 
 const anchoringRecords = ref([
   { operation: 'DID Entity Registration', txHash: '0x1a2b3c4d5e6f7g8h9i0j', blockNumber: 124, timestamp: '2025-04-17 14:23:10' },
@@ -234,6 +346,89 @@ const shortenAddress = (addr: string, len = 6) => {
   if (!addr) return ''
   return `${addr.slice(0, len)}...${addr.slice(-4)}`
 }
+
+// 计算6个节点的圆形布局位置
+const calculateCircularPositions = (centerX: number, centerY: number, radius: number, count: number) => {
+  const positions = []
+  const angleStep = (Math.PI * 2) / count
+  for (let i = 0; i < count; i++) {
+    const angle = i * angleStep - Math.PI / 2 // 从顶部开始
+    positions.push({
+      x: centerX + radius * Math.cos(angle),
+      y: centerY + radius * Math.sin(angle)
+    })
+  }
+  return positions
+}
+
+// 更新拓扑图节点和边
+const updateTopology = () => {
+  const count = nodes.value.length
+  const positions = calculateCircularPositions(400, 200, 180, count)
+
+  // 更新节点，保留用户拖拽过的位置
+  flowNodes.value = nodes.value.map((node, idx) => {
+    const cachedPos = nodePositionsCache.value.get(node.address)
+    return {
+      id: node.address,
+      type: 'custom',
+      position: cachedPos || positions[idx],
+      data: {
+        label: node.name,
+        address: node.address,
+        isCurrentSealer: currentSealer.value === node.address,
+        isMining: scheduler.value.isRunning && currentSealer.value === node.address,
+      }
+    }
+  })
+
+  // 更新边（P2P 全连接：每对节点之间都有连接）
+  const edges: Edge[] = []
+  for (let i = 0; i < nodes.value.length; i++) {
+    for (let j = i + 1; j < nodes.value.length; j++) {
+      edges.push({
+        id: `edge-${i}-${j}`,
+        source: nodes.value[i].address,
+        target: nodes.value[j].address,
+        animated: true,
+        style: { stroke: '#67c23a', strokeWidth: 2 },
+        label: 'P2P',
+        labelStyle: { fill: '#67c23a', fontSize: 10 }
+      })
+    }
+  }
+  flowEdges.value = edges
+}
+
+// 重置拓扑图视图
+const resetTopologyView = () => {
+  nodePositionsCache.value.clear()
+  updateTopology()
+}
+
+// 拖拽事件：保存节点位置
+const handleNodeDragStart = (event: any) => {
+  // 拖拽开始时的处理
+}
+
+const handleNodeDragStop = (event: any) => {
+  if (event.node) {
+    nodePositionsCache.value.set(event.node.id, {
+      x: event.node.position.x,
+      y: event.node.position.y
+    })
+  }
+}
+
+// 监听 currentSealer 变化，更新拓扑图高亮
+watch(currentSealer, () => {
+  updateTopology()
+})
+
+// 监听 scheduler.isRunning 变化
+watch(() => scheduler.value.isRunning, () => {
+  updateTopology()
+})
 
 const addLog = (level: 'INFO' | 'WARN' | 'ERROR' | 'SUCCESS', message: string) => {
   const now = new Date()
@@ -269,7 +464,7 @@ const addRecentBlock = (blockNum: number, sealerAddr: string, sealerName: string
     sealerName,
     time: new Date().toLocaleTimeString(),
   })
-  if (recentBlocks.value.length > 8) recentBlocks.value.pop()
+  if (recentBlocks.value.length > 12) recentBlocks.value.pop()
 }
 
 const sealNewBlock = () => {
@@ -280,17 +475,25 @@ const sealNewBlock = () => {
 
   currentBlockHeight.value++
   currentSealer.value = nextNode.address
+
+  // 更新节点的挖矿状态
+  nodes.value.forEach(node => {
+    node.isMining = (node.address === currentSealer.value)
+  })
+
   addRecentBlock(currentBlockHeight.value, nextNode.address, nextNode.name)
   addLog('SUCCESS', `Block #${currentBlockHeight.value} sealed by ${nextNode.name} (${shortenAddress(nextNode.address)})`)
 
   scheduler.value.idleSeconds = 0
   scheduler.value.idleProgress = 0
+  updateTopology()
 }
 
 const simulateWriteRequest = async () => {
   if (!scheduler.value.isRunning) {
     scheduler.value.isRunning = true
     addLog('INFO', 'Mining scheduler ACTIVATED by write request')
+    updateTopology()
   }
 
   scheduler.value.idleSeconds = 0
@@ -310,6 +513,13 @@ const simulateWriteRequest = async () => {
 
   const nextIdx = (runningNodes.findIndex(n => n.address === currentSealer.value) + 1) % runningNodes.length
   currentSealer.value = runningNodes[nextIdx].address
+
+  // 更新节点的挖矿状态
+  nodes.value.forEach(node => {
+    node.isMining = (node.address === currentSealer.value)
+  })
+
+  updateTopology()
 
   anchoringRecords.value.unshift({
     operation: 'DID Entity Registration (TX)',
@@ -333,6 +543,12 @@ const startIdleTimer = () => {
       if (scheduler.value.idleSeconds >= 600) {
         scheduler.value.isRunning = false
         addLog('INFO', 'Idle timeout reached (10 minutes). Mining scheduler STOPPED automatically.')
+
+        // 停止挖矿时，清除所有节点的挖矿状态
+        nodes.value.forEach(node => {
+          node.isMining = false
+        })
+        updateTopology()
       }
     } else if (!scheduler.value.isRunning && scheduler.value.idleSeconds > 0) {
       scheduler.value.idleSeconds = Math.max(0, scheduler.value.idleSeconds - 1)
@@ -342,6 +558,7 @@ const startIdleTimer = () => {
 }
 
 const initData = () => {
+  // 初始化6个节点
   nodes.value = nodeAddresses.map((addr, idx) => ({
     id: idx + 1,
     name: nodeNames[idx],
@@ -350,31 +567,85 @@ const initData = () => {
     address: addr,
     balance: '100.00 ETH',
     isMining: idx === 0,
-    peers: 2,
+    peers: 5,
   }))
+
   currentSealer.value = nodeAddresses[0]
-  currentBlockHeight.value = 148
-  recentBlocks.value = [
-    { number: 147, sealer: nodeAddresses[1], sealerName: 'geth-node2', time: '14:36:45' },
-    { number: 146, sealer: nodeAddresses[0], sealerName: 'geth-node1', time: '14:36:40' },
-    { number: 145, sealer: nodeAddresses[2], sealerName: 'geth-node3', time: '14:36:35' },
-    { number: 144, sealer: nodeAddresses[1], sealerName: 'geth-node2', time: '14:36:30' },
-    { number: 143, sealer: nodeAddresses[0], sealerName: 'geth-node1', time: '14:36:25' },
-    { number: 142, sealer: nodeAddresses[2], sealerName: 'geth-node3', time: '14:36:20' },
-    { number: 141, sealer: nodeAddresses[1], sealerName: 'geth-node2', time: '14:36:15' },
-    { number: 140, sealer: nodeAddresses[0], sealerName: 'geth-node1', time: '14:36:10' },
-  ]
+  currentBlockHeight.value = 178
+
+  // 初始化最近区块记录
+  recentBlocks.value = []
+  for (let i = 0; i < 12; i++) {
+    const sealerIdx = (i % 6)
+    recentBlocks.value.push({
+      number: currentBlockHeight.value - i,
+      sealer: nodeAddresses[sealerIdx],
+      sealerName: nodeNames[sealerIdx],
+      time: new Date(Date.now() - i * 6000).toLocaleTimeString(),
+    })
+  }
+
+  // 初始化拓扑图
+  updateTopology()
 
   addLog('INFO', 'Blockchain Private Chain initialized (Clique PoA, Chain ID: 9527)')
-  addLog('INFO', 'Three Geth nodes running: geth-node1 (RPC:8545), geth-node2 (RPC:8546), geth-node3 (RPC:8547)')
-  addLog('INFO', 'Genesis block loaded with 3 signers (100 ETH each)')
-  addLog('INFO', 'P2P connections established: all nodes have 2 peers')
+  addLog('INFO', 'Six Geth nodes running in full mesh topology')
+  addLog('INFO', 'Genesis block loaded with 6 signers (100 ETH each)')
+  addLog('INFO', 'P2P connections established: all nodes have 5 peers')
   addLog('INFO', 'Mining scheduler running in ACTIVE mode')
   addLog('INFO', 'Round-robin sealing in progress - blocks sealed every 6 seconds')
 }
 
+// ==================== Loading ====================
+const startLoading = () => {
+  let progress = 0
+  let msgIndex = 0
+
+  const msgInterval = setInterval(() => {
+    if (msgIndex < loadingMessages.length - 1) {
+      msgIndex++
+      loadingMessage.value = loadingMessages[msgIndex]
+    }
+  }, 800)
+
+  const progressInterval = setInterval(() => {
+    if (progress < 90) {
+      progress += Math.random() * 10
+      loadingProgress.value = Math.min(progress, 90)
+
+      if (progress > 80 && loadingMessage.value !== loadingMessages[5]) {
+        loadingMessage.value = loadingMessages[5]
+      } else if (progress > 60 && loadingMessage.value !== loadingMessages[4]) {
+        loadingMessage.value = loadingMessages[4]
+      } else if (progress > 40 && loadingMessage.value !== loadingMessages[3]) {
+        loadingMessage.value = loadingMessages[3]
+      } else if (progress > 20 && loadingMessage.value !== loadingMessages[2]) {
+        loadingMessage.value = loadingMessages[2]
+      } else if (progress > 10 && loadingMessage.value !== loadingMessages[1]) {
+        loadingMessage.value = loadingMessages[1]
+      }
+    }
+  }, 100)
+
+  setTimeout(() => {
+    clearInterval(msgInterval)
+    clearInterval(progressInterval)
+    loadingMessage.value = 'Ready!'
+    loadingProgress.value = 100
+
+    setTimeout(() => {
+      isPageLoaded.value = true
+      nextTick(() => {
+        setTimeout(() => {
+          initData()
+        }, 100)
+      })
+    }, 500)
+  }, 2500)
+}
+
 onMounted(() => {
-  initData()
+  startLoading()
   startIdleTimer()
   miningInterval = setInterval(() => {
     if (scheduler.value.isRunning) {
@@ -394,6 +665,162 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+/* ==================== Loading Screen ==================== */
+.loading-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-overlay {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(2px);
+}
+
+.loading-content {
+  text-align: center;
+  padding: 40px;
+  border-radius: 32px;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.loading-spinner {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 24px;
+}
+
+.spinner-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  animation: spin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+}
+
+.spinner-ring:nth-child(1) {
+  border-top-color: #3b82f6;
+  animation-delay: 0s;
+}
+
+.spinner-ring:nth-child(2) {
+  border-right-color: #f59e0b;
+  animation-delay: 0.2s;
+  width: 70%;
+  height: 70%;
+  top: 15%;
+  left: 15%;
+}
+
+.spinner-ring:nth-child(3) {
+  border-bottom-color: #10b981;
+  animation-delay: 0.4s;
+  width: 40%;
+  height: 40%;
+  top: 30%;
+  left: 30%;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  margin-bottom: 24px;
+  font-size: 28px;
+  font-weight: 700;
+  color: #e2e8f0;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.loading-dots {
+  display: inline-flex;
+  gap: 2px;
+}
+
+.loading-dots span {
+  animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.loading-dots span:nth-child(1) { animation-delay: -0.32s; }
+.loading-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0); opacity: 0.3; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+.loading-progress {
+  width: 280px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 0 auto 16px;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec489a);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  background-size: 200% auto;
+  animation: shimmer 2s linear infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
+}
+
+.loading-tip {
+  font-size: 13px;
+  color: #94a3b8;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.loading-subtip {
+  font-size: 11px;
+  color: #64748b;
+  letter-spacing: 0.5px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==================== Main Dashboard Styles ==================== */
 .simple-dashboard {
   padding: 12px;
   background: #ffffff;
@@ -448,7 +875,179 @@ onUnmounted(() => {
   margin-top: 2px;
 }
 
-/* Nodes Container */
+/* ========== 拓扑图样式 ========== */
+.topology-section {
+  background: #f5f7fa;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 20px;
+  border: 1px solid #e4e7ed;
+}
+
+.topology-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #303133;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.topology-legend {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+.legend-dot.sealer {
+  background: #409eff;
+  box-shadow: 0 0 6px #409eff;
+}
+
+.legend-dot.peer {
+  background: #67c23a;
+}
+
+.legend-dot.mining {
+  background: #e6a23c;
+  animation: pulse 1.5s infinite;
+}
+
+.topology-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.topology-canvas {
+  min-height: 600px;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #e4e7ed;
+  overflow: hidden;
+}
+
+.vue-flow-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+/* 拓扑图节点样式 */
+.topology-node {
+  width: 140px;
+  padding: 12px;
+  background: #ffffff;
+  border: 2px solid #e4e7ed;
+  border-radius: 12px;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: grab;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.topology-node:active {
+  cursor: grabbing;
+}
+
+.topology-node:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.topology-node.is-sealer {
+  border-color: #409eff;
+  background: linear-gradient(135deg, #ecf5ff 0%, #ffffff 100%);
+  box-shadow: 0 0 12px rgba(64, 158, 255, 0.3);
+}
+
+.topology-node.is-mining {
+  border-color: #e6a23c;
+  background: linear-gradient(135deg, #fdf6ec 0%, #ffffff 100%);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(64, 158, 255, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(64, 158, 255, 0); }
+}
+
+.node-icon {
+  font-size: 28px;
+  margin-bottom: 6px;
+}
+
+.node-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #303133;
+  margin-bottom: 4px;
+}
+
+.node-address {
+  font-size: 10px;
+  font-family: monospace;
+  color: #909399;
+  margin-bottom: 6px;
+}
+
+.node-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 10px;
+  color: #67c23a;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #67c23a;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.sealer-badge, .mining-badge {
+  margin-top: 8px;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 12px;
+  display: inline-block;
+}
+
+.sealer-badge {
+  color: #409eff;
+  background: #ecf5ff;
+}
+
+.mining-badge {
+  color: #e6a23c;
+  background: #fdf6ec;
+}
+
+/* 节点卡片样式 */
 .nodes-container {
   display: flex;
   flex-direction: column;
@@ -528,7 +1127,6 @@ onUnmounted(() => {
   border-radius: 4px;
 }
 
-/* Info Row Grid */
 .info-row-grid {
   display: flex;
   flex-direction: column;
@@ -570,7 +1168,6 @@ onUnmounted(() => {
   color: #909399;
 }
 
-/* Blocks List */
 .blocks-list {
   display: flex;
   flex-direction: column;
@@ -609,7 +1206,6 @@ onUnmounted(() => {
   color: #909399;
 }
 
-/* Records List */
 .records-list {
   display: flex;
   flex-direction: column;
@@ -650,7 +1246,6 @@ onUnmounted(() => {
   color: #c0c4cc;
 }
 
-/* Logs */
 .logs-header {
   display: flex;
   justify-content: space-between;
@@ -728,7 +1323,7 @@ onUnmounted(() => {
   width: 4px;
 }
 
-/* Desktop */
+/* Desktop 样式 */
 @media (min-width: 768px) {
   .simple-dashboard {
     padding: 24px;
@@ -797,5 +1392,48 @@ onUnmounted(() => {
   .log-message {
     flex: 1;
   }
+
+  .topology-canvas {
+    height: 420px;
+  }
+}
+
+/* 移动端拓扑图高度调整 */
+@media (max-width: 768px) {
+  .topology-canvas {
+    height: 320px;
+  }
+
+  .topology-node {
+    width: 110px;
+    padding: 8px;
+  }
+
+  .node-name {
+    font-size: 11px;
+  }
+
+  .node-icon {
+    font-size: 22px;
+  }
+
+  .nodes-container {
+    gap: 12px;
+  }
+}
+
+/* VueFlow 样式覆盖 */
+:deep(.vue-flow__edge-path) {
+  stroke-dasharray: 5;
+}
+
+:deep(.vue-flow__edge-label) {
+  font-size: 10px;
+  fill: #67c23a;
+}
+
+:deep(.vue-flow__minimap) {
+  background-color: #f5f7fa;
+  border: 1px solid #e4e7ed;
 }
 </style>
