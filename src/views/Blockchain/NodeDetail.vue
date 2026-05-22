@@ -347,15 +347,56 @@ const shortenAddress = (addr: string, len = 6) => {
   return `${addr.slice(0, len)}...${addr.slice(-4)}`
 }
 
-// 计算6个节点的圆形布局位置
-const calculateCircularPositions = (centerX: number, centerY: number, radius: number, count: number) => {
+// 计算固定网格布局位置（2行3列）- 使用固定坐标
+const getFixedGridPositions = () => {
+  // 节点宽度约140px，高度约120px
+  // 第一行：y = 80，第二行：y = 280
+  // 三列：x = 100, 320, 540
+  return [
+    { x: 100, y: 80 },   // node1 - 第1行第1列
+    { x: 320, y: 80 },   // node2 - 第1行第2列
+    { x: 540, y: 80 },   // node3 - 第1行第3列
+    { x: 100, y: 280 },  // node4 - 第2行第1列
+    { x: 320, y: 280 },  // node5 - 第2行第2列
+    { x: 540, y: 280 },  // node6 - 第2行第3列
+  ]
+}
+
+// 获取容器尺寸并计算响应式网格位置
+const calculateResponsiveGridPositions = () => {
+  if (!topologyRef.value) {
+    // 如果容器还未渲染，返回固定位置
+    return getFixedGridPositions()
+  }
+
+  const rect = topologyRef.value.getBoundingClientRect()
+  const width = rect.width
+  const height = rect.height
+
+  // 如果容器尺寸无效，返回固定位置
+  if (width === 0 || height === 0) {
+    return getFixedGridPositions()
+  }
+
+  const cols = 3
+  const rows = 2
+
+  // 节点宽度约140px，高度约120px
+  const nodeWidth = 140
+  const nodeHeight = 120
+
+  // 计算每个单元格的宽度和高度
+  const cellWidth = width / cols
+  const cellHeight = height / rows
+
   const positions = []
-  const angleStep = (Math.PI * 2) / count
-  for (let i = 0; i < count; i++) {
-    const angle = i * angleStep - Math.PI / 2 // 从顶部开始
+  for (let i = 0; i < nodes.value.length; i++) {
+    const row = Math.floor(i / cols)
+    const col = i % cols
+    // 将节点放置在单元格中心
     positions.push({
-      x: centerX + radius * Math.cos(angle),
-      y: centerY + radius * Math.sin(angle)
+      x: col * cellWidth + (cellWidth - nodeWidth) / 2,
+      y: row * cellHeight + (cellHeight - nodeHeight) / 2
     })
   }
   return positions
@@ -363,8 +404,9 @@ const calculateCircularPositions = (centerX: number, centerY: number, radius: nu
 
 // 更新拓扑图节点和边
 const updateTopology = () => {
-  const count = nodes.value.length
-  const positions = calculateCircularPositions(400, 200, 180, count)
+  if (nodes.value.length === 0) return
+
+  const positions = calculateResponsiveGridPositions()
 
   // 更新节点，保留用户拖拽过的位置
   flowNodes.value = nodes.value.map((node, idx) => {
@@ -408,7 +450,7 @@ const resetTopologyView = () => {
 
 // 拖拽事件：保存节点位置
 const handleNodeDragStart = (event: any) => {
-  // 拖拽开始时的处理
+  // 拖拽开始时的处理（可选）
 }
 
 const handleNodeDragStop = (event: any) => {
@@ -417,6 +459,13 @@ const handleNodeDragStop = (event: any) => {
       x: event.node.position.x,
       y: event.node.position.y
     })
+  }
+}
+
+// 监听窗口大小变化，重新计算布局
+const handleResize = () => {
+  if (isPageLoaded.value && topologyRef.value) {
+    updateTopology()
   }
 }
 
@@ -585,8 +634,10 @@ const initData = () => {
     })
   }
 
-  // 初始化拓扑图
-  updateTopology()
+  // 延迟一下确保 DOM 已渲染，然后更新拓扑图
+  nextTick(() => {
+    updateTopology()
+  })
 
   addLog('INFO', 'Blockchain Private Chain initialized (Clique PoA, Chain ID: 9527)')
   addLog('INFO', 'Six Geth nodes running in full mesh topology')
@@ -655,12 +706,30 @@ onMounted(() => {
   writeRequestInterval = setInterval(() => {
     simulateWriteRequest()
   }, 35000)
+
+  // 添加窗口大小监听
+  window.addEventListener('resize', handleResize)
+
+  // 使用 MutationObserver 等待 topologyRef 元素出现
+  const checkTopologyRef = setInterval(() => {
+    if (topologyRef.value) {
+      clearInterval(checkTopologyRef)
+      // 使用 ResizeObserver 监听容器大小变化
+      const resizeObserver = new ResizeObserver(() => {
+        if (isPageLoaded.value && nodes.value.length > 0) {
+          updateTopology()
+        }
+      })
+      resizeObserver.observe(topologyRef.value)
+    }
+  }, 100)
 })
 
 onUnmounted(() => {
   if (idleInterval) clearInterval(idleInterval)
   if (miningInterval) clearInterval(miningInterval)
   if (writeRequestInterval) clearInterval(writeRequestInterval)
+  window.removeEventListener('resize', handleResize)
 })
 </script>
 
