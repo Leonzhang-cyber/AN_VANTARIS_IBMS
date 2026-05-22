@@ -1,37 +1,36 @@
 <template>
-  <!-- Key Auth Screen -->
-  <div v-if="!isAuthenticated" class="auth-container">
-    <div class="auth-overlay">
-      <div class="auth-content">
-        <div class="auth-icon">🔐</div>
-        <h2 class="auth-title">Access Required</h2>
-        <p class="auth-desc">Please enter the access key to view IBMS Web3 documentation</p>
-        <div class="auth-input-group">
-          <input
-              type="password"
-              v-model="accessKey"
-              placeholder="Enter access key"
-              class="auth-input"
-              @keyup.enter="verifyKey"
-              autofocus
-          />
-          <button class="auth-btn" @click="verifyKey" :disabled="!accessKey">
-            Verify Access
-          </button>
-        </div>
-        <p v-if="authError" class="auth-error">❌ Invalid access key. Please try again.</p>
-<!--        <div class="auth-loading" v-if="isLoadingImages">-->
-<!--          <span class="loading-dot"></span>-->
-<!--          <span class="loading-dot"></span>-->
-<!--          <span class="loading-dot"></span>-->
-<!--          <span class="loading-text">Loading Web3 modules in background...</span>-->
-<!--        </div>-->
+  <!-- Key Verification -->
+  <div v-if="!isKeyVerified" class="key-verify-container">
+    <div class="key-verify-card">
+      <div class="key-verify-icon">🔐</div>
+      <h2>Access Restricted</h2>
+      <p>This page contains sensitive technical documentation.<br>Please enter the access key to continue.</p>
+      <div class="key-input-wrapper">
+        <el-input
+            v-model="accessKey"
+            type="password"
+            placeholder="Enter access key"
+            size="large"
+            @keyup.enter="verifyKey"
+            :disabled="keyVerifying"
+            class="key-input"
+        >
+          <template #prefix>
+            <el-icon><Lock /></el-icon>
+          </template>
+        </el-input>
+        <el-button type="primary" size="large" @click="verifyKey" :loading="keyVerifying">
+          <el-icon><Unlock /></el-icon> Verify Access
+        </el-button>
+      </div>
+      <div v-if="keyError" class="key-error">
+        <el-icon><CircleClose /></el-icon> Invalid access key. Please try again.
       </div>
     </div>
   </div>
 
-  <!-- Loading Screen (after auth, waiting for images) -->
-  <div v-else-if="!isLoaded" class="loading-container">
+  <!-- Loading Screen -->
+  <div v-else-if="!isPageLoaded" class="loading-container">
     <div class="loading-overlay">
       <div class="loading-content">
         <div class="loading-spinner">
@@ -39,682 +38,831 @@
           <div class="spinner-ring"></div>
           <div class="spinner-ring"></div>
         </div>
-        <div class="loading-text">Web3 infrastructure</div>
+        <div class="loading-text">
+          <span class="loading-title">Loading</span>
+          <span class="loading-dots">
+            <span>.</span><span>.</span><span>.</span>
+          </span>
+        </div>
         <div class="loading-progress">
           <div class="progress-bar" :style="{ width: loadingProgress + '%' }"></div>
         </div>
+        <div class="loading-tip">IBMS · Integrations & Web3 Introduction</div>
         <div class="loading-subtip">{{ loadingMessage }}</div>
       </div>
     </div>
   </div>
 
   <!-- Main Content -->
-  <div v-else class="web3-intro-page">
-    <!-- Hero Section -->
-    <section class="hero">
-      <div class="hero-bg"></div>
-      <div class="hero-container">
-        <div class="hero-badge">
-          <span class="badge-dot"></span>
-          Enterprise Ready · Production Deployed
-        </div>
-        <h1 class="hero-title">
-          Bridging IoT & Blockchain<br />
-          <span class="gradient-text">with Enterprise-Grade Web3</span>
-        </h1>
-        <p class="hero-description">
-          IBMS delivers a complete Web3 infrastructure for smart building management —
-          combining decentralized identity, on-chain data anchoring, and seamless IoT integration.
-          Built for enterprises requiring trust, transparency, and auditability.
-        </p>
+  <div v-else class="introduction-page">
+    <div class="page-container">
+      <!-- Hero Section -->
+      <div class="hero-section">
+        <div class="hero-badge">📖 IBMS System Documentation</div>
+        <h1>Integrations & Web3 Introduction</h1>
+        <p class="hero-subtitle">Bridge the gap between traditional systems and blockchain technology</p>
         <div class="hero-stats">
-          <div class="stat">
-            <span class="stat-number">500+</span>
-            <span class="stat-label">Devices Supported</span>
-          </div>
-          <div class="stat">
-            <span class="stat-number">3</span>
-            <span class="stat-label">Geth Nodes</span>
-          </div>
-          <div class="stat">
-            <span class="stat-number">5s</span>
-            <span class="stat-label">Block Time</span>
-          </div>
-          <div class="stat">
-            <span class="stat-number">24/7</span>
-            <span class="stat-label">Real-time Sync</span>
-          </div>
+          <div class="hero-stat"><span class="stat-number">67</span><span class="stat-label">Code Files</span></div>
+          <div class="hero-stat"><span class="stat-number">48</span><span class="stat-label">API Endpoints</span></div>
+          <div class="hero-stat"><span class="stat-number">6</span><span class="stat-label">Geth Nodes</span></div>
+          <div class="hero-stat"><span class="stat-number">100%</span><span class="stat-label">On-Chain</span></div>
         </div>
       </div>
-    </section>
 
-    <!-- Architecture Section -->
-    <section id="architecture" class="section architecture-section">
-      <div class="container">
+      <!-- 1. System Architecture -->
+      <div class="section-card">
         <div class="section-header">
-          <span class="section-tag">System Design</span>
-          <h2 class="section-title">How IBMS Integrates Web3</h2>
-          <p class="section-desc">
-            Our architecture follows an "Off-Chain First" principle — keeping high-frequency
-            business logic off-chain while anchoring cryptographic proofs on blockchain for
-            maximum performance and trust.
-          </p>
+          <span class="section-icon">🏗️</span>
+          <div>
+            <h2>1. System Architecture Overview</h2>
+            <p class="section-desc">Layered microservices architecture with decoupled components across 7 layers</p>
+          </div>
+          <el-tag size="small" type="success" style="margin-left: auto">7 Layers | 67 Files</el-tag>
         </div>
-
-        <div class="architecture-grid">
-          <div class="arch-card" v-for="layer in layers" :key="layer.name">
-            <div class="arch-card-icon" :style="{ background: layer.color }">
-              <el-icon><component :is="layer.icon" /></el-icon>
-            </div>
-            <h3>{{ layer.name }}</h3>
-            <p>{{ layer.description }}</p>
-            <div class="arch-card-techs">
-              <span v-for="tech in layer.techs" :key="tech">{{ tech }}</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="architecture-image-wrapper">
-          <div class="image-label">
-            <span class="label-icon">📐</span>
-            <span>System Architecture Diagram</span>
-          </div>
-          <img
-              :src="images.architecture"
-              alt="IBMS Web3 Architecture"
-              class="architecture-image"
-              @load="handleImageLoad"
-              @error="handleImageError"
-          />
-        </div>
-
-        <div class="architecture-explanation">
-          <div class="exp-item">
-            <div class="exp-icon">🎯</div>
-            <div class="exp-content">
-              <h4>Application Layer</h4>
-              <p>DID Service handles decentralized identity management, VC issuance and verification. IoT Service manages device connectivity, protocol adaptation and data ingestion. Modeling Service provides AI-powered energy prediction and analytics.</p>
-            </div>
-          </div>
-          <div class="exp-item">
-            <div class="exp-icon">🔌</div>
-            <div class="exp-content">
-              <h4>Web3 Integration Layer</h4>
-              <p>The Blockchain Unified Entry provides a single interface for all chain interactions. ContractManager routes smart contract calls with ABI management. MiningScheduler intelligently starts/stops mining nodes based on transaction demand.</p>
-            </div>
-          </div>
-          <div class="exp-item">
-            <div class="exp-icon">⛓️</div>
-            <div class="exp-content">
-              <h4>Blockchain Layer</h4>
-              <p>Three Geth nodes running Clique PoA consensus, each with independent RPC endpoints. Nodes automatically rotate block production every 5 seconds, ensuring high availability and fault tolerance.</p>
-            </div>
-          </div>
-          <div class="exp-item">
-            <div class="exp-icon">📜</div>
-            <div class="exp-content">
-              <h4>Smart Contract Layer</h4>
-              <p>IBMSAnchor contract provides immutable on-chain storage for entity metadata hashes and VC credentials. All anchoring operations emit events for complete audit trails.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Registration Flow Section -->
-    <section id="registration" class="section registration-section">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-tag">Identity Management</span>
-          <h2 class="section-title">DID-Based Entity Registration</h2>
-          <p class="section-desc">
-            Every device and user in IBMS receives a unique Decentralized Identifier (DID)
-            and Verifiable Credential (VC), anchored on blockchain for tamper-proof identity verification.
-          </p>
-        </div>
-
-        <div class="flow-visual">
-          <div class="flow-steps-horizontal">
-            <div class="flow-step" v-for="(step, idx) in registrationSteps" :key="idx">
-              <div class="step-circle">{{ idx + 1 }}</div>
-              <div class="step-connector" v-if="idx < registrationSteps.length"></div>
-            </div>
-          </div>
-
-          <div class="flow-details">
-            <div class="flow-detail-card" v-for="(step, idx) in registrationSteps" :key="idx">
-              <div class="detail-content">
-                <h4 style="font-size: 16px">{{ step.title }}</h4>
-                <p style="font-size: 13px">{{ step.description }}</p>
+        <div class="topology-container" ref="archTopologyRef" style="height: 760px;">
+          <VueFlow
+              v-model="archNodes"
+              v-model:edges="archEdges"
+              class="vue-flow-wrapper"
+              :default-viewport="{ zoom: 0.65, x: 80, y: 20 }"
+              :fit-view-on-init="true"
+              :nodes-draggable="true"
+              :zoom-on-scroll="true"
+              :min-zoom="0.4"
+              :max-zoom="1.5"
+          >
+            <template #node-custom="nodeProps">
+              <div class="arch-node" :style="{ borderColor: nodeProps.data.color, background: nodeProps.data.bg || '#ffffff' }">
+                <div class="arch-node-icon">{{ nodeProps.data.icon }}</div>
+                <div class="arch-node-name">{{ nodeProps.data.label }}</div>
+                <div class="arch-node-desc">{{ nodeProps.data.desc }}</div>
+                <div class="arch-node-tech">{{ nodeProps.data.tech }}</div>
               </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="flow-image-wrapper">
-          <div class="image-label">
-            <span class="label-icon">🔄</span>
-            <span>Entity Registration Sequence Diagram</span>
-          </div>
-          <img
-              :src="images.registration"
-              alt="Entity Registration Flow"
-              class="flow-image"
-              @load="handleImageLoad"
-              @error="handleImageError"
-          />
-        </div>
-
-        <div class="registration-benefits">
-          <div class="benefit" v-for="benefit in registrationBenefits" :key="benefit.title">
-            <div class="benefit-icon">{{ benefit.icon }}</div>
-            <h4>{{ benefit.title }}</h4>
-            <p>{{ benefit.description }}</p>
-          </div>
+            </template>
+          </VueFlow>
         </div>
       </div>
-    </section>
 
-    <!-- Data Provenance Section -->
-    <section id="provenance" class="section provenance-section">
-      <div class="container">
+      <!-- 2. Blockchain Network Topology -->
+      <div class="section-card">
         <div class="section-header">
-          <span class="section-tag">Data Integrity</span>
-          <h2 class="section-title">Critical Data Provenance</h2>
-          <p class="section-desc">
-            Not all data needs blockchain. IBMS intelligently identifies critical data points
-            and anchors only their cryptographic hashes on-chain, balancing performance with auditability.
-          </p>
+          <span class="section-icon">⛓️</span>
+          <div>
+            <h2>2. Blockchain Network Topology</h2>
+            <p class="section-desc">6-node Geth private chain cluster with Clique PoA consensus</p>
+          </div>
+          <el-tag size="small" type="danger" style="margin-left: auto">6-Node | Full-Mesh</el-tag>
         </div>
-
-        <div class="provenance-pipeline">
-          <div class="pipeline-stage" v-for="(stage, idx) in provenanceStages" :key="idx">
-            <div class="stage-icon" :class="stage.type">
-              <el-icon><component :is="stage.icon" /></el-icon>
-            </div>
-            <div class="stage-content">
-              <h4 style="font-size: 16px">{{ stage.title }}</h4>
-              <p style="font-size: 13px">{{ stage.description }}</p>
-            </div>
-            <div class="stage-arrow" v-if="idx < provenanceStages.length - 1">
-              <el-icon><ArrowRight /></el-icon>
-            </div>
-          </div>
+        <div class="topology-container" ref="blockchainTopologyRef" style="height: 520px;">
+          <VueFlow
+              v-model="blockchainNodes"
+              v-model:edges="blockchainEdges"
+              class="vue-flow-wrapper"
+              :default-viewport="{ zoom: 0.7, x: 100, y: 50 }"
+              :fit-view-on-init="true"
+              :nodes-draggable="true"
+              :zoom-on-scroll="true"
+              :min-zoom="0.5"
+              :max-zoom="1.5"
+          >
+            <template #node-custom="nodeProps">
+              <div class="blockchain-node">
+                <div class="node-icon">⛏️</div>
+                <div class="node-name">{{ nodeProps.data.label }}</div>
+                <div class="node-ports">RPC: {{ nodeProps.data.rpc }}<br>P2P: {{ nodeProps.data.p2p }}</div>
+                <div class="node-status-badge online">● Online</div>
+                <div class="node-balance">{{ nodeProps.data.balance }} ETH</div>
+              </div>
+            </template>
+          </VueFlow>
         </div>
-
-        <div class="flow-image-wrapper">
-          <div class="image-label">
-            <span class="label-icon">📊</span>
-            <span>Data Provenance Flow Diagram</span>
-          </div>
-          <img
-              :src="images.dataProvenance"
-              alt="Data Provenance Flow"
-              class="flow-image"
-              @load="handleImageLoad"
-              @error="handleImageError"
-          />
-        </div>
-
-        <div class="provenance-features">
-          <div class="p-feature">
-            <div class="p-feature-icon">⚡</div>
-            <div class="p-feature-text">
-              <strong>High Performance</strong>
-              <span>99% of IoT data stored off-chain in CSV for fast querying</span>
-            </div>
-          </div>
-          <div class="p-feature">
-            <div class="p-feature-icon">🔒</div>
-            <div class="p-feature-text">
-              <strong>Selective Anchoring</strong>
-              <span>Only critical data (alarms, thresholds) hash stored on blockchain</span>
-            </div>
-          </div>
-          <div class="p-feature">
-            <div class="p-feature-icon">📡</div>
-            <div class="p-feature-text">
-              <strong>Real-time Push</strong>
-              <span>SSE streams deliver data to frontend with millisecond latency</span>
-            </div>
-          </div>
+        <div class="blockchain-details">
+          <div class="detail-item"><span class="detail-label">Consensus:</span><span>Clique (PoA) - Round-Robin Sealing</span></div>
+          <div class="detail-item"><span class="detail-label">Chain ID:</span><span>9527</span></div>
+          <div class="detail-item"><span class="detail-label">Block Interval:</span><span>5 seconds</span></div>
+          <div class="detail-item"><span class="detail-label">Initial Supply:</span><span>600 ETH (100 ETH per signer)</span></div>
+          <div class="detail-item"><span class="detail-label">Block Height:</span><span>1,247</span></div>
+          <div class="detail-item"><span class="detail-label">Avg Gas Price:</span><span>1.2 Gwei</span></div>
         </div>
       </div>
-    </section>
 
-    <!-- Tech Stack Section -->
-    <section id="tech" class="section tech-section">
-      <div class="container">
+      <!-- 3. DID + Blockchain Integration -->
+      <div class="section-card">
         <div class="section-header">
-          <span class="section-tag">Technology</span>
-          <h2 class="section-title">Enterprise Web3 Stack</h2>
-          <p class="section-desc">
-            Built on battle-tested technologies, our stack delivers production-grade reliability
-            while maintaining flexibility for future expansions.
-          </p>
-        </div>
-
-        <div class="tech-showcase">
-          <div class="tech-showcase-item" v-for="tech in techStack" :key="tech.name">
-            <div class="tech-showcase-icon" :style="{ background: tech.color }">
-              <el-icon><component :is="tech.icon" /></el-icon>
-            </div>
-            <div class="tech-showcase-info">
-              <h3>{{ tech.name }}</h3>
-              <p>{{ tech.description }}</p>
-              <span class="tech-version">{{ tech.version }}</span>
-            </div>
+          <span class="section-icon">🆔</span>
+          <div>
+            <h2>3. DID + Blockchain Integration</h2>
+            <p class="section-desc">W3C-compliant decentralized identity with hierarchical DID and on-chain anchoring</p>
           </div>
+          <el-tag size="small" type="primary" style="margin-left: auto">W3C Standard</el-tag>
+        </div>
+        <div class="topology-container" ref="didBlockchainTopologyRef" style="height: 480px;">
+          <VueFlow
+              v-model="didBlockchainNodes"
+              v-model:edges="didBlockchainEdges"
+              class="vue-flow-wrapper"
+              :default-viewport="{ zoom: 0.7, x: 80, y: 40 }"
+              :fit-view-on-init="true"
+              :nodes-draggable="true"
+              :zoom-on-scroll="true"
+              :min-zoom="0.5"
+              :max-zoom="1.5"
+          >
+            <template #node-custom="nodeProps">
+              <div class="did-blockchain-node" :style="{ borderColor: nodeProps.data.color, background: nodeProps.data.bg || '#ffffff' }">
+                <div class="node-icon">{{ nodeProps.data.icon }}</div>
+                <div class="node-name">{{ nodeProps.data.label }}</div>
+                <div class="node-desc">{{ nodeProps.data.desc }}</div>
+              </div>
+            </template>
+          </VueFlow>
+        </div>
+        <div class="did-features">
+          <div class="did-feature-item"><span class="did-feature-icon">📝</span>Hierarchical DID: <code>did:imbs:{type}:{id}:{suffix}</code></div>
+          <div class="did-feature-item"><span class="did-feature-icon">🎫</span>VC Issuance · Verification · Revocation</div>
+          <div class="did-feature-item"><span class="did-feature-icon">✅</span>VP Challenge-Response Authentication</div>
+          <div class="did-feature-item"><span class="did-feature-icon">🔗</span>IMBSAnchor.sol Hash Anchoring</div>
         </div>
       </div>
-    </section>
 
-    <!-- Features Section -->
-    <section id="features" class="section features-section">
-      <div class="container">
+      <!-- 4. Data Flow Pipeline -->
+      <div class="section-card">
         <div class="section-header">
-          <span class="section-tag">Innovation</span>
-          <h2 class="section-title">Why IBMS Web3 Stands Out</h2>
-          <p class="section-desc">
-            Six key innovations that make our Web3 integration uniquely suited for enterprise IoT.
-          </p>
+          <span class="section-icon">🌊</span>
+          <div>
+            <h2>4. Complete Data Flow Pipeline</h2>
+            <p class="section-desc">End-to-end data flow from IoT devices to on-chain anchoring and real-time push</p>
+          </div>
+          <el-tag size="small" type="info" style="margin-left: auto">End-to-End Pipeline</el-tag>
         </div>
+        <div class="topology-container" ref="dataFlowTopologyRef" style="height: 480px;">
+          <VueFlow
+              v-model="dataFlowNodes"
+              v-model:edges="dataFlowEdges"
+              class="vue-flow-wrapper"
+              :default-viewport="{ zoom: 0.7, x: 60, y: 40 }"
+              :fit-view-on-init="true"
+              :nodes-draggable="true"
+              :zoom-on-scroll="true"
+              :min-zoom="0.5"
+              :max-zoom="1.5"
+          >
+            <template #node-custom="nodeProps">
+              <div class="dataflow-node" :style="{ background: nodeProps.data.color }">
+                <div class="node-icon">{{ nodeProps.data.icon }}</div>
+                <div class="node-name">{{ nodeProps.data.label }}</div>
+                <div class="node-desc">{{ nodeProps.data.desc }}</div>
+                <div class="node-tech">{{ nodeProps.data.tech }}</div>
+              </div>
+            </template>
+          </VueFlow>
+        </div>
+        <div class="dataflow-stats">
+          <div class="stat-item"><span>📡 Device Protocols:</span> MQTT · HTTP · Modbus</div>
+          <div class="stat-item"><span>🔐 Auth Methods:</span> DID Auth · JWT · API Key</div>
+          <div class="stat-item"><span>⛓️ Anchor Rate:</span> ~12 tx/hour</div>
+          <div class="stat-item"><span>📨 Push Latency:</span> &lt; 500ms</div>
+        </div>
+      </div>
 
-        <div class="features-grid">
-          <div class="feature-card" v-for="feature in features" :key="feature.title">
-            <div class="feature-icon" :style="{ color: feature.color, background: feature.color + '08' }">
-              <el-icon><component :is="feature.icon" /></el-icon>
+      <!-- 5. Mining Scheduler Workflow -->
+      <div class="section-card">
+        <div class="section-header">
+          <span class="section-icon">⛏️</span>
+          <div>
+            <h2>5. Mining Scheduler Workflow</h2>
+            <p class="section-desc">On-demand mining scheduler that starts on first write request and stops after idle timeout</p>
+          </div>
+          <el-tag size="small" type="warning" style="margin-left: auto">On-Demand Mining</el-tag>
+        </div>
+        <div class="topology-container" ref="miningSchedulerTopologyRef" style="height: 420px;">
+          <VueFlow
+              v-model="miningNodes"
+              v-model:edges="miningEdges"
+              class="vue-flow-wrapper"
+              :default-viewport="{ zoom: 0.8, x: 80, y: 40 }"
+              :fit-view-on-init="true"
+              :nodes-draggable="true"
+              :zoom-on-scroll="true"
+              :min-zoom="0.5"
+              :max-zoom="1.5"
+          >
+            <template #node-custom="nodeProps">
+              <div class="mining-node" :class="nodeProps.data.type">
+                <div class="node-icon">{{ nodeProps.data.icon }}</div>
+                <div class="node-name">{{ nodeProps.data.label }}</div>
+                <div class="node-desc">{{ nodeProps.data.desc }}</div>
+              </div>
+            </template>
+          </VueFlow>
+        </div>
+        <div class="mining-stats">
+          <div class="stat-card-mini"><span>⚡ Mining Trigger:</span> First write request</div>
+          <div class="stat-card-mini"><span>⏰ Idle Timeout:</span> 10 minutes</div>
+          <div class="stat-card-mini"><span>🔄 Scheduler Check:</span> Every 30 seconds</div>
+          <div class="stat-card-mini"><span>💰 Energy Saved:</span> ~85%</div>
+        </div>
+      </div>
+
+      <!-- 6. Module Dependency Graph -->
+      <div class="section-card">
+        <div class="section-header">
+          <span class="section-icon">📦</span>
+          <div>
+            <h2>6. Module Dependency Graph</h2>
+            <p class="section-desc">Dependency relationships between 5 core modules (67 source files)</p>
+          </div>
+          <el-tag size="small" type="info" style="margin-left: auto">67 Files | 5 Core Modules</el-tag>
+        </div>
+        <div class="topology-container" ref="dependencyTopologyRef" style="height: 480px;">
+          <VueFlow
+              v-model="dependencyNodes"
+              v-model:edges="dependencyEdges"
+              class="vue-flow-wrapper"
+              :default-viewport="{ zoom: 0.7, x: 80, y: 40 }"
+              :fit-view-on-init="true"
+              :nodes-draggable="true"
+              :zoom-on-scroll="true"
+              :min-zoom="0.5"
+              :max-zoom="1.5"
+          >
+            <template #node-custom="nodeProps">
+              <div class="dependency-node" :style="{ borderColor: nodeProps.data.color, background: nodeProps.data.bg || '#ffffff' }">
+                <div class="node-icon">{{ nodeProps.data.icon }}</div>
+                <div class="node-name">{{ nodeProps.data.label }}</div>
+                <div class="node-files">{{ nodeProps.data.files }} files</div>
+                <div class="node-desc-small">{{ nodeProps.data.desc }}</div>
+              </div>
+            </template>
+          </VueFlow>
+        </div>
+      </div>
+
+      <!-- 7. Database Schema -->
+      <div class="section-card">
+        <div class="section-header">
+          <span class="section-icon">🗄️</span>
+          <div>
+            <h2>7. Database Schema & ER Diagram</h2>
+            <p class="section-desc">6 core tables supporting hierarchical relationships, permissions, and VC anchoring</p>
+          </div>
+          <el-tag size="small" type="success" style="margin-left: auto">6 Tables | MySQL 8.0</el-tag>
+        </div>
+        <div class="topology-container" ref="databaseTopologyRef" style="height: 580px;">
+          <VueFlow
+              v-model="databaseNodes"
+              v-model:edges="databaseEdges"
+              class="vue-flow-wrapper"
+              :default-viewport="{ zoom: 0.65, x: 100, y: 40 }"
+              :fit-view-on-init="true"
+              :nodes-draggable="true"
+              :zoom-on-scroll="true"
+              :min-zoom="0.5"
+              :max-zoom="1.5"
+          >
+            <template #node-custom="nodeProps">
+              <div class="database-node">
+                <div class="db-icon">🗄️</div>
+                <div class="db-name">{{ nodeProps.data.label }}</div>
+                <div class="db-fields">{{ nodeProps.data.fields }}</div>
+                <div class="db-records">{{ nodeProps.data.records }} records</div>
+              </div>
+            </template>
+          </VueFlow>
+        </div>
+        <div class="table-stats">
+          <div class="table-stat"><span>imbs_entity_type:</span> 6 types</div>
+          <div class="table-stat"><span>imbs_permission:</span> 24 permissions</div>
+          <div class="table-stat"><span>imbs_users:</span> 50+ entities</div>
+          <div class="table-stat"><span>imbs_vc_anchor:</span> 89 anchors</div>
+        </div>
+      </div>
+
+      <!-- 8. API Gateway & Rate Limiting -->
+      <div class="section-card">
+        <div class="section-header">
+          <span class="section-icon">🌐</span>
+          <div>
+            <h2>8. API Gateway & Rate Limiting</h2>
+            <p class="section-desc">Unified API gateway with authentication, rate limiting, and request routing</p>
+          </div>
+          <el-tag size="small" type="info" style="margin-left: auto">48 Endpoints</el-tag>
+        </div>
+        <div class="topology-container" ref="apiGatewayTopologyRef" style="height: 460px;">
+          <VueFlow
+              v-model="apiGatewayNodes"
+              v-model:edges="apiGatewayEdges"
+              class="vue-flow-wrapper"
+              :default-viewport="{ zoom: 0.7, x: 80, y: 40 }"
+              :fit-view-on-init="true"
+              :nodes-draggable="true"
+              :zoom-on-scroll="true"
+              :min-zoom="0.5"
+              :max-zoom="1.5"
+          >
+            <template #node-custom="nodeProps">
+              <div class="api-node" :style="{ background: nodeProps.data.color }">
+                <div class="api-icon">{{ nodeProps.data.icon }}</div>
+                <div class="api-name">{{ nodeProps.data.label }}</div>
+                <div class="api-count">{{ nodeProps.data.count }} endpoints</div>
+              </div>
+            </template>
+          </VueFlow>
+        </div>
+      </div>
+
+      <!-- 9. Pluggable Driver Architecture -->
+      <div class="section-card">
+        <div class="section-header">
+          <span class="section-icon">🔌</span>
+          <div>
+            <h2>9. Pluggable Driver Architecture</h2>
+            <p class="section-desc">Plugin-based driver architecture supporting multiple IoT protocols</p>
+          </div>
+          <el-tag size="small" type="warning" style="margin-left: auto">3+ Protocols</el-tag>
+        </div>
+        <div class="topology-container" ref="driverTopologyRef" style="height: 440px;">
+          <VueFlow
+              v-model="driverNodes"
+              v-model:edges="driverEdges"
+              class="vue-flow-wrapper"
+              :default-viewport="{ zoom: 0.7, x: 80, y: 40 }"
+              :fit-view-on-init="true"
+              :nodes-draggable="true"
+              :zoom-on-scroll="true"
+              :min-zoom="0.5"
+              :max-zoom="1.5"
+          >
+            <template #node-custom="nodeProps">
+              <div class="driver-node" :style="{ borderColor: nodeProps.data.color, background: nodeProps.data.bg || '#ffffff' }">
+                <div class="driver-icon">{{ nodeProps.data.icon }}</div>
+                <div class="driver-name">{{ nodeProps.data.label }}</div>
+                <div class="driver-status">{{ nodeProps.data.status }}</div>
+              </div>
+            </template>
+          </VueFlow>
+        </div>
+        <div class="field-mapping-table">
+          <div class="table-title">📋 Field Mapping Example (HVAC Device)</div>
+          <el-table :data="fieldMappingData" size="small" border stripe>
+            <el-table-column prop="deviceField" label="Device Field" />
+            <el-table-column prop="deviceValue" label="Device Value" />
+            <el-table-column prop="standardField" label="Standard Field" />
+            <el-table-column prop="standardValue" label="Standard Value" />
+          </el-table>
+        </div>
+      </div>
+
+      <!-- 10. XGBoost Data Modeling -->
+      <div class="section-card">
+        <div class="section-header">
+          <span class="section-icon">🤖</span>
+          <div>
+            <h2>10. XGBoost Data Modeling</h2>
+            <p class="section-desc">Energy consumption prediction using XGBoost machine learning model</p>
+          </div>
+          <el-tag size="small" type="success" style="margin-left: auto">Energy Prediction</el-tag>
+        </div>
+        <div class="topology-container" ref="modelingTopologyRef" style="height: 400px;">
+          <VueFlow
+              v-model="modelingNodes"
+              v-model:edges="modelingEdges"
+              class="vue-flow-wrapper"
+              :default-viewport="{ zoom: 0.7, x: 80, y: 40 }"
+              :fit-view-on-init="true"
+              :nodes-draggable="true"
+              :zoom-on-scroll="true"
+              :min-zoom="0.5"
+              :max-zoom="1.5"
+          >
+            <template #node-custom="nodeProps">
+              <div class="modeling-node" :style="{ background: nodeProps.data.color }">
+                <div class="node-icon">{{ nodeProps.data.icon }}</div>
+                <div class="node-name">{{ nodeProps.data.label }}</div>
+              </div>
+            </template>
+          </VueFlow>
+        </div>
+        <div class="prediction-table">
+          <div class="table-title">📊 Energy Prediction Results (Next 7 Days)</div>
+          <el-table :data="predictionData" size="small" border stripe>
+            <el-table-column prop="date" label="Date" width="120" />
+            <el-table-column prop="predicted" label="Predicted (kWh)" />
+            <el-table-column prop="baseline" label="Baseline (kWh)" />
+            <el-table-column prop="savings" label="Savings (kWh)" />
+            <el-table-column prop="savingsPercent" label="Savings %" />
+          </el-table>
+        </div>
+      </div>
+
+      <!-- Core Concepts -->
+      <div class="section-card">
+        <div class="section-header">
+          <span class="section-icon">🧠</span>
+          <div><h2>Core Concepts</h2><p class="section-desc">Click cards to navigate to management pages</p></div>
+          <el-tag size="small" type="info" style="margin-left: auto">Click to navigate</el-tag>
+        </div>
+        <div class="concepts-grid">
+          <div v-for="concept in coreConcepts" :key="concept.name" class="concept-card" @click="navigateTo(concept.route)">
+            <div class="concept-icon" :style="{ background: concept.color }">{{ concept.icon }}</div>
+            <div class="concept-info">
+              <h3>{{ concept.name }}</h3>
+              <p>{{ concept.description }}</p>
+              <span class="concept-link">Manage →</span>
             </div>
-            <h3>{{ feature.title }}</h3>
-            <p>{{ feature.description }}</p>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- CTA Section -->
-    <section class="cta-section">
-      <div class="container">
-        <div class="cta-content">
-          <h2>Ready to Build Trust into Your IoT Infrastructure?</h2>
-          <p>Schedule a demo to see how IBMS Web3 can transform your building management system.</p>
-          <div class="cta-buttons">
-            <button class="btn-primary-large">Request Demo</button>
-            <button class="btn-secondary">Contact Sales</button>
-          </div>
+      <!-- FAQ Section -->
+      <div class="section-card">
+        <div class="section-header">
+          <span class="section-icon">❓</span>
+          <div><h2>Frequently Asked Questions</h2></div>
+        </div>
+        <el-collapse v-model="activeFaq" accordion>
+          <el-collapse-item v-for="faq in faqItems" :key="faq.question" :name="faq.question">
+            <template #title><div class="faq-title">{{ faq.question }}</div></template>
+            <div class="faq-answer">{{ faq.answer }}</div>
+          </el-collapse-item>
+        </el-collapse>
+      </div>
+
+      <!-- Submit Feedback -->
+      <div class="feedback-card">
+        <div class="feedback-icon">💬</div>
+        <div class="feedback-content">
+          <h3>Help Us Improve</h3>
+          <p>Your feedback helps us make the documentation better.</p>
+          <el-button type="primary" @click="showFeedbackDialog = true"><el-icon><Edit /></el-icon> Submit Feedback</el-button>
         </div>
       </div>
-    </section>
+    </div>
+
+    <!-- Feedback Dialog -->
+    <el-dialog v-model="showFeedbackDialog" title="Submit Feedback" width="500px">
+      <el-form :model="feedbackForm" label-width="80px">
+        <el-form-item label="Title" required>
+          <el-input v-model="feedbackForm.title" placeholder="Brief summary" />
+        </el-form-item>
+        <el-form-item label="Description" required>
+          <el-input v-model="feedbackForm.description" type="textarea" rows="4" placeholder="Please describe in detail" />
+        </el-form-item>
+        <el-form-item label="Screenshot">
+          <el-upload action="#" :auto-upload="false" :show-file-list="true" :limit="1">
+            <el-button size="small"><el-icon><Upload /></el-icon> Upload Screenshot</el-button>
+          </el-upload>
+        </el-form-item>
+      </el-form>
+      <template #footer>
+        <el-button @click="showFeedbackDialog = false">Cancel</el-button>
+        <el-button type="primary" @click="submitFeedback">Submit</el-button>
+      </template>
+    </el-dialog>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
-import {
-  Share, Document, DataLine, Cpu, Star,
-  ArrowRight, Connection, Key, Lock, DataAnalysis,
-  Monitor, Guide, Timer, Coin, User, Link
-} from '@element-plus/icons-vue'
+import { ref, onMounted } from 'vue'
+import { VueFlow } from '@vue-flow/core'
+import type { Node, Edge } from '@vue-flow/core'
+import '@vue-flow/core/dist/style.css'
+import '@vue-flow/core/dist/theme-default.css'
+import { ElMessage } from 'element-plus'
+import { Lock, Unlock, CircleClose, Edit, Upload } from '@element-plus/icons-vue'
 
-// ============ Access Key ============
-const CORRECT_KEY = 'Leon88509998'
+// ==================== Key Verification ====================
+const REQUIRED_KEY = 'Leon88509998'
+const isKeyVerified = ref(false)
 const accessKey = ref('')
-const isAuthenticated = ref(false)
-const authError = ref(false)
-const isLoadingImages = ref(false)
+const keyVerifying = ref(false)
+const keyError = ref(false)
 
-// ============ Image URLs ============
-const IMAGE_URLS = {
-  architecture: 'https://aegisnx.com/wp-content/uploads/2026/05/1779094789817.png',
-  registration: 'https://aegisnx.com/wp-content/uploads/2026/05/1779094455062.png',
-  dataProvenance: 'https://aegisnx.com/wp-content/uploads/2026/05/1779094802455.png'
-}
-
-// ============ Loading State ============
-const isLoaded = ref(false)
-const loadingProgress = ref(0)
-const loadingMessage = ref('Initializing Web3 modules...')
-const imagesLoadedCount = ref(0)
-const imageErrors = ref(0)
-const totalImages = 3
-
-const images = ref({
-  architecture: IMAGE_URLS.architecture,
-  registration: IMAGE_URLS.registration,
-  dataProvenance: IMAGE_URLS.dataProvenance
-})
-
-const processedImages = ref({
-  architecture: false,
-  registration: false,
-  dataProvenance: false
-})
-
-const loadingMessages = [
-  'Connecting to blockchain network...',
-  'Loading smart contracts...',
-  'Initializing Web3 modules...',
-  'Almost ready...'
-]
-
-let loadingTimeout: ReturnType<typeof setTimeout> | null = null
-let progressInterval: ReturnType<typeof setInterval> | null = null
-
-// ============ Key Verification ============
 const verifyKey = () => {
-  if (accessKey.value === CORRECT_KEY) {
-    authError.value = false
-    isAuthenticated.value = true
-
-    // If images are not fully loaded yet, continue waiting
-    if (imagesLoadedCount.value < totalImages) {
-      isLoadingImages.value = true
+  if (!accessKey.value.trim()) { keyError.value = true; return }
+  keyVerifying.value = true
+  setTimeout(() => {
+    if (accessKey.value === REQUIRED_KEY) {
+      isKeyVerified.value = true
+      keyError.value = false
+      startLoading()
+    } else {
+      keyError.value = true
+      accessKey.value = ''
     }
-  } else {
-    authError.value = true
-    accessKey.value = ''
+    keyVerifying.value = false
+  }, 500)
+}
+
+// ==================== Loading ====================
+const isPageLoaded = ref(false)
+const loadingProgress = ref(0)
+const loadingMessage = ref('Preparing documentation...')
+const loadingMessages = ['Preparing documentation...', 'Loading architecture diagrams...', 'Initializing topology graphs...', 'Gathering technical data...', 'Almost ready...']
+
+// ==================== Table Data ====================
+const fieldMappingData = ref([
+  { deviceField: 'temp', deviceValue: '23.5', standardField: 'temperature', standardValue: '23.5' },
+  { deviceField: 'hmt', deviceValue: '56', standardField: 'humidity', standardValue: '56' },
+  { deviceField: 'pwr', deviceValue: '1250', standardField: 'power_consumption', standardValue: '1250' },
+  { deviceField: 'stat', deviceValue: '1', standardField: 'device_status', standardValue: 'running' }
+])
+
+const predictionData = ref([
+  { date: '2025-05-22', predicted: 12450, baseline: 13800, savings: 1350, savingsPercent: '9.8%' },
+  { date: '2025-05-23', predicted: 11890, baseline: 13200, savings: 1310, savingsPercent: '9.9%' },
+  { date: '2025-05-24', predicted: 11230, baseline: 12500, savings: 1270, savingsPercent: '10.2%' },
+  { date: '2025-05-25', predicted: 10870, baseline: 12100, savings: 1230, savingsPercent: '10.2%' },
+  { date: '2025-05-26', predicted: 11560, baseline: 12800, savings: 1240, savingsPercent: '9.7%' },
+  { date: '2025-05-27', predicted: 12180, baseline: 13500, savings: 1320, savingsPercent: '9.8%' },
+  { date: '2025-05-28', predicted: 12740, baseline: 14100, savings: 1360, savingsPercent: '9.6%' }
+])
+
+// ==================== Core Concepts ====================
+const coreConcepts = ref([
+  { name: 'DID (Decentralized Identity)', icon: '🆔', color: '#3b82f6', description: 'Hierarchical DID: did:imbs:{type}:{id}:{suffix}', route: '/did-management' },
+  { name: 'Smart Contracts', icon: '📜', color: '#8b5cf6', description: 'IMBSAnchor.sol for data anchoring', route: '/smart-contracts' },
+  { name: 'Data Anchoring', icon: '🔗', color: '#10b981', description: 'SHA256 hash stored on-chain', route: '/data-anchoring' },
+  { name: 'Edge Nodes', icon: '⚡', color: '#f59e0b', description: '6 edge gateways in Singapore & Hong Kong', route: '/edge-nodes' },
+  { name: 'Geth Private Chain', icon: '⛓️', color: '#ef4444', description: '6-node cluster, Chain ID 9527', route: '/blockchain-dashboard' },
+  { name: 'Verifiable Credentials', icon: '🎫', color: '#06b6d4', description: 'VC issuance, verification, revocation', route: '/did-management' }
+])
+
+// ==================== FAQ ====================
+const activeFaq = ref('')
+const faqItems = ref([
+  { question: 'How do I verify that my data has not been tampered with?', answer: 'Use the Verification Tool in the Data Anchoring page. The system will compare the computed hash with the on-chain stored hash via IMBSAnchor.sol contract.' },
+  { question: 'What happens when an edge node goes offline?', answer: 'It continues to collect data locally using configured drivers (MQTT/HTTP/Modbus). Once restored, it automatically syncs cached data with retry mechanism (up to 3 retries).' },
+  { question: 'How can I call the APIs from my application?', answer: 'Register an application to obtain Client ID and Secret, then generate an API key. Use it in the `X-API-Key` header of your HTTP requests.' },
+  { question: 'What is the difference between DID and VC?', answer: 'DID is a unique identifier for an entity. VC is a cryptographically signed credential issued by one DID to another, proving claims about the subject.' },
+  { question: 'How many nodes does the private chain have?', answer: '6 Geth nodes in full-mesh topology with Clique PoA consensus. All 6 are signers in round-robin block sealing (5-second interval).' },
+  { question: 'What is the mining scheduler?', answer: 'On-demand mining: starts on first write request, automatically stops after 10 minutes idle to save resources.' }
+])
+
+const showFeedbackDialog = ref(false)
+const feedbackForm = ref({ title: '', description: '' })
+
+const submitFeedback = () => {
+  if (!feedbackForm.value.title || !feedbackForm.value.description) {
+    ElMessage.warning('Please fill in all fields')
+    return
   }
+  ElMessage.success('Thank you for your feedback!')
+  showFeedbackDialog.value = false
+  feedbackForm.value = { title: '', description: '' }
 }
 
-// ============ Image Load Handlers ============
-const updateLoadingProgress = () => {
-  loadingProgress.value = (imagesLoadedCount.value / totalImages) * 100
-  const idx = Math.min(Math.floor(imagesLoadedCount.value / totalImages * loadingMessages.length), loadingMessages.length - 1)
-  const numb = loadingMessages[idx]
-  if (numb) {
-    loadingMessage.value = numb
-  }else {
-    loadingMessage.value = ''
-  }
+const navigateTo = (route: string) => {
+  ElMessage.info(`Navigate to: ${route}`)
+}
 
-  if (imagesLoadedCount.value === totalImages) {
-    if (loadingTimeout) clearTimeout(loadingTimeout)
-    if (progressInterval) clearInterval(progressInterval)
-    // If authenticated, show main content after images load
-    if (isAuthenticated.value) {
-      setTimeout(() => { isLoaded.value = true }, 300)
+// ==================== Generate Full Mesh Edges Helper ====================
+const generateFullMeshEdges = (ids: string[]): Edge[] => {
+  const edges: Edge[] = []
+  for (let i = 0; i < ids.length; i++) {
+    for (let j = i + 1; j < ids.length; j++) {
+      edges.push({
+        id: `${ids[i]}-${ids[j]}`,
+        source: ids[i],
+        target: ids[j],
+        animated: true,
+        style: { stroke: '#52c41a', strokeWidth: 2 }
+      })
     }
   }
+  return edges
 }
 
-const handleImageLoad = () => {
-  imagesLoadedCount.value++
-  updateLoadingProgress()
+// ==================== 1. System Architecture ====================
+const archNodes = ref<Node[]>([
+  { id: 'app', type: 'custom', position: { x: 500, y: 30 }, data: { label: 'Application Layer', icon: '📱', desc: 'Frontend · Third-party', tech: 'Vue 3 / React', color: '#3b82f6', bg: '#eff6ff' } },
+  { id: 'api', type: 'custom', position: { x: 250, y: 130 }, data: { label: 'API Gateway', icon: '🚪', desc: 'Entry · Rate Limit', tech: 'Flask · Nginx', color: '#8b5cf6', bg: '#f5f3ff' } },
+  { id: 'sse', type: 'custom', position: { x: 750, y: 130 }, data: { label: 'SSE Push', icon: '📨', desc: 'Real-time Push', tech: 'Server-Sent Events', color: '#06b6d4', bg: '#ecfeff' } },
+  { id: 'service', type: 'custom', position: { x: 500, y: 160 }, data: { label: 'Service Layer', icon: '⚙️', desc: 'DID · IoT · Modeling', tech: 'Python Services', color: '#f59e0b', bg: '#fffbeb' } },
+  { id: 'core', type: 'custom', position: { x: 500, y: 280 }, data: { label: 'Core Layer', icon: '🔧', desc: 'Drivers · Mapping', tech: 'Plugin Architecture', color: '#10b981', bg: '#ecfdf5' } },
+  { id: 'data', type: 'custom', position: { x: 300, y: 400 }, data: { label: 'Data Layer', icon: '💾', desc: 'MySQL · CSV', tech: 'SQLAlchemy', color: '#3b82f6', bg: '#eff6ff' } },
+  { id: 'blockchain', type: 'custom', position: { x: 700, y: 400 }, data: { label: 'Blockchain Layer', icon: '⛓️', desc: '6 Geth Nodes', tech: 'Web3.py', color: '#ef4444', bg: '#fef2f2' } },
+  { id: 'device', type: 'custom', position: { x: 500, y: 520 }, data: { label: 'Device Layer', icon: '📡', desc: 'MQTT · HTTP', tech: 'IoT Devices', color: '#64748b', bg: '#f8fafc' } }
+])
+
+const archEdges = ref<Edge[]>([
+  { id: 'e1', source: 'app', target: 'api', animated: true, label: 'HTTP/HTTPS', style: { stroke: '#3b82f6' } },
+  { id: 'e2', source: 'app', target: 'sse', animated: true, label: 'SSE', style: { stroke: '#06b6d4' } },
+  { id: 'e3', source: 'api', target: 'service', animated: true, label: 'REST API', style: { stroke: '#8b5cf6' } },
+  { id: 'e4', source: 'sse', target: 'service', animated: true, label: 'Subscribe', style: { stroke: '#06b6d4' } },
+  { id: 'e5', source: 'service', target: 'core', animated: true, label: 'Call', style: { stroke: '#f59e0b' } },
+  { id: 'e6', source: 'core', target: 'data', animated: true, label: 'CRUD', style: { stroke: '#10b981' } },
+  { id: 'e7', source: 'core', target: 'blockchain', animated: true, label: 'RPC', style: { stroke: '#ef4444' } },
+  { id: 'e8', source: 'device', target: 'core', animated: true, label: 'MQTT/HTTP', style: { stroke: '#64748b' } }
+])
+
+// ==================== 2. Blockchain Network ====================
+const blockchainNodes = ref<Node[]>([
+  { id: 'n1', type: 'custom', position: { x: 250, y: 100 }, data: { label: 'Geth Node 1', rpc: '8545', p2p: '30303', balance: '98.5' } },
+  { id: 'n2', type: 'custom', position: { x: 450, y: 50 }, data: { label: 'Geth Node 2', rpc: '8546', p2p: '30304', balance: '97.2' } },
+  { id: 'n3', type: 'custom', position: { x: 650, y: 100 }, data: { label: 'Geth Node 3', rpc: '8547', p2p: '30305', balance: '99.1' } },
+  { id: 'n4', type: 'custom', position: { x: 650, y: 280 }, data: { label: 'Geth Node 4', rpc: '8548', p2p: '30306', balance: '96.8' } },
+  { id: 'n5', type: 'custom', position: { x: 450, y: 330 }, data: { label: 'Geth Node 5', rpc: '8549', p2p: '30307', balance: '98.0' } },
+  { id: 'n6', type: 'custom', position: { x: 250, y: 280 }, data: { label: 'Geth Node 6', rpc: '8550', p2p: '30308', balance: '97.5' } }
+])
+const blockchainEdges = ref<Edge[]>(generateFullMeshEdges(['n1', 'n2', 'n3', 'n4', 'n5', 'n6']))
+
+// ==================== 3. DID + Blockchain Integration ====================
+const didBlockchainNodes = ref<Node[]>([
+  { id: 'entity', type: 'custom', position: { x: 150, y: 100 }, data: { label: 'Entity', icon: '👤', desc: 'User/Device/Org', color: '#f59e0b', bg: '#fffbeb' } },
+  { id: 'did', type: 'custom', position: { x: 380, y: 80 }, data: { label: 'DID Registry', icon: '🆔', desc: 'DID Registration', color: '#3b82f6', bg: '#eff6ff' } },
+  { id: 'vc', type: 'custom', position: { x: 600, y: 80 }, data: { label: 'VC Manager', icon: '📜', desc: 'Issue/Verify VC', color: '#8b5cf6', bg: '#f5f3ff' } },
+  { id: 'vp', type: 'custom', position: { x: 380, y: 220 }, data: { label: 'VP Verifier', icon: '✅', desc: 'Presentation Verify', color: '#10b981', bg: '#ecfdf5' } },
+  { id: 'anchor', type: 'custom', position: { x: 600, y: 220 }, data: { label: 'IMBSAnchor', icon: '🔗', desc: 'Hash Anchoring', color: '#ef4444', bg: '#fef2f2' } },
+  { id: 'chain', type: 'custom', position: { x: 780, y: 150 }, data: { label: 'Geth Chain', icon: '⛓️', desc: '6 Nodes PoA', color: '#64748b', bg: '#f8fafc' } }
+])
+
+const didBlockchainEdges = ref<Edge[]>([
+  { id: 'e1', source: 'entity', target: 'did', label: 'Register', animated: true, style: { stroke: '#f59e0b' } },
+  { id: 'e2', source: 'did', target: 'vc', label: 'Issue', animated: true, style: { stroke: '#3b82f6' } },
+  { id: 'e3', source: 'did', target: 'vp', label: 'Challenge', animated: true, style: { stroke: '#10b981' } },
+  { id: 'e4', source: 'vc', target: 'anchor', label: 'Anchor Hash', animated: true, style: { stroke: '#8b5cf6' } },
+  { id: 'e5', source: 'anchor', target: 'chain', label: 'Store', style: { stroke: '#ef4444' } }
+])
+
+// ==================== 4. Data Flow Pipeline ====================
+const dataFlowNodes = ref<Node[]>([
+  { id: 'iot', type: 'custom', position: { x: 80, y: 100 }, data: { label: 'IoT Device', icon: '📡', desc: 'Data Source', tech: 'MQTT/HTTP', color: '#3b82f6' } },
+  { id: 'auth', type: 'custom', position: { x: 240, y: 100 }, data: { label: 'DID Auth', icon: '🔐', desc: 'Identity Verify', tech: 'DID/JWT', color: '#8b5cf6' } },
+  { id: 'mapping', type: 'custom', position: { x: 400, y: 100 }, data: { label: 'Field Map', icon: '🗺️', desc: 'Data Normalize', tech: 'Mapper', color: '#f59e0b' } },
+  { id: 'anchor', type: 'custom', position: { x: 560, y: 100 }, data: { label: 'On-Chain', icon: '⛓️', desc: 'Hash Store', tech: 'Web3.py', color: '#10b981' } },
+  { id: 'csv', type: 'custom', position: { x: 720, y: 100 }, data: { label: 'Data Store', icon: '💾', desc: 'Time Series', tech: 'Pandas', color: '#ef4444' } },
+  { id: 'sse', type: 'custom', position: { x: 880, y: 100 }, data: { label: 'SSE/API', icon: '📨', desc: 'Real-time Push', tech: 'EventStream', color: '#06b6d4' } }
+])
+
+const dataFlowEdges = ref<Edge[]>([
+  { id: 'e1', source: 'iot', target: 'auth', animated: true, label: 'Auth' },
+  { id: 'e2', source: 'auth', target: 'mapping', animated: true, label: 'Process' },
+  { id: 'e3', source: 'mapping', target: 'anchor', animated: true, label: 'Anchor' },
+  { id: 'e4', source: 'anchor', target: 'csv', animated: true, label: 'Store' },
+  { id: 'e5', source: 'csv', target: 'sse', animated: true, label: 'Push' }
+])
+
+// ==================== 5. Mining Scheduler ====================
+const miningNodes = ref<Node[]>([
+  { id: 'idle', type: 'custom', position: { x: 120, y: 100 }, data: { label: 'Idle State', icon: '⏰', desc: 'Mining Stopped', type: 'idle' } },
+  { id: 'write', type: 'custom', position: { x: 320, y: 100 }, data: { label: 'Write Request', icon: '📝', desc: 'DID/VC/Anchor', type: 'trigger' } },
+  { id: 'mining', type: 'custom', position: { x: 520, y: 100 }, data: { label: 'Mining Active', icon: '⛏️', desc: 'Block Sealing', type: 'active' } },
+  { id: 'timer', type: 'custom', position: { x: 520, y: 250 }, data: { label: 'Idle Timer', icon: '⏱️', desc: '10 min countdown', type: 'timer' } }
+])
+
+const miningEdges = ref<Edge[]>([
+  { id: 'e1', source: 'idle', target: 'write', label: 'Trigger', animated: true, style: { stroke: '#f59e0b' } },
+  { id: 'e2', source: 'write', target: 'mining', label: 'Start', animated: true, style: { stroke: '#52c41a' } },
+  { id: 'e3', source: 'mining', target: 'timer', label: 'Reset', style: { stroke: '#3b82f6' } },
+  { id: 'e4', source: 'timer', target: 'idle', label: 'Timeout → Stop', animated: true, style: { stroke: '#ef4444' } }
+])
+
+// ==================== 6. Module Dependency ====================
+const dependencyNodes = ref<Node[]>([
+  { id: 'did', type: 'custom', position: { x: 150, y: 100 }, data: { label: 'DID Module', icon: '🆔', files: '7', desc: 'Identity Management', color: '#3b82f6', bg: '#eff6ff' } },
+  { id: 'iot', type: 'custom', position: { x: 350, y: 100 }, data: { label: 'IoT Module', icon: '📡', files: '18', desc: 'Device Management', color: '#8b5cf6', bg: '#f5f3ff' } },
+  { id: 'model', type: 'custom', position: { x: 550, y: 100 }, data: { label: 'Modeling', icon: '📊', files: '8', desc: 'XGBoost', color: '#f59e0b', bg: '#fffbeb' } },
+  { id: 'blockchain', type: 'custom', position: { x: 350, y: 250 }, data: { label: 'Blockchain', icon: '⛓️', files: '9', desc: 'Web3.py', color: '#ef4444', bg: '#fef2f2' } },
+  { id: 'common', type: 'custom', position: { x: 150, y: 250 }, data: { label: 'Common', icon: '🔧', files: '8', desc: 'Config/DB', color: '#10b981', bg: '#ecfdf5' } }
+])
+
+const dependencyEdges = ref<Edge[]>([
+  { id: 'e1', source: 'did', target: 'blockchain', animated: true },
+  { id: 'e2', source: 'iot', target: 'blockchain', animated: true },
+  { id: 'e3', source: 'model', target: 'iot', animated: true },
+  { id: 'e4', source: 'did', target: 'common', animated: true },
+  { id: 'e5', source: 'iot', target: 'common', animated: true },
+  { id: 'e6', source: 'blockchain', target: 'common', animated: true }
+])
+
+// ==================== 7. Database Schema ====================
+const databaseNodes = ref<Node[]>([
+  { id: 't1', type: 'custom', position: { x: 150, y: 80 }, data: { label: 'imbs_entity_type', fields: 'type_code, type_name', records: '6' } },
+  { id: 't2', type: 'custom', position: { x: 450, y: 80 }, data: { label: 'imbs_permission', fields: 'perm_code, desc', records: '24' } },
+  { id: 't3', type: 'custom', position: { x: 300, y: 200 }, data: { label: 'imbs_relationship', fields: 'parent_did, child_did', records: '120' } },
+  { id: 't4', type: 'custom', position: { x: 150, y: 320 }, data: { label: 'imbs_users', fields: 'did, name, pubkey', records: '52' } },
+  { id: 't5', type: 'custom', position: { x: 450, y: 320 }, data: { label: 'imbs_vc_anchor', fields: 'vc_id, vc_hash', records: '89' } },
+  { id: 't6', type: 'custom', position: { x: 300, y: 440 }, data: { label: 'imbs_vc_revocation', fields: 'vc_id, revoked_by', records: '3' } }
+])
+
+const databaseEdges = ref<Edge[]>([
+  // entity_type → users (类型关联)
+  { id: 'e1', source: 't1', target: 't4', label: 'entity_type_id', animated: true, style: { stroke: '#3b82f6' } },
+  // users → relationship (层级关系)
+  { id: 'e2', source: 't4', target: 't3', label: 'parent_did/child_did', style: { stroke: '#8b5cf6' } },
+  // users → vc_anchor (VC持有者)
+  { id: 'e3', source: 't4', target: 't5', label: 'subject_did', style: { stroke: '#f59e0b' } },
+  // users → permission (权限关联 - 通过 permission_codes JSON字段)
+  { id: 'e4', source: 't4', target: 't2', label: 'permission_codes → perm_code', style: { stroke: '#10b981', type: 'dashed' } },
+  // vc_anchor → vc_revocation (撤销记录)
+  { id: 'e5', source: 't5', target: 't6', label: 'vc_id', style: { stroke: '#ef4444' } }
+])
+
+// ==================== 8. API Gateway ====================
+const apiGatewayNodes = ref<Node[]>([
+  { id: 'client', type: 'custom', position: { x: 120, y: 100 }, data: { label: 'Client', icon: '🌐', count: '-', color: '#8b5cf6' } },
+  { id: 'gateway', type: 'custom', position: { x: 300, y: 100 }, data: { label: 'API Gateway', icon: '🚪', count: '-', color: '#3b82f6' } },
+  { id: 'did', type: 'custom', position: { x: 120, y: 250 }, data: { label: 'DID API', icon: '🆔', count: '15', color: '#10b981' } },
+  { id: 'iot', type: 'custom', position: { x: 300, y: 250 }, data: { label: 'IoT API', icon: '📡', count: '27', color: '#f59e0b' } },
+  { id: 'model', type: 'custom', position: { x: 480, y: 250 }, data: { label: 'Modeling API', icon: '📊', count: '6', color: '#ef4444' } },
+  { id: 'sse', type: 'custom', position: { x: 480, y: 100 }, data: { label: 'SSE Stream', icon: '📨', count: '-', color: '#06b6d4' } }
+])
+
+const apiGatewayEdges = ref<Edge[]>([
+  { id: 'e1', source: 'client', target: 'gateway', animated: true, label: 'Request' },
+  { id: 'e2', source: 'gateway', target: 'did', animated: true, label: 'Route' },
+  { id: 'e3', source: 'gateway', target: 'iot', animated: true, label: 'Route' },
+  { id: 'e4', source: 'gateway', target: 'model', animated: true, label: 'Route' },
+  { id: 'e5', source: 'gateway', target: 'sse', animated: true, label: 'Stream' }
+])
+
+// ==================== 9. Driver Architecture ====================
+const driverNodes = ref<Node[]>([
+  { id: 'registry', type: 'custom', position: { x: 300, y: 100 }, data: { label: 'Driver Registry', icon: '⚙️', status: 'Active', color: '#3b82f6', bg: '#eff6ff' } },
+  { id: 'mqtt', type: 'custom', position: { x: 100, y: 250 }, data: { label: 'MQTT Driver', icon: '📨', status: 'Connected', color: '#10b981', bg: '#ecfdf5' } },
+  { id: 'http', type: 'custom', position: { x: 300, y: 250 }, data: { label: 'HTTP Driver', icon: '🌐', status: 'Connected', color: '#f59e0b', bg: '#fffbeb' } },
+  { id: 'modbus', type: 'custom', position: { x: 500, y: 250 }, data: { label: 'Modbus Driver', icon: '🔧', status: 'Standby', color: '#ef4444', bg: '#fef2f2' } },
+  { id: 'field', type: 'custom', position: { x: 300, y: 400 }, data: { label: 'Field Mapping', icon: '🗺️', status: 'Active', color: '#8b5cf6', bg: '#f5f3ff' } }
+])
+
+const driverEdges = ref<Edge[]>([
+  { id: 'e1', source: 'registry', target: 'mqtt', animated: true },
+  { id: 'e2', source: 'registry', target: 'http', animated: true },
+  { id: 'e3', source: 'registry', target: 'modbus', animated: true },
+  { id: 'e4', source: 'mqtt', target: 'field', animated: true },
+  { id: 'e5', source: 'http', target: 'field', animated: true },
+  { id: 'e6', source: 'modbus', target: 'field', animated: true }
+])
+
+// ==================== 10. XGBoost Modeling ====================
+const modelingNodes = ref<Node[]>([
+  { id: 'csv', type: 'custom', position: { x: 100, y: 100 }, data: { label: 'CSV Data', icon: '📊', color: '#3b82f6' } },
+  { id: 'preprocess', type: 'custom', position: { x: 280, y: 100 }, data: { label: 'Preprocess', icon: '🔄', color: '#8b5cf6' } },
+  { id: 'train', type: 'custom', position: { x: 460, y: 100 }, data: { label: 'XGBoost Train', icon: '🤖', color: '#f59e0b' } },
+  { id: 'predict', type: 'custom', position: { x: 640, y: 100 }, data: { label: 'Predict', icon: '⚡', color: '#10b981' } },
+  { id: 'saving', type: 'custom', position: { x: 820, y: 100 }, data: { label: 'Savings', icon: '💰', color: '#ef4444' } }
+])
+
+const modelingEdges = ref<Edge[]>([
+  { id: 'e1', source: 'csv', target: 'preprocess', animated: true },
+  { id: 'e2', source: 'preprocess', target: 'train', animated: true },
+  { id: 'e3', source: 'train', target: 'predict', animated: true },
+  { id: 'e4', source: 'predict', target: 'saving', animated: true }
+])
+
+// ==================== Loading Animation ====================
+const startLoading = () => {
+  let progress = 0, msgIndex = 0
+  const msgInterval = setInterval(() => {
+    if (msgIndex < loadingMessages.length - 1) { msgIndex++; loadingMessage.value = loadingMessages[msgIndex] }
+  }, 800)
+  const progressInterval = setInterval(() => {
+    if (progress < 90) { progress += Math.random() * 10; loadingProgress.value = Math.min(progress, 90) }
+  }, 100)
+  setTimeout(() => {
+    clearInterval(msgInterval); clearInterval(progressInterval)
+    loadingProgress.value = 100; loadingMessage.value = 'Ready!'
+    setTimeout(() => { isPageLoaded.value = true }, 500)
+  }, 2500)
 }
 
-const handleImageError = () => {
-  imageErrors.value++
-  imagesLoadedCount.value++
-  updateLoadingProgress()
-}
-
-const startProgressSimulation = () => {
-  let progress = 0
-  progressInterval = setInterval(() => {
-    if (progress < 85 && imagesLoadedCount.value < totalImages) {
-      progress += Math.random() * 8 + 2
-      if (progress > 85) progress = 85
-      loadingProgress.value = progress
-    }
-  }, 200)
-}
-
-const startLoadingTimeout = () => {
-  loadingTimeout = setTimeout(() => {
-    if (imagesLoadedCount.value < totalImages) {
-      while (imagesLoadedCount.value < totalImages) imagesLoadedCount.value++
-      updateLoadingProgress()
-    }
-  }, 15000)
-}
-
-const preloadImages = () => {
-  Object.values(images.value).forEach((url) => {
-    const img = new window.Image()
-    img.src = url
-  })
-}
-
-// ============ Initialize - Start loading images in background ============
-onMounted(() => {
-  // Start loading images immediately regardless of auth
-  isLoadingImages.value = true
-  startProgressSimulation()
-  startLoadingTimeout()
-  preloadImages()
-})
-
-onUnmounted(() => {
-  if (loadingTimeout) clearTimeout(loadingTimeout)
-  if (progressInterval) clearInterval(progressInterval)
-})
-
-// ============ Data ============
-const layers = [
-  { name: 'Application Layer', description: 'Business logic for DID, IoT and AI modeling', icon: 'Monitor', color: '#10b981', techs: ['DID Service', 'IoT Service', 'Modeling'] },
-  { name: 'Web3 Integration', description: 'Unified blockchain interface and contract routing', icon: 'Connection', color: '#3b82f6', techs: ['Blockchain Entry', 'ContractManager', 'MiningScheduler'] },
-  { name: 'Blockchain Layer', description: 'Three-node Geth cluster with PoA consensus', icon: 'Link', color: '#f59e0b', techs: ['Node-1', 'Node-2', 'Node-3'] },
-  { name: 'Smart Contract', description: 'IBMSAnchor for immutable data anchoring', icon: 'Document', color: '#ef4444', techs: ['anchorEntity', 'anchorVC', 'Events'] }
-]
-
-const registrationSteps = [
-  { title: 'Submit Request', description: 'Administrator submits device information via REST API' },
-  { title: 'Generate Identity', description: 'DID module creates unique DID, keypair and VC' },
-  { title: 'Start Mining', description: 'MiningScheduler activates Geth nodes if idle' },
-  { title: 'Anchor on Chain', description: 'IBMSAnchor contract stores metadata hash' },
-  { title: 'Store Proof', description: 'Transaction hash saved to MySQL for audit trail' }
-]
-
-const registrationBenefits = [
-  { icon: '🆔', title: 'Universal Identity', description: 'Every entity gets a W3C-compliant DID that works across systems' },
-  { icon: '📜', title: 'Verifiable Credentials', description: 'VCs provide tamper-proof proof of identity and permissions' },
-  { icon: '⛓️', title: 'Immutable Record', description: 'All identity operations are permanently anchored on blockchain' },
-  { icon: '🔐', title: 'Self-Sovereign', description: 'Private keys controlled by entity owner, not central authority' }
-]
-
-const provenanceStages = [
-  { title: 'Data Ingestion', description: 'MQTT/HTTP data reception from IoT devices', icon: 'Download', type: 'ingest' },
-  { title: 'Standardization', description: 'Field mapping and data transformation', icon: 'Refresh', type: 'process' },
-  { title: 'Critical Check', description: 'Determine if data requires on-chain anchoring', icon: 'Warning', type: 'decision' },
-  { title: 'Hash & Anchor', description: 'SHA256 hash stored on IBMSAnchor contract', icon: 'Lock', type: 'blockchain' },
-  { title: 'Off-Chain Storage', description: 'Full time-series data saved to CSV', icon: 'Document', type: 'storage' },
-  { title: 'Real-time Push', description: 'SSE streams data to frontend dashboards', icon: 'Share', type: 'output' }
-]
-
-const techStack = [
-  { name: 'Geth', description: 'Go Ethereum client running private PoA network with three signer nodes', icon: 'Coin', version: 'v1.13.15', color: '#62688f' },
-  { name: 'Web3.py', description: 'Python library for blockchain interaction, transaction signing and event monitoring', icon: 'Connection', version: '7.15.0', color: '#3b82f6' },
-  { name: 'Clique PoA', description: 'Proof-of-Authority consensus with 5-second block time and no energy waste', icon: 'User', version: 'Clique', color: '#f59e0b' },
-  { name: 'IBMSAnchor', description: 'Custom Solidity contract for entity and VC hash anchoring', icon: 'Document', version: 'Solidity 0.8', color: '#ef4444' },
-  { name: 'MiningScheduler', description: 'Intelligent on-demand mining with 10-minute idle timeout', icon: 'Timer', version: 'Custom', color: '#8b5cf6' },
-  { name: 'DID Module', description: 'W3C DID standard implementation with VC/VP support', icon: 'Key', version: 'DID Core', color: '#06b6d4' }
-]
-
-const features = [
-  { title: 'Off-Chain First', description: 'High-frequency business logic stays off-chain for performance. Only cryptographic proofs are anchored on blockchain, reducing costs and latency.', icon: 'DataAnalysis', color: '#10b981' },
-  { title: 'On-Demand Mining', description: 'Mining nodes activate only when transactions exist and automatically stop after 10 minutes idle, saving server resources.', icon: 'Timer', color: '#f59e0b' },
-  { title: 'DID + VC Integration', description: 'Every device, user, and organization receives a unique DID and Verifiable Credential for trust establishment.', icon: 'Key', color: '#3b82f6' },
-  { title: 'Critical Data Anchoring', description: 'Selective on-chain storage for alarms, threshold breaches, and compliance-critical data enables audit trails.', icon: 'Lock', color: '#ef4444' },
-  { title: 'Hybrid Storage Architecture', description: 'MySQL for metadata, CSV for time-series data, Blockchain for immutable proofs — each optimized for its purpose.', icon: 'Coin', color: '#8b5cf6' },
-  { title: 'Complete Audit Trail', description: 'All on-chain events are queryable via smart contract logs, providing full transaction history.', icon: 'Guide', color: '#06b6d4' }
-]
+onMounted(() => { startLoading() })
 </script>
 
 <style scoped>
-/* ==================== Auth Screen Styles ==================== */
-.auth-container {
+/* ==================== Key Verification ==================== */
+.key-verify-container {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, #0a0b0f 0%, #1a1d2e 100%);
-  z-index: 10000;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  z-index: 9999;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
-.auth-overlay {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  backdrop-filter: blur(2px);
-}
-
-.auth-content {
+.key-verify-card {
   text-align: center;
   padding: 48px;
   border-radius: 32px;
   background: rgba(15, 23, 42, 0.8);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(59, 130, 246, 0.3);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-  animation: fadeInUp 0.6s ease-out;
-  min-width: 380px;
+  max-width: 480px;
+  width: 90%;
 }
+.key-verify-icon { font-size: 64px; margin-bottom: 20px; }
+.key-verify-card h2 { font-size: 28px; font-weight: 700; color: #fff; margin-bottom: 12px; }
+.key-verify-card p { color: #94a3b8; font-size: 14px; margin-bottom: 32px; }
+.key-input-wrapper { display: flex; gap: 12px; margin-bottom: 20px; }
+.key-input { flex: 1; }
+.key-input :deep(.el-input__wrapper) { background: rgba(255,255,255,0.1); border-color: rgba(59,130,246,0.3); box-shadow: none; }
+.key-input :deep(.el-input__inner) { color: #fff; }
+.key-error { color: #f56c6c; font-size: 13px; display: flex; align-items: center; justify-content: center; gap: 6px; }
 
-.auth-icon {
-  font-size: 56px;
-  margin-bottom: 20px;
-}
-
-.auth-title {
-  font-size: 28px;
-  font-weight: 700;
-  color: #e2e8f0;
-  margin-bottom: 12px;
-}
-
-.auth-desc {
-  font-size: 14px;
-  color: #94a3b8;
-  margin-bottom: 32px;
-}
-
-.auth-input-group {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 20px;
-}
-
-.auth-input {
-  flex: 1;
-  padding: 14px 18px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  color: #e2e8f0;
-  font-size: 14px;
-  outline: none;
-  transition: all 0.2s;
-}
-
-.auth-input:focus {
-  border-color: #3b82f6;
-  background: rgba(59, 130, 246, 0.05);
-}
-
-.auth-input::placeholder {
-  color: #64748b;
-}
-
-.auth-btn {
-  padding: 14px 28px;
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-  border: none;
-  border-radius: 12px;
-  color: white;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: opacity 0.2s;
-}
-
-.auth-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.auth-btn:hover:not(:disabled) {
-  opacity: 0.85;
-}
-
-.auth-error {
-  color: #ef4444;
-  font-size: 13px;
-  margin-top: 12px;
-}
-
-.auth-loading {
-  margin-top: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.loading-dot {
-  width: 6px;
-  height: 6px;
-  background: #3b82f6;
-  border-radius: 50%;
-  animation: dotPulse 1.4s infinite ease-in-out;
-}
-
-.loading-dot:nth-child(1) { animation-delay: 0s; }
-.loading-dot:nth-child(2) { animation-delay: 0.2s; }
-.loading-dot:nth-child(3) { animation-delay: 0.4s; }
-
-@keyframes dotPulse {
-  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
-  40% { transform: scale(1); opacity: 1; }
-}
-
-.loading-text {
-  font-size: 12px;
-  color: #64748b;
-  margin-left: 8px;
-}
-
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ==================== Your Original Styles Below ==================== */
-/* ==================== Reset & Base ==================== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-}
-
-.web3-intro-page {
-  min-height: 100vh;
-  background: #0a0b0f;
-  color: #e5e7eb;
-}
-
-.container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 40px;
-}
-
-/* ==================== Loading ==================== */
 /* ==================== Loading Screen ==================== */
 .loading-container {
   position: fixed;
@@ -728,17 +876,6 @@ body {
   justify-content: center;
   align-items: center;
 }
-
-.loading-overlay {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  backdrop-filter: blur(2px);
-}
-
 .loading-content {
   text-align: center;
   padding: 40px;
@@ -746,964 +883,161 @@ body {
   background: rgba(15, 23, 42, 0.6);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(59, 130, 246, 0.3);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   animation: fadeInUp 0.6s ease-out;
 }
+.loading-spinner { position: relative; width: 80px; height: 80px; margin: 0 auto 24px; }
+.spinner-ring { position: absolute; width: 100%; height: 100%; border-radius: 50%; border: 3px solid transparent; animation: spin 1.5s infinite; }
+.spinner-ring:nth-child(1) { border-top-color: #3b82f6; }
+.spinner-ring:nth-child(2) { border-right-color: #f59e0b; width: 70%; height: 70%; top: 15%; left: 15%; animation-delay: 0.2s; }
+.spinner-ring:nth-child(3) { border-bottom-color: #10b981; width: 40%; height: 40%; top: 30%; left: 30%; animation-delay: 0.4s; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+.loading-text { margin-bottom: 24px; font-size: 28px; font-weight: 700; color: #e2e8f0; display: flex; justify-content: center; gap: 4px; }
+.loading-dots { display: inline-flex; gap: 2px; }
+.loading-dots span { animation: bounce 1.4s infinite; }
+@keyframes bounce { 0%,80%,100% { transform: scale(0); opacity: 0.3; } 40% { transform: scale(1); opacity: 1; } }
+.loading-progress { width: 280px; height: 4px; background: rgba(255,255,255,0.1); border-radius: 4px; margin: 0 auto 16px; overflow: hidden; }
+.progress-bar { height: 100%; background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec489a); transition: width 0.3s; }
+.loading-tip { font-size: 13px; color: #94a3b8; margin-bottom: 8px; }
+.loading-subtip { font-size: 11px; color: #64748b; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100% { opacity: 0.6; } 50% { opacity: 1; } }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-.loading-spinner {
-  position: relative;
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 24px;
-}
+/* ==================== Main Content ==================== */
+.introduction-page { background: #f5f7fa; min-height: 100vh; padding: 24px; }
+.page-container { max-width: 1400px; margin: 0 auto; }
 
-.spinner-ring {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  border: 3px solid transparent;
-  animation: spin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
-}
-
-.spinner-ring:nth-child(1) {
-  border-top-color: #3b82f6;
-  animation-delay: 0s;
-}
-
-.spinner-ring:nth-child(2) {
-  border-right-color: #f59e0b;
-  animation-delay: 0.2s;
-  width: 70%;
-  height: 70%;
-  top: 15%;
-  left: 15%;
-}
-
-.spinner-ring:nth-child(3) {
-  border-bottom-color: #10b981;
-  animation-delay: 0.4s;
-  width: 40%;
-  height: 40%;
-  top: 30%;
-  left: 30%;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.loading-text {
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  border-radius: 24px;
+  padding: 48px 32px;
   margin-bottom: 24px;
-  font-size: 28px;
-  font-weight: 700;
-  color: #e2e8f0;
-  display: flex;
-  justify-content: center;
-  align-items: baseline;
-  gap: 4px;
-}
-
-.loading-dots {
-  display: inline-flex;
-  gap: 2px;
-}
-
-.loading-dots span {
-  animation: bounce 1.4s infinite ease-in-out both;
-}
-
-.loading-dots span:nth-child(1) { animation-delay: -0.32s; }
-.loading-dots span:nth-child(2) { animation-delay: -0.16s; }
-
-@keyframes bounce {
-  0%, 80%, 100% { transform: scale(0); opacity: 0.3; }
-  40% { transform: scale(1); opacity: 1; }
-}
-
-.loading-progress {
-  width: 280px;
-  height: 4px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-  overflow: hidden;
-  margin: 0 auto 16px;
-}
-
-.progress-bar {
-  height: 100%;
-  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec489a);
-  border-radius: 4px;
-  transition: width 0.3s ease;
-  background-size: 200% auto;
-  animation: shimmer 2s linear infinite;
-}
-
-@keyframes shimmer {
-  0% { background-position: 0% 0%; }
-  100% { background-position: 200% 0%; }
-}
-
-.loading-tip {
-  font-size: 13px;
-  color: #94a3b8;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
-  font-weight: 500;
-}
-
-.loading-subtip {
-  font-size: 11px;
-  color: #64748b;
-  letter-spacing: 0.5px;
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 0.6; }
-  50% { opacity: 1; }
-}
-
-/* ==================== Navigation ==================== */
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: rgba(10, 11, 15, 0.95);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  z-index: 100;
-  padding: 16px 0;
-}
-
-.nav-container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.nav-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 20px;
-  font-weight: 700;
-}
-
-.logo-icon {
-  font-size: 24px;
-}
-
-.logo-text {
-  background: linear-gradient(135deg, #e5e7eb, #9ca3af);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.logo-web3 {
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.nav-links {
-  display: flex;
-  gap: 32px;
-}
-
-.nav-links a {
-  color: #9ca3af;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 500;
-  transition: color 0.2s;
-}
-
-.nav-links a:hover {
-  color: #e5e7eb;
-}
-
-.btn-primary {
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-  border: none;
-  color: white;
-  padding: 8px 20px;
-  border-radius: 30px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: opacity 0.2s;
-}
-
-.btn-primary:hover {
-  opacity: 0.85;
-}
-
-/* ==================== Hero ==================== */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(ellipse at 30% 40%, rgba(59,130,246,0.12), transparent 60%),
-  radial-gradient(ellipse at 70% 60%, rgba(139,92,246,0.08), transparent 60%);
-  pointer-events: none;
-}
-
-.hero-container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 40px;
-  position: relative;
-  z-index: 1;
-}
-
-.hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(59,130,246,0.12);
-  border: 1px solid rgba(59,130,246,0.2);
-  border-radius: 40px;
-  padding: 6px 16px;
-  font-size: 13px;
-  margin-bottom: 32px;
-}
-
-.badge-dot {
-  width: 6px;
-  height: 6px;
-  background: #3b82f6;
-  border-radius: 50%;
-  animation: pulse 2s infinite;
-}
-
-.hero-title {
-  font-size: 56px;
-  font-weight: 700;
-  line-height: 1.2;
-  margin-bottom: 24px;
-}
-
-.gradient-text {
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec489a);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.hero-description {
-  font-size: 18px;
-  color: #9ca3af;
-  line-height: 1.6;
-  max-width: 600px;
-  margin-bottom: 48px;
-}
-
-.hero-stats {
-  display: flex;
-  gap: 48px;
-  flex-wrap: wrap;
-}
-
-.stat {
-  display: flex;
-  flex-direction: column;
-}
-
-.stat-number {
-  font-size: 32px;
-  font-weight: 700;
-  background: linear-gradient(135deg, #e5e7eb, #9ca3af);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.stat-label {
-  font-size: 13px;
-  color: #ffffff;
-  margin-top: 4px;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(1.2); }
-}
-
-/* ==================== Sections ==================== */
-.section {
-  padding: 20px 0;
-  border-top: 1px solid rgba(255,255,255,0.05);
-}
-
-.section-header {
   text-align: center;
-  max-width: 700px;
-  margin: 0 auto 60px;
 }
-
-.section-tag {
-  display: inline-block;
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  margin-bottom: 16px;
-}
-
-.section-title {
-  font-size: 40px;
-  font-weight: 700;
-  margin-bottom: 20px;
-}
-
-.section-desc {
-  font-size: 16px;
-  color: #9ca3af;
-  line-height: 1.6;
-}
-
-/* Architecture Grid */
-.architecture-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  margin-bottom: 60px;
-}
-
-.arch-card {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.05);
-  border-radius: 20px;
-  padding: 24px;
-  transition: all 0.3s;
-}
-
-.arch-card:hover {
-  border-color: rgba(59,130,246,0.3);
-  transform: translateY(-4px);
-}
-
-.arch-card-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.arch-card-icon .el-icon {
-  font-size: 24px;
-  color: white;
-}
-
-.arch-card h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.arch-card p {
-  font-size: 13px;
-  color: #9ca3af;
-  line-height: 1.5;
-  margin-bottom: 16px;
-}
-
-.arch-card-techs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.arch-card-techs span {
-  font-size: 11px;
-  padding: 3px 10px;
-  background: rgba(255,255,255,0.05);
-  border-radius: 20px;
-  color: #ffffff;
-}
-
-/* Image Wrapper */
-.architecture-image-wrapper,
-.flow-image-wrapper {
-  margin: 60px 0;
-}
-
-.image-label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 20px;
-  font-size: 13px;
-  color: #9ca3af;
-}
-
-.label-icon {
-  font-size: 16px;
-}
-
-.architecture-image,
-.flow-image {
-  width: 100%;
-  height: auto;
-  border-radius: 20px;
-  border: 1px solid rgba(255,255,255,0.08);
-  background: #0d0e12;
-}
-
-/* Architecture Explanation */
-.architecture-explanation {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-  margin-top: 40px;
-}
-
-.exp-item {
-  display: flex;
-  gap: 16px;
-  padding: 20px;
-  background: rgba(255,255,255,0.02);
-  border-radius: 16px;
-}
-
-.exp-icon {
-  font-size: 28px;
-}
-
-.exp-content h4 {
-  font-size: 16px;
-  margin-bottom: 8px;
-}
-
-.exp-content p {
-  font-size: 13px;
-  color: #9ca3af;
-  line-height: 1.5;
-}
-
-/* Flow Steps */
-.flow-visual {
-  margin-bottom: 60px;
-}
-
-.flow-steps-horizontal {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  padding-left: 100px;
-  padding-right: 100px;
-  position: relative;
-}
-
-.step-circle {
-  width: 40px;
-  height: 40px;
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  position: relative;
-  z-index: 2;
-}
-
-.step-connector {
-  flex: 1;
-  height: 2px;
-  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-  margin-top: 19px;
-}
-
-.flow-details {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 16px;
-}
-
-.flow-detail-card {
-  text-align: center;
-  padding: 20px;
-  background: rgba(255,255,255,0.02);
-  border-radius: 16px;
-}
-
-.detail-number {
-  width: 28px;
-  height: 28px;
-  background: rgba(59,130,246,0.2);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: 600;
-  margin: 0 auto 12px;
-}
-
-.flow-detail-card h4 {
-  font-size: 14px;
-  margin-bottom: 8px;
-}
-
-.flow-detail-card p {
-  font-size: 11px;
-  color: #9ca3af;
-  line-height: 1.4;
-}
-
-/* Registration Benefits */
-.registration-benefits {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  margin-top: 40px;
-}
-
-.benefit {
-  text-align: center;
-  padding: 24px;
-  background: rgba(255,255,255,0.02);
-  border-radius: 20px;
-}
-
-.benefit-icon {
-  font-size: 36px;
-  margin-bottom: 16px;
-}
-
-.benefit h4 {
-  font-size: 16px;
-  margin-bottom: 8px;
-}
-
-.benefit p {
-  font-size: 13px;
-  color: #9ca3af;
-  line-height: 1.5;
-}
-
-/* Provenance Pipeline */
-.provenance-pipeline {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 60px;
-}
-
-.pipeline-stage {
-  flex: 1;
-  min-width: 150px;
-  text-align: center;
-  position: relative;
-}
-
-.stage-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 16px;
-}
-
-.stage-icon .el-icon {
-  font-size: 26px;
-  color: white;
-}
-
-.stage-icon.ingest { background: linear-gradient(135deg, #3b82f6, #2563eb); }
-.stage-icon.process { background: linear-gradient(135deg, #f59e0b, #d97706); }
-.stage-icon.decision { background: linear-gradient(135deg, #ef4444, #dc2626); }
-.stage-icon.blockchain { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
-.stage-icon.storage { background: linear-gradient(135deg, #10b981, #059669); }
-.stage-icon.output { background: linear-gradient(135deg, #06b6d4, #0891b2); }
-
-.pipeline-stage h4 {
-  font-size: 14px;
-  margin-bottom: 6px;
-}
-
-.pipeline-stage p {
-  font-size: 11px;
-  color: #9ca3af;
-}
-
-.stage-arrow {
-  position: absolute;
-  right: -20px;
-  top: 20px;
-  color: #2a2a35;
-}
-
-/* Provenance Features */
-.provenance-features {
-  display: flex;
-  justify-content: center;
-  gap: 48px;
-  margin-top: 48px;
-  flex-wrap: wrap;
-}
-
-.p-feature {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.p-feature-icon {
-  font-size: 34px;
-  margin-bottom: 10px;
-}
-
-.p-feature-text {
-  display: flex;
-  flex-direction: column;
-}
-
-.p-feature-text strong {
-  font-size: 16px;
-  margin-bottom: 4px;
-}
-
-.p-feature-text span {
-  font-size: 14px;
-  color: #9ca3af;
-}
-
-/* Tech Showcase */
-.tech-showcase {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.tech-showcase-item {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  padding: 20px;
-  background: rgba(255,255,255,0.02);
-  border-radius: 16px;
-  transition: all 0.3s;
-}
-
-.tech-showcase-item:hover {
-  background: rgba(255,255,255,0.04);
-}
-
-.tech-showcase-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.tech-showcase-icon .el-icon {
-  font-size: 28px;
-  color: white;
-}
-
-.tech-showcase-info {
-  flex: 1;
-}
-
-.tech-showcase-info h3 {
-  font-size: 18px;
-  margin-bottom: 6px;
-}
-
-.tech-showcase-info p {
-  font-size: 14px;
-  color: #9ca3af;
-  line-height: 1.5;
-}
-
-.tech-version {
-  display: inline-block;
-  margin-top: 8px;
-  font-size: 13px;
-  font-family: monospace;
-  color: #60a5fa;
-  background: rgba(59,130,246,0.15);
-  padding: 3px 10px;
-  border-radius: 20px;
-}
-
-/* Features Grid */
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-
-.feature-card {
-  padding: 28px;
-  background: rgba(255,255,255,0.02);
-  border: 1px solid rgba(255,255,255,0.05);
-  border-radius: 20px;
-  transition: all 0.3s;
-}
-
-.feature-card:hover {
-  border-color: rgba(59,130,246,0.3);
-  transform: translateY(-4px);
-}
-
-.feature-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-  font-size: 26px;
-}
-
-.feature-card h3 {
-  font-size: 18px;
-  margin-bottom: 12px;
-}
-
-.feature-card p {
-  font-size: 14px;
-  color: #9ca3af;
-  line-height: 1.6;
-}
-
-/* CTA Section */
-.cta-section {
-  background: linear-gradient(135deg, rgba(59,130,246,0.08), rgba(139,92,246,0.08));
-  border-top: 1px solid rgba(255,255,255,0.05);
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  padding: 80px 0;
-  text-align: center;
-  margin-top: 30px;
-}
-
-.cta-content h2 {
-  font-size: 32px;
-  margin-bottom: 16px;
-}
-
-.cta-content p {
-  font-size: 16px;
-  color: #9ca3af;
-  margin-bottom: 32px;
-}
-
-.cta-buttons {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-}
-
-.btn-primary-large {
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-  border: none;
-  color: white;
-  padding: 12px 32px;
-  border-radius: 40px;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: opacity 0.2s;
-}
-
-.btn-secondary {
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.2);
-  color: #e5e7eb;
-  padding: 12px 32px;
-  border-radius: 40px;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.btn-secondary:hover {
-  border-color: #3b82f6;
-  color: #3b82f6;
-}
-
-/* Footer */
-.footer {
-  padding: 60px 0 30px;
-  background: #0a0b0f;
-}
-
-.footer-content {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 40px;
-  margin-bottom: 40px;
-}
-
-.footer-logo span {
-  font-size: 20px;
-  font-weight: 700;
-}
-
-.footer-web3 {
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.footer-logo p {
-  font-size: 12px;
-  color: #9ca3af;
-  margin-top: 8px;
-}
-
-.footer-links {
-  display: flex;
-  gap: 60px;
-  flex-wrap: wrap;
-}
-
-.footer-col h4 {
-  font-size: 14px;
-  margin-bottom: 16px;
-}
-
-.footer-col a {
-  display: block;
-  font-size: 13px;
-  color: #9ca3af;
-  color: #9ca3af;
-  text-decoration: none;
-  margin-bottom: 10px;
-  transition: color 0.2s;
-}
-
-.footer-col a:hover {
-  color: #e5e7eb;
-}
-
-.footer-bottom {
-  text-align: center;
-  padding-top: 30px;
-  border-top: 1px solid rgba(255,255,255,0.05);
-}
-
-.footer-bottom p {
-  font-size: 12px;
-  color: #9ca3af;
-}
+.hero-badge { display: inline-block; padding: 4px 12px; background: rgba(59,130,246,0.2); border-radius: 20px; font-size: 12px; color: #60a5fa; margin-bottom: 16px; }
+.hero-section h1 { font-size: 36px; font-weight: 700; color: #fff; margin-bottom: 12px; }
+.hero-subtitle { font-size: 16px; color: #a0aec0; margin-bottom: 32px; }
+.hero-stats { display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; }
+.hero-stat { text-align: center; }
+.hero-stat .stat-number { display: block; font-size: 32px; font-weight: 700; color: #60a5fa; }
+.hero-stat .stat-label { font-size: 12px; color: #94a3b8; }
+
+/* Section Card */
+.section-card { background: #fff; border-radius: 20px; padding: 24px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+.section-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+.section-icon { font-size: 28px; }
+.section-header h2 { font-size: 20px; font-weight: 600; color: #1e293b; margin: 0; }
+.section-desc { font-size: 13px; color: #64748b; margin-top: 4px; max-width: 600px; }
+
+
+
+
+
+/* Topology Containers */
+.topology-container { height: 560px; width: 100%; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 16px; overflow: hidden; margin-bottom: 16px; border: 1px solid #e2e8f0; }
+.vue-flow-wrapper { width: 100%; height: 100%; }
+
+/* Node Styles */
+.arch-node { width: 160px; padding: 12px; background: #ffffff; border-radius: 12px; text-align: center; border-left: 4px solid; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+.arch-node-icon { font-size: 28px; margin-bottom: 6px; }
+.arch-node-name { font-size: 14px; font-weight: 700; color: #1e293b; }
+.arch-node-desc { font-size: 10px; color: #64748b; margin-top: 4px; }
+.arch-node-tech { font-size: 9px; color: #94a3b8; margin-top: 4px; }
+
+.blockchain-node { width: 130px; padding: 10px; background: #ffffff; border-radius: 12px; text-align: center; border: 2px solid #52c41a; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+.blockchain-node .node-icon { font-size: 24px; margin-bottom: 6px; }
+.blockchain-node .node-name { font-size: 12px; font-weight: 700; color: #1e293b; }
+.blockchain-node .node-ports { font-size: 9px; color: #64748b; margin: 4px 0; }
+.node-status-badge { font-size: 9px; padding: 2px 6px; border-radius: 12px; display: inline-block; }
+.node-status-badge.online { color: #52c41a; background: #f6ffed; }
+.node-balance { font-size: 9px; color: #f59e0b; margin-top: 4px; }
+
+.did-blockchain-node { width: 150px; padding: 12px; background: #ffffff; border-radius: 12px; text-align: center; border-left: 4px solid; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+.dataflow-node { width: 120px; padding: 12px; border-radius: 12px; text-align: center; color: white; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+.mining-node { width: 140px; padding: 12px; border-radius: 12px; text-align: center; color: white; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+.mining-node.idle { background: #64748b; }
+.mining-node.trigger { background: #f59e0b; }
+.mining-node.active { background: #10b981; animation: pulse 1.5s infinite; }
+.mining-node.timer { background: #3b82f6; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.7; } }
+
+.dependency-node { width: 140px; padding: 12px; background: #ffffff; border-radius: 12px; text-align: center; border-left: 4px solid; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+.dependency-node .node-files { font-size: 10px; color: #64748b; margin-top: 4px; }
+.dependency-node .node-desc-small { font-size: 9px; color: #64748b; margin-top: 4px; }
+
+.database-node { width: 160px; padding: 10px; background: #ffffff; border-radius: 8px; text-align: center; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.db-icon { font-size: 20px; margin-bottom: 4px; }
+.db-name { font-size: 11px; font-weight: 600; font-family: monospace; color: #3b82f6; }
+.db-fields { font-size: 9px; color: #64748b; margin-top: 4px; }
+.db-records { font-size: 9px; color: #10b981; margin-top: 2px; }
+
+.api-node { width: 130px; padding: 12px; border-radius: 12px; text-align: center; color: white; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+.api-icon { font-size: 24px; margin-bottom: 6px; }
+.api-name { font-size: 12px; font-weight: 600; }
+.api-count { font-size: 10px; opacity: 0.8; margin-top: 4px; }
+
+.driver-node { width: 140px; padding: 12px; background: #ffffff; border-radius: 12px; text-align: center; border-left: 4px solid; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+.driver-icon { font-size: 28px; margin-bottom: 6px; }
+.driver-name { font-size: 13px; font-weight: 600; color: #1e293b; }
+.driver-status { font-size: 9px; color: #52c41a; margin-top: 4px; }
+
+.modeling-node { width: 130px; padding: 12px; border-radius: 12px; text-align: center; color: white; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+.node-icon { font-size: 24px; margin-bottom: 6px; }
+.node-name { font-size: 12px; font-weight: 600; }
+.node-desc { font-size: 10px; opacity: 0.9; margin-top: 4px; }
+.node-tech { font-size: 9px; opacity: 0.7; margin-top: 4px; }
+
+/* Detail Sections */
+.blockchain-details, .dataflow-stats, .mining-stats, .table-stats { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 16px; padding: 12px; background: #f8fafc; border-radius: 12px; }
+.detail-item, .stat-item, .stat-card-mini, .table-stat { font-size: 12px; color: #475569; }
+.detail-label, .stat-item span, .stat-card-mini span, .table-stat span { font-weight: 600; color: #1e293b; margin-right: 8px; }
+
+.did-features { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 16px; }
+.did-feature-item { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: #f8fafc; border-radius: 8px; font-size: 12px; }
+.did-feature-icon { font-size: 18px; }
+.did-feature-item code { background: #e2e8f0; padding: 2px 6px; border-radius: 4px; font-size: 11px; }
+
+.field-mapping-table, .prediction-table { margin-top: 16px; }
+.table-title { font-size: 13px; font-weight: 600; color: #1e293b; margin-bottom: 12px; }
+:deep(.el-table) { font-size: 12px; }
+:deep(.el-table th) { background: #f8fafc; }
+
+/* Core Concepts */
+.concepts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.concept-card { background: #f8fafc; border-radius: 16px; padding: 16px; display: flex; gap: 14px; cursor: pointer; transition: all 0.3s; border: 1px solid #e2e8f0; }
+.concept-card:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); border-color: #3b82f6; }
+.concept-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: white; }
+.concept-info h3 { font-size: 14px; font-weight: 600; color: #1e293b; margin: 0 0 4px; }
+.concept-info p { font-size: 11px; color: #64748b; margin: 0 0 6px; }
+.concept-link { font-size: 11px; color: #3b82f6; font-weight: 500; }
+
+/* FAQ */
+.faq-title { font-weight: 500; color: #1e293b; }
+.faq-answer { color: #475569; font-size: 13px; line-height: 1.5; padding: 8px 0; }
+
+/* Feedback Card */
+.feedback-card { background: linear-gradient(135deg, #3b82f6, #8b5cf6); border-radius: 20px; padding: 28px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+.feedback-icon { font-size: 48px; }
+.feedback-content h3 { font-size: 20px; font-weight: 600; color: white; margin: 0 0 6px; }
+.feedback-content p { color: rgba(255,255,255,0.8); font-size: 13px; margin-bottom: 14px; }
+.feedback-content .el-button { background: white; color: #3b82f6; border: none; }
+
+/* VueFlow Overrides */
+:deep(.vue-flow__edge-path) { stroke-dasharray: 5; }
+:deep(.vue-flow__edge-label) { font-size: 10px; fill: #fff; background: #1890ff; padding: 2px 8px; border-radius: 12px; }
 
 /* Responsive */
 @media (max-width: 1024px) {
-  .architecture-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .flow-details {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  }
-
-  .registration-benefits {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .features-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .hero-title {
-    font-size: 42px;
-  }
-
-  .section-title {
-    font-size: 32px;
-  }
+  .concepts-grid { grid-template-columns: repeat(2, 1fr); }
+  .topology-container { height: 500px; }
 }
-
 @media (max-width: 768px) {
-  .nav-links {
-    display: none;
-  }
-
-  .container {
-    padding: 0 24px;
-  }
-
-  .architecture-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .architecture-explanation {
-    grid-template-columns: 1fr;
-  }
-
-  .registration-benefits {
-    grid-template-columns: 1fr;
-  }
-
-  .features-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .provenance-pipeline {
-    flex-direction: column;
-  }
-
-  .stage-arrow {
-    display: none;
-  }
-
-  .hero-title {
-    font-size: 32px;
-  }
-
-  .hero-stats {
-    gap: 24px;
-  }
-
-  .hero-stat {
-    font-size: 24px;
-  }
-
-  .section-title {
-    font-size: 28px;
-  }
-
-  .cta-buttons {
-    flex-direction: column;
-    align-items: center;
-  }
+  .introduction-page { padding: 16px; }
+  .hero-section { padding: 32px 20px; }
+  .hero-section h1 { font-size: 24px; }
+  .hero-stats { gap: 24px; }
+  .concepts-grid { grid-template-columns: 1fr; }
+  .topology-container { height: 400px; }
+  .section-header { flex-direction: column; }
 }
 </style>
