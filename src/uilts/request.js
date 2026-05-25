@@ -1,20 +1,92 @@
+// src/utils/request.js
 import axios from 'axios'
+import { ElMessage } from 'element-plus'
+
+const BASE_URL = 'https://ibms.aegisnx.com/api'  // 替换为你的实际后端地址
 
 const service = axios.create({
-    baseURL: '/api',
-    timeout: 10000
+    baseURL: BASE_URL,
+    timeout: 120000
 })
 
-// 请求拦截
+// 请求拦截器
 service.interceptors.request.use(
-    config => config,
-    error => Promise.reject(error)
+    (config) => {
+        const token = localStorage.getItem('token')
+        if (token) {
+            config.headers = {
+                ...config.headers,
+                'Authorization': `Bearer ${token}`
+            }
+        }
+        return config
+    },
+    (error) => {
+        return Promise.reject(error)
+    }
 )
 
-// 响应拦截
+// 响应拦截器
 service.interceptors.response.use(
-    res => res.data,
-    error => Promise.reject(error)
+    (response) => {
+        const { status, data } = response
+
+        if (status === 200) {
+            if (data.code === 200) {
+                return data.data
+            } else {
+                const msg = data.message || '请求失败'
+                ElMessage.error(msg)
+                return Promise.reject(new Error(msg))
+            }
+        } else if (status === 401) {
+            localStorage.removeItem('token')
+            window.location.href = '/login'
+            return Promise.reject(new Error('登录已过期'))
+        } else {
+            const msg = '网络异常，请稍后重试'
+            ElMessage.error(msg)
+            return Promise.reject(new Error(msg))
+        }
+    },
+    (error) => {
+        const msg = error.message || '网络连接失败'
+        ElMessage.error(msg)
+        return Promise.reject(error)
+    }
 )
+
+// 封装请求方法
+export const get = (url, params = {}) => {
+    return service({
+        url,
+        method: 'GET',
+        params
+    })
+}
+
+export const post = (url, data = {}) => {
+    return service({
+        url,
+        method: 'POST',
+        data
+    })
+}
+
+export const put = (url, data = {}) => {
+    return service({
+        url,
+        method: 'PUT',
+        data
+    })
+}
+
+export const del = (url, params = {}) => {
+    return service({
+        url,
+        method: 'DELETE',
+        params
+    })
+}
 
 export default service
