@@ -80,6 +80,12 @@ const routes = [
             meta: { title: 'Protocol Hub' }
           },
           {
+            path: 'cctv',
+            name: 'DeviceCCTV',
+            component: () => import('../views/Device/DeviceCCTV.vue'),
+            meta: { title: 'DeviceCCTV Management' }
+          },
+          {
             path: 'hvac',
             name: 'DeviceHVAC',
             component: () => import('../views/Device/DeviceHVAC.vue'),
@@ -339,12 +345,6 @@ const routes = [
             meta: { title: 'Carbon Reports' }
           }
         ]
-      },
-      {
-        path: 'report',
-        name: 'Report',
-        component: () => import('../views/Report/Report.vue'),
-        meta: { title: 'Data Reports' }
       },
       {
         path: 'support',

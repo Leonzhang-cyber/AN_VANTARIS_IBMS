@@ -621,6 +621,7 @@ const menuConfig = ref([
     children: [
       { index: '/device/area-topology', title: 'Area Topology' },
       { index: '/device/protocol', title: 'Protocol Hub' },
+      { index: '/device/cctv', title: 'CCTV' },
       { index: '/device/hvac', title: 'HVAC' },
       { index: '/device/access', title: 'Access' },
       { index: '/device/sas', title: 'SAS (Security)' },
