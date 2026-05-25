@@ -321,6 +321,12 @@ const routes = [
         redirect: '/report/energy',
         children: [
           {
+            path: 'data',
+            name: 'Data Reports',
+            component: () => import('../views/Report/Report.vue'),
+            meta: { title: 'Data Reports' }
+          },
+          {
             path: 'energy',
             name: 'Energy Reports',
             component: () => import('../views/Report/Energy.vue'),

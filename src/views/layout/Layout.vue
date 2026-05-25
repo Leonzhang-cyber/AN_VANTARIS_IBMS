@@ -706,9 +706,10 @@ const menuConfig = ref([
   },
   {
     index: '/report',
-    title: 'Data Reports',
+    title: 'Reports',
     icon: 'Reading',
     children: [
+      { index: '/report/data', title: 'Data Reports' },
       { index: '/report/energy', title: 'Energy Reports' },
       { index: '/report/device', title: 'Device Reports' },
       { index: '/report/maintenance', title: 'Maintenance Reports' },
