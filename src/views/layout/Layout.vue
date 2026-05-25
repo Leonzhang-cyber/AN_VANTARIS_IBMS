@@ -64,7 +64,7 @@
     </el-aside>
 
     <el-container class="main-container">
-      <!-- 顶部栏（保持原有代码不变） -->
+      <!-- 顶部栏 -->
       <el-header
           class="header-bar"
           :style="{
@@ -299,6 +299,68 @@
             </el-dropdown>
           </template>
 
+          <!-- 版本切换下拉按钮组 -->
+          <template v-if="!isMobile">
+            <el-dropdown trigger="click" @command="handleVersionChange" class="version-dropdown">
+              <el-button size="small" class="version-btn pill-btn">
+                <span class="version-icon">🏷️</span>
+                <span class="version-text">{{ currentVersionFullName }}</span>
+                <el-icon class="el-icon--right"><ArrowDown /></el-icon>
+              </el-button>
+              <template #dropdown>
+                <el-dropdown-menu class="version-dropdown-menu">
+                  <div class="version-dropdown-header">
+                    <span>Select Edition</span>
+                  </div>
+
+                  <el-dropdown-item command="essential" class="version-item" :class="{ 'active-version': menuVersion === 'essential' }">
+                    <div class="version-item-content">
+                      <span class="version-item-icon">📊</span>
+                      <div class="version-item-info">
+                        <span class="version-item-title">Essential</span>
+                        <span class="version-item-desc">Core device management & administration</span>
+                      </div>
+                      <span class="version-item-badge" v-if="menuVersion === 'essential'">✓</span>
+                    </div>
+                  </el-dropdown-item>
+
+                  <el-dropdown-item command="professional" class="version-item" :class="{ 'active-version': menuVersion === 'professional' }">
+                    <div class="version-item-content">
+                      <span class="version-item-icon">🚀</span>
+                      <div class="version-item-info">
+                        <span class="version-item-title">Professional</span>
+                        <span class="version-item-desc">Alarm, maintenance, reports & API</span>
+                      </div>
+                      <span class="version-item-badge" v-if="menuVersion === 'professional'">✓</span>
+                    </div>
+                  </el-dropdown-item>
+
+                  <el-dropdown-item command="smart-campus" class="version-item" :class="{ 'active-version': menuVersion === 'smart-campus' }">
+                    <div class="version-item-content">
+                      <span class="version-item-icon">🏢</span>
+                      <div class="version-item-info">
+                        <span class="version-item-title">Smart Campus</span>
+                        <span class="version-item-desc">Multi-site, energy, blockchain & command center</span>
+                      </div>
+                      <span class="version-item-badge" v-if="menuVersion === 'smart-campus'">✓</span>
+                    </div>
+                  </el-dropdown-item>
+
+                  <el-dropdown-item command="enterprise-ai" class="version-item" :class="{ 'active-version': menuVersion === 'enterprise-ai' }">
+                    <div class="version-item-content">
+                      <span class="version-item-icon">👑</span>
+                      <div class="version-item-info">
+                        <span class="version-item-title">Enterprise AI</span>
+                        <span class="version-item-desc">AI analytics, video intelligence & digital twin</span>
+                      </div>
+                      <span class="version-item-badge" v-if="menuVersion === 'enterprise-ai'">✓</span>
+                    </div>
+                  </el-dropdown-item>
+                </el-dropdown-menu>
+              </template>
+            </el-dropdown>
+          </template>
+
           <!-- 更多菜单 - 显示被折叠的按钮 -->
           <el-dropdown
               v-if="foldedButtonsList.length > 0"
@@ -381,7 +443,7 @@
         </div>
       </el-header>
 
-      <!-- 弹窗组件（保持原有代码不变） -->
+      <!-- 弹窗组件 -->
       <el-drawer
           v-model="alarmDrawerVisible"
           title="Alarm Center"
@@ -592,165 +654,18 @@ const counterStore = useCounterStore()
 // ==================== 从 store 获取菜单配置 ====================
 const menuConfig = computed(() => counterStore.menuConfig)
 
-// ==================== 菜单配置（可配置化） ====================
-// const menuConfig = ref([
-//   {
-//     index: '/',
-//     title: 'Dashboard',
-//     icon: 'View'
-//   },
-//   {
-//     index: '/control',
-//     title: 'Quick Control',
-//     icon: 'Coordinate'
-//   },
-//   {
-//     index: '/sites',
-//     title: 'Sites',
-//     icon: 'Odometer',
-//     children: [
-//       { index: '/sites/Factory', title: 'Factory' },
-//       { index: '/sites/Building', title: 'Building' },
-//       { index: '/sites/Airport', title: 'Airport' },
-//       { index: '/sites/Shopping', title: 'Shopping Mall' },
-//       { index: '/sites/Hospital', title: 'Hospital' },
-//       { index: '/sites/Hotel', title: 'Hotel' }
-//     ]
-//   },
-//   {
-//     index: '/device',
-//     title: 'Device',
-//     icon: 'Cpu',
-//     children: [
-//       { index: '/device/area-topology', title: 'Area Topology' },
-//       { index: '/device/protocol', title: 'Protocol Hub' },
-//       { index: '/device/cctv', title: 'CCTV' },
-//       { index: '/device/hvac', title: 'HVAC' },
-//       { index: '/device/access', title: 'Access' },
-//       { index: '/device/sas', title: 'SAS (Security)' },
-//       { index: '/device/fas', title: 'FAS (Fire)' },
-//       { index: '/device/lighting', title: 'Lighting Control' },
-//       { index: '/device/plumbing', title: 'Plumbing' }
-//     ]
-//   },
-//   {
-//     index: '/energy',
-//     title: 'Energy & Carbon',
-//     icon: 'TrendCharts',
-//     children: [
-//       { index: '/energy/overview', title: 'Energy Overview' },
-//       { index: '/energy/wind', title: 'Wind Energy' },
-//       { index: '/energy/solar', title: 'Solar Energy' },
-//       { index: '/energy/electricity', title: 'Electricity Energy' },
-//       { index: '/energy/waste', title: 'Waste to Energy' },
-//       { index: '/energy/hydrogen', title: 'Hydrogen Energy' },
-//       { index: '/energy/storage', title: 'Energy Storage' },
-//       { index: '/energy/geothermal', title: 'Geothermal Energy' },
-//       { index: '/energy/carbon', title: 'Carbon Emission' },
-//       { index: '/energy/savings', title: 'Energy Savings' }
-//     ]
-//   },
-//   {
-//     index: '/prediction',
-//     title: 'Prediction',
-//     icon: 'MagicStick',
-//     children: [
-//       { index: '/prediction/hvac', title: 'HVAC Prediction' },
-//       { index: '/prediction/lighting', title: 'Lighting Prediction' },
-//       { index: '/prediction/power-socket', title: 'Power & Socket' },
-//       { index: '/prediction/ev-charging', title: 'EV Charging' },
-//       { index: '/prediction/renewable', title: 'Renewable Generation' },
-//       { index: '/prediction/storage', title: 'Storage Strategy' }
-//     ]
-//   },
-//   {
-//     index: '/property',
-//     title: 'Smart Facility',
-//     icon: 'SwitchFilled',
-//     children: [
-//       { index: '/property/parking', title: 'Parking' },
-//       { index: '/property/visitor', title: 'Visitor' },
-//       { index: '/property/space', title: 'Space' },
-//       { index: '/property/waste', title: 'Waste' }
-//     ]
-//   },
-//   {
-//     index: '/maintain',
-//     title: 'Maintenance',
-//     icon: 'SetUp',
-//     children: [
-//       { index: '/maintain/predictive', title: 'Predictive Maintenance' }
-//     ]
-//   },
-//   {
-//     index: '/alarm',
-//     title: 'Alarm Center',
-//     icon: 'BellFilled',
-//     children: [
-//       { index: '/alarm/index', title: 'Alarm Center' },
-//       { index: '/alarm/notify', title: 'Multi‑dim Notification' },
-//       { index: '/alarm/history', title: 'Alarm History' }
-//     ]
-//   },
-//   {
-//     index: '/blockchain',
-//     title: 'Integrations & Web3',
-//     icon: 'Connection',
-//     children: [
-//       { index: '/blockchain/did', title: 'DID' },
-//       { index: '/blockchain/contracts', title: 'Smart Contracts' },
-//       { index: '/blockchain/anchoring', title: 'Blockchain Anchoring' },
-//       { index: '/blockchain/api', title: 'API Management' },
-//       { index: '/blockchain/node', title: 'Node Management' },
-//       { index: '/blockchain/edge-nodes', title: 'Edge Nodes' },
-//       { index: '/blockchain/web3', title: 'Web3 Services' },
-//       { index: '/blockchain/introduction', title: 'Introduction' }
-//     ]
-//   },
-//   {
-//     index: '/report',
-//     title: 'Reports',
-//     icon: 'Reading',
-//     children: [
-//       { index: '/report/data', title: 'Data Reports' },
-//       { index: '/report/energy', title: 'Energy Reports' },
-//       { index: '/report/device', title: 'Device Reports' },
-//       { index: '/report/maintenance', title: 'Maintenance Reports' },
-//       { index: '/report/carbon', title: 'Carbon Reports' }
-//     ]
-//   },
-//   {
-//     index: '/support',
-//     title: 'Terminal',
-//     icon: 'Platform',
-//     children: [
-//       { index: '/support/mobile', title: 'Mobile Terminal' }
-//     ]
-//   },
-//   {
-//     index: '/settings',
-//     title: 'Voice & AI',
-//     icon: 'Mic',
-//     children: [
-//       { index: '/settings/voice-cmd', title: 'Voice Commands' },
-//       { index: '/settings/tts-rule', title: 'TTS Broadcast Rules' },
-//       { index: '/settings/voice-log', title: 'Voice Training Logs' },
-//       { index: '/settings/lang', title: 'Multi-language Pack' }
-//     ]
-//   },
-//   {
-//     index: '/administration',
-//     title: 'Administration',
-//     icon: 'Setting',
-//     children: [
-//       { index: '/administration/user-role', title: 'User & Role' },
-//       { index: '/administration/system-logs', title: 'System Logs' },
-//       { index: '/administration/multi-language', title: 'Multi‑language' },
-//       { index: '/administration/theme', title: 'Theme & Language' },
-//       { index: '/administration/license', title: 'License & Upgrade' }
-//     ]
-//   }
-// ])
+// ==================== 版本切换相关 ====================
+const menuVersion = computed(() => counterStore.menuVersion)
+const currentVersionFullName = computed(() => counterStore.currentVersionFullName)
+
+// 处理版本切换命令
+const handleVersionChange = (version) => {
+  counterStore.setMenuVersion(version)
+  ElMessage.success(`Switched to ${counterStore.currentVersionFullName.value}`)
+}
+
+// ==================== 菜单配置（可配置化）- 已注释，保留备份 ====================
+// const menuConfig = ref([...]) // 已注释
 
 // 图标映射（用于动态渲染）
 const iconMap = {
@@ -878,7 +793,7 @@ const showEnergyReport = computed({
   set: (val) => counterStore.setShowEnergyReport(val)
 })
 
-// 添加判断是否在 Sites 子页面的计算属性
+// 添加判断是否在子页面的计算属性
 const isInDashboardChildren = computed(() => {
   const dashboardChildren = [
     '/sites/Factory',
@@ -1156,7 +1071,7 @@ const handleMoreCommand = (command) => {
   }
 }
 
-// 在 script setup 中修改 handleUserCommand 函数
+// 处理用户下拉菜单命令
 const handleUserCommand = (command) => {
   switch (command) {
     case 'logout':
@@ -1165,13 +1080,9 @@ const handleUserCommand = (command) => {
         cancelButtonText: 'Cancel',
         type: 'warning'
       }).then(() => {
-        // 清除本地存储
         localStorage.removeItem('token')
         localStorage.removeItem('userInfo')
-
         ElMessage.success('Logged out successfully')
-
-        // 跳转到登录页
         router.push('/login')
       }).catch(() => {})
       break
@@ -1195,23 +1106,19 @@ const checkResponsiveLayout = () => {
   const wasMobile = isMobile.value
   isMobile.value = width < 768
 
-  // 根据宽度决定按钮可见性 - 所有宽度都会触发折叠
   if (width >= 850) {
-    // 较大屏幕：显示所有按钮
     visibleButtons.value = {
       voice: true, alarm: true, orders: true,
       inspection: true, door: true, light: true, hvac: true,
       repair: true, search: true, notify: true, emergency: true
     }
   } else if (width >= 768) {
-    // 平板横屏：隐藏部分按钮
     visibleButtons.value = {
       voice: true, alarm: true, orders: true,
       inspection: false, door: true, light: true, hvac: true,
       repair: false, search: false, notify: false, emergency: false
     }
   } else {
-    // 移动端：只显示语音、告警、工单
     visibleButtons.value = {
       voice: true, alarm: true, orders: true,
       inspection: false, door: false, light: false, hvac: false,
@@ -1287,7 +1194,6 @@ const onFullScreenChange = () => {
 const onKeydown = (e) => {
   if (!isFullscreen.value || isMobile.value) return
 
-  // 收集所有菜单路径
   const collectPaths = (items, paths = []) => {
     for (const item of items) {
       if (item.children) {
@@ -1312,7 +1218,6 @@ const onKeydown = (e) => {
 }
 
 const handleResize = () => {
-  // 使用 requestAnimationFrame 优化性能
   requestAnimationFrame(() => {
     checkResponsiveLayout()
   })
@@ -1329,7 +1234,6 @@ onMounted(() => {
   window.addEventListener('resize', handleResize)
   checkResponsiveLayout()
 
-  // 添加延迟检查，确保初始加载时正确
   setTimeout(() => {
     checkResponsiveLayout()
   }, 100)
@@ -1437,11 +1341,10 @@ onUnmounted(() => {
   -webkit-overflow-scrolling: touch;
   height: 100%;
   padding-left: 0px;
-  scrollbar-width:thin;
-  scrollbar-color:rgba(255, 255, 255, 0.2) transparent;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 }
 
-/* Chrome / Edge / Safari 横向滚动条美化 */
 .header-controls::-webkit-scrollbar {
   height: 1px;
 }
@@ -1511,7 +1414,7 @@ onUnmounted(() => {
   transform: translateY(0);
 }
 
-/* Door 按钮 - 翠绿色 */
+/* Door 按钮 */
 .highlight-door {
   background: linear-gradient(135deg, #00b894, #00cec9) !important;
   border-color: #00b894 !important;
@@ -1525,7 +1428,7 @@ onUnmounted(() => {
   border-color: #00dfa2 !important;
 }
 
-/* Light 按钮 - 琥珀金橙色 */
+/* Light 按钮 */
 .highlight-light {
   background: linear-gradient(135deg, #f39c12, #f1c40f) !important;
   border-color: #f39c12 !important;
@@ -1539,7 +1442,7 @@ onUnmounted(() => {
   border-color: #ffbe76 !important;
 }
 
-/* HVAC 按钮 - 科技蓝 */
+/* HVAC 按钮 */
 .highlight-hvac {
   background: linear-gradient(135deg, #0984e3, #74b9ff) !important;
   border-color: #0984e3 !important;
@@ -1553,7 +1456,7 @@ onUnmounted(() => {
   border-color: #6c5ce7 !important;
 }
 
-/* Repair 按钮 - 紫罗兰渐变 */
+/* Repair 按钮 */
 .highlight-repair {
   background: linear-gradient(135deg, #6c5ce7, #a29bfe) !important;
   border-color: #6c5ce7 !important;
@@ -1651,7 +1554,6 @@ onUnmounted(() => {
   font-weight: 600;
 }
 
-/* 下拉菜单样式 */
 .energy-dropdown-menu {
   min-width: 220px !important;
   padding: 4px 0 !important;
@@ -1732,6 +1634,113 @@ onUnmounted(() => {
   background: rgba(144, 147, 153, 0.08) !important;
   color: #909399 !important;
   box-shadow: none !important;
+}
+
+/* 版本切换按钮样式 */
+.version-dropdown {
+  margin-left: 4px;
+}
+
+.version-btn {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(109, 40, 217, 0.1)) !important;
+  border: 1px solid rgba(139, 92, 246, 0.3) !important;
+  color: #a78bfa !important;
+  font-weight: 600;
+  font-size: 11px;
+  padding: 4px 10px;
+  min-height: 30px;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+}
+
+.version-btn:hover {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.25), rgba(109, 40, 217, 0.2)) !important;
+  border-color: rgba(139, 92, 246, 0.5) !important;
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.3);
+  transform: translateY(-1px);
+}
+
+.version-icon {
+  font-size: 13px;
+  margin-right: 3px;
+}
+
+.version-text {
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.version-dropdown-menu {
+  min-width: 280px !important;
+  padding: 4px 0 !important;
+}
+
+.version-dropdown-header {
+  padding: 8px 16px 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #909399;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  margin-bottom: 4px;
+}
+
+.version-item {
+  padding: 0 !important;
+}
+
+.version-item-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  width: 100%;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.version-item:hover .version-item-content {
+  background: rgba(139, 92, 246, 0.05);
+}
+
+.version-item-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.version-item-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.version-item-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #303133;
+}
+
+.version-item-desc {
+  font-size: 10px;
+  color: #909399;
+}
+
+.version-item-badge {
+  font-size: 14px;
+  color: #10b981;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.active-version {
+  background: rgba(139, 92, 246, 0.08);
+}
+
+.active-version .version-item-title {
+  color: #8b5cf6;
 }
 
 /* 右侧工具 */
@@ -2046,6 +2055,31 @@ onUnmounted(() => {
 .control-btn.pill-btn:active {
   transform: translateY(1px);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* 移动端版本切换按钮样式 */
+@media (max-width: 768px) {
+  .version-btn {
+    font-size: 10px;
+    padding: 3px 8px;
+    min-height: 26px;
+  }
+
+  .version-icon {
+    font-size: 11px;
+  }
+
+  .version-text {
+    font-size: 10px;
+  }
+
+  .version-dropdown-menu {
+    min-width: 260px !important;
+  }
+
+  .version-item-desc {
+    font-size: 9px;
+  }
 }
 
 /* 响应式 */

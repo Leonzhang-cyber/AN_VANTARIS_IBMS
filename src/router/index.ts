@@ -378,34 +378,40 @@ const routes = [
         redirect: '/administration/mobile',
         children: [
           {
-            path: 'user-role',
-            name: 'User & Role',
-            component: () => import('../views/Administration/User-role.vue'),
-            meta: { title: 'User & Role' }
+            path: 'user',
+            name: 'User Management',
+            component: () => import('../views/Administration/User.vue'),
+            meta: { title: 'User Management' }
           },
           {
-            path: 'system-logs',
-            name: 'System Logs',
-            component: () => import('../views/Administration/System-logs.vue'),
-            meta: { title: 'System Logs' }
+            path: 'role',
+            name: 'Role Management',
+            component: () => import('../views/Administration/Role.vue'),
+            meta: { title: 'Role Management' }
           },
           {
-            path: 'multi-language',
-            name: 'Multi‑language',
-            component: () => import('../views/Administration/Multi‑language.vue'),
-            meta: { title: 'Multi‑language' }
+            path: 'permission',
+            name: 'Permission Management',
+            component: () => import('../views/Administration/Permission.vue'),
+            meta: { title: 'Permission Management' }
           },
           {
-            path: 'theme',
-            name: 'Theme & Language',
-            component: () => import('../views/Administration/Theme.vue'),
-            meta: { title: 'Theme & Language' }
+            path: 'system',
+            name: 'System Configuration',
+            component: () => import('../views/Administration/System.vue'),
+            meta: { title: 'System Configuration' }
           },
           {
             path: 'license',
-            name: 'License & Upgrade',
+            name: 'License Management',
             component: () => import('../views/Administration/License.vue'),
-            meta: { title: 'Theme & Language' }
+            meta: { title: 'License Management' }
+          },
+          {
+            path: 'edition',
+            name: 'Edition Management',
+            component: () => import('../views/Administration/Edition.vue'),
+            meta: { title: 'Edition Management' }
           }
         ]
       },

@@ -13,7 +13,170 @@ interface MenuItem {
 // 定义菜单版本类型
 type MenuVersion = 'essential' | 'professional' | 'smart-campus' | 'enterprise-ai'
 
-// ==================== Essential 基础版菜单 ====================
+// ==================== allMenu 全部菜单（作为基准参照） ====================
+const allMenu: MenuItem[] = [
+  {
+    index: '/',
+    title: 'Dashboard',
+    icon: 'View'
+  },
+  {
+    index: '/control',
+    title: 'Quick Control',
+    icon: 'Coordinate'
+  },
+  {
+    index: '/sites',
+    title: 'Sites',
+    icon: 'Odometer',
+    children: [
+      { index: '/sites/Factory', title: 'Factory' },
+      { index: '/sites/Building', title: 'Building' },
+      { index: '/sites/Airport', title: 'Airport' },
+      { index: '/sites/Shopping', title: 'Shopping Mall' },
+      { index: '/sites/Hospital', title: 'Hospital' },
+      { index: '/sites/Hotel', title: 'Hotel' }
+    ]
+  },
+  {
+    index: '/device',
+    title: 'Device',
+    icon: 'Cpu',
+    children: [
+      { index: '/device/area-topology', title: 'Area Topology' },
+      { index: '/device/protocol', title: 'Protocol Hub' },
+      { index: '/device/cctv', title: 'CCTV' },
+      { index: '/device/hvac', title: 'HVAC' },
+      { index: '/device/access', title: 'Access' },
+      { index: '/device/sas', title: 'SAS (Security)' },
+      { index: '/device/fas', title: 'FAS (Fire)' },
+      { index: '/device/lighting', title: 'Lighting Control' },
+      { index: '/device/plumbing', title: 'Plumbing' }
+    ]
+  },
+  {
+    index: '/energy',
+    title: 'Energy & Carbon',
+    icon: 'TrendCharts',
+    children: [
+      { index: '/energy/overview', title: 'Energy Overview' },
+      { index: '/energy/wind', title: 'Wind Energy' },
+      { index: '/energy/solar', title: 'Solar Energy' },
+      { index: '/energy/electricity', title: 'Electricity Energy' },
+      { index: '/energy/waste', title: 'Waste to Energy' },
+      { index: '/energy/hydrogen', title: 'Hydrogen Energy' },
+      { index: '/energy/storage', title: 'Energy Storage' },
+      { index: '/energy/geothermal', title: 'Geothermal Energy' },
+      { index: '/energy/carbon', title: 'Carbon Emission' },
+      { index: '/energy/savings', title: 'Energy Savings' }
+    ]
+  },
+  {
+    index: '/prediction',
+    title: 'Prediction',
+    icon: 'MagicStick',
+    children: [
+      { index: '/prediction/hvac', title: 'HVAC Prediction' },
+      { index: '/prediction/lighting', title: 'Lighting Prediction' },
+      { index: '/prediction/power-socket', title: 'Power & Socket' },
+      { index: '/prediction/ev-charging', title: 'EV Charging' },
+      { index: '/prediction/renewable', title: 'Renewable Generation' },
+      { index: '/prediction/storage', title: 'Storage Strategy' }
+    ]
+  },
+  {
+    index: '/property',
+    title: 'Smart Facility',
+    icon: 'SwitchFilled',
+    children: [
+      { index: '/property/parking', title: 'Parking' },
+      { index: '/property/visitor', title: 'Visitor' },
+      { index: '/property/space', title: 'Space' },
+      { index: '/property/waste', title: 'Waste' }
+    ]
+  },
+  {
+    index: '/maintain',
+    title: 'Maintenance',
+    icon: 'SetUp',
+    children: [
+      { index: '/maintain/predictive', title: 'Predictive Maintenance' }
+    ]
+  },
+  {
+    index: '/alarm',
+    title: 'Alarm Center',
+    icon: 'BellFilled',
+    children: [
+      { index: '/alarm/index', title: 'Alarm Center' },
+      { index: '/alarm/notify', title: 'Multi‑dim Notification' },
+      { index: '/alarm/history', title: 'Alarm History' }
+    ]
+  },
+  {
+    index: '/blockchain',
+    title: 'Integrations & Web3',
+    icon: 'Connection',
+    children: [
+      { index: '/blockchain/did', title: 'DID' },
+      { index: '/blockchain/contracts', title: 'Smart Contracts' },
+      { index: '/blockchain/anchoring', title: 'Blockchain Anchoring' },
+      { index: '/blockchain/api', title: 'API Management' },
+      { index: '/blockchain/node', title: 'Node Management' },
+      { index: '/blockchain/edge-nodes', title: 'Edge Nodes' },
+      { index: '/blockchain/web3', title: 'Web3 Services' },
+      { index: '/blockchain/introduction', title: 'Introduction' }
+    ]
+  },
+  {
+    index: '/report',
+    title: 'Reports',
+    icon: 'Reading',
+    children: [
+      { index: '/report/data', title: 'Data Reports' },
+      { index: '/report/energy', title: 'Energy Reports' },
+      { index: '/report/device', title: 'Device Reports' },
+      { index: '/report/maintenance', title: 'Maintenance Reports' },
+      { index: '/report/carbon', title: 'Carbon Reports' }
+    ]
+  },
+  {
+    index: '/support',
+    title: 'Terminal',
+    icon: 'Platform',
+    children: [
+      { index: '/support/mobile', title: 'Mobile Terminal' }
+    ]
+  },
+  {
+    index: '/settings',
+    title: 'Voice & AI',
+    icon: 'Mic',
+    children: [
+      { index: '/settings/voice-cmd', title: 'Voice Commands' },
+      { index: '/settings/tts-rule', title: 'TTS Broadcast Rules' },
+      { index: '/settings/voice-log', title: 'Voice Training Logs' },
+      { index: '/settings/lang', title: 'Multi-language Pack' }
+    ]
+  },
+  {
+    index: '/administration',
+    title: 'Administration',
+    icon: 'Setting',
+    children: [
+      { index: '/administration/user', title: 'User Management' },
+      { index: '/administration/role', title: 'Role Management' },
+      { index: '/administration/permission', title: 'Permission Management' },
+      { index: '/administration/system', title: 'System Configuration' },
+      { index: '/administration/license', title: 'License Management' },
+      { index: '/administration/edition', title: 'Edition Management' }
+    ]
+  }
+]
+
+// ==================== 各版本菜单配置 ====================
+
+// Essential 基础版菜单
 const essentialMenu: MenuItem[] = [
   {
     index: '/',
@@ -27,18 +190,31 @@ const essentialMenu: MenuItem[] = [
   },
   {
     index: '/device',
-    title: 'Device Management',
+    title: 'Device',
     icon: 'Cpu',
     children: [
       { index: '/device/area-topology', title: 'Area Topology' },
       { index: '/device/protocol', title: 'Protocol Hub' },
       { index: '/device/cctv', title: 'CCTV' },
       { index: '/device/hvac', title: 'HVAC' },
-      { index: '/device/access', title: 'Access Control' },
-      { index: '/device/sas', title: 'Security System' },
-      { index: '/device/fas', title: 'Fire Alarm' },
+      { index: '/device/access', title: 'Access' },
+      { index: '/device/sas', title: 'SAS (Security)' },
+      { index: '/device/fas', title: 'FAS (Fire)' },
       { index: '/device/lighting', title: 'Lighting Control' },
       { index: '/device/plumbing', title: 'Plumbing' }
+    ]
+  },
+  {
+    index: '/prediction',
+    title: 'Prediction',
+    icon: 'MagicStick',
+    children: [
+      { index: '/prediction/hvac', title: 'HVAC Prediction' },
+      { index: '/prediction/lighting', title: 'Lighting Prediction' },
+      { index: '/prediction/power-socket', title: 'Power & Socket' },
+      { index: '/prediction/ev-charging', title: 'EV Charging' },
+      { index: '/prediction/renewable', title: 'Renewable Generation' },
+      { index: '/prediction/storage', title: 'Storage Strategy' }
     ]
   },
   {
@@ -46,16 +222,17 @@ const essentialMenu: MenuItem[] = [
     title: 'Administration',
     icon: 'Setting',
     children: [
-      { index: '/administration/user-role', title: 'User & Role' },
-      { index: '/administration/system-logs', title: 'System Logs' },
-      { index: '/administration/multi-language', title: 'Multi-language' },
-      { index: '/administration/theme', title: 'Theme & Language' },
-      { index: '/administration/license', title: 'License & Upgrade' }
+      { index: '/administration/user', title: 'User Management' },
+      { index: '/administration/role', title: 'Role Management' },
+      { index: '/administration/permission', title: 'Permission Management' },
+      { index: '/administration/system', title: 'System Configuration' },
+      { index: '/administration/license', title: 'License Management' },
+      { index: '/administration/edition', title: 'Edition Management' }
     ]
   }
 ]
 
-// ==================== Professional 专业版菜单 ====================
+// Professional 专业版菜单
 const professionalMenu: MenuItem[] = [
   {
     index: '/',
@@ -68,65 +245,62 @@ const professionalMenu: MenuItem[] = [
     icon: 'Coordinate'
   },
   {
+    index: '/sites',
+    title: 'Sites',
+    icon: 'Odometer',
+    children: [
+      { index: '/sites/Factory', title: 'Factory' },
+      { index: '/sites/Building', title: 'Building' },
+      { index: '/sites/Airport', title: 'Airport' },
+      { index: '/sites/Shopping', title: 'Shopping Mall' },
+      { index: '/sites/Hospital', title: 'Hospital' },
+      { index: '/sites/Hotel', title: 'Hotel' }
+    ]
+  },
+  {
     index: '/device',
-    title: 'Device Management',
+    title: 'Device',
     icon: 'Cpu',
     children: [
       { index: '/device/area-topology', title: 'Area Topology' },
       { index: '/device/protocol', title: 'Protocol Hub' },
       { index: '/device/cctv', title: 'CCTV' },
       { index: '/device/hvac', title: 'HVAC' },
-      { index: '/device/access', title: 'Access Control' },
-      { index: '/device/sas', title: 'Security System' },
-      { index: '/device/fas', title: 'Fire Alarm' },
+      { index: '/device/access', title: 'Access' },
+      { index: '/device/sas', title: 'SAS (Security)' },
+      { index: '/device/fas', title: 'FAS (Fire)' },
       { index: '/device/lighting', title: 'Lighting Control' },
       { index: '/device/plumbing', title: 'Plumbing' }
     ]
   },
   {
-    index: '/alarm',
-    title: 'Alarm Center',
-    icon: 'BellFilled',
+    index: '/energy',
+    title: 'Energy & Carbon',
+    icon: 'TrendCharts',
     children: [
-      { index: '/alarm/index', title: 'Alarm Center' },
-      { index: '/alarm/notify', title: 'Multi-dim Notification' },
-      { index: '/alarm/history', title: 'Alarm History' }
+      { index: '/energy/overview', title: 'Energy Overview' },
+      { index: '/energy/wind', title: 'Wind Energy' },
+      { index: '/energy/solar', title: 'Solar Energy' },
+      { index: '/energy/electricity', title: 'Electricity Energy' },
+      { index: '/energy/waste', title: 'Waste to Energy' },
+      { index: '/energy/hydrogen', title: 'Hydrogen Energy' },
+      { index: '/energy/storage', title: 'Energy Storage' },
+      { index: '/energy/geothermal', title: 'Geothermal Energy' },
+      { index: '/energy/carbon', title: 'Carbon Emission' },
+      { index: '/energy/savings', title: 'Energy Savings' }
     ]
   },
   {
-    index: '/maintain',
-    title: 'Maintenance',
-    icon: 'SetUp',
+    index: '/prediction',
+    title: 'Prediction',
+    icon: 'MagicStick',
     children: [
-      { index: '/maintain/predictive', title: 'Predictive Maintenance' },
-      { index: '/maintain/inspection', title: 'Inspection Management' }
-    ]
-  },
-  {
-    index: '/property',
-    title: 'Smart Facility',
-    icon: 'SwitchFilled',
-    children: [
-      { index: '/property/visitor', title: 'Visitor Management' }
-    ]
-  },
-  {
-    index: '/report',
-    title: 'Reports & Analytics',
-    icon: 'Reading',
-    children: [
-      { index: '/report/data', title: 'Data Reports' },
-      { index: '/report/device', title: 'Device Reports' },
-      { index: '/report/maintenance', title: 'Maintenance Reports' }
-    ]
-  },
-  {
-    index: '/support',
-    title: 'Mobile & API',
-    icon: 'Platform',
-    children: [
-      { index: '/support/mobile', title: 'Mobile Terminal' },
-      { index: '/support/api', title: 'API Management' }
+      { index: '/prediction/hvac', title: 'HVAC Prediction' },
+      { index: '/prediction/lighting', title: 'Lighting Prediction' },
+      { index: '/prediction/power-socket', title: 'Power & Socket' },
+      { index: '/prediction/ev-charging', title: 'EV Charging' },
+      { index: '/prediction/renewable', title: 'Renewable Generation' },
+      { index: '/prediction/storage', title: 'Storage Strategy' }
     ]
   },
   {
@@ -134,16 +308,17 @@ const professionalMenu: MenuItem[] = [
     title: 'Administration',
     icon: 'Setting',
     children: [
-      { index: '/administration/user-role', title: 'User & Role' },
-      { index: '/administration/system-logs', title: 'System Logs' },
-      { index: '/administration/multi-language', title: 'Multi-language' },
-      { index: '/administration/theme', title: 'Theme & Language' },
-      { index: '/administration/license', title: 'License & Upgrade' }
+      { index: '/administration/user', title: 'User Management' },
+      { index: '/administration/role', title: 'Role Management' },
+      { index: '/administration/permission', title: 'Permission Management' },
+      { index: '/administration/system', title: 'System Configuration' },
+      { index: '/administration/license', title: 'License Management' },
+      { index: '/administration/edition', title: 'Edition Management' }
     ]
   }
 ]
 
-// ==================== Smart Campus 园区版菜单 ====================
+// Smart Campus 园区版菜单
 const smartCampusMenu: MenuItem[] = [
   {
     index: '/',
@@ -157,7 +332,7 @@ const smartCampusMenu: MenuItem[] = [
   },
   {
     index: '/sites',
-    title: 'Multi-Site Management',
+    title: 'Sites',
     icon: 'Odometer',
     children: [
       { index: '/sites/Factory', title: 'Factory' },
@@ -170,39 +345,18 @@ const smartCampusMenu: MenuItem[] = [
   },
   {
     index: '/device',
-    title: 'Device Management',
+    title: 'Device',
     icon: 'Cpu',
     children: [
       { index: '/device/area-topology', title: 'Area Topology' },
       { index: '/device/protocol', title: 'Protocol Hub' },
       { index: '/device/cctv', title: 'CCTV' },
       { index: '/device/hvac', title: 'HVAC' },
-      { index: '/device/access', title: 'Access Control' },
-      { index: '/device/sas', title: 'Security System' },
-      { index: '/device/fas', title: 'Fire Alarm' },
+      { index: '/device/access', title: 'Access' },
+      { index: '/device/sas', title: 'SAS (Security)' },
+      { index: '/device/fas', title: 'FAS (Fire)' },
       { index: '/device/lighting', title: 'Lighting Control' },
       { index: '/device/plumbing', title: 'Plumbing' }
-    ]
-  },
-  {
-    index: '/alarm',
-    title: 'Alarm Center',
-    icon: 'BellFilled',
-    children: [
-      { index: '/alarm/index', title: 'Alarm Center' },
-      { index: '/alarm/notify', title: 'Multi-dim Notification' },
-      { index: '/alarm/rules', title: 'Alarm Rules' },
-      { index: '/alarm/history', title: 'Alarm History' }
-    ]
-  },
-  {
-    index: '/maintain',
-    title: 'Maintenance',
-    icon: 'SetUp',
-    children: [
-      { index: '/maintain/predictive', title: 'Predictive Maintenance' },
-      { index: '/maintain/inspection', title: 'Inspection Management' },
-      { index: '/maintain/assets', title: 'Asset Management' }
     ]
   },
   {
@@ -213,23 +367,23 @@ const smartCampusMenu: MenuItem[] = [
       { index: '/energy/overview', title: 'Energy Overview' },
       { index: '/energy/wind', title: 'Wind Energy' },
       { index: '/energy/solar', title: 'Solar Energy' },
-      { index: '/energy/electricity', title: 'Electricity' },
+      { index: '/energy/electricity', title: 'Electricity Energy' },
       { index: '/energy/waste', title: 'Waste to Energy' },
       { index: '/energy/hydrogen', title: 'Hydrogen Energy' },
       { index: '/energy/storage', title: 'Energy Storage' },
-      { index: '/energy/geothermal', title: 'Geothermal' },
+      { index: '/energy/geothermal', title: 'Geothermal Energy' },
       { index: '/energy/carbon', title: 'Carbon Emission' },
       { index: '/energy/savings', title: 'Energy Savings' }
     ]
   },
   {
     index: '/prediction',
-    title: 'AI Prediction',
+    title: 'Prediction',
     icon: 'MagicStick',
     children: [
       { index: '/prediction/hvac', title: 'HVAC Prediction' },
       { index: '/prediction/lighting', title: 'Lighting Prediction' },
-      { index: '/prediction/power-socket', title: 'Power Prediction' },
+      { index: '/prediction/power-socket', title: 'Power & Socket' },
       { index: '/prediction/ev-charging', title: 'EV Charging' },
       { index: '/prediction/renewable', title: 'Renewable Generation' },
       { index: '/prediction/storage', title: 'Storage Strategy' }
@@ -240,15 +394,33 @@ const smartCampusMenu: MenuItem[] = [
     title: 'Smart Facility',
     icon: 'SwitchFilled',
     children: [
-      { index: '/property/parking', title: 'Parking Management' },
-      { index: '/property/visitor', title: 'Visitor Management' },
-      { index: '/property/space', title: 'Space Management' },
-      { index: '/property/waste', title: 'Waste Management' }
+      { index: '/property/parking', title: 'Parking' },
+      { index: '/property/visitor', title: 'Visitor' },
+      { index: '/property/space', title: 'Space' },
+      { index: '/property/waste', title: 'Waste' }
+    ]
+  },
+  {
+    index: '/maintain',
+    title: 'Maintenance',
+    icon: 'SetUp',
+    children: [
+      { index: '/maintain/predictive', title: 'Predictive Maintenance' }
+    ]
+  },
+  {
+    index: '/alarm',
+    title: 'Alarm Center',
+    icon: 'BellFilled',
+    children: [
+      { index: '/alarm/index', title: 'Alarm Center' },
+      { index: '/alarm/notify', title: 'Multi‑dim Notification' },
+      { index: '/alarm/history', title: 'Alarm History' }
     ]
   },
   {
     index: '/report',
-    title: 'Reports & Analytics',
+    title: 'Reports',
     icon: 'Reading',
     children: [
       { index: '/report/data', title: 'Data Reports' },
@@ -259,247 +431,26 @@ const smartCampusMenu: MenuItem[] = [
     ]
   },
   {
-    index: '/support',
-    title: 'Mobile & API',
-    icon: 'Platform',
-    children: [
-      { index: '/support/mobile', title: 'Mobile Terminal' },
-      { index: '/support/api', title: 'API Management' }
-    ]
-  },
-  {
-    index: '/command-center',
-    title: 'Command Center',
-    icon: 'Monitor',
-    children: [
-      { index: '/command-center/dashboard', title: 'Command Dashboard' },
-      { index: '/command-center/gis', title: 'GIS Map' }
-    ]
-  },
-  {
-    index: '/blockchain',
-    title: 'Web3 & Blockchain',
-    icon: 'Connection',
-    children: [
-      { index: '/blockchain/did', title: 'DID Management' },
-      { index: '/blockchain/contracts', title: 'Smart Contracts' },
-      { index: '/blockchain/anchoring', title: 'Blockchain Anchoring' },
-      { index: '/blockchain/web3', title: 'Web3 Services' }
-    ]
-  },
-  {
     index: '/administration',
     title: 'Administration',
     icon: 'Setting',
     children: [
-      { index: '/administration/user-role', title: 'User & Role' },
-      { index: '/administration/system-logs', title: 'System Logs' },
-      { index: '/administration/multi-language', title: 'Multi-language' },
-      { index: '/administration/theme', title: 'Theme & Language' },
-      { index: '/administration/license', title: 'License & Upgrade' }
+      { index: '/administration/user', title: 'User Management' },
+      { index: '/administration/role', title: 'Role Management' },
+      { index: '/administration/permission', title: 'Permission Management' },
+      { index: '/administration/system', title: 'System Configuration' },
+      { index: '/administration/license', title: 'License Management' },
+      { index: '/administration/edition', title: 'Edition Management' }
     ]
   }
 ]
 
-// ==================== Enterprise AI 旗舰版菜单 ====================
-const enterpriseAIMenu: MenuItem[] = [
-  {
-    index: '/',
-    title: 'Dashboard',
-    icon: 'View'
-  },
-  {
-    index: '/control',
-    title: 'Quick Control',
-    icon: 'Coordinate'
-  },
-  {
-    index: '/sites',
-    title: 'Multi-Site Management',
-    icon: 'Odometer',
-    children: [
-      { index: '/sites/Factory', title: 'Factory' },
-      { index: '/sites/Building', title: 'Building' },
-      { index: '/sites/Airport', title: 'Airport' },
-      { index: '/sites/Shopping', title: 'Shopping Mall' },
-      { index: '/sites/Hospital', title: 'Hospital' },
-      { index: '/sites/Hotel', title: 'Hotel' }
-    ]
-  },
-  {
-    index: '/device',
-    title: 'Device Management',
-    icon: 'Cpu',
-    children: [
-      { index: '/device/area-topology', title: 'Area Topology' },
-      { index: '/device/protocol', title: 'Protocol Hub' },
-      { index: '/device/cctv', title: 'CCTV' },
-      { index: '/device/hvac', title: 'HVAC' },
-      { index: '/device/access', title: 'Access Control' },
-      { index: '/device/sas', title: 'Security System' },
-      { index: '/device/fas', title: 'Fire Alarm' },
-      { index: '/device/lighting', title: 'Lighting Control' },
-      { index: '/device/plumbing', title: 'Plumbing' }
-    ]
-  },
-  {
-    index: '/alarm',
-    title: 'Alarm Center',
-    icon: 'BellFilled',
-    children: [
-      { index: '/alarm/index', title: 'Alarm Center' },
-      { index: '/alarm/notify', title: 'Multi-dim Notification' },
-      { index: '/alarm/rules', title: 'Alarm Rules' },
-      { index: '/alarm/history', title: 'Alarm History' }
-    ]
-  },
-  {
-    index: '/maintain',
-    title: 'Maintenance',
-    icon: 'SetUp',
-    children: [
-      { index: '/maintain/predictive', title: 'Predictive Maintenance' },
-      { index: '/maintain/inspection', title: 'Inspection Management' },
-      { index: '/maintain/assets', title: 'Asset Management' }
-    ]
-  },
-  {
-    index: '/energy',
-    title: 'Energy & Carbon',
-    icon: 'TrendCharts',
-    children: [
-      { index: '/energy/overview', title: 'Energy Overview' },
-      { index: '/energy/wind', title: 'Wind Energy' },
-      { index: '/energy/solar', title: 'Solar Energy' },
-      { index: '/energy/electricity', title: 'Electricity' },
-      { index: '/energy/waste', title: 'Waste to Energy' },
-      { index: '/energy/hydrogen', title: 'Hydrogen Energy' },
-      { index: '/energy/storage', title: 'Energy Storage' },
-      { index: '/energy/geothermal', title: 'Geothermal' },
-      { index: '/energy/carbon', title: 'Carbon Emission' },
-      { index: '/energy/savings', title: 'Energy Savings' }
-    ]
-  },
-  {
-    index: '/prediction',
-    title: 'AI Prediction',
-    icon: 'MagicStick',
-    children: [
-      { index: '/prediction/hvac', title: 'HVAC Prediction' },
-      { index: '/prediction/lighting', title: 'Lighting Prediction' },
-      { index: '/prediction/power-socket', title: 'Power Prediction' },
-      { index: '/prediction/ev-charging', title: 'EV Charging' },
-      { index: '/prediction/renewable', title: 'Renewable Generation' },
-      { index: '/prediction/storage', title: 'Storage Strategy' }
-    ]
-  },
-  {
-    index: '/property',
-    title: 'Smart Facility',
-    icon: 'SwitchFilled',
-    children: [
-      { index: '/property/parking', title: 'Parking Management' },
-      { index: '/property/visitor', title: 'Visitor Management' },
-      { index: '/property/space', title: 'Space Management' },
-      { index: '/property/waste', title: 'Waste Management' }
-    ]
-  },
-  {
-    index: '/report',
-    title: 'Reports & Analytics',
-    icon: 'Reading',
-    children: [
-      { index: '/report/data', title: 'Data Reports' },
-      { index: '/report/energy', title: 'Energy Reports' },
-      { index: '/report/device', title: 'Device Reports' },
-      { index: '/report/maintenance', title: 'Maintenance Reports' },
-      { index: '/report/carbon', title: 'Carbon Reports' },
-      { index: '/report/bi', title: 'BI Analytics' }
-    ]
-  },
-  {
-    index: '/support',
-    title: 'Mobile & API',
-    icon: 'Platform',
-    children: [
-      { index: '/support/mobile', title: 'Mobile Terminal' },
-      { index: '/support/api', title: 'API Management' }
-    ]
-  },
-  {
-    index: '/command-center',
-    title: 'Command Center',
-    icon: 'Monitor',
-    children: [
-      { index: '/command-center/dashboard', title: 'Command Dashboard' },
-      { index: '/command-center/gis', title: 'GIS Map' },
-      { index: '/command-center/large-screen', title: 'Large Screen Display' }
-    ]
-  },
-  {
-    index: '/ai-center',
-    title: 'AI Intelligence Center',
-    icon: 'Cpu',
-    children: [
-      { index: '/ai-center/insights', title: 'AI Insights' },
-      { index: '/ai-center/anomaly', title: 'Anomaly Detection' },
-      { index: '/ai-center/optimization', title: 'Energy Optimization' },
-      { index: '/ai-center/forecast', title: 'Demand Forecast' },
-      { index: '/ai-center/recommendations', title: 'Smart Recommendations' }
-    ]
-  },
-  {
-    index: '/video-ai',
-    title: 'Video AI Analytics',
-    icon: 'Camera',
-    children: [
-      { index: '/video-ai/analytics', title: 'Video Analytics' },
-      { index: '/video-ai/recognition', title: 'Face Recognition' },
-      { index: '/video-ai/behavior', title: 'Behavior Analysis' },
-      { index: '/video-ai/traffic', title: 'Traffic Monitoring' },
-      { index: '/video-ai/safety', title: 'Safety Detection' }
-    ]
-  },
-  {
-    index: '/digital-twin',
-    title: 'Digital Twin',
-    icon: 'Grid',
-    children: [
-      { index: '/digital-twin/model', title: '3D Model Viewer' },
-      { index: '/digital-twin/simulation', title: 'Simulation' },
-      { index: '/digital-twin/analytics', title: 'Twin Analytics' },
-      { index: '/digital-twin/real-time', title: 'Real-time Sync' }
-    ]
-  },
-  {
-    index: '/blockchain',
-    title: 'Web3 & Blockchain',
-    icon: 'Connection',
-    children: [
-      { index: '/blockchain/did', title: 'DID Management' },
-      { index: '/blockchain/contracts', title: 'Smart Contracts' },
-      { index: '/blockchain/anchoring', title: 'Blockchain Anchoring' },
-      { index: '/blockchain/web3', title: 'Web3 Services' },
-      { index: '/blockchain/traceability', title: 'Traceability' }
-    ]
-  },
-  {
-    index: '/administration',
-    title: 'Administration',
-    icon: 'Setting',
-    children: [
-      { index: '/administration/user-role', title: 'User & Role' },
-      { index: '/administration/system-logs', title: 'System Logs' },
-      { index: '/administration/multi-language', title: 'Multi-language' },
-      { index: '/administration/theme', title: 'Theme & Language' },
-      { index: '/administration/license', title: 'License & Upgrade' }
-    ]
-  }
-]
+// Enterprise AI 旗舰版菜单
+const enterpriseAIMenu: MenuItem[] = JSON.parse(JSON.stringify(allMenu))
 
 // ==================== Pinia Store ====================
 export const useCounterStore = defineStore('counter', () => {
-  // 原有状态
+  // ========== 原有状态 ==========
   const count = ref(0)
   const doubleCount = computed(() => count.value * 2)
   function increment() {
@@ -530,11 +481,15 @@ export const useCounterStore = defineStore('counter', () => {
     showEnergyReport.value = !showEnergyReport.value
   }
 
-  // ========== 新增：菜单版本管理 ==========
+  // ========== 菜单版本管理 ==========
   const menuVersion = ref<MenuVersion>('essential')
+  // 菜单配置版本号，用于强制刷新 computed
+  const menuConfigVersion = ref(0)
 
   // 根据版本获取菜单配置
   const menuConfig = computed(() => {
+    // 依赖版本号，确保每次更新都能重新计算
+    menuConfigVersion.value
     switch (menuVersion.value) {
       case 'essential':
         return essentialMenu
@@ -552,16 +507,17 @@ export const useCounterStore = defineStore('counter', () => {
   // 切换菜单版本
   function setMenuVersion(version: MenuVersion) {
     menuVersion.value = version
-    // 保存到 localStorage，持久化用户选择
     localStorage.setItem('menuVersion', version)
+    menuConfigVersion.value++
   }
 
-  // 初始化菜单版本（从 localStorage 读取）
+  // 初始化菜单版本
   function initMenuVersion() {
     const saved = localStorage.getItem('menuVersion') as MenuVersion
     if (saved && (saved === 'essential' || saved === 'professional' || saved === 'smart-campus' || saved === 'enterprise-ai')) {
       menuVersion.value = saved
     }
+    menuConfigVersion.value++
   }
 
   // 获取当前版本名称
@@ -597,61 +553,45 @@ export const useCounterStore = defineStore('counter', () => {
     }
   })
 
-  // 添加菜单项动态配置的方法
-  function addMenuItem(parentIndex: string, newItem: MenuItem) {
-    const findAndAdd = (items: MenuItem[], targetIndex: string): boolean => {
-      for (let i = 0; i < items.length; i++) {
-        if (items[i].index === targetIndex) {
-          if (!items[i].children) items[i].children = []
-          items[i].children!.push(newItem)
-          return true
-        }
-        if (items[i].children && findAndAdd(items[i].children, targetIndex)) return true
-      }
-      return false
-    }
-    // 根据当前版本添加到对应的菜单
-    switch (menuVersion.value) {
+  // 更新某个版本的菜单
+  function updateVersionMenu(version: MenuVersion, newMenu: MenuItem[]) {
+    const newMenuCopy = JSON.parse(JSON.stringify(newMenu))
+    switch (version) {
       case 'essential':
-        findAndAdd(essentialMenu, parentIndex)
+        essentialMenu.length = 0
+        essentialMenu.push(...newMenuCopy)
         break
       case 'professional':
-        findAndAdd(professionalMenu, parentIndex)
+        professionalMenu.length = 0
+        professionalMenu.push(...newMenuCopy)
         break
       case 'smart-campus':
-        findAndAdd(smartCampusMenu, parentIndex)
+        smartCampusMenu.length = 0
+        smartCampusMenu.push(...newMenuCopy)
         break
       case 'enterprise-ai':
-        findAndAdd(enterpriseAIMenu, parentIndex)
+        enterpriseAIMenu.length = 0
+        enterpriseAIMenu.push(...newMenuCopy)
         break
+    }
+    // 递增版本号，强制 menuConfig 重新计算
+    menuConfigVersion.value++
+  }
+
+  // 获取某个版本的菜单
+  function getVersionMenu(version: MenuVersion): MenuItem[] {
+    switch (version) {
+      case 'essential': return essentialMenu
+      case 'professional': return professionalMenu
+      case 'smart-campus': return smartCampusMenu
+      case 'enterprise-ai': return enterpriseAIMenu
+      default: return essentialMenu
     }
   }
 
-  function removeMenuItem(itemIndex: string) {
-    const remove = (items: MenuItem[]): boolean => {
-      for (let i = 0; i < items.length; i++) {
-        if (items[i].index === itemIndex) {
-          items.splice(i, 1)
-          return true
-        }
-        if (items[i].children && remove(items[i].children)) return true
-      }
-      return false
-    }
-    switch (menuVersion.value) {
-      case 'essential':
-        remove(essentialMenu)
-        break
-      case 'professional':
-        remove(professionalMenu)
-        break
-      case 'smart-campus':
-        remove(smartCampusMenu)
-        break
-      case 'enterprise-ai':
-        remove(enterpriseAIMenu)
-        break
-    }
+  // 刷新当前菜单
+  function refreshCurrentMenu() {
+    menuConfigVersion.value++
   }
 
   return {
@@ -667,7 +607,8 @@ export const useCounterStore = defineStore('counter', () => {
     showEnergyReport,
     setShowEnergyReport,
     toggleShowEnergyReport,
-    // 新增菜单相关
+    // 菜单相关
+    allMenu,
     menuConfig,
     menuVersion,
     setMenuVersion,
@@ -675,7 +616,9 @@ export const useCounterStore = defineStore('counter', () => {
     currentVersionName,
     currentVersionFullName,
     currentVersionDesc,
-    addMenuItem,
-    removeMenuItem
+    // 供 Edition 页面使用
+    updateVersionMenu,
+    getVersionMenu,
+    refreshCurrentMenu
   }
 })
