@@ -233,65 +233,100 @@ const isLoaded = ref(false)
 const loadingProgress = ref(0)
 const loadingMessage = ref('Loading...')
 
-// ==================== Voice Recognition ====================
+// ==================== Voice Recognition (模拟) ====================
 const isListening = ref(false)
 const interimTranscript = ref('')
-let recognition = null
+let listenTimer = null
 
-const initSpeechRecognition = () => {
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
-  if (!SpeechRecognition) {
-    ElMessage.error('Your browser does not support speech recognition. Please use Chrome or Edge.')
-    return false
+// 模拟语音识别
+const toggleVoiceInput = () => {
+  if (isListening.value) {
+    stopListening()
+    return
   }
-  recognition = new SpeechRecognition()
-  recognition.lang = 'en-US'
-  recognition.continuous = false
-  recognition.interimResults = true
-  recognition.onstart = () => { isListening.value = true; interimTranscript.value = '' }
-  recognition.onresult = (event) => {
-    let final = ''
-    for (let i = event.resultIndex; i < event.results.length; i++) {
-      if (event.results[i].isFinal) final += event.results[i][0].transcript
-      else interimTranscript.value = event.results[i][0].transcript
+
+  startListening()
+}
+
+const startListening = () => {
+  isListening.value = true
+  interimTranscript.value = ''
+
+  // 模拟识别过程
+  let currentText = ''
+  const mockPhrases = [
+    'turn',
+    'turn off',
+    'turn off all',
+    'turn off all lights'
+  ]
+
+  let step = 0
+  listenTimer = setInterval(() => {
+    if (step < mockPhrases.length) {
+      currentText = mockPhrases[step]
+      interimTranscript.value = currentText
+      step++
+    } else {
+      // 识别完成
+      clearInterval(listenTimer)
+      listenTimer = null
+
+      // 执行命令
+      processVoiceCommand(currentText)
+
+      // 停止监听状态
+      setTimeout(() => {
+        isListening.value = false
+        interimTranscript.value = ''
+      }, 500)
     }
-    if (final) { processVoiceCommand(final.toLowerCase()); recognition.stop() }
-  }
-  recognition.onerror = (event) => {
-    isListening.value = false
-    let msg = event.error === 'not-allowed' ? 'Please allow microphone access' : 'Recognition failed'
-    ElMessage.warning(msg)
-  }
-  recognition.onend = () => { isListening.value = false; interimTranscript.value = '' }
-  return true
+  }, 600)
 }
 
-const toggleVoiceInput = async () => {
-  if (isListening.value) { recognition?.stop(); return }
-  if (!recognition && !initSpeechRecognition()) return
-  try {
-    await navigator.mediaDevices.getUserMedia({ audio: true })
-    recognition.start()
-  } catch { ElMessage.warning('Please allow microphone access') }
+const stopListening = () => {
+  if (listenTimer) {
+    clearInterval(listenTimer)
+    listenTimer = null
+  }
+  isListening.value = false
+  interimTranscript.value = ''
+  ElMessage.info('Voice input cancelled')
 }
-const stopListening = () => recognition?.stop()
+
 const speakText = (text) => {
   if (!window.speechSynthesis) return
-  window.speechSynthesis.cancel()
-  const utterance = new SpeechSynthesisUtterance(text)
-  utterance.lang = 'en-US'
-  utterance.rate = 0.9
-  window.speechSynthesis.speak(utterance)
+  try {
+    window.speechSynthesis.cancel()
+    const utterance = new SpeechSynthesisUtterance(text)
+    utterance.lang = 'en-US'
+    utterance.rate = 0.9
+    window.speechSynthesis.speak(utterance)
+  } catch (error) {
+    console.warn('Speech synthesis error:', error)
+  }
 }
+
 const processVoiceCommand = (cmd) => {
-  if (cmd.includes('turn off') || cmd.includes('off all lights')) executeQuickActionById('all_lights_off')
-  else if (cmd.includes('turn on') || cmd.includes('on all lights')) executeQuickActionById('all_lights_on')
-  else if (cmd.includes('26')) executeQuickActionById('set_temp_26')
-  else if (cmd.includes('energy saving')) executeQuickActionById('energy_saving')
-  else if (cmd.includes('comfort')) executeQuickActionById('comfort_mode')
-  else if (cmd.includes('off duty')) executeQuickActionById('off_duty')
-  else if (cmd.includes('close all doors')) executeQuickActionById('doors_all_close')
-  else ElMessage.info(`Command not recognized: "${cmd}"`)
+  // 模拟处理命令
+  if (cmd.includes('turn off') || cmd.includes('off all lights')) {
+    executeQuickActionById('all_lights_off')
+  } else if (cmd.includes('turn on') || cmd.includes('on all lights')) {
+    executeQuickActionById('all_lights_on')
+  } else if (cmd.includes('26')) {
+    executeQuickActionById('set_temp_26')
+  } else if (cmd.includes('energy saving')) {
+    executeQuickActionById('energy_saving')
+  } else if (cmd.includes('comfort')) {
+    executeQuickActionById('comfort_mode')
+  } else if (cmd.includes('off duty')) {
+    executeQuickActionById('off_duty')
+  } else if (cmd.includes('close all doors')) {
+    executeQuickActionById('doors_all_close')
+  } else {
+    ElMessage.info(`Command: "${cmd}"`)
+    speakText(`Command ${cmd} received`)
+  }
 }
 
 // ==================== Quick Actions ====================
@@ -305,7 +340,11 @@ const quickActions = ref([
   { id: 'doors_all_close', name: 'All Doors Close', icon: 'Lock', description: 'Secure all access points', color: '#ef4444', action: 'doors_all_close' }
 ])
 
-const showToast = (msg) => { ElMessage.success(msg); speakText(msg) }
+const showToast = (msg) => {
+  ElMessage.success(msg)
+  speakText(msg)
+}
+
 const executeQuickAction = (action) => {
   switch (action.action) {
     case 'lighting_all_off': lightingZones.value.forEach(z => z.status = false); showToast('All lights turned off'); break
@@ -318,24 +357,54 @@ const executeQuickAction = (action) => {
   }
   addOperationRecord(action.name, 'Success')
 }
+
 const executeQuickActionById = (id) => { const a = quickActions.value.find(a => a.id === id); if (a) executeQuickAction(a) }
+
 const addActionDialogVisible = ref(false)
 const newActionForm = ref({ name: '', actionType: 'lighting_all_off', color: '#409eff' })
+
 const openAddQuickAction = () => { newActionForm.value = { name: '', actionType: 'lighting_all_off', color: '#409eff' }; addActionDialogVisible.value = true }
+
 const addQuickAction = () => {
   if (!newActionForm.value.name) { ElMessage.warning('Please enter action name'); return }
-  const map = { lighting_all_off: { icon: 'Sunny', action: 'lighting_all_off', desc: 'Turn off all lights' }, lighting_all_on: { icon: 'Sunny', action: 'lighting_all_on', desc: 'Turn on all lights' }, hvac_temp_26: { icon: 'ColdDrink', action: 'hvac_temp_26', desc: 'Set HVAC to 26°C' }, energy_saving: { icon: 'Star', action: 'energy_saving', desc: 'Eco mode' }, comfort_mode: { icon: 'Sunny', action: 'comfort_mode', desc: 'Comfort settings' }, doors_all_close: { icon: 'Lock', action: 'doors_all_close', desc: 'Close all doors' }, off_duty: { icon: 'Timer', action: 'off_duty', desc: 'Turn off all' } }
+  const map = {
+    lighting_all_off: { icon: 'Sunny', action: 'lighting_all_off', desc: 'Turn off all lights' },
+    lighting_all_on: { icon: 'Sunny', action: 'lighting_all_on', desc: 'Turn on all lights' },
+    hvac_temp_26: { icon: 'ColdDrink', action: 'hvac_temp_26', desc: 'Set HVAC to 26°C' },
+    energy_saving: { icon: 'Star', action: 'energy_saving', desc: 'Eco mode' },
+    comfort_mode: { icon: 'Sunny', action: 'comfort_mode', desc: 'Comfort settings' },
+    doors_all_close: { icon: 'Lock', action: 'doors_all_close', desc: 'Close all doors' },
+    off_duty: { icon: 'Timer', action: 'off_duty', desc: 'Turn off all' }
+  }
   const preset = map[newActionForm.value.actionType]
   quickActions.value.push({ id: Date.now().toString(), name: newActionForm.value.name, icon: preset.icon, description: preset.desc, color: newActionForm.value.color, action: newActionForm.value.actionType })
   addActionDialogVisible.value = false; showToast(`Added: ${newActionForm.value.name}`)
 }
+
 const deleteQuickAction = (id) => { quickActions.value = quickActions.value.filter(a => a.id !== id); ElMessage.info('Deleted') }
+
 const moveAction = (from, to) => { if (to < 0 || to >= quickActions.value.length) return; [quickActions.value[from], quickActions.value[to]] = [quickActions.value[to], quickActions.value[from]] }
 
 // ==================== Device Data ====================
-const hvacTemp = ref(24); const currentHvacMode = ref('Cool'); const fanSpeedValue = ref(60)
-const adjustTemp = (d) => { let t = hvacTemp.value + d; if (t >= 16 && t <= 30) { hvacTemp.value = t; showToast(`Temperature set to ${hvacTemp.value}°C`); addOperationRecord(`Temperature set to ${hvacTemp.value}°C`, 'Success') } }
-const setHvacMode = (m) => { currentHvacMode.value = m; showToast(`Mode changed to ${m}`); addOperationRecord(`Mode changed to ${m}`, 'Success') }
+const hvacTemp = ref(24)
+const currentHvacMode = ref('Cool')
+const fanSpeedValue = ref(60)
+
+const adjustTemp = (d) => {
+  let t = hvacTemp.value + d
+  if (t >= 16 && t <= 30) {
+    hvacTemp.value = t
+    showToast(`Temperature set to ${hvacTemp.value}°C`)
+    addOperationRecord(`Temperature set to ${hvacTemp.value}°C`, 'Success')
+  }
+}
+
+const setHvacMode = (m) => {
+  currentHvacMode.value = m
+  showToast(`Mode changed to ${m}`)
+  addOperationRecord(`Mode changed to ${m}`, 'Success')
+}
+
 const setFanSpeed = (v) => addOperationRecord(`Fan speed set to ${v}%`, 'Success')
 
 const lightingZones = ref([
@@ -346,9 +415,14 @@ const lightingZones = ref([
   { name: 'Meeting Room', status: true },
   { name: 'Restroom', status: false }
 ])
-const toggleLighting = (z) => { let s = z.status ? 'ON' : 'OFF'; showToast(`${z.name} lights ${s}`); addOperationRecord(`${z.name} lights ${s}`, 'Success') }
 
-// Access Control - 8 doors
+const toggleLighting = (z) => {
+  z.status = !z.status
+  let s = z.status ? 'ON' : 'OFF'
+  showToast(`${z.name} lights ${s}`)
+  addOperationRecord(`${z.name} lights ${s}`, 'Success')
+}
+
 const doors = ref([
   { name: 'Main Gate', status: false },
   { name: 'North Gate', status: false },
@@ -359,11 +433,32 @@ const doors = ref([
   { name: 'Loading Dock', status: true },
   { name: 'Roof Access', status: false }
 ])
-const toggleDoor = (d) => { d.status = !d.status; let a = d.status ? 'Opened' : 'Closed'; showToast(`${d.name} ${a}`); addOperationRecord(`${d.name} ${a}`, 'Success') }
-const openAllDoors = () => { doors.value.forEach(d => d.status = true); showToast('All doors opened'); addOperationRecord('All doors opened', 'Success') }
-const emergencyLockdown = async () => { try { await ElMessageBox.confirm('Close all doors immediately?', 'Emergency Lockdown', { confirmButtonText: 'Lockdown', type: 'error' }); doors.value.forEach(d => d.status = false); showToast('Emergency lockdown activated!'); addOperationRecord('Emergency lockdown', 'Critical') } catch {} }
 
-// Emergency Actions - 6 buttons
+const toggleDoor = (d) => {
+  d.status = !d.status
+  let a = d.status ? 'Opened' : 'Closed'
+  showToast(`${d.name} ${a}`)
+  addOperationRecord(`${d.name} ${a}`, 'Success')
+}
+
+const openAllDoors = () => {
+  doors.value.forEach(d => d.status = true)
+  showToast('All doors opened')
+  addOperationRecord('All doors opened', 'Success')
+}
+
+const emergencyLockdown = async () => {
+  try {
+    await ElMessageBox.confirm('Close all doors immediately?', 'Emergency Lockdown', {
+      confirmButtonText: 'Lockdown',
+      type: 'error'
+    })
+    doors.value.forEach(d => d.status = false)
+    showToast('Emergency lockdown activated!')
+    addOperationRecord('Emergency lockdown', 'Critical')
+  } catch {}
+}
+
 const callSecurity = () => { showToast('Security team dispatched'); addOperationRecord('Security dispatched', 'Critical') }
 const callFire = () => { showToast('Fire alert activated! Fire department notified.'); addOperationRecord('Fire alert', 'Critical') }
 const dispatchRepair = () => { showToast('Repair technician dispatched'); addOperationRecord('Repair dispatched', 'Pending') }
@@ -379,14 +474,37 @@ const batchControl = (type, action) => {
 }
 
 const recentOperations = ref([{ time: new Date().toLocaleTimeString(), action: 'System Ready', result: 'Success' }])
-const addOperationRecord = (action, result) => { recentOperations.value.unshift({ time: new Date().toLocaleTimeString(), action, result }); if (recentOperations.value.length > 10) recentOperations.value.pop() }
+
+const addOperationRecord = (action, result) => {
+  recentOperations.value.unshift({ time: new Date().toLocaleTimeString(), action, result })
+  if (recentOperations.value.length > 10) recentOperations.value.pop()
+}
 
 // ==================== Loading ====================
 const startLoading = () => {
-  let p = 0; const interval = setInterval(() => { p += Math.random() * 20; if (p >= 100) { p = 100; clearInterval(interval); setTimeout(() => { isLoaded.value = true }, 300) }; loadingProgress.value = Math.min(p, 100) }, 200); setTimeout(() => { loadingMessage.value = 'Ready!' }, 1500)
+  let p = 0
+  const interval = setInterval(() => {
+    p += Math.random() * 20
+    if (p >= 100) {
+      p = 100
+      clearInterval(interval)
+      setTimeout(() => { isLoaded.value = true }, 300)
+    }
+    loadingProgress.value = Math.min(p, 100)
+  }, 200)
+  setTimeout(() => { loadingMessage.value = 'Ready!' }, 1500)
 }
-onMounted(() => { startLoading(); navigator.mediaDevices.getUserMedia({ audio: true }).catch(() => {}) })
-onBeforeUnmount(() => { if (recognition) recognition.abort(); window.speechSynthesis?.cancel() })
+
+onMounted(() => {
+  startLoading()
+})
+
+onBeforeUnmount(() => {
+  if (listenTimer) {
+    clearInterval(listenTimer)
+  }
+  if (window.speechSynthesis) window.speechSynthesis.cancel()
+})
 </script>
 
 <style scoped>
