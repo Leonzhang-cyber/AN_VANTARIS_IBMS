@@ -18,6 +18,14 @@ class VPInvalidError(DIDError):
 class PermissionDenied:
     pass
 
+# src/system/exceptions.py
+class NotFoundError(Exception):
+    pass
+
+
+class DuplicateError(Exception):
+    pass
+
 
 # src/system/exceptions.py
 class NotFoundError(Exception):
