@@ -6,7 +6,7 @@
  * 请求自动携带 token（如果存在）
  */
 
-import { get, post } from '@/uilts/request.js'
+import { get, post } from '@/utils/request.js'
 
 // ==================== 1. 系统初始化 ====================
 /**

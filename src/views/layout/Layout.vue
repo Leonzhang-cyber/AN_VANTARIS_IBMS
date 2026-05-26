@@ -25,7 +25,15 @@
       </div>
 
       <div class="menu-scroll">
+        <!-- 加载中状态 -->
+        <div v-if="isLoading" class="menu-loading">
+          <el-icon class="is-loading"><Loading /></el-icon>
+          <span>Loading menu...</span>
+        </div>
+
+        <!-- 菜单渲染 -->
         <el-menu
+            v-else
             :key="route.path"
             background-color="#0a1629"
             text-color="#e5eaf3"
@@ -299,67 +307,39 @@
             </el-dropdown>
           </template>
 
-          <!-- 版本切换下拉按钮组 -->
-<!--          <template v-if="!isMobile">-->
-<!--            <el-dropdown trigger="click" @command="handleVersionChange" class="version-dropdown">-->
-<!--              <el-button size="small" class="version-btn pill-btn">-->
-<!--                <span class="version-icon">🏷️</span>-->
-<!--                <span class="version-text">{{ currentVersionFullName }}</span>-->
-<!--                <el-icon class="el-icon&#45;&#45;right"><ArrowDown /></el-icon>-->
-<!--              </el-button>-->
-<!--              <template #dropdown>-->
-<!--                <el-dropdown-menu class="version-dropdown-menu">-->
-<!--                  <div class="version-dropdown-header">-->
-<!--                    <span>Select Edition</span>-->
-<!--                  </div>-->
-
-<!--                  <el-dropdown-item command="essential" class="version-item" :class="{ 'active-version': menuVersion === 'essential' }">-->
-<!--                    <div class="version-item-content">-->
-<!--                      <span class="version-item-icon">📊</span>-->
-<!--                      <div class="version-item-info">-->
-<!--                        <span class="version-item-title">Essential</span>-->
-<!--                        <span class="version-item-desc">Core device management & administration</span>-->
-<!--                      </div>-->
-<!--                      <span class="version-item-badge" v-if="menuVersion === 'essential'">✓</span>-->
-<!--                    </div>-->
-<!--                  </el-dropdown-item>-->
-
-<!--                  <el-dropdown-item command="professional" class="version-item" :class="{ 'active-version': menuVersion === 'professional' }">-->
-<!--                    <div class="version-item-content">-->
-<!--                      <span class="version-item-icon">🚀</span>-->
-<!--                      <div class="version-item-info">-->
-<!--                        <span class="version-item-title">Professional</span>-->
-<!--                        <span class="version-item-desc">Alarm, maintenance, reports & API</span>-->
-<!--                      </div>-->
-<!--                      <span class="version-item-badge" v-if="menuVersion === 'professional'">✓</span>-->
-<!--                    </div>-->
-<!--                  </el-dropdown-item>-->
-
-<!--                  <el-dropdown-item command="smart-campus" class="version-item" :class="{ 'active-version': menuVersion === 'smart-campus' }">-->
-<!--                    <div class="version-item-content">-->
-<!--                      <span class="version-item-icon">🏢</span>-->
-<!--                      <div class="version-item-info">-->
-<!--                        <span class="version-item-title">Smart Campus</span>-->
-<!--                        <span class="version-item-desc">Multi-site, energy, blockchain & command center</span>-->
-<!--                      </div>-->
-<!--                      <span class="version-item-badge" v-if="menuVersion === 'smart-campus'">✓</span>-->
-<!--                    </div>-->
-<!--                  </el-dropdown-item>-->
-
-<!--                  <el-dropdown-item command="enterprise-ai" class="version-item" :class="{ 'active-version': menuVersion === 'enterprise-ai' }">-->
-<!--                    <div class="version-item-content">-->
-<!--                      <span class="version-item-icon">👑</span>-->
-<!--                      <div class="version-item-info">-->
-<!--                        <span class="version-item-title">Enterprise AI</span>-->
-<!--                        <span class="version-item-desc">AI analytics, video intelligence & digital twin</span>-->
-<!--                      </div>-->
-<!--                      <span class="version-item-badge" v-if="menuVersion === 'enterprise-ai'">✓</span>-->
-<!--                    </div>-->
-<!--                  </el-dropdown-item>-->
-<!--                </el-dropdown-menu>-->
-<!--              </template>-->
-<!--            </el-dropdown>-->
-<!--          </template>-->
+          <!-- 版本切换下拉按钮组 - 动态从后端获取版本列表 -->
+          <template v-if="!isMobile && allVersions.length > 0">
+            <el-dropdown trigger="click" @command="handleVersionChange" class="version-dropdown">
+              <el-button size="small" class="version-btn pill-btn">
+                <span class="version-icon">{{ currentVersionIcon }}</span>
+                <span class="version-text">{{ currentVersionFullName }}</span>
+                <el-icon class="el-icon--right"><ArrowDown /></el-icon>
+              </el-button>
+              <template #dropdown>
+                <el-dropdown-menu class="version-dropdown-menu">
+                  <div class="version-dropdown-header">
+                    <span>Select Edition</span>
+                  </div>
+                  <el-dropdown-item
+                      v-for="version in allVersions"
+                      :key="version.version_code"
+                      :command="version.version_code"
+                      class="version-item"
+                      :class="{ 'active-version': menuVersion === version.version_code }"
+                  >
+                    <div class="version-item-content">
+                      <span class="version-item-icon">{{ version.icon || '📦' }}</span>
+                      <div class="version-item-info">
+                        <span class="version-item-title">{{ version.version_name }}</span>
+                        <span class="version-item-desc">{{ version.description }}</span>
+                      </div>
+                      <span class="version-item-badge" v-if="menuVersion === version.version_code">✓</span>
+                    </div>
+                  </el-dropdown-item>
+                </el-dropdown-menu>
+              </template>
+            </el-dropdown>
+          </template>
 
           <!-- 更多菜单 - 显示被折叠的按钮 -->
           <el-dropdown
@@ -410,7 +390,6 @@
           <el-dropdown trigger="click" @command="handleUserCommand" class="user-dropdown">
             <span class="user-avatar glass-avatar">
                 <el-avatar :size="isMobile ? 28 : 32" :src="userAvatar" />
-              <!-- <span class="user-name" v-if="!isMobile">{{ userName }}</span> -->
             </span>
             <template #dropdown>
               <el-dropdown-menu>
@@ -635,6 +614,7 @@ import { computed, ref, onMounted, onUnmounted, watch, onErrorCaptured, nextTick
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
+import { Loading } from '@element-plus/icons-vue'
 import {
   Odometer, Cpu, TrendCharts, House, Connection, Bell, SetUp, PieChart,
   DataLine, Headset, Setting, FullScreen, Expand, Lock, ArrowDown,
@@ -644,6 +624,7 @@ import {
   MagicStick, SwitchFilled, Reading, Platform, Mic, BellFilled, Cpu as CpuIcon
 } from '@element-plus/icons-vue'
 import { useCounterStore } from '@/stores/counter.js'
+import { initMenuData, switchVersion } from '@/utils/menuInit.js'
 
 const route = useRoute()
 const router = useRouter()
@@ -651,336 +632,22 @@ const { locale } = useI18n()
 const isFullscreen = ref(false)
 const counterStore = useCounterStore()
 
-// ==================== 菜单配置（固定配置）====================
-// ==================== 菜单配置（固定配置）====================
-const menuConfig = ref([
+// ==================== 从 store 获取菜单配置（动态从后端API获取）====================
+const menuConfig = computed(() => counterStore.menuConfig)
+const allVersions = computed(() => counterStore.allVersions)
+const menuVersion = computed(() => counterStore.menuVersion)
+const isLoading = computed(() => counterStore.isLoading)
+const currentVersionFullName = computed(() => counterStore.currentVersionFullName)
+const currentVersionIcon = computed(() => counterStore.currentVersionIcon)
 
-  {
-    index: '/home/system-overview',
-    title: 'Dashboard',
-    icon: 'View'
-  },
-  // ==================== Home ====================
-  {
-    index: '/home',
-    title: 'Home',
-    icon: 'View',
-    children: [
-      { index: '/home/system-overview', title: 'System Overview' },
-      { index: '/home/kpi-dashboard', title: 'KPI Dashboard' },
-      { index: '/home/alarm-summary', title: 'Alarm Summary' },
-      { index: '/home/energy-overview', title: 'Energy Overview' },
-      { index: '/home/site-health-dashboard', title: 'Site Health Dashboard' },
-      { index: '/home/esg-dashboard', title: 'ESG Dashboard' },
-      { index: '/home/portfolio-dashboard', title: 'Portfolio Dashboard' },
-      { index: '/home/ai-insights', title: 'AI Insights' }
-    ]
-  },
-
-  // ==================== Operations ====================
-  {
-    index: '/operations',
-    title: 'Operations',
-    icon: 'Coordinate',
-    children: [
-      { index: '/operations/quick-control', title: 'Quick Control' },
-      { index: '/operations/scene-management', title: 'Scene Management' },
-      { index: '/operations/emergency-response', title: 'Emergency Response' },
-      { index: '/operations/operations-logbook', title: 'Operations Logbook' },
-      { index: '/operations/shift-handover', title: 'Shift Handover' }
-    ]
-  },
-
-  // ==================== Sites & Spaces ====================
-  {
-    index: '/sites-spaces',
-    title: 'Sites & Spaces',
-    icon: 'Odometer',
-    children: [
-      { index: '/sites-spaces/site-management', title: 'Site Management' },
-      { index: '/sites-spaces/building-management', title: 'Building Management' },
-      { index: '/sites-spaces/floor-management', title: 'Floor Management' },
-      { index: '/sites-spaces/zone-management', title: 'Zone Management' },
-      { index: '/sites-spaces/space-management', title: 'Space Management' },
-      { index: '/sites-spaces/multi-site-management', title: 'Multi-Site Management' }
-    ]
-  },
-
-  // ==================== Systems & Devices ====================
-  {
-    index: '/systems-devices',
-    title: 'Systems & Devices',
-    icon: 'Cpu',
-    children: [
-      // Device Management
-      { index: '/systems-devices/device-inventory', title: 'Device Inventory' },
-      { index: '/systems-devices/device-monitoring', title: 'Device Monitoring' },
-      { index: '/systems-devices/device-groups', title: 'Device Groups' },
-      { index: '/systems-devices/device-templates', title: 'Device Templates' },
-      { index: '/systems-devices/point-management', title: 'Point Management' },
-      { index: '/systems-devices/area-topology', title: 'Area Topology' },
-      // Specific Systems
-      { index: '/systems-devices/hvac-systems', title: 'HVAC Systems' },
-      { index: '/systems-devices/lighting-systems', title: 'Lighting Systems' },
-      { index: '/systems-devices/electrical-systems', title: 'Electrical Systems' },
-      { index: '/systems-devices/plumbing-systems', title: 'Plumbing Systems' },
-      { index: '/systems-devices/fire-alarm-systems', title: 'Fire Alarm Systems' },
-      { index: '/systems-devices/security-alarm-systems', title: 'Security Alarm Systems' },
-      { index: '/systems-devices/access-control-systems', title: 'Access Control Systems' },
-      { index: '/systems-devices/cctv-systems', title: 'CCTV Systems' },
-      { index: '/systems-devices/ev-charging-systems', title: 'EV Charging Systems' },
-      { index: '/systems-devices/renewable-energy-systems', title: 'Renewable Energy Systems' }
-    ]
-  },
-
-  // ==================== Alarms & Events ====================
-  {
-    index: '/alarms-events',
-    title: 'Alarms & Events',
-    icon: 'BellFilled',
-    children: [
-      { index: '/alarms-events/live-alarms', title: 'Live Alarms' },
-      { index: '/alarms-events/alarm-history', title: 'Alarm History' },
-      { index: '/alarms-events/alarm-rules', title: 'Alarm Rules' },
-      { index: '/alarms-events/alarm-correlation', title: 'Alarm Correlation' },
-      { index: '/alarms-events/escalation-rules', title: 'Escalation Rules' },
-      { index: '/alarms-events/notification-center', title: 'Notification Center' },
-      { index: '/alarms-events/event-analytics', title: 'Event Analytics' }
-    ]
-  },
-
-  // ==================== Fault Management ====================
-  {
-    index: '/fault-management',
-    title: 'Fault Management',
-    icon: 'WarningFilled',
-    children: [
-      { index: '/fault-management/fault-dashboard', title: 'Fault Dashboard' },
-      { index: '/fault-management/active-faults', title: 'Active Faults' },
-      { index: '/fault-management/fault-history', title: 'Fault History' },
-      { index: '/fault-management/fault-correlation', title: 'Fault Correlation' },
-      { index: '/fault-management/root-cause-analysis', title: 'Root Cause Analysis' },
-      { index: '/fault-management/fault-rules-engine', title: 'Fault Rules Engine' },
-      { index: '/fault-management/fault-workflow', title: 'Fault Workflow' },
-      { index: '/fault-management/fault-analytics', title: 'Fault Analytics' },
-      { index: '/fault-management/knowledge-base', title: 'Knowledge Base' },
-      { index: '/fault-management/ai-fault-diagnosis', title: 'AI Fault Diagnosis' }
-    ]
-  },
-
-  // ==================== Maintenance ====================
-  {
-    index: '/maintenance',
-    title: 'Maintenance',
-    icon: 'SetUp',
-    children: [
-      { index: '/maintenance/work-orders', title: 'Work Orders' },
-      { index: '/maintenance/dispatch-management', title: 'Dispatch Management' },
-      { index: '/maintenance/inspection-management', title: 'Inspection Management' },
-      { index: '/maintenance/preventive-maintenance', title: 'Preventive Maintenance' },
-      { index: '/maintenance/predictive-maintenance', title: 'Predictive Maintenance' },
-      { index: '/maintenance/asset-management', title: 'Asset Management' },
-      { index: '/maintenance/spare-parts-management', title: 'Spare Parts Management' },
-      { index: '/maintenance/vendor-management', title: 'Vendor Management' },
-      { index: '/maintenance/sla-management', title: 'SLA Management' },
-      { index: '/maintenance/maintenance-analytics', title: 'Maintenance Analytics' }
-    ]
-  },
-
-  // ==================== Energy & Sustainability ====================
-  {
-    index: '/energy-sustainability',
-    title: 'Energy & Sustainability',
-    icon: 'TrendCharts',
-    children: [
-      { index: '/energy-sustainability/electricity-monitoring', title: 'Electricity Monitoring' },
-      { index: '/energy-sustainability/water-monitoring', title: 'Water Monitoring' },
-      { index: '/energy-sustainability/gas-monitoring', title: 'Gas Monitoring' },
-      { index: '/energy-sustainability/thermal-energy-monitoring', title: 'Thermal Energy Monitoring' },
-      { index: '/energy-sustainability/solar-monitoring', title: 'Solar Monitoring' },
-      { index: '/energy-sustainability/battery-storage', title: 'Battery Storage' },
-      { index: '/energy-sustainability/utility-billing', title: 'Utility Billing' },
-      { index: '/energy-sustainability/energy-analytics', title: 'Energy Analytics' },
-      { index: '/energy-sustainability/carbon-analytics', title: 'Carbon Analytics' },
-      { index: '/energy-sustainability/esg-dashboard-energy', title: 'ESG Dashboard' }
-    ]
-  },
-
-  // ==================== Facility Services ====================
-  {
-    index: '/facility-services',
-    title: 'Facility Services',
-    icon: 'House',
-    children: [
-      { index: '/facility-services/parking-management', title: 'Parking Management' },
-      { index: '/facility-services/visitor-management', title: 'Visitor Management' },
-      { index: '/facility-services/meeting-room-booking', title: 'Meeting Room Booking' },
-      { index: '/facility-services/housekeeping-management', title: 'Housekeeping Management' },
-      { index: '/facility-services/waste-management', title: 'Waste Management' },
-      { index: '/facility-services/occupancy-analytics', title: 'Occupancy Analytics' },
-      { index: '/facility-services/facility-requests', title: 'Facility Requests' }
-    ]
-  },
-
-  // ==================== Decision & Evidence ====================
-  {
-    index: '/decision-evidence',
-    title: 'Decision & Evidence',
-    icon: 'Reading',
-    children: [
-      { index: '/decision-evidence/decision-dashboard', title: 'Decision Dashboard' },
-      { index: '/decision-evidence/decision-register', title: 'Decision Register' },
-      { index: '/decision-evidence/workflow-management', title: 'Workflow Management' },
-      { index: '/decision-evidence/decision-timeline', title: 'Decision Timeline' },
-      { index: '/decision-evidence/evidence-repository', title: 'Evidence Repository' },
-      { index: '/decision-evidence/audit-trail', title: 'Audit Trail' },
-      { index: '/decision-evidence/digital-signatures', title: 'Digital Signatures' },
-      { index: '/decision-evidence/lessons-learned', title: 'Lessons Learned' },
-      { index: '/decision-evidence/ai-recommendation-log', title: 'AI Recommendation Log' }
-    ]
-  },
-
-  // ==================== Command Center ====================
-  {
-    index: '/command-center',
-    title: 'Command Center',
-    icon: 'Platform',
-    children: [
-      { index: '/command-center/operations-dashboard', title: 'Operations Dashboard' },
-      { index: '/command-center/gis-map', title: 'GIS Map' },
-      { index: '/command-center/situation-awareness', title: 'Situation Awareness' },
-      { index: '/command-center/incident-center', title: 'Incident Center' },
-      { index: '/command-center/emergency-command', title: 'Emergency Command' },
-      { index: '/command-center/resource-dispatch', title: 'Resource Dispatch' },
-      { index: '/command-center/executive-dashboard', title: 'Executive Dashboard' }
-    ]
-  },
-
-  // ==================== Intelligence ====================
-  {
-    index: '/intelligence',
-    title: 'Intelligence',
-    icon: 'MagicStick',
-    children: [
-      { index: '/intelligence/ai-assistant', title: 'AI Assistant' },
-      { index: '/intelligence/predictive-maintenance-intel', title: 'Predictive Maintenance' },
-      { index: '/intelligence/fault-diagnostics', title: 'Fault Diagnostics' },
-      { index: '/intelligence/anomaly-detection', title: 'Anomaly Detection' },
-      { index: '/intelligence/energy-optimization', title: 'Energy Optimization' },
-      { index: '/intelligence/occupancy-forecast', title: 'Occupancy Forecast' },
-      { index: '/intelligence/recommendation-center', title: 'Recommendation Center' },
-      { index: '/intelligence/knowledge-graph', title: 'Knowledge Graph' },
-      { index: '/intelligence/digital-operator', title: 'Digital Operator' }
-    ]
-  },
-
-  // ==================== AI Video Analytics ====================
-  {
-    index: '/ai-video-analytics',
-    title: 'AI Video Analytics',
-    icon: 'Camera',
-    children: [
-      { index: '/ai-video-analytics/ppe-compliance', title: 'PPE Compliance' },
-      { index: '/ai-video-analytics/helmet-detection', title: 'Helmet Detection' },
-      { index: '/ai-video-analytics/fall-detection', title: 'Fall Detection' },
-      { index: '/ai-video-analytics/intrusion-detection', title: 'Intrusion Detection' },
-      { index: '/ai-video-analytics/smoke-detection', title: 'Smoke Detection' },
-      { index: '/ai-video-analytics/fire-detection', title: 'Fire Detection' },
-      { index: '/ai-video-analytics/vehicle-analytics', title: 'Vehicle Analytics' },
-      { index: '/ai-video-analytics/crowd-analytics', title: 'Crowd Analytics' },
-      { index: '/ai-video-analytics/anpr', title: 'ANPR' },
-      { index: '/ai-video-analytics/video-event-center', title: 'Video Event Center' }
-    ]
-  },
-
-  // ==================== Digital Twin ====================
-  {
-    index: '/digital-twin',
-    title: 'Digital Twin',
-    icon: 'Grid',
-    children: [
-      { index: '/digital-twin/bim-viewer', title: 'BIM Viewer' },
-      { index: '/digital-twin/asset-localization', title: 'Asset Localization' },
-      { index: '/digital-twin/3d-navigation', title: '3D Navigation' },
-      { index: '/digital-twin/real-time-twin', title: 'Real-Time Twin' },
-      { index: '/digital-twin/scenario-simulation', title: 'Scenario Simulation' },
-      { index: '/digital-twin/energy-simulation', title: 'Energy Simulation' },
-      { index: '/digital-twin/emergency-simulation', title: 'Emergency Simulation' },
-      { index: '/digital-twin/twin-analytics', title: 'Twin Analytics' }
-    ]
-  },
-
-  // ==================== Reports ====================
-  {
-    index: '/reports',
-    title: 'Reports',
-    icon: 'DataLine',
-    children: [
-      { index: '/reports/daily-reports', title: 'Daily Reports' },
-      { index: '/reports/weekly-reports', title: 'Weekly Reports' },
-      { index: '/reports/monthly-reports', title: 'Monthly Reports' },
-      { index: '/reports/annual-reports', title: 'Annual Reports' },
-      { index: '/reports/scheduled-reports', title: 'Scheduled Reports' },
-      { index: '/reports/custom-reports', title: 'Custom Reports' },
-      { index: '/reports/bi-reports', title: 'BI Reports' },
-      { index: '/reports/pdf-export', title: 'PDF Export' },
-      { index: '/reports/excel-export', title: 'Excel Export' }
-    ]
-  },
-
-  // ==================== Trust & Identity ====================
-  {
-    index: '/trust-identity',
-    title: 'Trust & Identity',
-    icon: 'Connection',
-    children: [
-      { index: '/trust-identity/did-identity-center', title: 'DID Identity Center' },
-      { index: '/trust-identity/credential-center', title: 'Credential Center' },
-      { index: '/trust-identity/verifiable-credentials', title: 'Verifiable Credentials' },
-      { index: '/trust-identity/blockchain-anchoring', title: 'Blockchain Anchoring' },
-      { index: '/trust-identity/smart-contracts', title: 'Smart Contracts' },
-      { index: '/trust-identity/decision-traceability', title: 'Decision Traceability' },
-      { index: '/trust-identity/trust-audit-logs', title: 'Trust Audit Logs' }
-    ]
-  },
-
-  // ==================== Administration ====================
-  {
-    index: '/administration',
-    title: 'Administration',
-    icon: 'Setting',
-    children: [
-      { index: '/administration/user-management', title: 'User Management' },
-      { index: '/administration/role-management', title: 'Role Management' },
-      { index: '/administration/permission-management', title: 'Permission Management' },
-      { index: '/administration/edition-management', title: 'Edition Management' },
-      { index: '/administration/license-management', title: 'License Management' },
-      { index: '/administration/integration-settings', title: 'Integration Settings' },
-      { index: '/administration/notification-settings', title: 'Notification Settings' },
-      { index: '/administration/system-settings', title: 'System Settings' },
-      { index: '/administration/audit-logs', title: 'Audit Logs' },
-      { index: '/administration/oem-branding', title: 'OEM Branding' }
-    ]
+// 处理版本切换命令
+const handleVersionChange = async (version) => {
+  const result = await switchVersion(counterStore, version)
+  if (result.success) {
+    ElMessage.success(`Switched to ${counterStore.currentVersionFullName.value}`)
+  } else {
+    ElMessage.error(`Failed to switch version: ${result.error}`)
   }
-])
-
-
-// ==================== 版本切换相关（仅影响界面显示，不影响菜单）====================
-const menuVersion = ref('professional')
-const currentVersionFullName = computed(() => {
-  const versions = {
-    essential: 'Essential',
-    professional: 'Professional',
-    'smart-campus': 'Smart Campus',
-    'enterprise-ai': 'Enterprise AI'
-  }
-  return versions[menuVersion.value] || 'Professional'
-})
-
-// 处理版本切换命令（仅改变显示，不影响实际菜单）
-const handleVersionChange = (version) => {
-  menuVersion.value = version
-  ElMessage.success(`Switched to ${currentVersionFullName.value}`)
 }
 
 // 图标映射（用于动态渲染）
@@ -992,6 +659,7 @@ const iconMap = {
 
 // 添加菜单项动态配置的方法
 const addMenuItem = (parentIndex, newItem) => {
+  const currentMenu = [...counterStore.menuConfig]
   const findAndAdd = (items, targetIndex) => {
     for (let i = 0; i < items.length; i++) {
       if (items[i].index === targetIndex) {
@@ -1003,10 +671,12 @@ const addMenuItem = (parentIndex, newItem) => {
     }
     return false
   }
-  findAndAdd(menuConfig.value, parentIndex)
+  findAndAdd(currentMenu, parentIndex)
+  counterStore.setMenuConfig(currentMenu)
 }
 
 const removeMenuItem = (itemIndex) => {
+  const currentMenu = [...counterStore.menuConfig]
   const remove = (items) => {
     for (let i = 0; i < items.length; i++) {
       if (items[i].index === itemIndex) {
@@ -1017,17 +687,19 @@ const removeMenuItem = (itemIndex) => {
     }
     return false
   }
-  remove(menuConfig.value)
+  remove(currentMenu)
+  counterStore.setMenuConfig(currentMenu)
 }
 
 // 导出菜单配置供外部使用
 defineExpose({
   menuConfig,
   addMenuItem,
-  removeMenuItem
+  removeMenuItem,
+  handleVersionChange
 })
 
-// 其他原有代码保持不变...
+// 其他原有代码...
 const isMobile = ref(false)
 const mobileSidebarVisible = ref(false)
 const controlsRef = ref(null)
@@ -1458,7 +1130,16 @@ const reloadRoute = async () => {
   try { await router.replace({ path: route.fullPath }) } catch {}
 }
 
-const activeMenu = computed(() => route.path)
+const activeMenu = computed(() => {
+  if (route.path && route.path !== '/') {
+    return route.path
+  }
+  if (route.path === '/') {
+    return '/home/system-overview'
+  }
+  return route.path
+})
+
 const openedMenus = ref([])
 
 // 获取父菜单路径
@@ -1539,7 +1220,13 @@ const handleResize = () => {
   })
 }
 
-onMounted(() => {
+onMounted(async () => {
+  // 初始化菜单数据（从后端API获取，不存缓存）
+  const result = await initMenuData(counterStore)
+  if (!result.success) {
+    ElMessage.error(`Failed to load menu: ${result.error}`)
+  }
+
   updateSingaporeTime()
   timeTimer = setInterval(updateSingaporeTime, 100)
   document.addEventListener('fullscreenchange', onFullScreenChange)
@@ -1562,7 +1249,7 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-/* ============ 所有样式保持原有不变 ============ */
+/* ============ 所有样式保持不变 ============ */
 /* 侧边栏 */
 .sidebar {
   background: #0a1629;
@@ -1604,6 +1291,24 @@ onUnmounted(() => {
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   -ms-overflow-style: none;
+}
+
+.menu-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: #e5eaf3;
+  gap: 12px;
+}
+
+.menu-loading .el-icon {
+  font-size: 32px;
+}
+
+.menu-loading span {
+  font-size: 12px;
 }
 
 .sidebar-footer {

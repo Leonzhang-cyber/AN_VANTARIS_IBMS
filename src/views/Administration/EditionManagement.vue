@@ -1,58 +1,38 @@
 <template>
-  <!-- Loading Screen -->
-  <div v-if="!isLoaded" class="loading-container">
-    <div class="loading-overlay">
-      <div class="loading-content">
-        <div class="loading-spinner">
-          <div class="spinner-ring"></div>
-          <div class="spinner-ring"></div>
-          <div class="spinner-ring"></div>
-        </div>
-        <div class="loading-text">
-          <span class="loading-title">Loading</span>
-          <span class="loading-dots">
-            <span>.</span><span>.</span><span>.</span>
-          </span>
-        </div>
-        <div class="loading-progress">
-          <div class="progress-bar" :style="{ width: loadingProgress + '%' }"></div>
-        </div>
-        <div class="loading-tip">Edition Menu Manager</div>
-        <div class="loading-subtip">{{ loadingMessage }}</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Main Content -->
-  <div v-else class="edition-manager">
-    <!-- Header -->
+  <div class="edition-manager">
+    <!-- 头部 -->
     <div class="manager-header">
       <div class="header-title">
         <el-icon><Edit /></el-icon>
         <span>Edition Menu Manager</span>
       </div>
       <div class="header-actions">
-        <el-button type="success" @click="saveAllChanges" :loading="saving">
+        <el-button
+            type="success"
+            @click="saveAllChanges"
+            :loading="saving"
+            :disabled="!hasChanges"
+        >
           <el-icon><Check /></el-icon>
           Save Configuration
         </el-button>
-        <el-button @click="resetAllChanges">
+        <el-button @click="resetChanges" :disabled="!hasChanges">
           <el-icon><Refresh /></el-icon>
           Reset
         </el-button>
       </div>
     </div>
 
-    <!-- 当前系统激活版本显示 + 切换按钮 -->
+    <!-- 当前激活版本显示 + 切换按钮 -->
     <div class="active-version-bar">
       <div class="active-version-content">
         <el-tag type="primary" size="large" effect="dark" class="active-version-tag">
           <el-icon><Monitor /></el-icon>
           <span>Currently Active: </span>
-          <strong>{{ systemActiveVersionFullName }}</strong>
+          <strong>{{ activeVersionName }}</strong>
         </el-tag>
         <el-tag type="info" size="small" class="active-version-desc">
-          {{ systemActiveVersionDesc }}
+          {{ activeVersionDesc }}
         </el-tag>
       </div>
       <div class="active-version-actions">
@@ -64,25 +44,15 @@
           </el-button>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item command="essential" :class="{ 'is-active': systemActiveVersion === 'essential' }">
-                <span class="version-option-icon">📊</span>
-                <span>Essential Version</span>
-                <el-icon v-if="systemActiveVersion === 'essential'" class="check-icon"><Check /></el-icon>
-              </el-dropdown-item>
-              <el-dropdown-item command="professional" :class="{ 'is-active': systemActiveVersion === 'professional' }">
-                <span class="version-option-icon">🚀</span>
-                <span>Professional Edition</span>
-                <el-icon v-if="systemActiveVersion === 'professional'" class="check-icon"><Check /></el-icon>
-              </el-dropdown-item>
-              <el-dropdown-item command="smart-campus" :class="{ 'is-active': systemActiveVersion === 'smart-campus' }">
-                <span class="version-option-icon">🏢</span>
-                <span>Smart Campus Edition</span>
-                <el-icon v-if="systemActiveVersion === 'smart-campus'" class="check-icon"><Check /></el-icon>
-              </el-dropdown-item>
-              <el-dropdown-item command="enterprise-ai" :class="{ 'is-active': systemActiveVersion === 'enterprise-ai' }">
-                <span class="version-option-icon">👑</span>
-                <span>Enterprise AI Flagship</span>
-                <el-icon v-if="systemActiveVersion === 'enterprise-ai'" class="check-icon"><Check /></el-icon>
+              <el-dropdown-item
+                  v-for="version in allVersions"
+                  :key="version.version_code"
+                  :command="version.version_code"
+                  :class="{ 'is-active': currentActiveVersion === version.version_code }"
+              >
+                <span class="version-option-icon">{{ version.icon || '📦' }}</span>
+                <span>{{ version.version_name }}</span>
+                <el-icon v-if="currentActiveVersion === version.version_code" class="check-icon"><Check /></el-icon>
               </el-dropdown-item>
             </el-dropdown-menu>
           </template>
@@ -90,58 +60,35 @@
       </div>
     </div>
 
-    <!-- Version Tabs -->
+    <!-- 版本标签页 -->
     <div class="version-tabs">
-      <el-tabs v-model="activeVersion" type="card" @tab-click="handleTabClick">
-        <el-tab-pane name="essential">
+      <el-tabs v-model="currentEditVersion" type="card" @tab-click="handleTabChange">
+        <el-tab-pane
+            v-for="version in allVersions"
+            :key="version.version_code"
+            :name="version.version_code"
+        >
           <template #label>
-            <span class="tab-label" :class="{ 'is-system-active': systemActiveVersion === 'essential' }">
-              <span class="tab-icon">📊</span>
-              <span>Essential</span>
-              <el-tag v-if="systemActiveVersion === 'essential'" size="small" type="primary" class="active-badge">Active</el-tag>
-            </span>
-          </template>
-        </el-tab-pane>
-        <el-tab-pane name="professional">
-          <template #label>
-            <span class="tab-label" :class="{ 'is-system-active': systemActiveVersion === 'professional' }">
-              <span class="tab-icon">🚀</span>
-              <span>Professional</span>
-              <el-tag v-if="systemActiveVersion === 'professional'" size="small" type="primary" class="active-badge">Active</el-tag>
-            </span>
-          </template>
-        </el-tab-pane>
-        <el-tab-pane name="smart-campus">
-          <template #label>
-            <span class="tab-label" :class="{ 'is-system-active': systemActiveVersion === 'smart-campus' }">
-              <span class="tab-icon">🏢</span>
-              <span>Smart Campus</span>
-              <el-tag v-if="systemActiveVersion === 'smart-campus'" size="small" type="primary" class="active-badge">Active</el-tag>
-            </span>
-          </template>
-        </el-tab-pane>
-        <el-tab-pane name="enterprise-ai">
-          <template #label>
-            <span class="tab-label" :class="{ 'is-system-active': systemActiveVersion === 'enterprise-ai' }">
-              <span class="tab-icon">👑</span>
-              <span>Enterprise AI</span>
-              <el-tag v-if="systemActiveVersion === 'enterprise-ai'" size="small" type="primary" class="active-badge">Active</el-tag>
+            <span class="tab-label" :class="{ 'is-system-active': currentActiveVersion === version.version_code }">
+              <span class="tab-icon">{{ version.icon || '📦' }}</span>
+              <span>{{ version.version_name }}</span>
+              <el-tag v-if="currentActiveVersion === version.version_code" size="small" type="primary" class="active-badge">Active</el-tag>
             </span>
           </template>
         </el-tab-pane>
       </el-tabs>
     </div>
 
-    <!-- Version Info Bar - 当前编辑的版本信息 + 展开/折叠按钮 -->
+    <!-- 当前编辑版本信息 -->
     <div class="version-info-bar">
       <div class="info-content">
         <el-icon><Edit /></el-icon>
         <span class="info-label">Editing:</span>
-        <span class="version-name">{{ currentVersionFullName }}</span>
-        <span class="version-desc">{{ currentVersionDesc }}</span>
+        <span class="version-name">{{ currentEditVersionName }}</span>
+        <span class="version-desc">{{ currentEditVersionDesc }}</span>
       </div>
       <div class="selection-info">
-        <span>Selected: <strong>{{ selectedCount }}</strong> / <strong>{{ totalMenuCount }}</strong> menus</span>
+        <span>Selected: <strong>{{ currentSelectedCount }}</strong> / <strong>{{ totalMenuCount }}</strong> menus</span>
         <el-button size="small" @click="selectAllMenus" class="select-all-btn">
           <el-icon><Select /></el-icon>
           Select All
@@ -162,16 +109,26 @@
       </div>
     </div>
 
-    <!-- Menu Tree -->
+    <!-- 菜单树 -->
     <div class="menu-editor">
       <div class="menu-tree-container">
+        <div v-if="loading" class="loading-state">
+          <el-icon class="is-loading"><Loading /></el-icon>
+          <span>Loading menu data...</span>
+        </div>
+        <div v-else-if="menuTree.length === 0" class="empty-state">
+          <el-icon><FolderOpened /></el-icon>
+          <span>No menu data available</span>
+        </div>
         <el-tree
+            v-else
             ref="treeRef"
-            :data="allMenu"
-            node-key="index"
+            :data="menuTree"
+            node-key="menu_path"
             :expand-on-click-node="false"
             :highlight-current="false"
             :default-expanded-keys="expandedKeys"
+            :props="treeProps"
         >
           <template #default="{ data }">
             <div class="tree-node">
@@ -180,12 +137,12 @@
                 <el-icon v-else><Document /></el-icon>
               </div>
               <div class="node-info">
-                <span class="node-title">{{ data.title }}</span>
-                <span class="node-path">{{ data.index }}</span>
+                <span class="node-title">{{ data.menu_title }}</span>
+                <span class="node-path">{{ data.menu_path }}</span>
               </div>
               <div class="node-checkbox">
                 <el-checkbox
-                    :model-value="isMenuSelected(data.index)"
+                    :model-value="isMenuSelectedForCurrentVersion(data.menu_path)"
                     @change="(val) => toggleMenuSelection(data, val)"
                 />
               </div>
@@ -197,446 +154,354 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref, computed, onMounted, nextTick, watch } from 'vue'
-import { ElMessage, ElMessageBox } from 'element-plus'
+<script setup>
+import {ref, computed, onMounted, watch, nextTick} from 'vue'
+import {ElMessage, ElMessageBox} from 'element-plus'
 import {
-  Edit, Check, Refresh, InfoFilled, Folder, Document, Select, Close,
-  Monitor, Switch, ArrowDown, Expand, Fold
+  Edit, Check, Refresh, Folder, Document, Select, Close,
+  Monitor, Switch, ArrowDown, Expand, Fold, FolderOpened, Loading
 } from '@element-plus/icons-vue'
-import { useCounterStore } from '@/stores/counter'
+import {
+  getDefaultVersion,
+  listVersions,
+  getMenuTree,
+  getVersionMenus,
+  batchUpdateVersionMenus
+} from '@/api/system_api'
+import {useCounterStore} from '@/stores/counter'
 
 const counterStore = useCounterStore()
 
-// Loading state
-const isLoaded = ref(false)
-const loadingProgress = ref(0)
-const loadingMessage = ref('Loading Edition Manager...')
-const loadingMessages = [
-  'Loading Edition Manager...',
-  'Loading menu data...',
-  'Initializing editor...',
-  'Almost ready...'
-]
-
-// Editor state
-const activeVersion = ref<'essential' | 'professional' | 'smart-campus' | 'enterprise-ai'>('essential')
-const allMenu = computed(() => counterStore.allMenu)
-const currentSelections = ref<string[]>([])
-const originalSelections = ref<string[]>([])
-const expandedKeys = ref<string[]>([])
-const treeRef = ref()
+// ==================== 数据状态 ====================
+const loading = ref(true)
 const saving = ref(false)
+const allVersions = ref([])
+const menuTree = ref([])
 
-// 系统当前激活的版本
-const systemActiveVersion = computed(() => counterStore.menuVersion)
-const systemActiveVersionFullName = computed(() => counterStore.currentVersionFullName)
-const systemActiveVersionDesc = computed(() => counterStore.currentVersionDesc)
+// 版本菜单配置存储
+const versionSelections = ref({})  // { version_code: { selected: Set, original: Set } }
 
-// 当前编辑的版本信息
-const currentVersionFullName = computed(() => {
-  switch (activeVersion.value) {
-    case 'essential': return 'Essential Version'
-    case 'professional': return 'Professional Edition'
-    case 'smart-campus': return 'Smart Campus Edition'
-    case 'enterprise-ai': return 'Enterprise AI Flagship'
-    default: return 'Essential Version'
-  }
+// UI状态
+const currentEditVersion = ref('')
+const currentActiveVersion = ref('')
+const expandedKeys = ref([])
+const treeRef = ref()
+const hasChanges = ref(false)
+
+// ==================== 计算属性 ====================
+// 当前激活版本信息
+const activeVersionName = computed(() => {
+  const version = allVersions.value.find(v => v.version_code === currentActiveVersion.value)
+  return version?.version_name || 'Unknown'
 })
 
-const currentVersionDesc = computed(() => {
-  switch (activeVersion.value) {
-    case 'essential': return 'Core device management & administration'
-    case 'professional': return 'Alarm, maintenance, reports & API integration'
-    case 'smart-campus': return 'Multi-site, energy, blockchain & command center'
-    case 'enterprise-ai': return 'AI analytics, video intelligence & digital twin'
-    default: return 'Core device management'
-  }
+const activeVersionDesc = computed(() => {
+  const version = allVersions.value.find(v => v.version_code === currentActiveVersion.value)
+  return version?.description || ''
 })
 
+// 当前编辑版本信息
+const currentEditVersionName = computed(() => {
+  const version = allVersions.value.find(v => v.version_code === currentEditVersion.value)
+  return version?.version_name || 'Unknown'
+})
+
+const currentEditVersionDesc = computed(() => {
+  const version = allVersions.value.find(v => v.version_code === currentEditVersion.value)
+  return version?.description || ''
+})
+
+// 当前编辑版本的选中数量
+const currentSelectedCount = computed(() => {
+  return versionSelections.value[currentEditVersion.value]?.selected?.size || 0
+})
+
+// 总菜单数量
+const totalMenuCount = computed(() => {
+  return getAllMenuIndexes(menuTree.value).length
+})
+
+// ==================== 工具函数 ====================
 // 获取所有菜单的 index
-const getAllMenuIndexes = (nodes: any[]): string[] => {
-  let indexes: string[] = []
-  nodes.forEach(node => {
-    indexes.push(node.index)
-    if (node.children && node.children.length) {
-      indexes = indexes.concat(getAllMenuIndexes(node.children))
-    }
-  })
-  return indexes
-}
-
-// 从菜单获取所有选中的 index
-const getSelectedIndexesFromMenu = (menu: any[]): string[] => {
-  const indexes: string[] = []
-  const collect = (nodes: any[]) => {
-    nodes.forEach(node => {
+const getAllMenuIndexes = (nodes) => {
+  let indexes = []
+  if (!nodes || !Array.isArray(nodes)) return indexes
+  for (const node of nodes) {
+    if (node && node.index) {
       indexes.push(node.index)
-      if (node.children && node.children.length) {
-        collect(node.children)
+      if (node.children && Array.isArray(node.children) && node.children.length) {
+        indexes = indexes.concat(getAllMenuIndexes(node.children))
       }
-    })
+    }
   }
-  collect(menu)
   return indexes
 }
 
-const totalMenuCount = computed(() => getAllMenuIndexes(allMenu.value).length)
-const selectedCount = computed(() => currentSelections.value.length)
-
-// 判断菜单是否选中
-const isMenuSelected = (menuIndex: string): boolean => {
-  return currentSelections.value.includes(menuIndex)
+// 收集所有子菜单 index
+const getAllChildIndexes = (menu) => {
+  const indexes = [menu.index]
+  if (menu.children && menu.children.length) {
+    for (const child of menu.children) {
+      indexes.push(...getAllChildIndexes(child))
+    }
+  }
+  return indexes
 }
 
-// 切换菜单选择（包括子菜单）
-const toggleMenuSelection = (menu: any, checked: boolean) => {
-  const selections = [...currentSelections.value]
-  const menuIndexes = [menu.index]
-
-  // 如果有子菜单，收集所有子菜单的 index
-  if (menu.children && menu.children.length) {
-    const collectChildIndexes = (nodes: any[]) => {
-      nodes.forEach(node => {
-        menuIndexes.push(node.index)
-        if (node.children && node.children.length) {
-          collectChildIndexes(node.children)
-        }
-      })
-    }
-    collectChildIndexes(menu.children)
+// 从版本菜单配置获取选中的 Set
+const getSelectedSetFromVersionMenus = (data) => {
+  if (!data) return new Set()
+  let menus = []
+  if (data.menus && Array.isArray(data.menus)) {
+    menus = data.menus
+  } else if (Array.isArray(data)) {
+    menus = data
+  } else {
+    return new Set()
   }
+  return new Set(
+      menus
+          .filter(m => m.is_visible === true || m.is_visible === 1 || m.is_visible === 'true')
+          .map(m => m.menu_path)
+  )
+}
+
+// ==================== 菜单操作 ====================
+// 判断当前编辑版本的菜单是否选中
+const isMenuSelectedForCurrentVersion = (menuIndex) => {
+  return versionSelections.value[currentEditVersion.value]?.selected?.has(menuIndex) || false
+}
+
+// 切换菜单选择
+const toggleMenuSelection = (menu, checked) => {
+  const versionData = versionSelections.value[currentEditVersion.value]
+  if (!versionData) return
+
+  const newSelected = new Set(versionData.selected)
+  const childIndexes = getAllChildIndexes(menu)
 
   if (checked) {
-    // 添加菜单及其所有子菜单
-    menuIndexes.forEach(idx => {
-      if (!selections.includes(idx)) {
-        selections.push(idx)
-      }
-    })
+    childIndexes.forEach(idx => newSelected.add(idx))
   } else {
-    // 移除菜单及其所有子菜单
-    menuIndexes.forEach(idx => {
-      const index = selections.indexOf(idx)
-      if (index > -1) {
-        selections.splice(index, 1)
-      }
-    })
+    childIndexes.forEach(idx => newSelected.delete(idx))
   }
 
-  currentSelections.value = selections
+  versionData.selected = newSelected
+  checkChanges()
 }
 
-// 全选所有菜单
+// 全选
 const selectAllMenus = () => {
-  currentSelections.value = getAllMenuIndexes(allMenu.value)
-  ElMessage.success(`Selected all ${currentSelections.value.length} menus`)
+  const allIndexes = getAllMenuIndexes(menuTree.value)
+  const versionData = versionSelections.value[currentEditVersion.value]
+  if (versionData) {
+    versionData.selected = new Set(allIndexes)
+    checkChanges()
+    ElMessage.success(`Selected all ${allIndexes.length} menus`)
+  }
 }
 
 // 取消全选
 const deselectAllMenus = () => {
-  currentSelections.value = []
-  ElMessage.success('All menus deselected')
+  const versionData = versionSelections.value[currentEditVersion.value]
+  if (versionData) {
+    versionData.selected = new Set()
+    checkChanges()
+    ElMessage.success('Deselected all menus')
+  }
 }
 
-// 展开所有节点 - 修复
+// 检查是否有未保存的更改
+const checkChanges = () => {
+  const versionData = versionSelections.value[currentEditVersion.value]
+  if (!versionData) {
+    hasChanges.value = false
+    return
+  }
+
+  // 比较两个 Set 是否相等
+  const isEqual = versionData.selected.size === versionData.original.size &&
+      [...versionData.selected].every(v => versionData.original.has(v))
+
+  hasChanges.value = !isEqual
+}
+
+// 重置当前版本的更改
+const resetChanges = () => {
+  const versionData = versionSelections.value[currentEditVersion.value]
+  if (versionData) {
+    versionData.selected = new Set(versionData.original)
+    checkChanges()
+    ElMessage.success('Reset completed')
+  }
+}
+
+// 展开所有节点
 const expandAll = () => {
-  nextTick(() => {
-    const allKeys = getAllMenuIndexes(allMenu.value)
-    expandedKeys.value = [...allKeys]
-    // 强制刷新树组件
-    if (treeRef.value) {
-      // 先清空再设置，强制刷新
-      treeRef.value.store.nodesMap = {}
-      expandedKeys.value = [...allKeys]
-    }
-    ElMessage.info('All menus expanded')
-  })
+  expandedKeys.value = getAllMenuIndexes(menuTree.value)
+  ElMessage.info('All menus expanded')
 }
 
-// 折叠所有节点 - 修复：清空 expandedKeys
+// 折叠所有节点
 const collapseAll = () => {
-  nextTick(() => {
-    // 关键修复：清空展开的 keys
-    expandedKeys.value = []
-    ElMessage.info('All menus collapsed')
-  })
+  expandedKeys.value = []
+  ElMessage.info('All menus collapsed')
 }
 
-// 加载版本数据 - 修复：确保数据正确加载
-const loadVersionData = () => {
-  const versionMenu = counterStore.getVersionMenu(activeVersion.value)
-  // 深拷贝避免引用问题
-  currentSelections.value = [...getSelectedIndexesFromMenu(JSON.parse(JSON.stringify(versionMenu)))]
-  originalSelections.value = [...currentSelections.value]
-  // 展开所有节点
-  nextTick(() => {
-    expandedKeys.value = getAllMenuIndexes(allMenu.value)
-  })
-}
+// ==================== API 操作 ====================
+// 加载单个版本的菜单配置
+const loadVersionMenus = async (versionCode) => {
+  try {
+    const data = await getVersionMenus(versionCode)
+    const selectedSet = getSelectedSetFromVersionMenus(data)
 
-// Tab 切换 - 修复：重新加载数据
-const handleTabClick = () => {
-  loadVersionData()
-}
+    if (!versionSelections.value[versionCode]) {
+      versionSelections.value[versionCode] = {
+        selected: new Set(),
+        original: new Set()
+      }
+    }
+    versionSelections.value[versionCode].selected = new Set(selectedSet)
+    versionSelections.value[versionCode].original = new Set(selectedSet)
 
-// 切换系统激活版本 - 修复：不刷新页面也能更新菜单
-const handleSwitchActiveVersion = (version: string) => {
-  const versionMap: Record<string, 'essential' | 'professional' | 'smart-campus' | 'enterprise-ai'> = {
-    essential: 'essential',
-    professional: 'professional',
-    'smart-campus': 'smart-campus',
-    'enterprise-ai': 'enterprise-ai'
-  }
-  const selectedVersion = versionMap[version]
-
-  if (selectedVersion && selectedVersion !== systemActiveVersion.value) {
-    counterStore.setMenuVersion(selectedVersion)
-    ElMessage.success(`Switched to ${counterStore.currentVersionFullName.value}`)
-    // 重新加载当前编辑版本的数据，确保显示正确
-    loadVersionData()
-  } else if (selectedVersion === systemActiveVersion.value) {
-    ElMessage.info('This version is already active')
+    console.log(`版本 ${versionCode} 菜单配置加载成功，选中 ${selectedSet.size} 个菜单`)
+  } catch (error) {
+    console.error(`加载版本 ${versionCode} 菜单配置失败:`, error)
+    // 失败时使用默认全选
+    const allIndexes = getAllMenuIndexes(menuTree.value)
+    if (!versionSelections.value[versionCode]) {
+      versionSelections.value[versionCode] = {
+        selected: new Set(),
+        original: new Set()
+      }
+    }
+    versionSelections.value[versionCode].selected = new Set(allIndexes)
+    versionSelections.value[versionCode].original = new Set(allIndexes)
   }
 }
 
-// 保存所有更改 - 修复：保存后自动刷新当前激活版本的菜单
+// 保存所有更改
 const saveAllChanges = async () => {
   saving.value = true
   try {
-    // 根据选中的 index 从 allMenu 生成新菜单
-    const generateMenuFromSelections = (selectedIndexes: string[]): any[] => {
-      const deepCopyAllMenu = JSON.parse(JSON.stringify(allMenu.value))
-      const filterMenu = (nodes: any[]): any[] => {
-        return nodes.filter(node => {
-          if (selectedIndexes.includes(node.index)) {
-            if (node.children && node.children.length) {
-              const filteredChildren = filterMenu(node.children)
-              if (filteredChildren.length > 0) {
-                node.children = filteredChildren
-              } else {
-                delete node.children
-              }
-            }
-            return true
-          }
-          return false
-        }).map(node => ({ ...node }))
-      }
-      return filterMenu(deepCopyAllMenu)
+    const versionData = versionSelections.value[currentEditVersion.value]
+    if (!versionData) return
+
+    const allMenuIndexes = getAllMenuIndexes(menuTree.value)
+    const menusToSave = allMenuIndexes.map(menuPath => ({
+      menu_path: menuPath,
+      is_visible: versionData.selected.has(menuPath)
+    }))
+
+    await batchUpdateVersionMenus(currentEditVersion.value, menusToSave)
+
+    // 更新原始数据
+    versionData.original = new Set(versionData.selected)
+    checkChanges()
+
+    // 如果当前编辑的版本就是系统激活的版本，更新 store
+    if (currentEditVersion.value === currentActiveVersion.value) {
+      counterStore.setMenuVersion(currentEditVersion.value)
+      // 重新获取菜单配置
+      const menuRes = await getVersionMenus(currentEditVersion.value)
+      const newSelectedSet = getSelectedSetFromVersionMenus(menuRes)
+      // 触发 Layout 刷新（通过重新加载页面）
+      setTimeout(() => {
+        window.location.reload()
+      }, 1000)
     }
 
-    const newMenu = generateMenuFromSelections(currentSelections.value)
-    counterStore.updateVersionMenu(activeVersion.value, newMenu)
-    originalSelections.value = [...currentSelections.value]
-
-    // 关键修复：如果当前编辑的版本就是系统激活的版本，立即更新 menuConfig
-    if (activeVersion.value === systemActiveVersion.value) {
-      // 直接更新 store 中的菜单配置，触发 Layout 重新渲染
-      counterStore.refreshCurrentMenu()
-    }
-
-    ElMessage.success(`Configuration saved! ${currentSelections.value.length} menus enabled for ${currentVersionFullName.value}`)
+    ElMessage.success(`Configuration saved for ${currentEditVersionName.value}`)
   } catch (error) {
     console.error('Save error:', error)
     ElMessage.error('Failed to save configuration')
   } finally {
     saving.value = false
   }
-
-
-
 }
 
-// 重置所有更改
-const resetAllChanges = () => {
-  ElMessageBox.confirm(
-      'Are you sure you want to reset? All unsaved changes will be lost.',
-      'Confirm Reset',
-      { confirmButtonText: 'Reset', cancelButtonText: 'Cancel', type: 'warning' }
-  ).then(() => {
-    currentSelections.value = [...originalSelections.value]
-    ElMessage.success('Reset completed')
-  }).catch(() => {})
-}
-
-// 监听激活版本变化，更新当前编辑版本的数据
-watch(systemActiveVersion, () => {
-  // 如果当前编辑的版本不是激活版本，重新加载数据
-  if (activeVersion.value !== systemActiveVersion.value) {
-    loadVersionData()
+// 切换系统激活版本
+const handleSwitchActiveVersion = async (versionCode) => {
+  if (versionCode === currentActiveVersion.value) {
+    ElMessage.info('This version is already active')
+    return
   }
+
+  try {
+    // 更新 store 中的激活版本
+    counterStore.setMenuVersion(versionCode)
+    currentActiveVersion.value = versionCode
+
+    ElMessage.success(`Switched to ${counterStore.currentVersionFullName.value}`)
+
+    // 刷新页面以应用新菜单
+    setTimeout(() => {
+      window.location.reload()
+    }, 500)
+  } catch (error) {
+    console.error('Switch version error:', error)
+    ElMessage.error('Failed to switch version')
+  }
+}
+
+// ==================== 初始化 ====================
+const initData = async () => {
+  try {
+    console.log('=== 开始初始化请求 ===')
+
+    // 并行请求
+    const [defaultVer, versions, tree] = await Promise.all([
+      getDefaultVersion(),
+      listVersions(),
+      getMenuTree()
+    ])
+
+    console.log('默认版本:', defaultVer)
+    console.log('所有版本:', versions)
+    console.log('菜单树:', tree)
+
+    allVersions.value = versions
+    menuTree.value = tree
+    currentActiveVersion.value = defaultVer?.version_code || versions[0]?.version_code
+
+    // 设置默认编辑版本为激活版本
+    currentEditVersion.value = currentActiveVersion.value
+
+    // 加载所有版本的菜单配置
+    const loadPromises = versions.map(v => loadVersionMenus(v.version_code))
+    await Promise.all(loadPromises)
+
+    // 展开所有节点
+    expandedKeys.value = getAllMenuIndexes(menuTree.value)
+
+    console.log('=== 所有接口请求完成 ===')
+  } catch (error) {
+    console.error('初始化异常:', error)
+    ElMessage.error('Failed to initialize data')
+  } finally {
+    loading.value = false
+  }
+}
+
+// Tab 切换时重置 changes 状态
+const handleTabChange = () => {
+  checkChanges()
+  // 展开所有节点
+  expandedKeys.value = getAllMenuIndexes(menuTree.value)
+}
+
+// 监听编辑版本变化，重置 changes 状态
+watch(currentEditVersion, () => {
+  checkChanges()
 })
 
-// Initialize
+// 组件挂载
 onMounted(() => {
-  let messageIndex = 0
-  const messageInterval = setInterval(() => {
-    if (messageIndex < loadingMessages.length - 1) {
-      messageIndex++
-      loadingMessage.value = loadingMessages[messageIndex]
-    }
-  }, 400)
-
-  const progressInterval = setInterval(() => {
-    if (loadingProgress.value < 100) {
-      loadingProgress.value += Math.random() * 15 + 5
-      if (loadingProgress.value > 100) loadingProgress.value = 100
-    }
-  }, 200)
-
-  setTimeout(() => {
-    clearInterval(messageInterval)
-    clearInterval(progressInterval)
-    loadingProgress.value = 100
-    loadingMessage.value = 'Ready!'
-
-    setTimeout(() => {
-      loadVersionData()
-      isLoaded.value = true
-    }, 400)
-  }, 2000)
+  initData()
 })
 </script>
 
 <style scoped>
-/* 样式保持不变，与之前相同 */
-.loading-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-  z-index: 9999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.loading-overlay {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  backdrop-filter: blur(2px);
-}
-
-.loading-content {
-  text-align: center;
-  padding: 40px;
-  border-radius: 32px;
-  background: rgba(15, 23, 42, 0.6);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(59, 130, 246, 0.3);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-  animation: fadeInUp 0.6s ease-out;
-}
-
-.loading-spinner {
-  position: relative;
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 24px;
-}
-
-.spinner-ring {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  border: 3px solid transparent;
-  animation: spin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
-}
-
-.spinner-ring:nth-child(1) { border-top-color: #3b82f6; animation-delay: 0s; }
-.spinner-ring:nth-child(2) { border-right-color: #f59e0b; animation-delay: 0.2s; width: 70%; height: 70%; top: 15%; left: 15%; }
-.spinner-ring:nth-child(3) { border-bottom-color: #10b981; animation-delay: 0.4s; width: 40%; height: 40%; top: 30%; left: 30%; }
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.loading-text {
-  margin-bottom: 24px;
-  font-size: 28px;
-  font-weight: 700;
-  color: #e2e8f0;
-  display: flex;
-  justify-content: center;
-  align-items: baseline;
-  gap: 4px;
-}
-
-.loading-dots {
-  display: inline-flex;
-  gap: 2px;
-}
-
-.loading-dots span {
-  animation: bounce 1.4s infinite ease-in-out both;
-}
-
-.loading-dots span:nth-child(1) { animation-delay: -0.32s; }
-.loading-dots span:nth-child(2) { animation-delay: -0.16s; }
-
-@keyframes bounce {
-  0%, 80%, 100% { transform: scale(0); opacity: 0.3; }
-  40% { transform: scale(1); opacity: 1; }
-}
-
-.loading-progress {
-  width: 280px;
-  height: 4px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-  overflow: hidden;
-  margin: 0 auto 16px;
-}
-
-.progress-bar {
-  height: 100%;
-  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec489a);
-  border-radius: 4px;
-  transition: width 0.3s ease;
-  background-size: 200% auto;
-  animation: shimmer 2s linear infinite;
-}
-
-@keyframes shimmer {
-  0% { background-position: 0% 0%; }
-  100% { background-position: 200% 0%; }
-}
-
-.loading-tip {
-  font-size: 13px;
-  color: #94a3b8;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
-  font-weight: 500;
-}
-
-.loading-subtip {
-  font-size: 11px;
-  color: #64748b;
-  letter-spacing: 0.5px;
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 0.6; }
-  50% { opacity: 1; }
-}
-
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Main Content */
 .edition-manager {
   width: 100%;
   height: 100vh;
@@ -718,7 +583,7 @@ onMounted(() => {
   gap: 12px;
 }
 
-/* Dropdown menu active item */
+/* Dropdown */
 :deep(.el-dropdown-menu__item.is-active) {
   background: #ecf5ff;
   color: #409eff;
@@ -761,8 +626,12 @@ onMounted(() => {
 }
 
 @keyframes pulse-glow {
-  0%, 100% { text-shadow: 0 0 0px #409eff; }
-  50% { text-shadow: 0 0 4px #409eff; }
+  0%, 100% {
+    text-shadow: 0 0 0px #409eff;
+  }
+  50% {
+    text-shadow: 0 0 4px #409eff;
+  }
 }
 
 /* Version Info Bar */
@@ -867,6 +736,20 @@ onMounted(() => {
   padding: 16px;
 }
 
+.loading-state, .empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: #909399;
+  gap: 12px;
+}
+
+.loading-state .el-icon, .empty-state .el-icon {
+  font-size: 48px;
+}
+
 /* Tree Node Styles */
 .tree-node {
   display: flex;
@@ -929,5 +812,18 @@ onMounted(() => {
 .el-divider--vertical {
   height: 20px;
   margin: 0 4px;
+}
+
+.is-loading {
+  animation: rotating 2s linear infinite;
+}
+
+@keyframes rotating {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>

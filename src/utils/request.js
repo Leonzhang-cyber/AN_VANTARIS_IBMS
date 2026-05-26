@@ -2,10 +2,10 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 
-const BASE_URL = 'http://locahost:5000/api'  // 替换为你的实际后端地址
+const BASE_URL = 'http://127.0.0.1:5000/api'  // 替换为你的实际后端地址
 
 // https://ibms.aegisnx.com/api
-// http://locahost:5000/api
+// http://127.0.0.1:5000/api
 
 const service = axios.create({
     baseURL: BASE_URL,
