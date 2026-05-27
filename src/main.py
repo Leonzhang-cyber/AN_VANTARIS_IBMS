@@ -1,4 +1,3 @@
-# src/main.py
 import warnings
 
 warnings.filterwarnings("ignore", category=DeprecationWarning)
@@ -45,7 +44,6 @@ def init_system_on_startup():
     if not accounts:
         raise RuntimeError("区块链账户不可用，请检查私有链状态")
 
-    # 检查私有链挖矿状态，只在需要时停止
     print("\n🔍 检查私有链挖矿状态...")
     mining_active = False
 
@@ -64,7 +62,6 @@ def init_system_on_startup():
             except:
                 pass
 
-        # 只在有节点正在挖矿时才停止
         if mining_active:
             print("\n🛑 停止所有节点挖矿...")
             stop_all_mining(bc)
@@ -121,6 +118,11 @@ def create_app():
     return app
 
 
+# ==========================================
+# ✅ 关键修复：uWSGI 必须能找到这个变量
+# ==========================================
+app = create_app()
+application = app
+
 if __name__ == '__main__':
-    app = create_app()
-    app.run(debug=False, host='0.0.0.0', port=5000)
+    application.run(debug=False, host='0.0.0.0', port=5000)
