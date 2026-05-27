@@ -1,4 +1,3 @@
-# src/system/menu_dao.py
 from sqlalchemy.orm import Session
 from sqlalchemy import and_
 from typing import List, Optional, Dict, Any
@@ -45,7 +44,6 @@ class VersionDAO:
 
     @staticmethod
     def get_default(session: Session) -> Optional[SysVersion]:
-        """获取默认版本"""
         return session.query(SysVersion).filter(SysVersion.is_default == 1).first()
 
 
@@ -88,10 +86,6 @@ class MenuDAO:
     def get_by_parent(session: Session, parent_id: int = 0) -> List[SysMenu]:
         return session.query(SysMenu).filter(SysMenu.parent_id == parent_id).order_by(SysMenu.sort_order).all()
 
-    @staticmethod
-    def get_children(session: Session, parent_id: int) -> List[SysMenu]:
-        return session.query(SysMenu).filter(SysMenu.parent_id == parent_id).order_by(SysMenu.sort_order).all()
-
 
 class VersionMenuDAO:
     """版本菜单关联数据访问层"""
@@ -99,7 +93,6 @@ class VersionMenuDAO:
     @staticmethod
     def set_visible(session: Session, version_code: str, menu_id: int, is_visible: bool,
                     sort_order: int = None) -> SysVersionMenu:
-        """设置版本下菜单的可见性"""
         existing = session.query(SysVersionMenu).filter(
             and_(SysVersionMenu.version_code == version_code, SysVersionMenu.menu_id == menu_id)
         ).first()
@@ -111,7 +104,6 @@ class VersionMenuDAO:
             session.flush()
             return existing
 
-        # 获取菜单路径
         menu = session.query(SysMenu).filter(SysMenu.id == menu_id).first()
         if not menu:
             raise ValueError(f"Menu {menu_id} not found")
@@ -129,7 +121,6 @@ class VersionMenuDAO:
 
     @staticmethod
     def get_by_version(session: Session, version_code: str, only_visible: bool = True) -> List[SysVersionMenu]:
-        """获取版本的所有菜单关联"""
         query = session.query(SysVersionMenu).filter(SysVersionMenu.version_code == version_code)
         if only_visible:
             query = query.filter(SysVersionMenu.is_visible == 1)
@@ -137,8 +128,7 @@ class VersionMenuDAO:
 
     @staticmethod
     def get_visible_menus(session: Session, version_code: str) -> List[SysMenu]:
-        """获取版本可见的菜单（关联查询）"""
-        results = session.query(SysMenu).join(
+        return session.query(SysMenu).join(
             SysVersionMenu,
             and_(
                 SysMenu.id == SysVersionMenu.menu_id,
@@ -146,11 +136,9 @@ class VersionMenuDAO:
                 SysVersionMenu.is_visible == 1
             )
         ).order_by(SysMenu.parent_id, SysVersionMenu.sort_order).all()
-        return results
 
     @staticmethod
     def init_version_menus(session: Session, version_code: str) -> int:
-        """初始化版本的菜单配置（所有菜单默认可见）"""
         all_menus = session.query(SysMenu).all()
         count = 0
         for menu in all_menus:
@@ -171,7 +159,6 @@ class VersionMenuDAO:
 
     @staticmethod
     def batch_update(session: Session, version_code: str, menus: List[Dict]) -> int:
-        """批量更新版本菜单配置"""
         count = 0
         for menu_config in menus:
             menu_id = menu_config.get('menu_id')
@@ -203,7 +190,6 @@ class VersionMenuDAO:
 
     @staticmethod
     def delete_by_version(session: Session, version_code: str) -> int:
-        """删除版本的所有菜单关联"""
         deleted = session.query(SysVersionMenu).filter(SysVersionMenu.version_code == version_code).delete()
         session.flush()
         return deleted
