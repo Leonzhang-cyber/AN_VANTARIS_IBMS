@@ -29,6 +29,10 @@
         <span>Edition Menu Manager</span>
       </div>
       <div class="header-actions">
+        <el-button type="info" @click="openVersionManager">
+          <el-icon><Setting /></el-icon>
+          Version Management
+        </el-button>
         <el-button type="success" @click="saveAllChanges" :loading="saving" :disabled="!hasChanges">
           <el-icon><Check /></el-icon>
           Save Config
@@ -42,11 +46,11 @@
 
     <!-- Main Layout: Left Panel (Version Management) + Right Panel (All Menus Management) -->
     <div class="two-column-layout">
-      <!-- Left Column: Version Management -->
+      <!-- Left Column: Version Selection -->
       <div class="left-panel">
         <div class="panel-header">
           <el-icon><Folder /></el-icon>
-          <span>Version Management</span>
+          <span>Version Selection</span>
           <div class="active-version-actions">
             <el-dropdown trigger="click" @command="handleSwitchActiveVersion">
               <el-button type="primary" size="small" :loading="switching">
@@ -120,7 +124,7 @@
           </div>
         </div>
 
-        <!-- Menu Tree for Version -->
+        <!-- Menu Tree for Version (禁止拖拽排序) -->
         <div class="menu-tree-container">
           <div v-if="loading" class="loading-state">
             <el-icon class="is-loading"><Loading /></el-icon>
@@ -131,8 +135,8 @@
             <span>No menu data</span>
           </div>
           <div v-else class="sort-hint">
-            <el-icon><Rank /></el-icon>
-            <span>Drag to sort</span>
+            <el-icon><Menu /></el-icon>
+            <span>Select menus to include in this version</span>
           </div>
           <el-tree
               ref="treeRef"
@@ -142,16 +146,9 @@
               :expand-on-click-node="false"
               :highlight-current="false"
               :default-expanded-keys="expandedKeys"
-              draggable
-              :allow-drop="allowDrop"
-              @node-drag-start="handleDragStart"
-              @node-drag-end="handleDragEnd"
           >
             <template #default="{ data }">
-              <div class="tree-node" :class="{ 'drag-source': draggingNode === data }">
-                <div class="drag-handle">
-                  <el-icon><Rank /></el-icon>
-                </div>
+              <div class="tree-node">
                 <div class="node-icon">
                   <el-icon v-if="data.children && data.children.length"><Folder /></el-icon>
                   <el-icon v-else><Document /></el-icon>
@@ -249,6 +246,87 @@
     </div>
   </div>
 
+  <!-- Version Management Dialog -->
+  <el-dialog
+      v-model="versionDialogVisible"
+      title="Version Management"
+      width="700px"
+      class="version-dialog"
+  >
+    <div class="version-list">
+      <div class="version-list-header">
+        <div class="header-cell">Icon</div>
+        <div class="header-cell">Version Code</div>
+        <div class="header-cell">Version Name</div>
+        <div class="header-cell">Status</div>
+        <div class="header-cell">Operations</div>
+      </div>
+      <div class="version-list-body">
+        <div v-for="version in allVersions" :key="version.id" class="version-item">
+          <div class="item-cell">{{ version.icon || '📦' }}</div>
+          <div class="item-cell version-code">{{ version.version_code }}</div>
+          <div class="item-cell">{{ version.version_name }}</div>
+          <div class="item-cell">
+            <el-tag v-if="version.version_code === currentActiveVersion" type="success" size="small">Active</el-tag>
+            <el-tag v-else type="info" size="small">Inactive</el-tag>
+          </div>
+          <div class="item-cell actions">
+            <el-button size="small" text @click="handleEditVersion(version)">
+              <el-icon><Edit /></el-icon>
+            </el-button>
+            <el-button
+                size="small"
+                text
+                type="danger"
+                @click="handleDeleteVersion(version)"
+                :disabled="version.version_code === currentActiveVersion"
+            >
+              <el-icon><Delete /></el-icon>
+            </el-button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="version-dialog-footer">
+      <el-button type="primary" @click="handleAddVersion">
+        <el-icon><Plus /></el-icon>
+        Add Version
+      </el-button>
+    </div>
+  </el-dialog>
+
+  <!-- Version Edit Dialog -->
+  <el-dialog
+      v-model="versionFormDialogVisible"
+      :title="versionForm.id ? 'Edit Version' : 'Add Version'"
+      width="500px"
+  >
+    <el-form :model="versionForm" label-width="100px">
+      <el-form-item label="Version Code" required>
+        <el-input
+            v-model="versionForm.version_code"
+            placeholder="e.g., v1.0, v2.0"
+            :disabled="!!versionForm.id"
+        />
+      </el-form-item>
+      <el-form-item label="Version Name" required>
+        <el-input v-model="versionForm.version_name" placeholder="e.g., Version 1.0" />
+      </el-form-item>
+      <el-form-item label="Icon">
+        <el-input v-model="versionForm.icon" placeholder="e.g., 📦, 🚀, 💡" maxlength="2" />
+      </el-form-item>
+      <el-form-item label="Set as Active">
+        <el-switch v-model="versionForm.is_default" />
+      </el-form-item>
+    </el-form>
+    <template #footer>
+      <el-button @click="versionFormDialogVisible = false">Cancel</el-button>
+      <el-button type="primary" @click="handleSaveVersion" :loading="versionSaving">
+        Save
+      </el-button>
+    </template>
+  </el-dialog>
+
   <!-- Menu Edit Dialog -->
   <el-dialog
       v-model="menuDialogVisible"
@@ -341,7 +419,7 @@ import { ref, computed, onMounted, watch, nextTick } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import {
   Edit, Check, Refresh, Folder, Document, Select, Close, Rank, Delete, List,
-  Monitor, Switch, ArrowDown, Expand, Fold, FolderOpened, Loading, Plus
+  Monitor, Switch, ArrowDown, Expand, Fold, FolderOpened, Loading, Plus, Setting, Menu
 } from '@element-plus/icons-vue'
 import {
   listVersions,
@@ -353,7 +431,10 @@ import {
   createMenu,
   updateMenu,
   deleteMenu,
-  batchUpdateMenuSort
+  batchUpdateMenuSort,
+  createVersion,
+  updateVersion,
+  deleteVersion
 } from '@/api/system_api'
 import { useCounterStore } from '@/stores/counter'
 
@@ -385,8 +466,18 @@ const treeKey = ref(0)
 const allMenusTreeKey = ref(0)
 const allMenusExpandedKeys = ref([])
 
-// Drag state for version tree
-const draggingNode = ref(null)
+// Version management state
+const versionDialogVisible = ref(false)
+const versionFormDialogVisible = ref(false)
+const versionForm = ref({
+  id: null,
+  version_code: '',
+  version_name: '',
+  icon: '📦',
+  is_default: false
+})
+const versionSaving = ref(false)
+
 // Drag state for all menus tree
 const allMenusDraggingNode = ref(null)
 
@@ -435,7 +526,6 @@ const currentSelectedCount = computed(() => {
 })
 
 const totalMenuCount = computed(() => {
-  console.log(getAllMenuPaths(menuTree.value).length,'shuliang')
   return getAllMenuPaths(menuTree.value).length - 1
 })
 
@@ -530,23 +620,13 @@ const updateSortedMenuTreeSelection = () => {
   updateNode(sortedMenuTree.value)
 }
 
-// ==================== Drag & Drop Sort (Shared) ====================
+// ==================== Drag & Drop Sort (Only for All Menus) ====================
 const allowDrop = (draggingNode, dropNode, type) => {
   if (type === 'inner') return false
   if (draggingNode.parent?.data?.menu_path !== dropNode.parent?.data?.menu_path) {
     return false
   }
   return true
-}
-
-// Version tree drag handlers
-const handleDragStart = (node, event) => {
-  draggingNode.value = node.data
-}
-
-const handleDragEnd = () => {
-  draggingNode.value = null
-  collectSortChangesFromTree(sortedMenuTree.value)
 }
 
 // All menus tree drag handlers
@@ -787,6 +867,113 @@ const handleDeleteMenu = async (menu) => {
       console.error('Delete menu error:', error)
       ElMessage.error('Failed to delete menu')
     }
+  }
+}
+
+// ==================== Version Management Operations ====================
+const openVersionManager = () => {
+  versionDialogVisible.value = true
+}
+
+const handleAddVersion = () => {
+  versionForm.value = {
+    id: null,
+    version_code: '',
+    version_name: '',
+    icon: '📦',
+    is_default: false
+  }
+  versionFormDialogVisible.value = true
+}
+
+const handleEditVersion = (version) => {
+  versionForm.value = {
+    id: version.id,
+    version_code: version.version_code,
+    version_name: version.version_name,
+    icon: version.icon || '📦',
+    is_default: version.version_code === currentActiveVersion.value
+  }
+  versionFormDialogVisible.value = true
+}
+
+const handleSaveVersion = async () => {
+  if (!versionForm.value.version_code || !versionForm.value.version_name) {
+    ElMessage.warning('Version code and name are required')
+    return
+  }
+
+  versionSaving.value = true
+  try {
+    if (versionForm.value.id) {
+      // Update version
+      await updateVersion(versionForm.value.id, versionForm.value)
+      ElMessage.success('Version updated successfully')
+    } else {
+      // Create version
+      await createVersion(versionForm.value)
+      ElMessage.success('Version created successfully')
+    }
+
+    versionFormDialogVisible.value = false
+    await refreshVersions()
+  } catch (error) {
+    console.error('Save version error:', error)
+    if (error.message && error.message.includes('already exists')) {
+      ElMessage.warning('Version code already exists')
+    } else {
+      ElMessage.error('Failed to save version')
+    }
+  } finally {
+    versionSaving.value = false
+  }
+}
+
+const handleDeleteVersion = async (version) => {
+  // Check if it's the currently active version
+  if (version.version_code === currentActiveVersion.value) {
+    ElMessage.warning('Cannot delete the currently active version')
+    return
+  }
+
+  try {
+    await ElMessageBox.confirm(
+        `Are you sure you want to delete version "${version.version_name}"? This action cannot be undone.`,
+        'Confirm Delete',
+        { confirmButtonText: 'Delete', cancelButtonText: 'Cancel', type: 'warning' }
+    )
+
+    await deleteVersion(version.version_code)
+    ElMessage.success('Version deleted successfully')
+    await refreshVersions()
+  } catch (error) {
+    if (error !== 'cancel') {
+      console.error('Delete version error:', error)
+      ElMessage.error('Failed to delete version')
+    }
+  }
+}
+
+const refreshVersions = async () => {
+  try {
+    const versions = await listVersions()
+    allVersions.value = versions || []
+
+    // Update current active version
+    const activeVersion = versions.find(v => v.is_default)
+    if (activeVersion) {
+      currentActiveVersion.value = activeVersion.version_code
+    }
+
+    // If current editing version was deleted, switch to first version
+    if (!versions.find(v => v.version_code === currentEditVersion.value) && versions.length > 0) {
+      currentEditVersion.value = versions[0].version_code
+      await loadVersionMenus(currentEditVersion.value)
+    }
+
+    treeKey.value++
+  } catch (error) {
+    console.error('Refresh versions error:', error)
   }
 }
 
@@ -1432,25 +1619,8 @@ onMounted(() => {
   border-bottom: 1px solid #f0f0f0;
 }
 
-.tree-node.drag-source {
-  opacity: 0.5;
-}
-
 .tree-node:hover {
   background: #f5f7fa;
-}
-
-.drag-handle {
-  width: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: grab;
-  color: #c0c4cc;
-}
-
-.drag-handle:hover {
-  color: #409eff;
 }
 
 .node-icon {
@@ -1501,6 +1671,19 @@ onMounted(() => {
   background: #f5f7fa;
 }
 
+.drag-handle {
+  width: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  color: #c0c4cc;
+}
+
+.drag-handle:hover {
+  color: #409eff;
+}
+
 .node-actions {
   display: flex;
   gap: 4px;
@@ -1532,5 +1715,76 @@ onMounted(() => {
 @keyframes rotating {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+/* Version Dialog Styles */
+.version-dialog :deep(.el-dialog__body) {
+  padding: 0;
+}
+
+.version-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.version-list-header {
+  display: grid;
+  grid-template-columns: 60px 150px 1fr 100px 120px;
+  background: #f5f7fa;
+  padding: 12px 16px;
+  font-weight: 600;
+  color: #606266;
+  border-bottom: 1px solid #e4e7ed;
+}
+
+.version-list-body {
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+.version-item {
+  display: grid;
+  grid-template-columns: 60px 150px 1fr 100px 120px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  align-items: center;
+}
+
+.version-item:hover {
+  background: #f5f7fa;
+}
+
+.item-cell {
+  display: flex;
+  align-items: center;
+}
+
+.version-code {
+  font-family: monospace;
+  font-weight: 500;
+  color: #409eff;
+}
+
+.actions {
+  gap: 8px;
+}
+
+.version-dialog-footer {
+  padding: 16px;
+  border-top: 1px solid #e4e7ed;
+  text-align: right;
+}
+
+.version-option-icon {
+  margin-right: 8px;
+}
+
+.check-icon {
+  margin-left: auto;
+  color: #409eff;
+}
+
+.is-active {
+  background-color: #ecf5ff;
 }
 </style>

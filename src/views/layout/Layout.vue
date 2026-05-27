@@ -64,17 +64,28 @@
           >
             <!-- 动态渲染菜单 -->
             <template v-for="item in menuConfig" :key="item.index">
-              <!-- 子菜单 -->
               <el-sub-menu v-if="item.children && item.children.length" :index="item.index">
                 <template #title>
                   <el-icon v-if="item.icon"><component :is="item.icon" /></el-icon>
                   <span>{{ item.title }}</span>
                 </template>
-                <el-menu-item v-for="child in item.children" :key="child.index" :index="child.index">
-                  <span>{{ child.title }}</span>
-                </el-menu-item>
+                <!-- 这里递归渲染子菜单 -->
+                <template v-for="child in item.children" :key="child.index">
+                  <el-sub-menu v-if="child.children && child.children.length" :index="child.index">
+                    <template #title>
+                      <el-icon v-if="child.icon"><component :is="child.icon" /></el-icon>
+                      <span>{{ child.title }}</span>
+                    </template>
+                    <el-menu-item v-for="grandChild in child.children" :key="grandChild.index" :index="grandChild.index">
+                      <span>{{ grandChild.title }}</span>
+                    </el-menu-item>
+                  </el-sub-menu>
+                  <el-menu-item v-else :index="child.index">
+                    <el-icon v-if="child.icon"><component :is="child.icon" /></el-icon>
+                    <span>{{ child.title }}</span>
+                  </el-menu-item>
+                </template>
               </el-sub-menu>
-              <!-- 普通菜单项 -->
               <el-menu-item v-else :index="item.index">
                 <el-icon v-if="item.icon"><component :is="item.icon" /></el-icon>
                 <span>{{ item.title }}</span>
@@ -275,36 +286,36 @@
             </template>
 
             <!-- 版本切换下拉按钮组 -->
-            <template v-if="!isMobile && allVersions.length > 0">
-              <el-dropdown trigger="click" @command="handleVersionChange" class="version-dropdown">
-                <el-button size="small" class="version-btn pill-btn">
-                  <span class="version-icon">{{ currentVersionIcon }}</span>
-                  <span class="version-text">{{ currentVersionFullName }}</span>
-                  <el-icon class="el-icon--right"><ArrowDown /></el-icon>
-                </el-button>
-                <template #dropdown>
-                  <el-dropdown-menu class="version-dropdown-menu">
-                    <div class="version-dropdown-header"><span>Select Edition</span></div>
-                    <el-dropdown-item
-                        v-for="version in allVersions"
-                        :key="version.version_code"
-                        :command="version.version_code"
-                        class="version-item"
-                        :class="{ 'active-version': menuVersion === version.version_code }"
-                    >
-                      <div class="version-item-content">
-                        <span class="version-item-icon">{{ version.icon || '📦' }}</span>
-                        <div class="version-item-info">
-                          <span class="version-item-title">{{ version.version_name }}</span>
-                          <span class="version-item-desc">{{ version.description }}</span>
-                        </div>
-                        <span class="version-item-badge" v-if="menuVersion === version.version_code">✓</span>
-                      </div>
-                    </el-dropdown-item>
-                  </el-dropdown-menu>
-                </template>
-              </el-dropdown>
-            </template>
+<!--            <template v-if="!isMobile && allVersions.length > 0">-->
+<!--              <el-dropdown trigger="click" @command="handleVersionChange" class="version-dropdown">-->
+<!--                <el-button size="small" class="version-btn pill-btn">-->
+<!--                  <span class="version-icon">{{ currentVersionIcon }}</span>-->
+<!--                  <span class="version-text">{{ currentVersionFullName }}</span>-->
+<!--                  <el-icon class="el-icon&#45;&#45;right"><ArrowDown /></el-icon>-->
+<!--                </el-button>-->
+<!--                <template #dropdown>-->
+<!--                  <el-dropdown-menu class="version-dropdown-menu">-->
+<!--                    <div class="version-dropdown-header"><span>Select Edition</span></div>-->
+<!--                    <el-dropdown-item-->
+<!--                        v-for="version in allVersions"-->
+<!--                        :key="version.version_code"-->
+<!--                        :command="version.version_code"-->
+<!--                        class="version-item"-->
+<!--                        :class="{ 'active-version': menuVersion === version.version_code }"-->
+<!--                    >-->
+<!--                      <div class="version-item-content">-->
+<!--                        <span class="version-item-icon">{{ version.icon || '📦' }}</span>-->
+<!--                        <div class="version-item-info">-->
+<!--                          <span class="version-item-title">{{ version.version_name }}</span>-->
+<!--                          <span class="version-item-desc">{{ version.description }}</span>-->
+<!--                        </div>-->
+<!--                        <span class="version-item-badge" v-if="menuVersion === version.version_code">✓</span>-->
+<!--                      </div>-->
+<!--                    </el-dropdown-item>-->
+<!--                  </el-dropdown-menu>-->
+<!--                </template>-->
+<!--              </el-dropdown>-->
+<!--            </template>-->
 
             <!-- 更多菜单 -->
             <el-dropdown v-if="foldedButtonsList.length > 0" trigger="click" @command="handleMoreCommand">
@@ -523,7 +534,7 @@ import {
   MagicStick, SwitchFilled, Reading, Platform, Mic, BellFilled, Cpu as CpuIcon
 } from '@element-plus/icons-vue'
 import { useCounterStore } from '@/stores/counter.js'
-import { initMenuData, switchVersion } from '@/utils/menuInit.js'
+import { initMenuData } from '@/utils/menuInit.js'
 
 const route = useRoute()
 const router = useRouter()
@@ -544,14 +555,14 @@ const currentVersionFullName = computed(() => counterStore.currentVersionFullNam
 const currentVersionIcon = computed(() => counterStore.currentVersionIcon)
 
 // 处理版本切换命令
-const handleVersionChange = async (version) => {
-  const result = await switchVersion(counterStore, version)
-  if (result.success) {
-    ElMessage.success(`Switched to ${counterStore.currentVersionFullName.value}`)
-  } else {
-    ElMessage.error(`Failed to switch version: ${result.error}`)
-  }
-}
+// const handleVersionChange = async (version) => {
+//   const result = await switchVersion(counterStore, version)
+//   if (result.success) {
+//     ElMessage.success(`Switched to ${counterStore.currentVersionFullName.value}`)
+//   } else {
+//     ElMessage.error(`Failed to switch version: ${result.error}`)
+//   }
+// }
 
 // 图标映射
 const iconMap = {
@@ -597,8 +608,8 @@ const removeMenuItem = (itemIndex) => {
 defineExpose({
   menuConfig,
   addMenuItem,
-  removeMenuItem,
-  handleVersionChange
+  removeMenuItem
+  // handleVersionChange
 })
 
 // ==================== 其他原有代码 ====================
@@ -1042,6 +1053,11 @@ onMounted(async () => {
 
   // 初始化菜单数据
   const result = await initMenuData(counterStore)
+
+  // ========== 打印菜单数组 ==========
+  console.log('=== 获取到的菜单数组 ===')
+  console.log('菜单配置:', JSON.parse(JSON.stringify(counterStore.menuConfig)))
+  console.log('菜单配置长度:', counterStore.menuConfig?.length)
 
   // 完成加载
   clearInterval(progressInterval)
