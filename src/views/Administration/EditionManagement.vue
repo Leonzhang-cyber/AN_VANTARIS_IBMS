@@ -1,20 +1,37 @@
 <template>
-  <div class="edition-manager">
-    <!-- 头部 -->
+  <!-- Page Initial Loading Screen -->
+  <div v-if="!isPageLoaded" class="loading-fullscreen">
+    <div class="loading-content-center">
+      <div class="loading-spinner">
+        <div class="spinner-ring"></div>
+        <div class="spinner-ring"></div>
+        <div class="spinner-ring"></div>
+      </div>
+      <div class="loading-text">
+        <span class="loading-title">Loading</span>
+        <span class="loading-dots">
+          <span>.</span><span>.</span><span>.</span>
+        </span>
+      </div>
+      <div class="loading-progress">
+        <div class="progress-bar" :style="{ width: pageLoadingProgress + '%' }"></div>
+      </div>
+      <div class="loading-tip">Edition Menu Manager</div>
+      <div class="loading-subtip">{{ pageLoadingMessage }}</div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div v-else class="edition-manager">
     <div class="manager-header">
       <div class="header-title">
         <el-icon><Edit /></el-icon>
         <span>Edition Menu Manager</span>
       </div>
       <div class="header-actions">
-        <el-button
-            type="success"
-            @click="saveAllChanges"
-            :loading="saving"
-            :disabled="!hasChanges"
-        >
+        <el-button type="success" @click="saveAllChanges" :loading="saving" :disabled="!hasChanges">
           <el-icon><Check /></el-icon>
-          Save Configuration
+          Save Config
         </el-button>
         <el-button @click="resetChanges" :disabled="!hasChanges">
           <el-icon><Refresh /></el-icon>
@@ -23,232 +40,443 @@
       </div>
     </div>
 
-    <!-- 当前激活版本显示 + 切换按钮 -->
-    <div class="active-version-bar">
-      <div class="active-version-content">
-        <el-tag type="primary" size="large" effect="dark" class="active-version-tag">
-          <el-icon><Monitor /></el-icon>
-          <span>Currently Active: </span>
-          <strong>{{ activeVersionName }}</strong>
-        </el-tag>
-        <el-tag type="info" size="small" class="active-version-desc">
-          {{ activeVersionDesc }}
-        </el-tag>
-      </div>
-      <div class="active-version-actions">
-        <el-dropdown trigger="click" @command="handleSwitchActiveVersion">
-          <el-button type="primary" size="small">
-            <el-icon><Switch /></el-icon>
-            Switch Active Version
-            <el-icon class="el-icon--right"><ArrowDown /></el-icon>
-          </el-button>
-          <template #dropdown>
-            <el-dropdown-menu>
-              <el-dropdown-item
-                  v-for="version in allVersions"
-                  :key="version.version_code"
-                  :command="version.version_code"
-                  :class="{ 'is-active': currentActiveVersion === version.version_code }"
-              >
-                <span class="version-option-icon">{{ version.icon || '📦' }}</span>
-                <span>{{ version.version_name }}</span>
-                <el-icon v-if="currentActiveVersion === version.version_code" class="check-icon"><Check /></el-icon>
-              </el-dropdown-item>
-            </el-dropdown-menu>
-          </template>
-        </el-dropdown>
-      </div>
-    </div>
-
-    <!-- 版本标签页 -->
-    <div class="version-tabs">
-      <el-tabs v-model="currentEditVersion" type="card" @tab-click="handleTabChange">
-        <el-tab-pane
-            v-for="version in allVersions"
-            :key="version.version_code"
-            :name="version.version_code"
-        >
-          <template #label>
-            <span class="tab-label" :class="{ 'is-system-active': currentActiveVersion === version.version_code }">
-              <span class="tab-icon">{{ version.icon || '📦' }}</span>
-              <span>{{ version.version_name }}</span>
-              <el-tag v-if="currentActiveVersion === version.version_code" size="small" type="primary" class="active-badge">Active</el-tag>
-            </span>
-          </template>
-        </el-tab-pane>
-      </el-tabs>
-    </div>
-
-    <!-- 当前编辑版本信息 -->
-    <div class="version-info-bar">
-      <div class="info-content">
-        <el-icon><Edit /></el-icon>
-        <span class="info-label">Editing:</span>
-        <span class="version-name">{{ currentEditVersionName }}</span>
-        <span class="version-desc">{{ currentEditVersionDesc }}</span>
-      </div>
-      <div class="selection-info">
-        <span>Selected: <strong>{{ currentSelectedCount }}</strong> / <strong>{{ totalMenuCount }}</strong> menus</span>
-        <el-button size="small" @click="selectAllMenus" class="select-all-btn">
-          <el-icon><Select /></el-icon>
-          Select All
-        </el-button>
-        <el-button size="small" @click="deselectAllMenus" class="deselect-all-btn">
-          <el-icon><Close /></el-icon>
-          Deselect All
-        </el-button>
-        <el-divider direction="vertical" />
-        <el-button size="small" @click="expandAll" class="expand-btn">
-          <el-icon><Expand /></el-icon>
-          Expand All
-        </el-button>
-        <el-button size="small" @click="collapseAll" class="collapse-btn">
-          <el-icon><Fold /></el-icon>
-          Collapse All
-        </el-button>
-      </div>
-    </div>
-
-    <!-- 菜单树 -->
-    <div class="menu-editor">
-      <div class="menu-tree-container">
-        <div v-if="loading" class="loading-state">
-          <el-icon class="is-loading"><Loading /></el-icon>
-          <span>Loading menu data...</span>
+    <!-- Main Layout: Left Panel (Version Management) + Right Panel (All Menus Management) -->
+    <div class="two-column-layout">
+      <!-- Left Column: Version Management -->
+      <div class="left-panel">
+        <div class="panel-header">
+          <el-icon><Folder /></el-icon>
+          <span>Version Management</span>
+          <div class="active-version-actions">
+            <el-dropdown trigger="click" @command="handleSwitchActiveVersion">
+              <el-button type="primary" size="small" :loading="switching">
+                <el-icon><Switch /></el-icon>
+                Switch Version
+                <el-icon class="el-icon--right"><ArrowDown /></el-icon>
+              </el-button>
+              <template #dropdown>
+                <el-dropdown-menu>
+                  <el-dropdown-item
+                      v-for="version in allVersions"
+                      :key="version.version_code"
+                      :command="version.version_code"
+                      :class="{ 'is-active': currentActiveVersion === version.version_code }"
+                  >
+                    <span class="version-option-icon">{{ version.icon || '📦' }}</span>
+                    <span>{{ version.version_name }}</span>
+                    <el-icon v-if="currentActiveVersion === version.version_code" class="check-icon"><Check /></el-icon>
+                  </el-dropdown-item>
+                </el-dropdown-menu>
+              </template>
+            </el-dropdown>
+          </div>
         </div>
-        <div v-else-if="menuTree.length === 0" class="empty-state">
-          <el-icon><FolderOpened /></el-icon>
-          <span>No menu data available</span>
+
+        <!-- Version Tabs -->
+        <div class="version-tabs">
+          <el-tabs v-model="currentEditVersion" type="card" @tab-click="handleTabChange">
+            <el-tab-pane
+                v-for="version in allVersions"
+                :key="version.version_code"
+                :name="version.version_code"
+            >
+              <template #label>
+                <span class="tab-label" :class="{ 'is-system-active': currentActiveVersion === version.version_code }">
+                  <span class="tab-icon">{{ version.icon || '📦' }}</span>
+                  <span>{{ version.version_name }}</span>
+                  <el-tag v-if="currentActiveVersion === version.version_code" size="small" type="primary" class="active-badge">Active</el-tag>
+                </span>
+              </template>
+            </el-tab-pane>
+          </el-tabs>
         </div>
-        <el-tree
-            v-else
-            ref="treeRef"
+
+        <!-- Version Info Bar -->
+        <div class="version-info-bar">
+          <div class="info-content">
+            <el-icon><Edit /></el-icon>
+            <span class="info-label">Editing:</span>
+            <span class="version-name">{{ currentEditVersionName }}</span>
+          </div>
+          <div class="selection-info">
+            <span>Selected: <strong>{{ currentSelectedCount }}</strong> / <strong>{{ totalMenuCount }}</strong></span>
+            <el-button size="small" @click="selectAllMenus">
+              <el-icon><Select /></el-icon>
+              Select All
+            </el-button>
+            <el-button size="small" @click="deselectAllMenus">
+              <el-icon><Close /></el-icon>
+              Deselect All
+            </el-button>
+            <el-divider direction="vertical" />
+            <el-button size="small" @click="expandAllVersionTree">
+              <el-icon><Expand /></el-icon>
+              Expand
+            </el-button>
+            <el-button size="small" @click="collapseAllVersionTree">
+              <el-icon><Fold /></el-icon>
+              Collapse
+            </el-button>
+          </div>
+        </div>
+
+        <!-- Menu Tree for Version -->
+        <div class="menu-tree-container">
+          <div v-if="loading" class="loading-state">
+            <el-icon class="is-loading"><Loading /></el-icon>
+            <span>Loading...</span>
+          </div>
+          <div v-else-if="menuTree.length === 0" class="empty-state">
+            <el-icon><FolderOpened /></el-icon>
+            <span>No menu data</span>
+          </div>
+          <div v-else class="sort-hint">
+            <el-icon><Rank /></el-icon>
+            <span>Drag to sort</span>
+          </div>
+          <el-tree
+              ref="treeRef"
+              :key="treeKey"
+              :data="sortedMenuTree"
+              node-key="menu_path"
+              :expand-on-click-node="false"
+              :highlight-current="false"
+              :default-expanded-keys="expandedKeys"
+              draggable
+              :allow-drop="allowDrop"
+              @node-drag-start="handleDragStart"
+              @node-drag-end="handleDragEnd"
+          >
+            <template #default="{ data }">
+              <div class="tree-node" :class="{ 'drag-source': draggingNode === data }">
+                <div class="drag-handle">
+                  <el-icon><Rank /></el-icon>
+                </div>
+                <div class="node-icon">
+                  <el-icon v-if="data.children && data.children.length"><Folder /></el-icon>
+                  <el-icon v-else><Document /></el-icon>
+                </div>
+                <div class="node-info">
+                  <span class="node-title">{{ data.menu_title }}</span>
+                  <span class="node-path">{{ data.menu_path }}</span>
+                </div>
+                <div class="node-checkbox">
+                  <el-checkbox
+                      :model-value="isMenuSelectedForCurrentVersion(data.menu_path)"
+                      :disabled="isMenuItemDisabled(data)"
+                      @change="(val) => toggleMenuSelection(data, val)"
+                  />
+                </div>
+              </div>
+            </template>
+          </el-tree>
+        </div>
+      </div>
+
+      <!-- Right Column: All Menus Management -->
+      <div class="right-panel">
+        <div class="panel-header">
+          <el-icon><List /></el-icon>
+          <span>All Menus Management</span>
+          <div class="right-panel-actions">
+            <el-button size="small" @click="expandAllMenusTree">
+              <el-icon><Expand /></el-icon>
+              Expand
+            </el-button>
+            <el-button size="small" @click="collapseAllMenusTree">
+              <el-icon><Fold /></el-icon>
+              Collapse
+            </el-button>
+            <el-button type="primary" size="small" @click="openMenuDialog(null)">
+              <el-icon><Plus /></el-icon>
+              Add Menu
+            </el-button>
+          </div>
+        </div>
+
+        <!-- All Menus Tree with Actions and Drag Sort -->
+        <div class="all-menus-container">
+          <div v-if="loading" class="loading-state">
+            <el-icon class="is-loading"><Loading /></el-icon>
+            <span>Loading...</span>
+          </div>
+          <div v-else-if="menuTree.length === 0" class="empty-state">
+            <el-icon><FolderOpened /></el-icon>
+            <span>No menu data</span>
+          </div>
+          <div v-else class="sort-hint">
+            <el-icon><Rank /></el-icon>
+            <span>Drag to sort menus</span>
+          </div>
+          <el-tree
+              ref="allMenusTreeRef"
+              :key="allMenusTreeKey"
+              :data="allMenusTreeData"
+              node-key="menu_path"
+              :expand-on-click-node="false"
+              :default-expanded-keys="allMenusExpandedKeys"
+              draggable
+              :allow-drop="allowDrop"
+              @node-drag-start="handleAllMenusDragStart"
+              @node-drag-end="handleAllMenusDragEnd"
+          >
+            <template #default="{ data }">
+              <div class="all-menus-node" :class="{ 'drag-source': allMenusDraggingNode === data }">
+                <div class="drag-handle">
+                  <el-icon><Rank /></el-icon>
+                </div>
+                <div class="node-icon">
+                  <el-icon v-if="data.children && data.children.length"><Folder /></el-icon>
+                  <el-icon v-else><Document /></el-icon>
+                </div>
+                <div class="node-info">
+                  <span class="node-title">{{ data.menu_title }}</span>
+                  <span class="node-path">{{ data.menu_path }}</span>
+                </div>
+                <div class="node-actions">
+                  <el-button size="small" text @click="openMenuDialog(data)">
+                    <el-icon><Edit /></el-icon>
+                  </el-button>
+                  <el-button size="small" text type="danger" @click="handleDeleteMenu(data)">
+                    <el-icon><Delete /></el-icon>
+                  </el-button>
+                </div>
+              </div>
+            </template>
+          </el-tree>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Menu Edit Dialog -->
+  <el-dialog
+      v-model="menuDialogVisible"
+      :title="editingMenu ? 'Edit Menu' : 'Add Menu'"
+      width="500px"
+  >
+    <el-form :model="menuForm" label-width="100px">
+      <el-form-item label="Parent Menu">
+        <el-tree-select
+            v-model="menuForm.parent_id"
             :data="menuTree"
-            node-key="menu_path"
-            :expand-on-click-node="false"
-            :highlight-current="false"
-            :default-expanded-keys="expandedKeys"
-            :props="treeProps"
-        >
-          <template #default="{ data }">
-            <div class="tree-node">
-              <div class="node-icon">
-                <el-icon v-if="data.children && data.children.length"><Folder /></el-icon>
-                <el-icon v-else><Document /></el-icon>
-              </div>
-              <div class="node-info">
-                <span class="node-title">{{ data.menu_title }}</span>
-                <span class="node-path">{{ data.menu_path }}</span>
-              </div>
-              <div class="node-checkbox">
-                <el-checkbox
-                    :model-value="isMenuSelectedForCurrentVersion(data.menu_path)"
-                    @change="(val) => toggleMenuSelection(data, val)"
-                />
-              </div>
-            </div>
-          </template>
-        </el-tree>
+            :props="{ label: 'menu_title', value: 'id' }"
+            placeholder="Select parent menu (0 for root)"
+            check-strictly
+            clearable
+            style="width: 100%"
+        />
+      </el-form-item>
+      <el-form-item label="Menu Path" required>
+        <el-input v-model="menuForm.menu_path" placeholder="e.g., /new-module" />
+      </el-form-item>
+      <el-form-item label="Menu Title" required>
+        <el-input v-model="menuForm.menu_title" placeholder="Menu display name" />
+      </el-form-item>
+      <el-form-item label="Icon">
+        <el-input v-model="menuForm.menu_icon" placeholder="e.g., View, Cpu, Setting" />
+      </el-form-item>
+      <el-form-item label="Menu Type">
+        <el-select v-model="menuForm.menu_type" style="width: 100%">
+          <el-option label="Menu (clickable)" value="menu" />
+          <el-option label="Container (not clickable)" value="container" />
+        </el-select>
+      </el-form-item>
+      <el-form-item label="Redirect Path">
+        <el-input v-model="menuForm.redirect_path" placeholder="Redirect URL" />
+      </el-form-item>
+      <el-form-item label="Sort Order">
+        <el-input-number v-model="menuForm.sort_order" :min="0" style="width: 100%" />
+      </el-form-item>
+      <el-form-item label="Visible">
+        <el-switch v-model="menuForm.is_visible" />
+      </el-form-item>
+    </el-form>
+    <template #footer>
+      <el-button @click="menuDialogVisible = false">Cancel</el-button>
+      <el-button type="primary" @click="handleSaveMenu" :loading="menuSaving">
+        Save
+      </el-button>
+    </template>
+  </el-dialog>
+
+  <!-- Saving Loading Mask -->
+  <div v-if="saving" class="loading-fullscreen">
+    <div class="loading-content-center">
+      <div class="loading-spinner-small">
+        <div class="spinner-ring-small"></div>
+        <div class="spinner-ring-small"></div>
+        <div class="spinner-ring-small"></div>
       </div>
+      <div class="loading-text-switch">
+        <span>Saving Configuration</span>
+        <span class="loading-dots">
+          <span>.</span><span>.</span><span>.</span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Switching Version Loading Mask -->
+  <div v-if="switching" class="loading-fullscreen">
+    <div class="loading-content-center">
+      <div class="loading-spinner-small">
+        <div class="spinner-ring-small"></div>
+        <div class="spinner-ring-small"></div>
+        <div class="spinner-ring-small"></div>
+      </div>
+      <div class="loading-text-switch">
+        <span>Switching Version</span>
+        <span class="loading-dots">
+          <span>.</span><span>.</span><span>.</span>
+        </span>
+      </div>
+      <div class="loading-version-name">{{ switchingVersionName }}</div>
     </div>
   </div>
 </template>
 
 <script setup>
-import {ref, computed, onMounted, watch, nextTick} from 'vue'
-import {ElMessage, ElMessageBox} from 'element-plus'
+import { ref, computed, onMounted, watch, nextTick } from 'vue'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import {
-  Edit, Check, Refresh, Folder, Document, Select, Close,
-  Monitor, Switch, ArrowDown, Expand, Fold, FolderOpened, Loading
+  Edit, Check, Refresh, Folder, Document, Select, Close, Rank, Delete, List,
+  Monitor, Switch, ArrowDown, Expand, Fold, FolderOpened, Loading, Plus
 } from '@element-plus/icons-vue'
 import {
-  getDefaultVersion,
   listVersions,
   getMenuTree,
   getVersionMenus,
-  batchUpdateVersionMenus
+  getActiveVersionMenuConfig,
+  switchActiveVersion,
+  incrementalUpdateVersionMenus,
+  createMenu,
+  updateMenu,
+  deleteMenu,
+  batchUpdateMenuSort
 } from '@/api/system_api'
-import {useCounterStore} from '@/stores/counter'
+import { useCounterStore } from '@/stores/counter'
 
 const counterStore = useCounterStore()
 
-// ==================== 数据状态 ====================
+// ==================== Page Loading State ====================
+const isPageLoaded = ref(false)
+const pageLoadingProgress = ref(0)
+const pageLoadingMessage = ref('Preparing...')
+const loadingMessages = [
+  'Preparing...',
+  'Loading versions...',
+  'Loading menu tree...',
+  'Loading menu configs...',
+  'Almost ready...'
+]
+
+// ==================== Data State ====================
 const loading = ref(true)
 const saving = ref(false)
+const switching = ref(false)
+const menuSaving = ref(false)
+const switchingVersionName = ref('')
 const allVersions = ref([])
 const menuTree = ref([])
+const sortedMenuTree = ref([])
+const allMenusTreeData = ref([])
+const treeKey = ref(0)
+const allMenusTreeKey = ref(0)
+const allMenusExpandedKeys = ref([])
 
-// 版本菜单配置存储
-const versionSelections = ref({})  // { version_code: { selected: Set, original: Set } }
+// Drag state for version tree
+const draggingNode = ref(null)
+// Drag state for all menus tree
+const allMenusDraggingNode = ref(null)
 
-// UI状态
+// Version menu config storage
+const versionSelections = ref({})
+
+// UI state
 const currentEditVersion = ref('')
 const currentActiveVersion = ref('')
 const expandedKeys = ref([])
 const treeRef = ref()
+const allMenusTreeRef = ref()
 const hasChanges = ref(false)
 
-// ==================== 计算属性 ====================
-// 当前激活版本信息
+// Menu dialog
+const menuDialogVisible = ref(false)
+const editingMenu = ref(null)
+const menuForm = ref({
+  parent_id: 0,
+  menu_path: '',
+  menu_title: '',
+  menu_icon: '',
+  menu_type: 'menu',
+  has_children: false,
+  redirect_path: '',
+  sort_order: 0,
+  is_visible: true
+})
+
+// Track sort changes (global, affects both trees)
+let pendingSortChanges = []
+
+// ==================== Computed Properties ====================
 const activeVersionName = computed(() => {
   const version = allVersions.value.find(v => v.version_code === currentActiveVersion.value)
   return version?.version_name || 'Unknown'
 })
 
-const activeVersionDesc = computed(() => {
-  const version = allVersions.value.find(v => v.version_code === currentActiveVersion.value)
-  return version?.description || ''
-})
-
-// 当前编辑版本信息
 const currentEditVersionName = computed(() => {
   const version = allVersions.value.find(v => v.version_code === currentEditVersion.value)
   return version?.version_name || 'Unknown'
 })
 
-const currentEditVersionDesc = computed(() => {
-  const version = allVersions.value.find(v => v.version_code === currentEditVersion.value)
-  return version?.description || ''
-})
-
-// 当前编辑版本的选中数量
 const currentSelectedCount = computed(() => {
   return versionSelections.value[currentEditVersion.value]?.selected?.size || 0
 })
 
-// 总菜单数量
 const totalMenuCount = computed(() => {
-  return getAllMenuIndexes(menuTree.value).length
+  console.log(getAllMenuPaths(menuTree.value).length,'shuliang')
+  return getAllMenuPaths(menuTree.value).length - 1
 })
 
-// ==================== 工具函数 ====================
-// 获取所有菜单的 index
-const getAllMenuIndexes = (nodes) => {
-  let indexes = []
-  if (!nodes || !Array.isArray(nodes)) return indexes
+// ==================== Utility Functions ====================
+const getAllMenuPaths = (nodes) => {
+  let paths = []
+  if (!nodes || !Array.isArray(nodes)) return paths
   for (const node of nodes) {
-    if (node && node.index) {
-      indexes.push(node.index)
+    if (node && node.menu_path) {
+      paths.push(node.menu_path)
       if (node.children && Array.isArray(node.children) && node.children.length) {
-        indexes = indexes.concat(getAllMenuIndexes(node.children))
+        paths = paths.concat(getAllMenuPaths(node.children))
       }
     }
   }
-  return indexes
+  return paths
 }
 
-// 收集所有子菜单 index
-const getAllChildIndexes = (menu) => {
-  const indexes = [menu.index]
+const getAllChildPaths = (menu) => {
+  const paths = [menu.menu_path]
   if (menu.children && menu.children.length) {
     for (const child of menu.children) {
-      indexes.push(...getAllChildIndexes(child))
+      paths.push(...getAllChildPaths(child))
     }
   }
-  return indexes
+  return paths
 }
 
-// 从版本菜单配置获取选中的 Set
+const isMenuItemDisabled = (menu) => {
+  const versionData = versionSelections.value[currentEditVersion.value]
+  if (!versionData) return false
+  if (menu.parent_id === 0) return false
+
+  const menuPathParts = menu.menu_path.split('/')
+  let parentPath = menuPathParts.slice(0, -1).join('/')
+  if (parentPath === '') parentPath = '/' + menuPathParts[1]
+
+  const isParentSelected = versionData.selected.has(parentPath)
+  return !isParentSelected
+}
+
 const getSelectedSetFromVersionMenus = (data) => {
   if (!data) return new Set()
   let menus = []
@@ -266,52 +494,153 @@ const getSelectedSetFromVersionMenus = (data) => {
   )
 }
 
-// ==================== 菜单操作 ====================
-// 判断当前编辑版本的菜单是否选中
-const isMenuSelectedForCurrentVersion = (menuIndex) => {
-  return versionSelections.value[currentEditVersion.value]?.selected?.has(menuIndex) || false
+const getAllMenuPathsFromConfig = (config) => {
+  let paths = []
+  const collect = (nodes) => {
+    if (!nodes) return
+    for (const node of nodes) {
+      paths.push(node.index)
+      if (node.children && node.children.length) {
+        collect(node.children)
+      }
+    }
+  }
+  collect(config)
+  return paths
 }
 
-// 切换菜单选择
+const deepCopyMenuTree = (nodes) => {
+  if (!nodes) return []
+  return nodes.map(node => ({
+    ...node,
+    children: node.children ? deepCopyMenuTree(node.children) : []
+  }))
+}
+
+const updateSortedMenuTreeSelection = () => {
+  const selectedSet = versionSelections.value[currentEditVersion.value]?.selected || new Set()
+  const updateNode = (nodes) => {
+    if (!nodes) return
+    for (const node of nodes) {
+      if (node.children && node.children.length) {
+        updateNode(node.children)
+      }
+    }
+  }
+  updateNode(sortedMenuTree.value)
+}
+
+// ==================== Drag & Drop Sort (Shared) ====================
+const allowDrop = (draggingNode, dropNode, type) => {
+  if (type === 'inner') return false
+  if (draggingNode.parent?.data?.menu_path !== dropNode.parent?.data?.menu_path) {
+    return false
+  }
+  return true
+}
+
+// Version tree drag handlers
+const handleDragStart = (node, event) => {
+  draggingNode.value = node.data
+}
+
+const handleDragEnd = () => {
+  draggingNode.value = null
+  collectSortChangesFromTree(sortedMenuTree.value)
+}
+
+// All menus tree drag handlers
+const handleAllMenusDragStart = (node, event) => {
+  allMenusDraggingNode.value = node.data
+}
+
+const handleAllMenusDragEnd = () => {
+  allMenusDraggingNode.value = null
+  collectSortChangesFromTree(allMenusTreeData.value)
+}
+
+// Collect sort changes from any tree
+const collectSortChangesFromTree = (treeData) => {
+  const changes = []
+
+  const extractSortOrder = (nodes) => {
+    if (!nodes || !Array.isArray(nodes)) return
+    nodes.forEach((node, index) => {
+      const newSortOrder = index + 1
+      if (node.sort_order !== newSortOrder) {
+        changes.push({
+          menu_path: node.menu_path,
+          sort_order: newSortOrder
+        })
+        node.sort_order = newSortOrder
+      }
+      if (node.children && node.children.length) {
+        extractSortOrder(node.children)
+      }
+    })
+  }
+
+  extractSortOrder(treeData)
+
+  if (changes.length > 0) {
+    // Merge with existing pending changes
+    for (const change of changes) {
+      const existingIndex = pendingSortChanges.findIndex(c => c.menu_path === change.menu_path)
+      if (existingIndex !== -1) {
+        pendingSortChanges[existingIndex] = change
+      } else {
+        pendingSortChanges.push(change)
+      }
+    }
+    hasChanges.value = true
+    console.log('Sort changes collected:', changes)
+  }
+}
+
+// ==================== Menu Operations ====================
+const isMenuSelectedForCurrentVersion = (menuPath) => {
+  return versionSelections.value[currentEditVersion.value]?.selected?.has(menuPath) || false
+}
+
 const toggleMenuSelection = (menu, checked) => {
   const versionData = versionSelections.value[currentEditVersion.value]
   if (!versionData) return
 
   const newSelected = new Set(versionData.selected)
-  const childIndexes = getAllChildIndexes(menu)
+  const childPaths = getAllChildPaths(menu)
 
   if (checked) {
-    childIndexes.forEach(idx => newSelected.add(idx))
+    childPaths.forEach(path => newSelected.add(path))
   } else {
-    childIndexes.forEach(idx => newSelected.delete(idx))
+    childPaths.forEach(path => newSelected.delete(path))
   }
 
   versionData.selected = newSelected
+  updateSortedMenuTreeSelection()
   checkChanges()
 }
 
-// 全选
 const selectAllMenus = () => {
-  const allIndexes = getAllMenuIndexes(menuTree.value)
+  const allPaths = getAllMenuPaths(menuTree.value)
   const versionData = versionSelections.value[currentEditVersion.value]
   if (versionData) {
-    versionData.selected = new Set(allIndexes)
+    versionData.selected = new Set(allPaths)
+    updateSortedMenuTreeSelection()
     checkChanges()
-    ElMessage.success(`Selected all ${allIndexes.length} menus`)
+    ElMessage.success(`Selected all ${allPaths.length} menus`)
   }
 }
 
-// 取消全选
 const deselectAllMenus = () => {
   const versionData = versionSelections.value[currentEditVersion.value]
   if (versionData) {
     versionData.selected = new Set()
+    updateSortedMenuTreeSelection()
     checkChanges()
     ElMessage.success('Deselected all menus')
   }
 }
 
-// 检查是否有未保存的更改
 const checkChanges = () => {
   const versionData = versionSelections.value[currentEditVersion.value]
   if (!versionData) {
@@ -319,37 +648,149 @@ const checkChanges = () => {
     return
   }
 
-  // 比较两个 Set 是否相等
   const isEqual = versionData.selected.size === versionData.original.size &&
       [...versionData.selected].every(v => versionData.original.has(v))
 
-  hasChanges.value = !isEqual
+  hasChanges.value = !isEqual || pendingSortChanges.length > 0
 }
 
-// 重置当前版本的更改
 const resetChanges = () => {
   const versionData = versionSelections.value[currentEditVersion.value]
   if (versionData) {
     versionData.selected = new Set(versionData.original)
+    updateSortedMenuTreeSelection()
+    pendingSortChanges = []
+    syncSortOrderFromOriginal()
     checkChanges()
     ElMessage.success('Reset completed')
   }
 }
 
-// 展开所有节点
-const expandAll = () => {
-  expandedKeys.value = getAllMenuIndexes(menuTree.value)
-  ElMessage.info('All menus expanded')
+const syncSortOrderFromOriginal = () => {
+  const syncOrder = (targetNodes, sourceNodes) => {
+    if (!targetNodes || !sourceNodes) return
+    for (let i = 0; i < targetNodes.length && i < sourceNodes.length; i++) {
+      if (targetNodes[i].menu_path === sourceNodes[i].menu_path) {
+        targetNodes[i].sort_order = sourceNodes[i].sort_order
+        if (targetNodes[i].children && sourceNodes[i].children) {
+          syncOrder(targetNodes[i].children, sourceNodes[i].children)
+        }
+      }
+    }
+  }
+  syncOrder(sortedMenuTree.value, menuTree.value)
+  syncOrder(allMenusTreeData.value, menuTree.value)
+  treeKey.value++
+  allMenusTreeKey.value++
 }
 
-// 折叠所有节点
-const collapseAll = () => {
+// Version tree expand/collapse
+const expandAllVersionTree = () => {
+  const allPaths = getAllMenuPaths(menuTree.value)
+  expandedKeys.value = [...allPaths]
+  treeKey.value++
+  ElMessage.success(`Expanded ${allPaths.length} menus`)
+}
+
+const collapseAllVersionTree = () => {
   expandedKeys.value = []
-  ElMessage.info('All menus collapsed')
+  treeKey.value++
+  ElMessage.success('All menus collapsed')
 }
 
-// ==================== API 操作 ====================
-// 加载单个版本的菜单配置
+// All menus tree expand/collapse
+const expandAllMenusTree = () => {
+  const allPaths = getAllMenuPaths(menuTree.value)
+  allMenusExpandedKeys.value = [...allPaths]
+  allMenusTreeKey.value++
+  ElMessage.success(`Expanded ${allPaths.length} menus`)
+}
+
+const collapseAllMenusTree = () => {
+  allMenusExpandedKeys.value = []
+  allMenusTreeKey.value++
+  ElMessage.success('All menus collapsed')
+}
+
+// ==================== Menu CRUD Operations ====================
+const openMenuDialog = (menu) => {
+  editingMenu.value = menu
+  if (menu) {
+    menuForm.value = {
+      parent_id: menu.parent_id,
+      menu_path: menu.menu_path,
+      menu_title: menu.menu_title,
+      menu_icon: menu.menu_icon || '',
+      menu_type: menu.menu_type || 'menu',
+      has_children: menu.has_children || false,
+      redirect_path: menu.redirect_path || '',
+      sort_order: menu.sort_order || 0,
+      is_visible: menu.is_visible !== false
+    }
+  } else {
+    menuForm.value = {
+      parent_id: 0,
+      menu_path: '',
+      menu_title: '',
+      menu_icon: '',
+      menu_type: 'menu',
+      has_children: false,
+      redirect_path: '',
+      sort_order: 0,
+      is_visible: true
+    }
+  }
+  menuDialogVisible.value = true
+}
+
+const handleSaveMenu = async () => {
+  if (!menuForm.value.menu_path || !menuForm.value.menu_title) {
+    ElMessage.warning('Menu path and title are required')
+    return
+  }
+
+  menuSaving.value = true
+  try {
+    if (editingMenu.value) {
+      await updateMenu(editingMenu.value.id, menuForm.value)
+      ElMessage.success('Menu updated successfully')
+    } else {
+      await createMenu(menuForm.value)
+      ElMessage.success('Menu created successfully')
+    }
+    menuDialogVisible.value = false
+    await refreshAllData()
+  } catch (error) {
+    console.error('Save menu error:', error)
+    if (error.message && error.message.includes('already exists')) {
+      ElMessage.warning('Menu path already exists')
+    } else {
+      ElMessage.error('Failed to save menu')
+    }
+  } finally {
+    menuSaving.value = false
+  }
+}
+
+const handleDeleteMenu = async (menu) => {
+  try {
+    await ElMessageBox.confirm(
+        `Are you sure you want to delete "${menu.menu_title}"? All submenus will also be deleted.`,
+        'Confirm Delete',
+        { confirmButtonText: 'Delete', cancelButtonText: 'Cancel', type: 'warning' }
+    )
+    await deleteMenu(menu.id)
+    ElMessage.success('Menu deleted successfully')
+    await refreshAllData()
+  } catch (error) {
+    if (error !== 'cancel') {
+      console.error('Delete menu error:', error)
+      ElMessage.error('Failed to delete menu')
+    }
+  }
+}
+
+// ==================== API Operations ====================
 const loadVersionMenus = async (versionCode) => {
   try {
     const data = await getVersionMenus(versionCode)
@@ -364,54 +805,98 @@ const loadVersionMenus = async (versionCode) => {
     versionSelections.value[versionCode].selected = new Set(selectedSet)
     versionSelections.value[versionCode].original = new Set(selectedSet)
 
-    console.log(`版本 ${versionCode} 菜单配置加载成功，选中 ${selectedSet.size} 个菜单`)
+    if (versionCode === currentEditVersion.value) {
+      updateSortedMenuTreeSelection()
+    }
+
+    console.log(`Version ${versionCode} loaded, selected ${selectedSet.size} menus`)
   } catch (error) {
-    console.error(`加载版本 ${versionCode} 菜单配置失败:`, error)
-    // 失败时使用默认全选
-    const allIndexes = getAllMenuIndexes(menuTree.value)
+    console.error(`Failed to load version ${versionCode}:`, error)
+    const allPaths = getAllMenuPaths(menuTree.value)
     if (!versionSelections.value[versionCode]) {
       versionSelections.value[versionCode] = {
         selected: new Set(),
         original: new Set()
       }
     }
-    versionSelections.value[versionCode].selected = new Set(allIndexes)
-    versionSelections.value[versionCode].original = new Set(allIndexes)
+    versionSelections.value[versionCode].selected = new Set(allPaths)
+    versionSelections.value[versionCode].original = new Set(allPaths)
+    if (versionCode === currentEditVersion.value) {
+      updateSortedMenuTreeSelection()
+    }
   }
 }
 
-// 保存所有更改
 const saveAllChanges = async () => {
   saving.value = true
   try {
     const versionData = versionSelections.value[currentEditVersion.value]
     if (!versionData) return
 
-    const allMenuIndexes = getAllMenuIndexes(menuTree.value)
-    const menusToSave = allMenuIndexes.map(menuPath => ({
-      menu_path: menuPath,
-      is_visible: versionData.selected.has(menuPath)
-    }))
+    const originalSet = versionData.original
+    const currentSet = versionData.selected
 
-    await batchUpdateVersionMenus(currentEditVersion.value, menusToSave)
+    const addList = []
+    const removeList = []
 
-    // 更新原始数据
+    currentSet.forEach(path => {
+      if (!originalSet.has(path)) addList.push(path)
+    })
+
+    originalSet.forEach(path => {
+      if (!currentSet.has(path)) removeList.push(path)
+    })
+
+    if (pendingSortChanges.length > 0) {
+      console.log('Saving sort changes:', pendingSortChanges)
+      await batchUpdateMenuSort(pendingSortChanges)
+    }
+
+    if (addList.length > 0 || removeList.length > 0) {
+      console.log('Saving selection changes:', { add: addList.length, remove: removeList.length })
+      await incrementalUpdateVersionMenus(currentEditVersion.value, {
+        add: addList,
+        remove: removeList
+      })
+    }
+
+    if (addList.length === 0 && removeList.length === 0 && pendingSortChanges.length === 0) {
+      ElMessage.info('No changes to save')
+      saving.value = false
+      return
+    }
+
     versionData.original = new Set(versionData.selected)
+
+    if (pendingSortChanges.length > 0) {
+      const syncOrderToOriginal = (nodes) => {
+        if (!nodes) return
+        for (const node of nodes) {
+          const change = pendingSortChanges.find(c => c.menu_path === node.menu_path)
+          if (change) {
+            node.sort_order = change.sort_order
+          }
+          if (node.children) {
+            syncOrderToOriginal(node.children)
+          }
+        }
+      }
+      syncOrderToOriginal(menuTree.value)
+      syncOrderToOriginal(sortedMenuTree.value)
+      syncOrderToOriginal(allMenusTreeData.value)
+      pendingSortChanges = []
+    }
+
     checkChanges()
 
-    // 如果当前编辑的版本就是系统激活的版本，更新 store
     if (currentEditVersion.value === currentActiveVersion.value) {
       counterStore.setMenuVersion(currentEditVersion.value)
-      // 重新获取菜单配置
-      const menuRes = await getVersionMenus(currentEditVersion.value)
-      const newSelectedSet = getSelectedSetFromVersionMenus(menuRes)
-      // 触发 Layout 刷新（通过重新加载页面）
       setTimeout(() => {
         window.location.reload()
       }, 1000)
+    } else {
+      ElMessage.success(`Configuration saved for ${currentEditVersionName.value}`)
     }
-
-    ElMessage.success(`Configuration saved for ${currentEditVersionName.value}`)
   } catch (error) {
     console.error('Save error:', error)
     ElMessage.error('Failed to save configuration')
@@ -420,88 +905,328 @@ const saveAllChanges = async () => {
   }
 }
 
-// 切换系统激活版本
+const refreshAllData = async () => {
+  loading.value = true
+  try {
+    const tree = await getMenuTree()
+    menuTree.value = tree || []
+    sortedMenuTree.value = deepCopyMenuTree(tree)
+    allMenusTreeData.value = deepCopyMenuTree(tree)
+
+    if (allVersions.value.length > 0) {
+      const loadPromises = allVersions.value.map(v => loadVersionMenus(v.version_code))
+      await Promise.all(loadPromises)
+    }
+
+    allMenusExpandedKeys.value = []
+    expandedKeys.value = []
+    treeKey.value++
+    allMenusTreeKey.value++
+  } catch (error) {
+    console.error('Refresh error:', error)
+  } finally {
+    loading.value = false
+  }
+}
+
 const handleSwitchActiveVersion = async (versionCode) => {
   if (versionCode === currentActiveVersion.value) {
     ElMessage.info('This version is already active')
     return
   }
 
+  const targetVersion = allVersions.value.find(v => v.version_code === versionCode)
+  switchingVersionName.value = targetVersion?.version_name || versionCode
+  switching.value = true
+
   try {
-    // 更新 store 中的激活版本
-    counterStore.setMenuVersion(versionCode)
-    currentActiveVersion.value = versionCode
+    const result = await switchActiveVersion(versionCode)
 
-    ElMessage.success(`Switched to ${counterStore.currentVersionFullName.value}`)
+    currentActiveVersion.value = result.version_code
+    counterStore.setMenuVersion(result.version_code)
 
-    // 刷新页面以应用新菜单
+    allVersions.value = allVersions.value.map(v => ({
+      ...v,
+      is_default: v.version_code === result.version_code
+    }))
+
+    if (currentEditVersion.value === result.version_code) {
+      const selectedPaths = getAllMenuPathsFromConfig(result.menu_config)
+      if (versionSelections.value[result.version_code]) {
+        versionSelections.value[result.version_code].selected = new Set(selectedPaths)
+        versionSelections.value[result.version_code].original = new Set(selectedPaths)
+      }
+      updateSortedMenuTreeSelection()
+      checkChanges()
+    }
+
+    ElMessage.success(`Switched to ${result.version_name}`)
+
     setTimeout(() => {
       window.location.reload()
-    }, 500)
+    }, 800)
   } catch (error) {
     console.error('Switch version error:', error)
     ElMessage.error('Failed to switch version')
+    switching.value = false
   }
 }
 
-// ==================== 初始化 ====================
+// ==================== Initialization ====================
 const initData = async () => {
   try {
-    console.log('=== 开始初始化请求 ===')
+    let messageIndex = 0
+    const messageInterval = setInterval(() => {
+      if (messageIndex < loadingMessages.length - 1) {
+        messageIndex++
+        pageLoadingMessage.value = loadingMessages[messageIndex]
+      }
+    }, 400)
 
-    // 并行请求
-    const [defaultVer, versions, tree] = await Promise.all([
-      getDefaultVersion(),
-      listVersions(),
-      getMenuTree()
-    ])
+    const progressInterval = setInterval(() => {
+      if (pageLoadingProgress.value < 90) {
+        pageLoadingProgress.value += Math.random() * 15 + 5
+        if (pageLoadingProgress.value > 90) pageLoadingProgress.value = 90
+      }
+    }, 200)
 
-    console.log('默认版本:', defaultVer)
-    console.log('所有版本:', versions)
-    console.log('菜单树:', tree)
+    console.log('=== Starting initialization ===')
 
-    allVersions.value = versions
-    menuTree.value = tree
-    currentActiveVersion.value = defaultVer?.version_code || versions[0]?.version_code
+    const activeMenuConfig = await getActiveVersionMenuConfig()
+    console.log('Active version menu config:', activeMenuConfig)
 
-    // 设置默认编辑版本为激活版本
-    currentEditVersion.value = currentActiveVersion.value
+    if (!activeMenuConfig || !activeMenuConfig.version_code) {
+      throw new Error('Failed to get active version menu config')
+    }
 
-    // 加载所有版本的菜单配置
-    const loadPromises = versions.map(v => loadVersionMenus(v.version_code))
-    await Promise.all(loadPromises)
+    pageLoadingProgress.value = 60
+    pageLoadingMessage.value = 'Loading menu tree...'
 
-    // 展开所有节点
-    expandedKeys.value = getAllMenuIndexes(menuTree.value)
+    const activeVersionCode = activeMenuConfig.version_code
 
-    console.log('=== 所有接口请求完成 ===')
+    const versions = await listVersions()
+    console.log('All versions:', versions)
+
+    pageLoadingProgress.value = 75
+    pageLoadingMessage.value = 'Loading menu tree...'
+
+    const tree = await getMenuTree()
+    console.log('Menu tree:', tree)
+
+    pageLoadingProgress.value = 85
+    pageLoadingMessage.value = 'Loading menu configs...'
+
+    allVersions.value = versions || []
+    menuTree.value = tree || []
+    sortedMenuTree.value = deepCopyMenuTree(tree)
+    allMenusTreeData.value = deepCopyMenuTree(tree)
+    currentActiveVersion.value = activeVersionCode
+    currentEditVersion.value = activeVersionCode
+
+    if (versions && versions.length > 0) {
+      const loadPromises = versions.map(v => loadVersionMenus(v.version_code))
+      await Promise.all(loadPromises)
+    }
+
+    expandedKeys.value = []
+    allMenusExpandedKeys.value = []
+    loading.value = false
+    pendingSortChanges = []
+
+    console.log('=== Initialization complete ===')
+
+    clearInterval(messageInterval)
+    clearInterval(progressInterval)
+    pageLoadingProgress.value = 100
+    pageLoadingMessage.value = 'Ready!'
+
+    setTimeout(() => {
+      isPageLoaded.value = true
+    }, 400)
   } catch (error) {
-    console.error('初始化异常:', error)
+    console.error('Initialization error:', error)
     ElMessage.error('Failed to initialize data')
-  } finally {
+    isPageLoaded.value = true
     loading.value = false
   }
 }
 
-// Tab 切换时重置 changes 状态
 const handleTabChange = () => {
   checkChanges()
-  // 展开所有节点
-  expandedKeys.value = getAllMenuIndexes(menuTree.value)
 }
 
-// 监听编辑版本变化，重置 changes 状态
 watch(currentEditVersion, () => {
   checkChanges()
 })
 
-// 组件挂载
 onMounted(() => {
   initData()
 })
 </script>
 
 <style scoped>
+.loading-fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-content-center {
+  text-align: center;
+  padding: 40px;
+  border-radius: 32px;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.loading-spinner {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 24px;
+}
+
+.spinner-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  animation: spin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+}
+
+.spinner-ring:nth-child(1) { border-top-color: #3b82f6; animation-delay: 0s; }
+.spinner-ring:nth-child(2) { border-right-color: #f59e0b; animation-delay: 0.2s; width: 70%; height: 70%; top: 15%; left: 15%; }
+.spinner-ring:nth-child(3) { border-bottom-color: #10b981; animation-delay: 0.4s; width: 40%; height: 40%; top: 30%; left: 30%; }
+
+.loading-spinner-small {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  margin: 0 auto 20px;
+}
+
+.spinner-ring-small {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  animation: spin 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+}
+
+.spinner-ring-small:nth-child(1) { border-top-color: #3b82f6; }
+.spinner-ring-small:nth-child(2) { border-right-color: #f59e0b; animation-delay: 0.15s; width: 70%; height: 70%; top: 15%; left: 15%; }
+.spinner-ring-small:nth-child(3) { border-bottom-color: #10b981; animation-delay: 0.3s; width: 40%; height: 40%; top: 30%; left: 30%; }
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  margin-bottom: 24px;
+  font-size: 28px;
+  font-weight: 700;
+  color: #e2e8f0;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.loading-text-switch {
+  font-size: 18px;
+  font-weight: 600;
+  color: #e2e8f0;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.loading-dots {
+  display: inline-flex;
+  gap: 2px;
+}
+
+.loading-dots span {
+  animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.loading-dots span:nth-child(1) { animation-delay: -0.32s; }
+.loading-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0); opacity: 0.3; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+.loading-progress {
+  width: 280px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 0 auto 16px;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec489a);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  background-size: 200% auto;
+  animation: shimmer 2s linear infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
+}
+
+.loading-tip {
+  font-size: 13px;
+  color: #94a3b8;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.loading-subtip {
+  font-size: 11px;
+  color: #64748b;
+  letter-spacing: 0.5px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.loading-version-name {
+  font-size: 14px;
+  color: #94a3b8;
+  margin-top: 8px;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .edition-manager {
   width: 100%;
   height: 100vh;
@@ -511,7 +1236,6 @@ onMounted(() => {
   overflow: hidden;
 }
 
-/* Header */
 .manager-header {
   display: flex;
   justify-content: space-between;
@@ -540,69 +1264,58 @@ onMounted(() => {
   gap: 12px;
 }
 
-/* Active Version Bar */
-.active-version-bar {
+.two-column-layout {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 24px;
-  background: linear-gradient(135deg, #e8f4ff, #d9ecff);
-  border-bottom: 2px solid #409eff;
+  flex: 1;
+  gap: 20px;
+  padding: 20px;
+  overflow: hidden;
 }
 
-.active-version-content {
+.left-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.05);
+}
+
+.right-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.05);
+}
+
+.panel-header {
   display: flex;
   align-items: center;
-  gap: 16px;
-}
-
-.active-version-tag {
-  padding: 8px 16px;
-  font-size: 14px;
-  background: linear-gradient(135deg, #409eff, #66b1ff);
-  border: none;
-}
-
-.active-version-tag .el-icon {
-  margin-right: 8px;
-}
-
-.active-version-tag strong {
-  font-weight: 700;
-  margin-left: 4px;
-}
-
-.active-version-desc {
-  background: rgba(64, 158, 255, 0.1);
-  border-color: rgba(64, 158, 255, 0.3);
-  color: #409eff;
+  gap: 8px;
+  padding: 12px 16px;
+  background: #f0f2f5;
+  border-bottom: 1px solid #e4e7ed;
+  font-weight: 600;
+  color: #303133;
 }
 
 .active-version-actions {
-  display: flex;
-  gap: 12px;
-}
-
-/* Dropdown */
-:deep(.el-dropdown-menu__item.is-active) {
-  background: #ecf5ff;
-  color: #409eff;
-}
-
-.version-option-icon {
-  margin-right: 8px;
-  font-size: 14px;
-}
-
-.check-icon {
   margin-left: auto;
-  color: #409eff;
 }
 
-/* Version Tabs */
+.right-panel-actions {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
 .version-tabs {
   background: #fff;
-  padding: 0 24px;
+  padding: 0 16px;
   border-bottom: 1px solid #e4e7ed;
 }
 
@@ -610,11 +1323,6 @@ onMounted(() => {
   display: flex;
   align-items: center;
   gap: 8px;
-  position: relative;
-}
-
-.tab-label.is-system-active .tab-icon {
-  animation: pulse-glow 1.5s ease-in-out infinite;
 }
 
 .tab-icon {
@@ -625,21 +1333,11 @@ onMounted(() => {
   margin-left: 6px;
 }
 
-@keyframes pulse-glow {
-  0%, 100% {
-    text-shadow: 0 0 0px #409eff;
-  }
-  50% {
-    text-shadow: 0 0 4px #409eff;
-  }
-}
-
-/* Version Info Bar */
 .version-info-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 24px;
+  padding: 12px 16px;
   background: #f0f7ff;
   border-bottom: 1px solid #d9ecff;
 }
@@ -667,16 +1365,10 @@ onMounted(() => {
   color: #1a1a2e;
 }
 
-.version-desc {
-  font-size: 12px;
-  color: #606266;
-  margin-left: 8px;
-}
-
 .selection-info {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
 }
 
 .selection-info span {
@@ -686,54 +1378,35 @@ onMounted(() => {
 
 .selection-info strong {
   color: #409eff;
-  font-size: 15px;
-}
-
-.select-all-btn, .deselect-all-btn, .expand-btn, .collapse-btn {
-  padding: 4px 12px;
-  font-size: 12px;
-}
-
-.select-all-btn {
-  background: #ecf5ff;
-  border-color: #d9ecff;
-  color: #409eff;
-}
-
-.deselect-all-btn {
-  background: #fef0f0;
-  border-color: #fde2e2;
-  color: #f56c6c;
-}
-
-.expand-btn, .collapse-btn {
-  background: #f5f7fa;
-  border-color: #e4e7ed;
-  color: #606266;
-}
-
-.expand-btn:hover, .collapse-btn:hover {
-  background: #ecf5ff;
-  border-color: #409eff;
-  color: #409eff;
-}
-
-/* Menu Editor */
-.menu-editor {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  margin: 20px;
-  background: #fff;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.05);
 }
 
 .menu-tree-container {
   flex: 1;
   overflow: auto;
   padding: 16px;
+}
+
+.all-menus-container {
+  flex: 1;
+  overflow: auto;
+  padding: 16px;
+}
+
+.sort-hint {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 8px 16px;
+  background: #f0f7ff;
+  border-bottom: 1px solid #d9ecff;
+  font-size: 12px;
+  color: #606266;
+  margin-bottom: 12px;
+}
+
+.sort-hint .el-icon {
+  color: #409eff;
 }
 
 .loading-state, .empty-state {
@@ -750,7 +1423,6 @@ onMounted(() => {
   font-size: 48px;
 }
 
-/* Tree Node Styles */
 .tree-node {
   display: flex;
   align-items: center;
@@ -760,8 +1432,25 @@ onMounted(() => {
   border-bottom: 1px solid #f0f0f0;
 }
 
+.tree-node.drag-source {
+  opacity: 0.5;
+}
+
 .tree-node:hover {
   background: #f5f7fa;
+}
+
+.drag-handle {
+  width: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  color: #c0c4cc;
+}
+
+.drag-handle:hover {
+  color: #409eff;
 }
 
 .node-icon {
@@ -795,7 +1484,29 @@ onMounted(() => {
   margin: 0 12px;
 }
 
-/* Deep Tree Styles */
+.all-menus-node {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.all-menus-node.drag-source {
+  opacity: 0.5;
+}
+
+.all-menus-node:hover {
+  background: #f5f7fa;
+}
+
+.node-actions {
+  display: flex;
+  gap: 4px;
+  margin-right: 12px;
+}
+
 :deep(.el-tree-node__content) {
   height: auto;
   padding: 0;
@@ -819,11 +1530,7 @@ onMounted(() => {
 }
 
 @keyframes rotating {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 </style>

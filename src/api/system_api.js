@@ -6,7 +6,7 @@
  * 请求自动携带 token（如果存在）
  */
 
-import { get, post, put, del } from '@/utils/request.js'
+import {get, post, put, del, patch} from '@/utils/request.js'
 
 // ==================== 实体类型管理 ====================
 
@@ -326,7 +326,7 @@ export function getMenu(menuId) {
  * @returns {Promise}
  */
 export function createMenu(data) {
-    return post('/system/menus', data)
+    return post('/system/menus-add', data)
 }
 
 /**
@@ -336,7 +336,7 @@ export function createMenu(data) {
  * @returns {Promise}
  */
 export function updateMenu(menuId, data) {
-    return put(`/system/menus/${menuId}`, data)
+    return put(`/system/menus-update/${menuId}`, data)
 }
 
 /**
@@ -345,7 +345,7 @@ export function updateMenu(menuId, data) {
  * @returns {Promise}
  */
 export function deleteMenu(menuId) {
-    return del(`/system/menus/${menuId}`)
+    return del(`/system/menus-delete/${menuId}`)
 }
 
 // ==================== 版本菜单配置管理接口 ====================
@@ -413,3 +413,110 @@ export function copyMenuConfig(fromVersion, toVersion) {
 export function testApi() {
     return get('/system/test')
 }
+
+// ==================== 激活版本管理 ====================
+
+/**
+ * 激活指定版本（将该版本设为默认，其他版本取消默认）
+ * @param {string} versionCode - 版本代码
+ * @returns {Promise}
+ */
+export function activateVersion(versionCode) {
+    return put(`/system/versions/activate/${versionCode}`)
+}
+
+/**
+ * 获取当前激活的版本
+ * @returns {Promise}
+ */
+export function getActiveVersion() {
+    return get('/system/versions/activate')
+}
+
+
+// ==================== 获取当前激活版本的菜单配置 ====================
+
+/**
+ * 获取当前激活版本的菜单配置（前端使用）
+ * @returns {Promise} 返回 { version_code, menu_config }
+ */
+export function getActiveVersionMenuConfig() {
+    return get('/system/menu/active')
+}
+
+// ==================== 切换激活版本并获取菜单配置 ====================
+
+/**
+ * 切换激活版本并返回新版本的菜单配置
+ * @param {string} versionCode - 版本代码
+ * @returns {Promise} 返回 { version_code, version_name, description, icon, menu_config }
+ */
+export function switchActiveVersion(versionCode) {
+    return put(`/system/versions/switch/${versionCode}`)
+}
+
+// ==================== 菜单排序 ====================
+
+/**
+ * 批量更新菜单排序
+ * @param {Array} menus - [{ id, sort_order }]
+ * @returns {Promise}
+ */
+export function batchUpdateMenuSort(menus) {
+    return post('/system/menus/batch-sort', { menus })
+}
+
+/**
+ * 按父级排序菜单（拖拽排序）
+ * @param {number} parentId - 父菜单ID
+ * @param {Array} menuIds - 按顺序排列的菜单ID列表
+ * @returns {Promise}
+ */
+export function sortMenusByParent(parentId, menuIds) {
+    return post('/system/menus/sort-by-parent', { parent_id: parentId, menu_ids: menuIds })
+}
+
+
+// ==================== 增量更新版本菜单配置 ====================
+
+/**
+ * 差异更新版本菜单配置
+ * @param {string} versionCode - 版本代码
+ * @param {Array} changes - [{ menu_path, is_visible }]
+ * @returns {Promise}
+ */
+export function diffUpdateVersionMenus(versionCode, changes) {
+    return post(`/system/version-menus/${versionCode}/diff`, { changes })
+}
+
+
+/**
+ * 增量更新版本菜单配置（只更新变化的菜单）
+ * @param {string} versionCode - 版本代码
+ * @param {Object} data - { add: [], remove: [] }
+ * @returns {Promise}
+ */
+// 增量更新版本菜单配置 - 使用 POST 方法
+export function incrementalUpdateVersionMenus(versionCode, data) {
+    // 改为 POST 方法，避免 CORS 预检问题
+    return post(`/system/version-menus/${versionCode}/incremental`, data)
+}
+
+
+// // Menu CRUD
+// export function createMenu(data) {
+//     return post('/system/menus', data)
+// }
+//
+// export function updateMenu(menuId, data) {
+//     return put(`/system/menus/${menuId}`, data)
+// }
+//
+// export function deleteMenu(menuId) {
+//     return del(`/system/menus/${menuId}`)
+// }
+//
+// // Batch sort
+// export function batchUpdateMenuSort(menus) {
+//     return post('/system/menus/batch-sort', { menus })
+// }

@@ -1,5 +1,5 @@
 // src/utils/menuInit.js
-import { getMenuConfig, listVersions, getDefaultVersion } from '@/api/system_api'
+import { listVersions, getActiveVersionMenuConfig, switchActiveVersion } from '@/api/system_api'
 import { ElMessage } from 'element-plus'
 
 /**
@@ -11,46 +11,39 @@ export async function initMenuData(counterStore) {
 
         console.log('=== 开始初始化菜单数据 ===')
 
-        // 1. 获取默认版本
-        const defaultVersionRes = await getDefaultVersion()
-        console.log('默认版本响应:', defaultVersionRes)
+        // 1. 直接获取当前激活版本的菜单配置（包含版本信息和菜单配置）
+        const activeMenuRes = await getActiveVersionMenuConfig()
+        console.log('激活版本菜单配置响应:', activeMenuRes)
 
-        if (!defaultVersionRes) {
-            throw new Error('Failed to get default version')
+        if (!activeMenuRes) {
+            throw new Error('Failed to get active version menu config')
         }
 
-        // 获取默认版本的 version_code
-        const currentVersionCode = defaultVersionRes.version_code
-        console.log('当前版本代码:', currentVersionCode)
+        // 获取当前激活版本代码
+        const currentVersionCode = activeMenuRes.version_code
+        const menuConfig = activeMenuRes.menu_config
+
+        console.log('当前激活版本代码:', currentVersionCode)
+        console.log('菜单配置:', menuConfig)
 
         // 设置当前版本
         counterStore.setMenuVersion(currentVersionCode)
 
+        // 设置菜单配置到 store
+        counterStore.setMenuConfig(menuConfig)
+        console.log('菜单配置设置成功，共', menuConfig.length, '个顶级菜单')
+
         // 2. 获取所有版本列表（用于版本切换下拉菜单）
         const allVersionsRes = await listVersions()
-        if (allVersionsRes) {
+        if (allVersionsRes && allVersionsRes.length > 0) {
             counterStore.setAllVersions(allVersionsRes)
             console.log('所有版本列表:', allVersionsRes.map(v => v.version_code))
         }
 
-        // 3. 使用默认版本的 version_code 获取菜单配置
-        console.log('开始获取菜单配置，版本:', currentVersionCode)
-        const menuRes = await getMenuConfig(currentVersionCode)
-        console.log('菜单配置响应:', menuRes)
-
-        if (!menuRes) {
-            throw new Error(menuRes.message || 'Failed to load menu config')
-        }
-
-        // 设置菜单配置到 store
-        counterStore.setMenuConfig(menuRes)
-        console.log('菜单配置设置成功，共', menuRes.length, '个顶级菜单')
-        console.log('菜单数据:', JSON.stringify(menuRes, null, 2))
-
         return {
             success: true,
             version: currentVersionCode,
-            menuCount: menuRes.length
+            menuCount: menuConfig.length
         }
     } catch (error) {
         console.error('初始化菜单失败:', error)
@@ -66,6 +59,7 @@ export async function initMenuData(counterStore) {
 
 /**
  * 切换版本并重新加载菜单
+ * 调用后端接口：切换激活版本 + 返回新版本的菜单配置
  */
 export async function switchVersion(counterStore, versionCode) {
     try {
@@ -73,24 +67,35 @@ export async function switchVersion(counterStore, versionCode) {
 
         console.log('切换版本:', versionCode)
 
-        // 获取新版本的菜单配置
-        const menuRes = await getMenuConfig(versionCode)
-        console.log('新版本菜单配置:', menuRes)
+        // 调用后端接口：切换激活版本并获取新版本菜单配置
+        const result = await switchActiveVersion(versionCode)
+        console.log('切换版本响应:', result)
 
-        if (!menuRes) {
-            throw new Error('Failed to load menu config')
+        if (!result || !result.menu_config) {
+            throw new Error('Failed to switch version')
         }
 
         // 更新 store
-        counterStore.setMenuVersion(versionCode)
-        counterStore.setMenuConfig(menuRes)
+        counterStore.setMenuVersion(result.version_code)
+        counterStore.setMenuConfig(result.menu_config)
 
-        console.log('版本切换成功，菜单数量:', menuRes.length)
+        // 同时更新版本列表中的 is_default 状态
+        const allVersions = counterStore.allVersions
+        if (allVersions && allVersions.length > 0) {
+            const updatedVersions = allVersions.map(v => ({
+                ...v,
+                is_default: v.version_code === result.version_code
+            }))
+            counterStore.setAllVersions(updatedVersions)
+        }
+
+        console.log('版本切换成功，菜单数量:', result.menu_config.length)
 
         return {
             success: true,
-            version: versionCode,
-            menuCount: menuRes.length
+            version: result.version_code,
+            menuCount: result.menu_config.length,
+            menuConfig: result.menu_config
         }
     } catch (error) {
         console.error('切换版本失败:', error)
@@ -114,17 +119,18 @@ export async function refreshCurrentMenu(counterStore) {
         const currentVersion = counterStore.menuVersion
         console.log('刷新当前版本菜单:', currentVersion)
 
-        const menuRes = await getMenuConfig(currentVersion)
-        if (!menuRes) {
+        // 使用获取激活版本菜单的接口
+        const result = await getActiveVersionMenuConfig()
+        if (!result || !result.menu_config) {
             throw new Error('Failed to load menu config')
         }
 
-        counterStore.setMenuConfig(menuRes)
-        console.log('菜单刷新成功，数量:', menuRes.length)
+        counterStore.setMenuConfig(result.menu_config)
+        console.log('菜单刷新成功，数量:', result.menu_config.length)
 
         return {
             success: true,
-            menuCount: menuRes.length
+            menuCount: result.menu_config.length
         }
     } catch (error) {
         console.error('Failed to refresh menu:', error)

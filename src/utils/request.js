@@ -92,4 +92,9 @@ export const del = (url, params = {}) => {
     })
 }
 
+// 添加 patch 方法
+export const patch = (url, data = {}) => {
+    return service({ url, method: 'PATCH', data })
+}
+
 export default service
