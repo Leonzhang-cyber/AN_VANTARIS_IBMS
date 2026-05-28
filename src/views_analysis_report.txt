@@ -1,0 +1,453 @@
+================================================================================
+Views 目录结构分析报告
+生成时间: 2026-05-28 10:11:00
+项目路径: G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src
+Views 路径: G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views
+================================================================================
+
+【统计摘要】
+  需要创建的页面总数: 587
+  已存在的页面总数: 748
+  需要创建的页面数: 43
+  多余的文件数: 204
+  完成度: 748/587 (127.4%)
+
+【分类统计（按一级目录）】
+  ⚠ Administration: 21/22 (缺失: 1)
+  ⚠ AiVideoAnalytics: 0/24 (缺失: 24)
+  ✓ AlarmsEvents: 19/19 (缺失: 0)
+  ✓ AssetIntelligence: 9/9 (缺失: 0)
+  ⚠ CommandCenter: 6/7 (缺失: 1)
+  ✓ DataCenterOperations: 54/54 (缺失: 0)
+  ✓ DataPlatform: 22/22 (缺失: 0)
+  ⚠ DecisionEvidence: 20/21 (缺失: 1)
+  ✓ DeveloperCenter: 10/10 (缺失: 0)
+  ✓ DigitalTwinOpenbim: 17/17 (缺失: 0)
+  ⚠ EnergySustainability: 27/28 (缺失: 1)
+  ✓ FacilityServices: 15/15 (缺失: 0)
+  ✓ FaultManagementSystem: 27/27 (缺失: 0)
+  ⚠ Home: 15/27 (缺失: 12)
+  ✓ IntegrationHub: 57/57 (缺失: 0)
+  ⚠ Intelligence: 22/23 (缺失: 1)
+  ⚠ Maintenance: 25/26 (缺失: 1)
+  ✓ OperationalAssistance: 27/27 (缺失: 0)
+  ✓ Operations: 29/29 (缺失: 0)
+  ✓ ReportsBi: 13/13 (缺失: 0)
+  ✓ SecurityCompliance: 11/11 (缺失: 0)
+  ✓ SitesSpaces: 18/18 (缺失: 0)
+  ✓ SystemsDevices: 67/67 (缺失: 0)
+  ⚠ TrustIdentity: 13/14 (缺失: 1)
+
+【需要创建的目录结构】
+  第1级目录:
+        📁 Administration/
+        📁 AiVideoAnalytics/
+        📁 AlarmsEvents/
+        📁 AssetIntelligence/
+        📁 CommandCenter/
+        📁 DataCenterOperations/
+        📁 DataPlatform/
+        📁 DecisionEvidence/
+        📁 DeveloperCenter/
+        📁 DigitalTwinOpenbim/
+        📁 EnergySustainability/
+        📁 FacilityServices/
+        📁 FaultManagementSystem/
+        📁 Home/
+        📁 IntegrationHub/
+        📁 Intelligence/
+        📁 Maintenance/
+        📁 OperationalAssistance/
+        📁 Operations/
+        📁 ReportsBi/
+        📁 SecurityCompliance/
+        📁 SitesSpaces/
+        📁 SystemsDevices/
+        📁 TrustIdentity/
+  第2级目录:
+            📁 Administration/EditionManagement/
+            📁 Administration/FeatureToggleManagement/
+            📁 AiVideoAnalytics/CrowdAnalytics/
+            📁 AiVideoAnalytics/PpeCompliance/
+            📁 AiVideoAnalytics/SafetyMonitoring/
+            📁 AiVideoAnalytics/VehicleAnalytics/
+            📁 AlarmsEvents/AlarmRules/
+            📁 AlarmsEvents/DataCenterAlarms/
+            📁 AlarmsEvents/LiveAlarms/
+            📁 DataCenterOperations/AirflowOptimization/
+            📁 DataCenterOperations/CapacityManagement/
+            📁 DataCenterOperations/CoolingOptimization/
+            📁 DataCenterOperations/EsgComplianceCenter/
+            📁 DataCenterOperations/Introduction/
+            📁 DataCenterOperations/PowerOptimization/
+            📁 DataCenterOperations/RackManagement/
+            📁 DataCenterOperations/ScenarioSimulation/
+            📁 DataPlatform/DataQuality/
+            📁 DataPlatform/DataServices/
+            📁 DataPlatform/Historian/
+            📁 DataPlatform/SemanticModel/
+            📁 DecisionEvidence/DecisionRegister/
+            📁 DecisionEvidence/EvidenceRepository/
+            📁 DecisionEvidence/WorkflowManagement/
+            📁 DigitalTwinOpenbim/BimManagement/
+            📁 DigitalTwinOpenbim/OpenbimIntegration/
+            📁 EnergySustainability/CarbonAnalytics/
+            📁 EnergySustainability/DataCenterEnergy/
+            📁 EnergySustainability/EnergyAnalytics/
+            📁 EnergySustainability/SustainabilityReporting/
+            📁 FacilityServices/HousekeepingManagement/
+            📁 FacilityServices/ParkingManagement/
+            📁 FaultManagementSystem/DataCenterFaults/
+            📁 FaultManagementSystem/FaultKpi/
+            📁 FaultManagementSystem/FaultWorkflow/
+            📁 FaultManagementSystem/RootCauseAnalysis/
+            📁 Home/AlarmSummary/
+            📁 Home/SystemOverview/
+            📁 IntegrationHub/CompatibilityCenter/
+            📁 IntegrationHub/CustomProtocols/
+            📁 IntegrationHub/DeviceDrivers/
+            📁 IntegrationHub/ProtocolGateway/
+            📁 IntegrationHub/ProtocolHealthCheck/
+            📁 IntegrationHub/SecurityMonitoring/
+            📁 IntegrationHub/ThirdPartySystems/
+            📁 IntegrationHub/VendorPlatformAdapter/
+            📁 Intelligence/AiGovernance/
+            📁 Intelligence/EnergyOptimization/
+            📁 Intelligence/FaultDiagnostics/
+            📁 Intelligence/PredictiveMaintenance/
+            📁 Maintenance/AssetManagement/
+            📁 Maintenance/DataCenterMaintenance/
+            📁 Maintenance/DispatchManagement/
+            📁 Maintenance/InspectionManagement/
+            📁 Maintenance/WorkOrders/
+            📁 OperationalAssistance/CommissioningCenter/
+            📁 OperationalAssistance/DeviceDiscovery/
+            📁 OperationalAssistance/DiagnosticCenter/
+            📁 OperationalAssistance/MobileOperations/
+            📁 Operations/EmergencyResponse/
+            📁 Operations/SceneManagement/
+            📁 ReportsBi/ReportGovernance/
+            📁 SitesSpaces/DataCenterRooms/
+            📁 SitesSpaces/SiteManagement/
+            📁 SitesSpaces/SpaceManagement/
+            📁 SystemsDevices/CctvSystems/
+            📁 SystemsDevices/DataCenterSystems/
+            📁 SystemsDevices/DeviceInventory/
+            📁 SystemsDevices/DeviceMonitoring/
+            📁 SystemsDevices/DeviceTemplates/
+            📁 SystemsDevices/ElectricalSystems/
+            📁 SystemsDevices/FireAlarmSystems/
+            📁 SystemsDevices/HvacSystems/
+            📁 SystemsDevices/LightingSystems/
+            📁 SystemsDevices/PlumbingSystems/
+            📁 SystemsDevices/PointManagement/
+            📁 TrustIdentity/BlockchainAnchoring/
+            📁 TrustIdentity/CredentialCenter/
+  第3级目录:
+                📁 Home/KpiDashboard/EnergyKpi/
+                📁 Home/KpiDashboard/EsgKpi/
+                📁 Home/KpiDashboard/FacilityKpi/
+                📁 Home/KpiDashboard/OperationalKpi/
+                📁 Operations/QuickControl/AccessControl/
+                📁 Operations/QuickControl/CctvControl/
+                📁 Operations/QuickControl/EmergencyDevices/
+                📁 Operations/QuickControl/HvacControl/
+                📁 Operations/QuickControl/LightingControl/
+
+【缺失文件详情】
+
+  📁 Administration/
+      📄 OemBranding.vue
+
+  📁 AiVideoAnalytics/
+      📄 AiEvidenceRepository.vue
+      📄 BehavioralAnalytics.vue
+      📄 VideoEventCenter.vue
+      📄 VideoHealthMonitoring.vue
+
+  📁 AiVideoAnalytics/CrowdAnalytics/
+      📄 DensityMonitoring.vue
+      📄 FlowAnalytics.vue
+      📄 OccupancyCounting.vue
+      📄 QueueDetection.vue
+
+  📁 AiVideoAnalytics/PpeCompliance/
+      📄 GlovesDetection.vue
+      📄 GogglesDetection.vue
+      📄 HelmetDetection.vue
+      📄 PpeReports.vue
+      📄 SafetyVestDetection.vue
+
+  📁 AiVideoAnalytics/SafetyMonitoring/
+      📄 FallDetection.vue
+      📄 FireDetection.vue
+      📄 IntrusionDetection.vue
+      📄 LoiteringDetection.vue
+      📄 RestrictedAreaDetection.vue
+      📄 SmokeDetection.vue
+
+  📁 AiVideoAnalytics/VehicleAnalytics/
+      📄 Anpr.vue
+      📄 FleetAnalytics.vue
+      📄 IllegalParking.vue
+      📄 VehicleCounting.vue
+      📄 VehicleTracking.vue
+
+  📁 CommandCenter/
+      📄 GisMap.vue
+
+  📁 DecisionEvidence/
+      📄 AiRecommendationLog.vue
+
+  📁 EnergySustainability/
+      📄 EsgDashboard.vue
+
+  📁 Home/KpiDashboard/EnergyKpi/
+      📄 EnergyIntensity.vue
+      📄 PeakDemand.vue
+      📄 SavingsProgress.vue
+
+  📁 Home/KpiDashboard/EsgKpi/
+      📄 CarbonIntensity.vue
+      📄 ComplianceGap.vue
+      📄 EsgScore.vue
+
+  📁 Home/KpiDashboard/FacilityKpi/
+      📄 CustomerSatisfaction.vue
+      📄 Occupancy.vue
+      📄 ServiceRequests.vue
+
+  📁 Home/KpiDashboard/OperationalKpi/
+      📄 Availability.vue
+      📄 ResponseTime.vue
+      📄 SlaCompliance.vue
+
+  📁 Intelligence/
+      📄 AiAssistant.vue
+
+  📁 Maintenance/
+      📄 SlaManagement.vue
+
+  📁 TrustIdentity/
+      📄 DidIdentityCenter.vue
+
+【警告：多余的文件（不在路由配置中）】
+  ⚠ AIVideoAnalytics/ANPR.vue
+  ⚠ AIVideoAnalytics/AiEvidenceRepository.vue
+  ⚠ AIVideoAnalytics/BehavioralAnalytics.vue
+  ⚠ AIVideoAnalytics/CrowdAnalytics.vue
+  ⚠ AIVideoAnalytics/CrowdAnalytics/DensityMonitoring.vue
+  ⚠ AIVideoAnalytics/CrowdAnalytics/FlowAnalytics.vue
+  ⚠ AIVideoAnalytics/CrowdAnalytics/OccupancyCounting.vue
+  ⚠ AIVideoAnalytics/CrowdAnalytics/QueueDetection.vue
+  ⚠ AIVideoAnalytics/FallDetection.vue
+  ⚠ AIVideoAnalytics/FireDetection.vue
+  ⚠ AIVideoAnalytics/HelmetDetection.vue
+  ⚠ AIVideoAnalytics/IntrusionDetection.vue
+  ⚠ AIVideoAnalytics/PPECompliance.vue
+  ⚠ AIVideoAnalytics/PpeCompliance/GlovesDetection.vue
+  ⚠ AIVideoAnalytics/PpeCompliance/GogglesDetection.vue
+  ⚠ AIVideoAnalytics/PpeCompliance/HelmetDetection.vue
+  ⚠ AIVideoAnalytics/PpeCompliance/PpeReports.vue
+  ⚠ AIVideoAnalytics/PpeCompliance/SafetyVestDetection.vue
+  ⚠ AIVideoAnalytics/SafetyMonitoring/FallDetection.vue
+  ⚠ AIVideoAnalytics/SafetyMonitoring/FireDetection.vue
+  ⚠ AIVideoAnalytics/SafetyMonitoring/IntrusionDetection.vue
+  ⚠ AIVideoAnalytics/SafetyMonitoring/LoiteringDetection.vue
+  ⚠ AIVideoAnalytics/SafetyMonitoring/RestrictedAreaDetection.vue
+  ⚠ AIVideoAnalytics/SafetyMonitoring/SmokeDetection.vue
+  ⚠ AIVideoAnalytics/SmokeDetection.vue
+  ⚠ AIVideoAnalytics/VehicleAnalytics.vue
+  ⚠ AIVideoAnalytics/VehicleAnalytics/Anpr.vue
+  ⚠ AIVideoAnalytics/VehicleAnalytics/FleetAnalytics.vue
+  ⚠ AIVideoAnalytics/VehicleAnalytics/IllegalParking.vue
+  ⚠ AIVideoAnalytics/VehicleAnalytics/VehicleCounting.vue
+  ⚠ AIVideoAnalytics/VehicleAnalytics/VehicleTracking.vue
+  ⚠ AIVideoAnalytics/VideoEventCenter.vue
+  ⚠ AIVideoAnalytics/VideoHealthMonitoring.vue
+  ⚠ Administration/EditionManagement.vue
+  ⚠ Administration/OEMBranding.vue
+  ⚠ Administration/System.vue
+  ⚠ Alarm/Alarm.vue
+  ⚠ Alarm/AlarmCorrelation.vue
+  ⚠ Alarm/AlarmHistory.vue
+  ⚠ Alarm/AlarmRules.vue
+  ⚠ Alarm/EscalationRules.vue
+  ⚠ Alarm/EventAnalytics.vue
+  ⚠ Alarm/History.vue
+  ⚠ Alarm/LiveAlarms.vue
+  ⚠ Alarm/Notification.vue
+  ⚠ Alarm/NotificationCenter.vue
+  ⚠ Blockchain/APIManagement.vue
+  ⚠ Blockchain/Anchoring.vue
+  ⚠ Blockchain/Contracts.vue
+  ⚠ Blockchain/DIDManagement.vue
+  ... 还有 154 个文件未显示
+
+【创建目录命令（Windows PowerShell）】
+
+# 创建缺失的目录:
+New-Item -ItemType Directory -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Administration"
+New-Item -ItemType Directory -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics"
+New-Item -ItemType Directory -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\CrowdAnalytics"
+New-Item -ItemType Directory -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\PpeCompliance"
+New-Item -ItemType Directory -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\SafetyMonitoring"
+New-Item -ItemType Directory -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\VehicleAnalytics"
+New-Item -ItemType Directory -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\CommandCenter"
+New-Item -ItemType Directory -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\DecisionEvidence"
+New-Item -ItemType Directory -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\EnergySustainability"
+New-Item -ItemType Directory -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Home\KpiDashboard\EnergyKpi"
+New-Item -ItemType Directory -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Home\KpiDashboard\EsgKpi"
+New-Item -ItemType Directory -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Home\KpiDashboard\FacilityKpi"
+New-Item -ItemType Directory -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Home\KpiDashboard\OperationalKpi"
+New-Item -ItemType Directory -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Intelligence"
+New-Item -ItemType Directory -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Maintenance"
+New-Item -ItemType Directory -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\TrustIdentity"
+
+# 创建缺失的文件:
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Administration\OemBranding.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\AiEvidenceRepository.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\BehavioralAnalytics.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\VideoEventCenter.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\VideoHealthMonitoring.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\CrowdAnalytics\DensityMonitoring.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\CrowdAnalytics\FlowAnalytics.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\CrowdAnalytics\OccupancyCounting.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\CrowdAnalytics\QueueDetection.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\PpeCompliance\GlovesDetection.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\PpeCompliance\GogglesDetection.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\PpeCompliance\HelmetDetection.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\PpeCompliance\PpeReports.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\PpeCompliance\SafetyVestDetection.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\SafetyMonitoring\FallDetection.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\SafetyMonitoring\FireDetection.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\SafetyMonitoring\IntrusionDetection.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\SafetyMonitoring\LoiteringDetection.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\SafetyMonitoring\RestrictedAreaDetection.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\SafetyMonitoring\SmokeDetection.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\VehicleAnalytics\Anpr.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\VehicleAnalytics\FleetAnalytics.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\VehicleAnalytics\IllegalParking.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\VehicleAnalytics\VehicleCounting.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\VehicleAnalytics\VehicleTracking.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\CommandCenter\GisMap.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\DecisionEvidence\AiRecommendationLog.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\EnergySustainability\EsgDashboard.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Home\KpiDashboard\EnergyKpi\EnergyIntensity.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Home\KpiDashboard\EnergyKpi\PeakDemand.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Home\KpiDashboard\EnergyKpi\SavingsProgress.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Home\KpiDashboard\EsgKpi\CarbonIntensity.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Home\KpiDashboard\EsgKpi\ComplianceGap.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Home\KpiDashboard\EsgKpi\EsgScore.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Home\KpiDashboard\FacilityKpi\CustomerSatisfaction.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Home\KpiDashboard\FacilityKpi\Occupancy.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Home\KpiDashboard\FacilityKpi\ServiceRequests.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Home\KpiDashboard\OperationalKpi\Availability.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Home\KpiDashboard\OperationalKpi\ResponseTime.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Home\KpiDashboard\OperationalKpi\SlaCompliance.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Intelligence\AiAssistant.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Maintenance\SlaManagement.vue"
+New-Item -ItemType File -Force -Path "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\TrustIdentity\DidIdentityCenter.vue"
+
+【创建目录命令（Linux/Mac）】
+
+# 创建缺失的目录:
+mkdir -p "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Administration"
+mkdir -p "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics"
+mkdir -p "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\CrowdAnalytics"
+mkdir -p "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\PpeCompliance"
+mkdir -p "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\SafetyMonitoring"
+mkdir -p "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\VehicleAnalytics"
+mkdir -p "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\CommandCenter"
+mkdir -p "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\DecisionEvidence"
+mkdir -p "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\EnergySustainability"
+mkdir -p "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Home\KpiDashboard\EnergyKpi"
+mkdir -p "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Home\KpiDashboard\EsgKpi"
+mkdir -p "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Home\KpiDashboard\FacilityKpi"
+mkdir -p "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Home\KpiDashboard\OperationalKpi"
+mkdir -p "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Intelligence"
+mkdir -p "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Maintenance"
+mkdir -p "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\TrustIdentity"
+
+# 创建缺失的文件:
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Administration\OemBranding.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\AiEvidenceRepository.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\BehavioralAnalytics.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\VideoEventCenter.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\VideoHealthMonitoring.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\CrowdAnalytics\DensityMonitoring.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\CrowdAnalytics\FlowAnalytics.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\CrowdAnalytics\OccupancyCounting.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\CrowdAnalytics\QueueDetection.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\PpeCompliance\GlovesDetection.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\PpeCompliance\GogglesDetection.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\PpeCompliance\HelmetDetection.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\PpeCompliance\PpeReports.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\PpeCompliance\SafetyVestDetection.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\SafetyMonitoring\FallDetection.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\SafetyMonitoring\FireDetection.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\SafetyMonitoring\IntrusionDetection.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\SafetyMonitoring\LoiteringDetection.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\SafetyMonitoring\RestrictedAreaDetection.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\SafetyMonitoring\SmokeDetection.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\VehicleAnalytics\Anpr.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\VehicleAnalytics\FleetAnalytics.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\VehicleAnalytics\IllegalParking.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\VehicleAnalytics\VehicleCounting.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\AiVideoAnalytics\VehicleAnalytics\VehicleTracking.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\CommandCenter\GisMap.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\DecisionEvidence\AiRecommendationLog.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\EnergySustainability\EsgDashboard.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Home\KpiDashboard\EnergyKpi\EnergyIntensity.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Home\KpiDashboard\EnergyKpi\PeakDemand.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Home\KpiDashboard\EnergyKpi\SavingsProgress.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Home\KpiDashboard\EsgKpi\CarbonIntensity.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Home\KpiDashboard\EsgKpi\ComplianceGap.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Home\KpiDashboard\EsgKpi\EsgScore.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Home\KpiDashboard\FacilityKpi\CustomerSatisfaction.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Home\KpiDashboard\FacilityKpi\Occupancy.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Home\KpiDashboard\FacilityKpi\ServiceRequests.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Home\KpiDashboard\OperationalKpi\Availability.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Home\KpiDashboard\OperationalKpi\ResponseTime.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Home\KpiDashboard\OperationalKpi\SlaCompliance.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Intelligence\AiAssistant.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\Maintenance\SlaManagement.vue"
+touch "G:\zgpprojectenglish\IMBS_SYSTEM\bigdata-frontend\src\views\TrustIdentity\DidIdentityCenter.vue"
+
+【Vue文件模板示例】
+
+文件: Administration/OemBranding.vue
+----------------------------------------
+<template>
+  <div class="oembranding-container">
+    <h1>OemBranding</h1>
+    <p>This is the OemBranding component.</p>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'OemBranding',
+  data() {
+    return {
+      // Add your data here
+    }
+  },
+  mounted() {
+    // Initialize component
+  },
+  methods: {
+    // Add your methods here
+  }
+}
+</script>
+
+<style scoped>
+.oembranding-container {
+  padding: 20px;
+}
+</style>
+
+
+================================================================================
+报告结束
