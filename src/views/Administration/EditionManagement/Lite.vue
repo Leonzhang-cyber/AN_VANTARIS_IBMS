@@ -994,6 +994,8 @@ const handleSaveMenu = async () => {
     }
     menuDialogVisible.value = false
     await refreshAllData()
+// 如果你坚持要刷新页面，取消注释下面这行
+    window.location.reload()
   } catch (error) {
     console.error('Save menu error:', error)
     if (error.message && error.message.includes('already exists')) {
