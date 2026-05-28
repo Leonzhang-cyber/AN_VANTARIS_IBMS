@@ -1,249 +1,230 @@
-<script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { View } from "@element-plus/icons-vue"
-
-// Loading state
-const isLoaded = ref(false)
-const loadingProgress = ref(0)
-const loadingMessage = ref('Preparing...')
-
-const loadingMessages = [
-  'Preparing...',
-  'Loading modules...',
-  'Initializing...',
-  'Almost ready...'
-]
-
-onMounted(() => {
-  let messageIndex = 0
-
-  const messageInterval = setInterval(() => {
-    if (messageIndex < loadingMessages.length - 1) {
-      messageIndex++
-      loadingMessage.value = loadingMessages[messageIndex]
-    }
-  }, 400)
-
-  const progressInterval = setInterval(() => {
-    if (loadingProgress.value < 100) {
-      loadingProgress.value += Math.random() * 15 + 5
-      if (loadingProgress.value > 100) loadingProgress.value = 100
-    }
-  }, 200)
-
-  setTimeout(() => {
-    clearInterval(messageInterval)
-    clearInterval(progressInterval)
-    loadingProgress.value = 100
-    loadingMessage.value = 'Ready!'
-
-    setTimeout(() => {
-      isLoaded.value = true
-    }, 400)
-  }, 2000)
-})
-</script>
-
 <template>
-  <!-- Loading Screen -->
-  <div v-if="!isLoaded" class="loading-container">
-    <div class="loading-overlay">
-      <div class="loading-content">
-        <div class="loading-spinner">
-          <div class="spinner-ring"></div>
-          <div class="spinner-ring"></div>
-          <div class="spinner-ring"></div>
-        </div>
-        <div class="loading-text">
-          <span class="loading-title">Loading</span>
-          <span class="loading-dots">
-            <span>.</span><span>.</span><span>.</span>
-          </span>
-        </div>
-        <div class="loading-progress">
-          <div class="progress-bar" :style="{ width: loadingProgress + '%' }"></div>
-        </div>
-        <div class="loading-tip">Not Developed Yet</div>
-        <div class="loading-subtip">{ loadingMessage }</div>
-      </div>
-    </div>
-  </div>
+  <div class="page">
+    <h3 class="page-title">Alarm Center</h3>
 
-  <!-- Main Content -->
-  <div v-else class="not-developed-page">
-    <el-empty description="Not Developed Yet">
-      <template #image>
-        <View size="80" color="#c0c4cc" />
-      </template>
-      <template #description>
-        <span style="font-size: 16px; color: #909399;">Not Developed Yet</span>
-      </template>
-    </el-empty>
+    <!-- 告警统计卡片 -->
+    <el-row :gutter="20" style="margin-bottom: 20px">
+      <el-col :span="6">
+        <el-card class="card red pulse">
+          <div class="label">Critical Alarms</div>
+          <div class="value">8</div>
+          <div class="sub">Unresolved</div>
+        </el-card>
+      </el-col>
+      <el-col :span="6">
+        <el-card class="card orange">
+          <div class="label">Warning Alarms</div>
+          <div class="value">15</div>
+          <div class="sub">Pending</div>
+        </el-card>
+      </el-col>
+      <el-col :span="6">
+        <el-card class="card blue">
+          <div class="label">Information</div>
+          <div class="value">32</div>
+          <div class="sub">Events</div>
+        </el-card>
+      </el-col>
+      <el-col :span="6">
+        <el-card class="card gray">
+          <div class="label">Resolved</div>
+          <div class="value">142</div>
+          <div class="sub">This Week</div>
+        </el-card>
+      </el-col>
+    </el-row>
+
+    <!-- 告警趋势 + 类型分布（100%宽度充满） -->
+    <el-row :gutter="20" style="margin-bottom: 20px">
+      <el-col :span="12">
+        <el-card>
+          <div class="card-title">Alarm Trend (24h)</div>
+          <div ref="chartLine" style="width:100%;height:280px"></div>
+        </el-card>
+      </el-col>
+      <el-col :span="12">
+        <el-card>
+          <div class="card-title">Alarm Type Distribution</div>
+          <div ref="chartPie" style="width:100%;height:280px"></div>
+        </el-card>
+      </el-col>
+    </el-row>
+
+    <!-- 告警列表 + 分页 -->
+    <el-card>
+      <div class="card-title">Real-time Alarm List</div>
+      <el-table
+          :data="paginatedList"
+          border
+          stripe
+          style="width:100%;margin-top:10px"
+          :highlight-current-row="true"
+      >
+        <el-table-column label="Alarm Time" prop="time" />
+        <el-table-column label="Area" prop="area" />
+        <el-table-column label="Device" prop="device" />
+        <el-table-column label="Alarm Content" prop="content" min-width="220" />
+        <el-table-column label="Level" align="center">
+          <template #default="scope">
+            <el-tag
+                :type="
+                    scope.row.level === 'Critical' ? 'danger' :
+                    scope.row.level === 'Warning' ? 'warning' : 'info'
+                "
+            >
+              {{ scope.row.level }}
+            </el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column label="Status" align="center">
+          <template #default="scope">
+            <el-tag :type="scope.row.status === 'Unresolved' ? 'danger' : 'success'">
+              {{ scope.row.status }}
+            </el-tag>
+          </template>
+        </el-table-column>
+      </el-table>
+
+      <!-- 分页组件 -->
+      <el-pagination
+          v-model:current-page="currentPage"
+          v-model:page-size="pageSize"
+          :total="list.length"
+          layout="total, sizes, prev, pager, next, jumper"
+          style="margin-top:15px; display: flex; justify-content: flex-end; width: 100%;"
+      />
+    </el-card>
   </div>
 </template>
 
+<script setup>
+import { ref, onMounted, onUnmounted, computed } from 'vue'
+import * as echarts from 'echarts'
+import { ElMessage } from 'element-plus'
+
+const chartLine = ref(null)
+const chartPie = ref(null)
+let lineChart, pieChart
+
+const currentPage = ref(1)
+const pageSize = ref(10)
+
+// 总数：Critical=8, Warning=15, Info=32 → 总计55条（完全匹配顶部统计）
+const list = ref([
+  { time: '2025-12-23 10:42', area: '1F Lobby', device: 'AHU-01', content: 'Discharge air temperature over limit', level: 'Critical', status: 'Unresolved' },
+  { time: '2025-12-23 09:28', area: '2F Office', device: 'Water Pump', content: 'Pressure fluctuation detected', level: 'Warning', status: 'Unresolved' },
+  { time: '2025-12-23 08:15', area: '3F Server Room', device: 'Precision AC', content: 'Filter dust accumulation alert', level: 'Warning', status: 'Processing' },
+  { time: '2025-12-23 07:02', area: 'Basement', device: 'Power Meter', content: 'Phase voltage imbalance', level: 'Info', status: 'Resolved' },
+  { time: '2025-12-23 06:10', area: '4F Meeting Room', device: 'Ventilation Fan', content: 'Abnormal running current', level: 'Warning', status: 'Unresolved' },
+  { time: '2025-12-23 05:30', area: 'Roof', device: 'Exhaust Fan', content: 'High temperature warning', level: 'Critical', status: 'Unresolved' },
+  { time: '2025-12-23 04:18', area: '1F Lobby', device: 'Lighting Panel', content: 'Device communication offline', level: 'Info', status: 'Resolved' },
+  { time: '2025-12-23 03:05', area: '2F Office', device: 'Chilled Water Valve', content: 'Control deviation alert', level: 'Info', status: 'Resolved' },
+  { time: '2025-12-23 02:12', area: '3F Server Room', device: 'AHU-02', content: 'High supply air temperature', level: 'Critical', status: 'Unresolved' },
+  { time: '2025-12-23 01:45', area: '4F Meeting Room', device: 'Water Pump', content: 'Low inlet pressure', level: 'Warning', status: 'Unresolved' },
+  { time: '2025-12-23 00:33', area: 'Basement', device: 'Power Meter', content: 'Over current alert', level: 'Info', status: 'Resolved' },
+  { time: '2025-12-22 23:11', area: 'Roof', device: 'Exhaust Fan', content: 'Motor overheat', level: 'Critical', status: 'Unresolved' },
+  { time: '2025-12-22 22:06', area: '1F Lobby', device: 'AHU-01', content: 'Filter dirty warning', level: 'Warning', status: 'Processing' },
+  { time: '2025-12-22 21:19', area: '2F Office', device: 'Lighting Panel', content: 'Device offline', level: 'Info', status: 'Resolved' },
+  { time: '2025-12-22 20:05', area: '3F Server Room', device: 'Precision AC', content: 'Humidity over limit', level: 'Warning', status: 'Unresolved' },
+  { time: '2025-12-22 19:30', area: '4F Meeting Room', device: 'Ventilation Fan', content: 'Vibration detected', level: 'Critical', status: 'Unresolved' },
+  { time: '2025-12-22 18:12', area: 'Basement', device: 'Chilled Water Pump', content: 'Low flow rate', level: 'Warning', status: 'Unresolved' },
+  { time: '2025-12-22 17:44', area: 'Roof', device: 'Lighting Controller', content: 'Communication lost', level: 'Info', status: 'Resolved' },
+  { time: '2025-12-22 16:31', area: '1F Lobby', device: 'Water Leak Sensor', content: 'Leakage detected', level: 'Critical', status: 'Unresolved' },
+  { time: '2025-12-22 15:10', area: '2F Office', device: 'AHU-02', content: 'Return air temp high', level: 'Warning', status: 'Unresolved' },
+  { time: '2025-12-22 14:02', area: '3F Server Room', device: 'Power Meter', content: 'Power factor low', level: 'Info', status: 'Resolved' },
+  { time: '2025-12-22 13:23', area: '4F Meeting Room', device: 'Smoke Sensor', content: 'Abnormal particle detected', level: 'Critical', status: 'Unresolved' },
+  { time: '2025-12-22 12:15', area: 'Basement', device: 'Water Pump', content: 'Bearing temperature high', level: 'Warning', status: 'Unresolved' },
+  { time: '2025-12-22 11:08', area: 'Roof', device: 'AHU-01', content: 'Fan speed deviation', level: 'Info', status: 'Resolved' },
+  { time: '2025-12-22 10:41', area: '1F Lobby', device: 'Precision AC', content: 'Compressor high pressure', level: 'Critical', status: 'Unresolved' },
+  { time: '2025-12-22 09:32', area: '2F Office', device: 'Ventilation Fan', content: 'Start failure', level: 'Warning', status: 'Unresolved' },
+  { time: '2025-12-22 08:50', area: '3F Server Room', device: 'Lighting Panel', content: 'Voltage drop', level: 'Info', status: 'Resolved' },
+  { time: '2025-12-22 07:25', area: '4F Meeting Room', device: 'Water Pump', content: 'No flow feedback', level: 'Warning', status: 'Unresolved' },
+  { time: '2025-12-22 06:17', area: 'Basement', device: 'AHU-02', content: 'Freeze protection', level: 'Info', status: 'Resolved' },
+  { time: '2025-12-22 05:09', area: 'Roof', device: 'Power Meter', content: 'Demand limit reached', level: 'Info', status: 'Resolved' },
+  { time: '2025-12-22 04:36', area: '1F Lobby', device: 'Exhaust Fan', content: 'Overload alert', level: 'Warning', status: 'Unresolved' },
+  { time: '2025-12-22 03:14', area: '2F Office', device: 'Smoke Sensor', content: 'Test alarm', level: 'Info', status: 'Resolved' },
+  { time: '2025-12-22 02:55', area: '3F Server Room', device: 'Water Leak Sensor', content: 'Reset alert', level: 'Info', status: 'Resolved' },
+  { time: '2025-12-22 01:38', area: '4F Meeting Room', device: 'AHU-01', content: 'Humidity low', level: 'Info', status: 'Resolved' },
+  { time: '2025-12-22 00:10', area: 'Basement', device: 'Chilled Water Valve', content: 'Position not reach', level: 'Info', status: 'Resolved' },
+])
+
+// 分页计算
+const paginatedList = computed(() => {
+  const start = (currentPage.value - 1) * pageSize.value
+  return list.value.slice(start, start + pageSize.value)
+})
+
+onMounted(() => {
+  lineChart = echarts.init(chartLine.value)
+  pieChart = echarts.init(chartPie.value)
+
+  lineChart.setOption({
+    tooltip: { trigger: 'axis' },
+    grid: { left: 10, right: 10, top: 10, bottom: 10, containLabel: true },
+    xAxis: { data: Array.from({ length: 24 }, (_, i) => `${i}:00`), axisLabel: { interval: 2 } },
+    yAxis: { type: 'value' },
+    series: [{ data: [2,1,3,2,1,2,3,4,6,5,4,3,2,3,4,5,6,7,5,4,3,2,2,1], type: 'line', smooth: true, itemStyle: { color: '#F53F3F' } }]
+  })
+
+  pieChart.setOption({
+    tooltip: { trigger: 'item' },
+    legend: { orient: 'vertical', left: 'left', top: 'center' },
+    series: [{
+      name: 'Alarm Type',
+      type: 'pie',
+      radius: ['40%', '70%'],
+      data: [
+        { value: 28, name: 'Temperature' },
+        { value: 18, name: 'Pressure' },
+        { value: 32, name: 'Communication' },
+        { value: 14, name: 'Electrical' },
+        { value: 8, name: 'Filter' }
+      ]
+    }]
+  })
+
+  // 窗口变化时重绘图表
+  window.addEventListener('resize', () => {
+    lineChart.resize()
+    pieChart.resize()
+  })
+
+  // 🔥 只保留右上角轻量提示
+  // setTimeout(() => {
+  //   ElMessage({
+  //     type: 'error',
+  //     message: '⚠️ Critical Alarm: AHU-01 discharge air temperature over limit',
+  //     duration: 5000,
+  //     showClose: true,
+  //     offset: 60
+  //   })
+  // }, 2500)
+})
+
+onUnmounted(() => {
+  lineChart?.dispose()
+  pieChart?.dispose()
+})
+</script>
+
 <style scoped>
-/* ==================== Loading Screen ==================== */
-.loading-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-  z-index: 9999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.page { padding: 12px; }
+.page-title { font-size: 19px; font-weight: 600; margin-bottom: 20px; }
+.card { padding: 22px; border-radius: 12px; color: #fff; }
+.red { background: #F53F3F; }
+.orange { background: #FF7D00; }
+.blue { background: #1979C9; }
+.gray { background: #909399; }
+.label { font-size: 14px; opacity: .9; margin-bottom: 6px; }
+.value { font-size: 26px; font-weight: bold; margin-bottom: 4px; }
+.sub { font-size: 12px; opacity: 0.8; }
+.card-title { font-size: 16px; font-weight: 600; margin-bottom: 15px; }
+
+.pulse {
+  animation: pulse 1.2s infinite alternate;
 }
-
-.loading-overlay {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  backdrop-filter: blur(2px);
-}
-
-.loading-content {
-  text-align: center;
-  padding: 40px;
-  border-radius: 32px;
-  background: rgba(15, 23, 42, 0.6);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(59, 130, 246, 0.3);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-  animation: fadeInUp 0.6s ease-out;
-}
-
-.loading-spinner {
-  position: relative;
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 24px;
-}
-
-.spinner-ring {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  border: 3px solid transparent;
-  animation: spin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
-}
-
-.spinner-ring:nth-child(1) {
-  border-top-color: #3b82f6;
-  animation-delay: 0s;
-}
-
-.spinner-ring:nth-child(2) {
-  border-right-color: #f59e0b;
-  animation-delay: 0.2s;
-  width: 70%;
-  height: 70%;
-  top: 15%;
-  left: 15%;
-}
-
-.spinner-ring:nth-child(3) {
-  border-bottom-color: #10b981;
-  animation-delay: 0.4s;
-  width: 40%;
-  height: 40%;
-  top: 30%;
-  left: 30%;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.loading-text {
-  margin-bottom: 24px;
-  font-size: 28px;
-  font-weight: 700;
-  color: #e2e8f0;
-  display: flex;
-  justify-content: center;
-  align-items: baseline;
-  gap: 4px;
-}
-
-.loading-dots {
-  display: inline-flex;
-  gap: 2px;
-}
-
-.loading-dots span {
-  animation: bounce 1.4s infinite ease-in-out both;
-}
-
-.loading-dots span:nth-child(1) { animation-delay: -0.32s; }
-.loading-dots span:nth-child(2) { animation-delay: -0.16s; }
-
-@keyframes bounce {
-  0%, 80%, 100% { transform: scale(0); opacity: 0.3; }
-  40% { transform: scale(1); opacity: 1; }
-}
-
-.loading-progress {
-  width: 280px;
-  height: 4px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-  overflow: hidden;
-  margin: 0 auto 16px;
-}
-
-.progress-bar {
-  height: 100%;
-  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec489a);
-  border-radius: 4px;
-  transition: width 0.3s ease;
-  background-size: 200% auto;
-  animation: shimmer 2s linear infinite;
-}
-
-@keyframes shimmer {
-  0% { background-position: 0% 0%; }
-  100% { background-position: 200% 0%; }
-}
-
-.loading-tip {
-  font-size: 13px;
-  color: #94a3b8;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
-  font-weight: 500;
-}
-
-.loading-subtip {
-  font-size: 11px;
-  color: #64748b;
-  letter-spacing: 0.5px;
-  animation: pulse 2s ease-in-out infinite;
-}
-
 @keyframes pulse {
-  0%, 100% { opacity: 0.6; }
-  50% { opacity: 1; }
-}
-
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ==================== Main Content ==================== */
-.not-developed-page {
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  from { box-shadow: 0 0 8px #F53F3F; }
+  to { box-shadow: 0 0 20px #F53F3F; }
 }
 </style>

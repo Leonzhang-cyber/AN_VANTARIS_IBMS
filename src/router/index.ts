@@ -218,7 +218,7 @@ const routes = [
           },
           {
             path: 'data-center',
-            name: 'DataCenterDashboard',
+            name: 'DataCenter',
             component: () => import('@/views/Home/DataCenter.vue'),
             meta: { title: 'Data Center Dashboard' }
           },
