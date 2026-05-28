@@ -2,10 +2,10 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 
-const devUrl = 'http://127.0.0.1:5000/api'
-const online = 'https://ibms.aegisnx.com/api'
+const DevUrl = 'http://127.0.0.1:5000/api'
+const Online = 'https://ibms.aegisnx.com/api'
 
-const BASE_URL =  online // 替换为你的实际后端地址
+const BASE_URL =  DevUrl
 
 // https://ibms.aegisnx.com/api
 // http://127.0.0.1:5000/api

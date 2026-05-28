@@ -503,20 +503,10 @@ export function incrementalUpdateVersionMenus(versionCode, data) {
 }
 
 
-// // Menu CRUD
-// export function createMenu(data) {
-//     return post('/system/menus', data)
-// }
-//
-// export function updateMenu(menuId, data) {
-//     return put(`/system/menus/${menuId}`, data)
-// }
-//
-// export function deleteMenu(menuId) {
-//     return del(`/system/menus/${menuId}`)
-// }
-//
-// // Batch sort
-// export function batchUpdateMenuSort(menus) {
-//     return post('/system/menus/batch-sort', { menus })
-// }
+/**
+ * 获取页面初始化所需的所有数据（一次性接口）
+ * @returns {Promise} 返回 { active_version, versions, menu_tree, version_menus }
+ */
+export function getInitializationData() {
+    return get('/system/menu/init-data')
+}

@@ -4366,6 +4366,12 @@ const routes = [
             name: 'EditionManagement',
             children: [
               {
+                path: 'menu',
+                name: 'MenuManagement',
+                component: () => import('@/views/Administration/EditionManagement/MenuManagement.vue'),
+                meta: { title: 'Menu Management' }
+              },
+              {
                 path: 'lite',
                 name: 'Lite',
                 component: () => import('@/views/Administration/EditionManagement/Lite.vue'),
