@@ -62,29 +62,51 @@
               :collapse="false"
               :collapse-transition="true"
           >
-            <!-- 动态渲染菜单 -->
+            <!-- 动态渲染菜单（支持 4 层） -->
             <template v-for="item in menuConfig" :key="item.index">
               <el-sub-menu v-if="item.children && item.children.length" :index="item.index">
                 <template #title>
                   <el-icon v-if="item.icon"><component :is="item.icon" /></el-icon>
                   <span>{{ item.title }}</span>
                 </template>
-                <!-- 这里递归渲染子菜单 -->
+
+                <!-- 第二层 -->
                 <template v-for="child in item.children" :key="child.index">
                   <el-sub-menu v-if="child.children && child.children.length" :index="child.index">
                     <template #title>
                       <el-icon v-if="child.icon"><component :is="child.icon" /></el-icon>
                       <span>{{ child.title }}</span>
                     </template>
-                    <el-menu-item v-for="grandChild in child.children" :key="grandChild.index" :index="grandChild.index">
-                      <span>{{ grandChild.title }}</span>
-                    </el-menu-item>
+
+                    <!-- 第三层 -->
+                    <template v-for="grandChild in child.children" :key="grandChild.index">
+                      <el-sub-menu v-if="grandChild.children && grandChild.children.length" :index="grandChild.index">
+                        <template #title>
+                          <span>{{ grandChild.title }}</span>
+                        </template>
+
+                        <!-- 第四层 -->
+                        <el-menu-item
+                            v-for="greatGrand in grandChild.children"
+                            :key="greatGrand.index"
+                            :index="greatGrand.index"
+                        >
+                          <span>{{ greatGrand.title }}</span>
+                        </el-menu-item>
+
+                      </el-sub-menu>
+                      <el-menu-item v-else :index="grandChild.index">
+                        <span>{{ grandChild.title }}</span>
+                      </el-menu-item>
+                    </template>
+
                   </el-sub-menu>
                   <el-menu-item v-else :index="child.index">
                     <el-icon v-if="child.icon"><component :is="child.icon" /></el-icon>
                     <span>{{ child.title }}</span>
                   </el-menu-item>
                 </template>
+
               </el-sub-menu>
               <el-menu-item v-else :index="item.index">
                 <el-icon v-if="item.icon"><component :is="item.icon" /></el-icon>
