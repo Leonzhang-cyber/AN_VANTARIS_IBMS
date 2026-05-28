@@ -1,3 +1,4 @@
+# src/main.py
 import warnings
 
 warnings.filterwarnings("ignore", category=DeprecationWarning)

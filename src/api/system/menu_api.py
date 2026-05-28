@@ -406,14 +406,10 @@ def batch_update_version_menus(version_code):
 
 # ==================== Incremental Update Version Menu ====================
 
-@api_bp.route('/system/version-menus/<version_code>/incremental',methods=['POST'])
+@api_bp.route('/system/version-menus/<version_code>/incremental', methods=['POST'])
 def incremental_update_version_menus(version_code):
     """
-    增量更新版本菜单配置（只更新变化的菜单）
-    请求体格式: {
-        "add": ["/menu/path/1", "/menu/path/2"],      # 新增勾选的菜单
-        "remove": ["/menu/path/3", "/menu/path/4"]    # 取消勾选的菜单
-    }
+    增量更新版本菜单配置 - 纯批量操作优化版（最快）
     """
     data = request.json
     add_list = data.get('add', [])
@@ -424,69 +420,107 @@ def incremental_update_version_menus(version_code):
 
     try:
         from sqlalchemy import text
+        import time
+        start_time = time.time()
 
         # 检查版本是否存在
-        version = db.session.execute(
-            text("SELECT version_code FROM sys_version WHERE version_code = :code"),
+        version_check = db.session.execute(
+            text("SELECT 1 FROM sys_version WHERE version_code = :code LIMIT 1"),
             {"code": version_code}
         ).fetchone()
 
-        if not version:
+        if not version_check:
             return Result.error('NOT_FOUND', f'Version {version_code} not found', 404)
+
+        # 一次性获取所有相关菜单的ID
+        all_paths = add_list + remove_list
+        path_to_id = {}
+
+        if all_paths:
+            # 分批查询避免 SQL 过长（每批最多100个）
+            batch_size = 100
+            for i in range(0, len(all_paths), batch_size):
+                batch_paths = all_paths[i:i + batch_size]
+                placeholders = ','.join([f':path_{j}' for j in range(len(batch_paths))])
+                params = {f'path_{j}': path for j, path in enumerate(batch_paths)}
+
+                menu_query = text(f"""
+                    SELECT menu_path, id 
+                    FROM sys_menu 
+                    WHERE menu_path IN ({placeholders})
+                """)
+                batch_result = db.session.execute(menu_query, params).fetchall()
+                path_to_id.update({row[0]: row[1] for row in batch_result})
 
         added_count = 0
         removed_count = 0
 
-        # 处理新增勾选的菜单
-        for menu_path in add_list:
-            menu = db.session.execute(
-                text("SELECT id, menu_path FROM sys_menu WHERE menu_path = :path"),
-                {"path": menu_path}
-            ).fetchone()
+        # 批量插入/更新新增菜单
+        if add_list:
+            add_data = []
+            for menu_path in add_list:
+                menu_id = path_to_id.get(menu_path)
+                if menu_id:
+                    add_data.append({
+                        'version_code': version_code,
+                        'menu_id': menu_id,
+                        'menu_path': menu_path,
+                        'is_visible': 1
+                    })
 
-            if menu:
-                db.session.execute(
-                    text("""
-                         INSERT INTO sys_version_menu (version_code, menu_id, menu_path, is_visible)
-                         VALUES (:version_code, :menu_id, :menu_path, 1) ON DUPLICATE KEY
-                         UPDATE is_visible = 1
-                         """),
-                    {
-                        "version_code": version_code,
-                        "menu_id": menu[0],
-                        "menu_path": menu[1]
-                    }
-                )
-                added_count += 1
+            if add_data:
+                # 使用 executemany 批量操作
+                from sqlalchemy import bindparam
 
-        # 处理取消勾选的菜单
-        for menu_path in remove_list:
-            menu = db.session.execute(
-                text("SELECT id, menu_path FROM sys_menu WHERE menu_path = :path"),
-                {"path": menu_path}
-            ).fetchone()
+                stmt = text("""
+                            INSERT INTO sys_version_menu (version_code, menu_id, menu_path, is_visible)
+                            VALUES (:version_code, :menu_id, :menu_path, :is_visible) ON DUPLICATE KEY
+                            UPDATE is_visible =
+                            VALUES (is_visible)
+                            """)
 
-            if menu:
-                db.session.execute(
-                    text("""
-                         UPDATE sys_version_menu
-                         SET is_visible = 0
-                         WHERE version_code = :version_code
-                           AND menu_id = :menu_id
-                         """),
-                    {
-                        "version_code": version_code,
-                        "menu_id": menu[0]
-                    }
-                )
-                removed_count += 1
+                # 分批 executemany，避免一次处理太多
+                for i in range(0, len(add_data), 500):
+                    batch = add_data[i:i + 500]
+                    db.session.execute(stmt, batch)
+                    added_count += len(batch)
+
+                # 如果数据量不大，可以直接用 executemany
+                # db.session.execute(stmt, add_data)
+                # added_count = len(add_data)
+
+        # 批量更新移除的菜单（使用 CASE WHEN 或 IN）
+        if remove_list:
+            remove_paths = [path for path in remove_list if path in path_to_id]
+            if remove_paths:
+                # 分批处理
+                batch_size = 500
+                for i in range(0, len(remove_paths), batch_size):
+                    batch_paths = remove_paths[i:i + batch_size]
+                    placeholders = ','.join([f':path_{j}' for j in range(len(batch_paths))])
+                    params = {'version_code': version_code}
+                    for j, path in enumerate(batch_paths):
+                        params[f'path_{j}'] = path
+
+                    update_query = text(f"""
+                        UPDATE sys_version_menu 
+                        SET is_visible = 0 
+                        WHERE version_code = :version_code 
+                          AND menu_path IN ({placeholders})
+                    """)
+                    result = db.session.execute(update_query, params)
+                    removed_count += result.rowcount
 
         db.session.commit()
+
+        elapsed_time = (time.time() - start_time) * 1000
+        print(f"✅ 批量增量更新完成: +{added_count} -{removed_count} 耗时 {elapsed_time:.2f}ms")
 
         return Result.success({
             'added': added_count,
             'removed': removed_count,
-            'message': f'Updated {added_count} menus added, {removed_count} menus removed'
+            'message': f'Updated {added_count} menus added, {removed_count} menus removed',
+            'elapsed_ms': round(elapsed_time, 2)
         }, 'Incremental update successful')
 
     except Exception as e:
