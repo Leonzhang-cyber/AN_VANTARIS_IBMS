@@ -595,3 +595,169 @@ def diff_update_version_menus(version_code):
         import traceback
         traceback.print_exc()
         return Result.error(code=500, message=str(e))
+
+
+@api_bp.route('/system/menu/init-data', methods=['GET'])
+def get_initialization_data():
+    """
+    获取页面初始化所需的所有数据 - MySQL 终极性能版本
+    使用两次查询 + 内存处理，速度最快且兼容性好
+    """
+    try:
+        from sqlalchemy import text
+        import time
+        start_time = time.time()
+
+        service = MenuService()
+
+        # ========== 1. 查询版本及其菜单配置（使用 GROUP_CONCAT） ==========
+        versions_query = text("""
+                              SELECT v.id,
+                                     v.version_code,
+                                     v.version_name,
+                                     v.description,
+                                     v.icon,
+                                     v.sort_order,
+                                     v.is_active,
+                                     v.is_default,
+                                     COALESCE(
+                                             (SELECT GROUP_CONCAT(menu_path ORDER BY menu_path SEPARATOR ',')
+                                              FROM sys_version_menu
+                                              WHERE version_code = v.version_code
+                                                AND is_visible = 1),
+                                             ''
+                                     ) as menu_paths
+                              FROM sys_version v
+                              WHERE v.is_active = 1
+                              ORDER BY v.is_default DESC, v.sort_order, v.id
+                              """)
+
+        versions_result = db.session.execute(versions_query).fetchall()
+
+        if not versions_result:
+            return Result.error(code=500, message="No versions found")
+
+        # 构建版本数据
+        versions = []
+        version_menus = {}
+        active_version_code = None
+
+        for row in versions_result:
+            version_code = row[1]
+            menu_paths_str = row[8] if row[8] else ''
+
+            version_data = {
+                'id': row[0],
+                'version_code': version_code,
+                'version_name': row[2],
+                'description': row[3],
+                'icon': row[4],
+                'sort_order': row[5],
+                'is_active': row[6] == 1,
+                'is_default': row[7] == 1
+            }
+            versions.append(version_data)
+
+            # 分割菜单路径
+            if menu_paths_str:
+                version_menus[version_code] = menu_paths_str.split(',')
+            else:
+                version_menus[version_code] = []
+
+            if version_data['is_default']:
+                active_version_code = version_code
+
+        # ========== 2. 查询菜单树（一次性获取，利用索引） ==========
+        menu_query = text("""
+                          SELECT id,
+                                 parent_id,
+                                 menu_path,
+                                 menu_title,
+                                 menu_icon,
+                                 menu_type,
+                                 has_children,
+                                 redirect_path,
+                                 sort_order,
+                                 is_visible
+                          FROM sys_menu
+                          WHERE is_visible = 1
+                          ORDER BY parent_id, sort_order, id
+                          """)
+
+        menu_result = db.session.execute(menu_query).fetchall()
+
+        # ========== 3. 快速构建树形结构（O(n) 复杂度） ==========
+        # 使用字典映射，避免递归查找
+        menu_map = {}
+        children_map = {}
+
+        for row in menu_result:
+            menu = {
+                'id': row[0],
+                'parent_id': row[1],
+                'menu_path': row[2],
+                'menu_title': row[3],
+                'menu_icon': row[4],
+                'menu_type': row[5],
+                'has_children': row[6] == 1,
+                'redirect_path': row[7],
+                'sort_order': row[8],
+                'is_visible': row[9] == 1,
+                'children': []
+            }
+            menu_map[row[0]] = menu
+
+            parent_id = row[1]
+            if parent_id not in children_map:
+                children_map[parent_id] = []
+            children_map[parent_id].append(menu)
+
+        # 构建父子关系
+        for parent_id, children in children_map.items():
+            if parent_id != 0 and parent_id in menu_map:
+                menu_map[parent_id]['children'] = children
+
+        # 获取根菜单
+        root_menus = children_map.get(0, [])
+
+        # 排序函数（原地排序，最快）
+        def sort_menu(node):
+            if node['children']:
+                node['children'].sort(key=lambda x: (x['sort_order'], x['id']))
+                for child in node['children']:
+                    sort_menu(child)
+
+        # 对根菜单排序
+        root_menus.sort(key=lambda x: (x['sort_order'], x['id']))
+        for menu in root_menus:
+            sort_menu(menu)
+
+        # ========== 4. 获取激活版本的完整配置 ==========
+        active_config = None
+        if active_version_code:
+            try:
+                active_config = service.get_active_version_menu_config(db.session)
+            except Exception as e:
+                print(f"获取激活版本配置失败: {e}")
+                active_config = {
+                    'version_code': active_version_code,
+                    'version_name': next(
+                        (v['version_name'] for v in versions if v['version_code'] == active_version_code), ''),
+                    'menu_config': []
+                }
+
+        elapsed_time = (time.time() - start_time) * 1000
+        print(f"✅ 初始化完成 - 版本: {len(versions)}, 菜单: {len(menu_map)}, 耗时: {elapsed_time:.2f}ms")
+
+        return Result.success({
+            'active_version': active_config,
+            'versions': versions,
+            'menu_tree': root_menus,
+            'version_menus': version_menus
+        })
+
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        db.session.rollback()
+        return Result.error(code=500, message=f"初始化失败: {str(e)}")
