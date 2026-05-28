@@ -5,7 +5,7 @@ import { ElMessage } from 'element-plus'
 const DevUrl = 'http://127.0.0.1:5000/api'
 const Online = 'https://ibms.aegisnx.com/api'
 
-const BASE_URL =  DevUrl
+const BASE_URL =  Online
 
 // https://ibms.aegisnx.com/api
 // http://127.0.0.1:5000/api

@@ -269,6 +269,7 @@
                 :icon="Search"
                 class="control-btn pill-btn"
                 @click="openGlobalSearch"
+                style="margin-left: 0px"
             >
               <span v-if="!isMobile">Search</span>
             </el-button>
