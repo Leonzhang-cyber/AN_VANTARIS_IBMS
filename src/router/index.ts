@@ -12,7 +12,7 @@ const routes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/home/system-overview',  // 直接重定向，不要嵌套 children 的重定向
+    redirect: 'home/system-overview/total-devices-online-rate',  // 直接重定向，不要嵌套 children 的重定向
     children: [
       //   1 home
       {
