@@ -351,8 +351,8 @@ const cameras = ref<Camera[]>([
 
 // Mock Data - Presets
 const presets = ref<PTZPreset[]>([
-  { id: 1, cameraId: 1, number: 1, name: 'Main Entrance', description: 'Front gate view', thumbnail: 'https://picsum.photos/id/20/200/120', createdAt: '2025-05-28', pan: 0, tilt: 0, zoom: 1 },
-  { id: 2, cameraId: 1, number: 2, name: 'Reception Desk', description: 'Lobby area', thumbnail: 'https://picsum.photos/id/21/200/120', createdAt: '2025-05-28', pan: 45, tilt: -10, zoom: 1.5 },
+  { id: 1, cameraId: 1, number: 1, name: 'Main Entrance', description: 'Front gate view', thumbnail: 'https://picsum.photos/id/27/200/120', createdAt: '2025-05-28', pan: 0, tilt: 0, zoom: 1 },
+  { id: 2, cameraId: 1, number: 2, name: 'Reception Desk', description: 'Lobby area', thumbnail: 'https://picsum.photos/id/26/200/120', createdAt: '2025-05-28', pan: 45, tilt: -10, zoom: 1.5 },
   { id: 3, cameraId: 5, number: 1, name: 'Server Rack A', description: 'Main server row', thumbnail: 'https://picsum.photos/id/26/200/120', createdAt: '2025-05-27', pan: 0, tilt: 0, zoom: 2 },
   { id: 4, cameraId: 5, number: 2, name: 'Cooling System', description: 'HVAC monitoring', thumbnail: 'https://picsum.photos/id/27/200/120', createdAt: '2025-05-27', pan: 90, tilt: 0, zoom: 1 },
   { id: 5, cameraId: 2, number: 1, name: 'North Corridor', description: 'Main hallway', thumbnail: 'https://picsum.photos/id/22/200/120', createdAt: '2025-05-26', pan: 0, tilt: 0, zoom: 1 }
