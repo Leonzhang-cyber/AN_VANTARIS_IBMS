@@ -97,7 +97,7 @@ const routes = [
                   },
                   {
                     path: 'peak-demand',
-                    name: 'PeakDemand',
+                    name: 'PeakDemandView',
                     component: () => import('@/views/Home/KpiDashboard/EnergyKpi/PeakDemand.vue'),
                     meta: { title: 'Peak Demand' }
                   },
@@ -116,7 +116,7 @@ const routes = [
                 children: [
                   {
                     path: 'carbon-intensity',
-                    name: 'CarbonIntensity',
+                    name: 'CarbonIntensityView',
                     component: () => import('@/views/Home/KpiDashboard/EsgKpi/CarbonIntensity.vue'),
                     meta: { title: 'Carbon Intensity' }
                   },
