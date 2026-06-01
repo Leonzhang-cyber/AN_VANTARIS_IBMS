@@ -505,6 +505,42 @@ const routes = [
                 name: 'SiteContacts',
                 component: () => import('@/views/SitesSpaces/SiteManagement/SiteContacts.vue'),
                 meta: { title: 'Site Contacts' }
+              },
+              {
+                path: 'airport',
+                name: 'Airport',
+                component: () => import('@/views/SitesSpaces/SiteManagement/Airport.vue'),
+                meta: { title: 'Site Airport' }
+              },
+              {
+                path: 'building',
+                name: 'Building',
+                component: () => import('@/views/SitesSpaces/SiteManagement/Building.vue'),
+                meta: { title: 'Site Building' }
+              },
+              {
+                path: 'factory',
+                name: 'Factory',
+                component: () => import('@/views/SitesSpaces/SiteManagement/Factory.vue'),
+                meta: { title: 'Site Factory' }
+              },
+              {
+                path: 'hospital',
+                name: 'Hospital',
+                component: () => import('@/views/SitesSpaces/SiteManagement/Hospital.vue'),
+                meta: { title: 'Site Hospital' }
+              },
+              {
+                path: 'hotel',
+                name: 'Hotel',
+                component: () => import('@/views/SitesSpaces/SiteManagement/Hotel.vue'),
+                meta: { title: 'Site Hotel' }
+              },
+              {
+                path: 'shopping',
+                name: 'Shopping',
+                component: () => import('@/views/SitesSpaces/SiteManagement/Shopping.vue'),
+                meta: { title: 'Site Shopping' }
               }
             ]
           },
