@@ -735,7 +735,7 @@ const routes = [
           // 4.4 Device Templates
           {
             path: 'device-templates',
-            name: 'DeviceTemplates',
+            name: 'DeviceTemplatesView',
             children: [
               {
                 path: 'standard-template',
@@ -931,7 +931,7 @@ const routes = [
               },
               {
                 path: 'power-quality',
-                name: 'PowerQuality',
+                name: 'PowerQualityView',
                 component: () => import('@/views/SystemsDevices/ElectricalSystems/PowerQuality.vue'),
                 meta: { title: 'Power Quality' }
               },
