@@ -1,96 +1,660 @@
-<script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { View } from "@element-plus/icons-vue"
-
-// Loading state
-const isLoaded = ref(false)
-const loadingProgress = ref(0)
-const loadingMessage = ref('Preparing...')
-
-const loadingMessages = [
-  'Preparing...',
-  'Loading modules...',
-  'Initializing...',
-  'Almost ready...'
-]
-
-onMounted(() => {
-  let messageIndex = 0
-
-  const messageInterval = setInterval(() => {
-    if (messageIndex < loadingMessages.length - 1) {
-      messageIndex++
-      loadingMessage.value = loadingMessages[messageIndex]
-    }
-  }, 400)
-
-  const progressInterval = setInterval(() => {
-    if (loadingProgress.value < 100) {
-      loadingProgress.value += Math.random() * 15 + 5
-      if (loadingProgress.value > 100) loadingProgress.value = 100
-    }
-  }, 200)
-
-  setTimeout(() => {
-    clearInterval(messageInterval)
-    clearInterval(progressInterval)
-    loadingProgress.value = 100
-    loadingMessage.value = 'Ready!'
-
-    setTimeout(() => {
-      isLoaded.value = true
-    }, 400)
-  }, 2000)
-})
-</script>
-
 <template>
-  <!-- Loading Screen -->
-  <div v-if="!isLoaded" class="loading-container">
-    <div class="loading-overlay">
-      <div class="loading-content">
-        <div class="loading-spinner">
-          <div class="spinner-ring"></div>
-          <div class="spinner-ring"></div>
-          <div class="spinner-ring"></div>
+  <div v-if="isPageLoaded" class="hvac-page">
+    <div class="main-view">
+      <div class="three-columns">
+        <!-- Left Column: Key Metrics + Generation Status + Recent Events + Device Health -->
+        <div class="col-left">
+          <div class="title-row" v-if="isMobile">
+            <h1 class="page-title">RES</h1>
+            <span class="live-time">{{ currentTime }}</span>
+          </div>
+          <div class="card-img" v-if="isMobile">
+            <img :src="securityImageUrl" alt="Renewable Energy 3D View" />
+          </div>
+
+          <!-- Key Metrics -->
+          <el-card class="card glass-card" shadow="hover">
+            <div class="card-header">📈 Key Metrics</div>
+            <div class="metrics-list">
+              <div class="metric-row"><div class="metric-icon">🌞</div><div class="metric-label">Solar Capacity</div><div class="metric-value">{{ solarCapacity }} kWp</div></div>
+              <div class="metric-row"><div class="metric-icon">💨</div><div class="metric-label">Wind Capacity</div><div class="metric-value">{{ windCapacity }} kWp</div></div>
+              <div class="metric-row"><div class="metric-icon">🔋</div><div class="metric-label">BESS Capacity</div><div class="metric-value">{{ bessCapacity }} kWh</div></div>
+              <div class="metric-row"><div class="metric-icon">⚡</div><div class="metric-label">Current Output</div><div class="metric-value">{{ currentOutput }} kW</div></div>
+              <div class="metric-row"><div class="metric-icon">🌿</div><div class="metric-label">CO₂ Saved</div><div class="metric-value">{{ co2Saved }} tons</div></div>
+            </div>
+          </el-card>
+
+          <!-- Generation Status -->
+          <el-card class="card glass-card" shadow="hover">
+            <div class="card-header">⚡ Generation Status</div>
+            <div class="mode-list">
+              <div class="mode-row" v-for="item in generationStatus" :key="item.name">
+                <div class="mode-name">{{ item.name }}</div>
+                <div class="mode-bar-bg"><div class="mode-bar-fill" :style="{ width: item.efficiency + '%', background: item.color }"></div></div>
+                <div class="mode-value">{{ item.efficiency }}%</div>
+                <div class="mode-power">{{ item.status }}</div>
+              </div>
+            </div>
+          </el-card>
+
+          <!-- Recent Events -->
+          <el-card class="card glass-card" shadow="hover">
+            <div class="card-header">📋 Recent Events</div>
+            <div class="alert-list">
+              <div class="alert-item" v-for="event in recentEvents" :key="event.id">
+                <div class="alert-header"><span class="alert-tag" :class="event.severity">{{ event.severity }}</span><span class="alert-device">{{ event.location }}</span></div>
+                <div class="alert-msg">{{ event.description }}</div>
+                <div class="alert-time">{{ event.timestamp }}</div>
+              </div>
+            </div>
+          </el-card>
+
+          <!-- Device Health -->
+          <el-card class="card glass-card" shadow="hover">
+            <div class="card-header">💚 Device Health</div>
+            <div class="health-list">
+              <div class="health-row" v-for="item in deviceHealth" :key="item.subsystem">
+                <div class="health-dot" :class="item.status"></div>
+                <div class="health-name">{{ item.subsystem }}</div>
+                <div class="health-status" :class="item.status">{{ item.statusText }}</div>
+              </div>
+            </div>
+          </el-card>
         </div>
-        <div class="loading-text">
-          <span class="loading-title">Loading</span>
-          <span class="loading-dots">
-            <span>.</span><span>.</span><span>.</span>
-          </span>
+
+        <!-- Center Column: Image + Charts -->
+        <div class="col-center">
+          <div class="title-row" v-if="!isMobile">
+            <h1 class="page-title">RES</h1>
+            <span class="live-time" v-if="isFullscreen">{{ currentTime }}</span>
+          </div>
+          <div class="card-img" v-if="!isMobile">
+            <img :src="securityImageUrl" alt="Renewable Energy 3D View" />
+          </div>
+          <div class="cart-view">
+            <!-- Power Generation Trend -->
+            <el-card class="card glass-card chart-card" shadow="hover">
+              <div class="card-header">📊 Power Generation (Hourly)</div>
+              <div ref="generationChartRef" class="chart-box"></div>
+            </el-card>
+            <!-- Energy Mix -->
+            <el-card class="card glass-card chart-card" shadow="hover">
+              <div class="card-header">🥧 Energy Mix</div>
+              <div ref="mixChartRef" class="chart-box"></div>
+            </el-card>
+          </div>
         </div>
-        <div class="loading-progress">
-          <div class="progress-bar" :style="{ width: loadingProgress + '%' }"></div>
+
+        <!-- Right Column: KPIs + Source Status + Battery Status + Tips -->
+        <div class="col-right">
+          <!-- Renewable KPIs -->
+          <el-card class="card glass-card" shadow="hover">
+            <div class="card-header">📊 Renewable KPIs</div>
+            <div class="kpi-row"><span class="kpi-row-left">Renewable Penetration</span><strong>{{ renewablePenetration }}%</strong><span class="trend up">+{{ penetrationTrend }}%</span></div>
+            <div class="kpi-row"><span class="kpi-row-left">Self-Consumption Rate</span><strong>{{ selfConsumption }}%</strong><span class="trend up">+5%</span></div>
+            <div class="kpi-row"><span class="kpi-row-left">Grid Import Reduction</span><strong>{{ gridImportReduction }}%</strong><span class="trend up">vs Baseline</span></div>
+            <div class="kpi-row"><span class="kpi-row-left">Energy Yield Today</span><strong>{{ energyYieldToday }} kWh</strong><span class="trend up">{{ yieldTrend }}%</span></div>
+            <div class="kpi-row"><span class="kpi-row-left">Equivalent Trees Planted</span><strong>{{ treesPlanted }}</strong><span class="trend stable">MTD</span></div>
+          </el-card>
+
+          <!-- Source Status Gauges -->
+          <el-card class="card glass-card" shadow="hover">
+            <div class="card-header">🌡️ Source Status</div>
+            <div class="gauges-grid">
+              <div class="gauge-item"><el-progress type="dashboard" :percentage="solarEfficiency" :color="solarColor" :width="90" :stroke-width="4"><template #default><span class="percentage-label">{{ solarOutput }} kW</span></template></el-progress><div class="gauge-label">Solar PV</div></div>
+              <div class="gauge-item"><el-progress type="dashboard" :percentage="windEfficiency" :color="windColor" :width="90" :stroke-width="4"><template #default><span class="percentage-label">{{ windOutput }} kW</span></template></el-progress><div class="gauge-label">Wind</div></div>
+              <div class="gauge-item"><el-progress type="dashboard" :percentage="bessSoC" :color="bessColor" :width="90" :stroke-width="4"><template #default><span class="percentage-label">{{ bessSoC }}%</span></template></el-progress><div class="gauge-label">BESS SoC</div></div>
+              <div class="gauge-item"><el-progress type="dashboard" :percentage="gridImport" :color="gridColor" :width="90" :stroke-width="4"><template #default><span class="percentage-label">{{ gridImport }}%</span></template></el-progress><div class="gauge-label">Grid Import</div></div>
+            </div>
+          </el-card>
+
+          <!-- Battery Status -->
+          <el-card class="card glass-card" shadow="hover">
+            <div class="card-header">🔋 Battery Status</div>
+            <div class="setpoint-list">
+              <div class="setpoint-row" v-for="item in batteryStatus" :key="item.label">
+                <div class="sp-label">{{ item.label }}</div>
+                <div class="sp-values"><span class="sp-set">SoC: {{ item.soc }}%</span><span class="sp-actual">Power: {{ item.power }} kW</span></div>
+                <div class="sp-deviation" :class="item.statusClass">{{ item.status }}</div>
+              </div>
+            </div>
+          </el-card>
+
+          <!-- Energy Tips -->
+          <el-card class="card glass-card" shadow="hover">
+            <div class="card-header">💡 Energy Tips</div>
+            <div class="tips-list">
+              <div class="tip-item" v-for="(tip, idx) in energyTips" :key="idx">
+                <div class="tip-icon">{{ tip.icon }}</div>
+                <div class="tip-content"><div class="tip-title">{{ tip.title }}</div><div class="tip-desc">{{ tip.desc }}</div><div class="tip-saving">{{ tip.priority }}</div></div>
+              </div>
+            </div>
+          </el-card>
         </div>
-        <div class="loading-tip">Not Developed Yet</div>
-        <div class="loading-subtip">{ loadingMessage }</div>
       </div>
     </div>
   </div>
 
-  <!-- Main Content -->
-  <div v-else class="not-developed-page">
-    <el-empty description="Not Developed Yet">
-      <template #image>
-        <View size="80" color="#c0c4cc" />
-      </template>
-      <template #description>
-        <span style="font-size: 16px; color: #909399;">Not Developed Yet</span>
-      </template>
-    </el-empty>
+  <div v-else class="loading-container">
+    <div class="loading-overlay"><div class="loading-content"><div class="loading-spinner"><div class="spinner-ring"></div><div class="spinner-ring"></div><div class="spinner-ring"></div></div>
+      <div class="loading-text"><span class="loading-title">Loading</span><span class="loading-dots"><span>.</span><span>.</span><span>.</span></span></div>
+      <div class="loading-progress"><div class="progress-bar" :style="{ width: loadingProgress + '%' }"></div></div>
+      <div class="loading-tip">Initializing Renewable Energy System</div>
+      <div class="loading-subtip">{{ loadingMessage }}</div>
+    </div></div>
   </div>
 </template>
 
+<script setup>
+import { ref, onMounted, onBeforeUnmount, nextTick, watch, computed } from 'vue'
+import { useRoute } from 'vue-router'
+import * as echarts from 'echarts'
+
+import { useCounterStore } from '@/stores/counter.js'
+import { getCurrentInstance } from 'vue'
+
+const getStore = () => {
+  const instance = getCurrentInstance()
+  if (!instance) throw new Error('useStore() must be called within a setup function')
+  const pinia = instance.appContext.config.globalProperties.$pinia
+  if (!pinia) throw new Error('Pinia instance not found')
+  return useCounterStore(pinia)
+}
+const counterStore = getStore()
+const isFullscreen = computed(() => counterStore.isFullscreen)
+const route = useRoute()
+
+// ==================== Loading State ====================
+const isPageLoaded = ref(false)
+const loadingProgress = ref(0)
+const loadingMessage = ref('Preparing assets...')
+const securityImageUrl = ref('')
+
+const loadingMessages = [
+  'Preparing assets...',
+  'Loading solar data...',
+  'Checking wind turbines...',
+  'Initializing BESS...',
+  'Connecting to grid...',
+  'Starting dashboard...',
+  'Almost ready...'
+]
+
+const preloadSecurityImage = () => {
+  return new Promise((resolve) => {
+    const img = new Image()
+    const imageUrl = 'https://aegisnx.com/wp-content/uploads/2026/05/5201314520.webp'
+    img.onload = () => {
+      securityImageUrl.value = imageUrl;
+      resolve()
+    }
+    img.onerror = () => {
+      securityImageUrl.value = imageUrl;
+      resolve()
+    }
+    img.src = imageUrl
+  })
+}
+
+const preloadAssets = async () => {
+  let progress = 0
+  let messageIndex = 0
+  const messageInterval = setInterval(() => {
+    if (messageIndex < loadingMessages.length - 1) {
+      messageIndex++;
+      loadingMessage.value = loadingMessages[messageIndex]
+    }
+  }, 800)
+  const progressInterval = setInterval(() => {
+    if (progress < 90) {
+      progress += Math.random() * 10;
+      loadingProgress.value = Math.min(progress, 90)
+    }
+  }, 100)
+  await preloadSecurityImage()
+  clearInterval(messageInterval);
+  clearInterval(progressInterval)
+  loadingMessage.value = 'Ready!';
+  loadingProgress.value = 100
+  await new Promise(resolve => setTimeout(resolve, 500))
+  isPageLoaded.value = true
+}
+
+// ==================== Real-time Clock ====================
+const currentTime = ref('')
+const updateTime = () => {
+  const now = new Date()
+  const utc = now.getTime() + (now.getTimezoneOffset() * 60000)
+  const sgTime = new Date(utc + (8 * 3600000))
+  currentTime.value = `${sgTime.getFullYear()}-${String(sgTime.getMonth() + 1).padStart(2, '0')}-${String(sgTime.getDate()).padStart(2, '0')} ${String(sgTime.getHours()).padStart(2, '0')}:${String(sgTime.getMinutes()).padStart(2, '0')}:${String(sgTime.getSeconds()).padStart(2, '0')}.${String(sgTime.getMilliseconds()).padStart(3, '0')} SGT`
+}
+let clockTimer = null
+
+// ==================== Core Renewable Energy Data ====================
+// Key metrics
+const solarCapacity = ref(1250)
+const windCapacity = ref(800)
+const bessCapacity = ref(1000)
+const currentOutput = ref(0)
+const co2Saved = ref(0)
+
+// Source outputs
+const solarOutput = ref(0)
+const windOutput = ref(0)
+const bessSoC = ref(65)
+const gridImport = ref(25)
+
+const solarEfficiency = ref(0)
+const windEfficiency = ref(0)
+
+// KPIs
+const renewablePenetration = ref(0)
+const selfConsumption = ref(68)
+const gridImportReduction = ref(32)
+const energyYieldToday = ref(0)
+const yieldTrend = ref(12)
+const treesPlanted = ref(1250)
+const penetrationTrend = ref(8)
+
+// Generation status
+const generationStatus = ref([
+  {name: 'Solar PV', efficiency: 0, status: 'Daytime', color: '#fbbf24'},
+  {name: 'Wind Turbines', efficiency: 0, status: 'Moderate', color: '#60a5fa'},
+  {name: 'BESS', efficiency: 65, status: 'Discharging', color: '#34d399'},
+  {name: 'Grid Import', efficiency: 25, status: 'Active', color: '#94a3b8'}
+])
+
+// Recent events
+const recentEvents = ref([
+  {
+    id: 1,
+    severity: 'Info',
+    location: 'Solar PV Array',
+    description: 'Peak generation: 850 kW at 12:30',
+    timestamp: '2 hours ago'
+  },
+  {
+    id: 2,
+    severity: 'Warning',
+    location: 'Wind Turbine 3',
+    description: 'Low wind speed detected',
+    timestamp: '4 hours ago'
+  },
+  {id: 3, severity: 'Success', location: 'BESS', description: 'Charging cycle completed', timestamp: '8 hours ago'}
+])
+
+// Device health
+const deviceHealth = ref([
+  {subsystem: 'Solar Inverters', status: 'normal', statusText: 'Online'},
+  {subsystem: 'Wind Turbines', status: 'normal', statusText: 'Running'},
+  {subsystem: 'BESS', status: 'normal', statusText: 'Active'},
+  {subsystem: 'Grid Interface', status: 'normal', statusText: 'Connected'},
+  {subsystem: 'EMS Controller', status: 'normal', statusText: 'Optimal'}
+])
+
+// Battery status
+const batteryStatus = ref([
+  {label: 'BESS Unit 1', soc: 72, power: 45, status: 'Charging', statusClass: 'normal'},
+  {label: 'BESS Unit 2', soc: 58, power: 32, status: 'Discharging', statusClass: 'low'},
+  {label: 'BESS Unit 3', soc: 65, power: 0, status: 'Idle', statusClass: 'normal'}
+])
+
+// Energy tips
+const energyTips = ref([
+  {icon: '🌞', title: 'Solar Peak Hours', desc: 'Optimal generation: 10 AM - 2 PM', priority: 'Active Now'},
+  {icon: '💨', title: 'Wind Forecast', desc: 'High wind expected tomorrow morning', priority: 'Opportunity'}
+])
+
+// Color configurations
+const solarColor = [{color: '#fbbf24', percentage: 100}]
+const windColor = [{color: '#60a5fa', percentage: 100}]
+const bessColor = [{color: '#34d399', percentage: 70}, {color: '#f59e0b', percentage: 90}, {
+  color: '#ef4444',
+  percentage: 100
+}]
+const gridColor = [{color: '#94a3b8', percentage: 50}, {color: '#f59e0b', percentage: 80}, {
+  color: '#ef4444',
+  percentage: 100
+}]
+
+// ==================== Charts ====================
+const generationChartRef = ref(null)
+const mixChartRef = ref(null)
+let generationChart = null
+let mixChart = null
+
+// Generation history (24 hours)
+const generationHistoryLength = 24
+const solarHistory = ref([])
+const windHistory = ref([])
+const hourLabels = ref([])
+
+const initGenerationHistory = () => {
+  solarHistory.value = []
+  windHistory.value = []
+  hourLabels.value = []
+  const now = new Date()
+  for (let i = generationHistoryLength - 1; i >= 0; i--) {
+    const t = new Date(now - i * 3600000)
+    hourLabels.value.push(t.toTimeString().slice(0, 5))
+    const hour = t.getHours()
+    const solarVal = hour >= 6 && hour <= 18 ? parseFloat((200 + Math.random() * 600).toFixed(1)) : parseFloat((0 + Math.random() * 50).toFixed(1))
+    const windVal = parseFloat((50 + Math.random() * 250).toFixed(1))
+    solarHistory.value.push(solarVal)
+    windHistory.value.push(windVal)
+  }
+}
+
+// Energy mix data
+const energyMix = ref({solar: 0, wind: 0, bess: 0, grid: 0})
+
+const updateEnergyMix = () => {
+  const total = solarOutput.value + windOutput.value + (bessSoC.value > 50 ? bessSoC.value * 2 : 0) + gridImport.value * 10
+  if (total > 0) {
+    energyMix.value = {
+      solar: parseFloat(((solarOutput.value / total) * 100).toFixed(1)),
+      wind: parseFloat(((windOutput.value / total) * 100).toFixed(1)),
+      bess: parseFloat(((bessSoC.value * 2 / total) * 100).toFixed(1)),
+      grid: parseFloat(((gridImport.value * 10 / total) * 100).toFixed(1))
+    }
+  }
+}
+
+// Generation chart option
+const getGenerationChartOption = () => {
+  return {
+    backgroundColor: 'transparent',
+    tooltip: {
+      trigger: 'axis',
+      backgroundColor: 'rgba(15,25,45,0.9)',
+      borderColor: '#3b82f6',
+      textStyle: {color: '#e2e8f0'}
+    },
+    legend: {data: ['Solar PV', 'Wind Turbines'], textStyle: {color: '#94a3b8', fontSize: 9}, top: 0},
+    grid: {left: '0%', right: '0%', bottom: 0, top: 48, containLabel: true},
+    xAxis: {
+      type: 'category',
+      data: hourLabels.value,
+      axisLabel: {color: '#94a3b8', fontSize: 9, rotate: 30, interval: 3},
+      axisLine: {lineStyle: {color: '#334155'}}
+    },
+    yAxis: {
+      type: 'value',
+      name: 'Power (kW)',
+      nameTextStyle: {color: '#64748b', fontSize: 10},
+      axisLabel: {color: '#94a3b8', fontSize: 10},
+      splitLine: {lineStyle: {color: '#1e293b', type: 'dashed'}}
+    },
+    series: [
+      {
+        name: 'Solar PV',
+        type: 'line',
+        data: solarHistory.value,
+        smooth: true,
+        symbol: 'circle',
+        symbolSize: 4,
+        lineStyle: {width: 2, color: '#fbbf24'},
+        areaStyle: {opacity: 0.3, color: '#fbbf24'}
+      },
+      {
+        name: 'Wind Turbines',
+        type: 'line',
+        data: windHistory.value,
+        smooth: true,
+        symbol: 'circle',
+        symbolSize: 4,
+        lineStyle: {width: 2, color: '#60a5fa'},
+        areaStyle: {opacity: 0.3, color: '#60a5fa'}
+      }
+    ]
+  }
+}
+
+// Energy mix pie chart option
+const getMixChartOption = () => {
+  return {
+    backgroundColor: 'transparent',
+    tooltip: {
+      trigger: 'item',
+      backgroundColor: 'rgba(15,25,45,0.9)',
+      borderColor: '#3b82f6',
+      textStyle: {color: '#e2e8f0'}
+    },
+    legend: {orient: 'vertical', left: 'left', textStyle: {color: '#94a3b8', fontSize: 10}},
+    series: [{
+      type: 'pie', radius: '55%', center: ['50%', '50%'],
+      data: [
+        {value: energyMix.value.solar, name: 'Solar PV', itemStyle: {color: '#fbbf24'}},
+        {value: energyMix.value.wind, name: 'Wind', itemStyle: {color: '#60a5fa'}},
+        {value: energyMix.value.bess, name: 'BESS', itemStyle: {color: '#34d399'}},
+        {value: energyMix.value.grid, name: 'Grid Import', itemStyle: {color: '#94a3b8'}}
+      ],
+      label: {show: true, formatter: '{b}: {d}%', fontSize: 10, color: '#cbd5e1'}
+    }]
+  }
+}
+
+// ==================== Chart Lifecycle ====================
+const disposeCharts = () => {
+  if (generationChart) {
+    generationChart.dispose();
+    generationChart = null
+  }
+  if (mixChart) {
+    mixChart.dispose();
+    mixChart = null
+  }
+}
+
+const initCharts = async () => {
+  await nextTick()
+  for (let attempt = 0; attempt < 5; attempt++) {
+    await new Promise(resolve => setTimeout(resolve, 100))
+    const genDom = generationChartRef.value
+    const mixDom = mixChartRef.value
+    if (!genDom || !mixDom) continue
+    if (genDom.clientWidth === 0 || genDom.clientHeight === 0) continue
+    if (mixDom.clientWidth === 0 || mixDom.clientHeight === 0) continue
+    disposeCharts()
+    try {
+      generationChart = echarts.init(genDom)
+      mixChart = echarts.init(mixDom)
+      generationChart.setOption(getGenerationChartOption())
+      mixChart.setOption(getMixChartOption())
+      return
+    } catch (e) {
+      console.error('[initCharts] Error:', e)
+    }
+  }
+}
+
+const handleResize = () => {
+  generationChart?.resize()
+  mixChart?.resize()
+}
+
+let fullscreenTimer = null
+const onFullscreenChange = () => {
+  clearTimeout(fullscreenTimer)
+  fullscreenTimer = setTimeout(handleResize, 350)
+}
+
+// ==================== Live Update ====================
+let updateTimer = null
+
+const updateAllData = () => {
+  const hour = new Date().getHours()
+  const isDaytime = hour >= 6 && hour <= 18
+
+  // Update generation outputs
+  solarOutput.value = isDaytime ? parseFloat((300 + Math.random() * 600).toFixed(1)) : parseFloat((0 + Math.random() * 30).toFixed(1))
+  windOutput.value = parseFloat((100 + Math.random() * 300).toFixed(1))
+  currentOutput.value = parseFloat((solarOutput.value + windOutput.value).toFixed(1))
+
+  solarEfficiency.value = Math.min(100, Math.floor((solarOutput.value / 850) * 100))
+  windEfficiency.value = Math.min(100, Math.floor((windOutput.value / 400) * 100))
+
+  // Update generation status
+  generationStatus.value = [
+    {name: 'Solar PV', efficiency: solarEfficiency.value, status: isDaytime ? 'Generating' : 'Night', color: '#fbbf24'},
+    {
+      name: 'Wind Turbines',
+      efficiency: windEfficiency.value,
+      status: windEfficiency.value > 50 ? 'High' : 'Moderate',
+      color: '#60a5fa'
+    },
+    {name: 'BESS', efficiency: bessSoC.value, status: bessSoC.value > 60 ? 'Available' : 'Low', color: '#34d399'},
+    {
+      name: 'Grid Import',
+      efficiency: gridImport.value,
+      status: gridImport.value > 30 ? 'Active' : 'Low',
+      color: '#94a3b8'
+    }
+  ]
+
+  // Update BESS and grid
+  if (solarOutput.value > 500) {
+    bessSoC.value = Math.min(95, bessSoC.value + Math.random() * 3)
+    gridImport.value = Math.max(5, gridImport.value - Math.random() * 2)
+  } else if (solarOutput.value < 100) {
+    bessSoC.value = Math.max(20, bessSoC.value - Math.random() * 4)
+    gridImport.value = Math.min(60, gridImport.value + Math.random() * 3)
+  }
+  bessSoC.value = parseFloat(bessSoC.value.toFixed(1))
+  gridImport.value = parseFloat(gridImport.value.toFixed(1))
+
+  // Update KPIs
+  renewablePenetration.value = Math.min(100, Math.floor((currentOutput.value / (currentOutput.value + gridImport.value * 10)) * 100))
+  energyYieldToday.value = parseFloat((energyYieldToday.value + currentOutput.value / 12).toFixed(1))
+  co2Saved.value = parseFloat((co2Saved.value + currentOutput.value * 0.0004).toFixed(1))
+
+  // Update battery status
+  batteryStatus.value = [
+    {
+      label: 'BESS Unit 1',
+      soc: parseFloat((72 + Math.random() * 5 - 2.5).toFixed(1)),
+      power: parseFloat((40 + Math.random() * 20).toFixed(1)),
+      status: solarOutput.value > 400 ? 'Charging' : 'Discharging',
+      statusClass: 'normal'
+    },
+    {
+      label: 'BESS Unit 2',
+      soc: parseFloat((58 + Math.random() * 5 - 2.5).toFixed(1)),
+      power: parseFloat((30 + Math.random() * 15).toFixed(1)),
+      status: solarOutput.value > 400 ? 'Charging' : 'Discharging',
+      statusClass: 'low'
+    },
+    {
+      label: 'BESS Unit 3',
+      soc: parseFloat((65 + Math.random() * 3 - 1.5).toFixed(1)),
+      power: parseFloat((0 + Math.random() * 10).toFixed(1)),
+      status: 'Standby',
+      statusClass: 'normal'
+    }
+  ]
+
+  // Update energy mix
+  updateEnergyMix()
+
+  // Update charts
+  if (generationChart && mixChart) {
+    const now = new Date()
+    const timeLabel = now.toTimeString().slice(0, 5)
+    const lastHour = hourLabels.value[hourLabels.value.length - 1]
+
+    if (lastHour !== timeLabel) {
+      hourLabels.value.push(timeLabel)
+      if (hourLabels.value.length > generationHistoryLength) hourLabels.value.shift()
+
+      const currentHour = now.getHours()
+      const newSolar = currentHour >= 6 && currentHour <= 18 ? parseFloat((200 + Math.random() * 600).toFixed(1)) : parseFloat((0 + Math.random() * 50).toFixed(1))
+      const newWind = parseFloat((50 + Math.random() * 250).toFixed(1))
+      solarHistory.value.push(newSolar)
+      windHistory.value.push(newWind)
+      if (solarHistory.value.length > generationHistoryLength) solarHistory.value.shift()
+      if (windHistory.value.length > generationHistoryLength) windHistory.value.shift()
+
+      generationChart.setOption({
+        xAxis: {data: hourLabels.value},
+        series: [{data: solarHistory.value}, {data: windHistory.value}]
+      })
+    }
+
+    mixChart.setOption({
+      series: [{data: [{value: energyMix.value.solar}, {value: energyMix.value.wind}, {value: energyMix.value.bess}, {value: energyMix.value.grid}]}]
+    })
+  }
+
+  // Update tips occasionally
+  if (Math.random() > 0.7) {
+    const tipPool = [
+      {
+        icon: '🌞',
+        title: 'Solar Peak Hours',
+        desc: `Current solar output: ${solarOutput.value} kW`,
+        priority: 'Active Now'
+      },
+      {icon: '💨', title: 'Wind Forecast', desc: 'High wind expected in next 6 hours', priority: 'Opportunity'},
+      {icon: '🔋', title: 'BESS Status', desc: `SoC: ${bessSoC.value}%`, priority: bessSoC.value < 30 ? 'Alert' : 'Info'}
+    ]
+    energyTips.value = tipPool.sort(() => Math.random() - 0.5).slice(0, 2)
+  }
+}
+
+let routeWatch = null
+const isMobile = ref(false)
+const checkMobile = () => {
+  isMobile.value = window.innerWidth < 768
+}
+
+onMounted(async () => {
+  checkMobile()
+  updateTime()
+  clockTimer = setInterval(updateTime, 1000)
+
+  await preloadAssets()
+
+  initGenerationHistory()
+  updateEnergyMix()
+  await initCharts()
+
+  if (generationChart && mixChart) {
+    updateTimer = setInterval(updateAllData, 5000)
+  }
+
+  window.addEventListener('resize', handleResize)
+  document.addEventListener('fullscreenchange', onFullscreenChange)
+
+  routeWatch = watch(() => route.fullPath, async () => {
+    initGenerationHistory()
+    updateEnergyMix()
+    await initCharts()
+    if (generationChart && mixChart && !updateTimer) {
+      updateTimer = setInterval(updateAllData, 5000)
+    }
+  })
+})
+
+onBeforeUnmount(() => {
+  clearInterval(clockTimer)
+  clearInterval(updateTimer)
+  clearTimeout(fullscreenTimer)
+  window.removeEventListener('resize', handleResize)
+  document.removeEventListener('fullscreenchange', onFullscreenChange)
+  if (routeWatch) routeWatch()
+  disposeCharts()
+})
+</script>
+
 <style scoped>
-/* ==================== Loading Screen ==================== */
+/* 所有样式与模板完全相同，不再重复 */
 .loading-container {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  background: linear-gradient(135deg, #0a1620 0%, #03060c 100%);
   z-index: 9999;
   display: flex;
   justify-content: center;
@@ -111,7 +675,7 @@ onMounted(() => {
   text-align: center;
   padding: 40px;
   border-radius: 32px;
-  background: rgba(15, 23, 42, 0.6);
+  background: rgba(15, 25, 45, 0.6);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(59, 130, 246, 0.3);
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
@@ -158,8 +722,12 @@ onMounted(() => {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .loading-text {
@@ -182,12 +750,23 @@ onMounted(() => {
   animation: bounce 1.4s infinite ease-in-out both;
 }
 
-.loading-dots span:nth-child(1) { animation-delay: -0.32s; }
-.loading-dots span:nth-child(2) { animation-delay: -0.16s; }
+.loading-dots span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.loading-dots span:nth-child(2) {
+  animation-delay: -0.16s;
+}
 
 @keyframes bounce {
-  0%, 80%, 100% { transform: scale(0); opacity: 0.3; }
-  40% { transform: scale(1); opacity: 1; }
+  0%, 80%, 100% {
+    transform: scale(0);
+    opacity: 0.3;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .loading-progress {
@@ -209,8 +788,12 @@ onMounted(() => {
 }
 
 @keyframes shimmer {
-  0% { background-position: 0% 0%; }
-  100% { background-position: 200% 0%; }
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 200% 0%;
+  }
 }
 
 .loading-tip {
@@ -229,21 +812,777 @@ onMounted(() => {
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 0.6; }
-  50% { opacity: 1; }
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* ==================== Main Content ==================== */
-.not-developed-page {
-  width: 100%;
-  height: 100vh;
+.hvac-page {
+  height: 100%;
+  background: radial-gradient(circle at 10% 20%, #0a1620, #03060c);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.title-row {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.page-title {
+  font-size: 32px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #e2e8f0, #60a5fa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: 1px;
+  text-shadow: 0 0 8px rgba(96, 165, 250, 0.4);
+  margin: 0;
+}
+
+.live-time {
+  position: absolute;
+  right: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #facc15;
+  font-family: monospace;
+  letter-spacing: 1px;
+  text-shadow: 0 0 6px rgba(250, 204, 21, 0.3);
+  padding: 6px 14px;
+  background: rgba(15, 25, 45, 0.6);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 10px;
+  backdrop-filter: blur(8px);
+}
+
+.main-view {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.three-columns {
+  flex: 1;
+  display: flex;
+  gap: 20px;
+  align-items: stretch;
+  min-height: 0;
+}
+
+.col-left, .col-right {
+  width: 300px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  min-height: 0;
+}
+
+.col-left::-webkit-scrollbar, .col-right::-webkit-scrollbar {
+  display: none;
+}
+
+.col-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-height: 0;
+}
+
+.glass-card, .card-img {
+  background: rgba(15, 25, 45, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 20px;
+  transition: all 0.3s;
+}
+
+.glass-card:hover {
+  background: rgba(15, 25, 45, 0.8);
+  border-color: rgba(59, 130, 246, 0.6);
+  transform: translateY(-3px);
+}
+
+.card {
+  background: transparent;
+}
+
+.card-img {
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.card-img img {
+  width: 100%;
+  display: block;
+  height: auto;
+  border-radius: 10px;
+}
+
+.card-header {
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #e2e8f0;
+  border-left: 4px solid #3b82f6;
+  padding-left: 10px;
+}
+
+.metrics-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.metric-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.metric-row .metric-icon {
+  font-size: 24px;
+  width: 36px;
+  opacity: 0.9;
+}
+
+.metric-row .metric-label {
+  flex: 1;
+  font-size: 14px;
+  color: #94a3b8;
+  padding-left: 12px;
+  letter-spacing: 0.3px;
+}
+
+.metric-row .metric-value {
+  font-size: 18px;
+  font-weight: 600;
+  color: #facc15;
+  text-align: right;
+  font-family: monospace;
+}
+
+.mode-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mode-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #cbd5e1;
+}
+
+.mode-name {
+  width: 80px;
+  flex-shrink: 0;
+}
+
+.mode-bar-bg {
+  flex: 1;
+  height: 6px;
+  background: rgba(148, 163, 184, 0.15);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.mode-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.5s;
+}
+
+.mode-value {
+  width: 35px;
+  text-align: right;
+  color: #facc15;
+}
+
+.mode-power {
+  width: 55px;
+  text-align: right;
+  color: #94a3b8;
+}
+
+.alert-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.alert-item {
+  background: rgba(239, 68, 68, 0.05);
+  border-radius: 8px;
+  padding: 4px 10px;
+  border-left: 3px solid #ef4444;
+}
+
+.alert-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.alert-tag {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.alert-tag.Warning {
+  background: rgba(251, 191, 36, 0.2);
+  color: #fbbf24;
+}
+
+.alert-tag.Critical {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+.alert-tag.Info {
+  background: rgba(59, 130, 246, 0.2);
+  color: #60a5fa;
+}
+
+.alert-tag.Success {
+  background: rgba(52, 211, 153, 0.2);
+  color: #34d399;
+}
+
+.alert-device {
+  font-size: 12px;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.alert-msg {
+  font-size: 11px;
+  color: #94a3b8;
+  margin-bottom: 2px;
+}
+
+.alert-time {
+  font-size: 10px;
+  color: #64748b;
+}
+
+.health-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.health-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+}
+
+.health-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.health-dot.normal {
+  background: #34d399;
+  box-shadow: 0 0 6px #34d399;
+}
+
+.health-dot.warning {
+  background: #fbbf24;
+  box-shadow: 0 0 6px #fbbf24;
+}
+
+.health-dot.critical {
+  background: #ef4444;
+  box-shadow: 0 0 6px #ef4444;
+}
+
+.health-name {
+  flex: 1;
+  color: #cbd5e1;
+}
+
+.health-status {
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.health-status.normal {
+  color: #34d399;
+}
+
+.health-status.warning {
+  color: #fbbf24;
+}
+
+.health-status.critical {
+  color: #ef4444;
+}
+
+.cart-view {
+  width: 100%;
+  display: flex;
+  flex: 1;
+  background: transparent;
+  overflow-y: auto;
+  gap: 10px;
+  min-height: 0;
+}
+
+.chart-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.chart-card .card-header {
+  flex-shrink: 0;
+}
+
+.chart-box {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  overflow: hidden;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.gauges-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.gauge-item {
+  text-align: center;
+}
+
+.gauge-label {
+  font-size: 13px;
+  color: #cbd5e1;
+  margin-top: 0px;
+  height: 20px;
+  text-align: center;
+  align-items: center;
+}
+
+.kpi-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 13px;
+  color: #cbd5e6;
+}
+
+.kpi-row span {
+  text-align: left;
+}
+
+.kpi-row-left {
+  min-width: 100px;
+  max-width: 100px;
+  text-align: left;
+}
+
+.kpi-row strong {
+  font-size: 16px;
+  color: #facc15;
+  text-align: center;
+}
+
+.trend {
+  width: 70px;
+  font-size: 11px;
+  margin-left: 8px;
+  text-align: right;
+  font-weight: bold;
+}
+
+.trend.up {
+  color: #34d399;
+  text-align: right;
+}
+
+.trend.stable {
+  color: #fbbf24;
+  text-align: right;
+}
+
+.setpoint-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.setpoint-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.sp-label {
+  flex: 1;
+  color: #94a3b8;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.sp-values {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  margin-right: 8px;
+}
+
+.sp-set {
+  font-size: 10px;
+  color: #cbd5e1;
+  font-weight: bold;
+}
+
+.sp-actual {
+  font-weight: 600;
+  text-align: center;
+  color: #fbbf24;
+}
+
+.sp-deviation {
+  width: 60px;
+  text-align: right;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.sp-deviation.high {
+  color: #ef4444;
+}
+
+.sp-deviation.low {
+  color: #3b82f6;
+}
+
+.sp-deviation.normal {
+  color: #34d399;
+}
+
+.tips-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tip-item {
+  display: flex;
+  gap: 10px;
+  padding: 8px 10px;
+  background: rgba(59, 130, 246, 0.08);
+  border-radius: 8px;
+  border-left: 3px solid #3b82f6;
+  margin-top: 5px;
+}
+
+.tip-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.tip-content {
+  flex: 1;
+}
+
+.tip-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #e2e8f0;
+  margin-bottom: 2px;
+}
+
+.tip-desc {
+  font-size: 11px;
+  color: #94a3b8;
+  line-height: 1.4;
+  margin-bottom: 2px;
+}
+
+.tip-saving {
+  font-size: 10px;
+  color: #facc15;
+  font-weight: 600;
+}
+
+.percentage-value {
+  display: block;
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.percentage-label {
+  display: block;
+  margin-top: 10px;
+  font-size: 12px;
+  color: #facc15;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .hvac-page {
+    padding: 16px;
+    overflow-y: auto;
+    height: auto;
+  }
+
+  .title-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-shrink: 0;
+  }
+
+  .page-title {
+    font-size: 26px;
+    text-align: center;
+  }
+
+  .live-time {
+    position: static;
+    text-align: center;
+    width: fit-content;
+    margin: 0 auto;
+    font-size: 12px;
+    padding: 4px 12px;
+  }
+
+  .three-columns {
+    flex-direction: column;
+    gap: 16px;
+    flex: none;
+  }
+
+  .col-left, .col-right {
+    width: 100%;
+    overflow-y: visible;
+    gap: 16px;
+  }
+
+  .col-center {
+    gap: 16px;
+  }
+
+  .glass-card, .card-img {
+    border-radius: 16px;
+  }
+
+  .glass-card:hover {
+    transform: none;
+  }
+
+  .card-header {
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+
+  .metric-row .metric-icon {
+    font-size: 20px;
+    width: 28px;
+  }
+
+  .metric-row .metric-label {
+    font-size: 12px;
+    padding-left: 8px;
+  }
+
+  .metric-row .metric-value {
+    font-size: 16px;
+  }
+
+  .mode-name {
+    width: 70px;
+    font-size: 11px;
+  }
+
+  .mode-value {
+    width: 30px;
+    font-size: 11px;
+  }
+
+  .mode-power {
+    width: 50px;
+    font-size: 10px;
+  }
+
+  .health-row {
+    font-size: 11px;
+  }
+
+  .health-name {
+    font-size: 11px;
+  }
+
+  .health-status {
+    font-size: 10px;
+  }
+
+  .cart-view {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .chart-card {
+    min-height: 220px;
+  }
+
+  .chart-box {
+    height: 180px;
+    min-height: 0;
+  }
+
+  .gauges-grid {
+    gap: 8px;
+  }
+
+  .gauge-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .gauge-label {
+    font-size: 11px;
+    margin-top: 2px;
+  }
+
+  :deep(.el-progress-circle) {
+    width: 80px !important;
+    height: 80px !important;
+  }
+
+  :deep(.el-progress__text) {
+    font-size: 10px !important;
+  }
+
+  .kpi-row {
+    font-size: 12px;
+  }
+
+  .kpi-row strong {
+    font-size: 14px;
+  }
+
+  .trend {
+    font-size: 10px;
+    min-width: 55px;
+  }
+
+  .setpoint-row {
+    font-size: 11px;
+  }
+
+  .sp-label {
+    font-size: 11px;
+  }
+
+  .sp-set, .sp-actual {
+    font-size: 9px;
+  }
+
+  .sp-deviation {
+    font-size: 10px;
+    width: 50px;
+  }
+
+  .tip-title {
+    font-size: 11px;
+  }
+
+  .tip-desc {
+    font-size: 10px;
+  }
+
+  .tip-saving {
+    font-size: 9px;
+  }
+
+  .card-img img {
+    width: 100%;
+    height: auto;
+    max-height: 160px;
+    object-fit: cover;
+  }
+}
+</style>
+
+<style>
+.el-card__body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overflow: visible !important;
+}
+
+.col-left .el-card, .col-right .el-card {
+  overflow: visible;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.chart-card .el-card__body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 </style>
