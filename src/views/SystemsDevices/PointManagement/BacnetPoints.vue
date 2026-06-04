@@ -202,9 +202,10 @@
 
 <script setup lang="ts">
 import { ref, reactive, onMounted, onUnmounted, nextTick, computed } from 'vue'
-import { VueFlow, useVueFlow } from '@vue-flow/core'
+
 import { ElMessage } from 'element-plus'
 import * as echarts from 'echarts'
+import { VueFlow, useVueFlow } from '@vue-flow/core'
 import '@vue-flow/core/dist/style.css'
 import '@vue-flow/core/dist/theme-default.css'
 import { Connection, CircleCheckFilled, WarningFilled, DataLine, Refresh, Cpu, Monitor, House, Setting } from '@element-plus/icons-vue'
