@@ -18,6 +18,12 @@ const service = axios.create({
 // 请求拦截器
 service.interceptors.request.use(
     (config) => {
+
+        // 关键：首次请求赋值重试次数为0
+        if (config._retryCount === undefined) {
+            config._retryCount = 0
+        }
+
         const token = localStorage.getItem('token')
         if (token) {
             config.headers = {
@@ -55,7 +61,18 @@ service.interceptors.response.use(
             return Promise.reject(new Error(msg))
         }
     },
-    (error) => {
+    async (error) => {
+
+        const config = error.config
+        // 规则：仅未重试过(0次)、存在请求配置 才延迟1s重试1次
+        if (config && config._retryCount === 0) {
+            config._retryCount = 1 // 标记已重试，不再二次重试
+            // 延迟1000ms
+            await new Promise(resolve => setTimeout(resolve, 1000))
+            // 重新发起请求
+            return service(config)
+        }
+
         const msg = error.message || '网络连接失败'
         ElMessage.error(msg)
         return Promise.reject(error)
