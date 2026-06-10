@@ -4,12 +4,12 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import {
   Plus, Search, Refresh, View, Edit, Delete, Monitor, Connection,
   User, Warning, Clock, Cpu, DataLine, Message, Upload, Download,
-  Setting, Document, Checked, Bell, TrendCharts, Chip, Microchip,
+  Setting, Document, Checked, Bell, TrendCharts,
   List, Odometer, Location, Link, Share, VideoCamera, Lock,
   CopyDocument, Switch, Filter, MagicStick, Tickets, Right,
   Sort, FolderOpened, Files, DocumentAdd, Timer, Aim, DataAnalysis,
-  Key, Grid, Collection, Platform, Service, ShareInner, Send,
-  Notification, TicketsFilled, Guide, Star, StarFilled, ShoppingCart,
+  Key, Grid, Collection, Platform, Service,
+  Notification, Guide, Star, StarFilled, ShoppingCart,
   Shop, OfficeBuilding, Box, Files as FilesIcon
 } from '@element-plus/icons-vue'
 import * as echarts from 'echarts'

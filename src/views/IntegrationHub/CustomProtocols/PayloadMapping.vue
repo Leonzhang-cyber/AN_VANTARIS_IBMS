@@ -4,7 +4,7 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import {
   Plus, Search, Refresh, View, Edit, Delete, Monitor, Connection,
   User, Warning, Clock, Cpu, DataLine, Message, Upload, Download,
-  Setting, Document, Checked, Bell, TrendCharts, Chip, Microchip,
+  Setting, Document, Checked, Bell, TrendCharts,
   List, Odometer, Location, Link, Share, VideoCamera, Lock,
   CopyDocument, Switch, Filter, MagicStick, Tickets, Right,
   Sort, FolderOpened, Files, DocumentAdd
