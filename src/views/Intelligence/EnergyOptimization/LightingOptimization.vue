@@ -9,7 +9,7 @@ import {
   MagicStick, ChatDotRound, Message, Service,
   Search, Edit, Plus, VideoPlay, VideoPause,
   Operation, Headset, Monitor, Cpu, Connection,
-  Sunny, ColdDrink, WindPower, Light
+  Sunny, ColdDrink, WindPower
 } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 

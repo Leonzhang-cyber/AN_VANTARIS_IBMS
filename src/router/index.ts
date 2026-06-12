@@ -3739,28 +3739,28 @@ const routes = [
           {
             path: 'behavioral-analytics',
             name: 'BehavioralAnalytics',
-            component: () => import('@/views/AiVideoAnalytics/BehavioralAnalytics.vue'),
+            component: () => import('@/views/AIVideoAnalytics/BehavioralAnalytics.vue'),
             meta: { title: 'Behavioral Analytics' }
           },
           // 18.6 Video Event Center
           {
             path: 'video-event-center',
             name: 'VideoEventCenter',
-            component: () => import('@/views/AiVideoAnalytics/VideoEventCenter.vue'),
+            component: () => import('@/views/AIVideoAnalytics/VideoEventCenter.vue'),
             meta: { title: 'Video Event Center' }
           },
           // 18.7 AI Evidence Repository
           {
             path: 'ai-evidence-repository',
             name: 'AiEvidenceRepository',
-            component: () => import('@/views/AiVideoAnalytics/AiEvidenceRepository.vue'),
+            component: () => import('@/views/AIVideoAnalytics/AiEvidenceRepository.vue'),
             meta: { title: 'AI Evidence Repository' }
           },
           // 18.8 Video Health Monitoring
           {
             path: 'video-health-monitoring',
             name: 'VideoHealthMonitoring',
-            component: () => import('@/views/AiVideoAnalytics/VideoHealthMonitoring.vue'),
+            component: () => import('@/views/AIVideoAnalytics/VideoHealthMonitoring.vue'),
             meta: { title: 'Video Health Monitoring' }
           }
         ]

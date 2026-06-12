@@ -9,7 +9,7 @@ import {
   MagicStick, ChatDotRound, Message, Service,
   Search, Edit, Plus, VideoPlay, VideoPause,
   Operation, Headset, Monitor, Cpu, Connection,
-  Lock, Key, Shield, Medal, Flag, DataAnalysis
+  Lock, Key, Medal, Flag, DataAnalysis
 } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 
