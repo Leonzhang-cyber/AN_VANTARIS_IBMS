@@ -3450,7 +3450,7 @@ const routes = [
           // 17.3 Fault Diagnostics
           {
             path: 'fault-diagnostics',
-            name: 'FaultDiagnostics',
+            name: 'FaultDiagnosticsview',
             children: [
               {
                 path: 'root-cause-analysis',
