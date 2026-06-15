@@ -13,7 +13,7 @@ from src.Iot.exceptions import ProtocolError
 
 
 class HTTPDriver(BaseProtocolDriver):
-    """HTTP协议驱动"""
+    """HTTP协议驱动 - 支持主动拉取和主动上报两种模式"""
 
     def __init__(self):
         super().__init__("http")
@@ -22,12 +22,23 @@ class HTTPDriver(BaseProtocolDriver):
         self.session = requests.Session()
 
     def connect(self, device_did: str, config: Dict[str, Any]) -> bool:
-        """连接HTTP设备（验证连接）"""
-        base_url = config.get('base_url')
-        if not base_url:
-            raise ProtocolError("缺少 base_url 配置")
+        """
+        连接HTTP设备
+        支持两种模式：
+        1. 主动拉取模式：需要提供 base_url，驱动会主动轮询设备
+        2. 主动上报模式：不需要 base_url，设备主动 POST 数据到 /ingest/http
+        """
+        base_url = config.get('base_url', '')
 
-        # 可选：验证连接
+        # 🆕 主动上报模式：没有 base_url，不需要主动连接
+        if not base_url:
+            self.device_endpoints[device_did] = ""
+            self.device_configs[device_did] = config
+            self._on_status(device_did, 'online')
+            print(f"[HTTP] 设备 {device_did} 已就绪（主动上报模式）")
+            return True
+
+        # 主动拉取模式：验证连接
         verify_endpoint = config.get('verify_endpoint', '/health')
         timeout = config.get('timeout', 10)
 
@@ -38,7 +49,7 @@ class HTTPDriver(BaseProtocolDriver):
                 self.device_endpoints[device_did] = base_url
                 self.device_configs[device_did] = config
                 self._on_status(device_did, 'online')
-                print(f"[HTTP] 设备 {device_did} 连接成功: {base_url}")
+                print(f"[HTTP] 设备 {device_did} 连接成功（主动拉取模式）: {base_url}")
                 return True
             else:
                 raise ProtocolError(f"HTTP连接失败: {response.status_code}")
@@ -55,14 +66,15 @@ class HTTPDriver(BaseProtocolDriver):
         return True
 
     def send_command(self, device_did: str, command: Dict[str, Any]) -> Dict[str, Any]:
-        """下发HTTP命令"""
+        """下发HTTP命令（仅主动拉取模式支持）"""
         base_url = self.device_endpoints.get(device_did)
+
+        # 主动上报模式不支持命令下发
         if not base_url:
-            raise ProtocolError(f"设备未连接: {device_did}")
+            raise ProtocolError(f"设备 {device_did} 为主动上报模式，不支持命令下发")
 
         config = self.device_configs.get(device_did, {})
 
-        # 获取命令参数
         endpoint = command.get('endpoint', '/command')
         http_method = command.get('http_method', 'POST')
         params = command.get('params', {})
@@ -71,7 +83,7 @@ class HTTPDriver(BaseProtocolDriver):
 
         url = f"{base_url}{endpoint}"
 
-        print(f"[HTTP] 下发命令: method={http_method}, url={url}, params={params}")
+        print(f"[HTTP] 下发命令: method={http_method}, url={url}")
 
         try:
             if http_method.upper() == 'GET':
@@ -80,10 +92,9 @@ class HTTPDriver(BaseProtocolDriver):
                 response = self.session.put(url, json=params, headers=headers, timeout=timeout)
             elif http_method.upper() == 'DELETE':
                 response = self.session.delete(url, json=params, headers=headers, timeout=timeout)
-            else:  # POST 默认
+            else:
                 response = self.session.post(url, json=params, headers=headers, timeout=timeout)
 
-            # 解析响应
             try:
                 response_data = response.json() if response.text else {}
             except:
@@ -104,8 +115,15 @@ class HTTPDriver(BaseProtocolDriver):
             raise ProtocolError(f"HTTP命令失败: {str(e)}")
 
     def subscribe(self, device_did: str, topics: Optional[list] = None):
-        """HTTP 通常使用轮询，这里实现轮询机制"""
+        """HTTP 轮询机制（仅主动拉取模式）"""
         config = self.device_configs.get(device_did, {})
+        base_url = self.device_endpoints.get(device_did, "")
+
+        # 主动上报模式不需要轮询
+        if not base_url:
+            print(f"[HTTP] 设备 {device_did} 为主动上报模式，跳过轮询")
+            return
+
         poll_interval = config.get('poll_interval', 30)
         poll_endpoint = config.get('poll_endpoint', '/data')
 
@@ -115,7 +133,6 @@ class HTTPDriver(BaseProtocolDriver):
         def poll_loop():
             while device_did in self.device_endpoints:
                 try:
-                    base_url = self.device_endpoints.get(device_did)
                     if base_url:
                         url = f"{base_url}{poll_endpoint}"
                         response = self.session.get(url, timeout=10)
@@ -137,3 +154,15 @@ class HTTPDriver(BaseProtocolDriver):
             thread = threading.Thread(target=poll_loop, daemon=True)
             thread.start()
             print(f"[HTTP] 启动轮询: {poll_interval}s")
+
+    # 🆕 新增方法：处理设备主动上报的数据
+    def ingest_data(self, device_did: str, payload: Dict[str, Any]) -> None:
+        """
+        处理设备主动上报的数据
+        供 /ingest/http 接口调用
+        """
+        print(f"[HTTP] 设备 {device_did} 主动上报数据")
+        self._on_data(device_did, {
+            'payload': payload,
+            'timestamp': datetime.now().isoformat()
+        })

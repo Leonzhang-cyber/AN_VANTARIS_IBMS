@@ -8,10 +8,10 @@ class Config:
     DB_PORT = "13306"
     DB_NAME = "ibms"
 
-    system_did = "did:imbs:system:root:2f71181048b0"
-    system_did_secret = "0xa1eeD703B79f2548eaa1E591370d19c67E561D9e"
-    system_did_public_key = "0xa1eeD703B79f2548eaa1E591370d19c67E561D9e"
-    system_did_private_key = "792b838cc64813c4b40f4ecbde9cce1479930062e2726c8dec9e0fdc64821a10"
+    system_did = "did:imbs:system:root:e75d57e76dc8"
+    # system_did_secret = "0xa1eeD703B79f2548eaa1E591370d19c67E561D9e"
+    system_did_public_key = "0xdA9497EAFF812aF112F26FD162d8e2879e886477"
+    system_did_private_key = "18466913ccc119f03f5a5d4a0feebc60170b95c2e1610e85618d046697b42ba0"
 
     # 构造完整的 SQLAlchemy 数据库 URI
     SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"

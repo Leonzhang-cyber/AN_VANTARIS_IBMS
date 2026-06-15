@@ -58,7 +58,6 @@ def get_latest_data(device_code: str) -> dict:
 
 
 # src/api/iot/sse_api.py
-
 @api_bp.route('/iot/device/<string:device_code>/stream')
 def device_sse_stream(device_code: str):
     """
@@ -67,16 +66,28 @@ def device_sse_stream(device_code: str):
     """
     print(f"[SSE] 设备 {device_code} 开始监听")
 
+    # 记录当前队列状态
+    q = get_device_queue(device_code)
+    print(f"[SSE] 设备 {device_code} 当前队列大小: {q.qsize()}")
+
     def generate():
-        q = get_device_queue(device_code)
+        data_count = 0  # 计数器
+
         # 发送连接成功消息
         yield f"data: {json.dumps({'type': 'connected', 'device_code': device_code, 'timestamp': datetime.now().isoformat()})}\n\n"
 
         while True:
             try:
                 data = q.get(timeout=30)
+                data_count += 1
+
+                # 📌 收到数据时打印
+                print(f"[SSE] 设备 {device_code} 收到数据 #{data_count}, 类型: {data.get('type', 'unknown')}")
+
                 yield f"data: {json.dumps(data)}\n\n"
+
             except queue.Empty:
+                # 心跳
                 yield ": heartbeat\n\n"
 
     response = Response(
@@ -93,6 +104,40 @@ def device_sse_stream(device_code: str):
         }
     )
     return response
+# @api_bp.route('/iot/device/<string:device_code>/stream')
+# def device_sse_stream(device_code: str):
+#     """
+#     SSE 设备数据流
+#     前端连接: new EventSource('/api/iot/device/HVAC_SIM_001/stream')
+#     """
+#     print(f"[SSE] 设备 {device_code} 开始监听")
+#
+#     def generate():
+#         q = get_device_queue(device_code)
+#         # 发送连接成功消息
+#         yield f"data: {json.dumps({'type': 'connected', 'device_code': device_code, 'timestamp': datetime.now().isoformat()})}\n\n"
+#
+#         while True:
+#             try:
+#                 data = q.get(timeout=30)
+#                 yield f"data: {json.dumps(data)}\n\n"
+#             except queue.Empty:
+#                 yield ": heartbeat\n\n"
+#
+#     response = Response(
+#         stream_with_context(generate()),
+#         mimetype='text/event-stream',
+#         headers={
+#             'Cache-Control': 'no-cache',
+#             'X-Accel-Buffering': 'no',
+#             'Access-Control-Allow-Origin': '*',
+#             'Access-Control-Allow-Methods': 'GET',
+#             'Access-Control-Allow-Headers': 'Content-Type',
+#             'Content-Type': 'text/event-stream; charset=utf-8',
+#             'Connection': 'keep-alive'
+#         }
+#     )
+#     return response
 
 
 # 添加 OPTIONS 预检请求处理

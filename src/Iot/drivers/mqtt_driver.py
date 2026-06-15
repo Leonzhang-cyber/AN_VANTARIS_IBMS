@@ -78,6 +78,9 @@ class MQTTDriver(BaseProtocolDriver):
             client.reconnect()
 
     def _on_message(self, client, userdata, msg):
+
+        print(f"📨 [MQTT] 收到消息: {msg.topic}")  # 添加这行
+
         topic = msg.topic
         payload = msg.payload.decode('utf-8')
 

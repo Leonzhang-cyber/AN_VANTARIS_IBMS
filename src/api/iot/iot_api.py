@@ -1000,3 +1000,66 @@ def delete_standard_method(method_code: str):
     except Exception as e:
         db.session.rollback()
         return Result.error(message=str(e), code=500)
+
+@api_bp.route('/iot/ingest/http', methods=['POST'])
+def http_data_ingest():
+    """
+    HTTP 设备主动上报数据接口
+    设备通过 POST 请求发送数据到此端点
+    """
+    from src.Iot.device_manager import get_device_manager
+    from src.Iot.dao import DeviceDAO
+    from src.Iot.drivers import DriverRegistry
+    from src.common.models.response import Result
+    from datetime import datetime
+    from flask import request
+
+    try:
+        data = request.json
+        if not data:
+            return Result.error(message="请求体为空")
+
+        device_code = data.get('device_code')
+        if not device_code:
+            return Result.error(message="缺少 device_code")
+
+        # 查找设备
+        device = DeviceDAO.get_device_by_code(device_code)
+
+        if not device:
+            print(f"[HTTP Ingest] 拒绝: 设备未注册 - {device_code}")
+            return Result.error(message=f"设备未注册: {device_code}")
+
+        if device.protocol != 'http':
+            return Result.error(message=f"设备协议不匹配，期望 http，实际 {device.protocol}")
+
+        payload = data.get('data', {})
+        if not payload:
+            return Result.error(message="缺少 data 字段")
+
+        if 'timestamp' not in payload:
+            payload['timestamp'] = datetime.now().isoformat()
+
+        # 🆕 通过 HTTP 驱动处理数据（统一使用驱动的回调机制）
+        try:
+            driver = DriverRegistry.get_driver('http')
+            driver.ingest_data(device.did, payload)
+        except Exception as e:
+            print(f"[HTTP Ingest] 驱动处理失败: {e}")
+            # 降级：直接调用 DeviceManager
+            from src.Iot.device_manager import get_device_manager
+            dm = get_device_manager()
+            dm._on_device_data(device.did, payload, 'http')
+
+        print(f"[HTTP Ingest] ✅ 设备 {device_code} 数据已接收")
+
+        return Result.success(message="数据已接收", data={
+            'device_code': device_code,
+            'received_at': datetime.now().isoformat()
+        })
+
+    except Exception as e:
+        print(f"[HTTP Ingest] ❌ 错误: {e}")
+        import traceback
+        traceback.print_exc()
+        return Result.error(message=str(e))

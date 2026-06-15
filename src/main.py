@@ -89,8 +89,22 @@ def init_system_on_startup():
 
     try:
         result = service.init_system_entity()
+        # if result.get('is_new'):
+        #     print(f"✅ 系统实体已创建: {result['did']}")
         if result.get('is_new'):
-            print(f"✅ 系统实体已创建: {result['did']}")
+            print("✅✅✅ 系统根实体首次创建成功 ✅✅✅")
+            print("=" * 60)
+            print(f"📌 DID: {result['did']}")
+            print(f"📌 实体名称: {result.get('name', 'System Root')}")
+            print(f"📌 实体类型: {result.get('entity_type', 'system')}")
+            print("-" * 60)
+            print("🔑 🔑 🔑 重要：请保存以下私钥 🔑 🔑 🔑")
+            print("-" * 60)
+            print(f"私钥: {result.get('private_key')}")
+            print("-" * 60)
+            print("⚠️  警告：私钥仅显示一次，丢失后将无法恢复！")
+            print("⚠️  请立即将私钥保存到安全的地方（如密码管理器）")
+            print("=" * 60)
         else:
             print(f"ℹ️ 系统实体已存在: {result['did']}")
     except Exception as e:
