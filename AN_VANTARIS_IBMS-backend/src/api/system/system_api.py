@@ -1,6 +1,6 @@
 # src/api/system/system_api.py
 
-from flask import Blueprint, request, jsonify, g
+from flask import Blueprint, request, jsonify, g, current_app
 from src.common.core.database import db
 from src.system.service import SystemService
 from src.common.utils.jwt_util import jwt_required, get_current_did
@@ -242,15 +242,6 @@ def get_permission(perm_id):
 @jwt_required
 def list_permissions():
     """分页查询权限列表"""
-    from src.common.utils.local_smoke import (
-        handle_db_smoke_error,
-        is_local_smoke_enabled,
-        local_smoke_permissions_response,
-    )
-
-    if is_local_smoke_enabled():
-        return local_smoke_permissions_response()
-
     limit = int(request.args.get('limit', 100))
     offset = int(request.args.get('offset', 0))
     try:
@@ -263,7 +254,8 @@ def list_permissions():
             'extra': p.extra
         } for p in perms])
     except Exception as e:
-        return handle_db_smoke_error(e)
+        current_app.logger.warning("list_permissions failed: %s", type(e).__name__)
+        return Result.error(code=500, message="Failed to load permissions")
 
 
 
