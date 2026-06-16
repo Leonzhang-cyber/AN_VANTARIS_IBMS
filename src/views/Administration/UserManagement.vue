@@ -313,7 +313,7 @@ import {
   Star, Share, CopyDocument, Delete, Mic, Picture, Document, Upload, Download,
   MagicStick, ChatDotRound, Message, Service, Search, Edit, Plus, VideoPlay,
   VideoPause, Operation, Headset, Monitor, Cpu, Connection, Lock, Key, Medal,
-  Flag, DataAnalysis, EditPen, Tickets, Filter, SuccessFilled, List, Grid, Calendar, Bell, History, More
+  Flag, DataAnalysis, EditPen, Tickets, Filter, SuccessFilled, List, Grid, Calendar, Bell, More
 } from '@element-plus/icons-vue'
 
 // Loading state
