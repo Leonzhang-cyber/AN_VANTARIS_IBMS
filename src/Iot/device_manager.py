@@ -145,6 +145,16 @@ class DeviceManager:
         device_info = self.devices.get(device_did, {})
         device_code = device_info.get('device_code', 'unknown')
 
+        # ===== 🆕 视频帧直接透传（不做字段映射） =====
+        if isinstance(raw_data, dict) and raw_data.get('type') == 'video_frame':
+            print(f"[DeviceManager] 📹 收到视频帧: {device_code}, frame_count={raw_data.get('frame_count')}")
+            try:
+                push_to_device(device_code, raw_data)
+                print(f"[DeviceManager] ✅ 视频帧已推送到 SSE")
+            except Exception as e:
+                print(f"[DeviceManager] ❌ SSE 推送失败: {e}")
+            return
+
         if isinstance(raw_data, dict):
             payload = raw_data.get('payload', raw_data)
         else:
@@ -274,12 +284,12 @@ class DeviceManager:
                 print(f"   ❌ {device_code} ({device_name})")
                 return False
         except Exception as e:
-            print(f"   ❌ {device_code} 连接错误: {e}")
+            # print(f"   ❌ {device_code} 连接错误: {e}")
             return False
 
     def _print_startup_summary(self):
         print("\n" + "=" * 60)
-        print(f"📊 已连接设备: {len(self.devices)} 台")
+        print(f"📊 已注册设备: {len(self.devices)} 台")
         for did, info in self.devices.items():
             print(f"   ✅ {info.get('device_code')} | {info.get('protocol')}")
         print("=" * 60)

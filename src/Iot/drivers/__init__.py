@@ -81,6 +81,26 @@ class DriverRegistry:
                             protocol_name = temp_instance.protocol_name
                             cls.register(protocol_name, attr)
 
+                            # 🆕 如果是 ISUP 驱动，自动启动服务端
+                            if protocol_name == 'isup':
+                                try:
+                                    # 获取已注册的驱动实例
+                                    driver_instance = cls.get_driver(protocol_name)
+                                    if hasattr(driver_instance, 'start_server'):
+                                        driver_instance.start_server(7660)
+                                        print(f"[ISUP] 服务端已启动，监听端口: 7660")
+                                except Exception as e:
+                                    print(f"[ISUP] 启动服务端失败: {e}")
+
+                            # 🆕 如果是 RTSP 驱动，打印 RTP 接收端口
+                            if protocol_name == 'rtsp':
+                                try:
+                                    driver_instance = cls.get_driver(protocol_name)
+                                    if hasattr(driver_instance, 'rtp_port'):
+                                        print(f"[RTSP] RTP 数据接收端口: {driver_instance.rtp_port}")
+                                except Exception as e:
+                                    print(f"[RTSP] 获取端口信息失败: {e}")
+
                 except Exception as e:
                     print(f"[DriverRegistry] Failed to load {module_name}: {e}")
 

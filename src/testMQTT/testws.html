@@ -1,716 +1,278 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>设备数据实时监控 - SSE 版本</title>
+    <title>ISAPI摄像头控制面板</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Segoe UI', 'Microsoft YaHei', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
             padding: 20px;
         }
-
         .container {
-            max-width: 1200px;
+            max-width: 800px;
             margin: 0 auto;
-        }
-
-        /* 头部卡片 */
-        .header {
             background: white;
-            border-radius: 16px;
-            padding: 24px 30px;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-
         h1 {
             color: #333;
-            font-size: 24px;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        h1::before {
-            content: "📡";
-            font-size: 28px;
-        }
-
-        .subtitle {
-            color: #666;
-            font-size: 14px;
-            border-left: 3px solid #4CAF50;
-            padding-left: 12px;
-            margin-top: 8px;
-        }
-
-        /* 控制栏 */
-        .control-bar {
-            background: white;
-            border-radius: 16px;
-            padding: 20px 30px;
             margin-bottom: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 15px;
         }
-
-        .control-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .control-group label {
-            font-weight: 600;
-            color: #333;
-        }
-
-        input {
-            padding: 10px 15px;
-            width: 220px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 14px;
-            transition: all 0.3s;
-        }
-
-        input:focus {
-            outline: none;
-            border-color: #4CAF50;
-            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
-        }
-
-        button {
-            padding: 10px 24px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 600;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-
-        button.connect {
-            background: linear-gradient(135deg, #4CAF50, #45a049);
-            color: white;
-        }
-
-        button.disconnect {
-            background: linear-gradient(135deg, #f44336, #da190b);
-            color: white;
-        }
-
-        button.clear {
-            background: linear-gradient(135deg, #607d8b, #455a64);
-            color: white;
-        }
-
-        button.copy-log {
-            background: linear-gradient(135deg, #2196F3, #1976D2);
-            color: white;
-        }
-
-        /* 两列布局 */
-        .dashboard {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        /* 卡片通用样式 */
-        .card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        }
-
-        .card-header {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            padding: 15px 20px;
-            border-bottom: 2px solid #4CAF50;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .card-header h3 {
-            color: #333;
-            font-size: 16px;
-            font-weight: 600;
-        }
-
-        .card-header .badge {
-            margin-left: auto;
-            font-size: 12px;
-            padding: 4px 10px;
-            border-radius: 20px;
-            background: #e0e0e0;
-            color: #666;
-        }
-
-        .card-content {
-            padding: 20px;
-            max-height: 450px;
-            overflow-y: auto;
-        }
-
-        /* 状态显示 */
-        .status-indicator {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            border-radius: 30px;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .status-online {
-            background: #d4edda;
-            color: #155724;
-        }
-
-        .status-offline {
-            background: #f8d7da;
-            color: #721c24;
-        }
-
-        .status-connecting {
-            background: #fff3cd;
-            color: #856404;
-        }
-
-        .led {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            display: inline-block;
-            animation: pulse 1.5s infinite;
-        }
-
-        .led-green {
-            background: #4CAF50;
-            box-shadow: 0 0 5px #4CAF50;
-        }
-
-        .led-red {
-            background: #f44336;
-        }
-
-        .led-yellow {
-            background: #ffc107;
-            animation: none;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        /* 数据展示 */
-        .data-viewer {
-            background: #1e1e1e;
-            border-radius: 12px;
-            padding: 15px;
-            font-family: 'Consolas', 'Monaco', monospace;
-            font-size: 12px;
-            color: #d4d4d4;
-            overflow-x: auto;
-            white-space: pre-wrap;
-            word-break: break-all;
-            max-height: 380px;
-            overflow-y: auto;
-        }
-
-        /* 日志区域 */
-        .log-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .log-list {
-            font-family: 'Consolas', 'Monaco', monospace;
-            font-size: 12px;
-            line-height: 1.6;
-            max-height: 380px;
-            overflow-y: auto;
-        }
-
-        .log-entry {
-            padding: 8px 12px;
-            border-bottom: 1px solid #f0f0f0;
-            display: flex;
-            gap: 12px;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .log-entry:hover {
-            background: #f8f9fa;
-        }
-
-        .log-time {
-            color: #999;
-            font-size: 11px;
-            min-width: 85px;
-        }
-
-        .log-icon {
-            min-width: 24px;
-        }
-
-        .log-message {
-            flex: 1;
-            word-break: break-word;
-        }
-
-        .log-data {
-            color: #666;
-            font-size: 11px;
-            margin-top: 4px;
-            padding-left: 20px;
-            border-left: 2px solid #e0e0e0;
-        }
-
-        .log-success { color: #4CAF50; }
-        .log-error { color: #f44336; }
-        .log-info { color: #2196F3; }
-        .log-warning { color: #ff9800; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* 滚动条美化 */
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 3px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #c1c1c1;
-            border-radius: 3px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #a8a8a8;
-        }
-
-        /* 响应式 */
-        @media (max-width: 768px) {
-            .dashboard {
-                grid-template-columns: 1fr;
-            }
-            .control-bar {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .control-group {
-                justify-content: space-between;
-            }
-        }
-
-        /* 设备信息栏 */
-        .info-bar {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 12px 20px;
-            margin-bottom: 20px;
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            font-size: 13px;
-        }
-
-        .info-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .info-label {
-            font-weight: 600;
-            color: #666;
-        }
-
-        .info-value {
-            color: #333;
-            font-family: monospace;
-        }
-
-        /* 复制成功提示 */
-        .copy-toast {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #4CAF50;
-            color: white;
-            padding: 12px 24px;
+        .video-container {
+            background: #000;
             border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        canvas {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .control-panel {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            max-width: 300px;
+            margin: 0 auto 20px;
+        }
+        button {
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        .dir-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .dir-btn:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+        .stop-btn {
+            background-color: #f44336;
+            color: white;
+            grid-column: 2;
+        }
+        .stop-btn:hover {
+            background-color: #da190b;
+        }
+        .zoom-btn {
+            background-color: #2196F3;
+            color: white;
+        }
+        .zoom-btn:hover {
+            background-color: #0b7dda;
+        }
+        .info {
+            background-color: #e7f3ff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 20px;
             font-size: 14px;
-            font-weight: 500;
-            z-index: 1000;
-            animation: slideIn 0.3s ease, fadeOut 2s ease 1.7s forwards;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            color: #333;
         }
-
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+        .status {
+            color: #4CAF50;
+            font-weight: bold;
         }
-
-        @keyframes fadeOut {
-            to { opacity: 0; visibility: hidden; }
+        .loading {
+            color: #999;
+            font-style: italic;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- 头部 -->
-        <div class="header">
-            <h1>设备数据实时监控</h1>
-            <div class="subtitle">SSE (Server-Sent Events) 单向推送 · 实时数据展示</div>
+        <h1>📹 ISAPI摄像头控制面板</h1>
+
+        <div class="video-container">
+            <canvas id="canvas" width="640" height="360"></canvas>
         </div>
 
-        <!-- 控制栏 -->
-        <div class="control-bar">
-            <div class="control-group">
-                <label>📟 设备编号：</label>
-                <input type="text" id="deviceCode" value="HVAC_SIM_001" placeholder="请输入设备编号">
-            </div>
-            <div class="control-group">
-                <button class="connect" onclick="connect()">🔗 连接 SSE</button>
-                <button class="disconnect" onclick="disconnect()">❌ 断开</button>
-                <button class="clear" onclick="clearLogs()">🗑️ 清空日志</button>
-                <button class="copy-log" onclick="copyLogs()">📋 复制日志</button>
-            </div>
+        <div class="control-panel">
+            <button class="dir-btn" onclick="sendPTZCommand('up_left')">↖️ 左上</button>
+            <button class="dir-btn" onclick="sendPTZCommand('up')">⬆️ 上</button>
+            <button class="dir-btn" onclick="sendPTZCommand('up_right')">↗️ 右上</button>
+
+            <button class="dir-btn" onclick="sendPTZCommand('left')">⬅️ 左</button>
+            <button class="stop-btn" onclick="sendPTZCommand('stop')">⏹️ 停止</button>
+            <button class="dir-btn" onclick="sendPTZCommand('right')">➡️ 右</button>
+
+            <button class="dir-btn" onclick="sendPTZCommand('down_left')">↙️ 左下</button>
+            <button class="dir-btn" onclick="sendPTZCommand('down')">⬇️ 下</button>
+            <button class="dir-btn" onclick="sendPTZCommand('down_right')">↘️ 右下</button>
+
+            <button class="zoom-btn" onclick="sendPTZCommand('zoom_in')">🔍 放大</button>
+            <button class="zoom-btn" onclick="sendPTZCommand('zoom_out')">🔍 缩小</button>
+            <button class="zoom-btn" onclick="getStatus()">📊 状态</button>
         </div>
 
-        <!-- 连接信息栏 -->
-        <div class="info-bar" id="infoBar">
-            <div class="info-item">
-                <span class="info-label">🔌 SSE 地址：</span>
-                <span class="info-value" id="sseUrlDisplay">未连接</span>
-            </div>
-            <div class="info-item">
-                <span class="info-label">📊 连接状态：</span>
-                <span class="info-value" id="statusDisplay">
-                    <span class="status-indicator status-offline">
-                        <span class="led led-red"></span> 未连接
-                    </span>
-                </span>
-            </div>
-            <div class="info-item">
-                <span class="info-label">📨 接收消息：</span>
-                <span class="info-value" id="msgCount">0</span>
-            </div>
-        </div>
-
-        <!-- 主内容区 两列布局 -->
-        <div class="dashboard">
-            <!-- 左侧：实时数据 -->
-            <div class="card">
-                <div class="card-header">
-                    <span>📈</span>
-                    <h3>实时数据（映射后）</h3>
-                    <span class="badge" id="lastUpdateTime">-</span>
-                </div>
-                <div class="card-content">
-                    <pre id="dataViewer" class="data-viewer">等待数据...</pre>
-                </div>
-            </div>
-
-            <!-- 右侧：事件日志 -->
-            <div class="card">
-                <div class="card-header">
-                    <span>📋</span>
-                    <h3>事件日志</h3>
-                    <span class="badge" id="logCount">0 条</span>
-                </div>
-                <div class="card-content">
-                    <div id="logContainer" class="log-list">
-                        <div class="log-entry">
-                            <span class="log-time">--:--:--</span>
-                            <span class="log-icon">💡</span>
-                            <span class="log-message">点击「连接 SSE」开始接收数据</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 提示信息 -->
-        <div style="margin-top: 20px; text-align: center; font-size: 12px; color: rgba(255,255,255,0.7);">
-            💡 SSE 是单向推送，服务器自动推送数据，无需手动刷新
+        <div class="info" id="info">
+            <span class="loading">等待视频流...</span>
         </div>
     </div>
 
     <script>
-        let eventSource = null;
-        let currentDeviceCode = 'HVAC_SIM_001';
-        let messageCount = 0;
-        let logs = [];
+        const deviceCode = 'ISAPI_CAM_001';
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const infoDiv = document.getElementById('info');
 
-        // 显示复制成功提示
-        function showCopyToast(message) {
-            const toast = document.createElement('div');
-            toast.className = 'copy-toast';
-            toast.innerHTML = `✅ ${message}`;
-            document.body.appendChild(toast);
-            setTimeout(() => {
-                toast.remove();
-            }, 2000);
-        }
+        let frameCount = 0;
+        let lastFrameTime = Date.now();
 
-        // 复制日志
-        function copyLogs() {
-            if (logs.length === 0) {
-                showCopyToast('暂无日志可复制');
-                return;
+        // 连接 SSE 接收视频流
+        const es = new EventSource(`http://localhost:5000/api/iot/device/${deviceCode}/stream`);
+
+        es.onopen = () => {
+            infoDiv.innerHTML = '<span class="status">✅ 已连接</span> - 等待视频流...';
+        };
+
+        es.onmessage = (e) => {
+            const data = JSON.parse(e.data);
+
+            if (data.type === 'video_frame') {
+                frameCount++;
+                const now = Date.now();
+                const fps = Math.round(1000 / (now - lastFrameTime));
+                lastFrameTime = now;
+
+                const img = new Image();
+                img.onload = () => {
+                    // 设置 canvas 尺寸
+                    if (data.width) canvas.width = data.width;
+                    if (data.height) canvas.height = data.height;
+                    ctx.drawImage(img, 0, 0);
+                };
+                img.src = 'data:image/jpeg;base64,' + data.image;
+
+                infoDiv.innerHTML = `
+                    <span class="status">✅ 视频流正常</span><br>
+                    帧数: ${frameCount} | FPS: ~${fps}<br>
+                    分辨率: ${data.width || 640}x${data.height || 360}
+                `;
             }
 
-            // 提取纯文本日志
-            const logTexts = [];
-            const logElements = document.querySelectorAll('#logContainer .log-entry');
-            logElements.forEach(el => {
-                const time = el.querySelector('.log-time')?.innerText || '';
-                const icon = el.querySelector('.log-icon')?.innerText || '';
-                const message = el.querySelector('.log-message')?.innerText || '';
-                logTexts.push(`[${time}] ${icon} ${message}`);
-            });
-
-            const copyText = logTexts.join('\n');
-
-            navigator.clipboard.writeText(copyText).then(() => {
-                showCopyToast(`已复制 ${logs.length} 条日志`);
-            }).catch(() => {
-                // 降级方案
-                const textarea = document.createElement('textarea');
-                textarea.value = copyText;
-                document.body.appendChild(textarea);
-                textarea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textarea);
-                showCopyToast(`已复制 ${logs.length} 条日志`);
-            });
-        }
-
-        // 添加日志
-        function addLog(type, message, data = null) {
-            const timestamp = new Date();
-            const timeStr = timestamp.toLocaleTimeString();
-            const iconMap = {
-                'success': '✅',
-                'error': '❌',
-                'info': 'ℹ️',
-                'warning': '⚠️',
-                'data': '📊',
-                'connect': '🔌',
-                'disconnect': '🔌'
-            };
-
-            const icon = iconMap[type] || '📝';
-            let colorClass = '';
-            if (type === 'success') colorClass = 'log-success';
-            if (type === 'error') colorClass = 'log-error';
-            if (type === 'info') colorClass = 'log-info';
-            if (type === 'warning') colorClass = 'log-warning';
-
-            let logHtml = `<div class="log-entry" style="animation: fadeIn 0.3s ease;">`;
-            logHtml += `<span class="log-time">${timeStr}</span>`;
-            logHtml += `<span class="log-icon">${icon}</span>`;
-            logHtml += `<span class="log-message ${colorClass}">${message}</span>`;
-
-            if (data) {
-                let dataStr = typeof data === 'object' ? JSON.stringify(data, null, 2) : data;
-                if (dataStr.length > 300) dataStr = dataStr.substring(0, 300) + '...';
-                logHtml += `<div class="log-data">${dataStr}</div>`;
-            }
-            logHtml += `</div>`;
-
-            logs.unshift(logHtml);
-            if (logs.length > 100) logs.pop();
-
-            const logContainer = document.getElementById('logContainer');
-            logContainer.innerHTML = logs.join('');
-            document.getElementById('logCount').innerText = `${logs.length} 条`;
-        }
-
-        function clearLogs() {
-            logs = [];
-            document.getElementById('logContainer').innerHTML = `
-                <div class="log-entry">
-                    <span class="log-time">--:--:--</span>
-                    <span class="log-icon">🗑️</span>
-                    <span class="log-message">日志已清空</span>
-                </div>
-            `;
-            document.getElementById('logCount').innerText = '0 条';
-            addLog('info', '日志已清空');
-        }
-
-        function updateStatus(status, message) {
-            const statusDisplay = document.getElementById('statusDisplay');
-            let html = '';
-            if (status === 'online') {
-                html = `<span class="status-indicator status-online">
-                            <span class="led led-green"></span> ${message}
-                        </span>`;
-            } else if (status === 'connecting') {
-                html = `<span class="status-indicator status-connecting">
-                            <span class="led led-yellow"></span> ${message}
-                        </span>`;
-            } else {
-                html = `<span class="status-indicator status-offline">
-                            <span class="led led-red"></span> ${message}
-                        </span>`;
-            }
-            statusDisplay.innerHTML = html;
-        }
-
-        function updateLastUpdateTime() {
-            const now = new Date();
-            document.getElementById('lastUpdateTime').innerText = now.toLocaleTimeString();
-        }
-
-        function updateMsgCount() {
-            document.getElementById('msgCount').innerText = messageCount;
-        }
-
-        function connect() {
-            const deviceCode = document.getElementById('deviceCode').value.trim();
-            if (!deviceCode) {
-                alert('请输入设备编号');
-                return;
-            }
-
-            currentDeviceCode = deviceCode;
-
-            if (eventSource) {
-                disconnect();
-            }
-
-            // 使用完整 URL
-            const fullUrl = `http://localhost:5000/api/iot/device/${deviceCode}/stream`;
-            document.getElementById('sseUrlDisplay').innerHTML = fullUrl;
-            document.getElementById('sseUrlDisplay').title = fullUrl;
-
-            addLog('connect', `正在连接 SSE: ${deviceCode}`, fullUrl);
-            updateStatus('connecting', '正在连接...');
-
-            console.log(`连接 SSE: ${fullUrl}`);
-
-            eventSource = new EventSource(fullUrl);
-
-            eventSource.onopen = () => {
-                addLog('success', `SSE 连接成功 (设备: ${deviceCode})`);
-                updateStatus('online', '已连接，等待数据...');
-                messageCount = 0;
-                updateMsgCount();
-            };
-
-            eventSource.onmessage = (event) => {
-                try {
-                    const data = JSON.parse(event.data);
-                    messageCount++;
-                    updateMsgCount();
-                    updateLastUpdateTime();
-
-                    if (data.type === 'device_data') {
-                        const jsonStr = JSON.stringify(data, null, 2);
-                        document.getElementById('dataViewer').innerHTML = jsonStr;
-                        updateStatus('online', '接收中...');
-
-                        // 提取关键信息添加到日志
-                        if (data.data) {
-                            const temp = data.data.temperature !== undefined ? data.data.temperature.toFixed(1) : '?';
-                            const power = data.data.power !== undefined ? data.data.power.toFixed(1) : '?';
-                            addLog('data', `收到设备数据 | 温度: ${temp}°C | 功率: ${power}kW`, {
-                                device_code: data.device_code,
-                                temperature: data.data.temperature,
-                                power: data.data.power,
-                                timestamp: data.timestamp
-                            });
-                        } else {
-                            addLog('data', `收到设备数据`, data);
-                        }
-                    } else if (data.type === 'connected') {
-                        addLog('success', `连接确认: 设备 ${data.device_code} 已就绪`);
-                    } else {
-                        addLog('info', `收到消息类型: ${data.type}`, data);
-                    }
-                } catch (e) {
-                    addLog('error', `解析数据失败: ${e.message}`);
-                    console.error('解析数据失败:', e);
-                }
-            };
-
-            eventSource.onerror = (error) => {
-                addLog('error', `SSE 连接错误，尝试重连...`);
-                updateStatus('offline', '连接错误，重连中...');
-
+            if (data.type === 'alarm') {
+                infoDiv.innerHTML = `<span style="color: red;">⚠️ 报警: ${data.payload || '检测到事件'}</span>`;
                 setTimeout(() => {
-                    if (eventSource && eventSource.readyState === EventSource.CLOSED) {
-                        addLog('info', '正在重连 SSE...');
-                        connect();
+                    if (frameCount > 0) {
+                        infoDiv.innerHTML = `<span class="status">✅ 视频流正常</span><br>帧数: ${frameCount}`;
                     }
                 }, 3000);
-            };
-        }
+            }
+        };
 
-        function disconnect() {
-            if (eventSource) {
-                eventSource.close();
-                eventSource = null;
-                addLog('disconnect', `已断开 SSE 连接 (设备: ${currentDeviceCode})`);
-                updateStatus('offline', '已断开');
-                document.getElementById('sseUrlDisplay').innerHTML = '未连接';
-                addLog('info', '连接已关闭，可重新连接');
-            } else {
-                addLog('warning', '没有活跃的连接');
+        es.onerror = (error) => {
+            console.error('SSE 错误:', error);
+            infoDiv.innerHTML = '<span style="color: red;">❌ 连接断开，尝试重连...</span>';
+            setTimeout(() => {
+                infoDiv.innerHTML = '<span class="loading">🔄 重新连接中...</span>';
+            }, 1000);
+        };
+
+        // 发送 PTZ 控制命令
+        async function sendPTZCommand(action) {
+            const speed = 0.5;
+
+            infoDiv.innerHTML = `<span style="color: orange;">🎮 执行: ${getActionName(action)}...</span>`;
+
+            try {
+                const response = await fetch(`http://localhost:5000/api/iot/device/code/${deviceCode}/command`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        method: 'ptz_control',
+                        params: {
+                            action: action,
+                            speed: speed,
+                            channel: 1
+                        }
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.code === 200) {
+                    infoDiv.innerHTML = `<span style="color: green;">✅ ${getActionName(action)} 成功</span>`;
+                    setTimeout(() => {
+                        if (frameCount > 0) {
+                            infoDiv.innerHTML = `<span class="status">✅ 视频流正常</span><br>帧数: ${frameCount}`;
+                        }
+                    }, 1500);
+                } else {
+                    infoDiv.innerHTML = `<span style="color: red;">❌ ${getActionName(action)} 失败: ${result.message}</span>`;
+                }
+            } catch (error) {
+                console.error('命令发送失败:', error);
+                infoDiv.innerHTML = `<span style="color: red;">❌ 命令发送失败: ${error.message}</span>`;
             }
         }
 
-        // 页面关闭时断开连接
+        // 获取设备状态
+        async function getStatus() {
+            infoDiv.innerHTML = '<span style="color: orange;">📡 获取设备状态...</span>';
+
+            try {
+                const response = await fetch(`http://localhost:5000/api/iot/device/code/${deviceCode}`);
+                const result = await response.json();
+
+                if (result.code === 200 && result.data) {
+                    const device = result.data;
+                    infoDiv.innerHTML = `
+                        📊 设备信息<br>
+                        名称: ${device.device_name}<br>
+                        代码: ${device.device_code}<br>
+                        协议: ${device.protocol}<br>
+                        状态: ${device.status === 1 ? '<span style="color: green;">在线</span>' : '<span style="color: red;">离线</span>'}<br>
+                        创建时间: ${device.created_at}
+                    `;
+                    setTimeout(() => {
+                        if (frameCount > 0) {
+                            infoDiv.innerHTML = `<span class="status">✅ 视频流正常</span><br>帧数: ${frameCount}`;
+                        }
+                    }, 5000);
+                }
+            } catch (error) {
+                infoDiv.innerHTML = `<span style="color: red;">❌ 获取状态失败: ${error.message}</span>`;
+            }
+        }
+
+        // 动作名称映射
+        function getActionName(action) {
+            const names = {
+                'up': '向上转动',
+                'down': '向下转动',
+                'left': '向左转动',
+                'right': '向右转动',
+                'up_left': '左上转动',
+                'up_right': '右上转动',
+                'down_left': '左下转动',
+                'down_right': '右下转动',
+                'stop': '停止转动',
+                'zoom_in': '放大',
+                'zoom_out': '缩小'
+            };
+            return names[action] || action;
+        }
+
+        // 页面关闭时关闭 SSE 连接
         window.addEventListener('beforeunload', () => {
-            if (eventSource) {
-                eventSource.close();
+            if (es) {
+                es.close();
             }
         });
-
-        // 初始化日志
-        addLog('info', '页面已加载，请输入设备编号后点击连接');
     </script>
 </body>
 </html>

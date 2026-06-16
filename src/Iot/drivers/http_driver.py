@@ -35,7 +35,7 @@ class HTTPDriver(BaseProtocolDriver):
             self.device_endpoints[device_did] = ""
             self.device_configs[device_did] = config
             self._on_status(device_did, 'online')
-            print(f"[HTTP] 设备 {device_did} 已就绪（主动上报模式）")
+            print(f"[HTTP] 设备已就绪（主动上报模式）")
             return True
 
         # 主动拉取模式：验证连接

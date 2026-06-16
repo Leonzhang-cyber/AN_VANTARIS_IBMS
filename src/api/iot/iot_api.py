@@ -1063,3 +1063,33 @@ def http_data_ingest():
         import traceback
         traceback.print_exc()
         return Result.error(message=str(e))
+
+
+@api_bp.route('/iot/device/<string:device_code>/reconnect', methods=['POST'])
+def reconnect_device(device_code: str):
+    """手动重连设备"""
+    from src.Iot.device_manager import get_device_manager
+    from src.Iot.dao import DeviceDAO
+
+    device = DeviceDAO.get_device_by_code(device_code)
+    if not device:
+        return Result.error(message="设备不存在", code=404)
+
+    dm = get_device_manager()
+
+    # 断开现有连接
+    if device.did in dm.drivers:
+        driver = dm.drivers[device.did]
+        driver.disconnect(device.did)
+        del dm.drivers[device.did]
+
+    # 重新连接
+    dm._connect_device({
+        'did': device.did,
+        'device_name': device.device_name,
+        'device_code': device.device_code,
+        'protocol': device.protocol,
+        'connect_config': device.connect_config
+    })
+
+    return Result.success(message="重连指令已发送")
