@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import { createPinia } from 'pinia' // 导入 createPinia
+import { createPinia } from 'pinia' // 导入 createPinia 测试推送
 import router from './router/index'
 import i18n from './lang/index'
 import ElementPlus from 'element-plus'
