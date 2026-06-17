@@ -76,6 +76,12 @@ def send_data():
     data = generate_sensor_data()
     sent_count += 1
 
+    # ===== 🆕 打印原始上报数据 =====
+    print("\n" + "=" * 60)
+    print(f"📤 [{sent_count}] 原始上报数据:")
+    print(json.dumps(data, indent=2, ensure_ascii=False))
+    print("=" * 60)
+
     try:
         response = requests.post(
             INGEST_URL,

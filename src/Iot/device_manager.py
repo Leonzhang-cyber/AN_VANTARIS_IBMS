@@ -1,4 +1,5 @@
 # src/Iot/device_manager.py
+
 import threading
 import time
 from typing import Dict, Any, Optional, List
@@ -61,38 +62,37 @@ class DeviceManager:
         except:
             return value
 
-    def _apply_field_mapping(self, device_did: str, device_code: str, protocol: str, payload: Dict) -> Dict:
-        """应用标准字段映射"""
+    def _apply_field_mapping(self, device_did: str, protocol: str, payload: Dict) -> Dict:
+        """
+        应用标准字段映射 - 只负责字段名转换，不添加元数据
+
+        输入: {'temperature_c': 23.1, 'humidity_percent': 47.5, 'status_code': 0}
+        输出: {'temperature': 23.1, 'humidity': 47.5, 'error_code': 0}
+        """
         from src.Iot.dao import FieldMappingDAO
 
-        mapped_result = {}
+        if not self.app:
+            return payload.copy()
 
-        if self.app:
-            with self.app.app_context():
-                mappings = FieldMappingDAO.get_mappings_by_device(device_did, protocol)
+        with self.app.app_context():
+            mappings = FieldMappingDAO.get_mappings_by_device(device_did, protocol)
 
-                for mapping in mappings:
-                    raw_field = mapping.raw_field
-                    if raw_field in payload:
-                        value = payload[raw_field]
+            # 没有配置映射，直接透传
+            if not mappings:
+                print(f"[Mapping] ⚠️ 设备 {device_did} 没有配置字段映射，直接透传")
+                return payload.copy()
 
-                        if mapping.transform:
-                            value = self._apply_transform(value, mapping.transform)
+            # 应用映射
+            mapped_result = {}
+            for mapping in mappings:
+                raw_field = mapping.raw_field
+                if raw_field in payload:
+                    value = payload[raw_field]
+                    if mapping.transform:
+                        value = self._apply_transform(value, mapping.transform)
+                    mapped_result[mapping.standard_field] = value
 
-                        mapped_result[mapping.standard_field] = value
-
-        # 添加设备信息
-        mapped_result['device_code'] = device_code
-        mapped_result['device_did'] = device_did
-        if 'timestamp' in payload:
-            mapped_result['timestamp'] = payload['timestamp']
-        else:
-            mapped_result['timestamp'] = datetime.now().isoformat()
-
-        if 'seq' in payload:
-            mapped_result['seq'] = payload['seq']
-
-        return mapped_result
+            return mapped_result
 
     def _save_to_csv_for_analysis(self, device_did: str, mapped_data: Dict):
         """将数据保存到CSV用于数据分析"""
@@ -101,103 +101,93 @@ class DeviceManager:
                 return
 
             with self.app.app_context():
-                # 1. 获取设备信息
                 device = DeviceDAO.get_device_by_did(device_did)
                 if not device:
                     return
 
-                # 2. 获取 device_code（必须存在）
                 if hasattr(device, 'device_code') and device.device_code:
                     device_code = device.device_code
                 else:
-                    print(f"[CSV] 错误: 设备 {device_did} 没有 device_code，无法创建CSV文件")
                     return
 
-                # 2. 检查 extra 中的数据分析标识
                 extra = device.extra or {}
                 enable_data_analysis = extra.get('enable_data_analysis', False)
 
                 if not enable_data_analysis:
-                    print(device_did + ":不采用数据存储模式")
                     return
 
-                # 采用数据存储模式
-                print(device_did + ":采用数据存储模式")
-                print(f"数据: {mapped_data}")
-
-                # 3. 直接存储所有映射后的数据（排除系统内部字段）
-                # 需要存储的字段：所有不以 _ 开头的字段
                 filtered_data = {}
                 for key, value in mapped_data.items():
-                    # 不存储系统内部字段（以 _ 开头）
                     if not key.startswith('_'):
                         filtered_data[key] = value
 
                 if filtered_data:
                     csv_storage.append_data(device_code, filtered_data)
-                    print(f"[CSV] {device_did} 已加入队列，字段: {list(filtered_data.keys())}")
 
         except Exception as e:
             print(f"[CSV] 异常: {e}")
 
     def _on_device_data(self, device_did: str, raw_data: Any, protocol: str):
-        """设备数据回调 - 先做字段映射，再通过 SSE 推送到前端"""
+        """
+        设备数据回调 - 先做字段映射，再通过 SSE 推送到前端
+        """
         device_info = self.devices.get(device_did, {})
         device_code = device_info.get('device_code', 'unknown')
 
-        # ===== 🆕 视频帧直接透传（不做字段映射） =====
+        # ===== 视频帧直接透传 =====
         if isinstance(raw_data, dict) and raw_data.get('type') == 'video_frame':
-            print(f"[DeviceManager] 📹 收到视频帧: {device_code}, frame_count={raw_data.get('frame_count')}")
             try:
                 push_to_device(device_code, raw_data)
-                print(f"[DeviceManager] ✅ 视频帧已推送到 SSE")
             except Exception as e:
                 print(f"[DeviceManager] ❌ SSE 推送失败: {e}")
             return
 
+        # ===== 提取实际数据 payload =====
         if isinstance(raw_data, dict):
-            payload = raw_data.get('payload', raw_data)
+            if 'payload' in raw_data and isinstance(raw_data['payload'], dict):
+                payload = raw_data['payload']
+            elif 'data' in raw_data and isinstance(raw_data['data'], dict):
+                payload = raw_data['data']
+            else:
+                payload = raw_data
         else:
             payload = raw_data
 
-        # 🆕 打印映射前原始数据
-        print("=" * 20)
-        print(f"\n[映射前] device_did: {device_did}")
+        print("=" * 60)
+        print(f"[映射前] device_did: {device_did}")
         print(f"[映射前] protocol: {protocol}")
         print(f"[映射前] payload: {payload}")
 
-        # 1. 标准字段映射
-        mapped_data = self._apply_field_mapping(device_did, device_code, protocol, payload)
+        # 1. 字段映射（只返回业务数据，不添加元数据）
+        mapped_data = self._apply_field_mapping(device_did, protocol, payload)
 
-        # 🆕 1.5 保存到CSV用于数据分析
+        print(f"[映射后] mapped_data: {mapped_data}")
+        print("=" * 60)
+
+        # 2. 保存到CSV（如果需要）
         self._save_to_csv_for_analysis(device_did, mapped_data)
 
-        print("=" * 20)
-
-        # 2. 构建 SSE 推送数据
+        # 3. 构建 SSE 推送数据（元数据在外层，data 只包含业务数据）
         push_data = {
             'type': 'device_data',
             'device_code': device_code,
             'device_did': device_did,
             'timestamp': datetime.now().isoformat(),
-            'data': mapped_data
+            'data': mapped_data  # ✅ 只有业务数据，没有重复
         }
 
-        # 3. SSE 推送
+        # 4. SSE 推送
         try:
             push_to_device(device_code, push_data)
+            print(f"[SSE] ✅ 已推送: {device_code}")
         except Exception as e:
-            print(f"[SSE] 推送失败: {e}")
+            print(f"[SSE] ❌ 推送失败: {e}")
 
     def _on_device_status(self, device_did: str, status: str, protocol: str):
         """设备状态回调"""
         device_info = self.devices.get(device_did, {})
-        device_name = device_info.get('device_name', device_did[:20])
         device_code = device_info.get('device_code', 'unknown')
 
-        # print(f"[{device_code}] {device_name} -> {status.upper()}")
-
-        # 推送状态变化到 SSE
         status_data = {
             'type': 'device_status',
             'device_code': device_code,
@@ -210,7 +200,6 @@ class DeviceManager:
         except Exception as e:
             pass
 
-        # 更新数据库状态
         try:
             if self.app:
                 with self.app.app_context():
@@ -240,7 +229,6 @@ class DeviceManager:
         try:
             result = DeviceDAO.list_devices(page=1, per_page=1000)
             all_devices = result['items']
-            # print(f"\n📋 发现 {len(all_devices)} 台设备")
 
             device_dicts = []
             for device in all_devices:
@@ -254,7 +242,6 @@ class DeviceManager:
                 }
                 device_dicts.append(device_dict)
 
-            # print("🔌 连接设备...")
             for device_dict in device_dicts:
                 self._connect_device(device_dict)
         except Exception as e:
@@ -262,7 +249,6 @@ class DeviceManager:
 
     def _connect_device(self, device: Dict) -> bool:
         device_did = device.get('did')
-        device_name = device.get('device_name', '未知')
         device_code = device.get('device_code', '未知')
         protocol = device.get('protocol', '')
         connect_config = device.get('connect_config', {})
@@ -278,13 +264,12 @@ class DeviceManager:
             if success:
                 self.devices[device_did] = device
                 self.drivers[device_did] = driver
-                # print(f"   ✅ {device_code} ({device_name})")
+                print(f"   ✅ {device_code}")
                 return True
             else:
-                print(f"   ❌ {device_code} ({device_name})")
+                print(f"   ❌ {device_code}")
                 return False
         except Exception as e:
-            # print(f"   ❌ {device_code} 连接错误: {e}")
             return False
 
     def _print_startup_summary(self):
@@ -317,6 +302,7 @@ class DeviceManager:
 
 
 _device_manager = None
+
 
 def get_device_manager() -> DeviceManager:
     global _device_manager
