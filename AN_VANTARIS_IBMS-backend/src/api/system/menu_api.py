@@ -411,20 +411,29 @@ def batch_update_version_menus(version_code):
                     {"path": menu_path}
                 ).fetchone()
                 if menu:
-                    db.session.execute(
+                    params = {
+                        "version_code": version_code,
+                        "menu_id": menu[0],
+                        "menu_path": menu_path,
+                        "is_visible": 1 if is_visible else 0,
+                        "sort_order": sort_order
+                    }
+                    updated = db.session.execute(
                         text("""
-                            INSERT INTO sys_version_menu (version_code, menu_id, menu_path, is_visible, sort_order)
-                            VALUES (:version_code, :menu_id, :menu_path, :is_visible, :sort_order)
-                            ON DUPLICATE KEY UPDATE is_visible = :is_visible, sort_order = :sort_order
+                            UPDATE sys_version_menu
+                            SET is_visible = :is_visible, sort_order = :sort_order
+                            WHERE version_code = :version_code AND menu_id = :menu_id
                         """),
-                        {
-                            "version_code": version_code,
-                            "menu_id": menu[0],
-                            "menu_path": menu_path,
-                            "is_visible": 1 if is_visible else 0,
-                            "sort_order": sort_order
-                        }
+                        params
                     )
+                    if updated.rowcount == 0:
+                        db.session.execute(
+                            text("""
+                                INSERT INTO sys_version_menu (version_code, menu_id, menu_path, is_visible, sort_order)
+                                VALUES (:version_code, :menu_id, :menu_path, :is_visible, :sort_order)
+                            """),
+                            params
+                        )
                     count += 1
         db.session.commit()
         return Result.success({'updated_count': count}, 'Batch update successful')
@@ -485,39 +494,34 @@ def incremental_update_version_menus(version_code):
         added_count = 0
         removed_count = 0
 
-        # 批量插入/更新新增菜单
+        # 批量新增菜单（先尝试更新，不存在再插入，避免 MySQL-specific upsert）
         if add_list:
-            add_data = []
             for menu_path in add_list:
                 menu_id = path_to_id.get(menu_path)
                 if menu_id:
-                    add_data.append({
+                    params = {
                         'version_code': version_code,
                         'menu_id': menu_id,
                         'menu_path': menu_path,
                         'is_visible': 1
-                    })
-
-            if add_data:
-                # 使用 executemany 批量操作
-                from sqlalchemy import bindparam
-
-                stmt = text("""
-                            INSERT INTO sys_version_menu (version_code, menu_id, menu_path, is_visible)
-                            VALUES (:version_code, :menu_id, :menu_path, :is_visible) ON DUPLICATE KEY
-                            UPDATE is_visible =
-                            VALUES (is_visible)
-                            """)
-
-                # 分批 executemany，避免一次处理太多
-                for i in range(0, len(add_data), 500):
-                    batch = add_data[i:i + 500]
-                    db.session.execute(stmt, batch)
-                    added_count += len(batch)
-
-                # 如果数据量不大，可以直接用 executemany
-                # db.session.execute(stmt, add_data)
-                # added_count = len(add_data)
+                    }
+                    updated = db.session.execute(
+                        text("""
+                            UPDATE sys_version_menu
+                            SET is_visible = :is_visible
+                            WHERE version_code = :version_code AND menu_id = :menu_id
+                        """),
+                        params
+                    )
+                    if updated.rowcount == 0:
+                        db.session.execute(
+                            text("""
+                                INSERT INTO sys_version_menu (version_code, menu_id, menu_path, is_visible)
+                                VALUES (:version_code, :menu_id, :menu_path, :is_visible)
+                            """),
+                            params
+                        )
+                    added_count += 1
 
         # 批量更新移除的菜单（使用 CASE WHEN 或 IN）
         if remove_list:
@@ -603,19 +607,28 @@ def diff_update_version_menus(version_code):
             ).fetchone()
 
             if menu:
-                db.session.execute(
+                params = {
+                    "version_code": version_code,
+                    "menu_id": menu[0],
+                    "menu_path": menu[1],
+                    "is_visible": 1 if is_visible else 0
+                }
+                updated = db.session.execute(
                     text("""
-                         INSERT INTO sys_version_menu (version_code, menu_id, menu_path, is_visible)
-                         VALUES (:version_code, :menu_id, :menu_path, :is_visible) ON DUPLICATE KEY
-                         UPDATE is_visible = :is_visible
-                         """),
-                    {
-                        "version_code": version_code,
-                        "menu_id": menu[0],
-                        "menu_path": menu[1],
-                        "is_visible": 1 if is_visible else 0
-                    }
+                        UPDATE sys_version_menu
+                        SET is_visible = :is_visible
+                        WHERE version_code = :version_code AND menu_id = :menu_id
+                    """),
+                    params
                 )
+                if updated.rowcount == 0:
+                    db.session.execute(
+                        text("""
+                            INSERT INTO sys_version_menu (version_code, menu_id, menu_path, is_visible)
+                            VALUES (:version_code, :menu_id, :menu_path, :is_visible)
+                        """),
+                        params
+                    )
                 updated_count += 1
 
         db.session.commit()
@@ -642,7 +655,7 @@ def get_initialization_data():
 
         service = MenuService()
 
-        # ========== 1. 查询版本及其菜单配置（使用 GROUP_CONCAT） ==========
+        # ========== 1. 查询版本 ==========
         versions_query = text("""
                               SELECT v.id,
                                      v.version_code,
@@ -651,14 +664,7 @@ def get_initialization_data():
                                      v.icon,
                                      v.sort_order,
                                      v.is_active,
-                                     v.is_default,
-                                     COALESCE(
-                                             (SELECT GROUP_CONCAT(menu_path ORDER BY menu_path SEPARATOR ',')
-                                              FROM sys_version_menu
-                                              WHERE version_code = v.version_code
-                                                AND is_visible = 1),
-                                             ''
-                                     ) as menu_paths
+                                     v.is_default
                               FROM sys_version v
                               WHERE v.is_active = 1
                               ORDER BY v.is_default DESC, v.sort_order, v.id
@@ -669,6 +675,19 @@ def get_initialization_data():
         if not versions_result:
             return Result.error(code=500, message="No versions found")
 
+        # 一次查询拿到各版本可见菜单路径，避免 MySQL-specific GROUP_CONCAT
+        version_menu_rows = db.session.execute(
+            text("""
+                SELECT version_code, menu_path
+                FROM sys_version_menu
+                WHERE is_visible = 1
+                ORDER BY version_code, menu_path
+            """)
+        ).fetchall()
+        visible_paths_by_version = {}
+        for row in version_menu_rows:
+            visible_paths_by_version.setdefault(row[0], []).append(row[1])
+
         # 构建版本数据
         versions = []
         version_menus = {}
@@ -676,7 +695,6 @@ def get_initialization_data():
 
         for row in versions_result:
             version_code = row[1]
-            menu_paths_str = row[8] if row[8] else ''
 
             version_data = {
                 'id': row[0],
@@ -690,11 +708,7 @@ def get_initialization_data():
             }
             versions.append(version_data)
 
-            # 分割菜单路径
-            if menu_paths_str:
-                version_menus[version_code] = menu_paths_str.split(',')
-            else:
-                version_menus[version_code] = []
+            version_menus[version_code] = visible_paths_by_version.get(version_code, [])
 
             if version_data['is_default']:
                 active_version_code = version_code
