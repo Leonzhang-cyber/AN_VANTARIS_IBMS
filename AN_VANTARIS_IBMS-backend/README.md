@@ -72,11 +72,23 @@ rm -f /tmp/ibms-local-smoke-token.txt
 
 Never log or commit the token. Do not inject into browser localStorage.
 
+**Local MySQL install (MYSQL-LOCAL-INSTALL-1)**
+
+Install and start Homebrew MySQL before DB smoke:
+
+```bash
+brew install mysql          # skip if mysql --version works
+brew services start mysql
+mysql -uroot -e "SELECT VERSION();"
+```
+
+See `docs/architecture/IBMS_MYSQL_LOCAL_INSTALL_1.md`. Fresh Homebrew install uses empty root password (localhost only). Do not commit credentials.
+
 **Local MySQL smoke (DB-LOCAL-SMOKE-EXEC-A)**
 
-System read APIs (`GET /api/system/menus`, `/permissions`, `/versions`) require a disposable local MySQL instance. This task does **not** install MySQL automatically.
+System read APIs (`GET /api/system/menus`, `/permissions`, `/versions`) require a disposable local MySQL instance.
 
-1. Install and start local MySQL on the host (e.g. Homebrew `mysql` or `mysql@8.0`).
+1. Ensure MySQL is running (see above).
 2. Create disposable DB/user with shell-only credentials — use `<LOCAL_SMOKE_DB_PASSWORD>`, never commit.
 3. Apply ORM-aligned smoke DDL — see `docs/architecture/IBMS_DB_LOCAL_SMOKE_MINIMAL_DDL.md`.
 4. Start backend with shell env overrides (no `.env` file):
