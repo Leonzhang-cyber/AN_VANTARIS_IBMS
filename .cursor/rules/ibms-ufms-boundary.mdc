@@ -1,0 +1,22 @@
+---
+description: Prevent IBMS and UFMS cross-contamination during development
+alwaysApply: true
+---
+
+# IBMS / UFMS Boundary Guard
+
+IBMS and UFMS are separate systems. In this repository, default scope is IBMS only.
+
+If any UFMS-specific path, code, menu, API, schema, seed, migration, auth logic, deployment logic, or documentation is detected during an IBMS task, stop immediately and report to the user.
+
+Do not copy UFMS source into IBMS.
+Do not copy IBMS source into UFMS.
+Do not merge UFMS backend/frontend/prisma/database/auth/menu/seed logic into IBMS unless the user explicitly approves that exact cross-system operation.
+
+Allowed cross-system work is limited to explicit API contracts, data mapping documents, and integration specifications.
+
+Before every task:
+1. confirm current repository path
+2. confirm task scope is IBMS
+3. check for UFMS boundary risk
+4. stop if boundary risk exists
