@@ -193,3 +193,14 @@ Root `.gitignore` (on disk) already excludes `.env`, `node_modules/`, `dist/`, `
 - No `npm install`, build, test, migration, fetch, pull, or push
 - No secrets, tokens, or real `.env` committed
 - `/tmp` inventory files not committed
+
+---
+
+## 10. IBMS-REPO-BASELINE-2 append (2026-06-17)
+
+- Cleared stale `.git/index.lock` and restored workspace to `/Users/mac/Desktop/AN_VANTARIS_IBMS` (moved from Trash; `HEAD` unchanged at `1b1f854`).
+- Staged canonical baseline: `.gitignore`, `AN_VANTARIS_IBMS-main`, `contracts`, `docs`, `AN_VANTARIS_IBMS-frontend`, `AN_VANTARIS_IBMS-backend` (~325 new cached paths + 7 smoke files from `109aba8`).
+- Path validation: no staged `node_modules`, `dist`, `.venv`, real `.env`, credentials, PEM, SQL dumps, logs, or archives.
+- Baseline commit message: `chore(ibms): establish controlled local baseline` (see `docs/IBMS_BASELINE_COMMIT_REPORT.md`).
+- **Next:** IBMS-FE-BUILD-1.
+
