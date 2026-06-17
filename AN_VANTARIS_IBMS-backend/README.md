@@ -120,6 +120,19 @@ If `IBMS_DATABASE_URL` is unset, legacy MySQL fallback (`mysql+pymysql://` via `
 
 See `docs/architecture/IBMS_POSTGRES_CONFIG_ABSTRACTION_1.md`.
 
+**PostgreSQL local install (POSTGRES-LOCAL-INSTALL-1)**
+
+Install and start Homebrew PostgreSQL before smoke execution:
+
+```bash
+brew install postgresql@16    # skip if psql --version works
+brew services start postgresql@16
+export PATH="/usr/local/opt/postgresql@16/bin:$PATH"
+psql postgres -c "SELECT version();"
+```
+
+See `docs/architecture/IBMS_POSTGRES_LOCAL_INSTALL_1.md`. No IBMS DB/user created in install task.
+
 **PostgreSQL driver (POSTGRES-DEPS-PREP-1)**
 
 PostgreSQL is the target canonical DB.
