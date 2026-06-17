@@ -1,0 +1,2598 @@
+openapi: 3.0.3
+info:
+  title: VANTARIS IBMS Protected API
+  version: ibms.contract.v1
+  description: |
+    Draft protected API boundary for VANTARIS IBMS.
+    Sources: SECURITY-A6, A7, A8B, A10, CONTRACTS-A1, CORE-A0.
+    Schemas marked as draft placeholders where runtime bodies are not fully confirmed.
+
+servers:
+  - url: /api
+    description: Legacy unversioned backend prefix (current)
+
+security:
+  - bearerAuth: []
+
+tags:
+  - name: Modeling
+    description: Data modeling and prediction (JWT required)
+  - name: IoT
+    description: IoT write, command, and ingest (JWT required)
+  - name: SSE
+    description: Server-sent events
+  - name: DID
+    description: DID high-risk write operations (JWT required)
+  - name: System
+    description: System menu and version API (JWT required since MENU-JWT; permission pending)
+
+paths:
+  /modeling/csv/list:
+    get:
+      tags: [Modeling]
+      summary: List CSV files
+      operationId: modelingCsvList
+      parameters:
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          description: CSV file list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /modeling/csv/{device_code}:
+    get:
+      tags: [Modeling]
+      summary: Get device CSV info
+      operationId: modelingCsvInfo
+      parameters:
+        - $ref: '#/components/parameters/DeviceCode'
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          description: Device CSV metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /modeling/{device_code}/train:
+    post:
+      tags: [Modeling]
+      summary: Train model
+      operationId: modelingTrain
+      parameters:
+        - $ref: '#/components/parameters/DeviceCode'
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Draft placeholder — training parameters vary by device
+              additionalProperties: true
+      responses:
+        '202':
+          description: Training accepted
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /modeling/{device_code}/predict:
+    post:
+      tags: [Modeling]
+      summary: Single-point predict
+      operationId: modelingPredict
+      parameters:
+        - $ref: '#/components/parameters/DeviceCode'
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelingPredictRequest'
+      responses:
+        '200':
+          description: Prediction result
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /modeling/{device_code}/predict_future:
+    post:
+      tags: [Modeling]
+      summary: Multi-day forecast
+      operationId: modelingPredictFuture
+      parameters:
+        - $ref: '#/components/parameters/DeviceCode'
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Draft placeholder — e.g. days, city, electricity_price
+              additionalProperties: true
+      responses:
+        '200':
+          description: Forecast result
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /modeling/{device_code}/model_info:
+    get:
+      tags: [Modeling]
+      summary: Get model metadata
+      operationId: modelingModelInfo
+      parameters:
+        - $ref: '#/components/parameters/DeviceCode'
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          description: Model info
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /modeling/{device_code}/{method}:
+    get:
+      tags: [Modeling]
+      summary: Generic predictor GET dispatch
+      operationId: modelingCallGet
+      parameters:
+        - $ref: '#/components/parameters/DeviceCode'
+        - name: method
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          description: Method result
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+    post:
+      tags: [Modeling]
+      summary: Generic predictor POST dispatch
+      operationId: modelingCallPost
+      parameters:
+        - $ref: '#/components/parameters/DeviceCode'
+        - name: method
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Method result
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /iot/device/register:
+    post:
+      tags: [IoT]
+      summary: Register device
+      operationId: iotDeviceRegister
+      parameters:
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Draft placeholder — device registration payload
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /iot/device/parent/{parent_did}:
+    get:
+      tags: [IoT]
+      summary: List devices by parent DID
+      description: Public read at runtime — JWT/auth decision pending.
+      operationId: iotDevicesByParent
+      security: []
+      parameters:
+        - name: parent_did
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /iot/device/did/{device_did}:
+    get:
+      tags: [IoT]
+      summary: Get device by DID
+      description: Public read at runtime — JWT/auth decision pending.
+      operationId: iotDeviceGetByDid
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/DeviceDid'
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '404':
+          description: Device not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    put:
+      tags: [IoT]
+      summary: Update device
+      operationId: iotDeviceUpdate
+      parameters:
+        - $ref: '#/components/parameters/DeviceDid'
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+    patch:
+      tags: [IoT]
+      summary: Partial update device
+      operationId: iotDevicePatch
+      parameters:
+        - $ref: '#/components/parameters/DeviceDid'
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+    delete:
+      tags: [IoT]
+      summary: Delete device
+      operationId: iotDeviceDelete
+      parameters:
+        - $ref: '#/components/parameters/DeviceDid'
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /iot/device/did/{device_did}/status:
+    put:
+      tags: [IoT]
+      summary: Update device status
+      operationId: iotDeviceStatus
+      parameters:
+        - $ref: '#/components/parameters/DeviceDid'
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: integer
+                  description: 0 offline, 1 online, 2 fault
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /iot/device/did/{device_did}/field-mappings:
+    put:
+      tags: [IoT]
+      summary: Update field mappings
+      operationId: iotFieldMappings
+      parameters:
+        - $ref: '#/components/parameters/DeviceDid'
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /iot/device/did/{device_did}/method-mappings:
+    put:
+      tags: [IoT]
+      summary: Update method mappings
+      operationId: iotMethodMappings
+      parameters:
+        - $ref: '#/components/parameters/DeviceDid'
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /iot/device/{device_did}/command:
+    post:
+      tags: [IoT]
+      summary: Send command by DID
+      operationId: iotCommandByDid
+      parameters:
+        - $ref: '#/components/parameters/DeviceDid'
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IoTCommandRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /iot/device/code/{device_code}/command:
+    post:
+      tags: [IoT]
+      summary: Send command by device code
+      operationId: iotCommandByCode
+      parameters:
+        - $ref: '#/components/parameters/DeviceCode'
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IoTCommandRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /iot/ingest/http:
+    post:
+      tags: [IoT]
+      summary: HTTP telemetry ingest
+      operationId: iotIngestHttp
+      parameters:
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IoTIngestRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /iot/device/{device_code}/reconnect:
+    post:
+      tags: [IoT]
+      summary: Reconnect device
+      operationId: iotDeviceReconnect
+      parameters:
+        - $ref: '#/components/parameters/DeviceCode'
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /iot/device/code/{device_code}:
+    get:
+      tags: [IoT]
+      summary: Get device by code
+      description: Public read at runtime — JWT/auth decision pending.
+      operationId: iotDeviceGetByCode
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/DeviceCode'
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '404':
+          description: Device not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /iot/device/{device_code}/sse-url:
+    get:
+      tags: [SSE]
+      summary: Get SSE stream URL for device
+      description: Public at runtime — returns relative stream URL for device_code.
+      operationId: iotDeviceSseUrl
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/DeviceCode'
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /iot/device/{device_code}/stream:
+    get:
+      tags: [SSE]
+      summary: Device SSE event stream
+      description: Public at runtime (no JWT) — production auth hardening pending.
+      operationId: iotDeviceStream
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/DeviceCode'
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          description: text/event-stream
+          content:
+            text/event-stream:
+              schema:
+                type: string
+        '500':
+          $ref: '#/components/responses/ServerError'
+    options:
+      tags: [SSE]
+      summary: CORS preflight for SSE stream
+      operationId: iotDeviceStreamOptions
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/DeviceCode'
+      responses:
+        '200':
+          description: CORS preflight response
+
+  /iot/device/{device_code}/latest:
+    get:
+      tags: [SSE]
+      summary: Latest device telemetry (polling fallback)
+      description: Public read at runtime — auth decision pending.
+      operationId: iotDeviceLatest
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/DeviceCode'
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /iot/{device_did}/field-mappings-info:
+    get:
+      tags: [IoT]
+      summary: Get device field mappings
+      description: Public read at runtime — JWT/auth decision pending.
+      operationId: iotFieldMappingsInfo
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/DeviceDid'
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '404':
+          description: Device not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /iot/{device_did}/method-mappings-info:
+    get:
+      tags: [IoT]
+      summary: Get device method mappings
+      description: Public read at runtime — JWT/auth decision pending.
+      operationId: iotMethodMappingsInfo
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/DeviceDid'
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '404':
+          description: Device not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /iot/standard-fields:
+    get:
+      tags: [IoT]
+      summary: List standard fields
+      description: Public read at runtime — JWT/auth decision pending.
+      operationId: iotStandardFieldsList
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    post:
+      tags: [IoT]
+      summary: Create standard field
+      operationId: iotStandardFieldCreate
+      parameters:
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /iot/standard-fields/{field_code}:
+    get:
+      tags: [IoT]
+      summary: Get standard field by code
+      description: Public read at runtime — JWT/auth decision pending.
+      operationId: iotStandardFieldGet
+      security: []
+      parameters:
+        - name: field_code
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    put:
+      tags: [IoT]
+      summary: Update standard field
+      operationId: iotStandardFieldUpdate
+      parameters:
+        - name: field_code
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+    delete:
+      tags: [IoT]
+      summary: Delete standard field
+      operationId: iotStandardFieldDelete
+      parameters:
+        - name: field_code
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /iot/standard-methods:
+    get:
+      tags: [IoT]
+      summary: List standard methods
+      description: Public read at runtime — JWT/auth decision pending.
+      operationId: iotStandardMethodsList
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    post:
+      tags: [IoT]
+      summary: Create standard method
+      operationId: iotStandardMethodCreate
+      parameters:
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /iot/standard-methods/{method_code}:
+    get:
+      tags: [IoT]
+      summary: Get standard method by code
+      description: Public read at runtime — JWT/auth decision pending.
+      operationId: iotStandardMethodGet
+      security: []
+      parameters:
+        - name: method_code
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    put:
+      tags: [IoT]
+      summary: Update standard method
+      operationId: iotStandardMethodUpdate
+      parameters:
+        - name: method_code
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+    delete:
+      tags: [IoT]
+      summary: Delete standard method
+      operationId: iotStandardMethodDelete
+      parameters:
+        - name: method_code
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /iot/device/{device_code}/test-sse-push:
+    post:
+      tags: [SSE]
+      summary: Test SSE push (dev only)
+      description: |
+        Disabled in production (403). Non-production requires
+        IBMS_SIMULATOR_ENABLED or IBMS_TESTMQTT_ENABLED. JWT required.
+      operationId: sseTestPush
+      parameters:
+        - $ref: '#/components/parameters/DeviceCode'
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /did/system/init:
+    post:
+      tags: [DID]
+      summary: Initialize system root entity
+      operationId: didSystemInit
+      parameters:
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /did/entity:
+    post:
+      tags: [DID]
+      summary: Create sub-entity and issue VC
+      operationId: didCreateEntity
+      parameters:
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DidEntityRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /did/vp/generate:
+    post:
+      tags: [DID]
+      summary: Generate verifiable presentation
+      operationId: didVpGenerate
+      parameters:
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Draft placeholder — holder_did, vcs, challenge
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /did/vc/reissue:
+    post:
+      tags: [DID]
+      summary: Revoke and reissue VC
+      operationId: didVcReissue
+      parameters:
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DidCredentialRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /did/vc/revoke:
+    post:
+      tags: [DID]
+      summary: Revoke VC
+      description: |
+        Revoke an issued verifiable credential. JWT required (SECURITY-A10, commit 898f99c).
+        Request body is a draft placeholder — do not embed real VC, DID, or private key material in docs.
+      operationId: didVcRevoke
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Draft placeholder — vc_id and revoked_by_did required at runtime
+              properties:
+                vc_id:
+                  type: string
+                  example: VC_ID_PLACEHOLDER
+                revoked_by_did:
+                  type: string
+                  example: did:imbs:entity:placeholder
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /did/login:
+    post:
+      tags: [DID]
+      summary: DID login
+      description: Public — returns JWT. Supports VP or challenge/signature modes at runtime.
+      operationId: didLogin
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /did/me:
+    get:
+      tags: [DID]
+      summary: Current authenticated DID entity
+      operationId: didMe
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /did/challenge:
+    get:
+      tags: [DID]
+      summary: Generate login challenge
+      description: Public at runtime — no JWT.
+      operationId: didChallenge
+      security: []
+      parameters:
+        - name: length
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 32
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /did/entity/{did}:
+    get:
+      tags: [DID]
+      summary: Get entity by DID
+      description: Public read at runtime — production auth hardening pending.
+      operationId: didEntityGet
+      security: []
+      parameters:
+        - name: did
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '404':
+          description: Entity not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /did/vp/verify:
+    post:
+      tags: [DID]
+      summary: Verify verifiable presentation
+      description: Public at runtime — no JWT decorator on Flask route.
+      operationId: didVpVerify
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /did/vc/status:
+    post:
+      tags: [DID]
+      summary: Check verifiable credential status
+      description: Public at runtime — no JWT decorator on Flask route.
+      operationId: didVcStatus
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /did/subordinates/direct:
+    get:
+      tags: [DID]
+      summary: List direct subordinate entities
+      description: Public read at runtime — requires parent_did query param.
+      operationId: didSubordinatesDirect
+      security: []
+      parameters:
+        - name: parent_did
+          in: query
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /did/subordinates/tree:
+    get:
+      tags: [DID]
+      summary: Subordinate entity tree
+      description: Public read at runtime — requires parent_did query param.
+      operationId: didSubordinatesTree
+      security: []
+      parameters:
+        - name: parent_did
+          in: query
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /did/subordinates/flat:
+    get:
+      tags: [DID]
+      summary: Flat list of descendant entities
+      description: Public read at runtime — requires parent_did query param.
+      operationId: didSubordinatesFlat
+      security: []
+      parameters:
+        - name: parent_did
+          in: query
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /did/chain/entity-hash/{did}:
+    get:
+      tags: [DID]
+      summary: On-chain entity metadata hash
+      description: Public read at runtime — blockchain contract must be configured.
+      operationId: didChainEntityHash
+      security: []
+      parameters:
+        - name: did
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '503':
+          description: Blockchain contract not configured
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /did/chain/vc-hash/{vc_id}:
+    get:
+      tags: [DID]
+      summary: On-chain VC hash
+      description: Public read at runtime — blockchain contract must be configured.
+      operationId: didChainVcHash
+      security: []
+      parameters:
+        - name: vc_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '503':
+          description: Blockchain contract not configured
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /did/chain/events:
+    get:
+      tags: [DID]
+      summary: Query blockchain contract events
+      description: Public read at runtime — filter params vary; draft placeholder.
+      operationId: didChainEvents
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /did/verify/entity/{did}:
+    get:
+      tags: [DID]
+      summary: Verify entity on-chain
+      description: Public read at runtime — verifies entity anchor status.
+      operationId: didVerifyEntity
+      security: []
+      parameters:
+        - name: did
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  # --- System permissions (JWT) ---
+  /system/permissions:
+    get:
+      tags: [System]
+      summary: List system permissions (draft)
+      description: Draft — maps to GET `/system/permissions`. JWT required; `system:read` enforcement pending.
+      operationId: systemPermissionsList
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 100
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 0
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    post:
+      tags: [System]
+      summary: Create system permission (draft)
+      description: Draft write — JWT required. Target `system:admin` (enforcement pending).
+      operationId: systemPermissionsCreate
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for menu routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/permissions/{perm_id}:
+    get:
+      tags: [System]
+      summary: Get system permission by id (draft)
+      operationId: systemPermissionsGet
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: perm_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Permission not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    put:
+      tags: [System]
+      summary: Update system permission (draft)
+      operationId: systemPermissionsUpdate
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: perm_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for menu routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    delete:
+      tags: [System]
+      summary: Delete system permission (draft)
+      operationId: systemPermissionsDelete
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: perm_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for menu routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  # --- System entity-types (JWT) ---
+  /system/entity-types:
+    get:
+      tags: [System]
+      summary: List entity types (draft)
+      description: JWT required. Fine-grained `system:read` enforcement pending.
+      operationId: systemEntityTypesList
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 100
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 0
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    post:
+      tags: [System]
+      summary: Create entity type (draft)
+      operationId: systemEntityTypesCreate
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for system admin routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/entity-types/{type_id}:
+    get:
+      tags: [System]
+      summary: Get entity type by id (draft)
+      operationId: systemEntityTypesGet
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: type_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Entity type not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    put:
+      tags: [System]
+      summary: Update entity type (draft)
+      operationId: systemEntityTypesUpdate
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: type_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for system admin routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    delete:
+      tags: [System]
+      summary: Delete entity type (draft)
+      operationId: systemEntityTypesDelete
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: type_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for system admin routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/entity-types/tree:
+    get:
+      tags: [System]
+      summary: Entity type hierarchy tree (draft)
+      operationId: systemEntityTypesTree
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  # --- System standard fields (Flask runtime paths) ---
+  /system/list-standard-fields:
+    get:
+      tags: [System]
+      summary: List system standard fields (draft)
+      description: Flask runtime GET `/system/list-standard-fields`. Contract alias `/system/standard-fields` pending.
+      operationId: systemStandardFieldsList
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/getById-standard-fields/{field_id}:
+    get:
+      tags: [System]
+      summary: Get system standard field by id (draft)
+      description: Flask runtime path — contract alias `/system/standard-fields/{id}` pending verification.
+      operationId: systemStandardFieldsGetById
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: field_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Field not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/create-standard-fields:
+    post:
+      tags: [System]
+      summary: Create system standard field (draft)
+      operationId: systemStandardFieldsCreate
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for system admin routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/update-standard-fields/{field_id}:
+    put:
+      tags: [System]
+      summary: Update system standard field (draft)
+      operationId: systemStandardFieldsUpdate
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: field_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for system admin routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/delete-standard-fields/{field_id}:
+    delete:
+      tags: [System]
+      summary: Delete system standard field (draft)
+      operationId: systemStandardFieldsDelete
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: field_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for system admin routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  # --- System standard methods (Flask runtime paths) ---
+  /system/list-standard-methods:
+    get:
+      tags: [System]
+      summary: List system standard methods (draft)
+      description: Flask runtime GET `/system/list-standard-methods`. Contract alias `/system/standard-methods` pending.
+      operationId: systemStandardMethodsList
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/getById-standard-methods/{method_id}:
+    get:
+      tags: [System]
+      summary: Get system standard method by id (draft)
+      description: Flask runtime path — contract alias `/system/standard-methods/{id}` pending verification.
+      operationId: systemStandardMethodsGetById
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: method_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Method not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/create-standard-methods:
+    post:
+      tags: [System]
+      summary: Create system standard method (draft)
+      operationId: systemStandardMethodsCreate
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for system admin routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/update-standard-methods/{method_id}:
+    put:
+      tags: [System]
+      summary: Update system standard method (draft)
+      operationId: systemStandardMethodsUpdate
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: method_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for system admin routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/delete-standard-methods/{method_id}:
+    delete:
+      tags: [System]
+      summary: Delete system standard method (draft)
+      operationId: systemStandardMethodsDelete
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: method_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for system admin routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/test:
+    get:
+      tags: [System]
+      summary: System diagnostic test endpoint (draft)
+      description: |
+        JWT required at runtime (`@jwt_required`). Diagnostic ping returning `{ status: ok }`.
+        **Production exposure must be reviewed** — disable or restrict in production deployments.
+        No fine-grained permission decorator at runtime; 403 reserved for future hardening.
+      operationId: systemTestDiagnostic
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  # --- System / Menu (MENU-JWT) — draft route group; 19 runtime routes in menu_api.py ---
+  /system/versions:
+    get:
+      tags: [System]
+      summary: List system versions (draft)
+      description: |
+        Draft — MENU-JWT protected. JWT required. Fine-grained `system:read` enforcement pending (SYSTEM-B).
+      operationId: systemVersionsList
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    post:
+      tags: [System]
+      summary: Create system version (draft)
+      description: |
+        Draft write route — JWT required. Target permission `system:admin` (enforcement pending).
+      operationId: systemVersionsCreate
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Permission enforcement pending — reserved for future `system:admin`
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/versions/default:
+    get:
+      tags: [System]
+      summary: Get default menu version (draft)
+      description: Draft — maps to GET `/system/versions/default`. JWT required.
+      operationId: systemVersionsDefault
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/versions/switch/{version_code}:
+    put:
+      tags: [System]
+      summary: Switch active menu version (draft)
+      description: Draft write — maps to PUT `/system/versions/switch/{version_code}`.
+      operationId: systemVersionsSwitch
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: version_code
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for menu routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/versions/{version_code}:
+    put:
+      tags: [System]
+      summary: Update system version (draft)
+      operationId: systemVersionsUpdate
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: version_code
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Permission enforcement pending
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    delete:
+      tags: [System]
+      summary: Delete system version (draft)
+      operationId: systemVersionsDelete
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: version_code
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Permission enforcement pending
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/menus:
+    get:
+      tags: [System]
+      summary: Get menu tree (draft)
+      description: Draft — maps to GET `/system/menus`. JWT required; `system:read` pending.
+      operationId: systemMenusTree
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/menus/batch-sort:
+    post:
+      tags: [System]
+      summary: Batch sort menu items (draft)
+      description: Draft write — maps to POST `/system/menus/batch-sort`.
+      operationId: systemMenusBatchSort
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for menu routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/menus-add:
+    post:
+      tags: [System]
+      summary: Create menu item (draft)
+      description: Draft write — JWT required. Target `system:write` or `system:admin` (pending).
+      operationId: systemMenusCreate
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Permission enforcement pending
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/menus-update/{menu_id}:
+    put:
+      tags: [System]
+      summary: Update menu item (draft)
+      description: Draft — maps to menu mutation routes. JWT required; permission pending.
+      operationId: systemMenusUpdate
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: menu_id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Permission enforcement pending
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/menus-delete/{menu_id}:
+    delete:
+      tags: [System]
+      summary: Delete menu item (draft)
+      operationId: systemMenusDelete
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: menu_id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Permission enforcement pending
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/menu/active:
+    get:
+      tags: [System]
+      summary: Active version menu config (draft)
+      description: Draft route group under `/system/menu/*`. JWT required; permission pending.
+      operationId: systemMenuActive
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/menu/config/{version_code}:
+    get:
+      tags: [System]
+      summary: Menu config by version (draft)
+      operationId: systemMenuConfig
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: version_code
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/version-menus/{version_code}:
+    get:
+      tags: [System]
+      summary: Version menu bindings (draft)
+      description: Draft — `/system/version-menus/{version_id}/menus` pattern. JWT required.
+      operationId: systemVersionMenusGet
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: version_code
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    post:
+      tags: [System]
+      summary: Batch update version menus (draft)
+      description: Draft write — maps to batch/incremental/diff version-menu routes. Permission pending.
+      operationId: systemVersionMenusBatch
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: version_code
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Permission enforcement pending
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/menu/init-data:
+    get:
+      tags: [System]
+      summary: Menu initialization seed data (draft)
+      description: Draft — maps to GET `/system/menu/init-data`.
+      operationId: systemMenuInitData
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/version-menus/{version_code}/batch:
+    post:
+      tags: [System]
+      summary: Batch replace version menus (draft)
+      description: Draft write — maps to POST `/system/version-menus/{version_code}/batch`.
+      operationId: systemVersionMenusBatchReplace
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: version_code
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for menu routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/version-menus/{version_code}/incremental:
+    post:
+      tags: [System]
+      summary: Incremental version menu update (draft)
+      description: Draft write — maps to POST `/system/version-menus/{version_code}/incremental`.
+      operationId: systemVersionMenusIncremental
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: version_code
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for menu routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/version-menus/{version_code}/diff:
+    post:
+      tags: [System]
+      summary: Diff version menu changes (draft)
+      description: Draft write — maps to POST `/system/version-menus/{version_code}/diff`.
+      operationId: systemVersionMenusDiff
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: version_code
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for menu routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  # --- Frontend contract aliases (path shape differs from Flask runtime) ---
+  /system/menu:
+    post:
+      tags: [System]
+      summary: Create menu item (frontend contract alias)
+      description: |
+        Frontend contract path. Flask runtime alias: POST `/system/menus-add`.
+        Pending exact route verification for unified path adoption.
+      operationId: systemMenuCreateContractAlias
+      x-ibms-backend-route: POST /system/menus-add
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for menu routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/menu/{id}:
+    put:
+      tags: [System]
+      summary: Update menu item (frontend contract alias)
+      description: Flask runtime alias PUT `/system/menus-update/{menu_id}`.
+      operationId: systemMenuUpdateContractAlias
+      x-ibms-backend-route: PUT /system/menus-update/{menu_id}
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for menu routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    delete:
+      tags: [System]
+      summary: Delete menu item (frontend contract alias)
+      description: Flask runtime alias DELETE `/system/menus-delete/{menu_id}`.
+      operationId: systemMenuDeleteContractAlias
+      x-ibms-backend-route: DELETE /system/menus-delete/{menu_id}
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for menu routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/version/{version_id}/menus:
+    get:
+      tags: [System]
+      summary: Version menus (frontend contract alias)
+      description: Flask runtime alias GET `/system/version-menus/{version_code}`.
+      operationId: systemVersionMenusContractAliasGet
+      x-ibms-backend-route: GET /system/version-menus/{version_code}
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: version_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for menu routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/version/{version_id}/menu/{menu_id}:
+    put:
+      tags: [System]
+      summary: Update version-menu binding (frontend contract alias)
+      description: Contract path — no exact Flask route with this shape; pending exact runtime verification.
+      operationId: systemVersionMenuBindingContractAliasUpdate
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: version_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: menu_id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - $ref: '#/components/parameters/XTraceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for menu routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    delete:
+      tags: [System]
+      summary: Remove version-menu binding (frontend contract alias)
+      description: Contract path — pending exact Flask runtime alias verification.
+      operationId: systemVersionMenuBindingContractAliasDelete
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: version_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: menu_id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - $ref: '#/components/parameters/XTraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for menu routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT from POST /api/did/login — use placeholder token in docs only
+
+  parameters:
+    XTraceId:
+      name: X-Trace-Id
+      in: header
+      required: false
+      schema:
+        type: string
+        format: uuid
+      description: Optional correlation id for audit (SECURITY-A9)
+    DeviceCode:
+      name: device_code
+      in: path
+      required: true
+      schema:
+        type: string
+      example: DEVICE_CODE_PLACEHOLDER
+    DeviceDid:
+      name: device_did
+      in: path
+      required: true
+      schema:
+        type: string
+      example: did:imbs:device:placeholder
+
+  schemas:
+    ErrorResponse:
+      type: object
+      description: Existing Result.error style — draft
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+      additionalProperties: true
+
+    SuccessResponse:
+      type: object
+      description: Existing Result.success style — draft
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        data:
+          type: object
+          additionalProperties: true
+      additionalProperties: true
+
+    TraceableResponse:
+      allOf:
+        - $ref: '#/components/schemas/SuccessResponse'
+      description: Response may correlate with X-Trace-Id in logs; traceId not in body by default
+
+    ModelingPredictRequest:
+      type: object
+      description: Draft placeholder schema for predict body
+      additionalProperties: true
+      example:
+        timestamp: '2026-06-16T10:00:00'
+        temperature: 24.5
+
+    IoTCommandRequest:
+      type: object
+      required:
+        - method
+      properties:
+        method:
+          type: string
+          example: set_temperature
+        params:
+          type: object
+          additionalProperties: true
+          example:
+            value: 24
+      additionalProperties: true
+
+    IoTIngestRequest:
+      type: object
+      required:
+        - device_code
+        - data
+      properties:
+        device_code:
+          type: string
+          example: DEVICE_CODE_PLACEHOLDER
+        data:
+          type: object
+          additionalProperties: true
+      additionalProperties: true
+
+    DidEntityRequest:
+      type: object
+      description: Draft placeholder — parent_did, entity_type_code, name, permissions required at runtime
+      additionalProperties: true
+      example:
+        parent_did: did:imbs:system:root:placeholder
+        entity_type_code: property
+        name: Example Entity
+        permissions:
+          - device:read
+
+    DidCredentialRequest:
+      type: object
+      description: Draft placeholder — issuer_did, subject_did required at runtime
+      additionalProperties: true
+
+  responses:
+    Success:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SuccessResponse'
+    UnauthorizedError:
+      description: Missing or invalid JWT
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            message: Invalid token
+    ForbiddenError:
+      description: |
+        Forbidden — valid JWT but missing required permission (A6B/A7B/A10B),
+        or environment guard denied (e.g. SSE test in production, A8B).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            code: 403
+            message: 'Permission denied: requires [modeling:train]'
+    ValidationError:
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'

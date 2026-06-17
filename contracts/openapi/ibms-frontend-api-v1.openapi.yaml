@@ -1,0 +1,1498 @@
+openapi: 3.0.3
+info:
+  title: VANTARIS IBMS Frontend API
+  version: ibms.frontend.contract.v1
+  description: |
+    Frontend-facing API subset for VANTARIS IBMS Console migration.
+    Aligns with AN_VANTARIS_IBMS-frontend domain API modules (FRONTEND-A4).
+
+    Legacy backend prefix: `/api` (unversioned).
+    Contract paths below are relative to server `/api` unless noted.
+
+    x-ibms-backend-route annotations map contract paths to current Flask routes
+    where they differ (e.g. menu CRUD uses `/system/menus-add` at runtime).
+
+    Do not embed real tokens, DIDs, or secrets in examples.
+
+servers:
+  - url: /api
+    description: Current backend API prefix
+
+tags:
+  - name: System
+    description: System permissions and administration
+  - name: Menu
+    description: Menu and version management (JWT required; permission pending)
+  - name: DID
+    description: DID authentication and credential operations
+  - name: IoT
+    description: IoT device registry, command, and ingest
+  - name: Modeling
+    description: Data modeling and prediction
+
+security:
+  - bearerAuth: []
+
+paths:
+  /system/permissions:
+    get:
+      tags: [System]
+      summary: List system permissions
+      description: JWT required. Maps to GET `/system/permissions` (limit/offset query supported at runtime).
+      operationId: frontendSystemPermissionsList
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 100
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    post:
+      tags: [System]
+      summary: Create system permission
+      description: JWT required. Requires `perm_code` and `description` at runtime.
+      operationId: frontendSystemPermissionsCreate
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for menu routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/permissions/{id}:
+    get:
+      tags: [System]
+      summary: Get system permission by id
+      operationId: frontendSystemPermissionsGet
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ResourceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Permission not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    put:
+      tags: [System]
+      summary: Update system permission
+      description: Runtime uses PUT (no PATCH). Body fields passed through to service layer.
+      operationId: frontendSystemPermissionsUpdate
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ResourceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for menu routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    delete:
+      tags: [System]
+      summary: Delete system permission
+      operationId: frontendSystemPermissionsDelete
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ResourceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for menu routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  # --- System admin subset (entity-types, standard fields/methods) — Flask runtime paths ---
+  /system/entity-types:
+    get:
+      tags: [System]
+      summary: List entity types
+      description: JWT required. Maps to GET `/system/entity-types`.
+      operationId: frontendSystemEntityTypesList
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 100
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    post:
+      tags: [System]
+      summary: Create entity type
+      operationId: frontendSystemEntityTypesCreate
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for system admin routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/entity-types/{type_id}:
+    get:
+      tags: [System]
+      summary: Get entity type by id
+      operationId: frontendSystemEntityTypesGet
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: type_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Entity type not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    put:
+      tags: [System]
+      summary: Update entity type
+      operationId: frontendSystemEntityTypesUpdate
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: type_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for system admin routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    delete:
+      tags: [System]
+      summary: Delete entity type
+      operationId: frontendSystemEntityTypesDelete
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: type_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for system admin routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/entity-types/tree:
+    get:
+      tags: [System]
+      summary: Entity type hierarchy tree
+      operationId: frontendSystemEntityTypesTree
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/list-standard-fields:
+    get:
+      tags: [System]
+      summary: List system standard fields
+      description: |
+        Flask runtime path. Frontend contract alias `/system/standard-fields` (GET) pending adoption.
+      operationId: frontendSystemStandardFieldsList
+      x-ibms-backend-route: GET /system/list-standard-fields
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/list-standard-methods:
+    get:
+      tags: [System]
+      summary: List system standard methods
+      description: |
+        Flask runtime path. Frontend contract alias `/system/standard-methods` (GET) pending adoption.
+      operationId: frontendSystemStandardMethodsList
+      x-ibms-backend-route: GET /system/list-standard-methods
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/versions:
+    get:
+      tags: [Menu]
+      summary: List menu versions
+      description: JWT required. Permission enforcement pending.
+      operationId: frontendMenuVersionsList
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    post:
+      tags: [Menu]
+      summary: Create menu version
+      operationId: frontendMenuVersionsCreate
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for menu routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/versions/default:
+    get:
+      tags: [Menu]
+      summary: Get default menu version
+      description: Runtime backend GET `/system/versions/default`.
+      operationId: frontendMenuVersionsDefault
+      x-ibms-backend-route: GET /system/versions/default
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/versions/{version_id}:
+    put:
+      tags: [Menu]
+      summary: Update menu version (contract path)
+      description: Runtime backend PUT `/system/versions/{version_code}` — path param is version code string.
+      operationId: frontendMenuVersionsUpdate
+      x-ibms-backend-route: PUT /system/versions/{version_code}
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/VersionId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for menu routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    delete:
+      tags: [Menu]
+      summary: Delete menu version (contract path)
+      description: Runtime backend DELETE `/system/versions/{version_code}`.
+      operationId: frontendMenuVersionsDelete
+      x-ibms-backend-route: DELETE /system/versions/{version_code}
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/VersionId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for menu routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/versions/switch/{version_id}:
+    put:
+      tags: [Menu]
+      summary: Switch active menu version
+      description: Runtime backend PUT `/system/versions/switch/{version_code}`.
+      operationId: frontendMenuVersionsSwitch
+      x-ibms-backend-route: PUT /system/versions/switch/{version_code}
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/VersionId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for menu routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/menus:
+    get:
+      tags: [Menu]
+      summary: List menus
+      description: JWT required (MENU-JWT). Maps to backend GET /system/menus.
+      operationId: frontendMenusList
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/menus/{id}:
+    get:
+      tags: [Menu]
+      summary: Menu item detail (contract placeholder)
+      description: |
+        Contract path reserved for frontend menu admin. No dedicated GET-by-id Flask route
+        at runtime — pending exact route verification or derived from tree list.
+      operationId: frontendMenusGetById
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/MenuId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/menus/batch-sort:
+    post:
+      tags: [Menu]
+      summary: Batch sort menu items
+      description: Runtime backend POST `/system/menus/batch-sort`.
+      operationId: frontendMenusBatchSort
+      x-ibms-backend-route: POST /system/menus/batch-sort
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for menu routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/menu:
+    post:
+      tags: [Menu]
+      summary: Create menu item (contract path)
+      description: |
+        Frontend contract path. Runtime backend: POST /system/menus-add
+      operationId: frontendMenuCreate
+      x-ibms-backend-route: POST /system/menus-add
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for menu routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/menu/init-data:
+    get:
+      tags: [Menu]
+      summary: Menu initialization seed data
+      description: Runtime backend GET `/system/menu/init-data`.
+      operationId: frontendMenuInitData
+      x-ibms-backend-route: GET /system/menu/init-data
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/menu/active:
+    get:
+      tags: [Menu]
+      summary: Active version menu config
+      description: Runtime backend GET `/system/menu/active`.
+      operationId: frontendMenuActive
+      x-ibms-backend-route: GET /system/menu/active
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/menu/config/{version_id}:
+    get:
+      tags: [Menu]
+      summary: Menu config for version
+      description: Runtime backend GET `/system/menu/config/{version_code}`.
+      operationId: frontendMenuConfig
+      x-ibms-backend-route: GET /system/menu/config/{version_code}
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/VersionId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/menu/{id}:
+    put:
+      tags: [Menu]
+      summary: Update menu item (contract path)
+      description: Runtime backend PUT /system/menus-update/{id}
+      operationId: frontendMenuUpdate
+      x-ibms-backend-route: PUT /system/menus-update/{id}
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/MenuId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for menu routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    delete:
+      tags: [Menu]
+      summary: Delete menu item (contract path)
+      description: Runtime backend DELETE /system/menus-delete/{id}
+      operationId: frontendMenuDelete
+      x-ibms-backend-route: DELETE /system/menus-delete/{id}
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/MenuId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for menu routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/version/{version_id}/menus:
+    get:
+      tags: [Menu]
+      summary: Version menu bindings (contract path)
+      description: Runtime backend GET /system/version-menus/{version_code}
+      operationId: frontendVersionMenusGet
+      x-ibms-backend-route: GET /system/version-menus/{version_code}
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/VersionId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for menu routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    post:
+      tags: [Menu]
+      summary: Batch bind menus to version (contract path)
+      description: |
+        Contract aggregate write. Runtime aliases:
+        POST `/system/version-menus/{version_code}/batch`,
+        POST `/system/version-menus/{version_code}/incremental`,
+        POST `/system/version-menus/{version_code}/diff` — pending exact operation mapping.
+      operationId: frontendVersionMenusBatch
+      x-ibms-backend-route: POST /system/version-menus/{version_code}/batch
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/VersionId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for menu routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /system/version/{version_id}/menu/{menu_id}:
+    put:
+      tags: [Menu]
+      summary: Update single version-menu binding (contract path)
+      description: |
+        Contract path for per-menu version binding updates. No exact Flask route with this
+        path shape — use batch/incremental runtime routes until verified.
+      operationId: frontendVersionMenuBindingUpdate
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/VersionId'
+        - $ref: '#/components/parameters/MenuId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for menu routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    delete:
+      tags: [Menu]
+      summary: Remove version-menu binding (contract path)
+      description: Contract path — pending exact Flask runtime alias verification.
+      operationId: frontendVersionMenuBindingDelete
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/VersionId'
+        - $ref: '#/components/parameters/MenuId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Authenticated user lacks required system permission. Runtime permission enforcement pending for menu routes if not yet applied.
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /did/login:
+    post:
+      tags: [DID]
+      summary: DID login
+      operationId: frontendDidLogin
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+              description: Draft — challenge/signature fields per runtime
+      responses:
+        '200':
+          description: Returns JWT access token in response body (draft)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TraceableResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+
+  /did/me:
+    get:
+      tags: [DID]
+      summary: Current authenticated DID entity
+      operationId: frontendDidMe
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+
+  /did/entity:
+    post:
+      tags: [DID]
+      summary: Create DID entity
+      operationId: frontendDidEntityCreate
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DidEntityRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /did/vp/generate:
+    post:
+      tags: [DID]
+      summary: Generate verifiable presentation
+      operationId: frontendDidVpGenerate
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /did/vc/reissue:
+    post:
+      tags: [DID]
+      summary: Reissue verifiable credential
+      operationId: frontendDidVcReissue
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DidCredentialRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /did/vc/revoke:
+    post:
+      tags: [DID]
+      summary: Revoke verifiable credential
+      operationId: frontendDidVcRevoke
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /did/challenge:
+    get:
+      tags: [DID]
+      summary: Generate login challenge
+      description: Public at runtime — no JWT. Used for DID challenge-response login.
+      operationId: frontendDidChallenge
+      security: []
+      parameters:
+        - name: length
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 32
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /did/entity/{did}:
+    get:
+      tags: [DID]
+      summary: Get entity by DID
+      description: Public read at runtime — production auth hardening pending.
+      operationId: frontendDidEntityGet
+      security: []
+      parameters:
+        - name: did
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '404':
+          description: Entity not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /did/vc/status:
+    post:
+      tags: [DID]
+      summary: Check verifiable credential status
+      description: Public at runtime — no JWT decorator on Flask route.
+      operationId: frontendDidVcStatus
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /did/vp/verify:
+    post:
+      tags: [DID]
+      summary: Verify verifiable presentation
+      description: Public at runtime — no JWT decorator on Flask route.
+      operationId: frontendDidVpVerify
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /iot/device/register:
+    post:
+      tags: [IoT]
+      summary: Register IoT device
+      operationId: frontendIotDeviceRegister
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /iot/device/{device_did}/command:
+    post:
+      tags: [IoT]
+      summary: Send device command
+      operationId: frontendIotDeviceCommand
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/DeviceDid'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IoTCommandRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /iot/ingest/http:
+    post:
+      tags: [IoT]
+      summary: HTTP ingest endpoint
+      operationId: frontendIotIngestHttp
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IoTIngestRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /iot/standard-fields:
+    get:
+      tags: [IoT]
+      summary: List standard fields
+      operationId: frontendIotStandardFieldsList
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+    post:
+      tags: [IoT]
+      summary: Create standard field
+      operationId: frontendIotStandardFieldsCreate
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /iot/device/did/{device_did}:
+    get:
+      tags: [IoT]
+      summary: Get device by DID
+      description: Public read at runtime — JWT/auth decision pending.
+      operationId: frontendIotDeviceGetByDid
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/DeviceDid'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '404':
+          description: Device not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /iot/device/code/{device_code}:
+    get:
+      tags: [IoT]
+      summary: Get device by code
+      description: Public read at runtime — JWT/auth decision pending.
+      operationId: frontendIotDeviceGetByCode
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/DeviceCode'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '404':
+          description: Device not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /iot/device/code/{device_code}/command:
+    post:
+      tags: [IoT]
+      summary: Send device command by code
+      operationId: frontendIotDeviceCommandByCode
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/DeviceCode'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IoTCommandRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /iot/standard-fields/{field_code}:
+    get:
+      tags: [IoT]
+      summary: Get standard field by code
+      description: Public read at runtime — JWT/auth decision pending.
+      operationId: frontendIotStandardFieldGet
+      security: []
+      parameters:
+        - name: field_code
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /iot/standard-methods:
+    get:
+      tags: [IoT]
+      summary: List standard methods
+      description: Public read at runtime — JWT/auth decision pending.
+      operationId: frontendIotStandardMethodsList
+      security: []
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /iot/standard-methods/{method_code}:
+    get:
+      tags: [IoT]
+      summary: Get standard method by code
+      description: Public read at runtime — JWT/auth decision pending.
+      operationId: frontendIotStandardMethodGet
+      security: []
+      parameters:
+        - name: method_code
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /iot/device/{device_code}/latest:
+    get:
+      tags: [IoT]
+      summary: Get latest device telemetry
+      description: Public read at runtime (SSE fallback polling) — auth decision pending.
+      operationId: frontendIotDeviceLatest
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/DeviceCode'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /iot/device/{device_code}/stream:
+    get:
+      tags: [IoT]
+      summary: Device SSE event stream
+      description: |
+        Server-sent events stream. Public at runtime (no JWT on Flask route).
+        Auth decision pending for production hardening.
+      operationId: frontendIotDeviceStream
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/DeviceCode'
+      responses:
+        '200':
+          description: text/event-stream
+          content:
+            text/event-stream:
+              schema:
+                type: string
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /iot/{device_did}/field-mappings-info:
+    get:
+      tags: [IoT]
+      summary: Get device field mappings
+      description: Public read at runtime — JWT/auth decision pending.
+      operationId: frontendIotFieldMappingsInfo
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/DeviceDid'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '404':
+          description: Device not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /iot/{device_did}/method-mappings-info:
+    get:
+      tags: [IoT]
+      summary: Get device method mappings
+      description: Public read at runtime — JWT/auth decision pending.
+      operationId: frontendIotMethodMappingsInfo
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/DeviceDid'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '404':
+          description: Device not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /modeling/csv/list:
+    get:
+      tags: [Modeling]
+      summary: List modeling CSV files
+      operationId: frontendModelingCsvList
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /modeling/{device_code}/train:
+    post:
+      tags: [Modeling]
+      summary: Train model
+      operationId: frontendModelingTrain
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/DeviceCode'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '202':
+          description: Training accepted
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /modeling/{device_code}/predict:
+    post:
+      tags: [Modeling]
+      summary: Single-point prediction
+      operationId: frontendModelingPredict
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/DeviceCode'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /modeling/{device_code}/predict_future:
+    post:
+      tags: [Modeling]
+      summary: Multi-day forecast
+      operationId: frontendModelingPredictFuture
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/DeviceCode'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+  /modeling/{device_code}/model_info:
+    get:
+      tags: [Modeling]
+      summary: Model metadata
+      operationId: frontendModelingModelInfo
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/DeviceCode'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT from POST /did/login — use placeholder in docs only
+
+  parameters:
+    ResourceId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    MenuId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    VersionId:
+      name: version_id
+      in: path
+      required: true
+      schema:
+        type: string
+    DeviceCode:
+      name: device_code
+      in: path
+      required: true
+      schema:
+        type: string
+    DeviceDid:
+      name: device_did
+      in: path
+      required: true
+      schema:
+        type: string
+
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+      additionalProperties: true
+
+    SuccessResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        data:
+          type: object
+          additionalProperties: true
+      additionalProperties: true
+
+    TraceableResponse:
+      allOf:
+        - $ref: '#/components/schemas/SuccessResponse'
+      description: May correlate with X-Trace-Id in server logs
+
+    DidEntityRequest:
+      type: object
+      additionalProperties: true
+      description: Draft placeholder — see PERMISSION_MATRIX_A2
+
+    DidCredentialRequest:
+      type: object
+      additionalProperties: true
+
+    IoTCommandRequest:
+      type: object
+      required:
+        - method
+      properties:
+        method:
+          type: string
+        params:
+          type: object
+          additionalProperties: true
+      additionalProperties: true
+
+    IoTIngestRequest:
+      type: object
+      required:
+        - device_code
+        - data
+      properties:
+        device_code:
+          type: string
+        data:
+          type: object
+          additionalProperties: true
+      additionalProperties: true
+
+  responses:
+    Success:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SuccessResponse'
+    UnauthorizedError:
+      description: Missing or invalid JWT
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            message: Invalid token
+    ForbiddenError:
+      description: Valid JWT but missing required permission
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            code: 403
+            message: 'Permission denied: requires [modeling:train]'
+    ServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            code: 500
+            message: Internal error

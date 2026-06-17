@@ -1,0 +1,41 @@
+
+{
+    "@context": [
+        "https://www.w3.org/2018/credentials/v1"
+    ],
+    "id": "vc:imbs:e192361dee76",
+    "type": [
+        "VerifiableCredential",
+        "PropertyCredential"
+    ],
+    "issuer": "did:imbs:system:root:2f71181048b0",
+    "issuanceDate": "2026-04-28T07:37:29.397325Z",
+    "expirationDate": "2027-04-28T07:36:58.672474Z",
+    "credentialSubject": {
+        "id": "did:imbs:system:root:property:f121f6d6:0818318eea03",
+        "name": "测试物业",
+        "entity_type": "property",
+        "level": 1,
+        "region": "全园区",
+        "public_key": "0x3779698D179cfeC938b31CEbdc7ED515b6EEDa0D",
+        "permissions": [
+            "device:read",
+            "device:control",
+            "employee:manage"
+        ],
+        "active": true,
+        "created_at": "2026-04-28T15:37:25",
+        "extra": {
+            "parent_did": "did:imbs:system:root:2f71181048b0",
+            "address": "XX路1号",
+            "contact": "123456789"
+        }
+    },
+    "proof": {
+        "type": "EcdsaSecp256k1Signature2019",
+        "created": "2026-04-28T07:37:29.405086Z",
+        "proofPurpose": "assertionMethod",
+        "verificationMethod": "did:imbs:system:root:2f71181048b0#keys-1",
+        "signatureValue": "17b0fea6cd076a4b8f1666ccc29bb151ec9f671507432d150c56f46184232c4970e2fa657ff86cbcd39ebc51d6e0646d66e6f4ef4eefde95fef8213ed70d25b81c"
+    }
+}

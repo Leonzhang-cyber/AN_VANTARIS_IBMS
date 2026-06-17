@@ -1,0 +1,16 @@
+{
+  "packageName": "AN_VANTARIS_IBMS-frontend",
+  "packageRole": "frontend-target",
+  "stage": "SPLIT-B3-skeleton",
+  "canonicalSource": "AN_VANTARIS_IBMS-ibms_front",
+  "runtimeStatus": "not-runnable",
+  "contractsOwner": "contracts",
+  "backendApiOwner": "AN_VANTARIS_IBMS-backend",
+  "migrationPolicy": {
+    "copyRawFrontendWholesale": false,
+    "copySecrets": false,
+    "copyNodeModules": false,
+    "copyDist": false,
+    "copyLargeAssetsWithoutReview": false
+  }
+}

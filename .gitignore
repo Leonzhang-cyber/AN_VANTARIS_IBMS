@@ -1,5 +1,6 @@
 .DS_Store
 __pycache__/
+**/.pytest_cache/
 *.pyc
 *.pyo
 *.pyd
@@ -36,7 +37,12 @@ venv/
 *.zip
 *.tar
 *.tgz
+*.tar.gz
 *.gz
+*.7z
+*.rar
+*.bak
+*.backup
 Files/
 AN_VANTARIS_IBMS-main 2/
 

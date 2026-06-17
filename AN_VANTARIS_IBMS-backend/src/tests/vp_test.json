@@ -1,0 +1,67 @@
+
+{
+    "vp": {
+        "@context": [
+            "https://www.w3.org/2018/credentials/v1"
+        ],
+        "proof": {
+            "challenge": "61138a39d14dc805a6698d9c6ee7b8635bb0b1d9678fd81883b5dff99aedbee2",
+            "created": "2026-04-28T07:40:29.190477Z",
+            "domain": null,
+            "proofPurpose": "authentication",
+            "signatureValue": "9e06ceec15bdfb8afa64ae8cfa3c8eb0808df8bb934d94baed8122d423f223b83067a1c70c1a1da19e0b2936cf7750c3fdc7a78a9eb87ffd1ea9ace4ddf31f4d1c",
+            "signingInput": {
+                "challenge": "61138a39d14dc805a6698d9c6ee7b8635bb0b1d9678fd81883b5dff99aedbee2",
+                "timestamp": 1777362029,
+                "vc_hashes": [
+                    "5930b3a09d56ec131a86a66b0db533d2d49a06184235f5b4e4c00db861a0526b"
+                ]
+            },
+            "type": "EcdsaSecp256k1Signature2019",
+            "verificationMethod": "did:imbs:system:root:property:f121f6d6:0818318eea03#keys-1"
+        },
+        "type": "VerifiablePresentation",
+        "verifiableCredential": [
+            {
+                "@context": [
+                    "https://www.w3.org/2018/credentials/v1"
+                ],
+                "credentialSubject": {
+                    "active": true,
+                    "created_at": "2026-04-28T15:37:25",
+                    "entity_type": "property",
+                    "extra": {
+                        "address": "XX路1号",
+                        "contact": "123456789",
+                        "parent_did": "did:imbs:system:root:2f71181048b0"
+                    },
+                    "id": "did:imbs:system:root:property:f121f6d6:0818318eea03",
+                    "level": 1,
+                    "name": "测试物业",
+                    "permissions": [
+                        "device:read",
+                        "device:control",
+                        "employee:manage"
+                    ],
+                    "public_key": "0x3779698D179cfeC938b31CEbdc7ED515b6EEDa0D",
+                    "region": "全园区"
+                },
+                "expirationDate": "2027-04-28T07:36:58.672474Z",
+                "id": "vc:imbs:e192361dee76",
+                "issuanceDate": "2026-04-28T07:37:29.397325Z",
+                "issuer": "did:imbs:system:root:2f71181048b0",
+                "proof": {
+                    "created": "2026-04-28T07:37:29.405086Z",
+                    "proofPurpose": "assertionMethod",
+                    "signatureValue": "17b0fea6cd076a4b8f1666ccc29bb151ec9f671507432d150c56f46184232c4970e2fa657ff86cbcd39ebc51d6e0646d66e6f4ef4eefde95fef8213ed70d25b81c",
+                    "type": "EcdsaSecp256k1Signature2019",
+                    "verificationMethod": "did:imbs:system:root:2f71181048b0#keys-1"
+                },
+                "type": [
+                    "VerifiableCredential",
+                    "PropertyCredential"
+                ]
+            }
+        ]
+    }
+}

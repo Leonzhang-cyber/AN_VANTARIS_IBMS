@@ -1,0 +1,10 @@
+# macOS / Linux local-smoke install path
+# Requires Python >=3.10 (3.11 recommended). System Python 3.9 will fail on pinned deps.
+#
+#   cd AN_VANTARIS_IBMS-backend
+#   python3.11 -m venv .venv && source .venv/bin/activate
+#   pip install -r requirements-macos-smoke.txt
+#
+# pywin32 is excluded via PEP 508 marker in requirements.txt (win32 only).
+
+-r requirements.txt
