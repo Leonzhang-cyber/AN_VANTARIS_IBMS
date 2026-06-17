@@ -107,6 +107,22 @@ PYTHONPATH=. python src/main.py
 
 Boundary: IBMS only — stop if UFMS content appears. Do not connect to production DB.
 
+**PostgreSQL driver (POSTGRES-DEPS-PREP-1)**
+
+PostgreSQL is the target canonical DB. This task adds the driver only — **runtime still uses MySQL/PyMySQL** until `POSTGRES-CONFIG-ABSTRACTION-1`.
+
+```bash
+# After activating .venv — install new driver (UTF-16LE requirements workaround if needed)
+iconv -f UTF-16LE -t UTF-8 requirements.txt > /tmp/ibms-requirements-utf8.txt
+pip install "psycopg[binary]==3.2.13"   # or pip install -r /tmp/ibms-requirements-utf8.txt
+python -c "import psycopg, pymysql; print('drivers ok')"
+```
+
+- `psycopg[binary]==3.2.13` — PostgreSQL target driver
+- `PyMySQL==1.1.2` — retained for legacy compatibility
+- Do not switch `IBMS_DATABASE_URL` until config abstraction task
+- See `docs/architecture/IBMS_POSTGRES_DEPS_PREP_1.md`
+
 1.  xxxx
 2.  xxxx
 3.  xxxx
