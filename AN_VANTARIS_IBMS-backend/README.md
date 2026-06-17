@@ -133,6 +133,15 @@ psql postgres -c "SELECT version();"
 
 See `docs/architecture/IBMS_POSTGRES_LOCAL_INSTALL_1.md`. No IBMS DB/user created in install task.
 
+**PostgreSQL local smoke result (POSTGRES-LOCAL-SMOKE-EXEC-1)**
+
+Status: **PASS**. Local smoke used `postgresql+psycopg://` with disposable local DB only.
+
+- GET `/api/system/menus`, `/api/system/permissions`, `/api/system/versions` returned 200 with valid dev JWT
+- No production DB or customer data used
+- Smoke DDL is not production migration
+- See `docs/architecture/IBMS_POSTGRES_LOCAL_SMOKE_EXEC_1.md` and `docs/architecture/IBMS_POSTGRES_LOCAL_SMOKE_RESULTS_1.md`
+
 **PostgreSQL driver (POSTGRES-DEPS-PREP-1)**
 
 PostgreSQL is the target canonical DB.
