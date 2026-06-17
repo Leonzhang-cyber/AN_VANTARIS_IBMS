@@ -159,6 +159,19 @@ python -c "import psycopg, pymysql; print('drivers ok')"
 - `PyMySQL==1.1.2` — retained for legacy compatibility
 - See `docs/architecture/IBMS_POSTGRES_DEPS_PREP_1.md`
 
+**PostgreSQL migration framework baseline (POSTGRES-MIGRATION-FRAMEWORK-RECOVERY-1)**
+
+Migration framework baseline is prepared for IBMS PostgreSQL transition.
+
+- Added dependencies: `Flask-Migrate==4.0.7`, `alembic==1.17.2`
+- Baseline files created: `alembic.ini`, `migrations/`
+- Import verification passed: `alembic`, `flask_migrate`
+- No `flask db upgrade`, no `alembic upgrade`, no autogenerate, no production DB
+- See:
+  - `docs/architecture/IBMS_POSTGRES_MIGRATION_FRAMEWORK_1.md`
+  - `docs/security/IBMS_POSTGRES_MIGRATION_FRAMEWORK_1_RISK_REVIEW.md`
+  - `docs/architecture/IBMS_POSTGRES_MIGRATION_FRAMEWORK_RECOVERY_1.md`
+
 1.  xxxx
 2.  xxxx
 3.  xxxx
