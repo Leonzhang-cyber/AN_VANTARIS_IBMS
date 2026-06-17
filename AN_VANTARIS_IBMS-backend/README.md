@@ -135,6 +135,8 @@ See `docs/architecture/IBMS_POSTGRES_LOCAL_INSTALL_1.md`. No IBMS DB/user create
 
 **PostgreSQL local smoke result (POSTGRES-LOCAL-SMOKE-EXEC-1)**
 
+PostgreSQL local smoke passed. PostgreSQL is the canonical target database. Smoke-only DDL is not production migration.
+
 Status: **PASS**. Local smoke used `postgresql+psycopg://` with disposable local DB only.
 
 - GET `/api/system/menus`, `/api/system/permissions`, `/api/system/versions` returned 200 with valid dev JWT
