@@ -72,6 +72,29 @@ rm -f /tmp/ibms-local-smoke-token.txt
 
 Never log or commit the token. Do not inject into browser localStorage.
 
+**Local MySQL smoke (DB-LOCAL-SMOKE-EXEC-A)**
+
+System read APIs (`GET /api/system/menus`, `/permissions`, `/versions`) require a disposable local MySQL instance. This task does **not** install MySQL automatically.
+
+1. Install and start local MySQL on the host (e.g. Homebrew `mysql` or `mysql@8.0`).
+2. Create disposable DB/user with shell-only credentials — use `<LOCAL_SMOKE_DB_PASSWORD>`, never commit.
+3. Apply ORM-aligned smoke DDL — see `docs/architecture/IBMS_DB_LOCAL_SMOKE_MINIMAL_DDL.md`.
+4. Start backend with shell env overrides (no `.env` file):
+
+```bash
+export IBMS_ENV=local-smoke
+export IBMS_DB_HOST=127.0.0.1
+export IBMS_DB_PORT=3306
+export IBMS_DB_NAME=ibms_db
+export IBMS_DB_USER=ibms_user
+export IBMS_DB_PASSWORD='<LOCAL_SMOKE_DB_PASSWORD>'
+PYTHONPATH=. python src/main.py
+```
+
+5. Run GET-only JWT smoke — see `docs/architecture/IBMS_DB_LOCAL_SMOKE_EXEC_A.md`.
+
+Boundary: IBMS only — stop if UFMS content appears. Do not connect to production DB.
+
 1.  xxxx
 2.  xxxx
 3.  xxxx
