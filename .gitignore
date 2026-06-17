@@ -1,0 +1,61 @@
+.DS_Store
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+**/credential*.json
+**/vc_credential.json
+**/secrets/
+**/secrets.*
+node_modules/
+dist/
+build/
+.vite/
+.cache/
+coverage/
+*.log
+logs/
+uploads/
+local_raw_data/
+*.sqlite
+*.db
+venv/
+.venv/
+.idea/
+.vscode/
+
+# Local archives and reference material
+*.zip
+*.tar
+*.tgz
+*.gz
+Files/
+AN_VANTARIS_IBMS-main 2/
+
+# Raw original source packages for split analysis only
+# Do not commit full raw packages directly.
+AN_VANTARIS_IBMS-ibms_backend/
+AN_VANTARIS_IBMS-ibms_front/
+AN_VANTARIS_IBMS-ibms_main/
+
+# Large data / model artifacts
+*.pkl
+*.pickle
+*.joblib
+*.onnx
+*.pt
+*.pth
+*.h5
+*.csv
+*.xlsx
+*.mp4
+*.sql
+*.dump
