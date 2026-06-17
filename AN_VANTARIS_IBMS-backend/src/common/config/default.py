@@ -44,6 +44,16 @@ def _env_bool(name: str, default: bool = False) -> bool:
     return str(value).strip().lower() in ("1", "true", "yes", "on")
 
 
+def normalize_database_uri(url: str) -> str:
+    """Ensure PostgreSQL URLs use the psycopg3 SQLAlchemy driver when needed."""
+    normalized = str(url).strip()
+    if normalized.startswith("postgres://"):
+        return "postgresql+psycopg://" + normalized[len("postgres://") :]
+    if normalized.startswith("postgresql://"):
+        return "postgresql+psycopg://" + normalized[len("postgresql://") :]
+    return normalized
+
+
 def _build_db_config() -> dict:
     database_url = os.getenv("IBMS_DATABASE_URL")
     if database_url is not None and str(database_url).strip():
@@ -60,7 +70,7 @@ def _build_db_config() -> dict:
             "DB_HOST": host,
             "DB_PORT": port,
             "DB_NAME": name,
-            "SQLALCHEMY_DATABASE_URI": url,
+            "SQLALCHEMY_DATABASE_URI": normalize_database_uri(url),
         }
 
     user = _env_str("IBMS_DB_USER", _DEV_DB_USER)

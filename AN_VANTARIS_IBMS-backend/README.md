@@ -107,9 +107,22 @@ PYTHONPATH=. python src/main.py
 
 Boundary: IBMS only — stop if UFMS content appears. Do not connect to production DB.
 
+**PostgreSQL database URI (POSTGRES-CONFIG-ABSTRACTION-1)**
+
+Runtime DB selection is URI-first. Set `IBMS_DATABASE_URL` in shell (no `.env` commit):
+
+```bash
+export IBMS_DATABASE_URL="postgresql+psycopg://ibms_user:<LOCAL_SMOKE_DB_PASSWORD>@127.0.0.1:5432/ibms_db"
+# postgresql:// and postgres:// are normalized to postgresql+psycopg://
+```
+
+If `IBMS_DATABASE_URL` is unset, legacy MySQL fallback (`mysql+pymysql://` via `IBMS_DB_*`) still applies.
+
+See `docs/architecture/IBMS_POSTGRES_CONFIG_ABSTRACTION_1.md`.
+
 **PostgreSQL driver (POSTGRES-DEPS-PREP-1)**
 
-PostgreSQL is the target canonical DB. This task adds the driver only — **runtime still uses MySQL/PyMySQL** until `POSTGRES-CONFIG-ABSTRACTION-1`.
+PostgreSQL is the target canonical DB.
 
 ```bash
 # After activating .venv — install new driver (UTF-16LE requirements workaround if needed)
@@ -120,7 +133,6 @@ python -c "import psycopg, pymysql; print('drivers ok')"
 
 - `psycopg[binary]==3.2.13` — PostgreSQL target driver
 - `PyMySQL==1.1.2` — retained for legacy compatibility
-- Do not switch `IBMS_DATABASE_URL` until config abstraction task
 - See `docs/architecture/IBMS_POSTGRES_DEPS_PREP_1.md`
 
 1.  xxxx
