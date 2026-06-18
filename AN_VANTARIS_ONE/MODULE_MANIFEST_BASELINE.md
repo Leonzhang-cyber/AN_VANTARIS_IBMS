@@ -42,3 +42,10 @@ Each A1 manifest must define:
 ## 5. Current Boundary
 
 A0 manifest does not represent runtime ready status, does not create real modules, and does not modify API/DB/frontend.
+
+## 6. UDOC A1 Realignment
+
+UDOC A1 module manifest draft is established.
+Historical A0 wording `idc-dcim` is realigned to UDOC as the primary module name.
+UDOC remains `runtimeReady: false`.
+UDOC impact remains `none-in-a1-draft` for API, DB, menu, runtime, and schema.

@@ -139,9 +139,17 @@
     },
     {
       "moduleId": "udoc",
+      "moduleName": "UDOC",
       "displayName": "UDOC",
+      "fullName": "Unified Data Operations Center",
+      "chineseName": "全向数据运营中心",
       "moduleType": "business",
-      "status": "pending-a1",
+      "status": "draft-a1",
+      "historicalNames": [
+        "IDC/DCIM",
+        "idc-dcim",
+        "Data Center Operations"
+      ],
       "owns": [
         "data center infrastructure operations context",
         "capacity/power/cooling context",
@@ -167,7 +175,7 @@
       ],
       "traceabilityRequired": true,
       "runtimeReady": false,
-      "nextTask": "UDOC-A1-MODULE-MANIFEST-DRAFT"
+      "nextTask": "UESG-A1-MODULE-MANIFEST-DRAFT"
     },
     {
       "moduleId": "ucde",
@@ -350,12 +358,11 @@
     "Menu/API/DB changes require separate approval."
   ],
   "nextTasks": [
-    "UDOC-A1-MODULE-MANIFEST-DRAFT",
-    "UESG_A1_MODULE_MANIFEST_DRAFT",
-    "UMMS_A1_MODULE_MANIFEST_DRAFT",
+    "UESG-A1-MODULE-MANIFEST-DRAFT",
+    "UMMS-A1-MODULE-MANIFEST-DRAFT",
     "UCORE-A1-MODULE-MANIFEST-DRAFT",
     "ONE-ADAPTER-A1-CONSUMER-CONTRACT-DRAFT",
-    "UCONSOLE_A1_MODULE_STATUS_CONTRACT_DRAFT",
+    "UCONSOLE-A1-MODULE-STATUS-CONTRACT-DRAFT",
     "UCDE-A2-EVIDENCE-CONTRACT-DRAFT"
   ]
 }
