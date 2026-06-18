@@ -6,6 +6,7 @@
 - no backend/frontend migration in A5
 - no DB migration in A5
 - no Edge/Link runtime implementation in A5
+- no runtime rename/package migration in R0 docs-only phase
 
 ## 2. Allowed future migration source
 
@@ -23,3 +24,4 @@
 - no NexusAI direct business DB mutation
 - no Console direct business DB bypass
 - no global rename IBMS to ONE
+- no API path / DB table / frontend route rename in R0

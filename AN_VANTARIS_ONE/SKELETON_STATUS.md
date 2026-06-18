@@ -13,3 +13,5 @@
 Notes:
 
 - ibms-core planned as business module under AN_VANTARIS_Code; no runtime source migrated in A6.
+- R0 rebrand is docs-only; runtime rename/package migration remains not approved.
+- Existing `AN_VANTARIS_IBMS` workspace remains the current implementation base during transition.
