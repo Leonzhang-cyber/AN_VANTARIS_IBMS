@@ -9,8 +9,10 @@ from typing import Any, Dict, List, Optional, Tuple
 from src.reports.reports_audit_store import (
     append_audit_record,
     build_audit_record,
+    get_reports_audit_retention_policy,
     get_audit_record,
     list_audit_records,
+    verify_audit_chain,
 )
 from src.reports.reports_catalog import get_catalog_item, list_catalog
 from src.reports.reports_integrity import (
@@ -153,14 +155,19 @@ class ReportsService:
                 "notes": "Query audit foundation in local JSONL store.",
             },
         )
-        persisted, persist_error = append_audit_record(record)
-        result["audit"]["auditId"] = record["auditId"]
-        result["audit"]["persisted"] = persisted
+        persist_result = append_audit_record(record)
+        result["audit"]["auditId"] = persist_result.get("auditId") or record["auditId"]
+        result["audit"]["persisted"] = bool(persist_result.get("persisted"))
         result["audit"]["storageMode"] = "local-jsonl"
         result["audit"]["permissionDecision"] = permission.get("allowed", True)
         result["audit"]["permissionMode"] = permission.get("permissionMode", "placeholder-allow")
-        if persist_error:
-            result["audit"]["auditPersistError"] = persist_error
+        result["audit"]["auditRecordHash"] = persist_result.get("auditRecordHash")
+        result["audit"]["previousAuditHash"] = persist_result.get("previousAuditHash")
+        result["audit"]["retentionClass"] = "audit-readiness-local"
+        result["audit"]["retentionPolicy"] = "local-jsonl-retain-until-manual-cleanup"
+        result["audit"]["verificationStatus"] = "not-verified"
+        if persist_result.get("error"):
+            result["audit"]["auditPersistError"] = str(persist_result.get("error"))
         return result, None
 
     def build_export_manifest_preview(
@@ -244,42 +251,69 @@ class ReportsService:
                 "notes": "Export manifest audit foundation in local JSONL store.",
             },
         )
-        persisted, persist_error = append_audit_record(record)
-        manifest["auditId"] = record["auditId"]
-        manifest["auditPersisted"] = persisted
+        persist_result = append_audit_record(record)
+        manifest["auditId"] = persist_result.get("auditId") or record["auditId"]
+        manifest["auditPersisted"] = bool(persist_result.get("persisted"))
         manifest["storageMode"] = "local-jsonl"
         manifest["permissionDecision"] = permission.get("allowed", True)
         manifest["permissionMode"] = permission.get("permissionMode", "placeholder-allow")
-        if persist_error:
-            manifest["auditPersistError"] = persist_error
+        manifest["auditRecordHash"] = persist_result.get("auditRecordHash")
+        manifest["previousAuditHash"] = persist_result.get("previousAuditHash")
+        manifest["retentionClass"] = "audit-readiness-local"
+        manifest["retentionPolicy"] = "local-jsonl-retain-until-manual-cleanup"
+        manifest["verificationStatus"] = "not-verified"
+        if persist_result.get("error"):
+            manifest["auditPersistError"] = str(persist_result.get("error"))
         return {"manifest": manifest}, None
 
     def list_audit(
-        self, limit: int = 50, event_type: Optional[str] = None, report_id: Optional[str] = None
+        self,
+        limit: int = 50,
+        event_type: Optional[str] = None,
+        report_id: Optional[str] = None,
+        verification_status: Optional[str] = None,
     ) -> Dict[str, Any]:
         permission = evaluate_report_permission(action="view_audit", report_id=report_id or "*", context={})
-        records: List[Dict[str, Any]] = list_audit_records(
+        records_result = list_audit_records(
             limit=limit,
             event_type=event_type,
             report_id=report_id,
+            verification_status=verification_status,
         )
+        records: List[Dict[str, Any]] = records_result.get("items", [])
         return {
             "items": records,
             "total": len(records),
             "storageMode": "local-jsonl",
+            "readStats": records_result.get("readStats", {}),
             "permissionMode": permission.get("permissionMode", "placeholder-allow"),
             "permissionDecision": permission.get("allowed", True),
         }
 
     def get_audit_detail(self, audit_id: str) -> Tuple[Optional[Dict[str, Any]], Optional[Tuple[int, str]]]:
         permission = evaluate_report_permission(action="view_audit", report_id="*", context={"auditId": audit_id})
-        record = get_audit_record(audit_id)
+        record, read_stats = get_audit_record(audit_id)
         if not record:
             return None, (404, "auditId not found")
         return {
             "item": record,
             "storageMode": "local-jsonl",
+            "readStats": read_stats,
             "permissionMode": permission.get("permissionMode", "placeholder-allow"),
             "permissionDecision": permission.get("allowed", True),
         }, None
+
+    def verify_audit(self, limit: Optional[int] = None) -> Dict[str, Any]:
+        permission = evaluate_report_permission(action="verify_audit", report_id="*", context={"limit": limit})
+        verification = verify_audit_chain(limit=limit)
+        verification["permissionMode"] = permission.get("permissionMode", "placeholder-allow")
+        verification["permissionDecision"] = permission.get("allowed", True)
+        return verification
+
+    def get_audit_retention_policy(self) -> Dict[str, Any]:
+        permission = evaluate_report_permission(action="view_audit", report_id="*", context={"policy": "retention"})
+        policy = get_reports_audit_retention_policy()
+        policy["permissionMode"] = permission.get("permissionMode", "placeholder-allow")
+        policy["permissionDecision"] = permission.get("allowed", True)
+        return policy
 

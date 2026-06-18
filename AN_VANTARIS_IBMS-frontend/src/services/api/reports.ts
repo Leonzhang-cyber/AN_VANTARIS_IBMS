@@ -75,6 +75,11 @@ export interface ReportAuditMetadata {
   permissionDecision?: boolean
   permissionMode?: string
   auditPersistError?: string
+  previousAuditHash?: string
+  auditRecordHash?: string
+  retentionClass?: string
+  retentionPolicy?: string
+  verificationStatus?: string
 }
 
 export interface ReportTraceability {
@@ -118,6 +123,11 @@ export interface ReportExportManifest {
   auditPersistError?: string
   fallbackMode?: boolean
   hashUnavailable?: boolean
+  previousAuditHash?: string
+  auditRecordHash?: string
+  retentionClass?: string
+  retentionPolicy?: string
+  verificationStatus?: string
 }
 
 export interface ReportPermissionDecision {
@@ -150,14 +160,57 @@ export interface ReportAuditRecord {
   certified: boolean
   iec62443Certified: boolean
   storageMode: string
+  previousAuditHash?: string
+  auditRecordHash?: string
+  hashAlgorithm?: string
+  retentionClass?: string
+  retentionPolicy?: string
+  verificationStatus?: string
   tamperEvidenceMode: string
   notes: string
+}
+
+export interface ReportAuditReadStats {
+  totalLines: number
+  validRecords: number
+  corruptedLines: number
+  skippedLines: number
+  storePathMode: string
 }
 
 export interface ReportAuditListResponse {
   items: ReportAuditRecord[]
   total: number
   storageMode: string
+  permissionMode: string
+  permissionDecision: boolean
+  readStats: ReportAuditReadStats
+}
+
+export interface ReportAuditVerificationResult {
+  verified: boolean
+  verificationMode: string
+  totalRecords: number
+  verifiedRecords: number
+  failedRecords: number
+  failures: Array<Record<string, unknown>>
+  certified: boolean
+  iec62443Certified: boolean
+  permissionMode: string
+  permissionDecision: boolean
+  readStats: ReportAuditReadStats
+}
+
+export interface ReportAuditRetentionPolicy {
+  retentionMode: string
+  retentionClass: string
+  defaultRetention: string
+  dbRetentionIntegrated: boolean
+  legalHoldIntegrated: boolean
+  redactionIntegrated: boolean
+  certified: boolean
+  iec62443Certified: boolean
+  notes: string
   permissionMode: string
   permissionDecision: boolean
 }
@@ -168,6 +221,17 @@ function asRecord(value: unknown): Record<string, unknown> {
 
 function asStringArray(value: unknown): string[] {
   return Array.isArray(value) ? value.map((item) => String(item)) : []
+}
+
+function normalizeReadStats(raw: unknown): ReportAuditReadStats {
+  const data = asRecord(raw)
+  return {
+    totalLines: Number(data.totalLines ?? 0),
+    validRecords: Number(data.validRecords ?? 0),
+    corruptedLines: Number(data.corruptedLines ?? 0),
+    skippedLines: Number(data.skippedLines ?? 0),
+    storePathMode: String(data.storePathMode ?? 'local-jsonl'),
+  }
 }
 
 function unwrapData<T>(body: unknown): T {
@@ -259,6 +323,11 @@ function normalizeQueryResult(raw: unknown): QueryReportResult {
               auditRaw.permissionDecision !== undefined ? Boolean(auditRaw.permissionDecision) : undefined,
             permissionMode: auditRaw.permissionMode ? String(auditRaw.permissionMode) : undefined,
             auditPersistError: auditRaw.auditPersistError ? String(auditRaw.auditPersistError) : undefined,
+            previousAuditHash: auditRaw.previousAuditHash ? String(auditRaw.previousAuditHash) : undefined,
+            auditRecordHash: auditRaw.auditRecordHash ? String(auditRaw.auditRecordHash) : undefined,
+            retentionClass: auditRaw.retentionClass ? String(auditRaw.retentionClass) : undefined,
+            retentionPolicy: auditRaw.retentionPolicy ? String(auditRaw.retentionPolicy) : undefined,
+            verificationStatus: auditRaw.verificationStatus ? String(auditRaw.verificationStatus) : undefined,
           }
         : undefined,
     traceability:
@@ -309,6 +378,11 @@ function normalizeExportManifest(raw: unknown): ReportExportManifest {
     auditPersistError: data.auditPersistError ? String(data.auditPersistError) : undefined,
     fallbackMode: data.fallbackMode !== undefined ? Boolean(data.fallbackMode) : undefined,
     hashUnavailable: data.hashUnavailable !== undefined ? Boolean(data.hashUnavailable) : undefined,
+    previousAuditHash: data.previousAuditHash ? String(data.previousAuditHash) : undefined,
+    auditRecordHash: data.auditRecordHash ? String(data.auditRecordHash) : undefined,
+    retentionClass: data.retentionClass ? String(data.retentionClass) : undefined,
+    retentionPolicy: data.retentionPolicy ? String(data.retentionPolicy) : undefined,
+    verificationStatus: data.verificationStatus ? String(data.verificationStatus) : undefined,
   }
 }
 
@@ -339,6 +413,12 @@ function normalizeAuditRecord(raw: unknown): ReportAuditRecord {
     certified: Boolean(data.certified),
     iec62443Certified: Boolean(data.iec62443Certified),
     storageMode: String(data.storageMode ?? 'local-jsonl'),
+    previousAuditHash: data.previousAuditHash ? String(data.previousAuditHash) : undefined,
+    auditRecordHash: data.auditRecordHash ? String(data.auditRecordHash) : undefined,
+    hashAlgorithm: data.hashAlgorithm ? String(data.hashAlgorithm) : undefined,
+    retentionClass: data.retentionClass ? String(data.retentionClass) : undefined,
+    retentionPolicy: data.retentionPolicy ? String(data.retentionPolicy) : undefined,
+    verificationStatus: data.verificationStatus ? String(data.verificationStatus) : undefined,
     tamperEvidenceMode: String(data.tamperEvidenceMode ?? 'hash-only'),
     notes: String(data.notes ?? ''),
   }
@@ -400,6 +480,7 @@ export interface GetReportsAuditParams {
   limit?: number
   eventType?: string
   reportId?: string
+  verificationStatus?: string
 }
 
 export async function getReportsAudit(params: GetReportsAuditParams = {}): Promise<ReportAuditListResponse> {
@@ -412,6 +493,7 @@ export async function getReportsAudit(params: GetReportsAuditParams = {}): Promi
     storageMode: String(body.storageMode ?? 'local-jsonl'),
     permissionMode: String(body.permissionMode ?? 'placeholder-allow'),
     permissionDecision: body.permissionDecision !== undefined ? Boolean(body.permissionDecision) : true,
+    readStats: normalizeReadStats(body.readStats),
   }
 }
 
@@ -421,5 +503,43 @@ export async function getReportsAuditRecord(auditId: string): Promise<ReportAudi
   const body = asRecord(unwrapped)
   const item = body.item ?? unwrapped
   return normalizeAuditRecord(item)
+}
+
+export async function verifyReportsAudit(limit?: number): Promise<ReportAuditVerificationResult> {
+  const { data } = await request.get('/v1/reports/audit/verify', { params: limit ? { limit } : {} })
+  const body = asRecord(unwrapData<unknown>(data))
+  return {
+    verified: Boolean(body.verified),
+    verificationMode: String(body.verificationMode ?? 'local-jsonl-hash-chain'),
+    totalRecords: Number(body.totalRecords ?? 0),
+    verifiedRecords: Number(body.verifiedRecords ?? 0),
+    failedRecords: Number(body.failedRecords ?? 0),
+    failures: Array.isArray(body.failures)
+      ? body.failures.map((item) => asRecord(item))
+      : [],
+    certified: Boolean(body.certified),
+    iec62443Certified: Boolean(body.iec62443Certified),
+    permissionMode: String(body.permissionMode ?? 'placeholder-allow'),
+    permissionDecision: body.permissionDecision !== undefined ? Boolean(body.permissionDecision) : true,
+    readStats: normalizeReadStats(body.readStats),
+  }
+}
+
+export async function getReportsAuditRetentionPolicy(): Promise<ReportAuditRetentionPolicy> {
+  const { data } = await request.get('/v1/reports/audit/retention-policy')
+  const body = asRecord(unwrapData<unknown>(data))
+  return {
+    retentionMode: String(body.retentionMode ?? 'placeholder-local-jsonl'),
+    retentionClass: String(body.retentionClass ?? 'audit-readiness-local'),
+    defaultRetention: String(body.defaultRetention ?? 'manual-cleanup'),
+    dbRetentionIntegrated: Boolean(body.dbRetentionIntegrated),
+    legalHoldIntegrated: Boolean(body.legalHoldIntegrated),
+    redactionIntegrated: Boolean(body.redactionIntegrated),
+    certified: Boolean(body.certified),
+    iec62443Certified: Boolean(body.iec62443Certified),
+    notes: String(body.notes ?? ''),
+    permissionMode: String(body.permissionMode ?? 'placeholder-allow'),
+    permissionDecision: body.permissionDecision !== undefined ? Boolean(body.permissionDecision) : true,
+  }
 }
 

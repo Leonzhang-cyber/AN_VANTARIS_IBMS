@@ -65,7 +65,30 @@ def reports_audit_list():
         limit = 50
     event_type = request.args.get("eventType")
     report_id = request.args.get("reportId")
-    result = _service.list_audit(limit=limit, event_type=event_type, report_id=report_id)
+    verification_status = request.args.get("verificationStatus")
+    result = _service.list_audit(
+        limit=limit,
+        event_type=event_type,
+        report_id=report_id,
+        verification_status=verification_status,
+    )
+    return Result.success(data=result)
+
+
+@api_bp.route("/v1/reports/audit/verify", methods=["GET"])
+def reports_audit_verify():
+    limit = request.args.get("limit")
+    try:
+        parsed_limit = int(limit) if limit is not None else None
+    except (TypeError, ValueError):
+        parsed_limit = None
+    result = _service.verify_audit(limit=parsed_limit)
+    return Result.success(data=result)
+
+
+@api_bp.route("/v1/reports/audit/retention-policy", methods=["GET"])
+def reports_audit_retention_policy():
+    result = _service.get_audit_retention_policy()
     return Result.success(data=result)
 
 

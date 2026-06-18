@@ -4,17 +4,22 @@ import { ElMessage } from 'element-plus'
 import { ApiError } from '@/services/api/errors'
 import {
   buildReportExportManifest,
-  getReportCatalogItem,
   getReportsAudit,
+  getReportsAuditRecord,
+  getReportsAuditRetentionPolicy,
+  getReportCatalogItem,
   getReportsCatalog,
   getReportsHealth,
   queryReport,
   type ReportAuditRecord,
+  type ReportAuditRetentionPolicy,
+  type ReportAuditVerificationResult,
   type ReportExportManifest,
   type QueryReportPayload,
   type QueryReportResult,
   type ReportsCatalogItem,
   type ReportsHealth,
+  verifyReportsAudit,
 } from '@/services/api/reports'
 
 interface QueryFilters {
@@ -77,6 +82,25 @@ const catalogItems = ref<ReportsCatalogItem[]>([])
 const auditRecords = ref<ReportAuditRecord[]>([])
 const auditStorageMode = ref('local-jsonl')
 const auditPermissionMode = ref('placeholder-allow')
+const auditReadStats = ref({
+  totalLines: 0,
+  validRecords: 0,
+  corruptedLines: 0,
+  skippedLines: 0,
+  storePathMode: 'local-jsonl',
+})
+const verifyingAudit = ref(false)
+const auditVerification = ref<ReportAuditVerificationResult | null>(null)
+const auditRetentionPolicy = ref<ReportAuditRetentionPolicy | null>(null)
+const loadingAuditDetail = ref(false)
+const showAuditDetailDrawer = ref(false)
+const selectedAuditDetail = ref<ReportAuditRecord | null>(null)
+
+const auditFilters = reactive({
+  eventType: '',
+  reportId: '',
+  limit: 20,
+})
 const health = ref<ReportsHealth>({
   module: 'reports',
   status: 'unknown',
@@ -192,14 +216,66 @@ async function loadAuditTrail(): Promise<void> {
   loadingAudit.value = true
   auditError.value = ''
   try {
-    const result = await getReportsAudit({ limit: 20 })
+    const result = await getReportsAudit({
+      limit: auditFilters.limit,
+      eventType: auditFilters.eventType || undefined,
+      reportId: auditFilters.reportId || undefined,
+    })
     auditRecords.value = result.items
     auditStorageMode.value = result.storageMode
     auditPermissionMode.value = result.permissionMode
+    auditReadStats.value = result.readStats
   } catch (error) {
     auditError.value = normalizeError(error, 'Audit trail is temporarily unavailable.')
   } finally {
     loadingAudit.value = false
+  }
+}
+
+function sanitizeAuditLimit(value: unknown): number {
+  const parsed = Number(value)
+  if (!Number.isFinite(parsed)) {
+    return 20
+  }
+  return Math.min(Math.max(Math.trunc(parsed), 1), 200)
+}
+
+function refreshAuditTrail(): void {
+  auditFilters.limit = sanitizeAuditLimit(auditFilters.limit)
+  void loadAuditTrail()
+}
+
+async function verifyAuditChainNow(): Promise<void> {
+  verifyingAudit.value = true
+  try {
+    auditVerification.value = await verifyReportsAudit(auditFilters.limit)
+    ElMessage.success(auditVerification.value.verified ? 'Audit chain verified.' : 'Audit chain verification found issues.')
+    void loadAuditTrail()
+  } catch (error) {
+    auditError.value = normalizeError(error, 'Audit verification is temporarily unavailable.')
+  } finally {
+    verifyingAudit.value = false
+  }
+}
+
+async function loadRetentionPolicy(): Promise<void> {
+  try {
+    auditRetentionPolicy.value = await getReportsAuditRetentionPolicy()
+  } catch (error) {
+    auditError.value = normalizeError(error, 'Retention policy API is temporarily unavailable.')
+  }
+}
+
+async function openAuditDetail(row: ReportAuditRecord): Promise<void> {
+  showAuditDetailDrawer.value = true
+  loadingAuditDetail.value = true
+  selectedAuditDetail.value = row
+  try {
+    selectedAuditDetail.value = await getReportsAuditRecord(row.auditId)
+  } catch (error) {
+    auditError.value = normalizeError(error, 'Failed to load audit detail.')
+  } finally {
+    loadingAuditDetail.value = false
   }
 }
 
@@ -438,17 +514,17 @@ async function runQuery(): Promise<void> {
   try {
     if (fallbackMode.value) {
       queryResult.value = buildLocalFallbackQueryResult(payload)
-      void loadAuditTrail()
+      refreshAuditTrail()
       return
     }
     queryResult.value = await queryReport(payload)
-    void loadAuditTrail()
+    refreshAuditTrail()
   } catch (error) {
     const message = normalizeError(error, 'Failed to query report.')
     if (apiUnavailable.value) {
       queryResult.value = buildLocalFallbackQueryResult(payload)
       queryError.value = `${message} Switched to fallback mock mode.`
-      void loadAuditTrail()
+      refreshAuditTrail()
     } else {
       queryError.value = message
       queryResult.value = null
@@ -730,7 +806,7 @@ async function exportCurrentResultCsv(): Promise<void> {
 
     exportManifest.value = manifest
     downloadJson(buildManifestFilename(reportId), manifest)
-    void loadAuditTrail()
+    refreshAuditTrail()
     ElMessage.success('CSV and manifest exported.')
   } catch {
     ElMessage.error('CSV or manifest export failed.')
@@ -743,6 +819,7 @@ onMounted(() => {
   void loadHealth()
   void loadCatalog()
   void loadAuditTrail()
+  void loadRetentionPolicy()
 })
 </script>
 
@@ -1158,7 +1235,7 @@ onMounted(() => {
         show-icon
         :closable="false"
         title="Local JSONL audit store is an audit readiness foundation."
-        description="It is not a formal certified evidence protocol or certification proof."
+        description="Local hash-chain verification supports audit readiness. It is not a formal certified evidence protocol or certification proof."
         class="block-space"
       />
       <el-alert
@@ -1171,15 +1248,75 @@ onMounted(() => {
       />
       <el-skeleton v-if="loadingAudit" :rows="3" animated />
       <template v-else>
-        <el-descriptions :column="2" border class="block-space">
+        <div class="audit-filter-row block-space">
+          <el-select v-model="auditFilters.eventType" placeholder="Filter Event Type" clearable class="audit-filter-input">
+            <el-option label="report.query" value="report.query" />
+            <el-option label="report.export_manifest" value="report.export_manifest" />
+          </el-select>
+          <el-input v-model="auditFilters.reportId" placeholder="Filter Report ID" clearable class="audit-filter-input" />
+          <el-input-number v-model="auditFilters.limit" :min="1" :max="200" controls-position="right" />
+          <el-button plain @click="refreshAuditTrail">Refresh Audit</el-button>
+          <el-button type="primary" plain :loading="verifyingAudit" @click="verifyAuditChainNow">
+            Verify Audit Chain
+          </el-button>
+        </div>
+
+        <el-descriptions :column="3" border class="block-space">
           <el-descriptions-item label="storageMode">{{ auditStorageMode }}</el-descriptions-item>
           <el-descriptions-item label="permissionMode">{{ auditPermissionMode }}</el-descriptions-item>
+          <el-descriptions-item label="verificationStatus">
+            {{ auditVerification?.verified === false ? 'failed' : auditVerification?.verified ? 'verified' : 'not-run' }}
+          </el-descriptions-item>
+          <el-descriptions-item label="totalLines">{{ auditReadStats.totalLines }}</el-descriptions-item>
+          <el-descriptions-item label="validRecords">{{ auditReadStats.validRecords }}</el-descriptions-item>
+          <el-descriptions-item label="corruptedLines">{{ auditReadStats.corruptedLines }}</el-descriptions-item>
+          <el-descriptions-item label="skippedLines">{{ auditReadStats.skippedLines }}</el-descriptions-item>
+          <el-descriptions-item label="storePathMode">{{ auditReadStats.storePathMode }}</el-descriptions-item>
+          <el-descriptions-item label="retentionClass">
+            {{ auditRetentionPolicy?.retentionClass ?? 'audit-readiness-local' }}
+          </el-descriptions-item>
+          <el-descriptions-item label="retentionPolicy" :span="2">
+            {{ auditRetentionPolicy?.defaultRetention ?? 'manual-cleanup' }}
+          </el-descriptions-item>
         </el-descriptions>
+
+        <el-card v-if="auditVerification" shadow="never" class="block-space">
+          <template #header>Audit Verification</template>
+          <el-descriptions :column="3" border>
+            <el-descriptions-item label="verified">{{ auditVerification.verified }}</el-descriptions-item>
+            <el-descriptions-item label="verificationMode">{{ auditVerification.verificationMode }}</el-descriptions-item>
+            <el-descriptions-item label="failedRecords">{{ auditVerification.failedRecords }}</el-descriptions-item>
+          </el-descriptions>
+        </el-card>
+
+        <el-card v-if="auditRetentionPolicy" shadow="never" class="block-space">
+          <template #header>Retention Policy</template>
+          <el-descriptions :column="2" border>
+            <el-descriptions-item label="retentionMode">{{ auditRetentionPolicy.retentionMode }}</el-descriptions-item>
+            <el-descriptions-item label="defaultRetention">{{ auditRetentionPolicy.defaultRetention }}</el-descriptions-item>
+            <el-descriptions-item label="dbRetentionIntegrated">
+              {{ auditRetentionPolicy.dbRetentionIntegrated }}
+            </el-descriptions-item>
+            <el-descriptions-item label="legalHoldIntegrated">
+              {{ auditRetentionPolicy.legalHoldIntegrated }}
+            </el-descriptions-item>
+            <el-descriptions-item label="redactionIntegrated">
+              {{ auditRetentionPolicy.redactionIntegrated }}
+            </el-descriptions-item>
+            <el-descriptions-item label="notes">{{ auditRetentionPolicy.notes }}</el-descriptions-item>
+          </el-descriptions>
+        </el-card>
         <el-empty
           v-if="auditRecords.length === 0"
           description="No audit records found yet. Run query or export manifest to create records."
         />
-        <el-table v-else :data="auditRecords" row-key="auditId" empty-text="No audit records">
+        <el-table
+          v-else
+          :data="auditRecords"
+          row-key="auditId"
+          empty-text="No audit records"
+          @row-click="openAuditDetail"
+        >
           <el-table-column prop="auditEventType" label="Event" min-width="170" />
           <el-table-column prop="reportId" label="Report" min-width="150" />
           <el-table-column prop="queryId" label="Query ID" min-width="230" show-overflow-tooltip />
@@ -1190,6 +1327,7 @@ onMounted(() => {
           <el-table-column prop="persistedAt" label="persistedAt" min-width="210" />
           <el-table-column prop="storageMode" label="storageMode" min-width="130" />
           <el-table-column prop="permissionMode" label="permissionMode" min-width="150" />
+          <el-table-column prop="verificationStatus" label="verificationStatus" min-width="150" />
           <el-table-column label="certified" min-width="100">
             <template #default="{ row }">
               {{ row.certified }}
@@ -1203,6 +1341,38 @@ onMounted(() => {
         </el-table>
       </template>
     </el-card>
+
+    <el-drawer v-model="showAuditDetailDrawer" title="Audit Detail" size="45%">
+      <el-skeleton v-if="loadingAuditDetail" :rows="8" animated />
+      <el-empty v-else-if="!selectedAuditDetail" description="No audit detail selected." />
+      <el-descriptions v-else :column="1" border>
+        <el-descriptions-item label="auditId">{{ selectedAuditDetail.auditId }}</el-descriptions-item>
+        <el-descriptions-item label="auditEventType">{{ selectedAuditDetail.auditEventType }}</el-descriptions-item>
+        <el-descriptions-item label="reportId">{{ selectedAuditDetail.reportId }}</el-descriptions-item>
+        <el-descriptions-item label="queryId">{{ selectedAuditDetail.queryId }}</el-descriptions-item>
+        <el-descriptions-item label="exportId">{{ selectedAuditDetail.exportId || '-' }}</el-descriptions-item>
+        <el-descriptions-item label="queryHash">{{ selectedAuditDetail.queryHash }}</el-descriptions-item>
+        <el-descriptions-item label="payloadHash">{{ selectedAuditDetail.payloadHash }}</el-descriptions-item>
+        <el-descriptions-item label="exportHash">{{ selectedAuditDetail.exportHash || '-' }}</el-descriptions-item>
+        <el-descriptions-item label="previousAuditHash">
+          {{ selectedAuditDetail.previousAuditHash || '-' }}
+        </el-descriptions-item>
+        <el-descriptions-item label="auditRecordHash">
+          {{ selectedAuditDetail.auditRecordHash || '-' }}
+        </el-descriptions-item>
+        <el-descriptions-item label="storageMode">{{ selectedAuditDetail.storageMode }}</el-descriptions-item>
+        <el-descriptions-item label="retentionClass">
+          {{ selectedAuditDetail.retentionClass || 'audit-readiness-local' }}
+        </el-descriptions-item>
+        <el-descriptions-item label="retentionPolicy">
+          {{ selectedAuditDetail.retentionPolicy || 'local-jsonl-retain-until-manual-cleanup' }}
+        </el-descriptions-item>
+        <el-descriptions-item label="permissionMode">{{ selectedAuditDetail.permissionMode }}</el-descriptions-item>
+        <el-descriptions-item label="certified">{{ selectedAuditDetail.certified }}</el-descriptions-item>
+        <el-descriptions-item label="iec62443Certified">{{ selectedAuditDetail.iec62443Certified }}</el-descriptions-item>
+        <el-descriptions-item label="notes">{{ selectedAuditDetail.notes }}</el-descriptions-item>
+      </el-descriptions>
+    </el-drawer>
   </div>
 </template>
 
@@ -1254,6 +1424,17 @@ onMounted(() => {
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
+}
+
+.audit-filter-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.audit-filter-input {
+  width: 220px;
 }
 
 :deep(.catalog-row-selected) {

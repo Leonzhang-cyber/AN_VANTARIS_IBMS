@@ -48,6 +48,9 @@ class TestReportsAPI(unittest.TestCase):
         self.assertEqual(payload["data"]["audit"]["auditEventType"], "report.query")
         self.assertIn("auditId", payload["data"]["audit"])
         self.assertIn("permissionMode", payload["data"]["audit"])
+        self.assertIn("auditRecordHash", payload["data"]["audit"])
+        self.assertIn("previousAuditHash", payload["data"]["audit"])
+        self.assertIn("retentionClass", payload["data"]["audit"])
         self.assertIn("traceability", payload["data"])
 
     def test_query_invalid_report_id(self):
@@ -80,6 +83,8 @@ class TestReportsAPI(unittest.TestCase):
         self.assertIn("payloadHash", manifest)
         self.assertIn("auditId", manifest)
         self.assertIn("permissionMode", manifest)
+        self.assertIn("auditRecordHash", manifest)
+        self.assertIn("retentionPolicy", manifest)
         self.assertEqual(manifest["certified"], False)
         self.assertEqual(manifest["iec62443Certified"], False)
 
@@ -105,10 +110,36 @@ class TestReportsAPI(unittest.TestCase):
         payload = response.get_json()
         self.assertIn("items", payload["data"])
         self.assertIn("permissionMode", payload["data"])
+        self.assertIn("readStats", payload["data"])
 
     def test_audit_detail_not_found(self):
         response = self.client.get("/api/v1/reports/audit/not-found")
         self.assertEqual(response.status_code, 404)
+
+    def test_audit_verify_endpoint(self):
+        self.client.post(
+            "/api/v1/reports/query",
+            json={"reportId": "incident-summary", "limit": 1, "filters": {"moduleId": "source-reference"}},
+        )
+        self.client.post(
+            "/api/v1/reports/query",
+            json={"reportId": "event-trend", "limit": 1, "filters": {"moduleId": "source-reference"}},
+        )
+        response = self.client.get("/api/v1/reports/audit/verify")
+        self.assertEqual(response.status_code, 200)
+        payload = response.get_json()
+        self.assertIn("verified", payload["data"])
+        self.assertIn("verificationMode", payload["data"])
+        self.assertEqual(payload["data"]["certified"], False)
+        self.assertEqual(payload["data"]["iec62443Certified"], False)
+
+    def test_audit_retention_policy_endpoint(self):
+        response = self.client.get("/api/v1/reports/audit/retention-policy")
+        self.assertEqual(response.status_code, 200)
+        payload = response.get_json()
+        self.assertEqual(payload["data"]["retentionMode"], "placeholder-local-jsonl")
+        self.assertEqual(payload["data"]["certified"], False)
+        self.assertEqual(payload["data"]["iec62443Certified"], False)
 
 
 if __name__ == "__main__":
