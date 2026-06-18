@@ -15,13 +15,12 @@ This layer is consumed by VANTARIS ONE through approved boundaries and is not mo
 
 ## 3. Platform Layer
 
-- ONE Adapter
 - UConsole
 - Reports
 - Analytics
 - Nexus AI Consumer
 
-Platform layer provides status, integration, reporting, and analysis visibility while avoiding business-domain ownership.
+Platform layer provides status, reporting, analytics, shared AI service capability, and governance visibility while avoiding business-domain ownership.
 
 ## 4. Unified Business Modules
 
@@ -31,9 +30,20 @@ Platform layer provides status, integration, reporting, and analysis visibility 
 - UCDE
 - UDOC
 
-Business modules own domain context and consume shared/foundation outputs through approved adapter/contracts boundaries.
+Business modules own domain context and consume standardized shared/foundation outputs through governance and module manifest boundaries.
 
-## 5. Runtime Boundary
+## 5. Integration Ingress And Delivery Boundary
+
+- integration ingress is handled by EDGE Fleet
+- secure delivery is handled by LINK
+- Shared Foundation includes Contracts, EDGE, LINK, and DB references
+- ONE Adapter is removed from primary platform role and retained only as historical/deprecated record
+
+## 6. Nexus AI Shared Service Note
+
+Nexus AI is a shared service for all core modules, including UFMS.
+
+## 7. Runtime Boundary
 
 This model is architecture-only and does not create runtime implementations.
 

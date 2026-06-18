@@ -1,5 +1,9 @@
 # ONE Adapter A2 Foundation Consumer Gate Summary
 
+> Cancellation notice: ONE Adapter has been cancelled as an active module and this file is retained for historical traceability only.
+> ONE Adapter is no longer an active module, not a primary platform module, and not a next implementation gate.
+> Functions are reallocated to EDGE/LINK/Contracts/DB/UCDE/UConsole/governance.
+
 ## 1. Current Baseline Commit
 
 - baseline commit: `00c8469`

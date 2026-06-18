@@ -6,8 +6,18 @@
   "chineseName": "共享基础消费适配边界",
   "moduleType": "platform-module",
   "manifestVersion": "A2-draft",
-  "status": "draft-a2",
+  "status": "cancelled-a1",
+  "deprecated": true,
+  "cancelled": true,
   "runtimeReady": false,
+  "implementationAuthorized": false,
+  "runtimeImplementationAuthorized": false,
+  "apiImplementationAuthorized": false,
+  "dbImplementationAuthorized": false,
+  "schemaPromotionAuthorized": false,
+  "contractsPromotionAuthorized": false,
+  "cancellationReason": "ONE Adapter module cancelled; functions reassigned to correct system layers.",
+  "supersededBy": "EDGE-FLEET-LINK-DIRECT-CONSUMPTION-MODEL",
   "scope": {
     "primaryPurpose": "Define docs-level consumer boundary and module-to-foundation reference routing for VANTARIS ONE platform and business modules.",
     "docsOnly": true,
@@ -119,5 +129,15 @@
     "runtimeImplementationAuthorized": false,
     "nextTask": "UCDE-A3-FORMAL-CONTRACT-PROMOTION-GATE"
   },
-  "nextTask": "UCDE-A3-FORMAL-CONTRACT-PROMOTION-GATE"
+  "functionReallocation": {
+    "consumerBoundary": "governance/module-manifest/uconsole",
+    "contractRouting": "contracts/link",
+    "objectMapping": "edge/contracts",
+    "identityPreservation": "edge/link/ucde/db",
+    "traceabilityPreservation": "link/ucde/db",
+    "externalIngress": "edge-fleet",
+    "deliveryReference": "link",
+    "evidenceLinkage": "ucde"
+  },
+  "nextTask": null
 }

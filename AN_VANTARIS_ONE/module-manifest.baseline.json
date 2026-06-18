@@ -13,7 +13,9 @@
       "fullName": "VANTARIS ONE Shared Foundation Consumer Adapter",
       "chineseName": "共享基础消费适配边界",
       "moduleType": "platform",
-      "status": "draft-a2",
+      "status": "cancelled-a1",
+      "deprecated": true,
+      "cancelled": true,
       "owns": [
         "Shared Foundation consumption boundary",
         "contract/version validation",
@@ -49,7 +51,9 @@
       "schemaPromotionAuthorized": false,
       "contractsPromotionAuthorized": false,
       "runtimeImplementationAuthorized": false,
-      "nextTask": "UCDE-A3-FORMAL-CONTRACT-PROMOTION-GATE"
+      "deprecatedReason": "Cancelled as standalone module; responsibilities reallocated to EDGE, LINK, Contracts, DB, UCDE, UConsole, and governance rules.",
+      "supersededBy": "EDGE-FLEET-LINK-DIRECT-CONSUMPTION-MODEL",
+      "nextTask": null
     },
     {
       "moduleId": "ucore",
@@ -422,12 +426,12 @@
     "No Link runtime in ONE.",
     "No private Contracts fork in ONE.",
     "No UFMS runtime import.",
-    "All modules consume through approved adapter/contracts.",
+    "All modules consume through approved governance/contracts/link boundaries.",
     "Runtime implementation requires separate A1 approval.",
     "Menu/API/DB changes require separate approval."
   ],
   "nextTasks": [
-    "UCDE-A5-CONTRACT-CANDIDATE-SPEC-DRAFT"
+    "EDGE-FLEET-A1-CONSUMPTION-MODEL-DRAFT"
   ],
   "readinessReview": {
     "reviewId": "U-MODULES-A2-READINESS-REVIEW",
@@ -437,7 +441,7 @@
     "dbReady": false,
     "schemaReady": false,
     "contractsReady": false,
-    "nextTask": "UCDE-A5-CONTRACT-CANDIDATE-SPEC-DRAFT"
+    "nextTask": "EDGE-FLEET-A1-CONSUMPTION-MODEL-DRAFT"
   },
   "implementationGatePlan": {
     "planId": "U-MODULES-A3-IMPLEMENTATION-GATE-PLAN",
@@ -448,6 +452,6 @@
     "schemaPromotionAuthorized": false,
     "contractsPromotionAuthorized": false,
     "frontendImplementationAuthorized": false,
-    "nextTask": "UCDE-A5-CONTRACT-CANDIDATE-SPEC-DRAFT"
+    "nextTask": "EDGE-FLEET-A1-CONSUMPTION-MODEL-DRAFT"
   }
 }

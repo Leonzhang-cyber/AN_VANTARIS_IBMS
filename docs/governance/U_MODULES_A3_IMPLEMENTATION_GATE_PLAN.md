@@ -28,11 +28,17 @@ Define a controlled implementation gate planning model for VANTARIS ONE U module
 
 ## 5. Implementation Gate Sequence
 
-### Gate 1: ONE-ADAPTER-A2-FOUNDATION-CONSUMER-GATE
+### Gate 1: EDGE-FLEET-A1-CONSUMPTION-MODEL-DRAFT
 
-- purpose: define formal consumer-boundary design entry plan for ONE Adapter.
-- limit: no EDGE/LINK/DB/CONTRACTS modifications.
-- output: interface-boundary design plan only.
+- purpose: define formal direct consumption topology planning for EDGE Fleet -> LINK -> Shared Foundation outputs -> VANTARIS ONE modules.
+- limit: no EDGE/LINK/DB/CONTRACTS source modifications.
+- output: edge-fleet direct consumption model plan only.
+
+### Historical Gate Note: ONE-ADAPTER-A2-FOUNDATION-CONSUMER-GATE (cancelled/superseded)
+
+- status: cancelled/superseded by ONE-ADAPTER-A1 cancellation decision.
+- purpose: retained only as historical decision trace.
+- active sequence impact: removed from primary active gate path.
 
 ### Gate 2: UCDE-A3-FORMAL-CONTRACT-PROMOTION-GATE
 
@@ -93,4 +99,4 @@ Define a controlled implementation gate planning model for VANTARIS ONE U module
 
 ## 11. Recommended First Implementation Gate
 
-`ONE-ADAPTER-A2-FOUNDATION-CONSUMER-GATE`
+`EDGE-FLEET-A1-CONSUMPTION-MODEL-DRAFT`

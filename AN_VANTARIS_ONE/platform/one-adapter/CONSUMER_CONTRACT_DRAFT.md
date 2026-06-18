@@ -1,5 +1,9 @@
 # ONE Adapter Consumer Contract Draft
 
+> Cancellation notice: ONE Adapter has been cancelled as an active module and this file is retained for historical traceability only.
+> ONE Adapter is no longer an active module, not a primary platform module, and not a next implementation gate.
+> Functions are reallocated to EDGE/LINK/Contracts/DB/UCDE/UConsole/governance.
+
 ## 1. Purpose
 
 This document defines the ONE Adapter A1/A2 consumer contract draft as a docs-level boundary.

@@ -42,6 +42,7 @@ Completed stages:
 - ONE-ADAPTER-A2-FOUNDATION-CONSUMER-GATE — current task
 - UCDE-A3-FORMAL-CONTRACT-PROMOTION-GATE — current task
 - UCDE-A4-FORMAL-CONTRACT-PROMOTION-PLAN — current task
+- ONE-ADAPTER-A1-CANCEL-AND-FUNCTION-REALLOCATION — current task
 
 ## Current Allowed Work
 
@@ -62,7 +63,7 @@ Completed stages:
 
 ## Next Recommended Task
 
-- UCDE-A5-CONTRACT-CANDIDATE-SPEC-DRAFT
+- EDGE-FLEET-A1-CONSUMPTION-MODEL-DRAFT
 
 ## Historical Name Mapping
 
@@ -108,3 +109,10 @@ Contract/schema promotion remains blocked unless separately authorized.
 Direct Foundation modification remains blocked.
 ONE Adapter implementation remains blocked unless separately authorized.
 Formal contract creation remains blocked.
+ONE Adapter is cancelled as module and retained only as deprecated historical docs.
+consumer boundary responsibility is reallocated to governance/module manifest/UConsole.
+contract routing responsibility is reallocated to Contracts + LINK.
+object mapping responsibility is reallocated to EDGE + Contracts.
+identity preservation responsibility is reallocated to EDGE + LINK + UCDE + DB.
+traceability preservation responsibility is reallocated to LINK + UCDE + DB.
+external ingress responsibility is reallocated to EDGE Fleet.

@@ -6,7 +6,7 @@ This document defines the current A0 module manifest baseline for VANTARIS ONE a
 
 ## 2. Current Modules
 
-- ONE Adapter
+- ONE Adapter (cancelled-a1, historical/deprecated)
 - UCore
 - UMMS
 - UESG
@@ -107,3 +107,10 @@ UCDE-A4 formal contract promotion plan is completed as docs-level planning only.
 Promotion is not executed in this task.
 Formal contract/schema/OpenAPI/runtime remain blocked.
 Next task is UCDE-A5-CONTRACT-CANDIDATE-SPEC-DRAFT.
+
+## 15. ONE Adapter A1 Cancellation And Function Reallocation
+
+ONE Adapter is cancelled as a standalone active module and is no longer a primary platform module.
+ONE Adapter is retained only as historical/deprecated documentation in this task.
+Responsibilities are reallocated to EDGE/LINK/Contracts/DB/UCDE/UConsole/governance rules.
+No runtime/API/DB/schema/contracts implementation is performed in this cancellation task.

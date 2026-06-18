@@ -2,9 +2,10 @@
 
 1. A3 is gate planning only.
 2. No runtime/API/DB/schema/contracts/frontend/backend changes are included.
-3. Implementation must start with ONE Adapter gate.
-4. UCDE formal contract promotion requires separate authorization.
-5. UConsole API design requires separate authorization.
-6. Business module runtime must not start until platform gates are approved.
+3. Original ONE Adapter gate is cancelled/superseded and retained as historical record only.
+4. Active implementation sequence now starts with EDGE-FLEET-A1-CONSUMPTION-MODEL-DRAFT.
+5. UCDE formal contract promotion requires separate authorization.
+6. UConsole API design requires separate authorization.
+7. Business module runtime must not start until platform gates are approved.
 
-Next recommended task: ONE-ADAPTER-A2-FOUNDATION-CONSUMER-GATE.
+Next recommended task: EDGE-FLEET-A1-CONSUMPTION-MODEL-DRAFT.

@@ -11,15 +11,16 @@
 
 ## 3. A3 Gate Sequence
 
-1. ONE-ADAPTER-A2-FOUNDATION-CONSUMER-GATE
-2. UCDE-A3-FORMAL-CONTRACT-PROMOTION-GATE
-3. UCONSOLE-A2-MODULE-STATUS-API-GATE
-4. UCORE-A2-OPERATION-COORDINATION-GATE
-5. UMMS/UESG/UDOC business module gates
+1. EDGE-FLEET-A1-CONSUMPTION-MODEL-DRAFT
+2. UCDE-A3-FORMAL-CONTRACT-PROMOTION-GATE (deferred in active sequence)
+3. UCONSOLE-A2-MODULE-STATUS-API-GATE (deferred in active sequence)
+4. UCORE-A2-OPERATION-COORDINATION-GATE (deferred in active sequence)
+5. UMMS/UESG/UDOC business module gates (deferred in active sequence)
+H. ONE-ADAPTER-A2-FOUNDATION-CONSUMER-GATE (cancelled/superseded historical gate)
 
 ## 4. First Recommended Gate
 
-- ONE-ADAPTER-A2-FOUNDATION-CONSUMER-GATE
+- EDGE-FLEET-A1-CONSUMPTION-MODEL-DRAFT
 
 ## 5. Blocked Work List
 
@@ -42,13 +43,14 @@
 
 | Module | Gate | Status |
 | --- | --- | --- |
-| ONE Adapter | Gate 1 | next |
-| UCDE | Gate 2 | formal contract promotion later |
-| UConsole | Gate 3 | API design later |
-| UCore | Gate 4 | coordination design later |
-| UMMS | Gate 5 | later |
-| UESG | Gate 5 | later |
-| UDOC | Gate 5 | later |
+| ONE Adapter | historical | cancelled/superseded |
+| EDGE Fleet Direct Consumption | Gate 1 | next |
+| UCDE | Gate 2 | deferred |
+| UConsole | Gate 3 | deferred |
+| UCore | Gate 4 | deferred |
+| UMMS | Gate 5 | deferred |
+| UESG | Gate 5 | deferred |
+| UDOC | Gate 5 | deferred |
 | Reports | future | pending |
 | Analytics | future | pending |
 | Nexus AI Consumer | future | pending |
