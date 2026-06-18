@@ -10,6 +10,7 @@ class Config:
 
     system_did = "did:imbs:system:root:e75d57e76dc8"
     # system_did_secret = "0xa1eeD703B79f2548eaa1E591370d19c67E561D9e"
+
     system_did_public_key = "0xdA9497EAFF812aF112F26FD162d8e2879e886477"
     system_did_private_key = "18466913ccc119f03f5a5d4a0feebc60170b95c2e1610e85618d046697b42ba0"
 
