@@ -39,6 +39,7 @@ Completed stages:
 - UCDE-A2-EVIDENCE-CONTRACT-DRAFT — current task
 - U-MODULES-A2-READINESS-REVIEW — current task
 - U-MODULES-A3-IMPLEMENTATION-GATE-PLAN — current task
+- ONE-ADAPTER-A2-FOUNDATION-CONSUMER-GATE — current task
 
 ## Current Allowed Work
 
@@ -59,7 +60,7 @@ Completed stages:
 
 ## Next Recommended Task
 
-- ONE-ADAPTER-A2-FOUNDATION-CONSUMER-GATE
+- UCDE-A3-FORMAL-CONTRACT-PROMOTION-GATE
 
 ## Historical Name Mapping
 
@@ -102,3 +103,5 @@ VANTARIS ONE module naming and layer model is realigned to U-series names: UCore
 Promotion from docs-level planning to implementation requires explicit approval in a separate authorized task.
 Direct runtime implementation remains blocked after A3.
 Contract/schema promotion remains blocked unless separately authorized.
+Direct Foundation modification remains blocked.
+ONE Adapter implementation remains blocked unless separately authorized.

@@ -13,7 +13,7 @@
       "fullName": "VANTARIS ONE Shared Foundation Consumer Adapter",
       "chineseName": "共享基础消费适配边界",
       "moduleType": "platform",
-      "status": "draft-a1",
+      "status": "draft-a2",
       "owns": [
         "Shared Foundation consumption boundary",
         "contract/version validation",
@@ -43,7 +43,13 @@
       ],
       "traceabilityRequired": true,
       "runtimeReady": false,
-      "nextTask": "UCONSOLE-A1-MODULE-STATUS-CONTRACT-DRAFT"
+      "implementationAuthorized": false,
+      "apiImplementationAuthorized": false,
+      "dbImplementationAuthorized": false,
+      "schemaPromotionAuthorized": false,
+      "contractsPromotionAuthorized": false,
+      "runtimeImplementationAuthorized": false,
+      "nextTask": "UCDE-A3-FORMAL-CONTRACT-PROMOTION-GATE"
     },
     {
       "moduleId": "ucore",
@@ -393,7 +399,7 @@
     "Menu/API/DB changes require separate approval."
   ],
   "nextTasks": [
-    "ONE-ADAPTER-A2-FOUNDATION-CONSUMER-GATE"
+    "UCDE-A3-FORMAL-CONTRACT-PROMOTION-GATE"
   ],
   "readinessReview": {
     "reviewId": "U-MODULES-A2-READINESS-REVIEW",
@@ -403,17 +409,17 @@
     "dbReady": false,
     "schemaReady": false,
     "contractsReady": false,
-    "nextTask": "ONE-ADAPTER-A2-FOUNDATION-CONSUMER-GATE"
+    "nextTask": "UCDE-A3-FORMAL-CONTRACT-PROMOTION-GATE"
   },
   "implementationGatePlan": {
     "planId": "U-MODULES-A3-IMPLEMENTATION-GATE-PLAN",
-    "status": "planned-docs-level",
+    "status": "in-progress-gated",
     "runtimeImplementationAuthorized": false,
     "apiImplementationAuthorized": false,
     "dbImplementationAuthorized": false,
     "schemaPromotionAuthorized": false,
     "contractsPromotionAuthorized": false,
     "frontendImplementationAuthorized": false,
-    "nextTask": "ONE-ADAPTER-A2-FOUNDATION-CONSUMER-GATE"
+    "nextTask": "UCDE-A3-FORMAL-CONTRACT-PROMOTION-GATE"
   }
 }

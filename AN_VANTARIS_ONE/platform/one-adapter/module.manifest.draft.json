@@ -5,8 +5,8 @@
   "fullName": "VANTARIS ONE Shared Foundation Consumer Adapter",
   "chineseName": "共享基础消费适配边界",
   "moduleType": "platform-module",
-  "manifestVersion": "A1-draft",
-  "status": "draft-a1",
+  "manifestVersion": "A2-draft",
+  "status": "draft-a2",
   "runtimeReady": false,
   "scope": {
     "primaryPurpose": "Define docs-level consumer boundary and module-to-foundation reference routing for VANTARIS ONE platform and business modules.",
@@ -108,5 +108,16 @@
     "runtimeImpact": "none-in-a1-draft",
     "schemaImpact": "none-in-a1-draft"
   },
-  "nextTask": "UCONSOLE-A1-MODULE-STATUS-CONTRACT-DRAFT"
+  "a2FoundationConsumerGate": {
+    "gateId": "ONE-ADAPTER-A2-FOUNDATION-CONSUMER-GATE",
+    "docsLevelOnly": true,
+    "implementationAuthorized": false,
+    "apiImplementationAuthorized": false,
+    "dbImplementationAuthorized": false,
+    "schemaPromotionAuthorized": false,
+    "contractsPromotionAuthorized": false,
+    "runtimeImplementationAuthorized": false,
+    "nextTask": "UCDE-A3-FORMAL-CONTRACT-PROMOTION-GATE"
+  },
+  "nextTask": "UCDE-A3-FORMAL-CONTRACT-PROMOTION-GATE"
 }

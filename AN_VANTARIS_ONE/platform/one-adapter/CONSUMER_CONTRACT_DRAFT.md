@@ -2,7 +2,7 @@
 
 ## 1. Purpose
 
-This document defines the ONE Adapter A1 consumer contract draft as a docs-level boundary.
+This document defines the ONE Adapter A1/A2 consumer contract draft as a docs-level boundary.
 It describes how VANTARIS ONE consumes shared foundation references without owning foundation runtime.
 
 ## 2. Scope
@@ -21,6 +21,7 @@ ONE Adapter consumes references from `AN_VANTARIS_Contracts`, `AN_VANTARIS_EDGE`
 
 UCore, UMMS, UESG, UCDE, and UDOC consume foundation references through ONE Adapter boundary definitions.
 
-## 5. A1 Boundary
+## 5. A1/A2 Boundary
 
-This A1 draft does not modify `AN_VANTARIS_Contracts`, `contracts/`, `schemas/`, backend, frontend, or runtime code.
+This draft does not modify `AN_VANTARIS_Contracts`, `contracts/`, `schemas/`, backend, frontend, or runtime code.
+A2 remains gate/design planning only and does not authorize implementation.
