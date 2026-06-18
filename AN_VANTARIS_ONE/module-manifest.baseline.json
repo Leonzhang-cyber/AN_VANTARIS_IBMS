@@ -314,32 +314,61 @@
     },
     {
       "moduleId": "reports",
+      "moduleName": "Reports",
       "displayName": "Reports",
-      "moduleType": "reporting",
-      "status": "pending-a1",
+      "fullName": "Reporting Workspace",
+      "chineseName": "报表工作台",
+      "moduleType": "platform-module",
+      "status": "draft-a1",
       "owns": [
-        "approved module output presentation context"
+        "reporting workspace context",
+        "report catalog context",
+        "scheduled reporting context reference",
+        "custom report context reference",
+        "drill-down context reference",
+        "export context reference",
+        "compliance report reference",
+        "module status report reference",
+        "evidence-linked report reference",
+        "operational report reference"
       ],
       "doesNotOwn": [
-        "business module logic ownership",
+        "backend report engine implementation",
+        "frontend report page implementation",
+        "report export runtime",
+        "scheduled report job runtime",
+        "API route",
+        "DB table",
+        "OpenAPI spec",
+        "JSON Schema",
+        "Contracts schema",
         "Edge runtime",
         "Link runtime",
-        "UFMS runtime"
+        "UFMS runtime",
+        "DB runtime/schema"
       ],
       "consumesFrom": [
         "ucore",
+        "ufms",
         "umms",
         "uesg",
         "udoc",
         "ucde",
-        "uconsole"
+        "uconsole",
+        "audit",
+        "module-metadata",
+        "governance-status"
       ],
       "providesTo": [
         "stakeholders"
       ],
       "traceabilityRequired": true,
       "runtimeReady": false,
-      "nextTask": "REPORTS-A1-MODULE-MANIFEST-DRAFT"
+      "apiReady": false,
+      "dbReady": false,
+      "schemaReady": false,
+      "contractsPackageReady": false,
+      "nextTask": "REPORTS-A2-API-DATA-MODEL-GATE"
     },
     {
       "moduleId": "analytics",
@@ -431,7 +460,7 @@
     "Menu/API/DB changes require separate approval."
   ],
   "nextTasks": [
-    "EDGE-FLEET-A1-CONSUMPTION-MODEL-DRAFT"
+    "REPORTS-A2-API-DATA-MODEL-GATE"
   ],
   "readinessReview": {
     "reviewId": "U-MODULES-A2-READINESS-REVIEW",
@@ -441,7 +470,7 @@
     "dbReady": false,
     "schemaReady": false,
     "contractsReady": false,
-    "nextTask": "EDGE-FLEET-A1-CONSUMPTION-MODEL-DRAFT"
+    "nextTask": "REPORTS-A2-API-DATA-MODEL-GATE"
   },
   "implementationGatePlan": {
     "planId": "U-MODULES-A3-IMPLEMENTATION-GATE-PLAN",
@@ -452,6 +481,6 @@
     "schemaPromotionAuthorized": false,
     "contractsPromotionAuthorized": false,
     "frontendImplementationAuthorized": false,
-    "nextTask": "EDGE-FLEET-A1-CONSUMPTION-MODEL-DRAFT"
+    "nextTask": "REPORTS-A2-API-DATA-MODEL-GATE"
   }
 }

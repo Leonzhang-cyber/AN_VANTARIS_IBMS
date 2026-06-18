@@ -1,0 +1,136 @@
+{
+  "moduleId": "reports",
+  "moduleName": "Reports",
+  "displayName": "Reports",
+  "fullName": "Reporting Workspace",
+  "chineseName": "报表工作台",
+  "moduleType": "platform-module",
+  "manifestVersion": "A1-draft",
+  "status": "draft-a1",
+  "runtimeReady": false,
+  "apiReady": false,
+  "dbReady": false,
+  "schemaReady": false,
+  "contractsPackageReady": false,
+  "scope": {
+    "primaryPurpose": "Unified reporting workspace context for operational, fault, maintenance, sustainability, evidence, data operations, compliance, and module status reporting.",
+    "docsOnly": true,
+    "runtimeImplementation": false,
+    "apiImplementation": false,
+    "databaseImplementation": false,
+    "frontendImplementation": false,
+    "schemaImplementation": false
+  },
+  "ownerScope": [
+    "reporting workspace context",
+    "report catalog context",
+    "scheduled reporting context reference",
+    "custom report context reference",
+    "drill-down context reference",
+    "export context reference",
+    "compliance report reference",
+    "module status report reference",
+    "evidence-linked report reference",
+    "operational report reference"
+  ],
+  "forbiddenOwnership": [
+    "backend report engine implementation",
+    "frontend report page implementation",
+    "report export runtime",
+    "scheduled report job runtime",
+    "DB table",
+    "API route",
+    "OpenAPI spec",
+    "JSON Schema",
+    "Contracts schema",
+    "EDGE runtime",
+    "LINK runtime",
+    "DB runtime/schema",
+    "auth/login/RBAC",
+    "credential/secret/token"
+  ],
+  "consumedReferences": [
+    "UCore operations reference",
+    "UFMS fault/alarm/event reference",
+    "UMMS maintenance reference",
+    "UESG sustainability reference",
+    "UCDE evidence reference",
+    "UDOC operations reference",
+    "UConsole module status reference",
+    "audit reference",
+    "module metadata reference",
+    "governance status reference"
+  ],
+  "providedDraftObjects": [
+    "reportsWorkspaceContext",
+    "reportsCatalogContext",
+    "reportsScheduleContext",
+    "reportsExportContext",
+    "reportsDrilldownContext",
+    "reportsComplianceContext",
+    "reportsEvidenceLinkedContext"
+  ],
+  "reportingContextFields": [
+    "tenantId",
+    "projectId",
+    "siteId",
+    "moduleId",
+    "reportId",
+    "reportType",
+    "reportCategory",
+    "sourceModuleId",
+    "sourceReferenceId",
+    "evidenceReferenceId",
+    "timeRange",
+    "filters",
+    "aggregationLevel",
+    "exportFormat",
+    "schedulePolicy",
+    "retentionClass",
+    "createdAt",
+    "updatedAt"
+  ],
+  "reportCatalogCandidates": [
+    "UFMS Fault Summary Report",
+    "UFMS Alarm/Event Trend Report",
+    "UMMS Work Order Report",
+    "UMMS SLA Report",
+    "UESG Energy Report",
+    "UESG Sustainability Report",
+    "UCDE Evidence Traceability Report",
+    "UDOC Data Operations Report",
+    "UCore Operations Summary Report",
+    "Module Readiness Report",
+    "Audit and Governance Report"
+  ],
+  "dependencies": {
+    "businessModules": [
+      "ucore",
+      "ufms",
+      "umms",
+      "uesg",
+      "ucde",
+      "udoc"
+    ],
+    "platformModules": [
+      "uconsole",
+      "analytics",
+      "nexus-ai"
+    ],
+    "foundationReferencesOnly": [
+      "AN_VANTARIS_Contracts",
+      "AN_VANTARIS_EDGE",
+      "AN_VANTARIS_LINK",
+      "AN_VANTARIS_DB"
+    ]
+  },
+  "impact": {
+    "apiImpact": "none-in-a1-draft",
+    "dbImpact": "none-in-a1-draft",
+    "menuImpact": "none-in-a1-draft",
+    "runtimeImpact": "none-in-a1-draft",
+    "schemaImpact": "none-in-a1-draft",
+    "frontendImpact": "none-in-a1-draft"
+  },
+  "nextTask": "REPORTS-A2-API-DATA-MODEL-GATE"
+}

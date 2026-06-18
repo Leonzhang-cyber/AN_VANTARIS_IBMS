@@ -43,6 +43,7 @@ Completed stages:
 - UCDE-A3-FORMAL-CONTRACT-PROMOTION-GATE — current task
 - UCDE-A4-FORMAL-CONTRACT-PROMOTION-PLAN — current task
 - ONE-ADAPTER-A1-CANCEL-AND-FUNCTION-REALLOCATION — current task
+- REPORTS-A1-MODULE-MANIFEST-DRAFT — current task
 
 ## Current Allowed Work
 
@@ -63,7 +64,7 @@ Completed stages:
 
 ## Next Recommended Task
 
-- EDGE-FLEET-A1-CONSUMPTION-MODEL-DRAFT
+- REPORTS-A2-API-DATA-MODEL-GATE
 
 ## Historical Name Mapping
 
@@ -116,3 +117,5 @@ object mapping responsibility is reallocated to EDGE + Contracts.
 identity preservation responsibility is reallocated to EDGE + LINK + UCDE + DB.
 traceability preservation responsibility is reallocated to LINK + UCDE + DB.
 external ingress responsibility is reallocated to EDGE Fleet.
+Reports is defined as Reporting Workspace (`报表工作台`) in platform layer draft scope.
+Reports runtime/API/DB/frontend implementation remains blocked unless separately authorized.

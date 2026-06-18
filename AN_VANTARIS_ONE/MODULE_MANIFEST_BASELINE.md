@@ -114,3 +114,11 @@ ONE Adapter is cancelled as a standalone active module and is no longer a primar
 ONE Adapter is retained only as historical/deprecated documentation in this task.
 Responsibilities are reallocated to EDGE/LINK/Contracts/DB/UCDE/UConsole/governance rules.
 No runtime/API/DB/schema/contracts implementation is performed in this cancellation task.
+
+## 16. Reports A1 Module Manifest Draft Completion
+
+Reports A1 manifest draft is established as `Reporting Workspace` (`报表工作台`).
+Reports remains `runtimeReady: false`.
+Reports API/DB/menu/runtime/schema impact remains `none-in-a1-draft`.
+Reports does not directly connect to external systems.
+Reports does not own EDGE/LINK/DB/Contracts runtime or schema.

@@ -16,11 +16,12 @@ This layer is consumed by VANTARIS ONE through approved boundaries and is not mo
 ## 3. Platform Layer
 
 - UConsole
-- Reports
+- Reports (Reporting Workspace / 报表工作台)
 - Analytics
 - Nexus AI Consumer
 
 Platform layer provides status, reporting, analytics, shared AI service capability, and governance visibility while avoiding business-domain ownership.
+Reports consumes standardized module references, events, evidence, status, metadata, and aggregated context, and does not directly connect to external systems.
 
 ## 4. Unified Business Modules
 
