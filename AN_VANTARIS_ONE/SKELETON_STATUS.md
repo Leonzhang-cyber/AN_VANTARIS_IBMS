@@ -4,8 +4,12 @@
 | ------- | ------ | ---------------------: | ---------------- | --------- |
 | AN_VANTARIS_EDGE | SKELETON_ONLY | No | AN_VANTARIS_IBMS-backend/src/Iot/drivers | EDGE-SOURCE-AUDIT / EDGE-C1 later |
 | AN_VANTARIS_LINK | SKELETON_ONLY | No | To be created from Contracts | LINK-A0 later |
-| AN_VANTARIS_Code | SKELETON_ONLY | No | AN_VANTARIS_IBMS-backend | ONE-TRANSITION-A6 |
+| AN_VANTARIS_Code | SKELETON_ONLY | No | AN_VANTARIS_IBMS-backend (ibms-core + platform-core classification source) | ONE-TRANSITION-A7-REBRAND-READINESS / CODE-MODULE-A0 after approval |
 | AN_VANTARIS_Console | SKELETON_ONLY | No | AN_VANTARIS_IBMS-frontend | ONE-TRANSITION-A6 |
 | AN_VANTARIS_NexusAI | SKELETON_ONLY | No | AI-related existing code if any, otherwise new module | NexusAI-A0 later |
 | AN_VANTARIS_DB | SKELETON_ONLY | No | current PostgreSQL / migration assets | DB-SCHEMA-BASELINE later |
 | AN_VANTARIS_Contracts | SKELETON_ONLY | No | contracts/ | CONTRACTS-A0 later |
+
+Notes:
+
+- ibms-core planned as business module under AN_VANTARIS_Code; no runtime source migrated in A6.
