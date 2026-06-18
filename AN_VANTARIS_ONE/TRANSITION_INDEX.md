@@ -26,6 +26,7 @@ Completed stages:
 - ESG-A0-MODULE-BOUNDARY — current task
 - IDC-DCIM-A0-MODULE-BOUNDARY — current task
 - CDE-A0-EVIDENCE-CONSUMER — current task
+- CONSOLE-A0-SHARED-FOUNDATION-HEALTH-VIEW — current task
 
 ## Current Allowed Work
 
@@ -46,13 +47,14 @@ Completed stages:
 
 ## Recommended Next Tasks
 
-1. CONSOLE-A0-SHARED-FOUNDATION-HEALTH-VIEW
+1. MODULE-MANIFEST-A0-CROSS-MODULE-BASELINE
 2. CDE-A1-MODULE-MANIFEST-DRAFT
 3. IDC-DCIM-A1-MODULE-MANIFEST-DRAFT
 4. ESG-A1-MODULE-MANIFEST-DRAFT
 5. MMS-A1-MODULE-MANIFEST-DRAFT
 6. IBMS-CORE-A1-MODULE-MANIFEST-DRAFT
 7. ONE-ADAPTER-A1-CONSUMER-CONTRACT-DRAFT
+8. CONSOLE-A1-MODULE-STATUS-CONTRACT-DRAFT
 
 ## Shared Foundation Runtime Continuation
 
@@ -68,3 +70,4 @@ MMS is now defined as VANTARIS ONE maintenance business module, not as owner of 
 ESG is now defined as VANTARIS ONE energy and sustainability business module, not as owner of Edge / Link / Contracts, not as owner of UFMS RCA/correlation runtime, not as MMS workflow owner, and not as CDE evidence chain owner.
 IDC / DCIM is now defined as VANTARIS ONE data center infrastructure operations business module, not as owner of Edge / Link / Contracts, not as owner of UFMS RCA/correlation runtime, not as MMS workflow owner, not as ESG carbon reporting owner, and not as CDE evidence chain owner.
 CDE is now defined as VANTARIS ONE evidence and traceability consumer module, not as owner of Edge / Link / Contracts, not as owner of UFMS RCA/correlation runtime, not as owner of MMS workflow, ESG calculation model, or IDC/DCIM capacity/PUE model.
+Console is now defined as VANTARIS ONE platform control and health view module, not as owner of Edge / Link / Contracts, not as owner of UFMS RCA/correlation runtime, and not as owner of business module logic.
