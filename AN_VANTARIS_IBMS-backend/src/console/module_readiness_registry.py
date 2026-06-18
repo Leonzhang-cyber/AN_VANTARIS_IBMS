@@ -340,6 +340,10 @@ def get_module_readiness_registry() -> List[Dict[str, Any]]:
             readiness_notes=[
                 "Assets R2 uses local skeleton topology relationship details and read-only hierarchy paths.",
                 "Topology relationships are local skeleton references. Runtime discovery, telemetry correlation and EDGE/LINK integration are not integrated.",
+                "Assets R1-R2 readiness freeze completed for current foundation scope.",
+                "Asset persistence gate is deferred; local-mock-provider remains active in this stage.",
+                "Local skeleton topology is retained until persistence and validation gates are approved.",
+                "Runtime discovery and EDGE/LINK integration are deferred in this stage.",
             ],
         ),
         _module_record(
