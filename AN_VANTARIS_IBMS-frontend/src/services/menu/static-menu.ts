@@ -58,5 +58,19 @@ export const fallbackMenuItems: AppMenuItem[] = [
       },
     ],
   },
+  {
+    id: 'ucde',
+    label: 'UCDE',
+    path: '/ucde/evidence',
+    source: 'static',
+    children: [
+      {
+        id: 'ucde-evidence-center',
+        label: 'Evidence Center',
+        path: '/ucde/evidence',
+        source: 'static',
+      },
+    ],
+  },
   { id: 'reports', label: 'Reports', path: '/reports', source: 'static' },
 ]

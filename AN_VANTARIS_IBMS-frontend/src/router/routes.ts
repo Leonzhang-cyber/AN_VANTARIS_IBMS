@@ -9,6 +9,7 @@ import NotificationSettingsView from '@/modules/system/NotificationSettingsView.
 import PermissionListView from '@/modules/system/PermissionListView.vue'
 import PlatformOperationsDashboard from '@/modules/console/PlatformOperationsDashboard.vue'
 import ReportsView from '@/modules/reports/ReportsView.vue'
+import EvidenceCenter from '@/modules/ucde/EvidenceCenter.vue'
 import SystemOverviewView from '@/modules/system/SystemOverviewView.vue'
 import SystemSettingsView from '@/modules/system/SystemSettingsView.vue'
 
@@ -103,6 +104,12 @@ export const routes: RouteRecordRaw[] = [
     name: 'reports',
     component: ReportsView,
     meta: { requiresAuth: true, title: 'Reports', layout: true },
+  },
+  {
+    path: '/ucde/evidence',
+    name: 'ucde-evidence-center',
+    component: EvidenceCenter,
+    meta: { requiresAuth: true, title: 'UCDE Evidence Center', layout: true },
   },
   {
     path: '/403',
