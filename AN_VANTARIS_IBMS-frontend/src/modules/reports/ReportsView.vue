@@ -7,6 +7,7 @@ import {
   getReportsCatalog,
   getReportsHealth,
   queryReport,
+  type QueryReportPayload,
   type QueryReportResult,
   type ReportsCatalogItem,
   type ReportsHealth,
@@ -19,8 +20,39 @@ interface QueryFilters {
   status: string
   severity: string
   category: string
+  assetId: string
+  deviceId: string
+  evidenceReferenceId: string
+  aggregationLevel: string
   limit: number
 }
+
+type FilterFieldKey =
+  | 'timeRange'
+  | 'siteId'
+  | 'moduleId'
+  | 'status'
+  | 'severity'
+  | 'category'
+  | 'assetId'
+  | 'deviceId'
+  | 'evidenceReferenceId'
+  | 'aggregationLevel'
+  | 'limit'
+
+const FILTER_FIELD_KEYS: FilterFieldKey[] = [
+  'timeRange',
+  'siteId',
+  'moduleId',
+  'status',
+  'severity',
+  'category',
+  'assetId',
+  'deviceId',
+  'evidenceReferenceId',
+  'aggregationLevel',
+  'limit',
+]
 
 const loadingHealth = ref(false)
 const loadingCatalog = ref(false)
@@ -52,6 +84,10 @@ const filters = reactive<QueryFilters>({
   status: '',
   severity: '',
   category: '',
+  assetId: '',
+  deviceId: '',
+  evidenceReferenceId: '',
+  aggregationLevel: '',
   limit: 20,
 })
 
@@ -63,7 +99,16 @@ const fallbackCatalog: ReportsCatalogItem[] = [
     groupName: 'Incident & Event Reports',
     sourceModules: ['source-reference', 'evidence-reference', 'module-status'],
     sourceReferenceTypes: ['incident', 'evidence', 'module-status'],
-    supportedFilters: ['timeRange', 'siteId', 'moduleId', 'status', 'severity', 'category'],
+    supportedFilters: [
+      'timeRange',
+      'siteId',
+      'moduleId',
+      'status',
+      'severity',
+      'category',
+      'aggregationLevel',
+      'limit',
+    ],
     defaultFilters: { timeRange: 'last_24h' },
     aggregationLevels: ['raw', 'hourly', 'daily'],
     exportFormats: ['view-only'],
@@ -78,7 +123,7 @@ const fallbackCatalog: ReportsCatalogItem[] = [
     groupName: 'Incident & Event Reports',
     sourceModules: ['source-reference', 'evidence-reference'],
     sourceReferenceTypes: ['event', 'evidence'],
-    supportedFilters: ['timeRange', 'siteId', 'moduleId', 'severity', 'category'],
+    supportedFilters: ['timeRange', 'siteId', 'moduleId', 'severity', 'category', 'aggregationLevel', 'limit'],
     defaultFilters: { timeRange: 'last_7d' },
     aggregationLevels: ['hourly', 'daily'],
     exportFormats: ['view-only'],
@@ -91,24 +136,147 @@ const fallbackCatalog: ReportsCatalogItem[] = [
 const queryColumns = computed(() => queryResult.value?.columns ?? [])
 const queryRows = computed(() => queryResult.value?.rows ?? [])
 const canExportCsv = computed(() => !querying.value && !exportingCsv.value && queryRows.value.length > 0)
+const selectedReport = computed(() =>
+  catalogItems.value.find((item) => item.reportId === selectedReportId.value) ?? null,
+)
+const selectedReportSupportedFilters = computed<Set<FilterFieldKey>>(() => {
+  const report = selectedReport.value
+  if (!report) {
+    return new Set<FilterFieldKey>(['limit'])
+  }
+  const filtersFromCatalog = Array.isArray(report.supportedFilters) ? report.supportedFilters : []
+  return new Set(
+    filtersFromCatalog.filter((name): name is FilterFieldKey =>
+      FILTER_FIELD_KEYS.includes(name as FilterFieldKey),
+    ),
+  )
+})
+
+const activeFilterEntries = computed(() => {
+  const payload = buildQueryPayload()
+  const entries: Array<{ key: string; value: string }> = [{ key: 'reportId', value: payload.reportId }]
+  entries.push({ key: 'sourceSemantics', value: 'ibms-neutral' })
+  if (payload.aggregationLevel) {
+    entries.push({ key: 'aggregationLevel', value: payload.aggregationLevel })
+  }
+  if (!payload.filters) {
+    return entries
+  }
+  for (const [key, value] of Object.entries(payload.filters)) {
+    entries.push({ key, value: String(value) })
+  }
+  return entries
+})
 
 function normalizeError(error: unknown, fallback: string): string {
   return error instanceof ApiError ? error.message : fallback
 }
 
-function buildQueryPayload() {
-  return {
-    reportId: selectedReportId.value,
-    limit: Math.min(Math.max(Number(filters.limit) || 20, 1), 100),
-    filters: {
-      timeRange: filters.timeRange,
-      siteId: filters.siteId,
-      moduleId: filters.moduleId,
-      status: filters.status,
-      severity: filters.severity,
-      category: filters.category,
-    },
+function isFilterSupported(name: FilterFieldKey): boolean {
+  return selectedReportSupportedFilters.value.has(name)
+}
+
+function sanitizeLimit(value: unknown): number {
+  const parsed = Number(value)
+  if (!Number.isFinite(parsed)) {
+    return 20
   }
+  return Math.min(Math.max(Math.trunc(parsed), 1), 100)
+}
+
+function resetFilters(): void {
+  filters.timeRange = ''
+  filters.siteId = ''
+  filters.moduleId = ''
+  filters.status = ''
+  filters.severity = ''
+  filters.category = ''
+  filters.assetId = ''
+  filters.deviceId = ''
+  filters.evidenceReferenceId = ''
+  filters.aggregationLevel = ''
+  filters.limit = 20
+}
+
+function applySelectedReportDefaults(report: ReportsCatalogItem): void {
+  resetFilters()
+  queryResult.value = null
+  queryError.value = ''
+
+  const defaults = (report.defaultFilters ?? {}) as Record<string, unknown>
+  for (const key of FILTER_FIELD_KEYS) {
+    if (!(key in defaults)) {
+      continue
+    }
+    if (key === 'limit') {
+      filters.limit = sanitizeLimit(defaults.limit)
+      continue
+    }
+    if (key === 'aggregationLevel') {
+      const value = defaults.aggregationLevel
+      if (value !== null && value !== undefined) {
+        filters.aggregationLevel = String(value).trim()
+      }
+      continue
+    }
+    const value = defaults[key]
+    if (value !== null && value !== undefined) {
+      filters[key] = String(value).trim()
+    }
+  }
+
+  if (!filters.aggregationLevel && Array.isArray(report.aggregationLevels) && report.aggregationLevels.length > 0) {
+    filters.aggregationLevel = report.aggregationLevels[0]
+  }
+
+  filters.limit = sanitizeLimit(filters.limit)
+}
+
+function buildCleanFilters(): Record<string, unknown> {
+  const rawEntries: Array<[FilterFieldKey, unknown]> = [
+    ['timeRange', filters.timeRange],
+    ['siteId', filters.siteId],
+    ['moduleId', filters.moduleId],
+    ['status', filters.status],
+    ['severity', filters.severity],
+    ['category', filters.category],
+    ['assetId', filters.assetId],
+    ['deviceId', filters.deviceId],
+    ['evidenceReferenceId', filters.evidenceReferenceId],
+  ]
+  const clean: Record<string, unknown> = {}
+  for (const [key, value] of rawEntries) {
+    if (!isFilterSupported(key)) {
+      continue
+    }
+    if (value === null || value === undefined) {
+      continue
+    }
+    const normalized = String(value).trim()
+    if (!normalized) {
+      continue
+    }
+    clean[key] = normalized
+  }
+  return clean
+}
+
+function buildQueryPayload(): QueryReportPayload {
+  const payload: QueryReportPayload = {
+    reportId: selectedReportId.value,
+    limit: sanitizeLimit(filters.limit),
+  }
+  const cleanFilters = buildCleanFilters()
+  if (Object.keys(cleanFilters).length > 0) {
+    payload.filters = cleanFilters
+  }
+  if (isFilterSupported('aggregationLevel')) {
+    const value = String(filters.aggregationLevel ?? '').trim()
+    if (value) {
+      payload.aggregationLevel = value
+    }
+  }
+  return payload
 }
 
 async function loadHealth(): Promise<void> {
@@ -149,6 +317,7 @@ async function loadCatalog(): Promise<void> {
   } finally {
     if (!selectedReportId.value && catalogItems.value.length > 0) {
       selectedReportId.value = catalogItems.value[0].reportId
+      applySelectedReportDefaults(catalogItems.value[0])
     }
     loadingCatalog.value = false
   }
@@ -157,34 +326,40 @@ async function loadCatalog(): Promise<void> {
 async function selectReport(report: ReportsCatalogItem): Promise<void> {
   selectedReportId.value = report.reportId
   queryError.value = ''
+  queryResult.value = null
   if (fallbackMode.value) {
+    applySelectedReportDefaults(report)
     return
   }
   try {
     const detail = await getReportCatalogItem(report.reportId)
     selectedReportId.value = detail.reportId
+    applySelectedReportDefaults(detail)
   } catch (error) {
     const message = normalizeError(error, 'Failed to load report catalog detail.')
     queryError.value = message
     ElMessage.warning(message)
+    applySelectedReportDefaults(report)
   }
 }
 
-function buildLocalFallbackQueryResult(payload: ReturnType<typeof buildQueryPayload>): QueryReportResult {
-  const rows = Array.from({ length: payload.limit }, (_, index) => ({
+function buildLocalFallbackQueryResult(payload: QueryReportPayload): QueryReportResult {
+  const limit = sanitizeLimit(payload.limit)
+  const cleanFilters = payload.filters ?? {}
+  const rows = Array.from({ length: limit }, (_, index) => ({
     recordId: `${payload.reportId}-fallback-${index + 1}`,
     sourceType: 'reference',
     sourceReferenceId: `fallback-ref-${index + 1}`,
-    sourceModuleId: payload.filters.moduleId || 'source-reference',
-    status: payload.filters.status || 'open',
-    severity: payload.filters.severity || 'medium',
-    category: payload.filters.category || 'general',
+    sourceModuleId: String(cleanFilters.moduleId ?? 'source-reference'),
+    status: String(cleanFilters.status ?? 'open'),
+    severity: String(cleanFilters.severity ?? 'medium'),
+    category: String(cleanFilters.category ?? 'general'),
     timestamp: new Date().toISOString(),
     evidenceReferenceId: `fallback-ev-${index + 1}`,
     summary: `Fallback mock row ${index + 1} for ${payload.reportId}`,
     count: index + 1,
     trendValue: Number(((index + 1) * 1.2).toFixed(2)),
-    aggregationLevel: 'raw',
+    aggregationLevel: String(payload.aggregationLevel ?? 'raw'),
   }))
   const columns = Object.keys(rows[0] ?? {})
   return {
@@ -194,7 +369,7 @@ function buildLocalFallbackQueryResult(payload: ReturnType<typeof buildQueryPayl
       'Fallback Report',
     queryId: `fallback-${Date.now()}`,
     generatedAt: new Date().toISOString(),
-    filters: payload.filters,
+    filters: cleanFilters,
     columns,
     rows,
     summary: {
@@ -220,6 +395,7 @@ async function runQuery(): Promise<void> {
 
   querying.value = true
   const payload = buildQueryPayload()
+  filters.limit = sanitizeLimit(payload.limit)
   try {
     if (fallbackMode.value) {
       queryResult.value = buildLocalFallbackQueryResult(payload)
@@ -469,43 +645,84 @@ onMounted(() => {
                 <el-input :model-value="selectedReportId" disabled placeholder="Select from catalog" />
               </el-form-item>
             </el-col>
-            <el-col :xs="24" :sm="12" :md="6">
+            <el-col v-if="isFilterSupported('timeRange')" :xs="24" :sm="12" :md="6">
               <el-form-item label="timeRange">
                 <el-input v-model="filters.timeRange" placeholder="last_24h" />
               </el-form-item>
             </el-col>
-            <el-col :xs="24" :sm="12" :md="6">
+            <el-col v-if="isFilterSupported('siteId')" :xs="24" :sm="12" :md="6">
               <el-form-item label="siteId">
                 <el-input v-model="filters.siteId" placeholder="site-001" />
               </el-form-item>
             </el-col>
-            <el-col :xs="24" :sm="12" :md="6">
+            <el-col v-if="isFilterSupported('moduleId')" :xs="24" :sm="12" :md="6">
               <el-form-item label="moduleId">
                 <el-input v-model="filters.moduleId" placeholder="source-reference" />
               </el-form-item>
             </el-col>
-            <el-col :xs="24" :sm="12" :md="6">
+            <el-col v-if="isFilterSupported('status')" :xs="24" :sm="12" :md="6">
               <el-form-item label="status">
                 <el-input v-model="filters.status" placeholder="open" />
               </el-form-item>
             </el-col>
-            <el-col :xs="24" :sm="12" :md="6">
+            <el-col v-if="isFilterSupported('severity')" :xs="24" :sm="12" :md="6">
               <el-form-item label="severity">
                 <el-input v-model="filters.severity" placeholder="medium" />
               </el-form-item>
             </el-col>
-            <el-col :xs="24" :sm="12" :md="6">
+            <el-col v-if="isFilterSupported('category')" :xs="24" :sm="12" :md="6">
               <el-form-item label="category">
                 <el-input v-model="filters.category" placeholder="general" />
               </el-form-item>
             </el-col>
-            <el-col :xs="24" :sm="12" :md="6">
+            <el-col v-if="isFilterSupported('assetId')" :xs="24" :sm="12" :md="6">
+              <el-form-item label="assetId">
+                <el-input v-model="filters.assetId" placeholder="asset-001" />
+              </el-form-item>
+            </el-col>
+            <el-col v-if="isFilterSupported('deviceId')" :xs="24" :sm="12" :md="6">
+              <el-form-item label="deviceId">
+                <el-input v-model="filters.deviceId" placeholder="device-001" />
+              </el-form-item>
+            </el-col>
+            <el-col v-if="isFilterSupported('evidenceReferenceId')" :xs="24" :sm="12" :md="6">
+              <el-form-item label="evidenceReferenceId">
+                <el-input v-model="filters.evidenceReferenceId" placeholder="ev-0001" />
+              </el-form-item>
+            </el-col>
+            <el-col v-if="isFilterSupported('aggregationLevel')" :xs="24" :sm="12" :md="6">
+              <el-form-item label="aggregationLevel">
+                <el-select
+                  v-model="filters.aggregationLevel"
+                  placeholder="Select aggregation level"
+                  clearable
+                  filterable
+                >
+                  <el-option
+                    v-for="level in selectedReport?.aggregationLevels ?? []"
+                    :key="level"
+                    :label="level"
+                    :value="level"
+                  />
+                </el-select>
+              </el-form-item>
+            </el-col>
+            <el-col v-if="isFilterSupported('limit')" :xs="24" :sm="12" :md="6">
               <el-form-item label="limit">
                 <el-input-number v-model="filters.limit" :min="1" :max="100" :step="1" controls-position="right" />
               </el-form-item>
             </el-col>
           </el-row>
         </el-form>
+
+        <el-card shadow="never" class="block-space">
+          <template #header>Active Filters</template>
+          <el-space wrap>
+            <el-tag v-for="entry in activeFilterEntries" :key="`${entry.key}:${entry.value}`" size="small">
+              {{ entry.key }}: {{ entry.value }}
+            </el-tag>
+          </el-space>
+        </el-card>
 
         <el-button type="primary" :loading="querying" :disabled="!selectedReportId" @click="runQuery">
           Run Query
