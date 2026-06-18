@@ -41,6 +41,7 @@ Completed stages:
 - U-MODULES-A3-IMPLEMENTATION-GATE-PLAN — current task
 - ONE-ADAPTER-A2-FOUNDATION-CONSUMER-GATE — current task
 - UCDE-A3-FORMAL-CONTRACT-PROMOTION-GATE — current task
+- UCDE-A4-FORMAL-CONTRACT-PROMOTION-PLAN — current task
 
 ## Current Allowed Work
 
@@ -61,7 +62,7 @@ Completed stages:
 
 ## Next Recommended Task
 
-- UCDE-A4-FORMAL-CONTRACT-PROMOTION-PLAN
+- UCDE-A5-CONTRACT-CANDIDATE-SPEC-DRAFT
 
 ## Historical Name Mapping
 

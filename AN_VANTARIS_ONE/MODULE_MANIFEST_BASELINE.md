@@ -100,3 +100,10 @@ UCDE-A3 formal contract promotion gate is completed as docs-level gate review.
 Promotion is not executed in this task.
 Formal contract/schema/OpenAPI/runtime remain blocked.
 Next task is UCDE-A4-FORMAL-CONTRACT-PROMOTION-PLAN.
+
+## 14. UCDE A4 Formal Contract Promotion Plan Completion
+
+UCDE-A4 formal contract promotion plan is completed as docs-level planning only.
+Promotion is not executed in this task.
+Formal contract/schema/OpenAPI/runtime remain blocked.
+Next task is UCDE-A5-CONTRACT-CANDIDATE-SPEC-DRAFT.

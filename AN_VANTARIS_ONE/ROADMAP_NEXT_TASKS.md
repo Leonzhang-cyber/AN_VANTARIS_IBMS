@@ -18,15 +18,17 @@ After `ONE-SHARED-FOUNDATION-CONSUMER-A0`, VANTARIS ONE treats Edge/Link/Contrac
 - U-MODULES-A3-IMPLEMENTATION-GATE-PLAN
 - ONE-ADAPTER-A2-FOUNDATION-CONSUMER-GATE
 - UCDE-A3-FORMAL-CONTRACT-PROMOTION-GATE
+- UCDE-A4-FORMAL-CONTRACT-PROMOTION-PLAN
 
 ## Next Recommended Task
 
-- UCDE-A4-FORMAL-CONTRACT-PROMOTION-PLAN
+- UCDE-A5-CONTRACT-CANDIDATE-SPEC-DRAFT
 
 A3 is implementation gate planning only. It does not implement runtime, API, DB, schema, or contracts package directly.
 ONE-ADAPTER-A2 is also a gate/design task unless explicitly authorized otherwise, and must not modify EDGE/LINK/DB/CONTRACTS.
 UCDE-A3 remains a promotion gate only and is not actual contracts/schemas modification.
 UCDE-A4 remains a promotion plan only and is not actual contracts/schemas modification.
+UCDE-A5 remains a candidate spec draft only and is not actual contracts/schemas modification unless explicitly authorized.
 
 ## Shared Foundation Runtime Continuation (UFMS-led)
 

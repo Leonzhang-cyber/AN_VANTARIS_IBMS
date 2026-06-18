@@ -119,9 +119,10 @@
     "contractsImpact": "none-in-a2-draft"
   },
   "a3PromotionGateReviewed": true,
+  "a4PromotionPlanCreated": true,
   "promotionExecuted": false,
   "formalContractCreated": false,
   "schemaCreated": false,
   "openApiCreated": false,
-  "nextTask": "UCDE-A4-FORMAL-CONTRACT-PROMOTION-PLAN"
+  "nextTask": "UCDE-A5-CONTRACT-CANDIDATE-SPEC-DRAFT"
 }

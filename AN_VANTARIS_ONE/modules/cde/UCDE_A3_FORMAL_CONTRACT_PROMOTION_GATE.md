@@ -39,3 +39,8 @@ This A3 task is gate-only. It does not create contracts, schemas, OpenAPI, DTOs,
 ## 8. Next Recommended Task
 
 - `UCDE-A4-FORMAL-CONTRACT-PROMOTION-PLAN`
+
+## 9. A4 Planning Continuation
+
+UCDE-A4 continues as docs-level formal contract promotion planning only.
+No formal contract/schema/OpenAPI/runtime implementation is authorized by A4 planning.

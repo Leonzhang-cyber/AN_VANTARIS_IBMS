@@ -215,7 +215,7 @@
       "moduleName": "UCDE",
       "displayName": "UCDE",
       "moduleType": "business",
-      "status": "draft-a3-gate",
+      "status": "draft-a4-plan",
       "owns": [
         "evidence reference context",
         "traceability and audit linkage context",
@@ -259,7 +259,21 @@
         "contractsPromotionAuthorized": false,
         "nextTask": "UCDE-A4-FORMAL-CONTRACT-PROMOTION-PLAN"
       },
-      "nextTask": "UCDE-A4-FORMAL-CONTRACT-PROMOTION-PLAN"
+      "a4FormalContractPromotionPlan": {
+        "planId": "UCDE-A4-FORMAL-CONTRACT-PROMOTION-PLAN",
+        "docsLevelOnly": true,
+        "promotionExecuted": false,
+        "formalContractCreated": false,
+        "schemaCreated": false,
+        "openApiCreated": false,
+        "runtimeImplementationAuthorized": false,
+        "apiImplementationAuthorized": false,
+        "dbImplementationAuthorized": false,
+        "schemaPromotionAuthorized": false,
+        "contractsPromotionAuthorized": false,
+        "nextTask": "UCDE-A5-CONTRACT-CANDIDATE-SPEC-DRAFT"
+      },
+      "nextTask": "UCDE-A5-CONTRACT-CANDIDATE-SPEC-DRAFT"
     },
     {
       "moduleId": "uconsole",
@@ -413,7 +427,7 @@
     "Menu/API/DB changes require separate approval."
   ],
   "nextTasks": [
-    "UCDE-A4-FORMAL-CONTRACT-PROMOTION-PLAN"
+    "UCDE-A5-CONTRACT-CANDIDATE-SPEC-DRAFT"
   ],
   "readinessReview": {
     "reviewId": "U-MODULES-A2-READINESS-REVIEW",
@@ -423,7 +437,7 @@
     "dbReady": false,
     "schemaReady": false,
     "contractsReady": false,
-    "nextTask": "UCDE-A4-FORMAL-CONTRACT-PROMOTION-PLAN"
+    "nextTask": "UCDE-A5-CONTRACT-CANDIDATE-SPEC-DRAFT"
   },
   "implementationGatePlan": {
     "planId": "U-MODULES-A3-IMPLEMENTATION-GATE-PLAN",
@@ -434,6 +448,6 @@
     "schemaPromotionAuthorized": false,
     "contractsPromotionAuthorized": false,
     "frontendImplementationAuthorized": false,
-    "nextTask": "UCDE-A4-FORMAL-CONTRACT-PROMOTION-PLAN"
+    "nextTask": "UCDE-A5-CONTRACT-CANDIDATE-SPEC-DRAFT"
   }
 }
