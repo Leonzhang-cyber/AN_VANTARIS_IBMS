@@ -44,9 +44,17 @@
     },
     {
       "moduleId": "ucore",
+      "moduleName": "UCore",
       "displayName": "UCore",
+      "fullName": "Unified Core Operations",
+      "chineseName": "全向核心运营",
       "moduleType": "business",
-      "status": "pending-a1",
+      "status": "draft-a1",
+      "historicalNames": [
+        "IBMS Core",
+        "ibms-core",
+        "Core Operations"
+      ],
       "owns": [
         "building operations context",
         "operations dashboard context",
@@ -72,13 +80,21 @@
       ],
       "traceabilityRequired": true,
       "runtimeReady": false,
-      "nextTask": "UCORE-A1-MODULE-MANIFEST-DRAFT"
+      "nextTask": "ONE-ADAPTER-A1-CONSUMER-CONTRACT-DRAFT"
     },
     {
       "moduleId": "umms",
+      "moduleName": "UMMS",
       "displayName": "UMMS",
+      "fullName": "Unified Maintenance Management System",
+      "chineseName": "全向维护管理系统",
       "moduleType": "business",
-      "status": "pending-a1",
+      "status": "draft-a1",
+      "historicalNames": [
+        "MMS",
+        "mms",
+        "Maintenance Management System"
+      ],
       "owns": [
         "maintenance workflow lifecycle context",
         "work order context",
@@ -103,13 +119,21 @@
       ],
       "traceabilityRequired": true,
       "runtimeReady": false,
-      "nextTask": "UMMS_A1_MODULE_MANIFEST_DRAFT"
+      "nextTask": "UCORE-A1-MODULE-MANIFEST-DRAFT"
     },
     {
       "moduleId": "uesg",
+      "moduleName": "UESG",
       "displayName": "UESG",
+      "fullName": "Unified ESG",
+      "chineseName": "全向能源与可持续",
       "moduleType": "business",
-      "status": "pending-a1",
+      "status": "draft-a1",
+      "historicalNames": [
+        "ESG",
+        "esg",
+        "Energy & Sustainability"
+      ],
       "owns": [
         "energy/sustainability interpretation context",
         "sustainability KPI context",
@@ -135,7 +159,7 @@
       ],
       "traceabilityRequired": true,
       "runtimeReady": false,
-      "nextTask": "UESG_A1_MODULE_MANIFEST_DRAFT"
+      "nextTask": "UMMS-A1-MODULE-MANIFEST-DRAFT"
     },
     {
       "moduleId": "udoc",
@@ -358,9 +382,6 @@
     "Menu/API/DB changes require separate approval."
   ],
   "nextTasks": [
-    "UESG-A1-MODULE-MANIFEST-DRAFT",
-    "UMMS-A1-MODULE-MANIFEST-DRAFT",
-    "UCORE-A1-MODULE-MANIFEST-DRAFT",
     "ONE-ADAPTER-A1-CONSUMER-CONTRACT-DRAFT",
     "UCONSOLE-A1-MODULE-STATUS-CONTRACT-DRAFT",
     "UCDE-A2-EVIDENCE-CONTRACT-DRAFT"

@@ -1,0 +1,131 @@
+{
+  "moduleId": "uesg",
+  "moduleName": "UESG",
+  "displayName": "UESG",
+  "fullName": "Unified ESG",
+  "chineseName": "全向能源与可持续",
+  "moduleType": "business-module",
+  "manifestVersion": "A1-draft",
+  "status": "draft-a1",
+  "runtimeReady": false,
+  "historicalNames": [
+    "ESG",
+    "esg",
+    "Energy & Sustainability",
+    "Sustainability Operations"
+  ],
+  "scope": {
+    "primaryPurpose": "Unified sustainability and energy context for operations, carbon, utility consumption, environmental performance, and cross-module linkage references.",
+    "docsOnly": true,
+    "runtimeImplementation": false,
+    "apiImplementation": false,
+    "databaseImplementation": false,
+    "frontendImplementation": false
+  },
+  "ownerScope": [
+    "energy operations context reference",
+    "carbon and sustainability context reference",
+    "green mark and ESG reporting context reference",
+    "utility consumption context reference",
+    "environmental performance context reference",
+    "energy anomaly context reference",
+    "UDOC power cooling space linkage reference",
+    "UMMS maintenance linkage reference",
+    "UCDE evidence linkage reference",
+    "UCore operational linkage reference"
+  ],
+  "forbiddenOwnership": [
+    "no Edge runtime",
+    "no Link runtime",
+    "no DB schema",
+    "no Contracts schema",
+    "no backend runtime",
+    "no frontend runtime",
+    "no ESG regulatory engine implementation in A1",
+    "no carbon accounting engine implementation in A1",
+    "no credential secret token"
+  ],
+  "consumedObjects": [
+    "energy meter reference",
+    "utility consumption reference",
+    "power usage reference",
+    "cooling usage reference",
+    "space utilization reference",
+    "environment telemetry reference",
+    "carbon factor reference",
+    "emission reference",
+    "green mark reference",
+    "sustainability KPI reference",
+    "maintenance linkage reference",
+    "evidence linkage reference",
+    "UCore operation reference",
+    "Edge gateway reference",
+    "Link delivery reference",
+    "UFMS fault intelligence reference optional"
+  ],
+  "providedObjects": [
+    "uesgSustainabilityContext",
+    "uesgEnergyContext",
+    "uesgCarbonContext",
+    "uesgUtilityContext",
+    "uesgEnvironmentalPerformanceContext",
+    "uesgAnomalyContext",
+    "uesgReadinessStatus"
+  ],
+  "statusModel": [
+    "planned",
+    "draft-a1",
+    "contract-pending",
+    "runtime-pending",
+    "blocked",
+    "ready-for-a2"
+  ],
+  "sustainabilityContextFields": [
+    "tenantId",
+    "projectId",
+    "siteId",
+    "assetId",
+    "deviceId",
+    "sourceSystem",
+    "energyContextId",
+    "carbonContextId",
+    "utilityContextId",
+    "sustainabilityContextId",
+    "maintenanceContextId",
+    "evidenceContextId",
+    "operationContextId",
+    "traceId",
+    "correlationId",
+    "createdAt",
+    "updatedAt"
+  ],
+  "dependencies": {
+    "platform": [
+      "one-adapter",
+      "uconsole",
+      "reports",
+      "analytics",
+      "nexus-ai-consumer"
+    ],
+    "businessModules": [
+      "ucore",
+      "umms",
+      "udoc",
+      "ucde"
+    ],
+    "foundationReferencesOnly": [
+      "AN_VANTARIS_Contracts",
+      "AN_VANTARIS_EDGE",
+      "AN_VANTARIS_LINK",
+      "AN_VANTARIS_DB"
+    ]
+  },
+  "impact": {
+    "apiImpact": "none-in-a1-draft",
+    "dbImpact": "none-in-a1-draft",
+    "menuImpact": "none-in-a1-draft",
+    "runtimeImpact": "none-in-a1-draft",
+    "schemaImpact": "none-in-a1-draft"
+  },
+  "nextTask": "UMMS-A1-MODULE-MANIFEST-DRAFT"
+}

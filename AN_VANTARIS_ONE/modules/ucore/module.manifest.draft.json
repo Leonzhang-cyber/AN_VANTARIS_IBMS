@@ -1,0 +1,133 @@
+{
+  "moduleId": "ucore",
+  "moduleName": "UCore",
+  "displayName": "UCore",
+  "fullName": "Unified Core Operations",
+  "chineseName": "全向核心运营",
+  "moduleType": "business-module",
+  "manifestVersion": "A1-draft",
+  "status": "draft-a1",
+  "runtimeReady": false,
+  "historicalNames": [
+    "IBMS Core",
+    "ibms-core",
+    "Core Operations",
+    "Unified Core"
+  ],
+  "scope": {
+    "primaryPurpose": "Unified core operation coordination context for site/asset/event/alarm references, command center references, readiness references, and cross-module orchestration references.",
+    "docsOnly": true,
+    "runtimeImplementation": false,
+    "apiImplementation": false,
+    "databaseImplementation": false,
+    "frontendImplementation": false
+  },
+  "ownerScope": [
+    "core operations context reference",
+    "site asset event alarm coordination reference",
+    "command center operation reference",
+    "cross module operational readiness reference",
+    "business module orchestration reference",
+    "UDOC UESG UMMS UCDE linkage reference",
+    "ONE Adapter consumer boundary reference",
+    "UConsole status linkage reference",
+    "Reports Analytics linkage reference"
+  ],
+  "forbiddenOwnership": [
+    "no Edge runtime",
+    "no Link runtime",
+    "no DB schema",
+    "no Contracts schema",
+    "no backend runtime",
+    "no frontend runtime",
+    "no command center runtime implementation in A1",
+    "no auth login RBAC implementation in A1",
+    "no credential secret token"
+  ],
+  "consumedObjects": [
+    "site reference",
+    "asset reference",
+    "event reference",
+    "alarm reference",
+    "maintenance linkage reference",
+    "sustainability linkage reference",
+    "operations evidence linkage reference",
+    "data operations linkage reference",
+    "module readiness reference",
+    "adapter status reference",
+    "console status reference",
+    "report output reference",
+    "analytics output reference",
+    "Edge gateway reference",
+    "Link delivery reference",
+    "UFMS fault intelligence reference optional"
+  ],
+  "providedObjects": [
+    "ucoreOperationsContext",
+    "ucoreCoordinationContext",
+    "ucoreReadinessContext",
+    "ucoreModuleOrchestrationContext",
+    "ucoreCommandCenterReferenceContext",
+    "ucoreStatusSnapshot",
+    "ucoreReadinessStatus"
+  ],
+  "statusModel": [
+    "planned",
+    "draft-a1",
+    "contract-pending",
+    "runtime-pending",
+    "blocked",
+    "ready-for-a2"
+  ],
+  "operationCoordinationFields": [
+    "tenantId",
+    "projectId",
+    "siteId",
+    "assetId",
+    "deviceId",
+    "eventId",
+    "alarmId",
+    "sourceSystem",
+    "operationCoordinationId",
+    "moduleOrchestrationId",
+    "readinessContextId",
+    "maintenanceLinkageContextId",
+    "sustainabilityLinkageContextId",
+    "evidenceLinkageContextId",
+    "adapterContextId",
+    "consoleContextId",
+    "traceId",
+    "correlationId",
+    "createdAt",
+    "updatedAt"
+  ],
+  "dependencies": {
+    "platform": [
+      "one-adapter",
+      "uconsole",
+      "reports",
+      "analytics",
+      "nexus-ai-consumer"
+    ],
+    "businessModules": [
+      "umms",
+      "uesg",
+      "udoc",
+      "ucde"
+    ],
+    "foundationReferencesOnly": [
+      "AN_VANTARIS_Contracts",
+      "AN_VANTARIS_EDGE",
+      "AN_VANTARIS_LINK",
+      "AN_VANTARIS_DB"
+    ]
+  },
+  "impact": {
+    "apiImpact": "none-in-a1-draft",
+    "dbImpact": "none-in-a1-draft",
+    "menuImpact": "none-in-a1-draft",
+    "runtimeImpact": "none-in-a1-draft",
+    "schemaImpact": "none-in-a1-draft"
+  },
+  "nextTask": "ONE-ADAPTER-A1-CONSUMER-CONTRACT-DRAFT"
+}

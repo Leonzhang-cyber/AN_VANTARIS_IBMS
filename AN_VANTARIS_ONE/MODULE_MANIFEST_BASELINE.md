@@ -49,3 +49,12 @@ UDOC A1 module manifest draft is established.
 Historical A0 wording `idc-dcim` is realigned to UDOC as the primary module name.
 UDOC remains `runtimeReady: false`.
 UDOC impact remains `none-in-a1-draft` for API, DB, menu, runtime, and schema.
+
+## 7. UESG UMMS UCore A1 Draft Alignment
+
+UESG A1 module manifest draft is established with primary name UESG and historical ESG wording marked as deprecated primary naming.
+UMMS A1 module manifest draft is established with primary name UMMS and historical MMS wording marked as deprecated primary naming.
+UCore A1 module manifest draft is established with primary name UCore and historical IBMS Core wording marked as deprecated primary naming.
+
+All three modules remain `runtimeReady: false`.
+All three modules remain docs-only and keep API/DB/menu/runtime/schema impact as `none-in-a1-draft`.

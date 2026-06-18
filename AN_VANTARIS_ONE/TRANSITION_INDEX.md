@@ -31,6 +31,9 @@ Completed stages:
 - CDE-A1-MODULE-MANIFEST-DRAFT — current task
 - U-MODULES-A0-NAMING-AND-LAYER-REALIGNMENT — current task
 - UDOC-A1-MODULE-MANIFEST-DRAFT — current task
+- UESG-A1-MODULE-MANIFEST-DRAFT — current task
+- UMMS-A1-MODULE-MANIFEST-DRAFT — current task
+- UCORE-A1-MODULE-MANIFEST-DRAFT — current task
 
 ## Current Allowed Work
 
@@ -49,17 +52,18 @@ Completed stages:
 - ONE-private expansion of Edge/Link/Contracts runtime
 - direct UFMS runtime/source/auth/login/seed/migration copy into ONE
 
-## Recommended Next Tasks
+## Next Recommended Task
 
-1. UESG-A1-MODULE-MANIFEST-DRAFT
-2. UMMS-A1-MODULE-MANIFEST-DRAFT
-3. UCORE-A1-MODULE-MANIFEST-DRAFT
-4. ONE-ADAPTER-A1-CONSUMER-CONTRACT-DRAFT
-5. UCONSOLE-A1-MODULE-STATUS-CONTRACT-DRAFT
-6. UCDE-A2-EVIDENCE-CONTRACT-DRAFT
+- ONE-ADAPTER-A1-CONSUMER-CONTRACT-DRAFT
 
 ## Historical Name Mapping
 
+- ESG -> UESG
+- esg -> uesg
+- MMS -> UMMS
+- mms -> umms
+- IBMS Core -> UCore
+- ibms-core -> ucore
 - IDC/DCIM -> UDOC
 - idc-dcim -> udoc
 - Data Center Operations -> UDOC

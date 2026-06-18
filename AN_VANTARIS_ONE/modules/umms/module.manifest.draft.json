@@ -1,0 +1,137 @@
+{
+  "moduleId": "umms",
+  "moduleName": "UMMS",
+  "displayName": "UMMS",
+  "fullName": "Unified Maintenance Management System",
+  "chineseName": "全向维护管理系统",
+  "moduleType": "business-module",
+  "manifestVersion": "A1-draft",
+  "status": "draft-a1",
+  "runtimeReady": false,
+  "historicalNames": [
+    "MMS",
+    "mms",
+    "Maintenance Management System",
+    "Maintenance Operations"
+  ],
+  "scope": {
+    "primaryPurpose": "Unified maintenance context for work order references, preventive and corrective references, SLA/assignment/escalation references, and cross-module linkage references.",
+    "docsOnly": true,
+    "runtimeImplementation": false,
+    "apiImplementation": false,
+    "databaseImplementation": false,
+    "frontendImplementation": false
+  },
+  "ownerScope": [
+    "maintenance management context reference",
+    "work order reference context",
+    "preventive maintenance reference context",
+    "corrective maintenance reference context",
+    "fault maintenance linkage context reference",
+    "SLA assignment escalation reference context",
+    "spare parts reference context",
+    "technician team reference context",
+    "UFMS fault intelligence optional reference",
+    "UDOC asset location linkage reference",
+    "UESG maintenance energy linkage reference",
+    "UCDE evidence linkage reference",
+    "UCore operational linkage reference"
+  ],
+  "forbiddenOwnership": [
+    "no Edge runtime",
+    "no Link runtime",
+    "no DB schema",
+    "no Contracts schema",
+    "no backend runtime",
+    "no frontend runtime",
+    "no real work order engine implementation in A1",
+    "no technician scheduling implementation in A1",
+    "no credential secret token"
+  ],
+  "consumedObjects": [
+    "maintenance request reference",
+    "work order reference",
+    "preventive task reference",
+    "corrective task reference",
+    "SLA reference",
+    "assignment reference",
+    "escalation reference",
+    "spare parts reference",
+    "technician reference",
+    "team reference",
+    "asset reference",
+    "location reference",
+    "fault event reference",
+    "evidence linkage reference",
+    "energy impact reference",
+    "UFMS fault intelligence reference optional"
+  ],
+  "providedObjects": [
+    "ummsMaintenanceContext",
+    "ummsWorkOrderContext",
+    "ummsPreventiveContext",
+    "ummsCorrectiveContext",
+    "ummsSlaEscalationContext",
+    "ummsTechnicianContext",
+    "ummsReadinessStatus"
+  ],
+  "statusModel": [
+    "planned",
+    "draft-a1",
+    "contract-pending",
+    "runtime-pending",
+    "blocked",
+    "ready-for-a2"
+  ],
+  "maintenanceContextFields": [
+    "tenantId",
+    "projectId",
+    "siteId",
+    "assetId",
+    "deviceId",
+    "sourceSystem",
+    "maintenanceContextId",
+    "workOrderContextId",
+    "preventiveContextId",
+    "correctiveContextId",
+    "slaContextId",
+    "assignmentContextId",
+    "escalationContextId",
+    "energyLinkageContextId",
+    "evidenceContextId",
+    "operationContextId",
+    "traceId",
+    "correlationId",
+    "createdAt",
+    "updatedAt"
+  ],
+  "dependencies": {
+    "platform": [
+      "one-adapter",
+      "uconsole",
+      "reports",
+      "analytics",
+      "nexus-ai-consumer"
+    ],
+    "businessModules": [
+      "ucore",
+      "uesg",
+      "udoc",
+      "ucde"
+    ],
+    "foundationReferencesOnly": [
+      "AN_VANTARIS_Contracts",
+      "AN_VANTARIS_EDGE",
+      "AN_VANTARIS_LINK",
+      "AN_VANTARIS_DB"
+    ]
+  },
+  "impact": {
+    "apiImpact": "none-in-a1-draft",
+    "dbImpact": "none-in-a1-draft",
+    "menuImpact": "none-in-a1-draft",
+    "runtimeImpact": "none-in-a1-draft",
+    "schemaImpact": "none-in-a1-draft"
+  },
+  "nextTask": "UCORE-A1-MODULE-MANIFEST-DRAFT"
+}
