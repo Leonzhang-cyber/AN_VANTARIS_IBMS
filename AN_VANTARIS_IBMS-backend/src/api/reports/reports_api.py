@@ -55,3 +55,24 @@ def reports_export_manifest():
         return Result.error(code=error[0], message=error[1])
     return Result.success(data=result)
 
+
+@api_bp.route("/v1/reports/audit", methods=["GET"])
+def reports_audit_list():
+    limit = request.args.get("limit", 50)
+    try:
+        limit = int(limit)
+    except (TypeError, ValueError):
+        limit = 50
+    event_type = request.args.get("eventType")
+    report_id = request.args.get("reportId")
+    result = _service.list_audit(limit=limit, event_type=event_type, report_id=report_id)
+    return Result.success(data=result)
+
+
+@api_bp.route("/v1/reports/audit/<string:audit_id>", methods=["GET"])
+def reports_audit_detail(audit_id: str):
+    result, error = _service.get_audit_detail(audit_id)
+    if error:
+        return Result.error(code=error[0], message=error[1])
+    return Result.success(data=result)
+

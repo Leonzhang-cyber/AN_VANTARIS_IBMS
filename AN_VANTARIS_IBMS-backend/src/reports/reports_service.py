@@ -4,14 +4,21 @@ from __future__ import annotations
 
 import uuid
 from datetime import datetime, timezone
-from typing import Any, Dict, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
+from src.reports.reports_audit_store import (
+    append_audit_record,
+    build_audit_record,
+    get_audit_record,
+    list_audit_records,
+)
 from src.reports.reports_catalog import get_catalog_item, list_catalog
 from src.reports.reports_integrity import (
     build_export_manifest,
     build_payload_hash,
     build_query_hash,
 )
+from src.reports.reports_permissions import evaluate_report_permission
 from src.reports.reports_provider import get_mock_rows
 
 
@@ -123,6 +130,37 @@ class ReportsService:
                 "evidenceLinked": bool(catalog.get("evidenceLinked", False)),
             },
         }
+        permission = evaluate_report_permission(action="query", report_id=report_id, context={"mode": "reports-r9"})
+        record = build_audit_record(
+            event_type="report.query",
+            payload={
+                "reportId": result["reportId"],
+                "reportName": result["reportName"],
+                "queryId": query_id,
+                "generatedAt": generated_at,
+                "provider": self.PROVIDER,
+                "runtimeMode": self.RUNTIME_MODE,
+                "mockData": True,
+                "queryHash": query_hash,
+                "payloadHash": payload_hash,
+                "rowCount": len(mock["rows"]),
+                "columnCount": len(mock["columns"]),
+                "sourceReferences": source_references,
+                "evidenceReferences": evidence_references,
+                "permissionDecision": permission.get("allowed", True),
+                "permissionMode": permission.get("permissionMode", "placeholder-allow"),
+                "tamperEvidenceMode": "hash-only",
+                "notes": "Query audit foundation in local JSONL store.",
+            },
+        )
+        persisted, persist_error = append_audit_record(record)
+        result["audit"]["auditId"] = record["auditId"]
+        result["audit"]["persisted"] = persisted
+        result["audit"]["storageMode"] = "local-jsonl"
+        result["audit"]["permissionDecision"] = permission.get("allowed", True)
+        result["audit"]["permissionMode"] = permission.get("permissionMode", "placeholder-allow")
+        if persist_error:
+            result["audit"]["auditPersistError"] = persist_error
         return result, None
 
     def build_export_manifest_preview(
@@ -179,5 +217,69 @@ class ReportsService:
                 "evidenceLinked": catalog.get("evidenceLinked", False),
             }
         )
+        permission = evaluate_report_permission(
+            action="export_manifest", report_id=report_id, context={"mode": "reports-r9"}
+        )
+        record = build_audit_record(
+            event_type="report.export_manifest",
+            payload={
+                "reportId": report_id,
+                "reportName": manifest.get("reportName", ""),
+                "queryId": manifest.get("queryId", ""),
+                "exportId": manifest.get("exportId", ""),
+                "generatedAt": manifest.get("generatedAt", ""),
+                "provider": manifest.get("provider", self.PROVIDER),
+                "runtimeMode": manifest.get("runtimeMode", self.RUNTIME_MODE),
+                "mockData": manifest.get("mockData", True),
+                "queryHash": manifest.get("queryHash", ""),
+                "payloadHash": manifest.get("payloadHash", ""),
+                "exportHash": manifest.get("exportHash", ""),
+                "rowCount": manifest.get("rowCount", 0),
+                "columnCount": manifest.get("columnCount", 0),
+                "sourceReferences": manifest.get("sourceReferences", []),
+                "evidenceReferences": manifest.get("evidenceReferences", []),
+                "permissionDecision": permission.get("allowed", True),
+                "permissionMode": permission.get("permissionMode", "placeholder-allow"),
+                "tamperEvidenceMode": manifest.get("tamperEvidenceMode", "hash-only-local-manifest"),
+                "notes": "Export manifest audit foundation in local JSONL store.",
+            },
+        )
+        persisted, persist_error = append_audit_record(record)
+        manifest["auditId"] = record["auditId"]
+        manifest["auditPersisted"] = persisted
+        manifest["storageMode"] = "local-jsonl"
+        manifest["permissionDecision"] = permission.get("allowed", True)
+        manifest["permissionMode"] = permission.get("permissionMode", "placeholder-allow")
+        if persist_error:
+            manifest["auditPersistError"] = persist_error
         return {"manifest": manifest}, None
+
+    def list_audit(
+        self, limit: int = 50, event_type: Optional[str] = None, report_id: Optional[str] = None
+    ) -> Dict[str, Any]:
+        permission = evaluate_report_permission(action="view_audit", report_id=report_id or "*", context={})
+        records: List[Dict[str, Any]] = list_audit_records(
+            limit=limit,
+            event_type=event_type,
+            report_id=report_id,
+        )
+        return {
+            "items": records,
+            "total": len(records),
+            "storageMode": "local-jsonl",
+            "permissionMode": permission.get("permissionMode", "placeholder-allow"),
+            "permissionDecision": permission.get("allowed", True),
+        }
+
+    def get_audit_detail(self, audit_id: str) -> Tuple[Optional[Dict[str, Any]], Optional[Tuple[int, str]]]:
+        permission = evaluate_report_permission(action="view_audit", report_id="*", context={"auditId": audit_id})
+        record = get_audit_record(audit_id)
+        if not record:
+            return None, (404, "auditId not found")
+        return {
+            "item": record,
+            "storageMode": "local-jsonl",
+            "permissionMode": permission.get("permissionMode", "placeholder-allow"),
+            "permissionDecision": permission.get("allowed", True),
+        }, None
 

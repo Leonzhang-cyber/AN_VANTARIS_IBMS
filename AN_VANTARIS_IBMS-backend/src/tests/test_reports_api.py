@@ -46,6 +46,8 @@ class TestReportsAPI(unittest.TestCase):
         self.assertIn("payloadHash", payload["data"]["integrity"])
         self.assertIn("audit", payload["data"])
         self.assertEqual(payload["data"]["audit"]["auditEventType"], "report.query")
+        self.assertIn("auditId", payload["data"]["audit"])
+        self.assertIn("permissionMode", payload["data"]["audit"])
         self.assertIn("traceability", payload["data"])
 
     def test_query_invalid_report_id(self):
@@ -76,6 +78,8 @@ class TestReportsAPI(unittest.TestCase):
         self.assertIn("exportHash", manifest)
         self.assertIn("queryHash", manifest)
         self.assertIn("payloadHash", manifest)
+        self.assertIn("auditId", manifest)
+        self.assertIn("permissionMode", manifest)
         self.assertEqual(manifest["certified"], False)
         self.assertEqual(manifest["iec62443Certified"], False)
 
@@ -89,6 +93,21 @@ class TestReportsAPI(unittest.TestCase):
                 "summary": {},
             },
         )
+        self.assertEqual(response.status_code, 404)
+
+    def test_audit_list_endpoint(self):
+        self.client.post(
+            "/api/v1/reports/query",
+            json={"reportId": "incident-summary", "limit": 1, "filters": {"moduleId": "source-reference"}},
+        )
+        response = self.client.get("/api/v1/reports/audit?limit=20")
+        self.assertEqual(response.status_code, 200)
+        payload = response.get_json()
+        self.assertIn("items", payload["data"])
+        self.assertIn("permissionMode", payload["data"])
+
+    def test_audit_detail_not_found(self):
+        response = self.client.get("/api/v1/reports/audit/not-found")
         self.assertEqual(response.status_code, 404)
 
 

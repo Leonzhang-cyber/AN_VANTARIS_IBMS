@@ -5,9 +5,11 @@ import { ApiError } from '@/services/api/errors'
 import {
   buildReportExportManifest,
   getReportCatalogItem,
+  getReportsAudit,
   getReportsCatalog,
   getReportsHealth,
   queryReport,
+  type ReportAuditRecord,
   type ReportExportManifest,
   type QueryReportPayload,
   type QueryReportResult,
@@ -58,6 +60,7 @@ const FILTER_FIELD_KEYS: FilterFieldKey[] = [
 
 const loadingHealth = ref(false)
 const loadingCatalog = ref(false)
+const loadingAudit = ref(false)
 const querying = ref(false)
 const exportingCsv = ref(false)
 const queryExecuted = ref(false)
@@ -67,9 +70,13 @@ const apiUnavailable = ref(false)
 const healthError = ref('')
 const catalogError = ref('')
 const queryError = ref('')
+const auditError = ref('')
 
 const selectedReportId = ref('')
 const catalogItems = ref<ReportsCatalogItem[]>([])
+const auditRecords = ref<ReportAuditRecord[]>([])
+const auditStorageMode = ref('local-jsonl')
+const auditPermissionMode = ref('placeholder-allow')
 const health = ref<ReportsHealth>({
   module: 'reports',
   status: 'unknown',
@@ -179,6 +186,21 @@ const activeFilterEntries = computed(() => {
 
 function normalizeError(error: unknown, fallback: string): string {
   return error instanceof ApiError ? error.message : fallback
+}
+
+async function loadAuditTrail(): Promise<void> {
+  loadingAudit.value = true
+  auditError.value = ''
+  try {
+    const result = await getReportsAudit({ limit: 20 })
+    auditRecords.value = result.items
+    auditStorageMode.value = result.storageMode
+    auditPermissionMode.value = result.permissionMode
+  } catch (error) {
+    auditError.value = normalizeError(error, 'Audit trail is temporarily unavailable.')
+  } finally {
+    loadingAudit.value = false
+  }
 }
 
 function catalogRowClassName({ row }: { row: ReportsCatalogItem }): string {
@@ -416,14 +438,17 @@ async function runQuery(): Promise<void> {
   try {
     if (fallbackMode.value) {
       queryResult.value = buildLocalFallbackQueryResult(payload)
+      void loadAuditTrail()
       return
     }
     queryResult.value = await queryReport(payload)
+    void loadAuditTrail()
   } catch (error) {
     const message = normalizeError(error, 'Failed to query report.')
     if (apiUnavailable.value) {
       queryResult.value = buildLocalFallbackQueryResult(payload)
       queryError.value = `${message} Switched to fallback mock mode.`
+      void loadAuditTrail()
     } else {
       queryError.value = message
       queryResult.value = null
@@ -705,6 +730,7 @@ async function exportCurrentResultCsv(): Promise<void> {
 
     exportManifest.value = manifest
     downloadJson(buildManifestFilename(reportId), manifest)
+    void loadAuditTrail()
     ElMessage.success('CSV and manifest exported.')
   } catch {
     ElMessage.error('CSV or manifest export failed.')
@@ -716,6 +742,7 @@ async function exportCurrentResultCsv(): Promise<void> {
 onMounted(() => {
   void loadHealth()
   void loadCatalog()
+  void loadAuditTrail()
 })
 </script>
 
@@ -1116,6 +1143,61 @@ onMounted(() => {
           >
             <template #default="{ row }">
               {{ renderCellValue(row[column]) }}
+            </template>
+          </el-table-column>
+        </el-table>
+      </template>
+    </el-card>
+
+    <el-card shadow="never" class="block-space top-space">
+      <template #header>
+        <div class="section-title">Audit Trail</div>
+      </template>
+      <el-alert
+        type="info"
+        show-icon
+        :closable="false"
+        title="Local JSONL audit store is an audit readiness foundation."
+        description="It is not a formal certified evidence protocol or certification proof."
+        class="block-space"
+      />
+      <el-alert
+        v-if="auditError"
+        type="warning"
+        show-icon
+        :closable="false"
+        :title="auditError"
+        class="block-space"
+      />
+      <el-skeleton v-if="loadingAudit" :rows="3" animated />
+      <template v-else>
+        <el-descriptions :column="2" border class="block-space">
+          <el-descriptions-item label="storageMode">{{ auditStorageMode }}</el-descriptions-item>
+          <el-descriptions-item label="permissionMode">{{ auditPermissionMode }}</el-descriptions-item>
+        </el-descriptions>
+        <el-empty
+          v-if="auditRecords.length === 0"
+          description="No audit records found yet. Run query or export manifest to create records."
+        />
+        <el-table v-else :data="auditRecords" row-key="auditId" empty-text="No audit records">
+          <el-table-column prop="auditEventType" label="Event" min-width="170" />
+          <el-table-column prop="reportId" label="Report" min-width="150" />
+          <el-table-column prop="queryId" label="Query ID" min-width="230" show-overflow-tooltip />
+          <el-table-column prop="exportId" label="Export ID" min-width="230" show-overflow-tooltip />
+          <el-table-column prop="queryHash" label="queryHash" min-width="220" show-overflow-tooltip />
+          <el-table-column prop="payloadHash" label="payloadHash" min-width="220" show-overflow-tooltip />
+          <el-table-column prop="exportHash" label="exportHash" min-width="220" show-overflow-tooltip />
+          <el-table-column prop="persistedAt" label="persistedAt" min-width="210" />
+          <el-table-column prop="storageMode" label="storageMode" min-width="130" />
+          <el-table-column prop="permissionMode" label="permissionMode" min-width="150" />
+          <el-table-column label="certified" min-width="100">
+            <template #default="{ row }">
+              {{ row.certified }}
+            </template>
+          </el-table-column>
+          <el-table-column label="iec62443Certified" min-width="150">
+            <template #default="{ row }">
+              {{ row.iec62443Certified }}
             </template>
           </el-table-column>
         </el-table>

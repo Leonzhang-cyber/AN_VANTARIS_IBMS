@@ -61,6 +61,7 @@ export interface ReportIntegrity {
 }
 
 export interface ReportAuditMetadata {
+  auditId?: string
   queryId: string
   auditEventType: string
   generatedAt: string
@@ -70,6 +71,10 @@ export interface ReportAuditMetadata {
   mockData: boolean
   auditMode: string
   persisted: boolean
+  storageMode?: string
+  permissionDecision?: boolean
+  permissionMode?: string
+  auditPersistError?: string
 }
 
 export interface ReportTraceability {
@@ -105,6 +110,56 @@ export interface ReportExportManifest {
   certified: boolean
   iec62443Certified: boolean
   notes: string
+  auditId?: string
+  auditPersisted?: boolean
+  storageMode?: string
+  permissionDecision?: boolean
+  permissionMode?: string
+  auditPersistError?: string
+  fallbackMode?: boolean
+  hashUnavailable?: boolean
+}
+
+export interface ReportPermissionDecision {
+  allowed: boolean
+  permissionMode: string
+}
+
+export interface ReportAuditRecord {
+  auditId: string
+  auditEventType: string
+  reportId: string
+  reportName: string
+  queryId: string
+  exportId?: string
+  generatedAt: string
+  persistedAt: string
+  sourceSemantics: string
+  provider: string
+  runtimeMode: string
+  mockData: boolean
+  queryHash: string
+  payloadHash: string
+  exportHash?: string
+  rowCount: number
+  columnCount: number
+  sourceReferences: string[]
+  evidenceReferences: string[]
+  permissionDecision: boolean
+  permissionMode: string
+  certified: boolean
+  iec62443Certified: boolean
+  storageMode: string
+  tamperEvidenceMode: string
+  notes: string
+}
+
+export interface ReportAuditListResponse {
+  items: ReportAuditRecord[]
+  total: number
+  storageMode: string
+  permissionMode: string
+  permissionDecision: boolean
 }
 
 function asRecord(value: unknown): Record<string, unknown> {
@@ -198,6 +253,12 @@ function normalizeQueryResult(raw: unknown): QueryReportResult {
             mockData: Boolean(auditRaw.mockData),
             auditMode: String(auditRaw.auditMode ?? 'runtime-skeleton-local'),
             persisted: Boolean(auditRaw.persisted),
+            auditId: auditRaw.auditId ? String(auditRaw.auditId) : undefined,
+            storageMode: auditRaw.storageMode ? String(auditRaw.storageMode) : undefined,
+            permissionDecision:
+              auditRaw.permissionDecision !== undefined ? Boolean(auditRaw.permissionDecision) : undefined,
+            permissionMode: auditRaw.permissionMode ? String(auditRaw.permissionMode) : undefined,
+            auditPersistError: auditRaw.auditPersistError ? String(auditRaw.auditPersistError) : undefined,
           }
         : undefined,
     traceability:
@@ -239,6 +300,46 @@ function normalizeExportManifest(raw: unknown): ReportExportManifest {
     tamperEvidenceMode: String(data.tamperEvidenceMode ?? 'hash-only-local-manifest'),
     certified: Boolean(data.certified),
     iec62443Certified: Boolean(data.iec62443Certified),
+    notes: String(data.notes ?? ''),
+    auditId: data.auditId ? String(data.auditId) : undefined,
+    auditPersisted: data.auditPersisted !== undefined ? Boolean(data.auditPersisted) : undefined,
+    storageMode: data.storageMode ? String(data.storageMode) : undefined,
+    permissionDecision: data.permissionDecision !== undefined ? Boolean(data.permissionDecision) : undefined,
+    permissionMode: data.permissionMode ? String(data.permissionMode) : undefined,
+    auditPersistError: data.auditPersistError ? String(data.auditPersistError) : undefined,
+    fallbackMode: data.fallbackMode !== undefined ? Boolean(data.fallbackMode) : undefined,
+    hashUnavailable: data.hashUnavailable !== undefined ? Boolean(data.hashUnavailable) : undefined,
+  }
+}
+
+function normalizeAuditRecord(raw: unknown): ReportAuditRecord {
+  const data = asRecord(raw)
+  return {
+    auditId: String(data.auditId ?? ''),
+    auditEventType: String(data.auditEventType ?? ''),
+    reportId: String(data.reportId ?? ''),
+    reportName: String(data.reportName ?? ''),
+    queryId: String(data.queryId ?? ''),
+    exportId: data.exportId ? String(data.exportId) : undefined,
+    generatedAt: String(data.generatedAt ?? ''),
+    persistedAt: String(data.persistedAt ?? ''),
+    sourceSemantics: String(data.sourceSemantics ?? 'ibms-neutral'),
+    provider: String(data.provider ?? 'local-mock-provider'),
+    runtimeMode: String(data.runtimeMode ?? 'skeleton'),
+    mockData: Boolean(data.mockData),
+    queryHash: String(data.queryHash ?? ''),
+    payloadHash: String(data.payloadHash ?? ''),
+    exportHash: data.exportHash ? String(data.exportHash) : undefined,
+    rowCount: Number(data.rowCount ?? 0),
+    columnCount: Number(data.columnCount ?? 0),
+    sourceReferences: asStringArray(data.sourceReferences),
+    evidenceReferences: asStringArray(data.evidenceReferences),
+    permissionDecision: Boolean(data.permissionDecision),
+    permissionMode: String(data.permissionMode ?? 'placeholder-allow'),
+    certified: Boolean(data.certified),
+    iec62443Certified: Boolean(data.iec62443Certified),
+    storageMode: String(data.storageMode ?? 'local-jsonl'),
+    tamperEvidenceMode: String(data.tamperEvidenceMode ?? 'hash-only'),
     notes: String(data.notes ?? ''),
   }
 }
@@ -293,5 +394,32 @@ export async function buildReportExportManifest(
       ? (unwrapped as { manifest?: unknown }).manifest
       : unwrapped
   return normalizeExportManifest(manifestRaw)
+}
+
+export interface GetReportsAuditParams {
+  limit?: number
+  eventType?: string
+  reportId?: string
+}
+
+export async function getReportsAudit(params: GetReportsAuditParams = {}): Promise<ReportAuditListResponse> {
+  const { data } = await request.get('/v1/reports/audit', { params })
+  const unwrapped = unwrapData<{ items?: unknown[] } | unknown>(data)
+  const body = asRecord(unwrapped)
+  return {
+    items: Array.isArray(body.items) ? body.items.map((item) => normalizeAuditRecord(item)) : [],
+    total: Number(body.total ?? 0),
+    storageMode: String(body.storageMode ?? 'local-jsonl'),
+    permissionMode: String(body.permissionMode ?? 'placeholder-allow'),
+    permissionDecision: body.permissionDecision !== undefined ? Boolean(body.permissionDecision) : true,
+  }
+}
+
+export async function getReportsAuditRecord(auditId: string): Promise<ReportAuditRecord> {
+  const { data } = await request.get(`/v1/reports/audit/${encodeURIComponent(auditId)}`)
+  const unwrapped = unwrapData<{ item?: unknown } | unknown>(data)
+  const body = asRecord(unwrapped)
+  const item = body.item ?? unwrapped
+  return normalizeAuditRecord(item)
 }
 

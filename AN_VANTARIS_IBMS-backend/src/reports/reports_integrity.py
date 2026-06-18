@@ -130,7 +130,7 @@ def build_export_manifest(payload: Dict[str, Any]) -> Dict[str, Any]:
         "tamperEvidenceMode": "hash-only-local-manifest",
         "certified": False,
         "iec62443Certified": False,
-        "notes": "Hash-only local manifest for audit readiness; not a formal long-term non-repudiation chain.",
+        "notes": "Hash-only local manifest for audit readiness; not a formal certified evidence protocol.",
     }
     manifest_seed["exportHash"] = sha256_hex(manifest_seed)
     return manifest_seed
