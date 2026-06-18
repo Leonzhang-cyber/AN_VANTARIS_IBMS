@@ -11,4 +11,5 @@ from .data_modeling import modeling_api
 from .reports import reports_api
 from .console import console_api
 from .ucde import ucde_api
+from .assets import assets_api
 from .iot.sse_api import *

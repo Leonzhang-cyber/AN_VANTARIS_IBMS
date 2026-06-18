@@ -59,6 +59,20 @@ export const fallbackMenuItems: AppMenuItem[] = [
     ],
   },
   {
+    id: 'assets-topology',
+    label: 'Assets & Topology',
+    path: '/assets/topology',
+    source: 'static',
+    children: [
+      {
+        id: 'assets-topology-home',
+        label: 'Asset Topology',
+        path: '/assets/topology',
+        source: 'static',
+      },
+    ],
+  },
+  {
     id: 'ucde',
     label: 'UCDE',
     path: '/ucde/evidence',

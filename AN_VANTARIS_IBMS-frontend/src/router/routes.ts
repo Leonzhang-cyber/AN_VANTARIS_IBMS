@@ -10,6 +10,7 @@ import PermissionListView from '@/modules/system/PermissionListView.vue'
 import PlatformOperationsDashboard from '@/modules/console/PlatformOperationsDashboard.vue'
 import ReportsView from '@/modules/reports/ReportsView.vue'
 import EvidenceCenter from '@/modules/ucde/EvidenceCenter.vue'
+import AssetsTopology from '@/modules/assets/AssetsTopology.vue'
 import SystemOverviewView from '@/modules/system/SystemOverviewView.vue'
 import SystemSettingsView from '@/modules/system/SystemSettingsView.vue'
 
@@ -110,6 +111,12 @@ export const routes: RouteRecordRaw[] = [
     name: 'ucde-evidence-center',
     component: EvidenceCenter,
     meta: { requiresAuth: true, title: 'UCDE Evidence Center', layout: true },
+  },
+  {
+    path: '/assets/topology',
+    name: 'assets-topology',
+    component: AssetsTopology,
+    meta: { requiresAuth: true, title: 'Assets & Topology', layout: true },
   },
   {
     path: '/403',
