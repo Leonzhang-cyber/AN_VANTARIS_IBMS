@@ -1,6 +1,6 @@
 {
-  "moduleId": "cde",
-  "displayName": "CDE / Evidence Traceability",
+  "moduleId": "ucde",
+  "displayName": "UCDE / Evidence Traceability",
   "moduleType": "business",
   "manifestVersion": "0.1.0-a1-draft",
   "status": "draft-a1",
@@ -41,11 +41,11 @@
     "attachment_media_document_reference"
   ],
   "providedObjects": [
-    "cde_evidence_index_context",
-    "cde_traceability_status",
-    "cde_audit_linkage_context",
-    "cde_report_evidence_context",
-    "cde_evidence_readiness_status"
+    "ucde_evidence_index_context",
+    "ucde_traceability_status",
+    "ucde_audit_linkage_context",
+    "ucde_report_evidence_context",
+    "ucde_evidence_readiness_status"
   ],
   "statusModel": [
     "planned",
@@ -88,5 +88,5 @@
   "dbImpact": "none-in-a1-draft",
   "menuImpact": "none-in-a1-draft",
   "runtimeImplementation": "not-in-this-task",
-  "nextTask": "CDE-A2-EVIDENCE-CONTRACT-DRAFT"
+  "nextTask": "UCDE-A2-EVIDENCE-CONTRACT-DRAFT"
 }

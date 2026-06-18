@@ -1,4 +1,4 @@
-# CDE A1 Evidence Object Model
+# UCDE A1 Evidence Object Model
 
 ## 1. Core Evidence Object Draft
 
@@ -42,12 +42,12 @@ Document-level draft object (not contracts/schema):
 - every evidence reference should preserve traceId where available
 - every event/alarm derived evidence should preserve messageId
 - every cross-module chain should preserve correlationId
-- CDE must not mutate source business record
-- CDE must not become system of record for source business modules
+- UCDE must not mutate source business record
+- UCDE must not become system of record for source business modules
 
 ## 4. A1 Boundary
 
 This is not JSON Schema.
 This is not DB schema.
 This is not API contract.
-Only CDE-A2 may propose evidence contract draft.
+Only UCDE-A2 may propose evidence contract draft.

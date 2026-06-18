@@ -8,4 +8,4 @@
 6. Reports and Analytics remain consumers, not business owners.
 7. Nexus AI Consumer remains future.
 8. No runtime/API/DB/frontend/menu changes in A0.
-9. Next recommended task: CDE-A1-MODULE-MANIFEST-DRAFT or ONE-ADAPTER-A1-CONSUMER-CONTRACT-DRAFT.
+9. Next recommended task: UDOC-A1-MODULE-MANIFEST-DRAFT or ONE-ADAPTER-A1-CONSUMER-CONTRACT-DRAFT.

@@ -29,12 +29,12 @@
         "AN_VANTARIS_LINK"
       ],
       "providesTo": [
-        "ibms-core",
-        "mms",
-        "esg",
-        "idc-dcim",
-        "cde",
-        "console",
+        "ucore",
+        "umms",
+        "uesg",
+        "udoc",
+        "ucde",
+        "uconsole",
         "reports",
         "analytics"
       ],
@@ -43,10 +43,10 @@
       "nextTask": "ONE-ADAPTER-A1-CONSUMER-CONTRACT-DRAFT"
     },
     {
-      "moduleId": "ibms-core",
-      "displayName": "IBMS Core",
+      "moduleId": "ucore",
+      "displayName": "UCore",
       "moduleType": "business",
-      "status": "draft-a0",
+      "status": "pending-a1",
       "owns": [
         "building operations context",
         "operations dashboard context",
@@ -56,29 +56,29 @@
         "Edge runtime",
         "Link runtime",
         "UFMS runtime",
-        "CDE evidence chain core"
+        "UCDE evidence chain core"
       ],
       "consumesFrom": [
         "one-adapter"
       ],
       "providesTo": [
-        "mms",
-        "esg",
-        "idc-dcim",
-        "cde",
-        "console",
+        "umms",
+        "uesg",
+        "udoc",
+        "ucde",
+        "uconsole",
         "reports",
         "analytics"
       ],
       "traceabilityRequired": true,
       "runtimeReady": false,
-      "nextTask": "IBMS-CORE-A1-MODULE-MANIFEST-DRAFT"
+      "nextTask": "UCORE-A1-MODULE-MANIFEST-DRAFT"
     },
     {
-      "moduleId": "mms",
-      "displayName": "MMS",
+      "moduleId": "umms",
+      "displayName": "UMMS",
       "moduleType": "business",
-      "status": "draft-a0",
+      "status": "pending-a1",
       "owns": [
         "maintenance workflow lifecycle context",
         "work order context",
@@ -88,28 +88,28 @@
         "Edge runtime",
         "Link runtime",
         "UFMS runtime",
-        "ESG carbon model"
+        "UESG carbon model"
       ],
       "consumesFrom": [
         "one-adapter",
-        "ibms-core"
+        "ucore"
       ],
       "providesTo": [
-        "esg",
-        "cde",
-        "console",
+        "uesg",
+        "ucde",
+        "uconsole",
         "reports",
         "analytics"
       ],
       "traceabilityRequired": true,
       "runtimeReady": false,
-      "nextTask": "MMS-A1-MODULE-MANIFEST-DRAFT"
+      "nextTask": "UMMS_A1_MODULE_MANIFEST_DRAFT"
     },
     {
-      "moduleId": "esg",
-      "displayName": "ESG",
+      "moduleId": "uesg",
+      "displayName": "UESG",
       "moduleType": "business",
-      "status": "draft-a0",
+      "status": "pending-a1",
       "owns": [
         "energy/sustainability interpretation context",
         "sustainability KPI context",
@@ -119,29 +119,29 @@
         "Edge runtime",
         "Link runtime",
         "UFMS runtime",
-        "MMS work order lifecycle"
+        "UMMS work order lifecycle"
       ],
       "consumesFrom": [
         "one-adapter",
-        "ibms-core",
-        "mms",
-        "idc-dcim"
+        "ucore",
+        "umms",
+        "udoc"
       ],
       "providesTo": [
-        "cde",
-        "console",
+        "ucde",
+        "uconsole",
         "reports",
         "analytics"
       ],
       "traceabilityRequired": true,
       "runtimeReady": false,
-      "nextTask": "ESG-A1-MODULE-MANIFEST-DRAFT"
+      "nextTask": "UESG_A1_MODULE_MANIFEST_DRAFT"
     },
     {
-      "moduleId": "idc-dcim",
-      "displayName": "IDC/DCIM",
+      "moduleId": "udoc",
+      "displayName": "UDOC",
       "moduleType": "business",
-      "status": "draft-a0",
+      "status": "pending-a1",
       "owns": [
         "data center infrastructure operations context",
         "capacity/power/cooling context",
@@ -151,29 +151,29 @@
         "Edge runtime",
         "Link runtime",
         "UFMS runtime",
-        "ESG carbon reporting model"
+        "UESG carbon reporting model"
       ],
       "consumesFrom": [
         "one-adapter",
-        "ibms-core"
+        "ucore"
       ],
       "providesTo": [
-        "mms",
-        "esg",
-        "cde",
-        "console",
+        "umms",
+        "uesg",
+        "ucde",
+        "uconsole",
         "reports",
         "analytics"
       ],
       "traceabilityRequired": true,
       "runtimeReady": false,
-      "nextTask": "IDC-DCIM-A1-MODULE-MANIFEST-DRAFT"
+      "nextTask": "UDOC-A1-MODULE-MANIFEST-DRAFT"
     },
     {
-      "moduleId": "cde",
-      "displayName": "CDE",
+      "moduleId": "ucde",
+      "displayName": "UCDE",
       "moduleType": "business",
-      "status": "draft-a0",
+      "status": "draft-a1",
       "owns": [
         "evidence reference context",
         "traceability and audit linkage context",
@@ -187,25 +187,25 @@
       ],
       "consumesFrom": [
         "one-adapter",
-        "ibms-core",
-        "mms",
-        "esg",
-        "idc-dcim"
+        "ucore",
+        "umms",
+        "uesg",
+        "udoc"
       ],
       "providesTo": [
-        "console",
+        "uconsole",
         "reports",
         "analytics"
       ],
       "traceabilityRequired": true,
       "runtimeReady": false,
-      "nextTask": "CDE-A2-EVIDENCE-CONTRACT-DRAFT"
+      "nextTask": "UCDE-A2-EVIDENCE-CONTRACT-DRAFT"
     },
     {
-      "moduleId": "console",
-      "displayName": "Console",
+      "moduleId": "uconsole",
+      "displayName": "UConsole",
       "moduleType": "platform",
-      "status": "draft-a0",
+      "status": "pending-a1",
       "owns": [
         "platform/module health visibility context",
         "status/governance entry context"
@@ -218,18 +218,18 @@
       ],
       "consumesFrom": [
         "one-adapter",
-        "ibms-core",
-        "mms",
-        "esg",
-        "idc-dcim",
-        "cde"
+        "ucore",
+        "umms",
+        "uesg",
+        "udoc",
+        "ucde"
       ],
       "providesTo": [
         "platform-operators"
       ],
       "traceabilityRequired": true,
       "runtimeReady": false,
-      "nextTask": "CONSOLE-A1-MODULE-STATUS-CONTRACT-DRAFT"
+      "nextTask": "UCONSOLE_A1_MODULE_STATUS_CONTRACT_DRAFT"
     },
     {
       "moduleId": "reports",
@@ -246,12 +246,12 @@
         "UFMS runtime"
       ],
       "consumesFrom": [
-        "ibms-core",
-        "mms",
-        "esg",
-        "idc-dcim",
-        "cde",
-        "console"
+        "ucore",
+        "umms",
+        "uesg",
+        "udoc",
+        "ucde",
+        "uconsole"
       ],
       "providesTo": [
         "stakeholders"
@@ -275,12 +275,12 @@
         "UFMS runtime"
       ],
       "consumesFrom": [
-        "ibms-core",
-        "mms",
-        "esg",
-        "idc-dcim",
-        "cde",
-        "console"
+        "ucore",
+        "umms",
+        "uesg",
+        "udoc",
+        "ucde",
+        "uconsole"
       ],
       "providesTo": [
         "platform-operators",
@@ -306,11 +306,11 @@
       ],
       "consumesFrom": [
         "one-adapter",
-        "ibms-core",
-        "mms",
-        "esg",
-        "idc-dcim",
-        "cde"
+        "ucore",
+        "umms",
+        "uesg",
+        "udoc",
+        "ucde"
       ],
       "providesTo": [
         "future module consumers"
@@ -350,12 +350,12 @@
     "Menu/API/DB changes require separate approval."
   ],
   "nextTasks": [
-    "CDE-A1-MODULE-MANIFEST-DRAFT",
-    "IDC-DCIM-A1-MODULE-MANIFEST-DRAFT",
-    "ESG-A1-MODULE-MANIFEST-DRAFT",
-    "MMS-A1-MODULE-MANIFEST-DRAFT",
-    "IBMS-CORE-A1-MODULE-MANIFEST-DRAFT",
+    "UDOC-A1-MODULE-MANIFEST-DRAFT",
+    "UESG_A1_MODULE_MANIFEST_DRAFT",
+    "UMMS_A1_MODULE_MANIFEST_DRAFT",
+    "UCORE-A1-MODULE-MANIFEST-DRAFT",
     "ONE-ADAPTER-A1-CONSUMER-CONTRACT-DRAFT",
-    "CONSOLE-A1-MODULE-STATUS-CONTRACT-DRAFT"
+    "UCONSOLE_A1_MODULE_STATUS_CONTRACT_DRAFT",
+    "UCDE-A2-EVIDENCE-CONTRACT-DRAFT"
   ]
 }

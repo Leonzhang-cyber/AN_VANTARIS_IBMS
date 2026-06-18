@@ -7,12 +7,12 @@ This document defines the current A0 module manifest baseline for VANTARIS ONE a
 ## 2. Current Modules
 
 - ONE Adapter
-- IBMS Core
-- MMS
-- ESG
-- IDC / DCIM
-- CDE
-- Console
+- UCore
+- UMMS
+- UESG
+- UDOC
+- UCDE
+- UConsole
 - Reports
 - Analytics
 - Nexus AI Consumer, future
@@ -21,6 +21,8 @@ This document defines the current A0 module manifest baseline for VANTARIS ONE a
 
 AN_VANTARIS_Contracts, AN_VANTARIS_EDGE, and AN_VANTARIS_LINK are UFMS-led Shared Foundation dependencies.
 VANTARIS ONE consumes these dependencies and does not privately fork runtime.
+
+Foundation Layer is reference-only in this task. This task does not modify AN_VANTARIS_EDGE, AN_VANTARIS_LINK, AN_VANTARIS_DB, AN_VANTARIS_Contracts, contracts, or schemas.
 
 ## 4. A1 Manifest Rule
 

@@ -34,19 +34,19 @@
 
 ## 5) Console becomes hidden control plane runtime
 
-- description: Console scope expands from status view to runtime owner.
+- description: UConsole scope expands from status view to runtime owner.
 - impact: architecture contamination and operational risk.
-- control: maintain Console as visibility/governance entry only until approved A1.
+- control: maintain UConsole as visibility/governance entry only until approved A1.
 - current status: controlled.
-- next mitigation task: CONSOLE-A1-MODULE-STATUS-CONTRACT-DRAFT with strict scope gate.
+- next mitigation task: UCONSOLE_A1_MODULE_STATUS_CONTRACT_DRAFT with strict scope gate.
 
 ## 6) CDE becomes hidden data lake
 
-- description: CDE expands into unrestricted data lake ownership.
+- description: UCDE expands into unrestricted data lake ownership.
 - impact: blurred responsibilities and high complexity.
-- control: constrain CDE to evidence reference/traceability boundary.
-- current status: controlled by CDE A0 boundary.
-- next mitigation task: CDE-A1-MODULE-MANIFEST-DRAFT scope validation.
+- control: constrain UCDE to evidence reference/traceability boundary.
+- current status: controlled by UCDE A0 boundary.
+- next mitigation task: UCDE-A1-MODULE-MANIFEST-DRAFT scope validation.
 
 ## 7) ONE Adapter becomes hidden Link runtime
 

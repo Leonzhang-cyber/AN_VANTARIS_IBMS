@@ -29,6 +29,7 @@ Completed stages:
 - CONSOLE-A0-SHARED-FOUNDATION-HEALTH-VIEW — current task
 - MODULE-MANIFEST-A0-CROSS-MODULE-BASELINE — current task
 - CDE-A1-MODULE-MANIFEST-DRAFT — current task
+- U-MODULES-A0-NAMING-AND-LAYER-REALIGNMENT — current task
 
 ## Current Allowed Work
 
@@ -49,13 +50,13 @@ Completed stages:
 
 ## Recommended Next Tasks
 
-1. IDC-DCIM-A1-MODULE-MANIFEST-DRAFT
-2. ESG-A1-MODULE-MANIFEST-DRAFT
-3. MMS-A1-MODULE-MANIFEST-DRAFT
-4. IBMS-CORE-A1-MODULE-MANIFEST-DRAFT
+1. UDOC-A1-MODULE-MANIFEST-DRAFT
+2. UESG_A1_MODULE_MANIFEST_DRAFT
+3. UMMS_A1_MODULE_MANIFEST_DRAFT
+4. UCORE-A1-MODULE-MANIFEST-DRAFT
 5. ONE-ADAPTER-A1-CONSUMER-CONTRACT-DRAFT
-6. CONSOLE-A1-MODULE-STATUS-CONTRACT-DRAFT
-7. CDE-A2-EVIDENCE-CONTRACT-DRAFT
+6. UCONSOLE_A1_MODULE_STATUS_CONTRACT_DRAFT
+7. UCDE-A2-EVIDENCE-CONTRACT-DRAFT
 
 ## Shared Foundation Runtime Continuation
 
@@ -74,3 +75,4 @@ CDE is now defined as VANTARIS ONE evidence and traceability consumer module, no
 Console is now defined as VANTARIS ONE platform control and health view module, not as owner of Edge / Link / Contracts, not as owner of UFMS RCA/correlation runtime, and not as owner of business module logic.
 VANTARIS ONE now has cross-module manifest baseline for ONE Adapter, IBMS Core, MMS, ESG, IDC/DCIM, CDE, Console, Reports, Analytics and future Nexus AI Consumer.
 CDE now has module manifest draft and evidence object draft, both docs-only and runtimeReady false.
+VANTARIS ONE module naming and layer model is realigned to U-series names: UCore, UMMS, UESG, UCDE, UDOC, and UConsole, while Foundation Layer remains reference-only in this task.

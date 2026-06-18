@@ -2,11 +2,11 @@
 
 ## 1) CDE A1 manifest conflicts with A0 baseline
 
-- description: CDE A1 definitions diverge from cross-module A0 baseline.
+- description: UCDE A1 definitions diverge from cross-module A0 baseline.
 - impact: module consistency and governance drift.
 - control: enforce baseline alignment review before acceptance.
 - current status: controlled by A1 drafting rules.
-- next mitigation task: CDE-A1 baseline conformance checklist.
+- next mitigation task: UCDE-A1 baseline conformance checklist.
 
 ## 2) CDE evidence object is mistaken as DB schema
 
@@ -20,15 +20,15 @@
 
 - description: draft object is treated as final API contract.
 - impact: premature contract lock and compatibility risk.
-- control: mark as non-contract draft and defer contract to CDE-A2.
+- control: mark as non-contract draft and defer contract to UCDE-A2.
 - current status: controlled.
-- next mitigation task: CDE-A2-EVIDENCE-CONTRACT-DRAFT.
+- next mitigation task: UCDE-A2-EVIDENCE-CONTRACT-DRAFT.
 
 ## 4) CDE becomes system of record for business modules
 
-- description: CDE starts owning source business records.
+- description: UCDE starts owning source business records.
 - impact: ownership conflicts with IBMS/MMS/ESG/IDC modules.
-- control: CDE remains reference/traceability module only.
+- control: UCDE remains reference/traceability module only.
 - current status: controlled at design level.
 - next mitigation task: A2 contract must preserve source ownership boundaries.
 
@@ -42,39 +42,39 @@
 
 ## 6) CDE imports UFMS runtime
 
-- description: CDE implementation imports UFMS runtime/source directly.
+- description: UCDE implementation imports UFMS runtime/source directly.
 - impact: UFMS boundary contamination and coupling.
 - control: no UFMS runtime import rule.
 - current status: controlled by manifest rules.
-- next mitigation task: UFMS boundary review in each CDE follow-up task.
+- next mitigation task: UFMS boundary review in each UCDE follow-up task.
 
 ## 7) CDE redefines shared Contracts
 
-- description: CDE introduces independent contracts outside shared process.
+- description: UCDE introduces independent contracts outside shared process.
 - impact: schema drift and integration break risk.
 - control: prohibit contract redefinition and align to shared contracts path.
 - current status: controlled.
-- next mitigation task: adapter-first contract alignment before CDE-A2 finalization.
+- next mitigation task: adapter-first contract alignment before UCDE-A2 finalization.
 
 ## 8) CDE becomes hidden data lake
 
-- description: CDE scope expands into unrestricted data storage ownership.
+- description: UCDE scope expands into unrestricted data storage ownership.
 - impact: architectural bloat and governance risk.
-- control: keep CDE scope on evidence references and traceability context.
+- control: keep UCDE scope on evidence references and traceability context.
 - current status: controlled at A1 draft level.
 - next mitigation task: enforce scope constraints in A2/A3 planning.
 
 ## 9) CDE A2 contract draft starts before adapter contract is ready
 
-- description: CDE contract progression outruns adapter contract readiness.
+- description: UCDE contract progression outruns adapter contract readiness.
 - impact: incompatible boundaries and rework.
-- control: sequence CDE A2 with ONE-ADAPTER-A1 contract progress.
+- control: sequence UCDE A2 with ONE-ADAPTER-A1 contract progress.
 - current status: open.
-- next mitigation task: coordinate CDE-A2 with ONE-ADAPTER-A1-CONSUMER-CONTRACT-DRAFT.
+- next mitigation task: coordinate UCDE-A2 with ONE-ADAPTER-A1-CONSUMER-CONTRACT-DRAFT.
 
 ## 10) CDE manifest status drifts from module-manifest.baseline.json
 
-- description: CDE module status differs between baseline and CDE manifest draft.
+- description: UCDE module status differs between baseline and UCDE manifest draft.
 - impact: roadmap inconsistency and governance confusion.
 - control: synchronize status updates in baseline and module draft together.
 - current status: controlled in this task.

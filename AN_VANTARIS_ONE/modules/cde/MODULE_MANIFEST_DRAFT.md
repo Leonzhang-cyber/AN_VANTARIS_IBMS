@@ -1,13 +1,13 @@
-# CDE Module Manifest Draft
+# UCDE Module Manifest Draft
 
 ## 1. Purpose
 
-This document is the CDE A1 module manifest draft and defines CDE module identity, object boundaries, status model, and evidence traceability requirements.
+This document is the UCDE A1 module manifest draft and defines UCDE module identity, object boundaries, status model, and evidence traceability requirements.
 
 ## 2. Module Identity
 
-- moduleId: cde
-- displayName: CDE / Evidence Traceability
+- moduleId: ucde
+- displayName: UCDE / Evidence Traceability
 - moduleType: business
 - status: draft-a1
 - runtimeReady: false
@@ -52,11 +52,11 @@ This document is the CDE A1 module manifest draft and defines CDE module identit
 
 ## 6. Provided Objects
 
-- cde_evidence_index_context
-- cde_traceability_status
-- cde_audit_linkage_context
-- cde_report_evidence_context
-- cde_evidence_readiness_status
+- ucde_evidence_index_context
+- ucde_traceability_status
+- ucde_audit_linkage_context
+- ucde_report_evidence_context
+- ucde_evidence_readiness_status
 
 ## 7. Traceability Fields
 

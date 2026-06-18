@@ -9,15 +9,15 @@ Define the VANTARIS ONE cross-module manifest baseline.
 Platform / Consumer:
 
 - ONE Adapter
-- Console
+- UConsole
 
 Business Modules:
 
-- IBMS Core
-- MMS
-- ESG
-- IDC / DCIM
-- CDE
+- UCore
+- UMMS
+- UESG
+- UDOC
+- UCDE
 
 Supporting / Future:
 
@@ -34,12 +34,12 @@ Shared Foundation:
 ## 3. Boundary Summary
 
 - ONE Adapter consumes Shared Foundation.
-- IBMS Core owns building operations context.
-- MMS owns maintenance workflow context.
-- ESG owns energy and sustainability interpretation.
-- IDC/DCIM owns data center infrastructure operations context.
-- CDE owns evidence and traceability context.
-- Console owns platform health and governance view.
+- UCore owns building operations context.
+- UMMS owns maintenance workflow context.
+- UESG owns energy and sustainability interpretation.
+- UDOC owns data center infrastructure operations context.
+- UCDE owns evidence and traceability context.
+- UConsole owns platform health and governance view.
 - Reports consumes approved module outputs.
 - Analytics consumes approved module outputs.
 - Nexus AI Consumer is future and does not own model runtime yet.
