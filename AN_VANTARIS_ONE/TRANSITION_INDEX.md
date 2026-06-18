@@ -23,6 +23,7 @@ Completed stages:
 - ONE-ADAPTER-A0-SHARED-FOUNDATION-INTERFACE — current task
 - IBMS-CORE-A0-BUSINESS-MODULE-BOUNDARY — current task
 - MMS-A0-MODULE-BOUNDARY — current task
+- ESG-A0-MODULE-BOUNDARY — current task
 
 ## Current Allowed Work
 
@@ -43,9 +44,9 @@ Completed stages:
 
 ## Recommended Next Tasks
 
-1. ESG-A0-MODULE-BOUNDARY
-2. CDE-A0-EVIDENCE-CONSUMER
-3. CONSOLE-A0-SHARED-FOUNDATION-HEALTH-VIEW
+1. CDE-A0-EVIDENCE-CONSUMER
+2. CONSOLE-A0-SHARED-FOUNDATION-HEALTH-VIEW
+3. ESG-A1-MODULE-MANIFEST-DRAFT
 4. MMS-A1-MODULE-MANIFEST-DRAFT
 5. IBMS-CORE-A1-MODULE-MANIFEST-DRAFT
 6. ONE-ADAPTER-A1-CONSUMER-CONTRACT-DRAFT
@@ -61,3 +62,4 @@ VANTARIS ONE work focuses on adapters and business modules.
 VANTARIS ONE adapter is consumer boundary only; runtime implementation requires separate A1 approval.
 IBMS Core is now defined as VANTARIS ONE business module, not as the entire platform and not as owner of Edge / Link / Contracts.
 MMS is now defined as VANTARIS ONE maintenance business module, not as owner of Edge / Link / Contracts and not as owner of UFMS RCA/correlation runtime.
+ESG is now defined as VANTARIS ONE energy and sustainability business module, not as owner of Edge / Link / Contracts, not as owner of UFMS RCA/correlation runtime, not as MMS workflow owner, and not as CDE evidence chain owner.
