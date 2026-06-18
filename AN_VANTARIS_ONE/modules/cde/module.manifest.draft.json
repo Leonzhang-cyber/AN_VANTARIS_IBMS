@@ -1,0 +1,92 @@
+{
+  "moduleId": "cde",
+  "displayName": "CDE / Evidence Traceability",
+  "moduleType": "business",
+  "manifestVersion": "0.1.0-a1-draft",
+  "status": "draft-a1",
+  "runtimeReady": false,
+  "ownerScope": [
+    "evidence reference context",
+    "evidence traceability view",
+    "cross-module evidence index context",
+    "audit linkage context",
+    "evidence readiness status context"
+  ],
+  "forbiddenOwnership": [
+    "Edge runtime",
+    "Link runtime",
+    "global Contracts schema",
+    "UFMS runtime/RCA engine",
+    "MMS work order lifecycle",
+    "ESG calculation model",
+    "IDC/DCIM capacity/PUE model",
+    "IBMS Core operations dashboard",
+    "NexusAI model runtime",
+    "DB schema outside approved boundary"
+  ],
+  "consumedObjects": [
+    "evidence_reference",
+    "audit_event",
+    "event_alarm_reference",
+    "telemetry_snapshot_reference",
+    "edge_health_evidence",
+    "link_delivery_evidence",
+    "ufms_fault_intelligence_evidence_optional",
+    "mms_work_order_evidence",
+    "inspection_evidence",
+    "esg_report_meter_evidence",
+    "idc_dcim_incident_capacity_pue_evidence",
+    "user_action_evidence",
+    "configuration_change_evidence",
+    "attachment_media_document_reference"
+  ],
+  "providedObjects": [
+    "cde_evidence_index_context",
+    "cde_traceability_status",
+    "cde_audit_linkage_context",
+    "cde_report_evidence_context",
+    "cde_evidence_readiness_status"
+  ],
+  "statusModel": [
+    "planned",
+    "draft-a1",
+    "contract-pending",
+    "runtime-pending",
+    "blocked",
+    "ready-for-a2"
+  ],
+  "traceabilityFields": [
+    "tenantId",
+    "projectId",
+    "siteId",
+    "messageId",
+    "traceId",
+    "correlationId",
+    "sourceSystemId",
+    "gatewayId",
+    "connectorId",
+    "assetUid",
+    "deviceUid",
+    "pointUid",
+    "evidenceId",
+    "evidenceType",
+    "capturedAt",
+    "receivedAt",
+    "createdAt"
+  ],
+  "dependencies": [
+    "ONE Adapter",
+    "Shared Contracts",
+    "IBMS Core",
+    "MMS",
+    "ESG",
+    "IDC/DCIM",
+    "Console, future",
+    "UFMS fault intelligence evidence, optional"
+  ],
+  "apiImpact": "none-in-a1-draft",
+  "dbImpact": "none-in-a1-draft",
+  "menuImpact": "none-in-a1-draft",
+  "runtimeImplementation": "not-in-this-task",
+  "nextTask": "CDE-A2-EVIDENCE-CONTRACT-DRAFT"
+}

@@ -10,7 +10,7 @@
       "moduleId": "one-adapter",
       "displayName": "ONE Adapter",
       "moduleType": "consumer",
-      "status": "draft-a0",
+      "status": "draft-a1",
       "owns": [
         "Shared Foundation consumption boundary",
         "contract/version validation",
@@ -199,7 +199,7 @@
       ],
       "traceabilityRequired": true,
       "runtimeReady": false,
-      "nextTask": "CDE-A1-MODULE-MANIFEST-DRAFT"
+      "nextTask": "CDE-A2-EVIDENCE-CONTRACT-DRAFT"
     },
     {
       "moduleId": "console",

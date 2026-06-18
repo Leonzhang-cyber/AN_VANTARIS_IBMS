@@ -28,6 +28,7 @@ Completed stages:
 - CDE-A0-EVIDENCE-CONSUMER — current task
 - CONSOLE-A0-SHARED-FOUNDATION-HEALTH-VIEW — current task
 - MODULE-MANIFEST-A0-CROSS-MODULE-BASELINE — current task
+- CDE-A1-MODULE-MANIFEST-DRAFT — current task
 
 ## Current Allowed Work
 
@@ -48,13 +49,13 @@ Completed stages:
 
 ## Recommended Next Tasks
 
-1. CDE-A1-MODULE-MANIFEST-DRAFT
-2. IDC-DCIM-A1-MODULE-MANIFEST-DRAFT
-3. ESG-A1-MODULE-MANIFEST-DRAFT
-4. MMS-A1-MODULE-MANIFEST-DRAFT
-5. IBMS-CORE-A1-MODULE-MANIFEST-DRAFT
-6. ONE-ADAPTER-A1-CONSUMER-CONTRACT-DRAFT
-7. CONSOLE-A1-MODULE-STATUS-CONTRACT-DRAFT
+1. IDC-DCIM-A1-MODULE-MANIFEST-DRAFT
+2. ESG-A1-MODULE-MANIFEST-DRAFT
+3. MMS-A1-MODULE-MANIFEST-DRAFT
+4. IBMS-CORE-A1-MODULE-MANIFEST-DRAFT
+5. ONE-ADAPTER-A1-CONSUMER-CONTRACT-DRAFT
+6. CONSOLE-A1-MODULE-STATUS-CONTRACT-DRAFT
+7. CDE-A2-EVIDENCE-CONTRACT-DRAFT
 
 ## Shared Foundation Runtime Continuation
 
@@ -72,3 +73,4 @@ IDC / DCIM is now defined as VANTARIS ONE data center infrastructure operations 
 CDE is now defined as VANTARIS ONE evidence and traceability consumer module, not as owner of Edge / Link / Contracts, not as owner of UFMS RCA/correlation runtime, not as owner of MMS workflow, ESG calculation model, or IDC/DCIM capacity/PUE model.
 Console is now defined as VANTARIS ONE platform control and health view module, not as owner of Edge / Link / Contracts, not as owner of UFMS RCA/correlation runtime, and not as owner of business module logic.
 VANTARIS ONE now has cross-module manifest baseline for ONE Adapter, IBMS Core, MMS, ESG, IDC/DCIM, CDE, Console, Reports, Analytics and future Nexus AI Consumer.
+CDE now has module manifest draft and evidence object draft, both docs-only and runtimeReady false.
