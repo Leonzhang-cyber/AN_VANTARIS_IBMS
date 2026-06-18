@@ -48,6 +48,7 @@ export interface QueryReportResult {
   integrity?: ReportIntegrity
   audit?: ReportAuditMetadata
   traceability?: ReportTraceability
+  permission?: ReportPermissionStatus
 }
 
 export interface ReportIntegrity {
@@ -128,11 +129,18 @@ export interface ReportExportManifest {
   retentionClass?: string
   retentionPolicy?: string
   verificationStatus?: string
+  permission?: ReportPermissionStatus
 }
 
-export interface ReportPermissionDecision {
+export interface ReportPermissionStatus {
   allowed: boolean
   permissionMode: string
+  action: string
+  reportId: string
+  rbacIntegrated: boolean
+  authIntegrated: boolean
+  productionEnforced: boolean
+  reason: string
 }
 
 export interface ReportAuditRecord {
@@ -185,6 +193,7 @@ export interface ReportAuditListResponse {
   permissionMode: string
   permissionDecision: boolean
   readStats: ReportAuditReadStats
+  permission?: ReportPermissionStatus
 }
 
 export interface ReportAuditVerificationResult {
@@ -199,6 +208,7 @@ export interface ReportAuditVerificationResult {
   permissionMode: string
   permissionDecision: boolean
   readStats: ReportAuditReadStats
+  permission?: ReportPermissionStatus
 }
 
 export interface ReportAuditRetentionPolicy {
@@ -213,6 +223,7 @@ export interface ReportAuditRetentionPolicy {
   notes: string
   permissionMode: string
   permissionDecision: boolean
+  permission?: ReportPermissionStatus
 }
 
 function asRecord(value: unknown): Record<string, unknown> {
@@ -221,6 +232,22 @@ function asRecord(value: unknown): Record<string, unknown> {
 
 function asStringArray(value: unknown): string[] {
   return Array.isArray(value) ? value.map((item) => String(item)) : []
+}
+
+function normalizePermission(raw: unknown, fallbackAction: string, fallbackReportId = '*'): ReportPermissionStatus {
+  const data = asRecord(raw)
+  return {
+    allowed: data.allowed !== undefined ? Boolean(data.allowed) : true,
+    permissionMode: String(data.permissionMode ?? 'placeholder-allow'),
+    action: String(data.action ?? fallbackAction),
+    reportId: String(data.reportId ?? fallbackReportId),
+    rbacIntegrated: Boolean(data.rbacIntegrated),
+    authIntegrated: Boolean(data.authIntegrated),
+    productionEnforced: Boolean(data.productionEnforced),
+    reason: String(
+      data.reason ?? 'Reports permission placeholder only; no production RBAC enforcement.',
+    ),
+  }
 }
 
 function normalizeReadStats(raw: unknown): ReportAuditReadStats {
@@ -278,6 +305,7 @@ function normalizeQueryResult(raw: unknown): QueryReportResult {
   const integrityRaw = asRecord(data.integrity)
   const auditRaw = asRecord(data.audit)
   const traceabilityRaw = asRecord(data.traceability)
+  const permissionRaw = asRecord(data.permission)
   return {
     reportId: String(data.reportId ?? ''),
     reportName: String(data.reportName ?? 'Report'),
@@ -339,11 +367,16 @@ function normalizeQueryResult(raw: unknown): QueryReportResult {
             evidenceLinked: Boolean(traceabilityRaw.evidenceLinked),
           }
         : undefined,
+    permission:
+      Object.keys(permissionRaw).length > 0
+        ? normalizePermission(permissionRaw, 'query', String(data.reportId ?? ''))
+        : undefined,
   }
 }
 
 function normalizeExportManifest(raw: unknown): ReportExportManifest {
   const data = asRecord(raw)
+  const permissionRaw = asRecord(data.permission)
   return {
     manifestVersion: String(data.manifestVersion ?? 'reports-export-manifest-v1'),
     exportId: String(data.exportId ?? ''),
@@ -383,6 +416,10 @@ function normalizeExportManifest(raw: unknown): ReportExportManifest {
     retentionClass: data.retentionClass ? String(data.retentionClass) : undefined,
     retentionPolicy: data.retentionPolicy ? String(data.retentionPolicy) : undefined,
     verificationStatus: data.verificationStatus ? String(data.verificationStatus) : undefined,
+    permission:
+      Object.keys(permissionRaw).length > 0
+        ? normalizePermission(permissionRaw, 'export_manifest', String(data.reportId ?? ''))
+        : undefined,
   }
 }
 
@@ -494,6 +531,10 @@ export async function getReportsAudit(params: GetReportsAuditParams = {}): Promi
     permissionMode: String(body.permissionMode ?? 'placeholder-allow'),
     permissionDecision: body.permissionDecision !== undefined ? Boolean(body.permissionDecision) : true,
     readStats: normalizeReadStats(body.readStats),
+    permission:
+      body.permission !== undefined
+        ? normalizePermission(body.permission, 'view_audit', String(params.reportId ?? '*'))
+        : undefined,
   }
 }
 
@@ -522,6 +563,7 @@ export async function verifyReportsAudit(limit?: number): Promise<ReportAuditVer
     permissionMode: String(body.permissionMode ?? 'placeholder-allow'),
     permissionDecision: body.permissionDecision !== undefined ? Boolean(body.permissionDecision) : true,
     readStats: normalizeReadStats(body.readStats),
+    permission: body.permission !== undefined ? normalizePermission(body.permission, 'verify_audit', '*') : undefined,
   }
 }
 
@@ -540,6 +582,7 @@ export async function getReportsAuditRetentionPolicy(): Promise<ReportAuditReten
     notes: String(body.notes ?? ''),
     permissionMode: String(body.permissionMode ?? 'placeholder-allow'),
     permissionDecision: body.permissionDecision !== undefined ? Boolean(body.permissionDecision) : true,
+    permission: body.permission !== undefined ? normalizePermission(body.permission, 'view_audit', '*') : undefined,
   }
 }
 

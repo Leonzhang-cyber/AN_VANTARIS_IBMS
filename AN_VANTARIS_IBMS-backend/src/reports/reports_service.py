@@ -132,7 +132,7 @@ class ReportsService:
                 "evidenceLinked": bool(catalog.get("evidenceLinked", False)),
             },
         }
-        permission = evaluate_report_permission(action="query", report_id=report_id, context={"mode": "reports-r9"})
+        permission = evaluate_report_permission(action="query", report_id=report_id, context={"mode": "reports-r11"})
         record = build_audit_record(
             event_type="report.query",
             payload={
@@ -166,6 +166,7 @@ class ReportsService:
         result["audit"]["retentionClass"] = "audit-readiness-local"
         result["audit"]["retentionPolicy"] = "local-jsonl-retain-until-manual-cleanup"
         result["audit"]["verificationStatus"] = "not-verified"
+        result["permission"] = permission
         if persist_result.get("error"):
             result["audit"]["auditPersistError"] = str(persist_result.get("error"))
         return result, None
@@ -225,7 +226,7 @@ class ReportsService:
             }
         )
         permission = evaluate_report_permission(
-            action="export_manifest", report_id=report_id, context={"mode": "reports-r9"}
+            action="export_manifest", report_id=report_id, context={"mode": "reports-r11"}
         )
         record = build_audit_record(
             event_type="report.export_manifest",
@@ -262,6 +263,7 @@ class ReportsService:
         manifest["retentionClass"] = "audit-readiness-local"
         manifest["retentionPolicy"] = "local-jsonl-retain-until-manual-cleanup"
         manifest["verificationStatus"] = "not-verified"
+        manifest["permission"] = permission
         if persist_result.get("error"):
             manifest["auditPersistError"] = str(persist_result.get("error"))
         return {"manifest": manifest}, None
@@ -288,6 +290,7 @@ class ReportsService:
             "readStats": records_result.get("readStats", {}),
             "permissionMode": permission.get("permissionMode", "placeholder-allow"),
             "permissionDecision": permission.get("allowed", True),
+            "permission": permission,
         }
 
     def get_audit_detail(self, audit_id: str) -> Tuple[Optional[Dict[str, Any]], Optional[Tuple[int, str]]]:
@@ -301,6 +304,7 @@ class ReportsService:
             "readStats": read_stats,
             "permissionMode": permission.get("permissionMode", "placeholder-allow"),
             "permissionDecision": permission.get("allowed", True),
+            "permission": permission,
         }, None
 
     def verify_audit(self, limit: Optional[int] = None) -> Dict[str, Any]:
@@ -308,6 +312,7 @@ class ReportsService:
         verification = verify_audit_chain(limit=limit)
         verification["permissionMode"] = permission.get("permissionMode", "placeholder-allow")
         verification["permissionDecision"] = permission.get("allowed", True)
+        verification["permission"] = permission
         return verification
 
     def get_audit_retention_policy(self) -> Dict[str, Any]:
@@ -315,5 +320,6 @@ class ReportsService:
         policy = get_reports_audit_retention_policy()
         policy["permissionMode"] = permission.get("permissionMode", "placeholder-allow")
         policy["permissionDecision"] = permission.get("allowed", True)
+        policy["permission"] = permission
         return policy
 

@@ -15,6 +15,7 @@ import {
   type ReportAuditRetentionPolicy,
   type ReportAuditVerificationResult,
   type ReportExportManifest,
+  type ReportPermissionStatus,
   type QueryReportPayload,
   type QueryReportResult,
   type ReportsCatalogItem,
@@ -111,6 +112,7 @@ const health = ref<ReportsHealth>({
 
 const queryResult = ref<QueryReportResult | null>(null)
 const exportManifest = ref<ReportExportManifest | null>(null)
+const permissionByAction = ref<Record<string, ReportPermissionStatus>>({})
 
 const filters = reactive<QueryFilters>({
   timeRange: 'last_24h',
@@ -208,8 +210,54 @@ const activeFilterEntries = computed(() => {
   return entries
 })
 
+const permissionGateRows = computed(() => {
+  const reportId = selectedReportId.value || '*'
+  const fallback = (action: string): ReportPermissionStatus => ({
+    allowed: true,
+    permissionMode: 'placeholder-allow',
+    action,
+    reportId,
+    rbacIntegrated: false,
+    authIntegrated: false,
+    productionEnforced: false,
+    reason: 'Reports permission placeholder only; no production RBAC enforcement.',
+  })
+  const actions = ['query', 'export_manifest', 'view_audit', 'verify_audit']
+  return actions.map((action) => permissionByAction.value[action] ?? fallback(action))
+})
+
+const canExportAuditRecords = computed(() => !loadingAudit.value && auditRecords.value.length > 0)
+const auditExportHelperText = computed(() =>
+  canExportAuditRecords.value
+    ? 'Exports currently loaded audit records from the browser. No backend export job is created.'
+    : 'Load audit records before exporting.',
+)
+
 function normalizeError(error: unknown, fallback: string): string {
   return error instanceof ApiError ? error.message : fallback
+}
+
+function buildFallbackPermission(action: string, reportId: string): ReportPermissionStatus {
+  return {
+    allowed: true,
+    permissionMode: 'placeholder-allow',
+    action,
+    reportId,
+    rbacIntegrated: false,
+    authIntegrated: false,
+    productionEnforced: false,
+    reason: 'Reports permission placeholder only; no production RBAC enforcement.',
+  }
+}
+
+function updatePermissionState(action: string, value: Partial<ReportPermissionStatus> | undefined): void {
+  const reportId = String(value?.reportId ?? selectedReportId.value ?? '*')
+  permissionByAction.value[action] = {
+    ...buildFallbackPermission(action, reportId),
+    ...value,
+    action,
+    reportId,
+  }
 }
 
 async function loadAuditTrail(): Promise<void> {
@@ -225,6 +273,7 @@ async function loadAuditTrail(): Promise<void> {
     auditStorageMode.value = result.storageMode
     auditPermissionMode.value = result.permissionMode
     auditReadStats.value = result.readStats
+    updatePermissionState('view_audit', result.permission)
   } catch (error) {
     auditError.value = normalizeError(error, 'Audit trail is temporarily unavailable.')
   } finally {
@@ -249,6 +298,7 @@ async function verifyAuditChainNow(): Promise<void> {
   verifyingAudit.value = true
   try {
     auditVerification.value = await verifyReportsAudit(auditFilters.limit)
+    updatePermissionState('verify_audit', auditVerification.value.permission)
     ElMessage.success(auditVerification.value.verified ? 'Audit chain verified.' : 'Audit chain verification found issues.')
     void loadAuditTrail()
   } catch (error) {
@@ -261,6 +311,7 @@ async function verifyAuditChainNow(): Promise<void> {
 async function loadRetentionPolicy(): Promise<void> {
   try {
     auditRetentionPolicy.value = await getReportsAuditRetentionPolicy()
+    updatePermissionState('view_audit', auditRetentionPolicy.value.permission)
   } catch (error) {
     auditError.value = normalizeError(error, 'Retention policy API is temporarily unavailable.')
   }
@@ -514,10 +565,12 @@ async function runQuery(): Promise<void> {
   try {
     if (fallbackMode.value) {
       queryResult.value = buildLocalFallbackQueryResult(payload)
+      updatePermissionState('query', buildFallbackPermission('query', payload.reportId))
       refreshAuditTrail()
       return
     }
     queryResult.value = await queryReport(payload)
+    updatePermissionState('query', queryResult.value.permission)
     refreshAuditTrail()
   } catch (error) {
     const message = normalizeError(error, 'Failed to query report.')
@@ -686,6 +739,105 @@ function downloadJson(filename: string, data: unknown): void {
   URL.revokeObjectURL(url)
 }
 
+function buildAuditExportFilename(extension: 'json' | 'csv'): string {
+  const timestamp = formatTimestampForFilename(new Date())
+  return `reports-audit-records-${timestamp}.${extension}`
+}
+
+function buildAuditCsv(): string {
+  const columns = [
+    'auditId',
+    'auditEventType',
+    'reportId',
+    'reportName',
+    'queryId',
+    'exportId',
+    'generatedAt',
+    'persistedAt',
+    'permissionMode',
+    'allowed',
+    'storageMode',
+    'retentionClass',
+    'verificationStatus',
+    'queryHash',
+    'payloadHash',
+    'exportHash',
+    'previousAuditHash',
+    'auditRecordHash',
+    'certified',
+    'iec62443Certified',
+  ]
+  const rows = auditRecords.value.map((record) => ({
+    auditId: record.auditId,
+    auditEventType: record.auditEventType,
+    reportId: record.reportId,
+    reportName: record.reportName,
+    queryId: record.queryId,
+    exportId: record.exportId ?? '',
+    generatedAt: record.generatedAt,
+    persistedAt: record.persistedAt,
+    permissionMode: record.permissionMode,
+    allowed: record.permissionDecision,
+    storageMode: record.storageMode,
+    retentionClass: record.retentionClass ?? '',
+    verificationStatus: record.verificationStatus ?? '',
+    queryHash: record.queryHash,
+    payloadHash: record.payloadHash,
+    exportHash: record.exportHash ?? '',
+    previousAuditHash: record.previousAuditHash ?? '',
+    auditRecordHash: record.auditRecordHash ?? '',
+    certified: record.certified,
+    iec62443Certified: record.iec62443Certified,
+  }))
+  return buildCsv(columns, rows)
+}
+
+function exportCurrentAuditJson(): void {
+  if (!canExportAuditRecords.value) {
+    return
+  }
+  try {
+    const payload = {
+      exportType: 'reports-audit-records-json',
+      exportedAt: new Date().toISOString(),
+      sourceSemantics: 'ibms-neutral',
+      storageMode: 'browser-local',
+      certified: false,
+      iec62443Certified: false,
+      filters: {
+        eventType: auditFilters.eventType,
+        reportId: auditFilters.reportId,
+        limit: auditFilters.limit,
+      },
+      readStats: auditReadStats.value,
+      verification: auditVerification.value,
+      retentionPolicy: auditRetentionPolicy.value,
+      records: auditRecords.value,
+    }
+    downloadJson(buildAuditExportFilename('json'), payload)
+    ElMessage.success('Audit JSON exported.')
+  } catch {
+    ElMessage.error('Audit JSON export failed.')
+  }
+}
+
+function exportCurrentAuditCsv(): void {
+  if (!canExportAuditRecords.value) {
+    return
+  }
+  try {
+    const csv = buildAuditCsv()
+    if (!csv) {
+      ElMessage.error('No audit records to export.')
+      return
+    }
+    downloadCsv(buildAuditExportFilename('csv'), csv)
+    ElMessage.success('Audit CSV exported.')
+  } catch {
+    ElMessage.error('Audit CSV export failed.')
+  }
+}
+
 async function buildLocalExportManifest(
   result: QueryReportResult,
   payload: QueryReportPayload,
@@ -805,6 +957,10 @@ async function exportCurrentResultCsv(): Promise<void> {
     }
 
     exportManifest.value = manifest
+    updatePermissionState(
+      'export_manifest',
+      manifest.permission ?? buildFallbackPermission('export_manifest', reportId),
+    )
     downloadJson(buildManifestFilename(reportId), manifest)
     refreshAuditTrail()
     ElMessage.success('CSV and manifest exported.')
@@ -883,6 +1039,28 @@ onMounted(() => {
         :title="healthError"
         class="block-space top-space"
       />
+    </el-card>
+
+    <el-card shadow="never" class="block-space">
+      <template #header>
+        <div class="section-title">Permission Gate</div>
+      </template>
+      <el-alert
+        type="info"
+        show-icon
+        :closable="false"
+        title="Permission display is a placeholder. Production auth/RBAC is not integrated in this stage."
+        class="block-space"
+      />
+      <el-table :data="permissionGateRows" row-key="action" empty-text="No permission records">
+        <el-table-column prop="action" label="action" min-width="140" />
+        <el-table-column prop="permissionMode" label="permissionMode" min-width="170" />
+        <el-table-column prop="allowed" label="allowed" min-width="90" />
+        <el-table-column prop="reportId" label="reportId" min-width="130" />
+        <el-table-column prop="rbacIntegrated" label="rbacIntegrated" min-width="130" />
+        <el-table-column prop="authIntegrated" label="authIntegrated" min-width="130" />
+        <el-table-column prop="reason" label="reason" min-width="340" show-overflow-tooltip />
+      </el-table>
     </el-card>
 
     <el-card shadow="never" class="block-space">
@@ -1261,12 +1439,37 @@ onMounted(() => {
           </el-button>
         </div>
 
+        <div class="audit-filter-row block-space">
+          <el-tooltip
+            :disabled="canExportAuditRecords"
+            content="Load audit records before exporting."
+            placement="top"
+          >
+            <el-button plain :disabled="!canExportAuditRecords" @click="exportCurrentAuditJson">
+              Export Audit JSON
+            </el-button>
+          </el-tooltip>
+          <el-tooltip
+            :disabled="canExportAuditRecords"
+            content="Load audit records before exporting."
+            placement="top"
+          >
+            <el-button plain :disabled="!canExportAuditRecords" @click="exportCurrentAuditCsv">
+              Export Audit CSV
+            </el-button>
+          </el-tooltip>
+          <span class="field-helper-text">{{ auditExportHelperText }}</span>
+        </div>
+
         <el-descriptions :column="3" border class="block-space">
           <el-descriptions-item label="storageMode">{{ auditStorageMode }}</el-descriptions-item>
           <el-descriptions-item label="permissionMode">{{ auditPermissionMode }}</el-descriptions-item>
           <el-descriptions-item label="verificationStatus">
             {{ auditVerification?.verified === false ? 'failed' : auditVerification?.verified ? 'verified' : 'not-run' }}
           </el-descriptions-item>
+          <el-descriptions-item label="auditExportMode">browser-local</el-descriptions-item>
+          <el-descriptions-item label="auditExportScope">current-audit-records</el-descriptions-item>
+          <el-descriptions-item label="formats">json/csv</el-descriptions-item>
           <el-descriptions-item label="totalLines">{{ auditReadStats.totalLines }}</el-descriptions-item>
           <el-descriptions-item label="validRecords">{{ auditReadStats.validRecords }}</el-descriptions-item>
           <el-descriptions-item label="corruptedLines">{{ auditReadStats.corruptedLines }}</el-descriptions-item>

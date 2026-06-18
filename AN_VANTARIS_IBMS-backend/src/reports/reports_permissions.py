@@ -1,4 +1,4 @@
-"""Reports permission placeholder evaluator (R9 foundation)."""
+"""Reports permission placeholder evaluator (R11 foundation)."""
 
 from __future__ import annotations
 
@@ -15,7 +15,8 @@ def evaluate_report_permission(
         "reportId": report_id,
         "rbacIntegrated": False,
         "authIntegrated": False,
-        "reason": "Reports permission placeholder only; no production RBAC enforcement in R9.",
+        "productionEnforced": False,
+        "reason": "Reports permission placeholder only; no production RBAC enforcement in R11.",
         "context": context or {},
     }
 
