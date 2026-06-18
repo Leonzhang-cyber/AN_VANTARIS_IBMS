@@ -2,8 +2,8 @@
   "moduleId": "ucde",
   "displayName": "UCDE / Evidence Traceability",
   "moduleType": "business",
-  "manifestVersion": "0.2.0-a2-draft",
-  "status": "draft-a2",
+  "manifestVersion": "0.3.0-a3-gate",
+  "status": "draft-a3-gate",
   "runtimeReady": false,
   "ownerScope": [
     "evidence reference context",
@@ -95,7 +95,21 @@
     "schemaReady": false,
     "apiReady": false,
     "dbReady": false,
-    "nextTask": "U-MODULES-A2-READINESS-REVIEW"
+    "nextTask": "UCDE-A3-FORMAL-CONTRACT-PROMOTION-GATE"
   },
-  "nextTask": "U-MODULES-A2-READINESS-REVIEW"
+  "a3FormalContractPromotionGate": {
+    "gateId": "UCDE-A3-FORMAL-CONTRACT-PROMOTION-GATE",
+    "docsLevelOnly": true,
+    "promotionExecuted": false,
+    "formalContractCreated": false,
+    "schemaCreated": false,
+    "openApiCreated": false,
+    "runtimeImplementationAuthorized": false,
+    "apiImplementationAuthorized": false,
+    "dbImplementationAuthorized": false,
+    "schemaPromotionAuthorized": false,
+    "contractsPromotionAuthorized": false,
+    "nextTask": "UCDE-A4-FORMAL-CONTRACT-PROMOTION-PLAN"
+  },
+  "nextTask": "UCDE-A4-FORMAL-CONTRACT-PROMOTION-PLAN"
 }

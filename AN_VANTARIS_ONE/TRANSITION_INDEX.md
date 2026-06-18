@@ -40,6 +40,7 @@ Completed stages:
 - U-MODULES-A2-READINESS-REVIEW — current task
 - U-MODULES-A3-IMPLEMENTATION-GATE-PLAN — current task
 - ONE-ADAPTER-A2-FOUNDATION-CONSUMER-GATE — current task
+- UCDE-A3-FORMAL-CONTRACT-PROMOTION-GATE — current task
 
 ## Current Allowed Work
 
@@ -60,7 +61,7 @@ Completed stages:
 
 ## Next Recommended Task
 
-- UCDE-A3-FORMAL-CONTRACT-PROMOTION-GATE
+- UCDE-A4-FORMAL-CONTRACT-PROMOTION-PLAN
 
 ## Historical Name Mapping
 
@@ -105,3 +106,4 @@ Direct runtime implementation remains blocked after A3.
 Contract/schema promotion remains blocked unless separately authorized.
 Direct Foundation modification remains blocked.
 ONE Adapter implementation remains blocked unless separately authorized.
+Formal contract creation remains blocked.

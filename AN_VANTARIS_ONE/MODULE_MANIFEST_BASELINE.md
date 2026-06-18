@@ -93,3 +93,10 @@ ONE Adapter A2 Foundation Consumer Gate is completed as docs-level consumer boun
 ONE Adapter remains consumer boundary only and does not own EDGE/LINK/DB/CONTRACTS runtime or schema.
 No runtime/API/DB/schema/contracts implementation is authorized.
 Next task is UCDE-A3-FORMAL-CONTRACT-PROMOTION-GATE.
+
+## 13. UCDE A3 Formal Contract Promotion Gate Completion
+
+UCDE-A3 formal contract promotion gate is completed as docs-level gate review.
+Promotion is not executed in this task.
+Formal contract/schema/OpenAPI/runtime remain blocked.
+Next task is UCDE-A4-FORMAL-CONTRACT-PROMOTION-PLAN.
