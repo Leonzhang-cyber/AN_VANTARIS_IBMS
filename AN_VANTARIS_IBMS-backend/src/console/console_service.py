@@ -2,7 +2,14 @@
 
 from __future__ import annotations
 
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
+
+from src.console.module_readiness_registry import (
+    calculate_registry_summary,
+    get_module_readiness,
+    get_registry_health_details,
+    list_module_readiness,
+)
 
 
 class ConsoleService:
@@ -27,172 +34,44 @@ class ConsoleService:
         }
 
     def get_platform_modules_summary(self) -> List[Dict[str, Any]]:
-        return [
-            {
-                "moduleId": "reports",
-                "moduleName": "Reports",
-                "moduleType": "platform-module",
-                "runtimeStatus": "ready",
-                "readinessLevel": "readiness-candidate",
-                "route": "/reports",
-                "frontendReady": True,
-                "backendReady": True,
-                "auditReadiness": True,
-                "permissionMode": "placeholder-allow",
-                "dataPersistenceMode": "local-jsonl-audit",
-                "securityNotes": "Audit readiness foundation with placeholder permission mode.",
-                "certified": False,
-                "iec62443Certified": False,
-            },
-            {
-                "moduleId": "uconsole",
-                "moduleName": "UConsole / Platform Operations Dashboard",
-                "moduleType": "platform-module",
-                "runtimeStatus": "foundation",
-                "readinessLevel": "r1-foundation",
-                "route": "/console/operations",
-                "frontendReady": True,
-                "backendReady": True,
-                "auditReadiness": False,
-                "permissionMode": "placeholder-allow",
-                "dataPersistenceMode": "none",
-                "securityNotes": "Read-only dashboard foundation; no control actions enabled.",
-                "certified": False,
-                "iec62443Certified": False,
-            },
-            {
-                "moduleId": "ucde",
-                "moduleName": "UCDE Evidence Center",
-                "moduleType": "business-module",
-                "runtimeStatus": "planned",
-                "readinessLevel": "not-integrated",
-                "route": "",
-                "frontendReady": False,
-                "backendReady": False,
-                "auditReadiness": False,
-                "permissionMode": "not-integrated",
-                "dataPersistenceMode": "not-integrated",
-                "securityNotes": "Runtime integration not included in this stage.",
-                "certified": False,
-                "iec62443Certified": False,
-            },
-            {
-                "moduleId": "uesg",
-                "moduleName": "UESG Sustainability",
-                "moduleType": "business-module",
-                "runtimeStatus": "planned",
-                "readinessLevel": "not-integrated",
-                "route": "",
-                "frontendReady": False,
-                "backendReady": False,
-                "auditReadiness": False,
-                "permissionMode": "not-integrated",
-                "dataPersistenceMode": "not-integrated",
-                "securityNotes": "Runtime integration not included in this stage.",
-                "certified": False,
-                "iec62443Certified": False,
-            },
-            {
-                "moduleId": "umms",
-                "moduleName": "UMMS Maintenance",
-                "moduleType": "business-module",
-                "runtimeStatus": "planned",
-                "readinessLevel": "not-integrated",
-                "route": "",
-                "frontendReady": False,
-                "backendReady": False,
-                "auditReadiness": False,
-                "permissionMode": "not-integrated",
-                "dataPersistenceMode": "not-integrated",
-                "securityNotes": "Runtime integration not included in this stage.",
-                "certified": False,
-                "iec62443Certified": False,
-            },
-            {
-                "moduleId": "assets-topology",
-                "moduleName": "Assets & Topology",
-                "moduleType": "platform-module",
-                "runtimeStatus": "planned",
-                "readinessLevel": "not-integrated",
-                "route": "",
-                "frontendReady": False,
-                "backendReady": False,
-                "auditReadiness": False,
-                "permissionMode": "not-integrated",
-                "dataPersistenceMode": "not-integrated",
-                "securityNotes": "Foundation planning only.",
-                "certified": False,
-                "iec62443Certified": False,
-            },
-            {
-                "moduleId": "edge-fleet",
-                "moduleName": "EDGE Fleet",
-                "moduleType": "foundation-module",
-                "runtimeStatus": "not-integrated",
-                "readinessLevel": "external-foundation-reference",
-                "route": "",
-                "frontendReady": False,
-                "backendReady": False,
-                "auditReadiness": False,
-                "permissionMode": "not-integrated",
-                "dataPersistenceMode": "not-integrated",
-                "securityNotes": "No direct runtime integration in IBMS scope.",
-                "certified": False,
-                "iec62443Certified": False,
-            },
-            {
-                "moduleId": "link-gateway",
-                "moduleName": "LINK Gateway",
-                "moduleType": "foundation-module",
-                "runtimeStatus": "not-integrated",
-                "readinessLevel": "external-foundation-reference",
-                "route": "",
-                "frontendReady": False,
-                "backendReady": False,
-                "auditReadiness": False,
-                "permissionMode": "not-integrated",
-                "dataPersistenceMode": "not-integrated",
-                "securityNotes": "No direct runtime integration in IBMS scope.",
-                "certified": False,
-                "iec62443Certified": False,
-            },
-            {
-                "moduleId": "nexus-ai",
-                "moduleName": "NEXUS-AI",
-                "moduleType": "platform-module",
-                "runtimeStatus": "planned",
-                "readinessLevel": "not-integrated",
-                "route": "",
-                "frontendReady": False,
-                "backendReady": False,
-                "auditReadiness": False,
-                "permissionMode": "not-integrated",
-                "dataPersistenceMode": "not-integrated",
-                "securityNotes": "Planned capability; no runtime integration yet.",
-                "certified": False,
-                "iec62443Certified": False,
-            },
-        ]
+        modules = list_module_readiness()
+        items: List[Dict[str, Any]] = []
+        for module in modules:
+            audit_mode = str(module.get("auditReadiness", "planned"))
+            items.append(
+                {
+                    "moduleId": module.get("moduleId", ""),
+                    "moduleName": module.get("moduleName", ""),
+                    "moduleType": module.get("moduleType", "platform-module"),
+                    "domain": module.get("domain", "platform-operations"),
+                    "route": module.get("route", ""),
+                    "runtimeStatus": module.get("runtimeStatus", "planned"),
+                    "readinessLevel": module.get("readinessLevel", "not-integrated"),
+                    "lifecycleStage": module.get("lifecycleStage", "planned"),
+                    "frontendReady": bool(module.get("frontendReady", False)),
+                    "backendReady": bool(module.get("backendReady", False)),
+                    "apiReady": bool(module.get("apiReady", False)),
+                    "auditReadiness": audit_mode in {"ready", "foundation", "limited"},
+                    "permissionMode": module.get("permissionMode", "not-integrated"),
+                    "dataPersistenceMode": module.get("dataPersistenceMode", "not-integrated"),
+                    "integrationMode": module.get("integrationMode", "not-integrated"),
+                    "healthStatus": module.get("healthStatus", "planned"),
+                    "healthScore": module.get("healthScore", 0),
+                    "securityNotes": "; ".join(module.get("limitations", [])[:2]),
+                    "certified": False,
+                    "iec62443Certified": False,
+                }
+            )
+        return items
 
     def get_operations_dashboard_summary(self) -> Dict[str, Any]:
-        modules = self.get_platform_modules_summary()
-        ready_modules = [item for item in modules if item.get("runtimeStatus") == "ready"]
-        foundation_modules = [item for item in modules if item.get("runtimeStatus") == "foundation"]
-        planned_modules = [item for item in modules if item.get("runtimeStatus") == "planned"]
-        audit_ready_modules = [item for item in modules if bool(item.get("auditReadiness"))]
+        modules = list_module_readiness()
+        totals = calculate_registry_summary(modules)
         return {
-            "totals": {
-                "totalModules": len(modules),
-                "readyModules": len(ready_modules),
-                "foundationModules": len(foundation_modules),
-                "plannedModules": len(planned_modules),
-                "auditReadyModules": len(audit_ready_modules),
-                "certifiedModules": 0,
-                "iec62443CertifiedModules": 0,
-            },
+            "totals": totals,
             "highlights": [
                 "Reports readiness candidate",
-                "UConsole foundation",
+                "UConsole r2 foundation",
             ],
             "warnings": [
                 "Permission mode placeholder",
@@ -206,30 +85,46 @@ class ConsoleService:
                 "dbAuditIntegrated": False,
                 "siemIntegrated": False,
                 "ucdeRuntimeIntegrated": False,
+                "edgeRuntimeIntegrated": False,
+                "linkRuntimeIntegrated": False,
                 "certified": False,
                 "iec62443Certified": False,
             },
         }
 
     def get_reports_readiness_snapshot(self) -> Dict[str, Any]:
+        reports = get_module_readiness("reports") or {}
+        details = reports.get("healthDetails", {}) if isinstance(reports, dict) else {}
+
+        def _is_ready(key: str) -> bool:
+            part = details.get(key, {})
+            status = str(part.get("status", "")).strip().lower()
+            return status in {"ready", "foundation", "limited"}
+
         return {
-            "routeReady": True,
-            "menuReady": True,
-            "queryReady": True,
-            "exportReady": True,
-            "manifestReady": True,
-            "auditStoreReady": True,
-            "auditVerifyReady": True,
-            "permissionPlaceholderReady": True,
-            "auditExportReady": True,
+            "routeReady": bool(reports.get("route")),
+            "menuReady": bool(reports.get("route")),
+            "queryReady": _is_ready("api"),
+            "exportReady": _is_ready("api"),
+            "manifestReady": _is_ready("api"),
+            "auditStoreReady": _is_ready("audit"),
+            "auditVerifyReady": _is_ready("audit"),
+            "permissionPlaceholderReady": _is_ready("permission"),
+            "auditExportReady": _is_ready("audit"),
             "certified": False,
             "iec62443Certified": False,
-            "limitations": [
-                "No real auth/RBAC integration.",
-                "No DB audit table migration.",
-                "No formal immutable evidence chain.",
-                "No UCDE runtime integration.",
-                "No IEC62443 certification claim.",
-            ],
+            "limitations": reports.get("limitations", []),
         }
+
+    def get_module_health_detail(self, module_id: str) -> Optional[Dict[str, Any]]:
+        return get_module_readiness(module_id)
+
+    def get_all_module_health_details(self) -> List[Dict[str, Any]]:
+        return get_registry_health_details()
+
+    def get_readiness_registry(self) -> List[Dict[str, Any]]:
+        return list_module_readiness()
+
+    def get_readiness_summary(self) -> Dict[str, Any]:
+        return calculate_registry_summary(list_module_readiness())
 
