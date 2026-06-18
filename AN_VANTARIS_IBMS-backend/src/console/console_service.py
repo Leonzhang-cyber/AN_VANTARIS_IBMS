@@ -10,6 +10,7 @@ from src.console.module_readiness_registry import (
     get_registry_health_details,
     list_module_readiness,
 )
+from src.console.platform_readiness_score import calculate_platform_readiness_score
 
 
 class ConsoleService:
@@ -67,8 +68,10 @@ class ConsoleService:
     def get_operations_dashboard_summary(self) -> Dict[str, Any]:
         modules = list_module_readiness()
         totals = calculate_registry_summary(modules)
+        readiness_score = calculate_platform_readiness_score(modules)
         return {
             "totals": totals,
+            "readinessScore": readiness_score,
             "highlights": [
                 "Reports readiness candidate",
                 "UConsole r2 foundation",
@@ -127,4 +130,65 @@ class ConsoleService:
 
     def get_readiness_summary(self) -> Dict[str, Any]:
         return calculate_registry_summary(list_module_readiness())
+
+    def get_platform_readiness_score(self) -> Dict[str, Any]:
+        return calculate_platform_readiness_score(list_module_readiness())
+
+    def get_platform_navigation_model(self) -> Dict[str, Any]:
+        items: List[Dict[str, Any]] = []
+        for module in list_module_readiness():
+            module_id = str(module.get("moduleId", ""))
+            module_name = str(module.get("moduleName", ""))
+            status = str(module.get("runtimeStatus", "planned"))
+            route = str(module.get("route", "")) or None
+
+            launch_enabled = bool(route) and status in {"ready", "foundation"}
+            launch_label = "Open Module"
+            disabled_reason: Optional[str] = None
+            boundary_note: Optional[str] = None
+
+            if module_id == "reports":
+                launch_label = "Open Reports"
+            elif module_id == "uconsole":
+                launch_label = "Current Dashboard"
+            elif status == "planned":
+                launch_label = "Planned"
+                disabled_reason = "Module route is not available in current stage."
+                boundary_note = "No runtime integration is performed from UConsole."
+            elif status == "not-integrated":
+                launch_label = "Not Integrated"
+                disabled_reason = f"{module_name} runtime is not integrated in VANTARIS ONE at this stage."
+                if module_id == "edge-fleet":
+                    boundary_note = "AN_VANTARIS_EDGE remains a separate shared foundation boundary."
+                elif module_id == "link-gateway":
+                    boundary_note = "AN_VANTARIS_LINK remains a separate shared foundation boundary."
+                else:
+                    boundary_note = "This module remains a separate shared foundation boundary."
+            else:
+                launch_label = "Open Module" if launch_enabled else "Unavailable"
+                if not launch_enabled:
+                    disabled_reason = "Module route is not available in current stage."
+                    boundary_note = "No runtime integration is performed from UConsole."
+
+            items.append(
+                {
+                    "moduleId": module_id,
+                    "moduleName": module_name,
+                    "route": route,
+                    "launchEnabled": launch_enabled,
+                    "launchLabel": launch_label,
+                    "status": status,
+                    "disabledReason": disabled_reason,
+                    "boundaryNote": boundary_note,
+                    "readOnly": True,
+                    "controlActionsEnabled": False,
+                    "certified": False,
+                    "iec62443Certified": False,
+                }
+            )
+        return {
+            "navigationMode": "read-only-module-launch",
+            "controlActionsEnabled": False,
+            "items": items,
+        }
 

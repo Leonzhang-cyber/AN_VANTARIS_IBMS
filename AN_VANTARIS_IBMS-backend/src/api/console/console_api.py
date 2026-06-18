@@ -52,3 +52,13 @@ def console_modules_health():
 def console_readiness_summary():
     return Result.success(data=_service.get_readiness_summary())
 
+
+@api_bp.route("/v1/console/readiness/score", methods=["GET"])
+def console_readiness_score():
+    return Result.success(data=_service.get_platform_readiness_score())
+
+
+@api_bp.route("/v1/console/navigation/modules", methods=["GET"])
+def console_navigation_modules():
+    return Result.success(data=_service.get_platform_navigation_model())
+

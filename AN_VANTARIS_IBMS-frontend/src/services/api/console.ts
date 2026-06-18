@@ -99,6 +99,50 @@ export interface ModuleReadinessSummary {
   highestHealthModules: Array<{ moduleId: string; healthScore: number }>
 }
 
+export interface ReadinessScoreComponent {
+  score: number
+  weight: number
+  basis: string
+}
+
+export interface PlatformReadinessScore {
+  overallScore: number
+  scoreBand: 'early-foundation' | 'foundation' | 'readiness-candidate' | 'operational-candidate'
+  scoreMode: 'registry-derived' | 'frontend-local-fallback'
+  certified: boolean
+  iec62443Certified: boolean
+  components: {
+    moduleReadiness: ReadinessScoreComponent
+    auditReadiness: ReadinessScoreComponent
+    securityPosture: ReadinessScoreComponent
+    integrationReadiness: ReadinessScoreComponent
+  }
+  drivers: string[]
+  risks: string[]
+  recommendations: string[]
+}
+
+export interface PlatformNavigationItem {
+  moduleId: string
+  moduleName: string
+  route: string | null
+  launchEnabled: boolean
+  launchLabel: string
+  status: string
+  disabledReason: string | null
+  boundaryNote: string | null
+  readOnly: boolean
+  controlActionsEnabled: boolean
+  certified: boolean
+  iec62443Certified: boolean
+}
+
+export interface PlatformNavigationModel {
+  navigationMode: string
+  controlActionsEnabled: boolean
+  items: PlatformNavigationItem[]
+}
+
 export interface OperationsDashboardSummary {
   totals: {
     totalModules: number
@@ -120,6 +164,7 @@ export interface OperationsDashboardSummary {
     certified: boolean
     iec62443Certified: boolean
   }
+  readinessScore?: PlatformReadinessScore
 }
 
 export interface ReportsReadinessSnapshot {
@@ -249,6 +294,55 @@ function normalizeReadinessRecord(raw: unknown): ModuleReadinessRecord {
   }
 }
 
+function normalizeReadinessScoreComponent(raw: unknown): ReadinessScoreComponent {
+  const data = asRecord(raw)
+  return {
+    score: Number(data.score ?? 0),
+    weight: Number(data.weight ?? 0),
+    basis: String(data.basis ?? ''),
+  }
+}
+
+function normalizeReadinessScore(raw: unknown): PlatformReadinessScore {
+  const data = asRecord(raw)
+  const components = asRecord(data.components)
+  return {
+    overallScore: Number(data.overallScore ?? 0),
+    scoreBand: String(data.scoreBand ?? 'foundation') as PlatformReadinessScore['scoreBand'],
+    scoreMode: String(data.scoreMode ?? 'registry-derived') as PlatformReadinessScore['scoreMode'],
+    certified: Boolean(data.certified),
+    iec62443Certified: Boolean(data.iec62443Certified),
+    components: {
+      moduleReadiness: normalizeReadinessScoreComponent(components.moduleReadiness),
+      auditReadiness: normalizeReadinessScoreComponent(components.auditReadiness),
+      securityPosture: normalizeReadinessScoreComponent(components.securityPosture),
+      integrationReadiness: normalizeReadinessScoreComponent(components.integrationReadiness),
+    },
+    drivers: asStringArray(data.drivers),
+    risks: asStringArray(data.risks),
+    recommendations: asStringArray(data.recommendations),
+  }
+}
+
+function normalizeNavigationItem(raw: unknown): PlatformNavigationItem {
+  const data = asRecord(raw)
+  const routeValue = data.route
+  return {
+    moduleId: String(data.moduleId ?? ''),
+    moduleName: String(data.moduleName ?? ''),
+    route: routeValue === null || routeValue === undefined || String(routeValue) === '' ? null : String(routeValue),
+    launchEnabled: Boolean(data.launchEnabled),
+    launchLabel: String(data.launchLabel ?? 'Open Module'),
+    status: String(data.status ?? 'planned'),
+    disabledReason: data.disabledReason === null || data.disabledReason === undefined ? null : String(data.disabledReason),
+    boundaryNote: data.boundaryNote === null || data.boundaryNote === undefined ? null : String(data.boundaryNote),
+    readOnly: data.readOnly !== undefined ? Boolean(data.readOnly) : true,
+    controlActionsEnabled: Boolean(data.controlActionsEnabled),
+    certified: Boolean(data.certified),
+    iec62443Certified: Boolean(data.iec62443Certified),
+  }
+}
+
 function normalizeSummary(raw: unknown): OperationsDashboardSummary {
   const data = asRecord(raw)
   const totals = asRecord(data.totals)
@@ -274,6 +368,7 @@ function normalizeSummary(raw: unknown): OperationsDashboardSummary {
       certified: Boolean(security.certified),
       iec62443Certified: Boolean(security.iec62443Certified),
     },
+    readinessScore: data.readinessScore ? normalizeReadinessScore(data.readinessScore) : undefined,
   }
 }
 
@@ -370,5 +465,20 @@ export async function getConsoleOperationsSummary(): Promise<OperationsDashboard
 export async function getConsoleReportsReadiness(): Promise<ReportsReadinessSnapshot> {
   const { data } = await request.get('/v1/console/reports/readiness')
   return normalizeReportsReadiness(unwrapData<unknown>(data))
+}
+
+export async function getConsoleReadinessScore(): Promise<PlatformReadinessScore> {
+  const { data } = await request.get('/v1/console/readiness/score')
+  return normalizeReadinessScore(unwrapData<unknown>(data))
+}
+
+export async function getConsoleNavigationModules(): Promise<PlatformNavigationModel> {
+  const { data } = await request.get('/v1/console/navigation/modules')
+  const payload = asRecord(unwrapData<unknown>(data))
+  return {
+    navigationMode: String(payload.navigationMode ?? 'read-only-module-launch'),
+    controlActionsEnabled: Boolean(payload.controlActionsEnabled),
+    items: Array.isArray(payload.items) ? payload.items.map((item) => normalizeNavigationItem(item)) : [],
+  }
 }
 

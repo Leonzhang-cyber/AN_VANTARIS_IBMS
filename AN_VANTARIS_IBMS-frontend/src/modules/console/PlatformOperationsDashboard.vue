@@ -7,8 +7,10 @@ import {
   getConsoleHealth,
   getConsoleModuleHealth,
   getConsoleModules,
+  getConsoleNavigationModules,
   getConsoleOperationsSummary,
   getConsoleReadinessRegistry,
+  getConsoleReadinessScore,
   getConsoleReadinessSummary,
   getConsoleReportsReadiness,
   type ConsoleHealth,
@@ -16,6 +18,9 @@ import {
   type ModuleReadinessSummary,
   type OperationsDashboardSummary,
   type PlatformModuleSummary,
+  type PlatformNavigationItem,
+  type PlatformNavigationModel,
+  type PlatformReadinessScore,
   type ReportsReadinessSnapshot,
 } from '@/services/api/console'
 
@@ -24,6 +29,8 @@ const router = useRouter()
 const loading = ref(false)
 const loadingHealthDetail = ref(false)
 const apiError = ref('')
+const scoreFallbackAlert = ref('')
+const navigationFallbackAlert = ref('')
 const showHealthDrawer = ref(false)
 const selectedHealthDetail = ref<ModuleReadinessRecord | null>(null)
 
@@ -97,6 +104,29 @@ const registrySummary = ref<ModuleReadinessSummary>({
   averageHealthScore: 0,
   lowestHealthModules: [],
   highestHealthModules: [],
+})
+
+const readinessScore = ref<PlatformReadinessScore>({
+  overallScore: 0,
+  scoreBand: 'early-foundation',
+  scoreMode: 'frontend-local-fallback',
+  certified: false,
+  iec62443Certified: false,
+  components: {
+    moduleReadiness: { score: 0, weight: 0.35, basis: 'runtimeStatus, readinessLevel, frontendReady, backendReady, apiReady' },
+    auditReadiness: { score: 0, weight: 0.25, basis: 'auditReadiness, audit storage, audit verification placeholders' },
+    securityPosture: { score: 0, weight: 0.25, basis: 'permission mode, certified flags, RBAC/SIEM/UCDE integration status' },
+    integrationReadiness: { score: 0, weight: 0.15, basis: 'integrationMode, edge/link runtime integration status' },
+  },
+  drivers: [],
+  risks: [],
+  recommendations: [],
+})
+
+const navigationModel = ref<PlatformNavigationModel>({
+  navigationMode: 'read-only-module-launch',
+  controlActionsEnabled: false,
+  items: [],
 })
 
 const moduleFilters = reactive({
@@ -203,10 +233,8 @@ const filteredModules = computed(() => {
   })
 })
 
-function normalizeError(error: unknown): string {
-  return error instanceof ApiError
-    ? error.message
-    : 'Registry API unavailable. Showing local fallback summary.'
+function normalizeError(error: unknown, fallbackMessage: string): string {
+  return error instanceof ApiError ? error.message : fallbackMessage
 }
 
 function asReadinessRecord(item: PlatformModuleSummary): ModuleReadinessRecord {
@@ -218,7 +246,7 @@ function asReadinessRecord(item: PlatformModuleSummary): ModuleReadinessRecord {
     route: item.route,
     runtimeStatus: item.runtimeStatus,
     readinessLevel: item.readinessLevel,
-    lifecycleStage: item.runtimeStatus === 'ready' ? 'runnable-readiness' : 'planned',
+    lifecycleStage: item.runtimeStatus === 'ready' ? 'runnable-readiness' : item.runtimeStatus === 'foundation' ? 'platform-foundation' : 'planned',
     frontendReady: item.frontendReady,
     backendReady: item.backendReady,
     apiReady: item.backendReady,
@@ -272,28 +300,114 @@ function calculateFallbackSummary(items: ModuleReadinessRecord[]): ModuleReadine
   }
 }
 
+function computeLocalScore(items: ModuleReadinessRecord[]): PlatformReadinessScore {
+  const summary = calculateFallbackSummary(items)
+  const total = Math.max(summary.totalModules, 1)
+  const moduleScore = Number(((summary.readyModules * 80 + summary.foundationModules * 55 + summary.plannedModules * 25 + summary.notIntegratedModules * 10) / total).toFixed(2))
+  const auditScore = Number(((summary.auditReadyModules * 60 + (total - summary.auditReadyModules) * 18) / total).toFixed(2))
+  const securityScore = 32
+  const integrationScore = Number(((summary.notIntegratedModules > 0 ? 12 : 36) + (summary.readyModules > 0 ? 8 : 0)).toFixed(2))
+  const overall = Number((moduleScore * 0.35 + auditScore * 0.25 + securityScore * 0.25 + integrationScore * 0.15).toFixed(2))
+  const band: PlatformReadinessScore['scoreBand'] =
+    overall <= 24 ? 'early-foundation' : overall <= 49 ? 'foundation' : overall <= 74 ? 'readiness-candidate' : 'operational-candidate'
+  return {
+    overallScore: overall,
+    scoreBand: band,
+    scoreMode: 'frontend-local-fallback',
+    certified: false,
+    iec62443Certified: false,
+    components: {
+      moduleReadiness: {
+        score: moduleScore,
+        weight: 0.35,
+        basis: 'runtimeStatus, readinessLevel, frontendReady, backendReady, apiReady',
+      },
+      auditReadiness: {
+        score: auditScore,
+        weight: 0.25,
+        basis: 'auditReadiness, audit storage, audit verification placeholders',
+      },
+      securityPosture: {
+        score: securityScore,
+        weight: 0.25,
+        basis: 'permission mode, certified flags, RBAC/SIEM/UCDE integration status',
+      },
+      integrationReadiness: {
+        score: integrationScore,
+        weight: 0.15,
+        basis: 'integrationMode, edge/link runtime integration status',
+      },
+    },
+    drivers: ['Local registry fallback is available.'],
+    risks: ['Most modules are planned or not integrated.'],
+    recommendations: ['Keep certification claims disabled and continue module foundations.'],
+  }
+}
+
+function fallbackNavigationFromRegistry(items: ModuleReadinessRecord[]): PlatformNavigationModel {
+  const rows: PlatformNavigationItem[] = items.map((item) => {
+    const route = item.route || null
+    const launchEnabled = Boolean(route) && (item.runtimeStatus === 'ready' || item.runtimeStatus === 'foundation')
+    const status = item.runtimeStatus
+    let launchLabel = launchEnabled ? 'Open Module' : 'Planned'
+    let disabledReason: string | null = null
+    let boundaryNote: string | null = null
+    if (item.moduleId === 'reports') {
+      launchLabel = 'Open Reports'
+    } else if (item.moduleId === 'uconsole') {
+      launchLabel = 'Current Dashboard'
+    } else if (status === 'not-integrated') {
+      launchLabel = 'Not Integrated'
+      disabledReason = 'Module runtime is not integrated in current stage.'
+      boundaryNote =
+        item.moduleId === 'edge-fleet'
+          ? 'AN_VANTARIS_EDGE remains a separate shared foundation boundary.'
+          : item.moduleId === 'link-gateway'
+            ? 'AN_VANTARIS_LINK remains a separate shared foundation boundary.'
+            : 'This module remains a separate shared foundation boundary.'
+    } else if (!launchEnabled) {
+      launchLabel = 'Planned'
+      disabledReason = 'Module route is not available in current stage.'
+      boundaryNote = 'No runtime integration is performed from UConsole.'
+    }
+    return {
+      moduleId: item.moduleId,
+      moduleName: item.moduleName,
+      route,
+      launchEnabled,
+      launchLabel,
+      status,
+      disabledReason,
+      boundaryNote,
+      readOnly: true,
+      controlActionsEnabled: false,
+      certified: false,
+      iec62443Certified: false,
+    }
+  })
+  return {
+    navigationMode: 'read-only-module-launch',
+    controlActionsEnabled: false,
+    items: rows,
+  }
+}
+
 async function loadDashboard(): Promise<void> {
   loading.value = true
   apiError.value = ''
+  scoreFallbackAlert.value = ''
+  navigationFallbackAlert.value = ''
   try {
-    const [healthResult, readinessResult] = await Promise.all([
-      getConsoleHealth(),
-      getConsoleReportsReadiness(),
-    ])
+    const [healthResult, readinessResult] = await Promise.all([getConsoleHealth(), getConsoleReportsReadiness()])
     health.value = healthResult
     reportsReadiness.value = readinessResult
 
     try {
-      const [registryResult, summaryResult] = await Promise.all([
-        getConsoleReadinessRegistry(),
-        getConsoleReadinessSummary(),
-      ])
+      const [registryResult, summaryResult] = await Promise.all([getConsoleReadinessRegistry(), getConsoleReadinessSummary()])
       modules.value = registryResult.items
       registrySummary.value = summaryResult
-      legacySummary.value = await getConsoleOperationsSummary()
-      return
     } catch (registryError) {
-      apiError.value = normalizeError(registryError)
+      apiError.value = normalizeError(registryError, 'Registry API unavailable. Showing local fallback summary.')
       try {
         const modulesResult = await getConsoleModules()
         modules.value = modulesResult.map((item) => asReadinessRecord(item))
@@ -301,12 +415,29 @@ async function loadDashboard(): Promise<void> {
         modules.value = [...fallbackModules]
       }
       registrySummary.value = calculateFallbackSummary(modules.value)
-      legacySummary.value = await getConsoleOperationsSummary()
     }
+
+    try {
+      readinessScore.value = await getConsoleReadinessScore()
+    } catch (scoreError) {
+      scoreFallbackAlert.value = normalizeError(scoreError, 'Readiness score API unavailable. Using frontend local score.')
+      readinessScore.value = computeLocalScore(modules.value)
+    }
+
+    try {
+      navigationModel.value = await getConsoleNavigationModules()
+    } catch (navigationError) {
+      navigationFallbackAlert.value = normalizeError(navigationError, 'Navigation API unavailable. Using registry-derived navigation.')
+      navigationModel.value = fallbackNavigationFromRegistry(modules.value)
+    }
+
+    legacySummary.value = await getConsoleOperationsSummary()
   } catch (error) {
-    apiError.value = normalizeError(error)
+    apiError.value = normalizeError(error, 'UConsole API unavailable. Showing local fallback summary.')
     modules.value = [...fallbackModules]
     registrySummary.value = calculateFallbackSummary(modules.value)
+    readinessScore.value = computeLocalScore(modules.value)
+    navigationModel.value = fallbackNavigationFromRegistry(modules.value)
   } finally {
     loading.value = false
   }
@@ -331,6 +462,12 @@ async function refreshAllHealthDetails(): Promise<void> {
     const payload = await getConsoleAllModuleHealth()
     modules.value = payload.items
     registrySummary.value = calculateFallbackSummary(payload.items)
+    if (readinessScore.value.scoreMode === 'frontend-local-fallback') {
+      readinessScore.value = computeLocalScore(payload.items)
+    }
+    if (navigationFallbackAlert.value) {
+      navigationModel.value = fallbackNavigationFromRegistry(payload.items)
+    }
   } catch {
     // keep non-blocking read-only fallback behavior
   }
@@ -341,6 +478,13 @@ function goToRoute(path: string): void {
     return
   }
   void router.push(path)
+}
+
+function launchModule(item: PlatformNavigationItem): void {
+  if (!item.launchEnabled || !item.route) {
+    return
+  }
+  void router.push(item.route)
 }
 
 onMounted(() => {
@@ -377,6 +521,97 @@ onMounted(() => {
       class="block-space"
     />
 
+    <el-alert
+      v-if="scoreFallbackAlert"
+      type="warning"
+      show-icon
+      :closable="false"
+      :title="scoreFallbackAlert"
+      class="block-space"
+    />
+
+    <el-alert
+      v-if="navigationFallbackAlert"
+      type="warning"
+      show-icon
+      :closable="false"
+      :title="navigationFallbackAlert"
+      class="block-space"
+    />
+
+    <el-card shadow="never" class="block-space">
+      <template #header>
+        <div class="section-title">Platform Readiness Score</div>
+      </template>
+      <el-skeleton v-if="loading" :rows="4" animated />
+      <template v-else>
+        <el-descriptions :column="3" border class="block-space">
+          <el-descriptions-item label="overallScore">{{ readinessScore.overallScore }}</el-descriptions-item>
+          <el-descriptions-item label="scoreBand">{{ readinessScore.scoreBand }}</el-descriptions-item>
+          <el-descriptions-item label="scoreMode">{{ readinessScore.scoreMode }}</el-descriptions-item>
+          <el-descriptions-item label="certified">{{ readinessScore.certified }}</el-descriptions-item>
+          <el-descriptions-item label="iec62443Certified">{{ readinessScore.iec62443Certified }}</el-descriptions-item>
+        </el-descriptions>
+        <el-alert
+          type="info"
+          show-icon
+          :closable="false"
+          title="Readiness score is derived from the local registry. It is not a certification result."
+        />
+      </template>
+    </el-card>
+
+    <el-card shadow="never" class="block-space">
+      <template #header>
+        <div class="section-title">Score Breakdown</div>
+      </template>
+      <el-skeleton v-if="loading" :rows="4" animated />
+      <el-table v-else :data="[
+        { key: 'moduleReadiness', value: readinessScore.components.moduleReadiness },
+        { key: 'auditReadiness', value: readinessScore.components.auditReadiness },
+        { key: 'securityPosture', value: readinessScore.components.securityPosture },
+        { key: 'integrationReadiness', value: readinessScore.components.integrationReadiness },
+      ]" row-key="key" empty-text="No score breakdown">
+        <el-table-column prop="key" label="component" min-width="180" />
+        <el-table-column label="score" min-width="100">
+          <template #default="{ row }">{{ row.value.score }}</template>
+        </el-table-column>
+        <el-table-column label="weight" min-width="100">
+          <template #default="{ row }">{{ row.value.weight }}</template>
+        </el-table-column>
+        <el-table-column label="basis" min-width="340">
+          <template #default="{ row }">{{ row.value.basis }}</template>
+        </el-table-column>
+      </el-table>
+    </el-card>
+
+    <el-card shadow="never" class="block-space">
+      <template #header>
+        <div class="section-title">Drivers / Risks / Recommendations</div>
+      </template>
+      <el-skeleton v-if="loading" :rows="4" animated />
+      <template v-else>
+        <el-card shadow="never" class="block-space">
+          <template #header>Drivers</template>
+          <ul class="inline-list">
+            <li v-for="item in readinessScore.drivers" :key="item">{{ item }}</li>
+          </ul>
+        </el-card>
+        <el-card shadow="never" class="block-space">
+          <template #header>Risks</template>
+          <ul class="inline-list">
+            <li v-for="item in readinessScore.risks" :key="item">{{ item }}</li>
+          </ul>
+        </el-card>
+        <el-card shadow="never">
+          <template #header>Recommendations</template>
+          <ul class="inline-list">
+            <li v-for="item in readinessScore.recommendations" :key="item">{{ item }}</li>
+          </ul>
+        </el-card>
+      </template>
+    </el-card>
+
     <el-card shadow="never" class="block-space">
       <template #header>
         <div class="section-title">Registry Summary</div>
@@ -395,6 +630,34 @@ onMounted(() => {
           {{ registrySummary.iec62443CertifiedModules }}
         </el-descriptions-item>
       </el-descriptions>
+    </el-card>
+
+    <el-card shadow="never" class="block-space">
+      <template #header>
+        <div class="section-title">Platform Module Navigation</div>
+      </template>
+      <el-skeleton v-if="loading" :rows="4" animated />
+      <el-table v-else :data="navigationModel.items" row-key="moduleId" empty-text="No navigation data">
+        <el-table-column prop="moduleName" label="moduleName" min-width="220" />
+        <el-table-column prop="status" label="status" min-width="130" />
+        <el-table-column prop="launchEnabled" label="launchEnabled" min-width="130" />
+        <el-table-column label="route" min-width="170">
+          <template #default="{ row }">
+            <span v-if="row.route">{{ row.route }}</span>
+            <span v-else>-</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="launchLabel" label="launchLabel" min-width="170" />
+        <el-table-column prop="disabledReason" label="disabledReason" min-width="260" />
+        <el-table-column prop="boundaryNote" label="boundaryNote" min-width="280" />
+        <el-table-column label="launch" min-width="140" fixed="right">
+          <template #default="{ row }">
+            <el-button type="primary" plain :disabled="!row.launchEnabled" @click="launchModule(row)">
+              {{ row.launchLabel }}
+            </el-button>
+          </template>
+        </el-table-column>
+      </el-table>
     </el-card>
 
     <el-card shadow="never" class="block-space">
