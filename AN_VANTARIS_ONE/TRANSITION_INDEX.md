@@ -24,6 +24,7 @@ Completed stages:
 - IBMS-CORE-A0-BUSINESS-MODULE-BOUNDARY — current task
 - MMS-A0-MODULE-BOUNDARY — current task
 - ESG-A0-MODULE-BOUNDARY — current task
+- IDC-DCIM-A0-MODULE-BOUNDARY — current task
 
 ## Current Allowed Work
 
@@ -46,10 +47,11 @@ Completed stages:
 
 1. CDE-A0-EVIDENCE-CONSUMER
 2. CONSOLE-A0-SHARED-FOUNDATION-HEALTH-VIEW
-3. ESG-A1-MODULE-MANIFEST-DRAFT
-4. MMS-A1-MODULE-MANIFEST-DRAFT
-5. IBMS-CORE-A1-MODULE-MANIFEST-DRAFT
-6. ONE-ADAPTER-A1-CONSUMER-CONTRACT-DRAFT
+3. IDC-DCIM-A1-MODULE-MANIFEST-DRAFT
+4. ESG-A1-MODULE-MANIFEST-DRAFT
+5. MMS-A1-MODULE-MANIFEST-DRAFT
+6. IBMS-CORE-A1-MODULE-MANIFEST-DRAFT
+7. ONE-ADAPTER-A1-CONSUMER-CONTRACT-DRAFT
 
 ## Shared Foundation Runtime Continuation
 
@@ -63,3 +65,4 @@ VANTARIS ONE adapter is consumer boundary only; runtime implementation requires 
 IBMS Core is now defined as VANTARIS ONE business module, not as the entire platform and not as owner of Edge / Link / Contracts.
 MMS is now defined as VANTARIS ONE maintenance business module, not as owner of Edge / Link / Contracts and not as owner of UFMS RCA/correlation runtime.
 ESG is now defined as VANTARIS ONE energy and sustainability business module, not as owner of Edge / Link / Contracts, not as owner of UFMS RCA/correlation runtime, not as MMS workflow owner, and not as CDE evidence chain owner.
+IDC / DCIM is now defined as VANTARIS ONE data center infrastructure operations business module, not as owner of Edge / Link / Contracts, not as owner of UFMS RCA/correlation runtime, not as MMS workflow owner, not as ESG carbon reporting owner, and not as CDE evidence chain owner.
