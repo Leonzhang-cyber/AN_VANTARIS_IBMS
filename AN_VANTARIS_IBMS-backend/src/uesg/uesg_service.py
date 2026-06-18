@@ -5,10 +5,15 @@ from __future__ import annotations
 from typing import Any, Dict, Optional
 
 from src.uesg.uesg_provider import (
+    get_data_quality_summary,
+    get_esg_category_details,
+    get_esg_site_system_associations,
     get_associations,
     get_metric,
+    get_metric_calculation,
     get_metrics_breakdown,
     get_metrics_summary,
+    get_trend_placeholder,
     get_uesg_health,
     list_metrics,
 )
@@ -65,9 +70,24 @@ class UesgSustainabilityService:
     def get_metrics_breakdown(self) -> Dict[str, Any]:
         return get_metrics_breakdown()
 
+    def get_category_details(self) -> Dict[str, Any]:
+        return get_esg_category_details()
+
     def get_associations(self) -> Dict[str, Any]:
         return get_associations()
 
+    def get_association_detail(self) -> Dict[str, Any]:
+        return get_esg_site_system_associations()
+
+    def get_data_quality(self) -> Dict[str, Any]:
+        return get_data_quality_summary()
+
+    def get_trends(self) -> Dict[str, Any]:
+        return get_trend_placeholder()
+
     def get_metric_detail(self, metric_id: str) -> Optional[Dict[str, Any]]:
         return get_metric(metric_id)
+
+    def get_metric_calculation(self, metric_id: str) -> Optional[Dict[str, Any]]:
+        return get_metric_calculation(metric_id)
 

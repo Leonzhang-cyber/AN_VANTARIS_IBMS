@@ -1,29 +1,23 @@
 import request from './request'
 
-export interface UesgHealth {
-  status: string
-  moduleId: string
-  moduleName: string
-  provider: string
-  runtimeMode: string
-  sourceSemantics: string
-  mockData: boolean
-  readOnly: boolean
-  controlActionsEnabled: boolean
-  meterIntegrationEnabled: boolean
-  edgeRuntimeIntegrated: boolean
-  linkRuntimeIntegrated: boolean
+export interface EsgCalculationDetail {
+  calculationMode: string
+  formulaMode: string
+  inputReferences: string[]
+  assumptions: string[]
+  dataQuality: string
+  calculationReady: boolean
+  runtimeLinked: boolean
   carbonFactorDatabaseIntegrated: boolean
-  totalMetrics: number
-  runtimeLinkedMetrics: number
+  meterIntegrationEnabled: boolean
+  notes: string
   certified: boolean
-  iec62443Certified: boolean
   greenMarkCertified: boolean
   griCertified: boolean
   isoCertified: boolean
 }
 
-export interface UesgMetric {
+export interface EsgMetricRecord {
   metricId: string
   metricName: string
   metricCategory: string
@@ -53,6 +47,7 @@ export interface UesgMetric {
   tags: string[]
   metadata: Record<string, unknown>
   limitations: string[]
+  calculationDetail: EsgCalculationDetail
   runtimeLinked: boolean
   certified: boolean
   iec62443Certified: boolean
@@ -61,7 +56,30 @@ export interface UesgMetric {
   isoCertified: boolean
 }
 
-export interface UesgMetricsSummary {
+export interface UesgHealth {
+  status: string
+  moduleId: string
+  moduleName: string
+  provider: string
+  runtimeMode: string
+  sourceSemantics: string
+  mockData: boolean
+  readOnly: boolean
+  controlActionsEnabled: boolean
+  meterIntegrationEnabled: boolean
+  edgeRuntimeIntegrated: boolean
+  linkRuntimeIntegrated: boolean
+  carbonFactorDatabaseIntegrated: boolean
+  totalMetrics: number
+  runtimeLinkedMetrics: number
+  certified: boolean
+  iec62443Certified: boolean
+  greenMarkCertified: boolean
+  griCertified: boolean
+  isoCertified: boolean
+}
+
+export interface EsgSummary {
   totalMetrics: number
   energyMetrics: number
   carbonMetrics: number
@@ -69,7 +87,16 @@ export interface UesgMetricsSummary {
   wasteMetrics: number
   environmentMetrics: number
   mockMetrics: number
+  categoryDetailReady: boolean
+  calculationDetailReady: boolean
+  associationDetailReady: boolean
+  dataQualityReady: boolean
+  trendPlaceholderReady: boolean
   runtimeLinkedMetrics: number
+  meterLinkedMetrics: number
+  carbonFactorLinkedMetrics: number
+  reportReadyMetrics: number
+  complianceCertifiedMetrics: number
   certifiedMetrics: number
   iec62443CertifiedMetrics: number
   greenMarkCertifiedMetrics: number
@@ -100,7 +127,45 @@ export interface UesgBreakdown {
   notes: string
 }
 
-export interface UesgAssociations {
+export interface EsgCategoryDetail {
+  categoryId: string
+  categoryName: string
+  categoryMode: string
+  metricCount: number
+  metrics: Array<{
+    metricId: string
+    metricName: string
+    unit: string
+    value: number
+    dataQuality: string
+  }>
+  primaryUnit: string
+  units: string[]
+  totalValue: number
+  dataQualitySummary: Record<string, number>
+  calculationModes: string[]
+  runtimeLinked: boolean
+  meterIntegrationEnabled: boolean
+  carbonFactorDatabaseIntegrated: boolean
+  certified: boolean
+  greenMarkCertified: boolean
+  griCertified: boolean
+  isoCertified: boolean
+  limitations: string[]
+}
+
+export interface EsgCategoryDetailsResponse {
+  categoryMode: string
+  items: EsgCategoryDetail[]
+  runtimeLinked: boolean
+  certified: boolean
+  greenMarkCertified: boolean
+  griCertified: boolean
+  isoCertified: boolean
+  notes: string
+}
+
+export interface EsgAssociationModel {
   associationMode: string
   items: Array<{
     associationId: string
@@ -120,8 +185,76 @@ export interface UesgAssociations {
   notes: string
 }
 
+export interface EsgAssociationDetail {
+  associationMode: string
+  associationSummary: {
+    siteAssociationCount: number
+    systemAssociationCount: number
+    runtimeLinkedAssociations: number
+    assetRuntimeIntegrated: boolean
+  }
+  siteAssociations: Array<{
+    siteId: string
+    siteName: string
+    metricIds: string[]
+    metricCategories: string[]
+    runtimeLinked: boolean
+  }>
+  systemAssociations: Array<{
+    systemId: string
+    systemName: string
+    metricIds: string[]
+    metricCategories: string[]
+    runtimeLinked: boolean
+  }>
+  runtimeLinked: boolean
+  certified: boolean
+  greenMarkCertified: boolean
+  griCertified: boolean
+  isoCertified: boolean
+  limitations: string[]
+}
+
+export interface EsgDataQualitySummary {
+  qualityMode: string
+  totalMetrics: number
+  qualityCounts: Record<string, number>
+  runtimeLinked: boolean
+  certified: boolean
+  greenMarkCertified: boolean
+  griCertified: boolean
+  isoCertified: boolean
+  limitations: string[]
+}
+
+export interface EsgTrendPlaceholder {
+  trendMode: string
+  periods: string[]
+  trendCalculated: boolean
+  periodComparisonReady: boolean
+  series: unknown[]
+  runtimeLinked: boolean
+  limitations: string[]
+  certified: boolean
+  greenMarkCertified: boolean
+  griCertified: boolean
+  isoCertified: boolean
+}
+
+export interface EsgMetricCalculationResponse {
+  metricId: string
+  metricName: string
+  metricCategory: string
+  calculationDetail: EsgCalculationDetail
+  runtimeLinked: boolean
+  certified: boolean
+  greenMarkCertified: boolean
+  griCertified: boolean
+  isoCertified: boolean
+}
+
 export interface UesgMetricListResponse {
-  items: UesgMetric[]
+  items: EsgMetricRecord[]
   total: number
   filters: {
     metricCategory: string
@@ -131,7 +264,7 @@ export interface UesgMetricListResponse {
     systemId: string
     dataQuality: string
   }
-  summary: UesgMetricsSummary
+  summary: EsgSummary
   provider: string
   runtimeMode: string
   sourceSemantics: string
@@ -167,6 +300,14 @@ function asStringArray(value: unknown): string[] {
   return Array.isArray(value) ? value.map((item) => String(item)) : []
 }
 
+function asNumberRecord(value: unknown): Record<string, number> {
+  const data = asRecord(value)
+  return Object.keys(data).reduce<Record<string, number>>((acc, key) => {
+    acc[key] = Number(data[key] ?? 0)
+    return acc
+  }, {})
+}
+
 function unwrapData<T>(body: unknown): T {
   if (typeof body === 'object' && body !== null && 'data' in body) {
     return (body as { data: T }).data
@@ -174,7 +315,27 @@ function unwrapData<T>(body: unknown): T {
   return body as T
 }
 
-function normalizeMetric(raw: unknown): UesgMetric {
+function normalizeCalculationDetail(raw: unknown): EsgCalculationDetail {
+  const data = asRecord(raw)
+  return {
+    calculationMode: String(data.calculationMode ?? 'local-skeleton-estimate'),
+    formulaMode: String(data.formulaMode ?? 'placeholder'),
+    inputReferences: asStringArray(data.inputReferences),
+    assumptions: asStringArray(data.assumptions),
+    dataQuality: String(data.dataQuality ?? 'unknown'),
+    calculationReady: Boolean(data.calculationReady),
+    runtimeLinked: Boolean(data.runtimeLinked),
+    carbonFactorDatabaseIntegrated: Boolean(data.carbonFactorDatabaseIntegrated),
+    meterIntegrationEnabled: Boolean(data.meterIntegrationEnabled),
+    notes: String(data.notes ?? ''),
+    certified: Boolean(data.certified),
+    greenMarkCertified: Boolean(data.greenMarkCertified),
+    griCertified: Boolean(data.griCertified),
+    isoCertified: Boolean(data.isoCertified),
+  }
+}
+
+function normalizeMetric(raw: unknown): EsgMetricRecord {
   const data = asRecord(raw)
   return {
     metricId: String(data.metricId ?? ''),
@@ -206,6 +367,7 @@ function normalizeMetric(raw: unknown): UesgMetric {
     tags: asStringArray(data.tags),
     metadata: asRecord(data.metadata),
     limitations: asStringArray(data.limitations),
+    calculationDetail: normalizeCalculationDetail(data.calculationDetail),
     runtimeLinked: Boolean(data.runtimeLinked),
     certified: Boolean(data.certified),
     iec62443Certified: Boolean(data.iec62443Certified),
@@ -241,7 +403,7 @@ function normalizeHealth(raw: unknown): UesgHealth {
   }
 }
 
-function normalizeSummary(raw: unknown): UesgMetricsSummary {
+function normalizeSummary(raw: unknown): EsgSummary {
   const data = asRecord(raw)
   return {
     totalMetrics: Number(data.totalMetrics ?? 0),
@@ -251,7 +413,16 @@ function normalizeSummary(raw: unknown): UesgMetricsSummary {
     wasteMetrics: Number(data.wasteMetrics ?? 0),
     environmentMetrics: Number(data.environmentMetrics ?? 0),
     mockMetrics: Number(data.mockMetrics ?? 0),
+    categoryDetailReady: Boolean(data.categoryDetailReady),
+    calculationDetailReady: Boolean(data.calculationDetailReady),
+    associationDetailReady: Boolean(data.associationDetailReady),
+    dataQualityReady: Boolean(data.dataQualityReady),
+    trendPlaceholderReady: Boolean(data.trendPlaceholderReady),
     runtimeLinkedMetrics: Number(data.runtimeLinkedMetrics ?? 0),
+    meterLinkedMetrics: Number(data.meterLinkedMetrics ?? 0),
+    carbonFactorLinkedMetrics: Number(data.carbonFactorLinkedMetrics ?? 0),
+    reportReadyMetrics: Number(data.reportReadyMetrics ?? 0),
+    complianceCertifiedMetrics: Number(data.complianceCertifiedMetrics ?? 0),
     certifiedMetrics: Number(data.certifiedMetrics ?? 0),
     iec62443CertifiedMetrics: Number(data.iec62443CertifiedMetrics ?? 0),
     greenMarkCertifiedMetrics: Number(data.greenMarkCertifiedMetrics ?? 0),
@@ -286,7 +457,7 @@ function normalizeBreakdown(raw: unknown): UesgBreakdown {
   }
 }
 
-function normalizeAssociations(raw: unknown): UesgAssociations {
+function normalizeAssociationModel(raw: unknown): EsgAssociationModel {
   const data = asRecord(raw)
   return {
     associationMode: String(data.associationMode ?? 'local-skeleton-associations'),
@@ -306,6 +477,126 @@ function normalizeAssociations(raw: unknown): UesgAssociations {
     griCertified: Boolean(data.griCertified),
     isoCertified: Boolean(data.isoCertified),
     notes: String(data.notes ?? ''),
+  }
+}
+
+function normalizeCategoryDetails(raw: unknown): EsgCategoryDetailsResponse {
+  const data = asRecord(raw)
+  return {
+    categoryMode: String(data.categoryMode ?? 'local-skeleton-category'),
+    items: asRecordArray(data.items).map((item) => ({
+      categoryId: String(item.categoryId ?? ''),
+      categoryName: String(item.categoryName ?? ''),
+      categoryMode: String(item.categoryMode ?? 'local-skeleton-category'),
+      metricCount: Number(item.metricCount ?? 0),
+      metrics: asRecordArray(item.metrics).map((row) => ({
+        metricId: String(row.metricId ?? ''),
+        metricName: String(row.metricName ?? ''),
+        unit: String(row.unit ?? ''),
+        value: Number(row.value ?? 0),
+        dataQuality: String(row.dataQuality ?? ''),
+      })),
+      primaryUnit: String(item.primaryUnit ?? ''),
+      units: asStringArray(item.units),
+      totalValue: Number(item.totalValue ?? 0),
+      dataQualitySummary: asNumberRecord(item.dataQualitySummary),
+      calculationModes: asStringArray(item.calculationModes),
+      runtimeLinked: Boolean(item.runtimeLinked),
+      meterIntegrationEnabled: Boolean(item.meterIntegrationEnabled),
+      carbonFactorDatabaseIntegrated: Boolean(item.carbonFactorDatabaseIntegrated),
+      certified: Boolean(item.certified),
+      greenMarkCertified: Boolean(item.greenMarkCertified),
+      griCertified: Boolean(item.griCertified),
+      isoCertified: Boolean(item.isoCertified),
+      limitations: asStringArray(item.limitations),
+    })),
+    runtimeLinked: Boolean(data.runtimeLinked),
+    certified: Boolean(data.certified),
+    greenMarkCertified: Boolean(data.greenMarkCertified),
+    griCertified: Boolean(data.griCertified),
+    isoCertified: Boolean(data.isoCertified),
+    notes: String(data.notes ?? ''),
+  }
+}
+
+function normalizeCalculationResponse(raw: unknown): EsgMetricCalculationResponse {
+  const data = asRecord(raw)
+  return {
+    metricId: String(data.metricId ?? ''),
+    metricName: String(data.metricName ?? ''),
+    metricCategory: String(data.metricCategory ?? ''),
+    calculationDetail: normalizeCalculationDetail(data.calculationDetail),
+    runtimeLinked: Boolean(data.runtimeLinked),
+    certified: Boolean(data.certified),
+    greenMarkCertified: Boolean(data.greenMarkCertified),
+    griCertified: Boolean(data.griCertified),
+    isoCertified: Boolean(data.isoCertified),
+  }
+}
+
+function normalizeAssociationDetail(raw: unknown): EsgAssociationDetail {
+  const data = asRecord(raw)
+  const summary = asRecord(data.associationSummary)
+  return {
+    associationMode: String(data.associationMode ?? 'local-skeleton-association-detail'),
+    associationSummary: {
+      siteAssociationCount: Number(summary.siteAssociationCount ?? 0),
+      systemAssociationCount: Number(summary.systemAssociationCount ?? 0),
+      runtimeLinkedAssociations: Number(summary.runtimeLinkedAssociations ?? 0),
+      assetRuntimeIntegrated: Boolean(summary.assetRuntimeIntegrated),
+    },
+    siteAssociations: asRecordArray(data.siteAssociations).map((item) => ({
+      siteId: String(item.siteId ?? ''),
+      siteName: String(item.siteName ?? ''),
+      metricIds: asStringArray(item.metricIds),
+      metricCategories: asStringArray(item.metricCategories),
+      runtimeLinked: Boolean(item.runtimeLinked),
+    })),
+    systemAssociations: asRecordArray(data.systemAssociations).map((item) => ({
+      systemId: String(item.systemId ?? ''),
+      systemName: String(item.systemName ?? ''),
+      metricIds: asStringArray(item.metricIds),
+      metricCategories: asStringArray(item.metricCategories),
+      runtimeLinked: Boolean(item.runtimeLinked),
+    })),
+    runtimeLinked: Boolean(data.runtimeLinked),
+    certified: Boolean(data.certified),
+    greenMarkCertified: Boolean(data.greenMarkCertified),
+    griCertified: Boolean(data.griCertified),
+    isoCertified: Boolean(data.isoCertified),
+    limitations: asStringArray(data.limitations),
+  }
+}
+
+function normalizeDataQuality(raw: unknown): EsgDataQualitySummary {
+  const data = asRecord(raw)
+  return {
+    qualityMode: String(data.qualityMode ?? 'local-skeleton-quality'),
+    totalMetrics: Number(data.totalMetrics ?? 0),
+    qualityCounts: asNumberRecord(data.qualityCounts),
+    runtimeLinked: Boolean(data.runtimeLinked),
+    certified: Boolean(data.certified),
+    greenMarkCertified: Boolean(data.greenMarkCertified),
+    griCertified: Boolean(data.griCertified),
+    isoCertified: Boolean(data.isoCertified),
+    limitations: asStringArray(data.limitations),
+  }
+}
+
+function normalizeTrend(raw: unknown): EsgTrendPlaceholder {
+  const data = asRecord(raw)
+  return {
+    trendMode: String(data.trendMode ?? 'local-skeleton-trend'),
+    periods: asStringArray(data.periods),
+    trendCalculated: Boolean(data.trendCalculated),
+    periodComparisonReady: Boolean(data.periodComparisonReady),
+    series: Array.isArray(data.series) ? data.series : [],
+    runtimeLinked: Boolean(data.runtimeLinked),
+    limitations: asStringArray(data.limitations),
+    certified: Boolean(data.certified),
+    greenMarkCertified: Boolean(data.greenMarkCertified),
+    griCertified: Boolean(data.griCertified),
+    isoCertified: Boolean(data.isoCertified),
   }
 }
 
@@ -347,7 +638,7 @@ export async function getUesgMetrics(params: GetUesgMetricsParams = {}): Promise
   return normalizeList(unwrapData<unknown>(data))
 }
 
-export async function getUesgMetricsSummary(): Promise<UesgMetricsSummary> {
+export async function getUesgMetricsSummary(): Promise<EsgSummary> {
   const { data } = await request.get('/v1/uesg/metrics/summary')
   return normalizeSummary(unwrapData<unknown>(data))
 }
@@ -357,13 +648,38 @@ export async function getUesgMetricsBreakdown(): Promise<UesgBreakdown> {
   return normalizeBreakdown(unwrapData<unknown>(data))
 }
 
-export async function getUesgAssociations(): Promise<UesgAssociations> {
+export async function getUesgAssociations(): Promise<EsgAssociationModel> {
   const { data } = await request.get('/v1/uesg/associations')
-  return normalizeAssociations(unwrapData<unknown>(data))
+  return normalizeAssociationModel(unwrapData<unknown>(data))
 }
 
-export async function getUesgMetricDetail(metricId: string): Promise<UesgMetric> {
+export async function getUesgMetricDetail(metricId: string): Promise<EsgMetricRecord> {
   const { data } = await request.get(`/v1/uesg/metrics/${encodeURIComponent(metricId)}`)
   return normalizeMetric(unwrapData<unknown>(data))
+}
+
+export async function getEsgCategoryDetails(): Promise<EsgCategoryDetailsResponse> {
+  const { data } = await request.get('/v1/uesg/metrics/categories')
+  return normalizeCategoryDetails(unwrapData<unknown>(data))
+}
+
+export async function getEsgMetricCalculation(metricId: string): Promise<EsgMetricCalculationResponse> {
+  const { data } = await request.get(`/v1/uesg/metrics/${encodeURIComponent(metricId)}/calculation`)
+  return normalizeCalculationResponse(unwrapData<unknown>(data))
+}
+
+export async function getEsgAssociationDetail(): Promise<EsgAssociationDetail> {
+  const { data } = await request.get('/v1/uesg/associations/detail')
+  return normalizeAssociationDetail(unwrapData<unknown>(data))
+}
+
+export async function getEsgDataQuality(): Promise<EsgDataQualitySummary> {
+  const { data } = await request.get('/v1/uesg/data-quality')
+  return normalizeDataQuality(unwrapData<unknown>(data))
+}
+
+export async function getEsgTrends(): Promise<EsgTrendPlaceholder> {
+  const { data } = await request.get('/v1/uesg/trends')
+  return normalizeTrend(unwrapData<unknown>(data))
 }
 
