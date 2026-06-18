@@ -21,6 +21,7 @@ Completed stages:
 - SHARED-FOUNDATION-A0-SCOPE-REALIGNMENT — current task
 - ONE-SHARED-FOUNDATION-CONSUMER-A0 — current task
 - ONE-ADAPTER-A0-SHARED-FOUNDATION-INTERFACE — current task
+- IBMS-CORE-A0-BUSINESS-MODULE-BOUNDARY — current task
 
 ## Current Allowed Work
 
@@ -41,13 +42,12 @@ Completed stages:
 
 ## Recommended Next Tasks
 
-1. ONE-ADAPTER-A0-SHARED-FOUNDATION-INTERFACE
-2. IBMS-CORE-A0-BUSINESS-MODULE-BOUNDARY
-3. MMS-A0-MODULE-BOUNDARY
-4. ESG-A0-MODULE-BOUNDARY
-5. CDE-A0-EVIDENCE-CONSUMER
-6. CONSOLE-A0-SHARED-FOUNDATION-HEALTH-VIEW
-7. ONE-ADAPTER-A1-CONSUMER-CONTRACT-DRAFT
+1. MMS-A0-MODULE-BOUNDARY
+2. ESG-A0-MODULE-BOUNDARY
+3. CDE-A0-EVIDENCE-CONSUMER
+4. CONSOLE-A0-SHARED-FOUNDATION-HEALTH-VIEW
+5. IBMS-CORE-A1-MODULE-MANIFEST-DRAFT
+6. ONE-ADAPTER-A1-CONSUMER-CONTRACT-DRAFT
 
 ## Shared Foundation Runtime Continuation
 
@@ -58,3 +58,4 @@ Shared runtime tasks continue under UFMS-led roadmap: `SHARED-CONTRACTS`, `SHARE
 After this point, VANTARIS ONE does not expand Edge/Link/Contracts as private runtime.
 VANTARIS ONE work focuses on adapters and business modules.
 VANTARIS ONE adapter is consumer boundary only; runtime implementation requires separate A1 approval.
+IBMS Core is now defined as VANTARIS ONE business module, not as the entire platform and not as owner of Edge / Link / Contracts.
