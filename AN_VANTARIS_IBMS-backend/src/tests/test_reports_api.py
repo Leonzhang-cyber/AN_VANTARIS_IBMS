@@ -41,12 +41,55 @@ class TestReportsAPI(unittest.TestCase):
         self.assertEqual(len(payload["data"]["rows"]), 5)
         self.assertEqual(payload["data"]["provider"], "local-mock-provider")
         self.assertTrue(payload["data"]["mockData"])
+        self.assertIn("integrity", payload["data"])
+        self.assertIn("queryHash", payload["data"]["integrity"])
+        self.assertIn("payloadHash", payload["data"]["integrity"])
+        self.assertIn("audit", payload["data"])
+        self.assertEqual(payload["data"]["audit"]["auditEventType"], "report.query")
+        self.assertIn("traceability", payload["data"])
 
     def test_query_invalid_report_id(self):
         response = self.client.post("/api/v1/reports/query", json={"reportId": "unknown-report"})
         self.assertEqual(response.status_code, 404)
         payload = response.get_json()
         self.assertEqual(payload["message"], "reportId not found")
+
+    def test_export_manifest_preview_success(self):
+        response = self.client.post(
+            "/api/v1/reports/export/manifest",
+            json={
+                "reportId": "incident-summary",
+                "queryId": "q-1",
+                "generatedAt": "2026-01-01T00:00:00Z",
+                "columns": ["recordId", "sourceReferenceId"],
+                "rows": [{"recordId": "1", "sourceReferenceId": "ref-1"}],
+                "summary": {"rowCount": 1},
+                "filters": {"timeRange": "last_24h"},
+                "provider": "local-mock-provider",
+                "runtimeMode": "skeleton",
+                "mockData": True,
+            },
+        )
+        self.assertEqual(response.status_code, 200)
+        payload = response.get_json()
+        manifest = payload["data"]["manifest"]
+        self.assertIn("exportHash", manifest)
+        self.assertIn("queryHash", manifest)
+        self.assertIn("payloadHash", manifest)
+        self.assertEqual(manifest["certified"], False)
+        self.assertEqual(manifest["iec62443Certified"], False)
+
+    def test_export_manifest_preview_invalid_report_id(self):
+        response = self.client.post(
+            "/api/v1/reports/export/manifest",
+            json={
+                "reportId": "unknown-report",
+                "columns": ["recordId"],
+                "rows": [],
+                "summary": {},
+            },
+        )
+        self.assertEqual(response.status_code, 404)
 
 
 if __name__ == "__main__":

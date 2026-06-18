@@ -46,3 +46,12 @@ def reports_query():
         return Result.error(code=error[0], message=error[1])
     return Result.success(data=result)
 
+
+@api_bp.route("/v1/reports/export/manifest", methods=["POST"])
+def reports_export_manifest():
+    payload = request.get_json(silent=True) or {}
+    result, error = _service.build_export_manifest_preview(payload)
+    if error:
+        return Result.error(code=error[0], message=error[1])
+    return Result.success(data=result)
+

@@ -3,10 +3,12 @@ import { computed, onMounted, reactive, ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import { ApiError } from '@/services/api/errors'
 import {
+  buildReportExportManifest,
   getReportCatalogItem,
   getReportsCatalog,
   getReportsHealth,
   queryReport,
+  type ReportExportManifest,
   type QueryReportPayload,
   type QueryReportResult,
   type ReportsCatalogItem,
@@ -77,6 +79,7 @@ const health = ref<ReportsHealth>({
 })
 
 const queryResult = ref<QueryReportResult | null>(null)
+const exportManifest = ref<ReportExportManifest | null>(null)
 
 const filters = reactive<QueryFilters>({
   timeRange: 'last_24h',
@@ -211,6 +214,7 @@ function resetFilters(): void {
 function applySelectedReportDefaults(report: ReportsCatalogItem): void {
   resetFilters()
   queryResult.value = null
+  exportManifest.value = null
   queryError.value = ''
   queryExecuted.value = false
 
@@ -399,6 +403,7 @@ function buildLocalFallbackQueryResult(payload: QueryReportPayload): QueryReport
 
 async function runQuery(): Promise<void> {
   queryError.value = ''
+  exportManifest.value = null
   if (!selectedReportId.value) {
     queryError.value = 'Please select a report first.'
     return
@@ -526,23 +531,183 @@ function buildCsvFilename(reportId: string): string {
   return `reports-${safeReportId}-${timestamp}.csv`
 }
 
+function buildManifestFilename(reportId: string): string {
+  const timestamp = formatTimestampForFilename(new Date())
+  const safeReportId = reportId.replace(/[^a-zA-Z0-9_-]/g, '-')
+  return `reports-${safeReportId}-${timestamp}.manifest.json`
+}
+
+function canonicalJson(value: unknown): string {
+  const normalize = (input: unknown): unknown => {
+    if (Array.isArray(input)) {
+      return input.map((item) => normalize(item))
+    }
+    if (input && typeof input === 'object') {
+      return Object.keys(input as Record<string, unknown>)
+        .sort()
+        .reduce<Record<string, unknown>>((acc, key) => {
+          acc[key] = normalize((input as Record<string, unknown>)[key])
+          return acc
+        }, {})
+    }
+    return input
+  }
+  return JSON.stringify(normalize(value))
+}
+
+async function buildLocalHash(input: unknown): Promise<{ hash: string; hashUnavailable: boolean }> {
+  const text = canonicalJson(input)
+  const hasWebCrypto = typeof globalThis.crypto !== 'undefined' && globalThis.crypto.subtle
+  if (!hasWebCrypto) {
+    return { hash: `hash-unavailable-${text.length}`, hashUnavailable: true }
+  }
+  try {
+    const encoded = new TextEncoder().encode(text)
+    const digest = await globalThis.crypto.subtle.digest('SHA-256', encoded)
+    const bytes = Array.from(new Uint8Array(digest))
+    const hash = bytes.map((b) => b.toString(16).padStart(2, '0')).join('')
+    return { hash, hashUnavailable: false }
+  } catch {
+    return { hash: `hash-unavailable-${text.length}`, hashUnavailable: true }
+  }
+}
+
+function downloadJson(filename: string, data: unknown): void {
+  const json = `${JSON.stringify(data, null, 2)}\n`
+  const blob = new Blob([json], { type: 'application/json;charset=utf-8' })
+  const url = URL.createObjectURL(blob)
+  const anchor = document.createElement('a')
+  anchor.href = url
+  anchor.download = filename
+  document.body.appendChild(anchor)
+  anchor.click()
+  document.body.removeChild(anchor)
+  URL.revokeObjectURL(url)
+}
+
+async function buildLocalExportManifest(
+  result: QueryReportResult,
+  payload: QueryReportPayload,
+): Promise<ReportExportManifest> {
+  const queryHashResult = await buildLocalHash({
+    reportId: result.reportId,
+    filters: payload.filters ?? {},
+    limit: payload.limit ?? result.rows.length,
+    aggregationLevel: payload.aggregationLevel ?? '',
+  })
+  const payloadHashResult = await buildLocalHash({
+    columns: result.columns,
+    rows: result.rows,
+    summary: result.summary,
+  })
+
+  const sourceReferences = result.rows
+    .map((row) => row.sourceReferenceId)
+    .filter((value): value is string => typeof value === 'string' && value.trim().length > 0)
+  const evidenceReferences = result.rows
+    .map((row) => row.evidenceReferenceId)
+    .filter((value): value is string => typeof value === 'string' && value.trim().length > 0)
+
+  const seed = {
+    exportId: `frontend-export-${Date.now()}`,
+    queryId: result.queryId,
+    reportId: result.reportId,
+    reportName: result.reportName,
+    generatedAt: result.generatedAt,
+    exportedAt: new Date().toISOString(),
+    sourceSemantics: 'ibms-neutral',
+    provider: 'frontend-local-manifest',
+    runtimeMode: result.runtimeMode,
+    mockData: result.mockData,
+    queryHash: queryHashResult.hash,
+    payloadHash: payloadHashResult.hash,
+    rowCount: result.rows.length,
+    columnCount: result.columns.length,
+    sourceReferences: Array.from(new Set(sourceReferences)).sort(),
+    evidenceReferences: Array.from(new Set(evidenceReferences)).sort(),
+    sourceReferenceTypes: result.traceability?.sourceReferenceTypes ?? [],
+    evidenceLinked: Boolean(result.traceability?.evidenceLinked),
+    hashAlgorithm: 'SHA-256',
+    tamperEvidenceMode: 'hash-only-local-fallback',
+    certified: false,
+    iec62443Certified: false,
+    fallbackMode: true,
+    hashUnavailable: queryHashResult.hashUnavailable || payloadHashResult.hashUnavailable,
+    notes: 'Hash-only local manifest for audit readiness; no formal certification claim.',
+  }
+  const exportHashResult = await buildLocalHash(seed)
+  return {
+    manifestVersion: 'reports-export-manifest-v1',
+    exportId: seed.exportId,
+    queryId: seed.queryId,
+    reportId: seed.reportId,
+    reportName: seed.reportName,
+    generatedAt: seed.generatedAt,
+    exportedAt: seed.exportedAt,
+    sourceSemantics: seed.sourceSemantics,
+    provider: seed.provider,
+    runtimeMode: seed.runtimeMode,
+    mockData: seed.mockData,
+    queryHash: seed.queryHash,
+    payloadHash: seed.payloadHash,
+    exportHash: exportHashResult.hash,
+    rowCount: seed.rowCount,
+    columnCount: seed.columnCount,
+    sourceReferences: seed.sourceReferences,
+    evidenceReferences: seed.evidenceReferences,
+    sourceReferenceTypes: seed.sourceReferenceTypes,
+    evidenceLinked: seed.evidenceLinked,
+    hashAlgorithm: seed.hashAlgorithm,
+    tamperEvidenceMode: seed.tamperEvidenceMode,
+    certified: seed.certified,
+    iec62443Certified: seed.iec62443Certified,
+    notes: seed.notes,
+  }
+}
+
 async function exportCurrentResultCsv(): Promise<void> {
   if (!queryResult.value || !canExportCsv.value) {
     return
   }
 
   exportingCsv.value = true
+  const result = queryResult.value
+  const reportId = result.reportId || selectedReportId.value || 'report'
+  const queryPayload = buildQueryPayload()
   try {
-    const csv = buildCsv(queryResult.value.columns as unknown[], queryResult.value.rows)
+    const csv = buildCsv(result.columns as unknown[], result.rows)
     if (!csv) {
       ElMessage.error('No exportable data in current result.')
       return
     }
-    const filename = buildCsvFilename(queryResult.value.reportId || selectedReportId.value || 'report')
-    downloadCsv(filename, csv)
-    ElMessage.success('CSV export completed.')
+    downloadCsv(buildCsvFilename(reportId), csv)
+
+    let manifest: ReportExportManifest
+    try {
+      manifest = await buildReportExportManifest({
+        reportId,
+        reportName: result.reportName,
+        queryId: result.queryId,
+        generatedAt: result.generatedAt,
+        filters: result.filters,
+        limit: queryPayload.limit,
+        aggregationLevel: queryPayload.aggregationLevel,
+        columns: result.columns,
+        rows: result.rows,
+        summary: result.summary,
+        provider: result.provider,
+        runtimeMode: result.runtimeMode,
+        mockData: result.mockData,
+      })
+    } catch {
+      manifest = await buildLocalExportManifest(result, queryPayload)
+    }
+
+    exportManifest.value = manifest
+    downloadJson(buildManifestFilename(reportId), manifest)
+    ElMessage.success('CSV and manifest exported.')
   } catch {
-    ElMessage.error('CSV export failed.')
+    ElMessage.error('CSV or manifest export failed.')
   } finally {
     exportingCsv.value = false
   }
@@ -862,10 +1027,63 @@ onMounted(() => {
           </el-descriptions-item>
           <el-descriptions-item label="runtimeMode">{{ queryResult.runtimeMode }}</el-descriptions-item>
           <el-descriptions-item label="sourceSemantics">{{ queryResult.sourceSemantics }}</el-descriptions-item>
+          <el-descriptions-item label="queryHash">
+            {{ queryResult.integrity?.queryHash || 'not-available' }}
+          </el-descriptions-item>
+          <el-descriptions-item label="payloadHash">
+            {{ queryResult.integrity?.payloadHash || 'not-available' }}
+          </el-descriptions-item>
+          <el-descriptions-item label="exportHash">
+            {{ exportManifest?.exportHash || queryResult.integrity?.exportHash || 'not-exported' }}
+          </el-descriptions-item>
+          <el-descriptions-item label="tamperEvidenceMode">
+            {{ exportManifest?.tamperEvidenceMode || queryResult.integrity?.tamperEvidenceMode || 'hash-only' }}
+          </el-descriptions-item>
+          <el-descriptions-item label="certified">
+            {{ exportManifest?.certified ?? queryResult.integrity?.certified ?? false }}
+          </el-descriptions-item>
+          <el-descriptions-item label="IEC62443 Readiness Flag">
+            {{ exportManifest?.iec62443Certified ?? queryResult.integrity?.iec62443Certified ?? false }}
+          </el-descriptions-item>
           <el-descriptions-item label="exportMode">browser-local</el-descriptions-item>
           <el-descriptions-item label="exportScope">current-result</el-descriptions-item>
           <el-descriptions-item label="exportFormat">csv</el-descriptions-item>
         </el-descriptions>
+
+        <el-alert
+          type="info"
+          show-icon
+          :closable="false"
+          title="Hash-only manifest supports audit readiness."
+          description="This is not a formal immutable proof chain and not certification proof."
+          class="block-space"
+        />
+
+        <el-card shadow="never" class="block-space">
+          <template #header>Traceability</template>
+          <el-descriptions :column="2" border>
+            <el-descriptions-item label="sourceReferences">
+              {{ queryResult.traceability?.sourceReferences?.length ?? 0 }}
+            </el-descriptions-item>
+            <el-descriptions-item label="evidenceReferences">
+              {{ queryResult.traceability?.evidenceReferences?.length ?? 0 }}
+            </el-descriptions-item>
+            <el-descriptions-item label="sourceReferenceTypes">
+              <el-space wrap>
+                <el-tag
+                  v-for="typeName in queryResult.traceability?.sourceReferenceTypes ?? []"
+                  :key="typeName"
+                  size="small"
+                >
+                  {{ typeName }}
+                </el-tag>
+              </el-space>
+            </el-descriptions-item>
+            <el-descriptions-item label="evidenceLinked">
+              {{ queryResult.traceability?.evidenceLinked ?? false }}
+            </el-descriptions-item>
+          </el-descriptions>
+        </el-card>
 
         <div class="export-row block-space">
           <el-tooltip :disabled="canExportCsv" content="Run a report query before exporting CSV." placement="top">
