@@ -7,6 +7,7 @@ import AuditLogsView from '@/modules/system/AuditLogsView.vue'
 import IntegrationSettingsView from '@/modules/system/IntegrationSettingsView.vue'
 import NotificationSettingsView from '@/modules/system/NotificationSettingsView.vue'
 import PermissionListView from '@/modules/system/PermissionListView.vue'
+import ReportsView from '@/modules/reports/ReportsView.vue'
 import SystemOverviewView from '@/modules/system/SystemOverviewView.vue'
 import SystemSettingsView from '@/modules/system/SystemSettingsView.vue'
 
@@ -89,6 +90,12 @@ export const routes: RouteRecordRaw[] = [
     name: 'modeling',
     component: DashboardPlaceholder,
     meta: { requiresAuth: true, title: 'Modeling', layout: true },
+  },
+  {
+    path: '/reports',
+    name: 'reports',
+    component: ReportsView,
+    meta: { requiresAuth: true, title: 'Reports', layout: true },
   },
   {
     path: '/403',
