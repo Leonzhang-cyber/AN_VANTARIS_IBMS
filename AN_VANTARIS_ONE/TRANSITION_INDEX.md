@@ -19,13 +19,14 @@ Completed stages:
 - EDGE-A0.1-TYPECHECK-TOOLCHAIN-BASELINE — 362e756
 - EDGE-A1-CONNECTOR-REGISTRY-DRYRUN — d0f5181
 - SHARED-FOUNDATION-A0-SCOPE-REALIGNMENT — current task
+- ONE-SHARED-FOUNDATION-CONSUMER-A0 — current task
 
 ## Current Allowed Work
 
 - docs-only brand alignment
 - metadata alignment
-- shared foundation governance realignment
-- shared Contracts/Edge/Link scope planning
+- ONE consumer-governance realignment
+- adapter/business-module planning
 
 ## Current Forbidden Work
 
@@ -34,17 +35,23 @@ Completed stages:
 - API path rename
 - DB table rename
 - package migration
-- duplicated Edge/Link/Contracts implementation between ONE and UFMS
+- ONE-private expansion of Edge/Link/Contracts runtime
+- direct UFMS runtime/source/auth/login/seed/migration copy into ONE
 
 ## Recommended Next Tasks
 
-1. SHARED-FOUNDATION-A1-ROADMAP-RENUMBERING
-2. SHARED-CONTRACTS-A2-MODULE-PATCH-LICENSE-CDE-SCHEMAS
-3. SHARED-EDGE-A2-PROTOCOL-PLUGIN-DESCRIPTOR-BASELINE
-4. SHARED-LINK-A0-SKELETON-PACKAGE
-5. UFMS-ONE-ADAPTER-CONTRACT-A0
-6. CODE-MODULE-A0
+1. ONE-ADAPTER-A0-SHARED-FOUNDATION-INTERFACE
+2. IBMS-CORE-A0-BUSINESS-MODULE-BOUNDARY
+3. MMS-A0-MODULE-BOUNDARY
+4. ESG-A0-MODULE-BOUNDARY
+5. CDE-A0-EVIDENCE-CONSUMER
+6. CONSOLE-A0-SHARED-FOUNDATION-HEALTH-VIEW
 
-## Shared Foundation Rule
+## Shared Foundation Runtime Continuation
 
-Edge/Link/Contracts tasks after this point must use `SHARED-` prefix unless product-specific scope is explicitly approved.
+Shared runtime tasks continue under UFMS-led roadmap: `SHARED-CONTRACTS`, `SHARED-EDGE`, `SHARED-LINK`.
+
+## ONE Consumer Rule
+
+After this point, VANTARIS ONE does not expand Edge/Link/Contracts as private runtime.
+VANTARIS ONE work focuses on adapters and business modules.

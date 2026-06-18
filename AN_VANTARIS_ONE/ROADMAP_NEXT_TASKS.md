@@ -1,17 +1,25 @@
 # VANTARIS ONE Next Task Roadmap
 
-## Shared Foundation Realignment
+## ONE Consumer Realignment
 
-After `SHARED-FOUNDATION-A0-SCOPE-REALIGNMENT`, Edge/Link/Contracts planning is moved to shared foundation scope to avoid duplicated ONE/UFMS implementations.
+After `ONE-SHARED-FOUNDATION-CONSUMER-A0`, VANTARIS ONE treats Edge/Link/Contracts as UFMS-led shared foundation assets and focuses on consumer integration.
 
 ## Recommended Sequence
 
-1. SHARED-FOUNDATION-A1-ROADMAP-RENUMBERING
-2. SHARED-CONTRACTS-A2-MODULE-PATCH-LICENSE-CDE-SCHEMAS
-3. SHARED-EDGE-A2-PROTOCOL-PLUGIN-DESCRIPTOR-BASELINE
-4. SHARED-LINK-A0-SKELETON-PACKAGE
-5. UFMS-ONE-ADAPTER-CONTRACT-A0
-6. CODE-MODULE-A0
+1. ONE-ADAPTER-A0-SHARED-FOUNDATION-INTERFACE
+2. IBMS-CORE-A0-BUSINESS-MODULE-BOUNDARY
+3. MMS-A0-MODULE-BOUNDARY
+4. ESG-A0-MODULE-BOUNDARY
+5. CDE-A0-EVIDENCE-CONSUMER
+6. CONSOLE-A0-SHARED-FOUNDATION-HEALTH-VIEW
+
+## Shared Foundation Runtime Continuation (UFMS-led)
+
+Shared foundation runtime tasks continue under UFMS-led roadmap:
+
+- SHARED-CONTRACTS
+- SHARED-EDGE
+- SHARED-LINK
 
 ## Not Yet Allowed
 
@@ -20,4 +28,5 @@ After `SHARED-FOUNDATION-A0-SCOPE-REALIGNMENT`, Edge/Link/Contracts planning is 
 - frontend move
 - DB rename
 - API namespace change
-- duplicated Edge/Link/Contracts implementation per product
+- ONE-private duplicated Edge/Link/Contracts runtime implementation
+- direct UFMS runtime/source/auth/login/seed/migration copy into ONE
