@@ -122,3 +122,10 @@ Reports remains `runtimeReady: false`.
 Reports API/DB/menu/runtime/schema impact remains `none-in-a1-draft`.
 Reports does not directly connect to external systems.
 Reports does not own EDGE/LINK/DB/Contracts runtime or schema.
+
+## 17. Reports A2 API Data Model Gate Completion
+
+Reports A2 API/Data Model Gate is completed as docs-level candidate gate only.
+API/data model remains candidate-only and not implemented in this task.
+backend/frontend/DB/schema/runtime/export/schedule remains blocked.
+Next task is REPORTS-A3-REPORT-CATALOG-SPEC-DRAFT.

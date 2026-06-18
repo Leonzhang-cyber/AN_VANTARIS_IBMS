@@ -44,6 +44,7 @@ Completed stages:
 - UCDE-A4-FORMAL-CONTRACT-PROMOTION-PLAN — current task
 - ONE-ADAPTER-A1-CANCEL-AND-FUNCTION-REALLOCATION — current task
 - REPORTS-A1-MODULE-MANIFEST-DRAFT — current task
+- REPORTS-A2-API-DATA-MODEL-GATE — current task
 
 ## Current Allowed Work
 
@@ -64,7 +65,7 @@ Completed stages:
 
 ## Next Recommended Task
 
-- REPORTS-A2-API-DATA-MODEL-GATE
+- REPORTS-A3-REPORT-CATALOG-SPEC-DRAFT
 
 ## Historical Name Mapping
 
@@ -119,3 +120,5 @@ traceability preservation responsibility is reallocated to LINK + UCDE + DB.
 external ingress responsibility is reallocated to EDGE Fleet.
 Reports is defined as Reporting Workspace (`报表工作台`) in platform layer draft scope.
 Reports runtime/API/DB/frontend implementation remains blocked unless separately authorized.
+Reports API/data model is currently gate-level candidate planning only.
+Reports backend/frontend/API/DB/export/schedule implementation remains blocked unless separately authorized.

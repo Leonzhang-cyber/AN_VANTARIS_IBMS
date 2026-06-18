@@ -5,8 +5,8 @@
   "fullName": "Reporting Workspace",
   "chineseName": "报表工作台",
   "moduleType": "platform-module",
-  "manifestVersion": "A1-draft",
-  "status": "draft-a1",
+  "manifestVersion": "A2-gate-draft",
+  "status": "draft-a2-gate",
   "runtimeReady": false,
   "apiReady": false,
   "dbReady": false,
@@ -132,5 +132,20 @@
     "schemaImpact": "none-in-a1-draft",
     "frontendImpact": "none-in-a1-draft"
   },
-  "nextTask": "REPORTS-A2-API-DATA-MODEL-GATE"
+  "a2ApiDataModelGate": {
+    "gateId": "REPORTS-A2-API-DATA-MODEL-GATE",
+    "docsLevelOnly": true,
+    "apiImplementationAuthorized": false,
+    "dbImplementationAuthorized": false,
+    "frontendImplementationAuthorized": false,
+    "runtimeImplementationAuthorized": false,
+    "schemaPromotionAuthorized": false,
+    "openApiCreated": false,
+    "jsonSchemaCreated": false,
+    "reportEngineCreated": false,
+    "exportRuntimeCreated": false,
+    "scheduleRuntimeCreated": false,
+    "nextTask": "REPORTS-A3-REPORT-CATALOG-SPEC-DRAFT"
+  },
+  "nextTask": "REPORTS-A3-REPORT-CATALOG-SPEC-DRAFT"
 }

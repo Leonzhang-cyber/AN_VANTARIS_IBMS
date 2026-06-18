@@ -319,7 +319,7 @@
       "fullName": "Reporting Workspace",
       "chineseName": "报表工作台",
       "moduleType": "platform-module",
-      "status": "draft-a1",
+      "status": "draft-a2-gate",
       "owns": [
         "reporting workspace context",
         "report catalog context",
@@ -368,7 +368,22 @@
       "dbReady": false,
       "schemaReady": false,
       "contractsPackageReady": false,
-      "nextTask": "REPORTS-A2-API-DATA-MODEL-GATE"
+      "a2ApiDataModelGate": {
+        "gateId": "REPORTS-A2-API-DATA-MODEL-GATE",
+        "docsLevelOnly": true,
+        "apiImplementationAuthorized": false,
+        "dbImplementationAuthorized": false,
+        "frontendImplementationAuthorized": false,
+        "runtimeImplementationAuthorized": false,
+        "schemaPromotionAuthorized": false,
+        "openApiCreated": false,
+        "jsonSchemaCreated": false,
+        "reportEngineCreated": false,
+        "exportRuntimeCreated": false,
+        "scheduleRuntimeCreated": false,
+        "nextTask": "REPORTS-A3-REPORT-CATALOG-SPEC-DRAFT"
+      },
+      "nextTask": "REPORTS-A3-REPORT-CATALOG-SPEC-DRAFT"
     },
     {
       "moduleId": "analytics",
@@ -460,7 +475,7 @@
     "Menu/API/DB changes require separate approval."
   ],
   "nextTasks": [
-    "REPORTS-A2-API-DATA-MODEL-GATE"
+    "REPORTS-A3-REPORT-CATALOG-SPEC-DRAFT"
   ],
   "readinessReview": {
     "reviewId": "U-MODULES-A2-READINESS-REVIEW",
@@ -470,7 +485,7 @@
     "dbReady": false,
     "schemaReady": false,
     "contractsReady": false,
-    "nextTask": "REPORTS-A2-API-DATA-MODEL-GATE"
+    "nextTask": "REPORTS-A3-REPORT-CATALOG-SPEC-DRAFT"
   },
   "implementationGatePlan": {
     "planId": "U-MODULES-A3-IMPLEMENTATION-GATE-PLAN",
@@ -481,6 +496,6 @@
     "schemaPromotionAuthorized": false,
     "contractsPromotionAuthorized": false,
     "frontendImplementationAuthorized": false,
-    "nextTask": "REPORTS-A2-API-DATA-MODEL-GATE"
+    "nextTask": "REPORTS-A3-REPORT-CATALOG-SPEC-DRAFT"
   }
 }
