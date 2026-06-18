@@ -8,8 +8,11 @@
   "modules": [
     {
       "moduleId": "one-adapter",
+      "moduleName": "ONE Adapter",
       "displayName": "ONE Adapter",
-      "moduleType": "consumer",
+      "fullName": "VANTARIS ONE Shared Foundation Consumer Adapter",
+      "chineseName": "共享基础消费适配边界",
+      "moduleType": "platform",
       "status": "draft-a1",
       "owns": [
         "Shared Foundation consumption boundary",
@@ -40,7 +43,7 @@
       ],
       "traceabilityRequired": true,
       "runtimeReady": false,
-      "nextTask": "ONE-ADAPTER-A1-CONSUMER-CONTRACT-DRAFT"
+      "nextTask": "UCONSOLE-A1-MODULE-STATUS-CONTRACT-DRAFT"
     },
     {
       "moduleId": "ucore",
@@ -235,9 +238,12 @@
     },
     {
       "moduleId": "uconsole",
+      "moduleName": "UConsole",
       "displayName": "UConsole",
+      "fullName": "Unified Console",
+      "chineseName": "全向控制台",
       "moduleType": "platform",
-      "status": "pending-a1",
+      "status": "draft-a1",
       "owns": [
         "platform/module health visibility context",
         "status/governance entry context"
@@ -261,7 +267,7 @@
       ],
       "traceabilityRequired": true,
       "runtimeReady": false,
-      "nextTask": "UCONSOLE_A1_MODULE_STATUS_CONTRACT_DRAFT"
+      "nextTask": "UCDE-A2-EVIDENCE-CONTRACT-DRAFT"
     },
     {
       "moduleId": "reports",
@@ -382,8 +388,6 @@
     "Menu/API/DB changes require separate approval."
   ],
   "nextTasks": [
-    "ONE-ADAPTER-A1-CONSUMER-CONTRACT-DRAFT",
-    "UCONSOLE-A1-MODULE-STATUS-CONTRACT-DRAFT",
     "UCDE-A2-EVIDENCE-CONTRACT-DRAFT"
   ]
 }

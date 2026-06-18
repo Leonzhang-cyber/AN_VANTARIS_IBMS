@@ -1,0 +1,112 @@
+{
+  "moduleId": "one-adapter",
+  "moduleName": "ONE Adapter",
+  "displayName": "ONE Adapter",
+  "fullName": "VANTARIS ONE Shared Foundation Consumer Adapter",
+  "chineseName": "共享基础消费适配边界",
+  "moduleType": "platform-module",
+  "manifestVersion": "A1-draft",
+  "status": "draft-a1",
+  "runtimeReady": false,
+  "scope": {
+    "primaryPurpose": "Define docs-level consumer boundary and module-to-foundation reference routing for VANTARIS ONE platform and business modules.",
+    "docsOnly": true,
+    "runtimeImplementation": false,
+    "apiImplementation": false,
+    "databaseImplementation": false,
+    "frontendImplementation": false
+  },
+  "ownerScope": [
+    "shared foundation consumer boundary",
+    "module-to-foundation reference mapping",
+    "business module consumption policy",
+    "foundation runtime non-ownership declaration",
+    "contract draft routing policy reference",
+    "DB reference consumption policy",
+    "Edge/Link reference consumption policy",
+    "module readiness dependency reference"
+  ],
+  "forbiddenOwnership": [
+    "no AN_VANTARIS_EDGE runtime",
+    "no AN_VANTARIS_LINK runtime",
+    "no AN_VANTARIS_DB schema/runtime",
+    "no AN_VANTARIS_Contracts schema ownership",
+    "no contracts/ modification",
+    "no schemas/ modification",
+    "no backend runtime",
+    "no frontend runtime",
+    "no API route",
+    "no DB table",
+    "no migration",
+    "no auth/login/RBAC",
+    "no secret/token/credential"
+  ],
+  "consumedReferences": [
+    "AN_VANTARIS_Contracts reference",
+    "AN_VANTARIS_EDGE reference",
+    "AN_VANTARIS_LINK reference",
+    "AN_VANTARIS_DB reference",
+    "UCore module reference",
+    "UMMS module reference",
+    "UESG module reference",
+    "UCDE module reference",
+    "UDOC module reference",
+    "UConsole status reference",
+    "Reports reference",
+    "Analytics reference",
+    "Nexus AI Consumer reference"
+  ],
+  "providedDraftObjects": [
+    "oneAdapterConsumerBoundary",
+    "oneAdapterFoundationReferenceMap",
+    "oneAdapterModuleConsumptionPolicy",
+    "oneAdapterReadinessDependencyMap",
+    "oneAdapterContractDraftRoutingPolicy"
+  ],
+  "consumerBoundaryFields": [
+    "tenantId",
+    "projectId",
+    "moduleId",
+    "moduleName",
+    "foundationDependencyId",
+    "referenceType",
+    "consumptionMode",
+    "mappingPolicyId",
+    "routingPolicyId",
+    "readinessDependencyId",
+    "sourceSystem",
+    "traceId",
+    "correlationId",
+    "createdAt",
+    "updatedAt"
+  ],
+  "dependencies": {
+    "platform": [
+      "uconsole",
+      "reports",
+      "analytics",
+      "nexus-ai-consumer"
+    ],
+    "businessModules": [
+      "ucore",
+      "umms",
+      "uesg",
+      "ucde",
+      "udoc"
+    ],
+    "foundationReferencesOnly": [
+      "AN_VANTARIS_Contracts",
+      "AN_VANTARIS_EDGE",
+      "AN_VANTARIS_LINK",
+      "AN_VANTARIS_DB"
+    ]
+  },
+  "impact": {
+    "apiImpact": "none-in-a1-draft",
+    "dbImpact": "none-in-a1-draft",
+    "menuImpact": "none-in-a1-draft",
+    "runtimeImpact": "none-in-a1-draft",
+    "schemaImpact": "none-in-a1-draft"
+  },
+  "nextTask": "UCONSOLE-A1-MODULE-STATUS-CONTRACT-DRAFT"
+}

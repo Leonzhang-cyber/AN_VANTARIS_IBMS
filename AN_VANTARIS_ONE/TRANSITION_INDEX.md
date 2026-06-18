@@ -34,6 +34,8 @@ Completed stages:
 - UESG-A1-MODULE-MANIFEST-DRAFT — current task
 - UMMS-A1-MODULE-MANIFEST-DRAFT — current task
 - UCORE-A1-MODULE-MANIFEST-DRAFT — current task
+- ONE-ADAPTER-A1-CONSUMER-CONTRACT-DRAFT — current task
+- UCONSOLE-A1-MODULE-STATUS-CONTRACT-DRAFT — current task
 
 ## Current Allowed Work
 
@@ -54,7 +56,7 @@ Completed stages:
 
 ## Next Recommended Task
 
-- ONE-ADAPTER-A1-CONSUMER-CONTRACT-DRAFT
+- UCDE-A2-EVIDENCE-CONTRACT-DRAFT
 
 ## Historical Name Mapping
 
@@ -64,6 +66,8 @@ Completed stages:
 - mms -> umms
 - IBMS Core -> UCore
 - ibms-core -> ucore
+- Console -> UConsole
+- console -> uconsole
 - IDC/DCIM -> UDOC
 - idc-dcim -> udoc
 - Data Center Operations -> UDOC

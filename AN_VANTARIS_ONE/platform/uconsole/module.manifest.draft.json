@@ -1,0 +1,107 @@
+{
+  "moduleId": "uconsole",
+  "moduleName": "UConsole",
+  "displayName": "UConsole",
+  "fullName": "Unified Console",
+  "chineseName": "全向控制台",
+  "moduleType": "platform-module",
+  "manifestVersion": "A1-draft",
+  "status": "draft-a1",
+  "runtimeReady": false,
+  "scope": {
+    "primaryPurpose": "Define docs-level module status contract draft and readiness/dependency/risk/roadmap status view model references for platform visibility.",
+    "docsOnly": true,
+    "runtimeImplementation": false,
+    "apiImplementation": false,
+    "databaseImplementation": false,
+    "frontendImplementation": false
+  },
+  "ownerScope": [
+    "module status display contract draft",
+    "module readiness status reference",
+    "module dependency status reference",
+    "governance status reference",
+    "risk status reference",
+    "roadmap status reference",
+    "A1 docs-only status model"
+  ],
+  "forbiddenOwnership": [
+    "no frontend page implementation",
+    "no menu route",
+    "no backend API",
+    "no DB table",
+    "no migration",
+    "no schema",
+    "no runtime",
+    "no auth/login/RBAC",
+    "no Edge runtime",
+    "no Link runtime",
+    "no Contracts ownership",
+    "no secret/token/credential"
+  ],
+  "consumedReferences": [
+    "one-adapter readiness reference",
+    "ucore readiness reference",
+    "umms readiness reference",
+    "uesg readiness reference",
+    "ucde readiness reference",
+    "udoc readiness reference",
+    "reports readiness reference",
+    "analytics readiness reference",
+    "nexus-ai-consumer readiness reference",
+    "foundation reference status"
+  ],
+  "providedDraftObjects": [
+    "uconsoleModuleStatusContract",
+    "uconsoleModuleReadinessViewModel",
+    "uconsoleDependencyStatusViewModel",
+    "uconsoleRiskStatusViewModel",
+    "uconsoleRoadmapStatusViewModel"
+  ],
+  "moduleStatusFields": [
+    "tenantId",
+    "projectId",
+    "moduleId",
+    "moduleName",
+    "status",
+    "readinessStatus",
+    "dependencyStatus",
+    "governanceStatus",
+    "riskStatus",
+    "roadmapStatus",
+    "sourceSystem",
+    "traceId",
+    "correlationId",
+    "createdAt",
+    "updatedAt"
+  ],
+  "dependencies": {
+    "platform": [
+      "one-adapter",
+      "reports",
+      "analytics",
+      "nexus-ai-consumer"
+    ],
+    "businessModules": [
+      "ucore",
+      "umms",
+      "uesg",
+      "ucde",
+      "udoc"
+    ],
+    "foundationReferencesOnly": [
+      "AN_VANTARIS_Contracts",
+      "AN_VANTARIS_EDGE",
+      "AN_VANTARIS_LINK",
+      "AN_VANTARIS_DB"
+    ]
+  },
+  "impact": {
+    "apiImpact": "none-in-a1-draft",
+    "dbImpact": "none-in-a1-draft",
+    "menuImpact": "none-in-a1-draft",
+    "runtimeImpact": "none-in-a1-draft",
+    "schemaImpact": "none-in-a1-draft"
+  },
+  "nextTask": "UCDE-A2-EVIDENCE-CONTRACT-DRAFT"
+}

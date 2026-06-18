@@ -58,3 +58,11 @@ UCore A1 module manifest draft is established with primary name UCore and histor
 
 All three modules remain `runtimeReady: false`.
 All three modules remain docs-only and keep API/DB/menu/runtime/schema impact as `none-in-a1-draft`.
+
+## 8. ONE Adapter and UConsole A1 Platform Draft Alignment
+
+ONE Adapter A1 consumer contract draft is established as docs-level platform boundary guidance.
+UConsole A1 module status contract draft is established as docs-level platform status guidance.
+
+Both modules remain `runtimeReady: false`.
+Both modules remain docs-only and keep API/DB/menu/runtime/schema impact as `none-in-a1-draft`.
