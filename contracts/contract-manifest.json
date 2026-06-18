@@ -1,0 +1,74 @@
+{
+  "contractFamily": "VANTARIS_ONE",
+  "contractRoot": "contracts",
+  "version": "0.1.0-transition",
+  "status": "BASELINE_TRANSITION",
+  "runtimeReady": false,
+  "gaReady": false,
+  "platform": {
+    "productName": "VANTARIS ONE",
+    "engineeringTargetName": "AN_VANTARIS_ONE",
+    "legacySourceBase": "AN_VANTARIS_IBMS"
+  },
+  "modules": [
+    "AN_VANTARIS_EDGE",
+    "AN_VANTARIS_LINK",
+    "AN_VANTARIS_Code",
+    "AN_VANTARIS_Console",
+    "AN_VANTARIS_NexusAI",
+    "AN_VANTARIS_DB",
+    "AN_VANTARIS_Contracts",
+    "ibms-core",
+    "asset-topology",
+    "integration-management",
+    "alarm-event",
+    "mms",
+    "esg",
+    "cde-traceability",
+    "reports",
+    "notification",
+    "evidence"
+  ],
+  "domains": [
+    "platform",
+    "asset",
+    "integration",
+    "telemetry",
+    "event-alarm",
+    "work-management",
+    "esg",
+    "cde",
+    "ai",
+    "trust",
+    "audit",
+    "edge-link"
+  ],
+  "baselineArtifacts": {
+    "versioningPolicy": "VERSIONING_POLICY.md",
+    "objectIdentityStandard": "OBJECT_IDENTITY_STANDARD.md",
+    "apiNamespacePolicy": "API_NAMESPACE_POLICY.md",
+    "errorCodes": "ERROR_CODES.md",
+    "statusCodes": "STATUS_CODES.md",
+    "portsAndNetworkBoundary": "PORTS_AND_NETWORK_BOUNDARY.md",
+    "governance": "GOVERNANCE.md"
+  },
+  "missingP0Artifacts": [
+    "Edge normalized object schema",
+    "Link envelope schema",
+    "Link ACK schema",
+    "Link retry policy schema",
+    "Link DLQ schema",
+    "module manifest schema",
+    "patch manifest schema",
+    "license VC schema",
+    "CDE base schema"
+  ],
+  "rules": {
+    "noRuntimeLogic": true,
+    "noDbConnection": true,
+    "noSecretMaterial": true,
+    "noUfmsRuntimeImport": true,
+    "contractFirstChange": true,
+    "breakingChangeRequiresNewVersion": true
+  }
+}
