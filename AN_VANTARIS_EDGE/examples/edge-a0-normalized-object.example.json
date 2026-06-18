@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "edgeMessageId": "123e4567-e89b-42d3-a456-426614174001",
+  "traceId": "123e4567-e89b-42d3-a456-426614174002",
+  "messageType": "telemetry.point.updated",
+  "gatewayId": "gw-demo-01",
+  "connectorId": "connector-demo-01",
+  "sourceSystemId": "source-demo-01",
+  "tenantId": "tenant-demo",
+  "projectId": "project-demo",
+  "siteId": "site-demo",
+  "sampledAt": "2026-06-18T02:00:00Z",
+  "receivedAt": "2026-06-18T02:00:01Z",
+  "quality": "good",
+  "payload": {
+    "pointCode": "PT-TEMP-01",
+    "value": 22.5
+  },
+  "metadata": {
+    "mode": "dry-run"
+  },
+  "idempotencyKey": "demo-tenant-demo-site-demo-PT-TEMP-01-2026-06-18T02:00:00Z"
+}

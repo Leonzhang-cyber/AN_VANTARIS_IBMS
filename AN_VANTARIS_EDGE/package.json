@@ -1,0 +1,13 @@
+{
+  "name": "an-vantaris-edge",
+  "version": "0.0.0-skeleton",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "validate:skeleton": "bash ../scripts/validation/validate-edge-a0-skeleton.sh"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "connectorId": "connector-demo-01",
+  "protocol": "http",
+  "status": "configured",
+  "tenantId": "tenant-demo",
+  "projectId": "project-demo",
+  "siteId": "site-demo"
+}

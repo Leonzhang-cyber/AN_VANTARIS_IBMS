@@ -1,0 +1,12 @@
+{
+  "id": "plugin-mqtt-demo",
+  "protocol": "mqtt",
+  "version": "0.0.0-skeleton",
+  "extractability": "NEEDS_ADAPTER",
+  "capabilities": [
+    {
+      "protocol": "mqtt",
+      "dryRunSupported": true
+    }
+  ]
+}
