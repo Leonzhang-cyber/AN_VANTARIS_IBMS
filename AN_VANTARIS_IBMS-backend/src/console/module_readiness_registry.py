@@ -54,6 +54,9 @@ def _module_record(
     health_details: Dict[str, Any],
     limitations: List[str],
     dependencies: List[str],
+    next_actions: Optional[List[str]] = None,
+    readiness_notes: Optional[List[str]] = None,
+    boundary_notes: Optional[List[str]] = None,
 ) -> Dict[str, Any]:
     return {
         "moduleId": module_id,
@@ -77,6 +80,9 @@ def _module_record(
         "securityFlags": _security_flags(),
         "limitations": limitations,
         "dependencies": dependencies,
+        "nextActions": next_actions or [],
+        "readinessNotes": readiness_notes or [],
+        "boundaryNotes": boundary_notes or [],
         "lastUpdated": _utc_now_iso(),
         "readOnly": True,
         "controlActionsEnabled": False,
@@ -126,6 +132,11 @@ def get_module_readiness_registry() -> List[Dict[str, Any]]:
                 "No formal certified evidence protocol.",
             ],
             dependencies=["uconsole", "platform-menu", "reports-api"],
+            next_actions=[
+                "Maintain readiness candidate.",
+                "Plan DB audit and RBAC integration in later stages.",
+            ],
+            readiness_notes=["Audit readiness foundation with placeholder permission mode."],
         ),
         _module_record(
             module_id="uconsole",
@@ -161,6 +172,11 @@ def get_module_readiness_registry() -> List[Dict[str, Any]]:
                 "No runtime integration calls to external foundations.",
             ],
             dependencies=["router", "menu", "console-api"],
+            next_actions=[
+                "Freeze UConsole foundation.",
+                "Use as platform module entry point for read-only operations.",
+            ],
+            readiness_notes=["Read-only dashboard foundation with local registry-derived score."],
         ),
         _module_record(
             module_id="ucde",
@@ -192,6 +208,7 @@ def get_module_readiness_registry() -> List[Dict[str, Any]]:
             },
             limitations=["Runtime not integrated in current stage."],
             dependencies=["planned-roadmap"],
+            next_actions=["Create runtime foundation before enabling module launch."],
         ),
         _module_record(
             module_id="uesg",
@@ -223,6 +240,7 @@ def get_module_readiness_registry() -> List[Dict[str, Any]]:
             },
             limitations=["Runtime not integrated in current stage."],
             dependencies=["planned-roadmap"],
+            next_actions=["Create runtime foundation before enabling module launch."],
         ),
         _module_record(
             module_id="umms",
@@ -254,6 +272,7 @@ def get_module_readiness_registry() -> List[Dict[str, Any]]:
             },
             limitations=["Runtime not integrated in current stage."],
             dependencies=["planned-roadmap"],
+            next_actions=["Create runtime foundation before enabling module launch."],
         ),
         _module_record(
             module_id="assets-topology",
@@ -285,6 +304,7 @@ def get_module_readiness_registry() -> List[Dict[str, Any]]:
             },
             limitations=["Runtime not integrated in current stage."],
             dependencies=["planned-roadmap"],
+            next_actions=["Create runtime foundation before enabling module launch."],
         ),
         _module_record(
             module_id="edge-fleet",
@@ -316,6 +336,8 @@ def get_module_readiness_registry() -> List[Dict[str, Any]]:
             },
             limitations=["Foundation reference only; runtime integration disabled."],
             dependencies=["foundation-contract-reference"],
+            next_actions=["Keep boundary separated until integration is explicitly approved."],
+            boundary_notes=["Separate shared foundation boundary; no runtime call from UConsole."],
         ),
         _module_record(
             module_id="link-gateway",
@@ -347,6 +369,8 @@ def get_module_readiness_registry() -> List[Dict[str, Any]]:
             },
             limitations=["Foundation reference only; runtime integration disabled."],
             dependencies=["foundation-contract-reference"],
+            next_actions=["Keep boundary separated until integration is explicitly approved."],
+            boundary_notes=["Separate shared foundation boundary; no runtime call from UConsole."],
         ),
         _module_record(
             module_id="nexus-ai",
@@ -378,6 +402,7 @@ def get_module_readiness_registry() -> List[Dict[str, Any]]:
             },
             limitations=["Runtime not integrated in current stage."],
             dependencies=["planned-roadmap"],
+            next_actions=["Create runtime foundation before enabling module launch."],
         ),
     ]
 

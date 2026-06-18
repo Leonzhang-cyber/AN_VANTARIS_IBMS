@@ -168,6 +168,9 @@ const fallbackModules: ModuleReadinessRecord[] = [
     },
     limitations: ['Fallback summary only.'],
     dependencies: [],
+    nextActions: ['Maintain readiness candidate in read-only mode.'],
+    readinessNotes: [],
+    boundaryNotes: [],
     lastUpdated: '',
     readOnly: true,
     controlActionsEnabled: false,
@@ -205,6 +208,9 @@ const fallbackModules: ModuleReadinessRecord[] = [
     },
     limitations: ['Fallback summary only.'],
     dependencies: [],
+    nextActions: ['Freeze UConsole foundation and maintain read-only entry.'],
+    readinessNotes: [],
+    boundaryNotes: [],
     lastUpdated: '',
     readOnly: true,
     controlActionsEnabled: false,
@@ -269,6 +275,9 @@ function asReadinessRecord(item: PlatformModuleSummary): ModuleReadinessRecord {
     },
     limitations: [item.securityNotes],
     dependencies: [],
+    nextActions: [],
+    readinessNotes: [],
+    boundaryNotes: [],
     lastUpdated: '',
     readOnly: true,
     controlActionsEnabled: false,
@@ -298,6 +307,55 @@ function calculateFallbackSummary(items: ModuleReadinessRecord[]): ModuleReadine
     lowestHealthModules: [],
     highestHealthModules: [],
   }
+}
+
+function getNextActionLabel(item: ModuleReadinessRecord): string {
+  if (item.runtimeStatus === 'ready' || item.readinessLevel === 'readiness-candidate') {
+    return 'Continue hardening'
+  }
+  if (item.runtimeStatus === 'foundation') {
+    return 'Freeze foundation'
+  }
+  if (item.runtimeStatus === 'planned') {
+    return 'Build runtime foundation'
+  }
+  if (item.runtimeStatus === 'not-integrated') {
+    return 'Keep boundary separated'
+  }
+  return 'Review readiness'
+}
+
+function getGeneratedNextActions(item: ModuleReadinessRecord): string[] {
+  if (item.nextActions.length > 0) {
+    return item.nextActions
+  }
+  const label = getNextActionLabel(item)
+  if (label === 'Continue hardening') {
+    return ['Maintain readiness, continue hardening.']
+  }
+  if (label === 'Freeze foundation') {
+    return ['Complete module freeze and expand details.']
+  }
+  if (label === 'Build runtime foundation') {
+    return ['Create runtime foundation before launch.']
+  }
+  if (label === 'Keep boundary separated') {
+    return ['Keep boundary separated until integration is explicitly approved.']
+  }
+  return ['Review readiness assumptions and update registry details.']
+}
+
+function getScoreMeaning(score: number): string {
+  if (score >= 75) {
+    return 'strong readiness for current staged scope'
+  }
+  if (score >= 50) {
+    return 'moderate readiness with remaining limitations'
+  }
+  if (score >= 25) {
+    return 'foundation established but major work remains'
+  }
+  return 'early foundation and planning-heavy stage'
 }
 
 function computeLocalScore(items: ModuleReadinessRecord[]): PlatformReadinessScore {
@@ -557,6 +615,7 @@ onMounted(() => {
           show-icon
           :closable="false"
           title="Readiness score is derived from the local registry. It is not a certification result."
+          description="The score is an operational planning signal for local readiness, not a compliance or certification outcome."
         />
       </template>
     </el-card>
@@ -579,8 +638,11 @@ onMounted(() => {
         <el-table-column label="weight" min-width="100">
           <template #default="{ row }">{{ row.value.weight }}</template>
         </el-table-column>
-        <el-table-column label="basis" min-width="340">
+        <el-table-column label="basis" min-width="300">
           <template #default="{ row }">{{ row.value.basis }}</template>
+        </el-table-column>
+        <el-table-column label="score meaning" min-width="280">
+          <template #default="{ row }">{{ getScoreMeaning(row.value.score) }}</template>
         </el-table-column>
       </el-table>
     </el-card>
@@ -592,19 +654,19 @@ onMounted(() => {
       <el-skeleton v-if="loading" :rows="4" animated />
       <template v-else>
         <el-card shadow="never" class="block-space">
-          <template #header>Drivers</template>
+          <template #header>Drivers (improves score)</template>
           <ul class="inline-list">
             <li v-for="item in readinessScore.drivers" :key="item">{{ item }}</li>
           </ul>
         </el-card>
         <el-card shadow="never" class="block-space">
-          <template #header>Risks</template>
+          <template #header>Risks (lowers score)</template>
           <ul class="inline-list">
             <li v-for="item in readinessScore.risks" :key="item">{{ item }}</li>
           </ul>
         </el-card>
         <el-card shadow="never">
-          <template #header>Recommendations</template>
+          <template #header>Recommendations (next work)</template>
           <ul class="inline-list">
             <li v-for="item in readinessScore.recommendations" :key="item">{{ item }}</li>
           </ul>
@@ -726,6 +788,15 @@ onMounted(() => {
           <el-table-column prop="readinessLevel" label="readinessLevel" min-width="170" />
           <el-table-column prop="lifecycleStage" label="lifecycleStage" min-width="170" />
           <el-table-column prop="healthScore" label="healthScore" min-width="110" />
+          <el-table-column label="limitationsCount" min-width="130">
+            <template #default="{ row }">{{ row.limitations.length }}</template>
+          </el-table-column>
+          <el-table-column label="dependencyCount" min-width="130">
+            <template #default="{ row }">{{ row.dependencies.length }}</template>
+          </el-table-column>
+          <el-table-column label="nextActionLabel" min-width="180">
+            <template #default="{ row }">{{ getNextActionLabel(row) }}</template>
+          </el-table-column>
           <el-table-column prop="frontendReady" label="frontendReady" min-width="120" />
           <el-table-column prop="backendReady" label="backendReady" min-width="120" />
           <el-table-column prop="apiReady" label="apiReady" min-width="100" />
@@ -802,54 +873,114 @@ onMounted(() => {
       </template>
     </el-card>
 
-    <el-drawer v-model="showHealthDrawer" title="Module Health Detail" size="42%">
+    <el-drawer v-model="showHealthDrawer" title="Module Health Detail" size="52%">
       <el-skeleton v-if="loadingHealthDetail" :rows="8" animated />
       <el-empty v-else-if="!selectedHealthDetail" description="No module selected." />
       <template v-else>
-        <el-descriptions :column="1" border class="block-space">
-          <el-descriptions-item label="moduleId">{{ selectedHealthDetail.moduleId }}</el-descriptions-item>
-          <el-descriptions-item label="moduleName">{{ selectedHealthDetail.moduleName }}</el-descriptions-item>
-          <el-descriptions-item label="runtimeStatus">{{ selectedHealthDetail.runtimeStatus }}</el-descriptions-item>
-          <el-descriptions-item label="readinessLevel">{{ selectedHealthDetail.readinessLevel }}</el-descriptions-item>
-          <el-descriptions-item label="lifecycleStage">{{ selectedHealthDetail.lifecycleStage }}</el-descriptions-item>
-          <el-descriptions-item label="healthStatus">{{ selectedHealthDetail.healthStatus }}</el-descriptions-item>
-          <el-descriptions-item label="healthScore">{{ selectedHealthDetail.healthScore }}</el-descriptions-item>
-          <el-descriptions-item label="readOnly">{{ selectedHealthDetail.readOnly }}</el-descriptions-item>
-          <el-descriptions-item label="controlActionsEnabled">
-            {{ selectedHealthDetail.controlActionsEnabled }}
-          </el-descriptions-item>
-          <el-descriptions-item label="certified">{{ selectedHealthDetail.certified }}</el-descriptions-item>
-          <el-descriptions-item label="iec62443Certified">
-            {{ selectedHealthDetail.iec62443Certified }}
-          </el-descriptions-item>
-        </el-descriptions>
+        <el-card shadow="never" class="block-space">
+          <template #header>Module Overview</template>
+          <el-descriptions :column="1" border>
+            <el-descriptions-item label="moduleId">{{ selectedHealthDetail.moduleId }}</el-descriptions-item>
+            <el-descriptions-item label="moduleName">{{ selectedHealthDetail.moduleName }}</el-descriptions-item>
+            <el-descriptions-item label="moduleType">{{ selectedHealthDetail.moduleType }}</el-descriptions-item>
+            <el-descriptions-item label="domain">{{ selectedHealthDetail.domain }}</el-descriptions-item>
+            <el-descriptions-item label="runtimeStatus">{{ selectedHealthDetail.runtimeStatus }}</el-descriptions-item>
+            <el-descriptions-item label="readinessLevel">{{ selectedHealthDetail.readinessLevel }}</el-descriptions-item>
+            <el-descriptions-item label="lifecycleStage">{{ selectedHealthDetail.lifecycleStage }}</el-descriptions-item>
+            <el-descriptions-item label="healthScore">{{ selectedHealthDetail.healthScore }}</el-descriptions-item>
+            <el-descriptions-item label="route">{{ selectedHealthDetail.route || '-' }}</el-descriptions-item>
+            <el-descriptions-item label="integrationMode">{{ selectedHealthDetail.integrationMode }}</el-descriptions-item>
+            <el-descriptions-item label="dataPersistenceMode">{{ selectedHealthDetail.dataPersistenceMode }}</el-descriptions-item>
+          </el-descriptions>
+        </el-card>
+
+        <el-card shadow="never" class="block-space">
+          <template #header>Readiness Flags</template>
+          <el-descriptions :column="1" border>
+            <el-descriptions-item label="frontendReady">{{ selectedHealthDetail.frontendReady }}</el-descriptions-item>
+            <el-descriptions-item label="backendReady">{{ selectedHealthDetail.backendReady }}</el-descriptions-item>
+            <el-descriptions-item label="apiReady">{{ selectedHealthDetail.apiReady }}</el-descriptions-item>
+            <el-descriptions-item label="auditReadiness">{{ selectedHealthDetail.auditReadiness }}</el-descriptions-item>
+            <el-descriptions-item label="permissionMode">{{ selectedHealthDetail.permissionMode }}</el-descriptions-item>
+            <el-descriptions-item label="readOnly">{{ selectedHealthDetail.readOnly }}</el-descriptions-item>
+            <el-descriptions-item label="controlActionsEnabled">{{ selectedHealthDetail.controlActionsEnabled }}</el-descriptions-item>
+            <el-descriptions-item label="certified">{{ selectedHealthDetail.certified }}</el-descriptions-item>
+            <el-descriptions-item label="iec62443Certified">{{ selectedHealthDetail.iec62443Certified }}</el-descriptions-item>
+          </el-descriptions>
+        </el-card>
+
         <el-card shadow="never" class="block-space">
           <template #header>Health Details</template>
+          <el-table
+            :data="Object.entries(selectedHealthDetail.healthDetails).map(([key, value]) => ({ key, ...value }))"
+            row-key="key"
+            empty-text="No health details"
+          >
+            <el-table-column prop="key" label="key" min-width="130" />
+            <el-table-column prop="status" label="status" min-width="120" />
+            <el-table-column prop="label" label="label" min-width="150" />
+            <el-table-column prop="score" label="score" min-width="90" />
+            <el-table-column prop="message" label="message" min-width="280" />
+          </el-table>
+        </el-card>
+        <el-card shadow="never" class="block-space">
+          <template #header>Security Flags</template>
           <el-descriptions :column="1" border>
-            <el-descriptions-item
-              v-for="(detail, key) in selectedHealthDetail.healthDetails"
-              :key="key"
-              :label="key"
-            >
-              {{ detail.status }} | {{ detail.label }} | score={{ detail.score }} | {{ detail.message }}
+            <el-descriptions-item label="realRbacIntegrated">
+              {{ selectedHealthDetail.securityFlags.realRbacIntegrated }}
+            </el-descriptions-item>
+            <el-descriptions-item label="dbAuditIntegrated">
+              {{ selectedHealthDetail.securityFlags.dbAuditIntegrated }}
+            </el-descriptions-item>
+            <el-descriptions-item label="siemIntegrated">{{ selectedHealthDetail.securityFlags.siemIntegrated }}</el-descriptions-item>
+            <el-descriptions-item label="ucdeRuntimeIntegrated">
+              {{ selectedHealthDetail.securityFlags.ucdeRuntimeIntegrated }}
+            </el-descriptions-item>
+            <el-descriptions-item label="edgeRuntimeIntegrated">
+              {{ selectedHealthDetail.securityFlags.edgeRuntimeIntegrated }}
+            </el-descriptions-item>
+            <el-descriptions-item label="linkRuntimeIntegrated">
+              {{ selectedHealthDetail.securityFlags.linkRuntimeIntegrated }}
+            </el-descriptions-item>
+            <el-descriptions-item label="certified">{{ selectedHealthDetail.securityFlags.certified }}</el-descriptions-item>
+            <el-descriptions-item label="iec62443Certified">
+              {{ selectedHealthDetail.securityFlags.iec62443Certified }}
             </el-descriptions-item>
           </el-descriptions>
         </el-card>
         <el-card shadow="never" class="block-space">
-          <template #header>Security Flags</template>
-          <pre class="summary-block">{{ JSON.stringify(selectedHealthDetail.securityFlags, null, 2) }}</pre>
+          <template #header>Limitations</template>
+          <template v-if="selectedHealthDetail.limitations.length > 0">
+            <ul class="inline-list">
+              <li v-for="item in selectedHealthDetail.limitations" :key="item">{{ item }}</li>
+            </ul>
+          </template>
+          <el-text v-else>
+            No additional limitations declared for this readiness record.
+          </el-text>
         </el-card>
         <el-card shadow="never" class="block-space">
-          <template #header>Limitations</template>
-          <ul class="inline-list">
-            <li v-for="item in selectedHealthDetail.limitations" :key="item">{{ item }}</li>
-          </ul>
-        </el-card>
-        <el-card shadow="never">
           <template #header>Dependencies</template>
+          <template v-if="selectedHealthDetail.dependencies.length > 0">
+            <ul class="inline-list">
+              <li v-for="item in selectedHealthDetail.dependencies" :key="item">{{ item }}</li>
+            </ul>
+          </template>
+          <el-text v-else>
+            No runtime dependencies are invoked by UConsole in this stage.
+          </el-text>
+        </el-card>
+        <el-card shadow="never" class="block-space">
+          <template #header>Next Actions</template>
           <ul class="inline-list">
-            <li v-for="item in selectedHealthDetail.dependencies" :key="item">{{ item }}</li>
+            <li v-for="item in getGeneratedNextActions(selectedHealthDetail)" :key="item">{{ item }}</li>
           </ul>
+          <template v-if="selectedHealthDetail.boundaryNotes.length > 0">
+            <el-divider />
+            <ul class="inline-list">
+              <li v-for="item in selectedHealthDetail.boundaryNotes" :key="item">{{ item }}</li>
+            </ul>
+          </template>
         </el-card>
       </template>
     </el-drawer>

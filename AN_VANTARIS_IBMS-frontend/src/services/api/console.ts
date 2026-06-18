@@ -70,6 +70,9 @@ export interface ModuleReadinessRecord {
   securityFlags: ModuleSecurityFlags
   limitations: string[]
   dependencies: string[]
+  nextActions: string[]
+  readinessNotes: string[]
+  boundaryNotes: string[]
   lastUpdated: string
   readOnly: boolean
   controlActionsEnabled: boolean
@@ -286,6 +289,9 @@ function normalizeReadinessRecord(raw: unknown): ModuleReadinessRecord {
     securityFlags: normalizeSecurityFlags(data.securityFlags),
     limitations: asStringArray(data.limitations),
     dependencies: asStringArray(data.dependencies),
+    nextActions: asStringArray(data.nextActions),
+    readinessNotes: asStringArray(data.readinessNotes),
+    boundaryNotes: asStringArray(data.boundaryNotes),
     lastUpdated: String(data.lastUpdated ?? ''),
     readOnly: data.readOnly !== undefined ? Boolean(data.readOnly) : true,
     controlActionsEnabled: Boolean(data.controlActionsEnabled),
