@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vantaris.one/contracts/schemas/edge-link/link-retry-policy.schema.json",
+  "title": "Link Retry Policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "retryPolicyId",
+    "maxAttempts",
+    "initialDelayMs",
+    "maxDelayMs",
+    "backoffMultiplier",
+    "jitterEnabled",
+    "retryableErrorCodes",
+    "nonRetryableErrorCodes",
+    "dlqOnExhausted",
+    "createdAt"
+  ],
+  "properties": {
+    "retryPolicyId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "maxAttempts": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "initialDelayMs": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "maxDelayMs": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "backoffMultiplier": {
+      "type": "number",
+      "minimum": 1
+    },
+    "jitterEnabled": {
+      "type": "boolean"
+    },
+    "retryableErrorCodes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "nonRetryableErrorCodes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "dlqOnExhausted": {
+      "type": "boolean"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vantaris.one/contracts/schemas/edge-link/link-envelope.schema.json",
+  "title": "Link Envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "envelopeVersion",
+    "messageId",
+    "traceId",
+    "idempotencyKey",
+    "messageType",
+    "producer",
+    "tenantId",
+    "projectId",
+    "siteId",
+    "schemaRef",
+    "payload",
+    "security",
+    "delivery",
+    "createdAt"
+  ],
+  "properties": {
+    "envelopeVersion": {
+      "type": "string"
+    },
+    "messageId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "traceId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "idempotencyKey": {
+      "type": "string",
+      "minLength": 1
+    },
+    "messageType": {
+      "type": "string",
+      "enum": [
+        "telemetry.point.updated",
+        "event.created",
+        "alarm.raised",
+        "device.health.updated",
+        "evidence.captured"
+      ]
+    },
+    "producer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "component",
+        "instanceId"
+      ],
+      "properties": {
+        "component": {
+          "type": "string",
+          "enum": [
+            "AN_VANTARIS_EDGE",
+            "AN_VANTARIS_LINK",
+            "AN_VANTARIS_Code",
+            "AN_VANTARIS_Console",
+            "AN_VANTARIS_NexusAI",
+            "external-adapter"
+          ]
+        },
+        "instanceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "machineDid": {
+          "type": "string"
+        },
+        "gatewayId": {
+          "type": "string"
+        },
+        "connectorId": {
+          "type": "string"
+        }
+      }
+    },
+    "tenantId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "projectId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "siteId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "schemaRef": {
+      "type": "string",
+      "minLength": 1
+    },
+    "payload": {
+      "type": "object"
+    },
+    "security": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "payloadHash",
+        "hashAlgorithm",
+        "signatureAlgorithm"
+      ],
+      "properties": {
+        "payloadHash": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hashAlgorithm": {
+          "type": "string",
+          "minLength": 1
+        },
+        "signatureAlgorithm": {
+          "type": "string",
+          "minLength": 1
+        },
+        "signature": {
+          "type": "string"
+        },
+        "signedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "delivery": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "priority",
+        "ttlSeconds",
+        "requiresAck"
+      ],
+      "properties": {
+        "priority": {
+          "type": "string",
+          "enum": [
+            "P0",
+            "P1",
+            "P2",
+            "P3",
+            "P4"
+          ]
+        },
+        "ttlSeconds": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "requiresAck": {
+          "type": "boolean"
+        },
+        "retryPolicyRef": {
+          "type": "string"
+        },
+        "routeKey": {
+          "type": "string"
+        }
+      }
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

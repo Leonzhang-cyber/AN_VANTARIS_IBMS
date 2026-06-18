@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vantaris.one/contracts/schemas/edge-link/link-message-state.schema.json",
+  "title": "Link Message State",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "messageId",
+    "traceId",
+    "status",
+    "updatedAt",
+    "history"
+  ],
+  "properties": {
+    "messageId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "traceId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "received",
+        "validated",
+        "queued",
+        "accepted",
+        "delivered",
+        "processed",
+        "duplicate",
+        "retry_scheduled",
+        "dlq",
+        "quarantined",
+        "expired",
+        "rejected",
+        "cancelled"
+      ]
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "history": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "status",
+          "at",
+          "actor"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "received",
+              "validated",
+              "queued",
+              "accepted",
+              "delivered",
+              "processed",
+              "duplicate",
+              "retry_scheduled",
+              "dlq",
+              "quarantined",
+              "expired",
+              "rejected",
+              "cancelled"
+            ]
+          },
+          "at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "actor": {
+            "type": "string",
+            "minLength": 1
+          },
+          "reason": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

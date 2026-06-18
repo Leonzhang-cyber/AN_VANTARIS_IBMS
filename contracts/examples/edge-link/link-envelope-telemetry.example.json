@@ -1,0 +1,37 @@
+{
+  "envelopeVersion": "1.0.0",
+  "messageId": "88888888-8888-4888-8888-888888888888",
+  "traceId": "99999999-9999-4999-8999-999999999999",
+  "idempotencyKey": "link-telemetry-tenant-demo-site-demo-hq-PT-TEMP-01-2026-06-18T02:40:00Z",
+  "messageType": "telemetry.point.updated",
+  "producer": {
+    "component": "AN_VANTARIS_EDGE",
+    "instanceId": "edge-instance-demo-01",
+    "machineDid": "did:example:edge-demo-01",
+    "gatewayId": "gw-demo-01",
+    "connectorId": "connector-mqtt-01"
+  },
+  "tenantId": "tenant-demo",
+  "projectId": "project-demo",
+  "siteId": "site-demo-hq",
+  "schemaRef": "schemas/edge-link/edge-normalized-object.schema.json",
+  "payload": {
+    "pointCode": "PT-TEMP-01",
+    "pointValue": 21.7,
+    "quality": "good"
+  },
+  "security": {
+    "payloadHash": "c8b03cfbd7f1f1c2ccf7d7c9242f9e8d7f74f8e8f4b4f4b4c3d3b2a1e0f9d8c7",
+    "hashAlgorithm": "sha256",
+    "signatureAlgorithm": "ed25519",
+    "signedAt": "2026-06-18T02:40:02Z"
+  },
+  "delivery": {
+    "priority": "P2",
+    "ttlSeconds": 120,
+    "requiresAck": true,
+    "retryPolicyRef": "retry-default-v1",
+    "routeKey": "telemetry.default"
+  },
+  "createdAt": "2026-06-18T02:40:02Z"
+}

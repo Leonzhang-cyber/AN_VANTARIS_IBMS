@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vantaris.one/contracts/schemas/edge-link/link-delivery-audit.schema.json",
+  "title": "Link Delivery Audit",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "auditId",
+    "messageId",
+    "traceId",
+    "eventType",
+    "actor",
+    "source",
+    "target",
+    "occurredAt",
+    "result",
+    "details"
+  ],
+  "properties": {
+    "auditId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "messageId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "traceId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "eventType": {
+      "type": "string",
+      "enum": [
+        "ingress_received",
+        "validation_passed",
+        "validation_failed",
+        "ack_sent",
+        "delivery_attempted",
+        "delivery_succeeded",
+        "delivery_failed",
+        "retry_scheduled",
+        "dlq_created",
+        "replay_requested",
+        "replay_completed"
+      ]
+    },
+    "actor": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target": {
+      "type": "string",
+      "minLength": 1
+    },
+    "occurredAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "result": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure",
+        "partial"
+      ]
+    },
+    "details": {
+      "type": "object"
+    }
+  }
+}

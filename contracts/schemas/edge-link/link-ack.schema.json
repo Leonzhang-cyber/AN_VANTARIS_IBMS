@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vantaris.one/contracts/schemas/edge-link/link-ack.schema.json",
+  "title": "Link ACK",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ackId",
+    "messageId",
+    "traceId",
+    "ackType",
+    "status",
+    "receivedAt",
+    "ackedAt",
+    "consumer",
+    "details"
+  ],
+  "properties": {
+    "ackId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "messageId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "traceId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "ackType": {
+      "type": "string",
+      "enum": [
+        "accepted",
+        "rejected",
+        "duplicate",
+        "processed",
+        "failed",
+        "retry_scheduled",
+        "dlq"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "received",
+        "validated",
+        "queued",
+        "accepted",
+        "processed",
+        "duplicate",
+        "retry_scheduled",
+        "dlq",
+        "quarantined",
+        "expired",
+        "rejected"
+      ]
+    },
+    "receivedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "ackedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "consumer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "component",
+        "instanceId"
+      ],
+      "properties": {
+        "component": {
+          "type": "string",
+          "minLength": 1
+        },
+        "instanceId": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "details": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "errorCode": {
+          "type": "string"
+        },
+        "errorMessage": {
+          "type": "string"
+        },
+        "retryCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "dlqId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "duplicateOf": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    }
+  }
+}

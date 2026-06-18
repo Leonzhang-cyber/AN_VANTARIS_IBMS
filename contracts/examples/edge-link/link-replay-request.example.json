@@ -1,0 +1,19 @@
+{
+  "replayRequestId": "ccccccc1-cccc-4ccc-8ccc-ccccccccccc1",
+  "requester": "ops-user-demo",
+  "target": "AN_VANTARIS_LINK",
+  "filter": {
+    "dlqId": "bbbbbbb1-bbbb-4bbb-8bbb-bbbbbbbbbbb1",
+    "timeFrom": "2026-06-18T02:40:00Z",
+    "timeTo": "2026-06-18T02:50:00Z",
+    "messageType": "telemetry.point.updated",
+    "connectorId": "connector-mqtt-01"
+  },
+  "reason": "Replay demo message after downstream recovery.",
+  "requestedAt": "2026-06-18T03:00:00Z",
+  "approval": {
+    "required": true,
+    "approvedBy": "platform-owner-demo",
+    "approvedAt": "2026-06-18T03:02:00Z"
+  }
+}

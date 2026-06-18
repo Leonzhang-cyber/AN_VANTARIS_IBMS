@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vantaris.one/contracts/schemas/edge-link/link-dlq.schema.json",
+  "title": "Link Dead Letter Queue Item",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "dlqId",
+    "messageId",
+    "traceId",
+    "originalEnvelope",
+    "failureReason",
+    "errorCode",
+    "retryCount",
+    "firstFailedAt",
+    "lastFailedAt",
+    "replayable",
+    "quarantineRequired",
+    "createdAt"
+  ],
+  "properties": {
+    "dlqId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "messageId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "traceId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "originalEnvelope": {
+      "type": "object"
+    },
+    "failureReason": {
+      "type": "string",
+      "minLength": 1
+    },
+    "errorCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "retryCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "firstFailedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "lastFailedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "replayable": {
+      "type": "boolean"
+    },
+    "quarantineRequired": {
+      "type": "boolean"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

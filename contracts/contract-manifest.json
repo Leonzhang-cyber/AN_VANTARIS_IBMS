@@ -50,14 +50,31 @@
     "errorCodes": "ERROR_CODES.md",
     "statusCodes": "STATUS_CODES.md",
     "portsAndNetworkBoundary": "PORTS_AND_NETWORK_BOUNDARY.md",
-    "governance": "GOVERNANCE.md"
+    "governance": "GOVERNANCE.md",
+    "edgeLinkSchemas": [
+      "schemas/edge-link/edge-normalized-object.schema.json",
+      "schemas/edge-link/link-envelope.schema.json",
+      "schemas/edge-link/link-ack.schema.json",
+      "schemas/edge-link/link-retry-policy.schema.json",
+      "schemas/edge-link/link-dlq.schema.json",
+      "schemas/edge-link/link-replay-request.schema.json",
+      "schemas/edge-link/link-route-policy.schema.json",
+      "schemas/edge-link/link-message-state.schema.json",
+      "schemas/edge-link/link-delivery-audit.schema.json"
+    ],
+    "edgeLinkExamples": [
+      "examples/edge-link/edge-normalized-telemetry.example.json",
+      "examples/edge-link/edge-normalized-event.example.json",
+      "examples/edge-link/edge-normalized-alarm.example.json",
+      "examples/edge-link/link-envelope-telemetry.example.json",
+      "examples/edge-link/link-ack-accepted.example.json",
+      "examples/edge-link/link-ack-rejected.example.json",
+      "examples/edge-link/link-dlq.example.json",
+      "examples/edge-link/link-replay-request.example.json",
+      "examples/edge-link/link-route-policy.example.json"
+    ]
   },
   "missingP0Artifacts": [
-    "Edge normalized object schema",
-    "Link envelope schema",
-    "Link ACK schema",
-    "Link retry policy schema",
-    "Link DLQ schema",
     "module manifest schema",
     "patch manifest schema",
     "license VC schema",

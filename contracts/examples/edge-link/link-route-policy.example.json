@@ -1,0 +1,26 @@
+{
+  "routePolicyId": "route-policy-demo-01",
+  "enabled": true,
+  "match": {
+    "tenantId": "tenant-demo",
+    "projectId": "project-demo",
+    "siteId": "site-demo-hq",
+    "messageType": "telemetry.point.updated",
+    "sourceSystemId": "demo-bms-source",
+    "connectorId": "connector-mqtt-01",
+    "priority": "P2"
+  },
+  "target": {
+    "targetType": "code-api",
+    "targetName": "AN_VANTARIS_Code ingestion",
+    "endpointRef": "code-api.telemetry.ingest.v1"
+  },
+  "delivery": {
+    "retryPolicyRef": "retry-default-v1",
+    "timeoutMs": 2000,
+    "requiresAck": true,
+    "circuitBreakerEnabled": true
+  },
+  "createdAt": "2026-06-18T03:10:00Z",
+  "updatedAt": "2026-06-18T03:10:00Z"
+}

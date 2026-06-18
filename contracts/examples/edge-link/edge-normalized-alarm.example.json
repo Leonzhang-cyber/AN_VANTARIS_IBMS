@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "1.0.0",
+  "edgeMessageId": "66666666-6666-4666-8666-666666666666",
+  "traceId": "77777777-7777-4777-8777-777777777777",
+  "messageType": "alarm.raised",
+  "gatewayId": "gw-demo-02",
+  "connectorId": "connector-modbus-01",
+  "sourceSystemId": "demo-fire-panel",
+  "tenantId": "tenant-demo",
+  "projectId": "project-demo",
+  "siteId": "site-demo-plant",
+  "sampledAt": "2026-06-18T02:42:00Z",
+  "receivedAt": "2026-06-18T02:42:01Z",
+  "quality": "good",
+  "payload": {
+    "alarmCode": "smoke.detector.triggered",
+    "severity": "critical",
+    "zone": "Z-12"
+  },
+  "metadata": {
+    "protocol": "modbus",
+    "panelId": "panel-demo-01"
+  },
+  "assetCode": "ASSET-FIRE-01",
+  "deviceCode": "DEV-PANEL-01",
+  "pointUid": "point-uid-demo-alarm-01",
+  "idempotencyKey": "alarm-tenant-demo-site-demo-plant-DEV-PANEL-01-2026-06-18T02:42:00Z"
+}

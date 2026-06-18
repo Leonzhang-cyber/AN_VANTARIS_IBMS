@@ -21,3 +21,34 @@ UFMS is only referenced through adapter/boundary contracts, not runtime import.
 - `ERROR_CODES.md`
 - `STATUS_CODES.md`
 - `PORTS_AND_NETWORK_BOUNDARY.md`
+
+## CONTRACTS-A1 Edge/Link Schemas
+
+Schemas:
+
+- `schemas/edge-link/edge-normalized-object.schema.json`
+- `schemas/edge-link/link-envelope.schema.json`
+- `schemas/edge-link/link-ack.schema.json`
+- `schemas/edge-link/link-retry-policy.schema.json`
+- `schemas/edge-link/link-dlq.schema.json`
+- `schemas/edge-link/link-replay-request.schema.json`
+- `schemas/edge-link/link-route-policy.schema.json`
+- `schemas/edge-link/link-message-state.schema.json`
+- `schemas/edge-link/link-delivery-audit.schema.json`
+
+Examples:
+
+- `examples/edge-link/edge-normalized-telemetry.example.json`
+- `examples/edge-link/edge-normalized-event.example.json`
+- `examples/edge-link/edge-normalized-alarm.example.json`
+- `examples/edge-link/link-envelope-telemetry.example.json`
+- `examples/edge-link/link-ack-accepted.example.json`
+- `examples/edge-link/link-ack-rejected.example.json`
+- `examples/edge-link/link-dlq.example.json`
+- `examples/edge-link/link-replay-request.example.json`
+- `examples/edge-link/link-route-policy.example.json`
+
+These schemas are contract baseline only.
+They do not create AN_VANTARIS_EDGE runtime.
+They do not create AN_VANTARIS_LINK runtime.
+Runtime implementation must follow future EDGE / LINK tasks.

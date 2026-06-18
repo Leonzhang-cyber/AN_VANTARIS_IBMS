@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vantaris.one/contracts/schemas/edge-link/link-route-policy.schema.json",
+  "title": "Link Route Policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "routePolicyId",
+    "enabled",
+    "match",
+    "target",
+    "delivery",
+    "createdAt",
+    "updatedAt"
+  ],
+  "properties": {
+    "routePolicyId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "match": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tenantId": {
+          "type": "string"
+        },
+        "projectId": {
+          "type": "string"
+        },
+        "siteId": {
+          "type": "string"
+        },
+        "messageType": {
+          "type": "string"
+        },
+        "sourceSystemId": {
+          "type": "string"
+        },
+        "connectorId": {
+          "type": "string"
+        },
+        "priority": {
+          "type": "string",
+          "enum": [
+            "P0",
+            "P1",
+            "P2",
+            "P3",
+            "P4"
+          ]
+        }
+      }
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "targetType",
+        "targetName",
+        "endpointRef"
+      ],
+      "properties": {
+        "targetType": {
+          "type": "string",
+          "enum": [
+            "code-api",
+            "nexusai-api",
+            "external-adapter",
+            "audit-sink",
+            "cde-sink"
+          ]
+        },
+        "targetName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "endpointRef": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "delivery": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "retryPolicyRef": {
+          "type": "string"
+        },
+        "timeoutMs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "requiresAck": {
+          "type": "boolean"
+        },
+        "circuitBreakerEnabled": {
+          "type": "boolean"
+        }
+      }
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "edgeMessageId": "33333333-3333-4333-8333-333333333333",
+  "traceId": "44444444-4444-4444-8444-444444444444",
+  "messageType": "event.created",
+  "gatewayId": "gw-demo-01",
+  "connectorId": "connector-http-01",
+  "sourceSystemId": "demo-access-system",
+  "tenantId": "tenant-demo",
+  "projectId": "project-demo",
+  "siteId": "site-demo-hq",
+  "sampledAt": "2026-06-18T02:41:00Z",
+  "receivedAt": "2026-06-18T02:41:02Z",
+  "quality": "uncertain",
+  "payload": {
+    "eventCode": "door.opened",
+    "severity": "info",
+    "description": "Demo door-open event from edge connector."
+  },
+  "metadata": {
+    "protocol": "http",
+    "connectorVersion": "0.1.0-demo"
+  },
+  "assetUid": "asset-uid-demo-0001",
+  "deviceUid": "device-uid-demo-0001",
+  "correlationId": "55555555-5555-4555-8555-555555555555"
+}

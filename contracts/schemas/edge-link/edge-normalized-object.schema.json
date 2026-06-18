@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vantaris.one/contracts/schemas/edge-link/edge-normalized-object.schema.json",
+  "title": "Edge Normalized Object",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "edgeMessageId",
+    "traceId",
+    "messageType",
+    "gatewayId",
+    "connectorId",
+    "sourceSystemId",
+    "tenantId",
+    "projectId",
+    "siteId",
+    "sampledAt",
+    "receivedAt",
+    "quality",
+    "payload",
+    "metadata"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string"
+    },
+    "edgeMessageId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "traceId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "messageType": {
+      "type": "string",
+      "enum": [
+        "telemetry.point.updated",
+        "event.created",
+        "alarm.raised",
+        "device.health.updated",
+        "evidence.captured"
+      ]
+    },
+    "gatewayId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "connectorId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceSystemId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tenantId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "projectId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "siteId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sampledAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "receivedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "quality": {
+      "type": "string",
+      "enum": [
+        "good",
+        "uncertain",
+        "bad",
+        "unknown"
+      ]
+    },
+    "payload": {
+      "type": "object"
+    },
+    "metadata": {
+      "type": "object"
+    },
+    "assetCode": {
+      "type": "string"
+    },
+    "assetUid": {
+      "type": "string"
+    },
+    "deviceCode": {
+      "type": "string"
+    },
+    "deviceUid": {
+      "type": "string"
+    },
+    "pointCode": {
+      "type": "string"
+    },
+    "pointUid": {
+      "type": "string"
+    },
+    "idempotencyKey": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceSequence": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "correlationId": {
+      "type": "string",
+      "format": "uuid"
+    }
+  }
+}

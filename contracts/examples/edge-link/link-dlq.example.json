@@ -1,0 +1,21 @@
+{
+  "dlqId": "bbbbbbb1-bbbb-4bbb-8bbb-bbbbbbbbbbb1",
+  "messageId": "88888888-8888-4888-8888-888888888888",
+  "traceId": "99999999-9999-4999-8999-999999999999",
+  "originalEnvelope": {
+    "envelopeVersion": "1.0.0",
+    "messageType": "telemetry.point.updated",
+    "producer": {
+      "component": "AN_VANTARIS_EDGE",
+      "instanceId": "edge-instance-demo-01"
+    }
+  },
+  "failureReason": "Delivery target unavailable after retries.",
+  "errorCode": "DELIVERY_RETRY_EXHAUSTED",
+  "retryCount": 5,
+  "firstFailedAt": "2026-06-18T02:40:10Z",
+  "lastFailedAt": "2026-06-18T02:45:10Z",
+  "replayable": true,
+  "quarantineRequired": false,
+  "createdAt": "2026-06-18T02:45:11Z"
+}

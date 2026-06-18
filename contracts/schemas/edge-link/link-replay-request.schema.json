@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vantaris.one/contracts/schemas/edge-link/link-replay-request.schema.json",
+  "title": "Link Replay Request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "replayRequestId",
+    "requester",
+    "target",
+    "filter",
+    "reason",
+    "requestedAt",
+    "approval"
+  ],
+  "properties": {
+    "replayRequestId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "requester": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target": {
+      "type": "string",
+      "minLength": 1
+    },
+    "filter": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "messageId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "traceId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "dlqId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "timeFrom": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "timeTo": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "messageType": {
+          "type": "string"
+        },
+        "connectorId": {
+          "type": "string"
+        }
+      }
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1
+    },
+    "requestedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "required": {
+          "type": "boolean"
+        },
+        "approvedBy": {
+          "type": "string"
+        },
+        "approvedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "required"
+      ]
+    }
+  }
+}
