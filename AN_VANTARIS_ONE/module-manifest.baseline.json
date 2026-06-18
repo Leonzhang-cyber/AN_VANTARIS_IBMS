@@ -239,7 +239,7 @@
       "apiReady": false,
       "dbReady": false,
       "contractsPackageReady": false,
-      "nextTask": "U-MODULES-A2-READINESS-REVIEW"
+      "nextTask": "U-MODULES-A3-IMPLEMENTATION-GATE-PLAN"
     },
     {
       "moduleId": "uconsole",
@@ -393,7 +393,7 @@
     "Menu/API/DB changes require separate approval."
   ],
   "nextTasks": [
-    "U-MODULES-A3-IMPLEMENTATION-GATE-PLAN"
+    "ONE-ADAPTER-A2-FOUNDATION-CONSUMER-GATE"
   ],
   "readinessReview": {
     "reviewId": "U-MODULES-A2-READINESS-REVIEW",
@@ -403,6 +403,17 @@
     "dbReady": false,
     "schemaReady": false,
     "contractsReady": false,
-    "nextTask": "U-MODULES-A3-IMPLEMENTATION-GATE-PLAN"
+    "nextTask": "ONE-ADAPTER-A2-FOUNDATION-CONSUMER-GATE"
+  },
+  "implementationGatePlan": {
+    "planId": "U-MODULES-A3-IMPLEMENTATION-GATE-PLAN",
+    "status": "planned-docs-level",
+    "runtimeImplementationAuthorized": false,
+    "apiImplementationAuthorized": false,
+    "dbImplementationAuthorized": false,
+    "schemaPromotionAuthorized": false,
+    "contractsPromotionAuthorized": false,
+    "frontendImplementationAuthorized": false,
+    "nextTask": "ONE-ADAPTER-A2-FOUNDATION-CONSUMER-GATE"
   }
 }

@@ -38,6 +38,7 @@ Completed stages:
 - UCONSOLE-A1-MODULE-STATUS-CONTRACT-DRAFT — current task
 - UCDE-A2-EVIDENCE-CONTRACT-DRAFT — current task
 - U-MODULES-A2-READINESS-REVIEW — current task
+- U-MODULES-A3-IMPLEMENTATION-GATE-PLAN — current task
 
 ## Current Allowed Work
 
@@ -58,7 +59,7 @@ Completed stages:
 
 ## Next Recommended Task
 
-- U-MODULES-A3-IMPLEMENTATION-GATE-PLAN
+- ONE-ADAPTER-A2-FOUNDATION-CONSUMER-GATE
 
 ## Historical Name Mapping
 
@@ -99,3 +100,5 @@ VANTARIS ONE now has cross-module manifest baseline for ONE Adapter, IBMS Core, 
 CDE now has module manifest draft and evidence object draft, both docs-only and runtimeReady false.
 VANTARIS ONE module naming and layer model is realigned to U-series names: UCore, UMMS, UESG, UCDE, UDOC, and UConsole, while Foundation Layer remains reference-only in this task.
 Promotion from docs-level planning to implementation requires explicit approval in a separate authorized task.
+Direct runtime implementation remains blocked after A3.
+Contract/schema promotion remains blocked unless separately authorized.
