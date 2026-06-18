@@ -206,9 +206,10 @@
     },
     {
       "moduleId": "ucde",
+      "moduleName": "UCDE",
       "displayName": "UCDE",
       "moduleType": "business",
-      "status": "draft-a1",
+      "status": "draft-a2",
       "owns": [
         "evidence reference context",
         "traceability and audit linkage context",
@@ -234,7 +235,11 @@
       ],
       "traceabilityRequired": true,
       "runtimeReady": false,
-      "nextTask": "UCDE-A2-EVIDENCE-CONTRACT-DRAFT"
+      "schemaReady": false,
+      "apiReady": false,
+      "dbReady": false,
+      "contractsPackageReady": false,
+      "nextTask": "U-MODULES-A2-READINESS-REVIEW"
     },
     {
       "moduleId": "uconsole",
@@ -388,6 +393,6 @@
     "Menu/API/DB changes require separate approval."
   ],
   "nextTasks": [
-    "UCDE-A2-EVIDENCE-CONTRACT-DRAFT"
+    "U-MODULES-A2-READINESS-REVIEW"
   ]
 }

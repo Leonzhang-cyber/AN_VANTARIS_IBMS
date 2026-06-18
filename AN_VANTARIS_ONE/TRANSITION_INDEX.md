@@ -36,6 +36,7 @@ Completed stages:
 - UCORE-A1-MODULE-MANIFEST-DRAFT — current task
 - ONE-ADAPTER-A1-CONSUMER-CONTRACT-DRAFT — current task
 - UCONSOLE-A1-MODULE-STATUS-CONTRACT-DRAFT — current task
+- UCDE-A2-EVIDENCE-CONTRACT-DRAFT — current task
 
 ## Current Allowed Work
 
@@ -56,7 +57,7 @@ Completed stages:
 
 ## Next Recommended Task
 
-- UCDE-A2-EVIDENCE-CONTRACT-DRAFT
+- U-MODULES-A2-READINESS-REVIEW
 
 ## Historical Name Mapping
 
@@ -73,8 +74,10 @@ Completed stages:
 - Data Center Operations -> UDOC
 - DATA-CENTER-A1 -> UDOC-A1-MODULE-MANIFEST-DRAFT
 - IDC-DCIM-A1 -> UDOC-A1-MODULE-MANIFEST-DRAFT
+- CDE-A2 -> UCDE-A2-EVIDENCE-CONTRACT-DRAFT
+- CDE evidence contract -> UCDE evidence contract draft
 
-Old names are deprecated as primary task names and kept only as historical mapping.
+Old wording is historical only, and primary name in this phase is UCDE-A2.
 
 ## Shared Foundation Runtime Continuation
 

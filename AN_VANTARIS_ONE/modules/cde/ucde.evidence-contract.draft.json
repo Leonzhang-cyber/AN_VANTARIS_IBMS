@@ -1,0 +1,122 @@
+{
+  "draftId": "UCDE-A2-EVIDENCE-CONTRACT-DRAFT",
+  "moduleId": "ucde",
+  "moduleName": "UCDE",
+  "fullName": "Unified Common Data Evidence",
+  "chineseName": "全向证据链",
+  "draftType": "docs-level-evidence-contract-draft",
+  "contractStatus": "draft-a2",
+  "runtimeReady": false,
+  "schemaReady": false,
+  "apiReady": false,
+  "dbReady": false,
+  "contractsPackageReady": false,
+  "scope": {
+    "docsOnly": true,
+    "realContract": false,
+    "realSchema": false,
+    "realOpenApi": false,
+    "runtimeImplementation": false,
+    "apiImplementation": false,
+    "databaseImplementation": false,
+    "frontendImplementation": false
+  },
+  "evidenceIdentityFields": [
+    "evidenceId",
+    "evidenceType",
+    "evidenceVersion",
+    "tenantId",
+    "projectId",
+    "siteId",
+    "sourceModuleId",
+    "sourceSystem",
+    "sourceRecordId",
+    "sourceRecordType",
+    "traceId",
+    "correlationId",
+    "messageId",
+    "createdAt",
+    "updatedAt"
+  ],
+  "evidenceContextFields": [
+    "assetId",
+    "deviceId",
+    "pointId",
+    "eventId",
+    "alarmId",
+    "workOrderId",
+    "maintenanceContextId",
+    "energyContextId",
+    "operationContextId",
+    "dataOperationContextId",
+    "riskContextId",
+    "decisionContextId"
+  ],
+  "evidenceIntegrityFields": [
+    "sourceHashReference",
+    "payloadHashReference",
+    "signatureReference",
+    "chainReference",
+    "previousEvidenceId",
+    "retentionClass",
+    "classification",
+    "immutabilityPolicy",
+    "redactionPolicy"
+  ],
+  "crossModuleLinkages": {
+    "ucore": [
+      "operation decision evidence",
+      "command center action evidence",
+      "readiness status evidence"
+    ],
+    "umms": [
+      "work order evidence",
+      "maintenance action evidence",
+      "SLA escalation evidence"
+    ],
+    "uesg": [
+      "energy evidence",
+      "sustainability evidence",
+      "carbon reporting evidence"
+    ],
+    "udoc": [
+      "capacity evidence",
+      "rack/room/site context evidence",
+      "power/cooling/environment evidence"
+    ],
+    "oneAdapter": [
+      "foundation reference evidence",
+      "consumer boundary evidence"
+    ],
+    "uconsole": [
+      "module status evidence",
+      "risk status evidence",
+      "roadmap status evidence"
+    ]
+  },
+  "forbiddenOwnership": [
+    "AN_VANTARIS_Contracts schema",
+    "contracts/ files",
+    "schemas/ files",
+    "OpenAPI spec",
+    "backend API route",
+    "frontend page",
+    "DB table",
+    "Prisma schema",
+    "migration",
+    "Edge runtime",
+    "Link runtime",
+    "DB runtime",
+    "auth/login/RBAC",
+    "secret/token/credential"
+  ],
+  "impact": {
+    "apiImpact": "none-in-a2-draft",
+    "dbImpact": "none-in-a2-draft",
+    "menuImpact": "none-in-a2-draft",
+    "runtimeImpact": "none-in-a2-draft",
+    "schemaImpact": "none-in-a2-draft",
+    "contractsImpact": "none-in-a2-draft"
+  },
+  "nextTask": "U-MODULES-A2-READINESS-REVIEW"
+}

@@ -2,8 +2,8 @@
   "moduleId": "ucde",
   "displayName": "UCDE / Evidence Traceability",
   "moduleType": "business",
-  "manifestVersion": "0.1.0-a1-draft",
-  "status": "draft-a1",
+  "manifestVersion": "0.2.0-a2-draft",
+  "status": "draft-a2",
   "runtimeReady": false,
   "ownerScope": [
     "evidence reference context",
@@ -88,5 +88,14 @@
   "dbImpact": "none-in-a1-draft",
   "menuImpact": "none-in-a1-draft",
   "runtimeImplementation": "not-in-this-task",
-  "nextTask": "UCDE-A2-EVIDENCE-CONTRACT-DRAFT"
+  "a2EvidenceContractDraft": {
+    "draftId": "UCDE-A2-EVIDENCE-CONTRACT-DRAFT",
+    "docsLevelOnly": true,
+    "realContract": false,
+    "schemaReady": false,
+    "apiReady": false,
+    "dbReady": false,
+    "nextTask": "U-MODULES-A2-READINESS-REVIEW"
+  },
+  "nextTask": "U-MODULES-A2-READINESS-REVIEW"
 }

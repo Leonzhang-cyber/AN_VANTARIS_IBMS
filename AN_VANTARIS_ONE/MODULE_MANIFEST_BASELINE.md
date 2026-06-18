@@ -66,3 +66,10 @@ UConsole A1 module status contract draft is established as docs-level platform s
 
 Both modules remain `runtimeReady: false`.
 Both modules remain docs-only and keep API/DB/menu/runtime/schema impact as `none-in-a1-draft`.
+
+## 9. UCDE A2 Evidence Contract Draft Alignment
+
+UCDE-A2 docs-level evidence contract draft is completed in VANTARIS ONE documentation scope.
+UCDE does not own real contracts, real schemas, or runtime implementation.
+`AN_VANTARIS_Contracts`, `contracts/`, and `schemas/` remain untouched in this task.
+UCDE remains `runtimeReady: false`.

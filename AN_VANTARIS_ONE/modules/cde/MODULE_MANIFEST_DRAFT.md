@@ -1,5 +1,11 @@
 # UCDE Module Manifest Draft
 
+UCDE is the primary name.
+CDE is retained only as historical wording and historical path context.
+The `modules/cde` path remains unchanged in this task as historical path continuity.
+
+UCDE-A2 is a VANTARIS ONE docs-level evidence contract draft only. It does not modify AN_VANTARIS_Contracts, contracts/, schemas/, backend/, frontend/, DB, Edge, or Link.
+
 ## 1. Purpose
 
 This document is the UCDE A1 module manifest draft and defines UCDE module identity, object boundaries, status model, and evidence traceability requirements.
@@ -78,10 +84,11 @@ This document is the UCDE A1 module manifest draft and defines UCDE module ident
 - receivedAt
 - createdAt
 
-## 8. A1 Boundary
+## 8. A2 Boundary
 
-A1 does not create runtime.
-A1 does not create API.
-A1 does not create DB.
-A1 does not change frontend/menu.
-A1 does not create immutable ledger/hash chain.
+A2 does not create runtime.
+A2 does not create API.
+A2 does not create DB.
+A2 does not change frontend/menu.
+A2 does not create OpenAPI or JSON Schema artifacts.
+A2 does not modify contracts/schemas boundaries.
