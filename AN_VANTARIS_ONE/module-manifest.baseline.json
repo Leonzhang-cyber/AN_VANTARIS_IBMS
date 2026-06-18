@@ -319,7 +319,7 @@
       "fullName": "Reporting Workspace",
       "chineseName": "报表工作台",
       "moduleType": "platform-module",
-      "status": "draft-a2-gate",
+      "status": "draft-a3-catalog-spec",
       "owns": [
         "reporting workspace context",
         "report catalog context",
@@ -383,7 +383,24 @@
         "scheduleRuntimeCreated": false,
         "nextTask": "REPORTS-A3-REPORT-CATALOG-SPEC-DRAFT"
       },
-      "nextTask": "REPORTS-A3-REPORT-CATALOG-SPEC-DRAFT"
+      "a3ReportCatalogSpecDraft": {
+        "draftId": "REPORTS-A3-REPORT-CATALOG-SPEC-DRAFT",
+        "docsLevelOnly": true,
+        "reportEngineCreated": false,
+        "backendApiCreated": false,
+        "frontendPageCreated": false,
+        "dbSchemaCreated": false,
+        "openApiCreated": false,
+        "jsonSchemaCreated": false,
+        "exportRuntimeCreated": false,
+        "scheduleRuntimeCreated": false,
+        "apiImplementationAuthorized": false,
+        "dbImplementationAuthorized": false,
+        "frontendImplementationAuthorized": false,
+        "runtimeImplementationAuthorized": false,
+        "nextTask": "REPORTS-A4-REPORT-IMPLEMENTATION-GATE-PLAN"
+      },
+      "nextTask": "REPORTS-A4-REPORT-IMPLEMENTATION-GATE-PLAN"
     },
     {
       "moduleId": "analytics",
@@ -475,7 +492,7 @@
     "Menu/API/DB changes require separate approval."
   ],
   "nextTasks": [
-    "REPORTS-A3-REPORT-CATALOG-SPEC-DRAFT"
+    "REPORTS-A4-REPORT-IMPLEMENTATION-GATE-PLAN"
   ],
   "readinessReview": {
     "reviewId": "U-MODULES-A2-READINESS-REVIEW",
@@ -485,7 +502,7 @@
     "dbReady": false,
     "schemaReady": false,
     "contractsReady": false,
-    "nextTask": "REPORTS-A3-REPORT-CATALOG-SPEC-DRAFT"
+    "nextTask": "REPORTS-A4-REPORT-IMPLEMENTATION-GATE-PLAN"
   },
   "implementationGatePlan": {
     "planId": "U-MODULES-A3-IMPLEMENTATION-GATE-PLAN",
@@ -496,6 +513,6 @@
     "schemaPromotionAuthorized": false,
     "contractsPromotionAuthorized": false,
     "frontendImplementationAuthorized": false,
-    "nextTask": "REPORTS-A3-REPORT-CATALOG-SPEC-DRAFT"
+    "nextTask": "REPORTS-A4-REPORT-IMPLEMENTATION-GATE-PLAN"
   }
 }

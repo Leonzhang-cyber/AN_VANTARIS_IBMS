@@ -129,3 +129,10 @@ Reports A2 API/Data Model Gate is completed as docs-level candidate gate only.
 API/data model remains candidate-only and not implemented in this task.
 backend/frontend/DB/schema/runtime/export/schedule remains blocked.
 Next task is REPORTS-A3-REPORT-CATALOG-SPEC-DRAFT.
+
+## 18. Reports A3 Report Catalog Spec Draft Completion
+
+Reports A3 report catalog spec draft is completed as docs-level catalog specification only.
+First-batch report candidates are defined.
+report engine/API/DB/frontend/export/schedule remains blocked.
+Next task is REPORTS-A4-REPORT-IMPLEMENTATION-GATE-PLAN.

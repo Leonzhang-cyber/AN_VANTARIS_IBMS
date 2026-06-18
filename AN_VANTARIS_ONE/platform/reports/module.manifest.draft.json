@@ -5,8 +5,8 @@
   "fullName": "Reporting Workspace",
   "chineseName": "报表工作台",
   "moduleType": "platform-module",
-  "manifestVersion": "A2-gate-draft",
-  "status": "draft-a2-gate",
+  "manifestVersion": "A3-catalog-draft",
+  "status": "draft-a3-catalog-spec",
   "runtimeReady": false,
   "apiReady": false,
   "dbReady": false,
@@ -147,5 +147,22 @@
     "scheduleRuntimeCreated": false,
     "nextTask": "REPORTS-A3-REPORT-CATALOG-SPEC-DRAFT"
   },
-  "nextTask": "REPORTS-A3-REPORT-CATALOG-SPEC-DRAFT"
+  "a3ReportCatalogSpecDraft": {
+    "draftId": "REPORTS-A3-REPORT-CATALOG-SPEC-DRAFT",
+    "docsLevelOnly": true,
+    "reportEngineCreated": false,
+    "backendApiCreated": false,
+    "frontendPageCreated": false,
+    "dbSchemaCreated": false,
+    "openApiCreated": false,
+    "jsonSchemaCreated": false,
+    "exportRuntimeCreated": false,
+    "scheduleRuntimeCreated": false,
+    "apiImplementationAuthorized": false,
+    "dbImplementationAuthorized": false,
+    "frontendImplementationAuthorized": false,
+    "runtimeImplementationAuthorized": false,
+    "nextTask": "REPORTS-A4-REPORT-IMPLEMENTATION-GATE-PLAN"
+  },
+  "nextTask": "REPORTS-A4-REPORT-IMPLEMENTATION-GATE-PLAN"
 }

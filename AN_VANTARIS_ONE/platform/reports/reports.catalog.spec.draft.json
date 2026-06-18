@@ -1,0 +1,202 @@
+{
+  "draftId": "REPORTS-A3-REPORT-CATALOG-SPEC-DRAFT",
+  "moduleId": "reports",
+  "moduleName": "Reports",
+  "fullName": "Reporting Workspace",
+  "chineseName": "报表工作台",
+  "draftType": "docs-level-report-catalog-spec",
+  "catalogStatus": "draft-a3",
+  "runtimeReady": false,
+  "apiReady": false,
+  "dbReady": false,
+  "schemaReady": false,
+  "frontendReady": false,
+  "reportEngineReady": false,
+  "exportRuntimeReady": false,
+  "scheduleRuntimeReady": false,
+  "implementationAuthorized": false,
+  "apiImplementationAuthorized": false,
+  "dbImplementationAuthorized": false,
+  "frontendImplementationAuthorized": false,
+  "reportEngineImplementationAuthorized": false,
+  "exportRuntimeImplementationAuthorized": false,
+  "scheduleRuntimeImplementationAuthorized": false,
+  "catalogGroups": [
+    {
+      "groupId": "fault-alarm-reports",
+      "groupName": "Fault & Alarm Reports",
+      "chineseName": "故障与告警报表",
+      "sourceModules": [
+        "ufms",
+        "ucde",
+        "uconsole"
+      ],
+      "reportCandidates": [
+        "UFMS Fault Summary Report",
+        "UFMS Alarm/Event Trend Report",
+        "Fault Impact and Escalation Report"
+      ]
+    },
+    {
+      "groupId": "maintenance-reports",
+      "groupName": "Maintenance Reports",
+      "chineseName": "维护报表",
+      "sourceModules": [
+        "umms",
+        "ufms",
+        "ucde"
+      ],
+      "reportCandidates": [
+        "UMMS Work Order Summary Report",
+        "UMMS SLA Compliance Report",
+        "Preventive Maintenance Completion Report"
+      ]
+    },
+    {
+      "groupId": "energy-sustainability-reports",
+      "groupName": "Energy & Sustainability Reports",
+      "chineseName": "能源与可持续报表",
+      "sourceModules": [
+        "uesg",
+        "udoc",
+        "ucde"
+      ],
+      "reportCandidates": [
+        "UESG Energy Consumption Report",
+        "UESG Sustainability KPI Report",
+        "Carbon and Utility Trend Report"
+      ]
+    },
+    {
+      "groupId": "evidence-audit-reports",
+      "groupName": "Evidence & Audit Reports",
+      "chineseName": "证据与审计报表",
+      "sourceModules": [
+        "ucde",
+        "uconsole"
+      ],
+      "reportCandidates": [
+        "UCDE Evidence Traceability Report",
+        "Audit Trail Report",
+        "Evidence Retention and Redaction Report"
+      ]
+    },
+    {
+      "groupId": "data-operations-reports",
+      "groupName": "Data Operations Reports",
+      "chineseName": "数据运营报表",
+      "sourceModules": [
+        "udoc",
+        "ucore",
+        "ucde"
+      ],
+      "reportCandidates": [
+        "UDOC Data Operations Summary Report",
+        "Capacity and Availability Report",
+        "Power Cooling and Environment Report"
+      ]
+    },
+    {
+      "groupId": "operations-summary-reports",
+      "groupName": "Operations Summary Reports",
+      "chineseName": "运营汇总报表",
+      "sourceModules": [
+        "ucore",
+        "ufms",
+        "umms",
+        "uesg",
+        "udoc"
+      ],
+      "reportCandidates": [
+        "UCore Operations Summary Report",
+        "Daily Operations Brief Report",
+        "Cross-Module Operational KPI Report"
+      ]
+    },
+    {
+      "groupId": "module-status-reports",
+      "groupName": "Module Status Reports",
+      "chineseName": "模块状态报表",
+      "sourceModules": [
+        "uconsole"
+      ],
+      "reportCandidates": [
+        "Module Readiness Report",
+        "Module Health and Dependency Report",
+        "Roadmap and Governance Status Report"
+      ]
+    },
+    {
+      "groupId": "governance-compliance-reports",
+      "groupName": "Governance & Compliance Reports",
+      "chineseName": "治理与合规报表",
+      "sourceModules": [
+        "uconsole",
+        "ucde"
+      ],
+      "reportCandidates": [
+        "Governance Decision Log Report",
+        "Compliance Evidence Summary Report",
+        "Security Risk Review Report"
+      ]
+    }
+  ],
+  "commonMetadataCandidates": [
+    "reportId",
+    "reportCode",
+    "reportName",
+    "reportGroupId",
+    "sourceModules",
+    "sourceReferences",
+    "defaultFilters",
+    "supportedFilters",
+    "aggregationLevel",
+    "exportFormatCandidates",
+    "scheduleEligible",
+    "permissionScope",
+    "auditRequired",
+    "evidenceLinked",
+    "retentionClass"
+  ],
+  "commonFilterCandidates": [
+    "timeRange",
+    "siteId",
+    "buildingId",
+    "floorId",
+    "zoneId",
+    "moduleId",
+    "assetId",
+    "deviceId",
+    "severity",
+    "status",
+    "category",
+    "evidenceReferenceId"
+  ],
+  "exportFormatCandidates": [
+    "view-only",
+    "pdf-candidate",
+    "excel-candidate",
+    "csv-candidate"
+  ],
+  "forbiddenCurrentActions": [
+    "create report engine",
+    "create backend API",
+    "create frontend page",
+    "create DB table",
+    "create OpenAPI",
+    "create JSON Schema",
+    "create DTO/controller/service",
+    "create PDF/Excel generation runtime",
+    "create scheduled report job"
+  ],
+  "impact": {
+    "apiImpact": "none-in-a3-draft",
+    "dbImpact": "none-in-a3-draft",
+    "schemaImpact": "none-in-a3-draft",
+    "runtimeImpact": "none-in-a3-draft",
+    "frontendImpact": "none-in-a3-draft",
+    "exportImpact": "none-in-a3-draft",
+    "scheduleImpact": "none-in-a3-draft"
+  },
+  "nextTask": "REPORTS-A4-REPORT-IMPLEMENTATION-GATE-PLAN"
+}

@@ -22,10 +22,11 @@ After `ONE-SHARED-FOUNDATION-CONSUMER-A0`, VANTARIS ONE treats Edge/Link/Contrac
 - ONE-ADAPTER-A1-CANCEL-AND-FUNCTION-REALLOCATION
 - REPORTS-A1-MODULE-MANIFEST-DRAFT
 - REPORTS-A2-API-DATA-MODEL-GATE
+- REPORTS-A3-REPORT-CATALOG-SPEC-DRAFT
 
 ## Next Recommended Task
 
-- REPORTS-A3-REPORT-CATALOG-SPEC-DRAFT
+- REPORTS-A4-REPORT-IMPLEMENTATION-GATE-PLAN
 
 A3 is implementation gate planning only. It does not implement runtime, API, DB, schema, or contracts package directly.
 ONE-ADAPTER-A2 is a historical gate record and is no longer active after cancellation.
@@ -36,6 +37,7 @@ ONE-ADAPTER-A2 is cancelled/superseded by ONE-ADAPTER-A1 cancellation decision.
 UCDE-A3/A4/A5 remain historical/planned records and are not current primary next-task sequence.
 REPORTS-A2 remains an API/data model gate and is not backend/frontend implementation unless explicitly authorized.
 REPORTS-A3 remains a report catalog spec draft and is not report engine implementation unless explicitly authorized.
+REPORTS-A4 remains an implementation gate plan and is not report engine/backend/frontend implementation unless explicitly authorized.
 
 ## Shared Foundation Runtime Continuation (UFMS-led)
 

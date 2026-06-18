@@ -45,6 +45,7 @@ Completed stages:
 - ONE-ADAPTER-A1-CANCEL-AND-FUNCTION-REALLOCATION — current task
 - REPORTS-A1-MODULE-MANIFEST-DRAFT — current task
 - REPORTS-A2-API-DATA-MODEL-GATE — current task
+- REPORTS-A3-REPORT-CATALOG-SPEC-DRAFT — current task
 
 ## Current Allowed Work
 
@@ -65,7 +66,7 @@ Completed stages:
 
 ## Next Recommended Task
 
-- REPORTS-A3-REPORT-CATALOG-SPEC-DRAFT
+- REPORTS-A4-REPORT-IMPLEMENTATION-GATE-PLAN
 
 ## Historical Name Mapping
 
@@ -122,3 +123,5 @@ Reports is defined as Reporting Workspace (`报表工作台`) in platform layer 
 Reports runtime/API/DB/frontend implementation remains blocked unless separately authorized.
 Reports API/data model is currently gate-level candidate planning only.
 Reports backend/frontend/API/DB/export/schedule implementation remains blocked unless separately authorized.
+Reports catalog is currently docs-level specification only.
+Reports implementation remains blocked unless separately authorized.

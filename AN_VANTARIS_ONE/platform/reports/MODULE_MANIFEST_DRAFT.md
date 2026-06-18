@@ -26,9 +26,14 @@ Reports will consume standardized references and metadata for:
 
 ## Next Task
 
-`REPORTS-A3-REPORT-CATALOG-SPEC-DRAFT`
+`REPORTS-A4-REPORT-IMPLEMENTATION-GATE-PLAN`
 
 ## A2 Gate Note
 
 Reports A2 API/Data Model Gate is completed as docs-level only.
 A2 does not implement backend API, frontend page, DB schema, OpenAPI, JSON Schema, report engine, export runtime, or scheduled job runtime.
+
+## A3 Catalog Spec Note
+
+Reports A3 Report Catalog Spec Draft is completed as docs-level catalog specification only.
+A3 does not implement report engine, backend API, frontend page, DB schema, OpenAPI, JSON Schema, export runtime, or schedule runtime.

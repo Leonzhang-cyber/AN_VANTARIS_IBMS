@@ -43,3 +43,8 @@ This task is gate-only and does not implement runtime, API, DB, frontend, schema
 ## 10. Next Recommended Task
 
 `REPORTS-A3-REPORT-CATALOG-SPEC-DRAFT`
+
+## 11. A3 Continuation Note
+
+A3 continues as docs-level report catalog specification only.
+No runtime/API/DB/frontend/export/schedule implementation is authorized by A3.
