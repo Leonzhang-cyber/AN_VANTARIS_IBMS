@@ -25,6 +25,7 @@ interface QueryFilters {
 const loadingHealth = ref(false)
 const loadingCatalog = ref(false)
 const querying = ref(false)
+const exportingCsv = ref(false)
 const fallbackMode = ref(false)
 const apiUnavailable = ref(false)
 
@@ -89,6 +90,7 @@ const fallbackCatalog: ReportsCatalogItem[] = [
 
 const queryColumns = computed(() => queryResult.value?.columns ?? [])
 const queryRows = computed(() => queryResult.value?.rows ?? [])
+const canExportCsv = computed(() => !querying.value && !exportingCsv.value && queryRows.value.length > 0)
 
 function normalizeError(error: unknown, fallback: string): string {
   return error instanceof ApiError ? error.message : fallback
@@ -246,6 +248,116 @@ function renderCellValue(value: unknown): string {
     return JSON.stringify(value)
   }
   return String(value)
+}
+
+function escapeCsvValue(value: unknown): string {
+  if (value === null || value === undefined) {
+    return ''
+  }
+  const text = typeof value === 'object' ? JSON.stringify(value) : String(value)
+  return `"${text.replace(/"/g, '""')}"`
+}
+
+interface CsvColumnInfo {
+  key: string
+  header: string
+}
+
+function normalizeCsvColumns(columns: unknown[], rows: Record<string, unknown>[]): CsvColumnInfo[] {
+  const normalized = columns
+    .map((column) => {
+      if (typeof column === 'string') {
+        return { key: column, header: column }
+      }
+      if (typeof column === 'object' && column !== null) {
+        const data = column as Record<string, unknown>
+        const keyCandidate = data.key ?? data.field ?? data.name ?? data.title ?? data.label
+        const headerCandidate = data.label ?? data.title ?? data.name ?? data.key ?? data.field
+        if (typeof keyCandidate === 'string' && keyCandidate.trim()) {
+          return {
+            key: keyCandidate.trim(),
+            header:
+              typeof headerCandidate === 'string' && headerCandidate.trim()
+                ? headerCandidate.trim()
+                : keyCandidate.trim(),
+          }
+        }
+      }
+      return null
+    })
+    .filter((item): item is CsvColumnInfo => Boolean(item))
+
+  if (normalized.length > 0) {
+    return normalized
+  }
+
+  const firstRow = rows[0] ?? {}
+  return Object.keys(firstRow).map((key) => ({ key, header: key }))
+}
+
+function buildCsv(columns: unknown[], rows: Record<string, unknown>[]): string {
+  const csvColumns = normalizeCsvColumns(columns, rows)
+  if (csvColumns.length === 0) {
+    return ''
+  }
+
+  const headerLine = csvColumns.map((column) => escapeCsvValue(column.header)).join(',')
+  const dataLines = rows.map((row) =>
+    csvColumns.map((column) => escapeCsvValue(row[column.key])).join(','),
+  )
+
+  return [headerLine, ...dataLines].join('\r\n')
+}
+
+function formatTimestampForFilename(date: Date): string {
+  const pad2 = (value: number) => String(value).padStart(2, '0')
+  const yyyy = date.getFullYear()
+  const mm = pad2(date.getMonth() + 1)
+  const dd = pad2(date.getDate())
+  const hh = pad2(date.getHours())
+  const mi = pad2(date.getMinutes())
+  const ss = pad2(date.getSeconds())
+  return `${yyyy}${mm}${dd}-${hh}${mi}${ss}`
+}
+
+function downloadCsv(filename: string, csvContent: string): void {
+  const blob = new Blob(['\uFEFF', csvContent], { type: 'text/csv;charset=utf-8' })
+  const url = URL.createObjectURL(blob)
+  const anchor = document.createElement('a')
+  anchor.href = url
+  anchor.download = filename
+  document.body.appendChild(anchor)
+  anchor.click()
+  document.body.removeChild(anchor)
+  URL.revokeObjectURL(url)
+}
+
+function buildCsvFilename(reportId: string): string {
+  const timestamp = formatTimestampForFilename(new Date())
+  const safeReportId = reportId.replace(/[^a-zA-Z0-9_-]/g, '-')
+  return `reports-${safeReportId}-${timestamp}.csv`
+}
+
+async function exportCurrentResultCsv(): Promise<void> {
+  if (!queryResult.value || !canExportCsv.value) {
+    return
+  }
+
+  exportingCsv.value = true
+  try {
+    const csv = buildCsv(queryResult.value.columns as unknown[], queryResult.value.rows)
+    if (!csv) {
+      ElMessage.error('No exportable data in current result.')
+      return
+    }
+    const filename = buildCsvFilename(queryResult.value.reportId || selectedReportId.value || 'report')
+    downloadCsv(filename, csv)
+    ElMessage.success('CSV export completed.')
+  } catch {
+    ElMessage.error('CSV export failed.')
+  } finally {
+    exportingCsv.value = false
+  }
 }
 
 onMounted(() => {
@@ -415,7 +527,21 @@ onMounted(() => {
             <el-descriptions-item label="provider">{{ queryResult.provider }}</el-descriptions-item>
             <el-descriptions-item label="runtimeMode">{{ queryResult.runtimeMode }}</el-descriptions-item>
             <el-descriptions-item label="sourceSemantics">{{ queryResult.sourceSemantics }}</el-descriptions-item>
+            <el-descriptions-item label="exportMode">browser-local</el-descriptions-item>
+            <el-descriptions-item label="exportScope">current-result</el-descriptions-item>
+            <el-descriptions-item label="exportFormat">csv</el-descriptions-item>
           </el-descriptions>
+
+          <el-button
+            type="success"
+            plain
+            class="block-space"
+            :loading="exportingCsv"
+            :disabled="!canExportCsv"
+            @click="exportCurrentResultCsv"
+          >
+            Export CSV
+          </el-button>
 
           <el-card shadow="never" class="block-space">
             <template #header>Summary</template>
