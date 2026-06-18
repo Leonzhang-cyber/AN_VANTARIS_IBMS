@@ -283,6 +283,10 @@ def get_module_readiness_registry() -> List[Dict[str, Any]]:
                 "UESG R2 adds category/calculation/association/quality/trend placeholder detail.",
                 "All ESG data remains local mock and read-only in this stage.",
                 "Certification and compliance reporting are deferred.",
+                "UESG R1-R2 readiness freeze completed for current foundation scope.",
+                "ESG persistence gate is deferred; local skeleton ESG metrics are retained in this stage.",
+                "Meter integration and carbon factor governance are deferred in this stage.",
+                "ESG reporting readiness and certification reporting remain deferred in this stage.",
             ],
         ),
         _module_record(
