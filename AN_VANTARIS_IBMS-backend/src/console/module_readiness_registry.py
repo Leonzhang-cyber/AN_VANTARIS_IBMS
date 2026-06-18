@@ -223,7 +223,11 @@ def get_module_readiness_registry() -> List[Dict[str, Any]]:
                 "Add runtime Reports audit linkage later.",
                 "Add signature verification later.",
             ],
-            readiness_notes=["UCDE R2 uses local skeleton references for traceability readiness."],
+            readiness_notes=[
+                "UCDE R2 uses local skeleton references for traceability readiness.",
+                "UCDE R1-R2 readiness freeze completed with a no-op runtime gate decision.",
+                "Evidence persistence gate is deferred; local-mock-provider remains active in this stage.",
+            ],
         ),
         _module_record(
             module_id="uesg",
