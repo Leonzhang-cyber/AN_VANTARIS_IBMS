@@ -20,6 +20,7 @@ Completed stages:
 - EDGE-A1-CONNECTOR-REGISTRY-DRYRUN — d0f5181
 - SHARED-FOUNDATION-A0-SCOPE-REALIGNMENT — current task
 - ONE-SHARED-FOUNDATION-CONSUMER-A0 — current task
+- ONE-ADAPTER-A0-SHARED-FOUNDATION-INTERFACE — current task
 
 ## Current Allowed Work
 
@@ -46,6 +47,7 @@ Completed stages:
 4. ESG-A0-MODULE-BOUNDARY
 5. CDE-A0-EVIDENCE-CONSUMER
 6. CONSOLE-A0-SHARED-FOUNDATION-HEALTH-VIEW
+7. ONE-ADAPTER-A1-CONSUMER-CONTRACT-DRAFT
 
 ## Shared Foundation Runtime Continuation
 
@@ -55,3 +57,4 @@ Shared runtime tasks continue under UFMS-led roadmap: `SHARED-CONTRACTS`, `SHARE
 
 After this point, VANTARIS ONE does not expand Edge/Link/Contracts as private runtime.
 VANTARIS ONE work focuses on adapters and business modules.
+VANTARIS ONE adapter is consumer boundary only; runtime implementation requires separate A1 approval.
