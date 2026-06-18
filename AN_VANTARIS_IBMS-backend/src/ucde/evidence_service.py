@@ -8,6 +8,7 @@ from src.ucde.evidence_integrity import build_evidence_hash, build_traceability_
 from src.ucde.evidence_provider import (
     get_evidence,
     get_evidence_health,
+    get_evidence_relationships,
     get_evidence_summary,
     list_evidence,
 )
@@ -66,10 +67,18 @@ class UcdeEvidenceService:
     def get_evidence_summary(self) -> Dict[str, Any]:
         summary = get_evidence_summary()
         summary["limitations"] = summary.get("limitations", []) + [
-            "UCDE R1 uses hash-only local evidence for traceability readiness.",
+            "UCDE R2 uses hash-only local evidence for traceability readiness.",
             "Not a certification proof in this stage.",
         ]
         return summary
+
+    def get_evidence_relationships(
+        self, evidence_id: str
+    ) -> Tuple[Optional[Dict[str, Any]], Optional[Tuple[int, str]]]:
+        relationships = get_evidence_relationships(evidence_id)
+        if not relationships:
+            return None, (404, "evidenceId not found")
+        return relationships, None
 
     def verify_evidence_record(
         self, evidence_id: str
@@ -84,12 +93,38 @@ class UcdeEvidenceService:
         actual_traceability_hash = str(item.get("traceabilityHash", ""))
         evidence_hash_matches = actual_evidence_hash == expected_evidence_hash
         traceability_hash_matches = actual_traceability_hash == expected_traceability_hash
+        source_reference_count = len(item.get("sourceReferences", []))
+        evidence_reference_count = len(item.get("evidenceReferences", []))
+        audit_reference_count = len(item.get("auditReferences", []))
+        correlation_reference_count = len(item.get("correlationReferences", []))
+        traceability_path_complete = bool(item.get("traceabilityPath", {}).get("complete"))
         return {
             "verified": bool(evidence_hash_matches and traceability_hash_matches),
             "verificationMode": "hash-only-local-evidence",
             "evidenceId": str(item.get("evidenceId", "")),
             "evidenceHashMatches": evidence_hash_matches,
             "traceabilityHashMatches": traceability_hash_matches,
+            "evidenceHashExpected": expected_evidence_hash,
+            "evidenceHashActual": actual_evidence_hash,
+            "traceabilityHashExpected": expected_traceability_hash,
+            "traceabilityHashActual": actual_traceability_hash,
+            "sourceReferenceCount": source_reference_count,
+            "evidenceReferenceCount": evidence_reference_count,
+            "auditReferenceCount": audit_reference_count,
+            "correlationReferenceCount": correlation_reference_count,
+            "traceabilityPathComplete": traceability_path_complete,
+            "verificationNotes": [
+                "Hash verification is local and deterministic.",
+                "Runtime source record validation is not integrated.",
+                "No digital signature is applied in R2.",
+            ],
+            "limitations": [
+                "no DB evidence store",
+                "no digital signature",
+                "no runtime source validation",
+                "no formal immutable protocol",
+                "no certification claim",
+            ],
             "certified": False,
             "iec62443Certified": False,
         }, None

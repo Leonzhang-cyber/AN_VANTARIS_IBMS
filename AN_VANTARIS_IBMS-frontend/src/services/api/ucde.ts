@@ -17,6 +17,82 @@ export interface UcdeHealth {
   ucdeRuntimeIntegrated: boolean
 }
 
+export interface EvidenceReferenceBase {
+  referenceId: string
+  relationship: string
+  runtimeLinked: boolean
+  notes: string
+}
+
+export interface SourceReference extends EvidenceReferenceBase {
+  sourceModuleId: string
+  sourceRecordId: string
+  sourceRecordType: string
+  sourceTimestamp: string
+}
+
+export interface EvidenceReference extends EvidenceReferenceBase {
+  evidenceId: string
+}
+
+export interface AuditReference extends EvidenceReferenceBase {
+  auditId: string
+  auditEventType: string
+  sourceModuleId: string
+}
+
+export interface CorrelationReference extends EvidenceReferenceBase {
+  correlationType: string
+  relatedModuleIds: string[]
+}
+
+export interface TraceabilityStep {
+  stepOrder: number
+  stepType: string
+  label: string
+  referenceId: string
+  runtimeLinked: boolean
+}
+
+export interface TraceabilityPath {
+  pathId: string
+  pathMode: string
+  sourceModuleId: string
+  sourceRecordId: string
+  evidenceId: string
+  steps: TraceabilityStep[]
+  complete: boolean
+  completionReason: string
+  certified: boolean
+  iec62443Certified: boolean
+}
+
+export interface EvidenceRelationshipNode {
+  nodeId: string
+  nodeType: 'evidence' | 'source' | 'audit' | 'correlation'
+  label: string
+  moduleId: string
+  runtimeLinked: boolean
+}
+
+export interface EvidenceRelationshipEdge {
+  edgeId: string
+  from: string
+  to: string
+  relationship: string
+  runtimeLinked: boolean
+}
+
+export interface EvidenceRelationshipGraph {
+  evidenceId: string
+  graphMode: string
+  nodes: EvidenceRelationshipNode[]
+  edges: EvidenceRelationshipEdge[]
+  certified: boolean
+  iec62443Certified: boolean
+  notes: string
+}
+
 export interface EvidenceRecord {
   evidenceId: string
   evidenceType: string
@@ -40,10 +116,11 @@ export interface EvidenceRecord {
   tamperEvidenceMode: string
   certified: boolean
   iec62443Certified: boolean
-  sourceReferences: string[]
-  evidenceReferences: string[]
-  auditReferences: string[]
-  correlationReferences: string[]
+  sourceReferences: SourceReference[]
+  evidenceReferences: EvidenceReference[]
+  auditReferences: AuditReference[]
+  correlationReferences: CorrelationReference[]
+  traceabilityPath: TraceabilityPath | null
   tags: string[]
   metadata: Record<string, unknown>
   limitations: string[]
@@ -61,6 +138,15 @@ export interface EvidenceSummary {
   iec62443CertifiedEvidence: number
   sourceModules: string[]
   evidenceTypes: string[]
+  totalSourceReferences: number
+  totalEvidenceReferences: number
+  totalAuditReferences: number
+  totalCorrelationReferences: number
+  traceabilityPathCount: number
+  runtimeLinkedReferences: number
+  completeTraceabilityPaths: number
+  skeletonTraceabilityPaths: number
+  relationshipGraphReady: boolean
   limitations: string[]
 }
 
@@ -70,6 +156,17 @@ export interface EvidenceVerificationResult {
   evidenceId: string
   evidenceHashMatches: boolean
   traceabilityHashMatches: boolean
+  evidenceHashExpected: string
+  evidenceHashActual: string
+  traceabilityHashExpected: string
+  traceabilityHashActual: string
+  sourceReferenceCount: number
+  evidenceReferenceCount: number
+  auditReferenceCount: number
+  correlationReferenceCount: number
+  traceabilityPathComplete: boolean
+  verificationNotes: string[]
+  limitations: string[]
   certified: boolean
   iec62443Certified: boolean
 }
@@ -106,6 +203,12 @@ function asRecord(value: unknown): Record<string, unknown> {
 
 function asStringArray(value: unknown): string[] {
   return Array.isArray(value) ? value.map((item) => String(item)) : []
+}
+
+function asRecordArray(value: unknown): Record<string, unknown>[] {
+  return Array.isArray(value)
+    ? value.filter((item) => typeof item === 'object' && item !== null).map((item) => item as Record<string, unknown>)
+    : []
 }
 
 function unwrapData<T>(body: unknown): T {
@@ -160,10 +263,11 @@ function normalizeEvidenceRecord(raw: unknown): EvidenceRecord {
     tamperEvidenceMode: String(data.tamperEvidenceMode ?? 'hash-only-local-evidence'),
     certified: Boolean(data.certified),
     iec62443Certified: Boolean(data.iec62443Certified),
-    sourceReferences: asStringArray(data.sourceReferences),
-    evidenceReferences: asStringArray(data.evidenceReferences),
-    auditReferences: asStringArray(data.auditReferences),
-    correlationReferences: asStringArray(data.correlationReferences),
+    sourceReferences: asRecordArray(data.sourceReferences).map((item) => normalizeSourceReference(item)),
+    evidenceReferences: asRecordArray(data.evidenceReferences).map((item) => normalizeEvidenceReference(item)),
+    auditReferences: asRecordArray(data.auditReferences).map((item) => normalizeAuditReference(item)),
+    correlationReferences: asRecordArray(data.correlationReferences).map((item) => normalizeCorrelationReference(item)),
+    traceabilityPath: normalizeTraceabilityPath(data.traceabilityPath),
     tags: asStringArray(data.tags),
     metadata: asRecord(data.metadata),
     limitations: asStringArray(data.limitations),
@@ -184,6 +288,15 @@ function normalizeEvidenceSummary(raw: unknown): EvidenceSummary {
     iec62443CertifiedEvidence: Number(data.iec62443CertifiedEvidence ?? 0),
     sourceModules: asStringArray(data.sourceModules),
     evidenceTypes: asStringArray(data.evidenceTypes),
+    totalSourceReferences: Number(data.totalSourceReferences ?? 0),
+    totalEvidenceReferences: Number(data.totalEvidenceReferences ?? 0),
+    totalAuditReferences: Number(data.totalAuditReferences ?? 0),
+    totalCorrelationReferences: Number(data.totalCorrelationReferences ?? 0),
+    traceabilityPathCount: Number(data.traceabilityPathCount ?? 0),
+    runtimeLinkedReferences: Number(data.runtimeLinkedReferences ?? 0),
+    completeTraceabilityPaths: Number(data.completeTraceabilityPaths ?? 0),
+    skeletonTraceabilityPaths: Number(data.skeletonTraceabilityPaths ?? 0),
+    relationshipGraphReady: Boolean(data.relationshipGraphReady),
     limitations: asStringArray(data.limitations),
   }
 }
@@ -196,8 +309,136 @@ function normalizeEvidenceVerification(raw: unknown): EvidenceVerificationResult
     evidenceId: String(data.evidenceId ?? ''),
     evidenceHashMatches: Boolean(data.evidenceHashMatches),
     traceabilityHashMatches: Boolean(data.traceabilityHashMatches),
+    evidenceHashExpected: String(data.evidenceHashExpected ?? ''),
+    evidenceHashActual: String(data.evidenceHashActual ?? ''),
+    traceabilityHashExpected: String(data.traceabilityHashExpected ?? ''),
+    traceabilityHashActual: String(data.traceabilityHashActual ?? ''),
+    sourceReferenceCount: Number(data.sourceReferenceCount ?? 0),
+    evidenceReferenceCount: Number(data.evidenceReferenceCount ?? 0),
+    auditReferenceCount: Number(data.auditReferenceCount ?? 0),
+    correlationReferenceCount: Number(data.correlationReferenceCount ?? 0),
+    traceabilityPathComplete: Boolean(data.traceabilityPathComplete),
+    verificationNotes: asStringArray(data.verificationNotes),
+    limitations: asStringArray(data.limitations),
     certified: Boolean(data.certified),
     iec62443Certified: Boolean(data.iec62443Certified),
+  }
+}
+
+function normalizeReferenceBase(raw: unknown): EvidenceReferenceBase {
+  const data = asRecord(raw)
+  return {
+    referenceId: String(data.referenceId ?? ''),
+    relationship: String(data.relationship ?? ''),
+    runtimeLinked: Boolean(data.runtimeLinked),
+    notes: String(data.notes ?? ''),
+  }
+}
+
+function normalizeSourceReference(raw: unknown): SourceReference {
+  const data = asRecord(raw)
+  const base = normalizeReferenceBase(data)
+  return {
+    ...base,
+    sourceModuleId: String(data.sourceModuleId ?? ''),
+    sourceRecordId: String(data.sourceRecordId ?? ''),
+    sourceRecordType: String(data.sourceRecordType ?? ''),
+    sourceTimestamp: String(data.sourceTimestamp ?? ''),
+  }
+}
+
+function normalizeEvidenceReference(raw: unknown): EvidenceReference {
+  const data = asRecord(raw)
+  const base = normalizeReferenceBase(data)
+  return {
+    ...base,
+    evidenceId: String(data.evidenceId ?? ''),
+  }
+}
+
+function normalizeAuditReference(raw: unknown): AuditReference {
+  const data = asRecord(raw)
+  const base = normalizeReferenceBase(data)
+  return {
+    ...base,
+    auditId: String(data.auditId ?? ''),
+    auditEventType: String(data.auditEventType ?? ''),
+    sourceModuleId: String(data.sourceModuleId ?? ''),
+  }
+}
+
+function normalizeCorrelationReference(raw: unknown): CorrelationReference {
+  const data = asRecord(raw)
+  const base = normalizeReferenceBase(data)
+  return {
+    ...base,
+    correlationType: String(data.correlationType ?? ''),
+    relatedModuleIds: asStringArray(data.relatedModuleIds),
+  }
+}
+
+function normalizeTraceabilityStep(raw: unknown): TraceabilityStep {
+  const data = asRecord(raw)
+  return {
+    stepOrder: Number(data.stepOrder ?? 0),
+    stepType: String(data.stepType ?? ''),
+    label: String(data.label ?? ''),
+    referenceId: String(data.referenceId ?? ''),
+    runtimeLinked: Boolean(data.runtimeLinked),
+  }
+}
+
+function normalizeTraceabilityPath(raw: unknown): TraceabilityPath | null {
+  if (!raw || typeof raw !== 'object') {
+    return null
+  }
+  const data = asRecord(raw)
+  return {
+    pathId: String(data.pathId ?? ''),
+    pathMode: String(data.pathMode ?? ''),
+    sourceModuleId: String(data.sourceModuleId ?? ''),
+    sourceRecordId: String(data.sourceRecordId ?? ''),
+    evidenceId: String(data.evidenceId ?? ''),
+    steps: asRecordArray(data.steps).map((item) => normalizeTraceabilityStep(item)),
+    complete: Boolean(data.complete),
+    completionReason: String(data.completionReason ?? ''),
+    certified: Boolean(data.certified),
+    iec62443Certified: Boolean(data.iec62443Certified),
+  }
+}
+
+function normalizeRelationshipNode(raw: unknown): EvidenceRelationshipNode {
+  const data = asRecord(raw)
+  return {
+    nodeId: String(data.nodeId ?? ''),
+    nodeType: String(data.nodeType ?? 'evidence') as EvidenceRelationshipNode['nodeType'],
+    label: String(data.label ?? ''),
+    moduleId: String(data.moduleId ?? ''),
+    runtimeLinked: Boolean(data.runtimeLinked),
+  }
+}
+
+function normalizeRelationshipEdge(raw: unknown): EvidenceRelationshipEdge {
+  const data = asRecord(raw)
+  return {
+    edgeId: String(data.edgeId ?? ''),
+    from: String(data.from ?? ''),
+    to: String(data.to ?? ''),
+    relationship: String(data.relationship ?? ''),
+    runtimeLinked: Boolean(data.runtimeLinked),
+  }
+}
+
+function normalizeRelationshipGraph(raw: unknown): EvidenceRelationshipGraph {
+  const data = asRecord(raw)
+  return {
+    evidenceId: String(data.evidenceId ?? ''),
+    graphMode: String(data.graphMode ?? 'local-skeleton-relationships'),
+    nodes: asRecordArray(data.nodes).map((item) => normalizeRelationshipNode(item)),
+    edges: asRecordArray(data.edges).map((item) => normalizeRelationshipEdge(item)),
+    certified: Boolean(data.certified),
+    iec62443Certified: Boolean(data.iec62443Certified),
+    notes: String(data.notes ?? ''),
   }
 }
 
@@ -247,5 +488,10 @@ export async function getEvidenceSummary(): Promise<EvidenceSummary> {
 export async function verifyEvidenceRecord(evidenceId: string): Promise<EvidenceVerificationResult> {
   const { data } = await request.get(`/v1/ucde/evidence/${encodeURIComponent(evidenceId)}/verify`)
   return normalizeEvidenceVerification(unwrapData<unknown>(data))
+}
+
+export async function getEvidenceRelationships(evidenceId: string): Promise<EvidenceRelationshipGraph> {
+  const { data } = await request.get(`/v1/ucde/evidence/${encodeURIComponent(evidenceId)}/relationships`)
+  return normalizeRelationshipGraph(unwrapData<unknown>(data))
 }
 

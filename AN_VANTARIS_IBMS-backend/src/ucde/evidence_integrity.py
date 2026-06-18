@@ -38,6 +38,7 @@ def build_traceability_hash(evidence: Dict[str, Any]) -> str:
         "evidenceReferences": data.get("evidenceReferences", []),
         "auditReferences": data.get("auditReferences", []),
         "correlationReferences": data.get("correlationReferences", []),
+        "traceabilityPath": data.get("traceabilityPath", {}),
     }
     return sha256_hex(traceability_payload)
 

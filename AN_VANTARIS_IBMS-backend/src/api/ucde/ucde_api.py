@@ -30,6 +30,14 @@ def ucde_evidence_verify(evidence_id: str):
     return Result.success(data=result)
 
 
+@api_bp.route("/v1/ucde/evidence/<string:evidence_id>/relationships", methods=["GET"])
+def ucde_evidence_relationships(evidence_id: str):
+    result, error = _service.get_evidence_relationships(evidence_id)
+    if error:
+        return Result.error(code=error[0], message=error[1])
+    return Result.success(data=result)
+
+
 @api_bp.route("/v1/ucde/evidence/<string:evidence_id>", methods=["GET"])
 def ucde_evidence_detail(evidence_id: str):
     item = _service.get_evidence_detail(evidence_id)
