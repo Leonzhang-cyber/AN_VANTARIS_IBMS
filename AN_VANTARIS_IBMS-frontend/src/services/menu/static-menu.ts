@@ -100,5 +100,19 @@ export const fallbackMenuItems: AppMenuItem[] = [
       },
     ],
   },
+  {
+    id: 'umms',
+    label: 'UMMS',
+    path: '/umms/maintenance',
+    source: 'static',
+    children: [
+      {
+        id: 'umms-maintenance',
+        label: 'Maintenance',
+        path: '/umms/maintenance',
+        source: 'static',
+      },
+    ],
+  },
   { id: 'reports', label: 'Reports', path: '/reports', source: 'static' },
 ]

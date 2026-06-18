@@ -12,6 +12,7 @@ import ReportsView from '@/modules/reports/ReportsView.vue'
 import EvidenceCenter from '@/modules/ucde/EvidenceCenter.vue'
 import AssetsTopology from '@/modules/assets/AssetsTopology.vue'
 import UesgSustainability from '@/modules/uesg/UesgSustainability.vue'
+import UmmsMaintenance from '@/modules/umms/UmmsMaintenance.vue'
 import SystemOverviewView from '@/modules/system/SystemOverviewView.vue'
 import SystemSettingsView from '@/modules/system/SystemSettingsView.vue'
 
@@ -124,6 +125,12 @@ export const routes: RouteRecordRaw[] = [
     name: 'uesg-sustainability',
     component: UesgSustainability,
     meta: { requiresAuth: true, title: 'UESG Sustainability', layout: true },
+  },
+  {
+    path: '/umms/maintenance',
+    name: 'umms-maintenance',
+    component: UmmsMaintenance,
+    meta: { requiresAuth: true, title: 'UMMS Maintenance', layout: true },
   },
   {
     path: '/403',

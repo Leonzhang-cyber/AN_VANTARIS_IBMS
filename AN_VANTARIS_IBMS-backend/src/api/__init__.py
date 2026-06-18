@@ -13,4 +13,5 @@ from .console import console_api
 from .ucde import ucde_api
 from .assets import assets_api
 from .uesg import uesg_api
+from .umms import umms_api
 from .iot.sse_api import *
