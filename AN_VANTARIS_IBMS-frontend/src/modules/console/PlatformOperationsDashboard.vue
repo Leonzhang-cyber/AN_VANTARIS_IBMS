@@ -13,9 +13,21 @@ import {
   getConsoleReadinessScore,
   getConsoleReadinessSummary,
   getConsoleReportsReadiness,
+  getLockedPackages,
+  getModulePackageDetail,
+  getModulePackages,
+  getPackageCenterHealth,
+  getPackageEntries,
+  getPackageSummary,
+  getPatchReadiness,
   type ConsoleHealth,
+  type ModulePackageRecord,
   type ModuleReadinessRecord,
   type ModuleReadinessSummary,
+  type PackageCenterHealth,
+  type PackageEntryCenter,
+  type PackageSummary,
+  type PatchReadiness,
   type OperationsDashboardSummary,
   type PlatformModuleSummary,
   type PlatformNavigationItem,
@@ -33,6 +45,10 @@ const scoreFallbackAlert = ref('')
 const navigationFallbackAlert = ref('')
 const showHealthDrawer = ref(false)
 const selectedHealthDetail = ref<ModuleReadinessRecord | null>(null)
+const loadingPackageDetail = ref(false)
+const showPackageDrawer = ref(false)
+const selectedPackageDetail = ref<ModulePackageRecord | null>(null)
+const packageCenterError = ref('')
 
 const health = ref<ConsoleHealth>({
   status: 'unknown',
@@ -129,11 +145,88 @@ const navigationModel = ref<PlatformNavigationModel>({
   items: [],
 })
 
+const packageCenterHealth = ref<PackageCenterHealth>({
+  status: 'unknown',
+  moduleId: 'uconsole-package-center',
+  moduleName: 'UConsole Module Package Center',
+  runtimeMode: 'local-skeleton',
+  provider: 'local-package-registry',
+  readOnly: true,
+  controlActionsEnabled: false,
+  patchActionsEnabled: false,
+  licenseServerIntegrated: false,
+  entitlementRuntimeIntegrated: false,
+  hotPlugArchitectureReady: true,
+  roleEntryModelReady: true,
+  certified: false,
+  iec62443Certified: false,
+})
+
+const packageSummary = ref<PackageSummary>({
+  totalPackages: 0,
+  installedPackages: 0,
+  entitledPackages: 0,
+  enabledPackages: 0,
+  visiblePackages: 0,
+  lockedPackages: 0,
+  customerEntryCount: 0,
+  engineerEntryCount: 0,
+  adminEntryCount: 0,
+  patchReadyPackages: 0,
+  upgradeRequiredPackages: 0,
+  licenseServerIntegrated: false,
+  patchActionsEnabled: false,
+  controlActionsEnabled: false,
+  roleEntryModelReady: true,
+  hotPlugArchitectureReady: true,
+  limitations: [],
+  certified: false,
+  iec62443Certified: false,
+})
+
+const packageEntries = ref<PackageEntryCenter>({
+  customerApplications: [],
+  engineerWorkspace: [],
+  adminPackageCenter: [],
+  lockedPackages: [],
+  entryMode: 'local-skeleton-entry-center',
+  roleAware: true,
+  runtimeLinked: false,
+  certified: false,
+  iec62443Certified: false,
+})
+
+const patchReadiness = ref<PatchReadiness>({
+  patchMode: 'local-skeleton-patch-readiness',
+  patchActionsEnabled: false,
+  packages: [],
+  upgradeRequiredPackages: [],
+  patchReadyPackages: [],
+  licenseServerIntegrated: false,
+  limitations: [],
+  certified: false,
+  iec62443Certified: false,
+})
+
+const packages = ref<ModulePackageRecord[]>([])
+const lockedPackages = ref<ModulePackageRecord[]>([])
+
 const moduleFilters = reactive({
   runtimeStatus: '',
   lifecycleStage: '',
   auditReadiness: '',
   permissionMode: '',
+})
+
+const packageFilters = reactive({
+  moduleId: '',
+  packageCategory: '',
+  installed: '',
+  entitled: '',
+  enabled: '',
+  visible: '',
+  patchStatus: '',
+  role: '',
 })
 
 const fallbackModules: ModuleReadinessRecord[] = [
@@ -220,6 +313,35 @@ const fallbackModules: ModuleReadinessRecord[] = [
 ]
 
 const hasModules = computed(() => filteredModules.value.length > 0)
+const filteredPackages = computed(() => {
+  return packages.value.filter((row) => {
+    if (packageFilters.moduleId && row.moduleId !== packageFilters.moduleId) {
+      return false
+    }
+    if (packageFilters.packageCategory && row.packageCategory !== packageFilters.packageCategory) {
+      return false
+    }
+    if (packageFilters.installed && String(row.installed) !== packageFilters.installed) {
+      return false
+    }
+    if (packageFilters.entitled && String(row.entitled) !== packageFilters.entitled) {
+      return false
+    }
+    if (packageFilters.enabled && String(row.enabled) !== packageFilters.enabled) {
+      return false
+    }
+    if (packageFilters.visible && String(row.visible) !== packageFilters.visible) {
+      return false
+    }
+    if (packageFilters.patchStatus && row.patchStatus !== packageFilters.patchStatus) {
+      return false
+    }
+    if (packageFilters.role && !row.roleVisibility[packageFilters.role as keyof typeof row.roleVisibility]) {
+      return false
+    }
+    return true
+  })
+})
 
 const filteredModules = computed(() => {
   return modules.value.filter((row) => {
@@ -455,6 +577,7 @@ async function loadDashboard(): Promise<void> {
   apiError.value = ''
   scoreFallbackAlert.value = ''
   navigationFallbackAlert.value = ''
+  packageCenterError.value = ''
   try {
     const [healthResult, readinessResult] = await Promise.all([getConsoleHealth(), getConsoleReportsReadiness()])
     health.value = healthResult
@@ -490,12 +613,56 @@ async function loadDashboard(): Promise<void> {
     }
 
     legacySummary.value = await getConsoleOperationsSummary()
+
+    try {
+      const [packageHealth, packageList, packageSummaryResult, entryCenter, patchResult, lockedResult] = await Promise.all([
+        getPackageCenterHealth(),
+        getModulePackages(),
+        getPackageSummary(),
+        getPackageEntries(),
+        getPatchReadiness(),
+        getLockedPackages(),
+      ])
+      packageCenterHealth.value = packageHealth
+      packages.value = packageList.items
+      packageSummary.value = packageSummaryResult
+      packageEntries.value = entryCenter
+      patchReadiness.value = patchResult
+      lockedPackages.value = lockedResult
+    } catch (packageError) {
+      packageCenterError.value = normalizeError(packageError, 'Package Center API unavailable. Using local fallback package state.')
+      packages.value = []
+      packageEntries.value = {
+        customerApplications: [],
+        engineerWorkspace: [],
+        adminPackageCenter: [],
+        lockedPackages: [],
+        entryMode: 'local-skeleton-entry-center',
+        roleAware: true,
+        runtimeLinked: false,
+        certified: false,
+        iec62443Certified: false,
+      }
+      patchReadiness.value = {
+        patchMode: 'local-skeleton-patch-readiness',
+        patchActionsEnabled: false,
+        packages: [],
+        upgradeRequiredPackages: [],
+        patchReadyPackages: [],
+        licenseServerIntegrated: false,
+        limitations: ['Package Center fallback active.'],
+        certified: false,
+        iec62443Certified: false,
+      }
+      lockedPackages.value = []
+    }
   } catch (error) {
     apiError.value = normalizeError(error, 'UConsole API unavailable. Showing local fallback summary.')
     modules.value = [...fallbackModules]
     registrySummary.value = calculateFallbackSummary(modules.value)
     readinessScore.value = computeLocalScore(modules.value)
     navigationModel.value = fallbackNavigationFromRegistry(modules.value)
+    packageCenterError.value = 'Package Center API unavailable. Using local fallback package state.'
   } finally {
     loading.value = false
   }
@@ -543,6 +710,38 @@ function launchModule(item: PlatformNavigationItem): void {
     return
   }
   void router.push(item.route)
+}
+
+async function openPackageDetail(packageIdOrModuleId: string): Promise<void> {
+  showPackageDrawer.value = true
+  loadingPackageDetail.value = true
+  selectedPackageDetail.value = packages.value.find((item) => item.packageId === packageIdOrModuleId || item.moduleId === packageIdOrModuleId) || null
+  try {
+    const detail = await getModulePackageDetail(packageIdOrModuleId)
+    selectedPackageDetail.value = detail.item
+  } catch {
+    // keep fallback detail from list.
+  } finally {
+    loadingPackageDetail.value = false
+  }
+}
+
+function openPackageEntry(route: string, enabled: boolean, visible: boolean): void {
+  if (!enabled || !visible || !route) {
+    return
+  }
+  void router.push(route)
+}
+
+function resetPackageFilters(): void {
+  packageFilters.moduleId = ''
+  packageFilters.packageCategory = ''
+  packageFilters.installed = ''
+  packageFilters.entitled = ''
+  packageFilters.enabled = ''
+  packageFilters.visible = ''
+  packageFilters.patchStatus = ''
+  packageFilters.role = ''
 }
 
 onMounted(() => {
@@ -720,6 +919,188 @@ onMounted(() => {
           </template>
         </el-table-column>
       </el-table>
+    </el-card>
+
+    <el-alert
+      type="info"
+      show-icon
+      :closable="false"
+      title="Module Package Center uses local skeleton package states. License server, patch installer and runtime enable/disable actions are not integrated."
+      class="block-space"
+    />
+
+    <el-alert
+      v-if="packageCenterError"
+      type="warning"
+      show-icon
+      :closable="false"
+      :title="packageCenterError"
+      class="block-space"
+    />
+
+    <el-card shadow="never" class="block-space">
+      <template #header>
+        <div class="section-title">Module Package & Entry Center</div>
+      </template>
+      <el-descriptions :column="4" border>
+        <el-descriptions-item label="totalPackages">{{ packageSummary.totalPackages }}</el-descriptions-item>
+        <el-descriptions-item label="installedPackages">{{ packageSummary.installedPackages }}</el-descriptions-item>
+        <el-descriptions-item label="entitledPackages">{{ packageSummary.entitledPackages }}</el-descriptions-item>
+        <el-descriptions-item label="enabledPackages">{{ packageSummary.enabledPackages }}</el-descriptions-item>
+        <el-descriptions-item label="visiblePackages">{{ packageSummary.visiblePackages }}</el-descriptions-item>
+        <el-descriptions-item label="lockedPackages">{{ packageSummary.lockedPackages }}</el-descriptions-item>
+        <el-descriptions-item label="customerEntryCount">{{ packageSummary.customerEntryCount }}</el-descriptions-item>
+        <el-descriptions-item label="engineerEntryCount">{{ packageSummary.engineerEntryCount }}</el-descriptions-item>
+        <el-descriptions-item label="adminEntryCount">{{ packageSummary.adminEntryCount }}</el-descriptions-item>
+        <el-descriptions-item label="patchReadyPackages">{{ packageSummary.patchReadyPackages }}</el-descriptions-item>
+        <el-descriptions-item label="upgradeRequiredPackages">{{ packageSummary.upgradeRequiredPackages }}</el-descriptions-item>
+        <el-descriptions-item label="patchActionsEnabled">{{ packageCenterHealth.patchActionsEnabled }}</el-descriptions-item>
+      </el-descriptions>
+    </el-card>
+
+    <el-card shadow="never" class="block-space">
+      <template #header>
+        <div class="section-title">Package State Table</div>
+      </template>
+      <div class="filter-row block-space">
+        <el-input v-model="packageFilters.moduleId" placeholder="moduleId" clearable class="filter-field" />
+        <el-input v-model="packageFilters.packageCategory" placeholder="packageCategory" clearable class="filter-field" />
+        <el-select v-model="packageFilters.installed" placeholder="installed" clearable class="filter-field">
+          <el-option label="true" value="true" />
+          <el-option label="false" value="false" />
+        </el-select>
+        <el-select v-model="packageFilters.entitled" placeholder="entitled" clearable class="filter-field">
+          <el-option label="true" value="true" />
+          <el-option label="false" value="false" />
+        </el-select>
+        <el-select v-model="packageFilters.enabled" placeholder="enabled" clearable class="filter-field">
+          <el-option label="true" value="true" />
+          <el-option label="false" value="false" />
+        </el-select>
+        <el-select v-model="packageFilters.visible" placeholder="visible" clearable class="filter-field">
+          <el-option label="true" value="true" />
+          <el-option label="false" value="false" />
+        </el-select>
+        <el-input v-model="packageFilters.patchStatus" placeholder="patchStatus" clearable class="filter-field" />
+        <el-select v-model="packageFilters.role" placeholder="role" clearable class="filter-field">
+          <el-option label="customer" value="customer" />
+          <el-option label="engineer" value="engineer" />
+          <el-option label="admin" value="admin" />
+        </el-select>
+        <el-button @click="resetPackageFilters">Reset</el-button>
+      </div>
+      <el-table :data="filteredPackages" row-key="packageId" empty-text="No package state data">
+        <el-table-column prop="packageCode" label="packageCode" min-width="150" />
+        <el-table-column prop="packageName" label="packageName" min-width="180" />
+        <el-table-column prop="moduleId" label="moduleId" min-width="130" />
+        <el-table-column prop="installed" label="installed" min-width="100" />
+        <el-table-column prop="entitled" label="entitled" min-width="100" />
+        <el-table-column prop="enabled" label="enabled" min-width="100" />
+        <el-table-column prop="visible" label="visible" min-width="100" />
+        <el-table-column prop="installedVersion" label="installedVersion" min-width="140" />
+        <el-table-column prop="availableVersion" label="availableVersion" min-width="140" />
+        <el-table-column prop="patchStatus" label="patchStatus" min-width="140" />
+        <el-table-column prop="lockedReason" label="lockedReason" min-width="220" />
+        <el-table-column label="actions" min-width="320" fixed="right">
+          <template #default="{ row }">
+            <el-space wrap>
+              <el-button link type="primary" @click="openPackageDetail(row.packageId)">View Package Detail</el-button>
+              <el-button
+                link
+                type="primary"
+                :disabled="!(row.customerEntry.visible && row.customerEntry.enabled)"
+                @click="openPackageEntry(row.customerEntry.route, row.customerEntry.enabled, row.customerEntry.visible)"
+              >
+                Open Customer Entry
+              </el-button>
+              <el-button
+                link
+                type="primary"
+                :disabled="!(row.engineerEntry.visible && row.engineerEntry.enabled)"
+                @click="openPackageEntry(row.engineerEntry.route, row.engineerEntry.enabled, row.engineerEntry.visible)"
+              >
+                Open Engineer Entry
+              </el-button>
+            </el-space>
+          </template>
+        </el-table-column>
+      </el-table>
+    </el-card>
+
+    <el-card shadow="never" class="block-space">
+      <template #header><div class="section-title">Customer Applications</div></template>
+      <el-table :data="packageEntries.customerApplications" row-key="packageId" empty-text="No customer applications">
+        <el-table-column prop="moduleName" label="label" min-width="200" />
+        <el-table-column label="route" min-width="180">
+          <template #default="{ row }">{{ row.entry.route || '-' }}</template>
+        </el-table-column>
+        <el-table-column label="enabled/visible" min-width="140">
+          <template #default="{ row }">{{ row.entry.enabled }} / {{ row.entry.visible }}</template>
+        </el-table-column>
+        <el-table-column prop="lockedReason" label="lockedReason" min-width="240" />
+      </el-table>
+    </el-card>
+
+    <el-card shadow="never" class="block-space">
+      <template #header><div class="section-title">Engineer Workspace</div></template>
+      <el-alert
+        type="info"
+        show-icon
+        :closable="false"
+        title="Engineer workspace entries are placeholder-only and do not connect to EDGE/LINK runtime in this stage."
+        class="block-space"
+      />
+      <el-table :data="packageEntries.engineerWorkspace" row-key="packageId" empty-text="No engineer entries">
+        <el-table-column prop="moduleName" label="label" min-width="220" />
+        <el-table-column label="route" min-width="180">
+          <template #default="{ row }">{{ row.entry.route || '-' }}</template>
+        </el-table-column>
+        <el-table-column label="enabled/visible" min-width="140">
+          <template #default="{ row }">{{ row.entry.enabled }} / {{ row.entry.visible }}</template>
+        </el-table-column>
+        <el-table-column label="lockedReason" min-width="240">
+          <template #default="{ row }">{{ row.entry.lockedReason || '-' }}</template>
+        </el-table-column>
+      </el-table>
+    </el-card>
+
+    <el-card shadow="never" class="block-space">
+      <template #header><div class="section-title">Admin Package Center</div></template>
+      <el-table :data="packageEntries.adminPackageCenter" row-key="packageId" empty-text="No admin entries">
+        <el-table-column prop="moduleName" label="moduleName" min-width="220" />
+        <el-table-column label="entryLabel" min-width="170">
+          <template #default="{ row }">{{ row.entry.label }}</template>
+        </el-table-column>
+        <el-table-column prop="patchStatus" label="patchStatus" min-width="140" />
+        <el-table-column prop="upgradeRequired" label="upgradeRequired" min-width="130" />
+        <el-table-column label="entitled/enabled/visible" min-width="170">
+          <template #default="{ row }">{{ row.entitled }} / {{ row.enabled }} / {{ row.visible }}</template>
+        </el-table-column>
+      </el-table>
+    </el-card>
+
+    <el-card shadow="never" class="block-space">
+      <template #header><div class="section-title">Locked Packages</div></template>
+      <el-table :data="lockedPackages" row-key="packageId" empty-text="No locked packages">
+        <el-table-column prop="packageCode" label="packageCode" min-width="150" />
+        <el-table-column prop="moduleName" label="moduleName" min-width="220" />
+        <el-table-column prop="lockedReason" label="lockedReason" min-width="260" />
+        <el-table-column prop="patchStatus" label="patchStatus" min-width="130" />
+      </el-table>
+    </el-card>
+
+    <el-card shadow="never" class="block-space">
+      <template #header><div class="section-title">Patch Readiness</div></template>
+      <el-descriptions :column="3" border class="block-space">
+        <el-descriptions-item label="patchMode">{{ patchReadiness.patchMode }}</el-descriptions-item>
+        <el-descriptions-item label="patchActionsEnabled">{{ patchReadiness.patchActionsEnabled }}</el-descriptions-item>
+        <el-descriptions-item label="licenseServerIntegrated">{{ patchReadiness.licenseServerIntegrated }}</el-descriptions-item>
+      </el-descriptions>
+      <el-descriptions :column="1" border class="block-space">
+        <el-descriptions-item label="upgradeRequiredPackages">{{ patchReadiness.upgradeRequiredPackages.join(', ') || '-' }}</el-descriptions-item>
+        <el-descriptions-item label="patchReadyPackages">{{ patchReadiness.patchReadyPackages.join(', ') || '-' }}</el-descriptions-item>
+      </el-descriptions>
+      <el-text>{{ patchReadiness.limitations.join(' | ') }}</el-text>
     </el-card>
 
     <el-card shadow="never" class="block-space">
@@ -982,6 +1363,30 @@ onMounted(() => {
             </ul>
           </template>
         </el-card>
+      </template>
+    </el-drawer>
+
+    <el-drawer v-model="showPackageDrawer" title="Package Detail" size="52%">
+      <el-skeleton v-if="loadingPackageDetail" :rows="8" animated />
+      <el-empty v-else-if="!selectedPackageDetail" description="No package selected." />
+      <template v-else>
+        <el-descriptions :column="1" border>
+          <el-descriptions-item label="packageOverview">
+            {{ selectedPackageDetail.packageCode }} | {{ selectedPackageDetail.packageName }} | {{ selectedPackageDetail.moduleId }}
+          </el-descriptions-item>
+          <el-descriptions-item label="stateFlags">
+            installed={{ selectedPackageDetail.installed }}, entitled={{ selectedPackageDetail.entitled }}, enabled={{ selectedPackageDetail.enabled }}, visible={{ selectedPackageDetail.visible }}
+          </el-descriptions-item>
+          <el-descriptions-item label="customerEntry">{{ selectedPackageDetail.customerEntry }}</el-descriptions-item>
+          <el-descriptions-item label="engineerEntry">{{ selectedPackageDetail.engineerEntry }}</el-descriptions-item>
+          <el-descriptions-item label="adminEntry">{{ selectedPackageDetail.adminEntry }}</el-descriptions-item>
+          <el-descriptions-item label="roleVisibility">{{ selectedPackageDetail.roleVisibility }}</el-descriptions-item>
+          <el-descriptions-item label="patch/version">
+            {{ selectedPackageDetail.patchStatus }} | {{ selectedPackageDetail.installedVersion }} -> {{ selectedPackageDetail.availableVersion }}
+          </el-descriptions-item>
+          <el-descriptions-item label="limitations">{{ selectedPackageDetail.limitations.join(' | ') }}</el-descriptions-item>
+          <el-descriptions-item label="nextActions">{{ selectedPackageDetail.nextActions.join(' | ') }}</el-descriptions-item>
+        </el-descriptions>
       </template>
     </el-drawer>
   </div>

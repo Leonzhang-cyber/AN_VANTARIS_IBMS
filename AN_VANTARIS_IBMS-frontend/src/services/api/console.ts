@@ -488,3 +488,410 @@ export async function getConsoleNavigationModules(): Promise<PlatformNavigationM
   }
 }
 
+export interface ModulePackageEntry {
+  enabled: boolean
+  visible: boolean
+  route: string
+  label: string
+  entryMode: string
+  lockedReason: string | null
+}
+
+export interface ModuleRoleVisibility {
+  customer: boolean
+  engineer: boolean
+  admin: boolean
+}
+
+export interface ModulePackageRecord {
+  packageId: string
+  packageCode: string
+  packageName: string
+  moduleId: string
+  moduleName: string
+  moduleType: string
+  packageCategory: string
+  installed: boolean
+  entitled: boolean
+  enabled: boolean
+  visible: boolean
+  installedVersion: string
+  availableVersion: string
+  patchStatus: string
+  patchMode: string
+  upgradeRequired: boolean
+  activationMode: string
+  lockedReason: string | null
+  customerEntry: ModulePackageEntry
+  engineerEntry: ModulePackageEntry
+  adminEntry: ModulePackageEntry
+  roleVisibility: ModuleRoleVisibility
+  entryStatus: string
+  runtimeMode: string
+  provider: string
+  readOnly: boolean
+  controlActionsEnabled: boolean
+  patchActionsEnabled: boolean
+  licenseServerIntegrated: boolean
+  entitlementRuntimeIntegrated: boolean
+  hotPlugArchitectureReady: boolean
+  roleEntryModelReady: boolean
+  certified: boolean
+  iec62443Certified: boolean
+  limitations: string[]
+  nextActions: string[]
+}
+
+export interface PackageCenterHealth {
+  status: string
+  moduleId: string
+  moduleName: string
+  runtimeMode: string
+  provider: string
+  readOnly: boolean
+  controlActionsEnabled: boolean
+  patchActionsEnabled: boolean
+  licenseServerIntegrated: boolean
+  entitlementRuntimeIntegrated: boolean
+  hotPlugArchitectureReady: boolean
+  roleEntryModelReady: boolean
+  certified: boolean
+  iec62443Certified: boolean
+}
+
+export interface PackageSummary {
+  totalPackages: number
+  installedPackages: number
+  entitledPackages: number
+  enabledPackages: number
+  visiblePackages: number
+  lockedPackages: number
+  customerEntryCount: number
+  engineerEntryCount: number
+  adminEntryCount: number
+  patchReadyPackages: number
+  upgradeRequiredPackages: number
+  licenseServerIntegrated: boolean
+  patchActionsEnabled: boolean
+  controlActionsEnabled: boolean
+  roleEntryModelReady: boolean
+  hotPlugArchitectureReady: boolean
+  limitations: string[]
+  certified: boolean
+  iec62443Certified: boolean
+}
+
+export interface PackageEntryCenter {
+  customerApplications: Array<{
+    packageId: string
+    moduleId: string
+    moduleName: string
+    entry: ModulePackageEntry
+    entitled: boolean
+    enabled: boolean
+    visible: boolean
+    lockedReason: string | null
+  }>
+  engineerWorkspace: Array<{
+    packageId: string
+    moduleId: string
+    moduleName: string
+    entry: ModulePackageEntry
+  }>
+  adminPackageCenter: Array<{
+    packageId: string
+    moduleId: string
+    moduleName: string
+    entry: ModulePackageEntry
+    entitled: boolean
+    enabled: boolean
+    visible: boolean
+    patchStatus: string
+    upgradeRequired: boolean
+  }>
+  lockedPackages: ModulePackageRecord[]
+  entryMode: string
+  roleAware: boolean
+  runtimeLinked: boolean
+  certified: boolean
+  iec62443Certified: boolean
+}
+
+export interface PatchReadiness {
+  patchMode: string
+  patchActionsEnabled: boolean
+  packages: Array<{
+    packageId: string
+    packageCode: string
+    patchStatus: string
+    upgradeRequired: boolean
+    installedVersion: string
+    availableVersion: string
+  }>
+  upgradeRequiredPackages: string[]
+  patchReadyPackages: string[]
+  licenseServerIntegrated: boolean
+  limitations: string[]
+  certified: boolean
+  iec62443Certified: boolean
+}
+
+export interface PackageListResponse {
+  items: ModulePackageRecord[]
+  summary: PackageSummary
+  filters: Record<string, unknown>
+  runtimeMode: string
+  provider: string
+  readOnly: boolean
+  controlActionsEnabled: boolean
+  patchActionsEnabled: boolean
+  certified: boolean
+  iec62443Certified: boolean
+}
+
+export interface GetModulePackagesParams {
+  moduleId?: string
+  packageCategory?: string
+  installed?: boolean
+  entitled?: boolean
+  enabled?: boolean
+  visible?: boolean
+  patchStatus?: string
+  role?: string
+}
+
+function normalizePackageEntry(raw: unknown): ModulePackageEntry {
+  const data = asRecord(raw)
+  return {
+    enabled: Boolean(data.enabled),
+    visible: Boolean(data.visible),
+    route: String(data.route ?? ''),
+    label: String(data.label ?? ''),
+    entryMode: String(data.entryMode ?? ''),
+    lockedReason: data.lockedReason === null || data.lockedReason === undefined ? null : String(data.lockedReason),
+  }
+}
+
+function normalizeRoleVisibility(raw: unknown): ModuleRoleVisibility {
+  const data = asRecord(raw)
+  return {
+    customer: Boolean(data.customer),
+    engineer: Boolean(data.engineer),
+    admin: Boolean(data.admin),
+  }
+}
+
+function normalizePackage(raw: unknown): ModulePackageRecord {
+  const data = asRecord(raw)
+  return {
+    packageId: String(data.packageId ?? ''),
+    packageCode: String(data.packageCode ?? ''),
+    packageName: String(data.packageName ?? ''),
+    moduleId: String(data.moduleId ?? ''),
+    moduleName: String(data.moduleName ?? ''),
+    moduleType: String(data.moduleType ?? ''),
+    packageCategory: String(data.packageCategory ?? ''),
+    installed: Boolean(data.installed),
+    entitled: Boolean(data.entitled),
+    enabled: Boolean(data.enabled),
+    visible: Boolean(data.visible),
+    installedVersion: String(data.installedVersion ?? ''),
+    availableVersion: String(data.availableVersion ?? ''),
+    patchStatus: String(data.patchStatus ?? ''),
+    patchMode: String(data.patchMode ?? ''),
+    upgradeRequired: Boolean(data.upgradeRequired),
+    activationMode: String(data.activationMode ?? ''),
+    lockedReason: data.lockedReason === null || data.lockedReason === undefined ? null : String(data.lockedReason),
+    customerEntry: normalizePackageEntry(data.customerEntry),
+    engineerEntry: normalizePackageEntry(data.engineerEntry),
+    adminEntry: normalizePackageEntry(data.adminEntry),
+    roleVisibility: normalizeRoleVisibility(data.roleVisibility),
+    entryStatus: String(data.entryStatus ?? ''),
+    runtimeMode: String(data.runtimeMode ?? 'local-skeleton'),
+    provider: String(data.provider ?? 'local-package-registry'),
+    readOnly: data.readOnly !== undefined ? Boolean(data.readOnly) : true,
+    controlActionsEnabled: Boolean(data.controlActionsEnabled),
+    patchActionsEnabled: Boolean(data.patchActionsEnabled),
+    licenseServerIntegrated: Boolean(data.licenseServerIntegrated),
+    entitlementRuntimeIntegrated: Boolean(data.entitlementRuntimeIntegrated),
+    hotPlugArchitectureReady: Boolean(data.hotPlugArchitectureReady),
+    roleEntryModelReady: Boolean(data.roleEntryModelReady),
+    certified: Boolean(data.certified),
+    iec62443Certified: Boolean(data.iec62443Certified),
+    limitations: asStringArray(data.limitations),
+    nextActions: asStringArray(data.nextActions),
+  }
+}
+
+function normalizePackageSummary(raw: unknown): PackageSummary {
+  const data = asRecord(raw)
+  return {
+    totalPackages: Number(data.totalPackages ?? 0),
+    installedPackages: Number(data.installedPackages ?? 0),
+    entitledPackages: Number(data.entitledPackages ?? 0),
+    enabledPackages: Number(data.enabledPackages ?? 0),
+    visiblePackages: Number(data.visiblePackages ?? 0),
+    lockedPackages: Number(data.lockedPackages ?? 0),
+    customerEntryCount: Number(data.customerEntryCount ?? 0),
+    engineerEntryCount: Number(data.engineerEntryCount ?? 0),
+    adminEntryCount: Number(data.adminEntryCount ?? 0),
+    patchReadyPackages: Number(data.patchReadyPackages ?? 0),
+    upgradeRequiredPackages: Number(data.upgradeRequiredPackages ?? 0),
+    licenseServerIntegrated: Boolean(data.licenseServerIntegrated),
+    patchActionsEnabled: Boolean(data.patchActionsEnabled),
+    controlActionsEnabled: Boolean(data.controlActionsEnabled),
+    roleEntryModelReady: Boolean(data.roleEntryModelReady),
+    hotPlugArchitectureReady: Boolean(data.hotPlugArchitectureReady),
+    limitations: asStringArray(data.limitations),
+    certified: Boolean(data.certified),
+    iec62443Certified: Boolean(data.iec62443Certified),
+  }
+}
+
+function normalizePackageHealth(raw: unknown): PackageCenterHealth {
+  const data = asRecord(raw)
+  return {
+    status: String(data.status ?? 'unknown'),
+    moduleId: String(data.moduleId ?? 'uconsole-package-center'),
+    moduleName: String(data.moduleName ?? 'UConsole Module Package Center'),
+    runtimeMode: String(data.runtimeMode ?? 'local-skeleton'),
+    provider: String(data.provider ?? 'local-package-registry'),
+    readOnly: data.readOnly !== undefined ? Boolean(data.readOnly) : true,
+    controlActionsEnabled: Boolean(data.controlActionsEnabled),
+    patchActionsEnabled: Boolean(data.patchActionsEnabled),
+    licenseServerIntegrated: Boolean(data.licenseServerIntegrated),
+    entitlementRuntimeIntegrated: Boolean(data.entitlementRuntimeIntegrated),
+    hotPlugArchitectureReady: Boolean(data.hotPlugArchitectureReady),
+    roleEntryModelReady: Boolean(data.roleEntryModelReady),
+    certified: Boolean(data.certified),
+    iec62443Certified: Boolean(data.iec62443Certified),
+  }
+}
+
+function normalizePatchReadiness(raw: unknown): PatchReadiness {
+  const data = asRecord(raw)
+  return {
+    patchMode: String(data.patchMode ?? 'local-skeleton-patch-readiness'),
+    patchActionsEnabled: Boolean(data.patchActionsEnabled),
+    packages: Array.isArray(data.packages)
+      ? data.packages.map((item) => {
+          const row = asRecord(item)
+          return {
+            packageId: String(row.packageId ?? ''),
+            packageCode: String(row.packageCode ?? ''),
+            patchStatus: String(row.patchStatus ?? ''),
+            upgradeRequired: Boolean(row.upgradeRequired),
+            installedVersion: String(row.installedVersion ?? ''),
+            availableVersion: String(row.availableVersion ?? ''),
+          }
+        })
+      : [],
+    upgradeRequiredPackages: asStringArray(data.upgradeRequiredPackages),
+    patchReadyPackages: asStringArray(data.patchReadyPackages),
+    licenseServerIntegrated: Boolean(data.licenseServerIntegrated),
+    limitations: asStringArray(data.limitations),
+    certified: Boolean(data.certified),
+    iec62443Certified: Boolean(data.iec62443Certified),
+  }
+}
+
+function normalizeEntryCenter(raw: unknown): PackageEntryCenter {
+  const data = asRecord(raw)
+  const normalizeGenericEntry = (item: unknown) => {
+    const row = asRecord(item)
+    return {
+      packageId: String(row.packageId ?? ''),
+      moduleId: String(row.moduleId ?? ''),
+      moduleName: String(row.moduleName ?? ''),
+      entry: normalizePackageEntry(row.entry),
+    }
+  }
+  return {
+    customerApplications: Array.isArray(data.customerApplications)
+      ? data.customerApplications.map((item) => {
+          const row = asRecord(item)
+          const base = normalizeGenericEntry(row)
+          return {
+            ...base,
+            entitled: Boolean(row.entitled),
+            enabled: Boolean(row.enabled),
+            visible: Boolean(row.visible),
+            lockedReason: row.lockedReason === null || row.lockedReason === undefined ? null : String(row.lockedReason),
+          }
+        })
+      : [],
+    engineerWorkspace: Array.isArray(data.engineerWorkspace) ? data.engineerWorkspace.map((item) => normalizeGenericEntry(item)) : [],
+    adminPackageCenter: Array.isArray(data.adminPackageCenter)
+      ? data.adminPackageCenter.map((item) => {
+          const row = asRecord(item)
+          const base = normalizeGenericEntry(row)
+          return {
+            ...base,
+            entitled: Boolean(row.entitled),
+            enabled: Boolean(row.enabled),
+            visible: Boolean(row.visible),
+            patchStatus: String(row.patchStatus ?? ''),
+            upgradeRequired: Boolean(row.upgradeRequired),
+          }
+        })
+      : [],
+    lockedPackages: Array.isArray(data.lockedPackages) ? data.lockedPackages.map((item) => normalizePackage(item)) : [],
+    entryMode: String(data.entryMode ?? 'local-skeleton-entry-center'),
+    roleAware: Boolean(data.roleAware),
+    runtimeLinked: Boolean(data.runtimeLinked),
+    certified: Boolean(data.certified),
+    iec62443Certified: Boolean(data.iec62443Certified),
+  }
+}
+
+export async function getPackageCenterHealth(): Promise<PackageCenterHealth> {
+  const { data } = await request.get('/v1/console/packages/health')
+  return normalizePackageHealth(unwrapData<unknown>(data))
+}
+
+export async function getModulePackages(params: GetModulePackagesParams = {}): Promise<PackageListResponse> {
+  const { data } = await request.get('/v1/console/packages', { params })
+  const body = asRecord(unwrapData<unknown>(data))
+  return {
+    items: Array.isArray(body.items) ? body.items.map((item) => normalizePackage(item)) : [],
+    summary: normalizePackageSummary(body.summary),
+    filters: asRecord(body.filters),
+    runtimeMode: String(body.runtimeMode ?? 'local-skeleton'),
+    provider: String(body.provider ?? 'local-package-registry'),
+    readOnly: body.readOnly !== undefined ? Boolean(body.readOnly) : true,
+    controlActionsEnabled: Boolean(body.controlActionsEnabled),
+    patchActionsEnabled: Boolean(body.patchActionsEnabled),
+    certified: Boolean(body.certified),
+    iec62443Certified: Boolean(body.iec62443Certified),
+  }
+}
+
+export async function getModulePackageDetail(packageIdOrModuleId: string): Promise<{ item: ModulePackageRecord | null; found: boolean }> {
+  const { data } = await request.get(`/v1/console/packages/${encodeURIComponent(packageIdOrModuleId)}`)
+  const body = asRecord(unwrapData<unknown>(data))
+  const found = Boolean(body.found)
+  const item = body.item ? normalizePackage(body.item) : null
+  return { item, found }
+}
+
+export async function getPackageSummary(): Promise<PackageSummary> {
+  const { data } = await request.get('/v1/console/packages/summary')
+  return normalizePackageSummary(unwrapData<unknown>(data))
+}
+
+export async function getPackageEntries(): Promise<PackageEntryCenter> {
+  const { data } = await request.get('/v1/console/packages/entries')
+  return normalizeEntryCenter(unwrapData<unknown>(data))
+}
+
+export async function getLockedPackages(): Promise<ModulePackageRecord[]> {
+  const { data } = await request.get('/v1/console/packages/locked')
+  const body = asRecord(unwrapData<unknown>(data))
+  return Array.isArray(body.items) ? body.items.map((item) => normalizePackage(item)) : []
+}
+
+export async function getPatchReadiness(): Promise<PatchReadiness> {
+  const { data } = await request.get('/v1/console/packages/patch-readiness')
+  return normalizePatchReadiness(unwrapData<unknown>(data))
+}
+

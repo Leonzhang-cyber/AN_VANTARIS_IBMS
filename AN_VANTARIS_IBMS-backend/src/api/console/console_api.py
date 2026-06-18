@@ -2,12 +2,16 @@
 
 from __future__ import annotations
 
+from flask import request
+
 from src.api import api_bp
 from src.common.models.response import Result
 from src.console.console_service import ConsoleService
+from src.console.module_package_service import ModulePackageService
 
 
 _service = ConsoleService()
+_package_service = ModulePackageService()
 
 
 @api_bp.route("/v1/console/health", methods=["GET"])
@@ -61,4 +65,50 @@ def console_readiness_score():
 @api_bp.route("/v1/console/navigation/modules", methods=["GET"])
 def console_navigation_modules():
     return Result.success(data=_service.get_platform_navigation_model())
+
+
+@api_bp.route("/v1/console/packages/health", methods=["GET"])
+def console_package_health():
+    return Result.success(data=_package_service.get_package_center_health())
+
+
+@api_bp.route("/v1/console/packages", methods=["GET"])
+def console_packages():
+    filters = {
+        "moduleId": request.args.get("moduleId"),
+        "packageCategory": request.args.get("packageCategory"),
+        "installed": request.args.get("installed"),
+        "entitled": request.args.get("entitled"),
+        "enabled": request.args.get("enabled"),
+        "visible": request.args.get("visible"),
+        "patchStatus": request.args.get("patchStatus"),
+        "role": request.args.get("role"),
+    }
+    return Result.success(data=_package_service.list_packages(filters))
+
+
+@api_bp.route("/v1/console/packages/summary", methods=["GET"])
+def console_packages_summary():
+    return Result.success(data=_package_service.get_package_summary())
+
+
+@api_bp.route("/v1/console/packages/entries", methods=["GET"])
+def console_packages_entries():
+    return Result.success(data=_package_service.get_entry_center())
+
+
+@api_bp.route("/v1/console/packages/locked", methods=["GET"])
+def console_packages_locked():
+    return Result.success(data=_package_service.get_locked_packages())
+
+
+@api_bp.route("/v1/console/packages/patch-readiness", methods=["GET"])
+def console_packages_patch_readiness():
+    return Result.success(data=_package_service.get_patch_readiness())
+
+
+@api_bp.route("/v1/console/packages/<string:package_id_or_module_id>", methods=["GET"])
+def console_package_detail(package_id_or_module_id: str):
+    data = _package_service.get_package_detail(package_id_or_module_id)
+    return Result.success(data={"item": data, "found": bool(data)})
 
