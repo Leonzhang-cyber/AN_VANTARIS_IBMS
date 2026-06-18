@@ -44,5 +44,19 @@ export const fallbackMenuItems: AppMenuItem[] = [
   { id: 'iot', label: 'IoT', path: '/iot', source: 'static' },
   { id: 'did', label: 'DID', path: '/did', source: 'static' },
   { id: 'modeling', label: 'Modeling', path: '/modeling', source: 'static' },
+  {
+    id: 'uconsole',
+    label: 'UConsole',
+    path: '/console/operations',
+    source: 'static',
+    children: [
+      {
+        id: 'uconsole-platform-operations',
+        label: 'Platform Operations',
+        path: '/console/operations',
+        source: 'static',
+      },
+    ],
+  },
   { id: 'reports', label: 'Reports', path: '/reports', source: 'static' },
 ]

@@ -9,4 +9,5 @@ from .iot import iot_api
 from .system import system_api, menu_api
 from .data_modeling import modeling_api
 from .reports import reports_api
+from .console import console_api
 from .iot.sse_api import *
