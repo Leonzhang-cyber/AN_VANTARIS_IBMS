@@ -35,6 +35,22 @@ def asset_relationships(asset_id: str):
     return Result.success(data=data)
 
 
+@api_bp.route("/v1/assets/<string:asset_id>/lineage", methods=["GET"])
+def asset_lineage(asset_id: str):
+    data, error = _service.get_asset_topology_lineage(asset_id)
+    if error:
+        return Result.error(code=error[0], message=error[1])
+    return Result.success(data=data)
+
+
+@api_bp.route("/v1/assets/<string:asset_id>/impact", methods=["GET"])
+def asset_impact(asset_id: str):
+    data, error = _service.get_asset_impact(asset_id)
+    if error:
+        return Result.error(code=error[0], message=error[1])
+    return Result.success(data=data)
+
+
 @api_bp.route("/v1/assets/<string:asset_id>", methods=["GET"])
 def asset_detail(asset_id: str):
     data = _service.get_asset_detail(asset_id)

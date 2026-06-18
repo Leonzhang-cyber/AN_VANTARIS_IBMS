@@ -3,22 +3,32 @@ import { computed, onMounted, reactive, ref } from 'vue'
 import { ApiError } from '@/services/api/errors'
 import {
   getAssetDetail,
+  getAssetImpact,
+  getAssetLineage,
   getAssetRelationships,
   getAssetsHealth,
   getAssetsList,
   getAssetTopology,
+  type AssetImpactSkeleton,
+  type AssetRelationshipGroups,
+  type AssetRelationshipPath,
+  type AssetRelationshipSummary,
   type AssetRecord,
   type AssetRelationships,
   type AssetsHealth,
   type AssetsSummary,
   type AssetTopology,
+  type AssetTopologyLineage,
 } from '@/services/api/assets'
 
 const loading = ref(false)
 const apiError = ref('')
 const showDetailDrawer = ref(false)
+const activeDetailTab = ref('overview')
 const selectedAsset = ref<AssetRecord | null>(null)
 const selectedRelationships = ref<AssetRelationships | null>(null)
+const selectedLineage = ref<AssetTopologyLineage | null>(null)
+const selectedImpact = ref<AssetImpactSkeleton | null>(null)
 
 const health = ref<AssetsHealth>({
   status: 'unknown',
@@ -53,6 +63,16 @@ const summary = ref<AssetsSummary>({
   runtimeLinkedAssets: 0,
   certifiedAssets: 0,
   iec62443CertifiedAssets: 0,
+  totalRelationships: 0,
+  containmentRelationships: 0,
+  pointRelationships: 0,
+  relatedRelationships: 0,
+  rootAssets: 0,
+  leafAssets: 0,
+  maxHierarchyDepth: 0,
+  runtimeLinkedRelationships: 0,
+  topologyValidationMode: 'local-skeleton-validation',
+  topologyValidated: false,
   assetTypes: [],
   assetCategories: [],
   limitations: [],
@@ -116,6 +136,22 @@ const fallbackAssets: AssetRecord[] = [
     tags: ['fallback'],
     metadata: {},
     limitations: ['Fallback mode: API data unavailable.'],
+    hierarchyPath: {
+      pathMode: 'local-skeleton-hierarchy',
+      assetId: 'fallback-site',
+      levels: [
+        {
+          level: 1,
+          assetId: 'fallback-site',
+          assetName: 'Fallback Site',
+          assetType: 'site',
+          relationship: 'root',
+        },
+      ],
+      complete: true,
+      runtimeLinked: false,
+      notes: 'Local skeleton hierarchy; no DB or runtime topology validation.',
+    },
     runtimeLinked: false,
     certified: false,
     iec62443Certified: false,
@@ -153,6 +189,80 @@ function normalizeError(error: unknown, fallback: string): string {
   return error instanceof ApiError ? error.message : fallback
 }
 
+const emptyRelationshipSummary = (): AssetRelationshipSummary => ({
+  parentCount: 0,
+  childCount: 0,
+  relatedCount: 0,
+  upstreamCount: 0,
+  downstreamCount: 0,
+  pointCount: 0,
+  equipmentCount: 0,
+  systemCount: 0,
+  runtimeLinkedRelationships: 0,
+})
+
+const emptyRelationshipGroups = (): AssetRelationshipGroups => ({
+  parent: [],
+  children: [],
+  related: [],
+  upstream: [],
+  downstream: [],
+  points: [],
+  equipment: [],
+  systems: [],
+})
+
+const emptyRelationshipPath = (assetId: string): AssetRelationshipPath => ({
+  pathMode: 'local-skeleton-relationship-path',
+  assetId,
+  rootAssetId: '',
+  rootToAsset: [],
+  assetToLeaves: [],
+  complete: false,
+  runtimeLinked: false,
+})
+
+const emptyLineage = (assetId: string): AssetTopologyLineage => ({
+  assetId,
+  lineageMode: 'local-skeleton-lineage',
+  upstream: [],
+  downstream: [],
+  siblings: [],
+  containedAssets: [],
+  containingAssets: [],
+  runtimeLinked: false,
+  certified: false,
+  iec62443Certified: false,
+  notes: 'Local topology lineage only; no runtime impact calculation.',
+})
+
+const emptyImpact = (assetId: string): AssetImpactSkeleton => ({
+  assetId,
+  impactMode: 'local-skeleton-impact',
+  potentiallyImpactedAssets: [],
+  potentiallyImpactedSystems: [],
+  potentiallyImpactedZones: [],
+  impactScore: null,
+  impactCalculated: false,
+  runtimeLinked: false,
+  limitations: [
+    'No runtime telemetry',
+    'No telemetry correlation',
+    'No EDGE/LINK integration',
+    'No DB-backed dependency graph',
+  ],
+  certified: false,
+  iec62443Certified: false,
+})
+
+function hierarchyDepth(asset: AssetRecord): number {
+  return asset.hierarchyPath?.levels.length || 0
+}
+
+function relationshipCount(asset: AssetRecord): number {
+  return (asset.childrenAssetIds?.length || 0) + (asset.relatedAssetIds?.length || 0) + (asset.parentAssetId ? 1 : 0)
+}
+
 async function loadAssetsPage(): Promise<void> {
   loading.value = true
   apiError.value = ''
@@ -175,6 +285,15 @@ async function loadAssetsPage(): Promise<void> {
       totalAssets: fallbackAssets.length,
       siteCount: 1,
       runtimeLinkedAssets: 0,
+      totalRelationships: 0,
+      containmentRelationships: 0,
+      pointRelationships: 0,
+      relatedRelationships: 0,
+      rootAssets: 1,
+      leafAssets: 1,
+      maxHierarchyDepth: 1,
+      runtimeLinkedRelationships: 0,
+      topologyValidated: false,
     }
   } finally {
     loading.value = false
@@ -209,9 +328,34 @@ async function viewDetail(assetId: string): Promise<void> {
   const row = assets.value.find((item) => item.assetId === assetId) || null
   selectedAsset.value = row
   selectedRelationships.value = null
+  selectedLineage.value = emptyLineage(assetId)
+  selectedImpact.value = emptyImpact(assetId)
+  activeDetailTab.value = 'overview'
   showDetailDrawer.value = true
   try {
-    selectedAsset.value = await getAssetDetail(assetId)
+    const [detail, relationships, lineage, impact] = await Promise.all([
+      getAssetDetail(assetId),
+      getAssetRelationships(assetId).catch(() => ({
+        assetId,
+        relationshipMode: 'local-skeleton-relationships',
+        parent: null,
+        children: [],
+        related: [],
+        relationshipSummary: emptyRelationshipSummary(),
+        relationshipGroups: emptyRelationshipGroups(),
+        relationshipPath: emptyRelationshipPath(assetId),
+        edges: [],
+        runtimeLinked: false,
+        certified: false,
+        iec62443Certified: false,
+      })),
+      getAssetLineage(assetId).catch(() => emptyLineage(assetId)),
+      getAssetImpact(assetId).catch(() => emptyImpact(assetId)),
+    ])
+    selectedAsset.value = detail
+    selectedRelationships.value = relationships
+    selectedLineage.value = lineage
+    selectedImpact.value = impact
   } catch {
     selectedAsset.value = row
   }
@@ -221,14 +365,21 @@ async function viewRelationships(assetId: string): Promise<void> {
   const row = assets.value.find((item) => item.assetId === assetId) || null
   selectedAsset.value = row
   selectedRelationships.value = null
+  selectedLineage.value = emptyLineage(assetId)
+  selectedImpact.value = emptyImpact(assetId)
+  activeDetailTab.value = 'relationships'
   showDetailDrawer.value = true
   try {
-    const [detail, relationships] = await Promise.all([
+    const [detail, relationships, lineage, impact] = await Promise.all([
       getAssetDetail(assetId).catch(() => row),
       getAssetRelationships(assetId),
+      getAssetLineage(assetId).catch(() => emptyLineage(assetId)),
+      getAssetImpact(assetId).catch(() => emptyImpact(assetId)),
     ])
     selectedAsset.value = detail || row
     selectedRelationships.value = relationships
+    selectedLineage.value = lineage
+    selectedImpact.value = impact
   } catch {
     selectedRelationships.value = {
       assetId,
@@ -236,6 +387,9 @@ async function viewRelationships(assetId: string): Promise<void> {
       parent: null,
       children: [],
       related: [],
+      relationshipSummary: emptyRelationshipSummary(),
+      relationshipGroups: emptyRelationshipGroups(),
+      relationshipPath: emptyRelationshipPath(assetId),
       edges: [],
       runtimeLinked: false,
       certified: false,
@@ -275,7 +429,7 @@ onMounted(() => {
       type="info"
       show-icon
       :closable="false"
-      title="Assets R1 uses local skeleton topology. Runtime discovery, EDGE/LINK integration and DB persistence are not integrated."
+      title="Topology relationships are local skeleton references. Runtime discovery, telemetry correlation and EDGE/LINK integration are not integrated."
       class="block-space"
     />
 
@@ -295,6 +449,15 @@ onMounted(() => {
         <el-descriptions-item label="systemCount">{{ summary.systemCount }}</el-descriptions-item>
         <el-descriptions-item label="equipmentCount">{{ summary.equipmentCount }}</el-descriptions-item>
         <el-descriptions-item label="pointCount">{{ summary.pointCount }}</el-descriptions-item>
+        <el-descriptions-item label="totalRelationships">{{ summary.totalRelationships }}</el-descriptions-item>
+        <el-descriptions-item label="containmentRelationships">{{ summary.containmentRelationships }}</el-descriptions-item>
+        <el-descriptions-item label="pointRelationships">{{ summary.pointRelationships }}</el-descriptions-item>
+        <el-descriptions-item label="relatedRelationships">{{ summary.relatedRelationships }}</el-descriptions-item>
+        <el-descriptions-item label="rootAssets">{{ summary.rootAssets }}</el-descriptions-item>
+        <el-descriptions-item label="leafAssets">{{ summary.leafAssets }}</el-descriptions-item>
+        <el-descriptions-item label="maxHierarchyDepth">{{ summary.maxHierarchyDepth }}</el-descriptions-item>
+        <el-descriptions-item label="runtimeLinkedRelationships">{{ summary.runtimeLinkedRelationships }}</el-descriptions-item>
+        <el-descriptions-item label="topologyValidated">{{ summary.topologyValidated }}</el-descriptions-item>
         <el-descriptions-item label="runtimeLinkedAssets">{{ summary.runtimeLinkedAssets }}</el-descriptions-item>
       </el-descriptions>
     </el-card>
@@ -335,6 +498,15 @@ onMounted(() => {
           <el-table-column prop="zoneName" label="zoneName" min-width="140" />
           <el-table-column prop="systemName" label="systemName" min-width="150" />
           <el-table-column prop="parentAssetId" label="parentAssetId" min-width="160" />
+          <el-table-column label="hierarchyDepth" min-width="130">
+            <template #default="{ row }">{{ hierarchyDepth(row) }}</template>
+          </el-table-column>
+          <el-table-column label="childrenCount" min-width="120">
+            <template #default="{ row }">{{ row.childrenAssetIds.length }}</template>
+          </el-table-column>
+          <el-table-column label="relationshipCount" min-width="140">
+            <template #default="{ row }">{{ relationshipCount(row) }}</template>
+          </el-table-column>
           <el-table-column label="actions" min-width="180" fixed="right">
             <template #default="{ row }">
               <el-space>
@@ -384,85 +556,257 @@ onMounted(() => {
       </el-card>
     </el-card>
 
-    <el-drawer v-model="showDetailDrawer" title="Asset Detail" size="52%">
+    <el-drawer v-model="showDetailDrawer" title="Asset Detail" size="60%">
       <el-empty v-if="!selectedAsset" description="No asset selected." />
       <template v-else>
-        <el-card shadow="never" class="block-space">
-          <template #header>overview</template>
-          <el-descriptions :column="1" border>
-            <el-descriptions-item label="assetId">{{ selectedAsset.assetId }}</el-descriptions-item>
-            <el-descriptions-item label="assetName">{{ selectedAsset.assetName }}</el-descriptions-item>
-            <el-descriptions-item label="assetType">{{ selectedAsset.assetType }}</el-descriptions-item>
-            <el-descriptions-item label="assetCategory">{{ selectedAsset.assetCategory }}</el-descriptions-item>
-            <el-descriptions-item label="lifecycleStatus">{{ selectedAsset.lifecycleStatus }}</el-descriptions-item>
-            <el-descriptions-item label="operationalStatus">{{ selectedAsset.operationalStatus }}</el-descriptions-item>
-            <el-descriptions-item label="certified">{{ selectedAsset.certified }}</el-descriptions-item>
-            <el-descriptions-item label="iec62443Certified">{{ selectedAsset.iec62443Certified }}</el-descriptions-item>
-          </el-descriptions>
-        </el-card>
+        <el-tabs v-model="activeDetailTab">
+          <el-tab-pane name="overview" label="Overview">
+            <el-card shadow="never" class="block-space">
+              <el-descriptions :column="1" border>
+                <el-descriptions-item label="assetId">{{ selectedAsset.assetId }}</el-descriptions-item>
+                <el-descriptions-item label="assetName">{{ selectedAsset.assetName }}</el-descriptions-item>
+                <el-descriptions-item label="assetType">{{ selectedAsset.assetType }}</el-descriptions-item>
+                <el-descriptions-item label="assetCategory">{{ selectedAsset.assetCategory }}</el-descriptions-item>
+                <el-descriptions-item label="lifecycleStatus">{{ selectedAsset.lifecycleStatus }}</el-descriptions-item>
+                <el-descriptions-item label="operationalStatus">{{ selectedAsset.operationalStatus }}</el-descriptions-item>
+                <el-descriptions-item label="parentAssetId">{{ selectedAsset.parentAssetId }}</el-descriptions-item>
+                <el-descriptions-item label="certified">{{ selectedAsset.certified }}</el-descriptions-item>
+                <el-descriptions-item label="iec62443Certified">{{ selectedAsset.iec62443Certified }}</el-descriptions-item>
+              </el-descriptions>
+            </el-card>
+          </el-tab-pane>
 
-        <el-card shadow="never" class="block-space">
-          <template #header>location hierarchy</template>
-          <el-descriptions :column="1" border>
-            <el-descriptions-item label="siteName">{{ selectedAsset.siteName }}</el-descriptions-item>
-            <el-descriptions-item label="buildingName">{{ selectedAsset.buildingName }}</el-descriptions-item>
-            <el-descriptions-item label="floorName">{{ selectedAsset.floorName }}</el-descriptions-item>
-            <el-descriptions-item label="zoneName">{{ selectedAsset.zoneName }}</el-descriptions-item>
-          </el-descriptions>
-        </el-card>
-
-        <el-card shadow="never" class="block-space">
-          <template #header>system hierarchy</template>
-          <el-descriptions :column="1" border>
-            <el-descriptions-item label="systemId">{{ selectedAsset.systemId }}</el-descriptions-item>
-            <el-descriptions-item label="systemName">{{ selectedAsset.systemName }}</el-descriptions-item>
-            <el-descriptions-item label="parentAssetId">{{ selectedAsset.parentAssetId }}</el-descriptions-item>
-          </el-descriptions>
-        </el-card>
-
-        <el-card shadow="never" class="block-space">
-          <template #header>parent / children / related</template>
-          <el-descriptions :column="1" border class="block-space">
-            <el-descriptions-item label="relationshipMode">{{
-              selectedRelationships?.relationshipMode || 'local-skeleton-relationships'
-            }}</el-descriptions-item>
-            <el-descriptions-item label="runtimeLinked">{{ selectedRelationships?.runtimeLinked ?? false }}</el-descriptions-item>
-          </el-descriptions>
-          <el-table :data="selectedRelationships?.parent ? [selectedRelationships.parent] : []" empty-text="No parent">
-            <el-table-column prop="assetId" label="parent.assetId" min-width="160" />
-            <el-table-column prop="assetName" label="parent.assetName" min-width="180" />
-            <el-table-column prop="assetType" label="parent.assetType" min-width="120" />
-          </el-table>
-          <el-card shadow="never" class="block-space">
-            <template #header>children</template>
-            <el-table :data="selectedRelationships?.children || []" empty-text="No children">
+          <el-tab-pane name="hierarchy" label="Hierarchy Path">
+            <el-card shadow="never" class="block-space">
+              <el-descriptions :column="1" border>
+                <el-descriptions-item label="pathMode">{{ selectedAsset.hierarchyPath?.pathMode || 'n/a' }}</el-descriptions-item>
+                <el-descriptions-item label="complete">{{ selectedAsset.hierarchyPath?.complete ?? false }}</el-descriptions-item>
+                <el-descriptions-item label="notes">{{ selectedAsset.hierarchyPath?.notes || 'n/a' }}</el-descriptions-item>
+              </el-descriptions>
+            </el-card>
+            <el-table :data="selectedAsset.hierarchyPath?.levels || []" empty-text="No hierarchy levels">
+              <el-table-column prop="level" label="level" min-width="90" />
               <el-table-column prop="assetId" label="assetId" min-width="160" />
               <el-table-column prop="assetName" label="assetName" min-width="180" />
               <el-table-column prop="assetType" label="assetType" min-width="120" />
+              <el-table-column prop="relationship" label="relationship" min-width="140" />
             </el-table>
-          </el-card>
-          <el-card shadow="never">
-            <template #header>related</template>
-            <el-table :data="selectedRelationships?.related || []" empty-text="No related assets">
-              <el-table-column prop="assetId" label="assetId" min-width="160" />
-              <el-table-column prop="assetName" label="assetName" min-width="180" />
-              <el-table-column prop="assetType" label="assetType" min-width="120" />
-            </el-table>
-          </el-card>
-        </el-card>
+          </el-tab-pane>
 
-        <el-card shadow="never" class="block-space">
-          <template #header>metadata</template>
-          <pre class="meta-block">{{ JSON.stringify(selectedAsset.metadata, null, 2) }}</pre>
-        </el-card>
+          <el-tab-pane name="relationships" label="Relationships">
+            <el-card shadow="never" class="block-space">
+              <el-descriptions :column="3" border>
+                <el-descriptions-item label="parentCount">{{
+                  selectedRelationships?.relationshipSummary.parentCount || 0
+                }}</el-descriptions-item>
+                <el-descriptions-item label="childCount">{{
+                  selectedRelationships?.relationshipSummary.childCount || 0
+                }}</el-descriptions-item>
+                <el-descriptions-item label="relatedCount">{{
+                  selectedRelationships?.relationshipSummary.relatedCount || 0
+                }}</el-descriptions-item>
+                <el-descriptions-item label="upstreamCount">{{
+                  selectedRelationships?.relationshipSummary.upstreamCount || 0
+                }}</el-descriptions-item>
+                <el-descriptions-item label="downstreamCount">{{
+                  selectedRelationships?.relationshipSummary.downstreamCount || 0
+                }}</el-descriptions-item>
+                <el-descriptions-item label="pointCount">{{
+                  selectedRelationships?.relationshipSummary.pointCount || 0
+                }}</el-descriptions-item>
+                <el-descriptions-item label="equipmentCount">{{
+                  selectedRelationships?.relationshipSummary.equipmentCount || 0
+                }}</el-descriptions-item>
+                <el-descriptions-item label="systemCount">{{
+                  selectedRelationships?.relationshipSummary.systemCount || 0
+                }}</el-descriptions-item>
+                <el-descriptions-item label="runtimeLinkedRelationships">{{
+                  selectedRelationships?.relationshipSummary.runtimeLinkedRelationships || 0
+                }}</el-descriptions-item>
+              </el-descriptions>
+            </el-card>
+            <el-card shadow="never" class="block-space">
+              <template #header>relationshipPath</template>
+              <el-descriptions :column="1" border>
+                <el-descriptions-item label="pathMode">{{
+                  selectedRelationships?.relationshipPath.pathMode || 'local-skeleton-relationship-path'
+                }}</el-descriptions-item>
+                <el-descriptions-item label="rootAssetId">{{
+                  selectedRelationships?.relationshipPath.rootAssetId || 'n/a'
+                }}</el-descriptions-item>
+                <el-descriptions-item label="complete">{{
+                  selectedRelationships?.relationshipPath.complete ?? false
+                }}</el-descriptions-item>
+                <el-descriptions-item label="runtimeLinked">{{
+                  selectedRelationships?.relationshipPath.runtimeLinked ?? false
+                }}</el-descriptions-item>
+              </el-descriptions>
+            </el-card>
+            <el-card shadow="never" class="block-space">
+              <template #header>rootToAsset</template>
+              <el-table :data="selectedRelationships?.relationshipPath.rootToAsset || []" empty-text="No root path">
+                <el-table-column prop="level" label="level" min-width="90" />
+                <el-table-column prop="assetId" label="assetId" min-width="150" />
+                <el-table-column prop="assetName" label="assetName" min-width="180" />
+                <el-table-column prop="assetType" label="assetType" min-width="120" />
+              </el-table>
+            </el-card>
+            <el-card shadow="never" class="block-space">
+              <template #header>group: parent</template>
+              <el-table :data="selectedRelationships?.relationshipGroups.parent || []" empty-text="No parent">
+                <el-table-column prop="assetId" label="assetId" min-width="160" />
+                <el-table-column prop="assetName" label="assetName" min-width="180" />
+                <el-table-column prop="assetType" label="assetType" min-width="120" />
+              </el-table>
+            </el-card>
+            <el-card shadow="never" class="block-space">
+              <template #header>group: children</template>
+              <el-table :data="selectedRelationships?.relationshipGroups.children || []" empty-text="No children">
+                <el-table-column prop="assetId" label="assetId" min-width="160" />
+                <el-table-column prop="assetName" label="assetName" min-width="180" />
+                <el-table-column prop="assetType" label="assetType" min-width="120" />
+              </el-table>
+            </el-card>
+            <el-card shadow="never" class="block-space">
+              <template #header>group: related</template>
+              <el-table :data="selectedRelationships?.relationshipGroups.related || []" empty-text="No related assets">
+                <el-table-column prop="assetId" label="assetId" min-width="160" />
+                <el-table-column prop="assetName" label="assetName" min-width="180" />
+                <el-table-column prop="assetType" label="assetType" min-width="120" />
+              </el-table>
+            </el-card>
+            <el-card shadow="never" class="block-space">
+              <template #header>group: upstream / downstream</template>
+              <el-table :data="selectedRelationships?.relationshipGroups.upstream || []" empty-text="No upstream">
+                <el-table-column prop="assetId" label="upstream.assetId" min-width="160" />
+                <el-table-column prop="assetName" label="upstream.assetName" min-width="180" />
+                <el-table-column prop="assetType" label="upstream.assetType" min-width="120" />
+              </el-table>
+              <el-table :data="selectedRelationships?.relationshipGroups.downstream || []" empty-text="No downstream">
+                <el-table-column prop="assetId" label="downstream.assetId" min-width="160" />
+                <el-table-column prop="assetName" label="downstream.assetName" min-width="180" />
+                <el-table-column prop="assetType" label="downstream.assetType" min-width="120" />
+              </el-table>
+            </el-card>
+            <el-card shadow="never">
+              <template #header>group: points / equipment / systems</template>
+              <el-table :data="selectedRelationships?.relationshipGroups.points || []" empty-text="No points">
+                <el-table-column prop="assetId" label="point.assetId" min-width="160" />
+                <el-table-column prop="assetName" label="point.assetName" min-width="180" />
+              </el-table>
+              <el-table :data="selectedRelationships?.relationshipGroups.equipment || []" empty-text="No equipment">
+                <el-table-column prop="assetId" label="equipment.assetId" min-width="160" />
+                <el-table-column prop="assetName" label="equipment.assetName" min-width="180" />
+              </el-table>
+              <el-table :data="selectedRelationships?.relationshipGroups.systems || []" empty-text="No systems">
+                <el-table-column prop="assetId" label="system.assetId" min-width="160" />
+                <el-table-column prop="assetName" label="system.assetName" min-width="180" />
+              </el-table>
+            </el-card>
+          </el-tab-pane>
 
-        <el-card shadow="never">
-          <template #header>limitations</template>
-          <ul class="inline-list">
-            <li v-for="item in selectedAsset.limitations" :key="item">{{ item }}</li>
-            <li v-if="selectedAsset.limitations.length === 0">No limitations declared.</li>
-          </ul>
-        </el-card>
+          <el-tab-pane name="lineage" label="Lineage">
+            <el-card shadow="never" class="block-space">
+              <el-descriptions :column="1" border>
+                <el-descriptions-item label="lineageMode">{{
+                  selectedLineage?.lineageMode || 'local-skeleton-lineage'
+                }}</el-descriptions-item>
+                <el-descriptions-item label="runtimeLinked">{{ selectedLineage?.runtimeLinked ?? false }}</el-descriptions-item>
+                <el-descriptions-item label="notes">{{ selectedLineage?.notes || 'n/a' }}</el-descriptions-item>
+              </el-descriptions>
+            </el-card>
+            <el-card shadow="never" class="block-space">
+              <template #header>upstream</template>
+              <el-table :data="selectedLineage?.upstream || []" empty-text="No upstream lineage">
+                <el-table-column prop="assetId" label="assetId" min-width="160" />
+                <el-table-column prop="assetName" label="assetName" min-width="180" />
+                <el-table-column prop="assetType" label="assetType" min-width="120" />
+              </el-table>
+            </el-card>
+            <el-card shadow="never" class="block-space">
+              <template #header>downstream</template>
+              <el-table :data="selectedLineage?.downstream || []" empty-text="No downstream lineage">
+                <el-table-column prop="assetId" label="assetId" min-width="160" />
+                <el-table-column prop="assetName" label="assetName" min-width="180" />
+                <el-table-column prop="assetType" label="assetType" min-width="120" />
+              </el-table>
+            </el-card>
+            <el-card shadow="never">
+              <template #header>siblings / containedAssets / containingAssets</template>
+              <el-table :data="selectedLineage?.siblings || []" empty-text="No siblings">
+                <el-table-column prop="assetId" label="sibling.assetId" min-width="160" />
+                <el-table-column prop="assetName" label="sibling.assetName" min-width="180" />
+              </el-table>
+              <el-table :data="selectedLineage?.containedAssets || []" empty-text="No contained assets">
+                <el-table-column prop="assetId" label="contained.assetId" min-width="160" />
+                <el-table-column prop="assetName" label="contained.assetName" min-width="180" />
+              </el-table>
+              <el-table :data="selectedLineage?.containingAssets || []" empty-text="No containing assets">
+                <el-table-column prop="assetId" label="containing.assetId" min-width="160" />
+                <el-table-column prop="assetName" label="containing.assetName" min-width="180" />
+              </el-table>
+            </el-card>
+          </el-tab-pane>
+
+          <el-tab-pane name="impact" label="Impact Skeleton">
+            <el-card shadow="never" class="block-space">
+              <el-descriptions :column="1" border>
+                <el-descriptions-item label="impactMode">{{
+                  selectedImpact?.impactMode || 'local-skeleton-impact'
+                }}</el-descriptions-item>
+                <el-descriptions-item label="impactCalculated">{{ selectedImpact?.impactCalculated ?? false }}</el-descriptions-item>
+                <el-descriptions-item label="impactScore">{{ selectedImpact?.impactScore ?? 'null' }}</el-descriptions-item>
+                <el-descriptions-item label="runtimeLinked">{{ selectedImpact?.runtimeLinked ?? false }}</el-descriptions-item>
+                <el-descriptions-item label="certified">{{ selectedImpact?.certified ?? false }}</el-descriptions-item>
+                <el-descriptions-item label="iec62443Certified">{{
+                  selectedImpact?.iec62443Certified ?? false
+                }}</el-descriptions-item>
+              </el-descriptions>
+            </el-card>
+            <el-card shadow="never" class="block-space">
+              <template #header>potentiallyImpactedAssets</template>
+              <ul class="inline-list">
+                <li v-for="item in selectedImpact?.potentiallyImpactedAssets || []" :key="item">{{ item }}</li>
+                <li v-if="(selectedImpact?.potentiallyImpactedAssets || []).length === 0">No impacted assets in local skeleton.</li>
+              </ul>
+            </el-card>
+            <el-card shadow="never" class="block-space">
+              <template #header>potentiallyImpactedSystems</template>
+              <ul class="inline-list">
+                <li v-for="item in selectedImpact?.potentiallyImpactedSystems || []" :key="item">{{ item }}</li>
+                <li v-if="(selectedImpact?.potentiallyImpactedSystems || []).length === 0">No impacted systems in local skeleton.</li>
+              </ul>
+            </el-card>
+            <el-card shadow="never" class="block-space">
+              <template #header>potentiallyImpactedZones</template>
+              <ul class="inline-list">
+                <li v-for="item in selectedImpact?.potentiallyImpactedZones || []" :key="item">{{ item }}</li>
+                <li v-if="(selectedImpact?.potentiallyImpactedZones || []).length === 0">No impacted zones in local skeleton.</li>
+              </ul>
+            </el-card>
+            <el-card shadow="never">
+              <template #header>limitations</template>
+              <ul class="inline-list">
+                <li v-for="item in selectedImpact?.limitations || []" :key="item">{{ item }}</li>
+              </ul>
+            </el-card>
+          </el-tab-pane>
+
+          <el-tab-pane name="metadata" label="Metadata">
+            <el-card shadow="never">
+              <pre class="meta-block">{{ JSON.stringify(selectedAsset.metadata, null, 2) }}</pre>
+            </el-card>
+          </el-tab-pane>
+
+          <el-tab-pane name="limitations" label="Limitations">
+            <el-card shadow="never">
+              <ul class="inline-list">
+                <li v-for="item in selectedAsset.limitations" :key="item">{{ item }}</li>
+                <li v-if="selectedAsset.limitations.length === 0">No limitations declared.</li>
+              </ul>
+            </el-card>
+          </el-tab-pane>
+        </el-tabs>
       </template>
     </el-drawer>
   </div>

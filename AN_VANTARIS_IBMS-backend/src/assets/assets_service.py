@@ -7,6 +7,8 @@ from typing import Any, Dict, Optional, Tuple
 from src.assets.assets_provider import (
     get_asset,
     get_asset_health,
+    get_asset_impact_skeleton,
+    get_asset_topology_lineage,
     get_assets_summary,
     get_topology_relationships,
     list_assets,
@@ -72,8 +74,8 @@ class AssetsTopologyService:
     def get_assets_summary(self) -> Dict[str, Any]:
         summary = get_assets_summary()
         summary["limitations"] = summary.get("limitations", []) + [
-            "Assets R1 uses local skeleton topology.",
-            "Runtime discovery, EDGE/LINK integration and DB persistence are not integrated.",
+            "Assets R2 uses local skeleton topology relationship details.",
+            "Topology relationships are local skeleton references. Runtime discovery, telemetry correlation and EDGE/LINK integration are not integrated.",
         ]
         return summary
 
@@ -94,11 +96,79 @@ class AssetsTopologyService:
             return None, (404, "assetId not found")
 
         all_assets = list_assets()
+        by_id = {str(item.get("assetId", "")): item for item in all_assets}
+        children_map: Dict[str, list] = {}
+        for row in all_assets:
+            parent = str(row.get("parentAssetId", "")).strip()
+            if parent:
+                children_map.setdefault(parent, []).append(row)
+
         parent_id = str(asset.get("parentAssetId", "")).strip()
-        parent = get_asset(parent_id) if parent_id else None
-        children = [item for item in all_assets if str(item.get("parentAssetId", "")) == asset["assetId"]]
+        parent = by_id.get(parent_id) if parent_id else None
+        children = list(children_map.get(asset["assetId"], []))
         related_ids = [str(item) for item in asset.get("relatedAssetIds", []) if str(item).strip()]
-        related = [item for item in all_assets if str(item.get("assetId", "")) in related_ids]
+        related = [by_id[item_id] for item_id in related_ids if item_id in by_id]
+
+        upstream = []
+        current_parent_id = parent_id
+        visited = set()
+        while current_parent_id and current_parent_id not in visited:
+            visited.add(current_parent_id)
+            parent_row = by_id.get(current_parent_id)
+            if not parent_row:
+                break
+            upstream.append(parent_row)
+            current_parent_id = str(parent_row.get("parentAssetId", "")).strip()
+
+        queue = list(children)
+        downstream = []
+        downstream_seen = set()
+        while queue:
+            current = queue.pop(0)
+            current_id = str(current.get("assetId", ""))
+            if current_id in downstream_seen:
+                continue
+            downstream_seen.add(current_id)
+            downstream.append(current)
+            queue.extend(children_map.get(current_id, []))
+
+        points = [row for row in downstream if str(row.get("assetType", "")) == "point"]
+        equipment = [row for row in downstream if str(row.get("assetType", "")) == "equipment"]
+        systems = [row for row in downstream if str(row.get("assetType", "")) == "system"]
+
+        hierarchy_path = asset.get("hierarchyPath", {})
+        root_to_asset = hierarchy_path.get("levels", []) if isinstance(hierarchy_path, dict) else []
+        root_asset_id = str(root_to_asset[0].get("assetId", "")) if root_to_asset else ""
+
+        def _asset_to_leaf_paths(start_id: str) -> list:
+            paths = []
+
+            def _walk(current_id: str, acc: list, walk_seen: set) -> None:
+                if current_id in walk_seen:
+                    return
+                walk_seen.add(current_id)
+                current_node = by_id.get(current_id)
+                if not current_node:
+                    return
+                next_acc = acc + [
+                    {
+                        "assetId": current_node.get("assetId", ""),
+                        "assetName": current_node.get("assetName", ""),
+                        "assetType": current_node.get("assetType", ""),
+                    }
+                ]
+                current_children = children_map.get(current_id, [])
+                if not current_children:
+                    paths.append(next_acc)
+                    return
+                for child in current_children:
+                    _walk(str(child.get("assetId", "")), next_acc, set(walk_seen))
+
+            _walk(start_id, [], set())
+            return paths
+
+        asset_to_leaves = _asset_to_leaf_paths(asset["assetId"])
+        relationship_complete = bool(hierarchy_path.get("complete", True)) if isinstance(hierarchy_path, dict) else False
 
         edges = []
         if parent:
@@ -136,15 +206,86 @@ class AssetsTopologyService:
             ]
         )
 
+        edges.extend(
+            [
+                {
+                    "edgeId": f"edge-upstream-{row['assetId']}-{asset['assetId']}",
+                    "from": row["assetId"],
+                    "to": asset["assetId"],
+                    "relationship": "belongs-to",
+                    "runtimeLinked": False,
+                }
+                for row in upstream
+            ]
+        )
+        edges.extend(
+            [
+                {
+                    "edgeId": f"edge-downstream-{asset['assetId']}-{row['assetId']}",
+                    "from": asset["assetId"],
+                    "to": row["assetId"],
+                    "relationship": "contains",
+                    "runtimeLinked": False,
+                }
+                for row in downstream
+            ]
+        )
+
         return {
             "assetId": asset["assetId"],
             "relationshipMode": "local-skeleton-relationships",
             "parent": parent,
             "children": children,
             "related": related,
+            "relationshipSummary": {
+                "parentCount": 1 if parent else 0,
+                "childCount": len(children),
+                "relatedCount": len(related),
+                "upstreamCount": len(upstream),
+                "downstreamCount": len(downstream),
+                "pointCount": len(points),
+                "equipmentCount": len(equipment),
+                "systemCount": len(systems),
+                "runtimeLinkedRelationships": 0,
+            },
+            "relationshipGroups": {
+                "parent": [parent] if parent else [],
+                "children": children,
+                "related": related,
+                "upstream": upstream,
+                "downstream": downstream,
+                "points": points,
+                "equipment": equipment,
+                "systems": systems,
+            },
+            "relationshipPath": {
+                "pathMode": "local-skeleton-relationship-path",
+                "assetId": asset["assetId"],
+                "rootAssetId": root_asset_id,
+                "rootToAsset": root_to_asset,
+                "assetToLeaves": asset_to_leaves,
+                "complete": relationship_complete,
+                "runtimeLinked": False,
+            },
             "edges": edges,
             "runtimeLinked": False,
             "certified": False,
             "iec62443Certified": False,
         }, None
+
+    def get_asset_topology_lineage(
+        self, asset_id: str
+    ) -> Tuple[Optional[Dict[str, Any]], Optional[Tuple[int, str]]]:
+        lineage = get_asset_topology_lineage(asset_id)
+        if not lineage:
+            return None, (404, "assetId not found")
+        return lineage, None
+
+    def get_asset_impact(
+        self, asset_id: str
+    ) -> Tuple[Optional[Dict[str, Any]], Optional[Tuple[int, str]]]:
+        impact = get_asset_impact_skeleton(asset_id)
+        if not impact:
+            return None, (404, "assetId not found")
+        return impact, None
 

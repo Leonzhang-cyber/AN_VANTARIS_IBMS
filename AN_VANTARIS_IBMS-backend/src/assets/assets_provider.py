@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from copy import deepcopy
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Set, Tuple
 
 
 def _now_iso() -> str:
@@ -325,8 +325,141 @@ def _asset_type_count(items: List[Dict[str, Any]], asset_type: str) -> int:
     return len([item for item in items if str(item.get("assetType", "")) == asset_type])
 
 
+def _assets_index(items: List[Dict[str, Any]]) -> Dict[str, Dict[str, Any]]:
+    return {str(item.get("assetId", "")): item for item in items}
+
+
+def _children_index(items: List[Dict[str, Any]]) -> Dict[str, List[Dict[str, Any]]]:
+    mapping: Dict[str, List[Dict[str, Any]]] = {}
+    for item in items:
+        parent = str(item.get("parentAssetId", "")).strip()
+        if not parent:
+            continue
+        mapping.setdefault(parent, []).append(item)
+    return mapping
+
+
+def _build_hierarchy_path(asset_id: str, by_id: Dict[str, Dict[str, Any]]) -> Dict[str, Any]:
+    target = by_id.get(asset_id)
+    if not target:
+        return {
+            "pathMode": "local-skeleton-hierarchy",
+            "assetId": asset_id,
+            "levels": [],
+            "complete": False,
+            "runtimeLinked": False,
+            "notes": "Hierarchy path cannot be built because asset is not found.",
+        }
+
+    chain: List[Dict[str, Any]] = []
+    visited: Set[str] = set()
+    current = target
+    complete = True
+    notes = "Local skeleton hierarchy; no DB or runtime topology validation."
+
+    while current:
+        current_id = str(current.get("assetId", ""))
+        if current_id in visited:
+            complete = False
+            notes = "Hierarchy path contains a cycle in local skeleton data."
+            break
+        visited.add(current_id)
+        chain.append(current)
+
+        parent_id = str(current.get("parentAssetId", "")).strip()
+        if not parent_id:
+            break
+        parent = by_id.get(parent_id)
+        if not parent:
+            complete = False
+            notes = f"Hierarchy path is incomplete because parent '{parent_id}' is missing."
+            break
+        current = parent
+
+    levels = list(reversed(chain))
+    result_levels = [
+        {
+            "level": idx + 1,
+            "assetId": row.get("assetId", ""),
+            "assetName": row.get("assetName", ""),
+            "assetType": row.get("assetType", ""),
+            "relationship": "root" if idx == 0 else "contains",
+        }
+        for idx, row in enumerate(levels)
+    ]
+    return {
+        "pathMode": "local-skeleton-hierarchy",
+        "assetId": asset_id,
+        "levels": result_levels,
+        "complete": complete,
+        "runtimeLinked": False,
+        "notes": notes,
+    }
+
+
+def _descendants(asset_id: str, children_map: Dict[str, List[Dict[str, Any]]]) -> List[Dict[str, Any]]:
+    queue = list(children_map.get(asset_id, []))
+    result: List[Dict[str, Any]] = []
+    visited: Set[str] = set()
+    while queue:
+        current = queue.pop(0)
+        current_id = str(current.get("assetId", ""))
+        if current_id in visited:
+            continue
+        visited.add(current_id)
+        result.append(current)
+        queue.extend(children_map.get(current_id, []))
+    return result
+
+
+def _topology_edges(items: List[Dict[str, Any]]) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
+    containment_edges: List[Dict[str, Any]] = []
+    related_edges: List[Dict[str, Any]] = []
+    related_index: Set[Tuple[str, str]] = set()
+    by_id = _assets_index(items)
+
+    for item in items:
+        current_id = str(item.get("assetId", ""))
+        parent_id = str(item.get("parentAssetId", "")).strip()
+        if parent_id:
+            relationship = "measures" if str(item.get("assetType", "")) == "point" else "contains"
+            containment_edges.append(
+                {
+                    "edgeId": f"edge-{parent_id}-{current_id}",
+                    "from": f"node-{parent_id}",
+                    "to": f"node-{current_id}",
+                    "relationship": relationship,
+                    "runtimeLinked": False,
+                }
+            )
+
+        for related_id in item.get("relatedAssetIds", []):
+            candidate = str(related_id).strip()
+            if not candidate or candidate not in by_id:
+                continue
+            pair = tuple(sorted([current_id, candidate]))
+            if pair in related_index:
+                continue
+            related_index.add(pair)
+            related_edges.append(
+                {
+                    "edgeId": f"edge-related-{pair[0]}-{pair[1]}",
+                    "from": f"node-{pair[0]}",
+                    "to": f"node-{pair[1]}",
+                    "relationship": "related-to",
+                    "runtimeLinked": False,
+                }
+            )
+
+    return containment_edges, related_edges
+
+
 def _normalized_assets() -> List[Dict[str, Any]]:
-    return [deepcopy(row) for row in _base_assets()]
+    items = [deepcopy(row) for row in _base_assets()]
+    by_id = _assets_index(items)
+    for row in items:
+        row["hierarchyPath"] = _build_hierarchy_path(str(row.get("assetId", "")), by_id)
+    return items
 
 
 def list_assets(filters: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
@@ -368,6 +501,14 @@ def get_asset(asset_id: str) -> Optional[Dict[str, Any]]:
 
 def get_assets_summary() -> Dict[str, Any]:
     items = _normalized_assets()
+    by_id = _assets_index(items)
+    containment_edges, related_edges = _topology_edges(items)
+    point_relationships = len([edge for edge in containment_edges if str(edge.get("relationship", "")) == "measures"])
+    roots = [item for item in items if not str(item.get("parentAssetId", "")).strip()]
+    leaves = [item for item in items if len(item.get("childrenAssetIds", [])) == 0]
+    max_hierarchy_depth = max(
+        [len(item.get("hierarchyPath", {}).get("levels", [])) for item in items if isinstance(item.get("hierarchyPath"), dict)] or [0]
+    )
     asset_types = sorted({str(item.get("assetType", "")) for item in items if str(item.get("assetType", "")).strip()})
     asset_categories = sorted(
         {str(item.get("assetCategory", "")) for item in items if str(item.get("assetCategory", "")).strip()}
@@ -382,6 +523,10 @@ def get_assets_summary() -> Dict[str, Any]:
     )
     active_assets = len([item for item in items if str(item.get("operationalStatus", "")) == "online"])
     mock_assets = len([item for item in items if bool(item.get("mockData"))])
+    containment_relationships = len(containment_edges)
+    related_relationships = len(related_edges)
+    total_relationships = containment_relationships + related_relationships
+
     return {
         "totalAssets": len(items),
         "siteCount": _asset_type_count(items, "site"),
@@ -396,6 +541,16 @@ def get_assets_summary() -> Dict[str, Any]:
         "runtimeLinkedAssets": 0,
         "certifiedAssets": 0,
         "iec62443CertifiedAssets": 0,
+        "totalRelationships": total_relationships,
+        "containmentRelationships": containment_relationships,
+        "pointRelationships": point_relationships,
+        "relatedRelationships": related_relationships,
+        "rootAssets": len(roots),
+        "leafAssets": len(leaves),
+        "maxHierarchyDepth": max_hierarchy_depth,
+        "runtimeLinkedRelationships": 0,
+        "topologyValidationMode": "local-skeleton-validation",
+        "topologyValidated": False,
         "assetTypes": asset_types,
         "assetCategories": asset_categories,
         "limitations": limitations,
@@ -404,6 +559,7 @@ def get_assets_summary() -> Dict[str, Any]:
 
 def get_topology_relationships() -> Dict[str, Any]:
     items = _normalized_assets()
+    containment_edges, related_edges = _topology_edges(items)
     nodes = [
         {
             "nodeId": f"node-{item['assetId']}",
@@ -416,38 +572,7 @@ def get_topology_relationships() -> Dict[str, Any]:
         }
         for item in items
     ]
-
-    edges: List[Dict[str, Any]] = []
-    edge_index = set()
-
-    for item in items:
-        parent_id = str(item.get("parentAssetId", "")).strip()
-        if parent_id:
-            edges.append(
-                {
-                    "edgeId": f"edge-{parent_id}-{item['assetId']}",
-                    "from": f"node-{parent_id}",
-                    "to": f"node-{item['assetId']}",
-                    "relationship": "contains",
-                    "runtimeLinked": False,
-                }
-            )
-
-        for related_id in item.get("relatedAssetIds", []):
-            pair = tuple(sorted([item["assetId"], related_id]))
-            if pair in edge_index:
-                continue
-            edge_index.add(pair)
-            edges.append(
-                {
-                    "edgeId": f"edge-related-{pair[0]}-{pair[1]}",
-                    "from": f"node-{pair[0]}",
-                    "to": f"node-{pair[1]}",
-                    "relationship": "related-to",
-                    "runtimeLinked": False,
-                }
-            )
-
+    edges = containment_edges + related_edges
     return {
         "topologyMode": "local-skeleton-topology",
         "nodes": nodes,
@@ -455,7 +580,95 @@ def get_topology_relationships() -> Dict[str, Any]:
         "runtimeLinked": False,
         "certified": False,
         "iec62443Certified": False,
-        "notes": "Local skeleton topology; no runtime device discovery or EDGE/LINK integration.",
+        "notes": "Local skeleton topology; runtime discovery and EDGE/LINK integration are not integrated.",
+    }
+
+
+def get_asset_topology_lineage(asset_id: str) -> Optional[Dict[str, Any]]:
+    items = _normalized_assets()
+    by_id = _assets_index(items)
+    children_map = _children_index(items)
+    target = by_id.get(asset_id)
+    if not target:
+        return None
+
+    parent_id = str(target.get("parentAssetId", "")).strip()
+    upstream: List[Dict[str, Any]] = []
+    visited: Set[str] = set()
+    while parent_id:
+        if parent_id in visited:
+            break
+        visited.add(parent_id)
+        parent = by_id.get(parent_id)
+        if not parent:
+            break
+        upstream.append(parent)
+        parent_id = str(parent.get("parentAssetId", "")).strip()
+
+    downstream = _descendants(asset_id, children_map)
+    siblings = []
+    containing_assets = list(upstream)
+    if str(target.get("parentAssetId", "")).strip():
+        siblings = [
+            item
+            for item in children_map.get(str(target.get("parentAssetId", "")).strip(), [])
+            if str(item.get("assetId", "")) != asset_id
+        ]
+
+    return {
+        "assetId": asset_id,
+        "lineageMode": "local-skeleton-lineage",
+        "upstream": upstream,
+        "downstream": downstream,
+        "siblings": siblings,
+        "containedAssets": downstream,
+        "containingAssets": containing_assets,
+        "runtimeLinked": False,
+        "certified": False,
+        "iec62443Certified": False,
+        "notes": "Local topology lineage only; no runtime impact calculation.",
+    }
+
+
+def get_asset_impact_skeleton(asset_id: str) -> Optional[Dict[str, Any]]:
+    lineage = get_asset_topology_lineage(asset_id)
+    if not lineage:
+        return None
+
+    downstream = lineage.get("downstream", [])
+    potentially_impacted_assets = [item.get("assetId", "") for item in downstream]
+    impacted_systems = sorted(
+        {
+            str(item.get("assetId", ""))
+            for item in downstream
+            if str(item.get("assetType", "")) == "system" and str(item.get("assetId", "")).strip()
+        }
+    )
+    impacted_zones = sorted(
+        {
+            str(item.get("assetId", ""))
+            for item in downstream
+            if str(item.get("assetType", "")) == "zone" and str(item.get("assetId", "")).strip()
+        }
+    )
+
+    return {
+        "assetId": asset_id,
+        "impactMode": "local-skeleton-impact",
+        "potentiallyImpactedAssets": potentially_impacted_assets,
+        "potentiallyImpactedSystems": impacted_systems,
+        "potentiallyImpactedZones": impacted_zones,
+        "impactScore": None,
+        "impactCalculated": False,
+        "runtimeLinked": False,
+        "limitations": [
+            "No runtime telemetry",
+            "No telemetry correlation",
+            "No EDGE/LINK integration",
+            "No DB-backed dependency graph",
+        ],
+        "certified": False,
+        "iec62443Certified": False,
     }
 
 

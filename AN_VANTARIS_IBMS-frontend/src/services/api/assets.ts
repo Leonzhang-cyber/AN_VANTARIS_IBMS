@@ -51,9 +51,27 @@ export interface AssetRecord {
   tags: string[]
   metadata: Record<string, unknown>
   limitations: string[]
+  hierarchyPath: AssetHierarchyPath | null
   runtimeLinked: boolean
   certified: boolean
   iec62443Certified: boolean
+}
+
+export interface AssetHierarchyLevel {
+  level: number
+  assetId: string
+  assetName: string
+  assetType: string
+  relationship: string
+}
+
+export interface AssetHierarchyPath {
+  pathMode: string
+  assetId: string
+  levels: AssetHierarchyLevel[]
+  complete: boolean
+  runtimeLinked: boolean
+  notes: string
 }
 
 export interface AssetsSummary {
@@ -70,6 +88,16 @@ export interface AssetsSummary {
   runtimeLinkedAssets: number
   certifiedAssets: number
   iec62443CertifiedAssets: number
+  totalRelationships: number
+  containmentRelationships: number
+  pointRelationships: number
+  relatedRelationships: number
+  rootAssets: number
+  leafAssets: number
+  maxHierarchyDepth: number
+  runtimeLinkedRelationships: number
+  topologyValidationMode: string
+  topologyValidated: boolean
   assetTypes: string[]
   assetCategories: string[]
   limitations: string[]
@@ -114,6 +142,9 @@ export interface AssetRelationships {
   parent: AssetRecord | null
   children: AssetRecord[]
   related: AssetRecord[]
+  relationshipSummary: AssetRelationshipSummary
+  relationshipGroups: AssetRelationshipGroups
+  relationshipPath: AssetRelationshipPath
   edges: Array<{
     edgeId: string
     from: string
@@ -122,6 +153,67 @@ export interface AssetRelationships {
     runtimeLinked: boolean
   }>
   runtimeLinked: boolean
+  certified: boolean
+  iec62443Certified: boolean
+}
+
+export interface AssetRelationshipSummary {
+  parentCount: number
+  childCount: number
+  relatedCount: number
+  upstreamCount: number
+  downstreamCount: number
+  pointCount: number
+  equipmentCount: number
+  systemCount: number
+  runtimeLinkedRelationships: number
+}
+
+export interface AssetRelationshipGroups {
+  parent: AssetRecord[]
+  children: AssetRecord[]
+  related: AssetRecord[]
+  upstream: AssetRecord[]
+  downstream: AssetRecord[]
+  points: AssetRecord[]
+  equipment: AssetRecord[]
+  systems: AssetRecord[]
+}
+
+export interface AssetRelationshipPath {
+  pathMode: string
+  assetId: string
+  rootAssetId: string
+  rootToAsset: AssetHierarchyLevel[]
+  assetToLeaves: Array<Array<{ assetId: string; assetName: string; assetType: string }>>
+  complete: boolean
+  runtimeLinked: boolean
+}
+
+export interface AssetTopologyLineage {
+  assetId: string
+  lineageMode: string
+  upstream: AssetRecord[]
+  downstream: AssetRecord[]
+  siblings: AssetRecord[]
+  containedAssets: AssetRecord[]
+  containingAssets: AssetRecord[]
+  runtimeLinked: boolean
+  certified: boolean
+  iec62443Certified: boolean
+  notes: string
+}
+
+export interface AssetImpactSkeleton {
+  assetId: string
+  impactMode: string
+  potentiallyImpactedAssets: string[]
+  potentiallyImpactedSystems: string[]
+  potentiallyImpactedZones: string[]
+  impactScore: number | null
+  impactCalculated: boolean
+  runtimeLinked: boolean
+  limitations: string[]
   certified: boolean
   iec62443Certified: boolean
 }
@@ -212,9 +304,36 @@ function normalizeAsset(raw: unknown): AssetRecord {
     tags: asStringArray(data.tags),
     metadata: asRecord(data.metadata),
     limitations: asStringArray(data.limitations),
+    hierarchyPath: normalizeHierarchyPath(data.hierarchyPath),
     runtimeLinked: Boolean(data.runtimeLinked),
     certified: Boolean(data.certified),
     iec62443Certified: Boolean(data.iec62443Certified),
+  }
+}
+
+function normalizeHierarchyLevel(raw: unknown): AssetHierarchyLevel {
+  const data = asRecord(raw)
+  return {
+    level: Number(data.level ?? 0),
+    assetId: String(data.assetId ?? ''),
+    assetName: String(data.assetName ?? ''),
+    assetType: String(data.assetType ?? ''),
+    relationship: String(data.relationship ?? ''),
+  }
+}
+
+function normalizeHierarchyPath(raw: unknown): AssetHierarchyPath | null {
+  if (!raw || typeof raw !== 'object') {
+    return null
+  }
+  const data = asRecord(raw)
+  return {
+    pathMode: String(data.pathMode ?? 'local-skeleton-hierarchy'),
+    assetId: String(data.assetId ?? ''),
+    levels: asRecordArray(data.levels).map((item) => normalizeHierarchyLevel(item)),
+    complete: Boolean(data.complete),
+    runtimeLinked: Boolean(data.runtimeLinked),
+    notes: String(data.notes ?? ''),
   }
 }
 
@@ -234,6 +353,16 @@ function normalizeSummary(raw: unknown): AssetsSummary {
     runtimeLinkedAssets: Number(data.runtimeLinkedAssets ?? 0),
     certifiedAssets: Number(data.certifiedAssets ?? 0),
     iec62443CertifiedAssets: Number(data.iec62443CertifiedAssets ?? 0),
+    totalRelationships: Number(data.totalRelationships ?? 0),
+    containmentRelationships: Number(data.containmentRelationships ?? 0),
+    pointRelationships: Number(data.pointRelationships ?? 0),
+    relatedRelationships: Number(data.relatedRelationships ?? 0),
+    rootAssets: Number(data.rootAssets ?? 0),
+    leafAssets: Number(data.leafAssets ?? 0),
+    maxHierarchyDepth: Number(data.maxHierarchyDepth ?? 0),
+    runtimeLinkedRelationships: Number(data.runtimeLinkedRelationships ?? 0),
+    topologyValidationMode: String(data.topologyValidationMode ?? 'local-skeleton-validation'),
+    topologyValidated: Boolean(data.topologyValidated),
     assetTypes: asStringArray(data.assetTypes),
     assetCategories: asStringArray(data.assetCategories),
     limitations: asStringArray(data.limitations),
@@ -307,12 +436,53 @@ function normalizeTopology(raw: unknown): AssetTopology {
 
 function normalizeRelationships(raw: unknown): AssetRelationships {
   const data = asRecord(raw)
+  const relationshipSummary = asRecord(data.relationshipSummary)
+  const relationshipGroups = asRecord(data.relationshipGroups)
+  const relationshipPath = asRecord(data.relationshipPath)
   return {
     assetId: String(data.assetId ?? ''),
     relationshipMode: String(data.relationshipMode ?? 'local-skeleton-relationships'),
     parent: data.parent ? normalizeAsset(data.parent) : null,
     children: asRecordArray(data.children).map((item) => normalizeAsset(item)),
     related: asRecordArray(data.related).map((item) => normalizeAsset(item)),
+    relationshipSummary: {
+      parentCount: Number(relationshipSummary.parentCount ?? 0),
+      childCount: Number(relationshipSummary.childCount ?? 0),
+      relatedCount: Number(relationshipSummary.relatedCount ?? 0),
+      upstreamCount: Number(relationshipSummary.upstreamCount ?? 0),
+      downstreamCount: Number(relationshipSummary.downstreamCount ?? 0),
+      pointCount: Number(relationshipSummary.pointCount ?? 0),
+      equipmentCount: Number(relationshipSummary.equipmentCount ?? 0),
+      systemCount: Number(relationshipSummary.systemCount ?? 0),
+      runtimeLinkedRelationships: Number(relationshipSummary.runtimeLinkedRelationships ?? 0),
+    },
+    relationshipGroups: {
+      parent: asRecordArray(relationshipGroups.parent).map((item) => normalizeAsset(item)),
+      children: asRecordArray(relationshipGroups.children).map((item) => normalizeAsset(item)),
+      related: asRecordArray(relationshipGroups.related).map((item) => normalizeAsset(item)),
+      upstream: asRecordArray(relationshipGroups.upstream).map((item) => normalizeAsset(item)),
+      downstream: asRecordArray(relationshipGroups.downstream).map((item) => normalizeAsset(item)),
+      points: asRecordArray(relationshipGroups.points).map((item) => normalizeAsset(item)),
+      equipment: asRecordArray(relationshipGroups.equipment).map((item) => normalizeAsset(item)),
+      systems: asRecordArray(relationshipGroups.systems).map((item) => normalizeAsset(item)),
+    },
+    relationshipPath: {
+      pathMode: String(relationshipPath.pathMode ?? 'local-skeleton-relationship-path'),
+      assetId: String(relationshipPath.assetId ?? ''),
+      rootAssetId: String(relationshipPath.rootAssetId ?? ''),
+      rootToAsset: asRecordArray(relationshipPath.rootToAsset).map((item) => normalizeHierarchyLevel(item)),
+      assetToLeaves: Array.isArray(relationshipPath.assetToLeaves)
+        ? relationshipPath.assetToLeaves.map((entry) =>
+            asRecordArray(entry).map((leaf) => ({
+              assetId: String(leaf.assetId ?? ''),
+              assetName: String(leaf.assetName ?? ''),
+              assetType: String(leaf.assetType ?? ''),
+            }))
+          )
+        : [],
+      complete: Boolean(relationshipPath.complete),
+      runtimeLinked: Boolean(relationshipPath.runtimeLinked),
+    },
     edges: asRecordArray(data.edges).map((item) => ({
       edgeId: String(item.edgeId ?? ''),
       from: String(item.from ?? ''),
@@ -321,6 +491,40 @@ function normalizeRelationships(raw: unknown): AssetRelationships {
       runtimeLinked: Boolean(item.runtimeLinked),
     })),
     runtimeLinked: Boolean(data.runtimeLinked),
+    certified: Boolean(data.certified),
+    iec62443Certified: Boolean(data.iec62443Certified),
+  }
+}
+
+function normalizeLineage(raw: unknown): AssetTopologyLineage {
+  const data = asRecord(raw)
+  return {
+    assetId: String(data.assetId ?? ''),
+    lineageMode: String(data.lineageMode ?? 'local-skeleton-lineage'),
+    upstream: asRecordArray(data.upstream).map((item) => normalizeAsset(item)),
+    downstream: asRecordArray(data.downstream).map((item) => normalizeAsset(item)),
+    siblings: asRecordArray(data.siblings).map((item) => normalizeAsset(item)),
+    containedAssets: asRecordArray(data.containedAssets).map((item) => normalizeAsset(item)),
+    containingAssets: asRecordArray(data.containingAssets).map((item) => normalizeAsset(item)),
+    runtimeLinked: Boolean(data.runtimeLinked),
+    certified: Boolean(data.certified),
+    iec62443Certified: Boolean(data.iec62443Certified),
+    notes: String(data.notes ?? ''),
+  }
+}
+
+function normalizeImpact(raw: unknown): AssetImpactSkeleton {
+  const data = asRecord(raw)
+  return {
+    assetId: String(data.assetId ?? ''),
+    impactMode: String(data.impactMode ?? 'local-skeleton-impact'),
+    potentiallyImpactedAssets: asStringArray(data.potentiallyImpactedAssets),
+    potentiallyImpactedSystems: asStringArray(data.potentiallyImpactedSystems),
+    potentiallyImpactedZones: asStringArray(data.potentiallyImpactedZones),
+    impactScore: data.impactScore === null || data.impactScore === undefined ? null : Number(data.impactScore),
+    impactCalculated: Boolean(data.impactCalculated),
+    runtimeLinked: Boolean(data.runtimeLinked),
+    limitations: asStringArray(data.limitations),
     certified: Boolean(data.certified),
     iec62443Certified: Boolean(data.iec62443Certified),
   }
@@ -380,5 +584,15 @@ export async function getAssetTopology(): Promise<AssetTopology> {
 export async function getAssetRelationships(assetId: string): Promise<AssetRelationships> {
   const { data } = await request.get(`/v1/assets/${encodeURIComponent(assetId)}/relationships`)
   return normalizeRelationships(unwrapData<unknown>(data))
+}
+
+export async function getAssetLineage(assetId: string): Promise<AssetTopologyLineage> {
+  const { data } = await request.get(`/v1/assets/${encodeURIComponent(assetId)}/lineage`)
+  return normalizeLineage(unwrapData<unknown>(data))
+}
+
+export async function getAssetImpact(assetId: string): Promise<AssetImpactSkeleton> {
+  const { data } = await request.get(`/v1/assets/${encodeURIComponent(assetId)}/impact`)
+  return normalizeImpact(unwrapData<unknown>(data))
 }
 
