@@ -1,20 +1,17 @@
 # VANTARIS ONE Next Task Roadmap
 
-## Immediate Next Recommended Task
+## Shared Foundation Realignment
 
-CONTRACTS-A0-MANIFEST-BASELINE
+After `SHARED-FOUNDATION-A0-SCOPE-REALIGNMENT`, Edge/Link/Contracts planning is moved to shared foundation scope to avoid duplicated ONE/UFMS implementations.
 
-Reason:
+## Recommended Sequence
 
-Contracts coverage is PARTIAL. Before Edge/Link/Code runtime migration, Contracts must define manifest, versioning, object identity, API namespace policy, Edge normalized object, Link envelope/ACK/retry/DLQ, module manifest, patch manifest, license VC, CDE base schema.
-
-## Parallel Optional Task
-
-EDGE-SOURCE-AUDIT
-
-Reason:
-
-AN_VANTARIS_EDGE runtime package does not exist. Current protocol drivers remain inside AN_VANTARIS_IBMS-backend/src/Iot/drivers. Need source audit before extraction.
+1. SHARED-FOUNDATION-A1-ROADMAP-RENUMBERING
+2. SHARED-CONTRACTS-A2-MODULE-PATCH-LICENSE-CDE-SCHEMAS
+3. SHARED-EDGE-A2-PROTOCOL-PLUGIN-DESCRIPTOR-BASELINE
+4. SHARED-LINK-A0-SKELETON-PACKAGE
+5. UFMS-ONE-ADAPTER-CONTRACT-A0
+6. CODE-MODULE-A0
 
 ## Not Yet Allowed
 
@@ -23,14 +20,4 @@ AN_VANTARIS_EDGE runtime package does not exist. Current protocol drivers remain
 - frontend move
 - DB rename
 - API namespace change
-- production package split
-
-## Recommended Sequence
-
-1. CONTRACTS-A0-MANIFEST-BASELINE
-2. EDGE-SOURCE-AUDIT
-3. CONTRACTS-A1-EDGE-LINK-SCHEMAS
-4. EDGE-A0-SKELETON-PACKAGE
-5. DB-SCHEMA-BASELINE
-6. CODE-MODULE-A0
-7. CONSOLE-MODULE-A0
+- duplicated Edge/Link/Contracts implementation per product
