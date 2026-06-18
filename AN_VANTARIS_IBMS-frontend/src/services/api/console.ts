@@ -895,3 +895,260 @@ export async function getPatchReadiness(): Promise<PatchReadiness> {
   return normalizePatchReadiness(unwrapData<unknown>(data))
 }
 
+export type ConsoleRole = 'customer' | 'engineer' | 'admin'
+
+export interface RolePackageVisibility {
+  role: ConsoleRole
+  packageId: string
+  packageCode: string
+  packageName: string
+  moduleId: string
+  moduleName: string
+  entryMode: string
+  label: string
+  route: string
+  visible: boolean
+  enabled: boolean
+  entitled: boolean
+  installed: boolean
+  contextOnly: boolean
+  lockedReason: string | null
+  state: string
+  readOnly: boolean
+  controlActionsEnabled: boolean
+  realRbacIntegrated: boolean
+  authIntegrated: boolean
+  routeGuardIntegrated: boolean
+  certified: boolean
+  iec62443Certified: boolean
+}
+
+export interface RoleVisibilityPolicy {
+  role: ConsoleRole
+  roleLabel: string
+  visibilityMode: string
+  realRbacIntegrated: boolean
+  authIntegrated: boolean
+  routeGuardIntegrated: boolean
+  readOnly: boolean
+  allowedEntryModes: string[]
+  hiddenEntryModes: string[]
+  visiblePackages: RolePackageVisibility[]
+  lockedPackages: RolePackageVisibility[]
+  hiddenPackages: RolePackageVisibility[]
+  menuPreview: RolePackageVisibility[]
+  hiddenOrLockedReasons: Array<{
+    role: ConsoleRole
+    packageCode: string
+    moduleName: string
+    entryMode: string
+    reason: string
+    state: string
+    certified: boolean
+    iec62443Certified: boolean
+  }>
+  limitations: string[]
+  certified: boolean
+  iec62443Certified: boolean
+}
+
+export interface RoleEntryView {
+  role: ConsoleRole
+  roleLabel: string
+  entryMode: string
+  visiblePackages: RolePackageVisibility[]
+  lockedPackages: RolePackageVisibility[]
+  hiddenPackages: RolePackageVisibility[]
+  readOnly: boolean
+  controlActionsEnabled: boolean
+  realRbacIntegrated: boolean
+  authIntegrated: boolean
+  routeGuardIntegrated: boolean
+  certified: boolean
+  iec62443Certified: boolean
+}
+
+export interface RoleMenuPreview {
+  role: ConsoleRole
+  roleLabel: string
+  menuPreviewMode: string
+  items: RolePackageVisibility[]
+  readOnly: boolean
+  realRbacIntegrated: boolean
+  authIntegrated: boolean
+  routeGuardIntegrated: boolean
+  certified: boolean
+  iec62443Certified: boolean
+}
+
+export interface RoleVisibilitySummary {
+  supportedRoles: ConsoleRole[]
+  roleVisibilityMode: string
+  realRbacIntegrated: boolean
+  authIntegrated: boolean
+  routeGuardIntegrated: boolean
+  customerVisibleCount: number
+  engineerVisibleCount: number
+  adminVisibleCount: number
+  lockedPackageCount: number
+  hiddenPackageCount: number
+  readOnly: boolean
+  controlActionsEnabled: boolean
+  certified: boolean
+  iec62443Certified: boolean
+}
+
+function normalizeRole(value: unknown): ConsoleRole {
+  const role = String(value ?? '').toLowerCase()
+  if (role === 'customer' || role === 'engineer' || role === 'admin') {
+    return role
+  }
+  return 'customer'
+}
+
+function normalizeRolePackageVisibility(raw: unknown): RolePackageVisibility {
+  const data = asRecord(raw)
+  return {
+    role: normalizeRole(data.role),
+    packageId: String(data.packageId ?? ''),
+    packageCode: String(data.packageCode ?? ''),
+    packageName: String(data.packageName ?? ''),
+    moduleId: String(data.moduleId ?? ''),
+    moduleName: String(data.moduleName ?? ''),
+    entryMode: String(data.entryMode ?? ''),
+    label: String(data.label ?? ''),
+    route: String(data.route ?? ''),
+    visible: Boolean(data.visible),
+    enabled: Boolean(data.enabled),
+    entitled: Boolean(data.entitled),
+    installed: Boolean(data.installed),
+    contextOnly: Boolean(data.contextOnly),
+    lockedReason: data.lockedReason === null || data.lockedReason === undefined ? null : String(data.lockedReason),
+    state: String(data.state ?? 'hidden'),
+    readOnly: data.readOnly !== undefined ? Boolean(data.readOnly) : true,
+    controlActionsEnabled: Boolean(data.controlActionsEnabled),
+    realRbacIntegrated: Boolean(data.realRbacIntegrated),
+    authIntegrated: Boolean(data.authIntegrated),
+    routeGuardIntegrated: Boolean(data.routeGuardIntegrated),
+    certified: Boolean(data.certified),
+    iec62443Certified: Boolean(data.iec62443Certified),
+  }
+}
+
+function normalizeRoleEntryView(raw: unknown): RoleEntryView {
+  const data = asRecord(raw)
+  return {
+    role: normalizeRole(data.role),
+    roleLabel: String(data.roleLabel ?? ''),
+    entryMode: String(data.entryMode ?? 'local-skeleton-role-entry-view'),
+    visiblePackages: Array.isArray(data.visiblePackages) ? data.visiblePackages.map((item) => normalizeRolePackageVisibility(item)) : [],
+    lockedPackages: Array.isArray(data.lockedPackages) ? data.lockedPackages.map((item) => normalizeRolePackageVisibility(item)) : [],
+    hiddenPackages: Array.isArray(data.hiddenPackages) ? data.hiddenPackages.map((item) => normalizeRolePackageVisibility(item)) : [],
+    readOnly: data.readOnly !== undefined ? Boolean(data.readOnly) : true,
+    controlActionsEnabled: Boolean(data.controlActionsEnabled),
+    realRbacIntegrated: Boolean(data.realRbacIntegrated),
+    authIntegrated: Boolean(data.authIntegrated),
+    routeGuardIntegrated: Boolean(data.routeGuardIntegrated),
+    certified: Boolean(data.certified),
+    iec62443Certified: Boolean(data.iec62443Certified),
+  }
+}
+
+function normalizeRoleMenuPreview(raw: unknown): RoleMenuPreview {
+  const data = asRecord(raw)
+  return {
+    role: normalizeRole(data.role),
+    roleLabel: String(data.roleLabel ?? ''),
+    menuPreviewMode: String(data.menuPreviewMode ?? 'local-skeleton-role-menu-preview'),
+    items: Array.isArray(data.items) ? data.items.map((item) => normalizeRolePackageVisibility(item)) : [],
+    readOnly: data.readOnly !== undefined ? Boolean(data.readOnly) : true,
+    realRbacIntegrated: Boolean(data.realRbacIntegrated),
+    authIntegrated: Boolean(data.authIntegrated),
+    routeGuardIntegrated: Boolean(data.routeGuardIntegrated),
+    certified: Boolean(data.certified),
+    iec62443Certified: Boolean(data.iec62443Certified),
+  }
+}
+
+function normalizeRoleVisibilityPolicy(raw: unknown): RoleVisibilityPolicy {
+  const data = asRecord(raw)
+  const reasonsRaw = Array.isArray(data.hiddenOrLockedReasons) ? data.hiddenOrLockedReasons : []
+  return {
+    role: normalizeRole(data.role),
+    roleLabel: String(data.roleLabel ?? ''),
+    visibilityMode: String(data.visibilityMode ?? 'local-skeleton-role-visibility'),
+    realRbacIntegrated: Boolean(data.realRbacIntegrated),
+    authIntegrated: Boolean(data.authIntegrated),
+    routeGuardIntegrated: Boolean(data.routeGuardIntegrated),
+    readOnly: data.readOnly !== undefined ? Boolean(data.readOnly) : true,
+    allowedEntryModes: asStringArray(data.allowedEntryModes),
+    hiddenEntryModes: asStringArray(data.hiddenEntryModes),
+    visiblePackages: Array.isArray(data.visiblePackages) ? data.visiblePackages.map((item) => normalizeRolePackageVisibility(item)) : [],
+    lockedPackages: Array.isArray(data.lockedPackages) ? data.lockedPackages.map((item) => normalizeRolePackageVisibility(item)) : [],
+    hiddenPackages: Array.isArray(data.hiddenPackages) ? data.hiddenPackages.map((item) => normalizeRolePackageVisibility(item)) : [],
+    menuPreview: Array.isArray(data.menuPreview) ? data.menuPreview.map((item) => normalizeRolePackageVisibility(item)) : [],
+    hiddenOrLockedReasons: reasonsRaw.map((item) => {
+      const row = asRecord(item)
+      return {
+        role: normalizeRole(row.role),
+        packageCode: String(row.packageCode ?? ''),
+        moduleName: String(row.moduleName ?? ''),
+        entryMode: String(row.entryMode ?? ''),
+        reason: String(row.reason ?? ''),
+        state: String(row.state ?? ''),
+        certified: Boolean(row.certified),
+        iec62443Certified: Boolean(row.iec62443Certified),
+      }
+    }),
+    limitations: asStringArray(data.limitations),
+    certified: Boolean(data.certified),
+    iec62443Certified: Boolean(data.iec62443Certified),
+  }
+}
+
+function normalizeRoleVisibilitySummary(raw: unknown): RoleVisibilitySummary {
+  const data = asRecord(raw)
+  return {
+    supportedRoles: Array.isArray(data.supportedRoles) ? data.supportedRoles.map((item) => normalizeRole(item)) : ['customer', 'engineer', 'admin'],
+    roleVisibilityMode: String(data.roleVisibilityMode ?? 'local-skeleton-role-visibility'),
+    realRbacIntegrated: Boolean(data.realRbacIntegrated),
+    authIntegrated: Boolean(data.authIntegrated),
+    routeGuardIntegrated: Boolean(data.routeGuardIntegrated),
+    customerVisibleCount: Number(data.customerVisibleCount ?? 0),
+    engineerVisibleCount: Number(data.engineerVisibleCount ?? 0),
+    adminVisibleCount: Number(data.adminVisibleCount ?? 0),
+    lockedPackageCount: Number(data.lockedPackageCount ?? 0),
+    hiddenPackageCount: Number(data.hiddenPackageCount ?? 0),
+    readOnly: data.readOnly !== undefined ? Boolean(data.readOnly) : true,
+    controlActionsEnabled: Boolean(data.controlActionsEnabled),
+    certified: Boolean(data.certified),
+    iec62443Certified: Boolean(data.iec62443Certified),
+  }
+}
+
+export async function getSupportedPackageRoles(): Promise<ConsoleRole[]> {
+  const { data } = await request.get('/v1/console/packages/roles')
+  const payload = asRecord(unwrapData<unknown>(data))
+  return Array.isArray(payload.items) ? payload.items.map((item) => normalizeRole(item)) : []
+}
+
+export async function getRoleVisibilitySummary(): Promise<RoleVisibilitySummary> {
+  const { data } = await request.get('/v1/console/packages/roles/summary')
+  return normalizeRoleVisibilitySummary(unwrapData<unknown>(data))
+}
+
+export async function getRoleVisibility(role: ConsoleRole): Promise<RoleVisibilityPolicy> {
+  const { data } = await request.get(`/v1/console/packages/roles/${encodeURIComponent(role)}`)
+  return normalizeRoleVisibilityPolicy(unwrapData<unknown>(data))
+}
+
+export async function getRoleEntries(role: ConsoleRole): Promise<RoleEntryView> {
+  const { data } = await request.get(`/v1/console/packages/roles/${encodeURIComponent(role)}/entries`)
+  return normalizeRoleEntryView(unwrapData<unknown>(data))
+}
+
+export async function getRoleMenuPreview(role: ConsoleRole): Promise<RoleMenuPreview> {
+  const { data } = await request.get(`/v1/console/packages/roles/${encodeURIComponent(role)}/menu-preview`)
+  return normalizeRoleMenuPreview(unwrapData<unknown>(data))
+}
+

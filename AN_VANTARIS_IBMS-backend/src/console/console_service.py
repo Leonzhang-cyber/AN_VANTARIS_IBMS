@@ -159,9 +159,9 @@ class ConsoleService:
                 launch_label = "Not Integrated"
                 disabled_reason = f"{module_name} runtime is not integrated in VANTARIS ONE at this stage."
                 if module_id == "edge-fleet":
-                    boundary_note = "AN_VANTARIS_EDGE remains a separate shared foundation boundary."
+                    boundary_note = "EDGE remains a separate shared foundation boundary."
                 elif module_id == "link-gateway":
-                    boundary_note = "AN_VANTARIS_LINK remains a separate shared foundation boundary."
+                    boundary_note = "LINK remains a separate shared foundation boundary."
                 else:
                     boundary_note = "This module remains a separate shared foundation boundary."
             else:

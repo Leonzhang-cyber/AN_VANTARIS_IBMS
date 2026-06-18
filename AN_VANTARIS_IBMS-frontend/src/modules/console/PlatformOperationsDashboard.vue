@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, reactive, ref } from 'vue'
+import { computed, onMounted, reactive, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { ApiError } from '@/services/api/errors'
 import {
@@ -18,8 +18,14 @@ import {
   getModulePackages,
   getPackageCenterHealth,
   getPackageEntries,
+  getRoleEntries,
+  getRoleMenuPreview,
+  getRoleVisibility,
+  getRoleVisibilitySummary,
+  getSupportedPackageRoles,
   getPackageSummary,
   getPatchReadiness,
+  type ConsoleRole,
   type ConsoleHealth,
   type ModulePackageRecord,
   type ModuleReadinessRecord,
@@ -28,6 +34,10 @@ import {
   type PackageEntryCenter,
   type PackageSummary,
   type PatchReadiness,
+  type RoleEntryView,
+  type RoleMenuPreview,
+  type RoleVisibilityPolicy,
+  type RoleVisibilitySummary,
   type OperationsDashboardSummary,
   type PlatformModuleSummary,
   type PlatformNavigationItem,
@@ -49,6 +59,8 @@ const loadingPackageDetail = ref(false)
 const showPackageDrawer = ref(false)
 const selectedPackageDetail = ref<ModulePackageRecord | null>(null)
 const packageCenterError = ref('')
+const roleVisibilityError = ref('')
+const selectedRole = ref<ConsoleRole>('admin')
 
 const health = ref<ConsoleHealth>({
   status: 'unknown',
@@ -210,6 +222,69 @@ const patchReadiness = ref<PatchReadiness>({
 
 const packages = ref<ModulePackageRecord[]>([])
 const lockedPackages = ref<ModulePackageRecord[]>([])
+const supportedRoles = ref<ConsoleRole[]>(['customer', 'engineer', 'admin'])
+const roleVisibilitySummary = ref<RoleVisibilitySummary>({
+  supportedRoles: ['customer', 'engineer', 'admin'],
+  roleVisibilityMode: 'local-skeleton-role-visibility',
+  realRbacIntegrated: false,
+  authIntegrated: false,
+  routeGuardIntegrated: false,
+  customerVisibleCount: 0,
+  engineerVisibleCount: 0,
+  adminVisibleCount: 0,
+  lockedPackageCount: 0,
+  hiddenPackageCount: 0,
+  readOnly: true,
+  controlActionsEnabled: false,
+  certified: false,
+  iec62443Certified: false,
+})
+const rolePolicy = ref<RoleVisibilityPolicy>({
+  role: 'admin',
+  roleLabel: 'Admin User',
+  visibilityMode: 'local-skeleton-role-visibility',
+  realRbacIntegrated: false,
+  authIntegrated: false,
+  routeGuardIntegrated: false,
+  readOnly: true,
+  allowedEntryModes: ['customer-application', 'engineer-diagnostics', 'admin-package-center'],
+  hiddenEntryModes: [],
+  visiblePackages: [],
+  lockedPackages: [],
+  hiddenPackages: [],
+  menuPreview: [],
+  hiddenOrLockedReasons: [],
+  limitations: [],
+  certified: false,
+  iec62443Certified: false,
+})
+const roleEntries = ref<RoleEntryView>({
+  role: 'admin',
+  roleLabel: 'Admin User',
+  entryMode: 'local-skeleton-role-entry-view',
+  visiblePackages: [],
+  lockedPackages: [],
+  hiddenPackages: [],
+  readOnly: true,
+  controlActionsEnabled: false,
+  realRbacIntegrated: false,
+  authIntegrated: false,
+  routeGuardIntegrated: false,
+  certified: false,
+  iec62443Certified: false,
+})
+const roleMenuPreview = ref<RoleMenuPreview>({
+  role: 'admin',
+  roleLabel: 'Admin User',
+  menuPreviewMode: 'local-skeleton-role-menu-preview',
+  items: [],
+  readOnly: true,
+  realRbacIntegrated: false,
+  authIntegrated: false,
+  routeGuardIntegrated: false,
+  certified: false,
+  iec62443Certified: false,
+})
 
 const moduleFilters = reactive({
   runtimeStatus: '',
@@ -341,6 +416,22 @@ const filteredPackages = computed(() => {
     }
     return true
   })
+})
+
+const roleVisibleCustomerApplications = computed(() => {
+  return roleEntries.value.visiblePackages.filter((item) => item.entryMode === 'customer-application' && !item.contextOnly)
+})
+
+const roleVisibleEngineerWorkspace = computed(() => {
+  const allEngineerRows = [...roleEntries.value.visiblePackages, ...roleEntries.value.lockedPackages, ...roleEntries.value.hiddenPackages]
+  return allEngineerRows.filter((item) => item.entryMode === 'engineer-diagnostics')
+})
+
+const roleAdminPackageCenter = computed(() => {
+  if (selectedRole.value !== 'admin') {
+    return []
+  }
+  return packageEntries.value.adminPackageCenter
 })
 
 const filteredModules = computed(() => {
@@ -541,9 +632,9 @@ function fallbackNavigationFromRegistry(items: ModuleReadinessRecord[]): Platfor
       disabledReason = 'Module runtime is not integrated in current stage.'
       boundaryNote =
         item.moduleId === 'edge-fleet'
-          ? 'AN_VANTARIS_EDGE remains a separate shared foundation boundary.'
+          ? 'EDGE remains a separate shared foundation boundary.'
           : item.moduleId === 'link-gateway'
-            ? 'AN_VANTARIS_LINK remains a separate shared foundation boundary.'
+            ? 'LINK remains a separate shared foundation boundary.'
             : 'This module remains a separate shared foundation boundary.'
     } else if (!launchEnabled) {
       launchLabel = 'Planned'
@@ -569,6 +660,72 @@ function fallbackNavigationFromRegistry(items: ModuleReadinessRecord[]): Platfor
     navigationMode: 'read-only-module-launch',
     controlActionsEnabled: false,
     items: rows,
+  }
+}
+
+async function loadRoleVisibilityPreview(role: ConsoleRole): Promise<void> {
+  roleVisibilityError.value = ''
+  try {
+    const [rolesResult, summaryResult, policyResult, entriesResult, menuResult] = await Promise.all([
+      getSupportedPackageRoles(),
+      getRoleVisibilitySummary(),
+      getRoleVisibility(role),
+      getRoleEntries(role),
+      getRoleMenuPreview(role),
+    ])
+    supportedRoles.value = rolesResult.length > 0 ? rolesResult : ['customer', 'engineer', 'admin']
+    roleVisibilitySummary.value = summaryResult
+    rolePolicy.value = policyResult
+    roleEntries.value = entriesResult
+    roleMenuPreview.value = menuResult
+  } catch (error) {
+    roleVisibilityError.value = normalizeError(error, 'Role visibility preview API unavailable. Showing empty role preview.')
+    rolePolicy.value = {
+      role,
+      roleLabel: role === 'customer' ? 'Customer User' : role === 'engineer' ? 'Engineer User' : 'Admin User',
+      visibilityMode: 'local-skeleton-role-visibility',
+      realRbacIntegrated: false,
+      authIntegrated: false,
+      routeGuardIntegrated: false,
+      readOnly: true,
+      allowedEntryModes: role === 'customer' ? ['customer-application'] : role === 'engineer' ? ['engineer-diagnostics'] : ['admin-package-center'],
+      hiddenEntryModes: [],
+      visiblePackages: [],
+      lockedPackages: [],
+      hiddenPackages: [],
+      menuPreview: [],
+      hiddenOrLockedReasons: [],
+      limitations: ['Role visibility preview fallback is active.'],
+      certified: false,
+      iec62443Certified: false,
+    }
+    roleEntries.value = {
+      role,
+      roleLabel: rolePolicy.value.roleLabel,
+      entryMode: 'local-skeleton-role-entry-view',
+      visiblePackages: [],
+      lockedPackages: [],
+      hiddenPackages: [],
+      readOnly: true,
+      controlActionsEnabled: false,
+      realRbacIntegrated: false,
+      authIntegrated: false,
+      routeGuardIntegrated: false,
+      certified: false,
+      iec62443Certified: false,
+    }
+    roleMenuPreview.value = {
+      role,
+      roleLabel: rolePolicy.value.roleLabel,
+      menuPreviewMode: 'local-skeleton-role-menu-preview',
+      items: [],
+      readOnly: true,
+      realRbacIntegrated: false,
+      authIntegrated: false,
+      routeGuardIntegrated: false,
+      certified: false,
+      iec62443Certified: false,
+    }
   }
 }
 
@@ -629,6 +786,7 @@ async function loadDashboard(): Promise<void> {
       packageEntries.value = entryCenter
       patchReadiness.value = patchResult
       lockedPackages.value = lockedResult
+      await loadRoleVisibilityPreview(selectedRole.value)
     } catch (packageError) {
       packageCenterError.value = normalizeError(packageError, 'Package Center API unavailable. Using local fallback package state.')
       packages.value = []
@@ -655,6 +813,7 @@ async function loadDashboard(): Promise<void> {
         iec62443Certified: false,
       }
       lockedPackages.value = []
+      await loadRoleVisibilityPreview(selectedRole.value)
     }
   } catch (error) {
     apiError.value = normalizeError(error, 'UConsole API unavailable. Showing local fallback summary.')
@@ -663,6 +822,7 @@ async function loadDashboard(): Promise<void> {
     readinessScore.value = computeLocalScore(modules.value)
     navigationModel.value = fallbackNavigationFromRegistry(modules.value)
     packageCenterError.value = 'Package Center API unavailable. Using local fallback package state.'
+    await loadRoleVisibilityPreview(selectedRole.value)
   } finally {
     loading.value = false
   }
@@ -743,6 +903,13 @@ function resetPackageFilters(): void {
   packageFilters.patchStatus = ''
   packageFilters.role = ''
 }
+
+watch(
+  () => selectedRole.value,
+  (role) => {
+    void loadRoleVisibilityPreview(role)
+  }
+)
 
 onMounted(() => {
   void loadDashboard()
@@ -1028,14 +1195,108 @@ onMounted(() => {
     </el-card>
 
     <el-card shadow="never" class="block-space">
+      <template #header>
+        <div class="section-title">Role-Based Module Visibility Preview</div>
+      </template>
+      <el-alert
+        type="info"
+        show-icon
+        :closable="false"
+        title="Role-based visibility is a local skeleton preview. Real RBAC, auth enforcement and route guards are not integrated."
+        class="block-space"
+      />
+      <el-alert
+        v-if="roleVisibilityError"
+        type="warning"
+        show-icon
+        :closable="false"
+        :title="roleVisibilityError"
+        class="block-space"
+      />
+      <div class="filter-row block-space">
+        <el-select v-model="selectedRole" placeholder="role selector" class="filter-field">
+          <el-option
+            v-for="role in supportedRoles"
+            :key="role"
+            :label="role === 'customer' ? 'Customer' : role === 'engineer' ? 'Engineer' : 'Admin'"
+            :value="role"
+          />
+        </el-select>
+      </div>
+      <el-descriptions :column="4" border class="block-space">
+        <el-descriptions-item label="supportedRoles">{{ roleVisibilitySummary.supportedRoles.join(', ') }}</el-descriptions-item>
+        <el-descriptions-item label="customerVisibleCount">{{ roleVisibilitySummary.customerVisibleCount }}</el-descriptions-item>
+        <el-descriptions-item label="engineerVisibleCount">{{ roleVisibilitySummary.engineerVisibleCount }}</el-descriptions-item>
+        <el-descriptions-item label="adminVisibleCount">{{ roleVisibilitySummary.adminVisibleCount }}</el-descriptions-item>
+        <el-descriptions-item label="lockedPackageCount">{{ roleVisibilitySummary.lockedPackageCount }}</el-descriptions-item>
+        <el-descriptions-item label="hiddenPackageCount">{{ roleVisibilitySummary.hiddenPackageCount }}</el-descriptions-item>
+        <el-descriptions-item label="realRbacIntegrated">{{ roleVisibilitySummary.realRbacIntegrated }}</el-descriptions-item>
+        <el-descriptions-item label="routeGuardIntegrated">{{ roleVisibilitySummary.routeGuardIntegrated }}</el-descriptions-item>
+      </el-descriptions>
+      <el-descriptions :column="2" border class="block-space">
+        <el-descriptions-item label="role">{{ rolePolicy.role }}</el-descriptions-item>
+        <el-descriptions-item label="visibilityMode">{{ rolePolicy.visibilityMode }}</el-descriptions-item>
+        <el-descriptions-item label="allowedEntryModes">{{ rolePolicy.allowedEntryModes.join(', ') || '-' }}</el-descriptions-item>
+        <el-descriptions-item label="hiddenEntryModes">{{ rolePolicy.hiddenEntryModes.join(', ') || '-' }}</el-descriptions-item>
+        <el-descriptions-item label="realRbacIntegrated">{{ rolePolicy.realRbacIntegrated }}</el-descriptions-item>
+        <el-descriptions-item label="authIntegrated">{{ rolePolicy.authIntegrated }}</el-descriptions-item>
+        <el-descriptions-item label="routeGuardIntegrated">{{ rolePolicy.routeGuardIntegrated }}</el-descriptions-item>
+        <el-descriptions-item label="readOnly">{{ rolePolicy.readOnly }}</el-descriptions-item>
+      </el-descriptions>
+      <el-text>{{ rolePolicy.limitations.join(' | ') }}</el-text>
+    </el-card>
+
+    <el-card shadow="never" class="block-space">
+      <template #header><div class="section-title">Role Entries</div></template>
+      <el-descriptions :column="3" border class="block-space">
+        <el-descriptions-item label="visiblePackages">{{ roleEntries.visiblePackages.length }}</el-descriptions-item>
+        <el-descriptions-item label="lockedPackages">{{ roleEntries.lockedPackages.length }}</el-descriptions-item>
+        <el-descriptions-item label="hiddenPackages">{{ roleEntries.hiddenPackages.length }}</el-descriptions-item>
+      </el-descriptions>
+      <el-table :data="roleEntries.visiblePackages" row-key="packageCode" empty-text="No visible entries for selected role">
+        <el-table-column prop="packageCode" label="packageCode" min-width="150" />
+        <el-table-column prop="moduleId" label="moduleId" min-width="130" />
+        <el-table-column prop="entryMode" label="entryMode" min-width="170" />
+        <el-table-column prop="label" label="label" min-width="180" />
+        <el-table-column prop="route" label="route" min-width="170" />
+        <el-table-column prop="visible" label="visible" min-width="100" />
+        <el-table-column prop="enabled" label="enabled" min-width="100" />
+      </el-table>
+    </el-card>
+
+    <el-card shadow="never" class="block-space">
+      <template #header><div class="section-title">Menu Preview Table</div></template>
+      <el-table :data="roleMenuPreview.items" row-key="packageCode" empty-text="No menu preview data">
+        <el-table-column prop="label" label="label" min-width="180" />
+        <el-table-column prop="route" label="route" min-width="170" />
+        <el-table-column prop="packageCode" label="packageCode" min-width="150" />
+        <el-table-column prop="moduleId" label="moduleId" min-width="130" />
+        <el-table-column prop="entryMode" label="entryMode" min-width="170" />
+        <el-table-column prop="visible" label="visible" min-width="100" />
+        <el-table-column prop="enabled" label="enabled" min-width="100" />
+        <el-table-column prop="lockedReason" label="lockedReason" min-width="220" />
+      </el-table>
+    </el-card>
+
+    <el-card shadow="never" class="block-space">
+      <template #header><div class="section-title">Hidden / Locked Reasons</div></template>
+      <el-table :data="rolePolicy.hiddenOrLockedReasons" row-key="packageCode" empty-text="No hidden or locked reasons">
+        <el-table-column prop="packageCode" label="packageCode" min-width="150" />
+        <el-table-column prop="moduleName" label="moduleName" min-width="220" />
+        <el-table-column prop="role" label="role" min-width="120" />
+        <el-table-column prop="reason" label="reason" min-width="260" />
+      </el-table>
+    </el-card>
+
+    <el-card shadow="never" class="block-space">
       <template #header><div class="section-title">Customer Applications</div></template>
-      <el-table :data="packageEntries.customerApplications" row-key="packageId" empty-text="No customer applications">
+      <el-table :data="roleVisibleCustomerApplications" row-key="packageCode" empty-text="No customer applications for selected role">
         <el-table-column prop="moduleName" label="label" min-width="200" />
         <el-table-column label="route" min-width="180">
-          <template #default="{ row }">{{ row.entry.route || '-' }}</template>
+          <template #default="{ row }">{{ row.route || '-' }}</template>
         </el-table-column>
         <el-table-column label="enabled/visible" min-width="140">
-          <template #default="{ row }">{{ row.entry.enabled }} / {{ row.entry.visible }}</template>
+          <template #default="{ row }">{{ row.enabled }} / {{ row.visible }}</template>
         </el-table-column>
         <el-table-column prop="lockedReason" label="lockedReason" min-width="240" />
       </el-table>
@@ -1050,23 +1311,23 @@ onMounted(() => {
         title="Engineer workspace entries are placeholder-only and do not connect to EDGE/LINK runtime in this stage."
         class="block-space"
       />
-      <el-table :data="packageEntries.engineerWorkspace" row-key="packageId" empty-text="No engineer entries">
+      <el-table :data="roleVisibleEngineerWorkspace" row-key="packageCode" empty-text="No engineer entries for selected role">
         <el-table-column prop="moduleName" label="label" min-width="220" />
         <el-table-column label="route" min-width="180">
-          <template #default="{ row }">{{ row.entry.route || '-' }}</template>
+          <template #default="{ row }">{{ row.route || '-' }}</template>
         </el-table-column>
         <el-table-column label="enabled/visible" min-width="140">
-          <template #default="{ row }">{{ row.entry.enabled }} / {{ row.entry.visible }}</template>
+          <template #default="{ row }">{{ row.enabled }} / {{ row.visible }}</template>
         </el-table-column>
         <el-table-column label="lockedReason" min-width="240">
-          <template #default="{ row }">{{ row.entry.lockedReason || '-' }}</template>
+          <template #default="{ row }">{{ row.lockedReason || '-' }}</template>
         </el-table-column>
       </el-table>
     </el-card>
 
     <el-card shadow="never" class="block-space">
       <template #header><div class="section-title">Admin Package Center</div></template>
-      <el-table :data="packageEntries.adminPackageCenter" row-key="packageId" empty-text="No admin entries">
+      <el-table :data="roleAdminPackageCenter" row-key="packageId" empty-text="No admin entries for selected role">
         <el-table-column prop="moduleName" label="moduleName" min-width="220" />
         <el-table-column label="entryLabel" min-width="170">
           <template #default="{ row }">{{ row.entry.label }}</template>

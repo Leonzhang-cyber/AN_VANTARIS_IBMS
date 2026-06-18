@@ -107,6 +107,40 @@ def console_packages_patch_readiness():
     return Result.success(data=_package_service.get_patch_readiness())
 
 
+@api_bp.route("/v1/console/packages/roles", methods=["GET"])
+def console_package_roles():
+    return Result.success(data=_package_service.get_supported_roles())
+
+
+@api_bp.route("/v1/console/packages/roles/summary", methods=["GET"])
+def console_package_roles_summary():
+    return Result.success(data=_package_service.get_role_visibility_summary())
+
+
+@api_bp.route("/v1/console/packages/roles/<string:role>", methods=["GET"])
+def console_package_role_visibility(role: str):
+    data = _package_service.get_role_visibility(role)
+    if not data:
+        return Result.error(code=404, message="role not found")
+    return Result.success(data=data)
+
+
+@api_bp.route("/v1/console/packages/roles/<string:role>/entries", methods=["GET"])
+def console_package_role_entries(role: str):
+    data = _package_service.get_role_entries(role)
+    if not data:
+        return Result.error(code=404, message="role not found")
+    return Result.success(data=data)
+
+
+@api_bp.route("/v1/console/packages/roles/<string:role>/menu-preview", methods=["GET"])
+def console_package_role_menu_preview(role: str):
+    data = _package_service.get_role_menu_preview(role)
+    if not data:
+        return Result.error(code=404, message="role not found")
+    return Result.success(data=data)
+
+
 @api_bp.route("/v1/console/packages/<string:package_id_or_module_id>", methods=["GET"])
 def console_package_detail(package_id_or_module_id: str):
     data = _package_service.get_package_detail(package_id_or_module_id)

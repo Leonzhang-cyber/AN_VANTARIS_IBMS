@@ -14,6 +14,12 @@ from src.console.module_package_registry import (
     get_patch_readiness,
     list_module_packages,
 )
+from src.console.module_role_visibility import (
+    get_role_entry_view,
+    get_role_menu_preview,
+    get_role_visibility_policy,
+    get_supported_roles,
+)
 
 
 class ModulePackageService:
@@ -94,4 +100,51 @@ class ModulePackageService:
 
     def get_patch_readiness(self) -> Dict[str, Any]:
         return get_patch_readiness()
+
+    def get_supported_roles(self) -> Dict[str, Any]:
+        return {
+            "items": get_supported_roles(),
+            "roleVisibilityMode": "local-skeleton-role-visibility",
+            "readOnly": True,
+            "realRbacIntegrated": False,
+            "authIntegrated": False,
+            "routeGuardIntegrated": False,
+            "certified": False,
+            "iec62443Certified": False,
+        }
+
+    def get_role_visibility(self, role: str) -> Optional[Dict[str, Any]]:
+        packages = list_module_packages({})
+        return get_role_visibility_policy(role, packages)
+
+    def get_role_entries(self, role: str) -> Optional[Dict[str, Any]]:
+        packages = list_module_packages({})
+        return get_role_entry_view(role, packages)
+
+    def get_role_menu_preview(self, role: str) -> Optional[Dict[str, Any]]:
+        packages = list_module_packages({})
+        return get_role_menu_preview(role, packages)
+
+    def get_role_visibility_summary(self) -> Dict[str, Any]:
+        packages = list_module_packages({})
+        customer_view = get_role_entry_view("customer", packages) or {}
+        engineer_view = get_role_entry_view("engineer", packages) or {}
+        admin_view = get_role_entry_view("admin", packages) or {}
+
+        return {
+            "supportedRoles": get_supported_roles(),
+            "roleVisibilityMode": "local-skeleton-role-visibility",
+            "realRbacIntegrated": False,
+            "authIntegrated": False,
+            "routeGuardIntegrated": False,
+            "customerVisibleCount": len(customer_view.get("visiblePackages", [])),
+            "engineerVisibleCount": len(engineer_view.get("visiblePackages", [])),
+            "adminVisibleCount": len(admin_view.get("visiblePackages", [])),
+            "lockedPackageCount": len(admin_view.get("lockedPackages", [])),
+            "hiddenPackageCount": len(admin_view.get("hiddenPackages", [])),
+            "readOnly": True,
+            "controlActionsEnabled": False,
+            "certified": False,
+            "iec62443Certified": False,
+        }
 
