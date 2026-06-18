@@ -14,10 +14,13 @@ After `ONE-SHARED-FOUNDATION-CONSUMER-A0`, VANTARIS ONE treats Edge/Link/Contrac
 - ONE-ADAPTER-A1-CONSUMER-CONTRACT-DRAFT
 - UCONSOLE-A1-MODULE-STATUS-CONTRACT-DRAFT
 - UCDE-A2-EVIDENCE-CONTRACT-DRAFT
+- U-MODULES-A2-READINESS-REVIEW
 
 ## Next Recommended Task
 
-- U-MODULES-A2-READINESS-REVIEW
+- U-MODULES-A3-IMPLEMENTATION-GATE-PLAN
+
+A3 is implementation gate planning only. It does not implement runtime, API, DB, schema, or contracts package directly.
 
 ## Shared Foundation Runtime Continuation (UFMS-led)
 
