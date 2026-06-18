@@ -1,0 +1,361 @@
+{
+  "manifestName": "VANTARIS_ONE_MODULE_MANIFEST_BASELINE",
+  "manifestVersion": "0.1.0-a0",
+  "status": "DRAFT_A0",
+  "runtimeReady": false,
+  "createdFor": "VANTARIS ONE",
+  "sharedFoundationMode": "UFMS_LED_SHARED_FOUNDATION_CONSUMER",
+  "modules": [
+    {
+      "moduleId": "one-adapter",
+      "displayName": "ONE Adapter",
+      "moduleType": "consumer",
+      "status": "draft-a0",
+      "owns": [
+        "Shared Foundation consumption boundary",
+        "contract/version validation",
+        "identity/traceability preservation",
+        "cross-module object mapping"
+      ],
+      "doesNotOwn": [
+        "Edge runtime",
+        "Link runtime",
+        "global Contracts ownership",
+        "UFMS runtime"
+      ],
+      "consumesFrom": [
+        "AN_VANTARIS_Contracts",
+        "AN_VANTARIS_EDGE",
+        "AN_VANTARIS_LINK"
+      ],
+      "providesTo": [
+        "ibms-core",
+        "mms",
+        "esg",
+        "idc-dcim",
+        "cde",
+        "console",
+        "reports",
+        "analytics"
+      ],
+      "traceabilityRequired": true,
+      "runtimeReady": false,
+      "nextTask": "ONE-ADAPTER-A1-CONSUMER-CONTRACT-DRAFT"
+    },
+    {
+      "moduleId": "ibms-core",
+      "displayName": "IBMS Core",
+      "moduleType": "business",
+      "status": "draft-a0",
+      "owns": [
+        "building operations context",
+        "operations dashboard context",
+        "facility operational workflows context"
+      ],
+      "doesNotOwn": [
+        "Edge runtime",
+        "Link runtime",
+        "UFMS runtime",
+        "CDE evidence chain core"
+      ],
+      "consumesFrom": [
+        "one-adapter"
+      ],
+      "providesTo": [
+        "mms",
+        "esg",
+        "idc-dcim",
+        "cde",
+        "console",
+        "reports",
+        "analytics"
+      ],
+      "traceabilityRequired": true,
+      "runtimeReady": false,
+      "nextTask": "IBMS-CORE-A1-MODULE-MANIFEST-DRAFT"
+    },
+    {
+      "moduleId": "mms",
+      "displayName": "MMS",
+      "moduleType": "business",
+      "status": "draft-a0",
+      "owns": [
+        "maintenance workflow lifecycle context",
+        "work order context",
+        "inspection and maintenance KPI context"
+      ],
+      "doesNotOwn": [
+        "Edge runtime",
+        "Link runtime",
+        "UFMS runtime",
+        "ESG carbon model"
+      ],
+      "consumesFrom": [
+        "one-adapter",
+        "ibms-core"
+      ],
+      "providesTo": [
+        "esg",
+        "cde",
+        "console",
+        "reports",
+        "analytics"
+      ],
+      "traceabilityRequired": true,
+      "runtimeReady": false,
+      "nextTask": "MMS-A1-MODULE-MANIFEST-DRAFT"
+    },
+    {
+      "moduleId": "esg",
+      "displayName": "ESG",
+      "moduleType": "business",
+      "status": "draft-a0",
+      "owns": [
+        "energy/sustainability interpretation context",
+        "sustainability KPI context",
+        "reporting workspace context"
+      ],
+      "doesNotOwn": [
+        "Edge runtime",
+        "Link runtime",
+        "UFMS runtime",
+        "MMS work order lifecycle"
+      ],
+      "consumesFrom": [
+        "one-adapter",
+        "ibms-core",
+        "mms",
+        "idc-dcim"
+      ],
+      "providesTo": [
+        "cde",
+        "console",
+        "reports",
+        "analytics"
+      ],
+      "traceabilityRequired": true,
+      "runtimeReady": false,
+      "nextTask": "ESG-A1-MODULE-MANIFEST-DRAFT"
+    },
+    {
+      "moduleId": "idc-dcim",
+      "displayName": "IDC/DCIM",
+      "moduleType": "business",
+      "status": "draft-a0",
+      "owns": [
+        "data center infrastructure operations context",
+        "capacity/power/cooling context",
+        "availability and incident context"
+      ],
+      "doesNotOwn": [
+        "Edge runtime",
+        "Link runtime",
+        "UFMS runtime",
+        "ESG carbon reporting model"
+      ],
+      "consumesFrom": [
+        "one-adapter",
+        "ibms-core"
+      ],
+      "providesTo": [
+        "mms",
+        "esg",
+        "cde",
+        "console",
+        "reports",
+        "analytics"
+      ],
+      "traceabilityRequired": true,
+      "runtimeReady": false,
+      "nextTask": "IDC-DCIM-A1-MODULE-MANIFEST-DRAFT"
+    },
+    {
+      "moduleId": "cde",
+      "displayName": "CDE",
+      "moduleType": "business",
+      "status": "draft-a0",
+      "owns": [
+        "evidence reference context",
+        "traceability and audit linkage context",
+        "cross-module evidence index context"
+      ],
+      "doesNotOwn": [
+        "Edge runtime",
+        "Link runtime",
+        "UFMS runtime",
+        "business workflow ownership"
+      ],
+      "consumesFrom": [
+        "one-adapter",
+        "ibms-core",
+        "mms",
+        "esg",
+        "idc-dcim"
+      ],
+      "providesTo": [
+        "console",
+        "reports",
+        "analytics"
+      ],
+      "traceabilityRequired": true,
+      "runtimeReady": false,
+      "nextTask": "CDE-A1-MODULE-MANIFEST-DRAFT"
+    },
+    {
+      "moduleId": "console",
+      "displayName": "Console",
+      "moduleType": "platform",
+      "status": "draft-a0",
+      "owns": [
+        "platform/module health visibility context",
+        "status/governance entry context"
+      ],
+      "doesNotOwn": [
+        "Edge runtime",
+        "Link runtime",
+        "UFMS runtime",
+        "business module logic ownership"
+      ],
+      "consumesFrom": [
+        "one-adapter",
+        "ibms-core",
+        "mms",
+        "esg",
+        "idc-dcim",
+        "cde"
+      ],
+      "providesTo": [
+        "platform-operators"
+      ],
+      "traceabilityRequired": true,
+      "runtimeReady": false,
+      "nextTask": "CONSOLE-A1-MODULE-STATUS-CONTRACT-DRAFT"
+    },
+    {
+      "moduleId": "reports",
+      "displayName": "Reports",
+      "moduleType": "reporting",
+      "status": "pending-a1",
+      "owns": [
+        "approved module output presentation context"
+      ],
+      "doesNotOwn": [
+        "business module logic ownership",
+        "Edge runtime",
+        "Link runtime",
+        "UFMS runtime"
+      ],
+      "consumesFrom": [
+        "ibms-core",
+        "mms",
+        "esg",
+        "idc-dcim",
+        "cde",
+        "console"
+      ],
+      "providesTo": [
+        "stakeholders"
+      ],
+      "traceabilityRequired": true,
+      "runtimeReady": false,
+      "nextTask": "REPORTS-A1-MODULE-MANIFEST-DRAFT"
+    },
+    {
+      "moduleId": "analytics",
+      "displayName": "Analytics",
+      "moduleType": "analytics",
+      "status": "pending-a1",
+      "owns": [
+        "approved module output analysis context"
+      ],
+      "doesNotOwn": [
+        "business module logic ownership",
+        "Edge runtime",
+        "Link runtime",
+        "UFMS runtime"
+      ],
+      "consumesFrom": [
+        "ibms-core",
+        "mms",
+        "esg",
+        "idc-dcim",
+        "cde",
+        "console"
+      ],
+      "providesTo": [
+        "platform-operators",
+        "reports"
+      ],
+      "traceabilityRequired": true,
+      "runtimeReady": false,
+      "nextTask": "ANALYTICS-A1-MODULE-MANIFEST-DRAFT"
+    },
+    {
+      "moduleId": "nexus-ai-consumer",
+      "displayName": "Nexus AI Consumer",
+      "moduleType": "future",
+      "status": "future",
+      "owns": [
+        "future AI consumption boundary context"
+      ],
+      "doesNotOwn": [
+        "NexusAI model runtime",
+        "Edge runtime",
+        "Link runtime",
+        "UFMS runtime"
+      ],
+      "consumesFrom": [
+        "one-adapter",
+        "ibms-core",
+        "mms",
+        "esg",
+        "idc-dcim",
+        "cde"
+      ],
+      "providesTo": [
+        "future module consumers"
+      ],
+      "traceabilityRequired": true,
+      "runtimeReady": false,
+      "nextTask": "NEXUS-AI-CONSUMER-A1-MODULE-MANIFEST-DRAFT"
+    }
+  ],
+  "sharedFoundationDependencies": [
+    {
+      "dependencyId": "AN_VANTARIS_Contracts",
+      "ownership": "UFMS-led Shared Foundation",
+      "oneRole": "consumer only",
+      "runtimeOwnedByONE": false
+    },
+    {
+      "dependencyId": "AN_VANTARIS_EDGE",
+      "ownership": "UFMS-led Shared Foundation",
+      "oneRole": "consumer only",
+      "runtimeOwnedByONE": false
+    },
+    {
+      "dependencyId": "AN_VANTARIS_LINK",
+      "ownership": "UFMS-led Shared Foundation",
+      "oneRole": "consumer only",
+      "runtimeOwnedByONE": false
+    }
+  ],
+  "rules": [
+    "No Edge runtime in ONE.",
+    "No Link runtime in ONE.",
+    "No private Contracts fork in ONE.",
+    "No UFMS runtime import.",
+    "All modules consume through approved adapter/contracts.",
+    "Runtime implementation requires separate A1 approval.",
+    "Menu/API/DB changes require separate approval."
+  ],
+  "nextTasks": [
+    "CDE-A1-MODULE-MANIFEST-DRAFT",
+    "IDC-DCIM-A1-MODULE-MANIFEST-DRAFT",
+    "ESG-A1-MODULE-MANIFEST-DRAFT",
+    "MMS-A1-MODULE-MANIFEST-DRAFT",
+    "IBMS-CORE-A1-MODULE-MANIFEST-DRAFT",
+    "ONE-ADAPTER-A1-CONSUMER-CONTRACT-DRAFT",
+    "CONSOLE-A1-MODULE-STATUS-CONTRACT-DRAFT"
+  ]
+}
