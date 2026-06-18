@@ -86,5 +86,19 @@ export const fallbackMenuItems: AppMenuItem[] = [
       },
     ],
   },
+  {
+    id: 'uesg',
+    label: 'UESG',
+    path: '/uesg/sustainability',
+    source: 'static',
+    children: [
+      {
+        id: 'uesg-sustainability',
+        label: 'Sustainability',
+        path: '/uesg/sustainability',
+        source: 'static',
+      },
+    ],
+  },
   { id: 'reports', label: 'Reports', path: '/reports', source: 'static' },
 ]

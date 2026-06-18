@@ -1,0 +1,2 @@
+"""UESG API package."""
+

@@ -11,6 +11,7 @@ import PlatformOperationsDashboard from '@/modules/console/PlatformOperationsDas
 import ReportsView from '@/modules/reports/ReportsView.vue'
 import EvidenceCenter from '@/modules/ucde/EvidenceCenter.vue'
 import AssetsTopology from '@/modules/assets/AssetsTopology.vue'
+import UesgSustainability from '@/modules/uesg/UesgSustainability.vue'
 import SystemOverviewView from '@/modules/system/SystemOverviewView.vue'
 import SystemSettingsView from '@/modules/system/SystemSettingsView.vue'
 
@@ -117,6 +118,12 @@ export const routes: RouteRecordRaw[] = [
     name: 'assets-topology',
     component: AssetsTopology,
     meta: { requiresAuth: true, title: 'Assets & Topology', layout: true },
+  },
+  {
+    path: '/uesg/sustainability',
+    name: 'uesg-sustainability',
+    component: UesgSustainability,
+    meta: { requiresAuth: true, title: 'UESG Sustainability', layout: true },
   },
   {
     path: '/403',
