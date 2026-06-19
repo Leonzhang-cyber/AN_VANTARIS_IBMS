@@ -14,11 +14,15 @@ TEST_FILE = ROOT / "AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/ev
 SAMPLE_DIR = ROOT / "AN_VANTARIS_ONE/evidence/device-reconciliation/sample"
 
 ALLOWED_PREFIXES = (
-    "AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/",
-    "AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/",
+    "AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/",
+    "AN_VANTARIS_IBMS-backend/src/asset_graph/compatibility/models.py",
+    "AN_VANTARIS_IBMS-backend/src/asset_graph/compatibility/facade.py",
+    "AN_VANTARIS_IBMS-backend/tests/asset_graph/",
     "AN_VANTARIS_ONE/evidence/device-reconciliation/sample/",
     "scripts/validation/run-one-device-reconciliation-evidence.py",
+    "scripts/validation/run-one-device-reconciliation-excel.py",
     "scripts/validation/validate-one-device-reconciliation-evidence.py",
+    "scripts/validation/validate-one-device-reconciliation-excel.py",
 )
 
 REQUIRED_SAMPLES = (

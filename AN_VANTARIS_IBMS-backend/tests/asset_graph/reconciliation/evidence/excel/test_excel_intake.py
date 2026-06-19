@@ -157,6 +157,17 @@ class TestExcelEvidenceIntake(unittest.TestCase):
             row = [item for item in book.rows("Devices") if item.get("Scenario") == "SITE_MISMATCH"][0]
         package = convert_workbook_rows([row], [])
         self.assertEqual(package["devices"][0]["siteId"], "SYNTH-SITE-MISMATCH")
+        self.assertNotIn("SYNTH-SITE-MISMATCH", package["siteContext"]["allowedSiteIds"])
+
+    # 14b
+    def test_converter_declares_multi_site_context(self) -> None:
+        with ExcelWorkbook.open(self.workbook_path) as book:
+            package = convert_workbook_rows(book.rows("Devices"), book.rows("StandardFields"))
+        self.assertEqual(package["siteContext"]["mode"], "MULTI_SITE_DECLARED")
+        self.assertEqual(
+            package["siteContext"]["allowedSiteIds"],
+            ["SYNTH-SITE-001", "SYNTH-SITE-002", "SYNTH-SITE-003"],
+        )
 
     # 15
     def test_point_unknown_device_preserved(self) -> None:

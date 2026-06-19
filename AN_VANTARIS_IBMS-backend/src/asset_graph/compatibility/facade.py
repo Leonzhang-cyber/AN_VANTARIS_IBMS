@@ -100,7 +100,7 @@ class LegacyDeviceReadCompatibilityFacade:
                 return self._failure(ProjectionCategory.INVALID_SOURCE, "MISSING_TENANT")
             if record.source_tenant_id and record.source_tenant_id != context.tenant_id:
                 return self._failure(ProjectionCategory.SCOPE_MISMATCH, "TENANT_SCOPE_MISMATCH")
-            if record.source_site_id and record.source_site_id != context.site_id:
+            if record.source_site_id and not context.allows_record_site(record.source_site_id):
                 return self._failure(ProjectionCategory.SCOPE_MISMATCH, "SITE_SCOPE_MISMATCH")
             identity = self.build_source_identity(record, context)
             created, updated = self._timestamps(record)
@@ -111,7 +111,8 @@ class LegacyDeviceReadCompatibilityFacade:
             lifecycle = self.lifecycle_map.get(record.status, LifecycleStatus.ACTIVE.value)
             operational = self.operational_map.get(record.status, OperationalStatus.UNKNOWN.value)
             device_id = self._id("device", context, record.source_id)
-            site_id = SiteId(context.site_id) if context.site_id else None
+            effective_site = record.source_site_id or context.site_id or context.primary_site_id
+            site_id = SiteId(effective_site) if effective_site else None
             device = Device(
                 global_id=device_id, tenant_id=TenantId(context.tenant_id), site_id=site_id,
                 asset_id=GlobalId(context.parent_asset_id) if context.parent_asset_id else None,

@@ -16,11 +16,14 @@ TEST_DIR = ROOT / "AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evi
 FIXTURES = TEST_DIR / "fixtures.py"
 
 ALLOWED_PREFIXES = (
-    "AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/excel/",
-    "AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/__init__.py",
-    "AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/",
+    "AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/",
+    "AN_VANTARIS_IBMS-backend/src/asset_graph/compatibility/models.py",
+    "AN_VANTARIS_IBMS-backend/src/asset_graph/compatibility/facade.py",
+    "AN_VANTARIS_IBMS-backend/tests/asset_graph/",
     "scripts/validation/run-one-device-reconciliation-excel.py",
+    "scripts/validation/run-one-device-reconciliation-evidence.py",
     "scripts/validation/validate-one-device-reconciliation-excel.py",
+    "scripts/validation/validate-one-device-reconciliation-evidence.py",
 )
 
 

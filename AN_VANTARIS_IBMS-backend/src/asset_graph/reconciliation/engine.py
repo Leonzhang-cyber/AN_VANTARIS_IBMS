@@ -259,7 +259,9 @@ class DeviceProjectionReconciliationService:
             blockers = ()
             if point and projection.canonical_device and point.device_id != projection.canonical_device.global_id:
                 blockers = ("POINT_DEVICE_REFERENCE",)
-            if point and (str(point.tenant_id) != context.tenant_id or str(point.site_id or "") != str(context.site_id or "")):
+            if point and str(point.tenant_id) != context.tenant_id:
+                blockers += ("POINT_SCOPE_MISMATCH",)
+            elif point and point.site_id and not context.allows_record_site(str(point.site_id)):
                 blockers += ("POINT_SCOPE_MISMATCH",)
             results.append(PointReconciliationResult(
                 source_id, classification, str(point.global_id) if point else None,
@@ -275,10 +277,9 @@ class DeviceProjectionReconciliationService:
     def _relationship_results(projection: ProjectionResult, context):
         results = []
         for item in projection.relationships:
-            scope_mismatch = (
-                str(item.tenant_id) != context.tenant_id
-                or str(item.site_id or "") != str(context.site_id or "")
-            )
+            scope_mismatch = str(item.tenant_id) != context.tenant_id
+            if not scope_mismatch and item.site_id:
+                scope_mismatch = not context.allows_record_site(str(item.site_id))
             results.append(RelationshipReconciliationResult(
                 item.relationship_type,
                 DimensionStatus.MISMATCH.value if scope_mismatch else DimensionStatus.PASS.value,

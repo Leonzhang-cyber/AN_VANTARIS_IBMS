@@ -14,15 +14,18 @@ from src.asset_graph.compatibility import (
     LegacyFieldSnapshot,
     ProjectionContext,
 )
+from src.asset_graph.reconciliation.constants import DEFAULT_CUTOVER_DECISION, MAX_RECONCILIATION_BATCH_SIZE
 from src.asset_graph.reconciliation import (
     DeviceProjectionReconciliationService,
     ReconciliationInput,
     canonical_json,
     sha256_digest,
 )
-from src.asset_graph.reconciliation.constants import (
-    DEFAULT_CUTOVER_DECISION,
-    MAX_RECONCILIATION_BATCH_SIZE,
+from src.asset_graph.reconciliation.site_context import (
+    SiteContextError,
+    collect_scope_metrics,
+    merge_site_context,
+    parse_site_context,
 )
 
 AUTHORITY = "ONE-A5-P1-16B"
@@ -208,16 +211,20 @@ def _build_context(package: Mapping[str, Any]) -> ProjectionContext:
     tenant_id = str(tenant_context.get("tenantId", "")).strip()
     source_system_id = str(source_context.get("sourceSystemId", "")).strip()
     source_namespace = str(source_context.get("sourceNamespace", "legacy.iot.devices")).strip()
-    site_id_raw = site_context.get("siteId")
-    site_id = str(site_id_raw).strip() if site_id_raw else None
     _ensure_safe_identifier(tenant_id, "tenantId")
     _ensure_safe_identifier(source_system_id, "sourceSystemId")
     _ensure_safe_identifier(source_namespace.replace("/", "_"), "sourceNamespace")
-    if site_id:
-        _ensure_safe_identifier(site_id, "siteId")
-    return ProjectionContext(
+    try:
+        site_base = parse_site_context(site_context, tenant_id=tenant_id)
+    except SiteContextError as exc:
+        raise EvidencePackageError("INVALID_SITE_CONTEXT", str(exc)) from exc
+    for site_value in site_base.allowed_site_ids:
+        _ensure_safe_identifier(site_value, "allowedSiteId")
+    if site_base.primary_site_id:
+        _ensure_safe_identifier(site_base.primary_site_id, "primarySiteId")
+    return merge_site_context(
+        site_base,
         tenant_id=tenant_id,
-        site_id=site_id,
         source_system_id=source_system_id,
         source_namespace=source_namespace,
         default_device_type="CONTROLLER",
@@ -271,7 +278,7 @@ def _normalize_devices(
         site_id = str(site_id_raw).strip() if site_id_raw else None
         if tenant_id != context.tenant_id:
             blockers.append({"type": "BLOCKER", "code": "TENANT_SCOPE_MISMATCH", "message": f"device[{index}] tenant mismatch"})
-        if context.site_id and site_id and site_id != context.site_id:
+        if site_id and not context.allows_record_site(site_id):
             blockers.append({"type": "BLOCKER", "code": "SITE_SCOPE_MISMATCH", "message": f"device[{index}] site mismatch"})
         parent_reference = None
         if isinstance(raw.get("locationReference"), Mapping):
@@ -496,6 +503,12 @@ def run_device_reconciliation_evidence(
     service = DeviceProjectionReconciliationService(facade=facade)
     run = service.reconcile_batch(run_id=run_id, reconciliation_input=reconciliation_input)
     collected = _collect_results(run, validation_blockers, validation_reviews)
+    scope_metrics = collect_scope_metrics(
+        context,
+        package["devices"],
+        validation_blockers,
+        run.record_results,
+    )
     blockers = list(collected["blockers"])
     reviews = list(collected["reviews"])
     cutover_decision = _cutover_decision(blockers, reviews, run.cutover_decision)
@@ -532,6 +545,7 @@ def run_device_reconciliation_evidence(
         "mappingVersion": mapping_version,
         "tenantId": context.tenant_id,
         "siteId": context.site_id,
+        "scopeMetrics": scope_metrics,
         "sourceSystemId": context.source_system_id,
         "runId": run_id,
         "sourceSummary": package["sourceSummary"],

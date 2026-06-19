@@ -114,6 +114,20 @@ class ProjectionContext:
     parent_asset_id: Optional[str] = None
     metadata_classification: str = "INTERNAL"
     default_device_type: Optional[str] = None
+    site_scope_mode: str = "SINGLE_SITE_STRICT"
+    primary_site_id: Optional[str] = None
+    allowed_site_ids: Tuple[str, ...] = ()
+
+    def allows_record_site(self, record_site_id: Optional[str]) -> bool:
+        if record_site_id is None or not str(record_site_id).strip():
+            return True
+        record_site = str(record_site_id).strip()
+        if self.site_scope_mode == "MULTI_SITE_DECLARED":
+            return record_site in self.allowed_site_ids
+        declared_site = self.site_id or self.primary_site_id
+        if declared_site:
+            return record_site == declared_site
+        return True
 
 
 @dataclass(frozen=True)

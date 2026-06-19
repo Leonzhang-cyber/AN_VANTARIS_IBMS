@@ -141,6 +141,15 @@ def _field_record(row: Mapping[str, Any]) -> dict[str, Any]:
     return record
 
 
+def _declared_allowed_sites(device_rows: Sequence[Mapping[str, Any]]) -> list[str]:
+    declared = sorted({
+        _clean(row.get("SiteID"))
+        for row in device_rows
+        if _clean(row.get("SiteID")) in DEFAULT_SITES
+    })
+    return declared if declared else list(DEFAULT_SITES)
+
+
 def convert_workbook_rows(
     device_rows: Sequence[Mapping[str, Any]],
     field_rows: Sequence[Mapping[str, Any]],
@@ -154,8 +163,8 @@ def convert_workbook_rows(
     fields = [_field_record(row) for row in field_rows]
     devices.sort(key=lambda item: str(item.get("sourceId", "")))
     fields.sort(key=lambda item: (str(item.get("deviceSourceId", "")), str(item.get("sourceId", ""))))
-    sites = sorted({str(row.get("SiteID", "")).strip() for row in device_rows if _clean(row.get("SiteID"))})
     namespaces = sorted({str(row.get("SourceNamespace", "")).strip() for row in device_rows if _clean(row.get("SourceNamespace"))})
+    allowed_sites = _declared_allowed_sites(device_rows)
     return {
         "formatName": FORMAT_NAME,
         "formatVersion": FORMAT_VERSION,
@@ -166,8 +175,9 @@ def convert_workbook_rows(
             "synthetic": True,
         },
         "siteContext": {
-            "siteId": DEFAULT_SITES[0],
-            "declaredSites": list(sites or DEFAULT_SITES),
+            "mode": "MULTI_SITE_DECLARED",
+            "primarySiteId": DEFAULT_SITES[0],
+            "allowedSiteIds": allowed_sites,
             "synthetic": True,
         },
         "sourceSystemContext": {
