@@ -1,0 +1,914 @@
+{
+  "registryName": "VANTARIS_ONE_API_NAMESPACE_REGISTRY",
+  "registryVersion": "1.0.0",
+  "generatedAtPolicy": "STATIC_ARCHITECTURE_BASELINE",
+  "authority": "ONE-PLAN-A4",
+  "status": "FROZEN_FOR_IMPLEMENTATION",
+  "apiNamespaces": [
+    {
+      "namespace": "/api/v1/platform",
+      "owningModule": "UConsole",
+      "packageId": "PKG-UCONSOLE",
+      "contractNamespaces": [
+        "vantaris.package.v1",
+        "vantaris.health.v1"
+      ],
+      "operationClasses": [
+        "READ",
+        "WRITE",
+        "CONTROL",
+        "EVENT"
+      ],
+      "authenticationRequired": true,
+      "permissionPrefix": "platform",
+      "tenantScoped": true,
+      "siteScoped": false,
+      "auditPolicy": "ALL_WRITES_CONTROLS_EXPORTS_AND_SENSITIVE_READS",
+      "idempotencyPolicy": "REQUIRED_FOR_COMMANDS_AND_INTAKE",
+      "retryOwner": "CALLER_FOR_SAFE_READS_PROVIDER_OR_LINK_FOR_DELIVERY",
+      "timeoutClass": "BOUNDED_OR_ASYNC_JOB",
+      "cachePolicy": "TENANT_SCOPED_READ_ONLY_VERSION_AWARE",
+      "legacyMappings": [],
+      "prohibitedDependencies": [
+        "direct-cross-module-database-access",
+        "runtime-internal-imports"
+      ],
+      "currentState": "TARGET_NAMESPACE",
+      "readinessGate": "CONTRACT_AND_AUTHORIZATION_VALIDATED"
+    },
+    {
+      "namespace": "/api/v1/context",
+      "owningModule": "UCore",
+      "packageId": "PKG-UCORE",
+      "contractNamespaces": [
+        "vantaris.identity.v1",
+        "vantaris.asset.v1"
+      ],
+      "operationClasses": [
+        "READ",
+        "WRITE",
+        "CONTROL",
+        "EVENT"
+      ],
+      "authenticationRequired": true,
+      "permissionPrefix": "context",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditPolicy": "ALL_WRITES_CONTROLS_EXPORTS_AND_SENSITIVE_READS",
+      "idempotencyPolicy": "REQUIRED_FOR_COMMANDS_AND_INTAKE",
+      "retryOwner": "CALLER_FOR_SAFE_READS_PROVIDER_OR_LINK_FOR_DELIVERY",
+      "timeoutClass": "BOUNDED_OR_ASYNC_JOB",
+      "cachePolicy": "TENANT_SCOPED_READ_ONLY_VERSION_AWARE",
+      "legacyMappings": [
+        "/api/system"
+      ],
+      "prohibitedDependencies": [
+        "direct-cross-module-database-access",
+        "runtime-internal-imports"
+      ],
+      "currentState": "TARGET_NAMESPACE",
+      "readinessGate": "CONTRACT_AND_AUTHORIZATION_VALIDATED"
+    },
+    {
+      "namespace": "/api/v1/assets",
+      "owningModule": "ONE Asset Graph",
+      "packageId": "PKG-ASSET-GRAPH",
+      "contractNamespaces": [
+        "vantaris.asset.v1",
+        "vantaris.device.v1"
+      ],
+      "operationClasses": [
+        "READ",
+        "WRITE",
+        "CONTROL",
+        "EVENT"
+      ],
+      "authenticationRequired": true,
+      "permissionPrefix": "asset",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditPolicy": "ALL_WRITES_CONTROLS_EXPORTS_AND_SENSITIVE_READS",
+      "idempotencyPolicy": "REQUIRED_FOR_COMMANDS_AND_INTAKE",
+      "retryOwner": "CALLER_FOR_SAFE_READS_PROVIDER_OR_LINK_FOR_DELIVERY",
+      "timeoutClass": "BOUNDED_OR_ASYNC_JOB",
+      "cachePolicy": "TENANT_SCOPED_READ_ONLY_VERSION_AWARE",
+      "legacyMappings": [
+        "/api/v1/assets",
+        "/api/iot/device"
+      ],
+      "prohibitedDependencies": [
+        "direct-cross-module-database-access",
+        "runtime-internal-imports"
+      ],
+      "currentState": "TARGET_NAMESPACE",
+      "readinessGate": "CONTRACT_AND_AUTHORIZATION_VALIDATED"
+    },
+    {
+      "namespace": "/api/v1/model",
+      "owningModule": "Unified Data Model",
+      "packageId": "PKG-UNIFIED-DATA-MODEL",
+      "contractNamespaces": [
+        "vantaris.asset.v1",
+        "vantaris.device.v1"
+      ],
+      "operationClasses": [
+        "READ",
+        "WRITE",
+        "CONTROL",
+        "EVENT"
+      ],
+      "authenticationRequired": true,
+      "permissionPrefix": "asset",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditPolicy": "ALL_WRITES_CONTROLS_EXPORTS_AND_SENSITIVE_READS",
+      "idempotencyPolicy": "REQUIRED_FOR_COMMANDS_AND_INTAKE",
+      "retryOwner": "CALLER_FOR_SAFE_READS_PROVIDER_OR_LINK_FOR_DELIVERY",
+      "timeoutClass": "BOUNDED_OR_ASYNC_JOB",
+      "cachePolicy": "TENANT_SCOPED_READ_ONLY_VERSION_AWARE",
+      "legacyMappings": [
+        "/api/system/list-standard-fields"
+      ],
+      "prohibitedDependencies": [
+        "direct-cross-module-database-access",
+        "runtime-internal-imports"
+      ],
+      "currentState": "TARGET_NAMESPACE",
+      "readinessGate": "CONTRACT_AND_AUTHORIZATION_VALIDATED"
+    },
+    {
+      "namespace": "/api/v1/integration",
+      "owningModule": "Integration Governance",
+      "packageId": "PKG-UNIFIED-DATA-MODEL",
+      "contractNamespaces": [
+        "vantaris.integration.v1"
+      ],
+      "operationClasses": [
+        "READ",
+        "WRITE",
+        "CONTROL",
+        "EVENT"
+      ],
+      "authenticationRequired": true,
+      "permissionPrefix": "integration",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditPolicy": "ALL_WRITES_CONTROLS_EXPORTS_AND_SENSITIVE_READS",
+      "idempotencyPolicy": "REQUIRED_FOR_COMMANDS_AND_INTAKE",
+      "retryOwner": "CALLER_FOR_SAFE_READS_PROVIDER_OR_LINK_FOR_DELIVERY",
+      "timeoutClass": "BOUNDED_OR_ASYNC_JOB",
+      "cachePolicy": "TENANT_SCOPED_READ_ONLY_VERSION_AWARE",
+      "legacyMappings": [
+        "/api/iot/*/field-mappings-info"
+      ],
+      "prohibitedDependencies": [
+        "direct-cross-module-database-access",
+        "runtime-internal-imports"
+      ],
+      "currentState": "TARGET_NAMESPACE",
+      "readinessGate": "CONTRACT_AND_AUTHORIZATION_VALIDATED"
+    },
+    {
+      "namespace": "/api/v1/edge",
+      "owningModule": "AN_VANTARIS_EDGE",
+      "packageId": "PKG-EDGE",
+      "contractNamespaces": [
+        "vantaris.edge.v1"
+      ],
+      "operationClasses": [
+        "READ",
+        "WRITE",
+        "CONTROL",
+        "EVENT"
+      ],
+      "authenticationRequired": true,
+      "permissionPrefix": "edge",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditPolicy": "ALL_WRITES_CONTROLS_EXPORTS_AND_SENSITIVE_READS",
+      "idempotencyPolicy": "REQUIRED_FOR_COMMANDS_AND_INTAKE",
+      "retryOwner": "CALLER_FOR_SAFE_READS_PROVIDER_OR_LINK_FOR_DELIVERY",
+      "timeoutClass": "BOUNDED_OR_ASYNC_JOB",
+      "cachePolicy": "TENANT_SCOPED_READ_ONLY_VERSION_AWARE",
+      "legacyMappings": [
+        "/api/v1/uedge"
+      ],
+      "prohibitedDependencies": [
+        "direct-cross-module-database-access",
+        "runtime-internal-imports"
+      ],
+      "currentState": "TARGET_NAMESPACE",
+      "readinessGate": "CONTRACT_AND_AUTHORIZATION_VALIDATED"
+    },
+    {
+      "namespace": "/api/v1/link",
+      "owningModule": "AN_VANTARIS_LINK",
+      "packageId": "PKG-LINK",
+      "contractNamespaces": [
+        "vantaris.link.v1"
+      ],
+      "operationClasses": [
+        "READ",
+        "WRITE",
+        "CONTROL",
+        "EVENT"
+      ],
+      "authenticationRequired": true,
+      "permissionPrefix": "link",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditPolicy": "ALL_WRITES_CONTROLS_EXPORTS_AND_SENSITIVE_READS",
+      "idempotencyPolicy": "REQUIRED_FOR_COMMANDS_AND_INTAKE",
+      "retryOwner": "CALLER_FOR_SAFE_READS_PROVIDER_OR_LINK_FOR_DELIVERY",
+      "timeoutClass": "BOUNDED_OR_ASYNC_JOB",
+      "cachePolicy": "TENANT_SCOPED_READ_ONLY_VERSION_AWARE",
+      "legacyMappings": [],
+      "prohibitedDependencies": [
+        "direct-cross-module-database-access",
+        "runtime-internal-imports"
+      ],
+      "currentState": "TARGET_NAMESPACE",
+      "readinessGate": "CONTRACT_AND_AUTHORIZATION_VALIDATED"
+    },
+    {
+      "namespace": "/api/v1/telemetry",
+      "owningModule": "Layer 3 Data Foundation",
+      "packageId": "PKG-DATA-LAKE",
+      "contractNamespaces": [
+        "vantaris.telemetry.v1"
+      ],
+      "operationClasses": [
+        "READ",
+        "WRITE",
+        "CONTROL",
+        "EVENT"
+      ],
+      "authenticationRequired": true,
+      "permissionPrefix": "event",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditPolicy": "ALL_WRITES_CONTROLS_EXPORTS_AND_SENSITIVE_READS",
+      "idempotencyPolicy": "REQUIRED_FOR_COMMANDS_AND_INTAKE",
+      "retryOwner": "CALLER_FOR_SAFE_READS_PROVIDER_OR_LINK_FOR_DELIVERY",
+      "timeoutClass": "BOUNDED_OR_ASYNC_JOB",
+      "cachePolicy": "TENANT_SCOPED_READ_ONLY_VERSION_AWARE",
+      "legacyMappings": [
+        "/api/iot/ingest/http"
+      ],
+      "prohibitedDependencies": [
+        "direct-cross-module-database-access",
+        "runtime-internal-imports"
+      ],
+      "currentState": "TARGET_NAMESPACE",
+      "readinessGate": "CONTRACT_AND_AUTHORIZATION_VALIDATED"
+    },
+    {
+      "namespace": "/api/v1/events",
+      "owningModule": "Layer 3 Data Foundation",
+      "packageId": "PKG-DATA-LAKE",
+      "contractNamespaces": [
+        "vantaris.event.v1"
+      ],
+      "operationClasses": [
+        "READ",
+        "WRITE",
+        "CONTROL",
+        "EVENT"
+      ],
+      "authenticationRequired": true,
+      "permissionPrefix": "event",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditPolicy": "ALL_WRITES_CONTROLS_EXPORTS_AND_SENSITIVE_READS",
+      "idempotencyPolicy": "REQUIRED_FOR_COMMANDS_AND_INTAKE",
+      "retryOwner": "CALLER_FOR_SAFE_READS_PROVIDER_OR_LINK_FOR_DELIVERY",
+      "timeoutClass": "BOUNDED_OR_ASYNC_JOB",
+      "cachePolicy": "TENANT_SCOPED_READ_ONLY_VERSION_AWARE",
+      "legacyMappings": [
+        "/api/iot/device/*/stream"
+      ],
+      "prohibitedDependencies": [
+        "direct-cross-module-database-access",
+        "runtime-internal-imports"
+      ],
+      "currentState": "TARGET_NAMESPACE",
+      "readinessGate": "CONTRACT_AND_AUTHORIZATION_VALIDATED"
+    },
+    {
+      "namespace": "/api/v1/adapters/ufms",
+      "owningModule": "PKG-UFMS-INTEGRATION",
+      "packageId": "PKG-UFMS-INTEGRATION",
+      "contractNamespaces": [
+        "vantaris.ufms.v1",
+        "vantaris.work.v1",
+        "vantaris.evidence.v1"
+      ],
+      "operationClasses": [
+        "READ",
+        "WRITE",
+        "CONTROL",
+        "EVENT"
+      ],
+      "authenticationRequired": true,
+      "permissionPrefix": "fault",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditPolicy": "ALL_WRITES_CONTROLS_EXPORTS_AND_SENSITIVE_READS",
+      "idempotencyPolicy": "REQUIRED_FOR_COMMANDS_AND_INTAKE",
+      "retryOwner": "CALLER_FOR_SAFE_READS_PROVIDER_OR_LINK_FOR_DELIVERY",
+      "timeoutClass": "BOUNDED_OR_ASYNC_JOB",
+      "cachePolicy": "TENANT_SCOPED_READ_ONLY_VERSION_AWARE",
+      "legacyMappings": [],
+      "prohibitedDependencies": [
+        "direct-cross-module-database-access",
+        "runtime-internal-imports"
+      ],
+      "currentState": "TARGET_NAMESPACE",
+      "readinessGate": "CONTRACT_AND_AUTHORIZATION_VALIDATED",
+      "liveVerificationRequired": [
+        "exactEndpointPaths",
+        "payloads",
+        "authenticationMethod",
+        "errorResponses",
+        "pagination",
+        "eventDeliveryMode",
+        "supportedContractVersion",
+        "rateLimits",
+        "idempotencyBehavior"
+      ]
+    },
+    {
+      "namespace": "/api/v1/work",
+      "owningModule": "ONE Work Management",
+      "packageId": "PKG-WORK-MANAGEMENT",
+      "contractNamespaces": [
+        "vantaris.work.v1"
+      ],
+      "operationClasses": [
+        "READ",
+        "WRITE",
+        "CONTROL",
+        "EVENT"
+      ],
+      "authenticationRequired": true,
+      "permissionPrefix": "work",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditPolicy": "ALL_WRITES_CONTROLS_EXPORTS_AND_SENSITIVE_READS",
+      "idempotencyPolicy": "REQUIRED_FOR_COMMANDS_AND_INTAKE",
+      "retryOwner": "CALLER_FOR_SAFE_READS_PROVIDER_OR_LINK_FOR_DELIVERY",
+      "timeoutClass": "BOUNDED_OR_ASYNC_JOB",
+      "cachePolicy": "TENANT_SCOPED_READ_ONLY_VERSION_AWARE",
+      "legacyMappings": [],
+      "prohibitedDependencies": [
+        "direct-cross-module-database-access",
+        "runtime-internal-imports"
+      ],
+      "currentState": "TARGET_NAMESPACE",
+      "readinessGate": "CONTRACT_AND_AUTHORIZATION_VALIDATED"
+    },
+    {
+      "namespace": "/api/v1/mms",
+      "owningModule": "UMMS",
+      "packageId": "PKG-UMMS",
+      "contractNamespaces": [
+        "vantaris.maintenance.v1",
+        "vantaris.work.v1"
+      ],
+      "operationClasses": [
+        "READ",
+        "WRITE",
+        "CONTROL",
+        "EVENT"
+      ],
+      "authenticationRequired": true,
+      "permissionPrefix": "maintenance",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditPolicy": "ALL_WRITES_CONTROLS_EXPORTS_AND_SENSITIVE_READS",
+      "idempotencyPolicy": "REQUIRED_FOR_COMMANDS_AND_INTAKE",
+      "retryOwner": "CALLER_FOR_SAFE_READS_PROVIDER_OR_LINK_FOR_DELIVERY",
+      "timeoutClass": "BOUNDED_OR_ASYNC_JOB",
+      "cachePolicy": "TENANT_SCOPED_READ_ONLY_VERSION_AWARE",
+      "legacyMappings": [
+        "/api/v1/umms"
+      ],
+      "prohibitedDependencies": [
+        "direct-cross-module-database-access",
+        "runtime-internal-imports"
+      ],
+      "currentState": "TARGET_NAMESPACE",
+      "readinessGate": "CONTRACT_AND_AUTHORIZATION_VALIDATED"
+    },
+    {
+      "namespace": "/api/v1/esg",
+      "owningModule": "UESG",
+      "packageId": "PKG-UESG",
+      "contractNamespaces": [
+        "vantaris.esg.v1"
+      ],
+      "operationClasses": [
+        "READ",
+        "WRITE",
+        "CONTROL",
+        "EVENT"
+      ],
+      "authenticationRequired": true,
+      "permissionPrefix": "esg",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditPolicy": "ALL_WRITES_CONTROLS_EXPORTS_AND_SENSITIVE_READS",
+      "idempotencyPolicy": "REQUIRED_FOR_COMMANDS_AND_INTAKE",
+      "retryOwner": "CALLER_FOR_SAFE_READS_PROVIDER_OR_LINK_FOR_DELIVERY",
+      "timeoutClass": "BOUNDED_OR_ASYNC_JOB",
+      "cachePolicy": "TENANT_SCOPED_READ_ONLY_VERSION_AWARE",
+      "legacyMappings": [
+        "/api/v1/uesg"
+      ],
+      "prohibitedDependencies": [
+        "direct-cross-module-database-access",
+        "runtime-internal-imports"
+      ],
+      "currentState": "TARGET_NAMESPACE",
+      "readinessGate": "CONTRACT_AND_AUTHORIZATION_VALIDATED"
+    },
+    {
+      "namespace": "/api/v1/udoc",
+      "owningModule": "UDOC",
+      "packageId": "PKG-UDOC",
+      "contractNamespaces": [
+        "vantaris.udoc.v1"
+      ],
+      "operationClasses": [
+        "READ",
+        "WRITE",
+        "CONTROL",
+        "EVENT"
+      ],
+      "authenticationRequired": true,
+      "permissionPrefix": "udoc",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditPolicy": "ALL_WRITES_CONTROLS_EXPORTS_AND_SENSITIVE_READS",
+      "idempotencyPolicy": "REQUIRED_FOR_COMMANDS_AND_INTAKE",
+      "retryOwner": "CALLER_FOR_SAFE_READS_PROVIDER_OR_LINK_FOR_DELIVERY",
+      "timeoutClass": "BOUNDED_OR_ASYNC_JOB",
+      "cachePolicy": "TENANT_SCOPED_READ_ONLY_VERSION_AWARE",
+      "legacyMappings": [],
+      "prohibitedDependencies": [
+        "direct-cross-module-database-access",
+        "runtime-internal-imports"
+      ],
+      "currentState": "TARGET_NAMESPACE",
+      "readinessGate": "CONTRACT_AND_AUTHORIZATION_VALIDATED"
+    },
+    {
+      "namespace": "/api/v1/evidence",
+      "owningModule": "Evidence Center",
+      "packageId": "PKG-EVIDENCE-CENTER",
+      "contractNamespaces": [
+        "vantaris.evidence.v1",
+        "vantaris.trust.v1"
+      ],
+      "operationClasses": [
+        "READ",
+        "WRITE",
+        "CONTROL",
+        "EVENT"
+      ],
+      "authenticationRequired": true,
+      "permissionPrefix": "evidence",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditPolicy": "ALL_WRITES_CONTROLS_EXPORTS_AND_SENSITIVE_READS",
+      "idempotencyPolicy": "REQUIRED_FOR_COMMANDS_AND_INTAKE",
+      "retryOwner": "CALLER_FOR_SAFE_READS_PROVIDER_OR_LINK_FOR_DELIVERY",
+      "timeoutClass": "BOUNDED_OR_ASYNC_JOB",
+      "cachePolicy": "TENANT_SCOPED_READ_ONLY_VERSION_AWARE",
+      "legacyMappings": [
+        "/api/v1/ucde/evidence"
+      ],
+      "prohibitedDependencies": [
+        "direct-cross-module-database-access",
+        "runtime-internal-imports"
+      ],
+      "currentState": "TARGET_NAMESPACE",
+      "readinessGate": "CONTRACT_AND_AUTHORIZATION_VALIDATED"
+    },
+    {
+      "namespace": "/api/v1/cde",
+      "owningModule": "UCDE",
+      "packageId": "PKG-UCDE",
+      "contractNamespaces": [
+        "vantaris.evidence.v1"
+      ],
+      "operationClasses": [
+        "READ",
+        "WRITE",
+        "CONTROL",
+        "EVENT"
+      ],
+      "authenticationRequired": true,
+      "permissionPrefix": "evidence",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditPolicy": "ALL_WRITES_CONTROLS_EXPORTS_AND_SENSITIVE_READS",
+      "idempotencyPolicy": "REQUIRED_FOR_COMMANDS_AND_INTAKE",
+      "retryOwner": "CALLER_FOR_SAFE_READS_PROVIDER_OR_LINK_FOR_DELIVERY",
+      "timeoutClass": "BOUNDED_OR_ASYNC_JOB",
+      "cachePolicy": "TENANT_SCOPED_READ_ONLY_VERSION_AWARE",
+      "legacyMappings": [
+        "/api/v1/ucde"
+      ],
+      "prohibitedDependencies": [
+        "direct-cross-module-database-access",
+        "runtime-internal-imports"
+      ],
+      "currentState": "TARGET_NAMESPACE",
+      "readinessGate": "CONTRACT_AND_AUTHORIZATION_VALIDATED"
+    },
+    {
+      "namespace": "/api/v1/orchestration",
+      "owningModule": "ONE Orchestrator",
+      "packageId": "PKG-ORCHESTRATOR",
+      "contractNamespaces": [
+        "vantaris.workflow.v1"
+      ],
+      "operationClasses": [
+        "READ",
+        "WRITE",
+        "CONTROL",
+        "EVENT"
+      ],
+      "authenticationRequired": true,
+      "permissionPrefix": "workflow",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditPolicy": "ALL_WRITES_CONTROLS_EXPORTS_AND_SENSITIVE_READS",
+      "idempotencyPolicy": "REQUIRED_FOR_COMMANDS_AND_INTAKE",
+      "retryOwner": "CALLER_FOR_SAFE_READS_PROVIDER_OR_LINK_FOR_DELIVERY",
+      "timeoutClass": "BOUNDED_OR_ASYNC_JOB",
+      "cachePolicy": "TENANT_SCOPED_READ_ONLY_VERSION_AWARE",
+      "legacyMappings": [],
+      "prohibitedDependencies": [
+        "direct-cross-module-database-access",
+        "runtime-internal-imports"
+      ],
+      "currentState": "TARGET_NAMESPACE",
+      "readinessGate": "CONTRACT_AND_AUTHORIZATION_VALIDATED"
+    },
+    {
+      "namespace": "/api/v1/reports",
+      "owningModule": "Reports",
+      "packageId": "PKG-REPORTS",
+      "contractNamespaces": [
+        "vantaris.report.v1"
+      ],
+      "operationClasses": [
+        "READ",
+        "WRITE",
+        "CONTROL",
+        "EVENT"
+      ],
+      "authenticationRequired": true,
+      "permissionPrefix": "report",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditPolicy": "ALL_WRITES_CONTROLS_EXPORTS_AND_SENSITIVE_READS",
+      "idempotencyPolicy": "REQUIRED_FOR_COMMANDS_AND_INTAKE",
+      "retryOwner": "CALLER_FOR_SAFE_READS_PROVIDER_OR_LINK_FOR_DELIVERY",
+      "timeoutClass": "BOUNDED_OR_ASYNC_JOB",
+      "cachePolicy": "TENANT_SCOPED_READ_ONLY_VERSION_AWARE",
+      "legacyMappings": [
+        "/api/v1/reports"
+      ],
+      "prohibitedDependencies": [
+        "direct-cross-module-database-access",
+        "runtime-internal-imports"
+      ],
+      "currentState": "TARGET_NAMESPACE",
+      "readinessGate": "CONTRACT_AND_AUTHORIZATION_VALIDATED"
+    },
+    {
+      "namespace": "/api/v1/analytics",
+      "owningModule": "Analytics",
+      "packageId": "PKG-ANALYTICS",
+      "contractNamespaces": [
+        "vantaris.analytics.v1"
+      ],
+      "operationClasses": [
+        "READ",
+        "WRITE",
+        "CONTROL",
+        "EVENT"
+      ],
+      "authenticationRequired": true,
+      "permissionPrefix": "analytics",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditPolicy": "ALL_WRITES_CONTROLS_EXPORTS_AND_SENSITIVE_READS",
+      "idempotencyPolicy": "REQUIRED_FOR_COMMANDS_AND_INTAKE",
+      "retryOwner": "CALLER_FOR_SAFE_READS_PROVIDER_OR_LINK_FOR_DELIVERY",
+      "timeoutClass": "BOUNDED_OR_ASYNC_JOB",
+      "cachePolicy": "TENANT_SCOPED_READ_ONLY_VERSION_AWARE",
+      "legacyMappings": [],
+      "prohibitedDependencies": [
+        "direct-cross-module-database-access",
+        "runtime-internal-imports"
+      ],
+      "currentState": "TARGET_NAMESPACE",
+      "readinessGate": "CONTRACT_AND_AUTHORIZATION_VALIDATED"
+    },
+    {
+      "namespace": "/api/v1/console",
+      "owningModule": "UConsole",
+      "packageId": "PKG-UCONSOLE",
+      "contractNamespaces": [
+        "vantaris.health.v1",
+        "vantaris.package.v1"
+      ],
+      "operationClasses": [
+        "READ",
+        "WRITE",
+        "CONTROL",
+        "EVENT"
+      ],
+      "authenticationRequired": true,
+      "permissionPrefix": "platform",
+      "tenantScoped": true,
+      "siteScoped": false,
+      "auditPolicy": "ALL_WRITES_CONTROLS_EXPORTS_AND_SENSITIVE_READS",
+      "idempotencyPolicy": "REQUIRED_FOR_COMMANDS_AND_INTAKE",
+      "retryOwner": "CALLER_FOR_SAFE_READS_PROVIDER_OR_LINK_FOR_DELIVERY",
+      "timeoutClass": "BOUNDED_OR_ASYNC_JOB",
+      "cachePolicy": "TENANT_SCOPED_READ_ONLY_VERSION_AWARE",
+      "legacyMappings": [
+        "/api/v1/console"
+      ],
+      "prohibitedDependencies": [
+        "direct-cross-module-database-access",
+        "runtime-internal-imports"
+      ],
+      "currentState": "TARGET_NAMESPACE",
+      "readinessGate": "CONTRACT_AND_AUTHORIZATION_VALIDATED"
+    },
+    {
+      "namespace": "/api/v1/security",
+      "owningModule": "Governance & Security",
+      "packageId": "PKG-GOVERNANCE-SECURITY",
+      "contractNamespaces": [
+        "vantaris.identity.v1",
+        "vantaris.tenant.v1"
+      ],
+      "operationClasses": [
+        "READ",
+        "WRITE",
+        "CONTROL",
+        "EVENT"
+      ],
+      "authenticationRequired": true,
+      "permissionPrefix": "security",
+      "tenantScoped": true,
+      "siteScoped": false,
+      "auditPolicy": "ALL_WRITES_CONTROLS_EXPORTS_AND_SENSITIVE_READS",
+      "idempotencyPolicy": "REQUIRED_FOR_COMMANDS_AND_INTAKE",
+      "retryOwner": "CALLER_FOR_SAFE_READS_PROVIDER_OR_LINK_FOR_DELIVERY",
+      "timeoutClass": "BOUNDED_OR_ASYNC_JOB",
+      "cachePolicy": "TENANT_SCOPED_READ_ONLY_VERSION_AWARE",
+      "legacyMappings": [
+        "/api/did",
+        "/api/system/permissions"
+      ],
+      "prohibitedDependencies": [
+        "direct-cross-module-database-access",
+        "runtime-internal-imports"
+      ],
+      "currentState": "TARGET_NAMESPACE",
+      "readinessGate": "CONTRACT_AND_AUTHORIZATION_VALIDATED"
+    },
+    {
+      "namespace": "/api/v1/trust",
+      "owningModule": "Governance & Security / Trust",
+      "packageId": "PKG-GOVERNANCE-SECURITY",
+      "contractNamespaces": [
+        "vantaris.trust.v1"
+      ],
+      "operationClasses": [
+        "READ",
+        "WRITE",
+        "CONTROL",
+        "EVENT"
+      ],
+      "authenticationRequired": true,
+      "permissionPrefix": "security",
+      "tenantScoped": true,
+      "siteScoped": false,
+      "auditPolicy": "ALL_WRITES_CONTROLS_EXPORTS_AND_SENSITIVE_READS",
+      "idempotencyPolicy": "REQUIRED_FOR_COMMANDS_AND_INTAKE",
+      "retryOwner": "CALLER_FOR_SAFE_READS_PROVIDER_OR_LINK_FOR_DELIVERY",
+      "timeoutClass": "BOUNDED_OR_ASYNC_JOB",
+      "cachePolicy": "TENANT_SCOPED_READ_ONLY_VERSION_AWARE",
+      "legacyMappings": [
+        "/api/did/chain"
+      ],
+      "prohibitedDependencies": [
+        "direct-cross-module-database-access",
+        "runtime-internal-imports"
+      ],
+      "currentState": "TARGET_NAMESPACE",
+      "readinessGate": "CONTRACT_AND_AUTHORIZATION_VALIDATED"
+    },
+    {
+      "namespace": "/api/v1/audit",
+      "owningModule": "Governance & Security",
+      "packageId": "PKG-GOVERNANCE-SECURITY",
+      "contractNamespaces": [
+        "vantaris.audit.v1"
+      ],
+      "operationClasses": [
+        "READ",
+        "WRITE",
+        "CONTROL",
+        "EVENT"
+      ],
+      "authenticationRequired": true,
+      "permissionPrefix": "audit",
+      "tenantScoped": true,
+      "siteScoped": false,
+      "auditPolicy": "ALL_WRITES_CONTROLS_EXPORTS_AND_SENSITIVE_READS",
+      "idempotencyPolicy": "REQUIRED_FOR_COMMANDS_AND_INTAKE",
+      "retryOwner": "CALLER_FOR_SAFE_READS_PROVIDER_OR_LINK_FOR_DELIVERY",
+      "timeoutClass": "BOUNDED_OR_ASYNC_JOB",
+      "cachePolicy": "TENANT_SCOPED_READ_ONLY_VERSION_AWARE",
+      "legacyMappings": [
+        "/api/v1/reports/audit"
+      ],
+      "prohibitedDependencies": [
+        "direct-cross-module-database-access",
+        "runtime-internal-imports"
+      ],
+      "currentState": "TARGET_NAMESPACE",
+      "readinessGate": "CONTRACT_AND_AUTHORIZATION_VALIDATED"
+    },
+    {
+      "namespace": "/api/v1/packages",
+      "owningModule": "Governance & Security",
+      "packageId": "PKG-GOVERNANCE-SECURITY",
+      "contractNamespaces": [
+        "vantaris.package.v1"
+      ],
+      "operationClasses": [
+        "READ",
+        "WRITE",
+        "CONTROL",
+        "EVENT"
+      ],
+      "authenticationRequired": true,
+      "permissionPrefix": "package",
+      "tenantScoped": true,
+      "siteScoped": false,
+      "auditPolicy": "ALL_WRITES_CONTROLS_EXPORTS_AND_SENSITIVE_READS",
+      "idempotencyPolicy": "REQUIRED_FOR_COMMANDS_AND_INTAKE",
+      "retryOwner": "CALLER_FOR_SAFE_READS_PROVIDER_OR_LINK_FOR_DELIVERY",
+      "timeoutClass": "BOUNDED_OR_ASYNC_JOB",
+      "cachePolicy": "TENANT_SCOPED_READ_ONLY_VERSION_AWARE",
+      "legacyMappings": [
+        "/api/v1/console/packages"
+      ],
+      "prohibitedDependencies": [
+        "direct-cross-module-database-access",
+        "runtime-internal-imports"
+      ],
+      "currentState": "TARGET_NAMESPACE",
+      "readinessGate": "CONTRACT_AND_AUTHORIZATION_VALIDATED"
+    },
+    {
+      "namespace": "/api/v1/health",
+      "owningModule": "UConsole",
+      "packageId": "PKG-UCONSOLE",
+      "contractNamespaces": [
+        "vantaris.health.v1"
+      ],
+      "operationClasses": [
+        "READ",
+        "WRITE",
+        "CONTROL",
+        "EVENT"
+      ],
+      "authenticationRequired": true,
+      "permissionPrefix": "platform",
+      "tenantScoped": true,
+      "siteScoped": false,
+      "auditPolicy": "ALL_WRITES_CONTROLS_EXPORTS_AND_SENSITIVE_READS",
+      "idempotencyPolicy": "REQUIRED_FOR_COMMANDS_AND_INTAKE",
+      "retryOwner": "CALLER_FOR_SAFE_READS_PROVIDER_OR_LINK_FOR_DELIVERY",
+      "timeoutClass": "BOUNDED_OR_ASYNC_JOB",
+      "cachePolicy": "TENANT_SCOPED_READ_ONLY_VERSION_AWARE",
+      "legacyMappings": [
+        "/api/v1/*/health"
+      ],
+      "prohibitedDependencies": [
+        "direct-cross-module-database-access",
+        "runtime-internal-imports"
+      ],
+      "currentState": "TARGET_NAMESPACE",
+      "readinessGate": "CONTRACT_AND_AUTHORIZATION_VALIDATED"
+    },
+    {
+      "namespace": "/api/v1/knowledge",
+      "owningModule": "Knowledge Base",
+      "packageId": "PKG-KNOWLEDGE-BASE",
+      "contractNamespaces": [
+        "vantaris.knowledge.v1"
+      ],
+      "operationClasses": [
+        "READ",
+        "WRITE",
+        "CONTROL",
+        "EVENT"
+      ],
+      "authenticationRequired": true,
+      "permissionPrefix": "knowledge",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditPolicy": "ALL_WRITES_CONTROLS_EXPORTS_AND_SENSITIVE_READS",
+      "idempotencyPolicy": "REQUIRED_FOR_COMMANDS_AND_INTAKE",
+      "retryOwner": "CALLER_FOR_SAFE_READS_PROVIDER_OR_LINK_FOR_DELIVERY",
+      "timeoutClass": "BOUNDED_OR_ASYNC_JOB",
+      "cachePolicy": "TENANT_SCOPED_READ_ONLY_VERSION_AWARE",
+      "legacyMappings": [],
+      "prohibitedDependencies": [
+        "direct-cross-module-database-access",
+        "runtime-internal-imports"
+      ],
+      "currentState": "TARGET_NAMESPACE",
+      "readinessGate": "CONTRACT_AND_AUTHORIZATION_VALIDATED"
+    },
+    {
+      "namespace": "/api/v1/models",
+      "owningModule": "AI Model Hub",
+      "packageId": "PKG-AI-MODEL-HUB",
+      "contractNamespaces": [
+        "vantaris.model.v1"
+      ],
+      "operationClasses": [
+        "READ",
+        "WRITE",
+        "CONTROL",
+        "EVENT"
+      ],
+      "authenticationRequired": true,
+      "permissionPrefix": "model",
+      "tenantScoped": true,
+      "siteScoped": false,
+      "auditPolicy": "ALL_WRITES_CONTROLS_EXPORTS_AND_SENSITIVE_READS",
+      "idempotencyPolicy": "REQUIRED_FOR_COMMANDS_AND_INTAKE",
+      "retryOwner": "CALLER_FOR_SAFE_READS_PROVIDER_OR_LINK_FOR_DELIVERY",
+      "timeoutClass": "BOUNDED_OR_ASYNC_JOB",
+      "cachePolicy": "TENANT_SCOPED_READ_ONLY_VERSION_AWARE",
+      "legacyMappings": [
+        "/api/modeling/*/model_info"
+      ],
+      "prohibitedDependencies": [
+        "direct-cross-module-database-access",
+        "runtime-internal-imports"
+      ],
+      "currentState": "TARGET_NAMESPACE",
+      "readinessGate": "CONTRACT_AND_AUTHORIZATION_VALIDATED"
+    },
+    {
+      "namespace": "/api/v1/ai",
+      "owningModule": "Nexus AI",
+      "packageId": "PKG-NEXUS-AI",
+      "contractNamespaces": [
+        "vantaris.ai.v1",
+        "vantaris.model.v1",
+        "vantaris.knowledge.v1"
+      ],
+      "operationClasses": [
+        "READ",
+        "WRITE",
+        "CONTROL",
+        "EVENT"
+      ],
+      "authenticationRequired": true,
+      "permissionPrefix": "ai",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditPolicy": "ALL_WRITES_CONTROLS_EXPORTS_AND_SENSITIVE_READS",
+      "idempotencyPolicy": "REQUIRED_FOR_COMMANDS_AND_INTAKE",
+      "retryOwner": "CALLER_FOR_SAFE_READS_PROVIDER_OR_LINK_FOR_DELIVERY",
+      "timeoutClass": "BOUNDED_OR_ASYNC_JOB",
+      "cachePolicy": "TENANT_SCOPED_READ_ONLY_VERSION_AWARE",
+      "legacyMappings": [
+        "/api/modeling"
+      ],
+      "prohibitedDependencies": [
+        "direct-cross-module-database-access",
+        "runtime-internal-imports"
+      ],
+      "currentState": "TARGET_NAMESPACE",
+      "readinessGate": "CONTRACT_AND_AUTHORIZATION_VALIDATED"
+    }
+  ]
+}

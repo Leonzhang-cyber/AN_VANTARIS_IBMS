@@ -1,0 +1,1145 @@
+{
+  "registryName": "VANTARIS_ONE_PACKAGE_REGISTRY",
+  "registryVersion": "1.0.0",
+  "generatedAtPolicy": "STATIC_ARCHITECTURE_BASELINE",
+  "authority": "ONE-PLAN-A4",
+  "status": "FROZEN_FOR_IMPLEMENTATION",
+  "packageClasses": [
+    "SHARED_FOUNDATION",
+    "MANDATORY_PLATFORM",
+    "DATA_FOUNDATION",
+    "DOMAIN_OPTIONAL",
+    "PLATFORM_OPTIONAL",
+    "AI_OPTIONAL",
+    "EXTERNAL_PRODUCT_INTEGRATION"
+  ],
+  "packageStatePolicy": "INSTALLED_ENTITLED_ENABLED_VISIBLE_HEALTHY_ARE_INDEPENDENT",
+  "packages": [
+    {
+      "packageId": "PKG-CONTRACTS",
+      "moduleId": "contracts",
+      "displayName": "AN_VANTARIS Contracts",
+      "packageClass": "SHARED_FOUNDATION",
+      "mandatory": true,
+      "semanticOwner": "AN_VANTARIS_CONTRACTS",
+      "defaultInstalled": true,
+      "defaultEntitled": true,
+      "defaultEnabled": true,
+      "defaultVisible": true,
+      "healthSource": "/api/v1/health/packages/PKG-CONTRACTS",
+      "versionPolicy": "SEMVER",
+      "compatibilityRange": "vantaris-contracts-v1",
+      "dependencies": [],
+      "conflicts": [
+        "standalone-one-adapter",
+        "direct-cross-module-database-access"
+      ],
+      "runtimeDependencies": [],
+      "routes": [],
+      "permissions": [],
+      "publicApiNamespaces": [],
+      "healthEndpoint": "/api/v1/health/packages/PKG-CONTRACTS",
+      "upgradeOrder": 1,
+      "rollbackOrder": 23,
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "readinessGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED",
+      "stateDimensions": {
+        "installed": "INDEPENDENT_BOOLEAN",
+        "entitled": "INDEPENDENT_BOOLEAN",
+        "enabled": "INDEPENDENT_BOOLEAN",
+        "visible": "INDEPENDENT_BOOLEAN",
+        "healthy": "INDEPENDENT_HEALTH_ENUM"
+      }
+    },
+    {
+      "packageId": "PKG-DB",
+      "moduleId": "db",
+      "displayName": "AN_VANTARIS DB",
+      "packageClass": "SHARED_FOUNDATION",
+      "mandatory": true,
+      "semanticOwner": "AN_VANTARIS_DB",
+      "defaultInstalled": true,
+      "defaultEntitled": true,
+      "defaultEnabled": true,
+      "defaultVisible": true,
+      "healthSource": "/api/v1/health/packages/PKG-DB",
+      "versionPolicy": "SEMVER",
+      "compatibilityRange": "vantaris-contracts-v1",
+      "dependencies": [
+        "PKG-CONTRACTS"
+      ],
+      "conflicts": [
+        "standalone-one-adapter",
+        "direct-cross-module-database-access"
+      ],
+      "runtimeDependencies": [],
+      "routes": [],
+      "permissions": [],
+      "publicApiNamespaces": [],
+      "healthEndpoint": "/api/v1/health/packages/PKG-DB",
+      "upgradeOrder": 2,
+      "rollbackOrder": 22,
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "readinessGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED",
+      "stateDimensions": {
+        "installed": "INDEPENDENT_BOOLEAN",
+        "entitled": "INDEPENDENT_BOOLEAN",
+        "enabled": "INDEPENDENT_BOOLEAN",
+        "visible": "INDEPENDENT_BOOLEAN",
+        "healthy": "INDEPENDENT_HEALTH_ENUM"
+      }
+    },
+    {
+      "packageId": "PKG-EDGE",
+      "moduleId": "edge",
+      "displayName": "AN_VANTARIS EDGE",
+      "packageClass": "SHARED_FOUNDATION",
+      "mandatory": false,
+      "semanticOwner": "AN_VANTARIS_EDGE",
+      "defaultInstalled": false,
+      "defaultEntitled": false,
+      "defaultEnabled": false,
+      "defaultVisible": false,
+      "healthSource": "/api/v1/health/packages/PKG-EDGE",
+      "versionPolicy": "SEMVER",
+      "compatibilityRange": "vantaris-contracts-v1",
+      "dependencies": [
+        "PKG-CONTRACTS"
+      ],
+      "conflicts": [
+        "standalone-one-adapter",
+        "direct-cross-module-database-access"
+      ],
+      "runtimeDependencies": [],
+      "routes": [
+        "/integrations/gateways"
+      ],
+      "permissions": [
+        "edge:read",
+        "edge:diagnose",
+        "edge:configure"
+      ],
+      "publicApiNamespaces": [
+        "/api/v1/edge"
+      ],
+      "healthEndpoint": "/api/v1/health/packages/PKG-EDGE",
+      "upgradeOrder": 3,
+      "rollbackOrder": 21,
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "readinessGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED",
+      "stateDimensions": {
+        "installed": "INDEPENDENT_BOOLEAN",
+        "entitled": "INDEPENDENT_BOOLEAN",
+        "enabled": "INDEPENDENT_BOOLEAN",
+        "visible": "INDEPENDENT_BOOLEAN",
+        "healthy": "INDEPENDENT_HEALTH_ENUM"
+      }
+    },
+    {
+      "packageId": "PKG-LINK",
+      "moduleId": "link",
+      "displayName": "AN_VANTARIS LINK",
+      "packageClass": "SHARED_FOUNDATION",
+      "mandatory": false,
+      "semanticOwner": "AN_VANTARIS_LINK",
+      "defaultInstalled": false,
+      "defaultEntitled": false,
+      "defaultEnabled": false,
+      "defaultVisible": false,
+      "healthSource": "/api/v1/health/packages/PKG-LINK",
+      "versionPolicy": "SEMVER",
+      "compatibilityRange": "vantaris-contracts-v1",
+      "dependencies": [
+        "PKG-CONTRACTS"
+      ],
+      "conflicts": [
+        "standalone-one-adapter",
+        "direct-cross-module-database-access"
+      ],
+      "runtimeDependencies": [
+        "PKG-EDGE"
+      ],
+      "routes": [
+        "/integrations/delivery"
+      ],
+      "permissions": [
+        "link:read",
+        "link:operate",
+        "link:replay"
+      ],
+      "publicApiNamespaces": [
+        "/api/v1/link"
+      ],
+      "healthEndpoint": "/api/v1/health/packages/PKG-LINK",
+      "upgradeOrder": 4,
+      "rollbackOrder": 20,
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "readinessGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED",
+      "stateDimensions": {
+        "installed": "INDEPENDENT_BOOLEAN",
+        "entitled": "INDEPENDENT_BOOLEAN",
+        "enabled": "INDEPENDENT_BOOLEAN",
+        "visible": "INDEPENDENT_BOOLEAN",
+        "healthy": "INDEPENDENT_HEALTH_ENUM"
+      }
+    },
+    {
+      "packageId": "PKG-UNIFIED-DATA-MODEL",
+      "moduleId": "unified-data-model",
+      "displayName": "Unified Data Model",
+      "packageClass": "MANDATORY_PLATFORM",
+      "mandatory": true,
+      "semanticOwner": "Unified Data Model",
+      "defaultInstalled": true,
+      "defaultEntitled": true,
+      "defaultEnabled": true,
+      "defaultVisible": true,
+      "healthSource": "/api/v1/health/packages/PKG-UNIFIED-DATA-MODEL",
+      "versionPolicy": "SEMVER",
+      "compatibilityRange": "vantaris-contracts-v1",
+      "dependencies": [
+        "PKG-CONTRACTS"
+      ],
+      "conflicts": [
+        "standalone-one-adapter",
+        "direct-cross-module-database-access"
+      ],
+      "runtimeDependencies": [],
+      "routes": [],
+      "permissions": [
+        "asset:read"
+      ],
+      "publicApiNamespaces": [
+        "/api/v1/model",
+        "/api/v1/integration"
+      ],
+      "healthEndpoint": "/api/v1/health/packages/PKG-UNIFIED-DATA-MODEL",
+      "upgradeOrder": 5,
+      "rollbackOrder": 19,
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "readinessGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED",
+      "stateDimensions": {
+        "installed": "INDEPENDENT_BOOLEAN",
+        "entitled": "INDEPENDENT_BOOLEAN",
+        "enabled": "INDEPENDENT_BOOLEAN",
+        "visible": "INDEPENDENT_BOOLEAN",
+        "healthy": "INDEPENDENT_HEALTH_ENUM"
+      }
+    },
+    {
+      "packageId": "PKG-ASSET-GRAPH",
+      "moduleId": "asset-graph",
+      "displayName": "ONE Asset Graph",
+      "packageClass": "MANDATORY_PLATFORM",
+      "mandatory": true,
+      "semanticOwner": "ONE Asset Graph",
+      "defaultInstalled": true,
+      "defaultEntitled": true,
+      "defaultEnabled": true,
+      "defaultVisible": true,
+      "healthSource": "/api/v1/health/packages/PKG-ASSET-GRAPH",
+      "versionPolicy": "SEMVER",
+      "compatibilityRange": "vantaris-contracts-v1",
+      "dependencies": [
+        "PKG-CONTRACTS",
+        "PKG-DB",
+        "PKG-UNIFIED-DATA-MODEL"
+      ],
+      "conflicts": [
+        "standalone-one-adapter",
+        "direct-cross-module-database-access",
+        "ucore-owned-asset-graph",
+        "edge-owned-canonical-device-point"
+      ],
+      "runtimeDependencies": [],
+      "routes": [
+        "/assets/graph"
+      ],
+      "permissions": [
+        "asset:read",
+        "asset:create",
+        "asset:update",
+        "asset:retire",
+        "asset:link",
+        "asset:import",
+        "device:read",
+        "device:approve",
+        "device:update"
+      ],
+      "publicApiNamespaces": [
+        "/api/v1/assets"
+      ],
+      "healthEndpoint": "/api/v1/health/packages/PKG-ASSET-GRAPH",
+      "upgradeOrder": 6,
+      "rollbackOrder": 18,
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "readinessGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED",
+      "stateDimensions": {
+        "installed": "INDEPENDENT_BOOLEAN",
+        "entitled": "INDEPENDENT_BOOLEAN",
+        "enabled": "INDEPENDENT_BOOLEAN",
+        "visible": "INDEPENDENT_BOOLEAN",
+        "healthy": "INDEPENDENT_HEALTH_ENUM"
+      }
+    },
+    {
+      "packageId": "PKG-GOVERNANCE-SECURITY",
+      "moduleId": "governance-security",
+      "displayName": "Governance & Security",
+      "packageClass": "MANDATORY_PLATFORM",
+      "mandatory": true,
+      "semanticOwner": "Governance & Security",
+      "defaultInstalled": true,
+      "defaultEntitled": true,
+      "defaultEnabled": true,
+      "defaultVisible": true,
+      "healthSource": "/api/v1/health/packages/PKG-GOVERNANCE-SECURITY",
+      "versionPolicy": "SEMVER",
+      "compatibilityRange": "vantaris-contracts-v1",
+      "dependencies": [
+        "PKG-CONTRACTS",
+        "PKG-DB"
+      ],
+      "conflicts": [
+        "standalone-one-adapter",
+        "direct-cross-module-database-access"
+      ],
+      "runtimeDependencies": [],
+      "routes": [
+        "/admin/security",
+        "/admin/audit",
+        "/admin/packages"
+      ],
+      "permissions": [
+        "security:read",
+        "security:admin",
+        "audit:read",
+        "audit:export",
+        "package:read",
+        "package:install",
+        "package:enable",
+        "package:upgrade"
+      ],
+      "publicApiNamespaces": [
+        "/api/v1/security",
+        "/api/v1/trust",
+        "/api/v1/audit",
+        "/api/v1/packages"
+      ],
+      "healthEndpoint": "/api/v1/health/packages/PKG-GOVERNANCE-SECURITY",
+      "upgradeOrder": 7,
+      "rollbackOrder": 17,
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "readinessGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED",
+      "stateDimensions": {
+        "installed": "INDEPENDENT_BOOLEAN",
+        "entitled": "INDEPENDENT_BOOLEAN",
+        "enabled": "INDEPENDENT_BOOLEAN",
+        "visible": "INDEPENDENT_BOOLEAN",
+        "healthy": "INDEPENDENT_HEALTH_ENUM"
+      }
+    },
+    {
+      "packageId": "PKG-UCORE",
+      "moduleId": "ucore",
+      "displayName": "UCore",
+      "packageClass": "MANDATORY_PLATFORM",
+      "mandatory": true,
+      "semanticOwner": "UCore",
+      "defaultInstalled": true,
+      "defaultEntitled": true,
+      "defaultEnabled": true,
+      "defaultVisible": true,
+      "healthSource": "/api/v1/health/packages/PKG-UCORE",
+      "versionPolicy": "SEMVER",
+      "compatibilityRange": "vantaris-contracts-v1",
+      "dependencies": [
+        "PKG-ASSET-GRAPH",
+        "PKG-GOVERNANCE-SECURITY"
+      ],
+      "conflicts": [
+        "standalone-one-adapter",
+        "direct-cross-module-database-access"
+      ],
+      "runtimeDependencies": [],
+      "routes": [
+        "/overview/operations"
+      ],
+      "permissions": [
+        "context:read",
+        "context:update"
+      ],
+      "publicApiNamespaces": [
+        "/api/v1/context"
+      ],
+      "healthEndpoint": "/api/v1/health/packages/PKG-UCORE",
+      "upgradeOrder": 8,
+      "rollbackOrder": 16,
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "readinessGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED",
+      "stateDimensions": {
+        "installed": "INDEPENDENT_BOOLEAN",
+        "entitled": "INDEPENDENT_BOOLEAN",
+        "enabled": "INDEPENDENT_BOOLEAN",
+        "visible": "INDEPENDENT_BOOLEAN",
+        "healthy": "INDEPENDENT_HEALTH_ENUM"
+      }
+    },
+    {
+      "packageId": "PKG-WORK-MANAGEMENT",
+      "moduleId": "work-management",
+      "displayName": "ONE Work Management",
+      "packageClass": "MANDATORY_PLATFORM",
+      "mandatory": true,
+      "semanticOwner": "ONE Work Management",
+      "defaultInstalled": true,
+      "defaultEntitled": true,
+      "defaultEnabled": true,
+      "defaultVisible": true,
+      "healthSource": "/api/v1/health/packages/PKG-WORK-MANAGEMENT",
+      "versionPolicy": "SEMVER",
+      "compatibilityRange": "vantaris-contracts-v1",
+      "dependencies": [
+        "PKG-CONTRACTS",
+        "PKG-DB",
+        "PKG-GOVERNANCE-SECURITY",
+        "PKG-ASSET-GRAPH"
+      ],
+      "conflicts": [
+        "standalone-one-adapter",
+        "direct-cross-module-database-access",
+        "umms-owned-generic-workorder"
+      ],
+      "runtimeDependencies": [],
+      "routes": [
+        "/work/orders",
+        "/work/dispatch"
+      ],
+      "permissions": [
+        "work:read",
+        "work:create",
+        "work:triage",
+        "work:assign",
+        "work:dispatch",
+        "work:execute",
+        "work:close",
+        "work:review"
+      ],
+      "publicApiNamespaces": [
+        "/api/v1/work"
+      ],
+      "healthEndpoint": "/api/v1/health/packages/PKG-WORK-MANAGEMENT",
+      "upgradeOrder": 9,
+      "rollbackOrder": 15,
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "readinessGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED",
+      "stateDimensions": {
+        "installed": "INDEPENDENT_BOOLEAN",
+        "entitled": "INDEPENDENT_BOOLEAN",
+        "enabled": "INDEPENDENT_BOOLEAN",
+        "visible": "INDEPENDENT_BOOLEAN",
+        "healthy": "INDEPENDENT_HEALTH_ENUM"
+      }
+    },
+    {
+      "packageId": "PKG-UCONSOLE",
+      "moduleId": "uconsole",
+      "displayName": "UConsole",
+      "packageClass": "MANDATORY_PLATFORM",
+      "mandatory": true,
+      "semanticOwner": "UConsole",
+      "defaultInstalled": true,
+      "defaultEntitled": true,
+      "defaultEnabled": true,
+      "defaultVisible": true,
+      "healthSource": "/api/v1/health/packages/PKG-UCONSOLE",
+      "versionPolicy": "SEMVER",
+      "compatibilityRange": "vantaris-contracts-v1",
+      "dependencies": [
+        "PKG-UCORE",
+        "PKG-GOVERNANCE-SECURITY"
+      ],
+      "conflicts": [
+        "standalone-one-adapter",
+        "direct-cross-module-database-access"
+      ],
+      "runtimeDependencies": [],
+      "routes": [
+        "/overview/platform",
+        "/admin/platform"
+      ],
+      "permissions": [
+        "platform:read",
+        "platform:admin"
+      ],
+      "publicApiNamespaces": [
+        "/api/v1/platform",
+        "/api/v1/console",
+        "/api/v1/health"
+      ],
+      "healthEndpoint": "/api/v1/health/packages/PKG-UCONSOLE",
+      "upgradeOrder": 10,
+      "rollbackOrder": 14,
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "readinessGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED",
+      "stateDimensions": {
+        "installed": "INDEPENDENT_BOOLEAN",
+        "entitled": "INDEPENDENT_BOOLEAN",
+        "enabled": "INDEPENDENT_BOOLEAN",
+        "visible": "INDEPENDENT_BOOLEAN",
+        "healthy": "INDEPENDENT_HEALTH_ENUM"
+      }
+    },
+    {
+      "packageId": "PKG-DATA-LAKE",
+      "moduleId": "data-lake",
+      "displayName": "Data Lake",
+      "packageClass": "DATA_FOUNDATION",
+      "mandatory": false,
+      "semanticOwner": "Layer 3 Data Foundation",
+      "defaultInstalled": false,
+      "defaultEntitled": false,
+      "defaultEnabled": false,
+      "defaultVisible": false,
+      "healthSource": "/api/v1/health/packages/PKG-DATA-LAKE",
+      "versionPolicy": "SEMVER",
+      "compatibilityRange": "vantaris-contracts-v1",
+      "dependencies": [
+        "PKG-CONTRACTS",
+        "PKG-DB",
+        "PKG-GOVERNANCE-SECURITY"
+      ],
+      "conflicts": [
+        "standalone-one-adapter",
+        "direct-cross-module-database-access"
+      ],
+      "runtimeDependencies": [],
+      "routes": [],
+      "permissions": [
+        "event:read"
+      ],
+      "publicApiNamespaces": [
+        "/api/v1/telemetry",
+        "/api/v1/events"
+      ],
+      "healthEndpoint": "/api/v1/health/packages/PKG-DATA-LAKE",
+      "upgradeOrder": 11,
+      "rollbackOrder": 13,
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "readinessGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED",
+      "stateDimensions": {
+        "installed": "INDEPENDENT_BOOLEAN",
+        "entitled": "INDEPENDENT_BOOLEAN",
+        "enabled": "INDEPENDENT_BOOLEAN",
+        "visible": "INDEPENDENT_BOOLEAN",
+        "healthy": "INDEPENDENT_HEALTH_ENUM"
+      }
+    },
+    {
+      "packageId": "PKG-KNOWLEDGE-BASE",
+      "moduleId": "knowledge-base",
+      "displayName": "Knowledge Base",
+      "packageClass": "DATA_FOUNDATION",
+      "mandatory": false,
+      "semanticOwner": "Knowledge Base",
+      "defaultInstalled": false,
+      "defaultEntitled": false,
+      "defaultEnabled": false,
+      "defaultVisible": false,
+      "healthSource": "/api/v1/health/packages/PKG-KNOWLEDGE-BASE",
+      "versionPolicy": "SEMVER",
+      "compatibilityRange": "vantaris-contracts-v1",
+      "dependencies": [
+        "PKG-CONTRACTS",
+        "PKG-GOVERNANCE-SECURITY"
+      ],
+      "conflicts": [
+        "standalone-one-adapter",
+        "direct-cross-module-database-access"
+      ],
+      "runtimeDependencies": [],
+      "routes": [
+        "/intelligence/knowledge"
+      ],
+      "permissions": [
+        "knowledge:read",
+        "knowledge:publish"
+      ],
+      "publicApiNamespaces": [
+        "/api/v1/knowledge"
+      ],
+      "healthEndpoint": "/api/v1/health/packages/PKG-KNOWLEDGE-BASE",
+      "upgradeOrder": 12,
+      "rollbackOrder": 12,
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "readinessGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED",
+      "stateDimensions": {
+        "installed": "INDEPENDENT_BOOLEAN",
+        "entitled": "INDEPENDENT_BOOLEAN",
+        "enabled": "INDEPENDENT_BOOLEAN",
+        "visible": "INDEPENDENT_BOOLEAN",
+        "healthy": "INDEPENDENT_HEALTH_ENUM"
+      }
+    },
+    {
+      "packageId": "PKG-EVIDENCE-CENTER",
+      "moduleId": "evidence-center",
+      "displayName": "Evidence Center",
+      "packageClass": "DATA_FOUNDATION",
+      "mandatory": false,
+      "semanticOwner": "Evidence Center",
+      "defaultInstalled": false,
+      "defaultEntitled": false,
+      "defaultEnabled": false,
+      "defaultVisible": false,
+      "healthSource": "/api/v1/health/packages/PKG-EVIDENCE-CENTER",
+      "versionPolicy": "SEMVER",
+      "compatibilityRange": "vantaris-contracts-v1",
+      "dependencies": [
+        "PKG-CONTRACTS",
+        "PKG-DB",
+        "PKG-GOVERNANCE-SECURITY"
+      ],
+      "conflicts": [
+        "standalone-one-adapter",
+        "direct-cross-module-database-access",
+        "ucde-owned-evidencerecord"
+      ],
+      "runtimeDependencies": [],
+      "routes": [],
+      "permissions": [
+        "evidence:read",
+        "evidence:submit",
+        "evidence:link",
+        "evidence:verify",
+        "evidence:export"
+      ],
+      "publicApiNamespaces": [
+        "/api/v1/evidence"
+      ],
+      "healthEndpoint": "/api/v1/health/packages/PKG-EVIDENCE-CENTER",
+      "upgradeOrder": 13,
+      "rollbackOrder": 11,
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "readinessGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED",
+      "stateDimensions": {
+        "installed": "INDEPENDENT_BOOLEAN",
+        "entitled": "INDEPENDENT_BOOLEAN",
+        "enabled": "INDEPENDENT_BOOLEAN",
+        "visible": "INDEPENDENT_BOOLEAN",
+        "healthy": "INDEPENDENT_HEALTH_ENUM"
+      }
+    },
+    {
+      "packageId": "PKG-UMMS",
+      "moduleId": "umms",
+      "displayName": "UMMS",
+      "packageClass": "DOMAIN_OPTIONAL",
+      "mandatory": false,
+      "semanticOwner": "UMMS",
+      "defaultInstalled": false,
+      "defaultEntitled": false,
+      "defaultEnabled": false,
+      "defaultVisible": false,
+      "healthSource": "/api/v1/health/packages/PKG-UMMS",
+      "versionPolicy": "SEMVER",
+      "compatibilityRange": "vantaris-contracts-v1",
+      "dependencies": [
+        "PKG-WORK-MANAGEMENT",
+        "PKG-ASSET-GRAPH",
+        "PKG-GOVERNANCE-SECURITY"
+      ],
+      "conflicts": [
+        "standalone-one-adapter",
+        "direct-cross-module-database-access"
+      ],
+      "runtimeDependencies": [],
+      "routes": [
+        "/maintenance/plans",
+        "/maintenance/inspections"
+      ],
+      "permissions": [
+        "maintenance:read",
+        "maintenance:plan",
+        "maintenance:update",
+        "inspection:read",
+        "inspection:execute",
+        "inspection:approve"
+      ],
+      "publicApiNamespaces": [
+        "/api/v1/mms"
+      ],
+      "healthEndpoint": "/api/v1/health/packages/PKG-UMMS",
+      "upgradeOrder": 14,
+      "rollbackOrder": 10,
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "readinessGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED",
+      "stateDimensions": {
+        "installed": "INDEPENDENT_BOOLEAN",
+        "entitled": "INDEPENDENT_BOOLEAN",
+        "enabled": "INDEPENDENT_BOOLEAN",
+        "visible": "INDEPENDENT_BOOLEAN",
+        "healthy": "INDEPENDENT_HEALTH_ENUM"
+      }
+    },
+    {
+      "packageId": "PKG-UESG",
+      "moduleId": "uesg",
+      "displayName": "UESG",
+      "packageClass": "DOMAIN_OPTIONAL",
+      "mandatory": false,
+      "semanticOwner": "UESG",
+      "defaultInstalled": false,
+      "defaultEntitled": false,
+      "defaultEnabled": false,
+      "defaultVisible": false,
+      "healthSource": "/api/v1/health/packages/PKG-UESG",
+      "versionPolicy": "SEMVER",
+      "compatibilityRange": "vantaris-contracts-v1",
+      "dependencies": [
+        "PKG-ASSET-GRAPH",
+        "PKG-DATA-LAKE",
+        "PKG-GOVERNANCE-SECURITY"
+      ],
+      "conflicts": [
+        "standalone-one-adapter",
+        "direct-cross-module-database-access"
+      ],
+      "runtimeDependencies": [],
+      "routes": [
+        "/sustainability/esg"
+      ],
+      "permissions": [
+        "esg:read",
+        "esg:configure",
+        "esg:approve"
+      ],
+      "publicApiNamespaces": [
+        "/api/v1/esg"
+      ],
+      "healthEndpoint": "/api/v1/health/packages/PKG-UESG",
+      "upgradeOrder": 15,
+      "rollbackOrder": 9,
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "readinessGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED",
+      "stateDimensions": {
+        "installed": "INDEPENDENT_BOOLEAN",
+        "entitled": "INDEPENDENT_BOOLEAN",
+        "enabled": "INDEPENDENT_BOOLEAN",
+        "visible": "INDEPENDENT_BOOLEAN",
+        "healthy": "INDEPENDENT_HEALTH_ENUM"
+      }
+    },
+    {
+      "packageId": "PKG-UCDE",
+      "moduleId": "ucde",
+      "displayName": "UCDE",
+      "packageClass": "DOMAIN_OPTIONAL",
+      "mandatory": false,
+      "semanticOwner": "UCDE",
+      "defaultInstalled": false,
+      "defaultEntitled": false,
+      "defaultEnabled": false,
+      "defaultVisible": false,
+      "healthSource": "/api/v1/health/packages/PKG-UCDE",
+      "versionPolicy": "SEMVER",
+      "compatibilityRange": "vantaris-contracts-v1",
+      "dependencies": [
+        "PKG-EVIDENCE-CENTER",
+        "PKG-GOVERNANCE-SECURITY"
+      ],
+      "conflicts": [
+        "standalone-one-adapter",
+        "direct-cross-module-database-access"
+      ],
+      "runtimeDependencies": [],
+      "routes": [
+        "/evidence/investigations"
+      ],
+      "permissions": [
+        "evidence:read",
+        "evidence:verify",
+        "evidence:export"
+      ],
+      "publicApiNamespaces": [
+        "/api/v1/cde"
+      ],
+      "healthEndpoint": "/api/v1/health/packages/PKG-UCDE",
+      "upgradeOrder": 16,
+      "rollbackOrder": 8,
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "readinessGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED",
+      "stateDimensions": {
+        "installed": "INDEPENDENT_BOOLEAN",
+        "entitled": "INDEPENDENT_BOOLEAN",
+        "enabled": "INDEPENDENT_BOOLEAN",
+        "visible": "INDEPENDENT_BOOLEAN",
+        "healthy": "INDEPENDENT_HEALTH_ENUM"
+      }
+    },
+    {
+      "packageId": "PKG-UDOC",
+      "moduleId": "udoc",
+      "displayName": "Unified Data Center Operations",
+      "packageClass": "DOMAIN_OPTIONAL",
+      "mandatory": false,
+      "semanticOwner": "UDOC",
+      "defaultInstalled": false,
+      "defaultEntitled": false,
+      "defaultEnabled": false,
+      "defaultVisible": false,
+      "healthSource": "/api/v1/health/packages/PKG-UDOC",
+      "versionPolicy": "SEMVER",
+      "compatibilityRange": "vantaris-contracts-v1",
+      "dependencies": [
+        "PKG-ASSET-GRAPH",
+        "PKG-DATA-LAKE",
+        "PKG-GOVERNANCE-SECURITY"
+      ],
+      "conflicts": [
+        "standalone-one-adapter",
+        "direct-cross-module-database-access"
+      ],
+      "runtimeDependencies": [],
+      "routes": [
+        "/data-center/operations"
+      ],
+      "permissions": [
+        "udoc:read",
+        "udoc:operate",
+        "udoc:approve"
+      ],
+      "publicApiNamespaces": [
+        "/api/v1/udoc"
+      ],
+      "healthEndpoint": "/api/v1/health/packages/PKG-UDOC",
+      "upgradeOrder": 17,
+      "rollbackOrder": 7,
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "readinessGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED",
+      "stateDimensions": {
+        "installed": "INDEPENDENT_BOOLEAN",
+        "entitled": "INDEPENDENT_BOOLEAN",
+        "enabled": "INDEPENDENT_BOOLEAN",
+        "visible": "INDEPENDENT_BOOLEAN",
+        "healthy": "INDEPENDENT_HEALTH_ENUM"
+      }
+    },
+    {
+      "packageId": "PKG-UFMS-INTEGRATION",
+      "moduleId": "ufms-integration",
+      "displayName": "UFMS Integration",
+      "packageClass": "EXTERNAL_PRODUCT_INTEGRATION",
+      "mandatory": false,
+      "semanticOwner": "VANTARIS ONE UFMS Integration Boundary",
+      "defaultInstalled": false,
+      "defaultEntitled": false,
+      "defaultEnabled": false,
+      "defaultVisible": false,
+      "healthSource": "/api/v1/health/packages/PKG-UFMS-INTEGRATION",
+      "versionPolicy": "SEMVER",
+      "compatibilityRange": "vantaris-contracts-v1",
+      "dependencies": [
+        "PKG-CONTRACTS",
+        "PKG-LINK",
+        "PKG-WORK-MANAGEMENT",
+        "PKG-EVIDENCE-CENTER",
+        "PKG-GOVERNANCE-SECURITY"
+      ],
+      "conflicts": [
+        "standalone-one-adapter",
+        "direct-cross-module-database-access",
+        "embedded-full-ufms-runtime"
+      ],
+      "runtimeDependencies": [],
+      "routes": [
+        "/faults/alarms",
+        "/faults/cases"
+      ],
+      "permissions": [
+        "fault:read",
+        "fault:investigate",
+        "fault:acknowledge",
+        "fault:escalate"
+      ],
+      "publicApiNamespaces": [
+        "/api/v1/adapters/ufms"
+      ],
+      "healthEndpoint": "/api/v1/health/packages/PKG-UFMS-INTEGRATION",
+      "upgradeOrder": 18,
+      "rollbackOrder": 6,
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "readinessGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED",
+      "stateDimensions": {
+        "installed": "INDEPENDENT_BOOLEAN",
+        "entitled": "INDEPENDENT_BOOLEAN",
+        "enabled": "INDEPENDENT_BOOLEAN",
+        "visible": "INDEPENDENT_BOOLEAN",
+        "healthy": "INDEPENDENT_HEALTH_ENUM"
+      }
+    },
+    {
+      "packageId": "PKG-REPORTS",
+      "moduleId": "reports",
+      "displayName": "Reports",
+      "packageClass": "PLATFORM_OPTIONAL",
+      "mandatory": false,
+      "semanticOwner": "Reports",
+      "defaultInstalled": false,
+      "defaultEntitled": false,
+      "defaultEnabled": false,
+      "defaultVisible": false,
+      "healthSource": "/api/v1/health/packages/PKG-REPORTS",
+      "versionPolicy": "SEMVER",
+      "compatibilityRange": "vantaris-contracts-v1",
+      "dependencies": [
+        "PKG-GOVERNANCE-SECURITY"
+      ],
+      "conflicts": [
+        "standalone-one-adapter",
+        "direct-cross-module-database-access"
+      ],
+      "runtimeDependencies": [],
+      "routes": [
+        "/reports/catalog",
+        "/reports/schedules"
+      ],
+      "permissions": [
+        "report:read",
+        "report:execute",
+        "report:schedule",
+        "report:export"
+      ],
+      "publicApiNamespaces": [
+        "/api/v1/reports"
+      ],
+      "healthEndpoint": "/api/v1/health/packages/PKG-REPORTS",
+      "upgradeOrder": 19,
+      "rollbackOrder": 5,
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "readinessGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED",
+      "stateDimensions": {
+        "installed": "INDEPENDENT_BOOLEAN",
+        "entitled": "INDEPENDENT_BOOLEAN",
+        "enabled": "INDEPENDENT_BOOLEAN",
+        "visible": "INDEPENDENT_BOOLEAN",
+        "healthy": "INDEPENDENT_HEALTH_ENUM"
+      }
+    },
+    {
+      "packageId": "PKG-ANALYTICS",
+      "moduleId": "analytics",
+      "displayName": "Analytics",
+      "packageClass": "PLATFORM_OPTIONAL",
+      "mandatory": false,
+      "semanticOwner": "Analytics",
+      "defaultInstalled": false,
+      "defaultEntitled": false,
+      "defaultEnabled": false,
+      "defaultVisible": false,
+      "healthSource": "/api/v1/health/packages/PKG-ANALYTICS",
+      "versionPolicy": "SEMVER",
+      "compatibilityRange": "vantaris-contracts-v1",
+      "dependencies": [
+        "PKG-DATA-LAKE",
+        "PKG-GOVERNANCE-SECURITY"
+      ],
+      "conflicts": [
+        "standalone-one-adapter",
+        "direct-cross-module-database-access"
+      ],
+      "runtimeDependencies": [],
+      "routes": [
+        "/intelligence/analytics"
+      ],
+      "permissions": [
+        "analytics:read",
+        "analytics:execute"
+      ],
+      "publicApiNamespaces": [
+        "/api/v1/analytics"
+      ],
+      "healthEndpoint": "/api/v1/health/packages/PKG-ANALYTICS",
+      "upgradeOrder": 20,
+      "rollbackOrder": 4,
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "readinessGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED",
+      "stateDimensions": {
+        "installed": "INDEPENDENT_BOOLEAN",
+        "entitled": "INDEPENDENT_BOOLEAN",
+        "enabled": "INDEPENDENT_BOOLEAN",
+        "visible": "INDEPENDENT_BOOLEAN",
+        "healthy": "INDEPENDENT_HEALTH_ENUM"
+      }
+    },
+    {
+      "packageId": "PKG-ORCHESTRATOR",
+      "moduleId": "orchestrator",
+      "displayName": "ONE Orchestrator",
+      "packageClass": "PLATFORM_OPTIONAL",
+      "mandatory": false,
+      "semanticOwner": "ONE Orchestrator",
+      "defaultInstalled": false,
+      "defaultEntitled": false,
+      "defaultEnabled": false,
+      "defaultVisible": false,
+      "healthSource": "/api/v1/health/packages/PKG-ORCHESTRATOR",
+      "versionPolicy": "SEMVER",
+      "compatibilityRange": "vantaris-contracts-v1",
+      "dependencies": [
+        "PKG-WORK-MANAGEMENT",
+        "PKG-EVIDENCE-CENTER",
+        "PKG-GOVERNANCE-SECURITY"
+      ],
+      "conflicts": [
+        "standalone-one-adapter",
+        "direct-cross-module-database-access"
+      ],
+      "runtimeDependencies": [],
+      "routes": [
+        "/automation/workflows"
+      ],
+      "permissions": [
+        "workflow:read",
+        "workflow:create",
+        "workflow:approve",
+        "workflow:operate"
+      ],
+      "publicApiNamespaces": [
+        "/api/v1/orchestration"
+      ],
+      "healthEndpoint": "/api/v1/health/packages/PKG-ORCHESTRATOR",
+      "upgradeOrder": 21,
+      "rollbackOrder": 3,
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "readinessGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED",
+      "stateDimensions": {
+        "installed": "INDEPENDENT_BOOLEAN",
+        "entitled": "INDEPENDENT_BOOLEAN",
+        "enabled": "INDEPENDENT_BOOLEAN",
+        "visible": "INDEPENDENT_BOOLEAN",
+        "healthy": "INDEPENDENT_HEALTH_ENUM"
+      }
+    },
+    {
+      "packageId": "PKG-AI-MODEL-HUB",
+      "moduleId": "ai-model-hub",
+      "displayName": "AI Model Hub",
+      "packageClass": "AI_OPTIONAL",
+      "mandatory": false,
+      "semanticOwner": "AI Model Hub",
+      "defaultInstalled": false,
+      "defaultEntitled": false,
+      "defaultEnabled": false,
+      "defaultVisible": false,
+      "healthSource": "/api/v1/health/packages/PKG-AI-MODEL-HUB",
+      "versionPolicy": "SEMVER",
+      "compatibilityRange": "vantaris-contracts-v1",
+      "dependencies": [
+        "PKG-KNOWLEDGE-BASE",
+        "PKG-GOVERNANCE-SECURITY"
+      ],
+      "conflicts": [
+        "standalone-one-adapter",
+        "direct-cross-module-database-access"
+      ],
+      "runtimeDependencies": [],
+      "routes": [
+        "/intelligence/models"
+      ],
+      "permissions": [
+        "model:read",
+        "model:register",
+        "model:approve",
+        "model:deploy"
+      ],
+      "publicApiNamespaces": [
+        "/api/v1/models"
+      ],
+      "healthEndpoint": "/api/v1/health/packages/PKG-AI-MODEL-HUB",
+      "upgradeOrder": 22,
+      "rollbackOrder": 2,
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "readinessGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED",
+      "stateDimensions": {
+        "installed": "INDEPENDENT_BOOLEAN",
+        "entitled": "INDEPENDENT_BOOLEAN",
+        "enabled": "INDEPENDENT_BOOLEAN",
+        "visible": "INDEPENDENT_BOOLEAN",
+        "healthy": "INDEPENDENT_HEALTH_ENUM"
+      }
+    },
+    {
+      "packageId": "PKG-NEXUS-AI",
+      "moduleId": "nexus-ai",
+      "displayName": "Nexus AI",
+      "packageClass": "AI_OPTIONAL",
+      "mandatory": false,
+      "semanticOwner": "Nexus AI",
+      "defaultInstalled": false,
+      "defaultEntitled": false,
+      "defaultEnabled": false,
+      "defaultVisible": false,
+      "healthSource": "/api/v1/health/packages/PKG-NEXUS-AI",
+      "versionPolicy": "SEMVER",
+      "compatibilityRange": "vantaris-contracts-v1",
+      "dependencies": [
+        "PKG-AI-MODEL-HUB",
+        "PKG-KNOWLEDGE-BASE",
+        "PKG-EVIDENCE-CENTER",
+        "PKG-GOVERNANCE-SECURITY"
+      ],
+      "conflicts": [
+        "standalone-one-adapter",
+        "direct-cross-module-database-access"
+      ],
+      "runtimeDependencies": [],
+      "routes": [
+        "/intelligence/assistant"
+      ],
+      "permissions": [
+        "ai:use",
+        "ai:review",
+        "ai:approve"
+      ],
+      "publicApiNamespaces": [
+        "/api/v1/ai"
+      ],
+      "healthEndpoint": "/api/v1/health/packages/PKG-NEXUS-AI",
+      "upgradeOrder": 23,
+      "rollbackOrder": 1,
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "readinessGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED",
+      "stateDimensions": {
+        "installed": "INDEPENDENT_BOOLEAN",
+        "entitled": "INDEPENDENT_BOOLEAN",
+        "enabled": "INDEPENDENT_BOOLEAN",
+        "visible": "INDEPENDENT_BOOLEAN",
+        "healthy": "INDEPENDENT_HEALTH_ENUM"
+      }
+    }
+  ]
+}

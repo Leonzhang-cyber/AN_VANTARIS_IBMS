@@ -1,0 +1,1029 @@
+{
+  "registryName": "VANTARIS_ONE_CONTRACT_NAMESPACE_REGISTRY",
+  "registryVersion": "1.0.0",
+  "generatedAtPolicy": "STATIC_ARCHITECTURE_BASELINE",
+  "authority": "ONE-PLAN-A4",
+  "status": "FROZEN_FOR_IMPLEMENTATION",
+  "namespaces": [
+    {
+      "namespace": "vantaris.identity.v1",
+      "owner": "Governance & Security",
+      "canonicalObjects": [
+        "Identity",
+        "ServiceIdentity"
+      ],
+      "apiNamespaces": [
+        "/api/v1/security"
+      ],
+      "eventFamilies": [
+        "vantaris.identity.v1.events"
+      ],
+      "commandFamilies": [
+        "vantaris.identity.v1.commands"
+      ],
+      "schemaFormat": "JSON_SCHEMA_2020_12",
+      "generatedLanguages": [
+        "python",
+        "typescript"
+      ],
+      "compatibilityPolicy": {
+        "additiveOptionalField": "MINOR",
+        "clarificationWithoutWireBreak": "PATCH",
+        "removalRenameSemanticChangeOrIncompatibleEnum": "MAJOR",
+        "publishedGeneratedTypes": "IMMUTABLE"
+      },
+      "deprecationPolicy": {
+        "minimumSupportedMinorReleases": 2,
+        "documentedUpgradeWindowRequired": true
+      },
+      "validationRules": [
+        "schema-valid",
+        "examples-valid",
+        "provider-conformance",
+        "consumer-compatibility"
+      ],
+      "currentState": "PARTIAL",
+      "priority": "P0"
+    },
+    {
+      "namespace": "vantaris.tenant.v1",
+      "owner": "Governance & Security",
+      "canonicalObjects": [
+        "Tenant"
+      ],
+      "apiNamespaces": [
+        "/api/v1/security",
+        "/api/v1/platform"
+      ],
+      "eventFamilies": [
+        "vantaris.tenant.v1.events"
+      ],
+      "commandFamilies": [
+        "vantaris.tenant.v1.commands"
+      ],
+      "schemaFormat": "JSON_SCHEMA_2020_12",
+      "generatedLanguages": [
+        "python",
+        "typescript"
+      ],
+      "compatibilityPolicy": {
+        "additiveOptionalField": "MINOR",
+        "clarificationWithoutWireBreak": "PATCH",
+        "removalRenameSemanticChangeOrIncompatibleEnum": "MAJOR",
+        "publishedGeneratedTypes": "IMMUTABLE"
+      },
+      "deprecationPolicy": {
+        "minimumSupportedMinorReleases": 2,
+        "documentedUpgradeWindowRequired": true
+      },
+      "validationRules": [
+        "schema-valid",
+        "examples-valid",
+        "provider-conformance",
+        "consumer-compatibility"
+      ],
+      "currentState": "PLANNED",
+      "priority": "P0"
+    },
+    {
+      "namespace": "vantaris.asset.v1",
+      "owner": "ONE Asset Graph",
+      "canonicalObjects": [
+        "Site",
+        "Building",
+        "Floor",
+        "Zone",
+        "Space",
+        "System",
+        "Asset",
+        "Equipment"
+      ],
+      "apiNamespaces": [
+        "/api/v1/assets"
+      ],
+      "eventFamilies": [
+        "vantaris.asset.v1.events"
+      ],
+      "commandFamilies": [
+        "vantaris.asset.v1.commands"
+      ],
+      "schemaFormat": "JSON_SCHEMA_2020_12",
+      "generatedLanguages": [
+        "python",
+        "typescript"
+      ],
+      "compatibilityPolicy": {
+        "additiveOptionalField": "MINOR",
+        "clarificationWithoutWireBreak": "PATCH",
+        "removalRenameSemanticChangeOrIncompatibleEnum": "MAJOR",
+        "publishedGeneratedTypes": "IMMUTABLE"
+      },
+      "deprecationPolicy": {
+        "minimumSupportedMinorReleases": 2,
+        "documentedUpgradeWindowRequired": true
+      },
+      "validationRules": [
+        "schema-valid",
+        "examples-valid",
+        "provider-conformance",
+        "consumer-compatibility"
+      ],
+      "currentState": "PLANNED",
+      "priority": "P0"
+    },
+    {
+      "namespace": "vantaris.device.v1",
+      "owner": "ONE Asset Graph",
+      "canonicalObjects": [
+        "Device",
+        "Point",
+        "Tag"
+      ],
+      "apiNamespaces": [
+        "/api/v1/assets"
+      ],
+      "eventFamilies": [
+        "vantaris.device.v1.events"
+      ],
+      "commandFamilies": [
+        "vantaris.device.v1.commands"
+      ],
+      "schemaFormat": "JSON_SCHEMA_2020_12",
+      "generatedLanguages": [
+        "python",
+        "typescript"
+      ],
+      "compatibilityPolicy": {
+        "additiveOptionalField": "MINOR",
+        "clarificationWithoutWireBreak": "PATCH",
+        "removalRenameSemanticChangeOrIncompatibleEnum": "MAJOR",
+        "publishedGeneratedTypes": "IMMUTABLE"
+      },
+      "deprecationPolicy": {
+        "minimumSupportedMinorReleases": 2,
+        "documentedUpgradeWindowRequired": true
+      },
+      "validationRules": [
+        "schema-valid",
+        "examples-valid",
+        "provider-conformance",
+        "consumer-compatibility"
+      ],
+      "currentState": "PLANNED",
+      "priority": "P0"
+    },
+    {
+      "namespace": "vantaris.integration.v1",
+      "owner": "Integration Governance",
+      "canonicalObjects": [
+        "MappingCandidate",
+        "NotificationDelivery"
+      ],
+      "apiNamespaces": [
+        "/api/v1/integration"
+      ],
+      "eventFamilies": [
+        "vantaris.integration.v1.events"
+      ],
+      "commandFamilies": [
+        "vantaris.integration.v1.commands"
+      ],
+      "schemaFormat": "JSON_SCHEMA_2020_12",
+      "generatedLanguages": [
+        "python",
+        "typescript"
+      ],
+      "compatibilityPolicy": {
+        "additiveOptionalField": "MINOR",
+        "clarificationWithoutWireBreak": "PATCH",
+        "removalRenameSemanticChangeOrIncompatibleEnum": "MAJOR",
+        "publishedGeneratedTypes": "IMMUTABLE"
+      },
+      "deprecationPolicy": {
+        "minimumSupportedMinorReleases": 2,
+        "documentedUpgradeWindowRequired": true
+      },
+      "validationRules": [
+        "schema-valid",
+        "examples-valid",
+        "provider-conformance",
+        "consumer-compatibility"
+      ],
+      "currentState": "PLANNED",
+      "priority": "P0"
+    },
+    {
+      "namespace": "vantaris.edge.v1",
+      "owner": "AN_VANTARIS_EDGE",
+      "canonicalObjects": [
+        "GatewayRuntime",
+        "ConnectorRuntime",
+        "DiscoveryObservation"
+      ],
+      "apiNamespaces": [
+        "/api/v1/edge"
+      ],
+      "eventFamilies": [
+        "vantaris.edge.v1.events"
+      ],
+      "commandFamilies": [
+        "vantaris.edge.v1.commands"
+      ],
+      "schemaFormat": "JSON_SCHEMA_2020_12",
+      "generatedLanguages": [
+        "python",
+        "typescript"
+      ],
+      "compatibilityPolicy": {
+        "additiveOptionalField": "MINOR",
+        "clarificationWithoutWireBreak": "PATCH",
+        "removalRenameSemanticChangeOrIncompatibleEnum": "MAJOR",
+        "publishedGeneratedTypes": "IMMUTABLE"
+      },
+      "deprecationPolicy": {
+        "minimumSupportedMinorReleases": 2,
+        "documentedUpgradeWindowRequired": true
+      },
+      "validationRules": [
+        "schema-valid",
+        "examples-valid",
+        "provider-conformance",
+        "consumer-compatibility"
+      ],
+      "currentState": "PARTIAL",
+      "priority": "P0"
+    },
+    {
+      "namespace": "vantaris.link.v1",
+      "owner": "AN_VANTARIS_LINK",
+      "canonicalObjects": [],
+      "apiNamespaces": [
+        "/api/v1/link"
+      ],
+      "eventFamilies": [
+        "vantaris.link.v1.events"
+      ],
+      "commandFamilies": [
+        "vantaris.link.v1.commands"
+      ],
+      "schemaFormat": "JSON_SCHEMA_2020_12",
+      "generatedLanguages": [
+        "python",
+        "typescript"
+      ],
+      "compatibilityPolicy": {
+        "additiveOptionalField": "MINOR",
+        "clarificationWithoutWireBreak": "PATCH",
+        "removalRenameSemanticChangeOrIncompatibleEnum": "MAJOR",
+        "publishedGeneratedTypes": "IMMUTABLE"
+      },
+      "deprecationPolicy": {
+        "minimumSupportedMinorReleases": 2,
+        "documentedUpgradeWindowRequired": true
+      },
+      "validationRules": [
+        "schema-valid",
+        "examples-valid",
+        "provider-conformance",
+        "consumer-compatibility"
+      ],
+      "currentState": "PARTIAL",
+      "priority": "P0"
+    },
+    {
+      "namespace": "vantaris.telemetry.v1",
+      "owner": "Layer 3 Data Foundation",
+      "canonicalObjects": [
+        "Telemetry"
+      ],
+      "apiNamespaces": [
+        "/api/v1/telemetry"
+      ],
+      "eventFamilies": [
+        "vantaris.telemetry.v1.events"
+      ],
+      "commandFamilies": [
+        "vantaris.telemetry.v1.commands"
+      ],
+      "schemaFormat": "JSON_SCHEMA_2020_12",
+      "generatedLanguages": [
+        "python",
+        "typescript"
+      ],
+      "compatibilityPolicy": {
+        "additiveOptionalField": "MINOR",
+        "clarificationWithoutWireBreak": "PATCH",
+        "removalRenameSemanticChangeOrIncompatibleEnum": "MAJOR",
+        "publishedGeneratedTypes": "IMMUTABLE"
+      },
+      "deprecationPolicy": {
+        "minimumSupportedMinorReleases": 2,
+        "documentedUpgradeWindowRequired": true
+      },
+      "validationRules": [
+        "schema-valid",
+        "examples-valid",
+        "provider-conformance",
+        "consumer-compatibility"
+      ],
+      "currentState": "PARTIAL",
+      "priority": "P0"
+    },
+    {
+      "namespace": "vantaris.event.v1",
+      "owner": "Layer 3 Data Foundation",
+      "canonicalObjects": [
+        "RawEvent"
+      ],
+      "apiNamespaces": [
+        "/api/v1/events"
+      ],
+      "eventFamilies": [
+        "vantaris.event.v1.events"
+      ],
+      "commandFamilies": [
+        "vantaris.event.v1.commands"
+      ],
+      "schemaFormat": "JSON_SCHEMA_2020_12",
+      "generatedLanguages": [
+        "python",
+        "typescript"
+      ],
+      "compatibilityPolicy": {
+        "additiveOptionalField": "MINOR",
+        "clarificationWithoutWireBreak": "PATCH",
+        "removalRenameSemanticChangeOrIncompatibleEnum": "MAJOR",
+        "publishedGeneratedTypes": "IMMUTABLE"
+      },
+      "deprecationPolicy": {
+        "minimumSupportedMinorReleases": 2,
+        "documentedUpgradeWindowRequired": true
+      },
+      "validationRules": [
+        "schema-valid",
+        "examples-valid",
+        "provider-conformance",
+        "consumer-compatibility"
+      ],
+      "currentState": "PARTIAL",
+      "priority": "P0"
+    },
+    {
+      "namespace": "vantaris.ufms.v1",
+      "owner": "UFMS",
+      "canonicalObjects": [
+        "InterpretedEvent",
+        "Alarm",
+        "Episode",
+        "Problem",
+        "FaultCase",
+        "Correlation",
+        "DiagnosticFinding",
+        "RootCauseCandidate",
+        "ImpactAssessment",
+        "EscalationDecision",
+        "WorkOrderIntent"
+      ],
+      "apiNamespaces": [
+        "/api/v1/adapters/ufms"
+      ],
+      "eventFamilies": [
+        "vantaris.ufms.v1.events"
+      ],
+      "commandFamilies": [
+        "vantaris.ufms.v1.commands"
+      ],
+      "schemaFormat": "JSON_SCHEMA_2020_12",
+      "generatedLanguages": [
+        "python",
+        "typescript"
+      ],
+      "compatibilityPolicy": {
+        "additiveOptionalField": "MINOR",
+        "clarificationWithoutWireBreak": "PATCH",
+        "removalRenameSemanticChangeOrIncompatibleEnum": "MAJOR",
+        "publishedGeneratedTypes": "IMMUTABLE"
+      },
+      "deprecationPolicy": {
+        "minimumSupportedMinorReleases": 2,
+        "documentedUpgradeWindowRequired": true
+      },
+      "validationRules": [
+        "schema-valid",
+        "examples-valid",
+        "provider-conformance",
+        "consumer-compatibility"
+      ],
+      "currentState": "PLANNED",
+      "priority": "P0"
+    },
+    {
+      "namespace": "vantaris.work.v1",
+      "owner": "ONE Work Management",
+      "canonicalObjects": [
+        "WorkRequest",
+        "WorkOrder",
+        "WorkAssignment",
+        "WorkExecution",
+        "WorkClosure"
+      ],
+      "apiNamespaces": [
+        "/api/v1/work"
+      ],
+      "eventFamilies": [
+        "vantaris.work.v1.events"
+      ],
+      "commandFamilies": [
+        "vantaris.work.v1.commands"
+      ],
+      "schemaFormat": "JSON_SCHEMA_2020_12",
+      "generatedLanguages": [
+        "python",
+        "typescript"
+      ],
+      "compatibilityPolicy": {
+        "additiveOptionalField": "MINOR",
+        "clarificationWithoutWireBreak": "PATCH",
+        "removalRenameSemanticChangeOrIncompatibleEnum": "MAJOR",
+        "publishedGeneratedTypes": "IMMUTABLE"
+      },
+      "deprecationPolicy": {
+        "minimumSupportedMinorReleases": 2,
+        "documentedUpgradeWindowRequired": true
+      },
+      "validationRules": [
+        "schema-valid",
+        "examples-valid",
+        "provider-conformance",
+        "consumer-compatibility"
+      ],
+      "currentState": "PLANNED",
+      "priority": "P0"
+    },
+    {
+      "namespace": "vantaris.maintenance.v1",
+      "owner": "UMMS",
+      "canonicalObjects": [
+        "MaintenancePlan",
+        "Checklist",
+        "Inspection",
+        "SparePart",
+        "Vendor",
+        "TechnicianSkill",
+        "MaintenanceFinding"
+      ],
+      "apiNamespaces": [
+        "/api/v1/mms"
+      ],
+      "eventFamilies": [
+        "vantaris.maintenance.v1.events"
+      ],
+      "commandFamilies": [
+        "vantaris.maintenance.v1.commands"
+      ],
+      "schemaFormat": "JSON_SCHEMA_2020_12",
+      "generatedLanguages": [
+        "python",
+        "typescript"
+      ],
+      "compatibilityPolicy": {
+        "additiveOptionalField": "MINOR",
+        "clarificationWithoutWireBreak": "PATCH",
+        "removalRenameSemanticChangeOrIncompatibleEnum": "MAJOR",
+        "publishedGeneratedTypes": "IMMUTABLE"
+      },
+      "deprecationPolicy": {
+        "minimumSupportedMinorReleases": 2,
+        "documentedUpgradeWindowRequired": true
+      },
+      "validationRules": [
+        "schema-valid",
+        "examples-valid",
+        "provider-conformance",
+        "consumer-compatibility"
+      ],
+      "currentState": "PLANNED",
+      "priority": "P1"
+    },
+    {
+      "namespace": "vantaris.esg.v1",
+      "owner": "UESG",
+      "canonicalObjects": [
+        "ESGMetric",
+        "ESGFactor",
+        "ESGAnomaly"
+      ],
+      "apiNamespaces": [
+        "/api/v1/esg"
+      ],
+      "eventFamilies": [
+        "vantaris.esg.v1.events"
+      ],
+      "commandFamilies": [
+        "vantaris.esg.v1.commands"
+      ],
+      "schemaFormat": "JSON_SCHEMA_2020_12",
+      "generatedLanguages": [
+        "python",
+        "typescript"
+      ],
+      "compatibilityPolicy": {
+        "additiveOptionalField": "MINOR",
+        "clarificationWithoutWireBreak": "PATCH",
+        "removalRenameSemanticChangeOrIncompatibleEnum": "MAJOR",
+        "publishedGeneratedTypes": "IMMUTABLE"
+      },
+      "deprecationPolicy": {
+        "minimumSupportedMinorReleases": 2,
+        "documentedUpgradeWindowRequired": true
+      },
+      "validationRules": [
+        "schema-valid",
+        "examples-valid",
+        "provider-conformance",
+        "consumer-compatibility"
+      ],
+      "currentState": "PLANNED",
+      "priority": "P1"
+    },
+    {
+      "namespace": "vantaris.udoc.v1",
+      "owner": "UDOC",
+      "canonicalObjects": [
+        "CapacityRecord",
+        "PowerChain",
+        "CoolingChain",
+        "PUERecord"
+      ],
+      "apiNamespaces": [
+        "/api/v1/udoc"
+      ],
+      "eventFamilies": [
+        "vantaris.udoc.v1.events"
+      ],
+      "commandFamilies": [
+        "vantaris.udoc.v1.commands"
+      ],
+      "schemaFormat": "JSON_SCHEMA_2020_12",
+      "generatedLanguages": [
+        "python",
+        "typescript"
+      ],
+      "compatibilityPolicy": {
+        "additiveOptionalField": "MINOR",
+        "clarificationWithoutWireBreak": "PATCH",
+        "removalRenameSemanticChangeOrIncompatibleEnum": "MAJOR",
+        "publishedGeneratedTypes": "IMMUTABLE"
+      },
+      "deprecationPolicy": {
+        "minimumSupportedMinorReleases": 2,
+        "documentedUpgradeWindowRequired": true
+      },
+      "validationRules": [
+        "schema-valid",
+        "examples-valid",
+        "provider-conformance",
+        "consumer-compatibility"
+      ],
+      "currentState": "PLANNED",
+      "priority": "P2"
+    },
+    {
+      "namespace": "vantaris.evidence.v1",
+      "owner": "Evidence Center",
+      "canonicalObjects": [
+        "EvidenceRecord",
+        "EvidenceReference",
+        "EvidenceRelationship"
+      ],
+      "apiNamespaces": [
+        "/api/v1/evidence",
+        "/api/v1/cde"
+      ],
+      "eventFamilies": [
+        "vantaris.evidence.v1.events"
+      ],
+      "commandFamilies": [
+        "vantaris.evidence.v1.commands"
+      ],
+      "schemaFormat": "JSON_SCHEMA_2020_12",
+      "generatedLanguages": [
+        "python",
+        "typescript"
+      ],
+      "compatibilityPolicy": {
+        "additiveOptionalField": "MINOR",
+        "clarificationWithoutWireBreak": "PATCH",
+        "removalRenameSemanticChangeOrIncompatibleEnum": "MAJOR",
+        "publishedGeneratedTypes": "IMMUTABLE"
+      },
+      "deprecationPolicy": {
+        "minimumSupportedMinorReleases": 2,
+        "documentedUpgradeWindowRequired": true
+      },
+      "validationRules": [
+        "schema-valid",
+        "examples-valid",
+        "provider-conformance",
+        "consumer-compatibility"
+      ],
+      "currentState": "PLANNED",
+      "priority": "P0"
+    },
+    {
+      "namespace": "vantaris.workflow.v1",
+      "owner": "ONE Orchestrator",
+      "canonicalObjects": [
+        "NotificationIntent",
+        "DecisionCase",
+        "WorkflowInstance",
+        "HumanTask"
+      ],
+      "apiNamespaces": [
+        "/api/v1/orchestration"
+      ],
+      "eventFamilies": [
+        "vantaris.workflow.v1.events"
+      ],
+      "commandFamilies": [
+        "vantaris.workflow.v1.commands"
+      ],
+      "schemaFormat": "JSON_SCHEMA_2020_12",
+      "generatedLanguages": [
+        "python",
+        "typescript"
+      ],
+      "compatibilityPolicy": {
+        "additiveOptionalField": "MINOR",
+        "clarificationWithoutWireBreak": "PATCH",
+        "removalRenameSemanticChangeOrIncompatibleEnum": "MAJOR",
+        "publishedGeneratedTypes": "IMMUTABLE"
+      },
+      "deprecationPolicy": {
+        "minimumSupportedMinorReleases": 2,
+        "documentedUpgradeWindowRequired": true
+      },
+      "validationRules": [
+        "schema-valid",
+        "examples-valid",
+        "provider-conformance",
+        "consumer-compatibility"
+      ],
+      "currentState": "PLANNED",
+      "priority": "P1"
+    },
+    {
+      "namespace": "vantaris.audit.v1",
+      "owner": "Governance & Security",
+      "canonicalObjects": [
+        "AuditRecord"
+      ],
+      "apiNamespaces": [
+        "/api/v1/audit"
+      ],
+      "eventFamilies": [
+        "vantaris.audit.v1.events"
+      ],
+      "commandFamilies": [
+        "vantaris.audit.v1.commands"
+      ],
+      "schemaFormat": "JSON_SCHEMA_2020_12",
+      "generatedLanguages": [
+        "python",
+        "typescript"
+      ],
+      "compatibilityPolicy": {
+        "additiveOptionalField": "MINOR",
+        "clarificationWithoutWireBreak": "PATCH",
+        "removalRenameSemanticChangeOrIncompatibleEnum": "MAJOR",
+        "publishedGeneratedTypes": "IMMUTABLE"
+      },
+      "deprecationPolicy": {
+        "minimumSupportedMinorReleases": 2,
+        "documentedUpgradeWindowRequired": true
+      },
+      "validationRules": [
+        "schema-valid",
+        "examples-valid",
+        "provider-conformance",
+        "consumer-compatibility"
+      ],
+      "currentState": "PLANNED",
+      "priority": "P0"
+    },
+    {
+      "namespace": "vantaris.trust.v1",
+      "owner": "Governance & Security / Trust",
+      "canonicalObjects": [
+        "HashAnchor",
+        "LicenseEntitlement"
+      ],
+      "apiNamespaces": [
+        "/api/v1/trust"
+      ],
+      "eventFamilies": [
+        "vantaris.trust.v1.events"
+      ],
+      "commandFamilies": [
+        "vantaris.trust.v1.commands"
+      ],
+      "schemaFormat": "JSON_SCHEMA_2020_12",
+      "generatedLanguages": [
+        "python",
+        "typescript"
+      ],
+      "compatibilityPolicy": {
+        "additiveOptionalField": "MINOR",
+        "clarificationWithoutWireBreak": "PATCH",
+        "removalRenameSemanticChangeOrIncompatibleEnum": "MAJOR",
+        "publishedGeneratedTypes": "IMMUTABLE"
+      },
+      "deprecationPolicy": {
+        "minimumSupportedMinorReleases": 2,
+        "documentedUpgradeWindowRequired": true
+      },
+      "validationRules": [
+        "schema-valid",
+        "examples-valid",
+        "provider-conformance",
+        "consumer-compatibility"
+      ],
+      "currentState": "PLANNED",
+      "priority": "P0"
+    },
+    {
+      "namespace": "vantaris.report.v1",
+      "owner": "Reports",
+      "canonicalObjects": [
+        "ReportDefinition",
+        "ReportExecution",
+        "ExportJob"
+      ],
+      "apiNamespaces": [
+        "/api/v1/reports"
+      ],
+      "eventFamilies": [
+        "vantaris.report.v1.events"
+      ],
+      "commandFamilies": [
+        "vantaris.report.v1.commands"
+      ],
+      "schemaFormat": "JSON_SCHEMA_2020_12",
+      "generatedLanguages": [
+        "python",
+        "typescript"
+      ],
+      "compatibilityPolicy": {
+        "additiveOptionalField": "MINOR",
+        "clarificationWithoutWireBreak": "PATCH",
+        "removalRenameSemanticChangeOrIncompatibleEnum": "MAJOR",
+        "publishedGeneratedTypes": "IMMUTABLE"
+      },
+      "deprecationPolicy": {
+        "minimumSupportedMinorReleases": 2,
+        "documentedUpgradeWindowRequired": true
+      },
+      "validationRules": [
+        "schema-valid",
+        "examples-valid",
+        "provider-conformance",
+        "consumer-compatibility"
+      ],
+      "currentState": "PLANNED",
+      "priority": "P1"
+    },
+    {
+      "namespace": "vantaris.analytics.v1",
+      "owner": "Analytics",
+      "canonicalObjects": [],
+      "apiNamespaces": [
+        "/api/v1/analytics"
+      ],
+      "eventFamilies": [
+        "vantaris.analytics.v1.events"
+      ],
+      "commandFamilies": [
+        "vantaris.analytics.v1.commands"
+      ],
+      "schemaFormat": "JSON_SCHEMA_2020_12",
+      "generatedLanguages": [
+        "python",
+        "typescript"
+      ],
+      "compatibilityPolicy": {
+        "additiveOptionalField": "MINOR",
+        "clarificationWithoutWireBreak": "PATCH",
+        "removalRenameSemanticChangeOrIncompatibleEnum": "MAJOR",
+        "publishedGeneratedTypes": "IMMUTABLE"
+      },
+      "deprecationPolicy": {
+        "minimumSupportedMinorReleases": 2,
+        "documentedUpgradeWindowRequired": true
+      },
+      "validationRules": [
+        "schema-valid",
+        "examples-valid",
+        "provider-conformance",
+        "consumer-compatibility"
+      ],
+      "currentState": "PLANNED",
+      "priority": "P2"
+    },
+    {
+      "namespace": "vantaris.package.v1",
+      "owner": "Governance & Security",
+      "canonicalObjects": [
+        "PackageState"
+      ],
+      "apiNamespaces": [
+        "/api/v1/packages"
+      ],
+      "eventFamilies": [
+        "vantaris.package.v1.events"
+      ],
+      "commandFamilies": [
+        "vantaris.package.v1.commands"
+      ],
+      "schemaFormat": "JSON_SCHEMA_2020_12",
+      "generatedLanguages": [
+        "python",
+        "typescript"
+      ],
+      "compatibilityPolicy": {
+        "additiveOptionalField": "MINOR",
+        "clarificationWithoutWireBreak": "PATCH",
+        "removalRenameSemanticChangeOrIncompatibleEnum": "MAJOR",
+        "publishedGeneratedTypes": "IMMUTABLE"
+      },
+      "deprecationPolicy": {
+        "minimumSupportedMinorReleases": 2,
+        "documentedUpgradeWindowRequired": true
+      },
+      "validationRules": [
+        "schema-valid",
+        "examples-valid",
+        "provider-conformance",
+        "consumer-compatibility"
+      ],
+      "currentState": "PLANNED",
+      "priority": "P0"
+    },
+    {
+      "namespace": "vantaris.health.v1",
+      "owner": "UConsole",
+      "canonicalObjects": [],
+      "apiNamespaces": [
+        "/api/v1/health",
+        "/api/v1/console"
+      ],
+      "eventFamilies": [
+        "vantaris.health.v1.events"
+      ],
+      "commandFamilies": [
+        "vantaris.health.v1.commands"
+      ],
+      "schemaFormat": "JSON_SCHEMA_2020_12",
+      "generatedLanguages": [
+        "python",
+        "typescript"
+      ],
+      "compatibilityPolicy": {
+        "additiveOptionalField": "MINOR",
+        "clarificationWithoutWireBreak": "PATCH",
+        "removalRenameSemanticChangeOrIncompatibleEnum": "MAJOR",
+        "publishedGeneratedTypes": "IMMUTABLE"
+      },
+      "deprecationPolicy": {
+        "minimumSupportedMinorReleases": 2,
+        "documentedUpgradeWindowRequired": true
+      },
+      "validationRules": [
+        "schema-valid",
+        "examples-valid",
+        "provider-conformance",
+        "consumer-compatibility"
+      ],
+      "currentState": "PLANNED",
+      "priority": "P0"
+    },
+    {
+      "namespace": "vantaris.knowledge.v1",
+      "owner": "Knowledge Base",
+      "canonicalObjects": [
+        "KnowledgeDocument"
+      ],
+      "apiNamespaces": [
+        "/api/v1/knowledge"
+      ],
+      "eventFamilies": [
+        "vantaris.knowledge.v1.events"
+      ],
+      "commandFamilies": [
+        "vantaris.knowledge.v1.commands"
+      ],
+      "schemaFormat": "JSON_SCHEMA_2020_12",
+      "generatedLanguages": [
+        "python",
+        "typescript"
+      ],
+      "compatibilityPolicy": {
+        "additiveOptionalField": "MINOR",
+        "clarificationWithoutWireBreak": "PATCH",
+        "removalRenameSemanticChangeOrIncompatibleEnum": "MAJOR",
+        "publishedGeneratedTypes": "IMMUTABLE"
+      },
+      "deprecationPolicy": {
+        "minimumSupportedMinorReleases": 2,
+        "documentedUpgradeWindowRequired": true
+      },
+      "validationRules": [
+        "schema-valid",
+        "examples-valid",
+        "provider-conformance",
+        "consumer-compatibility"
+      ],
+      "currentState": "PLANNED",
+      "priority": "P2"
+    },
+    {
+      "namespace": "vantaris.model.v1",
+      "owner": "AI Model Hub",
+      "canonicalObjects": [
+        "ModelMetadata",
+        "ModelVersion"
+      ],
+      "apiNamespaces": [
+        "/api/v1/models"
+      ],
+      "eventFamilies": [
+        "vantaris.model.v1.events"
+      ],
+      "commandFamilies": [
+        "vantaris.model.v1.commands"
+      ],
+      "schemaFormat": "JSON_SCHEMA_2020_12",
+      "generatedLanguages": [
+        "python",
+        "typescript"
+      ],
+      "compatibilityPolicy": {
+        "additiveOptionalField": "MINOR",
+        "clarificationWithoutWireBreak": "PATCH",
+        "removalRenameSemanticChangeOrIncompatibleEnum": "MAJOR",
+        "publishedGeneratedTypes": "IMMUTABLE"
+      },
+      "deprecationPolicy": {
+        "minimumSupportedMinorReleases": 2,
+        "documentedUpgradeWindowRequired": true
+      },
+      "validationRules": [
+        "schema-valid",
+        "examples-valid",
+        "provider-conformance",
+        "consumer-compatibility"
+      ],
+      "currentState": "PLANNED",
+      "priority": "P2"
+    },
+    {
+      "namespace": "vantaris.ai.v1",
+      "owner": "Nexus AI",
+      "canonicalObjects": [
+        "AIRecommendation",
+        "AITrace"
+      ],
+      "apiNamespaces": [
+        "/api/v1/ai"
+      ],
+      "eventFamilies": [
+        "vantaris.ai.v1.events"
+      ],
+      "commandFamilies": [
+        "vantaris.ai.v1.commands"
+      ],
+      "schemaFormat": "JSON_SCHEMA_2020_12",
+      "generatedLanguages": [
+        "python",
+        "typescript"
+      ],
+      "compatibilityPolicy": {
+        "additiveOptionalField": "MINOR",
+        "clarificationWithoutWireBreak": "PATCH",
+        "removalRenameSemanticChangeOrIncompatibleEnum": "MAJOR",
+        "publishedGeneratedTypes": "IMMUTABLE"
+      },
+      "deprecationPolicy": {
+        "minimumSupportedMinorReleases": 2,
+        "documentedUpgradeWindowRequired": true
+      },
+      "validationRules": [
+        "schema-valid",
+        "examples-valid",
+        "provider-conformance",
+        "consumer-compatibility"
+      ],
+      "currentState": "PLANNED",
+      "priority": "P2"
+    }
+  ]
+}

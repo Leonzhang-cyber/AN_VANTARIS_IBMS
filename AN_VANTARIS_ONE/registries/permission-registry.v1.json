@@ -1,0 +1,1374 @@
+{
+  "registryName": "VANTARIS_ONE_PERMISSION_REGISTRY",
+  "registryVersion": "1.0.0",
+  "generatedAtPolicy": "STATIC_ARCHITECTURE_BASELINE",
+  "authority": "ONE-PLAN-A4",
+  "status": "FROZEN_FOR_IMPLEMENTATION",
+  "roleProfiles": [
+    "OPERATOR",
+    "ENGINEER",
+    "SUPERVISOR",
+    "ADMINISTRATOR",
+    "AUDITOR",
+    "SERVICE_IDENTITY"
+  ],
+  "roleProfilePolicy": "PLANNING_DEFAULTS_ONLY_NOT_RUNTIME_AUTHORIZATION",
+  "permissions": [
+    {
+      "permission": "platform:read",
+      "resource": "platform",
+      "action": "read",
+      "description": "Allows read operations on platform resources.",
+      "owningModule": "UConsole",
+      "riskLevel": "LOW",
+      "tenantScoped": true,
+      "siteScoped": false,
+      "auditRequired": false,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR",
+        "AUDITOR"
+      ]
+    },
+    {
+      "permission": "platform:admin",
+      "resource": "platform",
+      "action": "admin",
+      "description": "Allows admin operations on platform resources.",
+      "owningModule": "UConsole",
+      "riskLevel": "HIGH",
+      "tenantScoped": true,
+      "siteScoped": false,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "context:read",
+      "resource": "context",
+      "action": "read",
+      "description": "Allows read operations on context resources.",
+      "owningModule": "UCore",
+      "riskLevel": "LOW",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": false,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR",
+        "AUDITOR"
+      ]
+    },
+    {
+      "permission": "context:update",
+      "resource": "context",
+      "action": "update",
+      "description": "Allows update operations on context resources.",
+      "owningModule": "UCore",
+      "riskLevel": "MEDIUM",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "asset:read",
+      "resource": "asset",
+      "action": "read",
+      "description": "Allows read operations on asset resources.",
+      "owningModule": "ONE Asset Graph",
+      "riskLevel": "LOW",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": false,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR",
+        "AUDITOR"
+      ]
+    },
+    {
+      "permission": "asset:create",
+      "resource": "asset",
+      "action": "create",
+      "description": "Allows create operations on asset resources.",
+      "owningModule": "ONE Asset Graph",
+      "riskLevel": "MEDIUM",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "asset:update",
+      "resource": "asset",
+      "action": "update",
+      "description": "Allows update operations on asset resources.",
+      "owningModule": "ONE Asset Graph",
+      "riskLevel": "MEDIUM",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "asset:retire",
+      "resource": "asset",
+      "action": "retire",
+      "description": "Allows retire operations on asset resources.",
+      "owningModule": "ONE Asset Graph",
+      "riskLevel": "HIGH",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "asset:link",
+      "resource": "asset",
+      "action": "link",
+      "description": "Allows link operations on asset resources.",
+      "owningModule": "ONE Asset Graph",
+      "riskLevel": "MEDIUM",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "asset:import",
+      "resource": "asset",
+      "action": "import",
+      "description": "Allows import operations on asset resources.",
+      "owningModule": "ONE Asset Graph",
+      "riskLevel": "HIGH",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "device:read",
+      "resource": "device",
+      "action": "read",
+      "description": "Allows read operations on device resources.",
+      "owningModule": "ONE Asset Graph",
+      "riskLevel": "LOW",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": false,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR",
+        "AUDITOR"
+      ]
+    },
+    {
+      "permission": "device:approve",
+      "resource": "device",
+      "action": "approve",
+      "description": "Allows approve operations on device resources.",
+      "owningModule": "ONE Asset Graph",
+      "riskLevel": "HIGH",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "device:update",
+      "resource": "device",
+      "action": "update",
+      "description": "Allows update operations on device resources.",
+      "owningModule": "ONE Asset Graph",
+      "riskLevel": "MEDIUM",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "integration:read",
+      "resource": "integration",
+      "action": "read",
+      "description": "Allows read operations on integration resources.",
+      "owningModule": "Integration Governance",
+      "riskLevel": "LOW",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": false,
+      "serviceIdentityAllowed": true,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR",
+        "AUDITOR"
+      ]
+    },
+    {
+      "permission": "integration:configure",
+      "resource": "integration",
+      "action": "configure",
+      "description": "Allows configure operations on integration resources.",
+      "owningModule": "Integration Governance",
+      "riskLevel": "HIGH",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": true,
+      "defaultRoleProfiles": [
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "edge:read",
+      "resource": "edge",
+      "action": "read",
+      "description": "Allows read operations on edge resources.",
+      "owningModule": "AN_VANTARIS_EDGE",
+      "riskLevel": "LOW",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": false,
+      "serviceIdentityAllowed": true,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR",
+        "AUDITOR"
+      ]
+    },
+    {
+      "permission": "edge:diagnose",
+      "resource": "edge",
+      "action": "diagnose",
+      "description": "Allows diagnose operations on edge resources.",
+      "owningModule": "AN_VANTARIS_EDGE",
+      "riskLevel": "MEDIUM",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": true,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "edge:configure",
+      "resource": "edge",
+      "action": "configure",
+      "description": "Allows configure operations on edge resources.",
+      "owningModule": "AN_VANTARIS_EDGE",
+      "riskLevel": "HIGH",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": true,
+      "defaultRoleProfiles": [
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "link:read",
+      "resource": "link",
+      "action": "read",
+      "description": "Allows read operations on link resources.",
+      "owningModule": "AN_VANTARIS_LINK",
+      "riskLevel": "LOW",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": false,
+      "serviceIdentityAllowed": true,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR",
+        "AUDITOR"
+      ]
+    },
+    {
+      "permission": "link:operate",
+      "resource": "link",
+      "action": "operate",
+      "description": "Allows operate operations on link resources.",
+      "owningModule": "AN_VANTARIS_LINK",
+      "riskLevel": "HIGH",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": true,
+      "defaultRoleProfiles": [
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "link:replay",
+      "resource": "link",
+      "action": "replay",
+      "description": "Allows replay operations on link resources.",
+      "owningModule": "AN_VANTARIS_LINK",
+      "riskLevel": "HIGH",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": true,
+      "defaultRoleProfiles": [
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "event:read",
+      "resource": "event",
+      "action": "read",
+      "description": "Allows read operations on event resources.",
+      "owningModule": "Layer 3 Data Foundation",
+      "riskLevel": "LOW",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": false,
+      "serviceIdentityAllowed": true,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR",
+        "AUDITOR"
+      ]
+    },
+    {
+      "permission": "fault:read",
+      "resource": "fault",
+      "action": "read",
+      "description": "Allows read operations on fault resources.",
+      "owningModule": "PKG-UFMS-INTEGRATION",
+      "riskLevel": "LOW",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": false,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR",
+        "AUDITOR"
+      ]
+    },
+    {
+      "permission": "fault:investigate",
+      "resource": "fault",
+      "action": "investigate",
+      "description": "Allows investigate operations on fault resources.",
+      "owningModule": "PKG-UFMS-INTEGRATION",
+      "riskLevel": "MEDIUM",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "fault:acknowledge",
+      "resource": "fault",
+      "action": "acknowledge",
+      "description": "Allows acknowledge operations on fault resources.",
+      "owningModule": "PKG-UFMS-INTEGRATION",
+      "riskLevel": "MEDIUM",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "fault:escalate",
+      "resource": "fault",
+      "action": "escalate",
+      "description": "Allows escalate operations on fault resources.",
+      "owningModule": "PKG-UFMS-INTEGRATION",
+      "riskLevel": "MEDIUM",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "work:read",
+      "resource": "work",
+      "action": "read",
+      "description": "Allows read operations on work resources.",
+      "owningModule": "ONE Work Management",
+      "riskLevel": "LOW",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": false,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR",
+        "AUDITOR"
+      ]
+    },
+    {
+      "permission": "work:create",
+      "resource": "work",
+      "action": "create",
+      "description": "Allows create operations on work resources.",
+      "owningModule": "ONE Work Management",
+      "riskLevel": "MEDIUM",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "work:triage",
+      "resource": "work",
+      "action": "triage",
+      "description": "Allows triage operations on work resources.",
+      "owningModule": "ONE Work Management",
+      "riskLevel": "MEDIUM",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "work:assign",
+      "resource": "work",
+      "action": "assign",
+      "description": "Allows assign operations on work resources.",
+      "owningModule": "ONE Work Management",
+      "riskLevel": "MEDIUM",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "work:dispatch",
+      "resource": "work",
+      "action": "dispatch",
+      "description": "Allows dispatch operations on work resources.",
+      "owningModule": "ONE Work Management",
+      "riskLevel": "MEDIUM",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "work:execute",
+      "resource": "work",
+      "action": "execute",
+      "description": "Allows execute operations on work resources.",
+      "owningModule": "ONE Work Management",
+      "riskLevel": "MEDIUM",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "work:close",
+      "resource": "work",
+      "action": "close",
+      "description": "Allows close operations on work resources.",
+      "owningModule": "ONE Work Management",
+      "riskLevel": "MEDIUM",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "work:review",
+      "resource": "work",
+      "action": "review",
+      "description": "Allows review operations on work resources.",
+      "owningModule": "ONE Work Management",
+      "riskLevel": "MEDIUM",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "maintenance:read",
+      "resource": "maintenance",
+      "action": "read",
+      "description": "Allows read operations on maintenance resources.",
+      "owningModule": "UMMS",
+      "riskLevel": "LOW",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": false,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR",
+        "AUDITOR"
+      ]
+    },
+    {
+      "permission": "maintenance:plan",
+      "resource": "maintenance",
+      "action": "plan",
+      "description": "Allows plan operations on maintenance resources.",
+      "owningModule": "UMMS",
+      "riskLevel": "MEDIUM",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "maintenance:update",
+      "resource": "maintenance",
+      "action": "update",
+      "description": "Allows update operations on maintenance resources.",
+      "owningModule": "UMMS",
+      "riskLevel": "MEDIUM",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "inspection:read",
+      "resource": "inspection",
+      "action": "read",
+      "description": "Allows read operations on inspection resources.",
+      "owningModule": "UMMS",
+      "riskLevel": "LOW",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": false,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR",
+        "AUDITOR"
+      ]
+    },
+    {
+      "permission": "inspection:execute",
+      "resource": "inspection",
+      "action": "execute",
+      "description": "Allows execute operations on inspection resources.",
+      "owningModule": "UMMS",
+      "riskLevel": "MEDIUM",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "inspection:approve",
+      "resource": "inspection",
+      "action": "approve",
+      "description": "Allows approve operations on inspection resources.",
+      "owningModule": "UMMS",
+      "riskLevel": "HIGH",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "esg:read",
+      "resource": "esg",
+      "action": "read",
+      "description": "Allows read operations on esg resources.",
+      "owningModule": "UESG",
+      "riskLevel": "LOW",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": false,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR",
+        "AUDITOR"
+      ]
+    },
+    {
+      "permission": "esg:configure",
+      "resource": "esg",
+      "action": "configure",
+      "description": "Allows configure operations on esg resources.",
+      "owningModule": "UESG",
+      "riskLevel": "HIGH",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "esg:approve",
+      "resource": "esg",
+      "action": "approve",
+      "description": "Allows approve operations on esg resources.",
+      "owningModule": "UESG",
+      "riskLevel": "HIGH",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "udoc:read",
+      "resource": "udoc",
+      "action": "read",
+      "description": "Allows read operations on udoc resources.",
+      "owningModule": "UDOC",
+      "riskLevel": "LOW",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": false,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR",
+        "AUDITOR"
+      ]
+    },
+    {
+      "permission": "udoc:operate",
+      "resource": "udoc",
+      "action": "operate",
+      "description": "Allows operate operations on udoc resources.",
+      "owningModule": "UDOC",
+      "riskLevel": "HIGH",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "udoc:approve",
+      "resource": "udoc",
+      "action": "approve",
+      "description": "Allows approve operations on udoc resources.",
+      "owningModule": "UDOC",
+      "riskLevel": "HIGH",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "evidence:read",
+      "resource": "evidence",
+      "action": "read",
+      "description": "Allows read operations on evidence resources.",
+      "owningModule": "Evidence Center",
+      "riskLevel": "LOW",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": false,
+      "serviceIdentityAllowed": true,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR",
+        "AUDITOR"
+      ]
+    },
+    {
+      "permission": "evidence:submit",
+      "resource": "evidence",
+      "action": "submit",
+      "description": "Allows submit operations on evidence resources.",
+      "owningModule": "Evidence Center",
+      "riskLevel": "MEDIUM",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": true,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "evidence:link",
+      "resource": "evidence",
+      "action": "link",
+      "description": "Allows link operations on evidence resources.",
+      "owningModule": "Evidence Center",
+      "riskLevel": "MEDIUM",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": true,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "evidence:verify",
+      "resource": "evidence",
+      "action": "verify",
+      "description": "Allows verify operations on evidence resources.",
+      "owningModule": "Evidence Center",
+      "riskLevel": "MEDIUM",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": true,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "evidence:export",
+      "resource": "evidence",
+      "action": "export",
+      "description": "Allows export operations on evidence resources.",
+      "owningModule": "Evidence Center",
+      "riskLevel": "HIGH",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": true,
+      "defaultRoleProfiles": [
+        "ADMINISTRATOR",
+        "AUDITOR"
+      ]
+    },
+    {
+      "permission": "workflow:read",
+      "resource": "workflow",
+      "action": "read",
+      "description": "Allows read operations on workflow resources.",
+      "owningModule": "ONE Orchestrator",
+      "riskLevel": "LOW",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": false,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR",
+        "AUDITOR"
+      ]
+    },
+    {
+      "permission": "workflow:create",
+      "resource": "workflow",
+      "action": "create",
+      "description": "Allows create operations on workflow resources.",
+      "owningModule": "ONE Orchestrator",
+      "riskLevel": "MEDIUM",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "workflow:approve",
+      "resource": "workflow",
+      "action": "approve",
+      "description": "Allows approve operations on workflow resources.",
+      "owningModule": "ONE Orchestrator",
+      "riskLevel": "HIGH",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "workflow:operate",
+      "resource": "workflow",
+      "action": "operate",
+      "description": "Allows operate operations on workflow resources.",
+      "owningModule": "ONE Orchestrator",
+      "riskLevel": "HIGH",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "report:read",
+      "resource": "report",
+      "action": "read",
+      "description": "Allows read operations on report resources.",
+      "owningModule": "Reports",
+      "riskLevel": "LOW",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": false,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR",
+        "AUDITOR"
+      ]
+    },
+    {
+      "permission": "report:execute",
+      "resource": "report",
+      "action": "execute",
+      "description": "Allows execute operations on report resources.",
+      "owningModule": "Reports",
+      "riskLevel": "MEDIUM",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "report:schedule",
+      "resource": "report",
+      "action": "schedule",
+      "description": "Allows schedule operations on report resources.",
+      "owningModule": "Reports",
+      "riskLevel": "MEDIUM",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "report:export",
+      "resource": "report",
+      "action": "export",
+      "description": "Allows export operations on report resources.",
+      "owningModule": "Reports",
+      "riskLevel": "HIGH",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "ADMINISTRATOR",
+        "AUDITOR"
+      ]
+    },
+    {
+      "permission": "analytics:read",
+      "resource": "analytics",
+      "action": "read",
+      "description": "Allows read operations on analytics resources.",
+      "owningModule": "Analytics",
+      "riskLevel": "LOW",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": false,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR",
+        "AUDITOR"
+      ]
+    },
+    {
+      "permission": "analytics:execute",
+      "resource": "analytics",
+      "action": "execute",
+      "description": "Allows execute operations on analytics resources.",
+      "owningModule": "Analytics",
+      "riskLevel": "MEDIUM",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "package:read",
+      "resource": "package",
+      "action": "read",
+      "description": "Allows read operations on package resources.",
+      "owningModule": "Governance & Security",
+      "riskLevel": "LOW",
+      "tenantScoped": true,
+      "siteScoped": false,
+      "auditRequired": false,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR",
+        "AUDITOR"
+      ]
+    },
+    {
+      "permission": "package:install",
+      "resource": "package",
+      "action": "install",
+      "description": "Allows install operations on package resources.",
+      "owningModule": "Governance & Security",
+      "riskLevel": "HIGH",
+      "tenantScoped": true,
+      "siteScoped": false,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "package:enable",
+      "resource": "package",
+      "action": "enable",
+      "description": "Allows enable operations on package resources.",
+      "owningModule": "Governance & Security",
+      "riskLevel": "HIGH",
+      "tenantScoped": true,
+      "siteScoped": false,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "package:upgrade",
+      "resource": "package",
+      "action": "upgrade",
+      "description": "Allows upgrade operations on package resources.",
+      "owningModule": "Governance & Security",
+      "riskLevel": "HIGH",
+      "tenantScoped": true,
+      "siteScoped": false,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "security:read",
+      "resource": "security",
+      "action": "read",
+      "description": "Allows read operations on security resources.",
+      "owningModule": "Governance & Security",
+      "riskLevel": "LOW",
+      "tenantScoped": true,
+      "siteScoped": false,
+      "auditRequired": false,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR",
+        "AUDITOR"
+      ]
+    },
+    {
+      "permission": "security:admin",
+      "resource": "security",
+      "action": "admin",
+      "description": "Allows admin operations on security resources.",
+      "owningModule": "Governance & Security",
+      "riskLevel": "HIGH",
+      "tenantScoped": true,
+      "siteScoped": false,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "audit:read",
+      "resource": "audit",
+      "action": "read",
+      "description": "Allows read operations on audit resources.",
+      "owningModule": "Governance & Security",
+      "riskLevel": "LOW",
+      "tenantScoped": true,
+      "siteScoped": false,
+      "auditRequired": false,
+      "serviceIdentityAllowed": true,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR",
+        "AUDITOR"
+      ]
+    },
+    {
+      "permission": "audit:export",
+      "resource": "audit",
+      "action": "export",
+      "description": "Allows export operations on audit resources.",
+      "owningModule": "Governance & Security",
+      "riskLevel": "HIGH",
+      "tenantScoped": true,
+      "siteScoped": false,
+      "auditRequired": true,
+      "serviceIdentityAllowed": true,
+      "defaultRoleProfiles": [
+        "ADMINISTRATOR",
+        "AUDITOR"
+      ]
+    },
+    {
+      "permission": "knowledge:read",
+      "resource": "knowledge",
+      "action": "read",
+      "description": "Allows read operations on knowledge resources.",
+      "owningModule": "Knowledge Base",
+      "riskLevel": "LOW",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": false,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR",
+        "AUDITOR"
+      ]
+    },
+    {
+      "permission": "knowledge:publish",
+      "resource": "knowledge",
+      "action": "publish",
+      "description": "Allows publish operations on knowledge resources.",
+      "owningModule": "Knowledge Base",
+      "riskLevel": "MEDIUM",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": false,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "model:read",
+      "resource": "model",
+      "action": "read",
+      "description": "Allows read operations on model resources.",
+      "owningModule": "AI Model Hub",
+      "riskLevel": "LOW",
+      "tenantScoped": true,
+      "siteScoped": false,
+      "auditRequired": false,
+      "serviceIdentityAllowed": true,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR",
+        "AUDITOR"
+      ]
+    },
+    {
+      "permission": "model:register",
+      "resource": "model",
+      "action": "register",
+      "description": "Allows register operations on model resources.",
+      "owningModule": "AI Model Hub",
+      "riskLevel": "MEDIUM",
+      "tenantScoped": true,
+      "siteScoped": false,
+      "auditRequired": true,
+      "serviceIdentityAllowed": true,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "model:approve",
+      "resource": "model",
+      "action": "approve",
+      "description": "Allows approve operations on model resources.",
+      "owningModule": "AI Model Hub",
+      "riskLevel": "HIGH",
+      "tenantScoped": true,
+      "siteScoped": false,
+      "auditRequired": true,
+      "serviceIdentityAllowed": true,
+      "defaultRoleProfiles": [
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "model:deploy",
+      "resource": "model",
+      "action": "deploy",
+      "description": "Allows deploy operations on model resources.",
+      "owningModule": "AI Model Hub",
+      "riskLevel": "HIGH",
+      "tenantScoped": true,
+      "siteScoped": false,
+      "auditRequired": true,
+      "serviceIdentityAllowed": true,
+      "defaultRoleProfiles": [
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "ai:use",
+      "resource": "ai",
+      "action": "use",
+      "description": "Allows use operations on ai resources.",
+      "owningModule": "Nexus AI",
+      "riskLevel": "LOW",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": false,
+      "serviceIdentityAllowed": true,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR",
+        "AUDITOR"
+      ]
+    },
+    {
+      "permission": "ai:review",
+      "resource": "ai",
+      "action": "review",
+      "description": "Allows review operations on ai resources.",
+      "owningModule": "Nexus AI",
+      "riskLevel": "MEDIUM",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": true,
+      "defaultRoleProfiles": [
+        "OPERATOR",
+        "ENGINEER",
+        "SUPERVISOR",
+        "ADMINISTRATOR"
+      ]
+    },
+    {
+      "permission": "ai:approve",
+      "resource": "ai",
+      "action": "approve",
+      "description": "Allows approve operations on ai resources.",
+      "owningModule": "Nexus AI",
+      "riskLevel": "HIGH",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditRequired": true,
+      "serviceIdentityAllowed": true,
+      "defaultRoleProfiles": [
+        "ADMINISTRATOR"
+      ]
+    }
+  ]
+}

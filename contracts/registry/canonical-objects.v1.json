@@ -1,0 +1,2493 @@
+{
+  "registryName": "VANTARIS_ONE_CANONICAL_OBJECT_REGISTRY",
+  "registryVersion": "1.0.0",
+  "generatedAtPolicy": "STATIC_ARCHITECTURE_BASELINE",
+  "authority": "ONE-PLAN-A4",
+  "status": "FROZEN_FOR_IMPLEMENTATION",
+  "objects": [
+    {
+      "objectName": "Tenant",
+      "namespace": "vantaris.tenant.v1",
+      "semanticOwner": "Governance & Security",
+      "systemOfRecord": "Tenant Registry",
+      "apiProvider": "/api/v1/security",
+      "eventProvider": "Governance & Security",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": false,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "Site",
+      "namespace": "vantaris.asset.v1",
+      "semanticOwner": "ONE Asset Graph",
+      "systemOfRecord": "ONE Asset Graph",
+      "apiProvider": "/api/v1/assets",
+      "eventProvider": "ONE Asset Graph",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": false,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "Building",
+      "namespace": "vantaris.asset.v1",
+      "semanticOwner": "ONE Asset Graph",
+      "systemOfRecord": "ONE Asset Graph",
+      "apiProvider": "/api/v1/assets",
+      "eventProvider": "ONE Asset Graph",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": false,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "Floor",
+      "namespace": "vantaris.asset.v1",
+      "semanticOwner": "ONE Asset Graph",
+      "systemOfRecord": "ONE Asset Graph",
+      "apiProvider": "/api/v1/assets",
+      "eventProvider": "ONE Asset Graph",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": false,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "Zone",
+      "namespace": "vantaris.asset.v1",
+      "semanticOwner": "ONE Asset Graph",
+      "systemOfRecord": "ONE Asset Graph",
+      "apiProvider": "/api/v1/assets",
+      "eventProvider": "ONE Asset Graph",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": false,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "Space",
+      "namespace": "vantaris.asset.v1",
+      "semanticOwner": "ONE Asset Graph",
+      "systemOfRecord": "ONE Asset Graph",
+      "apiProvider": "/api/v1/assets",
+      "eventProvider": "ONE Asset Graph",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": false,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "System",
+      "namespace": "vantaris.asset.v1",
+      "semanticOwner": "ONE Asset Graph",
+      "systemOfRecord": "ONE Asset Graph",
+      "apiProvider": "/api/v1/assets",
+      "eventProvider": "ONE Asset Graph",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": false,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "Asset",
+      "namespace": "vantaris.asset.v1",
+      "semanticOwner": "ONE Asset Graph",
+      "systemOfRecord": "ONE Asset Graph",
+      "apiProvider": "/api/v1/assets",
+      "eventProvider": "ONE Asset Graph",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": false,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "Equipment",
+      "namespace": "vantaris.asset.v1",
+      "semanticOwner": "ONE Asset Graph",
+      "systemOfRecord": "ONE Asset Graph",
+      "apiProvider": "/api/v1/assets",
+      "eventProvider": "ONE Asset Graph",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": false,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "Device",
+      "namespace": "vantaris.device.v1",
+      "semanticOwner": "ONE Asset Graph",
+      "systemOfRecord": "ONE Asset Graph",
+      "apiProvider": "/api/v1/assets",
+      "eventProvider": "ONE Asset Graph",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "LEGACY_OR_SKELETON",
+      "migrationRequired": true,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "Point",
+      "namespace": "vantaris.device.v1",
+      "semanticOwner": "ONE Asset Graph",
+      "systemOfRecord": "ONE Asset Graph",
+      "apiProvider": "/api/v1/assets",
+      "eventProvider": "ONE Asset Graph",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "LEGACY_OR_SKELETON",
+      "migrationRequired": true,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "Tag",
+      "namespace": "vantaris.device.v1",
+      "semanticOwner": "ONE Asset Graph",
+      "systemOfRecord": "ONE Asset Graph",
+      "apiProvider": "/api/v1/assets",
+      "eventProvider": "ONE Asset Graph",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "LEGACY_OR_SKELETON",
+      "migrationRequired": true,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "GatewayRuntime",
+      "namespace": "vantaris.edge.v1",
+      "semanticOwner": "AN_VANTARIS_EDGE",
+      "systemOfRecord": "AN_VANTARIS_EDGE",
+      "apiProvider": "/api/v1/edge",
+      "eventProvider": "AN_VANTARIS_EDGE",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "ConnectorRuntime",
+      "namespace": "vantaris.edge.v1",
+      "semanticOwner": "AN_VANTARIS_EDGE",
+      "systemOfRecord": "AN_VANTARIS_EDGE",
+      "apiProvider": "/api/v1/edge",
+      "eventProvider": "AN_VANTARIS_EDGE",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "DiscoveryObservation",
+      "namespace": "vantaris.edge.v1",
+      "semanticOwner": "AN_VANTARIS_EDGE",
+      "systemOfRecord": "AN_VANTARIS_EDGE",
+      "apiProvider": "/api/v1/edge",
+      "eventProvider": "AN_VANTARIS_EDGE",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "MappingCandidate",
+      "namespace": "vantaris.integration.v1",
+      "semanticOwner": "AN_VANTARIS_EDGE",
+      "systemOfRecord": "AN_VANTARIS_EDGE",
+      "apiProvider": "/api/v1/edge",
+      "eventProvider": "AN_VANTARIS_EDGE",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "NotificationDelivery",
+      "namespace": "vantaris.integration.v1",
+      "semanticOwner": "Integration Governance",
+      "systemOfRecord": "Delivery Provider",
+      "apiProvider": "/api/v1/integration",
+      "eventProvider": "AN_VANTARIS_LINK",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "Telemetry",
+      "namespace": "vantaris.telemetry.v1",
+      "semanticOwner": "Layer 3 Data Foundation",
+      "systemOfRecord": "Layer 3 Ingestion",
+      "apiProvider": "/api/v1/telemetry",
+      "eventProvider": "Layer 3 Ingestion",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "RawEvent",
+      "namespace": "vantaris.event.v1",
+      "semanticOwner": "Layer 3 Data Foundation",
+      "systemOfRecord": "Layer 3 Ingestion",
+      "apiProvider": "/api/v1/events",
+      "eventProvider": "Layer 3 Ingestion",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "InterpretedEvent",
+      "namespace": "vantaris.ufms.v1",
+      "semanticOwner": "UFMS",
+      "systemOfRecord": "UFMS",
+      "apiProvider": "/api/v1/adapters/ufms",
+      "eventProvider": "PKG-UFMS-INTEGRATION",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "Alarm",
+      "namespace": "vantaris.ufms.v1",
+      "semanticOwner": "UFMS",
+      "systemOfRecord": "UFMS",
+      "apiProvider": "/api/v1/adapters/ufms",
+      "eventProvider": "PKG-UFMS-INTEGRATION",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "Episode",
+      "namespace": "vantaris.ufms.v1",
+      "semanticOwner": "UFMS",
+      "systemOfRecord": "UFMS",
+      "apiProvider": "/api/v1/adapters/ufms",
+      "eventProvider": "PKG-UFMS-INTEGRATION",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "Problem",
+      "namespace": "vantaris.ufms.v1",
+      "semanticOwner": "UFMS",
+      "systemOfRecord": "UFMS",
+      "apiProvider": "/api/v1/adapters/ufms",
+      "eventProvider": "PKG-UFMS-INTEGRATION",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "FaultCase",
+      "namespace": "vantaris.ufms.v1",
+      "semanticOwner": "UFMS",
+      "systemOfRecord": "UFMS",
+      "apiProvider": "/api/v1/adapters/ufms",
+      "eventProvider": "PKG-UFMS-INTEGRATION",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": true,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "Correlation",
+      "namespace": "vantaris.ufms.v1",
+      "semanticOwner": "UFMS",
+      "systemOfRecord": "UFMS",
+      "apiProvider": "/api/v1/adapters/ufms",
+      "eventProvider": "PKG-UFMS-INTEGRATION",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "DiagnosticFinding",
+      "namespace": "vantaris.ufms.v1",
+      "semanticOwner": "UFMS",
+      "systemOfRecord": "UFMS",
+      "apiProvider": "/api/v1/adapters/ufms",
+      "eventProvider": "PKG-UFMS-INTEGRATION",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": true,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "RootCauseCandidate",
+      "namespace": "vantaris.ufms.v1",
+      "semanticOwner": "UFMS",
+      "systemOfRecord": "UFMS",
+      "apiProvider": "/api/v1/adapters/ufms",
+      "eventProvider": "PKG-UFMS-INTEGRATION",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": true,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "ImpactAssessment",
+      "namespace": "vantaris.ufms.v1",
+      "semanticOwner": "UFMS",
+      "systemOfRecord": "UFMS",
+      "apiProvider": "/api/v1/adapters/ufms",
+      "eventProvider": "PKG-UFMS-INTEGRATION",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": true,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "EscalationDecision",
+      "namespace": "vantaris.ufms.v1",
+      "semanticOwner": "UFMS",
+      "systemOfRecord": "UFMS",
+      "apiProvider": "/api/v1/adapters/ufms",
+      "eventProvider": "PKG-UFMS-INTEGRATION",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": true,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "WorkOrderIntent",
+      "namespace": "vantaris.ufms.v1",
+      "semanticOwner": "UFMS",
+      "systemOfRecord": "UFMS",
+      "apiProvider": "/api/v1/adapters/ufms",
+      "eventProvider": "PKG-UFMS-INTEGRATION",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "NotificationIntent",
+      "namespace": "vantaris.workflow.v1",
+      "semanticOwner": "ONE Orchestrator",
+      "systemOfRecord": "Originating Workflow",
+      "apiProvider": "/api/v1/orchestration",
+      "eventProvider": "ONE Orchestrator",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "DecisionCase",
+      "namespace": "vantaris.workflow.v1",
+      "semanticOwner": "ONE Orchestrator",
+      "systemOfRecord": "ONE Orchestrator",
+      "apiProvider": "/api/v1/orchestration",
+      "eventProvider": "ONE Orchestrator",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": true,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "WorkflowInstance",
+      "namespace": "vantaris.workflow.v1",
+      "semanticOwner": "ONE Orchestrator",
+      "systemOfRecord": "ONE Orchestrator",
+      "apiProvider": "/api/v1/orchestration",
+      "eventProvider": "ONE Orchestrator",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "HumanTask",
+      "namespace": "vantaris.workflow.v1",
+      "semanticOwner": "ONE Orchestrator",
+      "systemOfRecord": "ONE Orchestrator",
+      "apiProvider": "/api/v1/orchestration",
+      "eventProvider": "ONE Orchestrator",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "WorkRequest",
+      "namespace": "vantaris.work.v1",
+      "semanticOwner": "ONE Work Management",
+      "systemOfRecord": "ONE Work Management",
+      "apiProvider": "/api/v1/work",
+      "eventProvider": "ONE Work Management",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "WorkOrder",
+      "namespace": "vantaris.work.v1",
+      "semanticOwner": "ONE Work Management",
+      "systemOfRecord": "ONE Work Management",
+      "apiProvider": "/api/v1/work",
+      "eventProvider": "ONE Work Management",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": true,
+      "idempotencyRequired": true,
+      "currentImplementation": "LEGACY_OR_SKELETON",
+      "migrationRequired": true,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "WorkAssignment",
+      "namespace": "vantaris.work.v1",
+      "semanticOwner": "ONE Work Management",
+      "systemOfRecord": "ONE Work Management",
+      "apiProvider": "/api/v1/work",
+      "eventProvider": "ONE Work Management",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "WorkExecution",
+      "namespace": "vantaris.work.v1",
+      "semanticOwner": "ONE Work Management",
+      "systemOfRecord": "ONE Work Management",
+      "apiProvider": "/api/v1/work",
+      "eventProvider": "ONE Work Management",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "WorkClosure",
+      "namespace": "vantaris.work.v1",
+      "semanticOwner": "ONE Work Management",
+      "systemOfRecord": "ONE Work Management",
+      "apiProvider": "/api/v1/work",
+      "eventProvider": "ONE Work Management",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": true,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "MaintenancePlan",
+      "namespace": "vantaris.maintenance.v1",
+      "semanticOwner": "UMMS",
+      "systemOfRecord": "UMMS",
+      "apiProvider": "/api/v1/mms",
+      "eventProvider": "UMMS",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "Checklist",
+      "namespace": "vantaris.maintenance.v1",
+      "semanticOwner": "UMMS",
+      "systemOfRecord": "UMMS",
+      "apiProvider": "/api/v1/mms",
+      "eventProvider": "UMMS",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "Inspection",
+      "namespace": "vantaris.maintenance.v1",
+      "semanticOwner": "UMMS",
+      "systemOfRecord": "UMMS",
+      "apiProvider": "/api/v1/mms",
+      "eventProvider": "UMMS",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "SparePart",
+      "namespace": "vantaris.maintenance.v1",
+      "semanticOwner": "UMMS",
+      "systemOfRecord": "UMMS",
+      "apiProvider": "/api/v1/mms",
+      "eventProvider": "UMMS",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "Vendor",
+      "namespace": "vantaris.maintenance.v1",
+      "semanticOwner": "UMMS",
+      "systemOfRecord": "UMMS",
+      "apiProvider": "/api/v1/mms",
+      "eventProvider": "UMMS",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "TechnicianSkill",
+      "namespace": "vantaris.maintenance.v1",
+      "semanticOwner": "UMMS",
+      "systemOfRecord": "UMMS",
+      "apiProvider": "/api/v1/mms",
+      "eventProvider": "UMMS",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "MaintenanceFinding",
+      "namespace": "vantaris.maintenance.v1",
+      "semanticOwner": "UMMS",
+      "systemOfRecord": "UMMS",
+      "apiProvider": "/api/v1/mms",
+      "eventProvider": "UMMS",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "ESGMetric",
+      "namespace": "vantaris.esg.v1",
+      "semanticOwner": "UESG",
+      "systemOfRecord": "UESG",
+      "apiProvider": "/api/v1/esg",
+      "eventProvider": "UESG",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "ESGFactor",
+      "namespace": "vantaris.esg.v1",
+      "semanticOwner": "UESG",
+      "systemOfRecord": "UESG",
+      "apiProvider": "/api/v1/esg",
+      "eventProvider": "UESG",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "ESGAnomaly",
+      "namespace": "vantaris.esg.v1",
+      "semanticOwner": "UESG",
+      "systemOfRecord": "UESG",
+      "apiProvider": "/api/v1/esg",
+      "eventProvider": "UESG",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "CapacityRecord",
+      "namespace": "vantaris.udoc.v1",
+      "semanticOwner": "UDOC",
+      "systemOfRecord": "UDOC",
+      "apiProvider": "/api/v1/udoc",
+      "eventProvider": "UDOC",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "PowerChain",
+      "namespace": "vantaris.udoc.v1",
+      "semanticOwner": "UDOC",
+      "systemOfRecord": "UDOC",
+      "apiProvider": "/api/v1/udoc",
+      "eventProvider": "UDOC",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "CoolingChain",
+      "namespace": "vantaris.udoc.v1",
+      "semanticOwner": "UDOC",
+      "systemOfRecord": "UDOC",
+      "apiProvider": "/api/v1/udoc",
+      "eventProvider": "UDOC",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "PUERecord",
+      "namespace": "vantaris.udoc.v1",
+      "semanticOwner": "UDOC",
+      "systemOfRecord": "UDOC",
+      "apiProvider": "/api/v1/udoc",
+      "eventProvider": "UDOC",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "EvidenceRecord",
+      "namespace": "vantaris.evidence.v1",
+      "semanticOwner": "Evidence Center",
+      "systemOfRecord": "Evidence Center",
+      "apiProvider": "/api/v1/evidence",
+      "eventProvider": "Evidence Center",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "LEGACY_OR_SKELETON",
+      "migrationRequired": true,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "EvidenceReference",
+      "namespace": "vantaris.evidence.v1",
+      "semanticOwner": "Originating Module",
+      "systemOfRecord": "Originating Module",
+      "apiProvider": "/api/v1/evidence",
+      "eventProvider": "Originating Module",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "EvidenceRelationship",
+      "namespace": "vantaris.evidence.v1",
+      "semanticOwner": "Evidence Center",
+      "systemOfRecord": "Evidence Center",
+      "apiProvider": "/api/v1/evidence",
+      "eventProvider": "Evidence Center",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "HashAnchor",
+      "namespace": "vantaris.trust.v1",
+      "semanticOwner": "Evidence Center / Trust",
+      "systemOfRecord": "Governance & Security / Trust",
+      "apiProvider": "/api/v1/trust",
+      "eventProvider": "Governance & Security / Trust",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "LicenseEntitlement",
+      "namespace": "vantaris.trust.v1",
+      "semanticOwner": "Governance & Security",
+      "systemOfRecord": "License Entitlement Service",
+      "apiProvider": "/api/v1/trust",
+      "eventProvider": "Governance & Security",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": false,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "AuditRecord",
+      "namespace": "vantaris.audit.v1",
+      "semanticOwner": "Governance & Security",
+      "systemOfRecord": "Governance & Security Audit Service",
+      "apiProvider": "/api/v1/audit",
+      "eventProvider": "Governance & Security",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": true,
+      "idempotencyRequired": true,
+      "currentImplementation": "LEGACY_OR_SKELETON",
+      "migrationRequired": true,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "ReportDefinition",
+      "namespace": "vantaris.report.v1",
+      "semanticOwner": "Reports",
+      "systemOfRecord": "Reports",
+      "apiProvider": "/api/v1/reports",
+      "eventProvider": "Reports",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "LEGACY_OR_SKELETON",
+      "migrationRequired": true,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "ReportExecution",
+      "namespace": "vantaris.report.v1",
+      "semanticOwner": "Reports",
+      "systemOfRecord": "Reports",
+      "apiProvider": "/api/v1/reports",
+      "eventProvider": "Reports",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "LEGACY_OR_SKELETON",
+      "migrationRequired": true,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "ExportJob",
+      "namespace": "vantaris.report.v1",
+      "semanticOwner": "Reports",
+      "systemOfRecord": "Reports",
+      "apiProvider": "/api/v1/reports",
+      "eventProvider": "Reports",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "LEGACY_OR_SKELETON",
+      "migrationRequired": true,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "PackageState",
+      "namespace": "vantaris.package.v1",
+      "semanticOwner": "Governance & Security",
+      "systemOfRecord": "Package Control Plane",
+      "apiProvider": "/api/v1/packages",
+      "eventProvider": "Governance & Security",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": false,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "OperationalContext",
+      "namespace": "vantaris.identity.v1",
+      "semanticOwner": "UCore",
+      "systemOfRecord": "UCore",
+      "apiProvider": "/api/v1/context",
+      "eventProvider": "UCore",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "AIRecommendation",
+      "namespace": "vantaris.ai.v1",
+      "semanticOwner": "Nexus AI",
+      "systemOfRecord": "Nexus AI",
+      "apiProvider": "/api/v1/ai",
+      "eventProvider": "Nexus AI",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": true,
+      "idempotencyRequired": true,
+      "currentImplementation": "LEGACY_OR_SKELETON",
+      "migrationRequired": true,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "AITrace",
+      "namespace": "vantaris.ai.v1",
+      "semanticOwner": "Nexus AI",
+      "systemOfRecord": "Nexus AI",
+      "apiProvider": "/api/v1/ai",
+      "eventProvider": "Nexus AI",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "LEGACY_OR_SKELETON",
+      "migrationRequired": true,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "ModelMetadata",
+      "namespace": "vantaris.model.v1",
+      "semanticOwner": "AI Model Hub",
+      "systemOfRecord": "AI Model Hub",
+      "apiProvider": "/api/v1/models",
+      "eventProvider": "AI Model Hub",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": false,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "ModelVersion",
+      "namespace": "vantaris.model.v1",
+      "semanticOwner": "AI Model Hub",
+      "systemOfRecord": "AI Model Hub",
+      "apiProvider": "/api/v1/models",
+      "eventProvider": "AI Model Hub",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": false,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    },
+    {
+      "objectName": "KnowledgeDocument",
+      "namespace": "vantaris.knowledge.v1",
+      "semanticOwner": "Knowledge Base",
+      "systemOfRecord": "Knowledge Base",
+      "apiProvider": "/api/v1/knowledge",
+      "eventProvider": "Knowledge Base",
+      "consumers": [
+        "authorized-platform-modules"
+      ],
+      "projections": [
+        "UConsole",
+        "Reports",
+        "Analytics"
+      ],
+      "domainExtensions": [
+        "contract-governed-only"
+      ],
+      "identifierFormat": "UUID_GLOBAL_ID",
+      "tenantScoped": true,
+      "siteScoped": false,
+      "lifecycle": [
+        "created",
+        "active",
+        "retired"
+      ],
+      "statusModel": "NAMESPACE_DEFINED",
+      "contractVersion": "1.0.0",
+      "retentionClass": "DOMAIN_POLICY",
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "idempotencyRequired": true,
+      "currentImplementation": "PLANNED",
+      "migrationRequired": false,
+      "readiness": "REGISTRY_FROZEN"
+    }
+  ]
+}
