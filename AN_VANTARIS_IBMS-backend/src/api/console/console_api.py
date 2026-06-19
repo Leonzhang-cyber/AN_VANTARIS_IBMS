@@ -7,11 +7,13 @@ from flask import request
 from src.api import api_bp
 from src.common.models.response import Result
 from src.console.console_service import ConsoleService
+from src.console.module_content_dashboard import ModuleContentDashboardService
 from src.console.module_package_service import ModulePackageService
 
 
 _service = ConsoleService()
 _package_service = ModulePackageService()
+_content_service = ModuleContentDashboardService()
 
 
 @api_bp.route("/v1/console/health", methods=["GET"])
@@ -145,4 +147,31 @@ def console_package_role_menu_preview(role: str):
 def console_package_detail(package_id_or_module_id: str):
     data = _package_service.get_package_detail(package_id_or_module_id)
     return Result.success(data={"item": data, "found": bool(data)})
+
+
+@api_bp.route("/v1/console/content/dashboard", methods=["GET"])
+def console_content_dashboard():
+    role = request.args.get("role", "admin")
+    return Result.success(data=_content_service.get_module_content_dashboard(role=role))
+
+
+@api_bp.route("/v1/console/content/cards", methods=["GET"])
+def console_content_cards():
+    role = request.args.get("role", "admin")
+    return Result.success(data=_content_service.get_module_content_cards(role=role))
+
+
+@api_bp.route("/v1/console/content/summary", methods=["GET"])
+def console_content_summary():
+    role = request.args.get("role", "admin")
+    return Result.success(data=_content_service.get_module_content_summary(role=role))
+
+
+@api_bp.route("/v1/console/content/modules/<string:module_id>", methods=["GET"])
+def console_content_module_detail(module_id: str):
+    role = request.args.get("role", "admin")
+    data = _content_service.get_module_content_detail(module_id=module_id, role=role)
+    if not data:
+        return Result.error(code=404, message="moduleId not found")
+    return Result.success(data=data)
 

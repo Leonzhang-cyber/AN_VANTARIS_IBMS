@@ -389,7 +389,7 @@ def _base_packages() -> List[Dict[str, Any]]:
             admin_entry=deepcopy(admin_entry),
             role_visibility=_role_visibility(False, True, True),
             entry_status="locked",
-            limitations=["UEDGE package is placeholder-only in this stage.", "No EDGE runtime integration."],
+            limitations=["UEDGE package is placeholder-only in this stage.", "No EDGE integration is connected."],
             next_actions=["Keep UEDGE diagnostics as placeholder until installation gate is approved."],
         ),
         _package_record(
@@ -428,7 +428,7 @@ def _base_packages() -> List[Dict[str, Any]]:
             admin_entry=deepcopy(admin_entry),
             role_visibility=_role_visibility(False, True, True),
             entry_status="locked",
-            limitations=["LINK package is placeholder-only in this stage.", "No LINK runtime integration."],
+            limitations=["LINK package is placeholder-only in this stage.", "No LINK integration is connected."],
             next_actions=["Keep LINK diagnostics as placeholder until installation gate is approved."],
         ),
         _package_record(

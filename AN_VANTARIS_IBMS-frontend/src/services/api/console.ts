@@ -1152,3 +1152,194 @@ export async function getRoleMenuPreview(role: ConsoleRole): Promise<RoleMenuPre
   return normalizeRoleMenuPreview(unwrapData<unknown>(data))
 }
 
+export interface ModuleContentCard {
+  moduleId: string
+  moduleName: string
+  packageCode: string
+  contentMode: string
+  runtimeLinked: boolean
+  visible: boolean
+  enabled: boolean
+  entitled: boolean
+  route: string
+  status: string
+  summary: Record<string, unknown>
+  highlights: string[]
+  risks: string[]
+  limitations: string[]
+  lastUpdated: string
+  fallbackUsed: boolean
+  lockedReason: string | null
+  entryMode: string
+  roleVisibility: ModuleRoleVisibility
+  packageState: {
+    installed: boolean
+    entitled: boolean
+    enabled: boolean
+    visible: boolean
+    patchStatus: string
+    upgradeRequired: boolean
+    lockedReason: string | null
+  }
+  readOnly: boolean
+  controlActionsEnabled: boolean
+  realRbacIntegrated: boolean
+  routeGuardIntegrated: boolean
+  certified: boolean
+  iec62443Certified: boolean
+}
+
+export interface ModuleContentSummary {
+  role: ConsoleRole
+  totalContentCards: number
+  visibleContentCards: number
+  fallbackCards: number
+  lockedPreviewCards: number
+  readOnly: boolean
+  runtimeLinked: boolean
+  realRbacIntegrated: boolean
+  routeGuardIntegrated: boolean
+  certified: boolean
+  iec62443Certified: boolean
+}
+
+export interface ModuleContentDashboard {
+  role: ConsoleRole
+  summary: ModuleContentSummary
+  cards: ModuleContentCard[]
+  contentMode: string
+  runtimeLinked: boolean
+  readOnly: boolean
+  controlActionsEnabled: boolean
+  realRbacIntegrated: boolean
+  routeGuardIntegrated: boolean
+  limitations: string[]
+  certified: boolean
+  iec62443Certified: boolean
+}
+
+export interface ModuleContentDetail {
+  role: ConsoleRole
+  item: ModuleContentCard
+  readOnly: boolean
+  runtimeLinked: boolean
+  realRbacIntegrated: boolean
+  routeGuardIntegrated: boolean
+  certified: boolean
+  iec62443Certified: boolean
+}
+
+function normalizeModuleContentCard(raw: unknown): ModuleContentCard {
+  const data = asRecord(raw)
+  const packageState = asRecord(data.packageState)
+  return {
+    moduleId: String(data.moduleId ?? ''),
+    moduleName: String(data.moduleName ?? ''),
+    packageCode: String(data.packageCode ?? ''),
+    contentMode: String(data.contentMode ?? 'local-skeleton-summary'),
+    runtimeLinked: Boolean(data.runtimeLinked),
+    visible: Boolean(data.visible),
+    enabled: Boolean(data.enabled),
+    entitled: Boolean(data.entitled),
+    route: String(data.route ?? ''),
+    status: String(data.status ?? ''),
+    summary: asRecord(data.summary),
+    highlights: asStringArray(data.highlights),
+    risks: asStringArray(data.risks),
+    limitations: asStringArray(data.limitations),
+    lastUpdated: String(data.lastUpdated ?? ''),
+    fallbackUsed: Boolean(data.fallbackUsed),
+    lockedReason: data.lockedReason === null || data.lockedReason === undefined ? null : String(data.lockedReason),
+    entryMode: String(data.entryMode ?? ''),
+    roleVisibility: normalizeRoleVisibility(data.roleVisibility),
+    packageState: {
+      installed: Boolean(packageState.installed),
+      entitled: Boolean(packageState.entitled),
+      enabled: Boolean(packageState.enabled),
+      visible: Boolean(packageState.visible),
+      patchStatus: String(packageState.patchStatus ?? ''),
+      upgradeRequired: Boolean(packageState.upgradeRequired),
+      lockedReason:
+        packageState.lockedReason === null || packageState.lockedReason === undefined ? null : String(packageState.lockedReason),
+    },
+    readOnly: data.readOnly !== undefined ? Boolean(data.readOnly) : true,
+    controlActionsEnabled: Boolean(data.controlActionsEnabled),
+    realRbacIntegrated: Boolean(data.realRbacIntegrated),
+    routeGuardIntegrated: Boolean(data.routeGuardIntegrated),
+    certified: Boolean(data.certified),
+    iec62443Certified: Boolean(data.iec62443Certified),
+  }
+}
+
+function normalizeModuleContentSummary(raw: unknown): ModuleContentSummary {
+  const data = asRecord(raw)
+  return {
+    role: normalizeRole(data.role),
+    totalContentCards: Number(data.totalContentCards ?? 0),
+    visibleContentCards: Number(data.visibleContentCards ?? 0),
+    fallbackCards: Number(data.fallbackCards ?? 0),
+    lockedPreviewCards: Number(data.lockedPreviewCards ?? 0),
+    readOnly: data.readOnly !== undefined ? Boolean(data.readOnly) : true,
+    runtimeLinked: Boolean(data.runtimeLinked),
+    realRbacIntegrated: Boolean(data.realRbacIntegrated),
+    routeGuardIntegrated: Boolean(data.routeGuardIntegrated),
+    certified: Boolean(data.certified),
+    iec62443Certified: Boolean(data.iec62443Certified),
+  }
+}
+
+function normalizeModuleContentDashboard(raw: unknown): ModuleContentDashboard {
+  const data = asRecord(raw)
+  return {
+    role: normalizeRole(data.role),
+    summary: normalizeModuleContentSummary(data.summary),
+    cards: Array.isArray(data.cards) ? data.cards.map((item) => normalizeModuleContentCard(item)) : [],
+    contentMode: String(data.contentMode ?? 'local-skeleton-content-dashboard'),
+    runtimeLinked: Boolean(data.runtimeLinked),
+    readOnly: data.readOnly !== undefined ? Boolean(data.readOnly) : true,
+    controlActionsEnabled: Boolean(data.controlActionsEnabled),
+    realRbacIntegrated: Boolean(data.realRbacIntegrated),
+    routeGuardIntegrated: Boolean(data.routeGuardIntegrated),
+    limitations: asStringArray(data.limitations),
+    certified: Boolean(data.certified),
+    iec62443Certified: Boolean(data.iec62443Certified),
+  }
+}
+
+function normalizeModuleContentDetail(raw: unknown): ModuleContentDetail {
+  const data = asRecord(raw)
+  return {
+    role: normalizeRole(data.role),
+    item: normalizeModuleContentCard(data.item),
+    readOnly: data.readOnly !== undefined ? Boolean(data.readOnly) : true,
+    runtimeLinked: Boolean(data.runtimeLinked),
+    realRbacIntegrated: Boolean(data.realRbacIntegrated),
+    routeGuardIntegrated: Boolean(data.routeGuardIntegrated),
+    certified: Boolean(data.certified),
+    iec62443Certified: Boolean(data.iec62443Certified),
+  }
+}
+
+export async function getModuleContentDashboard(role?: ConsoleRole): Promise<ModuleContentDashboard> {
+  const { data } = await request.get('/v1/console/content/dashboard', { params: role ? { role } : undefined })
+  return normalizeModuleContentDashboard(unwrapData<unknown>(data))
+}
+
+export async function getModuleContentCards(role?: ConsoleRole): Promise<ModuleContentCard[]> {
+  const { data } = await request.get('/v1/console/content/cards', { params: role ? { role } : undefined })
+  const payload = asRecord(unwrapData<unknown>(data))
+  return Array.isArray(payload.items) ? payload.items.map((item) => normalizeModuleContentCard(item)) : []
+}
+
+export async function getModuleContentSummary(role?: ConsoleRole): Promise<ModuleContentSummary> {
+  const { data } = await request.get('/v1/console/content/summary', { params: role ? { role } : undefined })
+  return normalizeModuleContentSummary(unwrapData<unknown>(data))
+}
+
+export async function getModuleContentDetail(moduleId: string, role?: ConsoleRole): Promise<ModuleContentDetail> {
+  const { data } = await request.get(`/v1/console/content/modules/${encodeURIComponent(moduleId)}`, {
+    params: role ? { role } : undefined,
+  })
+  return normalizeModuleContentDetail(unwrapData<unknown>(data))
+}
+

@@ -162,7 +162,7 @@ def calculate_platform_readiness_score(modules: List[Dict[str, Any]]) -> Dict[st
         ],
         "risks": [
             "Production RBAC is not integrated.",
-            "EDGE and LINK runtime integration is not integrated.",
+            "EDGE and LINK integration is not connected.",
             "UCDE runtime evidence integration is not integrated.",
             "Most modules are still in planned stage.",
         ],

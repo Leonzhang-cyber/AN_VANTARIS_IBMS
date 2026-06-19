@@ -14,8 +14,12 @@ import {
   getConsoleReadinessSummary,
   getConsoleReportsReadiness,
   getLockedPackages,
+  getModuleContentDashboard,
+  getModuleContentDetail,
   getModulePackageDetail,
   getModulePackages,
+  getModuleContentCards,
+  getModuleContentSummary,
   getPackageCenterHealth,
   getPackageEntries,
   getRoleEntries,
@@ -28,6 +32,10 @@ import {
   type ConsoleRole,
   type ConsoleHealth,
   type ModulePackageRecord,
+  type ModuleContentCard,
+  type ModuleContentDashboard,
+  type ModuleContentSummary,
+  type ModuleContentDetail,
   type ModuleReadinessRecord,
   type ModuleReadinessSummary,
   type PackageCenterHealth,
@@ -60,6 +68,10 @@ const showPackageDrawer = ref(false)
 const selectedPackageDetail = ref<ModulePackageRecord | null>(null)
 const packageCenterError = ref('')
 const roleVisibilityError = ref('')
+const contentDashboardError = ref('')
+const loadingContentDetail = ref(false)
+const showContentDrawer = ref(false)
+const selectedContentDetail = ref<ModuleContentCard | null>(null)
 const selectedRole = ref<ConsoleRole>('admin')
 
 const health = ref<ConsoleHealth>({
@@ -285,6 +297,34 @@ const roleMenuPreview = ref<RoleMenuPreview>({
   certified: false,
   iec62443Certified: false,
 })
+const moduleContentSummary = ref<ModuleContentSummary>({
+  role: 'admin',
+  totalContentCards: 0,
+  visibleContentCards: 0,
+  fallbackCards: 0,
+  lockedPreviewCards: 0,
+  readOnly: true,
+  runtimeLinked: false,
+  realRbacIntegrated: false,
+  routeGuardIntegrated: false,
+  certified: false,
+  iec62443Certified: false,
+})
+const moduleContentCards = ref<ModuleContentCard[]>([])
+const moduleContentDashboard = ref<ModuleContentDashboard>({
+  role: 'admin',
+  summary: moduleContentSummary.value,
+  cards: [],
+  contentMode: 'local-skeleton-content-dashboard',
+  runtimeLinked: false,
+  readOnly: true,
+  controlActionsEnabled: false,
+  realRbacIntegrated: false,
+  routeGuardIntegrated: false,
+  limitations: [],
+  certified: false,
+  iec62443Certified: false,
+})
 
 const moduleFilters = reactive({
   runtimeStatus: '',
@@ -432,6 +472,14 @@ const roleAdminPackageCenter = computed(() => {
     return []
   }
   return packageEntries.value.adminPackageCenter
+})
+
+const lockedFutureContentCards = computed(() => {
+  return moduleContentCards.value.filter((item) => item.moduleId === 'locked-future-modules')
+})
+
+const engineerContextCards = computed(() => {
+  return moduleContentCards.value.filter((item) => item.moduleId === 'engineer-content-context')
 })
 
 const filteredModules = computed(() => {
@@ -729,6 +777,53 @@ async function loadRoleVisibilityPreview(role: ConsoleRole): Promise<void> {
   }
 }
 
+async function loadModuleContent(role: ConsoleRole): Promise<void> {
+  contentDashboardError.value = ''
+  try {
+    const [dashboardResult, cardsResult, summaryResult] = await Promise.all([
+      getModuleContentDashboard(role),
+      getModuleContentCards(role),
+      getModuleContentSummary(role),
+    ])
+    moduleContentDashboard.value = dashboardResult
+    moduleContentCards.value = cardsResult
+    moduleContentSummary.value = summaryResult
+  } catch (error) {
+    contentDashboardError.value = normalizeError(
+      error,
+      'Module Content Dashboard API unavailable. Showing empty local skeleton fallback.'
+    )
+    moduleContentSummary.value = {
+      role,
+      totalContentCards: 0,
+      visibleContentCards: 0,
+      fallbackCards: 0,
+      lockedPreviewCards: 0,
+      readOnly: true,
+      runtimeLinked: false,
+      realRbacIntegrated: false,
+      routeGuardIntegrated: false,
+      certified: false,
+      iec62443Certified: false,
+    }
+    moduleContentCards.value = []
+    moduleContentDashboard.value = {
+      role,
+      summary: moduleContentSummary.value,
+      cards: [],
+      contentMode: 'local-skeleton-content-dashboard',
+      runtimeLinked: false,
+      readOnly: true,
+      controlActionsEnabled: false,
+      realRbacIntegrated: false,
+      routeGuardIntegrated: false,
+      limitations: ['Module content dashboard fallback is active.'],
+      certified: false,
+      iec62443Certified: false,
+    }
+  }
+}
+
 async function loadDashboard(): Promise<void> {
   loading.value = true
   apiError.value = ''
@@ -787,6 +882,7 @@ async function loadDashboard(): Promise<void> {
       patchReadiness.value = patchResult
       lockedPackages.value = lockedResult
       await loadRoleVisibilityPreview(selectedRole.value)
+      await loadModuleContent(selectedRole.value)
     } catch (packageError) {
       packageCenterError.value = normalizeError(packageError, 'Package Center API unavailable. Using local fallback package state.')
       packages.value = []
@@ -814,6 +910,7 @@ async function loadDashboard(): Promise<void> {
       }
       lockedPackages.value = []
       await loadRoleVisibilityPreview(selectedRole.value)
+      await loadModuleContent(selectedRole.value)
     }
   } catch (error) {
     apiError.value = normalizeError(error, 'UConsole API unavailable. Showing local fallback summary.')
@@ -823,6 +920,7 @@ async function loadDashboard(): Promise<void> {
     navigationModel.value = fallbackNavigationFromRegistry(modules.value)
     packageCenterError.value = 'Package Center API unavailable. Using local fallback package state.'
     await loadRoleVisibilityPreview(selectedRole.value)
+    await loadModuleContent(selectedRole.value)
   } finally {
     loading.value = false
   }
@@ -893,6 +991,27 @@ function openPackageEntry(route: string, enabled: boolean, visible: boolean): vo
   void router.push(route)
 }
 
+function openContentModule(card: ModuleContentCard): void {
+  if (!card.route || !card.visible || !card.enabled || !card.entitled) {
+    return
+  }
+  void router.push(card.route)
+}
+
+async function openContentDetail(moduleId: string): Promise<void> {
+  showContentDrawer.value = true
+  loadingContentDetail.value = true
+  selectedContentDetail.value = moduleContentCards.value.find((item) => item.moduleId === moduleId) || null
+  try {
+    const detail: ModuleContentDetail = await getModuleContentDetail(moduleId, selectedRole.value)
+    selectedContentDetail.value = detail.item
+  } catch {
+    // keep list fallback
+  } finally {
+    loadingContentDetail.value = false
+  }
+}
+
 function resetPackageFilters(): void {
   packageFilters.moduleId = ''
   packageFilters.packageCategory = ''
@@ -908,6 +1027,7 @@ watch(
   () => selectedRole.value,
   (role) => {
     void loadRoleVisibilityPreview(role)
+    void loadModuleContent(role)
   }
 )
 
@@ -1308,7 +1428,7 @@ onMounted(() => {
         type="info"
         show-icon
         :closable="false"
-        title="Engineer workspace entries are placeholder-only and do not connect to EDGE/LINK runtime in this stage."
+        title="Engineer workspace entries are placeholder-only and do not connect to EDGE/LINK integration in this stage."
         class="block-space"
       />
       <el-table :data="roleVisibleEngineerWorkspace" row-key="packageCode" empty-text="No engineer entries for selected role">
@@ -1337,6 +1457,101 @@ onMounted(() => {
         <el-table-column label="entitled/enabled/visible" min-width="170">
           <template #default="{ row }">{{ row.entitled }} / {{ row.enabled }} / {{ row.visible }}</template>
         </el-table-column>
+      </el-table>
+    </el-card>
+
+    <el-card shadow="never" class="block-space">
+      <template #header><div class="section-title">Module Content Dashboard</div></template>
+      <el-alert
+        type="info"
+        show-icon
+        :closable="false"
+        title="Module Content Dashboard uses read-only local skeleton summaries. Cross-module aggregation, EDGE/LINK diagnostics and UFMS integration are not connected."
+        class="block-space"
+      />
+      <el-alert
+        v-if="contentDashboardError"
+        type="warning"
+        show-icon
+        :closable="false"
+        :title="contentDashboardError"
+        class="block-space"
+      />
+      <el-descriptions :column="3" border class="block-space">
+        <el-descriptions-item label="totalContentCards">{{ moduleContentSummary.totalContentCards }}</el-descriptions-item>
+        <el-descriptions-item label="visibleContentCards">{{ moduleContentSummary.visibleContentCards }}</el-descriptions-item>
+        <el-descriptions-item label="fallbackCards">{{ moduleContentSummary.fallbackCards }}</el-descriptions-item>
+        <el-descriptions-item label="lockedPreviewCards">{{ moduleContentSummary.lockedPreviewCards }}</el-descriptions-item>
+        <el-descriptions-item label="readOnly">{{ moduleContentSummary.readOnly }}</el-descriptions-item>
+        <el-descriptions-item label="runtimeLinked">{{ moduleContentSummary.runtimeLinked }}</el-descriptions-item>
+      </el-descriptions>
+      <el-descriptions :column="2" border class="block-space">
+        <el-descriptions-item label="selectedRole">{{ selectedRole }}</el-descriptions-item>
+        <el-descriptions-item label="contentMode">{{ moduleContentDashboard.contentMode }}</el-descriptions-item>
+        <el-descriptions-item label="realRbacIntegrated">{{ moduleContentDashboard.realRbacIntegrated }}</el-descriptions-item>
+        <el-descriptions-item label="routeGuardIntegrated">{{ moduleContentDashboard.routeGuardIntegrated }}</el-descriptions-item>
+      </el-descriptions>
+
+      <el-row :gutter="12">
+        <el-col v-for="card in moduleContentCards" :key="card.moduleId" :xs="24" :sm="24" :md="12">
+          <el-card shadow="never" class="block-space">
+            <template #header>
+              <div class="section-title">{{ card.moduleName }} ({{ card.packageCode }})</div>
+            </template>
+            <el-descriptions :column="1" border class="block-space">
+              <el-descriptions-item label="status">{{ card.status }}</el-descriptions-item>
+              <el-descriptions-item label="route">{{ card.route || '-' }}</el-descriptions-item>
+              <el-descriptions-item label="visible/enabled/entitled">
+                {{ card.visible }} / {{ card.enabled }} / {{ card.entitled }}
+              </el-descriptions-item>
+              <el-descriptions-item label="fallbackUsed">{{ card.fallbackUsed }}</el-descriptions-item>
+              <el-descriptions-item label="lockedReason">{{ card.lockedReason || '-' }}</el-descriptions-item>
+            </el-descriptions>
+            <el-table
+              :data="Object.entries(card.summary).map(([key, value]) => ({ key, value: String(value) }))"
+              row-key="key"
+              size="small"
+              empty-text="No summary metrics"
+              class="block-space"
+            >
+              <el-table-column prop="key" label="summaryKey" min-width="160" />
+              <el-table-column prop="value" label="summaryValue" min-width="200" />
+            </el-table>
+            <el-text class="block-space">highlights: {{ card.highlights.join(' | ') || '-' }}</el-text>
+            <el-text class="block-space">risks: {{ card.risks.join(' | ') || '-' }}</el-text>
+            <el-space wrap>
+              <el-button
+                type="primary"
+                plain
+                :disabled="!(card.route && card.visible && card.enabled && card.entitled)"
+                @click="openContentModule(card)"
+              >
+                Open Module
+              </el-button>
+              <el-button plain @click="openContentDetail(card.moduleId)">View Content Detail</el-button>
+            </el-space>
+          </el-card>
+        </el-col>
+      </el-row>
+    </el-card>
+
+    <el-card shadow="never" class="block-space">
+      <template #header><div class="section-title">Locked / Future Content Preview</div></template>
+      <el-table :data="lockedFutureContentCards" row-key="moduleId" empty-text="No locked preview cards">
+        <el-table-column prop="moduleName" label="moduleName" min-width="220" />
+        <el-table-column prop="packageCode" label="packageCode" min-width="170" />
+        <el-table-column prop="status" label="status" min-width="120" />
+        <el-table-column prop="lockedReason" label="lockedReason" min-width="260" />
+      </el-table>
+    </el-card>
+
+    <el-card v-if="selectedRole === 'engineer'" shadow="never" class="block-space">
+      <template #header><div class="section-title">Engineer Content Context</div></template>
+      <el-table :data="engineerContextCards" row-key="moduleId" empty-text="No engineer context cards">
+        <el-table-column prop="moduleName" label="moduleName" min-width="220" />
+        <el-table-column prop="packageCode" label="packageCode" min-width="170" />
+        <el-table-column prop="status" label="status" min-width="120" />
+        <el-table-column prop="lockedReason" label="lockedReason" min-width="240" />
       </el-table>
     </el-card>
 
@@ -1623,6 +1838,55 @@ onMounted(() => {
               <li v-for="item in selectedHealthDetail.boundaryNotes" :key="item">{{ item }}</li>
             </ul>
           </template>
+        </el-card>
+      </template>
+    </el-drawer>
+
+    <el-drawer v-model="showContentDrawer" title="Content Detail" size="52%">
+      <el-skeleton v-if="loadingContentDetail" :rows="8" animated />
+      <el-empty v-else-if="!selectedContentDetail" description="No content selected." />
+      <template v-else>
+        <el-descriptions :column="1" border class="block-space">
+          <el-descriptions-item label="moduleOverview">
+            {{ selectedContentDetail.moduleName }} | {{ selectedContentDetail.moduleId }} | {{ selectedContentDetail.packageCode }}
+          </el-descriptions-item>
+          <el-descriptions-item label="route">{{ selectedContentDetail.route || '-' }}</el-descriptions-item>
+          <el-descriptions-item label="status">{{ selectedContentDetail.status }}</el-descriptions-item>
+          <el-descriptions-item label="packageState">
+            installed={{ selectedContentDetail.packageState.installed }}, entitled={{ selectedContentDetail.packageState.entitled }},
+            enabled={{ selectedContentDetail.packageState.enabled }}, visible={{ selectedContentDetail.packageState.visible }},
+            patchStatus={{ selectedContentDetail.packageState.patchStatus }}
+          </el-descriptions-item>
+          <el-descriptions-item label="roleVisibility">
+            customer={{ selectedContentDetail.roleVisibility.customer }}, engineer={{ selectedContentDetail.roleVisibility.engineer }},
+            admin={{ selectedContentDetail.roleVisibility.admin }}
+          </el-descriptions-item>
+          <el-descriptions-item label="readOnly/runtimeLinked/certified">
+            {{ selectedContentDetail.readOnly }} / {{ selectedContentDetail.runtimeLinked }} / {{ selectedContentDetail.certified }}
+          </el-descriptions-item>
+          <el-descriptions-item label="iec62443Certified">{{ selectedContentDetail.iec62443Certified }}</el-descriptions-item>
+          <el-descriptions-item label="fallbackUsed">{{ selectedContentDetail.fallbackUsed }}</el-descriptions-item>
+        </el-descriptions>
+        <el-table
+          :data="Object.entries(selectedContentDetail.summary).map(([key, value]) => ({ key, value: String(value) }))"
+          row-key="key"
+          empty-text="No summary content"
+          class="block-space"
+        >
+          <el-table-column prop="key" label="summaryKey" min-width="180" />
+          <el-table-column prop="value" label="summaryValue" min-width="220" />
+        </el-table>
+        <el-card shadow="never" class="block-space">
+          <template #header>Highlights</template>
+          <el-text>{{ selectedContentDetail.highlights.join(' | ') || '-' }}</el-text>
+        </el-card>
+        <el-card shadow="never" class="block-space">
+          <template #header>Risks</template>
+          <el-text>{{ selectedContentDetail.risks.join(' | ') || '-' }}</el-text>
+        </el-card>
+        <el-card shadow="never" class="block-space">
+          <template #header>Limitations</template>
+          <el-text>{{ selectedContentDetail.limitations.join(' | ') || '-' }}</el-text>
         </el-card>
       </template>
     </el-drawer>
