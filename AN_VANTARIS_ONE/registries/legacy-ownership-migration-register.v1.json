@@ -1,0 +1,2597 @@
+{
+  "registryName": "VANTARIS ONE Legacy Ownership Migration Register",
+  "registryVersion": "1.0.0",
+  "authority": "ONE-A5-P0-08",
+  "status": "FROZEN_FOR_MIGRATION_IMPLEMENTATION",
+  "generatedAtPolicy": "STATIC_ARCHITECTURE_BASELINE",
+  "migrationPrinciples": [
+    "Ownership migration starts with contracts, not table movement.",
+    "Physical storage does not determine semantic ownership.",
+    "Legacy routes remain behind compatibility façades until target parity.",
+    "No direct cross-module database access may be introduced.",
+    "New owners expose APIs/events before consumers migrate.",
+    "Dual write is prohibited by default.",
+    "Dual write requires explicit durable reconciliation and rollback design.",
+    "Read façades may be used temporarily when ownership is clear.",
+    "Legacy data must not be deleted before reconciliation and rollback proof.",
+    "Canonical identifiers must be preserved or explicitly mapped.",
+    "Audit records remain immutable during migration.",
+    "Evidence integrity and provenance must be preserved.",
+    "Package disablement must not orphan canonical records.",
+    "UFMS remains an external product; no UFMS data tables are absorbed into ONE without an approved contract.",
+    "Exception retirement requires validation, parity and rollback gates."
+  ],
+  "ownershipConflicts": [
+    {
+      "conflictId": "OWN-DID-IDENTITY-TRUST-001",
+      "title": "Legacy DID identity, permission and trust persistence overlap",
+      "sourceEvidence": [
+        {
+          "sourcePath": "AN_VANTARIS_IBMS-backend/src/DID/models.py",
+          "line": 13,
+          "symbol": "EntityType",
+          "evidence": "DID models persist identity, permission, relationship, VC anchors and revocations."
+        }
+      ],
+      "currentOwner": "Legacy DID subsystem",
+      "currentPhysicalStores": [
+        "STORE-SQL_TABLE-FBBE7D555839",
+        "STORE-SQL_TABLE-988D15973D42",
+        "STORE-SQL_TABLE-0EE09B0B9679",
+        "STORE-SQL_TABLE-5E9C4E4F3E8D",
+        "STORE-SQL_TABLE-13DD8929E7DE",
+        "STORE-SQL_TABLE-6519FE6AA282"
+      ],
+      "affectedObjects": [
+        "HashAnchor"
+      ],
+      "canonicalOwner": "Governance & Security / Evidence Center / Trust",
+      "targetSystemOfRecord": "Governance & Security identity/permission services and Trust hash-anchor boundary",
+      "targetPackage": "PKG-GOVERNANCE-SECURITY",
+      "sourcePackages": [
+        "PKG-GOVERNANCE-SECURITY"
+      ],
+      "targetContracts": [
+        "vantaris.identity.v1",
+        "vantaris.trust.v1"
+      ],
+      "currentRoutes": [
+        "ROUTE-GET-283F35CF0C07",
+        "ROUTE-GET-46D441526495",
+        "ROUTE-GET-6CF5D07A668F",
+        "ROUTE-GET-7802726AE6F1",
+        "ROUTE-GET-7EC9099EB8D8",
+        "ROUTE-GET-8C362FA14821",
+        "ROUTE-GET-9CC5014E204B",
+        "ROUTE-GET-A0AE9913AFD8",
+        "ROUTE-GET-B5979853FC22",
+        "ROUTE-GET-CC50BDBE4851",
+        "ROUTE-POST-46E1DF1495F9",
+        "ROUTE-POST-5E0D4436A8E3",
+        "ROUTE-POST-606B5218A941",
+        "ROUTE-POST-7E380E2C5D9E",
+        "ROUTE-POST-86E6BBC22849",
+        "ROUTE-POST-B8F0F230EA09",
+        "ROUTE-POST-C83D6D0E1661",
+        "ROUTE-POST-FBB45557ACEE"
+      ],
+      "targetApiNamespace": "/api/v1/security",
+      "targetEventContracts": [
+        "vantaris.identity.v1.events",
+        "vantaris.trust.v1.events"
+      ],
+      "migrationClass": "OWNERSHIP_SPLIT",
+      "migrationWave": "WAVE-0-CONTRACTS",
+      "compatibilityFacade": "LEGACY_ROUTE_PROXY",
+      "readMigration": "Preserve DID route compatibility behind Governance & Security providers.",
+      "writeMigration": "New identity/security writes use governed providers; trust anchors remain Trust-owned.",
+      "identifierMapping": "Preserve DID and VC IDs as source identifiers mapped to governed global IDs.",
+      "dataReconciliation": [
+        "RECORD_COUNT",
+        "SOURCE_ID",
+        "GLOBAL_ID",
+        "DIGEST",
+        "RELATIONSHIP_COUNT",
+        "DUPLICATE_ID"
+      ],
+      "auditMigration": "Security administration and trust actions require fail-closed audit.",
+      "evidenceMigration": "HashAnchor may support EvidenceReference but remains distinct from EvidenceRecord.",
+      "retentionMigration": "Identity and trust records retain policy-controlled security retention.",
+      "packageImpact": "Consolidates legacy DID behavior under PKG-GOVERNANCE-SECURITY boundaries.",
+      "deploymentImpact": "Later provider migration; no identity runtime change here.",
+      "prerequisites": [
+        "Identity and trust contracts",
+        "Credential separation",
+        "Security provider"
+      ],
+      "explicitNonScope": [
+        "No data movement in ONE-A5-P0-08",
+        "No schema, route, provider, model, import, adapter, or runtime change",
+        "No generic standalone one-adapter",
+        "No dual write approval"
+      ],
+      "validationGates": [
+        "Contract conformance",
+        "Target provider parity",
+        "Identifier mapping validation",
+        "Read and write behavior parity",
+        "Reconciliation across required dimensions",
+        "Audit and evidence integrity",
+        "Rollback rehearsal",
+        "Strict boundary scanner"
+      ],
+      "rollbackPlan": "Preserve immutable legacy source and bounded provider-specific compatibility path until rollback window and approval close.",
+      "exceptionIds": [],
+      "exceptionRetirementGate": "TARGET_PARITY_RECONCILIATION_ROLLBACK_STRICT_SCANNER_AND_OWNER_APPROVAL",
+      "proposedTasks": [
+        "ONE-A5-P1-16"
+      ],
+      "implementationStatus": "CONTRACT_REQUIRED",
+      "scannerConfidence": "HIGH",
+      "reviewReason": [
+        "CREDENTIAL_SEPARATION"
+      ],
+      "notes": [
+        "Credential values are never migration metadata; only classified references and mappings."
+      ]
+    },
+    {
+      "conflictId": "OWN-EDGE-CANONICAL-DEVICE-001",
+      "title": "EDGE runtime versus canonical Device and Point boundary",
+      "sourceEvidence": [
+        {
+          "sourcePath": "AN_VANTARIS_IBMS-backend/src/uedge/uedge_provider.py",
+          "line": 51,
+          "symbol": "customer_setup_steps",
+          "evidence": "Read-only gateway and connector setup/diagnostic placeholder."
+        }
+      ],
+      "currentOwner": "EDGE runtime placeholder and legacy IoT model",
+      "currentPhysicalStores": [
+        "STORE-IN_MEMORY_STORE-3DB38C5BF13F",
+        "STORE-SQL_TABLE-760B76D35F5B",
+        "STORE-SQL_TABLE-DA7444B7B5FA",
+        "STORE-SQL_TABLE-1EE247CB815E"
+      ],
+      "affectedObjects": [
+        "GatewayRuntime",
+        "ConnectorRuntime",
+        "DiscoveryObservation",
+        "MappingCandidate",
+        "Device",
+        "Point"
+      ],
+      "canonicalOwner": "AN_VANTARIS_EDGE / ONE Asset Graph",
+      "targetSystemOfRecord": "EDGE runtime plus Asset Graph canonical identity",
+      "targetPackage": "PKG-EDGE",
+      "sourcePackages": [
+        "PKG-EDGE",
+        "PKG-ASSET-GRAPH"
+      ],
+      "targetContracts": [
+        "vantaris.edge.v1",
+        "vantaris.device.v1",
+        "vantaris.integration.v1"
+      ],
+      "currentRoutes": [
+        "ROUTE-DELETE-0A255BBA81A4",
+        "ROUTE-DELETE-EB63D908C453",
+        "ROUTE-DELETE-ECEF97BAE75E",
+        "ROUTE-GET-05917CA7574F",
+        "ROUTE-GET-06BE2D68D2C3",
+        "ROUTE-GET-22AE6C18E63A",
+        "ROUTE-GET-2B58373DDE78",
+        "ROUTE-GET-41A4B44850C3",
+        "ROUTE-GET-41BE1D6FFE9D",
+        "ROUTE-GET-571175030A61",
+        "ROUTE-GET-5B33D927D25D",
+        "ROUTE-GET-67D7A5F97868",
+        "ROUTE-GET-8B113F0F6494",
+        "ROUTE-GET-8D67983D9ABF",
+        "ROUTE-GET-AAD58D7A10AD",
+        "ROUTE-GET-B4C8AAF241B7",
+        "ROUTE-GET-B8AE224F0688",
+        "ROUTE-GET-C6795CC0379B",
+        "ROUTE-GET-D42FE1A731B6",
+        "ROUTE-GET-D8249F519690",
+        "ROUTE-GET-E130C169EA45",
+        "ROUTE-OPTIONS-8E1593658363",
+        "ROUTE-PATCH-733846BDE3D6",
+        "ROUTE-POST-6AB524C2C59C",
+        "ROUTE-POST-882645C6D054",
+        "ROUTE-POST-9412C2480650",
+        "ROUTE-POST-AB5EAE45BD7A",
+        "ROUTE-POST-C1E70D66F843",
+        "ROUTE-POST-C64CA148C31A",
+        "ROUTE-POST-CB116CAC22A3",
+        "ROUTE-POST-FE14A95830E6",
+        "ROUTE-PUT-3765FD467C5C",
+        "ROUTE-PUT-545838C395F9",
+        "ROUTE-PUT-6CF00DE47255",
+        "ROUTE-PUT-8534F2E18EA8",
+        "ROUTE-PUT-AFCEE7155691",
+        "ROUTE-PUT-CF852D538D02"
+      ],
+      "targetApiNamespace": "/api/v1/edge",
+      "targetEventContracts": [
+        "vantaris.edge.v1.events",
+        "vantaris.device.v1.events"
+      ],
+      "migrationClass": "OWNERSHIP_SPLIT",
+      "migrationWave": "WAVE-0-CONTRACTS",
+      "compatibilityFacade": "PROJECTION_ADAPTER",
+      "readMigration": "EDGE resolves canonical Device/Point references from Asset Graph.",
+      "writeMigration": "EDGE writes runtime/discovery/mapping state only and proposes canonical changes through contracts.",
+      "identifierMapping": "Gateway/connector IDs remain EDGE IDs; Device/Point IDs remain Asset Graph IDs.",
+      "dataReconciliation": [
+        "GLOBAL_ID",
+        "SOURCE_ID",
+        "RELATIONSHIP_COUNT",
+        "STATUS",
+        "ORPHAN_REFERENCE"
+      ],
+      "auditMigration": "Audit mapping approval, runtime controls and canonical link changes.",
+      "evidenceMigration": "Discovery evidence may reference observations without making EDGE EvidenceRecord owner.",
+      "retentionMigration": "Retain mapping source data through reconciliation.",
+      "packageImpact": "Separates PKG-EDGE from PKG-ASSET-GRAPH ownership.",
+      "deploymentImpact": "Requires explicit providers and adapters in later tasks.",
+      "prerequisites": [
+        "Device contract",
+        "EDGE runtime contract",
+        "Mapping approval workflow"
+      ],
+      "explicitNonScope": [
+        "No data movement in ONE-A5-P0-08",
+        "No schema, route, provider, model, import, adapter, or runtime change",
+        "No generic standalone one-adapter",
+        "No dual write approval"
+      ],
+      "validationGates": [
+        "Contract conformance",
+        "Target provider parity",
+        "Identifier mapping validation",
+        "Read and write behavior parity",
+        "Reconciliation across required dimensions",
+        "Audit and evidence integrity",
+        "Rollback rehearsal",
+        "Strict boundary scanner"
+      ],
+      "rollbackPlan": "Preserve immutable legacy source and bounded provider-specific compatibility path until rollback window and approval close.",
+      "exceptionIds": [],
+      "exceptionRetirementGate": "TARGET_PARITY_RECONCILIATION_ROLLBACK_STRICT_SCANNER_AND_OWNER_APPROVAL",
+      "proposedTasks": [
+        "ONE-A5-P1-07",
+        "ONE-A5-P1-08",
+        "ONE-A5-P1-09"
+      ],
+      "implementationStatus": "WRITE_MIGRATION_BLOCKED",
+      "scannerConfidence": "HIGH",
+      "reviewReason": [
+        "IDENTIFIER_MAPPING_UNKNOWN"
+      ],
+      "notes": [
+        "EDGE does not retain canonical Device or Point ownership."
+      ]
+    },
+    {
+      "conflictId": "OWN-IOT-CONNECTOR-ASSET-001",
+      "title": "Legacy IoT mapping tables combine connector and asset concerns",
+      "sourceEvidence": [
+        {
+          "sourcePath": "AN_VANTARIS_IBMS-backend/src/Iot/models.py",
+          "line": 52,
+          "symbol": "IMSFieldMapping",
+          "evidence": "Field/method mappings bind device DID, protocol, raw paths and canonical semantics."
+        }
+      ],
+      "currentOwner": "Legacy IoT subsystem",
+      "currentPhysicalStores": [
+        "STORE-SQL_TABLE-DA7444B7B5FA",
+        "STORE-SQL_TABLE-1EE247CB815E",
+        "STORE-SQL_TABLE-91D45E0F7F9C"
+      ],
+      "affectedObjects": [
+        "MappingCandidate",
+        "ConnectorRuntime",
+        "Point"
+      ],
+      "canonicalOwner": "AN_VANTARIS_EDGE / Unified Data Model / ONE Asset Graph",
+      "targetSystemOfRecord": "EDGE mapping execution; Unified Data Model semantics; Asset Graph Point records",
+      "targetPackage": "PKG-EDGE",
+      "sourcePackages": [
+        "PKG-ASSET-GRAPH",
+        "PKG-UNIFIED-DATA-MODEL"
+      ],
+      "targetContracts": [
+        "vantaris.integration.v1",
+        "vantaris.edge.v1",
+        "vantaris.device.v1"
+      ],
+      "currentRoutes": [
+        "ROUTE-DELETE-0A255BBA81A4",
+        "ROUTE-DELETE-EB63D908C453",
+        "ROUTE-DELETE-ECEF97BAE75E",
+        "ROUTE-GET-2B58373DDE78",
+        "ROUTE-GET-41A4B44850C3",
+        "ROUTE-GET-41BE1D6FFE9D",
+        "ROUTE-GET-571175030A61",
+        "ROUTE-GET-5B33D927D25D",
+        "ROUTE-GET-8B113F0F6494",
+        "ROUTE-GET-8D67983D9ABF",
+        "ROUTE-GET-AAD58D7A10AD",
+        "ROUTE-GET-B8AE224F0688",
+        "ROUTE-GET-C6795CC0379B",
+        "ROUTE-GET-D42FE1A731B6",
+        "ROUTE-GET-D8249F519690",
+        "ROUTE-OPTIONS-8E1593658363",
+        "ROUTE-PATCH-733846BDE3D6",
+        "ROUTE-POST-6AB524C2C59C",
+        "ROUTE-POST-882645C6D054",
+        "ROUTE-POST-9412C2480650",
+        "ROUTE-POST-AB5EAE45BD7A",
+        "ROUTE-POST-C1E70D66F843",
+        "ROUTE-POST-C64CA148C31A",
+        "ROUTE-POST-CB116CAC22A3",
+        "ROUTE-POST-FE14A95830E6",
+        "ROUTE-PUT-3765FD467C5C",
+        "ROUTE-PUT-545838C395F9",
+        "ROUTE-PUT-6CF00DE47255",
+        "ROUTE-PUT-8534F2E18EA8",
+        "ROUTE-PUT-AFCEE7155691",
+        "ROUTE-PUT-CF852D538D02"
+      ],
+      "targetApiNamespace": "/api/v1/integration",
+      "targetEventContracts": [
+        "vantaris.integration.v1.events"
+      ],
+      "migrationClass": "OWNERSHIP_SPLIT",
+      "migrationWave": "WAVE-0-CONTRACTS",
+      "compatibilityFacade": "IDENTIFIER_MAPPING",
+      "readMigration": "Expose mappings through Integration Governance/EDGE while consumers adopt canonical Point IDs.",
+      "writeMigration": "Mapping execution writes stay in EDGE; approved canonical Point changes go to Asset Graph.",
+      "identifierMapping": "Map device DID, raw field/path and standard semantic identifiers deterministically.",
+      "dataReconciliation": [
+        "SOURCE_ID",
+        "GLOBAL_ID",
+        "RELATIONSHIP_COUNT",
+        "DIGEST",
+        "ORPHAN_REFERENCE"
+      ],
+      "auditMigration": "Audit mapping approval and execution controls.",
+      "evidenceMigration": "Mapping evidence retains source observation references.",
+      "retentionMigration": "Retain legacy mappings until all active connector mappings reconcile.",
+      "packageImpact": "Clarifies PKG-EDGE, PKG-UNIFIED-DATA-MODEL and PKG-ASSET-GRAPH dependencies.",
+      "deploymentImpact": "Requires bounded provider-specific mapping adapter, never generic one-adapter.",
+      "prerequisites": [
+        "Mapping contracts",
+        "Point identifier mapping",
+        "EDGE provider"
+      ],
+      "explicitNonScope": [
+        "No data movement in ONE-A5-P0-08",
+        "No schema, route, provider, model, import, adapter, or runtime change",
+        "No generic standalone one-adapter",
+        "No dual write approval"
+      ],
+      "validationGates": [
+        "Contract conformance",
+        "Target provider parity",
+        "Identifier mapping validation",
+        "Read and write behavior parity",
+        "Reconciliation across required dimensions",
+        "Audit and evidence integrity",
+        "Rollback rehearsal",
+        "Strict boundary scanner"
+      ],
+      "rollbackPlan": "Preserve immutable legacy source and bounded provider-specific compatibility path until rollback window and approval close.",
+      "exceptionIds": [],
+      "exceptionRetirementGate": "TARGET_PARITY_RECONCILIATION_ROLLBACK_STRICT_SCANNER_AND_OWNER_APPROVAL",
+      "proposedTasks": [
+        "ONE-A5-P1-07",
+        "ONE-A5-P1-09",
+        "ONE-A5-P1-16"
+      ],
+      "implementationStatus": "WRITE_MIGRATION_BLOCKED",
+      "scannerConfidence": "HIGH",
+      "reviewReason": [
+        "TABLE_RELATIONSHIP_UNKNOWN"
+      ],
+      "notes": [
+        "No direct cross-module database access may be introduced."
+      ]
+    },
+    {
+      "conflictId": "OWN-LEGACY-DEVICE-001",
+      "title": "Legacy Device, Point and connector configuration ownership split",
+      "sourceEvidence": [
+        {
+          "sourcePath": "AN_VANTARIS_IBMS-backend/src/Iot/models.py",
+          "line": 14,
+          "symbol": "IMSDevice",
+          "evidence": "imbs_device combines device identity, status, protocol, connection configuration and credential material."
+        }
+      ],
+      "currentOwner": "Legacy IoT monolith",
+      "currentPhysicalStores": [
+        "STORE-SQL_TABLE-760B76D35F5B",
+        "STORE-SQL_TABLE-3EF25DF256DA"
+      ],
+      "affectedObjects": [
+        "Device",
+        "Point",
+        "Tag",
+        "ConnectorRuntime"
+      ],
+      "canonicalOwner": "ONE Asset Graph / AN_VANTARIS_EDGE / Governance & Security",
+      "targetSystemOfRecord": "ONE Asset Graph for Device/Point/Tag; EDGE for runtime connectivity; Governance & Security for credentials",
+      "targetPackage": "PKG-ASSET-GRAPH",
+      "sourcePackages": [
+        "PKG-ASSET-GRAPH",
+        "PKG-EDGE",
+        "PKG-GOVERNANCE-SECURITY"
+      ],
+      "targetContracts": [
+        "vantaris.device.v1",
+        "vantaris.edge.v1"
+      ],
+      "currentRoutes": [
+        "ROUTE-DELETE-ECEF97BAE75E",
+        "ROUTE-GET-41A4B44850C3",
+        "ROUTE-GET-41BE1D6FFE9D",
+        "ROUTE-GET-8B113F0F6494",
+        "ROUTE-GET-AAD58D7A10AD",
+        "ROUTE-GET-B8AE224F0688",
+        "ROUTE-GET-D42FE1A731B6",
+        "ROUTE-OPTIONS-8E1593658363",
+        "ROUTE-PATCH-733846BDE3D6",
+        "ROUTE-POST-6AB524C2C59C",
+        "ROUTE-POST-9412C2480650",
+        "ROUTE-POST-C64CA148C31A",
+        "ROUTE-POST-CB116CAC22A3",
+        "ROUTE-POST-FE14A95830E6",
+        "ROUTE-PUT-3765FD467C5C",
+        "ROUTE-PUT-545838C395F9",
+        "ROUTE-PUT-8534F2E18EA8",
+        "ROUTE-PUT-CF852D538D02"
+      ],
+      "targetApiNamespace": "/api/v1/assets",
+      "targetEventContracts": [
+        "vantaris.device.v1.events",
+        "vantaris.edge.v1.events"
+      ],
+      "migrationClass": "OWNERSHIP_SPLIT",
+      "migrationWave": "WAVE-0-CONTRACTS",
+      "compatibilityFacade": "READ_ONLY_FACADE",
+      "readMigration": "Expose canonical Device/Point reads through Asset Graph while preserving bounded legacy reads.",
+      "writeMigration": "Target-first write to Asset Graph and EDGE-specific configuration APIs after parity; legacy writes then disabled.",
+      "identifierMapping": "Preserve device DID/code as source identifiers and map to UUID global IDs.",
+      "dataReconciliation": [
+        "RECORD_COUNT",
+        "GLOBAL_ID",
+        "SOURCE_ID",
+        "STATE",
+        "STATUS",
+        "TENANT_SCOPE",
+        "SITE_SCOPE",
+        "ORPHAN_REFERENCE"
+      ],
+      "auditMigration": "Audit every identifier mapping, credential separation and write cutover.",
+      "evidenceMigration": "Evidence references retain source record ID and migration digest where required.",
+      "retentionMigration": "Legacy source retained through reconciliation and rollback window.",
+      "packageImpact": "PKG-ASSET-GRAPH and PKG-EDGE providers must be independently deployable.",
+      "deploymentImpact": "Requires provider additions and later bounded compatibility façade; no runtime change in this task.",
+      "prerequisites": [
+        "Frozen Device/Point contracts",
+        "Credential separation design",
+        "Target provider foundation"
+      ],
+      "explicitNonScope": [
+        "No data movement in ONE-A5-P0-08",
+        "No schema, route, provider, model, import, adapter, or runtime change",
+        "No generic standalone one-adapter",
+        "No dual write approval"
+      ],
+      "validationGates": [
+        "Contract conformance",
+        "Target provider parity",
+        "Identifier mapping validation",
+        "Read and write behavior parity",
+        "Reconciliation across required dimensions",
+        "Audit and evidence integrity",
+        "Rollback rehearsal",
+        "Strict boundary scanner"
+      ],
+      "rollbackPlan": "Preserve immutable legacy source and bounded provider-specific compatibility path until rollback window and approval close.",
+      "exceptionIds": [
+        "LEGACY-IOT-DEVICE-MODEL-001"
+      ],
+      "exceptionRetirementGate": "TARGET_PARITY_RECONCILIATION_ROLLBACK_STRICT_SCANNER_AND_OWNER_APPROVAL",
+      "proposedTasks": [
+        "ONE-A5-P1-07",
+        "ONE-A5-P1-08",
+        "ONE-A5-P1-09",
+        "ONE-A5-P1-16",
+        "ONE-A5-P1-17"
+      ],
+      "implementationStatus": "LEGACY_EXCEPTION_ACTIVE",
+      "scannerConfidence": "HIGH",
+      "reviewReason": [
+        "CREDENTIAL_SEPARATION",
+        "IDENTIFIER_MAPPING_UNKNOWN"
+      ],
+      "notes": [
+        "EDGE owns runtime, discovery and mapping execution; it does not own canonical Device or Point."
+      ]
+    },
+    {
+      "conflictId": "OWN-MODELING-AI-MODEL-001",
+      "title": "Local modeling CSV persistence mixes AI execution and model metadata",
+      "sourceEvidence": [
+        {
+          "sourcePath": "AN_VANTARIS_IBMS-backend/src/data_modeling/csv_storage.py",
+          "line": 34,
+          "symbol": "CSVStorage",
+          "evidence": "Per-device local CSV files support training and prediction data."
+        }
+      ],
+      "currentOwner": "Legacy modeling service",
+      "currentPhysicalStores": [
+        "STORE-LOCAL_FILESYSTEM-739D44B2A801"
+      ],
+      "affectedObjects": [
+        "AITrace",
+        "ModelMetadata"
+      ],
+      "canonicalOwner": "Nexus AI / AI Model Hub",
+      "targetSystemOfRecord": "Nexus AI for request traces; AI Model Hub for model metadata/version lifecycle",
+      "targetPackage": "PKG-NEXUS-AI",
+      "sourcePackages": [
+        "PKG-NEXUS-AI",
+        "PKG-AI-MODEL-HUB"
+      ],
+      "targetContracts": [
+        "vantaris.ai.v1",
+        "vantaris.model.v1"
+      ],
+      "currentRoutes": [
+        "ROUTE-GET-016FFE03F854",
+        "ROUTE-GET-36939E65A57E",
+        "ROUTE-GET-4442412D9F0F",
+        "ROUTE-GET-POST-7474DF3A5EBE",
+        "ROUTE-POST-025BC91E270D",
+        "ROUTE-POST-941F086D9152",
+        "ROUTE-POST-C80597B46DE0"
+      ],
+      "targetApiNamespace": "/api/v1/ai",
+      "targetEventContracts": [
+        "vantaris.ai.v1.events",
+        "vantaris.model.v1.events"
+      ],
+      "migrationClass": "OWNERSHIP_SPLIT",
+      "migrationWave": "WAVE-0-CONTRACTS",
+      "compatibilityFacade": "LEGACY_DTO_TRANSLATOR",
+      "readMigration": "Read local model information through bounded compatibility while target registries are built.",
+      "writeMigration": "AI requests write trace to Nexus AI; model registration/deployment writes to AI Model Hub.",
+      "identifierMapping": "Map device_code dataset references separately from model IDs and versions.",
+      "dataReconciliation": [
+        "RECORD_COUNT",
+        "SOURCE_ID",
+        "GLOBAL_ID",
+        "DIGEST",
+        "TIMESTAMP",
+        "DUPLICATE_ID"
+      ],
+      "auditMigration": "AI requests, reviews and model lifecycle actions remain auditable.",
+      "evidenceMigration": "Training provenance may create EvidenceReference without making local CSV an EvidenceRecord store.",
+      "retentionMigration": "Retain source datasets according to approved model/training retention.",
+      "packageImpact": "Splits PKG-NEXUS-AI execution from PKG-AI-MODEL-HUB lifecycle.",
+      "deploymentImpact": "Target providers precede retirement of local CSV paths.",
+      "prerequisites": [
+        "AI and model contracts",
+        "Dataset retention decision",
+        "Model provider"
+      ],
+      "explicitNonScope": [
+        "No data movement in ONE-A5-P0-08",
+        "No schema, route, provider, model, import, adapter, or runtime change",
+        "No generic standalone one-adapter",
+        "No dual write approval"
+      ],
+      "validationGates": [
+        "Contract conformance",
+        "Target provider parity",
+        "Identifier mapping validation",
+        "Read and write behavior parity",
+        "Reconciliation across required dimensions",
+        "Audit and evidence integrity",
+        "Rollback rehearsal",
+        "Strict boundary scanner"
+      ],
+      "rollbackPlan": "Preserve immutable legacy source and bounded provider-specific compatibility path until rollback window and approval close.",
+      "exceptionIds": [],
+      "exceptionRetirementGate": "TARGET_PARITY_RECONCILIATION_ROLLBACK_STRICT_SCANNER_AND_OWNER_APPROVAL",
+      "proposedTasks": [
+        "ONE-A5-P1-16"
+      ],
+      "implementationStatus": "REVIEW_REQUIRED",
+      "scannerConfidence": "HIGH",
+      "reviewReason": [
+        "RETENTION_REQUIREMENT_UNKNOWN",
+        "IDENTIFIER_MAPPING_UNKNOWN"
+      ],
+      "notes": [
+        "No physical model registry table is invented."
+      ]
+    },
+    {
+      "conflictId": "OWN-REPORTS-AUDIT-001",
+      "title": "Reports local JSONL audit persistence",
+      "sourceEvidence": [
+        {
+          "sourcePath": "AN_VANTARIS_IBMS-backend/src/reports/reports_audit_store.py",
+          "line": 20,
+          "symbol": "get_audit_store_path",
+          "evidence": "Local reports_audit.jsonl hash-chain persistence."
+        }
+      ],
+      "currentOwner": "Reports local audit readiness store",
+      "currentPhysicalStores": [
+        "STORE-JSONL_LEDGER-5957388225F4"
+      ],
+      "affectedObjects": [
+        "AuditRecord"
+      ],
+      "canonicalOwner": "Governance & Security",
+      "targetSystemOfRecord": "Governance & Security Audit Service",
+      "targetPackage": "PKG-GOVERNANCE-SECURITY",
+      "sourcePackages": [
+        "PKG-REPORTS"
+      ],
+      "targetContracts": [
+        "vantaris.audit.v1"
+      ],
+      "currentRoutes": [
+        "ROUTE-GET-1B15A1CF22C6",
+        "ROUTE-GET-58710B89C122",
+        "ROUTE-GET-CCCA9FCF76F8",
+        "ROUTE-GET-D4846EBDEE88",
+        "ROUTE-POST-817A0DC5CEDE",
+        "ROUTE-POST-DB42FCFB820C"
+      ],
+      "targetApiNamespace": "/api/v1/audit",
+      "targetEventContracts": [
+        "vantaris.audit.v1.events"
+      ],
+      "migrationClass": "DATA_COPY_AND_RECONCILE",
+      "migrationWave": "WAVE-1-TARGET-PROVIDERS",
+      "compatibilityFacade": "EXPORT_COMPATIBILITY",
+      "readMigration": "Reports consumes central audit query/export APIs; JSONL remains bounded read compatibility.",
+      "writeMigration": "Reports emits AuditRecord through Governance & Security; no local authoritative writes after cutover.",
+      "identifierMapping": "Preserve auditId and hash-chain digests as source lineage references.",
+      "dataReconciliation": [
+        "RECORD_COUNT",
+        "GLOBAL_ID",
+        "DIGEST",
+        "AUDIT_LINK",
+        "TIMESTAMP",
+        "DUPLICATE_ID"
+      ],
+      "auditMigration": "Target AuditRecord emission is authoritative; local records are immutable migration inputs.",
+      "evidenceMigration": "EvidenceReference may link migrated audit IDs without converting AuditRecord into EvidenceRecord.",
+      "retentionMigration": "Retain JSONL immutably until central counts, IDs and digests reconcile.",
+      "packageImpact": "PKG-REPORTS becomes consumer; PKG-GOVERNANCE-SECURITY becomes provider.",
+      "deploymentImpact": "Central audit provider precedes Reports read migration.",
+      "prerequisites": [
+        "Audit contract",
+        "Governance Audit provider",
+        "Migration and verification tooling"
+      ],
+      "explicitNonScope": [
+        "No data movement in ONE-A5-P0-08",
+        "No schema, route, provider, model, import, adapter, or runtime change",
+        "No generic standalone one-adapter",
+        "No dual write approval"
+      ],
+      "validationGates": [
+        "Contract conformance",
+        "Target provider parity",
+        "Identifier mapping validation",
+        "Read and write behavior parity",
+        "Reconciliation across required dimensions",
+        "Audit and evidence integrity",
+        "Rollback rehearsal",
+        "Strict boundary scanner"
+      ],
+      "rollbackPlan": "Preserve immutable legacy source and bounded provider-specific compatibility path until rollback window and approval close.",
+      "exceptionIds": [
+        "LEGACY-REPORTS-AUDIT-001"
+      ],
+      "exceptionRetirementGate": "TARGET_PARITY_RECONCILIATION_ROLLBACK_STRICT_SCANNER_AND_OWNER_APPROVAL",
+      "proposedTasks": [
+        "ONE-A5-P1-10",
+        "ONE-A5-P1-11",
+        "ONE-A5-P1-16",
+        "ONE-A5-P1-17"
+      ],
+      "implementationStatus": "LEGACY_EXCEPTION_ACTIVE",
+      "scannerConfidence": "HIGH",
+      "reviewReason": [
+        "RETENTION_REQUIREMENT_UNKNOWN"
+      ],
+      "notes": [
+        "Reports JSONL is never the target AuditRecord system of record."
+      ]
+    },
+    {
+      "conflictId": "OWN-UCDE-EVIDENCE-001",
+      "title": "UCDE local EvidenceRecord and integrity skeleton",
+      "sourceEvidence": [
+        {
+          "sourcePath": "AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py",
+          "line": 124,
+          "symbol": "_base_records",
+          "evidence": "Local mock EvidenceRecord, relationships and hash verification metadata."
+        }
+      ],
+      "currentOwner": "UCDE workspace provider",
+      "currentPhysicalStores": [
+        "STORE-IN_MEMORY_STORE-B2ECBFB0C5E3"
+      ],
+      "affectedObjects": [
+        "EvidenceRecord",
+        "EvidenceRelationship",
+        "HashAnchor"
+      ],
+      "canonicalOwner": "Evidence Center / Evidence Center / Trust",
+      "targetSystemOfRecord": "Evidence Center and Governance & Security / Trust",
+      "targetPackage": "PKG-EVIDENCE-CENTER",
+      "sourcePackages": [
+        "PKG-UCDE"
+      ],
+      "targetContracts": [
+        "vantaris.evidence.v1",
+        "vantaris.trust.v1"
+      ],
+      "currentRoutes": [
+        "ROUTE-GET-137FD0984C90",
+        "ROUTE-GET-584CF4005530",
+        "ROUTE-GET-61E8872C6D75",
+        "ROUTE-GET-6F7216792B37",
+        "ROUTE-GET-8E3128EEB3B9"
+      ],
+      "targetApiNamespace": "/api/v1/evidence",
+      "targetEventContracts": [
+        "vantaris.evidence.v1.events",
+        "vantaris.trust.v1.events"
+      ],
+      "migrationClass": "STRANGLER_MIGRATION",
+      "migrationWave": "WAVE-1-TARGET-PROVIDERS",
+      "compatibilityFacade": "PROJECTION_ADAPTER",
+      "readMigration": "UCDE reads Evidence Center records and workspace projections.",
+      "writeMigration": "Evidence creation, relationships, provenance, integrity and retention write through Evidence Center.",
+      "identifierMapping": "Preserve evidence IDs, source references, relationship IDs and hash anchors.",
+      "dataReconciliation": [
+        "RECORD_COUNT",
+        "GLOBAL_ID",
+        "RELATIONSHIP_COUNT",
+        "DIGEST",
+        "EVIDENCE_PROVENANCE",
+        "ORPHAN_REFERENCE"
+      ],
+      "auditMigration": "Evidence changes and verification actions emit authoritative AuditRecord.",
+      "evidenceMigration": "Preserve provenance, relationships, digests and HashAnchor trust references.",
+      "retentionMigration": "No evidence source removed until provenance and digest parity pass.",
+      "packageImpact": "PKG-UCDE becomes workspace consumer of PKG-EVIDENCE-CENTER.",
+      "deploymentImpact": "Evidence Center provider precedes UCDE consumer migration.",
+      "prerequisites": [
+        "Evidence contract",
+        "Evidence Center provider",
+        "Trust hash-anchor boundary"
+      ],
+      "explicitNonScope": [
+        "No data movement in ONE-A5-P0-08",
+        "No schema, route, provider, model, import, adapter, or runtime change",
+        "No generic standalone one-adapter",
+        "No dual write approval"
+      ],
+      "validationGates": [
+        "Contract conformance",
+        "Target provider parity",
+        "Identifier mapping validation",
+        "Read and write behavior parity",
+        "Reconciliation across required dimensions",
+        "Audit and evidence integrity",
+        "Rollback rehearsal",
+        "Strict boundary scanner"
+      ],
+      "rollbackPlan": "Preserve immutable legacy source and bounded provider-specific compatibility path until rollback window and approval close.",
+      "exceptionIds": [
+        "LEGACY-UCDE-EVIDENCE-001"
+      ],
+      "exceptionRetirementGate": "TARGET_PARITY_RECONCILIATION_ROLLBACK_STRICT_SCANNER_AND_OWNER_APPROVAL",
+      "proposedTasks": [
+        "ONE-A5-P1-14",
+        "ONE-A5-P1-15",
+        "ONE-A5-P1-16",
+        "ONE-A5-P1-17"
+      ],
+      "implementationStatus": "LEGACY_EXCEPTION_ACTIVE",
+      "scannerConfidence": "HIGH",
+      "reviewReason": [
+        "RETENTION_REQUIREMENT_UNKNOWN"
+      ],
+      "notes": [
+        "UCDE retains investigation UI/workspace only and does not retain EvidenceRecord ownership."
+      ]
+    },
+    {
+      "conflictId": "OWN-UCORE-ASSET-001",
+      "title": "UCore classification and context overlap with asset semantics",
+      "sourceEvidence": [
+        {
+          "sourcePath": "AN_VANTARIS_IBMS-backend/src/system/models.py",
+          "line": 17,
+          "symbol": "EntityType",
+          "evidence": "UCore/system model duplicates entity classification and imports IoT field/method models."
+        }
+      ],
+      "currentOwner": "UCore and legacy system APIs",
+      "currentPhysicalStores": [
+        "STORE-SQL_TABLE-FBBE7D555839",
+        "STORE-SQL_TABLE-17CE83F8872C",
+        "STORE-SQL_TABLE-6A2F49427F0A",
+        "STORE-SQL_TABLE-6CA0E4450C90"
+      ],
+      "affectedObjects": [
+        "OperationalContext",
+        "Asset",
+        "Equipment",
+        "Point",
+        "Tag"
+      ],
+      "canonicalOwner": "UCore / Unified Data Model / ONE Asset Graph",
+      "targetSystemOfRecord": "UCore for operational context; Unified Data Model for schema; Asset Graph for assets",
+      "targetPackage": "PKG-UCORE",
+      "sourcePackages": [
+        "PKG-UCORE",
+        "PKG-UNIFIED-DATA-MODEL"
+      ],
+      "targetContracts": [
+        "vantaris.identity.v1",
+        "vantaris.asset.v1",
+        "vantaris.device.v1"
+      ],
+      "currentRoutes": [
+        "ROUTE-DELETE-1C1BF1530326",
+        "ROUTE-DELETE-234383D4A015",
+        "ROUTE-DELETE-6BAD313CBC29",
+        "ROUTE-DELETE-74BEE725E4E5",
+        "ROUTE-DELETE-8A5B51A5959A",
+        "ROUTE-DELETE-BC7AD2D5C7BE",
+        "ROUTE-GET-07D5A9375A20",
+        "ROUTE-GET-087117B30F59",
+        "ROUTE-GET-1E8BDAA440FC",
+        "ROUTE-GET-3090DD672E7A",
+        "ROUTE-GET-4F3A052F407D",
+        "ROUTE-GET-5230E2E7A2E6",
+        "ROUTE-GET-6010BE65E9C3",
+        "ROUTE-GET-7FDFE88D8070",
+        "ROUTE-GET-8341C54F00EA",
+        "ROUTE-GET-A6585ACA808D",
+        "ROUTE-GET-AAF9DDF4F1B2",
+        "ROUTE-GET-B35284DD1FB1",
+        "ROUTE-GET-C452DF324804",
+        "ROUTE-GET-C5A9232D0D85",
+        "ROUTE-GET-C8A6723A3791",
+        "ROUTE-GET-D0BBC4F59939",
+        "ROUTE-GET-E752BE5BAF95",
+        "ROUTE-POST-4DF87E19E07C",
+        "ROUTE-POST-533B7E0F470E",
+        "ROUTE-POST-66E81981F748",
+        "ROUTE-POST-890743EB4A04",
+        "ROUTE-POST-B392D4F2B4F0",
+        "ROUTE-POST-C224D4EB1102",
+        "ROUTE-POST-C39FFBE9F5DC",
+        "ROUTE-POST-C502B05AFF15",
+        "ROUTE-POST-DC3F129BF460",
+        "ROUTE-POST-F26674CAD742",
+        "ROUTE-PUT-33E2FBF9C7D6",
+        "ROUTE-PUT-7165EE7B8744",
+        "ROUTE-PUT-7287C5AE6C06",
+        "ROUTE-PUT-AEEAAA90E269",
+        "ROUTE-PUT-DADB0D2560FD",
+        "ROUTE-PUT-E1FF8D187B4D",
+        "ROUTE-PUT-F1FC5E5A2287"
+      ],
+      "targetApiNamespace": "/api/v1/context",
+      "targetEventContracts": [
+        "vantaris.asset.v1.events"
+      ],
+      "migrationClass": "OWNERSHIP_SPLIT",
+      "migrationWave": "WAVE-0-CONTRACTS",
+      "compatibilityFacade": "LEGACY_ROUTE_PROXY",
+      "readMigration": "Retain system route compatibility while reads are redirected to explicit owners.",
+      "writeMigration": "UCore writes operational context only; asset/schema writes go to canonical owners.",
+      "identifierMapping": "Map legacy entity type and menu context IDs without treating them as Asset IDs.",
+      "dataReconciliation": [
+        "SOURCE_ID",
+        "GLOBAL_ID",
+        "RELATIONSHIP_COUNT",
+        "TENANT_SCOPE",
+        "SITE_SCOPE"
+      ],
+      "auditMigration": "Audit owner selection and write routing.",
+      "evidenceMigration": "Not applicable except references to governed owner records.",
+      "retentionMigration": "Preserve system configuration through cutover and rollback.",
+      "packageImpact": "Clarifies dependencies among PKG-UCORE, PKG-UNIFIED-DATA-MODEL and PKG-ASSET-GRAPH.",
+      "deploymentImpact": "Contract and route-provider changes in later tasks.",
+      "prerequisites": [
+        "Explicit operational-context schema",
+        "Unified Data Model provider decisions",
+        "Asset Graph provider"
+      ],
+      "explicitNonScope": [
+        "No data movement in ONE-A5-P0-08",
+        "No schema, route, provider, model, import, adapter, or runtime change",
+        "No generic standalone one-adapter",
+        "No dual write approval"
+      ],
+      "validationGates": [
+        "Contract conformance",
+        "Target provider parity",
+        "Identifier mapping validation",
+        "Read and write behavior parity",
+        "Reconciliation across required dimensions",
+        "Audit and evidence integrity",
+        "Rollback rehearsal",
+        "Strict boundary scanner"
+      ],
+      "rollbackPlan": "Preserve immutable legacy source and bounded provider-specific compatibility path until rollback window and approval close.",
+      "exceptionIds": [],
+      "exceptionRetirementGate": "TARGET_PARITY_RECONCILIATION_ROLLBACK_STRICT_SCANNER_AND_OWNER_APPROVAL",
+      "proposedTasks": [
+        "ONE-A5-P1-07",
+        "ONE-A5-P1-16"
+      ],
+      "implementationStatus": "CONTRACT_REQUIRED",
+      "scannerConfidence": "HIGH",
+      "reviewReason": [
+        "SEMANTIC_OWNER_AMBIGUITY"
+      ],
+      "notes": [
+        "UCore must not become Site/Building/Floor/Zone/Space/System/Asset/Equipment system of record."
+      ]
+    },
+    {
+      "conflictId": "OWN-UFMS-PLACEHOLDER-001",
+      "title": "UFMS external integration placeholder boundary",
+      "sourceEvidence": [
+        {
+          "sourcePath": "AN_VANTARIS_ONE/registries/api-namespace-registry.v1.json",
+          "line": 298,
+          "symbol": "/api/v1/adapters/ufms",
+          "evidence": "Frozen external integration namespace without local UFMS runtime or data store."
+        }
+      ],
+      "currentOwner": "VANTARIS ONE UFMS Integration Boundary",
+      "currentPhysicalStores": [
+        "STORE-EXTERNAL_STORE_REFERENCE-FB8F7A39163F"
+      ],
+      "affectedObjects": [
+        "InterpretedEvent",
+        "Alarm",
+        "Episode",
+        "Problem",
+        "FaultCase",
+        "WorkOrderIntent"
+      ],
+      "canonicalOwner": "UFMS",
+      "targetSystemOfRecord": "UFMS external product",
+      "targetPackage": "PKG-UFMS-INTEGRATION",
+      "sourcePackages": [
+        "PKG-UFMS-INTEGRATION"
+      ],
+      "targetContracts": [
+        "vantaris.ufms.v1"
+      ],
+      "currentRoutes": [],
+      "targetApiNamespace": "/api/v1/adapters/ufms",
+      "targetEventContracts": [
+        "vantaris.ufms.v1.events"
+      ],
+      "migrationClass": "CONTRACT_FIRST",
+      "migrationWave": "WAVE-0-CONTRACTS",
+      "compatibilityFacade": "NO_FACADE_ALLOWED",
+      "readMigration": "Use approved external contract projections only after live interface verification.",
+      "writeMigration": "No internal UFMS placeholder may become an authoritative writer.",
+      "identifierMapping": "External UFMS IDs map to contract-governed source IDs; no UFMS table is absorbed.",
+      "dataReconciliation": [
+        "SOURCE_ID",
+        "GLOBAL_ID",
+        "STATUS",
+        "DIGEST",
+        "TENANT_SCOPE",
+        "SITE_SCOPE"
+      ],
+      "auditMigration": "Adapter intake, fault actions and WorkOrderIntent require authoritative audit.",
+      "evidenceMigration": "EvidenceReference may link UFMS source records without copying confidential payloads.",
+      "retentionMigration": "External retention remains UFMS-owned; ONE retains only contract-approved records.",
+      "packageImpact": "PKG-UFMS-INTEGRATION remains an external-product integration package.",
+      "deploymentImpact": "Implementation blocked on live UFMS details.",
+      "prerequisites": [
+        "CONFIRMED_BY_ONE_PLAN_A0_AUDIT",
+        "LIVE_UFMS_VERIFICATION_REQUIRED for implementation details"
+      ],
+      "explicitNonScope": [
+        "No data movement in ONE-A5-P0-08",
+        "No schema, route, provider, model, import, adapter, or runtime change",
+        "No generic standalone one-adapter",
+        "No dual write approval"
+      ],
+      "validationGates": [
+        "Contract conformance",
+        "Target provider parity",
+        "Identifier mapping validation",
+        "Read and write behavior parity",
+        "Reconciliation across required dimensions",
+        "Audit and evidence integrity",
+        "Rollback rehearsal",
+        "Strict boundary scanner"
+      ],
+      "rollbackPlan": "Preserve immutable legacy source and bounded provider-specific compatibility path until rollback window and approval close.",
+      "exceptionIds": [],
+      "exceptionRetirementGate": "TARGET_PARITY_RECONCILIATION_ROLLBACK_STRICT_SCANNER_AND_OWNER_APPROVAL",
+      "proposedTasks": [
+        "ONE-A5-P1-16"
+      ],
+      "implementationStatus": "WRITE_MIGRATION_BLOCKED",
+      "scannerConfidence": "HIGH",
+      "reviewReason": [
+        "UFMS_LIVE_VERIFICATION",
+        "EXTERNAL_DEPENDENCY"
+      ],
+      "notes": [
+        "SOURCE = ONE-PLAN-A0 AUDIT REPORT",
+        "No live UFMS endpoint or source verification was performed."
+      ]
+    },
+    {
+      "conflictId": "OWN-UMMS-WORKORDER-001",
+      "title": "UMMS generic WorkOrder skeleton ownership",
+      "sourceEvidence": [
+        {
+          "sourcePath": "AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py",
+          "line": 91,
+          "symbol": "_base_work_orders",
+          "evidence": "Read-only mock generic work-order lifecycle records."
+        }
+      ],
+      "currentOwner": "UMMS mock provider",
+      "currentPhysicalStores": [
+        "STORE-IN_MEMORY_STORE-44F3FE2E69EA"
+      ],
+      "affectedObjects": [
+        "WorkOrder",
+        "WorkAssignment",
+        "WorkExecution",
+        "WorkClosure",
+        "MaintenanceFinding"
+      ],
+      "canonicalOwner": "ONE Work Management / UMMS",
+      "targetSystemOfRecord": "ONE Work Management for generic lifecycle; UMMS for maintenance extensions",
+      "targetPackage": "PKG-WORK-MANAGEMENT",
+      "sourcePackages": [
+        "PKG-UMMS"
+      ],
+      "targetContracts": [
+        "vantaris.work.v1",
+        "vantaris.maintenance.v1"
+      ],
+      "currentRoutes": [
+        "ROUTE-GET-0F2CC82328FB",
+        "ROUTE-GET-1B1FA9EB3F2E",
+        "ROUTE-GET-6083232B3EE4",
+        "ROUTE-GET-8D7720BB01C6"
+      ],
+      "targetApiNamespace": "/api/v1/work",
+      "targetEventContracts": [
+        "vantaris.work.v1.events",
+        "vantaris.maintenance.v1.events"
+      ],
+      "migrationClass": "STRANGLER_MIGRATION",
+      "migrationWave": "WAVE-1-TARGET-PROVIDERS",
+      "compatibilityFacade": "LEGACY_DTO_TRANSLATOR",
+      "readMigration": "UMMS reads canonical WorkOrder and joins maintenance extension data.",
+      "writeMigration": "All generic lifecycle writes go to Work Management; UMMS writes only maintenance-owned extensions.",
+      "identifierMapping": "Preserve work order source IDs and map extension foreign references to canonical WorkOrder IDs.",
+      "dataReconciliation": [
+        "RECORD_COUNT",
+        "GLOBAL_ID",
+        "SOURCE_ID",
+        "STATE",
+        "STATUS",
+        "RELATIONSHIP_COUNT",
+        "ORPHAN_REFERENCE"
+      ],
+      "auditMigration": "Audit lifecycle transitions at Work Management and extension changes at UMMS.",
+      "evidenceMigration": "Maintenance evidence references canonical WorkOrder and owning audit records.",
+      "retentionMigration": "Mock source retained until provider parity; no production data deletion implied.",
+      "packageImpact": "Adds PKG-WORK-MANAGEMENT provider dependency to UMMS.",
+      "deploymentImpact": "Work provider foundation precedes UMMS consumer migration.",
+      "prerequisites": [
+        "Work contract",
+        "Work Management provider",
+        "Maintenance extension schema"
+      ],
+      "explicitNonScope": [
+        "No data movement in ONE-A5-P0-08",
+        "No schema, route, provider, model, import, adapter, or runtime change",
+        "No generic standalone one-adapter",
+        "No dual write approval"
+      ],
+      "validationGates": [
+        "Contract conformance",
+        "Target provider parity",
+        "Identifier mapping validation",
+        "Read and write behavior parity",
+        "Reconciliation across required dimensions",
+        "Audit and evidence integrity",
+        "Rollback rehearsal",
+        "Strict boundary scanner"
+      ],
+      "rollbackPlan": "Preserve immutable legacy source and bounded provider-specific compatibility path until rollback window and approval close.",
+      "exceptionIds": [
+        "LEGACY-UMMS-WORKORDER-001"
+      ],
+      "exceptionRetirementGate": "TARGET_PARITY_RECONCILIATION_ROLLBACK_STRICT_SCANNER_AND_OWNER_APPROVAL",
+      "proposedTasks": [
+        "ONE-A5-P1-12",
+        "ONE-A5-P1-13",
+        "ONE-A5-P1-16",
+        "ONE-A5-P1-17"
+      ],
+      "implementationStatus": "LEGACY_EXCEPTION_ACTIVE",
+      "scannerConfidence": "HIGH",
+      "reviewReason": [
+        "IDENTIFIER_MAPPING_UNKNOWN"
+      ],
+      "notes": [
+        "UMMS does not own assignment, dispatch, execution, closure, SLA or generic WorkOrder lifecycle."
+      ]
+    }
+  ],
+  "migrationWaves": [
+    {
+      "waveId": "WAVE-0-CONTRACTS",
+      "objective": "Freeze objects, IDs, APIs, events and ownership; no data movement.",
+      "prerequisites": [
+        "A2C ownership freeze",
+        "A4 registries"
+      ],
+      "allowedChanges": [
+        "Contracts and mapping metadata"
+      ],
+      "prohibitedChanges": [
+        "Data movement",
+        "Runtime cutover"
+      ],
+      "validationGates": [
+        "Schema validation",
+        "Provider/consumer contract review"
+      ],
+      "rollbackRequirements": [
+        "No runtime rollback needed; preserve baseline"
+      ],
+      "exitCriteria": [
+        "Contracts frozen and approved"
+      ]
+    },
+    {
+      "waveId": "WAVE-1-TARGET-PROVIDERS",
+      "objective": "Create target owner service/provider while retaining legacy read compatibility.",
+      "prerequisites": [
+        "Wave 0 complete"
+      ],
+      "allowedChanges": [
+        "Target providers",
+        "Read-only compatibility"
+      ],
+      "prohibitedChanges": [
+        "Legacy write disablement"
+      ],
+      "validationGates": [
+        "Provider conformance",
+        "Health and authorization"
+      ],
+      "rollbackRequirements": [
+        "Disable new provider and retain legacy path"
+      ],
+      "exitCriteria": [
+        "Provider parity demonstrated"
+      ]
+    },
+    {
+      "waveId": "WAVE-2-READ-MIGRATION",
+      "objective": "Consumers read through target owner or bounded compatibility façade.",
+      "prerequisites": [
+        "Wave 1 complete"
+      ],
+      "allowedChanges": [
+        "Consumer read cutover",
+        "Provider-specific façade"
+      ],
+      "prohibitedChanges": [
+        "New direct legacy DB consumers",
+        "Write cutover"
+      ],
+      "validationGates": [
+        "Read parity",
+        "Latency and error behavior"
+      ],
+      "rollbackRequirements": [
+        "Revert consumers to bounded legacy reads"
+      ],
+      "exitCriteria": [
+        "All consumers read target or façade"
+      ]
+    },
+    {
+      "waveId": "WAVE-3-WRITE-CUTOVER",
+      "objective": "Route new writes to target owner after parity.",
+      "prerequisites": [
+        "Wave 2 complete",
+        "Idempotency and audit controls"
+      ],
+      "allowedChanges": [
+        "Controlled target-first writes",
+        "Legacy projection where approved"
+      ],
+      "prohibitedChanges": [
+        "Uncontrolled dual write",
+        "Legacy write disablement before parity"
+      ],
+      "validationGates": [
+        "Write parity",
+        "Audit",
+        "Idempotency",
+        "Failure recovery"
+      ],
+      "rollbackRequirements": [
+        "Restore legacy-first compatibility within bounded window"
+      ],
+      "exitCriteria": [
+        "Target writes authoritative and stable"
+      ]
+    },
+    {
+      "waveId": "WAVE-4-RECONCILIATION",
+      "objective": "Compare counts, IDs, digests, status and relationships and resolve drift.",
+      "prerequisites": [
+        "Wave 3 stable"
+      ],
+      "allowedChanges": [
+        "Read-only comparison",
+        "Approved repair planning"
+      ],
+      "prohibitedChanges": [
+        "Unapproved repair or deletion"
+      ],
+      "validationGates": [
+        "All reconciliation dimensions",
+        "Zero critical drift"
+      ],
+      "rollbackRequirements": [
+        "Keep legacy immutable and revert cutover if thresholds fail"
+      ],
+      "exitCriteria": [
+        "Reconciliation approved"
+      ]
+    },
+    {
+      "waveId": "WAVE-5-LEGACY-RETIREMENT",
+      "objective": "Retire compatibility only after rollback window and approval.",
+      "prerequisites": [
+        "Wave 4 complete",
+        "Rollback window closed"
+      ],
+      "allowedChanges": [
+        "Compatibility removal",
+        "Exception retirement"
+      ],
+      "prohibitedChanges": [
+        "Source deletion before approval"
+      ],
+      "validationGates": [
+        "Strict scanner",
+        "No active consumers",
+        "Owner approval"
+      ],
+      "rollbackRequirements": [
+        "Restore versioned compatibility release"
+      ],
+      "exitCriteria": [
+        "Exceptions retired and removal approved"
+      ]
+    }
+  ],
+  "compatibilityPolicies": [
+    {
+      "facadeType": "READ_ONLY_FACADE",
+      "purpose": "Temporary canonical reads over legacy source",
+      "owner": "Target provider",
+      "allowedDirection": "LEGACY_TO_TARGET_READ",
+      "businessWriteAllowed": false,
+      "auditRequirement": "ALL_ACCESS_AND_TRANSLATION_DECISIONS_WHERE_IDENTITY_OR_MUTATION_EXISTS",
+      "retirementCondition": "TARGET_PARITY_RECONCILIATION_ROLLBACK_WINDOW_AND_APPROVAL"
+    },
+    {
+      "facadeType": "LEGACY_ROUTE_PROXY",
+      "purpose": "Preserve a specific legacy route while target provider owns behavior",
+      "owner": "Target provider",
+      "allowedDirection": "LEGACY_ROUTE_TO_TARGET_PROVIDER",
+      "businessWriteAllowed": false,
+      "auditRequirement": "ALL_ACCESS_AND_TRANSLATION_DECISIONS_WHERE_IDENTITY_OR_MUTATION_EXISTS",
+      "retirementCondition": "TARGET_PARITY_RECONCILIATION_ROLLBACK_WINDOW_AND_APPROVAL"
+    },
+    {
+      "facadeType": "LEGACY_DTO_TRANSLATOR",
+      "purpose": "Translate a specific legacy DTO to/from target contract",
+      "owner": "Provider/consumer boundary owner",
+      "allowedDirection": "BOUNDED_TRANSLATION",
+      "businessWriteAllowed": false,
+      "auditRequirement": "ALL_ACCESS_AND_TRANSLATION_DECISIONS_WHERE_IDENTITY_OR_MUTATION_EXISTS",
+      "retirementCondition": "TARGET_PARITY_RECONCILIATION_ROLLBACK_WINDOW_AND_APPROVAL"
+    },
+    {
+      "facadeType": "IDENTIFIER_MAPPING",
+      "purpose": "Map source identifiers to canonical IDs",
+      "owner": "Target provider",
+      "allowedDirection": "SOURCE_TO_CANONICAL",
+      "businessWriteAllowed": false,
+      "auditRequirement": "ALL_ACCESS_AND_TRANSLATION_DECISIONS_WHERE_IDENTITY_OR_MUTATION_EXISTS",
+      "retirementCondition": "TARGET_PARITY_RECONCILIATION_ROLLBACK_WINDOW_AND_APPROVAL"
+    },
+    {
+      "facadeType": "PROJECTION_ADAPTER",
+      "purpose": "Build a consumer projection from canonical owner APIs/events",
+      "owner": "Consumer module",
+      "allowedDirection": "TARGET_TO_CONSUMER_PROJECTION",
+      "businessWriteAllowed": false,
+      "auditRequirement": "ALL_ACCESS_AND_TRANSLATION_DECISIONS_WHERE_IDENTITY_OR_MUTATION_EXISTS",
+      "retirementCondition": "TARGET_PARITY_RECONCILIATION_ROLLBACK_WINDOW_AND_APPROVAL"
+    },
+    {
+      "facadeType": "EXPORT_COMPATIBILITY",
+      "purpose": "Preserve legacy export/read format during migration",
+      "owner": "Target provider and export consumer",
+      "allowedDirection": "TARGET_TO_LEGACY_EXPORT",
+      "businessWriteAllowed": false,
+      "auditRequirement": "ALL_ACCESS_AND_TRANSLATION_DECISIONS_WHERE_IDENTITY_OR_MUTATION_EXISTS",
+      "retirementCondition": "TARGET_PARITY_RECONCILIATION_ROLLBACK_WINDOW_AND_APPROVAL"
+    },
+    {
+      "facadeType": "NO_FACADE_ALLOWED",
+      "purpose": "Prohibit internal emulation of an external or security-owned system",
+      "owner": "Boundary owner",
+      "allowedDirection": "NONE",
+      "businessWriteAllowed": false,
+      "auditRequirement": "ALL_ACCESS_AND_TRANSLATION_DECISIONS_WHERE_IDENTITY_OR_MUTATION_EXISTS",
+      "retirementCondition": "TARGET_PARITY_RECONCILIATION_ROLLBACK_WINDOW_AND_APPROVAL"
+    }
+  ],
+  "reconciliationPolicies": [
+    {
+      "dimension": "RECORD_COUNT",
+      "comparisonMethod": "Compare scoped counts",
+      "authoritativeSide": "TARGET_AFTER_CUTOVER",
+      "tolerance": "ZERO_UNEXPLAINED",
+      "failureSeverity": "HIGH",
+      "repairAllowed": false,
+      "auditRequired": true
+    },
+    {
+      "dimension": "GLOBAL_ID",
+      "comparisonMethod": "Compare canonical global IDs",
+      "authoritativeSide": "TARGET",
+      "tolerance": "EXACT",
+      "failureSeverity": "CRITICAL",
+      "repairAllowed": false,
+      "auditRequired": true
+    },
+    {
+      "dimension": "SOURCE_ID",
+      "comparisonMethod": "Compare source-to-canonical mapping",
+      "authoritativeSide": "MAPPING_REGISTRY",
+      "tolerance": "EXACT",
+      "failureSeverity": "CRITICAL",
+      "repairAllowed": false,
+      "auditRequired": true
+    },
+    {
+      "dimension": "RELATIONSHIP_COUNT",
+      "comparisonMethod": "Compare scoped relationship counts",
+      "authoritativeSide": "TARGET",
+      "tolerance": "ZERO_UNEXPLAINED",
+      "failureSeverity": "HIGH",
+      "repairAllowed": false,
+      "auditRequired": true
+    },
+    {
+      "dimension": "STATE",
+      "comparisonMethod": "Compare lifecycle state",
+      "authoritativeSide": "TARGET_AFTER_CUTOVER",
+      "tolerance": "EXACT_OR_APPROVED_MAPPING",
+      "failureSeverity": "CRITICAL",
+      "repairAllowed": false,
+      "auditRequired": true
+    },
+    {
+      "dimension": "STATUS",
+      "comparisonMethod": "Compare operational status",
+      "authoritativeSide": "OWNER_DEFINED",
+      "tolerance": "BOUNDED_TIME_WINDOW",
+      "failureSeverity": "HIGH",
+      "repairAllowed": false,
+      "auditRequired": true
+    },
+    {
+      "dimension": "TIMESTAMP",
+      "comparisonMethod": "Compare normalized timestamps",
+      "authoritativeSide": "SOURCE_EVENT_OR_TARGET_COMMIT",
+      "tolerance": "CLOCK_SKEW_POLICY",
+      "failureSeverity": "MEDIUM",
+      "repairAllowed": false,
+      "auditRequired": true
+    },
+    {
+      "dimension": "DIGEST",
+      "comparisonMethod": "Compare canonical content digests",
+      "authoritativeSide": "TARGET",
+      "tolerance": "EXACT",
+      "failureSeverity": "CRITICAL",
+      "repairAllowed": false,
+      "auditRequired": true
+    },
+    {
+      "dimension": "AUDIT_LINK",
+      "comparisonMethod": "Verify AuditRecord references",
+      "authoritativeSide": "GOVERNANCE_SECURITY",
+      "tolerance": "EXACT",
+      "failureSeverity": "CRITICAL",
+      "repairAllowed": false,
+      "auditRequired": true
+    },
+    {
+      "dimension": "EVIDENCE_PROVENANCE",
+      "comparisonMethod": "Verify evidence source and relationship provenance",
+      "authoritativeSide": "EVIDENCE_CENTER",
+      "tolerance": "EXACT",
+      "failureSeverity": "CRITICAL",
+      "repairAllowed": false,
+      "auditRequired": true
+    },
+    {
+      "dimension": "TENANT_SCOPE",
+      "comparisonMethod": "Verify tenant isolation",
+      "authoritativeSide": "TARGET",
+      "tolerance": "EXACT",
+      "failureSeverity": "CRITICAL",
+      "repairAllowed": false,
+      "auditRequired": true
+    },
+    {
+      "dimension": "SITE_SCOPE",
+      "comparisonMethod": "Verify site isolation",
+      "authoritativeSide": "TARGET",
+      "tolerance": "EXACT",
+      "failureSeverity": "CRITICAL",
+      "repairAllowed": false,
+      "auditRequired": true
+    },
+    {
+      "dimension": "ORPHAN_REFERENCE",
+      "comparisonMethod": "Detect unresolved references",
+      "authoritativeSide": "TARGET",
+      "tolerance": "ZERO",
+      "failureSeverity": "CRITICAL",
+      "repairAllowed": false,
+      "auditRequired": true
+    },
+    {
+      "dimension": "DUPLICATE_ID",
+      "comparisonMethod": "Detect duplicate canonical/source IDs",
+      "authoritativeSide": "TARGET",
+      "tolerance": "ZERO",
+      "failureSeverity": "CRITICAL",
+      "repairAllowed": false,
+      "auditRequired": true
+    }
+  ],
+  "rollbackPolicies": [
+    {
+      "policyId": "ROLLBACK-IMMUTABLE-SOURCE",
+      "appliesTo": "ALL_CONFLICTS",
+      "requirements": [
+        "Preserve legacy source",
+        "Version mappings",
+        "Rehearse rollback",
+        "Bound rollback window",
+        "Audit cutover and rollback"
+      ],
+      "trigger": "Critical reconciliation, integrity, authorization, or availability failure",
+      "authority": "Canonical owner and Governance & Security"
+    }
+  ],
+  "exceptionRetirementPlan": [
+    {
+      "exceptionId": "LEGACY-IOT-DEVICE-MODEL-001",
+      "conflictId": "OWN-LEGACY-DEVICE-001",
+      "currentReason": "Legacy Device model combines canonical identity, runtime connectivity and credential concerns.",
+      "prerequisiteTasks": [
+        "ONE-A5-P1-07",
+        "ONE-A5-P1-08",
+        "ONE-A5-P1-09"
+      ],
+      "targetParityGate": "Asset Graph/EDGE provider parity",
+      "reconciliationGate": "All device mappings reconcile",
+      "rollbackGate": "Rollback rehearsal passes",
+      "strictScannerGate": "Strict boundary scanner passes",
+      "retirementApproval": "Asset Graph, EDGE, Governance & Security",
+      "finalRemovalTask": "ONE-A5-P1-17"
+    },
+    {
+      "exceptionId": "LEGACY-REPORTS-AUDIT-001",
+      "conflictId": "OWN-REPORTS-AUDIT-001",
+      "currentReason": "Reports local JSONL predates central AuditRecord provider.",
+      "prerequisiteTasks": [
+        "ONE-A5-P1-10",
+        "ONE-A5-P1-11"
+      ],
+      "targetParityGate": "Central audit emission/query/export parity",
+      "reconciliationGate": "Counts, IDs and digests reconcile",
+      "rollbackGate": "JSONL read rollback available",
+      "strictScannerGate": "Strict boundary scanner passes",
+      "retirementApproval": "Governance & Security and Reports",
+      "finalRemovalTask": "ONE-A5-P1-17"
+    },
+    {
+      "exceptionId": "LEGACY-UMMS-WORKORDER-001",
+      "conflictId": "OWN-UMMS-WORKORDER-001",
+      "currentReason": "UMMS read-only mock predates Work Management.",
+      "prerequisiteTasks": [
+        "ONE-A5-P1-12",
+        "ONE-A5-P1-13"
+      ],
+      "targetParityGate": "Work lifecycle and UMMS extension parity",
+      "reconciliationGate": "IDs, states and relationships reconcile",
+      "rollbackGate": "UMMS compatibility rollback passes",
+      "strictScannerGate": "Strict boundary scanner passes",
+      "retirementApproval": "ONE Work Management and UMMS",
+      "finalRemovalTask": "ONE-A5-P1-17"
+    },
+    {
+      "exceptionId": "LEGACY-UCDE-EVIDENCE-001",
+      "conflictId": "OWN-UCDE-EVIDENCE-001",
+      "currentReason": "UCDE mock evidence predates Evidence Center.",
+      "prerequisiteTasks": [
+        "ONE-A5-P1-14",
+        "ONE-A5-P1-15"
+      ],
+      "targetParityGate": "Evidence records, relationships and integrity parity",
+      "reconciliationGate": "IDs, digests and provenance reconcile",
+      "rollbackGate": "UCDE workspace rollback passes",
+      "strictScannerGate": "Strict boundary scanner passes",
+      "retirementApproval": "Evidence Center, Trust and UCDE",
+      "finalRemovalTask": "ONE-A5-P1-17"
+    }
+  ],
+  "reviewQueue": [
+    {
+      "reviewId": "LEGACY-OWNERSHIP-REVIEW-0001",
+      "conflictId": "OWN-DID-IDENTITY-TRUST-001",
+      "storeId": "STORE-SQL_TABLE-FBBE7D555839",
+      "reviewType": "CREDENTIAL_SEPARATION",
+      "reason": "CREDENTIAL_SEPARATION remains unresolved for implementation.",
+      "evidence": [
+        {
+          "sourcePath": "AN_VANTARIS_IBMS-backend/src/DID/models.py",
+          "line": 13,
+          "symbol": "EntityType",
+          "evidence": "DID models persist identity, permission, relationship, VC anchors and revocations."
+        }
+      ],
+      "proposedSafeDefault": "NO_WRITE_CUTOVER_NO_DUAL_WRITE_PRESERVE_SOURCE_AND_USE_BOUNDED_READ_COMPATIBILITY",
+      "requiredDecision": "Resolve with canonical owner approval before the blocking migration wave.",
+      "blockingTask": "ONE-A5-P1-16",
+      "priority": "P0"
+    },
+    {
+      "reviewId": "LEGACY-OWNERSHIP-REVIEW-0002",
+      "conflictId": "OWN-EDGE-CANONICAL-DEVICE-001",
+      "storeId": "STORE-IN_MEMORY_STORE-3DB38C5BF13F",
+      "reviewType": "IDENTIFIER_MAPPING_UNKNOWN",
+      "reason": "IDENTIFIER_MAPPING_UNKNOWN remains unresolved for implementation.",
+      "evidence": [
+        {
+          "sourcePath": "AN_VANTARIS_IBMS-backend/src/uedge/uedge_provider.py",
+          "line": 51,
+          "symbol": "customer_setup_steps",
+          "evidence": "Read-only gateway and connector setup/diagnostic placeholder."
+        }
+      ],
+      "proposedSafeDefault": "NO_WRITE_CUTOVER_NO_DUAL_WRITE_PRESERVE_SOURCE_AND_USE_BOUNDED_READ_COMPATIBILITY",
+      "requiredDecision": "Resolve with canonical owner approval before the blocking migration wave.",
+      "blockingTask": "ONE-A5-P1-07",
+      "priority": "P1"
+    },
+    {
+      "reviewId": "LEGACY-OWNERSHIP-REVIEW-0003",
+      "conflictId": "OWN-IOT-CONNECTOR-ASSET-001",
+      "storeId": "STORE-SQL_TABLE-DA7444B7B5FA",
+      "reviewType": "TABLE_RELATIONSHIP_UNKNOWN",
+      "reason": "TABLE_RELATIONSHIP_UNKNOWN remains unresolved for implementation.",
+      "evidence": [
+        {
+          "sourcePath": "AN_VANTARIS_IBMS-backend/src/Iot/models.py",
+          "line": 52,
+          "symbol": "IMSFieldMapping",
+          "evidence": "Field/method mappings bind device DID, protocol, raw paths and canonical semantics."
+        }
+      ],
+      "proposedSafeDefault": "NO_WRITE_CUTOVER_NO_DUAL_WRITE_PRESERVE_SOURCE_AND_USE_BOUNDED_READ_COMPATIBILITY",
+      "requiredDecision": "Resolve with canonical owner approval before the blocking migration wave.",
+      "blockingTask": "ONE-A5-P1-07",
+      "priority": "P1"
+    },
+    {
+      "reviewId": "LEGACY-OWNERSHIP-REVIEW-0004",
+      "conflictId": "OWN-LEGACY-DEVICE-001",
+      "storeId": "STORE-SQL_TABLE-760B76D35F5B",
+      "reviewType": "CREDENTIAL_SEPARATION",
+      "reason": "CREDENTIAL_SEPARATION remains unresolved for implementation.",
+      "evidence": [
+        {
+          "sourcePath": "AN_VANTARIS_IBMS-backend/src/Iot/models.py",
+          "line": 14,
+          "symbol": "IMSDevice",
+          "evidence": "imbs_device combines device identity, status, protocol, connection configuration and credential material."
+        }
+      ],
+      "proposedSafeDefault": "NO_WRITE_CUTOVER_NO_DUAL_WRITE_PRESERVE_SOURCE_AND_USE_BOUNDED_READ_COMPATIBILITY",
+      "requiredDecision": "Resolve with canonical owner approval before the blocking migration wave.",
+      "blockingTask": "ONE-A5-P1-07",
+      "priority": "P0"
+    },
+    {
+      "reviewId": "LEGACY-OWNERSHIP-REVIEW-0005",
+      "conflictId": "OWN-LEGACY-DEVICE-001",
+      "storeId": "STORE-SQL_TABLE-760B76D35F5B",
+      "reviewType": "IDENTIFIER_MAPPING_UNKNOWN",
+      "reason": "IDENTIFIER_MAPPING_UNKNOWN remains unresolved for implementation.",
+      "evidence": [
+        {
+          "sourcePath": "AN_VANTARIS_IBMS-backend/src/Iot/models.py",
+          "line": 14,
+          "symbol": "IMSDevice",
+          "evidence": "imbs_device combines device identity, status, protocol, connection configuration and credential material."
+        }
+      ],
+      "proposedSafeDefault": "NO_WRITE_CUTOVER_NO_DUAL_WRITE_PRESERVE_SOURCE_AND_USE_BOUNDED_READ_COMPATIBILITY",
+      "requiredDecision": "Resolve with canonical owner approval before the blocking migration wave.",
+      "blockingTask": "ONE-A5-P1-07",
+      "priority": "P1"
+    },
+    {
+      "reviewId": "LEGACY-OWNERSHIP-REVIEW-0006",
+      "conflictId": "OWN-MODELING-AI-MODEL-001",
+      "storeId": "STORE-LOCAL_FILESYSTEM-739D44B2A801",
+      "reviewType": "RETENTION_REQUIREMENT_UNKNOWN",
+      "reason": "RETENTION_REQUIREMENT_UNKNOWN remains unresolved for implementation.",
+      "evidence": [
+        {
+          "sourcePath": "AN_VANTARIS_IBMS-backend/src/data_modeling/csv_storage.py",
+          "line": 34,
+          "symbol": "CSVStorage",
+          "evidence": "Per-device local CSV files support training and prediction data."
+        }
+      ],
+      "proposedSafeDefault": "NO_WRITE_CUTOVER_NO_DUAL_WRITE_PRESERVE_SOURCE_AND_USE_BOUNDED_READ_COMPATIBILITY",
+      "requiredDecision": "Resolve with canonical owner approval before the blocking migration wave.",
+      "blockingTask": "ONE-A5-P1-16",
+      "priority": "P1"
+    },
+    {
+      "reviewId": "LEGACY-OWNERSHIP-REVIEW-0007",
+      "conflictId": "OWN-MODELING-AI-MODEL-001",
+      "storeId": "STORE-LOCAL_FILESYSTEM-739D44B2A801",
+      "reviewType": "IDENTIFIER_MAPPING_UNKNOWN",
+      "reason": "IDENTIFIER_MAPPING_UNKNOWN remains unresolved for implementation.",
+      "evidence": [
+        {
+          "sourcePath": "AN_VANTARIS_IBMS-backend/src/data_modeling/csv_storage.py",
+          "line": 34,
+          "symbol": "CSVStorage",
+          "evidence": "Per-device local CSV files support training and prediction data."
+        }
+      ],
+      "proposedSafeDefault": "NO_WRITE_CUTOVER_NO_DUAL_WRITE_PRESERVE_SOURCE_AND_USE_BOUNDED_READ_COMPATIBILITY",
+      "requiredDecision": "Resolve with canonical owner approval before the blocking migration wave.",
+      "blockingTask": "ONE-A5-P1-16",
+      "priority": "P1"
+    },
+    {
+      "reviewId": "LEGACY-OWNERSHIP-REVIEW-0008",
+      "conflictId": "OWN-REPORTS-AUDIT-001",
+      "storeId": "STORE-JSONL_LEDGER-5957388225F4",
+      "reviewType": "RETENTION_REQUIREMENT_UNKNOWN",
+      "reason": "RETENTION_REQUIREMENT_UNKNOWN remains unresolved for implementation.",
+      "evidence": [
+        {
+          "sourcePath": "AN_VANTARIS_IBMS-backend/src/reports/reports_audit_store.py",
+          "line": 20,
+          "symbol": "get_audit_store_path",
+          "evidence": "Local reports_audit.jsonl hash-chain persistence."
+        }
+      ],
+      "proposedSafeDefault": "NO_WRITE_CUTOVER_NO_DUAL_WRITE_PRESERVE_SOURCE_AND_USE_BOUNDED_READ_COMPATIBILITY",
+      "requiredDecision": "Resolve with canonical owner approval before the blocking migration wave.",
+      "blockingTask": "ONE-A5-P1-10",
+      "priority": "P1"
+    },
+    {
+      "reviewId": "LEGACY-OWNERSHIP-REVIEW-0009",
+      "conflictId": "OWN-UCDE-EVIDENCE-001",
+      "storeId": "STORE-IN_MEMORY_STORE-B2ECBFB0C5E3",
+      "reviewType": "RETENTION_REQUIREMENT_UNKNOWN",
+      "reason": "RETENTION_REQUIREMENT_UNKNOWN remains unresolved for implementation.",
+      "evidence": [
+        {
+          "sourcePath": "AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py",
+          "line": 124,
+          "symbol": "_base_records",
+          "evidence": "Local mock EvidenceRecord, relationships and hash verification metadata."
+        }
+      ],
+      "proposedSafeDefault": "NO_WRITE_CUTOVER_NO_DUAL_WRITE_PRESERVE_SOURCE_AND_USE_BOUNDED_READ_COMPATIBILITY",
+      "requiredDecision": "Resolve with canonical owner approval before the blocking migration wave.",
+      "blockingTask": "ONE-A5-P1-14",
+      "priority": "P1"
+    },
+    {
+      "reviewId": "LEGACY-OWNERSHIP-REVIEW-0010",
+      "conflictId": "OWN-UCORE-ASSET-001",
+      "storeId": "STORE-SQL_TABLE-FBBE7D555839",
+      "reviewType": "SEMANTIC_OWNER_AMBIGUITY",
+      "reason": "SEMANTIC_OWNER_AMBIGUITY remains unresolved for implementation.",
+      "evidence": [
+        {
+          "sourcePath": "AN_VANTARIS_IBMS-backend/src/system/models.py",
+          "line": 17,
+          "symbol": "EntityType",
+          "evidence": "UCore/system model duplicates entity classification and imports IoT field/method models."
+        }
+      ],
+      "proposedSafeDefault": "NO_WRITE_CUTOVER_NO_DUAL_WRITE_PRESERVE_SOURCE_AND_USE_BOUNDED_READ_COMPATIBILITY",
+      "requiredDecision": "Resolve with canonical owner approval before the blocking migration wave.",
+      "blockingTask": "ONE-A5-P1-07",
+      "priority": "P1"
+    },
+    {
+      "reviewId": "LEGACY-OWNERSHIP-REVIEW-0011",
+      "conflictId": "OWN-UFMS-PLACEHOLDER-001",
+      "storeId": "STORE-EXTERNAL_STORE_REFERENCE-FB8F7A39163F",
+      "reviewType": "UFMS_LIVE_VERIFICATION",
+      "reason": "UFMS_LIVE_VERIFICATION remains unresolved for implementation.",
+      "evidence": [
+        {
+          "sourcePath": "AN_VANTARIS_ONE/registries/api-namespace-registry.v1.json",
+          "line": 298,
+          "symbol": "/api/v1/adapters/ufms",
+          "evidence": "Frozen external integration namespace without local UFMS runtime or data store."
+        }
+      ],
+      "proposedSafeDefault": "NO_WRITE_CUTOVER_NO_DUAL_WRITE_PRESERVE_SOURCE_AND_USE_BOUNDED_READ_COMPATIBILITY",
+      "requiredDecision": "Resolve with canonical owner approval before the blocking migration wave.",
+      "blockingTask": "ONE-A5-P1-16",
+      "priority": "P0"
+    },
+    {
+      "reviewId": "LEGACY-OWNERSHIP-REVIEW-0012",
+      "conflictId": "OWN-UFMS-PLACEHOLDER-001",
+      "storeId": "STORE-EXTERNAL_STORE_REFERENCE-FB8F7A39163F",
+      "reviewType": "EXTERNAL_DEPENDENCY",
+      "reason": "EXTERNAL_DEPENDENCY remains unresolved for implementation.",
+      "evidence": [
+        {
+          "sourcePath": "AN_VANTARIS_ONE/registries/api-namespace-registry.v1.json",
+          "line": 298,
+          "symbol": "/api/v1/adapters/ufms",
+          "evidence": "Frozen external integration namespace without local UFMS runtime or data store."
+        }
+      ],
+      "proposedSafeDefault": "NO_WRITE_CUTOVER_NO_DUAL_WRITE_PRESERVE_SOURCE_AND_USE_BOUNDED_READ_COMPATIBILITY",
+      "requiredDecision": "Resolve with canonical owner approval before the blocking migration wave.",
+      "blockingTask": "ONE-A5-P1-16",
+      "priority": "P1"
+    },
+    {
+      "reviewId": "LEGACY-OWNERSHIP-REVIEW-0013",
+      "conflictId": "OWN-UMMS-WORKORDER-001",
+      "storeId": "STORE-IN_MEMORY_STORE-44F3FE2E69EA",
+      "reviewType": "IDENTIFIER_MAPPING_UNKNOWN",
+      "reason": "IDENTIFIER_MAPPING_UNKNOWN remains unresolved for implementation.",
+      "evidence": [
+        {
+          "sourcePath": "AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py",
+          "line": 91,
+          "symbol": "_base_work_orders",
+          "evidence": "Read-only mock generic work-order lifecycle records."
+        }
+      ],
+      "proposedSafeDefault": "NO_WRITE_CUTOVER_NO_DUAL_WRITE_PRESERVE_SOURCE_AND_USE_BOUNDED_READ_COMPATIBILITY",
+      "requiredDecision": "Resolve with canonical owner approval before the blocking migration wave.",
+      "blockingTask": "ONE-A5-P1-12",
+      "priority": "P1"
+    }
+  ],
+  "summary": {
+    "totalConflicts": 10,
+    "P0ExceptionConflicts": 4,
+    "contractRequired": 2,
+    "targetProviderRequired": 0,
+    "writeMigrationBlocked": 3,
+    "reconciliationRequired": 0,
+    "activeLegacyExceptions": 4,
+    "proposedTaskCount": 11,
+    "reviewQueueCount": 13,
+    "conflictsByMigrationWave": {
+      "WAVE-0-CONTRACTS": 7,
+      "WAVE-1-TARGET-PROVIDERS": 3
+    },
+    "conflictsByCanonicalOwner": {
+      "AN_VANTARIS_EDGE / ONE Asset Graph": 1,
+      "AN_VANTARIS_EDGE / Unified Data Model / ONE Asset Graph": 1,
+      "Evidence Center / Evidence Center / Trust": 1,
+      "Governance & Security": 1,
+      "Governance & Security / Evidence Center / Trust": 1,
+      "Nexus AI / AI Model Hub": 1,
+      "ONE Asset Graph / AN_VANTARIS_EDGE / Governance & Security": 1,
+      "ONE Work Management / UMMS": 1,
+      "UCore / Unified Data Model / ONE Asset Graph": 1,
+      "UFMS": 1
+    },
+    "conflictsByTargetPackage": {
+      "PKG-ASSET-GRAPH": 1,
+      "PKG-EDGE": 2,
+      "PKG-EVIDENCE-CENTER": 1,
+      "PKG-GOVERNANCE-SECURITY": 2,
+      "PKG-NEXUS-AI": 1,
+      "PKG-UCORE": 1,
+      "PKG-UFMS-INTEGRATION": 1,
+      "PKG-WORK-MANAGEMENT": 1
+    }
+  },
+  "proposedTasks": [
+    {
+      "taskId": "ONE-A5-P1-07",
+      "title": "Asset Graph Device/Point Contract and Provider Foundation",
+      "conflictIds": [
+        "OWN-LEGACY-DEVICE-001",
+        "OWN-EDGE-CANONICAL-DEVICE-001",
+        "OWN-IOT-CONNECTOR-ASSET-001"
+      ],
+      "migrationWave": "WAVE-1-TARGET-PROVIDERS",
+      "objective": "Implement the bounded Asset Graph Device/Point Contract and Provider Foundation outcome.",
+      "prerequisites": [
+        "Prior migration waves complete",
+        "Frozen contracts and ownership register"
+      ],
+      "allowedPaths": [
+        "Task-specific provider, contract, migration or validation paths to be authorized by that task"
+      ],
+      "expectedRuntimeChanges": [
+        "Only changes explicitly authorized by the future task"
+      ],
+      "prohibitedChanges": [
+        "Generic one-adapter",
+        "Uncontrolled dual write",
+        "Direct cross-module database access",
+        "Unapproved source deletion"
+      ],
+      "contractDependencies": [
+        "vantaris.device.v1",
+        "vantaris.edge.v1",
+        "vantaris.integration.v1"
+      ],
+      "dataDependencies": [
+        "STORE-IN_MEMORY_STORE-3DB38C5BF13F",
+        "STORE-SQL_TABLE-1EE247CB815E",
+        "STORE-SQL_TABLE-3EF25DF256DA",
+        "STORE-SQL_TABLE-760B76D35F5B",
+        "STORE-SQL_TABLE-91D45E0F7F9C",
+        "STORE-SQL_TABLE-DA7444B7B5FA"
+      ],
+      "migrationRequirements": [
+        "Identifier mapping",
+        "Audit",
+        "Idempotency where applicable",
+        "Reconciliation",
+        "Bounded compatibility"
+      ],
+      "rollbackRequirements": [
+        "Versioned rollback plan",
+        "Preserved source",
+        "Rollback rehearsal",
+        "Bounded window"
+      ],
+      "validationCommands": [
+        "python3 scripts/validation/validate-one-legacy-ownership-register.py",
+        "python3 scripts/validation/validate-one-boundaries.py --mode strict --format text"
+      ],
+      "acceptanceCriteria": [
+        "Target ownership is authoritative.",
+        "Parity and reconciliation pass.",
+        "Rollback evidence exists.",
+        "No boundary weakening."
+      ],
+      "restartStatus": "READY_AFTER_PREREQUISITES",
+      "risk": "MEDIUM"
+    },
+    {
+      "taskId": "ONE-A5-P1-08",
+      "title": "Legacy Device Read Compatibility Façade",
+      "conflictIds": [
+        "OWN-LEGACY-DEVICE-001",
+        "OWN-EDGE-CANONICAL-DEVICE-001"
+      ],
+      "migrationWave": "WAVE-2-READ-MIGRATION",
+      "objective": "Implement the bounded Legacy Device Read Compatibility Façade outcome.",
+      "prerequisites": [
+        "Prior migration waves complete",
+        "Frozen contracts and ownership register"
+      ],
+      "allowedPaths": [
+        "Task-specific provider, contract, migration or validation paths to be authorized by that task"
+      ],
+      "expectedRuntimeChanges": [
+        "Only changes explicitly authorized by the future task"
+      ],
+      "prohibitedChanges": [
+        "Generic one-adapter",
+        "Uncontrolled dual write",
+        "Direct cross-module database access",
+        "Unapproved source deletion"
+      ],
+      "contractDependencies": [
+        "vantaris.device.v1",
+        "vantaris.edge.v1",
+        "vantaris.integration.v1"
+      ],
+      "dataDependencies": [
+        "STORE-IN_MEMORY_STORE-3DB38C5BF13F",
+        "STORE-SQL_TABLE-1EE247CB815E",
+        "STORE-SQL_TABLE-3EF25DF256DA",
+        "STORE-SQL_TABLE-760B76D35F5B",
+        "STORE-SQL_TABLE-DA7444B7B5FA"
+      ],
+      "migrationRequirements": [
+        "Identifier mapping",
+        "Audit",
+        "Idempotency where applicable",
+        "Reconciliation",
+        "Bounded compatibility"
+      ],
+      "rollbackRequirements": [
+        "Versioned rollback plan",
+        "Preserved source",
+        "Rollback rehearsal",
+        "Bounded window"
+      ],
+      "validationCommands": [
+        "python3 scripts/validation/validate-one-legacy-ownership-register.py",
+        "python3 scripts/validation/validate-one-boundaries.py --mode strict --format text"
+      ],
+      "acceptanceCriteria": [
+        "Target ownership is authoritative.",
+        "Parity and reconciliation pass.",
+        "Rollback evidence exists.",
+        "No boundary weakening."
+      ],
+      "restartStatus": "READY_AFTER_PREREQUISITES",
+      "risk": "MEDIUM"
+    },
+    {
+      "taskId": "ONE-A5-P1-09",
+      "title": "Device/Point Write Ownership Cutover Plan",
+      "conflictIds": [
+        "OWN-LEGACY-DEVICE-001",
+        "OWN-EDGE-CANONICAL-DEVICE-001",
+        "OWN-IOT-CONNECTOR-ASSET-001"
+      ],
+      "migrationWave": "WAVE-3-WRITE-CUTOVER",
+      "objective": "Implement the bounded Device/Point Write Ownership Cutover Plan outcome.",
+      "prerequisites": [
+        "Prior migration waves complete",
+        "Frozen contracts and ownership register"
+      ],
+      "allowedPaths": [
+        "Task-specific provider, contract, migration or validation paths to be authorized by that task"
+      ],
+      "expectedRuntimeChanges": [
+        "Only changes explicitly authorized by the future task"
+      ],
+      "prohibitedChanges": [
+        "Generic one-adapter",
+        "Uncontrolled dual write",
+        "Direct cross-module database access",
+        "Unapproved source deletion"
+      ],
+      "contractDependencies": [
+        "vantaris.device.v1",
+        "vantaris.edge.v1",
+        "vantaris.integration.v1"
+      ],
+      "dataDependencies": [
+        "STORE-IN_MEMORY_STORE-3DB38C5BF13F",
+        "STORE-SQL_TABLE-1EE247CB815E",
+        "STORE-SQL_TABLE-3EF25DF256DA",
+        "STORE-SQL_TABLE-760B76D35F5B",
+        "STORE-SQL_TABLE-91D45E0F7F9C",
+        "STORE-SQL_TABLE-DA7444B7B5FA"
+      ],
+      "migrationRequirements": [
+        "Identifier mapping",
+        "Audit",
+        "Idempotency where applicable",
+        "Reconciliation",
+        "Bounded compatibility"
+      ],
+      "rollbackRequirements": [
+        "Versioned rollback plan",
+        "Preserved source",
+        "Rollback rehearsal",
+        "Bounded window"
+      ],
+      "validationCommands": [
+        "python3 scripts/validation/validate-one-legacy-ownership-register.py",
+        "python3 scripts/validation/validate-one-boundaries.py --mode strict --format text"
+      ],
+      "acceptanceCriteria": [
+        "Target ownership is authoritative.",
+        "Parity and reconciliation pass.",
+        "Rollback evidence exists.",
+        "No boundary weakening."
+      ],
+      "restartStatus": "READY_AFTER_PREREQUISITES",
+      "risk": "HIGH"
+    },
+    {
+      "taskId": "ONE-A5-P1-10",
+      "title": "Governance Audit Provider Foundation",
+      "conflictIds": [
+        "OWN-REPORTS-AUDIT-001"
+      ],
+      "migrationWave": "WAVE-1-TARGET-PROVIDERS",
+      "objective": "Implement the bounded Governance Audit Provider Foundation outcome.",
+      "prerequisites": [
+        "Prior migration waves complete",
+        "Frozen contracts and ownership register"
+      ],
+      "allowedPaths": [
+        "Task-specific provider, contract, migration or validation paths to be authorized by that task"
+      ],
+      "expectedRuntimeChanges": [
+        "Only changes explicitly authorized by the future task"
+      ],
+      "prohibitedChanges": [
+        "Generic one-adapter",
+        "Uncontrolled dual write",
+        "Direct cross-module database access",
+        "Unapproved source deletion"
+      ],
+      "contractDependencies": [
+        "vantaris.audit.v1"
+      ],
+      "dataDependencies": [
+        "STORE-JSONL_LEDGER-5957388225F4"
+      ],
+      "migrationRequirements": [
+        "Identifier mapping",
+        "Audit",
+        "Idempotency where applicable",
+        "Reconciliation",
+        "Bounded compatibility"
+      ],
+      "rollbackRequirements": [
+        "Versioned rollback plan",
+        "Preserved source",
+        "Rollback rehearsal",
+        "Bounded window"
+      ],
+      "validationCommands": [
+        "python3 scripts/validation/validate-one-legacy-ownership-register.py",
+        "python3 scripts/validation/validate-one-boundaries.py --mode strict --format text"
+      ],
+      "acceptanceCriteria": [
+        "Target ownership is authoritative.",
+        "Parity and reconciliation pass.",
+        "Rollback evidence exists.",
+        "No boundary weakening."
+      ],
+      "restartStatus": "READY_AFTER_PREREQUISITES",
+      "risk": "MEDIUM"
+    },
+    {
+      "taskId": "ONE-A5-P1-11",
+      "title": "Reports Audit Read Compatibility Migration",
+      "conflictIds": [
+        "OWN-REPORTS-AUDIT-001"
+      ],
+      "migrationWave": "WAVE-2-READ-MIGRATION",
+      "objective": "Implement the bounded Reports Audit Read Compatibility Migration outcome.",
+      "prerequisites": [
+        "Prior migration waves complete",
+        "Frozen contracts and ownership register"
+      ],
+      "allowedPaths": [
+        "Task-specific provider, contract, migration or validation paths to be authorized by that task"
+      ],
+      "expectedRuntimeChanges": [
+        "Only changes explicitly authorized by the future task"
+      ],
+      "prohibitedChanges": [
+        "Generic one-adapter",
+        "Uncontrolled dual write",
+        "Direct cross-module database access",
+        "Unapproved source deletion"
+      ],
+      "contractDependencies": [
+        "vantaris.audit.v1"
+      ],
+      "dataDependencies": [
+        "STORE-JSONL_LEDGER-5957388225F4"
+      ],
+      "migrationRequirements": [
+        "Identifier mapping",
+        "Audit",
+        "Idempotency where applicable",
+        "Reconciliation",
+        "Bounded compatibility"
+      ],
+      "rollbackRequirements": [
+        "Versioned rollback plan",
+        "Preserved source",
+        "Rollback rehearsal",
+        "Bounded window"
+      ],
+      "validationCommands": [
+        "python3 scripts/validation/validate-one-legacy-ownership-register.py",
+        "python3 scripts/validation/validate-one-boundaries.py --mode strict --format text"
+      ],
+      "acceptanceCriteria": [
+        "Target ownership is authoritative.",
+        "Parity and reconciliation pass.",
+        "Rollback evidence exists.",
+        "No boundary weakening."
+      ],
+      "restartStatus": "READY_AFTER_PREREQUISITES",
+      "risk": "MEDIUM"
+    },
+    {
+      "taskId": "ONE-A5-P1-12",
+      "title": "Work Management Canonical WorkOrder Foundation",
+      "conflictIds": [
+        "OWN-UMMS-WORKORDER-001"
+      ],
+      "migrationWave": "WAVE-1-TARGET-PROVIDERS",
+      "objective": "Implement the bounded Work Management Canonical WorkOrder Foundation outcome.",
+      "prerequisites": [
+        "Prior migration waves complete",
+        "Frozen contracts and ownership register"
+      ],
+      "allowedPaths": [
+        "Task-specific provider, contract, migration or validation paths to be authorized by that task"
+      ],
+      "expectedRuntimeChanges": [
+        "Only changes explicitly authorized by the future task"
+      ],
+      "prohibitedChanges": [
+        "Generic one-adapter",
+        "Uncontrolled dual write",
+        "Direct cross-module database access",
+        "Unapproved source deletion"
+      ],
+      "contractDependencies": [
+        "vantaris.maintenance.v1",
+        "vantaris.work.v1"
+      ],
+      "dataDependencies": [
+        "STORE-IN_MEMORY_STORE-44F3FE2E69EA"
+      ],
+      "migrationRequirements": [
+        "Identifier mapping",
+        "Audit",
+        "Idempotency where applicable",
+        "Reconciliation",
+        "Bounded compatibility"
+      ],
+      "rollbackRequirements": [
+        "Versioned rollback plan",
+        "Preserved source",
+        "Rollback rehearsal",
+        "Bounded window"
+      ],
+      "validationCommands": [
+        "python3 scripts/validation/validate-one-legacy-ownership-register.py",
+        "python3 scripts/validation/validate-one-boundaries.py --mode strict --format text"
+      ],
+      "acceptanceCriteria": [
+        "Target ownership is authoritative.",
+        "Parity and reconciliation pass.",
+        "Rollback evidence exists.",
+        "No boundary weakening."
+      ],
+      "restartStatus": "READY_AFTER_PREREQUISITES",
+      "risk": "MEDIUM"
+    },
+    {
+      "taskId": "ONE-A5-P1-13",
+      "title": "UMMS WorkOrder Extension Migration",
+      "conflictIds": [
+        "OWN-UMMS-WORKORDER-001"
+      ],
+      "migrationWave": "WAVE-2-READ-MIGRATION",
+      "objective": "Implement the bounded UMMS WorkOrder Extension Migration outcome.",
+      "prerequisites": [
+        "Prior migration waves complete",
+        "Frozen contracts and ownership register"
+      ],
+      "allowedPaths": [
+        "Task-specific provider, contract, migration or validation paths to be authorized by that task"
+      ],
+      "expectedRuntimeChanges": [
+        "Only changes explicitly authorized by the future task"
+      ],
+      "prohibitedChanges": [
+        "Generic one-adapter",
+        "Uncontrolled dual write",
+        "Direct cross-module database access",
+        "Unapproved source deletion"
+      ],
+      "contractDependencies": [
+        "vantaris.maintenance.v1",
+        "vantaris.work.v1"
+      ],
+      "dataDependencies": [
+        "STORE-IN_MEMORY_STORE-44F3FE2E69EA"
+      ],
+      "migrationRequirements": [
+        "Identifier mapping",
+        "Audit",
+        "Idempotency where applicable",
+        "Reconciliation",
+        "Bounded compatibility"
+      ],
+      "rollbackRequirements": [
+        "Versioned rollback plan",
+        "Preserved source",
+        "Rollback rehearsal",
+        "Bounded window"
+      ],
+      "validationCommands": [
+        "python3 scripts/validation/validate-one-legacy-ownership-register.py",
+        "python3 scripts/validation/validate-one-boundaries.py --mode strict --format text"
+      ],
+      "acceptanceCriteria": [
+        "Target ownership is authoritative.",
+        "Parity and reconciliation pass.",
+        "Rollback evidence exists.",
+        "No boundary weakening."
+      ],
+      "restartStatus": "READY_AFTER_PREREQUISITES",
+      "risk": "MEDIUM"
+    },
+    {
+      "taskId": "ONE-A5-P1-14",
+      "title": "Evidence Center Provider Foundation",
+      "conflictIds": [
+        "OWN-UCDE-EVIDENCE-001"
+      ],
+      "migrationWave": "WAVE-1-TARGET-PROVIDERS",
+      "objective": "Implement the bounded Evidence Center Provider Foundation outcome.",
+      "prerequisites": [
+        "Prior migration waves complete",
+        "Frozen contracts and ownership register"
+      ],
+      "allowedPaths": [
+        "Task-specific provider, contract, migration or validation paths to be authorized by that task"
+      ],
+      "expectedRuntimeChanges": [
+        "Only changes explicitly authorized by the future task"
+      ],
+      "prohibitedChanges": [
+        "Generic one-adapter",
+        "Uncontrolled dual write",
+        "Direct cross-module database access",
+        "Unapproved source deletion"
+      ],
+      "contractDependencies": [
+        "vantaris.evidence.v1",
+        "vantaris.trust.v1"
+      ],
+      "dataDependencies": [
+        "STORE-IN_MEMORY_STORE-B2ECBFB0C5E3"
+      ],
+      "migrationRequirements": [
+        "Identifier mapping",
+        "Audit",
+        "Idempotency where applicable",
+        "Reconciliation",
+        "Bounded compatibility"
+      ],
+      "rollbackRequirements": [
+        "Versioned rollback plan",
+        "Preserved source",
+        "Rollback rehearsal",
+        "Bounded window"
+      ],
+      "validationCommands": [
+        "python3 scripts/validation/validate-one-legacy-ownership-register.py",
+        "python3 scripts/validation/validate-one-boundaries.py --mode strict --format text"
+      ],
+      "acceptanceCriteria": [
+        "Target ownership is authoritative.",
+        "Parity and reconciliation pass.",
+        "Rollback evidence exists.",
+        "No boundary weakening."
+      ],
+      "restartStatus": "READY_AFTER_PREREQUISITES",
+      "risk": "MEDIUM"
+    },
+    {
+      "taskId": "ONE-A5-P1-15",
+      "title": "UCDE Evidence Workspace Consumer Migration",
+      "conflictIds": [
+        "OWN-UCDE-EVIDENCE-001"
+      ],
+      "migrationWave": "WAVE-2-READ-MIGRATION",
+      "objective": "Implement the bounded UCDE Evidence Workspace Consumer Migration outcome.",
+      "prerequisites": [
+        "Prior migration waves complete",
+        "Frozen contracts and ownership register"
+      ],
+      "allowedPaths": [
+        "Task-specific provider, contract, migration or validation paths to be authorized by that task"
+      ],
+      "expectedRuntimeChanges": [
+        "Only changes explicitly authorized by the future task"
+      ],
+      "prohibitedChanges": [
+        "Generic one-adapter",
+        "Uncontrolled dual write",
+        "Direct cross-module database access",
+        "Unapproved source deletion"
+      ],
+      "contractDependencies": [
+        "vantaris.evidence.v1",
+        "vantaris.trust.v1"
+      ],
+      "dataDependencies": [
+        "STORE-IN_MEMORY_STORE-B2ECBFB0C5E3"
+      ],
+      "migrationRequirements": [
+        "Identifier mapping",
+        "Audit",
+        "Idempotency where applicable",
+        "Reconciliation",
+        "Bounded compatibility"
+      ],
+      "rollbackRequirements": [
+        "Versioned rollback plan",
+        "Preserved source",
+        "Rollback rehearsal",
+        "Bounded window"
+      ],
+      "validationCommands": [
+        "python3 scripts/validation/validate-one-legacy-ownership-register.py",
+        "python3 scripts/validation/validate-one-boundaries.py --mode strict --format text"
+      ],
+      "acceptanceCriteria": [
+        "Target ownership is authoritative.",
+        "Parity and reconciliation pass.",
+        "Rollback evidence exists.",
+        "No boundary weakening."
+      ],
+      "restartStatus": "READY_AFTER_PREREQUISITES",
+      "risk": "MEDIUM"
+    },
+    {
+      "taskId": "ONE-A5-P1-16",
+      "title": "Legacy Ownership Reconciliation Framework",
+      "conflictIds": [
+        "OWN-DID-IDENTITY-TRUST-001",
+        "OWN-EDGE-CANONICAL-DEVICE-001",
+        "OWN-IOT-CONNECTOR-ASSET-001",
+        "OWN-LEGACY-DEVICE-001",
+        "OWN-MODELING-AI-MODEL-001",
+        "OWN-REPORTS-AUDIT-001",
+        "OWN-UCDE-EVIDENCE-001",
+        "OWN-UCORE-ASSET-001",
+        "OWN-UFMS-PLACEHOLDER-001",
+        "OWN-UMMS-WORKORDER-001"
+      ],
+      "migrationWave": "WAVE-4-RECONCILIATION",
+      "objective": "Implement the bounded Legacy Ownership Reconciliation Framework outcome.",
+      "prerequisites": [
+        "Prior migration waves complete",
+        "Frozen contracts and ownership register"
+      ],
+      "allowedPaths": [
+        "Task-specific provider, contract, migration or validation paths to be authorized by that task"
+      ],
+      "expectedRuntimeChanges": [
+        "Only changes explicitly authorized by the future task"
+      ],
+      "prohibitedChanges": [
+        "Generic one-adapter",
+        "Uncontrolled dual write",
+        "Direct cross-module database access",
+        "Unapproved source deletion"
+      ],
+      "contractDependencies": [
+        "vantaris.ai.v1",
+        "vantaris.asset.v1",
+        "vantaris.audit.v1",
+        "vantaris.device.v1",
+        "vantaris.edge.v1",
+        "vantaris.evidence.v1",
+        "vantaris.identity.v1",
+        "vantaris.integration.v1",
+        "vantaris.maintenance.v1",
+        "vantaris.model.v1",
+        "vantaris.trust.v1",
+        "vantaris.ufms.v1",
+        "vantaris.work.v1"
+      ],
+      "dataDependencies": [
+        "STORE-EXTERNAL_STORE_REFERENCE-FB8F7A39163F",
+        "STORE-IN_MEMORY_STORE-3DB38C5BF13F",
+        "STORE-IN_MEMORY_STORE-44F3FE2E69EA",
+        "STORE-IN_MEMORY_STORE-B2ECBFB0C5E3",
+        "STORE-JSONL_LEDGER-5957388225F4",
+        "STORE-LOCAL_FILESYSTEM-739D44B2A801",
+        "STORE-SQL_TABLE-0EE09B0B9679",
+        "STORE-SQL_TABLE-13DD8929E7DE",
+        "STORE-SQL_TABLE-17CE83F8872C",
+        "STORE-SQL_TABLE-1EE247CB815E",
+        "STORE-SQL_TABLE-3EF25DF256DA",
+        "STORE-SQL_TABLE-5E9C4E4F3E8D",
+        "STORE-SQL_TABLE-6519FE6AA282",
+        "STORE-SQL_TABLE-6A2F49427F0A",
+        "STORE-SQL_TABLE-6CA0E4450C90",
+        "STORE-SQL_TABLE-760B76D35F5B",
+        "STORE-SQL_TABLE-91D45E0F7F9C",
+        "STORE-SQL_TABLE-988D15973D42",
+        "STORE-SQL_TABLE-DA7444B7B5FA",
+        "STORE-SQL_TABLE-FBBE7D555839"
+      ],
+      "migrationRequirements": [
+        "Identifier mapping",
+        "Audit",
+        "Idempotency where applicable",
+        "Reconciliation",
+        "Bounded compatibility"
+      ],
+      "rollbackRequirements": [
+        "Versioned rollback plan",
+        "Preserved source",
+        "Rollback rehearsal",
+        "Bounded window"
+      ],
+      "validationCommands": [
+        "python3 scripts/validation/validate-one-legacy-ownership-register.py",
+        "python3 scripts/validation/validate-one-boundaries.py --mode strict --format text"
+      ],
+      "acceptanceCriteria": [
+        "Target ownership is authoritative.",
+        "Parity and reconciliation pass.",
+        "Rollback evidence exists.",
+        "No boundary weakening."
+      ],
+      "restartStatus": "READY_AFTER_PREREQUISITES",
+      "risk": "HIGH"
+    },
+    {
+      "taskId": "ONE-A5-P1-17",
+      "title": "Legacy Exception Retirement Gate",
+      "conflictIds": [
+        "OWN-LEGACY-DEVICE-001",
+        "OWN-REPORTS-AUDIT-001",
+        "OWN-UCDE-EVIDENCE-001",
+        "OWN-UMMS-WORKORDER-001"
+      ],
+      "migrationWave": "WAVE-5-LEGACY-RETIREMENT",
+      "objective": "Implement the bounded Legacy Exception Retirement Gate outcome.",
+      "prerequisites": [
+        "Prior migration waves complete",
+        "Frozen contracts and ownership register"
+      ],
+      "allowedPaths": [
+        "Task-specific provider, contract, migration or validation paths to be authorized by that task"
+      ],
+      "expectedRuntimeChanges": [
+        "Only changes explicitly authorized by the future task"
+      ],
+      "prohibitedChanges": [
+        "Generic one-adapter",
+        "Uncontrolled dual write",
+        "Direct cross-module database access",
+        "Unapproved source deletion"
+      ],
+      "contractDependencies": [
+        "vantaris.audit.v1",
+        "vantaris.device.v1",
+        "vantaris.edge.v1",
+        "vantaris.evidence.v1",
+        "vantaris.maintenance.v1",
+        "vantaris.trust.v1",
+        "vantaris.work.v1"
+      ],
+      "dataDependencies": [
+        "STORE-IN_MEMORY_STORE-44F3FE2E69EA",
+        "STORE-IN_MEMORY_STORE-B2ECBFB0C5E3",
+        "STORE-JSONL_LEDGER-5957388225F4",
+        "STORE-SQL_TABLE-3EF25DF256DA",
+        "STORE-SQL_TABLE-760B76D35F5B"
+      ],
+      "migrationRequirements": [
+        "Identifier mapping",
+        "Audit",
+        "Idempotency where applicable",
+        "Reconciliation",
+        "Bounded compatibility"
+      ],
+      "rollbackRequirements": [
+        "Versioned rollback plan",
+        "Preserved source",
+        "Rollback rehearsal",
+        "Bounded window"
+      ],
+      "validationCommands": [
+        "python3 scripts/validation/validate-one-legacy-ownership-register.py",
+        "python3 scripts/validation/validate-one-boundaries.py --mode strict --format text"
+      ],
+      "acceptanceCriteria": [
+        "Target ownership is authoritative.",
+        "Parity and reconciliation pass.",
+        "Rollback evidence exists.",
+        "No boundary weakening."
+      ],
+      "restartStatus": "READY_AFTER_PREREQUISITES",
+      "risk": "HIGH"
+    }
+  ],
+  "dualWritePolicy": {
+    "defaultAllowed": false,
+    "mandatoryControlsForAnyFutureProposal": [
+      "authoritativeWriteResult",
+      "durableOutboxOrTransactionBoundary",
+      "deterministicIdempotency",
+      "reconciliationLedger",
+      "failureRecovery",
+      "audit",
+      "cutoverPlan",
+      "rollbackPlan",
+      "boundedDuration",
+      "ownerApproval"
+    ],
+    "approvedProposals": [],
+    "preferredAlternatives": [
+      "TARGET_FIRST_WRITE_WITH_LEGACY_PROJECTION",
+      "LEGACY_FIRST_COMPATIBILITY_DURING_TARGET_BUILD",
+      "OFFLINE_MIGRATION",
+      "READ_FACADE",
+      "CONTROLLED_CUTOVER"
+    ]
+  }
+}

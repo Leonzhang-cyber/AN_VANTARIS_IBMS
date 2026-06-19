@@ -1,0 +1,1003 @@
+{
+  "registryName": "VANTARIS ONE Legacy Physical Store Owner Map",
+  "registryVersion": "1.0.0",
+  "authority": "ONE-A5-P0-08",
+  "status": "FROZEN_LEGACY_STORE_BASELINE",
+  "generatedAtPolicy": "STATIC_ARCHITECTURE_BASELINE",
+  "extractionPolicy": {
+    "mode": "PYTHON_AST_AND_CONSERVATIVE_STATIC_TEXT",
+    "backendImportExecution": false,
+    "databaseConnection": false,
+    "modelExecution": false,
+    "physicalTablePolicy": "ONLY_EXPLICIT_TABLENAME_DECLARATIONS",
+    "duplicatePhysicalNamePolicy": "ONE_STORE_WITH_ALL_MODEL_DECLARATIONS_NOTED",
+    "unresolvedPolicy": "RETAIN_EXPLICITLY"
+  },
+  "summary": {
+    "totalStores": 21,
+    "sqlTables": 14,
+    "ormModels": 0,
+    "jsonStores": 0,
+    "jsonlStores": 1,
+    "localFilesystemStores": 1,
+    "inMemoryStores": 4,
+    "correctOwnerStores": 3,
+    "legacyOwnerStores": 5,
+    "mixedResponsibilityStores": 7,
+    "placeholderStores": 5,
+    "unresolvedStores": 0,
+    "storesByCurrentModule": {
+      "AN_VANTARIS_EDGE": 1,
+      "Legacy DID": 4,
+      "Legacy DID / UCore": 2,
+      "Legacy IoT": 5,
+      "Nexus AI": 1,
+      "ONE Asset Graph": 1,
+      "Reports": 1,
+      "UCDE": 1,
+      "UCore": 3,
+      "UMMS": 1,
+      "VANTARIS ONE UFMS Integration Boundary": 1
+    },
+    "storesByCanonicalOwner": {
+      "AN_VANTARIS_EDGE": 2,
+      "AN_VANTARIS_EDGE / ONE Asset Graph": 1,
+      "Evidence Center / Evidence Center / Trust": 1,
+      "Evidence Center / Trust": 2,
+      "Governance & Security": 4,
+      "Nexus AI / AI Model Hub": 1,
+      "ONE Asset Graph": 1,
+      "ONE Asset Graph / AN_VANTARIS_EDGE / Governance & Security": 1,
+      "ONE Work Management / UMMS": 1,
+      "UCore": 3,
+      "UFMS": 1,
+      "Unified Data Model": 1,
+      "Unified Data Model / AN_VANTARIS_EDGE": 1,
+      "Unified Data Model / ONE Asset Graph": 1
+    },
+    "storesByMigrationClass": {
+      "CONTRACT_FIRST": 8,
+      "DATA_COPY_AND_RECONCILE": 1,
+      "NO_MIGRATION": 3,
+      "OWNERSHIP_SPLIT": 3,
+      "READ_FACADE": 2,
+      "STRANGLER_MIGRATION": 4
+    }
+  },
+  "physicalStores": [
+    {
+      "storeId": "STORE-EXTERNAL_STORE_REFERENCE-FB8F7A39163F",
+      "storeType": "EXTERNAL_STORE_REFERENCE",
+      "sourcePath": "AN_VANTARIS_ONE/registries/api-namespace-registry.v1.json",
+      "line": 298,
+      "symbol": "/api/v1/adapters/ufms",
+      "physicalName": "UFMS_EXTERNAL_INTEGRATION_REFERENCE",
+      "currentModule": "VANTARIS ONE UFMS Integration Boundary",
+      "currentPackage": "PKG-UFMS-INTEGRATION",
+      "currentSemanticObjects": [
+        "InterpretedEvent",
+        "Alarm",
+        "Episode",
+        "Problem",
+        "FaultCase",
+        "WorkOrderIntent"
+      ],
+      "currentPersistenceRole": "EXTERNAL_PRODUCT_REFERENCE_ONLY",
+      "canonicalObjects": [
+        "InterpretedEvent",
+        "Alarm",
+        "Episode",
+        "Problem",
+        "FaultCase",
+        "WorkOrderIntent"
+      ],
+      "canonicalOwner": "UFMS",
+      "targetSystemOfRecord": "UFMS",
+      "targetPackage": "PKG-UFMS-INTEGRATION",
+      "ownershipStatus": "PLACEHOLDER",
+      "migrationClass": "CONTRACT_FIRST",
+      "compatibilityFacadeRequired": false,
+      "dualReadAllowed": false,
+      "dualWriteAllowed": false,
+      "dataReconciliationRequired": false,
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "retentionRequirement": "PRESERVE_UNTIL_RECONCILIATION_ROLLBACK_AND_RETIREMENT_GATES_PASS",
+      "migrationPrerequisites": [
+        "FROZEN_CONTRACT",
+        "TARGET_PROVIDER_AVAILABLE",
+        "IDENTIFIER_MAPPING_DEFINED"
+      ],
+      "proposedMigrationTask": "ONE-A5-P1-16",
+      "rollbackRequirement": "PRESERVE_LEGACY_READ_PATH_AND_IMMUTABLE_SOURCE_UNTIL_ROLLBACK_WINDOW_CLOSES",
+      "removalGate": "TARGET_PARITY_RECONCILIATION_STRICT_SCANNER_AND_APPROVAL",
+      "scannerConfidence": "HIGH",
+      "notes": [
+        "UFMS is external; no UFMS physical table is asserted or absorbed into ONE.",
+        "LIVE_UFMS_VERIFICATION_REQUIRED for implementation endpoints, payloads, authentication, errors, versions, pagination, and delivery mode."
+      ]
+    },
+    {
+      "storeId": "STORE-IN_MEMORY_STORE-3DB38C5BF13F",
+      "storeType": "IN_MEMORY_STORE",
+      "sourcePath": "AN_VANTARIS_IBMS-backend/src/uedge/uedge_provider.py",
+      "line": 51,
+      "symbol": "customer_setup_steps",
+      "physicalName": "uedge:runtime_placeholder",
+      "currentModule": "AN_VANTARIS_EDGE",
+      "currentPackage": "PKG-EDGE",
+      "currentSemanticObjects": [
+        "GatewayRuntime",
+        "ConnectorRuntime",
+        "DiscoveryObservation"
+      ],
+      "currentPersistenceRole": "READ_ONLY_RUNTIME_DIAGNOSTIC_PLACEHOLDER",
+      "canonicalObjects": [
+        "GatewayRuntime",
+        "ConnectorRuntime",
+        "DiscoveryObservation"
+      ],
+      "canonicalOwner": "AN_VANTARIS_EDGE",
+      "targetSystemOfRecord": "AN_VANTARIS_EDGE",
+      "targetPackage": "PKG-EDGE",
+      "ownershipStatus": "PLACEHOLDER",
+      "migrationClass": "CONTRACT_FIRST",
+      "compatibilityFacadeRequired": false,
+      "dualReadAllowed": false,
+      "dualWriteAllowed": false,
+      "dataReconciliationRequired": false,
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "retentionRequirement": "PRESERVE_UNTIL_RECONCILIATION_ROLLBACK_AND_RETIREMENT_GATES_PASS",
+      "migrationPrerequisites": [
+        "FROZEN_CONTRACT",
+        "TARGET_PROVIDER_AVAILABLE",
+        "IDENTIFIER_MAPPING_DEFINED"
+      ],
+      "proposedMigrationTask": "ONE-A5-P1-07",
+      "rollbackRequirement": "PRESERVE_LEGACY_READ_PATH_AND_IMMUTABLE_SOURCE_UNTIL_ROLLBACK_WINDOW_CLOSES",
+      "removalGate": "TARGET_PARITY_RECONCILIATION_STRICT_SCANNER_AND_APPROVAL",
+      "scannerConfidence": "HIGH",
+      "notes": [
+        "EDGE owns runtime connectivity and discovery, not canonical Device or Point identity."
+      ]
+    },
+    {
+      "storeId": "STORE-IN_MEMORY_STORE-44F3FE2E69EA",
+      "storeType": "IN_MEMORY_STORE",
+      "sourcePath": "AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py",
+      "line": 91,
+      "symbol": "_base_work_orders",
+      "physicalName": "umms:_base_work_orders",
+      "currentModule": "UMMS",
+      "currentPackage": "PKG-UMMS",
+      "currentSemanticObjects": [
+        "WorkOrder",
+        "MaintenanceFinding"
+      ],
+      "currentPersistenceRole": "READ_ONLY_MOCK_PROVIDER",
+      "canonicalObjects": [
+        "WorkOrder",
+        "MaintenanceFinding"
+      ],
+      "canonicalOwner": "ONE Work Management / UMMS",
+      "targetSystemOfRecord": "ONE Work Management for generic lifecycle; UMMS for maintenance extensions",
+      "targetPackage": "PKG-WORK-MANAGEMENT",
+      "ownershipStatus": "PLACEHOLDER",
+      "migrationClass": "STRANGLER_MIGRATION",
+      "compatibilityFacadeRequired": true,
+      "dualReadAllowed": true,
+      "dualWriteAllowed": false,
+      "dataReconciliationRequired": true,
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "retentionRequirement": "PRESERVE_UNTIL_RECONCILIATION_ROLLBACK_AND_RETIREMENT_GATES_PASS",
+      "migrationPrerequisites": [
+        "FROZEN_CONTRACT",
+        "TARGET_PROVIDER_AVAILABLE",
+        "IDENTIFIER_MAPPING_DEFINED"
+      ],
+      "proposedMigrationTask": "ONE-A5-P1-12",
+      "rollbackRequirement": "PRESERVE_LEGACY_READ_PATH_AND_IMMUTABLE_SOURCE_UNTIL_ROLLBACK_WINDOW_CLOSES",
+      "removalGate": "TARGET_PARITY_RECONCILIATION_STRICT_SCANNER_AND_APPROVAL",
+      "scannerConfidence": "HIGH",
+      "notes": [
+        "mockData=true, readOnly=true, and DB persistence is explicitly absent."
+      ]
+    },
+    {
+      "storeId": "STORE-IN_MEMORY_STORE-AC67D062FC4C",
+      "storeType": "IN_MEMORY_STORE",
+      "sourcePath": "AN_VANTARIS_IBMS-backend/src/assets/assets_provider.py",
+      "line": 80,
+      "symbol": "_base_assets",
+      "physicalName": "assets:_base_assets",
+      "currentModule": "ONE Asset Graph",
+      "currentPackage": "PKG-ASSET-GRAPH",
+      "currentSemanticObjects": [
+        "Asset",
+        "Equipment"
+      ],
+      "currentPersistenceRole": "READ_ONLY_MOCK_PROVIDER",
+      "canonicalObjects": [
+        "Asset",
+        "Equipment"
+      ],
+      "canonicalOwner": "ONE Asset Graph",
+      "targetSystemOfRecord": "ONE Asset Graph",
+      "targetPackage": "PKG-ASSET-GRAPH",
+      "ownershipStatus": "PLACEHOLDER",
+      "migrationClass": "CONTRACT_FIRST",
+      "compatibilityFacadeRequired": false,
+      "dualReadAllowed": false,
+      "dualWriteAllowed": false,
+      "dataReconciliationRequired": false,
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "retentionRequirement": "PRESERVE_UNTIL_RECONCILIATION_ROLLBACK_AND_RETIREMENT_GATES_PASS",
+      "migrationPrerequisites": [
+        "FROZEN_CONTRACT",
+        "TARGET_PROVIDER_AVAILABLE",
+        "IDENTIFIER_MAPPING_DEFINED"
+      ],
+      "proposedMigrationTask": "ONE-A5-P1-07",
+      "rollbackRequirement": "PRESERVE_LEGACY_READ_PATH_AND_IMMUTABLE_SOURCE_UNTIL_ROLLBACK_WINDOW_CLOSES",
+      "removalGate": "TARGET_PARITY_RECONCILIATION_STRICT_SCANNER_AND_APPROVAL",
+      "scannerConfidence": "HIGH",
+      "notes": [
+        "Correct semantic owner, but provider is placeholder data rather than a durable canonical store."
+      ]
+    },
+    {
+      "storeId": "STORE-IN_MEMORY_STORE-B2ECBFB0C5E3",
+      "storeType": "IN_MEMORY_STORE",
+      "sourcePath": "AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py",
+      "line": 124,
+      "symbol": "_base_records",
+      "physicalName": "ucde:_base_records",
+      "currentModule": "UCDE",
+      "currentPackage": "PKG-UCDE",
+      "currentSemanticObjects": [
+        "EvidenceRecord",
+        "EvidenceRelationship",
+        "HashAnchor"
+      ],
+      "currentPersistenceRole": "READ_ONLY_MOCK_PROVIDER",
+      "canonicalObjects": [
+        "EvidenceRecord",
+        "EvidenceRelationship",
+        "HashAnchor"
+      ],
+      "canonicalOwner": "Evidence Center / Evidence Center / Trust",
+      "targetSystemOfRecord": "Evidence Center and Governance & Security / Trust",
+      "targetPackage": "PKG-EVIDENCE-CENTER",
+      "ownershipStatus": "PLACEHOLDER",
+      "migrationClass": "STRANGLER_MIGRATION",
+      "compatibilityFacadeRequired": true,
+      "dualReadAllowed": true,
+      "dualWriteAllowed": false,
+      "dataReconciliationRequired": true,
+      "auditRequired": true,
+      "evidenceRequired": true,
+      "retentionRequirement": "PRESERVE_UNTIL_RECONCILIATION_ROLLBACK_AND_RETIREMENT_GATES_PASS",
+      "migrationPrerequisites": [
+        "FROZEN_CONTRACT",
+        "TARGET_PROVIDER_AVAILABLE",
+        "IDENTIFIER_MAPPING_DEFINED"
+      ],
+      "proposedMigrationTask": "ONE-A5-P1-14",
+      "rollbackRequirement": "PRESERVE_LEGACY_READ_PATH_AND_IMMUTABLE_SOURCE_UNTIL_ROLLBACK_WINDOW_CLOSES",
+      "removalGate": "TARGET_PARITY_RECONCILIATION_STRICT_SCANNER_AND_APPROVAL",
+      "scannerConfidence": "HIGH",
+      "notes": [
+        "UCDE is the investigation workspace consumer; it is not the EvidenceRecord system of record."
+      ]
+    },
+    {
+      "storeId": "STORE-JSONL_LEDGER-5957388225F4",
+      "storeType": "JSONL_LEDGER",
+      "sourcePath": "AN_VANTARIS_IBMS-backend/src/reports/reports_audit_store.py",
+      "line": 20,
+      "symbol": "get_audit_store_path",
+      "physicalName": "runtime/reports_audit/reports_audit.jsonl",
+      "currentModule": "Reports",
+      "currentPackage": "PKG-REPORTS",
+      "currentSemanticObjects": [
+        "AuditRecord"
+      ],
+      "currentPersistenceRole": "LOCAL_AUDIT_READINESS_LEDGER",
+      "canonicalObjects": [
+        "AuditRecord"
+      ],
+      "canonicalOwner": "Governance & Security",
+      "targetSystemOfRecord": "Governance & Security Audit Service",
+      "targetPackage": "PKG-GOVERNANCE-SECURITY",
+      "ownershipStatus": "LEGACY_OWNER",
+      "migrationClass": "DATA_COPY_AND_RECONCILE",
+      "compatibilityFacadeRequired": false,
+      "dualReadAllowed": true,
+      "dualWriteAllowed": false,
+      "dataReconciliationRequired": true,
+      "auditRequired": true,
+      "evidenceRequired": true,
+      "retentionRequirement": "PRESERVE_UNTIL_RECONCILIATION_ROLLBACK_AND_RETIREMENT_GATES_PASS",
+      "migrationPrerequisites": [
+        "FROZEN_CONTRACT",
+        "TARGET_PROVIDER_AVAILABLE",
+        "IDENTIFIER_MAPPING_DEFINED"
+      ],
+      "proposedMigrationTask": "ONE-A5-P1-10",
+      "rollbackRequirement": "PRESERVE_LEGACY_READ_PATH_AND_IMMUTABLE_SOURCE_UNTIL_ROLLBACK_WINDOW_CLOSES",
+      "removalGate": "TARGET_PARITY_RECONCILIATION_STRICT_SCANNER_AND_APPROVAL",
+      "scannerConfidence": "HIGH",
+      "notes": [
+        "Local hash-chain JSONL is compatibility-only and not the target AuditRecord system of record."
+      ]
+    },
+    {
+      "storeId": "STORE-LOCAL_FILESYSTEM-739D44B2A801",
+      "storeType": "LOCAL_FILESYSTEM",
+      "sourcePath": "AN_VANTARIS_IBMS-backend/src/data_modeling/csv_storage.py",
+      "line": 34,
+      "symbol": "CSVStorage",
+      "physicalName": "data_modeling/device_code.csv",
+      "currentModule": "Nexus AI",
+      "currentPackage": "PKG-NEXUS-AI",
+      "currentSemanticObjects": [
+        "AITrace",
+        "ModelMetadata"
+      ],
+      "currentPersistenceRole": "LOCAL_MODELING_DATASET_STORE",
+      "canonicalObjects": [
+        "AITrace",
+        "ModelMetadata"
+      ],
+      "canonicalOwner": "Nexus AI / AI Model Hub",
+      "targetSystemOfRecord": "Nexus AI request trace and AI Model Hub model metadata",
+      "targetPackage": "PKG-NEXUS-AI",
+      "ownershipStatus": "LOCAL_FALLBACK",
+      "migrationClass": "OWNERSHIP_SPLIT",
+      "compatibilityFacadeRequired": true,
+      "dualReadAllowed": true,
+      "dualWriteAllowed": false,
+      "dataReconciliationRequired": true,
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "retentionRequirement": "PRESERVE_UNTIL_RECONCILIATION_ROLLBACK_AND_RETIREMENT_GATES_PASS",
+      "migrationPrerequisites": [
+        "FROZEN_CONTRACT",
+        "TARGET_PROVIDER_AVAILABLE",
+        "IDENTIFIER_MAPPING_DEFINED"
+      ],
+      "proposedMigrationTask": "ONE-A5-P1-16",
+      "rollbackRequirement": "PRESERVE_LEGACY_READ_PATH_AND_IMMUTABLE_SOURCE_UNTIL_ROLLBACK_WINDOW_CLOSES",
+      "removalGate": "TARGET_PARITY_RECONCILIATION_STRICT_SCANNER_AND_APPROVAL",
+      "scannerConfidence": "HIGH",
+      "notes": [
+        "Local per-device CSV persistence mixes request data and model-related concerns."
+      ]
+    },
+    {
+      "storeId": "STORE-SQL_TABLE-0EE09B0B9679",
+      "storeType": "SQL_TABLE",
+      "sourcePath": "AN_VANTARIS_IBMS-backend/src/DID/models.py",
+      "line": 41,
+      "symbol": "EntityRelationship",
+      "physicalName": "imbs_relationship",
+      "currentModule": "Legacy DID",
+      "currentPackage": "PKG-GOVERNANCE-SECURITY",
+      "currentSemanticObjects": [
+        "EntityRelationship",
+        "Identity relationship"
+      ],
+      "currentPersistenceRole": "AUTHORITATIVE_OR_LEGACY_RELATIONAL_PERSISTENCE",
+      "canonicalObjects": [],
+      "canonicalOwner": "Governance & Security",
+      "targetSystemOfRecord": "Governance & Security",
+      "targetPackage": "PKG-GOVERNANCE-SECURITY",
+      "ownershipStatus": "LEGACY_OWNER",
+      "migrationClass": "CONTRACT_FIRST",
+      "compatibilityFacadeRequired": false,
+      "dualReadAllowed": false,
+      "dualWriteAllowed": false,
+      "dataReconciliationRequired": false,
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "retentionRequirement": "PRESERVE_UNTIL_RECONCILIATION_ROLLBACK_AND_RETIREMENT_GATES_PASS",
+      "migrationPrerequisites": [
+        "FROZEN_CONTRACT",
+        "TARGET_PROVIDER_AVAILABLE",
+        "IDENTIFIER_MAPPING_DEFINED"
+      ],
+      "proposedMigrationTask": "ONE-A5-P1-16",
+      "rollbackRequirement": "PRESERVE_LEGACY_READ_PATH_AND_IMMUTABLE_SOURCE_UNTIL_ROLLBACK_WINDOW_CLOSES",
+      "removalGate": "TARGET_PARITY_RECONCILIATION_STRICT_SCANNER_AND_APPROVAL",
+      "scannerConfidence": "HIGH",
+      "notes": [
+        "Explicit SQLAlchemy __tablename__ declaration.",
+        "All model declarations for this physical table: AN_VANTARIS_IBMS-backend/src/DID/models.py:EntityRelationship",
+        "Physical storage does not determine frozen semantic ownership."
+      ]
+    },
+    {
+      "storeId": "STORE-SQL_TABLE-13DD8929E7DE",
+      "storeType": "SQL_TABLE",
+      "sourcePath": "AN_VANTARIS_IBMS-backend/src/DID/models.py",
+      "line": 82,
+      "symbol": "VCAnchor",
+      "physicalName": "imbs_vc_anchor",
+      "currentModule": "Legacy DID",
+      "currentPackage": "PKG-GOVERNANCE-SECURITY",
+      "currentSemanticObjects": [
+        "HashAnchor",
+        "VCAnchor"
+      ],
+      "currentPersistenceRole": "AUTHORITATIVE_OR_LEGACY_RELATIONAL_PERSISTENCE",
+      "canonicalObjects": [
+        "HashAnchor"
+      ],
+      "canonicalOwner": "Evidence Center / Trust",
+      "targetSystemOfRecord": "Governance & Security / Trust",
+      "targetPackage": "PKG-GOVERNANCE-SECURITY",
+      "ownershipStatus": "MIXED_RESPONSIBILITY",
+      "migrationClass": "READ_FACADE",
+      "compatibilityFacadeRequired": true,
+      "dualReadAllowed": true,
+      "dualWriteAllowed": false,
+      "dataReconciliationRequired": false,
+      "auditRequired": true,
+      "evidenceRequired": true,
+      "retentionRequirement": "PRESERVE_UNTIL_RECONCILIATION_ROLLBACK_AND_RETIREMENT_GATES_PASS",
+      "migrationPrerequisites": [
+        "FROZEN_CONTRACT",
+        "TARGET_PROVIDER_AVAILABLE",
+        "IDENTIFIER_MAPPING_DEFINED"
+      ],
+      "proposedMigrationTask": "ONE-A5-P1-16",
+      "rollbackRequirement": "PRESERVE_LEGACY_READ_PATH_AND_IMMUTABLE_SOURCE_UNTIL_ROLLBACK_WINDOW_CLOSES",
+      "removalGate": "TARGET_PARITY_RECONCILIATION_STRICT_SCANNER_AND_APPROVAL",
+      "scannerConfidence": "HIGH",
+      "notes": [
+        "Explicit SQLAlchemy __tablename__ declaration.",
+        "All model declarations for this physical table: AN_VANTARIS_IBMS-backend/src/DID/models.py:VCAnchor",
+        "Physical storage does not determine frozen semantic ownership."
+      ]
+    },
+    {
+      "storeId": "STORE-SQL_TABLE-17CE83F8872C",
+      "storeType": "SQL_TABLE",
+      "sourcePath": "AN_VANTARIS_IBMS-backend/src/system/menu_models.py",
+      "line": 14,
+      "symbol": "SysVersion",
+      "physicalName": "sys_version",
+      "currentModule": "UCore",
+      "currentPackage": "PKG-UCORE",
+      "currentSemanticObjects": [
+        "OperationalContext",
+        "SysVersion"
+      ],
+      "currentPersistenceRole": "AUTHORITATIVE_OR_LEGACY_RELATIONAL_PERSISTENCE",
+      "canonicalObjects": [
+        "OperationalContext"
+      ],
+      "canonicalOwner": "UCore",
+      "targetSystemOfRecord": "UCore",
+      "targetPackage": "PKG-UCORE",
+      "ownershipStatus": "CORRECT_OWNER",
+      "migrationClass": "NO_MIGRATION",
+      "compatibilityFacadeRequired": false,
+      "dualReadAllowed": false,
+      "dualWriteAllowed": false,
+      "dataReconciliationRequired": false,
+      "auditRequired": false,
+      "evidenceRequired": false,
+      "retentionRequirement": "PRESERVE_UNTIL_RECONCILIATION_ROLLBACK_AND_RETIREMENT_GATES_PASS",
+      "migrationPrerequisites": [
+        "FROZEN_CONTRACT",
+        "TARGET_PROVIDER_AVAILABLE",
+        "IDENTIFIER_MAPPING_DEFINED"
+      ],
+      "proposedMigrationTask": "ONE-A5-P1-16",
+      "rollbackRequirement": "PRESERVE_LEGACY_READ_PATH_AND_IMMUTABLE_SOURCE_UNTIL_ROLLBACK_WINDOW_CLOSES",
+      "removalGate": "TARGET_PARITY_RECONCILIATION_STRICT_SCANNER_AND_APPROVAL",
+      "scannerConfidence": "HIGH",
+      "notes": [
+        "Explicit SQLAlchemy __tablename__ declaration.",
+        "All model declarations for this physical table: AN_VANTARIS_IBMS-backend/src/system/menu_models.py:SysVersion",
+        "Physical storage does not determine frozen semantic ownership."
+      ]
+    },
+    {
+      "storeId": "STORE-SQL_TABLE-1EE247CB815E",
+      "storeType": "SQL_TABLE",
+      "sourcePath": "AN_VANTARIS_IBMS-backend/src/Iot/models.py",
+      "line": 72,
+      "symbol": "IMSMethodMapping",
+      "physicalName": "imbs_method_mapping",
+      "currentModule": "Legacy IoT",
+      "currentPackage": "PKG-UNIFIED-DATA-MODEL",
+      "currentSemanticObjects": [
+        "ConnectorRuntime",
+        "IMSMethodMapping",
+        "MappingCandidate"
+      ],
+      "currentPersistenceRole": "AUTHORITATIVE_OR_LEGACY_RELATIONAL_PERSISTENCE",
+      "canonicalObjects": [
+        "MappingCandidate",
+        "ConnectorRuntime"
+      ],
+      "canonicalOwner": "AN_VANTARIS_EDGE",
+      "targetSystemOfRecord": "AN_VANTARIS_EDGE",
+      "targetPackage": "PKG-EDGE",
+      "ownershipStatus": "LEGACY_OWNER",
+      "migrationClass": "STRANGLER_MIGRATION",
+      "compatibilityFacadeRequired": true,
+      "dualReadAllowed": true,
+      "dualWriteAllowed": false,
+      "dataReconciliationRequired": true,
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "retentionRequirement": "PRESERVE_UNTIL_RECONCILIATION_ROLLBACK_AND_RETIREMENT_GATES_PASS",
+      "migrationPrerequisites": [
+        "FROZEN_CONTRACT",
+        "TARGET_PROVIDER_AVAILABLE",
+        "IDENTIFIER_MAPPING_DEFINED"
+      ],
+      "proposedMigrationTask": "ONE-A5-P1-09",
+      "rollbackRequirement": "PRESERVE_LEGACY_READ_PATH_AND_IMMUTABLE_SOURCE_UNTIL_ROLLBACK_WINDOW_CLOSES",
+      "removalGate": "TARGET_PARITY_RECONCILIATION_STRICT_SCANNER_AND_APPROVAL",
+      "scannerConfidence": "HIGH",
+      "notes": [
+        "Explicit SQLAlchemy __tablename__ declaration.",
+        "All model declarations for this physical table: AN_VANTARIS_IBMS-backend/src/Iot/models.py:IMSMethodMapping",
+        "Physical storage does not determine frozen semantic ownership."
+      ]
+    },
+    {
+      "storeId": "STORE-SQL_TABLE-3EF25DF256DA",
+      "storeType": "SQL_TABLE",
+      "sourcePath": "AN_VANTARIS_IBMS-backend/src/Iot/models.py",
+      "line": 36,
+      "symbol": "IMSStandardField",
+      "physicalName": "imbs_standard_field",
+      "currentModule": "Legacy IoT",
+      "currentPackage": "PKG-UNIFIED-DATA-MODEL",
+      "currentSemanticObjects": [
+        "IMSStandardField",
+        "Point",
+        "Tag"
+      ],
+      "currentPersistenceRole": "AUTHORITATIVE_OR_LEGACY_RELATIONAL_PERSISTENCE",
+      "canonicalObjects": [
+        "Point",
+        "Tag"
+      ],
+      "canonicalOwner": "Unified Data Model / ONE Asset Graph",
+      "targetSystemOfRecord": "Unified Data Model and ONE Asset Graph",
+      "targetPackage": "PKG-UNIFIED-DATA-MODEL",
+      "ownershipStatus": "MIXED_RESPONSIBILITY",
+      "migrationClass": "CONTRACT_FIRST",
+      "compatibilityFacadeRequired": false,
+      "dualReadAllowed": false,
+      "dualWriteAllowed": false,
+      "dataReconciliationRequired": false,
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "retentionRequirement": "PRESERVE_UNTIL_RECONCILIATION_ROLLBACK_AND_RETIREMENT_GATES_PASS",
+      "migrationPrerequisites": [
+        "FROZEN_CONTRACT",
+        "TARGET_PROVIDER_AVAILABLE",
+        "IDENTIFIER_MAPPING_DEFINED"
+      ],
+      "proposedMigrationTask": "ONE-A5-P1-07",
+      "rollbackRequirement": "PRESERVE_LEGACY_READ_PATH_AND_IMMUTABLE_SOURCE_UNTIL_ROLLBACK_WINDOW_CLOSES",
+      "removalGate": "TARGET_PARITY_RECONCILIATION_STRICT_SCANNER_AND_APPROVAL",
+      "scannerConfidence": "HIGH",
+      "notes": [
+        "Explicit SQLAlchemy __tablename__ declaration.",
+        "All model declarations for this physical table: AN_VANTARIS_IBMS-backend/src/Iot/models.py:IMSStandardField",
+        "Physical storage does not determine frozen semantic ownership."
+      ]
+    },
+    {
+      "storeId": "STORE-SQL_TABLE-5E9C4E4F3E8D",
+      "storeType": "SQL_TABLE",
+      "sourcePath": "AN_VANTARIS_IBMS-backend/src/DID/models.py",
+      "line": 56,
+      "symbol": "User",
+      "physicalName": "imbs_users",
+      "currentModule": "Legacy DID",
+      "currentPackage": "PKG-GOVERNANCE-SECURITY",
+      "currentSemanticObjects": [
+        "Credential reference",
+        "Identity",
+        "User"
+      ],
+      "currentPersistenceRole": "AUTHORITATIVE_OR_LEGACY_RELATIONAL_PERSISTENCE",
+      "canonicalObjects": [],
+      "canonicalOwner": "Governance & Security",
+      "targetSystemOfRecord": "Governance & Security identity service",
+      "targetPackage": "PKG-GOVERNANCE-SECURITY",
+      "ownershipStatus": "LEGACY_OWNER",
+      "migrationClass": "STRANGLER_MIGRATION",
+      "compatibilityFacadeRequired": true,
+      "dualReadAllowed": true,
+      "dualWriteAllowed": false,
+      "dataReconciliationRequired": true,
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "retentionRequirement": "PRESERVE_UNTIL_RECONCILIATION_ROLLBACK_AND_RETIREMENT_GATES_PASS",
+      "migrationPrerequisites": [
+        "FROZEN_CONTRACT",
+        "TARGET_PROVIDER_AVAILABLE",
+        "IDENTIFIER_MAPPING_DEFINED"
+      ],
+      "proposedMigrationTask": "ONE-A5-P1-16",
+      "rollbackRequirement": "PRESERVE_LEGACY_READ_PATH_AND_IMMUTABLE_SOURCE_UNTIL_ROLLBACK_WINDOW_CLOSES",
+      "removalGate": "TARGET_PARITY_RECONCILIATION_STRICT_SCANNER_AND_APPROVAL",
+      "scannerConfidence": "HIGH",
+      "notes": [
+        "Explicit SQLAlchemy __tablename__ declaration.",
+        "All model declarations for this physical table: AN_VANTARIS_IBMS-backend/src/DID/models.py:User",
+        "Physical storage does not determine frozen semantic ownership."
+      ]
+    },
+    {
+      "storeId": "STORE-SQL_TABLE-6519FE6AA282",
+      "storeType": "SQL_TABLE",
+      "sourcePath": "AN_VANTARIS_IBMS-backend/src/DID/models.py",
+      "line": 95,
+      "symbol": "VCRevocation",
+      "physicalName": "imbs_vc_revocation",
+      "currentModule": "Legacy DID",
+      "currentPackage": "PKG-GOVERNANCE-SECURITY",
+      "currentSemanticObjects": [
+        "HashAnchor",
+        "VCRevocation"
+      ],
+      "currentPersistenceRole": "AUTHORITATIVE_OR_LEGACY_RELATIONAL_PERSISTENCE",
+      "canonicalObjects": [
+        "HashAnchor"
+      ],
+      "canonicalOwner": "Evidence Center / Trust",
+      "targetSystemOfRecord": "Governance & Security / Trust",
+      "targetPackage": "PKG-GOVERNANCE-SECURITY",
+      "ownershipStatus": "MIXED_RESPONSIBILITY",
+      "migrationClass": "READ_FACADE",
+      "compatibilityFacadeRequired": true,
+      "dualReadAllowed": true,
+      "dualWriteAllowed": false,
+      "dataReconciliationRequired": false,
+      "auditRequired": true,
+      "evidenceRequired": true,
+      "retentionRequirement": "PRESERVE_UNTIL_RECONCILIATION_ROLLBACK_AND_RETIREMENT_GATES_PASS",
+      "migrationPrerequisites": [
+        "FROZEN_CONTRACT",
+        "TARGET_PROVIDER_AVAILABLE",
+        "IDENTIFIER_MAPPING_DEFINED"
+      ],
+      "proposedMigrationTask": "ONE-A5-P1-16",
+      "rollbackRequirement": "PRESERVE_LEGACY_READ_PATH_AND_IMMUTABLE_SOURCE_UNTIL_ROLLBACK_WINDOW_CLOSES",
+      "removalGate": "TARGET_PARITY_RECONCILIATION_STRICT_SCANNER_AND_APPROVAL",
+      "scannerConfidence": "HIGH",
+      "notes": [
+        "Explicit SQLAlchemy __tablename__ declaration.",
+        "All model declarations for this physical table: AN_VANTARIS_IBMS-backend/src/DID/models.py:VCRevocation",
+        "Physical storage does not determine frozen semantic ownership."
+      ]
+    },
+    {
+      "storeId": "STORE-SQL_TABLE-6A2F49427F0A",
+      "storeType": "SQL_TABLE",
+      "sourcePath": "AN_VANTARIS_IBMS-backend/src/system/menu_models.py",
+      "line": 32,
+      "symbol": "SysMenu",
+      "physicalName": "sys_menu",
+      "currentModule": "UCore",
+      "currentPackage": "PKG-UCORE",
+      "currentSemanticObjects": [
+        "OperationalContext",
+        "SysMenu"
+      ],
+      "currentPersistenceRole": "AUTHORITATIVE_OR_LEGACY_RELATIONAL_PERSISTENCE",
+      "canonicalObjects": [
+        "OperationalContext"
+      ],
+      "canonicalOwner": "UCore",
+      "targetSystemOfRecord": "UCore",
+      "targetPackage": "PKG-UCORE",
+      "ownershipStatus": "CORRECT_OWNER",
+      "migrationClass": "NO_MIGRATION",
+      "compatibilityFacadeRequired": false,
+      "dualReadAllowed": false,
+      "dualWriteAllowed": false,
+      "dataReconciliationRequired": false,
+      "auditRequired": false,
+      "evidenceRequired": false,
+      "retentionRequirement": "PRESERVE_UNTIL_RECONCILIATION_ROLLBACK_AND_RETIREMENT_GATES_PASS",
+      "migrationPrerequisites": [
+        "FROZEN_CONTRACT",
+        "TARGET_PROVIDER_AVAILABLE",
+        "IDENTIFIER_MAPPING_DEFINED"
+      ],
+      "proposedMigrationTask": "ONE-A5-P1-16",
+      "rollbackRequirement": "PRESERVE_LEGACY_READ_PATH_AND_IMMUTABLE_SOURCE_UNTIL_ROLLBACK_WINDOW_CLOSES",
+      "removalGate": "TARGET_PARITY_RECONCILIATION_STRICT_SCANNER_AND_APPROVAL",
+      "scannerConfidence": "HIGH",
+      "notes": [
+        "Explicit SQLAlchemy __tablename__ declaration.",
+        "All model declarations for this physical table: AN_VANTARIS_IBMS-backend/src/system/menu_models.py:SysMenu",
+        "Physical storage does not determine frozen semantic ownership."
+      ]
+    },
+    {
+      "storeId": "STORE-SQL_TABLE-6CA0E4450C90",
+      "storeType": "SQL_TABLE",
+      "sourcePath": "AN_VANTARIS_IBMS-backend/src/system/menu_models.py",
+      "line": 56,
+      "symbol": "SysVersionMenu",
+      "physicalName": "sys_version_menu",
+      "currentModule": "UCore",
+      "currentPackage": "PKG-UCORE",
+      "currentSemanticObjects": [
+        "OperationalContext",
+        "SysVersionMenu"
+      ],
+      "currentPersistenceRole": "AUTHORITATIVE_OR_LEGACY_RELATIONAL_PERSISTENCE",
+      "canonicalObjects": [
+        "OperationalContext"
+      ],
+      "canonicalOwner": "UCore",
+      "targetSystemOfRecord": "UCore",
+      "targetPackage": "PKG-UCORE",
+      "ownershipStatus": "CORRECT_OWNER",
+      "migrationClass": "NO_MIGRATION",
+      "compatibilityFacadeRequired": false,
+      "dualReadAllowed": false,
+      "dualWriteAllowed": false,
+      "dataReconciliationRequired": false,
+      "auditRequired": false,
+      "evidenceRequired": false,
+      "retentionRequirement": "PRESERVE_UNTIL_RECONCILIATION_ROLLBACK_AND_RETIREMENT_GATES_PASS",
+      "migrationPrerequisites": [
+        "FROZEN_CONTRACT",
+        "TARGET_PROVIDER_AVAILABLE",
+        "IDENTIFIER_MAPPING_DEFINED"
+      ],
+      "proposedMigrationTask": "ONE-A5-P1-16",
+      "rollbackRequirement": "PRESERVE_LEGACY_READ_PATH_AND_IMMUTABLE_SOURCE_UNTIL_ROLLBACK_WINDOW_CLOSES",
+      "removalGate": "TARGET_PARITY_RECONCILIATION_STRICT_SCANNER_AND_APPROVAL",
+      "scannerConfidence": "HIGH",
+      "notes": [
+        "Explicit SQLAlchemy __tablename__ declaration.",
+        "All model declarations for this physical table: AN_VANTARIS_IBMS-backend/src/system/menu_models.py:SysVersionMenu",
+        "Physical storage does not determine frozen semantic ownership."
+      ]
+    },
+    {
+      "storeId": "STORE-SQL_TABLE-760B76D35F5B",
+      "storeType": "SQL_TABLE",
+      "sourcePath": "AN_VANTARIS_IBMS-backend/src/Iot/models.py",
+      "line": 16,
+      "symbol": "IMSDevice",
+      "physicalName": "imbs_device",
+      "currentModule": "Legacy IoT",
+      "currentPackage": "PKG-ASSET-GRAPH",
+      "currentSemanticObjects": [
+        "ConnectorRuntime",
+        "Device",
+        "IMSDevice",
+        "Point",
+        "Tag"
+      ],
+      "currentPersistenceRole": "AUTHORITATIVE_OR_LEGACY_RELATIONAL_PERSISTENCE",
+      "canonicalObjects": [
+        "Device",
+        "Point",
+        "Tag",
+        "ConnectorRuntime"
+      ],
+      "canonicalOwner": "ONE Asset Graph / AN_VANTARIS_EDGE / Governance & Security",
+      "targetSystemOfRecord": "ONE Asset Graph and AN_VANTARIS_EDGE with credential references",
+      "targetPackage": "PKG-ASSET-GRAPH",
+      "ownershipStatus": "MIXED_RESPONSIBILITY",
+      "migrationClass": "OWNERSHIP_SPLIT",
+      "compatibilityFacadeRequired": true,
+      "dualReadAllowed": true,
+      "dualWriteAllowed": false,
+      "dataReconciliationRequired": true,
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "retentionRequirement": "PRESERVE_UNTIL_RECONCILIATION_ROLLBACK_AND_RETIREMENT_GATES_PASS",
+      "migrationPrerequisites": [
+        "FROZEN_CONTRACT",
+        "TARGET_PROVIDER_AVAILABLE",
+        "IDENTIFIER_MAPPING_DEFINED"
+      ],
+      "proposedMigrationTask": "ONE-A5-P1-07",
+      "rollbackRequirement": "PRESERVE_LEGACY_READ_PATH_AND_IMMUTABLE_SOURCE_UNTIL_ROLLBACK_WINDOW_CLOSES",
+      "removalGate": "TARGET_PARITY_RECONCILIATION_STRICT_SCANNER_AND_APPROVAL",
+      "scannerConfidence": "HIGH",
+      "notes": [
+        "Explicit SQLAlchemy __tablename__ declaration.",
+        "All model declarations for this physical table: AN_VANTARIS_IBMS-backend/src/Iot/models.py:IMSDevice",
+        "Physical storage does not determine frozen semantic ownership."
+      ]
+    },
+    {
+      "storeId": "STORE-SQL_TABLE-91D45E0F7F9C",
+      "storeType": "SQL_TABLE",
+      "sourcePath": "AN_VANTARIS_IBMS-backend/src/Iot/models.py",
+      "line": 86,
+      "symbol": "IMSStandardMethod",
+      "physicalName": "imbs_standard_method",
+      "currentModule": "Legacy IoT",
+      "currentPackage": "PKG-UNIFIED-DATA-MODEL",
+      "currentSemanticObjects": [
+        "IMSStandardMethod",
+        "MappingCandidate"
+      ],
+      "currentPersistenceRole": "AUTHORITATIVE_OR_LEGACY_RELATIONAL_PERSISTENCE",
+      "canonicalObjects": [
+        "MappingCandidate"
+      ],
+      "canonicalOwner": "Unified Data Model / AN_VANTARIS_EDGE",
+      "targetSystemOfRecord": "Unified Data Model contracts and AN_VANTARIS_EDGE execution",
+      "targetPackage": "PKG-UNIFIED-DATA-MODEL",
+      "ownershipStatus": "MIXED_RESPONSIBILITY",
+      "migrationClass": "CONTRACT_FIRST",
+      "compatibilityFacadeRequired": false,
+      "dualReadAllowed": false,
+      "dualWriteAllowed": false,
+      "dataReconciliationRequired": false,
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "retentionRequirement": "PRESERVE_UNTIL_RECONCILIATION_ROLLBACK_AND_RETIREMENT_GATES_PASS",
+      "migrationPrerequisites": [
+        "FROZEN_CONTRACT",
+        "TARGET_PROVIDER_AVAILABLE",
+        "IDENTIFIER_MAPPING_DEFINED"
+      ],
+      "proposedMigrationTask": "ONE-A5-P1-07",
+      "rollbackRequirement": "PRESERVE_LEGACY_READ_PATH_AND_IMMUTABLE_SOURCE_UNTIL_ROLLBACK_WINDOW_CLOSES",
+      "removalGate": "TARGET_PARITY_RECONCILIATION_STRICT_SCANNER_AND_APPROVAL",
+      "scannerConfidence": "HIGH",
+      "notes": [
+        "Explicit SQLAlchemy __tablename__ declaration.",
+        "All model declarations for this physical table: AN_VANTARIS_IBMS-backend/src/Iot/models.py:IMSStandardMethod",
+        "Physical storage does not determine frozen semantic ownership."
+      ]
+    },
+    {
+      "storeId": "STORE-SQL_TABLE-988D15973D42",
+      "storeType": "SQL_TABLE",
+      "sourcePath": "AN_VANTARIS_IBMS-backend/src/DID/models.py",
+      "line": 30,
+      "symbol": "Permission",
+      "physicalName": "imbs_permission",
+      "currentModule": "Legacy DID / UCore",
+      "currentPackage": "PKG-GOVERNANCE-SECURITY",
+      "currentSemanticObjects": [
+        "Permission",
+        "Permission definition"
+      ],
+      "currentPersistenceRole": "AUTHORITATIVE_OR_LEGACY_RELATIONAL_PERSISTENCE",
+      "canonicalObjects": [],
+      "canonicalOwner": "Governance & Security",
+      "targetSystemOfRecord": "Governance & Security permission registry",
+      "targetPackage": "PKG-GOVERNANCE-SECURITY",
+      "ownershipStatus": "LEGACY_OWNER",
+      "migrationClass": "CONTRACT_FIRST",
+      "compatibilityFacadeRequired": false,
+      "dualReadAllowed": false,
+      "dualWriteAllowed": false,
+      "dataReconciliationRequired": false,
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "retentionRequirement": "PRESERVE_UNTIL_RECONCILIATION_ROLLBACK_AND_RETIREMENT_GATES_PASS",
+      "migrationPrerequisites": [
+        "FROZEN_CONTRACT",
+        "TARGET_PROVIDER_AVAILABLE",
+        "IDENTIFIER_MAPPING_DEFINED"
+      ],
+      "proposedMigrationTask": "ONE-A5-P1-16",
+      "rollbackRequirement": "PRESERVE_LEGACY_READ_PATH_AND_IMMUTABLE_SOURCE_UNTIL_ROLLBACK_WINDOW_CLOSES",
+      "removalGate": "TARGET_PARITY_RECONCILIATION_STRICT_SCANNER_AND_APPROVAL",
+      "scannerConfidence": "HIGH",
+      "notes": [
+        "Explicit SQLAlchemy __tablename__ declaration.",
+        "All model declarations for this physical table: AN_VANTARIS_IBMS-backend/src/DID/models.py:Permission, AN_VANTARIS_IBMS-backend/src/system/models.py:Permission",
+        "Physical storage does not determine frozen semantic ownership."
+      ]
+    },
+    {
+      "storeId": "STORE-SQL_TABLE-DA7444B7B5FA",
+      "storeType": "SQL_TABLE",
+      "sourcePath": "AN_VANTARIS_IBMS-backend/src/Iot/models.py",
+      "line": 54,
+      "symbol": "IMSFieldMapping",
+      "physicalName": "imbs_field_mapping",
+      "currentModule": "Legacy IoT",
+      "currentPackage": "PKG-UNIFIED-DATA-MODEL",
+      "currentSemanticObjects": [
+        "IMSFieldMapping",
+        "MappingCandidate",
+        "Point"
+      ],
+      "currentPersistenceRole": "AUTHORITATIVE_OR_LEGACY_RELATIONAL_PERSISTENCE",
+      "canonicalObjects": [
+        "MappingCandidate",
+        "Point"
+      ],
+      "canonicalOwner": "AN_VANTARIS_EDGE / ONE Asset Graph",
+      "targetSystemOfRecord": "AN_VANTARIS_EDGE mapping execution and ONE Asset Graph Point",
+      "targetPackage": "PKG-EDGE",
+      "ownershipStatus": "MIXED_RESPONSIBILITY",
+      "migrationClass": "OWNERSHIP_SPLIT",
+      "compatibilityFacadeRequired": true,
+      "dualReadAllowed": true,
+      "dualWriteAllowed": false,
+      "dataReconciliationRequired": true,
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "retentionRequirement": "PRESERVE_UNTIL_RECONCILIATION_ROLLBACK_AND_RETIREMENT_GATES_PASS",
+      "migrationPrerequisites": [
+        "FROZEN_CONTRACT",
+        "TARGET_PROVIDER_AVAILABLE",
+        "IDENTIFIER_MAPPING_DEFINED"
+      ],
+      "proposedMigrationTask": "ONE-A5-P1-09",
+      "rollbackRequirement": "PRESERVE_LEGACY_READ_PATH_AND_IMMUTABLE_SOURCE_UNTIL_ROLLBACK_WINDOW_CLOSES",
+      "removalGate": "TARGET_PARITY_RECONCILIATION_STRICT_SCANNER_AND_APPROVAL",
+      "scannerConfidence": "HIGH",
+      "notes": [
+        "Explicit SQLAlchemy __tablename__ declaration.",
+        "All model declarations for this physical table: AN_VANTARIS_IBMS-backend/src/Iot/models.py:IMSFieldMapping",
+        "Physical storage does not determine frozen semantic ownership."
+      ]
+    },
+    {
+      "storeId": "STORE-SQL_TABLE-FBBE7D555839",
+      "storeType": "SQL_TABLE",
+      "sourcePath": "AN_VANTARIS_IBMS-backend/src/DID/models.py",
+      "line": 13,
+      "symbol": "EntityType",
+      "physicalName": "imbs_entity_type",
+      "currentModule": "Legacy DID / UCore",
+      "currentPackage": "PKG-UCORE",
+      "currentSemanticObjects": [
+        "Classification metadata",
+        "EntityType"
+      ],
+      "currentPersistenceRole": "AUTHORITATIVE_OR_LEGACY_RELATIONAL_PERSISTENCE",
+      "canonicalObjects": [],
+      "canonicalOwner": "Unified Data Model",
+      "targetSystemOfRecord": "Unified Data Model contracts",
+      "targetPackage": "PKG-UNIFIED-DATA-MODEL",
+      "ownershipStatus": "MIXED_RESPONSIBILITY",
+      "migrationClass": "CONTRACT_FIRST",
+      "compatibilityFacadeRequired": false,
+      "dualReadAllowed": false,
+      "dualWriteAllowed": false,
+      "dataReconciliationRequired": false,
+      "auditRequired": true,
+      "evidenceRequired": false,
+      "retentionRequirement": "PRESERVE_UNTIL_RECONCILIATION_ROLLBACK_AND_RETIREMENT_GATES_PASS",
+      "migrationPrerequisites": [
+        "FROZEN_CONTRACT",
+        "TARGET_PROVIDER_AVAILABLE",
+        "IDENTIFIER_MAPPING_DEFINED"
+      ],
+      "proposedMigrationTask": "ONE-A5-P1-16",
+      "rollbackRequirement": "PRESERVE_LEGACY_READ_PATH_AND_IMMUTABLE_SOURCE_UNTIL_ROLLBACK_WINDOW_CLOSES",
+      "removalGate": "TARGET_PARITY_RECONCILIATION_STRICT_SCANNER_AND_APPROVAL",
+      "scannerConfidence": "HIGH",
+      "notes": [
+        "Explicit SQLAlchemy __tablename__ declaration.",
+        "All model declarations for this physical table: AN_VANTARIS_IBMS-backend/src/DID/models.py:EntityType, AN_VANTARIS_IBMS-backend/src/system/models.py:EntityType",
+        "Physical storage does not determine frozen semantic ownership."
+      ]
+    }
+  ],
+  "unresolvedStores": []
+}
