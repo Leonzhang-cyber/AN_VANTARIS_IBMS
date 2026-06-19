@@ -1,0 +1,66 @@
+{
+  "profileName": "VANTARIS ONE Airport Spatial Hierarchy Profile",
+  "profileVersion": "1.0.0",
+  "authority": "ONE-AIRPORT-A1-02",
+  "profileType": "INDUSTRY_PROFILE",
+  "platformScope": "CROSS_INDUSTRY_ASSET_GRAPH",
+  "implementationMode": "READ_ONLY_MAPPING",
+  "platformCoreAirportized": false,
+  "owningModule": "ONE Asset Graph",
+  "genericPlatformLevels": [
+    "Site",
+    "Facility",
+    "Building",
+    "Level",
+    "Zone",
+    "Space",
+    "Location",
+    "System",
+    "Device"
+  ],
+  "optionalAirportProfileLevels": [
+    "Airport",
+    "Terminal",
+    "DistributionArea"
+  ],
+  "genericToAirportMapping": {
+    "Airport": "Site or SiteGroup (deployment context)",
+    "Terminal": "Facility or BuildingGroup",
+    "Building": "Building",
+    "Level": "Level",
+    "AirportZone": "Zone",
+    "DistributionArea": "ZoneExtension or SpatialGrouping",
+    "Location": "Space or Location",
+    "Device": "Device"
+  },
+  "allowedGenericRelationshipSemantics": [
+    "CONTAINS",
+    "LOCATED_IN",
+    "ASSIGNED_TO",
+    "BELONGS_TO"
+  ],
+  "mappingVersion": "airport-spatial-v1",
+  "compatibleIntakeAuthorities": [
+    "ONE-AIRPORT-A1-01"
+  ],
+  "compatibleIntakeEvidenceVersions": [
+    "1.0.0"
+  ],
+  "compatibleIntakeExecutionModes": [
+    "OFFLINE_READ_ONLY"
+  ],
+  "compatibleIntakeReadinessOutcomes": [
+    "INTAKE_COMPLETE_WITH_REVIEWS",
+    "READY_FOR_AIRPORT_ASSET_RECONCILIATION"
+  ],
+  "forbiddenReadinessOutcomes": [
+    "READY_FOR_DATABASE_IMPORT",
+    "READY_FOR_CANONICAL_WRITE",
+    "READY_FOR_WRITE_CUTOVER"
+  ],
+  "implementationPaths": [
+    "AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/",
+    "AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/",
+    "scripts/validation/validate-one-airport-spatial-profile.py"
+  ]
+}
