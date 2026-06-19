@@ -1,0 +1,144 @@
+{
+  "contractName": "VANTARIS ONE Canonical Asset Graph Persistence Contract",
+  "contractVersion": "1.0.0",
+  "authority": "ONE-A5-P1-16O",
+  "implementationStatus": "CONTRACT_ONLY",
+  "writeCutoverStatus": "NOT_READY_FOR_WRITE_CUTOVER",
+  "generatedAtPolicy": "STATIC_POLICY_REGISTRY",
+  "canonicalObjectTypes": [
+    "Device",
+    "Point",
+    "Tag",
+    "AssetRelationship"
+  ],
+  "identityRules": [
+    "canonical global ID is immutable",
+    "source identity is immutable after creation",
+    "tenant ownership is immutable",
+    "site changes require explicit scoped transition",
+    "point parent device identity is immutable without relationship transition",
+    "relationship global ID is deterministic",
+    "tag key namespace is deterministic and bounded"
+  ],
+  "requiredCommandAuthority": "APPROVED_READ_MIGRATION_EXECUTION",
+  "requiredCommandFields": [
+    "commandId",
+    "idempotencyKey",
+    "tenantId",
+    "siteId",
+    "sourceSystemId",
+    "mappingVersion",
+    "evidenceDigest",
+    "readinessResultDigest",
+    "executionResultDigest",
+    "canonicalGlobalId",
+    "expectedVersion",
+    "requestedOperation",
+    "requestedByAuthority"
+  ],
+  "authorizationRequirements": [
+    "evidenceClassification=REAL_SANITIZED_EVIDENCE",
+    "readinessDecision=READY_FOR_READ_MIGRATION_CANDIDATE",
+    "approvedExecutionContract",
+    "explicitPersistenceAuthorization",
+    "matchingEvidenceReadinessExecutionDigests",
+    "matchingTenantSiteSourceSystemScope",
+    "noHardBlockers",
+    "writeProviderExplicitlyEnabled"
+  ],
+  "allowedAuthorizationDecisions": [
+    "DENIED",
+    "WAITING_FOR_REAL_EVIDENCE",
+    "WAITING_FOR_READINESS",
+    "WAITING_FOR_PERSISTENCE_APPROVAL",
+    "APPROVED_FOR_CANONICAL_WRITE_VALIDATION"
+  ],
+  "forbiddenAuthorizationDecisions": [
+    "APPROVED_FOR_WRITE_CUTOVER",
+    "DUAL_WRITE_ACTIVE",
+    "PRODUCTION_CUTOVER_COMPLETE"
+  ],
+  "batchLimits": {
+    "maximumDevicesPerUnitOfWork": 100,
+    "maximumPointsPerDevice": 5000,
+    "maximumRelationshipsPerUnitOfWork": 10000,
+    "maximumTagsPerUnitOfWork": 1000,
+    "maximumCommandsPerBatch": 20000
+  },
+  "conflictCodes": [
+    "SOURCE_IDENTITY_CONFLICT",
+    "CANONICAL_IDENTITY_CONFLICT",
+    "TENANT_SCOPE_CONFLICT",
+    "SITE_SCOPE_CONFLICT",
+    "POINT_PARENT_CONFLICT",
+    "TAG_NAMESPACE_CONFLICT",
+    "RELATIONSHIP_ENDPOINT_CONFLICT",
+    "RELATIONSHIP_DUPLICATE_CONFLICT",
+    "VERSION_CONFLICT",
+    "IDEMPOTENCY_CONFLICT",
+    "MAPPING_VERSION_CONFLICT",
+    "EVIDENCE_DIGEST_CONFLICT",
+    "READINESS_DIGEST_CONFLICT",
+    "EXECUTION_DIGEST_CONFLICT"
+  ],
+  "updateOutcomes": [
+    "UPDATED",
+    "VERSION_CONFLICT",
+    "NOT_FOUND",
+    "IDENTITY_IMMUTABLE",
+    "SCOPE_CONFLICT",
+    "VALIDATION_FAILED"
+  ],
+  "auditObligations": [
+    "authorizationEvaluated",
+    "commandAccepted",
+    "commandRejected",
+    "transactionStarted",
+    "transactionCommitted",
+    "transactionRolledBack",
+    "idempotentReplay",
+    "versionConflict",
+    "scopeConflict",
+    "providerUnavailable"
+  ],
+  "auditProviderContract": "VANTARIS ONE Audit Contract",
+  "auditFailureBehavior": "FAIL_CLOSED",
+  "rollbackTriggers": [
+    "validationFailure",
+    "authorizationFailure",
+    "providerFailure",
+    "auditFailure",
+    "dependencyFailure",
+    "versionConflict",
+    "partialStagingFailure"
+  ],
+  "rollbackGuarantees": [
+    "noPartialCanonicalGraph",
+    "sourceDataUnchanged",
+    "legacyDataUnchanged",
+    "failedCommandsNotMarkedSuccessful",
+    "rollbackAuditRequired",
+    "idempotencyReservationReleasedOrFailedDeterministically"
+  ],
+  "providerCapabilityDefaults": {
+    "providerName": "UNCONFIGURED_CANONICAL_PROVIDER",
+    "providerVersion": "0.0.0",
+    "storageType": "NONE",
+    "supportsTransactions": false,
+    "supportsOptimisticConcurrency": false,
+    "supportsIdempotency": false,
+    "supportsTenantIsolation": false,
+    "supportsSiteIsolation": false,
+    "supportsRelationshipIntegrity": false,
+    "supportsAuditBinding": false,
+    "maximumBatchSize": 0,
+    "healthStatus": "UNAVAILABLE",
+    "enabledForCanonicalWrites": false
+  },
+  "syntheticWriteAuthorizationProhibited": true,
+  "providerImplementationProhibitedInContractTask": true,
+  "databaseImplementationProhibited": true,
+  "filesystemPersistenceProhibited": true,
+  "dualWriteProhibited": true,
+  "writeCutoverProhibited": true
+}
