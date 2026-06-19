@@ -1,0 +1,792 @@
+{
+  "registryName": "VANTARIS ONE Guard Contract",
+  "registryVersion": "1.0.0",
+  "authority": "ONE-A5-P0-05",
+  "status": "FROZEN_FOR_GUARD_IMPLEMENTATION",
+  "generatedAtPolicy": "STATIC_ARCHITECTURE_BASELINE",
+  "enforcementPrinciples": [
+    "Backend authorization is authoritative.",
+    "Frontend route guards are supplementary.",
+    "Authentication does not imply authorization.",
+    "JWT-only routes are AUTH_ONLY, not permission guarded.",
+    "Every protected route must declare an authentication policy.",
+    "Every business action must declare a permission.",
+    "Every route must declare tenant and site scope behavior.",
+    "Package entitlement and enablement are independent from permissions.",
+    "Sensitive reads, mutations, controls and exports require audit policy.",
+    "Commands and intake operations require declared idempotency behavior.",
+    "Service identities receive explicit machine permissions only.",
+    "Role names must not be hardcoded into business services.",
+    "Public routes must be explicitly allowlisted.",
+    "Legacy compatibility does not exempt a route from classification.",
+    "Enforcement rollout must support compatibility stages without silently weakening policy."
+  ],
+  "authenticationClasses": [
+    {
+      "classId": "PUBLIC",
+      "acceptedCredentialTypes": [
+        "NONE"
+      ],
+      "tokenOrSessionRequirement": "NOT_REQUIRED",
+      "tenantClaimRequirement": "NOT_REQUIRED",
+      "siteClaimBehavior": "NOT_APPLICABLE",
+      "serviceIdentitySupport": false,
+      "auditBehavior": "SECURITY_METRICS_AND_ABUSE_EVENTS",
+      "failureResponse": "PUBLIC_ROUTE_NOT_ALLOWED",
+      "permittedRuntimeClasses": [
+        "PRODUCTION",
+        "LEGACY"
+      ]
+    },
+    {
+      "classId": "USER_AUTHENTICATED",
+      "acceptedCredentialTypes": [
+        "CURRENT_JWT_COMPATIBILITY"
+      ],
+      "tokenOrSessionRequirement": "VALID_USER_TOKEN_REQUIRED",
+      "tenantClaimRequirement": "REQUIRED_EXCEPT_EXPLICIT_GLOBAL_PLATFORM_POLICY",
+      "siteClaimBehavior": "CLAIM_OR_RESOURCE_DERIVATION_BY_SCOPE",
+      "serviceIdentitySupport": false,
+      "auditBehavior": "AUTHENTICATION_AND_DENIAL_EVENTS",
+      "failureResponse": "AUTHENTICATION_REQUIRED",
+      "permittedRuntimeClasses": [
+        "PRODUCTION",
+        "LEGACY"
+      ]
+    },
+    {
+      "classId": "SERVICE_AUTHENTICATED",
+      "acceptedCredentialTypes": [
+        "CURRENT_JWT_COMPATIBILITY_SERVICE_IDENTITY"
+      ],
+      "tokenOrSessionRequirement": "VALID_MACHINE_TOKEN_REQUIRED",
+      "tenantClaimRequirement": "REQUIRED",
+      "siteClaimBehavior": "CLAIM_OR_RESOURCE_DERIVATION_BY_SCOPE",
+      "serviceIdentitySupport": true,
+      "auditBehavior": "ALL_MACHINE_ACTIONS",
+      "failureResponse": "INVALID_CREDENTIAL",
+      "permittedRuntimeClasses": [
+        "PRODUCTION",
+        "LEGACY"
+      ]
+    },
+    {
+      "classId": "USER_OR_SERVICE_AUTHENTICATED",
+      "acceptedCredentialTypes": [
+        "CURRENT_JWT_COMPATIBILITY",
+        "CURRENT_JWT_COMPATIBILITY_SERVICE_IDENTITY"
+      ],
+      "tokenOrSessionRequirement": "VALID_USER_OR_MACHINE_TOKEN_REQUIRED",
+      "tenantClaimRequirement": "REQUIRED",
+      "siteClaimBehavior": "CLAIM_OR_RESOURCE_DERIVATION_BY_SCOPE",
+      "serviceIdentitySupport": true,
+      "auditBehavior": "IDENTITY_TYPE_AND_ACTION_RECORDED",
+      "failureResponse": "AUTHENTICATION_REQUIRED",
+      "permittedRuntimeClasses": [
+        "PRODUCTION",
+        "LEGACY"
+      ]
+    },
+    {
+      "classId": "INTERNAL_TRUSTED_SERVICE",
+      "acceptedCredentialTypes": [
+        "CURRENT_TRUSTED_SERVICE_COMPATIBILITY"
+      ],
+      "tokenOrSessionRequirement": "EXPLICIT_TRUSTED_SERVICE_IDENTITY_REQUIRED",
+      "tenantClaimRequirement": "REQUIRED",
+      "siteClaimBehavior": "EXPLICIT_SERVICE_SCOPE_REQUIRED",
+      "serviceIdentitySupport": true,
+      "auditBehavior": "ALL_INTERNAL_SERVICE_CALLS",
+      "failureResponse": "SERVICE_IDENTITY_DENIED",
+      "permittedRuntimeClasses": [
+        "PRODUCTION"
+      ]
+    },
+    {
+      "classId": "TEST_ONLY",
+      "acceptedCredentialTypes": [
+        "TEST_HARNESS_DEFINED"
+      ],
+      "tokenOrSessionRequirement": "NON_PRODUCTION_ONLY",
+      "tenantClaimRequirement": "NOT_APPLICABLE",
+      "siteClaimBehavior": "NOT_APPLICABLE",
+      "serviceIdentitySupport": true,
+      "auditBehavior": "TEST_ENVIRONMENT_POLICY",
+      "failureResponse": "ACTION_NOT_ALLOWED",
+      "permittedRuntimeClasses": [
+        "TEST_ONLY"
+      ]
+    },
+    {
+      "classId": "DENY_BY_DEFAULT",
+      "acceptedCredentialTypes": [
+        "NONE"
+      ],
+      "tokenOrSessionRequirement": "ACCESS_DENIED",
+      "tenantClaimRequirement": "NOT_APPLICABLE",
+      "siteClaimBehavior": "NOT_APPLICABLE",
+      "serviceIdentitySupport": false,
+      "auditBehavior": "DENIAL_REQUIRED",
+      "failureResponse": "POLICY_UNAVAILABLE",
+      "permittedRuntimeClasses": [
+        "PRODUCTION",
+        "LEGACY",
+        "UNKNOWN"
+      ]
+    }
+  ],
+  "authorizationStages": [
+    {
+      "stageId": "AUTHENTICATION",
+      "purpose": "Establish a valid user or service identity.",
+      "authoritativeProvider": "Governance & Security",
+      "input": "Credential",
+      "decision": "IDENTITY_OR_DENY",
+      "denialCode": "AUTHENTICATION_REQUIRED",
+      "auditRequirement": "ALWAYS",
+      "failurePolicy": "FAIL_CLOSED"
+    },
+    {
+      "stageId": "IDENTITY_STATUS",
+      "purpose": "Confirm identity is active and permitted to authenticate.",
+      "authoritativeProvider": "Governance & Security",
+      "input": "Identity record",
+      "decision": "ACTIVE_OR_DENY",
+      "denialCode": "IDENTITY_DISABLED",
+      "auditRequirement": "ON_DENIAL",
+      "failurePolicy": "FAIL_CLOSED"
+    },
+    {
+      "stageId": "TENANT_MEMBERSHIP",
+      "purpose": "Confirm identity membership in the requested tenant.",
+      "authoritativeProvider": "Governance & Security",
+      "input": "Identity and tenant",
+      "decision": "MEMBER_OR_DENY",
+      "denialCode": "TENANT_MEMBERSHIP_REQUIRED",
+      "auditRequirement": "ON_DENIAL",
+      "failurePolicy": "FAIL_CLOSED"
+    },
+    {
+      "stageId": "SITE_SCOPE",
+      "purpose": "Constrain access to an allowed site or resource-derived site.",
+      "authoritativeProvider": "Governance & Security",
+      "input": "Claims and resource context",
+      "decision": "IN_SCOPE_OR_DENY",
+      "denialCode": "SITE_SCOPE_DENIED",
+      "auditRequirement": "ON_DENIAL",
+      "failurePolicy": "FAIL_CLOSED"
+    },
+    {
+      "stageId": "PACKAGE_ENTITLEMENT",
+      "purpose": "Confirm tenant entitlement independently of installation state.",
+      "authoritativeProvider": "Governance & Security",
+      "input": "Tenant and package",
+      "decision": "ENTITLED_OR_DENY",
+      "denialCode": "ENTITLEMENT_REQUIRED",
+      "auditRequirement": "ON_DENIAL",
+      "failurePolicy": "FAIL_CLOSED"
+    },
+    {
+      "stageId": "PACKAGE_INSTALLED",
+      "purpose": "Confirm package artifacts are installed.",
+      "authoritativeProvider": "Governance & Security",
+      "input": "Package state",
+      "decision": "INSTALLED_OR_DENY",
+      "denialCode": "PACKAGE_NOT_INSTALLED",
+      "auditRequirement": "ON_DENIAL",
+      "failurePolicy": "FAIL_CLOSED"
+    },
+    {
+      "stageId": "PACKAGE_ENABLED",
+      "purpose": "Confirm package is enabled for the tenant.",
+      "authoritativeProvider": "Governance & Security",
+      "input": "Package state",
+      "decision": "ENABLED_OR_DENY",
+      "denialCode": "PACKAGE_DISABLED",
+      "auditRequirement": "ON_DENIAL",
+      "failurePolicy": "FAIL_CLOSED"
+    },
+    {
+      "stageId": "PERMISSION",
+      "purpose": "Authorize the declared business action.",
+      "authoritativeProvider": "Governance & Security",
+      "input": "Identity permissions and route requirement",
+      "decision": "ALLOW_OR_DENY",
+      "denialCode": "PERMISSION_DENIED",
+      "auditRequirement": "ON_DENIAL_AND_SENSITIVE_ALLOW",
+      "failurePolicy": "FAIL_CLOSED"
+    },
+    {
+      "stageId": "RESOURCE_OWNERSHIP_OBJECT_SCOPE",
+      "purpose": "Validate object-level tenant, site, ownership and relationship scope.",
+      "authoritativeProvider": "Owning business module",
+      "input": "Canonical resource identifier",
+      "decision": "IN_SCOPE_OR_DENY",
+      "denialCode": "RESOURCE_SCOPE_DENIED",
+      "auditRequirement": "ON_DENIAL",
+      "failurePolicy": "FAIL_CLOSED"
+    },
+    {
+      "stageId": "STATE_TRANSITION_RULE",
+      "purpose": "Validate the requested domain state transition.",
+      "authoritativeProvider": "Owning business module",
+      "input": "Current state and requested transition",
+      "decision": "VALID_OR_DENY",
+      "denialCode": "ACTION_NOT_ALLOWED",
+      "auditRequirement": "MUTATIONS",
+      "failurePolicy": "FAIL_CLOSED"
+    },
+    {
+      "stageId": "ACTION_APPROVAL",
+      "purpose": "Require an approved decision where policy demands separation of duties.",
+      "authoritativeProvider": "Owning business workflow or ONE Orchestrator",
+      "input": "Action and approval context",
+      "decision": "APPROVED_OR_DENY",
+      "denialCode": "APPROVAL_REQUIRED",
+      "auditRequirement": "ALWAYS_WHEN_APPLICABLE",
+      "failurePolicy": "FAIL_CLOSED"
+    },
+    {
+      "stageId": "AUDIT_RECORD",
+      "purpose": "Persist the authoritative security and business action record.",
+      "authoritativeProvider": "Governance & Security / Trust",
+      "input": "Prior policy decisions and action outcome",
+      "decision": "RECORDED_OR_POLICY_RESPONSE",
+      "denialCode": "POLICY_UNAVAILABLE",
+      "auditRequirement": "REQUIRED_ACTIONS",
+      "failurePolicy": "FAIL_CLOSED_EXCEPT_NARROW_LIVENESS"
+    }
+  ],
+  "scopeClasses": [
+    {
+      "scopeClassId": "GLOBAL_PLATFORM",
+      "requiredClaims": [
+        "platform authorization"
+      ],
+      "resourceLookupBehavior": "NO_TENANT_RESOURCE_LOOKUP",
+      "crossTenantProhibition": "PLATFORM_PERMISSION_REQUIRED",
+      "crossSiteProhibition": "NOT_APPLICABLE",
+      "administratorBehavior": "NO_AUTOMATIC_BYPASS; explicit platform permission and audited policy decision required",
+      "serviceIdentityBehavior": "EXPLICIT_PLATFORM_MACHINE_PERMISSION_REQUIRED",
+      "auditRequirement": "ALL_MUTATIONS_AND_SENSITIVE_READS"
+    },
+    {
+      "scopeClassId": "TENANT_REQUIRED",
+      "requiredClaims": [
+        "tenantId"
+      ],
+      "resourceLookupBehavior": "VERIFY_TENANT_MEMBERSHIP",
+      "crossTenantProhibition": "PROHIBITED",
+      "crossSiteProhibition": "SITE_RULE_APPLIES_SEPARATELY",
+      "administratorBehavior": "NO_AUTOMATIC_BYPASS; explicit platform permission and audited policy decision required",
+      "serviceIdentityBehavior": "SERVICE_TENANT_BINDING_REQUIRED",
+      "auditRequirement": "DENIALS_AND_SENSITIVE_ACTIONS"
+    },
+    {
+      "scopeClassId": "TENANT_OPTIONAL",
+      "requiredClaims": [],
+      "resourceLookupBehavior": "USE_TENANT_WHEN_RESOURCE_OR_REQUEST_SUPPLIES_ONE",
+      "crossTenantProhibition": "PROHIBITED_WHEN_TENANT_CONTEXT_EXISTS",
+      "crossSiteProhibition": "SITE_RULE_APPLIES_SEPARATELY",
+      "administratorBehavior": "NO_AUTOMATIC_BYPASS; explicit platform permission and audited policy decision required",
+      "serviceIdentityBehavior": "EXPLICIT_GLOBAL_OR_TENANT_BINDING",
+      "auditRequirement": "CONTEXT_SELECTION"
+    },
+    {
+      "scopeClassId": "SITE_REQUIRED",
+      "requiredClaims": [
+        "tenantId",
+        "siteId"
+      ],
+      "resourceLookupBehavior": "VERIFY_SITE_MEMBERSHIP",
+      "crossTenantProhibition": "PROHIBITED",
+      "crossSiteProhibition": "PROHIBITED",
+      "administratorBehavior": "NO_AUTOMATIC_BYPASS; explicit platform permission and audited policy decision required",
+      "serviceIdentityBehavior": "SERVICE_SITE_BINDING_REQUIRED",
+      "auditRequirement": "DENIALS_AND_SENSITIVE_ACTIONS"
+    },
+    {
+      "scopeClassId": "SITE_OPTIONAL",
+      "requiredClaims": [
+        "tenantId"
+      ],
+      "resourceLookupBehavior": "VERIFY_SITE_WHEN_REQUEST_OR_RESOURCE_SUPPLIES_ONE",
+      "crossTenantProhibition": "PROHIBITED",
+      "crossSiteProhibition": "PROHIBITED_WHEN_SITE_CONTEXT_EXISTS",
+      "administratorBehavior": "NO_AUTOMATIC_BYPASS; explicit platform permission and audited policy decision required",
+      "serviceIdentityBehavior": "SERVICE_SITE_BINDING_WHEN_SITE_CONTEXT_EXISTS",
+      "auditRequirement": "CONTEXT_SELECTION"
+    },
+    {
+      "scopeClassId": "RESOURCE_DERIVED",
+      "requiredClaims": [
+        "tenantId"
+      ],
+      "resourceLookupBehavior": "LOAD_CANONICAL_RESOURCE_AND_DERIVE_TENANT_AND_SITE",
+      "crossTenantProhibition": "PROHIBITED",
+      "crossSiteProhibition": "PROHIBITED",
+      "administratorBehavior": "NO_AUTOMATIC_BYPASS; explicit platform permission and audited policy decision required",
+      "serviceIdentityBehavior": "SERVICE_SCOPE_MUST_COVER_DERIVED_RESOURCE",
+      "auditRequirement": "RESOURCE_LOOKUP_AND_DENIALS"
+    },
+    {
+      "scopeClassId": "SERVICE_INTERNAL",
+      "requiredClaims": [
+        "serviceIdentity",
+        "tenantId"
+      ],
+      "resourceLookupBehavior": "VERIFY_INTERNAL_SERVICE_CONTRACT",
+      "crossTenantProhibition": "PROHIBITED",
+      "crossSiteProhibition": "PROHIBITED_UNLESS_EXPLICIT_MULTI_SITE_CONTRACT",
+      "administratorBehavior": "NO_AUTOMATIC_BYPASS; explicit platform permission and audited policy decision required",
+      "serviceIdentityBehavior": "EXPLICIT_MACHINE_SCOPE_REQUIRED",
+      "auditRequirement": "ALL_CALLS"
+    },
+    {
+      "scopeClassId": "NOT_APPLICABLE",
+      "requiredClaims": [],
+      "resourceLookupBehavior": "NO_BUSINESS_SCOPE_LOOKUP",
+      "crossTenantProhibition": "NO_TENANT_DATA_PERMITTED",
+      "crossSiteProhibition": "NO_SITE_DATA_PERMITTED",
+      "administratorBehavior": "NO_AUTOMATIC_BYPASS; explicit platform permission and audited policy decision required",
+      "serviceIdentityBehavior": "NO_BUSINESS_RESOURCE_ACCESS",
+      "auditRequirement": "POLICY_EVENTS_ONLY"
+    }
+  ],
+  "operationPolicies": [
+    {
+      "policyId": "READ_PUBLIC",
+      "authenticationClass": "PUBLIC",
+      "permissionRequired": false,
+      "scopeRequirement": "NOT_APPLICABLE",
+      "packageEnforcementRequired": false,
+      "auditRequired": false,
+      "idempotencyRequired": false,
+      "approvalMayBeRequired": false,
+      "serviceIdentityAllowed": false,
+      "compatibilityMode": "TARGET_ENFORCED",
+      "defaultDenialCode": "PUBLIC_ROUTE_NOT_ALLOWED"
+    },
+    {
+      "policyId": "READ_PROTECTED",
+      "authenticationClass": "USER_AUTHENTICATED",
+      "permissionRequired": true,
+      "scopeRequirement": "TENANT_REQUIRED",
+      "packageEnforcementRequired": true,
+      "auditRequired": false,
+      "idempotencyRequired": false,
+      "approvalMayBeRequired": false,
+      "serviceIdentityAllowed": false,
+      "compatibilityMode": "CURRENT_JWT_COMPATIBILITY",
+      "defaultDenialCode": "PERMISSION_DENIED"
+    },
+    {
+      "policyId": "READ_SENSITIVE",
+      "authenticationClass": "USER_AUTHENTICATED",
+      "permissionRequired": true,
+      "scopeRequirement": "TENANT_REQUIRED",
+      "packageEnforcementRequired": true,
+      "auditRequired": true,
+      "idempotencyRequired": false,
+      "approvalMayBeRequired": false,
+      "serviceIdentityAllowed": false,
+      "compatibilityMode": "CURRENT_JWT_COMPATIBILITY",
+      "defaultDenialCode": "PERMISSION_DENIED"
+    },
+    {
+      "policyId": "CREATE",
+      "authenticationClass": "USER_AUTHENTICATED",
+      "permissionRequired": true,
+      "scopeRequirement": "TENANT_REQUIRED",
+      "packageEnforcementRequired": true,
+      "auditRequired": true,
+      "idempotencyRequired": false,
+      "approvalMayBeRequired": false,
+      "serviceIdentityAllowed": false,
+      "compatibilityMode": "CURRENT_JWT_COMPATIBILITY",
+      "defaultDenialCode": "PERMISSION_DENIED"
+    },
+    {
+      "policyId": "UPDATE",
+      "authenticationClass": "USER_AUTHENTICATED",
+      "permissionRequired": true,
+      "scopeRequirement": "TENANT_REQUIRED",
+      "packageEnforcementRequired": true,
+      "auditRequired": true,
+      "idempotencyRequired": false,
+      "approvalMayBeRequired": true,
+      "serviceIdentityAllowed": false,
+      "compatibilityMode": "CURRENT_JWT_COMPATIBILITY",
+      "defaultDenialCode": "ACTION_NOT_ALLOWED"
+    },
+    {
+      "policyId": "DELETE",
+      "authenticationClass": "USER_AUTHENTICATED",
+      "permissionRequired": true,
+      "scopeRequirement": "TENANT_REQUIRED",
+      "packageEnforcementRequired": true,
+      "auditRequired": true,
+      "idempotencyRequired": false,
+      "approvalMayBeRequired": true,
+      "serviceIdentityAllowed": false,
+      "compatibilityMode": "CURRENT_JWT_COMPATIBILITY",
+      "defaultDenialCode": "ACTION_NOT_ALLOWED"
+    },
+    {
+      "policyId": "INTAKE",
+      "authenticationClass": "SERVICE_AUTHENTICATED",
+      "permissionRequired": true,
+      "scopeRequirement": "TENANT_REQUIRED",
+      "packageEnforcementRequired": true,
+      "auditRequired": true,
+      "idempotencyRequired": true,
+      "approvalMayBeRequired": false,
+      "serviceIdentityAllowed": true,
+      "compatibilityMode": "CURRENT_JWT_COMPATIBILITY",
+      "defaultDenialCode": "IDEMPOTENCY_KEY_REQUIRED"
+    },
+    {
+      "policyId": "CONTROL",
+      "authenticationClass": "USER_OR_SERVICE_AUTHENTICATED",
+      "permissionRequired": true,
+      "scopeRequirement": "TENANT_REQUIRED",
+      "packageEnforcementRequired": true,
+      "auditRequired": true,
+      "idempotencyRequired": true,
+      "approvalMayBeRequired": true,
+      "serviceIdentityAllowed": true,
+      "compatibilityMode": "CURRENT_JWT_COMPATIBILITY",
+      "defaultDenialCode": "ACTION_NOT_ALLOWED"
+    },
+    {
+      "policyId": "EXPORT",
+      "authenticationClass": "USER_AUTHENTICATED",
+      "permissionRequired": true,
+      "scopeRequirement": "TENANT_REQUIRED",
+      "packageEnforcementRequired": true,
+      "auditRequired": true,
+      "idempotencyRequired": false,
+      "approvalMayBeRequired": false,
+      "serviceIdentityAllowed": false,
+      "compatibilityMode": "CURRENT_JWT_COMPATIBILITY",
+      "defaultDenialCode": "PERMISSION_DENIED"
+    },
+    {
+      "policyId": "STREAM",
+      "authenticationClass": "USER_OR_SERVICE_AUTHENTICATED",
+      "permissionRequired": true,
+      "scopeRequirement": "TENANT_REQUIRED",
+      "packageEnforcementRequired": true,
+      "auditRequired": true,
+      "idempotencyRequired": false,
+      "approvalMayBeRequired": false,
+      "serviceIdentityAllowed": true,
+      "compatibilityMode": "CURRENT_JWT_COMPATIBILITY",
+      "defaultDenialCode": "PERMISSION_DENIED"
+    },
+    {
+      "policyId": "AUTHENTICATION",
+      "authenticationClass": "PUBLIC",
+      "permissionRequired": false,
+      "scopeRequirement": "NOT_APPLICABLE",
+      "packageEnforcementRequired": false,
+      "auditRequired": true,
+      "idempotencyRequired": false,
+      "approvalMayBeRequired": false,
+      "serviceIdentityAllowed": false,
+      "compatibilityMode": "CURRENT_JWT_COMPATIBILITY",
+      "defaultDenialCode": "INVALID_CREDENTIAL"
+    },
+    {
+      "policyId": "HEALTH_PUBLIC",
+      "authenticationClass": "PUBLIC",
+      "permissionRequired": false,
+      "scopeRequirement": "NOT_APPLICABLE",
+      "packageEnforcementRequired": false,
+      "auditRequired": false,
+      "idempotencyRequired": false,
+      "approvalMayBeRequired": false,
+      "serviceIdentityAllowed": false,
+      "compatibilityMode": "TARGET_ENFORCED",
+      "defaultDenialCode": "PUBLIC_ROUTE_NOT_ALLOWED"
+    },
+    {
+      "policyId": "HEALTH_PROTECTED",
+      "authenticationClass": "USER_AUTHENTICATED",
+      "permissionRequired": true,
+      "scopeRequirement": "TENANT_REQUIRED",
+      "packageEnforcementRequired": true,
+      "auditRequired": true,
+      "idempotencyRequired": false,
+      "approvalMayBeRequired": false,
+      "serviceIdentityAllowed": false,
+      "compatibilityMode": "CURRENT_JWT_COMPATIBILITY",
+      "defaultDenialCode": "PERMISSION_DENIED"
+    },
+    {
+      "policyId": "TEST_ONLY",
+      "authenticationClass": "TEST_ONLY",
+      "permissionRequired": false,
+      "scopeRequirement": "NOT_APPLICABLE",
+      "packageEnforcementRequired": false,
+      "auditRequired": false,
+      "idempotencyRequired": false,
+      "approvalMayBeRequired": false,
+      "serviceIdentityAllowed": true,
+      "compatibilityMode": "TEST_ONLY",
+      "defaultDenialCode": "ACTION_NOT_ALLOWED"
+    }
+  ],
+  "publicRoutePolicy": {
+    "defaultPolicy": "DENY_UNLESS_EXPLICITLY_ALLOWLISTED",
+    "eligibleCategories": [
+      "LOGIN_TOKEN_ACQUISITION",
+      "NARROW_LIVENESS",
+      "NARROW_READINESS_SUMMARY",
+      "APPROVED_STATIC_PUBLIC_METADATA"
+    ],
+    "prohibitedDataClasses": [
+      "TENANT_DATA",
+      "SITE_DATA",
+      "PACKAGE_ENTITLEMENT_DETAILS",
+      "DETAILED_RUNTIME_TOPOLOGY",
+      "DETAILED_DIAGNOSTICS",
+      "SECRETS",
+      "IDENTITY_LISTS",
+      "AUDIT_DATA",
+      "FAULT_DETAILS",
+      "WORK_ORDER_DATA",
+      "ASSET_DETAILS"
+    ],
+    "routes": [
+      {
+        "routeId": "ROUTE-GET-B5979853FC22",
+        "rationale": "Required to acquire or prove credentials before an authenticated session exists.",
+        "exposedDataClass": "AUTHENTICATION_EXCHANGE_MINIMUM",
+        "rateLimitRequired": true,
+        "sensitiveFieldPolicy": "MINIMIZE_RESPONSE; NO_TENANT_SITE_IDENTITY_LIST_SECRET_OR_INTERNAL_POLICY_DETAIL",
+        "auditPolicy": "SECURITY_EVENT_REQUIRED",
+        "reviewStatus": "AUTH_FLOW_REVIEW_REQUIRED",
+        "category": "LOGIN_TOKEN_ACQUISITION"
+      },
+      {
+        "routeId": "ROUTE-POST-FBB45557ACEE",
+        "rationale": "Required to acquire or prove credentials before an authenticated session exists.",
+        "exposedDataClass": "AUTHENTICATION_EXCHANGE_MINIMUM",
+        "rateLimitRequired": true,
+        "sensitiveFieldPolicy": "MINIMIZE_RESPONSE; NO_TENANT_SITE_IDENTITY_LIST_SECRET_OR_INTERNAL_POLICY_DETAIL",
+        "auditPolicy": "SECURITY_EVENT_REQUIRED",
+        "reviewStatus": "APPROVED_BASELINE_WITH_IMPLEMENTATION_VERIFICATION_REQUIRED",
+        "category": "LOGIN_TOKEN_ACQUISITION"
+      }
+    ]
+  },
+  "serviceIdentityPolicy": {
+    "defaultPolicy": "DENY_UNLESS_OPERATION_AND_PERMISSION_EXPLICITLY_ALLOW",
+    "permissionSource": "permission-registry.v1.json",
+    "tenantAndSiteIsolation": "REQUIRED",
+    "humanRoleInheritance": "PROHIBITED",
+    "futureCompatibleCredentialTechnologies": [
+      "OIDC_CLIENT_CREDENTIALS",
+      "MTLS"
+    ],
+    "implementationStatus": "NOT_IMPLEMENTED_BY_THIS_CONTRACT"
+  },
+  "denialResponseCatalog": [
+    {
+      "code": "AUTHENTICATION_REQUIRED",
+      "httpStatusRecommendation": 401,
+      "publicMessage": "Authentication is required.",
+      "auditSeverity": "WARNING",
+      "retryable": true,
+      "detailsExposurePolicy": "STABLE_CODE_AND_PUBLIC_MESSAGE_ONLY"
+    },
+    {
+      "code": "INVALID_CREDENTIAL",
+      "httpStatusRecommendation": 401,
+      "publicMessage": "The supplied credential is invalid.",
+      "auditSeverity": "WARNING",
+      "retryable": false,
+      "detailsExposurePolicy": "STABLE_CODE_AND_PUBLIC_MESSAGE_ONLY"
+    },
+    {
+      "code": "IDENTITY_DISABLED",
+      "httpStatusRecommendation": 403,
+      "publicMessage": "The identity is not permitted to access this resource.",
+      "auditSeverity": "HIGH",
+      "retryable": false,
+      "detailsExposurePolicy": "STABLE_CODE_AND_PUBLIC_MESSAGE_ONLY"
+    },
+    {
+      "code": "TENANT_MEMBERSHIP_REQUIRED",
+      "httpStatusRecommendation": 403,
+      "publicMessage": "Tenant membership is required.",
+      "auditSeverity": "WARNING",
+      "retryable": false,
+      "detailsExposurePolicy": "STABLE_CODE_AND_PUBLIC_MESSAGE_ONLY"
+    },
+    {
+      "code": "SITE_SCOPE_REQUIRED",
+      "httpStatusRecommendation": 403,
+      "publicMessage": "Site scope is required.",
+      "auditSeverity": "WARNING",
+      "retryable": false,
+      "detailsExposurePolicy": "STABLE_CODE_AND_PUBLIC_MESSAGE_ONLY"
+    },
+    {
+      "code": "TENANT_SCOPE_DENIED",
+      "httpStatusRecommendation": 403,
+      "publicMessage": "Tenant scope denied.",
+      "auditSeverity": "HIGH",
+      "retryable": false,
+      "detailsExposurePolicy": "STABLE_CODE_AND_PUBLIC_MESSAGE_ONLY"
+    },
+    {
+      "code": "SITE_SCOPE_DENIED",
+      "httpStatusRecommendation": 403,
+      "publicMessage": "Site scope denied.",
+      "auditSeverity": "HIGH",
+      "retryable": false,
+      "detailsExposurePolicy": "STABLE_CODE_AND_PUBLIC_MESSAGE_ONLY"
+    },
+    {
+      "code": "ENTITLEMENT_REQUIRED",
+      "httpStatusRecommendation": 403,
+      "publicMessage": "Package entitlement is required.",
+      "auditSeverity": "WARNING",
+      "retryable": false,
+      "detailsExposurePolicy": "STABLE_CODE_AND_PUBLIC_MESSAGE_ONLY"
+    },
+    {
+      "code": "PACKAGE_NOT_INSTALLED",
+      "httpStatusRecommendation": 503,
+      "publicMessage": "The required package is unavailable.",
+      "auditSeverity": "ERROR",
+      "retryable": true,
+      "detailsExposurePolicy": "STABLE_CODE_AND_PUBLIC_MESSAGE_ONLY"
+    },
+    {
+      "code": "PACKAGE_DISABLED",
+      "httpStatusRecommendation": 403,
+      "publicMessage": "The required package is disabled.",
+      "auditSeverity": "WARNING",
+      "retryable": false,
+      "detailsExposurePolicy": "STABLE_CODE_AND_PUBLIC_MESSAGE_ONLY"
+    },
+    {
+      "code": "PACKAGE_INCOMPATIBLE",
+      "httpStatusRecommendation": 503,
+      "publicMessage": "The required package is incompatible.",
+      "auditSeverity": "ERROR",
+      "retryable": true,
+      "detailsExposurePolicy": "STABLE_CODE_AND_PUBLIC_MESSAGE_ONLY"
+    },
+    {
+      "code": "PERMISSION_DENIED",
+      "httpStatusRecommendation": 403,
+      "publicMessage": "Permission denied.",
+      "auditSeverity": "WARNING",
+      "retryable": false,
+      "detailsExposurePolicy": "STABLE_CODE_AND_PUBLIC_MESSAGE_ONLY"
+    },
+    {
+      "code": "RESOURCE_SCOPE_DENIED",
+      "httpStatusRecommendation": 403,
+      "publicMessage": "Resource scope denied.",
+      "auditSeverity": "HIGH",
+      "retryable": false,
+      "detailsExposurePolicy": "STABLE_CODE_AND_PUBLIC_MESSAGE_ONLY"
+    },
+    {
+      "code": "ACTION_NOT_ALLOWED",
+      "httpStatusRecommendation": 409,
+      "publicMessage": "The requested action is not allowed.",
+      "auditSeverity": "WARNING",
+      "retryable": false,
+      "detailsExposurePolicy": "STABLE_CODE_AND_PUBLIC_MESSAGE_ONLY"
+    },
+    {
+      "code": "APPROVAL_REQUIRED",
+      "httpStatusRecommendation": 409,
+      "publicMessage": "Approval is required.",
+      "auditSeverity": "WARNING",
+      "retryable": true,
+      "detailsExposurePolicy": "STABLE_CODE_AND_PUBLIC_MESSAGE_ONLY"
+    },
+    {
+      "code": "IDEMPOTENCY_KEY_REQUIRED",
+      "httpStatusRecommendation": 400,
+      "publicMessage": "An idempotency key is required.",
+      "auditSeverity": "WARNING",
+      "retryable": true,
+      "detailsExposurePolicy": "STABLE_CODE_AND_PUBLIC_MESSAGE_ONLY"
+    },
+    {
+      "code": "SERVICE_IDENTITY_DENIED",
+      "httpStatusRecommendation": 403,
+      "publicMessage": "The service identity is not allowed.",
+      "auditSeverity": "HIGH",
+      "retryable": false,
+      "detailsExposurePolicy": "STABLE_CODE_AND_PUBLIC_MESSAGE_ONLY"
+    },
+    {
+      "code": "PUBLIC_ROUTE_NOT_ALLOWED",
+      "httpStatusRecommendation": 403,
+      "publicMessage": "Public access is not allowed.",
+      "auditSeverity": "HIGH",
+      "retryable": false,
+      "detailsExposurePolicy": "STABLE_CODE_AND_PUBLIC_MESSAGE_ONLY"
+    },
+    {
+      "code": "POLICY_UNAVAILABLE",
+      "httpStatusRecommendation": 503,
+      "publicMessage": "Authorization policy is unavailable.",
+      "auditSeverity": "CRITICAL",
+      "retryable": true,
+      "detailsExposurePolicy": "STABLE_CODE_AND_PUBLIC_MESSAGE_ONLY"
+    }
+  ],
+  "auditPolicy": {
+    "authoritativeOwner": "Governance & Security / Trust",
+    "recordType": "AuditRecord",
+    "requiredFor": [
+      "SENSITIVE_READ",
+      "MUTATION",
+      "CONTROL",
+      "EXPORT",
+      "AUTHENTICATION_EVENT",
+      "POLICY_DENIAL"
+    ],
+    "failurePolicy": "FAIL_CLOSED_FOR_REQUIRED_BUSINESS_ACTIONS",
+    "sensitiveDetailPolicy": "NO_SECRET_OR_INTERNAL_POLICY_DETAIL_IN_CLIENT_RESPONSE"
+  },
+  "idempotencyPolicy": {
+    "requiredFor": [
+      "INTAKE",
+      "CONTROL_COMMAND"
+    ],
+    "keyScope": "TENANT_IDENTITY_OPERATION_RESOURCE",
+    "replayBehavior": "RETURN_STABLE_PRIOR_OUTCOME_WITHOUT_REEXECUTION",
+    "conflictBehavior": "REJECT_KEY_REUSE_WITH_DIFFERENT_REQUEST",
+    "implementationStatus": "NOT_IMPLEMENTED_BY_THIS_CONTRACT"
+  },
+  "compatibilityPolicy": {
+    "credentialCompatibility": "CURRENT_JWT_COMPATIBILITY",
+    "futureCompatibleTechnologies": [
+      "OIDC",
+      "MTLS"
+    ],
+    "futureTechnologiesImplemented": false,
+    "legacyRule": "CLASSIFY_TARGET_POLICY_WITHOUT_CLAIMING_CURRENT_ENFORCEMENT",
+    "rolloutStages": [
+      "TARGET_ENFORCED",
+      "LEGACY_AUTH_ONLY",
+      "LEGACY_UNGUARDED",
+      "LEGACY_PUBLIC_REVIEW",
+      "TEST_ONLY",
+      "MIGRATION_REQUIRED"
+    ],
+    "defaultFailurePolicy": "FAIL_CLOSED",
+    "narrowException": "EXPLICITLY_APPROVED_HEALTH_OR_COMPATIBILITY_BEHAVIOR_ONLY"
+  }
+}
