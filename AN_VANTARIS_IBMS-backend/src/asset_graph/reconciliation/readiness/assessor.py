@@ -7,6 +7,7 @@ from ..models import sha256_digest
 from .evidence import extract_evidence_snapshot, validate_evidence_structure
 from .gates import evaluate_gates
 from .models import GateResult, ReadinessAssessment
+from .semantics import build_coverage_statistics, build_gate_semantics_index, enrich_gate_result
 
 ASSESSMENT_NAME = "VANTARIS ONE Asset Graph Read Migration Readiness Assessment"
 ASSESSMENT_VERSION = "1.0.0"
@@ -80,6 +81,12 @@ def assess_readiness(
     )
     passed_gate_count = sum(1 for gate in gate_results if gate.status == "PASS")
     failed_gate_count = sum(1 for gate in gate_results if gate.status == "FAIL")
+    coverage_statistics = build_coverage_statistics(evidence, policy)
+    gate_semantics = build_gate_semantics_index(policy)
+    enriched_gate_results = tuple(
+        enrich_gate_result(gate, policy, coverage_statistics, snapshot)
+        for gate in gate_results
+    )
     payload = {
         "assessmentName": ASSESSMENT_NAME,
         "assessmentVersion": ASSESSMENT_VERSION,
@@ -93,7 +100,9 @@ def assess_readiness(
         "warningCount": snapshot.warning_count,
         "passedGateCount": passed_gate_count,
         "failedGateCount": failed_gate_count,
-        "gateResults": [item.serialize() for item in gate_results],
+        "gateResults": list(enriched_gate_results),
+        "gateSemantics": gate_semantics,
+        "coverageStatistics": coverage_statistics,
         "coverageSummary": {
             "requiredFieldCoverageMinimumPercent": snapshot.required_coverage_min_percent,
             "safeSourceFieldCoverageMinimumPercent": snapshot.safe_coverage_min_percent,
@@ -141,5 +150,8 @@ def assess_readiness(
         relationship_summary=payload["relationshipSummary"],
         required_remediations=tuple(payload["requiredRemediations"]),
         write_cutover_status=payload["writeCutoverStatus"],
+        gate_semantics=gate_semantics,
+        coverage_statistics=coverage_statistics,
+        enriched_gate_results=enriched_gate_results,
         result_digest=sha256_digest(payload),
     )

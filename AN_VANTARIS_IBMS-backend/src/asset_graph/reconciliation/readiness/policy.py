@@ -23,6 +23,9 @@ def load_readiness_policy(path: Path | None = None, *, root: Path | None = None)
         raise ReadinessPolicyError(f"policy registry not found: {path}")
     policy = json.loads(path.read_text(encoding="utf-8"))
     _validate_policy(policy)
+    from .semantics import validate_gate_semantics
+
+    validate_gate_semantics(policy)
     return policy
 
 

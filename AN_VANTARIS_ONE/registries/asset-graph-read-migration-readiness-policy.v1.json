@@ -67,6 +67,90 @@
     "safeSourceFieldCoverageMinimumPercent": 75,
     "optionalFieldCoverageInformational": true
   },
+  "approvedAggregationLabels": [
+    "MINIMUM_PER_RECORD",
+    "MAXIMUM_PER_RECORD",
+    "PACKAGE_TOTAL",
+    "PACKAGE_RATIO",
+    "EXACT_PARITY",
+    "ZERO_TOLERANCE",
+    "BOUNDED_TOTAL",
+    "BOOLEAN_ASSERTION"
+  ],
+  "gateSemantics": {
+    "REQUIRED_FIELD_COVERAGE_GATE": {
+      "aggregation": "MINIMUM_PER_RECORD",
+      "recordScope": "DEVICE_FIELD_COVERAGE_ROWS",
+      "comparison": "observed >= threshold",
+      "percentageScale": "0_TO_100",
+      "comparisonMetric": "minimumPerRecordRequiredFieldCoverage",
+      "explanation": "The gate compares the lowest requiredFieldCoverage value across all Device-scoped fieldCoverage rows."
+    },
+    "SAFE_SOURCE_COVERAGE_GATE": {
+      "aggregation": "MINIMUM_PER_RECORD",
+      "recordScope": "DEVICE_FIELD_COVERAGE_ROWS",
+      "comparison": "observed >= threshold",
+      "percentageScale": "0_TO_100",
+      "comparisonMetric": "minimumPerRecordSafeSourceCoverage",
+      "explanation": "The gate compares the lowest safeSourceFieldCoverage value across all Device-scoped fieldCoverage rows. Package average and modal coverage are informational and do not determine the gate result."
+    },
+    "UNRESOLVED_RELATIONSHIP_GATE": {
+      "aggregation": "BOUNDED_TOTAL",
+      "recordScope": "RELATIONSHIP_METRICS",
+      "comparison": "observed <= threshold",
+      "percentageScale": "NONE",
+      "comparisonMetric": "unresolvedRelationshipCount",
+      "explanation": "Unresolved relationship count must remain within bounded totals defined for limited validation and read-migration candidate paths."
+    },
+    "DUPLICATE_RELATIONSHIP_GATE": {
+      "aggregation": "ZERO_TOLERANCE",
+      "recordScope": "RELATIONSHIP_METRICS",
+      "comparison": "observed <= threshold",
+      "percentageScale": "NONE",
+      "comparisonMetric": "duplicateCanonicalRelationshipCount",
+      "explanation": "Duplicate canonical relationship evidence must remain at zero tolerance; synthetic fixture duplicates remain blocking."
+    },
+    "REVIEW_RATIO_GATE": {
+      "aggregation": "PACKAGE_RATIO",
+      "recordScope": "RECONCILIATION_SUMMARY",
+      "comparison": "observed <= threshold",
+      "percentageScale": "0_TO_100",
+      "comparisonMetric": "reviewCountToTotalRecordsRatio",
+      "explanation": "Review ratio is computed as reviewCount divided by totalRecords."
+    },
+    "WARNING_RATIO_GATE": {
+      "aggregation": "PACKAGE_RATIO",
+      "recordScope": "RECONCILIATION_SUMMARY",
+      "comparison": "observed <= threshold",
+      "percentageScale": "0_TO_100",
+      "comparisonMetric": "warningCountToTotalRecordsRatio",
+      "explanation": "Warning ratio is computed as warningCount divided by totalRecords."
+    },
+    "HAS_POINT_PARITY_GATE": {
+      "aggregation": "EXACT_PARITY",
+      "recordScope": "RELATIONSHIP_METRICS",
+      "comparison": "projectedPointCount == hasPointPassCount",
+      "percentageScale": "NONE",
+      "comparisonMetric": "hasPointPassMatchesProjectedPoints",
+      "explanation": "Projected Point count must exactly match PASS HAS_POINT relationship count."
+    },
+    "TENANT_SCOPE_GATE": {
+      "aggregation": "BOOLEAN_ASSERTION",
+      "recordScope": "BLOCKER_SUMMARY",
+      "comparison": "tenantScopeBlocker == false",
+      "percentageScale": "NONE",
+      "comparisonMetric": "tenantScopeBlockerAbsent",
+      "explanation": "Tenant scope blockers must be absent for readiness approval."
+    },
+    "SITE_SCOPE_GATE": {
+      "aggregation": "BOOLEAN_ASSERTION",
+      "recordScope": "BLOCKER_SUMMARY",
+      "comparison": "siteScopeBlocker == false",
+      "percentageScale": "NONE",
+      "comparisonMetric": "siteScopeBlockerAbsent",
+      "explanation": "Site scope blockers must be absent for readiness approval."
+    }
+  },
   "ratioThresholds": {
     "reviewRatioMaximumPercentForLimitedValidation": 10,
     "warningRatioMaximumPercentForLimitedValidation": 20

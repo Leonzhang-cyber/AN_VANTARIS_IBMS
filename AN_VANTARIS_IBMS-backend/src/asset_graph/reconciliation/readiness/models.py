@@ -50,9 +50,17 @@ class ReadinessAssessment:
     relationship_summary: Mapping[str, Any]
     required_remediations: Tuple[str, ...]
     write_cutover_status: str
+    gate_semantics: Mapping[str, Any] = ()
+    coverage_statistics: Mapping[str, Any] = ()
+    enriched_gate_results: Tuple[Mapping[str, Any], ...] = ()
     result_digest: str = ""
 
     def serialize(self) -> dict[str, Any]:
+        gate_results = (
+            [dict(item) for item in self.enriched_gate_results]
+            if self.enriched_gate_results
+            else [item.serialize() for item in self.gate_results]
+        )
         payload = {
             "assessmentName": self.assessment_name,
             "assessmentVersion": self.assessment_version,
@@ -66,7 +74,9 @@ class ReadinessAssessment:
             "warningCount": self.warning_count,
             "passedGateCount": self.passed_gate_count,
             "failedGateCount": self.failed_gate_count,
-            "gateResults": [item.serialize() for item in self.gate_results],
+            "gateResults": gate_results,
+            "gateSemantics": dict(self.gate_semantics) if self.gate_semantics else {},
+            "coverageStatistics": dict(self.coverage_statistics) if self.coverage_statistics else {},
             "coverageSummary": dict(self.coverage_summary),
             "identitySummary": dict(self.identity_summary),
             "scopeSummary": dict(self.scope_summary),
