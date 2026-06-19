@@ -1,0 +1,126 @@
+{
+  "profileName": "VANTARIS ONE Airport System and Device Classification Profile",
+  "profileVersion": "1.0.0",
+  "authority": "ONE-AIRPORT-A1-03",
+  "profileType": "INDUSTRY_PROFILE",
+  "platformScope": "CROSS_INDUSTRY_ASSET_GRAPH",
+  "implementationMode": "READ_ONLY_CLASSIFICATION",
+  "platformCoreAirportized": false,
+  "owningModule": "ONE Asset Graph",
+  "profileId": "airport-classification-v1",
+  "mappingVersion": "airport-classification-v1",
+  "genericSystemCategories": [
+    "VIDEO_SURVEILLANCE",
+    "ACCESS_CONTROL",
+    "PUBLIC_ADDRESS",
+    "RADIO_COMMUNICATION",
+    "TELECOMMUNICATION",
+    "BUILDING_AUTOMATION",
+    "ENERGY_MANAGEMENT",
+    "SECURITY",
+    "INSPECTION",
+    "CUSTOMER_FEEDBACK",
+    "MAINTENANCE_MANAGEMENT",
+    "OTHER_CONTROLLED"
+  ],
+  "genericDeviceClasses": [
+    "CAMERA",
+    "TELEPHONE",
+    "ANTENNA",
+    "COUPLER",
+    "SPLITTER",
+    "CONTROLLER",
+    "LOCK",
+    "BREAK_GLASS",
+    "PUSH_BUTTON",
+    "CARD_READER",
+    "SPEAKER",
+    "INTERFACE",
+    "NETWORK_CONTROLLER",
+    "AMPLIFIER",
+    "SENSOR",
+    "ENDPOINT",
+    "OUTLET",
+    "OTHER_CONTROLLED"
+  ],
+  "industrySystemLabels": [
+    "CCTV",
+    "PA",
+    "ACS",
+    "RAS",
+    "TEL"
+  ],
+  "sourceNamespaceCodes": [
+    "SCN"
+  ],
+  "embeddedSystemAliasCandidates": {
+    "CCT": "CCTV",
+    "PAS": "PA"
+  },
+  "compatibleIntakeAuthorities": [
+    "ONE-AIRPORT-A1-01"
+  ],
+  "compatibleIntakeEvidenceVersions": [
+    "1.0.0"
+  ],
+  "compatibleSpatialAuthorities": [
+    "ONE-AIRPORT-A1-02"
+  ],
+  "compatibleSpatialEvidenceVersions": [
+    "1.0.0"
+  ],
+  "compatibleIntakeExecutionModes": [
+    "OFFLINE_READ_ONLY"
+  ],
+  "compatibleIntakeReadinessOutcomes": [
+    "INTAKE_COMPLETE_WITH_REVIEWS",
+    "READY_FOR_AIRPORT_ASSET_RECONCILIATION"
+  ],
+  "compatibleSpatialReadinessOutcomes": [
+    "SPATIAL_MAPPING_COMPLETE_WITH_REVIEWS",
+    "READY_FOR_AIRPORT_ASSET_RECONCILIATION"
+  ],
+  "forbiddenReadinessOutcomes": [
+    "READY_FOR_DATABASE_IMPORT",
+    "READY_FOR_CANONICAL_WRITE",
+    "READY_FOR_WRITE_CUTOVER"
+  ],
+  "allowedSystemMappingStatuses": [
+    "EXACT_MATCH",
+    "APPROVED_ALIAS",
+    "ALIAS_CANDIDATE",
+    "AMBIGUOUS_SOURCE_CODE",
+    "COLUMN_ID_CONFLICT",
+    "UNMAPPED_SOURCE_CODE",
+    "UNSUPPORTED_SYSTEM",
+    "REVIEW_REQUIRED"
+  ],
+  "allowedDeviceTypeMappingStatuses": [
+    "EXACT_TYPE_MATCH",
+    "APPROVED_TYPE_ALIAS",
+    "TYPE_ALIAS_CANDIDATE",
+    "UNKNOWN_DEVICE_TYPE_CODE",
+    "DEVICE_TYPE_COLUMN_CONFLICT",
+    "TYPE_REVIEW_REQUIRED"
+  ],
+  "allowedCompatibilityStatuses": [
+    "SYSTEM_DEVICE_COMPATIBLE",
+    "SYSTEM_DEVICE_UNEXPECTED",
+    "SYSTEM_DEVICE_AMBIGUOUS",
+    "SYSTEM_DEVICE_CONFLICT",
+    "COMPATIBILITY_REVIEW_REQUIRED"
+  ],
+  "allowedAuthorityLevels": [
+    "PLATFORM_GENERIC_CATEGORY",
+    "AIRPORT_PROFILE_APPROVED",
+    "CUSTOMER_MAPPING_APPROVED",
+    "EVIDENCE_ONLY",
+    "UNRESOLVED"
+  ],
+  "implementationPaths": [
+    "AN_VANTARIS_ONE/registries/airport-classification-profile.v1.json",
+    "AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/",
+    "AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/",
+    "scripts/validation/validate-one-airport-classification-profile.py"
+  ]
+}
