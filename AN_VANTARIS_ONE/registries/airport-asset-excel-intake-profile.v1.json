@@ -1,0 +1,62 @@
+{
+  "profileName": "VANTARIS ONE Airport Asset Excel Intake Profile",
+  "profileVersion": "1.0.0",
+  "authority": "ONE-AIRPORT-A1-01",
+  "owningModule": "ONE Asset Graph",
+  "capabilityPath": "Airport Asset Intake",
+  "executionMode": "OFFLINE_READ_ONLY",
+  "sourceWorkbookPolicy": {
+    "acceptedExtension": ".xlsx",
+    "operatorSuppliedPathOnly": true,
+    "mustRemainOutsideGit": true,
+    "mustNotBeEmbeddedInTests": true,
+    "preferredRuntimePath": "/tmp/one-airport-a1-01/Asset_Database_Zonewise_Basement_SH_030626.xlsx"
+  },
+  "requiredWorksheets": ["Zone-1", "Zone-2"],
+  "assetMasterFields": [
+    "SL",
+    "Device ID",
+    "Building",
+    "Level",
+    "Zone",
+    "DA",
+    "System",
+    "Area",
+    "Location",
+    "Device Type"
+  ],
+  "maintenanceExtensionFields": [
+    "Day",
+    "Keys Number",
+    "Scissor Lift",
+    "Mobile Scaffold",
+    "Last Done",
+    "Due Date",
+    "Status",
+    "Overdue",
+    "Remarks"
+  ],
+  "readinessOutcomes": [
+    "INPUT_REJECTED",
+    "INTAKE_BLOCKED",
+    "INTAKE_COMPLETE_WITH_REVIEWS",
+    "READY_FOR_AIRPORT_ASSET_RECONCILIATION"
+  ],
+  "forbiddenReadinessOutcomes": [
+    "READY_FOR_DATABASE_IMPORT",
+    "READY_FOR_CANONICAL_WRITE",
+    "READY_FOR_WRITE_CUTOVER"
+  ],
+  "implementationPaths": [
+    "AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/",
+    "AN_VANTARIS_IBMS-backend/tests/asset_graph/airport_intake/",
+    "scripts/validation/run-one-airport-asset-excel-intake.py",
+    "scripts/validation/validate-one-airport-asset-excel-intake.py"
+  ],
+  "forbiddenPaths": [
+    "AN_VANTARIS_EDGE/",
+    "UFMS/",
+    "database/migrations/",
+    "AN_VANTARIS_IBMS-frontend/"
+  ]
+}
