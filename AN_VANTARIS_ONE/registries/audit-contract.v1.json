@@ -1,0 +1,740 @@
+{
+  "registryName": "VANTARIS ONE Audit Contract",
+  "registryVersion": "1.0.0",
+  "authority": "ONE-A5-P0-07",
+  "status": "FROZEN_FOR_AUDIT_IMPLEMENTATION",
+  "generatedAtPolicy": "STATIC_ARCHITECTURE_BASELINE",
+  "auditPrinciples": [
+    "AuditRecord is owned by Governance & Security.",
+    "AuditRecord is not automatically an EvidenceRecord.",
+    "EvidenceReference may reference an AuditRecord when required.",
+    "Every security decision must be auditable.",
+    "Every business mutation and lifecycle transition must be auditable.",
+    "Every control operation must be auditable.",
+    "Sensitive reads and exports must be auditable.",
+    "Package state and entitlement transitions must be auditable.",
+    "Authentication success and failure must follow security audit policy.",
+    "Service-identity operations must identify the machine actor.",
+    "Audit failure must never silently convert a denied action into an allowed action.",
+    "Secrets, credentials and full tokens must never enter AuditRecord.",
+    "Audit identifiers and trace identifiers must be stable and non-secret.",
+    "Audit storage implementation is outside this task.",
+    "Local Reports JSONL is legacy compatibility only, not the target audit system of record."
+  ],
+  "auditEventClasses": [
+    {
+      "eventClass": "AUTHENTICATION",
+      "owner": "Governance & Security",
+      "defaultSeverity": "HIGH",
+      "actorRequired": true,
+      "targetRequired": false,
+      "beforeStateRequired": false,
+      "afterStateRequired": false,
+      "reasonRequired": false,
+      "permissionRequired": false,
+      "tenantRequired": false,
+      "siteRequired": false,
+      "evidenceEligible": false,
+      "retentionClass": "SECURITY_LONG",
+      "synchronousEmissionRequired": true,
+      "failureBehavior": "FAIL_CLOSED"
+    },
+    {
+      "eventClass": "AUTHORIZATION_DECISION",
+      "owner": "Governance & Security",
+      "defaultSeverity": "HIGH",
+      "actorRequired": true,
+      "targetRequired": false,
+      "beforeStateRequired": false,
+      "afterStateRequired": false,
+      "reasonRequired": true,
+      "permissionRequired": true,
+      "tenantRequired": true,
+      "siteRequired": false,
+      "evidenceEligible": false,
+      "retentionClass": "SECURITY_LONG",
+      "synchronousEmissionRequired": true,
+      "failureBehavior": "FAIL_CLOSED"
+    },
+    {
+      "eventClass": "SECURITY_ADMINISTRATION",
+      "owner": "Governance & Security",
+      "defaultSeverity": "HIGH",
+      "actorRequired": true,
+      "targetRequired": true,
+      "beforeStateRequired": false,
+      "afterStateRequired": false,
+      "reasonRequired": true,
+      "permissionRequired": true,
+      "tenantRequired": true,
+      "siteRequired": false,
+      "evidenceEligible": true,
+      "retentionClass": "SECURITY_LONG",
+      "synchronousEmissionRequired": true,
+      "failureBehavior": "FAIL_CLOSED"
+    },
+    {
+      "eventClass": "PACKAGE_LIFECYCLE",
+      "owner": "Governance & Security",
+      "defaultSeverity": "HIGH",
+      "actorRequired": true,
+      "targetRequired": true,
+      "beforeStateRequired": true,
+      "afterStateRequired": true,
+      "reasonRequired": true,
+      "permissionRequired": true,
+      "tenantRequired": true,
+      "siteRequired": false,
+      "evidenceEligible": true,
+      "retentionClass": "SECURITY_LONG",
+      "synchronousEmissionRequired": true,
+      "failureBehavior": "FAIL_CLOSED"
+    },
+    {
+      "eventClass": "ENTITLEMENT_LIFECYCLE",
+      "owner": "Governance & Security",
+      "defaultSeverity": "HIGH",
+      "actorRequired": true,
+      "targetRequired": true,
+      "beforeStateRequired": true,
+      "afterStateRequired": true,
+      "reasonRequired": true,
+      "permissionRequired": true,
+      "tenantRequired": true,
+      "siteRequired": false,
+      "evidenceEligible": false,
+      "retentionClass": "SECURITY_LONG",
+      "synchronousEmissionRequired": true,
+      "failureBehavior": "FAIL_CLOSED"
+    },
+    {
+      "eventClass": "CONFIGURATION_CHANGE",
+      "owner": "Governance & Security",
+      "defaultSeverity": "MEDIUM",
+      "actorRequired": true,
+      "targetRequired": true,
+      "beforeStateRequired": true,
+      "afterStateRequired": true,
+      "reasonRequired": true,
+      "permissionRequired": true,
+      "tenantRequired": true,
+      "siteRequired": false,
+      "evidenceEligible": false,
+      "retentionClass": "BUSINESS_LONG",
+      "synchronousEmissionRequired": false,
+      "failureBehavior": "FAIL_OPERATION_WITH_AUDIT_ERROR"
+    },
+    {
+      "eventClass": "CANONICAL_OBJECT_CREATE",
+      "owner": "Governance & Security",
+      "defaultSeverity": "MEDIUM",
+      "actorRequired": true,
+      "targetRequired": true,
+      "beforeStateRequired": false,
+      "afterStateRequired": true,
+      "reasonRequired": true,
+      "permissionRequired": true,
+      "tenantRequired": true,
+      "siteRequired": true,
+      "evidenceEligible": false,
+      "retentionClass": "BUSINESS_LONG",
+      "synchronousEmissionRequired": false,
+      "failureBehavior": "FAIL_OPERATION_WITH_AUDIT_ERROR"
+    },
+    {
+      "eventClass": "CANONICAL_OBJECT_UPDATE",
+      "owner": "Governance & Security",
+      "defaultSeverity": "MEDIUM",
+      "actorRequired": true,
+      "targetRequired": true,
+      "beforeStateRequired": true,
+      "afterStateRequired": true,
+      "reasonRequired": true,
+      "permissionRequired": true,
+      "tenantRequired": true,
+      "siteRequired": true,
+      "evidenceEligible": false,
+      "retentionClass": "BUSINESS_LONG",
+      "synchronousEmissionRequired": false,
+      "failureBehavior": "FAIL_OPERATION_WITH_AUDIT_ERROR"
+    },
+    {
+      "eventClass": "CANONICAL_OBJECT_RETIRE",
+      "owner": "Governance & Security",
+      "defaultSeverity": "MEDIUM",
+      "actorRequired": true,
+      "targetRequired": true,
+      "beforeStateRequired": true,
+      "afterStateRequired": true,
+      "reasonRequired": true,
+      "permissionRequired": true,
+      "tenantRequired": true,
+      "siteRequired": true,
+      "evidenceEligible": false,
+      "retentionClass": "BUSINESS_LONG",
+      "synchronousEmissionRequired": false,
+      "failureBehavior": "FAIL_OPERATION_WITH_AUDIT_ERROR"
+    },
+    {
+      "eventClass": "BUSINESS_STATE_TRANSITION",
+      "owner": "Governance & Security",
+      "defaultSeverity": "MEDIUM",
+      "actorRequired": true,
+      "targetRequired": true,
+      "beforeStateRequired": true,
+      "afterStateRequired": true,
+      "reasonRequired": true,
+      "permissionRequired": true,
+      "tenantRequired": true,
+      "siteRequired": true,
+      "evidenceEligible": true,
+      "retentionClass": "BUSINESS_LONG",
+      "synchronousEmissionRequired": false,
+      "failureBehavior": "FAIL_OPERATION_WITH_AUDIT_ERROR"
+    },
+    {
+      "eventClass": "WORK_LIFECYCLE",
+      "owner": "Governance & Security",
+      "defaultSeverity": "MEDIUM",
+      "actorRequired": true,
+      "targetRequired": true,
+      "beforeStateRequired": true,
+      "afterStateRequired": true,
+      "reasonRequired": true,
+      "permissionRequired": true,
+      "tenantRequired": true,
+      "siteRequired": true,
+      "evidenceEligible": true,
+      "retentionClass": "BUSINESS_LONG",
+      "synchronousEmissionRequired": false,
+      "failureBehavior": "FAIL_OPERATION_WITH_AUDIT_ERROR"
+    },
+    {
+      "eventClass": "MAINTENANCE_LIFECYCLE",
+      "owner": "Governance & Security",
+      "defaultSeverity": "MEDIUM",
+      "actorRequired": true,
+      "targetRequired": true,
+      "beforeStateRequired": true,
+      "afterStateRequired": true,
+      "reasonRequired": true,
+      "permissionRequired": true,
+      "tenantRequired": true,
+      "siteRequired": true,
+      "evidenceEligible": true,
+      "retentionClass": "BUSINESS_LONG",
+      "synchronousEmissionRequired": false,
+      "failureBehavior": "FAIL_OPERATION_WITH_AUDIT_ERROR"
+    },
+    {
+      "eventClass": "FAULT_ACTION",
+      "owner": "Governance & Security",
+      "defaultSeverity": "MEDIUM",
+      "actorRequired": true,
+      "targetRequired": true,
+      "beforeStateRequired": true,
+      "afterStateRequired": true,
+      "reasonRequired": true,
+      "permissionRequired": true,
+      "tenantRequired": true,
+      "siteRequired": true,
+      "evidenceEligible": true,
+      "retentionClass": "BUSINESS_LONG",
+      "synchronousEmissionRequired": false,
+      "failureBehavior": "FAIL_OPERATION_WITH_AUDIT_ERROR"
+    },
+    {
+      "eventClass": "EVIDENCE_ACTION",
+      "owner": "Governance & Security",
+      "defaultSeverity": "MEDIUM",
+      "actorRequired": true,
+      "targetRequired": true,
+      "beforeStateRequired": false,
+      "afterStateRequired": false,
+      "reasonRequired": true,
+      "permissionRequired": true,
+      "tenantRequired": true,
+      "siteRequired": true,
+      "evidenceEligible": true,
+      "retentionClass": "BUSINESS_LONG",
+      "synchronousEmissionRequired": false,
+      "failureBehavior": "FAIL_OPERATION_WITH_AUDIT_ERROR"
+    },
+    {
+      "eventClass": "REPORT_EXECUTION",
+      "owner": "Governance & Security",
+      "defaultSeverity": "INFO",
+      "actorRequired": true,
+      "targetRequired": true,
+      "beforeStateRequired": false,
+      "afterStateRequired": false,
+      "reasonRequired": false,
+      "permissionRequired": true,
+      "tenantRequired": true,
+      "siteRequired": false,
+      "evidenceEligible": false,
+      "retentionClass": "OPERATIONAL_STANDARD",
+      "synchronousEmissionRequired": false,
+      "failureBehavior": "BEST_EFFORT_NON_SENSITIVE_READ"
+    },
+    {
+      "eventClass": "EXPORT",
+      "owner": "Governance & Security",
+      "defaultSeverity": "HIGH",
+      "actorRequired": true,
+      "targetRequired": true,
+      "beforeStateRequired": false,
+      "afterStateRequired": false,
+      "reasonRequired": true,
+      "permissionRequired": true,
+      "tenantRequired": true,
+      "siteRequired": false,
+      "evidenceEligible": true,
+      "retentionClass": "SECURITY_LONG",
+      "synchronousEmissionRequired": true,
+      "failureBehavior": "FAIL_CLOSED"
+    },
+    {
+      "eventClass": "CONTROL_OPERATION",
+      "owner": "Governance & Security",
+      "defaultSeverity": "MEDIUM",
+      "actorRequired": true,
+      "targetRequired": true,
+      "beforeStateRequired": false,
+      "afterStateRequired": false,
+      "reasonRequired": true,
+      "permissionRequired": true,
+      "tenantRequired": true,
+      "siteRequired": true,
+      "evidenceEligible": true,
+      "retentionClass": "BUSINESS_LONG",
+      "synchronousEmissionRequired": false,
+      "failureBehavior": "FAIL_OPERATION_WITH_AUDIT_ERROR"
+    },
+    {
+      "eventClass": "INTEGRATION_OPERATION",
+      "owner": "Governance & Security",
+      "defaultSeverity": "MEDIUM",
+      "actorRequired": true,
+      "targetRequired": true,
+      "beforeStateRequired": false,
+      "afterStateRequired": false,
+      "reasonRequired": true,
+      "permissionRequired": true,
+      "tenantRequired": true,
+      "siteRequired": true,
+      "evidenceEligible": false,
+      "retentionClass": "BUSINESS_LONG",
+      "synchronousEmissionRequired": false,
+      "failureBehavior": "FAIL_OPERATION_WITH_AUDIT_ERROR"
+    },
+    {
+      "eventClass": "AI_REQUEST",
+      "owner": "Governance & Security",
+      "defaultSeverity": "INFO",
+      "actorRequired": true,
+      "targetRequired": true,
+      "beforeStateRequired": false,
+      "afterStateRequired": false,
+      "reasonRequired": false,
+      "permissionRequired": true,
+      "tenantRequired": true,
+      "siteRequired": false,
+      "evidenceEligible": false,
+      "retentionClass": "OPERATIONAL_STANDARD",
+      "synchronousEmissionRequired": false,
+      "failureBehavior": "BEST_EFFORT_NON_SENSITIVE_READ"
+    },
+    {
+      "eventClass": "AI_REVIEW",
+      "owner": "Governance & Security",
+      "defaultSeverity": "MEDIUM",
+      "actorRequired": true,
+      "targetRequired": true,
+      "beforeStateRequired": false,
+      "afterStateRequired": false,
+      "reasonRequired": true,
+      "permissionRequired": true,
+      "tenantRequired": true,
+      "siteRequired": false,
+      "evidenceEligible": false,
+      "retentionClass": "BUSINESS_LONG",
+      "synchronousEmissionRequired": false,
+      "failureBehavior": "FAIL_OPERATION_WITH_AUDIT_ERROR"
+    },
+    {
+      "eventClass": "MODEL_LIFECYCLE",
+      "owner": "Governance & Security",
+      "defaultSeverity": "MEDIUM",
+      "actorRequired": true,
+      "targetRequired": true,
+      "beforeStateRequired": true,
+      "afterStateRequired": true,
+      "reasonRequired": true,
+      "permissionRequired": true,
+      "tenantRequired": true,
+      "siteRequired": false,
+      "evidenceEligible": true,
+      "retentionClass": "BUSINESS_LONG",
+      "synchronousEmissionRequired": false,
+      "failureBehavior": "FAIL_OPERATION_WITH_AUDIT_ERROR"
+    },
+    {
+      "eventClass": "SENSITIVE_READ",
+      "owner": "Governance & Security",
+      "defaultSeverity": "INFO",
+      "actorRequired": true,
+      "targetRequired": true,
+      "beforeStateRequired": false,
+      "afterStateRequired": false,
+      "reasonRequired": false,
+      "permissionRequired": true,
+      "tenantRequired": true,
+      "siteRequired": false,
+      "evidenceEligible": false,
+      "retentionClass": "OPERATIONAL_STANDARD",
+      "synchronousEmissionRequired": false,
+      "failureBehavior": "BEST_EFFORT_NON_SENSITIVE_READ"
+    },
+    {
+      "eventClass": "SYSTEM_HEALTH_CONTROL",
+      "owner": "Governance & Security",
+      "defaultSeverity": "MEDIUM",
+      "actorRequired": true,
+      "targetRequired": true,
+      "beforeStateRequired": false,
+      "afterStateRequired": false,
+      "reasonRequired": true,
+      "permissionRequired": true,
+      "tenantRequired": true,
+      "siteRequired": false,
+      "evidenceEligible": false,
+      "retentionClass": "BUSINESS_LONG",
+      "synchronousEmissionRequired": false,
+      "failureBehavior": "FAIL_OPERATION_WITH_AUDIT_ERROR"
+    }
+  ],
+  "actorTypes": [
+    "USER",
+    "SERVICE_IDENTITY",
+    "SYSTEM_PROCESS",
+    "EXTERNAL_INTEGRATION"
+  ],
+  "targetTypes": [
+    "IDENTITY",
+    "TENANT",
+    "SITE",
+    "PACKAGE",
+    "CANONICAL_OBJECT",
+    "WORK_ORDER",
+    "MAINTENANCE_OBJECT",
+    "FAULT_CASE",
+    "EVIDENCE_RECORD",
+    "REPORT",
+    "EXPORT_JOB",
+    "INTEGRATION",
+    "MODEL",
+    "SYSTEM_CONTROL"
+  ],
+  "outcomeTypes": [
+    "SUCCESS",
+    "DENIED",
+    "FAILED",
+    "PARTIAL",
+    "QUEUED"
+  ],
+  "severityLevels": [
+    "INFO",
+    "LOW",
+    "MEDIUM",
+    "HIGH",
+    "CRITICAL"
+  ],
+  "requiredFields": [
+    {
+      "field": "auditId",
+      "requiredPolicy": "REQUIRED",
+      "sensitiveDataClass": "ALLOWED_NON_SENSITIVE",
+      "description": "Target AuditRecord field; values must follow sensitive-data policy."
+    },
+    {
+      "field": "eventClass",
+      "requiredPolicy": "REQUIRED",
+      "sensitiveDataClass": "ALLOWED_NON_SENSITIVE",
+      "description": "Target AuditRecord field; values must follow sensitive-data policy."
+    },
+    {
+      "field": "action",
+      "requiredPolicy": "REQUIRED",
+      "sensitiveDataClass": "ALLOWED_NON_SENSITIVE",
+      "description": "Target AuditRecord field; values must follow sensitive-data policy."
+    },
+    {
+      "field": "occurredAt",
+      "requiredPolicy": "REQUIRED",
+      "sensitiveDataClass": "ALLOWED_NON_SENSITIVE",
+      "description": "Target AuditRecord field; values must follow sensitive-data policy."
+    },
+    {
+      "field": "actorType",
+      "requiredPolicy": "REQUIRED",
+      "sensitiveDataClass": "ALLOWED_NON_SENSITIVE",
+      "description": "Target AuditRecord field; values must follow sensitive-data policy."
+    },
+    {
+      "field": "actorId",
+      "requiredPolicy": "REQUIRED",
+      "sensitiveDataClass": "ALLOWED_NON_SENSITIVE",
+      "description": "Target AuditRecord field; values must follow sensitive-data policy."
+    },
+    {
+      "field": "serviceIdentityId",
+      "requiredPolicy": "CONDITIONAL_BY_EVENT_CLASS",
+      "sensitiveDataClass": "ALLOWED_NON_SENSITIVE",
+      "description": "Target AuditRecord field; values must follow sensitive-data policy."
+    },
+    {
+      "field": "tenantId",
+      "requiredPolicy": "CONDITIONAL_BY_EVENT_CLASS",
+      "sensitiveDataClass": "ALLOWED_NON_SENSITIVE",
+      "description": "Target AuditRecord field; values must follow sensitive-data policy."
+    },
+    {
+      "field": "siteId",
+      "requiredPolicy": "CONDITIONAL_BY_EVENT_CLASS",
+      "sensitiveDataClass": "ALLOWED_NON_SENSITIVE",
+      "description": "Target AuditRecord field; values must follow sensitive-data policy."
+    },
+    {
+      "field": "subjectType",
+      "requiredPolicy": "CONDITIONAL_BY_EVENT_CLASS",
+      "sensitiveDataClass": "ALLOWED_NON_SENSITIVE",
+      "description": "Target AuditRecord field; values must follow sensitive-data policy."
+    },
+    {
+      "field": "subjectId",
+      "requiredPolicy": "CONDITIONAL_BY_EVENT_CLASS",
+      "sensitiveDataClass": "ALLOWED_NON_SENSITIVE",
+      "description": "Target AuditRecord field; values must follow sensitive-data policy."
+    },
+    {
+      "field": "targetType",
+      "requiredPolicy": "CONDITIONAL_BY_EVENT_CLASS",
+      "sensitiveDataClass": "ALLOWED_NON_SENSITIVE",
+      "description": "Target AuditRecord field; values must follow sensitive-data policy."
+    },
+    {
+      "field": "targetId",
+      "requiredPolicy": "CONDITIONAL_BY_EVENT_CLASS",
+      "sensitiveDataClass": "ALLOWED_NON_SENSITIVE",
+      "description": "Target AuditRecord field; values must follow sensitive-data policy."
+    },
+    {
+      "field": "routeId",
+      "requiredPolicy": "REQUIRED",
+      "sensitiveDataClass": "ALLOWED_NON_SENSITIVE",
+      "description": "Target AuditRecord field; values must follow sensitive-data policy."
+    },
+    {
+      "field": "requestId",
+      "requiredPolicy": "REQUIRED",
+      "sensitiveDataClass": "ALLOWED_NON_SENSITIVE",
+      "description": "Target AuditRecord field; values must follow sensitive-data policy."
+    },
+    {
+      "field": "traceId",
+      "requiredPolicy": "REQUIRED",
+      "sensitiveDataClass": "ALLOWED_NON_SENSITIVE",
+      "description": "Target AuditRecord field; values must follow sensitive-data policy."
+    },
+    {
+      "field": "correlationId",
+      "requiredPolicy": "REQUIRED",
+      "sensitiveDataClass": "ALLOWED_NON_SENSITIVE",
+      "description": "Target AuditRecord field; values must follow sensitive-data policy."
+    },
+    {
+      "field": "permission",
+      "requiredPolicy": "CONDITIONAL_BY_EVENT_CLASS",
+      "sensitiveDataClass": "ALLOWED_NON_SENSITIVE",
+      "description": "Target AuditRecord field; values must follow sensitive-data policy."
+    },
+    {
+      "field": "packageId",
+      "requiredPolicy": "CONDITIONAL_BY_EVENT_CLASS",
+      "sensitiveDataClass": "ALLOWED_NON_SENSITIVE",
+      "description": "Target AuditRecord field; values must follow sensitive-data policy."
+    },
+    {
+      "field": "outcome",
+      "requiredPolicy": "REQUIRED",
+      "sensitiveDataClass": "ALLOWED_NON_SENSITIVE",
+      "description": "Target AuditRecord field; values must follow sensitive-data policy."
+    },
+    {
+      "field": "denialCode",
+      "requiredPolicy": "CONDITIONAL_BY_EVENT_CLASS",
+      "sensitiveDataClass": "ALLOWED_NON_SENSITIVE",
+      "description": "Target AuditRecord field; values must follow sensitive-data policy."
+    },
+    {
+      "field": "reasonCode",
+      "requiredPolicy": "CONDITIONAL_BY_EVENT_CLASS",
+      "sensitiveDataClass": "ALLOWED_NON_SENSITIVE",
+      "description": "Target AuditRecord field; values must follow sensitive-data policy."
+    },
+    {
+      "field": "previousStateDigest",
+      "requiredPolicy": "CONDITIONAL_BY_EVENT_CLASS",
+      "sensitiveDataClass": "ALLOWED_NON_SENSITIVE",
+      "description": "Target AuditRecord field; values must follow sensitive-data policy."
+    },
+    {
+      "field": "resultingStateDigest",
+      "requiredPolicy": "CONDITIONAL_BY_EVENT_CLASS",
+      "sensitiveDataClass": "ALLOWED_NON_SENSITIVE",
+      "description": "Target AuditRecord field; values must follow sensitive-data policy."
+    },
+    {
+      "field": "sourceIpClass",
+      "requiredPolicy": "CONDITIONAL_BY_EVENT_CLASS",
+      "sensitiveDataClass": "ALLOWED_NON_SENSITIVE",
+      "description": "Target AuditRecord field; values must follow sensitive-data policy."
+    },
+    {
+      "field": "userAgentClass",
+      "requiredPolicy": "CONDITIONAL_BY_EVENT_CLASS",
+      "sensitiveDataClass": "ALLOWED_NON_SENSITIVE",
+      "description": "Target AuditRecord field; values must follow sensitive-data policy."
+    },
+    {
+      "field": "contractVersion",
+      "requiredPolicy": "REQUIRED",
+      "sensitiveDataClass": "ALLOWED_NON_SENSITIVE",
+      "description": "Target AuditRecord field; values must follow sensitive-data policy."
+    },
+    {
+      "field": "metadataClassification",
+      "requiredPolicy": "REQUIRED",
+      "sensitiveDataClass": "ALLOWED_NON_SENSITIVE",
+      "description": "Target AuditRecord field; values must follow sensitive-data policy."
+    },
+    {
+      "field": "evidenceReferenceIds",
+      "requiredPolicy": "CONDITIONAL_BY_EVENT_CLASS",
+      "sensitiveDataClass": "ALLOWED_NON_SENSITIVE",
+      "description": "Target AuditRecord field; values must follow sensitive-data policy."
+    }
+  ],
+  "sensitiveDataPolicy": {
+    "classificationClasses": [
+      "PROHIBITED",
+      "REDACTED",
+      "HASHED",
+      "TOKENIZED_REFERENCE",
+      "CLASSIFIED_METADATA",
+      "ALLOWED_NON_SENSITIVE"
+    ],
+    "prohibitedContent": [
+      "PASSWORDS",
+      "PRIVATE_KEYS",
+      "SEED_PHRASES",
+      "BEARER_TOKENS",
+      "REFRESH_TOKENS",
+      "COMPLETE_AUTHENTICATION_HEADERS",
+      "DATABASE_CREDENTIALS",
+      "RAW_LICENSE_TOKENS",
+      "CONFIDENTIAL_FILE_CONTENTS",
+      "UNRESTRICTED_TELEMETRY_PAYLOADS",
+      "COMPLETE_PERSONAL_DATA_RECORDS"
+    ],
+    "fieldResponsibilities": {
+      "routeHandler": "Supply identifiers and classified metadata, never raw secrets or full bodies.",
+      "auditEmitter": "Enforce allowlist, redaction, hashing and tokenized references before delivery.",
+      "auditStore": "Reject prohibited classes and preserve classification metadata.",
+      "consumer": "Apply least privilege and retention controls."
+    },
+    "defaultPolicy": "PROHIBITED_UNLESS_EXPLICITLY_CLASSIFIED"
+  },
+  "evidenceRelationshipPolicy": {
+    "auditRecordIsEvidenceRecord": false,
+    "relationshipMechanism": "EvidenceReference",
+    "relationshipOwner": "Evidence Center",
+    "auditOwner": "Governance & Security",
+    "integrityPolicy": "Reference immutable auditId and optional digest; do not duplicate sensitive audit payload."
+  },
+  "retentionClasses": [
+    {
+      "retentionClass": "SECURITY_LONG",
+      "purpose": "Security and authorization decisions",
+      "deletionPolicy": "GOVERNED_RETENTION"
+    },
+    {
+      "retentionClass": "BUSINESS_LONG",
+      "purpose": "Business lifecycle and regulated actions",
+      "deletionPolicy": "GOVERNED_RETENTION"
+    },
+    {
+      "retentionClass": "OPERATIONAL_STANDARD",
+      "purpose": "Operational audit events",
+      "deletionPolicy": "STANDARD_RETENTION"
+    },
+    {
+      "retentionClass": "LEGACY_LOCAL_COMPATIBILITY",
+      "purpose": "Reports JSONL transition only",
+      "deletionPolicy": "MIGRATE_THEN_RETIRE"
+    }
+  ],
+  "deliveryPolicy": {
+    "targetDelivery": "AUTHORITATIVE_GOVERNANCE_SECURITY_AUDIT_CHANNEL",
+    "synchronousClasses": [
+      "AUTHORIZATION_DECISION",
+      "SECURITY_ADMINISTRATION",
+      "PACKAGE_LIFECYCLE",
+      "ENTITLEMENT_LIFECYCLE",
+      "EXPORT"
+    ],
+    "durableQueueAllowed": true,
+    "queueImplementationStatus": "OUTSIDE_THIS_TASK",
+    "orderingScope": "TENANT_SUBJECT_OR_CORRELATION_FLOW",
+    "duplicateHandling": "AUDIT_ID_AND_EVENT_FINGERPRINT_DEDUPLICATION"
+  },
+  "failurePolicy": {
+    "modes": [
+      "FAIL_CLOSED",
+      "FAIL_OPERATION_WITH_AUDIT_ERROR",
+      "QUEUE_DURABLY_THEN_CONTINUE",
+      "BEST_EFFORT_NON_SENSITIVE_READ",
+      "NOT_APPLICABLE"
+    ],
+    "defaults": {
+      "authorizationAndSecurityAdministration": "FAIL_CLOSED",
+      "packageAndEntitlementLifecycle": "FAIL_CLOSED",
+      "canonicalBusinessMutation": "FAIL_OPERATION_WITH_AUDIT_ERROR_OR_DURABLE_QUEUE_WITH_PROOF",
+      "sensitiveExport": "FAIL_CLOSED",
+      "normalNonSensitiveRead": "NOT_APPLICABLE",
+      "diagnosticRead": "POLICY_DEPENDENT",
+      "authenticationFailure": "FAIL_CLOSED_WITHOUT_CREDENTIAL_DETAIL"
+    },
+    "queueImplementedByThisContract": false
+  },
+  "compatibilityPolicy": {
+    "legacyReportsJsonl": "LEGACY_COMPATIBILITY_ONLY_NOT_TARGET_SYSTEM_OF_RECORD",
+    "targetSystemOfRecord": "Governance & Security",
+    "rollout": "DUAL_OR_MIGRATION_MODE_REQUIRES_VALIDATED_DELIVERY_AND_ROLLBACK",
+    "runtimeImplementedByThisContract": false,
+    "correlationAndTracePolicy": {
+      "requestId": "Identifies one inbound request attempt.",
+      "traceId": "Tracks technical execution across components.",
+      "correlationId": "Links a business flow across requests and events.",
+      "causationId": "Links an effect to its immediate cause in event-driven processing.",
+      "sourceEnvelopeId": "Identifies a LINK delivery envelope without replacing business idempotency.",
+      "sourceEventId": "Identifies the originating event.",
+      "WorkOrderIntentId": "Identifies originating work intent and is not an AuditRecord identifier.",
+      "EvidenceReferenceId": "Identifies an evidence relationship and is not an AuditRecord identifier.",
+      "auditId": "Identifies the AuditRecord.",
+      "idempotencyKey": "Prevents duplicate command execution within its declared scope.",
+      "interchangeability": "PROHIBITED"
+    }
+  }
+}

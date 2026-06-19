@@ -1,0 +1,230 @@
+{
+  "registryName": "VANTARIS ONE Idempotency Contract",
+  "registryVersion": "1.0.0",
+  "authority": "ONE-A5-P0-07",
+  "status": "FROZEN_FOR_IDEMPOTENCY_IMPLEMENTATION",
+  "generatedAtPolicy": "STATIC_ARCHITECTURE_BASELINE",
+  "principles": [
+    "Safe reads do not require idempotency keys.",
+    "Intake, command and externally retried POST operations normally require idempotency.",
+    "Idempotency keys are scoped by tenant, actor/service identity, route and operation.",
+    "A key may not be reused with a different request fingerprint.",
+    "A matching replay returns the original committed result where safe.",
+    "An in-progress replay returns a stable conflict/in-progress response.",
+    "Failed operations must declare whether the key is reusable.",
+    "LINK delivery identifiers do not replace business-command idempotency keys.",
+    "Database transaction IDs are internal and not public idempotency keys.",
+    "Secrets must not be embedded in idempotency keys.",
+    "Idempotency storage implementation is outside this task.",
+    "Legacy operations may enter compatibility mode but must remain explicitly classified."
+  ],
+  "operationClasses": [
+    {
+      "operationClass": "NOT_REQUIRED_SAFE_READ",
+      "keyRequired": false,
+      "fingerprintRequired": false,
+      "resultReplayAllowed": true,
+      "inProgressBehavior": "NOT_APPLICABLE",
+      "conflictResponse": "NOT_APPLICABLE",
+      "retentionClass": "NONE",
+      "retryOwner": "CALLER",
+      "auditRequired": false,
+      "serviceIdentityAllowed": true
+    },
+    {
+      "operationClass": "REQUIRED_CREATE",
+      "keyRequired": true,
+      "fingerprintRequired": true,
+      "resultReplayAllowed": true,
+      "inProgressBehavior": "RETURN_IN_PROGRESS_CONFLICT",
+      "conflictResponse": "IDEMPOTENCY_CONFLICT",
+      "retentionClass": "STANDARD",
+      "retryOwner": "CALLER",
+      "auditRequired": true,
+      "serviceIdentityAllowed": false
+    },
+    {
+      "operationClass": "REQUIRED_INTAKE",
+      "keyRequired": true,
+      "fingerprintRequired": true,
+      "resultReplayAllowed": true,
+      "inProgressBehavior": "RETURN_IN_PROGRESS_CONFLICT",
+      "conflictResponse": "IDEMPOTENCY_CONFLICT",
+      "retentionClass": "INGESTION",
+      "retryOwner": "EXTERNAL_PRODUCER",
+      "auditRequired": true,
+      "serviceIdentityAllowed": true
+    },
+    {
+      "operationClass": "REQUIRED_COMMAND",
+      "keyRequired": true,
+      "fingerprintRequired": true,
+      "resultReplayAllowed": true,
+      "inProgressBehavior": "RETURN_IN_PROGRESS_CONFLICT",
+      "conflictResponse": "IDEMPOTENCY_CONFLICT",
+      "retentionClass": "COMMAND",
+      "retryOwner": "CALLER",
+      "auditRequired": true,
+      "serviceIdentityAllowed": true
+    },
+    {
+      "operationClass": "REQUIRED_CONTROL",
+      "keyRequired": true,
+      "fingerprintRequired": true,
+      "resultReplayAllowed": true,
+      "inProgressBehavior": "RETURN_IN_PROGRESS_CONFLICT",
+      "conflictResponse": "IDEMPOTENCY_CONFLICT",
+      "retentionClass": "CONTROL",
+      "retryOwner": "CALLER",
+      "auditRequired": true,
+      "serviceIdentityAllowed": true
+    },
+    {
+      "operationClass": "REQUIRED_EXPORT_JOB",
+      "keyRequired": true,
+      "fingerprintRequired": true,
+      "resultReplayAllowed": true,
+      "inProgressBehavior": "RETURN_EXISTING_JOB_OR_IN_PROGRESS",
+      "conflictResponse": "IDEMPOTENCY_CONFLICT",
+      "retentionClass": "EXPORT_JOB",
+      "retryOwner": "CALLER",
+      "auditRequired": true,
+      "serviceIdentityAllowed": false
+    },
+    {
+      "operationClass": "OPTIONAL_UPDATE_WITH_VERSION",
+      "keyRequired": false,
+      "fingerprintRequired": true,
+      "resultReplayAllowed": false,
+      "inProgressBehavior": "VERSION_CONFLICT",
+      "conflictResponse": "RESOURCE_VERSION_CONFLICT",
+      "retentionClass": "STANDARD",
+      "retryOwner": "CALLER",
+      "auditRequired": true,
+      "serviceIdentityAllowed": false
+    },
+    {
+      "operationClass": "STATE_TRANSITION_GUARDED",
+      "keyRequired": false,
+      "fingerprintRequired": true,
+      "resultReplayAllowed": false,
+      "inProgressBehavior": "STATE_CONFLICT",
+      "conflictResponse": "ACTION_NOT_ALLOWED",
+      "retentionClass": "BUSINESS",
+      "retryOwner": "CALLER",
+      "auditRequired": true,
+      "serviceIdentityAllowed": false
+    },
+    {
+      "operationClass": "UNSAFE_LEGACY_COMPATIBILITY",
+      "keyRequired": false,
+      "fingerprintRequired": false,
+      "resultReplayAllowed": false,
+      "inProgressBehavior": "DO_NOT_AUTOMATICALLY_RETRY",
+      "conflictResponse": "ACTION_NOT_ALLOWED",
+      "retentionClass": "LEGACY_SHORT",
+      "retryOwner": "CALLER",
+      "auditRequired": true,
+      "serviceIdentityAllowed": false
+    },
+    {
+      "operationClass": "TEST_ONLY",
+      "keyRequired": false,
+      "fingerprintRequired": false,
+      "resultReplayAllowed": false,
+      "inProgressBehavior": "TEST_HARNESS_DEFINED",
+      "conflictResponse": "NOT_APPLICABLE",
+      "retentionClass": "NONE",
+      "retryOwner": "TEST_HARNESS",
+      "auditRequired": false,
+      "serviceIdentityAllowed": true
+    },
+    {
+      "operationClass": "REVIEW_REQUIRED",
+      "keyRequired": false,
+      "fingerprintRequired": true,
+      "resultReplayAllowed": false,
+      "inProgressBehavior": "DENY_OR_DO_NOT_RETRY",
+      "conflictResponse": "POLICY_UNAVAILABLE",
+      "retentionClass": "REVIEW",
+      "retryOwner": "UNRESOLVED",
+      "auditRequired": true,
+      "serviceIdentityAllowed": false
+    }
+  ],
+  "idempotencyKeyPolicy": {
+    "acceptedHeaderNameRecommendation": "Idempotency-Key",
+    "canonicalNormalization": "TRIM_OUTER_WHITESPACE_PRESERVE_CASE_AND_EXACT_VALUE",
+    "maximumLengthPolicy": "255_CHARACTERS",
+    "permittedCharacterClass": "VISIBLE_ASCII_WITHOUT_WHITESPACE_OR_CONTROL_CHARACTERS",
+    "tenantScope": "REQUIRED_WHEN_TENANT_SCOPED",
+    "actorOrServiceScope": "REQUIRED",
+    "routeScope": "ROUTE_ID_AND_OPERATION",
+    "requestFingerprint": "CANONICAL_METHOD_ROUTE_RELEVANT_HEADERS_AND_CLASSIFIED_BODY_DIGEST",
+    "expiryBehavior": "EXPIRED_KEYS_MAY_BE_REUSED_ONLY_AFTER_RETENTION_AND_OPERATION_POLICY_ALLOW",
+    "duplicateSuccessBehavior": "RETURN_OR_REFERENCE_ORIGINAL_COMMITTED_RESULT",
+    "duplicateFailureBehavior": "FOLLOW_DECLARED_REUSABILITY_AND_RETURN_STABLE_OUTCOME",
+    "concurrentDuplicateBehavior": "RETURN_STABLE_IN_PROGRESS_OR_CONFLICT_RESPONSE"
+  },
+  "requestFingerprintPolicy": {
+    "algorithmPolicy": "STABLE_CRYPTOGRAPHIC_DIGEST",
+    "canonicalInputs": [
+      "HTTP_METHOD",
+      "ROUTE_ID",
+      "TENANT_ID",
+      "ACTOR_OR_SERVICE_ID",
+      "CLASSIFIED_REQUEST_SEMANTICS"
+    ],
+    "excludedInputs": [
+      "SECRETS",
+      "RAW_TOKENS",
+      "VOLATILE_TRACE_HEADERS"
+    ],
+    "mismatchBehavior": "REJECT_AS_IDEMPOTENCY_CONFLICT"
+  },
+  "replayPolicy": {
+    "completedSuccess": "RETURN_OR_REFERENCE_ORIGINAL_COMMITTED_RESULT",
+    "inProgress": "RETURN_STABLE_IN_PROGRESS_RESPONSE",
+    "completedFailure": "RETURN_STABLE_FAILURE_UNLESS_KEY_REUSE_EXPLICITLY_ALLOWED",
+    "sideEffectRule": "NEVER_REEXECUTE_COMMITTED_SIDE_EFFECT_FOR_MATCHING_KEY_AND_FINGERPRINT"
+  },
+  "retentionPolicy": {
+    "classes": [
+      "NONE",
+      "STANDARD",
+      "INGESTION",
+      "COMMAND",
+      "CONTROL",
+      "EXPORT_JOB",
+      "BUSINESS",
+      "LEGACY_SHORT",
+      "REVIEW"
+    ],
+    "durationPolicy": "DEFINED_BY_OPERATION_AND_BUSINESS_RETRY_WINDOW",
+    "expiryAudit": "REQUIRED_FOR_ADMINISTRATIVE_PURGE_OR_POLICY_CHANGE"
+  },
+  "conflictPolicy": {
+    "differentFingerprint": "REJECT",
+    "concurrentExecution": "STABLE_CONFLICT_OR_IN_PROGRESS",
+    "differentTenantActorOrRoute": "DISTINCT_SCOPE_NOT_A_REPLAY",
+    "detailsExposure": "NO_INTERNAL_STORAGE_OR_FINGERPRINT_DETAIL"
+  },
+  "retryPolicy": {
+    "safeRead": "CALLER_MAY_RETRY_WITH_BOUNDED_BACKOFF",
+    "idempotentCommand": "CALLER_MAY_RETRY_WITH_SAME_KEY_AND_FINGERPRINT",
+    "unsafeLegacy": "DO_NOT_AUTOMATICALLY_RETRY",
+    "deliveryOwner": "DECLARED_PER_OPERATION; LINK_DELIVERY_ID_DOES_NOT_REPLACE_COMMAND_KEY"
+  },
+  "serviceIdentityPolicy": {
+    "explicitPermissionRequired": true,
+    "tenantAndSiteScopeRequired": true,
+    "keyScopeIncludesServiceIdentity": true,
+    "humanKeySharing": "PROHIBITED"
+  },
+  "compatibilityPolicy": {
+    "legacyMode": "EXPLICIT_UNSAFE_OR_REVIEW_CLASSIFICATION_REQUIRED",
+    "runtimeImplementedByThisContract": false,
+    "headerImplementedByThisContract": false,
+    "storageImplementedByThisContract": false
+  }
+}
