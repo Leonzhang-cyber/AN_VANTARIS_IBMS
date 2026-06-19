@@ -13,6 +13,8 @@ import EvidenceCenter from '@/modules/ucde/EvidenceCenter.vue'
 import AssetsTopology from '@/modules/assets/AssetsTopology.vue'
 import UesgSustainability from '@/modules/uesg/UesgSustainability.vue'
 import UmmsMaintenance from '@/modules/umms/UmmsMaintenance.vue'
+import UedgeSetup from '@/modules/uedge/UedgeSetup.vue'
+import UedgeDiagnostics from '@/modules/uedge/UedgeDiagnostics.vue'
 import SystemOverviewView from '@/modules/system/SystemOverviewView.vue'
 import SystemSettingsView from '@/modules/system/SystemSettingsView.vue'
 
@@ -131,6 +133,18 @@ export const routes: RouteRecordRaw[] = [
     name: 'umms-maintenance',
     component: UmmsMaintenance,
     meta: { requiresAuth: true, title: 'UMMS Maintenance', layout: true },
+  },
+  {
+    path: '/uedge/setup',
+    name: 'uedge-setup',
+    component: UedgeSetup,
+    meta: { requiresAuth: true, title: 'UEDGE Customer Setup', layout: true },
+  },
+  {
+    path: '/uedge/diagnostics',
+    name: 'uedge-diagnostics',
+    component: UedgeDiagnostics,
+    meta: { requiresAuth: true, title: 'UEDGE Engineer Diagnostics', layout: true },
   },
   {
     path: '/403',

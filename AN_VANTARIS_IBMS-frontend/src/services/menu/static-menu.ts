@@ -114,5 +114,25 @@ export const fallbackMenuItems: AppMenuItem[] = [
       },
     ],
   },
+  {
+    id: 'uedge',
+    label: 'UEDGE',
+    path: '/uedge/setup',
+    source: 'static',
+    children: [
+      {
+        id: 'uedge-setup',
+        label: 'Customer Setup',
+        path: '/uedge/setup',
+        source: 'static',
+      },
+      {
+        id: 'uedge-diagnostics',
+        label: 'Engineer Diagnostics',
+        path: '/uedge/diagnostics',
+        source: 'static',
+      },
+    ],
+  },
   { id: 'reports', label: 'Reports', path: '/reports', source: 'static' },
 ]

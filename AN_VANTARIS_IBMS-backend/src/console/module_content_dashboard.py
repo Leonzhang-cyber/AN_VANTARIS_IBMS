@@ -342,6 +342,64 @@ class ModuleContentDashboardService:
             fallback_used=fallback_used,
         )
 
+    def _uedge_card(self, package: Dict[str, Any], role: str) -> Dict[str, Any]:
+        fallback_used = False
+        try:
+            from src.uedge.uedge_service import UedgeService
+
+            service = UedgeService()
+            setup = service.get_customer_setup()
+            diagnostics = service.get_engineer_diagnostics()
+            summary = {
+                "setupSkeletonReady": bool(setup.get("customerSetupReady", False)),
+                "diagnosticsSkeletonReady": bool(diagnostics.get("engineerDiagnosticsReady", False)),
+                "setupMode": str(setup.get("setupMode", "local-skeleton-setup")),
+                "diagnosticsMode": str(diagnostics.get("diagnosticsMode", "local-skeleton-diagnostics")),
+                "runtimeLinked": False,
+                "route": "/uedge/setup",
+                "engineerRoute": "/uedge/diagnostics",
+            }
+            highlights = [
+                "Customer setup wizard is available as local skeleton preview.",
+                "Engineer diagnostics panels are available as placeholder-only views.",
+            ]
+            risks = [
+                "No EDGE or LINK runtime integration is connected.",
+                "All setup and diagnostics actions remain disabled in this stage.",
+            ]
+            limitations = [
+                "No real device registration.",
+                "No certificate/token provisioning.",
+                "No network configuration changes.",
+            ]
+        except Exception:
+            fallback_used = True
+            summary = {
+                "setupSkeletonReady": False,
+                "diagnosticsSkeletonReady": False,
+                "setupMode": "local-skeleton-setup",
+                "diagnosticsMode": "local-skeleton-diagnostics",
+                "runtimeLinked": False,
+                "route": "/uedge/setup",
+                "engineerRoute": "/uedge/diagnostics",
+            }
+            highlights = ["UEDGE content summary fallback is active."]
+            risks = ["UEDGE source is unavailable; fallback data is shown."]
+            limitations = ["UEDGE summary fallback only; no runtime dependency is required."]
+        return _base_card(
+            package=package,
+            role=role,
+            module_id="uedge",
+            module_name="UEDGE Setup & Diagnostics",
+            package_code="PKG-UEDGE",
+            status="foundation",
+            summary=summary,
+            highlights=highlights,
+            risks=risks,
+            limitations=limitations,
+            fallback_used=fallback_used,
+        )
+
     def _package_role_summary_card(self, role: str) -> Dict[str, Any]:
         package_summary = self._package_service.get_package_summary()
         role_summary = self._package_service.get_role_visibility_summary()
@@ -488,6 +546,7 @@ class ModuleContentDashboardService:
         assets_pkg = packages.get("assets-topology")
         uesg_pkg = packages.get("uesg")
         umms_pkg = packages.get("umms")
+        uedge_pkg = packages.get("uedge")
         if reports_pkg:
             cards.append(self._reports_card(reports_pkg, role))
         if ucde_pkg:
@@ -498,6 +557,8 @@ class ModuleContentDashboardService:
             cards.append(self._uesg_card(uesg_pkg, role))
         if umms_pkg:
             cards.append(self._umms_card(umms_pkg, role))
+        if uedge_pkg:
+            cards.append(self._uedge_card(uedge_pkg, role))
         cards.append(self._package_role_summary_card(role))
         cards.append(self._locked_future_card(role))
         if role in {"engineer", "admin"}:
@@ -525,6 +586,12 @@ class ModuleContentDashboardService:
                 continue
             if module_id in visible_ids:
                 filtered.append(card)
+                continue
+            if role_key == "engineer" and module_id in locked_ids:
+                row = dict(card)
+                row["visible"] = False
+                row["enabled"] = False
+                filtered.append(row)
                 continue
             if role_key == "customer" and module_id in locked_ids:
                 # customer keeps locked cards only as preview and without launch
