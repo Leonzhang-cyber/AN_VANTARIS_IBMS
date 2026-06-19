@@ -1,0 +1,85 @@
+{
+  "formatName": "VANTARIS ONE Legacy Device Reconciliation Evidence Package",
+  "formatVersion": "1.0.0",
+  "exportPolicy": "SANITIZED_OFFLINE_READ_ONLY",
+  "tenantContext": {
+    "tenantId": "tenant-sample-a"
+  },
+  "siteContext": {
+    "siteId": "site-sample-a"
+  },
+  "sourceSystemContext": {
+    "sourceSystemId": "legacy-ibms",
+    "sourceNamespace": "legacy.iot.devices"
+  },
+  "mappingVersion": "1.0.0",
+  "devices": [
+    {
+      "sourceId": "dev-0001",
+      "sourceNamespace": "legacy.iot.devices",
+      "tenantId": "tenant-sample-a",
+      "siteId": "site-sample-a",
+      "name": "Synthetic Air Handler Controller",
+      "code": "SYN-AHU-01",
+      "description": "Synthetic controller with operational points.",
+      "deviceType": "CONTROLLER",
+      "manufacturer": "Synthetic Systems",
+      "model": "SIM-200",
+      "serialNumber": "SIM-DEV-0002",
+      "lifecycleStatus": "ACTIVE",
+      "operationalStatus": "AVAILABLE",
+      "sourceTagName": "SYN-AHU-01",
+      "locationReference": {
+        "zoneCode": "ZONE-B"
+      },
+      "createdAt": "2026-01-02T00:00:00Z",
+      "updatedAt": "2026-01-02T00:00:00Z",
+      "approvedMetadata": {
+        "class": "offline-sample"
+      }
+    }
+  ],
+  "standardFields": [
+    {
+      "sourceId": "fld-0001",
+      "deviceSourceId": "dev-0001",
+      "sourceNamespace": "legacy.iot.standard_fields",
+      "name": "supply_temperature",
+      "displayName": "Supply Temperature",
+      "fieldType": "float",
+      "dataType": "NUMBER",
+      "unit": "Cel",
+      "accessMode": "READ_ONLY",
+      "lifecycleStatus": "ACTIVE",
+      "sourceTagName": "SYN-AHU-01:supply_temperature",
+      "approvedMetadata": {
+        "classification": "operational"
+      }
+    },
+    {
+      "sourceId": "fld-0002",
+      "deviceSourceId": "dev-0001",
+      "sourceNamespace": "legacy.iot.standard_fields",
+      "name": "return_temperature",
+      "displayName": "Return Temperature",
+      "fieldType": "float",
+      "dataType": "NUMBER",
+      "unit": "Cel",
+      "accessMode": "READ_ONLY",
+      "lifecycleStatus": "ACTIVE",
+      "sourceTagName": "SYN-AHU-01:return_temperature",
+      "approvedMetadata": {
+        "classification": "operational"
+      }
+    }
+  ],
+  "declaredRedactions": [
+    "all-credential-material-removed"
+  ],
+  "sourceSummary": {
+    "recordCount": 3,
+    "deviceCount": 1,
+    "standardFieldCount": 2,
+    "notes": "Synthetic sample package only."
+  }
+}

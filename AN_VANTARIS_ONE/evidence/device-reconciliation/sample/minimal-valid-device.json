@@ -1,0 +1,52 @@
+{
+  "formatName": "VANTARIS ONE Legacy Device Reconciliation Evidence Package",
+  "formatVersion": "1.0.0",
+  "exportPolicy": "SANITIZED_OFFLINE_READ_ONLY",
+  "tenantContext": {
+    "tenantId": "tenant-sample-a"
+  },
+  "siteContext": {
+    "siteId": "site-sample-a"
+  },
+  "sourceSystemContext": {
+    "sourceSystemId": "legacy-ibms",
+    "sourceNamespace": "legacy.iot.devices"
+  },
+  "mappingVersion": "1.0.0",
+  "devices": [
+    {
+      "sourceId": "dev-0001",
+      "sourceNamespace": "legacy.iot.devices",
+      "tenantId": "tenant-sample-a",
+      "siteId": "site-sample-a",
+      "name": "Synthetic Chiller Controller",
+      "code": "SYN-CHLR-01",
+      "description": "Synthetic offline device for reconciliation evidence.",
+      "deviceType": "CONTROLLER",
+      "manufacturer": "Synthetic Systems",
+      "model": "SIM-100",
+      "serialNumber": "SIM-DEV-0001",
+      "lifecycleStatus": "ACTIVE",
+      "operationalStatus": "AVAILABLE",
+      "sourceTagName": "SYN-CHLR-01",
+      "locationReference": {
+        "zoneCode": "ZONE-A"
+      },
+      "createdAt": "2026-01-01T00:00:00Z",
+      "updatedAt": "2026-01-01T00:00:00Z",
+      "approvedMetadata": {
+        "class": "offline-sample"
+      }
+    }
+  ],
+  "standardFields": [],
+  "declaredRedactions": [
+    "all-credential-material-removed"
+  ],
+  "sourceSummary": {
+    "recordCount": 1,
+    "deviceCount": 1,
+    "standardFieldCount": 0,
+    "notes": "Synthetic sample package only."
+  }
+}

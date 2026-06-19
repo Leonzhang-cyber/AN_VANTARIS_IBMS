@@ -1,0 +1,42 @@
+{
+  "formatName": "VANTARIS ONE Legacy Device Reconciliation Evidence Package",
+  "formatVersion": "1.0.0",
+  "exportPolicy": "SANITIZED_OFFLINE_READ_ONLY",
+  "tenantContext": {
+    "tenantId": "tenant-sample-a"
+  },
+  "siteContext": {
+    "siteId": "site-sample-a"
+  },
+  "sourceSystemContext": {
+    "sourceSystemId": "legacy-ibms",
+    "sourceNamespace": "legacy.iot.devices"
+  },
+  "mappingVersion": "1.0.0",
+  "devices": [
+    {
+      "sourceId": "dev-proh-001",
+      "sourceNamespace": "legacy.iot.devices",
+      "tenantId": "tenant-sample-a",
+      "siteId": "site-sample-a",
+      "name": "Synthetic Prohibited Field Device",
+      "code": "SYN-PROH-01",
+      "deviceType": "CONTROLLER",
+      "operationalStatus": "AVAILABLE",
+      "password": "should-not-be-present",
+      "createdAt": "2026-01-08T00:00:00Z",
+      "updatedAt": "2026-01-08T00:00:00Z",
+      "approvedMetadata": {}
+    }
+  ],
+  "standardFields": [],
+  "declaredRedactions": [
+    "all-credential-material-removed"
+  ],
+  "sourceSummary": {
+    "recordCount": 1,
+    "deviceCount": 1,
+    "standardFieldCount": 0,
+    "notes": "Synthetic prohibited field sample."
+  }
+}

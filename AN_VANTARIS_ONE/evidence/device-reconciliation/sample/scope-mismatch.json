@@ -1,0 +1,41 @@
+{
+  "formatName": "VANTARIS ONE Legacy Device Reconciliation Evidence Package",
+  "formatVersion": "1.0.0",
+  "exportPolicy": "SANITIZED_OFFLINE_READ_ONLY",
+  "tenantContext": {
+    "tenantId": "tenant-sample-a"
+  },
+  "siteContext": {
+    "siteId": "site-sample-a"
+  },
+  "sourceSystemContext": {
+    "sourceSystemId": "legacy-ibms",
+    "sourceNamespace": "legacy.iot.devices"
+  },
+  "mappingVersion": "1.0.0",
+  "devices": [
+    {
+      "sourceId": "dev-scope-001",
+      "sourceNamespace": "legacy.iot.devices",
+      "tenantId": "tenant-sample-b",
+      "siteId": "site-sample-b",
+      "name": "Synthetic Scope Mismatch Device",
+      "code": "SYN-SCOPE-01",
+      "deviceType": "CONTROLLER",
+      "operationalStatus": "AVAILABLE",
+      "createdAt": "2026-01-04T00:00:00Z",
+      "updatedAt": "2026-01-04T00:00:00Z",
+      "approvedMetadata": {}
+    }
+  ],
+  "standardFields": [],
+  "declaredRedactions": [
+    "all-credential-material-removed"
+  ],
+  "sourceSummary": {
+    "recordCount": 1,
+    "deviceCount": 1,
+    "standardFieldCount": 0,
+    "notes": "Synthetic scope mismatch sample."
+  }
+}
