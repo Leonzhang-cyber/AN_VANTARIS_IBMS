@@ -1,0 +1,131 @@
+{
+  "policyName": "VANTARIS ONE Asset Graph Read Migration Readiness Policy",
+  "policyVersion": "1.0.0",
+  "authority": "ONE-A5-P1-16I",
+  "status": "FROZEN_FOR_READ_MIGRATION_READINESS",
+  "generatedAtPolicy": "STATIC_POLICY_REGISTRY",
+  "allowedDecisions": [
+    "INPUT_REJECTED",
+    "NOT_READY",
+    "READY_WITH_REMEDIATION",
+    "READY_FOR_LIMITED_READ_VALIDATION",
+    "READY_FOR_READ_MIGRATION_CANDIDATE"
+  ],
+  "forbiddenDecisions": [
+    "READY_FOR_WRITE_CUTOVER"
+  ],
+  "writeCutoverStatus": "NOT_READY_FOR_WRITE_CUTOVER",
+  "supportedMappingVersions": [
+    "legacy-device-v1"
+  ],
+  "requiredEvidenceFields": [
+    "evidenceName",
+    "evidenceVersion",
+    "status",
+    "resultDigest",
+    "mappingVersion",
+    "projectionSummary",
+    "reconciliationSummary",
+    "fieldCoverage",
+    "relationshipMetrics",
+    "prohibitedFieldResults",
+    "blockers",
+    "reviews",
+    "warnings"
+  ],
+  "evidenceClassifications": [
+    "REAL_SANITIZED_EVIDENCE",
+    "SYNTHETIC_REPRESENTATIVE_ONLY",
+    "SYNTHETIC_NEGATIVE_TEST",
+    "UNKNOWN"
+  ],
+  "classificationRules": {
+    "syntheticRepresentativeSignals": [
+      "synthetic representative",
+      "synthetic-representative",
+      "SYNTHETIC_REPRESENTATIVE_ONLY",
+      "synthetic: true"
+    ],
+    "syntheticNegativeSignals": [
+      "negative test",
+      "blocker fixture",
+      "intentional blocker"
+    ],
+    "realSanitizedSignals": [
+      "REAL_SANITIZED_EVIDENCE",
+      "real sanitized customer export"
+    ]
+  },
+  "classificationDecisionCeiling": {
+    "UNKNOWN": "NOT_READY",
+    "SYNTHETIC_REPRESENTATIVE_ONLY": "READY_FOR_LIMITED_READ_VALIDATION",
+    "SYNTHETIC_NEGATIVE_TEST": "NOT_READY",
+    "REAL_SANITIZED_EVIDENCE": "READY_FOR_READ_MIGRATION_CANDIDATE"
+  },
+  "coverageThresholds": {
+    "requiredFieldCoverageMinimumPercent": 100,
+    "safeSourceFieldCoverageMinimumPercent": 75,
+    "optionalFieldCoverageInformational": true
+  },
+  "ratioThresholds": {
+    "reviewRatioMaximumPercentForLimitedValidation": 10,
+    "warningRatioMaximumPercentForLimitedValidation": 20
+  },
+  "relationshipThresholds": {
+    "unresolvedRelationshipCountMaximumForReadMigrationCandidate": 0,
+    "unresolvedRelationshipCountMaximumForLimitedValidation": 1,
+    "duplicateCanonicalRelationshipCountMaximum": 0,
+    "duplicateHasPointPairCountMaximum": 0,
+    "orphanRelationshipCountMaximum": 0,
+    "hasPointParityRequired": true
+  },
+  "hardBlockerCodes": [
+    "PROHIBITED_FIELD_PRESENT",
+    "PROHIBITED_FIELD_LEAK",
+    "GLOBAL_ID_COLLISION",
+    "SOURCE_IDENTITY_COLLISION",
+    "DUPLICATE_SOURCE_IDENTITY",
+    "MISSING_STABLE_SOURCE_ID",
+    "TENANT_SCOPE_MISMATCH",
+    "SITE_SCOPE_MISMATCH",
+    "UNAPPROVED_MAPPING_VERSION",
+    "REPEAT_RUN_NONDETERMINISM"
+  ],
+  "hardBlockerGateCodes": [
+    "PRIVACY_GATE",
+    "EVIDENCE_FORMAT_GATE",
+    "DETERMINISM_GATE",
+    "MAPPING_VERSION_GATE",
+    "SOURCE_IDENTITY_GATE",
+    "GLOBAL_ID_GATE",
+    "TENANT_SCOPE_GATE",
+    "SITE_SCOPE_GATE",
+    "ORPHAN_RELATIONSHIP_GATE",
+    "HAS_POINT_PARITY_GATE",
+    "DUPLICATE_RELATIONSHIP_GATE"
+  ],
+  "syntheticFixtureExplanations": {
+    "duplicateRelationshipEvidence": "Duplicate canonical relationship counts from intentional synthetic duplicate-source fixtures remain blocking and do not grant real-data readiness approval."
+  },
+  "gates": [
+    {"gateCode": "PRIVACY_GATE", "severity": "BLOCKER", "remediationCategory": "PRIVACY"},
+    {"gateCode": "EVIDENCE_FORMAT_GATE", "severity": "BLOCKER", "remediationCategory": "EVIDENCE_FORMAT"},
+    {"gateCode": "DETERMINISM_GATE", "severity": "BLOCKER", "remediationCategory": "DETERMINISM"},
+    {"gateCode": "MAPPING_VERSION_GATE", "severity": "BLOCKER", "remediationCategory": "MAPPING"},
+    {"gateCode": "REQUIRED_FIELD_COVERAGE_GATE", "severity": "CRITICAL", "remediationCategory": "COVERAGE"},
+    {"gateCode": "SAFE_SOURCE_COVERAGE_GATE", "severity": "HIGH", "remediationCategory": "COVERAGE"},
+    {"gateCode": "SOURCE_IDENTITY_GATE", "severity": "BLOCKER", "remediationCategory": "IDENTITY"},
+    {"gateCode": "GLOBAL_ID_GATE", "severity": "BLOCKER", "remediationCategory": "IDENTITY"},
+    {"gateCode": "TENANT_SCOPE_GATE", "severity": "BLOCKER", "remediationCategory": "SCOPE"},
+    {"gateCode": "SITE_SCOPE_GATE", "severity": "BLOCKER", "remediationCategory": "SCOPE"},
+    {"gateCode": "POINT_PARENT_GATE", "severity": "BLOCKER", "remediationCategory": "RELATIONSHIP"},
+    {"gateCode": "HAS_POINT_PARITY_GATE", "severity": "CRITICAL", "remediationCategory": "RELATIONSHIP"},
+    {"gateCode": "ORPHAN_RELATIONSHIP_GATE", "severity": "BLOCKER", "remediationCategory": "RELATIONSHIP"},
+    {"gateCode": "UNRESOLVED_RELATIONSHIP_GATE", "severity": "REVIEW", "remediationCategory": "RELATIONSHIP"},
+    {"gateCode": "DUPLICATE_RELATIONSHIP_GATE", "severity": "BLOCKER", "remediationCategory": "RELATIONSHIP"},
+    {"gateCode": "REVIEW_RATIO_GATE", "severity": "REVIEW", "remediationCategory": "QUALITY"},
+    {"gateCode": "WARNING_RATIO_GATE", "severity": "REVIEW", "remediationCategory": "QUALITY"},
+    {"gateCode": "EVIDENCE_CLASSIFICATION_GATE", "severity": "INFO", "remediationCategory": "CLASSIFICATION"},
+    {"gateCode": "WRITE_CUTOVER_PROHIBITION_GATE", "severity": "BLOCKER", "remediationCategory": "CUTOVER"}
+  ]
+}

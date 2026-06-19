@@ -1,0 +1,88 @@
+{
+  "evidenceName": "VANTARIS ONE Device Projection Reconciliation Evidence",
+  "evidenceVersion": "1.0.0",
+  "authority": "ONE-A5-P1-16B",
+  "status": "OFFLINE_RECONCILIATION_EVIDENCE",
+  "generatedAtPolicy": "CALLER_CONTROLLED_NO_HIDDEN_TIMESTAMP",
+  "mappingVersion": "legacy-device-v1",
+  "resultDigest": "real-sanitized-evidence-digest-00000000000000000000000000000002",
+  "assessmentType": "REAL_SANITIZED_EVIDENCE",
+  "inputPackage": {
+    "formatName": "VANTARIS ONE Legacy Device Reconciliation Evidence Package",
+    "formatVersion": "1.0.0",
+    "exportPolicy": "SANITIZED_OFFLINE_READ_ONLY"
+  },
+  "sourceSummary": {
+    "deviceCount": 2,
+    "recordCount": 4,
+    "standardFieldCount": 2,
+    "notes": "real sanitized customer export approved for readiness assessment"
+  },
+  "projectionSummary": {
+    "projectedDeviceCount": 2,
+    "projectedPointCount": 2,
+    "projectedTagCount": 2,
+    "projectedRelationshipCount": 2
+  },
+  "reconciliationSummary": {
+    "totalRecords": 2,
+    "reviewCount": 0,
+    "warningCount": 0,
+    "blockerCount": 0
+  },
+  "fieldCoverage": [
+    {
+      "requiredFieldCoverage": "100.00%",
+      "safeSourceFieldCoverage": "100.00%",
+      "optionalFieldCoverage": "100.00%"
+    },
+    {
+      "requiredFieldCoverage": "100.00%",
+      "safeSourceFieldCoverage": "100.00%",
+      "optionalFieldCoverage": "100.00%"
+    }
+  ],
+  "relationshipMetrics": {
+    "relationshipResultCount": 2,
+    "canonicalRelationshipCount": 2,
+    "passRelationshipCount": 2,
+    "reviewRelationshipCount": 0,
+    "blockerRelationshipCount": 0,
+    "unresolvedRelationshipCount": 0,
+    "duplicateCanonicalRelationshipCount": 0,
+    "duplicateHasPointPairCount": 0,
+    "duplicateRelationshipBlockerPresent": false,
+    "relationshipTypeCounts": {
+      "HAS_POINT": {
+        "resultCount": 2,
+        "passCount": 2,
+        "reviewCount": 0,
+        "blockerCount": 0,
+        "uniquePairCount": 2,
+        "duplicatePairCount": 0
+      },
+      "LOCATED_IN": {
+        "resultCount": 0,
+        "passCount": 0,
+        "reviewCount": 0,
+        "blockerCount": 0,
+        "unresolvedCount": 0
+      }
+    }
+  },
+  "relationshipResults": {
+    "pass": 2,
+    "review": 0,
+    "mismatch": 0,
+    "relationshipResultCount": 2
+  },
+  "prohibitedFieldResults": {
+    "status": "PASS",
+    "detectedCount": 0,
+    "records": []
+  },
+  "blockers": [],
+  "reviews": [],
+  "warnings": [],
+  "cutoverDecision": "READY_FOR_READ_MIGRATION"
+}

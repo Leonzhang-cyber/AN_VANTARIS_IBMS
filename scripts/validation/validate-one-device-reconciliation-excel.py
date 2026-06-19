@@ -20,10 +20,12 @@ ALLOWED_PREFIXES = (
     "AN_VANTARIS_IBMS-backend/src/asset_graph/compatibility/models.py",
     "AN_VANTARIS_IBMS-backend/src/asset_graph/compatibility/facade.py",
     "AN_VANTARIS_IBMS-backend/tests/asset_graph/",
+    "AN_VANTARIS_ONE/registries/asset-graph-read-migration-readiness-policy.v1.json",
     "scripts/validation/run-one-device-reconciliation-excel.py",
     "scripts/validation/run-one-device-reconciliation-evidence.py",
     "scripts/validation/validate-one-device-reconciliation-excel.py",
     "scripts/validation/validate-one-device-reconciliation-evidence.py",
+    "scripts/validation/validate-one-asset-graph-readiness.py",
 )
 
 
