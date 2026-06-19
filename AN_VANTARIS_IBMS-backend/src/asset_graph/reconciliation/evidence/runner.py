@@ -21,6 +21,7 @@ from src.asset_graph.reconciliation import (
     canonical_json,
     sha256_digest,
 )
+from src.asset_graph.reconciliation.relationship_reporting import collect_relationship_metrics
 from src.asset_graph.reconciliation.site_context import (
     SiteContextError,
     collect_scope_metrics,
@@ -511,6 +512,7 @@ def run_device_reconciliation_evidence(
     )
     blockers = list(collected["blockers"])
     reviews = list(collected["reviews"])
+    relationship_metrics = collect_relationship_metrics(run, blockers=blockers)
     cutover_decision = _cutover_decision(blockers, reviews, run.cutover_decision)
     if cutover_decision == "READY_FOR_WRITE_CUTOVER":
         cutover_decision = DEFAULT_CUTOVER_DECISION
@@ -546,6 +548,7 @@ def run_device_reconciliation_evidence(
         "tenantId": context.tenant_id,
         "siteId": context.site_id,
         "scopeMetrics": scope_metrics,
+        "relationshipMetrics": relationship_metrics,
         "sourceSystemId": context.source_system_id,
         "runId": run_id,
         "sourceSummary": package["sourceSummary"],
@@ -554,6 +557,7 @@ def run_device_reconciliation_evidence(
             "projectedPointCount": run.projection_counts[1][1] if len(run.projection_counts) > 1 else 0,
             "projectedTagCount": run.projection_counts[2][1] if len(run.projection_counts) > 2 else 0,
             "projectedRelationshipCount": run.projection_counts[3][1] if len(run.projection_counts) > 3 else 0,
+            "projectedRelationshipCountSemantics": relationship_metrics["relationshipResultCountSemantics"],
         },
         "reconciliationSummary": {
             "totalRecords": run.summary.total_records,
@@ -574,7 +578,11 @@ def run_device_reconciliation_evidence(
         "scopeResults": collected["scopeResults"],
         "pointClassificationResults": collected["pointClassificationResults"],
         "tagResults": collected["tagResults"],
-        "relationshipResults": collected["relationshipResults"],
+        "relationshipResults": {
+            **collected["relationshipResults"],
+            "relationshipResultCount": relationship_metrics["relationshipResultCount"],
+            "relationshipResultCountSemantics": relationship_metrics["relationshipResultCountSemantics"],
+        },
         "prohibitedFieldResults": collected["prohibitedFieldResults"],
         "warnings": collected["warnings"],
         "reviews": reviews,
