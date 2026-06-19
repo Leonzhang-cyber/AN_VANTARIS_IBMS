@@ -1,0 +1,103 @@
+{
+  "profileName": "VANTARIS ONE Airport Source System Consumer Profile",
+  "profileVersion": "1.0.0",
+  "authority": "ONE-AIRPORT-A2-01",
+  "profileType": "INDUSTRY_CONSUMER_PROFILE",
+  "platformScope": "CROSS_INDUSTRY_SOURCE_SYSTEM_REGISTRY",
+  "implementationMode": "READ_ONLY_EVIDENCE_ADAPTER",
+  "platformCoreAirportized": false,
+  "crossIndustry": true,
+  "airportSpecific": true,
+  "runtimeConnectorExecutionEnabled": false,
+  "databaseAccessEnabled": false,
+  "productionActivationEnabled": false,
+  "profileId": "airport-source-system-profile-v1",
+  "mappingVersion": "airport-source-system-v1",
+  "compatibleEvidenceAuthorities": [
+    "ONE-AIRPORT-A1-03",
+    "ONE-AIRPORT-A1-04"
+  ],
+  "evidenceInputs": [
+    "airport-device-classification-bindings.json",
+    "airport-alias-approval-package.json"
+  ],
+  "systemEvidenceBindings": [
+    {
+      "sourceSystemKey": "ACS",
+      "genericSystemCategory": "ACCESS_CONTROL",
+      "evidenceMatch": "exact",
+      "aliasReviewRequired": false,
+      "namespaceReviewRequired": false
+    },
+    {
+      "sourceSystemKey": "RAS",
+      "genericSystemCategory": "RADIO_COMMUNICATION",
+      "evidenceMatch": "exact",
+      "aliasReviewRequired": false,
+      "namespaceReviewRequired": false
+    },
+    {
+      "sourceSystemKey": "CCTV",
+      "genericSystemCategory": "VIDEO_SURVEILLANCE",
+      "observedSourceValue": "CCT",
+      "proposedNormalizedValue": "CCTV",
+      "evidenceMatch": "alias_candidate",
+      "aliasReviewRequired": true,
+      "namespaceReviewRequired": false
+    },
+    {
+      "sourceSystemKey": "PA",
+      "genericSystemCategory": "PUBLIC_ADDRESS",
+      "observedSourceValue": "PAS",
+      "proposedNormalizedValue": "PA",
+      "evidenceMatch": "alias_candidate",
+      "aliasReviewRequired": true,
+      "namespaceReviewRequired": false
+    },
+    {
+      "sourceSystemKey": "TEL",
+      "genericSystemCategory": "TELECOMMUNICATION",
+      "observedSourceValue": "TEL",
+      "sourceNamespaceCode": "SCN",
+      "evidenceMatch": "namespace_review",
+      "aliasReviewRequired": false,
+      "namespaceReviewRequired": true
+    }
+  ],
+  "aliasProposals": {
+    "CCT": {
+      "proposedNormalizedValue": "CCTV",
+      "genericSystemCategory": "VIDEO_SURVEILLANCE",
+      "autoApprove": false
+    },
+    "PAS": {
+      "proposedNormalizedValue": "PA",
+      "genericSystemCategory": "PUBLIC_ADDRESS",
+      "autoApprove": false
+    }
+  },
+  "sourceNamespaceRules": {
+    "SCN": {
+      "reviewRequired": true,
+      "mustNotBeSystemAliasFor": [
+        "TEL"
+      ]
+    }
+  },
+  "forbiddenReadinessOutcomes": [
+    "READY_FOR_DATABASE_IMPORT",
+    "READY_FOR_CANONICAL_WRITE",
+    "READY_FOR_WRITE_CUTOVER",
+    "READY_FOR_PRODUCTION_ACTIVATION"
+  ],
+  "allowedReadinessOutcomes": [
+    "SOURCE_SYSTEM_CANDIDATES_COMPLETE_WITH_PENDING_REVIEWS"
+  ],
+  "implementationPaths": [
+    "AN_VANTARIS_ONE/registries/source-system-registry.v1.json",
+    "AN_VANTARIS_ONE/source_system_registry/",
+    "AN_VANTARIS_ONE/industry_profiles/airport/",
+    "AN_VANTARIS_ONE/tests/source_system_registry/",
+    "scripts/validation/validate-one-source-system-registry.py"
+  ]
+}

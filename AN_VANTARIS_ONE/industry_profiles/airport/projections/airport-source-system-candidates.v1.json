@@ -1,0 +1,367 @@
+{
+  "authority": "ONE-AIRPORT-A2-01",
+  "candidates": [
+    {
+      "airportConsumerMetadata": {
+        "aliasReviewRequired": false,
+        "autoApproved": false,
+        "evidenceMatch": "exact",
+        "namespaceReviewRequired": false,
+        "resultDigest": "205e5a7ad5c332ff7ea28bb2ae672c98f091f3268c19fb7e2d2ef9c4526903a7",
+        "sourceRecordCount": 129
+      },
+      "approvalState": "DRAFT",
+      "createdFromProfile": "airport-source-system-profile-v1",
+      "declaredCapabilities": [
+        {
+          "capabilityKey": "SOURCE_IDENTITY_EVIDENCE",
+          "declarationState": "DECLARED",
+          "evidenceReferences": [],
+          "resultDigest": "8eef1a35bd1c8240587d2e78df520f3b2f10379c6c602eb932faf7b6535f996b",
+          "verificationState": "NOT_VERIFIED"
+        }
+      ],
+      "description": "Source system candidate for ACS",
+      "displayName": "ACS",
+      "evidenceReferences": [
+        {
+          "digest": "7f4eb268556cd7cc31608ecc9f1796df9b053039ab13e3e4d1271339d7a23dec",
+          "evidenceId": "d5460171bfa515ad3fde83fa991bd0dbccac64817b6cd3cd50f7cec016d16330",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "f2134c9995fc2c8b24603620a9df349e320afce29bc99356c3fbea5e577f1188",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 129
+        }
+      ],
+      "healthPolicy": {
+        "evaluationMode": "DECLARATION_ONLY",
+        "expectedSignalTypes": [],
+        "policyKey": "EVIDENCE_ONLY_NO_RUNTIME_HEALTH",
+        "policyState": "DECLARED",
+        "resultDigest": "5a7d5afaa5ff432d4d95e83fe709f34f05ec64ae4038dc46762c71f7405c1f3b",
+        "staleThresholdDeclaration": null
+      },
+      "integrationDeclarations": [
+        {
+          "connectorReference": null,
+          "declarationState": "DECLARED",
+          "direction": "UNDECLARED",
+          "edgeGatewayReference": null,
+          "integrationMethod": "EVIDENCE_ONLY",
+          "linkRouteReference": null,
+          "protocolFamily": "UNDECLARED",
+          "resultDigest": "4122eac1dbaff2c920d749eb6519d05df6fee3d7deaddfc8f3e26a3b83ece35a"
+        }
+      ],
+      "lifecycleState": "CANDIDATE",
+      "mappingVersion": "airport-source-system-v1",
+      "normalizedName": "ACS",
+      "product": null,
+      "productVersion": null,
+      "registryEntryId": "722a59146a8bdb9d4f76c5786a634d5fbf3f5c9d6e41473485fa20eb335d2dd4",
+      "resultDigest": "d62d22011a5460b853231f94fb039797a6719da158a428fa72207301ddb68317",
+      "schemaVersion": "1.0.0",
+      "sourceSystemKey": "ACS",
+      "systemCategory": "ACCESS_CONTROL",
+      "vendor": null,
+      "verifiedCapabilities": []
+    },
+    {
+      "airportConsumerMetadata": {
+        "aliasDecisionStatus": "APPROVAL_REQUIRED",
+        "aliasProposalId": "48d8eb31cfa36ded40180f15d213bfa0e76d4fabf94e8eff34e2ca9ab04db2da",
+        "aliasReviewRequired": true,
+        "autoApproved": false,
+        "evidenceMatch": "alias_candidate",
+        "namespaceReviewRequired": false,
+        "observedSourceValue": "CCT",
+        "proposedNormalizedValue": "CCTV",
+        "resultDigest": "022b7b533fd67f96f7017ee242d2b2185b55f4dd1512a65da9147179f5e85e97",
+        "sourceRecordCount": 52
+      },
+      "approvalState": "REVIEW_REQUIRED",
+      "createdFromProfile": "airport-source-system-profile-v1",
+      "declaredCapabilities": [
+        {
+          "capabilityKey": "SOURCE_IDENTITY_EVIDENCE",
+          "declarationState": "DECLARED",
+          "evidenceReferences": [],
+          "resultDigest": "8eef1a35bd1c8240587d2e78df520f3b2f10379c6c602eb932faf7b6535f996b",
+          "verificationState": "NOT_VERIFIED"
+        }
+      ],
+      "description": "Source system candidate for CCTV",
+      "displayName": "CCTV",
+      "evidenceReferences": [
+        {
+          "digest": "700c0aa4873f711e6a0732e56e0e9d67df78be56ef396f52daa10b5c0fe766fa",
+          "evidenceId": "ceba5fc20cc1f142a8083ae0edf47f31d74cb445de857a7aa905c895ac30b017",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "49d8bfa2ece4be806883107bf8c00452af66b35f3a16898a53c8dbb18750faaa",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 52
+        }
+      ],
+      "healthPolicy": {
+        "evaluationMode": "DECLARATION_ONLY",
+        "expectedSignalTypes": [],
+        "policyKey": "EVIDENCE_ONLY_NO_RUNTIME_HEALTH",
+        "policyState": "DECLARED",
+        "resultDigest": "5a7d5afaa5ff432d4d95e83fe709f34f05ec64ae4038dc46762c71f7405c1f3b",
+        "staleThresholdDeclaration": null
+      },
+      "integrationDeclarations": [
+        {
+          "connectorReference": null,
+          "declarationState": "DECLARED",
+          "direction": "UNDECLARED",
+          "edgeGatewayReference": null,
+          "integrationMethod": "EVIDENCE_ONLY",
+          "linkRouteReference": null,
+          "protocolFamily": "UNDECLARED",
+          "resultDigest": "4122eac1dbaff2c920d749eb6519d05df6fee3d7deaddfc8f3e26a3b83ece35a"
+        }
+      ],
+      "lifecycleState": "CANDIDATE",
+      "mappingVersion": "airport-source-system-v1",
+      "normalizedName": "CCTV",
+      "product": null,
+      "productVersion": null,
+      "registryEntryId": "8b8e1222d598bb40a588a383c50a65e46c21e6cf81da63ab11fd625a6624f422",
+      "resultDigest": "251a2bdb19340fb98a489843c064636114787510c8809930409a6c5e23297197",
+      "schemaVersion": "1.0.0",
+      "sourceSystemKey": "CCTV",
+      "systemCategory": "VIDEO_SURVEILLANCE",
+      "vendor": null,
+      "verifiedCapabilities": []
+    },
+    {
+      "airportConsumerMetadata": {
+        "aliasDecisionStatus": "APPROVAL_REQUIRED",
+        "aliasProposalId": "2e6bed344e34bacf7d3cfe33c4841dcda1bcadb269174f6b7a904275fc055ffc",
+        "aliasReviewRequired": true,
+        "autoApproved": false,
+        "evidenceMatch": "alias_candidate",
+        "namespaceReviewRequired": false,
+        "observedSourceValue": "PAS",
+        "proposedNormalizedValue": "PA",
+        "resultDigest": "15767acf09d95410c6d6db2ee3d4361f688985c17520b309494ed5c4fdb7adf1",
+        "sourceRecordCount": 247
+      },
+      "approvalState": "REVIEW_REQUIRED",
+      "createdFromProfile": "airport-source-system-profile-v1",
+      "declaredCapabilities": [
+        {
+          "capabilityKey": "SOURCE_IDENTITY_EVIDENCE",
+          "declarationState": "DECLARED",
+          "evidenceReferences": [],
+          "resultDigest": "8eef1a35bd1c8240587d2e78df520f3b2f10379c6c602eb932faf7b6535f996b",
+          "verificationState": "NOT_VERIFIED"
+        }
+      ],
+      "description": "Source system candidate for PA",
+      "displayName": "PA",
+      "evidenceReferences": [
+        {
+          "digest": "6da53d802f057618e91b95564f3abee9dab082748ea008e69a81c62c40f21fd6",
+          "evidenceId": "6f9a9a469a9ad62b5a0d1065bada2f1f9b52cfc0b8132183f1e97f826c1ed461",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "1dbd5b57a352e475431caeeef6267b79df96f97568ca6f7fb77c37e2734cdea5",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 247
+        }
+      ],
+      "healthPolicy": {
+        "evaluationMode": "DECLARATION_ONLY",
+        "expectedSignalTypes": [],
+        "policyKey": "EVIDENCE_ONLY_NO_RUNTIME_HEALTH",
+        "policyState": "DECLARED",
+        "resultDigest": "5a7d5afaa5ff432d4d95e83fe709f34f05ec64ae4038dc46762c71f7405c1f3b",
+        "staleThresholdDeclaration": null
+      },
+      "integrationDeclarations": [
+        {
+          "connectorReference": null,
+          "declarationState": "DECLARED",
+          "direction": "UNDECLARED",
+          "edgeGatewayReference": null,
+          "integrationMethod": "EVIDENCE_ONLY",
+          "linkRouteReference": null,
+          "protocolFamily": "UNDECLARED",
+          "resultDigest": "4122eac1dbaff2c920d749eb6519d05df6fee3d7deaddfc8f3e26a3b83ece35a"
+        }
+      ],
+      "lifecycleState": "CANDIDATE",
+      "mappingVersion": "airport-source-system-v1",
+      "normalizedName": "PA",
+      "product": null,
+      "productVersion": null,
+      "registryEntryId": "cb749f05259f176629e62ee2d716b8cc3e51eeed2ce87b13b3b09870a56612d7",
+      "resultDigest": "cefa522c72eac99e00d9e4b89ebd92811f09ed40fa79961792ced0e882a5323a",
+      "schemaVersion": "1.0.0",
+      "sourceSystemKey": "PA",
+      "systemCategory": "PUBLIC_ADDRESS",
+      "vendor": null,
+      "verifiedCapabilities": []
+    },
+    {
+      "airportConsumerMetadata": {
+        "aliasReviewRequired": false,
+        "autoApproved": false,
+        "evidenceMatch": "exact",
+        "namespaceReviewRequired": false,
+        "resultDigest": "949ceb13c0e809b6cfd128471f0e5a3799a7ff061f48eb616d79d93b1b746456",
+        "sourceRecordCount": 28
+      },
+      "approvalState": "DRAFT",
+      "createdFromProfile": "airport-source-system-profile-v1",
+      "declaredCapabilities": [
+        {
+          "capabilityKey": "SOURCE_IDENTITY_EVIDENCE",
+          "declarationState": "DECLARED",
+          "evidenceReferences": [],
+          "resultDigest": "8eef1a35bd1c8240587d2e78df520f3b2f10379c6c602eb932faf7b6535f996b",
+          "verificationState": "NOT_VERIFIED"
+        }
+      ],
+      "description": "Source system candidate for RAS",
+      "displayName": "RAS",
+      "evidenceReferences": [
+        {
+          "digest": "cd8d0520ee8802a0a5a9b99604c26d35fefff5ca2c59738e8b6c7035bd29e40a",
+          "evidenceId": "6f36e31caf4664dc7654550df344e31ebfb0140204cfd528fd672dc869819f8d",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "1a375a7e7bab0f8b8b8d1e2f2add98d627a1c02825d3e8e16ca2e5014c293230",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 28
+        }
+      ],
+      "healthPolicy": {
+        "evaluationMode": "DECLARATION_ONLY",
+        "expectedSignalTypes": [],
+        "policyKey": "EVIDENCE_ONLY_NO_RUNTIME_HEALTH",
+        "policyState": "DECLARED",
+        "resultDigest": "5a7d5afaa5ff432d4d95e83fe709f34f05ec64ae4038dc46762c71f7405c1f3b",
+        "staleThresholdDeclaration": null
+      },
+      "integrationDeclarations": [
+        {
+          "connectorReference": null,
+          "declarationState": "DECLARED",
+          "direction": "UNDECLARED",
+          "edgeGatewayReference": null,
+          "integrationMethod": "EVIDENCE_ONLY",
+          "linkRouteReference": null,
+          "protocolFamily": "UNDECLARED",
+          "resultDigest": "4122eac1dbaff2c920d749eb6519d05df6fee3d7deaddfc8f3e26a3b83ece35a"
+        }
+      ],
+      "lifecycleState": "CANDIDATE",
+      "mappingVersion": "airport-source-system-v1",
+      "normalizedName": "RAS",
+      "product": null,
+      "productVersion": null,
+      "registryEntryId": "8bf7f40c3274d08acb945bf1e17df4dc62c8ac2d056760daf4a160d6e3c78c89",
+      "resultDigest": "61bde282282505045034d5ddcc20a7c9547a6f8ae6703c72cb906ecdaf4634d4",
+      "schemaVersion": "1.0.0",
+      "sourceSystemKey": "RAS",
+      "systemCategory": "RADIO_COMMUNICATION",
+      "vendor": null,
+      "verifiedCapabilities": []
+    },
+    {
+      "airportConsumerMetadata": {
+        "aliasReviewRequired": false,
+        "autoApproved": false,
+        "evidenceMatch": "namespace_review",
+        "namespaceDecisionStatus": "APPROVAL_REQUIRED",
+        "namespaceProposalId": "6ebbebe183502ce59e56668c1efadfd2150bca49537e6b6817a59806052b05dc",
+        "namespaceReviewRequired": true,
+        "observedSourceValue": "TEL",
+        "resultDigest": "7af59cc37df3daa4a033c8b708442ba08eabd8a025b2203774f8eb16b64186f2",
+        "sourceNamespaceCode": "SCN",
+        "sourceRecordCount": 14
+      },
+      "approvalState": "REVIEW_REQUIRED",
+      "createdFromProfile": "airport-source-system-profile-v1",
+      "declaredCapabilities": [
+        {
+          "capabilityKey": "SOURCE_IDENTITY_EVIDENCE",
+          "declarationState": "DECLARED",
+          "evidenceReferences": [],
+          "resultDigest": "8eef1a35bd1c8240587d2e78df520f3b2f10379c6c602eb932faf7b6535f996b",
+          "verificationState": "NOT_VERIFIED"
+        }
+      ],
+      "description": "Source system candidate for TEL",
+      "displayName": "TEL",
+      "evidenceReferences": [
+        {
+          "digest": "0fc6173d8a353b1dd2633b44ef99afa3a4acb41c29782b58436c0cbcf3c5f1ec",
+          "evidenceId": "2bd6c4b0f26f69cec870971cbed4ac5b63872ce8907c142650d07932cfdf8321",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "63061c85fca03040577cf513e43f686ec089995ded7485c138c834680d6832c7",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 14
+        }
+      ],
+      "healthPolicy": {
+        "evaluationMode": "DECLARATION_ONLY",
+        "expectedSignalTypes": [],
+        "policyKey": "EVIDENCE_ONLY_NO_RUNTIME_HEALTH",
+        "policyState": "DECLARED",
+        "resultDigest": "5a7d5afaa5ff432d4d95e83fe709f34f05ec64ae4038dc46762c71f7405c1f3b",
+        "staleThresholdDeclaration": null
+      },
+      "integrationDeclarations": [
+        {
+          "connectorReference": null,
+          "declarationState": "DECLARED",
+          "direction": "UNDECLARED",
+          "edgeGatewayReference": null,
+          "integrationMethod": "EVIDENCE_ONLY",
+          "linkRouteReference": null,
+          "protocolFamily": "UNDECLARED",
+          "resultDigest": "4122eac1dbaff2c920d749eb6519d05df6fee3d7deaddfc8f3e26a3b83ece35a"
+        }
+      ],
+      "lifecycleState": "CANDIDATE",
+      "mappingVersion": "airport-source-system-v1",
+      "normalizedName": "TEL",
+      "product": null,
+      "productVersion": null,
+      "registryEntryId": "bcdfadbc1ff27ba342c6add68393f1d78631b9d2925fbb467aab8463b776d16a",
+      "resultDigest": "7db6b13e72b06a75308314e74c58646096abdc8f48e06298252202e7da234fa4",
+      "schemaVersion": "1.0.0",
+      "sourceSystemKey": "TEL",
+      "systemCategory": "TELECOMMUNICATION",
+      "vendor": null,
+      "verifiedCapabilities": []
+    }
+  ],
+  "implementationStatus": "GENERIC_SOURCE_SYSTEM_REGISTRY_FOUNDATION_COMPLETE",
+  "profileId": "airport-source-system-profile-v1",
+  "readinessOutcome": "SOURCE_SYSTEM_CANDIDATES_COMPLETE_WITH_PENDING_REVIEWS",
+  "resultDigest": "4bd0d712da2cafa55c5fa842efeb1e7306685c3970940368d7420f20d8cae08b",
+  "summary": {
+    "activeSystemCount": 0,
+    "airportSpecific": false,
+    "aliasReviewCandidateCount": 2,
+    "approvedSystemCount": 0,
+    "containsCustomerAssetIdentifiers": false,
+    "crossIndustry": true,
+    "databaseAccessEnabled": false,
+    "exactEvidenceCandidateCount": 2,
+    "namespaceReviewCandidateCount": 1,
+    "productionActivationEnabled": false,
+    "registeredSystemCount": 0,
+    "runtimeConnectorExecutionEnabled": false,
+    "sourceSystemCandidateCount": 5,
+    "totalEvidenceDeviceCount": 470
+  }
+}
