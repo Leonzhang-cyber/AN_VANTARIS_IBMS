@@ -3,6 +3,10 @@ from .candidate_projection import (
     compare_deterministic_outputs,
     run_airport_source_system_projection,
 )
+from .evidence_adapter_profile import (
+    compare_deterministic_outputs as compare_evidence_adapter_deterministic_outputs,
+    run_airport_evidence_adapter_projection,
+)
 from .integration_health_projection import (
     compare_deterministic_outputs as compare_integration_health_deterministic_outputs,
     run_airport_integration_health_projection,
@@ -14,8 +18,10 @@ from .source_system_review_projection import (
 
 __all__ = [
     "compare_deterministic_outputs",
+    "compare_evidence_adapter_deterministic_outputs",
     "compare_integration_health_deterministic_outputs",
     "compare_review_deterministic_outputs",
+    "run_airport_evidence_adapter_projection",
     "run_airport_integration_health_projection",
     "run_airport_source_system_projection",
     "run_airport_source_system_review_projection",

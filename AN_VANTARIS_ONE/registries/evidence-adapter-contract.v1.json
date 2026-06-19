@@ -1,0 +1,84 @@
+{
+  "registryName": "VANTARIS ONE Evidence Adapter Contract",
+  "registryVersion": "1.0.0",
+  "contractVersion": "v1",
+  "authority": "ONE-AIRPORT-A2-04",
+  "profileType": "PLATFORM_EVIDENCE_ADAPTER_CONTRACT",
+  "platformScope": "CROSS_INDUSTRY",
+  "implementationMode": "READ_ONLY_CONTRACT",
+  "crossIndustry": true,
+  "airportSpecific": false,
+  "runtimeConnectorExecutionEnabled": false,
+  "databaseAccessEnabled": false,
+  "productionActivationEnabled": false,
+  "observedAtPolicy": "DETERMINISTIC_NO_VOLATILE_TIMESTAMP",
+  "producerTypes": [
+    "EDGE_GATEWAY",
+    "LINK_ROUTE",
+    "CONNECTOR_RUNTIME",
+    "MANUAL_IMPORT",
+    "OFFLINE_FIXTURE",
+    "UNKNOWN"
+  ],
+  "evidenceKinds": [
+    "HEARTBEAT",
+    "CONNECTOR_STATUS",
+    "LINK_DELIVERY_ACK",
+    "ROUTE_STATUS",
+    "MAPPING_VERSION",
+    "SCHEMA_VERSION",
+    "CAPABILITY_OBSERVATION",
+    "HEALTH_SIGNAL",
+    "DELIVERY_EVIDENCE",
+    "CONFIG_DECLARATION",
+    "UNKNOWN"
+  ],
+  "validationStates": [
+    "ACCEPTED_AS_EVIDENCE",
+    "REJECTED",
+    "REVIEW_REQUIRED",
+    "UNSUPPORTED",
+    "NOT_RUNTIME_EVIDENCE"
+  ],
+  "contractReadinessStates": [
+    "CONTRACT_DEFINED",
+    "FIXTURE_VALIDATED",
+    "RUNTIME_ADAPTER_PENDING"
+  ],
+  "forbiddenRuntimeMetrics": [
+    "heartbeatAt",
+    "lastSeen",
+    "latencyMs",
+    "uptimePercent",
+    "availabilityPercent",
+    "throughputBps",
+    "packetLossPercent"
+  ],
+  "ownershipBoundaries": {
+    "oneOwns": [
+      "evidence envelope validation",
+      "contract shape normalization",
+      "read-only contract projections"
+    ],
+    "edgeOwns": [
+      "connector runtime",
+      "protocol execution",
+      "gateway runtime health"
+    ],
+    "linkOwns": [
+      "transport",
+      "routing",
+      "ACK",
+      "retry",
+      "DLQ",
+      "replay"
+    ]
+  },
+  "implementationPaths": [
+    "AN_VANTARIS_ONE/registries/evidence-adapter-contract.v1.json",
+    "AN_VANTARIS_ONE/evidence_adapter_contract/",
+    "AN_VANTARIS_ONE/industry_profiles/airport/evidence_adapter_profile.py",
+    "AN_VANTARIS_ONE/tests/evidence_adapter_contract/",
+    "scripts/validation/validate-one-evidence-adapter-contract.py"
+  ]
+}
