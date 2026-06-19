@@ -1,0 +1,56 @@
+{
+  "formatName": "VANTARIS ONE Legacy Device Reconciliation Evidence Package",
+  "formatVersion": "1.0.0",
+  "exportPolicy": "SANITIZED_OFFLINE_READ_ONLY",
+  "tenantContext": {
+    "tenantId": "tenant-synthetic-control"
+  },
+  "siteContext": {
+    "siteId": "site-synthetic-control"
+  },
+  "sourceSystemContext": {
+    "sourceSystemId": "legacy-device-v1",
+    "sourceNamespace": "legacy.iot.devices"
+  },
+  "mappingVersion": "legacy-device-v1",
+  "devices": [
+    {
+      "sourceId": "dev-review-001",
+      "sourceNamespace": "legacy.iot.devices",
+      "tenantId": "tenant-synthetic-control",
+      "siteId": "site-synthetic-control",
+      "name": "Synthetic Ambiguous Field Device",
+      "code": "SYN-AMB-01",
+      "deviceType": "CONTROLLER",
+      "operationalStatus": "AVAILABLE",
+      "createdAt": "2026-01-06T00:00:00Z",
+      "updatedAt": "2026-01-06T00:00:00Z",
+      "approvedMetadata": {}
+    }
+  ],
+  "standardFields": [
+    {
+      "sourceId": "fld-review-001",
+      "deviceSourceId": "dev-review-001",
+      "sourceNamespace": "legacy.iot.standard_fields",
+      "name": "raw_json_payload",
+      "displayName": "Raw Json Payload",
+      "fieldType": "json",
+      "dataType": "JSON",
+      "unit": "",
+      "accessMode": "READ_ONLY",
+      "lifecycleStatus": "ACTIVE",
+      "sourceTagName": "SYN-AMB-01:raw_json_payload",
+      "approvedMetadata": {}
+    }
+  ],
+  "declaredRedactions": [
+    "all-credential-material-removed"
+  ],
+  "sourceSummary": {
+    "recordCount": 1,
+    "deviceCount": 1,
+    "standardFieldCount": 1,
+    "notes": "Synthetic representative package with review-producing ambiguous field."
+  }
+}
