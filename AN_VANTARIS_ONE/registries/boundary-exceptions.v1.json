@@ -1,0 +1,57 @@
+{
+  "registryName": "VANTARIS_ONE_BOUNDARY_EXCEPTION_REGISTRY",
+  "registryVersion": "1.0.0",
+  "generatedAtPolicy": "STATIC_ARCHITECTURE_BASELINE",
+  "authority": "ONE-PLAN-A4",
+  "status": "FROZEN_FOR_IMPLEMENTATION",
+  "exceptions": [
+    {
+      "exceptionId": "LEGACY-UMMS-WORKORDER-001",
+      "ruleId": "A4-BND-011",
+      "exactPath": "AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py",
+      "exactPattern": "_work_order",
+      "rationale": "The read-only UMMS skeleton predates the frozen ONE Work Management ownership boundary.",
+      "owner": "ONE Work Management / UMMS",
+      "status": "LEGACY_EXCEPTION",
+      "expiresByPolicy": "REMOVE_AFTER_WORK_MANAGEMENT_MIGRATION",
+      "compensatingControl": "Provider remains mockData=true, readOnly=true, and dispatch-disabled.",
+      "removalGate": "Canonical WorkOrder provider is supplied by PKG-WORK-MANAGEMENT."
+    },
+    {
+      "exceptionId": "LEGACY-UCDE-EVIDENCE-001",
+      "ruleId": "A4-BND-012",
+      "exactPath": "AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py",
+      "exactPattern": "_base_records",
+      "rationale": "The UCDE local evidence skeleton predates Evidence Center system-of-record ownership.",
+      "owner": "Evidence Center / UCDE",
+      "status": "LEGACY_EXCEPTION",
+      "expiresByPolicy": "REMOVE_AFTER_EVIDENCE_CENTER_MIGRATION",
+      "compensatingControl": "Provider is local mock data and does not claim production persistence.",
+      "removalGate": "UCDE consumes Evidence Center APIs and no longer provides EvidenceRecord storage."
+    },
+    {
+      "exceptionId": "LEGACY-REPORTS-AUDIT-001",
+      "ruleId": "A4-BND-009",
+      "exactPath": "AN_VANTARIS_IBMS-backend/src/reports/reports_audit_store.py",
+      "exactPattern": "append_audit_record",
+      "rationale": "Reports currently writes a local JSONL audit-readiness store predating Governance & Security AuditRecord ownership.",
+      "owner": "Governance & Security / Reports",
+      "status": "LEGACY_EXCEPTION",
+      "expiresByPolicy": "REMOVE_AFTER_P1_ENFORCEMENT",
+      "compensatingControl": "The store is explicitly local, non-certified, and isolated to report readiness.",
+      "removalGate": "Reports emits AuditRecord through the central audit service."
+    },
+    {
+      "exceptionId": "LEGACY-IOT-DEVICE-MODEL-001",
+      "ruleId": "A4-BND-002",
+      "exactPath": "AN_VANTARIS_IBMS-backend/src/Iot/models.py",
+      "exactPattern": "IMSDevice",
+      "rationale": "The legacy monolith persists Device identity and connector configuration together before Asset Graph and EDGE separation.",
+      "owner": "ONE Asset Graph / AN_VANTARIS_EDGE",
+      "status": "LEGACY_EXCEPTION",
+      "expiresByPolicy": "REMOVE_AFTER_ASSET_GRAPH_MIGRATION",
+      "compensatingControl": "No new canonical Device ownership may be added to the legacy model.",
+      "removalGate": "Canonical Device and Point records migrate to Asset Graph and runtime configuration moves behind EDGE APIs."
+    }
+  ]
+}
