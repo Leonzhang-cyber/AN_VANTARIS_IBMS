@@ -1,0 +1,53 @@
+{
+  "registryName": "VANTARIS ONE Integration Health Read Model",
+  "registryVersion": "1.0.0",
+  "authority": "ONE-AIRPORT-A2-03",
+  "profileType": "PLATFORM_READ_MODEL",
+  "platformScope": "CROSS_INDUSTRY",
+  "implementationMode": "READ_ONLY_PROJECTION",
+  "crossIndustry": true,
+  "airportSpecific": false,
+  "projectionOnly": true,
+  "runtimeConnectorExecutionEnabled": false,
+  "databaseAccessEnabled": false,
+  "productionActivationEnabled": false,
+  "runtimeEvidenceRequiredForVerifiedReady": true,
+  "generatedAtPolicy": "DETERMINISTIC_NO_VOLATILE_TIMESTAMP",
+  "classificationStates": [
+    "DECLARED",
+    "EVIDENCE_SUPPORTED",
+    "RUNTIME_OBSERVED",
+    "VERIFIED",
+    "UNKNOWN",
+    "NOT_APPLICABLE",
+    "REVIEW_REQUIRED"
+  ],
+  "healthStates": [
+    "HEALTHY",
+    "DEGRADED",
+    "UNHEALTHY",
+    "UNKNOWN",
+    "NOT_APPLICABLE",
+    "REVIEW_REQUIRED"
+  ],
+  "readinessStates": [
+    "NOT_READY",
+    "DECLARATION_READY",
+    "EVIDENCE_READY",
+    "REVIEW_REQUIRED",
+    "RUNTIME_VERIFICATION_REQUIRED",
+    "VERIFIED_READY"
+  ],
+  "forbiddenStaticOutcomes": [
+    "HEALTHY_FROM_RUNTIME",
+    "RUNTIME_OBSERVED_WITHOUT_ADAPTER",
+    "VERIFIED_READY_WITHOUT_APPROVAL"
+  ],
+  "implementationPaths": [
+    "AN_VANTARIS_ONE/registries/integration-health-read-model.v1.json",
+    "AN_VANTARIS_ONE/integration_health/",
+    "AN_VANTARIS_ONE/industry_profiles/airport/integration_health_projection.py",
+    "AN_VANTARIS_ONE/tests/integration_health/",
+    "scripts/validation/validate-one-integration-health-read-model.py"
+  ]
+}

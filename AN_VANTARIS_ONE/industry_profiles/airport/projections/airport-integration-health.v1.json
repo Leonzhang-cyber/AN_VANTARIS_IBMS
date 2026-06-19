@@ -1,0 +1,3860 @@
+{
+  "authority": "ONE-AIRPORT-A2-03",
+  "defaultPage": {
+    "continuationToken": null,
+    "deterministicDigest": "fe433b817de2435ba4a3eae7cccc8128db024a1155187404b42a2692e33ccaf0",
+    "items": [
+      {
+        "approvalState": "DRAFT",
+        "capabilityHealth": {
+          "classificationState": "UNKNOWN",
+          "deterministicDigest": "3b0e9b439e96c58598a4a79227e441caae66fcaaa179439c58a89986be3f8fd0",
+          "evidenceReferences": [
+            {
+              "digest": "7f4eb268556cd7cc31608ecc9f1796df9b053039ab13e3e4d1271339d7a23dec",
+              "evidenceId": "d5460171bfa515ad3fde83fa991bd0dbccac64817b6cd3cd50f7cec016d16330",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "f2134c9995fc2c8b24603620a9df349e320afce29bc99356c3fbea5e577f1188",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 129
+            }
+          ],
+          "reasonCodes": [
+            "CAPABILITIES_NOT_RUNTIME_VERIFIED"
+          ],
+          "reviewRequired": false,
+          "runtimeObserved": false,
+          "severity": "INFO",
+          "state": "UNKNOWN"
+        },
+        "configurationHealth": {
+          "classificationState": "DECLARED",
+          "deterministicDigest": "795394ee649e89a135d17de5ec259591a753aada9e61b065f6ef8773f964e313",
+          "evidenceReferences": [
+            {
+              "digest": "7f4eb268556cd7cc31608ecc9f1796df9b053039ab13e3e4d1271339d7a23dec",
+              "evidenceId": "d5460171bfa515ad3fde83fa991bd0dbccac64817b6cd3cd50f7cec016d16330",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "f2134c9995fc2c8b24603620a9df349e320afce29bc99356c3fbea5e577f1188",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 129
+            }
+          ],
+          "reasonCodes": [
+            "REGISTRY_APPROVAL_REQUIRED"
+          ],
+          "reviewRequired": false,
+          "runtimeObserved": false,
+          "severity": "LOW",
+          "state": "UNKNOWN"
+        },
+        "declarationHealth": {
+          "classificationState": "DECLARED",
+          "deterministicDigest": "af552d13c07d917e7b01c47d26540697ff6a84e18ec344f5c2eb67b2903f2700",
+          "evidenceReferences": [
+            {
+              "digest": "7f4eb268556cd7cc31608ecc9f1796df9b053039ab13e3e4d1271339d7a23dec",
+              "evidenceId": "d5460171bfa515ad3fde83fa991bd0dbccac64817b6cd3cd50f7cec016d16330",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "f2134c9995fc2c8b24603620a9df349e320afce29bc99356c3fbea5e577f1188",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 129
+            }
+          ],
+          "reasonCodes": [
+            "INTEGRATION_DECLARATION_PRESENT"
+          ],
+          "reviewRequired": false,
+          "runtimeObserved": false,
+          "severity": "INFO",
+          "state": "UNKNOWN"
+        },
+        "deterministicDigest": "ddc28be0e7cd673a0e65f3f649140efc78e5bea970b2e47d1ad85479af66c126",
+        "deviceEvidenceCount": 129,
+        "evidenceHealth": {
+          "classificationState": "EVIDENCE_SUPPORTED",
+          "deterministicDigest": "e0ee4f4095c6318a905f42ce766057b6a5f839f449fe00d4df2047dd50c6704b",
+          "evidenceReferences": [
+            {
+              "digest": "7f4eb268556cd7cc31608ecc9f1796df9b053039ab13e3e4d1271339d7a23dec",
+              "evidenceId": "d5460171bfa515ad3fde83fa991bd0dbccac64817b6cd3cd50f7cec016d16330",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "f2134c9995fc2c8b24603620a9df349e320afce29bc99356c3fbea5e577f1188",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 129
+            }
+          ],
+          "reasonCodes": [
+            "STATIC_EVIDENCE_SUPPORTED"
+          ],
+          "reviewRequired": false,
+          "runtimeObserved": false,
+          "severity": "INFO",
+          "state": "UNKNOWN"
+        },
+        "evidenceReferences": [
+          {
+            "digest": "7f4eb268556cd7cc31608ecc9f1796df9b053039ab13e3e4d1271339d7a23dec",
+            "evidenceId": "d5460171bfa515ad3fde83fa991bd0dbccac64817b6cd3cd50f7cec016d16330",
+            "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+            "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+            "resultDigest": "f2134c9995fc2c8b24603620a9df349e320afce29bc99356c3fbea5e577f1188",
+            "sourceProfile": "airport-source-system-profile-v1",
+            "sourceRecordCount": 129
+          }
+        ],
+        "findings": [
+          {
+            "affectedDimension": "declarationHealth",
+            "affectedSourceSystemKeys": [
+              "ACS"
+            ],
+            "decisionRequired": false,
+            "description": "Declaration metadata is present without a runtime reference assignment.",
+            "deterministicDigest": "405c65082f2c176ea4c94effc539a66361cddf2dd6c602ee58431bed803e9531",
+            "evidenceReferences": [
+              {
+                "digest": "7f4eb268556cd7cc31608ecc9f1796df9b053039ab13e3e4d1271339d7a23dec",
+                "evidenceId": "d5460171bfa515ad3fde83fa991bd0dbccac64817b6cd3cd50f7cec016d16330",
+                "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+                "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+                "resultDigest": "f2134c9995fc2c8b24603620a9df349e320afce29bc99356c3fbea5e577f1188",
+                "sourceProfile": "airport-source-system-profile-v1",
+                "sourceRecordCount": 129
+              }
+            ],
+            "findingId": "b46e00a545df44f49d6d2b5b52e4e6021f4471ace348f82ebd9afae05ab2f3d1",
+            "findingType": "CONNECTOR_REFERENCE_UNDECLARED",
+            "reasonCode": "CONNECTOR_REFERENCE_UNDECLARED",
+            "severity": "INFO",
+            "title": "Connector reference undeclared for ACS"
+          },
+          {
+            "affectedDimension": "declarationHealth",
+            "affectedSourceSystemKeys": [
+              "ACS"
+            ],
+            "decisionRequired": false,
+            "description": "Declaration metadata is present without a runtime reference assignment.",
+            "deterministicDigest": "c7bcd2a2adf609c36914a7ea8f43fa5cf99cde8b7abc75610c3fbc16f09aac07",
+            "evidenceReferences": [
+              {
+                "digest": "7f4eb268556cd7cc31608ecc9f1796df9b053039ab13e3e4d1271339d7a23dec",
+                "evidenceId": "d5460171bfa515ad3fde83fa991bd0dbccac64817b6cd3cd50f7cec016d16330",
+                "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+                "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+                "resultDigest": "f2134c9995fc2c8b24603620a9df349e320afce29bc99356c3fbea5e577f1188",
+                "sourceProfile": "airport-source-system-profile-v1",
+                "sourceRecordCount": 129
+              }
+            ],
+            "findingId": "f8d21501a63be1454cf421c5a28c2b02e92d270a1a3df5c2a6096bfc947a0ee6",
+            "findingType": "EDGE_GATEWAY_REFERENCE_UNDECLARED",
+            "reasonCode": "EDGE_GATEWAY_REFERENCE_UNDECLARED",
+            "severity": "INFO",
+            "title": "EDGE gateway reference undeclared for ACS"
+          },
+          {
+            "affectedDimension": "policyHealth",
+            "affectedSourceSystemKeys": [
+              "ACS"
+            ],
+            "decisionRequired": false,
+            "description": "Health policy remains declarative and has not been runtime-evaluated.",
+            "deterministicDigest": "fb0c8dfe669c69d9e9eac7199e0cac31c42b8c50a23ffbf4f00aad90153a52de",
+            "evidenceReferences": [
+              {
+                "digest": "7f4eb268556cd7cc31608ecc9f1796df9b053039ab13e3e4d1271339d7a23dec",
+                "evidenceId": "d5460171bfa515ad3fde83fa991bd0dbccac64817b6cd3cd50f7cec016d16330",
+                "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+                "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+                "resultDigest": "f2134c9995fc2c8b24603620a9df349e320afce29bc99356c3fbea5e577f1188",
+                "sourceProfile": "airport-source-system-profile-v1",
+                "sourceRecordCount": 129
+              }
+            ],
+            "findingId": "4bf0242c1c547c873eeec16e6529a94388a423ba3cb5fe99b3a6657a21f51ec4",
+            "findingType": "HEALTH_POLICY_NOT_EVALUATED",
+            "reasonCode": "HEALTH_POLICY_NOT_EVALUATED",
+            "severity": "INFO",
+            "title": "Health policy not evaluated for ACS"
+          },
+          {
+            "affectedDimension": "declarationHealth",
+            "affectedSourceSystemKeys": [
+              "ACS"
+            ],
+            "decisionRequired": false,
+            "description": "Declaration metadata is present without a runtime reference assignment.",
+            "deterministicDigest": "250aed438fe57c80ba47ddb32e6e133b3c7007e5514fc4cd7d7ee89e9c80eca6",
+            "evidenceReferences": [
+              {
+                "digest": "7f4eb268556cd7cc31608ecc9f1796df9b053039ab13e3e4d1271339d7a23dec",
+                "evidenceId": "d5460171bfa515ad3fde83fa991bd0dbccac64817b6cd3cd50f7cec016d16330",
+                "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+                "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+                "resultDigest": "f2134c9995fc2c8b24603620a9df349e320afce29bc99356c3fbea5e577f1188",
+                "sourceProfile": "airport-source-system-profile-v1",
+                "sourceRecordCount": 129
+              }
+            ],
+            "findingId": "878f0b8dbae43d5d051217a2430ed701c74007f110a31a6ce6079f1c8dc148ff",
+            "findingType": "LINK_ROUTE_REFERENCE_UNDECLARED",
+            "reasonCode": "LINK_ROUTE_REFERENCE_UNDECLARED",
+            "severity": "INFO",
+            "title": "LINK route reference undeclared for ACS"
+          },
+          {
+            "affectedDimension": "configurationHealth",
+            "affectedSourceSystemKeys": [
+              "ACS"
+            ],
+            "decisionRequired": true,
+            "description": "Exact static evidence exists, but registry approval is still required.",
+            "deterministicDigest": "ac827661f67e78cbc76d9a3220e48d35f4480ff376c73a2e64c101e02d430e6b",
+            "evidenceReferences": [
+              {
+                "digest": "7f4eb268556cd7cc31608ecc9f1796df9b053039ab13e3e4d1271339d7a23dec",
+                "evidenceId": "d5460171bfa515ad3fde83fa991bd0dbccac64817b6cd3cd50f7cec016d16330",
+                "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+                "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+                "resultDigest": "f2134c9995fc2c8b24603620a9df349e320afce29bc99356c3fbea5e577f1188",
+                "sourceProfile": "airport-source-system-profile-v1",
+                "sourceRecordCount": 129
+              }
+            ],
+            "findingId": "34c9047efd42e34448073a402adab01e1c185cb571e031d2fef6795e7e25d040",
+            "findingType": "REGISTRY_APPROVAL_PENDING",
+            "reasonCode": "REGISTRY_APPROVAL_PENDING",
+            "severity": "LOW",
+            "title": "Registry approval pending for ACS"
+          },
+          {
+            "affectedDimension": "runtimeObservationHealth",
+            "affectedSourceSystemKeys": [
+              "ACS"
+            ],
+            "decisionRequired": false,
+            "description": "No runtime adapter evidence is connected; this is not an outage.",
+            "deterministicDigest": "f63cac9df6a63f427ddfbd03708c3a4e11a19cc96b757c1829969714d3aae2c9",
+            "evidenceReferences": [],
+            "findingId": "de7912fa86db3637b831c9e6c39be28eba3c65b787d84913b53a33fd97c9a8c9",
+            "findingType": "RUNTIME_EVIDENCE_UNAVAILABLE",
+            "reasonCode": "RUNTIME_EVIDENCE_UNAVAILABLE",
+            "severity": "INFO",
+            "title": "Runtime verification required for ACS"
+          }
+        ],
+        "freshnessHealth": {
+          "classificationState": "NOT_APPLICABLE",
+          "deterministicDigest": "263010e3538490505b30210b0c419d42db100500212fe23bbc547d721fdd25c5",
+          "evidenceReferences": [],
+          "reasonCodes": [
+            "NO_TIMESTAMPED_RUNTIME_SIGNAL"
+          ],
+          "reviewRequired": false,
+          "runtimeObserved": false,
+          "severity": "INFO",
+          "state": "NOT_APPLICABLE"
+        },
+        "generatedAtPolicy": "DETERMINISTIC_NO_VOLATILE_TIMESTAMP",
+        "integrationHealthId": "fc25d8c3829e54ca9ef654da46a8f485f36a371794b692aa31686a82deeea8bb",
+        "lifecycleState": "CANDIDATE",
+        "mappingVersionDeclaration": "airport-source-system-v1",
+        "policyHealth": {
+          "classificationState": "NOT_APPLICABLE",
+          "deterministicDigest": "640a5bd921360a121b130afb59c9645e19e6ddb11b3b33148f867a296bd4eede",
+          "evidenceReferences": [],
+          "reasonCodes": [
+            "HEALTH_POLICY_NOT_EVALUATED"
+          ],
+          "reviewRequired": false,
+          "runtimeObserved": false,
+          "severity": "INFO",
+          "state": "NOT_APPLICABLE"
+        },
+        "readinessState": "RUNTIME_VERIFICATION_REQUIRED",
+        "registryEntryId": "722a59146a8bdb9d4f76c5786a634d5fbf3f5c9d6e41473485fa20eb335d2dd4",
+        "runtimeObservationHealth": {
+          "classificationState": "UNKNOWN",
+          "deterministicDigest": "262603dd0040bfc3934470f13a7edb57e91b0d5251b69e3c447e3156c8cf02b6",
+          "evidenceReferences": [],
+          "reasonCodes": [
+            "RUNTIME_EVIDENCE_UNAVAILABLE"
+          ],
+          "reviewRequired": false,
+          "runtimeObserved": false,
+          "severity": "INFO",
+          "state": "UNKNOWN"
+        },
+        "schemaVersionDeclaration": "1.0.0",
+        "sourceRecordCount": 129,
+        "sourceSystemKey": "ACS"
+      },
+      {
+        "approvalState": "REVIEW_REQUIRED",
+        "capabilityHealth": {
+          "classificationState": "UNKNOWN",
+          "deterministicDigest": "3d2b1fdf6680a241081779df9507ad908ddcec201dcbc795bb8537b9d7fce09f",
+          "evidenceReferences": [
+            {
+              "digest": "700c0aa4873f711e6a0732e56e0e9d67df78be56ef396f52daa10b5c0fe766fa",
+              "evidenceId": "ceba5fc20cc1f142a8083ae0edf47f31d74cb445de857a7aa905c895ac30b017",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "49d8bfa2ece4be806883107bf8c00452af66b35f3a16898a53c8dbb18750faaa",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 52
+            }
+          ],
+          "reasonCodes": [
+            "CAPABILITIES_NOT_RUNTIME_VERIFIED"
+          ],
+          "reviewRequired": false,
+          "runtimeObserved": false,
+          "severity": "INFO",
+          "state": "UNKNOWN"
+        },
+        "configurationHealth": {
+          "classificationState": "REVIEW_REQUIRED",
+          "deterministicDigest": "83c8472ea81b33d50fd28f4ee83fd60461eb49afe8f5311d368402fa9ffcdb4e",
+          "evidenceReferences": [
+            {
+              "digest": "700c0aa4873f711e6a0732e56e0e9d67df78be56ef396f52daa10b5c0fe766fa",
+              "evidenceId": "ceba5fc20cc1f142a8083ae0edf47f31d74cb445de857a7aa905c895ac30b017",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "49d8bfa2ece4be806883107bf8c00452af66b35f3a16898a53c8dbb18750faaa",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 52
+            }
+          ],
+          "reasonCodes": [
+            "ALIAS_APPROVAL_REQUIRED"
+          ],
+          "reviewRequired": true,
+          "runtimeObserved": false,
+          "severity": "MEDIUM",
+          "state": "REVIEW_REQUIRED"
+        },
+        "declarationHealth": {
+          "classificationState": "DECLARED",
+          "deterministicDigest": "21b8e045a0cb9e0e08d9d6f2f84d7d1f5e7cdb1ff4318098d5d7b0e2cdec7557",
+          "evidenceReferences": [
+            {
+              "digest": "700c0aa4873f711e6a0732e56e0e9d67df78be56ef396f52daa10b5c0fe766fa",
+              "evidenceId": "ceba5fc20cc1f142a8083ae0edf47f31d74cb445de857a7aa905c895ac30b017",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "49d8bfa2ece4be806883107bf8c00452af66b35f3a16898a53c8dbb18750faaa",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 52
+            }
+          ],
+          "reasonCodes": [
+            "INTEGRATION_DECLARATION_PRESENT"
+          ],
+          "reviewRequired": false,
+          "runtimeObserved": false,
+          "severity": "INFO",
+          "state": "UNKNOWN"
+        },
+        "deterministicDigest": "39f51e8f0c4b6597274b6ff5713704c05ed74d98d7785f0fa980bcc2008bb7fb",
+        "deviceEvidenceCount": 52,
+        "evidenceHealth": {
+          "classificationState": "REVIEW_REQUIRED",
+          "deterministicDigest": "c68864fc6fe566595a4b775bf0554e7042a7ae51eb7b5cefb864c451528f50e8",
+          "evidenceReferences": [
+            {
+              "digest": "700c0aa4873f711e6a0732e56e0e9d67df78be56ef396f52daa10b5c0fe766fa",
+              "evidenceId": "ceba5fc20cc1f142a8083ae0edf47f31d74cb445de857a7aa905c895ac30b017",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "49d8bfa2ece4be806883107bf8c00452af66b35f3a16898a53c8dbb18750faaa",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 52
+            }
+          ],
+          "reasonCodes": [
+            "STATIC_EVIDENCE_REVIEW_REQUIRED"
+          ],
+          "reviewRequired": true,
+          "runtimeObserved": false,
+          "severity": "INFO",
+          "state": "UNKNOWN"
+        },
+        "evidenceReferences": [
+          {
+            "digest": "700c0aa4873f711e6a0732e56e0e9d67df78be56ef396f52daa10b5c0fe766fa",
+            "evidenceId": "ceba5fc20cc1f142a8083ae0edf47f31d74cb445de857a7aa905c895ac30b017",
+            "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+            "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+            "resultDigest": "49d8bfa2ece4be806883107bf8c00452af66b35f3a16898a53c8dbb18750faaa",
+            "sourceProfile": "airport-source-system-profile-v1",
+            "sourceRecordCount": 52
+          }
+        ],
+        "findings": [
+          {
+            "affectedDimension": "configurationHealth",
+            "affectedSourceSystemKeys": [
+              "CCTV"
+            ],
+            "decisionRequired": true,
+            "description": "Static source evidence requires an operator alias decision.",
+            "deterministicDigest": "721597891563688a6eb5de32e93f2cb12d4e57f941e3af291d86d80d3a880c88",
+            "evidenceReferences": [
+              {
+                "digest": "700c0aa4873f711e6a0732e56e0e9d67df78be56ef396f52daa10b5c0fe766fa",
+                "evidenceId": "ceba5fc20cc1f142a8083ae0edf47f31d74cb445de857a7aa905c895ac30b017",
+                "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+                "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+                "resultDigest": "49d8bfa2ece4be806883107bf8c00452af66b35f3a16898a53c8dbb18750faaa",
+                "sourceProfile": "airport-source-system-profile-v1",
+                "sourceRecordCount": 52
+              }
+            ],
+            "findingId": "b5a83308804a06be550250022fce67ce517ad87d38a8f09859b72b1bbcfee0a1",
+            "findingType": "ALIAS_APPROVAL_PENDING",
+            "reasonCode": "ALIAS_APPROVAL_PENDING",
+            "severity": "MEDIUM",
+            "title": "Alias approval pending for CCTV"
+          },
+          {
+            "affectedDimension": "declarationHealth",
+            "affectedSourceSystemKeys": [
+              "CCTV"
+            ],
+            "decisionRequired": false,
+            "description": "Declaration metadata is present without a runtime reference assignment.",
+            "deterministicDigest": "47a008ef18577e0cb0cd8ca3bad1edc95ea87891d337b6e05bba07f1f96dd48e",
+            "evidenceReferences": [
+              {
+                "digest": "700c0aa4873f711e6a0732e56e0e9d67df78be56ef396f52daa10b5c0fe766fa",
+                "evidenceId": "ceba5fc20cc1f142a8083ae0edf47f31d74cb445de857a7aa905c895ac30b017",
+                "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+                "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+                "resultDigest": "49d8bfa2ece4be806883107bf8c00452af66b35f3a16898a53c8dbb18750faaa",
+                "sourceProfile": "airport-source-system-profile-v1",
+                "sourceRecordCount": 52
+              }
+            ],
+            "findingId": "54071d38191630e8026472228e5e905f30507da25e09ff4385b9591aa2ff4687",
+            "findingType": "CONNECTOR_REFERENCE_UNDECLARED",
+            "reasonCode": "CONNECTOR_REFERENCE_UNDECLARED",
+            "severity": "INFO",
+            "title": "Connector reference undeclared for CCTV"
+          },
+          {
+            "affectedDimension": "declarationHealth",
+            "affectedSourceSystemKeys": [
+              "CCTV"
+            ],
+            "decisionRequired": false,
+            "description": "Declaration metadata is present without a runtime reference assignment.",
+            "deterministicDigest": "7564c4fd231e4682adf7999c6f80ee06f773d720802766d7c501ba8d1e72473f",
+            "evidenceReferences": [
+              {
+                "digest": "700c0aa4873f711e6a0732e56e0e9d67df78be56ef396f52daa10b5c0fe766fa",
+                "evidenceId": "ceba5fc20cc1f142a8083ae0edf47f31d74cb445de857a7aa905c895ac30b017",
+                "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+                "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+                "resultDigest": "49d8bfa2ece4be806883107bf8c00452af66b35f3a16898a53c8dbb18750faaa",
+                "sourceProfile": "airport-source-system-profile-v1",
+                "sourceRecordCount": 52
+              }
+            ],
+            "findingId": "eb9638e2462f93e068d6d6728896d1ceb7b2e39b0d545bfbf51cf355820de452",
+            "findingType": "EDGE_GATEWAY_REFERENCE_UNDECLARED",
+            "reasonCode": "EDGE_GATEWAY_REFERENCE_UNDECLARED",
+            "severity": "INFO",
+            "title": "EDGE gateway reference undeclared for CCTV"
+          },
+          {
+            "affectedDimension": "policyHealth",
+            "affectedSourceSystemKeys": [
+              "CCTV"
+            ],
+            "decisionRequired": false,
+            "description": "Health policy remains declarative and has not been runtime-evaluated.",
+            "deterministicDigest": "129a2f3e0a1f08a36dcc978bd3737e62d1c2192e3de57f6a719c60701861449b",
+            "evidenceReferences": [
+              {
+                "digest": "700c0aa4873f711e6a0732e56e0e9d67df78be56ef396f52daa10b5c0fe766fa",
+                "evidenceId": "ceba5fc20cc1f142a8083ae0edf47f31d74cb445de857a7aa905c895ac30b017",
+                "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+                "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+                "resultDigest": "49d8bfa2ece4be806883107bf8c00452af66b35f3a16898a53c8dbb18750faaa",
+                "sourceProfile": "airport-source-system-profile-v1",
+                "sourceRecordCount": 52
+              }
+            ],
+            "findingId": "8a5087d82088f1eb2ba008fc7edcb51ceb8f10bdbdeaacdda27764b79194692e",
+            "findingType": "HEALTH_POLICY_NOT_EVALUATED",
+            "reasonCode": "HEALTH_POLICY_NOT_EVALUATED",
+            "severity": "INFO",
+            "title": "Health policy not evaluated for CCTV"
+          },
+          {
+            "affectedDimension": "declarationHealth",
+            "affectedSourceSystemKeys": [
+              "CCTV"
+            ],
+            "decisionRequired": false,
+            "description": "Declaration metadata is present without a runtime reference assignment.",
+            "deterministicDigest": "73f71e1dcae1b64cbc1e792bae59d358445992e42dd1bd6abb5aecf8a22a0374",
+            "evidenceReferences": [
+              {
+                "digest": "700c0aa4873f711e6a0732e56e0e9d67df78be56ef396f52daa10b5c0fe766fa",
+                "evidenceId": "ceba5fc20cc1f142a8083ae0edf47f31d74cb445de857a7aa905c895ac30b017",
+                "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+                "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+                "resultDigest": "49d8bfa2ece4be806883107bf8c00452af66b35f3a16898a53c8dbb18750faaa",
+                "sourceProfile": "airport-source-system-profile-v1",
+                "sourceRecordCount": 52
+              }
+            ],
+            "findingId": "7ee18318cb0da7e1ba7c388733e3a04e24a1cd2285eed9c3b67f46a9f78273ee",
+            "findingType": "LINK_ROUTE_REFERENCE_UNDECLARED",
+            "reasonCode": "LINK_ROUTE_REFERENCE_UNDECLARED",
+            "severity": "INFO",
+            "title": "LINK route reference undeclared for CCTV"
+          },
+          {
+            "affectedDimension": "runtimeObservationHealth",
+            "affectedSourceSystemKeys": [
+              "CCTV"
+            ],
+            "decisionRequired": false,
+            "description": "No runtime adapter evidence is connected; this is not an outage.",
+            "deterministicDigest": "39877b4266732f7a9677ca8788c4588a592681dcd2814cd977fdb37702a172de",
+            "evidenceReferences": [],
+            "findingId": "a54a6c48ca4a19836ac376fdacbf79001ee473c13f0106686fc1fc3c65eed0da",
+            "findingType": "RUNTIME_EVIDENCE_UNAVAILABLE",
+            "reasonCode": "RUNTIME_EVIDENCE_UNAVAILABLE",
+            "severity": "INFO",
+            "title": "Runtime verification required for CCTV"
+          }
+        ],
+        "freshnessHealth": {
+          "classificationState": "NOT_APPLICABLE",
+          "deterministicDigest": "263010e3538490505b30210b0c419d42db100500212fe23bbc547d721fdd25c5",
+          "evidenceReferences": [],
+          "reasonCodes": [
+            "NO_TIMESTAMPED_RUNTIME_SIGNAL"
+          ],
+          "reviewRequired": false,
+          "runtimeObserved": false,
+          "severity": "INFO",
+          "state": "NOT_APPLICABLE"
+        },
+        "generatedAtPolicy": "DETERMINISTIC_NO_VOLATILE_TIMESTAMP",
+        "integrationHealthId": "f6cb0a4e284850647a7c5414ac194c72cd3762fa9b17e7a71189582ab2807aa7",
+        "lifecycleState": "CANDIDATE",
+        "mappingVersionDeclaration": "airport-source-system-v1",
+        "policyHealth": {
+          "classificationState": "NOT_APPLICABLE",
+          "deterministicDigest": "640a5bd921360a121b130afb59c9645e19e6ddb11b3b33148f867a296bd4eede",
+          "evidenceReferences": [],
+          "reasonCodes": [
+            "HEALTH_POLICY_NOT_EVALUATED"
+          ],
+          "reviewRequired": false,
+          "runtimeObserved": false,
+          "severity": "INFO",
+          "state": "NOT_APPLICABLE"
+        },
+        "readinessState": "REVIEW_REQUIRED",
+        "registryEntryId": "8b8e1222d598bb40a588a383c50a65e46c21e6cf81da63ab11fd625a6624f422",
+        "runtimeObservationHealth": {
+          "classificationState": "UNKNOWN",
+          "deterministicDigest": "262603dd0040bfc3934470f13a7edb57e91b0d5251b69e3c447e3156c8cf02b6",
+          "evidenceReferences": [],
+          "reasonCodes": [
+            "RUNTIME_EVIDENCE_UNAVAILABLE"
+          ],
+          "reviewRequired": false,
+          "runtimeObserved": false,
+          "severity": "INFO",
+          "state": "UNKNOWN"
+        },
+        "schemaVersionDeclaration": "1.0.0",
+        "sourceRecordCount": 52,
+        "sourceSystemKey": "CCTV"
+      },
+      {
+        "approvalState": "REVIEW_REQUIRED",
+        "capabilityHealth": {
+          "classificationState": "UNKNOWN",
+          "deterministicDigest": "565fe92695afad06639e2a1e32331a3c22cc361fb3f74781f011d51d388dd0c4",
+          "evidenceReferences": [
+            {
+              "digest": "6da53d802f057618e91b95564f3abee9dab082748ea008e69a81c62c40f21fd6",
+              "evidenceId": "6f9a9a469a9ad62b5a0d1065bada2f1f9b52cfc0b8132183f1e97f826c1ed461",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "1dbd5b57a352e475431caeeef6267b79df96f97568ca6f7fb77c37e2734cdea5",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 247
+            }
+          ],
+          "reasonCodes": [
+            "CAPABILITIES_NOT_RUNTIME_VERIFIED"
+          ],
+          "reviewRequired": false,
+          "runtimeObserved": false,
+          "severity": "INFO",
+          "state": "UNKNOWN"
+        },
+        "configurationHealth": {
+          "classificationState": "REVIEW_REQUIRED",
+          "deterministicDigest": "1ac69bd638770ab23a2ef750ffa645aa458ecf8fc0368857a2cf925be5ed769e",
+          "evidenceReferences": [
+            {
+              "digest": "6da53d802f057618e91b95564f3abee9dab082748ea008e69a81c62c40f21fd6",
+              "evidenceId": "6f9a9a469a9ad62b5a0d1065bada2f1f9b52cfc0b8132183f1e97f826c1ed461",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "1dbd5b57a352e475431caeeef6267b79df96f97568ca6f7fb77c37e2734cdea5",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 247
+            }
+          ],
+          "reasonCodes": [
+            "ALIAS_APPROVAL_REQUIRED"
+          ],
+          "reviewRequired": true,
+          "runtimeObserved": false,
+          "severity": "MEDIUM",
+          "state": "REVIEW_REQUIRED"
+        },
+        "declarationHealth": {
+          "classificationState": "DECLARED",
+          "deterministicDigest": "aab74517fc08af1668fd6d8bd587c524b664ba4c360f1771c1c815d92540e61e",
+          "evidenceReferences": [
+            {
+              "digest": "6da53d802f057618e91b95564f3abee9dab082748ea008e69a81c62c40f21fd6",
+              "evidenceId": "6f9a9a469a9ad62b5a0d1065bada2f1f9b52cfc0b8132183f1e97f826c1ed461",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "1dbd5b57a352e475431caeeef6267b79df96f97568ca6f7fb77c37e2734cdea5",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 247
+            }
+          ],
+          "reasonCodes": [
+            "INTEGRATION_DECLARATION_PRESENT"
+          ],
+          "reviewRequired": false,
+          "runtimeObserved": false,
+          "severity": "INFO",
+          "state": "UNKNOWN"
+        },
+        "deterministicDigest": "0c479b1527b2c9309414dba014ea7de5f804a06f116ab8409a5cb1b1cc7ecce8",
+        "deviceEvidenceCount": 247,
+        "evidenceHealth": {
+          "classificationState": "REVIEW_REQUIRED",
+          "deterministicDigest": "f6fcf6eaf9486e7814375866d6856573fa2369f441229e16165f669dcaaa2497",
+          "evidenceReferences": [
+            {
+              "digest": "6da53d802f057618e91b95564f3abee9dab082748ea008e69a81c62c40f21fd6",
+              "evidenceId": "6f9a9a469a9ad62b5a0d1065bada2f1f9b52cfc0b8132183f1e97f826c1ed461",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "1dbd5b57a352e475431caeeef6267b79df96f97568ca6f7fb77c37e2734cdea5",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 247
+            }
+          ],
+          "reasonCodes": [
+            "STATIC_EVIDENCE_REVIEW_REQUIRED"
+          ],
+          "reviewRequired": true,
+          "runtimeObserved": false,
+          "severity": "INFO",
+          "state": "UNKNOWN"
+        },
+        "evidenceReferences": [
+          {
+            "digest": "6da53d802f057618e91b95564f3abee9dab082748ea008e69a81c62c40f21fd6",
+            "evidenceId": "6f9a9a469a9ad62b5a0d1065bada2f1f9b52cfc0b8132183f1e97f826c1ed461",
+            "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+            "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+            "resultDigest": "1dbd5b57a352e475431caeeef6267b79df96f97568ca6f7fb77c37e2734cdea5",
+            "sourceProfile": "airport-source-system-profile-v1",
+            "sourceRecordCount": 247
+          }
+        ],
+        "findings": [
+          {
+            "affectedDimension": "configurationHealth",
+            "affectedSourceSystemKeys": [
+              "PA"
+            ],
+            "decisionRequired": true,
+            "description": "Static source evidence requires an operator alias decision.",
+            "deterministicDigest": "54c54f58b296143464c3aa433da53fed8193b861f49bd2c89953bab0abdc342d",
+            "evidenceReferences": [
+              {
+                "digest": "6da53d802f057618e91b95564f3abee9dab082748ea008e69a81c62c40f21fd6",
+                "evidenceId": "6f9a9a469a9ad62b5a0d1065bada2f1f9b52cfc0b8132183f1e97f826c1ed461",
+                "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+                "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+                "resultDigest": "1dbd5b57a352e475431caeeef6267b79df96f97568ca6f7fb77c37e2734cdea5",
+                "sourceProfile": "airport-source-system-profile-v1",
+                "sourceRecordCount": 247
+              }
+            ],
+            "findingId": "248864517eea0d7cdd4ab283875bcbf014e18d9b8e92084d72bc95febc320a8b",
+            "findingType": "ALIAS_APPROVAL_PENDING",
+            "reasonCode": "ALIAS_APPROVAL_PENDING",
+            "severity": "MEDIUM",
+            "title": "Alias approval pending for PA"
+          },
+          {
+            "affectedDimension": "declarationHealth",
+            "affectedSourceSystemKeys": [
+              "PA"
+            ],
+            "decisionRequired": false,
+            "description": "Declaration metadata is present without a runtime reference assignment.",
+            "deterministicDigest": "b29f4f877f4c94b7da64570b22a2c37c3df26977bcc32f66d60ad07b58c902e4",
+            "evidenceReferences": [
+              {
+                "digest": "6da53d802f057618e91b95564f3abee9dab082748ea008e69a81c62c40f21fd6",
+                "evidenceId": "6f9a9a469a9ad62b5a0d1065bada2f1f9b52cfc0b8132183f1e97f826c1ed461",
+                "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+                "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+                "resultDigest": "1dbd5b57a352e475431caeeef6267b79df96f97568ca6f7fb77c37e2734cdea5",
+                "sourceProfile": "airport-source-system-profile-v1",
+                "sourceRecordCount": 247
+              }
+            ],
+            "findingId": "a135e33c1249f69738e160a5637f5e843c471c5a05ddb147b70c15931548775d",
+            "findingType": "CONNECTOR_REFERENCE_UNDECLARED",
+            "reasonCode": "CONNECTOR_REFERENCE_UNDECLARED",
+            "severity": "INFO",
+            "title": "Connector reference undeclared for PA"
+          },
+          {
+            "affectedDimension": "declarationHealth",
+            "affectedSourceSystemKeys": [
+              "PA"
+            ],
+            "decisionRequired": false,
+            "description": "Declaration metadata is present without a runtime reference assignment.",
+            "deterministicDigest": "a26353ef3765cad4d8a24863ae0338220a5cb416165d1e7bc1a3d3d6c69ae66b",
+            "evidenceReferences": [
+              {
+                "digest": "6da53d802f057618e91b95564f3abee9dab082748ea008e69a81c62c40f21fd6",
+                "evidenceId": "6f9a9a469a9ad62b5a0d1065bada2f1f9b52cfc0b8132183f1e97f826c1ed461",
+                "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+                "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+                "resultDigest": "1dbd5b57a352e475431caeeef6267b79df96f97568ca6f7fb77c37e2734cdea5",
+                "sourceProfile": "airport-source-system-profile-v1",
+                "sourceRecordCount": 247
+              }
+            ],
+            "findingId": "12e6ccb1b5c047fa9a29e49dc3d70c416f312864f1ad53f0a5a06359f0614146",
+            "findingType": "EDGE_GATEWAY_REFERENCE_UNDECLARED",
+            "reasonCode": "EDGE_GATEWAY_REFERENCE_UNDECLARED",
+            "severity": "INFO",
+            "title": "EDGE gateway reference undeclared for PA"
+          },
+          {
+            "affectedDimension": "policyHealth",
+            "affectedSourceSystemKeys": [
+              "PA"
+            ],
+            "decisionRequired": false,
+            "description": "Health policy remains declarative and has not been runtime-evaluated.",
+            "deterministicDigest": "95ab13260d9d1d4cece208d0391a692b46f7089ac743a66fe059a03551471f14",
+            "evidenceReferences": [
+              {
+                "digest": "6da53d802f057618e91b95564f3abee9dab082748ea008e69a81c62c40f21fd6",
+                "evidenceId": "6f9a9a469a9ad62b5a0d1065bada2f1f9b52cfc0b8132183f1e97f826c1ed461",
+                "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+                "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+                "resultDigest": "1dbd5b57a352e475431caeeef6267b79df96f97568ca6f7fb77c37e2734cdea5",
+                "sourceProfile": "airport-source-system-profile-v1",
+                "sourceRecordCount": 247
+              }
+            ],
+            "findingId": "2c2f7721646fb69072c0d8507f327d9fda59958d5a6bc7ccdcc752bb2ca01bc3",
+            "findingType": "HEALTH_POLICY_NOT_EVALUATED",
+            "reasonCode": "HEALTH_POLICY_NOT_EVALUATED",
+            "severity": "INFO",
+            "title": "Health policy not evaluated for PA"
+          },
+          {
+            "affectedDimension": "declarationHealth",
+            "affectedSourceSystemKeys": [
+              "PA"
+            ],
+            "decisionRequired": false,
+            "description": "Declaration metadata is present without a runtime reference assignment.",
+            "deterministicDigest": "bdfcd7f76d7c32ecc2038dc4cdae729f4e032fa09ff3004cd4303025682a61b0",
+            "evidenceReferences": [
+              {
+                "digest": "6da53d802f057618e91b95564f3abee9dab082748ea008e69a81c62c40f21fd6",
+                "evidenceId": "6f9a9a469a9ad62b5a0d1065bada2f1f9b52cfc0b8132183f1e97f826c1ed461",
+                "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+                "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+                "resultDigest": "1dbd5b57a352e475431caeeef6267b79df96f97568ca6f7fb77c37e2734cdea5",
+                "sourceProfile": "airport-source-system-profile-v1",
+                "sourceRecordCount": 247
+              }
+            ],
+            "findingId": "6823e43f6ab579fddb79d154d5c48d0488eaa473de41324b5737675f3ddb795c",
+            "findingType": "LINK_ROUTE_REFERENCE_UNDECLARED",
+            "reasonCode": "LINK_ROUTE_REFERENCE_UNDECLARED",
+            "severity": "INFO",
+            "title": "LINK route reference undeclared for PA"
+          },
+          {
+            "affectedDimension": "runtimeObservationHealth",
+            "affectedSourceSystemKeys": [
+              "PA"
+            ],
+            "decisionRequired": false,
+            "description": "No runtime adapter evidence is connected; this is not an outage.",
+            "deterministicDigest": "7af149474505f8f570cd1c7a45d04a58fd260f5a170db984e39b58259d2cc723",
+            "evidenceReferences": [],
+            "findingId": "441ec7e3eb0a14a6fc96161d224efcb4ed09cadfe40873b35f11ad959de52eff",
+            "findingType": "RUNTIME_EVIDENCE_UNAVAILABLE",
+            "reasonCode": "RUNTIME_EVIDENCE_UNAVAILABLE",
+            "severity": "INFO",
+            "title": "Runtime verification required for PA"
+          }
+        ],
+        "freshnessHealth": {
+          "classificationState": "NOT_APPLICABLE",
+          "deterministicDigest": "263010e3538490505b30210b0c419d42db100500212fe23bbc547d721fdd25c5",
+          "evidenceReferences": [],
+          "reasonCodes": [
+            "NO_TIMESTAMPED_RUNTIME_SIGNAL"
+          ],
+          "reviewRequired": false,
+          "runtimeObserved": false,
+          "severity": "INFO",
+          "state": "NOT_APPLICABLE"
+        },
+        "generatedAtPolicy": "DETERMINISTIC_NO_VOLATILE_TIMESTAMP",
+        "integrationHealthId": "1ac5296e39771479e2cc8369d95a6f1b002fe3bbe5870e2a83befd8859a8ece3",
+        "lifecycleState": "CANDIDATE",
+        "mappingVersionDeclaration": "airport-source-system-v1",
+        "policyHealth": {
+          "classificationState": "NOT_APPLICABLE",
+          "deterministicDigest": "640a5bd921360a121b130afb59c9645e19e6ddb11b3b33148f867a296bd4eede",
+          "evidenceReferences": [],
+          "reasonCodes": [
+            "HEALTH_POLICY_NOT_EVALUATED"
+          ],
+          "reviewRequired": false,
+          "runtimeObserved": false,
+          "severity": "INFO",
+          "state": "NOT_APPLICABLE"
+        },
+        "readinessState": "REVIEW_REQUIRED",
+        "registryEntryId": "cb749f05259f176629e62ee2d716b8cc3e51eeed2ce87b13b3b09870a56612d7",
+        "runtimeObservationHealth": {
+          "classificationState": "UNKNOWN",
+          "deterministicDigest": "262603dd0040bfc3934470f13a7edb57e91b0d5251b69e3c447e3156c8cf02b6",
+          "evidenceReferences": [],
+          "reasonCodes": [
+            "RUNTIME_EVIDENCE_UNAVAILABLE"
+          ],
+          "reviewRequired": false,
+          "runtimeObserved": false,
+          "severity": "INFO",
+          "state": "UNKNOWN"
+        },
+        "schemaVersionDeclaration": "1.0.0",
+        "sourceRecordCount": 247,
+        "sourceSystemKey": "PA"
+      },
+      {
+        "approvalState": "DRAFT",
+        "capabilityHealth": {
+          "classificationState": "UNKNOWN",
+          "deterministicDigest": "1276739db98cd95b6f1e48226c443ebe6c0de3b55f6593c9f87605797bb4cb6d",
+          "evidenceReferences": [
+            {
+              "digest": "cd8d0520ee8802a0a5a9b99604c26d35fefff5ca2c59738e8b6c7035bd29e40a",
+              "evidenceId": "6f36e31caf4664dc7654550df344e31ebfb0140204cfd528fd672dc869819f8d",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "1a375a7e7bab0f8b8b8d1e2f2add98d627a1c02825d3e8e16ca2e5014c293230",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 28
+            }
+          ],
+          "reasonCodes": [
+            "CAPABILITIES_NOT_RUNTIME_VERIFIED"
+          ],
+          "reviewRequired": false,
+          "runtimeObserved": false,
+          "severity": "INFO",
+          "state": "UNKNOWN"
+        },
+        "configurationHealth": {
+          "classificationState": "DECLARED",
+          "deterministicDigest": "e428c373da82c7dbb290f1663e2c644912bd64caec082d77e909e1c5580cb807",
+          "evidenceReferences": [
+            {
+              "digest": "cd8d0520ee8802a0a5a9b99604c26d35fefff5ca2c59738e8b6c7035bd29e40a",
+              "evidenceId": "6f36e31caf4664dc7654550df344e31ebfb0140204cfd528fd672dc869819f8d",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "1a375a7e7bab0f8b8b8d1e2f2add98d627a1c02825d3e8e16ca2e5014c293230",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 28
+            }
+          ],
+          "reasonCodes": [
+            "REGISTRY_APPROVAL_REQUIRED"
+          ],
+          "reviewRequired": false,
+          "runtimeObserved": false,
+          "severity": "LOW",
+          "state": "UNKNOWN"
+        },
+        "declarationHealth": {
+          "classificationState": "DECLARED",
+          "deterministicDigest": "421388859d2260528caf3abfd3c80b1d1aae999d21d8e0b9e9e80fa926c941b7",
+          "evidenceReferences": [
+            {
+              "digest": "cd8d0520ee8802a0a5a9b99604c26d35fefff5ca2c59738e8b6c7035bd29e40a",
+              "evidenceId": "6f36e31caf4664dc7654550df344e31ebfb0140204cfd528fd672dc869819f8d",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "1a375a7e7bab0f8b8b8d1e2f2add98d627a1c02825d3e8e16ca2e5014c293230",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 28
+            }
+          ],
+          "reasonCodes": [
+            "INTEGRATION_DECLARATION_PRESENT"
+          ],
+          "reviewRequired": false,
+          "runtimeObserved": false,
+          "severity": "INFO",
+          "state": "UNKNOWN"
+        },
+        "deterministicDigest": "c0ad31d9573fae79abbac65fb2b405a369bb367743b6d1da04ef8037bb3682a2",
+        "deviceEvidenceCount": 28,
+        "evidenceHealth": {
+          "classificationState": "EVIDENCE_SUPPORTED",
+          "deterministicDigest": "dbfa617a5ddab04e7b80fb9050eefa7b92909b84af24af194476b1e11167f06d",
+          "evidenceReferences": [
+            {
+              "digest": "cd8d0520ee8802a0a5a9b99604c26d35fefff5ca2c59738e8b6c7035bd29e40a",
+              "evidenceId": "6f36e31caf4664dc7654550df344e31ebfb0140204cfd528fd672dc869819f8d",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "1a375a7e7bab0f8b8b8d1e2f2add98d627a1c02825d3e8e16ca2e5014c293230",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 28
+            }
+          ],
+          "reasonCodes": [
+            "STATIC_EVIDENCE_SUPPORTED"
+          ],
+          "reviewRequired": false,
+          "runtimeObserved": false,
+          "severity": "INFO",
+          "state": "UNKNOWN"
+        },
+        "evidenceReferences": [
+          {
+            "digest": "cd8d0520ee8802a0a5a9b99604c26d35fefff5ca2c59738e8b6c7035bd29e40a",
+            "evidenceId": "6f36e31caf4664dc7654550df344e31ebfb0140204cfd528fd672dc869819f8d",
+            "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+            "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+            "resultDigest": "1a375a7e7bab0f8b8b8d1e2f2add98d627a1c02825d3e8e16ca2e5014c293230",
+            "sourceProfile": "airport-source-system-profile-v1",
+            "sourceRecordCount": 28
+          }
+        ],
+        "findings": [
+          {
+            "affectedDimension": "declarationHealth",
+            "affectedSourceSystemKeys": [
+              "RAS"
+            ],
+            "decisionRequired": false,
+            "description": "Declaration metadata is present without a runtime reference assignment.",
+            "deterministicDigest": "cecaa3a36bfc4b9d059a549d77e69ca41922f90f4bb1f7ee923ec5a5cebb9842",
+            "evidenceReferences": [
+              {
+                "digest": "cd8d0520ee8802a0a5a9b99604c26d35fefff5ca2c59738e8b6c7035bd29e40a",
+                "evidenceId": "6f36e31caf4664dc7654550df344e31ebfb0140204cfd528fd672dc869819f8d",
+                "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+                "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+                "resultDigest": "1a375a7e7bab0f8b8b8d1e2f2add98d627a1c02825d3e8e16ca2e5014c293230",
+                "sourceProfile": "airport-source-system-profile-v1",
+                "sourceRecordCount": 28
+              }
+            ],
+            "findingId": "d720e353213b4b2be6bd2d738c7ca58279a8490e7e3608ccd1ad645f52fdcabe",
+            "findingType": "CONNECTOR_REFERENCE_UNDECLARED",
+            "reasonCode": "CONNECTOR_REFERENCE_UNDECLARED",
+            "severity": "INFO",
+            "title": "Connector reference undeclared for RAS"
+          },
+          {
+            "affectedDimension": "declarationHealth",
+            "affectedSourceSystemKeys": [
+              "RAS"
+            ],
+            "decisionRequired": false,
+            "description": "Declaration metadata is present without a runtime reference assignment.",
+            "deterministicDigest": "8db665607286bd21cddf803722659a65bee134eccf112afd990fa1810a9ea7e5",
+            "evidenceReferences": [
+              {
+                "digest": "cd8d0520ee8802a0a5a9b99604c26d35fefff5ca2c59738e8b6c7035bd29e40a",
+                "evidenceId": "6f36e31caf4664dc7654550df344e31ebfb0140204cfd528fd672dc869819f8d",
+                "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+                "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+                "resultDigest": "1a375a7e7bab0f8b8b8d1e2f2add98d627a1c02825d3e8e16ca2e5014c293230",
+                "sourceProfile": "airport-source-system-profile-v1",
+                "sourceRecordCount": 28
+              }
+            ],
+            "findingId": "3ba8e53eb841b775b62ca8861d5cde789ab1fbef4c67ac3eedd6a0b8cdbbdaca",
+            "findingType": "EDGE_GATEWAY_REFERENCE_UNDECLARED",
+            "reasonCode": "EDGE_GATEWAY_REFERENCE_UNDECLARED",
+            "severity": "INFO",
+            "title": "EDGE gateway reference undeclared for RAS"
+          },
+          {
+            "affectedDimension": "policyHealth",
+            "affectedSourceSystemKeys": [
+              "RAS"
+            ],
+            "decisionRequired": false,
+            "description": "Health policy remains declarative and has not been runtime-evaluated.",
+            "deterministicDigest": "4426e2a602ef181f4767751954e0b1a63fde629c1fdc57b0c51552c9cda515a3",
+            "evidenceReferences": [
+              {
+                "digest": "cd8d0520ee8802a0a5a9b99604c26d35fefff5ca2c59738e8b6c7035bd29e40a",
+                "evidenceId": "6f36e31caf4664dc7654550df344e31ebfb0140204cfd528fd672dc869819f8d",
+                "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+                "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+                "resultDigest": "1a375a7e7bab0f8b8b8d1e2f2add98d627a1c02825d3e8e16ca2e5014c293230",
+                "sourceProfile": "airport-source-system-profile-v1",
+                "sourceRecordCount": 28
+              }
+            ],
+            "findingId": "95e7b78043c26e26df21c03d51d2f358ee33d7d5f3396fbc665deaa0c59be800",
+            "findingType": "HEALTH_POLICY_NOT_EVALUATED",
+            "reasonCode": "HEALTH_POLICY_NOT_EVALUATED",
+            "severity": "INFO",
+            "title": "Health policy not evaluated for RAS"
+          },
+          {
+            "affectedDimension": "declarationHealth",
+            "affectedSourceSystemKeys": [
+              "RAS"
+            ],
+            "decisionRequired": false,
+            "description": "Declaration metadata is present without a runtime reference assignment.",
+            "deterministicDigest": "d6a062d3b1a968c444127fc8e16e52a0df70241791aedcc9887429d4ef78286a",
+            "evidenceReferences": [
+              {
+                "digest": "cd8d0520ee8802a0a5a9b99604c26d35fefff5ca2c59738e8b6c7035bd29e40a",
+                "evidenceId": "6f36e31caf4664dc7654550df344e31ebfb0140204cfd528fd672dc869819f8d",
+                "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+                "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+                "resultDigest": "1a375a7e7bab0f8b8b8d1e2f2add98d627a1c02825d3e8e16ca2e5014c293230",
+                "sourceProfile": "airport-source-system-profile-v1",
+                "sourceRecordCount": 28
+              }
+            ],
+            "findingId": "d4a5e97c41880f0dfb54011bbd7b06d44bb29fa48fc65940260c7e0782edce77",
+            "findingType": "LINK_ROUTE_REFERENCE_UNDECLARED",
+            "reasonCode": "LINK_ROUTE_REFERENCE_UNDECLARED",
+            "severity": "INFO",
+            "title": "LINK route reference undeclared for RAS"
+          },
+          {
+            "affectedDimension": "configurationHealth",
+            "affectedSourceSystemKeys": [
+              "RAS"
+            ],
+            "decisionRequired": true,
+            "description": "Exact static evidence exists, but registry approval is still required.",
+            "deterministicDigest": "c77df00cfe9d1828c774d35e82ad7b203f248dc3474dbc7c3dfa7f1690c665cb",
+            "evidenceReferences": [
+              {
+                "digest": "cd8d0520ee8802a0a5a9b99604c26d35fefff5ca2c59738e8b6c7035bd29e40a",
+                "evidenceId": "6f36e31caf4664dc7654550df344e31ebfb0140204cfd528fd672dc869819f8d",
+                "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+                "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+                "resultDigest": "1a375a7e7bab0f8b8b8d1e2f2add98d627a1c02825d3e8e16ca2e5014c293230",
+                "sourceProfile": "airport-source-system-profile-v1",
+                "sourceRecordCount": 28
+              }
+            ],
+            "findingId": "d33777ae8fbc853f97490f92ea7471f7929ef3e6eb9b7935b1fdf5fc710aac68",
+            "findingType": "REGISTRY_APPROVAL_PENDING",
+            "reasonCode": "REGISTRY_APPROVAL_PENDING",
+            "severity": "LOW",
+            "title": "Registry approval pending for RAS"
+          },
+          {
+            "affectedDimension": "runtimeObservationHealth",
+            "affectedSourceSystemKeys": [
+              "RAS"
+            ],
+            "decisionRequired": false,
+            "description": "No runtime adapter evidence is connected; this is not an outage.",
+            "deterministicDigest": "86602b23e4a4ad441caa22a27366f3bab76da3739d968278afb03182f4ede609",
+            "evidenceReferences": [],
+            "findingId": "f66820e4735f1f09ec060440d9a9af485488d1965478c9c33cc2ed33252c86a4",
+            "findingType": "RUNTIME_EVIDENCE_UNAVAILABLE",
+            "reasonCode": "RUNTIME_EVIDENCE_UNAVAILABLE",
+            "severity": "INFO",
+            "title": "Runtime verification required for RAS"
+          }
+        ],
+        "freshnessHealth": {
+          "classificationState": "NOT_APPLICABLE",
+          "deterministicDigest": "263010e3538490505b30210b0c419d42db100500212fe23bbc547d721fdd25c5",
+          "evidenceReferences": [],
+          "reasonCodes": [
+            "NO_TIMESTAMPED_RUNTIME_SIGNAL"
+          ],
+          "reviewRequired": false,
+          "runtimeObserved": false,
+          "severity": "INFO",
+          "state": "NOT_APPLICABLE"
+        },
+        "generatedAtPolicy": "DETERMINISTIC_NO_VOLATILE_TIMESTAMP",
+        "integrationHealthId": "439a60ea6ea3a3fe458a554ab13811b41b19e4eefd325580ccabbad63daa57e6",
+        "lifecycleState": "CANDIDATE",
+        "mappingVersionDeclaration": "airport-source-system-v1",
+        "policyHealth": {
+          "classificationState": "NOT_APPLICABLE",
+          "deterministicDigest": "640a5bd921360a121b130afb59c9645e19e6ddb11b3b33148f867a296bd4eede",
+          "evidenceReferences": [],
+          "reasonCodes": [
+            "HEALTH_POLICY_NOT_EVALUATED"
+          ],
+          "reviewRequired": false,
+          "runtimeObserved": false,
+          "severity": "INFO",
+          "state": "NOT_APPLICABLE"
+        },
+        "readinessState": "RUNTIME_VERIFICATION_REQUIRED",
+        "registryEntryId": "8bf7f40c3274d08acb945bf1e17df4dc62c8ac2d056760daf4a160d6e3c78c89",
+        "runtimeObservationHealth": {
+          "classificationState": "UNKNOWN",
+          "deterministicDigest": "262603dd0040bfc3934470f13a7edb57e91b0d5251b69e3c447e3156c8cf02b6",
+          "evidenceReferences": [],
+          "reasonCodes": [
+            "RUNTIME_EVIDENCE_UNAVAILABLE"
+          ],
+          "reviewRequired": false,
+          "runtimeObserved": false,
+          "severity": "INFO",
+          "state": "UNKNOWN"
+        },
+        "schemaVersionDeclaration": "1.0.0",
+        "sourceRecordCount": 28,
+        "sourceSystemKey": "RAS"
+      },
+      {
+        "approvalState": "REVIEW_REQUIRED",
+        "capabilityHealth": {
+          "classificationState": "UNKNOWN",
+          "deterministicDigest": "84bca2a41d0dc1fa73516ced961db0f50824c3296244205b611a339912b0ce08",
+          "evidenceReferences": [
+            {
+              "digest": "0fc6173d8a353b1dd2633b44ef99afa3a4acb41c29782b58436c0cbcf3c5f1ec",
+              "evidenceId": "2bd6c4b0f26f69cec870971cbed4ac5b63872ce8907c142650d07932cfdf8321",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "63061c85fca03040577cf513e43f686ec089995ded7485c138c834680d6832c7",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 14
+            }
+          ],
+          "reasonCodes": [
+            "CAPABILITIES_NOT_RUNTIME_VERIFIED"
+          ],
+          "reviewRequired": false,
+          "runtimeObserved": false,
+          "severity": "INFO",
+          "state": "UNKNOWN"
+        },
+        "configurationHealth": {
+          "classificationState": "REVIEW_REQUIRED",
+          "deterministicDigest": "d6ca714af6a9cba3041520dcfbe91bf373f0b32a16281fa6d86b881f4dd9d422",
+          "evidenceReferences": [
+            {
+              "digest": "0fc6173d8a353b1dd2633b44ef99afa3a4acb41c29782b58436c0cbcf3c5f1ec",
+              "evidenceId": "2bd6c4b0f26f69cec870971cbed4ac5b63872ce8907c142650d07932cfdf8321",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "63061c85fca03040577cf513e43f686ec089995ded7485c138c834680d6832c7",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 14
+            }
+          ],
+          "reasonCodes": [
+            "NAMESPACE_INTERPRETATION_REQUIRED"
+          ],
+          "reviewRequired": true,
+          "runtimeObserved": false,
+          "severity": "MEDIUM",
+          "state": "REVIEW_REQUIRED"
+        },
+        "declarationHealth": {
+          "classificationState": "DECLARED",
+          "deterministicDigest": "da1aa7af44f3e13ab049cddb1cfb58db161259f27abb14106e1a793f29ff75f0",
+          "evidenceReferences": [
+            {
+              "digest": "0fc6173d8a353b1dd2633b44ef99afa3a4acb41c29782b58436c0cbcf3c5f1ec",
+              "evidenceId": "2bd6c4b0f26f69cec870971cbed4ac5b63872ce8907c142650d07932cfdf8321",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "63061c85fca03040577cf513e43f686ec089995ded7485c138c834680d6832c7",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 14
+            }
+          ],
+          "reasonCodes": [
+            "INTEGRATION_DECLARATION_PRESENT"
+          ],
+          "reviewRequired": false,
+          "runtimeObserved": false,
+          "severity": "INFO",
+          "state": "UNKNOWN"
+        },
+        "deterministicDigest": "599a70f0331920730c7de4d6b25700816a27cb293efd30391fbe08b7f4cacc1c",
+        "deviceEvidenceCount": 14,
+        "evidenceHealth": {
+          "classificationState": "REVIEW_REQUIRED",
+          "deterministicDigest": "67177682b8b33bbe99183e063663b42ad453ed31e0eb89ba2894ff8d9d456602",
+          "evidenceReferences": [
+            {
+              "digest": "0fc6173d8a353b1dd2633b44ef99afa3a4acb41c29782b58436c0cbcf3c5f1ec",
+              "evidenceId": "2bd6c4b0f26f69cec870971cbed4ac5b63872ce8907c142650d07932cfdf8321",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "63061c85fca03040577cf513e43f686ec089995ded7485c138c834680d6832c7",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 14
+            }
+          ],
+          "reasonCodes": [
+            "STATIC_EVIDENCE_REVIEW_REQUIRED"
+          ],
+          "reviewRequired": true,
+          "runtimeObserved": false,
+          "severity": "INFO",
+          "state": "UNKNOWN"
+        },
+        "evidenceReferences": [
+          {
+            "digest": "0fc6173d8a353b1dd2633b44ef99afa3a4acb41c29782b58436c0cbcf3c5f1ec",
+            "evidenceId": "2bd6c4b0f26f69cec870971cbed4ac5b63872ce8907c142650d07932cfdf8321",
+            "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+            "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+            "resultDigest": "63061c85fca03040577cf513e43f686ec089995ded7485c138c834680d6832c7",
+            "sourceProfile": "airport-source-system-profile-v1",
+            "sourceRecordCount": 14
+          }
+        ],
+        "findings": [
+          {
+            "affectedDimension": "declarationHealth",
+            "affectedSourceSystemKeys": [
+              "TEL"
+            ],
+            "decisionRequired": false,
+            "description": "Declaration metadata is present without a runtime reference assignment.",
+            "deterministicDigest": "e0ab9ab27f03cd52e2851512552f474f30ef275ffbf2221ee3f7f1c7c590a400",
+            "evidenceReferences": [
+              {
+                "digest": "0fc6173d8a353b1dd2633b44ef99afa3a4acb41c29782b58436c0cbcf3c5f1ec",
+                "evidenceId": "2bd6c4b0f26f69cec870971cbed4ac5b63872ce8907c142650d07932cfdf8321",
+                "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+                "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+                "resultDigest": "63061c85fca03040577cf513e43f686ec089995ded7485c138c834680d6832c7",
+                "sourceProfile": "airport-source-system-profile-v1",
+                "sourceRecordCount": 14
+              }
+            ],
+            "findingId": "59621b6960603edace7f4936c08fbc1958dfea8f1ea4eb5d8d9e769b40fc5386",
+            "findingType": "CONNECTOR_REFERENCE_UNDECLARED",
+            "reasonCode": "CONNECTOR_REFERENCE_UNDECLARED",
+            "severity": "INFO",
+            "title": "Connector reference undeclared for TEL"
+          },
+          {
+            "affectedDimension": "declarationHealth",
+            "affectedSourceSystemKeys": [
+              "TEL"
+            ],
+            "decisionRequired": false,
+            "description": "Declaration metadata is present without a runtime reference assignment.",
+            "deterministicDigest": "0deb680cd45fc17b9fe393334cce1ece126a2d46284a4da4c41c0e5d4e5da5b7",
+            "evidenceReferences": [
+              {
+                "digest": "0fc6173d8a353b1dd2633b44ef99afa3a4acb41c29782b58436c0cbcf3c5f1ec",
+                "evidenceId": "2bd6c4b0f26f69cec870971cbed4ac5b63872ce8907c142650d07932cfdf8321",
+                "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+                "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+                "resultDigest": "63061c85fca03040577cf513e43f686ec089995ded7485c138c834680d6832c7",
+                "sourceProfile": "airport-source-system-profile-v1",
+                "sourceRecordCount": 14
+              }
+            ],
+            "findingId": "583719ffc3e00c5a5a9126375a310014b3b33afa1666872357da4cf9a40afddf",
+            "findingType": "EDGE_GATEWAY_REFERENCE_UNDECLARED",
+            "reasonCode": "EDGE_GATEWAY_REFERENCE_UNDECLARED",
+            "severity": "INFO",
+            "title": "EDGE gateway reference undeclared for TEL"
+          },
+          {
+            "affectedDimension": "policyHealth",
+            "affectedSourceSystemKeys": [
+              "TEL"
+            ],
+            "decisionRequired": false,
+            "description": "Health policy remains declarative and has not been runtime-evaluated.",
+            "deterministicDigest": "6cfed0d13f16fb8cec556a83287edfa399b964d5304e2bdbd343da76b87159a7",
+            "evidenceReferences": [
+              {
+                "digest": "0fc6173d8a353b1dd2633b44ef99afa3a4acb41c29782b58436c0cbcf3c5f1ec",
+                "evidenceId": "2bd6c4b0f26f69cec870971cbed4ac5b63872ce8907c142650d07932cfdf8321",
+                "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+                "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+                "resultDigest": "63061c85fca03040577cf513e43f686ec089995ded7485c138c834680d6832c7",
+                "sourceProfile": "airport-source-system-profile-v1",
+                "sourceRecordCount": 14
+              }
+            ],
+            "findingId": "eb45bc3137402b6eb4f1ce18e694bcdabb1ca06a4d74d76ca5c810ab986ce3cf",
+            "findingType": "HEALTH_POLICY_NOT_EVALUATED",
+            "reasonCode": "HEALTH_POLICY_NOT_EVALUATED",
+            "severity": "INFO",
+            "title": "Health policy not evaluated for TEL"
+          },
+          {
+            "affectedDimension": "declarationHealth",
+            "affectedSourceSystemKeys": [
+              "TEL"
+            ],
+            "decisionRequired": false,
+            "description": "Declaration metadata is present without a runtime reference assignment.",
+            "deterministicDigest": "b2f435cdd91870bda70d4f017e7eb4659791e28f1ae78e19413e879748304b7c",
+            "evidenceReferences": [
+              {
+                "digest": "0fc6173d8a353b1dd2633b44ef99afa3a4acb41c29782b58436c0cbcf3c5f1ec",
+                "evidenceId": "2bd6c4b0f26f69cec870971cbed4ac5b63872ce8907c142650d07932cfdf8321",
+                "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+                "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+                "resultDigest": "63061c85fca03040577cf513e43f686ec089995ded7485c138c834680d6832c7",
+                "sourceProfile": "airport-source-system-profile-v1",
+                "sourceRecordCount": 14
+              }
+            ],
+            "findingId": "1c9e26d851393e86053105e43778cc2b6faac454d7963e6455ec9f647bcdc3a3",
+            "findingType": "LINK_ROUTE_REFERENCE_UNDECLARED",
+            "reasonCode": "LINK_ROUTE_REFERENCE_UNDECLARED",
+            "severity": "INFO",
+            "title": "LINK route reference undeclared for TEL"
+          },
+          {
+            "affectedDimension": "configurationHealth",
+            "affectedSourceSystemKeys": [
+              "TEL"
+            ],
+            "decisionRequired": true,
+            "description": "The source namespace requires an operator interpretation decision.",
+            "deterministicDigest": "ab8eef3f871b27d7df89b8663874ecf76290af6897d9a04b14a4e54708b64ab5",
+            "evidenceReferences": [
+              {
+                "digest": "0fc6173d8a353b1dd2633b44ef99afa3a4acb41c29782b58436c0cbcf3c5f1ec",
+                "evidenceId": "2bd6c4b0f26f69cec870971cbed4ac5b63872ce8907c142650d07932cfdf8321",
+                "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+                "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+                "resultDigest": "63061c85fca03040577cf513e43f686ec089995ded7485c138c834680d6832c7",
+                "sourceProfile": "airport-source-system-profile-v1",
+                "sourceRecordCount": 14
+              }
+            ],
+            "findingId": "252ff049ea0ee950350802ec11d9b8667b428881c9013d57ba5412a106caf694",
+            "findingType": "NAMESPACE_INTERPRETATION_PENDING",
+            "reasonCode": "NAMESPACE_INTERPRETATION_PENDING",
+            "severity": "MEDIUM",
+            "title": "Namespace interpretation pending for TEL"
+          },
+          {
+            "affectedDimension": "runtimeObservationHealth",
+            "affectedSourceSystemKeys": [
+              "TEL"
+            ],
+            "decisionRequired": false,
+            "description": "No runtime adapter evidence is connected; this is not an outage.",
+            "deterministicDigest": "4c5f8750b1a45af780559200d142ed6d34947a7f925d5da3ee82e5c565aa5192",
+            "evidenceReferences": [],
+            "findingId": "fc1fd8b021992c2a2c5ee7181979cfbf41b70a325d5977d188b1dc4addbc449f",
+            "findingType": "RUNTIME_EVIDENCE_UNAVAILABLE",
+            "reasonCode": "RUNTIME_EVIDENCE_UNAVAILABLE",
+            "severity": "INFO",
+            "title": "Runtime verification required for TEL"
+          }
+        ],
+        "freshnessHealth": {
+          "classificationState": "NOT_APPLICABLE",
+          "deterministicDigest": "263010e3538490505b30210b0c419d42db100500212fe23bbc547d721fdd25c5",
+          "evidenceReferences": [],
+          "reasonCodes": [
+            "NO_TIMESTAMPED_RUNTIME_SIGNAL"
+          ],
+          "reviewRequired": false,
+          "runtimeObserved": false,
+          "severity": "INFO",
+          "state": "NOT_APPLICABLE"
+        },
+        "generatedAtPolicy": "DETERMINISTIC_NO_VOLATILE_TIMESTAMP",
+        "integrationHealthId": "06eae5312fc9f7f169e12506d7ac3166729b8873279d14cddebdee2c46ab61e3",
+        "lifecycleState": "CANDIDATE",
+        "mappingVersionDeclaration": "airport-source-system-v1",
+        "policyHealth": {
+          "classificationState": "NOT_APPLICABLE",
+          "deterministicDigest": "640a5bd921360a121b130afb59c9645e19e6ddb11b3b33148f867a296bd4eede",
+          "evidenceReferences": [],
+          "reasonCodes": [
+            "HEALTH_POLICY_NOT_EVALUATED"
+          ],
+          "reviewRequired": false,
+          "runtimeObserved": false,
+          "severity": "INFO",
+          "state": "NOT_APPLICABLE"
+        },
+        "readinessState": "REVIEW_REQUIRED",
+        "registryEntryId": "bcdfadbc1ff27ba342c6add68393f1d78631b9d2925fbb467aab8463b776d16a",
+        "runtimeObservationHealth": {
+          "classificationState": "UNKNOWN",
+          "deterministicDigest": "262603dd0040bfc3934470f13a7edb57e91b0d5251b69e3c447e3156c8cf02b6",
+          "evidenceReferences": [],
+          "reasonCodes": [
+            "RUNTIME_EVIDENCE_UNAVAILABLE"
+          ],
+          "reviewRequired": false,
+          "runtimeObserved": false,
+          "severity": "INFO",
+          "state": "UNKNOWN"
+        },
+        "schemaVersionDeclaration": "1.0.0",
+        "sourceRecordCount": 14,
+        "sourceSystemKey": "TEL"
+      }
+    ],
+    "offset": 0,
+    "pageSize": 25,
+    "totalCount": 5
+  },
+  "facets": [
+    {
+      "count": 2,
+      "facetKey": "approvalState",
+      "optionDigest": "87e71c70fca1e89bd5384fb32957fe37078fcf886794dea64aca3a9b390feae0",
+      "optionValue": "DRAFT"
+    },
+    {
+      "count": 3,
+      "facetKey": "approvalState",
+      "optionDigest": "a7068dc8d33f6cf47cee9b3704c6578748a587f893a58730634e1da90bb8c79d",
+      "optionValue": "REVIEW_REQUIRED"
+    },
+    {
+      "count": 2,
+      "facetKey": "configurationReview",
+      "optionDigest": "c8c34d57556064e98b2c17c96a6cd7e7744df8cae757aa0d1af1282f1dfc4014",
+      "optionValue": "false"
+    },
+    {
+      "count": 3,
+      "facetKey": "configurationReview",
+      "optionDigest": "399991815bf619b1514465a0f0148a921453bf4fb37c0320800b6017c3e1dfb8",
+      "optionValue": "true"
+    },
+    {
+      "count": 25,
+      "facetKey": "findingSeverity",
+      "optionDigest": "59900466099fcf6676ebc2273a922279f2f3b3d297195c6d06eb38a672b1a1f6",
+      "optionValue": "INFO"
+    },
+    {
+      "count": 2,
+      "facetKey": "findingSeverity",
+      "optionDigest": "09b8b481b49f6094cf445dcdbee933a09d68364b26ce81f7134363b543357357",
+      "optionValue": "LOW"
+    },
+    {
+      "count": 3,
+      "facetKey": "findingSeverity",
+      "optionDigest": "9c5c0dab28ee9e5130edd9796821b98c147525713149b4075353109452013d74",
+      "optionValue": "MEDIUM"
+    },
+    {
+      "count": 2,
+      "facetKey": "findingType",
+      "optionDigest": "914dd3c8eed0d3596b2873546a569c050bf9945c49bbdd530f737e5a8901a45c",
+      "optionValue": "ALIAS_APPROVAL_PENDING"
+    },
+    {
+      "count": 5,
+      "facetKey": "findingType",
+      "optionDigest": "c0c2c4ab71046dc4cfdc505ba43bdb310ccb74842928e35107138ade0f4d3901",
+      "optionValue": "CONNECTOR_REFERENCE_UNDECLARED"
+    },
+    {
+      "count": 5,
+      "facetKey": "findingType",
+      "optionDigest": "a0c7d0d61830cf5fe79d1080c7d4f5b8c61fa8983425bf64deff2e0aaebb3e6a",
+      "optionValue": "EDGE_GATEWAY_REFERENCE_UNDECLARED"
+    },
+    {
+      "count": 5,
+      "facetKey": "findingType",
+      "optionDigest": "80a5b44732a56361dfff55d9e7d8d1c8e6ea87720f3c745dcbd910d78f5b82bd",
+      "optionValue": "HEALTH_POLICY_NOT_EVALUATED"
+    },
+    {
+      "count": 5,
+      "facetKey": "findingType",
+      "optionDigest": "14b5188c954516191fd2c4bc456df45e593b7d8ce3f762aa34928dcb5759e95a",
+      "optionValue": "LINK_ROUTE_REFERENCE_UNDECLARED"
+    },
+    {
+      "count": 1,
+      "facetKey": "findingType",
+      "optionDigest": "3ad57216d5de09016c3c267740f67cdfbe10bd26782ae273b430c5f014a53338",
+      "optionValue": "NAMESPACE_INTERPRETATION_PENDING"
+    },
+    {
+      "count": 2,
+      "facetKey": "findingType",
+      "optionDigest": "771529ee7f5061dfa88aff591bce573a2370477f6f0300841c17472ab134907f",
+      "optionValue": "REGISTRY_APPROVAL_PENDING"
+    },
+    {
+      "count": 5,
+      "facetKey": "findingType",
+      "optionDigest": "b1373c6e940eebf34f7c20adfa9fcf19aafd47292f61290d7f373d29f58b08f8",
+      "optionValue": "RUNTIME_EVIDENCE_UNAVAILABLE"
+    },
+    {
+      "count": 5,
+      "facetKey": "lifecycleState",
+      "optionDigest": "d79bee8d1641028336e99402020e98737e7efe35b2f5559d223702af87abe4ad",
+      "optionValue": "CANDIDATE"
+    },
+    {
+      "count": 3,
+      "facetKey": "readinessState",
+      "optionDigest": "91c6afa36ec8951b7abd6254f0c7cf58081bf8fbdbcba7ef591c8578bda36320",
+      "optionValue": "REVIEW_REQUIRED"
+    },
+    {
+      "count": 2,
+      "facetKey": "readinessState",
+      "optionDigest": "365f75844a760f98c126e4be12f73de100ca4baa529d1012bc9dc5979348d969",
+      "optionValue": "RUNTIME_VERIFICATION_REQUIRED"
+    },
+    {
+      "count": 5,
+      "facetKey": "runtimeObserved",
+      "optionDigest": "76c4fde46bd4d003cf45e9f6b89eb4fff6a88ae1a3ffec5fae085097ceb34243",
+      "optionValue": "false"
+    },
+    {
+      "count": 3,
+      "facetKey": "runtimeVerificationRequired",
+      "optionDigest": "0c8316b785f9ac0bb99965b4759002782b6437087a11e67784afeeaf1cd0c559",
+      "optionValue": "false"
+    },
+    {
+      "count": 2,
+      "facetKey": "runtimeVerificationRequired",
+      "optionDigest": "68c22b13f06e8a5bb6eb6551c14385f1318eaa882292f8d1de1cb6070a464667",
+      "optionValue": "true"
+    }
+  ],
+  "filters": [
+    {
+      "filterKey": "sourceSystemKey",
+      "filterType": "ENUM",
+      "options": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ]
+    },
+    {
+      "filterKey": "healthState",
+      "filterType": "ENUM",
+      "options": [
+        "UNKNOWN",
+        "NOT_APPLICABLE",
+        "REVIEW_REQUIRED"
+      ]
+    },
+    {
+      "filterKey": "readinessState",
+      "filterType": "ENUM",
+      "options": [
+        "REVIEW_REQUIRED",
+        "RUNTIME_VERIFICATION_REQUIRED"
+      ]
+    },
+    {
+      "filterKey": "severity",
+      "filterType": "ENUM",
+      "options": [
+        "INFO",
+        "LOW",
+        "MEDIUM"
+      ]
+    },
+    {
+      "filterKey": "approvalState",
+      "filterType": "ENUM",
+      "options": [
+        "DRAFT",
+        "REVIEW_REQUIRED"
+      ]
+    },
+    {
+      "filterKey": "lifecycleState",
+      "filterType": "ENUM",
+      "options": [
+        "CANDIDATE"
+      ]
+    },
+    {
+      "filterKey": "runtimeObserved",
+      "filterType": "BOOLEAN",
+      "options": [
+        "false"
+      ]
+    },
+    {
+      "filterKey": "reviewRequired",
+      "filterType": "BOOLEAN",
+      "options": [
+        "true",
+        "false"
+      ]
+    },
+    {
+      "filterKey": "findingType",
+      "filterType": "ENUM",
+      "options": [
+        "ALIAS_APPROVAL_PENDING",
+        "CONNECTOR_REFERENCE_UNDECLARED",
+        "EDGE_GATEWAY_REFERENCE_UNDECLARED",
+        "HEALTH_POLICY_NOT_EVALUATED",
+        "LINK_ROUTE_REFERENCE_UNDECLARED",
+        "NAMESPACE_INTERPRETATION_PENDING",
+        "REGISTRY_APPROVAL_PENDING",
+        "RUNTIME_EVIDENCE_UNAVAILABLE"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "affectedDimension": "configurationHealth",
+      "affectedSourceSystemKeys": [
+        "PA"
+      ],
+      "decisionRequired": true,
+      "description": "Static source evidence requires an operator alias decision.",
+      "deterministicDigest": "54c54f58b296143464c3aa433da53fed8193b861f49bd2c89953bab0abdc342d",
+      "evidenceReferences": [
+        {
+          "digest": "6da53d802f057618e91b95564f3abee9dab082748ea008e69a81c62c40f21fd6",
+          "evidenceId": "6f9a9a469a9ad62b5a0d1065bada2f1f9b52cfc0b8132183f1e97f826c1ed461",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "1dbd5b57a352e475431caeeef6267b79df96f97568ca6f7fb77c37e2734cdea5",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 247
+        }
+      ],
+      "findingId": "248864517eea0d7cdd4ab283875bcbf014e18d9b8e92084d72bc95febc320a8b",
+      "findingType": "ALIAS_APPROVAL_PENDING",
+      "reasonCode": "ALIAS_APPROVAL_PENDING",
+      "severity": "MEDIUM",
+      "title": "Alias approval pending for PA"
+    },
+    {
+      "affectedDimension": "configurationHealth",
+      "affectedSourceSystemKeys": [
+        "CCTV"
+      ],
+      "decisionRequired": true,
+      "description": "Static source evidence requires an operator alias decision.",
+      "deterministicDigest": "721597891563688a6eb5de32e93f2cb12d4e57f941e3af291d86d80d3a880c88",
+      "evidenceReferences": [
+        {
+          "digest": "700c0aa4873f711e6a0732e56e0e9d67df78be56ef396f52daa10b5c0fe766fa",
+          "evidenceId": "ceba5fc20cc1f142a8083ae0edf47f31d74cb445de857a7aa905c895ac30b017",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "49d8bfa2ece4be806883107bf8c00452af66b35f3a16898a53c8dbb18750faaa",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 52
+        }
+      ],
+      "findingId": "b5a83308804a06be550250022fce67ce517ad87d38a8f09859b72b1bbcfee0a1",
+      "findingType": "ALIAS_APPROVAL_PENDING",
+      "reasonCode": "ALIAS_APPROVAL_PENDING",
+      "severity": "MEDIUM",
+      "title": "Alias approval pending for CCTV"
+    },
+    {
+      "affectedDimension": "declarationHealth",
+      "affectedSourceSystemKeys": [
+        "CCTV"
+      ],
+      "decisionRequired": false,
+      "description": "Declaration metadata is present without a runtime reference assignment.",
+      "deterministicDigest": "47a008ef18577e0cb0cd8ca3bad1edc95ea87891d337b6e05bba07f1f96dd48e",
+      "evidenceReferences": [
+        {
+          "digest": "700c0aa4873f711e6a0732e56e0e9d67df78be56ef396f52daa10b5c0fe766fa",
+          "evidenceId": "ceba5fc20cc1f142a8083ae0edf47f31d74cb445de857a7aa905c895ac30b017",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "49d8bfa2ece4be806883107bf8c00452af66b35f3a16898a53c8dbb18750faaa",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 52
+        }
+      ],
+      "findingId": "54071d38191630e8026472228e5e905f30507da25e09ff4385b9591aa2ff4687",
+      "findingType": "CONNECTOR_REFERENCE_UNDECLARED",
+      "reasonCode": "CONNECTOR_REFERENCE_UNDECLARED",
+      "severity": "INFO",
+      "title": "Connector reference undeclared for CCTV"
+    },
+    {
+      "affectedDimension": "declarationHealth",
+      "affectedSourceSystemKeys": [
+        "TEL"
+      ],
+      "decisionRequired": false,
+      "description": "Declaration metadata is present without a runtime reference assignment.",
+      "deterministicDigest": "e0ab9ab27f03cd52e2851512552f474f30ef275ffbf2221ee3f7f1c7c590a400",
+      "evidenceReferences": [
+        {
+          "digest": "0fc6173d8a353b1dd2633b44ef99afa3a4acb41c29782b58436c0cbcf3c5f1ec",
+          "evidenceId": "2bd6c4b0f26f69cec870971cbed4ac5b63872ce8907c142650d07932cfdf8321",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "63061c85fca03040577cf513e43f686ec089995ded7485c138c834680d6832c7",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 14
+        }
+      ],
+      "findingId": "59621b6960603edace7f4936c08fbc1958dfea8f1ea4eb5d8d9e769b40fc5386",
+      "findingType": "CONNECTOR_REFERENCE_UNDECLARED",
+      "reasonCode": "CONNECTOR_REFERENCE_UNDECLARED",
+      "severity": "INFO",
+      "title": "Connector reference undeclared for TEL"
+    },
+    {
+      "affectedDimension": "declarationHealth",
+      "affectedSourceSystemKeys": [
+        "PA"
+      ],
+      "decisionRequired": false,
+      "description": "Declaration metadata is present without a runtime reference assignment.",
+      "deterministicDigest": "b29f4f877f4c94b7da64570b22a2c37c3df26977bcc32f66d60ad07b58c902e4",
+      "evidenceReferences": [
+        {
+          "digest": "6da53d802f057618e91b95564f3abee9dab082748ea008e69a81c62c40f21fd6",
+          "evidenceId": "6f9a9a469a9ad62b5a0d1065bada2f1f9b52cfc0b8132183f1e97f826c1ed461",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "1dbd5b57a352e475431caeeef6267b79df96f97568ca6f7fb77c37e2734cdea5",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 247
+        }
+      ],
+      "findingId": "a135e33c1249f69738e160a5637f5e843c471c5a05ddb147b70c15931548775d",
+      "findingType": "CONNECTOR_REFERENCE_UNDECLARED",
+      "reasonCode": "CONNECTOR_REFERENCE_UNDECLARED",
+      "severity": "INFO",
+      "title": "Connector reference undeclared for PA"
+    },
+    {
+      "affectedDimension": "declarationHealth",
+      "affectedSourceSystemKeys": [
+        "ACS"
+      ],
+      "decisionRequired": false,
+      "description": "Declaration metadata is present without a runtime reference assignment.",
+      "deterministicDigest": "405c65082f2c176ea4c94effc539a66361cddf2dd6c602ee58431bed803e9531",
+      "evidenceReferences": [
+        {
+          "digest": "7f4eb268556cd7cc31608ecc9f1796df9b053039ab13e3e4d1271339d7a23dec",
+          "evidenceId": "d5460171bfa515ad3fde83fa991bd0dbccac64817b6cd3cd50f7cec016d16330",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "f2134c9995fc2c8b24603620a9df349e320afce29bc99356c3fbea5e577f1188",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 129
+        }
+      ],
+      "findingId": "b46e00a545df44f49d6d2b5b52e4e6021f4471ace348f82ebd9afae05ab2f3d1",
+      "findingType": "CONNECTOR_REFERENCE_UNDECLARED",
+      "reasonCode": "CONNECTOR_REFERENCE_UNDECLARED",
+      "severity": "INFO",
+      "title": "Connector reference undeclared for ACS"
+    },
+    {
+      "affectedDimension": "declarationHealth",
+      "affectedSourceSystemKeys": [
+        "RAS"
+      ],
+      "decisionRequired": false,
+      "description": "Declaration metadata is present without a runtime reference assignment.",
+      "deterministicDigest": "cecaa3a36bfc4b9d059a549d77e69ca41922f90f4bb1f7ee923ec5a5cebb9842",
+      "evidenceReferences": [
+        {
+          "digest": "cd8d0520ee8802a0a5a9b99604c26d35fefff5ca2c59738e8b6c7035bd29e40a",
+          "evidenceId": "6f36e31caf4664dc7654550df344e31ebfb0140204cfd528fd672dc869819f8d",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "1a375a7e7bab0f8b8b8d1e2f2add98d627a1c02825d3e8e16ca2e5014c293230",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 28
+        }
+      ],
+      "findingId": "d720e353213b4b2be6bd2d738c7ca58279a8490e7e3608ccd1ad645f52fdcabe",
+      "findingType": "CONNECTOR_REFERENCE_UNDECLARED",
+      "reasonCode": "CONNECTOR_REFERENCE_UNDECLARED",
+      "severity": "INFO",
+      "title": "Connector reference undeclared for RAS"
+    },
+    {
+      "affectedDimension": "declarationHealth",
+      "affectedSourceSystemKeys": [
+        "PA"
+      ],
+      "decisionRequired": false,
+      "description": "Declaration metadata is present without a runtime reference assignment.",
+      "deterministicDigest": "a26353ef3765cad4d8a24863ae0338220a5cb416165d1e7bc1a3d3d6c69ae66b",
+      "evidenceReferences": [
+        {
+          "digest": "6da53d802f057618e91b95564f3abee9dab082748ea008e69a81c62c40f21fd6",
+          "evidenceId": "6f9a9a469a9ad62b5a0d1065bada2f1f9b52cfc0b8132183f1e97f826c1ed461",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "1dbd5b57a352e475431caeeef6267b79df96f97568ca6f7fb77c37e2734cdea5",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 247
+        }
+      ],
+      "findingId": "12e6ccb1b5c047fa9a29e49dc3d70c416f312864f1ad53f0a5a06359f0614146",
+      "findingType": "EDGE_GATEWAY_REFERENCE_UNDECLARED",
+      "reasonCode": "EDGE_GATEWAY_REFERENCE_UNDECLARED",
+      "severity": "INFO",
+      "title": "EDGE gateway reference undeclared for PA"
+    },
+    {
+      "affectedDimension": "declarationHealth",
+      "affectedSourceSystemKeys": [
+        "RAS"
+      ],
+      "decisionRequired": false,
+      "description": "Declaration metadata is present without a runtime reference assignment.",
+      "deterministicDigest": "8db665607286bd21cddf803722659a65bee134eccf112afd990fa1810a9ea7e5",
+      "evidenceReferences": [
+        {
+          "digest": "cd8d0520ee8802a0a5a9b99604c26d35fefff5ca2c59738e8b6c7035bd29e40a",
+          "evidenceId": "6f36e31caf4664dc7654550df344e31ebfb0140204cfd528fd672dc869819f8d",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "1a375a7e7bab0f8b8b8d1e2f2add98d627a1c02825d3e8e16ca2e5014c293230",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 28
+        }
+      ],
+      "findingId": "3ba8e53eb841b775b62ca8861d5cde789ab1fbef4c67ac3eedd6a0b8cdbbdaca",
+      "findingType": "EDGE_GATEWAY_REFERENCE_UNDECLARED",
+      "reasonCode": "EDGE_GATEWAY_REFERENCE_UNDECLARED",
+      "severity": "INFO",
+      "title": "EDGE gateway reference undeclared for RAS"
+    },
+    {
+      "affectedDimension": "declarationHealth",
+      "affectedSourceSystemKeys": [
+        "TEL"
+      ],
+      "decisionRequired": false,
+      "description": "Declaration metadata is present without a runtime reference assignment.",
+      "deterministicDigest": "0deb680cd45fc17b9fe393334cce1ece126a2d46284a4da4c41c0e5d4e5da5b7",
+      "evidenceReferences": [
+        {
+          "digest": "0fc6173d8a353b1dd2633b44ef99afa3a4acb41c29782b58436c0cbcf3c5f1ec",
+          "evidenceId": "2bd6c4b0f26f69cec870971cbed4ac5b63872ce8907c142650d07932cfdf8321",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "63061c85fca03040577cf513e43f686ec089995ded7485c138c834680d6832c7",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 14
+        }
+      ],
+      "findingId": "583719ffc3e00c5a5a9126375a310014b3b33afa1666872357da4cf9a40afddf",
+      "findingType": "EDGE_GATEWAY_REFERENCE_UNDECLARED",
+      "reasonCode": "EDGE_GATEWAY_REFERENCE_UNDECLARED",
+      "severity": "INFO",
+      "title": "EDGE gateway reference undeclared for TEL"
+    },
+    {
+      "affectedDimension": "declarationHealth",
+      "affectedSourceSystemKeys": [
+        "CCTV"
+      ],
+      "decisionRequired": false,
+      "description": "Declaration metadata is present without a runtime reference assignment.",
+      "deterministicDigest": "7564c4fd231e4682adf7999c6f80ee06f773d720802766d7c501ba8d1e72473f",
+      "evidenceReferences": [
+        {
+          "digest": "700c0aa4873f711e6a0732e56e0e9d67df78be56ef396f52daa10b5c0fe766fa",
+          "evidenceId": "ceba5fc20cc1f142a8083ae0edf47f31d74cb445de857a7aa905c895ac30b017",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "49d8bfa2ece4be806883107bf8c00452af66b35f3a16898a53c8dbb18750faaa",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 52
+        }
+      ],
+      "findingId": "eb9638e2462f93e068d6d6728896d1ceb7b2e39b0d545bfbf51cf355820de452",
+      "findingType": "EDGE_GATEWAY_REFERENCE_UNDECLARED",
+      "reasonCode": "EDGE_GATEWAY_REFERENCE_UNDECLARED",
+      "severity": "INFO",
+      "title": "EDGE gateway reference undeclared for CCTV"
+    },
+    {
+      "affectedDimension": "declarationHealth",
+      "affectedSourceSystemKeys": [
+        "ACS"
+      ],
+      "decisionRequired": false,
+      "description": "Declaration metadata is present without a runtime reference assignment.",
+      "deterministicDigest": "c7bcd2a2adf609c36914a7ea8f43fa5cf99cde8b7abc75610c3fbc16f09aac07",
+      "evidenceReferences": [
+        {
+          "digest": "7f4eb268556cd7cc31608ecc9f1796df9b053039ab13e3e4d1271339d7a23dec",
+          "evidenceId": "d5460171bfa515ad3fde83fa991bd0dbccac64817b6cd3cd50f7cec016d16330",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "f2134c9995fc2c8b24603620a9df349e320afce29bc99356c3fbea5e577f1188",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 129
+        }
+      ],
+      "findingId": "f8d21501a63be1454cf421c5a28c2b02e92d270a1a3df5c2a6096bfc947a0ee6",
+      "findingType": "EDGE_GATEWAY_REFERENCE_UNDECLARED",
+      "reasonCode": "EDGE_GATEWAY_REFERENCE_UNDECLARED",
+      "severity": "INFO",
+      "title": "EDGE gateway reference undeclared for ACS"
+    },
+    {
+      "affectedDimension": "policyHealth",
+      "affectedSourceSystemKeys": [
+        "PA"
+      ],
+      "decisionRequired": false,
+      "description": "Health policy remains declarative and has not been runtime-evaluated.",
+      "deterministicDigest": "95ab13260d9d1d4cece208d0391a692b46f7089ac743a66fe059a03551471f14",
+      "evidenceReferences": [
+        {
+          "digest": "6da53d802f057618e91b95564f3abee9dab082748ea008e69a81c62c40f21fd6",
+          "evidenceId": "6f9a9a469a9ad62b5a0d1065bada2f1f9b52cfc0b8132183f1e97f826c1ed461",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "1dbd5b57a352e475431caeeef6267b79df96f97568ca6f7fb77c37e2734cdea5",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 247
+        }
+      ],
+      "findingId": "2c2f7721646fb69072c0d8507f327d9fda59958d5a6bc7ccdcc752bb2ca01bc3",
+      "findingType": "HEALTH_POLICY_NOT_EVALUATED",
+      "reasonCode": "HEALTH_POLICY_NOT_EVALUATED",
+      "severity": "INFO",
+      "title": "Health policy not evaluated for PA"
+    },
+    {
+      "affectedDimension": "policyHealth",
+      "affectedSourceSystemKeys": [
+        "ACS"
+      ],
+      "decisionRequired": false,
+      "description": "Health policy remains declarative and has not been runtime-evaluated.",
+      "deterministicDigest": "fb0c8dfe669c69d9e9eac7199e0cac31c42b8c50a23ffbf4f00aad90153a52de",
+      "evidenceReferences": [
+        {
+          "digest": "7f4eb268556cd7cc31608ecc9f1796df9b053039ab13e3e4d1271339d7a23dec",
+          "evidenceId": "d5460171bfa515ad3fde83fa991bd0dbccac64817b6cd3cd50f7cec016d16330",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "f2134c9995fc2c8b24603620a9df349e320afce29bc99356c3fbea5e577f1188",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 129
+        }
+      ],
+      "findingId": "4bf0242c1c547c873eeec16e6529a94388a423ba3cb5fe99b3a6657a21f51ec4",
+      "findingType": "HEALTH_POLICY_NOT_EVALUATED",
+      "reasonCode": "HEALTH_POLICY_NOT_EVALUATED",
+      "severity": "INFO",
+      "title": "Health policy not evaluated for ACS"
+    },
+    {
+      "affectedDimension": "policyHealth",
+      "affectedSourceSystemKeys": [
+        "CCTV"
+      ],
+      "decisionRequired": false,
+      "description": "Health policy remains declarative and has not been runtime-evaluated.",
+      "deterministicDigest": "129a2f3e0a1f08a36dcc978bd3737e62d1c2192e3de57f6a719c60701861449b",
+      "evidenceReferences": [
+        {
+          "digest": "700c0aa4873f711e6a0732e56e0e9d67df78be56ef396f52daa10b5c0fe766fa",
+          "evidenceId": "ceba5fc20cc1f142a8083ae0edf47f31d74cb445de857a7aa905c895ac30b017",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "49d8bfa2ece4be806883107bf8c00452af66b35f3a16898a53c8dbb18750faaa",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 52
+        }
+      ],
+      "findingId": "8a5087d82088f1eb2ba008fc7edcb51ceb8f10bdbdeaacdda27764b79194692e",
+      "findingType": "HEALTH_POLICY_NOT_EVALUATED",
+      "reasonCode": "HEALTH_POLICY_NOT_EVALUATED",
+      "severity": "INFO",
+      "title": "Health policy not evaluated for CCTV"
+    },
+    {
+      "affectedDimension": "policyHealth",
+      "affectedSourceSystemKeys": [
+        "RAS"
+      ],
+      "decisionRequired": false,
+      "description": "Health policy remains declarative and has not been runtime-evaluated.",
+      "deterministicDigest": "4426e2a602ef181f4767751954e0b1a63fde629c1fdc57b0c51552c9cda515a3",
+      "evidenceReferences": [
+        {
+          "digest": "cd8d0520ee8802a0a5a9b99604c26d35fefff5ca2c59738e8b6c7035bd29e40a",
+          "evidenceId": "6f36e31caf4664dc7654550df344e31ebfb0140204cfd528fd672dc869819f8d",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "1a375a7e7bab0f8b8b8d1e2f2add98d627a1c02825d3e8e16ca2e5014c293230",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 28
+        }
+      ],
+      "findingId": "95e7b78043c26e26df21c03d51d2f358ee33d7d5f3396fbc665deaa0c59be800",
+      "findingType": "HEALTH_POLICY_NOT_EVALUATED",
+      "reasonCode": "HEALTH_POLICY_NOT_EVALUATED",
+      "severity": "INFO",
+      "title": "Health policy not evaluated for RAS"
+    },
+    {
+      "affectedDimension": "policyHealth",
+      "affectedSourceSystemKeys": [
+        "TEL"
+      ],
+      "decisionRequired": false,
+      "description": "Health policy remains declarative and has not been runtime-evaluated.",
+      "deterministicDigest": "6cfed0d13f16fb8cec556a83287edfa399b964d5304e2bdbd343da76b87159a7",
+      "evidenceReferences": [
+        {
+          "digest": "0fc6173d8a353b1dd2633b44ef99afa3a4acb41c29782b58436c0cbcf3c5f1ec",
+          "evidenceId": "2bd6c4b0f26f69cec870971cbed4ac5b63872ce8907c142650d07932cfdf8321",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "63061c85fca03040577cf513e43f686ec089995ded7485c138c834680d6832c7",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 14
+        }
+      ],
+      "findingId": "eb45bc3137402b6eb4f1ce18e694bcdabb1ca06a4d74d76ca5c810ab986ce3cf",
+      "findingType": "HEALTH_POLICY_NOT_EVALUATED",
+      "reasonCode": "HEALTH_POLICY_NOT_EVALUATED",
+      "severity": "INFO",
+      "title": "Health policy not evaluated for TEL"
+    },
+    {
+      "affectedDimension": "declarationHealth",
+      "affectedSourceSystemKeys": [
+        "TEL"
+      ],
+      "decisionRequired": false,
+      "description": "Declaration metadata is present without a runtime reference assignment.",
+      "deterministicDigest": "b2f435cdd91870bda70d4f017e7eb4659791e28f1ae78e19413e879748304b7c",
+      "evidenceReferences": [
+        {
+          "digest": "0fc6173d8a353b1dd2633b44ef99afa3a4acb41c29782b58436c0cbcf3c5f1ec",
+          "evidenceId": "2bd6c4b0f26f69cec870971cbed4ac5b63872ce8907c142650d07932cfdf8321",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "63061c85fca03040577cf513e43f686ec089995ded7485c138c834680d6832c7",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 14
+        }
+      ],
+      "findingId": "1c9e26d851393e86053105e43778cc2b6faac454d7963e6455ec9f647bcdc3a3",
+      "findingType": "LINK_ROUTE_REFERENCE_UNDECLARED",
+      "reasonCode": "LINK_ROUTE_REFERENCE_UNDECLARED",
+      "severity": "INFO",
+      "title": "LINK route reference undeclared for TEL"
+    },
+    {
+      "affectedDimension": "declarationHealth",
+      "affectedSourceSystemKeys": [
+        "PA"
+      ],
+      "decisionRequired": false,
+      "description": "Declaration metadata is present without a runtime reference assignment.",
+      "deterministicDigest": "bdfcd7f76d7c32ecc2038dc4cdae729f4e032fa09ff3004cd4303025682a61b0",
+      "evidenceReferences": [
+        {
+          "digest": "6da53d802f057618e91b95564f3abee9dab082748ea008e69a81c62c40f21fd6",
+          "evidenceId": "6f9a9a469a9ad62b5a0d1065bada2f1f9b52cfc0b8132183f1e97f826c1ed461",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "1dbd5b57a352e475431caeeef6267b79df96f97568ca6f7fb77c37e2734cdea5",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 247
+        }
+      ],
+      "findingId": "6823e43f6ab579fddb79d154d5c48d0488eaa473de41324b5737675f3ddb795c",
+      "findingType": "LINK_ROUTE_REFERENCE_UNDECLARED",
+      "reasonCode": "LINK_ROUTE_REFERENCE_UNDECLARED",
+      "severity": "INFO",
+      "title": "LINK route reference undeclared for PA"
+    },
+    {
+      "affectedDimension": "declarationHealth",
+      "affectedSourceSystemKeys": [
+        "CCTV"
+      ],
+      "decisionRequired": false,
+      "description": "Declaration metadata is present without a runtime reference assignment.",
+      "deterministicDigest": "73f71e1dcae1b64cbc1e792bae59d358445992e42dd1bd6abb5aecf8a22a0374",
+      "evidenceReferences": [
+        {
+          "digest": "700c0aa4873f711e6a0732e56e0e9d67df78be56ef396f52daa10b5c0fe766fa",
+          "evidenceId": "ceba5fc20cc1f142a8083ae0edf47f31d74cb445de857a7aa905c895ac30b017",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "49d8bfa2ece4be806883107bf8c00452af66b35f3a16898a53c8dbb18750faaa",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 52
+        }
+      ],
+      "findingId": "7ee18318cb0da7e1ba7c388733e3a04e24a1cd2285eed9c3b67f46a9f78273ee",
+      "findingType": "LINK_ROUTE_REFERENCE_UNDECLARED",
+      "reasonCode": "LINK_ROUTE_REFERENCE_UNDECLARED",
+      "severity": "INFO",
+      "title": "LINK route reference undeclared for CCTV"
+    },
+    {
+      "affectedDimension": "declarationHealth",
+      "affectedSourceSystemKeys": [
+        "ACS"
+      ],
+      "decisionRequired": false,
+      "description": "Declaration metadata is present without a runtime reference assignment.",
+      "deterministicDigest": "250aed438fe57c80ba47ddb32e6e133b3c7007e5514fc4cd7d7ee89e9c80eca6",
+      "evidenceReferences": [
+        {
+          "digest": "7f4eb268556cd7cc31608ecc9f1796df9b053039ab13e3e4d1271339d7a23dec",
+          "evidenceId": "d5460171bfa515ad3fde83fa991bd0dbccac64817b6cd3cd50f7cec016d16330",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "f2134c9995fc2c8b24603620a9df349e320afce29bc99356c3fbea5e577f1188",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 129
+        }
+      ],
+      "findingId": "878f0b8dbae43d5d051217a2430ed701c74007f110a31a6ce6079f1c8dc148ff",
+      "findingType": "LINK_ROUTE_REFERENCE_UNDECLARED",
+      "reasonCode": "LINK_ROUTE_REFERENCE_UNDECLARED",
+      "severity": "INFO",
+      "title": "LINK route reference undeclared for ACS"
+    },
+    {
+      "affectedDimension": "declarationHealth",
+      "affectedSourceSystemKeys": [
+        "RAS"
+      ],
+      "decisionRequired": false,
+      "description": "Declaration metadata is present without a runtime reference assignment.",
+      "deterministicDigest": "d6a062d3b1a968c444127fc8e16e52a0df70241791aedcc9887429d4ef78286a",
+      "evidenceReferences": [
+        {
+          "digest": "cd8d0520ee8802a0a5a9b99604c26d35fefff5ca2c59738e8b6c7035bd29e40a",
+          "evidenceId": "6f36e31caf4664dc7654550df344e31ebfb0140204cfd528fd672dc869819f8d",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "1a375a7e7bab0f8b8b8d1e2f2add98d627a1c02825d3e8e16ca2e5014c293230",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 28
+        }
+      ],
+      "findingId": "d4a5e97c41880f0dfb54011bbd7b06d44bb29fa48fc65940260c7e0782edce77",
+      "findingType": "LINK_ROUTE_REFERENCE_UNDECLARED",
+      "reasonCode": "LINK_ROUTE_REFERENCE_UNDECLARED",
+      "severity": "INFO",
+      "title": "LINK route reference undeclared for RAS"
+    },
+    {
+      "affectedDimension": "configurationHealth",
+      "affectedSourceSystemKeys": [
+        "TEL"
+      ],
+      "decisionRequired": true,
+      "description": "The source namespace requires an operator interpretation decision.",
+      "deterministicDigest": "ab8eef3f871b27d7df89b8663874ecf76290af6897d9a04b14a4e54708b64ab5",
+      "evidenceReferences": [
+        {
+          "digest": "0fc6173d8a353b1dd2633b44ef99afa3a4acb41c29782b58436c0cbcf3c5f1ec",
+          "evidenceId": "2bd6c4b0f26f69cec870971cbed4ac5b63872ce8907c142650d07932cfdf8321",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "63061c85fca03040577cf513e43f686ec089995ded7485c138c834680d6832c7",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 14
+        }
+      ],
+      "findingId": "252ff049ea0ee950350802ec11d9b8667b428881c9013d57ba5412a106caf694",
+      "findingType": "NAMESPACE_INTERPRETATION_PENDING",
+      "reasonCode": "NAMESPACE_INTERPRETATION_PENDING",
+      "severity": "MEDIUM",
+      "title": "Namespace interpretation pending for TEL"
+    },
+    {
+      "affectedDimension": "configurationHealth",
+      "affectedSourceSystemKeys": [
+        "ACS"
+      ],
+      "decisionRequired": true,
+      "description": "Exact static evidence exists, but registry approval is still required.",
+      "deterministicDigest": "ac827661f67e78cbc76d9a3220e48d35f4480ff376c73a2e64c101e02d430e6b",
+      "evidenceReferences": [
+        {
+          "digest": "7f4eb268556cd7cc31608ecc9f1796df9b053039ab13e3e4d1271339d7a23dec",
+          "evidenceId": "d5460171bfa515ad3fde83fa991bd0dbccac64817b6cd3cd50f7cec016d16330",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "f2134c9995fc2c8b24603620a9df349e320afce29bc99356c3fbea5e577f1188",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 129
+        }
+      ],
+      "findingId": "34c9047efd42e34448073a402adab01e1c185cb571e031d2fef6795e7e25d040",
+      "findingType": "REGISTRY_APPROVAL_PENDING",
+      "reasonCode": "REGISTRY_APPROVAL_PENDING",
+      "severity": "LOW",
+      "title": "Registry approval pending for ACS"
+    },
+    {
+      "affectedDimension": "configurationHealth",
+      "affectedSourceSystemKeys": [
+        "RAS"
+      ],
+      "decisionRequired": true,
+      "description": "Exact static evidence exists, but registry approval is still required.",
+      "deterministicDigest": "c77df00cfe9d1828c774d35e82ad7b203f248dc3474dbc7c3dfa7f1690c665cb",
+      "evidenceReferences": [
+        {
+          "digest": "cd8d0520ee8802a0a5a9b99604c26d35fefff5ca2c59738e8b6c7035bd29e40a",
+          "evidenceId": "6f36e31caf4664dc7654550df344e31ebfb0140204cfd528fd672dc869819f8d",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "1a375a7e7bab0f8b8b8d1e2f2add98d627a1c02825d3e8e16ca2e5014c293230",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 28
+        }
+      ],
+      "findingId": "d33777ae8fbc853f97490f92ea7471f7929ef3e6eb9b7935b1fdf5fc710aac68",
+      "findingType": "REGISTRY_APPROVAL_PENDING",
+      "reasonCode": "REGISTRY_APPROVAL_PENDING",
+      "severity": "LOW",
+      "title": "Registry approval pending for RAS"
+    },
+    {
+      "affectedDimension": "runtimeObservationHealth",
+      "affectedSourceSystemKeys": [
+        "PA"
+      ],
+      "decisionRequired": false,
+      "description": "No runtime adapter evidence is connected; this is not an outage.",
+      "deterministicDigest": "7af149474505f8f570cd1c7a45d04a58fd260f5a170db984e39b58259d2cc723",
+      "evidenceReferences": [],
+      "findingId": "441ec7e3eb0a14a6fc96161d224efcb4ed09cadfe40873b35f11ad959de52eff",
+      "findingType": "RUNTIME_EVIDENCE_UNAVAILABLE",
+      "reasonCode": "RUNTIME_EVIDENCE_UNAVAILABLE",
+      "severity": "INFO",
+      "title": "Runtime verification required for PA"
+    },
+    {
+      "affectedDimension": "runtimeObservationHealth",
+      "affectedSourceSystemKeys": [
+        "CCTV"
+      ],
+      "decisionRequired": false,
+      "description": "No runtime adapter evidence is connected; this is not an outage.",
+      "deterministicDigest": "39877b4266732f7a9677ca8788c4588a592681dcd2814cd977fdb37702a172de",
+      "evidenceReferences": [],
+      "findingId": "a54a6c48ca4a19836ac376fdacbf79001ee473c13f0106686fc1fc3c65eed0da",
+      "findingType": "RUNTIME_EVIDENCE_UNAVAILABLE",
+      "reasonCode": "RUNTIME_EVIDENCE_UNAVAILABLE",
+      "severity": "INFO",
+      "title": "Runtime verification required for CCTV"
+    },
+    {
+      "affectedDimension": "runtimeObservationHealth",
+      "affectedSourceSystemKeys": [
+        "ACS"
+      ],
+      "decisionRequired": false,
+      "description": "No runtime adapter evidence is connected; this is not an outage.",
+      "deterministicDigest": "f63cac9df6a63f427ddfbd03708c3a4e11a19cc96b757c1829969714d3aae2c9",
+      "evidenceReferences": [],
+      "findingId": "de7912fa86db3637b831c9e6c39be28eba3c65b787d84913b53a33fd97c9a8c9",
+      "findingType": "RUNTIME_EVIDENCE_UNAVAILABLE",
+      "reasonCode": "RUNTIME_EVIDENCE_UNAVAILABLE",
+      "severity": "INFO",
+      "title": "Runtime verification required for ACS"
+    },
+    {
+      "affectedDimension": "runtimeObservationHealth",
+      "affectedSourceSystemKeys": [
+        "RAS"
+      ],
+      "decisionRequired": false,
+      "description": "No runtime adapter evidence is connected; this is not an outage.",
+      "deterministicDigest": "86602b23e4a4ad441caa22a27366f3bab76da3739d968278afb03182f4ede609",
+      "evidenceReferences": [],
+      "findingId": "f66820e4735f1f09ec060440d9a9af485488d1965478c9c33cc2ed33252c86a4",
+      "findingType": "RUNTIME_EVIDENCE_UNAVAILABLE",
+      "reasonCode": "RUNTIME_EVIDENCE_UNAVAILABLE",
+      "severity": "INFO",
+      "title": "Runtime verification required for RAS"
+    },
+    {
+      "affectedDimension": "runtimeObservationHealth",
+      "affectedSourceSystemKeys": [
+        "TEL"
+      ],
+      "decisionRequired": false,
+      "description": "No runtime adapter evidence is connected; this is not an outage.",
+      "deterministicDigest": "4c5f8750b1a45af780559200d142ed6d34947a7f925d5da3ee82e5c565aa5192",
+      "evidenceReferences": [],
+      "findingId": "fc1fd8b021992c2a2c5ee7181979cfbf41b70a325d5977d188b1dc4addbc449f",
+      "findingType": "RUNTIME_EVIDENCE_UNAVAILABLE",
+      "reasonCode": "RUNTIME_EVIDENCE_UNAVAILABLE",
+      "severity": "INFO",
+      "title": "Runtime verification required for TEL"
+    }
+  ],
+  "healthRecords": [
+    {
+      "approvalState": "DRAFT",
+      "capabilityHealth": {
+        "classificationState": "UNKNOWN",
+        "deterministicDigest": "3b0e9b439e96c58598a4a79227e441caae66fcaaa179439c58a89986be3f8fd0",
+        "evidenceReferences": [
+          {
+            "digest": "7f4eb268556cd7cc31608ecc9f1796df9b053039ab13e3e4d1271339d7a23dec",
+            "evidenceId": "d5460171bfa515ad3fde83fa991bd0dbccac64817b6cd3cd50f7cec016d16330",
+            "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+            "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+            "resultDigest": "f2134c9995fc2c8b24603620a9df349e320afce29bc99356c3fbea5e577f1188",
+            "sourceProfile": "airport-source-system-profile-v1",
+            "sourceRecordCount": 129
+          }
+        ],
+        "reasonCodes": [
+          "CAPABILITIES_NOT_RUNTIME_VERIFIED"
+        ],
+        "reviewRequired": false,
+        "runtimeObserved": false,
+        "severity": "INFO",
+        "state": "UNKNOWN"
+      },
+      "configurationHealth": {
+        "classificationState": "DECLARED",
+        "deterministicDigest": "795394ee649e89a135d17de5ec259591a753aada9e61b065f6ef8773f964e313",
+        "evidenceReferences": [
+          {
+            "digest": "7f4eb268556cd7cc31608ecc9f1796df9b053039ab13e3e4d1271339d7a23dec",
+            "evidenceId": "d5460171bfa515ad3fde83fa991bd0dbccac64817b6cd3cd50f7cec016d16330",
+            "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+            "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+            "resultDigest": "f2134c9995fc2c8b24603620a9df349e320afce29bc99356c3fbea5e577f1188",
+            "sourceProfile": "airport-source-system-profile-v1",
+            "sourceRecordCount": 129
+          }
+        ],
+        "reasonCodes": [
+          "REGISTRY_APPROVAL_REQUIRED"
+        ],
+        "reviewRequired": false,
+        "runtimeObserved": false,
+        "severity": "LOW",
+        "state": "UNKNOWN"
+      },
+      "declarationHealth": {
+        "classificationState": "DECLARED",
+        "deterministicDigest": "af552d13c07d917e7b01c47d26540697ff6a84e18ec344f5c2eb67b2903f2700",
+        "evidenceReferences": [
+          {
+            "digest": "7f4eb268556cd7cc31608ecc9f1796df9b053039ab13e3e4d1271339d7a23dec",
+            "evidenceId": "d5460171bfa515ad3fde83fa991bd0dbccac64817b6cd3cd50f7cec016d16330",
+            "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+            "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+            "resultDigest": "f2134c9995fc2c8b24603620a9df349e320afce29bc99356c3fbea5e577f1188",
+            "sourceProfile": "airport-source-system-profile-v1",
+            "sourceRecordCount": 129
+          }
+        ],
+        "reasonCodes": [
+          "INTEGRATION_DECLARATION_PRESENT"
+        ],
+        "reviewRequired": false,
+        "runtimeObserved": false,
+        "severity": "INFO",
+        "state": "UNKNOWN"
+      },
+      "deterministicDigest": "ddc28be0e7cd673a0e65f3f649140efc78e5bea970b2e47d1ad85479af66c126",
+      "deviceEvidenceCount": 129,
+      "evidenceHealth": {
+        "classificationState": "EVIDENCE_SUPPORTED",
+        "deterministicDigest": "e0ee4f4095c6318a905f42ce766057b6a5f839f449fe00d4df2047dd50c6704b",
+        "evidenceReferences": [
+          {
+            "digest": "7f4eb268556cd7cc31608ecc9f1796df9b053039ab13e3e4d1271339d7a23dec",
+            "evidenceId": "d5460171bfa515ad3fde83fa991bd0dbccac64817b6cd3cd50f7cec016d16330",
+            "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+            "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+            "resultDigest": "f2134c9995fc2c8b24603620a9df349e320afce29bc99356c3fbea5e577f1188",
+            "sourceProfile": "airport-source-system-profile-v1",
+            "sourceRecordCount": 129
+          }
+        ],
+        "reasonCodes": [
+          "STATIC_EVIDENCE_SUPPORTED"
+        ],
+        "reviewRequired": false,
+        "runtimeObserved": false,
+        "severity": "INFO",
+        "state": "UNKNOWN"
+      },
+      "evidenceReferences": [
+        {
+          "digest": "7f4eb268556cd7cc31608ecc9f1796df9b053039ab13e3e4d1271339d7a23dec",
+          "evidenceId": "d5460171bfa515ad3fde83fa991bd0dbccac64817b6cd3cd50f7cec016d16330",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "f2134c9995fc2c8b24603620a9df349e320afce29bc99356c3fbea5e577f1188",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 129
+        }
+      ],
+      "findings": [
+        {
+          "affectedDimension": "declarationHealth",
+          "affectedSourceSystemKeys": [
+            "ACS"
+          ],
+          "decisionRequired": false,
+          "description": "Declaration metadata is present without a runtime reference assignment.",
+          "deterministicDigest": "405c65082f2c176ea4c94effc539a66361cddf2dd6c602ee58431bed803e9531",
+          "evidenceReferences": [
+            {
+              "digest": "7f4eb268556cd7cc31608ecc9f1796df9b053039ab13e3e4d1271339d7a23dec",
+              "evidenceId": "d5460171bfa515ad3fde83fa991bd0dbccac64817b6cd3cd50f7cec016d16330",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "f2134c9995fc2c8b24603620a9df349e320afce29bc99356c3fbea5e577f1188",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 129
+            }
+          ],
+          "findingId": "b46e00a545df44f49d6d2b5b52e4e6021f4471ace348f82ebd9afae05ab2f3d1",
+          "findingType": "CONNECTOR_REFERENCE_UNDECLARED",
+          "reasonCode": "CONNECTOR_REFERENCE_UNDECLARED",
+          "severity": "INFO",
+          "title": "Connector reference undeclared for ACS"
+        },
+        {
+          "affectedDimension": "declarationHealth",
+          "affectedSourceSystemKeys": [
+            "ACS"
+          ],
+          "decisionRequired": false,
+          "description": "Declaration metadata is present without a runtime reference assignment.",
+          "deterministicDigest": "c7bcd2a2adf609c36914a7ea8f43fa5cf99cde8b7abc75610c3fbc16f09aac07",
+          "evidenceReferences": [
+            {
+              "digest": "7f4eb268556cd7cc31608ecc9f1796df9b053039ab13e3e4d1271339d7a23dec",
+              "evidenceId": "d5460171bfa515ad3fde83fa991bd0dbccac64817b6cd3cd50f7cec016d16330",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "f2134c9995fc2c8b24603620a9df349e320afce29bc99356c3fbea5e577f1188",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 129
+            }
+          ],
+          "findingId": "f8d21501a63be1454cf421c5a28c2b02e92d270a1a3df5c2a6096bfc947a0ee6",
+          "findingType": "EDGE_GATEWAY_REFERENCE_UNDECLARED",
+          "reasonCode": "EDGE_GATEWAY_REFERENCE_UNDECLARED",
+          "severity": "INFO",
+          "title": "EDGE gateway reference undeclared for ACS"
+        },
+        {
+          "affectedDimension": "policyHealth",
+          "affectedSourceSystemKeys": [
+            "ACS"
+          ],
+          "decisionRequired": false,
+          "description": "Health policy remains declarative and has not been runtime-evaluated.",
+          "deterministicDigest": "fb0c8dfe669c69d9e9eac7199e0cac31c42b8c50a23ffbf4f00aad90153a52de",
+          "evidenceReferences": [
+            {
+              "digest": "7f4eb268556cd7cc31608ecc9f1796df9b053039ab13e3e4d1271339d7a23dec",
+              "evidenceId": "d5460171bfa515ad3fde83fa991bd0dbccac64817b6cd3cd50f7cec016d16330",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "f2134c9995fc2c8b24603620a9df349e320afce29bc99356c3fbea5e577f1188",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 129
+            }
+          ],
+          "findingId": "4bf0242c1c547c873eeec16e6529a94388a423ba3cb5fe99b3a6657a21f51ec4",
+          "findingType": "HEALTH_POLICY_NOT_EVALUATED",
+          "reasonCode": "HEALTH_POLICY_NOT_EVALUATED",
+          "severity": "INFO",
+          "title": "Health policy not evaluated for ACS"
+        },
+        {
+          "affectedDimension": "declarationHealth",
+          "affectedSourceSystemKeys": [
+            "ACS"
+          ],
+          "decisionRequired": false,
+          "description": "Declaration metadata is present without a runtime reference assignment.",
+          "deterministicDigest": "250aed438fe57c80ba47ddb32e6e133b3c7007e5514fc4cd7d7ee89e9c80eca6",
+          "evidenceReferences": [
+            {
+              "digest": "7f4eb268556cd7cc31608ecc9f1796df9b053039ab13e3e4d1271339d7a23dec",
+              "evidenceId": "d5460171bfa515ad3fde83fa991bd0dbccac64817b6cd3cd50f7cec016d16330",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "f2134c9995fc2c8b24603620a9df349e320afce29bc99356c3fbea5e577f1188",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 129
+            }
+          ],
+          "findingId": "878f0b8dbae43d5d051217a2430ed701c74007f110a31a6ce6079f1c8dc148ff",
+          "findingType": "LINK_ROUTE_REFERENCE_UNDECLARED",
+          "reasonCode": "LINK_ROUTE_REFERENCE_UNDECLARED",
+          "severity": "INFO",
+          "title": "LINK route reference undeclared for ACS"
+        },
+        {
+          "affectedDimension": "configurationHealth",
+          "affectedSourceSystemKeys": [
+            "ACS"
+          ],
+          "decisionRequired": true,
+          "description": "Exact static evidence exists, but registry approval is still required.",
+          "deterministicDigest": "ac827661f67e78cbc76d9a3220e48d35f4480ff376c73a2e64c101e02d430e6b",
+          "evidenceReferences": [
+            {
+              "digest": "7f4eb268556cd7cc31608ecc9f1796df9b053039ab13e3e4d1271339d7a23dec",
+              "evidenceId": "d5460171bfa515ad3fde83fa991bd0dbccac64817b6cd3cd50f7cec016d16330",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "f2134c9995fc2c8b24603620a9df349e320afce29bc99356c3fbea5e577f1188",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 129
+            }
+          ],
+          "findingId": "34c9047efd42e34448073a402adab01e1c185cb571e031d2fef6795e7e25d040",
+          "findingType": "REGISTRY_APPROVAL_PENDING",
+          "reasonCode": "REGISTRY_APPROVAL_PENDING",
+          "severity": "LOW",
+          "title": "Registry approval pending for ACS"
+        },
+        {
+          "affectedDimension": "runtimeObservationHealth",
+          "affectedSourceSystemKeys": [
+            "ACS"
+          ],
+          "decisionRequired": false,
+          "description": "No runtime adapter evidence is connected; this is not an outage.",
+          "deterministicDigest": "f63cac9df6a63f427ddfbd03708c3a4e11a19cc96b757c1829969714d3aae2c9",
+          "evidenceReferences": [],
+          "findingId": "de7912fa86db3637b831c9e6c39be28eba3c65b787d84913b53a33fd97c9a8c9",
+          "findingType": "RUNTIME_EVIDENCE_UNAVAILABLE",
+          "reasonCode": "RUNTIME_EVIDENCE_UNAVAILABLE",
+          "severity": "INFO",
+          "title": "Runtime verification required for ACS"
+        }
+      ],
+      "freshnessHealth": {
+        "classificationState": "NOT_APPLICABLE",
+        "deterministicDigest": "263010e3538490505b30210b0c419d42db100500212fe23bbc547d721fdd25c5",
+        "evidenceReferences": [],
+        "reasonCodes": [
+          "NO_TIMESTAMPED_RUNTIME_SIGNAL"
+        ],
+        "reviewRequired": false,
+        "runtimeObserved": false,
+        "severity": "INFO",
+        "state": "NOT_APPLICABLE"
+      },
+      "generatedAtPolicy": "DETERMINISTIC_NO_VOLATILE_TIMESTAMP",
+      "integrationHealthId": "fc25d8c3829e54ca9ef654da46a8f485f36a371794b692aa31686a82deeea8bb",
+      "lifecycleState": "CANDIDATE",
+      "mappingVersionDeclaration": "airport-source-system-v1",
+      "policyHealth": {
+        "classificationState": "NOT_APPLICABLE",
+        "deterministicDigest": "640a5bd921360a121b130afb59c9645e19e6ddb11b3b33148f867a296bd4eede",
+        "evidenceReferences": [],
+        "reasonCodes": [
+          "HEALTH_POLICY_NOT_EVALUATED"
+        ],
+        "reviewRequired": false,
+        "runtimeObserved": false,
+        "severity": "INFO",
+        "state": "NOT_APPLICABLE"
+      },
+      "readinessState": "RUNTIME_VERIFICATION_REQUIRED",
+      "registryEntryId": "722a59146a8bdb9d4f76c5786a634d5fbf3f5c9d6e41473485fa20eb335d2dd4",
+      "runtimeObservationHealth": {
+        "classificationState": "UNKNOWN",
+        "deterministicDigest": "262603dd0040bfc3934470f13a7edb57e91b0d5251b69e3c447e3156c8cf02b6",
+        "evidenceReferences": [],
+        "reasonCodes": [
+          "RUNTIME_EVIDENCE_UNAVAILABLE"
+        ],
+        "reviewRequired": false,
+        "runtimeObserved": false,
+        "severity": "INFO",
+        "state": "UNKNOWN"
+      },
+      "schemaVersionDeclaration": "1.0.0",
+      "sourceRecordCount": 129,
+      "sourceSystemKey": "ACS"
+    },
+    {
+      "approvalState": "REVIEW_REQUIRED",
+      "capabilityHealth": {
+        "classificationState": "UNKNOWN",
+        "deterministicDigest": "3d2b1fdf6680a241081779df9507ad908ddcec201dcbc795bb8537b9d7fce09f",
+        "evidenceReferences": [
+          {
+            "digest": "700c0aa4873f711e6a0732e56e0e9d67df78be56ef396f52daa10b5c0fe766fa",
+            "evidenceId": "ceba5fc20cc1f142a8083ae0edf47f31d74cb445de857a7aa905c895ac30b017",
+            "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+            "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+            "resultDigest": "49d8bfa2ece4be806883107bf8c00452af66b35f3a16898a53c8dbb18750faaa",
+            "sourceProfile": "airport-source-system-profile-v1",
+            "sourceRecordCount": 52
+          }
+        ],
+        "reasonCodes": [
+          "CAPABILITIES_NOT_RUNTIME_VERIFIED"
+        ],
+        "reviewRequired": false,
+        "runtimeObserved": false,
+        "severity": "INFO",
+        "state": "UNKNOWN"
+      },
+      "configurationHealth": {
+        "classificationState": "REVIEW_REQUIRED",
+        "deterministicDigest": "83c8472ea81b33d50fd28f4ee83fd60461eb49afe8f5311d368402fa9ffcdb4e",
+        "evidenceReferences": [
+          {
+            "digest": "700c0aa4873f711e6a0732e56e0e9d67df78be56ef396f52daa10b5c0fe766fa",
+            "evidenceId": "ceba5fc20cc1f142a8083ae0edf47f31d74cb445de857a7aa905c895ac30b017",
+            "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+            "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+            "resultDigest": "49d8bfa2ece4be806883107bf8c00452af66b35f3a16898a53c8dbb18750faaa",
+            "sourceProfile": "airport-source-system-profile-v1",
+            "sourceRecordCount": 52
+          }
+        ],
+        "reasonCodes": [
+          "ALIAS_APPROVAL_REQUIRED"
+        ],
+        "reviewRequired": true,
+        "runtimeObserved": false,
+        "severity": "MEDIUM",
+        "state": "REVIEW_REQUIRED"
+      },
+      "declarationHealth": {
+        "classificationState": "DECLARED",
+        "deterministicDigest": "21b8e045a0cb9e0e08d9d6f2f84d7d1f5e7cdb1ff4318098d5d7b0e2cdec7557",
+        "evidenceReferences": [
+          {
+            "digest": "700c0aa4873f711e6a0732e56e0e9d67df78be56ef396f52daa10b5c0fe766fa",
+            "evidenceId": "ceba5fc20cc1f142a8083ae0edf47f31d74cb445de857a7aa905c895ac30b017",
+            "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+            "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+            "resultDigest": "49d8bfa2ece4be806883107bf8c00452af66b35f3a16898a53c8dbb18750faaa",
+            "sourceProfile": "airport-source-system-profile-v1",
+            "sourceRecordCount": 52
+          }
+        ],
+        "reasonCodes": [
+          "INTEGRATION_DECLARATION_PRESENT"
+        ],
+        "reviewRequired": false,
+        "runtimeObserved": false,
+        "severity": "INFO",
+        "state": "UNKNOWN"
+      },
+      "deterministicDigest": "39f51e8f0c4b6597274b6ff5713704c05ed74d98d7785f0fa980bcc2008bb7fb",
+      "deviceEvidenceCount": 52,
+      "evidenceHealth": {
+        "classificationState": "REVIEW_REQUIRED",
+        "deterministicDigest": "c68864fc6fe566595a4b775bf0554e7042a7ae51eb7b5cefb864c451528f50e8",
+        "evidenceReferences": [
+          {
+            "digest": "700c0aa4873f711e6a0732e56e0e9d67df78be56ef396f52daa10b5c0fe766fa",
+            "evidenceId": "ceba5fc20cc1f142a8083ae0edf47f31d74cb445de857a7aa905c895ac30b017",
+            "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+            "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+            "resultDigest": "49d8bfa2ece4be806883107bf8c00452af66b35f3a16898a53c8dbb18750faaa",
+            "sourceProfile": "airport-source-system-profile-v1",
+            "sourceRecordCount": 52
+          }
+        ],
+        "reasonCodes": [
+          "STATIC_EVIDENCE_REVIEW_REQUIRED"
+        ],
+        "reviewRequired": true,
+        "runtimeObserved": false,
+        "severity": "INFO",
+        "state": "UNKNOWN"
+      },
+      "evidenceReferences": [
+        {
+          "digest": "700c0aa4873f711e6a0732e56e0e9d67df78be56ef396f52daa10b5c0fe766fa",
+          "evidenceId": "ceba5fc20cc1f142a8083ae0edf47f31d74cb445de857a7aa905c895ac30b017",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "49d8bfa2ece4be806883107bf8c00452af66b35f3a16898a53c8dbb18750faaa",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 52
+        }
+      ],
+      "findings": [
+        {
+          "affectedDimension": "configurationHealth",
+          "affectedSourceSystemKeys": [
+            "CCTV"
+          ],
+          "decisionRequired": true,
+          "description": "Static source evidence requires an operator alias decision.",
+          "deterministicDigest": "721597891563688a6eb5de32e93f2cb12d4e57f941e3af291d86d80d3a880c88",
+          "evidenceReferences": [
+            {
+              "digest": "700c0aa4873f711e6a0732e56e0e9d67df78be56ef396f52daa10b5c0fe766fa",
+              "evidenceId": "ceba5fc20cc1f142a8083ae0edf47f31d74cb445de857a7aa905c895ac30b017",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "49d8bfa2ece4be806883107bf8c00452af66b35f3a16898a53c8dbb18750faaa",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 52
+            }
+          ],
+          "findingId": "b5a83308804a06be550250022fce67ce517ad87d38a8f09859b72b1bbcfee0a1",
+          "findingType": "ALIAS_APPROVAL_PENDING",
+          "reasonCode": "ALIAS_APPROVAL_PENDING",
+          "severity": "MEDIUM",
+          "title": "Alias approval pending for CCTV"
+        },
+        {
+          "affectedDimension": "declarationHealth",
+          "affectedSourceSystemKeys": [
+            "CCTV"
+          ],
+          "decisionRequired": false,
+          "description": "Declaration metadata is present without a runtime reference assignment.",
+          "deterministicDigest": "47a008ef18577e0cb0cd8ca3bad1edc95ea87891d337b6e05bba07f1f96dd48e",
+          "evidenceReferences": [
+            {
+              "digest": "700c0aa4873f711e6a0732e56e0e9d67df78be56ef396f52daa10b5c0fe766fa",
+              "evidenceId": "ceba5fc20cc1f142a8083ae0edf47f31d74cb445de857a7aa905c895ac30b017",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "49d8bfa2ece4be806883107bf8c00452af66b35f3a16898a53c8dbb18750faaa",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 52
+            }
+          ],
+          "findingId": "54071d38191630e8026472228e5e905f30507da25e09ff4385b9591aa2ff4687",
+          "findingType": "CONNECTOR_REFERENCE_UNDECLARED",
+          "reasonCode": "CONNECTOR_REFERENCE_UNDECLARED",
+          "severity": "INFO",
+          "title": "Connector reference undeclared for CCTV"
+        },
+        {
+          "affectedDimension": "declarationHealth",
+          "affectedSourceSystemKeys": [
+            "CCTV"
+          ],
+          "decisionRequired": false,
+          "description": "Declaration metadata is present without a runtime reference assignment.",
+          "deterministicDigest": "7564c4fd231e4682adf7999c6f80ee06f773d720802766d7c501ba8d1e72473f",
+          "evidenceReferences": [
+            {
+              "digest": "700c0aa4873f711e6a0732e56e0e9d67df78be56ef396f52daa10b5c0fe766fa",
+              "evidenceId": "ceba5fc20cc1f142a8083ae0edf47f31d74cb445de857a7aa905c895ac30b017",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "49d8bfa2ece4be806883107bf8c00452af66b35f3a16898a53c8dbb18750faaa",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 52
+            }
+          ],
+          "findingId": "eb9638e2462f93e068d6d6728896d1ceb7b2e39b0d545bfbf51cf355820de452",
+          "findingType": "EDGE_GATEWAY_REFERENCE_UNDECLARED",
+          "reasonCode": "EDGE_GATEWAY_REFERENCE_UNDECLARED",
+          "severity": "INFO",
+          "title": "EDGE gateway reference undeclared for CCTV"
+        },
+        {
+          "affectedDimension": "policyHealth",
+          "affectedSourceSystemKeys": [
+            "CCTV"
+          ],
+          "decisionRequired": false,
+          "description": "Health policy remains declarative and has not been runtime-evaluated.",
+          "deterministicDigest": "129a2f3e0a1f08a36dcc978bd3737e62d1c2192e3de57f6a719c60701861449b",
+          "evidenceReferences": [
+            {
+              "digest": "700c0aa4873f711e6a0732e56e0e9d67df78be56ef396f52daa10b5c0fe766fa",
+              "evidenceId": "ceba5fc20cc1f142a8083ae0edf47f31d74cb445de857a7aa905c895ac30b017",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "49d8bfa2ece4be806883107bf8c00452af66b35f3a16898a53c8dbb18750faaa",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 52
+            }
+          ],
+          "findingId": "8a5087d82088f1eb2ba008fc7edcb51ceb8f10bdbdeaacdda27764b79194692e",
+          "findingType": "HEALTH_POLICY_NOT_EVALUATED",
+          "reasonCode": "HEALTH_POLICY_NOT_EVALUATED",
+          "severity": "INFO",
+          "title": "Health policy not evaluated for CCTV"
+        },
+        {
+          "affectedDimension": "declarationHealth",
+          "affectedSourceSystemKeys": [
+            "CCTV"
+          ],
+          "decisionRequired": false,
+          "description": "Declaration metadata is present without a runtime reference assignment.",
+          "deterministicDigest": "73f71e1dcae1b64cbc1e792bae59d358445992e42dd1bd6abb5aecf8a22a0374",
+          "evidenceReferences": [
+            {
+              "digest": "700c0aa4873f711e6a0732e56e0e9d67df78be56ef396f52daa10b5c0fe766fa",
+              "evidenceId": "ceba5fc20cc1f142a8083ae0edf47f31d74cb445de857a7aa905c895ac30b017",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "49d8bfa2ece4be806883107bf8c00452af66b35f3a16898a53c8dbb18750faaa",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 52
+            }
+          ],
+          "findingId": "7ee18318cb0da7e1ba7c388733e3a04e24a1cd2285eed9c3b67f46a9f78273ee",
+          "findingType": "LINK_ROUTE_REFERENCE_UNDECLARED",
+          "reasonCode": "LINK_ROUTE_REFERENCE_UNDECLARED",
+          "severity": "INFO",
+          "title": "LINK route reference undeclared for CCTV"
+        },
+        {
+          "affectedDimension": "runtimeObservationHealth",
+          "affectedSourceSystemKeys": [
+            "CCTV"
+          ],
+          "decisionRequired": false,
+          "description": "No runtime adapter evidence is connected; this is not an outage.",
+          "deterministicDigest": "39877b4266732f7a9677ca8788c4588a592681dcd2814cd977fdb37702a172de",
+          "evidenceReferences": [],
+          "findingId": "a54a6c48ca4a19836ac376fdacbf79001ee473c13f0106686fc1fc3c65eed0da",
+          "findingType": "RUNTIME_EVIDENCE_UNAVAILABLE",
+          "reasonCode": "RUNTIME_EVIDENCE_UNAVAILABLE",
+          "severity": "INFO",
+          "title": "Runtime verification required for CCTV"
+        }
+      ],
+      "freshnessHealth": {
+        "classificationState": "NOT_APPLICABLE",
+        "deterministicDigest": "263010e3538490505b30210b0c419d42db100500212fe23bbc547d721fdd25c5",
+        "evidenceReferences": [],
+        "reasonCodes": [
+          "NO_TIMESTAMPED_RUNTIME_SIGNAL"
+        ],
+        "reviewRequired": false,
+        "runtimeObserved": false,
+        "severity": "INFO",
+        "state": "NOT_APPLICABLE"
+      },
+      "generatedAtPolicy": "DETERMINISTIC_NO_VOLATILE_TIMESTAMP",
+      "integrationHealthId": "f6cb0a4e284850647a7c5414ac194c72cd3762fa9b17e7a71189582ab2807aa7",
+      "lifecycleState": "CANDIDATE",
+      "mappingVersionDeclaration": "airport-source-system-v1",
+      "policyHealth": {
+        "classificationState": "NOT_APPLICABLE",
+        "deterministicDigest": "640a5bd921360a121b130afb59c9645e19e6ddb11b3b33148f867a296bd4eede",
+        "evidenceReferences": [],
+        "reasonCodes": [
+          "HEALTH_POLICY_NOT_EVALUATED"
+        ],
+        "reviewRequired": false,
+        "runtimeObserved": false,
+        "severity": "INFO",
+        "state": "NOT_APPLICABLE"
+      },
+      "readinessState": "REVIEW_REQUIRED",
+      "registryEntryId": "8b8e1222d598bb40a588a383c50a65e46c21e6cf81da63ab11fd625a6624f422",
+      "runtimeObservationHealth": {
+        "classificationState": "UNKNOWN",
+        "deterministicDigest": "262603dd0040bfc3934470f13a7edb57e91b0d5251b69e3c447e3156c8cf02b6",
+        "evidenceReferences": [],
+        "reasonCodes": [
+          "RUNTIME_EVIDENCE_UNAVAILABLE"
+        ],
+        "reviewRequired": false,
+        "runtimeObserved": false,
+        "severity": "INFO",
+        "state": "UNKNOWN"
+      },
+      "schemaVersionDeclaration": "1.0.0",
+      "sourceRecordCount": 52,
+      "sourceSystemKey": "CCTV"
+    },
+    {
+      "approvalState": "REVIEW_REQUIRED",
+      "capabilityHealth": {
+        "classificationState": "UNKNOWN",
+        "deterministicDigest": "565fe92695afad06639e2a1e32331a3c22cc361fb3f74781f011d51d388dd0c4",
+        "evidenceReferences": [
+          {
+            "digest": "6da53d802f057618e91b95564f3abee9dab082748ea008e69a81c62c40f21fd6",
+            "evidenceId": "6f9a9a469a9ad62b5a0d1065bada2f1f9b52cfc0b8132183f1e97f826c1ed461",
+            "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+            "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+            "resultDigest": "1dbd5b57a352e475431caeeef6267b79df96f97568ca6f7fb77c37e2734cdea5",
+            "sourceProfile": "airport-source-system-profile-v1",
+            "sourceRecordCount": 247
+          }
+        ],
+        "reasonCodes": [
+          "CAPABILITIES_NOT_RUNTIME_VERIFIED"
+        ],
+        "reviewRequired": false,
+        "runtimeObserved": false,
+        "severity": "INFO",
+        "state": "UNKNOWN"
+      },
+      "configurationHealth": {
+        "classificationState": "REVIEW_REQUIRED",
+        "deterministicDigest": "1ac69bd638770ab23a2ef750ffa645aa458ecf8fc0368857a2cf925be5ed769e",
+        "evidenceReferences": [
+          {
+            "digest": "6da53d802f057618e91b95564f3abee9dab082748ea008e69a81c62c40f21fd6",
+            "evidenceId": "6f9a9a469a9ad62b5a0d1065bada2f1f9b52cfc0b8132183f1e97f826c1ed461",
+            "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+            "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+            "resultDigest": "1dbd5b57a352e475431caeeef6267b79df96f97568ca6f7fb77c37e2734cdea5",
+            "sourceProfile": "airport-source-system-profile-v1",
+            "sourceRecordCount": 247
+          }
+        ],
+        "reasonCodes": [
+          "ALIAS_APPROVAL_REQUIRED"
+        ],
+        "reviewRequired": true,
+        "runtimeObserved": false,
+        "severity": "MEDIUM",
+        "state": "REVIEW_REQUIRED"
+      },
+      "declarationHealth": {
+        "classificationState": "DECLARED",
+        "deterministicDigest": "aab74517fc08af1668fd6d8bd587c524b664ba4c360f1771c1c815d92540e61e",
+        "evidenceReferences": [
+          {
+            "digest": "6da53d802f057618e91b95564f3abee9dab082748ea008e69a81c62c40f21fd6",
+            "evidenceId": "6f9a9a469a9ad62b5a0d1065bada2f1f9b52cfc0b8132183f1e97f826c1ed461",
+            "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+            "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+            "resultDigest": "1dbd5b57a352e475431caeeef6267b79df96f97568ca6f7fb77c37e2734cdea5",
+            "sourceProfile": "airport-source-system-profile-v1",
+            "sourceRecordCount": 247
+          }
+        ],
+        "reasonCodes": [
+          "INTEGRATION_DECLARATION_PRESENT"
+        ],
+        "reviewRequired": false,
+        "runtimeObserved": false,
+        "severity": "INFO",
+        "state": "UNKNOWN"
+      },
+      "deterministicDigest": "0c479b1527b2c9309414dba014ea7de5f804a06f116ab8409a5cb1b1cc7ecce8",
+      "deviceEvidenceCount": 247,
+      "evidenceHealth": {
+        "classificationState": "REVIEW_REQUIRED",
+        "deterministicDigest": "f6fcf6eaf9486e7814375866d6856573fa2369f441229e16165f669dcaaa2497",
+        "evidenceReferences": [
+          {
+            "digest": "6da53d802f057618e91b95564f3abee9dab082748ea008e69a81c62c40f21fd6",
+            "evidenceId": "6f9a9a469a9ad62b5a0d1065bada2f1f9b52cfc0b8132183f1e97f826c1ed461",
+            "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+            "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+            "resultDigest": "1dbd5b57a352e475431caeeef6267b79df96f97568ca6f7fb77c37e2734cdea5",
+            "sourceProfile": "airport-source-system-profile-v1",
+            "sourceRecordCount": 247
+          }
+        ],
+        "reasonCodes": [
+          "STATIC_EVIDENCE_REVIEW_REQUIRED"
+        ],
+        "reviewRequired": true,
+        "runtimeObserved": false,
+        "severity": "INFO",
+        "state": "UNKNOWN"
+      },
+      "evidenceReferences": [
+        {
+          "digest": "6da53d802f057618e91b95564f3abee9dab082748ea008e69a81c62c40f21fd6",
+          "evidenceId": "6f9a9a469a9ad62b5a0d1065bada2f1f9b52cfc0b8132183f1e97f826c1ed461",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "1dbd5b57a352e475431caeeef6267b79df96f97568ca6f7fb77c37e2734cdea5",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 247
+        }
+      ],
+      "findings": [
+        {
+          "affectedDimension": "configurationHealth",
+          "affectedSourceSystemKeys": [
+            "PA"
+          ],
+          "decisionRequired": true,
+          "description": "Static source evidence requires an operator alias decision.",
+          "deterministicDigest": "54c54f58b296143464c3aa433da53fed8193b861f49bd2c89953bab0abdc342d",
+          "evidenceReferences": [
+            {
+              "digest": "6da53d802f057618e91b95564f3abee9dab082748ea008e69a81c62c40f21fd6",
+              "evidenceId": "6f9a9a469a9ad62b5a0d1065bada2f1f9b52cfc0b8132183f1e97f826c1ed461",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "1dbd5b57a352e475431caeeef6267b79df96f97568ca6f7fb77c37e2734cdea5",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 247
+            }
+          ],
+          "findingId": "248864517eea0d7cdd4ab283875bcbf014e18d9b8e92084d72bc95febc320a8b",
+          "findingType": "ALIAS_APPROVAL_PENDING",
+          "reasonCode": "ALIAS_APPROVAL_PENDING",
+          "severity": "MEDIUM",
+          "title": "Alias approval pending for PA"
+        },
+        {
+          "affectedDimension": "declarationHealth",
+          "affectedSourceSystemKeys": [
+            "PA"
+          ],
+          "decisionRequired": false,
+          "description": "Declaration metadata is present without a runtime reference assignment.",
+          "deterministicDigest": "b29f4f877f4c94b7da64570b22a2c37c3df26977bcc32f66d60ad07b58c902e4",
+          "evidenceReferences": [
+            {
+              "digest": "6da53d802f057618e91b95564f3abee9dab082748ea008e69a81c62c40f21fd6",
+              "evidenceId": "6f9a9a469a9ad62b5a0d1065bada2f1f9b52cfc0b8132183f1e97f826c1ed461",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "1dbd5b57a352e475431caeeef6267b79df96f97568ca6f7fb77c37e2734cdea5",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 247
+            }
+          ],
+          "findingId": "a135e33c1249f69738e160a5637f5e843c471c5a05ddb147b70c15931548775d",
+          "findingType": "CONNECTOR_REFERENCE_UNDECLARED",
+          "reasonCode": "CONNECTOR_REFERENCE_UNDECLARED",
+          "severity": "INFO",
+          "title": "Connector reference undeclared for PA"
+        },
+        {
+          "affectedDimension": "declarationHealth",
+          "affectedSourceSystemKeys": [
+            "PA"
+          ],
+          "decisionRequired": false,
+          "description": "Declaration metadata is present without a runtime reference assignment.",
+          "deterministicDigest": "a26353ef3765cad4d8a24863ae0338220a5cb416165d1e7bc1a3d3d6c69ae66b",
+          "evidenceReferences": [
+            {
+              "digest": "6da53d802f057618e91b95564f3abee9dab082748ea008e69a81c62c40f21fd6",
+              "evidenceId": "6f9a9a469a9ad62b5a0d1065bada2f1f9b52cfc0b8132183f1e97f826c1ed461",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "1dbd5b57a352e475431caeeef6267b79df96f97568ca6f7fb77c37e2734cdea5",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 247
+            }
+          ],
+          "findingId": "12e6ccb1b5c047fa9a29e49dc3d70c416f312864f1ad53f0a5a06359f0614146",
+          "findingType": "EDGE_GATEWAY_REFERENCE_UNDECLARED",
+          "reasonCode": "EDGE_GATEWAY_REFERENCE_UNDECLARED",
+          "severity": "INFO",
+          "title": "EDGE gateway reference undeclared for PA"
+        },
+        {
+          "affectedDimension": "policyHealth",
+          "affectedSourceSystemKeys": [
+            "PA"
+          ],
+          "decisionRequired": false,
+          "description": "Health policy remains declarative and has not been runtime-evaluated.",
+          "deterministicDigest": "95ab13260d9d1d4cece208d0391a692b46f7089ac743a66fe059a03551471f14",
+          "evidenceReferences": [
+            {
+              "digest": "6da53d802f057618e91b95564f3abee9dab082748ea008e69a81c62c40f21fd6",
+              "evidenceId": "6f9a9a469a9ad62b5a0d1065bada2f1f9b52cfc0b8132183f1e97f826c1ed461",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "1dbd5b57a352e475431caeeef6267b79df96f97568ca6f7fb77c37e2734cdea5",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 247
+            }
+          ],
+          "findingId": "2c2f7721646fb69072c0d8507f327d9fda59958d5a6bc7ccdcc752bb2ca01bc3",
+          "findingType": "HEALTH_POLICY_NOT_EVALUATED",
+          "reasonCode": "HEALTH_POLICY_NOT_EVALUATED",
+          "severity": "INFO",
+          "title": "Health policy not evaluated for PA"
+        },
+        {
+          "affectedDimension": "declarationHealth",
+          "affectedSourceSystemKeys": [
+            "PA"
+          ],
+          "decisionRequired": false,
+          "description": "Declaration metadata is present without a runtime reference assignment.",
+          "deterministicDigest": "bdfcd7f76d7c32ecc2038dc4cdae729f4e032fa09ff3004cd4303025682a61b0",
+          "evidenceReferences": [
+            {
+              "digest": "6da53d802f057618e91b95564f3abee9dab082748ea008e69a81c62c40f21fd6",
+              "evidenceId": "6f9a9a469a9ad62b5a0d1065bada2f1f9b52cfc0b8132183f1e97f826c1ed461",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "1dbd5b57a352e475431caeeef6267b79df96f97568ca6f7fb77c37e2734cdea5",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 247
+            }
+          ],
+          "findingId": "6823e43f6ab579fddb79d154d5c48d0488eaa473de41324b5737675f3ddb795c",
+          "findingType": "LINK_ROUTE_REFERENCE_UNDECLARED",
+          "reasonCode": "LINK_ROUTE_REFERENCE_UNDECLARED",
+          "severity": "INFO",
+          "title": "LINK route reference undeclared for PA"
+        },
+        {
+          "affectedDimension": "runtimeObservationHealth",
+          "affectedSourceSystemKeys": [
+            "PA"
+          ],
+          "decisionRequired": false,
+          "description": "No runtime adapter evidence is connected; this is not an outage.",
+          "deterministicDigest": "7af149474505f8f570cd1c7a45d04a58fd260f5a170db984e39b58259d2cc723",
+          "evidenceReferences": [],
+          "findingId": "441ec7e3eb0a14a6fc96161d224efcb4ed09cadfe40873b35f11ad959de52eff",
+          "findingType": "RUNTIME_EVIDENCE_UNAVAILABLE",
+          "reasonCode": "RUNTIME_EVIDENCE_UNAVAILABLE",
+          "severity": "INFO",
+          "title": "Runtime verification required for PA"
+        }
+      ],
+      "freshnessHealth": {
+        "classificationState": "NOT_APPLICABLE",
+        "deterministicDigest": "263010e3538490505b30210b0c419d42db100500212fe23bbc547d721fdd25c5",
+        "evidenceReferences": [],
+        "reasonCodes": [
+          "NO_TIMESTAMPED_RUNTIME_SIGNAL"
+        ],
+        "reviewRequired": false,
+        "runtimeObserved": false,
+        "severity": "INFO",
+        "state": "NOT_APPLICABLE"
+      },
+      "generatedAtPolicy": "DETERMINISTIC_NO_VOLATILE_TIMESTAMP",
+      "integrationHealthId": "1ac5296e39771479e2cc8369d95a6f1b002fe3bbe5870e2a83befd8859a8ece3",
+      "lifecycleState": "CANDIDATE",
+      "mappingVersionDeclaration": "airport-source-system-v1",
+      "policyHealth": {
+        "classificationState": "NOT_APPLICABLE",
+        "deterministicDigest": "640a5bd921360a121b130afb59c9645e19e6ddb11b3b33148f867a296bd4eede",
+        "evidenceReferences": [],
+        "reasonCodes": [
+          "HEALTH_POLICY_NOT_EVALUATED"
+        ],
+        "reviewRequired": false,
+        "runtimeObserved": false,
+        "severity": "INFO",
+        "state": "NOT_APPLICABLE"
+      },
+      "readinessState": "REVIEW_REQUIRED",
+      "registryEntryId": "cb749f05259f176629e62ee2d716b8cc3e51eeed2ce87b13b3b09870a56612d7",
+      "runtimeObservationHealth": {
+        "classificationState": "UNKNOWN",
+        "deterministicDigest": "262603dd0040bfc3934470f13a7edb57e91b0d5251b69e3c447e3156c8cf02b6",
+        "evidenceReferences": [],
+        "reasonCodes": [
+          "RUNTIME_EVIDENCE_UNAVAILABLE"
+        ],
+        "reviewRequired": false,
+        "runtimeObserved": false,
+        "severity": "INFO",
+        "state": "UNKNOWN"
+      },
+      "schemaVersionDeclaration": "1.0.0",
+      "sourceRecordCount": 247,
+      "sourceSystemKey": "PA"
+    },
+    {
+      "approvalState": "DRAFT",
+      "capabilityHealth": {
+        "classificationState": "UNKNOWN",
+        "deterministicDigest": "1276739db98cd95b6f1e48226c443ebe6c0de3b55f6593c9f87605797bb4cb6d",
+        "evidenceReferences": [
+          {
+            "digest": "cd8d0520ee8802a0a5a9b99604c26d35fefff5ca2c59738e8b6c7035bd29e40a",
+            "evidenceId": "6f36e31caf4664dc7654550df344e31ebfb0140204cfd528fd672dc869819f8d",
+            "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+            "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+            "resultDigest": "1a375a7e7bab0f8b8b8d1e2f2add98d627a1c02825d3e8e16ca2e5014c293230",
+            "sourceProfile": "airport-source-system-profile-v1",
+            "sourceRecordCount": 28
+          }
+        ],
+        "reasonCodes": [
+          "CAPABILITIES_NOT_RUNTIME_VERIFIED"
+        ],
+        "reviewRequired": false,
+        "runtimeObserved": false,
+        "severity": "INFO",
+        "state": "UNKNOWN"
+      },
+      "configurationHealth": {
+        "classificationState": "DECLARED",
+        "deterministicDigest": "e428c373da82c7dbb290f1663e2c644912bd64caec082d77e909e1c5580cb807",
+        "evidenceReferences": [
+          {
+            "digest": "cd8d0520ee8802a0a5a9b99604c26d35fefff5ca2c59738e8b6c7035bd29e40a",
+            "evidenceId": "6f36e31caf4664dc7654550df344e31ebfb0140204cfd528fd672dc869819f8d",
+            "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+            "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+            "resultDigest": "1a375a7e7bab0f8b8b8d1e2f2add98d627a1c02825d3e8e16ca2e5014c293230",
+            "sourceProfile": "airport-source-system-profile-v1",
+            "sourceRecordCount": 28
+          }
+        ],
+        "reasonCodes": [
+          "REGISTRY_APPROVAL_REQUIRED"
+        ],
+        "reviewRequired": false,
+        "runtimeObserved": false,
+        "severity": "LOW",
+        "state": "UNKNOWN"
+      },
+      "declarationHealth": {
+        "classificationState": "DECLARED",
+        "deterministicDigest": "421388859d2260528caf3abfd3c80b1d1aae999d21d8e0b9e9e80fa926c941b7",
+        "evidenceReferences": [
+          {
+            "digest": "cd8d0520ee8802a0a5a9b99604c26d35fefff5ca2c59738e8b6c7035bd29e40a",
+            "evidenceId": "6f36e31caf4664dc7654550df344e31ebfb0140204cfd528fd672dc869819f8d",
+            "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+            "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+            "resultDigest": "1a375a7e7bab0f8b8b8d1e2f2add98d627a1c02825d3e8e16ca2e5014c293230",
+            "sourceProfile": "airport-source-system-profile-v1",
+            "sourceRecordCount": 28
+          }
+        ],
+        "reasonCodes": [
+          "INTEGRATION_DECLARATION_PRESENT"
+        ],
+        "reviewRequired": false,
+        "runtimeObserved": false,
+        "severity": "INFO",
+        "state": "UNKNOWN"
+      },
+      "deterministicDigest": "c0ad31d9573fae79abbac65fb2b405a369bb367743b6d1da04ef8037bb3682a2",
+      "deviceEvidenceCount": 28,
+      "evidenceHealth": {
+        "classificationState": "EVIDENCE_SUPPORTED",
+        "deterministicDigest": "dbfa617a5ddab04e7b80fb9050eefa7b92909b84af24af194476b1e11167f06d",
+        "evidenceReferences": [
+          {
+            "digest": "cd8d0520ee8802a0a5a9b99604c26d35fefff5ca2c59738e8b6c7035bd29e40a",
+            "evidenceId": "6f36e31caf4664dc7654550df344e31ebfb0140204cfd528fd672dc869819f8d",
+            "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+            "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+            "resultDigest": "1a375a7e7bab0f8b8b8d1e2f2add98d627a1c02825d3e8e16ca2e5014c293230",
+            "sourceProfile": "airport-source-system-profile-v1",
+            "sourceRecordCount": 28
+          }
+        ],
+        "reasonCodes": [
+          "STATIC_EVIDENCE_SUPPORTED"
+        ],
+        "reviewRequired": false,
+        "runtimeObserved": false,
+        "severity": "INFO",
+        "state": "UNKNOWN"
+      },
+      "evidenceReferences": [
+        {
+          "digest": "cd8d0520ee8802a0a5a9b99604c26d35fefff5ca2c59738e8b6c7035bd29e40a",
+          "evidenceId": "6f36e31caf4664dc7654550df344e31ebfb0140204cfd528fd672dc869819f8d",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "1a375a7e7bab0f8b8b8d1e2f2add98d627a1c02825d3e8e16ca2e5014c293230",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 28
+        }
+      ],
+      "findings": [
+        {
+          "affectedDimension": "declarationHealth",
+          "affectedSourceSystemKeys": [
+            "RAS"
+          ],
+          "decisionRequired": false,
+          "description": "Declaration metadata is present without a runtime reference assignment.",
+          "deterministicDigest": "cecaa3a36bfc4b9d059a549d77e69ca41922f90f4bb1f7ee923ec5a5cebb9842",
+          "evidenceReferences": [
+            {
+              "digest": "cd8d0520ee8802a0a5a9b99604c26d35fefff5ca2c59738e8b6c7035bd29e40a",
+              "evidenceId": "6f36e31caf4664dc7654550df344e31ebfb0140204cfd528fd672dc869819f8d",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "1a375a7e7bab0f8b8b8d1e2f2add98d627a1c02825d3e8e16ca2e5014c293230",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 28
+            }
+          ],
+          "findingId": "d720e353213b4b2be6bd2d738c7ca58279a8490e7e3608ccd1ad645f52fdcabe",
+          "findingType": "CONNECTOR_REFERENCE_UNDECLARED",
+          "reasonCode": "CONNECTOR_REFERENCE_UNDECLARED",
+          "severity": "INFO",
+          "title": "Connector reference undeclared for RAS"
+        },
+        {
+          "affectedDimension": "declarationHealth",
+          "affectedSourceSystemKeys": [
+            "RAS"
+          ],
+          "decisionRequired": false,
+          "description": "Declaration metadata is present without a runtime reference assignment.",
+          "deterministicDigest": "8db665607286bd21cddf803722659a65bee134eccf112afd990fa1810a9ea7e5",
+          "evidenceReferences": [
+            {
+              "digest": "cd8d0520ee8802a0a5a9b99604c26d35fefff5ca2c59738e8b6c7035bd29e40a",
+              "evidenceId": "6f36e31caf4664dc7654550df344e31ebfb0140204cfd528fd672dc869819f8d",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "1a375a7e7bab0f8b8b8d1e2f2add98d627a1c02825d3e8e16ca2e5014c293230",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 28
+            }
+          ],
+          "findingId": "3ba8e53eb841b775b62ca8861d5cde789ab1fbef4c67ac3eedd6a0b8cdbbdaca",
+          "findingType": "EDGE_GATEWAY_REFERENCE_UNDECLARED",
+          "reasonCode": "EDGE_GATEWAY_REFERENCE_UNDECLARED",
+          "severity": "INFO",
+          "title": "EDGE gateway reference undeclared for RAS"
+        },
+        {
+          "affectedDimension": "policyHealth",
+          "affectedSourceSystemKeys": [
+            "RAS"
+          ],
+          "decisionRequired": false,
+          "description": "Health policy remains declarative and has not been runtime-evaluated.",
+          "deterministicDigest": "4426e2a602ef181f4767751954e0b1a63fde629c1fdc57b0c51552c9cda515a3",
+          "evidenceReferences": [
+            {
+              "digest": "cd8d0520ee8802a0a5a9b99604c26d35fefff5ca2c59738e8b6c7035bd29e40a",
+              "evidenceId": "6f36e31caf4664dc7654550df344e31ebfb0140204cfd528fd672dc869819f8d",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "1a375a7e7bab0f8b8b8d1e2f2add98d627a1c02825d3e8e16ca2e5014c293230",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 28
+            }
+          ],
+          "findingId": "95e7b78043c26e26df21c03d51d2f358ee33d7d5f3396fbc665deaa0c59be800",
+          "findingType": "HEALTH_POLICY_NOT_EVALUATED",
+          "reasonCode": "HEALTH_POLICY_NOT_EVALUATED",
+          "severity": "INFO",
+          "title": "Health policy not evaluated for RAS"
+        },
+        {
+          "affectedDimension": "declarationHealth",
+          "affectedSourceSystemKeys": [
+            "RAS"
+          ],
+          "decisionRequired": false,
+          "description": "Declaration metadata is present without a runtime reference assignment.",
+          "deterministicDigest": "d6a062d3b1a968c444127fc8e16e52a0df70241791aedcc9887429d4ef78286a",
+          "evidenceReferences": [
+            {
+              "digest": "cd8d0520ee8802a0a5a9b99604c26d35fefff5ca2c59738e8b6c7035bd29e40a",
+              "evidenceId": "6f36e31caf4664dc7654550df344e31ebfb0140204cfd528fd672dc869819f8d",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "1a375a7e7bab0f8b8b8d1e2f2add98d627a1c02825d3e8e16ca2e5014c293230",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 28
+            }
+          ],
+          "findingId": "d4a5e97c41880f0dfb54011bbd7b06d44bb29fa48fc65940260c7e0782edce77",
+          "findingType": "LINK_ROUTE_REFERENCE_UNDECLARED",
+          "reasonCode": "LINK_ROUTE_REFERENCE_UNDECLARED",
+          "severity": "INFO",
+          "title": "LINK route reference undeclared for RAS"
+        },
+        {
+          "affectedDimension": "configurationHealth",
+          "affectedSourceSystemKeys": [
+            "RAS"
+          ],
+          "decisionRequired": true,
+          "description": "Exact static evidence exists, but registry approval is still required.",
+          "deterministicDigest": "c77df00cfe9d1828c774d35e82ad7b203f248dc3474dbc7c3dfa7f1690c665cb",
+          "evidenceReferences": [
+            {
+              "digest": "cd8d0520ee8802a0a5a9b99604c26d35fefff5ca2c59738e8b6c7035bd29e40a",
+              "evidenceId": "6f36e31caf4664dc7654550df344e31ebfb0140204cfd528fd672dc869819f8d",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "1a375a7e7bab0f8b8b8d1e2f2add98d627a1c02825d3e8e16ca2e5014c293230",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 28
+            }
+          ],
+          "findingId": "d33777ae8fbc853f97490f92ea7471f7929ef3e6eb9b7935b1fdf5fc710aac68",
+          "findingType": "REGISTRY_APPROVAL_PENDING",
+          "reasonCode": "REGISTRY_APPROVAL_PENDING",
+          "severity": "LOW",
+          "title": "Registry approval pending for RAS"
+        },
+        {
+          "affectedDimension": "runtimeObservationHealth",
+          "affectedSourceSystemKeys": [
+            "RAS"
+          ],
+          "decisionRequired": false,
+          "description": "No runtime adapter evidence is connected; this is not an outage.",
+          "deterministicDigest": "86602b23e4a4ad441caa22a27366f3bab76da3739d968278afb03182f4ede609",
+          "evidenceReferences": [],
+          "findingId": "f66820e4735f1f09ec060440d9a9af485488d1965478c9c33cc2ed33252c86a4",
+          "findingType": "RUNTIME_EVIDENCE_UNAVAILABLE",
+          "reasonCode": "RUNTIME_EVIDENCE_UNAVAILABLE",
+          "severity": "INFO",
+          "title": "Runtime verification required for RAS"
+        }
+      ],
+      "freshnessHealth": {
+        "classificationState": "NOT_APPLICABLE",
+        "deterministicDigest": "263010e3538490505b30210b0c419d42db100500212fe23bbc547d721fdd25c5",
+        "evidenceReferences": [],
+        "reasonCodes": [
+          "NO_TIMESTAMPED_RUNTIME_SIGNAL"
+        ],
+        "reviewRequired": false,
+        "runtimeObserved": false,
+        "severity": "INFO",
+        "state": "NOT_APPLICABLE"
+      },
+      "generatedAtPolicy": "DETERMINISTIC_NO_VOLATILE_TIMESTAMP",
+      "integrationHealthId": "439a60ea6ea3a3fe458a554ab13811b41b19e4eefd325580ccabbad63daa57e6",
+      "lifecycleState": "CANDIDATE",
+      "mappingVersionDeclaration": "airport-source-system-v1",
+      "policyHealth": {
+        "classificationState": "NOT_APPLICABLE",
+        "deterministicDigest": "640a5bd921360a121b130afb59c9645e19e6ddb11b3b33148f867a296bd4eede",
+        "evidenceReferences": [],
+        "reasonCodes": [
+          "HEALTH_POLICY_NOT_EVALUATED"
+        ],
+        "reviewRequired": false,
+        "runtimeObserved": false,
+        "severity": "INFO",
+        "state": "NOT_APPLICABLE"
+      },
+      "readinessState": "RUNTIME_VERIFICATION_REQUIRED",
+      "registryEntryId": "8bf7f40c3274d08acb945bf1e17df4dc62c8ac2d056760daf4a160d6e3c78c89",
+      "runtimeObservationHealth": {
+        "classificationState": "UNKNOWN",
+        "deterministicDigest": "262603dd0040bfc3934470f13a7edb57e91b0d5251b69e3c447e3156c8cf02b6",
+        "evidenceReferences": [],
+        "reasonCodes": [
+          "RUNTIME_EVIDENCE_UNAVAILABLE"
+        ],
+        "reviewRequired": false,
+        "runtimeObserved": false,
+        "severity": "INFO",
+        "state": "UNKNOWN"
+      },
+      "schemaVersionDeclaration": "1.0.0",
+      "sourceRecordCount": 28,
+      "sourceSystemKey": "RAS"
+    },
+    {
+      "approvalState": "REVIEW_REQUIRED",
+      "capabilityHealth": {
+        "classificationState": "UNKNOWN",
+        "deterministicDigest": "84bca2a41d0dc1fa73516ced961db0f50824c3296244205b611a339912b0ce08",
+        "evidenceReferences": [
+          {
+            "digest": "0fc6173d8a353b1dd2633b44ef99afa3a4acb41c29782b58436c0cbcf3c5f1ec",
+            "evidenceId": "2bd6c4b0f26f69cec870971cbed4ac5b63872ce8907c142650d07932cfdf8321",
+            "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+            "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+            "resultDigest": "63061c85fca03040577cf513e43f686ec089995ded7485c138c834680d6832c7",
+            "sourceProfile": "airport-source-system-profile-v1",
+            "sourceRecordCount": 14
+          }
+        ],
+        "reasonCodes": [
+          "CAPABILITIES_NOT_RUNTIME_VERIFIED"
+        ],
+        "reviewRequired": false,
+        "runtimeObserved": false,
+        "severity": "INFO",
+        "state": "UNKNOWN"
+      },
+      "configurationHealth": {
+        "classificationState": "REVIEW_REQUIRED",
+        "deterministicDigest": "d6ca714af6a9cba3041520dcfbe91bf373f0b32a16281fa6d86b881f4dd9d422",
+        "evidenceReferences": [
+          {
+            "digest": "0fc6173d8a353b1dd2633b44ef99afa3a4acb41c29782b58436c0cbcf3c5f1ec",
+            "evidenceId": "2bd6c4b0f26f69cec870971cbed4ac5b63872ce8907c142650d07932cfdf8321",
+            "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+            "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+            "resultDigest": "63061c85fca03040577cf513e43f686ec089995ded7485c138c834680d6832c7",
+            "sourceProfile": "airport-source-system-profile-v1",
+            "sourceRecordCount": 14
+          }
+        ],
+        "reasonCodes": [
+          "NAMESPACE_INTERPRETATION_REQUIRED"
+        ],
+        "reviewRequired": true,
+        "runtimeObserved": false,
+        "severity": "MEDIUM",
+        "state": "REVIEW_REQUIRED"
+      },
+      "declarationHealth": {
+        "classificationState": "DECLARED",
+        "deterministicDigest": "da1aa7af44f3e13ab049cddb1cfb58db161259f27abb14106e1a793f29ff75f0",
+        "evidenceReferences": [
+          {
+            "digest": "0fc6173d8a353b1dd2633b44ef99afa3a4acb41c29782b58436c0cbcf3c5f1ec",
+            "evidenceId": "2bd6c4b0f26f69cec870971cbed4ac5b63872ce8907c142650d07932cfdf8321",
+            "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+            "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+            "resultDigest": "63061c85fca03040577cf513e43f686ec089995ded7485c138c834680d6832c7",
+            "sourceProfile": "airport-source-system-profile-v1",
+            "sourceRecordCount": 14
+          }
+        ],
+        "reasonCodes": [
+          "INTEGRATION_DECLARATION_PRESENT"
+        ],
+        "reviewRequired": false,
+        "runtimeObserved": false,
+        "severity": "INFO",
+        "state": "UNKNOWN"
+      },
+      "deterministicDigest": "599a70f0331920730c7de4d6b25700816a27cb293efd30391fbe08b7f4cacc1c",
+      "deviceEvidenceCount": 14,
+      "evidenceHealth": {
+        "classificationState": "REVIEW_REQUIRED",
+        "deterministicDigest": "67177682b8b33bbe99183e063663b42ad453ed31e0eb89ba2894ff8d9d456602",
+        "evidenceReferences": [
+          {
+            "digest": "0fc6173d8a353b1dd2633b44ef99afa3a4acb41c29782b58436c0cbcf3c5f1ec",
+            "evidenceId": "2bd6c4b0f26f69cec870971cbed4ac5b63872ce8907c142650d07932cfdf8321",
+            "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+            "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+            "resultDigest": "63061c85fca03040577cf513e43f686ec089995ded7485c138c834680d6832c7",
+            "sourceProfile": "airport-source-system-profile-v1",
+            "sourceRecordCount": 14
+          }
+        ],
+        "reasonCodes": [
+          "STATIC_EVIDENCE_REVIEW_REQUIRED"
+        ],
+        "reviewRequired": true,
+        "runtimeObserved": false,
+        "severity": "INFO",
+        "state": "UNKNOWN"
+      },
+      "evidenceReferences": [
+        {
+          "digest": "0fc6173d8a353b1dd2633b44ef99afa3a4acb41c29782b58436c0cbcf3c5f1ec",
+          "evidenceId": "2bd6c4b0f26f69cec870971cbed4ac5b63872ce8907c142650d07932cfdf8321",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "63061c85fca03040577cf513e43f686ec089995ded7485c138c834680d6832c7",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 14
+        }
+      ],
+      "findings": [
+        {
+          "affectedDimension": "declarationHealth",
+          "affectedSourceSystemKeys": [
+            "TEL"
+          ],
+          "decisionRequired": false,
+          "description": "Declaration metadata is present without a runtime reference assignment.",
+          "deterministicDigest": "e0ab9ab27f03cd52e2851512552f474f30ef275ffbf2221ee3f7f1c7c590a400",
+          "evidenceReferences": [
+            {
+              "digest": "0fc6173d8a353b1dd2633b44ef99afa3a4acb41c29782b58436c0cbcf3c5f1ec",
+              "evidenceId": "2bd6c4b0f26f69cec870971cbed4ac5b63872ce8907c142650d07932cfdf8321",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "63061c85fca03040577cf513e43f686ec089995ded7485c138c834680d6832c7",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 14
+            }
+          ],
+          "findingId": "59621b6960603edace7f4936c08fbc1958dfea8f1ea4eb5d8d9e769b40fc5386",
+          "findingType": "CONNECTOR_REFERENCE_UNDECLARED",
+          "reasonCode": "CONNECTOR_REFERENCE_UNDECLARED",
+          "severity": "INFO",
+          "title": "Connector reference undeclared for TEL"
+        },
+        {
+          "affectedDimension": "declarationHealth",
+          "affectedSourceSystemKeys": [
+            "TEL"
+          ],
+          "decisionRequired": false,
+          "description": "Declaration metadata is present without a runtime reference assignment.",
+          "deterministicDigest": "0deb680cd45fc17b9fe393334cce1ece126a2d46284a4da4c41c0e5d4e5da5b7",
+          "evidenceReferences": [
+            {
+              "digest": "0fc6173d8a353b1dd2633b44ef99afa3a4acb41c29782b58436c0cbcf3c5f1ec",
+              "evidenceId": "2bd6c4b0f26f69cec870971cbed4ac5b63872ce8907c142650d07932cfdf8321",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "63061c85fca03040577cf513e43f686ec089995ded7485c138c834680d6832c7",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 14
+            }
+          ],
+          "findingId": "583719ffc3e00c5a5a9126375a310014b3b33afa1666872357da4cf9a40afddf",
+          "findingType": "EDGE_GATEWAY_REFERENCE_UNDECLARED",
+          "reasonCode": "EDGE_GATEWAY_REFERENCE_UNDECLARED",
+          "severity": "INFO",
+          "title": "EDGE gateway reference undeclared for TEL"
+        },
+        {
+          "affectedDimension": "policyHealth",
+          "affectedSourceSystemKeys": [
+            "TEL"
+          ],
+          "decisionRequired": false,
+          "description": "Health policy remains declarative and has not been runtime-evaluated.",
+          "deterministicDigest": "6cfed0d13f16fb8cec556a83287edfa399b964d5304e2bdbd343da76b87159a7",
+          "evidenceReferences": [
+            {
+              "digest": "0fc6173d8a353b1dd2633b44ef99afa3a4acb41c29782b58436c0cbcf3c5f1ec",
+              "evidenceId": "2bd6c4b0f26f69cec870971cbed4ac5b63872ce8907c142650d07932cfdf8321",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "63061c85fca03040577cf513e43f686ec089995ded7485c138c834680d6832c7",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 14
+            }
+          ],
+          "findingId": "eb45bc3137402b6eb4f1ce18e694bcdabb1ca06a4d74d76ca5c810ab986ce3cf",
+          "findingType": "HEALTH_POLICY_NOT_EVALUATED",
+          "reasonCode": "HEALTH_POLICY_NOT_EVALUATED",
+          "severity": "INFO",
+          "title": "Health policy not evaluated for TEL"
+        },
+        {
+          "affectedDimension": "declarationHealth",
+          "affectedSourceSystemKeys": [
+            "TEL"
+          ],
+          "decisionRequired": false,
+          "description": "Declaration metadata is present without a runtime reference assignment.",
+          "deterministicDigest": "b2f435cdd91870bda70d4f017e7eb4659791e28f1ae78e19413e879748304b7c",
+          "evidenceReferences": [
+            {
+              "digest": "0fc6173d8a353b1dd2633b44ef99afa3a4acb41c29782b58436c0cbcf3c5f1ec",
+              "evidenceId": "2bd6c4b0f26f69cec870971cbed4ac5b63872ce8907c142650d07932cfdf8321",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "63061c85fca03040577cf513e43f686ec089995ded7485c138c834680d6832c7",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 14
+            }
+          ],
+          "findingId": "1c9e26d851393e86053105e43778cc2b6faac454d7963e6455ec9f647bcdc3a3",
+          "findingType": "LINK_ROUTE_REFERENCE_UNDECLARED",
+          "reasonCode": "LINK_ROUTE_REFERENCE_UNDECLARED",
+          "severity": "INFO",
+          "title": "LINK route reference undeclared for TEL"
+        },
+        {
+          "affectedDimension": "configurationHealth",
+          "affectedSourceSystemKeys": [
+            "TEL"
+          ],
+          "decisionRequired": true,
+          "description": "The source namespace requires an operator interpretation decision.",
+          "deterministicDigest": "ab8eef3f871b27d7df89b8663874ecf76290af6897d9a04b14a4e54708b64ab5",
+          "evidenceReferences": [
+            {
+              "digest": "0fc6173d8a353b1dd2633b44ef99afa3a4acb41c29782b58436c0cbcf3c5f1ec",
+              "evidenceId": "2bd6c4b0f26f69cec870971cbed4ac5b63872ce8907c142650d07932cfdf8321",
+              "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+              "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+              "resultDigest": "63061c85fca03040577cf513e43f686ec089995ded7485c138c834680d6832c7",
+              "sourceProfile": "airport-source-system-profile-v1",
+              "sourceRecordCount": 14
+            }
+          ],
+          "findingId": "252ff049ea0ee950350802ec11d9b8667b428881c9013d57ba5412a106caf694",
+          "findingType": "NAMESPACE_INTERPRETATION_PENDING",
+          "reasonCode": "NAMESPACE_INTERPRETATION_PENDING",
+          "severity": "MEDIUM",
+          "title": "Namespace interpretation pending for TEL"
+        },
+        {
+          "affectedDimension": "runtimeObservationHealth",
+          "affectedSourceSystemKeys": [
+            "TEL"
+          ],
+          "decisionRequired": false,
+          "description": "No runtime adapter evidence is connected; this is not an outage.",
+          "deterministicDigest": "4c5f8750b1a45af780559200d142ed6d34947a7f925d5da3ee82e5c565aa5192",
+          "evidenceReferences": [],
+          "findingId": "fc1fd8b021992c2a2c5ee7181979cfbf41b70a325d5977d188b1dc4addbc449f",
+          "findingType": "RUNTIME_EVIDENCE_UNAVAILABLE",
+          "reasonCode": "RUNTIME_EVIDENCE_UNAVAILABLE",
+          "severity": "INFO",
+          "title": "Runtime verification required for TEL"
+        }
+      ],
+      "freshnessHealth": {
+        "classificationState": "NOT_APPLICABLE",
+        "deterministicDigest": "263010e3538490505b30210b0c419d42db100500212fe23bbc547d721fdd25c5",
+        "evidenceReferences": [],
+        "reasonCodes": [
+          "NO_TIMESTAMPED_RUNTIME_SIGNAL"
+        ],
+        "reviewRequired": false,
+        "runtimeObserved": false,
+        "severity": "INFO",
+        "state": "NOT_APPLICABLE"
+      },
+      "generatedAtPolicy": "DETERMINISTIC_NO_VOLATILE_TIMESTAMP",
+      "integrationHealthId": "06eae5312fc9f7f169e12506d7ac3166729b8873279d14cddebdee2c46ab61e3",
+      "lifecycleState": "CANDIDATE",
+      "mappingVersionDeclaration": "airport-source-system-v1",
+      "policyHealth": {
+        "classificationState": "NOT_APPLICABLE",
+        "deterministicDigest": "640a5bd921360a121b130afb59c9645e19e6ddb11b3b33148f867a296bd4eede",
+        "evidenceReferences": [],
+        "reasonCodes": [
+          "HEALTH_POLICY_NOT_EVALUATED"
+        ],
+        "reviewRequired": false,
+        "runtimeObserved": false,
+        "severity": "INFO",
+        "state": "NOT_APPLICABLE"
+      },
+      "readinessState": "REVIEW_REQUIRED",
+      "registryEntryId": "bcdfadbc1ff27ba342c6add68393f1d78631b9d2925fbb467aab8463b776d16a",
+      "runtimeObservationHealth": {
+        "classificationState": "UNKNOWN",
+        "deterministicDigest": "262603dd0040bfc3934470f13a7edb57e91b0d5251b69e3c447e3156c8cf02b6",
+        "evidenceReferences": [],
+        "reasonCodes": [
+          "RUNTIME_EVIDENCE_UNAVAILABLE"
+        ],
+        "reviewRequired": false,
+        "runtimeObserved": false,
+        "severity": "INFO",
+        "state": "UNKNOWN"
+      },
+      "schemaVersionDeclaration": "1.0.0",
+      "sourceRecordCount": 14,
+      "sourceSystemKey": "TEL"
+    }
+  ],
+  "implementationStatus": "GENERIC_INTEGRATION_HEALTH_READ_MODEL_COMPLETE",
+  "readinessOutcome": "INTEGRATION_HEALTH_DECLARATION_COMPLETE_RUNTIME_EVIDENCE_PENDING",
+  "resultDigest": "0d282d8e52cb152cf1b0f2f2d2f56ec36339f81fe94f1030acd073be8a3e60dc",
+  "summary": {
+    "activeSystemCount": 0,
+    "airportSpecific": false,
+    "aliasApprovalPendingCount": 2,
+    "approvedSystemCount": 0,
+    "containsCustomerAssetIdentifiers": false,
+    "crossIndustry": true,
+    "databaseAccessEnabled": false,
+    "healthySystemCount": 0,
+    "integrationHealthRecordCount": 5,
+    "namespaceReviewPendingCount": 1,
+    "productionActivationEnabled": false,
+    "registeredSystemCount": 0,
+    "registryApprovalPendingCount": 2,
+    "runtimeConnectorExecutionEnabled": false,
+    "runtimeObservedSystemCount": 0,
+    "runtimeVerificationRequiredCount": 5,
+    "runtimeVerifiedSystemCount": 0,
+    "totalEvidenceDeviceCount": 470
+  }
+}
