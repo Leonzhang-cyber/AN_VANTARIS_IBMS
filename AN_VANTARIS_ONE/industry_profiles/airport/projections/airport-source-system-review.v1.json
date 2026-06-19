@@ -1,0 +1,604 @@
+{
+  "authority": "ONE-AIRPORT-A2-02",
+  "evidenceBindings": [
+    {
+      "approvalState": "DRAFT",
+      "bindingDigest": "91d39b89567f178c1ffb65b96ab0c624f1b41970eb5ac9f04101768eefed2438",
+      "deviceEvidenceCount": 129,
+      "evidenceReferences": [
+        {
+          "digest": "7f4eb268556cd7cc31608ecc9f1796df9b053039ab13e3e4d1271339d7a23dec",
+          "evidenceId": "d5460171bfa515ad3fde83fa991bd0dbccac64817b6cd3cd50f7cec016d16330",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "f2134c9995fc2c8b24603620a9df349e320afce29bc99356c3fbea5e577f1188",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 129
+        }
+      ],
+      "evidenceType": "exact",
+      "lifecycleState": "CANDIDATE",
+      "normalizedProposal": "ACS",
+      "observedSourceValues": [
+        "ACS"
+      ],
+      "provenance": "ONE-AIRPORT-A1-03 classification bindings via ONE-AIRPORT-A2-01 candidates",
+      "registryEntryId": "722a59146a8bdb9d4f76c5786a634d5fbf3f5c9d6e41473485fa20eb335d2dd4",
+      "reviewReasons": [
+        "REGISTRY_APPROVAL_REQUIRED"
+      ],
+      "sourceRecordCount": 129,
+      "sourceSystemKey": "ACS"
+    },
+    {
+      "approvalState": "REVIEW_REQUIRED",
+      "bindingDigest": "c7d4a6079daf6065d504de9c95e100ab9a7da2b0eb66a10497ef49381e6292e0",
+      "deviceEvidenceCount": 52,
+      "evidenceReferences": [
+        {
+          "digest": "700c0aa4873f711e6a0732e56e0e9d67df78be56ef396f52daa10b5c0fe766fa",
+          "evidenceId": "ceba5fc20cc1f142a8083ae0edf47f31d74cb445de857a7aa905c895ac30b017",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "49d8bfa2ece4be806883107bf8c00452af66b35f3a16898a53c8dbb18750faaa",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 52
+        }
+      ],
+      "evidenceType": "alias_review",
+      "lifecycleState": "CANDIDATE",
+      "normalizedProposal": "CCTV",
+      "observedSourceValues": [
+        "CCT"
+      ],
+      "provenance": "ONE-AIRPORT-A1-03 classification bindings via ONE-AIRPORT-A2-01 candidates",
+      "registryEntryId": "8b8e1222d598bb40a588a383c50a65e46c21e6cf81da63ab11fd625a6624f422",
+      "reviewReasons": [
+        "ALIAS_APPROVAL_REQUIRED"
+      ],
+      "sourceRecordCount": 52,
+      "sourceSystemKey": "CCTV"
+    },
+    {
+      "approvalState": "REVIEW_REQUIRED",
+      "bindingDigest": "b335ca7629bf820370221f75f0994e1844964d2dca4a6f027c55444a0d343e82",
+      "deviceEvidenceCount": 247,
+      "evidenceReferences": [
+        {
+          "digest": "6da53d802f057618e91b95564f3abee9dab082748ea008e69a81c62c40f21fd6",
+          "evidenceId": "6f9a9a469a9ad62b5a0d1065bada2f1f9b52cfc0b8132183f1e97f826c1ed461",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "1dbd5b57a352e475431caeeef6267b79df96f97568ca6f7fb77c37e2734cdea5",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 247
+        }
+      ],
+      "evidenceType": "alias_review",
+      "lifecycleState": "CANDIDATE",
+      "normalizedProposal": "PA",
+      "observedSourceValues": [
+        "PAS"
+      ],
+      "provenance": "ONE-AIRPORT-A1-03 classification bindings via ONE-AIRPORT-A2-01 candidates",
+      "registryEntryId": "cb749f05259f176629e62ee2d716b8cc3e51eeed2ce87b13b3b09870a56612d7",
+      "reviewReasons": [
+        "ALIAS_APPROVAL_REQUIRED"
+      ],
+      "sourceRecordCount": 247,
+      "sourceSystemKey": "PA"
+    },
+    {
+      "approvalState": "DRAFT",
+      "bindingDigest": "75c79fe6d72e6868e48bd824ff86aca0692de66d003b4493713116f90d20a05b",
+      "deviceEvidenceCount": 28,
+      "evidenceReferences": [
+        {
+          "digest": "cd8d0520ee8802a0a5a9b99604c26d35fefff5ca2c59738e8b6c7035bd29e40a",
+          "evidenceId": "6f36e31caf4664dc7654550df344e31ebfb0140204cfd528fd672dc869819f8d",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "1a375a7e7bab0f8b8b8d1e2f2add98d627a1c02825d3e8e16ca2e5014c293230",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 28
+        }
+      ],
+      "evidenceType": "exact",
+      "lifecycleState": "CANDIDATE",
+      "normalizedProposal": "RAS",
+      "observedSourceValues": [
+        "RAS"
+      ],
+      "provenance": "ONE-AIRPORT-A1-03 classification bindings via ONE-AIRPORT-A2-01 candidates",
+      "registryEntryId": "8bf7f40c3274d08acb945bf1e17df4dc62c8ac2d056760daf4a160d6e3c78c89",
+      "reviewReasons": [
+        "REGISTRY_APPROVAL_REQUIRED"
+      ],
+      "sourceRecordCount": 28,
+      "sourceSystemKey": "RAS"
+    },
+    {
+      "approvalState": "REVIEW_REQUIRED",
+      "bindingDigest": "25f9e765a7d23860c25f71b71935c69791f45506953bd547add932433998babd",
+      "deviceEvidenceCount": 14,
+      "evidenceReferences": [
+        {
+          "digest": "0fc6173d8a353b1dd2633b44ef99afa3a4acb41c29782b58436c0cbcf3c5f1ec",
+          "evidenceId": "2bd6c4b0f26f69cec870971cbed4ac5b63872ce8907c142650d07932cfdf8321",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "63061c85fca03040577cf513e43f686ec089995ded7485c138c834680d6832c7",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 14
+        }
+      ],
+      "evidenceType": "namespace_review",
+      "lifecycleState": "CANDIDATE",
+      "normalizedProposal": "TEL",
+      "observedSourceValues": [
+        "TEL"
+      ],
+      "provenance": "ONE-AIRPORT-A1-03 classification bindings via ONE-AIRPORT-A2-01 candidates",
+      "registryEntryId": "bcdfadbc1ff27ba342c6add68393f1d78631b9d2925fbb467aab8463b776d16a",
+      "reviewReasons": [
+        "NAMESPACE_INTERPRETATION_REQUIRED"
+      ],
+      "sourceRecordCount": 14,
+      "sourceSystemKey": "TEL"
+    }
+  ],
+  "facets": [
+    {
+      "count": 2,
+      "facetKey": "aliasReview",
+      "optionDigest": "bd554ef168aa39fcdf6f8146122d47e03f41e18a6a9b39a8190266c9d7bd68df"
+    },
+    {
+      "count": 2,
+      "facetKey": "approvalState",
+      "optionDigest": "87e71c70fca1e89bd5384fb32957fe37078fcf886794dea64aca3a9b390feae0"
+    },
+    {
+      "count": 3,
+      "facetKey": "approvalState",
+      "optionDigest": "a7068dc8d33f6cf47cee9b3704c6578748a587f893a58730634e1da90bb8c79d"
+    },
+    {
+      "count": 5,
+      "facetKey": "decisionRequired",
+      "optionDigest": "1cc587c91c8793ab92fdb49ef81b8b83efb6a539816a6862fc083a907918f30a"
+    },
+    {
+      "count": 1,
+      "facetKey": "evidenceType",
+      "optionDigest": "38a194108ec4f8fe9aca081a33be11d6d5b4e2739157d8ab1eb3cb3ad2e35fcb"
+    },
+    {
+      "count": 2,
+      "facetKey": "evidenceType",
+      "optionDigest": "61e03ae147b8b8d8188d82a868b00f043a96580ff9b5693e05e33cc5f5ca0cb5"
+    },
+    {
+      "count": 2,
+      "facetKey": "evidenceType",
+      "optionDigest": "9a670331ccbc1cd03069a80d81d6b9fcaa66bc3a469db428af258635b6560d6a"
+    },
+    {
+      "count": 2,
+      "facetKey": "exactEvidence",
+      "optionDigest": "33ed54c825cb71a2d84b1f25de46f720652f9ef82ffc199dd8f2698bcc2af1ce"
+    },
+    {
+      "count": 5,
+      "facetKey": "lifecycleState",
+      "optionDigest": "d79bee8d1641028336e99402020e98737e7efe35b2f5559d223702af87abe4ad"
+    },
+    {
+      "count": 1,
+      "facetKey": "namespaceReview",
+      "optionDigest": "939e74f465e3f8fcfc27aff3bb63401cefa56cdb27f3ee90467863805ec8541e"
+    },
+    {
+      "count": 2,
+      "facetKey": "registryApprovalReview",
+      "optionDigest": "6929ec612b3e9dca1c763c0263a921891d5019682606cc2189b5916d5ce68c2a"
+    },
+    {
+      "count": 2,
+      "facetKey": "reviewType",
+      "optionDigest": "30cbbcac21b16f07b48a39b1f4bb5e1499bbf5e811c08ade203f9c16924dfe26"
+    },
+    {
+      "count": 2,
+      "facetKey": "reviewType",
+      "optionDigest": "3811f57bedb3031694f1f7bf6ead37ffc8af3b5a42a909767a80c0d19440226c"
+    },
+    {
+      "count": 1,
+      "facetKey": "reviewType",
+      "optionDigest": "98b2a1242f07f4175ac5e6f0401f97df2424df819f02cea8ce4a8c6b2a160bc1"
+    }
+  ],
+  "filters": [
+    {
+      "filterKey": "sourceSystemKey",
+      "filterType": "ENUM",
+      "options": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ]
+    },
+    {
+      "filterKey": "evidenceType",
+      "filterType": "ENUM",
+      "options": [
+        "exact",
+        "alias_review",
+        "namespace_review",
+        "alias_candidate"
+      ]
+    },
+    {
+      "filterKey": "reviewType",
+      "filterType": "ENUM",
+      "options": [
+        "ALIAS_APPROVAL",
+        "NAMESPACE_INTERPRETATION",
+        "REGISTRY_APPROVAL"
+      ]
+    },
+    {
+      "filterKey": "approvalState",
+      "filterType": "ENUM",
+      "options": [
+        "DRAFT",
+        "REVIEW_REQUIRED"
+      ]
+    },
+    {
+      "filterKey": "lifecycleState",
+      "filterType": "ENUM",
+      "options": [
+        "CANDIDATE"
+      ]
+    },
+    {
+      "filterKey": "decisionRequired",
+      "filterType": "BOOLEAN",
+      "options": [
+        "true"
+      ]
+    }
+  ],
+  "pagination": {
+    "continuationToken": null,
+    "items": [
+      {
+        "approvalState": "DRAFT",
+        "bindingDigest": "91d39b89567f178c1ffb65b96ab0c624f1b41970eb5ac9f04101768eefed2438",
+        "deviceEvidenceCount": 129,
+        "evidenceReferences": [
+          {
+            "digest": "7f4eb268556cd7cc31608ecc9f1796df9b053039ab13e3e4d1271339d7a23dec",
+            "evidenceId": "d5460171bfa515ad3fde83fa991bd0dbccac64817b6cd3cd50f7cec016d16330",
+            "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+            "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+            "resultDigest": "f2134c9995fc2c8b24603620a9df349e320afce29bc99356c3fbea5e577f1188",
+            "sourceProfile": "airport-source-system-profile-v1",
+            "sourceRecordCount": 129
+          }
+        ],
+        "evidenceType": "exact",
+        "lifecycleState": "CANDIDATE",
+        "normalizedProposal": "ACS",
+        "observedSourceValues": [
+          "ACS"
+        ],
+        "provenance": "ONE-AIRPORT-A1-03 classification bindings via ONE-AIRPORT-A2-01 candidates",
+        "registryEntryId": "722a59146a8bdb9d4f76c5786a634d5fbf3f5c9d6e41473485fa20eb335d2dd4",
+        "reviewReasons": [
+          "REGISTRY_APPROVAL_REQUIRED"
+        ],
+        "sourceRecordCount": 129,
+        "sourceSystemKey": "ACS"
+      },
+      {
+        "approvalState": "REVIEW_REQUIRED",
+        "bindingDigest": "c7d4a6079daf6065d504de9c95e100ab9a7da2b0eb66a10497ef49381e6292e0",
+        "deviceEvidenceCount": 52,
+        "evidenceReferences": [
+          {
+            "digest": "700c0aa4873f711e6a0732e56e0e9d67df78be56ef396f52daa10b5c0fe766fa",
+            "evidenceId": "ceba5fc20cc1f142a8083ae0edf47f31d74cb445de857a7aa905c895ac30b017",
+            "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+            "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+            "resultDigest": "49d8bfa2ece4be806883107bf8c00452af66b35f3a16898a53c8dbb18750faaa",
+            "sourceProfile": "airport-source-system-profile-v1",
+            "sourceRecordCount": 52
+          }
+        ],
+        "evidenceType": "alias_review",
+        "lifecycleState": "CANDIDATE",
+        "normalizedProposal": "CCTV",
+        "observedSourceValues": [
+          "CCT"
+        ],
+        "provenance": "ONE-AIRPORT-A1-03 classification bindings via ONE-AIRPORT-A2-01 candidates",
+        "registryEntryId": "8b8e1222d598bb40a588a383c50a65e46c21e6cf81da63ab11fd625a6624f422",
+        "reviewReasons": [
+          "ALIAS_APPROVAL_REQUIRED"
+        ],
+        "sourceRecordCount": 52,
+        "sourceSystemKey": "CCTV"
+      },
+      {
+        "approvalState": "REVIEW_REQUIRED",
+        "bindingDigest": "b335ca7629bf820370221f75f0994e1844964d2dca4a6f027c55444a0d343e82",
+        "deviceEvidenceCount": 247,
+        "evidenceReferences": [
+          {
+            "digest": "6da53d802f057618e91b95564f3abee9dab082748ea008e69a81c62c40f21fd6",
+            "evidenceId": "6f9a9a469a9ad62b5a0d1065bada2f1f9b52cfc0b8132183f1e97f826c1ed461",
+            "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+            "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+            "resultDigest": "1dbd5b57a352e475431caeeef6267b79df96f97568ca6f7fb77c37e2734cdea5",
+            "sourceProfile": "airport-source-system-profile-v1",
+            "sourceRecordCount": 247
+          }
+        ],
+        "evidenceType": "alias_review",
+        "lifecycleState": "CANDIDATE",
+        "normalizedProposal": "PA",
+        "observedSourceValues": [
+          "PAS"
+        ],
+        "provenance": "ONE-AIRPORT-A1-03 classification bindings via ONE-AIRPORT-A2-01 candidates",
+        "registryEntryId": "cb749f05259f176629e62ee2d716b8cc3e51eeed2ce87b13b3b09870a56612d7",
+        "reviewReasons": [
+          "ALIAS_APPROVAL_REQUIRED"
+        ],
+        "sourceRecordCount": 247,
+        "sourceSystemKey": "PA"
+      },
+      {
+        "approvalState": "DRAFT",
+        "bindingDigest": "75c79fe6d72e6868e48bd824ff86aca0692de66d003b4493713116f90d20a05b",
+        "deviceEvidenceCount": 28,
+        "evidenceReferences": [
+          {
+            "digest": "cd8d0520ee8802a0a5a9b99604c26d35fefff5ca2c59738e8b6c7035bd29e40a",
+            "evidenceId": "6f36e31caf4664dc7654550df344e31ebfb0140204cfd528fd672dc869819f8d",
+            "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+            "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+            "resultDigest": "1a375a7e7bab0f8b8b8d1e2f2add98d627a1c02825d3e8e16ca2e5014c293230",
+            "sourceProfile": "airport-source-system-profile-v1",
+            "sourceRecordCount": 28
+          }
+        ],
+        "evidenceType": "exact",
+        "lifecycleState": "CANDIDATE",
+        "normalizedProposal": "RAS",
+        "observedSourceValues": [
+          "RAS"
+        ],
+        "provenance": "ONE-AIRPORT-A1-03 classification bindings via ONE-AIRPORT-A2-01 candidates",
+        "registryEntryId": "8bf7f40c3274d08acb945bf1e17df4dc62c8ac2d056760daf4a160d6e3c78c89",
+        "reviewReasons": [
+          "REGISTRY_APPROVAL_REQUIRED"
+        ],
+        "sourceRecordCount": 28,
+        "sourceSystemKey": "RAS"
+      },
+      {
+        "approvalState": "REVIEW_REQUIRED",
+        "bindingDigest": "25f9e765a7d23860c25f71b71935c69791f45506953bd547add932433998babd",
+        "deviceEvidenceCount": 14,
+        "evidenceReferences": [
+          {
+            "digest": "0fc6173d8a353b1dd2633b44ef99afa3a4acb41c29782b58436c0cbcf3c5f1ec",
+            "evidenceId": "2bd6c4b0f26f69cec870971cbed4ac5b63872ce8907c142650d07932cfdf8321",
+            "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+            "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+            "resultDigest": "63061c85fca03040577cf513e43f686ec089995ded7485c138c834680d6832c7",
+            "sourceProfile": "airport-source-system-profile-v1",
+            "sourceRecordCount": 14
+          }
+        ],
+        "evidenceType": "namespace_review",
+        "lifecycleState": "CANDIDATE",
+        "normalizedProposal": "TEL",
+        "observedSourceValues": [
+          "TEL"
+        ],
+        "provenance": "ONE-AIRPORT-A1-03 classification bindings via ONE-AIRPORT-A2-01 candidates",
+        "registryEntryId": "bcdfadbc1ff27ba342c6add68393f1d78631b9d2925fbb467aab8463b776d16a",
+        "reviewReasons": [
+          "NAMESPACE_INTERPRETATION_REQUIRED"
+        ],
+        "sourceRecordCount": 14,
+        "sourceSystemKey": "TEL"
+      }
+    ],
+    "offset": 0,
+    "pageSize": 50,
+    "returnedCount": 5,
+    "totalCount": 5
+  },
+  "profileId": "airport-source-system-profile-v1",
+  "readinessOutcome": "SOURCE_SYSTEM_REVIEW_PROJECTION_COMPLETE_WITH_PENDING_DECISIONS",
+  "resultDigest": "eb151b97c9d7b79996df2c9d8d95c3ae307412aa80f86609ccf896eab8be95da",
+  "reviewCards": [
+    {
+      "affectedRecordCount": 52,
+      "affectedSourceSystemKeys": [
+        "CCTV"
+      ],
+      "allowedDecisions": [
+        "APPROVE_ALIAS",
+        "DEFER",
+        "REJECT_ALIAS"
+      ],
+      "blockingEffect": "CANNOT_REGISTER_CCTV_WITHOUT_ALIAS_APPROVAL",
+      "currentDecision": "PENDING",
+      "decisionRequired": true,
+      "deterministicDigest": "82412671869cc0993953d60ba03c1e82c23af21aa23d4688618cfdc7ae33b521",
+      "evidenceReferences": [
+        {
+          "digest": "700c0aa4873f711e6a0732e56e0e9d67df78be56ef396f52daa10b5c0fe766fa",
+          "evidenceId": "ceba5fc20cc1f142a8083ae0edf47f31d74cb445de857a7aa905c895ac30b017",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "49d8bfa2ece4be806883107bf8c00452af66b35f3a16898a53c8dbb18750faaa",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 52
+        }
+      ],
+      "reviewCardId": "d083efddba5fa4bf3acc6c16411df33cfbb6f7dbb6e1b83a341e952e05a250f0",
+      "reviewType": "ALIAS_APPROVAL",
+      "rootCause": "SOURCE_ALIAS_CCT_TO_CCTV",
+      "title": "Approve CCT to CCTV source-system alias"
+    },
+    {
+      "affectedRecordCount": 247,
+      "affectedSourceSystemKeys": [
+        "PA"
+      ],
+      "allowedDecisions": [
+        "APPROVE_ALIAS",
+        "DEFER",
+        "REJECT_ALIAS"
+      ],
+      "blockingEffect": "CANNOT_REGISTER_PA_WITHOUT_ALIAS_APPROVAL",
+      "currentDecision": "PENDING",
+      "decisionRequired": true,
+      "deterministicDigest": "ceb13def54f2275faad11adfcd5772a2f99806a789ee430c6a34c7f3cf34a0ba",
+      "evidenceReferences": [
+        {
+          "digest": "6da53d802f057618e91b95564f3abee9dab082748ea008e69a81c62c40f21fd6",
+          "evidenceId": "6f9a9a469a9ad62b5a0d1065bada2f1f9b52cfc0b8132183f1e97f826c1ed461",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "1dbd5b57a352e475431caeeef6267b79df96f97568ca6f7fb77c37e2734cdea5",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 247
+        }
+      ],
+      "reviewCardId": "faa3c5b9a5135144a4a1cc2327e3cb762e9ade9f1c5da1a2fbab4e7c6f480718",
+      "reviewType": "ALIAS_APPROVAL",
+      "rootCause": "SOURCE_ALIAS_PAS_TO_PA",
+      "title": "Approve PAS to PA source-system alias"
+    },
+    {
+      "affectedRecordCount": 14,
+      "affectedSourceSystemKeys": [
+        "TEL"
+      ],
+      "allowedDecisions": [
+        "APPROVE_NAMESPACE",
+        "DEFER",
+        "REJECT_NAMESPACE"
+      ],
+      "blockingEffect": "CANNOT_REGISTER_TEL_WITHOUT_NAMESPACE_INTERPRETATION",
+      "currentDecision": "PENDING",
+      "decisionRequired": true,
+      "deterministicDigest": "0ddf325ff9903532e6fa94cae2487159510614e8476e0bb9bff6f8f972299eb2",
+      "evidenceReferences": [
+        {
+          "digest": "0fc6173d8a353b1dd2633b44ef99afa3a4acb41c29782b58436c0cbcf3c5f1ec",
+          "evidenceId": "2bd6c4b0f26f69cec870971cbed4ac5b63872ce8907c142650d07932cfdf8321",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "63061c85fca03040577cf513e43f686ec089995ded7485c138c834680d6832c7",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 14
+        }
+      ],
+      "reviewCardId": "3e4f7f595ad869fa3e1045d1763200b1318b51c513cbe00ee0316fe05da65b79",
+      "reviewType": "NAMESPACE_INTERPRETATION",
+      "rootCause": "SOURCE_NAMESPACE_SCN_SEMANTIC_REVIEW",
+      "title": "Review SCN source namespace for TEL"
+    },
+    {
+      "affectedRecordCount": 28,
+      "affectedSourceSystemKeys": [
+        "RAS"
+      ],
+      "allowedDecisions": [
+        "APPROVE_REGISTRY",
+        "DEFER",
+        "REJECT_REGISTRY"
+      ],
+      "blockingEffect": "CANNOT_REGISTER_RAS_WITHOUT_REGISTRY_APPROVAL",
+      "currentDecision": "PENDING",
+      "decisionRequired": true,
+      "deterministicDigest": "a53dd8e1349f2179cc85a01800e9e870552507652087223f5365fcc52ba2e1b8",
+      "evidenceReferences": [
+        {
+          "digest": "cd8d0520ee8802a0a5a9b99604c26d35fefff5ca2c59738e8b6c7035bd29e40a",
+          "evidenceId": "6f36e31caf4664dc7654550df344e31ebfb0140204cfd528fd672dc869819f8d",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "1a375a7e7bab0f8b8b8d1e2f2add98d627a1c02825d3e8e16ca2e5014c293230",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 28
+        }
+      ],
+      "reviewCardId": "5ea5b556187c5bd37958e5b541b5c7a40a680fcdb0277e107b16f5927cb89261",
+      "reviewType": "REGISTRY_APPROVAL",
+      "rootCause": "EXACT_EVIDENCE_REGISTRY_APPROVAL",
+      "title": "Approve RAS source-system registry candidate"
+    },
+    {
+      "affectedRecordCount": 129,
+      "affectedSourceSystemKeys": [
+        "ACS"
+      ],
+      "allowedDecisions": [
+        "APPROVE_REGISTRY",
+        "DEFER",
+        "REJECT_REGISTRY"
+      ],
+      "blockingEffect": "CANNOT_REGISTER_ACS_WITHOUT_REGISTRY_APPROVAL",
+      "currentDecision": "PENDING",
+      "decisionRequired": true,
+      "deterministicDigest": "0e79dd45db0c435ed7640ddaede3ca3b813af6092487ee32d88c863a3ef708e0",
+      "evidenceReferences": [
+        {
+          "digest": "7f4eb268556cd7cc31608ecc9f1796df9b053039ab13e3e4d1271339d7a23dec",
+          "evidenceId": "d5460171bfa515ad3fde83fa991bd0dbccac64817b6cd3cd50f7cec016d16330",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "f2134c9995fc2c8b24603620a9df349e320afce29bc99356c3fbea5e577f1188",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 129
+        }
+      ],
+      "reviewCardId": "dc451fd8823d7804a73df1bfeaaf8fb6b16e752c135044c85c2cf2edc19e1273",
+      "reviewType": "REGISTRY_APPROVAL",
+      "rootCause": "EXACT_EVIDENCE_REGISTRY_APPROVAL",
+      "title": "Approve ACS source-system registry candidate"
+    }
+  ],
+  "summary": {
+    "activeSystemCount": 0,
+    "aggregateCustomerIdentifierCount": 0,
+    "airportSpecific": true,
+    "aliasReviewCardCount": 2,
+    "approvedSystemCount": 0,
+    "containsCustomerAssetIdentifiers": false,
+    "crossIndustry": true,
+    "databaseAccessEnabled": false,
+    "namespaceReviewCardCount": 1,
+    "pendingDecisionCount": 5,
+    "productionActivationEnabled": false,
+    "registeredSystemCount": 0,
+    "registryApprovalReviewCardCount": 2,
+    "runtimeConnectorExecutionEnabled": false,
+    "sourceSystemCandidateCount": 5,
+    "sourceSystemEvidenceBindingCount": 5,
+    "totalBoundDeviceEvidenceCount": 470
+  }
+}
