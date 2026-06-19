@@ -1,0 +1,476 @@
+{
+  "backlogName": "VANTARIS ONE Airport POC Delivery Backlog",
+  "backlogVersion": "1.0.0",
+  "authority": "ONE-AIRPORT-A0",
+  "generatedAtPolicy": "STATIC_INSPECTION_BASELINE",
+  "sequence": ["AIRPORT-A1", "AIRPORT-A2", "AIRPORT-A3", "AIRPORT-A4", "AIRPORT-A5", "AIRPORT-A6", "AIRPORT-A7", "AIRPORT-A8"],
+  "groups": [
+    {
+      "groupCode": "AIRPORT-A1",
+      "groupName": "Airport Asset/System/Location Foundation",
+      "owner": "ONE Asset Graph",
+      "summary": "Establish airport spatial vocabulary, canonical Device/Point/Tag intake at scale, and topology projection without breaking Asset Graph ownership.",
+      "items": [
+        {
+          "itemCode": "A1-001",
+          "title": "Airport/Terminal spatial extension contract",
+          "owner": "ONE Asset Graph",
+          "allowedPaths": [
+            "AN_VANTARIS_ONE/registries/",
+            "contracts/registry/",
+            "AN_VANTARIS_IBMS-backend/src/asset_graph/",
+            "AN_VANTARIS_IBMS-backend/tests/asset_graph/"
+          ],
+          "forbiddenPaths": [
+            "UFMS/",
+            "AN_VANTARIS_EDGE/",
+            "AN_VANTARIS_IBMS-frontend/src/modules/ufms/",
+            "database/migrations/"
+          ],
+          "dependencies": [],
+          "acceptanceTests": [
+            "Registry documents Airport and Terminal as extensions of Site spatial model",
+            "Validator confirms Asset Graph remains canonical owner",
+            "No UFMS or UMMS asset write paths introduced"
+          ],
+          "expectedRuntimeResult": "Contract-only spatial extension ready for mapping; no production DB writes",
+          "dbWorkRequired": false,
+          "frontendWorkRequired": false,
+          "sharedEdgeLinkInputRequired": false
+        },
+        {
+          "itemCode": "A1-002",
+          "title": "Excel airport device/point bulk intake at representative scale",
+          "owner": "ONE Asset Graph",
+          "allowedPaths": [
+            "AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/excel/",
+            "AN_VANTARIS_IBMS-backend/tests/asset_graph/",
+            "scripts/validation/"
+          ],
+          "forbiddenPaths": [
+            "AN_VANTARIS_IBMS-backend/src/Iot/",
+            "UFMS/",
+            "database/migrations/"
+          ],
+          "dependencies": ["A1-001"],
+          "acceptanceTests": [
+            "Representative multi-site package reconciles with bounded review ratio",
+            "Ephemeral read model projects Device/Point/Tag without persistence",
+            "Deterministic evidence digest across repeated runs"
+          ],
+          "expectedRuntimeResult": "Offline validated airport asset intake path for ~270k points class datasets",
+          "dbWorkRequired": false,
+          "frontendWorkRequired": false,
+          "sharedEdgeLinkInputRequired": false
+        },
+        {
+          "itemCode": "A1-003",
+          "title": "Tag cross-reference and LOCATED_IN relationship readiness",
+          "owner": "ONE Asset Graph",
+          "allowedPaths": [
+            "AN_VANTARIS_IBMS-backend/src/asset_graph/",
+            "AN_VANTARIS_IBMS-backend/tests/asset_graph/"
+          ],
+          "forbiddenPaths": [
+            "UFMS/",
+            "AN_VANTARIS_IBMS-frontend/"
+          ],
+          "dependencies": ["A1-002"],
+          "acceptanceTests": [
+            "HAS_POINT parity gate passes for airport synthetic package",
+            "Unresolved LOCATED_IN remains diagnostic-only",
+            "Cross-system tag namespace collisions reported not silently merged"
+          ],
+          "expectedRuntimeResult": "Canonical relationship projections suitable for airport topology queries",
+          "dbWorkRequired": false,
+          "frontendWorkRequired": false,
+          "sharedEdgeLinkInputRequired": false
+        }
+      ]
+    },
+    {
+      "groupCode": "AIRPORT-A2",
+      "groupName": "Source System Registry and Integration Health",
+      "owner": "ONE Integration Registry + Shared EDGE/LINK consumption",
+      "summary": "Define source-system catalog and integration health projections consuming shared EDGE/LINK — no ONE-private connector runtime.",
+      "items": [
+        {
+          "itemCode": "A2-001",
+          "title": "Source System Registry contract and read API skeleton",
+          "owner": "ONE Integration Registry",
+          "allowedPaths": [
+            "AN_VANTARIS_ONE/registries/",
+            "contracts/registry/",
+            "AN_VANTARIS_IBMS-backend/src/uedge/",
+            "AN_VANTARIS_IBMS-backend/tests/"
+          ],
+          "forbiddenPaths": [
+            "AN_VANTARIS_EDGE/src/connectors/one-private/",
+            "UFMS/",
+            "database/migrations/"
+          ],
+          "dependencies": ["A1-001"],
+          "acceptanceTests": [
+            "Registry lists BMS/EMS/CCTV/ACS/PA/Security/e-Inspection/iFeedback/MMS types",
+            "Each source system has single owner and mappingVersion binding",
+            "Read-only API returns connection status fields without DB writes"
+          ],
+          "expectedRuntimeResult": "Bounded read-only source-system catalog for airport integrations",
+          "dbWorkRequired": false,
+          "frontendWorkRequired": false,
+          "sharedEdgeLinkInputRequired": true
+        },
+        {
+          "itemCode": "A2-002",
+          "title": "Integration health projection contract",
+          "owner": "Shared EDGE/LINK (consumed by ONE)",
+          "allowedPaths": [
+            "contracts/schemas/edge-link/",
+            "AN_VANTARIS_IBMS-backend/src/uedge/",
+            "AN_VANTARIS_IBMS-backend/src/console/",
+            "scripts/validation/"
+          ],
+          "forbiddenPaths": [
+            "AN_VANTARIS_IBMS-backend/src/asset_graph/read_model/",
+            "UFMS/",
+            "database/migrations/"
+          ],
+          "dependencies": ["A2-001"],
+          "acceptanceTests": [
+            "Health payload includes heartbeat, last sync, last error, DLQ, throughput, freshness",
+            "No direct DB access from EDGE/LINK packages",
+            "Validator confirms no ONE-private EDGE/LINK duplication"
+          ],
+          "expectedRuntimeResult": "Integration health data contract consumable by UConsole projection",
+          "dbWorkRequired": false,
+          "frontendWorkRequired": false,
+          "sharedEdgeLinkInputRequired": true
+        }
+      ]
+    },
+    {
+      "groupCode": "AIRPORT-A3",
+      "groupName": "Canonical Airport Alarm/Event Intake",
+      "owner": "UFMS adapter boundary + Shared EDGE/LINK",
+      "summary": "Intake external alarms through shared EDGE/LINK into UFMS-owned canonical Alarm objects with Asset Graph resolution.",
+      "items": [
+        {
+          "itemCode": "A3-001",
+          "title": "EDGE normalized alarm to Asset Graph resolution handoff",
+          "owner": "Shared EDGE + ONE Asset Graph",
+          "allowedPaths": [
+            "contracts/schemas/edge-link/",
+            "contracts/examples/edge-link/",
+            "AN_VANTARIS_IBMS-backend/src/asset_graph/",
+            "scripts/validation/"
+          ],
+          "forbiddenPaths": [
+            "UFMS/src/",
+            "database/migrations/",
+            "AN_VANTARIS_IBMS-frontend/"
+          ],
+          "dependencies": ["A1-003", "A2-002"],
+          "acceptanceTests": [
+            "Normalized alarm example resolves to Device/Point when mapping exists",
+            "Unmapped alarms produce bounded diagnostic records",
+            "No canonical Alarm persisted in Asset Graph"
+          ],
+          "expectedRuntimeResult": "Resolution contract from external alarm to canonical asset references",
+          "dbWorkRequired": false,
+          "frontendWorkRequired": false,
+          "sharedEdgeLinkInputRequired": true
+        },
+        {
+          "itemCode": "A3-002",
+          "title": "UFMS adapter canonical Alarm intake contract",
+          "owner": "UFMS via PKG-UFMS-INTEGRATION",
+          "allowedPaths": [
+            "contracts/registry/",
+            "AN_VANTARIS_ONE/registries/",
+            "docs/architecture/"
+          ],
+          "forbiddenPaths": [
+            "AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/",
+            "database/migrations/",
+            "AN_VANTARIS_IBMS-backend/src/umms/"
+          ],
+          "dependencies": ["A3-001"],
+          "acceptanceTests": [
+            "Alarm severity/state/ack/clear/dedup fields defined in adapter contract",
+            "Synthetic alarm cannot authorize production write without real evidence path",
+            "Adapter uses /api/v1/adapters/ufms namespace only"
+          ],
+          "expectedRuntimeResult": "Contract-first canonical Alarm intake ready for UFMS runtime hookup",
+          "dbWorkRequired": false,
+          "frontendWorkRequired": false,
+          "sharedEdgeLinkInputRequired": true
+        }
+      ]
+    },
+    {
+      "groupCode": "AIRPORT-A4",
+      "groupName": "UFMS Fault Case Vertical Slice",
+      "owner": "UFMS",
+      "summary": "Implement airport POC FaultCase vertical slice from canonical Alarm through correlation to WorkOrderIntent emission.",
+      "items": [
+        {
+          "itemCode": "A4-001",
+          "title": "Alarm to FaultCase vertical slice adapter",
+          "owner": "UFMS",
+          "allowedPaths": [
+            "contracts/registry/",
+            "AN_VANTARIS_ONE/registries/",
+            "docs/architecture/",
+            "scripts/validation/"
+          ],
+          "forbiddenPaths": [
+            "AN_VANTARIS_IBMS-backend/src/asset_graph/models.py",
+            "AN_VANTARIS_IBMS-backend/src/umms/",
+            "database/migrations/"
+          ],
+          "dependencies": ["A3-002"],
+          "acceptanceTests": [
+            "Alarm creates FaultCase with priority and evidence reference",
+            "Episode/Problem correlation fields validated in contract tests",
+            "UFMS remains fault SoR — no IBMS-owned FaultCase persistence"
+          ],
+          "expectedRuntimeResult": "End-to-end contract path Alarm → FaultCase for airport POC",
+          "dbWorkRequired": true,
+          "frontendWorkRequired": false,
+          "sharedEdgeLinkInputRequired": false
+        }
+      ]
+    },
+    {
+      "groupCode": "AIRPORT-A5",
+      "groupName": "WorkOrderIntent and ONE Work Management",
+      "owner": "ONE Work Management",
+      "summary": "Consume UFMS WorkOrderIntent and expose canonical WorkOrder API — resolve UMMS mock ownership ambiguity.",
+      "items": [
+        {
+          "itemCode": "A5-001",
+          "title": "WorkOrderIntent consumer contract",
+          "owner": "ONE Work Management",
+          "allowedPaths": [
+            "contracts/registry/",
+            "AN_VANTARIS_ONE/registries/",
+            "AN_VANTARIS_IBMS-backend/src/",
+            "AN_VANTARIS_IBMS-backend/tests/"
+          ],
+          "forbiddenPaths": [
+            "AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py",
+            "UFMS/src/",
+            "database/migrations/"
+          ],
+          "dependencies": ["A4-001"],
+          "acceptanceTests": [
+            "WorkOrderIntent idempotently creates WorkOrder",
+            "UMMS does not create generic WorkOrder SoR records",
+            "/api/v1/work routes registered with governance audit"
+          ],
+          "expectedRuntimeResult": "Canonical WorkOrder created from FaultCase intent with asset/alarm/fault links",
+          "dbWorkRequired": true,
+          "frontendWorkRequired": false,
+          "sharedEdgeLinkInputRequired": false
+        },
+        {
+          "itemCode": "A5-002",
+          "title": "Asset Graph persistence cutover gate (airport subset)",
+          "owner": "ONE Asset Graph",
+          "allowedPaths": [
+            "AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/",
+            "AN_VANTARIS_ONE/registries/asset-graph-persistence-contract.v1.json",
+            "scripts/validation/"
+          ],
+          "forbiddenPaths": [
+            "UFMS/",
+            "AN_VANTARIS_IBMS-frontend/",
+            "database/migrations/"
+          ],
+          "dependencies": ["A1-003"],
+          "acceptanceTests": [
+            "Real sanitized evidence required for write authorization",
+            "Write cutover remains NOT_READY until explicit approval task",
+            "No dual-write introduced"
+          ],
+          "expectedRuntimeResult": "Persistence contract evaluated for airport asset subset without cutover",
+          "dbWorkRequired": false,
+          "frontendWorkRequired": false,
+          "sharedEdgeLinkInputRequired": false
+        }
+      ]
+    },
+    {
+      "groupCode": "AIRPORT-A6",
+      "groupName": "UMMS Corrective Maintenance and Inspection",
+      "owner": "UMMS",
+      "summary": "Execute corrective maintenance against canonical WorkOrder; add e-Inspection/iFeedback intake hooks.",
+      "items": [
+        {
+          "itemCode": "A6-001",
+          "title": "UMMS corrective maintenance linked to WorkOrder",
+          "owner": "UMMS",
+          "allowedPaths": [
+            "AN_VANTARIS_IBMS-backend/src/umms/",
+            "AN_VANTARIS_IBMS-backend/tests/",
+            "AN_VANTARIS_ONE/modules/umms/"
+          ],
+          "forbiddenPaths": [
+            "contracts/registry/canonical-objects.v1.json",
+            "AN_VANTARIS_IBMS-backend/src/api/work/",
+            "UFMS/"
+          ],
+          "dependencies": ["A5-001"],
+          "acceptanceTests": [
+            "UMMS references WorkOrder by canonical ID only",
+            "Corrective maintenance lifecycle updates do not mutate WorkOrder SoR",
+            "Evidence emission on maintenance completion"
+          ],
+          "expectedRuntimeResult": "Corrective maintenance execution slice for airport POC work orders",
+          "dbWorkRequired": true,
+          "frontendWorkRequired": true,
+          "sharedEdgeLinkInputRequired": false
+        },
+        {
+          "itemCode": "A6-002",
+          "title": "Inspection checklist intake (e-Inspection / iFeedback)",
+          "owner": "UMMS",
+          "allowedPaths": [
+            "AN_VANTARIS_IBMS-backend/src/umms/",
+            "AN_VANTARIS_ONE/modules/umms/",
+            "contracts/registry/"
+          ],
+          "forbiddenPaths": [
+            "AN_VANTARIS_EDGE/",
+            "UFMS/",
+            "database/migrations/"
+          ],
+          "dependencies": ["A6-001"],
+          "acceptanceTests": [
+            "Inspection results link to Asset and optional WorkOrder",
+            "External system type mapped in source-system registry",
+            "Read-only until maintenance dispatch enabled"
+          ],
+          "expectedRuntimeResult": "Inspection records available as maintenance evidence inputs",
+          "dbWorkRequired": true,
+          "frontendWorkRequired": true,
+          "sharedEdgeLinkInputRequired": true
+        }
+      ]
+    },
+    {
+      "groupCode": "AIRPORT-A7",
+      "groupName": "Airport UConsole Workspaces",
+      "owner": "UConsole (projection-only)",
+      "summary": "Deliver eight airport POC pages as read-only projections — no business SoR in UConsole.",
+      "items": [
+        {
+          "itemCode": "A7-001",
+          "title": "Airport Overview and Alarms/Faults pages",
+          "owner": "UConsole",
+          "allowedPaths": [
+            "AN_VANTARIS_IBMS-frontend/src/modules/console/",
+            "AN_VANTARIS_IBMS-frontend/src/router/",
+            "AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json"
+          ],
+          "forbiddenPaths": [
+            "AN_VANTARIS_IBMS-backend/src/umms/",
+            "AN_VANTARIS_IBMS-backend/src/asset_graph/",
+            "database/migrations/"
+          ],
+          "dependencies": ["A3-002", "A4-001"],
+          "acceptanceTests": [
+            "Airport Overview renders module readiness and airport KPI placeholders from APIs",
+            "Alarms & Events page reads UFMS adapter API only",
+            "Fault Cases page reads UFMS adapter API only",
+            "UConsole performs no writes to business objects"
+          ],
+          "expectedRuntimeResult": "Four new or upgraded POC pages: Overview, Integration Health, Alarms, Fault Cases",
+          "dbWorkRequired": false,
+          "frontendWorkRequired": true,
+          "sharedEdgeLinkInputRequired": false
+        },
+        {
+          "itemCode": "A7-002",
+          "title": "Upgrade partial pages to airport POC contract",
+          "owner": "UConsole",
+          "allowedPaths": [
+            "AN_VANTARIS_IBMS-frontend/src/modules/assets/",
+            "AN_VANTARIS_IBMS-frontend/src/modules/umms/",
+            "AN_VANTARIS_IBMS-frontend/src/modules/ucde/",
+            "AN_VANTARIS_IBMS-frontend/src/modules/uedge/"
+          ],
+          "forbiddenPaths": [
+            "UFMS/src/",
+            "AN_VANTARIS_EDGE/src/"
+          ],
+          "dependencies": ["A1-003", "A5-001", "A6-001"],
+          "acceptanceTests": [
+            "Assets & Topology shows airport terminal/building context when available",
+            "Maintenance Work Orders reads /api/v1/work not UMMS mock SoR",
+            "Evidence page shows fault/work-order linkages"
+          ],
+          "expectedRuntimeResult": "Remaining four POC pages meet airport acceptance layout",
+          "dbWorkRequired": false,
+          "frontendWorkRequired": true,
+          "sharedEdgeLinkInputRequired": false
+        }
+      ]
+    },
+    {
+      "groupCode": "AIRPORT-A8",
+      "groupName": "Airport Reports and Acceptance",
+      "owner": "Reports + UConsole projections",
+      "summary": "Airport KPI reports and end-to-end vertical slice acceptance validation.",
+      "items": [
+        {
+          "itemCode": "A8-001",
+          "title": "Airport KPI report catalog",
+          "owner": "Reports",
+          "allowedPaths": [
+            "AN_VANTARIS_IBMS-backend/src/reports/",
+            "AN_VANTARIS_ONE/platform/reports/",
+            "AN_VANTARIS_IBMS-frontend/src/modules/reports/"
+          ],
+          "forbiddenPaths": [
+            "UFMS/src/",
+            "database/migrations/"
+          ],
+          "dependencies": ["A7-001", "A7-002"],
+          "acceptanceTests": [
+            "Reports cover alarm counts, open faults, WO status, integration availability, unmapped tags",
+            "All reports remain projection/read-only",
+            "MTTA/MTTR defined with explicit data dependency gates"
+          ],
+          "expectedRuntimeResult": "Airport KPI report catalog queryable for POC acceptance",
+          "dbWorkRequired": false,
+          "frontendWorkRequired": true,
+          "sharedEdgeLinkInputRequired": false
+        },
+        {
+          "itemCode": "A8-002",
+          "title": "Vertical slice acceptance validator",
+          "owner": "ONE Airport Program",
+          "allowedPaths": [
+            "scripts/validation/",
+            "AN_VANTARIS_ONE/registries/"
+          ],
+          "forbiddenPaths": [
+            "AN_VANTARIS_IBMS-backend/src/Iot/",
+            "database/migrations/"
+          ],
+          "dependencies": ["A8-001"],
+          "acceptanceTests": [
+            "End-to-end synthetic airport scenario traverses T01–T09 transitions",
+            "Ownership and boundary validators pass",
+            "No write cutover performed without explicit approval"
+          ],
+          "expectedRuntimeResult": "ONE_AIRPORT_POC_VERTICAL_SLICE_ACCEPTANCE_PASS marker",
+          "dbWorkRequired": false,
+          "frontendWorkRequired": false,
+          "sharedEdgeLinkInputRequired": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,153 @@
+{
+  "verticalSliceName": "VANTARIS ONE Airport POC Vertical Slice",
+  "verticalSliceVersion": "1.0.0",
+  "authority": "ONE-AIRPORT-A0",
+  "generatedAtPolicy": "STATIC_INSPECTION_BASELINE",
+  "frozenFlow": [
+    "External Alarm/Event",
+    "Source System",
+    "Asset/Device/Point resolution",
+    "Canonical Alarm",
+    "UFMS FaultCase",
+    "WorkOrderIntent",
+    "ONE WorkOrder",
+    "UMMS Corrective Maintenance",
+    "Evidence",
+    "Dashboard and Report"
+  ],
+  "transitions": [
+    {
+      "transitionId": "T01",
+      "from": "External Alarm/Event",
+      "to": "Source System",
+      "sourceObject": "edge-normalized-alarm / raw protocol payload",
+      "targetObject": "SourceSystemContext + connector delivery record",
+      "owningModule": "Shared EDGE / Shared LINK",
+      "requiredContract": "contracts/schemas/edge-link/edge-normalized-alarm.schema.json",
+      "boundary": "EDGE connector -> LINK envelope -> ONE intake adapter",
+      "missingImplementation": "Production EDGE/LINK runtime, heartbeat, DLQ handling, source-system registry",
+      "testRequirement": "Contract validation + dry-run connector registry; integration health acceptance tests",
+      "uiRepresentation": "Systems & Integration Health (PARTIAL via /uedge/diagnostics)"
+    },
+    {
+      "transitionId": "T02",
+      "from": "Source System",
+      "to": "Asset/Device/Point resolution",
+      "sourceObject": "Normalized object with source identity and tag references",
+      "targetObject": "Canonical Device, Point, Tag with SourceIdentity",
+      "owningModule": "ONE Asset Graph",
+      "requiredContract": "device-projection-reconciliation-policy.v1.json; legacy-device-v1 mapping",
+      "boundary": "In-process reconciliation / compatibility façade (no public write API yet)",
+      "missingImplementation": "Production persistence, airport Terminal spatial model, 270k-point scale path",
+      "testRequirement": "Existing asset_graph reconciliation and ephemeral read-model tests; airport-scale soak plan",
+      "uiRepresentation": "Assets & Topology (PARTIAL via /assets/topology)"
+    },
+    {
+      "transitionId": "T03",
+      "from": "Asset/Device/Point resolution",
+      "to": "Canonical Alarm",
+      "sourceObject": "Interpreted alarm with resolved device/point global IDs",
+      "targetObject": "Alarm (UFMS-owned canonical object)",
+      "owningModule": "UFMS via PKG-UFMS-INTEGRATION adapter",
+      "requiredContract": "vantaris.ufms.v1 Alarm; /api/v1/adapters/ufms",
+      "boundary": "Adapter API/event boundary — UFMS owns alarm SoR",
+      "missingImplementation": "UFMS adapter runtime, deduplication, severity/state model, ack/clear",
+      "testRequirement": "Adapter contract tests; alarm lifecycle acceptance scenarios",
+      "uiRepresentation": "Alarms & Events (MISSING dedicated page)"
+    },
+    {
+      "transitionId": "T04",
+      "from": "Canonical Alarm",
+      "to": "UFMS FaultCase",
+      "sourceObject": "Alarm + Episode/Problem correlation context",
+      "targetObject": "FaultCase",
+      "owningModule": "UFMS",
+      "requiredContract": "vantaris.ufms.v1 FaultCase; canonical-objects.v1.json",
+      "boundary": "UFMS in-process / adapter — not IBMS-owned persistence",
+      "missingImplementation": "FaultCase runtime, correlation, priority, SLA, escalation",
+      "testRequirement": "UFMS adapter integration tests; fault case creation from alarm fixture",
+      "uiRepresentation": "Fault Cases (MISSING; planned /ufms/fault-management)"
+    },
+    {
+      "transitionId": "T05",
+      "from": "UFMS FaultCase",
+      "to": "WorkOrderIntent",
+      "sourceObject": "FaultCase with impact and assignment context",
+      "targetObject": "WorkOrderIntent",
+      "owningModule": "UFMS",
+      "requiredContract": "vantaris.ufms.v1 WorkOrderIntent",
+      "boundary": "UFMS emits intent; ONE Work Management consumes — no UMMS-owned generic WorkOrder",
+      "missingImplementation": "WorkOrderIntent emission and contract consumer",
+      "testRequirement": "Cross-module intent handoff tests; idempotency on intent creation",
+      "uiRepresentation": "Fault Cases detail panel (MISSING)"
+    },
+    {
+      "transitionId": "T06",
+      "from": "WorkOrderIntent",
+      "to": "ONE WorkOrder",
+      "sourceObject": "WorkOrderIntent",
+      "targetObject": "WorkOrder",
+      "owningModule": "ONE Work Management",
+      "requiredContract": "vantaris.work.v1 WorkOrder; /api/v1/work",
+      "boundary": "Public work API — UMMS must not own generic WorkOrder SoR",
+      "missingImplementation": "/api/v1/work Flask routes, lifecycle, SLA, asset/alarm/fault links",
+      "testRequirement": "Work management API tests; intent-to-work-order acceptance",
+      "uiRepresentation": "Maintenance Work Orders (PARTIAL — UMMS mock only)"
+    },
+    {
+      "transitionId": "T07",
+      "from": "ONE WorkOrder",
+      "to": "UMMS Corrective Maintenance",
+      "sourceObject": "WorkOrder approved for maintenance execution",
+      "targetObject": "UMMS corrective maintenance execution record",
+      "owningModule": "UMMS",
+      "requiredContract": "UMMS maintenance extension manifest; association to WorkOrder by reference",
+      "boundary": "UMMS extends maintenance — references canonical WorkOrder, does not replace SoR",
+      "missingImplementation": "Real dispatch, inspection/checklist, technician workflow, DB persistence",
+      "testRequirement": "UMMS corrective maintenance slice tests linked to WorkOrder ID",
+      "uiRepresentation": "Maintenance Work Orders (PARTIAL via /umms/maintenance)"
+    },
+    {
+      "transitionId": "T08",
+      "from": "UMMS Corrective Maintenance",
+      "to": "Evidence",
+      "sourceObject": "Maintenance action completion payload",
+      "targetObject": "EvidenceRecord with provenance and integrity hash",
+      "owningModule": "Evidence Center",
+      "requiredContract": "ucde.evidence-contract; audit-contract.v1.json",
+      "boundary": "Evidence Center SoR — governance audit binding required",
+      "missingImplementation": "Fault/work-order/event relationship wiring; durable evidence store",
+      "testRequirement": "Evidence integrity tests; maintenance-closure evidence linkage",
+      "uiRepresentation": "Evidence & Investigation (PARTIAL via /ucde/evidence)"
+    },
+    {
+      "transitionId": "T09",
+      "from": "Evidence",
+      "to": "Dashboard and Report",
+      "sourceObject": "Aggregated operational metrics and evidence-backed KPIs",
+      "targetObject": "Airport dashboard tiles and report query results",
+      "owningModule": "UConsole + Reports (projection-only)",
+      "requiredContract": "reports.catalog.spec; frontend-route-inventory",
+      "boundary": "Read-only projection — UConsole is not business SoR",
+      "missingImplementation": "Airport Overview, alarm/fault KPIs, MTTA/MTTR, integration availability metrics",
+      "testRequirement": "Report query contract tests; airport acceptance dashboard scenarios",
+      "uiRepresentation": "Airport Overview + Reports (PLACEHOLDER/PARTIAL)"
+    }
+  ],
+  "verticalSliceGaps": [
+    "No production EDGE/LINK delivery path for external BMS/EMS/CCTV alarms",
+    "No source-system registry service with vendor/type/integration metadata",
+    "Asset Graph write path and airport Terminal spatial types not production-ready",
+    "UFMS adapter and canonical Alarm/FaultCase runtime absent from IBMS",
+    "Canonical /api/v1/work not implemented; UMMS mock creates ownership confusion risk",
+    "Evidence Center not linked to fault/work-order lifecycle",
+    "Six of eight airport POC pages are MISSING, PLACEHOLDER, or PARTIAL only"
+  ],
+  "ownershipConflicts": [
+    {
+      "conflictCode": "WORKORDER_SOR_AMBIGUITY",
+      "description": "UMMS exposes mock work orders at /api/v1/umms/work-orders while canonical WorkOrder owner is ONE Work Management at /api/v1/work",
+      "resolution": "UMMS must reference canonical WorkOrder IDs only; implement /api/v1/work in AIRPORT-A5"
+    }
+  ]
+}
