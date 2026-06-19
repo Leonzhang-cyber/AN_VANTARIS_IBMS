@@ -1,0 +1,32 @@
+{
+  "profileName": "VANTARIS ONE Airport Asset Reconciliation Profile",
+  "profileVersion": "1.0.0",
+  "authority": "ONE-AIRPORT-A1-04",
+  "profileType": "INDUSTRY_PROFILE",
+  "platformScope": "CROSS_INDUSTRY_ASSET_GRAPH",
+  "implementationMode": "READ_ONLY_RECONCILIATION",
+  "platformCoreAirportized": false,
+  "canonicalWriteEnabled": false,
+  "databaseAccessEnabled": false,
+  "profileId": "airport-asset-reconciliation-v1",
+  "compatibleIntakeAuthority": "ONE-AIRPORT-A1-01",
+  "compatibleSpatialAuthority": "ONE-AIRPORT-A1-02",
+  "compatibleClassificationAuthority": "ONE-AIRPORT-A1-03",
+  "compatibleCoverageAuthority": "ONE-AIRPORT-A1-03A",
+  "forbiddenReadinessOutcomes": [
+    "READY_FOR_DATABASE_IMPORT",
+    "READY_FOR_CANONICAL_WRITE",
+    "READY_FOR_WRITE_CUTOVER"
+  ],
+  "allowedReadinessOutcomes": [
+    "RECONCILIATION_BLOCKED",
+    "RECONCILIATION_COMPLETE_WITH_REVIEWS",
+    "READY_FOR_CONTROLLED_CANONICAL_PROPOSAL_REVIEW"
+  ],
+  "implementationPaths": [
+    "AN_VANTARIS_ONE/registries/airport-asset-reconciliation-profile.v1.json",
+    "AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_reconciliation/",
+    "AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/",
+    "scripts/validation/validate-one-airport-asset-reconciliation.py"
+  ]
+}

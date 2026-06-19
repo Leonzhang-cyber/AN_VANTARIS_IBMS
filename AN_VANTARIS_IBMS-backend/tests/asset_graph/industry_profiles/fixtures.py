@@ -168,3 +168,95 @@ def classification_context_kwargs(intake_digest: str) -> dict:
         "source_workbook_digest": WORKBOOK_DIGEST,
         "expected_intake_result_digest": intake_digest,
     }
+
+
+def build_classification_bindings(devices: list[dict]) -> list[dict]:
+    bindings: list[dict] = []
+    for device in devices:
+        source_id = device["sourceId"]
+        parts = source_id.split("-")
+        embedded = parts[1] if len(parts) > 1 else ""
+        type_code = parts[4] if len(parts) > 4 else "FCT"
+        system = str(device.get("sourceSystemCode", "CCTV")).upper()
+        system_status = "ALIAS_CANDIDATE" if embedded in {"CCT", "PAS"} else "EXACT_MATCH"
+        if embedded == "SCN":
+            system_status = "REVIEW_REQUIRED"
+        binding = {
+            "deviceCandidateDigest": sha256_digest(
+                {
+                    "sourceId": source_id,
+                    "sourceWorksheet": device["sourceWorksheet"],
+                    "sourceRowNumber": device["sourceRowNumber"],
+                }
+            ),
+            "spatialBindingDigest": sha256_digest({"sourceId": source_id}),
+            "sourceSystemValue": system,
+            "sourceNamespaceCode": "SCN" if embedded == "SCN" else "",
+            "embeddedDeviceTypeCode": type_code,
+            "embeddedSystemCode": embedded,
+            "genericSystemCategory": "VIDEO_SURVEILLANCE",
+            "genericDeviceClass": "CAMERA",
+            "systemMappingStatus": system_status,
+            "deviceTypeMappingStatus": "EXACT_TYPE_MATCH",
+            "compatibilityStatus": "SYSTEM_DEVICE_COMPATIBLE",
+            "reviewReasons": ["SCN_SEMANTIC_REVIEW_REQUIRED"] if embedded == "SCN" else [],
+            "sourceWorksheet": device["sourceWorksheet"],
+            "sourceRowNumber": device["sourceRowNumber"],
+        }
+        binding["bindingDigest"] = sha256_digest({k: v for k, v in binding.items() if k not in {"bindingDigest"}})
+        bindings.append(binding)
+    return bindings
+
+
+def build_classification_summary(*, device_count: int) -> dict:
+    payload = {
+        "authority": "ONE-AIRPORT-A1-03",
+        "deviceCandidateCount": device_count,
+        "readinessOutcome": "CLASSIFICATION_COMPLETE_WITH_REVIEWS",
+        "evidenceClassifiedDeviceCount": device_count,
+        "reconciliationEligibleDeviceCount": device_count,
+        "fullyApprovedDeviceCount": 0,
+        "reviewRequiredDeviceCount": device_count,
+        "unmappedDeviceCount": 0,
+        "unclassifiedDeviceCount": 0,
+    }
+    payload["resultDigest"] = sha256_digest({k: v for k, v in payload.items() if k != "resultDigest"})
+    return payload
+
+
+def build_coverage_analysis(*, device_count: int) -> dict:
+    coverage = {
+        "totalDeviceCandidates": device_count,
+        "evidenceClassifiedDeviceCount": device_count,
+        "reconciliationEligibleDeviceCount": device_count,
+        "fullyApprovedDeviceCount": 0,
+        "reviewRequiredDeviceCount": device_count,
+        "unmappedDeviceCount": 0,
+        "unclassifiedDeviceCount": 0,
+    }
+    payload = {
+        "authority": "ONE-AIRPORT-A1-03A",
+        "containsCustomerAssetIdentifiers": False,
+        "coverage": coverage,
+    }
+    payload["resultDigest"] = sha256_digest({k: v for k, v in payload.items() if k != "resultDigest"})
+    return payload
+
+
+def build_system_classification_doc(intake_digest: str) -> dict:
+    payload = {
+        "authority": "ONE-AIRPORT-A1-03",
+        "profileId": "airport-classification-v1",
+        "readinessOutcome": "CLASSIFICATION_COMPLETE_WITH_REVIEWS",
+        "candidates": [],
+    }
+    payload["resultDigest"] = sha256_digest({k: v for k, v in payload.items() if k != "resultDigest"})
+    return payload
+
+
+def reconciliation_context_kwargs() -> dict:
+    return {
+        "tenant_id": "SYNTH-TENANT-001",
+        "site_id": "SYNTH-SITE-001",
+        "source_workbook_digest": WORKBOOK_DIGEST,
+    }
