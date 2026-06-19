@@ -1,0 +1,3725 @@
+{
+  "registryName": "VANTARIS ONE Package Route Enforcement Registry",
+  "registryVersion": "1.0.0",
+  "authority": "ONE-A5-P0-06",
+  "status": "FROZEN_FOR_PACKAGE_ENFORCEMENT_IMPLEMENTATION",
+  "generatedAtPolicy": "STATIC_ARCHITECTURE_BASELINE",
+  "enforcementPrinciples": [
+    "Menu visibility never grants API access.",
+    "Direct URL policy must equal menu policy.",
+    "Backend package enforcement is authoritative for business APIs.",
+    "installed, entitled, enabled, visible and healthy are independent.",
+    "Package registry membership alone is not runtime enforcement.",
+    "Locked packages may expose a governed lock page but no business API.",
+    "Disabled packages may expose admin diagnostics only.",
+    "Unavailable packages may expose historical and diagnostic views where safe.",
+    "Degraded packages may permit safe reads while restricting writes.",
+    "Mandatory packages still require installed and enabled runtime validation.",
+    "Package health does not automatically determine entitlement.",
+    "Optional packages require entitlement, installation and enablement.",
+    "External integration packages require compatibility and remote health checks.",
+    "Frontend fallback menus must use the same policy inputs.",
+    "Backend denial decisions must emit AuditRecord where identity is known."
+  ],
+  "packageStateSemantics": [
+    {
+      "stateId": "installed",
+      "sourceOfTruth": "Package runtime inventory",
+      "allowedTransitions": [
+        "NOT_INSTALLED_TO_INSTALLED",
+        "INSTALLED_TO_NOT_INSTALLED"
+      ],
+      "authoritativeProvider": "Governance & Security package provider",
+      "frontendUse": "Select route, lock page or installation status.",
+      "backendUse": "Deny business API when false.",
+      "auditRequired": true,
+      "failureCode": "PACKAGE_NOT_INSTALLED"
+    },
+    {
+      "stateId": "entitled",
+      "sourceOfTruth": "Tenant entitlement policy",
+      "allowedTransitions": [
+        "UNENTITLED_TO_ENTITLED",
+        "ENTITLED_TO_UNENTITLED"
+      ],
+      "authoritativeProvider": "Governance & Security entitlement provider",
+      "frontendUse": "Select authorized menu or governed lock page.",
+      "backendUse": "Deny optional-package business API when false.",
+      "auditRequired": true,
+      "failureCode": "ENTITLEMENT_REQUIRED"
+    },
+    {
+      "stateId": "enabled",
+      "sourceOfTruth": "Tenant package enablement",
+      "allowedTransitions": [
+        "DISABLED_TO_ENABLED",
+        "ENABLED_TO_DISABLED"
+      ],
+      "authoritativeProvider": "Governance & Security package provider",
+      "frontendUse": "Hide, lock, or expose governed status according to policy.",
+      "backendUse": "Deny business API when false.",
+      "auditRequired": true,
+      "failureCode": "PACKAGE_DISABLED"
+    },
+    {
+      "stateId": "visible",
+      "sourceOfTruth": "Tenant navigation policy",
+      "allowedTransitions": [
+        "HIDDEN_TO_VISIBLE",
+        "VISIBLE_TO_HIDDEN"
+      ],
+      "authoritativeProvider": "UConsole presentation policy",
+      "frontendUse": "Controls presentation only and never grants access.",
+      "backendUse": "No authorization effect.",
+      "auditRequired": true,
+      "failureCode": "PERMISSION_DENIED"
+    },
+    {
+      "stateId": "healthy",
+      "sourceOfTruth": "Package health aggregation",
+      "allowedTransitions": [
+        "ANY_DECLARED_HEALTH_TRANSITION"
+      ],
+      "authoritativeProvider": "UConsole readiness and package health provider",
+      "frontendUse": "Choose normal, degraded, unavailable, or status presentation.",
+      "backendUse": "Restrict operations according to health access semantics.",
+      "auditRequired": true,
+      "failureCode": "POLICY_UNAVAILABLE"
+    },
+    {
+      "stateId": "compatible",
+      "sourceOfTruth": "Package compatibility evaluation",
+      "allowedTransitions": [
+        "COMPATIBLE_TO_INCOMPATIBLE",
+        "INCOMPATIBLE_TO_COMPATIBLE"
+      ],
+      "authoritativeProvider": "Governance & Security compatibility provider",
+      "frontendUse": "Show compatibility state and upgrade guidance.",
+      "backendUse": "Deny writes and controls when incompatible.",
+      "auditRequired": true,
+      "failureCode": "PACKAGE_INCOMPATIBLE"
+    },
+    {
+      "stateId": "upgradeRequired",
+      "sourceOfTruth": "Version and compatibility policy",
+      "allowedTransitions": [
+        "CLEAR_TO_REQUIRED",
+        "REQUIRED_TO_CLEAR"
+      ],
+      "authoritativeProvider": "Governance & Security upgrade provider",
+      "frontendUse": "Show governed upgrade-required status.",
+      "backendUse": "Limit APIs to approved safe mode.",
+      "auditRequired": true,
+      "failureCode": "PACKAGE_INCOMPATIBLE"
+    }
+  ],
+  "healthAccessSemantics": [
+    {
+      "healthState": "HEALTHY",
+      "menuBehavior": "NORMAL_POLICY_CONTROLLED",
+      "directUrlBehavior": "ALLOW_WHEN_AUTHORIZED",
+      "readBehavior": "ALLOW",
+      "writeBehavior": "ALLOW",
+      "controlBehavior": "ALLOW",
+      "diagnosticsBehavior": "AUTHORIZED",
+      "historicalBehavior": "ALLOW",
+      "backendApiBehavior": "NORMAL_POLICY",
+      "responseCode": 200,
+      "lockOrStatusPage": "NONE",
+      "auditBehavior": "STANDARD_REQUIRED_ACTION_AUDIT"
+    },
+    {
+      "healthState": "DEGRADED",
+      "menuBehavior": "VISIBLE_WITH_DEGRADED_STATUS",
+      "directUrlBehavior": "ALLOW_SAFE_VIEW",
+      "readBehavior": "ALLOW_SAFE_READS",
+      "writeBehavior": "DENY_SELECTED_WRITES",
+      "controlBehavior": "DENY_SELECTED_CONTROLS",
+      "diagnosticsBehavior": "AUTHORIZED_DIAGNOSTICS_REMAIN_AVAILABLE",
+      "historicalBehavior": "ALLOW",
+      "backendApiBehavior": "SAFE_READ_POLICY",
+      "responseCode": 200,
+      "lockOrStatusPage": "STATUS_PAGE_OPTIONAL",
+      "auditBehavior": "DENIALS_AND_SENSITIVE_ACTIONS"
+    },
+    {
+      "healthState": "UNAVAILABLE",
+      "menuBehavior": "VISIBLE_AS_STATUS",
+      "directUrlBehavior": "STATUS_PAGE_WHEN_UNAVAILABLE",
+      "readBehavior": "HISTORICAL_OR_STATUS_ONLY",
+      "writeBehavior": "DENY",
+      "controlBehavior": "DENY",
+      "diagnosticsBehavior": "AUTHORIZED_DIAGNOSTICS",
+      "historicalBehavior": "ALLOW_WHEN_SAFE",
+      "backendApiBehavior": "BUSINESS_WRITES_DENIED",
+      "responseCode": 503,
+      "lockOrStatusPage": "STATUS_PAGE",
+      "auditBehavior": "DENIAL_REQUIRED"
+    },
+    {
+      "healthState": "DISABLED",
+      "menuBehavior": "HIDDEN_OR_ADMIN_STATUS",
+      "directUrlBehavior": "ADMIN_DIAGNOSTICS_ONLY",
+      "readBehavior": "DENY_BUSINESS_READS",
+      "writeBehavior": "DENY",
+      "controlBehavior": "DENY",
+      "diagnosticsBehavior": "ADMIN_ONLY",
+      "historicalBehavior": "ADMIN_POLICY_ONLY",
+      "backendApiBehavior": "BUSINESS_API_DENIED",
+      "responseCode": 403,
+      "lockOrStatusPage": "DISABLED_LOCK_PAGE",
+      "auditBehavior": "DENIAL_REQUIRED"
+    },
+    {
+      "healthState": "UNLICENSED",
+      "menuBehavior": "VISIBLE_AS_LOCKED_OR_HIDDEN",
+      "directUrlBehavior": "LOCK_PAGE_WHEN_UNLICENSED",
+      "readBehavior": "DENY",
+      "writeBehavior": "DENY",
+      "controlBehavior": "DENY",
+      "diagnosticsBehavior": "ENTITLEMENT_STATUS_ONLY",
+      "historicalBehavior": "DENY",
+      "backendApiBehavior": "BUSINESS_API_DENIED",
+      "responseCode": 403,
+      "lockOrStatusPage": "UNLICENSED_LOCK_PAGE",
+      "auditBehavior": "DENIAL_REQUIRED"
+    },
+    {
+      "healthState": "NOT_INSTALLED",
+      "menuBehavior": "INSTALLATION_STATUS_ONLY",
+      "directUrlBehavior": "LOCK_PAGE_WHEN_UNLICENSED",
+      "readBehavior": "DENY",
+      "writeBehavior": "DENY",
+      "controlBehavior": "DENY",
+      "diagnosticsBehavior": "ADMIN_INSTALLATION_STATUS",
+      "historicalBehavior": "DENY",
+      "backendApiBehavior": "BUSINESS_API_DENIED",
+      "responseCode": 503,
+      "lockOrStatusPage": "NOT_INSTALLED_LOCK_PAGE",
+      "auditBehavior": "DENIAL_REQUIRED"
+    },
+    {
+      "healthState": "INCOMPATIBLE",
+      "menuBehavior": "VISIBLE_WITH_COMPATIBILITY_STATUS",
+      "directUrlBehavior": "STATUS_PAGE_WHEN_UNAVAILABLE",
+      "readBehavior": "SAFE_READ_ONLY_IF_EXPLICITLY_APPROVED",
+      "writeBehavior": "DENY",
+      "controlBehavior": "DENY",
+      "diagnosticsBehavior": "AUTHORIZED",
+      "historicalBehavior": "ALLOW_WHEN_SCHEMA_COMPATIBLE",
+      "backendApiBehavior": "COMPATIBILITY_SAFE_MODE",
+      "responseCode": 503,
+      "lockOrStatusPage": "INCOMPATIBLE_LOCK_PAGE",
+      "auditBehavior": "DENIAL_REQUIRED"
+    },
+    {
+      "healthState": "UPGRADE_REQUIRED",
+      "menuBehavior": "VISIBLE_WITH_UPGRADE_STATUS",
+      "directUrlBehavior": "STATUS_PAGE_WHEN_UNAVAILABLE",
+      "readBehavior": "LIMITED_SAFE_READS",
+      "writeBehavior": "DENY_UNLESS_UPGRADE_OPERATION",
+      "controlBehavior": "UPGRADE_CONTROL_ONLY",
+      "diagnosticsBehavior": "AUTHORIZED",
+      "historicalBehavior": "ALLOW_WHEN_SAFE",
+      "backendApiBehavior": "LIMITED_SAFE_MODE",
+      "responseCode": 426,
+      "lockOrStatusPage": "UPGRADE_REQUIRED_LOCK_PAGE",
+      "auditBehavior": "DENIAL_REQUIRED"
+    }
+  ],
+  "frontendRoutePolicies": [
+    {
+      "frontendRouteId": "FROUTE-0DBBB900287A",
+      "routePath": "/reports",
+      "packageId": "PKG-REPORTS",
+      "owningModule": "Reports",
+      "targetAccessClass": "BUSINESS_ROUTE",
+      "authenticationRequired": true,
+      "requiredPermissions": [
+        "report:read"
+      ],
+      "entitlementRequired": true,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "tenantScopeRequired": true,
+      "siteScopeRequired": true,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "VISIBLE_WHEN_AUTHORIZED",
+      "lockPagePolicy": "GOVERNED_PACKAGE_LOCK_PAGE",
+      "diagnosticFallback": "AUTHORIZED_STATUS_OR_DIAGNOSTICS",
+      "backendApiPolicyReferences": [
+        "/api/v1/reports"
+      ],
+      "auditPolicy": "AUDIT_DENIALS_AND_SENSITIVE_ACTIONS",
+      "compatibilityStage": "LEGACY_COMPATIBILITY_REQUIRED",
+      "implementationStatus": "MULTIPLE_CONTROLS_REQUIRED",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "ONE-A5-P0-07",
+      "reviewReason": [],
+      "notes": [
+        "Target metadata only; frontend and backend runtime enforcement are not implemented by ONE-A5-P0-06.",
+        "Missing controls: PERMISSION_METADATA, PACKAGE_METADATA, DIRECT_URL_ENFORCEMENT, BACKEND_POLICY_DEPENDENCY"
+      ]
+    },
+    {
+      "frontendRouteId": "FROUTE-2A1386B18C7A",
+      "routePath": "/:pathMatch(.*)*",
+      "packageId": "PKG-UCONSOLE",
+      "owningModule": "UConsole",
+      "targetAccessClass": "STATUS_ROUTE",
+      "authenticationRequired": false,
+      "requiredPermissions": [],
+      "entitlementRequired": false,
+      "installedRequired": false,
+      "enabledRequired": false,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED",
+        "UNAVAILABLE",
+        "DISABLED",
+        "UNLICENSED",
+        "NOT_INSTALLED",
+        "INCOMPATIBLE",
+        "UPGRADE_REQUIRED"
+      ],
+      "tenantScopeRequired": false,
+      "siteScopeRequired": false,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "NOT_IN_LEFT_NAVIGATION",
+      "lockPagePolicy": "NOT_APPLICABLE",
+      "diagnosticFallback": "NOT_APPLICABLE",
+      "backendApiPolicyReferences": [],
+      "auditPolicy": "SECURITY_METRICS_ONLY",
+      "compatibilityStage": "PLACEHOLDER",
+      "implementationStatus": "ALREADY_COMPLIANT",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "ONE-A5-P0-07",
+      "reviewReason": [],
+      "notes": [
+        "Target metadata only; frontend and backend runtime enforcement are not implemented by ONE-A5-P0-06.",
+        "Missing controls: NONE"
+      ]
+    },
+    {
+      "frontendRouteId": "FROUTE-3F4199646E7A",
+      "routePath": "/umms/maintenance",
+      "packageId": "PKG-UMMS",
+      "owningModule": "UMMS",
+      "targetAccessClass": "BUSINESS_ROUTE",
+      "authenticationRequired": true,
+      "requiredPermissions": [
+        "maintenance:read"
+      ],
+      "entitlementRequired": true,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "tenantScopeRequired": true,
+      "siteScopeRequired": true,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "VISIBLE_WHEN_AUTHORIZED",
+      "lockPagePolicy": "GOVERNED_PACKAGE_LOCK_PAGE",
+      "diagnosticFallback": "AUTHORIZED_STATUS_OR_DIAGNOSTICS",
+      "backendApiPolicyReferences": [
+        "/api/v1/mms",
+        "/api/v1/work"
+      ],
+      "auditPolicy": "AUDIT_DENIALS_AND_SENSITIVE_ACTIONS",
+      "compatibilityStage": "LEGACY_COMPATIBILITY_REQUIRED",
+      "implementationStatus": "MULTIPLE_CONTROLS_REQUIRED",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "ONE-A5-P0-07",
+      "reviewReason": [],
+      "notes": [
+        "Target metadata only; frontend and backend runtime enforcement are not implemented by ONE-A5-P0-06.",
+        "Missing controls: PERMISSION_METADATA, PACKAGE_METADATA, DIRECT_URL_ENFORCEMENT, BACKEND_POLICY_DEPENDENCY"
+      ]
+    },
+    {
+      "frontendRouteId": "FROUTE-5490D5BA9CE6",
+      "routePath": "/login",
+      "packageId": "PKG-GOVERNANCE-SECURITY",
+      "owningModule": "Governance & Security",
+      "targetAccessClass": "PUBLIC_ROUTE",
+      "authenticationRequired": false,
+      "requiredPermissions": [],
+      "entitlementRequired": false,
+      "installedRequired": false,
+      "enabledRequired": false,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "tenantScopeRequired": false,
+      "siteScopeRequired": false,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "NOT_IN_LEFT_NAVIGATION",
+      "lockPagePolicy": "NOT_APPLICABLE",
+      "diagnosticFallback": "NOT_APPLICABLE",
+      "backendApiPolicyReferences": [],
+      "auditPolicy": "SECURITY_METRICS_ONLY",
+      "compatibilityStage": "LEGACY_COMPATIBILITY_REQUIRED",
+      "implementationStatus": "ALREADY_COMPLIANT",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "ONE-A5-P0-07",
+      "reviewReason": [],
+      "notes": [
+        "Target metadata only; frontend and backend runtime enforcement are not implemented by ONE-A5-P0-06.",
+        "Missing controls: NONE"
+      ]
+    },
+    {
+      "frontendRouteId": "FROUTE-58045144902E",
+      "routePath": "/console/operations",
+      "packageId": "PKG-UCONSOLE",
+      "owningModule": "UConsole",
+      "targetAccessClass": "BUSINESS_ROUTE",
+      "authenticationRequired": true,
+      "requiredPermissions": [
+        "platform:read"
+      ],
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "tenantScopeRequired": true,
+      "siteScopeRequired": false,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "VISIBLE_WHEN_AUTHORIZED",
+      "lockPagePolicy": "GOVERNED_PACKAGE_LOCK_PAGE",
+      "diagnosticFallback": "AUTHORIZED_STATUS_OR_DIAGNOSTICS",
+      "backendApiPolicyReferences": [
+        "/api/v1/console",
+        "/api/v1/packages",
+        "/api/v1/health"
+      ],
+      "auditPolicy": "AUDIT_DENIALS_AND_SENSITIVE_ACTIONS",
+      "compatibilityStage": "LEGACY_COMPATIBILITY_REQUIRED",
+      "implementationStatus": "MULTIPLE_CONTROLS_REQUIRED",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "ONE-A5-P0-07",
+      "reviewReason": [],
+      "notes": [
+        "Target metadata only; frontend and backend runtime enforcement are not implemented by ONE-A5-P0-06.",
+        "Missing controls: PERMISSION_METADATA, PACKAGE_METADATA, DIRECT_URL_ENFORCEMENT, BACKEND_POLICY_DEPENDENCY"
+      ]
+    },
+    {
+      "frontendRouteId": "FROUTE-5B91B631064D",
+      "routePath": "/uedge/setup",
+      "packageId": "PKG-EDGE",
+      "owningModule": "AN_VANTARIS_EDGE",
+      "targetAccessClass": "BUSINESS_ROUTE",
+      "authenticationRequired": true,
+      "requiredPermissions": [
+        "edge:read"
+      ],
+      "entitlementRequired": true,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "tenantScopeRequired": true,
+      "siteScopeRequired": true,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "VISIBLE_WHEN_AUTHORIZED",
+      "lockPagePolicy": "GOVERNED_PACKAGE_LOCK_PAGE",
+      "diagnosticFallback": "AUTHORIZED_STATUS_OR_DIAGNOSTICS",
+      "backendApiPolicyReferences": [
+        "/api/v1/edge",
+        "/api/v1/health"
+      ],
+      "auditPolicy": "AUDIT_DENIALS_AND_SENSITIVE_ACTIONS",
+      "compatibilityStage": "LEGACY_COMPATIBILITY_REQUIRED",
+      "implementationStatus": "MULTIPLE_CONTROLS_REQUIRED",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "ONE-A5-P0-07",
+      "reviewReason": [],
+      "notes": [
+        "Target metadata only; frontend and backend runtime enforcement are not implemented by ONE-A5-P0-06.",
+        "Missing controls: PERMISSION_METADATA, PACKAGE_METADATA, DIRECT_URL_ENFORCEMENT, BACKEND_POLICY_DEPENDENCY"
+      ]
+    },
+    {
+      "frontendRouteId": "FROUTE-618A7E8141AF",
+      "routePath": "/uesg/sustainability",
+      "packageId": "PKG-UESG",
+      "owningModule": "UESG",
+      "targetAccessClass": "BUSINESS_ROUTE",
+      "authenticationRequired": true,
+      "requiredPermissions": [
+        "esg:read"
+      ],
+      "entitlementRequired": true,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "tenantScopeRequired": true,
+      "siteScopeRequired": true,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "VISIBLE_WHEN_AUTHORIZED",
+      "lockPagePolicy": "GOVERNED_PACKAGE_LOCK_PAGE",
+      "diagnosticFallback": "AUTHORIZED_STATUS_OR_DIAGNOSTICS",
+      "backendApiPolicyReferences": [
+        "/api/v1/esg"
+      ],
+      "auditPolicy": "AUDIT_DENIALS_AND_SENSITIVE_ACTIONS",
+      "compatibilityStage": "LEGACY_COMPATIBILITY_REQUIRED",
+      "implementationStatus": "MULTIPLE_CONTROLS_REQUIRED",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "ONE-A5-P0-07",
+      "reviewReason": [],
+      "notes": [
+        "Target metadata only; frontend and backend runtime enforcement are not implemented by ONE-A5-P0-06.",
+        "Missing controls: PERMISSION_METADATA, PACKAGE_METADATA, DIRECT_URL_ENFORCEMENT, BACKEND_POLICY_DEPENDENCY"
+      ]
+    },
+    {
+      "frontendRouteId": "FROUTE-732E195CD604",
+      "routePath": "/",
+      "packageId": "PKG-UCONSOLE",
+      "owningModule": "UConsole",
+      "targetAccessClass": "STATUS_ROUTE",
+      "authenticationRequired": false,
+      "requiredPermissions": [],
+      "entitlementRequired": false,
+      "installedRequired": false,
+      "enabledRequired": false,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED",
+        "UNAVAILABLE",
+        "DISABLED",
+        "UNLICENSED",
+        "NOT_INSTALLED",
+        "INCOMPATIBLE",
+        "UPGRADE_REQUIRED"
+      ],
+      "tenantScopeRequired": false,
+      "siteScopeRequired": false,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "NOT_IN_LEFT_NAVIGATION",
+      "lockPagePolicy": "NOT_APPLICABLE",
+      "diagnosticFallback": "NOT_APPLICABLE",
+      "backendApiPolicyReferences": [],
+      "auditPolicy": "SECURITY_METRICS_ONLY",
+      "compatibilityStage": "PLACEHOLDER",
+      "implementationStatus": "ALREADY_COMPLIANT",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "ONE-A5-P0-07",
+      "reviewReason": [],
+      "notes": [
+        "Target metadata only; frontend and backend runtime enforcement are not implemented by ONE-A5-P0-06.",
+        "Missing controls: NONE"
+      ]
+    },
+    {
+      "frontendRouteId": "FROUTE-74571E87F28B",
+      "routePath": "/uedge/diagnostics",
+      "packageId": "PKG-EDGE",
+      "owningModule": "AN_VANTARIS_EDGE",
+      "targetAccessClass": "DIAGNOSTIC_ROUTE",
+      "authenticationRequired": true,
+      "requiredPermissions": [
+        "edge:diagnose"
+      ],
+      "entitlementRequired": true,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED",
+        "UNAVAILABLE",
+        "DISABLED",
+        "UNLICENSED",
+        "NOT_INSTALLED",
+        "INCOMPATIBLE",
+        "UPGRADE_REQUIRED"
+      ],
+      "tenantScopeRequired": true,
+      "siteScopeRequired": true,
+      "directUrlPolicy": "ADMIN_DIAGNOSTICS_ONLY",
+      "menuPolicy": "VISIBLE_FOR_DIAGNOSTICS",
+      "lockPagePolicy": "GOVERNED_PACKAGE_LOCK_PAGE",
+      "diagnosticFallback": "AUTHORIZED_STATUS_OR_DIAGNOSTICS",
+      "backendApiPolicyReferences": [
+        "/api/v1/edge",
+        "/api/v1/health"
+      ],
+      "auditPolicy": "AUDIT_DENIALS_AND_SENSITIVE_ACTIONS",
+      "compatibilityStage": "LEGACY_COMPATIBILITY_REQUIRED",
+      "implementationStatus": "MULTIPLE_CONTROLS_REQUIRED",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "ONE-A5-P0-07",
+      "reviewReason": [],
+      "notes": [
+        "Target metadata only; frontend and backend runtime enforcement are not implemented by ONE-A5-P0-06.",
+        "Missing controls: PERMISSION_METADATA, PACKAGE_METADATA, DIRECT_URL_ENFORCEMENT, BACKEND_POLICY_DEPENDENCY"
+      ]
+    },
+    {
+      "frontendRouteId": "FROUTE-88546A365FF2",
+      "routePath": "/system/notification-settings",
+      "packageId": "PKG-UCORE",
+      "owningModule": "UCore",
+      "targetAccessClass": "ADMIN_ROUTE",
+      "authenticationRequired": true,
+      "requiredPermissions": [
+        "context:read"
+      ],
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "tenantScopeRequired": true,
+      "siteScopeRequired": true,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "VISIBLE_WHEN_AUTHORIZED",
+      "lockPagePolicy": "GOVERNED_PACKAGE_LOCK_PAGE",
+      "diagnosticFallback": "AUTHORIZED_STATUS_OR_DIAGNOSTICS",
+      "backendApiPolicyReferences": [
+        "/api/v1/context",
+        "/api/v1/packages"
+      ],
+      "auditPolicy": "AUDIT_DENIALS_AND_SENSITIVE_ACTIONS",
+      "compatibilityStage": "LEGACY_COMPATIBILITY_REQUIRED",
+      "implementationStatus": "MULTIPLE_CONTROLS_REQUIRED",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "ONE-A5-P0-07",
+      "reviewReason": [],
+      "notes": [
+        "Target metadata only; frontend and backend runtime enforcement are not implemented by ONE-A5-P0-06.",
+        "Missing controls: PACKAGE_METADATA, DIRECT_URL_ENFORCEMENT, BACKEND_POLICY_DEPENDENCY"
+      ]
+    },
+    {
+      "frontendRouteId": "FROUTE-8881919B5A77",
+      "routePath": "/assets/topology",
+      "packageId": "PKG-ASSET-GRAPH",
+      "owningModule": "ONE Asset Graph",
+      "targetAccessClass": "BUSINESS_ROUTE",
+      "authenticationRequired": true,
+      "requiredPermissions": [
+        "asset:read"
+      ],
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "tenantScopeRequired": true,
+      "siteScopeRequired": true,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "VISIBLE_WHEN_AUTHORIZED",
+      "lockPagePolicy": "GOVERNED_PACKAGE_LOCK_PAGE",
+      "diagnosticFallback": "AUTHORIZED_STATUS_OR_DIAGNOSTICS",
+      "backendApiPolicyReferences": [
+        "/api/v1/assets"
+      ],
+      "auditPolicy": "AUDIT_DENIALS_AND_SENSITIVE_ACTIONS",
+      "compatibilityStage": "LEGACY_COMPATIBILITY_REQUIRED",
+      "implementationStatus": "MULTIPLE_CONTROLS_REQUIRED",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "ONE-A5-P0-07",
+      "reviewReason": [],
+      "notes": [
+        "Target metadata only; frontend and backend runtime enforcement are not implemented by ONE-A5-P0-06.",
+        "Missing controls: PERMISSION_METADATA, PACKAGE_METADATA, DIRECT_URL_ENFORCEMENT, BACKEND_POLICY_DEPENDENCY"
+      ]
+    },
+    {
+      "frontendRouteId": "FROUTE-8D83C9D893E7",
+      "routePath": "/ucde/evidence",
+      "packageId": "PKG-EVIDENCE-CENTER",
+      "owningModule": "Evidence Center",
+      "targetAccessClass": "BUSINESS_ROUTE",
+      "authenticationRequired": true,
+      "requiredPermissions": [
+        "evidence:read"
+      ],
+      "entitlementRequired": true,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "tenantScopeRequired": true,
+      "siteScopeRequired": true,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "VISIBLE_WHEN_AUTHORIZED",
+      "lockPagePolicy": "GOVERNED_PACKAGE_LOCK_PAGE",
+      "diagnosticFallback": "AUTHORIZED_STATUS_OR_DIAGNOSTICS",
+      "backendApiPolicyReferences": [
+        "/api/v1/evidence"
+      ],
+      "auditPolicy": "AUDIT_DENIALS_AND_SENSITIVE_ACTIONS",
+      "compatibilityStage": "LEGACY_COMPATIBILITY_REQUIRED",
+      "implementationStatus": "MULTIPLE_CONTROLS_REQUIRED",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "ONE-A5-P0-07",
+      "reviewReason": [],
+      "notes": [
+        "Target metadata only; frontend and backend runtime enforcement are not implemented by ONE-A5-P0-06.",
+        "Missing controls: PERMISSION_METADATA, PACKAGE_METADATA, DIRECT_URL_ENFORCEMENT, BACKEND_POLICY_DEPENDENCY"
+      ]
+    },
+    {
+      "frontendRouteId": "FROUTE-9794B46A5219",
+      "routePath": "/iot",
+      "packageId": "PKG-ASSET-GRAPH",
+      "owningModule": "ONE Asset Graph",
+      "targetAccessClass": "BUSINESS_ROUTE",
+      "authenticationRequired": true,
+      "requiredPermissions": [
+        "asset:read"
+      ],
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "tenantScopeRequired": true,
+      "siteScopeRequired": true,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "VISIBLE_WHEN_AUTHORIZED",
+      "lockPagePolicy": "GOVERNED_PACKAGE_LOCK_PAGE",
+      "diagnosticFallback": "AUTHORIZED_STATUS_OR_DIAGNOSTICS",
+      "backendApiPolicyReferences": [
+        "/api/v1/assets",
+        "/api/v1/integration"
+      ],
+      "auditPolicy": "AUDIT_DENIALS_AND_SENSITIVE_ACTIONS",
+      "compatibilityStage": "PLACEHOLDER",
+      "implementationStatus": "MULTIPLE_CONTROLS_REQUIRED",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "ONE-A5-P0-07",
+      "reviewReason": [],
+      "notes": [
+        "Target metadata only; frontend and backend runtime enforcement are not implemented by ONE-A5-P0-06.",
+        "Missing controls: PERMISSION_METADATA, PACKAGE_METADATA, DIRECT_URL_ENFORCEMENT, BACKEND_POLICY_DEPENDENCY"
+      ]
+    },
+    {
+      "frontendRouteId": "FROUTE-A2842138F079",
+      "routePath": "/system/settings",
+      "packageId": "PKG-UCORE",
+      "owningModule": "UCore",
+      "targetAccessClass": "ADMIN_ROUTE",
+      "authenticationRequired": true,
+      "requiredPermissions": [
+        "context:read"
+      ],
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "tenantScopeRequired": true,
+      "siteScopeRequired": true,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "VISIBLE_WHEN_AUTHORIZED",
+      "lockPagePolicy": "GOVERNED_PACKAGE_LOCK_PAGE",
+      "diagnosticFallback": "AUTHORIZED_STATUS_OR_DIAGNOSTICS",
+      "backendApiPolicyReferences": [
+        "/api/v1/context",
+        "/api/v1/packages"
+      ],
+      "auditPolicy": "AUDIT_DENIALS_AND_SENSITIVE_ACTIONS",
+      "compatibilityStage": "LEGACY_COMPATIBILITY_REQUIRED",
+      "implementationStatus": "MULTIPLE_CONTROLS_REQUIRED",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "ONE-A5-P0-07",
+      "reviewReason": [],
+      "notes": [
+        "Target metadata only; frontend and backend runtime enforcement are not implemented by ONE-A5-P0-06.",
+        "Missing controls: PACKAGE_METADATA, DIRECT_URL_ENFORCEMENT, BACKEND_POLICY_DEPENDENCY"
+      ]
+    },
+    {
+      "frontendRouteId": "FROUTE-A77240D62B73",
+      "routePath": "/system/audit-logs",
+      "packageId": "PKG-GOVERNANCE-SECURITY",
+      "owningModule": "Governance & Security",
+      "targetAccessClass": "ADMIN_ROUTE",
+      "authenticationRequired": true,
+      "requiredPermissions": [
+        "audit:read"
+      ],
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "tenantScopeRequired": true,
+      "siteScopeRequired": false,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "VISIBLE_WHEN_AUTHORIZED",
+      "lockPagePolicy": "GOVERNED_PACKAGE_LOCK_PAGE",
+      "diagnosticFallback": "AUTHORIZED_STATUS_OR_DIAGNOSTICS",
+      "backendApiPolicyReferences": [
+        "/api/v1/audit"
+      ],
+      "auditPolicy": "AUDIT_DENIALS_AND_SENSITIVE_ACTIONS",
+      "compatibilityStage": "LEGACY_COMPATIBILITY_REQUIRED",
+      "implementationStatus": "MULTIPLE_CONTROLS_REQUIRED",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "ONE-A5-P0-07",
+      "reviewReason": [],
+      "notes": [
+        "Target metadata only; frontend and backend runtime enforcement are not implemented by ONE-A5-P0-06.",
+        "Missing controls: PACKAGE_METADATA, DIRECT_URL_ENFORCEMENT, BACKEND_POLICY_DEPENDENCY"
+      ]
+    },
+    {
+      "frontendRouteId": "FROUTE-A89E66839FAA",
+      "routePath": "/system/integration-settings",
+      "packageId": "PKG-UNIFIED-DATA-MODEL",
+      "owningModule": "Integration Governance",
+      "targetAccessClass": "ADMIN_ROUTE",
+      "authenticationRequired": true,
+      "requiredPermissions": [
+        "integration:configure"
+      ],
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "tenantScopeRequired": true,
+      "siteScopeRequired": true,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "VISIBLE_WHEN_AUTHORIZED",
+      "lockPagePolicy": "GOVERNED_PACKAGE_LOCK_PAGE",
+      "diagnosticFallback": "AUTHORIZED_STATUS_OR_DIAGNOSTICS",
+      "backendApiPolicyReferences": [
+        "/api/v1/integration"
+      ],
+      "auditPolicy": "AUDIT_DENIALS_AND_SENSITIVE_ACTIONS",
+      "compatibilityStage": "LEGACY_COMPATIBILITY_REQUIRED",
+      "implementationStatus": "MULTIPLE_CONTROLS_REQUIRED",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "ONE-A5-P0-07",
+      "reviewReason": [],
+      "notes": [
+        "Target metadata only; frontend and backend runtime enforcement are not implemented by ONE-A5-P0-06.",
+        "Missing controls: PACKAGE_METADATA, DIRECT_URL_ENFORCEMENT, BACKEND_POLICY_DEPENDENCY"
+      ]
+    },
+    {
+      "frontendRouteId": "FROUTE-A926AD8DB3CF",
+      "routePath": "/system",
+      "packageId": "PKG-UCORE",
+      "owningModule": "UCore",
+      "targetAccessClass": "ADMIN_ROUTE",
+      "authenticationRequired": true,
+      "requiredPermissions": [
+        "context:read"
+      ],
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "tenantScopeRequired": true,
+      "siteScopeRequired": true,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "VISIBLE_WHEN_AUTHORIZED",
+      "lockPagePolicy": "GOVERNED_PACKAGE_LOCK_PAGE",
+      "diagnosticFallback": "AUTHORIZED_STATUS_OR_DIAGNOSTICS",
+      "backendApiPolicyReferences": [
+        "/api/v1/context",
+        "/api/v1/packages"
+      ],
+      "auditPolicy": "AUDIT_DENIALS_AND_SENSITIVE_ACTIONS",
+      "compatibilityStage": "LEGACY_COMPATIBILITY_REQUIRED",
+      "implementationStatus": "MULTIPLE_CONTROLS_REQUIRED",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "ONE-A5-P0-07",
+      "reviewReason": [],
+      "notes": [
+        "Target metadata only; frontend and backend runtime enforcement are not implemented by ONE-A5-P0-06.",
+        "Missing controls: PACKAGE_METADATA, DIRECT_URL_ENFORCEMENT, BACKEND_POLICY_DEPENDENCY"
+      ]
+    },
+    {
+      "frontendRouteId": "FROUTE-BBEE7F90DDB4",
+      "routePath": "/system/permissions",
+      "packageId": "PKG-GOVERNANCE-SECURITY",
+      "owningModule": "Governance & Security",
+      "targetAccessClass": "ADMIN_ROUTE",
+      "authenticationRequired": true,
+      "requiredPermissions": [
+        "security:admin"
+      ],
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "tenantScopeRequired": true,
+      "siteScopeRequired": false,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "VISIBLE_WHEN_AUTHORIZED",
+      "lockPagePolicy": "GOVERNED_PACKAGE_LOCK_PAGE",
+      "diagnosticFallback": "AUTHORIZED_STATUS_OR_DIAGNOSTICS",
+      "backendApiPolicyReferences": [
+        "/api/v1/security"
+      ],
+      "auditPolicy": "AUDIT_DENIALS_AND_SENSITIVE_ACTIONS",
+      "compatibilityStage": "LEGACY_COMPATIBILITY_REQUIRED",
+      "implementationStatus": "MULTIPLE_CONTROLS_REQUIRED",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "ONE-A5-P0-07",
+      "reviewReason": [],
+      "notes": [
+        "Target metadata only; frontend and backend runtime enforcement are not implemented by ONE-A5-P0-06.",
+        "Missing controls: PACKAGE_METADATA, DIRECT_URL_ENFORCEMENT, BACKEND_POLICY_DEPENDENCY"
+      ]
+    },
+    {
+      "frontendRouteId": "FROUTE-C610388B9C44",
+      "routePath": "/forbidden",
+      "packageId": "PKG-UCONSOLE",
+      "owningModule": "UConsole",
+      "targetAccessClass": "STATUS_ROUTE",
+      "authenticationRequired": false,
+      "requiredPermissions": [],
+      "entitlementRequired": false,
+      "installedRequired": false,
+      "enabledRequired": false,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED",
+        "UNAVAILABLE",
+        "DISABLED",
+        "UNLICENSED",
+        "NOT_INSTALLED",
+        "INCOMPATIBLE",
+        "UPGRADE_REQUIRED"
+      ],
+      "tenantScopeRequired": false,
+      "siteScopeRequired": false,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "NOT_IN_LEFT_NAVIGATION",
+      "lockPagePolicy": "NOT_APPLICABLE",
+      "diagnosticFallback": "NOT_APPLICABLE",
+      "backendApiPolicyReferences": [],
+      "auditPolicy": "SECURITY_METRICS_ONLY",
+      "compatibilityStage": "PLACEHOLDER",
+      "implementationStatus": "ALREADY_COMPLIANT",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "ONE-A5-P0-07",
+      "reviewReason": [],
+      "notes": [
+        "Target metadata only; frontend and backend runtime enforcement are not implemented by ONE-A5-P0-06.",
+        "Missing controls: NONE"
+      ]
+    },
+    {
+      "frontendRouteId": "FROUTE-D0DBC5F0D5E1",
+      "routePath": "/403",
+      "packageId": "PKG-UCONSOLE",
+      "owningModule": "UConsole",
+      "targetAccessClass": "STATUS_ROUTE",
+      "authenticationRequired": false,
+      "requiredPermissions": [],
+      "entitlementRequired": false,
+      "installedRequired": false,
+      "enabledRequired": false,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED",
+        "UNAVAILABLE",
+        "DISABLED",
+        "UNLICENSED",
+        "NOT_INSTALLED",
+        "INCOMPATIBLE",
+        "UPGRADE_REQUIRED"
+      ],
+      "tenantScopeRequired": false,
+      "siteScopeRequired": false,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "NOT_IN_LEFT_NAVIGATION",
+      "lockPagePolicy": "NOT_APPLICABLE",
+      "diagnosticFallback": "NOT_APPLICABLE",
+      "backendApiPolicyReferences": [],
+      "auditPolicy": "SECURITY_METRICS_ONLY",
+      "compatibilityStage": "PLACEHOLDER",
+      "implementationStatus": "ALREADY_COMPLIANT",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "ONE-A5-P0-07",
+      "reviewReason": [],
+      "notes": [
+        "Target metadata only; frontend and backend runtime enforcement are not implemented by ONE-A5-P0-06.",
+        "Missing controls: NONE"
+      ]
+    },
+    {
+      "frontendRouteId": "FROUTE-D27D69D3F9AC",
+      "routePath": "/modeling",
+      "packageId": "PKG-NEXUS-AI",
+      "owningModule": "Nexus AI",
+      "targetAccessClass": "BUSINESS_ROUTE",
+      "authenticationRequired": true,
+      "requiredPermissions": [
+        "ai:use"
+      ],
+      "entitlementRequired": true,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": true,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "tenantScopeRequired": true,
+      "siteScopeRequired": true,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "VISIBLE_WHEN_AUTHORIZED",
+      "lockPagePolicy": "GOVERNED_PACKAGE_LOCK_PAGE",
+      "diagnosticFallback": "AUTHORIZED_STATUS_OR_DIAGNOSTICS",
+      "backendApiPolicyReferences": [
+        "/api/v1/ai",
+        "/api/v1/models"
+      ],
+      "auditPolicy": "AUDIT_DENIALS_AND_SENSITIVE_ACTIONS",
+      "compatibilityStage": "PLACEHOLDER",
+      "implementationStatus": "MULTIPLE_CONTROLS_REQUIRED",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "ONE-A5-P0-07",
+      "reviewReason": [],
+      "notes": [
+        "Target metadata only; frontend and backend runtime enforcement are not implemented by ONE-A5-P0-06.",
+        "Missing controls: PERMISSION_METADATA, PACKAGE_METADATA, DIRECT_URL_ENFORCEMENT, BACKEND_POLICY_DEPENDENCY"
+      ]
+    },
+    {
+      "frontendRouteId": "FROUTE-F31B3DD8DBB4",
+      "routePath": "/did",
+      "packageId": "PKG-GOVERNANCE-SECURITY",
+      "owningModule": "Governance & Security",
+      "targetAccessClass": "BUSINESS_ROUTE",
+      "authenticationRequired": true,
+      "requiredPermissions": [
+        "security:read"
+      ],
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "tenantScopeRequired": true,
+      "siteScopeRequired": false,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "VISIBLE_WHEN_AUTHORIZED",
+      "lockPagePolicy": "GOVERNED_PACKAGE_LOCK_PAGE",
+      "diagnosticFallback": "AUTHORIZED_STATUS_OR_DIAGNOSTICS",
+      "backendApiPolicyReferences": [
+        "/api/v1/security",
+        "/api/v1/trust"
+      ],
+      "auditPolicy": "AUDIT_DENIALS_AND_SENSITIVE_ACTIONS",
+      "compatibilityStage": "PLACEHOLDER",
+      "implementationStatus": "MULTIPLE_CONTROLS_REQUIRED",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "ONE-A5-P0-07",
+      "reviewReason": [],
+      "notes": [
+        "Target metadata only; frontend and backend runtime enforcement are not implemented by ONE-A5-P0-06.",
+        "Missing controls: PERMISSION_METADATA, PACKAGE_METADATA, DIRECT_URL_ENFORCEMENT, BACKEND_POLICY_DEPENDENCY"
+      ]
+    },
+    {
+      "frontendRouteId": "FROUTE-F6205A5DF1D3",
+      "routePath": "/dashboard",
+      "packageId": "PKG-UCONSOLE",
+      "owningModule": "UConsole",
+      "targetAccessClass": "BUSINESS_ROUTE",
+      "authenticationRequired": true,
+      "requiredPermissions": [
+        "platform:read"
+      ],
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "tenantScopeRequired": true,
+      "siteScopeRequired": false,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "VISIBLE_WHEN_AUTHORIZED",
+      "lockPagePolicy": "GOVERNED_PACKAGE_LOCK_PAGE",
+      "diagnosticFallback": "AUTHORIZED_STATUS_OR_DIAGNOSTICS",
+      "backendApiPolicyReferences": [
+        "/api/v1/console"
+      ],
+      "auditPolicy": "AUDIT_DENIALS_AND_SENSITIVE_ACTIONS",
+      "compatibilityStage": "PLACEHOLDER",
+      "implementationStatus": "MULTIPLE_CONTROLS_REQUIRED",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "ONE-A5-P0-07",
+      "reviewReason": [],
+      "notes": [
+        "Target metadata only; frontend and backend runtime enforcement are not implemented by ONE-A5-P0-06.",
+        "Missing controls: PERMISSION_METADATA, PACKAGE_METADATA, DIRECT_URL_ENFORCEMENT, BACKEND_POLICY_DEPENDENCY"
+      ]
+    }
+  ],
+  "backendNamespacePolicies": [
+    {
+      "namespace": "/api/v1/adapters/ufms",
+      "packageId": "PKG-UFMS-INTEGRATION",
+      "owningModule": "PKG-UFMS-INTEGRATION",
+      "businessApi": true,
+      "entitlementRequired": true,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": true,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "diagnosticOnlyOperations": [],
+      "publicOperations": [],
+      "denialCodes": [
+        "ENTITLEMENT_REQUIRED",
+        "PACKAGE_NOT_INSTALLED",
+        "PACKAGE_DISABLED",
+        "PACKAGE_INCOMPATIBLE"
+      ],
+      "auditRequired": true,
+      "backendGuardRequired": true,
+      "serviceIdentityAllowed": false,
+      "currentRuntimeState": "TARGET_NAMESPACE",
+      "implementationStatus": "RUNTIME_ENFORCEMENT_REQUIRED"
+    },
+    {
+      "namespace": "/api/v1/ai",
+      "packageId": "PKG-NEXUS-AI",
+      "owningModule": "Nexus AI",
+      "businessApi": true,
+      "entitlementRequired": true,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": true,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "diagnosticOnlyOperations": [],
+      "publicOperations": [],
+      "denialCodes": [
+        "ENTITLEMENT_REQUIRED",
+        "PACKAGE_NOT_INSTALLED",
+        "PACKAGE_DISABLED",
+        "PACKAGE_INCOMPATIBLE"
+      ],
+      "auditRequired": true,
+      "backendGuardRequired": true,
+      "serviceIdentityAllowed": true,
+      "currentRuntimeState": "TARGET_NAMESPACE",
+      "implementationStatus": "RUNTIME_ENFORCEMENT_REQUIRED"
+    },
+    {
+      "namespace": "/api/v1/analytics",
+      "packageId": "PKG-ANALYTICS",
+      "owningModule": "Analytics",
+      "businessApi": true,
+      "entitlementRequired": true,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "diagnosticOnlyOperations": [],
+      "publicOperations": [],
+      "denialCodes": [
+        "ENTITLEMENT_REQUIRED",
+        "PACKAGE_NOT_INSTALLED",
+        "PACKAGE_DISABLED",
+        "PACKAGE_INCOMPATIBLE"
+      ],
+      "auditRequired": true,
+      "backendGuardRequired": true,
+      "serviceIdentityAllowed": false,
+      "currentRuntimeState": "TARGET_NAMESPACE",
+      "implementationStatus": "RUNTIME_ENFORCEMENT_REQUIRED"
+    },
+    {
+      "namespace": "/api/v1/assets",
+      "packageId": "PKG-ASSET-GRAPH",
+      "owningModule": "ONE Asset Graph",
+      "businessApi": true,
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "diagnosticOnlyOperations": [],
+      "publicOperations": [],
+      "denialCodes": [
+        "ENTITLEMENT_REQUIRED",
+        "PACKAGE_NOT_INSTALLED",
+        "PACKAGE_DISABLED",
+        "PACKAGE_INCOMPATIBLE"
+      ],
+      "auditRequired": true,
+      "backendGuardRequired": true,
+      "serviceIdentityAllowed": true,
+      "currentRuntimeState": "TARGET_NAMESPACE",
+      "implementationStatus": "RUNTIME_ENFORCEMENT_REQUIRED"
+    },
+    {
+      "namespace": "/api/v1/audit",
+      "packageId": "PKG-GOVERNANCE-SECURITY",
+      "owningModule": "Governance & Security",
+      "businessApi": true,
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "diagnosticOnlyOperations": [
+        "ROUTE-GET-7F0F9D7037CB",
+        "ROUTE-GET-B60A1DD89375"
+      ],
+      "publicOperations": [
+        "ROUTE-GET-B5979853FC22",
+        "ROUTE-POST-FBB45557ACEE"
+      ],
+      "denialCodes": [
+        "ENTITLEMENT_REQUIRED",
+        "PACKAGE_NOT_INSTALLED",
+        "PACKAGE_DISABLED",
+        "PACKAGE_INCOMPATIBLE"
+      ],
+      "auditRequired": true,
+      "backendGuardRequired": true,
+      "serviceIdentityAllowed": true,
+      "currentRuntimeState": "TARGET_NAMESPACE",
+      "implementationStatus": "RUNTIME_ENFORCEMENT_REQUIRED"
+    },
+    {
+      "namespace": "/api/v1/cde",
+      "packageId": "PKG-UCDE",
+      "owningModule": "UCDE",
+      "businessApi": true,
+      "entitlementRequired": true,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "diagnosticOnlyOperations": [],
+      "publicOperations": [],
+      "denialCodes": [
+        "ENTITLEMENT_REQUIRED",
+        "PACKAGE_NOT_INSTALLED",
+        "PACKAGE_DISABLED",
+        "PACKAGE_INCOMPATIBLE"
+      ],
+      "auditRequired": true,
+      "backendGuardRequired": true,
+      "serviceIdentityAllowed": false,
+      "currentRuntimeState": "TARGET_NAMESPACE",
+      "implementationStatus": "RUNTIME_ENFORCEMENT_REQUIRED"
+    },
+    {
+      "namespace": "/api/v1/console",
+      "packageId": "PKG-UCONSOLE",
+      "owningModule": "UConsole",
+      "businessApi": true,
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "diagnosticOnlyOperations": [
+        "ROUTE-GET-06BE2D68D2C3",
+        "ROUTE-GET-146AD72F7D6F",
+        "ROUTE-GET-45E292862B33",
+        "ROUTE-GET-550B859890E9",
+        "ROUTE-GET-638909C1429A",
+        "ROUTE-GET-6EAAFB798BDD",
+        "ROUTE-GET-794B2D537270",
+        "ROUTE-GET-8859F3DB69D3",
+        "ROUTE-GET-94EE98C7CC30",
+        "ROUTE-GET-A57D62E32893",
+        "ROUTE-GET-C28C649A7FC8",
+        "ROUTE-GET-CAC78937C071",
+        "ROUTE-GET-F1EAB89DB039"
+      ],
+      "publicOperations": [],
+      "denialCodes": [
+        "ENTITLEMENT_REQUIRED",
+        "PACKAGE_NOT_INSTALLED",
+        "PACKAGE_DISABLED",
+        "PACKAGE_INCOMPATIBLE"
+      ],
+      "auditRequired": true,
+      "backendGuardRequired": true,
+      "serviceIdentityAllowed": false,
+      "currentRuntimeState": "TARGET_NAMESPACE",
+      "implementationStatus": "RUNTIME_ENFORCEMENT_REQUIRED"
+    },
+    {
+      "namespace": "/api/v1/context",
+      "packageId": "PKG-UCORE",
+      "owningModule": "UCore",
+      "businessApi": true,
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "diagnosticOnlyOperations": [],
+      "publicOperations": [],
+      "denialCodes": [
+        "ENTITLEMENT_REQUIRED",
+        "PACKAGE_NOT_INSTALLED",
+        "PACKAGE_DISABLED",
+        "PACKAGE_INCOMPATIBLE"
+      ],
+      "auditRequired": true,
+      "backendGuardRequired": true,
+      "serviceIdentityAllowed": true,
+      "currentRuntimeState": "TARGET_NAMESPACE",
+      "implementationStatus": "RUNTIME_ENFORCEMENT_REQUIRED"
+    },
+    {
+      "namespace": "/api/v1/edge",
+      "packageId": "PKG-EDGE",
+      "owningModule": "AN_VANTARIS_EDGE",
+      "businessApi": true,
+      "entitlementRequired": true,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "diagnosticOnlyOperations": [],
+      "publicOperations": [],
+      "denialCodes": [
+        "ENTITLEMENT_REQUIRED",
+        "PACKAGE_NOT_INSTALLED",
+        "PACKAGE_DISABLED",
+        "PACKAGE_INCOMPATIBLE"
+      ],
+      "auditRequired": true,
+      "backendGuardRequired": true,
+      "serviceIdentityAllowed": false,
+      "currentRuntimeState": "TARGET_NAMESPACE",
+      "implementationStatus": "RUNTIME_ENFORCEMENT_REQUIRED"
+    },
+    {
+      "namespace": "/api/v1/esg",
+      "packageId": "PKG-UESG",
+      "owningModule": "UESG",
+      "businessApi": true,
+      "entitlementRequired": true,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "diagnosticOnlyOperations": [],
+      "publicOperations": [],
+      "denialCodes": [
+        "ENTITLEMENT_REQUIRED",
+        "PACKAGE_NOT_INSTALLED",
+        "PACKAGE_DISABLED",
+        "PACKAGE_INCOMPATIBLE"
+      ],
+      "auditRequired": true,
+      "backendGuardRequired": true,
+      "serviceIdentityAllowed": false,
+      "currentRuntimeState": "TARGET_NAMESPACE",
+      "implementationStatus": "RUNTIME_ENFORCEMENT_REQUIRED"
+    },
+    {
+      "namespace": "/api/v1/events",
+      "packageId": "PKG-DATA-LAKE",
+      "owningModule": "Layer 3 Data Foundation",
+      "businessApi": true,
+      "entitlementRequired": true,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "diagnosticOnlyOperations": [],
+      "publicOperations": [],
+      "denialCodes": [
+        "ENTITLEMENT_REQUIRED",
+        "PACKAGE_NOT_INSTALLED",
+        "PACKAGE_DISABLED",
+        "PACKAGE_INCOMPATIBLE"
+      ],
+      "auditRequired": true,
+      "backendGuardRequired": true,
+      "serviceIdentityAllowed": true,
+      "currentRuntimeState": "TARGET_NAMESPACE",
+      "implementationStatus": "RUNTIME_ENFORCEMENT_REQUIRED"
+    },
+    {
+      "namespace": "/api/v1/evidence",
+      "packageId": "PKG-EVIDENCE-CENTER",
+      "owningModule": "Evidence Center",
+      "businessApi": true,
+      "entitlementRequired": true,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "diagnosticOnlyOperations": [],
+      "publicOperations": [],
+      "denialCodes": [
+        "ENTITLEMENT_REQUIRED",
+        "PACKAGE_NOT_INSTALLED",
+        "PACKAGE_DISABLED",
+        "PACKAGE_INCOMPATIBLE"
+      ],
+      "auditRequired": true,
+      "backendGuardRequired": true,
+      "serviceIdentityAllowed": false,
+      "currentRuntimeState": "TARGET_NAMESPACE",
+      "implementationStatus": "RUNTIME_ENFORCEMENT_REQUIRED"
+    },
+    {
+      "namespace": "/api/v1/health",
+      "packageId": "PKG-UCONSOLE",
+      "owningModule": "UConsole",
+      "businessApi": false,
+      "entitlementRequired": false,
+      "installedRequired": false,
+      "enabledRequired": false,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED",
+        "UNAVAILABLE",
+        "DISABLED",
+        "UNLICENSED",
+        "NOT_INSTALLED",
+        "INCOMPATIBLE",
+        "UPGRADE_REQUIRED"
+      ],
+      "diagnosticOnlyOperations": [
+        "ROUTE-GET-06BE2D68D2C3",
+        "ROUTE-GET-146AD72F7D6F",
+        "ROUTE-GET-45E292862B33",
+        "ROUTE-GET-550B859890E9",
+        "ROUTE-GET-638909C1429A",
+        "ROUTE-GET-6EAAFB798BDD",
+        "ROUTE-GET-794B2D537270",
+        "ROUTE-GET-8859F3DB69D3",
+        "ROUTE-GET-94EE98C7CC30",
+        "ROUTE-GET-A57D62E32893",
+        "ROUTE-GET-C28C649A7FC8",
+        "ROUTE-GET-CAC78937C071",
+        "ROUTE-GET-F1EAB89DB039"
+      ],
+      "publicOperations": [],
+      "denialCodes": [
+        "ENTITLEMENT_REQUIRED",
+        "PACKAGE_NOT_INSTALLED",
+        "PACKAGE_DISABLED",
+        "PACKAGE_INCOMPATIBLE"
+      ],
+      "auditRequired": true,
+      "backendGuardRequired": true,
+      "serviceIdentityAllowed": false,
+      "currentRuntimeState": "TARGET_NAMESPACE",
+      "implementationStatus": "RUNTIME_ENFORCEMENT_REQUIRED"
+    },
+    {
+      "namespace": "/api/v1/integration",
+      "packageId": "PKG-UNIFIED-DATA-MODEL",
+      "owningModule": "Integration Governance",
+      "businessApi": true,
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "diagnosticOnlyOperations": [],
+      "publicOperations": [],
+      "denialCodes": [
+        "ENTITLEMENT_REQUIRED",
+        "PACKAGE_NOT_INSTALLED",
+        "PACKAGE_DISABLED",
+        "PACKAGE_INCOMPATIBLE"
+      ],
+      "auditRequired": true,
+      "backendGuardRequired": true,
+      "serviceIdentityAllowed": false,
+      "currentRuntimeState": "TARGET_NAMESPACE",
+      "implementationStatus": "RUNTIME_ENFORCEMENT_REQUIRED"
+    },
+    {
+      "namespace": "/api/v1/knowledge",
+      "packageId": "PKG-KNOWLEDGE-BASE",
+      "owningModule": "Knowledge Base",
+      "businessApi": true,
+      "entitlementRequired": true,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "diagnosticOnlyOperations": [],
+      "publicOperations": [],
+      "denialCodes": [
+        "ENTITLEMENT_REQUIRED",
+        "PACKAGE_NOT_INSTALLED",
+        "PACKAGE_DISABLED",
+        "PACKAGE_INCOMPATIBLE"
+      ],
+      "auditRequired": true,
+      "backendGuardRequired": true,
+      "serviceIdentityAllowed": false,
+      "currentRuntimeState": "TARGET_NAMESPACE",
+      "implementationStatus": "RUNTIME_ENFORCEMENT_REQUIRED"
+    },
+    {
+      "namespace": "/api/v1/link",
+      "packageId": "PKG-LINK",
+      "owningModule": "AN_VANTARIS_LINK",
+      "businessApi": true,
+      "entitlementRequired": true,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "diagnosticOnlyOperations": [],
+      "publicOperations": [],
+      "denialCodes": [
+        "ENTITLEMENT_REQUIRED",
+        "PACKAGE_NOT_INSTALLED",
+        "PACKAGE_DISABLED",
+        "PACKAGE_INCOMPATIBLE"
+      ],
+      "auditRequired": true,
+      "backendGuardRequired": true,
+      "serviceIdentityAllowed": false,
+      "currentRuntimeState": "TARGET_NAMESPACE",
+      "implementationStatus": "RUNTIME_ENFORCEMENT_REQUIRED"
+    },
+    {
+      "namespace": "/api/v1/mms",
+      "packageId": "PKG-UMMS",
+      "owningModule": "UMMS",
+      "businessApi": true,
+      "entitlementRequired": true,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "diagnosticOnlyOperations": [],
+      "publicOperations": [],
+      "denialCodes": [
+        "ENTITLEMENT_REQUIRED",
+        "PACKAGE_NOT_INSTALLED",
+        "PACKAGE_DISABLED",
+        "PACKAGE_INCOMPATIBLE"
+      ],
+      "auditRequired": true,
+      "backendGuardRequired": true,
+      "serviceIdentityAllowed": false,
+      "currentRuntimeState": "TARGET_NAMESPACE",
+      "implementationStatus": "RUNTIME_ENFORCEMENT_REQUIRED"
+    },
+    {
+      "namespace": "/api/v1/model",
+      "packageId": "PKG-UNIFIED-DATA-MODEL",
+      "owningModule": "Unified Data Model",
+      "businessApi": true,
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "diagnosticOnlyOperations": [],
+      "publicOperations": [],
+      "denialCodes": [
+        "ENTITLEMENT_REQUIRED",
+        "PACKAGE_NOT_INSTALLED",
+        "PACKAGE_DISABLED",
+        "PACKAGE_INCOMPATIBLE"
+      ],
+      "auditRequired": true,
+      "backendGuardRequired": true,
+      "serviceIdentityAllowed": false,
+      "currentRuntimeState": "TARGET_NAMESPACE",
+      "implementationStatus": "RUNTIME_ENFORCEMENT_REQUIRED"
+    },
+    {
+      "namespace": "/api/v1/models",
+      "packageId": "PKG-AI-MODEL-HUB",
+      "owningModule": "AI Model Hub",
+      "businessApi": true,
+      "entitlementRequired": true,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": true,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "diagnosticOnlyOperations": [],
+      "publicOperations": [],
+      "denialCodes": [
+        "ENTITLEMENT_REQUIRED",
+        "PACKAGE_NOT_INSTALLED",
+        "PACKAGE_DISABLED",
+        "PACKAGE_INCOMPATIBLE"
+      ],
+      "auditRequired": true,
+      "backendGuardRequired": true,
+      "serviceIdentityAllowed": false,
+      "currentRuntimeState": "TARGET_NAMESPACE",
+      "implementationStatus": "RUNTIME_ENFORCEMENT_REQUIRED"
+    },
+    {
+      "namespace": "/api/v1/orchestration",
+      "packageId": "PKG-ORCHESTRATOR",
+      "owningModule": "ONE Orchestrator",
+      "businessApi": true,
+      "entitlementRequired": true,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "diagnosticOnlyOperations": [],
+      "publicOperations": [],
+      "denialCodes": [
+        "ENTITLEMENT_REQUIRED",
+        "PACKAGE_NOT_INSTALLED",
+        "PACKAGE_DISABLED",
+        "PACKAGE_INCOMPATIBLE"
+      ],
+      "auditRequired": true,
+      "backendGuardRequired": true,
+      "serviceIdentityAllowed": false,
+      "currentRuntimeState": "TARGET_NAMESPACE",
+      "implementationStatus": "RUNTIME_ENFORCEMENT_REQUIRED"
+    },
+    {
+      "namespace": "/api/v1/packages",
+      "packageId": "PKG-GOVERNANCE-SECURITY",
+      "owningModule": "Governance & Security",
+      "businessApi": true,
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "diagnosticOnlyOperations": [
+        "ROUTE-GET-7F0F9D7037CB",
+        "ROUTE-GET-B60A1DD89375"
+      ],
+      "publicOperations": [
+        "ROUTE-GET-B5979853FC22",
+        "ROUTE-POST-FBB45557ACEE"
+      ],
+      "denialCodes": [
+        "ENTITLEMENT_REQUIRED",
+        "PACKAGE_NOT_INSTALLED",
+        "PACKAGE_DISABLED",
+        "PACKAGE_INCOMPATIBLE"
+      ],
+      "auditRequired": true,
+      "backendGuardRequired": true,
+      "serviceIdentityAllowed": true,
+      "currentRuntimeState": "TARGET_NAMESPACE",
+      "implementationStatus": "RUNTIME_ENFORCEMENT_REQUIRED"
+    },
+    {
+      "namespace": "/api/v1/platform",
+      "packageId": "PKG-UCONSOLE",
+      "owningModule": "UConsole",
+      "businessApi": true,
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "diagnosticOnlyOperations": [
+        "ROUTE-GET-06BE2D68D2C3",
+        "ROUTE-GET-146AD72F7D6F",
+        "ROUTE-GET-45E292862B33",
+        "ROUTE-GET-550B859890E9",
+        "ROUTE-GET-638909C1429A",
+        "ROUTE-GET-6EAAFB798BDD",
+        "ROUTE-GET-794B2D537270",
+        "ROUTE-GET-8859F3DB69D3",
+        "ROUTE-GET-94EE98C7CC30",
+        "ROUTE-GET-A57D62E32893",
+        "ROUTE-GET-C28C649A7FC8",
+        "ROUTE-GET-CAC78937C071",
+        "ROUTE-GET-F1EAB89DB039"
+      ],
+      "publicOperations": [],
+      "denialCodes": [
+        "ENTITLEMENT_REQUIRED",
+        "PACKAGE_NOT_INSTALLED",
+        "PACKAGE_DISABLED",
+        "PACKAGE_INCOMPATIBLE"
+      ],
+      "auditRequired": true,
+      "backendGuardRequired": true,
+      "serviceIdentityAllowed": false,
+      "currentRuntimeState": "TARGET_NAMESPACE",
+      "implementationStatus": "RUNTIME_ENFORCEMENT_REQUIRED"
+    },
+    {
+      "namespace": "/api/v1/reports",
+      "packageId": "PKG-REPORTS",
+      "owningModule": "Reports",
+      "businessApi": true,
+      "entitlementRequired": true,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "diagnosticOnlyOperations": [],
+      "publicOperations": [],
+      "denialCodes": [
+        "ENTITLEMENT_REQUIRED",
+        "PACKAGE_NOT_INSTALLED",
+        "PACKAGE_DISABLED",
+        "PACKAGE_INCOMPATIBLE"
+      ],
+      "auditRequired": true,
+      "backendGuardRequired": true,
+      "serviceIdentityAllowed": false,
+      "currentRuntimeState": "TARGET_NAMESPACE",
+      "implementationStatus": "RUNTIME_ENFORCEMENT_REQUIRED"
+    },
+    {
+      "namespace": "/api/v1/security",
+      "packageId": "PKG-GOVERNANCE-SECURITY",
+      "owningModule": "Governance & Security",
+      "businessApi": true,
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "diagnosticOnlyOperations": [
+        "ROUTE-GET-7F0F9D7037CB",
+        "ROUTE-GET-B60A1DD89375"
+      ],
+      "publicOperations": [
+        "ROUTE-GET-B5979853FC22",
+        "ROUTE-POST-FBB45557ACEE"
+      ],
+      "denialCodes": [
+        "ENTITLEMENT_REQUIRED",
+        "PACKAGE_NOT_INSTALLED",
+        "PACKAGE_DISABLED",
+        "PACKAGE_INCOMPATIBLE"
+      ],
+      "auditRequired": true,
+      "backendGuardRequired": true,
+      "serviceIdentityAllowed": true,
+      "currentRuntimeState": "TARGET_NAMESPACE",
+      "implementationStatus": "RUNTIME_ENFORCEMENT_REQUIRED"
+    },
+    {
+      "namespace": "/api/v1/telemetry",
+      "packageId": "PKG-DATA-LAKE",
+      "owningModule": "Layer 3 Data Foundation",
+      "businessApi": true,
+      "entitlementRequired": true,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "diagnosticOnlyOperations": [],
+      "publicOperations": [],
+      "denialCodes": [
+        "ENTITLEMENT_REQUIRED",
+        "PACKAGE_NOT_INSTALLED",
+        "PACKAGE_DISABLED",
+        "PACKAGE_INCOMPATIBLE"
+      ],
+      "auditRequired": true,
+      "backendGuardRequired": true,
+      "serviceIdentityAllowed": true,
+      "currentRuntimeState": "TARGET_NAMESPACE",
+      "implementationStatus": "RUNTIME_ENFORCEMENT_REQUIRED"
+    },
+    {
+      "namespace": "/api/v1/trust",
+      "packageId": "PKG-GOVERNANCE-SECURITY",
+      "owningModule": "Governance & Security / Trust",
+      "businessApi": true,
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "diagnosticOnlyOperations": [
+        "ROUTE-GET-7F0F9D7037CB",
+        "ROUTE-GET-B60A1DD89375"
+      ],
+      "publicOperations": [
+        "ROUTE-GET-B5979853FC22",
+        "ROUTE-POST-FBB45557ACEE"
+      ],
+      "denialCodes": [
+        "ENTITLEMENT_REQUIRED",
+        "PACKAGE_NOT_INSTALLED",
+        "PACKAGE_DISABLED",
+        "PACKAGE_INCOMPATIBLE"
+      ],
+      "auditRequired": true,
+      "backendGuardRequired": true,
+      "serviceIdentityAllowed": true,
+      "currentRuntimeState": "TARGET_NAMESPACE",
+      "implementationStatus": "RUNTIME_ENFORCEMENT_REQUIRED"
+    },
+    {
+      "namespace": "/api/v1/udoc",
+      "packageId": "PKG-UDOC",
+      "owningModule": "UDOC",
+      "businessApi": true,
+      "entitlementRequired": true,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "diagnosticOnlyOperations": [],
+      "publicOperations": [],
+      "denialCodes": [
+        "ENTITLEMENT_REQUIRED",
+        "PACKAGE_NOT_INSTALLED",
+        "PACKAGE_DISABLED",
+        "PACKAGE_INCOMPATIBLE"
+      ],
+      "auditRequired": true,
+      "backendGuardRequired": true,
+      "serviceIdentityAllowed": false,
+      "currentRuntimeState": "TARGET_NAMESPACE",
+      "implementationStatus": "RUNTIME_ENFORCEMENT_REQUIRED"
+    },
+    {
+      "namespace": "/api/v1/work",
+      "packageId": "PKG-WORK-MANAGEMENT",
+      "owningModule": "ONE Work Management",
+      "businessApi": true,
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "diagnosticOnlyOperations": [],
+      "publicOperations": [],
+      "denialCodes": [
+        "ENTITLEMENT_REQUIRED",
+        "PACKAGE_NOT_INSTALLED",
+        "PACKAGE_DISABLED",
+        "PACKAGE_INCOMPATIBLE"
+      ],
+      "auditRequired": true,
+      "backendGuardRequired": true,
+      "serviceIdentityAllowed": false,
+      "currentRuntimeState": "TARGET_NAMESPACE",
+      "implementationStatus": "RUNTIME_ENFORCEMENT_REQUIRED"
+    }
+  ],
+  "packagePolicies": [
+    {
+      "packageId": "PKG-AI-MODEL-HUB",
+      "packageClass": "AI_OPTIONAL",
+      "mandatory": false,
+      "entitlementRequired": true,
+      "installationRequired": true,
+      "enablementRequired": true,
+      "compatibilityRequired": true,
+      "healthRequiredForWrites": true,
+      "frontendRoutes": [],
+      "backendNamespaces": [
+        "/api/v1/models"
+      ],
+      "lockPageRoute": "/packages/PKG-AI-MODEL-HUB/lock",
+      "statusRoute": "/packages/PKG-AI-MODEL-HUB/status",
+      "diagnosticRoutes": [],
+      "adminRoutes": [],
+      "defaultMenuBehavior": "VISIBLE_WHEN_AUTHORIZED_OR_GOVERNED_LOCK",
+      "defaultDirectUrlBehavior": "ENFORCE_SAME_PACKAGE_POLICY_AS_MENU",
+      "defaultApiBehavior": "BACKEND_PACKAGE_GUARD_AUTHORITATIVE",
+      "dependencyFailureBehavior": "SAFE_READ_OR_STATUS_ONLY; DENY_WRITES_AND_CONTROLS",
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "implementationStatus": "METADATA_FROZEN_RUNTIME_IMPLEMENTATION_REQUIRED",
+      "validationGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED"
+    },
+    {
+      "packageId": "PKG-ANALYTICS",
+      "packageClass": "PLATFORM_OPTIONAL",
+      "mandatory": false,
+      "entitlementRequired": true,
+      "installationRequired": true,
+      "enablementRequired": true,
+      "compatibilityRequired": false,
+      "healthRequiredForWrites": true,
+      "frontendRoutes": [],
+      "backendNamespaces": [
+        "/api/v1/analytics"
+      ],
+      "lockPageRoute": "/packages/PKG-ANALYTICS/lock",
+      "statusRoute": "/packages/PKG-ANALYTICS/status",
+      "diagnosticRoutes": [],
+      "adminRoutes": [],
+      "defaultMenuBehavior": "VISIBLE_WHEN_AUTHORIZED_OR_GOVERNED_LOCK",
+      "defaultDirectUrlBehavior": "ENFORCE_SAME_PACKAGE_POLICY_AS_MENU",
+      "defaultApiBehavior": "BACKEND_PACKAGE_GUARD_AUTHORITATIVE",
+      "dependencyFailureBehavior": "SAFE_READ_OR_STATUS_ONLY; DENY_WRITES_AND_CONTROLS",
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "implementationStatus": "METADATA_FROZEN_RUNTIME_IMPLEMENTATION_REQUIRED",
+      "validationGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED"
+    },
+    {
+      "packageId": "PKG-ASSET-GRAPH",
+      "packageClass": "MANDATORY_PLATFORM",
+      "mandatory": true,
+      "entitlementRequired": false,
+      "installationRequired": true,
+      "enablementRequired": true,
+      "compatibilityRequired": false,
+      "healthRequiredForWrites": true,
+      "frontendRoutes": [
+        "FROUTE-8881919B5A77",
+        "FROUTE-9794B46A5219"
+      ],
+      "backendNamespaces": [
+        "/api/v1/assets"
+      ],
+      "lockPageRoute": "/packages/PKG-ASSET-GRAPH/lock",
+      "statusRoute": "/packages/PKG-ASSET-GRAPH/status",
+      "diagnosticRoutes": [],
+      "adminRoutes": [],
+      "defaultMenuBehavior": "VISIBLE_WHEN_AUTHORIZED_OR_GOVERNED_LOCK",
+      "defaultDirectUrlBehavior": "ENFORCE_SAME_PACKAGE_POLICY_AS_MENU",
+      "defaultApiBehavior": "BACKEND_PACKAGE_GUARD_AUTHORITATIVE",
+      "dependencyFailureBehavior": "SAFE_READ_OR_STATUS_ONLY; DENY_WRITES_AND_CONTROLS",
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "implementationStatus": "METADATA_FROZEN_RUNTIME_IMPLEMENTATION_REQUIRED",
+      "validationGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED"
+    },
+    {
+      "packageId": "PKG-CONTRACTS",
+      "packageClass": "SHARED_FOUNDATION",
+      "mandatory": true,
+      "entitlementRequired": false,
+      "installationRequired": false,
+      "enablementRequired": false,
+      "compatibilityRequired": false,
+      "healthRequiredForWrites": false,
+      "frontendRoutes": [],
+      "backendNamespaces": [],
+      "lockPageRoute": "",
+      "statusRoute": "/packages/PKG-CONTRACTS/status",
+      "diagnosticRoutes": [],
+      "adminRoutes": [],
+      "defaultMenuBehavior": "NO_BUSINESS_MENU",
+      "defaultDirectUrlBehavior": "DENY_BUSINESS_ROUTE",
+      "defaultApiBehavior": "NO_PUBLIC_BUSINESS_API",
+      "dependencyFailureBehavior": "SAFE_READ_OR_STATUS_ONLY; DENY_WRITES_AND_CONTROLS",
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "implementationStatus": "METADATA_FROZEN_RUNTIME_IMPLEMENTATION_REQUIRED",
+      "validationGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED"
+    },
+    {
+      "packageId": "PKG-DATA-LAKE",
+      "packageClass": "DATA_FOUNDATION",
+      "mandatory": false,
+      "entitlementRequired": true,
+      "installationRequired": true,
+      "enablementRequired": true,
+      "compatibilityRequired": false,
+      "healthRequiredForWrites": true,
+      "frontendRoutes": [],
+      "backendNamespaces": [
+        "/api/v1/events",
+        "/api/v1/telemetry"
+      ],
+      "lockPageRoute": "/packages/PKG-DATA-LAKE/lock",
+      "statusRoute": "/packages/PKG-DATA-LAKE/status",
+      "diagnosticRoutes": [],
+      "adminRoutes": [],
+      "defaultMenuBehavior": "VISIBLE_WHEN_AUTHORIZED_OR_GOVERNED_LOCK",
+      "defaultDirectUrlBehavior": "ENFORCE_SAME_PACKAGE_POLICY_AS_MENU",
+      "defaultApiBehavior": "BACKEND_PACKAGE_GUARD_AUTHORITATIVE",
+      "dependencyFailureBehavior": "SAFE_READ_OR_STATUS_ONLY; DENY_WRITES_AND_CONTROLS",
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "implementationStatus": "METADATA_FROZEN_RUNTIME_IMPLEMENTATION_REQUIRED",
+      "validationGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED"
+    },
+    {
+      "packageId": "PKG-DB",
+      "packageClass": "SHARED_FOUNDATION",
+      "mandatory": true,
+      "entitlementRequired": false,
+      "installationRequired": false,
+      "enablementRequired": false,
+      "compatibilityRequired": false,
+      "healthRequiredForWrites": false,
+      "frontendRoutes": [],
+      "backendNamespaces": [],
+      "lockPageRoute": "",
+      "statusRoute": "/packages/PKG-DB/status",
+      "diagnosticRoutes": [],
+      "adminRoutes": [],
+      "defaultMenuBehavior": "NO_BUSINESS_MENU",
+      "defaultDirectUrlBehavior": "DENY_BUSINESS_ROUTE",
+      "defaultApiBehavior": "NO_PUBLIC_BUSINESS_API",
+      "dependencyFailureBehavior": "SAFE_READ_OR_STATUS_ONLY; DENY_WRITES_AND_CONTROLS",
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "implementationStatus": "METADATA_FROZEN_RUNTIME_IMPLEMENTATION_REQUIRED",
+      "validationGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED"
+    },
+    {
+      "packageId": "PKG-EDGE",
+      "packageClass": "SHARED_FOUNDATION",
+      "mandatory": false,
+      "entitlementRequired": true,
+      "installationRequired": true,
+      "enablementRequired": true,
+      "compatibilityRequired": false,
+      "healthRequiredForWrites": true,
+      "frontendRoutes": [
+        "FROUTE-5B91B631064D",
+        "FROUTE-74571E87F28B"
+      ],
+      "backendNamespaces": [
+        "/api/v1/edge"
+      ],
+      "lockPageRoute": "/packages/PKG-EDGE/lock",
+      "statusRoute": "/packages/PKG-EDGE/status",
+      "diagnosticRoutes": [
+        "FROUTE-74571E87F28B"
+      ],
+      "adminRoutes": [],
+      "defaultMenuBehavior": "VISIBLE_WHEN_AUTHORIZED_OR_GOVERNED_LOCK",
+      "defaultDirectUrlBehavior": "ENFORCE_SAME_PACKAGE_POLICY_AS_MENU",
+      "defaultApiBehavior": "BACKEND_PACKAGE_GUARD_AUTHORITATIVE",
+      "dependencyFailureBehavior": "SAFE_READ_OR_STATUS_ONLY; DENY_WRITES_AND_CONTROLS",
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "implementationStatus": "METADATA_FROZEN_RUNTIME_IMPLEMENTATION_REQUIRED",
+      "validationGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED"
+    },
+    {
+      "packageId": "PKG-EVIDENCE-CENTER",
+      "packageClass": "DATA_FOUNDATION",
+      "mandatory": false,
+      "entitlementRequired": true,
+      "installationRequired": true,
+      "enablementRequired": true,
+      "compatibilityRequired": false,
+      "healthRequiredForWrites": true,
+      "frontendRoutes": [
+        "FROUTE-8D83C9D893E7"
+      ],
+      "backendNamespaces": [
+        "/api/v1/evidence"
+      ],
+      "lockPageRoute": "/packages/PKG-EVIDENCE-CENTER/lock",
+      "statusRoute": "/packages/PKG-EVIDENCE-CENTER/status",
+      "diagnosticRoutes": [],
+      "adminRoutes": [],
+      "defaultMenuBehavior": "VISIBLE_WHEN_AUTHORIZED_OR_GOVERNED_LOCK",
+      "defaultDirectUrlBehavior": "ENFORCE_SAME_PACKAGE_POLICY_AS_MENU",
+      "defaultApiBehavior": "BACKEND_PACKAGE_GUARD_AUTHORITATIVE",
+      "dependencyFailureBehavior": "SAFE_READ_OR_STATUS_ONLY; DENY_WRITES_AND_CONTROLS",
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "implementationStatus": "METADATA_FROZEN_RUNTIME_IMPLEMENTATION_REQUIRED",
+      "validationGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED"
+    },
+    {
+      "packageId": "PKG-GOVERNANCE-SECURITY",
+      "packageClass": "MANDATORY_PLATFORM",
+      "mandatory": true,
+      "entitlementRequired": false,
+      "installationRequired": true,
+      "enablementRequired": true,
+      "compatibilityRequired": false,
+      "healthRequiredForWrites": true,
+      "frontendRoutes": [
+        "FROUTE-5490D5BA9CE6",
+        "FROUTE-A77240D62B73",
+        "FROUTE-BBEE7F90DDB4",
+        "FROUTE-F31B3DD8DBB4"
+      ],
+      "backendNamespaces": [
+        "/api/v1/audit",
+        "/api/v1/packages",
+        "/api/v1/security",
+        "/api/v1/trust"
+      ],
+      "lockPageRoute": "/packages/PKG-GOVERNANCE-SECURITY/lock",
+      "statusRoute": "/packages/PKG-GOVERNANCE-SECURITY/status",
+      "diagnosticRoutes": [],
+      "adminRoutes": [
+        "FROUTE-A77240D62B73",
+        "FROUTE-BBEE7F90DDB4"
+      ],
+      "defaultMenuBehavior": "VISIBLE_WHEN_AUTHORIZED_OR_GOVERNED_LOCK",
+      "defaultDirectUrlBehavior": "ENFORCE_SAME_PACKAGE_POLICY_AS_MENU",
+      "defaultApiBehavior": "BACKEND_PACKAGE_GUARD_AUTHORITATIVE",
+      "dependencyFailureBehavior": "SAFE_READ_OR_STATUS_ONLY; DENY_WRITES_AND_CONTROLS",
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "implementationStatus": "METADATA_FROZEN_RUNTIME_IMPLEMENTATION_REQUIRED",
+      "validationGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED"
+    },
+    {
+      "packageId": "PKG-KNOWLEDGE-BASE",
+      "packageClass": "DATA_FOUNDATION",
+      "mandatory": false,
+      "entitlementRequired": true,
+      "installationRequired": true,
+      "enablementRequired": true,
+      "compatibilityRequired": false,
+      "healthRequiredForWrites": true,
+      "frontendRoutes": [],
+      "backendNamespaces": [
+        "/api/v1/knowledge"
+      ],
+      "lockPageRoute": "/packages/PKG-KNOWLEDGE-BASE/lock",
+      "statusRoute": "/packages/PKG-KNOWLEDGE-BASE/status",
+      "diagnosticRoutes": [],
+      "adminRoutes": [],
+      "defaultMenuBehavior": "VISIBLE_WHEN_AUTHORIZED_OR_GOVERNED_LOCK",
+      "defaultDirectUrlBehavior": "ENFORCE_SAME_PACKAGE_POLICY_AS_MENU",
+      "defaultApiBehavior": "BACKEND_PACKAGE_GUARD_AUTHORITATIVE",
+      "dependencyFailureBehavior": "SAFE_READ_OR_STATUS_ONLY; DENY_WRITES_AND_CONTROLS",
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "implementationStatus": "METADATA_FROZEN_RUNTIME_IMPLEMENTATION_REQUIRED",
+      "validationGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED"
+    },
+    {
+      "packageId": "PKG-LINK",
+      "packageClass": "SHARED_FOUNDATION",
+      "mandatory": false,
+      "entitlementRequired": true,
+      "installationRequired": true,
+      "enablementRequired": true,
+      "compatibilityRequired": false,
+      "healthRequiredForWrites": true,
+      "frontendRoutes": [],
+      "backendNamespaces": [
+        "/api/v1/link"
+      ],
+      "lockPageRoute": "/packages/PKG-LINK/lock",
+      "statusRoute": "/packages/PKG-LINK/status",
+      "diagnosticRoutes": [],
+      "adminRoutes": [],
+      "defaultMenuBehavior": "VISIBLE_WHEN_AUTHORIZED_OR_GOVERNED_LOCK",
+      "defaultDirectUrlBehavior": "ENFORCE_SAME_PACKAGE_POLICY_AS_MENU",
+      "defaultApiBehavior": "BACKEND_PACKAGE_GUARD_AUTHORITATIVE",
+      "dependencyFailureBehavior": "SAFE_READ_OR_STATUS_ONLY; DENY_WRITES_AND_CONTROLS",
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "implementationStatus": "METADATA_FROZEN_RUNTIME_IMPLEMENTATION_REQUIRED",
+      "validationGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED"
+    },
+    {
+      "packageId": "PKG-NEXUS-AI",
+      "packageClass": "AI_OPTIONAL",
+      "mandatory": false,
+      "entitlementRequired": true,
+      "installationRequired": true,
+      "enablementRequired": true,
+      "compatibilityRequired": true,
+      "healthRequiredForWrites": true,
+      "frontendRoutes": [
+        "FROUTE-D27D69D3F9AC"
+      ],
+      "backendNamespaces": [
+        "/api/v1/ai"
+      ],
+      "lockPageRoute": "/packages/PKG-NEXUS-AI/lock",
+      "statusRoute": "/packages/PKG-NEXUS-AI/status",
+      "diagnosticRoutes": [],
+      "adminRoutes": [],
+      "defaultMenuBehavior": "VISIBLE_WHEN_AUTHORIZED_OR_GOVERNED_LOCK",
+      "defaultDirectUrlBehavior": "ENFORCE_SAME_PACKAGE_POLICY_AS_MENU",
+      "defaultApiBehavior": "BACKEND_PACKAGE_GUARD_AUTHORITATIVE",
+      "dependencyFailureBehavior": "SAFE_READ_OR_STATUS_ONLY; DENY_WRITES_AND_CONTROLS",
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "implementationStatus": "METADATA_FROZEN_RUNTIME_IMPLEMENTATION_REQUIRED",
+      "validationGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED"
+    },
+    {
+      "packageId": "PKG-ORCHESTRATOR",
+      "packageClass": "PLATFORM_OPTIONAL",
+      "mandatory": false,
+      "entitlementRequired": true,
+      "installationRequired": true,
+      "enablementRequired": true,
+      "compatibilityRequired": false,
+      "healthRequiredForWrites": true,
+      "frontendRoutes": [],
+      "backendNamespaces": [
+        "/api/v1/orchestration"
+      ],
+      "lockPageRoute": "/packages/PKG-ORCHESTRATOR/lock",
+      "statusRoute": "/packages/PKG-ORCHESTRATOR/status",
+      "diagnosticRoutes": [],
+      "adminRoutes": [],
+      "defaultMenuBehavior": "VISIBLE_WHEN_AUTHORIZED_OR_GOVERNED_LOCK",
+      "defaultDirectUrlBehavior": "ENFORCE_SAME_PACKAGE_POLICY_AS_MENU",
+      "defaultApiBehavior": "BACKEND_PACKAGE_GUARD_AUTHORITATIVE",
+      "dependencyFailureBehavior": "SAFE_READ_OR_STATUS_ONLY; DENY_WRITES_AND_CONTROLS",
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "implementationStatus": "METADATA_FROZEN_RUNTIME_IMPLEMENTATION_REQUIRED",
+      "validationGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED"
+    },
+    {
+      "packageId": "PKG-REPORTS",
+      "packageClass": "PLATFORM_OPTIONAL",
+      "mandatory": false,
+      "entitlementRequired": true,
+      "installationRequired": true,
+      "enablementRequired": true,
+      "compatibilityRequired": false,
+      "healthRequiredForWrites": true,
+      "frontendRoutes": [
+        "FROUTE-0DBBB900287A"
+      ],
+      "backendNamespaces": [
+        "/api/v1/reports"
+      ],
+      "lockPageRoute": "/packages/PKG-REPORTS/lock",
+      "statusRoute": "/packages/PKG-REPORTS/status",
+      "diagnosticRoutes": [],
+      "adminRoutes": [],
+      "defaultMenuBehavior": "VISIBLE_WHEN_AUTHORIZED_OR_GOVERNED_LOCK",
+      "defaultDirectUrlBehavior": "ENFORCE_SAME_PACKAGE_POLICY_AS_MENU",
+      "defaultApiBehavior": "BACKEND_PACKAGE_GUARD_AUTHORITATIVE",
+      "dependencyFailureBehavior": "SAFE_READ_OR_STATUS_ONLY; DENY_WRITES_AND_CONTROLS",
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "implementationStatus": "METADATA_FROZEN_RUNTIME_IMPLEMENTATION_REQUIRED",
+      "validationGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED"
+    },
+    {
+      "packageId": "PKG-UCDE",
+      "packageClass": "DOMAIN_OPTIONAL",
+      "mandatory": false,
+      "entitlementRequired": true,
+      "installationRequired": true,
+      "enablementRequired": true,
+      "compatibilityRequired": false,
+      "healthRequiredForWrites": true,
+      "frontendRoutes": [],
+      "backendNamespaces": [
+        "/api/v1/cde"
+      ],
+      "lockPageRoute": "/packages/PKG-UCDE/lock",
+      "statusRoute": "/packages/PKG-UCDE/status",
+      "diagnosticRoutes": [],
+      "adminRoutes": [],
+      "defaultMenuBehavior": "VISIBLE_WHEN_AUTHORIZED_OR_GOVERNED_LOCK",
+      "defaultDirectUrlBehavior": "ENFORCE_SAME_PACKAGE_POLICY_AS_MENU",
+      "defaultApiBehavior": "BACKEND_PACKAGE_GUARD_AUTHORITATIVE",
+      "dependencyFailureBehavior": "SAFE_READ_OR_STATUS_ONLY; DENY_WRITES_AND_CONTROLS",
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "implementationStatus": "METADATA_FROZEN_RUNTIME_IMPLEMENTATION_REQUIRED",
+      "validationGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED"
+    },
+    {
+      "packageId": "PKG-UCONSOLE",
+      "packageClass": "MANDATORY_PLATFORM",
+      "mandatory": true,
+      "entitlementRequired": false,
+      "installationRequired": true,
+      "enablementRequired": true,
+      "compatibilityRequired": false,
+      "healthRequiredForWrites": true,
+      "frontendRoutes": [
+        "FROUTE-2A1386B18C7A",
+        "FROUTE-58045144902E",
+        "FROUTE-732E195CD604",
+        "FROUTE-C610388B9C44",
+        "FROUTE-D0DBC5F0D5E1",
+        "FROUTE-F6205A5DF1D3"
+      ],
+      "backendNamespaces": [
+        "/api/v1/console",
+        "/api/v1/health",
+        "/api/v1/platform"
+      ],
+      "lockPageRoute": "/packages/PKG-UCONSOLE/lock",
+      "statusRoute": "/packages/PKG-UCONSOLE/status",
+      "diagnosticRoutes": [],
+      "adminRoutes": [],
+      "defaultMenuBehavior": "VISIBLE_WHEN_AUTHORIZED_OR_GOVERNED_LOCK",
+      "defaultDirectUrlBehavior": "ENFORCE_SAME_PACKAGE_POLICY_AS_MENU",
+      "defaultApiBehavior": "BACKEND_PACKAGE_GUARD_AUTHORITATIVE",
+      "dependencyFailureBehavior": "SAFE_READ_OR_STATUS_ONLY; DENY_WRITES_AND_CONTROLS",
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "implementationStatus": "METADATA_FROZEN_RUNTIME_IMPLEMENTATION_REQUIRED",
+      "validationGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED"
+    },
+    {
+      "packageId": "PKG-UCORE",
+      "packageClass": "MANDATORY_PLATFORM",
+      "mandatory": true,
+      "entitlementRequired": false,
+      "installationRequired": true,
+      "enablementRequired": true,
+      "compatibilityRequired": false,
+      "healthRequiredForWrites": true,
+      "frontendRoutes": [
+        "FROUTE-88546A365FF2",
+        "FROUTE-A2842138F079",
+        "FROUTE-A926AD8DB3CF"
+      ],
+      "backendNamespaces": [
+        "/api/v1/context"
+      ],
+      "lockPageRoute": "/packages/PKG-UCORE/lock",
+      "statusRoute": "/packages/PKG-UCORE/status",
+      "diagnosticRoutes": [],
+      "adminRoutes": [
+        "FROUTE-88546A365FF2",
+        "FROUTE-A2842138F079",
+        "FROUTE-A926AD8DB3CF"
+      ],
+      "defaultMenuBehavior": "VISIBLE_WHEN_AUTHORIZED_OR_GOVERNED_LOCK",
+      "defaultDirectUrlBehavior": "ENFORCE_SAME_PACKAGE_POLICY_AS_MENU",
+      "defaultApiBehavior": "BACKEND_PACKAGE_GUARD_AUTHORITATIVE",
+      "dependencyFailureBehavior": "SAFE_READ_OR_STATUS_ONLY; DENY_WRITES_AND_CONTROLS",
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "implementationStatus": "METADATA_FROZEN_RUNTIME_IMPLEMENTATION_REQUIRED",
+      "validationGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED"
+    },
+    {
+      "packageId": "PKG-UDOC",
+      "packageClass": "DOMAIN_OPTIONAL",
+      "mandatory": false,
+      "entitlementRequired": true,
+      "installationRequired": true,
+      "enablementRequired": true,
+      "compatibilityRequired": false,
+      "healthRequiredForWrites": true,
+      "frontendRoutes": [],
+      "backendNamespaces": [
+        "/api/v1/udoc"
+      ],
+      "lockPageRoute": "/packages/PKG-UDOC/lock",
+      "statusRoute": "/packages/PKG-UDOC/status",
+      "diagnosticRoutes": [],
+      "adminRoutes": [],
+      "defaultMenuBehavior": "VISIBLE_WHEN_AUTHORIZED_OR_GOVERNED_LOCK",
+      "defaultDirectUrlBehavior": "ENFORCE_SAME_PACKAGE_POLICY_AS_MENU",
+      "defaultApiBehavior": "BACKEND_PACKAGE_GUARD_AUTHORITATIVE",
+      "dependencyFailureBehavior": "SAFE_READ_OR_STATUS_ONLY; DENY_WRITES_AND_CONTROLS",
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "implementationStatus": "METADATA_FROZEN_RUNTIME_IMPLEMENTATION_REQUIRED",
+      "validationGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED"
+    },
+    {
+      "packageId": "PKG-UESG",
+      "packageClass": "DOMAIN_OPTIONAL",
+      "mandatory": false,
+      "entitlementRequired": true,
+      "installationRequired": true,
+      "enablementRequired": true,
+      "compatibilityRequired": false,
+      "healthRequiredForWrites": true,
+      "frontendRoutes": [
+        "FROUTE-618A7E8141AF"
+      ],
+      "backendNamespaces": [
+        "/api/v1/esg"
+      ],
+      "lockPageRoute": "/packages/PKG-UESG/lock",
+      "statusRoute": "/packages/PKG-UESG/status",
+      "diagnosticRoutes": [],
+      "adminRoutes": [],
+      "defaultMenuBehavior": "VISIBLE_WHEN_AUTHORIZED_OR_GOVERNED_LOCK",
+      "defaultDirectUrlBehavior": "ENFORCE_SAME_PACKAGE_POLICY_AS_MENU",
+      "defaultApiBehavior": "BACKEND_PACKAGE_GUARD_AUTHORITATIVE",
+      "dependencyFailureBehavior": "SAFE_READ_OR_STATUS_ONLY; DENY_WRITES_AND_CONTROLS",
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "implementationStatus": "METADATA_FROZEN_RUNTIME_IMPLEMENTATION_REQUIRED",
+      "validationGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED"
+    },
+    {
+      "packageId": "PKG-UFMS-INTEGRATION",
+      "packageClass": "EXTERNAL_PRODUCT_INTEGRATION",
+      "mandatory": false,
+      "entitlementRequired": true,
+      "installationRequired": true,
+      "enablementRequired": true,
+      "compatibilityRequired": true,
+      "healthRequiredForWrites": true,
+      "frontendRoutes": [],
+      "backendNamespaces": [
+        "/api/v1/adapters/ufms"
+      ],
+      "lockPageRoute": "/packages/PKG-UFMS-INTEGRATION/lock",
+      "statusRoute": "/packages/PKG-UFMS-INTEGRATION/status",
+      "diagnosticRoutes": [],
+      "adminRoutes": [],
+      "defaultMenuBehavior": "VISIBLE_WHEN_AUTHORIZED_OR_GOVERNED_LOCK",
+      "defaultDirectUrlBehavior": "ENFORCE_SAME_PACKAGE_POLICY_AS_MENU",
+      "defaultApiBehavior": "BACKEND_PACKAGE_GUARD_AUTHORITATIVE",
+      "dependencyFailureBehavior": "SAFE_READ_OR_STATUS_ONLY; DENY_WRITES_AND_CONTROLS",
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "EXTERNAL_INTEGRATION_BOUNDARY_WITH_COMPATIBILITY_AND_REMOTE_HEALTH; DOES_NOT_OWN_UFMS_RUNTIME",
+      "implementationStatus": "METADATA_FROZEN_RUNTIME_IMPLEMENTATION_REQUIRED",
+      "validationGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED"
+    },
+    {
+      "packageId": "PKG-UMMS",
+      "packageClass": "DOMAIN_OPTIONAL",
+      "mandatory": false,
+      "entitlementRequired": true,
+      "installationRequired": true,
+      "enablementRequired": true,
+      "compatibilityRequired": false,
+      "healthRequiredForWrites": true,
+      "frontendRoutes": [
+        "FROUTE-3F4199646E7A"
+      ],
+      "backendNamespaces": [
+        "/api/v1/mms"
+      ],
+      "lockPageRoute": "/packages/PKG-UMMS/lock",
+      "statusRoute": "/packages/PKG-UMMS/status",
+      "diagnosticRoutes": [],
+      "adminRoutes": [],
+      "defaultMenuBehavior": "VISIBLE_WHEN_AUTHORIZED_OR_GOVERNED_LOCK",
+      "defaultDirectUrlBehavior": "ENFORCE_SAME_PACKAGE_POLICY_AS_MENU",
+      "defaultApiBehavior": "BACKEND_PACKAGE_GUARD_AUTHORITATIVE",
+      "dependencyFailureBehavior": "SAFE_READ_OR_STATUS_ONLY; DENY_WRITES_AND_CONTROLS",
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "implementationStatus": "METADATA_FROZEN_RUNTIME_IMPLEMENTATION_REQUIRED",
+      "validationGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED"
+    },
+    {
+      "packageId": "PKG-UNIFIED-DATA-MODEL",
+      "packageClass": "MANDATORY_PLATFORM",
+      "mandatory": true,
+      "entitlementRequired": false,
+      "installationRequired": true,
+      "enablementRequired": true,
+      "compatibilityRequired": false,
+      "healthRequiredForWrites": true,
+      "frontendRoutes": [
+        "FROUTE-A89E66839FAA"
+      ],
+      "backendNamespaces": [
+        "/api/v1/integration",
+        "/api/v1/model"
+      ],
+      "lockPageRoute": "/packages/PKG-UNIFIED-DATA-MODEL/lock",
+      "statusRoute": "/packages/PKG-UNIFIED-DATA-MODEL/status",
+      "diagnosticRoutes": [],
+      "adminRoutes": [
+        "FROUTE-A89E66839FAA"
+      ],
+      "defaultMenuBehavior": "VISIBLE_WHEN_AUTHORIZED_OR_GOVERNED_LOCK",
+      "defaultDirectUrlBehavior": "ENFORCE_SAME_PACKAGE_POLICY_AS_MENU",
+      "defaultApiBehavior": "BACKEND_PACKAGE_GUARD_AUTHORITATIVE",
+      "dependencyFailureBehavior": "SAFE_READ_OR_STATUS_ONLY; DENY_WRITES_AND_CONTROLS",
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "implementationStatus": "METADATA_FROZEN_RUNTIME_IMPLEMENTATION_REQUIRED",
+      "validationGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED"
+    },
+    {
+      "packageId": "PKG-WORK-MANAGEMENT",
+      "packageClass": "MANDATORY_PLATFORM",
+      "mandatory": true,
+      "entitlementRequired": false,
+      "installationRequired": true,
+      "enablementRequired": true,
+      "compatibilityRequired": false,
+      "healthRequiredForWrites": true,
+      "frontendRoutes": [],
+      "backendNamespaces": [
+        "/api/v1/work"
+      ],
+      "lockPageRoute": "/packages/PKG-WORK-MANAGEMENT/lock",
+      "statusRoute": "/packages/PKG-WORK-MANAGEMENT/status",
+      "diagnosticRoutes": [],
+      "adminRoutes": [],
+      "defaultMenuBehavior": "VISIBLE_WHEN_AUTHORIZED_OR_GOVERNED_LOCK",
+      "defaultDirectUrlBehavior": "ENFORCE_SAME_PACKAGE_POLICY_AS_MENU",
+      "defaultApiBehavior": "BACKEND_PACKAGE_GUARD_AUTHORITATIVE",
+      "dependencyFailureBehavior": "SAFE_READ_OR_STATUS_ONLY; DENY_WRITES_AND_CONTROLS",
+      "currentImplementation": "PARTIAL_OR_PLANNED",
+      "targetImplementation": "INDEPENDENT_GOVERNED_PACKAGE",
+      "implementationStatus": "METADATA_FROZEN_RUNTIME_IMPLEMENTATION_REQUIRED",
+      "validationGate": "CONTRACT_DEPENDENCY_HEALTH_AND_ROLLBACK_VALIDATED"
+    }
+  ],
+  "lockPagePolicies": [
+    {
+      "lockState": "UNLICENSED",
+      "routeBehavior": "LOCK_PAGE_WHEN_UNLICENSED",
+      "allowedMetadataClasses": [
+        "PACKAGE_DISPLAY_NAME",
+        "INSTALLATION_STATUS",
+        "ENTITLEMENT_STATUS_CATEGORY",
+        "ENABLED_STATUS",
+        "COMPATIBILITY_CATEGORY",
+        "HIGH_LEVEL_HEALTH_CATEGORY",
+        "REQUIRED_ADMINISTRATIVE_NEXT_ACTION",
+        "SUPPORT_REFERENCE"
+      ],
+      "prohibitedMetadataClasses": [
+        "SECRETS",
+        "CREDENTIALS",
+        "TENANT_DATA",
+        "DETAILED_SYSTEM_TOPOLOGY",
+        "DETAILED_CONNECTOR_CONFIGURATION",
+        "BUSINESS_RECORDS",
+        "DETAILED_VULNERABILITIES",
+        "PRIVATE_LICENSE_TOKEN",
+        "INTERNAL_STACK_TRACES"
+      ],
+      "businessApiAccess": "DENIED",
+      "authenticationRequired": true,
+      "auditPolicy": "ACCESS_AND_ADMIN_ACTIONS_AUDITED"
+    },
+    {
+      "lockState": "NOT_INSTALLED",
+      "routeBehavior": "INSTALLATION_STATUS_PAGE",
+      "allowedMetadataClasses": [
+        "PACKAGE_DISPLAY_NAME",
+        "INSTALLATION_STATUS",
+        "ENTITLEMENT_STATUS_CATEGORY",
+        "ENABLED_STATUS",
+        "COMPATIBILITY_CATEGORY",
+        "HIGH_LEVEL_HEALTH_CATEGORY",
+        "REQUIRED_ADMINISTRATIVE_NEXT_ACTION",
+        "SUPPORT_REFERENCE"
+      ],
+      "prohibitedMetadataClasses": [
+        "SECRETS",
+        "CREDENTIALS",
+        "TENANT_DATA",
+        "DETAILED_SYSTEM_TOPOLOGY",
+        "DETAILED_CONNECTOR_CONFIGURATION",
+        "BUSINESS_RECORDS",
+        "DETAILED_VULNERABILITIES",
+        "PRIVATE_LICENSE_TOKEN",
+        "INTERNAL_STACK_TRACES"
+      ],
+      "businessApiAccess": "DENIED",
+      "authenticationRequired": true,
+      "auditPolicy": "ACCESS_AND_ADMIN_ACTIONS_AUDITED"
+    },
+    {
+      "lockState": "DISABLED",
+      "routeBehavior": "ADMIN_STATUS_PAGE",
+      "allowedMetadataClasses": [
+        "PACKAGE_DISPLAY_NAME",
+        "INSTALLATION_STATUS",
+        "ENTITLEMENT_STATUS_CATEGORY",
+        "ENABLED_STATUS",
+        "COMPATIBILITY_CATEGORY",
+        "HIGH_LEVEL_HEALTH_CATEGORY",
+        "REQUIRED_ADMINISTRATIVE_NEXT_ACTION",
+        "SUPPORT_REFERENCE"
+      ],
+      "prohibitedMetadataClasses": [
+        "SECRETS",
+        "CREDENTIALS",
+        "TENANT_DATA",
+        "DETAILED_SYSTEM_TOPOLOGY",
+        "DETAILED_CONNECTOR_CONFIGURATION",
+        "BUSINESS_RECORDS",
+        "DETAILED_VULNERABILITIES",
+        "PRIVATE_LICENSE_TOKEN",
+        "INTERNAL_STACK_TRACES"
+      ],
+      "businessApiAccess": "DENIED",
+      "authenticationRequired": true,
+      "auditPolicy": "ACCESS_AND_ADMIN_ACTIONS_AUDITED"
+    },
+    {
+      "lockState": "INCOMPATIBLE",
+      "routeBehavior": "COMPATIBILITY_STATUS_PAGE",
+      "allowedMetadataClasses": [
+        "PACKAGE_DISPLAY_NAME",
+        "INSTALLATION_STATUS",
+        "ENTITLEMENT_STATUS_CATEGORY",
+        "ENABLED_STATUS",
+        "COMPATIBILITY_CATEGORY",
+        "HIGH_LEVEL_HEALTH_CATEGORY",
+        "REQUIRED_ADMINISTRATIVE_NEXT_ACTION",
+        "SUPPORT_REFERENCE"
+      ],
+      "prohibitedMetadataClasses": [
+        "SECRETS",
+        "CREDENTIALS",
+        "TENANT_DATA",
+        "DETAILED_SYSTEM_TOPOLOGY",
+        "DETAILED_CONNECTOR_CONFIGURATION",
+        "BUSINESS_RECORDS",
+        "DETAILED_VULNERABILITIES",
+        "PRIVATE_LICENSE_TOKEN",
+        "INTERNAL_STACK_TRACES"
+      ],
+      "businessApiAccess": "DENIED",
+      "authenticationRequired": true,
+      "auditPolicy": "ACCESS_AND_ADMIN_ACTIONS_AUDITED"
+    },
+    {
+      "lockState": "UPGRADE_REQUIRED",
+      "routeBehavior": "UPGRADE_GUIDANCE_PAGE",
+      "allowedMetadataClasses": [
+        "PACKAGE_DISPLAY_NAME",
+        "INSTALLATION_STATUS",
+        "ENTITLEMENT_STATUS_CATEGORY",
+        "ENABLED_STATUS",
+        "COMPATIBILITY_CATEGORY",
+        "HIGH_LEVEL_HEALTH_CATEGORY",
+        "REQUIRED_ADMINISTRATIVE_NEXT_ACTION",
+        "SUPPORT_REFERENCE"
+      ],
+      "prohibitedMetadataClasses": [
+        "SECRETS",
+        "CREDENTIALS",
+        "TENANT_DATA",
+        "DETAILED_SYSTEM_TOPOLOGY",
+        "DETAILED_CONNECTOR_CONFIGURATION",
+        "BUSINESS_RECORDS",
+        "DETAILED_VULNERABILITIES",
+        "PRIVATE_LICENSE_TOKEN",
+        "INTERNAL_STACK_TRACES"
+      ],
+      "businessApiAccess": "DENIED",
+      "authenticationRequired": true,
+      "auditPolicy": "ACCESS_AND_ADMIN_ACTIONS_AUDITED"
+    }
+  ],
+  "diagnosticPolicies": [
+    {
+      "diagnosticClass": "PUBLIC_HEALTH_SUMMARY",
+      "allowedPrincipals": [
+        "Anonymous"
+      ],
+      "dataExposure": "MINIMAL_LIVENESS_OR_READINESS_ONLY",
+      "requiredPermissions": [],
+      "packageStateAccess": "HIGH_LEVEL_ONLY",
+      "controlsAllowed": false,
+      "auditPolicy": "SECURITY_METRICS"
+    },
+    {
+      "diagnosticClass": "AUTHENTICATED_STATUS",
+      "allowedPrincipals": [
+        "Operator",
+        "Engineer",
+        "Administrator"
+      ],
+      "dataExposure": "HIGH_LEVEL_PACKAGE_AND_HEALTH_STATUS",
+      "requiredPermissions": [
+        "platform:read"
+      ],
+      "packageStateAccess": "STATUS_CATEGORIES",
+      "controlsAllowed": false,
+      "auditPolicy": "DENIALS_AND_SENSITIVE_READS"
+    },
+    {
+      "diagnosticClass": "ENGINEER_DIAGNOSTICS",
+      "allowedPrincipals": [
+        "Engineer",
+        "Administrator"
+      ],
+      "dataExposure": "TECHNICAL_HEALTH_WITHOUT_SECRETS",
+      "requiredPermissions": [
+        "edge:diagnose"
+      ],
+      "packageStateAccess": "TECHNICAL_HEALTH",
+      "controlsAllowed": false,
+      "auditPolicy": "REQUIRED"
+    },
+    {
+      "diagnosticClass": "ADMIN_PACKAGE_CONTROL",
+      "allowedPrincipals": [
+        "Administrator"
+      ],
+      "dataExposure": "PACKAGE_STATE_AND_GOVERNED_CONTROL",
+      "requiredPermissions": [
+        "package:enable",
+        "package:upgrade"
+      ],
+      "packageStateAccess": "FULL_GOVERNED_STATUS_NO_SECRETS",
+      "controlsAllowed": true,
+      "auditPolicy": "REQUIRED"
+    },
+    {
+      "diagnosticClass": "INTERNAL_SERVICE_HEALTH",
+      "allowedPrincipals": [
+        "Service Identity"
+      ],
+      "dataExposure": "EXPLICIT_MACHINE_HEALTH_CONTRACT_ONLY",
+      "requiredPermissions": [
+        "edge:read"
+      ],
+      "packageStateAccess": "SERVICE_SCOPED",
+      "controlsAllowed": false,
+      "auditPolicy": "ALL_CALLS"
+    }
+  ],
+  "compatibilityPolicies": [
+    {
+      "currentRoute": "/system",
+      "targetRoute": "/system",
+      "packageId": "PKG-UCORE",
+      "permission": "context:read",
+      "retirementGate": "TARGET_ROUTE_POLICY_AND_BACKEND_PACKAGE_GUARDS_VALIDATED",
+      "redirectAllowed": false,
+      "apiCompatibilityDependency": [
+        "/api/v1/context"
+      ],
+      "rollbackRequirement": "PRESERVE_CURRENT_ROUTE_AND_STATIC_MENU_UNTIL_ACCEPTANCE_AND_ROLLBACK_GATES_PASS",
+      "legacyStatus": "LEGACY_COMPATIBILITY_REQUIRED"
+    },
+    {
+      "currentRoute": "/iot",
+      "targetRoute": "/assets/topology",
+      "packageId": "PKG-ASSET-GRAPH",
+      "permission": "asset:read",
+      "retirementGate": "TARGET_ROUTE_POLICY_AND_BACKEND_PACKAGE_GUARDS_VALIDATED",
+      "redirectAllowed": true,
+      "apiCompatibilityDependency": [
+        "/api/v1/assets"
+      ],
+      "rollbackRequirement": "PRESERVE_CURRENT_ROUTE_AND_STATIC_MENU_UNTIL_ACCEPTANCE_AND_ROLLBACK_GATES_PASS",
+      "legacyStatus": "LEGACY_COMPATIBILITY_REQUIRED"
+    },
+    {
+      "currentRoute": "/did",
+      "targetRoute": "/system",
+      "packageId": "PKG-GOVERNANCE-SECURITY",
+      "permission": "security:read",
+      "retirementGate": "TARGET_ROUTE_POLICY_AND_BACKEND_PACKAGE_GUARDS_VALIDATED",
+      "redirectAllowed": true,
+      "apiCompatibilityDependency": [
+        "/api/v1/audit",
+        "/api/v1/packages",
+        "/api/v1/security",
+        "/api/v1/trust"
+      ],
+      "rollbackRequirement": "PRESERVE_CURRENT_ROUTE_AND_STATIC_MENU_UNTIL_ACCEPTANCE_AND_ROLLBACK_GATES_PASS",
+      "legacyStatus": "LEGACY_COMPATIBILITY_REQUIRED"
+    },
+    {
+      "currentRoute": "/modeling",
+      "targetRoute": "/modeling",
+      "packageId": "PKG-NEXUS-AI",
+      "permission": "ai:use",
+      "retirementGate": "TARGET_ROUTE_POLICY_AND_BACKEND_PACKAGE_GUARDS_VALIDATED",
+      "redirectAllowed": false,
+      "apiCompatibilityDependency": [
+        "/api/v1/ai"
+      ],
+      "rollbackRequirement": "PRESERVE_CURRENT_ROUTE_AND_STATIC_MENU_UNTIL_ACCEPTANCE_AND_ROLLBACK_GATES_PASS",
+      "legacyStatus": "LEGACY_COMPATIBILITY_REQUIRED"
+    },
+    {
+      "currentRoute": "/console/operations",
+      "targetRoute": "/console/operations",
+      "packageId": "PKG-UCONSOLE",
+      "permission": "platform:read",
+      "retirementGate": "TARGET_ROUTE_POLICY_AND_BACKEND_PACKAGE_GUARDS_VALIDATED",
+      "redirectAllowed": false,
+      "apiCompatibilityDependency": [
+        "/api/v1/console",
+        "/api/v1/health",
+        "/api/v1/platform"
+      ],
+      "rollbackRequirement": "PRESERVE_CURRENT_ROUTE_AND_STATIC_MENU_UNTIL_ACCEPTANCE_AND_ROLLBACK_GATES_PASS",
+      "legacyStatus": "LEGACY_COMPATIBILITY_REQUIRED"
+    },
+    {
+      "currentRoute": "/assets/topology",
+      "targetRoute": "/assets/topology",
+      "packageId": "PKG-ASSET-GRAPH",
+      "permission": "asset:read",
+      "retirementGate": "TARGET_ROUTE_POLICY_AND_BACKEND_PACKAGE_GUARDS_VALIDATED",
+      "redirectAllowed": false,
+      "apiCompatibilityDependency": [
+        "/api/v1/assets"
+      ],
+      "rollbackRequirement": "PRESERVE_CURRENT_ROUTE_AND_STATIC_MENU_UNTIL_ACCEPTANCE_AND_ROLLBACK_GATES_PASS",
+      "legacyStatus": "LEGACY_COMPATIBILITY_REQUIRED"
+    },
+    {
+      "currentRoute": "/ucde/evidence",
+      "targetRoute": "/ucde/evidence",
+      "packageId": "PKG-EVIDENCE-CENTER",
+      "permission": "evidence:read",
+      "retirementGate": "TARGET_ROUTE_POLICY_AND_BACKEND_PACKAGE_GUARDS_VALIDATED",
+      "redirectAllowed": false,
+      "apiCompatibilityDependency": [
+        "/api/v1/evidence"
+      ],
+      "rollbackRequirement": "PRESERVE_CURRENT_ROUTE_AND_STATIC_MENU_UNTIL_ACCEPTANCE_AND_ROLLBACK_GATES_PASS",
+      "legacyStatus": "LEGACY_COMPATIBILITY_REQUIRED"
+    },
+    {
+      "currentRoute": "/uesg/sustainability",
+      "targetRoute": "/uesg/sustainability",
+      "packageId": "PKG-UESG",
+      "permission": "esg:read",
+      "retirementGate": "TARGET_ROUTE_POLICY_AND_BACKEND_PACKAGE_GUARDS_VALIDATED",
+      "redirectAllowed": false,
+      "apiCompatibilityDependency": [
+        "/api/v1/esg"
+      ],
+      "rollbackRequirement": "PRESERVE_CURRENT_ROUTE_AND_STATIC_MENU_UNTIL_ACCEPTANCE_AND_ROLLBACK_GATES_PASS",
+      "legacyStatus": "LEGACY_COMPATIBILITY_REQUIRED"
+    },
+    {
+      "currentRoute": "/umms/maintenance",
+      "targetRoute": "/umms/maintenance",
+      "packageId": "PKG-UMMS",
+      "permission": "maintenance:read",
+      "retirementGate": "TARGET_ROUTE_POLICY_AND_BACKEND_PACKAGE_GUARDS_VALIDATED",
+      "redirectAllowed": false,
+      "apiCompatibilityDependency": [
+        "/api/v1/mms"
+      ],
+      "rollbackRequirement": "PRESERVE_CURRENT_ROUTE_AND_STATIC_MENU_UNTIL_ACCEPTANCE_AND_ROLLBACK_GATES_PASS",
+      "legacyStatus": "LEGACY_COMPATIBILITY_REQUIRED"
+    },
+    {
+      "currentRoute": "/uedge/setup",
+      "targetRoute": "/uedge/setup",
+      "packageId": "PKG-EDGE",
+      "permission": "edge:read",
+      "retirementGate": "TARGET_ROUTE_POLICY_AND_BACKEND_PACKAGE_GUARDS_VALIDATED",
+      "redirectAllowed": false,
+      "apiCompatibilityDependency": [
+        "/api/v1/edge"
+      ],
+      "rollbackRequirement": "PRESERVE_CURRENT_ROUTE_AND_STATIC_MENU_UNTIL_ACCEPTANCE_AND_ROLLBACK_GATES_PASS",
+      "legacyStatus": "LEGACY_COMPATIBILITY_REQUIRED"
+    },
+    {
+      "currentRoute": "/uedge/diagnostics",
+      "targetRoute": "/uedge/diagnostics",
+      "packageId": "PKG-EDGE",
+      "permission": "edge:diagnose",
+      "retirementGate": "TARGET_ROUTE_POLICY_AND_BACKEND_PACKAGE_GUARDS_VALIDATED",
+      "redirectAllowed": false,
+      "apiCompatibilityDependency": [
+        "/api/v1/edge"
+      ],
+      "rollbackRequirement": "PRESERVE_CURRENT_ROUTE_AND_STATIC_MENU_UNTIL_ACCEPTANCE_AND_ROLLBACK_GATES_PASS",
+      "legacyStatus": "LEGACY_COMPATIBILITY_REQUIRED"
+    },
+    {
+      "currentRoute": "/reports",
+      "targetRoute": "/reports",
+      "packageId": "PKG-REPORTS",
+      "permission": "report:read",
+      "retirementGate": "TARGET_ROUTE_POLICY_AND_BACKEND_PACKAGE_GUARDS_VALIDATED",
+      "redirectAllowed": false,
+      "apiCompatibilityDependency": [
+        "/api/v1/reports"
+      ],
+      "rollbackRequirement": "PRESERVE_CURRENT_ROUTE_AND_STATIC_MENU_UNTIL_ACCEPTANCE_AND_ROLLBACK_GATES_PASS",
+      "legacyStatus": "LEGACY_COMPATIBILITY_REQUIRED"
+    }
+  ],
+  "reviewQueue": [
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0001",
+      "routeOrMenuId": "FROUTE-3F4199646E7A",
+      "reviewType": "MULTI_PACKAGE_PAGE",
+      "reason": "Route depends on multiple target API namespaces.",
+      "currentEvidence": {
+        "routePath": "/umms/maintenance",
+        "currentPermissions": [],
+        "backendApiDependencies": [
+          "/api/v1/mms",
+          "/api/v1/work"
+        ]
+      },
+      "proposedSafeDefault": "REQUIRE_ALL_REFERENCED_BACKEND_POLICIES",
+      "owningModule": "UMMS",
+      "requiredDecision": "Confirm aggregate-page partial availability behavior.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P1"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0002",
+      "routeOrMenuId": "FROUTE-58045144902E",
+      "reviewType": "MULTI_PACKAGE_PAGE",
+      "reason": "Route depends on multiple target API namespaces.",
+      "currentEvidence": {
+        "routePath": "/console/operations",
+        "currentPermissions": [],
+        "backendApiDependencies": [
+          "/api/v1/console",
+          "/api/v1/packages",
+          "/api/v1/health"
+        ]
+      },
+      "proposedSafeDefault": "REQUIRE_ALL_REFERENCED_BACKEND_POLICIES",
+      "owningModule": "UConsole",
+      "requiredDecision": "Confirm aggregate-page partial availability behavior.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P1"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0003",
+      "routeOrMenuId": "FROUTE-5B91B631064D",
+      "reviewType": "MULTI_PACKAGE_PAGE",
+      "reason": "Route depends on multiple target API namespaces.",
+      "currentEvidence": {
+        "routePath": "/uedge/setup",
+        "currentPermissions": [],
+        "backendApiDependencies": [
+          "/api/v1/edge",
+          "/api/v1/health"
+        ]
+      },
+      "proposedSafeDefault": "REQUIRE_ALL_REFERENCED_BACKEND_POLICIES",
+      "owningModule": "AN_VANTARIS_EDGE",
+      "requiredDecision": "Confirm aggregate-page partial availability behavior.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P1"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0004",
+      "routeOrMenuId": "FROUTE-732E195CD604",
+      "reviewType": "LEGACY_ROUTE_RETIREMENT",
+      "reason": "Redirect compatibility route remains directly addressable.",
+      "currentEvidence": {
+        "routePath": "/",
+        "currentPermissions": [],
+        "backendApiDependencies": []
+      },
+      "proposedSafeDefault": "PRESERVE_REDIRECT_WITHOUT_BUSINESS_ACCESS",
+      "owningModule": "UConsole",
+      "requiredDecision": "Approve retirement only after inbound-link and rollback review.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P1"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0005",
+      "routeOrMenuId": "FROUTE-74571E87F28B",
+      "reviewType": "MULTI_PACKAGE_PAGE",
+      "reason": "Route depends on multiple target API namespaces.",
+      "currentEvidence": {
+        "routePath": "/uedge/diagnostics",
+        "currentPermissions": [],
+        "backendApiDependencies": [
+          "/api/v1/edge",
+          "/api/v1/health"
+        ]
+      },
+      "proposedSafeDefault": "REQUIRE_ALL_REFERENCED_BACKEND_POLICIES",
+      "owningModule": "AN_VANTARIS_EDGE",
+      "requiredDecision": "Confirm aggregate-page partial availability behavior.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P1"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0006",
+      "routeOrMenuId": "FROUTE-88546A365FF2",
+      "reviewType": "MISSING_PERMISSION",
+      "reason": "Current router permission metadata does not resolve in the frozen permission registry.",
+      "currentEvidence": {
+        "routePath": "/system/notification-settings",
+        "currentPermissions": [
+          "system:read"
+        ],
+        "backendApiDependencies": [
+          "/api/v1/context",
+          "/api/v1/packages"
+        ]
+      },
+      "proposedSafeDefault": "USE_TARGET_PERMISSION_METADATA_AND_DENY_IF_UNRESOLVED",
+      "owningModule": "UCore",
+      "requiredDecision": "Replace legacy frontend-only permission labels in a future runtime task.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P0"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0007",
+      "routeOrMenuId": "FROUTE-88546A365FF2",
+      "reviewType": "MULTI_PACKAGE_PAGE",
+      "reason": "Route depends on multiple target API namespaces.",
+      "currentEvidence": {
+        "routePath": "/system/notification-settings",
+        "currentPermissions": [
+          "system:read"
+        ],
+        "backendApiDependencies": [
+          "/api/v1/context",
+          "/api/v1/packages"
+        ]
+      },
+      "proposedSafeDefault": "REQUIRE_ALL_REFERENCED_BACKEND_POLICIES",
+      "owningModule": "UCore",
+      "requiredDecision": "Confirm aggregate-page partial availability behavior.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P1"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0008",
+      "routeOrMenuId": "FROUTE-9794B46A5219",
+      "reviewType": "MULTI_PACKAGE_PAGE",
+      "reason": "Route depends on multiple target API namespaces.",
+      "currentEvidence": {
+        "routePath": "/iot",
+        "currentPermissions": [],
+        "backendApiDependencies": [
+          "/api/v1/assets",
+          "/api/v1/integration"
+        ]
+      },
+      "proposedSafeDefault": "REQUIRE_ALL_REFERENCED_BACKEND_POLICIES",
+      "owningModule": "ONE Asset Graph",
+      "requiredDecision": "Confirm aggregate-page partial availability behavior.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P1"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0009",
+      "routeOrMenuId": "FROUTE-A2842138F079",
+      "reviewType": "MISSING_PERMISSION",
+      "reason": "Current router permission metadata does not resolve in the frozen permission registry.",
+      "currentEvidence": {
+        "routePath": "/system/settings",
+        "currentPermissions": [
+          "system:read"
+        ],
+        "backendApiDependencies": [
+          "/api/v1/context",
+          "/api/v1/packages"
+        ]
+      },
+      "proposedSafeDefault": "USE_TARGET_PERMISSION_METADATA_AND_DENY_IF_UNRESOLVED",
+      "owningModule": "UCore",
+      "requiredDecision": "Replace legacy frontend-only permission labels in a future runtime task.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P0"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0010",
+      "routeOrMenuId": "FROUTE-A2842138F079",
+      "reviewType": "MULTI_PACKAGE_PAGE",
+      "reason": "Route depends on multiple target API namespaces.",
+      "currentEvidence": {
+        "routePath": "/system/settings",
+        "currentPermissions": [
+          "system:read"
+        ],
+        "backendApiDependencies": [
+          "/api/v1/context",
+          "/api/v1/packages"
+        ]
+      },
+      "proposedSafeDefault": "REQUIRE_ALL_REFERENCED_BACKEND_POLICIES",
+      "owningModule": "UCore",
+      "requiredDecision": "Confirm aggregate-page partial availability behavior.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P1"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0011",
+      "routeOrMenuId": "FROUTE-A89E66839FAA",
+      "reviewType": "MISSING_PERMISSION",
+      "reason": "Current router permission metadata does not resolve in the frozen permission registry.",
+      "currentEvidence": {
+        "routePath": "/system/integration-settings",
+        "currentPermissions": [
+          "system:read"
+        ],
+        "backendApiDependencies": [
+          "/api/v1/integration"
+        ]
+      },
+      "proposedSafeDefault": "USE_TARGET_PERMISSION_METADATA_AND_DENY_IF_UNRESOLVED",
+      "owningModule": "Integration Governance",
+      "requiredDecision": "Replace legacy frontend-only permission labels in a future runtime task.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P0"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0012",
+      "routeOrMenuId": "FROUTE-A926AD8DB3CF",
+      "reviewType": "MISSING_PERMISSION",
+      "reason": "Current router permission metadata does not resolve in the frozen permission registry.",
+      "currentEvidence": {
+        "routePath": "/system",
+        "currentPermissions": [
+          "system:read"
+        ],
+        "backendApiDependencies": [
+          "/api/v1/context",
+          "/api/v1/packages"
+        ]
+      },
+      "proposedSafeDefault": "USE_TARGET_PERMISSION_METADATA_AND_DENY_IF_UNRESOLVED",
+      "owningModule": "UCore",
+      "requiredDecision": "Replace legacy frontend-only permission labels in a future runtime task.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P0"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0013",
+      "routeOrMenuId": "FROUTE-A926AD8DB3CF",
+      "reviewType": "MULTI_PACKAGE_PAGE",
+      "reason": "Route depends on multiple target API namespaces.",
+      "currentEvidence": {
+        "routePath": "/system",
+        "currentPermissions": [
+          "system:read"
+        ],
+        "backendApiDependencies": [
+          "/api/v1/context",
+          "/api/v1/packages"
+        ]
+      },
+      "proposedSafeDefault": "REQUIRE_ALL_REFERENCED_BACKEND_POLICIES",
+      "owningModule": "UCore",
+      "requiredDecision": "Confirm aggregate-page partial availability behavior.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P1"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0014",
+      "routeOrMenuId": "FROUTE-BBEE7F90DDB4",
+      "reviewType": "MISSING_PERMISSION",
+      "reason": "Current router permission metadata does not resolve in the frozen permission registry.",
+      "currentEvidence": {
+        "routePath": "/system/permissions",
+        "currentPermissions": [
+          "system:read"
+        ],
+        "backendApiDependencies": [
+          "/api/v1/security"
+        ]
+      },
+      "proposedSafeDefault": "USE_TARGET_PERMISSION_METADATA_AND_DENY_IF_UNRESOLVED",
+      "owningModule": "Governance & Security",
+      "requiredDecision": "Replace legacy frontend-only permission labels in a future runtime task.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P0"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0015",
+      "routeOrMenuId": "FROUTE-C610388B9C44",
+      "reviewType": "LEGACY_ROUTE_RETIREMENT",
+      "reason": "Redirect compatibility route remains directly addressable.",
+      "currentEvidence": {
+        "routePath": "/forbidden",
+        "currentPermissions": [],
+        "backendApiDependencies": []
+      },
+      "proposedSafeDefault": "PRESERVE_REDIRECT_WITHOUT_BUSINESS_ACCESS",
+      "owningModule": "UConsole",
+      "requiredDecision": "Approve retirement only after inbound-link and rollback review.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P1"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0016",
+      "routeOrMenuId": "FROUTE-D27D69D3F9AC",
+      "reviewType": "MULTI_PACKAGE_PAGE",
+      "reason": "Route depends on multiple target API namespaces.",
+      "currentEvidence": {
+        "routePath": "/modeling",
+        "currentPermissions": [],
+        "backendApiDependencies": [
+          "/api/v1/ai",
+          "/api/v1/models"
+        ]
+      },
+      "proposedSafeDefault": "REQUIRE_ALL_REFERENCED_BACKEND_POLICIES",
+      "owningModule": "Nexus AI",
+      "requiredDecision": "Confirm aggregate-page partial availability behavior.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P1"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0017",
+      "routeOrMenuId": "FROUTE-F31B3DD8DBB4",
+      "reviewType": "MULTI_PACKAGE_PAGE",
+      "reason": "Route depends on multiple target API namespaces.",
+      "currentEvidence": {
+        "routePath": "/did",
+        "currentPermissions": [],
+        "backendApiDependencies": [
+          "/api/v1/security",
+          "/api/v1/trust"
+        ]
+      },
+      "proposedSafeDefault": "REQUIRE_ALL_REFERENCED_BACKEND_POLICIES",
+      "owningModule": "Governance & Security",
+      "requiredDecision": "Confirm aggregate-page partial availability behavior.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P1"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0018",
+      "routeOrMenuId": "MENU-134101A24AF8",
+      "reviewType": "STATIC_MENU_FALLBACK",
+      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
+      "currentEvidence": {
+        "routePath": "/system/permissions",
+        "staticFallback": true,
+        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
+      },
+      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+      "owningModule": "Governance & Security",
+      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P0"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0019",
+      "routeOrMenuId": "MENU-1433EB4F598D",
+      "reviewType": "STATIC_MENU_FALLBACK",
+      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
+      "currentEvidence": {
+        "routePath": "/dashboard",
+        "staticFallback": true,
+        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
+      },
+      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+      "owningModule": "UConsole",
+      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P0"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0020",
+      "routeOrMenuId": "MENU-2620EE0F832C",
+      "reviewType": "STATIC_MENU_FALLBACK",
+      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
+      "currentEvidence": {
+        "routePath": "/did",
+        "staticFallback": true,
+        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
+      },
+      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+      "owningModule": "Governance & Security",
+      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P0"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0021",
+      "routeOrMenuId": "MENU-2BD7722AE31A",
+      "reviewType": "STATIC_MENU_FALLBACK",
+      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
+      "currentEvidence": {
+        "routePath": "/assets/topology",
+        "staticFallback": true,
+        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
+      },
+      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+      "owningModule": "ONE Asset Graph",
+      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P0"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0022",
+      "routeOrMenuId": "MENU-2E3D271F6082",
+      "reviewType": "STATIC_MENU_FALLBACK",
+      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
+      "currentEvidence": {
+        "routePath": "/console/operations",
+        "staticFallback": true,
+        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
+      },
+      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+      "owningModule": "UConsole",
+      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P0"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0023",
+      "routeOrMenuId": "MENU-4086CA0E02F2",
+      "reviewType": "STATIC_MENU_FALLBACK",
+      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
+      "currentEvidence": {
+        "routePath": "/system",
+        "staticFallback": true,
+        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
+      },
+      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+      "owningModule": "UCore",
+      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P0"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0024",
+      "routeOrMenuId": "MENU-431BAEF84DFC",
+      "reviewType": "STATIC_MENU_FALLBACK",
+      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
+      "currentEvidence": {
+        "routePath": "/umms/maintenance",
+        "staticFallback": true,
+        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
+      },
+      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+      "owningModule": "UMMS",
+      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P0"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0025",
+      "routeOrMenuId": "MENU-66373E798387",
+      "reviewType": "STATIC_MENU_FALLBACK",
+      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
+      "currentEvidence": {
+        "routePath": "/ucde/evidence",
+        "staticFallback": true,
+        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
+      },
+      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+      "owningModule": "Evidence Center",
+      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P0"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0026",
+      "routeOrMenuId": "MENU-7174FE72B4F2",
+      "reviewType": "STATIC_MENU_FALLBACK",
+      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
+      "currentEvidence": {
+        "routePath": "/assets/topology",
+        "staticFallback": true,
+        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
+      },
+      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+      "owningModule": "ONE Asset Graph",
+      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P0"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0027",
+      "routeOrMenuId": "MENU-75F4FADB13B4",
+      "reviewType": "STATIC_MENU_FALLBACK",
+      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
+      "currentEvidence": {
+        "routePath": "/console/operations",
+        "staticFallback": true,
+        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
+      },
+      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+      "owningModule": "UConsole",
+      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P0"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0028",
+      "routeOrMenuId": "MENU-8109CEFD2767",
+      "reviewType": "STATIC_MENU_FALLBACK",
+      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
+      "currentEvidence": {
+        "routePath": "/umms/maintenance",
+        "staticFallback": true,
+        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
+      },
+      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+      "owningModule": "UMMS",
+      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P0"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0029",
+      "routeOrMenuId": "MENU-834D6259541B",
+      "reviewType": "STATIC_MENU_FALLBACK",
+      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
+      "currentEvidence": {
+        "routePath": "/uedge/diagnostics",
+        "staticFallback": true,
+        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
+      },
+      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+      "owningModule": "AN_VANTARIS_EDGE",
+      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P0"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0030",
+      "routeOrMenuId": "MENU-8C104C9CCF27",
+      "reviewType": "STATIC_MENU_FALLBACK",
+      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
+      "currentEvidence": {
+        "routePath": "/system/notification-settings",
+        "staticFallback": true,
+        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
+      },
+      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+      "owningModule": "UCore",
+      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P0"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0031",
+      "routeOrMenuId": "MENU-9BE53F871DDC",
+      "reviewType": "STATIC_MENU_FALLBACK",
+      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
+      "currentEvidence": {
+        "routePath": "/iot",
+        "staticFallback": true,
+        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
+      },
+      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+      "owningModule": "ONE Asset Graph",
+      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P0"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0032",
+      "routeOrMenuId": "MENU-AB6C6A4069BE",
+      "reviewType": "STATIC_MENU_FALLBACK",
+      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
+      "currentEvidence": {
+        "routePath": "/uesg/sustainability",
+        "staticFallback": true,
+        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
+      },
+      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+      "owningModule": "UESG",
+      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P0"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0033",
+      "routeOrMenuId": "MENU-AF4B041BE3AA",
+      "reviewType": "STATIC_MENU_FALLBACK",
+      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
+      "currentEvidence": {
+        "routePath": "/system/audit-logs",
+        "staticFallback": true,
+        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
+      },
+      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+      "owningModule": "Governance & Security",
+      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P0"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0034",
+      "routeOrMenuId": "MENU-AF8164732552",
+      "reviewType": "STATIC_MENU_FALLBACK",
+      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
+      "currentEvidence": {
+        "routePath": "/uesg/sustainability",
+        "staticFallback": true,
+        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
+      },
+      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+      "owningModule": "UESG",
+      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P0"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0035",
+      "routeOrMenuId": "MENU-B01B2C899205",
+      "reviewType": "STATIC_MENU_FALLBACK",
+      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
+      "currentEvidence": {
+        "routePath": "/modeling",
+        "staticFallback": true,
+        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
+      },
+      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+      "owningModule": "Nexus AI",
+      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P0"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0036",
+      "routeOrMenuId": "MENU-B188631F44D6",
+      "reviewType": "STATIC_MENU_FALLBACK",
+      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
+      "currentEvidence": {
+        "routePath": "/system/integration-settings",
+        "staticFallback": true,
+        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
+      },
+      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+      "owningModule": "Integration Governance",
+      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P0"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0037",
+      "routeOrMenuId": "MENU-B69133D5294B",
+      "reviewType": "STATIC_MENU_FALLBACK",
+      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
+      "currentEvidence": {
+        "routePath": "/system/settings",
+        "staticFallback": true,
+        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
+      },
+      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+      "owningModule": "UCore",
+      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P0"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0038",
+      "routeOrMenuId": "MENU-C9FF3AA41910",
+      "reviewType": "STATIC_MENU_FALLBACK",
+      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
+      "currentEvidence": {
+        "routePath": "/system",
+        "staticFallback": true,
+        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
+      },
+      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+      "owningModule": "UCore",
+      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P0"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0039",
+      "routeOrMenuId": "MENU-D60A6159BE0C",
+      "reviewType": "STATIC_MENU_FALLBACK",
+      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
+      "currentEvidence": {
+        "routePath": "/uedge/setup",
+        "staticFallback": true,
+        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
+      },
+      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+      "owningModule": "AN_VANTARIS_EDGE",
+      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P0"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0040",
+      "routeOrMenuId": "MENU-ECF82A069A6D",
+      "reviewType": "STATIC_MENU_FALLBACK",
+      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
+      "currentEvidence": {
+        "routePath": "/ucde/evidence",
+        "staticFallback": true,
+        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
+      },
+      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+      "owningModule": "Evidence Center",
+      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P0"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0041",
+      "routeOrMenuId": "MENU-F484962615CC",
+      "reviewType": "STATIC_MENU_FALLBACK",
+      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
+      "currentEvidence": {
+        "routePath": "/reports",
+        "staticFallback": true,
+        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
+      },
+      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+      "owningModule": "Reports",
+      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P0"
+    },
+    {
+      "reviewId": "PKG-ROUTE-REVIEW-0042",
+      "routeOrMenuId": "MENU-F5A4820A5C0B",
+      "reviewType": "STATIC_MENU_FALLBACK",
+      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
+      "currentEvidence": {
+        "routePath": "/uedge/setup",
+        "staticFallback": true,
+        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
+      },
+      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+      "owningModule": "AN_VANTARIS_EDGE",
+      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
+      "blockingTask": "ONE-A5-P0-07",
+      "priority": "P0"
+    }
+  ],
+  "summary": {
+    "packagePolicyCount": 23,
+    "backendNamespacePolicyCount": 28,
+    "frontendRoutePolicyCount": 23,
+    "lockPagePolicyCount": 5,
+    "diagnosticPolicyCount": 5,
+    "compatibilityMappingCount": 12,
+    "reviewQueueCount": 42,
+    "currentlyCompliantRoutes": 5,
+    "metadataOnlyRoutes": 0,
+    "runtimeEnforcementRequiredRoutes": 18
+  }
+}
