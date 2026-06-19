@@ -1,7 +1,8 @@
 {
   "profileName": "VANTARIS ONE Airport Asset Excel Intake Profile",
-  "profileVersion": "1.0.0",
+  "profileVersion": "1.1.0",
   "authority": "ONE-AIRPORT-A1-01",
+  "formulaProfileAuthority": "ONE-AIRPORT-A1-01F",
   "owningModule": "ONE Asset Graph",
   "capabilityPath": "Airport Asset Intake",
   "executionMode": "OFFLINE_READ_ONLY",
@@ -53,6 +54,13 @@
     "scripts/validation/run-one-airport-asset-excel-intake.py",
     "scripts/validation/validate-one-airport-asset-excel-intake.py"
   ],
+  "formulaSafeIntake": {
+    "dualViewRequired": true,
+    "formulasExecuted": false,
+    "approvedFormulaColumns": ["SL", "Building", "Level", "Zone", "DA", "System", "Device Type"],
+    "conditionalFormulaColumns": ["Day"],
+    "realWorkbookSha256": "60eac97282b1cae4d1697ad1b0505d66f530a638b3de3d095f9e5f9c620a3d48"
+  },
   "forbiddenPaths": [
     "AN_VANTARIS_EDGE/",
     "UFMS/",

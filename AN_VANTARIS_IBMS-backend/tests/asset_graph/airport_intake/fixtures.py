@@ -62,7 +62,7 @@ def build_zone1_rows() -> list[list]:
         _row("2", "TE3-PAS-BAS-DA21-SPK-001", system="PAS", location="LOBBY A"),
         _row("3", "TE3-ACS-BAS-DA21-DRR-001", system="ACS"),
         _row("3B", "TE3-ACS-BAS-DA21-DRR-001", system="ACS"),
-        _row("4", "TE3-RAS-BAS-DA21-SEN-001", system="RAS", level="GRD", zone="Z2"),
+        _row("4", "TE3-RAS-GRD-DA21-SEN-001", system="RAS", level="GRD", zone="Z2"),
         _row("5", "TE3-TEL-BAS-DA31-PAN-001", system="TEL", da="DA31"),
         _row("7", "TE3-CCT-BAS-DA21-FCT-001", system="CCT", location="DIFFERENT LOCATION"),
         _row("8", "", location="MISSING DEVICE ID ROW"),
@@ -80,7 +80,7 @@ def build_zone2_rows() -> list[list]:
     return [
         _row("201", "TE3-CCT-GRD-DA21-FCT-010", level="GRD", zone="Z2"),
         _row("202", "TE3-CCT-BAS-DA21-FCT-001", level="BAS", zone="Z1", location="CROSS SHEET DUPLICATE"),
-        _row("203", "TE3-CCT-BAS-DA21-FCT-011", level="1ST"),
+        _row("203", "TE3-CCT-1ST-DA21-FCT-011", level="1ST"),
         _row("204", "TE3-CCT-2ND-DA31-FCT-012", level="2ND", da="DA31"),
     ]
 

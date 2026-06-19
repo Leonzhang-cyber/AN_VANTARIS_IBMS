@@ -3,11 +3,11 @@ from __future__ import annotations
 
 from .errors import AirportIntakeError
 from .intake import compare_deterministic_outputs, run_airport_asset_excel_intake
-from .workbook import AirportExcelWorkbook
+from .formula_workbook import FormulaSafeWorkbook
 
 __all__ = [
-    "AirportExcelWorkbook",
     "AirportIntakeError",
+    "FormulaSafeWorkbook",
     "compare_deterministic_outputs",
     "run_airport_asset_excel_intake",
 ]

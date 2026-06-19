@@ -98,6 +98,8 @@ def main() -> int:
     checks.append(("No public API routes", "blueprint" not in module_text.lower()))
     checks.append(("Maintenance fields separated", "maintenanceExtensionCandidates" in module_text))
     checks.append(("No fabricated points", '"pointCandidateCount": 0' in module_text))
+    checks.append(("Formula-safe dual view", "FormulaSafeWorkbook" in module_text))
+    checks.append(("Formulas never executed", "formulasExecuted" in module_text and "eval(" not in module_text))
 
     if REGISTRY.is_file():
         registry = json.loads(REGISTRY.read_text(encoding="utf-8"))

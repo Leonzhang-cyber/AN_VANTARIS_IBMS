@@ -28,7 +28,18 @@ from .errors import AirportIntakeError
 from .location import candidate_display_name, normalize_location
 from .privacy import scan_row
 from .system_aliases import evaluate_system_alias, normalize_system_code
-from .workbook import AirportExcelWorkbook
+from .derived_columns import (
+    build_field_formula_evidence,
+    compare_building,
+    compare_da,
+    compare_device_type,
+    compare_level,
+    compare_sl,
+    compare_zone_cached,
+    derive_controlled_values,
+)
+from .formula_constants import FORMULA_PROFILE_AUTHORITY, REAL_WORKBOOK_FORMULA_EVIDENCE
+from .formula_workbook import FormulaSafeWorkbook
 
 
 def _stringify(value: Any) -> str:
@@ -128,13 +139,76 @@ def run_airport_asset_excel_intake(
     if not input_path.is_file():
         raise AirportIntakeError("WORKBOOK_NOT_FOUND", "source workbook was not found at operator path")
 
-    with AirportExcelWorkbook.open(input_path) as book:
-        worksheet_rows: dict[str, list[tuple[int, dict[str, Any]]]] = {}
+    formula_findings: list[dict[str, Any]] = []
+    formula_field_evidence: list[dict[str, Any]] = []
+    formula_metrics = {
+        "formulaCellCount": 0,
+        "approvedDerivedFormulaCount": 0,
+        "legacyAmbiguousFormulaCount": 0,
+        "unapprovedFormulaCount": 0,
+        "externalReferenceFormulaCount": 0,
+        "unsupportedFormulaCount": 0,
+        "formulaCacheMissingCount": 0,
+        "formulaCacheReconstructedCount": 0,
+        "formulaDerivationMatchCount": 0,
+        "formulaDerivationMismatchCount": 0,
+        "arrayFormulaCellCount": 0,
+        "daySemanticConflictCount": 0,
+    }
+
+    with FormulaSafeWorkbook.open(input_path) as book:
+        formula_inventory = book.formula_inventory()
+        worksheet_rows: dict[str, list[tuple[int, dict[str, Any], dict[str, dict[str, Any]]]]] = {}
         for sheet in REQUIRED_WORKSHEETS:
-            worksheet_rows[sheet] = book.rows_with_row_numbers(sheet)
+            worksheet_rows[sheet] = book.rows_with_formula_metadata(sheet)
+
+    for sheet_rows in worksheet_rows.values():
+        for _, _, row_formula_meta in sheet_rows:
+            for meta in row_formula_meta.values():
+                classification = meta.get("formulaClassification", "")
+                formula_metrics["formulaCellCount"] += 1
+                if meta.get("isArrayFormula"):
+                    formula_metrics["arrayFormulaCellCount"] += 1
+                key_map = {
+                    "APPROVED_DERIVED_FORMULA": "approvedDerivedFormulaCount",
+                    "LEGACY_AMBIGUOUS_FORMULA": "legacyAmbiguousFormulaCount",
+                    "LEGACY_FIELD_SEMANTIC_CONFLICT": "daySemanticConflictCount",
+                    "UNAPPROVED_FORMULA": "unapprovedFormulaCount",
+                    "EXTERNAL_REFERENCE_FORMULA": "externalReferenceFormulaCount",
+                    "UNSUPPORTED_FORMULA": "unsupportedFormulaCount",
+                }
+                metric_key = key_map.get(classification)
+                if metric_key:
+                    formula_metrics[metric_key] += 1
+                formula_findings.append(
+                    {
+                        "worksheet": meta.get("worksheet"),
+                        "column": meta.get("column"),
+                        "row": meta.get("row"),
+                        "formulaClassification": classification,
+                        "safeFunctionSet": meta.get("safeFunctionSet", []),
+                        "status": meta.get("status"),
+                    }
+                )
+
+    if formula_metrics["externalReferenceFormulaCount"] or formula_metrics["unsupportedFormulaCount"]:
+        raise AirportIntakeError(
+            "INPUT_REJECTED",
+            "workbook contains external or unsupported formulas",
+        )
+    if formula_metrics["unapprovedFormulaCount"]:
+        raise AirportIntakeError(
+            "INPUT_REJECTED",
+            "workbook contains formulas in unapproved columns",
+        )
+
+    flat_rows: dict[str, list[tuple[int, dict[str, Any]]]] = {
+        sheet: [(row_number, record) for row_number, record, _ in rows]
+        for sheet, rows in worksheet_rows.items()
+    }
 
     all_headers: set[str] = set()
-    for rows in worksheet_rows.values():
+    for rows in flat_rows.values():
         if rows:
             all_headers.update(rows[0][1].keys())
     _validate_required_columns(all_headers)
@@ -175,9 +249,13 @@ def run_airport_asset_excel_intake(
         "deviceId", "building", "level", "zone", "system", "location", "deviceType",
     )}
 
-    for sheet_name, rows in worksheet_rows.items():
+    row_sequence_by_sheet: dict[str, int] = {sheet: 0 for sheet in REQUIRED_WORKSHEETS}
+
+    for sheet_name in REQUIRED_WORKSHEETS:
         sheet_hint = _sheet_zone_hint(sheet_name)
-        for row_number, record in rows:
+        for row_number, record, row_formula_meta in worksheet_rows[sheet_name]:
+            row_sequence_by_sheet[sheet_name] += 1
+            row_sequence = row_sequence_by_sheet[sheet_name]
             source_row_count += 1
             privacy = scan_row(worksheet=sheet_name, row_number=row_number, record=record)
             if privacy:
@@ -202,6 +280,28 @@ def run_airport_asset_excel_intake(
                 )
 
             device_id = _stringify(record.get("Device ID"))
+            derived = derive_controlled_values(device_id)
+            row_formula_comparisons: list[dict[str, Any]] = []
+
+            def _track_comparison(column: str, comparison: dict[str, str], meta: dict[str, Any] | None) -> None:
+                status = comparison.get("comparisonStatus", "")
+                if status == "FORMULA_DERIVATION_MATCH":
+                    formula_metrics["formulaDerivationMatchCount"] += 1
+                elif status == "FORMULA_DERIVATION_MISMATCH":
+                    formula_metrics["formulaDerivationMismatchCount"] += 1
+                elif status == "FORMULA_CACHE_MISSING":
+                    formula_metrics["formulaCacheMissingCount"] += 1
+                elif status == "FORMULA_CACHE_MISSING_RECONSTRUCTED":
+                    formula_metrics["formulaCacheReconstructedCount"] += 1
+                row_formula_comparisons.append(
+                    build_field_formula_evidence(
+                        column_name=column,
+                        formula_meta=meta,
+                        comparison=comparison,
+                        derived=derived,
+                    )
+                )
+
             building = _stringify(record.get("Building"))
             level = _stringify(record.get("Level"))
             zone = _stringify(record.get("Zone"))
@@ -211,6 +311,32 @@ def run_airport_asset_excel_intake(
             location = _stringify(record.get("Location"))
             device_type = _stringify(record.get("Device Type"))
             sl = _stringify(record.get("SL"))
+
+            _track_comparison("Building", compare_building(record.get("Building"), derived), row_formula_meta.get("Building"))
+            _track_comparison("Level", compare_level(record.get("Level"), derived), row_formula_meta.get("Level"))
+            _track_comparison("DA", compare_da(record.get("DA"), derived), row_formula_meta.get("DA"))
+            _track_comparison(
+                "Device Type",
+                compare_device_type(
+                    record.get("Device Type"),
+                    derived,
+                    formula_present=bool(row_formula_meta.get("Device Type")),
+                ),
+                row_formula_meta.get("Device Type"),
+            )
+            _track_comparison("SL", compare_sl(record.get("SL"), row_sequence=row_sequence), row_formula_meta.get("SL"))
+            _track_comparison(
+                "Zone",
+                compare_zone_cached(record.get("Zone"), sheet_name=sheet_name, row_zone_value=zone),
+                row_formula_meta.get("Zone"),
+            )
+            formula_field_evidence.append(
+                {
+                    "worksheet": sheet_name,
+                    "rowNumber": row_number,
+                    "fields": row_formula_comparisons,
+                }
+            )
 
             if not device_id:
                 missing_counts["deviceId"] += 1
@@ -237,6 +363,7 @@ def run_airport_asset_excel_intake(
                         "classification": "SHEET_ZONE_INCONSISTENCY",
                     }
                 )
+            zone_comparison = compare_zone_cached(record.get("Zone"), sheet_name=sheet_name, row_zone_value=zone)
 
             raw_location, normalized_location = normalize_location(location)
             if normalized_location:
@@ -279,6 +406,16 @@ def run_airport_asset_excel_intake(
                 system_code_mismatch_findings.append(alias_entry)
 
             maintenance_fields = _non_empty_fields(record, MAINTENANCE_EXTENSION_COLUMNS)
+            day_formula = row_formula_meta.get("Day", {})
+            if day_formula.get("formulaClassification") == "LEGACY_FIELD_SEMANTIC_CONFLICT":
+                maintenance_fields.pop("Day", None)
+                maintenance_ambiguities.append(
+                    {
+                        "worksheet": sheet_name,
+                        "rowNumber": row_number,
+                        "classification": "LEGACY_FIELD_SEMANTIC_CONFLICT",
+                    }
+                )
             if maintenance_fields:
                 maintenance_candidates.append(
                     {
@@ -288,18 +425,19 @@ def run_airport_asset_excel_intake(
                         "fields": maintenance_fields,
                     }
                 )
-                day_ambiguity = _classify_day_value(
-                    _stringify(record.get("Day")),
-                    location,
-                )
-                if day_ambiguity:
-                    maintenance_ambiguities.append(
-                        {
-                            "worksheet": sheet_name,
-                            "rowNumber": row_number,
-                            "classification": day_ambiguity,
-                        }
+                if "Day" in maintenance_fields:
+                    day_ambiguity = _classify_day_value(
+                        _stringify(record.get("Day")),
+                        location,
                     )
+                    if day_ambiguity:
+                        maintenance_ambiguities.append(
+                            {
+                                "worksheet": sheet_name,
+                                "rowNumber": row_number,
+                                "classification": day_ambiguity,
+                            }
+                        )
 
             display_name = candidate_display_name(device_type, location)
             candidate = {
@@ -321,6 +459,7 @@ def run_airport_asset_excel_intake(
                 "candidateDisplayName": display_name,
                 "assetMasterFields": _non_empty_fields(record, ASSET_MASTER_COLUMNS),
                 "maintenanceExtensionFieldCount": len(maintenance_fields),
+                "formulaFieldEvidence": row_formula_comparisons,
             }
             device_candidates.append(candidate)
             accepted_rows.append({"worksheet": sheet_name, "rowNumber": row_number})
@@ -421,13 +560,16 @@ def run_airport_asset_excel_intake(
     )
 
     source_profile = _build_source_profile(
-        worksheet_rows=worksheet_rows,
+        worksheet_rows=flat_rows,
         system_codes=system_codes,
         spatial_sets=spatial_sets,
     )
 
-    blocker_count = len(privacy_findings) + sum(
-        1 for item in duplicate_findings if item["classification"] == "DUPLICATE_SOURCE_IDENTITY_CONFLICT"
+    derivation_mismatch_count = formula_metrics["formulaDerivationMismatchCount"]
+    blocker_count = (
+        len(privacy_findings)
+        + sum(1 for item in duplicate_findings if item["classification"] == "DUPLICATE_SOURCE_IDENTITY_CONFLICT")
+        + derivation_mismatch_count
     )
     review_count = (
         len(system_alias_candidates)
@@ -438,9 +580,11 @@ def run_airport_asset_excel_intake(
     )
     warning_count = len(system_code_mismatch_findings)
 
-    if duplicate_findings or system_alias_candidates or maintenance_ambiguities:
+    if derivation_mismatch_count > 0:
+        readiness = "INTAKE_BLOCKED"
+    elif duplicate_findings or system_alias_candidates or maintenance_ambiguities or formula_metrics["formulaCacheReconstructedCount"]:
         readiness = "INTAKE_COMPLETE_WITH_REVIEWS"
-    if airport_context_id == PLACEHOLDER_AIRPORT or terminal_context_id == PLACEHOLDER_TERMINAL:
+    elif airport_context_id == PLACEHOLDER_AIRPORT or terminal_context_id == PLACEHOLDER_TERMINAL:
         readiness = "INTAKE_COMPLETE_WITH_REVIEWS"
 
     aggregate = _build_aggregate_summary(
@@ -461,6 +605,7 @@ def run_airport_asset_excel_intake(
         blocker_count=blocker_count,
         review_count=review_count,
         warning_count=warning_count,
+        formula_metrics=formula_metrics,
     )
 
     evidence_core = {
@@ -476,10 +621,19 @@ def run_airport_asset_excel_intake(
             "worksheetNames": list(REQUIRED_WORKSHEETS),
             "containsRawWorkbook": False,
         },
+        "formulaProfile": {
+            "authority": FORMULA_PROFILE_AUTHORITY,
+            "formulasExecuted": False,
+            "dualViewSeparation": True,
+            "formulaInventory": formula_inventory,
+            "realWorkbookFormulaEvidence": REAL_WORKBOOK_FORMULA_EVIDENCE,
+        },
+        "formulaFindingsSummary": formula_findings[:100],
+        "formulaFieldEvidenceSample": formula_field_evidence[:20],
         "sourceProfile": source_profile,
         "worksheetSummary": {
             sheet: {"sourceRowCount": len(rows), "acceptedRowCount": len(rows)}
-            for sheet, rows in worksheet_rows.items()
+            for sheet, rows in flat_rows.items()
         },
         "spatialCandidates": _spatial_candidates(spatial_sets),
         "systemCandidates": sorted(system_codes),
@@ -564,27 +718,27 @@ def _build_relationship_candidates(
     spatial_sets: dict[str, set[str]],
 ) -> list[dict[str, str]]:
     relationships: list[dict[str, str]] = []
-    for building in spatial_sets["building"]:
+    for building in sorted(spatial_sets["building"]):
         relationships.append(
             {"relationshipType": "CONTAINS", "fromType": "Terminal", "fromId": terminal_context_id, "toType": "Building", "toId": building}
         )
-    for level in spatial_sets["level"]:
-        for building in spatial_sets["building"]:
+    for level in sorted(spatial_sets["level"]):
+        for building in sorted(spatial_sets["building"]):
             relationships.append(
                 {"relationshipType": "CONTAINS", "fromType": "Building", "fromId": building, "toType": "Level", "toId": level}
             )
-    for zone in spatial_sets["zone"]:
-        for level in spatial_sets["level"]:
+    for zone in sorted(spatial_sets["zone"]):
+        for level in sorted(spatial_sets["level"]):
             relationships.append(
                 {"relationshipType": "CONTAINS", "fromType": "Level", "fromId": level, "toType": "Zone", "toId": zone}
             )
-    for da in spatial_sets["distributionArea"]:
-        for zone in spatial_sets["zone"]:
+    for da in sorted(spatial_sets["distributionArea"]):
+        for zone in sorted(spatial_sets["zone"]):
             relationships.append(
                 {"relationshipType": "CONTAINS", "fromType": "Zone", "fromId": zone, "toType": "DistributionArea", "toId": da}
             )
-    for location in spatial_sets["location"]:
-        for da in spatial_sets["distributionArea"]:
+    for location in sorted(spatial_sets["location"]):
+        for da in sorted(spatial_sets["distributionArea"]):
             relationships.append(
                 {"relationshipType": "CONTAINS", "fromType": "DistributionArea", "fromId": da, "toType": "Location", "toId": location}
             )
@@ -684,7 +838,9 @@ def _build_aggregate_summary(
     blocker_count: int,
     review_count: int,
     warning_count: int,
+    formula_metrics: dict[str, int] | None = None,
 ) -> dict[str, Any]:
+    formula_metrics = formula_metrics or {}
     unique_device_ids = {c.get("sourceId") for c in device_candidates if c.get("sourceId")}
     duplicate_device_id_count = sum(
         1 for item in duplicate_findings if "deviceId" in item
@@ -727,6 +883,18 @@ def _build_aggregate_summary(
         "blockerCount": blocker_count,
         "reviewCount": review_count,
         "warningCount": warning_count,
+        "formulaCellCount": formula_metrics.get("formulaCellCount", 0),
+        "approvedDerivedFormulaCount": formula_metrics.get("approvedDerivedFormulaCount", 0),
+        "legacyAmbiguousFormulaCount": formula_metrics.get("legacyAmbiguousFormulaCount", 0),
+        "unapprovedFormulaCount": formula_metrics.get("unapprovedFormulaCount", 0),
+        "externalReferenceFormulaCount": formula_metrics.get("externalReferenceFormulaCount", 0),
+        "unsupportedFormulaCount": formula_metrics.get("unsupportedFormulaCount", 0),
+        "formulaCacheMissingCount": formula_metrics.get("formulaCacheMissingCount", 0),
+        "formulaCacheReconstructedCount": formula_metrics.get("formulaCacheReconstructedCount", 0),
+        "formulaDerivationMatchCount": formula_metrics.get("formulaDerivationMatchCount", 0),
+        "formulaDerivationMismatchCount": formula_metrics.get("formulaDerivationMismatchCount", 0),
+        "arrayFormulaCellCount": formula_metrics.get("arrayFormulaCellCount", 0),
+        "daySemanticConflictCount": formula_metrics.get("daySemanticConflictCount", 0),
     }
 
 

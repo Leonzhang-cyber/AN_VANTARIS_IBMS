@@ -28,7 +28,7 @@ from src.asset_graph.airport_intake.headers import normalize_header
 from src.asset_graph.airport_intake.intake import compare_deterministic_outputs, run_airport_asset_excel_intake
 from src.asset_graph.airport_intake.location import candidate_display_name, normalize_location
 from src.asset_graph.airport_intake.system_aliases import evaluate_system_alias
-from src.asset_graph.airport_intake.workbook import AirportExcelWorkbook
+from src.asset_graph.airport_intake.formula_workbook import FormulaSafeWorkbook
 
 FIXTURES_PATH = Path(__file__).resolve().parent / "fixtures.py"
 _spec = importlib.util.spec_from_file_location("airport_intake_fixtures", FIXTURES_PATH)
@@ -67,18 +67,18 @@ class TestAirportAssetExcelIntake(unittest.TestCase):
 
     # 1
     def test_xlsx_extension_accepted(self) -> None:
-        AirportExcelWorkbook.validate_extension(self.workbook_path)
+        FormulaSafeWorkbook.validate_extension(self.workbook_path)
 
     # 2
     def test_xlsm_extension_rejected(self) -> None:
         path = Path(self.tempdir.name) / "bad.xlsm"
         path.write_bytes(b"fake")
         with self.assertRaises(AirportIntakeError):
-            AirportExcelWorkbook.validate_extension(path)
+            FormulaSafeWorkbook.validate_extension(path)
 
     # 3
     def test_required_worksheets_detected(self) -> None:
-        with AirportExcelWorkbook.open(self.workbook_path) as book:
+        with FormulaSafeWorkbook.open(self.workbook_path) as book:
             self.assertEqual(book.sheet_names(), ("Zone-1", "Zone-2"))
 
     # 4
@@ -93,7 +93,7 @@ class TestAirportAssetExcelIntake(unittest.TestCase):
                     else:
                         zout.writestr(item, zin.read(item.filename))
         with self.assertRaises(AirportIntakeError):
-            AirportExcelWorkbook.open(bad_path)
+            FormulaSafeWorkbook.open(bad_path)
 
     # 5
     def test_header_normalization(self) -> None:
@@ -102,15 +102,15 @@ class TestAirportAssetExcelIntake(unittest.TestCase):
 
     # 6
     def test_required_asset_columns_present(self) -> None:
-        with AirportExcelWorkbook.open(self.workbook_path) as book:
-            rows = book.rows_with_row_numbers("Zone-1")
+        with FormulaSafeWorkbook.open(self.workbook_path) as book:
+            rows = book.rows_with_formula_metadata("Zone-1")
         for column in ASSET_MASTER_COLUMNS:
             self.assertIn(column, rows[0][1])
 
     # 7
     def test_optional_maintenance_columns_present(self) -> None:
-        with AirportExcelWorkbook.open(self.workbook_path) as book:
-            rows = book.rows_with_row_numbers("Zone-1")
+        with FormulaSafeWorkbook.open(self.workbook_path) as book:
+            rows = book.rows_with_formula_metadata("Zone-1")
         for column in MAINTENANCE_EXTENSION_COLUMNS:
             self.assertIn(column, rows[0][1])
 
@@ -121,8 +121,8 @@ class TestAirportAssetExcelIntake(unittest.TestCase):
 
     # 9
     def test_blank_trailing_rows_ignored(self) -> None:
-        with AirportExcelWorkbook.open(self.workbook_path) as book:
-            rows = book.rows_with_row_numbers("Zone-1")
+        with FormulaSafeWorkbook.open(self.workbook_path) as book:
+            rows = book.rows_with_formula_metadata("Zone-1")
         self.assertLess(len(rows), 16)
 
     # 10
