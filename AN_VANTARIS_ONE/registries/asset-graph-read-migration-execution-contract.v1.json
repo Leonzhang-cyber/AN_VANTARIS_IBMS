@@ -1,0 +1,166 @@
+{
+  "contractName": "VANTARIS ONE Asset Graph Controlled Read Migration Execution Contract",
+  "contractVersion": "1.0.0",
+  "authority": "ONE-A5-P1-16L",
+  "status": "FROZEN_FOR_READ_MIGRATION_CONTROL",
+  "generatedAtPolicy": "STATIC_POLICY_REGISTRY",
+  "executionMode": "READ_ONLY_VALIDATION",
+  "writeCutoverStatus": "NOT_READY_FOR_WRITE_CUTOVER",
+  "allowedExecutionStates": [
+    "DRAFT",
+    "WAITING_FOR_EVIDENCE",
+    "WAITING_FOR_READINESS",
+    "WAITING_FOR_APPROVAL",
+    "APPROVED_FOR_LIMITED_READ_VALIDATION",
+    "EXECUTION_BLOCKED",
+    "VALIDATION_COMPLETE",
+    "VALIDATION_FAILED",
+    "ROLLED_BACK"
+  ],
+  "forbiddenExecutionStates": [
+    "APPROVED_FOR_WRITE_MIGRATION",
+    "APPROVED_FOR_WRITE_CUTOVER",
+    "DUAL_WRITE_ACTIVE"
+  ],
+  "supportedReadinessPolicyVersions": [
+    "1.0.0"
+  ],
+  "supportedMappingVersions": [
+    "legacy-device-v1"
+  ],
+  "requiredControlInputs": [
+    "readinessResultDigest",
+    "readinessPolicyVersion",
+    "readinessDecision",
+    "evidenceClassification",
+    "evidenceDigest",
+    "mappingVersion",
+    "sourceCountSummary",
+    "projectedCountSummary",
+    "blockerCount",
+    "reviewCount",
+    "warningCount",
+    "hardBlockerCount",
+    "relationshipInvariantSummary",
+    "deterministicVerificationConfirmed",
+    "writeCutoverStatus",
+    "requestedOperations",
+    "migrationIntent",
+    "executionScope",
+    "approvals",
+    "evaluationInstant"
+  ],
+  "allowedApprovalTypes": [
+    "SYNTHETIC_LIMITED_READ_VALIDATION",
+    "REAL_LIMITED_READ_VALIDATION",
+    "REAL_READ_MIGRATION_CANDIDATE_REVIEW"
+  ],
+  "allowedApprovalRoles": [
+    "ARCHITECTURE_OWNER",
+    "DATA_OWNER"
+  ],
+  "allowedOperations": [
+    "READ_SOURCE_PACKAGE",
+    "PROJECT_IN_MEMORY",
+    "RECONCILE_IN_MEMORY",
+    "GENERATE_EVIDENCE",
+    "GENERATE_READINESS_ASSESSMENT",
+    "EXPORT_AGGREGATE_REPORT"
+  ],
+  "forbiddenOperations": [
+    "WRITE_LEGACY",
+    "WRITE_CANONICAL",
+    "CREATE_DATABASE_SCHEMA",
+    "ALTER_DATABASE_SCHEMA",
+    "RUN_MIGRATION",
+    "ENABLE_DUAL_WRITE",
+    "MODIFY_SOURCE_DATA",
+    "PUBLISH_PUBLIC_API",
+    "APPROVE_WRITE_CUTOVER"
+  ],
+  "allowedMigrationIntents": [
+    "LIMITED_READ_VALIDATION",
+    "READ_MIGRATION_CANDIDATE_REVIEW"
+  ],
+  "forbiddenMigrationIntents": [
+    "PRODUCTION_MIGRATION",
+    "WRITE_MIGRATION",
+    "WRITE_CUTOVER",
+    "DUAL_WRITE"
+  ],
+  "syntheticLimitedReadValidationRequirements": {
+    "readinessDecision": "READY_FOR_LIMITED_READ_VALIDATION",
+    "evidenceClassification": "SYNTHETIC_REPRESENTATIVE_ONLY",
+    "deterministicVerificationRequired": true,
+    "hardBlockerMaximum": 0,
+    "writeCutoverStatus": "NOT_READY_FOR_WRITE_CUTOVER",
+    "requiredApprovalTypes": [
+      "SYNTHETIC_LIMITED_READ_VALIDATION"
+    ],
+    "requiredApprovalRoles": [
+      "ARCHITECTURE_OWNER"
+    ],
+    "requiresExplicitExecutionScope": true,
+    "requiresExplicitExpiration": true,
+    "requiresExplicitRollbackPlan": true,
+    "approvedExecutionState": "APPROVED_FOR_LIMITED_READ_VALIDATION"
+  },
+  "realReadMigrationCandidateRequirements": {
+    "readinessDecision": "READY_FOR_READ_MIGRATION_CANDIDATE",
+    "evidenceClassification": "REAL_SANITIZED_EVIDENCE",
+    "hardBlockerMaximum": 0,
+    "writeCutoverStatus": "NOT_READY_FOR_WRITE_CUTOVER",
+    "requiredApprovalTypes": [
+      "REAL_READ_MIGRATION_CANDIDATE_REVIEW"
+    ],
+    "requiredApprovalRoles": [
+      "DATA_OWNER",
+      "ARCHITECTURE_OWNER"
+    ],
+    "requiresExplicitExecutionScope": true,
+    "requiresExplicitExpiration": true,
+    "requiresExplicitRollbackPlan": true,
+    "approvedExecutionState": "APPROVED_FOR_LIMITED_READ_VALIDATION"
+  },
+  "syntheticProductionMigrationProhibited": true,
+  "preconditionGates": [
+    "READINESS_RESULT_GATE",
+    "EVIDENCE_CLASSIFICATION_GATE",
+    "EVIDENCE_DIGEST_GATE",
+    "POLICY_VERSION_GATE",
+    "MAPPING_VERSION_GATE",
+    "DETERMINISM_GATE",
+    "HARD_BLOCKER_GATE",
+    "RELATIONSHIP_INVARIANT_GATE",
+    "SCOPE_DECLARATION_GATE",
+    "COUNT_BOUNDARY_GATE",
+    "APPROVAL_PRESENT_GATE",
+    "APPROVAL_SCOPE_MATCH_GATE",
+    "APPROVAL_EXPIRY_GATE",
+    "ROLLBACK_PLAN_GATE",
+    "RETENTION_POLICY_GATE",
+    "FORBIDDEN_OPERATION_GATE",
+    "WRITE_CUTOVER_PROHIBITION_GATE"
+  ],
+  "executionScopeFields": [
+    "tenantScope",
+    "siteScope",
+    "sourceSystemScope",
+    "mappingVersion",
+    "maximumDeviceCount",
+    "maximumPointCount",
+    "allowedOperations",
+    "forbiddenOperations",
+    "outputLocationPolicy",
+    "retentionPolicy",
+    "rollbackPolicy",
+    "approvalExpiry"
+  ],
+  "relationshipInvariantRequirements": {
+    "hasPointParityRequired": true,
+    "duplicateCanonicalRelationshipMaximum": 0,
+    "unresolvedRelationshipMaximumForSynthetic": 1
+  },
+  "retentionPolicyMinimumLength": 8,
+  "rollbackPolicyMinimumLength": 8
+}
