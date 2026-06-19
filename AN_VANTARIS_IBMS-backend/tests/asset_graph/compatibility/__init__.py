@@ -1,0 +1,1 @@
+"""Compatibility facade tests."""
