@@ -18,6 +18,7 @@ from .constants import (
     READINESS_OUTCOMES,
 )
 from .context import AirportClassificationContext
+from .coverage_metrics import compute_device_coverage, extend_summary
 from .device_id_segments import parse_device_id_segments
 from .device_type_classifier import classify_device_type
 from .duplicates import compare_duplicate_classifications
@@ -239,12 +240,7 @@ def run_airport_classification(
         in {"DUPLICATE_SYSTEM_CONFLICT", "DUPLICATE_DEVICE_TYPE_CONFLICT", "DUPLICATE_CLASSIFICATION_REVIEW_REQUIRED"}
     )
 
-    classified_count = sum(
-        1
-        for item in device_bindings
-        if item["systemMappingStatus"] in {"EXACT_MATCH", "APPROVED_ALIAS", "ALIAS_CANDIDATE"}
-        and item["deviceTypeMappingStatus"] in {"EXACT_TYPE_MATCH", "APPROVED_TYPE_ALIAS", "TYPE_ALIAS_CANDIDATE"}
-    )
+    classified_count = compute_device_coverage(device_bindings)["classifiedDeviceCount"]
     unclassified_count = len(device_bindings) - classified_count
 
     blocker_count = sum(1 for item in device_bindings if item["systemMappingStatus"] == "UNSUPPORTED_SYSTEM")
@@ -322,7 +318,13 @@ def run_airport_classification(
         "deviceTypeAliasCandidateCount": type_alias_candidate,
         "unknownDeviceTypeCodeCount": unknown_type,
         "deviceTypeColumnConflictCount": type_column_conflict,
+        "deviceTypeColumnConflictRecordCount": sum(
+            1 for item in device_bindings if item["deviceTypeMappingStatus"] == "DEVICE_TYPE_COLUMN_CONFLICT"
+        ),
         "compatibleSystemDeviceCount": compatible_count,
+        "compatibilityReviewDeviceCount": sum(
+            1 for item in device_bindings if item["compatibilityStatus"] == "COMPATIBILITY_REVIEW_REQUIRED"
+        ),
         "unexpectedSystemDeviceCount": unexpected_count,
         "ambiguousSystemDeviceCount": ambiguous_compat,
         "duplicateClassificationAgreementCount": duplicate_agreement,
@@ -332,6 +334,7 @@ def run_airport_classification(
         "warningCount": warning_count,
         "readinessOutcome": readiness,
     }
+    summary = extend_summary(summary, device_bindings)
     summary["resultDigest"] = sha256_digest({k: v for k, v in summary.items() if k != "resultDigest"})
 
     paths = {

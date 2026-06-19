@@ -590,5 +590,168 @@ class TestAirportClassificationProfile(unittest.TestCase):
             self.assertIn("SCN_SEMANTIC_REVIEW_REQUIRED", classifications)
 
 
+class TestClassificationCoverageSemantics(unittest.TestCase):
+    def _binding(
+        self,
+        *,
+        system_status: str = "EXACT_MATCH",
+        type_status: str = "EXACT_TYPE_MATCH",
+        compatibility_status: str = "SYSTEM_DEVICE_COMPATIBLE",
+        system_value: str = "ACS",
+        type_code: str = "ADCP",
+        system_category: str = "ACCESS_CONTROL",
+        device_class: str = "CONTROLLER",
+        review_reasons: list[str] | None = None,
+    ) -> dict:
+        return {
+            "sourceSystemValue": system_value,
+            "embeddedDeviceTypeCode": type_code,
+            "genericSystemCategory": system_category,
+            "genericDeviceClass": device_class,
+            "systemMappingStatus": system_status,
+            "deviceTypeMappingStatus": type_status,
+            "compatibilityStatus": compatibility_status,
+            "reviewReasons": review_reasons or [],
+            "sourceWorksheet": "Zone-1",
+            "sourceRowNumber": 1,
+        }
+
+    def test_all_records_accounted_for(self) -> None:
+        from src.asset_graph.industry_profiles.airport_classification.coverage_metrics import compute_device_coverage
+
+        bindings = [
+            self._binding(system_status="ALIAS_CANDIDATE", system_value="CCTV", type_code="FCT", system_category="VIDEO_SURVEILLANCE", device_class="CAMERA"),
+            self._binding(system_status="REVIEW_REQUIRED", system_value="TEL", type_code="TEL", system_category="TELECOMMUNICATION", device_class="TELEPHONE", compatibility_status="COMPATIBILITY_REVIEW_REQUIRED"),
+            self._binding(type_status="DEVICE_TYPE_COLUMN_CONFLICT", type_code="EML/DC1", device_class="LOCK"),
+        ]
+        coverage = compute_device_coverage(bindings)
+        self.assertEqual(coverage["totalDeviceCandidates"], 3)
+        self.assertEqual(coverage["evidenceClassifiedDeviceCount"], 3)
+        self.assertEqual(coverage["classifiedDeviceCount"] + coverage["unclassifiedDeviceCount"], 3)
+
+    def test_evidence_and_approval_counts_differ(self) -> None:
+        from src.asset_graph.industry_profiles.airport_classification.coverage_metrics import compute_device_coverage
+
+        bindings = [self._binding(system_status="ALIAS_CANDIDATE", system_value="CCTV", type_code="FCT", system_category="VIDEO_SURVEILLANCE", device_class="CAMERA")]
+        coverage = compute_device_coverage(bindings)
+        self.assertEqual(coverage["evidenceClassifiedDeviceCount"], 1)
+        self.assertEqual(coverage["fullyApprovedDeviceCount"], 0)
+        self.assertEqual(coverage["classifiedDeviceCount"], 1)
+
+    def test_alias_candidate_not_unmapped(self) -> None:
+        from src.asset_graph.industry_profiles.airport_classification.coverage_metrics import compute_device_coverage
+
+        bindings = [self._binding(system_status="ALIAS_CANDIDATE", system_value="PA", type_code="HSP", system_category="PUBLIC_ADDRESS", device_class="SPEAKER")]
+        coverage = compute_device_coverage(bindings)
+        self.assertEqual(coverage["unmappedDeviceCount"], 0)
+        self.assertEqual(coverage["classifiedDeviceCount"], 1)
+
+    def test_scn_review_not_fully_approved(self) -> None:
+        from src.asset_graph.industry_profiles.airport_classification.coverage_metrics import compute_device_coverage
+
+        bindings = [
+            self._binding(
+                system_status="REVIEW_REQUIRED",
+                system_value="TEL",
+                type_code="TEL",
+                system_category="TELECOMMUNICATION",
+                device_class="TELEPHONE",
+                compatibility_status="COMPATIBILITY_REVIEW_REQUIRED",
+                review_reasons=["SCN_SEMANTIC_REVIEW_REQUIRED"],
+            )
+        ]
+        coverage = compute_device_coverage(bindings)
+        self.assertEqual(coverage["fullyApprovedDeviceCount"], 0)
+        self.assertEqual(coverage["evidenceClassifiedDeviceCount"], 1)
+        self.assertEqual(coverage["unclassifiedDeviceCount"], 1)
+
+    def test_compatibility_does_not_imply_approval(self) -> None:
+        from src.asset_graph.industry_profiles.airport_classification.coverage_metrics import compute_device_coverage
+
+        bindings = [
+            self._binding(
+                type_status="DEVICE_TYPE_COLUMN_CONFLICT",
+                type_code="EML/DC1",
+                device_class="LOCK",
+                compatibility_status="SYSTEM_DEVICE_COMPATIBLE",
+            )
+        ]
+        coverage = compute_device_coverage(bindings)
+        self.assertEqual(coverage["compatibleSystemDeviceCount"], 1)
+        self.assertEqual(coverage["fullyApprovedDeviceCount"], 0)
+        self.assertEqual(coverage["unclassifiedDeviceCount"], 1)
+
+    def test_unique_candidate_counts_documented_in_summary(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            devices = [_fx._device_with_type("TE3-CCT-BAS-DA21-FCT-001", system="CCTV")]
+            _run_classification(base, devices)
+            summary = json.loads((base / "out" / "airport-classification-summary.json").read_text(encoding="utf-8"))
+            self.assertIn("metricDefinitions", summary)
+            self.assertIn("exactSystemMatchCount", summary["metricDefinitions"])
+            self.assertIn("not a device-record count", summary["metricDefinitions"]["exactSystemMatchCount"])
+
+    def test_summary_exposes_new_coverage_fields(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            devices = [_fx._device_with_type("TE3-CCT-BAS-DA21-FCT-001", system="CCTV")]
+            _run_classification(base, devices)
+            summary = json.loads((base / "out" / "airport-classification-summary.json").read_text(encoding="utf-8"))
+            for field in (
+                "evidenceClassifiedDeviceCount",
+                "reconciliationEligibleDeviceCount",
+                "fullyApprovedDeviceCount",
+                "reviewRequiredDeviceCount",
+                "compatibilityEvaluatedDeviceCount",
+                "compatibilityReviewDeviceCount",
+            ):
+                self.assertIn(field, summary)
+
+    def test_coverage_analysis_deterministic(self) -> None:
+        from src.asset_graph.industry_profiles.airport_classification import (
+            compare_deterministic_outputs,
+            write_classification_coverage_analysis,
+        )
+
+        bindings = [
+            self._binding(system_status="ALIAS_CANDIDATE", system_value="CCTV", type_code="FCT", system_category="VIDEO_SURVEILLANCE", device_class="CAMERA"),
+            self._binding(system_status="REVIEW_REQUIRED", system_value="TEL", type_code="TEL", system_category="TELECOMMUNICATION", device_class="TELEPHONE", compatibility_status="COMPATIBILITY_REVIEW_REQUIRED"),
+        ]
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            write_classification_coverage_analysis(bindings=bindings, output_path=base / "run1" / "classification-coverage-analysis.json")
+            write_classification_coverage_analysis(bindings=bindings, output_path=base / "run2" / "classification-coverage-analysis.json")
+            matched, status = compare_deterministic_outputs(
+                base / "run1" / "classification-coverage-analysis.json",
+                base / "run2" / "classification-coverage-analysis.json",
+            )
+            self.assertTrue(matched, status)
+
+    def test_coverage_analysis_excludes_customer_identifiers(self) -> None:
+        from src.asset_graph.industry_profiles.airport_classification import write_classification_coverage_analysis
+
+        bindings = [self._binding()]
+        with tempfile.TemporaryDirectory() as tmp:
+            output = Path(tmp) / "classification-coverage-analysis.json"
+            payload = write_classification_coverage_analysis(bindings=bindings, output_path=output)
+            self.assertFalse(payload["containsCustomerAssetIdentifiers"])
+            self.assertNotIn("TE3", output.read_text(encoding="utf-8"))
+
+    def test_internal_totals_consistent(self) -> None:
+        from src.asset_graph.industry_profiles.airport_classification.coverage_metrics import compute_device_coverage
+
+        bindings = [
+            self._binding(),
+            self._binding(system_status="ALIAS_CANDIDATE", system_value="PA", type_code="HSP", system_category="PUBLIC_ADDRESS", device_class="SPEAKER"),
+            self._binding(type_status="DEVICE_TYPE_COLUMN_CONFLICT", type_code="EML/DC1", device_class="LOCK"),
+        ]
+        coverage = compute_device_coverage(bindings)
+        self.assertEqual(coverage["devicesWithBothClassifications"], coverage["totalDeviceCandidates"])
+        self.assertEqual(
+            coverage["compatibilityEvaluatedDeviceCount"] + coverage["compatibilityNotEvaluatedDeviceCount"],
+            coverage["totalDeviceCandidates"],
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
