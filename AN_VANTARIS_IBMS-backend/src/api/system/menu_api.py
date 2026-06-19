@@ -5,7 +5,7 @@ from src.common.core.database import db
 from src.system.menu_service import MenuService
 from src.common.models.response import Result
 from src.api import api_bp
-from src.common.utils.jwt_util import jwt_required
+from src.common.utils.jwt_util import jwt_required; from src.governance.audit.pilot import audit_create_version_pilot
 from src.common.utils.local_smoke import (
     handle_db_smoke_error,
     is_local_smoke_enabled,
@@ -60,6 +60,7 @@ def get_default_version():
 
 @api_bp.route('/system/versions', methods=['POST'])
 @jwt_required
+@audit_create_version_pilot
 def create_version():
     data = request.json
     if not data.get('version_code') or not data.get('version_name'):
@@ -97,7 +98,6 @@ def create_version():
     except Exception as e:
         db.session.rollback()
         return Result.error(code=500, message=str(e))
-
 
 @api_bp.route('/system/versions/<version_code>', methods=['PUT'])
 @jwt_required

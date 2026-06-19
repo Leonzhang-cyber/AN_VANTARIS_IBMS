@@ -14,7 +14,9 @@ TEST_ROOT = ROOT / "AN_VANTARIS_IBMS-backend/src/tests/governance"
 ALLOWED_PREFIXES = (
     "AN_VANTARIS_IBMS-backend/src/governance/",
     "AN_VANTARIS_IBMS-backend/src/tests/governance/",
+    "AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py",
     "scripts/validation/validate-one-audit-provider-boundary.py",
+    "scripts/validation/validate-one-audit-integration-pilot.py",
 )
 
 
@@ -35,7 +37,7 @@ def main() -> int:
     source_files = sorted(PACKAGE.glob("*.py"))
     expected = {
         "__init__.py", "constants.py", "errors.py", "models.py",
-        "validation.py", "provider.py", "in_memory.py", "service.py",
+        "validation.py", "provider.py", "in_memory.py", "service.py", "pilot.py",
     }
     if {path.name for path in source_files} != expected:
         errors.append("audit provider source package is incomplete")
@@ -44,7 +46,7 @@ def main() -> int:
 
     forbidden_import_prefixes = (
         "src.reports", "src.ucde", "src.ufms", "src.uedge", "src.link",
-        "src.Iot", "sqlalchemy", "flask", "redis", "kafka",
+        "src.Iot", "sqlalchemy", "redis", "kafka",
     )
     for path in source_files:
         text = path.read_text(encoding="utf-8")
@@ -60,6 +62,8 @@ def main() -> int:
             elif isinstance(node, ast.ImportFrom):
                 names = [node.module or ""]
             for name in names:
+                if name == "flask" and path.name != "pilot.py":
+                    errors.append(f"{path.name}: forbidden cross-module import {name}")
                 if name.startswith(forbidden_import_prefixes):
                     errors.append(f"{path.name}: forbidden cross-module import {name}")
             if isinstance(node, ast.ClassDef):
