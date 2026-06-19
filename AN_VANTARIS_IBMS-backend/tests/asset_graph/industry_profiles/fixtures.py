@@ -260,3 +260,12 @@ def reconciliation_context_kwargs() -> dict:
         "site_id": "SYNTH-SITE-001",
         "source_workbook_digest": WORKBOOK_DIGEST,
     }
+
+
+def review_projection_context_kwargs(*, reconciliation_result_digest: str) -> dict:
+    return {
+        "tenant_id": "SYNTH-TENANT-001",
+        "site_id": "SYNTH-SITE-001",
+        "source_workbook_digest": WORKBOOK_DIGEST,
+        "reconciliation_result_digest": reconciliation_result_digest,
+    }

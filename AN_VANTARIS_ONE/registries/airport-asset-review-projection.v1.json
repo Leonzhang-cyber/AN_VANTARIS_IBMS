@@ -1,0 +1,30 @@
+{
+  "profileName": "VANTARIS ONE Airport Reconciled Asset Review Projection",
+  "profileVersion": "1.0.0",
+  "authority": "ONE-AIRPORT-A1-05",
+  "profileType": "INDUSTRY_PROJECTION",
+  "platformScope": "CROSS_INDUSTRY_ASSET_GRAPH",
+  "implementationMode": "READ_ONLY_PROJECTION",
+  "platformCoreAirportized": false,
+  "canonicalWriteEnabled": false,
+  "decisionWriteEnabled": false,
+  "databaseAccessEnabled": false,
+  "profileId": "airport-asset-review-projection-v1",
+  "compatibleReconciliationAuthority": "ONE-AIRPORT-A1-04",
+  "forbiddenReadinessOutcomes": [
+    "READY_FOR_DATABASE_IMPORT",
+    "READY_FOR_CANONICAL_WRITE",
+    "READY_FOR_WRITE_CUTOVER"
+  ],
+  "allowedReadinessOutcomes": [
+    "REVIEW_PROJECTION_BLOCKED",
+    "REVIEW_PROJECTION_COMPLETE_WITH_PENDING_DECISIONS",
+    "READY_FOR_READ_ONLY_UCONSOLE_INTEGRATION"
+  ],
+  "implementationPaths": [
+    "AN_VANTARIS_ONE/registries/airport-asset-review-projection.v1.json",
+    "AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_review_projection/",
+    "AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/",
+    "scripts/validation/validate-one-airport-review-projection.py"
+  ]
+}
