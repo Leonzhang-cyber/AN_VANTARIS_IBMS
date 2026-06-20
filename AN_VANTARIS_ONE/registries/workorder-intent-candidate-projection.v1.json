@@ -1,0 +1,26 @@
+{
+  "apiEnabled": false,
+  "airportSpecific": false,
+  "canonicalWriteCount": 0,
+  "contractVersion": "workorder-intent-candidate-projection.v1",
+  "crossIndustry": true,
+  "databaseAccessEnabled": false,
+  "databaseWriteCount": 0,
+  "description": "Generic cross-industry read-only WorkOrderIntent candidate projection for review only.",
+  "frontendEnabled": false,
+  "generatedAtPolicy": "DETERMINISTIC_NO_VOLATILE_TIMESTAMP",
+  "implementationStatus": "WORKORDER_INTENT_CANDIDATE_PROJECTION_COMPLETE",
+  "oneWorkManagementWriteCount": 0,
+  "productionActivationEnabled": false,
+  "registryId": "workorder-intent-candidate-projection.v1",
+  "runtimeAlarmObservedCount": 0,
+  "scope": "READ_ONLY_CANDIDATE_PROJECTION",
+  "supportedObjects": [
+    "WorkOrderIntentCandidateProjection",
+    "WorkOrderIntentCandidate",
+    "ReviewCard"
+  ],
+  "ummsWriteCount": 0,
+  "workOrderCreatedCount": 0,
+  "workOrderIntentCreatedCount": 0
+}
