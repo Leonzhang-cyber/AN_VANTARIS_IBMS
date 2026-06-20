@@ -1,0 +1,3924 @@
+{
+  "auditPreviews": [
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "3c4046bbd4ea0cad6717dcc31ab863ac2653d82c18eb163f6fbb0952140adb84",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "FAULTCASE_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "00f59930f5487c5770090311c9fdb0bf1994c04bc8254858057476fb79f937b9",
+      "deterministicDigest": "5c529ed307fb6619b2c04983211d82c5e1bcc4b8a41e99eb964211d74a20d2d1",
+      "evidenceDigest": "5d72468330b2e053b8f5e189a7213b42f9776c5fb145be36b4c5c83555d75fe9",
+      "policyDigest": "675cd1d649182155a2a5b4d932c223d7319a4622a0469c553cd2e3afa9935172",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "b6d43405f3633490cc4c95b9336e26d346802d74d243a7e36a48e0bf89c653ba",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "ALARM_EVENT_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "03844389bf147217f2259b0c92fc9a6f080eb6c3c31facf5e5fcc865dca3b2a3",
+      "deterministicDigest": "b5b930454a3bd75c48bf8799c7c79516be47eb31017942620cc631b1e4eccaf3",
+      "evidenceDigest": "4b42f410160f20a3908f93f4fb00f48297c13612216641a4ef88cd2e41d300f7",
+      "policyDigest": "4af25a253ff9e27a1afbd975dc654f461f767ae0865bbb418f5463a5b85c71b0",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "196501d3dd937466089990ae20c169ecb75fd1ac4626f2a42c614a6bdca88270",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "ASSET_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "0eabe9a6a35b8423d76496c43d1ad4cc580823b7a06cc68b7dc39d83649c651e",
+      "deterministicDigest": "4b0746b75a3e9894c980a2802a9120a49576ab41b8635914a0b4ef3a76f71b21",
+      "evidenceDigest": "3f717540d412b84f0106fcebd94bfaf078c24e859b8e69c45d262cb9cba91eae",
+      "policyDigest": "c2784dc9f23a076a13ff0ce4e585dc64b9b1ab6c21f02a9902a41308687f8bbe",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "2962e48bdb7c52419d7641d22566f735b44aff3d6ddf86cff68f6b9ca06764fa",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "ALARM_EVENT_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "1a70ceb857e36de227e061e6ba75e69732b34fbffeeebe7e448d2a35c6c985e6",
+      "deterministicDigest": "0230d98f34f91178f99e6e201d3f1bb6dc8d39bf4c5623b512e91ef2166d2294",
+      "evidenceDigest": "9df4c5fd2255ce0967d30f2210e38da19f6e3c2574a21b2fd07c47e030bc6fa3",
+      "policyDigest": "865d6bf3745472efe693e55425256b7ee830eeac793f5e9bfce3d4f8f19cc9c8",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "079f3e42eb332f2761b2647a8679adb12fddf0663ba8d1123058648485e8786c",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "ALARM_EVENT_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "219c5722fedae552a141355a59d84decdd91574ef099156941987a4436786044",
+      "deterministicDigest": "ea9829a951486c5f2ce356493a82c4d4279d5b0056e99a86f1005391800b9703",
+      "evidenceDigest": "f1c58393f642c81fb0a0ac53afe08209f1df3e292b5b7595cabaa8dbc322d19a",
+      "policyDigest": "97403656f798807f480025b3f633543433b6217c671eba9e92a0842d67d90c6f",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "a9ffc93455741ebe727f488f06319744e29b57d0f9844a9b5accc64b0a27fc88",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "SOURCE_SYSTEM_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "3c7e61e1bea96c33006ceb4afa5dae604e416748d429edc1af3c7596b8c4f890",
+      "deterministicDigest": "526bd6f56bdc7d0e85c9a5789e5d5df59226a6a0ce5c87f502a0ce27d1e3ee8c",
+      "evidenceDigest": "a0f589610031217c91c7b625ca4e951e87d50becea3236ce533ae4b5465d794c",
+      "policyDigest": "28f947510fb21c3d72159a99c830008236f276a82cb966cc5c0d47b7a8f1917a",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "f86dc04c16f4e2133f45353a09664a44d294268132a6b440208c7e221bec4a0b",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "WORKORDER_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "3d7d25278d6603f51d7074c9a5e82511e44a9e6ae572fba85e047afc84db6740",
+      "deterministicDigest": "daf8d3004fd5a354d75c58dc83cfb82ce0f30a68bb9d6cc585b8b060926da533",
+      "evidenceDigest": "838443e91db8a586ab1984c418d282e5792a5f89ad7f860180c0037b3662e783",
+      "policyDigest": "30c2ebebe0ae1773600887796f46b057cd0aeba17921a6a5195eb11361646e93",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "0d62c9a1166f3a2a6129a4981e35b4cb928637d310d0e209130c9311f41f136b",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "ASSET_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "468b82c86e28a34244d8c6bade6eb64947ce74ef10bf1faf7d442d24a88a4a7b",
+      "deterministicDigest": "05ccad1c714444b5fb77b355f9cc722316411c9474f1ed8efe396ebfde2eb2c5",
+      "evidenceDigest": "c7ee80f7ede2d0ee7f038087db6393d86ddadda2bcbede1499ed24c5db0ad46c",
+      "policyDigest": "af01640e0d962736bdbfbe024c6e9d5791a8c1efd7c94bb468093564bc0c4a05",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "8925175586059d5fe01bd7ea71e11de5f535e6943536cb0060bcef4bf9151094",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "FAULTCASE_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "477bbb2c89e20f91b743808f927db066ea1dbb11a33f834d2ba52a85c52fc850",
+      "deterministicDigest": "975804301f3a17a2d750fb339046a178232662ddfe1195a5c4495f0a69f1ccb6",
+      "evidenceDigest": "60d9f3e0c9c2350dcb859400ac512bf44100992dc8c3da4fe9a09c71cfd82d3a",
+      "policyDigest": "9833a69f64d5f2aa90bc86c3912a206ac6b595a65d78323fcea3c53b6d6ea001",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "80e30b5699eeaa122e7ad8e0cf65e2e5e54a281758aff0dcc52c84c097be2a2b",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "ASSET_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "4b5fd829706035c891f9a770e72577e34712162f09e7802c50cb64650d18ee72",
+      "deterministicDigest": "4dd4c2c7d2d64c4263a767fd009f464acf1a30fa04af17c3d87c949d64462d8d",
+      "evidenceDigest": "925383dfce9f3318611c0b6c91eb2cc7a55401dbf364072d41e8bddd392cfce6",
+      "policyDigest": "f05203e5a1d946ad2e96e41f62612b51d64d36495ce96a10bf3efe68d86e3eb6",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "4ab4613f905519c589ad5b588e7e5e8fb19b6dd53aae874a0fe380ed132f3c4f",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "ASSET_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "54df1e11c75e533678a0c935a548dc610282c25684b6c567404a7298d851e6e6",
+      "deterministicDigest": "d908309cf2d8b3129ff71ca9d521e1dc3d3b25007811c5e5b0f9de29dda7e82d",
+      "evidenceDigest": "f2f0a6a97354e83430218dcf589edf2d1d9cc10d92316733d9f4f565a3ea0f8c",
+      "policyDigest": "98784a19613d9bd6e6d77cbe11018be74759dddc1af0736c7ff36d88c4709690",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "a1ad69054daf3ce23a74dfb37c13d56bc1790abbd904507c2e9f5586ac9c7c44",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "ASSET_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "60aa1937c042b33992009e8426cac89121e160c26b3c8d3becd3db8bfd3df116",
+      "deterministicDigest": "f1b13734c583974e1252acfe646c326b480d62059d5984547addbb54dbc4262d",
+      "evidenceDigest": "564e5c459952a9a1bb49272f96e80372d9b542b58fbf914273cf189525f3e40b",
+      "policyDigest": "12fd5a9058871f1e008f9d088a4d8e69dcc1e2b9f1810f2b9092c2ce6a79eaaf",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "17ce6076218c52d708be32d23852f522f3ba840dfa548aac98fae80d10ad1448",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "ASSET_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "6105951e8f8cdc2557092b11dfd8ccc3d9ea77f7f67e016f17d725b4122c1985",
+      "deterministicDigest": "87281cb0071b9f325024e8dfcc1fcd02228a7f3fb6d49e83eaf433f24f3063e3",
+      "evidenceDigest": "50f467bcc8c4569867b1172a56e9706184b332a63ba566718fe1977dc30518a4",
+      "policyDigest": "cd4be7f89446c7beabb9e5c5f1fc69a167effc343b5cbf8f8b95009753e2f710",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "39b89a81b9fd55fd8df1c3dc4b391b0a33931aba342571c9df3a64b408aa7147",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "ASSET_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "611235e783d3860e1bfa3c4379f2a726f02c2184ef8a788e6c2ac6a4a5c52c66",
+      "deterministicDigest": "03ea362bd896b649db75aea35288c05a632e898805ec0d9c336144fea83a09fd",
+      "evidenceDigest": "f100b7a48ee112ed8d5aa68d8a227ae1e275fe6a942056f9c0e1d30b5415bd74",
+      "policyDigest": "eae9bb0c5f294d60817696c544f929732ee7b874baac77b061601044e2770736",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "8efef9390c0232f38ab24638f2925f90298a44118aeba1b04955a85ac6ade10d",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "ALARM_EVENT_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "6a8a8a5f8e4a3b518851527c2ba59896efd863f5fbe11ed03162666ad76a938e",
+      "deterministicDigest": "318ac9d98bd511234743f72d81f9c4ff68a31fda63fe6d0c858be2b5fa614993",
+      "evidenceDigest": "b58f372fc168bb969d02c458e8c9d004ebe5e331745791462e2c6d06400427ca",
+      "policyDigest": "d13b19bff57f3d4b5afd00e6d3981bad191e9a3251a4f15e07531c199ae0d703",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "ae85866066972564cd30421c502599227df0222b1ecf963764a1ba7753d77bc1",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "EVIDENCE_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "6b49f645470ed970a1ccd8f4c1971b47bd08058db365ce2f441ae8a2e356fde2",
+      "deterministicDigest": "b185f7fac95689de48acf46ca6c3f786764fa30aba3b3bb0295c17bfcb822cc7",
+      "evidenceDigest": "9739fb41af2a411f9a0cd8d264448b76b596eb9a1c6155d745a7bfdd34f12e3a",
+      "policyDigest": "4d7064d4370ccbba3d9354f0c47ffe09d9dbbb486d999e8224f311f149739d81",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "5e8527040e832d6b94af62c9a598eb91d7453722bfc9e56929f8c33090a359c9",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "ASSET_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "6ef8751e77444810843b4fa2632633d5292fc5952305c3a3810e7aea929183fc",
+      "deterministicDigest": "ee34874d9b358a6140c425dce9f45998f31c824ff01190ff926629a31da839db",
+      "evidenceDigest": "afc227f74ccc0db8415d503a04b249076e14b2577f9f72bee3ecf6e763b50be7",
+      "policyDigest": "d514722b58747cf8a3fbab88db82fb4b172f785f1dad646af380bab5d6b2a2a3",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "871425832a06441a881e81d459e046987568ab67b4c9de3a31ccb89f0bef5614",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "FAULTCASE_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "770d6dbaf35e13b857af6903985eb796a8e922b7087bac9de82317209570a83f",
+      "deterministicDigest": "cfdfbcca570395e1b7368d8f32912e70a7fc59674ac571910773d2868fb755a6",
+      "evidenceDigest": "94a4755c481fd539edd0e78701992a60cce8d3c4c72d427afab0c1bc5ffd73f4",
+      "policyDigest": "547a44fd2146ee3fcf0b153efffc1d7b0571c4e6987d147f330bdf2a12f15607",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "ede972890b72086d09ffb460cd48858aafb54152f2176405bd3c33cfaa9acda1",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "ASSET_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "79fc3560fd8284602dc149418f8e237cba89afc5534e52dc1256761021dfac5a",
+      "deterministicDigest": "71c57f3abace8579cdae24506a781897073583884718b2d587a9169a2146d7d9",
+      "evidenceDigest": "041b621adbe360a6cadfd6b94004443efa10e84c76449ac34bcc7f622a2eac4f",
+      "policyDigest": "da3981763a12c00fa39f3a4d0db5e1b4b3c7cfcba5e0e85c30765445fdad76db",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "83aa43942d24bb22d996a22b68f2cc9f96c812823f9b70694f3f463336971cd8",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "ASSET_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "7d79d4662cd1846f87189a667a4611b8e7c2f6eaa83393ed6bcabbf883ed84b5",
+      "deterministicDigest": "bc59773cf88f1eaa22f4dcef2d135ca964fa4858b69676ce1c43b5ef23758dba",
+      "evidenceDigest": "45889f5c66ffffa3813e760dfa3a3d4ace18b6a31a391162ce30ebb616187f69",
+      "policyDigest": "2280240e48f75abf26a02d90801d1f596501f678ff72db90d79bcd90096a69d8",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "3a226b18bc4daaf6c37dacc7bde5b7b4e0e76fb06123cfed44eb4c0028437a20",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "ASSET_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "827c9c5c33dd9dfa929294f5ec48c4a64d4d3a394e1b0128d2c72c62527b1550",
+      "deterministicDigest": "0dc8e5dad145fec76662520887096d40aa5b94f18a49a80050979f8558579b94",
+      "evidenceDigest": "7509476c01e953715f36c09409801089541de7e6474be7b49a0d5fccbae651a8",
+      "policyDigest": "f7700219375119e756a79a44948eedae84167a2f57cef83da01c0fa73ad1e9c2",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "5259f68f5f8879a4049ed75064a433964520ad04ae50eebdfb0bdd45c79d33ff",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "SOURCE_SYSTEM_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "86bf33f97dff8bcfd4a00ad6281f2bd1947bcb04f7cc0b76a7193a7ca541cdda",
+      "deterministicDigest": "ccff2962d3dba29560bb0ad046f0ba4e2aaa028fe8fe666f06114fdb07edd229",
+      "evidenceDigest": "6360c63bd9edb9287333a804591654eb4562d974427c0e0943939c044c91d1ef",
+      "policyDigest": "96f8ac672ee18b89cc11ccc422cabe4d5c5d196adb3fab1e7a941fb3cd7629ac",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "a129fc07520d429d718fcce707c862d9edd7f7c12cd54c15b8f85b7820626579",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "FAULTCASE_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "886b9bfd2f020321376d4cc3e6ab774a1aad219039abf74f835661e2e04b91f9",
+      "deterministicDigest": "f7104672e8df498b311bacf0d2b1f6279db09a22aded881a7a9bba6beadf22ea",
+      "evidenceDigest": "ce8919143a5b3a7a24a2ab5a504caef7809948b2f2613958a5dfb39873672d53",
+      "policyDigest": "590e867ac77e0bb3e0cf1109eac31aa6aa4325435eb68f6a81b7a524af0b29b0",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "511b2cda35e5d4264d44ba9b6fe69147155f4d9ae26716d1ac72bdb427b40b90",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "WORKORDER_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "8d846bf2f2153c26008ba832587389e08d96e5f06d98ad77ec404ddaa77a1ea3",
+      "deterministicDigest": "f386ff2ec80c473caf955167156f36373fd8153d690ccdc3a95cd0343f3008c0",
+      "evidenceDigest": "513cd0195d1c69508b88fd399301b96a0caa7dc2ff33d3b239400e9dd4dec6a9",
+      "policyDigest": "4117fb8d17bfe21acfd7a70bc124a518d591f7b116435b07a111e30ae9589332",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "da043c5af9308acda5cb7c7a468d0ec79520e3652cb1e3b1ac38f4e19d7503ff",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "ALARM_EVENT_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "8ff7a4d3349c11dfa062b509b4fff776ebe1aa8a2d4148dc02c7683b0c98d4d7",
+      "deterministicDigest": "07d463f3184426076869b402b1e5b1e48673ac1bae2c5ee865557ec9481d0eb3",
+      "evidenceDigest": "95f2f0d808ccfd7660583e2fbdbaee6f158bddf8684528c0eb112cb21a86405c",
+      "policyDigest": "024fd4ac872a634ddf33dbea0c51a029c74b5af410f2a9dade4c7b3e59aab47a",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "18549b9da48bd9e6d889e90e198bd3966bb3ab564a2dc3a3bc91c1d63608af96",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "ALARM_EVENT_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "921416f11d969831b8e941439e5d5bafab3ad7bf89eeceb238e346f9141214c9",
+      "deterministicDigest": "813868d074919aba5cc4602577d16097063c830d3e2e63dd16635a68154255aa",
+      "evidenceDigest": "ef8db7dd0dac524c4c6eb97e7838d1acadd7ac01d071f4ee2d100999e05d2d25",
+      "policyDigest": "f6968cf07bdef545db95c2ff08f76dc45954b660e0c5f1bbf2c66d2bbc7d78c6",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "1ef28c31145c3f33b376b32b0f07c189069eae78d2ae2d638ffc534403f9de30",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "ASSET_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "948fb786bd37d12da9ec26019d110fba1123a3dbc90f6ddb3c5e5b8d6e77b53f",
+      "deterministicDigest": "a089442b4be8744fb88a2ff49c6b476f09b5fc76a3553100a489b442b3cce371",
+      "evidenceDigest": "5fefd5a9e2fdcea7f3d91752a899758da8590b5d1906a3d301c8ab8becb2051d",
+      "policyDigest": "95e81d688ff0b11a3a7e0804405500de72da4b6e958559a8523cb535a08dc15e",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "3991661e74303da7086181e1aec35690499dd226c17827fceb67eeb7a723cbce",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "EVIDENCE_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "94af27fdd1e78c5472ce1267b5f2f2605894f2f9a06021a6211766e6dbea5355",
+      "deterministicDigest": "326af7e9b48b3d4c8916a0f4de696364f5fc3596adf97ef302c86f893ba06be5",
+      "evidenceDigest": "52f386b3c0f851e99bda081181dd9e90ba46787e6613460f53f44e08b782de5c",
+      "policyDigest": "8e845522c9b6e611be094c807affac99cb670e2c9fbc0277cfb05e0caddd9951",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "a023bdc492d563c1b9dd9041409df8753aff946c39f7fc2a74f17605694999ac",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "EVIDENCE_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "9644fd5626735ead20d577302879c654a158550ff4cdb9d8d9e6387c233a26fe",
+      "deterministicDigest": "2654ace687d02070da5005985935263199a358ad387527a1bf46341a67ddfd37",
+      "evidenceDigest": "88d0f15c82729f10d8e43b0b8406c0bdecc6c8326a8243fcd1f37609eff31b66",
+      "policyDigest": "d27035e119313d3be5ecd50f5d963355fb3b9875fcb967668b5eef78ee99e65f",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "d14f8750301937b428c3af2695ef3f18cdf9701d171b2eef61e171f41bfbb314",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "ALARM_EVENT_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "a767c1d68bbd4b11e76424b8118476275b069691406e5167dcb9d9df03c5a3e4",
+      "deterministicDigest": "e34f5ca2bfcea122443a7090ea072920bd6df6ddb14b9178401d41e313e9076f",
+      "evidenceDigest": "6a59d6ba622ef91176d53574b858022ed65b9d787c09bdd239445eef99f39534",
+      "policyDigest": "740bc261e632259d5ac7bdbccb5828f6173003cea6f12627dd91839c5b5635e3",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "703a50aaf95412292d2f1419497184e607c4ded3333856503a472c4742023fb0",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "WORKORDER_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "b74a4d09f7bf0c4d4a4d3d46319daf232a4a25162f214466e3b19558fb4b158c",
+      "deterministicDigest": "8cac3b1a6a0bb0104ebc83ea4909ffac825a3b198aa40655eafb123832cc527f",
+      "evidenceDigest": "a24ccbef5be4513bda86eee371224c0c889e5d99f09dc12124bc4271b868df3c",
+      "policyDigest": "3c90bad4aeefc4533cc25171cc586904317d1de6782b0f3f0018f5ea06d5877c",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "6e7165b032e838e237a4183a795a8b6b41bef8c3de80eb2df197e7f5a1a9069a",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "ASSET_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "b8685bdf4e7ffb23579272884eb700df32f2fdbc5ec1c844e55b3621dffc7d25",
+      "deterministicDigest": "123bcb2f3db2928dd320705cee4eb293f44905f46e57e822ace09c6a307a40d6",
+      "evidenceDigest": "47a400e591c36486d77daba25e66f6294a7c33e3941c1aa188f4275c6b6ebb3e",
+      "policyDigest": "3792a9a2a97ad9fa69119684e62b9d0e8bc8ce39cfc606aac3094dd2c801d376",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "158017e6c2e906ca3bb1301897dcc603faa71cdccabb154771ec14c03fe43653",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "EVIDENCE_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "bac5a5c46e001f3e84f6cfa4a82e726d9023a4a76e8be41e2e851a3516740924",
+      "deterministicDigest": "eb36ddea92c3160eeeac6baa60006dd5cc294b43fa56ef90a3d18ef4d575cbfc",
+      "evidenceDigest": "a0d54b0d1bc6b39ae1708be523389d7c9c28bc7f94e4fd397141052cba4a52fe",
+      "policyDigest": "24b9f695b4bb771d94f61b2401750147fab71f10fc7d7c418d541ea5d9d9c168",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "1caa3c7ea8455497a8cda61bd7bc3c9bcd4b53568d1be5c3ee5eacbf3cae1c51",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "FAULTCASE_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "bb11dc25caa5e9a71715d110ba356ec4eea8fef2a3bafe5b92926f4edc4c7818",
+      "deterministicDigest": "9e5592f8971a54b3188d7e568c94002ea570b5a7f4163881ee13794b20a34c70",
+      "evidenceDigest": "003c67b61f7ae6b44057df57fb31966cbf9cd35f1143ea9e073aec4c56b3856a",
+      "policyDigest": "1a0598d8b0955b2737d6d20580f54a2d96a74ae1bae74a0b242d5b7ec395418e",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "b1a18bf8fda097cbc11c1a72c50cacb52b2f6dcdc12964b5b4b6d64618d4c723",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "ALARM_EVENT_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "c9bdc082c69d8ada95f6ad4871262c73445d3ea36be5102bd2883b723d214db0",
+      "deterministicDigest": "ae95dcba8ccc82c27385552a4cfa551b6171be63199a01bab5d1111b593bbbbc",
+      "evidenceDigest": "9688ffe67fff92d360d7e752f6be5ef5c681a0fba6402a129c37c0fb694e50f3",
+      "policyDigest": "c75fced77c857fb6ce3a8b91e2730fd09baeba5a0dbb7edc68eb412ca69604a9",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "c96693f9e9f8c1cc0f2b503688b52ebef0b783123c6df52c96e164bb16e976dd",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "SOURCE_SYSTEM_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "cb750465e3e304c039c71babbed700084cf129cdebca9d5f31d40c715cc004ee",
+      "deterministicDigest": "ea8374a84858bc08b87d5768ebde9f7037d58f886459b17a8cf6103b8a106ea8",
+      "evidenceDigest": "92368c22a7f906dc1614a5dbf7d5e417c2553bdfdeb1072942434c13ede84ba3",
+      "policyDigest": "ce7ea242f8b2e5270f851ba9badaff2462b3abf105aa41d8f0a97fe1f96c55e9",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "e338f89a3a55f9634579c701d9ad89d71cf748ffbbbb961508bd24a2bb06e139",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "ALARM_EVENT_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "d2f028af434eb859174fe833d3a2961a79642417c6968a8a29432ecd4ccef27b",
+      "deterministicDigest": "b6109eb8d88158a716c15054de849d53ebc08e0a08d718bf1ebd628003fbcffe",
+      "evidenceDigest": "90760f0473f1ae6372da888e21a931bd002753203edb50b2ed34620cae59544f",
+      "policyDigest": "4cc5cffce0ec5c49a9a7de03afe7e12ac6033de837cef55d429ead23edcfe02d",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "9a747277c7458bf956b6c2e6c6b0c58c881a57105830043e9026e85df913024a",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "SOURCE_SYSTEM_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "d4a6daa52d2f0a3dec11137865eab052f146ada30b0f4f553a1a78027077f8a0",
+      "deterministicDigest": "e6efb749869e7ae9a41f4479e8a233c01f8ad2b977f90abb0923f3c535741b4e",
+      "evidenceDigest": "d5a8074dee0eb0f663f311728e9771d8a506a24027eac1124c6d8a56d67ae37b",
+      "policyDigest": "e9cea3b2fef07a4a38ed9c67620e20314ee19a7c37fbee6b505f8c149bffdf31",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "8d62611a050644eed2484c8781a4e729a88e20d1200f83a28feed930535a6b1d",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "WORKORDER_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "d76caf3e8ef5403bab8cd3b62aadb3d260dbe3529d07a855f53e4b4c731b1716",
+      "deterministicDigest": "555491b11d7d398e92e9971ac7281a8d4d7fa773088ea2d7dc59c77c78c89d10",
+      "evidenceDigest": "1a804e793daa63f0bed1e39c735348a8abb0fae98d0f40d620d71ec99aea2ee2",
+      "policyDigest": "53541b5e3fdc43635551edcde028b8a73c9a2c81b2caf5fbe2713374a02484e6",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "9e2e79bb500a43ca31b507c2e34a49e7997bcaf218a246f6be2f04dccd98fdd4",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "ALARM_EVENT_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "db57387cf930d7db4ac2afdc605dfa581742751fdc85fd0533cb0f37fe75b5ff",
+      "deterministicDigest": "dfaad7074c03325322b8a0331233ddb054180fed39df9d74075c2b80f48d207f",
+      "evidenceDigest": "aa780a96e9b8ca652c462b011dc0c21e148f0bfd602faa5270afc8ae84fec047",
+      "policyDigest": "2c10eaf30c42e347458152328febf5a3c56f720a99b7e325819d32054f321553",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "9cacfa10d8f5641aebd07bfa56e1c11c56d93d3ab202178ce9335d0f34af2c7b",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "ASSET_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "e5d8bae9ba014e2c1610700c8a68e3a2098d64244b0a092358e916ea786c39af",
+      "deterministicDigest": "57aea8b3896f2effccc653a160ad245984085633bcfe67459ad78ae92e78b381",
+      "evidenceDigest": "a583ea463934278e982d5c1ab128267fddfcde9694228cf1d0535cb894674546",
+      "policyDigest": "93f7ad49438fcfe4985867fac7c2e83e5f5d16b5b946e328d63c86c5349c22c2",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "66a1f743a44e0dd63dcc29b2553cbb566d100beae803a44208502ce54fc342ad",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "SOURCE_SYSTEM_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "f05dc6da056e5db68a03d8133f61e20fefabc6b55df942f98fc3128d88880037",
+      "deterministicDigest": "66465013e94e0a7daa346215917282640325a7705b3f420d0f3dabfc6adcc600",
+      "evidenceDigest": "5b089ed58bcd664a11bcce5abf846347493efa3ad5d3ec1be5bc3a009ccfe3f7",
+      "policyDigest": "9c12054b50167418b64e051666cadcc972719094433902232bf8f7c1eab29f7e",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "088eec9ea507a243ab15a5181c1272cc10997e4b548b0d5c91981f1b9d5e3f16",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "WORKORDER_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "f35099c85eab09ab5505892f123d17703bf4ef8491983bd5cda82960f6f8cada",
+      "deterministicDigest": "a9600bf464618247a2f07aa8c545370400d20bcaa354793f2f141cf5104ef907",
+      "evidenceDigest": "93d807ef213739e06ef6786f7a00ef96c214ea450ffe56bc743d9c2e70f2d318",
+      "policyDigest": "4a12eedcdfec84c5dbe067403fe99e602c4b799e2868a3203dcfc5b379daf31f",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "e283f9fb0be2b7d5bc8a8eab7ec85517f701d2cee68eae052a9dd5436edf482e",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "ASSET_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "f3c78a73247fdeb7878dc72b0a9884e972f1d70816dc8e7f9e3e1c6a1a703ad2",
+      "deterministicDigest": "2c426b4cdd078820ceadb6b2e9571df5183f34606deea64fc0fecd589a090bfc",
+      "evidenceDigest": "95e32d9f5dfd4222ed587259dfab5caa1a0c84fecf7bf6301b630113cd49a8c9",
+      "policyDigest": "6c91d2285cbd8d0db88211fed1d8c68e0a93e4e3f7ab42f5ddd1ae4c324d6d83",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "8a6b27100cb2dc3ca119249905b210c3c3356feccf51b28982602c0ddf1c756d",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "EVIDENCE_REVIEW",
+      "beforeState": "PENDING",
+      "decisionItemId": "f5e019ed5db793f0cf2fe3ba398eeb75541cdbf84c09007976925f90ebccb601",
+      "deterministicDigest": "15980b0f8c11f70ed176ef99528444c64172083b00e46176e11bec1e1d83e54d",
+      "evidenceDigest": "93a2bd6287043539d467cafead627c6c91a9fae3adc56ee7b3b34e1658c62ae8",
+      "policyDigest": "6678a7227ad0df9e7ed8cecf90a8131354f99f87d16ae92b2a0f95dfaf18dd74",
+      "proposedAfterState": "PENDING",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    },
+    {
+      "actorPolicy": "OPERATOR_REQUIRED",
+      "approvalWriteAllowed": false,
+      "auditEventType": "POLICY_GUARD_PREVIEW",
+      "auditPreviewId": "5d4f4d84c6931ee7e44aea1f9211cd9ffebb05423c100d613735ef85d9128c31",
+      "auditPreviewState": "GENERATED_READ_ONLY",
+      "auditScope": "RELEASE_GATE",
+      "beforeState": "READY_FOR_REVIEW",
+      "decisionItemId": "fa46ad3543b51ae3c68e87ac4a3396afc02db66125bc6cf64d7ca7bc329f55e6",
+      "deterministicDigest": "76e5749857baaafd71455ec80b9cfda83ead667ad49d9a8433f23775610ca212",
+      "evidenceDigest": "a2034ee27721d26416c11548056e63803268b48b02cfe46fa5af9f94df49c819",
+      "policyDigest": "02118a979746acd24805458832f5c3044d8a2ef3b5ddcbd748682a4e558ac09b",
+      "proposedAfterState": "READY_FOR_REVIEW",
+      "writeAllowed": false,
+      "writeTarget": "READ_ONLY_PREVIEW"
+    }
+  ],
+  "authority": "ONE-AIRPORT-A4-03",
+  "contractVersion": "operator-review-policy-guard.v1",
+  "defaultPage": {
+    "continuationToken": "6ff61f4766a5957a206d783c597178d14fdb8c3a5fea5c7aad22a7655cab3a69",
+    "deterministicDigest": "4708f9326513b4e6ae454da1adf8e6df821fafd754ded2cfe009d85fdec0dafd",
+    "items": [
+      {
+        "apiRequired": false,
+        "approvalAllowed": false,
+        "blocking": true,
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "03844389bf147217f2259b0c92fc9a6f080eb6c3c31facf5e5fcc865dca3b2a3",
+        "decisionScope": "ALARM_EVENT_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "ALARM_EVENT_REVIEW",
+        "deterministicDigest": "4af25a253ff9e27a1afbd975dc654f461f767ae0865bbb418f5463a5b85c71b0",
+        "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+        "evidenceReferences": [
+          "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '2b26090a97f80bde8af7ba0658a886bf37d07494c0f0f23fc42ba21ae6530fda', 'sourceSystemKey': 'ACS'}"
+        ],
+        "frontendRequired": false,
+        "guardResultId": "7c094d6e0ecc9b2e6a6fec8b81bc2273f20cc90545c30526476f7f8ae056626a",
+        "guardState": "BLOCKED_BY_POLICY",
+        "missingPreconditions": [],
+        "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+        "productionActivationAllowed": false,
+        "queueType": "ALARM_EVENT_QUEUE",
+        "reasonCodes": [
+          "APPROVAL_NOT_AUTHORIZED",
+          "EXECUTION_NOT_AUTHORIZED",
+          "READ_ONLY_PREVIEW_ALLOWED",
+          "WRITE_NOT_AUTHORIZED"
+        ],
+        "requestedDecision": "PREVIEW_ONLY",
+        "requiredPreconditions": [
+          "decisionItemId",
+          "decisionState",
+          "decisionType"
+        ],
+        "runtimeActivationAllowed": false,
+        "sourceStage": "A3-01",
+        "sourceSystemKey": "ACS",
+        "writeAllowed": false
+      },
+      {
+        "apiRequired": false,
+        "approvalAllowed": false,
+        "blocking": true,
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "219c5722fedae552a141355a59d84decdd91574ef099156941987a4436786044",
+        "decisionScope": "ALARM_EVENT_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "ALARM_EVENT_REVIEW",
+        "deterministicDigest": "97403656f798807f480025b3f633543433b6217c671eba9e92a0842d67d90c6f",
+        "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+        "evidenceReferences": [
+          "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '8886051eedce1be862c858ddb03534a4de000ff25f964d6eccc781930b9cec16', 'sourceSystemKey': 'CCTV'}"
+        ],
+        "frontendRequired": false,
+        "guardResultId": "c1463b2303eb4518d7c6061c34f1c78af3f0c06b879a9d3c6fbad0bed8a524ea",
+        "guardState": "BLOCKED_BY_POLICY",
+        "missingPreconditions": [],
+        "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+        "productionActivationAllowed": false,
+        "queueType": "ALARM_EVENT_QUEUE",
+        "reasonCodes": [
+          "APPROVAL_NOT_AUTHORIZED",
+          "EXECUTION_NOT_AUTHORIZED",
+          "READ_ONLY_PREVIEW_ALLOWED",
+          "WRITE_NOT_AUTHORIZED"
+        ],
+        "requestedDecision": "PREVIEW_ONLY",
+        "requiredPreconditions": [
+          "decisionItemId",
+          "decisionState",
+          "decisionType"
+        ],
+        "runtimeActivationAllowed": false,
+        "sourceStage": "A3-01",
+        "sourceSystemKey": "CCTV",
+        "writeAllowed": false
+      },
+      {
+        "apiRequired": false,
+        "approvalAllowed": false,
+        "blocking": true,
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "d2f028af434eb859174fe833d3a2961a79642417c6968a8a29432ecd4ccef27b",
+        "decisionScope": "ALARM_EVENT_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "ALARM_EVENT_REVIEW",
+        "deterministicDigest": "4cc5cffce0ec5c49a9a7de03afe7e12ac6033de837cef55d429ead23edcfe02d",
+        "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+        "evidenceReferences": [
+          "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'afdad1549fd06642825c07d2433783222914ecf27b2de141b991a29e57e10c4e', 'sourceSystemKey': 'PA'}"
+        ],
+        "frontendRequired": false,
+        "guardResultId": "4822eb50aeb024319e4659345966ebdae248431b4fafc6e90b9c7ffae2f7343c",
+        "guardState": "BLOCKED_BY_POLICY",
+        "missingPreconditions": [],
+        "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+        "productionActivationAllowed": false,
+        "queueType": "ALARM_EVENT_QUEUE",
+        "reasonCodes": [
+          "APPROVAL_NOT_AUTHORIZED",
+          "EXECUTION_NOT_AUTHORIZED",
+          "READ_ONLY_PREVIEW_ALLOWED",
+          "WRITE_NOT_AUTHORIZED"
+        ],
+        "requestedDecision": "PREVIEW_ONLY",
+        "requiredPreconditions": [
+          "decisionItemId",
+          "decisionState",
+          "decisionType"
+        ],
+        "runtimeActivationAllowed": false,
+        "sourceStage": "A3-01",
+        "sourceSystemKey": "PA",
+        "writeAllowed": false
+      },
+      {
+        "apiRequired": false,
+        "approvalAllowed": false,
+        "blocking": true,
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "c9bdc082c69d8ada95f6ad4871262c73445d3ea36be5102bd2883b723d214db0",
+        "decisionScope": "ALARM_EVENT_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "ALARM_EVENT_REVIEW",
+        "deterministicDigest": "c75fced77c857fb6ce3a8b91e2730fd09baeba5a0dbb7edc68eb412ca69604a9",
+        "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+        "evidenceReferences": [
+          "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'cdd2b1cc9930b527a42fc8c04e5a74e28d4eb0f3d29c2ebb1b1e30c0bf92bec0', 'sourceSystemKey': 'RAS'}"
+        ],
+        "frontendRequired": false,
+        "guardResultId": "5e30bd6073f1b41e72b535c2cc752cfda6f418164bb244bcb6b0f158a32731ef",
+        "guardState": "BLOCKED_BY_POLICY",
+        "missingPreconditions": [],
+        "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+        "productionActivationAllowed": false,
+        "queueType": "ALARM_EVENT_QUEUE",
+        "reasonCodes": [
+          "APPROVAL_NOT_AUTHORIZED",
+          "EXECUTION_NOT_AUTHORIZED",
+          "READ_ONLY_PREVIEW_ALLOWED",
+          "WRITE_NOT_AUTHORIZED"
+        ],
+        "requestedDecision": "PREVIEW_ONLY",
+        "requiredPreconditions": [
+          "decisionItemId",
+          "decisionState",
+          "decisionType"
+        ],
+        "runtimeActivationAllowed": false,
+        "sourceStage": "A3-01",
+        "sourceSystemKey": "RAS",
+        "writeAllowed": false
+      },
+      {
+        "apiRequired": false,
+        "approvalAllowed": false,
+        "blocking": true,
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "6a8a8a5f8e4a3b518851527c2ba59896efd863f5fbe11ed03162666ad76a938e",
+        "decisionScope": "ALARM_EVENT_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "ALARM_EVENT_REVIEW",
+        "deterministicDigest": "d13b19bff57f3d4b5afd00e6d3981bad191e9a3251a4f15e07531c199ae0d703",
+        "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+        "evidenceReferences": [
+          "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'db1df3fe509eae4f465e526c51ec045b2b70511b97f207918cc6ee07b7c7a44a', 'sourceSystemKey': 'TEL'}"
+        ],
+        "frontendRequired": false,
+        "guardResultId": "40c1b5befe6c7c2f3a23f1c0f5d1abb2cf1966f05f6e34ddf459186fca445f82",
+        "guardState": "BLOCKED_BY_POLICY",
+        "missingPreconditions": [],
+        "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+        "productionActivationAllowed": false,
+        "queueType": "ALARM_EVENT_QUEUE",
+        "reasonCodes": [
+          "APPROVAL_NOT_AUTHORIZED",
+          "EXECUTION_NOT_AUTHORIZED",
+          "READ_ONLY_PREVIEW_ALLOWED",
+          "WRITE_NOT_AUTHORIZED"
+        ],
+        "requestedDecision": "PREVIEW_ONLY",
+        "requiredPreconditions": [
+          "decisionItemId",
+          "decisionState",
+          "decisionType"
+        ],
+        "runtimeActivationAllowed": false,
+        "sourceStage": "A3-01",
+        "sourceSystemKey": "TEL",
+        "writeAllowed": false
+      },
+      {
+        "apiRequired": false,
+        "approvalAllowed": false,
+        "blocking": true,
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "86bf33f97dff8bcfd4a00ad6281f2bd1947bcb04f7cc0b76a7193a7ca541cdda",
+        "decisionScope": "SOURCE_SYSTEM_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "ALIAS_APPROVAL",
+        "deterministicDigest": "96f8ac672ee18b89cc11ccc422cabe4d5c5d196adb3fab1e7a941fb3cd7629ac",
+        "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+        "evidenceReferences": [
+          "{'digest': '700c0aa4873f711e6a0732e56e0e9d67df78be56ef396f52daa10b5c0fe766fa', 'evidenceId': 'ceba5fc20cc1f142a8083ae0edf47f31d74cb445de857a7aa905c895ac30b017', 'evidenceType': 'CLASSIFICATION_BINDING_AGGREGATE', 'provenance': 'ONE-AIRPORT-A1-03 classification bindings', 'resultDigest': '49d8bfa2ece4be806883107bf8c00452af66b35f3a16898a53c8dbb18750faaa', 'sourceProfile': 'airport-source-system-profile-v1', 'sourceRecordCount': 52}"
+        ],
+        "frontendRequired": false,
+        "guardResultId": "b698be537d840c990d469b8f153ce16e7518f95107664a1d9219b0c0ef8fad4e",
+        "guardState": "BLOCKED_BY_POLICY",
+        "missingPreconditions": [],
+        "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+        "productionActivationAllowed": false,
+        "queueType": "SOURCE_SYSTEM_QUEUE",
+        "reasonCodes": [
+          "APPROVAL_NOT_AUTHORIZED",
+          "EXECUTION_NOT_AUTHORIZED",
+          "READ_ONLY_PREVIEW_ALLOWED",
+          "WRITE_NOT_AUTHORIZED"
+        ],
+        "requestedDecision": "PREVIEW_ONLY",
+        "requiredPreconditions": [
+          "decisionItemId",
+          "decisionState",
+          "decisionType"
+        ],
+        "runtimeActivationAllowed": false,
+        "sourceStage": "A2",
+        "sourceSystemKey": "CCTV",
+        "writeAllowed": false
+      },
+      {
+        "apiRequired": false,
+        "approvalAllowed": false,
+        "blocking": true,
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "d4a6daa52d2f0a3dec11137865eab052f146ada30b0f4f553a1a78027077f8a0",
+        "decisionScope": "SOURCE_SYSTEM_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "ALIAS_APPROVAL",
+        "deterministicDigest": "e9cea3b2fef07a4a38ed9c67620e20314ee19a7c37fbee6b505f8c149bffdf31",
+        "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+        "evidenceReferences": [
+          "{'digest': '6da53d802f057618e91b95564f3abee9dab082748ea008e69a81c62c40f21fd6', 'evidenceId': '6f9a9a469a9ad62b5a0d1065bada2f1f9b52cfc0b8132183f1e97f826c1ed461', 'evidenceType': 'CLASSIFICATION_BINDING_AGGREGATE', 'provenance': 'ONE-AIRPORT-A1-03 classification bindings', 'resultDigest': '1dbd5b57a352e475431caeeef6267b79df96f97568ca6f7fb77c37e2734cdea5', 'sourceProfile': 'airport-source-system-profile-v1', 'sourceRecordCount': 247}"
+        ],
+        "frontendRequired": false,
+        "guardResultId": "bd38dcc2412ff5d7e2853cd7afe913ebab2d4e853740c14844b8a8a1b0c2563e",
+        "guardState": "BLOCKED_BY_POLICY",
+        "missingPreconditions": [],
+        "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+        "productionActivationAllowed": false,
+        "queueType": "SOURCE_SYSTEM_QUEUE",
+        "reasonCodes": [
+          "APPROVAL_NOT_AUTHORIZED",
+          "EXECUTION_NOT_AUTHORIZED",
+          "READ_ONLY_PREVIEW_ALLOWED",
+          "WRITE_NOT_AUTHORIZED"
+        ],
+        "requestedDecision": "PREVIEW_ONLY",
+        "requiredPreconditions": [
+          "decisionItemId",
+          "decisionState",
+          "decisionType"
+        ],
+        "runtimeActivationAllowed": false,
+        "sourceStage": "A2",
+        "sourceSystemKey": "PA",
+        "writeAllowed": false
+      },
+      {
+        "apiRequired": false,
+        "approvalAllowed": false,
+        "blocking": true,
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "0eabe9a6a35b8423d76496c43d1ad4cc580823b7a06cc68b7dc39d83649c651e",
+        "decisionScope": "ASSET_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "ASSET_RESOLUTION",
+        "deterministicDigest": "c2784dc9f23a076a13ff0ce4e585dc64b9b1ab6c21f02a9902a41308687f8bbe",
+        "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+        "evidenceReferences": [
+          "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '2b26090a97f80bde8af7ba0658a886bf37d07494c0f0f23fc42ba21ae6530fda', 'sourceSystemKey': 'ACS'}"
+        ],
+        "frontendRequired": false,
+        "guardResultId": "d26dc48248c918926e826d9921305f236b661a9e70be2b31272767b7c6e2994f",
+        "guardState": "BLOCKED_BY_POLICY",
+        "missingPreconditions": [],
+        "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+        "productionActivationAllowed": false,
+        "queueType": "ASSET_RESOLUTION_QUEUE",
+        "reasonCodes": [
+          "APPROVAL_NOT_AUTHORIZED",
+          "EXECUTION_NOT_AUTHORIZED",
+          "READ_ONLY_PREVIEW_ALLOWED",
+          "WRITE_NOT_AUTHORIZED"
+        ],
+        "requestedDecision": "PREVIEW_ONLY",
+        "requiredPreconditions": [
+          "decisionItemId",
+          "decisionState",
+          "decisionType"
+        ],
+        "runtimeActivationAllowed": false,
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "ACS",
+        "writeAllowed": false
+      },
+      {
+        "apiRequired": false,
+        "approvalAllowed": false,
+        "blocking": true,
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "6105951e8f8cdc2557092b11dfd8ccc3d9ea77f7f67e016f17d725b4122c1985",
+        "decisionScope": "ASSET_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "ASSET_RESOLUTION",
+        "deterministicDigest": "cd4be7f89446c7beabb9e5c5f1fc69a167effc343b5cbf8f8b95009753e2f710",
+        "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+        "evidenceReferences": [
+          "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '8886051eedce1be862c858ddb03534a4de000ff25f964d6eccc781930b9cec16', 'sourceSystemKey': 'CCTV'}"
+        ],
+        "frontendRequired": false,
+        "guardResultId": "00117d0536415cb502b510a94052e1e3d0a4f25b05317e7de99b25421fdb52cd",
+        "guardState": "BLOCKED_BY_POLICY",
+        "missingPreconditions": [],
+        "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+        "productionActivationAllowed": false,
+        "queueType": "ASSET_RESOLUTION_QUEUE",
+        "reasonCodes": [
+          "APPROVAL_NOT_AUTHORIZED",
+          "EXECUTION_NOT_AUTHORIZED",
+          "READ_ONLY_PREVIEW_ALLOWED",
+          "WRITE_NOT_AUTHORIZED"
+        ],
+        "requestedDecision": "PREVIEW_ONLY",
+        "requiredPreconditions": [
+          "decisionItemId",
+          "decisionState",
+          "decisionType"
+        ],
+        "runtimeActivationAllowed": false,
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "CCTV",
+        "writeAllowed": false
+      },
+      {
+        "apiRequired": false,
+        "approvalAllowed": false,
+        "blocking": true,
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "611235e783d3860e1bfa3c4379f2a726f02c2184ef8a788e6c2ac6a4a5c52c66",
+        "decisionScope": "ASSET_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "ASSET_RESOLUTION",
+        "deterministicDigest": "eae9bb0c5f294d60817696c544f929732ee7b874baac77b061601044e2770736",
+        "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+        "evidenceReferences": [
+          "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'afdad1549fd06642825c07d2433783222914ecf27b2de141b991a29e57e10c4e', 'sourceSystemKey': 'PA'}"
+        ],
+        "frontendRequired": false,
+        "guardResultId": "07d7a515043d9526215ce54812fc6521c820e49d9c4572d1bae6168d6205a815",
+        "guardState": "BLOCKED_BY_POLICY",
+        "missingPreconditions": [],
+        "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+        "productionActivationAllowed": false,
+        "queueType": "ASSET_RESOLUTION_QUEUE",
+        "reasonCodes": [
+          "APPROVAL_NOT_AUTHORIZED",
+          "EXECUTION_NOT_AUTHORIZED",
+          "READ_ONLY_PREVIEW_ALLOWED",
+          "WRITE_NOT_AUTHORIZED"
+        ],
+        "requestedDecision": "PREVIEW_ONLY",
+        "requiredPreconditions": [
+          "decisionItemId",
+          "decisionState",
+          "decisionType"
+        ],
+        "runtimeActivationAllowed": false,
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "PA",
+        "writeAllowed": false
+      },
+      {
+        "apiRequired": false,
+        "approvalAllowed": false,
+        "blocking": true,
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "f3c78a73247fdeb7878dc72b0a9884e972f1d70816dc8e7f9e3e1c6a1a703ad2",
+        "decisionScope": "ASSET_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "ASSET_RESOLUTION",
+        "deterministicDigest": "6c91d2285cbd8d0db88211fed1d8c68e0a93e4e3f7ab42f5ddd1ae4c324d6d83",
+        "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+        "evidenceReferences": [
+          "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'cdd2b1cc9930b527a42fc8c04e5a74e28d4eb0f3d29c2ebb1b1e30c0bf92bec0', 'sourceSystemKey': 'RAS'}"
+        ],
+        "frontendRequired": false,
+        "guardResultId": "680d27b504483f4dc7924dec8c1a84b7b3ecd851f34851c4a9c7872ff7518e52",
+        "guardState": "BLOCKED_BY_POLICY",
+        "missingPreconditions": [],
+        "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+        "productionActivationAllowed": false,
+        "queueType": "ASSET_RESOLUTION_QUEUE",
+        "reasonCodes": [
+          "APPROVAL_NOT_AUTHORIZED",
+          "EXECUTION_NOT_AUTHORIZED",
+          "READ_ONLY_PREVIEW_ALLOWED",
+          "WRITE_NOT_AUTHORIZED"
+        ],
+        "requestedDecision": "PREVIEW_ONLY",
+        "requiredPreconditions": [
+          "decisionItemId",
+          "decisionState",
+          "decisionType"
+        ],
+        "runtimeActivationAllowed": false,
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "RAS",
+        "writeAllowed": false
+      },
+      {
+        "apiRequired": false,
+        "approvalAllowed": false,
+        "blocking": true,
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "468b82c86e28a34244d8c6bade6eb64947ce74ef10bf1faf7d442d24a88a4a7b",
+        "decisionScope": "ASSET_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "ASSET_RESOLUTION",
+        "deterministicDigest": "af01640e0d962736bdbfbe024c6e9d5791a8c1efd7c94bb468093564bc0c4a05",
+        "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+        "evidenceReferences": [
+          "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'db1df3fe509eae4f465e526c51ec045b2b70511b97f207918cc6ee07b7c7a44a', 'sourceSystemKey': 'TEL'}"
+        ],
+        "frontendRequired": false,
+        "guardResultId": "cbdc58c66e3357955de3d46a8579ab3e03d730e3d80892b5e0ec8d5ecc79a06c",
+        "guardState": "BLOCKED_BY_POLICY",
+        "missingPreconditions": [],
+        "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+        "productionActivationAllowed": false,
+        "queueType": "ASSET_RESOLUTION_QUEUE",
+        "reasonCodes": [
+          "APPROVAL_NOT_AUTHORIZED",
+          "EXECUTION_NOT_AUTHORIZED",
+          "READ_ONLY_PREVIEW_ALLOWED",
+          "WRITE_NOT_AUTHORIZED"
+        ],
+        "requestedDecision": "PREVIEW_ONLY",
+        "requiredPreconditions": [
+          "decisionItemId",
+          "decisionState",
+          "decisionType"
+        ],
+        "runtimeActivationAllowed": false,
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "TEL",
+        "writeAllowed": false
+      },
+      {
+        "apiRequired": false,
+        "approvalAllowed": false,
+        "blocking": true,
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "db57387cf930d7db4ac2afdc605dfa581742751fdc85fd0533cb0f37fe75b5ff",
+        "decisionScope": "ALARM_EVENT_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "DOWNSTREAM_CREATION_AUTHORIZATION",
+        "deterministicDigest": "2c10eaf30c42e347458152328febf5a3c56f720a99b7e325819d32054f321553",
+        "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+        "evidenceReferences": [
+          "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '2b26090a97f80bde8af7ba0658a886bf37d07494c0f0f23fc42ba21ae6530fda', 'sourceSystemKey': 'ACS'}"
+        ],
+        "frontendRequired": false,
+        "guardResultId": "ed94ecbf8846cdf7f533fa1bc88cd6393221566d549dbf006133826e0bf5a609",
+        "guardState": "BLOCKED_BY_POLICY",
+        "missingPreconditions": [],
+        "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+        "productionActivationAllowed": false,
+        "queueType": "ALARM_EVENT_QUEUE",
+        "reasonCodes": [
+          "APPROVAL_NOT_AUTHORIZED",
+          "EXECUTION_NOT_AUTHORIZED",
+          "READ_ONLY_PREVIEW_ALLOWED",
+          "WRITE_NOT_AUTHORIZED"
+        ],
+        "requestedDecision": "PREVIEW_ONLY",
+        "requiredPreconditions": [
+          "decisionItemId",
+          "decisionState",
+          "decisionType"
+        ],
+        "runtimeActivationAllowed": false,
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "ACS",
+        "writeAllowed": false
+      },
+      {
+        "apiRequired": false,
+        "approvalAllowed": false,
+        "blocking": true,
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "1a70ceb857e36de227e061e6ba75e69732b34fbffeeebe7e448d2a35c6c985e6",
+        "decisionScope": "ALARM_EVENT_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "DOWNSTREAM_CREATION_AUTHORIZATION",
+        "deterministicDigest": "865d6bf3745472efe693e55425256b7ee830eeac793f5e9bfce3d4f8f19cc9c8",
+        "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+        "evidenceReferences": [
+          "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '8886051eedce1be862c858ddb03534a4de000ff25f964d6eccc781930b9cec16', 'sourceSystemKey': 'CCTV'}"
+        ],
+        "frontendRequired": false,
+        "guardResultId": "f58493729227d8de5fe9ee1b76a4aa7e1fbcd1dda0f0f8485de32844ec779789",
+        "guardState": "BLOCKED_BY_POLICY",
+        "missingPreconditions": [],
+        "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+        "productionActivationAllowed": false,
+        "queueType": "ALARM_EVENT_QUEUE",
+        "reasonCodes": [
+          "APPROVAL_NOT_AUTHORIZED",
+          "EXECUTION_NOT_AUTHORIZED",
+          "READ_ONLY_PREVIEW_ALLOWED",
+          "WRITE_NOT_AUTHORIZED"
+        ],
+        "requestedDecision": "PREVIEW_ONLY",
+        "requiredPreconditions": [
+          "decisionItemId",
+          "decisionState",
+          "decisionType"
+        ],
+        "runtimeActivationAllowed": false,
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "CCTV",
+        "writeAllowed": false
+      },
+      {
+        "apiRequired": false,
+        "approvalAllowed": false,
+        "blocking": true,
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "921416f11d969831b8e941439e5d5bafab3ad7bf89eeceb238e346f9141214c9",
+        "decisionScope": "ALARM_EVENT_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "DOWNSTREAM_CREATION_AUTHORIZATION",
+        "deterministicDigest": "f6968cf07bdef545db95c2ff08f76dc45954b660e0c5f1bbf2c66d2bbc7d78c6",
+        "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+        "evidenceReferences": [
+          "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'afdad1549fd06642825c07d2433783222914ecf27b2de141b991a29e57e10c4e', 'sourceSystemKey': 'PA'}"
+        ],
+        "frontendRequired": false,
+        "guardResultId": "91369001fa45dbba5f961f149a85940a15109022ebf4b3d711c1c7ec5fe7532e",
+        "guardState": "BLOCKED_BY_POLICY",
+        "missingPreconditions": [],
+        "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+        "productionActivationAllowed": false,
+        "queueType": "ALARM_EVENT_QUEUE",
+        "reasonCodes": [
+          "APPROVAL_NOT_AUTHORIZED",
+          "EXECUTION_NOT_AUTHORIZED",
+          "READ_ONLY_PREVIEW_ALLOWED",
+          "WRITE_NOT_AUTHORIZED"
+        ],
+        "requestedDecision": "PREVIEW_ONLY",
+        "requiredPreconditions": [
+          "decisionItemId",
+          "decisionState",
+          "decisionType"
+        ],
+        "runtimeActivationAllowed": false,
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "PA",
+        "writeAllowed": false
+      },
+      {
+        "apiRequired": false,
+        "approvalAllowed": false,
+        "blocking": true,
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "8ff7a4d3349c11dfa062b509b4fff776ebe1aa8a2d4148dc02c7683b0c98d4d7",
+        "decisionScope": "ALARM_EVENT_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "DOWNSTREAM_CREATION_AUTHORIZATION",
+        "deterministicDigest": "024fd4ac872a634ddf33dbea0c51a029c74b5af410f2a9dade4c7b3e59aab47a",
+        "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+        "evidenceReferences": [
+          "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'cdd2b1cc9930b527a42fc8c04e5a74e28d4eb0f3d29c2ebb1b1e30c0bf92bec0', 'sourceSystemKey': 'RAS'}"
+        ],
+        "frontendRequired": false,
+        "guardResultId": "ae2b709486cbb6b85e58284bd13b06631d172c5dc25d3f29f12a300af6b674ab",
+        "guardState": "BLOCKED_BY_POLICY",
+        "missingPreconditions": [],
+        "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+        "productionActivationAllowed": false,
+        "queueType": "ALARM_EVENT_QUEUE",
+        "reasonCodes": [
+          "APPROVAL_NOT_AUTHORIZED",
+          "EXECUTION_NOT_AUTHORIZED",
+          "READ_ONLY_PREVIEW_ALLOWED",
+          "WRITE_NOT_AUTHORIZED"
+        ],
+        "requestedDecision": "PREVIEW_ONLY",
+        "requiredPreconditions": [
+          "decisionItemId",
+          "decisionState",
+          "decisionType"
+        ],
+        "runtimeActivationAllowed": false,
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "RAS",
+        "writeAllowed": false
+      },
+      {
+        "apiRequired": false,
+        "approvalAllowed": false,
+        "blocking": true,
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "a767c1d68bbd4b11e76424b8118476275b069691406e5167dcb9d9df03c5a3e4",
+        "decisionScope": "ALARM_EVENT_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "DOWNSTREAM_CREATION_AUTHORIZATION",
+        "deterministicDigest": "740bc261e632259d5ac7bdbccb5828f6173003cea6f12627dd91839c5b5635e3",
+        "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+        "evidenceReferences": [
+          "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'db1df3fe509eae4f465e526c51ec045b2b70511b97f207918cc6ee07b7c7a44a', 'sourceSystemKey': 'TEL'}"
+        ],
+        "frontendRequired": false,
+        "guardResultId": "7d7bad0cf4a935b34350cd566d605b1239583fa901b4c7eacb169c61028b4143",
+        "guardState": "BLOCKED_BY_POLICY",
+        "missingPreconditions": [],
+        "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+        "productionActivationAllowed": false,
+        "queueType": "ALARM_EVENT_QUEUE",
+        "reasonCodes": [
+          "APPROVAL_NOT_AUTHORIZED",
+          "EXECUTION_NOT_AUTHORIZED",
+          "READ_ONLY_PREVIEW_ALLOWED",
+          "WRITE_NOT_AUTHORIZED"
+        ],
+        "requestedDecision": "PREVIEW_ONLY",
+        "requiredPreconditions": [
+          "decisionItemId",
+          "decisionState",
+          "decisionType"
+        ],
+        "runtimeActivationAllowed": false,
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "TEL",
+        "writeAllowed": false
+      },
+      {
+        "apiRequired": false,
+        "approvalAllowed": false,
+        "blocking": true,
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "6b49f645470ed970a1ccd8f4c1971b47bd08058db365ce2f441ae8a2e356fde2",
+        "decisionScope": "EVIDENCE_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "EVIDENCE_INVESTIGATION_REVIEW",
+        "deterministicDigest": "4d7064d4370ccbba3d9354f0c47ffe09d9dbbb486d999e8224f311f149739d81",
+        "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+        "evidenceReferences": [],
+        "frontendRequired": false,
+        "guardResultId": "93f2c9854b4c6f3f7e07a0d8c2133c86e191855b5a05e3a28a7fc7ac110cfe0e",
+        "guardState": "BLOCKED_BY_POLICY",
+        "missingPreconditions": [],
+        "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+        "productionActivationAllowed": false,
+        "queueType": "EVIDENCE_INVESTIGATION_QUEUE",
+        "reasonCodes": [
+          "APPROVAL_NOT_AUTHORIZED",
+          "EXECUTION_NOT_AUTHORIZED",
+          "READ_ONLY_PREVIEW_ALLOWED",
+          "WRITE_NOT_AUTHORIZED"
+        ],
+        "requestedDecision": "PREVIEW_ONLY",
+        "requiredPreconditions": [
+          "decisionItemId",
+          "decisionState",
+          "decisionType"
+        ],
+        "runtimeActivationAllowed": false,
+        "sourceStage": "A3-05",
+        "sourceSystemKey": "ACS",
+        "writeAllowed": false
+      },
+      {
+        "apiRequired": false,
+        "approvalAllowed": false,
+        "blocking": true,
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "bac5a5c46e001f3e84f6cfa4a82e726d9023a4a76e8be41e2e851a3516740924",
+        "decisionScope": "EVIDENCE_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "EVIDENCE_INVESTIGATION_REVIEW",
+        "deterministicDigest": "24b9f695b4bb771d94f61b2401750147fab71f10fc7d7c418d541ea5d9d9c168",
+        "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+        "evidenceReferences": [],
+        "frontendRequired": false,
+        "guardResultId": "b9b476d95628a04ba1d538cc576da14322a5c9b9ce95cce3219bbae0fbfc4ecd",
+        "guardState": "BLOCKED_BY_POLICY",
+        "missingPreconditions": [],
+        "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+        "productionActivationAllowed": false,
+        "queueType": "EVIDENCE_INVESTIGATION_QUEUE",
+        "reasonCodes": [
+          "APPROVAL_NOT_AUTHORIZED",
+          "EXECUTION_NOT_AUTHORIZED",
+          "READ_ONLY_PREVIEW_ALLOWED",
+          "WRITE_NOT_AUTHORIZED"
+        ],
+        "requestedDecision": "PREVIEW_ONLY",
+        "requiredPreconditions": [
+          "decisionItemId",
+          "decisionState",
+          "decisionType"
+        ],
+        "runtimeActivationAllowed": false,
+        "sourceStage": "A3-05",
+        "sourceSystemKey": "CCTV",
+        "writeAllowed": false
+      },
+      {
+        "apiRequired": false,
+        "approvalAllowed": false,
+        "blocking": true,
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "94af27fdd1e78c5472ce1267b5f2f2605894f2f9a06021a6211766e6dbea5355",
+        "decisionScope": "EVIDENCE_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "EVIDENCE_INVESTIGATION_REVIEW",
+        "deterministicDigest": "8e845522c9b6e611be094c807affac99cb670e2c9fbc0277cfb05e0caddd9951",
+        "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+        "evidenceReferences": [],
+        "frontendRequired": false,
+        "guardResultId": "23b046b4b95b0c38851dcac6fa86ea7718515a9a08e645c6ddf8be7a335f57fa",
+        "guardState": "BLOCKED_BY_POLICY",
+        "missingPreconditions": [],
+        "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+        "productionActivationAllowed": false,
+        "queueType": "EVIDENCE_INVESTIGATION_QUEUE",
+        "reasonCodes": [
+          "APPROVAL_NOT_AUTHORIZED",
+          "EXECUTION_NOT_AUTHORIZED",
+          "READ_ONLY_PREVIEW_ALLOWED",
+          "WRITE_NOT_AUTHORIZED"
+        ],
+        "requestedDecision": "PREVIEW_ONLY",
+        "requiredPreconditions": [
+          "decisionItemId",
+          "decisionState",
+          "decisionType"
+        ],
+        "runtimeActivationAllowed": false,
+        "sourceStage": "A3-05",
+        "sourceSystemKey": "PA",
+        "writeAllowed": false
+      },
+      {
+        "apiRequired": false,
+        "approvalAllowed": false,
+        "blocking": true,
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "9644fd5626735ead20d577302879c654a158550ff4cdb9d8d9e6387c233a26fe",
+        "decisionScope": "EVIDENCE_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "EVIDENCE_INVESTIGATION_REVIEW",
+        "deterministicDigest": "d27035e119313d3be5ecd50f5d963355fb3b9875fcb967668b5eef78ee99e65f",
+        "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+        "evidenceReferences": [],
+        "frontendRequired": false,
+        "guardResultId": "c3a110fd5978462eeff0173fac0a5da02d00c7bfcf5268e87490c43f1c2d3b8d",
+        "guardState": "BLOCKED_BY_POLICY",
+        "missingPreconditions": [],
+        "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+        "productionActivationAllowed": false,
+        "queueType": "EVIDENCE_INVESTIGATION_QUEUE",
+        "reasonCodes": [
+          "APPROVAL_NOT_AUTHORIZED",
+          "EXECUTION_NOT_AUTHORIZED",
+          "READ_ONLY_PREVIEW_ALLOWED",
+          "WRITE_NOT_AUTHORIZED"
+        ],
+        "requestedDecision": "PREVIEW_ONLY",
+        "requiredPreconditions": [
+          "decisionItemId",
+          "decisionState",
+          "decisionType"
+        ],
+        "runtimeActivationAllowed": false,
+        "sourceStage": "A3-05",
+        "sourceSystemKey": "RAS",
+        "writeAllowed": false
+      },
+      {
+        "apiRequired": false,
+        "approvalAllowed": false,
+        "blocking": true,
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "f5e019ed5db793f0cf2fe3ba398eeb75541cdbf84c09007976925f90ebccb601",
+        "decisionScope": "EVIDENCE_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "EVIDENCE_INVESTIGATION_REVIEW",
+        "deterministicDigest": "6678a7227ad0df9e7ed8cecf90a8131354f99f87d16ae92b2a0f95dfaf18dd74",
+        "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+        "evidenceReferences": [],
+        "frontendRequired": false,
+        "guardResultId": "40e9c71fc08f59fc8006c5a5b072c1df3ae62720f8ebb3190f7278d550cf9dbe",
+        "guardState": "BLOCKED_BY_POLICY",
+        "missingPreconditions": [],
+        "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+        "productionActivationAllowed": false,
+        "queueType": "EVIDENCE_INVESTIGATION_QUEUE",
+        "reasonCodes": [
+          "APPROVAL_NOT_AUTHORIZED",
+          "EXECUTION_NOT_AUTHORIZED",
+          "READ_ONLY_PREVIEW_ALLOWED",
+          "WRITE_NOT_AUTHORIZED"
+        ],
+        "requestedDecision": "PREVIEW_ONLY",
+        "requiredPreconditions": [
+          "decisionItemId",
+          "decisionState",
+          "decisionType"
+        ],
+        "runtimeActivationAllowed": false,
+        "sourceStage": "A3-05",
+        "sourceSystemKey": "TEL",
+        "writeAllowed": false
+      },
+      {
+        "apiRequired": false,
+        "approvalAllowed": false,
+        "blocking": true,
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "bb11dc25caa5e9a71715d110ba356ec4eea8fef2a3bafe5b92926f4edc4c7818",
+        "decisionScope": "FAULTCASE_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "FAULTCASE_CANDIDATE_REVIEW",
+        "deterministicDigest": "1a0598d8b0955b2737d6d20580f54a2d96a74ae1bae74a0b242d5b7ec395418e",
+        "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+        "evidenceReferences": [
+          "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '2b26090a97f80bde8af7ba0658a886bf37d07494c0f0f23fc42ba21ae6530fda', 'sourceSystemKey': 'ACS'}"
+        ],
+        "frontendRequired": false,
+        "guardResultId": "69a8cef0e468ca3a5762e1a855ea899d645ba3db776f8342150d861e4a5c1a9d",
+        "guardState": "BLOCKED_BY_POLICY",
+        "missingPreconditions": [],
+        "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+        "productionActivationAllowed": false,
+        "queueType": "FAULTCASE_QUEUE",
+        "reasonCodes": [
+          "APPROVAL_NOT_AUTHORIZED",
+          "EXECUTION_NOT_AUTHORIZED",
+          "READ_ONLY_PREVIEW_ALLOWED",
+          "WRITE_NOT_AUTHORIZED"
+        ],
+        "requestedDecision": "PREVIEW_ONLY",
+        "requiredPreconditions": [
+          "decisionItemId",
+          "decisionState",
+          "decisionType"
+        ],
+        "runtimeActivationAllowed": false,
+        "sourceStage": "A3-03",
+        "sourceSystemKey": "ACS",
+        "writeAllowed": false
+      },
+      {
+        "apiRequired": false,
+        "approvalAllowed": false,
+        "blocking": true,
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "770d6dbaf35e13b857af6903985eb796a8e922b7087bac9de82317209570a83f",
+        "decisionScope": "FAULTCASE_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "FAULTCASE_CANDIDATE_REVIEW",
+        "deterministicDigest": "547a44fd2146ee3fcf0b153efffc1d7b0571c4e6987d147f330bdf2a12f15607",
+        "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+        "evidenceReferences": [
+          "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '8886051eedce1be862c858ddb03534a4de000ff25f964d6eccc781930b9cec16', 'sourceSystemKey': 'CCTV'}"
+        ],
+        "frontendRequired": false,
+        "guardResultId": "868ee5b40510e3f7287b0e4b537863dcc6955d8bafe6ad2f708179559cfd16a7",
+        "guardState": "BLOCKED_BY_POLICY",
+        "missingPreconditions": [],
+        "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+        "productionActivationAllowed": false,
+        "queueType": "FAULTCASE_QUEUE",
+        "reasonCodes": [
+          "APPROVAL_NOT_AUTHORIZED",
+          "EXECUTION_NOT_AUTHORIZED",
+          "READ_ONLY_PREVIEW_ALLOWED",
+          "WRITE_NOT_AUTHORIZED"
+        ],
+        "requestedDecision": "PREVIEW_ONLY",
+        "requiredPreconditions": [
+          "decisionItemId",
+          "decisionState",
+          "decisionType"
+        ],
+        "runtimeActivationAllowed": false,
+        "sourceStage": "A3-03",
+        "sourceSystemKey": "CCTV",
+        "writeAllowed": false
+      },
+      {
+        "apiRequired": false,
+        "approvalAllowed": false,
+        "blocking": true,
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "477bbb2c89e20f91b743808f927db066ea1dbb11a33f834d2ba52a85c52fc850",
+        "decisionScope": "FAULTCASE_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "FAULTCASE_CANDIDATE_REVIEW",
+        "deterministicDigest": "9833a69f64d5f2aa90bc86c3912a206ac6b595a65d78323fcea3c53b6d6ea001",
+        "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+        "evidenceReferences": [
+          "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'afdad1549fd06642825c07d2433783222914ecf27b2de141b991a29e57e10c4e', 'sourceSystemKey': 'PA'}"
+        ],
+        "frontendRequired": false,
+        "guardResultId": "5345f147817607055ca56b66e0c399ca9219cdd7832599839901f3b3682bf0a8",
+        "guardState": "BLOCKED_BY_POLICY",
+        "missingPreconditions": [],
+        "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+        "productionActivationAllowed": false,
+        "queueType": "FAULTCASE_QUEUE",
+        "reasonCodes": [
+          "APPROVAL_NOT_AUTHORIZED",
+          "EXECUTION_NOT_AUTHORIZED",
+          "READ_ONLY_PREVIEW_ALLOWED",
+          "WRITE_NOT_AUTHORIZED"
+        ],
+        "requestedDecision": "PREVIEW_ONLY",
+        "requiredPreconditions": [
+          "decisionItemId",
+          "decisionState",
+          "decisionType"
+        ],
+        "runtimeActivationAllowed": false,
+        "sourceStage": "A3-03",
+        "sourceSystemKey": "PA",
+        "writeAllowed": false
+      }
+    ],
+    "nextContinuationToken": "9230a39eccf4494e7949582da710179f90ec9bcf23946bde12d702e72036165f",
+    "pageSize": 25,
+    "returnedCount": 25,
+    "totalCount": 46
+  },
+  "deterministicDigest": "d6cc8b96ac10c028f5ce88f47ff31decfd31c703bec5cb59bcead18eb5fab306",
+  "facets": {
+    "approvalAllowed": {
+      "False": 46
+    },
+    "auditPreviewState": {
+      "GENERATED_READ_ONLY": 46
+    },
+    "decisionScope": {
+      "ALARM_EVENT_REVIEW": 10,
+      "ASSET_REVIEW": 15,
+      "EVIDENCE_REVIEW": 5,
+      "FAULTCASE_REVIEW": 5,
+      "RELEASE_GATE": 1,
+      "SOURCE_SYSTEM_REVIEW": 5,
+      "WORKORDER_REVIEW": 5
+    },
+    "decisionType": {
+      "ALARM_EVENT_REVIEW": 5,
+      "ALIAS_APPROVAL": 2,
+      "ASSET_RESOLUTION": 5,
+      "DOWNSTREAM_CREATION_AUTHORIZATION": 5,
+      "EVIDENCE_INVESTIGATION_REVIEW": 5,
+      "FAULTCASE_CANDIDATE_REVIEW": 5,
+      "LOCATION_RESOLUTION": 5,
+      "NAMESPACE_INTERPRETATION": 1,
+      "POINT_RESOLUTION": 5,
+      "REGISTRY_APPROVAL": 2,
+      "RELEASE_GATE_REVIEW": 1,
+      "WORKORDER_INTENT_REVIEW": 5
+    },
+    "eligibilityState": {
+      "ELIGIBLE_FOR_PREVIEW": 46
+    },
+    "guardState": {
+      "BLOCKED_BY_POLICY": 46
+    },
+    "policyResult": {
+      "FAIL_WRITE_NOT_AUTHORIZED": 46
+    },
+    "productionActivationAllowed": {
+      "False": 46
+    },
+    "queueType": {
+      "ALARM_EVENT_QUEUE": 10,
+      "ASSET_RESOLUTION_QUEUE": 15,
+      "EVIDENCE_INVESTIGATION_QUEUE": 5,
+      "FAULTCASE_QUEUE": 5,
+      "RELEASE_GATE_QUEUE": 1,
+      "SOURCE_SYSTEM_QUEUE": 5,
+      "WORKORDER_INTENT_QUEUE": 5
+    },
+    "reasonCode": {
+      "APPROVAL_NOT_AUTHORIZED": 46,
+      "EXECUTION_NOT_AUTHORIZED": 46,
+      "READ_ONLY_PREVIEW_ALLOWED": 46,
+      "WRITE_NOT_AUTHORIZED": 46
+    },
+    "runtimeActivationAllowed": {
+      "False": 46
+    },
+    "sourceStage": {
+      "A2": 5,
+      "A3-01": 5,
+      "A3-02": 20,
+      "A3-03": 5,
+      "A3-04": 5,
+      "A3-05": 5,
+      "A3-07": 1
+    },
+    "sourceSystemKey": {
+      "ACS": 9,
+      "CCTV": 9,
+      "PA": 9,
+      "RAS": 9,
+      "TEL": 9
+    },
+    "writeAllowed": {
+      "False": 46
+    }
+  },
+  "filters": {
+    "approvalAllowed": {
+      "field": "approvalAllowed",
+      "options": [
+        false
+      ]
+    },
+    "auditPreviewState": {
+      "field": "auditPreviewState",
+      "options": [
+        "GENERATED_READ_ONLY"
+      ]
+    },
+    "decisionScope": {
+      "field": "decisionScope",
+      "options": [
+        "ALARM_EVENT_REVIEW",
+        "ASSET_REVIEW",
+        "EVIDENCE_REVIEW",
+        "FAULTCASE_REVIEW",
+        "RELEASE_GATE",
+        "SOURCE_SYSTEM_REVIEW",
+        "WORKORDER_REVIEW"
+      ]
+    },
+    "decisionType": {
+      "field": "decisionType",
+      "options": [
+        "ALARM_EVENT_REVIEW",
+        "ALIAS_APPROVAL",
+        "ASSET_RESOLUTION",
+        "DOWNSTREAM_CREATION_AUTHORIZATION",
+        "EVIDENCE_INVESTIGATION_REVIEW",
+        "FAULTCASE_CANDIDATE_REVIEW",
+        "LOCATION_RESOLUTION",
+        "NAMESPACE_INTERPRETATION",
+        "POINT_RESOLUTION",
+        "REGISTRY_APPROVAL",
+        "RELEASE_GATE_REVIEW",
+        "WORKORDER_INTENT_REVIEW"
+      ]
+    },
+    "eligibilityState": {
+      "field": "eligibilityState",
+      "options": [
+        "ELIGIBLE_FOR_PREVIEW"
+      ]
+    },
+    "guardState": {
+      "field": "guardState",
+      "options": [
+        "BLOCKED_BY_POLICY"
+      ]
+    },
+    "policyResult": {
+      "field": "policyResult",
+      "options": [
+        "FAIL_WRITE_NOT_AUTHORIZED"
+      ]
+    },
+    "productionActivationAllowed": {
+      "field": "productionActivationAllowed",
+      "options": [
+        false
+      ]
+    },
+    "queueType": {
+      "field": "queueType",
+      "options": [
+        "ALARM_EVENT_QUEUE",
+        "ASSET_RESOLUTION_QUEUE",
+        "EVIDENCE_INVESTIGATION_QUEUE",
+        "FAULTCASE_QUEUE",
+        "RELEASE_GATE_QUEUE",
+        "SOURCE_SYSTEM_QUEUE",
+        "WORKORDER_INTENT_QUEUE"
+      ]
+    },
+    "reasonCode": {
+      "field": "reasonCode",
+      "options": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ]
+    },
+    "runtimeActivationAllowed": {
+      "field": "runtimeActivationAllowed",
+      "options": [
+        false
+      ]
+    },
+    "sourceStage": {
+      "field": "sourceStage",
+      "options": [
+        "A2",
+        "A3-01",
+        "A3-02",
+        "A3-03",
+        "A3-04",
+        "A3-05",
+        "A3-07"
+      ]
+    },
+    "sourceSystemKey": {
+      "field": "sourceSystemKey",
+      "options": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ]
+    },
+    "writeAllowed": {
+      "field": "writeAllowed",
+      "options": [
+        false
+      ]
+    }
+  },
+  "generatedAtPolicy": "DETERMINISTIC_NO_VOLATILE_TIMESTAMP",
+  "guardGroups": [
+    {
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "approvalAllowedCount": 0,
+      "blockedCount": 46,
+      "deterministicDigest": "64bbab5d06ab5fa65ed15c57c28d68d3f3f30de8dd486a6f3e0cd6eca7d15192",
+      "eligibleCount": 46,
+      "groupType": "ALL_DECISION_GUARDS",
+      "guardGroupId": "aa07a91a9e9e31372ce68e2cde73bd27846ed4cad12743eb70c26097cb4b4c82",
+      "guardResultIds": [
+        "00117d0536415cb502b510a94052e1e3d0a4f25b05317e7de99b25421fdb52cd",
+        "034f03d4b8182f1aeb2fa2a653c4b96f6feff1bd8af44bda9a66463468586cda",
+        "07d7a515043d9526215ce54812fc6521c820e49d9c4572d1bae6168d6205a815",
+        "16ff09c8800f20e79e262ee9ea5af2161c83791fbcd835703a3cae31ab7108df",
+        "23b046b4b95b0c38851dcac6fa86ea7718515a9a08e645c6ddf8be7a335f57fa",
+        "3272e285e31301a3113e392e0eaf2aa0cea16b22d4869be18ce224c56d62ebe5",
+        "3bbe4dcc3164e605b102f7354be3c8688de1bd72c8dd87dc413e37b205805203",
+        "40c1b5befe6c7c2f3a23f1c0f5d1abb2cf1966f05f6e34ddf459186fca445f82",
+        "40e9c71fc08f59fc8006c5a5b072c1df3ae62720f8ebb3190f7278d550cf9dbe",
+        "470ce4d9b67a83248e94c28169db54f094a687fbfaaecb8d495c371aaafa10d1",
+        "47dc2e7340e3b7a92826f392819d2f08d35472df8012aeb29e30d00c18c613bc",
+        "4822eb50aeb024319e4659345966ebdae248431b4fafc6e90b9c7ffae2f7343c",
+        "4a681f105044245b11446040ad466784685c70cf03d2d4754d4b777e29fe0dd4",
+        "5345f147817607055ca56b66e0c399ca9219cdd7832599839901f3b3682bf0a8",
+        "5aae1f6e75950d48635921a85c94ebf8073b88f959a9783b45d9bee22299b44b",
+        "5e30bd6073f1b41e72b535c2cc752cfda6f418164bb244bcb6b0f158a32731ef",
+        "67c318547703e4b95afb6adb6ac2a87ee9a6d4ec0d5e336d56747bb6d2875e58",
+        "680d27b504483f4dc7924dec8c1a84b7b3ecd851f34851c4a9c7872ff7518e52",
+        "69a8cef0e468ca3a5762e1a855ea899d645ba3db776f8342150d861e4a5c1a9d",
+        "6da8d81b8948508e06aa5f057ea5302ad638eebd49e32c5f988076dd760d9e9f",
+        "6ee62c788746f92d292314daf03f32300d102032681937611cce52afabb3165e",
+        "7c094d6e0ecc9b2e6a6fec8b81bc2273f20cc90545c30526476f7f8ae056626a",
+        "7d7bad0cf4a935b34350cd566d605b1239583fa901b4c7eacb169c61028b4143",
+        "7e859c36df37ff1d4a45eb6e83327936cc13a4b97eb85e964d597fbbc97bdd67",
+        "85a81ef391203440774f75cbfc5eaa66f5afb402f2ef720220d47d329b5fa143",
+        "868ee5b40510e3f7287b0e4b537863dcc6955d8bafe6ad2f708179559cfd16a7",
+        "91369001fa45dbba5f961f149a85940a15109022ebf4b3d711c1c7ec5fe7532e",
+        "93f2c9854b4c6f3f7e07a0d8c2133c86e191855b5a05e3a28a7fc7ac110cfe0e",
+        "9cc258e5a9800162100f00a81b680d9f10062d07ad79f3623269866db27ae580",
+        "a47fcaf96f064823261b7d7fac20105f0ae5780c89457f9ca5f3bef1cd16bc44",
+        "add705cca30a183c5284a72a85a928449be67c33d78c742722b436365ea7150f",
+        "ae2b709486cbb6b85e58284bd13b06631d172c5dc25d3f29f12a300af6b674ab",
+        "b698be537d840c990d469b8f153ce16e7518f95107664a1d9219b0c0ef8fad4e",
+        "b9b476d95628a04ba1d538cc576da14322a5c9b9ce95cce3219bbae0fbfc4ecd",
+        "bd38dcc2412ff5d7e2853cd7afe913ebab2d4e853740c14844b8a8a1b0c2563e",
+        "c1463b2303eb4518d7c6061c34f1c78af3f0c06b879a9d3c6fbad0bed8a524ea",
+        "c3a110fd5978462eeff0173fac0a5da02d00c7bfcf5268e87490c43f1c2d3b8d",
+        "cbdc58c66e3357955de3d46a8579ab3e03d730e3d80892b5e0ec8d5ecc79a06c",
+        "d26dc48248c918926e826d9921305f236b661a9e70be2b31272767b7c6e2994f",
+        "d37a9191325c10e23b1600d67618a434b1651967da374a5f10849b9cbd41b85b",
+        "d796db9d8d2e7fd325c7629d1357554e4fe6005009d6e7ed586ebd1ec3a4453c",
+        "ed94ecbf8846cdf7f533fa1bc88cd6393221566d549dbf006133826e0bf5a609",
+        "f0e36b991e14740c76b16462e3c40de70a3805ebb56bb66fb854b3308731c0da",
+        "f0f928b2f99c726b560d3aee3c5d3b0e5ca2f2378d932adc036e1c8d4370b75f",
+        "f58493729227d8de5fe9ee1b76a4aa7e1fbcd1dda0f0f8485de32844ec779789",
+        "f6542a414523e3f4caf6957e1b19c174a3f11248dc192ac51ea1267df84d0062"
+      ],
+      "title": "All decision policy guards",
+      "writeAllowedCount": 0
+    },
+    {
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "approvalAllowedCount": 0,
+      "blockedCount": 5,
+      "deterministicDigest": "9979bfa672ea3add08abe18ebf77fd5f16fcfdda25af1ca643fc9aa30c2ed488",
+      "eligibleCount": 5,
+      "groupType": "SOURCE_SYSTEM_GUARDS",
+      "guardGroupId": "941c2703a98efc24f09b009de3174186142ba7d393344cf11b0ceec719480c0c",
+      "guardResultIds": [
+        "034f03d4b8182f1aeb2fa2a653c4b96f6feff1bd8af44bda9a66463468586cda",
+        "47dc2e7340e3b7a92826f392819d2f08d35472df8012aeb29e30d00c18c613bc",
+        "add705cca30a183c5284a72a85a928449be67c33d78c742722b436365ea7150f",
+        "b698be537d840c990d469b8f153ce16e7518f95107664a1d9219b0c0ef8fad4e",
+        "bd38dcc2412ff5d7e2853cd7afe913ebab2d4e853740c14844b8a8a1b0c2563e"
+      ],
+      "title": "Source-system policy guards",
+      "writeAllowedCount": 0
+    },
+    {
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "approvalAllowedCount": 0,
+      "blockedCount": 15,
+      "deterministicDigest": "dc5220e4e962c9a5689ceb7147363b0183ea402f80b7b2f305520d13991f4486",
+      "eligibleCount": 15,
+      "groupType": "ASSET_RESOLUTION_GUARDS",
+      "guardGroupId": "62de376b59d5efe9b197fc1566452e9adf7809a0f7948b1407f9839e62387fc3",
+      "guardResultIds": [
+        "00117d0536415cb502b510a94052e1e3d0a4f25b05317e7de99b25421fdb52cd",
+        "07d7a515043d9526215ce54812fc6521c820e49d9c4572d1bae6168d6205a815",
+        "16ff09c8800f20e79e262ee9ea5af2161c83791fbcd835703a3cae31ab7108df",
+        "3272e285e31301a3113e392e0eaf2aa0cea16b22d4869be18ce224c56d62ebe5",
+        "3bbe4dcc3164e605b102f7354be3c8688de1bd72c8dd87dc413e37b205805203",
+        "470ce4d9b67a83248e94c28169db54f094a687fbfaaecb8d495c371aaafa10d1",
+        "5aae1f6e75950d48635921a85c94ebf8073b88f959a9783b45d9bee22299b44b",
+        "680d27b504483f4dc7924dec8c1a84b7b3ecd851f34851c4a9c7872ff7518e52",
+        "6ee62c788746f92d292314daf03f32300d102032681937611cce52afabb3165e",
+        "85a81ef391203440774f75cbfc5eaa66f5afb402f2ef720220d47d329b5fa143",
+        "9cc258e5a9800162100f00a81b680d9f10062d07ad79f3623269866db27ae580",
+        "cbdc58c66e3357955de3d46a8579ab3e03d730e3d80892b5e0ec8d5ecc79a06c",
+        "d26dc48248c918926e826d9921305f236b661a9e70be2b31272767b7c6e2994f",
+        "f0f928b2f99c726b560d3aee3c5d3b0e5ca2f2378d932adc036e1c8d4370b75f",
+        "f6542a414523e3f4caf6957e1b19c174a3f11248dc192ac51ea1267df84d0062"
+      ],
+      "title": "Asset-resolution policy guards",
+      "writeAllowedCount": 0
+    },
+    {
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "approvalAllowedCount": 0,
+      "blockedCount": 10,
+      "deterministicDigest": "bada71e47e19147038969358cd2afe77b509a54ffc8454a19ecaa6dc9b40f67c",
+      "eligibleCount": 10,
+      "groupType": "ALARM_EVENT_GUARDS",
+      "guardGroupId": "b2735c17fbc47148ddadebb610cd6c16c27fa219ebbb31b8c10e1a03f9556c56",
+      "guardResultIds": [
+        "40c1b5befe6c7c2f3a23f1c0f5d1abb2cf1966f05f6e34ddf459186fca445f82",
+        "4822eb50aeb024319e4659345966ebdae248431b4fafc6e90b9c7ffae2f7343c",
+        "5e30bd6073f1b41e72b535c2cc752cfda6f418164bb244bcb6b0f158a32731ef",
+        "7c094d6e0ecc9b2e6a6fec8b81bc2273f20cc90545c30526476f7f8ae056626a",
+        "7d7bad0cf4a935b34350cd566d605b1239583fa901b4c7eacb169c61028b4143",
+        "91369001fa45dbba5f961f149a85940a15109022ebf4b3d711c1c7ec5fe7532e",
+        "ae2b709486cbb6b85e58284bd13b06631d172c5dc25d3f29f12a300af6b674ab",
+        "c1463b2303eb4518d7c6061c34f1c78af3f0c06b879a9d3c6fbad0bed8a524ea",
+        "ed94ecbf8846cdf7f533fa1bc88cd6393221566d549dbf006133826e0bf5a609",
+        "f58493729227d8de5fe9ee1b76a4aa7e1fbcd1dda0f0f8485de32844ec779789"
+      ],
+      "title": "Alarm/Event policy guards",
+      "writeAllowedCount": 0
+    },
+    {
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "approvalAllowedCount": 0,
+      "blockedCount": 5,
+      "deterministicDigest": "59c609e87882345efea3d49382518a96554e3d85b2ba679bea0a42dc9e3f9b6c",
+      "eligibleCount": 5,
+      "groupType": "FAULTCASE_GUARDS",
+      "guardGroupId": "e16b5f5bf021ec1995e520762e0581c621a71e99360412f28df889e2a904abf3",
+      "guardResultIds": [
+        "5345f147817607055ca56b66e0c399ca9219cdd7832599839901f3b3682bf0a8",
+        "69a8cef0e468ca3a5762e1a855ea899d645ba3db776f8342150d861e4a5c1a9d",
+        "7e859c36df37ff1d4a45eb6e83327936cc13a4b97eb85e964d597fbbc97bdd67",
+        "868ee5b40510e3f7287b0e4b537863dcc6955d8bafe6ad2f708179559cfd16a7",
+        "a47fcaf96f064823261b7d7fac20105f0ae5780c89457f9ca5f3bef1cd16bc44"
+      ],
+      "title": "FaultCase policy guards",
+      "writeAllowedCount": 0
+    },
+    {
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "approvalAllowedCount": 0,
+      "blockedCount": 5,
+      "deterministicDigest": "18e0ad58ac34499cf533f3feb64b6857465e010507a9ed48d2115202f08932aa",
+      "eligibleCount": 5,
+      "groupType": "WORKORDER_INTENT_GUARDS",
+      "guardGroupId": "39c52cf6778acda4b19c1940afbd3bba7d3cb0518d703ff684880bef17f43f3c",
+      "guardResultIds": [
+        "4a681f105044245b11446040ad466784685c70cf03d2d4754d4b777e29fe0dd4",
+        "67c318547703e4b95afb6adb6ac2a87ee9a6d4ec0d5e336d56747bb6d2875e58",
+        "d37a9191325c10e23b1600d67618a434b1651967da374a5f10849b9cbd41b85b",
+        "d796db9d8d2e7fd325c7629d1357554e4fe6005009d6e7ed586ebd1ec3a4453c",
+        "f0e36b991e14740c76b16462e3c40de70a3805ebb56bb66fb854b3308731c0da"
+      ],
+      "title": "WorkOrderIntent policy guards",
+      "writeAllowedCount": 0
+    },
+    {
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "approvalAllowedCount": 0,
+      "blockedCount": 5,
+      "deterministicDigest": "eb7c3568741fe2a004542dc1b6feb11df4ee2f0fdc3160f3489b497072fdae00",
+      "eligibleCount": 5,
+      "groupType": "EVIDENCE_INVESTIGATION_GUARDS",
+      "guardGroupId": "2c95106aebee2ea3022a42988e615473840368f5f71e501464fa27e3d781ff19",
+      "guardResultIds": [
+        "23b046b4b95b0c38851dcac6fa86ea7718515a9a08e645c6ddf8be7a335f57fa",
+        "40e9c71fc08f59fc8006c5a5b072c1df3ae62720f8ebb3190f7278d550cf9dbe",
+        "93f2c9854b4c6f3f7e07a0d8c2133c86e191855b5a05e3a28a7fc7ac110cfe0e",
+        "b9b476d95628a04ba1d538cc576da14322a5c9b9ce95cce3219bbae0fbfc4ecd",
+        "c3a110fd5978462eeff0173fac0a5da02d00c7bfcf5268e87490c43f1c2d3b8d"
+      ],
+      "title": "Evidence investigation policy guards",
+      "writeAllowedCount": 0
+    },
+    {
+      "affectedSourceSystemKeys": [],
+      "approvalAllowedCount": 0,
+      "blockedCount": 1,
+      "deterministicDigest": "2612aa5b2d95a30648c75cf7e00154018e2f240bcd85bb30a935037a5bcfb871",
+      "eligibleCount": 1,
+      "groupType": "RELEASE_GATE_GUARDS",
+      "guardGroupId": "61564b032670c8e7ab92c9fe861afd6070cc20ee35546be3e73be2458076a309",
+      "guardResultIds": [
+        "6da8d81b8948508e06aa5f057ea5302ad638eebd49e32c5f988076dd760d9e9f"
+      ],
+      "title": "Release gate policy guards",
+      "writeAllowedCount": 0
+    }
+  ],
+  "implementationStatus": "OPERATOR_REVIEW_DECISION_AUDIT_AND_POLICY_GUARD_COMPLETE",
+  "policyGuardResults": [
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "03844389bf147217f2259b0c92fc9a6f080eb6c3c31facf5e5fcc865dca3b2a3",
+      "decisionScope": "ALARM_EVENT_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "ALARM_EVENT_REVIEW",
+      "deterministicDigest": "4af25a253ff9e27a1afbd975dc654f461f767ae0865bbb418f5463a5b85c71b0",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '2b26090a97f80bde8af7ba0658a886bf37d07494c0f0f23fc42ba21ae6530fda', 'sourceSystemKey': 'ACS'}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "7c094d6e0ecc9b2e6a6fec8b81bc2273f20cc90545c30526476f7f8ae056626a",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "ALARM_EVENT_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-01",
+      "sourceSystemKey": "ACS",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "219c5722fedae552a141355a59d84decdd91574ef099156941987a4436786044",
+      "decisionScope": "ALARM_EVENT_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "ALARM_EVENT_REVIEW",
+      "deterministicDigest": "97403656f798807f480025b3f633543433b6217c671eba9e92a0842d67d90c6f",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '8886051eedce1be862c858ddb03534a4de000ff25f964d6eccc781930b9cec16', 'sourceSystemKey': 'CCTV'}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "c1463b2303eb4518d7c6061c34f1c78af3f0c06b879a9d3c6fbad0bed8a524ea",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "ALARM_EVENT_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-01",
+      "sourceSystemKey": "CCTV",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "d2f028af434eb859174fe833d3a2961a79642417c6968a8a29432ecd4ccef27b",
+      "decisionScope": "ALARM_EVENT_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "ALARM_EVENT_REVIEW",
+      "deterministicDigest": "4cc5cffce0ec5c49a9a7de03afe7e12ac6033de837cef55d429ead23edcfe02d",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'afdad1549fd06642825c07d2433783222914ecf27b2de141b991a29e57e10c4e', 'sourceSystemKey': 'PA'}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "4822eb50aeb024319e4659345966ebdae248431b4fafc6e90b9c7ffae2f7343c",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "ALARM_EVENT_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-01",
+      "sourceSystemKey": "PA",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "c9bdc082c69d8ada95f6ad4871262c73445d3ea36be5102bd2883b723d214db0",
+      "decisionScope": "ALARM_EVENT_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "ALARM_EVENT_REVIEW",
+      "deterministicDigest": "c75fced77c857fb6ce3a8b91e2730fd09baeba5a0dbb7edc68eb412ca69604a9",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'cdd2b1cc9930b527a42fc8c04e5a74e28d4eb0f3d29c2ebb1b1e30c0bf92bec0', 'sourceSystemKey': 'RAS'}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "5e30bd6073f1b41e72b535c2cc752cfda6f418164bb244bcb6b0f158a32731ef",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "ALARM_EVENT_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-01",
+      "sourceSystemKey": "RAS",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "6a8a8a5f8e4a3b518851527c2ba59896efd863f5fbe11ed03162666ad76a938e",
+      "decisionScope": "ALARM_EVENT_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "ALARM_EVENT_REVIEW",
+      "deterministicDigest": "d13b19bff57f3d4b5afd00e6d3981bad191e9a3251a4f15e07531c199ae0d703",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'db1df3fe509eae4f465e526c51ec045b2b70511b97f207918cc6ee07b7c7a44a', 'sourceSystemKey': 'TEL'}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "40c1b5befe6c7c2f3a23f1c0f5d1abb2cf1966f05f6e34ddf459186fca445f82",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "ALARM_EVENT_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-01",
+      "sourceSystemKey": "TEL",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "86bf33f97dff8bcfd4a00ad6281f2bd1947bcb04f7cc0b76a7193a7ca541cdda",
+      "decisionScope": "SOURCE_SYSTEM_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "ALIAS_APPROVAL",
+      "deterministicDigest": "96f8ac672ee18b89cc11ccc422cabe4d5c5d196adb3fab1e7a941fb3cd7629ac",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'digest': '700c0aa4873f711e6a0732e56e0e9d67df78be56ef396f52daa10b5c0fe766fa', 'evidenceId': 'ceba5fc20cc1f142a8083ae0edf47f31d74cb445de857a7aa905c895ac30b017', 'evidenceType': 'CLASSIFICATION_BINDING_AGGREGATE', 'provenance': 'ONE-AIRPORT-A1-03 classification bindings', 'resultDigest': '49d8bfa2ece4be806883107bf8c00452af66b35f3a16898a53c8dbb18750faaa', 'sourceProfile': 'airport-source-system-profile-v1', 'sourceRecordCount': 52}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "b698be537d840c990d469b8f153ce16e7518f95107664a1d9219b0c0ef8fad4e",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "SOURCE_SYSTEM_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A2",
+      "sourceSystemKey": "CCTV",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "d4a6daa52d2f0a3dec11137865eab052f146ada30b0f4f553a1a78027077f8a0",
+      "decisionScope": "SOURCE_SYSTEM_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "ALIAS_APPROVAL",
+      "deterministicDigest": "e9cea3b2fef07a4a38ed9c67620e20314ee19a7c37fbee6b505f8c149bffdf31",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'digest': '6da53d802f057618e91b95564f3abee9dab082748ea008e69a81c62c40f21fd6', 'evidenceId': '6f9a9a469a9ad62b5a0d1065bada2f1f9b52cfc0b8132183f1e97f826c1ed461', 'evidenceType': 'CLASSIFICATION_BINDING_AGGREGATE', 'provenance': 'ONE-AIRPORT-A1-03 classification bindings', 'resultDigest': '1dbd5b57a352e475431caeeef6267b79df96f97568ca6f7fb77c37e2734cdea5', 'sourceProfile': 'airport-source-system-profile-v1', 'sourceRecordCount': 247}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "bd38dcc2412ff5d7e2853cd7afe913ebab2d4e853740c14844b8a8a1b0c2563e",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "SOURCE_SYSTEM_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A2",
+      "sourceSystemKey": "PA",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "0eabe9a6a35b8423d76496c43d1ad4cc580823b7a06cc68b7dc39d83649c651e",
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "ASSET_RESOLUTION",
+      "deterministicDigest": "c2784dc9f23a076a13ff0ce4e585dc64b9b1ab6c21f02a9902a41308687f8bbe",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '2b26090a97f80bde8af7ba0658a886bf37d07494c0f0f23fc42ba21ae6530fda', 'sourceSystemKey': 'ACS'}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "d26dc48248c918926e826d9921305f236b661a9e70be2b31272767b7c6e2994f",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "ASSET_RESOLUTION_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "ACS",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "6105951e8f8cdc2557092b11dfd8ccc3d9ea77f7f67e016f17d725b4122c1985",
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "ASSET_RESOLUTION",
+      "deterministicDigest": "cd4be7f89446c7beabb9e5c5f1fc69a167effc343b5cbf8f8b95009753e2f710",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '8886051eedce1be862c858ddb03534a4de000ff25f964d6eccc781930b9cec16', 'sourceSystemKey': 'CCTV'}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "00117d0536415cb502b510a94052e1e3d0a4f25b05317e7de99b25421fdb52cd",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "ASSET_RESOLUTION_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "CCTV",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "611235e783d3860e1bfa3c4379f2a726f02c2184ef8a788e6c2ac6a4a5c52c66",
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "ASSET_RESOLUTION",
+      "deterministicDigest": "eae9bb0c5f294d60817696c544f929732ee7b874baac77b061601044e2770736",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'afdad1549fd06642825c07d2433783222914ecf27b2de141b991a29e57e10c4e', 'sourceSystemKey': 'PA'}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "07d7a515043d9526215ce54812fc6521c820e49d9c4572d1bae6168d6205a815",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "ASSET_RESOLUTION_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "PA",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "f3c78a73247fdeb7878dc72b0a9884e972f1d70816dc8e7f9e3e1c6a1a703ad2",
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "ASSET_RESOLUTION",
+      "deterministicDigest": "6c91d2285cbd8d0db88211fed1d8c68e0a93e4e3f7ab42f5ddd1ae4c324d6d83",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'cdd2b1cc9930b527a42fc8c04e5a74e28d4eb0f3d29c2ebb1b1e30c0bf92bec0', 'sourceSystemKey': 'RAS'}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "680d27b504483f4dc7924dec8c1a84b7b3ecd851f34851c4a9c7872ff7518e52",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "ASSET_RESOLUTION_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "RAS",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "468b82c86e28a34244d8c6bade6eb64947ce74ef10bf1faf7d442d24a88a4a7b",
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "ASSET_RESOLUTION",
+      "deterministicDigest": "af01640e0d962736bdbfbe024c6e9d5791a8c1efd7c94bb468093564bc0c4a05",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'db1df3fe509eae4f465e526c51ec045b2b70511b97f207918cc6ee07b7c7a44a', 'sourceSystemKey': 'TEL'}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "cbdc58c66e3357955de3d46a8579ab3e03d730e3d80892b5e0ec8d5ecc79a06c",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "ASSET_RESOLUTION_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "TEL",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "db57387cf930d7db4ac2afdc605dfa581742751fdc85fd0533cb0f37fe75b5ff",
+      "decisionScope": "ALARM_EVENT_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "DOWNSTREAM_CREATION_AUTHORIZATION",
+      "deterministicDigest": "2c10eaf30c42e347458152328febf5a3c56f720a99b7e325819d32054f321553",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '2b26090a97f80bde8af7ba0658a886bf37d07494c0f0f23fc42ba21ae6530fda', 'sourceSystemKey': 'ACS'}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "ed94ecbf8846cdf7f533fa1bc88cd6393221566d549dbf006133826e0bf5a609",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "ALARM_EVENT_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "ACS",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "1a70ceb857e36de227e061e6ba75e69732b34fbffeeebe7e448d2a35c6c985e6",
+      "decisionScope": "ALARM_EVENT_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "DOWNSTREAM_CREATION_AUTHORIZATION",
+      "deterministicDigest": "865d6bf3745472efe693e55425256b7ee830eeac793f5e9bfce3d4f8f19cc9c8",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '8886051eedce1be862c858ddb03534a4de000ff25f964d6eccc781930b9cec16', 'sourceSystemKey': 'CCTV'}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "f58493729227d8de5fe9ee1b76a4aa7e1fbcd1dda0f0f8485de32844ec779789",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "ALARM_EVENT_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "CCTV",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "921416f11d969831b8e941439e5d5bafab3ad7bf89eeceb238e346f9141214c9",
+      "decisionScope": "ALARM_EVENT_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "DOWNSTREAM_CREATION_AUTHORIZATION",
+      "deterministicDigest": "f6968cf07bdef545db95c2ff08f76dc45954b660e0c5f1bbf2c66d2bbc7d78c6",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'afdad1549fd06642825c07d2433783222914ecf27b2de141b991a29e57e10c4e', 'sourceSystemKey': 'PA'}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "91369001fa45dbba5f961f149a85940a15109022ebf4b3d711c1c7ec5fe7532e",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "ALARM_EVENT_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "PA",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "8ff7a4d3349c11dfa062b509b4fff776ebe1aa8a2d4148dc02c7683b0c98d4d7",
+      "decisionScope": "ALARM_EVENT_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "DOWNSTREAM_CREATION_AUTHORIZATION",
+      "deterministicDigest": "024fd4ac872a634ddf33dbea0c51a029c74b5af410f2a9dade4c7b3e59aab47a",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'cdd2b1cc9930b527a42fc8c04e5a74e28d4eb0f3d29c2ebb1b1e30c0bf92bec0', 'sourceSystemKey': 'RAS'}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "ae2b709486cbb6b85e58284bd13b06631d172c5dc25d3f29f12a300af6b674ab",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "ALARM_EVENT_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "RAS",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "a767c1d68bbd4b11e76424b8118476275b069691406e5167dcb9d9df03c5a3e4",
+      "decisionScope": "ALARM_EVENT_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "DOWNSTREAM_CREATION_AUTHORIZATION",
+      "deterministicDigest": "740bc261e632259d5ac7bdbccb5828f6173003cea6f12627dd91839c5b5635e3",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'db1df3fe509eae4f465e526c51ec045b2b70511b97f207918cc6ee07b7c7a44a', 'sourceSystemKey': 'TEL'}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "7d7bad0cf4a935b34350cd566d605b1239583fa901b4c7eacb169c61028b4143",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "ALARM_EVENT_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "TEL",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "6b49f645470ed970a1ccd8f4c1971b47bd08058db365ce2f441ae8a2e356fde2",
+      "decisionScope": "EVIDENCE_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "EVIDENCE_INVESTIGATION_REVIEW",
+      "deterministicDigest": "4d7064d4370ccbba3d9354f0c47ffe09d9dbbb486d999e8224f311f149739d81",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [],
+      "frontendRequired": false,
+      "guardResultId": "93f2c9854b4c6f3f7e07a0d8c2133c86e191855b5a05e3a28a7fc7ac110cfe0e",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "EVIDENCE_INVESTIGATION_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-05",
+      "sourceSystemKey": "ACS",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "bac5a5c46e001f3e84f6cfa4a82e726d9023a4a76e8be41e2e851a3516740924",
+      "decisionScope": "EVIDENCE_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "EVIDENCE_INVESTIGATION_REVIEW",
+      "deterministicDigest": "24b9f695b4bb771d94f61b2401750147fab71f10fc7d7c418d541ea5d9d9c168",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [],
+      "frontendRequired": false,
+      "guardResultId": "b9b476d95628a04ba1d538cc576da14322a5c9b9ce95cce3219bbae0fbfc4ecd",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "EVIDENCE_INVESTIGATION_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-05",
+      "sourceSystemKey": "CCTV",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "94af27fdd1e78c5472ce1267b5f2f2605894f2f9a06021a6211766e6dbea5355",
+      "decisionScope": "EVIDENCE_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "EVIDENCE_INVESTIGATION_REVIEW",
+      "deterministicDigest": "8e845522c9b6e611be094c807affac99cb670e2c9fbc0277cfb05e0caddd9951",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [],
+      "frontendRequired": false,
+      "guardResultId": "23b046b4b95b0c38851dcac6fa86ea7718515a9a08e645c6ddf8be7a335f57fa",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "EVIDENCE_INVESTIGATION_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-05",
+      "sourceSystemKey": "PA",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "9644fd5626735ead20d577302879c654a158550ff4cdb9d8d9e6387c233a26fe",
+      "decisionScope": "EVIDENCE_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "EVIDENCE_INVESTIGATION_REVIEW",
+      "deterministicDigest": "d27035e119313d3be5ecd50f5d963355fb3b9875fcb967668b5eef78ee99e65f",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [],
+      "frontendRequired": false,
+      "guardResultId": "c3a110fd5978462eeff0173fac0a5da02d00c7bfcf5268e87490c43f1c2d3b8d",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "EVIDENCE_INVESTIGATION_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-05",
+      "sourceSystemKey": "RAS",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "f5e019ed5db793f0cf2fe3ba398eeb75541cdbf84c09007976925f90ebccb601",
+      "decisionScope": "EVIDENCE_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "EVIDENCE_INVESTIGATION_REVIEW",
+      "deterministicDigest": "6678a7227ad0df9e7ed8cecf90a8131354f99f87d16ae92b2a0f95dfaf18dd74",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [],
+      "frontendRequired": false,
+      "guardResultId": "40e9c71fc08f59fc8006c5a5b072c1df3ae62720f8ebb3190f7278d550cf9dbe",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "EVIDENCE_INVESTIGATION_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-05",
+      "sourceSystemKey": "TEL",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "bb11dc25caa5e9a71715d110ba356ec4eea8fef2a3bafe5b92926f4edc4c7818",
+      "decisionScope": "FAULTCASE_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "FAULTCASE_CANDIDATE_REVIEW",
+      "deterministicDigest": "1a0598d8b0955b2737d6d20580f54a2d96a74ae1bae74a0b242d5b7ec395418e",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '2b26090a97f80bde8af7ba0658a886bf37d07494c0f0f23fc42ba21ae6530fda', 'sourceSystemKey': 'ACS'}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "69a8cef0e468ca3a5762e1a855ea899d645ba3db776f8342150d861e4a5c1a9d",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "FAULTCASE_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-03",
+      "sourceSystemKey": "ACS",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "770d6dbaf35e13b857af6903985eb796a8e922b7087bac9de82317209570a83f",
+      "decisionScope": "FAULTCASE_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "FAULTCASE_CANDIDATE_REVIEW",
+      "deterministicDigest": "547a44fd2146ee3fcf0b153efffc1d7b0571c4e6987d147f330bdf2a12f15607",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '8886051eedce1be862c858ddb03534a4de000ff25f964d6eccc781930b9cec16', 'sourceSystemKey': 'CCTV'}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "868ee5b40510e3f7287b0e4b537863dcc6955d8bafe6ad2f708179559cfd16a7",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "FAULTCASE_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-03",
+      "sourceSystemKey": "CCTV",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "477bbb2c89e20f91b743808f927db066ea1dbb11a33f834d2ba52a85c52fc850",
+      "decisionScope": "FAULTCASE_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "FAULTCASE_CANDIDATE_REVIEW",
+      "deterministicDigest": "9833a69f64d5f2aa90bc86c3912a206ac6b595a65d78323fcea3c53b6d6ea001",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'afdad1549fd06642825c07d2433783222914ecf27b2de141b991a29e57e10c4e', 'sourceSystemKey': 'PA'}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "5345f147817607055ca56b66e0c399ca9219cdd7832599839901f3b3682bf0a8",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "FAULTCASE_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-03",
+      "sourceSystemKey": "PA",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "886b9bfd2f020321376d4cc3e6ab774a1aad219039abf74f835661e2e04b91f9",
+      "decisionScope": "FAULTCASE_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "FAULTCASE_CANDIDATE_REVIEW",
+      "deterministicDigest": "590e867ac77e0bb3e0cf1109eac31aa6aa4325435eb68f6a81b7a524af0b29b0",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'cdd2b1cc9930b527a42fc8c04e5a74e28d4eb0f3d29c2ebb1b1e30c0bf92bec0', 'sourceSystemKey': 'RAS'}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "a47fcaf96f064823261b7d7fac20105f0ae5780c89457f9ca5f3bef1cd16bc44",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "FAULTCASE_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-03",
+      "sourceSystemKey": "RAS",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "00f59930f5487c5770090311c9fdb0bf1994c04bc8254858057476fb79f937b9",
+      "decisionScope": "FAULTCASE_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "FAULTCASE_CANDIDATE_REVIEW",
+      "deterministicDigest": "675cd1d649182155a2a5b4d932c223d7319a4622a0469c553cd2e3afa9935172",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'db1df3fe509eae4f465e526c51ec045b2b70511b97f207918cc6ee07b7c7a44a', 'sourceSystemKey': 'TEL'}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "7e859c36df37ff1d4a45eb6e83327936cc13a4b97eb85e964d597fbbc97bdd67",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "FAULTCASE_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-03",
+      "sourceSystemKey": "TEL",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "827c9c5c33dd9dfa929294f5ec48c4a64d4d3a394e1b0128d2c72c62527b1550",
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "LOCATION_RESOLUTION",
+      "deterministicDigest": "f7700219375119e756a79a44948eedae84167a2f57cef83da01c0fa73ad1e9c2",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '2b26090a97f80bde8af7ba0658a886bf37d07494c0f0f23fc42ba21ae6530fda', 'sourceSystemKey': 'ACS'}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "3272e285e31301a3113e392e0eaf2aa0cea16b22d4869be18ce224c56d62ebe5",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "ASSET_RESOLUTION_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "ACS",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "54df1e11c75e533678a0c935a548dc610282c25684b6c567404a7298d851e6e6",
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "LOCATION_RESOLUTION",
+      "deterministicDigest": "98784a19613d9bd6e6d77cbe11018be74759dddc1af0736c7ff36d88c4709690",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '8886051eedce1be862c858ddb03534a4de000ff25f964d6eccc781930b9cec16', 'sourceSystemKey': 'CCTV'}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "f6542a414523e3f4caf6957e1b19c174a3f11248dc192ac51ea1267df84d0062",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "ASSET_RESOLUTION_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "CCTV",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "4b5fd829706035c891f9a770e72577e34712162f09e7802c50cb64650d18ee72",
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "LOCATION_RESOLUTION",
+      "deterministicDigest": "f05203e5a1d946ad2e96e41f62612b51d64d36495ce96a10bf3efe68d86e3eb6",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'afdad1549fd06642825c07d2433783222914ecf27b2de141b991a29e57e10c4e', 'sourceSystemKey': 'PA'}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "85a81ef391203440774f75cbfc5eaa66f5afb402f2ef720220d47d329b5fa143",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "ASSET_RESOLUTION_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "PA",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "948fb786bd37d12da9ec26019d110fba1123a3dbc90f6ddb3c5e5b8d6e77b53f",
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "LOCATION_RESOLUTION",
+      "deterministicDigest": "95e81d688ff0b11a3a7e0804405500de72da4b6e958559a8523cb535a08dc15e",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'cdd2b1cc9930b527a42fc8c04e5a74e28d4eb0f3d29c2ebb1b1e30c0bf92bec0', 'sourceSystemKey': 'RAS'}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "f0f928b2f99c726b560d3aee3c5d3b0e5ca2f2378d932adc036e1c8d4370b75f",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "ASSET_RESOLUTION_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "RAS",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "60aa1937c042b33992009e8426cac89121e160c26b3c8d3becd3db8bfd3df116",
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "LOCATION_RESOLUTION",
+      "deterministicDigest": "12fd5a9058871f1e008f9d088a4d8e69dcc1e2b9f1810f2b9092c2ce6a79eaaf",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'db1df3fe509eae4f465e526c51ec045b2b70511b97f207918cc6ee07b7c7a44a', 'sourceSystemKey': 'TEL'}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "3bbe4dcc3164e605b102f7354be3c8688de1bd72c8dd87dc413e37b205805203",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "ASSET_RESOLUTION_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "TEL",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "f05dc6da056e5db68a03d8133f61e20fefabc6b55df942f98fc3128d88880037",
+      "decisionScope": "SOURCE_SYSTEM_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "NAMESPACE_INTERPRETATION",
+      "deterministicDigest": "9c12054b50167418b64e051666cadcc972719094433902232bf8f7c1eab29f7e",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'digest': '0fc6173d8a353b1dd2633b44ef99afa3a4acb41c29782b58436c0cbcf3c5f1ec', 'evidenceId': '2bd6c4b0f26f69cec870971cbed4ac5b63872ce8907c142650d07932cfdf8321', 'evidenceType': 'CLASSIFICATION_BINDING_AGGREGATE', 'provenance': 'ONE-AIRPORT-A1-03 classification bindings', 'resultDigest': '63061c85fca03040577cf513e43f686ec089995ded7485c138c834680d6832c7', 'sourceProfile': 'airport-source-system-profile-v1', 'sourceRecordCount': 14}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "47dc2e7340e3b7a92826f392819d2f08d35472df8012aeb29e30d00c18c613bc",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "SOURCE_SYSTEM_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A2",
+      "sourceSystemKey": "TEL",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "b8685bdf4e7ffb23579272884eb700df32f2fdbc5ec1c844e55b3621dffc7d25",
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "POINT_RESOLUTION",
+      "deterministicDigest": "3792a9a2a97ad9fa69119684e62b9d0e8bc8ce39cfc606aac3094dd2c801d376",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '2b26090a97f80bde8af7ba0658a886bf37d07494c0f0f23fc42ba21ae6530fda', 'sourceSystemKey': 'ACS'}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "470ce4d9b67a83248e94c28169db54f094a687fbfaaecb8d495c371aaafa10d1",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "ASSET_RESOLUTION_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "ACS",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "7d79d4662cd1846f87189a667a4611b8e7c2f6eaa83393ed6bcabbf883ed84b5",
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "POINT_RESOLUTION",
+      "deterministicDigest": "2280240e48f75abf26a02d90801d1f596501f678ff72db90d79bcd90096a69d8",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '8886051eedce1be862c858ddb03534a4de000ff25f964d6eccc781930b9cec16', 'sourceSystemKey': 'CCTV'}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "6ee62c788746f92d292314daf03f32300d102032681937611cce52afabb3165e",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "ASSET_RESOLUTION_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "CCTV",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "e5d8bae9ba014e2c1610700c8a68e3a2098d64244b0a092358e916ea786c39af",
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "POINT_RESOLUTION",
+      "deterministicDigest": "93f7ad49438fcfe4985867fac7c2e83e5f5d16b5b946e328d63c86c5349c22c2",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'afdad1549fd06642825c07d2433783222914ecf27b2de141b991a29e57e10c4e', 'sourceSystemKey': 'PA'}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "5aae1f6e75950d48635921a85c94ebf8073b88f959a9783b45d9bee22299b44b",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "ASSET_RESOLUTION_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "PA",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "79fc3560fd8284602dc149418f8e237cba89afc5534e52dc1256761021dfac5a",
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "POINT_RESOLUTION",
+      "deterministicDigest": "da3981763a12c00fa39f3a4d0db5e1b4b3c7cfcba5e0e85c30765445fdad76db",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'cdd2b1cc9930b527a42fc8c04e5a74e28d4eb0f3d29c2ebb1b1e30c0bf92bec0', 'sourceSystemKey': 'RAS'}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "16ff09c8800f20e79e262ee9ea5af2161c83791fbcd835703a3cae31ab7108df",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "ASSET_RESOLUTION_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "RAS",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "6ef8751e77444810843b4fa2632633d5292fc5952305c3a3810e7aea929183fc",
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "POINT_RESOLUTION",
+      "deterministicDigest": "d514722b58747cf8a3fbab88db82fb4b172f785f1dad646af380bab5d6b2a2a3",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'db1df3fe509eae4f465e526c51ec045b2b70511b97f207918cc6ee07b7c7a44a', 'sourceSystemKey': 'TEL'}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "9cc258e5a9800162100f00a81b680d9f10062d07ad79f3623269866db27ae580",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "ASSET_RESOLUTION_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "TEL",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "3c7e61e1bea96c33006ceb4afa5dae604e416748d429edc1af3c7596b8c4f890",
+      "decisionScope": "SOURCE_SYSTEM_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "REGISTRY_APPROVAL",
+      "deterministicDigest": "28f947510fb21c3d72159a99c830008236f276a82cb966cc5c0d47b7a8f1917a",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'digest': '7f4eb268556cd7cc31608ecc9f1796df9b053039ab13e3e4d1271339d7a23dec', 'evidenceId': 'd5460171bfa515ad3fde83fa991bd0dbccac64817b6cd3cd50f7cec016d16330', 'evidenceType': 'CLASSIFICATION_BINDING_AGGREGATE', 'provenance': 'ONE-AIRPORT-A1-03 classification bindings', 'resultDigest': 'f2134c9995fc2c8b24603620a9df349e320afce29bc99356c3fbea5e577f1188', 'sourceProfile': 'airport-source-system-profile-v1', 'sourceRecordCount': 129}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "034f03d4b8182f1aeb2fa2a653c4b96f6feff1bd8af44bda9a66463468586cda",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "SOURCE_SYSTEM_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A2",
+      "sourceSystemKey": "ACS",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "cb750465e3e304c039c71babbed700084cf129cdebca9d5f31d40c715cc004ee",
+      "decisionScope": "SOURCE_SYSTEM_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "REGISTRY_APPROVAL",
+      "deterministicDigest": "ce7ea242f8b2e5270f851ba9badaff2462b3abf105aa41d8f0a97fe1f96c55e9",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'digest': 'cd8d0520ee8802a0a5a9b99604c26d35fefff5ca2c59738e8b6c7035bd29e40a', 'evidenceId': '6f36e31caf4664dc7654550df344e31ebfb0140204cfd528fd672dc869819f8d', 'evidenceType': 'CLASSIFICATION_BINDING_AGGREGATE', 'provenance': 'ONE-AIRPORT-A1-03 classification bindings', 'resultDigest': '1a375a7e7bab0f8b8b8d1e2f2add98d627a1c02825d3e8e16ca2e5014c293230', 'sourceProfile': 'airport-source-system-profile-v1', 'sourceRecordCount': 28}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "add705cca30a183c5284a72a85a928449be67c33d78c742722b436365ea7150f",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "SOURCE_SYSTEM_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A2",
+      "sourceSystemKey": "RAS",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "fa46ad3543b51ae3c68e87ac4a3396afc02db66125bc6cf64d7ca7bc329f55e6",
+      "decisionScope": "RELEASE_GATE",
+      "decisionState": "READY_FOR_REVIEW",
+      "decisionType": "RELEASE_GATE_REVIEW",
+      "deterministicDigest": "02118a979746acd24805458832f5c3044d8a2ef3b5ddcbd748682a4e558ac09b",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "796134411c4e760230338fdee559e1e62a5193f4776e6e119dd35405abf2d3e0"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "6da8d81b8948508e06aa5f057ea5302ad638eebd49e32c5f988076dd760d9e9f",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "RELEASE_GATE_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-07",
+      "sourceSystemKey": null,
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "d76caf3e8ef5403bab8cd3b62aadb3d260dbe3529d07a855f53e4b4c731b1716",
+      "decisionScope": "WORKORDER_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "WORKORDER_INTENT_REVIEW",
+      "deterministicDigest": "53541b5e3fdc43635551edcde028b8a73c9a2c81b2caf5fbe2713374a02484e6",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '2b26090a97f80bde8af7ba0658a886bf37d07494c0f0f23fc42ba21ae6530fda', 'sourceSystemKey': 'ACS'}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "f0e36b991e14740c76b16462e3c40de70a3805ebb56bb66fb854b3308731c0da",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "WORKORDER_INTENT_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-04",
+      "sourceSystemKey": "ACS",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "b74a4d09f7bf0c4d4a4d3d46319daf232a4a25162f214466e3b19558fb4b158c",
+      "decisionScope": "WORKORDER_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "WORKORDER_INTENT_REVIEW",
+      "deterministicDigest": "3c90bad4aeefc4533cc25171cc586904317d1de6782b0f3f0018f5ea06d5877c",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '8886051eedce1be862c858ddb03534a4de000ff25f964d6eccc781930b9cec16', 'sourceSystemKey': 'CCTV'}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "d796db9d8d2e7fd325c7629d1357554e4fe6005009d6e7ed586ebd1ec3a4453c",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "WORKORDER_INTENT_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-04",
+      "sourceSystemKey": "CCTV",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "3d7d25278d6603f51d7074c9a5e82511e44a9e6ae572fba85e047afc84db6740",
+      "decisionScope": "WORKORDER_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "WORKORDER_INTENT_REVIEW",
+      "deterministicDigest": "30c2ebebe0ae1773600887796f46b057cd0aeba17921a6a5195eb11361646e93",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'afdad1549fd06642825c07d2433783222914ecf27b2de141b991a29e57e10c4e', 'sourceSystemKey': 'PA'}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "67c318547703e4b95afb6adb6ac2a87ee9a6d4ec0d5e336d56747bb6d2875e58",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "WORKORDER_INTENT_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-04",
+      "sourceSystemKey": "PA",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "f35099c85eab09ab5505892f123d17703bf4ef8491983bd5cda82960f6f8cada",
+      "decisionScope": "WORKORDER_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "WORKORDER_INTENT_REVIEW",
+      "deterministicDigest": "4a12eedcdfec84c5dbe067403fe99e602c4b799e2868a3203dcfc5b379daf31f",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'cdd2b1cc9930b527a42fc8c04e5a74e28d4eb0f3d29c2ebb1b1e30c0bf92bec0', 'sourceSystemKey': 'RAS'}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "d37a9191325c10e23b1600d67618a434b1651967da374a5f10849b9cbd41b85b",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "WORKORDER_INTENT_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-04",
+      "sourceSystemKey": "RAS",
+      "writeAllowed": false
+    },
+    {
+      "apiRequired": false,
+      "approvalAllowed": false,
+      "blocking": true,
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "8d846bf2f2153c26008ba832587389e08d96e5f06d98ad77ec404ddaa77a1ea3",
+      "decisionScope": "WORKORDER_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "WORKORDER_INTENT_REVIEW",
+      "deterministicDigest": "4117fb8d17bfe21acfd7a70bc124a518d591f7b116435b07a111e30ae9589332",
+      "eligibilityState": "ELIGIBLE_FOR_PREVIEW",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'db1df3fe509eae4f465e526c51ec045b2b70511b97f207918cc6ee07b7c7a44a', 'sourceSystemKey': 'TEL'}"
+      ],
+      "frontendRequired": false,
+      "guardResultId": "4a681f105044245b11446040ad466784685c70cf03d2d4754d4b777e29fe0dd4",
+      "guardState": "BLOCKED_BY_POLICY",
+      "missingPreconditions": [],
+      "policyResult": "FAIL_WRITE_NOT_AUTHORIZED",
+      "productionActivationAllowed": false,
+      "queueType": "WORKORDER_INTENT_QUEUE",
+      "reasonCodes": [
+        "APPROVAL_NOT_AUTHORIZED",
+        "EXECUTION_NOT_AUTHORIZED",
+        "READ_ONLY_PREVIEW_ALLOWED",
+        "WRITE_NOT_AUTHORIZED"
+      ],
+      "requestedDecision": "PREVIEW_ONLY",
+      "requiredPreconditions": [
+        "decisionItemId",
+        "decisionState",
+        "decisionType"
+      ],
+      "runtimeActivationAllowed": false,
+      "sourceStage": "A3-04",
+      "sourceSystemKey": "TEL",
+      "writeAllowed": false
+    }
+  ],
+  "profileId": "airport-operator-review-policy-guard-profile-v1",
+  "projectionId": "36a6a53370bf312c9668084223267bec1e210cab90d7cd29e36a9c464899a5f1",
+  "readinessOutcome": "OPERATOR_REVIEW_POLICY_GUARD_READY_FOR_READ_ONLY_PREVIEW",
+  "sourceArtifactReferences": [
+    {
+      "artifactType": "OPERATOR_REVIEW_DECISIONS",
+      "deterministicDigest": "20e55e07c01486d969b6c994820950680263eef5705085baead0d273738778da",
+      "digest": "ad6f565c07ca29ddf813a360f97e78a1287d7b4c591adfa85c40ebb583d9385e",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-operator-review-decisions.v1.json"
+    },
+    {
+      "artifactType": "UCONSOLE_OPERATOR_REVIEW_QUEUE",
+      "deterministicDigest": "c4c5c18c03c28aeed14cedfabdf4d139702b9ab8393ff55c6699aa8d1a79c7ba",
+      "digest": "e31628886fc1d9758c26788c5dd4b17771b694023afa54d15d086690a26b962d",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-uconsole-operator-review-queue.v1.json"
+    },
+    {
+      "artifactType": "A3_READINESS_RELEASE_GATE",
+      "deterministicDigest": "25c9802f282ffaf826c620d55ad96956af36a9a114db52f64029c9cc620eabd1",
+      "digest": "2b53aee526fe94b5ee6590c923b8288ae4472836163ffa038519882186ca0e39",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-a3-readiness-release-gate.v1.json"
+    }
+  ],
+  "summary": {
+    "airportSpecific": false,
+    "apiEnabled": false,
+    "approvalAllowedCount": 0,
+    "approvalWriteCount": 0,
+    "auditPreviewCount": 46,
+    "auditPreviewGeneratedCount": 46,
+    "blockedByPolicyCount": 46,
+    "canonicalWriteCount": 0,
+    "containsCustomerAssetIdentifiers": false,
+    "crossIndustry": true,
+    "databaseWriteCount": 0,
+    "decisionItemCount": 46,
+    "decisionWriteCount": 0,
+    "eligibleForExecutionCount": 0,
+    "eligibleForPreviewCount": 46,
+    "frontendEnabled": false,
+    "guardGroupCount": 8,
+    "policyGuardResultCount": 46,
+    "productionActivationAllowedCount": 0,
+    "pushAllowed": false,
+    "runtimeActivationAllowedCount": 0,
+    "writeAllowedCount": 0
+  }
+}

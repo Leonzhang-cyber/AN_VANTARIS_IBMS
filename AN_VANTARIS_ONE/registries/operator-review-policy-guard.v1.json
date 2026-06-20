@@ -1,0 +1,27 @@
+{
+  "apiEnabled": false,
+  "approvalWriteCount": 0,
+  "airportSpecific": false,
+  "authority": "ONE-AIRPORT-A4-03",
+  "canonicalWriteCount": 0,
+  "containsCustomerAssetIdentifiers": false,
+  "contractVersion": "operator-review-policy-guard.v1",
+  "crossIndustry": true,
+  "databaseAccessEnabled": false,
+  "databaseWriteCount": 0,
+  "decisionWriteCount": 0,
+  "description": "Read-only Operator Review Decision Audit and Policy Guard for future execution eligibility previews.",
+  "frontendEnabled": false,
+  "implementationStatus": "OPERATOR_REVIEW_DECISION_AUDIT_AND_POLICY_GUARD_COMPLETE",
+  "productionActivationAllowed": false,
+  "projectionId": "operator-review-policy-guard",
+  "pushAllowed": false,
+  "readOnly": true,
+  "readinessOutcome": "OPERATOR_REVIEW_POLICY_GUARD_READY_FOR_READ_ONLY_PREVIEW",
+  "runtimeActivationAllowed": false,
+  "sourceArtifacts": [
+    "airport-operator-review-decisions.v1.json",
+    "airport-uconsole-operator-review-queue.v1.json",
+    "airport-a3-readiness-release-gate.v1.json"
+  ]
+}
