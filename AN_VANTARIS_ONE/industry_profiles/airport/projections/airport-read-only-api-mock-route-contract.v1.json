@@ -1,0 +1,672 @@
+{
+  "authority": "ONE-AIRPORT-A7-03",
+  "boundaryMatrix": [
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryKey": "apiEnabled",
+      "deterministicDigest": "2b4cea0daa47758b2e86d350a595303cc0c44608c918b66a61ae31863a527a1e",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryKey": "approvalWriteCount",
+      "deterministicDigest": "f8c8e707698a310750c18ea897ad651a2e444195c708c7732dc2684a73949775",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryKey": "auditWriteCount",
+      "deterministicDigest": "ced150c948da97a64bf51c4cbab525a133f8e23d7dc3ce371a903a8faad8b1dc",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryKey": "backendRouteImplementationCount",
+      "deterministicDigest": "47c1b23770423b44fbdbfdfbcf3a1734a74e29a15a063ea587e383aa9569533c",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryKey": "canonicalWriteCount",
+      "deterministicDigest": "5ff0128ebeef5a328323d7c520c73e91ec2fbc26feec1be1840f87129a6a4152",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryKey": "containsCustomerAssetIdentifiers",
+      "deterministicDigest": "1b038f27541d684cdc83d89c7443cfd55e9e672856ea78adae31a0634d179b3d",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryKey": "databaseWriteCount",
+      "deterministicDigest": "d6dfda7d99c838fedfaa5f3d78037e5a2f3dfe64b9213fa177b2b0e991ee0b6c",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryKey": "decisionWriteCount",
+      "deterministicDigest": "f2dfc4a327b7109337980cab704e0ad414a2cca4f702bfb459790d354b2ac40d",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryKey": "frontendEnabled",
+      "deterministicDigest": "0368601a688838fc3fc697f7b61ad55bc55843d12f5ed9668b160d9488cd03d3",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryKey": "localhostCallRequiredCount",
+      "deterministicDigest": "ca909d7491fc43be4414e4312a17764e4b5c7346a8075a37bcc671a89f037130",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryKey": "networkCallRequiredCount",
+      "deterministicDigest": "670cc6c2cac602ef1a76c2f2d1731dadb9a8b173671ec4db49c2d5e2ddd3d159",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryKey": "productionActivationAllowed",
+      "deterministicDigest": "117a02f7bd31fecb4a3cc7864def0b4992d4ed9a8fd71319ef45017a59edb1c0",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryKey": "productionApiAllowed",
+      "deterministicDigest": "59627b7afb6f1507202d7dab7180145cd177c95bea33c6b911f3080775fab3c7",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryKey": "pushAllowed",
+      "deterministicDigest": "4f7882e020c156b914fcbd2bc07d248b356ed2f6ba4c39ff6dfb7965ae545e86",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryKey": "runtimeActivationAllowed",
+      "deterministicDigest": "ca42c7d4c19c2db935481f5835c1f604e3db3e008af59219aa62438f315fa47b",
+      "expectedValue": false,
+      "status": "PASS"
+    }
+  ],
+  "contractVersion": "read-only-api-mock-route-contract.v1",
+  "deterministicDigest": "f0784c9a2a5d6805eabe43c111613e022b89c5a0c91dbf1a27778911fd974a05",
+  "generatedAtPolicy": "DETERMINISTIC_NO_VOLATILE_TIMESTAMP",
+  "implementationStatus": "READ_ONLY_API_MOCK_ROUTE_CONTRACT_AND_LOCAL_SMOKE_GATE_COMPLETE",
+  "localSmokeCases": [
+    {
+      "deterministicDigest": "f0dc85a4780ce34060167f86682627e10647d54c4688592b5575330cda698bf7",
+      "endpointKey": "AIRPORT_OVERVIEW",
+      "expectedAuthRequired": true,
+      "expectedEnvelopeRequired": true,
+      "expectedFacetsSupported": true,
+      "expectedFiltersSupported": true,
+      "expectedNoWrite": true,
+      "expectedPaginationSupported": true,
+      "expectedReadOnly": true,
+      "expectedStatusCode": 200,
+      "localhostCallRequired": false,
+      "method": "GET",
+      "networkCallRequired": false,
+      "path": "/api/v1/one/airport/console/overview",
+      "smokeCaseId": "7fdd7923537ef0594d061d1405707cbda7fba880585e72964c18082e47030ef6"
+    },
+    {
+      "deterministicDigest": "17f1dd1edad4e22ccbd37956db5c2733db208fb93a1666c5c4db0ab65b185207",
+      "endpointKey": "ALARMS_EVENTS",
+      "expectedAuthRequired": true,
+      "expectedEnvelopeRequired": true,
+      "expectedFacetsSupported": true,
+      "expectedFiltersSupported": true,
+      "expectedNoWrite": true,
+      "expectedPaginationSupported": true,
+      "expectedReadOnly": true,
+      "expectedStatusCode": 200,
+      "localhostCallRequired": false,
+      "method": "GET",
+      "networkCallRequired": false,
+      "path": "/api/v1/one/airport/console/alarms-events",
+      "smokeCaseId": "a873ebf7459f4fe45698a7d5bc06e63c642df81c8256c0d70ddf409d0922c4a9"
+    },
+    {
+      "deterministicDigest": "121bcaf98b1d0e55d0576a33ba002c687332e2b74f86107d91b0e71f433559d4",
+      "endpointKey": "ASSETS_TOPOLOGY",
+      "expectedAuthRequired": true,
+      "expectedEnvelopeRequired": true,
+      "expectedFacetsSupported": true,
+      "expectedFiltersSupported": true,
+      "expectedNoWrite": true,
+      "expectedPaginationSupported": true,
+      "expectedReadOnly": true,
+      "expectedStatusCode": 200,
+      "localhostCallRequired": false,
+      "method": "GET",
+      "networkCallRequired": false,
+      "path": "/api/v1/one/airport/console/assets-topology",
+      "smokeCaseId": "e2daefda69ae9ed3dabe3575d77fcd80bdedb34d5c8c12601da2da4644338193"
+    },
+    {
+      "deterministicDigest": "5b21d563a261332ed7cb790d07262da94f991dcc83fb73cea20a82c1669f4eaa",
+      "endpointKey": "EVIDENCE_INVESTIGATION",
+      "expectedAuthRequired": true,
+      "expectedEnvelopeRequired": true,
+      "expectedFacetsSupported": true,
+      "expectedFiltersSupported": true,
+      "expectedNoWrite": true,
+      "expectedPaginationSupported": true,
+      "expectedReadOnly": true,
+      "expectedStatusCode": 200,
+      "localhostCallRequired": false,
+      "method": "GET",
+      "networkCallRequired": false,
+      "path": "/api/v1/one/airport/console/evidence-investigation",
+      "smokeCaseId": "31f7956341227c06ded4fb8b36688c6535cdd900ea8e86c7e1112b8bf455f71c"
+    },
+    {
+      "deterministicDigest": "447f6d88619bc608a3ef64c2ff4cb3fb2bc8ab064b25c4769ff14a5d683a9d61",
+      "endpointKey": "FAULT_CASES",
+      "expectedAuthRequired": true,
+      "expectedEnvelopeRequired": true,
+      "expectedFacetsSupported": true,
+      "expectedFiltersSupported": true,
+      "expectedNoWrite": true,
+      "expectedPaginationSupported": true,
+      "expectedReadOnly": true,
+      "expectedStatusCode": 200,
+      "localhostCallRequired": false,
+      "method": "GET",
+      "networkCallRequired": false,
+      "path": "/api/v1/one/airport/console/fault-cases",
+      "smokeCaseId": "c1ae1e6549b781f08c0a93b69e060b82782e7105294082ec1599a75c07ab8836"
+    },
+    {
+      "deterministicDigest": "38d588544f11889d2d2980718b4ca512d37de146d2551204ba48f8977e6ad223",
+      "endpointKey": "MAINTENANCE_WORK_ORDERS",
+      "expectedAuthRequired": true,
+      "expectedEnvelopeRequired": true,
+      "expectedFacetsSupported": true,
+      "expectedFiltersSupported": true,
+      "expectedNoWrite": true,
+      "expectedPaginationSupported": true,
+      "expectedReadOnly": true,
+      "expectedStatusCode": 200,
+      "localhostCallRequired": false,
+      "method": "GET",
+      "networkCallRequired": false,
+      "path": "/api/v1/one/airport/console/maintenance-work-orders",
+      "smokeCaseId": "e8ce2df9be64e8f9417dcfd994f5ffe5f3211c8fc0556bf3963b6451e1864791"
+    },
+    {
+      "deterministicDigest": "cfabc4920d92eb6cc3f11d0e19a00de2f0549d18da9a25c82363a39f9b25f04b",
+      "endpointKey": "REPORTS",
+      "expectedAuthRequired": true,
+      "expectedEnvelopeRequired": true,
+      "expectedFacetsSupported": true,
+      "expectedFiltersSupported": true,
+      "expectedNoWrite": true,
+      "expectedPaginationSupported": true,
+      "expectedReadOnly": true,
+      "expectedStatusCode": 200,
+      "localhostCallRequired": false,
+      "method": "GET",
+      "networkCallRequired": false,
+      "path": "/api/v1/one/airport/console/reports",
+      "smokeCaseId": "5809a2a7b93836ad3111db1cb9da4e14e895b9f1f0a2792fa7e12352cb86b1a6"
+    },
+    {
+      "deterministicDigest": "80f10ceecfbda3ddf9817dc496c1f0f762cbeab16d554a89145bf1db3c785a62",
+      "endpointKey": "SYSTEMS_INTEGRATION_HEALTH",
+      "expectedAuthRequired": true,
+      "expectedEnvelopeRequired": true,
+      "expectedFacetsSupported": true,
+      "expectedFiltersSupported": true,
+      "expectedNoWrite": true,
+      "expectedPaginationSupported": true,
+      "expectedReadOnly": true,
+      "expectedStatusCode": 200,
+      "localhostCallRequired": false,
+      "method": "GET",
+      "networkCallRequired": false,
+      "path": "/api/v1/one/airport/console/systems-integration-health",
+      "smokeCaseId": "ad58e6f58db788ce7c702a6ea496a38e9492f97aeda47f689f70d019ca856301"
+    }
+  ],
+  "mockRouteContractId": "10cdeb04428e5004dd8ae50d9f16b0c3ed1ae655fd0179bae24eb5703ddcbde7",
+  "mockRouteContracts": [
+    {
+      "authPolicyContractId": "d4863ae3c39576907b736c63d5d320fa72340a45a94d922cf573e2f48dc7e041",
+      "databaseAccessEnabled": false,
+      "deterministicDigest": "f796131c86bfa76c80d793d6c4738cea1d2d867da67a1895757530809451674e",
+      "endpointKey": "AIRPORT_OVERVIEW",
+      "expectedStatusCodes": [
+        200
+      ],
+      "method": "GET",
+      "mockResponseShape": "SUMMARY_PROJECTION_ENVELOPE",
+      "mockRouteContractId": "2eea13526352a51b315e88b655ffe2347c7e9cdcb9fefcb4dc29a6814a19a84c",
+      "path": "/api/v1/one/airport/console/overview",
+      "productionRouteEnabled": false,
+      "readOnly": true,
+      "responseContractId": "1720955c0cf27964ebacbe4128051635ce9aef2e1e4380173f7f2489c27487ae",
+      "routeMode": "MOCK_CONTRACT_ONLY",
+      "runtimeActivationEnabled": false,
+      "sourceArtifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-a3-readiness-release-gate.v1.json",
+      "sourceProjectionType": "A3_RELEASE_GATE",
+      "writeOperationEnabled": false
+    },
+    {
+      "authPolicyContractId": "d06bcdda1f9e2dd6bbf2d5ec9ae530feb4c34efd3e93c83187301bc95c5a8ece",
+      "databaseAccessEnabled": false,
+      "deterministicDigest": "f635b9b767404638902bc9b55ad382519e3cc49ca4cebcdfc6e0c8a719ce693a",
+      "endpointKey": "ALARMS_EVENTS",
+      "expectedStatusCodes": [
+        200
+      ],
+      "method": "GET",
+      "mockResponseShape": "PAGINATED_PROJECTION_ENVELOPE",
+      "mockRouteContractId": "5d765fe26d650c13a0f91cc93c54245e15007ba3248335fa06d7adc501e24922",
+      "path": "/api/v1/one/airport/console/alarms-events",
+      "productionRouteEnabled": false,
+      "readOnly": true,
+      "responseContractId": "6cc518dc855c7e6bfbccd2a37d1db0a44e922e40dddbd66072f5520e78d8d53e",
+      "routeMode": "MOCK_CONTRACT_ONLY",
+      "runtimeActivationEnabled": false,
+      "sourceArtifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-alarm-event-intake-candidates.v1.json",
+      "sourceProjectionType": "ALARM_EVENT_INTAKE",
+      "writeOperationEnabled": false
+    },
+    {
+      "authPolicyContractId": "da6a0b8615484d4264799fea91e773d2d0b0b60c61152c70af54698dcd8db9ec",
+      "databaseAccessEnabled": false,
+      "deterministicDigest": "96d93721da9e394f374957b9041943801f5914935869d6b662e021de2692bb10",
+      "endpointKey": "ASSETS_TOPOLOGY",
+      "expectedStatusCodes": [
+        200
+      ],
+      "method": "GET",
+      "mockResponseShape": "PAGINATED_PROJECTION_ENVELOPE",
+      "mockRouteContractId": "b428451adead8dcbaaea55b0093792a53b963dbf6109a7f3bb8ad545bed9e43a",
+      "path": "/api/v1/one/airport/console/assets-topology",
+      "productionRouteEnabled": false,
+      "readOnly": true,
+      "responseContractId": "95165b14ebdbd3d1eab8c62fe0f62ecc24a3f258f314e5a8e54ccd3c8a73e722",
+      "routeMode": "MOCK_CONTRACT_ONLY",
+      "runtimeActivationEnabled": false,
+      "sourceArtifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-alarm-event-asset-resolution-review.v1.json",
+      "sourceProjectionType": "ALARM_EVENT_RESOLUTION",
+      "writeOperationEnabled": false
+    },
+    {
+      "authPolicyContractId": "39b41c3323febc6382678e01885d2a144690aace77ca0f2af3a51f26a5a60670",
+      "databaseAccessEnabled": false,
+      "deterministicDigest": "882671f2ada57999ad1a82a802e32951cea2a53f54e68d76a6d30fb2fb1f0b4e",
+      "endpointKey": "EVIDENCE_INVESTIGATION",
+      "expectedStatusCodes": [
+        200
+      ],
+      "method": "GET",
+      "mockResponseShape": "PAGINATED_PROJECTION_ENVELOPE",
+      "mockRouteContractId": "e3d49dba3f790ceeda3f0d3511ec21dacf6a2773d0c796fc5ebc5d20e75c3299",
+      "path": "/api/v1/one/airport/console/evidence-investigation",
+      "productionRouteEnabled": false,
+      "readOnly": true,
+      "responseContractId": "757398e4d1c9f5a046f5bb8fa204eaf944ec8a41681e78ebc20e7b7addd2ade8",
+      "routeMode": "MOCK_CONTRACT_ONLY",
+      "runtimeActivationEnabled": false,
+      "sourceArtifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-evidence-investigation.v1.json",
+      "sourceProjectionType": "EVIDENCE_INVESTIGATION",
+      "writeOperationEnabled": false
+    },
+    {
+      "authPolicyContractId": "b76d38e2bf8f9b325bea991d111742ea773bcc315e9d43832ab41fa2cdb95e79",
+      "databaseAccessEnabled": false,
+      "deterministicDigest": "99267f978070b0c08c95c5043f7db0eb0b2d59d034aedb5d35ef68dedb3d218b",
+      "endpointKey": "FAULT_CASES",
+      "expectedStatusCodes": [
+        200
+      ],
+      "method": "GET",
+      "mockResponseShape": "PAGINATED_PROJECTION_ENVELOPE",
+      "mockRouteContractId": "95f5518df47c95ad09b7f4e679348b78c8b04e984e85566edf46d6942b2eb750",
+      "path": "/api/v1/one/airport/console/fault-cases",
+      "productionRouteEnabled": false,
+      "readOnly": true,
+      "responseContractId": "c4bf38ec74cbfb7571fdf2394757da1432b5e0cce0385669c85ed92cc5093812",
+      "routeMode": "MOCK_CONTRACT_ONLY",
+      "runtimeActivationEnabled": false,
+      "sourceArtifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-faultcase-candidates.v1.json",
+      "sourceProjectionType": "FAULTCASE_CANDIDATES",
+      "writeOperationEnabled": false
+    },
+    {
+      "authPolicyContractId": "987bbd681e2ea35d33b30f643252feff42cd3e2eb177f24e093c20b7fd5f4630",
+      "databaseAccessEnabled": false,
+      "deterministicDigest": "687291e3c1df5a7d7261e30c1edcd35d67ec7e928e322fa8a99d40c8ce6892d6",
+      "endpointKey": "MAINTENANCE_WORK_ORDERS",
+      "expectedStatusCodes": [
+        200
+      ],
+      "method": "GET",
+      "mockResponseShape": "PAGINATED_PROJECTION_ENVELOPE",
+      "mockRouteContractId": "8c2a3e8f5c29bc786ed09c53806c4a8245db60a090124bac09e6babaea9b4c50",
+      "path": "/api/v1/one/airport/console/maintenance-work-orders",
+      "productionRouteEnabled": false,
+      "readOnly": true,
+      "responseContractId": "a109d3f0438d34eb1a8471175c361643f6b06fec38b2dc53c4cd52b3ba09a4e9",
+      "routeMode": "MOCK_CONTRACT_ONLY",
+      "runtimeActivationEnabled": false,
+      "sourceArtifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-workorder-intent-candidates.v1.json",
+      "sourceProjectionType": "WORKORDER_INTENT_CANDIDATES",
+      "writeOperationEnabled": false
+    },
+    {
+      "authPolicyContractId": "d318b22406ffed53557d9bdca799943eca5ae49e4caef72f80e60c89f614007e",
+      "databaseAccessEnabled": false,
+      "deterministicDigest": "30724a8ea4fe773b54c85be0c2718d158e73afe49881f313a701cd6ec503fb77",
+      "endpointKey": "REPORTS",
+      "expectedStatusCodes": [
+        200
+      ],
+      "method": "GET",
+      "mockResponseShape": "SUMMARY_PROJECTION_ENVELOPE",
+      "mockRouteContractId": "7f47b309686faac6b4bf91a1f6e387dfd3276c799ba2236e553dce80029a9612",
+      "path": "/api/v1/one/airport/console/reports",
+      "productionRouteEnabled": false,
+      "readOnly": true,
+      "responseContractId": "8cf995ddfa00d2dfe9ed0ce5dcfaad47791b6b477ee25db6dfb3cb86d8983daa",
+      "routeMode": "MOCK_CONTRACT_ONLY",
+      "runtimeActivationEnabled": false,
+      "sourceArtifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-a4-readiness-release-gate.v1.json",
+      "sourceProjectionType": "A4_RELEASE_GATE",
+      "writeOperationEnabled": false
+    },
+    {
+      "authPolicyContractId": "f324bdb09c237084943effe17c99ac993af974dd5a18f61ae164f5b5ea0360fa",
+      "databaseAccessEnabled": false,
+      "deterministicDigest": "924e2ec33bd64b909d9143d353ba50b494125bb6087621e82bcb39774cc90bd3",
+      "endpointKey": "SYSTEMS_INTEGRATION_HEALTH",
+      "expectedStatusCodes": [
+        200
+      ],
+      "method": "GET",
+      "mockResponseShape": "PAGINATED_PROJECTION_ENVELOPE",
+      "mockRouteContractId": "1b40952128145fed8a30f912dd1bd0becf5ac271e9d650ecdfc5604ce1a07364",
+      "path": "/api/v1/one/airport/console/systems-integration-health",
+      "productionRouteEnabled": false,
+      "readOnly": true,
+      "responseContractId": "c305fe5d95476d4d38033a836e765b129f77feaeaba008309c5d96af2a9ed8e0",
+      "routeMode": "MOCK_CONTRACT_ONLY",
+      "runtimeActivationEnabled": false,
+      "sourceArtifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-integration-health.v1.json",
+      "sourceProjectionType": "INTEGRATION_HEALTH",
+      "writeOperationEnabled": false
+    }
+  ],
+  "profileId": "airport-read-only-api-mock-route-contract-profile-v1",
+  "readinessOutcome": "READ_ONLY_API_MOCK_ROUTE_CONTRACT_READY_FOR_FUTURE_ROUTE_IMPLEMENTATION",
+  "smokeGateResults": [
+    {
+      "blocking": true,
+      "deterministicDigest": "68ac13ef859a2ba0e46b1bf02e97a2783ec773c75fa556781d9ed17a4254d060",
+      "gateId": "G01_MOCK_ROUTE_CONTRACT_COMPLETENESS",
+      "gateName": "Mock route contract completeness",
+      "reasonCodes": [
+        "8_MOCK_ROUTE_CONTRACTS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "dfa3e06317b2fd203374a7e8ca73969572452355aadd3381c1303489caf2219e",
+      "gateId": "G02_LOCAL_SMOKE_CASE_COMPLETENESS",
+      "gateName": "Local smoke case completeness",
+      "reasonCodes": [
+        "8_LOCAL_SMOKE_CASES"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "51ab6ab4359f39ad0c8755e1f1750e866d13ab4ff1756b5e5dce56e12e7aa6ef",
+      "gateId": "G03_GET_ONLY_BOUNDARY",
+      "gateName": "GET-only boundary",
+      "reasonCodes": [
+        "ALL_METHODS_GET"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "524ef06820fa6789c4261b78cb9a32e6775419b8fcb331ce085e789675122d60",
+      "gateId": "G04_PRODUCTION_ROUTE_DISABLED",
+      "gateName": "Production route disabled",
+      "reasonCodes": [
+        "PRODUCTION_ROUTES_DISABLED"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "5a9c104cd3d208dda15f398bcbfa898656444138ed7ad0e9d97416602945a9af",
+      "gateId": "G05_READ_ONLY_ROUTE_BOUNDARY",
+      "gateName": "Read-only route boundary",
+      "reasonCodes": [
+        "READ_ONLY_AND_NO_WRITES"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "1c5005d6772e077a37d17df8884da96a2c5637ed4f2f79d7ed49cbd2e2d410dd",
+      "gateId": "G06_DATABASE_BOUNDARY",
+      "gateName": "Database boundary",
+      "reasonCodes": [
+        "DATABASE_ACCESS_DISABLED"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "3806d46e6667a75329bb38f4fc400c91ca273f8843d40b32bce451aeb8bf0d66",
+      "gateId": "G07_RUNTIME_BOUNDARY",
+      "gateName": "Runtime boundary",
+      "reasonCodes": [
+        "RUNTIME_ACTIVATION_DISABLED"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "66223a028aa81b01df2a3676dcc92d91aebacfaa8b66b600a4fae052dada38c3",
+      "gateId": "G08_RESPONSE_CONTRACT_LINKAGE",
+      "gateName": "Response contract linkage",
+      "reasonCodes": [
+        "8_A7_02_RESPONSE_CONTRACT_LINKS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "591e2c99ae1b1d61cc22f2609dd2ccb51477d711075e5ca004c05f9d812cc1aa",
+      "gateId": "G09_AUTH_POLICY_LINKAGE",
+      "gateName": "Auth policy linkage",
+      "reasonCodes": [
+        "8_A7_02_AUTH_POLICY_LINKS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "c741bff0ecba78c65b82ef263b4be353b254ffe4625f20e4a5702a16ec28fee5",
+      "gateId": "G10_LOCAL_SMOKE_EXPECTATIONS",
+      "gateName": "Local smoke expectations",
+      "reasonCodes": [
+        "ENVELOPE_AUTH_PAGINATION_FILTERS_FACETS_READ_ONLY_NO_WRITE"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "2897c9ebcc4e1aa5a8970d8b71d6f5bf7795f9a976473dbcfdebcac5f399300b",
+      "gateId": "G11_NO_NETWORK_CALLS",
+      "gateName": "No network calls",
+      "reasonCodes": [
+        "NO_NETWORK_OR_LOCALHOST_SMOKE_EXECUTION"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "2cd9bcbafbbf9277ac6b0bd18a6f7da487e1565f7955ddd2b1a3465b75ab1ca4",
+      "gateId": "G12_NO_BACKEND_ROUTE_IMPLEMENTATION",
+      "gateName": "No backend route implementation",
+      "reasonCodes": [
+        "NO_PRODUCTION_BACKEND_API_ROUTE_FILES_CHANGED"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "48ba2ef224e0479bac336b37343e22c5ceac69b0e8f843ad34c252526c8ce728",
+      "gateId": "G13_CUSTOMER_IDENTIFIER_SAFETY",
+      "gateName": "Customer identifier safety",
+      "reasonCodes": [
+        "NO_CUSTOMER_IDENTIFIER_LEAKAGE"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "5869e16473c52243b6ba9956ad1c52d363e440bd7543965e20bda1165089637a",
+      "gateId": "G14_DETERMINISTIC_OUTPUT",
+      "gateName": "Deterministic output",
+      "reasonCodes": [
+        "REPEATED_RUNNER_BYTE_IDENTICAL"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "e7884a153c48a0bf893e5d477f378a1e3b795c22dcf8a642d9849f0c75d12c4a",
+      "gateId": "G15_MOCK_ROUTE_CONTRACT_DECISION",
+      "gateName": "Mock route contract decision",
+      "reasonCodes": [
+        "READY_FOR_FUTURE_ROUTE_IMPLEMENTATION_PRODUCTION_DISABLED"
+      ],
+      "severity": "LOW",
+      "status": "PASS"
+    }
+  ],
+  "sourceArtifactReferences": [
+    {
+      "artifactType": "A7_READ_ONLY_API_SKELETON",
+      "deterministicDigest": "9a15c6198986f586f10a9a329bfdd85649460ab1624beea929bc1f7266e0390b",
+      "digest": "abb1a8c50a7c55e1173e7ba68c2f945e5f737ea5a7ab87abc260b4ee637cbefb",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-read-only-api-skeleton.v1.json"
+    },
+    {
+      "artifactType": "A7_READ_ONLY_API_RESPONSE_CONTRACT",
+      "deterministicDigest": "1a4d65932bd4053e9c3c245cf8550bb60a698ccaa8a62378231d3ed8b8d84dcb",
+      "digest": "3495228c1de1395ead68ae2f078dcdd172e4d4f065db347a342862d94fef592b",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-read-only-api-response-contract.v1.json"
+    },
+    {
+      "artifactType": "A6_IMPLEMENTATION_GATE",
+      "deterministicDigest": "0986558bc91a89b2df1101bb74254bcb30239cfbecb5889d4d7e0247be05a974",
+      "digest": "005d0ec5ef4d8d8b7616a2a8820303fd22f9f15d10c88e9c80e3b3814938c816",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-api-frontend-implementation-readiness-gate.v1.json"
+    },
+    {
+      "artifactType": "A5_OPERATIONS_CONSOLE_PACKAGE",
+      "deterministicDigest": "964ebe87d941e4d8839bd22877c179005651d795061e06a7072165be54e8a634",
+      "digest": "8641f7f58c802ec1b7a22b7a619897dec3c2c9583bf28bbf7291eac81ef253f5",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-operations-console-package.v1.json"
+    }
+  ],
+  "summary": {
+    "airportSpecific": false,
+    "apiEnabled": false,
+    "approvalWriteCount": 0,
+    "auditWriteCount": 0,
+    "authPolicyLinkedCount": 8,
+    "backendRouteImplementationCount": 0,
+    "blockingGateFailureCount": 0,
+    "canonicalWriteCount": 0,
+    "containsCustomerAssetIdentifiers": false,
+    "crossIndustry": true,
+    "databaseAccessEnabledRouteCount": 0,
+    "databaseWriteCount": 0,
+    "decisionWriteCount": 0,
+    "expectedAuthRequiredCount": 8,
+    "expectedEnvelopeRequiredCount": 8,
+    "expectedFacetsSupportedCount": 8,
+    "expectedFiltersSupportedCount": 8,
+    "expectedNoWriteCount": 8,
+    "expectedPaginationSupportedCount": 8,
+    "expectedStatus200Count": 8,
+    "frontendEnabled": false,
+    "getRouteCount": 8,
+    "localSmokeCaseCount": 8,
+    "localhostCallRequiredCount": 0,
+    "mockRouteContractCount": 8,
+    "networkCallRequiredCount": 0,
+    "passedSmokeGateCount": 15,
+    "productionActivationAllowed": false,
+    "productionApiAllowed": false,
+    "productionRouteEnabledCount": 0,
+    "pushAllowed": false,
+    "readOnlyRouteCount": 8,
+    "responseContractLinkedCount": 8,
+    "runtimeActivationAllowed": false,
+    "runtimeActivationEnabledRouteCount": 0,
+    "smokeGateCount": 15,
+    "writeOperationEnabledRouteCount": 0
+  }
+}
