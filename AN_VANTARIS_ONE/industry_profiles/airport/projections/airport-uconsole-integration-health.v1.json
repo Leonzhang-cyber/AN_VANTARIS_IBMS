@@ -1,0 +1,617 @@
+{
+  "authority": "ONE-AIRPORT-A2-05",
+  "dashboardCards": [
+    {
+      "affectedSourceSystemKeys": [
+        "CCTV"
+      ],
+      "cardId": "07fa3ced4d6a320d5522429bb130ea07c25a5a81638f5caa1f8bdc8c0a0c1749",
+      "cardType": "SOURCE_SYSTEM_SUMMARY",
+      "decisionRequired": true,
+      "deterministicDigest": "6845b1de0a1ea3dbb867d0f31b919f6c52ece73111852f6e51fc2b86414f9c9d",
+      "evidenceReferences": [
+        {
+          "digest": "700c0aa4873f711e6a0732e56e0e9d67df78be56ef396f52daa10b5c0fe766fa",
+          "evidenceId": "ceba5fc20cc1f142a8083ae0edf47f31d74cb445de857a7aa905c895ac30b017",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "49d8bfa2ece4be806883107bf8c00452af66b35f3a16898a53c8dbb18750faaa",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 52
+        }
+      ],
+      "severity": "MEDIUM",
+      "status": "REVIEW_REQUIRED",
+      "title": "CCTV source system",
+      "unit": "devices",
+      "value": 52
+    },
+    {
+      "affectedSourceSystemKeys": [
+        "TEL"
+      ],
+      "cardId": "51d5f6228b6d905a239c49f5720ce3ad3abba4a722841c4f266603be02375b92",
+      "cardType": "SOURCE_SYSTEM_SUMMARY",
+      "decisionRequired": true,
+      "deterministicDigest": "0d14d202a27246133ab6ce2e909ae1911ac8f221dc54d53871723766a69894ac",
+      "evidenceReferences": [
+        {
+          "digest": "0fc6173d8a353b1dd2633b44ef99afa3a4acb41c29782b58436c0cbcf3c5f1ec",
+          "evidenceId": "2bd6c4b0f26f69cec870971cbed4ac5b63872ce8907c142650d07932cfdf8321",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "63061c85fca03040577cf513e43f686ec089995ded7485c138c834680d6832c7",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 14
+        }
+      ],
+      "severity": "MEDIUM",
+      "status": "REVIEW_REQUIRED",
+      "title": "TEL source system",
+      "unit": "devices",
+      "value": 14
+    },
+    {
+      "affectedSourceSystemKeys": [
+        "PA"
+      ],
+      "cardId": "8e98ebbfcfba2b8e84efc66e0383f0fcef3445d87395d6544817bbd08410bc4c",
+      "cardType": "SOURCE_SYSTEM_SUMMARY",
+      "decisionRequired": true,
+      "deterministicDigest": "65e836141d411efb8c5fc544dcb956556adb8d3cdf89ef3e32d2d9d3a6f6e9e1",
+      "evidenceReferences": [
+        {
+          "digest": "6da53d802f057618e91b95564f3abee9dab082748ea008e69a81c62c40f21fd6",
+          "evidenceId": "6f9a9a469a9ad62b5a0d1065bada2f1f9b52cfc0b8132183f1e97f826c1ed461",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "1dbd5b57a352e475431caeeef6267b79df96f97568ca6f7fb77c37e2734cdea5",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 247
+        }
+      ],
+      "severity": "MEDIUM",
+      "status": "REVIEW_REQUIRED",
+      "title": "PA source system",
+      "unit": "devices",
+      "value": 247
+    },
+    {
+      "affectedSourceSystemKeys": [
+        "RAS"
+      ],
+      "cardId": "bee5a7819867c72c8790428e9d89c5bb7dc20c281b18c518f368765d1e7c227a",
+      "cardType": "SOURCE_SYSTEM_SUMMARY",
+      "decisionRequired": true,
+      "deterministicDigest": "148190c6640606820d6e08bd02ca56342e021675ada3ef1b727190e4d9d65f96",
+      "evidenceReferences": [
+        {
+          "digest": "cd8d0520ee8802a0a5a9b99604c26d35fefff5ca2c59738e8b6c7035bd29e40a",
+          "evidenceId": "6f36e31caf4664dc7654550df344e31ebfb0140204cfd528fd672dc869819f8d",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "1a375a7e7bab0f8b8b8d1e2f2add98d627a1c02825d3e8e16ca2e5014c293230",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 28
+        }
+      ],
+      "severity": "LOW",
+      "status": "REVIEW_REQUIRED",
+      "title": "RAS source system",
+      "unit": "devices",
+      "value": 28
+    },
+    {
+      "affectedSourceSystemKeys": [
+        "ACS"
+      ],
+      "cardId": "cf77f7024a841fab62a8a508c0ad692c7fc42454d8eb80fb917cc49d6086b2f2",
+      "cardType": "SOURCE_SYSTEM_SUMMARY",
+      "decisionRequired": true,
+      "deterministicDigest": "283bb6d7e760fa1a60392fa0e26f30262af6e38e176fd19aec5629ad2fe55e93",
+      "evidenceReferences": [
+        {
+          "digest": "7f4eb268556cd7cc31608ecc9f1796df9b053039ab13e3e4d1271339d7a23dec",
+          "evidenceId": "d5460171bfa515ad3fde83fa991bd0dbccac64817b6cd3cd50f7cec016d16330",
+          "evidenceType": "CLASSIFICATION_BINDING_AGGREGATE",
+          "provenance": "ONE-AIRPORT-A1-03 classification bindings",
+          "resultDigest": "f2134c9995fc2c8b24603620a9df349e320afce29bc99356c3fbea5e577f1188",
+          "sourceProfile": "airport-source-system-profile-v1",
+          "sourceRecordCount": 129
+        }
+      ],
+      "severity": "LOW",
+      "status": "REVIEW_REQUIRED",
+      "title": "ACS source system",
+      "unit": "devices",
+      "value": 129
+    }
+  ],
+  "defaultPage": {
+    "continuationToken": null,
+    "deterministicDigest": "77c4356f52fa8bb756be9ac4e5f89dfb7078670570ac0a619f211f66983491e2",
+    "items": [
+      {
+        "approvalState": "DRAFT",
+        "decisionRequired": true,
+        "deterministicDigest": "da6e05faacdb45f764eaaed35588f85919d1f2e064006ad00e3598aeee64347f",
+        "deviceEvidenceCount": 129,
+        "evidenceContractState": "NOT_RUNTIME_EVIDENCE",
+        "findingCount": 6,
+        "integrationHealthState": "RUNTIME_VERIFICATION_REQUIRED",
+        "lifecycleState": "CANDIDATE",
+        "pendingDecisionCount": 1,
+        "readinessState": "RUNTIME_VERIFICATION_REQUIRED",
+        "registryEntryId": "722a59146a8bdb9d4f76c5786a634d5fbf3f5c9d6e41473485fa20eb335d2dd4",
+        "reviewState": "REGISTRY_APPROVAL_PENDING",
+        "rowId": "2dabde009ca98c0ea3cdafce40fb032502e9cf1f7bce7851ccdc9f4b169f8457",
+        "runtimeObserved": false,
+        "runtimeVerified": false,
+        "sourceSystemKey": "ACS"
+      },
+      {
+        "approvalState": "REVIEW_REQUIRED",
+        "decisionRequired": true,
+        "deterministicDigest": "8bce6009d3a0a980c7bfed941bf673f43a77debdb6937dd7c08fb60c92982d7f",
+        "deviceEvidenceCount": 52,
+        "evidenceContractState": "NOT_RUNTIME_EVIDENCE",
+        "findingCount": 6,
+        "integrationHealthState": "REVIEW_REQUIRED",
+        "lifecycleState": "CANDIDATE",
+        "pendingDecisionCount": 1,
+        "readinessState": "REVIEW_REQUIRED",
+        "registryEntryId": "8b8e1222d598bb40a588a383c50a65e46c21e6cf81da63ab11fd625a6624f422",
+        "reviewState": "ALIAS_APPROVAL_PENDING",
+        "rowId": "e788532c7e51a1e1bda3ebbef72a284afb0823ea18dc4bd8c62bdfcc340e7af5",
+        "runtimeObserved": false,
+        "runtimeVerified": false,
+        "sourceSystemKey": "CCTV"
+      },
+      {
+        "approvalState": "REVIEW_REQUIRED",
+        "decisionRequired": true,
+        "deterministicDigest": "acc0dc099cc5d178c27957dab727ff73b68cd6b75e0f341035ee6b9e20621621",
+        "deviceEvidenceCount": 247,
+        "evidenceContractState": "NOT_RUNTIME_EVIDENCE",
+        "findingCount": 6,
+        "integrationHealthState": "REVIEW_REQUIRED",
+        "lifecycleState": "CANDIDATE",
+        "pendingDecisionCount": 1,
+        "readinessState": "REVIEW_REQUIRED",
+        "registryEntryId": "cb749f05259f176629e62ee2d716b8cc3e51eeed2ce87b13b3b09870a56612d7",
+        "reviewState": "ALIAS_APPROVAL_PENDING",
+        "rowId": "02a6594c159dd5ec51a5c51ff2b36ffd8470aab06147364619de3c895f230d4c",
+        "runtimeObserved": false,
+        "runtimeVerified": false,
+        "sourceSystemKey": "PA"
+      },
+      {
+        "approvalState": "DRAFT",
+        "decisionRequired": true,
+        "deterministicDigest": "61dea56e9ed7321c0742432f2efd8a8d7a960fa554048d12776041548f072293",
+        "deviceEvidenceCount": 28,
+        "evidenceContractState": "NOT_RUNTIME_EVIDENCE",
+        "findingCount": 6,
+        "integrationHealthState": "RUNTIME_VERIFICATION_REQUIRED",
+        "lifecycleState": "CANDIDATE",
+        "pendingDecisionCount": 1,
+        "readinessState": "RUNTIME_VERIFICATION_REQUIRED",
+        "registryEntryId": "8bf7f40c3274d08acb945bf1e17df4dc62c8ac2d056760daf4a160d6e3c78c89",
+        "reviewState": "REGISTRY_APPROVAL_PENDING",
+        "rowId": "77b4639858bc464501687bc9fc84917e739576fe48217d501e5c870de66d91ce",
+        "runtimeObserved": false,
+        "runtimeVerified": false,
+        "sourceSystemKey": "RAS"
+      },
+      {
+        "approvalState": "REVIEW_REQUIRED",
+        "decisionRequired": true,
+        "deterministicDigest": "398d22af6cc3c51418415c80bce3895aa145fedcbd4b2ddae882f93df6e10c9e",
+        "deviceEvidenceCount": 14,
+        "evidenceContractState": "NOT_RUNTIME_EVIDENCE",
+        "findingCount": 6,
+        "integrationHealthState": "REVIEW_REQUIRED",
+        "lifecycleState": "CANDIDATE",
+        "pendingDecisionCount": 1,
+        "readinessState": "REVIEW_REQUIRED",
+        "registryEntryId": "bcdfadbc1ff27ba342c6add68393f1d78631b9d2925fbb467aab8463b776d16a",
+        "reviewState": "NAMESPACE_INTERPRETATION_PENDING",
+        "rowId": "761ba00f6db3b21509ea8e0d64abbc41ccc666c69a5fcf0ef7deec2349d9cfc5",
+        "runtimeObserved": false,
+        "runtimeVerified": false,
+        "sourceSystemKey": "TEL"
+      }
+    ],
+    "offset": 0,
+    "pageSize": 25,
+    "returnedCount": 5,
+    "totalCount": 5
+  },
+  "deterministicDigest": "8954d1a53aee286b6df9e7ada161e6cdcc7a11f606f370fc6f773673f56ab882",
+  "evidenceContractCards": [
+    {
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "cardId": "e6f461758cd0c909ce66e29ceed941df4b544de4788b7deb32076e06823512e7",
+      "cardType": "EVIDENCE_CONTRACT_SUMMARY",
+      "decisionRequired": false,
+      "deterministicDigest": "c4fdf7f8475ea2ef448a90b505ecae50842e52ad6cb102792a54e85309e07d54",
+      "evidenceReferences": [],
+      "severity": "INFO",
+      "status": "RUNTIME_PENDING",
+      "title": "Evidence adapter contract summary",
+      "unit": "acceptedEvidence",
+      "value": 5
+    }
+  ],
+  "facets": [
+    {
+      "count": 2,
+      "facetKey": "approvalState",
+      "optionDigest": "87e71c70fca1e89bd5384fb32957fe37078fcf886794dea64aca3a9b390feae0",
+      "optionValue": "DRAFT"
+    },
+    {
+      "count": 3,
+      "facetKey": "approvalState",
+      "optionDigest": "a7068dc8d33f6cf47cee9b3704c6578748a587f893a58730634e1da90bb8c79d",
+      "optionValue": "REVIEW_REQUIRED"
+    },
+    {
+      "count": 5,
+      "facetKey": "decisionRequired",
+      "optionDigest": "1cc587c91c8793ab92fdb49ef81b8b83efb6a539816a6862fc083a907918f30a",
+      "optionValue": "true"
+    },
+    {
+      "count": 5,
+      "facetKey": "evidenceContractState",
+      "optionDigest": "658b7cf1a7a6c3414b69869f377e27158ca4784456bbeb45232d7548bab093e9",
+      "optionValue": "NOT_RUNTIME_EVIDENCE"
+    },
+    {
+      "count": 5,
+      "facetKey": "lifecycleState",
+      "optionDigest": "d79bee8d1641028336e99402020e98737e7efe35b2f5559d223702af87abe4ad",
+      "optionValue": "CANDIDATE"
+    },
+    {
+      "count": 2,
+      "facetKey": "readinessState",
+      "optionDigest": "365f75844a760f98c126e4be12f73de100ca4baa529d1012bc9dc5979348d969",
+      "optionValue": "RUNTIME_VERIFICATION_REQUIRED"
+    },
+    {
+      "count": 3,
+      "facetKey": "readinessState",
+      "optionDigest": "91c6afa36ec8951b7abd6254f0c7cf58081bf8fbdbcba7ef591c8578bda36320",
+      "optionValue": "REVIEW_REQUIRED"
+    },
+    {
+      "count": 2,
+      "facetKey": "reviewState",
+      "optionDigest": "114334934f6c24070b418b362edbc7a5d7088858a31e2e12465bfafff666760b",
+      "optionValue": "REGISTRY_APPROVAL_PENDING"
+    },
+    {
+      "count": 2,
+      "facetKey": "reviewState",
+      "optionDigest": "a433ce797fc3f500afdd35b07e2d18f71379dc4bb925d02a2da1996c5b34082a",
+      "optionValue": "ALIAS_APPROVAL_PENDING"
+    },
+    {
+      "count": 1,
+      "facetKey": "reviewState",
+      "optionDigest": "a98de2b7182589eee8cb429bbf6afc8cff36676e29419790729bf4e72faf40e2",
+      "optionValue": "NAMESPACE_INTERPRETATION_PENDING"
+    },
+    {
+      "count": 5,
+      "facetKey": "runtimeObserved",
+      "optionDigest": "76c4fde46bd4d003cf45e9f6b89eb4fff6a88ae1a3ffec5fae085097ceb34243",
+      "optionValue": "false"
+    },
+    {
+      "count": 5,
+      "facetKey": "runtimeVerified",
+      "optionDigest": "e96f19c4c562c799ddfa44ebc5bdb2a5db5d8f09d472193c79686d34724b45f2",
+      "optionValue": "false"
+    },
+    {
+      "count": 1,
+      "facetKey": "sourceSystemKey",
+      "optionDigest": "0180b6f2646eb31bef3eae507792366891db1197d497fc58485b17fe6a915850",
+      "optionValue": "CCTV"
+    },
+    {
+      "count": 1,
+      "facetKey": "sourceSystemKey",
+      "optionDigest": "2712fc6c98a3f8fc09b2a86209b6f1acb89825679b3df4cb221747e3e6061c0b",
+      "optionValue": "TEL"
+    },
+    {
+      "count": 1,
+      "facetKey": "sourceSystemKey",
+      "optionDigest": "39d0113a4b7fee3796e0c06b416c94e1ea827185d188efdb3427a7de57b57897",
+      "optionValue": "ACS"
+    },
+    {
+      "count": 1,
+      "facetKey": "sourceSystemKey",
+      "optionDigest": "9ed154939ef7cdd1e2ce9d4243e09f6a156dee72bfa325e82d88b5d689a2c89a",
+      "optionValue": "RAS"
+    },
+    {
+      "count": 1,
+      "facetKey": "sourceSystemKey",
+      "optionDigest": "e0e3b1ea40b882a0b72b2c41aa8e1b606e1dd0878b0cd9e9a7ec2f7f7303545d",
+      "optionValue": "PA"
+    }
+  ],
+  "filters": [
+    {
+      "filterKey": "sourceSystemKey",
+      "filterType": "ENUM",
+      "options": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ]
+    },
+    {
+      "filterKey": "lifecycleState",
+      "filterType": "ENUM",
+      "options": [
+        "CANDIDATE"
+      ]
+    },
+    {
+      "filterKey": "approvalState",
+      "filterType": "ENUM",
+      "options": [
+        "DRAFT",
+        "REVIEW_REQUIRED"
+      ]
+    },
+    {
+      "filterKey": "readinessState",
+      "filterType": "ENUM",
+      "options": [
+        "REVIEW_REQUIRED",
+        "RUNTIME_VERIFICATION_REQUIRED"
+      ]
+    },
+    {
+      "filterKey": "reviewState",
+      "filterType": "ENUM",
+      "options": [
+        "ALIAS_APPROVAL_PENDING",
+        "NAMESPACE_INTERPRETATION_PENDING",
+        "REGISTRY_APPROVAL_PENDING"
+      ]
+    },
+    {
+      "filterKey": "evidenceContractState",
+      "filterType": "ENUM",
+      "options": [
+        "NOT_RUNTIME_EVIDENCE"
+      ]
+    },
+    {
+      "filterKey": "runtimeObserved",
+      "filterType": "BOOLEAN",
+      "options": [
+        "false"
+      ]
+    },
+    {
+      "filterKey": "runtimeVerified",
+      "filterType": "BOOLEAN",
+      "options": [
+        "false"
+      ]
+    },
+    {
+      "filterKey": "decisionRequired",
+      "filterType": "BOOLEAN",
+      "options": [
+        "true"
+      ]
+    }
+  ],
+  "generatedAtPolicy": "DETERMINISTIC_NO_VOLATILE_TIMESTAMP",
+  "healthSummaryCards": [
+    {
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "cardId": "911e56c45676411f311f2f17f8d3ae4050baa7c7d7b099d071761f8d66431add",
+      "cardType": "HEALTH_SUMMARY",
+      "decisionRequired": false,
+      "deterministicDigest": "1389526e3ec698b351e636d253e832767dad33bf7105f9bc097693a1efdea907",
+      "evidenceReferences": [],
+      "severity": "INFO",
+      "status": "RUNTIME_PENDING",
+      "title": "Integration health summary",
+      "unit": "runtimeObserved",
+      "value": 0
+    }
+  ],
+  "implementationStatus": "READ_ONLY_UCONSOLE_INTEGRATION_HEALTH_PROJECTION_COMPLETE",
+  "profileId": "airport-source-system-profile-v1",
+  "projectionId": "debbbf313686f403396b88e11a8de5440f6466643bb92587e4fcbf8ea69f526a",
+  "projectionType": "UCONSOLE_INTEGRATION_HEALTH",
+  "projectionVersion": "v1",
+  "readinessOutcome": "UCONSOLE_INTEGRATION_HEALTH_READ_ONLY_PROJECTION_COMPLETE_RUNTIME_PENDING",
+  "reviewQueueCards": [
+    {
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "cardId": "acef6bb0adfa1041f7f741b0a8b53eb81c22cb1ffd757b818b70a7d30fcca0c0",
+      "cardType": "REVIEW_QUEUE_SUMMARY",
+      "decisionRequired": true,
+      "deterministicDigest": "5092ad4946ee8d5a41c26d1391e8625ec41ecab32c26b27e6f70cbc4bb40ac03",
+      "evidenceReferences": [],
+      "severity": "MEDIUM",
+      "status": "REVIEW_REQUIRED",
+      "title": "Review queue summary",
+      "unit": "pendingDecisions",
+      "value": 5
+    }
+  ],
+  "sourceArtifactReferences": [
+    {
+      "artifactDigest": "eb151b97c9d7b79996df2c9d8d95c3ae307412aa80f86609ccf896eab8be95da",
+      "artifactName": "airport-source-system-review.v1.json",
+      "authority": "ONE-AIRPORT-A2-02"
+    },
+    {
+      "artifactDigest": "0d282d8e52cb152cf1b0f2f2d2f56ec36339f81fe94f1030acd073be8a3e60dc",
+      "artifactName": "airport-integration-health.v1.json",
+      "authority": "ONE-AIRPORT-A2-03"
+    },
+    {
+      "artifactDigest": "dcc9eb2f2ab9430d2f327b26e55102295bfe5ca6e0e254411d3cde8d0bafd8f6",
+      "artifactName": "airport-evidence-adapter-contract.v1.json",
+      "authority": "ONE-AIRPORT-A2-04"
+    }
+  ],
+  "sourceSystemRows": [
+    {
+      "approvalState": "DRAFT",
+      "decisionRequired": true,
+      "deterministicDigest": "da6e05faacdb45f764eaaed35588f85919d1f2e064006ad00e3598aeee64347f",
+      "deviceEvidenceCount": 129,
+      "evidenceContractState": "NOT_RUNTIME_EVIDENCE",
+      "findingCount": 6,
+      "integrationHealthState": "RUNTIME_VERIFICATION_REQUIRED",
+      "lifecycleState": "CANDIDATE",
+      "pendingDecisionCount": 1,
+      "readinessState": "RUNTIME_VERIFICATION_REQUIRED",
+      "registryEntryId": "722a59146a8bdb9d4f76c5786a634d5fbf3f5c9d6e41473485fa20eb335d2dd4",
+      "reviewState": "REGISTRY_APPROVAL_PENDING",
+      "rowId": "2dabde009ca98c0ea3cdafce40fb032502e9cf1f7bce7851ccdc9f4b169f8457",
+      "runtimeObserved": false,
+      "runtimeVerified": false,
+      "sourceSystemKey": "ACS"
+    },
+    {
+      "approvalState": "REVIEW_REQUIRED",
+      "decisionRequired": true,
+      "deterministicDigest": "8bce6009d3a0a980c7bfed941bf673f43a77debdb6937dd7c08fb60c92982d7f",
+      "deviceEvidenceCount": 52,
+      "evidenceContractState": "NOT_RUNTIME_EVIDENCE",
+      "findingCount": 6,
+      "integrationHealthState": "REVIEW_REQUIRED",
+      "lifecycleState": "CANDIDATE",
+      "pendingDecisionCount": 1,
+      "readinessState": "REVIEW_REQUIRED",
+      "registryEntryId": "8b8e1222d598bb40a588a383c50a65e46c21e6cf81da63ab11fd625a6624f422",
+      "reviewState": "ALIAS_APPROVAL_PENDING",
+      "rowId": "e788532c7e51a1e1bda3ebbef72a284afb0823ea18dc4bd8c62bdfcc340e7af5",
+      "runtimeObserved": false,
+      "runtimeVerified": false,
+      "sourceSystemKey": "CCTV"
+    },
+    {
+      "approvalState": "REVIEW_REQUIRED",
+      "decisionRequired": true,
+      "deterministicDigest": "acc0dc099cc5d178c27957dab727ff73b68cd6b75e0f341035ee6b9e20621621",
+      "deviceEvidenceCount": 247,
+      "evidenceContractState": "NOT_RUNTIME_EVIDENCE",
+      "findingCount": 6,
+      "integrationHealthState": "REVIEW_REQUIRED",
+      "lifecycleState": "CANDIDATE",
+      "pendingDecisionCount": 1,
+      "readinessState": "REVIEW_REQUIRED",
+      "registryEntryId": "cb749f05259f176629e62ee2d716b8cc3e51eeed2ce87b13b3b09870a56612d7",
+      "reviewState": "ALIAS_APPROVAL_PENDING",
+      "rowId": "02a6594c159dd5ec51a5c51ff2b36ffd8470aab06147364619de3c895f230d4c",
+      "runtimeObserved": false,
+      "runtimeVerified": false,
+      "sourceSystemKey": "PA"
+    },
+    {
+      "approvalState": "DRAFT",
+      "decisionRequired": true,
+      "deterministicDigest": "61dea56e9ed7321c0742432f2efd8a8d7a960fa554048d12776041548f072293",
+      "deviceEvidenceCount": 28,
+      "evidenceContractState": "NOT_RUNTIME_EVIDENCE",
+      "findingCount": 6,
+      "integrationHealthState": "RUNTIME_VERIFICATION_REQUIRED",
+      "lifecycleState": "CANDIDATE",
+      "pendingDecisionCount": 1,
+      "readinessState": "RUNTIME_VERIFICATION_REQUIRED",
+      "registryEntryId": "8bf7f40c3274d08acb945bf1e17df4dc62c8ac2d056760daf4a160d6e3c78c89",
+      "reviewState": "REGISTRY_APPROVAL_PENDING",
+      "rowId": "77b4639858bc464501687bc9fc84917e739576fe48217d501e5c870de66d91ce",
+      "runtimeObserved": false,
+      "runtimeVerified": false,
+      "sourceSystemKey": "RAS"
+    },
+    {
+      "approvalState": "REVIEW_REQUIRED",
+      "decisionRequired": true,
+      "deterministicDigest": "398d22af6cc3c51418415c80bce3895aa145fedcbd4b2ddae882f93df6e10c9e",
+      "deviceEvidenceCount": 14,
+      "evidenceContractState": "NOT_RUNTIME_EVIDENCE",
+      "findingCount": 6,
+      "integrationHealthState": "REVIEW_REQUIRED",
+      "lifecycleState": "CANDIDATE",
+      "pendingDecisionCount": 1,
+      "readinessState": "REVIEW_REQUIRED",
+      "registryEntryId": "bcdfadbc1ff27ba342c6add68393f1d78631b9d2925fbb467aab8463b776d16a",
+      "reviewState": "NAMESPACE_INTERPRETATION_PENDING",
+      "rowId": "761ba00f6db3b21509ea8e0d64abbc41ccc666c69a5fcf0ef7deec2349d9cfc5",
+      "runtimeObserved": false,
+      "runtimeVerified": false,
+      "sourceSystemKey": "TEL"
+    }
+  ],
+  "summary": {
+    "acceptedAsEvidenceCount": 5,
+    "activeSystemCount": 0,
+    "airportSpecific": false,
+    "aliasApprovalPendingCount": 2,
+    "apiEnabled": false,
+    "approvedSystemCount": 0,
+    "containsCustomerAssetIdentifiers": false,
+    "crossIndustry": true,
+    "dashboardCardCount": 5,
+    "databaseAccessEnabled": false,
+    "evidenceContractCardCount": 1,
+    "evidenceEnvelopeCount": 5,
+    "frontendEnabled": false,
+    "healthSummaryCardCount": 1,
+    "healthySystemCount": 0,
+    "namespaceReviewPendingCount": 1,
+    "pendingDecisionCount": 5,
+    "productionActivationEnabled": false,
+    "registeredSystemCount": 0,
+    "registryApprovalPendingCount": 2,
+    "rejectedEnvelopeCount": 0,
+    "reviewQueueCardCount": 1,
+    "runtimeConnectorExecutionEnabled": false,
+    "runtimeObservedSystemCount": 0,
+    "runtimeVerifiedSystemCount": 0,
+    "sourceSystemRowCount": 5,
+    "totalEvidenceDeviceCount": 470,
+    "uConsoleIntegrationProjectionCount": 5
+  }
+}
