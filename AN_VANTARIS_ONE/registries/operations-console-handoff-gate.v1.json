@@ -1,0 +1,30 @@
+{
+  "apiEnabled": false,
+  "apiImplementationAllowed": false,
+  "airportSpecific": false,
+  "auditWriteCount": 0,
+  "authority": "ONE-AIRPORT-A5-02",
+  "canonicalWriteCount": 0,
+  "containsCustomerAssetIdentifiers": false,
+  "contractVersion": "operations-console-handoff-gate.v1",
+  "crossIndustry": true,
+  "databaseAccessEnabled": false,
+  "databaseWriteAllowed": false,
+  "databaseWriteCount": 0,
+  "description": "Read-only Airport Operations Console Package readiness and handoff gate for future planning.",
+  "frontendEnabled": false,
+  "frontendImplementationAllowed": false,
+  "handoffAllowed": true,
+  "implementationStatus": "AIRPORT_CONSOLE_PACKAGE_HANDOFF_GATE_COMPLETE",
+  "productionActivationAllowed": false,
+  "pushAllowed": false,
+  "readOnly": true,
+  "readinessOutcome": "AIRPORT_CONSOLE_PACKAGE_READY_FOR_API_FRONTEND_PLANNING",
+  "routeImplementationAllowed": false,
+  "runtimeActivationAllowed": false,
+  "sourceArtifacts": [
+    "airport-operations-console-package.v1.json",
+    "airport-a3-readiness-release-gate.v1.json",
+    "airport-a4-readiness-release-gate.v1.json"
+  ]
+}
