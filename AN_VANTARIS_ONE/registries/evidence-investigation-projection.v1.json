@@ -1,0 +1,30 @@
+{
+  "apiEnabled": false,
+  "airportSpecific": false,
+  "canonicalWriteCount": 0,
+  "contractVersion": "evidence-investigation-projection.v1",
+  "crossIndustry": true,
+  "databaseAccessEnabled": false,
+  "databaseWriteCount": 0,
+  "description": "Generic cross-industry read-only Evidence Linkage and Investigation Projection.",
+  "evidenceCenterWriteCount": 0,
+  "frontendEnabled": false,
+  "generatedAtPolicy": "DETERMINISTIC_NO_VOLATILE_TIMESTAMP",
+  "implementationStatus": "EVIDENCE_INVESTIGATION_PROJECTION_COMPLETE",
+  "oneWorkManagementWriteCount": 0,
+  "productionActivationEnabled": false,
+  "registryId": "evidence-investigation-projection.v1",
+  "runtimeAlarmObservedCount": 0,
+  "scope": "READ_ONLY_INVESTIGATION_PROJECTION",
+  "supportedObjects": [
+    "EvidenceInvestigationProjection",
+    "InvestigationCase",
+    "EvidenceLink",
+    "InvestigationTimelineItem",
+    "ReviewCard"
+  ],
+  "ufmsFaultCaseCreatedCount": 0,
+  "ummsWriteCount": 0,
+  "workOrderCreatedCount": 0,
+  "workOrderIntentCreatedCount": 0
+}
