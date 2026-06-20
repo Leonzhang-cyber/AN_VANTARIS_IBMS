@@ -1,0 +1,29 @@
+{
+  "apiEnabled": false,
+  "apiImplementationAllowedCount": 0,
+  "airportSpecific": false,
+  "auditWriteCount": 0,
+  "authority": "ONE-AIRPORT-A6-01",
+  "canonicalWriteCount": 0,
+  "containsCustomerAssetIdentifiers": false,
+  "contractVersion": "api-frontend-readiness-contract.v1",
+  "crossIndustry": true,
+  "databaseAccessAllowedCount": 0,
+  "databaseWriteCount": 0,
+  "decisionWriteCount": 0,
+  "description": "Read-only API / Frontend readiness contract freeze for future Airport Operations Console planning.",
+  "frontendEnabled": false,
+  "frontendImplementationAllowedCount": 0,
+  "implementationStatus": "API_FRONTEND_READINESS_CONTRACT_FREEZE_COMPLETE",
+  "productionActivationAllowed": false,
+  "pushAllowed": false,
+  "readOnly": true,
+  "readinessOutcome": "API_FRONTEND_CONTRACT_FROZEN_FOR_FUTURE_IMPLEMENTATION_PLANNING",
+  "routeImplementationAllowedCount": 0,
+  "runtimeActivationAllowed": false,
+  "sourceArtifacts": [
+    "airport-operations-console-handoff-gate.v1.json",
+    "airport-operations-console-package.v1.json"
+  ],
+  "writeOperationAllowedCount": 0
+}
