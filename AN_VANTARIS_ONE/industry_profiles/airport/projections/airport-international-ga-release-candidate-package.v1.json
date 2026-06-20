@@ -1,0 +1,1298 @@
+{
+  "artifactInventory": [
+    {
+      "active": true,
+      "artifactId": "65ad3dbe8ac56b820654054807ddc54d39b556eb2acdfb234f9677f727f42abb",
+      "artifactKey": "GA_RELEASE_GATE",
+      "artifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-international-ga-release-gate.v1.json",
+      "artifactType": "GA_RELEASE_GATE",
+      "deterministicDigest": "1681463dbcbe097367432b71ec621350db318cb304ce098e9a9b9bdf08ead153",
+      "legacyCompatibility": false,
+      "present": true,
+      "required": true,
+      "sourceStage": "GA-01"
+    },
+    {
+      "active": true,
+      "artifactId": "9b64ef651f41f2aab0378c5aa07ce80de810a407457d6f771f51244a008d3e4c",
+      "artifactKey": "SOURCE_SYSTEM_CANDIDATES",
+      "artifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-source-system-candidates.v1.json",
+      "artifactType": "PROJECTION",
+      "deterministicDigest": "117ef5286c5b7b99a888045b771c7c7fc3deebb6c929b3a4a543e123ec00f12c",
+      "legacyCompatibility": false,
+      "present": true,
+      "required": true,
+      "sourceStage": "A1"
+    },
+    {
+      "active": true,
+      "artifactId": "be618798d1f95a3e2a53896ea464e8c73f8bd9a0715b7f06f42578871367f251",
+      "artifactKey": "SOURCE_SYSTEM_REVIEW",
+      "artifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-source-system-review.v1.json",
+      "artifactType": "PROJECTION",
+      "deterministicDigest": "cc5121a59c558001760f7f82d976706b624f50ee61b85cb298adb61a628a3ada",
+      "legacyCompatibility": false,
+      "present": true,
+      "required": true,
+      "sourceStage": "A1"
+    },
+    {
+      "active": true,
+      "artifactId": "79d8de9050846fde3d964ed81191f9d1013a793e225dc87a7f5fdda61da96c9d",
+      "artifactKey": "INTEGRATION_HEALTH",
+      "artifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-integration-health.v1.json",
+      "artifactType": "PROJECTION",
+      "deterministicDigest": "ba0a0504e42334cd2a7b0df738ce0b63dd61dda706997b62ffeae156ab77f0b4",
+      "legacyCompatibility": false,
+      "present": true,
+      "required": true,
+      "sourceStage": "A2"
+    },
+    {
+      "active": true,
+      "artifactId": "35bb4f26efb6cc28c2b8ca34ef2177ffa05f47b704fdab02775f2cae8d1195cd",
+      "artifactKey": "EVIDENCE_ADAPTER_CONTRACT",
+      "artifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-evidence-adapter-contract.v1.json",
+      "artifactType": "CONTRACT",
+      "deterministicDigest": "f1c0492f80ac8e1f3ae11151438fb88ecc28cf83fead2423852b9725b8ada7ce",
+      "legacyCompatibility": false,
+      "present": true,
+      "required": true,
+      "sourceStage": "A2"
+    },
+    {
+      "active": true,
+      "artifactId": "f9e3737ac60ad9882082ab78ebb515a12695b95604a158179235db722084261f",
+      "artifactKey": "UCONSOLE_INTEGRATION_HEALTH",
+      "artifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-uconsole-integration-health.v1.json",
+      "artifactType": "PROJECTION",
+      "deterministicDigest": "6b0d39a7d8b83019bd3500b75cb7b668ab5c916f23597bd08956339a75a581b9",
+      "legacyCompatibility": false,
+      "present": true,
+      "required": true,
+      "sourceStage": "A2"
+    },
+    {
+      "active": true,
+      "artifactId": "a6517fcf3b70ed14be391891b412352b271a82b43fdfc538088d8c42d084e051",
+      "artifactKey": "ALARM_EVENT_INTAKE",
+      "artifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-alarm-event-intake-candidates.v1.json",
+      "artifactType": "PROJECTION",
+      "deterministicDigest": "e1294f4c6c3e723c0309dc82d2d188384196b4535c876805c29d31f114a0d1da",
+      "legacyCompatibility": false,
+      "present": true,
+      "required": true,
+      "sourceStage": "A3"
+    },
+    {
+      "active": true,
+      "artifactId": "2e41bd0c61cf5b183585a0fdacd4f6d9bb13403b02e06d9d8cc7f20f789bf130",
+      "artifactKey": "ALARM_EVENT_ASSET_RESOLUTION",
+      "artifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-alarm-event-asset-resolution-review.v1.json",
+      "artifactType": "PROJECTION",
+      "deterministicDigest": "6e260e9de98dfe65831723331fe29852aeb801bdef0406e50fc234785fc19788",
+      "legacyCompatibility": false,
+      "present": true,
+      "required": true,
+      "sourceStage": "A3"
+    },
+    {
+      "active": true,
+      "artifactId": "1a9c5d250756d34999b2940d21096b0a3c3c223df3e57f048545f2a5ab053788",
+      "artifactKey": "FAULTCASE_CANDIDATES",
+      "artifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-faultcase-candidates.v1.json",
+      "artifactType": "PROJECTION",
+      "deterministicDigest": "2ebfd7c8b8616d4a4023b74ad9405914addc98fbf7464e9268d32aa4e2d594c0",
+      "legacyCompatibility": false,
+      "present": true,
+      "required": true,
+      "sourceStage": "A3"
+    },
+    {
+      "active": true,
+      "artifactId": "ba64bfc9c5c6136eabf214cf2d3ef3ea8f580dc37a68fb16487deaeddc5cf69c",
+      "artifactKey": "WORKORDER_INTENT_CANDIDATES",
+      "artifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-workorder-intent-candidates.v1.json",
+      "artifactType": "PROJECTION",
+      "deterministicDigest": "0bbe9245a3a2edc0eb3dce965d55c1d23f02676f699ba53fb8388889db5683db",
+      "legacyCompatibility": false,
+      "present": true,
+      "required": true,
+      "sourceStage": "A3"
+    },
+    {
+      "active": true,
+      "artifactId": "06b074c82888d568212e822f52dbbcac4af523677edca18ebf06edfb1740a921",
+      "artifactKey": "EVIDENCE_INVESTIGATION",
+      "artifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-evidence-investigation.v1.json",
+      "artifactType": "PROJECTION",
+      "deterministicDigest": "de7562249cc575310646ca79b5be9b1a691d80a23049ea0d5ff0b8e7e4e2d7c0",
+      "legacyCompatibility": false,
+      "present": true,
+      "required": true,
+      "sourceStage": "A3"
+    },
+    {
+      "active": true,
+      "artifactId": "b2b938792ad4b0c116ac97154d8d72e334583eda8029a1f57b4af9dc1fd213cb",
+      "artifactKey": "UCONSOLE_ALARM_EVENT_OPERATIONS",
+      "artifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-uconsole-alarm-event-operations.v1.json",
+      "artifactType": "PROJECTION",
+      "deterministicDigest": "2bc837b3dbc092c62c792c703d7fefc35ebf05278e9c56c0ae779356be78616a",
+      "legacyCompatibility": false,
+      "present": true,
+      "required": true,
+      "sourceStage": "A3"
+    },
+    {
+      "active": true,
+      "artifactId": "33d3c576f7a9f202e9ae8af6d03c5d09fecb70e6475f79109097510f091a6b5f",
+      "artifactKey": "A3_RELEASE_GATE",
+      "artifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-a3-readiness-release-gate.v1.json",
+      "artifactType": "RELEASE_GATE",
+      "deterministicDigest": "70cc77709b23bde326ea37960a8cd435cd0d5e99ca531cfffff181ef232fd05c",
+      "legacyCompatibility": false,
+      "present": true,
+      "required": true,
+      "sourceStage": "A3"
+    },
+    {
+      "active": true,
+      "artifactId": "a604d5c298df5e2bb6b11563c98048ccedd1cd75ea38b713fbf3d140dd94e5a4",
+      "artifactKey": "OPERATOR_REVIEW_DECISIONS",
+      "artifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-operator-review-decisions.v1.json",
+      "artifactType": "PROJECTION",
+      "deterministicDigest": "a79177eef44c963a6b42ef056c4a6cc18cb98418c5bd7006bafa9c371d3dfec3",
+      "legacyCompatibility": false,
+      "present": true,
+      "required": true,
+      "sourceStage": "A4"
+    },
+    {
+      "active": true,
+      "artifactId": "a64c4ecd4b134a1818eaff0a3016a59b015b634d99f404fe1b5326b7293aacde",
+      "artifactKey": "UCONSOLE_OPERATOR_REVIEW_QUEUE",
+      "artifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-uconsole-operator-review-queue.v1.json",
+      "artifactType": "PROJECTION",
+      "deterministicDigest": "f805771b6abcb88da0d1ae7402d559da850faeaa5bd55cb3520da8139d1d2c41",
+      "legacyCompatibility": false,
+      "present": true,
+      "required": true,
+      "sourceStage": "A4"
+    },
+    {
+      "active": true,
+      "artifactId": "e29e317e0718574340a45ea938d9695115da5d3d4bfd8589b5ee73a93cdee547",
+      "artifactKey": "OPERATOR_REVIEW_POLICY_GUARD",
+      "artifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-operator-review-policy-guard.v1.json",
+      "artifactType": "PROJECTION",
+      "deterministicDigest": "f9854aac8894b1b2089774b75686b1fd99c4c6232939e1665f378871986e00f6",
+      "legacyCompatibility": false,
+      "present": true,
+      "required": true,
+      "sourceStage": "A4"
+    },
+    {
+      "active": true,
+      "artifactId": "abc1642a4139d4b7e7fa961ee5cdb84ee82eb9f0e36695f3af0e70a14f89b8b3",
+      "artifactKey": "A4_RELEASE_GATE",
+      "artifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-a4-readiness-release-gate.v1.json",
+      "artifactType": "RELEASE_GATE",
+      "deterministicDigest": "66559ab750210685ac8c9a1736abc95680924397a0d1fcf7dfe90dc3154341fb",
+      "legacyCompatibility": false,
+      "present": true,
+      "required": true,
+      "sourceStage": "A4"
+    },
+    {
+      "active": true,
+      "artifactId": "b4b1fcf94b09a71e2edc76a26257434757aea8470f8adae368963f873d4a5779",
+      "artifactKey": "OPERATIONS_CONSOLE_PACKAGE",
+      "artifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-operations-console-package.v1.json",
+      "artifactType": "PACKAGE",
+      "deterministicDigest": "d10fc2a44a8f2d3bc6a53c0442aafd368b5871ff2364b9f1dca72e152f9b63ed",
+      "legacyCompatibility": false,
+      "present": true,
+      "required": true,
+      "sourceStage": "A5"
+    },
+    {
+      "active": true,
+      "artifactId": "41bc3789e71221a922cafe7a951694cf855150760c4ee58fc82f59c045c9cd80",
+      "artifactKey": "OPERATIONS_CONSOLE_HANDOFF_GATE",
+      "artifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-operations-console-handoff-gate.v1.json",
+      "artifactType": "HANDOFF_GATE",
+      "deterministicDigest": "cee75b14caf4017094cbb174f3acac55b89ce3213734298d47476734a5a0be5e",
+      "legacyCompatibility": false,
+      "present": true,
+      "required": true,
+      "sourceStage": "A5"
+    },
+    {
+      "active": true,
+      "artifactId": "464dafe98f0860f92126388213b6fea46e75d8c2b6e083ca8821a712eb000261",
+      "artifactKey": "API_FRONTEND_READINESS_CONTRACT",
+      "artifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-api-frontend-readiness-contract.v1.json",
+      "artifactType": "CONTRACT",
+      "deterministicDigest": "29d0d1861d6e7370f96091a943169fcf4a6b9e8355dc35e4e6f558c4b5aaec00",
+      "legacyCompatibility": false,
+      "present": true,
+      "required": true,
+      "sourceStage": "A6"
+    },
+    {
+      "active": true,
+      "artifactId": "52765a2907ec8906cfbf7c81a0cb06830d5f1f1eb093d2a1b2e035831953dc9b",
+      "artifactKey": "API_FRONTEND_IMPLEMENTATION_GATE",
+      "artifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-api-frontend-implementation-readiness-gate.v1.json",
+      "artifactType": "RELEASE_GATE",
+      "deterministicDigest": "ae45c3821cd908940c971f18796c76a727da617229e70b0c3d82f7f9b45f9565",
+      "legacyCompatibility": false,
+      "present": true,
+      "required": true,
+      "sourceStage": "A6"
+    },
+    {
+      "active": true,
+      "artifactId": "f92a398bb5a98f28a48d43a1620bb773a902b3c1d32983024b1a30259167d865",
+      "artifactKey": "READ_ONLY_API_SKELETON",
+      "artifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-read-only-api-skeleton.v1.json",
+      "artifactType": "SKELETON",
+      "deterministicDigest": "97867bd62d4214ac38c111d44eb32afe35d18ecc90b5d90845f65edc3e7b1034",
+      "legacyCompatibility": false,
+      "present": true,
+      "required": true,
+      "sourceStage": "A7"
+    },
+    {
+      "active": true,
+      "artifactId": "c1054f512a7ec8b9cad5a151aa68400a3d0d43d7e7cb84f30684882b9da3d83e",
+      "artifactKey": "READ_ONLY_API_RESPONSE_CONTRACT",
+      "artifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-read-only-api-response-contract.v1.json",
+      "artifactType": "CONTRACT",
+      "deterministicDigest": "ce84ab141cf8c027f909ef0bd1ad9da441427429e42117d620be01fbf35da923",
+      "legacyCompatibility": false,
+      "present": true,
+      "required": true,
+      "sourceStage": "A7"
+    },
+    {
+      "active": true,
+      "artifactId": "bac92f4b5c557bb9e7f42b8443284d6566f3f88f5f5b2df5a33b01a64417da6c",
+      "artifactKey": "READ_ONLY_API_MOCK_ROUTE",
+      "artifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-read-only-api-mock-route-contract.v1.json",
+      "artifactType": "CONTRACT",
+      "deterministicDigest": "43b0583500e5c564b76d17302eb62b03b2f7d8b5740753e2109c27e33d019833",
+      "legacyCompatibility": false,
+      "present": true,
+      "required": true,
+      "sourceStage": "A7"
+    },
+    {
+      "active": true,
+      "artifactId": "5db463332e9f484549d7b9a7872e375c1690c9b52f7f2cc61cfe94dc96b6ecfb",
+      "artifactKey": "READ_ONLY_API_RELEASE_GATE",
+      "artifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-read-only-api-implementation-release-gate.v1.json",
+      "artifactType": "RELEASE_GATE",
+      "deterministicDigest": "4e3d9dc2a4e40f57190f6a134b6fccdb1a7abbb5e4492e457ef057278fcf079b",
+      "legacyCompatibility": false,
+      "present": true,
+      "required": true,
+      "sourceStage": "A7"
+    },
+    {
+      "active": true,
+      "artifactId": "f94aef63c2f9d9a34f217e25dbaaddefc14ae674036d45e8ef60cbba8cc7215c",
+      "artifactKey": "READ_ONLY_FRONTEND_SKELETON",
+      "artifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-read-only-frontend-skeleton.v1.json",
+      "artifactType": "SKELETON",
+      "deterministicDigest": "ec702ce03f6fdb7c3412fa1e29bb136f471535d824dcea44596d331175a6ed67",
+      "legacyCompatibility": false,
+      "present": true,
+      "required": true,
+      "sourceStage": "A8"
+    },
+    {
+      "active": true,
+      "artifactId": "ea1a3954e5fc424960b647ec4067648279630fdb66885ffecc9d464f6dab7161",
+      "artifactKey": "READ_ONLY_FRONTEND_PAGE_CONTRACT",
+      "artifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-read-only-frontend-page-contract.v1.json",
+      "artifactType": "CONTRACT",
+      "deterministicDigest": "5097a37a56a473b12c6050dcfcbb5f4677302467dab2bf9845ad9947d338bfe9",
+      "legacyCompatibility": false,
+      "present": true,
+      "required": true,
+      "sourceStage": "A8"
+    },
+    {
+      "active": true,
+      "artifactId": "4d4a14d56df800537c4c453ac92015fe85becb2c28861a6a598383e339bbb885",
+      "artifactKey": "READ_ONLY_FRONTEND_RELEASE_GATE",
+      "artifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-read-only-frontend-implementation-release-gate.v1.json",
+      "artifactType": "RELEASE_GATE",
+      "deterministicDigest": "5365286ddef6fb282538c1874bbdcafa2877755165a046a59a156fb1460ab6fd",
+      "legacyCompatibility": false,
+      "present": true,
+      "required": true,
+      "sourceStage": "A8"
+    },
+    {
+      "active": true,
+      "artifactId": "0f3eb9dbe60e7c1a6a4570e03d58211fc7e7f1ee372937f8745ac09f77b8f788",
+      "artifactKey": "GA_RELEASE_GATE_REGISTRY",
+      "artifactPath": "AN_VANTARIS_ONE/registries/airport-international-ga-release-gate.v1.json",
+      "artifactType": "REGISTRY",
+      "deterministicDigest": "b53c82e4828ae1dcf17bf32509ec643af771755f4abdf0b6416a850668aad4e7",
+      "legacyCompatibility": false,
+      "present": true,
+      "required": true,
+      "sourceStage": "GA-01"
+    },
+    {
+      "active": true,
+      "artifactId": "9322eb8cef038f55b9f32844fb47be8765110bda3c814ce592ee29a1e8dd7410",
+      "artifactKey": "GA_RELEASE_GATE_REPORT",
+      "artifactPath": "ONE_AIRPORT_GA_01_ALIGN_AIRPORT_RELEASE_TERMINOLOGY_WITH_INTERNATIONAL_GA_REPORT.md",
+      "artifactType": "REPORT",
+      "deterministicDigest": "d94fa927f54380767553e0b69c40413b1b784bc4b93a5110bdc7628092e8d4a2",
+      "legacyCompatibility": false,
+      "present": true,
+      "required": true,
+      "sourceStage": "GA-01"
+    }
+  ],
+  "authority": "ONE-AIRPORT-GA-02",
+  "boundaryStatement": {
+    "apiProductionAllowed": false,
+    "approvalExecutionAllowed": false,
+    "customerIdentifierLeakageAllowed": false,
+    "databaseWriteAllowed": false,
+    "deterministicDigest": "780985fa8fa9ae66de1a8fe1dac1dd64c4ca4dd3350604233f3407772b216394",
+    "frontendProductionAllowed": false,
+    "productionActivationAllowed": false,
+    "pushAllowed": false,
+    "runtimeActivationAllowed": false,
+    "statementId": "airport-international-ga-release-boundary-v1",
+    "tagAllowed": false
+  },
+  "contractVersion": "international-ga-release-candidate-package.v1",
+  "deterministicDigest": "3b527f7f41faebd012d84c3dc8748d4daf2aadad0a221aa984086e8b1a848aad",
+  "generatedAtPolicy": "DETERMINISTIC_NO_VOLATILE_TIMESTAMP",
+  "handoffInventory": [
+    {
+      "deterministicDigest": "1222162d9ff9d3be50cd22f8386c4e9f84bd9a3a6dc22e1c84ae0d835eb24fdd",
+      "handoffId": "06a2c29591336021e4f65c811d17ae97114799925a6386f1ce26bab954de0207",
+      "handoffType": "READ_ONLY_API_ROUTE_IMPLEMENTATION",
+      "implementationAllowedNow": true,
+      "readyForHandoff": true,
+      "sourceArtifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-read-only-api-implementation-release-gate.v1.json",
+      "targetFuturePhase": "A7 future route implementation",
+      "title": "Read-only API route implementation planning"
+    },
+    {
+      "deterministicDigest": "008e8f6bbde0a2d20dfe09e18d407bcf1dc559a2917a8a0fdc0e1e26a62ee6e4",
+      "handoffId": "133c4b61ec9f5f38bc5708ed3150dbc99546f21dc2f127e2c1992e972bc612d0",
+      "handoffType": "READ_ONLY_FRONTEND_IMPLEMENTATION",
+      "implementationAllowedNow": true,
+      "readyForHandoff": true,
+      "sourceArtifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-read-only-frontend-implementation-release-gate.v1.json",
+      "targetFuturePhase": "A8 future UI implementation",
+      "title": "Read-only frontend implementation planning"
+    },
+    {
+      "deterministicDigest": "d2fdc6c5daf9c62b321317bdd1ffbe263d3a40fc0017e1285419c7f795806c3d",
+      "handoffId": "0c0cf88101e97a2541056678abb6f8582c99e64eb3b8eb0c0fa5fd45a9f963f1",
+      "handoffType": "OPERATOR_DECISION_EXECUTION_FUTURE_PHASE",
+      "implementationAllowedNow": false,
+      "readyForHandoff": false,
+      "sourceArtifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-a4-readiness-release-gate.v1.json",
+      "targetFuturePhase": "Future approval and decision execution",
+      "title": "Operator decision execution future phase"
+    },
+    {
+      "deterministicDigest": "9858921171af632d688f7325ad1cf8431b79000fa1d8b1e2ad62c6ce9d46e74e",
+      "handoffId": "c2bcffc0cca5ce86e01f752cd34eb4057a76247aaa83aa201653779fd0809413",
+      "handoffType": "RUNTIME_ACTIVATION_FUTURE_PHASE",
+      "implementationAllowedNow": false,
+      "readyForHandoff": false,
+      "sourceArtifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-uconsole-integration-health.v1.json",
+      "targetFuturePhase": "Future runtime activation",
+      "title": "Runtime activation future phase"
+    },
+    {
+      "deterministicDigest": "72fa70502f2bdf917d11bac55e24c8ba57fcf276749862119efee781b1b363f4",
+      "handoffId": "7788cb82187fe41b147a5299abfc9d7b4b28d3252633453edc4fedddd613c9ec",
+      "handoffType": "PRODUCTION_DEPLOYMENT_FUTURE_PHASE",
+      "implementationAllowedNow": false,
+      "readyForHandoff": false,
+      "sourceArtifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-international-ga-release-gate.v1.json",
+      "targetFuturePhase": "Future production deployment",
+      "title": "Production deployment future phase"
+    },
+    {
+      "deterministicDigest": "11a8a42edaf7b58d76011c392914a6de86c9ec1b368e18a282b17db36b4f90a9",
+      "handoffId": "7bd4307349c718c09fd21a5b2cb7c396ee1ad3c492f76488e0d5fff97babdf95",
+      "handoffType": "PUSH_TAG_RELEASE_FUTURE_PHASE",
+      "implementationAllowedNow": false,
+      "readyForHandoff": false,
+      "sourceArtifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-international-ga-release-gate.v1.json",
+      "targetFuturePhase": "Future source-control release operation",
+      "title": "Push and tag release future phase"
+    }
+  ],
+  "implementationStatus": "INTERNATIONAL_GA_RELEASE_CANDIDATE_PACKAGING_AND_VALIDATION_MATRIX_COMPLETE",
+  "packageId": "2eb6386aff1ab398b5abfcc5225d69b99743f6bf64e95ecf1aeadfb271d66e83",
+  "packageVersion": "airport-international-ga-release-candidate-package.v1",
+  "packagingGates": [
+    {
+      "blocking": true,
+      "deterministicDigest": "3e960358348777f2c1b48148257f13353ec42f34b4c46ed26f1ca224aa1afdeb",
+      "gateId": "G01_ACTIVE_GA_RELEASE_GATE_PRESENT",
+      "gateName": "Active GA release gate present",
+      "reasonCodes": [
+        "ACTIVE_GA_RELEASE_GATE_PRESENT"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "e7e32b5001c9ed2e920be6b4c84797fd8bbc76158c0825e3fbc11728356c4aa4",
+      "gateId": "G02_STAGE_INVENTORY_COMPLETE",
+      "gateName": "Stage inventory complete",
+      "reasonCodes": [
+        "NINE_STAGE_ENTRIES"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "0539adf27b89855444f28e6fb7a4966c8ec421a6cf4251ba43f200acdb34e47a",
+      "gateId": "G03_ARTIFACT_INVENTORY_COMPLETE",
+      "gateName": "Artifact inventory complete",
+      "reasonCodes": [
+        "THIRTY_REQUIRED_ARTIFACTS_PRESENT"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "40b9c624ac36e47d4fe90324749b45e0eb5c6e74efb5a1fa7c1b7eace4ee050d",
+      "gateId": "G04_VALIDATOR_MATRIX_COMPLETE",
+      "gateName": "Validator matrix complete",
+      "reasonCodes": [
+        "TWENTY_VALIDATORS_REPRESENTED"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "bcc171a406f38bfbf78740dbdcc6ab975a59492c6fa655b7bcf71a5aab02e66a",
+      "gateId": "G05_UNIT_TEST_MATRIX_COMPLETE",
+      "gateName": "Unit test matrix complete",
+      "reasonCodes": [
+        "NINE_TEST_SUITES_REPRESENTED"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "bb333fc2402c215b8e859a370f729937c61b77fc470b8e322c3ce35e325531dd",
+      "gateId": "G06_GA_TERMINOLOGY_ACTIVE",
+      "gateName": "GA terminology active",
+      "reasonCodes": [
+        "ACTIVE_PACKAGE_AVOIDS_MISLEADING_STAGE_WORDING"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "34e3af864cb20d8daf29c2e0d8de271819d60670cc2043c15963fd62c9801ce1",
+      "gateId": "G07_LEGACY_COMPATIBILITY_ISOLATED",
+      "gateName": "Legacy compatibility isolated",
+      "reasonCodes": [
+        "NO_LEGACY_ARTIFACT_REQUIRED_FOR_GA"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "9d936153ac0fb077fd80b3a0346df90fda27f863959fc1f24faf7ca75196669f",
+      "gateId": "G08_BOUNDARY_STATEMENT_COMPLETE",
+      "gateName": "Boundary statement complete",
+      "reasonCodes": [
+        "BOUNDARIES_EXPLICIT"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "85fe3b9f615db1a43cd5902b980fa386ea5b8178cf6487818686dd60a915df48",
+      "gateId": "G09_RELEASE_NOTES_COMPLETE",
+      "gateName": "Release notes complete",
+      "reasonCodes": [
+        "RELEASE_NOTES_METADATA_PRESENT"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "ab29f298beafb9ca7c4b31261246d3b5174555aa4b175e01599631a4fc98ac31",
+      "gateId": "G10_HANDOFF_INVENTORY_COMPLETE",
+      "gateName": "Handoff inventory complete",
+      "reasonCodes": [
+        "SIX_HANDOFF_ENTRIES"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "ba2ffe0083f34174c993424d8effc4bcc52cb1d75583ace7b2c3fdc2fa2c333c",
+      "gateId": "G11_A1_A8_COUNTS_PRESERVED",
+      "gateName": "A1-A8 counts preserved",
+      "reasonCodes": [
+        "GA01_COUNTS_PRESERVED"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "9a6d5138a251c7c589aab6ad3ede2ffe624a887fa8a88e366c29e7ce3e81bc25",
+      "gateId": "G12_READ_ONLY_BOUNDARY",
+      "gateName": "Read-only boundary",
+      "reasonCodes": [
+        "ALL_WRITE_COUNTS_ZERO"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "c2664a308d692a93e069ddd4c666ae94b52549d3f93d877760fc875950c00d58",
+      "gateId": "G13_RUNTIME_PRODUCTION_BOUNDARY",
+      "gateName": "Runtime and production boundary",
+      "reasonCodes": [
+        "RUNTIME_AND_PRODUCTION_DISABLED"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "9e46451445b54af2b850ff033278772f8076f9d399fc2473827aaa8b21b5664c",
+      "gateId": "G14_API_FRONTEND_PRODUCTION_BOUNDARY",
+      "gateName": "API/frontend production boundary",
+      "reasonCodes": [
+        "PRODUCTION_API_FRONTEND_FALSE"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "b190136ab4554af4f08631e3618229de016ec971b56d4b5a9b322f0eedb906b6",
+      "gateId": "G15_CUSTOMER_IDENTIFIER_SAFETY",
+      "gateName": "Customer identifier safety",
+      "reasonCodes": [
+        "NO_IDENTIFIER_LEAKAGE"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "16d058fd6f3bd1d1ce07426d3f3185244d751b42a92523ab005f964b99805ac2",
+      "gateId": "G16_BOUNDARY_VALIDATOR",
+      "gateName": "Boundary validator",
+      "reasonCodes": [
+        "ONE_BOUNDARY_BASELINE_PASS_WITH_EXISTING_WARNINGS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "836279fe55cb892e185277e89bac95b0cecbf4910b76eed83cb2c9b8f6ab58d7",
+      "gateId": "G17_DETERMINISTIC_OUTPUT",
+      "gateName": "Deterministic output",
+      "reasonCodes": [
+        "REPEATED_RUNNER_BYTE_IDENTICAL"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "253e9d290e642a13f09d0c89c5ceec057a8e5639b529a91b002bed69abf28a8a",
+      "gateId": "G18_RELEASE_PACKAGE_DECISION",
+      "gateName": "Release package decision",
+      "reasonCodes": [
+        "INTERNATIONAL_GA_RELEASE_PACKAGE_PASS"
+      ],
+      "severity": "LOW",
+      "status": "PASS"
+    }
+  ],
+  "profileId": "airport-international-ga-release-candidate-package-profile-v1",
+  "readinessOutcome": "INTERNATIONAL_GA_RELEASE_CANDIDATE_PACKAGE_READY_FOR_HANDOFF",
+  "releaseDecision": {
+    "apiProductionAllowed": false,
+    "approvalExecutionAllowed": false,
+    "databaseWriteAllowed": false,
+    "decisionReason": "Airport International GA release candidate package is ready for handoff; push, tag, runtime activation, production activation, and approval execution remain disabled.",
+    "decisionState": "INTERNATIONAL_GA_RELEASE_PACKAGE_PASS",
+    "deterministicDigest": "ca79dcbc2ecf74669a20060587afe0c8877fba02ce59847b3a22c27cd2f606c0",
+    "frontendProductionAllowed": false,
+    "internationalGaPackageAllowed": true,
+    "internationalGaReadinessAllowed": true,
+    "productionActivationAllowed": false,
+    "pushAllowed": false,
+    "releaseCandidateAllowed": true,
+    "runtimeActivationAllowed": false,
+    "tagAllowed": false
+  },
+  "releaseNotes": {
+    "compatibilityNotes": [
+      "Historical A9 compatibility artifacts remain isolated from active required GA packaging."
+    ],
+    "deterministicDigest": "80c22b6748f22b60a9f8e96f2e304c9d5c538e6785fbd0ba2dd8d12ed12c828f",
+    "knownWarnings": [
+      "ONE boundary validator retains existing legacy warnings outside this package scope."
+    ],
+    "nextPhaseRecommendations": [
+      "Plan read-only API route implementation.",
+      "Plan read-only frontend implementation.",
+      "Keep runtime and production activation gated by explicit future authorization."
+    ],
+    "releaseCandidateName": "Airport International GA Release Candidate",
+    "releaseCandidateType": "International GA-ready read-only foundation",
+    "releaseNotesId": "24507e3a3d2c08a56e81b46b4444853326c1a8a1d56ab05975d544b7382469fe",
+    "releaseSummary": "Packages the Airport industry solution release candidate for handoff with production-grade readiness gates and explicit non-runtime boundaries."
+  },
+  "sourceArtifactReferences": [
+    {
+      "artifactType": "GA_RELEASE_GATE:GA_RELEASE_GATE",
+      "deterministicDigest": "d9b7dc4c33ddd2c9299a5595b5bdb022ad174fc8e9a441683e274a7e02785dd1",
+      "digest": "a573e3591efad937c72d66e7273370fe6b1f9f8f7adc8f07d23ee4b8e88cadcf",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-international-ga-release-gate.v1.json"
+    },
+    {
+      "artifactType": "PROJECTION:SOURCE_SYSTEM_CANDIDATES",
+      "deterministicDigest": "eccdba30f6efb39ab619820042cc39a395491a411fce2872767607920fab44b5",
+      "digest": "ac27a5438cfbd2cba3c643fdebdf16f50e38a0fcba243ce7893ed694c7dcdb31",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-source-system-candidates.v1.json"
+    },
+    {
+      "artifactType": "PROJECTION:SOURCE_SYSTEM_REVIEW",
+      "deterministicDigest": "154309b15cbbcac63b0fa8689ac1b626a95efe94d8f02860862a026a354ef9e9",
+      "digest": "7bb2526f6fd82463a87a395ef7224a1b4148a29893d4d9b3e1b616ee4041609d",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-source-system-review.v1.json"
+    },
+    {
+      "artifactType": "PROJECTION:INTEGRATION_HEALTH",
+      "deterministicDigest": "17215dd08711fa339504adf4c51013724a788fb19733c6bfae5ac5cc9b1cded7",
+      "digest": "9cc890eb9c59906dc0ac7c72c09806c4b9c4feb5a242f31174adbff53570ab25",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-integration-health.v1.json"
+    },
+    {
+      "artifactType": "CONTRACT:EVIDENCE_ADAPTER_CONTRACT",
+      "deterministicDigest": "c703580bf1cd471b9755f2b9208395cca54fa1071b34aca65547df0aab695a3d",
+      "digest": "fc5634b18dd6c739a7d2f6acb6dfe786537caefeb465837d0177e8bad6cdf96b",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-evidence-adapter-contract.v1.json"
+    },
+    {
+      "artifactType": "PROJECTION:UCONSOLE_INTEGRATION_HEALTH",
+      "deterministicDigest": "c389587dba58f049e3fd35a25adafbb06f43469d3c043f4337f11cd8608e72e7",
+      "digest": "88d62bea9e8ab55eca402f404fdc279976b503a677a6c12408b8bf084b5e40e9",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-uconsole-integration-health.v1.json"
+    },
+    {
+      "artifactType": "PROJECTION:ALARM_EVENT_INTAKE",
+      "deterministicDigest": "ee2acf8aa4f2f84693b76238bdf468f66f28e16fb97a4dc14619b92b10e47d44",
+      "digest": "06c466609dbfebee938229f14bcf9e6c9d21c653cc5f45fb3831ec0d4bc3edf1",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-alarm-event-intake-candidates.v1.json"
+    },
+    {
+      "artifactType": "PROJECTION:ALARM_EVENT_ASSET_RESOLUTION",
+      "deterministicDigest": "608d5a6e0e7eab5ed5b62f0a274e60f310d6f6ce7bce24f13907412cb1fa53d9",
+      "digest": "9c5c5ee17a0dfc71f5ed6ad1895d76d6957e22a2801dceb056764ee9f18a36d8",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-alarm-event-asset-resolution-review.v1.json"
+    },
+    {
+      "artifactType": "PROJECTION:FAULTCASE_CANDIDATES",
+      "deterministicDigest": "2a6e04a9e0da72b96d5306fc87b817bc7091ca92116676d27d92b6182a7ae2f9",
+      "digest": "bad7fd4417844538c00963dfcba7cfd335963e03fb80420f577b3f3532b5f97a",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-faultcase-candidates.v1.json"
+    },
+    {
+      "artifactType": "PROJECTION:WORKORDER_INTENT_CANDIDATES",
+      "deterministicDigest": "e0c16f463a0af71296156b04ea1c4c34f1306782b35dcb3961e5b28fa7479849",
+      "digest": "948403767ad917604f187941735372c683568b36612ece02333395671dd16343",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-workorder-intent-candidates.v1.json"
+    },
+    {
+      "artifactType": "PROJECTION:EVIDENCE_INVESTIGATION",
+      "deterministicDigest": "7abf413d8f67d17c3712ec765499a4fb05d8b130760d861d3aa8b4f0b9bf0163",
+      "digest": "6c555ebc74ef50ab79f5c2cddc1e10eb2973075023df25e9946d3963991369f0",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-evidence-investigation.v1.json"
+    },
+    {
+      "artifactType": "PROJECTION:UCONSOLE_ALARM_EVENT_OPERATIONS",
+      "deterministicDigest": "1d0e28990349e8a66ff537b1e8aeb46b426e4531f1d37f37046b43a83d9a0c97",
+      "digest": "7dc810ba56f6cea0b8d7dc8c584bc8131e9b5f92f51878af0e72650d065bdb96",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-uconsole-alarm-event-operations.v1.json"
+    },
+    {
+      "artifactType": "RELEASE_GATE:A3_RELEASE_GATE",
+      "deterministicDigest": "be8b20504824d5c04ab042eebecab7c1abb670c26bcd8d0da9564f33b6ac770c",
+      "digest": "2b53aee526fe94b5ee6590c923b8288ae4472836163ffa038519882186ca0e39",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-a3-readiness-release-gate.v1.json"
+    },
+    {
+      "artifactType": "PROJECTION:OPERATOR_REVIEW_DECISIONS",
+      "deterministicDigest": "d51e3a0888bc63e4f79f2ae8e6d957f041f1d5e1d6409eefd1c8cac84f98116f",
+      "digest": "ad6f565c07ca29ddf813a360f97e78a1287d7b4c591adfa85c40ebb583d9385e",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-operator-review-decisions.v1.json"
+    },
+    {
+      "artifactType": "PROJECTION:UCONSOLE_OPERATOR_REVIEW_QUEUE",
+      "deterministicDigest": "46b7b64ac6830e0032b9850a13f365f950c5cea734be8a05e08282a6d00f936d",
+      "digest": "e31628886fc1d9758c26788c5dd4b17771b694023afa54d15d086690a26b962d",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-uconsole-operator-review-queue.v1.json"
+    },
+    {
+      "artifactType": "PROJECTION:OPERATOR_REVIEW_POLICY_GUARD",
+      "deterministicDigest": "f9c8660e2254eeb8875c043bdbfca840d6664b79145293a49e8f3b11643ed4be",
+      "digest": "5eaa4cf3cc1f2c4c1424be3ffe0696d4878648c1820555e74cae38613448c898",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-operator-review-policy-guard.v1.json"
+    },
+    {
+      "artifactType": "RELEASE_GATE:A4_RELEASE_GATE",
+      "deterministicDigest": "7ac18ad444ccd33e7df087521118897ebcd6480816e31618df213138930f40da",
+      "digest": "a403587716be2c22e91f1700b03d29d54570d16162e3ee80d364fc688a59ac16",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-a4-readiness-release-gate.v1.json"
+    },
+    {
+      "artifactType": "PACKAGE:OPERATIONS_CONSOLE_PACKAGE",
+      "deterministicDigest": "878c7be0c1d7b23dd9e65b22dd09023fc47247364820c3c90abd32d43dc95b11",
+      "digest": "8641f7f58c802ec1b7a22b7a619897dec3c2c9583bf28bbf7291eac81ef253f5",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-operations-console-package.v1.json"
+    },
+    {
+      "artifactType": "HANDOFF_GATE:OPERATIONS_CONSOLE_HANDOFF_GATE",
+      "deterministicDigest": "ba87f0dd2c743c7a37d437a108fcc4f1173869e857d2acdd2d01500684330b0d",
+      "digest": "955ea3a451fc8419d823e93cd55931398689e6d7b1d5cca77626dd9676bd979a",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-operations-console-handoff-gate.v1.json"
+    },
+    {
+      "artifactType": "CONTRACT:API_FRONTEND_READINESS_CONTRACT",
+      "deterministicDigest": "97aa135480d5af53cbbd63209d6522f62322935f6f8ba200b909d8e8ac0b648a",
+      "digest": "8896a2732624ed05cac0bab543d3f7366b36f8a2040ea527c64677f94d854843",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-api-frontend-readiness-contract.v1.json"
+    },
+    {
+      "artifactType": "RELEASE_GATE:API_FRONTEND_IMPLEMENTATION_GATE",
+      "deterministicDigest": "5c14675d885b561755fff5693be136e850924eac13c9629d58f486a11f723db0",
+      "digest": "005d0ec5ef4d8d8b7616a2a8820303fd22f9f15d10c88e9c80e3b3814938c816",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-api-frontend-implementation-readiness-gate.v1.json"
+    },
+    {
+      "artifactType": "SKELETON:READ_ONLY_API_SKELETON",
+      "deterministicDigest": "5cdebca2ef0505882976aa875d0577abc773699f26d07c04d3ffc68aed783fc9",
+      "digest": "abb1a8c50a7c55e1173e7ba68c2f945e5f737ea5a7ab87abc260b4ee637cbefb",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-read-only-api-skeleton.v1.json"
+    },
+    {
+      "artifactType": "CONTRACT:READ_ONLY_API_RESPONSE_CONTRACT",
+      "deterministicDigest": "67a313480cca1359dd76af4e0c810185a051bc886d48a59126af066f9165283a",
+      "digest": "3495228c1de1395ead68ae2f078dcdd172e4d4f065db347a342862d94fef592b",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-read-only-api-response-contract.v1.json"
+    },
+    {
+      "artifactType": "CONTRACT:READ_ONLY_API_MOCK_ROUTE",
+      "deterministicDigest": "341f8c5c66b98f7fd60a84433742b0aab73f49150cf22cc93c22695023b2d406",
+      "digest": "60ba222664c018ff846a9e439a84dc95760e571c50a0975ae860f951ba1f8e9d",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-read-only-api-mock-route-contract.v1.json"
+    },
+    {
+      "artifactType": "RELEASE_GATE:READ_ONLY_API_RELEASE_GATE",
+      "deterministicDigest": "c2330e75dd055ee060341cc531197ebfd2489201c406dd7ab3cbafac7d670048",
+      "digest": "2a2569e7ee493c5147ced62370091e99703052b6f8c50cd90d26fd28c5e24f11",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-read-only-api-implementation-release-gate.v1.json"
+    },
+    {
+      "artifactType": "SKELETON:READ_ONLY_FRONTEND_SKELETON",
+      "deterministicDigest": "acebe1e8b9257c86c72e7e64d1d9587407dca4cc9df19aaf13122b252bb0499c",
+      "digest": "2c63d14f80ee1b4c41bb1419bd1fa45c10c61e30bd1d1e0accb97ce83d99ad44",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-read-only-frontend-skeleton.v1.json"
+    },
+    {
+      "artifactType": "CONTRACT:READ_ONLY_FRONTEND_PAGE_CONTRACT",
+      "deterministicDigest": "1267e9771c5e0be1cc1f1f49505632dc52989e63aa33cf8525fa3a5a459cf607",
+      "digest": "c34b257df7e099d7c8206aff8e40f3c8a9e596007c2630639ad0bd2456d16bcb",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-read-only-frontend-page-contract.v1.json"
+    },
+    {
+      "artifactType": "RELEASE_GATE:READ_ONLY_FRONTEND_RELEASE_GATE",
+      "deterministicDigest": "8f0e0057c742b69392df9276195c52f69110200ad4ae62df61e847e0e72c56d6",
+      "digest": "4b5c45efc0bad86ec0491f5acdcbbbb140f5645cd5438ef5505109658e952c20",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-read-only-frontend-implementation-release-gate.v1.json"
+    },
+    {
+      "artifactType": "REGISTRY:GA_RELEASE_GATE_REGISTRY",
+      "deterministicDigest": "6d86b08ea64afd76c521f05d7a31a66bb0ccbb95e55958e12c8b999c9578447e",
+      "digest": "e08c50afefcc3549b0d6585767e00a5df1767e8c75f673be271861369f4e970b",
+      "path": "AN_VANTARIS_ONE/registries/airport-international-ga-release-gate.v1.json"
+    },
+    {
+      "artifactType": "REPORT:GA_RELEASE_GATE_REPORT",
+      "deterministicDigest": "c8291d1e005e346b20a843debe0ca5ad9420abd8cf90e3da83a11808575fa1c1",
+      "digest": "7b67d6969a574b1d5751522c85a4dc2e00f2cff7cb36afc4b8877b69d57c30f4",
+      "path": "ONE_AIRPORT_GA_01_ALIGN_AIRPORT_RELEASE_TERMINOLOGY_WITH_INTERNATIONAL_GA_REPORT.md"
+    }
+  ],
+  "stageInventory": [
+    {
+      "activeArtifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-source-system-review.v1.json",
+      "activePassMarker": "ONE_AIRPORT_A2_01_GENERIC_SOURCE_SYSTEM_REGISTRY_FOUNDATION_PASS",
+      "commitReference": "e26ed6b",
+      "deterministicDigest": "5579bbc881b760971d17b8872bc140d213f9b3558057971eab1ef61aec6bf62c",
+      "stageId": "A1",
+      "stageName": "Asset Intake / Review Projection",
+      "stageStatus": "PASS"
+    },
+    {
+      "activeArtifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-uconsole-integration-health.v1.json",
+      "activePassMarker": "ONE_AIRPORT_A2_05_READ_ONLY_UCONSOLE_INTEGRATION_HEALTH_PROJECTION_PASS",
+      "commitReference": "e26ed6b",
+      "deterministicDigest": "49d34b6753b87fe9ba35a2ca3935ff8a5d1dcd723ddcf58b75a9334ba4aa599a",
+      "stageId": "A2",
+      "stageName": "Source System / Integration Health",
+      "stageStatus": "PASS"
+    },
+    {
+      "activeArtifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-a3-readiness-release-gate.v1.json",
+      "activePassMarker": "ONE_AIRPORT_A3_07_A3_READINESS_AGGREGATION_AND_RELEASE_GATE_PASS",
+      "commitReference": "e26ed6b",
+      "deterministicDigest": "63a3b45fc919e6b8dcb56d4adebe7812385691ec983bc811823bf0daec02336b",
+      "stageId": "A3",
+      "stageName": "Alarm \u2192 Fault \u2192 Work \u2192 Evidence Projection",
+      "stageStatus": "PASS"
+    },
+    {
+      "activeArtifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-a4-readiness-release-gate.v1.json",
+      "activePassMarker": "ONE_AIRPORT_A4_04_OPERATOR_REVIEW_READINESS_AND_RELEASE_GATE_PASS",
+      "commitReference": "e26ed6b",
+      "deterministicDigest": "3f5c832e33bed42610d6a079b5fcbd83c28fd14b4277be34a0a4eb6704319bd6",
+      "stageId": "A4",
+      "stageName": "Operator Review Decision Layer",
+      "stageStatus": "PASS"
+    },
+    {
+      "activeArtifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-operations-console-handoff-gate.v1.json",
+      "activePassMarker": "ONE_AIRPORT_A5_02_AIRPORT_CONSOLE_PACKAGE_READINESS_AND_HANDOFF_GATE_PASS",
+      "commitReference": "e26ed6b",
+      "deterministicDigest": "517bb74183ac9f67ada22de7df0ed072ef6ecb3230e65df66c988a12713d95cb",
+      "stageId": "A5",
+      "stageName": "Airport Operations Console Package",
+      "stageStatus": "PASS"
+    },
+    {
+      "activeArtifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-api-frontend-implementation-readiness-gate.v1.json",
+      "activePassMarker": "ONE_AIRPORT_A6_02_API_FRONTEND_IMPLEMENTATION_READINESS_RELEASE_GATE_PASS",
+      "commitReference": "e26ed6b",
+      "deterministicDigest": "24381bbc3ec04ea11cfc26ed833429d21fa0bcd96a03cfb053d59f0f7186335a",
+      "stageId": "A6",
+      "stageName": "API / Frontend Readiness Contract and Gate",
+      "stageStatus": "PASS"
+    },
+    {
+      "activeArtifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-read-only-api-implementation-release-gate.v1.json",
+      "activePassMarker": "ONE_AIRPORT_A7_04_READ_ONLY_API_IMPLEMENTATION_RELEASE_GATE_PASS",
+      "commitReference": "e26ed6b",
+      "deterministicDigest": "ceca353f0d3c2451538f216e01b138245d9e97bb4f596a9315fa7c5c5759d4c8",
+      "stageId": "A7",
+      "stageName": "Read-only API Skeleton / Contract / Mock / Release Gate",
+      "stageStatus": "PASS"
+    },
+    {
+      "activeArtifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-read-only-frontend-implementation-release-gate.v1.json",
+      "activePassMarker": "ONE_AIRPORT_A8_03_READ_ONLY_FRONTEND_IMPLEMENTATION_RELEASE_GATE_PASS",
+      "commitReference": "e26ed6b",
+      "deterministicDigest": "54db43a9aaa20434da4b0f74e1819e80822d57f47d89a499d58ea61984cd5350",
+      "stageId": "A8",
+      "stageName": "Read-only Frontend Skeleton / Page Contract / Release Gate",
+      "stageStatus": "PASS"
+    },
+    {
+      "activeArtifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-international-ga-release-gate.v1.json",
+      "activePassMarker": "ONE_AIRPORT_GA_01_ALIGN_AIRPORT_RELEASE_TERMINOLOGY_WITH_INTERNATIONAL_GA_PASS",
+      "commitReference": "e26ed6b",
+      "deterministicDigest": "8adea995b8fb234e3333753bf39ab52b8eb338d6f6703131f9701006f0926895",
+      "stageId": "GA-01",
+      "stageName": "International GA Readiness Alignment",
+      "stageStatus": "PASS"
+    }
+  ],
+  "summary": {
+    "activeStageCount": 9,
+    "airportSpecific": false,
+    "alarmEventCandidateCount": 5,
+    "apiEnabled": false,
+    "apiEndpointCandidateCount": 8,
+    "approvalWriteCount": 0,
+    "artifactInventoryCount": 30,
+    "auditPreviewCount": 46,
+    "auditWriteCount": 0,
+    "blockingDecisionCount": 45,
+    "blockingGateFailureCount": 0,
+    "businessCapabilityCount": 15,
+    "canonicalWriteCount": 0,
+    "containsCustomerAssetIdentifiers": false,
+    "crossIndustry": true,
+    "databaseWriteCount": 0,
+    "decisionItemCount": 46,
+    "decisionWriteCount": 0,
+    "evidenceCenterWriteCount": 0,
+    "failedStageCount": 0,
+    "faultCaseCandidateCount": 5,
+    "frontendEnabled": false,
+    "frontendPageCandidateCount": 8,
+    "frontendRouteCandidateCount": 8,
+    "handoffInventoryCount": 6,
+    "internationalGaPackageAllowed": true,
+    "internationalGaReadinessAllowed": true,
+    "investigationCaseCount": 5,
+    "oneWorkManagementWriteCount": 0,
+    "operationsRowCount": 5,
+    "packagingGateCount": 18,
+    "pageContractCount": 8,
+    "pageDefinitionCount": 8,
+    "pageSkeletonCount": 8,
+    "passedGateCount": 20,
+    "passedPackagingGateCount": 18,
+    "passedValidatorCount": 20,
+    "pendingDecisionCount": 46,
+    "policyGuardResultCount": 46,
+    "presentRequiredArtifactCount": 30,
+    "productionActivationAllowed": false,
+    "productionApiAllowed": false,
+    "productionFrontendAllowed": false,
+    "pushAllowed": false,
+    "queueRowCount": 46,
+    "readOnlyEndpointCount": 8,
+    "releaseCandidateAllowed": true,
+    "releaseGateCount": 20,
+    "requiredArtifactCount": 30,
+    "requiredValidatorCount": 20,
+    "runtimeActivationAllowed": false,
+    "runtimeAlarmObservedCount": 0,
+    "runtimeObservedCount": 0,
+    "sourceSystemCandidateCount": 5,
+    "stageInventoryCount": 9,
+    "tagAllowed": false,
+    "totalDeviceEvidenceCount": 470,
+    "ufmsFaultCaseCreatedCount": 0,
+    "ummsWriteCount": 0,
+    "unitTestMatrixCount": 9,
+    "validatorMatrixCount": 20,
+    "workOrderCreatedCount": 0,
+    "workOrderIntentCandidateCount": 5,
+    "workOrderIntentCreatedCount": 0
+  },
+  "unitTestMatrix": [
+    {
+      "deterministicDigest": "951c685d916c33e16bf04464313ed8f104135f6ad2dd7dc6e65bb9ea1e937085",
+      "expectedScope": "source-system registry and review",
+      "requiredForGa": true,
+      "sourceStage": "A1",
+      "status": "PASS",
+      "testMatrixId": "41849a484981497c974619f84f3c4b0e5739410facbb1056243e716d1632eb05",
+      "testPath": "AN_VANTARIS_ONE/tests/source_system_registry"
+    },
+    {
+      "deterministicDigest": "02b387ba4f2e9d6a42778daffb87f3c557a77078f2e30da76a9d61278a31693f",
+      "expectedScope": "integration health projection",
+      "requiredForGa": true,
+      "sourceStage": "A2",
+      "status": "PASS",
+      "testMatrixId": "f9e8c70c921f706621ae9f301269e15115735976649e3d6820176d10e51d6b5a",
+      "testPath": "AN_VANTARIS_ONE/tests/uconsole_projection"
+    },
+    {
+      "deterministicDigest": "ba8db02db7654de2ea8498d9bdee0a4dbc2bc2c93882902d9dbabe6f05b04e09",
+      "expectedScope": "A3 readiness gate",
+      "requiredForGa": true,
+      "sourceStage": "A3",
+      "status": "PASS",
+      "testMatrixId": "a5ebe4a6c98fa1bfc3e1d874adeed1089482d6ca3e6466d070a9b0598b13023f",
+      "testPath": "AN_VANTARIS_ONE/tests/a3_readiness_gate"
+    },
+    {
+      "deterministicDigest": "07c01b3ffdc96a85d47a44ce0ea8c8cadef4b91daa73e34ef746f4df10bee3d8",
+      "expectedScope": "operator decision layer",
+      "requiredForGa": true,
+      "sourceStage": "A4",
+      "status": "PASS",
+      "testMatrixId": "b919c866bbcada048846d2af3daa11c48620fa3974c6a9197284a31c229d150a",
+      "testPath": "AN_VANTARIS_ONE/tests/operator_review_decision"
+    },
+    {
+      "deterministicDigest": "8a7246066e003a88e1f4bb616fee37cfa8516ce02bdcadfbeb125f7e14aa1cfd",
+      "expectedScope": "operations console handoff",
+      "requiredForGa": true,
+      "sourceStage": "A5",
+      "status": "PASS",
+      "testMatrixId": "cabca7d0b355f8551285a9f8805cb4051830bbec66633a57e23fa55ddae3ae62",
+      "testPath": "AN_VANTARIS_ONE/tests/operations_console_handoff_gate"
+    },
+    {
+      "deterministicDigest": "9b453f01ff7bae68f0d4374f761760c1bda7a0f7593d1d48545ce70dc002b433",
+      "expectedScope": "API/frontend implementation readiness",
+      "requiredForGa": true,
+      "sourceStage": "A6",
+      "status": "PASS",
+      "testMatrixId": "213d63cb01aa9347db7a9011ef32282e1a09223e2bdfe1364b3fc8b61497e9d1",
+      "testPath": "AN_VANTARIS_ONE/tests/api_frontend_implementation_gate"
+    },
+    {
+      "deterministicDigest": "877fe3359ef9144df1faf904f0fb27eaa90361d7c456566c5f73587b0163c8cf",
+      "expectedScope": "read-only API release gate",
+      "requiredForGa": true,
+      "sourceStage": "A7",
+      "status": "PASS",
+      "testMatrixId": "3c15283dbb750e676333d7ae41f07d884fd23073b58c3e8cb6ef185c14e45624",
+      "testPath": "AN_VANTARIS_ONE/tests/read_only_api_release_gate"
+    },
+    {
+      "deterministicDigest": "43acff3c044fec90eb988a4bd4fc83bacb30052740398f3b2ef23e34e7db8ffe",
+      "expectedScope": "read-only frontend release gate",
+      "requiredForGa": true,
+      "sourceStage": "A8",
+      "status": "PASS",
+      "testMatrixId": "8a526166cf329ed7b98f3ee1709d3f67573048b8f4c181883c91f1a75ba2ce4d",
+      "testPath": "AN_VANTARIS_ONE/tests/read_only_frontend_release_gate"
+    },
+    {
+      "deterministicDigest": "6a48c82df03e6ef36828e59d019872ff710f7fc5d2336bccd25f18f944b16047",
+      "expectedScope": "International GA readiness alignment",
+      "requiredForGa": true,
+      "sourceStage": "GA-01",
+      "status": "PASS",
+      "testMatrixId": "3e272828bd3f94e342cad2327a5a253b2ea75adc9a8c5abd4765281e76ce5c75",
+      "testPath": "AN_VANTARIS_ONE/tests/airport_international_ga_release_gate"
+    }
+  ],
+  "validatorMatrix": [
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-airport-international-ga-release-gate.py",
+      "deterministicDigest": "cc63bdc1f7183423010f1978ecf3162b60ea66d4ef4f659a1732fd447a7a1754",
+      "expectedPassMarker": "ONE_AIRPORT_GA_01_ALIGN_AIRPORT_RELEASE_TERMINOLOGY_WITH_INTERNATIONAL_GA_PASS",
+      "requiredForGa": true,
+      "sourceStage": "GA-01",
+      "status": "PASS",
+      "validatorId": "5ca75af5740c58a4243a4eeeb6ed55cc42503e963605c453202f0fffdc7c63a4",
+      "validatorName": "validate-one-airport-international-ga-release-gate.py"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-airport-read-only-frontend-release-gate.py",
+      "deterministicDigest": "95fdff9712708aa25c21b4b780820abcafdcf9bb51edd2c19d60245e9108a32f",
+      "expectedPassMarker": "ONE_AIRPORT_A8_03_READ_ONLY_FRONTEND_IMPLEMENTATION_RELEASE_GATE_PASS",
+      "requiredForGa": true,
+      "sourceStage": "A8",
+      "status": "PASS",
+      "validatorId": "97fc5c70d30f047b92077a7bf9c708be309f8822fd54da0348031788af8866b6",
+      "validatorName": "validate-one-airport-read-only-frontend-release-gate.py"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-airport-read-only-frontend-page-contract.py",
+      "deterministicDigest": "2347f2604117f7e7fff18de4bd9445320c057d80e3d9a6488904a23fb0941020",
+      "expectedPassMarker": "ONE_AIRPORT_A8_02_READ_ONLY_FRONTEND_PAGE_CONTRACT_AND_LOCAL_SMOKE_GATE_PASS",
+      "requiredForGa": true,
+      "sourceStage": "A8",
+      "status": "PASS",
+      "validatorId": "f7fb050d956af42b9d2139dd08ebe34ea033a2e3ce690aedefc5e8b2828d5994",
+      "validatorName": "validate-one-airport-read-only-frontend-page-contract.py"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-airport-read-only-frontend-skeleton.py",
+      "deterministicDigest": "a1d5575affa81892f0409278f59d88bae4cfc98971d1d41f70b2587112783fc6",
+      "expectedPassMarker": "ONE_AIRPORT_A8_01_READ_ONLY_FRONTEND_SKELETON_FOUNDATION_PASS",
+      "requiredForGa": true,
+      "sourceStage": "A8",
+      "status": "PASS",
+      "validatorId": "11733029d2d4c972c123f3ab9df7fcb9f212a34b62c3a229d127d0fc73e7dd41",
+      "validatorName": "validate-one-airport-read-only-frontend-skeleton.py"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-airport-read-only-api-release-gate.py",
+      "deterministicDigest": "035896c10bbd5085f2f80c7bb62af2cc93e053b7e30d7a454eae4b6b0c0340a4",
+      "expectedPassMarker": "ONE_AIRPORT_A7_04_READ_ONLY_API_IMPLEMENTATION_RELEASE_GATE_PASS",
+      "requiredForGa": true,
+      "sourceStage": "A7",
+      "status": "PASS",
+      "validatorId": "a83f068e2c51a75e2b2c9894ff60f745880a900eb989279eb814a9e4fcd08280",
+      "validatorName": "validate-one-airport-read-only-api-release-gate.py"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-airport-read-only-api-mock-route-contract.py",
+      "deterministicDigest": "3ed4be7e56fc17557bf4040f52d46f95b0d2e75d40b068db82ffb132b2e5d580",
+      "expectedPassMarker": "ONE_AIRPORT_A7_03_READ_ONLY_API_MOCK_ROUTE_CONTRACT_AND_LOCAL_SMOKE_GATE_PASS",
+      "requiredForGa": true,
+      "sourceStage": "A7",
+      "status": "PASS",
+      "validatorId": "2ed826f103edf0f6643608b0c42068d04778857641b00de3ac62744d3a06aa98",
+      "validatorName": "validate-one-airport-read-only-api-mock-route-contract.py"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-airport-read-only-api-response-contract.py",
+      "deterministicDigest": "623ecd0ec4f1662e40912d4a378135301617671104e3679e1232c24a4edf4708",
+      "expectedPassMarker": "ONE_AIRPORT_A7_02_READ_ONLY_API_RESPONSE_CONTRACT_AND_VALIDATION_GATE_PASS",
+      "requiredForGa": true,
+      "sourceStage": "A7",
+      "status": "PASS",
+      "validatorId": "1d7c4d1ee0fd26b8767a5abb5642cbc4c03ed44d50f5da7cbcb3970b1c17d436",
+      "validatorName": "validate-one-airport-read-only-api-response-contract.py"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-airport-read-only-api-skeleton.py",
+      "deterministicDigest": "9596ac383f12b7b44aba3ed384320aa2a198071b3591d85fda85072f7e60fb17",
+      "expectedPassMarker": "ONE_AIRPORT_A7_01_READ_ONLY_API_SKELETON_FOUNDATION_PASS",
+      "requiredForGa": true,
+      "sourceStage": "A7",
+      "status": "PASS",
+      "validatorId": "989b4a56166e1b9c314c67e4db5344ded94dae1a646d2e80fd36212a555c16cb",
+      "validatorName": "validate-one-airport-read-only-api-skeleton.py"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-airport-api-frontend-implementation-gate.py",
+      "deterministicDigest": "c518393edf75d2ef61e552545d4d636ccfb64b61de01bde1c61849985d8b226b",
+      "expectedPassMarker": "ONE_AIRPORT_A6_02_API_FRONTEND_IMPLEMENTATION_READINESS_RELEASE_GATE_PASS",
+      "requiredForGa": true,
+      "sourceStage": "A6",
+      "status": "PASS",
+      "validatorId": "f36ff8ed379e1c518e2afc8deef4fd1b578bc7cc0362f2cbd592d84f66b2a4a0",
+      "validatorName": "validate-one-airport-api-frontend-implementation-gate.py"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-airport-api-frontend-readiness-contract.py",
+      "deterministicDigest": "0d2bd046a52d4d41c2084d113c738bf8a630a5fd75b21806ae0f7be634ef10e1",
+      "expectedPassMarker": "ONE_AIRPORT_A6_01_API_FRONTEND_READINESS_CONTRACT_FREEZE_PASS",
+      "requiredForGa": true,
+      "sourceStage": "A6",
+      "status": "PASS",
+      "validatorId": "fe13dd67e1570b670aa7173e95c8e0561a85a99d3f1145124dfc5c4c693721ea",
+      "validatorName": "validate-one-airport-api-frontend-readiness-contract.py"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-airport-operations-console-handoff-gate.py",
+      "deterministicDigest": "c5d057c30d2e839a85cb6ce35db735e3619349529d70675e7dc2fd1fedc64642",
+      "expectedPassMarker": "ONE_AIRPORT_A5_02_AIRPORT_CONSOLE_PACKAGE_READINESS_AND_HANDOFF_GATE_PASS",
+      "requiredForGa": true,
+      "sourceStage": "A5",
+      "status": "PASS",
+      "validatorId": "e646cf069fed6646f68dc83da1276868c33e90a578b306324c878baa76a79127",
+      "validatorName": "validate-one-airport-operations-console-handoff-gate.py"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-airport-operations-console-package.py",
+      "deterministicDigest": "13bd5d790cb9914b02db671b9bc70a46a20545327fde8ea19b582e512ced430e",
+      "expectedPassMarker": "ONE_AIRPORT_A5_01_READ_ONLY_AIRPORT_OPERATIONS_CONSOLE_PACKAGE_FOUNDATION_PASS",
+      "requiredForGa": true,
+      "sourceStage": "A5",
+      "status": "PASS",
+      "validatorId": "75d290cc3ecfd1e8ba31318b61f5e649fc3befc4872f8ece78320e8ed540b7a0",
+      "validatorName": "validate-one-airport-operations-console-package.py"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-airport-a4-readiness-release-gate.py",
+      "deterministicDigest": "e90092d17659b88f9ccc27be6594f77cb1414b8d505c40a74d1a8bfed9493360",
+      "expectedPassMarker": "ONE_AIRPORT_A4_04_OPERATOR_REVIEW_READINESS_AND_RELEASE_GATE_PASS",
+      "requiredForGa": true,
+      "sourceStage": "A4",
+      "status": "PASS",
+      "validatorId": "d843c0782c922c109f5a007f49c26acbb6e8bf22e4a64ee38d457fa02743646d",
+      "validatorName": "validate-one-airport-a4-readiness-release-gate.py"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-airport-a3-readiness-release-gate.py",
+      "deterministicDigest": "470e36a4cf67b0dc1a3dc303a589a945a5ee74328b807f0f5fb82b98330e5db8",
+      "expectedPassMarker": "ONE_AIRPORT_A3_07_A3_READINESS_AGGREGATION_AND_RELEASE_GATE_PASS",
+      "requiredForGa": true,
+      "sourceStage": "A3",
+      "status": "PASS",
+      "validatorId": "d8a297ec8fdc4b66ea66177ddba2d981c17f01fb5d26a22050691e19850eb13d",
+      "validatorName": "validate-one-airport-a3-readiness-release-gate.py"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-uconsole-operator-review-queue-projection.py",
+      "deterministicDigest": "cea245d7356519ceafc27b5bb0c987042b28acd1a9ca9eec7a966483e751d30a",
+      "expectedPassMarker": "ONE_AIRPORT_A4_02_OPERATOR_REVIEW_UCONSOLE_QUEUE_PROJECTION_PASS",
+      "requiredForGa": true,
+      "sourceStage": "A4",
+      "status": "PASS",
+      "validatorId": "628b1c6c19df6b3012a0c375fb7331b9e8a904af39821e2ecfb9b83d30784338",
+      "validatorName": "validate-one-uconsole-operator-review-queue-projection.py"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-uconsole-alarm-event-operations-projection.py",
+      "deterministicDigest": "0377c783ddd0eb5e4e86cd287d43fa0252e6d0966f407f19fa133a893ae059e6",
+      "expectedPassMarker": "ONE_AIRPORT_A3_06_READ_ONLY_UCONSOLE_ALARM_EVENT_OPERATIONS_PROJECTION_PASS",
+      "requiredForGa": true,
+      "sourceStage": "A3",
+      "status": "PASS",
+      "validatorId": "7884f8c545a0b87c8a17adc498a4a50e896fa74b27582d3b55922a2f0f77b18b",
+      "validatorName": "validate-one-uconsole-alarm-event-operations-projection.py"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-uconsole-integration-health-projection.py",
+      "deterministicDigest": "4528f1c32ee2a2862ccc7445d0b9bf86db64f308973af1c0fef6edee32658e10",
+      "expectedPassMarker": "ONE_AIRPORT_A2_05_READ_ONLY_UCONSOLE_INTEGRATION_HEALTH_PROJECTION_PASS",
+      "requiredForGa": true,
+      "sourceStage": "A2",
+      "status": "PASS",
+      "validatorId": "ebcf0681223977ff5ae08b6a62b2ec5605b7f4ceffc6e7fa743629fdd4be22d4",
+      "validatorName": "validate-one-uconsole-integration-health-projection.py"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-airport-source-system-review.py",
+      "deterministicDigest": "b98821eae3d405f5fb9379b6ffaf69b513b3f96b10ed914ea9c3e9ff3c8c6bf4",
+      "expectedPassMarker": "ONE_AIRPORT_A2_02_SOURCE_SYSTEM_EVIDENCE_BINDING_AND_REVIEW_PROJECTION_PASS",
+      "requiredForGa": true,
+      "sourceStage": "A1",
+      "status": "PASS",
+      "validatorId": "735f695a805b674d5e30432538c89abd70b13ab70b41a52653018671edc1dea9",
+      "validatorName": "validate-one-airport-source-system-review.py"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-source-system-registry.py",
+      "deterministicDigest": "203c5763b557136329a01f6ad262f953194b119a5a3548f98e58540fd05512e6",
+      "expectedPassMarker": "ONE_AIRPORT_A2_01_GENERIC_SOURCE_SYSTEM_REGISTRY_FOUNDATION_PASS",
+      "requiredForGa": true,
+      "sourceStage": "A1",
+      "status": "PASS",
+      "validatorId": "4faeb883b5bfc56a5c791146b6893f3fb8f8d8abb788c2a736b369a73c8f98dc",
+      "validatorName": "validate-one-source-system-registry.py"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-boundaries.py",
+      "deterministicDigest": "8f2d321f136d0da03249a359c7ec3dcf95f46400f3460ee867e4e1e36f038a72",
+      "expectedPassMarker": "ONE_BOUNDARY_BASELINE_PASS",
+      "requiredForGa": true,
+      "sourceStage": "GA-02",
+      "status": "PASS",
+      "validatorId": "63dd302b25d2f803b087188798216466ccc706e1c6db5cf5a64cd6671c513118",
+      "validatorName": "validate-one-boundaries.py"
+    }
+  ]
+}

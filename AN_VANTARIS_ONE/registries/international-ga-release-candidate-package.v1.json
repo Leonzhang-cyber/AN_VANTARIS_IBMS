@@ -1,0 +1,21 @@
+{
+  "apiEnabled": false,
+  "approvalExecutionAllowed": false,
+  "authority": "ONE-AIRPORT-GA-02",
+  "contractVersion": "international-ga-release-candidate-package.v1",
+  "crossIndustry": true,
+  "databaseWriteAllowed": false,
+  "description": "International GA release candidate packaging and validation matrix.",
+  "frontendEnabled": false,
+  "implementationStatus": "INTERNATIONAL_GA_RELEASE_CANDIDATE_PACKAGING_AND_VALIDATION_MATRIX_COMPLETE",
+  "internationalGaPackageAllowed": true,
+  "internationalGaReadinessAllowed": true,
+  "productionActivationAllowed": false,
+  "productionApiAllowed": false,
+  "productionFrontendAllowed": false,
+  "pushAllowed": false,
+  "readinessOutcome": "INTERNATIONAL_GA_RELEASE_CANDIDATE_PACKAGE_READY_FOR_HANDOFF",
+  "releaseCandidateAllowed": true,
+  "runtimeActivationAllowed": false,
+  "tagAllowed": false
+}
