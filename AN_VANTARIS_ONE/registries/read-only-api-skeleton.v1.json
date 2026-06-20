@@ -1,0 +1,28 @@
+{
+  "apiEnabled": false,
+  "apiSkeletonPhaseAllowed": true,
+  "airportSpecific": false,
+  "auditWriteCount": 0,
+  "authority": "ONE-AIRPORT-A7-01",
+  "canonicalWriteCount": 0,
+  "containsCustomerAssetIdentifiers": false,
+  "contractVersion": "read-only-api-skeleton.v1",
+  "crossIndustry": true,
+  "databaseWriteCount": 0,
+  "decisionWriteCount": 0,
+  "description": "Read-only API skeleton foundation for Airport Operations Console Package planning.",
+  "frontendEnabled": false,
+  "implementationStatus": "READ_ONLY_API_SKELETON_FOUNDATION_COMPLETE",
+  "productionActivationAllowed": false,
+  "productionApiAllowed": false,
+  "pushAllowed": false,
+  "readOnly": true,
+  "readinessOutcome": "READ_ONLY_API_SKELETON_READY_FOR_FUTURE_IMPLEMENTATION",
+  "runtimeActivationAllowed": false,
+  "sourceArtifacts": [
+    "airport-api-frontend-implementation-readiness-gate.v1.json",
+    "airport-api-frontend-readiness-contract.v1.json",
+    "airport-operations-console-package.v1.json",
+    "airport-operations-console-handoff-gate.v1.json"
+  ]
+}

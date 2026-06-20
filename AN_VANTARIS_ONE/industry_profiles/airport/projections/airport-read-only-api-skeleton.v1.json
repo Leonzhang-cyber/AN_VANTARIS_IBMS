@@ -1,0 +1,649 @@
+{
+  "apiReadinessGates": [
+    {
+      "blocking": true,
+      "deterministicDigest": "21402e1da131fc2bb0f61a261bb207aac2504aea480ef94ddb134670befb790b",
+      "gateId": "G01_API_SKELETON_ENDPOINT_COMPLETENESS",
+      "gateName": "API skeleton endpoint completeness",
+      "reasonCodes": [
+        "8_ENDPOINT_SKELETONS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "87d536c9ed2c2aee0154832aebc4eba5d61de01830c815f261a74f3e450aae07",
+      "gateId": "G02_API_METHOD_BOUNDARY",
+      "gateName": "API method boundary",
+      "reasonCodes": [
+        "ALL_ENDPOINTS_GET"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "d4f5e6712faf1d50c900303c9b5829caf4969c9ef8b1dc9dff63cd1a29420cc2",
+      "gateId": "G03_API_READ_ONLY_BOUNDARY",
+      "gateName": "API read-only boundary",
+      "reasonCodes": [
+        "READ_ONLY_TRUE_WRITES_DISABLED"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "6d29927ff7fa82d01e0557fce36c674b9f01b974f89f1d92b7e83a518f2cc428",
+      "gateId": "G04_API_DATABASE_BOUNDARY",
+      "gateName": "API database boundary",
+      "reasonCodes": [
+        "DATABASE_ACCESS_DISABLED"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "7a22f0e57dbefa7cf4e61d9c58a870ae6d15cc2ab4e62d4319a23c9a8da1efdc",
+      "gateId": "G05_API_PRODUCTION_BOUNDARY",
+      "gateName": "API production boundary",
+      "reasonCodes": [
+        "PRODUCTION_DISABLED"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "90c61ddb26357d721c2e90d4da903317fd3df351e357b8f6d698ccc132edff88",
+      "gateId": "G06_API_RUNTIME_BOUNDARY",
+      "gateName": "API runtime boundary",
+      "reasonCodes": [
+        "RUNTIME_ACTIVATION_DISABLED"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "093fea7baa5aefc8a0e94be3d023faa4c472fd4791b9c731dff844df49a1773c",
+      "gateId": "G07_API_AUTH_POLICY_DECLARED",
+      "gateName": "API auth policy declared",
+      "reasonCodes": [
+        "ALL_ENDPOINTS_REQUIRE_AUTH_OR_ROLE_POLICY"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "bd9919f1318dc249de6bde64409296c4df40ae61766867ac23c20dce8a0281b5",
+      "gateId": "G08_RESPONSE_CONTRACT_COMPLETENESS",
+      "gateName": "Response contract completeness",
+      "reasonCodes": [
+        "8_RESPONSE_CONTRACTS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "600dd4a2592f5caa6de7183d55bc59d6e84eab394277d5c64561bffe3b9153d3",
+      "gateId": "G09_ROUTE_GROUP_COMPLETENESS",
+      "gateName": "Route group completeness",
+      "reasonCodes": [
+        "3_ROUTE_GROUPS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "7d761d32739ce9692ddc46a91ec33622ab306ddac1bee0bde237b57ca3170e6e",
+      "gateId": "G10_A6_IMPLEMENTATION_GATE_DEPENDENCY",
+      "gateName": "A6 implementation gate dependency",
+      "reasonCodes": [
+        "API_SKELETON_PHASE_ALLOWED_TRUE"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "4dbda69edc3188a56e1c2523a0ee481911569ef590f399d9eaf6659b035d0d9b",
+      "gateId": "G11_NO_BACKEND_ROUTE_IMPLEMENTATION",
+      "gateName": "No backend route implementation",
+      "reasonCodes": [
+        "NO_PRODUCTION_BACKEND_ROUTE_FILES_CHANGED"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "2923589716c9f7fb367237360cdd1d3ee93308d4aa06ad874108ad8f0c15a359",
+      "gateId": "G12_CUSTOMER_IDENTIFIER_SAFETY",
+      "gateName": "Customer identifier safety",
+      "reasonCodes": [
+        "NO_CUSTOMER_IDENTIFIER_LEAKAGE"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "dab386f65e511f7d82f44f55d42433ca4236de6a81b890416a8068b23928e83e",
+      "gateId": "G13_DETERMINISTIC_OUTPUT",
+      "gateName": "Deterministic output",
+      "reasonCodes": [
+        "REPEATED_RUNNER_BYTE_IDENTICAL"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "79ec5f4c25f83b15fc77508fc238fbe54136f7db771f8645b05466f7201ea930",
+      "gateId": "G14_API_SKELETON_DECISION",
+      "gateName": "API skeleton decision",
+      "reasonCodes": [
+        "SKELETON_READY_PRODUCTION_API_DISABLED"
+      ],
+      "severity": "LOW",
+      "status": "PASS"
+    }
+  ],
+  "apiSkeletonId": "d8cf7623adb75a32f4a08e7c15c1ecc8425469c4615dd11ac740783d96877b6c",
+  "authority": "ONE-AIRPORT-A7-01",
+  "boundaryMatrix": [
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryKey": "apiEnabled",
+      "deterministicDigest": "2b4cea0daa47758b2e86d350a595303cc0c44608c918b66a61ae31863a527a1e",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryKey": "approvalWriteCount",
+      "deterministicDigest": "f8c8e707698a310750c18ea897ad651a2e444195c708c7732dc2684a73949775",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryKey": "auditWriteCount",
+      "deterministicDigest": "ced150c948da97a64bf51c4cbab525a133f8e23d7dc3ce371a903a8faad8b1dc",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryKey": "canonicalWriteCount",
+      "deterministicDigest": "5ff0128ebeef5a328323d7c520c73e91ec2fbc26feec1be1840f87129a6a4152",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryKey": "containsCustomerAssetIdentifiers",
+      "deterministicDigest": "1b038f27541d684cdc83d89c7443cfd55e9e672856ea78adae31a0634d179b3d",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryKey": "databaseWriteCount",
+      "deterministicDigest": "d6dfda7d99c838fedfaa5f3d78037e5a2f3dfe64b9213fa177b2b0e991ee0b6c",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryKey": "decisionWriteCount",
+      "deterministicDigest": "f2dfc4a327b7109337980cab704e0ad414a2cca4f702bfb459790d354b2ac40d",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryKey": "frontendEnabled",
+      "deterministicDigest": "0368601a688838fc3fc697f7b61ad55bc55843d12f5ed9668b160d9488cd03d3",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryKey": "productionActivationAllowed",
+      "deterministicDigest": "117a02f7bd31fecb4a3cc7864def0b4992d4ed9a8fd71319ef45017a59edb1c0",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryKey": "productionApiAllowed",
+      "deterministicDigest": "59627b7afb6f1507202d7dab7180145cd177c95bea33c6b911f3080775fab3c7",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryKey": "pushAllowed",
+      "deterministicDigest": "4f7882e020c156b914fcbd2bc07d248b356ed2f6ba4c39ff6dfb7965ae545e86",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryKey": "runtimeActivationAllowed",
+      "deterministicDigest": "ca42c7d4c19c2db935481f5835c1f604e3db3e008af59219aa62438f315fa47b",
+      "expectedValue": false,
+      "status": "PASS"
+    }
+  ],
+  "contractVersion": "read-only-api-skeleton.v1",
+  "deterministicDigest": "546f8b015e0599135be13b5b234a3f476b870dd362a87bd8256eb4df6e4377b5",
+  "endpointSkeletons": [
+    {
+      "authPolicy": "AUTH_REQUIRED",
+      "databaseAccessEnabled": false,
+      "deterministicDigest": "8138ed46ba7dd7091f900f37b18ec7fa9cd1bd9b59e3d1f97e7640ae5c0cca70",
+      "endpointKey": "AIRPORT_OVERVIEW",
+      "endpointSkeletonId": "1720955c0cf27964ebacbe4128051635ce9aef2e1e4380173f7f2489c27487ae",
+      "implementationState": "SKELETON_DEFINED",
+      "method": "GET",
+      "pageKey": "AIRPORT_OVERVIEW",
+      "path": "/api/v1/one/airport/console/overview",
+      "productionEnabled": false,
+      "readOnly": true,
+      "responseContractId": "6d086e1db414bde886acb820a855209828488d81c4d9aedde703efbd43ff6a75",
+      "runtimeActivationEnabled": false,
+      "sourceDataSourceKey": "A3_RELEASE_GATE",
+      "sourceProjectionType": "A3_RELEASE_GATE",
+      "writeOperationEnabled": false
+    },
+    {
+      "authPolicy": "ROLE_POLICY_REQUIRED",
+      "databaseAccessEnabled": false,
+      "deterministicDigest": "a901a47ba0aeab52eea4da4292265353f0075004497dff661e9165d0ebfd3e12",
+      "endpointKey": "ALARMS_EVENTS",
+      "endpointSkeletonId": "6cc518dc855c7e6bfbccd2a37d1db0a44e922e40dddbd66072f5520e78d8d53e",
+      "implementationState": "SKELETON_DEFINED",
+      "method": "GET",
+      "pageKey": "ALARMS_EVENTS",
+      "path": "/api/v1/one/airport/console/alarms-events",
+      "productionEnabled": false,
+      "readOnly": true,
+      "responseContractId": "46026ea0413e86c3c6e61c2bb8feca992f9da699fb1f4cf3af3e3d3df8ff9909",
+      "runtimeActivationEnabled": false,
+      "sourceDataSourceKey": "ALARM_EVENT_INTAKE",
+      "sourceProjectionType": "ALARM_EVENT_INTAKE",
+      "writeOperationEnabled": false
+    },
+    {
+      "authPolicy": "AUTH_REQUIRED",
+      "databaseAccessEnabled": false,
+      "deterministicDigest": "d2397e096986ceae4b18ce44c9be28d13f67392c4ee0335129d84cd3406b6f07",
+      "endpointKey": "ASSETS_TOPOLOGY",
+      "endpointSkeletonId": "95165b14ebdbd3d1eab8c62fe0f62ecc24a3f258f314e5a8e54ccd3c8a73e722",
+      "implementationState": "SKELETON_DEFINED",
+      "method": "GET",
+      "pageKey": "ASSETS_TOPOLOGY",
+      "path": "/api/v1/one/airport/console/assets-topology",
+      "productionEnabled": false,
+      "readOnly": true,
+      "responseContractId": "ed97cd8c1f67614de156e5edde582f4e905aa25cde743284fe96e07e2e609dd8",
+      "runtimeActivationEnabled": false,
+      "sourceDataSourceKey": "ALARM_EVENT_RESOLUTION",
+      "sourceProjectionType": "ALARM_EVENT_RESOLUTION",
+      "writeOperationEnabled": false
+    },
+    {
+      "authPolicy": "AUTH_REQUIRED",
+      "databaseAccessEnabled": false,
+      "deterministicDigest": "6aa8bf51c8ed0df03e91f85710f98e643b0c84fd32c104f72ccf30c07f3c6243",
+      "endpointKey": "EVIDENCE_INVESTIGATION",
+      "endpointSkeletonId": "757398e4d1c9f5a046f5bb8fa204eaf944ec8a41681e78ebc20e7b7addd2ade8",
+      "implementationState": "SKELETON_DEFINED",
+      "method": "GET",
+      "pageKey": "EVIDENCE_INVESTIGATION",
+      "path": "/api/v1/one/airport/console/evidence-investigation",
+      "productionEnabled": false,
+      "readOnly": true,
+      "responseContractId": "ce1ac9feb310ba74830f8dc3ca557bece9a551495d4f3e7c5e41eb714a77180a",
+      "runtimeActivationEnabled": false,
+      "sourceDataSourceKey": "EVIDENCE_INVESTIGATION",
+      "sourceProjectionType": "EVIDENCE_INVESTIGATION",
+      "writeOperationEnabled": false
+    },
+    {
+      "authPolicy": "AUTH_REQUIRED",
+      "databaseAccessEnabled": false,
+      "deterministicDigest": "8d6d6852080e26f7ade622737221f544a958e664719ca183ae63470eed2ecb87",
+      "endpointKey": "FAULT_CASES",
+      "endpointSkeletonId": "c4bf38ec74cbfb7571fdf2394757da1432b5e0cce0385669c85ed92cc5093812",
+      "implementationState": "SKELETON_DEFINED",
+      "method": "GET",
+      "pageKey": "FAULT_CASES",
+      "path": "/api/v1/one/airport/console/fault-cases",
+      "productionEnabled": false,
+      "readOnly": true,
+      "responseContractId": "274f07398cb55a25898535f5f33db8f2e20f2b14d526952c901cf7216094b0c5",
+      "runtimeActivationEnabled": false,
+      "sourceDataSourceKey": "FAULTCASE_CANDIDATES",
+      "sourceProjectionType": "FAULTCASE_CANDIDATES",
+      "writeOperationEnabled": false
+    },
+    {
+      "authPolicy": "AUTH_REQUIRED",
+      "databaseAccessEnabled": false,
+      "deterministicDigest": "79817ee858649d31e013fd86b4d32924cb938412f1a4a1fd99604ba8ddb7cf32",
+      "endpointKey": "MAINTENANCE_WORK_ORDERS",
+      "endpointSkeletonId": "a109d3f0438d34eb1a8471175c361643f6b06fec38b2dc53c4cd52b3ba09a4e9",
+      "implementationState": "SKELETON_DEFINED",
+      "method": "GET",
+      "pageKey": "MAINTENANCE_WORK_ORDERS",
+      "path": "/api/v1/one/airport/console/maintenance-work-orders",
+      "productionEnabled": false,
+      "readOnly": true,
+      "responseContractId": "f69a8a9c68331739aa20f57f8220ec589d6a972d66f6e01f13b8ad1b8ae8ae2b",
+      "runtimeActivationEnabled": false,
+      "sourceDataSourceKey": "WORKORDER_INTENT_CANDIDATES",
+      "sourceProjectionType": "WORKORDER_INTENT_CANDIDATES",
+      "writeOperationEnabled": false
+    },
+    {
+      "authPolicy": "ROLE_POLICY_REQUIRED",
+      "databaseAccessEnabled": false,
+      "deterministicDigest": "f204dc8048d8a9d1bc70fa9c01556b06129a349e03e016094a6822b883441b43",
+      "endpointKey": "REPORTS",
+      "endpointSkeletonId": "8cf995ddfa00d2dfe9ed0ce5dcfaad47791b6b477ee25db6dfb3cb86d8983daa",
+      "implementationState": "SKELETON_DEFINED",
+      "method": "GET",
+      "pageKey": "REPORTS",
+      "path": "/api/v1/one/airport/console/reports",
+      "productionEnabled": false,
+      "readOnly": true,
+      "responseContractId": "47e345c015d052340d28a675fa22d07a816f87b2386e0edcf65866c2fac7666a",
+      "runtimeActivationEnabled": false,
+      "sourceDataSourceKey": "A4_RELEASE_GATE",
+      "sourceProjectionType": "A4_RELEASE_GATE",
+      "writeOperationEnabled": false
+    },
+    {
+      "authPolicy": "AUTH_REQUIRED",
+      "databaseAccessEnabled": false,
+      "deterministicDigest": "24ee7f463217708b50720848040796aed73f131bd891aca319c493cf42ae0e99",
+      "endpointKey": "SYSTEMS_INTEGRATION_HEALTH",
+      "endpointSkeletonId": "c305fe5d95476d4d38033a836e765b129f77feaeaba008309c5d96af2a9ed8e0",
+      "implementationState": "SKELETON_DEFINED",
+      "method": "GET",
+      "pageKey": "SYSTEMS_INTEGRATION_HEALTH",
+      "path": "/api/v1/one/airport/console/systems-integration-health",
+      "productionEnabled": false,
+      "readOnly": true,
+      "responseContractId": "43659a79d1e9b2a186a241f27a79a06c6a575fdfdc5e46dd304ad733d637f11f",
+      "runtimeActivationEnabled": false,
+      "sourceDataSourceKey": "INTEGRATION_HEALTH",
+      "sourceProjectionType": "INTEGRATION_HEALTH",
+      "writeOperationEnabled": false
+    }
+  ],
+  "generatedAtPolicy": "DETERMINISTIC_NO_VOLATILE_TIMESTAMP",
+  "implementationStatus": "READ_ONLY_API_SKELETON_FOUNDATION_COMPLETE",
+  "profileId": "airport-read-only-api-skeleton-profile-v1",
+  "readinessOutcome": "READ_ONLY_API_SKELETON_READY_FOR_FUTURE_IMPLEMENTATION",
+  "responseContracts": [
+    {
+      "containsCustomerAssetIdentifiers": false,
+      "deterministicDigest": "653277ee24521d707b541b21e4c281e4a88e14fc13b47c4c0c56b3816f196597",
+      "endpointKey": "AIRPORT_OVERVIEW",
+      "facetsSupported": true,
+      "filtersSupported": true,
+      "paginationSupported": true,
+      "projectionRootKey": "summary",
+      "responseContractId": "6d086e1db414bde886acb820a855209828488d81c4d9aedde703efbd43ff6a75",
+      "responseShape": {
+        "data": "summary",
+        "facets": "facets",
+        "filters": "filters",
+        "pagination": "defaultPage",
+        "summary": "summary"
+      },
+      "sourceArtifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-a3-readiness-release-gate.v1.json"
+    },
+    {
+      "containsCustomerAssetIdentifiers": false,
+      "deterministicDigest": "db27df531f0d8c449519b28dafd8be0b2d04556ae9bac138a2a0530ade044d9f",
+      "endpointKey": "ALARMS_EVENTS",
+      "facetsSupported": true,
+      "filtersSupported": true,
+      "paginationSupported": true,
+      "projectionRootKey": "operationsRows",
+      "responseContractId": "46026ea0413e86c3c6e61c2bb8feca992f9da699fb1f4cf3af3e3d3df8ff9909",
+      "responseShape": {
+        "data": "operationsRows",
+        "facets": "facets",
+        "filters": "filters",
+        "pagination": "defaultPage",
+        "summary": "summary"
+      },
+      "sourceArtifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-alarm-event-intake-candidates.v1.json"
+    },
+    {
+      "containsCustomerAssetIdentifiers": false,
+      "deterministicDigest": "3a4b9aa5dfe5295bd100e65709dfc1fcfc7273fe8eb83003346bc5e067b1a6af",
+      "endpointKey": "ASSETS_TOPOLOGY",
+      "facetsSupported": true,
+      "filtersSupported": true,
+      "paginationSupported": true,
+      "projectionRootKey": "resolutionRows",
+      "responseContractId": "ed97cd8c1f67614de156e5edde582f4e905aa25cde743284fe96e07e2e609dd8",
+      "responseShape": {
+        "data": "resolutionRows",
+        "facets": "facets",
+        "filters": "filters",
+        "pagination": "defaultPage",
+        "summary": "summary"
+      },
+      "sourceArtifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-alarm-event-asset-resolution-review.v1.json"
+    },
+    {
+      "containsCustomerAssetIdentifiers": false,
+      "deterministicDigest": "10ecab460edb5f495afe39eb17c9f1d8f7a39e66d77344cb629fb5eac222ebe2",
+      "endpointKey": "EVIDENCE_INVESTIGATION",
+      "facetsSupported": true,
+      "filtersSupported": true,
+      "paginationSupported": true,
+      "projectionRootKey": "investigationCases",
+      "responseContractId": "ce1ac9feb310ba74830f8dc3ca557bece9a551495d4f3e7c5e41eb714a77180a",
+      "responseShape": {
+        "data": "investigationCases",
+        "facets": "facets",
+        "filters": "filters",
+        "pagination": "defaultPage",
+        "summary": "summary"
+      },
+      "sourceArtifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-evidence-investigation.v1.json"
+    },
+    {
+      "containsCustomerAssetIdentifiers": false,
+      "deterministicDigest": "3102af12ed2197dccfcae306d34dc7eb5db3a6e97177b321659a2be2ee80dd6a",
+      "endpointKey": "FAULT_CASES",
+      "facetsSupported": true,
+      "filtersSupported": true,
+      "paginationSupported": true,
+      "projectionRootKey": "faultCaseCandidates",
+      "responseContractId": "274f07398cb55a25898535f5f33db8f2e20f2b14d526952c901cf7216094b0c5",
+      "responseShape": {
+        "data": "faultCaseCandidates",
+        "facets": "facets",
+        "filters": "filters",
+        "pagination": "defaultPage",
+        "summary": "summary"
+      },
+      "sourceArtifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-faultcase-candidates.v1.json"
+    },
+    {
+      "containsCustomerAssetIdentifiers": false,
+      "deterministicDigest": "c799e9464baaf4f2a9c6ea53c24750d8ff0519327125a3e8e073eb1f4e97ca6a",
+      "endpointKey": "MAINTENANCE_WORK_ORDERS",
+      "facetsSupported": true,
+      "filtersSupported": true,
+      "paginationSupported": true,
+      "projectionRootKey": "workOrderIntentCandidates",
+      "responseContractId": "f69a8a9c68331739aa20f57f8220ec589d6a972d66f6e01f13b8ad1b8ae8ae2b",
+      "responseShape": {
+        "data": "workOrderIntentCandidates",
+        "facets": "facets",
+        "filters": "filters",
+        "pagination": "defaultPage",
+        "summary": "summary"
+      },
+      "sourceArtifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-workorder-intent-candidates.v1.json"
+    },
+    {
+      "containsCustomerAssetIdentifiers": false,
+      "deterministicDigest": "3e5f2f7564daa02ae2fba549164e37a80c1f3b1120e9f8500207ab4699412c54",
+      "endpointKey": "REPORTS",
+      "facetsSupported": true,
+      "filtersSupported": true,
+      "paginationSupported": true,
+      "projectionRootKey": "summary",
+      "responseContractId": "47e345c015d052340d28a675fa22d07a816f87b2386e0edcf65866c2fac7666a",
+      "responseShape": {
+        "data": "summary",
+        "facets": "facets",
+        "filters": "filters",
+        "pagination": "defaultPage",
+        "summary": "summary"
+      },
+      "sourceArtifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-a4-readiness-release-gate.v1.json"
+    },
+    {
+      "containsCustomerAssetIdentifiers": false,
+      "deterministicDigest": "87c005437f8c99b6fa6711148804482bd285773abd2b7731196f73c9805f5d0b",
+      "endpointKey": "SYSTEMS_INTEGRATION_HEALTH",
+      "facetsSupported": true,
+      "filtersSupported": true,
+      "paginationSupported": true,
+      "projectionRootKey": "sourceSystemRows",
+      "responseContractId": "43659a79d1e9b2a186a241f27a79a06c6a575fdfdc5e46dd304ad733d637f11f",
+      "responseShape": {
+        "data": "sourceSystemRows",
+        "facets": "facets",
+        "filters": "filters",
+        "pagination": "defaultPage",
+        "summary": "summary"
+      },
+      "sourceArtifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-integration-health.v1.json"
+    }
+  ],
+  "routeGroups": [
+    {
+      "deterministicDigest": "7fc5db763319562dceba6e1c2381ce93f70edc36d99df1636e9868bef515b75d",
+      "endpointSkeletonIds": [
+        "1720955c0cf27964ebacbe4128051635ce9aef2e1e4380173f7f2489c27487ae",
+        "c305fe5d95476d4d38033a836e765b129f77feaeaba008309c5d96af2a9ed8e0",
+        "95165b14ebdbd3d1eab8c62fe0f62ecc24a3f258f314e5a8e54ccd3c8a73e722"
+      ],
+      "groupKey": "AIRPORT_OPERATIONS_API",
+      "readOnly": true,
+      "routeGroupId": "a6b88b9a6267dafb2c293dce980ab4396cd6ba86788a662b9aedf53586c1d0c5",
+      "title": "Airport Operations API"
+    },
+    {
+      "deterministicDigest": "8363ac13b089fe9557862670d29b84f1ab7fa2a91edd5e3d79e641a9901dd739",
+      "endpointSkeletonIds": [
+        "6cc518dc855c7e6bfbccd2a37d1db0a44e922e40dddbd66072f5520e78d8d53e",
+        "c4bf38ec74cbfb7571fdf2394757da1432b5e0cce0385669c85ed92cc5093812",
+        "a109d3f0438d34eb1a8471175c361643f6b06fec38b2dc53c4cd52b3ba09a4e9"
+      ],
+      "groupKey": "ALARM_FAULT_WORK_API",
+      "readOnly": true,
+      "routeGroupId": "d0eaf08a07266f0d96d837d2c1e0ca55c445c14932474569d09a815e488d97be",
+      "title": "Alarm, Fault & Work API"
+    },
+    {
+      "deterministicDigest": "d3dc0df2ec154eb2088d6d021bd84ff02dd385f240665c0b6cdfde46b6148d5d",
+      "endpointSkeletonIds": [
+        "757398e4d1c9f5a046f5bb8fa204eaf944ec8a41681e78ebc20e7b7addd2ade8",
+        "8cf995ddfa00d2dfe9ed0ce5dcfaad47791b6b477ee25db6dfb3cb86d8983daa"
+      ],
+      "groupKey": "EVIDENCE_REPORTING_API",
+      "readOnly": true,
+      "routeGroupId": "80d40b27b19f0546cf597fa5e9fe73407c5fe7c0ecf971b2f68d00c34b180dc5",
+      "title": "Evidence & Reporting API"
+    }
+  ],
+  "sourceArtifactReferences": [
+    {
+      "artifactType": "A6_IMPLEMENTATION_GATE",
+      "deterministicDigest": "0986558bc91a89b2df1101bb74254bcb30239cfbecb5889d4d7e0247be05a974",
+      "digest": "005d0ec5ef4d8d8b7616a2a8820303fd22f9f15d10c88e9c80e3b3814938c816",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-api-frontend-implementation-readiness-gate.v1.json"
+    },
+    {
+      "artifactType": "A6_READINESS_CONTRACT",
+      "deterministicDigest": "50aca89aad614db5150fdce6ff0a40ff7b5fec3c8cb1e9eb9dea93428e061236",
+      "digest": "8896a2732624ed05cac0bab543d3f7366b36f8a2040ea527c64677f94d854843",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-api-frontend-readiness-contract.v1.json"
+    },
+    {
+      "artifactType": "A5_OPERATIONS_CONSOLE_PACKAGE",
+      "deterministicDigest": "964ebe87d941e4d8839bd22877c179005651d795061e06a7072165be54e8a634",
+      "digest": "8641f7f58c802ec1b7a22b7a619897dec3c2c9583bf28bbf7291eac81ef253f5",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-operations-console-package.v1.json"
+    },
+    {
+      "artifactType": "A5_HANDOFF_GATE",
+      "deterministicDigest": "0fa1476f3c1c296a96b90384fe4c2ea356d47673bd2dcff41e569ae148e50c4b",
+      "digest": "955ea3a451fc8419d823e93cd55931398689e6d7b1d5cca77626dd9676bd979a",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-operations-console-handoff-gate.v1.json"
+    }
+  ],
+  "summary": {
+    "airportSpecific": false,
+    "apiEnabled": false,
+    "apiSkeletonPhaseAllowed": true,
+    "approvalWriteCount": 0,
+    "auditWriteCount": 0,
+    "authPolicyRequiredCount": 8,
+    "blockingGateFailureCount": 0,
+    "canonicalWriteCount": 0,
+    "containsCustomerAssetIdentifiers": false,
+    "crossIndustry": true,
+    "databaseAccessEnabledEndpointCount": 0,
+    "databaseWriteCount": 0,
+    "decisionWriteCount": 0,
+    "endpointSkeletonCount": 8,
+    "frontendEnabled": false,
+    "getEndpointCount": 8,
+    "passedGateCount": 14,
+    "productionActivationAllowed": false,
+    "productionApiAllowed": false,
+    "productionEnabledEndpointCount": 0,
+    "pushAllowed": false,
+    "readOnlyEndpointCount": 8,
+    "readinessGateCount": 14,
+    "responseContractCount": 8,
+    "routeGroupCount": 3,
+    "runtimeActivationAllowed": false,
+    "runtimeActivationEnabledEndpointCount": 0,
+    "writeOperationEnabledEndpointCount": 0
+  }
+}
