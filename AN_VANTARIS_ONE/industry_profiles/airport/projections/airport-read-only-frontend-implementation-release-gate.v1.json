@@ -1,0 +1,998 @@
+{
+  "artifactReferences": [
+    {
+      "artifactType": "A8_READ_ONLY_FRONTEND_SKELETON",
+      "deterministicDigest": "d98b03a921abdc8d6f87f5637d3ec86e66cd1004bebe04dc834fe7274c6ff233",
+      "digest": "2c63d14f80ee1b4c41bb1419bd1fa45c10c61e30bd1d1e0accb97ce83d99ad44",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-read-only-frontend-skeleton.v1.json"
+    },
+    {
+      "artifactType": "A8_READ_ONLY_FRONTEND_PAGE_CONTRACT",
+      "deterministicDigest": "3202aaa1cf6fcf043be5b04a7af9d704d802ddf74bbea3c892ffab3a2e2c4e7a",
+      "digest": "c34b257df7e099d7c8206aff8e40f3c8a9e596007c2630639ad0bd2456d16bcb",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-read-only-frontend-page-contract.v1.json"
+    },
+    {
+      "artifactType": "A7_READ_ONLY_API_RELEASE_GATE",
+      "deterministicDigest": "b7dd8ba030db7a6c609b1d2d72cc5ecad7eb6690cd68fd8ebff3ee05709d809e",
+      "digest": "2a2569e7ee493c5147ced62370091e99703052b6f8c50cd90d26fd28c5e24f11",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-read-only-api-implementation-release-gate.v1.json"
+    },
+    {
+      "artifactType": "A6_FRONTEND_IMPLEMENTATION_GATE",
+      "deterministicDigest": "e73afbfe9b79e24a35d7b58cdb179fb3c45b9bc38fcb7323278c4f38a0b47e4c",
+      "digest": "005d0ec5ef4d8d8b7616a2a8820303fd22f9f15d10c88e9c80e3b3814938c816",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-api-frontend-implementation-readiness-gate.v1.json"
+    },
+    {
+      "artifactType": "A6_FRONTEND_READINESS_CONTRACT",
+      "deterministicDigest": "583400cb75afb3b5c57f18875e6574f81dadb46170d07be46067638e4ce00e1d",
+      "digest": "8896a2732624ed05cac0bab543d3f7366b36f8a2040ea527c64677f94d854843",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-api-frontend-readiness-contract.v1.json"
+    }
+  ],
+  "authority": "ONE-AIRPORT-A8-03",
+  "componentCoverageMatrix": [
+    {
+      "blocking": true,
+      "cardBindingPresent": true,
+      "componentBindingCount": 3,
+      "coverageId": "05aba165720133c2aa8abbf796a9c7de806a2451cba5ee593f2325f668fdd7d9",
+      "dataBindingPresent": true,
+      "deterministicDigest": "67e4c469ec7e9be7461332870b3fa2c0ad4ed09857a5e14c291f85d1278798e0",
+      "interactionContractCount": 8,
+      "pageKey": "AIRPORT_OVERVIEW",
+      "queueBindingPresent": true,
+      "status": "PASS",
+      "uiStateContractCount": 6
+    },
+    {
+      "blocking": true,
+      "cardBindingPresent": true,
+      "componentBindingCount": 3,
+      "coverageId": "4576bbbbf09c915e16b793c72685c2978a5b76ba18c7dc6b2cb1674b8629fc54",
+      "dataBindingPresent": true,
+      "deterministicDigest": "47feca57099612b397564a3ab29b1d67097925bb8395f1ab448d343b90ff9345",
+      "interactionContractCount": 8,
+      "pageKey": "ALARMS_EVENTS",
+      "queueBindingPresent": true,
+      "status": "PASS",
+      "uiStateContractCount": 6
+    },
+    {
+      "blocking": true,
+      "cardBindingPresent": true,
+      "componentBindingCount": 3,
+      "coverageId": "54310aa37705f81d65195dab29b81fd5d8b20708359a5e1d9353952a7b2af9c3",
+      "dataBindingPresent": true,
+      "deterministicDigest": "2eebd45973f64d86b5b5241ae530c73b8067ab6182acae2a7a14bf6638b47104",
+      "interactionContractCount": 8,
+      "pageKey": "ASSETS_TOPOLOGY",
+      "queueBindingPresent": true,
+      "status": "PASS",
+      "uiStateContractCount": 6
+    },
+    {
+      "blocking": true,
+      "cardBindingPresent": true,
+      "componentBindingCount": 3,
+      "coverageId": "c28715c55ed1039cf324358cb214a1d755e3c9ea2293c5e8a163b287cd52db9e",
+      "dataBindingPresent": true,
+      "deterministicDigest": "e348bc28b1c858d4911473877293d340af9d004443fb1077a76d3cf1df4aa821",
+      "interactionContractCount": 8,
+      "pageKey": "EVIDENCE_INVESTIGATION",
+      "queueBindingPresent": true,
+      "status": "PASS",
+      "uiStateContractCount": 6
+    },
+    {
+      "blocking": true,
+      "cardBindingPresent": true,
+      "componentBindingCount": 3,
+      "coverageId": "c12e270af2560ff4a51730e8fc682dbeebe4935049d5c9511492e2c9ed711403",
+      "dataBindingPresent": true,
+      "deterministicDigest": "b4c2d3d91cb69eb4018722c848d48896277327aef79cfd72ff319349cd1aae99",
+      "interactionContractCount": 8,
+      "pageKey": "FAULT_CASES",
+      "queueBindingPresent": true,
+      "status": "PASS",
+      "uiStateContractCount": 6
+    },
+    {
+      "blocking": true,
+      "cardBindingPresent": true,
+      "componentBindingCount": 3,
+      "coverageId": "43bf3e42d2a8247c953d8052f40cf51312507de635cfa6af91a82eed63241cde",
+      "dataBindingPresent": true,
+      "deterministicDigest": "0d3f86ced71e0f38ec3649dbe287f3d397574a38c3ceed7def01e240f44ab790",
+      "interactionContractCount": 8,
+      "pageKey": "MAINTENANCE_WORK_ORDERS",
+      "queueBindingPresent": true,
+      "status": "PASS",
+      "uiStateContractCount": 6
+    },
+    {
+      "blocking": true,
+      "cardBindingPresent": true,
+      "componentBindingCount": 3,
+      "coverageId": "42d2a84c39aa377f3b356ebdc237d2a1c34c35ae43ea3a209114d2652d50c179",
+      "dataBindingPresent": true,
+      "deterministicDigest": "273ead5c5ddb11171966351d4c8d7c2e115b37be2e26d3bba5bbb22cfdd21e6b",
+      "interactionContractCount": 8,
+      "pageKey": "REPORTS",
+      "queueBindingPresent": true,
+      "status": "PASS",
+      "uiStateContractCount": 6
+    },
+    {
+      "blocking": true,
+      "cardBindingPresent": true,
+      "componentBindingCount": 3,
+      "coverageId": "8672406898fe50c3d95eaf9ea518b4f50192cab3017c1782529a1ba27879b01b",
+      "dataBindingPresent": true,
+      "deterministicDigest": "01c354351fe0f5c3e9301b976caa5f62265553816b3a80d8594f9cae8212b108",
+      "interactionContractCount": 8,
+      "pageKey": "SYSTEMS_INTEGRATION_HEALTH",
+      "queueBindingPresent": true,
+      "status": "PASS",
+      "uiStateContractCount": 6
+    }
+  ],
+  "contractVersion": "read-only-frontend-implementation-release-gate.v1",
+  "dependencyGateResults": [
+    {
+      "blocking": true,
+      "deterministicDigest": "bfe3c8c063553a3c3264f033238d51b5490bfa071fb6985821a0fb76da32503b",
+      "gateId": "D01_A7_READ_ONLY_API_ALLOWED",
+      "gateName": "A7 read-only API allowed",
+      "reasonCodes": [
+        "D01_A7_READ_ONLY_API_ALLOWED",
+        "DEPENDENCY_PASS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "3a777ac5f4c3b5a811b60751985b5058ec3dd7b7be44f8efc5b2b5be400f957c",
+      "gateId": "D02_A7_PRODUCTION_API_DISABLED",
+      "gateName": "A7 production API disabled",
+      "reasonCodes": [
+        "D02_A7_PRODUCTION_API_DISABLED",
+        "DEPENDENCY_PASS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "08baa0af044ebb315d82bf26ff09a45afd5b341fd3c22c4593b19cc6116c5f49",
+      "gateId": "D03_A6_FRONTEND_SKELETON_ALLOWED",
+      "gateName": "A6 frontend skeleton allowed",
+      "reasonCodes": [
+        "D03_A6_FRONTEND_SKELETON_ALLOWED",
+        "DEPENDENCY_PASS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "91f4cc194e89ee1db09f51785d029dcad7b82f016595f9b68d2b00f705530718",
+      "gateId": "D04_A6_PRODUCTION_FRONTEND_DISABLED",
+      "gateName": "A6 production frontend disabled",
+      "reasonCodes": [
+        "D04_A6_PRODUCTION_FRONTEND_DISABLED",
+        "DEPENDENCY_PASS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "1d159647524118e9e5ce68c11b59344cb4a889e648b814cbb72c4e0a87c460af",
+      "gateId": "D05_A6_READINESS_CANDIDATES",
+      "gateName": "A6 readiness candidates",
+      "reasonCodes": [
+        "D05_A6_READINESS_CANDIDATES",
+        "DEPENDENCY_PASS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    }
+  ],
+  "deterministicDigest": "d4a563261af44f5be7361674c7e9ced6664f7827e329fe66b6154721183241a7",
+  "generatedAtPolicy": "DETERMINISTIC_NO_VOLATILE_TIMESTAMP",
+  "implementationBoundaryMatrix": [
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryId": "852c700cf303cd655e320568d08c45a2a95ad73160efec7cfca3dce75f5b4af2",
+      "boundaryKey": "apiImplementationRequired",
+      "deterministicDigest": "45a34fef0328b40aab1c063ceee2123581eafb9ba3d2d86a77d705115b4dbd2e",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryId": "29efac03ebd38283b761f0753c7939d37dd998f57908dc667c2e9602a2321c1d",
+      "boundaryKey": "approvalWriteCount",
+      "deterministicDigest": "d775c84aae1184046a5dd21696882ccb0d179e8c45ee894495b7b84af962a649",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryId": "9d7c700875edfc94a5a59b68cbfb799c534aff505430ec38e9fcab4b71691295",
+      "boundaryKey": "auditWriteCount",
+      "deterministicDigest": "9f55d9fcfb7490338fd680ffe03655d93fcee70183799875605b5fcc4eab6412",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryId": "e727be86e8885af911aaf72d7847295e8f670bf5ca5d67786933010db308b780",
+      "boundaryKey": "browserSmokeAllowed",
+      "deterministicDigest": "1534da79c8f3c4546db0c9fd32f98dce545642517b30794dcad1723946135be4",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryId": "285ab5430174d2fe92b95d2239e848c1bc2e06f6288375c8dfac882aeec5ee20",
+      "boundaryKey": "canonicalWriteCount",
+      "deterministicDigest": "2ccec779e144df15a5fa248150bef64c45a7375d85cdd133ff80f09d74572814",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryId": "b71ae76afd7a5d48cedf9fb660ed0eb8554ec3b52f85043d8b4b54e936e98778",
+      "boundaryKey": "dataMutationAllowed",
+      "deterministicDigest": "7ead49988ffedb5b73f28fd8d82ea44cf5f8015957ffd409115b27f5ebcbf96f",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryId": "068792ce36bcc307436782951592b49a6542433a63c26a1f88137a8e03058aee",
+      "boundaryKey": "databaseWriteAllowed",
+      "deterministicDigest": "821bf1bb0659d16e65711ee6c0b9c755557707393e9eae26ce10bd5a05a70aea",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryId": "b25d350a678d52cc1f0cb7e7d74d26d9038da849fb8aee6aae9bf221274630dc",
+      "boundaryKey": "databaseWriteCount",
+      "deterministicDigest": "ebfb8a8dcacfa8fcf4d59cfd973f562ce108c943ec2fc950ea40a45d79708d77",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryId": "cdc803fe403dc9b9e296283f5467b1813ade2682bd2b6af87eab4a2c09fa1bc0",
+      "boundaryKey": "decisionWriteCount",
+      "deterministicDigest": "2bc7f7015bb209e78e55408e982d52158aae10263c73624ed7feada8acd2b620",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryId": "f78c09e322c7957e434a9f8674245aa2073294f0ba1bd76426626b4dd7165a33",
+      "boundaryKey": "liveApiCallAllowed",
+      "deterministicDigest": "6948581da481fbca46fba917d905731724910c35d3cf6942e32b7ac9d993617d",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryId": "c23f32c4f11a3d822da044522a9d7f0ed41badd1054d643a21043765a3bb1fe1",
+      "boundaryKey": "menuImplementationAllowed",
+      "deterministicDigest": "2aaf6072e1da256266b31d7730d7031a380a74ab7eb54b69331fdd719b16ec40",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryId": "62ebbc81b643a7ec0fa7046bf89d200b002edbacf7ba882c33180ef5bfe5012b",
+      "boundaryKey": "productionActivationAllowed",
+      "deterministicDigest": "baa5b7d25097f3302021b2566ebf48847c6501003a2d831854ab47996c1a5ba8",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryId": "6a24a3056cf2e7348a2ebb9308e99f0e468b548ba94b9966a023cf7505c27a1a",
+      "boundaryKey": "productionFrontendAllowed",
+      "deterministicDigest": "ee8a9009d128d03d9c34a13a089a8188a98ba0fd071a10236d37a62005bc6d7d",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryId": "7ad1f78a17bb18f3394e70432a584611ea4ab92522244c42d81f293f80dfcf35",
+      "boundaryKey": "pushAllowed",
+      "deterministicDigest": "7d221cfbe2a8e2ea31bd33434319f982ea4d785512d9a4a927485dddd851c757",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": true,
+      "blocking": true,
+      "boundaryId": "51f0f7a7543fcb9fd890c3427a0d5317c920d9365edabf34ad2f443760ad46c0",
+      "boundaryKey": "readOnlyFrontendImplementationAllowed",
+      "deterministicDigest": "1de1f9308eb31c1d120834c1a15a8ad69b8c012d05c69d6bb04b828d3fb4875a",
+      "expectedValue": true,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryId": "5038699bba414dd9dba25b71e1b605cb1d129b85a2f3f49ca6538b282608ef76",
+      "boundaryKey": "realFrontendFileChangeCount",
+      "deterministicDigest": "c524982a4950e48cd7e65cbe27cc432017c494f2122f95a6a53cbd5f322032e6",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryId": "b639833de7a04b9b30561a26a5fb3fcfe07df918517f02f0ccd130403e0a3b25",
+      "boundaryKey": "realMenuEntryChangeCount",
+      "deterministicDigest": "2b1d0969630070cf7f15ce2c2f6ad6005399397dcece099e3ef40029132ecb73",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryId": "a0f68da1cf7e8438567ed93cfb11ebdeb8e96297c78c632f672f1c1aee5fa452",
+      "boundaryKey": "realRouteImplementationAllowed",
+      "deterministicDigest": "6db8b88de7d5e85a3160e1a08579a38bc57e3c7f846ce438467d21cf2f61090a",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryId": "7963da4f92ea196afdfc196ad41a544c8f216b2b6d948273a7f21c2efe4e2a2e",
+      "boundaryKey": "runtimeActivationAllowed",
+      "deterministicDigest": "1d6c7208cc3e9e29df230471fcdccc67ee53086617189a58553ab515e11dbb22",
+      "expectedValue": false,
+      "status": "PASS"
+    }
+  ],
+  "implementationDecision": {
+    "apiImplementationRequired": false,
+    "browserSmokeAllowed": false,
+    "dataMutationAllowed": false,
+    "databaseWriteAllowed": false,
+    "decisionReason": "A8 skeleton and page contracts are complete; only a future read-only frontend implementation phase is allowed.",
+    "decisionState": "READY_FOR_READ_ONLY_FRONTEND_IMPLEMENTATION",
+    "deterministicDigest": "8355a237d1ef77d944837dcae51d22ecc5d1d66bda1131f6fce3cfe1d7dc42a5",
+    "liveApiCallAllowed": false,
+    "menuImplementationAllowed": false,
+    "productionActivationAllowed": false,
+    "productionFrontendAllowed": false,
+    "pushAllowed": false,
+    "readOnlyFrontendImplementationAllowed": true,
+    "realRouteImplementationAllowed": false,
+    "runtimeActivationAllowed": false
+  },
+  "implementationStatus": "READ_ONLY_FRONTEND_IMPLEMENTATION_RELEASE_GATE_COMPLETE",
+  "interactionCoverageMatrix": [
+    {
+      "approvalDisabled": true,
+      "blocking": true,
+      "coverageId": "1b94694cf77f76b49030bfd2efe9e730ead52a58f14f301f8c840400b734bd44",
+      "deterministicDigest": "59775578193d36e24c3089b5e7f0b1b1f1b4f68740c2f131ccac2bf293545dd8",
+      "exportDisabled": true,
+      "facetSupported": true,
+      "filterSupported": true,
+      "mutationAllowed": false,
+      "pageKey": "AIRPORT_OVERVIEW",
+      "paginationSupported": true,
+      "searchSupported": true,
+      "sortSupported": true,
+      "status": "PASS",
+      "viewDetailsSupported": true
+    },
+    {
+      "approvalDisabled": true,
+      "blocking": true,
+      "coverageId": "f8d26b8a42ea551a99d34342138c497c84dbcfbc9f1c81ad5ee78c3be7512f5c",
+      "deterministicDigest": "483cbb2fd9bbda0cd901019b0c8781a1235d83a3a19c1e54b51c71f9dfc20fe0",
+      "exportDisabled": true,
+      "facetSupported": true,
+      "filterSupported": true,
+      "mutationAllowed": false,
+      "pageKey": "ALARMS_EVENTS",
+      "paginationSupported": true,
+      "searchSupported": true,
+      "sortSupported": true,
+      "status": "PASS",
+      "viewDetailsSupported": true
+    },
+    {
+      "approvalDisabled": true,
+      "blocking": true,
+      "coverageId": "1e55471b7e1a0d4b873cc2c0497cb554e6173e9567faa3e1ef17c4bfc7618184",
+      "deterministicDigest": "bb3ff06b840f04d517dedc7573c2e711c935d4f567ae9793a72469862e951720",
+      "exportDisabled": true,
+      "facetSupported": true,
+      "filterSupported": true,
+      "mutationAllowed": false,
+      "pageKey": "ASSETS_TOPOLOGY",
+      "paginationSupported": true,
+      "searchSupported": true,
+      "sortSupported": true,
+      "status": "PASS",
+      "viewDetailsSupported": true
+    },
+    {
+      "approvalDisabled": true,
+      "blocking": true,
+      "coverageId": "b369695b78401580643dbf5c7817b0a099813b8c8ba08db03ef3ef53fdb347d1",
+      "deterministicDigest": "0c17ba1cd719ec44ce2da5ceef32f9003064266fe8da09c9837ae847a777b586",
+      "exportDisabled": true,
+      "facetSupported": true,
+      "filterSupported": true,
+      "mutationAllowed": false,
+      "pageKey": "EVIDENCE_INVESTIGATION",
+      "paginationSupported": true,
+      "searchSupported": true,
+      "sortSupported": true,
+      "status": "PASS",
+      "viewDetailsSupported": true
+    },
+    {
+      "approvalDisabled": true,
+      "blocking": true,
+      "coverageId": "fced05e45630cb132c07f319aa04ff6b92070d820a3d35638d2030ba8c8134e8",
+      "deterministicDigest": "8a2ee32e4cdc39dca9e43927290b2f979efc276b62a1e7078c246e32e3dcd30c",
+      "exportDisabled": true,
+      "facetSupported": true,
+      "filterSupported": true,
+      "mutationAllowed": false,
+      "pageKey": "FAULT_CASES",
+      "paginationSupported": true,
+      "searchSupported": true,
+      "sortSupported": true,
+      "status": "PASS",
+      "viewDetailsSupported": true
+    },
+    {
+      "approvalDisabled": true,
+      "blocking": true,
+      "coverageId": "ea1a7b00d796b7b5e6911c8134aee0097a3f6cf8a2c183c74b6339ebedc97af7",
+      "deterministicDigest": "8ec6417dbd27d50a84553f0e8fdc824ff2af2097404b0b15d2ee1ad916d345d9",
+      "exportDisabled": true,
+      "facetSupported": true,
+      "filterSupported": true,
+      "mutationAllowed": false,
+      "pageKey": "MAINTENANCE_WORK_ORDERS",
+      "paginationSupported": true,
+      "searchSupported": true,
+      "sortSupported": true,
+      "status": "PASS",
+      "viewDetailsSupported": true
+    },
+    {
+      "approvalDisabled": true,
+      "blocking": true,
+      "coverageId": "aa2acf37ae06e5a128a79476de765cd93416ace8076613a660aa32b58c5377bf",
+      "deterministicDigest": "00836329648d8c90012d1883cbfe7506ad961d73920570ceded8e7711f3afab2",
+      "exportDisabled": true,
+      "facetSupported": true,
+      "filterSupported": true,
+      "mutationAllowed": false,
+      "pageKey": "REPORTS",
+      "paginationSupported": true,
+      "searchSupported": true,
+      "sortSupported": true,
+      "status": "PASS",
+      "viewDetailsSupported": true
+    },
+    {
+      "approvalDisabled": true,
+      "blocking": true,
+      "coverageId": "165c9e8524722f08cd1aa771734bb433dcb44231ae16359ae1ebf699d3c6a537",
+      "deterministicDigest": "9b5577eb263b66e8cebc04a839eda48240d1a12a6ec2bf605ca18dbc68c46515",
+      "exportDisabled": true,
+      "facetSupported": true,
+      "filterSupported": true,
+      "mutationAllowed": false,
+      "pageKey": "SYSTEMS_INTEGRATION_HEALTH",
+      "paginationSupported": true,
+      "searchSupported": true,
+      "sortSupported": true,
+      "status": "PASS",
+      "viewDetailsSupported": true
+    }
+  ],
+  "pageCoverageMatrix": [
+    {
+      "blocking": true,
+      "coverageId": "e2e22a287167519ce7a6d3e022094663a24b7ca96c2ed9767992934e0a1a0acd",
+      "dataMutationDisabled": true,
+      "deterministicDigest": "cd812407b75476147a4b69bab112c42fd6a03d7c100941eab0d3874703f38c75",
+      "layoutContractPresent": true,
+      "liveApiCallDisabled": true,
+      "pageContractPresent": true,
+      "pageKey": "AIRPORT_OVERVIEW",
+      "pageSkeletonPresent": true,
+      "readOnly": true,
+      "routeProductionDisabled": true,
+      "routeSkeletonPresent": true,
+      "staticOnly": true,
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "coverageId": "5ba0784b0bc1218f3e465a7035f4316240cb4b77b0a5c1ec89412cc42e74e864",
+      "dataMutationDisabled": true,
+      "deterministicDigest": "79621c95e72883b626aa8a16523687c20e4a02e5c2361008fe9dd3eae84e3010",
+      "layoutContractPresent": true,
+      "liveApiCallDisabled": true,
+      "pageContractPresent": true,
+      "pageKey": "ALARMS_EVENTS",
+      "pageSkeletonPresent": true,
+      "readOnly": true,
+      "routeProductionDisabled": true,
+      "routeSkeletonPresent": true,
+      "staticOnly": true,
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "coverageId": "467fb5cf47261797a35325611cc6bc6b5dc471c4d601fb40d1c2fc9cf11bb990",
+      "dataMutationDisabled": true,
+      "deterministicDigest": "27da98eaf1e396a0a1b450e938a1ae9b34c0437475f393e2b1877ec12ef185bb",
+      "layoutContractPresent": true,
+      "liveApiCallDisabled": true,
+      "pageContractPresent": true,
+      "pageKey": "ASSETS_TOPOLOGY",
+      "pageSkeletonPresent": true,
+      "readOnly": true,
+      "routeProductionDisabled": true,
+      "routeSkeletonPresent": true,
+      "staticOnly": true,
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "coverageId": "a629f6de8602ab4fa075efc2a2c21fd6f9d8ef1f44d7d82cec011542e0a3173f",
+      "dataMutationDisabled": true,
+      "deterministicDigest": "f2109babfc5610476a95cdc385c3893fa310cc02def734f49491bb29e3f9dd92",
+      "layoutContractPresent": true,
+      "liveApiCallDisabled": true,
+      "pageContractPresent": true,
+      "pageKey": "EVIDENCE_INVESTIGATION",
+      "pageSkeletonPresent": true,
+      "readOnly": true,
+      "routeProductionDisabled": true,
+      "routeSkeletonPresent": true,
+      "staticOnly": true,
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "coverageId": "e7c48fc4e3096f6163a35e30e871407bd38155cde307c192da84e11676884c8d",
+      "dataMutationDisabled": true,
+      "deterministicDigest": "3697c63e3beee1d4f1e304f00bd9140487d1494638390368178f4639b94465d1",
+      "layoutContractPresent": true,
+      "liveApiCallDisabled": true,
+      "pageContractPresent": true,
+      "pageKey": "FAULT_CASES",
+      "pageSkeletonPresent": true,
+      "readOnly": true,
+      "routeProductionDisabled": true,
+      "routeSkeletonPresent": true,
+      "staticOnly": true,
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "coverageId": "0951eed45eccf65d514a47914a1f1143cbdaa5663a88d86bbc0785c59b800213",
+      "dataMutationDisabled": true,
+      "deterministicDigest": "b35f50043f04f8e185a4eba625f549c3385656894d04a43d5a9d8803c37b5a8b",
+      "layoutContractPresent": true,
+      "liveApiCallDisabled": true,
+      "pageContractPresent": true,
+      "pageKey": "MAINTENANCE_WORK_ORDERS",
+      "pageSkeletonPresent": true,
+      "readOnly": true,
+      "routeProductionDisabled": true,
+      "routeSkeletonPresent": true,
+      "staticOnly": true,
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "coverageId": "dd69311d56200f9508459656ea59313f02d12a9eb59c54d9456c774904b8ddbd",
+      "dataMutationDisabled": true,
+      "deterministicDigest": "791ab23e82d21ad1b1bb63a3feb6eb71d4e96049e208ddb7a8b1af57569f0c41",
+      "layoutContractPresent": true,
+      "liveApiCallDisabled": true,
+      "pageContractPresent": true,
+      "pageKey": "REPORTS",
+      "pageSkeletonPresent": true,
+      "readOnly": true,
+      "routeProductionDisabled": true,
+      "routeSkeletonPresent": true,
+      "staticOnly": true,
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "coverageId": "72f5236ed9f2984b45f2e674c1597e4108227db38473307544b1a3f3eede9547",
+      "dataMutationDisabled": true,
+      "deterministicDigest": "bf50c6e10a3edc609eede0cfdf7e95082524c382b7ee7b0ac94a334cf0aa4063",
+      "layoutContractPresent": true,
+      "liveApiCallDisabled": true,
+      "pageContractPresent": true,
+      "pageKey": "SYSTEMS_INTEGRATION_HEALTH",
+      "pageSkeletonPresent": true,
+      "readOnly": true,
+      "routeProductionDisabled": true,
+      "routeSkeletonPresent": true,
+      "staticOnly": true,
+      "status": "PASS"
+    }
+  ],
+  "profileId": "airport-read-only-frontend-implementation-release-gate-profile-v1",
+  "readinessOutcome": "READ_ONLY_FRONTEND_READY_FOR_FUTURE_UI_IMPLEMENTATION",
+  "releaseGateId": "bc8eb1a5911d209d2211084c9dd4208b508dece3efca8a5fada03de0ff763118",
+  "releaseGateResults": [
+    {
+      "blocking": true,
+      "deterministicDigest": "16a724f919408ea507d407ba3b948de78a7f4c045f4611f27594ccd6e2d610b3",
+      "gateId": "G01_A8_STAGE_COMPLETENESS",
+      "gateName": "A8 stage completeness",
+      "reasonCodes": [
+        "A8_01_A8_02_ARTIFACTS_PRESENT"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "ec316cb7c083dc816458bde09702f9d6030cd9a4ed21480c47a436ef23d23220",
+      "gateId": "G02_A8_PASS_MARKER_COMPLETENESS",
+      "gateName": "A8 pass marker completeness",
+      "reasonCodes": [
+        "TWO_A8_PASS_MARKERS_REPRESENTED"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "4f11988ff9613b35a336a376b1ed156d4b7b0d4c40a03a90e8f3e70e007da898",
+      "gateId": "G03_PAGE_SKELETON_COVERAGE",
+      "gateName": "Page skeleton coverage",
+      "reasonCodes": [
+        "8_PAGE_SKELETONS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "f7ff977e4eaf3e4b707e7f676266755f9a661ba2d3294efd71471deb6be3913d",
+      "gateId": "G04_PAGE_CONTRACT_COVERAGE",
+      "gateName": "Page contract coverage",
+      "reasonCodes": [
+        "8_PAGE_CONTRACTS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "7ef50a7507084701bdafada1db8204392b64561e40c7b91f16ce621528b39d2b",
+      "gateId": "G05_ROUTE_SKELETON_COVERAGE",
+      "gateName": "Route skeleton coverage",
+      "reasonCodes": [
+        "8_ROUTE_SKELETONS_PRODUCTION_DISABLED"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "21322b4b70a5e64719da901c6127837c7999d70f79cd56a06b4e703ad7ed2b5d",
+      "gateId": "G06_LAYOUT_CONTRACT_COVERAGE",
+      "gateName": "Layout contract coverage",
+      "reasonCodes": [
+        "8_LAYOUT_CONTRACTS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "ed7d14f9e57fbdacc4c79068a6934267d15782dd4429b37d6a81f8edee5b0db1",
+      "gateId": "G07_COMPONENT_COVERAGE",
+      "gateName": "Component coverage",
+      "reasonCodes": [
+        "3_COMPONENT_BINDINGS_PER_PAGE"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "e723867ac7ace035c7c6722285717ab1ba549544fd63eeb68d29cd11257145c6",
+      "gateId": "G08_UI_STATE_COVERAGE",
+      "gateName": "UI state coverage",
+      "reasonCodes": [
+        "6_UI_STATES_PER_PAGE"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "e62cf5800baae4eaef266f580d984b15fe30795e9079e6e4f02e9ba9cb7ec598",
+      "gateId": "G09_INTERACTION_COVERAGE",
+      "gateName": "Interaction coverage",
+      "reasonCodes": [
+        "8_INTERACTIONS_PER_PAGE"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "000c383c0fc7b61fc8532893add62c790b6090ca316f2698f65eb4d1ec2d2aee",
+      "gateId": "G10_STATIC_READ_ONLY_BOUNDARY",
+      "gateName": "Static read-only boundary",
+      "reasonCodes": [
+        "STATIC_READ_ONLY_MUTATION_DISABLED"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "680e2d013127d29f2f1e91cdff517cf5bcf144357b910b2ffe571358153ab714",
+      "gateId": "G11_NO_LIVE_API_BROWSER_NETWORK_BOUNDARY",
+      "gateName": "No live API browser network boundary",
+      "reasonCodes": [
+        "NO_LIVE_API_BROWSER_NETWORK_LOCALHOST"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "424961fd4f60feee204886021109cff44cb2710e02da1e553d0a4ad86e4f5827",
+      "gateId": "G12_NO_REAL_FRONTEND_IMPLEMENTATION",
+      "gateName": "No real frontend implementation",
+      "reasonCodes": [
+        "NO_REAL_FRONTEND_FILES_ROUTES_MENUS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "6da6c15569e655549b4a6a372abe9b1438fbeeb05b447b88a7ce6ea1f57a846e",
+      "gateId": "G13_A7_API_DEPENDENCY_GATE",
+      "gateName": "A7 API dependency gate",
+      "reasonCodes": [
+        "A7_READ_ONLY_ROUTE_ALLOWED_PRODUCTION_API_DISABLED"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "6e67d0bfd6f1b5f7033ae7ede3a54f23dc723e68181b5588c0fec2df00ba4de6",
+      "gateId": "G14_A6_FRONTEND_DEPENDENCY_GATE",
+      "gateName": "A6 frontend dependency gate",
+      "reasonCodes": [
+        "A6_FRONTEND_SKELETON_ALLOWED_PRODUCTION_DISABLED"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "693990639e555c0cc20478e671af2ef5c58b0602ef768eb954ba06a02b75439d",
+      "gateId": "G15_CUSTOMER_IDENTIFIER_SAFETY",
+      "gateName": "Customer identifier safety",
+      "reasonCodes": [
+        "NO_CUSTOMER_IDENTIFIER_LEAKAGE"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "f83c5fca6048d272020bb96ae1abb48cfd2f9283523080947bf89d7097950a33",
+      "gateId": "G16_DETERMINISTIC_OUTPUT",
+      "gateName": "Deterministic output",
+      "reasonCodes": [
+        "REPEATED_RUNNER_BYTE_IDENTICAL"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "68823d00a5bc4200755ae0d2bbc8823258986750e3184371ec39cd42a27f656e",
+      "gateId": "G17_IMPLEMENTATION_DECISION",
+      "gateName": "Implementation decision",
+      "reasonCodes": [
+        "FUTURE_READ_ONLY_FRONTEND_ALLOWED_PRODUCTION_DISABLED"
+      ],
+      "severity": "LOW",
+      "status": "PASS"
+    }
+  ],
+  "stageResults": [
+    {
+      "artifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-read-only-frontend-skeleton.v1.json",
+      "deterministicDigest": "546c42df4d14fa0554f497a567a073f47437a6781e59e1e26122858a0bd919fd",
+      "passMarker": "ONE_AIRPORT_A8_01_READ_ONLY_FRONTEND_SKELETON_FOUNDATION_PASS",
+      "stageId": "A8-01",
+      "stageName": "Read-only Frontend Skeleton Foundation",
+      "status": "PASS",
+      "summary": {
+        "a6FrontendSkeletonPhaseAllowed": true,
+        "a7ReadOnlyApiRouteImplementationAllowed": true,
+        "airportSpecific": false,
+        "apiEnabled": false,
+        "approvalWriteCount": 0,
+        "auditWriteCount": 0,
+        "blockingGateFailureCount": 0,
+        "canonicalWriteCount": 0,
+        "cardSkeletonCount": 8,
+        "componentSkeletonCount": 24,
+        "containsCustomerAssetIdentifiers": false,
+        "crossIndustry": true,
+        "dataBindingSkeletonCount": 8,
+        "dataMutationEnabledPageCount": 0,
+        "databaseWriteCount": 0,
+        "decisionWriteCount": 0,
+        "frontendEnabled": false,
+        "frontendReadinessGateCount": 15,
+        "frontendSkeletonPhaseAllowed": true,
+        "liveApiCallEnabledBindingCount": 0,
+        "liveApiCallEnabledPageCount": 0,
+        "mockDataAllowedBindingCount": 8,
+        "pageSkeletonCount": 8,
+        "passedGateCount": 15,
+        "productionActivationAllowed": false,
+        "productionEnabledPageCount": 0,
+        "productionFrontendAllowed": false,
+        "productionRouteEnabledCount": 0,
+        "projectionBindingRequiredCount": 8,
+        "pushAllowed": false,
+        "queueSkeletonCount": 8,
+        "readOnlyPageCount": 8,
+        "routeSkeletonCount": 8,
+        "runtimeActivationAllowed": false,
+        "staticOnlyPageCount": 8
+      },
+      "validatorName": "validate-one-airport-read-only-frontend-skeleton.py"
+    },
+    {
+      "artifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-read-only-frontend-page-contract.v1.json",
+      "deterministicDigest": "f038fee1fe598585906550115c78d48656e0316f7893454ae6bc374cbf4efcd2",
+      "passMarker": "ONE_AIRPORT_A8_02_READ_ONLY_FRONTEND_PAGE_CONTRACT_AND_LOCAL_SMOKE_GATE_PASS",
+      "stageId": "A8-02",
+      "stageName": "Read-only Frontend Page Contract and Local Smoke Gate",
+      "status": "PASS",
+      "summary": {
+        "a7ReadOnlyApiRouteImplementationAllowed": true,
+        "a8FrontendSkeletonPageCount": 8,
+        "airportSpecific": false,
+        "apiEnabled": false,
+        "approvalWriteCount": 0,
+        "auditWriteCount": 0,
+        "blockingGateFailureCount": 0,
+        "browserLaunchRequiredCount": 0,
+        "canonicalWriteCount": 0,
+        "componentBindingContractCount": 24,
+        "containsCustomerAssetIdentifiers": false,
+        "crossIndustry": true,
+        "dataMutationEnabledComponentCount": 0,
+        "dataMutationEnabledPageCount": 0,
+        "databaseWriteCount": 0,
+        "decisionWriteCount": 0,
+        "frontendEnabled": false,
+        "interactionContractCount": 64,
+        "layoutContractCount": 8,
+        "liveApiCallEnabledComponentCount": 0,
+        "liveApiCallEnabledPageCount": 0,
+        "localSmokeCaseCount": 8,
+        "localhostCallRequiredCount": 0,
+        "mutationAllowedInteractionCount": 0,
+        "networkCallRequiredCount": 0,
+        "pageContractCount": 8,
+        "passedSmokeGateCount": 16,
+        "productionActivationAllowed": false,
+        "productionEnabledPageCount": 0,
+        "productionRouteEnabledCount": 0,
+        "pushAllowed": false,
+        "readOnlyPageCount": 8,
+        "runtimeActivationAllowed": false,
+        "smokeGateCount": 16,
+        "staticOnlyPageCount": 8,
+        "uiStateContractCount": 48
+      },
+      "validatorName": "validate-one-airport-read-only-frontend-page-contract.py"
+    }
+  ],
+  "summary": {
+    "a8StageCount": 2,
+    "airportSpecific": false,
+    "apiEnabled": false,
+    "apiImplementationRequired": false,
+    "approvalWriteCount": 0,
+    "auditWriteCount": 0,
+    "blockingGateFailureCount": 0,
+    "browserLaunchRequiredCount": 0,
+    "browserSmokeAllowed": false,
+    "canonicalWriteCount": 0,
+    "cardSkeletonCount": 8,
+    "componentBindingContractCount": 24,
+    "componentCoverageEntryCount": 8,
+    "containsCustomerAssetIdentifiers": false,
+    "crossIndustry": true,
+    "dataBindingSkeletonCount": 8,
+    "dataMutationAllowed": false,
+    "databaseWriteAllowed": false,
+    "databaseWriteCount": 0,
+    "decisionWriteCount": 0,
+    "failedStageCount": 0,
+    "frontendEnabled": false,
+    "interactionContractCount": 64,
+    "interactionCoverageEntryCount": 8,
+    "layoutContractCount": 8,
+    "liveApiCallAllowed": false,
+    "liveApiCallEnabledCount": 0,
+    "localhostCallRequiredCount": 0,
+    "menuImplementationAllowed": false,
+    "mutationAllowedInteractionCount": 0,
+    "networkCallRequiredCount": 0,
+    "pageContractCount": 8,
+    "pageCount": 8,
+    "pageSkeletonCount": 8,
+    "passedGateCount": 17,
+    "passedStageCount": 2,
+    "productionActivationAllowed": false,
+    "productionEnabledPageCount": 0,
+    "productionFrontendAllowed": false,
+    "productionRouteEnabledCount": 0,
+    "pushAllowed": false,
+    "queueSkeletonCount": 8,
+    "readOnlyFrontendImplementationAllowed": true,
+    "readOnlyPageCount": 8,
+    "realFrontendFileChangeCount": 0,
+    "realMenuEntryChangeCount": 0,
+    "realRouteImplementationAllowed": false,
+    "releaseGateCount": 17,
+    "routeSkeletonCount": 8,
+    "runtimeActivationAllowed": false,
+    "staticOnlyPageCount": 8,
+    "uiStateContractCount": 48
+  }
+}
