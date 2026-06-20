@@ -1,0 +1,515 @@
+{
+  "artifactReferences": [
+    {
+      "artifactType": "A4-01",
+      "deterministicDigest": "5289f693fa3c8cd445fb75817b42218e2f7999b72836d24149395456063d7c0a",
+      "digest": "ad6f565c07ca29ddf813a360f97e78a1287d7b4c591adfa85c40ebb583d9385e",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-operator-review-decisions.v1.json"
+    },
+    {
+      "artifactType": "A4-02",
+      "deterministicDigest": "6552a867b0d3d7db18bc216b92ad0ee87e9adad4ae43cfbc68a8ac77b0c11d66",
+      "digest": "e31628886fc1d9758c26788c5dd4b17771b694023afa54d15d086690a26b962d",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-uconsole-operator-review-queue.v1.json"
+    },
+    {
+      "artifactType": "A4-03",
+      "deterministicDigest": "a63e20c4b7950d9c40de86263a8f980cd88d9625de978ef31268c9363139dd3f",
+      "digest": "5eaa4cf3cc1f2c4c1424be3ffe0696d4878648c1820555e74cae38613448c898",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-operator-review-policy-guard.v1.json"
+    },
+    {
+      "artifactType": "A3-DEPENDENCY",
+      "deterministicDigest": "8c8ebd3ded6de4d311a49f805dcdd3aa5ee20872737c1057cb10555e7562655b",
+      "digest": "2b53aee526fe94b5ee6590c923b8288ae4472836163ffa038519882186ca0e39",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-a3-readiness-release-gate.v1.json"
+    }
+  ],
+  "authority": "ONE-AIRPORT-A4-04",
+  "boundaryMatrix": [
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryKey": "apiEnabled",
+      "deterministicDigest": "2b4cea0daa47758b2e86d350a595303cc0c44608c918b66a61ae31863a527a1e",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryKey": "approvalWriteCount",
+      "deterministicDigest": "f8c8e707698a310750c18ea897ad651a2e444195c708c7732dc2684a73949775",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryKey": "auditWriteCount",
+      "deterministicDigest": "ced150c948da97a64bf51c4cbab525a133f8e23d7dc3ce371a903a8faad8b1dc",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryKey": "canonicalWriteCount",
+      "deterministicDigest": "5ff0128ebeef5a328323d7c520c73e91ec2fbc26feec1be1840f87129a6a4152",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryKey": "containsCustomerAssetIdentifiers",
+      "deterministicDigest": "1b038f27541d684cdc83d89c7443cfd55e9e672856ea78adae31a0634d179b3d",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryKey": "databaseWriteCount",
+      "deterministicDigest": "d6dfda7d99c838fedfaa5f3d78037e5a2f3dfe64b9213fa177b2b0e991ee0b6c",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryKey": "decisionWriteCount",
+      "deterministicDigest": "f2dfc4a327b7109337980cab704e0ad414a2cca4f702bfb459790d354b2ac40d",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryKey": "frontendEnabled",
+      "deterministicDigest": "0368601a688838fc3fc697f7b61ad55bc55843d12f5ed9668b160d9488cd03d3",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryKey": "productionActivationAllowed",
+      "deterministicDigest": "117a02f7bd31fecb4a3cc7864def0b4992d4ed9a8fd71319ef45017a59edb1c0",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryKey": "pushAllowed",
+      "deterministicDigest": "4f7882e020c156b914fcbd2bc07d248b356ed2f6ba4c39ff6dfb7965ae545e86",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryKey": "runtimeActivationAllowed",
+      "deterministicDigest": "ca42c7d4c19c2db935481f5835c1f604e3db3e008af59219aa62438f315fa47b",
+      "expectedValue": false,
+      "status": "PASS"
+    }
+  ],
+  "contractVersion": "a4-readiness-release-gate.v1",
+  "deterministicDigest": "55b0311066ea5a121ff446e1e66a930b34e27f904b5532047ee7a5f67f880ecc",
+  "gateResults": [
+    {
+      "blocking": true,
+      "deterministicDigest": "07b67483a62efe340f6d2f67d46db57fd94eec6f2fd8164f33fb300cbc5732ae",
+      "evidenceReferences": [
+        "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-operator-review-decisions.v1.json",
+        "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-operator-review-policy-guard.v1.json",
+        "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-uconsole-operator-review-queue.v1.json"
+      ],
+      "gateId": "G01_A4_STAGE_COMPLETENESS",
+      "gateName": "A4 stage completeness",
+      "reasonCodes": [
+        "ALL_A4_ARTIFACTS_PRESENT"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "3be4878e371abf1fefb5b6b76f55cb69a6d3be9620f964440ce7222ef267bf67",
+      "evidenceReferences": [
+        "ONE_AIRPORT_A4_01_OPERATOR_REVIEW_DECISION_LAYER_FOUNDATION_PASS",
+        "ONE_AIRPORT_A4_02_OPERATOR_REVIEW_UCONSOLE_QUEUE_PROJECTION_PASS",
+        "ONE_AIRPORT_A4_03_OPERATOR_REVIEW_DECISION_AUDIT_AND_POLICY_GUARD_PASS"
+      ],
+      "gateId": "G02_A4_PASS_MARKER_COMPLETENESS",
+      "gateName": "A4 pass marker completeness",
+      "reasonCodes": [
+        "ALL_A4_PASS_MARKERS_REPRESENTED"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "92ff376573c2914a55b06e6ed803ea556d25b54004a73ff9dfcf3cacc38aa6c2",
+      "evidenceReferences": [
+        "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-operator-review-decisions.v1.json",
+        "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-operator-review-policy-guard.v1.json",
+        "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-uconsole-operator-review-queue.v1.json"
+      ],
+      "gateId": "G03_A4_DECISION_QUEUE_COMPLETENESS",
+      "gateName": "A4 decision queue completeness",
+      "reasonCodes": [
+        "46_DECISIONS_TO_46_QUEUE_ROWS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "21903cc13c8c9604d30d3158eebde14e2c0c2b97787a23576463623dbc94f4e4",
+      "evidenceReferences": [
+        "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-uconsole-operator-review-queue.v1.json"
+      ],
+      "gateId": "G04_A4_QUEUE_GROUP_COMPLETENESS",
+      "gateName": "A4 queue group completeness",
+      "reasonCodes": [
+        "8_GROUPS_AND_8_CARDS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "2708d92bb039a67c31c24c31f8bf9bb151276be8d3f94cdb9e847d0a9b4c7418",
+      "evidenceReferences": [
+        "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-operator-review-policy-guard.v1.json"
+      ],
+      "gateId": "G05_A4_POLICY_GUARD_COMPLETENESS",
+      "gateName": "A4 policy guard completeness",
+      "reasonCodes": [
+        "46_POLICY_GUARDS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "c0f9466c777233e4d487cb4063aa86eac748db446fd1ac2c203520ba532cb847",
+      "evidenceReferences": [
+        "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-operator-review-policy-guard.v1.json"
+      ],
+      "gateId": "G06_A4_AUDIT_PREVIEW_COMPLETENESS",
+      "gateName": "A4 audit preview completeness",
+      "reasonCodes": [
+        "46_READ_ONLY_AUDIT_PREVIEWS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "e8a6e645f1a4ffa075caf8fee765f28c289c04fa81c8cc261e5f403a38ac2c83",
+      "evidenceReferences": [
+        "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-operator-review-decisions.v1.json",
+        "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-operator-review-policy-guard.v1.json",
+        "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-uconsole-operator-review-queue.v1.json"
+      ],
+      "gateId": "G07_A4_NO_DECISION_WRITE_BOUNDARY",
+      "gateName": "A4 no decision write boundary",
+      "reasonCodes": [
+        "DECISION_AND_APPROVAL_WRITES_ZERO"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "f743253ef73433890ffa0593cd7d13bf3395d65c981a25e8fc778db6b1296baf",
+      "evidenceReferences": [
+        "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-operator-review-decisions.v1.json",
+        "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-operator-review-policy-guard.v1.json",
+        "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-uconsole-operator-review-queue.v1.json"
+      ],
+      "gateId": "G08_A4_NO_AUDIT_WRITE_BOUNDARY",
+      "gateName": "A4 no audit write boundary",
+      "reasonCodes": [
+        "AUDIT_AND_DATABASE_WRITES_ZERO"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "ebdb74cbcea67171275fdd77e4d417fdb2e9ef5b8b8fabb86041dfa4562e389a",
+      "evidenceReferences": [
+        "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-operator-review-decisions.v1.json",
+        "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-operator-review-policy-guard.v1.json",
+        "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-uconsole-operator-review-queue.v1.json"
+      ],
+      "gateId": "G09_A4_EXECUTION_BOUNDARY",
+      "gateName": "A4 execution boundary",
+      "reasonCodes": [
+        "EXECUTION_NOT_ALLOWED"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "96387c93fc15986c96af1605cafc3eb274bd181d64308f0ce036b4bc06041f1e",
+      "evidenceReferences": [
+        "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-operator-review-decisions.v1.json",
+        "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-operator-review-policy-guard.v1.json",
+        "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-uconsole-operator-review-queue.v1.json"
+      ],
+      "gateId": "G10_A4_API_FRONTEND_BOUNDARY",
+      "gateName": "A4 API/frontend boundary",
+      "reasonCodes": [
+        "API_AND_FRONTEND_DISABLED"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "5b9948c410fbbfd489d40a906b7cfe381005bed6d6b27fa55a2d3cafc9c1dba3",
+      "evidenceReferences": [
+        "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-operator-review-decisions.v1.json",
+        "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-operator-review-policy-guard.v1.json",
+        "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-uconsole-operator-review-queue.v1.json"
+      ],
+      "gateId": "G11_A4_CUSTOMER_IDENTIFIER_SAFETY",
+      "gateName": "A4 customer identifier safety",
+      "reasonCodes": [
+        "NO_CUSTOMER_IDENTIFIER_LEAKAGE"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "8465f90a318012eb78cff65e9dbba8a2a4f21063c1d82f6cdd52f3ce755cba31",
+      "evidenceReferences": [
+        "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-a3-readiness-release-gate.v1.json"
+      ],
+      "gateId": "G12_A4_A3_DEPENDENCY_GATE",
+      "gateName": "A4 A3 dependency gate",
+      "reasonCodes": [
+        "A3_RELEASE_ALLOWED_TRUE"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "1c9c0246b57df5fd687de98d8c4d139ff737fb6270e6d37b8b704509d61a8f55",
+      "evidenceReferences": [
+        "scripts/validation/_run_a4_04_readiness_release_gate.py"
+      ],
+      "gateId": "G13_A4_DETERMINISTIC_OUTPUT",
+      "gateName": "A4 deterministic output",
+      "reasonCodes": [
+        "REPEATED_RUNNER_BYTE_IDENTICAL"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "1312df1ff2a2a3ad152846bbfd437dff2ebe0dee801f8b1a5320a56235dea2b1",
+      "evidenceReferences": [
+        "scripts/validation/validate-one-boundaries.py"
+      ],
+      "gateId": "G14_A4_BOUNDARY_VALIDATOR",
+      "gateName": "A4 boundary validator",
+      "reasonCodes": [
+        "ONE_BOUNDARY_BASELINE_PASS_WITH_EXISTING_WARNINGS"
+      ],
+      "severity": "LOW",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "55869a73684a90d7ae5271b5c013ee7aadca5815b025c600fe4607dc39d2cf14",
+      "evidenceReferences": [
+        "releaseDecision"
+      ],
+      "gateId": "G15_A4_RELEASE_DECISION",
+      "gateName": "A4 release decision",
+      "reasonCodes": [
+        "ALL_BLOCKING_GATES_PASS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    }
+  ],
+  "generatedAtPolicy": "DETERMINISTIC_NO_VOLATILE_TIMESTAMP",
+  "implementationStatus": "A4_OPERATOR_REVIEW_READINESS_AND_RELEASE_GATE_COMPLETE",
+  "profileId": "airport-a4-readiness-release-gate-profile-v1",
+  "readinessOutcome": "A4_OPERATOR_REVIEW_READ_ONLY_RELEASE_GATE_PASS",
+  "regressionMatrix": [
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-operator-review-policy-guard.py",
+      "deterministicDigest": "8242d7fb8532f0ef834a7e68e5715a9c0604fa8fefb175cf96e02266ae4d6a9f",
+      "expectedMarker": "ONE_AIRPORT_A4_03_OPERATOR_REVIEW_DECISION_AUDIT_AND_POLICY_GUARD_PASS",
+      "requiredForRelease": true,
+      "status": "PASS",
+      "validatorName": "validate-one-operator-review-policy-guard.py"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-uconsole-operator-review-queue-projection.py",
+      "deterministicDigest": "878cb232378df6661a34685d0fd92768edb328a86eeb15a4cff06eabd17afbdf",
+      "expectedMarker": "ONE_AIRPORT_A4_02_OPERATOR_REVIEW_UCONSOLE_QUEUE_PROJECTION_PASS",
+      "requiredForRelease": true,
+      "status": "PASS",
+      "validatorName": "validate-one-uconsole-operator-review-queue-projection.py"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-operator-review-decision-layer.py",
+      "deterministicDigest": "0a46b413153adf736035a4203ee5b9d5bd7dfce79a6fdde4f5640f5edf7d9dae",
+      "expectedMarker": "ONE_AIRPORT_A4_01_OPERATOR_REVIEW_DECISION_LAYER_FOUNDATION_PASS",
+      "requiredForRelease": true,
+      "status": "PASS",
+      "validatorName": "validate-one-operator-review-decision-layer.py"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-airport-a3-readiness-release-gate.py",
+      "deterministicDigest": "d4f6f3a3808cac0b11530101fa26c9e39d74a7eb5115ccf215c14e58e7851d78",
+      "expectedMarker": "ONE_AIRPORT_A3_07_A3_READINESS_AGGREGATION_AND_RELEASE_GATE_PASS",
+      "requiredForRelease": true,
+      "status": "PASS",
+      "validatorName": "validate-one-airport-a3-readiness-release-gate.py"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-boundaries.py",
+      "deterministicDigest": "1e1ec290fc26a2136a2a5ebd1bad5106985a02d551291d5ced5419003ce56ebb",
+      "expectedMarker": "ONE_BOUNDARY_BASELINE_PASS",
+      "requiredForRelease": true,
+      "status": "PASS",
+      "validatorName": "validate-one-boundaries.py"
+    }
+  ],
+  "releaseDecision": {
+    "apiEnabled": false,
+    "approvalWriteAllowed": false,
+    "auditWriteAllowed": false,
+    "databaseWriteAllowed": false,
+    "decisionReason": "All A4 read-only operator-review gates passed locally; push and all writes remain disabled.",
+    "decisionState": "RELEASE_GATE_PASS",
+    "decisionWriteAllowed": false,
+    "deterministicDigest": "0b1dfe54d177f75bf894f2ca52c87e2f2e3646b8a12f263b77e49495c19601a4",
+    "frontendEnabled": false,
+    "productionActivationAllowed": false,
+    "pushAllowed": false,
+    "releaseAllowed": true,
+    "runtimeActivationAllowed": false
+  },
+  "releaseGateId": "f20e3a3a5a17ba9cc118686b86d4e0c7bdbd6cb5cb5a96ebdeb9ce4c7e56a3cc",
+  "releaseNotes": [
+    "A4 releaseAllowed means local read-only operator-review development gate passed.",
+    "Decision, approval, audit, database, API, frontend and runtime activation writes remain disabled.",
+    "pushAllowed remains false until explicitly instructed by the user."
+  ],
+  "stageResults": [
+    {
+      "artifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-operator-review-decisions.v1.json",
+      "commitReference": "b178fa2",
+      "deterministicDigest": "7cf06c74f512c49adb22fbe3514f1240e664d5de802dda12a3a25a33f6f5a3be",
+      "passMarker": "ONE_AIRPORT_A4_01_OPERATOR_REVIEW_DECISION_LAYER_FOUNDATION_PASS",
+      "stageId": "A4-01",
+      "stageName": "Operator Review Decision Layer Foundation",
+      "status": "PASS",
+      "summary": {
+        "approvalWriteCount": 0,
+        "auditPreviewCount": 0,
+        "containsCustomerAssetIdentifiers": false,
+        "databaseWriteCount": 0,
+        "decisionItemCount": 46,
+        "decisionWriteCount": 0,
+        "policyGuardResultCount": 0,
+        "queueRowCount": 0
+      },
+      "validatorName": "validate-one-operator-review-decision-layer.py"
+    },
+    {
+      "artifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-uconsole-operator-review-queue.v1.json",
+      "commitReference": "f2eebda",
+      "deterministicDigest": "ffadd0d6f98064900ef843201f30a849ba44f9180c80d065d4943cf3323bb48f",
+      "passMarker": "ONE_AIRPORT_A4_02_OPERATOR_REVIEW_UCONSOLE_QUEUE_PROJECTION_PASS",
+      "stageId": "A4-02",
+      "stageName": "Operator Review UConsole Queue Projection",
+      "status": "PASS",
+      "summary": {
+        "approvalWriteCount": 0,
+        "auditPreviewCount": 0,
+        "containsCustomerAssetIdentifiers": false,
+        "databaseWriteCount": 0,
+        "decisionItemCount": 46,
+        "decisionWriteCount": 0,
+        "policyGuardResultCount": 0,
+        "queueRowCount": 46
+      },
+      "validatorName": "validate-one-uconsole-operator-review-queue-projection.py"
+    },
+    {
+      "artifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-operator-review-policy-guard.v1.json",
+      "commitReference": "6f37fd0",
+      "deterministicDigest": "e41c1f52fed02d980073f67782d1322513be5bffc0b4e5791c5ee244f8f4de6c",
+      "passMarker": "ONE_AIRPORT_A4_03_OPERATOR_REVIEW_DECISION_AUDIT_AND_POLICY_GUARD_PASS",
+      "stageId": "A4-03",
+      "stageName": "Operator Review Decision Audit and Policy Guard",
+      "status": "PASS",
+      "summary": {
+        "approvalWriteCount": 0,
+        "auditPreviewCount": 46,
+        "containsCustomerAssetIdentifiers": false,
+        "databaseWriteCount": 0,
+        "decisionItemCount": 46,
+        "decisionWriteCount": 0,
+        "policyGuardResultCount": 46,
+        "queueRowCount": 0
+      },
+      "validatorName": "validate-one-operator-review-policy-guard.py"
+    }
+  ],
+  "summary": {
+    "a4StageCount": 3,
+    "affectedSourceSystemCount": 5,
+    "airportSpecific": false,
+    "apiEnabled": false,
+    "approvalWriteCount": 0,
+    "auditPreviewCount": 46,
+    "auditWriteCount": 0,
+    "blockedByPolicyCount": 46,
+    "blockingDecisionCount": 45,
+    "blockingGateFailureCount": 0,
+    "canonicalWriteCount": 0,
+    "containsCustomerAssetIdentifiers": false,
+    "crossIndustry": true,
+    "databaseWriteCount": 0,
+    "decisionItemCount": 46,
+    "decisionWriteCount": 0,
+    "eligibleForExecutionCount": 0,
+    "eligibleForPreviewCount": 46,
+    "failedStageCount": 0,
+    "frontendEnabled": false,
+    "gateCount": 15,
+    "guardGroupCount": 8,
+    "nonBlockingDecisionCount": 1,
+    "passedGateCount": 15,
+    "passedStageCount": 3,
+    "pendingDecisionCount": 46,
+    "policyGuardResultCount": 46,
+    "productionActivationAllowed": false,
+    "pushAllowed": false,
+    "queueCardCount": 8,
+    "queueGroupCount": 8,
+    "queueRowCount": 46,
+    "releaseAllowed": true,
+    "runtimeActivationAllowed": false,
+    "totalDeviceEvidenceCount": 470
+  }
+}

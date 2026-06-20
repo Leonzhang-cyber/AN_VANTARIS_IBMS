@@ -1,0 +1,29 @@
+{
+  "apiEnabled": false,
+  "approvalWriteCount": 0,
+  "airportSpecific": false,
+  "auditWriteCount": 0,
+  "authority": "ONE-AIRPORT-A4-04",
+  "canonicalWriteCount": 0,
+  "containsCustomerAssetIdentifiers": false,
+  "contractVersion": "a4-readiness-release-gate.v1",
+  "crossIndustry": true,
+  "databaseAccessEnabled": false,
+  "databaseWriteCount": 0,
+  "decisionWriteCount": 0,
+  "description": "Read-only A4 readiness aggregation and release gate for the Operator Review Decision Layer.",
+  "frontendEnabled": false,
+  "implementationStatus": "A4_OPERATOR_REVIEW_READINESS_AND_RELEASE_GATE_COMPLETE",
+  "productionActivationAllowed": false,
+  "projectionId": "a4-readiness-release-gate",
+  "pushAllowed": false,
+  "readOnly": true,
+  "readinessOutcome": "A4_OPERATOR_REVIEW_READ_ONLY_RELEASE_GATE_PASS",
+  "runtimeActivationAllowed": false,
+  "sourceArtifacts": [
+    "airport-operator-review-decisions.v1.json",
+    "airport-uconsole-operator-review-queue.v1.json",
+    "airport-operator-review-policy-guard.v1.json",
+    "airport-a3-readiness-release-gate.v1.json"
+  ]
+}
