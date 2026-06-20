@@ -1,0 +1,21 @@
+{
+  "apiProductionAllowed": false,
+  "approvalExecutionAllowed": false,
+  "authority": "ONE-AIRPORT-GA-04",
+  "contractVersion": "international-ga-final-local-verification.v1",
+  "crossIndustry": true,
+  "databaseWriteAllowed": false,
+  "description": "International GA final local verification and optional release tag/push plan.",
+  "frontendProductionAllowed": false,
+  "implementationStatus": "INTERNATIONAL_GA_FINAL_LOCAL_VERIFICATION_AND_OPTIONAL_RELEASE_TAG_PLAN_COMPLETE",
+  "productionActivationAllowed": false,
+  "pushAllowed": false,
+  "pushAllowedNow": false,
+  "readinessOutcome": "INTERNATIONAL_GA_LOCAL_VERIFICATION_PASS_READY_FOR_EXPLICIT_PUSH_TAG_DECISION",
+  "releaseCandidateAllowed": true,
+  "requiresExplicitUserApprovalForPush": true,
+  "requiresExplicitUserApprovalForTag": true,
+  "runtimeActivationAllowed": false,
+  "tagAllowed": false,
+  "tagAllowedNow": false
+}
