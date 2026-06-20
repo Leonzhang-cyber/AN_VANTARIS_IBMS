@@ -1,0 +1,25 @@
+{
+  "apiEnabled": false,
+  "airportSpecific": false,
+  "canonicalWriteCount": 0,
+  "contractVersion": "alarm-event-asset-resolution-review.v1",
+  "crossIndustry": true,
+  "databaseAccessEnabled": false,
+  "databaseWriteCount": 0,
+  "description": "Generic cross-industry read-only Alarm/Event to Asset/Point/Location resolution review projection.",
+  "frontendEnabled": false,
+  "generatedAtPolicy": "DETERMINISTIC_NO_VOLATILE_TIMESTAMP",
+  "implementationStatus": "ALARM_EVENT_ASSET_RESOLUTION_REVIEW_PROJECTION_COMPLETE",
+  "productionActivationEnabled": false,
+  "registryId": "alarm-event-asset-resolution-review.v1",
+  "runtimeAlarmObservedCount": 0,
+  "scope": "READ_ONLY_REVIEW_PROJECTION",
+  "supportedObjects": [
+    "ResolutionReviewProjection",
+    "ResolutionRow",
+    "ReviewCard"
+  ],
+  "ufmsFaultCaseCreatedCount": 0,
+  "workOrderCreatedCount": 0,
+  "workOrderIntentCreatedCount": 0
+}
