@@ -1,0 +1,25 @@
+{
+  "apiEnabled": false,
+  "airportSpecific": false,
+  "canonicalWriteCount": 0,
+  "contractVersion": "ufms-faultcase-candidate-projection.v1",
+  "crossIndustry": true,
+  "databaseAccessEnabled": false,
+  "databaseWriteCount": 0,
+  "description": "Generic cross-industry read-only UFMS FaultCase candidate projection for review only.",
+  "frontendEnabled": false,
+  "generatedAtPolicy": "DETERMINISTIC_NO_VOLATILE_TIMESTAMP",
+  "implementationStatus": "UFMS_FAULTCASE_CANDIDATE_PROJECTION_COMPLETE",
+  "productionActivationEnabled": false,
+  "registryId": "ufms-faultcase-candidate-projection.v1",
+  "runtimeAlarmObservedCount": 0,
+  "scope": "READ_ONLY_CANDIDATE_PROJECTION",
+  "supportedObjects": [
+    "FaultCaseCandidateProjection",
+    "FaultCaseCandidate",
+    "ReviewCard"
+  ],
+  "ufmsFaultCaseCreatedCount": 0,
+  "workOrderCreatedCount": 0,
+  "workOrderIntentCreatedCount": 0
+}
