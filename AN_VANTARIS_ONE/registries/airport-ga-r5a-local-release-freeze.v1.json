@@ -1,0 +1,119 @@
+{
+  "releaseFreezeId": "airport-ga-r5a-local-release-freeze-20260621",
+  "currentHead": "a581d5e242f1f3e6fb6890f31f2ad562a079d125",
+  "previousPushedTag": "airport-international-ga-ready-readonly-rc-20260620",
+  "branchStatus": "main...origin/main [ahead 5]",
+  "commitChain": [
+    {
+      "step": "GA-R1",
+      "commit": "c78fb35190c76027115b4bb92fc8322bf07b73c7",
+      "message": "feat(one): implement airport ga readonly api routes",
+      "passMarker": "ONE_AIRPORT_GA_R1_READONLY_API_ROUTE_IMPLEMENTATION_PASS"
+    },
+    {
+      "step": "GA-R2",
+      "commit": "d4218fe3711344369420ea30e57217998d968f2b",
+      "message": "test(one): add airport ga readonly api smoke regression",
+      "passMarker": "ONE_AIRPORT_GA_R2_READONLY_API_LOCAL_SMOKE_AND_CONTRACT_REGRESSION_PASS"
+    },
+    {
+      "step": "GA-R3",
+      "commit": "f1056fe0b34019dc0660783bab687cae0332e5ee",
+      "message": "feat(one): add airport ga readonly frontend page",
+      "passMarker": "ONE_AIRPORT_GA_R3_READONLY_FRONTEND_ROUTE_PAGE_IMPLEMENTATION_PASS"
+    },
+    {
+      "step": "GA-R4",
+      "commit": "82667d1",
+      "message": "feat(one): bind airport ga readonly page in uconsole",
+      "passMarker": "ONE_AIRPORT_GA_R4_UCONSOLE_AIRPORT_READONLY_PAGE_BINDING_PASS"
+    },
+    {
+      "step": "GA-R5",
+      "commit": "a581d5e242f1f3e6fb6890f31f2ad562a079d125",
+      "message": "docs(one): add airport ga stakeholder review package",
+      "passMarker": "ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE_PASS"
+    }
+  ],
+  "passMarkers": [
+    "ONE_AIRPORT_GA_R1_READONLY_API_ROUTE_IMPLEMENTATION_PASS",
+    "ONE_AIRPORT_GA_R2_READONLY_API_LOCAL_SMOKE_AND_CONTRACT_REGRESSION_PASS",
+    "ONE_AIRPORT_GA_R3_READONLY_FRONTEND_ROUTE_PAGE_IMPLEMENTATION_PASS",
+    "ONE_AIRPORT_GA_R4_UCONSOLE_AIRPORT_READONLY_PAGE_BINDING_PASS",
+    "ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE_PASS",
+    "ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS"
+  ],
+  "routeMatrix": [
+    {
+      "method": "GET",
+      "path": "/api/v1/one/airport/console/overview"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/one/airport/console/systems-integration-health"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/one/airport/console/assets-topology"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/one/airport/console/alarms-events"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/one/airport/console/fault-cases"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/one/airport/console/maintenance-work-orders"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/one/airport/console/evidence-investigation"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/one/airport/console/reports"
+    }
+  ],
+  "frontendRoute": "/one/airport/overview",
+  "uconsoleEntry": "Airport GA Read-only",
+  "safetyMatrix": {
+    "readOnly": true,
+    "productionActivation": false,
+    "runtimeActivation": false,
+    "dbWrite": false,
+    "approvalExecution": false,
+    "deploymentExecution": false,
+    "remoteCommandExecution": false,
+    "edgeLinkRuntimeCall": false,
+    "customerIdentifierLeakage": false,
+    "localAbsolutePathLeakage": false,
+    "oneAdapterIntroduced": false
+  },
+  "validationMatrix": {
+    "gaR1": "PASS",
+    "gaR2": "PASS",
+    "gaR3": "PASS",
+    "gaR4": "PASS",
+    "gaR5": "PASS",
+    "packageRouteEnforcement": "PASS",
+    "boundaryBaseline": "PASS",
+    "a8FrontendSkeleton": "PASS",
+    "a8FrontendPageContract": "PASS",
+    "a8FrontendReleaseGate": "PASS",
+    "registryJsonValidation": "PASS"
+  },
+  "optionalTagPlan": {
+    "tagName": "airport-ga-readonly-stakeholder-review-local-freeze-20260621",
+    "commandsDocumentedForFutureUseOnly": [
+      "git tag -a airport-ga-readonly-stakeholder-review-local-freeze-20260621 -m \"VANTARIS ONE Airport GA read-only stakeholder review local freeze\"",
+      "git push origin main",
+      "git push origin airport-ga-readonly-stakeholder-review-local-freeze-20260621"
+    ],
+    "executed": false
+  },
+  "pushPerformed": false,
+  "tagCreated": false
+}
