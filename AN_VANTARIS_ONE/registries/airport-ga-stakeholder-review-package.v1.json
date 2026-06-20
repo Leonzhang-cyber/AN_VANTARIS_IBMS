@@ -1,0 +1,141 @@
+{
+  "authority": "ONE-AIRPORT-GA-R5",
+  "contractVersion": "airport-ga-stakeholder-review-package.v1",
+  "releaseCandidate": "airport-international-ga-ready-readonly-rc-20260620",
+  "packageName": "Airport GA Read-only",
+  "packageType": "industry-solution",
+  "platform": "VANTARIS ONE",
+  "productionActivationAllowed": false,
+  "runtimeActivationAllowed": false,
+  "databaseWriteAllowed": false,
+  "approvalExecutionAllowed": false,
+  "deploymentExecutionAllowed": false,
+  "edgeLinkRuntimeIntegrationAllowed": false,
+  "pushAllowed": false,
+  "commitChain": {
+    "gaR1": "c78fb35190c76027115b4bb92fc8322bf07b73c7",
+    "gaR2": "d4218fe3711344369420ea30e57217998d968f2b",
+    "gaR3": "f1056fe0b34019dc0660783bab687cae0332e5ee",
+    "gaR4": "82667d1"
+  },
+  "routeMatrix": [
+    {
+      "method": "GET",
+      "path": "/api/v1/one/airport/console/overview"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/one/airport/console/systems-integration-health"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/one/airport/console/assets-topology"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/one/airport/console/alarms-events"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/one/airport/console/fault-cases"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/one/airport/console/maintenance-work-orders"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/one/airport/console/evidence-investigation"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/one/airport/console/reports"
+    }
+  ],
+  "frontendEntry": "/one/airport/overview",
+  "uconsoleEntry": "Airport GA Read-only",
+  "safetyMatrix": {
+    "readOnly": true,
+    "productionActivation": false,
+    "runtimeActivation": false,
+    "dbWrite": false,
+    "approvalExecution": false,
+    "deploymentExecution": false,
+    "edgeLinkRuntimeCall": false,
+    "customerIdentifierLeakage": false,
+    "localAbsolutePathLeakage": false
+  },
+  "customerCoreFunctionReadiness": [
+    {
+      "function": "Work Order Management, auto + manual",
+      "currentStatus": "read-only projection",
+      "futureOwner": "UMMS / ONE Work Management alignment"
+    },
+    {
+      "function": "Asset Registry, full lifecycle tracking",
+      "currentStatus": "readiness view",
+      "futureOwner": "VANTARIS ONE Airport with ONE Asset Graph / Layer 3"
+    },
+    {
+      "function": "Preventive Maintenance Scheduler",
+      "currentStatus": "future UMMS",
+      "futureOwner": "UMMS"
+    },
+    {
+      "function": "Spare Parts / Inventory Management",
+      "currentStatus": "future UMMS",
+      "futureOwner": "UMMS"
+    },
+    {
+      "function": "Vendor / Contract Management",
+      "currentStatus": "future UMMS",
+      "futureOwner": "UMMS"
+    },
+    {
+      "function": "Graphics HMI to locate equipment",
+      "currentStatus": "readiness view",
+      "futureOwner": "VANTARIS ONE Airport / UCDE"
+    },
+    {
+      "function": "Existing system onboarding",
+      "currentStatus": "readiness view",
+      "futureOwner": "EDGE / LINK shared foundation"
+    },
+    {
+      "function": "Engineer commissioning diagnostics",
+      "currentStatus": "readiness view",
+      "futureOwner": "EDGE / LINK shared foundation"
+    },
+    {
+      "function": "Remote overseas deployment",
+      "currentStatus": "not implemented",
+      "futureOwner": "LINK / EDGE shared foundation"
+    },
+    {
+      "function": "Distributed independent installation",
+      "currentStatus": "not implemented",
+      "futureOwner": "LINK / EDGE shared foundation"
+    }
+  ],
+  "futureSharedFoundationRequirements": [
+    "LINK source-system health",
+    "LINK delivery readiness",
+    "LINK audit/evidence chain",
+    "LINK work-order trigger contract",
+    "LINK asset/location reference contract",
+    "EDGE connector matrix for OPC UA / OPC TCP/IP / SNMP / Modbus / BACnet / REST / CSV / Excel / SDK / file export",
+    "EDGE tag mapping and normalization",
+    "EDGE engineer commissioning diagnostics",
+    "EDGE offline / remote deployment package",
+    "EDGE hardware-key / site-binding status",
+    "Distributed installation topology",
+    "Remote support bundle contract"
+  ],
+  "validationMarkers": [
+    "ONE_AIRPORT_GA_R1_READONLY_API_ROUTE_IMPLEMENTATION_PASS",
+    "ONE_AIRPORT_GA_R2_READONLY_API_LOCAL_SMOKE_AND_CONTRACT_REGRESSION_PASS",
+    "ONE_AIRPORT_GA_R3_READONLY_FRONTEND_ROUTE_PAGE_IMPLEMENTATION_PASS",
+    "ONE_AIRPORT_GA_R4_UCONSOLE_AIRPORT_READONLY_PAGE_BINDING_PASS",
+    "ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE_PASS"
+  ]
+}
