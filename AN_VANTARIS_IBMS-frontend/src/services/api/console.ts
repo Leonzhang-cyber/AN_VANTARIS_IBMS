@@ -527,6 +527,16 @@ export interface ModulePackageRecord {
   adminEntry: ModulePackageEntry
   roleVisibility: ModuleRoleVisibility
   entryStatus: string
+  platform: string
+  industryProjection: string
+  description: string
+  productionActivation: boolean
+  runtimeActivation: boolean
+  dbWrite: boolean
+  approvalExecution: boolean
+  deploymentExecution: boolean
+  edgeLinkRuntimeCall: boolean
+  customerIdentifierLeakage: boolean
   runtimeMode: string
   provider: string
   readOnly: boolean
@@ -707,6 +717,16 @@ function normalizePackage(raw: unknown): ModulePackageRecord {
     adminEntry: normalizePackageEntry(data.adminEntry),
     roleVisibility: normalizeRoleVisibility(data.roleVisibility),
     entryStatus: String(data.entryStatus ?? ''),
+    platform: String(data.platform ?? 'VANTARIS ONE'),
+    industryProjection: String(data.industryProjection ?? ''),
+    description: String(data.description ?? ''),
+    productionActivation: Boolean(data.productionActivation),
+    runtimeActivation: Boolean(data.runtimeActivation),
+    dbWrite: Boolean(data.dbWrite),
+    approvalExecution: Boolean(data.approvalExecution),
+    deploymentExecution: Boolean(data.deploymentExecution),
+    edgeLinkRuntimeCall: Boolean(data.edgeLinkRuntimeCall),
+    customerIdentifierLeakage: Boolean(data.customerIdentifierLeakage),
     runtimeMode: String(data.runtimeMode ?? 'local-skeleton'),
     provider: String(data.provider ?? 'local-package-registry'),
     readOnly: data.readOnly !== undefined ? Boolean(data.readOnly) : true,
@@ -1342,4 +1362,3 @@ export async function getModuleContentDetail(moduleId: string, role?: ConsoleRol
   })
   return normalizeModuleContentDetail(unwrapData<unknown>(data))
 }
-

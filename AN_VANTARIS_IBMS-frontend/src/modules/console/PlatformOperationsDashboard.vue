@@ -1287,6 +1287,10 @@ onMounted(() => {
         <el-table-column prop="installedVersion" label="installedVersion" min-width="140" />
         <el-table-column prop="availableVersion" label="availableVersion" min-width="140" />
         <el-table-column prop="patchStatus" label="patchStatus" min-width="140" />
+        <el-table-column prop="readOnly" label="readOnly" min-width="100" />
+        <el-table-column prop="productionActivation" label="productionActivation" min-width="170" />
+        <el-table-column prop="runtimeActivation" label="runtimeActivation" min-width="160" />
+        <el-table-column prop="deploymentExecution" label="deploymentExecution" min-width="170" />
         <el-table-column prop="lockedReason" label="lockedReason" min-width="220" />
         <el-table-column label="actions" min-width="320" fixed="right">
           <template #default="{ row }">
@@ -1906,6 +1910,19 @@ onMounted(() => {
           <el-descriptions-item label="engineerEntry">{{ selectedPackageDetail.engineerEntry }}</el-descriptions-item>
           <el-descriptions-item label="adminEntry">{{ selectedPackageDetail.adminEntry }}</el-descriptions-item>
           <el-descriptions-item label="roleVisibility">{{ selectedPackageDetail.roleVisibility }}</el-descriptions-item>
+          <el-descriptions-item label="readOnlySafety">
+            readOnly={{ selectedPackageDetail.readOnly }},
+            productionActivation={{ selectedPackageDetail.productionActivation }},
+            runtimeActivation={{ selectedPackageDetail.runtimeActivation }},
+            dbWrite={{ selectedPackageDetail.dbWrite }},
+            approvalExecution={{ selectedPackageDetail.approvalExecution }},
+            deploymentExecution={{ selectedPackageDetail.deploymentExecution }},
+            edgeLinkRuntimeCall={{ selectedPackageDetail.edgeLinkRuntimeCall }},
+            customerIdentifierLeakage={{ selectedPackageDetail.customerIdentifierLeakage }}
+          </el-descriptions-item>
+          <el-descriptions-item label="industryProjection">
+            {{ selectedPackageDetail.platform }} | {{ selectedPackageDetail.industryProjection || '-' }} | {{ selectedPackageDetail.description || '-' }}
+          </el-descriptions-item>
           <el-descriptions-item label="patch/version">
             {{ selectedPackageDetail.patchStatus }} | {{ selectedPackageDetail.installedVersion }} -> {{ selectedPackageDetail.availableVersion }}
           </el-descriptions-item>
@@ -1970,4 +1987,3 @@ onMounted(() => {
   word-break: break-word;
 }
 </style>
-
