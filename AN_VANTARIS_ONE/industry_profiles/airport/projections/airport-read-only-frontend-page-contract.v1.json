@@ -1,0 +1,2200 @@
+{
+  "authority": "ONE-AIRPORT-A8-02",
+  "boundaryMatrix": [
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryKey": "apiEnabled",
+      "deterministicDigest": "2b4cea0daa47758b2e86d350a595303cc0c44608c918b66a61ae31863a527a1e",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryKey": "approvalWriteCount",
+      "deterministicDigest": "f8c8e707698a310750c18ea897ad651a2e444195c708c7732dc2684a73949775",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryKey": "auditWriteCount",
+      "deterministicDigest": "ced150c948da97a64bf51c4cbab525a133f8e23d7dc3ce371a903a8faad8b1dc",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryKey": "browserLaunchRequiredCount",
+      "deterministicDigest": "f5affa55b282a84741ab04a2a2d41f511dae909907809309c0f04cd2777ccb26",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryKey": "canonicalWriteCount",
+      "deterministicDigest": "5ff0128ebeef5a328323d7c520c73e91ec2fbc26feec1be1840f87129a6a4152",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryKey": "containsCustomerAssetIdentifiers",
+      "deterministicDigest": "1b038f27541d684cdc83d89c7443cfd55e9e672856ea78adae31a0634d179b3d",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryKey": "databaseWriteCount",
+      "deterministicDigest": "d6dfda7d99c838fedfaa5f3d78037e5a2f3dfe64b9213fa177b2b0e991ee0b6c",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryKey": "decisionWriteCount",
+      "deterministicDigest": "f2dfc4a327b7109337980cab704e0ad414a2cca4f702bfb459790d354b2ac40d",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryKey": "frontendEnabled",
+      "deterministicDigest": "0368601a688838fc3fc697f7b61ad55bc55843d12f5ed9668b160d9488cd03d3",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryKey": "localhostCallRequiredCount",
+      "deterministicDigest": "ca909d7491fc43be4414e4312a17764e4b5c7346a8075a37bcc671a89f037130",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryKey": "networkCallRequiredCount",
+      "deterministicDigest": "670cc6c2cac602ef1a76c2f2d1731dadb9a8b173671ec4db49c2d5e2ddd3d159",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryKey": "productionActivationAllowed",
+      "deterministicDigest": "117a02f7bd31fecb4a3cc7864def0b4992d4ed9a8fd71319ef45017a59edb1c0",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryKey": "productionRouteEnabledCount",
+      "deterministicDigest": "7fedb2ed52deca08f4ca2cb1968c30d63c8aea2bc3b4fe86cb9a71e8f35debef",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryKey": "pushAllowed",
+      "deterministicDigest": "4f7882e020c156b914fcbd2bc07d248b356ed2f6ba4c39ff6dfb7965ae545e86",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryKey": "runtimeActivationAllowed",
+      "deterministicDigest": "ca42c7d4c19c2db935481f5835c1f604e3db3e008af59219aa62438f315fa47b",
+      "expectedValue": false,
+      "status": "PASS"
+    }
+  ],
+  "componentBindingContracts": [
+    {
+      "componentBindingId": "018e91cac2f2fb349cc1fb7db23e96659ebb0a951818dfd2adb4e9518b00ecee",
+      "componentKey": "ALARMS_EVENTS_DETAIL_PANEL",
+      "componentType": "REVIEW_QUEUE",
+      "dataMutationEnabled": false,
+      "deterministicDigest": "a98b724b7677b2fc246e57c9f5f8ee8dfc78f3cc1324018baf9356c99ffc6bbc",
+      "liveApiCallEnabled": false,
+      "pageKey": "ALARMS_EVENTS",
+      "readOnly": true,
+      "sourceApiEndpointKey": "ALARMS_EVENTS",
+      "sourceDataBindingKey": "cfc748a52833497f09a5a9a485cc137f79955f00368ae974b743ed38b2e6c2e0"
+    },
+    {
+      "componentBindingId": "0c9127fbce76dac76330262acde195d03a517ee8e1ec8694162d70d42834615e",
+      "componentKey": "ASSETS_TOPOLOGY_PAGE_CONTAINER",
+      "componentType": "PAGE_CONTAINER",
+      "dataMutationEnabled": false,
+      "deterministicDigest": "1b30f91fa468e98fae21a80894bf46b842c5a8ebc696a6b0083e67b99a750a16",
+      "liveApiCallEnabled": false,
+      "pageKey": "ASSETS_TOPOLOGY",
+      "readOnly": true,
+      "sourceApiEndpointKey": "ASSETS_TOPOLOGY",
+      "sourceDataBindingKey": "62e6259cb96ed8add1012d5f545973698ead565a8414cf47727eb9fa8ac45725"
+    },
+    {
+      "componentBindingId": "137e2020f4bd3247235ec1a6c28f3f200e1192672ffdaddc4d86843a77a29cf5",
+      "componentKey": "ASSETS_TOPOLOGY_PRIMARY_PANEL",
+      "componentType": "SUMMARY_CARD",
+      "dataMutationEnabled": false,
+      "deterministicDigest": "6aa7c81f4f84e0e7d7978dec907a1e99f175d7f6433536a8d4db43f0c57f7a0a",
+      "liveApiCallEnabled": false,
+      "pageKey": "ASSETS_TOPOLOGY",
+      "readOnly": true,
+      "sourceApiEndpointKey": "ASSETS_TOPOLOGY",
+      "sourceDataBindingKey": "62e6259cb96ed8add1012d5f545973698ead565a8414cf47727eb9fa8ac45725"
+    },
+    {
+      "componentBindingId": "24bcf56d0a3d9af47be2733c5d463c3db9f0847df13ddf1a62492c48513edea8",
+      "componentKey": "REPORTS_DETAIL_PANEL",
+      "componentType": "REPORT_PANEL",
+      "dataMutationEnabled": false,
+      "deterministicDigest": "bc86a7cd091ccdd7748ea1b4690d5a8ecb564099312fdd08e07221ac251d3dc6",
+      "liveApiCallEnabled": false,
+      "pageKey": "REPORTS",
+      "readOnly": true,
+      "sourceApiEndpointKey": "REPORTS",
+      "sourceDataBindingKey": "62076fc50b845ce8acf028c76948a6ea13481e4e7d3afea49f0f3c73c63cdfa8"
+    },
+    {
+      "componentBindingId": "426886ce948a8f27c16f56f6ee8c73a135f04e446b901fb1ac5a12b604a78f77",
+      "componentKey": "MAINTENANCE_WORK_ORDERS_PRIMARY_PANEL",
+      "componentType": "SUMMARY_CARD",
+      "dataMutationEnabled": false,
+      "deterministicDigest": "5c3ece1ffb24cb6c60cb996482ac14707fbc064037c4da610788df0f8aac670f",
+      "liveApiCallEnabled": false,
+      "pageKey": "MAINTENANCE_WORK_ORDERS",
+      "readOnly": true,
+      "sourceApiEndpointKey": "MAINTENANCE_WORK_ORDERS",
+      "sourceDataBindingKey": "3b694921cada62b369dd01769844abfe0a635dfed4ddb1b2350131a6ef3b4d9d"
+    },
+    {
+      "componentBindingId": "5ab8a62e3b53e726970e4546c36d8ebbf62bb25bc3bc6c36fc1325d5dc75ae9c",
+      "componentKey": "ASSETS_TOPOLOGY_DETAIL_PANEL",
+      "componentType": "DATA_TABLE",
+      "dataMutationEnabled": false,
+      "deterministicDigest": "4c4b16b0e288ca5110ad8467ae34d3914abb640864238f989b376e566f9e3db5",
+      "liveApiCallEnabled": false,
+      "pageKey": "ASSETS_TOPOLOGY",
+      "readOnly": true,
+      "sourceApiEndpointKey": "ASSETS_TOPOLOGY",
+      "sourceDataBindingKey": "62e6259cb96ed8add1012d5f545973698ead565a8414cf47727eb9fa8ac45725"
+    },
+    {
+      "componentBindingId": "6388429db8abc9069e54e0cf6ce237bf5fbf60e039cd179fd2d69e27a98bd52a",
+      "componentKey": "MAINTENANCE_WORK_ORDERS_DETAIL_PANEL",
+      "componentType": "REVIEW_QUEUE",
+      "dataMutationEnabled": false,
+      "deterministicDigest": "af08f8917a55eef2ebe2bfa85972a6f99b452dfea0d9665320bcc0a7bb4311bf",
+      "liveApiCallEnabled": false,
+      "pageKey": "MAINTENANCE_WORK_ORDERS",
+      "readOnly": true,
+      "sourceApiEndpointKey": "MAINTENANCE_WORK_ORDERS",
+      "sourceDataBindingKey": "3b694921cada62b369dd01769844abfe0a635dfed4ddb1b2350131a6ef3b4d9d"
+    },
+    {
+      "componentBindingId": "63ec238d7fd5e524ee2f9d59ad9f9ea557ea1b58ca87e53cebb7c73e46ecb37e",
+      "componentKey": "ALARMS_EVENTS_PRIMARY_PANEL",
+      "componentType": "SUMMARY_CARD",
+      "dataMutationEnabled": false,
+      "deterministicDigest": "6400599cc4bb4a09febb3b5a7907c56985269bf9edb1a8f626bb6eaed7bdeba1",
+      "liveApiCallEnabled": false,
+      "pageKey": "ALARMS_EVENTS",
+      "readOnly": true,
+      "sourceApiEndpointKey": "ALARMS_EVENTS",
+      "sourceDataBindingKey": "cfc748a52833497f09a5a9a485cc137f79955f00368ae974b743ed38b2e6c2e0"
+    },
+    {
+      "componentBindingId": "6785ddb8eeab1248397019f8b24f55edbe4a92a4afa8140adedad92bc1b413ef",
+      "componentKey": "SYSTEMS_INTEGRATION_HEALTH_PAGE_CONTAINER",
+      "componentType": "PAGE_CONTAINER",
+      "dataMutationEnabled": false,
+      "deterministicDigest": "303c44e04d602dac363da67a017394430fb095c1b7d72b872e2f96582b5ec7dd",
+      "liveApiCallEnabled": false,
+      "pageKey": "SYSTEMS_INTEGRATION_HEALTH",
+      "readOnly": true,
+      "sourceApiEndpointKey": "SYSTEMS_INTEGRATION_HEALTH",
+      "sourceDataBindingKey": "7535b3643e0fa7f300dd9e3a620a111a680bd0a6a736bdaf6301a4ac132cef77"
+    },
+    {
+      "componentBindingId": "70c8382c44ceca87d7bbd2b55bc6eeb05c04d43bb382028fcc029a6eccf11ae2",
+      "componentKey": "SYSTEMS_INTEGRATION_HEALTH_PRIMARY_PANEL",
+      "componentType": "STATUS_PANEL",
+      "dataMutationEnabled": false,
+      "deterministicDigest": "b2a5f229c129494cf2c2700fe5c7255d5f02c8ae97456b802577891632c9302a",
+      "liveApiCallEnabled": false,
+      "pageKey": "SYSTEMS_INTEGRATION_HEALTH",
+      "readOnly": true,
+      "sourceApiEndpointKey": "SYSTEMS_INTEGRATION_HEALTH",
+      "sourceDataBindingKey": "7535b3643e0fa7f300dd9e3a620a111a680bd0a6a736bdaf6301a4ac132cef77"
+    },
+    {
+      "componentBindingId": "8b0b1432aec804d4c2ce484886c8b82a99b8a0ad4b990159d7822c5cb71a3470",
+      "componentKey": "AIRPORT_OVERVIEW_PRIMARY_PANEL",
+      "componentType": "SUMMARY_CARD",
+      "dataMutationEnabled": false,
+      "deterministicDigest": "97cb9aa8bd1533f450610ebe870cc7e8bae38ae7d7ec1f7a2a82269cf736c33e",
+      "liveApiCallEnabled": false,
+      "pageKey": "AIRPORT_OVERVIEW",
+      "readOnly": true,
+      "sourceApiEndpointKey": "AIRPORT_OVERVIEW",
+      "sourceDataBindingKey": "45bc973d1de7316170b55aea59e1f514a1ac5226bc7b4fa3c3ae672e1d92b767"
+    },
+    {
+      "componentBindingId": "8eff7cb67048552804e3e002638cc9c74330ac602f6dbd149bd7066a90a750c3",
+      "componentKey": "FAULT_CASES_PRIMARY_PANEL",
+      "componentType": "SUMMARY_CARD",
+      "dataMutationEnabled": false,
+      "deterministicDigest": "5f836d7babcfa0c7889c7c9dc4247ac9314fece11bdcbf4c6885b950cbf68ec7",
+      "liveApiCallEnabled": false,
+      "pageKey": "FAULT_CASES",
+      "readOnly": true,
+      "sourceApiEndpointKey": "FAULT_CASES",
+      "sourceDataBindingKey": "f10cdd070a0f421c111c9d1ed23a2fa6a9e59b790eb025317a2f85ed413d16e7"
+    },
+    {
+      "componentBindingId": "9fb9c2f9ffa16852beb0affbff58c7c9eb66494fa3de46f36fa26c403e32b73c",
+      "componentKey": "ALARMS_EVENTS_PAGE_CONTAINER",
+      "componentType": "PAGE_CONTAINER",
+      "dataMutationEnabled": false,
+      "deterministicDigest": "aac4eb78463eb6b87befe37d8e915edebe7af17c2ab7b87da13b62cbb848d3af",
+      "liveApiCallEnabled": false,
+      "pageKey": "ALARMS_EVENTS",
+      "readOnly": true,
+      "sourceApiEndpointKey": "ALARMS_EVENTS",
+      "sourceDataBindingKey": "cfc748a52833497f09a5a9a485cc137f79955f00368ae974b743ed38b2e6c2e0"
+    },
+    {
+      "componentBindingId": "ab0bd17e021765b60ff9435a9c5675f400efe0d97f6df4045689d96245384674",
+      "componentKey": "AIRPORT_OVERVIEW_PAGE_CONTAINER",
+      "componentType": "PAGE_CONTAINER",
+      "dataMutationEnabled": false,
+      "deterministicDigest": "ade4281437dc06ed2f8273b83550831ef8f41f8432d24de8af107ce7b1ddcc76",
+      "liveApiCallEnabled": false,
+      "pageKey": "AIRPORT_OVERVIEW",
+      "readOnly": true,
+      "sourceApiEndpointKey": "AIRPORT_OVERVIEW",
+      "sourceDataBindingKey": "45bc973d1de7316170b55aea59e1f514a1ac5226bc7b4fa3c3ae672e1d92b767"
+    },
+    {
+      "componentBindingId": "af89aaac68df3f56fcd701993b38b81616ca96233c0b1a54168717be9c7f7c2f",
+      "componentKey": "REPORTS_PRIMARY_PANEL",
+      "componentType": "SUMMARY_CARD",
+      "dataMutationEnabled": false,
+      "deterministicDigest": "c8626aac57bab6d77fb236890d9bece7a6c4b402050af84a9635f2b97675a4a2",
+      "liveApiCallEnabled": false,
+      "pageKey": "REPORTS",
+      "readOnly": true,
+      "sourceApiEndpointKey": "REPORTS",
+      "sourceDataBindingKey": "62076fc50b845ce8acf028c76948a6ea13481e4e7d3afea49f0f3c73c63cdfa8"
+    },
+    {
+      "componentBindingId": "c251973c6f4d207eed6425fa9c99d1efea52849a0b6cac6b1383b8ebbe9f0cd8",
+      "componentKey": "REPORTS_PAGE_CONTAINER",
+      "componentType": "PAGE_CONTAINER",
+      "dataMutationEnabled": false,
+      "deterministicDigest": "948641ae94f5c5ce4bd49d4e14d6f69fd2072642852dbb9feff186d7fcb3f9ad",
+      "liveApiCallEnabled": false,
+      "pageKey": "REPORTS",
+      "readOnly": true,
+      "sourceApiEndpointKey": "REPORTS",
+      "sourceDataBindingKey": "62076fc50b845ce8acf028c76948a6ea13481e4e7d3afea49f0f3c73c63cdfa8"
+    },
+    {
+      "componentBindingId": "c80fe55e5fdaf70fbd07379a29d731e3bf45dee5471e8fcda8d1945c7750a2fa",
+      "componentKey": "FAULT_CASES_PAGE_CONTAINER",
+      "componentType": "PAGE_CONTAINER",
+      "dataMutationEnabled": false,
+      "deterministicDigest": "95a3f875add72599e52d7cfaf9d8d0ca638e7ba1e334c0bd64ae6c4a70f5c2ba",
+      "liveApiCallEnabled": false,
+      "pageKey": "FAULT_CASES",
+      "readOnly": true,
+      "sourceApiEndpointKey": "FAULT_CASES",
+      "sourceDataBindingKey": "f10cdd070a0f421c111c9d1ed23a2fa6a9e59b790eb025317a2f85ed413d16e7"
+    },
+    {
+      "componentBindingId": "e5a78eff53a0be03b5415c755a40ee600fccd73b57854166e6549b8e81c31e80",
+      "componentKey": "MAINTENANCE_WORK_ORDERS_PAGE_CONTAINER",
+      "componentType": "PAGE_CONTAINER",
+      "dataMutationEnabled": false,
+      "deterministicDigest": "a8c8af041bd56a683708c35728c0b6a4705418fd458dc870989c9c8843a218f1",
+      "liveApiCallEnabled": false,
+      "pageKey": "MAINTENANCE_WORK_ORDERS",
+      "readOnly": true,
+      "sourceApiEndpointKey": "MAINTENANCE_WORK_ORDERS",
+      "sourceDataBindingKey": "3b694921cada62b369dd01769844abfe0a635dfed4ddb1b2350131a6ef3b4d9d"
+    },
+    {
+      "componentBindingId": "eace4e079f3cfafe934b3a98e4a191ba3d49d840cca8774b331dfff65243a439",
+      "componentKey": "FAULT_CASES_DETAIL_PANEL",
+      "componentType": "REVIEW_QUEUE",
+      "dataMutationEnabled": false,
+      "deterministicDigest": "a45ca571926b708868da3a595d2fa6d7be6cb7c57f70db288330914473ee531e",
+      "liveApiCallEnabled": false,
+      "pageKey": "FAULT_CASES",
+      "readOnly": true,
+      "sourceApiEndpointKey": "FAULT_CASES",
+      "sourceDataBindingKey": "f10cdd070a0f421c111c9d1ed23a2fa6a9e59b790eb025317a2f85ed413d16e7"
+    },
+    {
+      "componentBindingId": "f0a28d3cc632abe4d70fbf41b8b84c55ad6a73fd93a0a68d92fd0de802dbf74e",
+      "componentKey": "SYSTEMS_INTEGRATION_HEALTH_DETAIL_PANEL",
+      "componentType": "DATA_TABLE",
+      "dataMutationEnabled": false,
+      "deterministicDigest": "c0290290530230e0459184a4e636fb2369a1c4133bafda414ce569d376f34793",
+      "liveApiCallEnabled": false,
+      "pageKey": "SYSTEMS_INTEGRATION_HEALTH",
+      "readOnly": true,
+      "sourceApiEndpointKey": "SYSTEMS_INTEGRATION_HEALTH",
+      "sourceDataBindingKey": "7535b3643e0fa7f300dd9e3a620a111a680bd0a6a736bdaf6301a4ac132cef77"
+    },
+    {
+      "componentBindingId": "f287d179c91df8489f65d777350dde613ee746e4f5f0c448cc03d4d92bda7aa9",
+      "componentKey": "AIRPORT_OVERVIEW_DETAIL_PANEL",
+      "componentType": "DATA_TABLE",
+      "dataMutationEnabled": false,
+      "deterministicDigest": "f5cddf774fb23eb15e5da40411fa75d32290be761f47db6320c9178d1079b3ed",
+      "liveApiCallEnabled": false,
+      "pageKey": "AIRPORT_OVERVIEW",
+      "readOnly": true,
+      "sourceApiEndpointKey": "AIRPORT_OVERVIEW",
+      "sourceDataBindingKey": "45bc973d1de7316170b55aea59e1f514a1ac5226bc7b4fa3c3ae672e1d92b767"
+    },
+    {
+      "componentBindingId": "f6edd512f24fba0cde1d21f1b0200afd1d4a577d2b82ea0145571e26f98c9ed3",
+      "componentKey": "EVIDENCE_INVESTIGATION_DETAIL_PANEL",
+      "componentType": "REVIEW_QUEUE",
+      "dataMutationEnabled": false,
+      "deterministicDigest": "07bdcb62af63c7ee58ef1862e1ed3a9b53ac59de825770f79618ad91e026edeb",
+      "liveApiCallEnabled": false,
+      "pageKey": "EVIDENCE_INVESTIGATION",
+      "readOnly": true,
+      "sourceApiEndpointKey": "EVIDENCE_INVESTIGATION",
+      "sourceDataBindingKey": "173035307c33781a3863324664b68328d882cc399e6b6010898fca726cc92fdc"
+    },
+    {
+      "componentBindingId": "f9f0358a6761e878d3eee14295bb398561fd2172fbc5472068b7081f0085ec99",
+      "componentKey": "EVIDENCE_INVESTIGATION_PAGE_CONTAINER",
+      "componentType": "PAGE_CONTAINER",
+      "dataMutationEnabled": false,
+      "deterministicDigest": "db4857588fd6d7b8f1be3702e05ef2d148f3162e489338f115bc3db84645a168",
+      "liveApiCallEnabled": false,
+      "pageKey": "EVIDENCE_INVESTIGATION",
+      "readOnly": true,
+      "sourceApiEndpointKey": "EVIDENCE_INVESTIGATION",
+      "sourceDataBindingKey": "173035307c33781a3863324664b68328d882cc399e6b6010898fca726cc92fdc"
+    },
+    {
+      "componentBindingId": "fa600c105892923992bb865c170707e54923f8122140b52ffce4aab741875926",
+      "componentKey": "EVIDENCE_INVESTIGATION_PRIMARY_PANEL",
+      "componentType": "SUMMARY_CARD",
+      "dataMutationEnabled": false,
+      "deterministicDigest": "6cdb85c96d7ca1dee2f3e2b9ed6911fc698beb0163978b93c43628e72e798928",
+      "liveApiCallEnabled": false,
+      "pageKey": "EVIDENCE_INVESTIGATION",
+      "readOnly": true,
+      "sourceApiEndpointKey": "EVIDENCE_INVESTIGATION",
+      "sourceDataBindingKey": "173035307c33781a3863324664b68328d882cc399e6b6010898fca726cc92fdc"
+    }
+  ],
+  "contractVersion": "read-only-frontend-page-contract.v1",
+  "deterministicDigest": "dd5a8ec2dd82da3afa5d048702f67b6ab7e7ccf65100b49dea04472bf9e1c37c",
+  "generatedAtPolicy": "DETERMINISTIC_NO_VOLATILE_TIMESTAMP",
+  "implementationStatus": "READ_ONLY_FRONTEND_PAGE_CONTRACT_AND_LOCAL_SMOKE_GATE_COMPLETE",
+  "interactionContracts": [
+    {
+      "deterministicDigest": "aded1adacbefc32180797ceea06d9cb574928d144f606bbf6017dd11e1a3d112",
+      "interactionContractId": "325e0c4453c1c5ba87382a57c18a710abfb74fb8805f8109cc878d8a9f548f88",
+      "interactionType": "APPROVAL_DISABLED",
+      "mutationAllowed": false,
+      "pageKey": "AIRPORT_OVERVIEW",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "29f177a8c8003aa4fd812ebd944289797cf4e4a913807d82b5aeac41381d3b66",
+      "interactionContractId": "415951d24bad757b2df81d4e4cd65350a8f15365367616a7011b7eb8fd12ef57",
+      "interactionType": "EXPORT_DISABLED",
+      "mutationAllowed": false,
+      "pageKey": "AIRPORT_OVERVIEW",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "ccfd7e4a391cf1c5809d94b630ca3fbfba6ee4cada156c5af130286dae1a0d84",
+      "interactionContractId": "7a9072662967b51d43e514380f71a08255b8e2ce477818e72791428ba5344b1e",
+      "interactionType": "FACET",
+      "mutationAllowed": false,
+      "pageKey": "AIRPORT_OVERVIEW",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "dc583c86505fdd614764c6094008dc430ed029746ea4ad21d4ba518ac9e8a4e4",
+      "interactionContractId": "dec963dd62d9e962cc02a678fd53d065bd953059cbc7d506271ce89dab9e9cc8",
+      "interactionType": "FILTER",
+      "mutationAllowed": false,
+      "pageKey": "AIRPORT_OVERVIEW",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "c366073a41ca3f79e0db248530e05349ca69bd5418b96f8b067ddd8d588d5882",
+      "interactionContractId": "ef0aae44b5ade676cb9850a0d1fa69b1f021412d1065cc7d744fc387c78e18c9",
+      "interactionType": "PAGINATION",
+      "mutationAllowed": false,
+      "pageKey": "AIRPORT_OVERVIEW",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "35603661e6cc17bd5c1ff27c3ce8fd31bfbd1ea9ed999aa941f3b08b8b77bb10",
+      "interactionContractId": "15403e45f011e54b889ba8cb00b154bd300e0a9761d3307e8e9b93c52e6c8fc7",
+      "interactionType": "SEARCH",
+      "mutationAllowed": false,
+      "pageKey": "AIRPORT_OVERVIEW",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "ad9d5522ee186c55d86104a1441acba7b985b5e73552fdc73b92842bdf5a4a38",
+      "interactionContractId": "6fa9a99d2eef9d11240f1f5b92534d6e459ebc57eb933a4f8fb6b672cf31d43f",
+      "interactionType": "SORT",
+      "mutationAllowed": false,
+      "pageKey": "AIRPORT_OVERVIEW",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "5513c2ca1f957fc5eb656d0456691da7dc98e69c9be12baf4ab9718f7623483d",
+      "interactionContractId": "2c365e032193207524ebfca5bad6cd84ad7e99f09cf04adae9c8df6c28f63028",
+      "interactionType": "VIEW_DETAILS",
+      "mutationAllowed": false,
+      "pageKey": "AIRPORT_OVERVIEW",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "a00f3de28184e1a6db3f5db595a2080cb2f14f3ed41956139f25ac6dd7856b41",
+      "interactionContractId": "5c055570d05d63356d572352799fffaf1d699e8d7fd27402708ebd1e89ee00b5",
+      "interactionType": "APPROVAL_DISABLED",
+      "mutationAllowed": false,
+      "pageKey": "ALARMS_EVENTS",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "ff6464d5c1d91ff1021628826d552ac7925f64633f441922600349024b44fd8f",
+      "interactionContractId": "e8499bd4eb27540b2b99435cc68fd034bc02d5de9f1bd77f0092d8a518dc0209",
+      "interactionType": "EXPORT_DISABLED",
+      "mutationAllowed": false,
+      "pageKey": "ALARMS_EVENTS",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "e18d752d9126beae6f095d06d7f06c429ceccbb754185452bc6b9e5bf40879b6",
+      "interactionContractId": "828f6839120b9492577bb5cc390dadfc527c59283b8ad6dd62b371f09919c1d2",
+      "interactionType": "FACET",
+      "mutationAllowed": false,
+      "pageKey": "ALARMS_EVENTS",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "f2a37474a77d72aa1bf18837acc03e73ff431aef1f0aa6d080bd422342808168",
+      "interactionContractId": "9a60e1d71db07ff57eb95507159c3fb182c7accdaad501b29689ed903c9d6064",
+      "interactionType": "FILTER",
+      "mutationAllowed": false,
+      "pageKey": "ALARMS_EVENTS",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "ad178165a364060c4058890bc4e94d393b868026bb7b5bc1887339765b420695",
+      "interactionContractId": "4219ded9fd4757248c32eb8a1e6129067be7501afb87e53d0a1084061c24a029",
+      "interactionType": "PAGINATION",
+      "mutationAllowed": false,
+      "pageKey": "ALARMS_EVENTS",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "07c7ff220c06a44f2cb5f8e2263f1917d38e42d558dc2a0077bc99cdcd2c99f4",
+      "interactionContractId": "1cb98ad6703c83986fbf94b3b093dcfcc16ec34670c0dd76c527dec689dab219",
+      "interactionType": "SEARCH",
+      "mutationAllowed": false,
+      "pageKey": "ALARMS_EVENTS",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "465d9f8ca44a112bb00d71f336de8caf44ecddb2fff1bc62c592d47954fa8575",
+      "interactionContractId": "b96738c5eff33343ffc1240208ceae5447b857aeadbd3e1c72c1d10c5feec4cc",
+      "interactionType": "SORT",
+      "mutationAllowed": false,
+      "pageKey": "ALARMS_EVENTS",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "667dd15341956ee2fc30ebb2fa558847928729383de47ac1e188597538da4a9a",
+      "interactionContractId": "017108dec285130f129c7bedbe9e3dec4aed1c3badc1c54a996cef496e58fe51",
+      "interactionType": "VIEW_DETAILS",
+      "mutationAllowed": false,
+      "pageKey": "ALARMS_EVENTS",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "31e22c1ddbb638c30c8d102dd11f9158bd3843aac5eef434b6041862dce34a80",
+      "interactionContractId": "845d696c4e85e4c26bc9a6f3e7d756e3971cc0cdfa11c77d637471e1ce0d34f6",
+      "interactionType": "APPROVAL_DISABLED",
+      "mutationAllowed": false,
+      "pageKey": "ASSETS_TOPOLOGY",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "1bf0cfbf9d8168adaa8aa02d71a197392d938bdb009f2864426932e8f5beb845",
+      "interactionContractId": "1f37918834e837bfb900ec8180946028fbe8fc3479c8a3aee7efb385dce74c89",
+      "interactionType": "EXPORT_DISABLED",
+      "mutationAllowed": false,
+      "pageKey": "ASSETS_TOPOLOGY",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "ce9d9bb6958540e34169fc25522043e4bbf4ef5be63743bc03d560de779f846c",
+      "interactionContractId": "d5b7869795b6f2ed2655136a5d9903961b6ab4aadec061c2cb4ec26cde8f0a60",
+      "interactionType": "FACET",
+      "mutationAllowed": false,
+      "pageKey": "ASSETS_TOPOLOGY",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "0398583a45967b15757a8dc66ad023d72d97a1aa930cd050bbf6b49c8e8e244d",
+      "interactionContractId": "5cfff9fa91268240606d68ac354df2838df8d02e76630d43683ac6e627d075aa",
+      "interactionType": "FILTER",
+      "mutationAllowed": false,
+      "pageKey": "ASSETS_TOPOLOGY",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "5f3276dea448e18e83bc00d360b1f87fd2c6ea487f8af83e2ea5fa524c0bdc91",
+      "interactionContractId": "be5fef5491f2ff9848dbdd5bedd0efa8e6369b597fd3ae7e5989c43f7f09ca6d",
+      "interactionType": "PAGINATION",
+      "mutationAllowed": false,
+      "pageKey": "ASSETS_TOPOLOGY",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "db53460c368ee421688da3b6b72c5cd4a9899bf26aee1f96a97dd454ff088d4f",
+      "interactionContractId": "b82013c3be31044c071d4903bb7eb1a5c996c5738949a28d5f7c3df1b664823f",
+      "interactionType": "SEARCH",
+      "mutationAllowed": false,
+      "pageKey": "ASSETS_TOPOLOGY",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "a45f0a3802bce76b37bbe5de404f81fb18cc57c9face0f21114efe1e6b11dfe6",
+      "interactionContractId": "890e12b91b8b43cc5d06a96985dde15eee492bf474de7d85bb8b612d47bffbcf",
+      "interactionType": "SORT",
+      "mutationAllowed": false,
+      "pageKey": "ASSETS_TOPOLOGY",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "9203f254330a4c4c74901882104c1d8c401e5cd83ecf1b6887d5a1461d8d67ed",
+      "interactionContractId": "448139a45e49003978d7849d66a7dee9b5f81b5f2010ddb4945853665d9475d1",
+      "interactionType": "VIEW_DETAILS",
+      "mutationAllowed": false,
+      "pageKey": "ASSETS_TOPOLOGY",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "8ddbe477db3af3a4cdf5fdda73686752e54c452ef71572798c6ebf2a751a386c",
+      "interactionContractId": "445a68e5f0b7ced4cfc8ed9fe2a83a1742c715cb221ca3dfc943e7496fb55335",
+      "interactionType": "APPROVAL_DISABLED",
+      "mutationAllowed": false,
+      "pageKey": "EVIDENCE_INVESTIGATION",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "6772cca615a3372f7fb23a3b47e673c12d7cf8873128a7cc6bbf6c487bce3af3",
+      "interactionContractId": "4be1ab62f257966af514d713ce399a3e75925e62342ab664a968c15e93063329",
+      "interactionType": "EXPORT_DISABLED",
+      "mutationAllowed": false,
+      "pageKey": "EVIDENCE_INVESTIGATION",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "2dc06602519829a312fbf121531d7c44573592e996a9dc710bb03f8465b4894e",
+      "interactionContractId": "af259249781385aa66b81941c54d5763e018ee8bf86eac2b028360648dea30be",
+      "interactionType": "FACET",
+      "mutationAllowed": false,
+      "pageKey": "EVIDENCE_INVESTIGATION",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "7660505b540d9c746cb8c83ed9001e3f79d8cd6a4c89e189066f2ff3dbf930a9",
+      "interactionContractId": "00358b8c2095f8d95ec0000e2989a475ad282e2b289e52ca6c0ce846b6afc06e",
+      "interactionType": "FILTER",
+      "mutationAllowed": false,
+      "pageKey": "EVIDENCE_INVESTIGATION",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "825184e00e3f7af14491901a3eb9544cedebbb9295caa08c53054e5555d1bb85",
+      "interactionContractId": "3daf1a8f1e6d5396e034ea707f39d2c5f3c12f09adc05d015f99bdcfeab44263",
+      "interactionType": "PAGINATION",
+      "mutationAllowed": false,
+      "pageKey": "EVIDENCE_INVESTIGATION",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "dc440ca380d20f42d29f62cc525aab7766bef9151c938be90e2757168a911f9f",
+      "interactionContractId": "a19445301c3eb0d88f0e019b568b96e9bb20b2ecdfa0d52f225845120c38bd55",
+      "interactionType": "SEARCH",
+      "mutationAllowed": false,
+      "pageKey": "EVIDENCE_INVESTIGATION",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "1bae9065f4a161d6e5e2dfc26c2a018cc0819a672f7c7c10ff0ee7a86abdf6a1",
+      "interactionContractId": "7090f1081cbfcabf44f7c830e1a4b86dd77255c7baf2339872bdcd996e77a00b",
+      "interactionType": "SORT",
+      "mutationAllowed": false,
+      "pageKey": "EVIDENCE_INVESTIGATION",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "03152d2db4a06cbf2201b09790fbc06cc808566cec3a7f6f3ea6f199124e6b73",
+      "interactionContractId": "f6dc553f747e78b866aee292045b04947c2e5d16323f84f4ccdd02d03fd1b172",
+      "interactionType": "VIEW_DETAILS",
+      "mutationAllowed": false,
+      "pageKey": "EVIDENCE_INVESTIGATION",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "0484eafa6b1d2efd2113525fa111295c0e376d05a1c83d63b182315f913584c1",
+      "interactionContractId": "4589cea7f741cf81087d3e656f7bf530cf0b69e608508d4bdf748873341b6cbd",
+      "interactionType": "APPROVAL_DISABLED",
+      "mutationAllowed": false,
+      "pageKey": "FAULT_CASES",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "98d1693020c84df6d3de1ab05bf794540929921cc985280da3fb4d4aeb878888",
+      "interactionContractId": "f123301a1f4e5286838e429f61e1a68e4798b1d0c65cb544427be0638d661e36",
+      "interactionType": "EXPORT_DISABLED",
+      "mutationAllowed": false,
+      "pageKey": "FAULT_CASES",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "888f98db06e99d8e636766a66423fc43498b8ab729ab6f975c0375ac7266096e",
+      "interactionContractId": "a7396288c586a5702bc927cd0a41ecbbcaa5425ef6b81743de55a16994b23ef2",
+      "interactionType": "FACET",
+      "mutationAllowed": false,
+      "pageKey": "FAULT_CASES",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "7de295c737af26b5079cba237aac25c28f68a64a4899fd3ecfee6dfe8d92a2bd",
+      "interactionContractId": "3ecc90c8a68be44e22c5854ff2a06b8586d9ca0ec3f9c569234486aedb9090e7",
+      "interactionType": "FILTER",
+      "mutationAllowed": false,
+      "pageKey": "FAULT_CASES",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "b18a25177008ca775414f98f103a1d4b842f213caa6cd29866b9a5389d72b368",
+      "interactionContractId": "5697f04e22920af5f92f235b28de09388d71755b5e559c8129c9c2b663f1ec77",
+      "interactionType": "PAGINATION",
+      "mutationAllowed": false,
+      "pageKey": "FAULT_CASES",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "fd7616e88ec2dca300b79eab7b9aa3b52eb070a1b399425a2b1602d8b0c5d89e",
+      "interactionContractId": "e845ee595a17501b26863d1db07a18ed3842a44b357d1a7bcb6c426c31cda31d",
+      "interactionType": "SEARCH",
+      "mutationAllowed": false,
+      "pageKey": "FAULT_CASES",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "d46ec9033fc44fda25fe1284f69755b97cdf8ee4e4c58757921c26ad36b08c94",
+      "interactionContractId": "7e0716bcb420a52a68937d8a97118a214f78b77ae59c294de9a98d3578bac85c",
+      "interactionType": "SORT",
+      "mutationAllowed": false,
+      "pageKey": "FAULT_CASES",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "f52d7c20dfa1e0dafeed98f15ed3c857921e58dc5de2c01ccaf10b436a5e5b96",
+      "interactionContractId": "6165fe0ba6ef8124a5ea94cc3a868506e872a4a6bdfa064b50a4c43ff5564cb1",
+      "interactionType": "VIEW_DETAILS",
+      "mutationAllowed": false,
+      "pageKey": "FAULT_CASES",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "a912625783fd1801a7c9513a87c38fdfb2dc6e7b12011944a95a04886f7211b7",
+      "interactionContractId": "c69391d11659fbfb6d55c59d734d8ac57b31c0662fe9dd6afe51cb884b3c673e",
+      "interactionType": "APPROVAL_DISABLED",
+      "mutationAllowed": false,
+      "pageKey": "MAINTENANCE_WORK_ORDERS",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "f7227c4fa7dc339b0413bd7320167b10c7bba6464ceedc5aed130d76a530daea",
+      "interactionContractId": "29ab75d68af2f4d826cb6d0ec9aad62306a836a44f52f6c832f0058fcbbd1c92",
+      "interactionType": "EXPORT_DISABLED",
+      "mutationAllowed": false,
+      "pageKey": "MAINTENANCE_WORK_ORDERS",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "0c5691c1f1bed97847f65e023a8e7be7e4fd2b80a288b32a550e55f50b3a78ff",
+      "interactionContractId": "78f30828903a0dd765f75743ebd170d89b7d4b01f35dde5c01f80cae4ae29dd2",
+      "interactionType": "FACET",
+      "mutationAllowed": false,
+      "pageKey": "MAINTENANCE_WORK_ORDERS",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "5b08a092aedb5bc41adc2007186ecdca91f235a0dc3d063376cbb8a0fb537d56",
+      "interactionContractId": "8ae2110c07fec25d7f2a98c96b60f96b98412b24e446cdafa70c028f9c164a1b",
+      "interactionType": "FILTER",
+      "mutationAllowed": false,
+      "pageKey": "MAINTENANCE_WORK_ORDERS",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "9aab421a974aeee037549c1441cac84c7377a012ab1da4b23a11344eefbead2d",
+      "interactionContractId": "bea6961f2e76e5f4f49dcbe548368c03d18f960e25123a805a9c21f16e967aac",
+      "interactionType": "PAGINATION",
+      "mutationAllowed": false,
+      "pageKey": "MAINTENANCE_WORK_ORDERS",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "aee92a92c3bc1973acef6628764f5db5653e5c2a87fd90b95025fe6dfd3990c1",
+      "interactionContractId": "ccd6ab4117a0b044a08704b39699ea04b0e9398bd5052aa995f4d76931974b66",
+      "interactionType": "SEARCH",
+      "mutationAllowed": false,
+      "pageKey": "MAINTENANCE_WORK_ORDERS",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "a5519f46c24d528cd9557958fb0e762373fd2a80bb676791ea4ef3e9cb8594d7",
+      "interactionContractId": "d57ebb8642b0e1544a809e2262b9f856a85fa5bbaeccba20702b5e6f46d8fbad",
+      "interactionType": "SORT",
+      "mutationAllowed": false,
+      "pageKey": "MAINTENANCE_WORK_ORDERS",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "13a1e17c48c1d59907463400f050d6573b497d1f7241b1ac949a77e6cece507c",
+      "interactionContractId": "c45e9048081e0f66c432ab7c4cd0a6e77cb1a154a5921c8cf8237cc850d38462",
+      "interactionType": "VIEW_DETAILS",
+      "mutationAllowed": false,
+      "pageKey": "MAINTENANCE_WORK_ORDERS",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "13441b6612caf13d32caa431503deeac128168aaeb8e5e7dacbfac1975247397",
+      "interactionContractId": "7301646515d55a0f8d5380bfa71d56cf952861db011c03c1dcf66a0ca14ddf76",
+      "interactionType": "APPROVAL_DISABLED",
+      "mutationAllowed": false,
+      "pageKey": "REPORTS",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "41e080e3e90f587d71b4bd84b21dc756a5a69ba0ba3f94bbdb881b1c6cd248f2",
+      "interactionContractId": "76116a3e53cdcc99b4ccba3e61bbd7c9d7b47cf472fec10737cb913624f759fa",
+      "interactionType": "EXPORT_DISABLED",
+      "mutationAllowed": false,
+      "pageKey": "REPORTS",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "3a4d5ab89716816d7255fc5cac29db21667090f5b430699420d5365c9ed002ee",
+      "interactionContractId": "69f4bdaa8ba096b3c4e09333705c2bb43d34396443ae453827e0b2cd3ddbf427",
+      "interactionType": "FACET",
+      "mutationAllowed": false,
+      "pageKey": "REPORTS",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "77b5c64494947288ac239b4e00af4110c443ab5578ccac81e1b35de288850f30",
+      "interactionContractId": "9b5c3e7ae75ebb6a6207abc62fabf78895157db8e7fad71d8d5fe78a437dd674",
+      "interactionType": "FILTER",
+      "mutationAllowed": false,
+      "pageKey": "REPORTS",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "28b1537f698dc0802a52877cf35ad26022d645af09811aea1a51cfaa6295d597",
+      "interactionContractId": "a305a2bc39f0e67c741c260098f440aca1366b7285235d99420cc92f9d7e0fea",
+      "interactionType": "PAGINATION",
+      "mutationAllowed": false,
+      "pageKey": "REPORTS",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "98b1bc3c5dbafe7bace8da2a2bfa1fb97fe8d0d133f71d2db8c033b782525094",
+      "interactionContractId": "8a9299aecdb63a12c2581d0c125223f7e630424c4dc1a5052b2b5e509ea59ff6",
+      "interactionType": "SEARCH",
+      "mutationAllowed": false,
+      "pageKey": "REPORTS",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "6d6dadacfe7a50c145aae36e441ce56ad2a5746527f3c20e823b2a489c06fe0c",
+      "interactionContractId": "ce34898981c8d32d3448ebb3b6f597fdb681e3402260dd24bd3eb839be7c74e9",
+      "interactionType": "SORT",
+      "mutationAllowed": false,
+      "pageKey": "REPORTS",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "a908ab7783f900233d09f59878f9f1caca8b8b721fa7d733f430e7767b4860d1",
+      "interactionContractId": "32b530f16eba05ea01bc6a71af605f2576c45f86736a49ae8ccecc30ae3a1556",
+      "interactionType": "VIEW_DETAILS",
+      "mutationAllowed": false,
+      "pageKey": "REPORTS",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "55bf57f483bbee895d1eae040377a6905128d9effa42dd8ba3e6a4d12fef3efe",
+      "interactionContractId": "8fd0d14842cb154dbfa40cc69ede93ac352a62bd980b99f193ac8859d8812b1c",
+      "interactionType": "APPROVAL_DISABLED",
+      "mutationAllowed": false,
+      "pageKey": "SYSTEMS_INTEGRATION_HEALTH",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "994c8c19483b05327b6c2da502ee7b72093907c9bc749ed103b773bea47d89be",
+      "interactionContractId": "7d4c2dbfae4b78ce223b09fd92c9e29fbada53e480478ae21ddfd27a9079b822",
+      "interactionType": "EXPORT_DISABLED",
+      "mutationAllowed": false,
+      "pageKey": "SYSTEMS_INTEGRATION_HEALTH",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "66db5e3040840b6ca0977c389793abf3997e4824e4d2afcd11c3e5b6000ee5d5",
+      "interactionContractId": "3d63f92d37e3b79a07e26aa71b6437723b5091ad1f244fedb642d2383f4030a9",
+      "interactionType": "FACET",
+      "mutationAllowed": false,
+      "pageKey": "SYSTEMS_INTEGRATION_HEALTH",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "d87a2000b8bc1148046185aa93ab494e97aa5fed1831baaf10d46464fa67a4b1",
+      "interactionContractId": "08501c08c67de5636ecfb859fe2d82bd0028fa2a7206cf11be4e23c706630911",
+      "interactionType": "FILTER",
+      "mutationAllowed": false,
+      "pageKey": "SYSTEMS_INTEGRATION_HEALTH",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "c411140a1234bcb20995998a154369b7e73094ba1963be7c9e367946c6a64e59",
+      "interactionContractId": "017926836cfebe4dfb643f77900d24b295edcd55b382d2bce71acd2b958c1017",
+      "interactionType": "PAGINATION",
+      "mutationAllowed": false,
+      "pageKey": "SYSTEMS_INTEGRATION_HEALTH",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "e142cdb057c6c34336436d41e5033e084063ba49ac24b2005ef93fc0516e354c",
+      "interactionContractId": "99314c7ac80ee94668b1d50077e74c5aee0140c4d2a111cfafadf7db39ae11cd",
+      "interactionType": "SEARCH",
+      "mutationAllowed": false,
+      "pageKey": "SYSTEMS_INTEGRATION_HEALTH",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "c8d9bc5b6d826b041c802e0a95358baeee37f358127581ce78756f53816743c5",
+      "interactionContractId": "25d4fbf78c45d76a16348c03d4e60cc3677944d6d4db9198eea004f44b335608",
+      "interactionType": "SORT",
+      "mutationAllowed": false,
+      "pageKey": "SYSTEMS_INTEGRATION_HEALTH",
+      "readOnly": true,
+      "supported": true
+    },
+    {
+      "deterministicDigest": "23c58497db14423f18c05d2d670db95464f450e773e3601234b80949c8f991a1",
+      "interactionContractId": "22d3eed368f579113b6a5598f4a3f6c19ee045a84c98de95ea2a8c848e9f79e6",
+      "interactionType": "VIEW_DETAILS",
+      "mutationAllowed": false,
+      "pageKey": "SYSTEMS_INTEGRATION_HEALTH",
+      "readOnly": true,
+      "supported": true
+    }
+  ],
+  "layoutContracts": [
+    {
+      "deterministicDigest": "075d491bad38eff1eea672518cdc93c1d1306169c17a731088322b27625144b8",
+      "layoutContractId": "b068a03c148ba57637db1dabc4d2f537700713946848e8e1c20ba4c620868492",
+      "layoutType": "DASHBOARD",
+      "pageKey": "AIRPORT_OVERVIEW",
+      "requiredRegions": [
+        "header",
+        "summary",
+        "content",
+        "filters",
+        "footer/status"
+      ],
+      "responsivePolicy": "STATIC_RESPONSIVE_CONTRACT_ONLY"
+    },
+    {
+      "deterministicDigest": "6c255df7e097fb316e1f5b2e7c4ebf7584201aa2e360dcde666356441d178d40",
+      "layoutContractId": "03a7f39291584e951690bb2cd6c0949ab15d6eee7283ac32cca37149dec93a25",
+      "layoutType": "TABLE_WORKSPACE",
+      "pageKey": "ALARMS_EVENTS",
+      "requiredRegions": [
+        "header",
+        "summary",
+        "content",
+        "filters",
+        "footer/status"
+      ],
+      "responsivePolicy": "STATIC_RESPONSIVE_CONTRACT_ONLY"
+    },
+    {
+      "deterministicDigest": "19196475cd46351f0c30beb425460ad59f74d5e38e0a03e21e0628d87ebd87be",
+      "layoutContractId": "fa8953c11ea3b756585982b161695785e27f3e40fc257db733cd29fabe7b6e5a",
+      "layoutType": "TABLE_WORKSPACE",
+      "pageKey": "ASSETS_TOPOLOGY",
+      "requiredRegions": [
+        "header",
+        "summary",
+        "content",
+        "filters",
+        "footer/status"
+      ],
+      "responsivePolicy": "STATIC_RESPONSIVE_CONTRACT_ONLY"
+    },
+    {
+      "deterministicDigest": "0a0e41f42931e85492417262af1c319e828303d684b2de3a72817b56d54f55a7",
+      "layoutContractId": "ac08d06dffe5b2dc4828fae277ee03570ca87d575e87e9ea92798835fd924d59",
+      "layoutType": "EVIDENCE_WORKSPACE",
+      "pageKey": "EVIDENCE_INVESTIGATION",
+      "requiredRegions": [
+        "header",
+        "summary",
+        "content",
+        "filters",
+        "footer/status"
+      ],
+      "responsivePolicy": "STATIC_RESPONSIVE_CONTRACT_ONLY"
+    },
+    {
+      "deterministicDigest": "78d6dc565aecaa6234b49f1c36d3c6c559319193109076e05d4aa6aacd23978a",
+      "layoutContractId": "b78d3bfdad8c768c4b16cc7bdf96dee6f8683bb2e9c9c105fab7f7e4a5facbaa",
+      "layoutType": "REVIEW_QUEUE",
+      "pageKey": "FAULT_CASES",
+      "requiredRegions": [
+        "header",
+        "summary",
+        "content",
+        "filters",
+        "footer/status"
+      ],
+      "responsivePolicy": "STATIC_RESPONSIVE_CONTRACT_ONLY"
+    },
+    {
+      "deterministicDigest": "078d3a4f57bd72fc96cc2f7cd08ab04a233a7c1f5e015c08bf770ab841d77077",
+      "layoutContractId": "a543775545b2c99d65fc46cdf8e296df8dec7399066e404753b0839bad73ea30",
+      "layoutType": "REVIEW_QUEUE",
+      "pageKey": "MAINTENANCE_WORK_ORDERS",
+      "requiredRegions": [
+        "header",
+        "summary",
+        "content",
+        "filters",
+        "footer/status"
+      ],
+      "responsivePolicy": "STATIC_RESPONSIVE_CONTRACT_ONLY"
+    },
+    {
+      "deterministicDigest": "a3353e183cc0db6e1d8859f849c86471a86d009d5d7396080c0f1d3fab427950",
+      "layoutContractId": "9f372a18558cdef810570c0dae4a139995238324bb58dbe1b03d4b530ac13866",
+      "layoutType": "REPORT_WORKSPACE",
+      "pageKey": "REPORTS",
+      "requiredRegions": [
+        "header",
+        "summary",
+        "content",
+        "filters",
+        "footer/status"
+      ],
+      "responsivePolicy": "STATIC_RESPONSIVE_CONTRACT_ONLY"
+    },
+    {
+      "deterministicDigest": "4ade7e3fe1a06f2865fa4fc90209da450032dabfa716ceecbf5330d6d36a1b1a",
+      "layoutContractId": "9ec313291eefcdccb9f67774f24bf5842bca731ed5ac8400aebb46b876d7ef7d",
+      "layoutType": "DASHBOARD",
+      "pageKey": "SYSTEMS_INTEGRATION_HEALTH",
+      "requiredRegions": [
+        "header",
+        "summary",
+        "content",
+        "filters",
+        "footer/status"
+      ],
+      "responsivePolicy": "STATIC_RESPONSIVE_CONTRACT_ONLY"
+    }
+  ],
+  "localSmokeCases": [
+    {
+      "browserLaunchRequired": false,
+      "deterministicDigest": "af82c9fedec357cc56bf9639e0dd03824dc3a5f1d05017d74ee8e7e1fedc4f41",
+      "expectedComponents": 3,
+      "expectedInteractions": 8,
+      "expectedLayout": true,
+      "expectedNoLiveApiCall": true,
+      "expectedNoMutation": true,
+      "expectedNoProductionRoute": true,
+      "expectedPageContract": true,
+      "expectedUiStates": 6,
+      "localhostCallRequired": false,
+      "networkCallRequired": false,
+      "pageKey": "AIRPORT_OVERVIEW",
+      "routePathCandidate": "/one/airport/overview",
+      "smokeCaseId": "323d4b04ef995eaf86c2ea0d32e3603890bcadb00d75a63ccec7c7ff24ed1e4b"
+    },
+    {
+      "browserLaunchRequired": false,
+      "deterministicDigest": "04d1d8bf30fdf30ebfc7a67fad49cb8ed664c84aa05611287e6bc761693b1bb7",
+      "expectedComponents": 3,
+      "expectedInteractions": 8,
+      "expectedLayout": true,
+      "expectedNoLiveApiCall": true,
+      "expectedNoMutation": true,
+      "expectedNoProductionRoute": true,
+      "expectedPageContract": true,
+      "expectedUiStates": 6,
+      "localhostCallRequired": false,
+      "networkCallRequired": false,
+      "pageKey": "ALARMS_EVENTS",
+      "routePathCandidate": "/one/airport/alarms-events",
+      "smokeCaseId": "dc7868154d9388cd98df27fb593b0b84783ee0264eea20fa6be4d82e15a991d0"
+    },
+    {
+      "browserLaunchRequired": false,
+      "deterministicDigest": "dca00e996fe877c79ddcedbdadfec2eb64513788ef47775235b9d2be9388071a",
+      "expectedComponents": 3,
+      "expectedInteractions": 8,
+      "expectedLayout": true,
+      "expectedNoLiveApiCall": true,
+      "expectedNoMutation": true,
+      "expectedNoProductionRoute": true,
+      "expectedPageContract": true,
+      "expectedUiStates": 6,
+      "localhostCallRequired": false,
+      "networkCallRequired": false,
+      "pageKey": "ASSETS_TOPOLOGY",
+      "routePathCandidate": "/one/airport/assets-topology",
+      "smokeCaseId": "1fa94981f5d0fd7cb5bdd0cb46068ea1cc26c44dae0bf226768ae2e3daa27bcd"
+    },
+    {
+      "browserLaunchRequired": false,
+      "deterministicDigest": "948beb484eb54accd16707fc44c5d50d2140a4e4a170b57d979d68f70fab57e7",
+      "expectedComponents": 3,
+      "expectedInteractions": 8,
+      "expectedLayout": true,
+      "expectedNoLiveApiCall": true,
+      "expectedNoMutation": true,
+      "expectedNoProductionRoute": true,
+      "expectedPageContract": true,
+      "expectedUiStates": 6,
+      "localhostCallRequired": false,
+      "networkCallRequired": false,
+      "pageKey": "EVIDENCE_INVESTIGATION",
+      "routePathCandidate": "/one/airport/evidence-investigation",
+      "smokeCaseId": "518f349ca5ed04a5e6dea199dafcd19aa421982fb3d15d1daaabec45205a6e91"
+    },
+    {
+      "browserLaunchRequired": false,
+      "deterministicDigest": "0ad94cf88ad8ee6c74f0576eb9691525fcd70bcd5133b0feb874408df989561b",
+      "expectedComponents": 3,
+      "expectedInteractions": 8,
+      "expectedLayout": true,
+      "expectedNoLiveApiCall": true,
+      "expectedNoMutation": true,
+      "expectedNoProductionRoute": true,
+      "expectedPageContract": true,
+      "expectedUiStates": 6,
+      "localhostCallRequired": false,
+      "networkCallRequired": false,
+      "pageKey": "FAULT_CASES",
+      "routePathCandidate": "/one/airport/fault-cases",
+      "smokeCaseId": "a31fcaeb06698a21d0ac682314b2b237ffce9ae5ba573eeb0b962297d491a934"
+    },
+    {
+      "browserLaunchRequired": false,
+      "deterministicDigest": "c428849bcf28ad8e251ff13db017c1f4e95f1cbc0d74640e0d4150a3286ba9d6",
+      "expectedComponents": 3,
+      "expectedInteractions": 8,
+      "expectedLayout": true,
+      "expectedNoLiveApiCall": true,
+      "expectedNoMutation": true,
+      "expectedNoProductionRoute": true,
+      "expectedPageContract": true,
+      "expectedUiStates": 6,
+      "localhostCallRequired": false,
+      "networkCallRequired": false,
+      "pageKey": "MAINTENANCE_WORK_ORDERS",
+      "routePathCandidate": "/one/airport/maintenance-work-orders",
+      "smokeCaseId": "f8f41510a35ea065eb39956bad50c647e597f349faf2b441d1c5a111de71b430"
+    },
+    {
+      "browserLaunchRequired": false,
+      "deterministicDigest": "a31c5c2f4ef0182a734a10dcdcd64232af9095c03c18249ad7f00ab2c176ffaf",
+      "expectedComponents": 3,
+      "expectedInteractions": 8,
+      "expectedLayout": true,
+      "expectedNoLiveApiCall": true,
+      "expectedNoMutation": true,
+      "expectedNoProductionRoute": true,
+      "expectedPageContract": true,
+      "expectedUiStates": 6,
+      "localhostCallRequired": false,
+      "networkCallRequired": false,
+      "pageKey": "REPORTS",
+      "routePathCandidate": "/one/airport/reports",
+      "smokeCaseId": "4b396bf9aca220d9f074205def8d437ac8292cb8eac1f459191b856fab3068c3"
+    },
+    {
+      "browserLaunchRequired": false,
+      "deterministicDigest": "63494f05e2fcd020b1fc4551c1394cab9da781a8b12d4b9f73f867ba8caee6b2",
+      "expectedComponents": 3,
+      "expectedInteractions": 8,
+      "expectedLayout": true,
+      "expectedNoLiveApiCall": true,
+      "expectedNoMutation": true,
+      "expectedNoProductionRoute": true,
+      "expectedPageContract": true,
+      "expectedUiStates": 6,
+      "localhostCallRequired": false,
+      "networkCallRequired": false,
+      "pageKey": "SYSTEMS_INTEGRATION_HEALTH",
+      "routePathCandidate": "/one/airport/systems-integration-health",
+      "smokeCaseId": "98bc998cf57409c75878ad1f0a630307828871d6df0a90413a3e23cbb20a13c2"
+    }
+  ],
+  "pageContractId": "46c05b811e44c813751832b69d7a9599397007d55bbd96366696d372db3dda9a",
+  "pageContracts": [
+    {
+      "componentBindingIds": [
+        "8b0b1432aec804d4c2ce484886c8b82a99b8a0ad4b990159d7822c5cb71a3470",
+        "ab0bd17e021765b60ff9435a9c5675f400efe0d97f6df4045689d96245384674",
+        "f287d179c91df8489f65d777350dde613ee746e4f5f0c448cc03d4d92bda7aa9"
+      ],
+      "dataMutationEnabled": false,
+      "deterministicDigest": "ab7e97043fe6b7467dc9903918c827be12399ce8858a7c71cf6f175c8c2dde05",
+      "interactionContractIds": [
+        "15403e45f011e54b889ba8cb00b154bd300e0a9761d3307e8e9b93c52e6c8fc7",
+        "2c365e032193207524ebfca5bad6cd84ad7e99f09cf04adae9c8df6c28f63028",
+        "325e0c4453c1c5ba87382a57c18a710abfb74fb8805f8109cc878d8a9f548f88",
+        "415951d24bad757b2df81d4e4cd65350a8f15365367616a7011b7eb8fd12ef57",
+        "6fa9a99d2eef9d11240f1f5b92534d6e459ebc57eb933a4f8fb6b672cf31d43f",
+        "7a9072662967b51d43e514380f71a08255b8e2ce477818e72791428ba5344b1e",
+        "dec963dd62d9e962cc02a678fd53d065bd953059cbc7d506271ce89dab9e9cc8",
+        "ef0aae44b5ade676cb9850a0d1fa69b1f021412d1065cc7d744fc387c78e18c9"
+      ],
+      "layoutContractId": "b068a03c148ba57637db1dabc4d2f537700713946848e8e1c20ba4c620868492",
+      "liveApiCallEnabled": false,
+      "pageContractId": "cbbd2e845a8a0d2461965e77b8d23ec52e3454b62458209ae3d6df0fb4e4ff24",
+      "pageKey": "AIRPORT_OVERVIEW",
+      "pageType": "OVERVIEW",
+      "productionEnabled": false,
+      "readOnly": true,
+      "routeKey": "AIRPORT_FRONTEND_ROUTE_AIRPORT_OVERVIEW",
+      "routePathCandidate": "/one/airport/overview",
+      "sourceApiEndpointKey": "AIRPORT_OVERVIEW",
+      "staticOnly": true,
+      "title": "Airport Overview",
+      "uiStateContractIds": [
+        "01495784edc502022caddae52fd3330afab463daf33fa0ca14b008e0ec98f9b1",
+        "3d4989677e75bf26bc4f5e623237756cbe3c921f71f1bdeb67b527caf2b3ac34",
+        "5e129d59bc856c9aae3a664b04de9c3e8a4d6a0321726a6b5e4034a55fe3fb28",
+        "9fda2f70029c37d92672f4851463a4103948982376ebd5c8cf79a3625d6accbe",
+        "b8c5756ea62033a704d3a81a205a7e719a95c069bb7ca7efd691bdd7d28ae57f",
+        "b8e11abe5f7a1b661977e0c6deb0eb09fea48d3f5a2a9edd22c377ddd5e5f331"
+      ]
+    },
+    {
+      "componentBindingIds": [
+        "018e91cac2f2fb349cc1fb7db23e96659ebb0a951818dfd2adb4e9518b00ecee",
+        "63ec238d7fd5e524ee2f9d59ad9f9ea557ea1b58ca87e53cebb7c73e46ecb37e",
+        "9fb9c2f9ffa16852beb0affbff58c7c9eb66494fa3de46f36fa26c403e32b73c"
+      ],
+      "dataMutationEnabled": false,
+      "deterministicDigest": "6f8f6601d179f2ba56f6c556e42c464000dc601d08bdaa9d40b3465430a2eb02",
+      "interactionContractIds": [
+        "017108dec285130f129c7bedbe9e3dec4aed1c3badc1c54a996cef496e58fe51",
+        "1cb98ad6703c83986fbf94b3b093dcfcc16ec34670c0dd76c527dec689dab219",
+        "4219ded9fd4757248c32eb8a1e6129067be7501afb87e53d0a1084061c24a029",
+        "5c055570d05d63356d572352799fffaf1d699e8d7fd27402708ebd1e89ee00b5",
+        "828f6839120b9492577bb5cc390dadfc527c59283b8ad6dd62b371f09919c1d2",
+        "9a60e1d71db07ff57eb95507159c3fb182c7accdaad501b29689ed903c9d6064",
+        "b96738c5eff33343ffc1240208ceae5447b857aeadbd3e1c72c1d10c5feec4cc",
+        "e8499bd4eb27540b2b99435cc68fd034bc02d5de9f1bd77f0092d8a518dc0209"
+      ],
+      "layoutContractId": "03a7f39291584e951690bb2cd6c0949ab15d6eee7283ac32cca37149dec93a25",
+      "liveApiCallEnabled": false,
+      "pageContractId": "61cf5a43a00828b5e9e0be9ced458c67b589b656a522d83adf187bf2511eb356",
+      "pageKey": "ALARMS_EVENTS",
+      "pageType": "REVIEW_QUEUE",
+      "productionEnabled": false,
+      "readOnly": true,
+      "routeKey": "AIRPORT_FRONTEND_ROUTE_ALARMS_EVENTS",
+      "routePathCandidate": "/one/airport/alarms-events",
+      "sourceApiEndpointKey": "ALARMS_EVENTS",
+      "staticOnly": true,
+      "title": "Alarms & Events",
+      "uiStateContractIds": [
+        "1cf80182401e56dc8aebe13617b0078cbf5f77d487f41e935a551e6d6b20ceb7",
+        "4ad4cf64b25c4517a755d6c9fa5de81d2edef3bd53a9e47fd3f57dad3148a43c",
+        "6ef04899727989b686a16de0292ff17f54137ebcf3e53060b22ef5ecb4c70699",
+        "aa47f24eb36972f8f9186b64fcb8f8c7acb635ad6722b276428e9aae671076ad",
+        "ad7980a7ced33d4f911977c0af9f1b25c8dac9d8f02fbba023ab50abaaf3b861",
+        "fc68db3a6878fd27c9bd362569abd61ac2cbd92add9894f2e62e981afb490c8e"
+      ]
+    },
+    {
+      "componentBindingIds": [
+        "0c9127fbce76dac76330262acde195d03a517ee8e1ec8694162d70d42834615e",
+        "137e2020f4bd3247235ec1a6c28f3f200e1192672ffdaddc4d86843a77a29cf5",
+        "5ab8a62e3b53e726970e4546c36d8ebbf62bb25bc3bc6c36fc1325d5dc75ae9c"
+      ],
+      "dataMutationEnabled": false,
+      "deterministicDigest": "e0a692bc68fa1adcd2efb1c669793712cfab8d141caae54e0c54a2c5198c7324",
+      "interactionContractIds": [
+        "1f37918834e837bfb900ec8180946028fbe8fc3479c8a3aee7efb385dce74c89",
+        "448139a45e49003978d7849d66a7dee9b5f81b5f2010ddb4945853665d9475d1",
+        "5cfff9fa91268240606d68ac354df2838df8d02e76630d43683ac6e627d075aa",
+        "845d696c4e85e4c26bc9a6f3e7d756e3971cc0cdfa11c77d637471e1ce0d34f6",
+        "890e12b91b8b43cc5d06a96985dde15eee492bf474de7d85bb8b612d47bffbcf",
+        "b82013c3be31044c071d4903bb7eb1a5c996c5738949a28d5f7c3df1b664823f",
+        "be5fef5491f2ff9848dbdd5bedd0efa8e6369b597fd3ae7e5989c43f7f09ca6d",
+        "d5b7869795b6f2ed2655136a5d9903961b6ab4aadec061c2cb4ec26cde8f0a60"
+      ],
+      "layoutContractId": "fa8953c11ea3b756585982b161695785e27f3e40fc257db733cd29fabe7b6e5a",
+      "liveApiCallEnabled": false,
+      "pageContractId": "e6ba899aaee943ea6e69bf637b9559a5560bb03b95138e9ed7880351793d6b5b",
+      "pageKey": "ASSETS_TOPOLOGY",
+      "pageType": "TABLE",
+      "productionEnabled": false,
+      "readOnly": true,
+      "routeKey": "AIRPORT_FRONTEND_ROUTE_ASSETS_TOPOLOGY",
+      "routePathCandidate": "/one/airport/assets-topology",
+      "sourceApiEndpointKey": "ASSETS_TOPOLOGY",
+      "staticOnly": true,
+      "title": "Assets & Topology",
+      "uiStateContractIds": [
+        "219d714cb324ab125af69820780bc832bbe2abb9c55c7bc43b5cb23e23bd5e4f",
+        "2374f8a2dbc1186e90f2d8917ee44e94cf99d1bad0a869297234bd1a8dc1ede3",
+        "6aa3f4eb6a9f4f3cceafbc5b55b03b9e42afcf1e9dc15327f44cc8a4afac0784",
+        "885d63576faf7322ba751d0031de01f8450fd8a0153c6409e10e032d74fe0f1c",
+        "c63282e3f4ffbbc9a70535be27e09e511e1be317e59ab9561eb7282fc4243563",
+        "d885b378218a9fe2de405491015219b79399125cb64c9d370b1a81e892719918"
+      ]
+    },
+    {
+      "componentBindingIds": [
+        "f6edd512f24fba0cde1d21f1b0200afd1d4a577d2b82ea0145571e26f98c9ed3",
+        "f9f0358a6761e878d3eee14295bb398561fd2172fbc5472068b7081f0085ec99",
+        "fa600c105892923992bb865c170707e54923f8122140b52ffce4aab741875926"
+      ],
+      "dataMutationEnabled": false,
+      "deterministicDigest": "9da16952d3d9785185046af55f6f56b0b9ccae5bd4fc065f6849b69792992cb9",
+      "interactionContractIds": [
+        "00358b8c2095f8d95ec0000e2989a475ad282e2b289e52ca6c0ce846b6afc06e",
+        "3daf1a8f1e6d5396e034ea707f39d2c5f3c12f09adc05d015f99bdcfeab44263",
+        "445a68e5f0b7ced4cfc8ed9fe2a83a1742c715cb221ca3dfc943e7496fb55335",
+        "4be1ab62f257966af514d713ce399a3e75925e62342ab664a968c15e93063329",
+        "7090f1081cbfcabf44f7c830e1a4b86dd77255c7baf2339872bdcd996e77a00b",
+        "a19445301c3eb0d88f0e019b568b96e9bb20b2ecdfa0d52f225845120c38bd55",
+        "af259249781385aa66b81941c54d5763e018ee8bf86eac2b028360648dea30be",
+        "f6dc553f747e78b866aee292045b04947c2e5d16323f84f4ccdd02d03fd1b172"
+      ],
+      "layoutContractId": "ac08d06dffe5b2dc4828fae277ee03570ca87d575e87e9ea92798835fd924d59",
+      "liveApiCallEnabled": false,
+      "pageContractId": "f5e69159e8e584c5b0b08a733601d9a7994655dbc7f413a5473c1295901b1167",
+      "pageKey": "EVIDENCE_INVESTIGATION",
+      "pageType": "REVIEW_QUEUE",
+      "productionEnabled": false,
+      "readOnly": true,
+      "routeKey": "AIRPORT_FRONTEND_ROUTE_EVIDENCE_INVESTIGATION",
+      "routePathCandidate": "/one/airport/evidence-investigation",
+      "sourceApiEndpointKey": "EVIDENCE_INVESTIGATION",
+      "staticOnly": true,
+      "title": "Evidence & Investigation",
+      "uiStateContractIds": [
+        "42395957296e461d392a39d1635725a1603eff778e937d3b8a8a12d34f7e9446",
+        "657e5e17530a68c2b3828bdd367c93490d42ef4ed0eca45620581f6c703d59e9",
+        "6e0b5794879f510cf0eb285a9e77053d0b71a47efce2ed562771d38174370b8f",
+        "81f04dfcbfa6668487f83e3dfada30d22ca34132164e5b3595266ec0fda3c069",
+        "9c053c2127820ac8ddf763db3b96c03a8c3d3a89424cb1f7aa86861b2aad4cce",
+        "b2683aee0190f613244cc1bf060e0fef328fd8306a70db99e0fef00362089145"
+      ]
+    },
+    {
+      "componentBindingIds": [
+        "8eff7cb67048552804e3e002638cc9c74330ac602f6dbd149bd7066a90a750c3",
+        "c80fe55e5fdaf70fbd07379a29d731e3bf45dee5471e8fcda8d1945c7750a2fa",
+        "eace4e079f3cfafe934b3a98e4a191ba3d49d840cca8774b331dfff65243a439"
+      ],
+      "dataMutationEnabled": false,
+      "deterministicDigest": "7ac4cd0599dda5899683974ba53572e84530aaf45ac68b2be112c5243d08f4c8",
+      "interactionContractIds": [
+        "3ecc90c8a68be44e22c5854ff2a06b8586d9ca0ec3f9c569234486aedb9090e7",
+        "4589cea7f741cf81087d3e656f7bf530cf0b69e608508d4bdf748873341b6cbd",
+        "5697f04e22920af5f92f235b28de09388d71755b5e559c8129c9c2b663f1ec77",
+        "6165fe0ba6ef8124a5ea94cc3a868506e872a4a6bdfa064b50a4c43ff5564cb1",
+        "7e0716bcb420a52a68937d8a97118a214f78b77ae59c294de9a98d3578bac85c",
+        "a7396288c586a5702bc927cd0a41ecbbcaa5425ef6b81743de55a16994b23ef2",
+        "e845ee595a17501b26863d1db07a18ed3842a44b357d1a7bcb6c426c31cda31d",
+        "f123301a1f4e5286838e429f61e1a68e4798b1d0c65cb544427be0638d661e36"
+      ],
+      "layoutContractId": "b78d3bfdad8c768c4b16cc7bdf96dee6f8683bb2e9c9c105fab7f7e4a5facbaa",
+      "liveApiCallEnabled": false,
+      "pageContractId": "e1703740fe205a8cb32fee8de32c1544c6b5dcfd1de435abc9931d805bab99da",
+      "pageKey": "FAULT_CASES",
+      "pageType": "REVIEW_QUEUE",
+      "productionEnabled": false,
+      "readOnly": true,
+      "routeKey": "AIRPORT_FRONTEND_ROUTE_FAULT_CASES",
+      "routePathCandidate": "/one/airport/fault-cases",
+      "sourceApiEndpointKey": "FAULT_CASES",
+      "staticOnly": true,
+      "title": "Fault Cases",
+      "uiStateContractIds": [
+        "1c93b74aeb2e04e3a2534467e7088bb8efd656fb433290882176565596f667b7",
+        "542fe789ea023b79231221ad473f77511a9682131cc5179ff6ce5549c04e5bb2",
+        "633375b46844f02d314c1c05ff31f1767767e5320389987d0738aadde905912a",
+        "7d43cb9b153e8f20bd4a10239c8f66f1788fafa56247f7205dab2051d3a69f52",
+        "c23d1f90ac86e5e3a332dcce4c4d75d2fa0a56e5051be819a2578685d5266b9a",
+        "c34c38cfebdbf1afef4bb3e96865e1ba9900c714f8a182715bd8564ce09713b5"
+      ]
+    },
+    {
+      "componentBindingIds": [
+        "426886ce948a8f27c16f56f6ee8c73a135f04e446b901fb1ac5a12b604a78f77",
+        "6388429db8abc9069e54e0cf6ce237bf5fbf60e039cd179fd2d69e27a98bd52a",
+        "e5a78eff53a0be03b5415c755a40ee600fccd73b57854166e6549b8e81c31e80"
+      ],
+      "dataMutationEnabled": false,
+      "deterministicDigest": "98f552cb523d3fc7db102691f15ca60f477fd5f1c4a75a10f9a3f19aa8105343",
+      "interactionContractIds": [
+        "29ab75d68af2f4d826cb6d0ec9aad62306a836a44f52f6c832f0058fcbbd1c92",
+        "78f30828903a0dd765f75743ebd170d89b7d4b01f35dde5c01f80cae4ae29dd2",
+        "8ae2110c07fec25d7f2a98c96b60f96b98412b24e446cdafa70c028f9c164a1b",
+        "bea6961f2e76e5f4f49dcbe548368c03d18f960e25123a805a9c21f16e967aac",
+        "c45e9048081e0f66c432ab7c4cd0a6e77cb1a154a5921c8cf8237cc850d38462",
+        "c69391d11659fbfb6d55c59d734d8ac57b31c0662fe9dd6afe51cb884b3c673e",
+        "ccd6ab4117a0b044a08704b39699ea04b0e9398bd5052aa995f4d76931974b66",
+        "d57ebb8642b0e1544a809e2262b9f856a85fa5bbaeccba20702b5e6f46d8fbad"
+      ],
+      "layoutContractId": "a543775545b2c99d65fc46cdf8e296df8dec7399066e404753b0839bad73ea30",
+      "liveApiCallEnabled": false,
+      "pageContractId": "033e27954993e53de51ca05a0a509910141e49a5d065e479651d4bd501815487",
+      "pageKey": "MAINTENANCE_WORK_ORDERS",
+      "pageType": "REVIEW_QUEUE",
+      "productionEnabled": false,
+      "readOnly": true,
+      "routeKey": "AIRPORT_FRONTEND_ROUTE_MAINTENANCE_WORK_ORDERS",
+      "routePathCandidate": "/one/airport/maintenance-work-orders",
+      "sourceApiEndpointKey": "MAINTENANCE_WORK_ORDERS",
+      "staticOnly": true,
+      "title": "Maintenance Work Orders",
+      "uiStateContractIds": [
+        "1bda2ac778d4334db336297cde3638efaa6d381a88539bdb793f7e4148401889",
+        "4240cfe2611b33cf1437666f4f1a5005317cda77642f0e149989d0763bd23638",
+        "62b5e769fe89848ae059ec584a9e22ac8e1a64a00ec6b1e8d174416155f7afb6",
+        "a7202b61b1af87e67e4020d78fc9b8f1f3111e19d815eff14ffb2149ff840ed0",
+        "c7fc93990d80a4f0f843986bdcb4fa902f62273b7e8120a54135e23a25cbc55d",
+        "d660136a4ebbcd20d7aecb12730f87347dd0f4d71fc6d7245edf813bcaffe78a"
+      ]
+    },
+    {
+      "componentBindingIds": [
+        "24bcf56d0a3d9af47be2733c5d463c3db9f0847df13ddf1a62492c48513edea8",
+        "af89aaac68df3f56fcd701993b38b81616ca96233c0b1a54168717be9c7f7c2f",
+        "c251973c6f4d207eed6425fa9c99d1efea52849a0b6cac6b1383b8ebbe9f0cd8"
+      ],
+      "dataMutationEnabled": false,
+      "deterministicDigest": "4e6a67dd25131b1e51086f65d2b3ea4761df11b3d870f30266b2ed47c812e6eb",
+      "interactionContractIds": [
+        "32b530f16eba05ea01bc6a71af605f2576c45f86736a49ae8ccecc30ae3a1556",
+        "69f4bdaa8ba096b3c4e09333705c2bb43d34396443ae453827e0b2cd3ddbf427",
+        "7301646515d55a0f8d5380bfa71d56cf952861db011c03c1dcf66a0ca14ddf76",
+        "76116a3e53cdcc99b4ccba3e61bbd7c9d7b47cf472fec10737cb913624f759fa",
+        "8a9299aecdb63a12c2581d0c125223f7e630424c4dc1a5052b2b5e509ea59ff6",
+        "9b5c3e7ae75ebb6a6207abc62fabf78895157db8e7fad71d8d5fe78a437dd674",
+        "a305a2bc39f0e67c741c260098f440aca1366b7285235d99420cc92f9d7e0fea",
+        "ce34898981c8d32d3448ebb3b6f597fdb681e3402260dd24bd3eb839be7c74e9"
+      ],
+      "layoutContractId": "9f372a18558cdef810570c0dae4a139995238324bb58dbe1b03d4b530ac13866",
+      "liveApiCallEnabled": false,
+      "pageContractId": "92e4d830a51634aa147ec9249fe72f53c6d223568616d30f03d3bbf52e829d52",
+      "pageKey": "REPORTS",
+      "pageType": "REPORT",
+      "productionEnabled": false,
+      "readOnly": true,
+      "routeKey": "AIRPORT_FRONTEND_ROUTE_REPORTS",
+      "routePathCandidate": "/one/airport/reports",
+      "sourceApiEndpointKey": "REPORTS",
+      "staticOnly": true,
+      "title": "Reports",
+      "uiStateContractIds": [
+        "0f25bc2bc890b914c56130b98a26cee4910565e2d8c7acdeb2d49555c221ffe9",
+        "1c8ef33f24ddabd33c88f32f1caccd095babef686ebcb9de5e2c21d3d5cc4831",
+        "895f3afe7f0c33d4803e0ad5567f516c06c51c6b4181f98b879ca7e2645bce14",
+        "c3be0e97b7aded03409393421b579ef3db4a47dc6ebb68d380cd2fd3c453715b",
+        "d4b6dbb529f227fcf7e7e31084c52d67bad812bf98da58dcb4125ea0cd42cf9f",
+        "d83b73b37b5c5928cf6a1382df0d4ccb819cd8822976fcc2df9cebfb54477c77"
+      ]
+    },
+    {
+      "componentBindingIds": [
+        "6785ddb8eeab1248397019f8b24f55edbe4a92a4afa8140adedad92bc1b413ef",
+        "70c8382c44ceca87d7bbd2b55bc6eeb05c04d43bb382028fcc029a6eccf11ae2",
+        "f0a28d3cc632abe4d70fbf41b8b84c55ad6a73fd93a0a68d92fd0de802dbf74e"
+      ],
+      "dataMutationEnabled": false,
+      "deterministicDigest": "430d8a1939b2b701291492f4eee898c079213a28b7273630ec46e2f1118ff610",
+      "interactionContractIds": [
+        "017926836cfebe4dfb643f77900d24b295edcd55b382d2bce71acd2b958c1017",
+        "08501c08c67de5636ecfb859fe2d82bd0028fa2a7206cf11be4e23c706630911",
+        "22d3eed368f579113b6a5598f4a3f6c19ee045a84c98de95ea2a8c848e9f79e6",
+        "25d4fbf78c45d76a16348c03d4e60cc3677944d6d4db9198eea004f44b335608",
+        "3d63f92d37e3b79a07e26aa71b6437723b5091ad1f244fedb642d2383f4030a9",
+        "7d4c2dbfae4b78ce223b09fd92c9e29fbada53e480478ae21ddfd27a9079b822",
+        "8fd0d14842cb154dbfa40cc69ede93ac352a62bd980b99f193ac8859d8812b1c",
+        "99314c7ac80ee94668b1d50077e74c5aee0140c4d2a111cfafadf7db39ae11cd"
+      ],
+      "layoutContractId": "9ec313291eefcdccb9f67774f24bf5842bca731ed5ac8400aebb46b876d7ef7d",
+      "liveApiCallEnabled": false,
+      "pageContractId": "ad0675de27893fa07d8739bc1f711d567ff4a6e8422cbaa932d7da405a8412e4",
+      "pageKey": "SYSTEMS_INTEGRATION_HEALTH",
+      "pageType": "STATUS",
+      "productionEnabled": false,
+      "readOnly": true,
+      "routeKey": "AIRPORT_FRONTEND_ROUTE_SYSTEMS_INTEGRATION_HEALTH",
+      "routePathCandidate": "/one/airport/systems-integration-health",
+      "sourceApiEndpointKey": "SYSTEMS_INTEGRATION_HEALTH",
+      "staticOnly": true,
+      "title": "Systems & Integration Health",
+      "uiStateContractIds": [
+        "1d1b9dbce8ef178792b09b3d80a26e4b5beaf13a6fcf195606c7ea2f639450f6",
+        "9196a6458228d5edde6c66dc7bd01ecd30697fae54ad25c616b984025ad553a2",
+        "a0a5a0e5b66979c81656fbbe6a2cd50deb2c6b7fcd8e7f6815f68fb86043a25a",
+        "ee31d2562971a17a4d67825a5a5a10e3555fda0a93e9c60bbee316b2ffe10a9e",
+        "f5aebc77877bd7c3c3fc906424a04c16352712ef284c99e8443f893637e5d3b4",
+        "ff8799e44c00fb7a56d7e91ddd4c397364ff1e6d30e8914d7b35a3d4860bb5b4"
+      ]
+    }
+  ],
+  "profileId": "airport-read-only-frontend-page-contract-profile-v1",
+  "readinessOutcome": "READ_ONLY_FRONTEND_PAGE_CONTRACT_READY_FOR_FUTURE_UI_IMPLEMENTATION",
+  "smokeGateResults": [
+    {
+      "blocking": true,
+      "deterministicDigest": "ae5c6e39246c8f7edfded59cf05b05b1603811054d762bb5bc8b113fd672e6f7",
+      "gateId": "G01_PAGE_CONTRACT_COMPLETENESS",
+      "gateName": "Page contract completeness",
+      "reasonCodes": [
+        "8_PAGE_CONTRACTS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "807e09a1b98a1e7f49a2337f1d0237f71e2b25fbfa30865d9c62d464f8f7dad4",
+      "gateId": "G02_LAYOUT_CONTRACT_COMPLETENESS",
+      "gateName": "Layout contract completeness",
+      "reasonCodes": [
+        "8_LAYOUT_CONTRACTS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "af9487fe32b0d12a9b3e9f6ce6ea5368ca7ee79fbaf9d0a177727b67797140fe",
+      "gateId": "G03_COMPONENT_BINDING_COMPLETENESS",
+      "gateName": "Component binding completeness",
+      "reasonCodes": [
+        "24_COMPONENT_BINDINGS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "b9153fc9fcfa311cdc1afcb0def933cb8c07641f17c749b785e57691eb091c79",
+      "gateId": "G04_UI_STATE_CONTRACT_COMPLETENESS",
+      "gateName": "UI state contract completeness",
+      "reasonCodes": [
+        "48_UI_STATE_CONTRACTS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "ea7775d573a4f564cef6084f2e715f60f0cf38d7000e3cc2b14f5ad633bb6f37",
+      "gateId": "G05_INTERACTION_CONTRACT_COMPLETENESS",
+      "gateName": "Interaction contract completeness",
+      "reasonCodes": [
+        "64_INTERACTION_CONTRACTS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "481f90b8d7d97ea0dfcdfa6f0bd0d30592cb5b87af9efe8c362229897a44d3ba",
+      "gateId": "G06_LOCAL_SMOKE_CASE_COMPLETENESS",
+      "gateName": "Local smoke case completeness",
+      "reasonCodes": [
+        "8_LOCAL_SMOKE_CASES"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "5de1c2b15a36e3be475c3d3897fd60de95ee304726d1b7313b3b31555d1ce40d",
+      "gateId": "G07_STATIC_READ_ONLY_BOUNDARY",
+      "gateName": "Static read-only boundary",
+      "reasonCodes": [
+        "STATIC_READ_ONLY_CONTRACTS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "02eac879bffa038927a288ad9ece4637ae4fe5cfb299ebbdb833d3ff414606c4",
+      "gateId": "G08_NO_LIVE_API_CALL_BOUNDARY",
+      "gateName": "No live API call boundary",
+      "reasonCodes": [
+        "LIVE_API_CALLS_DISABLED"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "d5cdc5cf733fe47c72ad05457c8afb1d67445924fefcf669408ddb4a673d3fdd",
+      "gateId": "G09_NO_DATA_MUTATION_BOUNDARY",
+      "gateName": "No data mutation boundary",
+      "reasonCodes": [
+        "MUTATIONS_DISABLED"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "b725b2c0e3141a5bffb2cdb06c4f62e45faef1da58cf3d9ade7f5b7310efc34d",
+      "gateId": "G10_NO_PRODUCTION_ROUTE_BOUNDARY",
+      "gateName": "No production route boundary",
+      "reasonCodes": [
+        "PRODUCTION_ROUTES_DISABLED"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "2e22dc310463530d4e845eba7e72f73bdefa48c30153e39a2ca289e7ef404509",
+      "gateId": "G11_A8_FRONTEND_SKELETON_DEPENDENCY",
+      "gateName": "A8 frontend skeleton dependency",
+      "reasonCodes": [
+        "A8_01_SKELETON_READY"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "98eccf4ef5765fcbf0d290b08b7cc0c080f656565a9e3e2e572540947fa7cca5",
+      "gateId": "G12_A7_API_CONTRACT_DEPENDENCY",
+      "gateName": "A7 API contract dependency",
+      "reasonCodes": [
+        "A7_READ_ONLY_ROUTE_IMPLEMENTATION_ALLOWED"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "4656643bef1607657079bae970472ef1cc878ce8513fa64433981e15344f71ce",
+      "gateId": "G13_NO_BROWSER_OR_NETWORK_SMOKE",
+      "gateName": "No browser or network smoke",
+      "reasonCodes": [
+        "NO_BROWSER_NETWORK_LOCALHOST"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "e024c6a643823f97e7d761c6886fff12f0bb7921fdb4ec4c88a26786db382478",
+      "gateId": "G14_CUSTOMER_IDENTIFIER_SAFETY",
+      "gateName": "Customer identifier safety",
+      "reasonCodes": [
+        "NO_CUSTOMER_IDENTIFIER_LEAKAGE"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "945d8f5170e0cc14ab6a47326f99017abfdc41b0d2a3ebfd4cfcd0a19616c2a2",
+      "gateId": "G15_DETERMINISTIC_OUTPUT",
+      "gateName": "Deterministic output",
+      "reasonCodes": [
+        "REPEATED_RUNNER_BYTE_IDENTICAL"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "42302d5c1bd54f67c3dc1471889ffa1756a6df6ee3c8eabf46e3d89a25cb2ddf",
+      "gateId": "G16_FRONTEND_PAGE_CONTRACT_DECISION",
+      "gateName": "Frontend page contract decision",
+      "reasonCodes": [
+        "READY_FOR_FUTURE_UI_IMPLEMENTATION_PRODUCTION_DISABLED"
+      ],
+      "severity": "LOW",
+      "status": "PASS"
+    }
+  ],
+  "sourceArtifactReferences": [
+    {
+      "artifactType": "A8_READ_ONLY_FRONTEND_SKELETON",
+      "deterministicDigest": "d98b03a921abdc8d6f87f5637d3ec86e66cd1004bebe04dc834fe7274c6ff233",
+      "digest": "2c63d14f80ee1b4c41bb1419bd1fa45c10c61e30bd1d1e0accb97ce83d99ad44",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-read-only-frontend-skeleton.v1.json"
+    },
+    {
+      "artifactType": "A7_READ_ONLY_API_RELEASE_GATE",
+      "deterministicDigest": "b7dd8ba030db7a6c609b1d2d72cc5ecad7eb6690cd68fd8ebff3ee05709d809e",
+      "digest": "2a2569e7ee493c5147ced62370091e99703052b6f8c50cd90d26fd28c5e24f11",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-read-only-api-implementation-release-gate.v1.json"
+    },
+    {
+      "artifactType": "A7_READ_ONLY_API_SKELETON",
+      "deterministicDigest": "9a15c6198986f586f10a9a329bfdd85649460ab1624beea929bc1f7266e0390b",
+      "digest": "abb1a8c50a7c55e1173e7ba68c2f945e5f737ea5a7ab87abc260b4ee637cbefb",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-read-only-api-skeleton.v1.json"
+    },
+    {
+      "artifactType": "A7_READ_ONLY_API_RESPONSE_CONTRACT",
+      "deterministicDigest": "1a4d65932bd4053e9c3c245cf8550bb60a698ccaa8a62378231d3ed8b8d84dcb",
+      "digest": "3495228c1de1395ead68ae2f078dcdd172e4d4f065db347a342862d94fef592b",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-read-only-api-response-contract.v1.json"
+    },
+    {
+      "artifactType": "A7_READ_ONLY_API_MOCK_ROUTE_CONTRACT",
+      "deterministicDigest": "f9f93df1511613abddf22a825bb29ab66ebe476ffe6c52e7d6e387b0a4fd0dcb",
+      "digest": "60ba222664c018ff846a9e439a84dc95760e571c50a0975ae860f951ba1f8e9d",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-read-only-api-mock-route-contract.v1.json"
+    }
+  ],
+  "summary": {
+    "a7ReadOnlyApiRouteImplementationAllowed": true,
+    "a8FrontendSkeletonPageCount": 8,
+    "airportSpecific": false,
+    "apiEnabled": false,
+    "approvalWriteCount": 0,
+    "auditWriteCount": 0,
+    "blockingGateFailureCount": 0,
+    "browserLaunchRequiredCount": 0,
+    "canonicalWriteCount": 0,
+    "componentBindingContractCount": 24,
+    "containsCustomerAssetIdentifiers": false,
+    "crossIndustry": true,
+    "dataMutationEnabledComponentCount": 0,
+    "dataMutationEnabledPageCount": 0,
+    "databaseWriteCount": 0,
+    "decisionWriteCount": 0,
+    "frontendEnabled": false,
+    "interactionContractCount": 64,
+    "layoutContractCount": 8,
+    "liveApiCallEnabledComponentCount": 0,
+    "liveApiCallEnabledPageCount": 0,
+    "localSmokeCaseCount": 8,
+    "localhostCallRequiredCount": 0,
+    "mutationAllowedInteractionCount": 0,
+    "networkCallRequiredCount": 0,
+    "pageContractCount": 8,
+    "passedSmokeGateCount": 16,
+    "productionActivationAllowed": false,
+    "productionEnabledPageCount": 0,
+    "productionRouteEnabledCount": 0,
+    "pushAllowed": false,
+    "readOnlyPageCount": 8,
+    "runtimeActivationAllowed": false,
+    "smokeGateCount": 16,
+    "staticOnlyPageCount": 8,
+    "uiStateContractCount": 48
+  },
+  "uiStateContracts": [
+    {
+      "deterministicDigest": "f6e321093cff5ca675d4e60f81d732c7269222d5106e9bf0ab063165da52e14d",
+      "messagePolicy": "EMPTY_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "AIRPORT_OVERVIEW",
+      "required": true,
+      "stateType": "EMPTY",
+      "uiStateContractId": "01495784edc502022caddae52fd3330afab463daf33fa0ca14b008e0ec98f9b1"
+    },
+    {
+      "deterministicDigest": "6f8b2ce5c0202694e9d059fe31ece23b3ac569eba62c0ec6e07908c41d8d9c6c",
+      "messagePolicy": "ERROR_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "AIRPORT_OVERVIEW",
+      "required": true,
+      "stateType": "ERROR",
+      "uiStateContractId": "3d4989677e75bf26bc4f5e623237756cbe3c921f71f1bdeb67b527caf2b3ac34"
+    },
+    {
+      "deterministicDigest": "a267e21c25de1b70eb8229f83763e47327ab1911cd2e594c7f40fb72ccb7352b",
+      "messagePolicy": "FILTERED_EMPTY_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "AIRPORT_OVERVIEW",
+      "required": true,
+      "stateType": "FILTERED_EMPTY",
+      "uiStateContractId": "b8e11abe5f7a1b661977e0c6deb0eb09fea48d3f5a2a9edd22c377ddd5e5f331"
+    },
+    {
+      "deterministicDigest": "269f53b8845414e1e66ba5d2106793853da88c85413c3a07bc213363bd16662d",
+      "messagePolicy": "LOADING_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "AIRPORT_OVERVIEW",
+      "required": true,
+      "stateType": "LOADING",
+      "uiStateContractId": "b8c5756ea62033a704d3a81a205a7e719a95c069bb7ca7efd691bdd7d28ae57f"
+    },
+    {
+      "deterministicDigest": "c261a7aa5880b3dd1d37b78aadcc5e9b7628c943f771b8b42db33b58c847413a",
+      "messagePolicy": "PERMISSION_REQUIRED_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "AIRPORT_OVERVIEW",
+      "required": true,
+      "stateType": "PERMISSION_REQUIRED",
+      "uiStateContractId": "9fda2f70029c37d92672f4851463a4103948982376ebd5c8cf79a3625d6accbe"
+    },
+    {
+      "deterministicDigest": "4e0cb24f8e0466d3e0c4984945f97f2a7b74f25705c9b8fd19cc527ba3cb3e09",
+      "messagePolicy": "READY_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "AIRPORT_OVERVIEW",
+      "required": true,
+      "stateType": "READY",
+      "uiStateContractId": "5e129d59bc856c9aae3a664b04de9c3e8a4d6a0321726a6b5e4034a55fe3fb28"
+    },
+    {
+      "deterministicDigest": "9771befe270d5e119494eaab88599330795f000b7eba9625c93dbdfdabad1b10",
+      "messagePolicy": "EMPTY_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "ALARMS_EVENTS",
+      "required": true,
+      "stateType": "EMPTY",
+      "uiStateContractId": "fc68db3a6878fd27c9bd362569abd61ac2cbd92add9894f2e62e981afb490c8e"
+    },
+    {
+      "deterministicDigest": "caba2935ddf757a4686f671be8d457b11afa0cc1ac095936c4f87b7ae1f96b4e",
+      "messagePolicy": "ERROR_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "ALARMS_EVENTS",
+      "required": true,
+      "stateType": "ERROR",
+      "uiStateContractId": "ad7980a7ced33d4f911977c0af9f1b25c8dac9d8f02fbba023ab50abaaf3b861"
+    },
+    {
+      "deterministicDigest": "9f27beac9e50ff54386479c102062a6a8c1a3da572c6ee804ee4e23de1ebd6d9",
+      "messagePolicy": "FILTERED_EMPTY_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "ALARMS_EVENTS",
+      "required": true,
+      "stateType": "FILTERED_EMPTY",
+      "uiStateContractId": "aa47f24eb36972f8f9186b64fcb8f8c7acb635ad6722b276428e9aae671076ad"
+    },
+    {
+      "deterministicDigest": "8e717f1f659fbd7ef3be0aa691b6d58716358f31e8250e5bff4cad695b1e712b",
+      "messagePolicy": "LOADING_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "ALARMS_EVENTS",
+      "required": true,
+      "stateType": "LOADING",
+      "uiStateContractId": "6ef04899727989b686a16de0292ff17f54137ebcf3e53060b22ef5ecb4c70699"
+    },
+    {
+      "deterministicDigest": "8b6ade1c2062dbd99e03299312491bb7a5935c7697c0b2ab08600fbae5bb4332",
+      "messagePolicy": "PERMISSION_REQUIRED_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "ALARMS_EVENTS",
+      "required": true,
+      "stateType": "PERMISSION_REQUIRED",
+      "uiStateContractId": "1cf80182401e56dc8aebe13617b0078cbf5f77d487f41e935a551e6d6b20ceb7"
+    },
+    {
+      "deterministicDigest": "73faa381c4e45bf0ddbe723d60bc372b92426eb8ca1e780b1e5fcd48dcd46857",
+      "messagePolicy": "READY_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "ALARMS_EVENTS",
+      "required": true,
+      "stateType": "READY",
+      "uiStateContractId": "4ad4cf64b25c4517a755d6c9fa5de81d2edef3bd53a9e47fd3f57dad3148a43c"
+    },
+    {
+      "deterministicDigest": "4d527a6542c3e248ddac494eff6b32a8bdef6a52118889ce154733e6a9192180",
+      "messagePolicy": "EMPTY_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "ASSETS_TOPOLOGY",
+      "required": true,
+      "stateType": "EMPTY",
+      "uiStateContractId": "6aa3f4eb6a9f4f3cceafbc5b55b03b9e42afcf1e9dc15327f44cc8a4afac0784"
+    },
+    {
+      "deterministicDigest": "130a4e4c7bc3deeb7cbd42f93b8608f6a7451e7ee4965509e2eb6de0a16187d8",
+      "messagePolicy": "ERROR_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "ASSETS_TOPOLOGY",
+      "required": true,
+      "stateType": "ERROR",
+      "uiStateContractId": "c63282e3f4ffbbc9a70535be27e09e511e1be317e59ab9561eb7282fc4243563"
+    },
+    {
+      "deterministicDigest": "754fb54075b988a8f255304191d7f917b5b1da158cd55495920ac09a8aaa2317",
+      "messagePolicy": "FILTERED_EMPTY_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "ASSETS_TOPOLOGY",
+      "required": true,
+      "stateType": "FILTERED_EMPTY",
+      "uiStateContractId": "885d63576faf7322ba751d0031de01f8450fd8a0153c6409e10e032d74fe0f1c"
+    },
+    {
+      "deterministicDigest": "60f80baae84268029f701895d9c71800d94168bedbd56c012a121e090bf25489",
+      "messagePolicy": "LOADING_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "ASSETS_TOPOLOGY",
+      "required": true,
+      "stateType": "LOADING",
+      "uiStateContractId": "d885b378218a9fe2de405491015219b79399125cb64c9d370b1a81e892719918"
+    },
+    {
+      "deterministicDigest": "cc81f15dcaa051ccc70f48b95754943ddf6621ad2559039ae3b44337542a8879",
+      "messagePolicy": "PERMISSION_REQUIRED_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "ASSETS_TOPOLOGY",
+      "required": true,
+      "stateType": "PERMISSION_REQUIRED",
+      "uiStateContractId": "2374f8a2dbc1186e90f2d8917ee44e94cf99d1bad0a869297234bd1a8dc1ede3"
+    },
+    {
+      "deterministicDigest": "441fd7d2c05eacf01e76fd8c0094fb264793c9bd2f4d33e9f1671723e481d0c1",
+      "messagePolicy": "READY_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "ASSETS_TOPOLOGY",
+      "required": true,
+      "stateType": "READY",
+      "uiStateContractId": "219d714cb324ab125af69820780bc832bbe2abb9c55c7bc43b5cb23e23bd5e4f"
+    },
+    {
+      "deterministicDigest": "b803774ba0c5648101177d631744edd623816d30d4cbab914720d9b3ea2dfcef",
+      "messagePolicy": "EMPTY_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "EVIDENCE_INVESTIGATION",
+      "required": true,
+      "stateType": "EMPTY",
+      "uiStateContractId": "657e5e17530a68c2b3828bdd367c93490d42ef4ed0eca45620581f6c703d59e9"
+    },
+    {
+      "deterministicDigest": "f7305310f1ffa9b338a6b2ea18d7c92ee0e59fc40ba12934b2173e0a6b470263",
+      "messagePolicy": "ERROR_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "EVIDENCE_INVESTIGATION",
+      "required": true,
+      "stateType": "ERROR",
+      "uiStateContractId": "b2683aee0190f613244cc1bf060e0fef328fd8306a70db99e0fef00362089145"
+    },
+    {
+      "deterministicDigest": "fe83578536957ebfbeb99a17f49352fdbbc727992f7359b71d3003539c5d96a4",
+      "messagePolicy": "FILTERED_EMPTY_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "EVIDENCE_INVESTIGATION",
+      "required": true,
+      "stateType": "FILTERED_EMPTY",
+      "uiStateContractId": "42395957296e461d392a39d1635725a1603eff778e937d3b8a8a12d34f7e9446"
+    },
+    {
+      "deterministicDigest": "66df6fe139c224edf8cb75d6a5dad67b4aaad2eb4ad214fb7661ab653cdce335",
+      "messagePolicy": "LOADING_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "EVIDENCE_INVESTIGATION",
+      "required": true,
+      "stateType": "LOADING",
+      "uiStateContractId": "9c053c2127820ac8ddf763db3b96c03a8c3d3a89424cb1f7aa86861b2aad4cce"
+    },
+    {
+      "deterministicDigest": "0256f85e3926f0b0b2fea392c88e0da551b4d0deed66957d17856e46127e3d31",
+      "messagePolicy": "PERMISSION_REQUIRED_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "EVIDENCE_INVESTIGATION",
+      "required": true,
+      "stateType": "PERMISSION_REQUIRED",
+      "uiStateContractId": "81f04dfcbfa6668487f83e3dfada30d22ca34132164e5b3595266ec0fda3c069"
+    },
+    {
+      "deterministicDigest": "5210bbdda4d4e083707011948bab4807787c0b8691bb3b25495b26be6ccc5977",
+      "messagePolicy": "READY_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "EVIDENCE_INVESTIGATION",
+      "required": true,
+      "stateType": "READY",
+      "uiStateContractId": "6e0b5794879f510cf0eb285a9e77053d0b71a47efce2ed562771d38174370b8f"
+    },
+    {
+      "deterministicDigest": "00ad64cca51817f1e47d5159df42c48f8000cfc5c112825872fda31d7b01f7df",
+      "messagePolicy": "EMPTY_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "FAULT_CASES",
+      "required": true,
+      "stateType": "EMPTY",
+      "uiStateContractId": "c23d1f90ac86e5e3a332dcce4c4d75d2fa0a56e5051be819a2578685d5266b9a"
+    },
+    {
+      "deterministicDigest": "f694e7897af4e101d4f766791bf45ba0e9c325d6ab78c4902121e8e8792c04b5",
+      "messagePolicy": "ERROR_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "FAULT_CASES",
+      "required": true,
+      "stateType": "ERROR",
+      "uiStateContractId": "c34c38cfebdbf1afef4bb3e96865e1ba9900c714f8a182715bd8564ce09713b5"
+    },
+    {
+      "deterministicDigest": "9f2ad47a106cd81f9edc704a2bd0594bc57a86e96035eefba56a78cbaefaf395",
+      "messagePolicy": "FILTERED_EMPTY_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "FAULT_CASES",
+      "required": true,
+      "stateType": "FILTERED_EMPTY",
+      "uiStateContractId": "1c93b74aeb2e04e3a2534467e7088bb8efd656fb433290882176565596f667b7"
+    },
+    {
+      "deterministicDigest": "3c9b1400feae3b5eb96c11945413b46d8da1c526b88205e3f9433c061fafc49a",
+      "messagePolicy": "LOADING_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "FAULT_CASES",
+      "required": true,
+      "stateType": "LOADING",
+      "uiStateContractId": "7d43cb9b153e8f20bd4a10239c8f66f1788fafa56247f7205dab2051d3a69f52"
+    },
+    {
+      "deterministicDigest": "de4c5001db52b633f9be2b88ee873e7f2d34e9408e58a889cd382b46a6341a4c",
+      "messagePolicy": "PERMISSION_REQUIRED_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "FAULT_CASES",
+      "required": true,
+      "stateType": "PERMISSION_REQUIRED",
+      "uiStateContractId": "542fe789ea023b79231221ad473f77511a9682131cc5179ff6ce5549c04e5bb2"
+    },
+    {
+      "deterministicDigest": "f19c3582fbae5af1c7a08ea507e2da2b6f5394b12288a2bab4fa927f3e8bb248",
+      "messagePolicy": "READY_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "FAULT_CASES",
+      "required": true,
+      "stateType": "READY",
+      "uiStateContractId": "633375b46844f02d314c1c05ff31f1767767e5320389987d0738aadde905912a"
+    },
+    {
+      "deterministicDigest": "cf6ed567b16302a64ffa3739425634806afe70590495d26ea66a53b4c42a6713",
+      "messagePolicy": "EMPTY_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "MAINTENANCE_WORK_ORDERS",
+      "required": true,
+      "stateType": "EMPTY",
+      "uiStateContractId": "a7202b61b1af87e67e4020d78fc9b8f1f3111e19d815eff14ffb2149ff840ed0"
+    },
+    {
+      "deterministicDigest": "0994d8530ca22e58e802dbfcba7f25a8da4ef157b397092082a24f18dcb57075",
+      "messagePolicy": "ERROR_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "MAINTENANCE_WORK_ORDERS",
+      "required": true,
+      "stateType": "ERROR",
+      "uiStateContractId": "4240cfe2611b33cf1437666f4f1a5005317cda77642f0e149989d0763bd23638"
+    },
+    {
+      "deterministicDigest": "6392b81af943f87ef554c292325a78a3be1674c57b2101f5cf86112684aaf892",
+      "messagePolicy": "FILTERED_EMPTY_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "MAINTENANCE_WORK_ORDERS",
+      "required": true,
+      "stateType": "FILTERED_EMPTY",
+      "uiStateContractId": "62b5e769fe89848ae059ec584a9e22ac8e1a64a00ec6b1e8d174416155f7afb6"
+    },
+    {
+      "deterministicDigest": "f89a2e19e1fc30b6aa644ce5cf675137dd39f7448b012998d56cc4a5cae733b5",
+      "messagePolicy": "LOADING_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "MAINTENANCE_WORK_ORDERS",
+      "required": true,
+      "stateType": "LOADING",
+      "uiStateContractId": "c7fc93990d80a4f0f843986bdcb4fa902f62273b7e8120a54135e23a25cbc55d"
+    },
+    {
+      "deterministicDigest": "4fe33142ddcf5a72392af717ab0485d11c6c78a0d553b2063b6557ec9e674f34",
+      "messagePolicy": "PERMISSION_REQUIRED_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "MAINTENANCE_WORK_ORDERS",
+      "required": true,
+      "stateType": "PERMISSION_REQUIRED",
+      "uiStateContractId": "d660136a4ebbcd20d7aecb12730f87347dd0f4d71fc6d7245edf813bcaffe78a"
+    },
+    {
+      "deterministicDigest": "408b4f660c2f13fd40ba24f4f1fa5c3b1e8e55d18df97f0a9f3904f4e282d8cd",
+      "messagePolicy": "READY_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "MAINTENANCE_WORK_ORDERS",
+      "required": true,
+      "stateType": "READY",
+      "uiStateContractId": "1bda2ac778d4334db336297cde3638efaa6d381a88539bdb793f7e4148401889"
+    },
+    {
+      "deterministicDigest": "e90bff0e3b2cd4c6b88f35339d84d87669682057356c28be3b88b8afb68a8ce2",
+      "messagePolicy": "EMPTY_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "REPORTS",
+      "required": true,
+      "stateType": "EMPTY",
+      "uiStateContractId": "1c8ef33f24ddabd33c88f32f1caccd095babef686ebcb9de5e2c21d3d5cc4831"
+    },
+    {
+      "deterministicDigest": "baf043288f90f007188579fd9c47413a1fa64eaaf2f75134ce95250008f24fd8",
+      "messagePolicy": "ERROR_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "REPORTS",
+      "required": true,
+      "stateType": "ERROR",
+      "uiStateContractId": "895f3afe7f0c33d4803e0ad5567f516c06c51c6b4181f98b879ca7e2645bce14"
+    },
+    {
+      "deterministicDigest": "902b04f1d4aaccb8fe28a4049e00326ca2ec14cd99b6d32193c00e5353322e8c",
+      "messagePolicy": "FILTERED_EMPTY_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "REPORTS",
+      "required": true,
+      "stateType": "FILTERED_EMPTY",
+      "uiStateContractId": "d4b6dbb529f227fcf7e7e31084c52d67bad812bf98da58dcb4125ea0cd42cf9f"
+    },
+    {
+      "deterministicDigest": "7c1783db0b6c23c4e7e17f6c6e0ecb897bc01338a148320e0cf149be2c1e51e9",
+      "messagePolicy": "LOADING_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "REPORTS",
+      "required": true,
+      "stateType": "LOADING",
+      "uiStateContractId": "0f25bc2bc890b914c56130b98a26cee4910565e2d8c7acdeb2d49555c221ffe9"
+    },
+    {
+      "deterministicDigest": "72dececebed9c96ca161152c147552c9b432e47f731b0f1510cdf96789f03a3f",
+      "messagePolicy": "PERMISSION_REQUIRED_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "REPORTS",
+      "required": true,
+      "stateType": "PERMISSION_REQUIRED",
+      "uiStateContractId": "d83b73b37b5c5928cf6a1382df0d4ccb819cd8822976fcc2df9cebfb54477c77"
+    },
+    {
+      "deterministicDigest": "1d0585efd2fcb807572c217943b806b4ee86896c7ba4d37214bcef3616677fdc",
+      "messagePolicy": "READY_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "REPORTS",
+      "required": true,
+      "stateType": "READY",
+      "uiStateContractId": "c3be0e97b7aded03409393421b579ef3db4a47dc6ebb68d380cd2fd3c453715b"
+    },
+    {
+      "deterministicDigest": "45522d4fd0c0c7a71a1949b0e58816f42b2ed66bc4a94a94b0c9b73d0d55dc8b",
+      "messagePolicy": "EMPTY_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "SYSTEMS_INTEGRATION_HEALTH",
+      "required": true,
+      "stateType": "EMPTY",
+      "uiStateContractId": "a0a5a0e5b66979c81656fbbe6a2cd50deb2c6b7fcd8e7f6815f68fb86043a25a"
+    },
+    {
+      "deterministicDigest": "a59060ec8184fa305fdefa88e6af67331373f17e10a5f2f86aa3c217700f0fd7",
+      "messagePolicy": "ERROR_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "SYSTEMS_INTEGRATION_HEALTH",
+      "required": true,
+      "stateType": "ERROR",
+      "uiStateContractId": "1d1b9dbce8ef178792b09b3d80a26e4b5beaf13a6fcf195606c7ea2f639450f6"
+    },
+    {
+      "deterministicDigest": "c1d3c0326d029f17fd1139de30a68cdd1295224054fae29efe7c10599ab813cb",
+      "messagePolicy": "FILTERED_EMPTY_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "SYSTEMS_INTEGRATION_HEALTH",
+      "required": true,
+      "stateType": "FILTERED_EMPTY",
+      "uiStateContractId": "ee31d2562971a17a4d67825a5a5a10e3555fda0a93e9c60bbee316b2ffe10a9e"
+    },
+    {
+      "deterministicDigest": "44e20c2756551f27d3c06ee946fba69d751c5adcde18ad32b161aa00d82a348d",
+      "messagePolicy": "LOADING_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "SYSTEMS_INTEGRATION_HEALTH",
+      "required": true,
+      "stateType": "LOADING",
+      "uiStateContractId": "ff8799e44c00fb7a56d7e91ddd4c397364ff1e6d30e8914d7b35a3d4860bb5b4"
+    },
+    {
+      "deterministicDigest": "f3436477fe69ce215a740305a2cdb12d610030873c26d0afedd61b741c661601",
+      "messagePolicy": "PERMISSION_REQUIRED_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "SYSTEMS_INTEGRATION_HEALTH",
+      "required": true,
+      "stateType": "PERMISSION_REQUIRED",
+      "uiStateContractId": "9196a6458228d5edde6c66dc7bd01ecd30697fae54ad25c616b984025ad553a2"
+    },
+    {
+      "deterministicDigest": "d12c6d0eec08fc2ec64d5370b328758040ffd68ac10368564b5c8824917d1159",
+      "messagePolicy": "READY_STATIC_MESSAGE_REQUIRED",
+      "pageKey": "SYSTEMS_INTEGRATION_HEALTH",
+      "required": true,
+      "stateType": "READY",
+      "uiStateContractId": "f5aebc77877bd7c3c3fc906424a04c16352712ef284c99e8443f893637e5d3b4"
+    }
+  ]
+}

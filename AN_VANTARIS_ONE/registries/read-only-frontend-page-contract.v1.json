@@ -1,0 +1,30 @@
+{
+  "apiEnabled": false,
+  "airportSpecific": false,
+  "approvalWriteCount": 0,
+  "auditWriteCount": 0,
+  "authority": "ONE-AIRPORT-A8-02",
+  "browserLaunchRequiredCount": 0,
+  "canonicalWriteCount": 0,
+  "containsCustomerAssetIdentifiers": false,
+  "contractVersion": "read-only-frontend-page-contract.v1",
+  "crossIndustry": true,
+  "databaseWriteCount": 0,
+  "decisionWriteCount": 0,
+  "description": "Read-only frontend page contract and local smoke gate for Airport Operations Console page skeletons.",
+  "frontendEnabled": false,
+  "implementationStatus": "READ_ONLY_FRONTEND_PAGE_CONTRACT_AND_LOCAL_SMOKE_GATE_COMPLETE",
+  "localhostCallRequiredCount": 0,
+  "networkCallRequiredCount": 0,
+  "productionActivationAllowed": false,
+  "pushAllowed": false,
+  "readinessOutcome": "READ_ONLY_FRONTEND_PAGE_CONTRACT_READY_FOR_FUTURE_UI_IMPLEMENTATION",
+  "runtimeActivationAllowed": false,
+  "sourceArtifacts": [
+    "airport-read-only-frontend-skeleton.v1.json",
+    "airport-read-only-api-implementation-release-gate.v1.json",
+    "airport-read-only-api-skeleton.v1.json",
+    "airport-read-only-api-response-contract.v1.json",
+    "airport-read-only-api-mock-route-contract.v1.json"
+  ]
+}
