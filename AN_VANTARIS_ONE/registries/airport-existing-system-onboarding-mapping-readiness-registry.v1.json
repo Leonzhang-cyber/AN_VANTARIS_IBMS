@@ -1,0 +1,33 @@
+{
+  "authority": "ONE-AIRPORT-GA-R7",
+  "contractVersion": "airport-existing-system-onboarding-mapping-readiness-registry.v1",
+  "projectionArtifact": "AN_VANTARIS_ONE/projections/airport-existing-system-onboarding-mapping-readiness.v1.json",
+  "report": "ONE_AIRPORT_GA_R7_EXISTING_SYSTEM_ONBOARDING_MAPPING_READINESS_REPORT.md",
+  "validationMarker": "ONE_AIRPORT_GA_R7_EXISTING_SYSTEM_ONBOARDING_MAPPING_READINESS_PASS",
+  "baselineHead": "dbf88514cb48b2994dd69276065d0b3316f08474",
+  "baselineTag": "airport-ga-readonly-stakeholder-review-local-freeze-20260621",
+  "gaR6Dependency": "AN_VANTARIS_ONE/projections/airport-link-integration-readiness.v1.json",
+  "existingSystemCatalog": "projection.existingSystemCatalog",
+  "integrationMethodCatalog": "projection.integrationMethodCatalog",
+  "mappingReadinessModel": "projection.mappingReadinessModel",
+  "customerFunctionImpact": "projection.customerCoreFunctionMappingImpact",
+  "sharedFoundationInterfaceRequirements": "projection.sharedFoundationInterfaceRequirements",
+  "safetyPosture": {
+    "readOnly": true,
+    "runtimeActivation": false,
+    "productionActivation": false,
+    "dbWrite": false,
+    "approvalExecution": false,
+    "deploymentExecution": false,
+    "remoteCommandExecution": false,
+    "connectorExecution": false,
+    "deviceConnection": false,
+    "edgeRuntimeCall": false,
+    "linkRuntimeCall": false,
+    "oneAdapterIntroduced": false,
+    "customerIdentifierLeakage": false,
+    "localAbsolutePathLeakage": false
+  },
+  "pushPerformed": false,
+  "runtimeIntegrationImplemented": false
+}
