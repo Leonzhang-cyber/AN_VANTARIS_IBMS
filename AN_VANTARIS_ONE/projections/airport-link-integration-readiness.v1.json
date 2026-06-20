@@ -1,0 +1,443 @@
+{
+  "metadata": {
+    "projectionId": "airport-link-integration-readiness.v1",
+    "platform": "VANTARIS ONE",
+    "industryProjection": "airport",
+    "releaseContext": "Airport GA-R6 LINK Integration Readiness Projection",
+    "readOnly": true,
+    "runtimeActivation": false,
+    "productionActivation": false,
+    "dbWrite": false,
+    "approvalExecution": false,
+    "deploymentExecution": false,
+    "edgeLinkRuntimeCall": false,
+    "oneAdapterIntroduced": false
+  },
+  "linkReadinessSummary": {
+    "targetIntegrationLayer": "AN_VANTARIS_LINK shared foundation",
+    "integrationMode": "future_read_only_projection_then_controlled_runtime_activation",
+    "currentStatus": "readiness_projection_only",
+    "runtimeConnected": false,
+    "productionEnabled": false
+  },
+  "sourceSystemHealthRequirements": {
+    "requiredFields": [
+      "sourceSystemId",
+      "sourceSystemType",
+      "connectorId",
+      "edgeNodeId",
+      "linkGatewayId",
+      "healthStatus",
+      "lastSeenAt",
+      "lastDeliveryAt",
+      "lastAckAt",
+      "dataFreshnessStatus",
+      "deliveryLatencyMs",
+      "queueDepth",
+      "retryCount",
+      "dlqCount",
+      "auditChainStatus",
+      "evidenceChainStatus"
+    ],
+    "requirementObjects": [
+      {
+        "name": "source_system_identity",
+        "fields": [
+          "sourceSystemId",
+          "sourceSystemType",
+          "connectorId",
+          "edgeNodeId",
+          "linkGatewayId"
+        ],
+        "status": "future_shared_foundation_requirement"
+      },
+      {
+        "name": "delivery_health_state",
+        "fields": [
+          "healthStatus",
+          "lastSeenAt",
+          "lastDeliveryAt",
+          "lastAckAt",
+          "dataFreshnessStatus",
+          "deliveryLatencyMs",
+          "queueDepth",
+          "retryCount",
+          "dlqCount"
+        ],
+        "status": "future_shared_foundation_requirement"
+      },
+      {
+        "name": "trust_chain_state",
+        "fields": [
+          "auditChainStatus",
+          "evidenceChainStatus"
+        ],
+        "status": "future_shared_foundation_requirement"
+      }
+    ]
+  },
+  "deliveryReadinessRequirements": {
+    "requiredFields": [
+      "deliveryChannelId",
+      "deliveryStatus",
+      "ackRequired",
+      "retryPolicyRequired",
+      "dlqRequired",
+      "payloadHashRequired",
+      "auditChainRequired",
+      "evidenceChainRequired",
+      "timestampNormalizationRequired",
+      "qualityFlagRequired",
+      "backpressureStatusRequired"
+    ],
+    "status": "future_shared_foundation_requirement"
+  },
+  "auditEvidenceRequirements": {
+    "categories": [
+      {
+        "category": "event_evidence",
+        "requiredFutureFields": [
+          "evidenceId",
+          "sourceSystemId",
+          "edgeNodeId",
+          "linkGatewayId",
+          "payloadHash",
+          "timestamp",
+          "chainHash",
+          "signatureStatus",
+          "retentionClass"
+        ]
+      },
+      {
+        "category": "alarm_evidence",
+        "requiredFutureFields": [
+          "evidenceId",
+          "sourceSystemId",
+          "edgeNodeId",
+          "linkGatewayId",
+          "payloadHash",
+          "timestamp",
+          "chainHash",
+          "signatureStatus",
+          "retentionClass"
+        ]
+      },
+      {
+        "category": "fault_evidence",
+        "requiredFutureFields": [
+          "evidenceId",
+          "sourceSystemId",
+          "edgeNodeId",
+          "linkGatewayId",
+          "payloadHash",
+          "timestamp",
+          "chainHash",
+          "signatureStatus",
+          "retentionClass"
+        ]
+      },
+      {
+        "category": "delivery_evidence",
+        "requiredFutureFields": [
+          "evidenceId",
+          "sourceSystemId",
+          "edgeNodeId",
+          "linkGatewayId",
+          "payloadHash",
+          "timestamp",
+          "chainHash",
+          "signatureStatus",
+          "retentionClass"
+        ]
+      },
+      {
+        "category": "mapping_evidence",
+        "requiredFutureFields": [
+          "evidenceId",
+          "sourceSystemId",
+          "edgeNodeId",
+          "linkGatewayId",
+          "payloadHash",
+          "timestamp",
+          "chainHash",
+          "signatureStatus",
+          "retentionClass"
+        ]
+      },
+      {
+        "category": "commissioning_evidence",
+        "requiredFutureFields": [
+          "evidenceId",
+          "sourceSystemId",
+          "edgeNodeId",
+          "linkGatewayId",
+          "payloadHash",
+          "timestamp",
+          "chainHash",
+          "signatureStatus",
+          "retentionClass"
+        ]
+      },
+      {
+        "category": "deployment_evidence",
+        "requiredFutureFields": [
+          "evidenceId",
+          "sourceSystemId",
+          "edgeNodeId",
+          "linkGatewayId",
+          "payloadHash",
+          "timestamp",
+          "chainHash",
+          "signatureStatus",
+          "retentionClass"
+        ]
+      },
+      {
+        "category": "work_order_trigger_evidence",
+        "requiredFutureFields": [
+          "evidenceId",
+          "sourceSystemId",
+          "edgeNodeId",
+          "linkGatewayId",
+          "payloadHash",
+          "timestamp",
+          "chainHash",
+          "signatureStatus",
+          "retentionClass"
+        ]
+      },
+      {
+        "category": "support_bundle_evidence",
+        "requiredFutureFields": [
+          "evidenceId",
+          "sourceSystemId",
+          "edgeNodeId",
+          "linkGatewayId",
+          "payloadHash",
+          "timestamp",
+          "chainHash",
+          "signatureStatus",
+          "retentionClass"
+        ]
+      }
+    ]
+  },
+  "workOrderTriggerRequirements": {
+    "requiredFields": [
+      "faultCandidateId",
+      "alarmId",
+      "eventId",
+      "assetRef",
+      "locationRef",
+      "severity",
+      "prioritySuggestion",
+      "sourceSystemId",
+      "firstSeenAt",
+      "lastSeenAt",
+      "occurrenceCount",
+      "recommendedAction",
+      "evidenceRefs"
+    ],
+    "ownershipStatement": "LINK does not create work orders. LINK provides work-order trigger data. UMMS owns work order lifecycle.",
+    "status": "future_shared_foundation_requirement"
+  },
+  "assetLocationReferenceRequirements": {
+    "requiredFields": [
+      "assetRef",
+      "locationRef",
+      "systemRef",
+      "equipmentRef",
+      "drawingRef",
+      "zoneRef",
+      "floorRef",
+      "roomRef",
+      "hmiSymbolRef"
+    ],
+    "ownershipStatement": "LINK carries references. VANTARIS ONE / UMMS / Airport resolve and display business context.",
+    "status": "future_shared_foundation_requirement"
+  },
+  "customerCoreFunctionDependencyMap": [
+    {
+      "function": "Work Order Management, auto + manual",
+      "currentGaR6Status": "readiness_projection_only",
+      "futureOwner": "UMMS / ONE Work Management",
+      "requiredLinkObjects": [
+        "workOrderTriggerRequirements",
+        "auditEvidenceRequirements"
+      ],
+      "requiredEdgeCapabilities": [
+        "event observation",
+        "alarm observation"
+      ],
+      "requiredOneProjection": "maintenance-work-orders readiness projection",
+      "requiredUmmsCapability": "canonical work order lifecycle",
+      "implementationPhase": "future UMMS alignment"
+    },
+    {
+      "function": "Asset Registry, full lifecycle tracking",
+      "currentGaR6Status": "readiness_projection_only",
+      "futureOwner": "VANTARIS ONE Asset Graph / Airport",
+      "requiredLinkObjects": [
+        "assetLocationReferenceRequirements",
+        "sourceSystemHealthRequirements"
+      ],
+      "requiredEdgeCapabilities": [
+        "asset discovery observation",
+        "point mapping observation"
+      ],
+      "requiredOneProjection": "assets-topology readiness projection",
+      "requiredUmmsCapability": "asset-context consumption for maintenance workflows",
+      "implementationPhase": "future shared foundation"
+    },
+    {
+      "function": "Preventive Maintenance Scheduler",
+      "currentGaR6Status": "future_UMMS",
+      "futureOwner": "UMMS",
+      "requiredLinkObjects": [
+        "assetLocationReferenceRequirements",
+        "deliveryReadinessRequirements"
+      ],
+      "requiredEdgeCapabilities": [
+        "equipment status observation"
+      ],
+      "requiredOneProjection": "maintenance scheduling readiness projection",
+      "requiredUmmsCapability": "PM plan and schedule execution",
+      "implementationPhase": "future UMMS domain implementation"
+    },
+    {
+      "function": "Spare Parts / Inventory Management",
+      "currentGaR6Status": "future_UMMS",
+      "futureOwner": "UMMS",
+      "requiredLinkObjects": [
+        "assetLocationReferenceRequirements"
+      ],
+      "requiredEdgeCapabilities": [
+        "equipment reference observation"
+      ],
+      "requiredOneProjection": "spare parts readiness projection",
+      "requiredUmmsCapability": "spare part and inventory transaction lifecycle",
+      "implementationPhase": "future UMMS domain implementation"
+    },
+    {
+      "function": "Vendor / Contract Management",
+      "currentGaR6Status": "future_UMMS",
+      "futureOwner": "UMMS",
+      "requiredLinkObjects": [
+        "auditEvidenceRequirements"
+      ],
+      "requiredEdgeCapabilities": [
+        "commissioning evidence observation"
+      ],
+      "requiredOneProjection": "vendor and contract readiness projection",
+      "requiredUmmsCapability": "vendor and contract lifecycle",
+      "implementationPhase": "future UMMS domain implementation"
+    },
+    {
+      "function": "Graphics HMI to locate Equipment",
+      "currentGaR6Status": "readiness_projection_only",
+      "futureOwner": "VANTARIS ONE Airport / UCDE",
+      "requiredLinkObjects": [
+        "assetLocationReferenceRequirements"
+      ],
+      "requiredEdgeCapabilities": [
+        "tag mapping and normalization",
+        "HMI symbol reference mapping"
+      ],
+      "requiredOneProjection": "HMI equipment locator readiness projection",
+      "requiredUmmsCapability": "maintenance context consumption",
+      "implementationPhase": "Airport GA-R9"
+    },
+    {
+      "function": "Existing system onboarding",
+      "currentGaR6Status": "readiness_projection_only",
+      "futureOwner": "EDGE / LINK shared foundation",
+      "requiredLinkObjects": [
+        "sourceSystemHealthRequirements",
+        "deliveryReadinessRequirements"
+      ],
+      "requiredEdgeCapabilities": [
+        "connector matrix",
+        "source-system discovery"
+      ],
+      "requiredOneProjection": "source-system onboarding readiness projection",
+      "requiredUmmsCapability": "none for onboarding readiness",
+      "implementationPhase": "Airport GA-R7"
+    },
+    {
+      "function": "Engineer commissioning diagnostics",
+      "currentGaR6Status": "readiness_projection_only",
+      "futureOwner": "EDGE / LINK shared foundation",
+      "requiredLinkObjects": [
+        "auditEvidenceRequirements",
+        "sourceSystemHealthRequirements"
+      ],
+      "requiredEdgeCapabilities": [
+        "commissioning diagnostics",
+        "mapping verification"
+      ],
+      "requiredOneProjection": "engineer commissioning readiness projection",
+      "requiredUmmsCapability": "handoff context consumption",
+      "implementationPhase": "Airport GA-R8"
+    },
+    {
+      "function": "Remote overseas deployment",
+      "currentGaR6Status": "future_shared_foundation",
+      "futureOwner": "EDGE / LINK shared foundation",
+      "requiredLinkObjects": [
+        "distributed topology contract",
+        "remote support bundle contract"
+      ],
+      "requiredEdgeCapabilities": [
+        "offline deployment package",
+        "site-binding status"
+      ],
+      "requiredOneProjection": "remote deployment readiness projection",
+      "requiredUmmsCapability": "deployment handoff visibility",
+      "implementationPhase": "Airport GA-R10"
+    },
+    {
+      "function": "Distributed independent installation",
+      "currentGaR6Status": "future_shared_foundation",
+      "futureOwner": "EDGE / LINK shared foundation",
+      "requiredLinkObjects": [
+        "distributed topology contract",
+        "sourceSystemHealthRequirements"
+      ],
+      "requiredEdgeCapabilities": [
+        "offline install topology",
+        "hardware-key / site-binding status"
+      ],
+      "requiredOneProjection": "distributed installation readiness projection",
+      "requiredUmmsCapability": "installation handoff visibility",
+      "implementationPhase": "Airport GA-R10"
+    }
+  ],
+  "sharedFoundationInterfaceGaps": [
+    "LINK source-system health contract",
+    "LINK delivery readiness contract",
+    "LINK audit/evidence chain Airport profile",
+    "LINK work-order trigger contract",
+    "LINK asset/location reference contract",
+    "LINK distributed topology contract",
+    "LINK remote support bundle contract",
+    "EDGE Airport ELV connector matrix",
+    "EDGE tag mapping and normalization",
+    "EDGE engineer commissioning diagnostics",
+    "EDGE offline / remote deployment package",
+    "EDGE hardware-key / site-binding status"
+  ],
+  "safetyPosture": {
+    "readOnly": true,
+    "runtimeActivation": false,
+    "productionActivation": false,
+    "dbWrite": false,
+    "approvalExecution": false,
+    "deploymentExecution": false,
+    "remoteCommandExecution": false,
+    "edgeRuntimeCall": false,
+    "linkRuntimeCall": false,
+    "oneAdapterIntroduced": false,
+    "customerIdentifierLeakage": false,
+    "localAbsolutePathLeakage": false
+  }
+}

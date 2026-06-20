@@ -1,0 +1,41 @@
+{
+  "authority": "ONE-AIRPORT-GA-R6",
+  "contractVersion": "airport-link-integration-readiness-registry.v1",
+  "projectionArtifact": "AN_VANTARIS_ONE/projections/airport-link-integration-readiness.v1.json",
+  "report": "ONE_AIRPORT_GA_R6_LINK_INTEGRATION_READINESS_PROJECTION_REPORT.md",
+  "validationMarker": "ONE_AIRPORT_GA_R6_LINK_INTEGRATION_READINESS_PROJECTION_PASS",
+  "baselineTag": "airport-ga-readonly-stakeholder-review-local-freeze-20260621",
+  "previousTag": "airport-international-ga-ready-readonly-rc-20260620",
+  "currentHead": "abf814a52be1cc5e128de706102d6aac268317c4",
+  "futureSharedFoundationRequirements": [
+    "LINK source-system health contract",
+    "LINK delivery readiness contract",
+    "LINK audit/evidence chain Airport profile",
+    "LINK work-order trigger contract",
+    "LINK asset/location reference contract",
+    "LINK distributed topology contract",
+    "LINK remote support bundle contract",
+    "EDGE Airport ELV connector matrix",
+    "EDGE tag mapping and normalization",
+    "EDGE engineer commissioning diagnostics",
+    "EDGE offline / remote deployment package",
+    "EDGE hardware-key / site-binding status"
+  ],
+  "safetyPosture": {
+    "readOnly": true,
+    "runtimeActivation": false,
+    "productionActivation": false,
+    "dbWrite": false,
+    "approvalExecution": false,
+    "deploymentExecution": false,
+    "remoteCommandExecution": false,
+    "edgeRuntimeCall": false,
+    "linkRuntimeCall": false,
+    "edgeLinkRuntimeCall": false,
+    "oneAdapterIntroduced": false,
+    "customerIdentifierLeakage": false,
+    "localAbsolutePathLeakage": false
+  },
+  "pushPerformed": false,
+  "runtimeIntegrationImplemented": false
+}
