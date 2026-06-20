@@ -1,0 +1,32 @@
+{
+  "apiEnabled": false,
+  "airportSpecific": false,
+  "approvalWriteCount": 0,
+  "auditWriteCount": 0,
+  "authority": "ONE-AIRPORT-A8-01",
+  "canonicalWriteCount": 0,
+  "containsCustomerAssetIdentifiers": false,
+  "contractVersion": "read-only-frontend-skeleton.v1",
+  "crossIndustry": true,
+  "databaseWriteCount": 0,
+  "decisionWriteCount": 0,
+  "description": "Read-only frontend skeleton foundation for Airport Operations Console package.",
+  "frontendEnabled": false,
+  "frontendSkeletonPhaseAllowed": true,
+  "implementationStatus": "READ_ONLY_FRONTEND_SKELETON_FOUNDATION_COMPLETE",
+  "productionActivationAllowed": false,
+  "productionFrontendAllowed": false,
+  "pushAllowed": false,
+  "readinessOutcome": "READ_ONLY_FRONTEND_SKELETON_READY_FOR_FUTURE_UI_IMPLEMENTATION",
+  "runtimeActivationAllowed": false,
+  "sourceArtifacts": [
+    "airport-read-only-api-implementation-release-gate.v1.json",
+    "airport-read-only-api-skeleton.v1.json",
+    "airport-read-only-api-response-contract.v1.json",
+    "airport-read-only-api-mock-route-contract.v1.json",
+    "airport-api-frontend-readiness-contract.v1.json",
+    "airport-api-frontend-implementation-readiness-gate.v1.json",
+    "airport-operations-console-package.v1.json",
+    "airport-operations-console-handoff-gate.v1.json"
+  ]
+}
