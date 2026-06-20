@@ -1,0 +1,1343 @@
+{
+  "authority": "ONE-AIRPORT-A3-06",
+  "contractVersion": "uconsole-alarm-event-operations-projection.v1",
+  "defaultPage": {
+    "continuationToken": null,
+    "deterministicDigest": "2296a145d5caee630dda0ff276c2b465a18149507967351afe0c83e8cda4f10f",
+    "items": [
+      {
+        "alarmEventCandidateId": "36aeed70d63f983f18758d8f924ecb70449816761ff1bf3551ddbaa402da5235",
+        "alarmEventState": "RAISED",
+        "assetResolutionState": "REVIEW_REQUIRED",
+        "blockingReasons": [
+          "ALARM_EVENT_OPERATIONS_READ_ONLY",
+          "ASSET_RESOLUTION_REQUIRED",
+          "BLOCKED_BY_FAULTCASE_REVIEW",
+          "BLOCKED_BY_RESOLUTION",
+          "BLOCKED_BY_SOURCE_SYSTEM_REVIEW",
+          "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+          "FAULTCASE_CREATION_NOT_AUTHORIZED",
+          "FAULTCASE_REVIEW_REQUIRED",
+          "LOCATION_RESOLUTION_REQUIRED",
+          "POINT_RESOLUTION_REQUIRED",
+          "REGISTRY_APPROVAL_REQUIRED",
+          "RUNTIME_PENDING",
+          "SOURCE_SYSTEM_REVIEW_REQUIRED",
+          "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED",
+          "WORKORDER_INTENT_REVIEW_REQUIRED",
+          "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED"
+        ],
+        "decisionRequired": true,
+        "deterministicDigest": "82088560dd7a0a4014785cbbdc76f5cd3fe56d37b16e44a607b4fe4c283841a3",
+        "deviceEvidenceCount": 129,
+        "eventCategory": "SECURITY",
+        "eventKind": "ALARM",
+        "eventSeverity": "HIGH",
+        "faultCaseCandidateId": "ba6285ad701ca2b62c97f8265ebbc2e643401e19d5d11c191e1ce35bb308e5cd",
+        "faultCaseCandidateState": "BLOCKED",
+        "investigationCaseId": "4a58e11f3221c8563dd08a72001c36a0a14872a1d98ff99373e73623d1a73b70",
+        "investigationState": "REVIEW_REQUIRED",
+        "operationalSeverity": "HIGH",
+        "operationalStatus": "BLOCKED",
+        "pendingDecisionCount": 17,
+        "resolutionRowId": "cb662b2fcf97830e9331a988271c978a51e39f19014bbc9e26f7317da89a29a1",
+        "reviewReasons": [
+          "ALARM_EVENT_QUEUE_REVIEW_REQUIRED",
+          "ASSET_RESOLUTION_REQUIRED",
+          "DOWNSTREAM_CREATION_NOT_AUTHORIZED",
+          "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+          "EVIDENCE_INVESTIGATION_REVIEW_REQUIRED",
+          "FAULTCASE_CREATION_NOT_AUTHORIZED",
+          "FAULTCASE_REVIEW_REQUIRED",
+          "INVESTIGATION_REVIEW_REQUIRED",
+          "LOCATION_RESOLUTION_REQUIRED",
+          "POINT_RESOLUTION_REQUIRED",
+          "REGISTRY_APPROVAL_REQUIRED",
+          "RESOLUTION_REVIEW_REQUIRED",
+          "RUNTIME_PENDING_REVIEW_REQUIRED",
+          "SOURCE_SYSTEM_REVIEW_REQUIRED",
+          "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED",
+          "WORKORDER_INTENT_REVIEW_REQUIRED",
+          "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED"
+        ],
+        "rowId": "55e943e7651f606eea75bf76d382a2a59b54ff0202f5ae3ea5e52d7ff75bb9c0",
+        "sourceSystemKey": "ACS",
+        "sourceSystemReviewState": "REGISTRY_APPROVAL_PENDING",
+        "workOrderIntentCandidateId": "20f55c844d844ecb2db5c0cd440f34037274832e280965df51688719102dfdab",
+        "workOrderIntentCandidateState": "BLOCKED_BY_FAULTCASE_REVIEW"
+      },
+      {
+        "alarmEventCandidateId": "e203e162065fc2e9cac4ef15d9238818fa25c2fd063ef458b44abb6c85bb1ebd",
+        "alarmEventState": "UPDATED",
+        "assetResolutionState": "REVIEW_REQUIRED",
+        "blockingReasons": [
+          "ALARM_EVENT_OPERATIONS_READ_ONLY",
+          "ALIAS_APPROVAL_REQUIRED",
+          "ASSET_RESOLUTION_REQUIRED",
+          "BLOCKED_BY_FAULTCASE_REVIEW",
+          "BLOCKED_BY_RESOLUTION",
+          "BLOCKED_BY_SOURCE_SYSTEM_REVIEW",
+          "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+          "FAULTCASE_CREATION_NOT_AUTHORIZED",
+          "FAULTCASE_REVIEW_REQUIRED",
+          "LOCATION_RESOLUTION_REQUIRED",
+          "POINT_RESOLUTION_REQUIRED",
+          "RUNTIME_PENDING",
+          "SOURCE_SYSTEM_REVIEW_REQUIRED",
+          "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED",
+          "WORKORDER_INTENT_REVIEW_REQUIRED",
+          "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED"
+        ],
+        "decisionRequired": true,
+        "deterministicDigest": "3bb12a5aca484c37d6aa77b1349a665eb2244905be0b0884859345587b550691",
+        "deviceEvidenceCount": 52,
+        "eventCategory": "SECURITY",
+        "eventKind": "HEALTH_SIGNAL",
+        "eventSeverity": "LOW",
+        "faultCaseCandidateId": "1e997dd9a269db6929fe98f478cfa9ba0f34c1885e827d1654c50f2f48db0551",
+        "faultCaseCandidateState": "BLOCKED",
+        "investigationCaseId": "e835e23c20fb57f54c65b9d9700c34486f648f8bb7ac9bf0c0ab3f26e155e906",
+        "investigationState": "REVIEW_REQUIRED",
+        "operationalSeverity": "LOW",
+        "operationalStatus": "BLOCKED",
+        "pendingDecisionCount": 17,
+        "resolutionRowId": "ec3cf042275b35b6acbb00847866a171fbdcc3121ce8eb8eb503a9660bd3929e",
+        "reviewReasons": [
+          "ALARM_EVENT_QUEUE_REVIEW_REQUIRED",
+          "ALIAS_APPROVAL_REQUIRED",
+          "ASSET_RESOLUTION_REQUIRED",
+          "DOWNSTREAM_CREATION_NOT_AUTHORIZED",
+          "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+          "EVIDENCE_INVESTIGATION_REVIEW_REQUIRED",
+          "FAULTCASE_CREATION_NOT_AUTHORIZED",
+          "FAULTCASE_REVIEW_REQUIRED",
+          "INVESTIGATION_REVIEW_REQUIRED",
+          "LOCATION_RESOLUTION_REQUIRED",
+          "POINT_RESOLUTION_REQUIRED",
+          "RESOLUTION_REVIEW_REQUIRED",
+          "RUNTIME_PENDING_REVIEW_REQUIRED",
+          "SOURCE_SYSTEM_REVIEW_REQUIRED",
+          "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED",
+          "WORKORDER_INTENT_REVIEW_REQUIRED",
+          "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED"
+        ],
+        "rowId": "0a690a5bc98d7b29e8dfd463e7f667f7f559c71f94f90378d2ddd75485536d21",
+        "sourceSystemKey": "CCTV",
+        "sourceSystemReviewState": "ALIAS_APPROVAL_PENDING",
+        "workOrderIntentCandidateId": "453c196c473ea290c5aeb8019ed33950557c7d0aa6264d42dafe72edd09a3108",
+        "workOrderIntentCandidateState": "BLOCKED_BY_FAULTCASE_REVIEW"
+      },
+      {
+        "alarmEventCandidateId": "85dcdb5bde8e72b3bb4e6f1e2f1a3ceea545e1742729253d7e90633472521299",
+        "alarmEventState": "UPDATED",
+        "assetResolutionState": "REVIEW_REQUIRED",
+        "blockingReasons": [
+          "ALARM_EVENT_OPERATIONS_READ_ONLY",
+          "ALIAS_APPROVAL_REQUIRED",
+          "ASSET_RESOLUTION_REQUIRED",
+          "BLOCKED_BY_FAULTCASE_REVIEW",
+          "BLOCKED_BY_RESOLUTION",
+          "BLOCKED_BY_SOURCE_SYSTEM_REVIEW",
+          "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+          "FAULTCASE_CREATION_NOT_AUTHORIZED",
+          "FAULTCASE_REVIEW_REQUIRED",
+          "LOCATION_RESOLUTION_REQUIRED",
+          "POINT_RESOLUTION_REQUIRED",
+          "RUNTIME_PENDING",
+          "SOURCE_SYSTEM_REVIEW_REQUIRED",
+          "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED",
+          "WORKORDER_INTENT_REVIEW_REQUIRED",
+          "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED"
+        ],
+        "decisionRequired": true,
+        "deterministicDigest": "9af4b1f8c2a551dd87bb05f3cc131e10c709328d128adea5c41c5f2c4549f585",
+        "deviceEvidenceCount": 247,
+        "eventCategory": "EQUIPMENT",
+        "eventKind": "EVENT",
+        "eventSeverity": "LOW",
+        "faultCaseCandidateId": "d1545a91ad3bc7745a999afff431bd11cbac54ea4089c2b15994f69b7a756f8a",
+        "faultCaseCandidateState": "BLOCKED",
+        "investigationCaseId": "16e7edb39014974b9cc1b3884ee29af9e96981061135aa56ae06ded148fd8c62",
+        "investigationState": "REVIEW_REQUIRED",
+        "operationalSeverity": "LOW",
+        "operationalStatus": "BLOCKED",
+        "pendingDecisionCount": 17,
+        "resolutionRowId": "42177ff0969ee5cf4c90be60f10d0ad762fd251b0920cb091ef1d923ecfcfa19",
+        "reviewReasons": [
+          "ALARM_EVENT_QUEUE_REVIEW_REQUIRED",
+          "ALIAS_APPROVAL_REQUIRED",
+          "ASSET_RESOLUTION_REQUIRED",
+          "DOWNSTREAM_CREATION_NOT_AUTHORIZED",
+          "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+          "EVIDENCE_INVESTIGATION_REVIEW_REQUIRED",
+          "FAULTCASE_CREATION_NOT_AUTHORIZED",
+          "FAULTCASE_REVIEW_REQUIRED",
+          "INVESTIGATION_REVIEW_REQUIRED",
+          "LOCATION_RESOLUTION_REQUIRED",
+          "POINT_RESOLUTION_REQUIRED",
+          "RESOLUTION_REVIEW_REQUIRED",
+          "RUNTIME_PENDING_REVIEW_REQUIRED",
+          "SOURCE_SYSTEM_REVIEW_REQUIRED",
+          "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED",
+          "WORKORDER_INTENT_REVIEW_REQUIRED",
+          "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED"
+        ],
+        "rowId": "be3f4f22d3d1029653d6e3a597a48d4d58cc97991966caae44aeef11ad1036d8",
+        "sourceSystemKey": "PA",
+        "sourceSystemReviewState": "ALIAS_APPROVAL_PENDING",
+        "workOrderIntentCandidateId": "a34d00bc5f1ad70dbffa43b6ccc3eff8eef4ac0b7f3312ef4cd4063895dacc17",
+        "workOrderIntentCandidateState": "BLOCKED_BY_FAULTCASE_REVIEW"
+      },
+      {
+        "alarmEventCandidateId": "c841cfad2ede70ea0e273378312b5764acb1b5a46966f9dd0f1888d8c83eac86",
+        "alarmEventState": "UPDATED",
+        "assetResolutionState": "REVIEW_REQUIRED",
+        "blockingReasons": [
+          "ALARM_EVENT_OPERATIONS_READ_ONLY",
+          "ASSET_RESOLUTION_REQUIRED",
+          "BLOCKED_BY_FAULTCASE_REVIEW",
+          "BLOCKED_BY_RESOLUTION",
+          "BLOCKED_BY_SOURCE_SYSTEM_REVIEW",
+          "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+          "FAULTCASE_CREATION_NOT_AUTHORIZED",
+          "FAULTCASE_REVIEW_REQUIRED",
+          "LOCATION_RESOLUTION_REQUIRED",
+          "POINT_RESOLUTION_REQUIRED",
+          "REGISTRY_APPROVAL_REQUIRED",
+          "RUNTIME_PENDING",
+          "SOURCE_SYSTEM_REVIEW_REQUIRED",
+          "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED",
+          "WORKORDER_INTENT_REVIEW_REQUIRED",
+          "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED"
+        ],
+        "decisionRequired": true,
+        "deterministicDigest": "c680a2a1d7e22db474e9f38f61634d0842744dfa77e5315e29bd513deb6138cd",
+        "deviceEvidenceCount": 28,
+        "eventCategory": "COMMUNICATION",
+        "eventKind": "EVENT",
+        "eventSeverity": "MEDIUM",
+        "faultCaseCandidateId": "a2aff06343278f4b4676777868247c6c06781f5e760f76537245c38ac72529be",
+        "faultCaseCandidateState": "BLOCKED",
+        "investigationCaseId": "571d8e1b0a27af0ce32e9a0101f4fcc74550901b7601936e62d7e998671fab2a",
+        "investigationState": "REVIEW_REQUIRED",
+        "operationalSeverity": "MEDIUM",
+        "operationalStatus": "BLOCKED",
+        "pendingDecisionCount": 17,
+        "resolutionRowId": "befd205594eddedd190d8a43a3a8e8a0f76944335c176ab850406471dfd116e1",
+        "reviewReasons": [
+          "ALARM_EVENT_QUEUE_REVIEW_REQUIRED",
+          "ASSET_RESOLUTION_REQUIRED",
+          "DOWNSTREAM_CREATION_NOT_AUTHORIZED",
+          "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+          "EVIDENCE_INVESTIGATION_REVIEW_REQUIRED",
+          "FAULTCASE_CREATION_NOT_AUTHORIZED",
+          "FAULTCASE_REVIEW_REQUIRED",
+          "INVESTIGATION_REVIEW_REQUIRED",
+          "LOCATION_RESOLUTION_REQUIRED",
+          "POINT_RESOLUTION_REQUIRED",
+          "REGISTRY_APPROVAL_REQUIRED",
+          "RESOLUTION_REVIEW_REQUIRED",
+          "RUNTIME_PENDING_REVIEW_REQUIRED",
+          "SOURCE_SYSTEM_REVIEW_REQUIRED",
+          "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED",
+          "WORKORDER_INTENT_REVIEW_REQUIRED",
+          "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED"
+        ],
+        "rowId": "5f7fd7ce030ec169039ab212e3487c0639d0826d4a41f5611191419695e7b827",
+        "sourceSystemKey": "RAS",
+        "sourceSystemReviewState": "REGISTRY_APPROVAL_PENDING",
+        "workOrderIntentCandidateId": "337dffb050ab650def753548ac80f639a2664bab13270b32fe0dc9d914a653d6",
+        "workOrderIntentCandidateState": "BLOCKED_BY_FAULTCASE_REVIEW"
+      },
+      {
+        "alarmEventCandidateId": "78172a5eb0e37b68fcd5b3080773ff60d7554e520c353550c8c4ed15060cd99e",
+        "alarmEventState": "UPDATED",
+        "assetResolutionState": "REVIEW_REQUIRED",
+        "blockingReasons": [
+          "ALARM_EVENT_OPERATIONS_READ_ONLY",
+          "ASSET_RESOLUTION_REQUIRED",
+          "BLOCKED_BY_FAULTCASE_REVIEW",
+          "BLOCKED_BY_RESOLUTION",
+          "BLOCKED_BY_SOURCE_SYSTEM_REVIEW",
+          "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+          "FAULTCASE_CREATION_NOT_AUTHORIZED",
+          "FAULTCASE_REVIEW_REQUIRED",
+          "LOCATION_RESOLUTION_REQUIRED",
+          "NAMESPACE_INTERPRETATION_REQUIRED",
+          "POINT_RESOLUTION_REQUIRED",
+          "RUNTIME_PENDING",
+          "SOURCE_SYSTEM_REVIEW_REQUIRED",
+          "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED",
+          "WORKORDER_INTENT_REVIEW_REQUIRED",
+          "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED"
+        ],
+        "decisionRequired": true,
+        "deterministicDigest": "8e7ceb7af2c573770caa6607aa748acf8ce8b20ea4335ca86965e0239e9b497e",
+        "deviceEvidenceCount": 14,
+        "eventCategory": "COMMUNICATION",
+        "eventKind": "STATUS_CHANGE",
+        "eventSeverity": "MEDIUM",
+        "faultCaseCandidateId": "4ccdb9b7712ed85e59319a9612d85cc97084abd6d51e5e63ff3f98848b7d2c10",
+        "faultCaseCandidateState": "BLOCKED",
+        "investigationCaseId": "a770259a87a43d430df3749226258c6611050c4975035cb344867a6b3191110c",
+        "investigationState": "REVIEW_REQUIRED",
+        "operationalSeverity": "MEDIUM",
+        "operationalStatus": "BLOCKED",
+        "pendingDecisionCount": 17,
+        "resolutionRowId": "255d12f1ad6a8d88b6f12ee6ca4c60238d2eb184ad92eb4940e67cd228c3981e",
+        "reviewReasons": [
+          "ALARM_EVENT_QUEUE_REVIEW_REQUIRED",
+          "ASSET_RESOLUTION_REQUIRED",
+          "DOWNSTREAM_CREATION_NOT_AUTHORIZED",
+          "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+          "EVIDENCE_INVESTIGATION_REVIEW_REQUIRED",
+          "FAULTCASE_CREATION_NOT_AUTHORIZED",
+          "FAULTCASE_REVIEW_REQUIRED",
+          "INVESTIGATION_REVIEW_REQUIRED",
+          "LOCATION_RESOLUTION_REQUIRED",
+          "NAMESPACE_INTERPRETATION_REQUIRED",
+          "POINT_RESOLUTION_REQUIRED",
+          "RESOLUTION_REVIEW_REQUIRED",
+          "RUNTIME_PENDING_REVIEW_REQUIRED",
+          "SOURCE_SYSTEM_REVIEW_REQUIRED",
+          "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED",
+          "WORKORDER_INTENT_REVIEW_REQUIRED",
+          "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED"
+        ],
+        "rowId": "16030ad89fa07e87e57229e70f282e838586631ba30a2024d96db7b553d3ac77",
+        "sourceSystemKey": "TEL",
+        "sourceSystemReviewState": "NAMESPACE_INTERPRETATION_PENDING",
+        "workOrderIntentCandidateId": "c0b1b04d3e1ad992f0f233100d79aae416c1153ad07d58f5e37ca22b5dd6b4fa",
+        "workOrderIntentCandidateState": "BLOCKED_BY_FAULTCASE_REVIEW"
+      }
+    ],
+    "nextContinuationToken": null,
+    "pageSize": 25
+  },
+  "deterministicDigest": "42b3bd7d639875390e0c6438ff97688fbd745394f752eb590062b7efd898af49",
+  "facets": {
+    "alarmEventState": [
+      {
+        "count": 1,
+        "value": "RAISED"
+      },
+      {
+        "count": 4,
+        "value": "UPDATED"
+      }
+    ],
+    "assetResolutionState": [
+      {
+        "count": 5,
+        "value": "REVIEW_REQUIRED"
+      }
+    ],
+    "blockingReason": [
+      {
+        "count": 5,
+        "value": "ALARM_EVENT_OPERATIONS_READ_ONLY"
+      },
+      {
+        "count": 2,
+        "value": "ALIAS_APPROVAL_REQUIRED"
+      },
+      {
+        "count": 5,
+        "value": "ASSET_RESOLUTION_REQUIRED"
+      },
+      {
+        "count": 5,
+        "value": "BLOCKED_BY_FAULTCASE_REVIEW"
+      },
+      {
+        "count": 5,
+        "value": "BLOCKED_BY_RESOLUTION"
+      },
+      {
+        "count": 5,
+        "value": "BLOCKED_BY_SOURCE_SYSTEM_REVIEW"
+      },
+      {
+        "count": 5,
+        "value": "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED"
+      },
+      {
+        "count": 5,
+        "value": "FAULTCASE_CREATION_NOT_AUTHORIZED"
+      },
+      {
+        "count": 5,
+        "value": "FAULTCASE_REVIEW_REQUIRED"
+      },
+      {
+        "count": 5,
+        "value": "LOCATION_RESOLUTION_REQUIRED"
+      },
+      {
+        "count": 1,
+        "value": "NAMESPACE_INTERPRETATION_REQUIRED"
+      },
+      {
+        "count": 5,
+        "value": "POINT_RESOLUTION_REQUIRED"
+      },
+      {
+        "count": 2,
+        "value": "REGISTRY_APPROVAL_REQUIRED"
+      },
+      {
+        "count": 5,
+        "value": "RUNTIME_PENDING"
+      },
+      {
+        "count": 5,
+        "value": "SOURCE_SYSTEM_REVIEW_REQUIRED"
+      },
+      {
+        "count": 5,
+        "value": "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED"
+      },
+      {
+        "count": 5,
+        "value": "WORKORDER_INTENT_REVIEW_REQUIRED"
+      },
+      {
+        "count": 5,
+        "value": "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED"
+      }
+    ],
+    "decisionRequired": [
+      {
+        "count": 5,
+        "value": "True"
+      }
+    ],
+    "eventCategory": [
+      {
+        "count": 2,
+        "value": "COMMUNICATION"
+      },
+      {
+        "count": 1,
+        "value": "EQUIPMENT"
+      },
+      {
+        "count": 2,
+        "value": "SECURITY"
+      }
+    ],
+    "eventKind": [
+      {
+        "count": 1,
+        "value": "ALARM"
+      },
+      {
+        "count": 2,
+        "value": "EVENT"
+      },
+      {
+        "count": 1,
+        "value": "HEALTH_SIGNAL"
+      },
+      {
+        "count": 1,
+        "value": "STATUS_CHANGE"
+      }
+    ],
+    "eventSeverity": [
+      {
+        "count": 1,
+        "value": "HIGH"
+      },
+      {
+        "count": 2,
+        "value": "LOW"
+      },
+      {
+        "count": 2,
+        "value": "MEDIUM"
+      }
+    ],
+    "faultCaseCandidateState": [
+      {
+        "count": 5,
+        "value": "BLOCKED"
+      }
+    ],
+    "investigationState": [
+      {
+        "count": 5,
+        "value": "REVIEW_REQUIRED"
+      }
+    ],
+    "operationalSeverity": [
+      {
+        "count": 1,
+        "value": "HIGH"
+      },
+      {
+        "count": 2,
+        "value": "LOW"
+      },
+      {
+        "count": 2,
+        "value": "MEDIUM"
+      }
+    ],
+    "operationalStatus": [
+      {
+        "count": 5,
+        "value": "BLOCKED"
+      }
+    ],
+    "reviewReason": [
+      {
+        "count": 5,
+        "value": "ALARM_EVENT_QUEUE_REVIEW_REQUIRED"
+      },
+      {
+        "count": 2,
+        "value": "ALIAS_APPROVAL_REQUIRED"
+      },
+      {
+        "count": 5,
+        "value": "ASSET_RESOLUTION_REQUIRED"
+      },
+      {
+        "count": 5,
+        "value": "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+      },
+      {
+        "count": 5,
+        "value": "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED"
+      },
+      {
+        "count": 5,
+        "value": "EVIDENCE_INVESTIGATION_REVIEW_REQUIRED"
+      },
+      {
+        "count": 5,
+        "value": "FAULTCASE_CREATION_NOT_AUTHORIZED"
+      },
+      {
+        "count": 5,
+        "value": "FAULTCASE_REVIEW_REQUIRED"
+      },
+      {
+        "count": 5,
+        "value": "INVESTIGATION_REVIEW_REQUIRED"
+      },
+      {
+        "count": 5,
+        "value": "LOCATION_RESOLUTION_REQUIRED"
+      },
+      {
+        "count": 1,
+        "value": "NAMESPACE_INTERPRETATION_REQUIRED"
+      },
+      {
+        "count": 5,
+        "value": "POINT_RESOLUTION_REQUIRED"
+      },
+      {
+        "count": 2,
+        "value": "REGISTRY_APPROVAL_REQUIRED"
+      },
+      {
+        "count": 5,
+        "value": "RESOLUTION_REVIEW_REQUIRED"
+      },
+      {
+        "count": 5,
+        "value": "RUNTIME_PENDING_REVIEW_REQUIRED"
+      },
+      {
+        "count": 5,
+        "value": "SOURCE_SYSTEM_REVIEW_REQUIRED"
+      },
+      {
+        "count": 5,
+        "value": "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED"
+      },
+      {
+        "count": 5,
+        "value": "WORKORDER_INTENT_REVIEW_REQUIRED"
+      },
+      {
+        "count": 5,
+        "value": "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED"
+      }
+    ],
+    "sourceSystemKey": [
+      {
+        "count": 1,
+        "value": "ACS"
+      },
+      {
+        "count": 1,
+        "value": "CCTV"
+      },
+      {
+        "count": 1,
+        "value": "PA"
+      },
+      {
+        "count": 1,
+        "value": "RAS"
+      },
+      {
+        "count": 1,
+        "value": "TEL"
+      }
+    ],
+    "sourceSystemReviewState": [
+      {
+        "count": 2,
+        "value": "ALIAS_APPROVAL_PENDING"
+      },
+      {
+        "count": 1,
+        "value": "NAMESPACE_INTERPRETATION_PENDING"
+      },
+      {
+        "count": 2,
+        "value": "REGISTRY_APPROVAL_PENDING"
+      }
+    ],
+    "workOrderIntentCandidateState": [
+      {
+        "count": 5,
+        "value": "BLOCKED_BY_FAULTCASE_REVIEW"
+      }
+    ]
+  },
+  "filters": {
+    "alarmEventState": [
+      "RAISED",
+      "UPDATED"
+    ],
+    "assetResolutionState": [
+      "REVIEW_REQUIRED"
+    ],
+    "blockingReason": [
+      "ALARM_EVENT_OPERATIONS_READ_ONLY",
+      "ALIAS_APPROVAL_REQUIRED",
+      "ASSET_RESOLUTION_REQUIRED",
+      "BLOCKED_BY_FAULTCASE_REVIEW",
+      "BLOCKED_BY_RESOLUTION",
+      "BLOCKED_BY_SOURCE_SYSTEM_REVIEW",
+      "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+      "FAULTCASE_CREATION_NOT_AUTHORIZED",
+      "FAULTCASE_REVIEW_REQUIRED",
+      "LOCATION_RESOLUTION_REQUIRED",
+      "NAMESPACE_INTERPRETATION_REQUIRED",
+      "POINT_RESOLUTION_REQUIRED",
+      "REGISTRY_APPROVAL_REQUIRED",
+      "RUNTIME_PENDING",
+      "SOURCE_SYSTEM_REVIEW_REQUIRED",
+      "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED",
+      "WORKORDER_INTENT_REVIEW_REQUIRED",
+      "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED"
+    ],
+    "decisionRequired": [
+      true
+    ],
+    "eventCategory": [
+      "COMMUNICATION",
+      "EQUIPMENT",
+      "SECURITY"
+    ],
+    "eventKind": [
+      "ALARM",
+      "EVENT",
+      "HEALTH_SIGNAL",
+      "STATUS_CHANGE"
+    ],
+    "eventSeverity": [
+      "HIGH",
+      "LOW",
+      "MEDIUM"
+    ],
+    "faultCaseCandidateState": [
+      "BLOCKED"
+    ],
+    "investigationState": [
+      "REVIEW_REQUIRED"
+    ],
+    "operationalSeverity": [
+      "HIGH",
+      "LOW",
+      "MEDIUM"
+    ],
+    "operationalStatus": [
+      "BLOCKED"
+    ],
+    "reviewReason": [
+      "ALARM_EVENT_QUEUE_REVIEW_REQUIRED",
+      "ALIAS_APPROVAL_REQUIRED",
+      "ASSET_RESOLUTION_REQUIRED",
+      "DOWNSTREAM_CREATION_NOT_AUTHORIZED",
+      "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+      "EVIDENCE_INVESTIGATION_REVIEW_REQUIRED",
+      "FAULTCASE_CREATION_NOT_AUTHORIZED",
+      "FAULTCASE_REVIEW_REQUIRED",
+      "INVESTIGATION_REVIEW_REQUIRED",
+      "LOCATION_RESOLUTION_REQUIRED",
+      "NAMESPACE_INTERPRETATION_REQUIRED",
+      "POINT_RESOLUTION_REQUIRED",
+      "REGISTRY_APPROVAL_REQUIRED",
+      "RESOLUTION_REVIEW_REQUIRED",
+      "RUNTIME_PENDING_REVIEW_REQUIRED",
+      "SOURCE_SYSTEM_REVIEW_REQUIRED",
+      "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED",
+      "WORKORDER_INTENT_REVIEW_REQUIRED",
+      "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED"
+    ],
+    "sourceSystemKey": [
+      "ACS",
+      "CCTV",
+      "PA",
+      "RAS",
+      "TEL"
+    ],
+    "sourceSystemReviewState": [
+      "ALIAS_APPROVAL_PENDING",
+      "NAMESPACE_INTERPRETATION_PENDING",
+      "REGISTRY_APPROVAL_PENDING"
+    ],
+    "workOrderIntentCandidateState": [
+      "BLOCKED_BY_FAULTCASE_REVIEW"
+    ]
+  },
+  "generatedAtPolicy": "DETERMINISTIC_NO_VOLATILE_TIMESTAMP",
+  "implementationStatus": "READ_ONLY_UCONSOLE_ALARM_EVENT_OPERATIONS_PROJECTION_COMPLETE",
+  "investigationCards": [
+    {
+      "affectedDeviceEvidenceCount": 470,
+      "affectedRowCount": 5,
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "cardId": "663bafb8822a55866101987958ba5417f95395f12c1d505b5a69b9ccdbe0ea79",
+      "cardType": "EVIDENCE_INVESTIGATION_QUEUE",
+      "decisionRequired": true,
+      "deterministicDigest": "7769ef63ab8ca08248e5bbd605d16e9da0f0ffd1b955b89ae45318d84a76d9b3",
+      "severity": "HIGH",
+      "status": "REVIEW_REQUIRED",
+      "title": "Evidence investigation queue",
+      "unit": "ROWS",
+      "value": 5
+    }
+  ],
+  "operationsCards": [
+    {
+      "affectedDeviceEvidenceCount": 470,
+      "affectedRowCount": 5,
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "cardId": "ecb68fa537da4512e5d7d2f3a0bd739f2c07db726740d41de83332e4de9e0e77",
+      "cardType": "ALARM_EVENT_QUEUE",
+      "decisionRequired": true,
+      "deterministicDigest": "f3900cfb50180edfefdec3dd9513f4f9996049a7a9899c09272d2260dd00af59",
+      "severity": "HIGH",
+      "status": "REVIEW_REQUIRED",
+      "title": "Alarm/Event queue",
+      "unit": "ROWS",
+      "value": 5
+    },
+    {
+      "affectedDeviceEvidenceCount": 470,
+      "affectedRowCount": 5,
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "cardId": "73890aae0d4d8f64c1075f6d8209bec1f77b8b98755ea462b1fe632a3ac8dd8e",
+      "cardType": "FAULTCASE_CANDIDATE_QUEUE",
+      "decisionRequired": true,
+      "deterministicDigest": "b636804881618b04da132fcf5d70318c2860398f8e58a26dc93a1124be09a398",
+      "severity": "HIGH",
+      "status": "REVIEW_REQUIRED",
+      "title": "FaultCase candidate queue",
+      "unit": "ROWS",
+      "value": 5
+    },
+    {
+      "affectedDeviceEvidenceCount": 470,
+      "affectedRowCount": 5,
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "cardId": "18196fa09ad82d9c3d3de0c670559900e03e0c7142b8b60d0c231a130fe362bb",
+      "cardType": "WORKORDER_INTENT_QUEUE",
+      "decisionRequired": true,
+      "deterministicDigest": "c3011e2115acc48f20d54c9c53e51afdc0fd9def89f508c5b95d30b79f392cbe",
+      "severity": "HIGH",
+      "status": "REVIEW_REQUIRED",
+      "title": "WorkOrderIntent queue",
+      "unit": "ROWS",
+      "value": 5
+    },
+    {
+      "affectedDeviceEvidenceCount": 470,
+      "affectedRowCount": 5,
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "cardId": "663bafb8822a55866101987958ba5417f95395f12c1d505b5a69b9ccdbe0ea79",
+      "cardType": "EVIDENCE_INVESTIGATION_QUEUE",
+      "decisionRequired": true,
+      "deterministicDigest": "7769ef63ab8ca08248e5bbd605d16e9da0f0ffd1b955b89ae45318d84a76d9b3",
+      "severity": "HIGH",
+      "status": "REVIEW_REQUIRED",
+      "title": "Evidence investigation queue",
+      "unit": "ROWS",
+      "value": 5
+    },
+    {
+      "affectedDeviceEvidenceCount": 470,
+      "affectedRowCount": 5,
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "cardId": "2adbd7ddd16d5bb21a61f0e5bd7ad1754e19b55c5c088e0c271aea6ef3f8dea1",
+      "cardType": "REVIEW_REQUIRED_SUMMARY",
+      "decisionRequired": true,
+      "deterministicDigest": "ff7bf923046e7c1dac20a6e2ed5c0b2645d4986dd0798626f509e37e3346ae08",
+      "severity": "HIGH",
+      "status": "REVIEW_REQUIRED",
+      "title": "Review-required summary",
+      "unit": "ROWS",
+      "value": 5
+    },
+    {
+      "affectedDeviceEvidenceCount": 470,
+      "affectedRowCount": 5,
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "cardId": "19c72777aa4e934978f9622aba4df6f6b7d2a4aec11eef7556ab2850c6a5a575",
+      "cardType": "RUNTIME_PENDING_SUMMARY",
+      "decisionRequired": true,
+      "deterministicDigest": "0232d764fc2f8a0d02a98d64a674943ef8746320858a66b41749ee40a87e01fb",
+      "severity": "HIGH",
+      "status": "RUNTIME_PENDING",
+      "title": "Runtime pending summary",
+      "unit": "ROWS",
+      "value": 5
+    },
+    {
+      "affectedDeviceEvidenceCount": 470,
+      "affectedRowCount": 5,
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "cardId": "3d9fd09dea309789e6b7ca24919b45888ee45844a0a642200dc227bb9267586c",
+      "cardType": "SOURCE_SYSTEM_SUMMARY",
+      "decisionRequired": true,
+      "deterministicDigest": "de917cbff92400deaf86b4576b532e0dbdff7505a06f66ec5a28ae7f8b23722e",
+      "severity": "MEDIUM",
+      "status": "REVIEW_REQUIRED",
+      "title": "Source-system summary",
+      "unit": "ROWS",
+      "value": 5
+    }
+  ],
+  "operationsRows": [
+    {
+      "alarmEventCandidateId": "36aeed70d63f983f18758d8f924ecb70449816761ff1bf3551ddbaa402da5235",
+      "alarmEventState": "RAISED",
+      "assetResolutionState": "REVIEW_REQUIRED",
+      "blockingReasons": [
+        "ALARM_EVENT_OPERATIONS_READ_ONLY",
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKED_BY_FAULTCASE_REVIEW",
+        "BLOCKED_BY_RESOLUTION",
+        "BLOCKED_BY_SOURCE_SYSTEM_REVIEW",
+        "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+        "FAULTCASE_CREATION_NOT_AUTHORIZED",
+        "FAULTCASE_REVIEW_REQUIRED",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED",
+        "REGISTRY_APPROVAL_REQUIRED",
+        "RUNTIME_PENDING",
+        "SOURCE_SYSTEM_REVIEW_REQUIRED",
+        "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED",
+        "WORKORDER_INTENT_REVIEW_REQUIRED",
+        "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED"
+      ],
+      "decisionRequired": true,
+      "deterministicDigest": "82088560dd7a0a4014785cbbdc76f5cd3fe56d37b16e44a607b4fe4c283841a3",
+      "deviceEvidenceCount": 129,
+      "eventCategory": "SECURITY",
+      "eventKind": "ALARM",
+      "eventSeverity": "HIGH",
+      "faultCaseCandidateId": "ba6285ad701ca2b62c97f8265ebbc2e643401e19d5d11c191e1ce35bb308e5cd",
+      "faultCaseCandidateState": "BLOCKED",
+      "investigationCaseId": "4a58e11f3221c8563dd08a72001c36a0a14872a1d98ff99373e73623d1a73b70",
+      "investigationState": "REVIEW_REQUIRED",
+      "operationalSeverity": "HIGH",
+      "operationalStatus": "BLOCKED",
+      "pendingDecisionCount": 17,
+      "resolutionRowId": "cb662b2fcf97830e9331a988271c978a51e39f19014bbc9e26f7317da89a29a1",
+      "reviewReasons": [
+        "ALARM_EVENT_QUEUE_REVIEW_REQUIRED",
+        "ASSET_RESOLUTION_REQUIRED",
+        "DOWNSTREAM_CREATION_NOT_AUTHORIZED",
+        "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+        "EVIDENCE_INVESTIGATION_REVIEW_REQUIRED",
+        "FAULTCASE_CREATION_NOT_AUTHORIZED",
+        "FAULTCASE_REVIEW_REQUIRED",
+        "INVESTIGATION_REVIEW_REQUIRED",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED",
+        "REGISTRY_APPROVAL_REQUIRED",
+        "RESOLUTION_REVIEW_REQUIRED",
+        "RUNTIME_PENDING_REVIEW_REQUIRED",
+        "SOURCE_SYSTEM_REVIEW_REQUIRED",
+        "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED",
+        "WORKORDER_INTENT_REVIEW_REQUIRED",
+        "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED"
+      ],
+      "rowId": "55e943e7651f606eea75bf76d382a2a59b54ff0202f5ae3ea5e52d7ff75bb9c0",
+      "sourceSystemKey": "ACS",
+      "sourceSystemReviewState": "REGISTRY_APPROVAL_PENDING",
+      "workOrderIntentCandidateId": "20f55c844d844ecb2db5c0cd440f34037274832e280965df51688719102dfdab",
+      "workOrderIntentCandidateState": "BLOCKED_BY_FAULTCASE_REVIEW"
+    },
+    {
+      "alarmEventCandidateId": "e203e162065fc2e9cac4ef15d9238818fa25c2fd063ef458b44abb6c85bb1ebd",
+      "alarmEventState": "UPDATED",
+      "assetResolutionState": "REVIEW_REQUIRED",
+      "blockingReasons": [
+        "ALARM_EVENT_OPERATIONS_READ_ONLY",
+        "ALIAS_APPROVAL_REQUIRED",
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKED_BY_FAULTCASE_REVIEW",
+        "BLOCKED_BY_RESOLUTION",
+        "BLOCKED_BY_SOURCE_SYSTEM_REVIEW",
+        "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+        "FAULTCASE_CREATION_NOT_AUTHORIZED",
+        "FAULTCASE_REVIEW_REQUIRED",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED",
+        "RUNTIME_PENDING",
+        "SOURCE_SYSTEM_REVIEW_REQUIRED",
+        "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED",
+        "WORKORDER_INTENT_REVIEW_REQUIRED",
+        "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED"
+      ],
+      "decisionRequired": true,
+      "deterministicDigest": "3bb12a5aca484c37d6aa77b1349a665eb2244905be0b0884859345587b550691",
+      "deviceEvidenceCount": 52,
+      "eventCategory": "SECURITY",
+      "eventKind": "HEALTH_SIGNAL",
+      "eventSeverity": "LOW",
+      "faultCaseCandidateId": "1e997dd9a269db6929fe98f478cfa9ba0f34c1885e827d1654c50f2f48db0551",
+      "faultCaseCandidateState": "BLOCKED",
+      "investigationCaseId": "e835e23c20fb57f54c65b9d9700c34486f648f8bb7ac9bf0c0ab3f26e155e906",
+      "investigationState": "REVIEW_REQUIRED",
+      "operationalSeverity": "LOW",
+      "operationalStatus": "BLOCKED",
+      "pendingDecisionCount": 17,
+      "resolutionRowId": "ec3cf042275b35b6acbb00847866a171fbdcc3121ce8eb8eb503a9660bd3929e",
+      "reviewReasons": [
+        "ALARM_EVENT_QUEUE_REVIEW_REQUIRED",
+        "ALIAS_APPROVAL_REQUIRED",
+        "ASSET_RESOLUTION_REQUIRED",
+        "DOWNSTREAM_CREATION_NOT_AUTHORIZED",
+        "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+        "EVIDENCE_INVESTIGATION_REVIEW_REQUIRED",
+        "FAULTCASE_CREATION_NOT_AUTHORIZED",
+        "FAULTCASE_REVIEW_REQUIRED",
+        "INVESTIGATION_REVIEW_REQUIRED",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED",
+        "RESOLUTION_REVIEW_REQUIRED",
+        "RUNTIME_PENDING_REVIEW_REQUIRED",
+        "SOURCE_SYSTEM_REVIEW_REQUIRED",
+        "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED",
+        "WORKORDER_INTENT_REVIEW_REQUIRED",
+        "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED"
+      ],
+      "rowId": "0a690a5bc98d7b29e8dfd463e7f667f7f559c71f94f90378d2ddd75485536d21",
+      "sourceSystemKey": "CCTV",
+      "sourceSystemReviewState": "ALIAS_APPROVAL_PENDING",
+      "workOrderIntentCandidateId": "453c196c473ea290c5aeb8019ed33950557c7d0aa6264d42dafe72edd09a3108",
+      "workOrderIntentCandidateState": "BLOCKED_BY_FAULTCASE_REVIEW"
+    },
+    {
+      "alarmEventCandidateId": "85dcdb5bde8e72b3bb4e6f1e2f1a3ceea545e1742729253d7e90633472521299",
+      "alarmEventState": "UPDATED",
+      "assetResolutionState": "REVIEW_REQUIRED",
+      "blockingReasons": [
+        "ALARM_EVENT_OPERATIONS_READ_ONLY",
+        "ALIAS_APPROVAL_REQUIRED",
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKED_BY_FAULTCASE_REVIEW",
+        "BLOCKED_BY_RESOLUTION",
+        "BLOCKED_BY_SOURCE_SYSTEM_REVIEW",
+        "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+        "FAULTCASE_CREATION_NOT_AUTHORIZED",
+        "FAULTCASE_REVIEW_REQUIRED",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED",
+        "RUNTIME_PENDING",
+        "SOURCE_SYSTEM_REVIEW_REQUIRED",
+        "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED",
+        "WORKORDER_INTENT_REVIEW_REQUIRED",
+        "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED"
+      ],
+      "decisionRequired": true,
+      "deterministicDigest": "9af4b1f8c2a551dd87bb05f3cc131e10c709328d128adea5c41c5f2c4549f585",
+      "deviceEvidenceCount": 247,
+      "eventCategory": "EQUIPMENT",
+      "eventKind": "EVENT",
+      "eventSeverity": "LOW",
+      "faultCaseCandidateId": "d1545a91ad3bc7745a999afff431bd11cbac54ea4089c2b15994f69b7a756f8a",
+      "faultCaseCandidateState": "BLOCKED",
+      "investigationCaseId": "16e7edb39014974b9cc1b3884ee29af9e96981061135aa56ae06ded148fd8c62",
+      "investigationState": "REVIEW_REQUIRED",
+      "operationalSeverity": "LOW",
+      "operationalStatus": "BLOCKED",
+      "pendingDecisionCount": 17,
+      "resolutionRowId": "42177ff0969ee5cf4c90be60f10d0ad762fd251b0920cb091ef1d923ecfcfa19",
+      "reviewReasons": [
+        "ALARM_EVENT_QUEUE_REVIEW_REQUIRED",
+        "ALIAS_APPROVAL_REQUIRED",
+        "ASSET_RESOLUTION_REQUIRED",
+        "DOWNSTREAM_CREATION_NOT_AUTHORIZED",
+        "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+        "EVIDENCE_INVESTIGATION_REVIEW_REQUIRED",
+        "FAULTCASE_CREATION_NOT_AUTHORIZED",
+        "FAULTCASE_REVIEW_REQUIRED",
+        "INVESTIGATION_REVIEW_REQUIRED",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED",
+        "RESOLUTION_REVIEW_REQUIRED",
+        "RUNTIME_PENDING_REVIEW_REQUIRED",
+        "SOURCE_SYSTEM_REVIEW_REQUIRED",
+        "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED",
+        "WORKORDER_INTENT_REVIEW_REQUIRED",
+        "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED"
+      ],
+      "rowId": "be3f4f22d3d1029653d6e3a597a48d4d58cc97991966caae44aeef11ad1036d8",
+      "sourceSystemKey": "PA",
+      "sourceSystemReviewState": "ALIAS_APPROVAL_PENDING",
+      "workOrderIntentCandidateId": "a34d00bc5f1ad70dbffa43b6ccc3eff8eef4ac0b7f3312ef4cd4063895dacc17",
+      "workOrderIntentCandidateState": "BLOCKED_BY_FAULTCASE_REVIEW"
+    },
+    {
+      "alarmEventCandidateId": "c841cfad2ede70ea0e273378312b5764acb1b5a46966f9dd0f1888d8c83eac86",
+      "alarmEventState": "UPDATED",
+      "assetResolutionState": "REVIEW_REQUIRED",
+      "blockingReasons": [
+        "ALARM_EVENT_OPERATIONS_READ_ONLY",
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKED_BY_FAULTCASE_REVIEW",
+        "BLOCKED_BY_RESOLUTION",
+        "BLOCKED_BY_SOURCE_SYSTEM_REVIEW",
+        "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+        "FAULTCASE_CREATION_NOT_AUTHORIZED",
+        "FAULTCASE_REVIEW_REQUIRED",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED",
+        "REGISTRY_APPROVAL_REQUIRED",
+        "RUNTIME_PENDING",
+        "SOURCE_SYSTEM_REVIEW_REQUIRED",
+        "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED",
+        "WORKORDER_INTENT_REVIEW_REQUIRED",
+        "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED"
+      ],
+      "decisionRequired": true,
+      "deterministicDigest": "c680a2a1d7e22db474e9f38f61634d0842744dfa77e5315e29bd513deb6138cd",
+      "deviceEvidenceCount": 28,
+      "eventCategory": "COMMUNICATION",
+      "eventKind": "EVENT",
+      "eventSeverity": "MEDIUM",
+      "faultCaseCandidateId": "a2aff06343278f4b4676777868247c6c06781f5e760f76537245c38ac72529be",
+      "faultCaseCandidateState": "BLOCKED",
+      "investigationCaseId": "571d8e1b0a27af0ce32e9a0101f4fcc74550901b7601936e62d7e998671fab2a",
+      "investigationState": "REVIEW_REQUIRED",
+      "operationalSeverity": "MEDIUM",
+      "operationalStatus": "BLOCKED",
+      "pendingDecisionCount": 17,
+      "resolutionRowId": "befd205594eddedd190d8a43a3a8e8a0f76944335c176ab850406471dfd116e1",
+      "reviewReasons": [
+        "ALARM_EVENT_QUEUE_REVIEW_REQUIRED",
+        "ASSET_RESOLUTION_REQUIRED",
+        "DOWNSTREAM_CREATION_NOT_AUTHORIZED",
+        "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+        "EVIDENCE_INVESTIGATION_REVIEW_REQUIRED",
+        "FAULTCASE_CREATION_NOT_AUTHORIZED",
+        "FAULTCASE_REVIEW_REQUIRED",
+        "INVESTIGATION_REVIEW_REQUIRED",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED",
+        "REGISTRY_APPROVAL_REQUIRED",
+        "RESOLUTION_REVIEW_REQUIRED",
+        "RUNTIME_PENDING_REVIEW_REQUIRED",
+        "SOURCE_SYSTEM_REVIEW_REQUIRED",
+        "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED",
+        "WORKORDER_INTENT_REVIEW_REQUIRED",
+        "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED"
+      ],
+      "rowId": "5f7fd7ce030ec169039ab212e3487c0639d0826d4a41f5611191419695e7b827",
+      "sourceSystemKey": "RAS",
+      "sourceSystemReviewState": "REGISTRY_APPROVAL_PENDING",
+      "workOrderIntentCandidateId": "337dffb050ab650def753548ac80f639a2664bab13270b32fe0dc9d914a653d6",
+      "workOrderIntentCandidateState": "BLOCKED_BY_FAULTCASE_REVIEW"
+    },
+    {
+      "alarmEventCandidateId": "78172a5eb0e37b68fcd5b3080773ff60d7554e520c353550c8c4ed15060cd99e",
+      "alarmEventState": "UPDATED",
+      "assetResolutionState": "REVIEW_REQUIRED",
+      "blockingReasons": [
+        "ALARM_EVENT_OPERATIONS_READ_ONLY",
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKED_BY_FAULTCASE_REVIEW",
+        "BLOCKED_BY_RESOLUTION",
+        "BLOCKED_BY_SOURCE_SYSTEM_REVIEW",
+        "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+        "FAULTCASE_CREATION_NOT_AUTHORIZED",
+        "FAULTCASE_REVIEW_REQUIRED",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "NAMESPACE_INTERPRETATION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED",
+        "RUNTIME_PENDING",
+        "SOURCE_SYSTEM_REVIEW_REQUIRED",
+        "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED",
+        "WORKORDER_INTENT_REVIEW_REQUIRED",
+        "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED"
+      ],
+      "decisionRequired": true,
+      "deterministicDigest": "8e7ceb7af2c573770caa6607aa748acf8ce8b20ea4335ca86965e0239e9b497e",
+      "deviceEvidenceCount": 14,
+      "eventCategory": "COMMUNICATION",
+      "eventKind": "STATUS_CHANGE",
+      "eventSeverity": "MEDIUM",
+      "faultCaseCandidateId": "4ccdb9b7712ed85e59319a9612d85cc97084abd6d51e5e63ff3f98848b7d2c10",
+      "faultCaseCandidateState": "BLOCKED",
+      "investigationCaseId": "a770259a87a43d430df3749226258c6611050c4975035cb344867a6b3191110c",
+      "investigationState": "REVIEW_REQUIRED",
+      "operationalSeverity": "MEDIUM",
+      "operationalStatus": "BLOCKED",
+      "pendingDecisionCount": 17,
+      "resolutionRowId": "255d12f1ad6a8d88b6f12ee6ca4c60238d2eb184ad92eb4940e67cd228c3981e",
+      "reviewReasons": [
+        "ALARM_EVENT_QUEUE_REVIEW_REQUIRED",
+        "ASSET_RESOLUTION_REQUIRED",
+        "DOWNSTREAM_CREATION_NOT_AUTHORIZED",
+        "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+        "EVIDENCE_INVESTIGATION_REVIEW_REQUIRED",
+        "FAULTCASE_CREATION_NOT_AUTHORIZED",
+        "FAULTCASE_REVIEW_REQUIRED",
+        "INVESTIGATION_REVIEW_REQUIRED",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "NAMESPACE_INTERPRETATION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED",
+        "RESOLUTION_REVIEW_REQUIRED",
+        "RUNTIME_PENDING_REVIEW_REQUIRED",
+        "SOURCE_SYSTEM_REVIEW_REQUIRED",
+        "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED",
+        "WORKORDER_INTENT_REVIEW_REQUIRED",
+        "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED"
+      ],
+      "rowId": "16030ad89fa07e87e57229e70f282e838586631ba30a2024d96db7b553d3ac77",
+      "sourceSystemKey": "TEL",
+      "sourceSystemReviewState": "NAMESPACE_INTERPRETATION_PENDING",
+      "workOrderIntentCandidateId": "c0b1b04d3e1ad992f0f233100d79aae416c1153ad07d58f5e37ca22b5dd6b4fa",
+      "workOrderIntentCandidateState": "BLOCKED_BY_FAULTCASE_REVIEW"
+    }
+  ],
+  "profileId": "airport-uconsole-alarm-event-operations-profile-v1",
+  "projectionId": "b40cff983286be7f972bfe065e932861e90555a53dff4367f2bc8c181b6ac219",
+  "queueCards": [
+    {
+      "affectedDeviceEvidenceCount": 470,
+      "affectedRowCount": 5,
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "cardId": "ecb68fa537da4512e5d7d2f3a0bd739f2c07db726740d41de83332e4de9e0e77",
+      "cardType": "ALARM_EVENT_QUEUE",
+      "decisionRequired": true,
+      "deterministicDigest": "f3900cfb50180edfefdec3dd9513f4f9996049a7a9899c09272d2260dd00af59",
+      "severity": "HIGH",
+      "status": "REVIEW_REQUIRED",
+      "title": "Alarm/Event queue",
+      "unit": "ROWS",
+      "value": 5
+    },
+    {
+      "affectedDeviceEvidenceCount": 470,
+      "affectedRowCount": 5,
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "cardId": "73890aae0d4d8f64c1075f6d8209bec1f77b8b98755ea462b1fe632a3ac8dd8e",
+      "cardType": "FAULTCASE_CANDIDATE_QUEUE",
+      "decisionRequired": true,
+      "deterministicDigest": "b636804881618b04da132fcf5d70318c2860398f8e58a26dc93a1124be09a398",
+      "severity": "HIGH",
+      "status": "REVIEW_REQUIRED",
+      "title": "FaultCase candidate queue",
+      "unit": "ROWS",
+      "value": 5
+    },
+    {
+      "affectedDeviceEvidenceCount": 470,
+      "affectedRowCount": 5,
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "cardId": "18196fa09ad82d9c3d3de0c670559900e03e0c7142b8b60d0c231a130fe362bb",
+      "cardType": "WORKORDER_INTENT_QUEUE",
+      "decisionRequired": true,
+      "deterministicDigest": "c3011e2115acc48f20d54c9c53e51afdc0fd9def89f508c5b95d30b79f392cbe",
+      "severity": "HIGH",
+      "status": "REVIEW_REQUIRED",
+      "title": "WorkOrderIntent queue",
+      "unit": "ROWS",
+      "value": 5
+    },
+    {
+      "affectedDeviceEvidenceCount": 470,
+      "affectedRowCount": 5,
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "cardId": "663bafb8822a55866101987958ba5417f95395f12c1d505b5a69b9ccdbe0ea79",
+      "cardType": "EVIDENCE_INVESTIGATION_QUEUE",
+      "decisionRequired": true,
+      "deterministicDigest": "7769ef63ab8ca08248e5bbd605d16e9da0f0ffd1b955b89ae45318d84a76d9b3",
+      "severity": "HIGH",
+      "status": "REVIEW_REQUIRED",
+      "title": "Evidence investigation queue",
+      "unit": "ROWS",
+      "value": 5
+    }
+  ],
+  "readinessOutcome": "UCONSOLE_ALARM_EVENT_OPERATIONS_READ_ONLY_PROJECTION_COMPLETE_PENDING_REVIEWS",
+  "sourceArtifactReferences": [
+    {
+      "artifactType": "ALARM_EVENT_ASSET_RESOLUTION_REVIEW",
+      "deterministicDigest": "627d39a1075441098b7f80ed2e14d72f45e9a87b4621880c687287802943a503",
+      "digest": "9c5c5ee17a0dfc71f5ed6ad1895d76d6957e22a2801dceb056764ee9f18a36d8",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-alarm-event-asset-resolution-review.v1.json"
+    },
+    {
+      "artifactType": "ALARM_EVENT_INTAKE_CANDIDATES",
+      "deterministicDigest": "43f78c9f7f2992cdb19f732fd2be3aa1c0e4b9350ccc99111b95e2bb047eb507",
+      "digest": "06c466609dbfebee938229f14bcf9e6c9d21c653cc5f45fb3831ec0d4bc3edf1",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-alarm-event-intake-candidates.v1.json"
+    },
+    {
+      "artifactType": "EVIDENCE_INVESTIGATION",
+      "deterministicDigest": "69ccd6cd34546d76586f163018ae83db1f6571d39700b3fbf5265fa263353c87",
+      "digest": "6c555ebc74ef50ab79f5c2cddc1e10eb2973075023df25e9946d3963991369f0",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-evidence-investigation.v1.json"
+    },
+    {
+      "artifactType": "UCONSOLE_INTEGRATION_HEALTH",
+      "deterministicDigest": "ccd54f7f03ef8d447e79d7289999922a6e1ae5147bd17ee7d5def2d866a2481e",
+      "digest": "88d62bea9e8ab55eca402f404fdc279976b503a677a6c12408b8bf084b5e40e9",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-uconsole-integration-health.v1.json"
+    },
+    {
+      "artifactType": "UFMS_FAULTCASE_CANDIDATES",
+      "deterministicDigest": "4100680943a8f8bf93cc9782b62d08c40c2d0954f00e783a098e03f7f8c4d08f",
+      "digest": "bad7fd4417844538c00963dfcba7cfd335963e03fb80420f577b3f3532b5f97a",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-faultcase-candidates.v1.json"
+    },
+    {
+      "artifactType": "WORKORDER_INTENT_CANDIDATES",
+      "deterministicDigest": "bf3a184aad58b297545c107b143332834003818d53bf78429a0c5f07d72a8c10",
+      "digest": "948403767ad917604f187941735372c683568b36612ece02333395671dd16343",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-workorder-intent-candidates.v1.json"
+    }
+  ],
+  "summary": {
+    "airportSpecific": false,
+    "alarmEventCandidateCount": 5,
+    "aliasApprovalPendingCount": 2,
+    "apiEnabled": false,
+    "assetResolutionRequiredCount": 5,
+    "blockedRowCount": 5,
+    "canonicalWriteCount": 0,
+    "containsCustomerAssetIdentifiers": false,
+    "crossIndustry": true,
+    "databaseWriteCount": 0,
+    "decisionRequiredCount": 5,
+    "evidenceCenterWriteCount": 0,
+    "evidenceInvestigationReviewRequiredCount": 5,
+    "faultCaseCandidateCount": 5,
+    "faultCaseReviewRequiredCount": 5,
+    "frontendEnabled": false,
+    "investigationCaseCount": 5,
+    "namespaceReviewPendingCount": 1,
+    "oneWorkManagementWriteCount": 0,
+    "operationsCardCount": 7,
+    "operationsRowCount": 5,
+    "registryApprovalPendingCount": 2,
+    "resolutionRowCount": 5,
+    "reviewRequiredRowCount": 5,
+    "runtimeAlarmObservedCount": 0,
+    "runtimePendingCount": 5,
+    "totalDeviceEvidenceCount": 470,
+    "ufmsFaultCaseCreatedCount": 0,
+    "ummsWriteCount": 0,
+    "workOrderCreatedCount": 0,
+    "workOrderIntentCandidateCount": 5,
+    "workOrderIntentCreatedCount": 0,
+    "workOrderIntentReviewRequiredCount": 5
+  }
+}

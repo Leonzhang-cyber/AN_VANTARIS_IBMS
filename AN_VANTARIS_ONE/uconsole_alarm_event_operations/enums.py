@@ -1,0 +1,32 @@
+"""Controlled enums for UConsole Alarm/Event Operations projections."""
+from __future__ import annotations
+
+from enum import Enum
+
+CONTRACT_VERSION = "uconsole-alarm-event-operations-projection.v1"
+
+
+class OperationsStatus(str, Enum):
+    REVIEW_REQUIRED = "REVIEW_REQUIRED"
+    BLOCKED = "BLOCKED"
+    READY_FOR_REVIEW = "READY_FOR_REVIEW"
+    RUNTIME_PENDING = "RUNTIME_PENDING"
+    UNKNOWN = "UNKNOWN"
+
+
+class OperationsSeverity(str, Enum):
+    INFO = "INFO"
+    LOW = "LOW"
+    MEDIUM = "MEDIUM"
+    HIGH = "HIGH"
+    CRITICAL = "CRITICAL"
+
+
+class CardType(str, Enum):
+    ALARM_EVENT_QUEUE = "ALARM_EVENT_QUEUE"
+    FAULTCASE_CANDIDATE_QUEUE = "FAULTCASE_CANDIDATE_QUEUE"
+    WORKORDER_INTENT_QUEUE = "WORKORDER_INTENT_QUEUE"
+    EVIDENCE_INVESTIGATION_QUEUE = "EVIDENCE_INVESTIGATION_QUEUE"
+    REVIEW_REQUIRED_SUMMARY = "REVIEW_REQUIRED_SUMMARY"
+    RUNTIME_PENDING_SUMMARY = "RUNTIME_PENDING_SUMMARY"
+    SOURCE_SYSTEM_SUMMARY = "SOURCE_SYSTEM_SUMMARY"

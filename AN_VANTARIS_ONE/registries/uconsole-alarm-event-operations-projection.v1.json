@@ -1,0 +1,31 @@
+{
+  "apiEnabled": false,
+  "airportSpecific": false,
+  "authority": "ONE-AIRPORT-A3-06",
+  "canonicalWriteCount": 0,
+  "containsCustomerAssetIdentifiers": false,
+  "contractVersion": "uconsole-alarm-event-operations-projection.v1",
+  "crossIndustry": true,
+  "databaseAccessEnabled": false,
+  "databaseWriteCount": 0,
+  "description": "Read-only UConsole Alarm/Event Operations Projection contract for aggregating alarm/event, FaultCase candidate, WorkOrderIntent candidate, evidence investigation and UConsole integration health artifacts.",
+  "evidenceCenterWriteCount": 0,
+  "frontendEnabled": false,
+  "implementationStatus": "READ_ONLY_UCONSOLE_ALARM_EVENT_OPERATIONS_PROJECTION_COMPLETE",
+  "projectionId": "uconsole-alarm-event-operations-projection",
+  "readOnly": true,
+  "readinessOutcome": "UCONSOLE_ALARM_EVENT_OPERATIONS_READ_ONLY_PROJECTION_COMPLETE_PENDING_REVIEWS",
+  "runtimeAlarmObservedCount": 0,
+  "sourceArtifacts": [
+    "airport-alarm-event-intake-candidates.v1.json",
+    "airport-alarm-event-asset-resolution-review.v1.json",
+    "airport-faultcase-candidates.v1.json",
+    "airport-workorder-intent-candidates.v1.json",
+    "airport-evidence-investigation.v1.json",
+    "airport-uconsole-integration-health.v1.json"
+  ],
+  "uiRuntimeBindingEnabled": false,
+  "ummsWriteCount": 0,
+  "workOrderCreatedCount": 0,
+  "workOrderIntentCreatedCount": 0
+}
