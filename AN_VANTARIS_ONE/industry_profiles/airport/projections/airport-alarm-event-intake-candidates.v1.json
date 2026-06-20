@@ -1,0 +1,699 @@
+{
+  "authority": "ONE-AIRPORT-A3-01",
+  "candidates": [
+    {
+      "approvalState": "REVIEW_REQUIRED",
+      "assetResolutionState": "REVIEW_REQUIRED",
+      "candidateId": "36aeed70d63f983f18758d8f924ecb70449816761ff1bf3551ddbaa402da5235",
+      "canonicalEventKey": "13b21d877f8847431692a3748ea6bb38b9ea4ef124ac1f71505c6df492ba3bdb",
+      "decisionRequired": true,
+      "deterministicDigest": "5bc0d58c56b23bdcdcc7219ad95af80b31f9278e1dbe03d995905944b6ff3083",
+      "eventCategory": "SECURITY",
+      "eventKind": "ALARM",
+      "eventSeverity": "HIGH",
+      "eventState": "RAISED",
+      "evidenceReferences": [
+        {
+          "evidenceType": "SOURCE_SYSTEM_REGISTRY_REFERENCE",
+          "provenance": "OFFLINE_FIXTURE_CANDIDATE_ONLY",
+          "referenceDigest": "2b26090a97f80bde8af7ba0658a886bf37d07494c0f0f23fc42ba21ae6530fda",
+          "sourceSystemKey": "ACS"
+        }
+      ],
+      "intakeEnvelopeId": "ec0a51037907d41ad979259e6ab6817a50fcbf602a4eaa8125d5fa5689d33748",
+      "lifecycleState": "CANDIDATE",
+      "locationResolutionState": "REVIEW_REQUIRED",
+      "normalizationState": "REVIEW_REQUIRED",
+      "pointResolutionState": "REVIEW_REQUIRED",
+      "reviewReasons": [
+        "ASSET_RESOLUTION_REQUIRED",
+        "DOWNSTREAM_CREATION_NOT_AUTHORIZED",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED",
+        "REGISTRY_APPROVAL_REQUIRED"
+      ],
+      "sourceSystemKey": "ACS",
+      "ufmsFaultCaseCandidateState": "BLOCKED",
+      "validationState": "ACCEPTED_AS_CANDIDATE",
+      "workOrderIntentCandidateState": "BLOCKED"
+    },
+    {
+      "approvalState": "REVIEW_REQUIRED",
+      "assetResolutionState": "REVIEW_REQUIRED",
+      "candidateId": "e203e162065fc2e9cac4ef15d9238818fa25c2fd063ef458b44abb6c85bb1ebd",
+      "canonicalEventKey": "b5ab92beefd3e43f755ead3b14b3129d92773e02d9e4cf95a30d5b53e396268e",
+      "decisionRequired": true,
+      "deterministicDigest": "5c3d9062cd255b9412eb64365e6f0fc7dbe811ef369d1e873041db66f5e70835",
+      "eventCategory": "SECURITY",
+      "eventKind": "HEALTH_SIGNAL",
+      "eventSeverity": "LOW",
+      "eventState": "UPDATED",
+      "evidenceReferences": [
+        {
+          "evidenceType": "SOURCE_SYSTEM_REGISTRY_REFERENCE",
+          "provenance": "OFFLINE_FIXTURE_CANDIDATE_ONLY",
+          "referenceDigest": "8886051eedce1be862c858ddb03534a4de000ff25f964d6eccc781930b9cec16",
+          "sourceSystemKey": "CCTV"
+        }
+      ],
+      "intakeEnvelopeId": "a49fc11b87da7649a80716559f9e72b8f0d4a9d1df9876ce0e313706d4e3efa8",
+      "lifecycleState": "CANDIDATE",
+      "locationResolutionState": "REVIEW_REQUIRED",
+      "normalizationState": "REVIEW_REQUIRED",
+      "pointResolutionState": "REVIEW_REQUIRED",
+      "reviewReasons": [
+        "ALIAS_APPROVAL_REQUIRED",
+        "ASSET_RESOLUTION_REQUIRED",
+        "DOWNSTREAM_CREATION_NOT_AUTHORIZED",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED"
+      ],
+      "sourceSystemKey": "CCTV",
+      "ufmsFaultCaseCandidateState": "BLOCKED",
+      "validationState": "ACCEPTED_AS_CANDIDATE",
+      "workOrderIntentCandidateState": "BLOCKED"
+    },
+    {
+      "approvalState": "REVIEW_REQUIRED",
+      "assetResolutionState": "REVIEW_REQUIRED",
+      "candidateId": "85dcdb5bde8e72b3bb4e6f1e2f1a3ceea545e1742729253d7e90633472521299",
+      "canonicalEventKey": "392ff9325ddbf8576ba63bf0499bbae5f106bd307bf4e77c53ee50bfd47a1872",
+      "decisionRequired": true,
+      "deterministicDigest": "530015d63e5bc21dd866ce2705f03a9a669d3d6a77666e074c25402c5c3f41a0",
+      "eventCategory": "EQUIPMENT",
+      "eventKind": "EVENT",
+      "eventSeverity": "LOW",
+      "eventState": "UPDATED",
+      "evidenceReferences": [
+        {
+          "evidenceType": "SOURCE_SYSTEM_REGISTRY_REFERENCE",
+          "provenance": "OFFLINE_FIXTURE_CANDIDATE_ONLY",
+          "referenceDigest": "afdad1549fd06642825c07d2433783222914ecf27b2de141b991a29e57e10c4e",
+          "sourceSystemKey": "PA"
+        }
+      ],
+      "intakeEnvelopeId": "c2ca5dfb445fce3b43614b8ce8189a942b2f6112104e6d80087f7cce2d8c1a50",
+      "lifecycleState": "CANDIDATE",
+      "locationResolutionState": "REVIEW_REQUIRED",
+      "normalizationState": "REVIEW_REQUIRED",
+      "pointResolutionState": "REVIEW_REQUIRED",
+      "reviewReasons": [
+        "ALIAS_APPROVAL_REQUIRED",
+        "ASSET_RESOLUTION_REQUIRED",
+        "DOWNSTREAM_CREATION_NOT_AUTHORIZED",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED"
+      ],
+      "sourceSystemKey": "PA",
+      "ufmsFaultCaseCandidateState": "BLOCKED",
+      "validationState": "ACCEPTED_AS_CANDIDATE",
+      "workOrderIntentCandidateState": "BLOCKED"
+    },
+    {
+      "approvalState": "REVIEW_REQUIRED",
+      "assetResolutionState": "REVIEW_REQUIRED",
+      "candidateId": "c841cfad2ede70ea0e273378312b5764acb1b5a46966f9dd0f1888d8c83eac86",
+      "canonicalEventKey": "60d67f8df2d8c189b3df12ea396a858ae606da840af7d0feced44375eb367f98",
+      "decisionRequired": true,
+      "deterministicDigest": "ab934b7cbba59b9563900c773b138385f7be0be597525b0c9ce7afce0f46518a",
+      "eventCategory": "COMMUNICATION",
+      "eventKind": "EVENT",
+      "eventSeverity": "MEDIUM",
+      "eventState": "UPDATED",
+      "evidenceReferences": [
+        {
+          "evidenceType": "SOURCE_SYSTEM_REGISTRY_REFERENCE",
+          "provenance": "OFFLINE_FIXTURE_CANDIDATE_ONLY",
+          "referenceDigest": "cdd2b1cc9930b527a42fc8c04e5a74e28d4eb0f3d29c2ebb1b1e30c0bf92bec0",
+          "sourceSystemKey": "RAS"
+        }
+      ],
+      "intakeEnvelopeId": "58b8a300159253a57793b4ca55a127459665b519f78b5535601abaf8601d3632",
+      "lifecycleState": "CANDIDATE",
+      "locationResolutionState": "REVIEW_REQUIRED",
+      "normalizationState": "REVIEW_REQUIRED",
+      "pointResolutionState": "REVIEW_REQUIRED",
+      "reviewReasons": [
+        "ASSET_RESOLUTION_REQUIRED",
+        "DOWNSTREAM_CREATION_NOT_AUTHORIZED",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED",
+        "REGISTRY_APPROVAL_REQUIRED"
+      ],
+      "sourceSystemKey": "RAS",
+      "ufmsFaultCaseCandidateState": "BLOCKED",
+      "validationState": "ACCEPTED_AS_CANDIDATE",
+      "workOrderIntentCandidateState": "BLOCKED"
+    },
+    {
+      "approvalState": "REVIEW_REQUIRED",
+      "assetResolutionState": "REVIEW_REQUIRED",
+      "candidateId": "78172a5eb0e37b68fcd5b3080773ff60d7554e520c353550c8c4ed15060cd99e",
+      "canonicalEventKey": "4214380268cfaba90da4653b2f80bcb22a7e4638b59c784da4031451927abfcf",
+      "decisionRequired": true,
+      "deterministicDigest": "fd5fed39a9eb7247bf0706129cd71356c4111151e4ceea1786c4b67cbde473ae",
+      "eventCategory": "COMMUNICATION",
+      "eventKind": "STATUS_CHANGE",
+      "eventSeverity": "MEDIUM",
+      "eventState": "UPDATED",
+      "evidenceReferences": [
+        {
+          "evidenceType": "SOURCE_SYSTEM_REGISTRY_REFERENCE",
+          "provenance": "OFFLINE_FIXTURE_CANDIDATE_ONLY",
+          "referenceDigest": "db1df3fe509eae4f465e526c51ec045b2b70511b97f207918cc6ee07b7c7a44a",
+          "sourceSystemKey": "TEL"
+        }
+      ],
+      "intakeEnvelopeId": "39983c3175ed4a54999104827b3ebc9c400be9017ccae479a0992cd8f38d164b",
+      "lifecycleState": "CANDIDATE",
+      "locationResolutionState": "REVIEW_REQUIRED",
+      "normalizationState": "REVIEW_REQUIRED",
+      "pointResolutionState": "REVIEW_REQUIRED",
+      "reviewReasons": [
+        "ASSET_RESOLUTION_REQUIRED",
+        "DOWNSTREAM_CREATION_NOT_AUTHORIZED",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "NAMESPACE_INTERPRETATION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED"
+      ],
+      "sourceSystemKey": "TEL",
+      "ufmsFaultCaseCandidateState": "BLOCKED",
+      "validationState": "ACCEPTED_AS_CANDIDATE",
+      "workOrderIntentCandidateState": "BLOCKED"
+    }
+  ],
+  "contractVersion": "canonical-alarm-event-intake.v1",
+  "defaultPage": {
+    "continuationToken": null,
+    "deterministicDigest": "94a6d0a786da0e2a8f057e31602ec5e43ce1e5003ec608a38e4cda40f7ff3083",
+    "items": [
+      {
+        "approvalState": "REVIEW_REQUIRED",
+        "assetResolutionState": "REVIEW_REQUIRED",
+        "candidateId": "36aeed70d63f983f18758d8f924ecb70449816761ff1bf3551ddbaa402da5235",
+        "canonicalEventKey": "13b21d877f8847431692a3748ea6bb38b9ea4ef124ac1f71505c6df492ba3bdb",
+        "decisionRequired": true,
+        "deterministicDigest": "5bc0d58c56b23bdcdcc7219ad95af80b31f9278e1dbe03d995905944b6ff3083",
+        "eventCategory": "SECURITY",
+        "eventKind": "ALARM",
+        "eventSeverity": "HIGH",
+        "eventState": "RAISED",
+        "evidenceReferences": [
+          {
+            "evidenceType": "SOURCE_SYSTEM_REGISTRY_REFERENCE",
+            "provenance": "OFFLINE_FIXTURE_CANDIDATE_ONLY",
+            "referenceDigest": "2b26090a97f80bde8af7ba0658a886bf37d07494c0f0f23fc42ba21ae6530fda",
+            "sourceSystemKey": "ACS"
+          }
+        ],
+        "intakeEnvelopeId": "ec0a51037907d41ad979259e6ab6817a50fcbf602a4eaa8125d5fa5689d33748",
+        "lifecycleState": "CANDIDATE",
+        "locationResolutionState": "REVIEW_REQUIRED",
+        "normalizationState": "REVIEW_REQUIRED",
+        "pointResolutionState": "REVIEW_REQUIRED",
+        "reviewReasons": [
+          "ASSET_RESOLUTION_REQUIRED",
+          "DOWNSTREAM_CREATION_NOT_AUTHORIZED",
+          "LOCATION_RESOLUTION_REQUIRED",
+          "POINT_RESOLUTION_REQUIRED",
+          "REGISTRY_APPROVAL_REQUIRED"
+        ],
+        "sourceSystemKey": "ACS",
+        "ufmsFaultCaseCandidateState": "BLOCKED",
+        "validationState": "ACCEPTED_AS_CANDIDATE",
+        "workOrderIntentCandidateState": "BLOCKED"
+      },
+      {
+        "approvalState": "REVIEW_REQUIRED",
+        "assetResolutionState": "REVIEW_REQUIRED",
+        "candidateId": "e203e162065fc2e9cac4ef15d9238818fa25c2fd063ef458b44abb6c85bb1ebd",
+        "canonicalEventKey": "b5ab92beefd3e43f755ead3b14b3129d92773e02d9e4cf95a30d5b53e396268e",
+        "decisionRequired": true,
+        "deterministicDigest": "5c3d9062cd255b9412eb64365e6f0fc7dbe811ef369d1e873041db66f5e70835",
+        "eventCategory": "SECURITY",
+        "eventKind": "HEALTH_SIGNAL",
+        "eventSeverity": "LOW",
+        "eventState": "UPDATED",
+        "evidenceReferences": [
+          {
+            "evidenceType": "SOURCE_SYSTEM_REGISTRY_REFERENCE",
+            "provenance": "OFFLINE_FIXTURE_CANDIDATE_ONLY",
+            "referenceDigest": "8886051eedce1be862c858ddb03534a4de000ff25f964d6eccc781930b9cec16",
+            "sourceSystemKey": "CCTV"
+          }
+        ],
+        "intakeEnvelopeId": "a49fc11b87da7649a80716559f9e72b8f0d4a9d1df9876ce0e313706d4e3efa8",
+        "lifecycleState": "CANDIDATE",
+        "locationResolutionState": "REVIEW_REQUIRED",
+        "normalizationState": "REVIEW_REQUIRED",
+        "pointResolutionState": "REVIEW_REQUIRED",
+        "reviewReasons": [
+          "ALIAS_APPROVAL_REQUIRED",
+          "ASSET_RESOLUTION_REQUIRED",
+          "DOWNSTREAM_CREATION_NOT_AUTHORIZED",
+          "LOCATION_RESOLUTION_REQUIRED",
+          "POINT_RESOLUTION_REQUIRED"
+        ],
+        "sourceSystemKey": "CCTV",
+        "ufmsFaultCaseCandidateState": "BLOCKED",
+        "validationState": "ACCEPTED_AS_CANDIDATE",
+        "workOrderIntentCandidateState": "BLOCKED"
+      },
+      {
+        "approvalState": "REVIEW_REQUIRED",
+        "assetResolutionState": "REVIEW_REQUIRED",
+        "candidateId": "85dcdb5bde8e72b3bb4e6f1e2f1a3ceea545e1742729253d7e90633472521299",
+        "canonicalEventKey": "392ff9325ddbf8576ba63bf0499bbae5f106bd307bf4e77c53ee50bfd47a1872",
+        "decisionRequired": true,
+        "deterministicDigest": "530015d63e5bc21dd866ce2705f03a9a669d3d6a77666e074c25402c5c3f41a0",
+        "eventCategory": "EQUIPMENT",
+        "eventKind": "EVENT",
+        "eventSeverity": "LOW",
+        "eventState": "UPDATED",
+        "evidenceReferences": [
+          {
+            "evidenceType": "SOURCE_SYSTEM_REGISTRY_REFERENCE",
+            "provenance": "OFFLINE_FIXTURE_CANDIDATE_ONLY",
+            "referenceDigest": "afdad1549fd06642825c07d2433783222914ecf27b2de141b991a29e57e10c4e",
+            "sourceSystemKey": "PA"
+          }
+        ],
+        "intakeEnvelopeId": "c2ca5dfb445fce3b43614b8ce8189a942b2f6112104e6d80087f7cce2d8c1a50",
+        "lifecycleState": "CANDIDATE",
+        "locationResolutionState": "REVIEW_REQUIRED",
+        "normalizationState": "REVIEW_REQUIRED",
+        "pointResolutionState": "REVIEW_REQUIRED",
+        "reviewReasons": [
+          "ALIAS_APPROVAL_REQUIRED",
+          "ASSET_RESOLUTION_REQUIRED",
+          "DOWNSTREAM_CREATION_NOT_AUTHORIZED",
+          "LOCATION_RESOLUTION_REQUIRED",
+          "POINT_RESOLUTION_REQUIRED"
+        ],
+        "sourceSystemKey": "PA",
+        "ufmsFaultCaseCandidateState": "BLOCKED",
+        "validationState": "ACCEPTED_AS_CANDIDATE",
+        "workOrderIntentCandidateState": "BLOCKED"
+      },
+      {
+        "approvalState": "REVIEW_REQUIRED",
+        "assetResolutionState": "REVIEW_REQUIRED",
+        "candidateId": "c841cfad2ede70ea0e273378312b5764acb1b5a46966f9dd0f1888d8c83eac86",
+        "canonicalEventKey": "60d67f8df2d8c189b3df12ea396a858ae606da840af7d0feced44375eb367f98",
+        "decisionRequired": true,
+        "deterministicDigest": "ab934b7cbba59b9563900c773b138385f7be0be597525b0c9ce7afce0f46518a",
+        "eventCategory": "COMMUNICATION",
+        "eventKind": "EVENT",
+        "eventSeverity": "MEDIUM",
+        "eventState": "UPDATED",
+        "evidenceReferences": [
+          {
+            "evidenceType": "SOURCE_SYSTEM_REGISTRY_REFERENCE",
+            "provenance": "OFFLINE_FIXTURE_CANDIDATE_ONLY",
+            "referenceDigest": "cdd2b1cc9930b527a42fc8c04e5a74e28d4eb0f3d29c2ebb1b1e30c0bf92bec0",
+            "sourceSystemKey": "RAS"
+          }
+        ],
+        "intakeEnvelopeId": "58b8a300159253a57793b4ca55a127459665b519f78b5535601abaf8601d3632",
+        "lifecycleState": "CANDIDATE",
+        "locationResolutionState": "REVIEW_REQUIRED",
+        "normalizationState": "REVIEW_REQUIRED",
+        "pointResolutionState": "REVIEW_REQUIRED",
+        "reviewReasons": [
+          "ASSET_RESOLUTION_REQUIRED",
+          "DOWNSTREAM_CREATION_NOT_AUTHORIZED",
+          "LOCATION_RESOLUTION_REQUIRED",
+          "POINT_RESOLUTION_REQUIRED",
+          "REGISTRY_APPROVAL_REQUIRED"
+        ],
+        "sourceSystemKey": "RAS",
+        "ufmsFaultCaseCandidateState": "BLOCKED",
+        "validationState": "ACCEPTED_AS_CANDIDATE",
+        "workOrderIntentCandidateState": "BLOCKED"
+      },
+      {
+        "approvalState": "REVIEW_REQUIRED",
+        "assetResolutionState": "REVIEW_REQUIRED",
+        "candidateId": "78172a5eb0e37b68fcd5b3080773ff60d7554e520c353550c8c4ed15060cd99e",
+        "canonicalEventKey": "4214380268cfaba90da4653b2f80bcb22a7e4638b59c784da4031451927abfcf",
+        "decisionRequired": true,
+        "deterministicDigest": "fd5fed39a9eb7247bf0706129cd71356c4111151e4ceea1786c4b67cbde473ae",
+        "eventCategory": "COMMUNICATION",
+        "eventKind": "STATUS_CHANGE",
+        "eventSeverity": "MEDIUM",
+        "eventState": "UPDATED",
+        "evidenceReferences": [
+          {
+            "evidenceType": "SOURCE_SYSTEM_REGISTRY_REFERENCE",
+            "provenance": "OFFLINE_FIXTURE_CANDIDATE_ONLY",
+            "referenceDigest": "db1df3fe509eae4f465e526c51ec045b2b70511b97f207918cc6ee07b7c7a44a",
+            "sourceSystemKey": "TEL"
+          }
+        ],
+        "intakeEnvelopeId": "39983c3175ed4a54999104827b3ebc9c400be9017ccae479a0992cd8f38d164b",
+        "lifecycleState": "CANDIDATE",
+        "locationResolutionState": "REVIEW_REQUIRED",
+        "normalizationState": "REVIEW_REQUIRED",
+        "pointResolutionState": "REVIEW_REQUIRED",
+        "reviewReasons": [
+          "ASSET_RESOLUTION_REQUIRED",
+          "DOWNSTREAM_CREATION_NOT_AUTHORIZED",
+          "LOCATION_RESOLUTION_REQUIRED",
+          "NAMESPACE_INTERPRETATION_REQUIRED",
+          "POINT_RESOLUTION_REQUIRED"
+        ],
+        "sourceSystemKey": "TEL",
+        "ufmsFaultCaseCandidateState": "BLOCKED",
+        "validationState": "ACCEPTED_AS_CANDIDATE",
+        "workOrderIntentCandidateState": "BLOCKED"
+      }
+    ],
+    "nextContinuationToken": null,
+    "pageSize": 25
+  },
+  "deterministicDigest": "e75f14b95bbb43d70f501409f084b2f5194e95a4518dc55e36ce6a384a581476",
+  "facets": {
+    "assetResolutionState": [
+      {
+        "count": 5,
+        "value": "REVIEW_REQUIRED"
+      }
+    ],
+    "decisionRequired": [
+      {
+        "count": 5,
+        "value": "True"
+      }
+    ],
+    "eventCategory": [
+      {
+        "count": 2,
+        "value": "COMMUNICATION"
+      },
+      {
+        "count": 1,
+        "value": "EQUIPMENT"
+      },
+      {
+        "count": 2,
+        "value": "SECURITY"
+      }
+    ],
+    "eventKind": [
+      {
+        "count": 1,
+        "value": "ALARM"
+      },
+      {
+        "count": 2,
+        "value": "EVENT"
+      },
+      {
+        "count": 1,
+        "value": "HEALTH_SIGNAL"
+      },
+      {
+        "count": 1,
+        "value": "STATUS_CHANGE"
+      }
+    ],
+    "eventSeverity": [
+      {
+        "count": 1,
+        "value": "HIGH"
+      },
+      {
+        "count": 2,
+        "value": "LOW"
+      },
+      {
+        "count": 2,
+        "value": "MEDIUM"
+      }
+    ],
+    "eventState": [
+      {
+        "count": 1,
+        "value": "RAISED"
+      },
+      {
+        "count": 4,
+        "value": "UPDATED"
+      }
+    ],
+    "locationResolutionState": [
+      {
+        "count": 5,
+        "value": "REVIEW_REQUIRED"
+      }
+    ],
+    "normalizationState": [
+      {
+        "count": 5,
+        "value": "REVIEW_REQUIRED"
+      }
+    ],
+    "pointResolutionState": [
+      {
+        "count": 5,
+        "value": "REVIEW_REQUIRED"
+      }
+    ],
+    "reviewReason": [
+      {
+        "count": 2,
+        "value": "ALIAS_APPROVAL_REQUIRED"
+      },
+      {
+        "count": 5,
+        "value": "ASSET_RESOLUTION_REQUIRED"
+      },
+      {
+        "count": 5,
+        "value": "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+      },
+      {
+        "count": 5,
+        "value": "LOCATION_RESOLUTION_REQUIRED"
+      },
+      {
+        "count": 1,
+        "value": "NAMESPACE_INTERPRETATION_REQUIRED"
+      },
+      {
+        "count": 5,
+        "value": "POINT_RESOLUTION_REQUIRED"
+      },
+      {
+        "count": 2,
+        "value": "REGISTRY_APPROVAL_REQUIRED"
+      }
+    ],
+    "sourceSystemKey": [
+      {
+        "count": 1,
+        "value": "ACS"
+      },
+      {
+        "count": 1,
+        "value": "CCTV"
+      },
+      {
+        "count": 1,
+        "value": "PA"
+      },
+      {
+        "count": 1,
+        "value": "RAS"
+      },
+      {
+        "count": 1,
+        "value": "TEL"
+      }
+    ],
+    "validationState": [
+      {
+        "count": 5,
+        "value": "ACCEPTED_AS_CANDIDATE"
+      }
+    ]
+  },
+  "filters": {
+    "assetResolutionState": [
+      "REVIEW_REQUIRED"
+    ],
+    "decisionRequired": [
+      true
+    ],
+    "eventCategory": [
+      "COMMUNICATION",
+      "EQUIPMENT",
+      "SECURITY"
+    ],
+    "eventKind": [
+      "ALARM",
+      "EVENT",
+      "HEALTH_SIGNAL",
+      "STATUS_CHANGE"
+    ],
+    "eventSeverity": [
+      "HIGH",
+      "LOW",
+      "MEDIUM"
+    ],
+    "eventState": [
+      "RAISED",
+      "UPDATED"
+    ],
+    "locationResolutionState": [
+      "REVIEW_REQUIRED"
+    ],
+    "normalizationState": [
+      "REVIEW_REQUIRED"
+    ],
+    "pointResolutionState": [
+      "REVIEW_REQUIRED"
+    ],
+    "sourceSystemKey": [
+      "ACS",
+      "CCTV",
+      "PA",
+      "RAS",
+      "TEL"
+    ],
+    "validationState": [
+      "ACCEPTED_AS_CANDIDATE"
+    ]
+  },
+  "generatedAtPolicy": "DETERMINISTIC_NO_VOLATILE_TIMESTAMP",
+  "implementationStatus": "CANONICAL_ALARM_EVENT_INTAKE_FOUNDATION_COMPLETE",
+  "profileId": "airport-alarm-event-intake-profile-v1",
+  "projectionId": "9286e006f90b8cdb89fa7607c3126691eec1f64f24bbd040e42573c76b036519",
+  "readinessOutcome": "ALARM_EVENT_INTAKE_CANDIDATES_COMPLETE_WITH_PENDING_REVIEWS",
+  "reviewCards": [
+    {
+      "affectedSourceSystemKeys": [
+        "CCTV",
+        "PA"
+      ],
+      "candidateCount": 2,
+      "decisionRequired": true,
+      "deterministicDigest": "6693d1bb5a771a38c20b970be70635319ae52c7bfb8c0e6b05b60662e011ab75",
+      "reason": "ALIAS_APPROVAL_REQUIRED",
+      "reviewCardId": "17be0095a3ead499a7de91c70a053a0627f635b5fd152b6848b1f684b91030f1",
+      "severity": "MEDIUM",
+      "title": "Alias approval required"
+    },
+    {
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "candidateCount": 5,
+      "decisionRequired": true,
+      "deterministicDigest": "9856559980777081aea822c593d1bd0cac82e0dc6d47724f2028a644f031dac4",
+      "reason": "ASSET_RESOLUTION_REQUIRED",
+      "reviewCardId": "27c1f2171360bf63ed30115b26dcf933f5a7d343af5cb068d5a1b24e6f7a4b39",
+      "severity": "MEDIUM",
+      "title": "Asset resolution required"
+    },
+    {
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "candidateCount": 5,
+      "decisionRequired": true,
+      "deterministicDigest": "ecaa9ec65f0b5818fecb01937097189c8ceacae2a03269fb5893d73047714b95",
+      "reason": "DOWNSTREAM_CREATION_NOT_AUTHORIZED",
+      "reviewCardId": "bac41d02ca6b2c15ed44b1b45a084f6881cab89579c0337cc8e33c0d511f6379",
+      "severity": "HIGH",
+      "title": "Downstream creation blocked"
+    },
+    {
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "candidateCount": 5,
+      "decisionRequired": true,
+      "deterministicDigest": "22f77d061cdcd091b2656f67d8cb0a1b17e2ed692ef01af1ead0409ae91bfa76",
+      "reason": "LOCATION_RESOLUTION_REQUIRED",
+      "reviewCardId": "788919d2ac60684c513af15dbd9257d5bf387031aebb3bc0f0f62d12b26cac3e",
+      "severity": "MEDIUM",
+      "title": "Location resolution required"
+    },
+    {
+      "affectedSourceSystemKeys": [
+        "TEL"
+      ],
+      "candidateCount": 1,
+      "decisionRequired": true,
+      "deterministicDigest": "3d1e676de66a8cf2eb34be3e21bda5cd72da68923151d0ca6acbdf769760d47d",
+      "reason": "NAMESPACE_INTERPRETATION_REQUIRED",
+      "reviewCardId": "8833ca972849fca5e5e968c552e9bb5364047560519bfd9ae4b5f0ac5b759ad1",
+      "severity": "MEDIUM",
+      "title": "Namespace interpretation required"
+    },
+    {
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "candidateCount": 5,
+      "decisionRequired": true,
+      "deterministicDigest": "979cc06f034c058fb5379706cb63e353a06194d1873eeb859fecf22bea6d0684",
+      "reason": "POINT_RESOLUTION_REQUIRED",
+      "reviewCardId": "bf665d396cc4e5160be2732dba1e61f9d15523c17098afe33c72dcdf32dbae68",
+      "severity": "MEDIUM",
+      "title": "Point resolution required"
+    },
+    {
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "RAS"
+      ],
+      "candidateCount": 2,
+      "decisionRequired": true,
+      "deterministicDigest": "69a23f715b43aaf3362ff36abcec3bffccfe5b7867912b27bcb316c761f1a463",
+      "reason": "REGISTRY_APPROVAL_REQUIRED",
+      "reviewCardId": "6a3802603cbed619917e551f1c37fc2e3c0a329407afdf51ee57a5ad53a91c90",
+      "severity": "LOW",
+      "title": "Registry approval required"
+    }
+  ],
+  "summary": {
+    "acceptedAsCandidateCount": 5,
+    "airportSpecific": false,
+    "canonicalAlarmEventCandidateCount": 5,
+    "canonicalWriteCount": 0,
+    "connectorExecutionEnabled": false,
+    "containsCustomerAssetIdentifiers": false,
+    "crossIndustry": true,
+    "databaseAccessEnabled": false,
+    "databaseWriteCount": 0,
+    "evidenceCenterWriteCount": 0,
+    "intakeEnvelopeCount": 5,
+    "liveAlarmPollingEnabled": false,
+    "productionActivationEnabled": false,
+    "rejectedEnvelopeCount": 0,
+    "reviewRequiredCandidateCount": 5,
+    "runtimeAlarmObservedCount": 0,
+    "sourceSystemCandidateCount": 5,
+    "ufmsFaultCaseCreatedCount": 0,
+    "workOrderCreatedCount": 0,
+    "workOrderIntentCreatedCount": 0
+  }
+}

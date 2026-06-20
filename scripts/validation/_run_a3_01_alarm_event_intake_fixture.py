@@ -1,0 +1,25 @@
+#!/usr/bin/env python3
+"""Generate deterministic A3-01 airport alarm/event intake projection fixture."""
+from __future__ import annotations
+
+from pathlib import Path
+
+from industry_profiles.airport.alarm_event_intake_profile import write_airport_alarm_event_intake_projection
+
+ROOT = Path(__file__).resolve().parents[2]
+OUTPUT = (
+    ROOT
+    / "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-alarm-event-intake-candidates.v1.json"
+)
+
+
+def main() -> int:
+    projection = write_airport_alarm_event_intake_projection(OUTPUT)
+    print(projection["implementationStatus"])
+    print(projection["readinessOutcome"])
+    print("ONE_AIRPORT_A3_01_CANONICAL_ALARM_EVENT_INTAKE_FIXTURE_GENERATED")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -1,0 +1,36 @@
+{
+  "apiEnabled": false,
+  "airportSpecific": false,
+  "canonicalWriteCount": 0,
+  "connectorExecutionEnabled": false,
+  "contractVersion": "canonical-alarm-event-intake.v1",
+  "crossIndustry": true,
+  "databaseAccessEnabled": false,
+  "databaseWriteCount": 0,
+  "description": "Generic cross-industry canonical alarm/event intake foundation for deterministic candidate validation and read-only projections.",
+  "disallowedDownstreamStates": [
+    "ACTIVE",
+    "REGISTERED",
+    "APPROVED",
+    "FAULT_CASE_CREATED",
+    "WORK_ORDER_CREATED",
+    "PERSISTED"
+  ],
+  "evidenceCenterWriteCount": 0,
+  "frontendEnabled": false,
+  "generatedAtPolicy": "DETERMINISTIC_NO_VOLATILE_TIMESTAMP",
+  "implementationStatus": "CANONICAL_ALARM_EVENT_INTAKE_FOUNDATION_COMPLETE",
+  "liveAlarmPollingEnabled": false,
+  "productionActivationEnabled": false,
+  "registryId": "canonical-alarm-event-intake.v1",
+  "runtimeAlarmObservedCount": 0,
+  "scope": "CONTRACT_FIRST_PROJECTION_ONLY",
+  "supportedObjects": [
+    "CanonicalAlarmEventIntakeEnvelope",
+    "CanonicalAlarmEventCandidate",
+    "IntakeProjection"
+  ],
+  "ufmsFaultCaseCreatedCount": 0,
+  "workOrderCreatedCount": 0,
+  "workOrderIntentCreatedCount": 0
+}
