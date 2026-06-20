@@ -1,0 +1,3714 @@
+{
+  "authority": "ONE-AIRPORT-A4-01",
+  "contractVersion": "operator-review-decision-layer.v1",
+  "decisionGroups": [
+    {
+      "affectedDeviceEvidenceCount": 3290,
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "blockingDecisionCount": 45,
+      "decisionGroupId": "556364428e14df8afc7d382674badf47b49d705bec33ca25644d5993b59824c5",
+      "decisionItemIds": [
+        "00f59930f5487c5770090311c9fdb0bf1994c04bc8254858057476fb79f937b9",
+        "03844389bf147217f2259b0c92fc9a6f080eb6c3c31facf5e5fcc865dca3b2a3",
+        "0eabe9a6a35b8423d76496c43d1ad4cc580823b7a06cc68b7dc39d83649c651e",
+        "1a70ceb857e36de227e061e6ba75e69732b34fbffeeebe7e448d2a35c6c985e6",
+        "219c5722fedae552a141355a59d84decdd91574ef099156941987a4436786044",
+        "3c7e61e1bea96c33006ceb4afa5dae604e416748d429edc1af3c7596b8c4f890",
+        "3d7d25278d6603f51d7074c9a5e82511e44a9e6ae572fba85e047afc84db6740",
+        "468b82c86e28a34244d8c6bade6eb64947ce74ef10bf1faf7d442d24a88a4a7b",
+        "477bbb2c89e20f91b743808f927db066ea1dbb11a33f834d2ba52a85c52fc850",
+        "4b5fd829706035c891f9a770e72577e34712162f09e7802c50cb64650d18ee72",
+        "54df1e11c75e533678a0c935a548dc610282c25684b6c567404a7298d851e6e6",
+        "60aa1937c042b33992009e8426cac89121e160c26b3c8d3becd3db8bfd3df116",
+        "6105951e8f8cdc2557092b11dfd8ccc3d9ea77f7f67e016f17d725b4122c1985",
+        "611235e783d3860e1bfa3c4379f2a726f02c2184ef8a788e6c2ac6a4a5c52c66",
+        "6a8a8a5f8e4a3b518851527c2ba59896efd863f5fbe11ed03162666ad76a938e",
+        "6b49f645470ed970a1ccd8f4c1971b47bd08058db365ce2f441ae8a2e356fde2",
+        "6ef8751e77444810843b4fa2632633d5292fc5952305c3a3810e7aea929183fc",
+        "770d6dbaf35e13b857af6903985eb796a8e922b7087bac9de82317209570a83f",
+        "79fc3560fd8284602dc149418f8e237cba89afc5534e52dc1256761021dfac5a",
+        "7d79d4662cd1846f87189a667a4611b8e7c2f6eaa83393ed6bcabbf883ed84b5",
+        "827c9c5c33dd9dfa929294f5ec48c4a64d4d3a394e1b0128d2c72c62527b1550",
+        "86bf33f97dff8bcfd4a00ad6281f2bd1947bcb04f7cc0b76a7193a7ca541cdda",
+        "886b9bfd2f020321376d4cc3e6ab774a1aad219039abf74f835661e2e04b91f9",
+        "8d846bf2f2153c26008ba832587389e08d96e5f06d98ad77ec404ddaa77a1ea3",
+        "8ff7a4d3349c11dfa062b509b4fff776ebe1aa8a2d4148dc02c7683b0c98d4d7",
+        "921416f11d969831b8e941439e5d5bafab3ad7bf89eeceb238e346f9141214c9",
+        "948fb786bd37d12da9ec26019d110fba1123a3dbc90f6ddb3c5e5b8d6e77b53f",
+        "94af27fdd1e78c5472ce1267b5f2f2605894f2f9a06021a6211766e6dbea5355",
+        "9644fd5626735ead20d577302879c654a158550ff4cdb9d8d9e6387c233a26fe",
+        "a767c1d68bbd4b11e76424b8118476275b069691406e5167dcb9d9df03c5a3e4",
+        "b74a4d09f7bf0c4d4a4d3d46319daf232a4a25162f214466e3b19558fb4b158c",
+        "b8685bdf4e7ffb23579272884eb700df32f2fdbc5ec1c844e55b3621dffc7d25",
+        "bac5a5c46e001f3e84f6cfa4a82e726d9023a4a76e8be41e2e851a3516740924",
+        "bb11dc25caa5e9a71715d110ba356ec4eea8fef2a3bafe5b92926f4edc4c7818",
+        "c9bdc082c69d8ada95f6ad4871262c73445d3ea36be5102bd2883b723d214db0",
+        "cb750465e3e304c039c71babbed700084cf129cdebca9d5f31d40c715cc004ee",
+        "d2f028af434eb859174fe833d3a2961a79642417c6968a8a29432ecd4ccef27b",
+        "d4a6daa52d2f0a3dec11137865eab052f146ada30b0f4f553a1a78027077f8a0",
+        "d76caf3e8ef5403bab8cd3b62aadb3d260dbe3529d07a855f53e4b4c731b1716",
+        "db57387cf930d7db4ac2afdc605dfa581742751fdc85fd0533cb0f37fe75b5ff",
+        "e5d8bae9ba014e2c1610700c8a68e3a2098d64244b0a092358e916ea786c39af",
+        "f05dc6da056e5db68a03d8133f61e20fefabc6b55df942f98fc3128d88880037",
+        "f35099c85eab09ab5505892f123d17703bf4ef8491983bd5cda82960f6f8cada",
+        "f3c78a73247fdeb7878dc72b0a9884e972f1d70816dc8e7f9e3e1c6a1a703ad2",
+        "f5e019ed5db793f0cf2fe3ba398eeb75541cdbf84c09007976925f90ebccb601",
+        "fa46ad3543b51ae3c68e87ac4a3396afc02db66125bc6cf64d7ca7bc329f55e6"
+      ],
+      "decisionRequiredCount": 46,
+      "deterministicDigest": "dcf60fa14d10e49b9644d061c3c1fbb255f25e6d19f6948c9d864df34ff74d38",
+      "groupType": "ALL_PENDING_QUEUE",
+      "title": "All pending decisions"
+    },
+    {
+      "affectedDeviceEvidenceCount": 470,
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "blockingDecisionCount": 5,
+      "decisionGroupId": "7f7e425c126753197775b06a70571f55702b595fae38edcec9d9a6191f4220c8",
+      "decisionItemIds": [
+        "3c7e61e1bea96c33006ceb4afa5dae604e416748d429edc1af3c7596b8c4f890",
+        "86bf33f97dff8bcfd4a00ad6281f2bd1947bcb04f7cc0b76a7193a7ca541cdda",
+        "cb750465e3e304c039c71babbed700084cf129cdebca9d5f31d40c715cc004ee",
+        "d4a6daa52d2f0a3dec11137865eab052f146ada30b0f4f553a1a78027077f8a0",
+        "f05dc6da056e5db68a03d8133f61e20fefabc6b55df942f98fc3128d88880037"
+      ],
+      "decisionRequiredCount": 5,
+      "deterministicDigest": "16d1aa999b89819857570b7fc113d331d189ef6864cbc461965e8011913a8620",
+      "groupType": "SOURCE_SYSTEM_QUEUE",
+      "title": "Source-system decisions"
+    },
+    {
+      "affectedDeviceEvidenceCount": 1410,
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "blockingDecisionCount": 15,
+      "decisionGroupId": "91e33d31200771c7b9aee14772a855e11b8b8fb358c11ddf15e2d93ee57ada1f",
+      "decisionItemIds": [
+        "0eabe9a6a35b8423d76496c43d1ad4cc580823b7a06cc68b7dc39d83649c651e",
+        "468b82c86e28a34244d8c6bade6eb64947ce74ef10bf1faf7d442d24a88a4a7b",
+        "4b5fd829706035c891f9a770e72577e34712162f09e7802c50cb64650d18ee72",
+        "54df1e11c75e533678a0c935a548dc610282c25684b6c567404a7298d851e6e6",
+        "60aa1937c042b33992009e8426cac89121e160c26b3c8d3becd3db8bfd3df116",
+        "6105951e8f8cdc2557092b11dfd8ccc3d9ea77f7f67e016f17d725b4122c1985",
+        "611235e783d3860e1bfa3c4379f2a726f02c2184ef8a788e6c2ac6a4a5c52c66",
+        "6ef8751e77444810843b4fa2632633d5292fc5952305c3a3810e7aea929183fc",
+        "79fc3560fd8284602dc149418f8e237cba89afc5534e52dc1256761021dfac5a",
+        "7d79d4662cd1846f87189a667a4611b8e7c2f6eaa83393ed6bcabbf883ed84b5",
+        "827c9c5c33dd9dfa929294f5ec48c4a64d4d3a394e1b0128d2c72c62527b1550",
+        "948fb786bd37d12da9ec26019d110fba1123a3dbc90f6ddb3c5e5b8d6e77b53f",
+        "b8685bdf4e7ffb23579272884eb700df32f2fdbc5ec1c844e55b3621dffc7d25",
+        "e5d8bae9ba014e2c1610700c8a68e3a2098d64244b0a092358e916ea786c39af",
+        "f3c78a73247fdeb7878dc72b0a9884e972f1d70816dc8e7f9e3e1c6a1a703ad2"
+      ],
+      "decisionRequiredCount": 15,
+      "deterministicDigest": "1a031dcc8d5493f8364c6acfa14cd4d8321e9e3b023ed506e0e373e6916fe6e6",
+      "groupType": "ASSET_RESOLUTION_QUEUE",
+      "title": "Asset, point and location resolution decisions"
+    },
+    {
+      "affectedDeviceEvidenceCount": 470,
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "blockingDecisionCount": 10,
+      "decisionGroupId": "417f6a6d8e1100fd660dead25083c32dd335cc110bd0746411161ed34a7ec56b",
+      "decisionItemIds": [
+        "03844389bf147217f2259b0c92fc9a6f080eb6c3c31facf5e5fcc865dca3b2a3",
+        "1a70ceb857e36de227e061e6ba75e69732b34fbffeeebe7e448d2a35c6c985e6",
+        "219c5722fedae552a141355a59d84decdd91574ef099156941987a4436786044",
+        "6a8a8a5f8e4a3b518851527c2ba59896efd863f5fbe11ed03162666ad76a938e",
+        "8ff7a4d3349c11dfa062b509b4fff776ebe1aa8a2d4148dc02c7683b0c98d4d7",
+        "921416f11d969831b8e941439e5d5bafab3ad7bf89eeceb238e346f9141214c9",
+        "a767c1d68bbd4b11e76424b8118476275b069691406e5167dcb9d9df03c5a3e4",
+        "c9bdc082c69d8ada95f6ad4871262c73445d3ea36be5102bd2883b723d214db0",
+        "d2f028af434eb859174fe833d3a2961a79642417c6968a8a29432ecd4ccef27b",
+        "db57387cf930d7db4ac2afdc605dfa581742751fdc85fd0533cb0f37fe75b5ff"
+      ],
+      "decisionRequiredCount": 10,
+      "deterministicDigest": "ae75d19d0b60bfef9cbe7255ef77773276f5596663a9a1ee745ff78ed9b3aece",
+      "groupType": "ALARM_EVENT_QUEUE",
+      "title": "Alarm/Event review decisions"
+    },
+    {
+      "affectedDeviceEvidenceCount": 0,
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "blockingDecisionCount": 5,
+      "decisionGroupId": "e04bb9ac0dd6f91a075df59dd4c8dd01ebf3d15738fc340cbda5f24cf353c32c",
+      "decisionItemIds": [
+        "00f59930f5487c5770090311c9fdb0bf1994c04bc8254858057476fb79f937b9",
+        "477bbb2c89e20f91b743808f927db066ea1dbb11a33f834d2ba52a85c52fc850",
+        "770d6dbaf35e13b857af6903985eb796a8e922b7087bac9de82317209570a83f",
+        "886b9bfd2f020321376d4cc3e6ab774a1aad219039abf74f835661e2e04b91f9",
+        "bb11dc25caa5e9a71715d110ba356ec4eea8fef2a3bafe5b92926f4edc4c7818"
+      ],
+      "decisionRequiredCount": 5,
+      "deterministicDigest": "b661bcee8f97c081139ccdb8c9a29b6ee35d3322ae08d10f12cf01db4ca040c0",
+      "groupType": "FAULTCASE_QUEUE",
+      "title": "FaultCase candidate decisions"
+    },
+    {
+      "affectedDeviceEvidenceCount": 470,
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "blockingDecisionCount": 5,
+      "decisionGroupId": "755c4ab007d30aca20415bc16dff5ccfd90a254859a4330e855b6ff7e96b0801",
+      "decisionItemIds": [
+        "3d7d25278d6603f51d7074c9a5e82511e44a9e6ae572fba85e047afc84db6740",
+        "8d846bf2f2153c26008ba832587389e08d96e5f06d98ad77ec404ddaa77a1ea3",
+        "b74a4d09f7bf0c4d4a4d3d46319daf232a4a25162f214466e3b19558fb4b158c",
+        "d76caf3e8ef5403bab8cd3b62aadb3d260dbe3529d07a855f53e4b4c731b1716",
+        "f35099c85eab09ab5505892f123d17703bf4ef8491983bd5cda82960f6f8cada"
+      ],
+      "decisionRequiredCount": 5,
+      "deterministicDigest": "864867bbfb366267f9489daf994b6eb3ba87e5a028f696a519224e2ab068545c",
+      "groupType": "WORKORDER_INTENT_QUEUE",
+      "title": "WorkOrderIntent decisions"
+    },
+    {
+      "affectedDeviceEvidenceCount": 470,
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "blockingDecisionCount": 5,
+      "decisionGroupId": "42d948dfe47508f6d91a696795c8d34064e62211fd17e6a6bd84effdabf768ec",
+      "decisionItemIds": [
+        "6b49f645470ed970a1ccd8f4c1971b47bd08058db365ce2f441ae8a2e356fde2",
+        "94af27fdd1e78c5472ce1267b5f2f2605894f2f9a06021a6211766e6dbea5355",
+        "9644fd5626735ead20d577302879c654a158550ff4cdb9d8d9e6387c233a26fe",
+        "bac5a5c46e001f3e84f6cfa4a82e726d9023a4a76e8be41e2e851a3516740924",
+        "f5e019ed5db793f0cf2fe3ba398eeb75541cdbf84c09007976925f90ebccb601"
+      ],
+      "decisionRequiredCount": 5,
+      "deterministicDigest": "d8e0ba1033e9afb572f30caba661b9a1ddb7301a84fb988e685fbea96a43b57b",
+      "groupType": "EVIDENCE_INVESTIGATION_QUEUE",
+      "title": "Evidence investigation decisions"
+    },
+    {
+      "affectedDeviceEvidenceCount": 0,
+      "affectedSourceSystemKeys": [],
+      "blockingDecisionCount": 0,
+      "decisionGroupId": "883be28efa73b060d75ba2206ef3428d0d96b4ce91e60d433d6f4d78c476551a",
+      "decisionItemIds": [
+        "fa46ad3543b51ae3c68e87ac4a3396afc02db66125bc6cf64d7ca7bc329f55e6"
+      ],
+      "decisionRequiredCount": 1,
+      "deterministicDigest": "d0fd3634da3521a45ab14205d1a31b580d98f3e48ee4d739ab6d31736615f5ae",
+      "groupType": "RELEASE_GATE_QUEUE",
+      "title": "Release gate decisions"
+    }
+  ],
+  "decisionItems": [
+    {
+      "affectedDeviceEvidenceCount": 0,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ALARM_EVENT_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "03844389bf147217f2259b0c92fc9a6f080eb6c3c31facf5e5fcc865dca3b2a3",
+      "decisionRequired": true,
+      "decisionScope": "ALARM_EVENT_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "ALARM_EVENT_REVIEW",
+      "description": "Operator review is required for the ALARM_EVENT_CANDIDATE candidate associated with ACS.",
+      "deterministicDigest": "7479dba79e26e17fb19c82743f0858380a676dd4eb62625f2ed0c73c22552588",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '2b26090a97f80bde8af7ba0658a886bf37d07494c0f0f23fc42ba21ae6530fda', 'sourceSystemKey': 'ACS'}"
+      ],
+      "priority": 30,
+      "queueTypes": [
+        "ALARM_EVENT_QUEUE"
+      ],
+      "reviewReasons": [
+        "ALARM_EVENT_REVIEW_REQUIRED"
+      ],
+      "severity": "HIGH",
+      "sourceArtifactId": "36aeed70d63f983f18758d8f924ecb70449816761ff1bf3551ddbaa402da5235",
+      "sourceArtifactType": "ALARM_EVENT_CANDIDATE",
+      "sourceStage": "A3-01",
+      "sourceSystemKey": "ACS",
+      "title": "ACS alarm/event review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 0,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ALARM_EVENT_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "219c5722fedae552a141355a59d84decdd91574ef099156941987a4436786044",
+      "decisionRequired": true,
+      "decisionScope": "ALARM_EVENT_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "ALARM_EVENT_REVIEW",
+      "description": "Operator review is required for the ALARM_EVENT_CANDIDATE candidate associated with CCTV.",
+      "deterministicDigest": "9def615f39071166bbdd50902de51bd6bc00ec90b9919407a8636ae3df7903d2",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '8886051eedce1be862c858ddb03534a4de000ff25f964d6eccc781930b9cec16', 'sourceSystemKey': 'CCTV'}"
+      ],
+      "priority": 30,
+      "queueTypes": [
+        "ALARM_EVENT_QUEUE"
+      ],
+      "reviewReasons": [
+        "ALARM_EVENT_REVIEW_REQUIRED"
+      ],
+      "severity": "LOW",
+      "sourceArtifactId": "e203e162065fc2e9cac4ef15d9238818fa25c2fd063ef458b44abb6c85bb1ebd",
+      "sourceArtifactType": "ALARM_EVENT_CANDIDATE",
+      "sourceStage": "A3-01",
+      "sourceSystemKey": "CCTV",
+      "title": "CCTV alarm/event review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 0,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ALARM_EVENT_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "d2f028af434eb859174fe833d3a2961a79642417c6968a8a29432ecd4ccef27b",
+      "decisionRequired": true,
+      "decisionScope": "ALARM_EVENT_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "ALARM_EVENT_REVIEW",
+      "description": "Operator review is required for the ALARM_EVENT_CANDIDATE candidate associated with PA.",
+      "deterministicDigest": "5a06b04d162d489e43e487660948680faa50fc064a93f9812bc5176e1042cfaf",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'afdad1549fd06642825c07d2433783222914ecf27b2de141b991a29e57e10c4e', 'sourceSystemKey': 'PA'}"
+      ],
+      "priority": 30,
+      "queueTypes": [
+        "ALARM_EVENT_QUEUE"
+      ],
+      "reviewReasons": [
+        "ALARM_EVENT_REVIEW_REQUIRED"
+      ],
+      "severity": "LOW",
+      "sourceArtifactId": "85dcdb5bde8e72b3bb4e6f1e2f1a3ceea545e1742729253d7e90633472521299",
+      "sourceArtifactType": "ALARM_EVENT_CANDIDATE",
+      "sourceStage": "A3-01",
+      "sourceSystemKey": "PA",
+      "title": "PA alarm/event review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 0,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ALARM_EVENT_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "c9bdc082c69d8ada95f6ad4871262c73445d3ea36be5102bd2883b723d214db0",
+      "decisionRequired": true,
+      "decisionScope": "ALARM_EVENT_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "ALARM_EVENT_REVIEW",
+      "description": "Operator review is required for the ALARM_EVENT_CANDIDATE candidate associated with RAS.",
+      "deterministicDigest": "c1d0b54733223bba73055baec0a9fa5c56f118f6985b9076bc0e6512a435092e",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'cdd2b1cc9930b527a42fc8c04e5a74e28d4eb0f3d29c2ebb1b1e30c0bf92bec0', 'sourceSystemKey': 'RAS'}"
+      ],
+      "priority": 30,
+      "queueTypes": [
+        "ALARM_EVENT_QUEUE"
+      ],
+      "reviewReasons": [
+        "ALARM_EVENT_REVIEW_REQUIRED"
+      ],
+      "severity": "MEDIUM",
+      "sourceArtifactId": "c841cfad2ede70ea0e273378312b5764acb1b5a46966f9dd0f1888d8c83eac86",
+      "sourceArtifactType": "ALARM_EVENT_CANDIDATE",
+      "sourceStage": "A3-01",
+      "sourceSystemKey": "RAS",
+      "title": "RAS alarm/event review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 0,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ALARM_EVENT_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "6a8a8a5f8e4a3b518851527c2ba59896efd863f5fbe11ed03162666ad76a938e",
+      "decisionRequired": true,
+      "decisionScope": "ALARM_EVENT_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "ALARM_EVENT_REVIEW",
+      "description": "Operator review is required for the ALARM_EVENT_CANDIDATE candidate associated with TEL.",
+      "deterministicDigest": "4ea41720417e2523dbbacf9fc3ce6a7e2e777db8802aaaef53a02aacf36b8537",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'db1df3fe509eae4f465e526c51ec045b2b70511b97f207918cc6ee07b7c7a44a', 'sourceSystemKey': 'TEL'}"
+      ],
+      "priority": 30,
+      "queueTypes": [
+        "ALARM_EVENT_QUEUE"
+      ],
+      "reviewReasons": [
+        "ALARM_EVENT_REVIEW_REQUIRED"
+      ],
+      "severity": "MEDIUM",
+      "sourceArtifactId": "78172a5eb0e37b68fcd5b3080773ff60d7554e520c353550c8c4ed15060cd99e",
+      "sourceArtifactType": "ALARM_EVENT_CANDIDATE",
+      "sourceStage": "A3-01",
+      "sourceSystemKey": "TEL",
+      "title": "TEL alarm/event review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 52,
+      "affectedRecordCount": 52,
+      "allowedDecisions": [
+        "APPROVE",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ALIAS_APPROVAL",
+        "SOURCE_SYSTEM_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "86bf33f97dff8bcfd4a00ad6281f2bd1947bcb04f7cc0b76a7193a7ca541cdda",
+      "decisionRequired": true,
+      "decisionScope": "SOURCE_SYSTEM_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "ALIAS_APPROVAL",
+      "description": "Operator review is required before CCTV source-system evidence can be accepted as approved registry context.",
+      "deterministicDigest": "0e9e036dc2e555febe8c8fba4e047ef6f4ada702b8d5e45449627ce48a150f41",
+      "evidenceReferences": [
+        "{'digest': '700c0aa4873f711e6a0732e56e0e9d67df78be56ef396f52daa10b5c0fe766fa', 'evidenceId': 'ceba5fc20cc1f142a8083ae0edf47f31d74cb445de857a7aa905c895ac30b017', 'evidenceType': 'CLASSIFICATION_BINDING_AGGREGATE', 'provenance': 'ONE-AIRPORT-A1-03 classification bindings', 'resultDigest': '49d8bfa2ece4be806883107bf8c00452af66b35f3a16898a53c8dbb18750faaa', 'sourceProfile': 'airport-source-system-profile-v1', 'sourceRecordCount': 52}"
+      ],
+      "priority": 10,
+      "queueTypes": [
+        "SOURCE_SYSTEM_QUEUE"
+      ],
+      "reviewReasons": [
+        "ALIAS_APPROVAL_REQUIRED"
+      ],
+      "severity": "HIGH",
+      "sourceArtifactId": "c7d4a6079daf6065d504de9c95e100ab9a7da2b0eb66a10497ef49381e6292e0",
+      "sourceArtifactType": "SOURCE_SYSTEM_REVIEW_BINDING",
+      "sourceStage": "A2",
+      "sourceSystemKey": "CCTV",
+      "title": "CCTV Alias approval required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 247,
+      "affectedRecordCount": 247,
+      "allowedDecisions": [
+        "APPROVE",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ALIAS_APPROVAL",
+        "SOURCE_SYSTEM_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "d4a6daa52d2f0a3dec11137865eab052f146ada30b0f4f553a1a78027077f8a0",
+      "decisionRequired": true,
+      "decisionScope": "SOURCE_SYSTEM_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "ALIAS_APPROVAL",
+      "description": "Operator review is required before PA source-system evidence can be accepted as approved registry context.",
+      "deterministicDigest": "1d5151f056aba314fff8c9b262186f8c60909146b0cd69b9dad59e3a58ced106",
+      "evidenceReferences": [
+        "{'digest': '6da53d802f057618e91b95564f3abee9dab082748ea008e69a81c62c40f21fd6', 'evidenceId': '6f9a9a469a9ad62b5a0d1065bada2f1f9b52cfc0b8132183f1e97f826c1ed461', 'evidenceType': 'CLASSIFICATION_BINDING_AGGREGATE', 'provenance': 'ONE-AIRPORT-A1-03 classification bindings', 'resultDigest': '1dbd5b57a352e475431caeeef6267b79df96f97568ca6f7fb77c37e2734cdea5', 'sourceProfile': 'airport-source-system-profile-v1', 'sourceRecordCount': 247}"
+      ],
+      "priority": 10,
+      "queueTypes": [
+        "SOURCE_SYSTEM_QUEUE"
+      ],
+      "reviewReasons": [
+        "ALIAS_APPROVAL_REQUIRED"
+      ],
+      "severity": "HIGH",
+      "sourceArtifactId": "b335ca7629bf820370221f75f0994e1844964d2dca4a6f027c55444a0d343e82",
+      "sourceArtifactType": "SOURCE_SYSTEM_REVIEW_BINDING",
+      "sourceStage": "A2",
+      "sourceSystemKey": "PA",
+      "title": "PA Alias approval required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 129,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKS_DOWNSTREAM_CREATION"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "0eabe9a6a35b8423d76496c43d1ad4cc580823b7a06cc68b7dc39d83649c651e",
+      "decisionRequired": true,
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "ASSET_RESOLUTION",
+      "description": "Operator review is required for ACS before downstream alarm/event decisions can progress.",
+      "deterministicDigest": "5e9c0567e1dfaa264d89189fd9c2d0cbf76524d473c55e2e0cd85307d7b17c6b",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '2b26090a97f80bde8af7ba0658a886bf37d07494c0f0f23fc42ba21ae6530fda', 'sourceSystemKey': 'ACS'}"
+      ],
+      "priority": 20,
+      "queueTypes": [
+        "ASSET_RESOLUTION_QUEUE"
+      ],
+      "reviewReasons": [
+        "ASSET_RESOLUTION_REQUIRED"
+      ],
+      "severity": "HIGH",
+      "sourceArtifactId": "cb662b2fcf97830e9331a988271c978a51e39f19014bbc9e26f7317da89a29a1:ASSET_RESOLUTION",
+      "sourceArtifactType": "ALARM_EVENT_ASSET_RESOLUTION_ROW",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "ACS",
+      "title": "ACS Asset resolution required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 52,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKS_DOWNSTREAM_CREATION"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "6105951e8f8cdc2557092b11dfd8ccc3d9ea77f7f67e016f17d725b4122c1985",
+      "decisionRequired": true,
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "ASSET_RESOLUTION",
+      "description": "Operator review is required for CCTV before downstream alarm/event decisions can progress.",
+      "deterministicDigest": "942b127144c08d7a6c4c6c753b4adb892ee33e09d59aa8faf69ce0f2d7756ce6",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '8886051eedce1be862c858ddb03534a4de000ff25f964d6eccc781930b9cec16', 'sourceSystemKey': 'CCTV'}"
+      ],
+      "priority": 20,
+      "queueTypes": [
+        "ASSET_RESOLUTION_QUEUE"
+      ],
+      "reviewReasons": [
+        "ASSET_RESOLUTION_REQUIRED"
+      ],
+      "severity": "LOW",
+      "sourceArtifactId": "ec3cf042275b35b6acbb00847866a171fbdcc3121ce8eb8eb503a9660bd3929e:ASSET_RESOLUTION",
+      "sourceArtifactType": "ALARM_EVENT_ASSET_RESOLUTION_ROW",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "CCTV",
+      "title": "CCTV Asset resolution required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 247,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKS_DOWNSTREAM_CREATION"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "611235e783d3860e1bfa3c4379f2a726f02c2184ef8a788e6c2ac6a4a5c52c66",
+      "decisionRequired": true,
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "ASSET_RESOLUTION",
+      "description": "Operator review is required for PA before downstream alarm/event decisions can progress.",
+      "deterministicDigest": "ec851f230645f922e2dfa840e798a0a65b220ace2d0c1c96cd4ea84a945d0cc5",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'afdad1549fd06642825c07d2433783222914ecf27b2de141b991a29e57e10c4e', 'sourceSystemKey': 'PA'}"
+      ],
+      "priority": 20,
+      "queueTypes": [
+        "ASSET_RESOLUTION_QUEUE"
+      ],
+      "reviewReasons": [
+        "ASSET_RESOLUTION_REQUIRED"
+      ],
+      "severity": "LOW",
+      "sourceArtifactId": "42177ff0969ee5cf4c90be60f10d0ad762fd251b0920cb091ef1d923ecfcfa19:ASSET_RESOLUTION",
+      "sourceArtifactType": "ALARM_EVENT_ASSET_RESOLUTION_ROW",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "PA",
+      "title": "PA Asset resolution required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 28,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKS_DOWNSTREAM_CREATION"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "f3c78a73247fdeb7878dc72b0a9884e972f1d70816dc8e7f9e3e1c6a1a703ad2",
+      "decisionRequired": true,
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "ASSET_RESOLUTION",
+      "description": "Operator review is required for RAS before downstream alarm/event decisions can progress.",
+      "deterministicDigest": "edb8a9790be1bc3923cb30214a20837452fb2314e666e032e6a4fe9fa02639fe",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'cdd2b1cc9930b527a42fc8c04e5a74e28d4eb0f3d29c2ebb1b1e30c0bf92bec0', 'sourceSystemKey': 'RAS'}"
+      ],
+      "priority": 20,
+      "queueTypes": [
+        "ASSET_RESOLUTION_QUEUE"
+      ],
+      "reviewReasons": [
+        "ASSET_RESOLUTION_REQUIRED"
+      ],
+      "severity": "MEDIUM",
+      "sourceArtifactId": "befd205594eddedd190d8a43a3a8e8a0f76944335c176ab850406471dfd116e1:ASSET_RESOLUTION",
+      "sourceArtifactType": "ALARM_EVENT_ASSET_RESOLUTION_ROW",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "RAS",
+      "title": "RAS Asset resolution required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 14,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKS_DOWNSTREAM_CREATION"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "468b82c86e28a34244d8c6bade6eb64947ce74ef10bf1faf7d442d24a88a4a7b",
+      "decisionRequired": true,
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "ASSET_RESOLUTION",
+      "description": "Operator review is required for TEL before downstream alarm/event decisions can progress.",
+      "deterministicDigest": "000ee6576b1ee7c2f5bdd2f8769f04382775d8db98f3cb8fd1084e3ecd699371",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'db1df3fe509eae4f465e526c51ec045b2b70511b97f207918cc6ee07b7c7a44a', 'sourceSystemKey': 'TEL'}"
+      ],
+      "priority": 20,
+      "queueTypes": [
+        "ASSET_RESOLUTION_QUEUE"
+      ],
+      "reviewReasons": [
+        "ASSET_RESOLUTION_REQUIRED"
+      ],
+      "severity": "MEDIUM",
+      "sourceArtifactId": "255d12f1ad6a8d88b6f12ee6ca4c60238d2eb184ad92eb4940e67cd228c3981e:ASSET_RESOLUTION",
+      "sourceArtifactType": "ALARM_EVENT_ASSET_RESOLUTION_ROW",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "TEL",
+      "title": "TEL Asset resolution required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 129,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "APPROVE",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "db57387cf930d7db4ac2afdc605dfa581742751fdc85fd0533cb0f37fe75b5ff",
+      "decisionRequired": true,
+      "decisionScope": "ALARM_EVENT_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "DOWNSTREAM_CREATION_AUTHORIZATION",
+      "description": "Operator authorization is required before any downstream candidate creation is applied for ACS.",
+      "deterministicDigest": "54fd4a6da8033aef614fa7415d1bb921d1c24acd976bef449a4634b85b63d5d5",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '2b26090a97f80bde8af7ba0658a886bf37d07494c0f0f23fc42ba21ae6530fda', 'sourceSystemKey': 'ACS'}"
+      ],
+      "priority": 70,
+      "queueTypes": [
+        "ALARM_EVENT_QUEUE"
+      ],
+      "reviewReasons": [
+        "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+      ],
+      "severity": "HIGH",
+      "sourceArtifactId": "cb662b2fcf97830e9331a988271c978a51e39f19014bbc9e26f7317da89a29a1:DOWNSTREAM_CREATION_AUTHORIZATION",
+      "sourceArtifactType": "ALARM_EVENT_ASSET_RESOLUTION_ROW",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "ACS",
+      "title": "ACS downstream creation authorization"
+    },
+    {
+      "affectedDeviceEvidenceCount": 52,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "APPROVE",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "1a70ceb857e36de227e061e6ba75e69732b34fbffeeebe7e448d2a35c6c985e6",
+      "decisionRequired": true,
+      "decisionScope": "ALARM_EVENT_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "DOWNSTREAM_CREATION_AUTHORIZATION",
+      "description": "Operator authorization is required before any downstream candidate creation is applied for CCTV.",
+      "deterministicDigest": "2f19449337b0ae62360e86e05432b72b67bfdb38bcab95c950c173f934aa950b",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '8886051eedce1be862c858ddb03534a4de000ff25f964d6eccc781930b9cec16', 'sourceSystemKey': 'CCTV'}"
+      ],
+      "priority": 70,
+      "queueTypes": [
+        "ALARM_EVENT_QUEUE"
+      ],
+      "reviewReasons": [
+        "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+      ],
+      "severity": "LOW",
+      "sourceArtifactId": "ec3cf042275b35b6acbb00847866a171fbdcc3121ce8eb8eb503a9660bd3929e:DOWNSTREAM_CREATION_AUTHORIZATION",
+      "sourceArtifactType": "ALARM_EVENT_ASSET_RESOLUTION_ROW",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "CCTV",
+      "title": "CCTV downstream creation authorization"
+    },
+    {
+      "affectedDeviceEvidenceCount": 247,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "APPROVE",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "921416f11d969831b8e941439e5d5bafab3ad7bf89eeceb238e346f9141214c9",
+      "decisionRequired": true,
+      "decisionScope": "ALARM_EVENT_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "DOWNSTREAM_CREATION_AUTHORIZATION",
+      "description": "Operator authorization is required before any downstream candidate creation is applied for PA.",
+      "deterministicDigest": "74568ba8a010043d6d7f0c8c02a89e5058147f3c47d4c26b08227eaf2035befa",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'afdad1549fd06642825c07d2433783222914ecf27b2de141b991a29e57e10c4e', 'sourceSystemKey': 'PA'}"
+      ],
+      "priority": 70,
+      "queueTypes": [
+        "ALARM_EVENT_QUEUE"
+      ],
+      "reviewReasons": [
+        "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+      ],
+      "severity": "LOW",
+      "sourceArtifactId": "42177ff0969ee5cf4c90be60f10d0ad762fd251b0920cb091ef1d923ecfcfa19:DOWNSTREAM_CREATION_AUTHORIZATION",
+      "sourceArtifactType": "ALARM_EVENT_ASSET_RESOLUTION_ROW",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "PA",
+      "title": "PA downstream creation authorization"
+    },
+    {
+      "affectedDeviceEvidenceCount": 28,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "APPROVE",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "8ff7a4d3349c11dfa062b509b4fff776ebe1aa8a2d4148dc02c7683b0c98d4d7",
+      "decisionRequired": true,
+      "decisionScope": "ALARM_EVENT_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "DOWNSTREAM_CREATION_AUTHORIZATION",
+      "description": "Operator authorization is required before any downstream candidate creation is applied for RAS.",
+      "deterministicDigest": "42d59b881f7ccf71bf05d1e76b927b7963254a577f50baa023ef5829255fb638",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'cdd2b1cc9930b527a42fc8c04e5a74e28d4eb0f3d29c2ebb1b1e30c0bf92bec0', 'sourceSystemKey': 'RAS'}"
+      ],
+      "priority": 70,
+      "queueTypes": [
+        "ALARM_EVENT_QUEUE"
+      ],
+      "reviewReasons": [
+        "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+      ],
+      "severity": "MEDIUM",
+      "sourceArtifactId": "befd205594eddedd190d8a43a3a8e8a0f76944335c176ab850406471dfd116e1:DOWNSTREAM_CREATION_AUTHORIZATION",
+      "sourceArtifactType": "ALARM_EVENT_ASSET_RESOLUTION_ROW",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "RAS",
+      "title": "RAS downstream creation authorization"
+    },
+    {
+      "affectedDeviceEvidenceCount": 14,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "APPROVE",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "a767c1d68bbd4b11e76424b8118476275b069691406e5167dcb9d9df03c5a3e4",
+      "decisionRequired": true,
+      "decisionScope": "ALARM_EVENT_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "DOWNSTREAM_CREATION_AUTHORIZATION",
+      "description": "Operator authorization is required before any downstream candidate creation is applied for TEL.",
+      "deterministicDigest": "747cf9ed35138ab43b49cd62be2395c391aa35f46b6dc80457877e33c429d68b",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'db1df3fe509eae4f465e526c51ec045b2b70511b97f207918cc6ee07b7c7a44a', 'sourceSystemKey': 'TEL'}"
+      ],
+      "priority": 70,
+      "queueTypes": [
+        "ALARM_EVENT_QUEUE"
+      ],
+      "reviewReasons": [
+        "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+      ],
+      "severity": "MEDIUM",
+      "sourceArtifactId": "255d12f1ad6a8d88b6f12ee6ca4c60238d2eb184ad92eb4940e67cd228c3981e:DOWNSTREAM_CREATION_AUTHORIZATION",
+      "sourceArtifactType": "ALARM_EVENT_ASSET_RESOLUTION_ROW",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "TEL",
+      "title": "TEL downstream creation authorization"
+    },
+    {
+      "affectedDeviceEvidenceCount": 129,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ASSET_RESOLUTION_REQUIRED",
+        "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+        "FAULTCASE_REVIEW_REQUIRED",
+        "REGISTRY_APPROVAL_REQUIRED",
+        "SOURCE_SYSTEM_REVIEW_REQUIRED",
+        "WORKORDER_INTENT_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "6b49f645470ed970a1ccd8f4c1971b47bd08058db365ce2f441ae8a2e356fde2",
+      "decisionRequired": true,
+      "decisionScope": "EVIDENCE_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "EVIDENCE_INVESTIGATION_REVIEW",
+      "description": "Operator review is required for the EVIDENCE_INVESTIGATION_CASE candidate associated with ACS.",
+      "deterministicDigest": "a2d8419c8e78b462bb3a7f36dc3871b4bcbe53d6b3412087b9ec446970747057",
+      "evidenceReferences": [],
+      "priority": 60,
+      "queueTypes": [
+        "EVIDENCE_INVESTIGATION_QUEUE"
+      ],
+      "reviewReasons": [
+        "EVIDENCE_INVESTIGATION_REVIEW_REQUIRED"
+      ],
+      "severity": "HIGH",
+      "sourceArtifactId": "4a58e11f3221c8563dd08a72001c36a0a14872a1d98ff99373e73623d1a73b70",
+      "sourceArtifactType": "EVIDENCE_INVESTIGATION_CASE",
+      "sourceStage": "A3-05",
+      "sourceSystemKey": "ACS",
+      "title": "ACS evidence investigation review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 52,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ALIAS_APPROVAL_REQUIRED",
+        "ASSET_RESOLUTION_REQUIRED",
+        "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+        "FAULTCASE_REVIEW_REQUIRED",
+        "SOURCE_SYSTEM_REVIEW_REQUIRED",
+        "WORKORDER_INTENT_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "bac5a5c46e001f3e84f6cfa4a82e726d9023a4a76e8be41e2e851a3516740924",
+      "decisionRequired": true,
+      "decisionScope": "EVIDENCE_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "EVIDENCE_INVESTIGATION_REVIEW",
+      "description": "Operator review is required for the EVIDENCE_INVESTIGATION_CASE candidate associated with CCTV.",
+      "deterministicDigest": "e2dbcf54c07cedf0b5d0fc9c52391459be5157baef4ea9a558cf669b6af76595",
+      "evidenceReferences": [],
+      "priority": 60,
+      "queueTypes": [
+        "EVIDENCE_INVESTIGATION_QUEUE"
+      ],
+      "reviewReasons": [
+        "EVIDENCE_INVESTIGATION_REVIEW_REQUIRED"
+      ],
+      "severity": "HIGH",
+      "sourceArtifactId": "e835e23c20fb57f54c65b9d9700c34486f648f8bb7ac9bf0c0ab3f26e155e906",
+      "sourceArtifactType": "EVIDENCE_INVESTIGATION_CASE",
+      "sourceStage": "A3-05",
+      "sourceSystemKey": "CCTV",
+      "title": "CCTV evidence investigation review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 247,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ALIAS_APPROVAL_REQUIRED",
+        "ASSET_RESOLUTION_REQUIRED",
+        "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+        "FAULTCASE_REVIEW_REQUIRED",
+        "SOURCE_SYSTEM_REVIEW_REQUIRED",
+        "WORKORDER_INTENT_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "94af27fdd1e78c5472ce1267b5f2f2605894f2f9a06021a6211766e6dbea5355",
+      "decisionRequired": true,
+      "decisionScope": "EVIDENCE_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "EVIDENCE_INVESTIGATION_REVIEW",
+      "description": "Operator review is required for the EVIDENCE_INVESTIGATION_CASE candidate associated with PA.",
+      "deterministicDigest": "ed7e3a85c0d3d4d42b789bb4c9446c718de616a240388aa4cbe5ad0574d5a3bb",
+      "evidenceReferences": [],
+      "priority": 60,
+      "queueTypes": [
+        "EVIDENCE_INVESTIGATION_QUEUE"
+      ],
+      "reviewReasons": [
+        "EVIDENCE_INVESTIGATION_REVIEW_REQUIRED"
+      ],
+      "severity": "HIGH",
+      "sourceArtifactId": "16e7edb39014974b9cc1b3884ee29af9e96981061135aa56ae06ded148fd8c62",
+      "sourceArtifactType": "EVIDENCE_INVESTIGATION_CASE",
+      "sourceStage": "A3-05",
+      "sourceSystemKey": "PA",
+      "title": "PA evidence investigation review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 28,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ASSET_RESOLUTION_REQUIRED",
+        "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+        "FAULTCASE_REVIEW_REQUIRED",
+        "REGISTRY_APPROVAL_REQUIRED",
+        "SOURCE_SYSTEM_REVIEW_REQUIRED",
+        "WORKORDER_INTENT_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "9644fd5626735ead20d577302879c654a158550ff4cdb9d8d9e6387c233a26fe",
+      "decisionRequired": true,
+      "decisionScope": "EVIDENCE_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "EVIDENCE_INVESTIGATION_REVIEW",
+      "description": "Operator review is required for the EVIDENCE_INVESTIGATION_CASE candidate associated with RAS.",
+      "deterministicDigest": "a14b9d1292d2f347627342f6dc54da34143bb3effad22b584a0dd390c1e0b477",
+      "evidenceReferences": [],
+      "priority": 60,
+      "queueTypes": [
+        "EVIDENCE_INVESTIGATION_QUEUE"
+      ],
+      "reviewReasons": [
+        "EVIDENCE_INVESTIGATION_REVIEW_REQUIRED"
+      ],
+      "severity": "HIGH",
+      "sourceArtifactId": "571d8e1b0a27af0ce32e9a0101f4fcc74550901b7601936e62d7e998671fab2a",
+      "sourceArtifactType": "EVIDENCE_INVESTIGATION_CASE",
+      "sourceStage": "A3-05",
+      "sourceSystemKey": "RAS",
+      "title": "RAS evidence investigation review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 14,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ASSET_RESOLUTION_REQUIRED",
+        "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+        "FAULTCASE_REVIEW_REQUIRED",
+        "NAMESPACE_INTERPRETATION_REQUIRED",
+        "SOURCE_SYSTEM_REVIEW_REQUIRED",
+        "WORKORDER_INTENT_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "f5e019ed5db793f0cf2fe3ba398eeb75541cdbf84c09007976925f90ebccb601",
+      "decisionRequired": true,
+      "decisionScope": "EVIDENCE_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "EVIDENCE_INVESTIGATION_REVIEW",
+      "description": "Operator review is required for the EVIDENCE_INVESTIGATION_CASE candidate associated with TEL.",
+      "deterministicDigest": "09fc658981bfc92e960b99ba2fb012d39765f3ea405f9b53c5c047508cc40e41",
+      "evidenceReferences": [],
+      "priority": 60,
+      "queueTypes": [
+        "EVIDENCE_INVESTIGATION_QUEUE"
+      ],
+      "reviewReasons": [
+        "EVIDENCE_INVESTIGATION_REVIEW_REQUIRED"
+      ],
+      "severity": "HIGH",
+      "sourceArtifactId": "a770259a87a43d430df3749226258c6611050c4975035cb344867a6b3191110c",
+      "sourceArtifactType": "EVIDENCE_INVESTIGATION_CASE",
+      "sourceStage": "A3-05",
+      "sourceSystemKey": "TEL",
+      "title": "TEL evidence investigation review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 0,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKED_BY_RESOLUTION",
+        "BLOCKED_BY_SOURCE_SYSTEM_REVIEW",
+        "FAULTCASE_CREATION_NOT_AUTHORIZED",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED",
+        "REGISTRY_APPROVAL_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "bb11dc25caa5e9a71715d110ba356ec4eea8fef2a3bafe5b92926f4edc4c7818",
+      "decisionRequired": true,
+      "decisionScope": "FAULTCASE_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "FAULTCASE_CANDIDATE_REVIEW",
+      "description": "Operator review is required for the FAULTCASE_CANDIDATE candidate associated with ACS.",
+      "deterministicDigest": "05c0cef82cce11e3347516b87b233d2503db4469da5eacb0c74bb12e3a73dbc4",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '2b26090a97f80bde8af7ba0658a886bf37d07494c0f0f23fc42ba21ae6530fda', 'sourceSystemKey': 'ACS'}"
+      ],
+      "priority": 40,
+      "queueTypes": [
+        "FAULTCASE_QUEUE"
+      ],
+      "reviewReasons": [
+        "FAULTCASE_REVIEW_REQUIRED"
+      ],
+      "severity": "HIGH",
+      "sourceArtifactId": "ba6285ad701ca2b62c97f8265ebbc2e643401e19d5d11c191e1ce35bb308e5cd",
+      "sourceArtifactType": "FAULTCASE_CANDIDATE",
+      "sourceStage": "A3-03",
+      "sourceSystemKey": "ACS",
+      "title": "ACS FaultCase candidate review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 0,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ALIAS_APPROVAL_REQUIRED",
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKED_BY_RESOLUTION",
+        "BLOCKED_BY_SOURCE_SYSTEM_REVIEW",
+        "FAULTCASE_CREATION_NOT_AUTHORIZED",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "770d6dbaf35e13b857af6903985eb796a8e922b7087bac9de82317209570a83f",
+      "decisionRequired": true,
+      "decisionScope": "FAULTCASE_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "FAULTCASE_CANDIDATE_REVIEW",
+      "description": "Operator review is required for the FAULTCASE_CANDIDATE candidate associated with CCTV.",
+      "deterministicDigest": "60a43db1965ad7c67d13265db9c36a6ae47642d22c55a4875d0271f306ec057b",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '8886051eedce1be862c858ddb03534a4de000ff25f964d6eccc781930b9cec16', 'sourceSystemKey': 'CCTV'}"
+      ],
+      "priority": 40,
+      "queueTypes": [
+        "FAULTCASE_QUEUE"
+      ],
+      "reviewReasons": [
+        "FAULTCASE_REVIEW_REQUIRED"
+      ],
+      "severity": "LOW",
+      "sourceArtifactId": "1e997dd9a269db6929fe98f478cfa9ba0f34c1885e827d1654c50f2f48db0551",
+      "sourceArtifactType": "FAULTCASE_CANDIDATE",
+      "sourceStage": "A3-03",
+      "sourceSystemKey": "CCTV",
+      "title": "CCTV FaultCase candidate review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 0,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ALIAS_APPROVAL_REQUIRED",
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKED_BY_RESOLUTION",
+        "BLOCKED_BY_SOURCE_SYSTEM_REVIEW",
+        "FAULTCASE_CREATION_NOT_AUTHORIZED",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "477bbb2c89e20f91b743808f927db066ea1dbb11a33f834d2ba52a85c52fc850",
+      "decisionRequired": true,
+      "decisionScope": "FAULTCASE_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "FAULTCASE_CANDIDATE_REVIEW",
+      "description": "Operator review is required for the FAULTCASE_CANDIDATE candidate associated with PA.",
+      "deterministicDigest": "cb603ef453e87c06739824b540f98af77a135bfb7f92807b394e0f317ef64011",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'afdad1549fd06642825c07d2433783222914ecf27b2de141b991a29e57e10c4e', 'sourceSystemKey': 'PA'}"
+      ],
+      "priority": 40,
+      "queueTypes": [
+        "FAULTCASE_QUEUE"
+      ],
+      "reviewReasons": [
+        "FAULTCASE_REVIEW_REQUIRED"
+      ],
+      "severity": "LOW",
+      "sourceArtifactId": "d1545a91ad3bc7745a999afff431bd11cbac54ea4089c2b15994f69b7a756f8a",
+      "sourceArtifactType": "FAULTCASE_CANDIDATE",
+      "sourceStage": "A3-03",
+      "sourceSystemKey": "PA",
+      "title": "PA FaultCase candidate review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 0,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKED_BY_RESOLUTION",
+        "BLOCKED_BY_SOURCE_SYSTEM_REVIEW",
+        "FAULTCASE_CREATION_NOT_AUTHORIZED",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED",
+        "REGISTRY_APPROVAL_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "886b9bfd2f020321376d4cc3e6ab774a1aad219039abf74f835661e2e04b91f9",
+      "decisionRequired": true,
+      "decisionScope": "FAULTCASE_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "FAULTCASE_CANDIDATE_REVIEW",
+      "description": "Operator review is required for the FAULTCASE_CANDIDATE candidate associated with RAS.",
+      "deterministicDigest": "6d771d201713b5bc594fee6c386e01211a1406ce1928b96b344a136c8846ea08",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'cdd2b1cc9930b527a42fc8c04e5a74e28d4eb0f3d29c2ebb1b1e30c0bf92bec0', 'sourceSystemKey': 'RAS'}"
+      ],
+      "priority": 40,
+      "queueTypes": [
+        "FAULTCASE_QUEUE"
+      ],
+      "reviewReasons": [
+        "FAULTCASE_REVIEW_REQUIRED"
+      ],
+      "severity": "MEDIUM",
+      "sourceArtifactId": "a2aff06343278f4b4676777868247c6c06781f5e760f76537245c38ac72529be",
+      "sourceArtifactType": "FAULTCASE_CANDIDATE",
+      "sourceStage": "A3-03",
+      "sourceSystemKey": "RAS",
+      "title": "RAS FaultCase candidate review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 0,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKED_BY_RESOLUTION",
+        "BLOCKED_BY_SOURCE_SYSTEM_REVIEW",
+        "FAULTCASE_CREATION_NOT_AUTHORIZED",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "NAMESPACE_INTERPRETATION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "00f59930f5487c5770090311c9fdb0bf1994c04bc8254858057476fb79f937b9",
+      "decisionRequired": true,
+      "decisionScope": "FAULTCASE_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "FAULTCASE_CANDIDATE_REVIEW",
+      "description": "Operator review is required for the FAULTCASE_CANDIDATE candidate associated with TEL.",
+      "deterministicDigest": "9c3e8d0909567d06ddae8831ba38df029d7fd5ae606e1f19dca8f49e7e9d6e9d",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'db1df3fe509eae4f465e526c51ec045b2b70511b97f207918cc6ee07b7c7a44a', 'sourceSystemKey': 'TEL'}"
+      ],
+      "priority": 40,
+      "queueTypes": [
+        "FAULTCASE_QUEUE"
+      ],
+      "reviewReasons": [
+        "FAULTCASE_REVIEW_REQUIRED"
+      ],
+      "severity": "MEDIUM",
+      "sourceArtifactId": "4ccdb9b7712ed85e59319a9612d85cc97084abd6d51e5e63ff3f98848b7d2c10",
+      "sourceArtifactType": "FAULTCASE_CANDIDATE",
+      "sourceStage": "A3-03",
+      "sourceSystemKey": "TEL",
+      "title": "TEL FaultCase candidate review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 129,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "BLOCKS_DOWNSTREAM_CREATION",
+        "LOCATION_RESOLUTION_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "827c9c5c33dd9dfa929294f5ec48c4a64d4d3a394e1b0128d2c72c62527b1550",
+      "decisionRequired": true,
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "LOCATION_RESOLUTION",
+      "description": "Operator review is required for ACS before downstream alarm/event decisions can progress.",
+      "deterministicDigest": "dc2b6bd9d7066c8ef1e04b7ecf7cc810f08cbae80655bd973867156f265e3134",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '2b26090a97f80bde8af7ba0658a886bf37d07494c0f0f23fc42ba21ae6530fda', 'sourceSystemKey': 'ACS'}"
+      ],
+      "priority": 20,
+      "queueTypes": [
+        "ASSET_RESOLUTION_QUEUE"
+      ],
+      "reviewReasons": [
+        "LOCATION_RESOLUTION_REQUIRED"
+      ],
+      "severity": "HIGH",
+      "sourceArtifactId": "cb662b2fcf97830e9331a988271c978a51e39f19014bbc9e26f7317da89a29a1:LOCATION_RESOLUTION",
+      "sourceArtifactType": "ALARM_EVENT_ASSET_RESOLUTION_ROW",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "ACS",
+      "title": "ACS Location resolution required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 52,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "BLOCKS_DOWNSTREAM_CREATION",
+        "LOCATION_RESOLUTION_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "54df1e11c75e533678a0c935a548dc610282c25684b6c567404a7298d851e6e6",
+      "decisionRequired": true,
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "LOCATION_RESOLUTION",
+      "description": "Operator review is required for CCTV before downstream alarm/event decisions can progress.",
+      "deterministicDigest": "d2aea08e252a6cb347ecb7b5761757492909aa7848e78bff584e0bbfe6d3d12a",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '8886051eedce1be862c858ddb03534a4de000ff25f964d6eccc781930b9cec16', 'sourceSystemKey': 'CCTV'}"
+      ],
+      "priority": 20,
+      "queueTypes": [
+        "ASSET_RESOLUTION_QUEUE"
+      ],
+      "reviewReasons": [
+        "LOCATION_RESOLUTION_REQUIRED"
+      ],
+      "severity": "LOW",
+      "sourceArtifactId": "ec3cf042275b35b6acbb00847866a171fbdcc3121ce8eb8eb503a9660bd3929e:LOCATION_RESOLUTION",
+      "sourceArtifactType": "ALARM_EVENT_ASSET_RESOLUTION_ROW",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "CCTV",
+      "title": "CCTV Location resolution required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 247,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "BLOCKS_DOWNSTREAM_CREATION",
+        "LOCATION_RESOLUTION_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "4b5fd829706035c891f9a770e72577e34712162f09e7802c50cb64650d18ee72",
+      "decisionRequired": true,
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "LOCATION_RESOLUTION",
+      "description": "Operator review is required for PA before downstream alarm/event decisions can progress.",
+      "deterministicDigest": "a1618676c67966bffb41e7a09c3acb385cf0b6b28504ba28b86a8fbb15382492",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'afdad1549fd06642825c07d2433783222914ecf27b2de141b991a29e57e10c4e', 'sourceSystemKey': 'PA'}"
+      ],
+      "priority": 20,
+      "queueTypes": [
+        "ASSET_RESOLUTION_QUEUE"
+      ],
+      "reviewReasons": [
+        "LOCATION_RESOLUTION_REQUIRED"
+      ],
+      "severity": "LOW",
+      "sourceArtifactId": "42177ff0969ee5cf4c90be60f10d0ad762fd251b0920cb091ef1d923ecfcfa19:LOCATION_RESOLUTION",
+      "sourceArtifactType": "ALARM_EVENT_ASSET_RESOLUTION_ROW",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "PA",
+      "title": "PA Location resolution required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 28,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "BLOCKS_DOWNSTREAM_CREATION",
+        "LOCATION_RESOLUTION_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "948fb786bd37d12da9ec26019d110fba1123a3dbc90f6ddb3c5e5b8d6e77b53f",
+      "decisionRequired": true,
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "LOCATION_RESOLUTION",
+      "description": "Operator review is required for RAS before downstream alarm/event decisions can progress.",
+      "deterministicDigest": "aca9e4a9535f149d3bd1cb76d400148e6ca9c41711d15fcab0ac83d1127e47d1",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'cdd2b1cc9930b527a42fc8c04e5a74e28d4eb0f3d29c2ebb1b1e30c0bf92bec0', 'sourceSystemKey': 'RAS'}"
+      ],
+      "priority": 20,
+      "queueTypes": [
+        "ASSET_RESOLUTION_QUEUE"
+      ],
+      "reviewReasons": [
+        "LOCATION_RESOLUTION_REQUIRED"
+      ],
+      "severity": "MEDIUM",
+      "sourceArtifactId": "befd205594eddedd190d8a43a3a8e8a0f76944335c176ab850406471dfd116e1:LOCATION_RESOLUTION",
+      "sourceArtifactType": "ALARM_EVENT_ASSET_RESOLUTION_ROW",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "RAS",
+      "title": "RAS Location resolution required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 14,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "BLOCKS_DOWNSTREAM_CREATION",
+        "LOCATION_RESOLUTION_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "60aa1937c042b33992009e8426cac89121e160c26b3c8d3becd3db8bfd3df116",
+      "decisionRequired": true,
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "LOCATION_RESOLUTION",
+      "description": "Operator review is required for TEL before downstream alarm/event decisions can progress.",
+      "deterministicDigest": "b1c5ba385b72eaa50e53a7fafb814cf8e30c7ae93a947713a8a915e40e98bbc8",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'db1df3fe509eae4f465e526c51ec045b2b70511b97f207918cc6ee07b7c7a44a', 'sourceSystemKey': 'TEL'}"
+      ],
+      "priority": 20,
+      "queueTypes": [
+        "ASSET_RESOLUTION_QUEUE"
+      ],
+      "reviewReasons": [
+        "LOCATION_RESOLUTION_REQUIRED"
+      ],
+      "severity": "MEDIUM",
+      "sourceArtifactId": "255d12f1ad6a8d88b6f12ee6ca4c60238d2eb184ad92eb4940e67cd228c3981e:LOCATION_RESOLUTION",
+      "sourceArtifactType": "ALARM_EVENT_ASSET_RESOLUTION_ROW",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "TEL",
+      "title": "TEL Location resolution required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 14,
+      "affectedRecordCount": 14,
+      "allowedDecisions": [
+        "APPROVE",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "NAMESPACE_INTERPRETATION",
+        "SOURCE_SYSTEM_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "f05dc6da056e5db68a03d8133f61e20fefabc6b55df942f98fc3128d88880037",
+      "decisionRequired": true,
+      "decisionScope": "SOURCE_SYSTEM_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "NAMESPACE_INTERPRETATION",
+      "description": "Operator review is required before TEL source-system evidence can be accepted as approved registry context.",
+      "deterministicDigest": "78a66a1073c7f8541a67124fadcb06bf4f55430da6bcd791b40d8c3c058c5f6d",
+      "evidenceReferences": [
+        "{'digest': '0fc6173d8a353b1dd2633b44ef99afa3a4acb41c29782b58436c0cbcf3c5f1ec', 'evidenceId': '2bd6c4b0f26f69cec870971cbed4ac5b63872ce8907c142650d07932cfdf8321', 'evidenceType': 'CLASSIFICATION_BINDING_AGGREGATE', 'provenance': 'ONE-AIRPORT-A1-03 classification bindings', 'resultDigest': '63061c85fca03040577cf513e43f686ec089995ded7485c138c834680d6832c7', 'sourceProfile': 'airport-source-system-profile-v1', 'sourceRecordCount': 14}"
+      ],
+      "priority": 10,
+      "queueTypes": [
+        "SOURCE_SYSTEM_QUEUE"
+      ],
+      "reviewReasons": [
+        "NAMESPACE_INTERPRETATION_REQUIRED"
+      ],
+      "severity": "HIGH",
+      "sourceArtifactId": "25f9e765a7d23860c25f71b71935c69791f45506953bd547add932433998babd",
+      "sourceArtifactType": "SOURCE_SYSTEM_REVIEW_BINDING",
+      "sourceStage": "A2",
+      "sourceSystemKey": "TEL",
+      "title": "TEL Namespace interpretation required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 129,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "BLOCKS_DOWNSTREAM_CREATION",
+        "POINT_RESOLUTION_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "b8685bdf4e7ffb23579272884eb700df32f2fdbc5ec1c844e55b3621dffc7d25",
+      "decisionRequired": true,
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "POINT_RESOLUTION",
+      "description": "Operator review is required for ACS before downstream alarm/event decisions can progress.",
+      "deterministicDigest": "dcfca12a15fe1cd630688e3e792304891c682305a77c582f562a282177a93a6a",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '2b26090a97f80bde8af7ba0658a886bf37d07494c0f0f23fc42ba21ae6530fda', 'sourceSystemKey': 'ACS'}"
+      ],
+      "priority": 20,
+      "queueTypes": [
+        "ASSET_RESOLUTION_QUEUE"
+      ],
+      "reviewReasons": [
+        "POINT_RESOLUTION_REQUIRED"
+      ],
+      "severity": "HIGH",
+      "sourceArtifactId": "cb662b2fcf97830e9331a988271c978a51e39f19014bbc9e26f7317da89a29a1:POINT_RESOLUTION",
+      "sourceArtifactType": "ALARM_EVENT_ASSET_RESOLUTION_ROW",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "ACS",
+      "title": "ACS Point resolution required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 52,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "BLOCKS_DOWNSTREAM_CREATION",
+        "POINT_RESOLUTION_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "7d79d4662cd1846f87189a667a4611b8e7c2f6eaa83393ed6bcabbf883ed84b5",
+      "decisionRequired": true,
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "POINT_RESOLUTION",
+      "description": "Operator review is required for CCTV before downstream alarm/event decisions can progress.",
+      "deterministicDigest": "21ae79efaab9cd93835b30bd25aca0a947fa68b6a9da7482817bdf65c7df1f1e",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '8886051eedce1be862c858ddb03534a4de000ff25f964d6eccc781930b9cec16', 'sourceSystemKey': 'CCTV'}"
+      ],
+      "priority": 20,
+      "queueTypes": [
+        "ASSET_RESOLUTION_QUEUE"
+      ],
+      "reviewReasons": [
+        "POINT_RESOLUTION_REQUIRED"
+      ],
+      "severity": "LOW",
+      "sourceArtifactId": "ec3cf042275b35b6acbb00847866a171fbdcc3121ce8eb8eb503a9660bd3929e:POINT_RESOLUTION",
+      "sourceArtifactType": "ALARM_EVENT_ASSET_RESOLUTION_ROW",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "CCTV",
+      "title": "CCTV Point resolution required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 247,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "BLOCKS_DOWNSTREAM_CREATION",
+        "POINT_RESOLUTION_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "e5d8bae9ba014e2c1610700c8a68e3a2098d64244b0a092358e916ea786c39af",
+      "decisionRequired": true,
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "POINT_RESOLUTION",
+      "description": "Operator review is required for PA before downstream alarm/event decisions can progress.",
+      "deterministicDigest": "fe677dd0578d6ac30121a62f106d431c659ddef68aece58e417e2b2c049d2406",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'afdad1549fd06642825c07d2433783222914ecf27b2de141b991a29e57e10c4e', 'sourceSystemKey': 'PA'}"
+      ],
+      "priority": 20,
+      "queueTypes": [
+        "ASSET_RESOLUTION_QUEUE"
+      ],
+      "reviewReasons": [
+        "POINT_RESOLUTION_REQUIRED"
+      ],
+      "severity": "LOW",
+      "sourceArtifactId": "42177ff0969ee5cf4c90be60f10d0ad762fd251b0920cb091ef1d923ecfcfa19:POINT_RESOLUTION",
+      "sourceArtifactType": "ALARM_EVENT_ASSET_RESOLUTION_ROW",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "PA",
+      "title": "PA Point resolution required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 28,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "BLOCKS_DOWNSTREAM_CREATION",
+        "POINT_RESOLUTION_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "79fc3560fd8284602dc149418f8e237cba89afc5534e52dc1256761021dfac5a",
+      "decisionRequired": true,
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "POINT_RESOLUTION",
+      "description": "Operator review is required for RAS before downstream alarm/event decisions can progress.",
+      "deterministicDigest": "a487729b807c0a4f1a93df264b92e83263f9e95d585e5b98e86102f1c3d18b0b",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'cdd2b1cc9930b527a42fc8c04e5a74e28d4eb0f3d29c2ebb1b1e30c0bf92bec0', 'sourceSystemKey': 'RAS'}"
+      ],
+      "priority": 20,
+      "queueTypes": [
+        "ASSET_RESOLUTION_QUEUE"
+      ],
+      "reviewReasons": [
+        "POINT_RESOLUTION_REQUIRED"
+      ],
+      "severity": "MEDIUM",
+      "sourceArtifactId": "befd205594eddedd190d8a43a3a8e8a0f76944335c176ab850406471dfd116e1:POINT_RESOLUTION",
+      "sourceArtifactType": "ALARM_EVENT_ASSET_RESOLUTION_ROW",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "RAS",
+      "title": "RAS Point resolution required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 14,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "BLOCKS_DOWNSTREAM_CREATION",
+        "POINT_RESOLUTION_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "6ef8751e77444810843b4fa2632633d5292fc5952305c3a3810e7aea929183fc",
+      "decisionRequired": true,
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "POINT_RESOLUTION",
+      "description": "Operator review is required for TEL before downstream alarm/event decisions can progress.",
+      "deterministicDigest": "edb33325cb3993978948c92d848dc32844dc429faf885e344014edbd806a1eec",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'db1df3fe509eae4f465e526c51ec045b2b70511b97f207918cc6ee07b7c7a44a', 'sourceSystemKey': 'TEL'}"
+      ],
+      "priority": 20,
+      "queueTypes": [
+        "ASSET_RESOLUTION_QUEUE"
+      ],
+      "reviewReasons": [
+        "POINT_RESOLUTION_REQUIRED"
+      ],
+      "severity": "MEDIUM",
+      "sourceArtifactId": "255d12f1ad6a8d88b6f12ee6ca4c60238d2eb184ad92eb4940e67cd228c3981e:POINT_RESOLUTION",
+      "sourceArtifactType": "ALARM_EVENT_ASSET_RESOLUTION_ROW",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "TEL",
+      "title": "TEL Point resolution required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 129,
+      "affectedRecordCount": 129,
+      "allowedDecisions": [
+        "APPROVE",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "REGISTRY_APPROVAL",
+        "SOURCE_SYSTEM_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "3c7e61e1bea96c33006ceb4afa5dae604e416748d429edc1af3c7596b8c4f890",
+      "decisionRequired": true,
+      "decisionScope": "SOURCE_SYSTEM_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "REGISTRY_APPROVAL",
+      "description": "Operator review is required before ACS source-system evidence can be accepted as approved registry context.",
+      "deterministicDigest": "9df3068394465b1adbc4550c88a1a649113331040611a245bc29a3aa4fa6a575",
+      "evidenceReferences": [
+        "{'digest': '7f4eb268556cd7cc31608ecc9f1796df9b053039ab13e3e4d1271339d7a23dec', 'evidenceId': 'd5460171bfa515ad3fde83fa991bd0dbccac64817b6cd3cd50f7cec016d16330', 'evidenceType': 'CLASSIFICATION_BINDING_AGGREGATE', 'provenance': 'ONE-AIRPORT-A1-03 classification bindings', 'resultDigest': 'f2134c9995fc2c8b24603620a9df349e320afce29bc99356c3fbea5e577f1188', 'sourceProfile': 'airport-source-system-profile-v1', 'sourceRecordCount': 129}"
+      ],
+      "priority": 10,
+      "queueTypes": [
+        "SOURCE_SYSTEM_QUEUE"
+      ],
+      "reviewReasons": [
+        "REGISTRY_APPROVAL_REQUIRED"
+      ],
+      "severity": "HIGH",
+      "sourceArtifactId": "91d39b89567f178c1ffb65b96ab0c624f1b41970eb5ac9f04101768eefed2438",
+      "sourceArtifactType": "SOURCE_SYSTEM_REVIEW_BINDING",
+      "sourceStage": "A2",
+      "sourceSystemKey": "ACS",
+      "title": "ACS Registry approval required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 28,
+      "affectedRecordCount": 28,
+      "allowedDecisions": [
+        "APPROVE",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "REGISTRY_APPROVAL",
+        "SOURCE_SYSTEM_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "cb750465e3e304c039c71babbed700084cf129cdebca9d5f31d40c715cc004ee",
+      "decisionRequired": true,
+      "decisionScope": "SOURCE_SYSTEM_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "REGISTRY_APPROVAL",
+      "description": "Operator review is required before RAS source-system evidence can be accepted as approved registry context.",
+      "deterministicDigest": "d0b775eceda98adf8c190a6f1d04a819eb128c7f23545834619346b30ae7bcc0",
+      "evidenceReferences": [
+        "{'digest': 'cd8d0520ee8802a0a5a9b99604c26d35fefff5ca2c59738e8b6c7035bd29e40a', 'evidenceId': '6f36e31caf4664dc7654550df344e31ebfb0140204cfd528fd672dc869819f8d', 'evidenceType': 'CLASSIFICATION_BINDING_AGGREGATE', 'provenance': 'ONE-AIRPORT-A1-03 classification bindings', 'resultDigest': '1a375a7e7bab0f8b8b8d1e2f2add98d627a1c02825d3e8e16ca2e5014c293230', 'sourceProfile': 'airport-source-system-profile-v1', 'sourceRecordCount': 28}"
+      ],
+      "priority": 10,
+      "queueTypes": [
+        "SOURCE_SYSTEM_QUEUE"
+      ],
+      "reviewReasons": [
+        "REGISTRY_APPROVAL_REQUIRED"
+      ],
+      "severity": "HIGH",
+      "sourceArtifactId": "75c79fe6d72e6868e48bd824ff86aca0692de66d003b4493713116f90d20a05b",
+      "sourceArtifactType": "SOURCE_SYSTEM_REVIEW_BINDING",
+      "sourceStage": "A2",
+      "sourceSystemKey": "RAS",
+      "title": "RAS Registry approval required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 0,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "DEFER",
+        "KEEP_PENDING",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": false,
+      "blockingReasons": [],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "fa46ad3543b51ae3c68e87ac4a3396afc02db66125bc6cf64d7ca7bc329f55e6",
+      "decisionRequired": true,
+      "decisionScope": "RELEASE_GATE",
+      "decisionState": "READY_FOR_REVIEW",
+      "decisionType": "RELEASE_GATE_REVIEW",
+      "description": "A3 local read-only release gate passed; push remains disabled pending explicit operator/user instruction.",
+      "deterministicDigest": "cbeb93ccc4618abbb670e92dd94c583a05ae4cf576e1de0cf7f164f9cdbfe9e3",
+      "evidenceReferences": [
+        "796134411c4e760230338fdee559e1e62a5193f4776e6e119dd35405abf2d3e0"
+      ],
+      "priority": 90,
+      "queueTypes": [
+        "RELEASE_GATE_QUEUE"
+      ],
+      "reviewReasons": [
+        "RELEASE_GATE_PASS_PUSH_DISABLED"
+      ],
+      "severity": "INFO",
+      "sourceArtifactId": "1b2f0242858b4a24c0a9eb77220fff97bdc8dc2d7b161693eebcad37a8746495",
+      "sourceArtifactType": "A3_READINESS_RELEASE_GATE",
+      "sourceStage": "A3-07",
+      "sourceSystemKey": null,
+      "title": "A3 read-only release gate review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 129,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKED_BY_FAULTCASE_REVIEW",
+        "BLOCKED_BY_RESOLUTION",
+        "BLOCKED_BY_SOURCE_SYSTEM_REVIEW",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED",
+        "REGISTRY_APPROVAL_REQUIRED",
+        "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED",
+        "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "d76caf3e8ef5403bab8cd3b62aadb3d260dbe3529d07a855f53e4b4c731b1716",
+      "decisionRequired": true,
+      "decisionScope": "WORKORDER_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "WORKORDER_INTENT_REVIEW",
+      "description": "Operator review is required for the WORKORDER_INTENT_CANDIDATE candidate associated with ACS.",
+      "deterministicDigest": "d3a84a020179b5daf97e6ed05e7a062bb48f8303bb8099be8e6f6782812c9e95",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '2b26090a97f80bde8af7ba0658a886bf37d07494c0f0f23fc42ba21ae6530fda', 'sourceSystemKey': 'ACS'}"
+      ],
+      "priority": 50,
+      "queueTypes": [
+        "WORKORDER_INTENT_QUEUE"
+      ],
+      "reviewReasons": [
+        "WORKORDER_INTENT_REVIEW_REQUIRED"
+      ],
+      "severity": "HIGH",
+      "sourceArtifactId": "20f55c844d844ecb2db5c0cd440f34037274832e280965df51688719102dfdab",
+      "sourceArtifactType": "WORKORDER_INTENT_CANDIDATE",
+      "sourceStage": "A3-04",
+      "sourceSystemKey": "ACS",
+      "title": "ACS WorkOrderIntent review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 52,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ALIAS_APPROVAL_REQUIRED",
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKED_BY_FAULTCASE_REVIEW",
+        "BLOCKED_BY_RESOLUTION",
+        "BLOCKED_BY_SOURCE_SYSTEM_REVIEW",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED",
+        "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED",
+        "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "b74a4d09f7bf0c4d4a4d3d46319daf232a4a25162f214466e3b19558fb4b158c",
+      "decisionRequired": true,
+      "decisionScope": "WORKORDER_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "WORKORDER_INTENT_REVIEW",
+      "description": "Operator review is required for the WORKORDER_INTENT_CANDIDATE candidate associated with CCTV.",
+      "deterministicDigest": "b947a3f40348782c0d6f540b161ce64e50e86f18e0e18a2d10875ebba8685345",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '8886051eedce1be862c858ddb03534a4de000ff25f964d6eccc781930b9cec16', 'sourceSystemKey': 'CCTV'}"
+      ],
+      "priority": 50,
+      "queueTypes": [
+        "WORKORDER_INTENT_QUEUE"
+      ],
+      "reviewReasons": [
+        "WORKORDER_INTENT_REVIEW_REQUIRED"
+      ],
+      "severity": "HIGH",
+      "sourceArtifactId": "453c196c473ea290c5aeb8019ed33950557c7d0aa6264d42dafe72edd09a3108",
+      "sourceArtifactType": "WORKORDER_INTENT_CANDIDATE",
+      "sourceStage": "A3-04",
+      "sourceSystemKey": "CCTV",
+      "title": "CCTV WorkOrderIntent review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 247,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ALIAS_APPROVAL_REQUIRED",
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKED_BY_FAULTCASE_REVIEW",
+        "BLOCKED_BY_RESOLUTION",
+        "BLOCKED_BY_SOURCE_SYSTEM_REVIEW",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED",
+        "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED",
+        "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "3d7d25278d6603f51d7074c9a5e82511e44a9e6ae572fba85e047afc84db6740",
+      "decisionRequired": true,
+      "decisionScope": "WORKORDER_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "WORKORDER_INTENT_REVIEW",
+      "description": "Operator review is required for the WORKORDER_INTENT_CANDIDATE candidate associated with PA.",
+      "deterministicDigest": "814fd0cb4c9504e426ba06b204ed5da1817ae78c97009c238ce59c0a95cde8e2",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'afdad1549fd06642825c07d2433783222914ecf27b2de141b991a29e57e10c4e', 'sourceSystemKey': 'PA'}"
+      ],
+      "priority": 50,
+      "queueTypes": [
+        "WORKORDER_INTENT_QUEUE"
+      ],
+      "reviewReasons": [
+        "WORKORDER_INTENT_REVIEW_REQUIRED"
+      ],
+      "severity": "HIGH",
+      "sourceArtifactId": "a34d00bc5f1ad70dbffa43b6ccc3eff8eef4ac0b7f3312ef4cd4063895dacc17",
+      "sourceArtifactType": "WORKORDER_INTENT_CANDIDATE",
+      "sourceStage": "A3-04",
+      "sourceSystemKey": "PA",
+      "title": "PA WorkOrderIntent review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 28,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKED_BY_FAULTCASE_REVIEW",
+        "BLOCKED_BY_RESOLUTION",
+        "BLOCKED_BY_SOURCE_SYSTEM_REVIEW",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED",
+        "REGISTRY_APPROVAL_REQUIRED",
+        "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED",
+        "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "f35099c85eab09ab5505892f123d17703bf4ef8491983bd5cda82960f6f8cada",
+      "decisionRequired": true,
+      "decisionScope": "WORKORDER_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "WORKORDER_INTENT_REVIEW",
+      "description": "Operator review is required for the WORKORDER_INTENT_CANDIDATE candidate associated with RAS.",
+      "deterministicDigest": "1aae63c213c7702711c9637a02324dbf69d4c873e8b7626ccc9578eb37662217",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'cdd2b1cc9930b527a42fc8c04e5a74e28d4eb0f3d29c2ebb1b1e30c0bf92bec0', 'sourceSystemKey': 'RAS'}"
+      ],
+      "priority": 50,
+      "queueTypes": [
+        "WORKORDER_INTENT_QUEUE"
+      ],
+      "reviewReasons": [
+        "WORKORDER_INTENT_REVIEW_REQUIRED"
+      ],
+      "severity": "HIGH",
+      "sourceArtifactId": "337dffb050ab650def753548ac80f639a2664bab13270b32fe0dc9d914a653d6",
+      "sourceArtifactType": "WORKORDER_INTENT_CANDIDATE",
+      "sourceStage": "A3-04",
+      "sourceSystemKey": "RAS",
+      "title": "RAS WorkOrderIntent review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 14,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKED_BY_FAULTCASE_REVIEW",
+        "BLOCKED_BY_RESOLUTION",
+        "BLOCKED_BY_SOURCE_SYSTEM_REVIEW",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "NAMESPACE_INTERPRETATION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED",
+        "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED",
+        "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "8d846bf2f2153c26008ba832587389e08d96e5f06d98ad77ec404ddaa77a1ea3",
+      "decisionRequired": true,
+      "decisionScope": "WORKORDER_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "WORKORDER_INTENT_REVIEW",
+      "description": "Operator review is required for the WORKORDER_INTENT_CANDIDATE candidate associated with TEL.",
+      "deterministicDigest": "f1f545adbfff47a13961e2f98866124a2b6078b4c07d0f10289596572805764a",
+      "evidenceReferences": [
+        "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'db1df3fe509eae4f465e526c51ec045b2b70511b97f207918cc6ee07b7c7a44a', 'sourceSystemKey': 'TEL'}"
+      ],
+      "priority": 50,
+      "queueTypes": [
+        "WORKORDER_INTENT_QUEUE"
+      ],
+      "reviewReasons": [
+        "WORKORDER_INTENT_REVIEW_REQUIRED"
+      ],
+      "severity": "HIGH",
+      "sourceArtifactId": "c0b1b04d3e1ad992f0f233100d79aae416c1153ad07d58f5e37ca22b5dd6b4fa",
+      "sourceArtifactType": "WORKORDER_INTENT_CANDIDATE",
+      "sourceStage": "A3-04",
+      "sourceSystemKey": "TEL",
+      "title": "TEL WorkOrderIntent review"
+    }
+  ],
+  "decisionQueues": [
+    {
+      "blockingDecisionCount": 45,
+      "decisionItemIds": [
+        "00f59930f5487c5770090311c9fdb0bf1994c04bc8254858057476fb79f937b9",
+        "03844389bf147217f2259b0c92fc9a6f080eb6c3c31facf5e5fcc865dca3b2a3",
+        "0eabe9a6a35b8423d76496c43d1ad4cc580823b7a06cc68b7dc39d83649c651e",
+        "1a70ceb857e36de227e061e6ba75e69732b34fbffeeebe7e448d2a35c6c985e6",
+        "219c5722fedae552a141355a59d84decdd91574ef099156941987a4436786044",
+        "3c7e61e1bea96c33006ceb4afa5dae604e416748d429edc1af3c7596b8c4f890",
+        "3d7d25278d6603f51d7074c9a5e82511e44a9e6ae572fba85e047afc84db6740",
+        "468b82c86e28a34244d8c6bade6eb64947ce74ef10bf1faf7d442d24a88a4a7b",
+        "477bbb2c89e20f91b743808f927db066ea1dbb11a33f834d2ba52a85c52fc850",
+        "4b5fd829706035c891f9a770e72577e34712162f09e7802c50cb64650d18ee72",
+        "54df1e11c75e533678a0c935a548dc610282c25684b6c567404a7298d851e6e6",
+        "60aa1937c042b33992009e8426cac89121e160c26b3c8d3becd3db8bfd3df116",
+        "6105951e8f8cdc2557092b11dfd8ccc3d9ea77f7f67e016f17d725b4122c1985",
+        "611235e783d3860e1bfa3c4379f2a726f02c2184ef8a788e6c2ac6a4a5c52c66",
+        "6a8a8a5f8e4a3b518851527c2ba59896efd863f5fbe11ed03162666ad76a938e",
+        "6b49f645470ed970a1ccd8f4c1971b47bd08058db365ce2f441ae8a2e356fde2",
+        "6ef8751e77444810843b4fa2632633d5292fc5952305c3a3810e7aea929183fc",
+        "770d6dbaf35e13b857af6903985eb796a8e922b7087bac9de82317209570a83f",
+        "79fc3560fd8284602dc149418f8e237cba89afc5534e52dc1256761021dfac5a",
+        "7d79d4662cd1846f87189a667a4611b8e7c2f6eaa83393ed6bcabbf883ed84b5",
+        "827c9c5c33dd9dfa929294f5ec48c4a64d4d3a394e1b0128d2c72c62527b1550",
+        "86bf33f97dff8bcfd4a00ad6281f2bd1947bcb04f7cc0b76a7193a7ca541cdda",
+        "886b9bfd2f020321376d4cc3e6ab774a1aad219039abf74f835661e2e04b91f9",
+        "8d846bf2f2153c26008ba832587389e08d96e5f06d98ad77ec404ddaa77a1ea3",
+        "8ff7a4d3349c11dfa062b509b4fff776ebe1aa8a2d4148dc02c7683b0c98d4d7",
+        "921416f11d969831b8e941439e5d5bafab3ad7bf89eeceb238e346f9141214c9",
+        "948fb786bd37d12da9ec26019d110fba1123a3dbc90f6ddb3c5e5b8d6e77b53f",
+        "94af27fdd1e78c5472ce1267b5f2f2605894f2f9a06021a6211766e6dbea5355",
+        "9644fd5626735ead20d577302879c654a158550ff4cdb9d8d9e6387c233a26fe",
+        "a767c1d68bbd4b11e76424b8118476275b069691406e5167dcb9d9df03c5a3e4",
+        "b74a4d09f7bf0c4d4a4d3d46319daf232a4a25162f214466e3b19558fb4b158c",
+        "b8685bdf4e7ffb23579272884eb700df32f2fdbc5ec1c844e55b3621dffc7d25",
+        "bac5a5c46e001f3e84f6cfa4a82e726d9023a4a76e8be41e2e851a3516740924",
+        "bb11dc25caa5e9a71715d110ba356ec4eea8fef2a3bafe5b92926f4edc4c7818",
+        "c9bdc082c69d8ada95f6ad4871262c73445d3ea36be5102bd2883b723d214db0",
+        "cb750465e3e304c039c71babbed700084cf129cdebca9d5f31d40c715cc004ee",
+        "d2f028af434eb859174fe833d3a2961a79642417c6968a8a29432ecd4ccef27b",
+        "d4a6daa52d2f0a3dec11137865eab052f146ada30b0f4f553a1a78027077f8a0",
+        "d76caf3e8ef5403bab8cd3b62aadb3d260dbe3529d07a855f53e4b4c731b1716",
+        "db57387cf930d7db4ac2afdc605dfa581742751fdc85fd0533cb0f37fe75b5ff",
+        "e5d8bae9ba014e2c1610700c8a68e3a2098d64244b0a092358e916ea786c39af",
+        "f05dc6da056e5db68a03d8133f61e20fefabc6b55df942f98fc3128d88880037",
+        "f35099c85eab09ab5505892f123d17703bf4ef8491983bd5cda82960f6f8cada",
+        "f3c78a73247fdeb7878dc72b0a9884e972f1d70816dc8e7f9e3e1c6a1a703ad2",
+        "f5e019ed5db793f0cf2fe3ba398eeb75541cdbf84c09007976925f90ebccb601",
+        "fa46ad3543b51ae3c68e87ac4a3396afc02db66125bc6cf64d7ca7bc329f55e6"
+      ],
+      "deterministicDigest": "7d1ee1b08f083e80f79a71b74e36312d5d84fd10b3fcb9dca89615203e84d504",
+      "openDecisionCount": 46,
+      "queueId": "aa380f4628b461ce732506cf3119e206657b30a43bc0aa1edc4bf68940b1e796",
+      "queueType": "ALL_PENDING_QUEUE",
+      "severity": "HIGH",
+      "title": "All pending decisions"
+    },
+    {
+      "blockingDecisionCount": 5,
+      "decisionItemIds": [
+        "3c7e61e1bea96c33006ceb4afa5dae604e416748d429edc1af3c7596b8c4f890",
+        "86bf33f97dff8bcfd4a00ad6281f2bd1947bcb04f7cc0b76a7193a7ca541cdda",
+        "cb750465e3e304c039c71babbed700084cf129cdebca9d5f31d40c715cc004ee",
+        "d4a6daa52d2f0a3dec11137865eab052f146ada30b0f4f553a1a78027077f8a0",
+        "f05dc6da056e5db68a03d8133f61e20fefabc6b55df942f98fc3128d88880037"
+      ],
+      "deterministicDigest": "94a5637718733abb154612ad275a742521f448fd27f06008800181fe54f1d7a4",
+      "openDecisionCount": 5,
+      "queueId": "38272593e5432c68dcd718b0911296ba4f1144ce8ef86b649e84a4cb0257130d",
+      "queueType": "SOURCE_SYSTEM_QUEUE",
+      "severity": "HIGH",
+      "title": "Source-system decisions"
+    },
+    {
+      "blockingDecisionCount": 15,
+      "decisionItemIds": [
+        "0eabe9a6a35b8423d76496c43d1ad4cc580823b7a06cc68b7dc39d83649c651e",
+        "468b82c86e28a34244d8c6bade6eb64947ce74ef10bf1faf7d442d24a88a4a7b",
+        "4b5fd829706035c891f9a770e72577e34712162f09e7802c50cb64650d18ee72",
+        "54df1e11c75e533678a0c935a548dc610282c25684b6c567404a7298d851e6e6",
+        "60aa1937c042b33992009e8426cac89121e160c26b3c8d3becd3db8bfd3df116",
+        "6105951e8f8cdc2557092b11dfd8ccc3d9ea77f7f67e016f17d725b4122c1985",
+        "611235e783d3860e1bfa3c4379f2a726f02c2184ef8a788e6c2ac6a4a5c52c66",
+        "6ef8751e77444810843b4fa2632633d5292fc5952305c3a3810e7aea929183fc",
+        "79fc3560fd8284602dc149418f8e237cba89afc5534e52dc1256761021dfac5a",
+        "7d79d4662cd1846f87189a667a4611b8e7c2f6eaa83393ed6bcabbf883ed84b5",
+        "827c9c5c33dd9dfa929294f5ec48c4a64d4d3a394e1b0128d2c72c62527b1550",
+        "948fb786bd37d12da9ec26019d110fba1123a3dbc90f6ddb3c5e5b8d6e77b53f",
+        "b8685bdf4e7ffb23579272884eb700df32f2fdbc5ec1c844e55b3621dffc7d25",
+        "e5d8bae9ba014e2c1610700c8a68e3a2098d64244b0a092358e916ea786c39af",
+        "f3c78a73247fdeb7878dc72b0a9884e972f1d70816dc8e7f9e3e1c6a1a703ad2"
+      ],
+      "deterministicDigest": "1f37554456927ae57489069b4be9630e5cc89d776b765b9ecd7ef4eb11bd883e",
+      "openDecisionCount": 15,
+      "queueId": "a2561725b041cb2fb5bd33b41a2e47d3ada1be777accd8a64f3dd49f666c6184",
+      "queueType": "ASSET_RESOLUTION_QUEUE",
+      "severity": "HIGH",
+      "title": "Asset, point and location resolution decisions"
+    },
+    {
+      "blockingDecisionCount": 10,
+      "decisionItemIds": [
+        "03844389bf147217f2259b0c92fc9a6f080eb6c3c31facf5e5fcc865dca3b2a3",
+        "1a70ceb857e36de227e061e6ba75e69732b34fbffeeebe7e448d2a35c6c985e6",
+        "219c5722fedae552a141355a59d84decdd91574ef099156941987a4436786044",
+        "6a8a8a5f8e4a3b518851527c2ba59896efd863f5fbe11ed03162666ad76a938e",
+        "8ff7a4d3349c11dfa062b509b4fff776ebe1aa8a2d4148dc02c7683b0c98d4d7",
+        "921416f11d969831b8e941439e5d5bafab3ad7bf89eeceb238e346f9141214c9",
+        "a767c1d68bbd4b11e76424b8118476275b069691406e5167dcb9d9df03c5a3e4",
+        "c9bdc082c69d8ada95f6ad4871262c73445d3ea36be5102bd2883b723d214db0",
+        "d2f028af434eb859174fe833d3a2961a79642417c6968a8a29432ecd4ccef27b",
+        "db57387cf930d7db4ac2afdc605dfa581742751fdc85fd0533cb0f37fe75b5ff"
+      ],
+      "deterministicDigest": "ed71cea439d9da6f5e4289a944e71811992eae4bd463f577df1d5c3d5e6fe6e0",
+      "openDecisionCount": 10,
+      "queueId": "8baea863be7a2c5c884676cf90a879929ffd4759072b9ffcaf5ecea5b052645d",
+      "queueType": "ALARM_EVENT_QUEUE",
+      "severity": "HIGH",
+      "title": "Alarm/Event review decisions"
+    },
+    {
+      "blockingDecisionCount": 5,
+      "decisionItemIds": [
+        "00f59930f5487c5770090311c9fdb0bf1994c04bc8254858057476fb79f937b9",
+        "477bbb2c89e20f91b743808f927db066ea1dbb11a33f834d2ba52a85c52fc850",
+        "770d6dbaf35e13b857af6903985eb796a8e922b7087bac9de82317209570a83f",
+        "886b9bfd2f020321376d4cc3e6ab774a1aad219039abf74f835661e2e04b91f9",
+        "bb11dc25caa5e9a71715d110ba356ec4eea8fef2a3bafe5b92926f4edc4c7818"
+      ],
+      "deterministicDigest": "8b5e17eb82bc42e63bfe2ab5f59439a0b3e42c0fae828ab40b043e07fa07568e",
+      "openDecisionCount": 5,
+      "queueId": "ff1fc2bce316211542b761b77e9d58bfb362b16918090d7eb94ee7909549a3cf",
+      "queueType": "FAULTCASE_QUEUE",
+      "severity": "HIGH",
+      "title": "FaultCase candidate decisions"
+    },
+    {
+      "blockingDecisionCount": 5,
+      "decisionItemIds": [
+        "3d7d25278d6603f51d7074c9a5e82511e44a9e6ae572fba85e047afc84db6740",
+        "8d846bf2f2153c26008ba832587389e08d96e5f06d98ad77ec404ddaa77a1ea3",
+        "b74a4d09f7bf0c4d4a4d3d46319daf232a4a25162f214466e3b19558fb4b158c",
+        "d76caf3e8ef5403bab8cd3b62aadb3d260dbe3529d07a855f53e4b4c731b1716",
+        "f35099c85eab09ab5505892f123d17703bf4ef8491983bd5cda82960f6f8cada"
+      ],
+      "deterministicDigest": "8300382fdd5aee3c5d92a7eecba4c3dbed4d6fcf31b260ac17d5779f96820cce",
+      "openDecisionCount": 5,
+      "queueId": "f83a8c1bc081c3e98f7020fa785b5ecfc5ef595e07bd72b4d15d7ac361adcd11",
+      "queueType": "WORKORDER_INTENT_QUEUE",
+      "severity": "HIGH",
+      "title": "WorkOrderIntent decisions"
+    },
+    {
+      "blockingDecisionCount": 5,
+      "decisionItemIds": [
+        "6b49f645470ed970a1ccd8f4c1971b47bd08058db365ce2f441ae8a2e356fde2",
+        "94af27fdd1e78c5472ce1267b5f2f2605894f2f9a06021a6211766e6dbea5355",
+        "9644fd5626735ead20d577302879c654a158550ff4cdb9d8d9e6387c233a26fe",
+        "bac5a5c46e001f3e84f6cfa4a82e726d9023a4a76e8be41e2e851a3516740924",
+        "f5e019ed5db793f0cf2fe3ba398eeb75541cdbf84c09007976925f90ebccb601"
+      ],
+      "deterministicDigest": "5cad5a5f6f006d24206571e954108fbcb0eb92a2f7cbc8ebe23cb987465351db",
+      "openDecisionCount": 5,
+      "queueId": "5cc041f3f7149a674f1c3c455587dadaa4b9d430634ee143e5e54f735c0cb852",
+      "queueType": "EVIDENCE_INVESTIGATION_QUEUE",
+      "severity": "HIGH",
+      "title": "Evidence investigation decisions"
+    },
+    {
+      "blockingDecisionCount": 0,
+      "decisionItemIds": [
+        "fa46ad3543b51ae3c68e87ac4a3396afc02db66125bc6cf64d7ca7bc329f55e6"
+      ],
+      "deterministicDigest": "97721d12b81c251e2ea6ece0561429237c6a8479ca4aada84bf9194f085433ff",
+      "openDecisionCount": 1,
+      "queueId": "dc1be0779eaeb0983043f7ac6523d6889c085301b9fe096192fff84a6ef7cf83",
+      "queueType": "RELEASE_GATE_QUEUE",
+      "severity": "INFO",
+      "title": "Release gate decisions"
+    }
+  ],
+  "defaultPage": {
+    "continuationToken": "93a79b0766aa0595d58c2c27df874fda103ea3fbb7a5bd4503fc3aa98bf7cecb",
+    "deterministicDigest": "d707e3d5638ee38a72e6c9a4850f62da6083f4a99f6247e36698d6afc59378c7",
+    "items": [
+      {
+        "affectedDeviceEvidenceCount": 0,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "ALARM_EVENT_REVIEW_REQUIRED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "03844389bf147217f2259b0c92fc9a6f080eb6c3c31facf5e5fcc865dca3b2a3",
+        "decisionRequired": true,
+        "decisionScope": "ALARM_EVENT_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "ALARM_EVENT_REVIEW",
+        "description": "Operator review is required for the ALARM_EVENT_CANDIDATE candidate associated with ACS.",
+        "deterministicDigest": "7479dba79e26e17fb19c82743f0858380a676dd4eb62625f2ed0c73c22552588",
+        "evidenceReferences": [
+          "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '2b26090a97f80bde8af7ba0658a886bf37d07494c0f0f23fc42ba21ae6530fda', 'sourceSystemKey': 'ACS'}"
+        ],
+        "priority": 30,
+        "queueTypes": [
+          "ALARM_EVENT_QUEUE"
+        ],
+        "reviewReasons": [
+          "ALARM_EVENT_REVIEW_REQUIRED"
+        ],
+        "severity": "HIGH",
+        "sourceArtifactId": "36aeed70d63f983f18758d8f924ecb70449816761ff1bf3551ddbaa402da5235",
+        "sourceArtifactType": "ALARM_EVENT_CANDIDATE",
+        "sourceStage": "A3-01",
+        "sourceSystemKey": "ACS",
+        "title": "ACS alarm/event review"
+      },
+      {
+        "affectedDeviceEvidenceCount": 0,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "ALARM_EVENT_REVIEW_REQUIRED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "219c5722fedae552a141355a59d84decdd91574ef099156941987a4436786044",
+        "decisionRequired": true,
+        "decisionScope": "ALARM_EVENT_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "ALARM_EVENT_REVIEW",
+        "description": "Operator review is required for the ALARM_EVENT_CANDIDATE candidate associated with CCTV.",
+        "deterministicDigest": "9def615f39071166bbdd50902de51bd6bc00ec90b9919407a8636ae3df7903d2",
+        "evidenceReferences": [
+          "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '8886051eedce1be862c858ddb03534a4de000ff25f964d6eccc781930b9cec16', 'sourceSystemKey': 'CCTV'}"
+        ],
+        "priority": 30,
+        "queueTypes": [
+          "ALARM_EVENT_QUEUE"
+        ],
+        "reviewReasons": [
+          "ALARM_EVENT_REVIEW_REQUIRED"
+        ],
+        "severity": "LOW",
+        "sourceArtifactId": "e203e162065fc2e9cac4ef15d9238818fa25c2fd063ef458b44abb6c85bb1ebd",
+        "sourceArtifactType": "ALARM_EVENT_CANDIDATE",
+        "sourceStage": "A3-01",
+        "sourceSystemKey": "CCTV",
+        "title": "CCTV alarm/event review"
+      },
+      {
+        "affectedDeviceEvidenceCount": 0,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "ALARM_EVENT_REVIEW_REQUIRED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "d2f028af434eb859174fe833d3a2961a79642417c6968a8a29432ecd4ccef27b",
+        "decisionRequired": true,
+        "decisionScope": "ALARM_EVENT_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "ALARM_EVENT_REVIEW",
+        "description": "Operator review is required for the ALARM_EVENT_CANDIDATE candidate associated with PA.",
+        "deterministicDigest": "5a06b04d162d489e43e487660948680faa50fc064a93f9812bc5176e1042cfaf",
+        "evidenceReferences": [
+          "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'afdad1549fd06642825c07d2433783222914ecf27b2de141b991a29e57e10c4e', 'sourceSystemKey': 'PA'}"
+        ],
+        "priority": 30,
+        "queueTypes": [
+          "ALARM_EVENT_QUEUE"
+        ],
+        "reviewReasons": [
+          "ALARM_EVENT_REVIEW_REQUIRED"
+        ],
+        "severity": "LOW",
+        "sourceArtifactId": "85dcdb5bde8e72b3bb4e6f1e2f1a3ceea545e1742729253d7e90633472521299",
+        "sourceArtifactType": "ALARM_EVENT_CANDIDATE",
+        "sourceStage": "A3-01",
+        "sourceSystemKey": "PA",
+        "title": "PA alarm/event review"
+      },
+      {
+        "affectedDeviceEvidenceCount": 0,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "ALARM_EVENT_REVIEW_REQUIRED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "c9bdc082c69d8ada95f6ad4871262c73445d3ea36be5102bd2883b723d214db0",
+        "decisionRequired": true,
+        "decisionScope": "ALARM_EVENT_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "ALARM_EVENT_REVIEW",
+        "description": "Operator review is required for the ALARM_EVENT_CANDIDATE candidate associated with RAS.",
+        "deterministicDigest": "c1d0b54733223bba73055baec0a9fa5c56f118f6985b9076bc0e6512a435092e",
+        "evidenceReferences": [
+          "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'cdd2b1cc9930b527a42fc8c04e5a74e28d4eb0f3d29c2ebb1b1e30c0bf92bec0', 'sourceSystemKey': 'RAS'}"
+        ],
+        "priority": 30,
+        "queueTypes": [
+          "ALARM_EVENT_QUEUE"
+        ],
+        "reviewReasons": [
+          "ALARM_EVENT_REVIEW_REQUIRED"
+        ],
+        "severity": "MEDIUM",
+        "sourceArtifactId": "c841cfad2ede70ea0e273378312b5764acb1b5a46966f9dd0f1888d8c83eac86",
+        "sourceArtifactType": "ALARM_EVENT_CANDIDATE",
+        "sourceStage": "A3-01",
+        "sourceSystemKey": "RAS",
+        "title": "RAS alarm/event review"
+      },
+      {
+        "affectedDeviceEvidenceCount": 0,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "ALARM_EVENT_REVIEW_REQUIRED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "6a8a8a5f8e4a3b518851527c2ba59896efd863f5fbe11ed03162666ad76a938e",
+        "decisionRequired": true,
+        "decisionScope": "ALARM_EVENT_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "ALARM_EVENT_REVIEW",
+        "description": "Operator review is required for the ALARM_EVENT_CANDIDATE candidate associated with TEL.",
+        "deterministicDigest": "4ea41720417e2523dbbacf9fc3ce6a7e2e777db8802aaaef53a02aacf36b8537",
+        "evidenceReferences": [
+          "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'db1df3fe509eae4f465e526c51ec045b2b70511b97f207918cc6ee07b7c7a44a', 'sourceSystemKey': 'TEL'}"
+        ],
+        "priority": 30,
+        "queueTypes": [
+          "ALARM_EVENT_QUEUE"
+        ],
+        "reviewReasons": [
+          "ALARM_EVENT_REVIEW_REQUIRED"
+        ],
+        "severity": "MEDIUM",
+        "sourceArtifactId": "78172a5eb0e37b68fcd5b3080773ff60d7554e520c353550c8c4ed15060cd99e",
+        "sourceArtifactType": "ALARM_EVENT_CANDIDATE",
+        "sourceStage": "A3-01",
+        "sourceSystemKey": "TEL",
+        "title": "TEL alarm/event review"
+      },
+      {
+        "affectedDeviceEvidenceCount": 52,
+        "affectedRecordCount": 52,
+        "allowedDecisions": [
+          "APPROVE",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "ALIAS_APPROVAL",
+          "SOURCE_SYSTEM_REVIEW_REQUIRED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "86bf33f97dff8bcfd4a00ad6281f2bd1947bcb04f7cc0b76a7193a7ca541cdda",
+        "decisionRequired": true,
+        "decisionScope": "SOURCE_SYSTEM_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "ALIAS_APPROVAL",
+        "description": "Operator review is required before CCTV source-system evidence can be accepted as approved registry context.",
+        "deterministicDigest": "0e9e036dc2e555febe8c8fba4e047ef6f4ada702b8d5e45449627ce48a150f41",
+        "evidenceReferences": [
+          "{'digest': '700c0aa4873f711e6a0732e56e0e9d67df78be56ef396f52daa10b5c0fe766fa', 'evidenceId': 'ceba5fc20cc1f142a8083ae0edf47f31d74cb445de857a7aa905c895ac30b017', 'evidenceType': 'CLASSIFICATION_BINDING_AGGREGATE', 'provenance': 'ONE-AIRPORT-A1-03 classification bindings', 'resultDigest': '49d8bfa2ece4be806883107bf8c00452af66b35f3a16898a53c8dbb18750faaa', 'sourceProfile': 'airport-source-system-profile-v1', 'sourceRecordCount': 52}"
+        ],
+        "priority": 10,
+        "queueTypes": [
+          "SOURCE_SYSTEM_QUEUE"
+        ],
+        "reviewReasons": [
+          "ALIAS_APPROVAL_REQUIRED"
+        ],
+        "severity": "HIGH",
+        "sourceArtifactId": "c7d4a6079daf6065d504de9c95e100ab9a7da2b0eb66a10497ef49381e6292e0",
+        "sourceArtifactType": "SOURCE_SYSTEM_REVIEW_BINDING",
+        "sourceStage": "A2",
+        "sourceSystemKey": "CCTV",
+        "title": "CCTV Alias approval required"
+      },
+      {
+        "affectedDeviceEvidenceCount": 247,
+        "affectedRecordCount": 247,
+        "allowedDecisions": [
+          "APPROVE",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "ALIAS_APPROVAL",
+          "SOURCE_SYSTEM_REVIEW_REQUIRED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "d4a6daa52d2f0a3dec11137865eab052f146ada30b0f4f553a1a78027077f8a0",
+        "decisionRequired": true,
+        "decisionScope": "SOURCE_SYSTEM_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "ALIAS_APPROVAL",
+        "description": "Operator review is required before PA source-system evidence can be accepted as approved registry context.",
+        "deterministicDigest": "1d5151f056aba314fff8c9b262186f8c60909146b0cd69b9dad59e3a58ced106",
+        "evidenceReferences": [
+          "{'digest': '6da53d802f057618e91b95564f3abee9dab082748ea008e69a81c62c40f21fd6', 'evidenceId': '6f9a9a469a9ad62b5a0d1065bada2f1f9b52cfc0b8132183f1e97f826c1ed461', 'evidenceType': 'CLASSIFICATION_BINDING_AGGREGATE', 'provenance': 'ONE-AIRPORT-A1-03 classification bindings', 'resultDigest': '1dbd5b57a352e475431caeeef6267b79df96f97568ca6f7fb77c37e2734cdea5', 'sourceProfile': 'airport-source-system-profile-v1', 'sourceRecordCount': 247}"
+        ],
+        "priority": 10,
+        "queueTypes": [
+          "SOURCE_SYSTEM_QUEUE"
+        ],
+        "reviewReasons": [
+          "ALIAS_APPROVAL_REQUIRED"
+        ],
+        "severity": "HIGH",
+        "sourceArtifactId": "b335ca7629bf820370221f75f0994e1844964d2dca4a6f027c55444a0d343e82",
+        "sourceArtifactType": "SOURCE_SYSTEM_REVIEW_BINDING",
+        "sourceStage": "A2",
+        "sourceSystemKey": "PA",
+        "title": "PA Alias approval required"
+      },
+      {
+        "affectedDeviceEvidenceCount": 129,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "ASSET_RESOLUTION_REQUIRED",
+          "BLOCKS_DOWNSTREAM_CREATION"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "0eabe9a6a35b8423d76496c43d1ad4cc580823b7a06cc68b7dc39d83649c651e",
+        "decisionRequired": true,
+        "decisionScope": "ASSET_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "ASSET_RESOLUTION",
+        "description": "Operator review is required for ACS before downstream alarm/event decisions can progress.",
+        "deterministicDigest": "5e9c0567e1dfaa264d89189fd9c2d0cbf76524d473c55e2e0cd85307d7b17c6b",
+        "evidenceReferences": [
+          "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '2b26090a97f80bde8af7ba0658a886bf37d07494c0f0f23fc42ba21ae6530fda', 'sourceSystemKey': 'ACS'}"
+        ],
+        "priority": 20,
+        "queueTypes": [
+          "ASSET_RESOLUTION_QUEUE"
+        ],
+        "reviewReasons": [
+          "ASSET_RESOLUTION_REQUIRED"
+        ],
+        "severity": "HIGH",
+        "sourceArtifactId": "cb662b2fcf97830e9331a988271c978a51e39f19014bbc9e26f7317da89a29a1:ASSET_RESOLUTION",
+        "sourceArtifactType": "ALARM_EVENT_ASSET_RESOLUTION_ROW",
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "ACS",
+        "title": "ACS Asset resolution required"
+      },
+      {
+        "affectedDeviceEvidenceCount": 52,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "ASSET_RESOLUTION_REQUIRED",
+          "BLOCKS_DOWNSTREAM_CREATION"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "6105951e8f8cdc2557092b11dfd8ccc3d9ea77f7f67e016f17d725b4122c1985",
+        "decisionRequired": true,
+        "decisionScope": "ASSET_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "ASSET_RESOLUTION",
+        "description": "Operator review is required for CCTV before downstream alarm/event decisions can progress.",
+        "deterministicDigest": "942b127144c08d7a6c4c6c753b4adb892ee33e09d59aa8faf69ce0f2d7756ce6",
+        "evidenceReferences": [
+          "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '8886051eedce1be862c858ddb03534a4de000ff25f964d6eccc781930b9cec16', 'sourceSystemKey': 'CCTV'}"
+        ],
+        "priority": 20,
+        "queueTypes": [
+          "ASSET_RESOLUTION_QUEUE"
+        ],
+        "reviewReasons": [
+          "ASSET_RESOLUTION_REQUIRED"
+        ],
+        "severity": "LOW",
+        "sourceArtifactId": "ec3cf042275b35b6acbb00847866a171fbdcc3121ce8eb8eb503a9660bd3929e:ASSET_RESOLUTION",
+        "sourceArtifactType": "ALARM_EVENT_ASSET_RESOLUTION_ROW",
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "CCTV",
+        "title": "CCTV Asset resolution required"
+      },
+      {
+        "affectedDeviceEvidenceCount": 247,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "ASSET_RESOLUTION_REQUIRED",
+          "BLOCKS_DOWNSTREAM_CREATION"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "611235e783d3860e1bfa3c4379f2a726f02c2184ef8a788e6c2ac6a4a5c52c66",
+        "decisionRequired": true,
+        "decisionScope": "ASSET_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "ASSET_RESOLUTION",
+        "description": "Operator review is required for PA before downstream alarm/event decisions can progress.",
+        "deterministicDigest": "ec851f230645f922e2dfa840e798a0a65b220ace2d0c1c96cd4ea84a945d0cc5",
+        "evidenceReferences": [
+          "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'afdad1549fd06642825c07d2433783222914ecf27b2de141b991a29e57e10c4e', 'sourceSystemKey': 'PA'}"
+        ],
+        "priority": 20,
+        "queueTypes": [
+          "ASSET_RESOLUTION_QUEUE"
+        ],
+        "reviewReasons": [
+          "ASSET_RESOLUTION_REQUIRED"
+        ],
+        "severity": "LOW",
+        "sourceArtifactId": "42177ff0969ee5cf4c90be60f10d0ad762fd251b0920cb091ef1d923ecfcfa19:ASSET_RESOLUTION",
+        "sourceArtifactType": "ALARM_EVENT_ASSET_RESOLUTION_ROW",
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "PA",
+        "title": "PA Asset resolution required"
+      },
+      {
+        "affectedDeviceEvidenceCount": 28,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "ASSET_RESOLUTION_REQUIRED",
+          "BLOCKS_DOWNSTREAM_CREATION"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "f3c78a73247fdeb7878dc72b0a9884e972f1d70816dc8e7f9e3e1c6a1a703ad2",
+        "decisionRequired": true,
+        "decisionScope": "ASSET_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "ASSET_RESOLUTION",
+        "description": "Operator review is required for RAS before downstream alarm/event decisions can progress.",
+        "deterministicDigest": "edb8a9790be1bc3923cb30214a20837452fb2314e666e032e6a4fe9fa02639fe",
+        "evidenceReferences": [
+          "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'cdd2b1cc9930b527a42fc8c04e5a74e28d4eb0f3d29c2ebb1b1e30c0bf92bec0', 'sourceSystemKey': 'RAS'}"
+        ],
+        "priority": 20,
+        "queueTypes": [
+          "ASSET_RESOLUTION_QUEUE"
+        ],
+        "reviewReasons": [
+          "ASSET_RESOLUTION_REQUIRED"
+        ],
+        "severity": "MEDIUM",
+        "sourceArtifactId": "befd205594eddedd190d8a43a3a8e8a0f76944335c176ab850406471dfd116e1:ASSET_RESOLUTION",
+        "sourceArtifactType": "ALARM_EVENT_ASSET_RESOLUTION_ROW",
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "RAS",
+        "title": "RAS Asset resolution required"
+      },
+      {
+        "affectedDeviceEvidenceCount": 14,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "ASSET_RESOLUTION_REQUIRED",
+          "BLOCKS_DOWNSTREAM_CREATION"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "468b82c86e28a34244d8c6bade6eb64947ce74ef10bf1faf7d442d24a88a4a7b",
+        "decisionRequired": true,
+        "decisionScope": "ASSET_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "ASSET_RESOLUTION",
+        "description": "Operator review is required for TEL before downstream alarm/event decisions can progress.",
+        "deterministicDigest": "000ee6576b1ee7c2f5bdd2f8769f04382775d8db98f3cb8fd1084e3ecd699371",
+        "evidenceReferences": [
+          "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'db1df3fe509eae4f465e526c51ec045b2b70511b97f207918cc6ee07b7c7a44a', 'sourceSystemKey': 'TEL'}"
+        ],
+        "priority": 20,
+        "queueTypes": [
+          "ASSET_RESOLUTION_QUEUE"
+        ],
+        "reviewReasons": [
+          "ASSET_RESOLUTION_REQUIRED"
+        ],
+        "severity": "MEDIUM",
+        "sourceArtifactId": "255d12f1ad6a8d88b6f12ee6ca4c60238d2eb184ad92eb4940e67cd228c3981e:ASSET_RESOLUTION",
+        "sourceArtifactType": "ALARM_EVENT_ASSET_RESOLUTION_ROW",
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "TEL",
+        "title": "TEL Asset resolution required"
+      },
+      {
+        "affectedDeviceEvidenceCount": 129,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "APPROVE",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "db57387cf930d7db4ac2afdc605dfa581742751fdc85fd0533cb0f37fe75b5ff",
+        "decisionRequired": true,
+        "decisionScope": "ALARM_EVENT_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "DOWNSTREAM_CREATION_AUTHORIZATION",
+        "description": "Operator authorization is required before any downstream candidate creation is applied for ACS.",
+        "deterministicDigest": "54fd4a6da8033aef614fa7415d1bb921d1c24acd976bef449a4634b85b63d5d5",
+        "evidenceReferences": [
+          "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '2b26090a97f80bde8af7ba0658a886bf37d07494c0f0f23fc42ba21ae6530fda', 'sourceSystemKey': 'ACS'}"
+        ],
+        "priority": 70,
+        "queueTypes": [
+          "ALARM_EVENT_QUEUE"
+        ],
+        "reviewReasons": [
+          "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+        ],
+        "severity": "HIGH",
+        "sourceArtifactId": "cb662b2fcf97830e9331a988271c978a51e39f19014bbc9e26f7317da89a29a1:DOWNSTREAM_CREATION_AUTHORIZATION",
+        "sourceArtifactType": "ALARM_EVENT_ASSET_RESOLUTION_ROW",
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "ACS",
+        "title": "ACS downstream creation authorization"
+      },
+      {
+        "affectedDeviceEvidenceCount": 52,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "APPROVE",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "1a70ceb857e36de227e061e6ba75e69732b34fbffeeebe7e448d2a35c6c985e6",
+        "decisionRequired": true,
+        "decisionScope": "ALARM_EVENT_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "DOWNSTREAM_CREATION_AUTHORIZATION",
+        "description": "Operator authorization is required before any downstream candidate creation is applied for CCTV.",
+        "deterministicDigest": "2f19449337b0ae62360e86e05432b72b67bfdb38bcab95c950c173f934aa950b",
+        "evidenceReferences": [
+          "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '8886051eedce1be862c858ddb03534a4de000ff25f964d6eccc781930b9cec16', 'sourceSystemKey': 'CCTV'}"
+        ],
+        "priority": 70,
+        "queueTypes": [
+          "ALARM_EVENT_QUEUE"
+        ],
+        "reviewReasons": [
+          "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+        ],
+        "severity": "LOW",
+        "sourceArtifactId": "ec3cf042275b35b6acbb00847866a171fbdcc3121ce8eb8eb503a9660bd3929e:DOWNSTREAM_CREATION_AUTHORIZATION",
+        "sourceArtifactType": "ALARM_EVENT_ASSET_RESOLUTION_ROW",
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "CCTV",
+        "title": "CCTV downstream creation authorization"
+      },
+      {
+        "affectedDeviceEvidenceCount": 247,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "APPROVE",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "921416f11d969831b8e941439e5d5bafab3ad7bf89eeceb238e346f9141214c9",
+        "decisionRequired": true,
+        "decisionScope": "ALARM_EVENT_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "DOWNSTREAM_CREATION_AUTHORIZATION",
+        "description": "Operator authorization is required before any downstream candidate creation is applied for PA.",
+        "deterministicDigest": "74568ba8a010043d6d7f0c8c02a89e5058147f3c47d4c26b08227eaf2035befa",
+        "evidenceReferences": [
+          "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'afdad1549fd06642825c07d2433783222914ecf27b2de141b991a29e57e10c4e', 'sourceSystemKey': 'PA'}"
+        ],
+        "priority": 70,
+        "queueTypes": [
+          "ALARM_EVENT_QUEUE"
+        ],
+        "reviewReasons": [
+          "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+        ],
+        "severity": "LOW",
+        "sourceArtifactId": "42177ff0969ee5cf4c90be60f10d0ad762fd251b0920cb091ef1d923ecfcfa19:DOWNSTREAM_CREATION_AUTHORIZATION",
+        "sourceArtifactType": "ALARM_EVENT_ASSET_RESOLUTION_ROW",
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "PA",
+        "title": "PA downstream creation authorization"
+      },
+      {
+        "affectedDeviceEvidenceCount": 28,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "APPROVE",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "8ff7a4d3349c11dfa062b509b4fff776ebe1aa8a2d4148dc02c7683b0c98d4d7",
+        "decisionRequired": true,
+        "decisionScope": "ALARM_EVENT_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "DOWNSTREAM_CREATION_AUTHORIZATION",
+        "description": "Operator authorization is required before any downstream candidate creation is applied for RAS.",
+        "deterministicDigest": "42d59b881f7ccf71bf05d1e76b927b7963254a577f50baa023ef5829255fb638",
+        "evidenceReferences": [
+          "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'cdd2b1cc9930b527a42fc8c04e5a74e28d4eb0f3d29c2ebb1b1e30c0bf92bec0', 'sourceSystemKey': 'RAS'}"
+        ],
+        "priority": 70,
+        "queueTypes": [
+          "ALARM_EVENT_QUEUE"
+        ],
+        "reviewReasons": [
+          "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+        ],
+        "severity": "MEDIUM",
+        "sourceArtifactId": "befd205594eddedd190d8a43a3a8e8a0f76944335c176ab850406471dfd116e1:DOWNSTREAM_CREATION_AUTHORIZATION",
+        "sourceArtifactType": "ALARM_EVENT_ASSET_RESOLUTION_ROW",
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "RAS",
+        "title": "RAS downstream creation authorization"
+      },
+      {
+        "affectedDeviceEvidenceCount": 14,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "APPROVE",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "a767c1d68bbd4b11e76424b8118476275b069691406e5167dcb9d9df03c5a3e4",
+        "decisionRequired": true,
+        "decisionScope": "ALARM_EVENT_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "DOWNSTREAM_CREATION_AUTHORIZATION",
+        "description": "Operator authorization is required before any downstream candidate creation is applied for TEL.",
+        "deterministicDigest": "747cf9ed35138ab43b49cd62be2395c391aa35f46b6dc80457877e33c429d68b",
+        "evidenceReferences": [
+          "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'db1df3fe509eae4f465e526c51ec045b2b70511b97f207918cc6ee07b7c7a44a', 'sourceSystemKey': 'TEL'}"
+        ],
+        "priority": 70,
+        "queueTypes": [
+          "ALARM_EVENT_QUEUE"
+        ],
+        "reviewReasons": [
+          "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+        ],
+        "severity": "MEDIUM",
+        "sourceArtifactId": "255d12f1ad6a8d88b6f12ee6ca4c60238d2eb184ad92eb4940e67cd228c3981e:DOWNSTREAM_CREATION_AUTHORIZATION",
+        "sourceArtifactType": "ALARM_EVENT_ASSET_RESOLUTION_ROW",
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "TEL",
+        "title": "TEL downstream creation authorization"
+      },
+      {
+        "affectedDeviceEvidenceCount": 129,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "ASSET_RESOLUTION_REQUIRED",
+          "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+          "FAULTCASE_REVIEW_REQUIRED",
+          "REGISTRY_APPROVAL_REQUIRED",
+          "SOURCE_SYSTEM_REVIEW_REQUIRED",
+          "WORKORDER_INTENT_REVIEW_REQUIRED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "6b49f645470ed970a1ccd8f4c1971b47bd08058db365ce2f441ae8a2e356fde2",
+        "decisionRequired": true,
+        "decisionScope": "EVIDENCE_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "EVIDENCE_INVESTIGATION_REVIEW",
+        "description": "Operator review is required for the EVIDENCE_INVESTIGATION_CASE candidate associated with ACS.",
+        "deterministicDigest": "a2d8419c8e78b462bb3a7f36dc3871b4bcbe53d6b3412087b9ec446970747057",
+        "evidenceReferences": [],
+        "priority": 60,
+        "queueTypes": [
+          "EVIDENCE_INVESTIGATION_QUEUE"
+        ],
+        "reviewReasons": [
+          "EVIDENCE_INVESTIGATION_REVIEW_REQUIRED"
+        ],
+        "severity": "HIGH",
+        "sourceArtifactId": "4a58e11f3221c8563dd08a72001c36a0a14872a1d98ff99373e73623d1a73b70",
+        "sourceArtifactType": "EVIDENCE_INVESTIGATION_CASE",
+        "sourceStage": "A3-05",
+        "sourceSystemKey": "ACS",
+        "title": "ACS evidence investigation review"
+      },
+      {
+        "affectedDeviceEvidenceCount": 52,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "ALIAS_APPROVAL_REQUIRED",
+          "ASSET_RESOLUTION_REQUIRED",
+          "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+          "FAULTCASE_REVIEW_REQUIRED",
+          "SOURCE_SYSTEM_REVIEW_REQUIRED",
+          "WORKORDER_INTENT_REVIEW_REQUIRED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "bac5a5c46e001f3e84f6cfa4a82e726d9023a4a76e8be41e2e851a3516740924",
+        "decisionRequired": true,
+        "decisionScope": "EVIDENCE_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "EVIDENCE_INVESTIGATION_REVIEW",
+        "description": "Operator review is required for the EVIDENCE_INVESTIGATION_CASE candidate associated with CCTV.",
+        "deterministicDigest": "e2dbcf54c07cedf0b5d0fc9c52391459be5157baef4ea9a558cf669b6af76595",
+        "evidenceReferences": [],
+        "priority": 60,
+        "queueTypes": [
+          "EVIDENCE_INVESTIGATION_QUEUE"
+        ],
+        "reviewReasons": [
+          "EVIDENCE_INVESTIGATION_REVIEW_REQUIRED"
+        ],
+        "severity": "HIGH",
+        "sourceArtifactId": "e835e23c20fb57f54c65b9d9700c34486f648f8bb7ac9bf0c0ab3f26e155e906",
+        "sourceArtifactType": "EVIDENCE_INVESTIGATION_CASE",
+        "sourceStage": "A3-05",
+        "sourceSystemKey": "CCTV",
+        "title": "CCTV evidence investigation review"
+      },
+      {
+        "affectedDeviceEvidenceCount": 247,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "ALIAS_APPROVAL_REQUIRED",
+          "ASSET_RESOLUTION_REQUIRED",
+          "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+          "FAULTCASE_REVIEW_REQUIRED",
+          "SOURCE_SYSTEM_REVIEW_REQUIRED",
+          "WORKORDER_INTENT_REVIEW_REQUIRED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "94af27fdd1e78c5472ce1267b5f2f2605894f2f9a06021a6211766e6dbea5355",
+        "decisionRequired": true,
+        "decisionScope": "EVIDENCE_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "EVIDENCE_INVESTIGATION_REVIEW",
+        "description": "Operator review is required for the EVIDENCE_INVESTIGATION_CASE candidate associated with PA.",
+        "deterministicDigest": "ed7e3a85c0d3d4d42b789bb4c9446c718de616a240388aa4cbe5ad0574d5a3bb",
+        "evidenceReferences": [],
+        "priority": 60,
+        "queueTypes": [
+          "EVIDENCE_INVESTIGATION_QUEUE"
+        ],
+        "reviewReasons": [
+          "EVIDENCE_INVESTIGATION_REVIEW_REQUIRED"
+        ],
+        "severity": "HIGH",
+        "sourceArtifactId": "16e7edb39014974b9cc1b3884ee29af9e96981061135aa56ae06ded148fd8c62",
+        "sourceArtifactType": "EVIDENCE_INVESTIGATION_CASE",
+        "sourceStage": "A3-05",
+        "sourceSystemKey": "PA",
+        "title": "PA evidence investigation review"
+      },
+      {
+        "affectedDeviceEvidenceCount": 28,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "ASSET_RESOLUTION_REQUIRED",
+          "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+          "FAULTCASE_REVIEW_REQUIRED",
+          "REGISTRY_APPROVAL_REQUIRED",
+          "SOURCE_SYSTEM_REVIEW_REQUIRED",
+          "WORKORDER_INTENT_REVIEW_REQUIRED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "9644fd5626735ead20d577302879c654a158550ff4cdb9d8d9e6387c233a26fe",
+        "decisionRequired": true,
+        "decisionScope": "EVIDENCE_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "EVIDENCE_INVESTIGATION_REVIEW",
+        "description": "Operator review is required for the EVIDENCE_INVESTIGATION_CASE candidate associated with RAS.",
+        "deterministicDigest": "a14b9d1292d2f347627342f6dc54da34143bb3effad22b584a0dd390c1e0b477",
+        "evidenceReferences": [],
+        "priority": 60,
+        "queueTypes": [
+          "EVIDENCE_INVESTIGATION_QUEUE"
+        ],
+        "reviewReasons": [
+          "EVIDENCE_INVESTIGATION_REVIEW_REQUIRED"
+        ],
+        "severity": "HIGH",
+        "sourceArtifactId": "571d8e1b0a27af0ce32e9a0101f4fcc74550901b7601936e62d7e998671fab2a",
+        "sourceArtifactType": "EVIDENCE_INVESTIGATION_CASE",
+        "sourceStage": "A3-05",
+        "sourceSystemKey": "RAS",
+        "title": "RAS evidence investigation review"
+      },
+      {
+        "affectedDeviceEvidenceCount": 14,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "ASSET_RESOLUTION_REQUIRED",
+          "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+          "FAULTCASE_REVIEW_REQUIRED",
+          "NAMESPACE_INTERPRETATION_REQUIRED",
+          "SOURCE_SYSTEM_REVIEW_REQUIRED",
+          "WORKORDER_INTENT_REVIEW_REQUIRED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "f5e019ed5db793f0cf2fe3ba398eeb75541cdbf84c09007976925f90ebccb601",
+        "decisionRequired": true,
+        "decisionScope": "EVIDENCE_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "EVIDENCE_INVESTIGATION_REVIEW",
+        "description": "Operator review is required for the EVIDENCE_INVESTIGATION_CASE candidate associated with TEL.",
+        "deterministicDigest": "09fc658981bfc92e960b99ba2fb012d39765f3ea405f9b53c5c047508cc40e41",
+        "evidenceReferences": [],
+        "priority": 60,
+        "queueTypes": [
+          "EVIDENCE_INVESTIGATION_QUEUE"
+        ],
+        "reviewReasons": [
+          "EVIDENCE_INVESTIGATION_REVIEW_REQUIRED"
+        ],
+        "severity": "HIGH",
+        "sourceArtifactId": "a770259a87a43d430df3749226258c6611050c4975035cb344867a6b3191110c",
+        "sourceArtifactType": "EVIDENCE_INVESTIGATION_CASE",
+        "sourceStage": "A3-05",
+        "sourceSystemKey": "TEL",
+        "title": "TEL evidence investigation review"
+      },
+      {
+        "affectedDeviceEvidenceCount": 0,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "ASSET_RESOLUTION_REQUIRED",
+          "BLOCKED_BY_RESOLUTION",
+          "BLOCKED_BY_SOURCE_SYSTEM_REVIEW",
+          "FAULTCASE_CREATION_NOT_AUTHORIZED",
+          "LOCATION_RESOLUTION_REQUIRED",
+          "POINT_RESOLUTION_REQUIRED",
+          "REGISTRY_APPROVAL_REQUIRED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "bb11dc25caa5e9a71715d110ba356ec4eea8fef2a3bafe5b92926f4edc4c7818",
+        "decisionRequired": true,
+        "decisionScope": "FAULTCASE_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "FAULTCASE_CANDIDATE_REVIEW",
+        "description": "Operator review is required for the FAULTCASE_CANDIDATE candidate associated with ACS.",
+        "deterministicDigest": "05c0cef82cce11e3347516b87b233d2503db4469da5eacb0c74bb12e3a73dbc4",
+        "evidenceReferences": [
+          "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '2b26090a97f80bde8af7ba0658a886bf37d07494c0f0f23fc42ba21ae6530fda', 'sourceSystemKey': 'ACS'}"
+        ],
+        "priority": 40,
+        "queueTypes": [
+          "FAULTCASE_QUEUE"
+        ],
+        "reviewReasons": [
+          "FAULTCASE_REVIEW_REQUIRED"
+        ],
+        "severity": "HIGH",
+        "sourceArtifactId": "ba6285ad701ca2b62c97f8265ebbc2e643401e19d5d11c191e1ce35bb308e5cd",
+        "sourceArtifactType": "FAULTCASE_CANDIDATE",
+        "sourceStage": "A3-03",
+        "sourceSystemKey": "ACS",
+        "title": "ACS FaultCase candidate review"
+      },
+      {
+        "affectedDeviceEvidenceCount": 0,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "ALIAS_APPROVAL_REQUIRED",
+          "ASSET_RESOLUTION_REQUIRED",
+          "BLOCKED_BY_RESOLUTION",
+          "BLOCKED_BY_SOURCE_SYSTEM_REVIEW",
+          "FAULTCASE_CREATION_NOT_AUTHORIZED",
+          "LOCATION_RESOLUTION_REQUIRED",
+          "POINT_RESOLUTION_REQUIRED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "770d6dbaf35e13b857af6903985eb796a8e922b7087bac9de82317209570a83f",
+        "decisionRequired": true,
+        "decisionScope": "FAULTCASE_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "FAULTCASE_CANDIDATE_REVIEW",
+        "description": "Operator review is required for the FAULTCASE_CANDIDATE candidate associated with CCTV.",
+        "deterministicDigest": "60a43db1965ad7c67d13265db9c36a6ae47642d22c55a4875d0271f306ec057b",
+        "evidenceReferences": [
+          "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': '8886051eedce1be862c858ddb03534a4de000ff25f964d6eccc781930b9cec16', 'sourceSystemKey': 'CCTV'}"
+        ],
+        "priority": 40,
+        "queueTypes": [
+          "FAULTCASE_QUEUE"
+        ],
+        "reviewReasons": [
+          "FAULTCASE_REVIEW_REQUIRED"
+        ],
+        "severity": "LOW",
+        "sourceArtifactId": "1e997dd9a269db6929fe98f478cfa9ba0f34c1885e827d1654c50f2f48db0551",
+        "sourceArtifactType": "FAULTCASE_CANDIDATE",
+        "sourceStage": "A3-03",
+        "sourceSystemKey": "CCTV",
+        "title": "CCTV FaultCase candidate review"
+      },
+      {
+        "affectedDeviceEvidenceCount": 0,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "ALIAS_APPROVAL_REQUIRED",
+          "ASSET_RESOLUTION_REQUIRED",
+          "BLOCKED_BY_RESOLUTION",
+          "BLOCKED_BY_SOURCE_SYSTEM_REVIEW",
+          "FAULTCASE_CREATION_NOT_AUTHORIZED",
+          "LOCATION_RESOLUTION_REQUIRED",
+          "POINT_RESOLUTION_REQUIRED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "477bbb2c89e20f91b743808f927db066ea1dbb11a33f834d2ba52a85c52fc850",
+        "decisionRequired": true,
+        "decisionScope": "FAULTCASE_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "FAULTCASE_CANDIDATE_REVIEW",
+        "description": "Operator review is required for the FAULTCASE_CANDIDATE candidate associated with PA.",
+        "deterministicDigest": "cb603ef453e87c06739824b540f98af77a135bfb7f92807b394e0f317ef64011",
+        "evidenceReferences": [
+          "{'evidenceType': 'SOURCE_SYSTEM_REGISTRY_REFERENCE', 'provenance': 'OFFLINE_FIXTURE_CANDIDATE_ONLY', 'referenceDigest': 'afdad1549fd06642825c07d2433783222914ecf27b2de141b991a29e57e10c4e', 'sourceSystemKey': 'PA'}"
+        ],
+        "priority": 40,
+        "queueTypes": [
+          "FAULTCASE_QUEUE"
+        ],
+        "reviewReasons": [
+          "FAULTCASE_REVIEW_REQUIRED"
+        ],
+        "severity": "LOW",
+        "sourceArtifactId": "d1545a91ad3bc7745a999afff431bd11cbac54ea4089c2b15994f69b7a756f8a",
+        "sourceArtifactType": "FAULTCASE_CANDIDATE",
+        "sourceStage": "A3-03",
+        "sourceSystemKey": "PA",
+        "title": "PA FaultCase candidate review"
+      }
+    ],
+    "nextContinuationToken": "9230a39eccf4494e7949582da710179f90ec9bcf23946bde12d702e72036165f",
+    "pageSize": 25,
+    "returnedCount": 25,
+    "totalCount": 46
+  },
+  "deterministicDigest": "1f19cbe57a026c82fded7f75c8710453b38c30df70f9858c274f308a7ac6640e",
+  "facets": {
+    "blocking": {
+      "False": 1,
+      "True": 45
+    },
+    "blockingReason": {
+      "ALARM_EVENT_REVIEW_REQUIRED": 5,
+      "ALIAS_APPROVAL": 2,
+      "ALIAS_APPROVAL_REQUIRED": 6,
+      "ASSET_RESOLUTION_REQUIRED": 20,
+      "BLOCKED_BY_FAULTCASE_REVIEW": 5,
+      "BLOCKED_BY_RESOLUTION": 10,
+      "BLOCKED_BY_SOURCE_SYSTEM_REVIEW": 10,
+      "BLOCKS_DOWNSTREAM_CREATION": 15,
+      "DOWNSTREAM_CREATION_NOT_AUTHORIZED": 5,
+      "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED": 5,
+      "FAULTCASE_CREATION_NOT_AUTHORIZED": 5,
+      "FAULTCASE_REVIEW_REQUIRED": 5,
+      "LOCATION_RESOLUTION_REQUIRED": 15,
+      "NAMESPACE_INTERPRETATION": 1,
+      "NAMESPACE_INTERPRETATION_REQUIRED": 3,
+      "POINT_RESOLUTION_REQUIRED": 15,
+      "REGISTRY_APPROVAL": 2,
+      "REGISTRY_APPROVAL_REQUIRED": 6,
+      "SOURCE_SYSTEM_REVIEW_REQUIRED": 10,
+      "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED": 5,
+      "WORKORDER_INTENT_REVIEW_REQUIRED": 5,
+      "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED": 5
+    },
+    "decisionRequired": {
+      "True": 46
+    },
+    "decisionScope": {
+      "ALARM_EVENT_REVIEW": 10,
+      "ASSET_REVIEW": 15,
+      "EVIDENCE_REVIEW": 5,
+      "FAULTCASE_REVIEW": 5,
+      "RELEASE_GATE": 1,
+      "SOURCE_SYSTEM_REVIEW": 5,
+      "WORKORDER_REVIEW": 5
+    },
+    "decisionState": {
+      "PENDING": 45,
+      "READY_FOR_REVIEW": 1
+    },
+    "decisionType": {
+      "ALARM_EVENT_REVIEW": 5,
+      "ALIAS_APPROVAL": 2,
+      "ASSET_RESOLUTION": 5,
+      "DOWNSTREAM_CREATION_AUTHORIZATION": 5,
+      "EVIDENCE_INVESTIGATION_REVIEW": 5,
+      "FAULTCASE_CANDIDATE_REVIEW": 5,
+      "LOCATION_RESOLUTION": 5,
+      "NAMESPACE_INTERPRETATION": 1,
+      "POINT_RESOLUTION": 5,
+      "REGISTRY_APPROVAL": 2,
+      "RELEASE_GATE_REVIEW": 1,
+      "WORKORDER_INTENT_REVIEW": 5
+    },
+    "priority": {
+      "10": 5,
+      "20": 15,
+      "30": 5,
+      "40": 5,
+      "50": 5,
+      "60": 5,
+      "70": 5,
+      "90": 1
+    },
+    "queueType": {
+      "ALARM_EVENT_QUEUE": 1,
+      "ALL_PENDING_QUEUE": 1,
+      "ASSET_RESOLUTION_QUEUE": 1,
+      "EVIDENCE_INVESTIGATION_QUEUE": 1,
+      "FAULTCASE_QUEUE": 1,
+      "RELEASE_GATE_QUEUE": 1,
+      "SOURCE_SYSTEM_QUEUE": 1,
+      "WORKORDER_INTENT_QUEUE": 1
+    },
+    "reviewReason": {
+      "ALARM_EVENT_REVIEW_REQUIRED": 5,
+      "ALIAS_APPROVAL_REQUIRED": 2,
+      "ASSET_RESOLUTION_REQUIRED": 5,
+      "DOWNSTREAM_CREATION_NOT_AUTHORIZED": 5,
+      "EVIDENCE_INVESTIGATION_REVIEW_REQUIRED": 5,
+      "FAULTCASE_REVIEW_REQUIRED": 5,
+      "LOCATION_RESOLUTION_REQUIRED": 5,
+      "NAMESPACE_INTERPRETATION_REQUIRED": 1,
+      "POINT_RESOLUTION_REQUIRED": 5,
+      "REGISTRY_APPROVAL_REQUIRED": 2,
+      "RELEASE_GATE_PASS_PUSH_DISABLED": 1,
+      "WORKORDER_INTENT_REVIEW_REQUIRED": 5
+    },
+    "severity": {
+      "HIGH": 21,
+      "INFO": 1,
+      "LOW": 12,
+      "MEDIUM": 12
+    },
+    "sourceStage": {
+      "A2": 5,
+      "A3-01": 5,
+      "A3-02": 20,
+      "A3-03": 5,
+      "A3-04": 5,
+      "A3-05": 5,
+      "A3-07": 1
+    },
+    "sourceSystemKey": {
+      "ACS": 9,
+      "CCTV": 9,
+      "PA": 9,
+      "RAS": 9,
+      "TEL": 9
+    }
+  },
+  "filters": {
+    "blocking": {
+      "field": "blocking",
+      "options": [
+        false,
+        true
+      ]
+    },
+    "blockingReason": {
+      "field": "blockingReason",
+      "options": [
+        "ALARM_EVENT_REVIEW_REQUIRED",
+        "ALIAS_APPROVAL",
+        "ALIAS_APPROVAL_REQUIRED",
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKED_BY_FAULTCASE_REVIEW",
+        "BLOCKED_BY_RESOLUTION",
+        "BLOCKED_BY_SOURCE_SYSTEM_REVIEW",
+        "BLOCKS_DOWNSTREAM_CREATION",
+        "DOWNSTREAM_CREATION_NOT_AUTHORIZED",
+        "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+        "FAULTCASE_CREATION_NOT_AUTHORIZED",
+        "FAULTCASE_REVIEW_REQUIRED",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "NAMESPACE_INTERPRETATION",
+        "NAMESPACE_INTERPRETATION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED",
+        "REGISTRY_APPROVAL",
+        "REGISTRY_APPROVAL_REQUIRED",
+        "SOURCE_SYSTEM_REVIEW_REQUIRED",
+        "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED",
+        "WORKORDER_INTENT_REVIEW_REQUIRED",
+        "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED"
+      ]
+    },
+    "decisionRequired": {
+      "field": "decisionRequired",
+      "options": [
+        true
+      ]
+    },
+    "decisionScope": {
+      "field": "decisionScope",
+      "options": [
+        "ALARM_EVENT_REVIEW",
+        "ASSET_REVIEW",
+        "EVIDENCE_REVIEW",
+        "FAULTCASE_REVIEW",
+        "RELEASE_GATE",
+        "SOURCE_SYSTEM_REVIEW",
+        "WORKORDER_REVIEW"
+      ]
+    },
+    "decisionState": {
+      "field": "decisionState",
+      "options": [
+        "PENDING",
+        "READY_FOR_REVIEW"
+      ]
+    },
+    "decisionType": {
+      "field": "decisionType",
+      "options": [
+        "ALARM_EVENT_REVIEW",
+        "ALIAS_APPROVAL",
+        "ASSET_RESOLUTION",
+        "DOWNSTREAM_CREATION_AUTHORIZATION",
+        "EVIDENCE_INVESTIGATION_REVIEW",
+        "FAULTCASE_CANDIDATE_REVIEW",
+        "LOCATION_RESOLUTION",
+        "NAMESPACE_INTERPRETATION",
+        "POINT_RESOLUTION",
+        "REGISTRY_APPROVAL",
+        "RELEASE_GATE_REVIEW",
+        "WORKORDER_INTENT_REVIEW"
+      ]
+    },
+    "priority": {
+      "field": "priority",
+      "options": [
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70,
+        90
+      ]
+    },
+    "queueType": {
+      "field": "queueType",
+      "options": [
+        "ALARM_EVENT_QUEUE",
+        "ALL_PENDING_QUEUE",
+        "ASSET_RESOLUTION_QUEUE",
+        "EVIDENCE_INVESTIGATION_QUEUE",
+        "FAULTCASE_QUEUE",
+        "RELEASE_GATE_QUEUE",
+        "SOURCE_SYSTEM_QUEUE",
+        "WORKORDER_INTENT_QUEUE"
+      ]
+    },
+    "reviewReason": {
+      "field": "reviewReason",
+      "options": [
+        "ALARM_EVENT_REVIEW_REQUIRED",
+        "ALIAS_APPROVAL_REQUIRED",
+        "ASSET_RESOLUTION_REQUIRED",
+        "DOWNSTREAM_CREATION_NOT_AUTHORIZED",
+        "EVIDENCE_INVESTIGATION_REVIEW_REQUIRED",
+        "FAULTCASE_REVIEW_REQUIRED",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "NAMESPACE_INTERPRETATION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED",
+        "REGISTRY_APPROVAL_REQUIRED",
+        "RELEASE_GATE_PASS_PUSH_DISABLED",
+        "WORKORDER_INTENT_REVIEW_REQUIRED"
+      ]
+    },
+    "severity": {
+      "field": "severity",
+      "options": [
+        "HIGH",
+        "INFO",
+        "LOW",
+        "MEDIUM"
+      ]
+    },
+    "sourceStage": {
+      "field": "sourceStage",
+      "options": [
+        "A2",
+        "A3-01",
+        "A3-02",
+        "A3-03",
+        "A3-04",
+        "A3-05",
+        "A3-07"
+      ]
+    },
+    "sourceSystemKey": {
+      "field": "sourceSystemKey",
+      "options": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ]
+    }
+  },
+  "generatedAtPolicy": "DETERMINISTIC_NO_VOLATILE_TIMESTAMP",
+  "implementationStatus": "OPERATOR_REVIEW_DECISION_LAYER_FOUNDATION_COMPLETE",
+  "profileId": "airport-operator-review-decision-profile-v1",
+  "projectionId": "70926132265a85511f1391115aa726f2ea55a0e86defa7ff635c052e26f0bf66",
+  "readinessOutcome": "OPERATOR_REVIEW_DECISION_QUEUE_COMPLETE_PENDING_OPERATOR_ACTION",
+  "sourceArtifactReferences": [
+    {
+      "artifactType": "A3_READINESS_RELEASE_GATE",
+      "deterministicDigest": "25c9802f282ffaf826c620d55ad96956af36a9a114db52f64029c9cc620eabd1",
+      "digest": "2b53aee526fe94b5ee6590c923b8288ae4472836163ffa038519882186ca0e39",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-a3-readiness-release-gate.v1.json"
+    },
+    {
+      "artifactType": "ALARM_EVENT_ASSET_RESOLUTION_REVIEW",
+      "deterministicDigest": "627d39a1075441098b7f80ed2e14d72f45e9a87b4621880c687287802943a503",
+      "digest": "9c5c5ee17a0dfc71f5ed6ad1895d76d6957e22a2801dceb056764ee9f18a36d8",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-alarm-event-asset-resolution-review.v1.json"
+    },
+    {
+      "artifactType": "ALARM_EVENT_INTAKE_CANDIDATES",
+      "deterministicDigest": "43f78c9f7f2992cdb19f732fd2be3aa1c0e4b9350ccc99111b95e2bb047eb507",
+      "digest": "06c466609dbfebee938229f14bcf9e6c9d21c653cc5f45fb3831ec0d4bc3edf1",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-alarm-event-intake-candidates.v1.json"
+    },
+    {
+      "artifactType": "EVIDENCE_ADAPTER_CONTRACT",
+      "deterministicDigest": "d97eaa8a16fe69ff089b03a5e9faebe9480df3282bc21beb88e212ded47fb311",
+      "digest": "fc5634b18dd6c739a7d2f6acb6dfe786537caefeb465837d0177e8bad6cdf96b",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-evidence-adapter-contract.v1.json"
+    },
+    {
+      "artifactType": "EVIDENCE_INVESTIGATION",
+      "deterministicDigest": "69ccd6cd34546d76586f163018ae83db1f6571d39700b3fbf5265fa263353c87",
+      "digest": "6c555ebc74ef50ab79f5c2cddc1e10eb2973075023df25e9946d3963991369f0",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-evidence-investigation.v1.json"
+    },
+    {
+      "artifactType": "INTEGRATION_HEALTH",
+      "deterministicDigest": "cc72837435168769309609c288edc3444728e1a3b67ed07f4edfe04a0751bbc9",
+      "digest": "9cc890eb9c59906dc0ac7c72c09806c4b9c4feb5a242f31174adbff53570ab25",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-integration-health.v1.json"
+    },
+    {
+      "artifactType": "SOURCE_SYSTEM_REVIEW",
+      "deterministicDigest": "852c7ff7f9cbba823a2d1021c16115400d8b0a7c01dec9dbc17cd992d0c1a332",
+      "digest": "7bb2526f6fd82463a87a395ef7224a1b4148a29893d4d9b3e1b616ee4041609d",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-source-system-review.v1.json"
+    },
+    {
+      "artifactType": "UCONSOLE_ALARM_EVENT_OPERATIONS",
+      "deterministicDigest": "2c62180dc0e2f869852bf7fa7b92aba64670dd7f70b5a73bd427ff5438e18fbb",
+      "digest": "7dc810ba56f6cea0b8d7dc8c584bc8131e9b5f92f51878af0e72650d065bdb96",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-uconsole-alarm-event-operations.v1.json"
+    },
+    {
+      "artifactType": "UCONSOLE_INTEGRATION_HEALTH",
+      "deterministicDigest": "ccd54f7f03ef8d447e79d7289999922a6e1ae5147bd17ee7d5def2d866a2481e",
+      "digest": "88d62bea9e8ab55eca402f404fdc279976b503a677a6c12408b8bf084b5e40e9",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-uconsole-integration-health.v1.json"
+    },
+    {
+      "artifactType": "UFMS_FAULTCASE_CANDIDATES",
+      "deterministicDigest": "4100680943a8f8bf93cc9782b62d08c40c2d0954f00e783a098e03f7f8c4d08f",
+      "digest": "bad7fd4417844538c00963dfcba7cfd335963e03fb80420f577b3f3532b5f97a",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-faultcase-candidates.v1.json"
+    },
+    {
+      "artifactType": "WORKORDER_INTENT_CANDIDATES",
+      "deterministicDigest": "bf3a184aad58b297545c107b143332834003818d53bf78429a0c5f07d72a8c10",
+      "digest": "948403767ad917604f187941735372c683568b36612ece02333395671dd16343",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-workorder-intent-candidates.v1.json"
+    }
+  ],
+  "summary": {
+    "affectedSourceSystemCount": 5,
+    "airportSpecific": false,
+    "alarmEventReviewDecisionCount": 5,
+    "apiEnabled": false,
+    "approvalWriteCount": 0,
+    "assetResolutionDecisionCount": 5,
+    "blockingDecisionCount": 45,
+    "canonicalWriteCount": 0,
+    "containsCustomerAssetIdentifiers": false,
+    "crossIndustry": true,
+    "databaseWriteCount": 0,
+    "decisionGroupCount": 8,
+    "decisionItemCount": 46,
+    "decisionQueueCount": 8,
+    "decisionWriteCount": 0,
+    "downstreamCreationAuthorizationDecisionCount": 5,
+    "evidenceInvestigationDecisionCount": 5,
+    "faultCaseReviewDecisionCount": 5,
+    "frontendEnabled": false,
+    "locationResolutionDecisionCount": 5,
+    "nonBlockingDecisionCount": 1,
+    "pendingDecisionCount": 46,
+    "pointResolutionDecisionCount": 5,
+    "productionActivationAllowed": false,
+    "pushAllowed": false,
+    "releaseGateDecisionCount": 1,
+    "runtimeActivationAllowed": false,
+    "sourceSystemRegistryDecisionCount": 5,
+    "totalDeviceEvidenceCount": 470,
+    "workOrderIntentReviewDecisionCount": 5
+  }
+}
