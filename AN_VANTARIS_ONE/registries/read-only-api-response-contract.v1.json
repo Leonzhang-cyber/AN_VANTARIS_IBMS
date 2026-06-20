@@ -1,0 +1,30 @@
+{
+  "apiEnabled": false,
+  "airportSpecific": false,
+  "auditWriteCount": 0,
+  "authority": "ONE-AIRPORT-A7-02",
+  "canonicalWriteCount": 0,
+  "containsCustomerAssetIdentifiers": false,
+  "contractVersion": "read-only-api-response-contract.v1",
+  "crossIndustry": true,
+  "databaseAccessEnabled": false,
+  "databaseWriteCount": 0,
+  "decisionWriteCount": 0,
+  "description": "Read-only API response contract and validation gate for Airport API skeleton endpoints.",
+  "frontendEnabled": false,
+  "implementationStatus": "READ_ONLY_API_RESPONSE_CONTRACT_AND_VALIDATION_GATE_COMPLETE",
+  "productionActivationAllowed": false,
+  "productionApiAllowed": false,
+  "pushAllowed": false,
+  "readOnly": true,
+  "readinessOutcome": "READ_ONLY_API_RESPONSE_CONTRACT_READY_FOR_FUTURE_ROUTE_IMPLEMENTATION",
+  "runtimeActivationAllowed": false,
+  "sourceArtifacts": [
+    "airport-read-only-api-skeleton.v1.json",
+    "airport-api-frontend-implementation-readiness-gate.v1.json",
+    "airport-api-frontend-readiness-contract.v1.json",
+    "airport-operations-console-package.v1.json",
+    "airport-operations-console-handoff-gate.v1.json"
+  ],
+  "writeOperationEnabledCount": 0
+}
