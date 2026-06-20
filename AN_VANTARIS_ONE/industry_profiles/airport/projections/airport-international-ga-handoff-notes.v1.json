@@ -1,0 +1,770 @@
+{
+  "authority": "ONE-AIRPORT-GA-03",
+  "boundaryStatement": {
+    "apiProductionAllowed": false,
+    "approvalExecutionAllowed": false,
+    "customerIdentifierLeakageAllowed": false,
+    "databaseWriteAllowed": false,
+    "deterministicDigest": "a9354d3cd8ff1c16c77c63fdc4fcc6592482c0ba16e84154782646ce5ce805d5",
+    "frontendProductionAllowed": false,
+    "productionActivationAllowed": false,
+    "pushAllowed": false,
+    "runtimeActivationAllowed": false,
+    "statementId": "airport-international-ga-handoff-boundary-v1",
+    "tagAllowed": false
+  },
+  "contractVersion": "international-ga-handoff-notes.v1",
+  "deterministicDigest": "a9c6a422dda785534e01f857e48c5a9c036f3f1098f99bf3bb2b8b5e8e4bdeff",
+  "engineeringHandoffSections": [
+    {
+      "deterministicDigest": "ea3189003de185a3b29b55c562c1376db3e450a7abc865516d9d9712a4b52d13",
+      "engineeringArea": "READ_ONLY_API_ROUTE_IMPLEMENTATION",
+      "implementationAllowedNow": false,
+      "nextPhaseAllowed": true,
+      "requiredBoundaries": [
+        "NO_DATABASE_WRITES",
+        "NO_RUNTIME_ACTIVATION",
+        "NO_PRODUCTION_ACTIVATION",
+        "NO_APPROVAL_EXECUTION",
+        "NO_PUSH_TAG"
+      ],
+      "sectionId": "a2308d9dca89ae73ef77dece36281f9a5cb700ba76f5dae3db75813f16ceeffa",
+      "summary": "Allowed as future read-only route work; no production API activation.",
+      "title": "Read-only API route implementation"
+    },
+    {
+      "deterministicDigest": "49ab4bcfd98441c95be4766bf84626d3af0f6e039374e869e68923932c6ceed4",
+      "engineeringArea": "READ_ONLY_FRONTEND_IMPLEMENTATION",
+      "implementationAllowedNow": false,
+      "nextPhaseAllowed": true,
+      "requiredBoundaries": [
+        "NO_DATABASE_WRITES",
+        "NO_RUNTIME_ACTIVATION",
+        "NO_PRODUCTION_ACTIVATION",
+        "NO_APPROVAL_EXECUTION",
+        "NO_PUSH_TAG"
+      ],
+      "sectionId": "aa2afc574ee44740b41d859ffc7146b5808a3835648247e8d6d163a14cabd609",
+      "summary": "Allowed as future read-only UI work; no production frontend activation.",
+      "title": "Read-only frontend implementation"
+    },
+    {
+      "deterministicDigest": "19e76a2c0dd936077bd4ce8e5b81eb310be14463a0dde9a569deac8031179aaa",
+      "engineeringArea": "OPERATOR_DECISION_EXECUTION_FUTURE_PHASE",
+      "implementationAllowedNow": false,
+      "nextPhaseAllowed": false,
+      "requiredBoundaries": [
+        "NO_DATABASE_WRITES",
+        "NO_RUNTIME_ACTIVATION",
+        "NO_PRODUCTION_ACTIVATION",
+        "NO_APPROVAL_EXECUTION",
+        "NO_PUSH_TAG"
+      ],
+      "sectionId": "9e6e7c8777ee3cf38809e22e393f2b72c8cbd987dd0970ca53db78d3e3d52698",
+      "summary": "Not allowed in this package; requires explicit future authorization.",
+      "title": "Operator decision execution"
+    },
+    {
+      "deterministicDigest": "74d014a2e8cec0056bd3b99edcc369fe11c57cc4eb3bab6e00e69a032d3bc211",
+      "engineeringArea": "RUNTIME_ACTIVATION_FUTURE_PHASE",
+      "implementationAllowedNow": false,
+      "nextPhaseAllowed": false,
+      "requiredBoundaries": [
+        "NO_DATABASE_WRITES",
+        "NO_RUNTIME_ACTIVATION",
+        "NO_PRODUCTION_ACTIVATION",
+        "NO_APPROVAL_EXECUTION",
+        "NO_PUSH_TAG"
+      ],
+      "sectionId": "e8fc1da678e87fd6565c129a840f5ac67061a1670c7c050e305ff51038ecf36e",
+      "summary": "Not allowed in this package.",
+      "title": "Runtime activation"
+    },
+    {
+      "deterministicDigest": "a0203922f966afdf6a811fc801d0af59c8ce6412dce1618ce70e34f25d56145c",
+      "engineeringArea": "PRODUCTION_DEPLOYMENT_FUTURE_PHASE",
+      "implementationAllowedNow": false,
+      "nextPhaseAllowed": false,
+      "requiredBoundaries": [
+        "NO_DATABASE_WRITES",
+        "NO_RUNTIME_ACTIVATION",
+        "NO_PRODUCTION_ACTIVATION",
+        "NO_APPROVAL_EXECUTION",
+        "NO_PUSH_TAG"
+      ],
+      "sectionId": "4eddeb1f3565bd5f6edcf2f44881e4bb0c69e8bc6b16836d37f2a34a95fd6e22",
+      "summary": "Not allowed in this package.",
+      "title": "Production deployment"
+    },
+    {
+      "deterministicDigest": "52a0d255178d1550e04b23ad3cba20567ac79a7f6be4af3e05ebbea03171e0bf",
+      "engineeringArea": "PUSH_TAG_RELEASE_FUTURE_PHASE",
+      "implementationAllowedNow": false,
+      "nextPhaseAllowed": false,
+      "requiredBoundaries": [
+        "NO_DATABASE_WRITES",
+        "NO_RUNTIME_ACTIVATION",
+        "NO_PRODUCTION_ACTIVATION",
+        "NO_APPROVAL_EXECUTION",
+        "NO_PUSH_TAG"
+      ],
+      "sectionId": "c8a3e5497a418719e6ecf0087135606ae9cbd4f20c0bda1242453c2ea030633f",
+      "summary": "Not allowed unless explicitly instructed by the user.",
+      "title": "Push and tag release"
+    }
+  ],
+  "generatedAtPolicy": "DETERMINISTIC_NO_VOLATILE_TIMESTAMP",
+  "handoffGates": [
+    {
+      "blocking": true,
+      "deterministicDigest": "5ead767d91000d0374e4cd5189960e4a074e0e5fb0476beff12c59d8f73bacac",
+      "gateId": "G01_RELEASE_NOTES_COMPLETE",
+      "gateName": "Release notes complete",
+      "reasonCodes": [
+        "RELEASE_NOTES_PRESENT"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "3a87032c191e6a17b99670c9601a1027e750ccacbb2ce7cd61f5e3c0a2e32fd5",
+      "gateId": "G02_STAKEHOLDER_HANDOFF_COMPLETE",
+      "gateName": "Stakeholder handoff complete",
+      "reasonCodes": [
+        "SEVEN_STAKEHOLDER_SECTIONS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "fc65e3c3777234c76cda0bc45d6551e3d207aef50c287ea86b374200f4908406",
+      "gateId": "G03_ENGINEERING_HANDOFF_COMPLETE",
+      "gateName": "Engineering handoff complete",
+      "reasonCodes": [
+        "SIX_ENGINEERING_SECTIONS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "c29e1af0f4a6765cc633bd8fc004317a5c3e52000c2bb91859181fef2256b017",
+      "gateId": "G04_VALIDATION_COMMAND_SET_COMPLETE",
+      "gateName": "Validation command set complete",
+      "reasonCodes": [
+        "TWENTY_ONE_VALIDATION_COMMANDS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "c004bd68b90dfc2e1add8baa6dbb35f43c2e5b78ef631697f5bc699d22b694f0",
+      "gateId": "G05_KNOWN_WARNINGS_COMPLETE",
+      "gateName": "Known warnings complete",
+      "reasonCodes": [
+        "FIVE_NON_BLOCKING_WARNINGS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "a07c1385104aa538fd6381b3ee9d2ec5aa7e75521ab7dc29691a8f1464cff820",
+      "gateId": "G06_BOUNDARY_STATEMENT_COMPLETE",
+      "gateName": "Boundary statement complete",
+      "reasonCodes": [
+        "ALL_RESTRICTED_FLAGS_FALSE"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "da39ba2c528180d3f9a6e9843983a280ae83fa05b50eb2a6a8328a26d6e70bd7",
+      "gateId": "G07_NEXT_PHASE_PLAN_COMPLETE",
+      "gateName": "Next phase plan complete",
+      "reasonCodes": [
+        "SIX_NEXT_PHASES"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "3bea83561bc158593fa94842ceed7f9d22ec353696c142d9f5e92e6ac88f44fc",
+      "gateId": "G08_RELEASE_METADATA_COMPLETE",
+      "gateName": "Release metadata complete",
+      "reasonCodes": [
+        "ACTIVE_HEAD_AND_ARTIFACTS_RECORDED"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "073bab9236fdb6432168e6c420d311db76325a4b260a922fc63fb40900475029",
+      "gateId": "G09_GA_PACKAGE_DEPENDENCY",
+      "gateName": "GA package dependency",
+      "reasonCodes": [
+        "INTERNATIONAL_GA_RELEASE_PACKAGE_PASS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "81cc0ba5096b3b1dd113128b2f3df728304582d33673b7cc403d632db08bafb1",
+      "gateId": "G10_GA_RELEASE_GATE_DEPENDENCY",
+      "gateName": "GA release gate dependency",
+      "reasonCodes": [
+        "INTERNATIONAL_GA_READINESS_PASS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "01cdf3815e4cbdd464eba9b26c00fc5268293dfe7594036a918be4e661258d75",
+      "gateId": "G11_NO_ACTIVE_STAGE_TERMINOLOGY",
+      "gateName": "No active superseded terminology",
+      "reasonCodes": [
+        "ACTIVE_GA03_TERMINOLOGY_PASS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "d08dc7474139dc3ee219cf8600f3ea2c93b397c033b0dab1cc349fdf6be38c71",
+      "gateId": "G12_DETERMINISTIC_OUTPUT",
+      "gateName": "Deterministic output",
+      "reasonCodes": [
+        "REPEATED_RUNNER_BYTE_IDENTICAL"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "d33b98b6cd0495212bf5c266f535d22db2e3287b083e20945c29606ec7daa201",
+      "gateId": "G13_HANDOFF_DECISION",
+      "gateName": "Handoff decision",
+      "reasonCodes": [
+        "READY_FOR_HANDOFF"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    }
+  ],
+  "handoffNotesId": "eabc9435427eeaf4f8a474d0c7af241e0fd972d35bc26a81d82baaf74a169f38",
+  "implementationStatus": "INTERNATIONAL_GA_HANDOFF_NOTES_AND_RELEASE_NOTES_FREEZE_COMPLETE",
+  "knownWarnings": [
+    {
+      "blocking": false,
+      "description": "Existing legacy warnings are known and unchanged.",
+      "deterministicDigest": "9217d7871772902d227f240b4b41df49fd00701c42c536eca5cf39c322729dd7",
+      "mitigation": "Keep existing boundary baseline visible in release handoff.",
+      "severity": "LOW",
+      "title": "Boundary validator legacy warnings",
+      "warningId": "845120ae7bce98dcc50bbba32d6c01d4d06209032b491e9d4f5897f4b49a8909",
+      "warningType": "BOUNDARY_VALIDATOR_LEGACY_WARNINGS"
+    },
+    {
+      "blocking": false,
+      "description": "Production activation is intentionally disabled.",
+      "deterministicDigest": "eaf2d06ee35dc87137b4f65ce4f896f2c54b6c47036c424c6e880a22ac971bd5",
+      "mitigation": "Require explicit future authorization before activation.",
+      "severity": "INFO",
+      "title": "No production activation in this release",
+      "warningId": "0b2e13df7b019ac9c5ed1d5d8e7b077aaa37925a4da4c6e88b931c9bcf8c8d35",
+      "warningType": "NO_PRODUCTION_ACTIVATION_IN_THIS_RELEASE"
+    },
+    {
+      "blocking": false,
+      "description": "This release freezes readiness and handoff notes; it does not implement runtime API or frontend behavior.",
+      "deterministicDigest": "3619dfbdc77d27219d0fa4e04c1df42331a60089b77c33a934c0f6f1959e396d",
+      "mitigation": "Plan read-only implementation in future phases.",
+      "severity": "INFO",
+      "title": "No real API/frontend runtime in this release",
+      "warningId": "757f9c5f90070666c1294358ce8500ffe2f7b5b1907c07a25f87466ce3eedf7e",
+      "warningType": "NO_REAL_API_FRONTEND_RUNTIME_IN_THIS_RELEASE"
+    },
+    {
+      "blocking": false,
+      "description": "46 pending decisions remain operator-review candidates, not applied approvals.",
+      "deterministicDigest": "80c3e9b6cded041e0bbe615c85cb23a2f5f41dacadf09e610bdbe9897c075422",
+      "mitigation": "Use future authorized operator decision workflow.",
+      "severity": "LOW",
+      "title": "Decisions remain pending",
+      "warningId": "1f98da5823cd1b684423dadda2c43c6fd902e7a518947dae4eb338ae7245d272",
+      "warningType": "DECISIONS_REMAIN_PENDING"
+    },
+    {
+      "blocking": false,
+      "description": "historical POC-named artifacts are compatibility-only; active release uses International GA terminology",
+      "deterministicDigest": "d3aea443b5b9331cb277a5d56e4e2605a0edf03f327b72862c57c3825606abe1",
+      "mitigation": "Keep active artifacts on International GA naming.",
+      "severity": "INFO",
+      "title": "Historical compatibility artifacts",
+      "warningId": "39743d7437d7d0a100d8a5e224ccb863f41436b96806dd758ac623a5e316439c",
+      "warningType": "HISTORICAL_COMPATIBILITY_ARTIFACTS"
+    }
+  ],
+  "nextPhasePlan": [
+    {
+      "allowed": true,
+      "allowedScope": [
+        "Read-only GET route planning and implementation"
+      ],
+      "blockedScope": [
+        "Production API activation",
+        "Mutation endpoints"
+      ],
+      "deterministicDigest": "96021c13ab923b3c969182417037bdb39366b263c879f59f0b94edbfc9033e92",
+      "phaseKey": "READ_ONLY_API_ROUTE_IMPLEMENTATION",
+      "planId": "daf0a9f928d011567993f9c82af779a8cf2c40aef28eda813114172076b52be5",
+      "prerequisiteArtifactKeys": [
+        "GA_RELEASE_PACKAGE",
+        "READ_ONLY_API_RELEASE_GATE"
+      ],
+      "title": "Read-only API route implementation"
+    },
+    {
+      "allowed": true,
+      "allowedScope": [
+        "Read-only frontend implementation planning"
+      ],
+      "blockedScope": [
+        "Production frontend activation",
+        "Mutation interactions"
+      ],
+      "deterministicDigest": "09ddb4cbf3cdeebbbaf0eabca29d60e2f7b9e19f7cab8725db93cf912ea013c4",
+      "phaseKey": "READ_ONLY_FRONTEND_IMPLEMENTATION",
+      "planId": "86c029454ba48f13c830c378d347748a70e9323f2183e8f82963b584f074533c",
+      "prerequisiteArtifactKeys": [
+        "GA_RELEASE_PACKAGE",
+        "READ_ONLY_FRONTEND_RELEASE_GATE"
+      ],
+      "title": "Read-only frontend implementation"
+    },
+    {
+      "allowed": false,
+      "allowedScope": [],
+      "blockedScope": [
+        "Approval execution",
+        "Decision writes"
+      ],
+      "deterministicDigest": "c7e343af77d001fa00e6fd0d018c924b192f22e98705c1a7f991b83fe06d741e",
+      "phaseKey": "OPERATOR_DECISION_EXECUTION",
+      "planId": "aecc7d19148f468c1a027739d6c1b2ac4f9a11a3b1f79b93befb3c6d2a9e0dbe",
+      "prerequisiteArtifactKeys": [
+        "OPERATOR_REVIEW_RELEASE_GATE"
+      ],
+      "title": "Operator decision execution"
+    },
+    {
+      "allowed": false,
+      "allowedScope": [],
+      "blockedScope": [
+        "Live polling",
+        "Connector runtime",
+        "Alarm runtime"
+      ],
+      "deterministicDigest": "19e019331d30f9658e7355f1a6cce1a9ca45ec3bc2067f662fba70d6c8f7fe95",
+      "phaseKey": "RUNTIME_ACTIVATION",
+      "planId": "6304909429f20ff09839cd2bf537f9292c4e4ef704d15c2034c594051dd2ed91",
+      "prerequisiteArtifactKeys": [
+        "BOUNDARY_AUTHORIZATION"
+      ],
+      "title": "Runtime activation"
+    },
+    {
+      "allowed": false,
+      "allowedScope": [],
+      "blockedScope": [
+        "Production deployment",
+        "Production activation"
+      ],
+      "deterministicDigest": "08dcab2c17486f6b4e0519c42c4ab94d83f73301dab064d5d625fc0b92fdb9ff",
+      "phaseKey": "PRODUCTION_DEPLOYMENT",
+      "planId": "80049b30a2499b4928e65c1c7c11d3b49cc0c1a568f861e0c7f969a1cdd76046",
+      "prerequisiteArtifactKeys": [
+        "DEPLOYMENT_AUTHORIZATION"
+      ],
+      "title": "Production deployment"
+    },
+    {
+      "allowed": false,
+      "allowedScope": [],
+      "blockedScope": [
+        "Git push",
+        "Release tag"
+      ],
+      "deterministicDigest": "81f0ede5d442adc5bd1494b9f4d653e584e5b69cd4bdb979f1af2590e5ad7400",
+      "phaseKey": "PUSH_AND_TAG_RELEASE",
+      "planId": "aa7bbbf8d11feb7f479ecb72563f3c28264bd56579ceab0a442089461da8aeba",
+      "prerequisiteArtifactKeys": [
+        "EXPLICIT_USER_INSTRUCTION"
+      ],
+      "title": "Push and tag release"
+    }
+  ],
+  "profileId": "airport-international-ga-handoff-notes-profile-v1",
+  "readinessOutcome": "INTERNATIONAL_GA_HANDOFF_NOTES_READY_FOR_STAKEHOLDER_AND_ENGINEERING_HANDOFF",
+  "releaseMetadata": {
+    "activeHeadReference": "b6138c7",
+    "branch": "main",
+    "deterministicDigest": "8377fd928285b6c61d16134642abe0ac0e822c3d4abb8f72ee34b64691740a8f",
+    "metadataId": "e6b27fb1b49257703906bc3b209e8ecde09ff67356c4b3d01af54f845c21dbbb",
+    "packageArtifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-international-ga-release-candidate-package.v1.json",
+    "pushAllowed": false,
+    "releaseCandidateAllowed": true,
+    "releaseGateArtifactPath": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-international-ga-release-gate.v1.json",
+    "releasePackageDecision": "INTERNATIONAL_GA_RELEASE_PACKAGE_PASS",
+    "tagAllowed": false
+  },
+  "releaseNotes": {
+    "deterministicDigest": "a06c73aa7b1882189f663f1191ba673a7543aea2bd084ed00178f2fdb57c33ef",
+    "includedBusinessCapabilities": [
+      "Airport Asset Review",
+      "Source System Registry",
+      "Integration Health",
+      "Alarm Event Intake",
+      "Asset Resolution Review",
+      "FaultCase Candidates",
+      "WorkOrder Intent Candidates",
+      "Evidence Investigation",
+      "UConsole Alarm Event Operations",
+      "Operator Review Decision Queue",
+      "Operator Policy Guard",
+      "Airport Operations Console Package",
+      "API Readiness Contract",
+      "Read-only API Skeleton",
+      "Read-only Frontend Skeleton"
+    ],
+    "includedStageGroups": [
+      "A1 Asset Intake / Review Projection",
+      "A2 Source System / Integration Health",
+      "A3 Alarm \u2192 Fault \u2192 Work \u2192 Evidence Projection",
+      "A4 Operator Review Decision Layer",
+      "A5 Airport Operations Console Package",
+      "A6 API / Frontend Readiness Contract and Gate",
+      "A7 Read-only API Skeleton / Contract / Mock / Release Gate",
+      "A8 Read-only Frontend Skeleton / Page Contract / Gate",
+      "GA-01 International GA terminology alignment",
+      "GA-02 International GA release package and validation matrix"
+    ],
+    "readinessStatement": "Ready for stakeholder and engineering handoff; production activation remains disabled until explicitly authorized.",
+    "releaseCandidateName": "VANTARIS_ONE_AIRPORT_INTERNATIONAL_GA_READY_RC",
+    "releaseNotesId": "5bc98157772b2805a2fa852334895534af5a5e1724fbefff969d79304447c25d",
+    "releaseSummary": "Airport industry solution package is frozen as an International GA-ready read-only foundation with production-grade readiness gates and explicit runtime, production, write, push, and tag boundaries.",
+    "releaseTitle": "VANTARIS ONE Airport International GA-ready Read-only Release Candidate",
+    "releaseType": "INTERNATIONAL_GA_READY_READ_ONLY_FOUNDATION"
+  },
+  "sourceArtifactReferences": [
+    {
+      "artifactType": "GA_PACKAGE",
+      "deterministicDigest": "4a9dabfe12bdb06304b35834b5bd780573809eef68bce1a69710270be3d5b004",
+      "digest": "fa8ef4394853522c8ff0e16e953aef0fd379804d8c117355e136b0c5127f29c8",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-international-ga-release-candidate-package.v1.json"
+    },
+    {
+      "artifactType": "GA_RELEASE_GATE",
+      "deterministicDigest": "5d9a2bf742c928e3b287232ce59196c08a61cc2df8595eeeb2dbb6cc2b837294",
+      "digest": "a573e3591efad937c72d66e7273370fe6b1f9f8f7adc8f07d23ee4b8e88cadcf",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-international-ga-release-gate.v1.json"
+    }
+  ],
+  "stakeholderHandoffSections": [
+    {
+      "audience": "PRODUCT_OWNER",
+      "decisionRequired": false,
+      "deterministicDigest": "7584d588b897e7c0e4c5cc378be3960e044aa040b7a2b7d9f4a3d9b4e9a90787",
+      "includedArtifactKeys": [
+        "GA_RELEASE_PACKAGE",
+        "GA_RELEASE_GATE"
+      ],
+      "sectionId": "3c50b328eacc32c77e79333900c3b4aa3e210ae7a706498ea23c2fd3b519d517",
+      "summary": "Release candidate is ready for International GA stakeholder review.",
+      "title": "Product owner release posture"
+    },
+    {
+      "audience": "ENGINEERING",
+      "decisionRequired": false,
+      "deterministicDigest": "b61f65c06c55c830fec241fb39789bac7a86f456fb0314f2a6d19f7f0ead2471",
+      "includedArtifactKeys": [
+        "VALIDATION_COMMAND_SET",
+        "BOUNDARY_STATEMENT"
+      ],
+      "sectionId": "90a8418a0bdbdf83485de901b7c7df552af37143bd986ba3d9cbb7369ad45424",
+      "summary": "Read-only API and frontend planning can proceed within frozen boundaries.",
+      "title": "Engineering implementation handoff"
+    },
+    {
+      "audience": "API_TEAM",
+      "decisionRequired": false,
+      "deterministicDigest": "142bf838f0377dac31931ab92e722e49f75a560e8c070f889f1ba5a8b8863915",
+      "includedArtifactKeys": [
+        "READ_ONLY_API_RELEASE_GATE"
+      ],
+      "sectionId": "6be9254002df067b38bfde5861faeb8e98c69a54bab4cddf1294722bdbfec95b",
+      "summary": "Read-only route implementation is a future implementation phase; production API remains blocked.",
+      "title": "API team handoff"
+    },
+    {
+      "audience": "FRONTEND_TEAM",
+      "decisionRequired": false,
+      "deterministicDigest": "67e0b489bdec9a510096e89312742bf198014397dd9010a44046373fbf6a09d6",
+      "includedArtifactKeys": [
+        "READ_ONLY_FRONTEND_RELEASE_GATE"
+      ],
+      "sectionId": "93f8ceea8562fda4898c93c6dd61b5b37af109efa9d941dc769bab1050893770",
+      "summary": "Read-only frontend implementation is a future implementation phase; production frontend remains blocked.",
+      "title": "Frontend team handoff"
+    },
+    {
+      "audience": "QA_VALIDATION",
+      "decisionRequired": false,
+      "deterministicDigest": "6a7e8da4c35b1fccec83eb851ef684f9e6a7d3ef1a1b9210996facb08ee3a7fa",
+      "includedArtifactKeys": [
+        "VALIDATION_COMMAND_SET"
+      ],
+      "sectionId": "f57fb9d2f23425b443658affe5de7468b556ba704ef1af25416c50cb740465b1",
+      "summary": "Twenty-one required validation commands are frozen for handoff.",
+      "title": "QA validation command set"
+    },
+    {
+      "audience": "DEPLOYMENT_TEAM",
+      "decisionRequired": true,
+      "deterministicDigest": "f35a2fa04bdbc0c55bcc25e37384800ade1804f69c87923039990cbdd8e545cc",
+      "includedArtifactKeys": [
+        "BOUNDARY_STATEMENT"
+      ],
+      "sectionId": "7074f4fcccedae84b9be537163cb7425a7dbb0801793480c727eeefb0be7af50",
+      "summary": "Deployment, push, tag, runtime, and production activation are not authorized by this package.",
+      "title": "Deployment boundary"
+    },
+    {
+      "audience": "CUSTOMER_TECHNICAL_REVIEW",
+      "decisionRequired": false,
+      "deterministicDigest": "009eec7c8d69dacbf52e203ee0b9db4b1caeb9576c70e365cff69a2f15c0b83d",
+      "includedArtifactKeys": [
+        "RELEASE_NOTES",
+        "KNOWN_WARNINGS"
+      ],
+      "sectionId": "8b1467b8e50aeeb83b997e127d23c7576984dde21846bab1581d469b029c8842",
+      "summary": "Customer-facing technical review can inspect read-only release notes without customer identifier leakage.",
+      "title": "Customer technical review"
+    }
+  ],
+  "summary": {
+    "airportSpecific": false,
+    "apiProductionAllowed": false,
+    "approvalExecutionAllowed": false,
+    "artifactInventoryCount": 30,
+    "blockingDecisionCount": 45,
+    "blockingGateFailureCount": 0,
+    "blockingKnownWarningCount": 0,
+    "businessCapabilityCount": 15,
+    "containsCustomerAssetIdentifiers": false,
+    "crossIndustry": true,
+    "databaseWriteAllowed": false,
+    "decisionItemCount": 46,
+    "engineeringHandoffSectionCount": 6,
+    "frontendProductionAllowed": false,
+    "handoffGateCount": 13,
+    "handoffNotesFrozen": true,
+    "internationalGaPackageAllowed": true,
+    "internationalGaReadinessAllowed": true,
+    "knownWarningCount": 5,
+    "nextPhasePlanCount": 6,
+    "passedHandoffGateCount": 13,
+    "pendingDecisionCount": 46,
+    "productionActivationAllowed": false,
+    "pushAllowed": false,
+    "readyForHandoff": true,
+    "releaseCandidateAllowed": true,
+    "requiredValidationCommandCount": 21,
+    "runtimeActivationAllowed": false,
+    "stageInventoryCount": 9,
+    "stakeholderHandoffSectionCount": 7,
+    "tagAllowed": false,
+    "totalDeviceEvidenceCount": 470,
+    "unitTestMatrixCount": 9,
+    "validationCommandCount": 21,
+    "validatorMatrixCount": 20
+  },
+  "validationCommandSet": [
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-airport-international-ga-release-package.py",
+      "commandId": "62574dee33d1f507c7f3effbb6355c8ade91c5e3b60ac2e7d14b09daa5b0a7e7",
+      "deterministicDigest": "444c1e753cd56d301c1c6810295c4a2dd0d5ba78f6252f98045ef857d1ecf4bc",
+      "expectedMarker": "ONE_AIRPORT_GA_02_INTERNATIONAL_GA_RELEASE_CANDIDATE_PACKAGING_AND_VALIDATION_MATRIX_PASS",
+      "requiredForHandoff": true,
+      "validationArea": "GA-02"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-airport-international-ga-release-gate.py",
+      "commandId": "566e70eb50e774a4a38507aa9a9e5a305b20665827bcfc51c660c3cae4c61037",
+      "deterministicDigest": "d5f5b55263cdc739ecbd3cf0e7359e4c194e26a58a6b9d681ec29ef8d1b9bd0b",
+      "expectedMarker": "ONE_AIRPORT_GA_01_ALIGN_AIRPORT_RELEASE_TERMINOLOGY_WITH_INTERNATIONAL_GA_PASS",
+      "requiredForHandoff": true,
+      "validationArea": "GA-01"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-airport-read-only-frontend-release-gate.py",
+      "commandId": "316bc9b8f2b5adb361d134101be73d1af0136145c2472c7805651567f59e5747",
+      "deterministicDigest": "a4d0d0189e3e105ee4e885c16714c2c58982d986571da21b38a8e7d7603b7fac",
+      "expectedMarker": "ONE_AIRPORT_A8_03_READ_ONLY_FRONTEND_IMPLEMENTATION_RELEASE_GATE_PASS",
+      "requiredForHandoff": true,
+      "validationArea": "A8"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-airport-read-only-frontend-page-contract.py",
+      "commandId": "67de369f3d7d88d61f4221f18c3a275e7580c148469a860eef3fc6a0a9d7b175",
+      "deterministicDigest": "a63b02bb47f61c6e8bdcc6cfd359496a9c1add9709af11eb62141e6f61463d1c",
+      "expectedMarker": "ONE_AIRPORT_A8_02_READ_ONLY_FRONTEND_PAGE_CONTRACT_AND_LOCAL_SMOKE_GATE_PASS",
+      "requiredForHandoff": true,
+      "validationArea": "A8"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-airport-read-only-frontend-skeleton.py",
+      "commandId": "859ca2c9b9064c66a989fed458b2f31654a9e50bba2bfe91abc89a331cd2cb52",
+      "deterministicDigest": "336f0ae43f324635118fe9160627f27c7f3440cc6ea0074146751354d3edb734",
+      "expectedMarker": "ONE_AIRPORT_A8_01_READ_ONLY_FRONTEND_SKELETON_FOUNDATION_PASS",
+      "requiredForHandoff": true,
+      "validationArea": "A8"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-airport-read-only-api-release-gate.py",
+      "commandId": "cbfd1378f4a3eae16d53e57e456a1100f89f7938ca317a3f76ae4e28e1e4f4f7",
+      "deterministicDigest": "fb36241a96089bacaf7dcb27cd16514403d07338abedfe30576cdf4873270c59",
+      "expectedMarker": "ONE_AIRPORT_A7_04_READ_ONLY_API_IMPLEMENTATION_RELEASE_GATE_PASS",
+      "requiredForHandoff": true,
+      "validationArea": "A7"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-airport-read-only-api-mock-route-contract.py",
+      "commandId": "24b96d075d3d98c35880b4fe146f5ac08d6ff2fda058c89ec340b8c4fddf4963",
+      "deterministicDigest": "3ed9932247385728189d608e8fc50ea44ee6436c12d82baa0f4bf63210c57706",
+      "expectedMarker": "ONE_AIRPORT_A7_03_READ_ONLY_API_MOCK_ROUTE_CONTRACT_AND_LOCAL_SMOKE_GATE_PASS",
+      "requiredForHandoff": true,
+      "validationArea": "A7"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-airport-read-only-api-response-contract.py",
+      "commandId": "3cf8a932a80406cda222958f0e73cbfe6247bc37de0953e334bd2375b5eedc5c",
+      "deterministicDigest": "567553c1a07f3f113ff68cbb077a282e6ee1b18bbfa9dc3f153c125f4542d655",
+      "expectedMarker": "ONE_AIRPORT_A7_02_READ_ONLY_API_RESPONSE_CONTRACT_AND_VALIDATION_GATE_PASS",
+      "requiredForHandoff": true,
+      "validationArea": "A7"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-airport-read-only-api-skeleton.py",
+      "commandId": "ff114fe4623788d9f168bbebfa44b8953bdcdb58927d5df5286004c73612831d",
+      "deterministicDigest": "50b5b16da977e1d7d430a6dd7861e931f35dafd14c94afe3c8a14a58039f49e2",
+      "expectedMarker": "ONE_AIRPORT_A7_01_READ_ONLY_API_SKELETON_FOUNDATION_PASS",
+      "requiredForHandoff": true,
+      "validationArea": "A7"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-airport-api-frontend-implementation-gate.py",
+      "commandId": "06205964a25e20f2c9de469d1f095b285b4ab68c7dbf2cd9b0ebce8a95c62d68",
+      "deterministicDigest": "36697656a5cb0acaeb836dccb7361e55ec47c3f06a47dc3e3ec8015269b56a63",
+      "expectedMarker": "ONE_AIRPORT_A6_02_API_FRONTEND_IMPLEMENTATION_READINESS_RELEASE_GATE_PASS",
+      "requiredForHandoff": true,
+      "validationArea": "A6"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-airport-api-frontend-readiness-contract.py",
+      "commandId": "b6f914b6c470406f2b69b477c6cac9bff31d77900fe24081183ef6072ae562d8",
+      "deterministicDigest": "0c3c459f8987dfa75c866c26fd93cd2d6db12fe337cbe82110cea7b5866e45b6",
+      "expectedMarker": "ONE_AIRPORT_A6_01_API_FRONTEND_READINESS_CONTRACT_FREEZE_PASS",
+      "requiredForHandoff": true,
+      "validationArea": "A6"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-airport-operations-console-handoff-gate.py",
+      "commandId": "08798a2131e43f6db04826df13fba3bd4e929ccbf5cb34f4101516e3c214ba9f",
+      "deterministicDigest": "d5d6e91adbed82c72cd4e9a0a3c7f7ff10b6c55f3ddbc05e2d6c882adb468681",
+      "expectedMarker": "ONE_AIRPORT_A5_02_AIRPORT_CONSOLE_PACKAGE_READINESS_AND_HANDOFF_GATE_PASS",
+      "requiredForHandoff": true,
+      "validationArea": "A5"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-airport-operations-console-package.py",
+      "commandId": "33c57555ce0dc97b685c469c3997314af62e4b88e94920d6c51670794b4fa565",
+      "deterministicDigest": "14a3a9d6cc6addad660b2f52e2f015321ed402df95d62cf53f6a6ba1b3d0fd27",
+      "expectedMarker": "ONE_AIRPORT_A5_01_READ_ONLY_AIRPORT_OPERATIONS_CONSOLE_PACKAGE_FOUNDATION_PASS",
+      "requiredForHandoff": true,
+      "validationArea": "A5"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-airport-a4-readiness-release-gate.py",
+      "commandId": "d67aabdcfed31517eb963541effb1977dc104599d6122496915ce2b0d80c0ace",
+      "deterministicDigest": "510d57e2233432b41c098852db415f31cc00306ebf94c8f1387a93db3e001182",
+      "expectedMarker": "ONE_AIRPORT_A4_04_OPERATOR_REVIEW_READINESS_AND_RELEASE_GATE_PASS",
+      "requiredForHandoff": true,
+      "validationArea": "A4"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-airport-a3-readiness-release-gate.py",
+      "commandId": "b96e944463cb2cf95bb99a83b85082f7d8e4db893c66e1c0025356bc0c11921c",
+      "deterministicDigest": "4e1d779149984c986300a3d4451c18c2c60e93d46bbd4052d3893a4418608ae6",
+      "expectedMarker": "ONE_AIRPORT_A3_07_A3_READINESS_AGGREGATION_AND_RELEASE_GATE_PASS",
+      "requiredForHandoff": true,
+      "validationArea": "A3"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-uconsole-operator-review-queue-projection.py",
+      "commandId": "62ca0340e9e47a0f0e1b506eba6824412307eee820da627eb5c8bd90825b1179",
+      "deterministicDigest": "a3c470a8d6b4a3f7793ff6c635aa1e8b5833e629dcbe4020e42aed10c9bca5bf",
+      "expectedMarker": "ONE_AIRPORT_A4_02_OPERATOR_REVIEW_UCONSOLE_QUEUE_PROJECTION_PASS",
+      "requiredForHandoff": true,
+      "validationArea": "A4"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-uconsole-alarm-event-operations-projection.py",
+      "commandId": "d3735cf07a4fe5cccbd8366d9be22f974ac3bc6498cf7d68f15bc02665374d50",
+      "deterministicDigest": "f1ffe19ef2848bf78bae609d7b4b6ca917417ca1e6ae8c20296e3a8263392636",
+      "expectedMarker": "ONE_AIRPORT_A3_06_READ_ONLY_UCONSOLE_ALARM_EVENT_OPERATIONS_PROJECTION_PASS",
+      "requiredForHandoff": true,
+      "validationArea": "A3"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-uconsole-integration-health-projection.py",
+      "commandId": "e17c901d15598ee817e554a9538b4a6da709113e36971b4de186ab9d7022f6d5",
+      "deterministicDigest": "1d519061aedcf5ae30828ea32b27e4469fa36419648cd4c3f016f71616efcbe7",
+      "expectedMarker": "ONE_AIRPORT_A2_05_READ_ONLY_UCONSOLE_INTEGRATION_HEALTH_PROJECTION_PASS",
+      "requiredForHandoff": true,
+      "validationArea": "A2"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-airport-source-system-review.py",
+      "commandId": "96eb516b38afea59dc980cef4e955bcbb1a66952e6ae48268d7d3b61e0411a60",
+      "deterministicDigest": "4330ac42fc9a784d32aef61510f229b4ac0007412db6d7a373d736ed40d97cb8",
+      "expectedMarker": "ONE_AIRPORT_A2_02_SOURCE_SYSTEM_EVIDENCE_BINDING_AND_REVIEW_PROJECTION_PASS",
+      "requiredForHandoff": true,
+      "validationArea": "A1"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-source-system-registry.py",
+      "commandId": "429843059a251b3f92d099335e3cf46ca7740933ea06803046f779b5c474e016",
+      "deterministicDigest": "43e44765af73bb0416f5f6edfc998c8c72a1f67e48acbedac76094373ae6dd5d",
+      "expectedMarker": "ONE_AIRPORT_A2_01_GENERIC_SOURCE_SYSTEM_REGISTRY_FOUNDATION_PASS",
+      "requiredForHandoff": true,
+      "validationArea": "A1"
+    },
+    {
+      "command": "PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-boundaries.py",
+      "commandId": "70b474233634cb165dd82483fdc5ad0dfba8d692a1812195589fa256df32e496",
+      "deterministicDigest": "c92893bf44ee3b233cead411f471594ba39029bb7bb4d2532ab6c5f20ba5b2a0",
+      "expectedMarker": "ONE_BOUNDARY_BASELINE_PASS",
+      "requiredForHandoff": true,
+      "validationArea": "BOUNDARY"
+    }
+  ]
+}

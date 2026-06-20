@@ -1,0 +1,19 @@
+{
+  "apiProductionAllowed": false,
+  "approvalExecutionAllowed": false,
+  "authority": "ONE-AIRPORT-GA-03",
+  "contractVersion": "international-ga-handoff-notes.v1",
+  "crossIndustry": true,
+  "databaseWriteAllowed": false,
+  "description": "International GA handoff notes and release notes freeze.",
+  "frontendProductionAllowed": false,
+  "handoffNotesFrozen": true,
+  "implementationStatus": "INTERNATIONAL_GA_HANDOFF_NOTES_AND_RELEASE_NOTES_FREEZE_COMPLETE",
+  "productionActivationAllowed": false,
+  "pushAllowed": false,
+  "readinessOutcome": "INTERNATIONAL_GA_HANDOFF_NOTES_READY_FOR_STAKEHOLDER_AND_ENGINEERING_HANDOFF",
+  "readyForHandoff": true,
+  "releaseCandidateAllowed": true,
+  "runtimeActivationAllowed": false,
+  "tagAllowed": false
+}
