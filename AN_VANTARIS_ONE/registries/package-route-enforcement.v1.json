@@ -267,6 +267,42 @@
       ]
     },
     {
+      "frontendRouteId": "FROUTE-1FCE20C4DFB1",
+      "routePath": "/one/airport/systems-integration-health",
+      "packageId": "PKG-UCONSOLE",
+      "owningModule": "UConsole",
+      "targetAccessClass": "BUSINESS_ROUTE",
+      "authenticationRequired": true,
+      "requiredPermissions": [
+        "platform:read"
+      ],
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "tenantScopeRequired": true,
+      "siteScopeRequired": false,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "VISIBLE_WHEN_AUTHORIZED",
+      "lockPagePolicy": "GOVERNED_PACKAGE_LOCK_PAGE",
+      "diagnosticFallback": "AUTHORIZED_STATUS_OR_DIAGNOSTICS",
+      "backendApiPolicyReferences": [],
+      "auditPolicy": "AUDIT_DENIALS_AND_SENSITIVE_ACTIONS",
+      "compatibilityStage": "CURRENT_TARGET",
+      "implementationStatus": "MULTIPLE_CONTROLS_REQUIRED",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "ONE-A5-P0-07",
+      "reviewReason": [],
+      "notes": [
+        "Target metadata only; frontend and backend runtime enforcement are not implemented by ONE-A5-P0-06.",
+        "Missing controls: PERMISSION_METADATA, PACKAGE_METADATA, DIRECT_URL_ENFORCEMENT"
+      ]
+    },
+    {
       "frontendRouteId": "FROUTE-2A1386B18C7A",
       "routePath": "/:pathMatch(.*)*",
       "packageId": "PKG-UCONSOLE",
@@ -307,6 +343,42 @@
       ]
     },
     {
+      "frontendRouteId": "FROUTE-3C2CD4A55D48",
+      "routePath": "/one/airport/evidence-investigation",
+      "packageId": "PKG-UCONSOLE",
+      "owningModule": "UConsole",
+      "targetAccessClass": "BUSINESS_ROUTE",
+      "authenticationRequired": true,
+      "requiredPermissions": [
+        "platform:read"
+      ],
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "tenantScopeRequired": true,
+      "siteScopeRequired": false,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "VISIBLE_WHEN_AUTHORIZED",
+      "lockPagePolicy": "GOVERNED_PACKAGE_LOCK_PAGE",
+      "diagnosticFallback": "AUTHORIZED_STATUS_OR_DIAGNOSTICS",
+      "backendApiPolicyReferences": [],
+      "auditPolicy": "AUDIT_DENIALS_AND_SENSITIVE_ACTIONS",
+      "compatibilityStage": "CURRENT_TARGET",
+      "implementationStatus": "MULTIPLE_CONTROLS_REQUIRED",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "ONE-A5-P0-07",
+      "reviewReason": [],
+      "notes": [
+        "Target metadata only; frontend and backend runtime enforcement are not implemented by ONE-A5-P0-06.",
+        "Missing controls: PERMISSION_METADATA, PACKAGE_METADATA, DIRECT_URL_ENFORCEMENT"
+      ]
+    },
+    {
       "frontendRouteId": "FROUTE-3F4199646E7A",
       "routePath": "/umms/maintenance",
       "packageId": "PKG-UMMS",
@@ -343,6 +415,42 @@
       "notes": [
         "Target metadata only; frontend and backend runtime enforcement are not implemented by ONE-A5-P0-06.",
         "Missing controls: PERMISSION_METADATA, PACKAGE_METADATA, DIRECT_URL_ENFORCEMENT, BACKEND_POLICY_DEPENDENCY"
+      ]
+    },
+    {
+      "frontendRouteId": "FROUTE-4C68A3FF7AE6",
+      "routePath": "/one/airport/maintenance-work-orders",
+      "packageId": "PKG-UCONSOLE",
+      "owningModule": "UConsole",
+      "targetAccessClass": "BUSINESS_ROUTE",
+      "authenticationRequired": true,
+      "requiredPermissions": [
+        "platform:read"
+      ],
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "tenantScopeRequired": true,
+      "siteScopeRequired": false,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "VISIBLE_WHEN_AUTHORIZED",
+      "lockPagePolicy": "GOVERNED_PACKAGE_LOCK_PAGE",
+      "diagnosticFallback": "AUTHORIZED_STATUS_OR_DIAGNOSTICS",
+      "backendApiPolicyReferences": [],
+      "auditPolicy": "AUDIT_DENIALS_AND_SENSITIVE_ACTIONS",
+      "compatibilityStage": "CURRENT_TARGET",
+      "implementationStatus": "MULTIPLE_CONTROLS_REQUIRED",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "ONE-A5-P0-07",
+      "reviewReason": [],
+      "notes": [
+        "Target metadata only; frontend and backend runtime enforcement are not implemented by ONE-A5-P0-06.",
+        "Missing controls: PERMISSION_METADATA, PACKAGE_METADATA, DIRECT_URL_ENFORCEMENT"
       ]
     },
     {
@@ -582,6 +690,42 @@
       ]
     },
     {
+      "frontendRouteId": "FROUTE-7DBC8F6C7C08",
+      "routePath": "/one/airport/assets-topology",
+      "packageId": "PKG-UCONSOLE",
+      "owningModule": "UConsole",
+      "targetAccessClass": "BUSINESS_ROUTE",
+      "authenticationRequired": true,
+      "requiredPermissions": [
+        "platform:read"
+      ],
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "tenantScopeRequired": true,
+      "siteScopeRequired": false,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "VISIBLE_WHEN_AUTHORIZED",
+      "lockPagePolicy": "GOVERNED_PACKAGE_LOCK_PAGE",
+      "diagnosticFallback": "AUTHORIZED_STATUS_OR_DIAGNOSTICS",
+      "backendApiPolicyReferences": [],
+      "auditPolicy": "AUDIT_DENIALS_AND_SENSITIVE_ACTIONS",
+      "compatibilityStage": "CURRENT_TARGET",
+      "implementationStatus": "MULTIPLE_CONTROLS_REQUIRED",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "ONE-A5-P0-07",
+      "reviewReason": [],
+      "notes": [
+        "Target metadata only; frontend and backend runtime enforcement are not implemented by ONE-A5-P0-06.",
+        "Missing controls: PERMISSION_METADATA, PACKAGE_METADATA, DIRECT_URL_ENFORCEMENT"
+      ]
+    },
+    {
       "frontendRouteId": "FROUTE-88546A365FF2",
       "routePath": "/system/notification-settings",
       "packageId": "PKG-UCORE",
@@ -733,6 +877,78 @@
       "notes": [
         "Target metadata only; frontend and backend runtime enforcement are not implemented by ONE-A5-P0-06.",
         "Missing controls: PERMISSION_METADATA, PACKAGE_METADATA, DIRECT_URL_ENFORCEMENT, BACKEND_POLICY_DEPENDENCY"
+      ]
+    },
+    {
+      "frontendRouteId": "FROUTE-9C2DD14BDEC4",
+      "routePath": "/one/airport/overview",
+      "packageId": "PKG-UCONSOLE",
+      "owningModule": "UConsole",
+      "targetAccessClass": "BUSINESS_ROUTE",
+      "authenticationRequired": true,
+      "requiredPermissions": [
+        "platform:read"
+      ],
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "tenantScopeRequired": true,
+      "siteScopeRequired": false,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "VISIBLE_WHEN_AUTHORIZED",
+      "lockPagePolicy": "GOVERNED_PACKAGE_LOCK_PAGE",
+      "diagnosticFallback": "AUTHORIZED_STATUS_OR_DIAGNOSTICS",
+      "backendApiPolicyReferences": [],
+      "auditPolicy": "AUDIT_DENIALS_AND_SENSITIVE_ACTIONS",
+      "compatibilityStage": "CURRENT_TARGET",
+      "implementationStatus": "MULTIPLE_CONTROLS_REQUIRED",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "ONE-A5-P0-07",
+      "reviewReason": [],
+      "notes": [
+        "Target metadata only; frontend and backend runtime enforcement are not implemented by ONE-A5-P0-06.",
+        "Missing controls: PERMISSION_METADATA, PACKAGE_METADATA, DIRECT_URL_ENFORCEMENT"
+      ]
+    },
+    {
+      "frontendRouteId": "FROUTE-A1A75FDDBCA3",
+      "routePath": "/one/airport/fault-cases",
+      "packageId": "PKG-UCONSOLE",
+      "owningModule": "UConsole",
+      "targetAccessClass": "BUSINESS_ROUTE",
+      "authenticationRequired": true,
+      "requiredPermissions": [
+        "platform:read"
+      ],
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "tenantScopeRequired": true,
+      "siteScopeRequired": false,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "VISIBLE_WHEN_AUTHORIZED",
+      "lockPagePolicy": "GOVERNED_PACKAGE_LOCK_PAGE",
+      "diagnosticFallback": "AUTHORIZED_STATUS_OR_DIAGNOSTICS",
+      "backendApiPolicyReferences": [],
+      "auditPolicy": "AUDIT_DENIALS_AND_SENSITIVE_ACTIONS",
+      "compatibilityStage": "CURRENT_TARGET",
+      "implementationStatus": "MULTIPLE_CONTROLS_REQUIRED",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "ONE-A5-P0-07",
+      "reviewReason": [],
+      "notes": [
+        "Target metadata only; frontend and backend runtime enforcement are not implemented by ONE-A5-P0-06.",
+        "Missing controls: PERMISSION_METADATA, PACKAGE_METADATA, DIRECT_URL_ENFORCEMENT"
       ]
     },
     {
@@ -968,6 +1184,42 @@
       ]
     },
     {
+      "frontendRouteId": "FROUTE-CABB05B4BD06",
+      "routePath": "/one/airport/alarms-events",
+      "packageId": "PKG-UCONSOLE",
+      "owningModule": "UConsole",
+      "targetAccessClass": "BUSINESS_ROUTE",
+      "authenticationRequired": true,
+      "requiredPermissions": [
+        "platform:read"
+      ],
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "tenantScopeRequired": true,
+      "siteScopeRequired": false,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "VISIBLE_WHEN_AUTHORIZED",
+      "lockPagePolicy": "GOVERNED_PACKAGE_LOCK_PAGE",
+      "diagnosticFallback": "AUTHORIZED_STATUS_OR_DIAGNOSTICS",
+      "backendApiPolicyReferences": [],
+      "auditPolicy": "AUDIT_DENIALS_AND_SENSITIVE_ACTIONS",
+      "compatibilityStage": "CURRENT_TARGET",
+      "implementationStatus": "MULTIPLE_CONTROLS_REQUIRED",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "ONE-A5-P0-07",
+      "reviewReason": [],
+      "notes": [
+        "Target metadata only; frontend and backend runtime enforcement are not implemented by ONE-A5-P0-06.",
+        "Missing controls: PERMISSION_METADATA, PACKAGE_METADATA, DIRECT_URL_ENFORCEMENT"
+      ]
+    },
+    {
       "frontendRouteId": "FROUTE-D0DBC5F0D5E1",
       "routePath": "/403",
       "packageId": "PKG-UCONSOLE",
@@ -1044,6 +1296,42 @@
       "notes": [
         "Target metadata only; frontend and backend runtime enforcement are not implemented by ONE-A5-P0-06.",
         "Missing controls: PERMISSION_METADATA, PACKAGE_METADATA, DIRECT_URL_ENFORCEMENT, BACKEND_POLICY_DEPENDENCY"
+      ]
+    },
+    {
+      "frontendRouteId": "FROUTE-EAADA1903894",
+      "routePath": "/one/airport/reports",
+      "packageId": "PKG-UCONSOLE",
+      "owningModule": "UConsole",
+      "targetAccessClass": "BUSINESS_ROUTE",
+      "authenticationRequired": true,
+      "requiredPermissions": [
+        "platform:read"
+      ],
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "tenantScopeRequired": true,
+      "siteScopeRequired": false,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "VISIBLE_WHEN_AUTHORIZED",
+      "lockPagePolicy": "GOVERNED_PACKAGE_LOCK_PAGE",
+      "diagnosticFallback": "AUTHORIZED_STATUS_OR_DIAGNOSTICS",
+      "backendApiPolicyReferences": [],
+      "auditPolicy": "AUDIT_DENIALS_AND_SENSITIVE_ACTIONS",
+      "compatibilityStage": "CURRENT_TARGET",
+      "implementationStatus": "MULTIPLE_CONTROLS_REQUIRED",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "ONE-A5-P0-07",
+      "reviewReason": [],
+      "notes": [
+        "Target metadata only; frontend and backend runtime enforcement are not implemented by ONE-A5-P0-06.",
+        "Missing controls: PERMISSION_METADATA, PACKAGE_METADATA, DIRECT_URL_ENFORCEMENT"
       ]
     },
     {
@@ -2017,8 +2305,8 @@
       "compatibilityRequired": false,
       "healthRequiredForWrites": true,
       "frontendRoutes": [
-        "FROUTE-8881919B5A77",
-        "FROUTE-9794B46A5219"
+        "/assets/topology",
+        "/iot"
       ],
       "backendNamespaces": [
         "/api/v1/assets"
@@ -2121,8 +2409,8 @@
       "compatibilityRequired": false,
       "healthRequiredForWrites": true,
       "frontendRoutes": [
-        "FROUTE-5B91B631064D",
-        "FROUTE-74571E87F28B"
+        "/uedge/diagnostics",
+        "/uedge/setup"
       ],
       "backendNamespaces": [
         "/api/v1/edge"
@@ -2152,7 +2440,7 @@
       "compatibilityRequired": false,
       "healthRequiredForWrites": true,
       "frontendRoutes": [
-        "FROUTE-8D83C9D893E7"
+        "/ucde/evidence"
       ],
       "backendNamespaces": [
         "/api/v1/evidence"
@@ -2180,10 +2468,10 @@
       "compatibilityRequired": false,
       "healthRequiredForWrites": true,
       "frontendRoutes": [
-        "FROUTE-5490D5BA9CE6",
-        "FROUTE-A77240D62B73",
-        "FROUTE-BBEE7F90DDB4",
-        "FROUTE-F31B3DD8DBB4"
+        "/did",
+        "/login",
+        "/system/audit-logs",
+        "/system/permissions"
       ],
       "backendNamespaces": [
         "/api/v1/audit",
@@ -2269,7 +2557,7 @@
       "compatibilityRequired": true,
       "healthRequiredForWrites": true,
       "frontendRoutes": [
-        "FROUTE-D27D69D3F9AC"
+        "/modeling"
       ],
       "backendNamespaces": [
         "/api/v1/ai"
@@ -2323,7 +2611,7 @@
       "compatibilityRequired": false,
       "healthRequiredForWrites": true,
       "frontendRoutes": [
-        "FROUTE-0DBBB900287A"
+        "/reports"
       ],
       "backendNamespaces": [
         "/api/v1/reports"
@@ -2377,12 +2665,20 @@
       "compatibilityRequired": false,
       "healthRequiredForWrites": true,
       "frontendRoutes": [
-        "FROUTE-2A1386B18C7A",
-        "FROUTE-58045144902E",
-        "FROUTE-732E195CD604",
-        "FROUTE-C610388B9C44",
-        "FROUTE-D0DBC5F0D5E1",
-        "FROUTE-F6205A5DF1D3"
+        "/",
+        "/403",
+        "/:pathMatch(.*)*",
+        "/console/operations",
+        "/dashboard",
+        "/forbidden",
+        "/one/airport/alarms-events",
+        "/one/airport/assets-topology",
+        "/one/airport/evidence-investigation",
+        "/one/airport/fault-cases",
+        "/one/airport/maintenance-work-orders",
+        "/one/airport/overview",
+        "/one/airport/reports",
+        "/one/airport/systems-integration-health"
       ],
       "backendNamespaces": [
         "/api/v1/console",
@@ -2412,9 +2708,9 @@
       "compatibilityRequired": false,
       "healthRequiredForWrites": true,
       "frontendRoutes": [
-        "FROUTE-88546A365FF2",
-        "FROUTE-A2842138F079",
-        "FROUTE-A926AD8DB3CF"
+        "/system",
+        "/system/notification-settings",
+        "/system/settings"
       ],
       "backendNamespaces": [
         "/api/v1/context"
@@ -2472,7 +2768,7 @@
       "compatibilityRequired": false,
       "healthRequiredForWrites": true,
       "frontendRoutes": [
-        "FROUTE-618A7E8141AF"
+        "/uesg/sustainability"
       ],
       "backendNamespaces": [
         "/api/v1/esg"
@@ -2526,7 +2822,7 @@
       "compatibilityRequired": false,
       "healthRequiredForWrites": true,
       "frontendRoutes": [
-        "FROUTE-3F4199646E7A"
+        "/umms/maintenance"
       ],
       "backendNamespaces": [
         "/api/v1/mms"
@@ -2554,7 +2850,7 @@
       "compatibilityRequired": false,
       "healthRequiredForWrites": true,
       "frontendRoutes": [
-        "FROUTE-A89E66839FAA"
+        "/system/integration-settings"
       ],
       "backendNamespaces": [
         "/api/v1/integration",
@@ -3678,22 +3974,6 @@
       "priority": "P0"
     },
     {
-      "reviewId": "PKG-ROUTE-REVIEW-0041",
-      "routeOrMenuId": "MENU-F484962615CC",
-      "reviewType": "STATIC_MENU_FALLBACK",
-      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
-      "currentEvidence": {
-        "routePath": "/reports",
-        "staticFallback": true,
-        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
-      },
-      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
-      "owningModule": "Reports",
-      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
-      "blockingTask": "ONE-A5-P0-07",
-      "priority": "P0"
-    },
-    {
       "reviewId": "PKG-ROUTE-REVIEW-0042",
       "routeOrMenuId": "MENU-F5A4820A5C0B",
       "reviewType": "STATIC_MENU_FALLBACK",
@@ -3713,13 +3993,13 @@
   "summary": {
     "packagePolicyCount": 23,
     "backendNamespacePolicyCount": 28,
-    "frontendRoutePolicyCount": 23,
+    "frontendRoutePolicyCount": 31,
     "lockPagePolicyCount": 5,
     "diagnosticPolicyCount": 5,
     "compatibilityMappingCount": 12,
-    "reviewQueueCount": 42,
+    "reviewQueueCount": 41,
     "currentlyCompliantRoutes": 5,
     "metadataOnlyRoutes": 0,
-    "runtimeEnforcementRequiredRoutes": 18
+    "runtimeEnforcementRequiredRoutes": 26
   }
 }

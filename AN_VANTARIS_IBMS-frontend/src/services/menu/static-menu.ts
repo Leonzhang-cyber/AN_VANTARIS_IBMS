@@ -134,5 +134,61 @@ export const fallbackMenuItems: AppMenuItem[] = [
       },
     ],
   },
+  {
+    id: 'airport-ga-readonly',
+    label: 'Airport GA Read-Only',
+    path: '/one/airport/overview',
+    source: 'static',
+    children: [
+      {
+        id: 'airport-ga-readonly-overview',
+        label: 'Overview',
+        path: '/one/airport/overview',
+        source: 'static',
+      },
+      {
+        id: 'airport-ga-readonly-health',
+        label: 'Systems Health',
+        path: '/one/airport/systems-integration-health',
+        source: 'static',
+      },
+      {
+        id: 'airport-ga-readonly-assets',
+        label: 'Assets & Topology',
+        path: '/one/airport/assets-topology',
+        source: 'static',
+      },
+      {
+        id: 'airport-ga-readonly-alarms',
+        label: 'Alarms & Events',
+        path: '/one/airport/alarms-events',
+        source: 'static',
+      },
+      {
+        id: 'airport-ga-readonly-faults',
+        label: 'Fault Cases',
+        path: '/one/airport/fault-cases',
+        source: 'static',
+      },
+      {
+        id: 'airport-ga-readonly-workorders',
+        label: 'Work Orders',
+        path: '/one/airport/maintenance-work-orders',
+        source: 'static',
+      },
+      {
+        id: 'airport-ga-readonly-evidence',
+        label: 'Evidence & Investigation',
+        path: '/one/airport/evidence-investigation',
+        source: 'static',
+      },
+      {
+        id: 'airport-ga-readonly-reports',
+        label: 'Reports',
+        path: '/one/airport/reports',
+        source: 'static',
+      },
+    ],
+  },
   { id: 'reports', label: 'Reports', path: '/reports', source: 'static' },
 ]

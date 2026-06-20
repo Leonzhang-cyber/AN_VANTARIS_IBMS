@@ -17,6 +17,7 @@ import UedgeSetup from '@/modules/uedge/UedgeSetup.vue'
 import UedgeDiagnostics from '@/modules/uedge/UedgeDiagnostics.vue'
 import SystemOverviewView from '@/modules/system/SystemOverviewView.vue'
 import SystemSettingsView from '@/modules/system/SystemSettingsView.vue'
+import AirportGaReadonlyConsole from '@/modules/airport/AirportGaReadonlyConsole.vue'
 
 declare module 'vue-router' {
   interface RouteMeta {
@@ -145,6 +146,54 @@ export const routes: RouteRecordRaw[] = [
     name: 'uedge-diagnostics',
     component: UedgeDiagnostics,
     meta: { requiresAuth: true, title: 'UEDGE Engineer Diagnostics', layout: true },
+  },
+  {
+    path: '/one/airport/overview',
+    name: 'airport-ga-readonly-overview',
+    component: AirportGaReadonlyConsole,
+    meta: { requiresAuth: true, title: 'Airport Overview', layout: true },
+  },
+  {
+    path: '/one/airport/systems-integration-health',
+    name: 'airport-ga-readonly-systems-integration-health',
+    component: AirportGaReadonlyConsole,
+    meta: { requiresAuth: true, title: 'Airport Systems & Integration Health', layout: true },
+  },
+  {
+    path: '/one/airport/assets-topology',
+    name: 'airport-ga-readonly-assets-topology',
+    component: AirportGaReadonlyConsole,
+    meta: { requiresAuth: true, title: 'Airport Assets & Topology', layout: true },
+  },
+  {
+    path: '/one/airport/alarms-events',
+    name: 'airport-ga-readonly-alarms-events',
+    component: AirportGaReadonlyConsole,
+    meta: { requiresAuth: true, title: 'Airport Alarms & Events', layout: true },
+  },
+  {
+    path: '/one/airport/fault-cases',
+    name: 'airport-ga-readonly-fault-cases',
+    component: AirportGaReadonlyConsole,
+    meta: { requiresAuth: true, title: 'Airport Fault Cases', layout: true },
+  },
+  {
+    path: '/one/airport/maintenance-work-orders',
+    name: 'airport-ga-readonly-maintenance-work-orders',
+    component: AirportGaReadonlyConsole,
+    meta: { requiresAuth: true, title: 'Airport Maintenance Work Orders', layout: true },
+  },
+  {
+    path: '/one/airport/evidence-investigation',
+    name: 'airport-ga-readonly-evidence-investigation',
+    component: AirportGaReadonlyConsole,
+    meta: { requiresAuth: true, title: 'Airport Evidence & Investigation', layout: true },
+  },
+  {
+    path: '/one/airport/reports',
+    name: 'airport-ga-readonly-reports',
+    component: AirportGaReadonlyConsole,
+    meta: { requiresAuth: true, title: 'Airport Reports', layout: true },
   },
   {
     path: '/403',
