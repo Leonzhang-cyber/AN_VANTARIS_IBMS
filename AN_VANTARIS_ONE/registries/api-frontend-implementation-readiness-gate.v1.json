@@ -1,0 +1,32 @@
+{
+  "apiEnabled": false,
+  "apiSkeletonPhaseAllowed": true,
+  "airportSpecific": false,
+  "auditWriteCount": 0,
+  "authority": "ONE-AIRPORT-A6-02",
+  "canonicalWriteCount": 0,
+  "containsCustomerAssetIdentifiers": false,
+  "contractVersion": "api-frontend-implementation-readiness-gate.v1",
+  "crossIndustry": true,
+  "databaseWriteAllowed": false,
+  "databaseWriteCount": 0,
+  "decisionWriteCount": 0,
+  "description": "Read-only release gate for future API/frontend skeleton planning.",
+  "frontendEnabled": false,
+  "frontendSkeletonPhaseAllowed": true,
+  "implementationStatus": "API_FRONTEND_IMPLEMENTATION_READINESS_RELEASE_GATE_COMPLETE",
+  "productionActivationAllowed": false,
+  "productionApiAllowed": false,
+  "productionFrontendAllowed": false,
+  "pushAllowed": false,
+  "readOnly": true,
+  "readinessOutcome": "API_FRONTEND_READY_FOR_READ_ONLY_SKELETON_PLANNING",
+  "runtimeActivationAllowed": false,
+  "sourceArtifacts": [
+    "airport-api-frontend-readiness-contract.v1.json",
+    "airport-operations-console-handoff-gate.v1.json",
+    "airport-operations-console-package.v1.json",
+    "airport-a4-readiness-release-gate.v1.json",
+    "airport-a3-readiness-release-gate.v1.json"
+  ]
+}

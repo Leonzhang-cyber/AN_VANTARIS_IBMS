@@ -1,0 +1,542 @@
+{
+  "apiImplementationReadiness": {
+    "authPolicyRequiredCount": 8,
+    "candidateEndpointCount": 8,
+    "databaseAccessAllowed": false,
+    "deterministicDigest": "13eee1c6d3f65347e09ad5ae8aea86d2d8c2c181f5fbd8bc66a1006f0df4d3dc",
+    "endpointContractCoverageCount": 8,
+    "implementationAllowed": false,
+    "publicApiEnabled": false,
+    "readOnlyEndpointCandidateCount": 8,
+    "readinessId": "b93324a7bb4541dbc0a3544487c9b86e178f7ce1dd6a307b396a61489cbddbc7",
+    "requiredFuturePhase": "A7_READ_ONLY_API_SKELETON",
+    "skeletonPhaseAllowed": true,
+    "writeOperationAllowed": false
+  },
+  "artifactReferences": [
+    {
+      "artifactType": "A6_API_FRONTEND_READINESS_CONTRACT",
+      "deterministicDigest": "96d51f336e900bf98263b8c39b0aa83071e6697956a828daba2ed653b13a7e56",
+      "digest": "8896a2732624ed05cac0bab543d3f7366b36f8a2040ea527c64677f94d854843",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-api-frontend-readiness-contract.v1.json"
+    },
+    {
+      "artifactType": "A5_HANDOFF_GATE",
+      "deterministicDigest": "0fa1476f3c1c296a96b90384fe4c2ea356d47673bd2dcff41e569ae148e50c4b",
+      "digest": "955ea3a451fc8419d823e93cd55931398689e6d7b1d5cca77626dd9676bd979a",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-operations-console-handoff-gate.v1.json"
+    },
+    {
+      "artifactType": "A5_OPERATIONS_CONSOLE_PACKAGE",
+      "deterministicDigest": "964ebe87d941e4d8839bd22877c179005651d795061e06a7072165be54e8a634",
+      "digest": "8641f7f58c802ec1b7a22b7a619897dec3c2c9583bf28bbf7291eac81ef253f5",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-operations-console-package.v1.json"
+    },
+    {
+      "artifactType": "A4_READINESS_RELEASE_GATE",
+      "deterministicDigest": "e6ed4a8310c1d339016ebfd6eb4a6c95933a992eb96e4a30f0a14aab803e9610",
+      "digest": "a403587716be2c22e91f1700b03d29d54570d16162e3ee80d364fc688a59ac16",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-a4-readiness-release-gate.v1.json"
+    },
+    {
+      "artifactType": "A3_READINESS_RELEASE_GATE",
+      "deterministicDigest": "25c9802f282ffaf826c620d55ad96956af36a9a114db52f64029c9cc620eabd1",
+      "digest": "2b53aee526fe94b5ee6590c923b8288ae4472836163ffa038519882186ca0e39",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-a3-readiness-release-gate.v1.json"
+    }
+  ],
+  "authority": "ONE-AIRPORT-A6-02",
+  "contractCoverageMatrix": [
+    {
+      "actualCount": 8,
+      "blocking": true,
+      "coverageId": "8c25ecb436c074995e4de7093ac601ebd50524b2718d448623d4fd4792726531",
+      "coverageType": "API_ENDPOINT_CONTRACT_COVERAGE",
+      "deterministicDigest": "cd6b7d3d3daf8a0a3b6ffe11b3e3d0421f1910a2c53379a9997f2267a98dc68a",
+      "expectedCount": 8,
+      "sourceKey": "API_ENDPOINTS",
+      "status": "PASS"
+    },
+    {
+      "actualCount": 8,
+      "blocking": true,
+      "coverageId": "c1c22c780bc45c1ba3483b4c4cdfed71172cf56014799476a5262584cf313349",
+      "coverageType": "AUTH_POLICY_COVERAGE",
+      "deterministicDigest": "c0f4acfaba931c3c291e42722e428859575638ff26606030775a81fcda67977a",
+      "expectedCount": 8,
+      "sourceKey": "AUTH_POLICY",
+      "status": "PASS"
+    },
+    {
+      "actualCount": 8,
+      "blocking": true,
+      "coverageId": "c5178f6ec6c1b09c0f99c7b1eafa4d5ef758e19845ede60c39af662d49da89a4",
+      "coverageType": "CARD_BINDING_CONTRACT_COVERAGE",
+      "deterministicDigest": "82855d266cddb272159f24a6a40db917587d94a2ceaf8543bf1f4ea463e54a1e",
+      "expectedCount": 8,
+      "sourceKey": "CARD_BINDINGS",
+      "status": "PASS"
+    },
+    {
+      "actualCount": 15,
+      "blocking": true,
+      "coverageId": "7c9e0676e5ed845c6d0959bf58108292708e779ce4f47cafb7c2b6e5805c0b7d",
+      "coverageType": "DATA_BINDING_CONTRACT_COVERAGE",
+      "deterministicDigest": "c4a8b145ef838d962824aa86558167671e377e4c2d426e3ac5f5416ab504e1da",
+      "expectedCount": 15,
+      "sourceKey": "DATA_BINDINGS",
+      "status": "PASS"
+    },
+    {
+      "actualCount": 8,
+      "blocking": true,
+      "coverageId": "f2700458bc53f695c6db45897fdcacd4c797c15e9b8a0c90c19844da7bd224b0",
+      "coverageType": "FRONTEND_PAGE_CONTRACT_COVERAGE",
+      "deterministicDigest": "3157ce441e9a414a36677eefc5a5585bffc96b6a2a88e5411067c8a405118cc5",
+      "expectedCount": 8,
+      "sourceKey": "FRONTEND_PAGES",
+      "status": "PASS"
+    },
+    {
+      "actualCount": 8,
+      "blocking": true,
+      "coverageId": "d7430fe23d2145252636ebf0076be8e033e0ecbc7eecb40ea11f1505d8c71e05",
+      "coverageType": "FRONTEND_ROUTE_CONTRACT_COVERAGE",
+      "deterministicDigest": "0eb39968fb7a6f61c458c745579087ed120c49bbfd51a31d05368cf15de9c62d",
+      "expectedCount": 8,
+      "sourceKey": "FRONTEND_ROUTES",
+      "status": "PASS"
+    },
+    {
+      "actualCount": 8,
+      "blocking": true,
+      "coverageId": "7012f7fbcd76b32df67609a83b5904b36b15b79f070351f407c177f272b12d60",
+      "coverageType": "QUEUE_BINDING_CONTRACT_COVERAGE",
+      "deterministicDigest": "da0f899fad8b2aa25c1c9b6bd0b36da11918acd676dadd4df695150f9d22dc4b",
+      "expectedCount": 8,
+      "sourceKey": "QUEUE_BINDINGS",
+      "status": "PASS"
+    },
+    {
+      "actualCount": 8,
+      "blocking": true,
+      "coverageId": "62629a8559e84a3914c5da6a09934557117116f8ce0deeba1ccc0d2a368a6fd4",
+      "coverageType": "READ_ONLY_ENDPOINT_CONTRACT_COVERAGE",
+      "deterministicDigest": "35a164c639238fe0a58637cea801f1a62db5c04a3f594720a91216cf99be373b",
+      "expectedCount": 8,
+      "sourceKey": "READ_ONLY_ENDPOINTS",
+      "status": "PASS"
+    }
+  ],
+  "contractVersion": "api-frontend-implementation-readiness-gate.v1",
+  "dependencyGateResults": [
+    {
+      "blocking": true,
+      "deterministicDigest": "0d401e827a4fbd0225dc529a011550112b33c398ac646b3af8fa045bc5f52ecd",
+      "gateId": "D01_A5_HANDOFF_ALLOWED",
+      "gateName": "A5 handoff dependency",
+      "reasonCodes": [
+        "A5_HANDOFF_ALLOWED_TRUE"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "a301bc59ca0cd234dddace21b918e6c96466c33d1e4a927b50d2ab99e8434d99",
+      "gateId": "D02_A4_RELEASE_ALLOWED",
+      "gateName": "A4 release dependency",
+      "reasonCodes": [
+        "A4_RELEASE_ALLOWED_TRUE"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "d34980948ebbaa463e6bf7f28c9b74aea0729cffe2c500605656f7ff8061b020",
+      "gateId": "D03_A3_RELEASE_ALLOWED",
+      "gateName": "A3 release dependency",
+      "reasonCodes": [
+        "A3_RELEASE_ALLOWED_TRUE"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    }
+  ],
+  "deterministicDigest": "60ae79e16868211c7f63b1d3f62401ee299e5cdfa814825636c197cf8f6bbd14",
+  "frontendImplementationReadiness": {
+    "cardCandidateCount": 8,
+    "dataBindingContractCount": 15,
+    "deterministicDigest": "7993bfaf6270de8f5c891a1053a2468b6dd05b0efa5706d407b1d9a4b5ee6163",
+    "implementationAllowed": false,
+    "pageCandidateCount": 8,
+    "readinessId": "8e295b24a25ad24954b4bf2fd9a984b0199e18800fc7e551804db66daaa002a3",
+    "requiredFuturePhase": "A8_READ_ONLY_FRONTEND_SKELETON",
+    "routeCandidateCount": 8,
+    "routeContractCoverageCount": 8,
+    "routeImplementationAllowed": false,
+    "runtimeDataMutationAllowed": false,
+    "skeletonPhaseAllowed": true
+  },
+  "generatedAtPolicy": "DETERMINISTIC_NO_VOLATILE_TIMESTAMP",
+  "implementationBoundaryMatrix": [
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryId": "9a2cecdb64bee1f176a4debabe09093c22fb17bb379bee99573a23030331b000",
+      "boundaryKey": "apiEnabled",
+      "deterministicDigest": "e967c9a1fe08a676f31fd5e0b4a52037707119b7b1775a85f6660d6b72e260a5",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryId": "29efac03ebd38283b761f0753c7939d37dd998f57908dc667c2e9602a2321c1d",
+      "boundaryKey": "approvalWriteCount",
+      "deterministicDigest": "d775c84aae1184046a5dd21696882ccb0d179e8c45ee894495b7b84af962a649",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryId": "9d7c700875edfc94a5a59b68cbfb799c534aff505430ec38e9fcab4b71691295",
+      "boundaryKey": "auditWriteCount",
+      "deterministicDigest": "9f55d9fcfb7490338fd680ffe03655d93fcee70183799875605b5fcc4eab6412",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryId": "285ab5430174d2fe92b95d2239e848c1bc2e06f6288375c8dfac882aeec5ee20",
+      "boundaryKey": "canonicalWriteCount",
+      "deterministicDigest": "2ccec779e144df15a5fa248150bef64c45a7375d85cdd133ff80f09d74572814",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryId": "b9f6c2a30e27cedc25b4f964c5e7752d53f674727598dc4902541d1ba4c5c7b9",
+      "boundaryKey": "containsCustomerAssetIdentifiers",
+      "deterministicDigest": "6c89a03048545310fa5bd34680cc273bc91d92eab1abbeabfea98171265a465b",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryId": "068792ce36bcc307436782951592b49a6542433a63c26a1f88137a8e03058aee",
+      "boundaryKey": "databaseWriteAllowed",
+      "deterministicDigest": "821bf1bb0659d16e65711ee6c0b9c755557707393e9eae26ce10bd5a05a70aea",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryId": "b25d350a678d52cc1f0cb7e7d74d26d9038da849fb8aee6aae9bf221274630dc",
+      "boundaryKey": "databaseWriteCount",
+      "deterministicDigest": "ebfb8a8dcacfa8fcf4d59cfd973f562ce108c943ec2fc950ea40a45d79708d77",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": 0,
+      "blocking": true,
+      "boundaryId": "cdc803fe403dc9b9e296283f5467b1813ade2682bd2b6af87eab4a2c09fa1bc0",
+      "boundaryKey": "decisionWriteCount",
+      "deterministicDigest": "2bc7f7015bb209e78e55408e982d52158aae10263c73624ed7feada8acd2b620",
+      "expectedValue": 0,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryId": "ee34d101ca60c44b0646d6099198c2e7ca84396dc0ef3635fb8bcd5d952b6fd2",
+      "boundaryKey": "frontendEnabled",
+      "deterministicDigest": "018f9acd2941a6293a70c09b20d00628663f4104d0ac1c07d3fc67dbbb168bee",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryId": "62ebbc81b643a7ec0fa7046bf89d200b002edbacf7ba882c33180ef5bfe5012b",
+      "boundaryKey": "productionActivationAllowed",
+      "deterministicDigest": "baa5b7d25097f3302021b2566ebf48847c6501003a2d831854ab47996c1a5ba8",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryId": "04ed707f596a8b78e165765f07109334b63187266a06c872f0dd1bb339ed6100",
+      "boundaryKey": "productionApiAllowed",
+      "deterministicDigest": "4ccaef70fe902651886886f3b8c6bb552cebdc6b1dd302173155233cb423d1f4",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryId": "6a24a3056cf2e7348a2ebb9308e99f0e468b548ba94b9966a023cf7505c27a1a",
+      "boundaryKey": "productionFrontendAllowed",
+      "deterministicDigest": "ee8a9009d128d03d9c34a13a089a8188a98ba0fd071a10236d37a62005bc6d7d",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryId": "7ad1f78a17bb18f3394e70432a584611ea4ab92522244c42d81f293f80dfcf35",
+      "boundaryKey": "pushAllowed",
+      "deterministicDigest": "7d221cfbe2a8e2ea31bd33434319f982ea4d785512d9a4a927485dddd851c757",
+      "expectedValue": false,
+      "status": "PASS"
+    },
+    {
+      "actualValue": false,
+      "blocking": true,
+      "boundaryId": "7963da4f92ea196afdfc196ad41a544c8f216b2b6d948273a7f21c2efe4e2a2e",
+      "boundaryKey": "runtimeActivationAllowed",
+      "deterministicDigest": "1d6c7208cc3e9e29df230471fcdccc67ee53086617189a58553ab515e11dbb22",
+      "expectedValue": false,
+      "status": "PASS"
+    }
+  ],
+  "implementationDecision": {
+    "apiSkeletonPhaseAllowed": true,
+    "databaseWriteAllowed": false,
+    "decisionReason": "Future read-only API/frontend skeleton planning is allowed; production API/frontend, writes, runtime activation and push remain disabled.",
+    "decisionState": "READY_FOR_READ_ONLY_SKELETON_PLANNING",
+    "deterministicDigest": "35e4df75a370aa27573f4f993b0729417e2782425fab9cb3da36a5bac60eb0de",
+    "frontendSkeletonPhaseAllowed": true,
+    "productionActivationAllowed": false,
+    "productionApiAllowed": false,
+    "productionFrontendAllowed": false,
+    "pushAllowed": false,
+    "runtimeActivationAllowed": false
+  },
+  "implementationStatus": "API_FRONTEND_IMPLEMENTATION_READINESS_RELEASE_GATE_COMPLETE",
+  "profileId": "airport-api-frontend-implementation-readiness-gate-profile-v1",
+  "readinessOutcome": "API_FRONTEND_READY_FOR_READ_ONLY_SKELETON_PLANNING",
+  "releaseGateId": "c884501e5256ccdd3a3e1a41290843a107588c4b9dae5801de95df1283a58892",
+  "releaseGateResults": [
+    {
+      "blocking": true,
+      "deterministicDigest": "0c31a156ad17fbb59fe882d8b1b6fdd8c5b478f95835f85c2ba0ea4fd168884e",
+      "gateId": "G01_A6_CONTRACT_ARTIFACT_PRESENT",
+      "gateName": "A6 contract artifact present",
+      "reasonCodes": [
+        "A6_01_CONTRACT_EXISTS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "27bdf70d2378a4acbb008d414edfdd7e449850cd390da84b08a8f14c0aa2ddca",
+      "gateId": "G02_API_ENDPOINT_CONTRACT_COVERAGE",
+      "gateName": "API endpoint contract coverage",
+      "reasonCodes": [
+        "8_READ_ONLY_ENDPOINT_CANDIDATES"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "9366fe1bc3ba49ca67fc8ecf5a1fc45d6418aecbf293492fdac9068e646be849",
+      "gateId": "G03_FRONTEND_PAGE_CONTRACT_COVERAGE",
+      "gateName": "Frontend page contract coverage",
+      "reasonCodes": [
+        "8_PAGE_AND_8_ROUTE_CANDIDATES"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "d7dccf0a4e32be0c7cce4004ff7cf037ff2fd4d0b498e0e4a431d813ad9cc251",
+      "gateId": "G04_DATA_BINDING_CONTRACT_COVERAGE",
+      "gateName": "Data binding contract coverage",
+      "reasonCodes": [
+        "15_DATASOURCE_BINDINGS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "9ed0d470aa3e85f243c29e233ca2c09ca087a86e52eab2ce4b85a2d569a2f47f",
+      "gateId": "G05_CARD_QUEUE_BINDING_CONTRACT_COVERAGE",
+      "gateName": "Card and queue binding contract coverage",
+      "reasonCodes": [
+        "8_CARD_AND_8_QUEUE_BINDINGS"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "b07705fc25e06f4e4e6073166c9a605937c1355a2fbad0af032ebcdf2619cfd9",
+      "gateId": "G06_AUTH_POLICY_DECLARED",
+      "gateName": "Auth policy declared",
+      "reasonCodes": [
+        "8_ENDPOINTS_REQUIRE_AUTH_POLICY"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "17b29bb0953d20165b463b97f1d6b8237a11f7be5e493f5a4454ae75e558e608",
+      "gateId": "G07_A5_HANDOFF_DEPENDENCY",
+      "gateName": "A5 handoff dependency",
+      "reasonCodes": [
+        "A5_HANDOFF_ALLOWED_TRUE"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "ffd0852d7ce3e28da946763ce1bcc7a632c7ea65e16661e73ce6d09cc500b5b6",
+      "gateId": "G08_A4_RELEASE_DEPENDENCY",
+      "gateName": "A4 release dependency",
+      "reasonCodes": [
+        "A4_RELEASE_ALLOWED_TRUE"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "861e4c258bb42765b66ec4fe81a4207a1ec76a9e2a0f445c61b21e5e51e2da7e",
+      "gateId": "G09_A3_RELEASE_DEPENDENCY",
+      "gateName": "A3 release dependency",
+      "reasonCodes": [
+        "A3_RELEASE_ALLOWED_TRUE"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "8e4cd93d4bad1d7dea9423a5b0890d80782f07ddfcd2dd0d16eef5e17b35d93d",
+      "gateId": "G10_NO_API_IMPLEMENTATION",
+      "gateName": "No API implementation",
+      "reasonCodes": [
+        "API_DISABLED_AND_PRODUCTION_API_BLOCKED"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "fb2c657caf7e435b72c85292cc2e04e7a26c29d53e524517ee9936bdd21a2133",
+      "gateId": "G11_NO_FRONTEND_IMPLEMENTATION",
+      "gateName": "No frontend implementation",
+      "reasonCodes": [
+        "FRONTEND_DISABLED_AND_PRODUCTION_FRONTEND_BLOCKED"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "9111098016b8125e56f0ca520bd5af77b9361a5915e93ddbef4ce0b345a96091",
+      "gateId": "G12_DATABASE_WRITE_BOUNDARY",
+      "gateName": "Database write boundary",
+      "reasonCodes": [
+        "DATABASE_WRITES_DISABLED"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "3d21d8b91659bf9b9f86cdf63883f5c8ec1be3fdf1d8b47d3ede1ba2de157c1b",
+      "gateId": "G13_RUNTIME_PRODUCTION_BOUNDARY",
+      "gateName": "Runtime production boundary",
+      "reasonCodes": [
+        "RUNTIME_AND_PRODUCTION_DISABLED"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "e024c6a643823f97e7d761c6886fff12f0bb7921fdb4ec4c88a26786db382478",
+      "gateId": "G14_CUSTOMER_IDENTIFIER_SAFETY",
+      "gateName": "Customer identifier safety",
+      "reasonCodes": [
+        "NO_CUSTOMER_IDENTIFIER_LEAKAGE"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "945d8f5170e0cc14ab6a47326f99017abfdc41b0d2a3ebfd4cfcd0a19616c2a2",
+      "gateId": "G15_DETERMINISTIC_OUTPUT",
+      "gateName": "Deterministic output",
+      "reasonCodes": [
+        "REPEATED_RUNNER_BYTE_IDENTICAL"
+      ],
+      "severity": "INFO",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "deterministicDigest": "40f710309ed1a3f71393ccf66ec73fa759f4a9232b5d034308c70af0a4d69a3a",
+      "gateId": "G16_IMPLEMENTATION_DECISION",
+      "gateName": "Implementation decision",
+      "reasonCodes": [
+        "SKELETON_PLANNING_ALLOWED_PRODUCTION_BLOCKED"
+      ],
+      "severity": "LOW",
+      "status": "PASS"
+    }
+  ],
+  "summary": {
+    "a3ReleaseAllowed": true,
+    "a4ReleaseAllowed": true,
+    "a5HandoffAllowed": true,
+    "airportSpecific": false,
+    "apiEnabled": false,
+    "apiEndpointCandidateCount": 8,
+    "apiSkeletonPhaseAllowed": true,
+    "approvalWriteCount": 0,
+    "auditWriteCount": 0,
+    "authPolicyRequiredCount": 8,
+    "blockingGateFailureCount": 0,
+    "canonicalWriteCount": 0,
+    "cardBindingContractCount": 8,
+    "containsCustomerAssetIdentifiers": false,
+    "contractPassedGateCount": 15,
+    "contractReadinessGateCount": 15,
+    "crossIndustry": true,
+    "dataBindingContractCount": 15,
+    "databaseWriteAllowed": false,
+    "databaseWriteCount": 0,
+    "decisionWriteCount": 0,
+    "frontendEnabled": false,
+    "frontendPageCandidateCount": 8,
+    "frontendRouteCandidateCount": 8,
+    "frontendSkeletonPhaseAllowed": true,
+    "implementationPassedGateCount": 16,
+    "implementationReleaseGateCount": 16,
+    "productionActivationAllowed": false,
+    "productionApiAllowed": false,
+    "productionFrontendAllowed": false,
+    "pushAllowed": false,
+    "queueBindingContractCount": 8,
+    "readOnlyEndpointCandidateCount": 8,
+    "runtimeActivationAllowed": false
+  }
+}
