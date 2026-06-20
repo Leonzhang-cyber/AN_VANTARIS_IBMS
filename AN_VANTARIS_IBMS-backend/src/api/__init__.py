@@ -15,4 +15,5 @@ from .assets import assets_api
 from .uesg import uesg_api
 from .umms import umms_api
 from .uedge import uedge_api
+from .airport_ga_readonly import airport_ga_readonly_api
 from .iot.sse_api import *
