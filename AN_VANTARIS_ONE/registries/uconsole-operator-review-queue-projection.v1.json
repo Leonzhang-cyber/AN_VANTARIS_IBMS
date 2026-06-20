@@ -1,0 +1,25 @@
+{
+  "apiEnabled": false,
+  "approvalWriteCount": 0,
+  "airportSpecific": false,
+  "authority": "ONE-AIRPORT-A4-02",
+  "canonicalWriteCount": 0,
+  "containsCustomerAssetIdentifiers": false,
+  "contractVersion": "uconsole-operator-review-queue-projection.v1",
+  "crossIndustry": true,
+  "databaseAccessEnabled": false,
+  "databaseWriteCount": 0,
+  "decisionWriteCount": 0,
+  "description": "Read-only UConsole Operator Review Queue projection from the A4-01 Operator Review Decision Layer.",
+  "frontendEnabled": false,
+  "implementationStatus": "OPERATOR_REVIEW_UCONSOLE_QUEUE_PROJECTION_COMPLETE",
+  "productionActivationAllowed": false,
+  "projectionId": "uconsole-operator-review-queue-projection",
+  "pushAllowed": false,
+  "readOnly": true,
+  "readinessOutcome": "UCONSOLE_OPERATOR_REVIEW_QUEUE_READY_FOR_READ_ONLY_CONSUMPTION",
+  "runtimeActivationAllowed": false,
+  "sourceArtifacts": [
+    "airport-operator-review-decisions.v1.json"
+  ]
+}

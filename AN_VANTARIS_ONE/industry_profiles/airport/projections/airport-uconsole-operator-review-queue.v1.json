@@ -1,0 +1,3123 @@
+{
+  "authority": "ONE-AIRPORT-A4-02",
+  "contractVersion": "uconsole-operator-review-queue-projection.v1",
+  "defaultPage": {
+    "continuationToken": "b1b0cc352498e2e32a10df98894704c1902ad60db756a68ee90b9f459392f45e",
+    "deterministicDigest": "41ebefeaff226928a92645bff755f82888c0e7693f0f608907a06cf79cde3d35",
+    "items": [
+      {
+        "affectedDeviceEvidenceCount": 0,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "ALARM_EVENT_REVIEW_REQUIRED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "03844389bf147217f2259b0c92fc9a6f080eb6c3c31facf5e5fcc865dca3b2a3",
+        "decisionRequired": true,
+        "decisionScope": "ALARM_EVENT_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "ALARM_EVENT_REVIEW",
+        "deterministicDigest": "dacebedf0f7038d3de3299e490f454f5823332c191aaf6367ab877e4e88cd40b",
+        "priority": 30,
+        "queueType": "ALARM_EVENT_QUEUE",
+        "reviewReasons": [
+          "ALARM_EVENT_REVIEW_REQUIRED"
+        ],
+        "rowId": "f30efc5155ca57d0b844c69d7ed48b3c5fd3090edcf53d02f9265902b5036619",
+        "severity": "HIGH",
+        "sourceStage": "A3-01",
+        "sourceSystemKey": "ACS",
+        "title": "ACS alarm/event review"
+      },
+      {
+        "affectedDeviceEvidenceCount": 0,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "ALARM_EVENT_REVIEW_REQUIRED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "219c5722fedae552a141355a59d84decdd91574ef099156941987a4436786044",
+        "decisionRequired": true,
+        "decisionScope": "ALARM_EVENT_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "ALARM_EVENT_REVIEW",
+        "deterministicDigest": "09d28ca00845d41567991aba3302af8aec4f5c67a42b5484038dd2ba237cf6b9",
+        "priority": 30,
+        "queueType": "ALARM_EVENT_QUEUE",
+        "reviewReasons": [
+          "ALARM_EVENT_REVIEW_REQUIRED"
+        ],
+        "rowId": "ab60f65601256da9fa53f116b98bfa0c2a3659907556943bd8392c8fc461ca7e",
+        "severity": "LOW",
+        "sourceStage": "A3-01",
+        "sourceSystemKey": "CCTV",
+        "title": "CCTV alarm/event review"
+      },
+      {
+        "affectedDeviceEvidenceCount": 0,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "ALARM_EVENT_REVIEW_REQUIRED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "d2f028af434eb859174fe833d3a2961a79642417c6968a8a29432ecd4ccef27b",
+        "decisionRequired": true,
+        "decisionScope": "ALARM_EVENT_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "ALARM_EVENT_REVIEW",
+        "deterministicDigest": "60d62360b363aac1c7a33c2499c429c1c24a604b224d26de1f6673270443d8f8",
+        "priority": 30,
+        "queueType": "ALARM_EVENT_QUEUE",
+        "reviewReasons": [
+          "ALARM_EVENT_REVIEW_REQUIRED"
+        ],
+        "rowId": "2bd748eeb2ce7ac85add818b4a5ae7fc2710372d8fe313c5f6ff9a668e1bbd34",
+        "severity": "LOW",
+        "sourceStage": "A3-01",
+        "sourceSystemKey": "PA",
+        "title": "PA alarm/event review"
+      },
+      {
+        "affectedDeviceEvidenceCount": 0,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "ALARM_EVENT_REVIEW_REQUIRED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "c9bdc082c69d8ada95f6ad4871262c73445d3ea36be5102bd2883b723d214db0",
+        "decisionRequired": true,
+        "decisionScope": "ALARM_EVENT_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "ALARM_EVENT_REVIEW",
+        "deterministicDigest": "ac6c85fbeca92a685b4679e0ca9254689fd999d77303dc886ad2aa9043e46e0f",
+        "priority": 30,
+        "queueType": "ALARM_EVENT_QUEUE",
+        "reviewReasons": [
+          "ALARM_EVENT_REVIEW_REQUIRED"
+        ],
+        "rowId": "71d3eb0b7ab84adbab3ba2476ed1cfc6e0e7a4d7147050ff06bc64df54e32dcc",
+        "severity": "MEDIUM",
+        "sourceStage": "A3-01",
+        "sourceSystemKey": "RAS",
+        "title": "RAS alarm/event review"
+      },
+      {
+        "affectedDeviceEvidenceCount": 0,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "ALARM_EVENT_REVIEW_REQUIRED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "6a8a8a5f8e4a3b518851527c2ba59896efd863f5fbe11ed03162666ad76a938e",
+        "decisionRequired": true,
+        "decisionScope": "ALARM_EVENT_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "ALARM_EVENT_REVIEW",
+        "deterministicDigest": "8ace7eb3cccf8d26a85e8d6c4beafc0c5c8185f2a3047a7a8ab2c67f586f95a0",
+        "priority": 30,
+        "queueType": "ALARM_EVENT_QUEUE",
+        "reviewReasons": [
+          "ALARM_EVENT_REVIEW_REQUIRED"
+        ],
+        "rowId": "b9c7eeec210bdc5643786877fa96e874073052d8dfeaff672f8360b753fe5852",
+        "severity": "MEDIUM",
+        "sourceStage": "A3-01",
+        "sourceSystemKey": "TEL",
+        "title": "TEL alarm/event review"
+      },
+      {
+        "affectedDeviceEvidenceCount": 129,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "APPROVE",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "db57387cf930d7db4ac2afdc605dfa581742751fdc85fd0533cb0f37fe75b5ff",
+        "decisionRequired": true,
+        "decisionScope": "ALARM_EVENT_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "DOWNSTREAM_CREATION_AUTHORIZATION",
+        "deterministicDigest": "88e77e5eeea22fe97c403c6c44df268ec1eb19c90821314759584e7924288a00",
+        "priority": 70,
+        "queueType": "ALARM_EVENT_QUEUE",
+        "reviewReasons": [
+          "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+        ],
+        "rowId": "13df5dfd6ac4f710fdfd24b5b1a930d9ffe28aa55094fce9171d4f48d1a636f5",
+        "severity": "HIGH",
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "ACS",
+        "title": "ACS downstream creation authorization"
+      },
+      {
+        "affectedDeviceEvidenceCount": 52,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "APPROVE",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "1a70ceb857e36de227e061e6ba75e69732b34fbffeeebe7e448d2a35c6c985e6",
+        "decisionRequired": true,
+        "decisionScope": "ALARM_EVENT_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "DOWNSTREAM_CREATION_AUTHORIZATION",
+        "deterministicDigest": "0bb9d09c5477fb84efcbca57b5c70c54fc05b7cfaeab0e54c4d5b061692b734f",
+        "priority": 70,
+        "queueType": "ALARM_EVENT_QUEUE",
+        "reviewReasons": [
+          "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+        ],
+        "rowId": "0fd7864071825a670cd9983771beb23ea8f3b5dc1614282dd958bb8ed9048410",
+        "severity": "LOW",
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "CCTV",
+        "title": "CCTV downstream creation authorization"
+      },
+      {
+        "affectedDeviceEvidenceCount": 247,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "APPROVE",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "921416f11d969831b8e941439e5d5bafab3ad7bf89eeceb238e346f9141214c9",
+        "decisionRequired": true,
+        "decisionScope": "ALARM_EVENT_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "DOWNSTREAM_CREATION_AUTHORIZATION",
+        "deterministicDigest": "1cc92bab2f7b809097dd675f153bce7c821c35974650d13d0fa5220f7f5e827f",
+        "priority": 70,
+        "queueType": "ALARM_EVENT_QUEUE",
+        "reviewReasons": [
+          "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+        ],
+        "rowId": "282988c09aa0b6f51d1f3db6ae0938de75c935b1a850878f0c78c12dd7146f5f",
+        "severity": "LOW",
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "PA",
+        "title": "PA downstream creation authorization"
+      },
+      {
+        "affectedDeviceEvidenceCount": 28,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "APPROVE",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "8ff7a4d3349c11dfa062b509b4fff776ebe1aa8a2d4148dc02c7683b0c98d4d7",
+        "decisionRequired": true,
+        "decisionScope": "ALARM_EVENT_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "DOWNSTREAM_CREATION_AUTHORIZATION",
+        "deterministicDigest": "e5b9a7751f6ac44715d7cc440b6e038791945fdca26eb174f05754f33488fc99",
+        "priority": 70,
+        "queueType": "ALARM_EVENT_QUEUE",
+        "reviewReasons": [
+          "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+        ],
+        "rowId": "4ccce47de6b58c9d42f213d83b4d05252745ed594d2bd112fa90721591138575",
+        "severity": "MEDIUM",
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "RAS",
+        "title": "RAS downstream creation authorization"
+      },
+      {
+        "affectedDeviceEvidenceCount": 14,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "APPROVE",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "a767c1d68bbd4b11e76424b8118476275b069691406e5167dcb9d9df03c5a3e4",
+        "decisionRequired": true,
+        "decisionScope": "ALARM_EVENT_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "DOWNSTREAM_CREATION_AUTHORIZATION",
+        "deterministicDigest": "f27cf118de05c3b03b3005237fe8df2548a44d57797403814d2507cde181331b",
+        "priority": 70,
+        "queueType": "ALARM_EVENT_QUEUE",
+        "reviewReasons": [
+          "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+        ],
+        "rowId": "cab4cad4604afe2852f37e37f2e11d8dfc9c85b5a68d1d8c5c3518ea891c1580",
+        "severity": "MEDIUM",
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "TEL",
+        "title": "TEL downstream creation authorization"
+      },
+      {
+        "affectedDeviceEvidenceCount": 129,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "ASSET_RESOLUTION_REQUIRED",
+          "BLOCKS_DOWNSTREAM_CREATION"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "0eabe9a6a35b8423d76496c43d1ad4cc580823b7a06cc68b7dc39d83649c651e",
+        "decisionRequired": true,
+        "decisionScope": "ASSET_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "ASSET_RESOLUTION",
+        "deterministicDigest": "59c065ff1899f3663c8a039c856ab6190ca8f1414f0e6c97394a64f2b0bf3089",
+        "priority": 20,
+        "queueType": "ASSET_RESOLUTION_QUEUE",
+        "reviewReasons": [
+          "ASSET_RESOLUTION_REQUIRED"
+        ],
+        "rowId": "636b31ed583d95cb81c6f0d3cbc878d1c38550ad192e6fddfeffa1d4a0c0482c",
+        "severity": "HIGH",
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "ACS",
+        "title": "ACS Asset resolution required"
+      },
+      {
+        "affectedDeviceEvidenceCount": 52,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "ASSET_RESOLUTION_REQUIRED",
+          "BLOCKS_DOWNSTREAM_CREATION"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "6105951e8f8cdc2557092b11dfd8ccc3d9ea77f7f67e016f17d725b4122c1985",
+        "decisionRequired": true,
+        "decisionScope": "ASSET_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "ASSET_RESOLUTION",
+        "deterministicDigest": "7c6af9e9b36f8f12fff9b7b6d752fdf9d1c438b54d71fd4fd3e3d62a1f07af88",
+        "priority": 20,
+        "queueType": "ASSET_RESOLUTION_QUEUE",
+        "reviewReasons": [
+          "ASSET_RESOLUTION_REQUIRED"
+        ],
+        "rowId": "ac9885b140dc7fabe7e06202788e359032a8f103fb1d7c570eadb4de06bdb1bd",
+        "severity": "LOW",
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "CCTV",
+        "title": "CCTV Asset resolution required"
+      },
+      {
+        "affectedDeviceEvidenceCount": 247,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "ASSET_RESOLUTION_REQUIRED",
+          "BLOCKS_DOWNSTREAM_CREATION"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "611235e783d3860e1bfa3c4379f2a726f02c2184ef8a788e6c2ac6a4a5c52c66",
+        "decisionRequired": true,
+        "decisionScope": "ASSET_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "ASSET_RESOLUTION",
+        "deterministicDigest": "e9e884b5d320f512e08e96d4ba9fadd55ac8d9716971a11fcb6cb5c785cc02df",
+        "priority": 20,
+        "queueType": "ASSET_RESOLUTION_QUEUE",
+        "reviewReasons": [
+          "ASSET_RESOLUTION_REQUIRED"
+        ],
+        "rowId": "62dc90c1e1ce43be92014f1c8cfa1d74a6044ab7dd57bf151bc2bc58bd18b868",
+        "severity": "LOW",
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "PA",
+        "title": "PA Asset resolution required"
+      },
+      {
+        "affectedDeviceEvidenceCount": 28,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "ASSET_RESOLUTION_REQUIRED",
+          "BLOCKS_DOWNSTREAM_CREATION"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "f3c78a73247fdeb7878dc72b0a9884e972f1d70816dc8e7f9e3e1c6a1a703ad2",
+        "decisionRequired": true,
+        "decisionScope": "ASSET_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "ASSET_RESOLUTION",
+        "deterministicDigest": "565b2a844d66da6da5e4b65a816af5ce87aa5c5be91328d5c5702ddadd6fb847",
+        "priority": 20,
+        "queueType": "ASSET_RESOLUTION_QUEUE",
+        "reviewReasons": [
+          "ASSET_RESOLUTION_REQUIRED"
+        ],
+        "rowId": "ffa876f689b183cf76cf590e3cc2c0dade97d69d96e5b7f11bb8966daaecf346",
+        "severity": "MEDIUM",
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "RAS",
+        "title": "RAS Asset resolution required"
+      },
+      {
+        "affectedDeviceEvidenceCount": 14,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "ASSET_RESOLUTION_REQUIRED",
+          "BLOCKS_DOWNSTREAM_CREATION"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "468b82c86e28a34244d8c6bade6eb64947ce74ef10bf1faf7d442d24a88a4a7b",
+        "decisionRequired": true,
+        "decisionScope": "ASSET_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "ASSET_RESOLUTION",
+        "deterministicDigest": "470a17c4cdbd830c964ab45cf747e2f6cf92003042db380499889c2351d64129",
+        "priority": 20,
+        "queueType": "ASSET_RESOLUTION_QUEUE",
+        "reviewReasons": [
+          "ASSET_RESOLUTION_REQUIRED"
+        ],
+        "rowId": "063e8f5c3feaef508b0670e3c4034039a1faaee08c6c21e179e2b6e46d481a84",
+        "severity": "MEDIUM",
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "TEL",
+        "title": "TEL Asset resolution required"
+      },
+      {
+        "affectedDeviceEvidenceCount": 129,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "BLOCKS_DOWNSTREAM_CREATION",
+          "LOCATION_RESOLUTION_REQUIRED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "827c9c5c33dd9dfa929294f5ec48c4a64d4d3a394e1b0128d2c72c62527b1550",
+        "decisionRequired": true,
+        "decisionScope": "ASSET_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "LOCATION_RESOLUTION",
+        "deterministicDigest": "189279df2028cdcda2586a12be6c47957ac21c63a65eb58a11546986375c8ecb",
+        "priority": 20,
+        "queueType": "ASSET_RESOLUTION_QUEUE",
+        "reviewReasons": [
+          "LOCATION_RESOLUTION_REQUIRED"
+        ],
+        "rowId": "3ba239793a49b0f1b2b021acc376445c4e41b8789ff31f68190289c23122b2b6",
+        "severity": "HIGH",
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "ACS",
+        "title": "ACS Location resolution required"
+      },
+      {
+        "affectedDeviceEvidenceCount": 52,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "BLOCKS_DOWNSTREAM_CREATION",
+          "LOCATION_RESOLUTION_REQUIRED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "54df1e11c75e533678a0c935a548dc610282c25684b6c567404a7298d851e6e6",
+        "decisionRequired": true,
+        "decisionScope": "ASSET_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "LOCATION_RESOLUTION",
+        "deterministicDigest": "6d76b39459ff69b77795d012770b092af73653c87bc698cca8088b6d943271c9",
+        "priority": 20,
+        "queueType": "ASSET_RESOLUTION_QUEUE",
+        "reviewReasons": [
+          "LOCATION_RESOLUTION_REQUIRED"
+        ],
+        "rowId": "6d2f6f44c686cd9d54a556c9139fb5d5591617e621122ad0674b40e3eb74bf09",
+        "severity": "LOW",
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "CCTV",
+        "title": "CCTV Location resolution required"
+      },
+      {
+        "affectedDeviceEvidenceCount": 247,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "BLOCKS_DOWNSTREAM_CREATION",
+          "LOCATION_RESOLUTION_REQUIRED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "4b5fd829706035c891f9a770e72577e34712162f09e7802c50cb64650d18ee72",
+        "decisionRequired": true,
+        "decisionScope": "ASSET_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "LOCATION_RESOLUTION",
+        "deterministicDigest": "b8de4c6cf52a3f9731198645b0a67075407428aa7677d85585e14f1691182e01",
+        "priority": 20,
+        "queueType": "ASSET_RESOLUTION_QUEUE",
+        "reviewReasons": [
+          "LOCATION_RESOLUTION_REQUIRED"
+        ],
+        "rowId": "098cec046277dfd7e90d06df98ff477f4f69adb7a0e2d65c00e0701ce6c149ff",
+        "severity": "LOW",
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "PA",
+        "title": "PA Location resolution required"
+      },
+      {
+        "affectedDeviceEvidenceCount": 28,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "BLOCKS_DOWNSTREAM_CREATION",
+          "LOCATION_RESOLUTION_REQUIRED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "948fb786bd37d12da9ec26019d110fba1123a3dbc90f6ddb3c5e5b8d6e77b53f",
+        "decisionRequired": true,
+        "decisionScope": "ASSET_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "LOCATION_RESOLUTION",
+        "deterministicDigest": "4bfc907d7b711e15e8278f23f8d73011906ef011fd4da7e71512a9699d7f4322",
+        "priority": 20,
+        "queueType": "ASSET_RESOLUTION_QUEUE",
+        "reviewReasons": [
+          "LOCATION_RESOLUTION_REQUIRED"
+        ],
+        "rowId": "aad3a4daa279a118ffeb658f874fe565afcf9e74343dda2360648d7fc8f25137",
+        "severity": "MEDIUM",
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "RAS",
+        "title": "RAS Location resolution required"
+      },
+      {
+        "affectedDeviceEvidenceCount": 14,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "BLOCKS_DOWNSTREAM_CREATION",
+          "LOCATION_RESOLUTION_REQUIRED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "60aa1937c042b33992009e8426cac89121e160c26b3c8d3becd3db8bfd3df116",
+        "decisionRequired": true,
+        "decisionScope": "ASSET_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "LOCATION_RESOLUTION",
+        "deterministicDigest": "0da53753db8e96c48199190f0764481ce80bbbef6e654f8c663b621686ba6c4d",
+        "priority": 20,
+        "queueType": "ASSET_RESOLUTION_QUEUE",
+        "reviewReasons": [
+          "LOCATION_RESOLUTION_REQUIRED"
+        ],
+        "rowId": "d60097f51d7678de08e19e06ac0196120e325bafbfa52bf344c8cce4cccfb842",
+        "severity": "MEDIUM",
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "TEL",
+        "title": "TEL Location resolution required"
+      },
+      {
+        "affectedDeviceEvidenceCount": 129,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "BLOCKS_DOWNSTREAM_CREATION",
+          "POINT_RESOLUTION_REQUIRED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "b8685bdf4e7ffb23579272884eb700df32f2fdbc5ec1c844e55b3621dffc7d25",
+        "decisionRequired": true,
+        "decisionScope": "ASSET_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "POINT_RESOLUTION",
+        "deterministicDigest": "fb48fe180b29fb3a11f4300fee0205c3113aaa5cfb142c07a616e0b071a3f0a7",
+        "priority": 20,
+        "queueType": "ASSET_RESOLUTION_QUEUE",
+        "reviewReasons": [
+          "POINT_RESOLUTION_REQUIRED"
+        ],
+        "rowId": "b45b3c2168c5e5194e05cf29454d567eefa5587002bce9c870710d88a3134bb8",
+        "severity": "HIGH",
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "ACS",
+        "title": "ACS Point resolution required"
+      },
+      {
+        "affectedDeviceEvidenceCount": 52,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "BLOCKS_DOWNSTREAM_CREATION",
+          "POINT_RESOLUTION_REQUIRED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "7d79d4662cd1846f87189a667a4611b8e7c2f6eaa83393ed6bcabbf883ed84b5",
+        "decisionRequired": true,
+        "decisionScope": "ASSET_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "POINT_RESOLUTION",
+        "deterministicDigest": "cb40252c779257516c154ffb04aabb26ddffca4b7fc7e682ddaf08b84e3e1959",
+        "priority": 20,
+        "queueType": "ASSET_RESOLUTION_QUEUE",
+        "reviewReasons": [
+          "POINT_RESOLUTION_REQUIRED"
+        ],
+        "rowId": "fa8a16f807ad1c992675fc408f8a6d7fae0fc635aed0560c82a6a9366fa54353",
+        "severity": "LOW",
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "CCTV",
+        "title": "CCTV Point resolution required"
+      },
+      {
+        "affectedDeviceEvidenceCount": 247,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "BLOCKS_DOWNSTREAM_CREATION",
+          "POINT_RESOLUTION_REQUIRED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "e5d8bae9ba014e2c1610700c8a68e3a2098d64244b0a092358e916ea786c39af",
+        "decisionRequired": true,
+        "decisionScope": "ASSET_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "POINT_RESOLUTION",
+        "deterministicDigest": "abf53348cf3a96824900d696859f9d3fabe1e8e5837b09713c59fc25596466c0",
+        "priority": 20,
+        "queueType": "ASSET_RESOLUTION_QUEUE",
+        "reviewReasons": [
+          "POINT_RESOLUTION_REQUIRED"
+        ],
+        "rowId": "849d7d6279a36032ef93ddeb0fa6c841f32634c85ae9d2e4539413825059aeac",
+        "severity": "LOW",
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "PA",
+        "title": "PA Point resolution required"
+      },
+      {
+        "affectedDeviceEvidenceCount": 28,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "BLOCKS_DOWNSTREAM_CREATION",
+          "POINT_RESOLUTION_REQUIRED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "79fc3560fd8284602dc149418f8e237cba89afc5534e52dc1256761021dfac5a",
+        "decisionRequired": true,
+        "decisionScope": "ASSET_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "POINT_RESOLUTION",
+        "deterministicDigest": "301b3176bf7ce31d6871a907d328e1fbcf0fecba9a16e9aeaee255fbe4e6fb0b",
+        "priority": 20,
+        "queueType": "ASSET_RESOLUTION_QUEUE",
+        "reviewReasons": [
+          "POINT_RESOLUTION_REQUIRED"
+        ],
+        "rowId": "bc0b5eafd3d14444367fa088f05e73f500aff6cf768c7a196cee954639bb74b2",
+        "severity": "MEDIUM",
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "RAS",
+        "title": "RAS Point resolution required"
+      },
+      {
+        "affectedDeviceEvidenceCount": 14,
+        "affectedRecordCount": 1,
+        "allowedDecisions": [
+          "ACCEPT_PROPOSAL",
+          "DEFER",
+          "KEEP_PENDING",
+          "REJECT_PROPOSAL",
+          "REQUEST_MORE_CONTEXT"
+        ],
+        "blocking": true,
+        "blockingReasons": [
+          "BLOCKS_DOWNSTREAM_CREATION",
+          "POINT_RESOLUTION_REQUIRED"
+        ],
+        "currentDecision": "KEEP_PENDING",
+        "decisionItemId": "6ef8751e77444810843b4fa2632633d5292fc5952305c3a3810e7aea929183fc",
+        "decisionRequired": true,
+        "decisionScope": "ASSET_REVIEW",
+        "decisionState": "PENDING",
+        "decisionType": "POINT_RESOLUTION",
+        "deterministicDigest": "1c816ce900971dffc2386b02884fecd231dd81b660449e9c561dbbf9d2589f7e",
+        "priority": 20,
+        "queueType": "ASSET_RESOLUTION_QUEUE",
+        "reviewReasons": [
+          "POINT_RESOLUTION_REQUIRED"
+        ],
+        "rowId": "e77c113e2da43369fb033bd946f3b83d9c6a6fa4193e83e16604641222384d13",
+        "severity": "MEDIUM",
+        "sourceStage": "A3-02",
+        "sourceSystemKey": "TEL",
+        "title": "TEL Point resolution required"
+      }
+    ],
+    "nextContinuationToken": "9230a39eccf4494e7949582da710179f90ec9bcf23946bde12d702e72036165f",
+    "pageSize": 25,
+    "returnedCount": 25,
+    "totalCount": 46
+  },
+  "deterministicDigest": "238110300af244f7837d752365abb195763dfc0ea84aea843f0604c31c0acd85",
+  "facets": {
+    "blocking": {
+      "False": 1,
+      "True": 45
+    },
+    "blockingReason": {
+      "ALARM_EVENT_REVIEW_REQUIRED": 5,
+      "ALIAS_APPROVAL": 2,
+      "ALIAS_APPROVAL_REQUIRED": 6,
+      "ASSET_RESOLUTION_REQUIRED": 20,
+      "BLOCKED_BY_FAULTCASE_REVIEW": 5,
+      "BLOCKED_BY_RESOLUTION": 10,
+      "BLOCKED_BY_SOURCE_SYSTEM_REVIEW": 10,
+      "BLOCKS_DOWNSTREAM_CREATION": 15,
+      "DOWNSTREAM_CREATION_NOT_AUTHORIZED": 5,
+      "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED": 5,
+      "FAULTCASE_CREATION_NOT_AUTHORIZED": 5,
+      "FAULTCASE_REVIEW_REQUIRED": 5,
+      "LOCATION_RESOLUTION_REQUIRED": 15,
+      "NAMESPACE_INTERPRETATION": 1,
+      "NAMESPACE_INTERPRETATION_REQUIRED": 3,
+      "POINT_RESOLUTION_REQUIRED": 15,
+      "REGISTRY_APPROVAL": 2,
+      "REGISTRY_APPROVAL_REQUIRED": 6,
+      "SOURCE_SYSTEM_REVIEW_REQUIRED": 10,
+      "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED": 5,
+      "WORKORDER_INTENT_REVIEW_REQUIRED": 5,
+      "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED": 5
+    },
+    "decisionRequired": {
+      "True": 46
+    },
+    "decisionScope": {
+      "ALARM_EVENT_REVIEW": 10,
+      "ASSET_REVIEW": 15,
+      "EVIDENCE_REVIEW": 5,
+      "FAULTCASE_REVIEW": 5,
+      "RELEASE_GATE": 1,
+      "SOURCE_SYSTEM_REVIEW": 5,
+      "WORKORDER_REVIEW": 5
+    },
+    "decisionState": {
+      "PENDING": 45,
+      "READY_FOR_REVIEW": 1
+    },
+    "decisionType": {
+      "ALARM_EVENT_REVIEW": 5,
+      "ALIAS_APPROVAL": 2,
+      "ASSET_RESOLUTION": 5,
+      "DOWNSTREAM_CREATION_AUTHORIZATION": 5,
+      "EVIDENCE_INVESTIGATION_REVIEW": 5,
+      "FAULTCASE_CANDIDATE_REVIEW": 5,
+      "LOCATION_RESOLUTION": 5,
+      "NAMESPACE_INTERPRETATION": 1,
+      "POINT_RESOLUTION": 5,
+      "REGISTRY_APPROVAL": 2,
+      "RELEASE_GATE_REVIEW": 1,
+      "WORKORDER_INTENT_REVIEW": 5
+    },
+    "priority": {
+      "10": 5,
+      "20": 15,
+      "30": 5,
+      "40": 5,
+      "50": 5,
+      "60": 5,
+      "70": 5,
+      "90": 1
+    },
+    "queueType": {
+      "ALARM_EVENT_QUEUE": 10,
+      "ASSET_RESOLUTION_QUEUE": 15,
+      "EVIDENCE_INVESTIGATION_QUEUE": 5,
+      "FAULTCASE_QUEUE": 5,
+      "RELEASE_GATE_QUEUE": 1,
+      "SOURCE_SYSTEM_QUEUE": 5,
+      "WORKORDER_INTENT_QUEUE": 5
+    },
+    "reviewReason": {
+      "ALARM_EVENT_REVIEW_REQUIRED": 5,
+      "ALIAS_APPROVAL_REQUIRED": 2,
+      "ASSET_RESOLUTION_REQUIRED": 5,
+      "DOWNSTREAM_CREATION_NOT_AUTHORIZED": 5,
+      "EVIDENCE_INVESTIGATION_REVIEW_REQUIRED": 5,
+      "FAULTCASE_REVIEW_REQUIRED": 5,
+      "LOCATION_RESOLUTION_REQUIRED": 5,
+      "NAMESPACE_INTERPRETATION_REQUIRED": 1,
+      "POINT_RESOLUTION_REQUIRED": 5,
+      "REGISTRY_APPROVAL_REQUIRED": 2,
+      "RELEASE_GATE_PASS_PUSH_DISABLED": 1,
+      "WORKORDER_INTENT_REVIEW_REQUIRED": 5
+    },
+    "severity": {
+      "HIGH": 21,
+      "INFO": 1,
+      "LOW": 12,
+      "MEDIUM": 12
+    },
+    "sourceStage": {
+      "A2": 5,
+      "A3-01": 5,
+      "A3-02": 20,
+      "A3-03": 5,
+      "A3-04": 5,
+      "A3-05": 5,
+      "A3-07": 1
+    },
+    "sourceSystemKey": {
+      "ACS": 9,
+      "CCTV": 9,
+      "PA": 9,
+      "RAS": 9,
+      "TEL": 9
+    }
+  },
+  "filters": {
+    "blocking": {
+      "field": "blocking",
+      "options": [
+        false,
+        true
+      ]
+    },
+    "blockingReason": {
+      "field": "blockingReason",
+      "options": [
+        "ALARM_EVENT_REVIEW_REQUIRED",
+        "ALIAS_APPROVAL",
+        "ALIAS_APPROVAL_REQUIRED",
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKED_BY_FAULTCASE_REVIEW",
+        "BLOCKED_BY_RESOLUTION",
+        "BLOCKED_BY_SOURCE_SYSTEM_REVIEW",
+        "BLOCKS_DOWNSTREAM_CREATION",
+        "DOWNSTREAM_CREATION_NOT_AUTHORIZED",
+        "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+        "FAULTCASE_CREATION_NOT_AUTHORIZED",
+        "FAULTCASE_REVIEW_REQUIRED",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "NAMESPACE_INTERPRETATION",
+        "NAMESPACE_INTERPRETATION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED",
+        "REGISTRY_APPROVAL",
+        "REGISTRY_APPROVAL_REQUIRED",
+        "SOURCE_SYSTEM_REVIEW_REQUIRED",
+        "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED",
+        "WORKORDER_INTENT_REVIEW_REQUIRED",
+        "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED"
+      ]
+    },
+    "decisionRequired": {
+      "field": "decisionRequired",
+      "options": [
+        true
+      ]
+    },
+    "decisionScope": {
+      "field": "decisionScope",
+      "options": [
+        "ALARM_EVENT_REVIEW",
+        "ASSET_REVIEW",
+        "EVIDENCE_REVIEW",
+        "FAULTCASE_REVIEW",
+        "RELEASE_GATE",
+        "SOURCE_SYSTEM_REVIEW",
+        "WORKORDER_REVIEW"
+      ]
+    },
+    "decisionState": {
+      "field": "decisionState",
+      "options": [
+        "PENDING",
+        "READY_FOR_REVIEW"
+      ]
+    },
+    "decisionType": {
+      "field": "decisionType",
+      "options": [
+        "ALARM_EVENT_REVIEW",
+        "ALIAS_APPROVAL",
+        "ASSET_RESOLUTION",
+        "DOWNSTREAM_CREATION_AUTHORIZATION",
+        "EVIDENCE_INVESTIGATION_REVIEW",
+        "FAULTCASE_CANDIDATE_REVIEW",
+        "LOCATION_RESOLUTION",
+        "NAMESPACE_INTERPRETATION",
+        "POINT_RESOLUTION",
+        "REGISTRY_APPROVAL",
+        "RELEASE_GATE_REVIEW",
+        "WORKORDER_INTENT_REVIEW"
+      ]
+    },
+    "priority": {
+      "field": "priority",
+      "options": [
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70,
+        90
+      ]
+    },
+    "queueType": {
+      "field": "queueType",
+      "options": [
+        "ALARM_EVENT_QUEUE",
+        "ASSET_RESOLUTION_QUEUE",
+        "EVIDENCE_INVESTIGATION_QUEUE",
+        "FAULTCASE_QUEUE",
+        "RELEASE_GATE_QUEUE",
+        "SOURCE_SYSTEM_QUEUE",
+        "WORKORDER_INTENT_QUEUE"
+      ]
+    },
+    "reviewReason": {
+      "field": "reviewReason",
+      "options": [
+        "ALARM_EVENT_REVIEW_REQUIRED",
+        "ALIAS_APPROVAL_REQUIRED",
+        "ASSET_RESOLUTION_REQUIRED",
+        "DOWNSTREAM_CREATION_NOT_AUTHORIZED",
+        "EVIDENCE_INVESTIGATION_REVIEW_REQUIRED",
+        "FAULTCASE_REVIEW_REQUIRED",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "NAMESPACE_INTERPRETATION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED",
+        "REGISTRY_APPROVAL_REQUIRED",
+        "RELEASE_GATE_PASS_PUSH_DISABLED",
+        "WORKORDER_INTENT_REVIEW_REQUIRED"
+      ]
+    },
+    "severity": {
+      "field": "severity",
+      "options": [
+        "HIGH",
+        "INFO",
+        "LOW",
+        "MEDIUM"
+      ]
+    },
+    "sourceStage": {
+      "field": "sourceStage",
+      "options": [
+        "A2",
+        "A3-01",
+        "A3-02",
+        "A3-03",
+        "A3-04",
+        "A3-05",
+        "A3-07"
+      ]
+    },
+    "sourceSystemKey": {
+      "field": "sourceSystemKey",
+      "options": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ]
+    }
+  },
+  "generatedAtPolicy": "DETERMINISTIC_NO_VOLATILE_TIMESTAMP",
+  "implementationStatus": "OPERATOR_REVIEW_UCONSOLE_QUEUE_PROJECTION_COMPLETE",
+  "profileId": "airport-uconsole-operator-review-queue-profile-v1",
+  "projectionId": "f38fb64c7ba0600490822f89c2a517463c5e0e2c65a0a687b1713af41c871800",
+  "queueCards": [
+    {
+      "affectedDecisionCount": 46,
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "blockingDecisionCount": 45,
+      "cardId": "76fdc45676a1189ffa9f22e7c5b326c30f2dbd073afa9f68df1fdf5ab312281b",
+      "cardType": "ALL_PENDING_SUMMARY",
+      "decisionRequired": true,
+      "deterministicDigest": "eb3319e045fde96aad526255994e8cae93526d3fa82a229e9aecfdc0fbb66973",
+      "queueType": "ALL_PENDING_QUEUE",
+      "severity": "HIGH",
+      "status": "BLOCKED",
+      "title": "All pending operator decisions",
+      "unit": "DECISIONS",
+      "value": 46
+    },
+    {
+      "affectedDecisionCount": 5,
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "blockingDecisionCount": 5,
+      "cardId": "b9c7a9b656275247e95bb2864eba4ad0712204cc1ac389c336a151f626fef4fa",
+      "cardType": "SOURCE_SYSTEM_REVIEW_SUMMARY",
+      "decisionRequired": true,
+      "deterministicDigest": "f3c3d5650e13c77d7cff0d85afe4db8a7ae258ea524b54d3d9a02b4bed9f9e5d",
+      "queueType": "SOURCE_SYSTEM_QUEUE",
+      "severity": "HIGH",
+      "status": "BLOCKED",
+      "title": "Source-system review decisions",
+      "unit": "DECISIONS",
+      "value": 5
+    },
+    {
+      "affectedDecisionCount": 15,
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "blockingDecisionCount": 15,
+      "cardId": "0d2d689b1ef2194f22a879a3773833f12232aad59a688169102411d5887d2f27",
+      "cardType": "ASSET_RESOLUTION_SUMMARY",
+      "decisionRequired": true,
+      "deterministicDigest": "18091b98c16b006d1b5340a303cc50a7bd110bacc11cd80c9ec0231a2ad1bc5e",
+      "queueType": "ASSET_RESOLUTION_QUEUE",
+      "severity": "HIGH",
+      "status": "BLOCKED",
+      "title": "Asset, point and location resolution decisions",
+      "unit": "DECISIONS",
+      "value": 15
+    },
+    {
+      "affectedDecisionCount": 10,
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "blockingDecisionCount": 10,
+      "cardId": "1c0f4bcc33df18b00f87ca3c7a7f05441c6ed304fd3274e136a558858e33c71a",
+      "cardType": "ALARM_EVENT_REVIEW_SUMMARY",
+      "decisionRequired": true,
+      "deterministicDigest": "de0ace1232c81c0c6009f2b7e11c9ae91f16e1e7146be3cf9e263fe1a30d8d95",
+      "queueType": "ALARM_EVENT_QUEUE",
+      "severity": "HIGH",
+      "status": "BLOCKED",
+      "title": "Alarm/Event review decisions",
+      "unit": "DECISIONS",
+      "value": 10
+    },
+    {
+      "affectedDecisionCount": 5,
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "blockingDecisionCount": 5,
+      "cardId": "c8d8c962cdb28a610de5c2ae2718d91ebed61e70b0c286526b1fe9044e289fb4",
+      "cardType": "FAULTCASE_REVIEW_SUMMARY",
+      "decisionRequired": true,
+      "deterministicDigest": "76d9ef4007d2d90148429657028eb32da305814baf8327ef37887823500c5b74",
+      "queueType": "FAULTCASE_QUEUE",
+      "severity": "HIGH",
+      "status": "BLOCKED",
+      "title": "FaultCase candidate decisions",
+      "unit": "DECISIONS",
+      "value": 5
+    },
+    {
+      "affectedDecisionCount": 5,
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "blockingDecisionCount": 5,
+      "cardId": "e94c9a9aa82b7bdb4ba0bc947f7b1105ee9f2b1a9bdb8b9f7e7cf6bf1f0e77f3",
+      "cardType": "WORKORDER_INTENT_REVIEW_SUMMARY",
+      "decisionRequired": true,
+      "deterministicDigest": "410d30b3d9201f728f74e537cb38cb214cc171f53d2156db767579d217d6d36a",
+      "queueType": "WORKORDER_INTENT_QUEUE",
+      "severity": "HIGH",
+      "status": "BLOCKED",
+      "title": "WorkOrderIntent decisions",
+      "unit": "DECISIONS",
+      "value": 5
+    },
+    {
+      "affectedDecisionCount": 5,
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "blockingDecisionCount": 5,
+      "cardId": "45085389d664935f958a3977bcc8a603bcb8feb647d75c8a14061d2ec023464f",
+      "cardType": "EVIDENCE_INVESTIGATION_REVIEW_SUMMARY",
+      "decisionRequired": true,
+      "deterministicDigest": "1a1d60bf053fc6d2dd2e4b075e4c2fc5569b5577697bab6bc443fe4ce4f2cccf",
+      "queueType": "EVIDENCE_INVESTIGATION_QUEUE",
+      "severity": "HIGH",
+      "status": "BLOCKED",
+      "title": "Evidence investigation decisions",
+      "unit": "DECISIONS",
+      "value": 5
+    },
+    {
+      "affectedDecisionCount": 1,
+      "affectedSourceSystemKeys": [],
+      "blockingDecisionCount": 0,
+      "cardId": "ddab40ac8c7a4068e06c7e656b9268ed781228ed8f0d3ec063a40562106088eb",
+      "cardType": "RELEASE_GATE_SUMMARY",
+      "decisionRequired": true,
+      "deterministicDigest": "8513abb05fb65aeee5db74840882263af6264044277ba1a640e6947b01afe73d",
+      "queueType": "RELEASE_GATE_QUEUE",
+      "severity": "INFO",
+      "status": "READY_FOR_REVIEW",
+      "title": "Release gate decisions",
+      "unit": "DECISIONS",
+      "value": 1
+    }
+  ],
+  "queueGroups": [
+    {
+      "affectedDeviceEvidenceCount": 3290,
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "blockingDecisionCount": 45,
+      "deterministicDigest": "467c135e48e41cfb711a872b0234b066470bd80ba4eb98d02e6bc512b199e2ea",
+      "openDecisionCount": 46,
+      "queueGroupId": "7e9a6c4e25401b786cd2594329b99abe7530fe9b507e0867e6d2e126a03a8705",
+      "queueType": "ALL_PENDING_QUEUE",
+      "rowIds": [
+        "063e8f5c3feaef508b0670e3c4034039a1faaee08c6c21e179e2b6e46d481a84",
+        "098cec046277dfd7e90d06df98ff477f4f69adb7a0e2d65c00e0701ce6c149ff",
+        "0fd7864071825a670cd9983771beb23ea8f3b5dc1614282dd958bb8ed9048410",
+        "13df5dfd6ac4f710fdfd24b5b1a930d9ffe28aa55094fce9171d4f48d1a636f5",
+        "17ddfdd06e24125c870d413eb1d4d3dae82b5f119eb2badc2d8ae0c91341e685",
+        "275a8d91d7cc13bdd63a421ccfd5c2c42b0700d04604f5ea6cfa5c0fc2ec853f",
+        "282988c09aa0b6f51d1f3db6ae0938de75c935b1a850878f0c78c12dd7146f5f",
+        "2bd748eeb2ce7ac85add818b4a5ae7fc2710372d8fe313c5f6ff9a668e1bbd34",
+        "3ba239793a49b0f1b2b021acc376445c4e41b8789ff31f68190289c23122b2b6",
+        "3f72c5511b556a2463f2c6256e7d01283d2d3f1a710b6b3dee7ed9b7c884df76",
+        "48567288a2ea647ca4d0dbd52bcd333483cd486f1343ee12d6303485c59eef3d",
+        "4ccce47de6b58c9d42f213d83b4d05252745ed594d2bd112fa90721591138575",
+        "57e48f95d3cc7e5723a8039058762d2a938967f372bae29bee384b2e74230e67",
+        "5b2ce3251f34bc09c24aaa233a4fddb8c9e5b4440fcc1866bfb62cafb1ac862d",
+        "62dc90c1e1ce43be92014f1c8cfa1d74a6044ab7dd57bf151bc2bc58bd18b868",
+        "636b31ed583d95cb81c6f0d3cbc878d1c38550ad192e6fddfeffa1d4a0c0482c",
+        "6d2f6f44c686cd9d54a556c9139fb5d5591617e621122ad0674b40e3eb74bf09",
+        "71d3eb0b7ab84adbab3ba2476ed1cfc6e0e7a4d7147050ff06bc64df54e32dcc",
+        "77f2594a59fe8fb67b558091f0ba2e2a33f7ffc1a584625db14ff35567dd7f92",
+        "83b9bd1475245a9edbe7de1fe41d11a05be74e506175ce6e095160b8271620da",
+        "849d7d6279a36032ef93ddeb0fa6c841f32634c85ae9d2e4539413825059aeac",
+        "9606b9dfc6809984fb0291009927a37987c1e39e31b3b80fa6d655aebd3fa457",
+        "98893cb8460f05b4c7dc47dd3d5898a35913e862c2140ab07cc5ad84d8787148",
+        "9adc9646ee2a28f6d5247d4cd0cf08e2d117b0e9116185d0c5b5ad7c7b790d0e",
+        "a2e1b4bf38405d89a8db8cb47671164fd799e5def2cdffcd6d5ee250ee802049",
+        "a89741a1e848bc70092f1f0b55e0f81f99a7c717a11d6d9df45530029fa6b58b",
+        "aad3a4daa279a118ffeb658f874fe565afcf9e74343dda2360648d7fc8f25137",
+        "ab60f65601256da9fa53f116b98bfa0c2a3659907556943bd8392c8fc461ca7e",
+        "ac9885b140dc7fabe7e06202788e359032a8f103fb1d7c570eadb4de06bdb1bd",
+        "b02fea4966d1fcbbe26efb976023675032308860749d7e9a568941d17b0d8d20",
+        "b2383640849cda2b89814c92a698576d463831d1d85f7f3dd8ff2c6ca92d7387",
+        "b45b3c2168c5e5194e05cf29454d567eefa5587002bce9c870710d88a3134bb8",
+        "b825b064f30e53d837d4ccb49fc95e29ddbbb062a74af0abb8f8446453ca5a93",
+        "b9c7eeec210bdc5643786877fa96e874073052d8dfeaff672f8360b753fe5852",
+        "bc0b5eafd3d14444367fa088f05e73f500aff6cf768c7a196cee954639bb74b2",
+        "cab4cad4604afe2852f37e37f2e11d8dfc9c85b5a68d1d8c5c3518ea891c1580",
+        "cd6ace0d6986eb65d064425c1caea77f23f39ff3ad7b3f42664a178d3e952692",
+        "d074ac3d592f6f6b25db5a7d967c257dadb508835eaafc0eec72ad9700a64eb1",
+        "d60097f51d7678de08e19e06ac0196120e325bafbfa52bf344c8cce4cccfb842",
+        "df0cc3913b7f05db4d2954af1cb3eec2bd3d8311e0715880a7dcd7be3e8083cb",
+        "e4c67bd03994e0e38bb9d9a0031a359ccc5c3bebd559baf780961714b8789c3d",
+        "e77c113e2da43369fb033bd946f3b83d9c6a6fa4193e83e16604641222384d13",
+        "f2f973c18ef7d4af747895cf2013361712b1e37b4ce68da1ac1077e96a513056",
+        "f30efc5155ca57d0b844c69d7ed48b3c5fd3090edcf53d02f9265902b5036619",
+        "fa8a16f807ad1c992675fc408f8a6d7fae0fc635aed0560c82a6a9366fa54353",
+        "ffa876f689b183cf76cf590e3cc2c0dade97d69d96e5b7f11bb8966daaecf346"
+      ],
+      "title": "All pending operator decisions"
+    },
+    {
+      "affectedDeviceEvidenceCount": 470,
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "blockingDecisionCount": 5,
+      "deterministicDigest": "84c9d9002d3fe6d3fcfebc24a7d4209cb88135455f9babb07ec4471b1ebdf59a",
+      "openDecisionCount": 5,
+      "queueGroupId": "ef0bc06dadb488d129852de1e2884449eab587fbe71cecf6232c4425733ffb79",
+      "queueType": "SOURCE_SYSTEM_QUEUE",
+      "rowIds": [
+        "17ddfdd06e24125c870d413eb1d4d3dae82b5f119eb2badc2d8ae0c91341e685",
+        "3f72c5511b556a2463f2c6256e7d01283d2d3f1a710b6b3dee7ed9b7c884df76",
+        "5b2ce3251f34bc09c24aaa233a4fddb8c9e5b4440fcc1866bfb62cafb1ac862d",
+        "83b9bd1475245a9edbe7de1fe41d11a05be74e506175ce6e095160b8271620da",
+        "b02fea4966d1fcbbe26efb976023675032308860749d7e9a568941d17b0d8d20"
+      ],
+      "title": "Source-system review decisions"
+    },
+    {
+      "affectedDeviceEvidenceCount": 1410,
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "blockingDecisionCount": 15,
+      "deterministicDigest": "d6698f5705c6d12ad00c94ef8d67d5a08ce95c9c299993a29e7fe68c62035699",
+      "openDecisionCount": 15,
+      "queueGroupId": "96644cefdbe725983a863420b8b03c97745418136b7fbcb58a812474f3cfcad5",
+      "queueType": "ASSET_RESOLUTION_QUEUE",
+      "rowIds": [
+        "063e8f5c3feaef508b0670e3c4034039a1faaee08c6c21e179e2b6e46d481a84",
+        "098cec046277dfd7e90d06df98ff477f4f69adb7a0e2d65c00e0701ce6c149ff",
+        "3ba239793a49b0f1b2b021acc376445c4e41b8789ff31f68190289c23122b2b6",
+        "62dc90c1e1ce43be92014f1c8cfa1d74a6044ab7dd57bf151bc2bc58bd18b868",
+        "636b31ed583d95cb81c6f0d3cbc878d1c38550ad192e6fddfeffa1d4a0c0482c",
+        "6d2f6f44c686cd9d54a556c9139fb5d5591617e621122ad0674b40e3eb74bf09",
+        "849d7d6279a36032ef93ddeb0fa6c841f32634c85ae9d2e4539413825059aeac",
+        "aad3a4daa279a118ffeb658f874fe565afcf9e74343dda2360648d7fc8f25137",
+        "ac9885b140dc7fabe7e06202788e359032a8f103fb1d7c570eadb4de06bdb1bd",
+        "b45b3c2168c5e5194e05cf29454d567eefa5587002bce9c870710d88a3134bb8",
+        "bc0b5eafd3d14444367fa088f05e73f500aff6cf768c7a196cee954639bb74b2",
+        "d60097f51d7678de08e19e06ac0196120e325bafbfa52bf344c8cce4cccfb842",
+        "e77c113e2da43369fb033bd946f3b83d9c6a6fa4193e83e16604641222384d13",
+        "fa8a16f807ad1c992675fc408f8a6d7fae0fc635aed0560c82a6a9366fa54353",
+        "ffa876f689b183cf76cf590e3cc2c0dade97d69d96e5b7f11bb8966daaecf346"
+      ],
+      "title": "Asset, point and location resolution decisions"
+    },
+    {
+      "affectedDeviceEvidenceCount": 470,
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "blockingDecisionCount": 10,
+      "deterministicDigest": "73fe0321f7bba2745eb3d904ba37ce7e80d3c14afe14c891cb6c24d2ccc700ad",
+      "openDecisionCount": 10,
+      "queueGroupId": "0d537cb4b4aafd936caba0d117d67e2de39824b57d6e57e912622b67759eb101",
+      "queueType": "ALARM_EVENT_QUEUE",
+      "rowIds": [
+        "0fd7864071825a670cd9983771beb23ea8f3b5dc1614282dd958bb8ed9048410",
+        "13df5dfd6ac4f710fdfd24b5b1a930d9ffe28aa55094fce9171d4f48d1a636f5",
+        "282988c09aa0b6f51d1f3db6ae0938de75c935b1a850878f0c78c12dd7146f5f",
+        "2bd748eeb2ce7ac85add818b4a5ae7fc2710372d8fe313c5f6ff9a668e1bbd34",
+        "4ccce47de6b58c9d42f213d83b4d05252745ed594d2bd112fa90721591138575",
+        "71d3eb0b7ab84adbab3ba2476ed1cfc6e0e7a4d7147050ff06bc64df54e32dcc",
+        "ab60f65601256da9fa53f116b98bfa0c2a3659907556943bd8392c8fc461ca7e",
+        "b9c7eeec210bdc5643786877fa96e874073052d8dfeaff672f8360b753fe5852",
+        "cab4cad4604afe2852f37e37f2e11d8dfc9c85b5a68d1d8c5c3518ea891c1580",
+        "f30efc5155ca57d0b844c69d7ed48b3c5fd3090edcf53d02f9265902b5036619"
+      ],
+      "title": "Alarm/Event review decisions"
+    },
+    {
+      "affectedDeviceEvidenceCount": 0,
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "blockingDecisionCount": 5,
+      "deterministicDigest": "64b3c9db87bb009485d8fd0df6aaf6ba3aef9168c663bfff6d3bc834293cddfa",
+      "openDecisionCount": 5,
+      "queueGroupId": "92bb97fea1e2d8b92823c9506d2ff0ac9d7b8006e29d8257a19c58bbd0849dd3",
+      "queueType": "FAULTCASE_QUEUE",
+      "rowIds": [
+        "57e48f95d3cc7e5723a8039058762d2a938967f372bae29bee384b2e74230e67",
+        "9606b9dfc6809984fb0291009927a37987c1e39e31b3b80fa6d655aebd3fa457",
+        "9adc9646ee2a28f6d5247d4cd0cf08e2d117b0e9116185d0c5b5ad7c7b790d0e",
+        "b825b064f30e53d837d4ccb49fc95e29ddbbb062a74af0abb8f8446453ca5a93",
+        "df0cc3913b7f05db4d2954af1cb3eec2bd3d8311e0715880a7dcd7be3e8083cb"
+      ],
+      "title": "FaultCase candidate decisions"
+    },
+    {
+      "affectedDeviceEvidenceCount": 470,
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "blockingDecisionCount": 5,
+      "deterministicDigest": "faae6944e3dd14b2d03da67a7f54ec7fb6302d0579d42a456da927390c32551c",
+      "openDecisionCount": 5,
+      "queueGroupId": "da5170a4c7f4e90795db239fe78fcad5030c05f897546c413f40640f812799af",
+      "queueType": "WORKORDER_INTENT_QUEUE",
+      "rowIds": [
+        "275a8d91d7cc13bdd63a421ccfd5c2c42b0700d04604f5ea6cfa5c0fc2ec853f",
+        "a2e1b4bf38405d89a8db8cb47671164fd799e5def2cdffcd6d5ee250ee802049",
+        "a89741a1e848bc70092f1f0b55e0f81f99a7c717a11d6d9df45530029fa6b58b",
+        "b2383640849cda2b89814c92a698576d463831d1d85f7f3dd8ff2c6ca92d7387",
+        "cd6ace0d6986eb65d064425c1caea77f23f39ff3ad7b3f42664a178d3e952692"
+      ],
+      "title": "WorkOrderIntent decisions"
+    },
+    {
+      "affectedDeviceEvidenceCount": 470,
+      "affectedSourceSystemKeys": [
+        "ACS",
+        "CCTV",
+        "PA",
+        "RAS",
+        "TEL"
+      ],
+      "blockingDecisionCount": 5,
+      "deterministicDigest": "32e1f9c73e166b12ce0be2ed25b5a19e823827911ffd8d159582358ba80f9cfb",
+      "openDecisionCount": 5,
+      "queueGroupId": "a0b12588dc7026047bed4e066924447fb3e723a8f6ec3df4d23b41395b18f33a",
+      "queueType": "EVIDENCE_INVESTIGATION_QUEUE",
+      "rowIds": [
+        "48567288a2ea647ca4d0dbd52bcd333483cd486f1343ee12d6303485c59eef3d",
+        "77f2594a59fe8fb67b558091f0ba2e2a33f7ffc1a584625db14ff35567dd7f92",
+        "98893cb8460f05b4c7dc47dd3d5898a35913e862c2140ab07cc5ad84d8787148",
+        "d074ac3d592f6f6b25db5a7d967c257dadb508835eaafc0eec72ad9700a64eb1",
+        "f2f973c18ef7d4af747895cf2013361712b1e37b4ce68da1ac1077e96a513056"
+      ],
+      "title": "Evidence investigation decisions"
+    },
+    {
+      "affectedDeviceEvidenceCount": 0,
+      "affectedSourceSystemKeys": [],
+      "blockingDecisionCount": 0,
+      "deterministicDigest": "6ea285e174ca1779a9dd7cb72ecd12f8e52224694de87cef547963c0dc945088",
+      "openDecisionCount": 1,
+      "queueGroupId": "e71cdb065b720f1c1c3761fc78bd2bc3b52be44b6b72f951ad156285a3ef4119",
+      "queueType": "RELEASE_GATE_QUEUE",
+      "rowIds": [
+        "e4c67bd03994e0e38bb9d9a0031a359ccc5c3bebd559baf780961714b8789c3d"
+      ],
+      "title": "Release gate decisions"
+    }
+  ],
+  "queueRows": [
+    {
+      "affectedDeviceEvidenceCount": 0,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ALARM_EVENT_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "03844389bf147217f2259b0c92fc9a6f080eb6c3c31facf5e5fcc865dca3b2a3",
+      "decisionRequired": true,
+      "decisionScope": "ALARM_EVENT_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "ALARM_EVENT_REVIEW",
+      "deterministicDigest": "dacebedf0f7038d3de3299e490f454f5823332c191aaf6367ab877e4e88cd40b",
+      "priority": 30,
+      "queueType": "ALARM_EVENT_QUEUE",
+      "reviewReasons": [
+        "ALARM_EVENT_REVIEW_REQUIRED"
+      ],
+      "rowId": "f30efc5155ca57d0b844c69d7ed48b3c5fd3090edcf53d02f9265902b5036619",
+      "severity": "HIGH",
+      "sourceStage": "A3-01",
+      "sourceSystemKey": "ACS",
+      "title": "ACS alarm/event review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 0,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ALARM_EVENT_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "219c5722fedae552a141355a59d84decdd91574ef099156941987a4436786044",
+      "decisionRequired": true,
+      "decisionScope": "ALARM_EVENT_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "ALARM_EVENT_REVIEW",
+      "deterministicDigest": "09d28ca00845d41567991aba3302af8aec4f5c67a42b5484038dd2ba237cf6b9",
+      "priority": 30,
+      "queueType": "ALARM_EVENT_QUEUE",
+      "reviewReasons": [
+        "ALARM_EVENT_REVIEW_REQUIRED"
+      ],
+      "rowId": "ab60f65601256da9fa53f116b98bfa0c2a3659907556943bd8392c8fc461ca7e",
+      "severity": "LOW",
+      "sourceStage": "A3-01",
+      "sourceSystemKey": "CCTV",
+      "title": "CCTV alarm/event review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 0,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ALARM_EVENT_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "d2f028af434eb859174fe833d3a2961a79642417c6968a8a29432ecd4ccef27b",
+      "decisionRequired": true,
+      "decisionScope": "ALARM_EVENT_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "ALARM_EVENT_REVIEW",
+      "deterministicDigest": "60d62360b363aac1c7a33c2499c429c1c24a604b224d26de1f6673270443d8f8",
+      "priority": 30,
+      "queueType": "ALARM_EVENT_QUEUE",
+      "reviewReasons": [
+        "ALARM_EVENT_REVIEW_REQUIRED"
+      ],
+      "rowId": "2bd748eeb2ce7ac85add818b4a5ae7fc2710372d8fe313c5f6ff9a668e1bbd34",
+      "severity": "LOW",
+      "sourceStage": "A3-01",
+      "sourceSystemKey": "PA",
+      "title": "PA alarm/event review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 0,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ALARM_EVENT_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "c9bdc082c69d8ada95f6ad4871262c73445d3ea36be5102bd2883b723d214db0",
+      "decisionRequired": true,
+      "decisionScope": "ALARM_EVENT_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "ALARM_EVENT_REVIEW",
+      "deterministicDigest": "ac6c85fbeca92a685b4679e0ca9254689fd999d77303dc886ad2aa9043e46e0f",
+      "priority": 30,
+      "queueType": "ALARM_EVENT_QUEUE",
+      "reviewReasons": [
+        "ALARM_EVENT_REVIEW_REQUIRED"
+      ],
+      "rowId": "71d3eb0b7ab84adbab3ba2476ed1cfc6e0e7a4d7147050ff06bc64df54e32dcc",
+      "severity": "MEDIUM",
+      "sourceStage": "A3-01",
+      "sourceSystemKey": "RAS",
+      "title": "RAS alarm/event review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 0,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ALARM_EVENT_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "6a8a8a5f8e4a3b518851527c2ba59896efd863f5fbe11ed03162666ad76a938e",
+      "decisionRequired": true,
+      "decisionScope": "ALARM_EVENT_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "ALARM_EVENT_REVIEW",
+      "deterministicDigest": "8ace7eb3cccf8d26a85e8d6c4beafc0c5c8185f2a3047a7a8ab2c67f586f95a0",
+      "priority": 30,
+      "queueType": "ALARM_EVENT_QUEUE",
+      "reviewReasons": [
+        "ALARM_EVENT_REVIEW_REQUIRED"
+      ],
+      "rowId": "b9c7eeec210bdc5643786877fa96e874073052d8dfeaff672f8360b753fe5852",
+      "severity": "MEDIUM",
+      "sourceStage": "A3-01",
+      "sourceSystemKey": "TEL",
+      "title": "TEL alarm/event review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 129,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "APPROVE",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "db57387cf930d7db4ac2afdc605dfa581742751fdc85fd0533cb0f37fe75b5ff",
+      "decisionRequired": true,
+      "decisionScope": "ALARM_EVENT_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "DOWNSTREAM_CREATION_AUTHORIZATION",
+      "deterministicDigest": "88e77e5eeea22fe97c403c6c44df268ec1eb19c90821314759584e7924288a00",
+      "priority": 70,
+      "queueType": "ALARM_EVENT_QUEUE",
+      "reviewReasons": [
+        "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+      ],
+      "rowId": "13df5dfd6ac4f710fdfd24b5b1a930d9ffe28aa55094fce9171d4f48d1a636f5",
+      "severity": "HIGH",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "ACS",
+      "title": "ACS downstream creation authorization"
+    },
+    {
+      "affectedDeviceEvidenceCount": 52,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "APPROVE",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "1a70ceb857e36de227e061e6ba75e69732b34fbffeeebe7e448d2a35c6c985e6",
+      "decisionRequired": true,
+      "decisionScope": "ALARM_EVENT_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "DOWNSTREAM_CREATION_AUTHORIZATION",
+      "deterministicDigest": "0bb9d09c5477fb84efcbca57b5c70c54fc05b7cfaeab0e54c4d5b061692b734f",
+      "priority": 70,
+      "queueType": "ALARM_EVENT_QUEUE",
+      "reviewReasons": [
+        "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+      ],
+      "rowId": "0fd7864071825a670cd9983771beb23ea8f3b5dc1614282dd958bb8ed9048410",
+      "severity": "LOW",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "CCTV",
+      "title": "CCTV downstream creation authorization"
+    },
+    {
+      "affectedDeviceEvidenceCount": 247,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "APPROVE",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "921416f11d969831b8e941439e5d5bafab3ad7bf89eeceb238e346f9141214c9",
+      "decisionRequired": true,
+      "decisionScope": "ALARM_EVENT_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "DOWNSTREAM_CREATION_AUTHORIZATION",
+      "deterministicDigest": "1cc92bab2f7b809097dd675f153bce7c821c35974650d13d0fa5220f7f5e827f",
+      "priority": 70,
+      "queueType": "ALARM_EVENT_QUEUE",
+      "reviewReasons": [
+        "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+      ],
+      "rowId": "282988c09aa0b6f51d1f3db6ae0938de75c935b1a850878f0c78c12dd7146f5f",
+      "severity": "LOW",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "PA",
+      "title": "PA downstream creation authorization"
+    },
+    {
+      "affectedDeviceEvidenceCount": 28,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "APPROVE",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "8ff7a4d3349c11dfa062b509b4fff776ebe1aa8a2d4148dc02c7683b0c98d4d7",
+      "decisionRequired": true,
+      "decisionScope": "ALARM_EVENT_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "DOWNSTREAM_CREATION_AUTHORIZATION",
+      "deterministicDigest": "e5b9a7751f6ac44715d7cc440b6e038791945fdca26eb174f05754f33488fc99",
+      "priority": 70,
+      "queueType": "ALARM_EVENT_QUEUE",
+      "reviewReasons": [
+        "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+      ],
+      "rowId": "4ccce47de6b58c9d42f213d83b4d05252745ed594d2bd112fa90721591138575",
+      "severity": "MEDIUM",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "RAS",
+      "title": "RAS downstream creation authorization"
+    },
+    {
+      "affectedDeviceEvidenceCount": 14,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "APPROVE",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "a767c1d68bbd4b11e76424b8118476275b069691406e5167dcb9d9df03c5a3e4",
+      "decisionRequired": true,
+      "decisionScope": "ALARM_EVENT_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "DOWNSTREAM_CREATION_AUTHORIZATION",
+      "deterministicDigest": "f27cf118de05c3b03b3005237fe8df2548a44d57797403814d2507cde181331b",
+      "priority": 70,
+      "queueType": "ALARM_EVENT_QUEUE",
+      "reviewReasons": [
+        "DOWNSTREAM_CREATION_NOT_AUTHORIZED"
+      ],
+      "rowId": "cab4cad4604afe2852f37e37f2e11d8dfc9c85b5a68d1d8c5c3518ea891c1580",
+      "severity": "MEDIUM",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "TEL",
+      "title": "TEL downstream creation authorization"
+    },
+    {
+      "affectedDeviceEvidenceCount": 129,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKS_DOWNSTREAM_CREATION"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "0eabe9a6a35b8423d76496c43d1ad4cc580823b7a06cc68b7dc39d83649c651e",
+      "decisionRequired": true,
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "ASSET_RESOLUTION",
+      "deterministicDigest": "59c065ff1899f3663c8a039c856ab6190ca8f1414f0e6c97394a64f2b0bf3089",
+      "priority": 20,
+      "queueType": "ASSET_RESOLUTION_QUEUE",
+      "reviewReasons": [
+        "ASSET_RESOLUTION_REQUIRED"
+      ],
+      "rowId": "636b31ed583d95cb81c6f0d3cbc878d1c38550ad192e6fddfeffa1d4a0c0482c",
+      "severity": "HIGH",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "ACS",
+      "title": "ACS Asset resolution required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 52,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKS_DOWNSTREAM_CREATION"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "6105951e8f8cdc2557092b11dfd8ccc3d9ea77f7f67e016f17d725b4122c1985",
+      "decisionRequired": true,
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "ASSET_RESOLUTION",
+      "deterministicDigest": "7c6af9e9b36f8f12fff9b7b6d752fdf9d1c438b54d71fd4fd3e3d62a1f07af88",
+      "priority": 20,
+      "queueType": "ASSET_RESOLUTION_QUEUE",
+      "reviewReasons": [
+        "ASSET_RESOLUTION_REQUIRED"
+      ],
+      "rowId": "ac9885b140dc7fabe7e06202788e359032a8f103fb1d7c570eadb4de06bdb1bd",
+      "severity": "LOW",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "CCTV",
+      "title": "CCTV Asset resolution required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 247,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKS_DOWNSTREAM_CREATION"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "611235e783d3860e1bfa3c4379f2a726f02c2184ef8a788e6c2ac6a4a5c52c66",
+      "decisionRequired": true,
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "ASSET_RESOLUTION",
+      "deterministicDigest": "e9e884b5d320f512e08e96d4ba9fadd55ac8d9716971a11fcb6cb5c785cc02df",
+      "priority": 20,
+      "queueType": "ASSET_RESOLUTION_QUEUE",
+      "reviewReasons": [
+        "ASSET_RESOLUTION_REQUIRED"
+      ],
+      "rowId": "62dc90c1e1ce43be92014f1c8cfa1d74a6044ab7dd57bf151bc2bc58bd18b868",
+      "severity": "LOW",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "PA",
+      "title": "PA Asset resolution required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 28,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKS_DOWNSTREAM_CREATION"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "f3c78a73247fdeb7878dc72b0a9884e972f1d70816dc8e7f9e3e1c6a1a703ad2",
+      "decisionRequired": true,
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "ASSET_RESOLUTION",
+      "deterministicDigest": "565b2a844d66da6da5e4b65a816af5ce87aa5c5be91328d5c5702ddadd6fb847",
+      "priority": 20,
+      "queueType": "ASSET_RESOLUTION_QUEUE",
+      "reviewReasons": [
+        "ASSET_RESOLUTION_REQUIRED"
+      ],
+      "rowId": "ffa876f689b183cf76cf590e3cc2c0dade97d69d96e5b7f11bb8966daaecf346",
+      "severity": "MEDIUM",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "RAS",
+      "title": "RAS Asset resolution required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 14,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKS_DOWNSTREAM_CREATION"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "468b82c86e28a34244d8c6bade6eb64947ce74ef10bf1faf7d442d24a88a4a7b",
+      "decisionRequired": true,
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "ASSET_RESOLUTION",
+      "deterministicDigest": "470a17c4cdbd830c964ab45cf747e2f6cf92003042db380499889c2351d64129",
+      "priority": 20,
+      "queueType": "ASSET_RESOLUTION_QUEUE",
+      "reviewReasons": [
+        "ASSET_RESOLUTION_REQUIRED"
+      ],
+      "rowId": "063e8f5c3feaef508b0670e3c4034039a1faaee08c6c21e179e2b6e46d481a84",
+      "severity": "MEDIUM",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "TEL",
+      "title": "TEL Asset resolution required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 129,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "BLOCKS_DOWNSTREAM_CREATION",
+        "LOCATION_RESOLUTION_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "827c9c5c33dd9dfa929294f5ec48c4a64d4d3a394e1b0128d2c72c62527b1550",
+      "decisionRequired": true,
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "LOCATION_RESOLUTION",
+      "deterministicDigest": "189279df2028cdcda2586a12be6c47957ac21c63a65eb58a11546986375c8ecb",
+      "priority": 20,
+      "queueType": "ASSET_RESOLUTION_QUEUE",
+      "reviewReasons": [
+        "LOCATION_RESOLUTION_REQUIRED"
+      ],
+      "rowId": "3ba239793a49b0f1b2b021acc376445c4e41b8789ff31f68190289c23122b2b6",
+      "severity": "HIGH",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "ACS",
+      "title": "ACS Location resolution required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 52,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "BLOCKS_DOWNSTREAM_CREATION",
+        "LOCATION_RESOLUTION_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "54df1e11c75e533678a0c935a548dc610282c25684b6c567404a7298d851e6e6",
+      "decisionRequired": true,
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "LOCATION_RESOLUTION",
+      "deterministicDigest": "6d76b39459ff69b77795d012770b092af73653c87bc698cca8088b6d943271c9",
+      "priority": 20,
+      "queueType": "ASSET_RESOLUTION_QUEUE",
+      "reviewReasons": [
+        "LOCATION_RESOLUTION_REQUIRED"
+      ],
+      "rowId": "6d2f6f44c686cd9d54a556c9139fb5d5591617e621122ad0674b40e3eb74bf09",
+      "severity": "LOW",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "CCTV",
+      "title": "CCTV Location resolution required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 247,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "BLOCKS_DOWNSTREAM_CREATION",
+        "LOCATION_RESOLUTION_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "4b5fd829706035c891f9a770e72577e34712162f09e7802c50cb64650d18ee72",
+      "decisionRequired": true,
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "LOCATION_RESOLUTION",
+      "deterministicDigest": "b8de4c6cf52a3f9731198645b0a67075407428aa7677d85585e14f1691182e01",
+      "priority": 20,
+      "queueType": "ASSET_RESOLUTION_QUEUE",
+      "reviewReasons": [
+        "LOCATION_RESOLUTION_REQUIRED"
+      ],
+      "rowId": "098cec046277dfd7e90d06df98ff477f4f69adb7a0e2d65c00e0701ce6c149ff",
+      "severity": "LOW",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "PA",
+      "title": "PA Location resolution required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 28,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "BLOCKS_DOWNSTREAM_CREATION",
+        "LOCATION_RESOLUTION_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "948fb786bd37d12da9ec26019d110fba1123a3dbc90f6ddb3c5e5b8d6e77b53f",
+      "decisionRequired": true,
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "LOCATION_RESOLUTION",
+      "deterministicDigest": "4bfc907d7b711e15e8278f23f8d73011906ef011fd4da7e71512a9699d7f4322",
+      "priority": 20,
+      "queueType": "ASSET_RESOLUTION_QUEUE",
+      "reviewReasons": [
+        "LOCATION_RESOLUTION_REQUIRED"
+      ],
+      "rowId": "aad3a4daa279a118ffeb658f874fe565afcf9e74343dda2360648d7fc8f25137",
+      "severity": "MEDIUM",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "RAS",
+      "title": "RAS Location resolution required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 14,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "BLOCKS_DOWNSTREAM_CREATION",
+        "LOCATION_RESOLUTION_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "60aa1937c042b33992009e8426cac89121e160c26b3c8d3becd3db8bfd3df116",
+      "decisionRequired": true,
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "LOCATION_RESOLUTION",
+      "deterministicDigest": "0da53753db8e96c48199190f0764481ce80bbbef6e654f8c663b621686ba6c4d",
+      "priority": 20,
+      "queueType": "ASSET_RESOLUTION_QUEUE",
+      "reviewReasons": [
+        "LOCATION_RESOLUTION_REQUIRED"
+      ],
+      "rowId": "d60097f51d7678de08e19e06ac0196120e325bafbfa52bf344c8cce4cccfb842",
+      "severity": "MEDIUM",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "TEL",
+      "title": "TEL Location resolution required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 129,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "BLOCKS_DOWNSTREAM_CREATION",
+        "POINT_RESOLUTION_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "b8685bdf4e7ffb23579272884eb700df32f2fdbc5ec1c844e55b3621dffc7d25",
+      "decisionRequired": true,
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "POINT_RESOLUTION",
+      "deterministicDigest": "fb48fe180b29fb3a11f4300fee0205c3113aaa5cfb142c07a616e0b071a3f0a7",
+      "priority": 20,
+      "queueType": "ASSET_RESOLUTION_QUEUE",
+      "reviewReasons": [
+        "POINT_RESOLUTION_REQUIRED"
+      ],
+      "rowId": "b45b3c2168c5e5194e05cf29454d567eefa5587002bce9c870710d88a3134bb8",
+      "severity": "HIGH",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "ACS",
+      "title": "ACS Point resolution required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 52,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "BLOCKS_DOWNSTREAM_CREATION",
+        "POINT_RESOLUTION_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "7d79d4662cd1846f87189a667a4611b8e7c2f6eaa83393ed6bcabbf883ed84b5",
+      "decisionRequired": true,
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "POINT_RESOLUTION",
+      "deterministicDigest": "cb40252c779257516c154ffb04aabb26ddffca4b7fc7e682ddaf08b84e3e1959",
+      "priority": 20,
+      "queueType": "ASSET_RESOLUTION_QUEUE",
+      "reviewReasons": [
+        "POINT_RESOLUTION_REQUIRED"
+      ],
+      "rowId": "fa8a16f807ad1c992675fc408f8a6d7fae0fc635aed0560c82a6a9366fa54353",
+      "severity": "LOW",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "CCTV",
+      "title": "CCTV Point resolution required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 247,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "BLOCKS_DOWNSTREAM_CREATION",
+        "POINT_RESOLUTION_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "e5d8bae9ba014e2c1610700c8a68e3a2098d64244b0a092358e916ea786c39af",
+      "decisionRequired": true,
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "POINT_RESOLUTION",
+      "deterministicDigest": "abf53348cf3a96824900d696859f9d3fabe1e8e5837b09713c59fc25596466c0",
+      "priority": 20,
+      "queueType": "ASSET_RESOLUTION_QUEUE",
+      "reviewReasons": [
+        "POINT_RESOLUTION_REQUIRED"
+      ],
+      "rowId": "849d7d6279a36032ef93ddeb0fa6c841f32634c85ae9d2e4539413825059aeac",
+      "severity": "LOW",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "PA",
+      "title": "PA Point resolution required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 28,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "BLOCKS_DOWNSTREAM_CREATION",
+        "POINT_RESOLUTION_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "79fc3560fd8284602dc149418f8e237cba89afc5534e52dc1256761021dfac5a",
+      "decisionRequired": true,
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "POINT_RESOLUTION",
+      "deterministicDigest": "301b3176bf7ce31d6871a907d328e1fbcf0fecba9a16e9aeaee255fbe4e6fb0b",
+      "priority": 20,
+      "queueType": "ASSET_RESOLUTION_QUEUE",
+      "reviewReasons": [
+        "POINT_RESOLUTION_REQUIRED"
+      ],
+      "rowId": "bc0b5eafd3d14444367fa088f05e73f500aff6cf768c7a196cee954639bb74b2",
+      "severity": "MEDIUM",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "RAS",
+      "title": "RAS Point resolution required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 14,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "BLOCKS_DOWNSTREAM_CREATION",
+        "POINT_RESOLUTION_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "6ef8751e77444810843b4fa2632633d5292fc5952305c3a3810e7aea929183fc",
+      "decisionRequired": true,
+      "decisionScope": "ASSET_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "POINT_RESOLUTION",
+      "deterministicDigest": "1c816ce900971dffc2386b02884fecd231dd81b660449e9c561dbbf9d2589f7e",
+      "priority": 20,
+      "queueType": "ASSET_RESOLUTION_QUEUE",
+      "reviewReasons": [
+        "POINT_RESOLUTION_REQUIRED"
+      ],
+      "rowId": "e77c113e2da43369fb033bd946f3b83d9c6a6fa4193e83e16604641222384d13",
+      "severity": "MEDIUM",
+      "sourceStage": "A3-02",
+      "sourceSystemKey": "TEL",
+      "title": "TEL Point resolution required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 129,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ASSET_RESOLUTION_REQUIRED",
+        "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+        "FAULTCASE_REVIEW_REQUIRED",
+        "REGISTRY_APPROVAL_REQUIRED",
+        "SOURCE_SYSTEM_REVIEW_REQUIRED",
+        "WORKORDER_INTENT_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "6b49f645470ed970a1ccd8f4c1971b47bd08058db365ce2f441ae8a2e356fde2",
+      "decisionRequired": true,
+      "decisionScope": "EVIDENCE_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "EVIDENCE_INVESTIGATION_REVIEW",
+      "deterministicDigest": "4192d7d85ee489bbd58ab2f410e23cb8775cc550a38c57d8d60d9ec1d5724049",
+      "priority": 60,
+      "queueType": "EVIDENCE_INVESTIGATION_QUEUE",
+      "reviewReasons": [
+        "EVIDENCE_INVESTIGATION_REVIEW_REQUIRED"
+      ],
+      "rowId": "f2f973c18ef7d4af747895cf2013361712b1e37b4ce68da1ac1077e96a513056",
+      "severity": "HIGH",
+      "sourceStage": "A3-05",
+      "sourceSystemKey": "ACS",
+      "title": "ACS evidence investigation review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 52,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ALIAS_APPROVAL_REQUIRED",
+        "ASSET_RESOLUTION_REQUIRED",
+        "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+        "FAULTCASE_REVIEW_REQUIRED",
+        "SOURCE_SYSTEM_REVIEW_REQUIRED",
+        "WORKORDER_INTENT_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "bac5a5c46e001f3e84f6cfa4a82e726d9023a4a76e8be41e2e851a3516740924",
+      "decisionRequired": true,
+      "decisionScope": "EVIDENCE_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "EVIDENCE_INVESTIGATION_REVIEW",
+      "deterministicDigest": "92b2a0dc5dd86fe14db1e0613dc22a1497f209a0eda7928224fd070f23576b41",
+      "priority": 60,
+      "queueType": "EVIDENCE_INVESTIGATION_QUEUE",
+      "reviewReasons": [
+        "EVIDENCE_INVESTIGATION_REVIEW_REQUIRED"
+      ],
+      "rowId": "98893cb8460f05b4c7dc47dd3d5898a35913e862c2140ab07cc5ad84d8787148",
+      "severity": "HIGH",
+      "sourceStage": "A3-05",
+      "sourceSystemKey": "CCTV",
+      "title": "CCTV evidence investigation review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 247,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ALIAS_APPROVAL_REQUIRED",
+        "ASSET_RESOLUTION_REQUIRED",
+        "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+        "FAULTCASE_REVIEW_REQUIRED",
+        "SOURCE_SYSTEM_REVIEW_REQUIRED",
+        "WORKORDER_INTENT_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "94af27fdd1e78c5472ce1267b5f2f2605894f2f9a06021a6211766e6dbea5355",
+      "decisionRequired": true,
+      "decisionScope": "EVIDENCE_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "EVIDENCE_INVESTIGATION_REVIEW",
+      "deterministicDigest": "e03ddccf7238f4ae70f0ca9b9d33c09cca40cb771d44a5a9001f8685643414ec",
+      "priority": 60,
+      "queueType": "EVIDENCE_INVESTIGATION_QUEUE",
+      "reviewReasons": [
+        "EVIDENCE_INVESTIGATION_REVIEW_REQUIRED"
+      ],
+      "rowId": "77f2594a59fe8fb67b558091f0ba2e2a33f7ffc1a584625db14ff35567dd7f92",
+      "severity": "HIGH",
+      "sourceStage": "A3-05",
+      "sourceSystemKey": "PA",
+      "title": "PA evidence investigation review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 28,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ASSET_RESOLUTION_REQUIRED",
+        "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+        "FAULTCASE_REVIEW_REQUIRED",
+        "REGISTRY_APPROVAL_REQUIRED",
+        "SOURCE_SYSTEM_REVIEW_REQUIRED",
+        "WORKORDER_INTENT_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "9644fd5626735ead20d577302879c654a158550ff4cdb9d8d9e6387c233a26fe",
+      "decisionRequired": true,
+      "decisionScope": "EVIDENCE_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "EVIDENCE_INVESTIGATION_REVIEW",
+      "deterministicDigest": "7a63bf7f630071a9af8d79b93aec048ac1b12884d998b45bab7c765f08d6b906",
+      "priority": 60,
+      "queueType": "EVIDENCE_INVESTIGATION_QUEUE",
+      "reviewReasons": [
+        "EVIDENCE_INVESTIGATION_REVIEW_REQUIRED"
+      ],
+      "rowId": "48567288a2ea647ca4d0dbd52bcd333483cd486f1343ee12d6303485c59eef3d",
+      "severity": "HIGH",
+      "sourceStage": "A3-05",
+      "sourceSystemKey": "RAS",
+      "title": "RAS evidence investigation review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 14,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ASSET_RESOLUTION_REQUIRED",
+        "EVIDENCE_CENTER_WRITE_NOT_AUTHORIZED",
+        "FAULTCASE_REVIEW_REQUIRED",
+        "NAMESPACE_INTERPRETATION_REQUIRED",
+        "SOURCE_SYSTEM_REVIEW_REQUIRED",
+        "WORKORDER_INTENT_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "f5e019ed5db793f0cf2fe3ba398eeb75541cdbf84c09007976925f90ebccb601",
+      "decisionRequired": true,
+      "decisionScope": "EVIDENCE_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "EVIDENCE_INVESTIGATION_REVIEW",
+      "deterministicDigest": "08ce37302dfc36dcc7cf81653b631901fe848192f709ffe2d730047a95f07ca3",
+      "priority": 60,
+      "queueType": "EVIDENCE_INVESTIGATION_QUEUE",
+      "reviewReasons": [
+        "EVIDENCE_INVESTIGATION_REVIEW_REQUIRED"
+      ],
+      "rowId": "d074ac3d592f6f6b25db5a7d967c257dadb508835eaafc0eec72ad9700a64eb1",
+      "severity": "HIGH",
+      "sourceStage": "A3-05",
+      "sourceSystemKey": "TEL",
+      "title": "TEL evidence investigation review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 0,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKED_BY_RESOLUTION",
+        "BLOCKED_BY_SOURCE_SYSTEM_REVIEW",
+        "FAULTCASE_CREATION_NOT_AUTHORIZED",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED",
+        "REGISTRY_APPROVAL_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "bb11dc25caa5e9a71715d110ba356ec4eea8fef2a3bafe5b92926f4edc4c7818",
+      "decisionRequired": true,
+      "decisionScope": "FAULTCASE_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "FAULTCASE_CANDIDATE_REVIEW",
+      "deterministicDigest": "1e58b194f295f98cbc0786eef3b85d6042fbcf1421b0c3b89dca35abf16408a7",
+      "priority": 40,
+      "queueType": "FAULTCASE_QUEUE",
+      "reviewReasons": [
+        "FAULTCASE_REVIEW_REQUIRED"
+      ],
+      "rowId": "57e48f95d3cc7e5723a8039058762d2a938967f372bae29bee384b2e74230e67",
+      "severity": "HIGH",
+      "sourceStage": "A3-03",
+      "sourceSystemKey": "ACS",
+      "title": "ACS FaultCase candidate review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 0,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ALIAS_APPROVAL_REQUIRED",
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKED_BY_RESOLUTION",
+        "BLOCKED_BY_SOURCE_SYSTEM_REVIEW",
+        "FAULTCASE_CREATION_NOT_AUTHORIZED",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "770d6dbaf35e13b857af6903985eb796a8e922b7087bac9de82317209570a83f",
+      "decisionRequired": true,
+      "decisionScope": "FAULTCASE_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "FAULTCASE_CANDIDATE_REVIEW",
+      "deterministicDigest": "f097ef4aa4bc073b9a8a4e11292eaeeaf3d0e2ba92197faa636e5f78231bd1df",
+      "priority": 40,
+      "queueType": "FAULTCASE_QUEUE",
+      "reviewReasons": [
+        "FAULTCASE_REVIEW_REQUIRED"
+      ],
+      "rowId": "df0cc3913b7f05db4d2954af1cb3eec2bd3d8311e0715880a7dcd7be3e8083cb",
+      "severity": "LOW",
+      "sourceStage": "A3-03",
+      "sourceSystemKey": "CCTV",
+      "title": "CCTV FaultCase candidate review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 0,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ALIAS_APPROVAL_REQUIRED",
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKED_BY_RESOLUTION",
+        "BLOCKED_BY_SOURCE_SYSTEM_REVIEW",
+        "FAULTCASE_CREATION_NOT_AUTHORIZED",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "477bbb2c89e20f91b743808f927db066ea1dbb11a33f834d2ba52a85c52fc850",
+      "decisionRequired": true,
+      "decisionScope": "FAULTCASE_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "FAULTCASE_CANDIDATE_REVIEW",
+      "deterministicDigest": "2f501e2e42b3352c95a9cc38fc53e83430d141d60ad87cdca185697f2d0dfeba",
+      "priority": 40,
+      "queueType": "FAULTCASE_QUEUE",
+      "reviewReasons": [
+        "FAULTCASE_REVIEW_REQUIRED"
+      ],
+      "rowId": "b825b064f30e53d837d4ccb49fc95e29ddbbb062a74af0abb8f8446453ca5a93",
+      "severity": "LOW",
+      "sourceStage": "A3-03",
+      "sourceSystemKey": "PA",
+      "title": "PA FaultCase candidate review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 0,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKED_BY_RESOLUTION",
+        "BLOCKED_BY_SOURCE_SYSTEM_REVIEW",
+        "FAULTCASE_CREATION_NOT_AUTHORIZED",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED",
+        "REGISTRY_APPROVAL_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "886b9bfd2f020321376d4cc3e6ab774a1aad219039abf74f835661e2e04b91f9",
+      "decisionRequired": true,
+      "decisionScope": "FAULTCASE_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "FAULTCASE_CANDIDATE_REVIEW",
+      "deterministicDigest": "4c1437eded360d07008bab7161211756bb32cf6ba9d420332ae9b1937bdd82b9",
+      "priority": 40,
+      "queueType": "FAULTCASE_QUEUE",
+      "reviewReasons": [
+        "FAULTCASE_REVIEW_REQUIRED"
+      ],
+      "rowId": "9606b9dfc6809984fb0291009927a37987c1e39e31b3b80fa6d655aebd3fa457",
+      "severity": "MEDIUM",
+      "sourceStage": "A3-03",
+      "sourceSystemKey": "RAS",
+      "title": "RAS FaultCase candidate review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 0,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKED_BY_RESOLUTION",
+        "BLOCKED_BY_SOURCE_SYSTEM_REVIEW",
+        "FAULTCASE_CREATION_NOT_AUTHORIZED",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "NAMESPACE_INTERPRETATION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "00f59930f5487c5770090311c9fdb0bf1994c04bc8254858057476fb79f937b9",
+      "decisionRequired": true,
+      "decisionScope": "FAULTCASE_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "FAULTCASE_CANDIDATE_REVIEW",
+      "deterministicDigest": "64d1115e9b2c310dbe8cdbc4cc4e652e789f7084a1eda384977e9a20f93a0e30",
+      "priority": 40,
+      "queueType": "FAULTCASE_QUEUE",
+      "reviewReasons": [
+        "FAULTCASE_REVIEW_REQUIRED"
+      ],
+      "rowId": "9adc9646ee2a28f6d5247d4cd0cf08e2d117b0e9116185d0c5b5ad7c7b790d0e",
+      "severity": "MEDIUM",
+      "sourceStage": "A3-03",
+      "sourceSystemKey": "TEL",
+      "title": "TEL FaultCase candidate review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 0,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "DEFER",
+        "KEEP_PENDING",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": false,
+      "blockingReasons": [],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "fa46ad3543b51ae3c68e87ac4a3396afc02db66125bc6cf64d7ca7bc329f55e6",
+      "decisionRequired": true,
+      "decisionScope": "RELEASE_GATE",
+      "decisionState": "READY_FOR_REVIEW",
+      "decisionType": "RELEASE_GATE_REVIEW",
+      "deterministicDigest": "849cb5838b7844ccabb3d62008cea5d5c86dba1e20cc568988b382f0122f77c1",
+      "priority": 90,
+      "queueType": "RELEASE_GATE_QUEUE",
+      "reviewReasons": [
+        "RELEASE_GATE_PASS_PUSH_DISABLED"
+      ],
+      "rowId": "e4c67bd03994e0e38bb9d9a0031a359ccc5c3bebd559baf780961714b8789c3d",
+      "severity": "INFO",
+      "sourceStage": "A3-07",
+      "sourceSystemKey": null,
+      "title": "A3 read-only release gate review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 52,
+      "affectedRecordCount": 52,
+      "allowedDecisions": [
+        "APPROVE",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ALIAS_APPROVAL",
+        "SOURCE_SYSTEM_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "86bf33f97dff8bcfd4a00ad6281f2bd1947bcb04f7cc0b76a7193a7ca541cdda",
+      "decisionRequired": true,
+      "decisionScope": "SOURCE_SYSTEM_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "ALIAS_APPROVAL",
+      "deterministicDigest": "8c20af8fa3ccd3105565369007504a4f45dd7967d8370dfef705ee4bb3be9d6c",
+      "priority": 10,
+      "queueType": "SOURCE_SYSTEM_QUEUE",
+      "reviewReasons": [
+        "ALIAS_APPROVAL_REQUIRED"
+      ],
+      "rowId": "83b9bd1475245a9edbe7de1fe41d11a05be74e506175ce6e095160b8271620da",
+      "severity": "HIGH",
+      "sourceStage": "A2",
+      "sourceSystemKey": "CCTV",
+      "title": "CCTV Alias approval required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 247,
+      "affectedRecordCount": 247,
+      "allowedDecisions": [
+        "APPROVE",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ALIAS_APPROVAL",
+        "SOURCE_SYSTEM_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "d4a6daa52d2f0a3dec11137865eab052f146ada30b0f4f553a1a78027077f8a0",
+      "decisionRequired": true,
+      "decisionScope": "SOURCE_SYSTEM_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "ALIAS_APPROVAL",
+      "deterministicDigest": "0db228f3f1e1761ca6d81095ce353958a829f048dc095fae26f1a70c56643255",
+      "priority": 10,
+      "queueType": "SOURCE_SYSTEM_QUEUE",
+      "reviewReasons": [
+        "ALIAS_APPROVAL_REQUIRED"
+      ],
+      "rowId": "17ddfdd06e24125c870d413eb1d4d3dae82b5f119eb2badc2d8ae0c91341e685",
+      "severity": "HIGH",
+      "sourceStage": "A2",
+      "sourceSystemKey": "PA",
+      "title": "PA Alias approval required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 14,
+      "affectedRecordCount": 14,
+      "allowedDecisions": [
+        "APPROVE",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "NAMESPACE_INTERPRETATION",
+        "SOURCE_SYSTEM_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "f05dc6da056e5db68a03d8133f61e20fefabc6b55df942f98fc3128d88880037",
+      "decisionRequired": true,
+      "decisionScope": "SOURCE_SYSTEM_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "NAMESPACE_INTERPRETATION",
+      "deterministicDigest": "5d39065ba465fe389932e5bacfdde99f244768d6fb1a7ddfed0642a2f9df7c45",
+      "priority": 10,
+      "queueType": "SOURCE_SYSTEM_QUEUE",
+      "reviewReasons": [
+        "NAMESPACE_INTERPRETATION_REQUIRED"
+      ],
+      "rowId": "5b2ce3251f34bc09c24aaa233a4fddb8c9e5b4440fcc1866bfb62cafb1ac862d",
+      "severity": "HIGH",
+      "sourceStage": "A2",
+      "sourceSystemKey": "TEL",
+      "title": "TEL Namespace interpretation required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 129,
+      "affectedRecordCount": 129,
+      "allowedDecisions": [
+        "APPROVE",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "REGISTRY_APPROVAL",
+        "SOURCE_SYSTEM_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "3c7e61e1bea96c33006ceb4afa5dae604e416748d429edc1af3c7596b8c4f890",
+      "decisionRequired": true,
+      "decisionScope": "SOURCE_SYSTEM_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "REGISTRY_APPROVAL",
+      "deterministicDigest": "4bf1a8786dc4a20908f1859d3adf01bd1a6f010ff55d225270121d2fcf7d2bde",
+      "priority": 10,
+      "queueType": "SOURCE_SYSTEM_QUEUE",
+      "reviewReasons": [
+        "REGISTRY_APPROVAL_REQUIRED"
+      ],
+      "rowId": "3f72c5511b556a2463f2c6256e7d01283d2d3f1a710b6b3dee7ed9b7c884df76",
+      "severity": "HIGH",
+      "sourceStage": "A2",
+      "sourceSystemKey": "ACS",
+      "title": "ACS Registry approval required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 28,
+      "affectedRecordCount": 28,
+      "allowedDecisions": [
+        "APPROVE",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "REGISTRY_APPROVAL",
+        "SOURCE_SYSTEM_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "cb750465e3e304c039c71babbed700084cf129cdebca9d5f31d40c715cc004ee",
+      "decisionRequired": true,
+      "decisionScope": "SOURCE_SYSTEM_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "REGISTRY_APPROVAL",
+      "deterministicDigest": "e579c86cc54df9c5cd796345cfda2d9d42b41e33d52840270edcdebd33919313",
+      "priority": 10,
+      "queueType": "SOURCE_SYSTEM_QUEUE",
+      "reviewReasons": [
+        "REGISTRY_APPROVAL_REQUIRED"
+      ],
+      "rowId": "b02fea4966d1fcbbe26efb976023675032308860749d7e9a568941d17b0d8d20",
+      "severity": "HIGH",
+      "sourceStage": "A2",
+      "sourceSystemKey": "RAS",
+      "title": "RAS Registry approval required"
+    },
+    {
+      "affectedDeviceEvidenceCount": 129,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKED_BY_FAULTCASE_REVIEW",
+        "BLOCKED_BY_RESOLUTION",
+        "BLOCKED_BY_SOURCE_SYSTEM_REVIEW",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED",
+        "REGISTRY_APPROVAL_REQUIRED",
+        "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED",
+        "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "d76caf3e8ef5403bab8cd3b62aadb3d260dbe3529d07a855f53e4b4c731b1716",
+      "decisionRequired": true,
+      "decisionScope": "WORKORDER_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "WORKORDER_INTENT_REVIEW",
+      "deterministicDigest": "46995cee5f8f09735e93fc10dfedf1ff2eb4dc5019ff98194090d38f43a88fc7",
+      "priority": 50,
+      "queueType": "WORKORDER_INTENT_QUEUE",
+      "reviewReasons": [
+        "WORKORDER_INTENT_REVIEW_REQUIRED"
+      ],
+      "rowId": "275a8d91d7cc13bdd63a421ccfd5c2c42b0700d04604f5ea6cfa5c0fc2ec853f",
+      "severity": "HIGH",
+      "sourceStage": "A3-04",
+      "sourceSystemKey": "ACS",
+      "title": "ACS WorkOrderIntent review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 52,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ALIAS_APPROVAL_REQUIRED",
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKED_BY_FAULTCASE_REVIEW",
+        "BLOCKED_BY_RESOLUTION",
+        "BLOCKED_BY_SOURCE_SYSTEM_REVIEW",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED",
+        "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED",
+        "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "b74a4d09f7bf0c4d4a4d3d46319daf232a4a25162f214466e3b19558fb4b158c",
+      "decisionRequired": true,
+      "decisionScope": "WORKORDER_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "WORKORDER_INTENT_REVIEW",
+      "deterministicDigest": "8ab3e506e3b6f2dd89580e2affb1cf676f5c51f3d290d3a0b6a6bc2ac1fd897f",
+      "priority": 50,
+      "queueType": "WORKORDER_INTENT_QUEUE",
+      "reviewReasons": [
+        "WORKORDER_INTENT_REVIEW_REQUIRED"
+      ],
+      "rowId": "a89741a1e848bc70092f1f0b55e0f81f99a7c717a11d6d9df45530029fa6b58b",
+      "severity": "HIGH",
+      "sourceStage": "A3-04",
+      "sourceSystemKey": "CCTV",
+      "title": "CCTV WorkOrderIntent review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 247,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ALIAS_APPROVAL_REQUIRED",
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKED_BY_FAULTCASE_REVIEW",
+        "BLOCKED_BY_RESOLUTION",
+        "BLOCKED_BY_SOURCE_SYSTEM_REVIEW",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED",
+        "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED",
+        "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "3d7d25278d6603f51d7074c9a5e82511e44a9e6ae572fba85e047afc84db6740",
+      "decisionRequired": true,
+      "decisionScope": "WORKORDER_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "WORKORDER_INTENT_REVIEW",
+      "deterministicDigest": "f4e0fa9c3a889cc28b57b8751d5e95ad758d705252206141a8342839193a27df",
+      "priority": 50,
+      "queueType": "WORKORDER_INTENT_QUEUE",
+      "reviewReasons": [
+        "WORKORDER_INTENT_REVIEW_REQUIRED"
+      ],
+      "rowId": "cd6ace0d6986eb65d064425c1caea77f23f39ff3ad7b3f42664a178d3e952692",
+      "severity": "HIGH",
+      "sourceStage": "A3-04",
+      "sourceSystemKey": "PA",
+      "title": "PA WorkOrderIntent review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 28,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKED_BY_FAULTCASE_REVIEW",
+        "BLOCKED_BY_RESOLUTION",
+        "BLOCKED_BY_SOURCE_SYSTEM_REVIEW",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED",
+        "REGISTRY_APPROVAL_REQUIRED",
+        "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED",
+        "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "f35099c85eab09ab5505892f123d17703bf4ef8491983bd5cda82960f6f8cada",
+      "decisionRequired": true,
+      "decisionScope": "WORKORDER_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "WORKORDER_INTENT_REVIEW",
+      "deterministicDigest": "52632b65252f57adaee2b1a0d6bd9a87964dbe7894e7b607284a624defbef343",
+      "priority": 50,
+      "queueType": "WORKORDER_INTENT_QUEUE",
+      "reviewReasons": [
+        "WORKORDER_INTENT_REVIEW_REQUIRED"
+      ],
+      "rowId": "a2e1b4bf38405d89a8db8cb47671164fd799e5def2cdffcd6d5ee250ee802049",
+      "severity": "HIGH",
+      "sourceStage": "A3-04",
+      "sourceSystemKey": "RAS",
+      "title": "RAS WorkOrderIntent review"
+    },
+    {
+      "affectedDeviceEvidenceCount": 14,
+      "affectedRecordCount": 1,
+      "allowedDecisions": [
+        "ACCEPT_PROPOSAL",
+        "DEFER",
+        "KEEP_PENDING",
+        "REJECT_PROPOSAL",
+        "REQUEST_MORE_CONTEXT"
+      ],
+      "blocking": true,
+      "blockingReasons": [
+        "ASSET_RESOLUTION_REQUIRED",
+        "BLOCKED_BY_FAULTCASE_REVIEW",
+        "BLOCKED_BY_RESOLUTION",
+        "BLOCKED_BY_SOURCE_SYSTEM_REVIEW",
+        "LOCATION_RESOLUTION_REQUIRED",
+        "NAMESPACE_INTERPRETATION_REQUIRED",
+        "POINT_RESOLUTION_REQUIRED",
+        "WORKORDER_INTENT_CREATION_NOT_AUTHORIZED",
+        "WORK_MANAGEMENT_POLICY_REVIEW_REQUIRED"
+      ],
+      "currentDecision": "KEEP_PENDING",
+      "decisionItemId": "8d846bf2f2153c26008ba832587389e08d96e5f06d98ad77ec404ddaa77a1ea3",
+      "decisionRequired": true,
+      "decisionScope": "WORKORDER_REVIEW",
+      "decisionState": "PENDING",
+      "decisionType": "WORKORDER_INTENT_REVIEW",
+      "deterministicDigest": "40f9679fc4781bf0dc52bd7415c8057c3fd0e1c57e175c13a21404dc936b731d",
+      "priority": 50,
+      "queueType": "WORKORDER_INTENT_QUEUE",
+      "reviewReasons": [
+        "WORKORDER_INTENT_REVIEW_REQUIRED"
+      ],
+      "rowId": "b2383640849cda2b89814c92a698576d463831d1d85f7f3dd8ff2c6ca92d7387",
+      "severity": "HIGH",
+      "sourceStage": "A3-04",
+      "sourceSystemKey": "TEL",
+      "title": "TEL WorkOrderIntent review"
+    }
+  ],
+  "readinessOutcome": "UCONSOLE_OPERATOR_REVIEW_QUEUE_READY_FOR_READ_ONLY_CONSUMPTION",
+  "sourceArtifactReferences": [
+    {
+      "artifactType": "OPERATOR_REVIEW_DECISIONS",
+      "deterministicDigest": "20e55e07c01486d969b6c994820950680263eef5705085baead0d273738778da",
+      "digest": "ad6f565c07ca29ddf813a360f97e78a1287d7b4c591adfa85c40ebb583d9385e",
+      "path": "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-operator-review-decisions.v1.json"
+    }
+  ],
+  "summary": {
+    "affectedSourceSystemCount": 5,
+    "airportSpecific": false,
+    "alarmEventReviewDecisionCount": 5,
+    "apiEnabled": false,
+    "approvalWriteCount": 0,
+    "assetResolutionDecisionCount": 5,
+    "blockingDecisionCount": 45,
+    "canonicalWriteCount": 0,
+    "containsCustomerAssetIdentifiers": false,
+    "crossIndustry": true,
+    "databaseWriteCount": 0,
+    "decisionItemCount": 46,
+    "decisionWriteCount": 0,
+    "downstreamCreationAuthorizationDecisionCount": 5,
+    "evidenceInvestigationDecisionCount": 5,
+    "faultCaseReviewDecisionCount": 5,
+    "frontendEnabled": false,
+    "locationResolutionDecisionCount": 5,
+    "nonBlockingDecisionCount": 1,
+    "pendingDecisionCount": 46,
+    "pointResolutionDecisionCount": 5,
+    "productionActivationAllowed": false,
+    "pushAllowed": false,
+    "queueCardCount": 8,
+    "queueGroupCount": 8,
+    "queueRowCount": 46,
+    "releaseGateDecisionCount": 1,
+    "runtimeActivationAllowed": false,
+    "sourceSystemRegistryDecisionCount": 5,
+    "totalDeviceEvidenceCount": 470,
+    "workOrderIntentReviewDecisionCount": 5
+  }
+}
