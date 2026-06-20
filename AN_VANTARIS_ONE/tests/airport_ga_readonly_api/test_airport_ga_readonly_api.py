@@ -11,6 +11,8 @@ from flask import Blueprint, Flask, jsonify
 
 ROOT = Path(__file__).resolve().parents[3]
 BACKEND_SRC = ROOT / "AN_VANTARIS_IBMS-backend"
+SKELETON = ROOT / "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-read-only-api-skeleton.v1.json"
+GA_R1_REPORT = ROOT / "ONE_AIRPORT_GA_R1_READONLY_API_ROUTE_IMPLEMENTATION_REPORT.md"
 if str(BACKEND_SRC) not in sys.path:
     sys.path.insert(0, str(BACKEND_SRC))
 
@@ -24,6 +26,27 @@ EXPECTED_ENDPOINTS = {
     "MAINTENANCE_WORK_ORDERS": "/api/v1/one/airport/console/maintenance-work-orders",
     "EVIDENCE_INVESTIGATION": "/api/v1/one/airport/console/evidence-investigation",
     "REPORTS": "/api/v1/one/airport/console/reports",
+}
+EXPECTED_PAYLOAD_KEYS = {
+    "platform",
+    "industryProjection",
+    "releaseCandidate",
+    "endpointKey",
+    "route",
+    "method",
+    "readOnly",
+    "productionActivation",
+    "runtimeActivation",
+    "databaseAccess",
+    "dbWrite",
+    "approvalExecution",
+    "customerIdentifierLeakage",
+    "source",
+    "summary",
+    "data",
+    "filters",
+    "facets",
+    "pagination",
 }
 
 
@@ -86,9 +109,11 @@ class AirportGaReadOnlyApiTest(unittest.TestCase):
             with self.subTest(endpoint_key=endpoint_key):
                 response = self.client.get(path)
                 self.assertEqual(response.status_code, 200)
+                self.assertTrue(response.is_json)
                 body = response.get_json()
                 self.assertEqual(body["code"], 200)
                 payload = body["data"]
+                self.assertEqual(set(payload), EXPECTED_PAYLOAD_KEYS)
                 self.assertEqual(payload["platform"], "VANTARIS ONE")
                 self.assertEqual(payload["industryProjection"], "airport")
                 self.assertEqual(payload["releaseCandidate"], self.module.RELEASE_CANDIDATE)
@@ -104,6 +129,7 @@ class AirportGaReadOnlyApiTest(unittest.TestCase):
                 self.assertFalse(payload["customerIdentifierLeakage"])
                 self.assertEqual(payload["source"]["type"], "local_projection_artifact")
                 self.assertEqual(payload["source"]["authority"], "A7_FROZEN_READ_ONLY_API_CONTRACT")
+                self.assertNotIn("/Users/", json.dumps(payload["source"], sort_keys=True))
                 self.assertIn("data", payload)
                 self.assertIn("summary", payload)
                 self.assertIn("filters", payload)
@@ -124,6 +150,24 @@ class AirportGaReadOnlyApiTest(unittest.TestCase):
         for rule in route_rules:
             declared_methods = set(rule.methods or set()) - {"HEAD", "OPTIONS"}
             self.assertEqual(declared_methods, {"GET"})
+
+    def test_contract_source_mapping_matches_a7_skeleton(self) -> None:
+        skeleton = json.loads(SKELETON.read_text(encoding="utf-8"))
+        contracts = {item["endpointKey"]: item for item in skeleton["responseContracts"]}
+        for endpoint_key, path in EXPECTED_ENDPOINTS.items():
+            with self.subTest(endpoint_key=endpoint_key):
+                payload = self.client.get(path).get_json()["data"]
+                route = self.module.ROUTES[endpoint_key]
+                self.assertEqual(payload["source"]["path"], contracts[endpoint_key]["sourceArtifactPath"])
+                self.assertEqual(payload["source"]["rootKey"], contracts[endpoint_key]["projectionRootKey"])
+                self.assertEqual(route.source_artifact_path, contracts[endpoint_key]["sourceArtifactPath"])
+                self.assertEqual(route.root_key, contracts[endpoint_key]["projectionRootKey"])
+
+    def test_ga_r1_report_route_list_matches_actual_routes(self) -> None:
+        report = GA_R1_REPORT.read_text(encoding="utf-8")
+        for path in EXPECTED_ENDPOINTS.values():
+            self.assertIn(f"GET `{path}`", report)
+        self.assertEqual(report.count("GET `/api/v1/one/airport/console/"), 8)
 
     def test_no_customer_identifier_leakage(self) -> None:
         serialized_responses = []
