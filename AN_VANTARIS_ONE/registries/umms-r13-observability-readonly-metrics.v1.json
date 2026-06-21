@@ -1,0 +1,250 @@
+{
+  "registryId": "umms-r13-observability-readonly-metrics.v1",
+  "baseline": {
+    "head": "49e0e2da209a77b6d491deaabf1f031886a7fbad",
+    "branch": "main",
+    "branchState": "main...origin/main [ahead 2]",
+    "workingTree": "clean"
+  },
+  "scope": {
+    "layer": "UMMS-R13 Observability / Monitoring / Read-only Metrics Layer",
+    "mode": "READ_ONLY_METRICS_AGGREGATION",
+    "source": "Committed UMMS-R2 through UMMS-R12A artifacts",
+    "frontendUiModified": false,
+    "backendModified": false,
+    "runtimeBehaviorAdded": false
+  },
+  "aggregatedMetrics": {
+    "totalChainLayers": 24,
+    "completedChainLayers": 24,
+    "readinessPercentage": 100,
+    "getOnlyEndpointCount": 5,
+    "readOnlyFrontendRoutes": 1,
+    "localFreezeLayers": 10,
+    "runtimeFlagsEnabled": 0,
+    "mutationFlagsEnabled": 0,
+    "dependencyFamiliesObserved": 3,
+    "legacyWarningsPresent": true
+  },
+  "chainStatusR2ToR12A": [
+    {
+      "layer": "UMMS-R2",
+      "scope": "Work Order / Asset / PM Domain Alignment",
+      "marker": "ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_PASS",
+      "status": "PASS"
+    },
+    {
+      "layer": "UMMS-R2A",
+      "scope": "R2 Local Freeze",
+      "marker": "ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+      "status": "PASS"
+    },
+    {
+      "layer": "UMMS-R3",
+      "scope": "Manual Work Order Read-only Queue / Draft Model",
+      "marker": "ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_PASS",
+      "status": "PASS"
+    },
+    {
+      "layer": "UMMS-R3A",
+      "scope": "R3 Local Freeze",
+      "marker": "ONE_UMMS_R3A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+      "status": "PASS"
+    },
+    {
+      "layer": "UMMS-R4",
+      "scope": "Work Order Lifecycle State Model + Validation Gate",
+      "marker": "ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_PASS",
+      "status": "PASS"
+    },
+    {
+      "layer": "UMMS-R4A",
+      "scope": "R4 Local Freeze",
+      "marker": "ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+      "status": "PASS"
+    },
+    {
+      "layer": "UMMS-R5",
+      "scope": "Preventive Maintenance Schedule Readiness",
+      "marker": "ONE_UMMS_R5_PREVENTIVE_MAINTENANCE_SCHEDULE_READINESS_PASS",
+      "status": "PASS"
+    },
+    {
+      "layer": "UMMS-R5A",
+      "scope": "R5 Local Freeze",
+      "marker": "ONE_UMMS_R5A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+      "status": "PASS"
+    },
+    {
+      "layer": "UMMS-R6",
+      "scope": "Spare Parts / Inventory Readiness",
+      "marker": "ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_PASS",
+      "status": "PASS"
+    },
+    {
+      "layer": "UMMS-R6A",
+      "scope": "R6 Local Freeze",
+      "marker": "ONE_UMMS_R6A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+      "status": "PASS"
+    },
+    {
+      "layer": "UMMS-R7",
+      "scope": "Vendor / Contract / SLA Readiness",
+      "marker": "ONE_UMMS_R7_VENDOR_CONTRACT_SLA_READINESS_PASS",
+      "status": "PASS"
+    },
+    {
+      "layer": "UMMS-R7A",
+      "scope": "R7 Local Freeze",
+      "marker": "ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+      "status": "PASS"
+    },
+    {
+      "layer": "UMMS-R8",
+      "scope": "UMMS + UCDE Evidence Closure Alignment",
+      "marker": "ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_PASS",
+      "status": "PASS"
+    },
+    {
+      "layer": "UMMS-R8A",
+      "scope": "R8 Local Freeze",
+      "marker": "ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+      "status": "PASS"
+    },
+    {
+      "layer": "UMMS-R9",
+      "scope": "UMMS + Airport HMI Locator Binding Readiness",
+      "marker": "ONE_UMMS_R9_AIRPORT_HMI_LOCATOR_BINDING_READINESS_PASS",
+      "status": "PASS"
+    },
+    {
+      "layer": "UMMS-R9A",
+      "scope": "R9 Local Freeze",
+      "marker": "ONE_UMMS_R9A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+      "status": "PASS"
+    },
+    {
+      "layer": "UMMS-R10",
+      "scope": "UMMS Stakeholder Review Package",
+      "marker": "ONE_UMMS_R10_STAKEHOLDER_REVIEW_PACKAGE_PASS",
+      "status": "PASS"
+    },
+    {
+      "layer": "UMMS-R10A",
+      "scope": "R10 Local Freeze",
+      "marker": "ONE_UMMS_R10A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+      "status": "PASS"
+    },
+    {
+      "layer": "UMMS Package / UConsole Entry",
+      "scope": "Package / UConsole stakeholder entry readiness",
+      "marker": "ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_READINESS_PASS",
+      "status": "PASS"
+    },
+    {
+      "layer": "UMMS Package / UConsole Entry Freeze",
+      "scope": "Package / UConsole stakeholder entry local freeze",
+      "marker": "ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+      "status": "PASS"
+    },
+    {
+      "layer": "UMMS-R11",
+      "scope": "Read-only API Entry Skeleton",
+      "marker": "ONE_UMMS_R11_READONLY_API_ENTRY_SKELETON_PASS",
+      "status": "PASS"
+    },
+    {
+      "layer": "UMMS-R11A",
+      "scope": "R11 Local Freeze",
+      "marker": "ONE_UMMS_R11A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+      "status": "PASS"
+    },
+    {
+      "layer": "UMMS-R12",
+      "scope": "Read-only Frontend / UConsole Card Entry",
+      "marker": "ONE_UMMS_R12_READONLY_FRONTEND_UCONSOLE_CARD_ENTRY_PASS",
+      "status": "PASS"
+    },
+    {
+      "layer": "UMMS-R12A",
+      "scope": "R12 Local Freeze",
+      "marker": "ONE_UMMS_R12A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+      "status": "PASS"
+    }
+  ],
+  "readinessIndicators": {
+    "chainComplete": true,
+    "readonlyApiComplete": true,
+    "readonlyFrontendEntryComplete": true,
+    "stakeholderReviewReady": true,
+    "packageRouteEnforcementPass": true,
+    "boundaryBaselinePass": true,
+    "legacyWarningsNonBlocking": true
+  },
+  "systemHealthIndicators": {
+    "ummsChainComplete": true,
+    "ummsReadOnlyApiComplete": true,
+    "ummsReadOnlyFrontendEntryComplete": true,
+    "ummsLocalFreezeCompleteThroughR12A": true,
+    "packageRouteEnforcementPass": true,
+    "boundaryBaselinePass": true,
+    "legacyWarningsPresent": true,
+    "runtimeActivationEnabled": false,
+    "dbWriteEnabled": false,
+    "workflowExecutionEnabled": false,
+    "edgeRuntimeCallEnabled": false,
+    "linkRuntimeCallEnabled": false,
+    "oneAdapterIntroduced": false
+  },
+  "dependencyMap": {
+    "EDGE": {
+      "role": "Existing readiness dependency observed from prior UMMS artifacts",
+      "runtimeCallEnabled": false
+    },
+    "LINK": {
+      "role": "Existing readiness dependency observed from prior UMMS artifacts",
+      "runtimeCallEnabled": false
+    },
+    "UCDE": {
+      "role": "Evidence closure dependency observed from UMMS-R8/R8A artifacts",
+      "runtimeExecutionEnabled": false
+    }
+  },
+  "safetyFlags": {
+    "readOnly": true,
+    "metricsAggregationOnly": true,
+    "runtimeActivation": false,
+    "productionActivation": false,
+    "dbWrite": false,
+    "workflowExecution": false,
+    "backendMutation": false,
+    "frontendUiMutation": false,
+    "approvalExecution": false,
+    "workOrderRuntimeExecution": false,
+    "pmExecution": false,
+    "inventoryTransaction": false,
+    "vendorContractSlaRuntime": false,
+    "evidenceClosureExecution": false,
+    "hmiRuntimeExecution": false,
+    "deviceConnection": false,
+    "connectorExecution": false,
+    "edgeRuntimeCall": false,
+    "linkRuntimeCall": false,
+    "contractsChange": false,
+    "ufmsChange": false,
+    "oneAdapterIntroduced": false,
+    "tagCreated": false,
+    "pushPerformed": false
+  },
+  "noExecutionFlags": {
+    "liveMetricsIngestion": false,
+    "runtimeObservabilityAgent": false,
+    "databaseReadImplementation": false,
+    "databaseWriteImplementation": false,
+    "backendRouteAdded": false,
+    "frontendRouteAdded": false,
+    "workflowHookAdded": false,
+    "edgeLinkRuntimeHookAdded": false
+  },
+  "nextStep": "UMMS-R13A freeze plan"
+}
