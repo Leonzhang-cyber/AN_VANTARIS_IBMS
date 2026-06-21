@@ -1,0 +1,156 @@
+{
+  "registryId": "umms-r14-productization-model.v1",
+  "baseline": {
+    "head": "599a7b3b510cc4d0b61fc450c4380ff5743995e9",
+    "branch": "main",
+    "branchState": "main...origin/main [ahead 4]"
+  },
+  "productBoundaryContract": {
+    "UMMS": {
+      "role": "read-only operations intelligence layer",
+      "runtimeAuthority": false,
+      "systemOfRecordAuthority": false,
+      "executionAuthority": false
+    },
+    "UFMS": {
+      "role": "system-of-record core",
+      "modifiedByR14": false
+    },
+    "EDGE": {
+      "role": "field execution layer",
+      "modifiedByR14": false
+    },
+    "LINK": {
+      "role": "integration layer",
+      "modifiedByR14": false
+    }
+  },
+  "moduleLayeringModel": [
+    {
+      "layer": "Core Read-only Domain Layer",
+      "source": "UMMS-R2 through UMMS-R10A",
+      "runtimeAuthority": false
+    },
+    {
+      "layer": "R11 API Layer",
+      "source": "UMMS-R11 / R11A",
+      "runtimeAuthority": false,
+      "apiMutation": false
+    },
+    {
+      "layer": "R12 UI Layer",
+      "source": "UMMS-R12 / R12A",
+      "runtimeAuthority": false,
+      "uiMutation": false
+    },
+    {
+      "layer": "R13 Observability Layer",
+      "source": "UMMS-R13",
+      "runtimeAuthority": false
+    },
+    {
+      "layer": "R13A Freeze Layer",
+      "source": "UMMS-R13A",
+      "runtimeAuthority": false
+    }
+  ],
+  "capabilityMapping": {
+    "Maintenance Operations": {
+      "view": "read-only maintenance operations intelligence",
+      "executionCapability": false
+    },
+    "Asset Intelligence": {
+      "view": "read-only asset intelligence",
+      "executionCapability": false
+    },
+    "Vendor / SLA Awareness": {
+      "view": "read-only vendor and SLA awareness",
+      "executionCapability": false
+    },
+    "Inventory Readiness": {
+      "view": "read-only inventory readiness",
+      "executionCapability": false
+    },
+    "Evidence & Compliance View": {
+      "view": "read-only evidence and compliance view",
+      "executionCapability": false
+    }
+  },
+  "systemRelationshipGraph": {
+    "nodes": ["UFMS", "UMMS", "EDGE", "LINK"],
+    "edges": [
+      {
+        "from": "UFMS",
+        "to": "UMMS",
+        "direction": "read-only context",
+        "execution": false
+      },
+      {
+        "from": "UMMS",
+        "to": "UFMS",
+        "direction": "future adapter requirement only",
+        "execution": false
+      },
+      {
+        "from": "EDGE",
+        "to": "UMMS",
+        "direction": "read-only field boundary context",
+        "execution": false
+      },
+      {
+        "from": "UMMS",
+        "to": "EDGE",
+        "direction": "no field execution",
+        "execution": false
+      },
+      {
+        "from": "LINK",
+        "to": "UMMS",
+        "direction": "read-only integration readiness context",
+        "execution": false
+      },
+      {
+        "from": "UMMS",
+        "to": "LINK",
+        "direction": "no integration runtime call",
+        "execution": false
+      }
+    ]
+  },
+  "safetyPosture": {
+    "readOnly": true,
+    "architectureOnly": true,
+    "runtimeActivation": false,
+    "productionActivation": false,
+    "dbWrite": false,
+    "workflowExecution": false,
+    "apiChange": false,
+    "uiChange": false,
+    "backendMutation": false,
+    "frontendMutation": false,
+    "approvalExecution": false,
+    "workOrderRuntimeExecution": false,
+    "pmExecution": false,
+    "inventoryTransaction": false,
+    "vendorContractSlaRuntime": false,
+    "evidenceClosureExecution": false,
+    "hmiRuntimeExecution": false,
+    "edgeRuntimeCall": false,
+    "linkRuntimeCall": false,
+    "ufmsModification": false,
+    "oneAdapterIntroduced": false,
+    "activationCapability": false
+  },
+  "executionCapability": {
+    "hasRuntimeAuthority": false,
+    "hasDbWriteAuthority": false,
+    "hasWorkflowAuthority": false,
+    "hasFieldExecutionAuthority": false,
+    "hasIntegrationExecutionAuthority": false,
+    "hasUfmsModificationAuthority": false
+  },
+  "dependency": {
+    "r13aPassMarker": "ONE_UMMS_R13A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS"
+  },
+  "passMarker": "ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION_PASS"
+}
