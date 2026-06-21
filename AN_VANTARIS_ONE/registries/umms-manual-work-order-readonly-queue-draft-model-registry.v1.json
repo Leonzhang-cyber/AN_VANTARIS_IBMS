@@ -1,0 +1,43 @@
+{
+  "registryId": "umms-manual-work-order-readonly-queue-draft-model-registry.v1",
+  "authority": "ONE-UMMS-R3",
+  "contractVersion": "v1",
+  "projectionArtifact": "AN_VANTARIS_ONE/projections/umms-manual-work-order-readonly-queue-draft-model.v1.json",
+  "report": "ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_REPORT.md",
+  "validationMarker": "ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_PASS",
+  "baselineHead": "72dbac01486a7e5f1ecd1950068e6852fad21321",
+  "publishedTags": [
+    "airport-ga-readonly-stakeholder-review-local-freeze-20260621",
+    "airport-ga-readiness-projection-chain-local-freeze-20260621",
+    "umms-r2-work-asset-pm-domain-alignment-local-freeze-20260621"
+  ],
+  "dependencies": {
+    "ummsR2": "ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_PASS",
+    "ummsR2A": "ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS"
+  },
+  "referencedSections": ["manualWorkOrderQueueModel", "manualWorkOrderDraftModel", "draftLifecycleModel", "manualWorkOrderSourceModel", "draftValidationModel", "assignmentReadinessModel", "evidenceReadinessModel", "airportToManualWorkOrderQueueMapping", "customerCoreFunctionR3Alignment", "sharedFoundationDependencyMap", "futureImplementationRoadmap", "safetyPosture"],
+  "safetyPosture": {
+    "readOnly": true,
+    "runtimeActivation": false,
+    "productionActivation": false,
+    "dbWrite": false,
+    "approvalExecution": false,
+    "workflowExecution": false,
+    "workOrderCreation": false,
+    "workOrderUpdate": false,
+    "workOrderAssignment": false,
+    "workOrderApproval": false,
+    "workOrderClosure": false,
+    "pmScheduleExecution": false,
+    "assetLifecycleWrite": false,
+    "inventoryTransaction": false,
+    "vendorContractExecution": false,
+    "connectorExecution": false,
+    "deviceConnection": false,
+    "edgeRuntimeCall": false,
+    "linkRuntimeCall": false,
+    "oneAdapterIntroduced": false
+  },
+  "pushPerformed": false,
+  "runtimeIntegrationImplemented": false
+}
