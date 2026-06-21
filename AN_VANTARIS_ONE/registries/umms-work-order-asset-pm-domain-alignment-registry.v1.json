@@ -1,0 +1,55 @@
+{
+  "registryId": "umms-work-order-asset-pm-domain-alignment-registry.v1",
+  "authority": "ONE-UMMS-R2",
+  "contractVersion": "v1",
+  "projectionArtifact": "AN_VANTARIS_ONE/projections/umms-work-order-asset-pm-domain-alignment.v1.json",
+  "report": "ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_REPORT.md",
+  "validationMarker": "ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_PASS",
+  "baselineHead": "ec7ef2fc98cf6c7e1adc15d07b20d6210ee6389b",
+  "publishedAirportTags": [
+    "airport-ga-readonly-stakeholder-review-local-freeze-20260621",
+    "airport-ga-readiness-projection-chain-local-freeze-20260621"
+  ],
+  "relatedAirportReadinessProjections": [
+    "AN_VANTARIS_ONE/projections/airport-link-integration-readiness.v1.json",
+    "AN_VANTARIS_ONE/projections/airport-existing-system-onboarding-mapping-readiness.v1.json",
+    "AN_VANTARIS_ONE/projections/airport-engineer-commissioning-diagnostics-readiness.v1.json",
+    "AN_VANTARIS_ONE/projections/airport-graphics-hmi-equipment-locator-readiness.v1.json",
+    "AN_VANTARIS_ONE/projections/airport-distributed-remote-deployment-readiness.v1.json"
+  ],
+  "referencedSections": [
+    "genericDomainObjects",
+    "workOrderDomainModel",
+    "workOrderLifecycleModel",
+    "workOrderTriggerAlignment",
+    "assetRegistryDomainModel",
+    "assetLifecycleModel",
+    "preventiveMaintenanceDomainModel",
+    "preventiveMaintenanceTriggerModel",
+    "airportToUmmsMapping",
+    "customerCoreFunctionAlignment",
+    "sharedFoundationDependencyMap",
+    "futureImplementationRoadmap",
+    "safetyPosture"
+  ],
+  "safetyPosture": {
+    "readOnly": true,
+    "runtimeActivation": false,
+    "productionActivation": false,
+    "dbWrite": false,
+    "approvalExecution": false,
+    "workflowExecution": false,
+    "workOrderCreation": false,
+    "pmScheduleExecution": false,
+    "assetLifecycleWrite": false,
+    "inventoryTransaction": false,
+    "vendorContractExecution": false,
+    "connectorExecution": false,
+    "deviceConnection": false,
+    "edgeRuntimeCall": false,
+    "linkRuntimeCall": false,
+    "oneAdapterIntroduced": false
+  },
+  "pushPerformed": false,
+  "runtimeIntegrationImplemented": false
+}

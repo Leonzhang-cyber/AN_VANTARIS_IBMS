@@ -1,0 +1,151 @@
+{
+  "metadata": {
+    "projectionId": "umms-work-order-asset-pm-domain-alignment.v1",
+    "platform": "VANTARIS ONE",
+    "module": "UMMS",
+    "releaseContext": "UMMS-R2 Work Order / Asset / PM Domain Alignment",
+    "readOnly": true,
+    "runtimeActivation": false,
+    "productionActivation": false,
+    "dbWrite": false,
+    "approvalExecution": false,
+    "workflowExecution": false,
+    "workOrderCreation": false,
+    "pmScheduleExecution": false,
+    "assetLifecycleWrite": false,
+    "inventoryTransaction": false,
+    "vendorContractExecution": false,
+    "edgeRuntimeCall": false,
+    "linkRuntimeCall": false,
+    "oneAdapterIntroduced": false
+  },
+  "domainAlignmentSummary": {
+    "targetModule": "UMMS",
+    "currentStatus": "domain_alignment_projection_only",
+    "sourceIndustryUseCase": "Airport ELV / Maintenance Operations",
+    "genericModuleScope": "cross_industry_maintenance_management",
+    "airportSpecificLogicInCore": false,
+    "runtimeWorkflowEnabled": false,
+    "productionWorkflowEnabled": false
+  },
+  "genericDomainObjects": [
+    {"objectName": "FaultCase", "purpose": "Generic fault context that may lead to work.", "genericOwner": "UMMS / UFMS relationship", "relatedAirportProjection": "Airport Fault Cases", "relatedLinkRequirement": "work-order trigger contract", "relatedEdgeRequirement": "source fault observation", "relatedUcdeRequirement": "fault evidence", "currentUmmsR2Status": "alignment_defined", "runtimeExecutionAllowed": false},
+    {"objectName": "WorkOrder", "purpose": "Generic maintenance work lifecycle container.", "genericOwner": "UMMS", "relatedAirportProjection": "Airport Maintenance Work Orders", "relatedLinkRequirement": "WorkOrderTrigger future input", "relatedEdgeRequirement": "asset/source context", "relatedUcdeRequirement": "closure evidence", "currentUmmsR2Status": "alignment_defined", "runtimeExecutionAllowed": false},
+    {"objectName": "WorkOrderTrigger", "purpose": "Future trigger input before work order lifecycle starts.", "genericOwner": "UMMS consumes LINK trigger", "relatedAirportProjection": "Airport Alarms & Events", "relatedLinkRequirement": "work-order trigger contract", "relatedEdgeRequirement": "event/fault mapping", "relatedUcdeRequirement": "trigger evidence", "currentUmmsR2Status": "alignment_defined", "runtimeExecutionAllowed": false},
+    {"objectName": "WorkOrderAssignment", "purpose": "Role/group assignment context.", "genericOwner": "UMMS", "relatedAirportProjection": "Airport Maintenance Work Orders", "relatedLinkRequirement": "delivery readiness context", "relatedEdgeRequirement": "none", "relatedUcdeRequirement": "assignment evidence", "currentUmmsR2Status": "alignment_defined", "runtimeExecutionAllowed": false},
+    {"objectName": "WorkOrderStatus", "purpose": "Lifecycle state label for work order.", "genericOwner": "UMMS", "relatedAirportProjection": "Airport Maintenance Work Orders", "relatedLinkRequirement": "status delivery future", "relatedEdgeRequirement": "none", "relatedUcdeRequirement": "status audit trail", "currentUmmsR2Status": "alignment_defined", "runtimeExecutionAllowed": false},
+    {"objectName": "WorkOrderEvidence", "purpose": "Evidence references attached to work.", "genericOwner": "UMMS / UCDE", "relatedAirportProjection": "Airport Evidence Investigation", "relatedLinkRequirement": "audit/evidence chain profile", "relatedEdgeRequirement": "source evidence references", "relatedUcdeRequirement": "EvidenceRecord / EvidenceReference", "currentUmmsR2Status": "alignment_defined", "runtimeExecutionAllowed": false},
+    {"objectName": "Asset", "purpose": "Generic maintained asset context consumed by UMMS.", "genericOwner": "ONE Asset Graph consumed by UMMS", "relatedAirportProjection": "Airport Assets & Topology", "relatedLinkRequirement": "asset/location reference contract", "relatedEdgeRequirement": "asset/location mapping preview", "relatedUcdeRequirement": "asset evidence", "currentUmmsR2Status": "alignment_defined", "runtimeExecutionAllowed": false},
+    {"objectName": "AssetLifecycleRecord", "purpose": "Read-only asset lifecycle context for maintenance.", "genericOwner": "ONE Asset Graph / UMMS projection", "relatedAirportProjection": "Airport Assets & Topology", "relatedLinkRequirement": "asset lifecycle reference future", "relatedEdgeRequirement": "commissioning diagnostics", "relatedUcdeRequirement": "lifecycle evidence", "currentUmmsR2Status": "alignment_defined", "runtimeExecutionAllowed": false},
+    {"objectName": "AssetLocationReference", "purpose": "Location context for work and PM.", "genericOwner": "ONE Asset Graph consumed by UMMS", "relatedAirportProjection": "Airport HMI Locator Readiness", "relatedLinkRequirement": "asset/location reference contract", "relatedEdgeRequirement": "asset/location mapping preview", "relatedUcdeRequirement": "location evidence", "currentUmmsR2Status": "alignment_defined", "runtimeExecutionAllowed": false},
+    {"objectName": "MaintenancePlan", "purpose": "Generic maintenance strategy definition.", "genericOwner": "UMMS", "relatedAirportProjection": "Airport Maintenance Work Orders", "relatedLinkRequirement": "future schedule delivery", "relatedEdgeRequirement": "runtime/event input future", "relatedUcdeRequirement": "plan evidence", "currentUmmsR2Status": "alignment_defined", "runtimeExecutionAllowed": false},
+    {"objectName": "PreventiveMaintenanceSchedule", "purpose": "Future PM schedule definition.", "genericOwner": "UMMS", "relatedAirportProjection": "Airport Maintenance Work Orders", "relatedLinkRequirement": "schedule contract future", "relatedEdgeRequirement": "runtime/event counts future", "relatedUcdeRequirement": "schedule evidence", "currentUmmsR2Status": "alignment_defined", "runtimeExecutionAllowed": false},
+    {"objectName": "PreventiveMaintenanceTask", "purpose": "Future PM task context.", "genericOwner": "UMMS", "relatedAirportProjection": "Airport Maintenance Work Orders", "relatedLinkRequirement": "work trigger future", "relatedEdgeRequirement": "condition signal future", "relatedUcdeRequirement": "task evidence", "currentUmmsR2Status": "alignment_defined", "runtimeExecutionAllowed": false},
+    {"objectName": "MaintenanceChecklist", "purpose": "Future checklist for work and PM.", "genericOwner": "UMMS", "relatedAirportProjection": "Engineer commissioning diagnostics", "relatedLinkRequirement": "handoff package future", "relatedEdgeRequirement": "diagnostics checklist future", "relatedUcdeRequirement": "checklist evidence", "currentUmmsR2Status": "alignment_defined", "runtimeExecutionAllowed": false},
+    {"objectName": "SparePartRequirement", "purpose": "Future parts need for work/PM.", "genericOwner": "UMMS", "relatedAirportProjection": "Spare Parts / Inventory Management", "relatedLinkRequirement": "inventory contract future", "relatedEdgeRequirement": "none", "relatedUcdeRequirement": "parts evidence", "currentUmmsR2Status": "future", "runtimeExecutionAllowed": false},
+    {"objectName": "InventoryReservation", "purpose": "Future inventory reservation context.", "genericOwner": "UMMS", "relatedAirportProjection": "Spare Parts / Inventory Management", "relatedLinkRequirement": "inventory reservation future", "relatedEdgeRequirement": "none", "relatedUcdeRequirement": "inventory evidence", "currentUmmsR2Status": "future", "runtimeExecutionAllowed": false},
+    {"objectName": "VendorReference", "purpose": "Future vendor context for maintenance.", "genericOwner": "UMMS", "relatedAirportProjection": "Vendor / Contract Management", "relatedLinkRequirement": "vendor reference future", "relatedEdgeRequirement": "none", "relatedUcdeRequirement": "vendor evidence", "currentUmmsR2Status": "future", "runtimeExecutionAllowed": false},
+    {"objectName": "ContractReference", "purpose": "Future contract context for maintenance.", "genericOwner": "UMMS", "relatedAirportProjection": "Vendor / Contract Management", "relatedLinkRequirement": "contract reference future", "relatedEdgeRequirement": "none", "relatedUcdeRequirement": "contract evidence", "currentUmmsR2Status": "future", "runtimeExecutionAllowed": false},
+    {"objectName": "ServiceLevelReference", "purpose": "Future SLA context.", "genericOwner": "UMMS", "relatedAirportProjection": "Vendor / Contract Management", "relatedLinkRequirement": "SLA reference future", "relatedEdgeRequirement": "none", "relatedUcdeRequirement": "SLA evidence", "currentUmmsR2Status": "future", "runtimeExecutionAllowed": false},
+    {"objectName": "HmiLocatorReference", "purpose": "Reference to future locator context.", "genericOwner": "UMMS consumes Asset/HMI references", "relatedAirportProjection": "Airport HMI Locator Readiness", "relatedLinkRequirement": "HMI drawing/symbol reference fields", "relatedEdgeRequirement": "HMI locator data foundation", "relatedUcdeRequirement": "locator evidence", "currentUmmsR2Status": "alignment_defined", "runtimeExecutionAllowed": false},
+    {"objectName": "EvidenceReference", "purpose": "Reference to UCDE/Evidence Center records.", "genericOwner": "UCDE / Evidence Center consumed by UMMS", "relatedAirportProjection": "Airport Evidence Investigation", "relatedLinkRequirement": "audit/evidence chain profile", "relatedEdgeRequirement": "source evidence reference", "relatedUcdeRequirement": "EvidenceReference", "currentUmmsR2Status": "alignment_defined", "runtimeExecutionAllowed": false}
+  ],
+  "workOrderDomainModel": {
+    "requiredFields": ["workOrderId", "workOrderType", "sourceType", "sourceFaultCaseId", "sourceAlarmId", "sourceEventId", "workOrderTriggerId", "assetRef", "locationRef", "priority", "severity", "status", "assignedToRole", "assignmentGroup", "slaTarget", "createdAt", "dueAt", "resolvedAt", "closedAt", "evidenceRefs", "hmiLocatorRef", "pmTaskRef", "sparePartRefs", "vendorRef", "contractRef"],
+    "statement": "UMMS-R2 defines the domain alignment only. No work order creation or execution is implemented in UMMS-R2."
+  },
+  "workOrderLifecycleModel": [
+    {"state": "draft", "description": "Future draft work item.", "allowedFutureTransitions": ["triaged", "cancelled"], "requiredEvidence": ["draft rationale"], "executionAllowedInR2": false},
+    {"state": "triaged", "description": "Future triage complete.", "allowedFutureTransitions": ["assigned", "cancelled"], "requiredEvidence": ["triage evidence"], "executionAllowedInR2": false},
+    {"state": "assigned", "description": "Future assignment made.", "allowedFutureTransitions": ["accepted", "cancelled"], "requiredEvidence": ["assignment record"], "executionAllowedInR2": false},
+    {"state": "accepted", "description": "Future assignee accepted.", "allowedFutureTransitions": ["in_progress", "cancelled"], "requiredEvidence": ["acceptance evidence"], "executionAllowedInR2": false},
+    {"state": "in_progress", "description": "Future work in progress.", "allowedFutureTransitions": ["pending_parts", "pending_vendor", "pending_customer", "resolved", "cancelled"], "requiredEvidence": ["work evidence"], "executionAllowedInR2": false},
+    {"state": "pending_parts", "description": "Future waiting for parts.", "allowedFutureTransitions": ["in_progress", "cancelled"], "requiredEvidence": ["parts evidence"], "executionAllowedInR2": false},
+    {"state": "pending_vendor", "description": "Future waiting for vendor.", "allowedFutureTransitions": ["in_progress", "cancelled"], "requiredEvidence": ["vendor evidence"], "executionAllowedInR2": false},
+    {"state": "pending_customer", "description": "Future waiting for customer.", "allowedFutureTransitions": ["in_progress", "cancelled"], "requiredEvidence": ["customer review evidence"], "executionAllowedInR2": false},
+    {"state": "resolved", "description": "Future resolution recorded.", "allowedFutureTransitions": ["verified", "in_progress"], "requiredEvidence": ["resolution evidence"], "executionAllowedInR2": false},
+    {"state": "verified", "description": "Future verification complete.", "allowedFutureTransitions": ["closed", "in_progress"], "requiredEvidence": ["verification evidence"], "executionAllowedInR2": false},
+    {"state": "closed", "description": "Future closure complete.", "allowedFutureTransitions": [], "requiredEvidence": ["closure evidence"], "executionAllowedInR2": false},
+    {"state": "cancelled", "description": "Future cancellation complete.", "allowedFutureTransitions": [], "requiredEvidence": ["cancellation reason"], "executionAllowedInR2": false}
+  ],
+  "workOrderTriggerAlignment": {
+    "requiredFields": ["faultCandidateId", "alarmId", "eventId", "assetRef", "locationRef", "severity", "prioritySuggestion", "sourceSystemId", "firstSeenAt", "lastSeenAt", "occurrenceCount", "recommendedAction", "evidenceRefs", "hmiLocatorRef"],
+    "statement": "LINK provides trigger data. UMMS owns work order lifecycle. UMMS-R2 does not consume live LINK runtime."
+  },
+  "assetRegistryDomainModel": {
+    "requiredFields": ["assetId", "assetRef", "assetName", "assetType", "systemType", "discipline", "sourceSystemId", "connectorId", "deviceId", "pointIds", "tagNames", "locationRef", "building", "level", "floor", "zone", "room", "equipmentSpace", "vendorRef", "model", "serialNumber", "installDate", "warrantyStatus", "lifecycleState", "maintenanceHistoryRefs", "faultHistoryRefs", "workOrderRefs", "pmPlanRefs", "hmiLocatorRef", "evidenceRefs"],
+    "statement": "UMMS-R2 does not write canonical Asset Graph. This is read-only domain alignment only."
+  },
+  "assetLifecycleModel": [
+    {"state": "planned", "description": "Future planned asset.", "requiredEvidence": ["planning evidence"], "relatedWorkOrderTypes": ["installation"], "relatedPmTasks": ["pre-install checklist"], "executionAllowedInR2": false},
+    {"state": "installed", "description": "Future installed asset.", "requiredEvidence": ["install evidence"], "relatedWorkOrderTypes": ["installation"], "relatedPmTasks": ["commissioning checklist"], "executionAllowedInR2": false},
+    {"state": "commissioning", "description": "Future commissioning stage.", "requiredEvidence": ["commissioning evidence"], "relatedWorkOrderTypes": ["commissioning"], "relatedPmTasks": ["commissioning task"], "executionAllowedInR2": false},
+    {"state": "active", "description": "Future active asset.", "requiredEvidence": ["activation evidence"], "relatedWorkOrderTypes": ["corrective", "preventive"], "relatedPmTasks": ["scheduled PM"], "executionAllowedInR2": false},
+    {"state": "under_maintenance", "description": "Future maintenance state.", "requiredEvidence": ["work order evidence"], "relatedWorkOrderTypes": ["corrective"], "relatedPmTasks": ["maintenance task"], "executionAllowedInR2": false},
+    {"state": "degraded", "description": "Future degraded state.", "requiredEvidence": ["fault evidence"], "relatedWorkOrderTypes": ["corrective"], "relatedPmTasks": ["condition task"], "executionAllowedInR2": false},
+    {"state": "retired", "description": "Future retired state.", "requiredEvidence": ["retirement evidence"], "relatedWorkOrderTypes": ["retirement"], "relatedPmTasks": [], "executionAllowedInR2": false},
+    {"state": "replaced", "description": "Future replaced state.", "requiredEvidence": ["replacement evidence"], "relatedWorkOrderTypes": ["replacement"], "relatedPmTasks": [], "executionAllowedInR2": false},
+    {"state": "decommissioned", "description": "Future decommissioned state.", "requiredEvidence": ["decommission evidence"], "relatedWorkOrderTypes": ["decommission"], "relatedPmTasks": [], "executionAllowedInR2": false}
+  ],
+  "preventiveMaintenanceDomainModel": {
+    "requiredFields": ["pmPlanId", "pmScheduleId", "pmTaskId", "assetRef", "locationRef", "maintenanceType", "frequencyType", "calendarFrequency", "runtimeHoursThreshold", "eventCountThreshold", "conditionBasedTrigger", "checklistRef", "assignedRole", "estimatedDuration", "requiredSpareParts", "vendorRef", "contractRef", "lastCompletedAt", "nextDueAt", "evidenceRefs", "workOrderGenerationPolicy"],
+    "statement": "UMMS-R2 defines PM alignment only. No PM schedule execution or automatic work order generation is implemented in UMMS-R2."
+  },
+  "preventiveMaintenanceTriggerModel": [
+    {"triggerType": "calendar_based", "requiredInputs": ["calendarFrequency"], "requiredEdgeFields": [], "requiredLinkObjects": ["schedule delivery future"], "requiredUmmsFields": ["pmScheduleId", "nextDueAt"], "requiredUcdeEvidence": ["schedule evidence"], "currentUmmsR2Status": "alignment_defined", "executionAllowedInR2": false},
+    {"triggerType": "runtime_hours_based", "requiredInputs": ["runtimeHoursThreshold"], "requiredEdgeFields": ["runtime hours"], "requiredLinkObjects": ["runtime envelope future"], "requiredUmmsFields": ["assetRef"], "requiredUcdeEvidence": ["runtime evidence"], "currentUmmsR2Status": "future", "executionAllowedInR2": false},
+    {"triggerType": "event_count_based", "requiredInputs": ["eventCountThreshold"], "requiredEdgeFields": ["event counts"], "requiredLinkObjects": ["event count contract future"], "requiredUmmsFields": ["assetRef"], "requiredUcdeEvidence": ["event evidence"], "currentUmmsR2Status": "future", "executionAllowedInR2": false},
+    {"triggerType": "fault_count_based", "requiredInputs": ["fault count"], "requiredEdgeFields": ["fault observations"], "requiredLinkObjects": ["fault candidate delivery"], "requiredUmmsFields": ["faultHistoryRefs"], "requiredUcdeEvidence": ["fault evidence"], "currentUmmsR2Status": "future", "executionAllowedInR2": false},
+    {"triggerType": "condition_based", "requiredInputs": ["conditionBasedTrigger"], "requiredEdgeFields": ["condition signals"], "requiredLinkObjects": ["condition envelope future"], "requiredUmmsFields": ["maintenanceType"], "requiredUcdeEvidence": ["condition evidence"], "currentUmmsR2Status": "future", "executionAllowedInR2": false},
+    {"triggerType": "vendor_recommended", "requiredInputs": ["vendorRef"], "requiredEdgeFields": [], "requiredLinkObjects": ["vendor reference future"], "requiredUmmsFields": ["vendorRef"], "requiredUcdeEvidence": ["vendor evidence"], "currentUmmsR2Status": "future", "executionAllowedInR2": false},
+    {"triggerType": "contract_sla_based", "requiredInputs": ["contractRef", "slaTarget"], "requiredEdgeFields": [], "requiredLinkObjects": ["contract/SLA reference future"], "requiredUmmsFields": ["contractRef", "slaTarget"], "requiredUcdeEvidence": ["contract evidence"], "currentUmmsR2Status": "future", "executionAllowedInR2": false}
+  ],
+  "airportToUmmsMapping": [
+    {"airportSource": "Airport Fault Cases", "ummsTarget": "UMMS FaultCase", "mappingType": "domain_alignment", "readOnlyStatus": "read_only", "runtimeStatus": "not_executed", "futureImplementationOwner": "UMMS / UFMS"},
+    {"airportSource": "Airport Maintenance Work Orders", "ummsTarget": "UMMS WorkOrder", "mappingType": "domain_alignment", "readOnlyStatus": "read_only", "runtimeStatus": "not_executed", "futureImplementationOwner": "UMMS"},
+    {"airportSource": "Airport Assets & Topology", "ummsTarget": "UMMS Asset / AssetLocationReference", "mappingType": "reference_alignment", "readOnlyStatus": "read_only", "runtimeStatus": "not_executed", "futureImplementationOwner": "Assets / UMMS"},
+    {"airportSource": "Airport Alarms & Events", "ummsTarget": "UMMS WorkOrderTrigger / FaultCase input", "mappingType": "trigger_alignment", "readOnlyStatus": "read_only", "runtimeStatus": "not_executed", "futureImplementationOwner": "LINK / UMMS / UFMS"},
+    {"airportSource": "Airport Evidence Investigation", "ummsTarget": "UMMS WorkOrderEvidence / UCDE EvidenceReference", "mappingType": "evidence_alignment", "readOnlyStatus": "read_only", "runtimeStatus": "not_executed", "futureImplementationOwner": "UCDE / UMMS"},
+    {"airportSource": "Airport Reports", "ummsTarget": "UMMS Maintenance Report inputs", "mappingType": "report_alignment", "readOnlyStatus": "read_only", "runtimeStatus": "not_executed", "futureImplementationOwner": "UMMS / Reports"},
+    {"airportSource": "Airport HMI Locator Readiness", "ummsTarget": "UMMS HmiLocatorReference", "mappingType": "locator_alignment", "readOnlyStatus": "read_only", "runtimeStatus": "not_executed", "futureImplementationOwner": "Assets / UMMS"},
+    {"airportSource": "Airport Deployment Readiness", "ummsTarget": "UMMS activation dependency, future only", "mappingType": "future_activation_dependency", "readOnlyStatus": "read_only", "runtimeStatus": "not_executed", "futureImplementationOwner": "UMMS / Deployment Governance"}
+  ],
+  "customerCoreFunctionAlignment": [
+    {"function": "Work Order Management, auto + manual", "genericUmmsDomain": "WorkOrder / WorkOrderTrigger", "airportUseCaseDependency": "Airport work order projection", "requiredLinkObjects": ["Work-order trigger contract"], "requiredEdgeCapabilities": ["source-system mapping"], "requiredUcdeEvidence": ["closure evidence"], "requiredOneProjection": "Airport GA-R6/GA-R10A", "currentUmmsR2Status": "alignment_defined", "futurePhase": "UMMS-R3"},
+    {"function": "Asset Registry, full lifecycle tracking", "genericUmmsDomain": "Asset / AssetLifecycleRecord", "airportUseCaseDependency": "Airport asset topology", "requiredLinkObjects": ["Asset/location reference contract"], "requiredEdgeCapabilities": ["asset/location mapping preview"], "requiredUcdeEvidence": ["lifecycle evidence"], "requiredOneProjection": "Airport GA-R7/GA-R9", "currentUmmsR2Status": "alignment_defined", "futurePhase": "Assets-R4"},
+    {"function": "Preventive Maintenance Scheduler", "genericUmmsDomain": "PreventiveMaintenanceSchedule", "airportUseCaseDependency": "Airport maintenance planning", "requiredLinkObjects": ["schedule contract future"], "requiredEdgeCapabilities": ["runtime/event counts future"], "requiredUcdeEvidence": ["PM evidence"], "requiredOneProjection": "Airport GA-R10A", "currentUmmsR2Status": "alignment_defined", "futurePhase": "UMMS-R5"},
+    {"function": "Spare Parts / Inventory Management", "genericUmmsDomain": "SparePartRequirement / InventoryReservation", "airportUseCaseDependency": "future inventory readiness", "requiredLinkObjects": ["inventory contract future"], "requiredEdgeCapabilities": [], "requiredUcdeEvidence": ["parts evidence"], "requiredOneProjection": "Airport GA-R10A", "currentUmmsR2Status": "future", "futurePhase": "UMMS-R6"},
+    {"function": "Vendor / Contract Management", "genericUmmsDomain": "VendorReference / ContractReference / ServiceLevelReference", "airportUseCaseDependency": "future vendor readiness", "requiredLinkObjects": ["vendor/SLA contract future"], "requiredEdgeCapabilities": [], "requiredUcdeEvidence": ["contract evidence"], "requiredOneProjection": "Airport GA-R10A", "currentUmmsR2Status": "future", "futurePhase": "UMMS-R7"},
+    {"function": "Graphics HMI to locate Equipment", "genericUmmsDomain": "HmiLocatorReference", "airportUseCaseDependency": "Airport HMI locator readiness", "requiredLinkObjects": ["HMI drawing/symbol references"], "requiredEdgeCapabilities": ["HMI locator data foundation"], "requiredUcdeEvidence": ["locator evidence"], "requiredOneProjection": "Airport GA-R9", "currentUmmsR2Status": "alignment_defined", "futurePhase": "UMMS-R9"},
+    {"function": "Existing system onboarding", "genericUmmsDomain": "WorkOrderTrigger / Asset mapping inputs", "airportUseCaseDependency": "Airport existing system onboarding", "requiredLinkObjects": ["source-system health contract"], "requiredEdgeCapabilities": ["connector matrix", "tag mapping"], "requiredUcdeEvidence": ["mapping review evidence"], "requiredOneProjection": "Airport GA-R7", "currentUmmsR2Status": "alignment_defined", "futurePhase": "EDGE/LINK Phase 1"},
+    {"function": "Engineer commissioning diagnostics", "genericUmmsDomain": "MaintenanceChecklist / EvidenceReference", "airportUseCaseDependency": "Airport diagnostics readiness", "requiredLinkObjects": ["diagnostic delivery"], "requiredEdgeCapabilities": ["Engineer diagnostics"], "requiredUcdeEvidence": ["diagnostic evidence"], "requiredOneProjection": "Airport GA-R8", "currentUmmsR2Status": "alignment_defined", "futurePhase": "UMMS-R8"},
+    {"function": "Remote overseas deployment", "genericUmmsDomain": "Deployment readiness dependency", "airportUseCaseDependency": "Airport remote deployment readiness", "requiredLinkObjects": ["distributed topology contract"], "requiredEdgeCapabilities": ["offline deployment readiness"], "requiredUcdeEvidence": ["handoff package"], "requiredOneProjection": "Airport GA-R10", "currentUmmsR2Status": "alignment_defined", "futurePhase": "Deployment readiness"},
+    {"function": "Distributed independent installation", "genericUmmsDomain": "Deployment readiness dependency", "airportUseCaseDependency": "Airport distributed deployment readiness", "requiredLinkObjects": ["remote support bundle contract"], "requiredEdgeCapabilities": ["offline deployment readiness"], "requiredUcdeEvidence": ["handoff package"], "requiredOneProjection": "Airport GA-R10", "currentUmmsR2Status": "alignment_defined", "futurePhase": "Deployment readiness"}
+  ],
+  "sharedFoundationDependencyMap": {
+    "edgeDependencies": ["Connector matrix", "Source system onboarding profile", "Tag mapping and normalization", "Asset/location mapping preview", "Runtime hours / event counts / condition signals, future", "Engineer diagnostics", "HMI locator data foundation", "Offline deployment readiness"],
+    "linkDependencies": ["Work-order trigger contract", "Source-system health contract", "Delivery readiness contract", "Asset/location reference contract", "HMI drawing/symbol references", "Audit/evidence chain profile", "Delivery / ACK / retry / DLQ status", "Distributed topology contract", "Remote support bundle contract"],
+    "ucdeDependencies": ["EvidenceRecord", "WorkOrderEvidence", "Closure evidence", "Review evidence", "Audit trail", "Handoff package", "Report evidence"]
+  },
+  "futureImplementationRoadmap": ["UMMS-R3 Manual Work Order Read-only Queue / Draft Model", "UMMS-R4 Work Order Lifecycle State Model + Validation Gate", "UMMS-R5 Preventive Maintenance Schedule Readiness", "UMMS-R6 Spare Parts / Inventory Readiness", "UMMS-R7 Vendor / Contract / SLA Readiness", "UMMS-R8 UMMS + UCDE Evidence Closure Alignment", "UMMS-R9 UMMS + Airport HMI Locator Binding Readiness", "UMMS-R10 UMMS Stakeholder Review Package"],
+  "safetyPosture": {
+    "readOnly": true,
+    "runtimeActivation": false,
+    "productionActivation": false,
+    "dbWrite": false,
+    "approvalExecution": false,
+    "workflowExecution": false,
+    "workOrderCreation": false,
+    "pmScheduleExecution": false,
+    "assetLifecycleWrite": false,
+    "inventoryTransaction": false,
+    "vendorContractExecution": false,
+    "connectorExecution": false,
+    "deviceConnection": false,
+    "edgeRuntimeCall": false,
+    "linkRuntimeCall": false,
+    "oneAdapterIntroduced": false,
+    "customerIdentifierLeakage": false,
+    "localAbsolutePathLeakage": false
+  }
+}
