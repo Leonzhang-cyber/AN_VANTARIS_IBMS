@@ -1,0 +1,134 @@
+{
+  "metadata": {
+    "projectionId": "airport-engineer-commissioning-diagnostics-readiness.v1",
+    "platform": "VANTARIS ONE",
+    "industryProjection": "airport",
+    "releaseContext": "Airport GA-R8 Engineer Commissioning Diagnostics Readiness",
+    "readOnly": true,
+    "runtimeActivation": false,
+    "productionActivation": false,
+    "dbWrite": false,
+    "approvalExecution": false,
+    "deploymentExecution": false,
+    "remoteCommandExecution": false,
+    "diagnosticsExecution": false,
+    "connectorExecution": false,
+    "deviceConnection": false,
+    "edgeRuntimeCall": false,
+    "linkRuntimeCall": false,
+    "oneAdapterIntroduced": false
+  },
+  "commissioningReadinessSummary": {
+    "targetExecutionLayer": "AN_VANTARIS_EDGE / AN_VANTARIS_LINK shared foundation",
+    "currentStatus": "diagnostics_readiness_projection_only",
+    "diagnosticsExecution": false,
+    "remoteSupportExecution": false,
+    "runtimeConnected": false,
+    "productionEnabled": false,
+    "engineerReviewRequiredBeforeActivation": true,
+    "customerSiteAccessRequiredForActivation": true
+  },
+  "diagnosticsDomainCatalog": [
+    {"domainId": "edge-node-readiness", "domainName": "EDGE Node Readiness", "purpose": "Review future EDGE node package, health, binding, and offline readiness.", "requiredFutureFields": ["edgeNodeId", "edgeVersion", "packageIntegrityStatus", "hardwareKeyStatus", "siteBindingStatus"], "futureExecutionOwner": "AN_VANTARIS_EDGE shared foundation", "oneProjectionOwner": "Airport GA-R8", "currentGaR8Status": "readiness_projection_only", "runtimeExecutionAllowed": false, "customerVisible": true, "engineerVisible": true},
+    {"domainId": "link-gateway-readiness", "domainName": "LINK Gateway Readiness", "purpose": "Review future LINK gateway delivery and topology readiness.", "requiredFutureFields": ["linkGatewayId", "linkVersion", "deliveryChannelStatus", "distributedTopologyStatus"], "futureExecutionOwner": "AN_VANTARIS_LINK shared foundation", "oneProjectionOwner": "Airport GA-R8", "currentGaR8Status": "readiness_projection_only", "runtimeExecutionAllowed": false, "customerVisible": true, "engineerVisible": true},
+    {"domainId": "source-system-connectivity", "domainName": "Source System Connectivity", "purpose": "Review future source-system reachability and credential status.", "requiredFutureFields": ["sourceSystemId", "connectivityStatus", "credentialStatus", "lastSeenAt"], "futureExecutionOwner": "EDGE / LINK shared foundation", "oneProjectionOwner": "Airport GA-R8", "currentGaR8Status": "readiness_projection_only", "runtimeExecutionAllowed": false, "customerVisible": true, "engineerVisible": true},
+    {"domainId": "connector-health", "domainName": "Connector Health", "purpose": "Review future connector health summaries and risk flags.", "requiredFutureFields": ["connectorId", "connectorHealthStatus", "riskFlags"], "futureExecutionOwner": "AN_VANTARIS_EDGE shared foundation", "oneProjectionOwner": "Airport GA-R8", "currentGaR8Status": "readiness_projection_only", "runtimeExecutionAllowed": false, "customerVisible": true, "engineerVisible": true},
+    {"domainId": "protocol-handshake", "domainName": "Protocol Handshake", "purpose": "Review future protocol handshake readiness without running protocol diagnostics.", "requiredFutureFields": ["integrationMethod", "handshakeStatus", "credentialStatus"], "futureExecutionOwner": "AN_VANTARIS_EDGE shared foundation", "oneProjectionOwner": "Airport GA-R8", "currentGaR8Status": "readiness_projection_only", "runtimeExecutionAllowed": false, "customerVisible": false, "engineerVisible": true},
+    {"domainId": "tag-mapping", "domainName": "Tag Mapping", "purpose": "Review future tag mapping risks and normalization status.", "requiredFutureFields": ["tagMappingStatus", "duplicateTagCount", "tagConflictCount"], "futureExecutionOwner": "EDGE / LINK shared foundation", "oneProjectionOwner": "Airport GA-R8", "currentGaR8Status": "readiness_projection_only", "runtimeExecutionAllowed": false, "customerVisible": true, "engineerVisible": true},
+    {"domainId": "asset-location-mapping", "domainName": "Asset / Location Mapping", "purpose": "Review future asset and location reference completeness.", "requiredFutureFields": ["missingAssetRefCount", "missingLocationRefCount"], "futureExecutionOwner": "LINK shared foundation", "oneProjectionOwner": "Asset Graph / Airport", "currentGaR8Status": "readiness_projection_only", "runtimeExecutionAllowed": false, "customerVisible": true, "engineerVisible": true},
+    {"domainId": "sample-payload-preview", "domainName": "Sample Payload Preview", "purpose": "Review future redacted sample payload preview requirements.", "requiredFutureFields": ["samplePayloadId", "payloadHash", "redactedPayloadPreviewRequired"], "futureExecutionOwner": "EDGE / LINK shared foundation", "oneProjectionOwner": "Airport GA-R8", "currentGaR8Status": "readiness_projection_only", "runtimeExecutionAllowed": false, "customerVisible": false, "engineerVisible": true},
+    {"domainId": "normalization-preview", "domainName": "Normalization Preview", "purpose": "Review future normalization preview and validation status.", "requiredFutureFields": ["normalizedEnvelopePreview", "normalizationStatus", "validationErrors"], "futureExecutionOwner": "LINK shared foundation", "oneProjectionOwner": "Airport GA-R8", "currentGaR8Status": "readiness_projection_only", "runtimeExecutionAllowed": false, "customerVisible": false, "engineerVisible": true},
+    {"domainId": "local-buffer-status", "domainName": "Local Buffer Status", "purpose": "Review future local buffer and offline mode readiness.", "requiredFutureFields": ["localBufferStatus", "offlineModeStatus"], "futureExecutionOwner": "AN_VANTARIS_EDGE shared foundation", "oneProjectionOwner": "Airport GA-R8", "currentGaR8Status": "readiness_projection_only", "runtimeExecutionAllowed": false, "customerVisible": true, "engineerVisible": true},
+    {"domainId": "delivery-ack-status", "domainName": "Delivery / ACK Status", "purpose": "Review future delivery and acknowledgement readiness.", "requiredFutureFields": ["deliveryStatus", "lastDeliveryAt", "lastAckAt"], "futureExecutionOwner": "AN_VANTARIS_LINK shared foundation", "oneProjectionOwner": "Airport GA-R8", "currentGaR8Status": "readiness_projection_only", "runtimeExecutionAllowed": false, "customerVisible": true, "engineerVisible": true},
+    {"domainId": "retry-dlq-status", "domainName": "Retry / DLQ Status", "purpose": "Review future retry and dead-letter readiness.", "requiredFutureFields": ["retryCount", "dlqCount", "retryPolicyStatus"], "futureExecutionOwner": "AN_VANTARIS_LINK shared foundation", "oneProjectionOwner": "Airport GA-R8", "currentGaR8Status": "readiness_projection_only", "runtimeExecutionAllowed": false, "customerVisible": true, "engineerVisible": true},
+    {"domainId": "audit-chain-status", "domainName": "Audit Chain Status", "purpose": "Review future audit chain integrity readiness.", "requiredFutureFields": ["auditChainStatus", "payloadHashRequired"], "futureExecutionOwner": "AN_VANTARIS_LINK shared foundation", "oneProjectionOwner": "Trust / Airport", "currentGaR8Status": "readiness_projection_only", "runtimeExecutionAllowed": false, "customerVisible": true, "engineerVisible": true},
+    {"domainId": "evidence-chain-status", "domainName": "Evidence Chain Status", "purpose": "Review future evidence chain integrity readiness.", "requiredFutureFields": ["evidenceChainStatus", "evidenceRef"], "futureExecutionOwner": "AN_VANTARIS_LINK shared foundation", "oneProjectionOwner": "Evidence Center / Airport", "currentGaR8Status": "readiness_projection_only", "runtimeExecutionAllowed": false, "customerVisible": true, "engineerVisible": true},
+    {"domainId": "hardware-key-site-binding", "domainName": "Hardware Key / Site Binding", "purpose": "Review future hardware-key and site-binding readiness.", "requiredFutureFields": ["hardwareKeyStatus", "siteBindingStatus"], "futureExecutionOwner": "AN_VANTARIS_EDGE shared foundation", "oneProjectionOwner": "Airport GA-R8", "currentGaR8Status": "readiness_projection_only", "runtimeExecutionAllowed": false, "customerVisible": true, "engineerVisible": true},
+    {"domainId": "package-integrity", "domainName": "Package Integrity", "purpose": "Review future package integrity and signature readiness.", "requiredFutureFields": ["packageIntegrityStatus", "signatureStatus"], "futureExecutionOwner": "EDGE / LINK shared foundation", "oneProjectionOwner": "Airport GA-R8", "currentGaR8Status": "readiness_projection_only", "runtimeExecutionAllowed": false, "customerVisible": true, "engineerVisible": true},
+    {"domainId": "config-version", "domainName": "Config Version", "purpose": "Review future configuration version alignment.", "requiredFutureFields": ["configVersion", "syncBatchStatus"], "futureExecutionOwner": "EDGE / LINK shared foundation", "oneProjectionOwner": "Airport GA-R8", "currentGaR8Status": "readiness_projection_only", "runtimeExecutionAllowed": false, "customerVisible": false, "engineerVisible": true},
+    {"domainId": "clock-timezone", "domainName": "Clock / Timezone", "purpose": "Review future clock and timezone readiness.", "requiredFutureFields": ["clockStatus", "timezoneStatus"], "futureExecutionOwner": "AN_VANTARIS_EDGE shared foundation", "oneProjectionOwner": "Airport GA-R8", "currentGaR8Status": "readiness_projection_only", "runtimeExecutionAllowed": false, "customerVisible": false, "engineerVisible": true},
+    {"domainId": "network-reachability", "domainName": "Network Reachability", "purpose": "Review future network reachability status without running checks.", "requiredFutureFields": ["networkReachabilityStatus"], "futureExecutionOwner": "AN_VANTARIS_EDGE shared foundation", "oneProjectionOwner": "Airport GA-R8", "currentGaR8Status": "readiness_projection_only", "runtimeExecutionAllowed": false, "customerVisible": false, "engineerVisible": true},
+    {"domainId": "support-bundle-readiness", "domainName": "Support Bundle Readiness", "purpose": "Review future support bundle export and redaction readiness.", "requiredFutureFields": ["supportBundleId", "redactionStatus", "supportBundleAvailable"], "futureExecutionOwner": "EDGE / LINK shared foundation", "oneProjectionOwner": "Airport GA-R8", "currentGaR8Status": "readiness_projection_only", "runtimeExecutionAllowed": false, "customerVisible": true, "engineerVisible": true},
+    {"domainId": "remote-engineer-review-checklist", "domainName": "Remote Engineer Review Checklist", "purpose": "Review future remote engineer activation checklist requirements.", "requiredFutureFields": ["checkId", "requiredEvidence", "activationGate"], "futureExecutionOwner": "EDGE / LINK shared foundation", "oneProjectionOwner": "Airport GA-R8", "currentGaR8Status": "readiness_projection_only", "runtimeExecutionAllowed": false, "customerVisible": true, "engineerVisible": true}
+  ],
+  "edgeDiagnosticRequirements": {
+    "requiredFutureFields": ["edgeNodeId", "siteId", "projectId", "edgeVersion", "packageIntegrityStatus", "hardwareKeyStatus", "siteBindingStatus", "connectorCount", "connectorHealthSummary", "sourceSystemCount", "localBufferStatus", "offlineModeStatus", "configVersion", "lastHealthSnapshotAt", "clockStatus", "timezoneStatus", "networkReachabilityStatus", "supportBundleAvailable"],
+    "ownershipStatement": "EDGE diagnostics execution belongs to shared AN_VANTARIS_EDGE and is not implemented in GA-R8."
+  },
+  "linkDiagnosticRequirements": {
+    "requiredFutureFields": ["linkGatewayId", "siteId", "projectId", "linkVersion", "deliveryChannelStatus", "lastDeliveryAt", "lastAckAt", "queueDepth", "retryCount", "dlqCount", "deliveryLatencyMs", "auditChainStatus", "evidenceChainStatus", "syncBatchStatus", "distributedTopologyStatus", "supportBundleReference"],
+    "ownershipStatement": "LINK diagnostics execution belongs to shared AN_VANTARIS_LINK and is not implemented in GA-R8."
+  },
+  "sourceSystemDiagnosticRequirements": {
+    "requiredFutureFields": ["sourceSystemId", "sourceSystemName", "sourceSystemType", "connectorId", "integrationMethod", "connectivityStatus", "credentialStatus", "lastSeenAt", "lastSampleReceivedAt", "dataFreshnessStatus", "mappingStatus", "normalizationStatus", "riskFlags", "requiredEngineerAction"],
+    "currentGaR8Status": "requirements_only"
+  },
+  "mappingDiagnosticRequirements": {
+    "requiredChecks": ["tagMappingStatus", "duplicateTagCount", "tagConflictCount", "missingAssetRefCount", "missingLocationRefCount", "unitNormalizationStatus", "timezoneNormalizationStatus", "qualityFlagStatus", "severityMappingStatus", "alarmMappingStatus", "faultCandidateMappingStatus", "workOrderTriggerMappingStatus", "hmiLocatorMappingStatus"]
+  },
+  "payloadAndNormalizationPreviewRequirements": {
+    "requiredFutureFields": ["samplePayloadId", "sourceSystemId", "connectorId", "rawPayloadPreviewAllowed", "redactedPayloadPreviewRequired", "payloadHash", "normalizedEnvelopePreview", "normalizationStatus", "validationErrors", "qualityFlags", "timestampNormalizationStatus", "severityNormalizationStatus", "evidenceRef"],
+    "statement": "Only preview requirements are defined in GA-R8. No runtime payload collection is added."
+  },
+  "deliveryDiagnosticsRequirements": {
+    "requiredFutureFields": ["deliveryChannelId", "deliveryStatus", "lastDeliveryAt", "lastAckAt", "ackRequired", "retryPolicyStatus", "queueDepth", "retryCount", "dlqCount", "backpressureStatus", "payloadHashRequired", "auditChainRequired", "evidenceChainRequired"]
+  },
+  "supportBundleRequirements": {
+    "requiredFutureFields": ["supportBundleId", "siteId", "edgeNodeId", "linkGatewayId", "createdAt", "includedDiagnostics", "redactionStatus", "customerIdentifierRedacted", "localPathRedacted", "packageIntegrityStatus", "signatureStatus", "uploadAllowed", "remoteSupportAllowed", "retentionClass"],
+    "statement": "Support bundle generation/execution is not implemented in GA-R8."
+  },
+  "remoteEngineerReviewChecklist": [
+    {"checkId": "confirm-deployment-mode", "checkName": "Confirm deployment mode", "requiredEvidence": ["deploymentMode"], "currentGaR8Status": "checklist_requirement_only", "futureExecutionOwner": "EDGE / LINK shared foundation", "activationGate": true},
+    {"checkId": "confirm-site-project-binding", "checkName": "Confirm site / project binding", "requiredEvidence": ["siteBindingStatus"], "currentGaR8Status": "checklist_requirement_only", "futureExecutionOwner": "AN_VANTARIS_EDGE shared foundation", "activationGate": true},
+    {"checkId": "confirm-hardware-key-status", "checkName": "Confirm hardware key status", "requiredEvidence": ["hardwareKeyStatus"], "currentGaR8Status": "checklist_requirement_only", "futureExecutionOwner": "AN_VANTARIS_EDGE shared foundation", "activationGate": true},
+    {"checkId": "confirm-edge-package-integrity", "checkName": "Confirm EDGE package integrity", "requiredEvidence": ["edgePackageIntegrityStatus"], "currentGaR8Status": "checklist_requirement_only", "futureExecutionOwner": "AN_VANTARIS_EDGE shared foundation", "activationGate": true},
+    {"checkId": "confirm-link-package-integrity", "checkName": "Confirm LINK package integrity", "requiredEvidence": ["linkPackageIntegrityStatus"], "currentGaR8Status": "checklist_requirement_only", "futureExecutionOwner": "AN_VANTARIS_LINK shared foundation", "activationGate": true},
+    {"checkId": "confirm-connector-matrix-selected", "checkName": "Confirm connector matrix selected", "requiredEvidence": ["connectorMatrix"], "currentGaR8Status": "checklist_requirement_only", "futureExecutionOwner": "AN_VANTARIS_EDGE shared foundation", "activationGate": true},
+    {"checkId": "confirm-source-system-profiles", "checkName": "Confirm source system profiles", "requiredEvidence": ["sourceSystemProfiles"], "currentGaR8Status": "checklist_requirement_only", "futureExecutionOwner": "EDGE / LINK shared foundation", "activationGate": true},
+    {"checkId": "confirm-mapping-draft", "checkName": "Confirm mapping draft", "requiredEvidence": ["mappingDraft"], "currentGaR8Status": "checklist_requirement_only", "futureExecutionOwner": "EDGE / LINK shared foundation", "activationGate": true},
+    {"checkId": "confirm-tag-mapping-risks", "checkName": "Confirm tag mapping risks", "requiredEvidence": ["tagMappingRiskFlags"], "currentGaR8Status": "checklist_requirement_only", "futureExecutionOwner": "EDGE / LINK shared foundation", "activationGate": true},
+    {"checkId": "confirm-asset-location-mapping-risks", "checkName": "Confirm asset/location mapping risks", "requiredEvidence": ["assetLocationRiskFlags"], "currentGaR8Status": "checklist_requirement_only", "futureExecutionOwner": "LINK shared foundation", "activationGate": true},
+    {"checkId": "confirm-sample-payload-preview-readiness", "checkName": "Confirm sample payload preview readiness", "requiredEvidence": ["samplePayloadPreviewStatus"], "currentGaR8Status": "checklist_requirement_only", "futureExecutionOwner": "EDGE / LINK shared foundation", "activationGate": true},
+    {"checkId": "confirm-normalization-preview-readiness", "checkName": "Confirm normalization preview readiness", "requiredEvidence": ["normalizationPreviewStatus"], "currentGaR8Status": "checklist_requirement_only", "futureExecutionOwner": "LINK shared foundation", "activationGate": true},
+    {"checkId": "confirm-delivery-ack-readiness", "checkName": "Confirm delivery / ack readiness", "requiredEvidence": ["deliveryAckStatus"], "currentGaR8Status": "checklist_requirement_only", "futureExecutionOwner": "AN_VANTARIS_LINK shared foundation", "activationGate": true},
+    {"checkId": "confirm-retry-dlq-readiness", "checkName": "Confirm retry / DLQ readiness", "requiredEvidence": ["retryDlqStatus"], "currentGaR8Status": "checklist_requirement_only", "futureExecutionOwner": "AN_VANTARIS_LINK shared foundation", "activationGate": true},
+    {"checkId": "confirm-audit-evidence-chain-readiness", "checkName": "Confirm audit/evidence chain readiness", "requiredEvidence": ["auditChainStatus", "evidenceChainStatus"], "currentGaR8Status": "checklist_requirement_only", "futureExecutionOwner": "AN_VANTARIS_LINK shared foundation", "activationGate": true},
+    {"checkId": "confirm-support-bundle-readiness", "checkName": "Confirm support bundle readiness", "requiredEvidence": ["supportBundleAvailable"], "currentGaR8Status": "checklist_requirement_only", "futureExecutionOwner": "EDGE / LINK shared foundation", "activationGate": true},
+    {"checkId": "confirm-runtime-activation-remains-disabled", "checkName": "Confirm runtime activation remains disabled", "requiredEvidence": ["runtimeActivation=false"], "currentGaR8Status": "checklist_requirement_only", "futureExecutionOwner": "VANTARIS ONE governance", "activationGate": true},
+    {"checkId": "confirm-production-activation-remains-disabled", "checkName": "Confirm production activation remains disabled", "requiredEvidence": ["productionActivation=false"], "currentGaR8Status": "checklist_requirement_only", "futureExecutionOwner": "VANTARIS ONE governance", "activationGate": true},
+    {"checkId": "confirm-customer-approval-required-before-activation", "checkName": "Confirm customer approval required before activation", "requiredEvidence": ["customerApprovalRequired"], "currentGaR8Status": "checklist_requirement_only", "futureExecutionOwner": "VANTARIS ONE governance", "activationGate": true}
+  ],
+  "customerCoreFunctionDiagnosticImpact": [
+    {"function": "Work Order Management, auto + manual", "requiredDiagnosticsDomains": ["Source System Connectivity", "Tag Mapping", "Delivery / ACK Status", "Evidence Chain Status"], "requiredEdgeDiagnostics": ["connector health diagnostics"], "requiredLinkDiagnostics": ["work-order trigger delivery diagnostics"], "requiredOneProjection": "maintenance work-order readiness projection", "requiredUmmsCapability": "canonical work order lifecycle", "gaR8ReadinessStatus": "readiness_projection_only", "futurePhase": "UMMS-R2"},
+    {"function": "Asset Registry, full lifecycle tracking", "requiredDiagnosticsDomains": ["Asset / Location Mapping", "Tag Mapping"], "requiredEdgeDiagnostics": ["source system connectivity diagnostics"], "requiredLinkDiagnostics": ["asset/location reference diagnostics"], "requiredOneProjection": "asset topology readiness projection", "requiredUmmsCapability": "asset context consumption", "gaR8ReadinessStatus": "readiness_projection_only", "futurePhase": "shared foundation"},
+    {"function": "Preventive Maintenance Scheduler", "requiredDiagnosticsDomains": ["Tag Mapping", "Normalization Preview"], "requiredEdgeDiagnostics": ["equipment status diagnostics"], "requiredLinkDiagnostics": ["delivery readiness diagnostics"], "requiredOneProjection": "PM readiness projection", "requiredUmmsCapability": "PM schedule execution", "gaR8ReadinessStatus": "future_UMMS", "futurePhase": "UMMS-R2"},
+    {"function": "Spare Parts / Inventory Management", "requiredDiagnosticsDomains": ["Asset / Location Mapping"], "requiredEdgeDiagnostics": ["equipment reference diagnostics"], "requiredLinkDiagnostics": ["asset reference diagnostics"], "requiredOneProjection": "spare parts readiness projection", "requiredUmmsCapability": "inventory transaction lifecycle", "gaR8ReadinessStatus": "future_UMMS", "futurePhase": "UMMS-R2"},
+    {"function": "Vendor / Contract Management", "requiredDiagnosticsDomains": ["Support Bundle Readiness", "Evidence Chain Status"], "requiredEdgeDiagnostics": ["commissioning evidence diagnostics"], "requiredLinkDiagnostics": ["audit/evidence diagnostics"], "requiredOneProjection": "vendor readiness projection", "requiredUmmsCapability": "vendor and contract lifecycle", "gaR8ReadinessStatus": "future_UMMS", "futurePhase": "UMMS-R2"},
+    {"function": "Graphics HMI to locate Equipment", "requiredDiagnosticsDomains": ["Asset / Location Mapping", "Tag Mapping"], "requiredEdgeDiagnostics": ["HMI symbol diagnostics"], "requiredLinkDiagnostics": ["mapping profile diagnostics"], "requiredOneProjection": "HMI locator readiness projection", "requiredUmmsCapability": "maintenance context consumption", "gaR8ReadinessStatus": "readiness_projection_only", "futurePhase": "Airport GA-R9"},
+    {"function": "Existing system onboarding", "requiredDiagnosticsDomains": ["Source System Connectivity", "Connector Health", "Protocol Handshake"], "requiredEdgeDiagnostics": ["connector matrix diagnostics"], "requiredLinkDiagnostics": ["source system health diagnostics"], "requiredOneProjection": "onboarding readiness projection", "requiredUmmsCapability": "none for onboarding", "gaR8ReadinessStatus": "readiness_projection_only", "futurePhase": "Airport GA-R7"},
+    {"function": "Engineer commissioning diagnostics", "requiredDiagnosticsDomains": ["Remote Engineer Review Checklist", "Support Bundle Readiness", "Package Integrity"], "requiredEdgeDiagnostics": ["engineer commissioning CLI diagnostics"], "requiredLinkDiagnostics": ["support bundle reference diagnostics"], "requiredOneProjection": "commissioning diagnostics readiness projection", "requiredUmmsCapability": "handoff context consumption", "gaR8ReadinessStatus": "readiness_projection_only", "futurePhase": "Airport GA-R8"},
+    {"function": "Remote overseas deployment", "requiredDiagnosticsDomains": ["Hardware Key / Site Binding", "Package Integrity", "Network Reachability"], "requiredEdgeDiagnostics": ["offline package integrity diagnostics"], "requiredLinkDiagnostics": ["deployment package status diagnostics"], "requiredOneProjection": "remote deployment readiness projection", "requiredUmmsCapability": "deployment handoff visibility", "gaR8ReadinessStatus": "future_shared_foundation", "futurePhase": "Airport GA-R10"},
+    {"function": "Distributed independent installation", "requiredDiagnosticsDomains": ["LINK Gateway Readiness", "EDGE Node Readiness", "Clock / Timezone"], "requiredEdgeDiagnostics": ["site binding diagnostics"], "requiredLinkDiagnostics": ["distributed topology diagnostics"], "requiredOneProjection": "distributed installation readiness projection", "requiredUmmsCapability": "installation handoff visibility", "gaR8ReadinessStatus": "future_shared_foundation", "futurePhase": "Airport GA-R10"}
+  ],
+  "sharedFoundationInterfaceRequirements": {
+    "edgeRequirements": ["Engineer commissioning CLI", "Connector health diagnostics", "Source system connectivity diagnostics", "Protocol handshake diagnostics", "Tag mapping diagnostics", "Asset/location mapping diagnostics", "Sample payload preview", "Normalization preview", "Local buffer diagnostics", "Hardware-key / site-binding diagnostics", "Offline package integrity diagnostics", "Support bundle export", "Timezone / clock check", "Network reachability check"],
+    "linkRequirements": ["LINK gateway diagnostics", "Delivery / ACK diagnostics", "Retry / DLQ diagnostics", "Audit/evidence chain diagnostics", "Sync batch diagnostics", "Distributed topology diagnostics", "Deployment package status", "Remote support bundle contract", "Support bundle ingestion / reference", "Delivery channel backpressure status"]
+  },
+  "safetyPosture": {
+    "readOnly": true,
+    "runtimeActivation": false,
+    "productionActivation": false,
+    "dbWrite": false,
+    "approvalExecution": false,
+    "deploymentExecution": false,
+    "remoteCommandExecution": false,
+    "diagnosticsExecution": false,
+    "connectorExecution": false,
+    "deviceConnection": false,
+    "edgeRuntimeCall": false,
+    "linkRuntimeCall": false,
+    "oneAdapterIntroduced": false,
+    "customerIdentifierLeakage": false,
+    "localAbsolutePathLeakage": false
+  }
+}
