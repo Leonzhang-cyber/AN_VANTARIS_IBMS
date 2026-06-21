@@ -1,0 +1,112 @@
+{
+  "releaseFreezeId": "umms-r13a-local-freeze.v1",
+  "currentHead": "4fbee5838065c24bbe9e5b380ae878fe6fac977f",
+  "branch": "main",
+  "branchState": "main...origin/main [ahead 3]",
+  "baselineCommit": {
+    "commit": "4fbee5838065c24bbe9e5b380ae878fe6fac977f",
+    "message": "docs(one): add umms observability readonly metrics layer",
+    "passMarker": "ONE_UMMS_R13_OBSERVABILITY_READONLY_METRICS_LAYER_PASS"
+  },
+  "r13ObservabilitySummary": {
+    "layer": "UMMS-R13 Observability / Monitoring / Read-only Metrics Layer",
+    "mode": "READ_ONLY_METRICS_AGGREGATION",
+    "sourceArtifacts": "Committed UMMS-R2 through UMMS-R13 artifacts",
+    "runtimeBehaviorAdded": false,
+    "backendMutationAdded": false,
+    "frontendUiMutationAdded": false,
+    "dbWriteAdded": false,
+    "workflowExecutionAdded": false
+  },
+  "metricsModel": {
+    "totalChainLayers": 25,
+    "completedChainLayers": 25,
+    "readinessPercentage": 100,
+    "getOnlyEndpointCount": 5,
+    "readOnlyFrontendRoutes": 1,
+    "dependencyFamiliesObserved": 3,
+    "runtimeFlagsEnabled": 0,
+    "mutationFlagsEnabled": 0,
+    "legacyWarningsPresent": true
+  },
+  "chainCompletenessR2ToR13": [
+    "ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_PASS",
+    "ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+    "ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_PASS",
+    "ONE_UMMS_R3A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+    "ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_PASS",
+    "ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+    "ONE_UMMS_R5_PREVENTIVE_MAINTENANCE_SCHEDULE_READINESS_PASS",
+    "ONE_UMMS_R5A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+    "ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_PASS",
+    "ONE_UMMS_R6A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+    "ONE_UMMS_R7_VENDOR_CONTRACT_SLA_READINESS_PASS",
+    "ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+    "ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_PASS",
+    "ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+    "ONE_UMMS_R9_AIRPORT_HMI_LOCATOR_BINDING_READINESS_PASS",
+    "ONE_UMMS_R9A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+    "ONE_UMMS_R10_STAKEHOLDER_REVIEW_PACKAGE_PASS",
+    "ONE_UMMS_R10A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+    "ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_READINESS_PASS",
+    "ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+    "ONE_UMMS_R11_READONLY_API_ENTRY_SKELETON_PASS",
+    "ONE_UMMS_R11A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+    "ONE_UMMS_R12_READONLY_FRONTEND_UCONSOLE_CARD_ENTRY_PASS",
+    "ONE_UMMS_R12A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+    "ONE_UMMS_R13_OBSERVABILITY_READONLY_METRICS_LAYER_PASS"
+  ],
+  "dependencyMap": {
+    "EDGE": {
+      "observed": true,
+      "runtimeCallEnabled": false
+    },
+    "LINK": {
+      "observed": true,
+      "runtimeCallEnabled": false
+    },
+    "UCDE": {
+      "observed": true,
+      "runtimeExecutionEnabled": false
+    }
+  },
+  "safetyFlags": {
+    "readOnly": true,
+    "localFreezeOnly": true,
+    "metricsAggregationOnly": true,
+    "runtimeActivation": false,
+    "productionActivation": false,
+    "dbWrite": false,
+    "workflowExecution": false,
+    "backendMutation": false,
+    "frontendUiMutation": false,
+    "approvalExecution": false,
+    "workOrderRuntimeExecution": false,
+    "pmExecution": false,
+    "inventoryTransaction": false,
+    "vendorContractSlaRuntime": false,
+    "evidenceClosureExecution": false,
+    "hmiRuntimeExecution": false,
+    "deviceConnection": false,
+    "connectorExecution": false,
+    "edgeRuntimeCall": false,
+    "linkRuntimeCall": false,
+    "contractsChange": false,
+    "ufmsChange": false,
+    "oneAdapterIntroduced": false,
+    "tagCreated": false,
+    "pushPerformed": false
+  },
+  "optionalTagPlan": {
+    "tagName": "umms-r13-observability-readonly-metrics-local-freeze-20260621",
+    "commandsExecuted": false,
+    "commandsForFutureUseOnly": [
+      "git tag -a umms-r13-observability-readonly-metrics-local-freeze-20260621 -m \"VANTARIS ONE UMMS-R13 observability readonly metrics local freeze\"",
+      "git push origin main",
+      "git push origin umms-r13-observability-readonly-metrics-local-freeze-20260621"
+    ]
+  },
+  "pushPerformed": false,
+  "tagCreated": false,
+  "nextStep": "UMMS-R14 planning stage"
+}
