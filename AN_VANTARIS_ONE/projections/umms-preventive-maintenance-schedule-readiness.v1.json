@@ -1,0 +1,170 @@
+{
+  "metadata": {
+    "projectionId": "umms-preventive-maintenance-schedule-readiness.v1",
+    "platform": "VANTARIS ONE",
+    "module": "UMMS",
+    "releaseContext": "UMMS-R5 Preventive Maintenance Schedule Readiness",
+    "readOnly": true,
+    "runtimeActivation": false,
+    "productionActivation": false,
+    "dbWrite": false,
+    "approvalExecution": false,
+    "workflowExecution": false,
+    "pmScheduleCreation": false,
+    "pmScheduleUpdate": false,
+    "pmScheduleExecution": false,
+    "pmTaskExecution": false,
+    "automaticWorkOrderGeneration": false,
+    "workOrderCreation": false,
+    "workOrderUpdate": false,
+    "workOrderAssignment": false,
+    "workOrderApproval": false,
+    "workOrderClosure": false,
+    "stateTransitionExecution": false,
+    "assetLifecycleWrite": false,
+    "inventoryTransaction": false,
+    "vendorContractExecution": false,
+    "edgeRuntimeCall": false,
+    "linkRuntimeCall": false,
+    "oneAdapterIntroduced": false
+  },
+  "r5ScopeSummary": {
+    "targetModule": "UMMS",
+    "currentStatus": "preventive_maintenance_schedule_readiness_projection_only",
+    "sourceBaseline": "UMMS-R4 Work Order Lifecycle State Model + Validation Gate",
+    "genericModuleScope": "cross_industry_maintenance_management",
+    "airportSpecificLogicInCore": false,
+    "runtimeWorkflowEnabled": false,
+    "productionWorkflowEnabled": false,
+    "pmExecutionEnabled": false,
+    "automaticWorkOrderGenerationEnabled": false
+  },
+  "pmPlanModel": {
+    "requiredFields": ["pmPlanId", "pmPlanName", "pmPlanType", "assetRef", "assetType", "systemType", "discipline", "locationRef", "hmiLocatorRef", "maintenanceType", "maintenanceStrategy", "priority", "riskClass", "checklistRef", "assignedRole", "assignmentGroup", "estimatedDuration", "requiredSkills", "requiredSpareParts", "vendorRef", "contractRef", "slaRef", "evidenceRefs", "reviewStatus", "activationAllowed"],
+    "activationAllowed": false,
+    "statement": "activationAllowed must remain false in UMMS-R5. No PM plan creation, update, approval, or activation is implemented."
+  },
+  "pmScheduleModel": {
+    "requiredFields": ["pmScheduleId", "pmPlanId", "assetRef", "locationRef", "scheduleType", "frequencyType", "calendarFrequency", "startDate", "endDate", "nextDueAt", "lastCompletedAt", "runtimeHoursThreshold", "eventCountThreshold", "faultCountThreshold", "conditionTriggerRef", "vendorRecommendationRef", "contractSlaRef", "timeWindow", "timezone", "gracePeriod", "escalationPolicyRef", "workOrderGenerationPolicyRef", "scheduleStatus", "validationStatus", "activationAllowed"],
+    "activationAllowed": false,
+    "statement": "No PM schedule execution is implemented in UMMS-R5. activationAllowed must remain false."
+  },
+  "pmTaskModel": {
+    "requiredFields": ["pmTaskId", "pmScheduleId", "pmPlanId", "assetRef", "locationRef", "taskName", "taskDescription", "taskType", "checklistRef", "estimatedDuration", "requiredRole", "requiredSkill", "requiredEvidence", "requiredSpareParts", "vendorSupportRequired", "safetyRequirement", "completionEvidenceRefs", "workOrderRef", "taskStatus", "executionAllowedInR5"],
+    "executionAllowedInR5": false
+  },
+  "pmChecklistModel": {
+    "requiredFields": ["checklistId", "checklistName", "checklistType", "assetType", "systemType", "taskSteps", "requiredMeasurements", "requiredPhotos", "requiredDocuments", "requiredEvidence", "passFailCriteria", "safetyNotes", "reviewRequired", "ucdeEvidenceRequired", "executionAllowedInR5"],
+    "executionAllowedInR5": false
+  },
+  "pmTriggerTypeModel": [
+    {"triggerType": "calendar_based", "description": "Calendar interval readiness.", "requiredInputs": ["calendarFrequency", "startDate"], "requiredEdgeFields": [], "requiredLinkObjects": [], "requiredUmmsFields": ["calendarFrequency"], "requiredUcdeEvidence": ["PM review evidence"], "requiredValidationGate": "Schedule completeness gate", "currentUmmsR5Status": "modeled_only", "executionAllowedInR5": false},
+    {"triggerType": "runtime_hours_based", "description": "Runtime-hours threshold readiness.", "requiredInputs": ["runtimeHoursThreshold"], "requiredEdgeFields": ["Runtime hours signal, future"], "requiredLinkObjects": ["Source-system health contract"], "requiredUmmsFields": ["runtimeHoursThreshold"], "requiredUcdeEvidence": ["PM task evidence"], "requiredValidationGate": "Runtime input readiness gate", "currentUmmsR5Status": "future_dependency_only", "executionAllowedInR5": false},
+    {"triggerType": "event_count_based", "description": "Event-count threshold readiness.", "requiredInputs": ["eventCountThreshold"], "requiredEdgeFields": ["Event count signal, future"], "requiredLinkObjects": ["Alarm/event/fault candidate references"], "requiredUmmsFields": ["eventCountThreshold"], "requiredUcdeEvidence": ["Audit trail"], "requiredValidationGate": "Runtime input readiness gate", "currentUmmsR5Status": "future_dependency_only", "executionAllowedInR5": false},
+    {"triggerType": "fault_count_based", "description": "Fault-count threshold readiness.", "requiredInputs": ["faultCountThreshold"], "requiredEdgeFields": ["Fault count signal, future"], "requiredLinkObjects": ["Alarm/event/fault candidate references"], "requiredUmmsFields": ["faultCountThreshold"], "requiredUcdeEvidence": ["PM review evidence"], "requiredValidationGate": "Runtime input readiness gate", "currentUmmsR5Status": "future_dependency_only", "executionAllowedInR5": false},
+    {"triggerType": "condition_based", "description": "Condition signal readiness.", "requiredInputs": ["conditionTriggerRef"], "requiredEdgeFields": ["Condition signal / health score, future"], "requiredLinkObjects": ["Source-system health contract"], "requiredUmmsFields": ["conditionTriggerRef"], "requiredUcdeEvidence": ["PM task evidence"], "requiredValidationGate": "Condition data freshness gate", "currentUmmsR5Status": "future_dependency_only", "executionAllowedInR5": false},
+    {"triggerType": "vendor_recommended", "description": "Vendor-recommended interval readiness.", "requiredInputs": ["vendorRecommendationRef"], "requiredEdgeFields": [], "requiredLinkObjects": ["Audit/evidence chain profile"], "requiredUmmsFields": ["vendorRef"], "requiredUcdeEvidence": ["PM review evidence"], "requiredValidationGate": "Vendor / contract readiness gate", "currentUmmsR5Status": "future_dependency_only", "executionAllowedInR5": false},
+    {"triggerType": "contract_sla_based", "description": "Contract/SLA based readiness.", "requiredInputs": ["contractSlaRef"], "requiredEdgeFields": [], "requiredLinkObjects": ["Delivery readiness contract"], "requiredUmmsFields": ["contractRef", "slaRef"], "requiredUcdeEvidence": ["Audit trail"], "requiredValidationGate": "SLA readiness gate", "currentUmmsR5Status": "future_dependency_only", "executionAllowedInR5": false},
+    {"triggerType": "manual_review_based", "description": "Manual review readiness.", "requiredInputs": ["reviewStatus"], "requiredEdgeFields": [], "requiredLinkObjects": [], "requiredUmmsFields": ["reviewStatus"], "requiredUcdeEvidence": ["PM review evidence"], "requiredValidationGate": "Customer approval gate, future optional", "currentUmmsR5Status": "modeled_only", "executionAllowedInR5": false}
+  ],
+  "calendarBasedPmReadiness": {
+    "requiredFields": ["calendarFrequency", "startDate", "endDate", "timezone", "businessCalendarRef", "holidayCalendarRef", "gracePeriod", "nextDueCalculationRequirement", "reviewStatus", "executionAllowedInR5"],
+    "executionAllowedInR5": false,
+    "statement": "No due-date calculation runtime is implemented in UMMS-R5."
+  },
+  "conditionBasedPmReadiness": {
+    "requiredFields": ["runtimeHours", "eventCount", "faultCount", "conditionSignal", "healthScore", "degradationIndicator", "thresholdRef", "sourceSystemId", "edgeNodeId", "linkGatewayId", "qualityFlag", "dataFreshnessStatus", "evidenceRef"],
+    "statement": "EDGE/LINK future runtime inputs are requirements only. No EDGE/LINK runtime call is implemented in UMMS-R5."
+  },
+  "workOrderGenerationPolicyModel": {
+    "requiredFields": ["policyId", "pmPlanId", "pmScheduleId", "generationMode", "manualReviewRequired", "autoGenerationAllowed", "requiredValidationGates", "requiredEvidence", "requiredRoleApproval", "requiredSlaGate", "requiredAssetLocationGate", "requiredSparePartGate", "requiredVendorContractGate", "targetWorkOrderType", "targetPriority", "targetAssignmentGroup", "activationAllowed"],
+    "autoGenerationAllowed": false,
+    "activationAllowed": false,
+    "statement": "autoGenerationAllowed must remain false in UMMS-R5. No work order generation is implemented."
+  },
+  "pmValidationGateModel": [
+    {"gateId": "asset_reference_gate", "gateName": "Asset reference gate", "purpose": "Require assetRef readiness.", "requiredInputs": ["assetRef"], "failureSeverity": "critical", "blocksFutureActivation": true, "currentR5Status": "modeled_only", "futureExecutionOwner": "UMMS + Asset Graph"},
+    {"gateId": "location_reference_gate", "gateName": "Location reference gate", "purpose": "Require locationRef readiness.", "requiredInputs": ["locationRef"], "failureSeverity": "critical", "blocksFutureActivation": true, "currentR5Status": "modeled_only", "futureExecutionOwner": "UMMS + Asset Graph"},
+    {"gateId": "pm_plan_completeness_gate", "gateName": "PM plan completeness gate", "purpose": "Validate future PM plan completeness.", "requiredInputs": ["pmPlanName", "maintenanceStrategy"], "failureSeverity": "high", "blocksFutureActivation": true, "currentR5Status": "modeled_only", "futureExecutionOwner": "UMMS"},
+    {"gateId": "schedule_completeness_gate", "gateName": "Schedule completeness gate", "purpose": "Validate future schedule completeness.", "requiredInputs": ["scheduleType", "frequencyType"], "failureSeverity": "high", "blocksFutureActivation": true, "currentR5Status": "modeled_only", "futureExecutionOwner": "UMMS"},
+    {"gateId": "checklist_readiness_gate", "gateName": "Checklist readiness gate", "purpose": "Require checklist readiness.", "requiredInputs": ["checklistRef"], "failureSeverity": "high", "blocksFutureActivation": true, "currentR5Status": "modeled_only", "futureExecutionOwner": "UMMS"},
+    {"gateId": "assignment_readiness_gate", "gateName": "Assignment readiness gate", "purpose": "Require assignment readiness.", "requiredInputs": ["assignedRole", "assignmentGroup"], "failureSeverity": "medium", "blocksFutureActivation": true, "currentR5Status": "modeled_only", "futureExecutionOwner": "UMMS"},
+    {"gateId": "sla_readiness_gate", "gateName": "SLA readiness gate", "purpose": "Require SLA readiness.", "requiredInputs": ["slaRef"], "failureSeverity": "medium", "blocksFutureActivation": true, "currentR5Status": "modeled_only", "futureExecutionOwner": "UMMS-R7"},
+    {"gateId": "evidence_readiness_gate", "gateName": "Evidence readiness gate", "purpose": "Require evidence readiness.", "requiredInputs": ["evidenceRefs"], "failureSeverity": "high", "blocksFutureActivation": true, "currentR5Status": "modeled_only", "futureExecutionOwner": "UMMS + UCDE"},
+    {"gateId": "spare_parts_readiness_gate", "gateName": "Spare parts readiness gate", "purpose": "Require parts readiness.", "requiredInputs": ["requiredSpareParts"], "failureSeverity": "medium", "blocksFutureActivation": true, "currentR5Status": "modeled_only", "futureExecutionOwner": "UMMS-R6"},
+    {"gateId": "vendor_contract_readiness_gate", "gateName": "Vendor / contract readiness gate", "purpose": "Require vendor/contract readiness.", "requiredInputs": ["vendorRef", "contractRef"], "failureSeverity": "medium", "blocksFutureActivation": true, "currentR5Status": "modeled_only", "futureExecutionOwner": "UMMS-R7"},
+    {"gateId": "runtime_input_readiness_gate", "gateName": "Runtime input readiness gate", "purpose": "Require future runtime input readiness.", "requiredInputs": ["runtimeHours", "eventCount", "faultCount"], "failureSeverity": "high", "blocksFutureActivation": true, "currentR5Status": "future_dependency_only", "futureExecutionOwner": "EDGE/LINK + UMMS"},
+    {"gateId": "condition_data_freshness_gate", "gateName": "Condition data freshness gate", "purpose": "Require condition data freshness.", "requiredInputs": ["dataFreshnessStatus", "qualityFlag"], "failureSeverity": "high", "blocksFutureActivation": true, "currentR5Status": "future_dependency_only", "futureExecutionOwner": "EDGE/LINK + UMMS"},
+    {"gateId": "work_order_generation_policy_gate", "gateName": "Work order generation policy gate", "purpose": "Require future generation policy review.", "requiredInputs": ["workOrderGenerationPolicyRef"], "failureSeverity": "critical", "blocksFutureActivation": true, "currentR5Status": "modeled_only", "futureExecutionOwner": "UMMS"},
+    {"gateId": "ucde_evidence_gate", "gateName": "UCDE evidence gate", "purpose": "Require future UCDE evidence alignment.", "requiredInputs": ["evidenceRefs"], "failureSeverity": "high", "blocksFutureActivation": true, "currentR5Status": "modeled_only", "futureExecutionOwner": "UCDE"},
+    {"gateId": "customer_approval_gate_future_optional", "gateName": "Customer approval gate, future optional", "purpose": "Future optional customer approval readiness.", "requiredInputs": ["reviewStatus"], "failureSeverity": "low", "blocksFutureActivation": false, "currentR5Status": "future_optional", "futureExecutionOwner": "UMMS"}
+  ],
+  "assetPmLinkageModel": {
+    "requiredFields": ["assetRef", "assetType", "systemType", "discipline", "locationRef", "hmiLocatorRef", "pmPlanRefs", "pmScheduleRefs", "pmTaskRefs", "lastPmCompletedAt", "nextPmDueAt", "pmRiskClass", "maintenanceHistoryRefs", "faultHistoryRefs", "workOrderRefs", "evidenceRefs", "lifecycleState"],
+    "statement": "UMMS-R5 does not write canonical Asset Graph. This is read-only PM linkage readiness only."
+  },
+  "airportToPmMapping": [
+    {"airportSource": "Airport Assets & Topology", "ummsPmTarget": "PM asset linkage", "mappingType": "asset context", "readOnlyStatus": "read_only_projection", "runtimeStatus": "disabled", "futureImplementationOwner": "UMMS + Asset Graph"},
+    {"airportSource": "Airport Fault Cases", "ummsPmTarget": "fault-count-based PM input, future", "mappingType": "future counter input", "readOnlyStatus": "read_only_projection", "runtimeStatus": "disabled", "futureImplementationOwner": "UMMS + UFMS planning"},
+    {"airportSource": "Airport Alarms & Events", "ummsPmTarget": "event-count-based PM input, future", "mappingType": "future counter input", "readOnlyStatus": "read_only_projection", "runtimeStatus": "disabled", "futureImplementationOwner": "UMMS + LINK"},
+    {"airportSource": "Airport Maintenance Work Orders", "ummsPmTarget": "PM work order history reference", "mappingType": "history reference", "readOnlyStatus": "read_only_projection", "runtimeStatus": "disabled", "futureImplementationOwner": "UMMS"},
+    {"airportSource": "Airport Evidence Investigation", "ummsPmTarget": "PM evidence readiness", "mappingType": "evidence readiness", "readOnlyStatus": "read_only_projection", "runtimeStatus": "disabled", "futureImplementationOwner": "UMMS + UCDE"},
+    {"airportSource": "Airport HMI Locator Readiness", "ummsPmTarget": "PM location / hmiLocatorRef readiness", "mappingType": "locator context", "readOnlyStatus": "read_only_projection", "runtimeStatus": "disabled", "futureImplementationOwner": "UMMS + Asset Graph"},
+    {"airportSource": "Airport Deployment Readiness", "ummsPmTarget": "PM activation dependency, future only", "mappingType": "activation dependency", "readOnlyStatus": "read_only_projection", "runtimeStatus": "disabled", "futureImplementationOwner": "UMMS + Deployment Gate"},
+    {"airportSource": "Airport Reports", "ummsPmTarget": "PM reporting input", "mappingType": "reporting projection", "readOnlyStatus": "read_only_projection", "runtimeStatus": "disabled", "futureImplementationOwner": "UMMS + Reports"}
+  ],
+  "customerCoreFunctionR5Alignment": [
+    {"function": "Work Order Management, auto + manual", "ummsR5Contribution": "Future PM-to-work-order policy modeled with auto generation disabled.", "requiredPmObjects": ["pmPlan", "pmSchedule"], "requiredValidationGates": ["Work order generation policy gate"], "requiredLinkObjects": ["Work-order trigger contract, future PM-generated work order"], "requiredEdgeCapabilities": ["Runtime hours signal, future"], "requiredUcdeEvidence": ["Work order evidence"], "currentUmmsR5Status": "projection_only", "futurePhase": "UMMS-R10"},
+    {"function": "Asset Registry, full lifecycle tracking", "ummsR5Contribution": "Read-only asset PM linkage readiness.", "requiredPmObjects": ["assetPmLinkage"], "requiredValidationGates": ["Asset reference gate", "Location reference gate"], "requiredLinkObjects": ["Asset/location reference contract"], "requiredEdgeCapabilities": ["Asset/location mapping preview"], "requiredUcdeEvidence": ["PM plan evidence"], "currentUmmsR5Status": "projection_only", "futurePhase": "UMMS-R9"},
+    {"function": "Preventive Maintenance Scheduler", "ummsR5Contribution": "Core PM plan/schedule/task/checklist readiness modeled.", "requiredPmObjects": ["pmPlan", "pmSchedule", "pmTask", "pmChecklist"], "requiredValidationGates": ["PM plan completeness gate", "Schedule completeness gate"], "requiredLinkObjects": ["Delivery readiness contract"], "requiredEdgeCapabilities": ["Condition signal / health score, future"], "requiredUcdeEvidence": ["PM task evidence"], "currentUmmsR5Status": "projection_only", "futurePhase": "UMMS-R5A"},
+    {"function": "Spare Parts / Inventory Management", "ummsR5Contribution": "Parts readiness gate references future inventory readiness.", "requiredPmObjects": ["pmTask"], "requiredValidationGates": ["Spare parts readiness gate"], "requiredLinkObjects": ["Delivery / ACK / retry / DLQ status"], "requiredEdgeCapabilities": ["Runtime hours signal, future"], "requiredUcdeEvidence": ["PM task evidence"], "currentUmmsR5Status": "future_dependency_only", "futurePhase": "UMMS-R6"},
+    {"function": "Vendor / Contract Management", "ummsR5Contribution": "Vendor-recommended and contract/SLA triggers modeled.", "requiredPmObjects": ["pmPlan", "pmSchedule"], "requiredValidationGates": ["Vendor / contract readiness gate", "SLA readiness gate"], "requiredLinkObjects": ["Audit/evidence chain profile"], "requiredEdgeCapabilities": ["Source system health contract"], "requiredUcdeEvidence": ["PM review evidence"], "currentUmmsR5Status": "future_dependency_only", "futurePhase": "UMMS-R7"},
+    {"function": "Graphics HMI to locate Equipment", "ummsR5Contribution": "hmiLocatorRef included in PM plan and asset linkage.", "requiredPmObjects": ["assetPmLinkage"], "requiredValidationGates": ["Location reference gate"], "requiredLinkObjects": ["Asset/location reference contract"], "requiredEdgeCapabilities": ["HMI locator data foundation"], "requiredUcdeEvidence": ["PM checklist evidence"], "currentUmmsR5Status": "projection_only", "futurePhase": "UMMS-R9"},
+    {"function": "Existing system onboarding", "ummsR5Contribution": "Future source-system inputs captured as dependencies.", "requiredPmObjects": ["conditionBasedPmReadiness"], "requiredValidationGates": ["Runtime input readiness gate"], "requiredLinkObjects": ["Source-system health contract"], "requiredEdgeCapabilities": ["Tag mapping and normalization"], "requiredUcdeEvidence": ["Audit trail"], "currentUmmsR5Status": "future_dependency_only", "futurePhase": "shared foundation"},
+    {"function": "Engineer commissioning diagnostics", "ummsR5Contribution": "Diagnostics can inform condition readiness later.", "requiredPmObjects": ["conditionBasedPmReadiness"], "requiredValidationGates": ["Condition data freshness gate"], "requiredLinkObjects": ["Audit/evidence chain profile"], "requiredEdgeCapabilities": ["Engineer diagnostics"], "requiredUcdeEvidence": ["PM review evidence"], "currentUmmsR5Status": "future_dependency_only", "futurePhase": "shared foundation"},
+    {"function": "Remote overseas deployment", "ummsR5Contribution": "No activation or deployment execution.", "requiredPmObjects": ["pmSchedule"], "requiredValidationGates": ["Work order generation policy gate"], "requiredLinkObjects": ["Distributed topology contract"], "requiredEdgeCapabilities": ["Asset/location mapping preview"], "requiredUcdeEvidence": ["Audit trail"], "currentUmmsR5Status": "not_executed", "futurePhase": "deployment gate"},
+    {"function": "Distributed independent installation", "ummsR5Contribution": "No install/runtime execution; readiness only.", "requiredPmObjects": ["pmPlan"], "requiredValidationGates": ["PM plan completeness gate"], "requiredLinkObjects": ["Distributed topology contract"], "requiredEdgeCapabilities": ["Asset/location mapping preview"], "requiredUcdeEvidence": ["Report evidence"], "currentUmmsR5Status": "not_executed", "futurePhase": "deployment gate"}
+  ],
+  "sharedFoundationDependencyMap": {
+    "edgeDependencies": ["Runtime hours signal, future", "Event count signal, future", "Fault count signal, future", "Condition signal / health score, future", "Asset/location mapping preview", "Tag mapping and normalization", "HMI locator data foundation", "Engineer diagnostics"],
+    "linkDependencies": ["Source-system health contract", "Delivery readiness contract", "Alarm/event/fault candidate references", "Asset/location reference contract", "Audit/evidence chain profile", "Delivery / ACK / retry / DLQ status", "Work-order trigger contract, future PM-generated work order", "Distributed topology contract"],
+    "ucdeDependencies": ["PM plan evidence", "PM task evidence", "PM checklist evidence", "PM completion evidence", "PM review evidence", "Work order evidence", "Closure evidence", "Audit trail", "Report evidence"]
+  },
+  "futureImplementationRoadmap": [
+    "UMMS-R5A Local Freeze + Optional Tag Plan",
+    "UMMS-R6 Spare Parts / Inventory Readiness",
+    "UMMS-R7 Vendor / Contract / SLA Readiness",
+    "UMMS-R8 UMMS + UCDE Evidence Closure Alignment",
+    "UMMS-R9 UMMS + Airport HMI Locator Binding Readiness",
+    "UMMS-R10 UMMS Stakeholder Review Package"
+  ],
+  "safetyPosture": {
+    "readOnly": true,
+    "runtimeActivation": false,
+    "productionActivation": false,
+    "dbWrite": false,
+    "approvalExecution": false,
+    "workflowExecution": false,
+    "pmScheduleCreation": false,
+    "pmScheduleUpdate": false,
+    "pmScheduleExecution": false,
+    "pmTaskExecution": false,
+    "automaticWorkOrderGeneration": false,
+    "workOrderCreation": false,
+    "workOrderUpdate": false,
+    "workOrderAssignment": false,
+    "workOrderApproval": false,
+    "workOrderClosure": false,
+    "stateTransitionExecution": false,
+    "assetLifecycleWrite": false,
+    "inventoryTransaction": false,
+    "vendorContractExecution": false,
+    "connectorExecution": false,
+    "deviceConnection": false,
+    "edgeRuntimeCall": false,
+    "linkRuntimeCall": false,
+    "oneAdapterIntroduced": false,
+    "customerIdentifierLeakage": false,
+    "localAbsolutePathLeakage": false
+  }
+}
