@@ -1,0 +1,180 @@
+{
+  "metadata": {
+    "projectionId": "umms-spare-parts-inventory-readiness.v1",
+    "platform": "VANTARIS ONE",
+    "module": "UMMS",
+    "releaseContext": "UMMS-R6 Spare Parts / Inventory Readiness",
+    "readOnly": true,
+    "runtimeActivation": false,
+    "productionActivation": false,
+    "dbWrite": false,
+    "approvalExecution": false,
+    "workflowExecution": false,
+    "inventoryTransaction": false,
+    "stockReservation": false,
+    "stockDeduction": false,
+    "stockReturn": false,
+    "procurementExecution": false,
+    "purchaseOrderExecution": false,
+    "warehouseTransferExecution": false,
+    "workOrderSparePartConsumption": false,
+    "pmScheduleExecution": false,
+    "automaticWorkOrderGeneration": false,
+    "workOrderCreation": false,
+    "workOrderUpdate": false,
+    "workOrderAssignment": false,
+    "workOrderApproval": false,
+    "workOrderClosure": false,
+    "assetLifecycleWrite": false,
+    "vendorContractExecution": false,
+    "edgeRuntimeCall": false,
+    "linkRuntimeCall": false,
+    "oneAdapterIntroduced": false
+  },
+  "r6ScopeSummary": {
+    "targetModule": "UMMS",
+    "currentStatus": "spare_parts_inventory_readiness_projection_only",
+    "sourceBaseline": "UMMS-R5 Preventive Maintenance Schedule Readiness",
+    "genericModuleScope": "cross_industry_maintenance_management",
+    "airportSpecificLogicInCore": false,
+    "runtimeWorkflowEnabled": false,
+    "productionWorkflowEnabled": false,
+    "inventoryExecutionEnabled": false,
+    "stockReservationEnabled": false,
+    "procurementExecutionEnabled": false
+  },
+  "sparePartCatalogModel": {
+    "fields": ["sparePartId", "sparePartRef", "partNumber", "partName", "partDescription", "partCategory", "assetType", "systemType", "discipline", "manufacturer", "modelCompatibility", "vendorRef", "contractRef", "unitOfMeasure", "criticality", "substitutePartRefs", "preferredPart", "shelfLifeRequired", "warrantyTrackingRequired", "evidenceRefs", "reviewStatus", "activationAllowed"],
+    "activationAllowed": false,
+    "statement": "activationAllowed must remain false in UMMS-R6. No spare part catalog creation, update, deletion, approval, or activation is implemented."
+  },
+  "inventoryItemModel": {
+    "fields": ["inventoryItemId", "sparePartRef", "partNumber", "inventoryLocationRef", "warehouseRef", "storeRoomRef", "binLocationRef", "quantityOnHand", "quantityAvailable", "quantityReserved", "quantityOnOrder", "minimumStockLevel", "maximumStockLevel", "reorderPoint", "reorderQuantity", "unitCost", "currency", "batchNumber", "serialNumber", "expiryDate", "warrantyStatus", "stockStatus", "lastStockCountAt", "evidenceRefs", "validationStatus", "activationAllowed"],
+    "activationAllowed": false,
+    "statement": "No inventory item write or quantity mutation is implemented in UMMS-R6. activationAllowed must remain false."
+  },
+  "inventoryLocationModel": {
+    "fields": ["inventoryLocationRef", "warehouseRef", "storeRoomRef", "binLocationRef", "siteRef", "building", "level", "room", "zone", "accessControlRequired", "temperatureControlled", "hazardousMaterialArea", "responsibleRole", "stockCountPolicy", "evidenceRefs", "activationAllowed"],
+    "activationAllowed": false,
+    "statement": "No inventory location creation/update is implemented in UMMS-R6."
+  },
+  "sparePartRequirementModel": {
+    "fields": ["requirementId", "sourceType", "sourceWorkOrderId", "sourcePmTaskId", "sourceAssetRef", "sourceFaultCaseId", "sparePartRef", "partNumber", "requiredQuantity", "requiredBy", "priority", "criticality", "reservationRequired", "substituteAllowed", "vendorSupportRequired", "contractRef", "evidenceRefs", "readinessStatus", "activationAllowed"],
+    "activationAllowed": false,
+    "statement": "No reservation, issue, deduction, or consumption is implemented in UMMS-R6."
+  },
+  "workOrderSparePartReadiness": {
+    "fields": ["workOrderId", "workOrderType", "assetRef", "locationRef", "requiredSparePartRefs", "requiredQuantities", "availableQuantitySummary", "shortageStatus", "reservationStatus", "issueStatus", "returnStatus", "substitutePartStatus", "vendorSupportStatus", "evidenceReadinessStatus", "inventoryGateStatus", "activationAllowed"],
+    "activationAllowed": false,
+    "statement": "No work order spare part consumption is implemented in UMMS-R6."
+  },
+  "pmSparePartReadiness": {
+    "fields": ["pmPlanId", "pmScheduleId", "pmTaskId", "assetRef", "locationRef", "requiredSparePartRefs", "recommendedQuantities", "minimumStockDependency", "reservationPolicyRef", "availabilityStatus", "shortageRisk", "vendorLeadTimeRisk", "contractCoverageStatus", "evidenceRefs", "activationAllowed"],
+    "activationAllowed": false,
+    "statement": "No PM spare part reservation or consumption is implemented in UMMS-R6."
+  },
+  "inventoryPolicyModel": [
+    {"policyId": "inventory-policy-minimum-stock", "policyType": "minimum_stock_policy", "purpose": "Model future minimum stock readiness.", "requiredInputs": ["sparePartRef", "inventoryLocationRef", "minimumStockLevel"], "requiredValidationGate": "Minimum stock readiness gate", "futureExecutionOwner": "UMMS inventory runtime, future", "currentUmmsR6Status": "readiness_only", "executionAllowedInR6": false},
+    {"policyId": "inventory-policy-reorder-point", "policyType": "reorder_point_policy", "purpose": "Model future reorder threshold readiness.", "requiredInputs": ["reorderPoint", "reorderQuantity", "leadTimeDays"], "requiredValidationGate": "Procurement suggestion readiness gate", "futureExecutionOwner": "UMMS procurement readiness, future", "currentUmmsR6Status": "readiness_only", "executionAllowedInR6": false},
+    {"policyId": "inventory-policy-reservation", "policyType": "reservation_policy", "purpose": "Model future reservation control readiness.", "requiredInputs": ["requiredQuantity", "quantityAvailable", "workOrderId"], "requiredValidationGate": "Reservation readiness gate", "futureExecutionOwner": "UMMS inventory runtime, future", "currentUmmsR6Status": "readiness_only", "executionAllowedInR6": false},
+    {"policyId": "inventory-policy-issue", "policyType": "issue_policy", "purpose": "Model future issue control readiness.", "requiredInputs": ["reservationStatus", "issueStatus", "evidenceRefs"], "requiredValidationGate": "Issue readiness gate", "futureExecutionOwner": "UMMS inventory runtime, future", "currentUmmsR6Status": "readiness_only", "executionAllowedInR6": false},
+    {"policyId": "inventory-policy-return", "policyType": "return_policy", "purpose": "Model future return control readiness.", "requiredInputs": ["returnStatus", "condition", "evidenceRefs"], "requiredValidationGate": "Return readiness gate", "futureExecutionOwner": "UMMS inventory runtime, future", "currentUmmsR6Status": "readiness_only", "executionAllowedInR6": false},
+    {"policyId": "inventory-policy-stock-count", "policyType": "stock_count_policy", "purpose": "Model future stock count readiness.", "requiredInputs": ["stockCountPolicy", "lastStockCountAt"], "requiredValidationGate": "Stock count readiness gate", "futureExecutionOwner": "UMMS inventory audit, future", "currentUmmsR6Status": "readiness_only", "executionAllowedInR6": false},
+    {"policyId": "inventory-policy-expiry", "policyType": "expiry_policy", "purpose": "Model future expiry and shelf-life readiness.", "requiredInputs": ["expiryDate", "shelfLifeRequired", "warrantyStatus"], "requiredValidationGate": "Expiry / warranty readiness gate", "futureExecutionOwner": "UMMS inventory audit, future", "currentUmmsR6Status": "readiness_only", "executionAllowedInR6": false},
+    {"policyId": "inventory-policy-substitution", "policyType": "substitution_policy", "purpose": "Model future substitute part readiness.", "requiredInputs": ["substitutePartRefs", "modelCompatibility"], "requiredValidationGate": "Substitute part readiness gate", "futureExecutionOwner": "UMMS inventory planning, future", "currentUmmsR6Status": "readiness_only", "executionAllowedInR6": false},
+    {"policyId": "inventory-policy-vendor-lead-time", "policyType": "vendor_lead_time_policy", "purpose": "Model future vendor lead-time readiness.", "requiredInputs": ["vendorRef", "contractRef", "leadTimeDays"], "requiredValidationGate": "Vendor / contract readiness gate", "futureExecutionOwner": "UMMS vendor readiness, future", "currentUmmsR6Status": "readiness_only", "executionAllowedInR6": false},
+    {"policyId": "inventory-policy-critical-spares", "policyType": "critical_spares_policy", "purpose": "Model future critical spare risk readiness.", "requiredInputs": ["criticality", "assetType", "systemType"], "requiredValidationGate": "Critical spare readiness through catalog and minimum stock gates", "futureExecutionOwner": "UMMS inventory planning, future", "currentUmmsR6Status": "readiness_only", "executionAllowedInR6": false}
+  ],
+  "procurementSuggestionReadiness": {
+    "fields": ["suggestionId", "sparePartRef", "partNumber", "triggerType", "shortageStatus", "minimumStockBreach", "forecastDemand", "vendorRef", "contractRef", "leadTimeDays", "recommendedQuantity", "estimatedCost", "currency", "approvalRequired", "purchaseOrderAllowed", "evidenceRefs", "activationAllowed"],
+    "purchaseOrderAllowed": false,
+    "activationAllowed": false,
+    "statement": "purchaseOrderAllowed must remain false in UMMS-R6. No procurement request or purchase order execution is implemented."
+  },
+  "inventoryValidationGateModel": [
+    {"gateId": "spare-part-catalog-completeness", "gateName": "Spare part catalog completeness gate", "purpose": "Validate future catalog references.", "requiredInputs": ["sparePartRef", "partNumber", "partName"], "failureSeverity": "high", "blocksFutureActivation": true, "currentR6Status": "readiness_only", "futureExecutionOwner": "UMMS"},
+    {"gateId": "inventory-item-reference", "gateName": "Inventory item reference gate", "purpose": "Validate future item references.", "requiredInputs": ["inventoryItemId", "sparePartRef"], "failureSeverity": "high", "blocksFutureActivation": true, "currentR6Status": "readiness_only", "futureExecutionOwner": "UMMS"},
+    {"gateId": "inventory-location-reference", "gateName": "Inventory location reference gate", "purpose": "Validate future inventory locations.", "requiredInputs": ["inventoryLocationRef", "warehouseRef"], "failureSeverity": "high", "blocksFutureActivation": true, "currentR6Status": "readiness_only", "futureExecutionOwner": "UMMS"},
+    {"gateId": "minimum-stock-readiness", "gateName": "Minimum stock readiness gate", "purpose": "Validate future min/max/reorder thresholds.", "requiredInputs": ["minimumStockLevel", "reorderPoint"], "failureSeverity": "medium", "blocksFutureActivation": true, "currentR6Status": "readiness_only", "futureExecutionOwner": "UMMS"},
+    {"gateId": "work-order-spare-part-requirement", "gateName": "Work order spare part requirement gate", "purpose": "Validate future work order spare part requirements.", "requiredInputs": ["workOrderId", "requiredSparePartRefs"], "failureSeverity": "high", "blocksFutureActivation": true, "currentR6Status": "readiness_only", "futureExecutionOwner": "ONE Work Management with UMMS"},
+    {"gateId": "pm-spare-part-requirement", "gateName": "PM spare part requirement gate", "purpose": "Validate future PM spare part requirements.", "requiredInputs": ["pmPlanId", "requiredSparePartRefs"], "failureSeverity": "medium", "blocksFutureActivation": true, "currentR6Status": "readiness_only", "futureExecutionOwner": "UMMS"},
+    {"gateId": "reservation-readiness", "gateName": "Reservation readiness gate", "purpose": "Validate future reservation readiness without execution.", "requiredInputs": ["reservationRequired", "quantityAvailable"], "failureSeverity": "high", "blocksFutureActivation": true, "currentR6Status": "readiness_only", "futureExecutionOwner": "UMMS"},
+    {"gateId": "issue-readiness", "gateName": "Issue readiness gate", "purpose": "Validate future issue readiness without execution.", "requiredInputs": ["issueStatus", "evidenceRefs"], "failureSeverity": "high", "blocksFutureActivation": true, "currentR6Status": "readiness_only", "futureExecutionOwner": "UMMS"},
+    {"gateId": "return-readiness", "gateName": "Return readiness gate", "purpose": "Validate future return readiness without execution.", "requiredInputs": ["returnStatus", "evidenceRefs"], "failureSeverity": "medium", "blocksFutureActivation": true, "currentR6Status": "readiness_only", "futureExecutionOwner": "UMMS"},
+    {"gateId": "substitute-part-readiness", "gateName": "Substitute part readiness gate", "purpose": "Validate future substitute part readiness.", "requiredInputs": ["substitutePartRefs", "substituteAllowed"], "failureSeverity": "medium", "blocksFutureActivation": true, "currentR6Status": "readiness_only", "futureExecutionOwner": "UMMS"},
+    {"gateId": "vendor-contract-readiness", "gateName": "Vendor / contract readiness gate", "purpose": "Validate future vendor and contract references.", "requiredInputs": ["vendorRef", "contractRef"], "failureSeverity": "medium", "blocksFutureActivation": true, "currentR6Status": "readiness_only", "futureExecutionOwner": "UMMS R7"},
+    {"gateId": "procurement-suggestion-readiness", "gateName": "Procurement suggestion readiness gate", "purpose": "Validate future procurement suggestion readiness without execution.", "requiredInputs": ["shortageStatus", "recommendedQuantity"], "failureSeverity": "medium", "blocksFutureActivation": true, "currentR6Status": "readiness_only", "futureExecutionOwner": "UMMS"},
+    {"gateId": "evidence-readiness", "gateName": "Evidence readiness gate", "purpose": "Validate future inventory evidence readiness.", "requiredInputs": ["evidenceRefs"], "failureSeverity": "medium", "blocksFutureActivation": true, "currentR6Status": "readiness_only", "futureExecutionOwner": "UCDE"},
+    {"gateId": "stock-count-readiness", "gateName": "Stock count readiness gate", "purpose": "Validate future stock count readiness.", "requiredInputs": ["stockCountPolicy", "lastStockCountAt"], "failureSeverity": "medium", "blocksFutureActivation": true, "currentR6Status": "readiness_only", "futureExecutionOwner": "UMMS"},
+    {"gateId": "expiry-warranty-readiness", "gateName": "Expiry / warranty readiness gate", "purpose": "Validate future expiry and warranty readiness.", "requiredInputs": ["expiryDate", "warrantyStatus"], "failureSeverity": "medium", "blocksFutureActivation": true, "currentR6Status": "readiness_only", "futureExecutionOwner": "UMMS"}
+  ],
+  "assetSparePartLinkageModel": {
+    "fields": ["assetRef", "assetType", "systemType", "discipline", "locationRef", "hmiLocatorRef", "recommendedSparePartRefs", "criticalSparePartRefs", "pmSparePartRefs", "workOrderSparePartHistoryRefs", "vendorRef", "contractRef", "warrantyRef", "evidenceRefs", "lifecycleState"],
+    "statement": "UMMS-R6 does not write canonical Asset Graph. This is read-only spare part linkage readiness only."
+  },
+  "airportToInventoryMapping": [
+    {"airportSource": "Airport Assets & Topology", "ummsInventoryTarget": "asset-to-spare-part linkage", "mappingType": "read_only_reference", "readOnlyStatus": true, "runtimeStatus": "disabled", "futureImplementationOwner": "UMMS with Asset Graph"},
+    {"airportSource": "Airport Maintenance Work Orders", "ummsInventoryTarget": "work order spare part requirement", "mappingType": "read_only_requirement_context", "readOnlyStatus": true, "runtimeStatus": "disabled", "futureImplementationOwner": "ONE Work Management with UMMS"},
+    {"airportSource": "Airport Preventive Maintenance readiness", "ummsInventoryTarget": "PM spare part requirement", "mappingType": "read_only_pm_context", "readOnlyStatus": true, "runtimeStatus": "disabled", "futureImplementationOwner": "UMMS"},
+    {"airportSource": "Airport Fault Cases", "ummsInventoryTarget": "critical spare risk context, future", "mappingType": "read_only_risk_context", "readOnlyStatus": true, "runtimeStatus": "disabled", "futureImplementationOwner": "UFMS and UMMS future integration"},
+    {"airportSource": "Airport Evidence Investigation", "ummsInventoryTarget": "inventory evidence readiness", "mappingType": "read_only_evidence_context", "readOnlyStatus": true, "runtimeStatus": "disabled", "futureImplementationOwner": "UCDE"},
+    {"airportSource": "Airport HMI Locator Readiness", "ummsInventoryTarget": "asset/location inventory context", "mappingType": "read_only_location_context", "readOnlyStatus": true, "runtimeStatus": "disabled", "futureImplementationOwner": "Asset Graph and UMMS"},
+    {"airportSource": "Airport Reports", "ummsInventoryTarget": "inventory readiness reporting input", "mappingType": "read_only_reporting_context", "readOnlyStatus": true, "runtimeStatus": "disabled", "futureImplementationOwner": "Reports and UMMS"}
+  ],
+  "customerCoreFunctionR6Alignment": [
+    {"function": "Work Order Management, auto + manual", "ummsR6Contribution": "Models spare part requirements for future work orders without consumption.", "requiredInventoryObjects": ["sparePartRequirementModel", "workOrderSparePartReadiness"], "requiredValidationGates": ["Work order spare part requirement gate", "Reservation readiness gate"], "requiredLinkObjects": ["Work-order trigger contract"], "requiredEdgeCapabilities": ["Asset/location mapping preview"], "requiredUcdeEvidence": ["Work order spare part evidence"], "currentUmmsR6Status": "readiness_only", "futurePhase": "UMMS-R10"},
+    {"function": "Asset Registry, full lifecycle tracking", "ummsR6Contribution": "Models asset-to-spare-part linkage without Asset Graph write.", "requiredInventoryObjects": ["assetSparePartLinkageModel"], "requiredValidationGates": ["Inventory item reference gate"], "requiredLinkObjects": ["Asset/location reference contract"], "requiredEdgeCapabilities": ["HMI locator data foundation"], "requiredUcdeEvidence": ["Spare part catalog evidence"], "currentUmmsR6Status": "readiness_only", "futurePhase": "UMMS-R9"},
+    {"function": "Preventive Maintenance Scheduler", "ummsR6Contribution": "Models PM spare part requirements without PM consumption.", "requiredInventoryObjects": ["pmSparePartReadiness", "sparePartRequirementModel"], "requiredValidationGates": ["PM spare part requirement gate"], "requiredLinkObjects": ["Delivery readiness contract"], "requiredEdgeCapabilities": ["Condition signals for critical spares planning, future"], "requiredUcdeEvidence": ["PM spare part evidence"], "currentUmmsR6Status": "readiness_only", "futurePhase": "UMMS-R8"},
+    {"function": "Spare Parts / Inventory Management", "ummsR6Contribution": "Defines read-only catalog, item, location, policy, and validation readiness.", "requiredInventoryObjects": ["sparePartCatalogModel", "inventoryItemModel", "inventoryLocationModel", "inventoryPolicyModel"], "requiredValidationGates": ["Spare part catalog completeness gate", "Minimum stock readiness gate"], "requiredLinkObjects": ["Audit/evidence chain profile"], "requiredEdgeCapabilities": ["Tag mapping and normalization"], "requiredUcdeEvidence": ["Inventory item evidence"], "currentUmmsR6Status": "readiness_only", "futurePhase": "UMMS-R6"},
+    {"function": "Vendor / Contract Management", "ummsR6Contribution": "Captures vendor and contract dependency readiness only.", "requiredInventoryObjects": ["procurementSuggestionReadiness"], "requiredValidationGates": ["Vendor / contract readiness gate"], "requiredLinkObjects": ["Audit/evidence chain profile"], "requiredEdgeCapabilities": [], "requiredUcdeEvidence": ["Procurement suggestion evidence"], "currentUmmsR6Status": "readiness_only", "futurePhase": "UMMS-R7"},
+    {"function": "Graphics HMI to locate Equipment", "ummsR6Contribution": "Uses HMI locator context for future part location and asset context.", "requiredInventoryObjects": ["assetSparePartLinkageModel", "inventoryLocationModel"], "requiredValidationGates": ["Inventory location reference gate"], "requiredLinkObjects": ["Asset/location reference contract"], "requiredEdgeCapabilities": ["HMI locator data foundation"], "requiredUcdeEvidence": ["Report evidence"], "currentUmmsR6Status": "readiness_only", "futurePhase": "UMMS-R9"},
+    {"function": "Existing system onboarding", "ummsR6Contribution": "Captures source-system dependency for future inventory data onboarding.", "requiredInventoryObjects": ["inventoryItemModel"], "requiredValidationGates": ["Inventory item reference gate"], "requiredLinkObjects": ["Source-system health contract"], "requiredEdgeCapabilities": ["Tag mapping and normalization"], "requiredUcdeEvidence": ["Audit trail"], "currentUmmsR6Status": "readiness_only", "futurePhase": "Shared foundation"},
+    {"function": "Engineer commissioning diagnostics", "ummsR6Contribution": "Captures diagnostics dependency for future spare readiness review.", "requiredInventoryObjects": ["sparePartRequirementModel"], "requiredValidationGates": ["Evidence readiness gate"], "requiredLinkObjects": ["Delivery / ACK / retry / DLQ status"], "requiredEdgeCapabilities": ["Engineer diagnostics"], "requiredUcdeEvidence": ["Issue/return evidence"], "currentUmmsR6Status": "readiness_only", "futurePhase": "Shared foundation"},
+    {"function": "Remote overseas deployment", "ummsR6Contribution": "Captures distributed inventory readiness without deployment execution.", "requiredInventoryObjects": ["inventoryLocationModel"], "requiredValidationGates": ["Inventory location reference gate"], "requiredLinkObjects": ["Distributed topology contract"], "requiredEdgeCapabilities": ["Asset/location mapping preview"], "requiredUcdeEvidence": ["Audit trail"], "currentUmmsR6Status": "readiness_only", "futurePhase": "Future deployment gate"},
+    {"function": "Distributed independent installation", "ummsR6Contribution": "Captures independent installation inventory readiness without runtime activation.", "requiredInventoryObjects": ["inventoryLocationModel", "inventoryPolicyModel"], "requiredValidationGates": ["Stock count readiness gate"], "requiredLinkObjects": ["Distributed topology contract"], "requiredEdgeCapabilities": ["Asset/location mapping preview"], "requiredUcdeEvidence": ["Report evidence"], "currentUmmsR6Status": "readiness_only", "futurePhase": "Future deployment gate"}
+  ],
+  "sharedFoundationDependencyMap": {
+    "edgeDependencies": ["Asset/location mapping preview", "Tag mapping and normalization", "HMI locator data foundation", "Engineer diagnostics", "Condition signals for critical spares planning, future"],
+    "linkDependencies": ["Source-system health contract", "Delivery readiness contract", "Asset/location reference contract", "Work-order trigger contract", "Audit/evidence chain profile", "Delivery / ACK / retry / DLQ status", "Distributed topology contract"],
+    "ucdeDependencies": ["Spare part catalog evidence", "Inventory item evidence", "Reservation evidence", "Issue/return evidence", "Procurement suggestion evidence", "Work order spare part evidence", "PM spare part evidence", "Audit trail", "Report evidence"]
+  },
+  "futureImplementationRoadmap": [
+    "UMMS-R6A Local Freeze + Optional Tag Plan",
+    "UMMS-R7 Vendor / Contract / SLA Readiness",
+    "UMMS-R8 UMMS + UCDE Evidence Closure Alignment",
+    "UMMS-R9 UMMS + Airport HMI Locator Binding Readiness",
+    "UMMS-R10 UMMS Stakeholder Review Package"
+  ],
+  "safetyPosture": {
+    "readOnly": true,
+    "runtimeActivation": false,
+    "productionActivation": false,
+    "dbWrite": false,
+    "approvalExecution": false,
+    "workflowExecution": false,
+    "inventoryTransaction": false,
+    "stockReservation": false,
+    "stockDeduction": false,
+    "stockReturn": false,
+    "procurementExecution": false,
+    "purchaseOrderExecution": false,
+    "warehouseTransferExecution": false,
+    "workOrderSparePartConsumption": false,
+    "pmScheduleExecution": false,
+    "automaticWorkOrderGeneration": false,
+    "workOrderCreation": false,
+    "workOrderUpdate": false,
+    "workOrderAssignment": false,
+    "workOrderApproval": false,
+    "workOrderClosure": false,
+    "assetLifecycleWrite": false,
+    "vendorContractExecution": false,
+    "connectorExecution": false,
+    "deviceConnection": false,
+    "edgeRuntimeCall": false,
+    "linkRuntimeCall": false,
+    "oneAdapterIntroduced": false,
+    "customerIdentifierLeakage": false,
+    "localAbsolutePathLeakage": false
+  }
+}
