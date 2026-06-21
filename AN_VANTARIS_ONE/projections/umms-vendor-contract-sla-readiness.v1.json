@@ -1,0 +1,181 @@
+{
+  "metadata": {
+    "projectionId": "umms-vendor-contract-sla-readiness.v1",
+    "platform": "VANTARIS ONE",
+    "module": "UMMS",
+    "releaseContext": "UMMS-R7 Vendor / Contract / SLA Readiness",
+    "readOnly": true,
+    "runtimeActivation": false,
+    "productionActivation": false,
+    "dbWrite": false,
+    "approvalExecution": false,
+    "workflowExecution": false,
+    "vendorTransaction": false,
+    "vendorDispatchExecution": false,
+    "contractExecution": false,
+    "contractApproval": false,
+    "slaEnforcementRuntime": false,
+    "slaBreachProcessing": false,
+    "procurementExecution": false,
+    "purchaseOrderExecution": false,
+    "inventoryTransaction": false,
+    "workOrderVendorAssignment": false,
+    "workOrderCreation": false,
+    "workOrderUpdate": false,
+    "workOrderAssignment": false,
+    "workOrderApproval": false,
+    "workOrderClosure": false,
+    "pmScheduleExecution": false,
+    "automaticWorkOrderGeneration": false,
+    "assetLifecycleWrite": false,
+    "edgeRuntimeCall": false,
+    "linkRuntimeCall": false,
+    "oneAdapterIntroduced": false
+  },
+  "r7ScopeSummary": {
+    "targetModule": "UMMS",
+    "currentStatus": "vendor_contract_sla_readiness_projection_only",
+    "sourceBaseline": "UMMS-R6 Spare Parts / Inventory Readiness",
+    "genericModuleScope": "cross_industry_maintenance_management",
+    "airportSpecificLogicInCore": false,
+    "runtimeWorkflowEnabled": false,
+    "productionWorkflowEnabled": false,
+    "vendorExecutionEnabled": false,
+    "contractExecutionEnabled": false,
+    "slaRuntimeEnabled": false
+  },
+  "vendorRegistryModel": {
+    "fields": ["vendorId", "vendorRef", "vendorName", "vendorType", "serviceCategory", "supportedAssetTypes", "supportedSystemTypes", "supportedDisciplines", "primaryContactRef", "supportChannelRefs", "emergencyContactRef", "regionCoverage", "siteCoverage", "responseCapability", "certificationRefs", "insuranceRefs", "contractRefs", "slaRefs", "warrantyRefs", "evidenceRefs", "reviewStatus", "activationAllowed"],
+    "activationAllowed": false,
+    "statement": "activationAllowed must remain false in UMMS-R7. No vendor creation, update, deletion, approval, or activation is implemented."
+  },
+  "vendorContactSupportModel": {
+    "fields": ["contactRef", "vendorRef", "contactName", "contactRole", "supportChannelType", "supportEmailRef", "supportPhoneRef", "portalRef", "emergencyChannel", "supportHours", "timezone", "escalationLevel", "responseWindowRef", "contractRef", "slaRef", "reviewStatus", "activationAllowed"],
+    "activationAllowed": false,
+    "statement": "No vendor contact workflow or communication execution is implemented in UMMS-R7."
+  },
+  "contractRegistryModel": {
+    "fields": ["contractId", "contractRef", "contractName", "vendorRef", "contractType", "serviceScope", "coveredAssetTypes", "coveredSystemTypes", "coveredSites", "startDate", "endDate", "renewalDate", "warrantyCoverageRef", "slaRefs", "responseWindowRefs", "maintenanceCoverage", "sparePartCoverage", "emergencySupportCoverage", "exclusionNotes", "documentEvidenceRefs", "reviewStatus", "activationAllowed"],
+    "activationAllowed": false,
+    "statement": "No contract creation, update, approval, activation, renewal, or execution is implemented in UMMS-R7."
+  },
+  "warrantyCoverageModel": {
+    "fields": ["warrantyRef", "assetRef", "vendorRef", "contractRef", "warrantyType", "coverageStart", "coverageEnd", "coveredComponents", "coveredFailures", "exclusionRules", "claimRequirementRefs", "evidenceRefs", "coverageStatus", "reviewStatus", "activationAllowed"],
+    "activationAllowed": false,
+    "statement": "No warranty claim execution or warranty transaction is implemented in UMMS-R7."
+  },
+  "slaRuleModel": {
+    "fields": ["slaId", "slaRef", "contractRef", "vendorRef", "assetType", "systemType", "faultSeverity", "priority", "responseTimeTarget", "acceptanceTimeTarget", "resolutionTimeTarget", "verificationTimeTarget", "closureTimeTarget", "escalationThreshold", "businessHoursRef", "holidayCalendarRef", "timezone", "breachRiskLevel", "evidenceRequired", "reviewStatus", "activationAllowed"],
+    "activationAllowed": false,
+    "statement": "No SLA enforcement runtime or breach processing is implemented in UMMS-R7."
+  },
+  "responseWindowModel": {
+    "fields": ["responseWindowRef", "vendorRef", "contractRef", "supportHours", "businessHours", "afterHoursSupport", "holidaySupport", "emergencySupport", "timezone", "responseCommitment", "escalationContactRef", "reviewStatus", "activationAllowed"],
+    "activationAllowed": false
+  },
+  "workOrderVendorLinkageModel": {
+    "fields": ["workOrderId", "faultCaseId", "assetRef", "locationRef", "vendorRef", "contractRef", "slaRef", "warrantyRef", "requiredVendorSupport", "vendorDispatchStatus", "responseWindowStatus", "slaRiskStatus", "contractCoverageStatus", "warrantyCoverageStatus", "requiredEvidence", "reviewStatus", "activationAllowed"],
+    "activationAllowed": false,
+    "statement": "No vendor dispatch, work order vendor assignment, or vendor workflow is implemented in UMMS-R7."
+  },
+  "pmVendorContractLinkageModel": {
+    "fields": ["pmPlanId", "pmScheduleId", "pmTaskId", "assetRef", "vendorRef", "contractRef", "slaRef", "warrantyRef", "vendorRecommendedPm", "contractSlaBasedPm", "coverageStatus", "requiredVendorSupport", "sparePartCoverageStatus", "evidenceRefs", "reviewStatus", "activationAllowed"],
+    "activationAllowed": false,
+    "statement": "No PM vendor execution or contract-SLA PM runtime is implemented in UMMS-R7."
+  },
+  "sparePartVendorContractLinkageModel": {
+    "fields": ["sparePartRef", "vendorRef", "contractRef", "preferredVendor", "leadTimeDays", "contractPriceRef", "warrantyCoverageRef", "sparePartCoverageStatus", "substitutePartVendorRefs", "procurementSuggestionRef", "evidenceRefs", "reviewStatus", "activationAllowed"],
+    "activationAllowed": false,
+    "statement": "No procurement request, purchase order, or vendor transaction is implemented in UMMS-R7."
+  },
+  "contractSlaValidationGateModel": [
+    {"gateId": "vendor-registry-completeness", "gateName": "Vendor registry completeness gate", "purpose": "Validate future vendor registry completeness.", "requiredInputs": ["vendorRef", "vendorName", "serviceCategory"], "failureSeverity": "high", "blocksFutureActivation": true, "currentR7Status": "readiness_only", "futureExecutionOwner": "UMMS"},
+    {"gateId": "vendor-contact-readiness", "gateName": "Vendor contact readiness gate", "purpose": "Validate future support contacts.", "requiredInputs": ["contactRef", "supportChannelType"], "failureSeverity": "high", "blocksFutureActivation": true, "currentR7Status": "readiness_only", "futureExecutionOwner": "UMMS"},
+    {"gateId": "contract-reference", "gateName": "Contract reference gate", "purpose": "Validate future contract references.", "requiredInputs": ["contractRef", "vendorRef"], "failureSeverity": "high", "blocksFutureActivation": true, "currentR7Status": "readiness_only", "futureExecutionOwner": "UMMS"},
+    {"gateId": "contract-coverage", "gateName": "Contract coverage gate", "purpose": "Validate future contract scope coverage.", "requiredInputs": ["coveredAssetTypes", "coveredSites"], "failureSeverity": "high", "blocksFutureActivation": true, "currentR7Status": "readiness_only", "futureExecutionOwner": "UMMS"},
+    {"gateId": "warranty-coverage", "gateName": "Warranty coverage gate", "purpose": "Validate future warranty coverage.", "requiredInputs": ["warrantyRef", "coverageStatus"], "failureSeverity": "medium", "blocksFutureActivation": true, "currentR7Status": "readiness_only", "futureExecutionOwner": "UMMS"},
+    {"gateId": "sla-rule-completeness", "gateName": "SLA rule completeness gate", "purpose": "Validate future SLA rule fields.", "requiredInputs": ["slaRef", "responseTimeTarget"], "failureSeverity": "high", "blocksFutureActivation": true, "currentR7Status": "readiness_only", "futureExecutionOwner": "UMMS"},
+    {"gateId": "response-window-readiness", "gateName": "Response window readiness gate", "purpose": "Validate future response windows.", "requiredInputs": ["responseWindowRef", "supportHours"], "failureSeverity": "medium", "blocksFutureActivation": true, "currentR7Status": "readiness_only", "futureExecutionOwner": "UMMS"},
+    {"gateId": "work-order-vendor-linkage", "gateName": "Work order vendor linkage gate", "purpose": "Validate future work order/vendor linkage.", "requiredInputs": ["workOrderId", "vendorRef"], "failureSeverity": "high", "blocksFutureActivation": true, "currentR7Status": "readiness_only", "futureExecutionOwner": "ONE Work Management with UMMS"},
+    {"gateId": "pm-vendor-linkage", "gateName": "PM vendor linkage gate", "purpose": "Validate future PM/vendor linkage.", "requiredInputs": ["pmPlanId", "vendorRef"], "failureSeverity": "medium", "blocksFutureActivation": true, "currentR7Status": "readiness_only", "futureExecutionOwner": "UMMS"},
+    {"gateId": "spare-part-vendor-linkage", "gateName": "Spare part vendor linkage gate", "purpose": "Validate future spare part vendor linkage.", "requiredInputs": ["sparePartRef", "vendorRef"], "failureSeverity": "medium", "blocksFutureActivation": true, "currentR7Status": "readiness_only", "futureExecutionOwner": "UMMS"},
+    {"gateId": "evidence-readiness", "gateName": "Evidence readiness gate", "purpose": "Validate future vendor/contract evidence.", "requiredInputs": ["evidenceRefs"], "failureSeverity": "medium", "blocksFutureActivation": true, "currentR7Status": "readiness_only", "futureExecutionOwner": "UCDE"},
+    {"gateId": "contract-document-evidence", "gateName": "Contract document evidence gate", "purpose": "Validate future contract document evidence.", "requiredInputs": ["documentEvidenceRefs"], "failureSeverity": "high", "blocksFutureActivation": true, "currentR7Status": "readiness_only", "futureExecutionOwner": "UCDE"},
+    {"gateId": "sla-breach-risk-readiness", "gateName": "SLA breach risk readiness gate", "purpose": "Validate future breach risk readiness without processing.", "requiredInputs": ["breachRiskLevel", "escalationThreshold"], "failureSeverity": "medium", "blocksFutureActivation": true, "currentR7Status": "readiness_only", "futureExecutionOwner": "UMMS"},
+    {"gateId": "escalation-readiness", "gateName": "Escalation readiness gate", "purpose": "Validate future escalation references.", "requiredInputs": ["escalationContactRef", "escalationLevel"], "failureSeverity": "medium", "blocksFutureActivation": true, "currentR7Status": "readiness_only", "futureExecutionOwner": "UMMS"},
+    {"gateId": "customer-approval-future", "gateName": "Customer approval gate, future optional", "purpose": "Validate future customer approval readiness only.", "requiredInputs": ["reviewStatus"], "failureSeverity": "medium", "blocksFutureActivation": true, "currentR7Status": "readiness_only", "futureExecutionOwner": "Governance"}
+  ],
+  "slaReadinessImpactModel": [
+    {"state": "candidate", "slaImpact": "SLA classification candidate only.", "requiredSlaRefs": [], "requiredVendorRefs": [], "requiredContractRefs": [], "requiredEvidence": [], "executionAllowedInR7": false},
+    {"state": "draft", "slaImpact": "Draft work may preview coverage references only.", "requiredSlaRefs": ["slaRef"], "requiredVendorRefs": ["vendorRef"], "requiredContractRefs": ["contractRef"], "requiredEvidence": ["SLA evidence"], "executionAllowedInR7": false},
+    {"state": "triaged", "slaImpact": "Triage may require future SLA severity mapping.", "requiredSlaRefs": ["slaRef"], "requiredVendorRefs": ["vendorRef"], "requiredContractRefs": ["contractRef"], "requiredEvidence": ["Contract document evidence"], "executionAllowedInR7": false},
+    {"state": "assigned", "slaImpact": "Assignment may require future vendor coverage validation.", "requiredSlaRefs": ["slaRef"], "requiredVendorRefs": ["vendorRef"], "requiredContractRefs": ["contractRef"], "requiredEvidence": ["Work order vendor evidence"], "executionAllowedInR7": false},
+    {"state": "accepted", "slaImpact": "Acceptance may require future response target evidence.", "requiredSlaRefs": ["slaRef"], "requiredVendorRefs": ["vendorRef"], "requiredContractRefs": ["contractRef"], "requiredEvidence": ["SLA evidence"], "executionAllowedInR7": false},
+    {"state": "in_progress", "slaImpact": "Progress may require future resolution target tracking.", "requiredSlaRefs": ["slaRef"], "requiredVendorRefs": ["vendorRef"], "requiredContractRefs": ["contractRef"], "requiredEvidence": ["Audit trail"], "executionAllowedInR7": false},
+    {"state": "pending_vendor", "slaImpact": "Pending vendor state may require future escalation readiness.", "requiredSlaRefs": ["slaRef"], "requiredVendorRefs": ["vendorRef"], "requiredContractRefs": ["contractRef"], "requiredEvidence": ["Escalation evidence"], "executionAllowedInR7": false},
+    {"state": "resolved", "slaImpact": "Resolution may require future verification target evidence.", "requiredSlaRefs": ["slaRef"], "requiredVendorRefs": ["vendorRef"], "requiredContractRefs": ["contractRef"], "requiredEvidence": ["Work order vendor evidence"], "executionAllowedInR7": false},
+    {"state": "verification_pending", "slaImpact": "Verification pending may require future closure target checks.", "requiredSlaRefs": ["slaRef"], "requiredVendorRefs": ["vendorRef"], "requiredContractRefs": ["contractRef"], "requiredEvidence": ["SLA evidence"], "executionAllowedInR7": false},
+    {"state": "closed", "slaImpact": "Closure may require future SLA reporting input.", "requiredSlaRefs": ["slaRef"], "requiredVendorRefs": ["vendorRef"], "requiredContractRefs": ["contractRef"], "requiredEvidence": ["Report evidence"], "executionAllowedInR7": false}
+  ],
+  "airportToVendorContractMapping": [
+    {"airportSource": "Airport Assets & Topology", "ummsVendorContractTarget": "vendor/contract coverage by asset", "mappingType": "read_only_coverage_context", "readOnlyStatus": true, "runtimeStatus": "disabled", "futureImplementationOwner": "UMMS with Asset Graph"},
+    {"airportSource": "Airport Fault Cases", "ummsVendorContractTarget": "SLA severity / response window readiness", "mappingType": "read_only_sla_context", "readOnlyStatus": true, "runtimeStatus": "disabled", "futureImplementationOwner": "UFMS and UMMS"},
+    {"airportSource": "Airport Maintenance Work Orders", "ummsVendorContractTarget": "work order vendor linkage", "mappingType": "read_only_work_order_context", "readOnlyStatus": true, "runtimeStatus": "disabled", "futureImplementationOwner": "ONE Work Management with UMMS"},
+    {"airportSource": "Airport Preventive Maintenance readiness", "ummsVendorContractTarget": "PM vendor/contract linkage", "mappingType": "read_only_pm_context", "readOnlyStatus": true, "runtimeStatus": "disabled", "futureImplementationOwner": "UMMS"},
+    {"airportSource": "Airport Spare Parts / Inventory readiness", "ummsVendorContractTarget": "spare part vendor linkage", "mappingType": "read_only_inventory_context", "readOnlyStatus": true, "runtimeStatus": "disabled", "futureImplementationOwner": "UMMS"},
+    {"airportSource": "Airport Evidence Investigation", "ummsVendorContractTarget": "contract/SLA evidence readiness", "mappingType": "read_only_evidence_context", "readOnlyStatus": true, "runtimeStatus": "disabled", "futureImplementationOwner": "UCDE"},
+    {"airportSource": "Airport Reports", "ummsVendorContractTarget": "vendor/SLA reporting input", "mappingType": "read_only_reporting_context", "readOnlyStatus": true, "runtimeStatus": "disabled", "futureImplementationOwner": "Reports and UMMS"},
+    {"airportSource": "Airport HMI Locator Readiness", "ummsVendorContractTarget": "asset/location/vendor support context", "mappingType": "read_only_location_context", "readOnlyStatus": true, "runtimeStatus": "disabled", "futureImplementationOwner": "Asset Graph and UMMS"}
+  ],
+  "customerCoreFunctionR7Alignment": [
+    {"function": "Work Order Management, auto + manual", "ummsR7Contribution": "Models future vendor/SLA linkage for work orders without dispatch.", "requiredVendorContractObjects": ["workOrderVendorLinkageModel", "slaRuleModel"], "requiredValidationGates": ["Work order vendor linkage gate"], "requiredLinkObjects": ["Work-order trigger contract"], "requiredEdgeCapabilities": ["Asset/location mapping preview"], "requiredUcdeEvidence": ["Work order vendor evidence"], "currentUmmsR7Status": "readiness_only", "futurePhase": "UMMS-R10"},
+    {"function": "Asset Registry, full lifecycle tracking", "ummsR7Contribution": "Models future vendor, contract, and warranty coverage by asset.", "requiredVendorContractObjects": ["vendorRegistryModel", "warrantyCoverageModel"], "requiredValidationGates": ["Warranty coverage gate"], "requiredLinkObjects": ["Asset/location reference contract"], "requiredEdgeCapabilities": ["HMI locator data foundation"], "requiredUcdeEvidence": ["Warranty evidence"], "currentUmmsR7Status": "readiness_only", "futurePhase": "UMMS-R9"},
+    {"function": "Preventive Maintenance Scheduler", "ummsR7Contribution": "Models future PM vendor/contract/SLA linkage without runtime.", "requiredVendorContractObjects": ["pmVendorContractLinkageModel"], "requiredValidationGates": ["PM vendor linkage gate"], "requiredLinkObjects": ["Delivery readiness contract"], "requiredEdgeCapabilities": ["Condition signals for vendor-supported assets, future"], "requiredUcdeEvidence": ["PM vendor evidence"], "currentUmmsR7Status": "readiness_only", "futurePhase": "UMMS-R8"},
+    {"function": "Spare Parts / Inventory Management", "ummsR7Contribution": "Models spare part vendor and contract linkage without procurement.", "requiredVendorContractObjects": ["sparePartVendorContractLinkageModel"], "requiredValidationGates": ["Spare part vendor linkage gate"], "requiredLinkObjects": ["Audit/evidence chain profile"], "requiredEdgeCapabilities": ["Tag mapping and normalization"], "requiredUcdeEvidence": ["Spare part vendor evidence"], "currentUmmsR7Status": "readiness_only", "futurePhase": "UMMS-R7"},
+    {"function": "Vendor / Contract Management", "ummsR7Contribution": "Defines read-only vendor registry, contacts, contracts, warranty, SLA, and response windows.", "requiredVendorContractObjects": ["vendorRegistryModel", "contractRegistryModel", "slaRuleModel"], "requiredValidationGates": ["Vendor registry completeness gate", "Contract reference gate", "SLA rule completeness gate"], "requiredLinkObjects": ["Audit/evidence chain profile"], "requiredEdgeCapabilities": [], "requiredUcdeEvidence": ["Vendor registry evidence", "Contract document evidence", "SLA evidence"], "currentUmmsR7Status": "readiness_only", "futurePhase": "UMMS-R7"},
+    {"function": "Graphics HMI to locate Equipment", "ummsR7Contribution": "Captures vendor support context by asset/location.", "requiredVendorContractObjects": ["workOrderVendorLinkageModel"], "requiredValidationGates": ["Contract coverage gate"], "requiredLinkObjects": ["Asset/location reference contract"], "requiredEdgeCapabilities": ["HMI locator data foundation"], "requiredUcdeEvidence": ["Report evidence"], "currentUmmsR7Status": "readiness_only", "futurePhase": "UMMS-R9"},
+    {"function": "Existing system onboarding", "ummsR7Contribution": "Captures source-system dependency for future vendor data references.", "requiredVendorContractObjects": ["vendorRegistryModel"], "requiredValidationGates": ["Vendor registry completeness gate"], "requiredLinkObjects": ["Source-system health contract"], "requiredEdgeCapabilities": ["Tag mapping and normalization"], "requiredUcdeEvidence": ["Audit trail"], "currentUmmsR7Status": "readiness_only", "futurePhase": "Shared foundation"},
+    {"function": "Engineer commissioning diagnostics", "ummsR7Contribution": "Captures diagnostics evidence for future vendor escalation review.", "requiredVendorContractObjects": ["responseWindowModel"], "requiredValidationGates": ["Escalation readiness gate"], "requiredLinkObjects": ["Delivery / ACK / retry / DLQ status"], "requiredEdgeCapabilities": ["Engineer diagnostics"], "requiredUcdeEvidence": ["Escalation evidence"], "currentUmmsR7Status": "readiness_only", "futurePhase": "Shared foundation"},
+    {"function": "Remote overseas deployment", "ummsR7Contribution": "Captures distributed vendor support readiness without deployment execution.", "requiredVendorContractObjects": ["vendorRegistryModel", "responseWindowModel"], "requiredValidationGates": ["Response window readiness gate"], "requiredLinkObjects": ["Distributed topology contract"], "requiredEdgeCapabilities": ["Asset/location mapping preview"], "requiredUcdeEvidence": ["Audit trail"], "currentUmmsR7Status": "readiness_only", "futurePhase": "Future deployment gate"},
+    {"function": "Distributed independent installation", "ummsR7Contribution": "Captures independent installation vendor/SLA readiness without runtime activation.", "requiredVendorContractObjects": ["contractRegistryModel", "slaRuleModel"], "requiredValidationGates": ["SLA rule completeness gate"], "requiredLinkObjects": ["Distributed topology contract"], "requiredEdgeCapabilities": ["Asset/location mapping preview"], "requiredUcdeEvidence": ["Report evidence"], "currentUmmsR7Status": "readiness_only", "futurePhase": "Future deployment gate"}
+  ],
+  "sharedFoundationDependencyMap": {
+    "edgeDependencies": ["Asset/location mapping preview", "Tag mapping and normalization", "HMI locator data foundation", "Engineer diagnostics", "Condition signals for vendor-supported assets, future"],
+    "linkDependencies": ["Source-system health contract", "Delivery readiness contract", "Asset/location reference contract", "Work-order trigger contract", "Audit/evidence chain profile", "Delivery / ACK / retry / DLQ status", "Distributed topology contract"],
+    "ucdeDependencies": ["Vendor registry evidence", "Contract document evidence", "Warranty evidence", "SLA evidence", "Work order vendor evidence", "PM vendor evidence", "Spare part vendor evidence", "Escalation evidence", "Audit trail", "Report evidence"]
+  },
+  "futureImplementationRoadmap": ["UMMS-R7A Local Freeze + Optional Tag Plan", "UMMS-R8 UMMS + UCDE Evidence Closure Alignment", "UMMS-R9 UMMS + Airport HMI Locator Binding Readiness", "UMMS-R10 UMMS Stakeholder Review Package"],
+  "safetyPosture": {
+    "readOnly": true,
+    "runtimeActivation": false,
+    "productionActivation": false,
+    "dbWrite": false,
+    "approvalExecution": false,
+    "workflowExecution": false,
+    "vendorTransaction": false,
+    "vendorDispatchExecution": false,
+    "contractExecution": false,
+    "contractApproval": false,
+    "slaEnforcementRuntime": false,
+    "slaBreachProcessing": false,
+    "procurementExecution": false,
+    "purchaseOrderExecution": false,
+    "inventoryTransaction": false,
+    "workOrderVendorAssignment": false,
+    "workOrderCreation": false,
+    "workOrderUpdate": false,
+    "workOrderAssignment": false,
+    "workOrderApproval": false,
+    "workOrderClosure": false,
+    "pmScheduleExecution": false,
+    "automaticWorkOrderGeneration": false,
+    "assetLifecycleWrite": false,
+    "connectorExecution": false,
+    "deviceConnection": false,
+    "edgeRuntimeCall": false,
+    "linkRuntimeCall": false,
+    "oneAdapterIntroduced": false,
+    "customerIdentifierLeakage": false,
+    "localAbsolutePathLeakage": false
+  }
+}
