@@ -229,6 +229,46 @@
   ],
   "frontendRoutePolicies": [
     {
+      "frontendRouteId": "FROUTE-037503DC40EA",
+      "routePath": "/one/umms/overview",
+      "packageId": "PKG-UMMS",
+      "owningModule": "UMMS",
+      "targetAccessClass": "BUSINESS_ROUTE",
+      "authenticationRequired": true,
+      "requiredPermissions": [
+        "maintenance:read"
+      ],
+      "entitlementRequired": true,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "tenantScopeRequired": true,
+      "siteScopeRequired": true,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "VISIBLE_WHEN_AUTHORIZED",
+      "lockPagePolicy": "GOVERNED_PACKAGE_LOCK_PAGE",
+      "diagnosticFallback": "AUTHORIZED_STATUS_OR_DIAGNOSTICS",
+      "backendApiPolicyReferences": [
+        "/api/v1/mms",
+        "/api/v1/work"
+      ],
+      "auditPolicy": "AUDIT_DENIALS_AND_SENSITIVE_ACTIONS",
+      "compatibilityStage": "CURRENT_TARGET_READONLY_UCONSOLE_ENTRY",
+      "implementationStatus": "MULTIPLE_CONTROLS_REQUIRED",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "UMMS-R12",
+      "reviewReason": [],
+      "notes": [
+        "Target metadata only; frontend and backend runtime enforcement are not implemented by UMMS-R12.",
+        "Read-only UConsole stakeholder entry consumes UMMS-R11 GET endpoints only.",
+        "Missing controls: PERMISSION_METADATA, PACKAGE_METADATA, DIRECT_URL_ENFORCEMENT, BACKEND_POLICY_DEPENDENCY"
+      ]
+    },
+    {
       "frontendRouteId": "FROUTE-0DBBB900287A",
       "routePath": "/reports",
       "packageId": "PKG-REPORTS",
@@ -2822,6 +2862,7 @@
       "compatibilityRequired": false,
       "healthRequiredForWrites": true,
       "frontendRoutes": [
+        "/one/umms/overview",
         "/umms/maintenance"
       ],
       "backendNamespaces": [
@@ -3993,13 +4034,13 @@
   "summary": {
     "packagePolicyCount": 23,
     "backendNamespacePolicyCount": 28,
-    "frontendRoutePolicyCount": 31,
+    "frontendRoutePolicyCount": 32,
     "lockPagePolicyCount": 5,
     "diagnosticPolicyCount": 5,
     "compatibilityMappingCount": 12,
     "reviewQueueCount": 41,
     "currentlyCompliantRoutes": 5,
     "metadataOnlyRoutes": 0,
-    "runtimeEnforcementRequiredRoutes": 26
+    "runtimeEnforcementRequiredRoutes": 27
   }
 }

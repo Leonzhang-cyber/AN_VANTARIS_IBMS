@@ -19,19 +19,19 @@
   },
   "summary": {
     "routes": {
-      "totalRoutes": 31,
-      "productionRoutes": 23,
+      "totalRoutes": 32,
+      "productionRoutes": 24,
       "legacyRoutes": 0,
       "placeholderRoutes": 8,
       "testOnlyRoutes": 0,
-      "routesWithCurrentAuthGuard": 26,
+      "routesWithCurrentAuthGuard": 27,
       "routesWithCurrentPermissionMetadata": 6,
       "routesWithCurrentPackageMetadata": 0,
-      "routesCurrentlyDirectAddressable": 31,
-      "routesRequiringPackageMetadata": 26,
-      "routesRequiringPermissionMetadata": 20,
-      "routesRequiringDirectUrlEnforcement": 26,
-      "routesRequiringMultipleControls": 20,
+      "routesCurrentlyDirectAddressable": 32,
+      "routesRequiringPackageMetadata": 27,
+      "routesRequiringPermissionMetadata": 21,
+      "routesRequiringDirectUrlEnforcement": 27,
+      "routesRequiringMultipleControls": 21,
       "routesByPackage": {
         "PKG-ASSET-GRAPH": 2,
         "PKG-EDGE": 2,
@@ -42,7 +42,7 @@
         "PKG-UCONSOLE": 14,
         "PKG-UCORE": 3,
         "PKG-UESG": 1,
-        "PKG-UMMS": 1,
+        "PKG-UMMS": 2,
         "PKG-UNIFIED-DATA-MODEL": 1
       },
       "routesByOwningModule": {
@@ -56,11 +56,11 @@
         "UConsole": 14,
         "UCore": 3,
         "UESG": 1,
-        "UMMS": 1
+        "UMMS": 2
       },
       "routesByTargetAccessClass": {
         "ADMIN_ROUTE": 6,
-        "BUSINESS_ROUTE": 19,
+        "BUSINESS_ROUTE": 20,
         "DIAGNOSTIC_ROUTE": 1,
         "PUBLIC_ROUTE": 1,
         "STATUS_ROUTE": 4
@@ -93,9 +93,48 @@
   },
   "routes": [
     {
+      "frontendRouteId": "FROUTE-037503DC40EA",
+      "sourcePath": "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
+      "line": 139,
+      "symbol": "umms-readonly-overview",
+      "routePath": "/one/umms/overview",
+      "routeName": "umms-readonly-overview",
+      "component": "UmmsReadonlyOverview",
+      "parentRoute": "",
+      "runtimeClass": "PRODUCTION",
+      "currentPackageId": "",
+      "targetPackageId": "PKG-UMMS",
+      "owningModule": "UMMS",
+      "currentPermissionMetadata": [],
+      "targetPermissions": [
+        "maintenance:read"
+      ],
+      "currentEntitlementMetadata": "NOT_DECLARED",
+      "currentPackageEnabledMetadata": "NOT_DECLARED",
+      "currentHealthMetadata": "NOT_DECLARED",
+      "directUrlCurrentlyAddressable": true,
+      "currentGuardClass": "AUTHENTICATION_ONLY",
+      "currentMenuPresence": false,
+      "targetMenuPresence": true,
+      "targetAccessClass": "BUSINESS_ROUTE",
+      "backendApiDependencies": [
+        "/api/v1/mms",
+        "/api/v1/work"
+      ],
+      "legacyStatus": "CURRENT_TARGET",
+      "compatibilityRequirement": "PRESERVE_ROUTE_UNTIL_TARGET_POLICY_RUNTIME_IS_VALIDATED",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedTaskId": "ONE-A5-P0-07",
+      "scannerConfidence": "HIGH",
+      "notes": [
+        "Static route declaration extracted without importing or executing Vue code.",
+        "Current package, entitlement, enablement and health metadata are not declared in the router."
+      ]
+    },
+    {
       "frontendRouteId": "FROUTE-0DBBB900287A",
       "sourcePath": "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
-      "line": 108,
+      "line": 109,
       "symbol": "reports",
       "routePath": "/reports",
       "routeName": "reports",
@@ -133,7 +172,7 @@
     {
       "frontendRouteId": "FROUTE-1FCE20C4DFB1",
       "sourcePath": "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
-      "line": 156,
+      "line": 163,
       "symbol": "airport-ga-readonly-systems-integration-health",
       "routePath": "/one/airport/systems-integration-health",
       "routeName": "airport-ga-readonly-systems-integration-health",
@@ -169,7 +208,7 @@
     {
       "frontendRouteId": "FROUTE-2A1386B18C7A",
       "sourcePath": "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
-      "line": 209,
+      "line": 216,
       "symbol": "not-found",
       "routePath": "/:pathMatch(.*)*",
       "routeName": "not-found",
@@ -203,7 +242,7 @@
     {
       "frontendRouteId": "FROUTE-3C2CD4A55D48",
       "sourcePath": "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
-      "line": 186,
+      "line": 193,
       "symbol": "airport-ga-readonly-evidence-investigation",
       "routePath": "/one/airport/evidence-investigation",
       "routeName": "airport-ga-readonly-evidence-investigation",
@@ -239,7 +278,7 @@
     {
       "frontendRouteId": "FROUTE-3F4199646E7A",
       "sourcePath": "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
-      "line": 132,
+      "line": 133,
       "symbol": "umms-maintenance",
       "routePath": "/umms/maintenance",
       "routeName": "umms-maintenance",
@@ -278,7 +317,7 @@
     {
       "frontendRouteId": "FROUTE-4C68A3FF7AE6",
       "sourcePath": "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
-      "line": 180,
+      "line": 187,
       "symbol": "airport-ga-readonly-maintenance-work-orders",
       "routePath": "/one/airport/maintenance-work-orders",
       "routeName": "airport-ga-readonly-maintenance-work-orders",
@@ -314,7 +353,7 @@
     {
       "frontendRouteId": "FROUTE-5490D5BA9CE6",
       "sourcePath": "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
-      "line": 32,
+      "line": 33,
       "symbol": "login",
       "routePath": "/login",
       "routeName": "login",
@@ -348,7 +387,7 @@
     {
       "frontendRouteId": "FROUTE-58045144902E",
       "sourcePath": "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
-      "line": 102,
+      "line": 103,
       "symbol": "console-operations",
       "routePath": "/console/operations",
       "routeName": "console-operations",
@@ -388,7 +427,7 @@
     {
       "frontendRouteId": "FROUTE-5B91B631064D",
       "sourcePath": "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
-      "line": 138,
+      "line": 145,
       "symbol": "uedge-setup",
       "routePath": "/uedge/setup",
       "routeName": "uedge-setup",
@@ -427,7 +466,7 @@
     {
       "frontendRouteId": "FROUTE-618A7E8141AF",
       "sourcePath": "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
-      "line": 126,
+      "line": 127,
       "symbol": "uesg-sustainability",
       "routePath": "/uesg/sustainability",
       "routeName": "uesg-sustainability",
@@ -465,7 +504,7 @@
     {
       "frontendRouteId": "FROUTE-732E195CD604",
       "sourcePath": "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
-      "line": 38,
+      "line": 39,
       "symbol": "/dashboard",
       "routePath": "/",
       "routeName": "",
@@ -499,7 +538,7 @@
     {
       "frontendRouteId": "FROUTE-74571E87F28B",
       "sourcePath": "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
-      "line": 144,
+      "line": 151,
       "symbol": "uedge-diagnostics",
       "routePath": "/uedge/diagnostics",
       "routeName": "uedge-diagnostics",
@@ -538,7 +577,7 @@
     {
       "frontendRouteId": "FROUTE-7DBC8F6C7C08",
       "sourcePath": "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
-      "line": 162,
+      "line": 169,
       "symbol": "airport-ga-readonly-assets-topology",
       "routePath": "/one/airport/assets-topology",
       "routeName": "airport-ga-readonly-assets-topology",
@@ -574,7 +613,7 @@
     {
       "frontendRouteId": "FROUTE-88546A365FF2",
       "sourcePath": "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
-      "line": 72,
+      "line": 73,
       "symbol": "system-notification-settings",
       "routePath": "/system/notification-settings",
       "routeName": "system-notification-settings",
@@ -615,7 +654,7 @@
     {
       "frontendRouteId": "FROUTE-8881919B5A77",
       "sourcePath": "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
-      "line": 120,
+      "line": 121,
       "symbol": "assets-topology",
       "routePath": "/assets/topology",
       "routeName": "assets-topology",
@@ -653,7 +692,7 @@
     {
       "frontendRouteId": "FROUTE-8D83C9D893E7",
       "sourcePath": "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
-      "line": 114,
+      "line": 115,
       "symbol": "ucde-evidence-center",
       "routePath": "/ucde/evidence",
       "routeName": "ucde-evidence-center",
@@ -691,7 +730,7 @@
     {
       "frontendRouteId": "FROUTE-9794B46A5219",
       "sourcePath": "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
-      "line": 84,
+      "line": 85,
       "symbol": "iot",
       "routePath": "/iot",
       "routeName": "iot",
@@ -730,7 +769,7 @@
     {
       "frontendRouteId": "FROUTE-9C2DD14BDEC4",
       "sourcePath": "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
-      "line": 150,
+      "line": 157,
       "symbol": "airport-ga-readonly-overview",
       "routePath": "/one/airport/overview",
       "routeName": "airport-ga-readonly-overview",
@@ -766,7 +805,7 @@
     {
       "frontendRouteId": "FROUTE-A1A75FDDBCA3",
       "sourcePath": "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
-      "line": 174,
+      "line": 181,
       "symbol": "airport-ga-readonly-fault-cases",
       "routePath": "/one/airport/fault-cases",
       "routeName": "airport-ga-readonly-fault-cases",
@@ -802,7 +841,7 @@
     {
       "frontendRouteId": "FROUTE-A2842138F079",
       "sourcePath": "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
-      "line": 54,
+      "line": 55,
       "symbol": "system-settings",
       "routePath": "/system/settings",
       "routeName": "system-settings",
@@ -843,7 +882,7 @@
     {
       "frontendRouteId": "FROUTE-A77240D62B73",
       "sourcePath": "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
-      "line": 66,
+      "line": 67,
       "symbol": "system-audit-logs",
       "routePath": "/system/audit-logs",
       "routeName": "system-audit-logs",
@@ -883,7 +922,7 @@
     {
       "frontendRouteId": "FROUTE-A89E66839FAA",
       "sourcePath": "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
-      "line": 78,
+      "line": 79,
       "symbol": "system-integration-settings",
       "routePath": "/system/integration-settings",
       "routeName": "system-integration-settings",
@@ -923,7 +962,7 @@
     {
       "frontendRouteId": "FROUTE-A926AD8DB3CF",
       "sourcePath": "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
-      "line": 48,
+      "line": 49,
       "symbol": "system",
       "routePath": "/system",
       "routeName": "system",
@@ -964,7 +1003,7 @@
     {
       "frontendRouteId": "FROUTE-BBEE7F90DDB4",
       "sourcePath": "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
-      "line": 60,
+      "line": 61,
       "symbol": "system-permissions",
       "routePath": "/system/permissions",
       "routeName": "system-permissions",
@@ -1004,7 +1043,7 @@
     {
       "frontendRouteId": "FROUTE-C610388B9C44",
       "sourcePath": "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
-      "line": 204,
+      "line": 211,
       "symbol": "/403",
       "routePath": "/forbidden",
       "routeName": "",
@@ -1038,7 +1077,7 @@
     {
       "frontendRouteId": "FROUTE-CABB05B4BD06",
       "sourcePath": "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
-      "line": 168,
+      "line": 175,
       "symbol": "airport-ga-readonly-alarms-events",
       "routePath": "/one/airport/alarms-events",
       "routeName": "airport-ga-readonly-alarms-events",
@@ -1074,7 +1113,7 @@
     {
       "frontendRouteId": "FROUTE-D0DBC5F0D5E1",
       "sourcePath": "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
-      "line": 198,
+      "line": 205,
       "symbol": "forbidden",
       "routePath": "/403",
       "routeName": "forbidden",
@@ -1108,7 +1147,7 @@
     {
       "frontendRouteId": "FROUTE-D27D69D3F9AC",
       "sourcePath": "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
-      "line": 96,
+      "line": 97,
       "symbol": "modeling",
       "routePath": "/modeling",
       "routeName": "modeling",
@@ -1147,7 +1186,7 @@
     {
       "frontendRouteId": "FROUTE-EAADA1903894",
       "sourcePath": "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
-      "line": 192,
+      "line": 199,
       "symbol": "airport-ga-readonly-reports",
       "routePath": "/one/airport/reports",
       "routeName": "airport-ga-readonly-reports",
@@ -1183,7 +1222,7 @@
     {
       "frontendRouteId": "FROUTE-F31B3DD8DBB4",
       "sourcePath": "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
-      "line": 90,
+      "line": 91,
       "symbol": "did",
       "routePath": "/did",
       "routeName": "did",
@@ -1222,7 +1261,7 @@
     {
       "frontendRouteId": "FROUTE-F6205A5DF1D3",
       "sourcePath": "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
-      "line": 42,
+      "line": 43,
       "symbol": "dashboard",
       "routePath": "/dashboard",
       "routeName": "dashboard",

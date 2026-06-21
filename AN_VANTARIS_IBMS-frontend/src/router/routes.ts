@@ -13,6 +13,7 @@ import EvidenceCenter from '@/modules/ucde/EvidenceCenter.vue'
 import AssetsTopology from '@/modules/assets/AssetsTopology.vue'
 import UesgSustainability from '@/modules/uesg/UesgSustainability.vue'
 import UmmsMaintenance from '@/modules/umms/UmmsMaintenance.vue'
+import UmmsReadonlyOverview from '@/modules/umms/UmmsReadonlyOverview.vue'
 import UedgeSetup from '@/modules/uedge/UedgeSetup.vue'
 import UedgeDiagnostics from '@/modules/uedge/UedgeDiagnostics.vue'
 import SystemOverviewView from '@/modules/system/SystemOverviewView.vue'
@@ -134,6 +135,12 @@ export const routes: RouteRecordRaw[] = [
     name: 'umms-maintenance',
     component: UmmsMaintenance,
     meta: { requiresAuth: true, title: 'UMMS Maintenance', layout: true },
+  },
+  {
+    path: '/one/umms/overview',
+    name: 'umms-readonly-overview',
+    component: UmmsReadonlyOverview,
+    meta: { requiresAuth: true, title: 'UMMS Read-only Overview', layout: true },
   },
   {
     path: '/uedge/setup',

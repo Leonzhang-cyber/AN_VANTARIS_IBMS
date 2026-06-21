@@ -144,6 +144,81 @@ export interface GetWorkOrdersParams {
   assetId?: string
 }
 
+export interface UmmsReadonlyGuard {
+  readOnly: boolean
+  runtimeEnabled: boolean
+  productionEnabled: boolean
+  dbWriteEnabled: boolean
+  workflowEnabled: boolean
+  approvalEnabled: boolean
+  writeActionsEnabled: boolean
+  edgeRuntimeCall: boolean
+  linkRuntimeCall: boolean
+  oneAdapterIntroduced: boolean
+}
+
+export interface UmmsPackageEntry extends UmmsReadonlyGuard {
+  platform: string
+  module: string
+  projection: string
+  packageId: string
+  packageName: string
+  packageDisplayName: string
+  packageStatus: string
+  entryMode: string
+  latestTag: string
+  stakeholderReviewPackage: string
+}
+
+export interface UmmsReadinessStage {
+  stage: string
+  title: string
+  status: string
+  passMarker: string
+  tagReference?: string
+}
+
+export interface UmmsStakeholderReview extends UmmsReadonlyGuard {
+  reviewPackageId: string
+  baselineHead: string
+  publishedTags: string[]
+  readinessChain: UmmsReadinessStage[]
+  knownLimitations: string[]
+  recommendedNextSteps: string[]
+}
+
+export interface UmmsCustomerCoreFunction {
+  function: string
+  coverageStatus: string
+  readinessStage: string
+  runtimeEnabled: boolean
+  futureOwner: string
+  remainingGap: string
+}
+
+export interface UmmsCustomerCoreFunctions extends UmmsReadonlyGuard {
+  customerCoreFunctions: UmmsCustomerCoreFunction[]
+  totalFunctions: number
+}
+
+export interface UmmsSafetyPosture extends UmmsReadonlyGuard {
+  safetyPosture: Record<string, boolean>
+}
+
+export interface UmmsReadinessSummary extends UmmsReadonlyGuard {
+  readinessStages: UmmsReadinessStage[]
+}
+
+export interface UmmsReadonlyOverview {
+  packageEntry: UmmsPackageEntry
+  stakeholderReview: UmmsStakeholderReview
+  readinessSummary: UmmsReadinessSummary
+  customerCoreFunctions: UmmsCustomerCoreFunctions
+  safetyPosture: UmmsSafetyPosture
+  fallbackActive: boolean
+  fallbackMessage: string
+}
+
 function asRecord(value: unknown): Record<string, unknown> {
   return typeof value === 'object' && value !== null ? (value as Record<string, unknown>) : {}
 }
@@ -338,6 +413,164 @@ function normalizeList(raw: unknown): WorkOrderListResponse {
   }
 }
 
+function normalizeGuard(data: Record<string, unknown>): UmmsReadonlyGuard {
+  return {
+    readOnly: data.readOnly !== undefined ? Boolean(data.readOnly) : true,
+    runtimeEnabled: Boolean(data.runtimeEnabled),
+    productionEnabled: Boolean(data.productionEnabled),
+    dbWriteEnabled: Boolean(data.dbWriteEnabled),
+    workflowEnabled: Boolean(data.workflowEnabled),
+    approvalEnabled: Boolean(data.approvalEnabled),
+    writeActionsEnabled: Boolean(data.writeActionsEnabled),
+    edgeRuntimeCall: Boolean(data.edgeRuntimeCall),
+    linkRuntimeCall: Boolean(data.linkRuntimeCall),
+    oneAdapterIntroduced: Boolean(data.oneAdapterIntroduced),
+  }
+}
+
+function normalizeReadinessStage(raw: unknown): UmmsReadinessStage {
+  const data = asRecord(raw)
+  return {
+    stage: String(data.stage ?? ''),
+    title: String(data.title ?? ''),
+    status: String(data.status ?? ''),
+    passMarker: String(data.passMarker ?? ''),
+    tagReference: data.tagReference === undefined ? undefined : String(data.tagReference),
+  }
+}
+
+function normalizePackageEntry(raw: unknown): UmmsPackageEntry {
+  const data = asRecord(raw)
+  return {
+    ...normalizeGuard(data),
+    platform: String(data.platform ?? 'VANTARIS ONE'),
+    module: String(data.module ?? 'UMMS'),
+    projection: String(data.projection ?? 'umms_package_entry'),
+    packageId: String(data.packageId ?? 'umms'),
+    packageName: String(data.packageName ?? 'Unified Maintenance Management System'),
+    packageDisplayName: String(data.packageDisplayName ?? 'UMMS'),
+    packageStatus: String(data.packageStatus ?? 'stakeholder_review_ready'),
+    entryMode: String(data.entryMode ?? 'read_only_stakeholder_review'),
+    latestTag: String(data.latestTag ?? 'umms-r11-readonly-api-entry-skeleton-local-freeze-20260621'),
+    stakeholderReviewPackage: String(data.stakeholderReviewPackage ?? 'ONE_UMMS_R10_STAKEHOLDER_REVIEW_PACKAGE.md'),
+  }
+}
+
+function normalizeStakeholderReview(raw: unknown): UmmsStakeholderReview {
+  const data = asRecord(raw)
+  return {
+    ...normalizeGuard(data),
+    reviewPackageId: String(data.reviewPackageId ?? 'umms-stakeholder-review-package.v1'),
+    baselineHead: String(data.baselineHead ?? ''),
+    publishedTags: asStringArray(data.publishedTags),
+    readinessChain: asRecordArray(data.readinessChain).map((item) => normalizeReadinessStage(item)),
+    knownLimitations: asStringArray(data.knownLimitations),
+    recommendedNextSteps: asStringArray(data.recommendedNextSteps),
+  }
+}
+
+function normalizeReadinessSummary(raw: unknown): UmmsReadinessSummary {
+  const data = asRecord(raw)
+  return {
+    ...normalizeGuard(data),
+    readinessStages: asRecordArray(data.readinessStages).map((item) => normalizeReadinessStage(item)),
+  }
+}
+
+function normalizeCustomerCoreFunction(raw: unknown): UmmsCustomerCoreFunction {
+  const data = asRecord(raw)
+  return {
+    function: String(data.function ?? ''),
+    coverageStatus: String(data.coverageStatus ?? ''),
+    readinessStage: String(data.readinessStage ?? ''),
+    runtimeEnabled: Boolean(data.runtimeEnabled),
+    futureOwner: String(data.futureOwner ?? ''),
+    remainingGap: String(data.remainingGap ?? ''),
+  }
+}
+
+function normalizeCustomerCoreFunctions(raw: unknown): UmmsCustomerCoreFunctions {
+  const data = asRecord(raw)
+  return {
+    ...normalizeGuard(data),
+    customerCoreFunctions: asRecordArray(data.customerCoreFunctions).map((item) => normalizeCustomerCoreFunction(item)),
+    totalFunctions: Number(data.totalFunctions ?? 0),
+  }
+}
+
+function normalizeSafetyPosture(raw: unknown): UmmsSafetyPosture {
+  const data = asRecord(raw)
+  const posture = asRecord(data.safetyPosture)
+  return {
+    ...normalizeGuard(data),
+    safetyPosture: Object.fromEntries(Object.entries(posture).map(([key, value]) => [key, Boolean(value)])),
+  }
+}
+
+function fallbackPackageEntry(): UmmsPackageEntry {
+  return normalizePackageEntry({})
+}
+
+function fallbackStakeholderReview(): UmmsStakeholderReview {
+  return normalizeStakeholderReview({
+    knownLimitations: ['UMMS readiness data unavailable, read-only fallback active.'],
+    recommendedNextSteps: ['UMMS read-only frontend freeze / archive'],
+  })
+}
+
+function fallbackReadinessSummary(): UmmsReadinessSummary {
+  return normalizeReadinessSummary({ readinessStages: [] })
+}
+
+function fallbackCustomerCoreFunctions(): UmmsCustomerCoreFunctions {
+  return normalizeCustomerCoreFunctions({
+    customerCoreFunctions: [
+      'Work Order Management',
+      'Asset Registry',
+      'Preventive Maintenance',
+      'Spare Parts / Inventory',
+      'Vendor / Contract / SLA',
+      'UCDE Evidence Closure Alignment',
+      'HMI Locator Binding',
+      'Existing System Onboarding',
+      'Engineer Commissioning Diagnostics',
+      'Remote / Distributed Deployment Readiness',
+    ].map((name) => ({
+      function: name,
+      coverageStatus: 'read_only_fallback',
+      readinessStage: 'UMMS-R12 fallback',
+      runtimeEnabled: false,
+      futureOwner: 'UMMS future implementation phase',
+      remainingGap: 'API data unavailable; fallback remains read-only.',
+    })),
+    totalFunctions: 10,
+  })
+}
+
+function fallbackSafetyPosture(): UmmsSafetyPosture {
+  return normalizeSafetyPosture({
+    safetyPosture: {
+      readOnly: true,
+      productionActivation: false,
+      runtimeActivation: false,
+      dbWrite: false,
+      approvalExecution: false,
+      workflowExecution: false,
+      workOrderRuntimeExecution: false,
+      pmExecution: false,
+      inventoryTransaction: false,
+      vendorContractSlaRuntime: false,
+      evidenceClosureExecution: false,
+      hmiRuntimeExecution: false,
+      deviceConnection: false,
+      connectorExecution: false,
+      edgeRuntimeCall: false,
+      linkRuntimeCall: false,
+      oneAdapterIntroduced: false,
+    },
+  })
+}
+
 export async function getUmmsHealth(): Promise<UmmsHealth> {
   const { data } = await request.get('/v1/umms/health')
   return normalizeHealth(unwrapData<unknown>(data))
@@ -368,3 +601,58 @@ export async function getMaintenanceAssociations(): Promise<MaintenanceAssociati
   return normalizeAssociations(unwrapData<unknown>(data))
 }
 
+export async function getUmmsReadonlyPackageEntry(): Promise<UmmsPackageEntry> {
+  const { data } = await request.get('/v1/one/umms/package-entry')
+  return normalizePackageEntry(unwrapData<unknown>(data))
+}
+
+export async function getUmmsReadonlyStakeholderReview(): Promise<UmmsStakeholderReview> {
+  const { data } = await request.get('/v1/one/umms/stakeholder-review')
+  return normalizeStakeholderReview(unwrapData<unknown>(data))
+}
+
+export async function getUmmsReadonlyReadinessSummary(): Promise<UmmsReadinessSummary> {
+  const { data } = await request.get('/v1/one/umms/readiness-summary')
+  return normalizeReadinessSummary(unwrapData<unknown>(data))
+}
+
+export async function getUmmsReadonlyCustomerCoreFunctions(): Promise<UmmsCustomerCoreFunctions> {
+  const { data } = await request.get('/v1/one/umms/customer-core-functions')
+  return normalizeCustomerCoreFunctions(unwrapData<unknown>(data))
+}
+
+export async function getUmmsReadonlySafetyPosture(): Promise<UmmsSafetyPosture> {
+  const { data } = await request.get('/v1/one/umms/safety-posture')
+  return normalizeSafetyPosture(unwrapData<unknown>(data))
+}
+
+export async function getUmmsReadonlyOverview(): Promise<UmmsReadonlyOverview> {
+  try {
+    const [packageEntry, stakeholderReview, readinessSummary, customerCoreFunctions, safetyPosture] = await Promise.all([
+      getUmmsReadonlyPackageEntry(),
+      getUmmsReadonlyStakeholderReview(),
+      getUmmsReadonlyReadinessSummary(),
+      getUmmsReadonlyCustomerCoreFunctions(),
+      getUmmsReadonlySafetyPosture(),
+    ])
+    return {
+      packageEntry,
+      stakeholderReview,
+      readinessSummary,
+      customerCoreFunctions,
+      safetyPosture,
+      fallbackActive: false,
+      fallbackMessage: '',
+    }
+  } catch {
+    return {
+      packageEntry: fallbackPackageEntry(),
+      stakeholderReview: fallbackStakeholderReview(),
+      readinessSummary: fallbackReadinessSummary(),
+      customerCoreFunctions: fallbackCustomerCoreFunctions(),
+      safetyPosture: fallbackSafetyPosture(),
+      fallbackActive: true,
+      fallbackMessage: 'UMMS readiness data unavailable, read-only fallback active.',
+    }
+  }
+}
