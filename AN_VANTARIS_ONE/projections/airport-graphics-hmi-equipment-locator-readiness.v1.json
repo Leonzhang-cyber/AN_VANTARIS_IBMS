@@ -1,0 +1,129 @@
+{
+  "metadata": {
+    "projectionId": "airport-graphics-hmi-equipment-locator-readiness.v1",
+    "platform": "VANTARIS ONE",
+    "industryProjection": "airport",
+    "releaseContext": "Airport GA-R9 Graphics HMI Equipment Locator Readiness",
+    "readOnly": true,
+    "runtimeActivation": false,
+    "productionActivation": false,
+    "dbWrite": false,
+    "approvalExecution": false,
+    "deploymentExecution": false,
+    "remoteCommandExecution": false,
+    "hmiRuntimeExecution": false,
+    "hmiControlExecution": false,
+    "drawingUpload": false,
+    "bimRuntimeIntegration": false,
+    "connectorExecution": false,
+    "deviceConnection": false,
+    "edgeRuntimeCall": false,
+    "linkRuntimeCall": false,
+    "oneAdapterIntroduced": false
+  },
+  "locatorReadinessSummary": {
+    "targetCapability": "Graphics HMI Equipment Locator",
+    "currentStatus": "locator_readiness_projection_only",
+    "runtimeHmiEnabled": false,
+    "customerDrawingLoaded": false,
+    "bimIntegrationEnabled": false,
+    "equipmentControlEnabled": false,
+    "engineerReviewRequiredBeforeActivation": true,
+    "assetLocationMappingRequired": true,
+    "drawingSymbolMappingRequired": true
+  },
+  "locatorReferenceModel": [
+    {"referenceName": "assetRef", "purpose": "Canonical asset identity for locator chains.", "requiredForLocator": true, "futureOwner": "ONE Asset Graph / Layer 3", "providedBy": "Unified Data Model / Contracts", "resolvedBy": "ONE Asset Graph", "currentGaR9Status": "readiness_defined"},
+    {"referenceName": "locationRef", "purpose": "Canonical site/building/floor/zone/space reference.", "requiredForLocator": true, "futureOwner": "ONE Asset Graph / Layer 3", "providedBy": "Unified Data Model / Contracts", "resolvedBy": "ONE Asset Graph", "currentGaR9Status": "readiness_defined"},
+    {"referenceName": "systemRef", "purpose": "System grouping for equipment topology.", "requiredForLocator": true, "futureOwner": "ONE Asset Graph / Layer 3", "providedBy": "Unified Data Model / Contracts", "resolvedBy": "ONE Asset Graph", "currentGaR9Status": "readiness_defined"},
+    {"referenceName": "equipmentRef", "purpose": "Equipment-level locator target.", "requiredForLocator": true, "futureOwner": "ONE Asset Graph / Layer 3", "providedBy": "Unified Data Model / Contracts", "resolvedBy": "ONE Asset Graph", "currentGaR9Status": "readiness_defined"},
+    {"referenceName": "drawingRef", "purpose": "Future drawing or floor-plan reference.", "requiredForLocator": true, "futureOwner": "Assets / Graphics HMI Package", "providedBy": "Future drawing registry", "resolvedBy": "Future HMI locator service", "currentGaR9Status": "readiness_defined"},
+    {"referenceName": "floorPlanRef", "purpose": "Future floor-plan view reference.", "requiredForLocator": true, "futureOwner": "Assets / Graphics HMI Package", "providedBy": "Future drawing registry", "resolvedBy": "Future HMI locator service", "currentGaR9Status": "readiness_defined"},
+    {"referenceName": "zoneRef", "purpose": "Zone-level navigation and context.", "requiredForLocator": true, "futureOwner": "ONE Asset Graph / Layer 3", "providedBy": "Unified Data Model / Contracts", "resolvedBy": "ONE Asset Graph", "currentGaR9Status": "readiness_defined"},
+    {"referenceName": "floorRef", "purpose": "Floor-level navigation and context.", "requiredForLocator": true, "futureOwner": "ONE Asset Graph / Layer 3", "providedBy": "Unified Data Model / Contracts", "resolvedBy": "ONE Asset Graph", "currentGaR9Status": "readiness_defined"},
+    {"referenceName": "roomRef", "purpose": "Room/equipment-space context.", "requiredForLocator": true, "futureOwner": "ONE Asset Graph / Layer 3", "providedBy": "Unified Data Model / Contracts", "resolvedBy": "ONE Asset Graph", "currentGaR9Status": "readiness_defined"},
+    {"referenceName": "hmiSymbolRef", "purpose": "Future symbol that can be highlighted on a graphic.", "requiredForLocator": true, "futureOwner": "Graphics HMI Package", "providedBy": "Future symbol library", "resolvedBy": "Future HMI locator service", "currentGaR9Status": "readiness_defined"},
+    {"referenceName": "topologyNodeRef", "purpose": "Topology graph node for system navigation.", "requiredForLocator": true, "futureOwner": "ONE Asset Graph / Layer 3", "providedBy": "Unified Data Model / Contracts", "resolvedBy": "ONE Asset Graph", "currentGaR9Status": "readiness_defined"},
+    {"referenceName": "bimObjectRef", "purpose": "Future optional BIM object reference.", "requiredForLocator": false, "futureOwner": "Future BIM integration", "providedBy": "Future BIM registry", "resolvedBy": "Future BIM locator extension", "currentGaR9Status": "future_optional"},
+    {"referenceName": "evidenceRef", "purpose": "Evidence context for locator investigation.", "requiredForLocator": true, "futureOwner": "Layer 3 Evidence Center", "providedBy": "Evidence Center / Contracts", "resolvedBy": "UCDE evidence workspace", "currentGaR9Status": "readiness_defined"},
+    {"referenceName": "workOrderRef", "purpose": "Work order context for maintenance locator journeys.", "requiredForLocator": true, "futureOwner": "ONE Work Management", "providedBy": "Work Management / UMMS projection", "resolvedBy": "UMMS / Work Management", "currentGaR9Status": "readiness_defined"},
+    {"referenceName": "faultCaseRef", "purpose": "UFMS fault case context for equipment location.", "requiredForLocator": true, "futureOwner": "UFMS", "providedBy": "UFMS projection contract", "resolvedBy": "UFMS intelligence", "currentGaR9Status": "readiness_defined"},
+    {"referenceName": "alarmEventRef", "purpose": "Alarm/event context for operator location journeys.", "requiredForLocator": true, "futureOwner": "UFMS for interpreted alarms and cases; Layer 3 for telemetry/raw events", "providedBy": "Contracts", "resolvedBy": "UFMS / Layer 3", "currentGaR9Status": "readiness_defined"}
+  ],
+  "locationHierarchyModel": {
+    "requiredFields": ["site", "terminal", "building", "level", "floor", "zone", "room", "area", "equipmentSpace", "coordinateSystem", "x", "y", "z", "geoReference", "drawingLayer", "hmiSymbolLayer"],
+    "statement": "GA-R9 defines the readiness model only. No customer-specific location data is loaded."
+  },
+  "drawingAndSymbolRequirements": {
+    "requiredFutureFields": ["drawingRef", "drawingType", "drawingVersion", "drawingDiscipline", "floorPlanRef", "symbolLibraryRef", "hmiSymbolRef", "symbolType", "symbolLabel", "symbolStatus", "symbolCoordinates", "symbolLayer", "assetRef", "locationRef", "lastReviewedAt", "reviewStatus"],
+    "drawingTypes": ["2D floor plan", "ELV system schematic", "system topology", "single-line diagram, future optional", "BIM view, future optional"],
+    "statement": "No drawing upload or rendering is implemented in GA-R9."
+  },
+  "locatorChainRequirements": [
+    {"chainId": "alarm-asset-location-drawing-hmi-symbol", "sourceObject": "Alarm", "requiredReferences": ["alarmEventRef", "assetRef", "locationRef", "drawingRef", "hmiSymbolRef"], "requiredLinkObjects": ["asset/location reference contract", "delivery envelope with asset/location references"], "requiredEdgeFields": ["assetRef", "locationRef", "drawingRef", "hmiSymbolRef"], "requiredOneProjection": "alarm locator projection", "requiredUmmsCapability": "consume asset/location context", "requiredUcdeCapability": "evidence context projection", "gaR9ReadinessStatus": "defined"},
+    {"chainId": "event-asset-location-drawing-hmi-symbol", "sourceObject": "Event", "requiredReferences": ["alarmEventRef", "assetRef", "locationRef", "drawingRef", "hmiSymbolRef"], "requiredLinkObjects": ["asset/location reference contract"], "requiredEdgeFields": ["assetRef", "locationRef", "drawingRef", "hmiSymbolRef"], "requiredOneProjection": "event locator projection", "requiredUmmsCapability": "consume asset/location context", "requiredUcdeCapability": "event evidence traceability", "gaR9ReadinessStatus": "defined"},
+    {"chainId": "fault-case-asset-location-hmi-symbol", "sourceObject": "Fault Case", "requiredReferences": ["faultCaseRef", "assetRef", "locationRef", "hmiSymbolRef"], "requiredLinkObjects": ["evidence chain with asset/location context"], "requiredEdgeFields": ["assetRef", "locationRef", "hmiSymbolRef"], "requiredOneProjection": "fault case locator projection", "requiredUmmsCapability": "maintenance linkage", "requiredUcdeCapability": "investigation workspace", "gaR9ReadinessStatus": "defined"},
+    {"chainId": "work-order-asset-location-hmi-symbol", "sourceObject": "Work Order", "requiredReferences": ["workOrderRef", "assetRef", "locationRef", "hmiSymbolRef"], "requiredLinkObjects": ["work-order trigger with asset/location/hmi references"], "requiredEdgeFields": ["assetRef", "locationRef", "hmiSymbolRef"], "requiredOneProjection": "work order locator projection", "requiredUmmsCapability": "work order extension", "requiredUcdeCapability": "evidence reference linkage", "gaR9ReadinessStatus": "defined"},
+    {"chainId": "asset-registry-location-drawing-hmi-symbol", "sourceObject": "Asset Registry", "requiredReferences": ["assetRef", "locationRef", "drawingRef", "hmiSymbolRef"], "requiredLinkObjects": ["mapping profile contract"], "requiredEdgeFields": ["assetRef", "locationRef", "drawingRef", "hmiSymbolRef"], "requiredOneProjection": "asset locator projection", "requiredUmmsCapability": "asset lifecycle consumption", "requiredUcdeCapability": "mapping review traceability", "gaR9ReadinessStatus": "defined"},
+    {"chainId": "pm-task-asset-location-hmi-symbol", "sourceObject": "Preventive Maintenance Task", "requiredReferences": ["workOrderRef", "assetRef", "locationRef", "hmiSymbolRef"], "requiredLinkObjects": ["work-order trigger with asset/location/hmi references"], "requiredEdgeFields": ["assetRef", "locationRef", "hmiSymbolRef"], "requiredOneProjection": "pm locator projection", "requiredUmmsCapability": "PM scheduler alignment", "requiredUcdeCapability": "PM evidence context", "gaR9ReadinessStatus": "defined"},
+    {"chainId": "spare-part-asset-location", "sourceObject": "Spare Part", "requiredReferences": ["assetRef", "locationRef"], "requiredLinkObjects": ["asset/location reference contract"], "requiredEdgeFields": ["assetRef", "locationRef"], "requiredOneProjection": "spare part locator context", "requiredUmmsCapability": "inventory alignment", "requiredUcdeCapability": "evidence reference linkage", "gaR9ReadinessStatus": "future_optional"},
+    {"chainId": "vendor-contract-asset-location", "sourceObject": "Vendor / Contract", "requiredReferences": ["assetRef", "locationRef"], "requiredLinkObjects": ["asset/location reference contract"], "requiredEdgeFields": ["assetRef", "locationRef"], "requiredOneProjection": "vendor locator context", "requiredUmmsCapability": "vendor/contract alignment", "requiredUcdeCapability": "contract evidence linkage", "gaR9ReadinessStatus": "future_optional"},
+    {"chainId": "evidence-record-asset-fault-workorder-location", "sourceObject": "Evidence Record", "requiredReferences": ["evidenceRef", "assetRef", "faultCaseRef", "workOrderRef", "locationRef"], "requiredLinkObjects": ["evidence chain with asset/location context"], "requiredEdgeFields": ["assetRef", "locationRef"], "requiredOneProjection": "evidence locator projection", "requiredUmmsCapability": "work order evidence context", "requiredUcdeCapability": "investigation UI alignment", "gaR9ReadinessStatus": "defined"}
+  ],
+  "assetLocationMappingRequirements": {
+    "requiredFutureFields": ["assetId", "assetRef", "assetName", "assetType", "systemType", "sourceSystemId", "connectorId", "deviceId", "pointId", "tagName", "locationRef", "building", "level", "floor", "zone", "room", "equipmentSpace", "drawingRef", "hmiSymbolRef", "topologyNodeRef", "bimObjectRef", "mappingStatus", "mappingConfidence", "reviewStatus", "riskFlags"],
+    "validationRequirements": ["missingAssetRefDetection", "missingLocationRefDetection", "missingDrawingRefDetection", "missingHmiSymbolRefDetection", "duplicateSymbolDetection", "conflictingLocationDetection", "staleDrawingVersionDetection", "unreviewedMappingDetection"]
+  },
+  "hmiLocatorUseCaseReadiness": [
+    {"useCaseId": "locate-equipment-from-alarm", "userRole": "Operator", "entryObject": "Alarm", "requiredReferences": ["alarmEventRef", "assetRef", "locationRef", "hmiSymbolRef"], "readOnlyGaStatus": "projection_only", "futureImplementationOwner": "Airport / UFMS / Assets", "activationGate": "operator review and customer drawing approval"},
+    {"useCaseId": "locate-equipment-from-event", "userRole": "Operator", "entryObject": "Event", "requiredReferences": ["alarmEventRef", "assetRef", "locationRef", "hmiSymbolRef"], "readOnlyGaStatus": "projection_only", "futureImplementationOwner": "Airport / UFMS / Assets", "activationGate": "event contract and locator mapping approval"},
+    {"useCaseId": "locate-equipment-from-fault-case", "userRole": "Engineer", "entryObject": "Fault Case", "requiredReferences": ["faultCaseRef", "assetRef", "locationRef", "hmiSymbolRef"], "readOnlyGaStatus": "projection_only", "futureImplementationOwner": "UFMS / Assets", "activationGate": "fault case locator review"},
+    {"useCaseId": "locate-equipment-from-work-order", "userRole": "Maintenance Team", "entryObject": "Work Order", "requiredReferences": ["workOrderRef", "assetRef", "locationRef", "hmiSymbolRef"], "readOnlyGaStatus": "projection_only", "futureImplementationOwner": "ONE Work Management / UMMS", "activationGate": "work order locator contract"},
+    {"useCaseId": "locate-equipment-from-asset-registry", "userRole": "Asset Owner", "entryObject": "Asset Registry", "requiredReferences": ["assetRef", "locationRef", "drawingRef", "hmiSymbolRef"], "readOnlyGaStatus": "projection_only", "futureImplementationOwner": "Assets", "activationGate": "asset graph location approval"},
+    {"useCaseId": "locate-equipment-from-pm-task", "userRole": "Maintenance Planner", "entryObject": "PM Task", "requiredReferences": ["assetRef", "locationRef", "hmiSymbolRef"], "readOnlyGaStatus": "projection_only", "futureImplementationOwner": "UMMS", "activationGate": "PM schedule locator mapping"},
+    {"useCaseId": "locate-related-equipment-in-same-zone", "userRole": "Engineer", "entryObject": "Zone", "requiredReferences": ["zoneRef", "assetRef", "systemRef"], "readOnlyGaStatus": "projection_only", "futureImplementationOwner": "Assets", "activationGate": "zone topology mapping"},
+    {"useCaseId": "locate-evidence-source-context", "userRole": "Supervisor", "entryObject": "Evidence Record", "requiredReferences": ["evidenceRef", "assetRef", "locationRef"], "readOnlyGaStatus": "projection_only", "futureImplementationOwner": "UCDE / Evidence Center", "activationGate": "evidence chain locator approval"},
+    {"useCaseId": "engineer-review-of-unmapped-equipment", "userRole": "Engineer", "entryObject": "Mapping Review", "requiredReferences": ["assetRef", "locationRef", "drawingRef"], "readOnlyGaStatus": "projection_only", "futureImplementationOwner": "Assets / EDGE", "activationGate": "engineer review completion"},
+    {"useCaseId": "supervisor-review-of-location-confidence", "userRole": "Supervisor", "entryObject": "Mapping Confidence", "requiredReferences": ["assetRef", "locationRef", "hmiSymbolRef"], "readOnlyGaStatus": "projection_only", "futureImplementationOwner": "Assets / UCDE", "activationGate": "supervisor approval"}
+  ],
+  "customerCoreFunctionLocatorImpact": [
+    {"function": "Work Order Management, auto + manual", "locatorDependency": "work order asset/location references", "requiredMappingGroups": ["asset-location", "work-order-location"], "requiredEdgeFields": ["assetRef", "locationRef"], "requiredLinkObjects": ["work-order trigger with asset/location/hmi references"], "requiredOneProjection": "work order locator context", "requiredUmmsCapability": "work order extension", "requiredUcdeCapability": "evidence reference linkage", "gaR9ReadinessStatus": "defined", "futurePhase": "UMMS-R2"},
+    {"function": "Asset Registry, full lifecycle tracking", "locatorDependency": "canonical asset graph and location hierarchy", "requiredMappingGroups": ["asset-location", "drawing-symbol"], "requiredEdgeFields": ["assetRef", "locationRef", "drawingRef", "hmiSymbolRef"], "requiredLinkObjects": ["mapping profile contract"], "requiredOneProjection": "asset locator context", "requiredUmmsCapability": "asset lifecycle consumption", "requiredUcdeCapability": "mapping review traceability", "gaR9ReadinessStatus": "defined", "futurePhase": "Assets-R4"},
+    {"function": "Preventive Maintenance Scheduler", "locatorDependency": "PM task to asset/location references", "requiredMappingGroups": ["asset-location", "pm-location"], "requiredEdgeFields": ["assetRef", "locationRef"], "requiredLinkObjects": ["work-order trigger with asset/location/hmi references"], "requiredOneProjection": "pm locator context", "requiredUmmsCapability": "PM scheduler alignment", "requiredUcdeCapability": "PM evidence context", "gaR9ReadinessStatus": "defined", "futurePhase": "UMMS-R2"},
+    {"function": "Spare Parts / Inventory Management", "locatorDependency": "asset-location context for inventory use", "requiredMappingGroups": ["asset-location"], "requiredEdgeFields": ["assetRef", "locationRef"], "requiredLinkObjects": ["asset/location reference contract"], "requiredOneProjection": "inventory locator context", "requiredUmmsCapability": "inventory alignment", "requiredUcdeCapability": "evidence linkage", "gaR9ReadinessStatus": "future_optional", "futurePhase": "UMMS-R2"},
+    {"function": "Vendor / Contract Management", "locatorDependency": "vendor-maintained asset location context", "requiredMappingGroups": ["asset-location"], "requiredEdgeFields": ["assetRef", "locationRef"], "requiredLinkObjects": ["asset/location reference contract"], "requiredOneProjection": "vendor locator context", "requiredUmmsCapability": "vendor/contract alignment", "requiredUcdeCapability": "contract evidence linkage", "gaR9ReadinessStatus": "future_optional", "futurePhase": "UMMS-R2"},
+    {"function": "Graphics HMI to locate Equipment", "locatorDependency": "asset/location/drawing/HMI symbol mapping", "requiredMappingGroups": ["asset-location", "drawing-symbol", "topology"], "requiredEdgeFields": ["assetRef", "locationRef", "drawingRef", "hmiSymbolRef"], "requiredLinkObjects": ["asset/location reference contract", "hmiSymbolRef / drawingRef reference fields"], "requiredOneProjection": "HMI equipment locator readiness", "requiredUmmsCapability": "maintenance context consumption", "requiredUcdeCapability": "review traceability", "gaR9ReadinessStatus": "defined", "futurePhase": "Airport GA-R10+"},
+    {"function": "Existing system onboarding", "locatorDependency": "source tag to asset/location/symbol mapping", "requiredMappingGroups": ["source-tag", "asset-location", "drawing-symbol"], "requiredEdgeFields": ["sourceSystemId", "connectorId", "tagName", "assetRef", "locationRef", "hmiSymbolRef"], "requiredLinkObjects": ["mapping profile contract"], "requiredOneProjection": "existing-system locator mapping", "requiredUmmsCapability": "asset/work alignment", "requiredUcdeCapability": "mapping review evidence", "gaR9ReadinessStatus": "defined", "futurePhase": "GA-R7 follow-on"},
+    {"function": "Engineer commissioning diagnostics", "locatorDependency": "diagnostic output includes locator readiness risks", "requiredMappingGroups": ["asset-location", "drawing-symbol"], "requiredEdgeFields": ["asset-location mapping diagnostics", "hmiSymbolRef mapping support"], "requiredLinkObjects": ["support bundle locator readiness summary"], "requiredOneProjection": "commissioning locator diagnostics", "requiredUmmsCapability": "review task generation", "requiredUcdeCapability": "diagnostic evidence trace", "gaR9ReadinessStatus": "defined", "futurePhase": "GA-R8 follow-on"},
+    {"function": "Remote overseas deployment", "locatorDependency": "offline package includes mapping readiness manifest", "requiredMappingGroups": ["site-building-floor", "asset-location"], "requiredEdgeFields": ["site", "building", "floor", "assetRef", "locationRef"], "requiredLinkObjects": ["distributed topology with site/building/floor references"], "requiredOneProjection": "deployment locator readiness", "requiredUmmsCapability": "maintenance readiness package", "requiredUcdeCapability": "handoff evidence package", "gaR9ReadinessStatus": "defined", "futurePhase": "GA-R10"},
+    {"function": "Distributed independent installation", "locatorDependency": "site-local locator references without central runtime dependency", "requiredMappingGroups": ["site-local topology", "asset-location"], "requiredEdgeFields": ["site", "building", "floor", "assetRef", "locationRef"], "requiredLinkObjects": ["distributed topology with site/building/floor references"], "requiredOneProjection": "distributed locator readiness", "requiredUmmsCapability": "local maintenance context", "requiredUcdeCapability": "local review traceability", "gaR9ReadinessStatus": "defined", "futurePhase": "GA-R10"}
+  ],
+  "sharedFoundationInterfaceRequirements": {
+    "edgeRequirements": ["assetRef / locationRef capture from connector mapping", "hmiSymbolRef mapping support", "drawingRef mapping support", "source tag to asset/location mapping preview", "asset-location mapping diagnostics", "HMI locator data foundation", "sample payload with asset/location references", "normalization preview with locator references", "connector mapping validation for missing references", "engineer commissioning output for locator readiness"],
+    "linkRequirements": ["asset/location reference contract", "hmiSymbolRef / drawingRef reference fields", "source system health with locator mapping status", "delivery envelope with asset/location references", "work-order trigger with asset/location/hmi references", "evidence chain with asset/location context", "mapping profile contract", "distributed topology with site/building/floor references", "support bundle locator readiness summary", "audit event for mapping review status"]
+  },
+  "futureRenderingDependencyModel": {
+    "dependencies": ["2D floor plan renderer", "Symbol library", "Equipment locator overlay", "Asset topology graph", "System topology view", "Alarm/event highlight overlay", "Work order location overlay", "Evidence-linked location view", "BIM integration, future optional", "Mobile locator view, future optional"],
+    "statement": "GA-R9 does not implement rendering. GA-R9 only defines readiness requirements."
+  },
+  "safetyPosture": {
+    "readOnly": true,
+    "runtimeActivation": false,
+    "productionActivation": false,
+    "dbWrite": false,
+    "approvalExecution": false,
+    "deploymentExecution": false,
+    "remoteCommandExecution": false,
+    "hmiRuntimeExecution": false,
+    "hmiControlExecution": false,
+    "drawingUpload": false,
+    "bimRuntimeIntegration": false,
+    "connectorExecution": false,
+    "deviceConnection": false,
+    "edgeRuntimeCall": false,
+    "linkRuntimeCall": false,
+    "oneAdapterIntroduced": false,
+    "customerIdentifierLeakage": false,
+    "localAbsolutePathLeakage": false
+  }
+}

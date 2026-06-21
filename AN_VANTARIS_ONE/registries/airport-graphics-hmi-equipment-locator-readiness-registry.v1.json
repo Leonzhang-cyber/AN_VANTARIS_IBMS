@@ -1,0 +1,43 @@
+{
+  "registryId": "airport-graphics-hmi-equipment-locator-readiness-registry.v1",
+  "authority": "ONE-AIRPORT-GA-R9",
+  "contractVersion": "v1",
+  "projectionArtifact": "AN_VANTARIS_ONE/projections/airport-graphics-hmi-equipment-locator-readiness.v1.json",
+  "report": "ONE_AIRPORT_GA_R9_GRAPHICS_HMI_EQUIPMENT_LOCATOR_READINESS_REPORT.md",
+  "validationMarker": "ONE_AIRPORT_GA_R9_GRAPHICS_HMI_EQUIPMENT_LOCATOR_READINESS_PASS",
+  "baselineHead": "30ba3536e45feb9c7030c1625f4338688f386308",
+  "baselineTag": "airport-ga-readonly-stakeholder-review-local-freeze-20260621",
+  "gaR8Dependency": "ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_PASS",
+  "referencedSections": [
+    "locatorReferenceModel",
+    "locationHierarchyModel",
+    "drawingAndSymbolRequirements",
+    "locatorChainRequirements",
+    "assetLocationMappingRequirements",
+    "hmiLocatorUseCaseReadiness",
+    "customerCoreFunctionLocatorImpact",
+    "sharedFoundationInterfaceRequirements",
+    "futureRenderingDependencyModel",
+    "safetyPosture"
+  ],
+  "safetyPosture": {
+    "readOnly": true,
+    "runtimeActivation": false,
+    "productionActivation": false,
+    "dbWrite": false,
+    "approvalExecution": false,
+    "deploymentExecution": false,
+    "remoteCommandExecution": false,
+    "hmiRuntimeExecution": false,
+    "hmiControlExecution": false,
+    "drawingUpload": false,
+    "bimRuntimeIntegration": false,
+    "connectorExecution": false,
+    "deviceConnection": false,
+    "edgeRuntimeCall": false,
+    "linkRuntimeCall": false,
+    "oneAdapterIntroduced": false
+  },
+  "pushPerformed": false,
+  "runtimeIntegrationImplemented": false
+}
