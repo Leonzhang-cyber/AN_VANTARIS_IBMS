@@ -1,0 +1,167 @@
+{
+  "metadata": {
+    "projectionId": "airport-distributed-remote-deployment-readiness.v1",
+    "platform": "VANTARIS ONE",
+    "industryProjection": "airport",
+    "releaseContext": "Airport GA-R10 Distributed / Remote Deployment Readiness Package",
+    "readOnly": true,
+    "runtimeActivation": false,
+    "productionActivation": false,
+    "dbWrite": false,
+    "approvalExecution": false,
+    "deploymentExecution": false,
+    "remoteCommandExecution": false,
+    "installExecution": false,
+    "upgradeExecution": false,
+    "rollbackExecution": false,
+    "supportBundleExecution": false,
+    "connectorExecution": false,
+    "deviceConnection": false,
+    "edgeRuntimeCall": false,
+    "linkRuntimeCall": false,
+    "oneAdapterIntroduced": false
+  },
+  "deploymentReadinessSummary": {
+    "targetExecutionLayer": "AN_VANTARIS_EDGE / AN_VANTARIS_LINK shared foundation and deployment tooling",
+    "currentStatus": "deployment_readiness_projection_only",
+    "deploymentExecution": false,
+    "remoteSupportExecution": false,
+    "runtimeConnected": false,
+    "productionEnabled": false,
+    "customerApprovalRequiredBeforeActivation": true,
+    "engineerReviewRequiredBeforeActivation": true,
+    "rollbackPlanRequired": true,
+    "offlineInstallPackageRequired": true
+  },
+  "deploymentModeCatalog": [
+    {"deploymentModeId": "single-box-demo-small-site", "deploymentModeName": "Single-box demo / small site", "purpose": "Compact read-only review or demo deployment planning.", "targetSiteType": "small site", "requiredComponents": ["VANTARIS ONE", "sample projection package"], "requiredNetworkAssumptions": ["local review network only"], "requiredCustomerApprovals": ["demo approval"], "requiredEngineerChecks": ["package integrity", "runtime disabled"], "futureExecutionOwner": "EDGE/LINK deployment tooling", "currentGaR10Status": "readiness_defined", "runtimeActivationAllowed": false},
+    {"deploymentModeId": "all-in-one-readonly-review-package", "deploymentModeName": "All-in-one read-only review package", "purpose": "Stakeholder review package without production activation.", "targetSiteType": "airport review environment", "requiredComponents": ["VANTARIS ONE", "read-only artifacts"], "requiredNetworkAssumptions": ["no device connection"], "requiredCustomerApprovals": ["review package acceptance"], "requiredEngineerChecks": ["read-only guardrail"], "futureExecutionOwner": "ONE package release", "currentGaR10Status": "readiness_defined", "runtimeActivationAllowed": false},
+    {"deploymentModeId": "distributed-edge-central-link", "deploymentModeName": "Distributed site with EDGE nodes and central LINK gateway", "purpose": "Future topology with source-proximate EDGE nodes and central delivery gateway.", "targetSiteType": "single airport", "requiredComponents": ["EDGE node", "LINK gateway", "VANTARIS ONE"], "requiredNetworkAssumptions": ["segmented site network"], "requiredCustomerApprovals": ["network boundary approval"], "requiredEngineerChecks": ["delivery route readiness"], "futureExecutionOwner": "EDGE/LINK shared foundation", "currentGaR10Status": "readiness_defined", "runtimeActivationAllowed": false},
+    {"deploymentModeId": "multi-edge-single-link", "deploymentModeName": "Multi-EDGE single-LINK", "purpose": "Future multiple EDGE nodes feeding one LINK gateway.", "targetSiteType": "large airport", "requiredComponents": ["multiple EDGE nodes", "single LINK gateway"], "requiredNetworkAssumptions": ["EDGE-to-LINK routing"], "requiredCustomerApprovals": ["topology approval"], "requiredEngineerChecks": ["multi-node healthcheck plan"], "futureExecutionOwner": "EDGE/LINK shared foundation", "currentGaR10Status": "readiness_defined", "runtimeActivationAllowed": false},
+    {"deploymentModeId": "multi-site-multi-link-future", "deploymentModeName": "Multi-site multi-LINK, future", "purpose": "Future multi-airport or multi-campus topology.", "targetSiteType": "multi-site airport estate", "requiredComponents": ["multiple LINK gateways", "site-local EDGE nodes"], "requiredNetworkAssumptions": ["site-to-site governed routing"], "requiredCustomerApprovals": ["multi-site approval"], "requiredEngineerChecks": ["distributed topology review"], "futureExecutionOwner": "EDGE/LINK shared foundation", "currentGaR10Status": "future_optional", "runtimeActivationAllowed": false},
+    {"deploymentModeId": "offline-customer-site", "deploymentModeName": "Offline customer site", "purpose": "Future offline package readiness and manual handoff.", "targetSiteType": "restricted or disconnected site", "requiredComponents": ["offline package", "signature manifest"], "requiredNetworkAssumptions": ["no internet dependency"], "requiredCustomerApprovals": ["offline install approval"], "requiredEngineerChecks": ["offline package precheck"], "futureExecutionOwner": "EDGE/LINK deployment tooling", "currentGaR10Status": "readiness_defined", "runtimeActivationAllowed": false},
+    {"deploymentModeId": "remote-engineer-assisted-installation", "deploymentModeName": "Remote engineer-assisted installation", "purpose": "Future remote handoff and guided customer-side installation planning.", "targetSiteType": "overseas customer site", "requiredComponents": ["handoff checklist", "support bundle requirement"], "requiredNetworkAssumptions": ["customer-approved support channel"], "requiredCustomerApprovals": ["remote assistance approval"], "requiredEngineerChecks": ["no remote command execution without approval"], "futureExecutionOwner": "EDGE/LINK deployment tooling", "currentGaR10Status": "readiness_defined", "runtimeActivationAllowed": false},
+    {"deploymentModeId": "customer-managed-exported-support-bundle", "deploymentModeName": "Customer-managed deployment with exported support bundle", "purpose": "Customer executes deployment while ONE records readiness and review posture.", "targetSiteType": "customer-managed site", "requiredComponents": ["support bundle manifest", "deployment status contract"], "requiredNetworkAssumptions": ["customer-controlled environment"], "requiredCustomerApprovals": ["customer-managed deployment approval"], "requiredEngineerChecks": ["bundle redaction and integrity"], "futureExecutionOwner": "Customer / EDGE-LINK tooling", "currentGaR10Status": "readiness_defined", "runtimeActivationAllowed": false},
+    {"deploymentModeId": "staged-activation-customer-approval", "deploymentModeName": "Staged activation with customer approval", "purpose": "Future activation after staged readiness gates.", "targetSiteType": "production candidate", "requiredComponents": ["activation gate model", "approval references"], "requiredNetworkAssumptions": ["approved deployment network"], "requiredCustomerApprovals": ["final activation approval"], "requiredEngineerChecks": ["all gates complete"], "futureExecutionOwner": "Governed deployment workflow", "currentGaR10Status": "readiness_defined", "runtimeActivationAllowed": false},
+    {"deploymentModeId": "rollback-ready-controlled-deployment", "deploymentModeName": "Rollback-ready controlled deployment", "purpose": "Future controlled deployment with rollback target defined.", "targetSiteType": "production candidate", "requiredComponents": ["rollback plan", "backup plan", "healthcheck plan"], "requiredNetworkAssumptions": ["controlled deployment window"], "requiredCustomerApprovals": ["rollback plan approval"], "requiredEngineerChecks": ["rollback target availability"], "futureExecutionOwner": "EDGE/LINK deployment tooling", "currentGaR10Status": "readiness_defined", "runtimeActivationAllowed": false}
+  ],
+  "distributedTopologyRequirements": {
+    "requiredFutureFields": ["siteId", "projectId", "deploymentMode", "edgeNodeId", "edgeNodeRole", "linkGatewayId", "linkGatewayRole", "sourceSystemId", "networkZone", "integrationZone", "applicationZone", "customerNetworkBoundary", "localBufferRequired", "deliveryRoute", "healthStatus", "lastSeenAt", "supportBundleRef", "deploymentPackageRef", "configVersionRef", "rollbackTargetRef"],
+    "statement": "GA-R10 defines topology readiness only. No topology runtime discovery is implemented."
+  },
+  "offlineInstallPackageRequirements": {
+    "requiredFutureFields": ["packageId", "packageType", "targetComponent", "targetVersion", "osRequirement", "architectureRequirement", "dependencyManifest", "signatureRequired", "packageIntegrityRequired", "hardwareKeyRequired", "siteBindingRequired", "precheckRequired", "installPlanRequired", "healthcheckRequired", "upgradePlanRequired", "rollbackPlanRequired", "uninstallPlanRequired", "supportBundleRequired"],
+    "statement": "GA-R10 does not build or execute install packages."
+  },
+  "deploymentPackageStatusRequirements": {
+    "requiredFutureFields": ["deploymentPackageId", "siteId", "projectId", "targetDeploymentMode", "edgeVersion", "linkVersion", "oneProjectionVersion", "configVersion", "mappingVersion", "connectorVersion", "signatureStatus", "integrityStatus", "approvalStatus", "activationStatus", "rollbackTarget", "createdAt", "reviewedAt", "approvedAt", "customerApprovalRef", "engineerReviewRef"],
+    "activationStatus": "disabled / not activated in GA-R10",
+    "statement": "activationStatus remains disabled / not activated in GA-R10."
+  },
+  "hardwareKeySiteBindingRequirements": {
+    "requiredFutureFields": ["edgeNodeId", "siteId", "projectId", "hardwareKeyFingerprint", "hardwareKeyStatus", "licenseMode", "siteBindingStatus", "configPackageBinding", "deploymentPackageBinding", "offlineGracePolicy", "lockedMode", "maintenanceMode", "diagnosticMode", "activeModeAllowed"],
+    "activeModeAllowed": false,
+    "statement": "activeModeAllowed must remain false in GA-R10."
+  },
+  "remoteSupportBundleRequirements": {
+    "requiredFutureFields": ["supportBundleId", "siteId", "projectId", "edgeNodeId", "linkGatewayId", "createdAt", "includedDiagnostics", "redactionStatus", "customerIdentifierRedacted", "localPathRedacted", "packageIntegrityStatus", "signatureStatus", "uploadAllowed", "remoteSupportAllowed", "retentionClass", "reviewStatus"],
+    "statement": "Support bundle generation/upload/remote support execution is not implemented in GA-R10."
+  },
+  "precheckHealthcheckRequirements": [
+    {"checkId": "os-architecture-readiness", "checkName": "OS / architecture readiness", "requiredEvidence": ["osRequirement", "architectureRequirement"], "futureExecutionOwner": "EDGE/LINK deployment tooling", "oneProjectionOwner": "Airport GA-R10", "currentGaR10Status": "readiness_defined", "activationGate": "required before activation"},
+    {"checkId": "package-integrity", "checkName": "Package integrity", "requiredEvidence": ["integrityStatus"], "futureExecutionOwner": "EDGE/LINK deployment tooling", "oneProjectionOwner": "Airport GA-R10", "currentGaR10Status": "readiness_defined", "activationGate": "required before activation"},
+    {"checkId": "signature-verification", "checkName": "Signature verification", "requiredEvidence": ["signatureStatus"], "futureExecutionOwner": "EDGE/LINK deployment tooling", "oneProjectionOwner": "Airport GA-R10", "currentGaR10Status": "readiness_defined", "activationGate": "required before activation"},
+    {"checkId": "hardware-key-status", "checkName": "Hardware key status", "requiredEvidence": ["hardwareKeyStatus"], "futureExecutionOwner": "EDGE", "oneProjectionOwner": "Airport GA-R10", "currentGaR10Status": "readiness_defined", "activationGate": "required before activation"},
+    {"checkId": "site-binding-status", "checkName": "Site binding status", "requiredEvidence": ["siteBindingStatus"], "futureExecutionOwner": "EDGE", "oneProjectionOwner": "Airport GA-R10", "currentGaR10Status": "readiness_defined", "activationGate": "required before activation"},
+    {"checkId": "config-package-version", "checkName": "Config package version", "requiredEvidence": ["configVersionRef"], "futureExecutionOwner": "EDGE/LINK", "oneProjectionOwner": "Airport GA-R10", "currentGaR10Status": "readiness_defined", "activationGate": "required before activation"},
+    {"checkId": "connector-package-version", "checkName": "Connector package version", "requiredEvidence": ["connectorVersion"], "futureExecutionOwner": "EDGE", "oneProjectionOwner": "Airport GA-R10", "currentGaR10Status": "readiness_defined", "activationGate": "required before activation"},
+    {"checkId": "network-reachability", "checkName": "Network reachability", "requiredEvidence": ["deliveryRoute"], "futureExecutionOwner": "EDGE/LINK", "oneProjectionOwner": "Airport GA-R10", "currentGaR10Status": "readiness_defined", "activationGate": "required before activation"},
+    {"checkId": "timezone-clock", "checkName": "Timezone / clock", "requiredEvidence": ["clockStatus"], "futureExecutionOwner": "EDGE/LINK", "oneProjectionOwner": "Airport GA-R10", "currentGaR10Status": "readiness_defined", "activationGate": "required before activation"},
+    {"checkId": "local-buffer-readiness", "checkName": "Local buffer readiness", "requiredEvidence": ["localBufferRequired"], "futureExecutionOwner": "EDGE", "oneProjectionOwner": "Airport GA-R10", "currentGaR10Status": "readiness_defined", "activationGate": "required before activation"},
+    {"checkId": "link-delivery-route-readiness", "checkName": "LINK delivery route readiness", "requiredEvidence": ["deliveryRoute"], "futureExecutionOwner": "LINK", "oneProjectionOwner": "Airport GA-R10", "currentGaR10Status": "readiness_defined", "activationGate": "required before activation"},
+    {"checkId": "disk-storage-readiness", "checkName": "Disk / storage readiness", "requiredEvidence": ["storageStatus"], "futureExecutionOwner": "EDGE/LINK", "oneProjectionOwner": "Airport GA-R10", "currentGaR10Status": "readiness_defined", "activationGate": "required before activation"},
+    {"checkId": "service-account-readiness", "checkName": "Service account readiness", "requiredEvidence": ["serviceAccountStatus"], "futureExecutionOwner": "EDGE/LINK", "oneProjectionOwner": "Airport GA-R10", "currentGaR10Status": "readiness_defined", "activationGate": "required before activation"},
+    {"checkId": "systemd-service-readiness", "checkName": "Systemd/service readiness, future EDGE/LINK owned", "requiredEvidence": ["serviceStatus"], "futureExecutionOwner": "EDGE/LINK", "oneProjectionOwner": "Airport GA-R10", "currentGaR10Status": "future_owned_by_edge_link", "activationGate": "required before activation"},
+    {"checkId": "rollback-target-availability", "checkName": "Rollback target availability", "requiredEvidence": ["rollbackTargetRef"], "futureExecutionOwner": "EDGE/LINK", "oneProjectionOwner": "Airport GA-R10", "currentGaR10Status": "readiness_defined", "activationGate": "required before activation"},
+    {"checkId": "support-bundle-availability", "checkName": "Support bundle availability", "requiredEvidence": ["supportBundleRef"], "futureExecutionOwner": "EDGE/LINK", "oneProjectionOwner": "Airport GA-R10", "currentGaR10Status": "readiness_defined", "activationGate": "required before activation"}
+  ],
+  "upgradeRollbackReadiness": {
+    "currentVersion": "future_current_version",
+    "targetVersion": "future_target_version",
+    "upgradePlanRequired": true,
+    "rollbackPlanRequired": true,
+    "rollbackTarget": "required_before_activation",
+    "backupRequired": true,
+    "configVersionCompatibility": "required",
+    "mappingVersionCompatibility": "required",
+    "connectorVersionCompatibility": "required",
+    "healthcheckBeforeUpgrade": true,
+    "healthcheckAfterUpgrade": true,
+    "customerApprovalRequired": true,
+    "engineerApprovalRequired": true,
+    "activationAllowed": false,
+    "statement": "activationAllowed remains false in GA-R10."
+  },
+  "remoteEngineerHandoffChecklist": [
+    {"checkId": "confirm-deployment-mode", "checkName": "Confirm deployment mode", "requiredEvidence": ["deploymentMode"], "currentGaR10Status": "readiness_defined", "futureExecutionOwner": "Deployment owner", "activationGate": "required"},
+    {"checkId": "confirm-site-project-binding", "checkName": "Confirm site/project binding", "requiredEvidence": ["siteId", "projectId"], "currentGaR10Status": "readiness_defined", "futureExecutionOwner": "EDGE/LINK", "activationGate": "required"},
+    {"checkId": "confirm-customer-network-boundary", "checkName": "Confirm customer network boundary", "requiredEvidence": ["customerNetworkBoundary"], "currentGaR10Status": "readiness_defined", "futureExecutionOwner": "Customer / engineer", "activationGate": "required"},
+    {"checkId": "confirm-no-remote-command-without-approval", "checkName": "Confirm no remote command execution without customer approval", "requiredEvidence": ["approval policy"], "currentGaR10Status": "readiness_defined", "futureExecutionOwner": "Governance", "activationGate": "required"},
+    {"checkId": "confirm-package-integrity", "checkName": "Confirm package integrity", "requiredEvidence": ["integrityStatus"], "currentGaR10Status": "readiness_defined", "futureExecutionOwner": "EDGE/LINK", "activationGate": "required"},
+    {"checkId": "confirm-signature-requirements", "checkName": "Confirm signature requirements", "requiredEvidence": ["signatureStatus"], "currentGaR10Status": "readiness_defined", "futureExecutionOwner": "EDGE/LINK", "activationGate": "required"},
+    {"checkId": "confirm-hardware-key-site-binding", "checkName": "Confirm hardware key/site binding", "requiredEvidence": ["hardwareKeyStatus", "siteBindingStatus"], "currentGaR10Status": "readiness_defined", "futureExecutionOwner": "EDGE", "activationGate": "required"},
+    {"checkId": "confirm-offline-install-package-requirement", "checkName": "Confirm offline install package requirement", "requiredEvidence": ["packageId"], "currentGaR10Status": "readiness_defined", "futureExecutionOwner": "EDGE/LINK", "activationGate": "required"},
+    {"checkId": "confirm-config-mapping-package-version", "checkName": "Confirm config/mapping package version", "requiredEvidence": ["configVersion", "mappingVersion"], "currentGaR10Status": "readiness_defined", "futureExecutionOwner": "EDGE/LINK", "activationGate": "required"},
+    {"checkId": "confirm-rollback-target", "checkName": "Confirm rollback target", "requiredEvidence": ["rollbackTargetRef"], "currentGaR10Status": "readiness_defined", "futureExecutionOwner": "EDGE/LINK", "activationGate": "required"},
+    {"checkId": "confirm-healthcheck-plan", "checkName": "Confirm healthcheck plan", "requiredEvidence": ["healthcheckRequired"], "currentGaR10Status": "readiness_defined", "futureExecutionOwner": "EDGE/LINK", "activationGate": "required"},
+    {"checkId": "confirm-support-bundle-requirement", "checkName": "Confirm support bundle requirement", "requiredEvidence": ["supportBundleRequired"], "currentGaR10Status": "readiness_defined", "futureExecutionOwner": "EDGE/LINK", "activationGate": "required"},
+    {"checkId": "confirm-source-system-onboarding-dependencies", "checkName": "Confirm source system onboarding dependencies", "requiredEvidence": ["GA-R7 dependency"], "currentGaR10Status": "readiness_defined", "futureExecutionOwner": "Airport / EDGE", "activationGate": "required"},
+    {"checkId": "confirm-mapping-readiness-dependencies", "checkName": "Confirm mapping readiness dependencies", "requiredEvidence": ["mappingVersion"], "currentGaR10Status": "readiness_defined", "futureExecutionOwner": "Airport / Assets", "activationGate": "required"},
+    {"checkId": "confirm-diagnostics-readiness-dependencies", "checkName": "Confirm diagnostics readiness dependencies", "requiredEvidence": ["GA-R8 dependency"], "currentGaR10Status": "readiness_defined", "futureExecutionOwner": "Airport / EDGE / LINK", "activationGate": "required"},
+    {"checkId": "confirm-hmi-locator-readiness-dependencies", "checkName": "Confirm HMI locator readiness dependencies", "requiredEvidence": ["GA-R9 dependency"], "currentGaR10Status": "readiness_defined", "futureExecutionOwner": "Airport / Assets", "activationGate": "required"},
+    {"checkId": "confirm-runtime-activation-disabled", "checkName": "Confirm runtime activation remains disabled", "requiredEvidence": ["runtimeActivation=false"], "currentGaR10Status": "readiness_defined", "futureExecutionOwner": "ONE Governance", "activationGate": "required"},
+    {"checkId": "confirm-production-activation-disabled", "checkName": "Confirm production activation remains disabled", "requiredEvidence": ["productionActivation=false"], "currentGaR10Status": "readiness_defined", "futureExecutionOwner": "ONE Governance", "activationGate": "required"},
+    {"checkId": "confirm-customer-approval-gate", "checkName": "Confirm customer approval gate", "requiredEvidence": ["customerApprovalRef"], "currentGaR10Status": "readiness_defined", "futureExecutionOwner": "Customer / Governance", "activationGate": "required"},
+    {"checkId": "confirm-engineer-review-gate", "checkName": "Confirm engineer review gate", "requiredEvidence": ["engineerReviewRef"], "currentGaR10Status": "readiness_defined", "futureExecutionOwner": "Engineer / Governance", "activationGate": "required"}
+  ],
+  "customerCoreFunctionDeploymentImpact": [
+    {"function": "Work Order Management, auto + manual", "deploymentDependency": "work-order package version and activation gate", "requiredDeploymentMode": "staged activation with customer approval", "requiredEdgeCapabilities": ["healthcheck script"], "requiredLinkObjects": ["deployment package status contract"], "requiredOneProjection": "work-order deployment readiness", "requiredUmmsCapability": "work management readiness", "requiredUcdeCapability": "approval evidence", "gaR10ReadinessStatus": "defined", "futurePhase": "UMMS-R2"},
+    {"function": "Asset Registry, full lifecycle tracking", "deploymentDependency": "asset/config/mapping package version compatibility", "requiredDeploymentMode": "distributed site with EDGE nodes and central LINK gateway", "requiredEdgeCapabilities": ["config package import validation"], "requiredLinkObjects": ["config version contract"], "requiredOneProjection": "asset deployment readiness", "requiredUmmsCapability": "asset consumption", "requiredUcdeCapability": "mapping evidence", "gaR10ReadinessStatus": "defined", "futurePhase": "Assets-R4"},
+    {"function": "Preventive Maintenance Scheduler", "deploymentDependency": "scheduler package readiness and rollback gate", "requiredDeploymentMode": "staged activation with customer approval", "requiredEdgeCapabilities": ["healthcheck script"], "requiredLinkObjects": ["rollback target reference contract"], "requiredOneProjection": "PM deployment readiness", "requiredUmmsCapability": "PM scheduler alignment", "requiredUcdeCapability": "handoff evidence", "gaR10ReadinessStatus": "defined", "futurePhase": "UMMS-R2"},
+    {"function": "Spare Parts / Inventory Management", "deploymentDependency": "inventory readiness in customer-approved package", "requiredDeploymentMode": "all-in-one read-only review package", "requiredEdgeCapabilities": ["package integrity"], "requiredLinkObjects": ["deployment package status contract"], "requiredOneProjection": "inventory deployment context", "requiredUmmsCapability": "inventory alignment", "requiredUcdeCapability": "review evidence", "gaR10ReadinessStatus": "defined", "futurePhase": "UMMS-R2"},
+    {"function": "Vendor / Contract Management", "deploymentDependency": "contract support and approval evidence", "requiredDeploymentMode": "customer-managed deployment with exported support bundle", "requiredEdgeCapabilities": ["support bundle export"], "requiredLinkObjects": ["remote support bundle contract"], "requiredOneProjection": "vendor deployment context", "requiredUmmsCapability": "vendor/contract alignment", "requiredUcdeCapability": "contract evidence", "gaR10ReadinessStatus": "defined", "futurePhase": "UMMS-R2"},
+    {"function": "Graphics HMI to locate Equipment", "deploymentDependency": "HMI locator package and mapping readiness", "requiredDeploymentMode": "rollback-ready controlled deployment", "requiredEdgeCapabilities": ["config package import validation"], "requiredLinkObjects": ["distributed topology contract"], "requiredOneProjection": "HMI locator deployment readiness", "requiredUmmsCapability": "maintenance context", "requiredUcdeCapability": "locator evidence", "gaR10ReadinessStatus": "defined", "futurePhase": "Airport GA-R10A+"},
+    {"function": "Existing system onboarding", "deploymentDependency": "source-system package and connector readiness", "requiredDeploymentMode": "distributed site with EDGE nodes and central LINK gateway", "requiredEdgeCapabilities": ["connector package import validation"], "requiredLinkObjects": ["distributed topology contract"], "requiredOneProjection": "existing-system deployment readiness", "requiredUmmsCapability": "asset/work alignment", "requiredUcdeCapability": "mapping evidence", "gaR10ReadinessStatus": "defined", "futurePhase": "GA-R7 follow-on"},
+    {"function": "Engineer commissioning diagnostics", "deploymentDependency": "diagnostic package and support bundle readiness", "requiredDeploymentMode": "remote engineer-assisted installation", "requiredEdgeCapabilities": ["precheck script", "healthcheck script", "support bundle export"], "requiredLinkObjects": ["remote support bundle contract"], "requiredOneProjection": "commissioning deployment readiness", "requiredUmmsCapability": "review task alignment", "requiredUcdeCapability": "diagnostic evidence", "gaR10ReadinessStatus": "defined", "futurePhase": "GA-R8 follow-on"},
+    {"function": "Remote overseas deployment", "deploymentDependency": "offline install, remote handoff, approval gate", "requiredDeploymentMode": "offline customer site", "requiredEdgeCapabilities": ["offline install package manifest", "rollback plan"], "requiredLinkObjects": ["deployment package status contract"], "requiredOneProjection": "remote deployment readiness", "requiredUmmsCapability": "maintenance handoff", "requiredUcdeCapability": "handoff evidence", "gaR10ReadinessStatus": "defined", "futurePhase": "GA-R10A"},
+    {"function": "Distributed independent installation", "deploymentDependency": "distributed topology and customer-managed package status", "requiredDeploymentMode": "multi-edge single-link", "requiredEdgeCapabilities": ["local buffer readiness check", "network reachability check"], "requiredLinkObjects": ["multi-EDGE single-LINK topology support"], "requiredOneProjection": "distributed install readiness", "requiredUmmsCapability": "local maintenance context", "requiredUcdeCapability": "local review traceability", "gaR10ReadinessStatus": "defined", "futurePhase": "GA-R10A"}
+  ],
+  "sharedFoundationInterfaceRequirements": {
+    "edgeRequirements": ["Offline install package manifest", "Precheck script", "Install plan", "Upgrade plan", "Rollback plan", "Healthcheck script", "Uninstall plan", "Hardware-key/site-binding status", "Support bundle export", "Config package import validation", "Connector package import validation", "Service/systemd readiness check", "Local buffer readiness check", "Clock/timezone check", "Network reachability check"],
+    "linkRequirements": ["Deployment package status contract", "Distributed topology contract", "LINK gateway health contract", "Delivery route readiness contract", "Remote support bundle contract", "Sync batch status contract", "Audit/evidence chain deployment profile", "Config version contract", "Rollback target reference contract", "Multi-EDGE single-LINK topology support"]
+  },
+  "futureActivationGateModel": {
+    "gates": ["Customer approval gate", "Engineer review gate", "Package integrity gate", "Signature verification gate", "Hardware key gate", "Site binding gate", "Mapping readiness gate", "Diagnostics readiness gate", "Delivery readiness gate", "Rollback readiness gate", "Support bundle readiness gate", "Final production activation gate"],
+    "statement": "GA-R10 defines gates only. No gate execution or approval execution is implemented."
+  },
+  "safetyPosture": {
+    "readOnly": true,
+    "runtimeActivation": false,
+    "productionActivation": false,
+    "dbWrite": false,
+    "approvalExecution": false,
+    "deploymentExecution": false,
+    "remoteCommandExecution": false,
+    "installExecution": false,
+    "upgradeExecution": false,
+    "rollbackExecution": false,
+    "supportBundleExecution": false,
+    "connectorExecution": false,
+    "deviceConnection": false,
+    "edgeRuntimeCall": false,
+    "linkRuntimeCall": false,
+    "oneAdapterIntroduced": false,
+    "customerIdentifierLeakage": false,
+    "localAbsolutePathLeakage": false
+  }
+}
