@@ -1,0 +1,121 @@
+{
+  "releaseFreezeId": "umms-r12a-local-freeze.v1",
+  "currentHead": "72f057b3db4882af73c901d0c81d362477f10885",
+  "branch": "main",
+  "branchState": "main...origin/main [ahead 1]",
+  "baselineCommit": {
+    "commit": "72f057b3db4882af73c901d0c81d362477f10885",
+    "message": "feat(one): add umms readonly frontend uconsole card entry",
+    "passMarker": "ONE_UMMS_R12_READONLY_FRONTEND_UCONSOLE_CARD_ENTRY_PASS"
+  },
+  "r12Summary": {
+    "apiLayer": "UMMS-R11 five-route GET-only read model consumed by frontend",
+    "uiLayer": "UMMS read-only overview card/page",
+    "uconsoleEntry": "Route-bound UConsole-accessible UMMS overview",
+    "runtimeBehaviorAdded": false,
+    "backendBehaviorChanged": false,
+    "frontendExpansionBeyondReadonlyCard": false
+  },
+  "uiEntryDefinition": {
+    "route": "/one/umms/overview",
+    "component": "UmmsReadonlyOverview",
+    "mode": "read-only",
+    "runtime": "disabled",
+    "fallbackMessage": "UMMS readiness data unavailable, read-only fallback active.",
+    "writeActionsPresent": false,
+    "approvalActionsPresent": false,
+    "activationActionsPresent": false,
+    "deploymentActionsPresent": false
+  },
+  "apiEndpoints": [
+    {
+      "method": "GET",
+      "path": "/api/v1/one/umms/package-entry",
+      "runtimeEnabled": false,
+      "dbWriteEnabled": false
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/one/umms/stakeholder-review",
+      "runtimeEnabled": false,
+      "dbWriteEnabled": false
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/one/umms/readiness-summary",
+      "runtimeEnabled": false,
+      "dbWriteEnabled": false
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/one/umms/customer-core-functions",
+      "runtimeEnabled": false,
+      "dbWriteEnabled": false
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/one/umms/safety-posture",
+      "runtimeEnabled": false,
+      "dbWriteEnabled": false
+    }
+  ],
+  "safetyFlags": {
+    "readOnly": true,
+    "getOnly": true,
+    "productionActivation": false,
+    "runtimeActivation": false,
+    "dbWrite": false,
+    "approvalExecution": false,
+    "workflowExecution": false,
+    "writeActionsEnabled": false,
+    "workOrderRuntimeExecution": false,
+    "pmExecution": false,
+    "inventoryTransaction": false,
+    "vendorContractSlaRuntime": false,
+    "evidenceClosureExecution": false,
+    "hmiRuntimeExecution": false,
+    "deviceConnection": false,
+    "connectorExecution": false,
+    "edgeRuntimeCall": false,
+    "linkRuntimeCall": false,
+    "oneAdapterIntroduced": false,
+    "customerIdentifierLeakage": false,
+    "localAbsolutePathLeakage": false
+  },
+  "dependencyChainR2ToR12": [
+    "ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_PASS",
+    "ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+    "ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_PASS",
+    "ONE_UMMS_R3A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+    "ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_PASS",
+    "ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+    "ONE_UMMS_R5_PREVENTIVE_MAINTENANCE_SCHEDULE_READINESS_PASS",
+    "ONE_UMMS_R5A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+    "ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_PASS",
+    "ONE_UMMS_R6A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+    "ONE_UMMS_R7_VENDOR_CONTRACT_SLA_READINESS_PASS",
+    "ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+    "ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_PASS",
+    "ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+    "ONE_UMMS_R9_AIRPORT_HMI_LOCATOR_BINDING_READINESS_PASS",
+    "ONE_UMMS_R9A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+    "ONE_UMMS_R10_STAKEHOLDER_REVIEW_PACKAGE_PASS",
+    "ONE_UMMS_R10A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+    "ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_READINESS_PASS",
+    "ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+    "ONE_UMMS_R11_READONLY_API_ENTRY_SKELETON_PASS",
+    "ONE_UMMS_R11A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+    "ONE_UMMS_R12_READONLY_FRONTEND_UCONSOLE_CARD_ENTRY_PASS"
+  ],
+  "optionalTagPlan": {
+    "tagName": "umms-r12-readonly-frontend-uconsole-entry-local-freeze-20260621",
+    "commandsExecuted": false,
+    "commandsForFutureUseOnly": [
+      "git tag -a umms-r12-readonly-frontend-uconsole-entry-local-freeze-20260621 -m \"VANTARIS ONE UMMS-R12 read-only frontend UConsole entry local freeze\"",
+      "git push origin main",
+      "git push origin umms-r12-readonly-frontend-uconsole-entry-local-freeze-20260621"
+    ]
+  },
+  "tagCreated": false,
+  "pushPerformed": false
+}
