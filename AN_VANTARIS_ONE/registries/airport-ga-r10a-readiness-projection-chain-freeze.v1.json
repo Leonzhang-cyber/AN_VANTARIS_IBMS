@@ -1,0 +1,139 @@
+{
+  "releaseFreezeId": "airport-ga-r10a-readiness-projection-chain-freeze-20260621",
+  "currentHead": "51b23317441726151110ff544869c3e56fd3f91f",
+  "previousPushedTag": "airport-ga-readonly-stakeholder-review-local-freeze-20260621",
+  "branchStatus": "main...origin/main [ahead 5]",
+  "commitChain": [
+    {
+      "task": "GA-R6 LINK Integration Readiness Projection",
+      "commit": "dbf88514cb48b2994dd69276065d0b3316f08474",
+      "message": "docs(one): add airport link integration readiness projection",
+      "passMarker": "ONE_AIRPORT_GA_R6_LINK_INTEGRATION_READINESS_PROJECTION_PASS"
+    },
+    {
+      "task": "GA-R7 Existing System Onboarding + Mapping Readiness",
+      "commit": "7b7bd04ddfe27eeceecd572a78d532c77fc4a857",
+      "message": "docs(one): add airport existing system onboarding readiness",
+      "passMarker": "ONE_AIRPORT_GA_R7_EXISTING_SYSTEM_ONBOARDING_MAPPING_READINESS_PASS"
+    },
+    {
+      "task": "GA-R8 Engineer Commissioning Diagnostics Readiness",
+      "commit": "30ba3536e45feb9c7030c1625f4338688f386308",
+      "message": "docs(one): add airport engineer commissioning readiness",
+      "passMarker": "ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_PASS"
+    },
+    {
+      "task": "GA-R9 Graphics HMI Equipment Locator Readiness",
+      "commit": "a18818644fa1fefa644753fd4cd31c10e3fcde0a",
+      "message": "docs(one): add airport graphics hmi locator readiness",
+      "passMarker": "ONE_AIRPORT_GA_R9_GRAPHICS_HMI_EQUIPMENT_LOCATOR_READINESS_PASS"
+    },
+    {
+      "task": "GA-R10 Distributed / Remote Deployment Readiness Package",
+      "commit": "51b23317441726151110ff544869c3e56fd3f91f",
+      "message": "docs(one): add airport remote deployment readiness",
+      "passMarker": "ONE_AIRPORT_GA_R10_DISTRIBUTED_REMOTE_DEPLOYMENT_READINESS_PASS"
+    }
+  ],
+  "passMarkers": [
+    "ONE_AIRPORT_GA_R6_LINK_INTEGRATION_READINESS_PROJECTION_PASS",
+    "ONE_AIRPORT_GA_R7_EXISTING_SYSTEM_ONBOARDING_MAPPING_READINESS_PASS",
+    "ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_PASS",
+    "ONE_AIRPORT_GA_R9_GRAPHICS_HMI_EQUIPMENT_LOCATOR_READINESS_PASS",
+    "ONE_AIRPORT_GA_R10_DISTRIBUTED_REMOTE_DEPLOYMENT_READINESS_PASS",
+    "ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS"
+  ],
+  "readinessProjectionChain": [
+    "AN_VANTARIS_ONE/projections/airport-link-integration-readiness.v1.json",
+    "AN_VANTARIS_ONE/projections/airport-existing-system-onboarding-mapping-readiness.v1.json",
+    "AN_VANTARIS_ONE/projections/airport-engineer-commissioning-diagnostics-readiness.v1.json",
+    "AN_VANTARIS_ONE/projections/airport-graphics-hmi-equipment-locator-readiness.v1.json",
+    "AN_VANTARIS_ONE/projections/airport-distributed-remote-deployment-readiness.v1.json"
+  ],
+  "customerCoreFunctionCoverage": [
+    "Work Order Management, auto + manual",
+    "Asset Registry, full lifecycle tracking",
+    "Preventive Maintenance Scheduler",
+    "Spare Parts / Inventory Management",
+    "Vendor / Contract Management",
+    "Graphics HMI to locate Equipment",
+    "Existing system onboarding",
+    "Engineer commissioning diagnostics",
+    "Remote overseas deployment",
+    "Distributed independent installation"
+  ],
+  "sharedFoundationInterfaceRequirements": {
+    "edgeRequirements": [
+      "Airport ELV connector matrix",
+      "Existing system onboarding profile",
+      "Tag mapping and normalization",
+      "Engineer commissioning diagnostics CLI",
+      "Sample payload preview",
+      "Normalization preview",
+      "HMI locator data foundation",
+      "Offline install package manifest",
+      "Hardware-key/site-binding status",
+      "Support bundle export",
+      "Healthcheck / precheck / rollback readiness",
+      "Remote deployment package readiness"
+    ],
+    "linkRequirements": [
+      "Airport ELV canonical envelope",
+      "Source-system health contract",
+      "Delivery readiness contract",
+      "Audit/evidence chain Airport profile",
+      "Work-order trigger contract",
+      "Asset/location reference contract",
+      "HMI drawing/symbol reference fields",
+      "Mapping profile contract",
+      "Distributed topology contract",
+      "Deployment package status contract",
+      "Remote support bundle contract",
+      "Delivery / ACK / retry / DLQ diagnostics"
+    ]
+  },
+  "safetyMatrix": {
+    "readOnly": true,
+    "productionActivation": false,
+    "runtimeActivation": false,
+    "dbWrite": false,
+    "approvalExecution": false,
+    "deploymentExecution": false,
+    "installExecution": false,
+    "upgradeExecution": false,
+    "rollbackExecution": false,
+    "remoteCommandExecution": false,
+    "diagnosticsExecution": false,
+    "hmiRuntimeExecution": false,
+    "hmiControlExecution": false,
+    "drawingUpload": false,
+    "supportBundleExecution": false,
+    "connectorExecution": false,
+    "deviceConnection": false,
+    "edgeRuntimeCall": false,
+    "linkRuntimeCall": false,
+    "oneAdapterIntroduced": false,
+    "customerIdentifierLeakage": false,
+    "localAbsolutePathLeakage": false
+  },
+  "validationMatrix": {
+    "ONE_AIRPORT_GA_R6_LINK_INTEGRATION_READINESS_PROJECTION_PASS": "PASS",
+    "ONE_AIRPORT_GA_R7_EXISTING_SYSTEM_ONBOARDING_MAPPING_READINESS_PASS": "PASS",
+    "ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_PASS": "PASS",
+    "ONE_AIRPORT_GA_R9_GRAPHICS_HMI_EQUIPMENT_LOCATOR_READINESS_PASS": "PASS",
+    "ONE_AIRPORT_GA_R10_DISTRIBUTED_REMOTE_DEPLOYMENT_READINESS_PASS": "PASS",
+    "ONE_PACKAGE_ROUTE_ENFORCEMENT_PASS": "PASS",
+    "ONE_BOUNDARY_BASELINE_PASS": "PASS",
+    "Projection JSON validation": "PASS",
+    "Registry JSON validation": "PASS"
+  },
+  "optionalTagPlan": {
+    "tagName": "airport-ga-readiness-projection-chain-local-freeze-20260621",
+    "documentedOnly": true,
+    "commandsExecuted": false,
+    "tagCreated": false,
+    "pushPerformed": false
+  },
+  "pushPerformed": false,
+  "tagCreated": false
+}
