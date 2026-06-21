@@ -1,0 +1,208 @@
+{
+  "releaseFreezeId": "umms-package-uconsole-stakeholder-entry-local-freeze.v1",
+  "currentHead": "63e8e3bc3c258e0e329fdbb974de9f566fd21037",
+  "branchStatus": "main...origin/main [ahead 1]",
+  "latestArchivedTag": "umms-r10-stakeholder-review-package-local-freeze-20260621",
+  "ummsPackageUconsoleEntryCommit": {
+    "commit": "63e8e3bc3c258e0e329fdbb974de9f566fd21037",
+    "message": "docs(one): add umms package uconsole stakeholder entry readiness",
+    "passMarker": "ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_READINESS_PASS"
+  },
+  "passMarkers": [
+    "ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_READINESS_PASS",
+    "ONE_UMMS_R10A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+    "ONE_UMMS_R10_STAKEHOLDER_REVIEW_PACKAGE_PASS",
+    "ONE_UMMS_R9A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+    "ONE_UMMS_R9_AIRPORT_HMI_LOCATOR_BINDING_READINESS_PASS",
+    "ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+    "ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_PASS",
+    "ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+    "ONE_UMMS_R7_VENDOR_CONTRACT_SLA_READINESS_PASS",
+    "ONE_UMMS_R6A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+    "ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_PASS",
+    "ONE_UMMS_R5A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+    "ONE_UMMS_R5_PREVENTIVE_MAINTENANCE_SCHEDULE_READINESS_PASS",
+    "ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+    "ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_PASS",
+    "ONE_UMMS_R3A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+    "ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_PASS",
+    "ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+    "ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_PASS",
+    "ONE_PACKAGE_ROUTE_ENFORCEMENT_PASS",
+    "ONE_BOUNDARY_BASELINE_PASS"
+  ],
+  "freezeScope": [
+    "UMMS package registry metadata",
+    "UMMS UConsole stakeholder entry readiness metadata",
+    "UMMS stakeholder review package reference",
+    "UMMS-R2 through UMMS-R10 readiness chain reference",
+    "Customer core function coverage",
+    "UConsole read-only entry posture",
+    "Safety posture",
+    "Future roadmap"
+  ],
+  "packageUconsoleEntrySummary": {
+    "packageVisible": true,
+    "packageId": "umms",
+    "uconsoleEntryId": "uconsole-umms-stakeholder-review",
+    "metadataBacked": true,
+    "readOnly": true,
+    "stakeholderReviewPackageReference": "ONE_UMMS_R10_STAKEHOLDER_REVIEW_PACKAGE.md",
+    "runtimeActionsHidden": true,
+    "approvalActionsHidden": true,
+    "activationActionsHidden": true,
+    "writeActionsHidden": true,
+    "deploymentActionsHidden": true,
+    "backendFrontendUconsoleRuntimeBehaviorChanged": false
+  },
+  "customerCoreFunctionCoverage": [
+    {
+      "function": "Work Order Management, auto + manual",
+      "currentVisibilityStatus": "stakeholder_review_ready",
+      "readinessStage": "UMMS-R2/R3/R4/R5/R8/R9/R10",
+      "runtimeEnabled": false,
+      "uconsoleVisible": true,
+      "futureOwner": "ONE Work Management with UMMS maintenance extensions",
+      "remainingGap": "Runtime work-order implementation requires future approval"
+    },
+    {
+      "function": "Asset Registry, full lifecycle tracking",
+      "currentVisibilityStatus": "stakeholder_review_ready",
+      "readinessStage": "UMMS-R2/R5/R6/R7/R8/R9/R10",
+      "runtimeEnabled": false,
+      "uconsoleVisible": true,
+      "futureOwner": "ONE Asset Graph / Layer 3",
+      "remainingGap": "Canonical Asset Graph implementation remains separate"
+    },
+    {
+      "function": "Preventive Maintenance Scheduler",
+      "currentVisibilityStatus": "stakeholder_review_ready",
+      "readinessStage": "UMMS-R2/R5/R6/R8/R9/R10",
+      "runtimeEnabled": false,
+      "uconsoleVisible": true,
+      "futureOwner": "UMMS PM implementation phase",
+      "remainingGap": "PM runtime and automatic generation remain future"
+    },
+    {
+      "function": "Spare Parts / Inventory Management",
+      "currentVisibilityStatus": "stakeholder_review_ready",
+      "readinessStage": "UMMS-R2/R6/R7/R8/R9/R10",
+      "runtimeEnabled": false,
+      "uconsoleVisible": true,
+      "futureOwner": "UMMS inventory implementation phase",
+      "remainingGap": "Stock mutation and procurement execution remain future"
+    },
+    {
+      "function": "Vendor / Contract Management",
+      "currentVisibilityStatus": "stakeholder_review_ready",
+      "readinessStage": "UMMS-R2/R7/R8/R9/R10",
+      "runtimeEnabled": false,
+      "uconsoleVisible": true,
+      "futureOwner": "UMMS vendor/contract/SLA implementation phase",
+      "remainingGap": "Vendor transactions, contract execution, and SLA enforcement remain future"
+    },
+    {
+      "function": "Graphics HMI to locate Equipment",
+      "currentVisibilityStatus": "stakeholder_review_ready",
+      "readinessStage": "UMMS-R9/R10",
+      "runtimeEnabled": false,
+      "uconsoleVisible": true,
+      "futureOwner": "Asset Graph + HMI projection consumer + UMMS",
+      "remainingGap": "Rendering, drawing upload, and device interaction remain future"
+    },
+    {
+      "function": "Existing system onboarding",
+      "currentVisibilityStatus": "dependency_ready_for_review",
+      "readinessStage": "UMMS-R3/R4/R9/R10",
+      "runtimeEnabled": false,
+      "uconsoleVisible": true,
+      "futureOwner": "EDGE/LINK shared foundation",
+      "remainingGap": "Real connector execution remains future"
+    },
+    {
+      "function": "Engineer commissioning diagnostics",
+      "currentVisibilityStatus": "dependency_ready_for_review",
+      "readinessStage": "UMMS-R4/R8/R9/R10",
+      "runtimeEnabled": false,
+      "uconsoleVisible": true,
+      "futureOwner": "EDGE diagnostics + UCDE evidence",
+      "remainingGap": "Real diagnostics execution remains future"
+    },
+    {
+      "function": "Remote overseas deployment",
+      "currentVisibilityStatus": "handoff_ready_for_review",
+      "readinessStage": "UMMS-R8/R9/R10",
+      "runtimeEnabled": false,
+      "uconsoleVisible": true,
+      "futureOwner": "Deployment/release governance with UCDE",
+      "remainingGap": "Deployment execution remains future"
+    },
+    {
+      "function": "Distributed independent installation",
+      "currentVisibilityStatus": "handoff_ready_for_review",
+      "readinessStage": "UMMS-R8/R9/R10",
+      "runtimeEnabled": false,
+      "uconsoleVisible": true,
+      "futureOwner": "Deployment/release governance with shared foundations",
+      "remainingGap": "Runtime activation and distributed installation execution remain future"
+    }
+  ],
+  "safetyMatrix": {
+    "readOnly": true,
+    "productionActivation": false,
+    "runtimeActivation": false,
+    "dbWrite": false,
+    "approvalExecution": false,
+    "workflowExecution": false,
+    "uconsoleWriteBehavior": false,
+    "workOrderRuntimeExecution": false,
+    "pmExecution": false,
+    "inventoryTransaction": false,
+    "vendorContractSlaRuntime": false,
+    "evidenceClosureExecution": false,
+    "hmiRuntimeExecution": false,
+    "deviceConnection": false,
+    "connectorExecution": false,
+    "edgeRuntimeCall": false,
+    "linkRuntimeCall": false,
+    "oneAdapterIntroduced": false,
+    "customerIdentifierLeakage": false,
+    "localAbsolutePathLeakage": false
+  },
+  "validationMatrix": {
+    "ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_READINESS_PASS": "PASS",
+    "ONE_UMMS_R10A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS": "PASS",
+    "ONE_UMMS_R10_STAKEHOLDER_REVIEW_PACKAGE_PASS": "PASS",
+    "ONE_UMMS_R9A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS": "PASS",
+    "ONE_UMMS_R9_AIRPORT_HMI_LOCATOR_BINDING_READINESS_PASS": "PASS",
+    "ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS": "PASS",
+    "ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_PASS": "PASS",
+    "ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS": "PASS",
+    "ONE_UMMS_R7_VENDOR_CONTRACT_SLA_READINESS_PASS": "PASS",
+    "ONE_UMMS_R6A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS": "PASS",
+    "ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_PASS": "PASS",
+    "ONE_UMMS_R5A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS": "PASS",
+    "ONE_UMMS_R5_PREVENTIVE_MAINTENANCE_SCHEDULE_READINESS_PASS": "PASS",
+    "ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS": "PASS",
+    "ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_PASS": "PASS",
+    "ONE_UMMS_R3A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS": "PASS",
+    "ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_PASS": "PASS",
+    "ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS": "PASS",
+    "ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_PASS": "PASS",
+    "ONE_PACKAGE_ROUTE_ENFORCEMENT_PASS": "PASS",
+    "ONE_BOUNDARY_BASELINE_PASS": "PASS",
+    "Registry JSON validation": "PASS"
+  },
+  "optionalTagPlan": {
+    "tagName": "umms-package-uconsole-stakeholder-entry-readiness-local-freeze-20260621",
+    "commandsExecuted": false,
+    "commandsForFutureUseOnly": [
+      "git tag -a umms-package-uconsole-stakeholder-entry-readiness-local-freeze-20260621 -m \"VANTARIS ONE UMMS package UConsole stakeholder entry readiness local freeze\"",
+      "git push origin main",
+      "git push origin umms-package-uconsole-stakeholder-entry-readiness-local-freeze-20260621"
+    ]
+  },
+  "pushPerformed": false,
+  "tagCreated": false
+}
+
