@@ -1,0 +1,262 @@
+{
+  "metadata": {
+    "registryId": "umms-package-uconsole-stakeholder-entry-readiness.v1",
+    "platform": "VANTARIS ONE",
+    "module": "UMMS",
+    "entryType": "package_uconsole_stakeholder_entry_readiness",
+    "releaseContext": "UMMS Package / UConsole Stakeholder Entry Readiness",
+    "readOnly": true,
+    "runtimeActivation": false,
+    "productionActivation": false,
+    "dbWrite": false,
+    "approvalExecution": false,
+    "workflowExecution": false,
+    "workOrderRuntimeExecution": false,
+    "pmExecution": false,
+    "inventoryTransaction": false,
+    "vendorContractSlaRuntime": false,
+    "evidenceClosureExecution": false,
+    "hmiRuntimeExecution": false,
+    "edgeRuntimeCall": false,
+    "linkRuntimeCall": false,
+    "oneAdapterIntroduced": false
+  },
+  "packageEntry": {
+    "packageId": "umms",
+    "packageName": "Unified Maintenance Management System",
+    "packageDisplayName": "UMMS",
+    "packageCategory": "operations_maintenance",
+    "packageStatus": "stakeholder_review_ready",
+    "packageVisibility": "uconsole_visible",
+    "entryMode": "read_only_stakeholder_review",
+    "runtimeEnabled": false,
+    "activationEnabled": false,
+    "workflowEnabled": false,
+    "approvalEnabled": false,
+    "dbWriteEnabled": false
+  },
+  "stakeholderReviewPackageReference": {
+    "packageDocument": "ONE_UMMS_R10_STAKEHOLDER_REVIEW_PACKAGE.md",
+    "packageReport": "ONE_UMMS_R10_STAKEHOLDER_REVIEW_PACKAGE_REPORT.md",
+    "packageRegistry": "AN_VANTARIS_ONE/registries/umms-stakeholder-review-package.v1.json",
+    "publishedTag": "umms-r10-stakeholder-review-package-local-freeze-20260621"
+  },
+  "ummsReadinessChainReference": [
+    {
+      "stage": "UMMS-R2",
+      "title": "UMMS-R2 Work Order / Asset / PM Domain Alignment",
+      "status": "pushed_tagged_frozen",
+      "passMarker": "ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_PASS",
+      "tagReference": "umms-r2-work-asset-pm-domain-alignment-local-freeze-20260621"
+    },
+    {
+      "stage": "UMMS-R3",
+      "title": "UMMS-R3 Manual Work Order Read-only Queue / Draft Model",
+      "status": "pushed_tagged_frozen",
+      "passMarker": "ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_PASS",
+      "tagReference": "umms-r3-manual-work-order-draft-model-local-freeze-20260621"
+    },
+    {
+      "stage": "UMMS-R4",
+      "title": "UMMS-R4 Work Order Lifecycle State Model + Validation Gate",
+      "status": "pushed_tagged_frozen",
+      "passMarker": "ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_PASS",
+      "tagReference": "umms-r4-work-order-lifecycle-validation-gate-local-freeze-20260621"
+    },
+    {
+      "stage": "UMMS-R5",
+      "title": "UMMS-R5 Preventive Maintenance Schedule Readiness",
+      "status": "pushed_tagged_frozen",
+      "passMarker": "ONE_UMMS_R5_PREVENTIVE_MAINTENANCE_SCHEDULE_READINESS_PASS",
+      "tagReference": "umms-r5-preventive-maintenance-schedule-readiness-local-freeze-20260621"
+    },
+    {
+      "stage": "UMMS-R6",
+      "title": "UMMS-R6 Spare Parts / Inventory Readiness",
+      "status": "pushed_tagged_frozen",
+      "passMarker": "ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_PASS",
+      "tagReference": "umms-r6-spare-parts-inventory-readiness-local-freeze-20260621"
+    },
+    {
+      "stage": "UMMS-R7",
+      "title": "UMMS-R7 Vendor / Contract / SLA Readiness",
+      "status": "pushed_tagged_frozen",
+      "passMarker": "ONE_UMMS_R7_VENDOR_CONTRACT_SLA_READINESS_PASS",
+      "tagReference": "umms-r7-vendor-contract-sla-readiness-local-freeze-20260621"
+    },
+    {
+      "stage": "UMMS-R8",
+      "title": "UMMS-R8 UMMS + UCDE Evidence Closure Alignment",
+      "status": "pushed_tagged_frozen",
+      "passMarker": "ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_PASS",
+      "tagReference": "umms-r8-ucde-evidence-closure-alignment-local-freeze-20260621"
+    },
+    {
+      "stage": "UMMS-R9",
+      "title": "UMMS-R9 UMMS + Airport HMI Locator Binding Readiness",
+      "status": "pushed_tagged_frozen",
+      "passMarker": "ONE_UMMS_R9_AIRPORT_HMI_LOCATOR_BINDING_READINESS_PASS",
+      "tagReference": "umms-r9-airport-hmi-locator-binding-readiness-local-freeze-20260621"
+    },
+    {
+      "stage": "UMMS-R10",
+      "title": "UMMS-R10 Stakeholder Review Package",
+      "status": "pushed_tagged_frozen",
+      "passMarker": "ONE_UMMS_R10_STAKEHOLDER_REVIEW_PACKAGE_PASS",
+      "tagReference": "umms-r10-stakeholder-review-package-local-freeze-20260621"
+    }
+  ],
+  "uconsoleEntryReadiness": {
+    "uconsoleEntryId": "uconsole-umms-stakeholder-review",
+    "entryTitle": "UMMS Stakeholder Review",
+    "entrySubtitle": "Read-only stakeholder review package for Unified Maintenance Management readiness",
+    "entryVisibility": "visible",
+    "entryAudience": [
+      "customer",
+      "engineer",
+      "admin"
+    ],
+    "entryPermissions": "read_only",
+    "entryRouteType": "metadata_or_readonly_projection",
+    "runtimeActionsVisible": false,
+    "approvalActionsVisible": false,
+    "activationActionsVisible": false,
+    "writeActionsVisible": false,
+    "deploymentActionsVisible": false
+  },
+  "uconsoleCardModel": {
+    "readOnly": true,
+    "fields": [
+      "packageName",
+      "packageStatus",
+      "readinessStatus",
+      "stakeholderReviewStatus",
+      "latestFreezeTag",
+      "coveredCapabilities",
+      "customerCoreFunctionCoverage",
+      "knownLimitations",
+      "nextRecommendedStep",
+      "safetyStatus"
+    ]
+  },
+  "customerCoreFunctionCoverage": [
+    {
+      "function": "Work Order Management, auto + manual",
+      "displayInUconsole": true,
+      "coverageStatus": "stakeholder_review_ready",
+      "readinessStage": "UMMS-R2/R3/R4/R5/R8/R9/R10",
+      "runtimeEnabled": false,
+      "futureOwner": "ONE Work Management with UMMS maintenance extensions",
+      "remainingGap": "Runtime work-order implementation requires future approval"
+    },
+    {
+      "function": "Asset Registry, full lifecycle tracking",
+      "displayInUconsole": true,
+      "coverageStatus": "stakeholder_review_ready",
+      "readinessStage": "UMMS-R2/R5/R6/R7/R8/R9/R10",
+      "runtimeEnabled": false,
+      "futureOwner": "ONE Asset Graph / Layer 3",
+      "remainingGap": "Canonical Asset Graph implementation remains separate"
+    },
+    {
+      "function": "Preventive Maintenance Scheduler",
+      "displayInUconsole": true,
+      "coverageStatus": "stakeholder_review_ready",
+      "readinessStage": "UMMS-R2/R5/R6/R8/R9/R10",
+      "runtimeEnabled": false,
+      "futureOwner": "UMMS PM implementation phase",
+      "remainingGap": "PM runtime and automatic generation remain future"
+    },
+    {
+      "function": "Spare Parts / Inventory Management",
+      "displayInUconsole": true,
+      "coverageStatus": "stakeholder_review_ready",
+      "readinessStage": "UMMS-R2/R6/R7/R8/R9/R10",
+      "runtimeEnabled": false,
+      "futureOwner": "UMMS inventory implementation phase",
+      "remainingGap": "Stock mutation and procurement execution remain future"
+    },
+    {
+      "function": "Vendor / Contract Management",
+      "displayInUconsole": true,
+      "coverageStatus": "stakeholder_review_ready",
+      "readinessStage": "UMMS-R2/R7/R8/R9/R10",
+      "runtimeEnabled": false,
+      "futureOwner": "UMMS vendor/contract/SLA implementation phase",
+      "remainingGap": "Vendor transactions, contract execution, and SLA enforcement remain future"
+    },
+    {
+      "function": "Graphics HMI to locate Equipment",
+      "displayInUconsole": true,
+      "coverageStatus": "stakeholder_review_ready",
+      "readinessStage": "UMMS-R9/R10",
+      "runtimeEnabled": false,
+      "futureOwner": "Asset Graph + HMI projection consumer + UMMS",
+      "remainingGap": "Rendering, drawing upload, and device interaction remain future"
+    },
+    {
+      "function": "Existing system onboarding",
+      "displayInUconsole": true,
+      "coverageStatus": "dependency_ready_for_review",
+      "readinessStage": "UMMS-R3/R4/R9/R10",
+      "runtimeEnabled": false,
+      "futureOwner": "EDGE/LINK shared foundation",
+      "remainingGap": "Real connector execution remains future"
+    },
+    {
+      "function": "Engineer commissioning diagnostics",
+      "displayInUconsole": true,
+      "coverageStatus": "dependency_ready_for_review",
+      "readinessStage": "UMMS-R4/R8/R9/R10",
+      "runtimeEnabled": false,
+      "futureOwner": "EDGE diagnostics + UCDE evidence",
+      "remainingGap": "Real diagnostics execution remains future"
+    },
+    {
+      "function": "Remote overseas deployment",
+      "displayInUconsole": true,
+      "coverageStatus": "handoff_ready_for_review",
+      "readinessStage": "UMMS-R8/R9/R10",
+      "runtimeEnabled": false,
+      "futureOwner": "Deployment/release governance with UCDE",
+      "remainingGap": "Deployment execution remains future"
+    },
+    {
+      "function": "Distributed independent installation",
+      "displayInUconsole": true,
+      "coverageStatus": "handoff_ready_for_review",
+      "readinessStage": "UMMS-R8/R9/R10",
+      "runtimeEnabled": false,
+      "futureOwner": "Deployment/release governance with shared foundations",
+      "remainingGap": "Runtime activation and distributed installation execution remain future"
+    }
+  ],
+  "safetyPosture": {
+    "readOnly": true,
+    "productionActivation": false,
+    "runtimeActivation": false,
+    "dbWrite": false,
+    "approvalExecution": false,
+    "workflowExecution": false,
+    "workOrderRuntimeExecution": false,
+    "pmExecution": false,
+    "inventoryTransaction": false,
+    "vendorContractSlaRuntime": false,
+    "evidenceClosureExecution": false,
+    "hmiRuntimeExecution": false,
+    "deviceConnection": false,
+    "connectorExecution": false,
+    "edgeRuntimeCall": false,
+    "linkRuntimeCall": false,
+    "oneAdapterIntroduced": false,
+    "customerIdentifierLeakage": false,
+    "localAbsolutePathLeakage": false
+  },
+  "futureRoadmap": [
+    "UMMS package / UConsole stakeholder entry local freeze",
+    "UMMS package / UConsole stakeholder entry tag + push archive",
+    "UMMS read-only API implementation, future",
+    "UMMS read-only frontend implementation, future",
+    "UMMS runtime implementation, future after explicit approval only"
+  ]
+}
