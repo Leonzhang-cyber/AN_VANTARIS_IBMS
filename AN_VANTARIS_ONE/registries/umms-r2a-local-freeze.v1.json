@@ -1,0 +1,100 @@
+{
+  "releaseFreezeId": "umms-r2a-local-freeze-20260621",
+  "currentHead": "5ade7e70347b7beb881ebaa29b763d9ecde575e1",
+  "publishedAirportTags": [
+    "airport-ga-readonly-stakeholder-review-local-freeze-20260621",
+    "airport-ga-readiness-projection-chain-local-freeze-20260621"
+  ],
+  "branchStatus": "main...origin/main [ahead 1]",
+  "ummsR2Commit": {
+    "commit": "5ade7e70347b7beb881ebaa29b763d9ecde575e1",
+    "message": "docs(one): add umms work asset pm domain alignment",
+    "passMarker": "ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_PASS"
+  },
+  "passMarkers": [
+    "ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_PASS",
+    "ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+    "ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+    "ONE_AIRPORT_GA_R10_DISTRIBUTED_REMOTE_DEPLOYMENT_READINESS_PASS",
+    "ONE_AIRPORT_GA_R9_GRAPHICS_HMI_EQUIPMENT_LOCATOR_READINESS_PASS",
+    "ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_PASS",
+    "ONE_AIRPORT_GA_R7_EXISTING_SYSTEM_ONBOARDING_MAPPING_READINESS_PASS",
+    "ONE_AIRPORT_GA_R6_LINK_INTEGRATION_READINESS_PROJECTION_PASS"
+  ],
+  "freezeScope": [
+    "UMMS generic domain alignment",
+    "Work Order domain model",
+    "Work Order lifecycle model",
+    "Work Order trigger alignment",
+    "Asset Registry domain model",
+    "Asset lifecycle model",
+    "Preventive Maintenance domain model",
+    "Preventive Maintenance trigger model",
+    "Airport-to-UMMS mapping",
+    "Customer core function alignment",
+    "Shared EDGE/LINK/UCDE dependency map",
+    "Future UMMS roadmap"
+  ],
+  "domainAlignmentSummary": {
+    "ummsGeneric": true,
+    "airportSpecificLogicInCore": false,
+    "airportSourceIndustryUseCaseOnly": true,
+    "runtimeExecution": false
+  },
+  "customerCoreFunctionCoverage": [
+    "Work Order Management, auto + manual",
+    "Asset Registry, full lifecycle tracking",
+    "Preventive Maintenance Scheduler",
+    "Spare Parts / Inventory Management",
+    "Vendor / Contract Management",
+    "Graphics HMI to locate Equipment",
+    "Existing system onboarding",
+    "Engineer commissioning diagnostics",
+    "Remote overseas deployment",
+    "Distributed independent installation"
+  ],
+  "safetyMatrix": {
+    "readOnly": true,
+    "productionActivation": false,
+    "runtimeActivation": false,
+    "dbWrite": false,
+    "approvalExecution": false,
+    "workflowExecution": false,
+    "workOrderCreation": false,
+    "pmScheduleExecution": false,
+    "assetLifecycleWrite": false,
+    "inventoryTransaction": false,
+    "vendorContractExecution": false,
+    "deploymentExecution": false,
+    "remoteCommandExecution": false,
+    "connectorExecution": false,
+    "deviceConnection": false,
+    "edgeRuntimeCall": false,
+    "linkRuntimeCall": false,
+    "oneAdapterIntroduced": false,
+    "customerIdentifierLeakage": false,
+    "localAbsolutePathLeakage": false
+  },
+  "validationMatrix": {
+    "ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_PASS": "PASS",
+    "ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS": "PASS",
+    "ONE_AIRPORT_GA_R10_DISTRIBUTED_REMOTE_DEPLOYMENT_READINESS_PASS": "PASS",
+    "ONE_AIRPORT_GA_R9_GRAPHICS_HMI_EQUIPMENT_LOCATOR_READINESS_PASS": "PASS",
+    "ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_PASS": "PASS",
+    "ONE_AIRPORT_GA_R7_EXISTING_SYSTEM_ONBOARDING_MAPPING_READINESS_PASS": "PASS",
+    "ONE_AIRPORT_GA_R6_LINK_INTEGRATION_READINESS_PROJECTION_PASS": "PASS",
+    "ONE_PACKAGE_ROUTE_ENFORCEMENT_PASS": "PASS",
+    "ONE_BOUNDARY_BASELINE_PASS": "PASS",
+    "Projection JSON validation": "PASS",
+    "Registry JSON validation": "PASS"
+  },
+  "optionalTagPlan": {
+    "tagName": "umms-r2-work-asset-pm-domain-alignment-local-freeze-20260621",
+    "documentedOnly": true,
+    "commandsExecuted": false,
+    "tagCreated": false,
+    "pushPerformed": false
+  },
+  "pushPerformed": false,
+  "tagCreated": false
+}
