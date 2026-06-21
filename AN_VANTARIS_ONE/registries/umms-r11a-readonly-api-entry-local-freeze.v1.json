@@ -1,0 +1,97 @@
+{
+  "releaseFreezeId": "umms-r11a-readonly-api-entry-local-freeze.v1",
+  "currentHead": "0b0587f071030158b200d2fec5e18a80ffc482aa",
+  "branchStatus": "main...origin/main [ahead 1]",
+  "latestArchivedTag": "umms-package-uconsole-stakeholder-entry-readiness-local-freeze-20260621",
+  "ummsR11Commit": {
+    "commit": "0b0587f071030158b200d2fec5e18a80ffc482aa",
+    "message": "feat(one): add umms readonly api entry skeleton",
+    "passMarker": "ONE_UMMS_R11_READONLY_API_ENTRY_SKELETON_PASS"
+  },
+  "passMarkers": [
+    "ONE_UMMS_R11_READONLY_API_ENTRY_SKELETON_PASS",
+    "ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+    "ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_READINESS_PASS",
+    "ONE_UMMS_R10A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+    "ONE_UMMS_R10_STAKEHOLDER_REVIEW_PACKAGE_PASS",
+    "ONE_PACKAGE_ROUTE_ENFORCEMENT_PASS",
+    "ONE_BOUNDARY_BASELINE_PASS"
+  ],
+  "frozenApiScope": [
+    {
+      "method": "GET",
+      "path": "/api/v1/one/umms/package-entry",
+      "runtimeEnabled": false,
+      "dbWriteEnabled": false
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/one/umms/stakeholder-review",
+      "runtimeEnabled": false,
+      "dbWriteEnabled": false
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/one/umms/readiness-summary",
+      "runtimeEnabled": false,
+      "dbWriteEnabled": false
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/one/umms/customer-core-functions",
+      "runtimeEnabled": false,
+      "dbWriteEnabled": false
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/one/umms/safety-posture",
+      "runtimeEnabled": false,
+      "dbWriteEnabled": false
+    }
+  ],
+  "safetyMatrix": {
+    "readOnly": true,
+    "getOnly": true,
+    "productionActivation": false,
+    "runtimeActivation": false,
+    "dbWrite": false,
+    "approvalExecution": false,
+    "workflowExecution": false,
+    "writeActionsEnabled": false,
+    "workOrderRuntimeExecution": false,
+    "pmExecution": false,
+    "inventoryTransaction": false,
+    "vendorContractSlaRuntime": false,
+    "evidenceClosureExecution": false,
+    "hmiRuntimeExecution": false,
+    "deviceConnection": false,
+    "connectorExecution": false,
+    "edgeRuntimeCall": false,
+    "linkRuntimeCall": false,
+    "oneAdapterIntroduced": false,
+    "customerIdentifierLeakage": false,
+    "localAbsolutePathLeakage": false
+  },
+  "validationMatrix": {
+    "ONE_UMMS_R11_READONLY_API_ENTRY_SKELETON_PASS": "PASS",
+    "ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS": "PASS",
+    "ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_READINESS_PASS": "PASS",
+    "ONE_UMMS_R10A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS": "PASS",
+    "ONE_UMMS_R10_STAKEHOLDER_REVIEW_PACKAGE_PASS": "PASS",
+    "ONE_PACKAGE_ROUTE_ENFORCEMENT_PASS": "PASS",
+    "ONE_BOUNDARY_BASELINE_PASS": "PASS",
+    "Registry JSON validation": "PASS"
+  },
+  "optionalTagPlan": {
+    "tagName": "umms-r11-readonly-api-entry-skeleton-local-freeze-20260621",
+    "commandsExecuted": false,
+    "commandsForFutureUseOnly": [
+      "git tag -a umms-r11-readonly-api-entry-skeleton-local-freeze-20260621 -m \"VANTARIS ONE UMMS-R11 readonly API entry skeleton local freeze\"",
+      "git push origin main",
+      "git push origin umms-r11-readonly-api-entry-skeleton-local-freeze-20260621"
+    ]
+  },
+  "pushPerformed": false,
+  "tagCreated": false
+}
+
