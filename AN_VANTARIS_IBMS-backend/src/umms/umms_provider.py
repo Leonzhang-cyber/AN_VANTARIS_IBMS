@@ -2,9 +2,84 @@
 
 from __future__ import annotations
 
+import json
 from copy import deepcopy
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import Any, Dict, List, Optional
+
+
+LATEST_UMMS_PACKAGE_UCONSOLE_TAG = "umms-package-uconsole-stakeholder-entry-readiness-local-freeze-20260621"
+UMMS_R11_BASELINE_HEAD = "1e39b7dd7a3e1ad4251206a9b82b6573269bd82e"
+PACKAGE_ENTRY_REGISTRY = "AN_VANTARIS_ONE/registries/umms-package-uconsole-stakeholder-entry-readiness.v1.json"
+LOCAL_FREEZE_REGISTRY = "AN_VANTARIS_ONE/registries/umms-package-uconsole-stakeholder-entry-local-freeze.v1.json"
+STAKEHOLDER_REVIEW_REGISTRY = "AN_VANTARIS_ONE/registries/umms-stakeholder-review-package.v1.json"
+STAKEHOLDER_REVIEW_PACKAGE = "ONE_UMMS_R10_STAKEHOLDER_REVIEW_PACKAGE.md"
+SAFETY_FALSE_DEFAULTS = {
+    "productionActivation": False,
+    "runtimeActivation": False,
+    "dbWrite": False,
+    "approvalExecution": False,
+    "workflowExecution": False,
+    "workOrderRuntimeExecution": False,
+    "pmExecution": False,
+    "inventoryTransaction": False,
+    "vendorContractSlaRuntime": False,
+    "evidenceClosureExecution": False,
+    "hmiRuntimeExecution": False,
+    "deviceConnection": False,
+    "connectorExecution": False,
+    "edgeRuntimeCall": False,
+    "linkRuntimeCall": False,
+    "oneAdapterIntroduced": False,
+}
+
+
+def _repo_root() -> Path:
+    current = Path(__file__).resolve()
+    for parent in current.parents:
+        if (parent / "AN_VANTARIS_ONE").is_dir() and (parent / "AN_VANTARIS_IBMS-backend").is_dir():
+            return parent
+    raise RuntimeError("VANTARIS ONE repository root not found")
+
+
+def _load_registry(relative_path: str) -> Dict[str, Any]:
+    path = _repo_root() / relative_path
+    with path.open("r", encoding="utf-8") as handle:
+        data = json.load(handle)
+    if not isinstance(data, dict):
+        raise ValueError(f"{relative_path} must contain a JSON object")
+    return data
+
+
+def _readonly_api_guard() -> Dict[str, Any]:
+    return {
+        "readOnly": True,
+        "runtimeEnabled": False,
+        "productionEnabled": False,
+        "dbWriteEnabled": False,
+        "workflowEnabled": False,
+        "approvalEnabled": False,
+        "writeActionsEnabled": False,
+        "edgeRuntimeCall": False,
+        "linkRuntimeCall": False,
+        "oneAdapterIntroduced": False,
+    }
+
+
+def _source_descriptor(root_key: str, relative_path: str) -> Dict[str, Any]:
+    return {
+        "type": "local_projection_registry",
+        "path": relative_path,
+        "rootKey": root_key,
+        "authority": "UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE",
+    }
+
+
+def _with_guard(payload: Dict[str, Any]) -> Dict[str, Any]:
+    guarded = dict(payload)
+    guarded.update(_readonly_api_guard())
+    return guarded
 
 
 def _now_iso() -> str:
@@ -409,3 +484,108 @@ def get_umms_health() -> Dict[str, Any]:
         "iec62443Certified": False,
     }
 
+
+def get_umms_package_entry_projection() -> Dict[str, Any]:
+    registry = _load_registry(PACKAGE_ENTRY_REGISTRY)
+    package_entry = deepcopy(registry.get("packageEntry", {}))
+    reference = deepcopy(registry.get("stakeholderReviewPackageReference", {}))
+    return _with_guard(
+        {
+            "platform": "VANTARIS ONE",
+            "module": "UMMS",
+            "projection": "umms_package_entry",
+            "packageId": package_entry.get("packageId", "umms"),
+            "packageName": package_entry.get("packageName", "Unified Maintenance Management System"),
+            "packageDisplayName": package_entry.get("packageDisplayName", "UMMS"),
+            "packageStatus": package_entry.get("packageStatus", "stakeholder_review_ready"),
+            "entryMode": package_entry.get("entryMode", "read_only_stakeholder_review"),
+            "latestTag": LATEST_UMMS_PACKAGE_UCONSOLE_TAG,
+            "stakeholderReviewPackage": reference.get("packageDocument", STAKEHOLDER_REVIEW_PACKAGE),
+            "source": _source_descriptor("packageEntry", PACKAGE_ENTRY_REGISTRY),
+        }
+    )
+
+
+def get_umms_stakeholder_review_projection() -> Dict[str, Any]:
+    stakeholder_registry = _load_registry(STAKEHOLDER_REVIEW_REGISTRY)
+    local_freeze = _load_registry(LOCAL_FREEZE_REGISTRY)
+    package_registry = _load_registry(PACKAGE_ENTRY_REGISTRY)
+    return _with_guard(
+        {
+            "platform": "VANTARIS ONE",
+            "module": "UMMS",
+            "projection": "umms_stakeholder_review",
+            "reviewPackageId": stakeholder_registry.get("reviewPackageId", "umms-stakeholder-review-package.v1"),
+            "baselineHead": UMMS_R11_BASELINE_HEAD,
+            "publishedTags": sorted(
+                set(stakeholder_registry.get("publishedTags", []))
+                | {
+                    stakeholder_registry.get("latestArchivedTag", ""),
+                    local_freeze.get("latestArchivedTag", ""),
+                    LATEST_UMMS_PACKAGE_UCONSOLE_TAG,
+                }
+                - {""}
+            ),
+            "readinessChain": deepcopy(package_registry.get("ummsReadinessChainReference", [])),
+            "knownLimitations": deepcopy(stakeholder_registry.get("knownLimitations", [])),
+            "recommendedNextSteps": [
+                "UMMS read-only API implementation, future",
+                "UMMS read-only frontend implementation, future",
+                "UMMS package runtime implementation, future only after explicit approval",
+            ],
+            "source": _source_descriptor("reviewPackageId", STAKEHOLDER_REVIEW_REGISTRY),
+        }
+    )
+
+
+def get_umms_readiness_summary_projection() -> Dict[str, Any]:
+    registry = _load_registry(PACKAGE_ENTRY_REGISTRY)
+    return _with_guard(
+        {
+            "platform": "VANTARIS ONE",
+            "module": "UMMS",
+            "projection": "umms_readiness_summary",
+            "readinessStages": deepcopy(registry.get("ummsReadinessChainReference", [])),
+            "source": _source_descriptor("ummsReadinessChainReference", PACKAGE_ENTRY_REGISTRY),
+        }
+    )
+
+
+def get_umms_customer_core_functions_projection() -> Dict[str, Any]:
+    registry = _load_registry(PACKAGE_ENTRY_REGISTRY)
+    functions = [
+        {
+            "function": item.get("function"),
+            "coverageStatus": item.get("coverageStatus"),
+            "readinessStage": item.get("readinessStage"),
+            "runtimeEnabled": False,
+            "futureOwner": item.get("futureOwner"),
+            "remainingGap": item.get("remainingGap"),
+        }
+        for item in registry.get("customerCoreFunctionCoverage", [])
+    ]
+    return _with_guard(
+        {
+            "platform": "VANTARIS ONE",
+            "module": "UMMS",
+            "projection": "umms_customer_core_functions",
+            "customerCoreFunctions": functions,
+            "totalFunctions": len(functions),
+            "source": _source_descriptor("customerCoreFunctionCoverage", PACKAGE_ENTRY_REGISTRY),
+        }
+    )
+
+
+def get_umms_safety_posture_projection() -> Dict[str, Any]:
+    registry = _load_registry(PACKAGE_ENTRY_REGISTRY)
+    safety = {"readOnly": True, **SAFETY_FALSE_DEFAULTS, **deepcopy(registry.get("safetyPosture", {}))}
+    safety.update(_readonly_api_guard())
+    return _with_guard(
+        {
+            "platform": "VANTARIS ONE",
+            "module": "UMMS",
+            "projection": "umms_safety_posture",
+            "safetyPosture": safety,
+            "source": _source_descriptor("safetyPosture", PACKAGE_ENTRY_REGISTRY),
+        }
+    )

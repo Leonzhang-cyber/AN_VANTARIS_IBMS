@@ -8,6 +8,11 @@ from src.umms.umms_provider import (
     get_maintenance_associations,
     get_maintenance_summary,
     get_umms_health,
+    get_umms_customer_core_functions_projection,
+    get_umms_package_entry_projection,
+    get_umms_readiness_summary_projection,
+    get_umms_safety_posture_projection,
+    get_umms_stakeholder_review_projection,
     get_work_order,
     get_work_order_breakdown,
     list_work_orders,
@@ -61,3 +66,17 @@ class UmmsMaintenanceService:
     def get_maintenance_associations(self) -> Dict[str, Any]:
         return get_maintenance_associations()
 
+    def get_package_entry_projection(self) -> Dict[str, Any]:
+        return get_umms_package_entry_projection()
+
+    def get_stakeholder_review_projection(self) -> Dict[str, Any]:
+        return get_umms_stakeholder_review_projection()
+
+    def get_readiness_summary_projection(self) -> Dict[str, Any]:
+        return get_umms_readiness_summary_projection()
+
+    def get_customer_core_functions_projection(self) -> Dict[str, Any]:
+        return get_umms_customer_core_functions_projection()
+
+    def get_safety_posture_projection(self) -> Dict[str, Any]:
+        return get_umms_safety_posture_projection()

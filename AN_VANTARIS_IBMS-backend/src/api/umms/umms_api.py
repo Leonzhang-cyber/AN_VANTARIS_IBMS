@@ -53,3 +53,27 @@ def umms_work_order_detail(work_order_id: str):
         return Result.error(code=404, message="workOrderId not found")
     return Result.success(data=data)
 
+
+@api_bp.route("/v1/one/umms/package-entry", methods=["GET"])
+def umms_one_package_entry():
+    return Result.success(data=_service.get_package_entry_projection())
+
+
+@api_bp.route("/v1/one/umms/stakeholder-review", methods=["GET"])
+def umms_one_stakeholder_review():
+    return Result.success(data=_service.get_stakeholder_review_projection())
+
+
+@api_bp.route("/v1/one/umms/readiness-summary", methods=["GET"])
+def umms_one_readiness_summary():
+    return Result.success(data=_service.get_readiness_summary_projection())
+
+
+@api_bp.route("/v1/one/umms/customer-core-functions", methods=["GET"])
+def umms_one_customer_core_functions():
+    return Result.success(data=_service.get_customer_core_functions_projection())
+
+
+@api_bp.route("/v1/one/umms/safety-posture", methods=["GET"])
+def umms_one_safety_posture():
+    return Result.success(data=_service.get_safety_posture_projection())
