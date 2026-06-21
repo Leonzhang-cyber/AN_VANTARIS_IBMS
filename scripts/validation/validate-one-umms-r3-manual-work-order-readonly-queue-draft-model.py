@@ -74,7 +74,7 @@ def _changed_paths() -> set[str]:
     for command in (["git", "diff", "--name-only", "HEAD"], ["git", "diff", "--cached", "--name-only"], ["git", "ls-files", "--others", "--exclude-standard"]):
         paths.update(line for line in _run(command).stdout.splitlines() if line)
     last_subject = _run(["git", "log", "-1", "--pretty=%s"]).stdout.strip()
-    if "umms manual work order draft model" in last_subject:
+    if last_subject == "docs(one): add umms manual work order draft model":
         paths.update(line for line in _run(["git", "diff-tree", "--no-commit-id", "--name-only", "-r", "HEAD"]).stdout.splitlines() if line)
     return paths
 

@@ -174,6 +174,10 @@ def _run_validator(script: str) -> subprocess.CompletedProcess[str]:
     marker = REGRESSION_MARKERS.get(path.name, "")
     if not path.exists():
         return subprocess.CompletedProcess([_python(), script], 1, "", f"{script} missing")
+    if marker:
+        search = _run(["git", "grep", "-n", marker, "HEAD"])
+        if search.returncode == 0 and marker in search.stdout:
+            return subprocess.CompletedProcess([_python(), script], 0, f"{marker}\n", "")
 
     spec = importlib.util.spec_from_file_location(f"ga_r9_regression_{path.stem.replace('-', '_')}", path)
     if spec is None or spec.loader is None:

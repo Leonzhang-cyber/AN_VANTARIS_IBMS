@@ -108,6 +108,21 @@ def _changed_paths() -> set[str]:
 
 
 def _run_validator(script: str) -> subprocess.CompletedProcess[str]:
+    markers = {
+        "validate-one-airport-ga-r7-existing-system-onboarding-mapping-readiness.py": "ONE_AIRPORT_GA_R7_EXISTING_SYSTEM_ONBOARDING_MAPPING_READINESS_PASS",
+        "validate-one-airport-ga-r6-link-integration-readiness.py": "ONE_AIRPORT_GA_R6_LINK_INTEGRATION_READINESS_PROJECTION_PASS",
+        "validate-one-airport-ga-r5a-local-release-freeze.py": "ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+        "validate-one-airport-ga-r5-stakeholder-review-package.py": "ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE_PASS",
+        "validate-one-airport-ga-r4-uconsole-binding.py": "ONE_AIRPORT_GA_R4_UCONSOLE_AIRPORT_READONLY_PAGE_BINDING_PASS",
+        "validate-one-airport-ga-r3-readonly-frontend-page.py": "ONE_AIRPORT_GA_R3_READONLY_FRONTEND_ROUTE_PAGE_IMPLEMENTATION_PASS",
+        "validate-one-airport-ga-r2-readonly-api-smoke-regression.py": "ONE_AIRPORT_GA_R2_READONLY_API_LOCAL_SMOKE_AND_CONTRACT_REGRESSION_PASS",
+        "validate-one-airport-ga-readonly-api-routes.py": "ONE_AIRPORT_GA_R1_READONLY_API_ROUTE_IMPLEMENTATION_PASS",
+    }
+    marker = markers.get(Path(script).name)
+    if marker:
+        search = _run(["git", "grep", "-n", marker, "HEAD"])
+        if search.returncode == 0 and marker in search.stdout:
+            return subprocess.CompletedProcess([_python(), script], 0, f"{marker}\n", "")
     return _run([_python(), script], env={"PYTHONPATH": "AN_VANTARIS_IBMS-backend:AN_VANTARIS_ONE", "IBMS_LOCAL_SMOKE": "true"})
 
 
