@@ -1,0 +1,168 @@
+{
+  "metadata": {
+    "projectionId": "umms-airport-hmi-locator-binding-readiness.v1",
+    "platform": "VANTARIS ONE",
+    "module": "UMMS",
+    "relatedIndustryProjection": "airport",
+    "relatedCapability": "Graphics HMI Equipment Locator",
+    "releaseContext": "UMMS-R9 UMMS + Airport HMI Locator Binding Readiness",
+    "readOnly": true,
+    "runtimeActivation": false,
+    "productionActivation": false,
+    "dbWrite": false,
+    "approvalExecution": false,
+    "workflowExecution": false,
+    "hmiRuntimeExecution": false,
+    "hmiControlExecution": false,
+    "drawingUpload": false,
+    "bimRuntimeIntegration": false,
+    "topologyRuntimeIntegration": false,
+    "deviceConnection": false,
+    "connectorExecution": false,
+    "edgeRuntimeCall": false,
+    "linkRuntimeCall": false,
+    "oneAdapterIntroduced": false
+  },
+  "r9ScopeSummary": {
+    "targetModule": "UMMS",
+    "relatedIndustryProjection": "airport",
+    "currentStatus": "hmi_locator_binding_readiness_projection_only",
+    "sourceBaseline": "UMMS-R8 UMMS + UCDE Evidence Closure Alignment",
+    "genericModuleScope": "cross_industry_maintenance_management",
+    "airportSpecificLogicInCore": false,
+    "runtimeWorkflowEnabled": false,
+    "productionWorkflowEnabled": false,
+    "hmiRuntimeEnabled": false,
+    "drawingUploadEnabled": false,
+    "equipmentControlEnabled": false
+  },
+  "hmiLocatorBindingReadinessModel": {
+    "fields": ["bindingReadinessId", "workOrderId", "faultCaseId", "assetRef", "locationRef", "hmiLocatorRef", "drawingRef", "hmiSymbolRef", "topologyNodeRef", "bimObjectRef", "pmTaskRef", "inventoryRequirementRef", "vendorRef", "contractRef", "slaRef", "evidenceRefs", "locatorBindingStatus", "mappingConfidence", "reviewStatus", "activationAllowed"],
+    "activationAllowed": false,
+    "statement": "activationAllowed must remain false in UMMS-R9. No HMI runtime or locator binding execution is implemented."
+  },
+  "workOrderHmiLocatorBindingModel": {
+    "fields": ["workOrderId", "workOrderType", "faultCaseId", "assetRef", "locationRef", "hmiLocatorRef", "drawingRef", "hmiSymbolRef", "floorPlanRef", "zoneRef", "roomRef", "equipmentSpace", "locatorConfidence", "missingReferenceFlags", "requiredEvidence", "reviewStatus", "activationAllowed"],
+    "activationAllowed": false,
+    "statement": "No work order HMI runtime binding or work order execution is implemented in UMMS-R9."
+  },
+  "faultCaseHmiLocatorBindingModel": {
+    "fields": ["faultCaseId", "sourceAlarmId", "sourceEventId", "assetRef", "locationRef", "hmiLocatorRef", "drawingRef", "hmiSymbolRef", "severity", "priority", "locatorConfidence", "evidenceRefs", "reviewStatus", "activationAllowed"],
+    "activationAllowed": false
+  },
+  "pmHmiLocatorBindingModel": {
+    "fields": ["pmPlanId", "pmScheduleId", "pmTaskId", "assetRef", "locationRef", "hmiLocatorRef", "drawingRef", "hmiSymbolRef", "checklistRef", "requiredEvidence", "reviewStatus", "activationAllowed"],
+    "activationAllowed": false,
+    "statement": "No PM HMI runtime binding or PM execution is implemented in UMMS-R9."
+  },
+  "inventoryHmiLocatorBindingModel": {
+    "fields": ["sparePartRef", "inventoryItemId", "workOrderId", "pmTaskId", "assetRef", "locationRef", "hmiLocatorRef", "drawingRef", "hmiSymbolRef", "storeRoomRef", "binLocationRef", "locatorContextType", "reviewStatus", "activationAllowed"],
+    "activationAllowed": false,
+    "statement": "No inventory transaction or HMI runtime binding is implemented in UMMS-R9."
+  },
+  "vendorContractHmiLocatorBindingModel": {
+    "fields": ["vendorRef", "contractRef", "slaRef", "workOrderId", "assetRef", "locationRef", "hmiLocatorRef", "drawingRef", "hmiSymbolRef", "responseWindowRef", "coverageStatus", "reviewStatus", "activationAllowed"],
+    "activationAllowed": false,
+    "statement": "No vendor / contract / SLA runtime or HMI runtime binding is implemented in UMMS-R9."
+  },
+  "ucdeEvidenceHmiContextModel": {
+    "fields": ["evidenceRef", "evidenceType", "sourceObjectType", "sourceObjectId", "workOrderId", "faultCaseId", "pmTaskId", "assetRef", "locationRef", "hmiLocatorRef", "drawingRef", "hmiSymbolRef", "payloadHash", "chainHash", "signatureStatus", "reviewStatus"],
+    "statement": "No UCDE evidence write, upload, or runtime HMI context binding is implemented in UMMS-R9."
+  },
+  "locatorReferenceValidationModel": [
+    {"checkId": "asset-ref-presence", "checkName": "assetRef presence", "purpose": "Validate future asset reference availability.", "requiredForActivation": true, "failureSeverity": "high", "currentR9Status": "readiness_only", "futureExecutionOwner": "Asset Graph + UMMS"},
+    {"checkId": "location-ref-presence", "checkName": "locationRef presence", "purpose": "Validate future location reference availability.", "requiredForActivation": true, "failureSeverity": "high", "currentR9Status": "readiness_only", "futureExecutionOwner": "Asset Graph + UMMS"},
+    {"checkId": "hmi-locator-ref-presence", "checkName": "hmiLocatorRef presence", "purpose": "Validate future HMI locator reference availability.", "requiredForActivation": true, "failureSeverity": "high", "currentR9Status": "readiness_only", "futureExecutionOwner": "UMMS + Airport HMI"},
+    {"checkId": "drawing-ref-presence", "checkName": "drawingRef presence", "purpose": "Validate future drawing reference availability.", "requiredForActivation": true, "failureSeverity": "high", "currentR9Status": "readiness_only", "futureExecutionOwner": "Airport HMI"},
+    {"checkId": "hmi-symbol-ref-presence", "checkName": "hmiSymbolRef presence", "purpose": "Validate future HMI symbol reference availability.", "requiredForActivation": true, "failureSeverity": "high", "currentR9Status": "readiness_only", "futureExecutionOwner": "Airport HMI"},
+    {"checkId": "floor-plan-ref-presence", "checkName": "floorPlanRef presence, optional", "purpose": "Validate optional future floor plan reference.", "requiredForActivation": false, "failureSeverity": "medium", "currentR9Status": "readiness_only", "futureExecutionOwner": "Airport HMI"},
+    {"checkId": "topology-node-ref-presence", "checkName": "topologyNodeRef presence, optional", "purpose": "Validate optional topology node reference.", "requiredForActivation": false, "failureSeverity": "medium", "currentR9Status": "readiness_only", "futureExecutionOwner": "Asset Graph"},
+    {"checkId": "bim-object-ref-presence", "checkName": "bimObjectRef presence, future optional", "purpose": "Validate optional future BIM object reference.", "requiredForActivation": false, "failureSeverity": "medium", "currentR9Status": "readiness_only", "futureExecutionOwner": "Future BIM service"},
+    {"checkId": "duplicate-symbol-detection", "checkName": "duplicate symbol detection", "purpose": "Detect future duplicate symbol references.", "requiredForActivation": true, "failureSeverity": "high", "currentR9Status": "readiness_only", "futureExecutionOwner": "Airport HMI"},
+    {"checkId": "conflicting-location-detection", "checkName": "conflicting location detection", "purpose": "Detect future asset/location conflicts.", "requiredForActivation": true, "failureSeverity": "high", "currentR9Status": "readiness_only", "futureExecutionOwner": "Asset Graph + UMMS"},
+    {"checkId": "stale-drawing-version-detection", "checkName": "stale drawing version detection", "purpose": "Detect future stale drawing versions.", "requiredForActivation": true, "failureSeverity": "medium", "currentR9Status": "readiness_only", "futureExecutionOwner": "Airport HMI"},
+    {"checkId": "missing-equipment-space-detection", "checkName": "missing equipment space detection", "purpose": "Detect future missing equipment spaces.", "requiredForActivation": true, "failureSeverity": "medium", "currentR9Status": "readiness_only", "futureExecutionOwner": "Asset Graph"},
+    {"checkId": "missing-evidence-context", "checkName": "missing evidence context", "purpose": "Detect future missing UCDE evidence context.", "requiredForActivation": true, "failureSeverity": "medium", "currentR9Status": "readiness_only", "futureExecutionOwner": "UCDE"},
+    {"checkId": "missing-work-order-context", "checkName": "missing work order context", "purpose": "Detect future missing work order context.", "requiredForActivation": true, "failureSeverity": "medium", "currentR9Status": "readiness_only", "futureExecutionOwner": "ONE Work Management + UMMS"},
+    {"checkId": "missing-pm-context", "checkName": "missing PM context", "purpose": "Detect future missing PM context.", "requiredForActivation": false, "failureSeverity": "medium", "currentR9Status": "readiness_only", "futureExecutionOwner": "UMMS"},
+    {"checkId": "missing-vendor-contract-context", "checkName": "missing vendor/contract context, optional", "purpose": "Detect future missing vendor/contract context.", "requiredForActivation": false, "failureSeverity": "low", "currentR9Status": "readiness_only", "futureExecutionOwner": "UMMS"}
+  ],
+  "hmiLocatorValidationGateModel": [
+    {"gateId": "asset-locator-reference", "gateName": "Asset locator reference gate", "purpose": "Validate future asset locator references.", "requiredInputs": ["assetRef", "hmiLocatorRef"], "failureSeverity": "high", "blocksFutureActivation": true, "currentR9Status": "readiness_only", "futureExecutionOwner": "Asset Graph + UMMS"},
+    {"gateId": "location-hierarchy", "gateName": "Location hierarchy gate", "purpose": "Validate future location hierarchy.", "requiredInputs": ["locationRef", "zoneRef"], "failureSeverity": "high", "blocksFutureActivation": true, "currentR9Status": "readiness_only", "futureExecutionOwner": "Asset Graph"},
+    {"gateId": "drawing-reference", "gateName": "Drawing reference gate", "purpose": "Validate future drawing references.", "requiredInputs": ["drawingRef"], "failureSeverity": "high", "blocksFutureActivation": true, "currentR9Status": "readiness_only", "futureExecutionOwner": "Airport HMI"},
+    {"gateId": "hmi-symbol-reference", "gateName": "HMI symbol reference gate", "purpose": "Validate future HMI symbols.", "requiredInputs": ["hmiSymbolRef"], "failureSeverity": "high", "blocksFutureActivation": true, "currentR9Status": "readiness_only", "futureExecutionOwner": "Airport HMI"},
+    {"gateId": "work-order-locator", "gateName": "Work order locator gate", "purpose": "Validate future work order locator context.", "requiredInputs": ["workOrderId", "assetRef", "hmiLocatorRef"], "failureSeverity": "medium", "blocksFutureActivation": true, "currentR9Status": "readiness_only", "futureExecutionOwner": "ONE Work Management + UMMS"},
+    {"gateId": "fault-case-locator", "gateName": "Fault case locator gate", "purpose": "Validate future fault case locator context.", "requiredInputs": ["faultCaseId", "assetRef", "hmiLocatorRef"], "failureSeverity": "medium", "blocksFutureActivation": true, "currentR9Status": "readiness_only", "futureExecutionOwner": "UFMS + UMMS"},
+    {"gateId": "pm-locator", "gateName": "PM locator gate", "purpose": "Validate future PM locator context.", "requiredInputs": ["pmTaskId", "assetRef", "hmiLocatorRef"], "failureSeverity": "medium", "blocksFutureActivation": true, "currentR9Status": "readiness_only", "futureExecutionOwner": "UMMS"},
+    {"gateId": "inventory-locator-context", "gateName": "Inventory locator context gate", "purpose": "Validate future inventory locator context.", "requiredInputs": ["sparePartRef", "assetRef", "locationRef"], "failureSeverity": "medium", "blocksFutureActivation": true, "currentR9Status": "readiness_only", "futureExecutionOwner": "UMMS"},
+    {"gateId": "vendor-contract-locator-context", "gateName": "Vendor / contract locator context gate", "purpose": "Validate future vendor/contract locator context.", "requiredInputs": ["vendorRef", "contractRef", "assetRef"], "failureSeverity": "medium", "blocksFutureActivation": true, "currentR9Status": "readiness_only", "futureExecutionOwner": "UMMS"},
+    {"gateId": "ucde-evidence-locator-context", "gateName": "UCDE evidence locator context gate", "purpose": "Validate future UCDE evidence locator context.", "requiredInputs": ["evidenceRef", "hmiLocatorRef"], "failureSeverity": "medium", "blocksFutureActivation": true, "currentR9Status": "readiness_only", "futureExecutionOwner": "UCDE"},
+    {"gateId": "drawing-version-readiness", "gateName": "Drawing version readiness gate", "purpose": "Validate future drawing version readiness.", "requiredInputs": ["drawingRef", "reviewStatus"], "failureSeverity": "medium", "blocksFutureActivation": true, "currentR9Status": "readiness_only", "futureExecutionOwner": "Airport HMI"},
+    {"gateId": "symbol-library-readiness", "gateName": "Symbol library readiness gate", "purpose": "Validate future symbol library readiness.", "requiredInputs": ["hmiSymbolRef"], "failureSeverity": "medium", "blocksFutureActivation": true, "currentR9Status": "readiness_only", "futureExecutionOwner": "Airport HMI"},
+    {"gateId": "drawing-redaction", "gateName": "Customer drawing redaction gate", "purpose": "Validate future drawing redaction posture.", "requiredInputs": ["redactionStatus"], "failureSeverity": "high", "blocksFutureActivation": true, "currentR9Status": "readiness_only", "futureExecutionOwner": "Governance + UCDE"},
+    {"gateId": "local-path-leakage", "gateName": "Local path leakage gate", "purpose": "Validate no local path exposure in future drawing references.", "requiredInputs": ["localPathRedacted"], "failureSeverity": "high", "blocksFutureActivation": true, "currentR9Status": "readiness_only", "futureExecutionOwner": "Governance + UCDE"},
+    {"gateId": "runtime-hmi-activation", "gateName": "Runtime HMI activation gate, future only", "purpose": "Gate future runtime HMI activation.", "requiredInputs": ["allValidationGates"], "failureSeverity": "critical", "blocksFutureActivation": true, "currentR9Status": "readiness_only", "futureExecutionOwner": "Release Governance"}
+  ],
+  "airportHmiReadinessDependencyMap": [
+    {"airportSource": "Airport Graphics HMI Equipment Locator Readiness", "ummsR9Target": "UMMS HMI locator binding", "mappingType": "read_only_locator_binding", "readOnlyStatus": true, "runtimeStatus": "disabled", "futureImplementationOwner": "UMMS + Airport HMI"},
+    {"airportSource": "Airport Assets & Topology", "ummsR9Target": "assetRef / locationRef", "mappingType": "read_only_asset_location_context", "readOnlyStatus": true, "runtimeStatus": "disabled", "futureImplementationOwner": "Asset Graph"},
+    {"airportSource": "Airport Alarms & Events", "ummsR9Target": "alarm/event locator context", "mappingType": "read_only_event_context", "readOnlyStatus": true, "runtimeStatus": "disabled", "futureImplementationOwner": "Layer 3 + UFMS"},
+    {"airportSource": "Airport Fault Cases", "ummsR9Target": "fault case locator context", "mappingType": "read_only_fault_context", "readOnlyStatus": true, "runtimeStatus": "disabled", "futureImplementationOwner": "UFMS + UMMS"},
+    {"airportSource": "Airport Maintenance Work Orders", "ummsR9Target": "work order locator context", "mappingType": "read_only_work_order_context", "readOnlyStatus": true, "runtimeStatus": "disabled", "futureImplementationOwner": "ONE Work Management + UMMS"},
+    {"airportSource": "Airport Evidence Investigation", "ummsR9Target": "UCDE evidence locator context", "mappingType": "read_only_evidence_context", "readOnlyStatus": true, "runtimeStatus": "disabled", "futureImplementationOwner": "UCDE"},
+    {"airportSource": "Airport PM Readiness", "ummsR9Target": "PM locator context", "mappingType": "read_only_pm_context", "readOnlyStatus": true, "runtimeStatus": "disabled", "futureImplementationOwner": "UMMS"},
+    {"airportSource": "Airport Inventory Readiness", "ummsR9Target": "spare part / inventory locator context", "mappingType": "read_only_inventory_context", "readOnlyStatus": true, "runtimeStatus": "disabled", "futureImplementationOwner": "UMMS"},
+    {"airportSource": "Airport Vendor / Contract / SLA Readiness", "ummsR9Target": "vendor locator context", "mappingType": "read_only_vendor_context", "readOnlyStatus": true, "runtimeStatus": "disabled", "futureImplementationOwner": "UMMS"}
+  ],
+  "customerCoreFunctionR9Alignment": [
+    {"function": "Work Order Management, auto + manual", "ummsR9Contribution": "Models future work order to asset/location/HMI symbol binding.", "requiredLocatorReferences": ["workOrderId", "assetRef", "locationRef", "hmiLocatorRef"], "requiredValidationGates": ["Work order locator gate"], "requiredUcdeObjects": ["WorkOrderEvidence"], "requiredLinkObjects": ["work-order trigger with asset/location/hmi references"], "requiredEdgeCapabilities": ["assetRef / locationRef capture from connector mapping"], "currentUmmsR9Status": "readiness_only", "futurePhase": "UMMS-R10"},
+    {"function": "Asset Registry, full lifecycle tracking", "ummsR9Contribution": "Models future asset/location references for HMI locator binding.", "requiredLocatorReferences": ["assetRef", "locationRef", "topologyNodeRef"], "requiredValidationGates": ["Asset locator reference gate", "Location hierarchy gate"], "requiredUcdeObjects": ["EvidenceRecord"], "requiredLinkObjects": ["asset/location reference contract"], "requiredEdgeCapabilities": ["asset-location mapping diagnostics"], "currentUmmsR9Status": "readiness_only", "futurePhase": "UMMS-R9"},
+    {"function": "Preventive Maintenance Scheduler", "ummsR9Contribution": "Models future PM task locator binding.", "requiredLocatorReferences": ["pmTaskId", "assetRef", "hmiLocatorRef"], "requiredValidationGates": ["PM locator gate"], "requiredUcdeObjects": ["PmEvidence"], "requiredLinkObjects": ["delivery envelope with asset/location references"], "requiredEdgeCapabilities": ["normalization preview with locator references"], "currentUmmsR9Status": "readiness_only", "futurePhase": "UMMS-R9"},
+    {"function": "Spare Parts / Inventory Management", "ummsR9Contribution": "Models future inventory and spare part location context.", "requiredLocatorReferences": ["sparePartRef", "inventoryItemId", "locationRef"], "requiredValidationGates": ["Inventory locator context gate"], "requiredUcdeObjects": ["InventoryEvidence"], "requiredLinkObjects": ["mapping profile contract"], "requiredEdgeCapabilities": ["source tag to asset/location mapping preview"], "currentUmmsR9Status": "readiness_only", "futurePhase": "UMMS-R9"},
+    {"function": "Vendor / Contract Management", "ummsR9Contribution": "Models future vendor/contract/SLA locator context.", "requiredLocatorReferences": ["vendorRef", "contractRef", "slaRef", "assetRef"], "requiredValidationGates": ["Vendor / contract locator context gate"], "requiredUcdeObjects": ["VendorContractEvidence"], "requiredLinkObjects": ["evidence chain with asset/location context"], "requiredEdgeCapabilities": ["sample payload with asset/location references"], "currentUmmsR9Status": "readiness_only", "futurePhase": "UMMS-R9"},
+    {"function": "Graphics HMI to locate Equipment", "ummsR9Contribution": "Defines the readiness binding between UMMS objects and Airport HMI locator references.", "requiredLocatorReferences": ["drawingRef", "hmiSymbolRef", "floorPlanRef"], "requiredValidationGates": ["Drawing reference gate", "HMI symbol reference gate"], "requiredUcdeObjects": ["HmiLocatorEvidenceContext"], "requiredLinkObjects": ["hmiSymbolRef / drawingRef reference fields"], "requiredEdgeCapabilities": ["HMI locator data foundation"], "currentUmmsR9Status": "readiness_only", "futurePhase": "UMMS-R9"},
+    {"function": "Existing system onboarding", "ummsR9Contribution": "Models future source-system mappings to locator references.", "requiredLocatorReferences": ["assetRef", "locationRef"], "requiredValidationGates": ["Asset locator reference gate"], "requiredUcdeObjects": ["AuditTrail"], "requiredLinkObjects": ["mapping profile contract"], "requiredEdgeCapabilities": ["source tag to asset/location mapping preview"], "currentUmmsR9Status": "readiness_only", "futurePhase": "Shared foundation"},
+    {"function": "Engineer commissioning diagnostics", "ummsR9Contribution": "Models future locator diagnostics evidence.", "requiredLocatorReferences": ["hmiLocatorRef", "drawingRef"], "requiredValidationGates": ["Drawing version readiness gate"], "requiredUcdeObjects": ["HmiLocatorEvidenceContext"], "requiredLinkObjects": ["delivery envelope with asset/location references"], "requiredEdgeCapabilities": ["asset-location mapping diagnostics"], "currentUmmsR9Status": "readiness_only", "futurePhase": "Shared foundation"},
+    {"function": "Remote overseas deployment", "ummsR9Contribution": "Models future distributed topology readiness without deployment execution.", "requiredLocatorReferences": ["siteRef", "floorPlanRef"], "requiredValidationGates": ["Local path leakage gate"], "requiredUcdeObjects": ["HandoffPackage"], "requiredLinkObjects": ["distributed topology with site/building/floor references"], "requiredEdgeCapabilities": ["sample payload with asset/location references"], "currentUmmsR9Status": "readiness_only", "futurePhase": "Future deployment gate"},
+    {"function": "Distributed independent installation", "ummsR9Contribution": "Models future independent installation locator readiness.", "requiredLocatorReferences": ["drawingRef", "hmiSymbolRef"], "requiredValidationGates": ["Runtime HMI activation gate, future only"], "requiredUcdeObjects": ["HandoffPackage"], "requiredLinkObjects": ["distributed topology with site/building/floor references"], "requiredEdgeCapabilities": ["normalization preview with locator references"], "currentUmmsR9Status": "readiness_only", "futurePhase": "Future deployment gate"}
+  ],
+  "sharedFoundationDependencyMap": {
+    "edgeDependencies": ["assetRef / locationRef capture from connector mapping", "hmiSymbolRef mapping support", "drawingRef mapping support", "source tag to asset/location mapping preview", "asset-location mapping diagnostics", "HMI locator data foundation", "sample payload with asset/location references", "normalization preview with locator references"],
+    "linkDependencies": ["asset/location reference contract", "hmiSymbolRef / drawingRef reference fields", "delivery envelope with asset/location references", "work-order trigger with asset/location/hmi references", "evidence chain with asset/location context", "mapping profile contract", "distributed topology with site/building/floor references"],
+    "ucdeDependencies": ["EvidenceRecord", "HmiLocatorEvidenceContext", "WorkOrderEvidence", "FaultCaseEvidence", "PmEvidence", "InventoryEvidence", "VendorContractEvidence", "AuditTrail", "HandoffPackage"]
+  },
+  "futureRenderingDependencyModel": {
+    "dependencies": ["2D floor plan renderer", "Symbol library", "Equipment locator overlay", "Asset topology graph", "System topology view", "Alarm/event highlight overlay", "Work order location overlay", "PM task location overlay", "Inventory location overlay", "Vendor support location overlay", "Evidence-linked location view", "BIM integration, future optional", "Mobile locator view, future optional"],
+    "statement": "UMMS-R9 does not implement rendering. UMMS-R9 only defines binding readiness requirements."
+  },
+  "futureImplementationRoadmap": ["UMMS-R9A Local Freeze + Optional Tag Plan", "UMMS-R10 UMMS Stakeholder Review Package"],
+  "safetyPosture": {
+    "readOnly": true,
+    "runtimeActivation": false,
+    "productionActivation": false,
+    "dbWrite": false,
+    "approvalExecution": false,
+    "workflowExecution": false,
+    "hmiRuntimeExecution": false,
+    "hmiControlExecution": false,
+    "drawingUpload": false,
+    "bimRuntimeIntegration": false,
+    "topologyRuntimeIntegration": false,
+    "equipmentControl": false,
+    "workOrderRuntimeExecution": false,
+    "pmExecution": false,
+    "inventoryTransaction": false,
+    "vendorContractExecution": false,
+    "evidenceUpload": false,
+    "evidenceClosureExecution": false,
+    "auditTrailWrite": false,
+    "connectorExecution": false,
+    "deviceConnection": false,
+    "edgeRuntimeCall": false,
+    "linkRuntimeCall": false,
+    "oneAdapterIntroduced": false,
+    "customerIdentifierLeakage": false,
+    "localAbsolutePathLeakage": false
+  }
+}
