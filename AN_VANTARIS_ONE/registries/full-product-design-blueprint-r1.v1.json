@@ -1,0 +1,213 @@
+{
+  "registryId": "full-product-design-blueprint-r1.v1",
+  "platform": "VANTARIS_ONE",
+  "designScope": "FULL_PRODUCT_BLUEPRINT",
+  "sourceBranch": "sync/ufms-foundation-packages-20260622-104646",
+  "sourceHeadBeforeTask": "0165fa78c4036ff3fba5da26e163cf6778297152",
+  "modules": [
+    {
+      "moduleId": "UCODE",
+      "moduleName": "UCode / CODE Layer",
+      "status": "Freeze required",
+      "purpose": "backend API, execution boundary, integration API",
+      "ownerLayer": "CODE API execution layer",
+      "nextMilestone": "UCODE-GA-R1 CODE Layer Final API/Execution Boundary Freeze"
+    },
+    {
+      "moduleId": "UMMS",
+      "moduleName": "UMMS",
+      "status": "Freeze/read-only capability complete; final module GA freeze required",
+      "purpose": "maintenance/facility management, asset/service workflows",
+      "ownerLayer": "Domain module",
+      "nextMilestone": "UMMS-GA-R1 Final Module Consolidated Freeze"
+    },
+    {
+      "moduleId": "UFMS",
+      "moduleName": "UFMS",
+      "status": "Foundation/projection evidence present; final full-product GA evidence required",
+      "purpose": "unified fault/event management, alarm/event correlation",
+      "ownerLayer": "Domain module",
+      "nextMilestone": "UCONSOLE-GA-R1 Full Module Entry & Menu Consistency Freeze"
+    },
+    {
+      "moduleId": "UESG",
+      "moduleName": "UESG",
+      "status": "Freeze/read-only capability complete; final module GA freeze required",
+      "purpose": "energy, sustainability, compliance evidence",
+      "ownerLayer": "Domain module",
+      "nextMilestone": "UESG-GA-R1 Final Module Consolidated Freeze"
+    },
+    {
+      "moduleId": "UCDE",
+      "moduleName": "UCDE",
+      "status": "Freeze/read-only capability complete; final capability audit required",
+      "purpose": "decision/evidence/traceability, read-only evidence chain",
+      "ownerLayer": "Domain module",
+      "nextMilestone": "UCDE-GA-R1 Final Capability Audit + Consolidated Freeze"
+    },
+    {
+      "moduleId": "UDOC",
+      "moduleName": "UDOC",
+      "status": "Incomplete/not confirmed by final GA-specific evidence",
+      "purpose": "document, handover, manuals, evidence documents",
+      "ownerLayer": "Domain module",
+      "nextMilestone": "UDOC-GA-R1 Document & Evidence Package Skeleton"
+    },
+    {
+      "moduleId": "AUTOMATED_RULES_POLICY",
+      "moduleName": "Automated Rules & Policy",
+      "status": "Freeze required before GA",
+      "purpose": "rule evaluation, thresholds, SLA, policy guardrails",
+      "ownerLayer": "Policy layer",
+      "nextMilestone": "GOVERNANCE-SECURITY-GA-R1 Final Governance & Security Freeze"
+    },
+    {
+      "moduleId": "ONE_ORCHESTRATOR",
+      "moduleName": "ONE Orchestrator",
+      "status": "Scaffold/current branch integration not confirmed",
+      "purpose": "workflow coordination, escalation, package orchestration",
+      "ownerLayer": "Coordination layer",
+      "nextMilestone": "ONE-ORCH-GA-R1 Orchestrator Read-only Workflow Freeze"
+    },
+    {
+      "moduleId": "UCONSOLE",
+      "moduleName": "UConsole",
+      "status": "Freeze/read-only capability complete; unified entry consistency required",
+      "purpose": "operator/engineer/admin/customer control surface",
+      "ownerLayer": "Presentation layer",
+      "nextMilestone": "UCONSOLE-GA-R1 Full Module Entry & Menu Consistency Freeze"
+    },
+    {
+      "moduleId": "REPORTS_ANALYTICS",
+      "moduleName": "Reports & Analytics",
+      "status": "Freeze/read-only capability complete; final analytics freeze required",
+      "purpose": "dashboards, exports, trend reports",
+      "ownerLayer": "Analytics layer",
+      "nextMilestone": "REPORTS-GA-R1 Final Reports & Analytics Freeze"
+    },
+    {
+      "moduleId": "GOVERNANCE_SECURITY",
+      "moduleName": "Governance & Security",
+      "status": "Route/boundary evidence present; final governance freeze required",
+      "purpose": "RBAC, audit, policy, IEC62443 posture, route enforcement",
+      "ownerLayer": "Governance layer",
+      "nextMilestone": "GOVERNANCE-SECURITY-GA-R1 Final Governance & Security Freeze"
+    },
+    {
+      "moduleId": "NEXUS_AI",
+      "moduleName": "NEXUS AI",
+      "status": "Not activated; current branch integration freeze required",
+      "purpose": "triage, recommendation, model selection, risk scoring; no execution",
+      "ownerLayer": "Decision/context layer",
+      "nextMilestone": "NEXUSAI-GA-R1 Current Branch Integration Freeze"
+    },
+    {
+      "moduleId": "EDGE",
+      "moduleName": "EDGE",
+      "status": "GA-ready for declared package scope",
+      "purpose": "local connector/runtime foundation, read-only collectors, local buffer",
+      "ownerLayer": "Foundation package",
+      "nextMilestone": "ONE-PROD-GA-R11 Customer Activation Plan"
+    },
+    {
+      "moduleId": "LINK",
+      "moduleName": "LINK",
+      "status": "GA-ready for declared package scope",
+      "purpose": "gateway/API handoff, delivery, queue, ack, DLQ",
+      "ownerLayer": "Foundation package",
+      "nextMilestone": "ONE-PROD-GA-R11 Customer Activation Plan"
+    },
+    {
+      "moduleId": "DB",
+      "moduleName": "DB",
+      "status": "GA-ready for declared package scope; no default migration",
+      "purpose": "PostgreSQL package/migrations/seed/backup/restore",
+      "ownerLayer": "Foundation package",
+      "nextMilestone": "ONE-PROD-GA-R11 Customer Activation Plan"
+    },
+    {
+      "moduleId": "CONTRACTS",
+      "moduleName": "Contracts",
+      "status": "GA-ready for declared package scope",
+      "purpose": "schemas, OpenAPI, envelope contracts",
+      "ownerLayer": "Foundation package",
+      "nextMilestone": "ONE-PROD-GA-R11 Customer Activation Plan"
+    },
+    {
+      "moduleId": "CUSTOMER_DELIVERY_INSTALLER",
+      "moduleName": "Customer Delivery / Installer",
+      "status": "Scaffold PASS; production activation not executed",
+      "purpose": "engineer-only installer scaffold, dry-run install/verify/rollback",
+      "ownerLayer": "Customer delivery",
+      "nextMilestone": "ONE-PROD-GA-R11 Customer Activation Plan"
+    },
+    {
+      "moduleId": "OFFLINE_EXPORT",
+      "moduleName": "Offline Export",
+      "status": "Offline export package PASS",
+      "purpose": "backup-ready tarball/checksum/restore metadata",
+      "ownerLayer": "Customer delivery",
+      "nextMilestone": "ONE-PROD-GA-R11 Customer Activation Plan"
+    }
+  ],
+  "packageCounts": {
+    "EDGE": 248,
+    "LINK": 153,
+    "DB": 14,
+    "Contracts": 174
+  },
+  "currentDecision": {
+    "foundationPackageGA": "PASS",
+    "offlineExportPackage": "PASS",
+    "customerDeliveryScaffold": "PASS",
+    "fullCustomerProductionActivation": "NOT_EXECUTED",
+    "fullInternationalGAAcrossAllModules": "NOT_YET"
+  },
+  "forbiddenActions": [
+    "Do not modify production module source code.",
+    "Do not modify EDGE/LINK/DB/Contracts package content.",
+    "Do not modify UFMS source workspace.",
+    "Do not run install scripts.",
+    "Do not run rollback scripts.",
+    "Do not run DB migration.",
+    "Do not start services.",
+    "Do not activate runtime.",
+    "Do not create production secrets.",
+    "Do not add .env files.",
+    "Do not merge to main.",
+    "Do not rebase.",
+    "Do not push.",
+    "Do not tag."
+  ],
+  "nextMilestones": [
+    "UCDE-GA-R1 Final Capability Audit + Consolidated Freeze",
+    "UCONSOLE-GA-R1 Full Module Entry & Menu Consistency Freeze",
+    "UMMS-GA-R1 Final Module Consolidated Freeze",
+    "UESG-GA-R1 Final Module Consolidated Freeze",
+    "REPORTS-GA-R1 Final Reports & Analytics Freeze",
+    "GOVERNANCE-SECURITY-GA-R1 Final Governance & Security Freeze",
+    "NEXUSAI-GA-R1 Current Branch Integration Freeze",
+    "UCODE-GA-R1 CODE Layer Final API/Execution Boundary Freeze",
+    "UDOC-GA-R1 Document & Evidence Package Skeleton",
+    "ONE-ORCH-GA-R1 Orchestrator Read-only Workflow Freeze",
+    "ONE-PROD-GA-R11 Customer Activation Plan"
+  ],
+  "validationReferences": {
+    "r10Validator": "scripts/validation/validate-one-prod-ga-r10-final-international-ga-readiness-matrix.py",
+    "r9Validator": "scripts/validation/validate-one-prod-ga-r9-final-customer-delivery-edition.py",
+    "packageRouteEnforcementValidator": "scripts/validation/validate-one-package-route-enforcement.py",
+    "boundaryBaselineValidator": "scripts/validation/validate-one-boundaries.py"
+  },
+  "safety": {
+    "installExecuted": false,
+    "rollbackExecuted": false,
+    "dbMigrationExecuted": false,
+    "runtimeActionExecuted": false,
+    "productionActivationExecuted": false,
+    "pushPerformed": false,
+    "tagCreated": false,
+    "mergePerformed": false,
+    "rebasePerformed": false
+  },
+  "passMarker": "ONE_DESIGN_R1_FULL_PRODUCT_DESIGN_BLUEPRINT_PASS"
+}
