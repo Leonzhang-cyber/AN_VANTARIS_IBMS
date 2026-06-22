@@ -542,9 +542,13 @@ def scan_ownership(root: Path) -> List[Dict[str, Any]]:
                 "Standalone one-adapter is not marked cancelled.", str(status), "", "",
                 "PERMANENTLY_STOP_STANDALONE_ADAPTER", "Ownership invariants",
             ))
+    allowed_schema_roots = (
+        "contracts/",
+        "AN_VANTARIS_ONE/packages/AN_VANTARIS_Contracts/schemas/",
+    )
     for path in source_files(root, (".json",)):
         relative = rel(root, path)
-        if path.name.endswith(".schema.json") and not relative.startswith("contracts/"):
+        if path.name.endswith(".schema.json") and not relative.startswith(allowed_schema_roots):
             findings.append(finding(
                 "A4-BND-005", "P0_CRITICAL", "VIOLATION", relative, None, path.name,
                 "Canonical/shared schema artifact is declared outside Contracts.",
