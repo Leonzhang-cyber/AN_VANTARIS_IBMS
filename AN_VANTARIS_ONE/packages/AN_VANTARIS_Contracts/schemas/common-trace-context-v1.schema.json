@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vantaris.local/contracts/schemas/common-trace-context-v1.schema.json",
+  "title": "CommonTraceContextV1",
+  "type": "object",
+  "additionalProperties": true,
+  "$defs": {
+    "traceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "correlationId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "idempotencyKey": {
+      "type": "string",
+      "minLength": 1
+    },
+    "traceContext": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "traceId"
+      ],
+      "properties": {
+        "traceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "spanId": {
+          "type": "string"
+        },
+        "parentSpanId": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

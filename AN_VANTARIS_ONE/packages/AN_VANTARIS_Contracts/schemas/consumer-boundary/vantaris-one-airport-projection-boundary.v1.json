@@ -1,0 +1,416 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "vantaris-one-airport-projection-boundary.v1",
+  "title": "VANTARIS ONE Airport Projection Boundary Schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "projectionId",
+    "projectionType",
+    "sourceContracts",
+    "airportContext",
+    "projectionContext",
+    "boundary"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "vantaris-one-airport-projection-boundary.v1"
+    },
+    "projectionId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "projectionType": {
+      "type": "string",
+      "enum": [
+        "AIRPORT_OPERATIONAL_OVERVIEW",
+        "AIRPORT_ASSET_PROJECTION",
+        "AIRPORT_FAULT_PROJECTION",
+        "AIRPORT_HEALTH_PROJECTION",
+        "AIRPORT_HMI_LOCATOR_PROJECTION",
+        "AIRPORT_WORK_ORDER_INTENT_PROJECTION",
+        "BOUNDARY_ONLY",
+        "UNKNOWN"
+      ]
+    },
+    "sourceContracts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonicalHandoffEnvelopeRef",
+        "airportSourceSystemProfileRef",
+        "airportConnectorMatrixRef",
+        "airportTagMappingRef",
+        "airportAssetLocationHmiLocatorRef"
+      ],
+      "properties": {
+        "canonicalHandoffEnvelopeRef": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ackReplayReliabilityRef": {
+          "type": "string"
+        },
+        "edgeHealthDiagnosticsRef": {
+          "type": "string"
+        },
+        "linkDeliveryReceiptRef": {
+          "type": "string"
+        },
+        "auditEvidenceChainRef": {
+          "type": "string"
+        },
+        "airportSourceSystemProfileRef": {
+          "type": "string",
+          "minLength": 1
+        },
+        "airportConnectorMatrixRef": {
+          "type": "string",
+          "minLength": 1
+        },
+        "airportOnboardingPacketRef": {
+          "type": "string"
+        },
+        "airportTagMappingRef": {
+          "type": "string",
+          "minLength": 1
+        },
+        "airportAssetLocationHmiLocatorRef": {
+          "type": "string",
+          "minLength": 1
+        },
+        "workOrderTriggerBoundaryRef": {
+          "type": "string"
+        }
+      }
+    },
+    "airportContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "siteId",
+        "siteName"
+      ],
+      "properties": {
+        "tenantId": {
+          "type": "string"
+        },
+        "siteId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "siteName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "airportCode": {
+          "type": "string"
+        },
+        "terminal": {
+          "type": "string"
+        },
+        "building": {
+          "type": "string"
+        },
+        "timezone": {
+          "type": "string"
+        }
+      }
+    },
+    "projectionContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "projectionMode",
+        "consumerTarget",
+        "readModelOnly",
+        "runtimeImplementationIncluded"
+      ],
+      "properties": {
+        "projectionMode": {
+          "type": "string",
+          "enum": [
+            "READ_MODEL_ONLY",
+            "DASHBOARD_BOUNDARY",
+            "ASSET_GRAPH_BOUNDARY",
+            "FAULT_REVIEW_BOUNDARY",
+            "HMI_LOCATOR_BOUNDARY",
+            "WORK_ORDER_INTENT_BOUNDARY",
+            "UNKNOWN"
+          ]
+        },
+        "consumerTarget": {
+          "type": "string",
+          "enum": [
+            "VANTARIS_ONE_BOUNDARY",
+            "AIRPORT_SOLUTION_BOUNDARY",
+            "ENGINEERING_REVIEW_BOUNDARY",
+            "UNKNOWN"
+          ]
+        },
+        "readModelOnly": {
+          "type": "boolean",
+          "const": true
+        },
+        "runtimeImplementationIncluded": {
+          "type": "boolean",
+          "const": false
+        },
+        "projectionRefreshPolicy": {
+          "type": "string",
+          "enum": [
+            "MANUAL",
+            "SCHEDULED_FUTURE",
+            "EVENT_DRIVEN_FUTURE",
+            "UNKNOWN"
+          ]
+        }
+      }
+    },
+    "assetProjection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "assetRef": {
+          "type": "string"
+        },
+        "assetName": {
+          "type": "string"
+        },
+        "assetType": {
+          "type": "string"
+        },
+        "discipline": {
+          "type": "string"
+        },
+        "deviceRef": {
+          "type": "string"
+        },
+        "pointRefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hierarchyPath": {
+          "type": "string"
+        }
+      }
+    },
+    "faultProjection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "faultRef": {
+          "type": "string"
+        },
+        "triggerRef": {
+          "type": "string"
+        },
+        "eventId": {
+          "type": "string"
+        },
+        "traceId": {
+          "type": "string"
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "CRITICAL",
+            "HIGH",
+            "MEDIUM",
+            "LOW",
+            "INFO",
+            "UNKNOWN"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "OPEN",
+            "ACKNOWLEDGED",
+            "CLEARED",
+            "SUPPRESSED",
+            "UNDER_REVIEW",
+            "UNKNOWN"
+          ]
+        },
+        "recommendedAction": {
+          "type": "string"
+        }
+      }
+    },
+    "locationProjection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "locationRef": {
+          "type": "string"
+        },
+        "terminal": {
+          "type": "string"
+        },
+        "building": {
+          "type": "string"
+        },
+        "level": {
+          "type": "string"
+        },
+        "room": {
+          "type": "string"
+        },
+        "zone": {
+          "type": "string"
+        },
+        "drawingRef": {
+          "type": "string"
+        },
+        "pageRef": {
+          "type": "string"
+        },
+        "symbolRef": {
+          "type": "string"
+        }
+      }
+    },
+    "workOrderIntentProjection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "workOrderTriggerRef": {
+          "type": "string"
+        },
+        "intentType": {
+          "type": "string",
+          "enum": [
+            "CREATE_WORK_ORDER",
+            "CREATE_INSPECTION_TASK",
+            "CREATE_REVIEW_TASK",
+            "NOTIFY_ONLY",
+            "BOUNDARY_ONLY",
+            "UNKNOWN"
+          ]
+        },
+        "priority": {
+          "type": "string",
+          "enum": [
+            "P1",
+            "P2",
+            "P3",
+            "P4",
+            "UNKNOWN"
+          ]
+        },
+        "targetConsumer": {
+          "type": "string",
+          "enum": [
+            "UMMS_BOUNDARY",
+            "MMS_BOUNDARY",
+            "UFMS_BOUNDARY",
+            "VANTARIS_ONE_BOUNDARY",
+            "MANUAL_REVIEW_BOUNDARY",
+            "UNKNOWN"
+          ]
+        },
+        "autoCreateAllowed": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    },
+    "evidenceRefs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "evidenceId",
+          "evidenceType"
+        ],
+        "properties": {
+          "evidenceId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidenceType": {
+            "type": "string",
+            "enum": [
+              "handoff",
+              "airport_source_system",
+              "connector_matrix",
+              "tag_mapping",
+              "asset_location",
+              "hmi_locator",
+              "work_order_trigger",
+              "audit",
+              "diagnostics",
+              "unknown"
+            ]
+          },
+          "sourcePath": {
+            "type": "string"
+          },
+          "hash": {
+            "type": "string"
+          }
+        }
+      },
+      "default": []
+    },
+    "boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contractOnly",
+        "vantarisOneRuntimeImplemented",
+        "airportRuntimeImplemented",
+        "consumerImplementationIncluded",
+        "linkProductionDeliveryAllowed",
+        "edgeRuntimeEnabled",
+        "directUfmsDbAccessAllowed",
+        "writebackAllowed",
+        "autoCreateWorkOrderAllowed"
+      ],
+      "properties": {
+        "contractOnly": {
+          "type": "boolean",
+          "const": true
+        },
+        "vantarisOneRuntimeImplemented": {
+          "type": "boolean",
+          "const": false
+        },
+        "airportRuntimeImplemented": {
+          "type": "boolean",
+          "const": false
+        },
+        "consumerImplementationIncluded": {
+          "type": "boolean",
+          "const": false
+        },
+        "linkProductionDeliveryAllowed": {
+          "type": "boolean",
+          "const": false
+        },
+        "edgeRuntimeEnabled": {
+          "type": "boolean",
+          "const": false
+        },
+        "directUfmsDbAccessAllowed": {
+          "type": "boolean",
+          "const": false
+        },
+        "writebackAllowed": {
+          "type": "boolean",
+          "const": false
+        },
+        "autoCreateWorkOrderAllowed": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    }
+  }
+}

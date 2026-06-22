@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "LINK_UNINSTALL_STRUCTURE_ONLY"
+echo "LINK_NO_RUNTIME_REMOVAL_EXECUTED"
+echo "LINK_NO_DATA_DELETION_EXECUTED"

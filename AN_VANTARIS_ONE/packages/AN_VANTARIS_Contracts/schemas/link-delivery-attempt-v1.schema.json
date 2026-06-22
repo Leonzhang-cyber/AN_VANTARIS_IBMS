@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vantaris.local/contracts/schemas/link-delivery-attempt-v1.schema.json",
+  "title": "LinkDeliveryAttemptV1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schemaVersion",
+    "deliveryId",
+    "envelopeId",
+    "attemptNo",
+    "maxAttempts",
+    "status",
+    "retryable",
+    "targetEndpoint",
+    "startedAt",
+    "traceContext",
+    "idempotencyKey"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "v1"
+    },
+    "deliveryId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "envelopeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "attemptNo": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "maxAttempts": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "scheduled",
+        "in_progress",
+        "succeeded",
+        "failed",
+        "moved_to_dlq"
+      ]
+    },
+    "retryable": {
+      "type": "boolean"
+    },
+    "retryAfterSeconds": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "failureCode": {
+      "type": "string"
+    },
+    "failureMessage": {
+      "type": "string"
+    },
+    "targetEndpoint": {
+      "type": "string",
+      "format": "uri"
+    },
+    "startedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC ISO-8601 timestamp."
+    },
+    "completedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC ISO-8601 timestamp."
+    },
+    "traceContext": {
+      "$ref": "common-trace-context-v1.schema.json#/$defs/traceContext"
+    },
+    "idempotencyKey": {
+      "$ref": "common-trace-context-v1.schema.json#/$defs/idempotencyKey"
+    }
+  }
+}

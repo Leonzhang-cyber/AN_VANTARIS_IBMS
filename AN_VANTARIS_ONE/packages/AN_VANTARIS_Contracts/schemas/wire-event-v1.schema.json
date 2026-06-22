@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vantaris.local/contracts/schemas/wire-event-v1.schema.json",
+  "title": "WireEventV1",
+  "description": "P0 EDGE/LINK wire event contract baseline.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schemaVersion",
+    "protocolVersion",
+    "eventId",
+    "eventType",
+    "sourceTimestamp",
+    "observedTimestamp",
+    "gatewayId",
+    "connectorId",
+    "sourceSystemId",
+    "traceContext",
+    "idempotencyKey",
+    "payload"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "v1"
+    },
+    "protocolVersion": {
+      "type": "string",
+      "const": "v1"
+    },
+    "eventId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "eventType": {
+      "type": "string",
+      "minLength": 1
+    },
+    "eventCategory": {
+      "type": "string"
+    },
+    "sourceTimestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "observedTimestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "tenantId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "siteId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "gatewayId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "connectorId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceSystemId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "assetId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "deviceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "pointId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["critical", "high", "medium", "low", "info"]
+    },
+    "status": {
+      "type": "string"
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "traceContext": {
+      "type": "object",
+      "required": ["traceId"],
+      "additionalProperties": true,
+      "properties": {
+        "traceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "spanId": {
+          "type": "string"
+        },
+        "parentSpanId": {
+          "type": "string"
+        }
+      }
+    },
+    "correlationId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "idempotencyKey": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

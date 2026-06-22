@@ -1,0 +1,38 @@
+openapi: 3.0.3
+info:
+  title: Code to LINK Acknowledgement API
+  version: v1
+  description: |
+    Callback or poll endpoint for AN_VANTARIS_Code to acknowledge delivery processing to AN_VANTARIS_LINK.
+    Contract master: AN_VANTARIS_Contracts (UFMS repo).
+servers:
+  - url: http://localhost:3100
+    description: AN_VANTARIS_LINK (default)
+paths:
+  /api/v1/code/ack:
+    post:
+      operationId: sendDeliveryAck
+      summary: Send delivery acknowledgement from Code to LINK
+      tags:
+        - link-ack
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/delivery-ack.v1.schema.json'
+      responses:
+        '200':
+          description: Ack recorded
+        '400':
+          description: Invalid ack payload
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/error-response.v1.schema.json'
+        '404':
+          description: Unknown messageId
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/error-response.v1.schema.json'

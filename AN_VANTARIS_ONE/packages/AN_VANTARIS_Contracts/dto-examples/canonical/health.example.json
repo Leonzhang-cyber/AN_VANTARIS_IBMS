@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "v1",
+  "healthId": "health-link-node-001",
+  "targetType": "link-node",
+  "targetId": "link-node-001",
+  "healthStatus": "healthy",
+  "observedTimestamp": "2026-06-17T12:00:00Z"
+}

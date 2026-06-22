@@ -1,0 +1,44 @@
+{
+  "manifestVersion": "link-release-manifest.v1",
+  "packageName": "AN_VANTARIS_LINK_OFFLINE_BUNDLE",
+  "packageStatus": "INSTALL_PACKAGE_FOUNDATION",
+  "scope": "AN_VANTARIS_LINK",
+  "generatedAt": "2026-06-20",
+  "releaseInputs": {
+    "packageManifest": "AN_VANTARIS_LINK/deploy/offline-bundle/manifests/link-offline-package-manifest.v1.json",
+    "lifecycleManifest": "AN_VANTARIS_LINK/deploy/offline-bundle/lifecycle/LIFECYCLE_MANIFEST.link.json",
+    "releaseLayout": "AN_VANTARIS_LINK/deploy/offline-bundle/docs/RELEASE_LAYOUT.link.md",
+    "rollbackPlan": "AN_VANTARIS_LINK/deploy/offline-bundle/docs/ROLLBACK_AND_UNINSTALL_PLAN.md",
+    "contractsManifest": "AN_VANTARIS_Contracts/manifest/AN_VANTARIS_CONTRACTS_SCHEMA_MANIFEST.v1.json"
+  },
+  "releaseFiles": [
+    "AN_VANTARIS_LINK/deploy/offline-bundle/README.md",
+    "AN_VANTARIS_LINK/deploy/offline-bundle/config/link.env.example",
+    "AN_VANTARIS_LINK/deploy/offline-bundle/systemd/an-vantaris-link.service.template",
+    "AN_VANTARIS_LINK/deploy/offline-bundle/manifests/link-offline-package-manifest.v1.json",
+    "AN_VANTARIS_LINK/deploy/offline-bundle/lifecycle/LIFECYCLE_MANIFEST.link.json",
+    "AN_VANTARIS_LINK/deploy/offline-bundle/lifecycle/INSTALL_PLAN.link.json",
+    "AN_VANTARIS_LINK/deploy/offline-bundle/lifecycle/UNINSTALL_PLAN.link.json",
+    "AN_VANTARIS_LINK/deploy/offline-bundle/lifecycle/UPGRADE_PLAN.link.json",
+    "AN_VANTARIS_LINK/deploy/offline-bundle/lifecycle/ROLLBACK_PLAN.link.json",
+    "AN_VANTARIS_LINK/deploy/offline-bundle/docs/RELEASE_LAYOUT.link.md",
+    "AN_VANTARIS_LINK/deploy/offline-bundle/docs/ROLLBACK_AND_UNINSTALL_PLAN.md",
+    "AN_VANTARIS_LINK/deploy/offline-bundle/scripts/install-link.sh",
+    "AN_VANTARIS_LINK/deploy/offline-bundle/scripts/uninstall-link.sh",
+    "AN_VANTARIS_LINK/deploy/offline-bundle/scripts/rollback-link.sh",
+    "AN_VANTARIS_LINK/deploy/offline-bundle/scripts/verify-link-offline-package.sh",
+    "AN_VANTARIS_LINK/deploy/offline-bundle/scripts/healthcheck-link-offline.sh"
+  ],
+  "boundary": {
+    "installPackageFoundation": true,
+    "realInstallExecuted": false,
+    "serviceStartExecuted": false,
+    "linkRuntimeEnabled": false,
+    "linkProductionDeliveryAllowed": false,
+    "endpointApproved": false,
+    "directUfmsDbAccessAllowed": false,
+    "writebackAllowed": false,
+    "consumerImplementationIncluded": false,
+    "realUfmsApiDeliveryEnabled": false
+  }
+}

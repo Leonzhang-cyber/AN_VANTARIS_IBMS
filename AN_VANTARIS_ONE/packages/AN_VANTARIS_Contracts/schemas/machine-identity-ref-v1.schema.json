@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vantaris.local/contracts/schemas/machine-identity-ref-v1.schema.json",
+  "title": "MachineIdentityRefV1",
+  "description": "Machine identity reference used by EDGE/LINK contract boundaries.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["machineId", "trustDomain", "keyId", "credentialType"],
+  "properties": {
+    "machineId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "gatewayId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "linkId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tenantId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "siteId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trustDomain": {
+      "type": "string",
+      "minLength": 1
+    },
+    "keyId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "credentialType": {
+      "type": "string",
+      "enum": ["x509", "hmac-shared-key", "opaque-machine-token"]
+    },
+    "issuedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expiresAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

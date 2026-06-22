@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "v1",
+  "batchId": "batch-001",
+  "partitionKey": "site-ufms-hq-001|gateway-edge-001|source-bms-001",
+  "envelopes": [
+    {
+      "envelopeId": "envelope-001",
+      "schemaVersion": "v1",
+      "protocolVersion": "v1",
+      "createdAt": "2026-06-18T00:00:00Z",
+      "machineIdentity": {
+        "machineId": "machine-edge-001",
+        "machineType": "edge-gateway",
+        "tenantId": "tenant-vantaris-demo-001",
+        "siteId": "site-ufms-hq-001"
+      },
+      "headers": {
+        "x-vantaris-machine-id": "machine-edge-001",
+        "x-vantaris-signature": "FAKE_SIGNATURE_HEX_001",
+        "x-vantaris-signature-algorithm": "HMAC-SHA256",
+        "x-vantaris-signed-at": "2026-06-18T00:00:00Z",
+        "x-vantaris-trace-id": "trace-rel-001",
+        "x-vantaris-idempotency-key": "idem-rel-001",
+        "x-vantaris-protocol-version": "v1"
+      },
+      "wireEvent": {
+        "schemaVersion": "v1",
+        "protocolVersion": "v1",
+        "eventId": "event-001",
+        "eventType": "temperature.threshold.exceeded",
+        "sourceTimestamp": "2026-06-18T00:00:00Z",
+        "observedTimestamp": "2026-06-18T00:00:00Z",
+        "gatewayId": "gateway-edge-001",
+        "connectorId": "connector-bacnet-001",
+        "sourceSystemId": "source-bms-001",
+        "traceContext": {
+          "traceId": "trace-rel-001"
+        },
+        "idempotencyKey": "idem-rel-001",
+        "payload": {
+          "value": 7.2
+        }
+      },
+      "idempotencyKey": "idem-rel-001"
+    }
+  ],
+  "deliveryPolicy": {
+    "schemaVersion": "v1",
+    "policyId": "retry-policy-default-v1",
+    "policyName": "default-link-retry-policy",
+    "maxAttempts": 5,
+    "initialBackoffSeconds": 5,
+    "maxBackoffSeconds": 300,
+    "backoffStrategy": "exponential_with_cap",
+    "jitterEnabled": true,
+    "retryableStatusCodes": [
+      408,
+      429,
+      500,
+      502,
+      503,
+      504
+    ],
+    "nonRetryableStatusCodes": [
+      400,
+      401,
+      403,
+      404,
+      409,
+      422
+    ],
+    "retryableErrorCodes": [
+      "LINK_DOWNSTREAM_TIMEOUT"
+    ],
+    "nonRetryableErrorCodes": [
+      "LINK_INVALID_SIGNATURE"
+    ],
+    "dlqAfterMaxAttempts": true,
+    "enabled": true,
+    "createdAt": "2026-06-18T00:00:00Z",
+    "updatedAt": "2026-06-18T00:00:00Z"
+  },
+  "traceContext": {
+    "traceId": "trace-rel-001"
+  },
+  "idempotencyKey": "idem-rel-batch-001",
+  "createdAt": "2026-06-18T00:00:00Z"
+}

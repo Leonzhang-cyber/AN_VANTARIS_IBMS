@@ -1,0 +1,511 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "airport-elv-connector-matrix.v1",
+  "title": "Airport ELV Connector Matrix Schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "matrixId",
+    "site",
+    "matrix",
+    "boundary"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "airport-elv-connector-matrix.v1"
+    },
+    "matrixId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "site": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "siteId",
+        "siteName"
+      ],
+      "properties": {
+        "tenantId": {
+          "type": "string"
+        },
+        "siteId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "siteName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "airportCode": {
+          "type": "string"
+        },
+        "terminal": {
+          "type": "string"
+        }
+      }
+    },
+    "matrix": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "matrixItemId",
+          "sourceSystemType",
+          "discipline",
+          "preferredProtocol",
+          "connectorReadiness",
+          "edgeAdapterRequirement",
+          "dataObjects",
+          "commissioning",
+          "risk",
+          "boundary"
+        ],
+        "properties": {
+          "matrixItemId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sourceSystemProfileRef": {
+            "type": "string"
+          },
+          "sourceSystemType": {
+            "type": "string",
+            "enum": [
+              "CCTV",
+              "ACS_SMS",
+              "PA_SYSTEM",
+              "RADIO_SYSTEM",
+              "IPTV",
+              "CLOCK_SYSTEM",
+              "IPBX",
+              "TOLL_SYSTEM",
+              "BMS",
+              "EMS",
+              "MMS",
+              "E_INSPECTION",
+              "IFEEDBACK",
+              "SECURITY_SYSTEM",
+              "FIRE_ALARM",
+              "LIFT_ESCALATOR",
+              "LIGHTING",
+              "POWER_METERING",
+              "HVAC",
+              "WATER",
+              "OTHER"
+            ]
+          },
+          "discipline": {
+            "type": "string",
+            "enum": [
+              "SECURITY",
+              "ELV",
+              "MECHANICAL",
+              "ELECTRICAL",
+              "FACILITY",
+              "OPERATIONS",
+              "MAINTENANCE",
+              "ENERGY",
+              "SAFETY",
+              "OTHER"
+            ]
+          },
+          "vendor": {
+            "type": "string"
+          },
+          "productName": {
+            "type": "string"
+          },
+          "preferredProtocol": {
+            "type": "string",
+            "enum": [
+              "OPC_UA",
+              "OPC_DA",
+              "MODBUS_TCP",
+              "BACNET_IP",
+              "SNMP",
+              "REST_API",
+              "SOAP_API",
+              "SDK",
+              "CSV",
+              "EXCEL",
+              "DATABASE_EXPORT",
+              "FILE_DROP",
+              "MQTT",
+              "SFTP",
+              "NONE",
+              "UNKNOWN"
+            ]
+          },
+          "fallbackProtocols": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "OPC_UA",
+                "OPC_DA",
+                "MODBUS_TCP",
+                "BACNET_IP",
+                "SNMP",
+                "REST_API",
+                "SOAP_API",
+                "SDK",
+                "CSV",
+                "EXCEL",
+                "DATABASE_EXPORT",
+                "FILE_DROP",
+                "MQTT",
+                "SFTP",
+                "NONE",
+                "UNKNOWN"
+              ]
+            },
+            "default": []
+          },
+          "connectorReadiness": {
+            "type": "string",
+            "enum": [
+              "READY_INTERNAL_CONTRACT",
+              "READY_SHARED_CONTRACT",
+              "ADAPTER_REQUIRED",
+              "VENDOR_INFO_REQUIRED",
+              "TAG_MAPPING_REQUIRED",
+              "ASSET_MAPPING_REQUIRED",
+              "SITE_SURVEY_REQUIRED",
+              "BLOCKED",
+              "UNKNOWN"
+            ]
+          },
+          "edgeAdapterRequirement": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "edgeRequired",
+              "adapterType",
+              "readOnly",
+              "writebackAllowed"
+            ],
+            "properties": {
+              "edgeRequired": {
+                "type": "boolean"
+              },
+              "adapterType": {
+                "type": "string",
+                "enum": [
+                  "OPC_UA_READ_ONLY",
+                  "OPC_DA_READ_ONLY",
+                  "MODBUS_TCP_READ_ONLY",
+                  "BACNET_IP_READ_ONLY",
+                  "SNMP_READ_ONLY",
+                  "REST_API_READ_ONLY",
+                  "SDK_READ_ONLY",
+                  "FILE_IMPORT",
+                  "EXCEL_IMPORT",
+                  "CSV_IMPORT",
+                  "MANUAL_REGISTER",
+                  "FUTURE",
+                  "UNKNOWN"
+                ]
+              },
+              "readOnly": {
+                "type": "boolean",
+                "const": true
+              },
+              "writebackAllowed": {
+                "type": "boolean",
+                "const": false
+              },
+              "requiresGatewayHardware": {
+                "type": "boolean"
+              },
+              "requiresVendorSdk": {
+                "type": "boolean"
+              },
+              "requiresNetworkAllowlist": {
+                "type": "boolean"
+              },
+              "requiresCredentialRef": {
+                "type": "boolean"
+              }
+            }
+          },
+          "dataObjects": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "supportedObjects"
+            ],
+            "properties": {
+              "supportedObjects": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "ASSET",
+                    "DEVICE",
+                    "POINT",
+                    "TELEMETRY",
+                    "EVENT",
+                    "ALARM",
+                    "HEALTH",
+                    "EVIDENCE",
+                    "CONFIG_VERSION",
+                    "THROUGHPUT",
+                    "UNKNOWN"
+                  ]
+                }
+              },
+              "estimatedPointCount": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "estimatedDeviceCount": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "supportsAlarmEvents": {
+                "type": "boolean"
+              },
+              "supportsTelemetry": {
+                "type": "boolean"
+              },
+              "supportsHealth": {
+                "type": "boolean"
+              },
+              "supportsEvidence": {
+                "type": "boolean"
+              }
+            }
+          },
+          "mapping": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "tagMappingRequired": {
+                "type": "boolean"
+              },
+              "assetMappingRequired": {
+                "type": "boolean"
+              },
+              "locationMappingRequired": {
+                "type": "boolean"
+              },
+              "hmiLocatorRequired": {
+                "type": "boolean"
+              },
+              "sampleDataRequired": {
+                "type": "boolean"
+              }
+            }
+          },
+          "commissioning": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "priority",
+              "status"
+            ],
+            "properties": {
+              "priority": {
+                "type": "string",
+                "enum": [
+                  "P0",
+                  "P1",
+                  "P2",
+                  "P3",
+                  "UNKNOWN"
+                ]
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "NOT_STARTED",
+                  "DISCOVERY",
+                  "PROFILE_READY",
+                  "MAPPING_REQUIRED",
+                  "DRY_RUN_READY",
+                  "VALIDATED",
+                  "BLOCKED",
+                  "UNKNOWN"
+                ]
+              },
+              "commissioningNotes": {
+                "type": "string"
+              }
+            }
+          },
+          "risk": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "integrationRisk",
+              "dataQualityRisk",
+              "securityRisk"
+            ],
+            "properties": {
+              "integrationRisk": {
+                "type": "string",
+                "enum": [
+                  "LOW",
+                  "MEDIUM",
+                  "HIGH",
+                  "UNKNOWN"
+                ]
+              },
+              "dataQualityRisk": {
+                "type": "string",
+                "enum": [
+                  "LOW",
+                  "MEDIUM",
+                  "HIGH",
+                  "UNKNOWN"
+                ]
+              },
+              "securityRisk": {
+                "type": "string",
+                "enum": [
+                  "LOW",
+                  "MEDIUM",
+                  "HIGH",
+                  "UNKNOWN"
+                ]
+              },
+              "riskNotes": {
+                "type": "string"
+              }
+            }
+          },
+          "boundary": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "contractOnly",
+              "runtimeConnectorImplemented",
+              "edgeRuntimeEnabled",
+              "linkProductionDeliveryAllowed",
+              "directUfmsDbAccessAllowed",
+              "writebackAllowed",
+              "consumerImplementationIncluded"
+            ],
+            "properties": {
+              "contractOnly": {
+                "type": "boolean",
+                "const": true
+              },
+              "runtimeConnectorImplemented": {
+                "type": "boolean",
+                "const": false
+              },
+              "edgeRuntimeEnabled": {
+                "type": "boolean",
+                "const": false
+              },
+              "linkProductionDeliveryAllowed": {
+                "type": "boolean",
+                "const": false
+              },
+              "directUfmsDbAccessAllowed": {
+                "type": "boolean",
+                "const": false
+              },
+              "writebackAllowed": {
+                "type": "boolean",
+                "const": false
+              },
+              "consumerImplementationIncluded": {
+                "type": "boolean",
+                "const": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "evidenceRefs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "evidenceId",
+          "evidenceType"
+        ],
+        "properties": {
+          "evidenceId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidenceType": {
+            "type": "string",
+            "enum": [
+              "source_system_profile",
+              "connector_matrix",
+              "vendor_document",
+              "network_detail",
+              "tag_list",
+              "asset_list",
+              "sample_data",
+              "mapping_review",
+              "commissioning_note",
+              "unknown"
+            ]
+          },
+          "sourcePath": {
+            "type": "string"
+          },
+          "hash": {
+            "type": "string"
+          }
+        }
+      },
+      "default": []
+    },
+    "boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contractOnly",
+        "runtimeConnectorImplemented",
+        "edgeRuntimeEnabled",
+        "linkProductionDeliveryAllowed",
+        "directUfmsDbAccessAllowed",
+        "writebackAllowed",
+        "consumerImplementationIncluded"
+      ],
+      "properties": {
+        "contractOnly": {
+          "type": "boolean",
+          "const": true
+        },
+        "runtimeConnectorImplemented": {
+          "type": "boolean",
+          "const": false
+        },
+        "edgeRuntimeEnabled": {
+          "type": "boolean",
+          "const": false
+        },
+        "linkProductionDeliveryAllowed": {
+          "type": "boolean",
+          "const": false
+        },
+        "directUfmsDbAccessAllowed": {
+          "type": "boolean",
+          "const": false
+        },
+        "writebackAllowed": {
+          "type": "boolean",
+          "const": false
+        },
+        "consumerImplementationIncluded": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    }
+  }
+}

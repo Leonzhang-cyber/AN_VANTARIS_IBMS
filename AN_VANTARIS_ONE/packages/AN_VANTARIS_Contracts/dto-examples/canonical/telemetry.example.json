@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "v1",
+  "telemetryId": "telemetry-001",
+  "pointId": "point-supply-temp-001",
+  "observedTimestamp": "2026-06-17T12:00:00Z",
+  "value": 7.2,
+  "quality": "good",
+  "traceContext": {
+    "traceId": "trace-001"
+  }
+}

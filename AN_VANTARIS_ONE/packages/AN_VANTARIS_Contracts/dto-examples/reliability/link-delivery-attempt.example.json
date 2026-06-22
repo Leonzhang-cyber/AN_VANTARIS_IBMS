@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "v1",
+  "deliveryId": "delivery-001",
+  "envelopeId": "envelope-001",
+  "attemptNo": 2,
+  "maxAttempts": 5,
+  "status": "failed",
+  "retryable": true,
+  "retryAfterSeconds": 30,
+  "failureCode": "LINK_DOWNSTREAM_TIMEOUT",
+  "failureMessage": "Code API timeout after 5s",
+  "targetEndpoint": "https://code-api.example.local/api/v1/link/delivery",
+  "startedAt": "2026-06-18T00:00:00Z",
+  "completedAt": "2026-06-18T00:00:05Z",
+  "traceContext": {
+    "traceId": "trace-rel-001",
+    "spanId": "span-rel-001"
+  },
+  "idempotencyKey": "idem-rel-001"
+}

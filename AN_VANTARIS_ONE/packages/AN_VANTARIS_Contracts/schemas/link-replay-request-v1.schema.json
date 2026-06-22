@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vantaris.local/contracts/schemas/link-replay-request-v1.schema.json",
+  "title": "LinkReplayRequestV1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schemaVersion",
+    "replayRequestId",
+    "requestedBy",
+    "requestReason",
+    "dlqItemIds",
+    "envelopeIds",
+    "replayMode",
+    "dryRun",
+    "maxItems",
+    "traceContext",
+    "requestedAt"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "v1"
+    },
+    "replayRequestId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "requestedBy": {
+      "type": "string",
+      "minLength": 1
+    },
+    "requestReason": {
+      "type": "string",
+      "minLength": 1
+    },
+    "dlqItemIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "envelopeIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "replayMode": {
+      "type": "string",
+      "enum": [
+        "by_dlq_item_ids",
+        "by_envelope_ids",
+        "force_replay"
+      ]
+    },
+    "dryRun": {
+      "type": "boolean"
+    },
+    "maxItems": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "traceContext": {
+      "$ref": "common-trace-context-v1.schema.json#/$defs/traceContext"
+    },
+    "requestedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC ISO-8601 timestamp."
+    }
+  }
+}

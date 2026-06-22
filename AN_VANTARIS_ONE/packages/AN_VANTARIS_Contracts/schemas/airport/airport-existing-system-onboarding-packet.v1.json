@@ -1,0 +1,593 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "airport-existing-system-onboarding-packet.v1",
+  "title": "Airport Existing System Onboarding Packet Schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "packetId",
+    "packetStatus",
+    "sourceSystemProfileRef",
+    "sourceSystemInventory",
+    "networkProfile",
+    "dataArtifacts",
+    "commissioning",
+    "review",
+    "boundary"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "airport-existing-system-onboarding-packet.v1"
+    },
+    "packetId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "packetStatus": {
+      "type": "string",
+      "enum": [
+        "DRAFT",
+        "SUBMITTED",
+        "UNDER_REVIEW",
+        "MAPPING_REQUIRED",
+        "READY_FOR_DRY_RUN",
+        "VALIDATED",
+        "BLOCKED",
+        "UNKNOWN"
+      ]
+    },
+    "sourceSystemProfileRef": {
+      "type": "string",
+      "minLength": 1
+    },
+    "connectorMatrixItemRef": {
+      "type": "string"
+    },
+    "sourceSystemInventory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceSystemId",
+        "sourceSystemName",
+        "sourceSystemType",
+        "vendor",
+        "ownerTeam"
+      ],
+      "properties": {
+        "sourceSystemId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceSystemName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceSystemType": {
+          "type": "string",
+          "enum": [
+            "CCTV",
+            "ACS_SMS",
+            "PA_SYSTEM",
+            "RADIO_SYSTEM",
+            "IPTV",
+            "CLOCK_SYSTEM",
+            "IPBX",
+            "TOLL_SYSTEM",
+            "BMS",
+            "EMS",
+            "MMS",
+            "E_INSPECTION",
+            "IFEEDBACK",
+            "SECURITY_SYSTEM",
+            "FIRE_ALARM",
+            "LIFT_ESCALATOR",
+            "LIGHTING",
+            "POWER_METERING",
+            "HVAC",
+            "WATER",
+            "OTHER"
+          ]
+        },
+        "vendor": {
+          "type": "string",
+          "minLength": 1
+        },
+        "productName": {
+          "type": "string"
+        },
+        "productVersion": {
+          "type": "string"
+        },
+        "ownerTeam": {
+          "type": "string",
+          "minLength": 1
+        },
+        "supportContactRef": {
+          "type": "string"
+        },
+        "criticality": {
+          "type": "string",
+          "enum": [
+            "CRITICAL",
+            "HIGH",
+            "MEDIUM",
+            "LOW",
+            "UNKNOWN"
+          ]
+        }
+      }
+    },
+    "networkProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "networkInfoAvailable",
+        "networkAccessApproved",
+        "readOnlyAccess"
+      ],
+      "properties": {
+        "networkInfoAvailable": {
+          "type": "boolean"
+        },
+        "networkAccessApproved": {
+          "type": "boolean",
+          "const": false
+        },
+        "hostRef": {
+          "type": "string"
+        },
+        "portRef": {
+          "type": "string"
+        },
+        "endpointRef": {
+          "type": "string"
+        },
+        "protocol": {
+          "type": "string",
+          "enum": [
+            "OPC_UA",
+            "OPC_DA",
+            "MODBUS_TCP",
+            "BACNET_IP",
+            "SNMP",
+            "REST_API",
+            "SOAP_API",
+            "SDK",
+            "CSV",
+            "EXCEL",
+            "DATABASE_EXPORT",
+            "FILE_DROP",
+            "MQTT",
+            "SFTP",
+            "NONE",
+            "UNKNOWN"
+          ]
+        },
+        "networkZone": {
+          "type": "string"
+        },
+        "firewallChangeRequired": {
+          "type": "boolean"
+        },
+        "allowlistRequired": {
+          "type": "boolean"
+        },
+        "credentialRef": {
+          "type": "string"
+        },
+        "readOnlyAccess": {
+          "type": "boolean",
+          "const": true
+        }
+      }
+    },
+    "vendorDocuments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "documentId",
+          "documentType",
+          "available"
+        ],
+        "properties": {
+          "documentId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "documentType": {
+            "type": "string",
+            "enum": [
+              "API_DOCUMENT",
+              "OPC_TAG_LIST",
+              "BACNET_OBJECT_LIST",
+              "MODBUS_REGISTER_MAP",
+              "SNMP_MIB",
+              "SDK_GUIDE",
+              "NETWORK_DIAGRAM",
+              "HMI_DRAWING",
+              "ASSET_LIST",
+              "ALARM_LIST",
+              "SAMPLE_EXPORT",
+              "OTHER"
+            ]
+          },
+          "available": {
+            "type": "boolean"
+          },
+          "sourcePath": {
+            "type": "string"
+          },
+          "hash": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      },
+      "default": []
+    },
+    "dataArtifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tagList",
+        "assetList",
+        "sampleData",
+        "hmiReferences"
+      ],
+      "properties": {
+        "tagList": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "available",
+            "format",
+            "reviewStatus"
+          ],
+          "properties": {
+            "available": {
+              "type": "boolean"
+            },
+            "format": {
+              "type": "string",
+              "enum": [
+                "EXCEL",
+                "CSV",
+                "JSON",
+                "XML",
+                "PDF",
+                "VENDOR_EXPORT",
+                "UNKNOWN"
+              ]
+            },
+            "sourcePath": {
+              "type": "string"
+            },
+            "estimatedTagCount": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "reviewStatus": {
+              "type": "string",
+              "enum": [
+                "NOT_REVIEWED",
+                "UNDER_REVIEW",
+                "NEEDS_CLEANUP",
+                "ACCEPTED",
+                "REJECTED",
+                "UNKNOWN"
+              ]
+            }
+          }
+        },
+        "assetList": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "available",
+            "format",
+            "reviewStatus"
+          ],
+          "properties": {
+            "available": {
+              "type": "boolean"
+            },
+            "format": {
+              "type": "string",
+              "enum": [
+                "EXCEL",
+                "CSV",
+                "JSON",
+                "XML",
+                "PDF",
+                "VENDOR_EXPORT",
+                "UNKNOWN"
+              ]
+            },
+            "sourcePath": {
+              "type": "string"
+            },
+            "estimatedAssetCount": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "reviewStatus": {
+              "type": "string",
+              "enum": [
+                "NOT_REVIEWED",
+                "UNDER_REVIEW",
+                "NEEDS_CLEANUP",
+                "ACCEPTED",
+                "REJECTED",
+                "UNKNOWN"
+              ]
+            }
+          }
+        },
+        "sampleData": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "available",
+            "format",
+            "reviewStatus"
+          ],
+          "properties": {
+            "available": {
+              "type": "boolean"
+            },
+            "format": {
+              "type": "string",
+              "enum": [
+                "EXCEL",
+                "CSV",
+                "JSON",
+                "XML",
+                "TEXT",
+                "VENDOR_EXPORT",
+                "UNKNOWN"
+              ]
+            },
+            "sourcePath": {
+              "type": "string"
+            },
+            "sampleWindow": {
+              "type": "string"
+            },
+            "reviewStatus": {
+              "type": "string",
+              "enum": [
+                "NOT_REVIEWED",
+                "UNDER_REVIEW",
+                "NEEDS_CLEANUP",
+                "ACCEPTED",
+                "REJECTED",
+                "UNKNOWN"
+              ]
+            }
+          }
+        },
+        "hmiReferences": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "available",
+            "reviewStatus"
+          ],
+          "properties": {
+            "available": {
+              "type": "boolean"
+            },
+            "drawingRef": {
+              "type": "string"
+            },
+            "symbolRef": {
+              "type": "string"
+            },
+            "zoneMapRef": {
+              "type": "string"
+            },
+            "reviewStatus": {
+              "type": "string",
+              "enum": [
+                "NOT_REVIEWED",
+                "UNDER_REVIEW",
+                "NEEDS_CLEANUP",
+                "ACCEPTED",
+                "REJECTED",
+                "UNKNOWN"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "commissioning": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "checklistStatus",
+        "dryRunAllowed",
+        "pilotApproved",
+        "productionApproved"
+      ],
+      "properties": {
+        "checklistStatus": {
+          "type": "string",
+          "enum": [
+            "NOT_STARTED",
+            "IN_PROGRESS",
+            "READY_FOR_REVIEW",
+            "READY_FOR_DRY_RUN",
+            "VALIDATED",
+            "BLOCKED",
+            "UNKNOWN"
+          ]
+        },
+        "dryRunAllowed": {
+          "type": "boolean"
+        },
+        "pilotApproved": {
+          "type": "boolean",
+          "const": false
+        },
+        "productionApproved": {
+          "type": "boolean",
+          "const": false
+        },
+        "requiredActions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mappingReviewStatus",
+        "securityReviewStatus",
+        "engineeringReviewStatus"
+      ],
+      "properties": {
+        "mappingReviewStatus": {
+          "type": "string",
+          "enum": [
+            "NOT_STARTED",
+            "UNDER_REVIEW",
+            "PASSED",
+            "FAILED",
+            "BLOCKED",
+            "UNKNOWN"
+          ]
+        },
+        "securityReviewStatus": {
+          "type": "string",
+          "enum": [
+            "NOT_STARTED",
+            "UNDER_REVIEW",
+            "PASSED",
+            "FAILED",
+            "BLOCKED",
+            "UNKNOWN"
+          ]
+        },
+        "engineeringReviewStatus": {
+          "type": "string",
+          "enum": [
+            "NOT_STARTED",
+            "UNDER_REVIEW",
+            "PASSED",
+            "FAILED",
+            "BLOCKED",
+            "UNKNOWN"
+          ]
+        },
+        "reviewerRef": {
+          "type": "string"
+        },
+        "reviewedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "evidenceRefs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "evidenceId",
+          "evidenceType"
+        ],
+        "properties": {
+          "evidenceId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidenceType": {
+            "type": "string",
+            "enum": [
+              "onboarding_packet",
+              "source_system_inventory",
+              "network_detail",
+              "vendor_document",
+              "credential_reference",
+              "tag_list",
+              "asset_list",
+              "sample_data",
+              "hmi_reference",
+              "commissioning_checklist",
+              "mapping_review",
+              "security_review",
+              "engineering_review",
+              "unknown"
+            ]
+          },
+          "sourcePath": {
+            "type": "string"
+          },
+          "hash": {
+            "type": "string"
+          }
+        }
+      },
+      "default": []
+    },
+    "boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contractOnly",
+        "runtimeConnectorImplemented",
+        "edgeRuntimeEnabled",
+        "linkProductionDeliveryAllowed",
+        "directUfmsDbAccessAllowed",
+        "writebackAllowed",
+        "consumerImplementationIncluded"
+      ],
+      "properties": {
+        "contractOnly": {
+          "type": "boolean",
+          "const": true
+        },
+        "runtimeConnectorImplemented": {
+          "type": "boolean",
+          "const": false
+        },
+        "edgeRuntimeEnabled": {
+          "type": "boolean",
+          "const": false
+        },
+        "linkProductionDeliveryAllowed": {
+          "type": "boolean",
+          "const": false
+        },
+        "directUfmsDbAccessAllowed": {
+          "type": "boolean",
+          "const": false
+        },
+        "writebackAllowed": {
+          "type": "boolean",
+          "const": false
+        },
+        "consumerImplementationIncluded": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    }
+  }
+}

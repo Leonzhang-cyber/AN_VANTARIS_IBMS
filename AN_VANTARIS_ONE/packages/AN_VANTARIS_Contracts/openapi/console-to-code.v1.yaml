@@ -1,0 +1,78 @@
+openapi: 3.0.3
+info:
+  title: Console to Code API
+  version: v1
+  description: |
+    HTTP boundary for AN_VANTARIS_Console calling AN_VANTARIS_Code.
+    Console must not access DB, LINK, EDGE, or NexusAI directly.
+    Contract master: AN_VANTARIS_Contracts (UFMS repo).
+servers:
+  - url: http://localhost:3000
+    description: AN_VANTARIS_Code (default)
+paths:
+  /api/v1/health:
+    get:
+      operationId: getCodeHealth
+      summary: Code service health for Console bootstrap
+      tags:
+        - health
+      responses:
+        '200':
+          description: Service health
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/service-health.v1.schema.json'
+  /api/v1/{resource}:
+    get:
+      operationId: consoleGetResource
+      summary: Console read proxy to Code
+      tags:
+        - console-api
+      parameters:
+        - name: resource
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Resource payload
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/error-response.v1.schema.json'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/error-response.v1.schema.json'
+    post:
+      operationId: consoleMutateResource
+      summary: Console write proxy to Code
+      tags:
+        - console-api
+      parameters:
+        - name: resource
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Mutation result
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/error-response.v1.schema.json'

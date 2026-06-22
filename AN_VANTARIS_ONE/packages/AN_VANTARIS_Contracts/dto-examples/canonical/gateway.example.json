@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "v1",
+  "gatewayId": "gateway-edge-001",
+  "siteId": "site-ufms-hq-001",
+  "name": "Edge Gateway A",
+  "status": "active",
+  "machineId": "machine-edge-001"
+}

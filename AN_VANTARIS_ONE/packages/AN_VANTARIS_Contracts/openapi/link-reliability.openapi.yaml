@@ -1,0 +1,153 @@
+openapi: 3.0.3
+info:
+  title: VANTARIS LINK Reliability API
+  version: 1.0.0
+  description: |
+    Engineer-facing reliability contract surface for LINK retry, DLQ, and replay operations.
+security:
+  - machineSignature: []
+  - serviceAuth: []
+paths:
+  /link/v1/partitions/{partitionId}/state:
+    get:
+      summary: Read partition delivery state
+      operationId: getPartitionState
+      tags: [link-reliability]
+      parameters:
+        - name: partitionId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Partition state payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LinkPartitionStateV1'
+        '404':
+          description: Partition not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /link/v1/dlq/items:
+    get:
+      summary: List DLQ items
+      operationId: listDlqItems
+      tags: [link-reliability]
+      parameters:
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: DLQ item list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LinkDlqItemV1'
+  /link/v1/dlq/items/{dlqItemId}:
+    get:
+      summary: Read DLQ item details
+      operationId: getDlqItem
+      tags: [link-reliability]
+      parameters:
+        - name: dlqItemId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: DLQ item payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LinkDlqItemV1'
+        '404':
+          description: DLQ item not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /link/v1/replay:
+    post:
+      summary: Submit replay request
+      operationId: createReplayRequest
+      tags: [link-reliability]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LinkReplayRequestV1'
+      responses:
+        '202':
+          description: Replay request accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LinkReplayResultV1'
+        '400':
+          description: Invalid replay request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /link/v1/replay/{replayRequestId}:
+    get:
+      summary: Read replay request result
+      operationId: getReplayResult
+      tags: [link-reliability]
+      parameters:
+        - name: replayRequestId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Replay result payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LinkReplayResultV1'
+        '404':
+          description: Replay request not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  securitySchemes:
+    machineSignature:
+      type: apiKey
+      in: header
+      name: x-vantaris-signature
+      description: Machine identity signature header.
+    serviceAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: Service-to-service auth placeholder.
+  schemas:
+    LinkDeliveryAttemptV1:
+      $ref: '../schemas/link-delivery-attempt-v1.schema.json'
+    LinkRetryPolicyV1:
+      $ref: '../schemas/link-retry-policy-v1.schema.json'
+    LinkDlqItemV1:
+      $ref: '../schemas/link-dlq-item-v1.schema.json'
+    LinkReplayRequestV1:
+      $ref: '../schemas/link-replay-request-v1.schema.json'
+    LinkReplayResultV1:
+      $ref: '../schemas/link-replay-result-v1.schema.json'
+    LinkPartitionStateV1:
+      $ref: '../schemas/link-partition-state-v1.schema.json'
+    ErrorResponse:
+      $ref: '../schemas/error-response.v1.schema.json'

@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vantaris.local/contracts/schemas/delivery-ack.v1.schema.json",
+  "title": "DeliveryAck",
+  "description": "Acknowledgement from AN_VANTARIS_Code to AN_VANTARIS_LINK (v1)",
+  "type": "object",
+  "required": ["schemaVersion", "messageId", "correlationId", "ackAt", "status"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "v1"
+    },
+    "messageId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "ackId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "deliveryId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "envelopeId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "correlationId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "protocolVersion": {
+      "type": "string"
+    },
+    "ackAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["accepted", "duplicate", "rejected"]
+    },
+    "codeProcessingStatus": {
+      "type": "string",
+      "description": "Reference to status/link-message-status.v1.md lifecycle value"
+    },
+    "acceptedCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "rejectedCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "partialSuccess": {
+      "type": "boolean"
+    },
+    "retryable": {
+      "type": "boolean"
+    },
+    "retryAfterSeconds": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "rejectionReasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "traceContext": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "receivedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "processedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "error": {
+      "$ref": "error-response.v1.schema.json"
+    }
+  }
+}

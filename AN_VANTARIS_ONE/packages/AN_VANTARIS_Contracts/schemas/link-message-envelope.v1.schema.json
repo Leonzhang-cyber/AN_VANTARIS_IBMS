@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vantaris.local/contracts/schemas/link-message-envelope.v1.schema.json",
+  "title": "LinkMessageEnvelope",
+  "description": "Envelope for messages delivered from AN_VANTARIS_LINK to AN_VANTARIS_Code (v1)",
+  "type": "object",
+  "required": ["schemaVersion", "messageId", "correlationId", "sentAt", "source", "payload"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "v1"
+    },
+    "messageId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique id for this delivery attempt"
+    },
+    "correlationId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "End-to-end trace id across LINK and Code"
+    },
+    "sentAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source": {
+      "type": "object",
+      "required": ["package", "edgeId"],
+      "additionalProperties": false,
+      "properties": {
+        "package": {
+          "type": "string",
+          "const": "AN_VANTARIS_LINK"
+        },
+        "edgeId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "linkInstanceId": {
+          "type": "string"
+        }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "required": ["eventType", "body"],
+      "additionalProperties": true,
+      "properties": {
+        "eventType": {
+          "type": "string",
+          "minLength": 1
+        },
+        "body": {
+          "type": "object"
+        },
+        "dedupeKey": {
+          "type": "string",
+          "description": "Optional key for Code-side deduplication"
+        }
+      }
+    }
+  }
+}

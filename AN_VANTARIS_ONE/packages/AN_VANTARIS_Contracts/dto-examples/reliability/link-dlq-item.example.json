@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "v1",
+  "dlqItemId": "dlq-item-001",
+  "envelopeId": "envelope-001",
+  "deliveryId": "delivery-001",
+  "finalAttemptNo": 5,
+  "failureCode": "LINK_DOWNSTREAM_TIMEOUT",
+  "failureMessage": "Code API timeout after max retry attempts",
+  "failureCategory": "downstream",
+  "retryable": false,
+  "originalEnvelopeRef": "https://contract-artifacts.example.local/envelopes/envelope-001",
+  "originalWireEventRef": "https://contract-artifacts.example.local/events/event-001",
+  "payloadSnapshot": {
+    "eventId": "event-001",
+    "eventType": "temperature.threshold.exceeded"
+  },
+  "traceContext": {
+    "traceId": "trace-rel-001",
+    "spanId": "span-rel-009"
+  },
+  "idempotencyKey": "idem-rel-001",
+  "movedToDlqAt": "2026-06-18T00:15:00Z",
+  "retentionUntil": "2026-07-18T00:15:00Z",
+  "status": "active"
+}

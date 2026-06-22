@@ -1,0 +1,18 @@
+{
+  "version": "0.0.0-ga-hardening",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.typecheck.json --noEmit",
+    "build:c8-stable-suppression": "tsc -p tsconfig.c8-stable-suppression.json",
+    "validate:c8-stable-suppression": "npm run build:c8-stable-suppression && node scripts/validate-c8-stable-suppression.mjs",
+    "build:c8-outbox": "tsc -p tsconfig.c8-outbox.json",
+    "validate:c8-outbox": "npm run build:c8-outbox && node scripts/validate-c8-outbox-reliability.mjs",
+    "build:c8-heartbeat": "tsc -p tsconfig.c8-heartbeat.json",
+    "validate:c8-heartbeat": "npm run build:c8-heartbeat && node scripts/validate-c8-heartbeat-liveness.mjs",
+    "build:c8-diagnostics": "tsc -p tsconfig.c8-diagnostics.json",
+    "validate:c8-diagnostics": "npm run build:c8-diagnostics && node scripts/validate-c8-diagnostics-bundle.mjs"
+  },
+  "devDependencies": {},
+  "name": "an-vantaris-edge"
+}

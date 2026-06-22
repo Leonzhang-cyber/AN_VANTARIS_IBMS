@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "v1",
+  "replayRequestId": "replay-req-001",
+  "requestedBy": "qa.engineer@example.local",
+  "requestReason": "Validate replay after downstream incident recovery",
+  "dlqItemIds": [
+    "dlq-item-001",
+    "dlq-item-002"
+  ],
+  "envelopeIds": [
+    "envelope-001"
+  ],
+  "replayMode": "by_dlq_item_ids",
+  "dryRun": true,
+  "maxItems": 100,
+  "traceContext": {
+    "traceId": "trace-rel-010"
+  },
+  "requestedAt": "2026-06-18T00:20:00Z"
+}

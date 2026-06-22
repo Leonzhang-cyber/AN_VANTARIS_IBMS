@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "v1",
+  "throughputId": "throughput-link-window-001",
+  "targetType": "link-ingress",
+  "targetId": "link-node-001",
+  "windowStart": "2026-06-17T11:55:00Z",
+  "windowEnd": "2026-06-17T12:00:00Z",
+  "messageCount": 128
+}

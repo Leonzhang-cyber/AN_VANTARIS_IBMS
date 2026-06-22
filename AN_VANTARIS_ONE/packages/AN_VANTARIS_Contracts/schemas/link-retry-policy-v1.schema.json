@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vantaris.local/contracts/schemas/link-retry-policy-v1.schema.json",
+  "title": "LinkRetryPolicyV1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schemaVersion",
+    "policyId",
+    "policyName",
+    "maxAttempts",
+    "initialBackoffSeconds",
+    "maxBackoffSeconds",
+    "backoffStrategy",
+    "jitterEnabled",
+    "retryableStatusCodes",
+    "nonRetryableStatusCodes",
+    "retryableErrorCodes",
+    "nonRetryableErrorCodes",
+    "dlqAfterMaxAttempts",
+    "enabled",
+    "createdAt",
+    "updatedAt"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "v1"
+    },
+    "policyId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "policyName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "maxAttempts": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "initialBackoffSeconds": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "maxBackoffSeconds": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "backoffStrategy": {
+      "type": "string",
+      "enum": [
+        "fixed",
+        "exponential",
+        "exponential_with_cap"
+      ]
+    },
+    "jitterEnabled": {
+      "type": "boolean"
+    },
+    "retryableStatusCodes": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 100,
+        "maximum": 599
+      }
+    },
+    "nonRetryableStatusCodes": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 100,
+        "maximum": 599
+      }
+    },
+    "retryableErrorCodes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "nonRetryableErrorCodes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "dlqAfterMaxAttempts": {
+      "type": "boolean"
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC ISO-8601 timestamp."
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC ISO-8601 timestamp."
+    }
+  }
+}

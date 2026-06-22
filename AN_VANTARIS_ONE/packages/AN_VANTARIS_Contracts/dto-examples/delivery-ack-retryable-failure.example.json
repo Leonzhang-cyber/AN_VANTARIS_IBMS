@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "v1",
+  "protocolVersion": "v1",
+  "messageId": "00000000-0000-4000-8000-000000005001",
+  "ackId": "00000000-0000-4000-8000-000000005002",
+  "deliveryId": "00000000-0000-4000-8000-000000005003",
+  "envelopeId": "00000000-0000-4000-8000-000000002001",
+  "correlationId": "00000000-0000-4000-8000-000000005004",
+  "ackAt": "2026-06-17T12:00:22Z",
+  "receivedAt": "2026-06-17T12:00:20Z",
+  "processedAt": "2026-06-17T12:00:22Z",
+  "status": "rejected",
+  "acceptedCount": 0,
+  "rejectedCount": 1,
+  "partialSuccess": false,
+  "retryable": true,
+  "retryAfterSeconds": 30,
+  "rejectionReasons": [
+    "delivery_retry"
+  ],
+  "traceContext": {
+    "traceId": "trace-demo-0001"
+  },
+  "error": {
+    "schemaVersion": "v1",
+    "code": "SERVICE_DEGRADED",
+    "message": "temporary downstream dependency outage",
+    "correlationId": "00000000-0000-4000-8000-000000005004"
+  }
+}

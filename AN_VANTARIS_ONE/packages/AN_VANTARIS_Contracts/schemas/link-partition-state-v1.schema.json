@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vantaris.local/contracts/schemas/link-partition-state-v1.schema.json",
+  "title": "LinkPartitionStateV1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schemaVersion",
+    "partitionId",
+    "partitionKey",
+    "status",
+    "queueDepth",
+    "inFlightCount",
+    "dlqCount",
+    "healthStatus",
+    "observedTimestamp"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "v1"
+    },
+    "partitionId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "partitionKey": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "degraded",
+        "blocked",
+        "recovery"
+      ]
+    },
+    "queueDepth": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "inFlightCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "dlqCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "lastDeliveredAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC ISO-8601 timestamp."
+    },
+    "lastAckAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC ISO-8601 timestamp."
+    },
+    "lastErrorAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC ISO-8601 timestamp."
+    },
+    "healthStatus": {
+      "$ref": "common-health-status-v1.schema.json#/$defs/healthStatus"
+    },
+    "observedTimestamp": {
+      "$ref": "common-audit-fields-v1.schema.json#/$defs/observedTimestamp"
+    }
+  }
+}

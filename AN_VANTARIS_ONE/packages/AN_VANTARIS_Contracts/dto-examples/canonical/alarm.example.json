@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "v1",
+  "alarmId": "alarm-high-temp-001",
+  "eventId": "event-thermal-001",
+  "severity": "high",
+  "status": "raised",
+  "raisedAt": "2026-06-17T12:00:00Z",
+  "traceContext": {
+    "traceId": "trace-001"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "contractPackageName": "AN_VANTARIS_Contracts",
+  "contractVersion": "1.0.0-contract-baseline",
+  "authority": true,
+  "appliesTo": [
+    "VANTARIS_ONE",
+    "UFMS",
+    "EDGE",
+    "LINK",
+    "Code",
+    "DB",
+    "Console",
+    "NexusAI"
+  ],
+  "directories": [
+    "schemas",
+    "openapi",
+    "errors",
+    "status",
+    "dto-examples",
+    "versions",
+    "standards",
+    "canonical",
+    "db",
+    "security",
+    "engineering-handoff"
+  ],
+  "compatibilityPolicy": {
+    "additiveOptionalFieldsAllowed": true,
+    "requiredFieldChangeRequiresMajor": true,
+    "fieldRemovalForbiddenAfterRelease": true,
+    "deprecatedFieldsMustRemainReadable": true,
+    "unknownFieldsMustBeTolerated": true
+  },
+  "timestampStandard": "UTC ISO-8601",
+  "idempotencyRequired": true,
+  "traceContextRequired": true,
+  "examplesMustUseFakeSecrets": true,
+  "securityBaseline": "IEC62443_ALIGNED_BASELINE_V1",
+  "certificationClaim": "NOT_CERTIFIED",
+  "certificationReadiness": "BASELINE_EVIDENCE_MODEL",
+  "auditabilityRequired": true,
+  "industrialSafetyAware": true
+}

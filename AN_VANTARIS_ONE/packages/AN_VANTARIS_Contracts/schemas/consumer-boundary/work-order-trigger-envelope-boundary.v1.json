@@ -1,0 +1,377 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "work-order-trigger-envelope-boundary.v1",
+  "title": "Work Order Trigger Envelope Boundary Schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "triggerId",
+    "triggerType",
+    "source",
+    "faultContext",
+    "assetContext",
+    "locationContext",
+    "workOrderIntent",
+    "evidenceRefs",
+    "boundary"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "work-order-trigger-envelope-boundary.v1"
+    },
+    "triggerId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "triggerType": {
+      "type": "string",
+      "enum": [
+        "ALARM",
+        "EVENT",
+        "HEALTH_DEGRADED",
+        "DIAGNOSTICS_FINDING",
+        "INSPECTION_FINDING",
+        "MANUAL_REVIEW",
+        "PREDICTIVE_MAINTENANCE",
+        "UNKNOWN"
+      ]
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceSystemType",
+        "sourceSystemRef",
+        "eventId",
+        "traceId"
+      ],
+      "properties": {
+        "sourceSystemType": {
+          "type": "string",
+          "enum": [
+            "EDGE",
+            "LINK",
+            "UFMS",
+            "AIRPORT_SOURCE_SYSTEM",
+            "BMS",
+            "EMS",
+            "MMS",
+            "SECURITY_SYSTEM",
+            "CCTV",
+            "ACS_SMS",
+            "PA_SYSTEM",
+            "E_INSPECTION",
+            "IFEEDBACK",
+            "MANUAL",
+            "UNKNOWN"
+          ]
+        },
+        "sourceSystemRef": {
+          "type": "string",
+          "minLength": 1
+        },
+        "gatewayId": {
+          "type": "string"
+        },
+        "edgeId": {
+          "type": "string"
+        },
+        "linkNodeId": {
+          "type": "string"
+        },
+        "envelopeId": {
+          "type": "string"
+        },
+        "eventId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "traceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "correlationId": {
+          "type": "string"
+        },
+        "occurredAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "faultContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "faultTitle",
+        "severity",
+        "status"
+      ],
+      "properties": {
+        "faultCode": {
+          "type": "string"
+        },
+        "faultTitle": {
+          "type": "string",
+          "minLength": 1
+        },
+        "faultDescription": {
+          "type": "string"
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "CRITICAL",
+            "HIGH",
+            "MEDIUM",
+            "LOW",
+            "INFO",
+            "UNKNOWN"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "OPEN",
+            "ACKNOWLEDGED",
+            "CLEARED",
+            "SUPPRESSED",
+            "UNDER_REVIEW",
+            "UNKNOWN"
+          ]
+        },
+        "recommendedAction": {
+          "type": "string"
+        },
+        "diagnosticSummary": {
+          "type": "string"
+        }
+      }
+    },
+    "assetContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "assetRef": {
+          "type": "string"
+        },
+        "assetName": {
+          "type": "string"
+        },
+        "assetType": {
+          "type": "string"
+        },
+        "deviceRef": {
+          "type": "string"
+        },
+        "pointRef": {
+          "type": "string"
+        },
+        "rawTagName": {
+          "type": "string"
+        },
+        "normalizedTagName": {
+          "type": "string"
+        },
+        "discipline": {
+          "type": "string",
+          "enum": [
+            "SECURITY",
+            "ELV",
+            "MECHANICAL",
+            "ELECTRICAL",
+            "FACILITY",
+            "OPERATIONS",
+            "MAINTENANCE",
+            "ENERGY",
+            "SAFETY",
+            "OTHER",
+            "UNKNOWN"
+          ]
+        }
+      }
+    },
+    "locationContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "locationRef": {
+          "type": "string"
+        },
+        "terminal": {
+          "type": "string"
+        },
+        "building": {
+          "type": "string"
+        },
+        "level": {
+          "type": "string"
+        },
+        "room": {
+          "type": "string"
+        },
+        "zone": {
+          "type": "string"
+        },
+        "hmiLocatorRef": {
+          "type": "string"
+        },
+        "drawingRef": {
+          "type": "string"
+        },
+        "pageRef": {
+          "type": "string"
+        },
+        "symbolRef": {
+          "type": "string"
+        }
+      }
+    },
+    "workOrderIntent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "intentType",
+        "priority",
+        "targetConsumer",
+        "autoCreateAllowed"
+      ],
+      "properties": {
+        "intentType": {
+          "type": "string",
+          "enum": [
+            "CREATE_WORK_ORDER",
+            "CREATE_INSPECTION_TASK",
+            "CREATE_REVIEW_TASK",
+            "NOTIFY_ONLY",
+            "BOUNDARY_ONLY",
+            "UNKNOWN"
+          ]
+        },
+        "priority": {
+          "type": "string",
+          "enum": [
+            "P1",
+            "P2",
+            "P3",
+            "P4",
+            "UNKNOWN"
+          ]
+        },
+        "targetConsumer": {
+          "type": "string",
+          "enum": [
+            "UMMS_BOUNDARY",
+            "MMS_BOUNDARY",
+            "UFMS_BOUNDARY",
+            "VANTARIS_ONE_BOUNDARY",
+            "MANUAL_REVIEW_BOUNDARY",
+            "UNKNOWN"
+          ]
+        },
+        "autoCreateAllowed": {
+          "type": "boolean",
+          "const": false
+        },
+        "suggestedSla": {
+          "type": "string"
+        },
+        "suggestedTrade": {
+          "type": "string"
+        },
+        "suggestedAssigneeGroup": {
+          "type": "string"
+        }
+      }
+    },
+    "evidenceRefs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "evidenceId",
+          "evidenceType"
+        ],
+        "properties": {
+          "evidenceId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidenceType": {
+            "type": "string",
+            "enum": [
+              "alarm",
+              "event",
+              "health",
+              "diagnostics",
+              "handoff",
+              "delivery",
+              "audit",
+              "asset_location",
+              "hmi_locator",
+              "manual_review",
+              "unknown"
+            ]
+          },
+          "sourcePath": {
+            "type": "string"
+          },
+          "hash": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contractOnly",
+        "workOrderRuntimeCreated",
+        "consumerImplementationIncluded",
+        "linkProductionDeliveryAllowed",
+        "edgeRuntimeEnabled",
+        "directUfmsDbAccessAllowed",
+        "writebackAllowed",
+        "autoCreateWorkOrderAllowed"
+      ],
+      "properties": {
+        "contractOnly": {
+          "type": "boolean",
+          "const": true
+        },
+        "workOrderRuntimeCreated": {
+          "type": "boolean",
+          "const": false
+        },
+        "consumerImplementationIncluded": {
+          "type": "boolean",
+          "const": false
+        },
+        "linkProductionDeliveryAllowed": {
+          "type": "boolean",
+          "const": false
+        },
+        "edgeRuntimeEnabled": {
+          "type": "boolean",
+          "const": false
+        },
+        "directUfmsDbAccessAllowed": {
+          "type": "boolean",
+          "const": false
+        },
+        "writebackAllowed": {
+          "type": "boolean",
+          "const": false
+        },
+        "autoCreateWorkOrderAllowed": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    }
+  }
+}

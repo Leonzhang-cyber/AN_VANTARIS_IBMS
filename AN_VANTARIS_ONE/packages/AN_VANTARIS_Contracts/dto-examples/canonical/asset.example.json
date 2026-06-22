@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "v1",
+  "assetId": "asset-chiller-001",
+  "siteId": "site-ufms-hq-001",
+  "name": "Chiller Plant 1",
+  "assetType": "hvac",
+  "status": "active"
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vantaris.local/contracts/schemas/common-health-status-v1.schema.json",
+  "title": "CommonHealthStatusV1",
+  "type": "object",
+  "additionalProperties": true,
+  "$defs": {
+    "healthStatus": {
+      "type": "string",
+      "enum": [
+        "healthy",
+        "degraded",
+        "unhealthy"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

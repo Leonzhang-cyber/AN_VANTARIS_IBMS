@@ -1,0 +1,26 @@
+{
+  "checksumManifestVersion": "link-checksums.v1",
+  "packageName": "AN_VANTARIS_LINK_OFFLINE_BUNDLE",
+  "status": "PLACEHOLDER_FOUNDATION",
+  "algorithm": "sha256",
+  "generatedAt": "2026-06-20",
+  "checksumsGenerated": false,
+  "realArtifactAssemblyExecuted": false,
+  "notes": [
+    "Checksum generation is intentionally deferred until real artifact assembly is approved.",
+    "This file establishes checksum manifest shape only.",
+    "Production delivery remains blocked."
+  ],
+  "boundary": {
+    "checksumFoundationOnly": true,
+    "realArtifactAssemblyExecuted": false,
+    "realInstallExecuted": false,
+    "serviceStartExecuted": false,
+    "linkRuntimeEnabled": false,
+    "linkProductionDeliveryAllowed": false,
+    "endpointApproved": false,
+    "directUfmsDbAccessAllowed": false,
+    "writebackAllowed": false,
+    "realUfmsApiDeliveryEnabled": false
+  }
+}

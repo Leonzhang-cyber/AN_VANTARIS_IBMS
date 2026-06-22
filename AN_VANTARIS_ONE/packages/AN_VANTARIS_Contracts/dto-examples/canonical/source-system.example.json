@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "v1",
+  "sourceSystemId": "source-bms-001",
+  "connectorId": "connector-bacnet-001",
+  "name": "BMS Source",
+  "systemType": "bms",
+  "status": "active"
+}

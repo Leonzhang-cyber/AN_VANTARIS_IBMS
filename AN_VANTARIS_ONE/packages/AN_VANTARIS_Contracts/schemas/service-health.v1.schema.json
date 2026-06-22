@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vantaris.local/contracts/schemas/service-health.v1.schema.json",
+  "title": "ServiceHealth",
+  "description": "Standard health probe response for UFMS packages (v1)",
+  "type": "object",
+  "required": ["schemaVersion", "packageName", "status", "checkedAt"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "v1"
+    },
+    "packageName": {
+      "type": "string",
+      "enum": [
+        "AN_VANTARIS_Code",
+        "AN_VANTARIS_DB",
+        "AN_VANTARIS_Console",
+        "AN_VANTARIS_NexusAI",
+        "AN_VANTARIS_LINK",
+        "AN_VANTARIS_EDGE"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["healthy", "degraded", "unhealthy"]
+    },
+    "checkedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "version": {
+      "type": "string"
+    },
+    "details": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}

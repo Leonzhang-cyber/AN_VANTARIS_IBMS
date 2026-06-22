@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.typecheck.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "outDir": "dist-c8",
+    "rootDir": "."
+  },
+  "include": [
+    "src/runtime/contracts/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "dist-c8",
+    "build",
+    "coverage"
+  ]
+}

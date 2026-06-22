@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.typecheck.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "outDir": "dist-c2",
+    "rootDir": "."
+  },
+  "include": [
+    "src/link/contracts/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "dist-c2",
+    "build",
+    "coverage"
+  ]
+}

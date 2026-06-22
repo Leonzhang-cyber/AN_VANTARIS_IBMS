@@ -1,0 +1,426 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ucde-evidence-review-package-boundary.v1",
+  "title": "UCDE Evidence Review Package Boundary Schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "packageId",
+    "packageType",
+    "reviewScope",
+    "sourceContracts",
+    "evidencePackage",
+    "integrity",
+    "review",
+    "boundary"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "ucde-evidence-review-package-boundary.v1"
+    },
+    "packageId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "packageType": {
+      "type": "string",
+      "enum": [
+        "EDGE_DIAGNOSTICS_REVIEW",
+        "LINK_AUDIT_REVIEW",
+        "AIRPORT_ONBOARDING_REVIEW",
+        "AIRPORT_MAPPING_REVIEW",
+        "AIRPORT_ASSET_LOCATION_REVIEW",
+        "DELIVERY_EVIDENCE_REVIEW",
+        "WORK_ORDER_TRIGGER_REVIEW",
+        "COMPLIANCE_REVIEW",
+        "SUPPORT_BUNDLE_REVIEW",
+        "BOUNDARY_ONLY",
+        "UNKNOWN"
+      ]
+    },
+    "reviewScope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scopeId",
+        "scopeType",
+        "consumerTarget",
+        "reviewOnly"
+      ],
+      "properties": {
+        "scopeId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scopeType": {
+          "type": "string",
+          "enum": [
+            "EDGE",
+            "LINK",
+            "AIRPORT",
+            "EDGE_LINK",
+            "AIRPORT_EDGE_LINK",
+            "WORK_ORDER_BOUNDARY",
+            "UNKNOWN"
+          ]
+        },
+        "consumerTarget": {
+          "type": "string",
+          "enum": [
+            "UCDE_BOUNDARY",
+            "EVIDENCE_REVIEW_BOUNDARY",
+            "COMPLIANCE_REVIEW_BOUNDARY",
+            "SUPPORT_REVIEW_BOUNDARY",
+            "ENGINEERING_REVIEW_BOUNDARY",
+            "UNKNOWN"
+          ]
+        },
+        "reviewOnly": {
+          "type": "boolean",
+          "const": true
+        },
+        "siteId": {
+          "type": "string"
+        },
+        "gatewayId": {
+          "type": "string"
+        },
+        "linkNodeId": {
+          "type": "string"
+        },
+        "airportCode": {
+          "type": "string"
+        }
+      }
+    },
+    "sourceContracts": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "edgeDiagnosticsRef": {
+          "type": "string"
+        },
+        "linkAuditEvidenceChainRef": {
+          "type": "string"
+        },
+        "linkDeliveryReceiptRef": {
+          "type": "string"
+        },
+        "canonicalHandoffEnvelopeRef": {
+          "type": "string"
+        },
+        "airportSourceSystemProfileRef": {
+          "type": "string"
+        },
+        "airportConnectorMatrixRef": {
+          "type": "string"
+        },
+        "airportOnboardingPacketRef": {
+          "type": "string"
+        },
+        "airportTagMappingRef": {
+          "type": "string"
+        },
+        "airportAssetLocationHmiLocatorRef": {
+          "type": "string"
+        },
+        "workOrderTriggerBoundaryRef": {
+          "type": "string"
+        }
+      }
+    },
+    "evidencePackage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidenceItems",
+        "containsSecretMaterial"
+      ],
+      "properties": {
+        "packageTitle": {
+          "type": "string"
+        },
+        "packageSummary": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createdByRef": {
+          "type": "string"
+        },
+        "evidenceItems": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "evidenceId",
+              "evidenceType",
+              "sourceType",
+              "reviewStatus",
+              "containsSecretMaterial"
+            ],
+            "properties": {
+              "evidenceId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "evidenceType": {
+                "type": "string",
+                "enum": [
+                  "edge_diagnostics",
+                  "edge_health",
+                  "link_audit",
+                  "link_evidence_chain",
+                  "link_delivery_receipt",
+                  "handoff_envelope",
+                  "airport_source_system",
+                  "airport_connector_matrix",
+                  "airport_onboarding_packet",
+                  "airport_tag_mapping",
+                  "airport_asset_location",
+                  "hmi_locator",
+                  "work_order_trigger",
+                  "package_integrity",
+                  "unknown"
+                ]
+              },
+              "sourceType": {
+                "type": "string",
+                "enum": [
+                  "EDGE",
+                  "LINK",
+                  "CONTRACTS",
+                  "AIRPORT_PACKET",
+                  "FIELD_ENGINEERING",
+                  "SUPPORT_BUNDLE",
+                  "UNKNOWN"
+                ]
+              },
+              "sourcePath": {
+                "type": "string"
+              },
+              "sourceRef": {
+                "type": "string"
+              },
+              "hash": {
+                "type": "string"
+              },
+              "reviewStatus": {
+                "type": "string",
+                "enum": [
+                  "NOT_REVIEWED",
+                  "UNDER_REVIEW",
+                  "ACCEPTED",
+                  "REJECTED",
+                  "NEEDS_CLARIFICATION",
+                  "BLOCKED",
+                  "UNKNOWN"
+                ]
+              },
+              "containsSecretMaterial": {
+                "type": "boolean",
+                "const": false
+              },
+              "summary": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "containsSecretMaterial": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "manifestId",
+        "itemCount",
+        "packageHash",
+        "tamperEvident",
+        "verified"
+      ],
+      "properties": {
+        "manifestId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "itemCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "itemIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hashAlgorithm": {
+          "type": "string",
+          "enum": [
+            "sha256",
+            "sha512",
+            "unknown"
+          ]
+        },
+        "packageHash": {
+          "type": "string",
+          "minLength": 1
+        },
+        "tamperEvident": {
+          "type": "boolean",
+          "const": true
+        },
+        "verified": {
+          "type": "boolean"
+        },
+        "verificationStatus": {
+          "type": "string",
+          "enum": [
+            "NOT_VERIFIED",
+            "VERIFIED",
+            "BROKEN",
+            "HASH_MISMATCH",
+            "MISSING_ITEM",
+            "UNKNOWN"
+          ]
+        }
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reviewStatus",
+        "reviewRuntimeImplemented"
+      ],
+      "properties": {
+        "reviewStatus": {
+          "type": "string",
+          "enum": [
+            "NOT_STARTED",
+            "UNDER_REVIEW",
+            "PASSED",
+            "FAILED",
+            "NEEDS_CLARIFICATION",
+            "BLOCKED",
+            "UNKNOWN"
+          ]
+        },
+        "reviewRuntimeImplemented": {
+          "type": "boolean",
+          "const": false
+        },
+        "reviewerRef": {
+          "type": "string"
+        },
+        "reviewedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "reviewNotes": {
+          "type": "string"
+        },
+        "decision": {
+          "type": "string",
+          "enum": [
+            "BOUNDARY_ONLY",
+            "ACCEPTED_FOR_FUTURE_USE",
+            "REJECTED",
+            "NEEDS_MORE_EVIDENCE",
+            "UNKNOWN"
+          ]
+        }
+      }
+    },
+    "retention": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "retentionClass": {
+          "type": "string",
+          "enum": [
+            "LOCAL_ONLY",
+            "FIELD_EVIDENCE",
+            "COMPLIANCE_EVIDENCE",
+            "SUPPORT_BUNDLE",
+            "BOUNDARY_ONLY",
+            "UNKNOWN"
+          ]
+        },
+        "exportAllowed": {
+          "type": "boolean"
+        },
+        "externalSharingAllowed": {
+          "type": "boolean",
+          "const": false
+        },
+        "expiresAt": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        }
+      }
+    },
+    "boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contractOnly",
+        "ucdeRuntimeImplemented",
+        "evidenceReviewRuntimeImplemented",
+        "consumerImplementationIncluded",
+        "containsSecretMaterial",
+        "linkProductionDeliveryAllowed",
+        "edgeRuntimeEnabled",
+        "directUfmsDbAccessAllowed",
+        "writebackAllowed"
+      ],
+      "properties": {
+        "contractOnly": {
+          "type": "boolean",
+          "const": true
+        },
+        "ucdeRuntimeImplemented": {
+          "type": "boolean",
+          "const": false
+        },
+        "evidenceReviewRuntimeImplemented": {
+          "type": "boolean",
+          "const": false
+        },
+        "consumerImplementationIncluded": {
+          "type": "boolean",
+          "const": false
+        },
+        "containsSecretMaterial": {
+          "type": "boolean",
+          "const": false
+        },
+        "linkProductionDeliveryAllowed": {
+          "type": "boolean",
+          "const": false
+        },
+        "edgeRuntimeEnabled": {
+          "type": "boolean",
+          "const": false
+        },
+        "directUfmsDbAccessAllowed": {
+          "type": "boolean",
+          "const": false
+        },
+        "writebackAllowed": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    }
+  }
+}

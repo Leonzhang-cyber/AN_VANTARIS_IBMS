@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "v1",
+  "protocolVersion": "v1",
+  "messageId": "00000000-0000-4000-8000-000000004001",
+  "ackId": "00000000-0000-4000-8000-000000004002",
+  "deliveryId": "00000000-0000-4000-8000-000000004003",
+  "envelopeId": "00000000-0000-4000-8000-000000002001",
+  "correlationId": "00000000-0000-4000-8000-000000004004",
+  "ackAt": "2026-06-17T12:00:10Z",
+  "receivedAt": "2026-06-17T12:00:09Z",
+  "processedAt": "2026-06-17T12:00:10Z",
+  "status": "accepted",
+  "acceptedCount": 8,
+  "rejectedCount": 2,
+  "partialSuccess": true,
+  "retryable": false,
+  "rejectionReasons": [
+    "invalid_point_shape",
+    "unsupported_unit"
+  ],
+  "traceContext": {
+    "traceId": "trace-demo-0001"
+  }
+}

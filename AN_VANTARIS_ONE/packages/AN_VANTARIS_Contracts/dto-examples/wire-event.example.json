@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "v1",
+  "protocolVersion": "v1",
+  "eventId": "00000000-0000-4000-8000-000000001001",
+  "eventType": "telemetry.point.updated",
+  "eventCategory": "telemetry",
+  "sourceTimestamp": "2026-06-17T12:00:00Z",
+  "observedTimestamp": "2026-06-17T12:00:02Z",
+  "tenantId": "tenant-demo-001",
+  "siteId": "site-demo-001",
+  "gatewayId": "gw-demo-001",
+  "connectorId": "connector-demo-bacnet",
+  "sourceSystemId": "source-bacnet-sim",
+  "assetId": "asset-chiller-01",
+  "deviceId": "device-controller-01",
+  "pointId": "point-supply-temp",
+  "severity": "info",
+  "status": "active",
+  "traceContext": {
+    "traceId": "trace-demo-0001",
+    "spanId": "span-demo-0001"
+  },
+  "correlationId": "00000000-0000-4000-8000-000000001002",
+  "idempotencyKey": "idem-demo-001",
+  "payload": {
+    "value": 7.2,
+    "unit": "C"
+  }
+}

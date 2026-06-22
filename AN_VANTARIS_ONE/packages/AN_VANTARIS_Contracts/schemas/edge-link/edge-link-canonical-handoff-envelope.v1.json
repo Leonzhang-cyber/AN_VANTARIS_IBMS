@@ -1,0 +1,379 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "edge-link-canonical-handoff-envelope.v1",
+  "title": "EDGE-LINK Canonical Handoff Envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "envelopeId",
+    "recordType",
+    "trace",
+    "source",
+    "reliability",
+    "payload",
+    "productionState",
+    "evidenceRefs",
+    "boundary"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "edge-link-canonical-handoff-envelope.v1"
+    },
+    "envelopeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "recordType": {
+      "type": "string",
+      "enum": [
+        "telemetry",
+        "event",
+        "alarm",
+        "health",
+        "evidence",
+        "throughput",
+        "sync_batch",
+        "audit",
+        "config_version",
+        "diagnostics",
+        "unknown"
+      ]
+    },
+    "trace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "eventId",
+        "traceId",
+        "occurredAt",
+        "normalizedAt"
+      ],
+      "properties": {
+        "eventId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "traceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "correlationId": {
+          "type": "string"
+        },
+        "occurredAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "normalizedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "gatewayId",
+        "sourceSystem",
+        "connectorType"
+      ],
+      "properties": {
+        "tenantId": {
+          "type": "string"
+        },
+        "siteId": {
+          "type": "string"
+        },
+        "gatewayId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "edgeId": {
+          "type": "string"
+        },
+        "sourceSystem": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceSystemId": {
+          "type": "string"
+        },
+        "connectorType": {
+          "type": "string",
+          "minLength": 1
+        },
+        "connectorId": {
+          "type": "string"
+        },
+        "adapterType": {
+          "type": "string"
+        },
+        "adapterId": {
+          "type": "string"
+        }
+      }
+    },
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "assetRef": {
+          "type": "string"
+        },
+        "deviceId": {
+          "type": "string"
+        },
+        "pointId": {
+          "type": "string"
+        },
+        "tagName": {
+          "type": "string"
+        },
+        "rawTagName": {
+          "type": "string"
+        },
+        "normalizedTagName": {
+          "type": "string"
+        },
+        "systemType": {
+          "type": "string"
+        },
+        "discipline": {
+          "type": "string"
+        },
+        "signalType": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        }
+      }
+    },
+    "location": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "locationRef": {
+          "type": "string"
+        },
+        "building": {
+          "type": "string"
+        },
+        "level": {
+          "type": "string"
+        },
+        "room": {
+          "type": "string"
+        },
+        "zone": {
+          "type": "string"
+        },
+        "hmiSymbolRef": {
+          "type": "string"
+        },
+        "drawingRef": {
+          "type": "string"
+        }
+      }
+    },
+    "reliability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "streamId",
+        "sequenceNumber",
+        "payloadHash"
+      ],
+      "properties": {
+        "streamId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sequenceNumber": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "payloadHash": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dedupeKey": {
+          "type": "string"
+        },
+        "sampleMode": {
+          "type": "string",
+          "enum": [
+            "RAW_EVERY_SAMPLE",
+            "CHANGE_ONLY",
+            "DEADBAND",
+            "HEARTBEAT",
+            "AGGREGATED_REPEAT",
+            "FULL_SNAPSHOT",
+            "UNKNOWN"
+          ]
+        },
+        "changeReason": {
+          "type": "string"
+        },
+        "suppressedCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "repeatCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "heartbeatDue": {
+          "type": "boolean"
+        },
+        "fullSnapshot": {
+          "type": "boolean"
+        },
+        "reconnectFirstSample": {
+          "type": "boolean"
+        }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "normalized"
+      ],
+      "properties": {
+        "normalized": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "quality": {
+          "type": "string"
+        },
+        "severity": {
+          "type": "string"
+        },
+        "valueChanged": {
+          "type": "boolean"
+        },
+        "qualityChanged": {
+          "type": "boolean"
+        },
+        "statusChanged": {
+          "type": "boolean"
+        }
+      }
+    },
+    "productionState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "runtimeEnabled",
+        "pilotApproved",
+        "productionApproved",
+        "writebackProhibited",
+        "productionDeliveryAllowed"
+      ],
+      "properties": {
+        "runtimeEnabled": {
+          "type": "boolean",
+          "const": false
+        },
+        "pilotApproved": {
+          "type": "boolean",
+          "const": false
+        },
+        "productionApproved": {
+          "type": "boolean",
+          "const": false
+        },
+        "writebackProhibited": {
+          "type": "boolean",
+          "const": true
+        },
+        "productionDeliveryAllowed": {
+          "type": "boolean",
+          "const": false
+        },
+        "reason": {
+          "type": "string"
+        }
+      }
+    },
+    "evidenceRefs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "evidenceId",
+          "evidenceType"
+        ],
+        "properties": {
+          "evidenceId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidenceType": {
+            "type": "string",
+            "enum": [
+              "adapter",
+              "connector_decision",
+              "pilot_approval",
+              "endpoint_approval",
+              "credential_reference",
+              "rollback_plan",
+              "operator_authorization",
+              "collection",
+              "handoff",
+              "heartbeat",
+              "health",
+              "diagnostics",
+              "unknown"
+            ]
+          },
+          "sourcePath": {
+            "type": "string"
+          },
+          "hash": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "edgeRuntimeEnabled",
+        "linkBypassAllowed",
+        "directUfmsDbAccessAllowed",
+        "writebackAllowed",
+        "consumerImplementationIncluded"
+      ],
+      "properties": {
+        "edgeRuntimeEnabled": {
+          "type": "boolean",
+          "const": false
+        },
+        "linkBypassAllowed": {
+          "type": "boolean",
+          "const": false
+        },
+        "directUfmsDbAccessAllowed": {
+          "type": "boolean",
+          "const": false
+        },
+        "writebackAllowed": {
+          "type": "boolean",
+          "const": false
+        },
+        "consumerImplementationIncluded": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vantaris.local/contracts/schemas/common-identifiers-v1.schema.json",
+  "title": "CommonIdentifiersV1",
+  "type": "object",
+  "additionalProperties": true,
+  "$defs": {
+    "tenantId": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Tenant identifier."
+    },
+    "siteId": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Site identifier."
+    },
+    "buildingId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "floorId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "spaceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "gatewayId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "connectorId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceSystemId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "assetId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "deviceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "pointId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "eventId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "alarmId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidenceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "syncBatchId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "configVersionId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "healthId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "throughputId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "telemetryId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "auditId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "machineId": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

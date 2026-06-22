@@ -1,0 +1,50 @@
+{
+  "planVersion": "link-rollback-plan.v1",
+  "packageName": "AN_VANTARIS_LINK_OFFLINE_BUNDLE",
+  "status": "DRY_RUN_ONLY",
+  "scope": "AN_VANTARIS_LINK",
+  "generatedAt": "2026-06-20",
+  "preconditions": [
+    "rollback target recorded",
+    "previous package available",
+    "rollback approval documented before real rollback",
+    "evidence retention preserved",
+    "production delivery remains blocked"
+  ],
+  "plannedSteps": [
+    {
+      "step": "verify_rollback_target",
+      "executionMode": "LOCAL_VALIDATION"
+    },
+    {
+      "step": "restore_previous_package",
+      "executionMode": "PLANNED_ONLY"
+    },
+    {
+      "step": "restore_previous_config_reference",
+      "executionMode": "PLANNED_ONLY"
+    },
+    {
+      "step": "run_package_verification",
+      "executionMode": "LOCAL_VALIDATION"
+    },
+    {
+      "step": "run_healthcheck",
+      "executionMode": "LOCAL_VALIDATION"
+    },
+    {
+      "step": "record_rollback_evidence",
+      "executionMode": "PLANNED_ONLY"
+    }
+  ],
+  "boundary": {
+    "realRollbackExecuted": false,
+    "serviceRestartExecuted": false,
+    "dataDeletionExecuted": false,
+    "linkRuntimeEnabled": false,
+    "linkProductionDeliveryAllowed": false,
+    "endpointApproved": false,
+    "directUfmsDbAccessAllowed": false,
+    "writebackAllowed": false
+  }
+}

@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "LINK_INSTALL_STRUCTURE_ONLY"
+echo "LINK_PRODUCTION_DELIVERY_ALLOWED=false"
+echo "LINK_ENDPOINT_APPROVED=false"
+echo "LINK_DIRECT_UFMS_DB_ACCESS_ALLOWED=false"
+echo "LINK_WRITEBACK_ALLOWED=false"
+echo "LINK_INSTALL_NOT_EXECUTED"

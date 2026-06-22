@@ -1,0 +1,49 @@
+{
+  "planVersion": "link-uninstall-plan.v1",
+  "packageName": "AN_VANTARIS_LINK_OFFLINE_BUNDLE",
+  "status": "DRY_RUN_ONLY",
+  "scope": "AN_VANTARIS_LINK",
+  "generatedAt": "2026-06-20",
+  "preconditions": [
+    "operator approval must be documented before real uninstall",
+    "evidence retention decision must be documented before real uninstall",
+    "production delivery remains blocked"
+  ],
+  "plannedSteps": [
+    {
+      "step": "stop_service",
+      "executionMode": "PLANNED_ONLY"
+    },
+    {
+      "step": "remove_service_template",
+      "executionMode": "PLANNED_ONLY"
+    },
+    {
+      "step": "remove_package_files",
+      "executionMode": "PLANNED_ONLY"
+    },
+    {
+      "step": "retain_evidence_and_diagnostics",
+      "executionMode": "MANDATORY_POLICY"
+    },
+    {
+      "step": "run_post_uninstall_healthcheck",
+      "executionMode": "PLANNED_ONLY"
+    }
+  ],
+  "retentionPolicy": {
+    "deleteAuditEvidence": false,
+    "deleteDiagnosticsEvidence": false,
+    "deleteContractsReferences": false,
+    "deleteUfmsData": false,
+    "deleteCredentials": false
+  },
+  "boundary": {
+    "realUninstallExecuted": false,
+    "serviceStopExecuted": false,
+    "dataDeletionExecuted": false,
+    "linkProductionDeliveryAllowed": false,
+    "directUfmsDbAccessAllowed": false,
+    "writebackAllowed": false
+  }
+}

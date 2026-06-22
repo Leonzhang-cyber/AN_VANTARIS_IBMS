@@ -1,0 +1,24 @@
+[Unit]
+Description=AN VANTARIS LINK Offline Dry-run Service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=vantaris-link
+Group=vantaris-link
+WorkingDirectory=/opt/an-vantaris-link
+EnvironmentFile=/etc/an-vantaris-link/link.env
+ExecStart=/usr/bin/node /opt/an-vantaris-link/dist/index.js
+Restart=on-failure
+RestartSec=5
+
+# Security hardening template
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/an-vantaris-link /var/log/an-vantaris-link
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vantaris.local/contracts/schemas/link-delivery-batch-v1.schema.json",
+  "title": "LinkDeliveryBatchV1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schemaVersion",
+    "batchId",
+    "partitionKey",
+    "envelopes",
+    "deliveryPolicy",
+    "traceContext",
+    "idempotencyKey",
+    "createdAt"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "v1"
+    },
+    "batchId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "partitionKey": {
+      "type": "string",
+      "minLength": 1
+    },
+    "envelopes": {
+      "type": "array",
+      "items": {
+        "$ref": "signed-handoff-envelope-v1.schema.json"
+      }
+    },
+    "deliveryPolicy": {
+      "$ref": "link-retry-policy-v1.schema.json"
+    },
+    "traceContext": {
+      "$ref": "common-trace-context-v1.schema.json#/$defs/traceContext"
+    },
+    "idempotencyKey": {
+      "$ref": "common-trace-context-v1.schema.json#/$defs/idempotencyKey"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC ISO-8601 timestamp."
+    }
+  }
+}

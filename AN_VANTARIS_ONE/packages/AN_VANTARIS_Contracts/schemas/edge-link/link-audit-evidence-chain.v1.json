@@ -1,0 +1,430 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "link-audit-evidence-chain.v1",
+  "title": "LINK Audit Evidence Chain Schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "chainId",
+    "recordId",
+    "recordType",
+    "auditEvent",
+    "evidence",
+    "chain",
+    "boundary"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "link-audit-evidence-chain.v1"
+    },
+    "chainId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "recordId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "recordType": {
+      "type": "string",
+      "enum": [
+        "AUDIT_EVENT",
+        "EVIDENCE_RECORD",
+        "CHAIN_SNAPSHOT",
+        "CHAIN_VERIFY_RESULT",
+        "UNKNOWN"
+      ]
+    },
+    "auditEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "auditEventId",
+        "eventType",
+        "occurredAt",
+        "actor",
+        "target",
+        "result"
+      ],
+      "properties": {
+        "auditEventId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "eventType": {
+          "type": "string",
+          "enum": [
+            "INGRESS_RECEIVED",
+            "INGRESS_VALIDATED",
+            "INGRESS_REJECTED",
+            "QUEUE_ENQUEUED",
+            "QUEUE_DEQUEUED",
+            "DELIVERY_ATTEMPTED",
+            "DELIVERY_BLOCKED",
+            "DELIVERY_ACKED",
+            "DELIVERY_FAILED",
+            "RETRY_SCHEDULED",
+            "REPLAY_REQUESTED",
+            "DLQ_MOVED",
+            "DIAGNOSTICS_GENERATED",
+            "HEALTH_SNAPSHOT_GENERATED",
+            "SECURITY_DECISION",
+            "BOUNDARY_BLOCKED",
+            "EVIDENCE_CHAIN_VERIFIED",
+            "UNKNOWN"
+          ]
+        },
+        "occurredAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "actor": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "actorType",
+            "actorId"
+          ],
+          "properties": {
+            "actorType": {
+              "type": "string",
+              "enum": [
+                "LINK_NODE",
+                "EDGE_GATEWAY",
+                "MACHINE_IDENTITY",
+                "SYSTEM",
+                "OPERATOR",
+                "UNKNOWN"
+              ]
+            },
+            "actorId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "machineIdentityRef": {
+              "type": "string"
+            },
+            "humanUserRef": {
+              "type": "string"
+            }
+          }
+        },
+        "target": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "targetType",
+            "targetId"
+          ],
+          "properties": {
+            "targetType": {
+              "type": "string",
+              "enum": [
+                "HANDOFF_ENVELOPE",
+                "QUEUE_ITEM",
+                "DELIVERY_TARGET",
+                "DELIVERY_ATTEMPT",
+                "RETRY_DECISION",
+                "DLQ_ITEM",
+                "DIAGNOSTICS_BUNDLE",
+                "HEALTH_SNAPSHOT",
+                "SECURITY_POLICY",
+                "BOUNDARY_GUARD",
+                "UNKNOWN"
+              ]
+            },
+            "targetId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "traceId": {
+              "type": "string"
+            },
+            "eventId": {
+              "type": "string"
+            },
+            "gatewayId": {
+              "type": "string"
+            },
+            "streamId": {
+              "type": "string"
+            },
+            "sequenceNumber": {
+              "type": ["integer", "null"],
+              "minimum": 0
+            }
+          }
+        },
+        "result": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status"
+          ],
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": [
+                "PASS",
+                "FAIL",
+                "BLOCKED",
+                "REJECTED",
+                "DEGRADED",
+                "UNKNOWN"
+              ]
+            },
+            "reason": {
+              "type": "string"
+            },
+            "errorCode": {
+              "type": "string"
+            },
+            "errorMessage": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidenceId",
+        "evidenceType",
+        "createdAt",
+        "source",
+        "hash"
+      ],
+      "properties": {
+        "evidenceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidenceType": {
+          "type": "string",
+          "enum": [
+            "ingress",
+            "queue",
+            "delivery",
+            "idempotency",
+            "receipt",
+            "retry",
+            "replay",
+            "dlq",
+            "audit",
+            "diagnostics",
+            "health",
+            "security",
+            "boundary",
+            "package_integrity",
+            "unknown"
+          ]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "sourceType",
+            "sourceId"
+          ],
+          "properties": {
+            "sourceType": {
+              "type": "string",
+              "enum": [
+                "LINK_CONTRACT",
+                "LINK_VALIDATION",
+                "EDGE_HANDOFF",
+                "DIAGNOSTICS_BUNDLE",
+                "HEALTH_SNAPSHOT",
+                "LOCAL_EVIDENCE_FILE",
+                "UNKNOWN"
+              ]
+            },
+            "sourceId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sourcePath": {
+              "type": "string"
+            }
+          }
+        },
+        "hash": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "algorithm",
+            "value"
+          ],
+          "properties": {
+            "algorithm": {
+              "type": "string",
+              "enum": [
+                "sha256",
+                "sha512",
+                "unknown"
+              ]
+            },
+            "value": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "summary": {
+          "type": "string"
+        },
+        "containsSecretMaterial": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    },
+    "chain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "chainIndex",
+        "previousHash",
+        "currentHash",
+        "tamperEvident",
+        "verified"
+      ],
+      "properties": {
+        "chainIndex": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "previousRecordId": {
+          "type": ["string", "null"]
+        },
+        "previousHash": {
+          "type": ["string", "null"]
+        },
+        "currentHash": {
+          "type": "string",
+          "minLength": 1
+        },
+        "nextRecordId": {
+          "type": ["string", "null"]
+        },
+        "tamperEvident": {
+          "type": "boolean",
+          "const": true
+        },
+        "verified": {
+          "type": "boolean"
+        },
+        "verificationStatus": {
+          "type": "string",
+          "enum": [
+            "NOT_VERIFIED",
+            "VERIFIED",
+            "BROKEN",
+            "MISSING_PREVIOUS",
+            "HASH_MISMATCH",
+            "UNKNOWN"
+          ]
+        }
+      }
+    },
+    "relatedRefs": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "handoffEnvelopeId": {
+          "type": "string"
+        },
+        "deliveryId": {
+          "type": "string"
+        },
+        "attemptId": {
+          "type": "string"
+        },
+        "receiptId": {
+          "type": "string"
+        },
+        "retryDecisionId": {
+          "type": "string"
+        },
+        "dlqItemId": {
+          "type": "string"
+        },
+        "diagnosticsBundleId": {
+          "type": "string"
+        },
+        "healthSnapshotId": {
+          "type": "string"
+        }
+      }
+    },
+    "retention": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "retentionClass": {
+          "type": "string",
+          "enum": [
+            "LOCAL_ONLY",
+            "FIELD_EVIDENCE",
+            "COMPLIANCE_EVIDENCE",
+            "SUPPORT_BUNDLE",
+            "UNKNOWN"
+          ]
+        },
+        "expiresAt": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "exportAllowed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "linkRuntimeEnabled",
+        "linkProductionDeliveryAllowed",
+        "directUfmsDbAccessAllowed",
+        "writebackAllowed",
+        "consumerImplementationIncluded",
+        "containsSecretMaterial"
+      ],
+      "properties": {
+        "linkRuntimeEnabled": {
+          "type": "boolean",
+          "const": false
+        },
+        "linkProductionDeliveryAllowed": {
+          "type": "boolean",
+          "const": false
+        },
+        "directUfmsDbAccessAllowed": {
+          "type": "boolean",
+          "const": false
+        },
+        "writebackAllowed": {
+          "type": "boolean",
+          "const": false
+        },
+        "consumerImplementationIncluded": {
+          "type": "boolean",
+          "const": false
+        },
+        "containsSecretMaterial": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    }
+  }
+}

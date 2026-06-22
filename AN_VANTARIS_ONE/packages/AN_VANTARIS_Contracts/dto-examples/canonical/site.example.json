@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "v1",
+  "siteId": "site-ufms-hq-001",
+  "tenantId": "tenant-vantaris-demo-001",
+  "name": "UFMS HQ",
+  "status": "active",
+  "createdAt": "2026-06-17T12:00:00Z"
+}

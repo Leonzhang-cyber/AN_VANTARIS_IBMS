@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "v1",
+  "auditId": "audit-001",
+  "actorType": "system",
+  "action": "event_ingested",
+  "targetType": "event",
+  "targetId": "event-thermal-001",
+  "occurredAt": "2026-06-17T12:00:00Z"
+}

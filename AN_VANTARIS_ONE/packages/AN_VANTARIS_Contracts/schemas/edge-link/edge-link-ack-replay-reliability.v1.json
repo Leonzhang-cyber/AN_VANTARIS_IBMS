@@ -1,0 +1,306 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "edge-link-ack-replay-reliability.v1",
+  "title": "EDGE-LINK ACK Replay Reliability Schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "messageId",
+    "messageType",
+    "stream",
+    "sequence",
+    "ack",
+    "boundary"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "edge-link-ack-replay-reliability.v1"
+    },
+    "messageId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "messageType": {
+      "type": "string",
+      "enum": [
+        "ACK",
+        "REPLAY_REQUEST",
+        "GAP_DETECTED",
+        "DUPLICATE_NOTICE",
+        "RELIABILITY_LEDGER_SNAPSHOT",
+        "UNKNOWN"
+      ]
+    },
+    "stream": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "gatewayId",
+        "streamId"
+      ],
+      "properties": {
+        "tenantId": {
+          "type": "string"
+        },
+        "siteId": {
+          "type": "string"
+        },
+        "gatewayId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "edgeId": {
+          "type": "string"
+        },
+        "streamId": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "sequence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sequenceNumber",
+        "eventId",
+        "traceId",
+        "payloadHash",
+        "occurredAt"
+      ],
+      "properties": {
+        "sequenceNumber": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "eventId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "traceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "correlationId": {
+          "type": "string"
+        },
+        "payloadHash": {
+          "type": "string",
+          "minLength": 1
+        },
+        "occurredAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "ack": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ackId",
+        "status",
+        "acknowledgedAt",
+        "duplicate",
+        "gapDetected"
+      ],
+      "properties": {
+        "ackId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "NONE",
+            "RECEIVED",
+            "VALIDATED",
+            "QUEUED",
+            "REJECTED",
+            "BLOCKED",
+            "DUPLICATE",
+            "GAP_DETECTED",
+            "REPLAY_REQUESTED",
+            "DLQ",
+            "TIMEOUT",
+            "UNKNOWN"
+          ]
+        },
+        "acknowledgedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "duplicate": {
+          "type": "boolean"
+        },
+        "gapDetected": {
+          "type": "boolean"
+        },
+        "reason": {
+          "type": "string"
+        }
+      }
+    },
+    "gap": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "fromSequence": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "toSequence": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "detectedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "replayWindow": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "requestId": {
+          "type": "string"
+        },
+        "fromSequence": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "toSequence": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "maxRecords": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "reason": {
+          "type": "string",
+          "enum": [
+            "SEQUENCE_GAP",
+            "LINK_RECOVERY",
+            "EDGE_RECONNECT",
+            "ACK_LOST",
+            "OPERATOR_REQUESTED",
+            "UNKNOWN"
+          ]
+        },
+        "requestedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "ledger": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "lastAcceptedSequence": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "seenEventIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "seenPayloadHashes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "duplicateCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "gapCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "lastAckedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "evidenceRefs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "evidenceId",
+          "evidenceType"
+        ],
+        "properties": {
+          "evidenceId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidenceType": {
+            "type": "string",
+            "enum": [
+              "ack",
+              "replay",
+              "gap",
+              "duplicate",
+              "ledger",
+              "reliability",
+              "outbox",
+              "queue",
+              "unknown"
+            ]
+          },
+          "sourcePath": {
+            "type": "string"
+          },
+          "hash": {
+            "type": "string"
+          }
+        }
+      },
+      "default": []
+    },
+    "boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "edgeRuntimeEnabled",
+        "linkProductionDeliveryAllowed",
+        "directUfmsDbAccessAllowed",
+        "writebackAllowed",
+        "consumerImplementationIncluded"
+      ],
+      "properties": {
+        "edgeRuntimeEnabled": {
+          "type": "boolean",
+          "const": false
+        },
+        "linkProductionDeliveryAllowed": {
+          "type": "boolean",
+          "const": false
+        },
+        "directUfmsDbAccessAllowed": {
+          "type": "boolean",
+          "const": false
+        },
+        "writebackAllowed": {
+          "type": "boolean",
+          "const": false
+        },
+        "consumerImplementationIncluded": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "machineId": "machine-edge-001",
+  "gatewayId": "gw-demo-001",
+  "linkId": "link-runtime-001",
+  "tenantId": "tenant-demo-001",
+  "siteId": "site-demo-001",
+  "trustDomain": "vantaris-demo-trust",
+  "keyId": "key-demo-001",
+  "credentialType": "hmac-shared-key",
+  "issuedAt": "2026-06-01T00:00:00Z",
+  "expiresAt": "2027-06-01T00:00:00Z"
+}

@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vantaris.local/contracts/schemas/signature-headers-v1.schema.json",
+  "title": "SignatureHeadersV1",
+  "description": "Required EDGE/LINK signature and trace headers represented as JSON object properties.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "x-vantaris-machine-id",
+    "x-vantaris-signature",
+    "x-vantaris-signature-algorithm",
+    "x-vantaris-signed-at",
+    "x-vantaris-trace-id",
+    "x-vantaris-idempotency-key"
+  ],
+  "properties": {
+    "x-vantaris-machine-id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "x-vantaris-signature": {
+      "type": "string",
+      "minLength": 1
+    },
+    "x-vantaris-signature-algorithm": {
+      "type": "string",
+      "minLength": 1
+    },
+    "x-vantaris-signed-at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "x-vantaris-trace-id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "x-vantaris-idempotency-key": {
+      "type": "string",
+      "minLength": 1
+    },
+    "x-vantaris-protocol-version": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

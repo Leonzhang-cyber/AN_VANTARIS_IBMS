@@ -1,0 +1,67 @@
+{
+  "manifestVersion": "link-offline-package-manifest.v1",
+  "packageName": "AN_VANTARIS_LINK_OFFLINE_BUNDLE",
+  "packageStatus": "STRUCTURE_ONLY",
+  "scope": "AN_VANTARIS_LINK",
+  "generatedAt": "2026-06-20",
+  "linkRuntimeEnabled": false,
+  "linkProductionDeliveryAllowed": false,
+  "endpointApproved": false,
+  "directUfmsDbAccessAllowed": false,
+  "writebackAllowed": false,
+  "consumerImplementationIncluded": false,
+  "contractsManifestRef": "AN_VANTARIS_Contracts/manifest/AN_VANTARIS_CONTRACTS_SCHEMA_MANIFEST.v1.json",
+  "diagnosticsEvidenceRefs": [
+    "AN_VANTARIS_LINK/evidence/LINK_C7_05_C7_AGGREGATE_GATE.md"
+  ],
+  "bundleFiles": [
+    {
+      "path": "AN_VANTARIS_LINK/deploy/offline-bundle/README.md",
+      "type": "documentation",
+      "required": true
+    },
+    {
+      "path": "AN_VANTARIS_LINK/deploy/offline-bundle/config/link.env.example",
+      "type": "config-example",
+      "required": true
+    },
+    {
+      "path": "AN_VANTARIS_LINK/deploy/offline-bundle/systemd/an-vantaris-link.service.template",
+      "type": "systemd-template",
+      "required": true
+    },
+    {
+      "path": "AN_VANTARIS_LINK/deploy/offline-bundle/scripts/install-link.sh",
+      "type": "structure-only-script",
+      "required": true,
+      "executable": true
+    },
+    {
+      "path": "AN_VANTARIS_LINK/deploy/offline-bundle/scripts/uninstall-link.sh",
+      "type": "structure-only-script",
+      "required": true,
+      "executable": true
+    },
+    {
+      "path": "AN_VANTARIS_LINK/deploy/offline-bundle/scripts/rollback-link.sh",
+      "type": "structure-only-script",
+      "required": true,
+      "executable": true
+    }
+  ],
+  "validationCommands": [
+    "npm --prefix AN_VANTARIS_LINK run typecheck",
+    "bash AN_VANTARIS_LINK/scripts/link-boundary-scan.sh"
+  ],
+  "boundary": {
+    "structureOnly": true,
+    "contractOnlyReference": true,
+    "linkRuntimeEnabled": false,
+    "linkProductionDeliveryAllowed": false,
+    "endpointApproved": false,
+    "directUfmsDbAccessAllowed": false,
+    "writebackAllowed": false,
+    "consumerImplementationIncluded": false,
+    "realUfmsApiDeliveryEnabled": false
+  }
+}

@@ -1,0 +1,48 @@
+openapi: 3.0.3
+info:
+  title: LINK to Code Delivery API
+  version: v1
+  description: |
+    HTTP boundary for AN_VANTARIS_LINK delivering normalized events to AN_VANTARIS_Code.
+    Contract master: AN_VANTARIS_Contracts (UFMS repo).
+servers:
+  - url: http://localhost:3000
+    description: AN_VANTARIS_Code (default)
+paths:
+  /api/v1/link/delivery:
+    post:
+      operationId: receiveLinkDelivery
+      summary: Receive a delivery envelope from LINK
+      tags:
+        - link-delivery
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/link-message-envelope.v1.schema.json'
+      responses:
+        '202':
+          description: Delivery accepted for processing
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/delivery-ack.v1.schema.json'
+        '400':
+          description: Invalid envelope
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/error-response.v1.schema.json'
+        '409':
+          description: Duplicate message
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/delivery-ack.v1.schema.json'
+        '500':
+          description: Internal processing error
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/error-response.v1.schema.json'

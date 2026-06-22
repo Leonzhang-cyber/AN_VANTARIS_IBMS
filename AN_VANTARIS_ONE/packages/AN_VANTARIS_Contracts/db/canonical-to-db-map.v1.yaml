@@ -1,0 +1,346 @@
+metadata:
+  schemaVersion: v1
+  contractVersion: 1.0.0-contract-baseline
+  authority: AN_VANTARIS_Contracts
+  generatedFrom:
+    canonicalSchemaIndex: AN_VANTARIS_Contracts/canonical/canonical-schema-index.v1.md
+    canonicalObjectModel: AN_VANTARIS_Contracts/canonical/canonical-object-model.v1.md
+  appliesTo:
+    - VANTARIS_ONE
+    - UFMS
+    - EDGE
+    - LINK
+    - Code
+    - DB
+    - Console
+    - NexusAI
+  updatedAt: "2026-06-17T23:30:00Z"
+  status: P1_DB_MAPPING_YAML_BASELINE
+
+principles:
+  - "DB is implementation mapping, not contract authority."
+  - "Code owns DB access and persistence orchestration."
+  - "EDGE/LINK must not direct-write UFMS DB."
+  - "Canonical identifiers must be preserved at published boundaries."
+  - "DB may add indexes, foreign keys, and technical fields."
+  - "Migrations must reference contractVersion milestones."
+  - "Unknown optional fields must be tolerated upstream."
+
+layers:
+  config:
+    purpose: "Store configuration, topology references, and versioned effective state."
+    canonicalObjects: [tenant, site, building, floor, space, gateway, connector, sourceSystem, configVersion]
+    ownerPackage: AN_VANTARIS_DB
+    storageResponsibility: "Configuration records and effective snapshot metadata."
+    retentionPolicy: "Long-lived, soft-delete allowed per governance."
+    notes: "Configuration ownership remains Code-facing; DB stores implementation state."
+  event:
+    purpose: "Persist normalized operational events, alarms, and lifecycle transitions."
+    canonicalObjects: [event, alarm, telemetry, health, throughput, syncBatch]
+    ownerPackage: AN_VANTARIS_DB
+    storageResponsibility: "Durable event stream views and alarm lifecycle history."
+    retentionPolicy: "Policy-driven by compliance and operations profile."
+    notes: "Designed for queryability and correlation across tenant/site and time windows."
+  raw:
+    purpose: "Preserve ingress payload snapshots and transport metadata for traceability."
+    canonicalObjects: [telemetry, event, evidence]
+    ownerPackage: AN_VANTARIS_DB
+    storageResponsibility: "Raw payload archive and hash linkage."
+    retentionPolicy: "Shorter TTL by default unless compliance hold applies."
+    notes: "Raw layer remains implementation detail and not a public contract surface."
+  insight:
+    purpose: "Store derived analytics and recommendation-support artifacts."
+    canonicalObjects: [asset, device, point, throughput, health]
+    ownerPackage: AN_VANTARIS_DB
+    storageResponsibility: "Materialized projections and derived operational indicators."
+    retentionPolicy: "Tiered retention based on product analytics policy."
+    notes: "Derived values must preserve canonical IDs for lineage."
+  audit:
+    purpose: "Track change and action trails with actor/target references."
+    canonicalObjects: [audit, configVersion, syncBatch]
+    ownerPackage: AN_VANTARIS_DB
+    storageResponsibility: "Immutable or append-preferred audit records."
+    retentionPolicy: "Compliance retention class; do not purge without policy approval."
+    notes: "Audit captures correlation and contract version context."
+
+canonicalObjectMappings:
+  tenant:
+    canonicalSchema: AN_VANTARIS_Contracts/schemas/tenant-v1.schema.json
+    example: AN_VANTARIS_Contracts/dto-examples/canonical/tenant.example.json
+    dbLayer: config
+    suggestedTable: tenant_registry
+    primaryKey: tenant_id
+    requiredCanonicalFields: [schemaVersion, tenantId, name, status]
+    dbTechnicalFields: [id, created_at, updated_at, deleted_at]
+    indexingHints: [tenant_id unique, status btree]
+    retentionClass: long_lived
+    ownerService: AN_VANTARIS_Code
+    allowedWriters: [AN_VANTARIS_Code]
+    allowedReaders: [AN_VANTARIS_Code, AN_VANTARIS_DB, AN_VANTARIS_Console, AN_VANTARIS_NexusAI]
+    notes: "Tenant root entity; preserve tenantId exactly."
+  site:
+    canonicalSchema: AN_VANTARIS_Contracts/schemas/site-v1.schema.json
+    example: AN_VANTARIS_Contracts/dto-examples/canonical/site.example.json
+    dbLayer: config
+    suggestedTable: site_registry
+    primaryKey: site_id
+    requiredCanonicalFields: [schemaVersion, siteId, tenantId, name, status]
+    dbTechnicalFields: [id, created_at, updated_at, deleted_at]
+    indexingHints: [site_id unique, tenant_id btree]
+    retentionClass: long_lived
+    ownerService: AN_VANTARIS_Code
+    allowedWriters: [AN_VANTARIS_Code]
+    allowedReaders: [AN_VANTARIS_Code, AN_VANTARIS_DB, AN_VANTARIS_Console]
+    notes: "Site isolation boundary for partitioning."
+  building:
+    canonicalSchema: AN_VANTARIS_Contracts/schemas/building-v1.schema.json
+    example: AN_VANTARIS_Contracts/dto-examples/canonical/building.example.json
+    dbLayer: config
+    suggestedTable: building_registry
+    primaryKey: building_id
+    requiredCanonicalFields: [schemaVersion, buildingId, siteId, name, status]
+    dbTechnicalFields: [id, created_at, updated_at, deleted_at]
+    indexingHints: [building_id unique, site_id btree]
+    retentionClass: long_lived
+    ownerService: AN_VANTARIS_Code
+    allowedWriters: [AN_VANTARIS_Code]
+    allowedReaders: [AN_VANTARIS_Code, AN_VANTARIS_DB, AN_VANTARIS_Console]
+    notes: "Facility hierarchy node."
+  floor:
+    canonicalSchema: AN_VANTARIS_Contracts/schemas/floor-v1.schema.json
+    example: AN_VANTARIS_Contracts/dto-examples/canonical/floor.example.json
+    dbLayer: config
+    suggestedTable: floor_registry
+    primaryKey: floor_id
+    requiredCanonicalFields: [schemaVersion, floorId, buildingId, name, status]
+    dbTechnicalFields: [id, created_at, updated_at, deleted_at]
+    indexingHints: [floor_id unique, building_id btree]
+    retentionClass: long_lived
+    ownerService: AN_VANTARIS_Code
+    allowedWriters: [AN_VANTARIS_Code]
+    allowedReaders: [AN_VANTARIS_Code, AN_VANTARIS_DB, AN_VANTARIS_Console]
+    notes: "Hierarchy mapping only."
+  space:
+    canonicalSchema: AN_VANTARIS_Contracts/schemas/space-v1.schema.json
+    example: AN_VANTARIS_Contracts/dto-examples/canonical/space.example.json
+    dbLayer: config
+    suggestedTable: space_registry
+    primaryKey: space_id
+    requiredCanonicalFields: [schemaVersion, spaceId, floorId, name, status]
+    dbTechnicalFields: [id, created_at, updated_at, deleted_at]
+    indexingHints: [space_id unique, floor_id btree]
+    retentionClass: long_lived
+    ownerService: AN_VANTARIS_Code
+    allowedWriters: [AN_VANTARIS_Code]
+    allowedReaders: [AN_VANTARIS_Code, AN_VANTARIS_DB, AN_VANTARIS_Console, AN_VANTARIS_NexusAI]
+    notes: "Room/zone reference."
+  gateway:
+    canonicalSchema: AN_VANTARIS_Contracts/schemas/gateway-v1.schema.json
+    example: AN_VANTARIS_Contracts/dto-examples/canonical/gateway.example.json
+    dbLayer: config
+    suggestedTable: gateway_registry
+    primaryKey: gateway_id
+    requiredCanonicalFields: [schemaVersion, gatewayId, siteId, name, status, machineId]
+    dbTechnicalFields: [id, created_at, updated_at, deleted_at]
+    indexingHints: [gateway_id unique, site_id btree, status btree]
+    retentionClass: long_lived
+    ownerService: AN_VANTARIS_Code
+    allowedWriters: [AN_VANTARIS_Code]
+    allowedReaders: [AN_VANTARIS_Code, AN_VANTARIS_DB, AN_VANTARIS_EDGE, AN_VANTARIS_LINK]
+    notes: "EDGE/LINK may read via Code boundary; no direct DB write."
+  connector:
+    canonicalSchema: AN_VANTARIS_Contracts/schemas/connector-v1.schema.json
+    example: AN_VANTARIS_Contracts/dto-examples/canonical/connector.example.json
+    dbLayer: config
+    suggestedTable: connector_registry
+    primaryKey: connector_id
+    requiredCanonicalFields: [schemaVersion, connectorId, gatewayId, connectorType, status]
+    dbTechnicalFields: [id, created_at, updated_at, deleted_at]
+    indexingHints: [connector_id unique, gateway_id btree]
+    retentionClass: long_lived
+    ownerService: AN_VANTARIS_Code
+    allowedWriters: [AN_VANTARIS_Code]
+    allowedReaders: [AN_VANTARIS_Code, AN_VANTARIS_DB, AN_VANTARIS_EDGE, AN_VANTARIS_LINK]
+    notes: "Connector state is implementation detail but IDs remain canonical."
+  sourceSystem:
+    canonicalSchema: AN_VANTARIS_Contracts/schemas/source-system-v1.schema.json
+    example: AN_VANTARIS_Contracts/dto-examples/canonical/source-system.example.json
+    dbLayer: config
+    suggestedTable: source_system_registry
+    primaryKey: source_system_id
+    requiredCanonicalFields: [schemaVersion, sourceSystemId, connectorId, name, systemType, status]
+    dbTechnicalFields: [id, created_at, updated_at, deleted_at]
+    indexingHints: [source_system_id unique, connector_id btree]
+    retentionClass: long_lived
+    ownerService: AN_VANTARIS_Code
+    allowedWriters: [AN_VANTARIS_Code]
+    allowedReaders: [AN_VANTARIS_Code, AN_VANTARIS_DB, AN_VANTARIS_EDGE, AN_VANTARIS_LINK]
+    notes: "Upstream system contract mapping."
+  asset:
+    canonicalSchema: AN_VANTARIS_Contracts/schemas/asset-v1.schema.json
+    example: AN_VANTARIS_Contracts/dto-examples/canonical/asset.example.json
+    dbLayer: insight
+    suggestedTable: asset_catalog
+    primaryKey: asset_id
+    requiredCanonicalFields: [schemaVersion, assetId, siteId, name, assetType, status]
+    dbTechnicalFields: [id, created_at, updated_at, deleted_at]
+    indexingHints: [asset_id unique, site_id btree, asset_type btree]
+    retentionClass: long_lived
+    ownerService: AN_VANTARIS_Code
+    allowedWriters: [AN_VANTARIS_Code]
+    allowedReaders: [AN_VANTARIS_Code, AN_VANTARIS_DB, AN_VANTARIS_Console, AN_VANTARIS_NexusAI]
+    notes: "Asset model supports operations and analytics."
+  device:
+    canonicalSchema: AN_VANTARIS_Contracts/schemas/device-v1.schema.json
+    example: AN_VANTARIS_Contracts/dto-examples/canonical/device.example.json
+    dbLayer: insight
+    suggestedTable: device_registry
+    primaryKey: device_id
+    requiredCanonicalFields: [schemaVersion, deviceId, assetId, sourceSystemId, name, deviceType, status]
+    dbTechnicalFields: [id, created_at, updated_at, deleted_at]
+    indexingHints: [device_id unique, asset_id btree, source_system_id btree]
+    retentionClass: long_lived
+    ownerService: AN_VANTARIS_Code
+    allowedWriters: [AN_VANTARIS_Code]
+    allowedReaders: [AN_VANTARIS_Code, AN_VANTARIS_DB, AN_VANTARIS_EDGE, AN_VANTARIS_LINK]
+    notes: "Device lifecycle and source lineage."
+  point:
+    canonicalSchema: AN_VANTARIS_Contracts/schemas/point-v1.schema.json
+    example: AN_VANTARIS_Contracts/dto-examples/canonical/point.example.json
+    dbLayer: insight
+    suggestedTable: point_registry
+    primaryKey: point_id
+    requiredCanonicalFields: [schemaVersion, pointId, deviceId, name, pointType, status]
+    dbTechnicalFields: [id, created_at, updated_at, deleted_at]
+    indexingHints: [point_id unique, device_id btree]
+    retentionClass: long_lived
+    ownerService: AN_VANTARIS_Code
+    allowedWriters: [AN_VANTARIS_Code]
+    allowedReaders: [AN_VANTARIS_Code, AN_VANTARIS_DB, AN_VANTARIS_EDGE, AN_VANTARIS_LINK]
+    notes: "Point metadata for telemetry correlation."
+  telemetry:
+    canonicalSchema: AN_VANTARIS_Contracts/schemas/telemetry-v1.schema.json
+    example: AN_VANTARIS_Contracts/dto-examples/canonical/telemetry.example.json
+    dbLayer: raw
+    suggestedTable: telemetry_raw
+    primaryKey: telemetry_id
+    requiredCanonicalFields: [schemaVersion, telemetryId, pointId, observedTimestamp, value, quality]
+    dbTechnicalFields: [id, ingestion_time, partition_key, raw_payload_hash]
+    indexingHints: [telemetry_id unique, point_id btree, observed_timestamp btree]
+    retentionClass: medium_term
+    ownerService: AN_VANTARIS_Code
+    allowedWriters: [AN_VANTARIS_Code]
+    allowedReaders: [AN_VANTARIS_Code, AN_VANTARIS_DB, AN_VANTARIS_NexusAI]
+    notes: "High-volume writes routed via Code ingestion boundary."
+  event:
+    canonicalSchema: AN_VANTARIS_Contracts/schemas/event-v1.schema.json
+    example: AN_VANTARIS_Contracts/dto-examples/canonical/event.example.json
+    dbLayer: event
+    suggestedTable: event_log
+    primaryKey: event_id
+    requiredCanonicalFields: [schemaVersion, eventId, eventType, sourceTimestamp, observedTimestamp, severity, status, traceContext, idempotencyKey]
+    dbTechnicalFields: [id, ingestion_time, partition_key, raw_payload_hash]
+    indexingHints: [event_id unique, observed_timestamp btree, status btree, idempotency_key btree]
+    retentionClass: compliance
+    ownerService: AN_VANTARIS_Code
+    allowedWriters: [AN_VANTARIS_Code]
+    allowedReaders: [AN_VANTARIS_Code, AN_VANTARIS_DB, AN_VANTARIS_Console, AN_VANTARIS_NexusAI]
+    notes: "Event write path must preserve idempotency semantics."
+  alarm:
+    canonicalSchema: AN_VANTARIS_Contracts/schemas/alarm-v1.schema.json
+    example: AN_VANTARIS_Contracts/dto-examples/canonical/alarm.example.json
+    dbLayer: event
+    suggestedTable: alarm_state
+    primaryKey: alarm_id
+    requiredCanonicalFields: [schemaVersion, alarmId, eventId, severity, status, raisedAt]
+    dbTechnicalFields: [id, created_at, updated_at, partition_key]
+    indexingHints: [alarm_id unique, event_id btree, status btree]
+    retentionClass: compliance
+    ownerService: AN_VANTARIS_Code
+    allowedWriters: [AN_VANTARIS_Code]
+    allowedReaders: [AN_VANTARIS_Code, AN_VANTARIS_DB, AN_VANTARIS_Console, AN_VANTARIS_NexusAI]
+    notes: "Alarm lifecycle updates are Code-owned."
+  evidence:
+    canonicalSchema: AN_VANTARIS_Contracts/schemas/evidence-v1.schema.json
+    example: AN_VANTARIS_Contracts/dto-examples/canonical/evidence.example.json
+    dbLayer: raw
+    suggestedTable: evidence_registry
+    primaryKey: evidence_id
+    requiredCanonicalFields: [schemaVersion, evidenceId, eventId, evidenceType, uri, capturedAt]
+    dbTechnicalFields: [id, created_at, ingestion_time, raw_payload_hash]
+    indexingHints: [evidence_id unique, event_id btree, captured_at btree]
+    retentionClass: compliance
+    ownerService: AN_VANTARIS_Code
+    allowedWriters: [AN_VANTARIS_Code]
+    allowedReaders: [AN_VANTARIS_Code, AN_VANTARIS_DB, AN_VANTARIS_Console, AN_VANTARIS_NexusAI]
+    notes: "Evidence payload can be externalized; DB stores metadata."
+  health:
+    canonicalSchema: AN_VANTARIS_Contracts/schemas/health-v1.schema.json
+    example: AN_VANTARIS_Contracts/dto-examples/canonical/health.example.json
+    dbLayer: event
+    suggestedTable: health_signal
+    primaryKey: health_id
+    requiredCanonicalFields: [schemaVersion, healthId, targetType, targetId, healthStatus, observedTimestamp]
+    dbTechnicalFields: [id, ingestion_time, partition_key]
+    indexingHints: [health_id unique, target_id btree, observed_timestamp btree]
+    retentionClass: medium_term
+    ownerService: AN_VANTARIS_Code
+    allowedWriters: [AN_VANTARIS_Code]
+    allowedReaders: [AN_VANTARIS_Code, AN_VANTARIS_DB, AN_VANTARIS_Console]
+    notes: "Health stream supports runtime monitoring and dashboards."
+  throughput:
+    canonicalSchema: AN_VANTARIS_Contracts/schemas/throughput-v1.schema.json
+    example: AN_VANTARIS_Contracts/dto-examples/canonical/throughput.example.json
+    dbLayer: insight
+    suggestedTable: throughput_window
+    primaryKey: throughput_id
+    requiredCanonicalFields: [schemaVersion, throughputId, targetType, targetId, windowStart, windowEnd, messageCount]
+    dbTechnicalFields: [id, created_at, partition_key]
+    indexingHints: [throughput_id unique, target_id btree, window_start btree]
+    retentionClass: short_term
+    ownerService: AN_VANTARIS_Code
+    allowedWriters: [AN_VANTARIS_Code]
+    allowedReaders: [AN_VANTARIS_Code, AN_VANTARIS_DB, AN_VANTARIS_Console, AN_VANTARIS_NexusAI]
+    notes: "Aggregated metrics for planning and observability."
+  syncBatch:
+    canonicalSchema: AN_VANTARIS_Contracts/schemas/sync-batch-v1.schema.json
+    example: AN_VANTARIS_Contracts/dto-examples/canonical/sync-batch.example.json
+    dbLayer: audit
+    suggestedTable: sync_batch_journal
+    primaryKey: sync_batch_id
+    requiredCanonicalFields: [schemaVersion, syncBatchId, sourceSystemId, startedAt, status]
+    dbTechnicalFields: [id, created_at, updated_at]
+    indexingHints: [sync_batch_id unique, source_system_id btree, status btree]
+    retentionClass: compliance
+    ownerService: AN_VANTARIS_Code
+    allowedWriters: [AN_VANTARIS_Code]
+    allowedReaders: [AN_VANTARIS_Code, AN_VANTARIS_DB]
+    notes: "Tracks sync operations and reconciliation."
+  audit:
+    canonicalSchema: AN_VANTARIS_Contracts/schemas/audit-v1.schema.json
+    example: AN_VANTARIS_Contracts/dto-examples/canonical/audit.example.json
+    dbLayer: audit
+    suggestedTable: audit_trail
+    primaryKey: audit_id
+    requiredCanonicalFields: [schemaVersion, auditId, actorType, action, targetType, targetId, occurredAt]
+    dbTechnicalFields: [id, created_at, partition_key]
+    indexingHints: [audit_id unique, occurred_at btree, target_id btree]
+    retentionClass: compliance
+    ownerService: AN_VANTARIS_Code
+    allowedWriters: [AN_VANTARIS_Code]
+    allowedReaders: [AN_VANTARIS_Code, AN_VANTARIS_DB, AN_VANTARIS_Console]
+    notes: "Immutable-by-policy preferred."
+  configVersion:
+    canonicalSchema: AN_VANTARIS_Contracts/schemas/config-version-v1.schema.json
+    example: AN_VANTARIS_Contracts/dto-examples/canonical/config-version.example.json
+    dbLayer: config
+    suggestedTable: config_version_registry
+    primaryKey: config_version_id
+    requiredCanonicalFields: [schemaVersion, configVersionId, targetType, targetId, version, effectiveFrom, status]
+    dbTechnicalFields: [id, created_at, updated_at, deleted_at]
+    indexingHints: [config_version_id unique, target_id btree, effective_from btree]
+    retentionClass: long_lived
+    ownerService: AN_VANTARIS_Code
+    allowedWriters: [AN_VANTARIS_Code]
+    allowedReaders: [AN_VANTARIS_Code, AN_VANTARIS_DB, AN_VANTARIS_EDGE, AN_VANTARIS_LINK, AN_VANTARIS_Console]
+    notes: "Links operational behavior with versioned config state."

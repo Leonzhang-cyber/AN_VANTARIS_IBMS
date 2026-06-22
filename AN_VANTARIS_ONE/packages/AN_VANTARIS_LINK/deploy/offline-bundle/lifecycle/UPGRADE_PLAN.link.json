@@ -1,0 +1,50 @@
+{
+  "planVersion": "link-upgrade-plan.v1",
+  "packageName": "AN_VANTARIS_LINK_OFFLINE_BUNDLE",
+  "status": "DRY_RUN_ONLY",
+  "scope": "AN_VANTARIS_LINK",
+  "generatedAt": "2026-06-20",
+  "preconditions": [
+    "current package state recorded",
+    "target package state recorded",
+    "rollback plan available",
+    "package verification passes",
+    "local healthcheck passes",
+    "production delivery remains blocked"
+  ],
+  "plannedSteps": [
+    {
+      "step": "verify_current_package",
+      "executionMode": "LOCAL_VALIDATION"
+    },
+    {
+      "step": "verify_target_package",
+      "executionMode": "LOCAL_VALIDATION"
+    },
+    {
+      "step": "backup_current_package",
+      "executionMode": "PLANNED_ONLY"
+    },
+    {
+      "step": "stage_target_package",
+      "executionMode": "PLANNED_ONLY"
+    },
+    {
+      "step": "run_healthcheck",
+      "executionMode": "LOCAL_VALIDATION"
+    },
+    {
+      "step": "record_upgrade_evidence",
+      "executionMode": "PLANNED_ONLY"
+    }
+  ],
+  "boundary": {
+    "realUpgradeExecuted": false,
+    "serviceRestartExecuted": false,
+    "linkRuntimeEnabled": false,
+    "linkProductionDeliveryAllowed": false,
+    "endpointApproved": false,
+    "directUfmsDbAccessAllowed": false,
+    "writebackAllowed": false
+  }
+}

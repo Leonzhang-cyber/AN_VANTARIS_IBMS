@@ -1,0 +1,418 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ufms-app-api-delivery-boundary.v1",
+  "title": "UFMS APP API Delivery Boundary Schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "boundaryId",
+    "deliveryBoundaryType",
+    "sourceContracts",
+    "ufmsApiTarget",
+    "deliveryPayload",
+    "deliveryControl",
+    "receiptExpectation",
+    "boundary"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "ufms-app-api-delivery-boundary.v1"
+    },
+    "boundaryId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "deliveryBoundaryType": {
+      "type": "string",
+      "enum": [
+        "TELEMETRY_DELIVERY",
+        "EVENT_DELIVERY",
+        "ALARM_DELIVERY",
+        "HEALTH_DELIVERY",
+        "DIAGNOSTICS_DELIVERY",
+        "EVIDENCE_DELIVERY",
+        "THROUGHPUT_DELIVERY",
+        "SYNC_BATCH_DELIVERY",
+        "AUDIT_DELIVERY",
+        "CONFIG_VERSION_DELIVERY",
+        "BOUNDARY_ONLY",
+        "UNKNOWN"
+      ]
+    },
+    "sourceContracts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonicalHandoffEnvelopeRef",
+        "linkDeliveryReceiptRef"
+      ],
+      "properties": {
+        "canonicalHandoffEnvelopeRef": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ackReplayReliabilityRef": {
+          "type": "string"
+        },
+        "edgeHealthDiagnosticsRef": {
+          "type": "string"
+        },
+        "linkDeliveryReceiptRef": {
+          "type": "string",
+          "minLength": 1
+        },
+        "linkAuditEvidenceChainRef": {
+          "type": "string"
+        },
+        "airportSourceSystemProfileRef": {
+          "type": "string"
+        },
+        "airportTagMappingRef": {
+          "type": "string"
+        },
+        "airportAssetLocationHmiLocatorRef": {
+          "type": "string"
+        }
+      }
+    },
+    "ufmsApiTarget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "targetId",
+        "targetSystem",
+        "endpointRef",
+        "method",
+        "machineIdentityRequired",
+        "endpointApproved"
+      ],
+      "properties": {
+        "targetId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "targetSystem": {
+          "type": "string",
+          "enum": [
+            "UFMS_APP_API_BOUNDARY",
+            "UFMS_INGEST_BOUNDARY",
+            "UFMS_EVENT_BOUNDARY",
+            "UFMS_ALARM_BOUNDARY",
+            "UFMS_HEALTH_BOUNDARY",
+            "UFMS_EVIDENCE_BOUNDARY",
+            "UNKNOWN"
+          ]
+        },
+        "endpointRef": {
+          "type": "string",
+          "minLength": 1
+        },
+        "routeTemplate": {
+          "type": "string"
+        },
+        "method": {
+          "type": "string",
+          "enum": [
+            "POST",
+            "PUT",
+            "PATCH",
+            "NONE"
+          ]
+        },
+        "machineIdentityRequired": {
+          "type": "boolean",
+          "const": true
+        },
+        "machineIdentityRef": {
+          "type": "string"
+        },
+        "credentialRef": {
+          "type": "string"
+        },
+        "endpointApproved": {
+          "type": "boolean",
+          "const": false
+        },
+        "approvalRef": {
+          "type": "string"
+        }
+      }
+    },
+    "deliveryPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "payloadRef",
+        "recordType",
+        "eventId",
+        "traceId",
+        "gatewayId",
+        "streamId",
+        "sequenceNumber",
+        "payloadHash"
+      ],
+      "properties": {
+        "payloadRef": {
+          "type": "string",
+          "minLength": 1
+        },
+        "recordType": {
+          "type": "string",
+          "enum": [
+            "telemetry",
+            "event",
+            "alarm",
+            "health",
+            "evidence",
+            "throughput",
+            "sync_batch",
+            "audit",
+            "config_version",
+            "diagnostics",
+            "unknown"
+          ]
+        },
+        "envelopeId": {
+          "type": "string"
+        },
+        "eventId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "traceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "correlationId": {
+          "type": "string"
+        },
+        "gatewayId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "edgeId": {
+          "type": "string"
+        },
+        "streamId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sequenceNumber": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "payloadHash": {
+          "type": "string",
+          "minLength": 1
+        },
+        "assetRef": {
+          "type": "string"
+        },
+        "deviceRef": {
+          "type": "string"
+        },
+        "pointRef": {
+          "type": "string"
+        },
+        "locationRef": {
+          "type": "string"
+        }
+      }
+    },
+    "deliveryControl": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "deliveryMode",
+        "idempotencyRequired",
+        "idempotencyKey",
+        "productionDeliveryAllowed",
+        "retryAllowed",
+        "dlqAllowed"
+      ],
+      "properties": {
+        "deliveryMode": {
+          "type": "string",
+          "enum": [
+            "LOCAL_DRY_RUN",
+            "BOUNDARY_ONLY",
+            "FUTURE_PRODUCTION",
+            "UNKNOWN"
+          ]
+        },
+        "idempotencyRequired": {
+          "type": "boolean",
+          "const": true
+        },
+        "idempotencyKey": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dedupeScope": {
+          "type": "string",
+          "enum": [
+            "TARGET",
+            "STREAM",
+            "GATEWAY",
+            "GLOBAL",
+            "UNKNOWN"
+          ]
+        },
+        "productionDeliveryAllowed": {
+          "type": "boolean",
+          "const": false
+        },
+        "retryAllowed": {
+          "type": "boolean"
+        },
+        "dlqAllowed": {
+          "type": "boolean"
+        },
+        "maxAttempts": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "receiptExpectation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "receiptRequired",
+        "receiptType",
+        "acceptedStatuses"
+      ],
+      "properties": {
+        "receiptRequired": {
+          "type": "boolean",
+          "const": true
+        },
+        "receiptType": {
+          "type": "string",
+          "enum": [
+            "HTTP_STATUS_ONLY",
+            "UFMS_ACK_BODY",
+            "LOCAL_DRY_RUN_RECEIPT",
+            "BOUNDARY_ONLY",
+            "UNKNOWN"
+          ]
+        },
+        "acceptedStatuses": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "RECEIVED",
+              "ACCEPTED",
+              "REJECTED",
+              "BLOCKED",
+              "DUPLICATE",
+              "TIMEOUT",
+              "UNKNOWN"
+            ]
+          }
+        },
+        "receiptRef": {
+          "type": "string"
+        },
+        "targetReferenceId": {
+          "type": "string"
+        }
+      }
+    },
+    "evidenceRefs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "evidenceId",
+          "evidenceType"
+        ],
+        "properties": {
+          "evidenceId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidenceType": {
+            "type": "string",
+            "enum": [
+              "handoff",
+              "delivery",
+              "receipt",
+              "idempotency",
+              "retry",
+              "dlq",
+              "audit",
+              "endpoint_approval",
+              "machine_identity",
+              "unknown"
+            ]
+          },
+          "sourcePath": {
+            "type": "string"
+          },
+          "hash": {
+            "type": "string"
+          }
+        }
+      },
+      "default": []
+    },
+    "boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contractOnly",
+        "ufmsApiRuntimeImplemented",
+        "ufmsBackendModified",
+        "consumerImplementationIncluded",
+        "linkProductionDeliveryAllowed",
+        "edgeRuntimeEnabled",
+        "directUfmsDbAccessAllowed",
+        "writebackAllowed",
+        "endpointApproved"
+      ],
+      "properties": {
+        "contractOnly": {
+          "type": "boolean",
+          "const": true
+        },
+        "ufmsApiRuntimeImplemented": {
+          "type": "boolean",
+          "const": false
+        },
+        "ufmsBackendModified": {
+          "type": "boolean",
+          "const": false
+        },
+        "consumerImplementationIncluded": {
+          "type": "boolean",
+          "const": false
+        },
+        "linkProductionDeliveryAllowed": {
+          "type": "boolean",
+          "const": false
+        },
+        "edgeRuntimeEnabled": {
+          "type": "boolean",
+          "const": false
+        },
+        "directUfmsDbAccessAllowed": {
+          "type": "boolean",
+          "const": false
+        },
+        "writebackAllowed": {
+          "type": "boolean",
+          "const": false
+        },
+        "endpointApproved": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    }
+  }
+}

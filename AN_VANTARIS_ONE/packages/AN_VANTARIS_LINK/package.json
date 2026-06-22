@@ -1,0 +1,24 @@
+{
+  "version": "0.0.0-ga-hardening",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.typecheck.json --noEmit",
+    "build:c2-contracts": "tsc -p tsconfig.c2-contracts.json",
+    "validate:c2-ingress-contract": "npm run build:c2-contracts && node scripts/validate-c2-ingress-contract.mjs",
+    "build:c3-queue": "tsc -p tsconfig.c3-queue.json",
+    "validate:c3-queue": "npm run build:c3-queue && node scripts/validate-c3-queue-contract.mjs",
+    "validate:c3-multi-edge": "npm run build:c3-queue && node scripts/validate-c3-multi-edge-queue.mjs",
+    "validate:c3-stable-telemetry": "npm run build:c3-queue && node scripts/validate-c3-stable-telemetry-awareness.mjs",
+    "build:c4-delivery": "tsc -p tsconfig.c4-delivery.json",
+    "validate:c4-synthetic-delivery": "npm run build:c4-delivery && node scripts/validate-c4-synthetic-delivery.mjs",
+    "build:c5-retry-dlq": "tsc -p tsconfig.c5-retry-dlq.json",
+    "validate:c5-retry-dlq": "npm run build:c5-retry-dlq && node scripts/validate-c5-retry-dlq.mjs",
+    "build:c6-evidence": "tsc -p tsconfig.c6-evidence.json",
+    "validate:c6-evidence": "npm run build:c6-evidence && node scripts/validate-c6-evidence-chain.mjs",
+    "build:c7-diagnostics": "tsc -p tsconfig.c7-diagnostics.json",
+    "validate:c7-diagnostics": "npm run build:c7-diagnostics && node scripts/validate-c7-runtime-diagnostics.mjs"
+  },
+  "devDependencies": {},
+  "name": "an-vantaris-link"
+}

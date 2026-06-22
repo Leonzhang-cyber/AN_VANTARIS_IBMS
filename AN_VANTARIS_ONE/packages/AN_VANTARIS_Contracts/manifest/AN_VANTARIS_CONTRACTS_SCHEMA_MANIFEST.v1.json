@@ -1,0 +1,140 @@
+{
+  "manifestVersion": "an-vantaris-contracts-schema-manifest.v1",
+  "status": "CONTRACT_ONLY",
+  "scope": "AN_VANTARIS_Contracts",
+  "generatedAt": "2026-06-20",
+  "runtimeEnabled": false,
+  "productionDeliveryAllowed": false,
+  "directUfmsDbAccessAllowed": false,
+  "writebackAllowed": false,
+  "consumerImplementationIncluded": false,
+  "schemaGroups": [
+    {
+      "groupId": "CONTRACTS-C1",
+      "groupName": "Shared EDGE / LINK Foundation",
+      "status": "COMPLETE",
+      "schemas": [
+        {
+          "schemaId": "edge-link-canonical-handoff-envelope.v1",
+          "schemaVersion": "edge-link-canonical-handoff-envelope.v1",
+          "domain": "edge-link",
+          "layer": "shared-foundation",
+          "path": "AN_VANTARIS_Contracts/schemas/edge-link/edge-link-canonical-handoff-envelope.v1.json"
+        },
+        {
+          "schemaId": "edge-link-ack-replay-reliability.v1",
+          "schemaVersion": "edge-link-ack-replay-reliability.v1",
+          "domain": "edge-link",
+          "layer": "shared-foundation",
+          "path": "AN_VANTARIS_Contracts/schemas/edge-link/edge-link-ack-replay-reliability.v1.json"
+        },
+        {
+          "schemaId": "edge-heartbeat-health-diagnostics.v1",
+          "schemaVersion": "edge-heartbeat-health-diagnostics.v1",
+          "domain": "edge-link",
+          "layer": "shared-foundation",
+          "path": "AN_VANTARIS_Contracts/schemas/edge-link/edge-heartbeat-health-diagnostics.v1.json"
+        },
+        {
+          "schemaId": "link-delivery-idempotency-receipt.v1",
+          "schemaVersion": "link-delivery-idempotency-receipt.v1",
+          "domain": "edge-link",
+          "layer": "shared-foundation",
+          "path": "AN_VANTARIS_Contracts/schemas/edge-link/link-delivery-idempotency-receipt.v1.json"
+        },
+        {
+          "schemaId": "link-audit-evidence-chain.v1",
+          "schemaVersion": "link-audit-evidence-chain.v1",
+          "domain": "edge-link",
+          "layer": "shared-foundation",
+          "path": "AN_VANTARIS_Contracts/schemas/edge-link/link-audit-evidence-chain.v1.json"
+        }
+      ]
+    },
+    {
+      "groupId": "CONTRACTS-C2",
+      "groupName": "Airport Shared Contract Foundation",
+      "status": "COMPLETE",
+      "schemas": [
+        {
+          "schemaId": "airport-source-system-profile.v1",
+          "schemaVersion": "airport-source-system-profile.v1",
+          "domain": "airport",
+          "layer": "airport-shared-contract",
+          "path": "AN_VANTARIS_Contracts/schemas/airport/airport-source-system-profile.v1.json"
+        },
+        {
+          "schemaId": "airport-elv-connector-matrix.v1",
+          "schemaVersion": "airport-elv-connector-matrix.v1",
+          "domain": "airport",
+          "layer": "airport-shared-contract",
+          "path": "AN_VANTARIS_Contracts/schemas/airport/airport-elv-connector-matrix.v1.json"
+        },
+        {
+          "schemaId": "airport-existing-system-onboarding-packet.v1",
+          "schemaVersion": "airport-existing-system-onboarding-packet.v1",
+          "domain": "airport",
+          "layer": "airport-shared-contract",
+          "path": "AN_VANTARIS_Contracts/schemas/airport/airport-existing-system-onboarding-packet.v1.json"
+        },
+        {
+          "schemaId": "airport-tag-mapping-normalization.v1",
+          "schemaVersion": "airport-tag-mapping-normalization.v1",
+          "domain": "airport",
+          "layer": "airport-shared-contract",
+          "path": "AN_VANTARIS_Contracts/schemas/airport/airport-tag-mapping-normalization.v1.json"
+        },
+        {
+          "schemaId": "airport-asset-location-hmi-locator.v1",
+          "schemaVersion": "airport-asset-location-hmi-locator.v1",
+          "domain": "airport",
+          "layer": "airport-shared-contract",
+          "path": "AN_VANTARIS_Contracts/schemas/airport/airport-asset-location-hmi-locator.v1.json"
+        }
+      ]
+    },
+    {
+      "groupId": "CONTRACTS-C3",
+      "groupName": "Future Consumer Boundary Foundation",
+      "status": "COMPLETE",
+      "schemas": [
+        {
+          "schemaId": "work-order-trigger-envelope-boundary.v1",
+          "schemaVersion": "work-order-trigger-envelope-boundary.v1",
+          "domain": "consumer-boundary",
+          "layer": "future-consumer-boundary",
+          "path": "AN_VANTARIS_Contracts/schemas/consumer-boundary/work-order-trigger-envelope-boundary.v1.json"
+        },
+        {
+          "schemaId": "vantaris-one-airport-projection-boundary.v1",
+          "schemaVersion": "vantaris-one-airport-projection-boundary.v1",
+          "domain": "consumer-boundary",
+          "layer": "future-consumer-boundary",
+          "path": "AN_VANTARIS_Contracts/schemas/consumer-boundary/vantaris-one-airport-projection-boundary.v1.json"
+        },
+        {
+          "schemaId": "ucde-evidence-review-package-boundary.v1",
+          "schemaVersion": "ucde-evidence-review-package-boundary.v1",
+          "domain": "consumer-boundary",
+          "layer": "future-consumer-boundary",
+          "path": "AN_VANTARIS_Contracts/schemas/consumer-boundary/ucde-evidence-review-package-boundary.v1.json"
+        },
+        {
+          "schemaId": "ufms-app-api-delivery-boundary.v1",
+          "schemaVersion": "ufms-app-api-delivery-boundary.v1",
+          "domain": "consumer-boundary",
+          "layer": "future-consumer-boundary",
+          "path": "AN_VANTARIS_Contracts/schemas/consumer-boundary/ufms-app-api-delivery-boundary.v1.json"
+        }
+      ]
+    }
+  ],
+  "boundary": {
+    "contractOnly": true,
+    "edgeRuntimeEnabled": false,
+    "linkProductionDeliveryAllowed": false,
+    "directUfmsDbAccessAllowed": false,
+    "writebackAllowed": false,
+    "consumerImplementationIncluded": false
+  }
+}

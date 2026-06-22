@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vantaris.local/contracts/schemas/signed-handoff-envelope-v1.schema.json",
+  "title": "SignedHandoffEnvelopeV1",
+  "description": "Signed transport envelope from EDGE to LINK containing wire event payload.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "envelopeId",
+    "schemaVersion",
+    "protocolVersion",
+    "createdAt",
+    "machineIdentity",
+    "headers",
+    "wireEvent",
+    "idempotencyKey"
+  ],
+  "properties": {
+    "envelopeId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "schemaVersion": {
+      "type": "string",
+      "const": "v1"
+    },
+    "protocolVersion": {
+      "type": "string",
+      "const": "v1"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "producer": {
+      "type": "string",
+      "enum": ["AN_VANTARIS_EDGE"]
+    },
+    "machineIdentity": {
+      "$ref": "machine-identity-ref-v1.schema.json"
+    },
+    "traceContext": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "headers": {
+      "$ref": "signature-headers-v1.schema.json"
+    },
+    "signature": {
+      "type": "string",
+      "minLength": 1
+    },
+    "wireEvent": {
+      "$ref": "wire-event-v1.schema.json"
+    },
+    "idempotencyKey": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

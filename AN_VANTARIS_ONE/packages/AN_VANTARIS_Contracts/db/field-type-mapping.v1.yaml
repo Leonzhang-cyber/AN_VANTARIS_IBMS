@@ -1,0 +1,68 @@
+metadata:
+  schemaVersion: v1
+  contractVersion: 1.0.0-contract-baseline
+  authority: AN_VANTARIS_Contracts
+  updatedAt: "2026-06-17T23:30:00Z"
+  status: P1_DB_FIELD_TYPE_MAPPING_BASELINE
+
+fieldTypeMappings:
+  stringIdFields:
+    canonicalType: string
+    recommendedDbTypePostgres: varchar(128)
+    nullableRule: "Non-null for required canonical identifier fields."
+    indexingRule: "Unique or high-selectivity btree index on primary IDs."
+    notes: "Applies to tenantId/siteId/deviceId/eventId and related IDs."
+  enumStatusFields:
+    canonicalType: string_enum
+    recommendedDbTypePostgres: varchar(64)
+    nullableRule: "Nullable only when canonical field is optional."
+    indexingRule: "Btree index for commonly filtered status/severity."
+    notes: "Use constrained values in app logic; tolerate unknown optional future values."
+  timestampFields:
+    canonicalType: utc_iso_8601_timestamp
+    recommendedDbTypePostgres: timestamptz
+    nullableRule: "Required timestamps are non-null; optional lifecycle timestamps may be null."
+    indexingRule: "Btree on observed/source/occurred timestamps for time-window queries."
+    notes: "All canonical timestamps remain UTC."
+  numericTelemetryValues:
+    canonicalType: number
+    recommendedDbTypePostgres: double precision
+    nullableRule: "Telemetry value may be nullable only when quality indicates missing/unavailable."
+    indexingRule: "Index together with point_id and observed_timestamp where needed."
+    notes: "Use numeric(20,6) for strict financial/billing-style precision domains."
+  booleanFlags:
+    canonicalType: boolean
+    recommendedDbTypePostgres: boolean
+    nullableRule: "Prefer explicit true/false; nullable for tri-state only."
+    indexingRule: "Partial index where sparse true flags are queried."
+    notes: "Flags should not replace status lifecycle fields."
+  jsonPayloads:
+    canonicalType: object
+    recommendedDbTypePostgres: jsonb
+    nullableRule: "Nullable for optional payload extensions."
+    indexingRule: "GIN index only when field-level querying is required."
+    notes: "Suitable for traceContext, extension metadata, and raw payload mirrors."
+  arrays:
+    canonicalType: array
+    recommendedDbTypePostgres: jsonb
+    nullableRule: "Optional arrays may be null; required arrays should default to empty list."
+    indexingRule: "GIN index on jsonb arrays only when query patterns justify."
+    notes: "Avoid DB-specific array semantics as contract requirement."
+  traceContext:
+    canonicalType: object_trace_context
+    recommendedDbTypePostgres: jsonb
+    nullableRule: "Required for event-like records, optional elsewhere."
+    indexingRule: "Btree index extracted trace_id/correlation_id columns when high-volume joins exist."
+    notes: "Keep canonical shape independent of DB extraction strategy."
+  idempotencyKeys:
+    canonicalType: string
+    recommendedDbTypePostgres: varchar(128)
+    nullableRule: "Non-null for retry-prone write paths."
+    indexingRule: "Unique or near-unique btree index per scope."
+    notes: "Scope key uniqueness by tenant/source window as needed."
+  hashFields:
+    canonicalType: string_hash
+    recommendedDbTypePostgres: char(64)
+    nullableRule: "Nullable when payload hash is not captured."
+    indexingRule: "Btree index for de-duplication and integrity lookups."
+    notes: "Intended for fields such as raw_payload_hash."

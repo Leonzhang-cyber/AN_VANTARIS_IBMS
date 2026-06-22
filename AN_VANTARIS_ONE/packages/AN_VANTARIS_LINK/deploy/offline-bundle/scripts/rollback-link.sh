@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "LINK_ROLLBACK_STRUCTURE_ONLY"
+echo "LINK_ROLLBACK_NOT_EXECUTED"
+echo "LINK_PRODUCTION_DELIVERY_REMAINS_BLOCKED"

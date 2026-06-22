@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vantaris.local/contracts/schemas/edge-handoff-event-v1.schema.json",
+  "title": "EdgeHandoffEventV1",
+  "description": "EDGE handoff event contract passed to LINK ingestion boundary.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["handoffId", "envelope", "createdAt"],
+  "properties": {
+    "handoffId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "envelope": {
+      "$ref": "signed-handoff-envelope-v1.schema.json"
+    },
+    "transport": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": ["http", "kafka", "file", "memory"]
+        },
+        "topic": {
+          "type": "string"
+        },
+        "partitionKey": {
+          "type": "string"
+        }
+      }
+    },
+    "deliveryExpectation": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "maxAttempts": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "retryBackoffSeconds": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "dlqOnFailure": {
+          "type": "boolean"
+        }
+      }
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

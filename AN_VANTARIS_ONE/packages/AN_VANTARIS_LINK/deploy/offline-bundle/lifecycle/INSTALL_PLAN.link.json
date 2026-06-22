@@ -1,0 +1,60 @@
+{
+  "planVersion": "link-install-plan.v1",
+  "packageName": "AN_VANTARIS_LINK_OFFLINE_BUNDLE",
+  "status": "DRY_RUN_ONLY",
+  "scope": "AN_VANTARIS_LINK",
+  "generatedAt": "2026-06-20",
+  "preconditions": [
+    "package manifest exists",
+    "contracts manifest exists",
+    "C7 diagnostics evidence exists",
+    "package verification passes",
+    "local healthcheck passes",
+    "production delivery remains blocked"
+  ],
+  "plannedInstallRoots": {
+    "packageRoot": "/opt/an-vantaris-link",
+    "configRoot": "/etc/an-vantaris-link",
+    "dataRoot": "/var/lib/an-vantaris-link",
+    "logRoot": "/var/log/an-vantaris-link"
+  },
+  "plannedSteps": [
+    {
+      "step": "verify_package",
+      "scriptRef": "AN_VANTARIS_LINK/deploy/offline-bundle/scripts/verify-link-offline-package.sh",
+      "executionMode": "LOCAL_VALIDATION"
+    },
+    {
+      "step": "create_runtime_user",
+      "executionMode": "PLANNED_ONLY"
+    },
+    {
+      "step": "stage_package_files",
+      "executionMode": "PLANNED_ONLY"
+    },
+    {
+      "step": "stage_config_example",
+      "executionMode": "PLANNED_ONLY"
+    },
+    {
+      "step": "stage_systemd_template",
+      "executionMode": "PLANNED_ONLY"
+    },
+    {
+      "step": "run_local_healthcheck",
+      "scriptRef": "AN_VANTARIS_LINK/deploy/offline-bundle/scripts/healthcheck-link-offline.sh",
+      "executionMode": "LOCAL_VALIDATION"
+    }
+  ],
+  "boundary": {
+    "realInstallExecuted": false,
+    "serviceStartExecuted": false,
+    "linkRuntimeEnabled": false,
+    "linkProductionDeliveryAllowed": false,
+    "endpointApproved": false,
+    "directUfmsDbAccessAllowed": false,
+    "writebackAllowed": false,
+    "consumerImplementationIncluded": false,
+    "realUfmsApiDeliveryEnabled": false
+  }
+}

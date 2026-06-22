@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vantaris.local/contracts/schemas/nexus-triage-response.v1.schema.json",
+  "title": "NexusTriageResponse",
+  "description": "Triage response from AN_VANTARIS_NexusAI to AN_VANTARIS_Code (v1)",
+  "type": "object",
+  "required": ["schemaVersion", "requestId", "respondedAt", "recommendation"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "v1"
+    },
+    "requestId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "respondedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "recommendation": {
+      "type": "object",
+      "required": ["action"],
+      "additionalProperties": true,
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": ["create_work_order", "notify_only", "ignore", "escalate"]
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "rationale": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object"
+        }
+      }
+    },
+    "error": {
+      "$ref": "error-response.v1.schema.json"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "schemaVersion": "v1",
+  "syncBatchId": "sync-batch-001",
+  "sourceSystemId": "source-bms-001",
+  "startedAt": "2026-06-17T12:00:00Z",
+  "status": "running"
+}

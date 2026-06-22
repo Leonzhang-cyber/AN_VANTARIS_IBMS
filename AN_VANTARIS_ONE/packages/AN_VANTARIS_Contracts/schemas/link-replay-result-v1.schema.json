@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vantaris.local/contracts/schemas/link-replay-result-v1.schema.json",
+  "title": "LinkReplayResultV1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schemaVersion",
+    "replayRequestId",
+    "status",
+    "totalRequested",
+    "replayedCount",
+    "skippedCount",
+    "failedCount",
+    "results",
+    "traceContext",
+    "completedAt"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "v1"
+    },
+    "replayRequestId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "accepted",
+        "completed",
+        "completed_with_failures",
+        "failed"
+      ]
+    },
+    "totalRequested": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "replayedCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "skippedCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "failedCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": [
+          "itemRef",
+          "status"
+        ],
+        "properties": {
+          "itemRef": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "replayed",
+              "skipped",
+              "failed"
+            ]
+          },
+          "reason": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "traceContext": {
+      "$ref": "common-trace-context-v1.schema.json#/$defs/traceContext"
+    },
+    "completedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC ISO-8601 timestamp."
+    }
+  }
+}

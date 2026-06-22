@@ -1,0 +1,59 @@
+metadata:
+  schemaVersion: v1
+  contractVersion: 1.0.0-contract-baseline
+  authority: AN_VANTARIS_Contracts
+  updatedAt: "2026-06-17T23:30:00Z"
+  status: P1_MIGRATION_METADATA_CONTRACT_BASELINE
+
+migrationMetadataContract:
+  requiredFields:
+    - migrationId
+    - contractVersion
+    - affectedCanonicalObjects
+    - affectedDbLayers
+    - changeType
+    - backwardCompatible
+    - rolloutMode
+    - rollbackSupported
+    - dataBackfillRequired
+    - validationChecklist
+    - approvers
+    - notes
+  fieldDescriptions:
+    migrationId: "Unique migration tracking identifier."
+    contractVersion: "Contract milestone linked to this migration."
+    affectedCanonicalObjects: "Canonical objects impacted by schema/data shape change."
+    affectedDbLayers: "DB layers touched (config/event/raw/insight/audit)."
+    changeType: "additive | corrective | deprecating | breaking."
+    backwardCompatible: "Whether old readers/writers continue to function."
+    rolloutMode: "one_phase | two_phase | shadow_write | expand_contract."
+    rollbackSupported: "Whether rollback path is prepared and tested."
+    dataBackfillRequired: "Whether historical data backfill is needed."
+    validationChecklist: "Pre/post-deploy checks required before completion."
+    approvers: "Roles or teams approving the migration."
+    notes: "Operational and risk notes."
+
+example:
+  migrationId: "mig-ufms-2026-06-17-001"
+  contractVersion: "1.0.0-contract-baseline"
+  affectedCanonicalObjects:
+    - event
+    - alarm
+    - telemetry
+  affectedDbLayers:
+    - event
+    - raw
+  changeType: additive
+  backwardCompatible: true
+  rolloutMode: expand_contract
+  rollbackSupported: true
+  dataBackfillRequired: false
+  validationChecklist:
+    - "validate-contracts.sh passes"
+    - "contract-drift-scan.sh passes"
+    - "critical read/write API smoke checks pass"
+  approvers:
+    - "contracts-authority-owner"
+    - "db-engineering-owner"
+    - "code-runtime-owner"
+  notes: "Fake example only; not an executable migration artifact."

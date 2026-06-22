@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "v1",
+  "replayRequestId": "replay-req-001",
+  "status": "completed",
+  "totalRequested": 2,
+  "replayedCount": 1,
+  "skippedCount": 1,
+  "failedCount": 0,
+  "results": [
+    {
+      "itemRef": "dlq-item-001",
+      "status": "replayed"
+    },
+    {
+      "itemRef": "dlq-item-002",
+      "status": "skipped",
+      "reason": "dry_run_enabled"
+    }
+  ],
+  "traceContext": {
+    "traceId": "trace-rel-010"
+  },
+  "completedAt": "2026-06-18T00:21:00Z"
+}

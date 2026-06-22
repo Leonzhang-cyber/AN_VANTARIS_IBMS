@@ -1,0 +1,606 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "edge-heartbeat-health-diagnostics.v1",
+  "title": "EDGE Heartbeat Health Diagnostics Schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "messageId",
+    "messageType",
+    "identity",
+    "heartbeat",
+    "health",
+    "diagnostics",
+    "boundary"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "edge-heartbeat-health-diagnostics.v1"
+    },
+    "messageId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "messageType": {
+      "type": "string",
+      "enum": [
+        "HEARTBEAT",
+        "HEARTBEAT_ACK",
+        "HEALTH_SNAPSHOT",
+        "DIAGNOSTICS_BUNDLE",
+        "LIVENESS_DECISION",
+        "UNKNOWN"
+      ]
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "gatewayId"
+      ],
+      "properties": {
+        "tenantId": {
+          "type": "string"
+        },
+        "siteId": {
+          "type": "string"
+        },
+        "gatewayId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "edgeId": {
+          "type": "string"
+        },
+        "heartbeatId": {
+          "type": "string"
+        },
+        "streamId": {
+          "type": "string",
+          "const": "health"
+        },
+        "sequenceNumber": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "heartbeat": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "runtimeStatus",
+        "linkConnectivityStatus",
+        "livenessStatus",
+        "generatedAt",
+        "heartbeatIntervalMs",
+        "missedAckCount",
+        "consecutiveMissedHeartbeatCount"
+      ],
+      "properties": {
+        "runtimeStatus": {
+          "type": "string",
+          "enum": [
+            "LOCKED",
+            "DIAGNOSTIC",
+            "MAINTENANCE",
+            "DRY_RUN",
+            "READY",
+            "DEGRADED",
+            "OFFLINE",
+            "UNKNOWN"
+          ]
+        },
+        "linkConnectivityStatus": {
+          "type": "string",
+          "enum": [
+            "UNKNOWN",
+            "DISCONNECTED",
+            "CONNECTING",
+            "CONNECTED",
+            "DEGRADED",
+            "ACK_TIMEOUT",
+            "REPLAY_REQUIRED",
+            "BLOCKED"
+          ]
+        },
+        "livenessStatus": {
+          "type": "string",
+          "enum": [
+            "ONLINE",
+            "DEGRADED",
+            "OFFLINE",
+            "LOCKED",
+            "MAINTENANCE",
+            "UNKNOWN"
+          ]
+        },
+        "generatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "heartbeatIntervalMs": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "lastSuccessfulAckAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "missedAckCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "consecutiveMissedHeartbeatCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "ack": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "ackId": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "NONE",
+                "RECEIVED",
+                "VALIDATED",
+                "ACKED",
+                "REJECTED",
+                "BLOCKED",
+                "DUPLICATE",
+                "TIMEOUT",
+                "UNKNOWN"
+              ]
+            },
+            "acknowledgedAt": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "reason": {
+              "type": "string"
+            },
+            "missedHeartbeatCountAfterAck": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        }
+      }
+    },
+    "health": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "overallStatus",
+        "outbox",
+        "security",
+        "policy"
+      ],
+      "properties": {
+        "overallStatus": {
+          "type": "string",
+          "enum": [
+            "HEALTHY",
+            "DEGRADED",
+            "UNHEALTHY",
+            "LOCKED",
+            "MAINTENANCE",
+            "UNKNOWN"
+          ]
+        },
+        "outbox": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "depth",
+            "oldestAgeMs",
+            "retryPendingCount",
+            "replayRequestedCount",
+            "ackPendingCount",
+            "localDlqCount"
+          ],
+          "properties": {
+            "depth": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "oldestAgeMs": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "retryPendingCount": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "replayRequestedCount": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "ackPendingCount": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "localDlqCount": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "adapters": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "totalAdapters": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "healthyAdapters": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "degradedAdapters": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "offlineAdapters": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "lastAdapterErrorAt": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        },
+        "connectors": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "totalConnectors": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "healthyConnectors": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "degradedConnectors": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "offlineConnectors": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "lastConnectorErrorAt": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        },
+        "resources": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "diskFreeBytes": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "diskTotalBytes": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "memoryUsedBytes": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "memoryTotalBytes": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "cpuLoadPercent": {
+              "type": "number",
+              "minimum": 0
+            }
+          }
+        },
+        "security": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "secretMaterialStored",
+            "writebackAllowed",
+            "directDbAccessAllowed"
+          ],
+          "properties": {
+            "machineIdentityConfigured": {
+              "type": "boolean"
+            },
+            "credentialRefConfigured": {
+              "type": "boolean"
+            },
+            "secretMaterialStored": {
+              "type": "boolean",
+              "const": false
+            },
+            "lockedMode": {
+              "type": "boolean"
+            },
+            "writebackAllowed": {
+              "type": "boolean",
+              "const": false
+            },
+            "directDbAccessAllowed": {
+              "type": "boolean",
+              "const": false
+            }
+          }
+        },
+        "policy": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "runtimeEnabled",
+            "pilotApproved",
+            "productionApproved",
+            "productionDeliveryAllowed",
+            "writebackProhibited"
+          ],
+          "properties": {
+            "runtimeEnabled": {
+              "type": "boolean",
+              "const": false
+            },
+            "pilotApproved": {
+              "type": "boolean",
+              "const": false
+            },
+            "productionApproved": {
+              "type": "boolean",
+              "const": false
+            },
+            "productionDeliveryAllowed": {
+              "type": "boolean",
+              "const": false
+            },
+            "writebackProhibited": {
+              "type": "boolean",
+              "const": true
+            },
+            "policyVersion": {
+              "type": "string"
+            },
+            "configVersion": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "diagnostics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bundleId",
+        "status",
+        "manifest",
+        "containsSecretMaterial"
+      ],
+      "properties": {
+        "bundleId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "READY",
+            "DEGRADED",
+            "INCOMPLETE",
+            "BLOCKED",
+            "UNKNOWN"
+          ]
+        },
+        "exportScope": {
+          "type": "string",
+          "enum": [
+            "LOCAL_ONLY",
+            "LINK_HANDOFF",
+            "FIELD_ENGINEER",
+            "SUPPORT_BUNDLE"
+          ]
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "itemId",
+              "itemType",
+              "status",
+              "containsSecretMaterial"
+            ],
+            "properties": {
+              "itemId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "itemType": {
+                "type": "string",
+                "enum": [
+                  "health_snapshot",
+                  "heartbeat",
+                  "outbox_summary",
+                  "adapter_summary",
+                  "connector_summary",
+                  "resource_summary",
+                  "security_summary",
+                  "policy_summary",
+                  "evidence_manifest",
+                  "log_reference",
+                  "config_reference",
+                  "package_integrity",
+                  "unknown"
+                ]
+              },
+              "status": {
+                "type": "string"
+              },
+              "summary": {
+                "type": "string"
+              },
+              "containsSecretMaterial": {
+                "type": "boolean",
+                "const": false
+              }
+            }
+          }
+        },
+        "manifest": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "manifestId",
+            "bundleId",
+            "itemCount",
+            "itemIds",
+            "bundleHash",
+            "containsSecretMaterial",
+            "runtimeEnabled",
+            "productionDeliveryAllowed",
+            "writebackAllowed",
+            "directDbAccessAllowed"
+          ],
+          "properties": {
+            "manifestId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "bundleId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "itemCount": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "itemIds": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "bundleHash": {
+              "type": "string",
+              "minLength": 1
+            },
+            "containsSecretMaterial": {
+              "type": "boolean",
+              "const": false
+            },
+            "runtimeEnabled": {
+              "type": "boolean",
+              "const": false
+            },
+            "productionDeliveryAllowed": {
+              "type": "boolean",
+              "const": false
+            },
+            "writebackAllowed": {
+              "type": "boolean",
+              "const": false
+            },
+            "directDbAccessAllowed": {
+              "type": "boolean",
+              "const": false
+            }
+          }
+        },
+        "containsSecretMaterial": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    },
+    "evidenceRefs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "evidenceId",
+          "evidenceType"
+        ],
+        "properties": {
+          "evidenceId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidenceType": {
+            "type": "string",
+            "enum": [
+              "heartbeat",
+              "health",
+              "diagnostics",
+              "outbox",
+              "adapter",
+              "connector",
+              "resource",
+              "security",
+              "policy",
+              "package",
+              "unknown"
+            ]
+          },
+          "sourcePath": {
+            "type": "string"
+          },
+          "hash": {
+            "type": "string"
+          }
+        }
+      },
+      "default": []
+    },
+    "boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "edgeRuntimeEnabled",
+        "linkProductionDeliveryAllowed",
+        "directUfmsDbAccessAllowed",
+        "writebackAllowed",
+        "consumerImplementationIncluded"
+      ],
+      "properties": {
+        "edgeRuntimeEnabled": {
+          "type": "boolean",
+          "const": false
+        },
+        "linkProductionDeliveryAllowed": {
+          "type": "boolean",
+          "const": false
+        },
+        "directUfmsDbAccessAllowed": {
+          "type": "boolean",
+          "const": false
+        },
+        "writebackAllowed": {
+          "type": "boolean",
+          "const": false
+        },
+        "consumerImplementationIncluded": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    }
+  }
+}

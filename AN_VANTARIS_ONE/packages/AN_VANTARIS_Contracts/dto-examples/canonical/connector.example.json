@@ -1,0 +1,7 @@
+{
+  "schemaVersion": "v1",
+  "connectorId": "connector-bacnet-001",
+  "gatewayId": "gateway-edge-001",
+  "connectorType": "bacnet",
+  "status": "active"
+}

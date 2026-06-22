@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "v1",
+  "partitionId": "partition-07",
+  "partitionKey": "site-ufms-hq-001|gateway-edge-001|source-bms-001",
+  "status": "active",
+  "queueDepth": 18,
+  "inFlightCount": 3,
+  "dlqCount": 2,
+  "lastDeliveredAt": "2026-06-18T00:18:00Z",
+  "lastAckAt": "2026-06-18T00:18:01Z",
+  "lastErrorAt": "2026-06-18T00:15:00Z",
+  "healthStatus": "degraded",
+  "observedTimestamp": "2026-06-18T00:18:05Z"
+}

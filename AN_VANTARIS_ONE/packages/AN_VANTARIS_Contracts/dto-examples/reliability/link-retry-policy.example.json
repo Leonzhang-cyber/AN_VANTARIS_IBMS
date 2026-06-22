@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "v1",
+  "policyId": "retry-policy-default-v1",
+  "policyName": "default-link-retry-policy",
+  "maxAttempts": 5,
+  "initialBackoffSeconds": 5,
+  "maxBackoffSeconds": 300,
+  "backoffStrategy": "exponential_with_cap",
+  "jitterEnabled": true,
+  "retryableStatusCodes": [
+    408,
+    429,
+    500,
+    502,
+    503,
+    504
+  ],
+  "nonRetryableStatusCodes": [
+    400,
+    401,
+    403,
+    404,
+    409,
+    422
+  ],
+  "retryableErrorCodes": [
+    "LINK_DOWNSTREAM_TIMEOUT",
+    "LINK_TRANSPORT_TEMPORARY"
+  ],
+  "nonRetryableErrorCodes": [
+    "LINK_INVALID_SIGNATURE",
+    "LINK_UNSUPPORTED_VERSION"
+  ],
+  "dlqAfterMaxAttempts": true,
+  "enabled": true,
+  "createdAt": "2026-06-18T00:00:00Z",
+  "updatedAt": "2026-06-18T00:00:00Z"
+}

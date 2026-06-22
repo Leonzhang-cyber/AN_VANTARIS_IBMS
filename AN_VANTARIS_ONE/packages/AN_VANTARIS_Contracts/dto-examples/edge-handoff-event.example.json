@@ -1,0 +1,55 @@
+{
+  "handoffId": "00000000-0000-4000-8000-000000003001",
+  "createdAt": "2026-06-17T12:00:04Z",
+  "transport": {
+    "mode": "http"
+  },
+  "deliveryExpectation": {
+    "maxAttempts": 3,
+    "retryBackoffSeconds": 30,
+    "dlqOnFailure": true
+  },
+  "envelope": {
+    "envelopeId": "00000000-0000-4000-8000-000000002001",
+    "schemaVersion": "v1",
+    "protocolVersion": "v1",
+    "createdAt": "2026-06-17T12:00:03Z",
+    "machineIdentity": {
+      "machineId": "machine-edge-001",
+      "trustDomain": "vantaris-demo-trust",
+      "keyId": "key-demo-001",
+      "credentialType": "hmac-shared-key"
+    },
+    "headers": {
+      "x-vantaris-machine-id": "machine-edge-001",
+      "x-vantaris-signature": "FAKE_SIGNATURE_HEX_001",
+      "x-vantaris-signature-algorithm": "HMAC-SHA256",
+      "x-vantaris-signed-at": "2026-06-17T12:00:03Z",
+      "x-vantaris-trace-id": "trace-demo-0001",
+      "x-vantaris-idempotency-key": "idem-demo-001",
+      "x-vantaris-protocol-version": "v1"
+    },
+    "idempotencyKey": "idem-demo-001",
+    "traceContext": {
+      "traceId": "trace-demo-0001"
+    },
+    "wireEvent": {
+      "schemaVersion": "v1",
+      "protocolVersion": "v1",
+      "eventId": "00000000-0000-4000-8000-000000001001",
+      "eventType": "telemetry.point.updated",
+      "sourceTimestamp": "2026-06-17T12:00:00Z",
+      "observedTimestamp": "2026-06-17T12:00:02Z",
+      "gatewayId": "gw-demo-001",
+      "connectorId": "connector-demo-bacnet",
+      "sourceSystemId": "source-bacnet-sim",
+      "traceContext": {
+        "traceId": "trace-demo-0001"
+      },
+      "idempotencyKey": "idem-demo-001",
+      "payload": {
+        "value": 7.2
+      }
+    }
+  }
+}

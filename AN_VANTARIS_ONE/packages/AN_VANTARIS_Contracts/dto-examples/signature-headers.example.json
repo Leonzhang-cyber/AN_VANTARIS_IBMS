@@ -1,0 +1,9 @@
+{
+  "x-vantaris-machine-id": "machine-edge-001",
+  "x-vantaris-signature": "FAKE_SIGNATURE_HEX_001",
+  "x-vantaris-signature-algorithm": "HMAC-SHA256",
+  "x-vantaris-signed-at": "2026-06-17T12:00:03Z",
+  "x-vantaris-trace-id": "trace-demo-0001",
+  "x-vantaris-idempotency-key": "idem-demo-001",
+  "x-vantaris-protocol-version": "v1"
+}

@@ -1,0 +1,55 @@
+openapi: 3.0.3
+info:
+  title: Code to NexusAI API
+  version: v1
+  description: |
+    HTTP boundary for AN_VANTARIS_Code orchestrating triage with AN_VANTARIS_NexusAI.
+    Contract master: AN_VANTARIS_Contracts (UFMS repo).
+servers:
+  - url: http://localhost:3200
+    description: AN_VANTARIS_NexusAI (default)
+paths:
+  /api/v1/triage:
+    post:
+      operationId: requestTriage
+      summary: Request AI triage for an ingested event context
+      tags:
+        - nexus-triage
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/nexus-triage-request.v1.schema.json'
+      responses:
+        '200':
+          description: Triage recommendation
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/nexus-triage-response.v1.schema.json'
+        '400':
+          description: Invalid triage request
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/error-response.v1.schema.json'
+        '503':
+          description: NexusAI unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/error-response.v1.schema.json'
+  /health:
+    get:
+      operationId: getNexusHealth
+      summary: NexusAI health probe
+      tags:
+        - health
+      responses:
+        '200':
+          description: Service health
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/service-health.v1.schema.json'

@@ -1,0 +1,210 @@
+openapi: 3.0.3
+info:
+  title: VANTARIS EDGE to LINK Handoff API
+  version: 1.0.0
+  description: |
+    P0 EDGE to LINK handoff authority contract.
+    Defines signed handoff ingestion, heartbeat signal, and health probe semantics.
+servers:
+  - url: http://localhost:3100
+    description: AN_VANTARIS_LINK default boundary
+security:
+  - machineSignature: []
+paths:
+  /edge/v1/handoff:
+    post:
+      operationId: postEdgeHandoff
+      summary: Submit signed EDGE handoff event to LINK
+      tags: [edge-link-handoff]
+      parameters:
+        - $ref: '#/components/parameters/XVantarisMachineId'
+        - $ref: '#/components/parameters/XVantarisSignature'
+        - $ref: '#/components/parameters/XVantarisSignatureAlgorithm'
+        - $ref: '#/components/parameters/XVantarisSignedAt'
+        - $ref: '#/components/parameters/XVantarisTraceId'
+        - $ref: '#/components/parameters/XVantarisIdempotencyKey'
+        - $ref: '#/components/parameters/XVantarisProtocolVersion'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/edge-handoff-event-v1.schema.json'
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/delivery-ack.v1.schema.json'
+              examples:
+                acceptedAck:
+                  $ref: '#/components/examples/AcceptedAck'
+        '400':
+          description: Validation or signature failure
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/error-response.v1.schema.json'
+              examples:
+                signatureError:
+                  $ref: '#/components/examples/SignatureError'
+        '409':
+          description: Duplicate/idempotency conflict
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/delivery-ack.v1.schema.json'
+              examples:
+                retryableError:
+                  $ref: '#/components/examples/RetryableError'
+        '422':
+          description: Version mismatch or unsupported protocol
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/error-response.v1.schema.json'
+              examples:
+                versionMismatchError:
+                  $ref: '#/components/examples/VersionMismatchError'
+  /edge/v1/heartbeat:
+    post:
+      operationId: postEdgeHeartbeat
+      summary: Submit EDGE heartbeat signal to LINK
+      tags: [edge-link-handoff]
+      parameters:
+        - $ref: '#/components/parameters/XVantarisMachineId'
+        - $ref: '#/components/parameters/XVantarisSignature'
+        - $ref: '#/components/parameters/XVantarisSignatureAlgorithm'
+        - $ref: '#/components/parameters/XVantarisSignedAt'
+        - $ref: '#/components/parameters/XVantarisTraceId'
+        - $ref: '#/components/parameters/XVantarisIdempotencyKey'
+        - $ref: '#/components/parameters/XVantarisProtocolVersion'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [heartbeatId, gatewayId, observedAt]
+              properties:
+                heartbeatId:
+                  type: string
+                  format: uuid
+                gatewayId:
+                  type: string
+                observedAt:
+                  type: string
+                  format: date-time
+                status:
+                  type: string
+      responses:
+        '202':
+          description: Heartbeat accepted
+  /edge/v1/health:
+    get:
+      operationId: getEdgeLinkHealth
+      summary: Health probe for EDGE to LINK handoff boundary
+      tags: [health]
+      responses:
+        '200':
+          description: Health payload
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/service-health.v1.schema.json'
+components:
+  securitySchemes:
+    machineSignature:
+      type: apiKey
+      in: header
+      name: x-vantaris-signature
+      description: Handoff machine signature scheme with companion headers.
+  parameters:
+    XVantarisMachineId:
+      name: x-vantaris-machine-id
+      in: header
+      required: true
+      schema:
+        type: string
+    XVantarisSignature:
+      name: x-vantaris-signature
+      in: header
+      required: true
+      schema:
+        type: string
+    XVantarisSignatureAlgorithm:
+      name: x-vantaris-signature-algorithm
+      in: header
+      required: true
+      schema:
+        type: string
+    XVantarisSignedAt:
+      name: x-vantaris-signed-at
+      in: header
+      required: true
+      schema:
+        type: string
+        format: date-time
+    XVantarisTraceId:
+      name: x-vantaris-trace-id
+      in: header
+      required: true
+      schema:
+        type: string
+    XVantarisIdempotencyKey:
+      name: x-vantaris-idempotency-key
+      in: header
+      required: true
+      schema:
+        type: string
+    XVantarisProtocolVersion:
+      name: x-vantaris-protocol-version
+      in: header
+      required: true
+      schema:
+        type: string
+  schemas:
+    SignedHandoffEnvelopeV1:
+      $ref: '../schemas/signed-handoff-envelope-v1.schema.json'
+    EdgeHandoffEventV1:
+      $ref: '../schemas/edge-handoff-event-v1.schema.json'
+    DeliveryAck:
+      $ref: '../schemas/delivery-ack.v1.schema.json'
+    ErrorResponse:
+      $ref: '../schemas/error-response.v1.schema.json'
+  examples:
+    AcceptedAck:
+      value:
+        schemaVersion: v1
+        protocolVersion: v1
+        messageId: '00000000-0000-4000-8000-000000000111'
+        ackId: '00000000-0000-4000-8000-000000000222'
+        correlationId: '00000000-0000-4000-8000-000000000333'
+        ackAt: '2026-06-17T12:00:00Z'
+        status: accepted
+        acceptedCount: 1
+        rejectedCount: 0
+    RetryableError:
+      value:
+        schemaVersion: v1
+        protocolVersion: v1
+        messageId: '00000000-0000-4000-8000-000000000111'
+        correlationId: '00000000-0000-4000-8000-000000000333'
+        ackAt: '2026-06-17T12:00:05Z'
+        status: rejected
+        retryable: true
+        retryAfterSeconds: 30
+        rejectionReasons: [delivery_retry]
+    SignatureError:
+      value:
+        schemaVersion: v1
+        code: INVALID_SIGNATURE
+        message: signature verification failed
+        correlationId: '00000000-0000-4000-8000-000000000333'
+    VersionMismatchError:
+      value:
+        schemaVersion: v1
+        code: UNSUPPORTED_VERSION
+        message: unsupported protocolVersion for edge handoff
+        correlationId: '00000000-0000-4000-8000-000000000333'

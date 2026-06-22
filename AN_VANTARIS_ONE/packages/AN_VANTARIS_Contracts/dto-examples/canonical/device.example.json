@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "v1",
+  "deviceId": "device-controller-001",
+  "assetId": "asset-chiller-001",
+  "sourceSystemId": "source-bms-001",
+  "name": "Controller A",
+  "deviceType": "controller",
+  "status": "active"
+}

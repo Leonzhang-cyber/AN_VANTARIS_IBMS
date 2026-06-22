@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vantaris.local/contracts/schemas/error-response.v1.schema.json",
+  "title": "ErrorResponse",
+  "description": "Canonical error payload for cross-package HTTP and message failures (v1)",
+  "type": "object",
+  "required": ["schemaVersion", "code", "message"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "v1"
+    },
+    "code": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9_]{2,63}$",
+      "description": "Machine-readable code; see errors/error-codes.v1.md"
+    },
+    "message": {
+      "type": "string"
+    },
+    "correlationId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "details": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}

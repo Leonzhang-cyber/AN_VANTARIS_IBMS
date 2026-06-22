@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "v1",
+  "evidenceId": "evidence-image-001",
+  "eventId": "event-thermal-001",
+  "evidenceType": "image",
+  "uri": "s3://fake/evidence-001.jpg",
+  "capturedAt": "2026-06-17T12:00:00Z",
+  "traceContext": {
+    "traceId": "trace-001"
+  }
+}

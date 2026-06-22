@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vantaris.local/contracts/schemas/evidence-v1.schema.json",
+  "title": "EvidenceV1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schemaVersion",
+    "evidenceId",
+    "eventId",
+    "evidenceType",
+    "uri",
+    "capturedAt"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "v1"
+    },
+    "evidenceId": {
+      "$ref": "common-identifiers-v1.schema.json#/$defs/evidenceId"
+    },
+    "tenantId": {
+      "$ref": "common-identifiers-v1.schema.json#/$defs/tenantId"
+    },
+    "siteId": {
+      "$ref": "common-identifiers-v1.schema.json#/$defs/siteId"
+    },
+    "gatewayId": {
+      "$ref": "common-identifiers-v1.schema.json#/$defs/gatewayId"
+    },
+    "connectorId": {
+      "$ref": "common-identifiers-v1.schema.json#/$defs/connectorId"
+    },
+    "sourceSystemId": {
+      "$ref": "common-identifiers-v1.schema.json#/$defs/sourceSystemId"
+    },
+    "status": {
+      "$ref": "common-audit-fields-v1.schema.json#/$defs/status"
+    },
+    "createdAt": {
+      "$ref": "common-audit-fields-v1.schema.json#/$defs/createdAt"
+    },
+    "updatedAt": {
+      "$ref": "common-audit-fields-v1.schema.json#/$defs/updatedAt"
+    },
+    "traceContext": {
+      "$ref": "common-trace-context-v1.schema.json#/$defs/traceContext"
+    },
+    "correlationId": {
+      "$ref": "common-trace-context-v1.schema.json#/$defs/correlationId"
+    },
+    "idempotencyKey": {
+      "$ref": "common-trace-context-v1.schema.json#/$defs/idempotencyKey"
+    },
+    "eventId": {
+      "$ref": "common-identifiers-v1.schema.json#/$defs/eventId"
+    },
+    "evidenceType": {
+      "type": "string"
+    },
+    "uri": {
+      "type": "string"
+    },
+    "capturedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

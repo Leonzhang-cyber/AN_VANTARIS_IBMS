@@ -1,0 +1,2788 @@
+// UFMS B1–B6 domain + B7 Auth/RBAC (User, Role, Permission).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// UFMS Commercial V1.0 fixed status enums
+enum AlarmStatus {
+  NEW
+  ACKNOWLEDGED
+  CORRELATED
+  CONVERTED
+  SUPPRESSED
+  CLOSED
+}
+
+enum EpisodeStatus {
+  OPEN
+  CORRELATING
+  LINKED_TO_PROBLEM
+  CLOSED
+}
+
+enum ProblemStatus {
+  OPEN
+  UNDER_INVESTIGATION
+  WORK_ORDER_CREATED
+  MONITORING
+  RESOLVED
+  CLOSED
+  REOPENED
+}
+
+enum WorkOrderStatus {
+  NEW
+  ACKNOWLEDGED
+  ASSIGNED
+  ACCEPTED
+  IN_PROGRESS
+  PENDING_PARTS
+  PENDING_REQUESTER_CONFIRMATION
+  PENDING_SUPERVISOR_REVIEW
+  CLOSED
+  REOPENED
+  CANCELLED
+}
+
+enum InspectionStatus {
+  SCHEDULED
+  IN_PROGRESS
+  COMPLETED
+  MISSED
+  EXCEPTION_FOUND
+  CONVERTED_TO_WORK_ORDER
+}
+
+enum SlaStatus {
+  NOT_STARTED
+  RUNNING
+  PAUSED
+  WARNING
+  BREACHED
+  MET
+  WAIVED
+}
+
+enum RfqCoverageStatus {
+  FULL
+  PARTIAL
+  CONFIGURABLE
+  INTEGRATION_REQUIRED
+  CUSTOM_REQUIRED
+  PLANNED_IN_V2
+  EXCLUDED
+}
+
+enum ConnectorStatus {
+  ONLINE
+  DEGRADED
+  OFFLINE
+  ERROR
+  UNKNOWN
+}
+
+model Site {
+  siteId    String   @id @map("site_id")
+  siteCode  String   @map("site_code")
+  siteName  String   @map("site_name")
+  country   String
+  city      String
+  siteType  String   @map("site_type")
+  status    String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  assets          Asset[]
+  devices         Device[]
+  externalSystems ExternalSystem[]
+  connectors      Connector[]
+  locations       Location[]
+  episodes        Episode[]
+  problems        Problem[]
+  slaPolicies     SlaPolicy[]
+  sopRules        SopRule[]
+  inspectionPlans InspectionPlan[]
+  requesters      Requester[]
+  contractors     Contractor[]
+  spareParts      SparePart[]
+
+  @@unique([siteCode])
+  @@index([siteType])
+  @@index([status])
+  @@map("tbl_site")
+}
+
+model Location {
+  locationId       String   @id @map("location_id")
+  siteId           String   @map("site_id")
+  parentLocationId String?  @map("parent_location_id")
+  locationCode     String   @map("location_code")
+  locationName     String   @map("location_name")
+  locationType     String   @map("location_type")
+  status           String
+  description      String?
+  metadata         Json?
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  site              Site               @relation(fields: [siteId], references: [siteId], onDelete: Restrict)
+  parentLocation    Location?          @relation("LocationHierarchy", fields: [parentLocationId], references: [locationId], onDelete: Restrict)
+  childLocations    Location[]         @relation("LocationHierarchy")
+  assets            Asset[]
+  alarms            Alarm[]
+  events            Event[]
+  episodes          Episode[]
+  workOrders        WorkOrder[]
+  problems          Problem[]
+  inspectionPlans   InspectionPlan[]
+  inspectionRecords InspectionRecord[]
+
+  @@unique([siteId, locationCode])
+  @@index([siteId, status])
+  @@index([parentLocationId])
+  @@index([locationType])
+  @@map("tbl_location")
+}
+
+model Asset {
+  assetId       String   @id @map("asset_id")
+  siteId        String   @map("site_id")
+  locationId    String?  @map("location_id")
+  parentAssetId String?  @map("parent_asset_id")
+  assetCode     String   @map("asset_code")
+  assetName     String   @map("asset_name")
+  assetType     String   @map("asset_type")
+  status        String
+  criticality   String?
+  metadata      Json?
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  site              Site               @relation(fields: [siteId], references: [siteId], onDelete: Restrict)
+  location          Location?          @relation(fields: [locationId], references: [locationId], onDelete: SetNull)
+  parentAsset       Asset?             @relation("AssetHierarchy", fields: [parentAssetId], references: [assetId], onDelete: Restrict)
+  childAssets       Asset[]            @relation("AssetHierarchy")
+  devices           Device[]
+  points            Point[]
+  workOrders        WorkOrder[]
+  alarms            Alarm[]
+  problems          Problem[]
+  inspectionPlans   InspectionPlan[]
+  inspectionRecords InspectionRecord[]
+  spareParts        SparePart[]
+
+  @@unique([siteId, assetCode])
+  @@index([siteId, status])
+  @@index([parentAssetId])
+  @@index([assetType])
+  @@index([status])
+  @@map("tbl_asset")
+}
+
+model Device {
+  deviceId   String   @id @map("device_id")
+  siteId     String   @map("site_id")
+  assetId    String   @map("asset_id")
+  deviceCode String   @map("device_code")
+  deviceName String   @map("device_name")
+  deviceType String   @map("device_type")
+  status     String
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  site   Site    @relation(fields: [siteId], references: [siteId], onDelete: Restrict)
+  asset  Asset   @relation(fields: [assetId], references: [assetId], onDelete: Restrict)
+  points Point[]
+
+  @@index([siteId, status])
+  @@index([assetId])
+  @@index([deviceType])
+  @@index([status])
+  @@map("tbl_device")
+}
+
+model Point {
+  pointId   String   @id @map("point_id")
+  deviceId  String   @map("device_id")
+  assetId   String   @map("asset_id")
+  pointCode String   @map("point_code")
+  pointName String   @map("point_name")
+  pointType String   @map("point_type")
+  unit      String
+  value     Json
+  quality   String
+  timestamp DateTime
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  device Device @relation(fields: [deviceId], references: [deviceId], onDelete: Restrict)
+  asset  Asset  @relation(fields: [assetId], references: [assetId], onDelete: Restrict)
+
+  @@index([deviceId])
+  @@index([assetId, quality])
+  @@index([pointType])
+  @@index([quality])
+  @@map("tbl_point")
+}
+
+model ExternalSystem {
+  externalSystemId    String    @id @map("external_system_id")
+  siteId              String    @map("site_id")
+  systemCode          String    @map("system_code")
+  systemName          String    @map("system_name")
+  systemType          String    @map("system_type")
+  vendor              String
+  status              String
+  description         String
+  externalReferenceId String?   @map("external_reference_id")
+  sourceRecordId      String?   @map("source_record_id")
+  trustLevel          String?   @map("trust_level")
+  chainStatus         String?   @map("chain_status")
+  verificationStatus  String?   @map("verification_status")
+  complianceTag       String?   @map("compliance_tag")
+  isActive            Boolean   @default(true) @map("is_active")
+  deletedAt           DateTime? @map("deleted_at")
+  deletedById         String?   @map("deleted_by_id")
+  createdById         String?   @map("created_by_id")
+  updatedById         String?   @map("updated_by_id")
+  productName         String?   @map("product_name")
+  productVersion      String?   @map("product_version")
+  networkZone         String?   @map("network_zone")
+  metadata            Json?
+  createdAt           DateTime  @default(now()) @map("created_at")
+  updatedAt           DateTime  @updatedAt @map("updated_at")
+
+  site                Site                 @relation(fields: [siteId], references: [siteId], onDelete: Restrict)
+  connectors          Connector[]
+  faultSources        FaultSource[]
+  integrationProfiles IntegrationProfile[]
+  rawMessages         RawMessage[]
+  events              Event[]
+
+  @@unique([siteId, systemCode])
+  @@index([siteId, status])
+  @@index([systemType])
+  @@index([status])
+  @@index([isActive])
+  @@map("tbl_external_system")
+}
+
+model Adapter {
+  adapterId   String   @id @map("adapter_id")
+  adapterCode String   @map("adapter_code")
+  adapterName String   @map("adapter_name")
+  protocol    String
+  version     String
+  status      String
+  description String
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  connectors Connector[]
+
+  @@unique([adapterCode])
+  @@index([protocol, status])
+  @@index([status])
+  @@map("tbl_adapter")
+}
+
+model Connector {
+  connectorId      String          @id @map("connector_id")
+  siteId           String          @map("site_id")
+  adapterId        String          @map("adapter_id")
+  externalSystemId String          @map("external_system_id")
+  connectorCode    String          @map("connector_code")
+  connectorName    String          @map("connector_name")
+  protocol         String
+  status           ConnectorStatus @default(UNKNOWN)
+  lastPollTime     DateTime        @map("last_poll_time")
+  lastErrorMessage String?         @map("last_error_message")
+  description      String
+  metadata         Json?
+  createdAt        DateTime        @default(now()) @map("created_at")
+  updatedAt        DateTime        @updatedAt @map("updated_at")
+
+  site           Site           @relation(fields: [siteId], references: [siteId], onDelete: Restrict)
+  adapter        Adapter        @relation(fields: [adapterId], references: [adapterId], onDelete: Restrict)
+  externalSystem ExternalSystem @relation(fields: [externalSystemId], references: [externalSystemId], onDelete: Restrict)
+  faultSources   FaultSource[]
+  events         Event[]
+  alarms         Alarm[]
+
+  @@index([siteId, status])
+  @@index([adapterId])
+  @@index([externalSystemId])
+  @@index([protocol])
+  @@index([status])
+  @@map("tbl_connector")
+}
+
+model FaultSource {
+  sourceId             String    @id @map("source_id")
+  connectorId          String    @map("connector_id")
+  externalSystemId     String    @map("external_system_id")
+  sourceName           String    @map("source_name")
+  sourceType           String    @map("source_type")
+  protocol             String
+  status               String
+  lastPollTime         DateTime  @map("last_poll_time")
+  sourceCategory       String?   @map("source_category")
+  systemDomain         String?   @map("system_domain")
+  siteName             String?   @map("site_name")
+  location             String?
+  ownerTeam            String?   @map("owner_team")
+  governanceStatus     String?   @map("governance_status")
+  trustLevel           String?   @map("trust_level")
+  dataCriticality      String?   @map("data_criticality")
+  validationRequired   Boolean   @default(false) @map("validation_required")
+  importAllowed        Boolean   @default(true) @map("import_allowed")
+  eventCreationAllowed Boolean   @default(true) @map("event_creation_allowed")
+  notes                String?
+  lastSeenAt           DateTime? @map("last_seen_at")
+  code                 String?   @unique
+  integrationProfileId String?   @map("integration_profile_id")
+  externalReferenceId  String?   @map("external_reference_id")
+  sourceRecordId       String?   @map("source_record_id")
+  chainStatus          String?   @map("chain_status")
+  verificationStatus   String?   @map("verification_status")
+  complianceTag        String?   @map("compliance_tag")
+  isActive             Boolean   @default(true) @map("is_active")
+  deletedAt            DateTime? @map("deleted_at")
+  deletedById          String?   @map("deleted_by_id")
+  createdById          String?   @map("created_by_id")
+  updatedById          String?   @map("updated_by_id")
+  metadata             Json?
+  createdAt            DateTime  @default(now()) @map("created_at")
+  updatedAt            DateTime  @updatedAt @map("updated_at")
+
+  connector      Connector      @relation(fields: [connectorId], references: [connectorId], onDelete: Restrict)
+  externalSystem ExternalSystem @relation(fields: [externalSystemId], references: [externalSystemId], onDelete: Restrict)
+  events         Event[]
+
+  @@index([connectorId])
+  @@index([externalSystemId, status])
+  @@index([sourceType])
+  @@index([status])
+  @@map("tbl_fault_source")
+}
+
+model ImportBatch {
+  importBatchId         String   @id @map("import_batch_id")
+  batchName             String   @map("batch_name")
+  fileName              String   @map("file_name")
+  fileSize              Int?     @map("file_size")
+  fileHash              String?  @map("file_hash")
+  sourceType            String   @default("csv") @map("source_type")
+  importMode            String   @default("events_csv") @map("import_mode")
+  dryRun                Boolean  @default(false) @map("dry_run")
+  status                String
+  totalRows             Int      @map("total_rows")
+  validRows             Int      @map("valid_rows")
+  createdRows           Int      @map("created_rows")
+  skippedRows           Int      @map("skipped_rows")
+  failedRows            Int      @map("failed_rows")
+  createdEventCount     Int      @default(0) @map("created_event_count")
+  createdIncidentCount  Int      @default(0) @map("created_incident_count")
+  createdWorkOrderCount Int      @default(0) @map("created_work_order_count")
+  importedBy            String   @map("imported_by")
+  importedAt            DateTime @default(now()) @map("imported_at")
+  createdEventIds       Json?    @map("created_event_ids")
+  validationSummary     Json?    @map("validation_summary")
+  errorSummary          Json?    @map("error_summary")
+  notes                 String?
+  createdAt             DateTime @default(now()) @map("created_at")
+  updatedAt             DateTime @updatedAt @map("updated_at")
+
+  events Event[]
+  items  ImportBatchItem[]
+
+  @@index([status])
+  @@index([importedBy])
+  @@index([importedAt])
+  @@index([fileName])
+  @@map("tbl_import_batch")
+}
+
+model ImportBatchItem {
+  importBatchItemId String   @id @map("import_batch_item_id")
+  importBatchId     String   @map("import_batch_id")
+  rowNumber         Int      @map("row_number")
+  sourceRecordKey   String?  @map("source_record_key")
+  targetType        String?  @map("target_type")
+  targetId          String?  @map("target_id")
+  processingStatus  String   @map("processing_status")
+  validationMessage String?  @map("validation_message")
+  errorMessage      String?  @map("error_message")
+  createdAt         DateTime @default(now()) @map("created_at")
+
+  importBatch ImportBatch @relation(fields: [importBatchId], references: [importBatchId], onDelete: Cascade)
+
+  @@index([importBatchId])
+  @@index([importBatchId, rowNumber])
+  @@map("tbl_import_batch_item")
+}
+
+model Event {
+  eventId              String    @id @map("event_id")
+  sourceId             String    @map("source_id")
+  sourceLabel          String    @map("source_label")
+  severity             String
+  category             String
+  assetLabel           String    @map("asset_label")
+  title                String
+  status               String
+  occurredTime         DateTime  @map("occurred_time")
+  incidentId           String?   @map("incident_id")
+  importBatchId        String?   @map("import_batch_id")
+  eventCode            String?   @unique @map("event_code")
+  description          String?
+  siteId               String?   @map("site_id")
+  locationId           String?   @map("location_id")
+  assetId              String?   @map("asset_id")
+  deviceId             String?   @map("device_id")
+  connectorId          String?   @map("connector_id")
+  acknowledgedAt       DateTime? @map("acknowledged_at")
+  resolvedAt           DateTime? @map("resolved_at")
+  closedAt             DateTime? @map("closed_at")
+  createdById          String?   @map("created_by_id")
+  updatedById          String?   @map("updated_by_id")
+  metadata             Json?
+  chainStatus          String?   @map("chain_status")
+  verificationStatus   String?   @map("verification_status")
+  complianceTag        String?   @map("compliance_tag")
+  isActive             Boolean   @default(true) @map("is_active")
+  deletedAt            DateTime? @map("deleted_at")
+  deletedById          String?   @map("deleted_by_id")
+  externalSystemId     String?   @map("external_system_id")
+  integrationProfileId String?   @map("integration_profile_id")
+  rawMessageId         String?   @map("raw_message_id")
+  sourceRecordId       String?   @map("source_record_id")
+  externalReferenceId  String?   @map("external_reference_id")
+  externalEventId      String?   @map("external_event_id")
+  sourceType           String?   @map("source_type")
+  sourceCategory       String?   @map("source_category")
+  eventCategory        String?   @map("event_category")
+  confidence           Float?    @map("confidence")
+  mediaUrl             String?   @map("media_url")
+  snapshotUrl          String?   @map("snapshot_url")
+  videoClipUrl         String?   @map("video_clip_url")
+  networkZone          String?   @map("network_zone")
+  trustLevel           String?   @map("trust_level")
+  createdAt            DateTime  @default(now()) @map("created_at")
+  updatedAt            DateTime  @updatedAt @map("updated_at")
+
+  faultSource        FaultSource         @relation(fields: [sourceId], references: [sourceId], onDelete: Restrict)
+  incident           Incident?           @relation(fields: [incidentId], references: [incidentId], onDelete: Restrict)
+  importBatch        ImportBatch?        @relation(fields: [importBatchId], references: [importBatchId], onDelete: SetNull)
+  externalSystem     ExternalSystem?     @relation(fields: [externalSystemId], references: [externalSystemId], onDelete: SetNull)
+  integrationProfile IntegrationProfile? @relation(fields: [integrationProfileId], references: [profileId], onDelete: SetNull)
+  rawMessage         RawMessage?         @relation(fields: [rawMessageId], references: [id], onDelete: SetNull)
+  connector          Connector?          @relation(fields: [connectorId], references: [connectorId], onDelete: SetNull)
+  location           Location?           @relation(fields: [locationId], references: [locationId], onDelete: SetNull)
+  alarms             Alarm[]
+
+  @@index([sourceId, occurredTime])
+  @@index([connectorId])
+  @@index([locationId])
+  @@index([externalSystemId])
+  @@index([integrationProfileId])
+  @@index([rawMessageId])
+  @@index([sourceRecordId])
+  @@index([externalEventId])
+  @@index([isActive])
+  @@index([incidentId])
+  @@index([importBatchId])
+  @@index([severity])
+  @@index([status])
+  @@index([category])
+  @@index([occurredTime])
+  @@index([siteId])
+  @@index([assetId])
+  @@index([deviceId])
+  @@map("tbl_event")
+}
+
+model Incident {
+  incidentId  String    @id @map("incident_id")
+  title       String
+  priority    String
+  status      String
+  severity    String
+  category    String
+  assignedTo  String    @map("assigned_to")
+  assetLabel  String    @map("asset_label")
+  incidentNo  String?   @unique @map("incident_no")
+  description String?
+  eventId     String?   @map("event_id")
+  rootCause   String?   @map("root_cause")
+  resolution  String?
+  resolvedAt  DateTime? @map("resolved_at")
+  closedAt    DateTime? @map("closed_at")
+  createdById String?   @map("created_by_id")
+  updatedById String?   @map("updated_by_id")
+  metadata    Json?
+  createdAt   DateTime  @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  events     Event[]
+  workOrders WorkOrder[]
+  decisions  Decision[]
+
+  @@index([priority])
+  @@index([status])
+  @@index([severity])
+  @@index([assignedTo])
+  @@index([createdAt])
+  @@map("tbl_incident")
+}
+
+model WorkOrder {
+  workOrderId          String          @id @map("work_order_id")
+  incidentId           String?         @map("incident_id")
+  problemId            String?         @map("problem_id")
+  episodeId            String?         @map("episode_id")
+  assetId              String?         @map("asset_id")
+  locationId           String?         @map("location_id")
+  slaPolicyId          String?         @map("sla_policy_id")
+  requesterId          String?         @map("requester_id")
+  contractorId         String?         @map("contractor_id")
+  title                String
+  assetLabel           String          @map("asset_label")
+  assignedTo           String          @map("assigned_to")
+  priority             String
+  status               WorkOrderStatus @default(NEW)
+  slaStatus            SlaStatus       @default(NOT_STARTED) @map("sla_status")
+  dueDate              DateTime        @map("due_date")
+  slaDueAt             DateTime?       @map("sla_due_at")
+  slaBreachedAt        DateTime?       @map("sla_breached_at")
+  workOrderNo          String?         @unique @map("work_order_no")
+  description          String?
+  eventId              String?         @map("event_id")
+  deviceId             String?         @map("device_id")
+  completedAt          DateTime?       @map("completed_at")
+  closedAt             DateTime?       @map("closed_at")
+  requesterConfirmedAt DateTime?       @map("requester_confirmed_at")
+  requesterConfirmedBy String?         @map("requester_confirmed_by")
+  supervisorClosedAt   DateTime?       @map("supervisor_closed_at")
+  supervisorClosedBy   String?         @map("supervisor_closed_by")
+  resolution           String?
+  createdById          String?         @map("created_by_id")
+  updatedById          String?         @map("updated_by_id")
+  metadata             Json?
+  createdAt            DateTime        @default(now()) @map("created_at")
+  updatedAt            DateTime        @updatedAt @map("updated_at")
+
+  incident          Incident?            @relation(fields: [incidentId], references: [incidentId], onDelete: Restrict)
+  problem           Problem?             @relation(fields: [problemId], references: [problemId], onDelete: SetNull)
+  episode           Episode?             @relation(fields: [episodeId], references: [episodeId], onDelete: SetNull)
+  asset             Asset?               @relation(fields: [assetId], references: [assetId], onDelete: Restrict)
+  location          Location?            @relation(fields: [locationId], references: [locationId], onDelete: SetNull)
+  slaPolicy         SlaPolicy?           @relation(fields: [slaPolicyId], references: [slaPolicyId], onDelete: SetNull)
+  requester         Requester?           @relation(fields: [requesterId], references: [requesterId], onDelete: SetNull)
+  contractor        Contractor?          @relation(fields: [contractorId], references: [contractorId], onDelete: SetNull)
+  decisions         Decision[]
+  evidenceItems     Evidence[]
+  sparePartUsages   WorkOrderSparePart[]
+  inspectionRecords InspectionRecord[]
+
+  @@index([incidentId])
+  @@index([problemId])
+  @@index([episodeId])
+  @@index([assetId])
+  @@index([locationId])
+  @@index([slaPolicyId])
+  @@index([requesterId])
+  @@index([contractorId])
+  @@index([priority])
+  @@index([status])
+  @@index([slaStatus])
+  @@index([assignedTo])
+  @@index([dueDate])
+  @@map("tbl_work_order")
+}
+
+model Timeline {
+  timelineId     String   @id @map("timeline_id")
+  entityType     String   @map("entity_type")
+  entityId       String   @map("entity_id")
+  action         String
+  message        String
+  actor          String
+  timestamp      DateTime
+  source         String   @default("local")
+  syncStatus     String   @default("synced") @map("sync_status")
+  actionType     String?  @map("action_type")
+  title          String?
+  description    String?
+  actorId        String?  @map("actor_id")
+  beforeSnapshot Json?    @map("before_snapshot")
+  afterSnapshot  Json?    @map("after_snapshot")
+  metadata       Json?
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  @@index([entityType, entityId, timestamp])
+  @@index([actor, timestamp])
+  @@index([timestamp])
+  @@map("tbl_timeline")
+}
+
+model AuditLog {
+  auditId    String   @id @map("audit_id")
+  entityType String   @map("entity_type")
+  entityId   String   @map("entity_id")
+  module     String?
+  action     String
+  oldValue   Json?    @map("old_value")
+  newValue   Json?    @map("new_value")
+  actor      String
+  actorRole  String?  @map("actor_role")
+  ipAddress  String?  @map("ip_address")
+  result     String?  @default("success")
+  evidenceId String?  @map("evidence_id")
+  timestamp  DateTime
+  hash       String   @map("audit_hash")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  @@index([entityType, entityId, timestamp])
+  @@index([action])
+  @@index([actor, timestamp])
+  @@index([actorRole])
+  @@index([timestamp])
+  @@index([hash])
+  @@index([evidenceId])
+  @@map("tbl_audit_log")
+}
+
+model Evidence {
+  evidenceId          String   @id @map("evidence_id")
+  workOrderId         String?  @map("work_order_id")
+  entityType          String   @map("entity_type")
+  entityId            String   @map("entity_id")
+  fileName            String   @map("file_name")
+  fileHash            String   @map("file_hash")
+  storagePath         String   @map("storage_path")
+  uploadedBy          String   @map("uploaded_by")
+  uploadedAt          DateTime @map("uploaded_at")
+  evidenceNo          String?  @unique @map("evidence_no")
+  evidenceType        String?  @map("evidence_type")
+  title               String?
+  description         String?
+  fileUrl             String?  @map("file_url")
+  textContent         String?  @map("text_content")
+  evidenceHash        String?  @map("evidence_hash")
+  verificationStatus  String?  @map("verification_status")
+  createdById         String?  @map("created_by_id")
+  mediaUrl            String?  @map("media_url")
+  snapshotUrl         String?  @map("snapshot_url")
+  videoClipUrl        String?  @map("video_clip_url")
+  thumbnailUrl        String?  @map("thumbnail_url")
+  sourceSystemId      String?  @map("source_system_id")
+  externalReferenceId String?  @map("external_reference_id")
+  chainStatus         String?  @map("chain_status")
+  metadata            Json?
+  createdAt           DateTime @default(now()) @map("created_at")
+  updatedAt           DateTime @updatedAt @map("updated_at")
+
+  workOrder             WorkOrder?         @relation(fields: [workOrderId], references: [workOrderId], onDelete: SetNull)
+  decisionEvidenceLinks DecisionEvidence[]
+
+  @@index([workOrderId])
+  @@index([entityType, entityId, uploadedAt])
+  @@index([sourceSystemId])
+  @@index([fileHash])
+  @@index([uploadedBy])
+  @@index([uploadedAt])
+  @@map("tbl_evidence")
+}
+
+model Alarm {
+  alarmId        String      @id @map("alarm_id")
+  alarmCode      String?     @unique @map("alarm_code")
+  eventId        String?     @map("event_id")
+  episodeId      String?     @map("episode_id")
+  assetId        String?     @map("asset_id")
+  locationId     String?     @map("location_id")
+  connectorId    String?     @map("connector_id")
+  title          String
+  severity       String
+  status         AlarmStatus @default(NEW)
+  occurredAt     DateTime    @default(now()) @map("occurred_at")
+  acknowledgedAt DateTime?   @map("acknowledged_at")
+  closedAt       DateTime?   @map("closed_at")
+  createdById    String?     @map("created_by_id")
+  updatedById    String?     @map("updated_by_id")
+  metadata       Json?
+  createdAt      DateTime    @default(now()) @map("created_at")
+  updatedAt      DateTime    @updatedAt @map("updated_at")
+
+  event     Event?     @relation(fields: [eventId], references: [eventId], onDelete: SetNull)
+  episode   Episode?   @relation(fields: [episodeId], references: [episodeId], onDelete: SetNull)
+  asset     Asset?     @relation(fields: [assetId], references: [assetId], onDelete: SetNull)
+  location  Location?  @relation(fields: [locationId], references: [locationId], onDelete: SetNull)
+  connector Connector? @relation(fields: [connectorId], references: [connectorId], onDelete: SetNull)
+
+  @@index([eventId])
+  @@index([episodeId])
+  @@index([assetId])
+  @@index([locationId])
+  @@index([connectorId])
+  @@index([severity])
+  @@index([status])
+  @@index([occurredAt])
+  @@map("tbl_alarm")
+}
+
+model Episode {
+  episodeId   String        @id @map("episode_id")
+  episodeCode String?       @unique @map("episode_code")
+  siteId      String        @map("site_id")
+  locationId  String?       @map("location_id")
+  problemId   String?       @map("problem_id")
+  title       String
+  description String?
+  status      EpisodeStatus @default(OPEN)
+  openedAt    DateTime      @default(now()) @map("opened_at")
+  closedAt    DateTime?     @map("closed_at")
+  createdById String?       @map("created_by_id")
+  updatedById String?       @map("updated_by_id")
+  metadata    Json?
+  createdAt   DateTime      @default(now()) @map("created_at")
+  updatedAt   DateTime      @updatedAt @map("updated_at")
+
+  site       Site        @relation(fields: [siteId], references: [siteId], onDelete: Restrict)
+  location   Location?   @relation(fields: [locationId], references: [locationId], onDelete: SetNull)
+  problem    Problem?    @relation(fields: [problemId], references: [problemId], onDelete: SetNull)
+  alarms     Alarm[]
+  workOrders WorkOrder[]
+
+  @@index([siteId])
+  @@index([locationId])
+  @@index([problemId])
+  @@index([status])
+  @@index([openedAt])
+  @@map("tbl_episode")
+}
+
+model Problem {
+  problemId   String        @id @map("problem_id")
+  problemCode String?       @unique @map("problem_code")
+  siteId      String        @map("site_id")
+  assetId     String?       @map("asset_id")
+  locationId  String?       @map("location_id")
+  title       String
+  description String?
+  status      ProblemStatus @default(OPEN)
+  rootCause   String?       @map("root_cause")
+  resolution  String?
+  openedAt    DateTime      @default(now()) @map("opened_at")
+  resolvedAt  DateTime?     @map("resolved_at")
+  closedAt    DateTime?     @map("closed_at")
+  createdById String?       @map("created_by_id")
+  updatedById String?       @map("updated_by_id")
+  metadata    Json?
+  createdAt   DateTime      @default(now()) @map("created_at")
+  updatedAt   DateTime      @updatedAt @map("updated_at")
+
+  site       Site        @relation(fields: [siteId], references: [siteId], onDelete: Restrict)
+  asset      Asset?      @relation(fields: [assetId], references: [assetId], onDelete: SetNull)
+  location   Location?   @relation(fields: [locationId], references: [locationId], onDelete: SetNull)
+  episodes   Episode[]
+  workOrders WorkOrder[]
+
+  @@index([siteId])
+  @@index([assetId])
+  @@index([locationId])
+  @@index([status])
+  @@index([openedAt])
+  @@map("tbl_problem")
+}
+
+model SlaPolicy {
+  slaPolicyId             String   @id @map("sla_policy_id")
+  siteId                  String?  @map("site_id")
+  policyCode              String   @unique @map("policy_code")
+  policyName              String   @map("policy_name")
+  priority                String
+  responseTimeMinutes     Int      @map("response_time_minutes")
+  resolveTimeMinutes      Int      @map("resolve_time_minutes")
+  warningThresholdPercent Int      @default(80) @map("warning_threshold_percent")
+  status                  String
+  description             String?
+  metadata                Json?
+  createdAt               DateTime @default(now()) @map("created_at")
+  updatedAt               DateTime @updatedAt @map("updated_at")
+
+  site       Site?       @relation(fields: [siteId], references: [siteId], onDelete: SetNull)
+  workOrders WorkOrder[]
+
+  @@index([siteId])
+  @@index([priority])
+  @@index([status])
+  @@map("tbl_sla_policy")
+}
+
+model SopRule {
+  sopRuleId       String   @id @map("sop_rule_id")
+  siteId          String?  @map("site_id")
+  ruleCode        String   @unique @map("rule_code")
+  ruleName        String   @map("rule_name")
+  triggerType     String   @map("trigger_type")
+  triggerSeverity String?  @map("trigger_severity")
+  triggerCategory String?  @map("trigger_category")
+  steps           Json
+  status          String
+  description     String?
+  metadata        Json?
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  site          Site?          @relation(fields: [siteId], references: [siteId], onDelete: SetNull)
+  notifications Notification[]
+
+  @@index([siteId])
+  @@index([triggerType])
+  @@index([status])
+  @@map("tbl_sop_rule")
+}
+
+model InspectionPlan {
+  inspectionPlanId String   @id @map("inspection_plan_id")
+  siteId           String   @map("site_id")
+  assetId          String   @map("asset_id")
+  locationId       String?  @map("location_id")
+  planCode         String   @unique @map("plan_code")
+  planName         String   @map("plan_name")
+  frequency        String
+  nextScheduledAt  DateTime @map("next_scheduled_at")
+  status           String
+  description      String?
+  metadata         Json?
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  site       Site                  @relation(fields: [siteId], references: [siteId], onDelete: Restrict)
+  asset      Asset                 @relation(fields: [assetId], references: [assetId], onDelete: Restrict)
+  location   Location?             @relation(fields: [locationId], references: [locationId], onDelete: SetNull)
+  checklists InspectionChecklist[]
+  records    InspectionRecord[]
+
+  @@index([siteId])
+  @@index([assetId])
+  @@index([locationId])
+  @@index([status])
+  @@index([nextScheduledAt])
+  @@map("tbl_inspection_plan")
+}
+
+model InspectionChecklist {
+  checklistId      String   @id @map("checklist_id")
+  inspectionPlanId String   @map("inspection_plan_id")
+  itemCode         String   @map("item_code")
+  itemLabel        String   @map("item_label")
+  itemType         String   @map("item_type")
+  sortOrder        Int      @default(0) @map("sort_order")
+  isRequired       Boolean  @default(true) @map("is_required")
+  metadata         Json?
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  inspectionPlan InspectionPlan @relation(fields: [inspectionPlanId], references: [inspectionPlanId], onDelete: Cascade)
+
+  @@unique([inspectionPlanId, itemCode])
+  @@index([inspectionPlanId])
+  @@map("tbl_inspection_checklist")
+}
+
+model InspectionRecord {
+  inspectionRecordId String           @id @map("inspection_record_id")
+  inspectionPlanId   String           @map("inspection_plan_id")
+  assetId            String           @map("asset_id")
+  locationId         String?          @map("location_id")
+  workOrderId        String?          @map("work_order_id")
+  recordCode         String?          @unique @map("record_code")
+  status             InspectionStatus @default(SCHEDULED)
+  scheduledAt        DateTime         @map("scheduled_at")
+  startedAt          DateTime?        @map("started_at")
+  completedAt        DateTime?        @map("completed_at")
+  performedBy        String?          @map("performed_by")
+  results            Json?
+  exceptionNotes     String?          @map("exception_notes")
+  metadata           Json?
+  createdAt          DateTime         @default(now()) @map("created_at")
+  updatedAt          DateTime         @updatedAt @map("updated_at")
+
+  inspectionPlan InspectionPlan @relation(fields: [inspectionPlanId], references: [inspectionPlanId], onDelete: Restrict)
+  asset          Asset          @relation(fields: [assetId], references: [assetId], onDelete: Restrict)
+  location       Location?      @relation(fields: [locationId], references: [locationId], onDelete: SetNull)
+  workOrder      WorkOrder?     @relation(fields: [workOrderId], references: [workOrderId], onDelete: SetNull)
+
+  @@index([inspectionPlanId])
+  @@index([assetId])
+  @@index([locationId])
+  @@index([workOrderId])
+  @@index([status])
+  @@index([scheduledAt])
+  @@map("tbl_inspection_record")
+}
+
+model Requester {
+  requesterId   String   @id @map("requester_id")
+  siteId        String?  @map("site_id")
+  requesterCode String   @unique @map("requester_code")
+  name          String
+  email         String
+  organization  String?
+  phone         String?
+  status        String
+  metadata      Json?
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  site       Site?       @relation(fields: [siteId], references: [siteId], onDelete: SetNull)
+  workOrders WorkOrder[]
+
+  @@index([siteId])
+  @@index([status])
+  @@map("tbl_requester")
+}
+
+model Contractor {
+  contractorId   String   @id @map("contractor_id")
+  siteId         String?  @map("site_id")
+  contractorCode String   @unique @map("contractor_code")
+  name           String
+  contactEmail   String   @map("contact_email")
+  contactPhone   String?  @map("contact_phone")
+  specialty      String?
+  status         String
+  metadata       Json?
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  site       Site?       @relation(fields: [siteId], references: [siteId], onDelete: SetNull)
+  workOrders WorkOrder[]
+
+  @@index([siteId])
+  @@index([status])
+  @@map("tbl_contractor")
+}
+
+model SparePart {
+  sparePartId    String   @id @map("spare_part_id")
+  siteId         String   @map("site_id")
+  assetId        String?  @map("asset_id")
+  partCode       String   @map("part_code")
+  partName       String   @map("part_name")
+  quantityOnHand Int      @default(0) @map("quantity_on_hand")
+  reorderLevel   Int      @default(0) @map("reorder_level")
+  unitCost       Float?   @map("unit_cost")
+  status         String
+  metadata       Json?
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  site   Site                 @relation(fields: [siteId], references: [siteId], onDelete: Restrict)
+  asset  Asset?               @relation(fields: [assetId], references: [assetId], onDelete: SetNull)
+  usages WorkOrderSparePart[]
+
+  @@unique([siteId, partCode])
+  @@index([assetId])
+  @@index([status])
+  @@map("tbl_spare_part")
+}
+
+model WorkOrderSparePart {
+  workOrderSparePartId String   @id @map("work_order_spare_part_id")
+  workOrderId          String   @map("work_order_id")
+  sparePartId          String   @map("spare_part_id")
+  quantityUsed         Int      @map("quantity_used")
+  issuedAt             DateTime @default(now()) @map("issued_at")
+  issuedBy             String?  @map("issued_by")
+  notes                String?
+  createdAt            DateTime @default(now()) @map("created_at")
+  updatedAt            DateTime @updatedAt @map("updated_at")
+
+  workOrder WorkOrder @relation(fields: [workOrderId], references: [workOrderId], onDelete: Cascade)
+  sparePart SparePart @relation(fields: [sparePartId], references: [sparePartId], onDelete: Restrict)
+
+  @@index([workOrderId])
+  @@index([sparePartId])
+  @@map("tbl_work_order_spare_part")
+}
+
+model Report {
+  reportId       String   @id @map("report_id")
+  reportCode     String   @unique @map("report_code")
+  reportName     String   @map("report_name")
+  reportType     String   @map("report_type")
+  moduleScope    String   @map("module_scope")
+  scheduleCron   String?  @map("schedule_cron")
+  templateConfig Json?    @map("template_config")
+  status         String
+  description    String?
+  metadata       Json?
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  @@index([reportType])
+  @@index([moduleScope])
+  @@index([status])
+  @@map("tbl_report")
+}
+
+model AiRecommendation {
+  recommendationId String    @id @map("recommendation_id")
+  sourceType       String    @map("source_type")
+  sourceId         String    @map("source_id")
+  riskLevel        String    @map("risk_level")
+  suggestedAction  String    @map("suggested_action")
+  confidence       Float
+  evidence         Json?
+  decisionId       String?   @map("decision_id")
+  status           String    @default("PENDING_REVIEW")
+  reviewer         String?
+  reviewedAt       DateTime? @map("reviewed_at")
+  provider         String    @default("RULE_ENGINE")
+  modelVersion     String?   @map("model_version")
+  metadata         Json?
+  createdAt        DateTime  @default(now()) @map("created_at")
+  updatedAt        DateTime  @updatedAt @map("updated_at")
+
+  @@index([sourceType, sourceId])
+  @@index([riskLevel])
+  @@index([status])
+  @@index([reviewer])
+  @@index([createdAt])
+  @@map("tbl_ai_recommendation")
+}
+
+model ReportRun {
+  runId         String    @id @map("run_id")
+  reportType    String    @map("report_type")
+  reportName    String    @map("report_name")
+  siteId        String?   @map("site_id")
+  timeRangeFrom DateTime? @map("time_range_from")
+  timeRangeTo   DateTime? @map("time_range_to")
+  format        String    @default("preview")
+  status        String    @default("completed")
+  generatedBy   String    @map("generated_by")
+  generatedAt   DateTime  @default(now()) @map("generated_at")
+  filters       Json?
+  metadata      Json?
+
+  @@index([reportType])
+  @@index([generatedAt])
+  @@index([generatedBy])
+  @@index([siteId])
+  @@map("tbl_report_run")
+}
+
+model RfqComplianceItem {
+  rfqItemId        String            @id @map("rfq_item_id")
+  requirementCode  String            @unique @map("requirement_code")
+  requirementTitle String            @map("requirement_title")
+  ufmsModule       String            @map("ufms_module")
+  coverageStatus   RfqCoverageStatus @map("coverage_status")
+  notes            String?
+  sortOrder        Int               @default(0) @map("sort_order")
+  metadata         Json?
+  createdAt        DateTime          @default(now()) @map("created_at")
+  updatedAt        DateTime          @updatedAt @map("updated_at")
+
+  @@index([ufmsModule])
+  @@index([coverageStatus])
+  @@map("tbl_rfq_compliance_item")
+}
+
+model Notification {
+  notificationId String    @id @map("notification_id")
+  sopRuleId      String?   @map("sop_rule_id")
+  entityType     String    @map("entity_type")
+  entityId       String    @map("entity_id")
+  channel        String
+  recipient      String
+  subject        String?
+  body           String
+  status         String
+  sentAt         DateTime? @map("sent_at")
+  metadata       Json?
+  createdAt      DateTime  @default(now()) @map("created_at")
+  updatedAt      DateTime  @updatedAt @map("updated_at")
+
+  sopRule SopRule? @relation(fields: [sopRuleId], references: [sopRuleId], onDelete: SetNull)
+
+  @@index([sopRuleId])
+  @@index([entityType, entityId])
+  @@index([status])
+  @@index([sentAt])
+  @@map("tbl_notification")
+}
+
+model DataLineage {
+  lineageId            String   @id @map("lineage_id")
+  objectType           String   @map("object_type")
+  objectId             String   @map("object_id")
+  sourceSystemId       String?  @map("source_system_id")
+  sourceRecordId       String?  @map("source_record_id")
+  importBatchId        String?  @map("import_batch_id")
+  transformationStep   String?  @map("transformation_step")
+  mappingProfileId     String?  @map("mapping_profile_id")
+  rawMessageId         String?  @map("raw_message_id")
+  integrationProfileId String?  @map("integration_profile_id")
+  mappingTemplateId    String?  @map("mapping_template_id")
+  testRunId            String?  @map("test_run_id")
+  testResultId         String?  @map("test_result_id")
+  metadata             Json?
+  createdById          String?  @map("created_by_id")
+  updatedById          String?  @map("updated_by_id")
+  createdAt            DateTime @default(now()) @map("created_at")
+  updatedAt            DateTime @updatedAt @map("updated_at")
+
+  @@index([objectType, objectId])
+  @@index([rawMessageId])
+  @@index([integrationProfileId])
+  @@index([mappingTemplateId])
+  @@index([testRunId])
+  @@index([testResultId])
+  @@map("tbl_data_lineage")
+}
+
+model DataQualityResult {
+  resultId    String   @id @map("result_id")
+  objectType  String   @map("object_type")
+  objectId    String   @map("object_id")
+  checkType   String   @map("check_type")
+  status      String
+  score       Float?
+  message     String?
+  metadata    Json?
+  createdById String?  @map("created_by_id")
+  updatedById String?  @map("updated_by_id")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@index([objectType, objectId])
+  @@index([checkType])
+  @@index([status])
+  @@map("tbl_data_quality_result")
+}
+
+model Approval {
+  approvalId   String    @id @map("approval_id")
+  entityType   String    @map("entity_type")
+  entityId     String    @map("entity_id")
+  approvalType String    @map("approval_type")
+  status       String
+  requestedBy  String    @map("requested_by")
+  approvedBy   String?   @map("approved_by")
+  requestedAt  DateTime  @map("requested_at")
+  approvedAt   DateTime? @map("approved_at")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+
+  @@index([entityType, entityId])
+  @@index([approvalType])
+  @@index([status])
+  @@index([requestedBy])
+  @@index([approvedBy])
+  @@map("tbl_approval")
+}
+
+model Decision {
+  decisionId        String   @id @map("decision_id")
+  incidentId        String   @map("incident_id")
+  workOrderId       String   @map("work_order_id")
+  parentDecisionId  String?  @map("parent_decision_id")
+  decisionType      String   @map("decision_type")
+  decisionStatus    String   @map("decision_status")
+  decisionSummary   String   @map("decision_summary")
+  recommendedAction String   @map("recommended_action")
+  approvedAction    String?  @map("approved_action")
+  decisionBy        String   @map("decision_by")
+  approvedBy        String?  @map("approved_by")
+  decisionTime      DateTime @map("decision_time")
+  decisionHash      String   @map("decision_hash")
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @updatedAt @map("updated_at")
+
+  incident       Incident           @relation(fields: [incidentId], references: [incidentId], onDelete: Restrict)
+  workOrder      WorkOrder          @relation(fields: [workOrderId], references: [workOrderId], onDelete: Restrict)
+  parentDecision Decision?          @relation("DecisionChain", fields: [parentDecisionId], references: [decisionId], onDelete: Restrict)
+  childDecisions Decision[]         @relation("DecisionChain")
+  evidenceLinks  DecisionEvidence[]
+
+  @@index([incidentId])
+  @@index([workOrderId])
+  @@index([parentDecisionId])
+  @@index([decisionType])
+  @@index([decisionStatus])
+  @@index([decisionBy])
+  @@index([approvedBy])
+  @@index([decisionTime])
+  @@index([decisionHash])
+  @@map("tbl_decision")
+}
+
+model DecisionEvidence {
+  decisionEvidenceId String   @id @map("decision_evidence_id")
+  decisionId         String   @map("decision_id")
+  evidenceId         String   @map("evidence_id")
+  linkType           String   @map("link_type")
+  linkedBy           String   @map("linked_by")
+  linkedAt           DateTime @map("linked_at")
+  createdAt          DateTime @default(now()) @map("created_at")
+  updatedAt          DateTime @updatedAt @map("updated_at")
+
+  decision Decision @relation(fields: [decisionId], references: [decisionId], onDelete: Restrict)
+  evidence Evidence @relation(fields: [evidenceId], references: [evidenceId], onDelete: Restrict)
+
+  @@unique([decisionId, evidenceId])
+  @@index([decisionId])
+  @@index([evidenceId])
+  @@index([linkType])
+  @@index([linkedBy])
+  @@index([linkedAt])
+  @@map("tbl_decision_evidence")
+}
+
+model User {
+  userId              String    @id @map("user_id")
+  username            String    @unique
+  displayName         String    @map("display_name")
+  email               String    @unique
+  passwordHash        String    @map("password_hash")
+  status              String
+  forcePasswordChange Boolean   @default(false) @map("force_password_change")
+  passwordChangedAt   DateTime? @map("password_changed_at")
+  lastLoginAt         DateTime? @map("last_login_at")
+  failedLoginCount    Int       @default(0) @map("failed_login_count")
+  lockedUntil         DateTime? @map("locked_until")
+  createdAt           DateTime  @default(now()) @map("created_at")
+  updatedAt           DateTime  @updatedAt @map("updated_at")
+
+  userRoles UserRole[]
+
+  @@index([username])
+  @@index([email])
+  @@index([status])
+  @@map("tbl_user")
+}
+
+model Role {
+  roleId      String   @id @map("role_id")
+  roleCode    String   @unique @map("role_code")
+  roleName    String   @map("role_name")
+  description String
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  userRoles       UserRole[]
+  rolePermissions RolePermission[]
+
+  @@map("tbl_role")
+}
+
+model Permission {
+  permissionId   String   @id @map("permission_id")
+  permissionCode String   @unique @map("permission_code")
+  permissionName String   @map("permission_name")
+  description    String
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  rolePermissions RolePermission[]
+
+  @@map("tbl_permission")
+}
+
+model UserRole {
+  userRoleId String   @id @map("user_role_id")
+  userId     String   @map("user_id")
+  roleId     String   @map("role_id")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [userId], onDelete: Restrict)
+  role Role @relation(fields: [roleId], references: [roleId], onDelete: Restrict)
+
+  @@unique([userId, roleId])
+  @@index([userId])
+  @@index([roleId])
+  @@map("tbl_user_role")
+}
+
+model RolePermission {
+  rolePermissionId String   @id @map("role_permission_id")
+  roleId           String   @map("role_id")
+  permissionId     String   @map("permission_id")
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  role       Role       @relation(fields: [roleId], references: [roleId], onDelete: Restrict)
+  permission Permission @relation(fields: [permissionId], references: [permissionId], onDelete: Restrict)
+
+  @@unique([roleId, permissionId])
+  @@index([roleId])
+  @@index([permissionId])
+  @@map("tbl_role_permission")
+}
+
+model IntegrationProfile {
+  profileId               String    @id @map("profile_id")
+  profileCode             String    @map("profile_code")
+  profileName             String    @map("profile_name")
+  description             String?   @db.Text
+  sourceSystemName        String    @map("source_system_name")
+  sourceSystemType        String    @map("source_system_type")
+  inputMode               String    @map("input_mode")
+  linkedFaultSourceId     String?   @map("linked_fault_source_id")
+  siteName                String?   @map("site_name")
+  systemDomain            String?   @map("system_domain")
+  status                  String
+  ownerTeam               String?   @map("owner_team")
+  unknownSeverityHandling String    @map("unknown_severity_handling")
+  unknownStatusHandling   String    @map("unknown_status_handling")
+  defaultSeverity         String    @map("default_severity")
+  defaultStatus           String    @map("default_status")
+  notes                   String?   @db.Text
+  lastTestedAt            DateTime? @map("last_tested_at")
+  createdBy               String    @map("created_by")
+  externalReferenceId     String?   @map("external_reference_id")
+  mappingTemplateId       String?   @map("mapping_template_id")
+  trustLevel              String?   @map("trust_level")
+  chainStatus             String?   @map("chain_status")
+  verificationStatus      String?   @map("verification_status")
+  complianceTag           String?   @map("compliance_tag")
+  isActive                Boolean   @default(true) @map("is_active")
+  deletedAt               DateTime? @map("deleted_at")
+  deletedById             String?   @map("deleted_by_id")
+  updatedById             String?   @map("updated_by_id")
+  externalSystemId        String?   @map("external_system_id")
+  connectionProfileId     String?   @map("connection_profile_id")
+  sourceType              String?   @map("source_type")
+  targetObjectType        String?   @map("target_object_type")
+  profileVersion          String?   @map("profile_version")
+  lastActivatedAt         DateTime? @map("last_activated_at")
+  metadata                Json?
+  createdAt               DateTime  @default(now()) @map("created_at")
+  updatedAt               DateTime  @updatedAt @map("updated_at")
+
+  fieldMappings     IntegrationFieldMapping[]
+  valueMappings     IntegrationValueMapping[]
+  testRuns          IntegrationTestRun[]
+  events            Event[]
+  rawMessages       RawMessage[]
+  mappingTemplate   MappingTemplate?          @relation(fields: [mappingTemplateId], references: [mappingTemplateId], onDelete: SetNull)
+  externalSystem    ExternalSystem?           @relation(fields: [externalSystemId], references: [externalSystemId], onDelete: SetNull)
+  connectionProfile ConnectionProfile?        @relation(fields: [connectionProfileId], references: [connectionProfileId], onDelete: SetNull)
+
+  @@index([status])
+  @@index([externalSystemId])
+  @@index([connectionProfileId])
+  @@index([inputMode])
+  @@index([linkedFaultSourceId])
+  @@index([isActive])
+  @@map("tbl_integration_profile")
+}
+
+model IntegrationFieldMapping {
+  mappingId           String   @id @map("mapping_id")
+  profileId           String   @map("profile_id")
+  externalFieldName   String   @map("external_field_name")
+  ufmsFieldName       String   @map("ufms_field_name")
+  isRequired          Boolean  @default(false) @map("is_required")
+  defaultValue        String?  @map("default_value")
+  transformType       String?  @map("transform_type")
+  sortOrder           Int      @default(0) @map("sort_order")
+  externalReferenceId String?  @map("external_reference_id")
+  metadata            Json?
+  createdAt           DateTime @default(now()) @map("created_at")
+  updatedAt           DateTime @updatedAt @map("updated_at")
+
+  profile IntegrationProfile @relation(fields: [profileId], references: [profileId], onDelete: Cascade)
+
+  @@index([profileId])
+  @@map("tbl_integration_field_mapping")
+}
+
+model IntegrationValueMapping {
+  mappingId     String   @id @map("mapping_id")
+  profileId     String   @map("profile_id")
+  mappingType   String   @map("mapping_type")
+  externalValue String   @map("external_value")
+  ufmsValue     String   @map("ufms_value")
+  sortOrder     Int      @default(0) @map("sort_order")
+  metadata      Json?
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  profile IntegrationProfile @relation(fields: [profileId], references: [profileId], onDelete: Cascade)
+
+  @@index([profileId])
+  @@index([profileId, mappingType])
+  @@map("tbl_integration_value_mapping")
+}
+
+model ReferenceCode {
+  referenceCodeId String   @id @map("reference_code_id")
+  objectType      String   @map("object_type")
+  objectId        String   @map("object_id")
+  codeType        String   @map("code_type")
+  codeValue       String   @map("code_value")
+  description     String?
+  isActive        Boolean  @default(true) @map("is_active")
+  metadata        Json?
+  createdById     String?  @map("created_by_id")
+  updatedById     String?  @map("updated_by_id")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  @@unique([objectType, objectId, codeType, codeValue])
+  @@index([objectType, objectId])
+  @@index([codeType])
+  @@map("tbl_reference_code")
+}
+
+model ObjectLink {
+  objectLinkId     String   @id @map("object_link_id")
+  sourceObjectType String   @map("source_object_type")
+  sourceObjectId   String   @map("source_object_id")
+  targetObjectType String   @map("target_object_type")
+  targetObjectId   String   @map("target_object_id")
+  linkType         String   @map("link_type")
+  linkStatus       String   @default("active") @map("link_status")
+  metadata         Json?
+  createdById      String?  @map("created_by_id")
+  updatedById      String?  @map("updated_by_id")
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  @@index([sourceObjectType, sourceObjectId])
+  @@index([targetObjectType, targetObjectId])
+  @@index([linkType])
+  @@map("tbl_object_link")
+}
+
+model ConnectionProfile {
+  connectionProfileId String    @id @map("connection_profile_id")
+  connectorId         String?   @map("connector_id")
+  profileCode         String    @unique @map("profile_code")
+  profileName         String    @map("profile_name")
+  protocol            String
+  endpointUrl         String?   @map("endpoint_url")
+  authMode            String?   @map("auth_mode")
+  status              String
+  trustLevel          String?   @map("trust_level")
+  chainStatus         String?   @map("chain_status")
+  verificationStatus  String?   @map("verification_status")
+  complianceTag       String?   @map("compliance_tag")
+  isActive            Boolean   @default(true) @map("is_active")
+  deletedAt           DateTime? @map("deleted_at")
+  deletedById         String?   @map("deleted_by_id")
+  protocolType        String?   @map("protocol_type")
+  transport           String?
+  direction           String?
+  host                String?
+  port                Int?
+  baseUrl             String?   @map("base_url")
+  endpointPath        String?   @map("endpoint_path")
+  topic               String?
+  filePath            String?   @map("file_path")
+  pollingIntervalSec  Int?      @map("polling_interval_sec")
+  authType            String?   @map("auth_type")
+  credentialRef       String?   @map("credential_ref")
+  timeoutMs           Int?      @map("timeout_ms")
+  retryCount          Int?      @map("retry_count")
+  retryBackoffMs      Int?      @map("retry_backoff_ms")
+  supportsPolling     Boolean   @default(false) @map("supports_polling")
+  supportsPush        Boolean   @default(false) @map("supports_push")
+  supportsBatch       Boolean   @default(false) @map("supports_batch")
+  supportsRealtime    Boolean   @default(false) @map("supports_realtime")
+  metadata            Json?
+  createdById         String?   @map("created_by_id")
+  updatedById         String?   @map("updated_by_id")
+  createdAt           DateTime  @default(now()) @map("created_at")
+  updatedAt           DateTime  @updatedAt @map("updated_at")
+
+  integrationProfiles IntegrationProfile[]
+
+  @@index([connectorId])
+  @@index([status])
+  @@index([isActive])
+  @@index([protocolType])
+  @@map("tbl_connection_profile")
+}
+
+model ProtocolProfile {
+  protocolProfileId  String    @id @map("protocol_profile_id")
+  adapterId          String?   @map("adapter_id")
+  profileCode        String    @unique @map("profile_code")
+  profileName        String    @map("profile_name")
+  protocol           String
+  version            String
+  status             String
+  trustLevel         String?   @map("trust_level")
+  chainStatus        String?   @map("chain_status")
+  verificationStatus String?   @map("verification_status")
+  complianceTag      String?   @map("compliance_tag")
+  isActive           Boolean   @default(true) @map("is_active")
+  deletedAt          DateTime? @map("deleted_at")
+  deletedById        String?   @map("deleted_by_id")
+  protocolType       String?   @map("protocol_type")
+  transport          String?
+  direction          String?
+  supportsPolling    Boolean   @default(false) @map("supports_polling")
+  supportsPush       Boolean   @default(false) @map("supports_push")
+  supportsBatch      Boolean   @default(false) @map("supports_batch")
+  supportsRealtime   Boolean   @default(false) @map("supports_realtime")
+  supportsCommand    Boolean   @default(false) @map("supports_command")
+  securityMode       String?   @map("security_mode")
+  metadata           Json?
+  createdById        String?   @map("created_by_id")
+  updatedById        String?   @map("updated_by_id")
+  createdAt          DateTime  @default(now()) @map("created_at")
+  updatedAt          DateTime  @updatedAt @map("updated_at")
+
+  @@index([adapterId])
+  @@index([protocol])
+  @@index([protocolType])
+  @@index([status])
+  @@map("tbl_protocol_profile")
+}
+
+model MappingTemplate {
+  mappingTemplateId String   @id @map("mapping_template_id")
+  templateCode      String   @unique @map("template_code")
+  templateName      String   @map("template_name")
+  sourceSystemType  String   @map("source_system_type")
+  inputMode         String   @map("input_mode")
+  status            String
+  description       String?
+  templateSchema    Json?    @map("template_schema")
+  isActive          Boolean  @default(true) @map("is_active")
+  metadata          Json?
+  createdById       String?  @map("created_by_id")
+  updatedById       String?  @map("updated_by_id")
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @updatedAt @map("updated_at")
+
+  profiles IntegrationProfile[]
+
+  @@index([sourceSystemType])
+  @@index([status])
+  @@map("tbl_mapping_template")
+}
+
+model IntegrationTestRun {
+  testRunId   String   @id @map("test_run_id")
+  profileId   String   @map("profile_id")
+  runBy       String   @map("run_by")
+  runAt       DateTime @default(now()) @map("run_at")
+  status      String
+  sampleInput Json?    @map("sample_input")
+  metadata    Json?
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  profile IntegrationProfile      @relation(fields: [profileId], references: [profileId], onDelete: Cascade)
+  results IntegrationTestResult[]
+
+  @@index([profileId, runAt])
+  @@index([status])
+  @@map("tbl_integration_test_run")
+}
+
+model IntegrationTestResult {
+  testResultId      String   @id @map("test_result_id")
+  testRunId         String   @map("test_run_id")
+  validationStatus  String   @map("validation_status")
+  mappedEvent       Json?    @map("mapped_event")
+  csvPreview        Json?    @map("csv_preview")
+  errors            Json?
+  warnings          Json?
+  missingRequired   Json?    @map("missing_required")
+  normalizedPayload Json?    @map("normalized_payload")
+  qualityScore      Float?   @map("quality_score")
+  metadata          Json?
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @updatedAt @map("updated_at")
+
+  testRun IntegrationTestRun @relation(fields: [testRunId], references: [testRunId], onDelete: Cascade)
+
+  @@index([testRunId])
+  @@index([validationStatus])
+  @@map("tbl_integration_test_result")
+}
+
+model RawMessage {
+  id                   String   @id @default(cuid())
+  externalSystemId     String?  @map("external_system_id")
+  integrationProfileId String?  @map("integration_profile_id")
+  faultSourceId        String?  @map("fault_source_id")
+  sourceRecordId       String?  @map("source_record_id")
+  protocolType         String?  @map("protocol_type")
+  messageType          String?  @map("message_type")
+  rawPayload           Json     @map("raw_payload")
+  receivedAt           DateTime @default(now()) @map("received_at")
+  processingStatus     String   @map("processing_status")
+  errorMessage         String?  @map("error_message")
+  normalizedEventId    String?  @map("normalized_event_id")
+  metadata             Json?
+  createdAt            DateTime @default(now()) @map("created_at")
+  updatedAt            DateTime @updatedAt @map("updated_at")
+
+  externalSystem     ExternalSystem?     @relation(fields: [externalSystemId], references: [externalSystemId], onDelete: SetNull)
+  integrationProfile IntegrationProfile? @relation(fields: [integrationProfileId], references: [profileId], onDelete: SetNull)
+  events             Event[]
+
+  @@index([externalSystemId])
+  @@index([integrationProfileId])
+  @@index([faultSourceId])
+  @@index([sourceRecordId])
+  @@index([processingStatus])
+  @@index([receivedAt])
+  @@map("tbl_raw_message")
+}
+
+model StatusHistory {
+  statusHistoryId String   @id @map("status_history_id")
+  objectType      String   @map("object_type")
+  objectId        String   @map("object_id")
+  statusFrom      String?  @map("status_from")
+  statusTo        String   @map("status_to")
+  changeReason    String?  @map("change_reason")
+  changedById     String?  @map("changed_by_id")
+  changedAt       DateTime @default(now()) @map("changed_at")
+  metadata        Json?
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  @@index([objectType, objectId, changedAt])
+  @@index([statusTo])
+  @@map("tbl_status_history")
+}
+
+enum HealthCheckStatus {
+  PASS
+  WARNING
+  FAIL
+  SKIPPED
+  UNKNOWN
+}
+
+enum HealthCheckCategory {
+  FRONTEND
+  BACKEND
+  DATABASE
+  SERVER
+  PORT
+  PROTOCOL
+  CONNECTOR
+  RBAC
+  REPORT
+  AUDIT
+  CONFIGURATION
+}
+
+model HealthCheckRun {
+  healthCheckRunId String            @id @map("health_check_run_id")
+  runCode          String            @unique @map("run_code")
+  triggeredBy      String            @map("triggered_by")
+  triggeredAt      DateTime          @map("triggered_at")
+  overallStatus    HealthCheckStatus @map("overall_status")
+  durationMs       Int               @map("duration_ms")
+  environment      String?
+  serverHostname   String?           @map("server_hostname")
+  appVersion       String?           @map("app_version")
+  backendVersion   String?           @map("backend_version")
+  frontendVersion  String?           @map("frontend_version")
+  summaryJson      Json?             @map("summary_json")
+  createdAt        DateTime          @default(now()) @map("created_at")
+
+  items   HealthCheckItem[]
+  reports DiagnosticReport[]
+
+  @@index([triggeredAt])
+  @@index([overallStatus])
+  @@map("tbl_health_check_run")
+}
+
+model HealthCheckItem {
+  healthCheckItemId String              @id @map("health_check_item_id")
+  runId             String              @map("run_id")
+  category          HealthCheckCategory
+  checkName         String              @map("check_name")
+  status            HealthCheckStatus
+  severity          String              @default("info")
+  target            String?
+  message           String
+  detailsJson       Json?               @map("details_json")
+  suggestedAction   String?             @map("suggested_action")
+  durationMs        Int                 @map("duration_ms")
+  createdAt         DateTime            @default(now()) @map("created_at")
+
+  run HealthCheckRun @relation(fields: [runId], references: [healthCheckRunId], onDelete: Cascade)
+
+  @@index([runId])
+  @@index([category])
+  @@index([status])
+  @@map("tbl_health_check_item")
+}
+
+model DiagnosticReport {
+  diagnosticReportId String            @id @map("diagnostic_report_id")
+  runId              String            @map("run_id")
+  reportTitle        String            @map("report_title")
+  overallStatus      HealthCheckStatus @map("overall_status")
+  reportType         String            @default("customer") @map("report_type")
+  reportJson         Json              @map("report_json")
+  exportFileUrl      String?           @map("export_file_url")
+  createdBy          String            @map("created_by")
+  createdAt          DateTime          @default(now()) @map("created_at")
+
+  run HealthCheckRun @relation(fields: [runId], references: [healthCheckRunId], onDelete: Cascade)
+
+  @@index([runId])
+  @@index([createdAt])
+  @@index([reportType])
+  @@map("tbl_diagnostic_report")
+}
+
+model MaintenanceAccessConfig {
+  maintenanceAccessConfigId String    @id @map("maintenance_access_config_id")
+  siteId                    String?   @map("site_id")
+  passwordHash              String    @map("password_hash")
+  enabled                   Boolean   @default(true)
+  failedAttempts            Int       @default(0) @map("failed_attempts")
+  lockedUntil               DateTime? @map("locked_until")
+  lastChangedAt             DateTime? @map("last_changed_at")
+  changedBy                 String?   @map("changed_by")
+  createdAt                 DateTime  @default(now()) @map("created_at")
+  updatedAt                 DateTime  @updatedAt @map("updated_at")
+
+  @@index([siteId])
+  @@index([enabled])
+  @@map("tbl_maintenance_access_config")
+}
+
+model MaintenanceSession {
+  maintenanceSessionId String   @id @map("maintenance_session_id")
+  userId               String   @map("user_id")
+  sessionTokenHash     String   @map("session_token_hash")
+  unlockedAt           DateTime @map("unlocked_at")
+  expiresAt            DateTime @map("expires_at")
+  ipAddress            String?  @map("ip_address")
+  userAgent            String?  @map("user_agent")
+  scope                String   @default("maintenance_view")
+  status               String   @default("active")
+  createdAt            DateTime @default(now()) @map("created_at")
+
+  @@index([userId, status])
+  @@index([expiresAt])
+  @@index([sessionTokenHash])
+  @@map("tbl_maintenance_session")
+}
+
+model MaintenanceLog {
+  maintenanceLogId String   @id @map("maintenance_log_id")
+  category         String
+  action           String
+  description      String
+  relatedRunId     String?  @map("related_run_id")
+  performedBy      String   @map("performed_by")
+  performedAt      DateTime @map("performed_at")
+  result           String
+  notes            String?
+  createdAt        DateTime @default(now()) @map("created_at")
+
+  @@index([relatedRunId])
+  @@index([performedAt])
+  @@map("tbl_maintenance_log")
+}
+
+model VersionControlStateRow {
+  versionControlStateId  String   @id @map("version_control_state_id")
+  externalProductVersion String   @map("external_product_version")
+  externalProductLabel   String   @map("external_product_label")
+  internalReleaseCode    String   @map("internal_release_code")
+  internalReleaseName    String   @map("internal_release_name")
+  edition                String
+  enabledModules         Json     @map("enabled_modules")
+  updatedBy              String   @map("updated_by")
+  updatedAt              DateTime @map("updated_at")
+  createdAt              DateTime @default(now()) @map("created_at")
+
+  @@map("tbl_version_control_state")
+}
+
+// -----------------------------------------------------------------------------
+// DB-SCHEMA-PATCH-01-E Minimal Safe P4 DB Schema Additions
+// Scope: schema-only patch. No migration SQL, no DB connection.
+// Added after existing UFMS B1-B7 schema alignment review.
+// -----------------------------------------------------------------------------
+
+enum AlarmActionType {
+  ACKNOWLEDGE
+  ASSIGN
+  COMMENT
+  SUPPRESS
+  ESCALATE
+  CLOSE
+  REOPEN
+  LINK_EVIDENCE
+  SYSTEM_NOTE
+}
+
+enum WorkOrderIntentStatus {
+  NEW
+  TRIAGED
+  APPROVED
+  REJECTED
+  CONVERTED
+  CANCELLED
+}
+
+enum DbOperationType {
+  MIGRATION
+  BACKUP
+  RESTORE
+  BOOTSTRAP
+  HEALTHCHECK
+  VALIDATION
+  CUTOVER
+  ROLLBACK
+}
+
+enum DbOperationStatus {
+  PLANNED
+  DRY_RUN
+  PASS
+  WARNING
+  FAIL
+  BLOCKED
+  APPROVED
+  COMPLETED
+  CANCELLED
+}
+
+enum AuditChainStatus {
+  PENDING
+  VERIFIED
+  BROKEN
+  SUPERSEDED
+  UNKNOWN
+}
+
+model Gateway {
+  gatewayId        String          @id @map("gateway_id")
+  siteId           String?         @map("site_id")
+  externalSystemId String?         @map("external_system_id")
+  connectorId      String?         @map("connector_id")
+  gatewayCode      String          @map("gateway_code")
+  gatewayName      String          @map("gateway_name")
+  deploymentMode   String?         @map("deployment_mode")
+  hostRef          String?         @map("host_ref")
+  networkZone      String?         @map("network_zone")
+  status           ConnectorStatus @default(UNKNOWN)
+  lastSeenAt       DateTime?       @map("last_seen_at")
+  metadata         Json?
+  createdAt        DateTime        @default(now()) @map("created_at")
+  updatedAt        DateTime        @updatedAt @map("updated_at")
+
+  @@unique([gatewayCode])
+  @@index([siteId])
+  @@index([externalSystemId])
+  @@index([connectorId])
+  @@index([status])
+  @@index([lastSeenAt])
+  @@map("tbl_gateway")
+}
+
+model AlarmAction {
+  alarmActionId String          @id @map("alarm_action_id")
+  alarmId       String          @map("alarm_id")
+  eventId       String?         @map("event_id")
+  actionType    AlarmActionType @map("action_type")
+  actorId       String?         @map("actor_id")
+  actorLabel    String          @map("actor_label")
+  note          String?
+  evidenceId    String?         @map("evidence_id")
+  metadata      Json?
+  createdAt     DateTime        @default(now()) @map("created_at")
+
+  @@index([alarmId])
+  @@index([eventId])
+  @@index([actionType])
+  @@index([actorId])
+  @@index([createdAt])
+  @@map("tbl_alarm_action")
+}
+
+model WorkOrderIntent {
+  workOrderIntentId String                @id @map("work_order_intent_id")
+  intentCode        String?               @unique @map("intent_code")
+  eventId           String?               @map("event_id")
+  alarmId           String?               @map("alarm_id")
+  workOrderId       String?               @map("work_order_id")
+  status            WorkOrderIntentStatus @default(NEW)
+  requestedBy       String?               @map("requested_by")
+  requestedReason   String?               @map("requested_reason")
+  triageResult      Json?                 @map("triage_result")
+  approvedBy        String?               @map("approved_by")
+  convertedAt       DateTime?             @map("converted_at")
+  metadata          Json?
+  createdAt         DateTime              @default(now()) @map("created_at")
+  updatedAt         DateTime              @updatedAt @map("updated_at")
+
+  @@index([eventId])
+  @@index([alarmId])
+  @@index([workOrderId])
+  @@index([status])
+  @@index([requestedBy])
+  @@index([createdAt])
+  @@map("tbl_work_order_intent")
+}
+
+model AuditLedgerHashChain {
+  chainId      String           @id @map("chain_id")
+  auditId      String?          @map("audit_id")
+  entityType   String           @map("entity_type")
+  entityId     String           @map("entity_id")
+  sequenceNo   Int              @map("sequence_no")
+  previousHash String?          @map("previous_hash")
+  payloadHash  String           @map("payload_hash")
+  currentHash  String           @map("current_hash")
+  chainStatus  AuditChainStatus @default(PENDING) @map("chain_status")
+  verifiedAt   DateTime?        @map("verified_at")
+  evidenceId   String?          @map("evidence_id")
+  metadata     Json?
+  createdAt    DateTime         @default(now()) @map("created_at")
+
+  @@index([auditId])
+  @@index([entityType, entityId])
+  @@index([sequenceNo])
+  @@index([chainStatus])
+  @@index([currentHash])
+  @@index([createdAt])
+  @@map("tbl_audit_ledger_hash_chain")
+}
+
+model DbOperationEvidence {
+  operationId     String            @id @map("operation_id")
+  operationType   DbOperationType   @map("operation_type")
+  operationStatus DbOperationStatus @map("operation_status")
+  targetName      String?           @map("target_name")
+  dryRun          Boolean           @default(true) @map("dry_run")
+  commandName     String?           @map("command_name")
+  evidenceHash    String?           @map("evidence_hash")
+  artifactPath    String?           @map("artifact_path")
+  operatorId      String?           @map("operator_id")
+  startedAt       DateTime          @default(now()) @map("started_at")
+  completedAt     DateTime?         @map("completed_at")
+  metadata        Json?
+  createdAt       DateTime          @default(now()) @map("created_at")
+
+  @@index([operationType])
+  @@index([operationStatus])
+  @@index([targetName])
+  @@index([dryRun])
+  @@index([operatorId])
+  @@index([startedAt])
+  @@map("tbl_db_operation_evidence")
+}
+
+enum UiPluginRegistryAction {
+  REGISTER
+  UPDATE
+  DISABLE
+  ENABLE
+  UNREGISTER
+  APPROVAL_REQUEST
+  APPROVAL_GRANTED
+  APPROVAL_REJECTED
+}
+
+model UiPluginRegistry {
+  tenantId         String   @default("default") @map("tenant_id")
+  pluginId         String   @map("plugin_id")
+  source           String
+  version          String
+  manifestVersion  Int      @default(1) @map("manifest_version")
+  enabled          Boolean  @default(true)
+  priority         Int      @default(100)
+  menu             Json?
+  routes           Json?
+  workspaces       Json?
+  createdBy        String?  @map("created_by")
+  updatedBy        String?  @map("updated_by")
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  versions  UiPluginRegistryVersion[]
+  auditLogs UiPluginRegistryAudit[]
+
+  @@id([tenantId, pluginId])
+  @@index([tenantId, enabled, priority])
+  @@index([tenantId, source])
+  @@map("ui_plugin_registry")
+}
+
+model UiPluginRegistryVersion {
+  versionId        String   @id @map("version_id")
+  tenantId         String   @map("tenant_id")
+  pluginId         String   @map("plugin_id")
+  manifestVersion  Int      @map("manifest_version")
+  version          String
+  menu             Json?
+  routes           Json?
+  workspaces       Json?
+  changeSummary    String?  @map("change_summary")
+  createdBy        String?  @map("created_by")
+  createdAt        DateTime @default(now()) @map("created_at")
+
+  plugin UiPluginRegistry @relation(fields: [tenantId, pluginId], references: [tenantId, pluginId], onDelete: Cascade)
+
+  @@unique([tenantId, pluginId, manifestVersion])
+  @@index([tenantId, pluginId, createdAt])
+  @@map("ui_plugin_registry_version")
+}
+
+model UiPluginRegistryAudit {
+  auditId         String                 @id @map("audit_id")
+  tenantId        String                 @map("tenant_id")
+  pluginId        String?                @map("plugin_id")
+  snapshotId      String?                @map("snapshot_id")
+  action          UiPluginRegistryAction
+  manifestVersion Int?                   @map("manifest_version")
+  version         String?
+  actorId         String?                @map("actor_id")
+  actorUsername   String?                @map("actor_username")
+  details         Json?
+  createdAt       DateTime               @default(now()) @map("created_at")
+
+  plugin UiPluginRegistry? @relation(fields: [tenantId, pluginId], references: [tenantId, pluginId], onDelete: Cascade)
+
+  @@index([tenantId, pluginId, createdAt])
+  @@index([tenantId, snapshotId, createdAt])
+  @@index([tenantId, action])
+  @@map("ui_plugin_registry_audit")
+}
+
+enum UiManifestSnapshotStatus {
+  DRAFT
+  PENDING_APPROVAL
+  STAGED
+  ACTIVE
+  ROLLBACK
+  ROLLBACK_REQUESTED
+}
+
+enum UiSnapshotApprovalStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  AUTO_APPROVED
+}
+
+model UiManifestSnapshot {
+  id        String                   @id @map("id")
+  tenantId  String                   @map("tenant_id")
+  version   Int
+  manifest  Json
+  status    UiManifestSnapshotStatus
+  createdAt DateTime                 @default(now()) @map("created_at")
+
+  approvalFlows UiSnapshotApprovalFlow[]
+
+  @@unique([tenantId, version])
+  @@index([tenantId, status, createdAt])
+  @@map("ui_manifest_snapshot")
+}
+
+model UiSnapshotApprovalFlow {
+  id          String                   @id @map("id")
+  tenantId    String                   @map("tenant_id")
+  snapshotId  String                   @map("snapshot_id")
+  requestedBy String                   @map("requested_by")
+  approvedBy  String?                  @map("approved_by")
+  status      UiSnapshotApprovalStatus
+  reason      String?
+  createdAt   DateTime                 @default(now()) @map("created_at")
+  updatedAt   DateTime                 @updatedAt @map("updated_at")
+
+  snapshot UiManifestSnapshot @relation(fields: [snapshotId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId, status, createdAt])
+  @@index([snapshotId, createdAt])
+  @@map("ui_snapshot_approval_flow")
+}
+
+enum UiSnapshotPolicyRuleType {
+  AUTO_APPROVE
+  AUTO_REJECT
+  AUTO_ROLLBACK
+  BLOCK
+}
+
+model UiSnapshotPolicy {
+  id        String                   @id @map("id")
+  tenantId  String                   @map("tenant_id")
+  name      String
+  ruleType  UiSnapshotPolicyRuleType @map("rule_type")
+  condition Json
+  priority  Int                      @default(100)
+  enabled   Boolean                  @default(true)
+  createdAt DateTime                 @default(now()) @map("created_at")
+
+  @@index([tenantId, enabled, priority])
+  @@index([tenantId, createdAt])
+  @@map("ui_snapshot_policy")
+}
+
+enum UiControlPlaneTraceEntityType {
+  PLUGIN
+  SNAPSHOT
+  POLICY
+  APPROVAL
+}
+
+enum UiControlPlaneTraceAction {
+  REGISTER
+  UPDATE
+  APPROVE
+  REJECT
+  ACTIVATE
+  ROLLBACK
+  POLICY_EVAL
+}
+
+model UiControlPlaneTrace {
+  id            String                        @id @map("id")
+  tenantId      String                        @map("tenant_id")
+  entityType    UiControlPlaneTraceEntityType @map("entity_type")
+  entityId      String                        @map("entity_id")
+  action        UiControlPlaneTraceAction
+  beforeState   Json?                         @map("before_state")
+  afterState    Json?                         @map("after_state")
+  actorUserId   String?                       @map("actor_user_id")
+  timestamp     DateTime                      @default(now())
+  correlationId String                        @map("correlation_id")
+
+  @@index([tenantId, timestamp])
+  @@index([entityId, timestamp])
+  @@index([correlationId, timestamp])
+  @@index([tenantId, correlationId])
+  @@map("ui_control_plane_trace")
+}
+
+enum UiOrchestrationRunStatus {
+  RUNNING
+  COMPLETED
+  FAILED
+  ROLLING_BACK
+  ROLLED_BACK
+  PARTIAL
+}
+
+model UiOrchestrationRun {
+  id            String                   @id @map("id")
+  tenantId      String                   @map("tenant_id")
+  correlationId String                   @unique @map("correlation_id")
+  status        UiOrchestrationRunStatus
+  pipeline      Json
+  error         String?
+  actorUserId   String?                  @map("actor_user_id")
+  createdAt     DateTime                 @default(now()) @map("created_at")
+  updatedAt     DateTime                 @updatedAt @map("updated_at")
+
+  @@index([tenantId, createdAt])
+  @@map("ui_orchestration_run")
+}
+
+enum UiControlPlaneNodeStatus {
+  ACTIVE
+  DEGRADED
+  OFFLINE
+}
+
+model UiControlPlaneNode {
+  nodeId           String                   @map("node_id")
+  tenantScope      String                   @map("tenant_scope")
+  status           UiControlPlaneNodeStatus
+  lastHeartbeat    DateTime                 @default(now()) @map("last_heartbeat")
+  capacityMetadata Json                     @default("{}") @map("capacity_metadata")
+
+  @@id([nodeId, tenantScope])
+  @@index([tenantScope, status])
+  @@index([lastHeartbeat])
+  @@map("ui_control_plane_node")
+}
+
+enum UiControlPlaneHealingResult {
+  HEALED
+  FAILED
+  MANUAL_REQUIRED
+}
+
+model UiControlPlaneHealingEvent {
+  id            String                     @id @map("id")
+  tenantId      String                     @map("tenant_id")
+  correlationId String?                    @map("correlation_id")
+  anomalyType   String                     @map("anomaly_type")
+  detectedAt    DateTime                   @default(now()) @map("detected_at")
+  actionTaken   String                     @map("action_taken")
+  result        UiControlPlaneHealingResult
+
+  @@index([tenantId, detectedAt])
+  @@index([correlationId])
+  @@map("ui_control_plane_healing_event")
+}
+
+enum PlatformTenantStatus {
+  PROVISIONING
+  ACTIVE
+  SUSPENDED
+}
+
+enum PlatformLicenseType {
+  TRIAL
+  STANDARD
+  ENTERPRISE
+}
+
+enum PlatformPluginInstallationStatus {
+  PENDING
+  INSTALLED
+  UNINSTALLED
+}
+
+enum PlatformUsageMetricType {
+  API_CALL
+  ORCHESTRATION_RUN
+  PLUGIN_USAGE
+}
+
+model PlatformTenant {
+  id          String               @id @map("id")
+  slug        String               @unique @map("slug")
+  name        String
+  status      PlatformTenantStatus @default(PROVISIONING)
+  licenseType PlatformLicenseType  @default(TRIAL) @map("license_type")
+  usageQuota  Json                 @default("{}") @map("usage_quota")
+  metadata    Json?
+  createdAt   DateTime             @default(now()) @map("created_at")
+  updatedAt   DateTime             @updatedAt @map("updated_at")
+
+  pluginInstallations PlatformPluginInstallation[]
+  licenses            PlatformLicense[]
+  usageRecords        PlatformUsageMetering[]
+  usageEvents         PlatformUsageEvent[]
+  revenueRecords      PlatformRevenueRecord[]
+  developerAccounts   PlatformDeveloperAccount[] @relation("DeveloperLinkedTenant")
+  marketplaceRatings  PlatformMarketplaceRating[]
+
+  @@map("platform_tenant")
+}
+
+model PlatformPluginCatalog {
+  id          String   @id @map("id")
+  pluginKey   String   @unique @map("plugin_key")
+  name        String
+  description String?
+  version     String
+  publisher   String?
+  metadata    Json?
+  priceCents  Int      @default(0) @map("price_cents")
+  isPublished Boolean  @default(true) @map("is_published")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  installations PlatformPluginInstallation[]
+  publications  PlatformPluginPublication[]
+  ratings       PlatformMarketplaceRating[]
+
+  @@map("platform_plugin_catalog")
+}
+
+model PlatformPluginInstallation {
+  id              String                           @id @map("id")
+  tenantId        String                           @map("tenant_id")
+  catalogPluginId String                           @map("catalog_plugin_id")
+  status          PlatformPluginInstallationStatus @default(PENDING)
+  installedAt     DateTime?                        @map("installed_at")
+  uninstalledAt   DateTime?                        @map("uninstalled_at")
+  createdAt       DateTime                         @default(now()) @map("created_at")
+  updatedAt       DateTime                         @updatedAt @map("updated_at")
+
+  tenant        PlatformTenant        @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  catalogPlugin PlatformPluginCatalog @relation(fields: [catalogPluginId], references: [id], onDelete: Cascade)
+
+  @@unique([tenantId, catalogPluginId])
+  @@index([tenantId, status])
+  @@map("platform_plugin_installation")
+}
+
+model PlatformLicense {
+  id           String              @id @map("id")
+  tenantId     String              @map("tenant_id")
+  licenseType  PlatformLicenseType @map("license_type")
+  entitlements Json                @default("{}")
+  validFrom    DateTime            @default(now()) @map("valid_from")
+  validUntil   DateTime?           @map("valid_until")
+  isActive     Boolean             @default(true) @map("is_active")
+  createdAt    DateTime            @default(now()) @map("created_at")
+  updatedAt    DateTime            @updatedAt @map("updated_at")
+
+  tenant PlatformTenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId, isActive])
+  @@map("platform_license")
+}
+
+model PlatformUsageMetering {
+  id         String                  @id @map("id")
+  tenantId   String                  @map("tenant_id")
+  metricType PlatformUsageMetricType @map("metric_type")
+  metricKey  String?                 @map("metric_key")
+  quantity   Int                     @default(1)
+  recordedAt DateTime                @default(now()) @map("recorded_at")
+  metadata   Json?
+
+  tenant PlatformTenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId, metricType, recordedAt])
+  @@map("platform_usage_metering")
+}
+
+enum PlatformPricingResourceType {
+  PLUGIN
+  FEATURE
+  API_CALL
+  ORCHESTRATION_RUN
+}
+
+enum PlatformUsageEventAction {
+  ALLOWED
+  BLOCKED
+  DEGRADED
+}
+
+enum PlatformRevenueRecordStatus {
+  OPEN
+  CLOSED
+  UNPAID
+}
+
+model PlatformPricingModel {
+  id             String                      @id @map("id")
+  resourceType   PlatformPricingResourceType @map("resource_type")
+  resourceKey    String                      @map("resource_key")
+  displayName    String                      @map("display_name")
+  unitPriceCents Int                         @default(0) @map("unit_price_cents")
+  billingUnit    String                      @default("per_unit") @map("billing_unit")
+  metadata       Json?
+  isActive       Boolean                     @default(true) @map("is_active")
+  createdAt      DateTime                    @default(now()) @map("created_at")
+  updatedAt      DateTime                    @updatedAt @map("updated_at")
+
+  @@unique([resourceType, resourceKey])
+  @@map("platform_pricing_model")
+}
+
+model PlatformUsageEvent {
+  id                String                   @id @map("id")
+  tenantId          String                   @map("tenant_id")
+  eventType         PlatformUsageMetricType  @map("event_type")
+  resourceKey       String?                  @map("resource_key")
+  quantity          Int                      @default(1)
+  costUnitsCents    Int                      @default(0) @map("cost_units_cents")
+  enforcementAction PlatformUsageEventAction @default(ALLOWED) @map("enforcement_action")
+  metadata          Json?
+  recordedAt        DateTime                 @default(now()) @map("recorded_at")
+
+  tenant PlatformTenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId, eventType, recordedAt])
+  @@index([tenantId, enforcementAction])
+  @@map("platform_usage_events")
+}
+
+model PlatformRevenueRecord {
+  id             String                      @id @map("id")
+  tenantId       String                      @map("tenant_id")
+  periodStart    DateTime                    @map("period_start")
+  periodEnd      DateTime                    @map("period_end")
+  totalCostCents Int                         @default(0) @map("total_cost_cents")
+  breakdown      Json                        @default("{}")
+  status         PlatformRevenueRecordStatus @default(OPEN)
+  createdAt      DateTime                    @default(now()) @map("created_at")
+  updatedAt      DateTime                    @updatedAt @map("updated_at")
+
+  tenant PlatformTenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId, periodStart])
+  @@map("platform_revenue_records")
+}
+
+enum PlatformDeveloperAccountStatus {
+  ACTIVE
+  SUSPENDED
+}
+
+enum PlatformPluginPublicationStatus {
+  DRAFT
+  REVIEW
+  PUBLISHED
+}
+
+enum PlatformPluginReviewStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model PlatformDeveloperAccount {
+  id             String                         @id @map("id")
+  slug           String                         @unique @map("slug")
+  displayName    String                         @map("display_name")
+  email          String?
+  linkedTenantId String?                        @map("linked_tenant_id")
+  status         PlatformDeveloperAccountStatus @default(ACTIVE)
+  metadata       Json?
+  createdAt      DateTime                       @default(now()) @map("created_at")
+  updatedAt      DateTime                       @updatedAt @map("updated_at")
+
+  linkedTenant PlatformTenant?            @relation("DeveloperLinkedTenant", fields: [linkedTenantId], references: [id], onDelete: SetNull)
+  publications PlatformPluginPublication[]
+
+  @@map("platform_developer_account")
+}
+
+model PlatformPluginPublication {
+  id                 String                          @id @map("id")
+  developerAccountId String                          @map("developer_account_id")
+  catalogPluginId    String?                         @map("catalog_plugin_id")
+  pluginKey          String                          @map("plugin_key")
+  name               String
+  description        String?
+  version            String
+  publicationStatus  PlatformPluginPublicationStatus @default(DRAFT) @map("publication_status")
+  compatibilityRules Json                            @default("{}") @map("compatibility_rules")
+  metadata           Json?
+  priceCents         Int                             @default(0) @map("price_cents")
+  submittedAt        DateTime?                       @map("submitted_at")
+  publishedAt        DateTime?                       @map("published_at")
+  createdAt          DateTime                        @default(now()) @map("created_at")
+  updatedAt          DateTime                        @updatedAt @map("updated_at")
+
+  developerAccount PlatformDeveloperAccount @relation(fields: [developerAccountId], references: [id], onDelete: Cascade)
+  catalogPlugin    PlatformPluginCatalog?   @relation(fields: [catalogPluginId], references: [id], onDelete: SetNull)
+  reviews          PlatformPluginReview[]
+
+  @@index([developerAccountId])
+  @@index([pluginKey, version])
+  @@index([publicationStatus])
+  @@map("platform_plugin_publication")
+}
+
+model PlatformPluginReview {
+  id             String                     @id @map("id")
+  publicationId  String                     @map("publication_id")
+  reviewerUserId String?                    @map("reviewer_user_id")
+  status         PlatformPluginReviewStatus @default(PENDING)
+  notes          String?
+  reviewedAt     DateTime?                  @map("reviewed_at")
+  createdAt      DateTime                   @default(now()) @map("created_at")
+
+  publication PlatformPluginPublication @relation(fields: [publicationId], references: [id], onDelete: Cascade)
+
+  @@index([publicationId])
+  @@index([status])
+  @@map("platform_plugin_review")
+}
+
+model PlatformMarketplaceRating {
+  id              String   @id @map("id")
+  catalogPluginId String   @map("catalog_plugin_id")
+  tenantId        String   @map("tenant_id")
+  rating          Int
+  reviewText      String?  @map("review_text")
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  catalogPlugin PlatformPluginCatalog @relation(fields: [catalogPluginId], references: [id], onDelete: Cascade)
+  tenant        PlatformTenant        @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@unique([catalogPluginId, tenantId])
+  @@index([catalogPluginId])
+  @@map("platform_marketplace_rating")
+}
+
+enum GlobalRegionStatus {
+  ACTIVE
+  INACTIVE
+  MAINTENANCE
+}
+
+enum GlobalClusterStatus {
+  HEALTHY
+  DEGRADED
+  OFFLINE
+}
+
+enum GlobalPolicyScope {
+  GLOBAL
+  REGION
+  TENANT
+}
+
+enum GlobalInsightSeverity {
+  INFO
+  WARNING
+  CRITICAL
+}
+
+enum GlobalOrchestrationTraceStatus {
+  PLANNED
+  RUNNING
+  COMPLETED
+  FAILED
+  FAILOVER
+}
+
+model GlobalRegionRegistry {
+  id          String             @id @map("id")
+  regionCode  String             @unique @map("region_code")
+  displayName String             @map("display_name")
+  endpoint    String?
+  latencyMs   Int                @default(0) @map("latency_ms")
+  status      GlobalRegionStatus @default(ACTIVE)
+  isPrimary   Boolean            @default(false) @map("is_primary")
+  metadata    Json?
+  createdAt   DateTime           @default(now()) @map("created_at")
+  updatedAt   DateTime           @updatedAt @map("updated_at")
+
+  clusters     GlobalClusterRegistry[]
+  sourceTraces GlobalOrchestrationTrace[] @relation("SourceRegion")
+  targetTraces GlobalOrchestrationTrace[] @relation("TargetRegion")
+
+  @@map("global_region_registry")
+}
+
+model GlobalClusterRegistry {
+  id             String              @id @map("id")
+  regionId       String              @map("region_id")
+  clusterKey     String              @map("cluster_key")
+  displayName    String              @map("display_name")
+  status         GlobalClusterStatus @default(HEALTHY)
+  tenantCapacity Int                 @default(100) @map("tenant_capacity")
+  activeTenants  Int                 @default(0) @map("active_tenants")
+  metadata       Json?
+  createdAt      DateTime            @default(now()) @map("created_at")
+  updatedAt      DateTime            @updatedAt @map("updated_at")
+
+  region GlobalRegionRegistry @relation(fields: [regionId], references: [id], onDelete: Cascade)
+
+  @@unique([regionId, clusterKey])
+  @@index([regionId])
+  @@map("global_cluster_registry")
+}
+
+model GlobalFederatedPolicy {
+  id             String            @id @map("id")
+  policyKey      String            @unique @map("policy_key")
+  scope          GlobalPolicyScope @default(GLOBAL)
+  targetRef      String?           @map("target_ref")
+  rules          Json              @default("{}")
+  priority       Int               @default(100)
+  overridesLocal Boolean           @default(false) @map("overrides_local")
+  isActive       Boolean           @default(true) @map("is_active")
+  createdAt      DateTime          @default(now()) @map("created_at")
+  updatedAt      DateTime          @updatedAt @map("updated_at")
+
+  @@map("global_federated_policy")
+}
+
+model GlobalCrossTenantInsight {
+  id                String                @id @map("id")
+  insightType       String                @map("insight_type")
+  patternKey        String                @map("pattern_key")
+  anonymizedMetrics Json                  @default("{}") @map("anonymized_metrics")
+  severity          GlobalInsightSeverity @default(INFO)
+  recommendation    String?
+  recordedAt        DateTime              @default(now()) @map("recorded_at")
+
+  @@index([insightType, recordedAt])
+  @@map("global_cross_tenant_insight")
+}
+
+model GlobalOrchestrationTrace {
+  id              String                         @id @map("id")
+  correlationId   String                         @map("correlation_id")
+  tenantSlug      String                         @map("tenant_slug")
+  sourceRegionId  String?                        @map("source_region_id")
+  targetRegionId  String?                        @map("target_region_id")
+  status          GlobalOrchestrationTraceStatus @default(PLANNED)
+  latencyMs       Int?                           @map("latency_ms")
+  failoverApplied Boolean                        @default(false) @map("failover_applied")
+  pipeline        Json                           @default("[]")
+  createdAt       DateTime                       @default(now()) @map("created_at")
+
+  sourceRegion GlobalRegionRegistry? @relation("SourceRegion", fields: [sourceRegionId], references: [id], onDelete: SetNull)
+  targetRegion GlobalRegionRegistry? @relation("TargetRegion", fields: [targetRegionId], references: [id], onDelete: SetNull)
+
+  @@index([correlationId])
+  @@index([tenantSlug, createdAt])
+  @@map("global_orchestration_trace")
+}
+
+enum IndustrialDeviceProtocol {
+  OPCUA
+  MODBUS
+  BACNET
+  IOT_REST
+}
+
+enum IndustrialDeviceStatus {
+  ACTIVE
+  INACTIVE
+  SIMULATED
+}
+
+enum IndustrialSystemType {
+  BMS
+  SCADA
+  PLC
+  IOT_GATEWAY
+}
+
+enum IndustrialSystemStatus {
+  ACTIVE
+  INACTIVE
+  SIMULATED
+}
+
+enum IndustrialMetricType {
+  TEMPERATURE
+  PRESSURE
+  STATUS
+  ALARM
+  TELEMETRY
+}
+
+model IndustrialSystemRegistry {
+  id         String                 @id @map("id")
+  tenantSlug String                 @map("tenant_slug")
+  systemKey  String                 @map("system_key")
+  name       String
+  systemType IndustrialSystemType   @map("system_type")
+  vendor     String?
+  endpoint   String?
+  status     IndustrialSystemStatus @default(SIMULATED)
+  metadata   Json?
+  createdAt  DateTime               @default(now()) @map("created_at")
+  updatedAt  DateTime               @updatedAt @map("updated_at")
+
+  devices IndustrialDevice[]
+  events  IndustrialTelemetryEvent[]
+
+  @@unique([tenantSlug, systemKey])
+  @@map("industrial_system_registry")
+}
+
+model IndustrialAsset {
+  id         String   @id @map("id")
+  tenantSlug String   @map("tenant_slug")
+  assetKey   String   @map("asset_key")
+  name       String
+  assetType  String   @default("EQUIPMENT") @map("asset_type")
+  siteRef    String?  @map("site_ref")
+  status     String   @default("ACTIVE")
+  metadata   Json?
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  devices IndustrialDevice[]
+
+  @@unique([tenantSlug, assetKey])
+  @@map("industrial_asset")
+}
+
+model IndustrialDevice {
+  id         String                   @id @map("id")
+  tenantSlug String                   @map("tenant_slug")
+  assetId    String?                  @map("asset_id")
+  systemId   String?                  @map("system_id")
+  deviceKey  String                   @map("device_key")
+  name       String
+  protocol   IndustrialDeviceProtocol
+  status     IndustrialDeviceStatus   @default(SIMULATED)
+  endpoint   String?
+  lastSeenAt DateTime?                @map("last_seen_at")
+  metadata   Json?
+  createdAt  DateTime                 @default(now()) @map("created_at")
+  updatedAt  DateTime                 @updatedAt @map("updated_at")
+
+  asset       IndustrialAsset?          @relation(fields: [assetId], references: [id], onDelete: SetNull)
+  system      IndustrialSystemRegistry? @relation(fields: [systemId], references: [id], onDelete: SetNull)
+  tagMappings IndustrialTagMapping[]
+  events      IndustrialTelemetryEvent[]
+
+  @@unique([tenantSlug, deviceKey])
+  @@index([systemId])
+  @@map("industrial_device")
+}
+
+model IndustrialTagMapping {
+  id             String   @id @map("id")
+  tenantSlug     String   @map("tenant_slug")
+  deviceId       String   @map("device_id")
+  tagKey         String   @map("tag_key")
+  sourceTag      String   @map("source_tag")
+  ufmsEntityType String   @default("POINT") @map("ufms_entity_type")
+  ufmsEntityId   String?  @map("ufms_entity_id")
+  unit           String?
+  scaleFactor    Float    @default(1) @map("scale_factor")
+  offset         Float    @default(0)
+  metadata       Json?
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  device IndustrialDevice           @relation(fields: [deviceId], references: [id], onDelete: Cascade)
+  events IndustrialTelemetryEvent[]
+
+  @@unique([deviceId, tagKey])
+  @@map("industrial_tag_mapping")
+}
+
+model IndustrialTelemetryEvent {
+  id              String                    @id @map("id")
+  tenantSlug      String                    @map("tenant_slug")
+  deviceId        String?                   @map("device_id")
+  tagMappingId    String?                   @map("tag_mapping_id")
+  systemId        String?                   @map("system_id")
+  eventType       String                    @default("telemetry") @map("event_type")
+  metricType      IndustrialMetricType      @default(TELEMETRY) @map("metric_type")
+  tagKey          String                    @map("tag_key")
+  value           String
+  unit            String?
+  normalizedValue Float?                    @map("normalized_value")
+  sourceProtocol  IndustrialDeviceProtocol? @map("source_protocol")
+  icpPayload      Json                      @default("{}") @map("icp_payload")
+  recordedAt      DateTime                  @default(now()) @map("recorded_at")
+  metadata        Json?
+
+  device     IndustrialDevice?         @relation(fields: [deviceId], references: [id], onDelete: SetNull)
+  tagMapping IndustrialTagMapping?     @relation(fields: [tagMappingId], references: [id], onDelete: SetNull)
+  system     IndustrialSystemRegistry? @relation(fields: [systemId], references: [id], onDelete: SetNull)
+
+  @@index([tenantSlug, recordedAt])
+  @@index([deviceId, recordedAt])
+  @@map("industrial_telemetry_event")
+}

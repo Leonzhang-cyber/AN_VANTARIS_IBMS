@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "v1",
+  "pointId": "point-supply-temp-001",
+  "deviceId": "device-controller-001",
+  "name": "Supply Temp",
+  "pointType": "temperature",
+  "status": "active"
+}
