@@ -1,0 +1,795 @@
+AN_VANTARIS_IBMS-backend/test/smoke/db_jwt_smoke.py:22:    "/api/system/menus",
+AN_VANTARIS_IBMS-backend/README.md:69:curl -H "Authorization: Bearer $(cat /tmp/ibms-local-smoke-token.txt)" http://127.0.0.1:5001/api/system/menus
+AN_VANTARIS_IBMS-backend/README.md:89:System read APIs (`GET /api/system/menus`, `/permissions`, `/versions`) require a disposable local MySQL instance.
+AN_VANTARIS_IBMS-backend/README.md:142:- GET `/api/system/menus`, `/api/system/permissions`, `/api/system/versions` returned 200 with valid dev JWT
+AN_VANTARIS_IBMS-backend/scripts/seed_permissions.py:56:    "system:read": "Read system configuration and menus",
+AN_VANTARIS_IBMS-backend/scripts/seed_permissions.py:57:    "system:write": "Write system standard fields, methods, and menus",
+AN_VANTARIS_IBMS-backend/.idea/.gitignore:3:/workspace.xml
+AN_VANTARIS_IBMS-backend/src/testMQTT/testws.html:176:            console.error('SSE 错误:', error);
+AN_VANTARIS_IBMS-backend/src/testMQTT/testws.html:218:                console.error('命令发送失败:', error);
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:12:LATEST_UMMS_PACKAGE_UCONSOLE_TAG = "umms-package-uconsole-stakeholder-entry-readiness-local-freeze-20260621"
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:14:PACKAGE_ENTRY_REGISTRY = "AN_VANTARIS_ONE/registries/umms-package-uconsole-stakeholder-entry-readiness.v1.json"
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:15:LOCAL_FREEZE_REGISTRY = "AN_VANTARIS_ONE/registries/umms-package-uconsole-stakeholder-entry-local-freeze.v1.json"
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_integration_pilot.py:10:from src.api.system import menu_api
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_integration_pilot.py:69:            with patch.object(menu_api, "db", fake_db):
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/policies.py:16:            raise OutputPolicyError("output directory must remain outside Git workspace")
+AN_VANTARIS_IBMS-backend/src/system/menu_models.py:1:# src/system/menu_models.py
+AN_VANTARIS_IBMS-backend/src/system/menu_models.py:32:    __tablename__ = 'sys_menu'
+AN_VANTARIS_IBMS-backend/src/system/menu_models.py:36:    menu_path = Column(String(200), nullable=False, unique=True, comment='菜单路径/唯一标识')
+AN_VANTARIS_IBMS-backend/src/system/menu_models.py:37:    menu_title = Column(String(100), nullable=False, comment='菜单标题')
+AN_VANTARIS_IBMS-backend/src/system/menu_models.py:38:    menu_icon = Column(String(50), nullable=True, comment='图标名称')
+AN_VANTARIS_IBMS-backend/src/system/menu_models.py:39:    menu_type = Column(String(20), default='menu', comment='菜单类型: menu-可点击跳转, container-仅作为容器不可点击')
+AN_VANTARIS_IBMS-backend/src/system/menu_models.py:56:    __tablename__ = 'sys_version_menu'
+AN_VANTARIS_IBMS-backend/src/system/menu_models.py:60:    menu_id = Column(BigInteger, nullable=False, comment='菜单ID')
+AN_VANTARIS_IBMS-backend/src/system/menu_models.py:61:    menu_path = Column(String(200), nullable=False, comment='菜单路径（冗余字段）')
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:1:# src/system/menu_dao.py
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:5:from src.system.menu_models import SysVersion, SysMenu, SysVersionMenu
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:56:        menu = SysMenu(**kwargs)
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:57:        session.add(menu)
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:59:        return menu
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:62:    def update(session: Session, menu: SysMenu, **kwargs) -> SysMenu:
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:64:            if hasattr(menu, key) and value is not None:
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:65:                setattr(menu, key, value)
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:67:        return menu
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:70:    def delete(session: Session, menu: SysMenu):
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:71:        session.delete(menu)
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:75:    def get_by_id(session: Session, menu_id: int) -> Optional[SysMenu]:
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:76:        return session.query(SysMenu).filter(SysMenu.id == menu_id).first()
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:79:    def get_by_path(session: Session, menu_path: str) -> Optional[SysMenu]:
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:80:        return session.query(SysMenu).filter(SysMenu.menu_path == menu_path).first()
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:95:    def set_visible(session: Session, version_code: str, menu_id: int, is_visible: bool,
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:98:            and_(SysVersionMenu.version_code == version_code, SysVersionMenu.menu_id == menu_id)
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:108:        menu = session.query(SysMenu).filter(SysMenu.id == menu_id).first()
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:109:        if not menu:
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:110:            raise ValueError(f"Menu {menu_id} not found")
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:114:            menu_id=menu_id,
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:115:            menu_path=menu.menu_path,
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:131:    def get_visible_menus(session: Session, version_code: str) -> List[SysMenu]:
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:135:                SysMenu.id == SysVersionMenu.menu_id,
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:142:    def init_version_menus(session: Session, version_code: str) -> int:
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:143:        all_menus = session.query(SysMenu).all()
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:145:        for menu in all_menus:
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:147:                and_(SysVersionMenu.version_code == version_code, SysVersionMenu.menu_id == menu.id)
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:152:                    menu_id=menu.id,
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:153:                    menu_path=menu.menu_path,
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:162:    def batch_update(session: Session, version_code: str, menus: List[Dict]) -> int:
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:164:        for menu_config in menus:
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:165:            menu_id = menu_config.get('menu_id')
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:166:            is_visible = menu_config.get('is_visible', True)
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:167:            sort_order = menu_config.get('sort_order')
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:170:                and_(SysVersionMenu.version_code == version_code, SysVersionMenu.menu_id == menu_id)
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:178:                menu = session.query(SysMenu).filter(SysMenu.id == menu_id).first()
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:179:                if menu:
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:182:                        menu_id=menu_id,
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:183:                        menu_path=menu.menu_path,
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:1:# src/system/menu_service.py
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:7:from src.system.menu_dao import VersionDAO, MenuDAO, VersionMenuDAO
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:8:from src.system.menu_models import SysVersion, SysMenu, SysVersionMenu
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:17:    def build_menu_tree(menus: List[SysMenu]) -> List[Dict]:
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:20:            for menu in menus:
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:21:                if menu.parent_id == parent_id:
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:23:                        'index': menu.menu_path,
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:24:                        'title': menu.menu_title,
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:25:                        'icon': menu.menu_icon
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:27:                    children = build(menu.id)
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:35:    def build_menu_tree_from_raw(menus: List) -> List[Dict]:
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:38:            for menu in menus:
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:39:                if menu[1] == parent_id:
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:41:                        'index': menu[2],
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:42:                        'title': menu[3],
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:43:                        'icon': menu[4]
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:45:                    children = build_tree(menu[0])
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:53:    def get_version_menu_config(session: Session, version_code: str) -> List[Dict]:
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:54:        menus = VersionMenuDAO.get_visible_menus(session, version_code)
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:55:        return MenuService.build_menu_tree(menus)
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:58:    def get_version_with_menus(session: Session, version_code: str) -> Optional[Dict]:
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:63:        menus = VersionMenuDAO.get_by_version(session, version_code, only_visible=False)
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:74:            'menus': [
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:76:                    'menu_id': vm.menu_id,
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:77:                    'menu_path': vm.menu_path,
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:81:                for vm in menus
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:86:    def copy_menu_config(session: Session, from_version: str, to_version: str) -> int:
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:87:        source_menus = VersionMenuDAO.get_by_version(session, from_version, only_visible=False)
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:89:        for vm in source_menus:
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:90:            VersionMenuDAO.set_visible(session, to_version, vm.menu_id, vm.is_visible == 1, vm.sort_order)
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:96:    def get_menu_tree(session: Session) -> List[Dict]:
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:97:        menus = MenuDAO.get_all(session)
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:99:        menu_dict = {}
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:100:        for menu in menus:
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:101:            menu_dict[menu.id] = {
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:102:                'id': menu.id,
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:103:                'parent_id': menu.parent_id,
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:104:                'menu_path': menu.menu_path,
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:105:                'menu_title': menu.menu_title,
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:106:                'menu_icon': menu.menu_icon,
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:107:                'menu_type': menu.menu_type,
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:108:                'has_children': menu.has_children == 1,
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:109:                'redirect_path': menu.redirect_path,
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:110:                'sort_order': menu.sort_order,
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:111:                'is_visible': menu.is_visible == 1,
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:116:        for menu in menus:
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:117:            if menu.parent_id == 0:
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:118:                roots.append(menu_dict[menu.id])
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:120:                if menu.parent_id in menu_dict:
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:121:                    menu_dict[menu.parent_id]['children'].append(menu_dict[menu.id])
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:125:    def get_active_version_menu_config(session: Session) -> Optional[Dict]:
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:135:        menus = session.execute(
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:137:                 SELECT m.id, m.parent_id, m.menu_path, m.menu_title, m.menu_icon,
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:138:                        m.menu_type, m.redirect_path, COALESCE(vm.sort_order, m.sort_order) as sort_order
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:139:                 FROM sys_menu m
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:140:                 JOIN sys_version_menu vm ON m.id = vm.menu_id AND vm.version_code = :version_code
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:147:        config = MenuService.build_menu_tree_from_raw(menus)
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:151:            'menu_config': config
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:171:        menus = session.execute(
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:173:                 SELECT m.id, m.parent_id, m.menu_path, m.menu_title, m.menu_icon,
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:174:                        m.menu_type, m.redirect_path, COALESCE(vm.sort_order, m.sort_order) as sort_order
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:175:                 FROM sys_menu m
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:176:                 JOIN sys_version_menu vm ON m.id = vm.menu_id AND vm.version_code = :version_code
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:183:        config = MenuService.build_menu_tree_from_raw(menus)
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:195:            'menu_config': config
+AN_VANTARIS_IBMS-backend/src/common/utils/local_smoke.py:1:"""Local DB smoke helpers for read-only system routes (menus, permissions, versions).
+AN_VANTARIS_IBMS-backend/src/common/utils/local_smoke.py:18:        "menu_path": "/smoke/dashboard",
+AN_VANTARIS_IBMS-backend/src/common/utils/local_smoke.py:19:        "menu_title": "Smoke Dashboard",
+AN_VANTARIS_IBMS-backend/src/common/utils/local_smoke.py:20:        "menu_icon": "dashboard",
+AN_VANTARIS_IBMS-backend/src/common/utils/local_smoke.py:21:        "menu_type": "menu",
+AN_VANTARIS_IBMS-backend/src/common/utils/local_smoke.py:100:def local_smoke_menus_response():
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:183:                    related_module_ids=["reports", "uconsole", "ucde"],
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:234:                    reference_id="evref-uconsole-score-foundation",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:235:                    evidence_id="uconsole-score-foundation",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:274:            "evidenceId": "uconsole-readiness-registry",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:276:            "evidenceName": "UConsole Registry Foundation Snapshot",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:280:            "sourceModuleId": "uconsole",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:281:            "sourceRecordId": "uconsole-readiness-registry",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:288:                    reference_id="src-uconsole-registry",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:289:                    source_module_id="uconsole",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:290:                    source_record_id="uconsole-readiness-registry",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:298:                    reference_id="evref-uconsole-score-foundation",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:299:                    evidence_id="uconsole-score-foundation",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:308:                    source_module_id="uconsole",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:316:                    related_module_ids=["uconsole", "reports", "ucde"],
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:320:                path_id="trace-uconsole-readiness-registry",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:321:                source_module_id="uconsole",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:322:                source_record_id="uconsole-readiness-registry",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:323:                evidence_id="uconsole-readiness-registry",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:324:                source_reference_id="src-uconsole-registry",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:325:                evidence_reference_id="evref-uconsole-score-foundation",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:326:                verification_reference_id="verify-uconsole-readiness-registry",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:328:            "tags": ["uconsole", "registry", "foundation"],
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:335:            "evidenceId": "uconsole-score-foundation",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:341:            "sourceModuleId": "uconsole",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:349:                    reference_id="src-uconsole-score",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:350:                    source_module_id="uconsole",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:359:                    reference_id="evref-uconsole-readiness-registry",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:360:                    evidence_id="uconsole-readiness-registry",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:369:                    source_module_id="uconsole",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:377:                    related_module_ids=["uconsole", "ucde"],
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:381:                path_id="trace-uconsole-score-foundation",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:382:                source_module_id="uconsole",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:384:                evidence_id="uconsole-score-foundation",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:385:                source_reference_id="src-uconsole-score",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:386:                evidence_reference_id="evref-uconsole-readiness-registry",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:387:                verification_reference_id="verify-uconsole-score-foundation",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:389:            "tags": ["uconsole", "score", "foundation"],
+AN_VANTARIS_IBMS-backend/src/api/prod_ga/foundation_packages_provider.py:3:This provider reads the frozen R2 console-entry registry and exposes normalized
+AN_VANTARIS_IBMS-backend/src/api/prod_ga/foundation_packages_provider.py:6:write to databases, or mutate package/source workspaces.
+AN_VANTARIS_IBMS-backend/src/api/prod_ga/foundation_packages_provider.py:16:R2_REGISTRY = "AN_VANTARIS_ONE/registries/prod-ga-foundation-package-console-entry.v1.json"
+AN_VANTARIS_IBMS-backend/src/api/prod_ga/foundation_packages_provider.py:90:        "consoleVisible": bool(package["consoleVisible"]),
+AN_VANTARIS_IBMS-backend/src/api/__init__.py:9:from .system import system_api, menu_api
+AN_VANTARIS_IBMS-backend/src/api/__init__.py:12:from .console import console_api
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:1:# src/api/system/menu_api.py
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:5:from src.system.menu_service import MenuService
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:12:    local_smoke_menus_response,
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:164:@api_bp.route('/system/menu/config/<version_code>', methods=['GET'])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:166:def get_menu_config(version_code):
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:169:        result = service.get_version_menu_config(db.session, version_code)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:175:@api_bp.route('/system/menu/active', methods=['GET'])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:177:def get_active_version_menu_config():
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:180:        result = service.get_active_version_menu_config(db.session)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:204:@api_bp.route('/system/menus', methods=['GET'])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:206:def get_menu_tree():
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:208:        return local_smoke_menus_response()
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:212:        tree = service.get_menu_tree(db.session)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:218:@api_bp.route('/system/menus-add', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:220:def create_menu():
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:222:    if not data.get('menu_path') or not data.get('menu_title'):
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:223:        return Result.error('MISSING_FIELDS', 'menu_path and menu_title are required', 400)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:227:            text("SELECT id FROM sys_menu WHERE menu_path = :path"),
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:228:            {"path": data['menu_path']}
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:231:            return Result.error('DUPLICATE', f"Menu path {data['menu_path']} already exists", 409)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:234:                INSERT INTO sys_menu (parent_id, menu_path, menu_title, menu_icon, menu_type, has_children, redirect_path, sort_order, is_visible)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:235:                VALUES (:parent_id, :menu_path, :menu_title, :menu_icon, :menu_type, :has_children, :redirect_path, :sort_order, :is_visible)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:239:                "menu_path": data['menu_path'],
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:240:                "menu_title": data['menu_title'],
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:241:                "menu_icon": data.get('menu_icon'),
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:242:                "menu_type": data.get('menu_type', 'menu'),
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:251:            text("SELECT id FROM sys_menu WHERE menu_path = :path"),
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:252:            {"path": data['menu_path']}
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:260:@api_bp.route('/system/menus-update/<int:menu_id>', methods=['PUT'])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:262:def update_menu(menu_id):
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:267:            text("SELECT id FROM sys_menu WHERE id = :id"),
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:268:            {"id": menu_id}
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:271:            return Result.error('NOT_FOUND', f'Menu {menu_id} not found', 404)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:273:        params = {"id": menu_id}
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:277:        if 'menu_title' in data:
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:278:            update_fields.append("menu_title = :menu_title")
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:279:            params["menu_title"] = data['menu_title']
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:280:        if 'menu_icon' in data:
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:281:            update_fields.append("menu_icon = :menu_icon")
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:282:            params["menu_icon"] = data['menu_icon']
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:283:        if 'menu_type' in data:
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:284:            update_fields.append("menu_type = :menu_type")
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:285:            params["menu_type"] = data['menu_type']
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:299:            query = f"UPDATE sys_menu SET {', '.join(update_fields)} WHERE id = :id"
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:308:@api_bp.route('/system/menus-delete/<int:menu_id>', methods=['DELETE'])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:310:def delete_menu(menu_id):
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:314:            text("SELECT id FROM sys_menu WHERE id = :id"),
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:315:            {"id": menu_id}
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:318:            return Result.error('NOT_FOUND', f'Menu {menu_id} not found', 404)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:319:        db.session.execute(text("DELETE FROM sys_menu WHERE parent_id = :parent_id"), {"parent_id": menu_id})
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:320:        db.session.execute(text("DELETE FROM sys_menu WHERE id = :id"), {"id": menu_id})
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:330:@api_bp.route('/system/menus/batch-sort', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:332:def batch_update_menu_sort():
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:334:    menus = data.get('menus', [])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:338:    print(f"收到排序数据: {menus}")
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:339:    if not menus:
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:340:        return Result.error('INVALID_REQUEST', 'menus is required', 400)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:344:        for menu in menus:
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:345:            # 支持两种格式：menu_id 或 menu_path
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:346:            menu_id = menu.get('id')
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:347:            menu_path = menu.get('menu_path')
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:348:            sort_order = menu.get('sort_order')
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:350:            # 如果没有提供 id，通过 menu_path 查询
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:351:            if menu_id is None and menu_path is not None:
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:353:                    text("SELECT id FROM sys_menu WHERE menu_path = :path"),
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:354:                    {"path": menu_path}
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:357:                    menu_id = result[0]
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:358:                    print(f"通过路径 {menu_path} 找到菜单 ID: {menu_id}")
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:360:            if menu_id is not None and sort_order is not None:
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:362:                    text("UPDATE sys_menu SET sort_order = :sort_order WHERE id = :id"),
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:363:                    {"id": menu_id, "sort_order": sort_order}
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:366:                print(f"更新菜单 {menu_id} 排序为 {sort_order}")
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:375:@api_bp.route('/system/version-menus/<version_code>', methods=['GET'])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:377:def get_version_menus(version_code):
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:380:        result = service.get_version_with_menus(db.session, version_code)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:388:@api_bp.route('/system/version-menus/<version_code>/batch', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:390:def batch_update_version_menus(version_code):
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:392:    menus = data.get('menus', [])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:393:    if not menus:
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:394:        return Result.error('INVALID_REQUEST', 'menus is required', 400)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:404:        for menu_config in menus:
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:405:            menu_path = menu_config.get('menu_path')
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:406:            is_visible = menu_config.get('is_visible', True)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:407:            sort_order = menu_config.get('sort_order')
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:408:            if menu_path:
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:409:                menu = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:410:                    text("SELECT id FROM sys_menu WHERE menu_path = :path"),
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:411:                    {"path": menu_path}
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:413:                if menu:
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:416:                        "menu_id": menu[0],
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:417:                        "menu_path": menu_path,
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:423:                            UPDATE sys_version_menu
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:425:                            WHERE version_code = :version_code AND menu_id = :menu_id
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:432:                                INSERT INTO sys_version_menu (version_code, menu_id, menu_path, is_visible, sort_order)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:433:                                VALUES (:version_code, :menu_id, :menu_path, :is_visible, :sort_order)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:447:@api_bp.route('/system/version-menus/<version_code>/incremental', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:449:def incremental_update_version_menus(version_code):
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:486:                menu_query = text(f"""
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:487:                    SELECT menu_path, id 
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:488:                    FROM sys_menu 
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:489:                    WHERE menu_path IN ({placeholders})
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:491:                batch_result = db.session.execute(menu_query, params).fetchall()
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:499:            for menu_path in add_list:
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:500:                menu_id = path_to_id.get(menu_path)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:501:                if menu_id:
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:504:                        'menu_id': menu_id,
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:505:                        'menu_path': menu_path,
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:510:                            UPDATE sys_version_menu
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:512:                            WHERE version_code = :version_code AND menu_id = :menu_id
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:519:                                INSERT INTO sys_version_menu (version_code, menu_id, menu_path, is_visible)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:520:                                VALUES (:version_code, :menu_id, :menu_path, :is_visible)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:540:                        UPDATE sys_version_menu 
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:543:                          AND menu_path IN ({placeholders})
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:556:            'message': f'Updated {added_count} menus added, {removed_count} menus removed',
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:567:@api_bp.route('/system/version-menus/<version_code>/diff', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:569:def diff_update_version_menus(version_code):
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:574:            {"menu_path": "/home/system-overview", "is_visible": true},
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:575:            {"menu_path": "/home/kpi-dashboard", "is_visible": false}
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:598:            menu_path = change.get('menu_path')
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:601:            if not menu_path:
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:604:            menu = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:605:                text("SELECT id, menu_path FROM sys_menu WHERE menu_path = :path"),
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:606:                {"path": menu_path}
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:609:            if menu:
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:612:                    "menu_id": menu[0],
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:613:                    "menu_path": menu[1],
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:618:                        UPDATE sys_version_menu
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:620:                        WHERE version_code = :version_code AND menu_id = :menu_id
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:627:                            INSERT INTO sys_version_menu (version_code, menu_id, menu_path, is_visible)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:628:                            VALUES (:version_code, :menu_id, :menu_path, :is_visible)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:644:@api_bp.route('/system/menu/init-data', methods=['GET'])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:679:        version_menu_rows = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:681:                SELECT version_code, menu_path
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:682:                FROM sys_version_menu
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:684:                ORDER BY version_code, menu_path
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:688:        for row in version_menu_rows:
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:693:        version_menus = {}
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:711:            version_menus[version_code] = visible_paths_by_version.get(version_code, [])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:717:        menu_query = text("""
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:720:                                 menu_path,
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:721:                                 menu_title,
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:722:                                 menu_icon,
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:723:                                 menu_type,
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:728:                          FROM sys_menu
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:733:        menu_result = db.session.execute(menu_query).fetchall()
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:737:        menu_map = {}
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:740:        for row in menu_result:
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:741:            menu = {
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:744:                'menu_path': row[2],
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:745:                'menu_title': row[3],
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:746:                'menu_icon': row[4],
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:747:                'menu_type': row[5],
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:754:            menu_map[row[0]] = menu
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:759:            children_map[parent_id].append(menu)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:763:            if parent_id != 0 and parent_id in menu_map:
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:764:                menu_map[parent_id]['children'] = children
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:767:        root_menus = children_map.get(0, [])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:770:        def sort_menu(node):
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:774:                    sort_menu(child)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:777:        root_menus.sort(key=lambda x: (x['sort_order'], x['id']))
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:778:        for menu in root_menus:
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:779:            sort_menu(menu)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:785:                active_config = service.get_active_version_menu_config(db.session)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:792:                    'menu_config': []
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:796:        print(f"✅ 初始化完成 - 版本: {len(versions)}, 菜单: {len(menu_map)}, 耗时: {elapsed_time:.2f}ms")
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:801:            'menu_tree': root_menus,
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:802:            'version_menus': version_menus
+AN_VANTARIS_IBMS-backend/src/api/airport_ga_readonly/airport_ga_readonly_api.py:194:@api_bp.route("/v1/one/airport/console/overview", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/airport_ga_readonly/airport_ga_readonly_api.py:199:@api_bp.route("/v1/one/airport/console/systems-integration-health", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/airport_ga_readonly/airport_ga_readonly_api.py:204:@api_bp.route("/v1/one/airport/console/assets-topology", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/airport_ga_readonly/airport_ga_readonly_api.py:209:@api_bp.route("/v1/one/airport/console/alarms-events", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/airport_ga_readonly/airport_ga_readonly_api.py:214:@api_bp.route("/v1/one/airport/console/fault-cases", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/airport_ga_readonly/airport_ga_readonly_api.py:219:@api_bp.route("/v1/one/airport/console/maintenance-work-orders", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/airport_ga_readonly/airport_ga_readonly_api.py:224:@api_bp.route("/v1/one/airport/console/evidence-investigation", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/airport_ga_readonly/airport_ga_readonly_api.py:229:@api_bp.route("/v1/one/airport/console/reports", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:1:"""UConsole platform operations API skeleton."""
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:9:from src.console.console_service import ConsoleService
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:10:from src.console.module_content_dashboard import ModuleContentDashboardService
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:11:from src.console.module_package_service import ModulePackageService
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:19:@api_bp.route("/v1/console/health", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:20:def console_health():
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:21:    return Result.success(data=_service.get_console_health())
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:24:@api_bp.route("/v1/console/modules", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:25:def console_modules():
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:29:@api_bp.route("/v1/console/operations/summary", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:30:def console_operations_summary():
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:34:@api_bp.route("/v1/console/reports/readiness", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:35:def console_reports_readiness():
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:39:@api_bp.route("/v1/console/readiness/registry", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:40:def console_readiness_registry():
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:44:@api_bp.route("/v1/console/modules/<string:module_id>/health", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:45:def console_module_health(module_id: str):
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:52:@api_bp.route("/v1/console/modules/health", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:53:def console_modules_health():
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:57:@api_bp.route("/v1/console/readiness/summary", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:58:def console_readiness_summary():
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:62:@api_bp.route("/v1/console/readiness/score", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:63:def console_readiness_score():
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:67:@api_bp.route("/v1/console/navigation/modules", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:68:def console_navigation_modules():
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:72:@api_bp.route("/v1/console/packages/health", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:73:def console_package_health():
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:77:@api_bp.route("/v1/console/packages", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:78:def console_packages():
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:92:@api_bp.route("/v1/console/packages/summary", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:93:def console_packages_summary():
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:97:@api_bp.route("/v1/console/packages/entries", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:98:def console_packages_entries():
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:102:@api_bp.route("/v1/console/packages/locked", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:103:def console_packages_locked():
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:107:@api_bp.route("/v1/console/packages/patch-readiness", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:108:def console_packages_patch_readiness():
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:112:@api_bp.route("/v1/console/packages/roles", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:113:def console_package_roles():
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:117:@api_bp.route("/v1/console/packages/roles/summary", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:118:def console_package_roles_summary():
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:122:@api_bp.route("/v1/console/packages/roles/<string:role>", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:123:def console_package_role_visibility(role: str):
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:130:@api_bp.route("/v1/console/packages/roles/<string:role>/entries", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:131:def console_package_role_entries(role: str):
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:138:@api_bp.route("/v1/console/packages/roles/<string:role>/menu-preview", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:139:def console_package_role_menu_preview(role: str):
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:140:    data = _package_service.get_role_menu_preview(role)
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:146:@api_bp.route("/v1/console/packages/<string:package_id_or_module_id>", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:147:def console_package_detail(package_id_or_module_id: str):
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:152:@api_bp.route("/v1/console/content/dashboard", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:153:def console_content_dashboard():
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:158:@api_bp.route("/v1/console/content/cards", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:159:def console_content_cards():
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:164:@api_bp.route("/v1/console/content/summary", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:165:def console_content_summary():
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:170:@api_bp.route("/v1/console/content/modules/<string:module_id>", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/console/console_api.py:171:def console_content_module_detail(module_id: str):
+AN_VANTARIS_IBMS-backend/src/assets/assets_provider.py:141:            asset_code="FLOOR-L1",
+AN_VANTARIS_IBMS-backend/src/console/module_role_visibility.py:1:"""UConsole role visibility policy skeleton (read-only local preview)."""
+AN_VANTARIS_IBMS-backend/src/console/module_role_visibility.py:198:def get_role_menu_preview(role: str, packages: List[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
+AN_VANTARIS_IBMS-backend/src/console/module_role_visibility.py:207:        "menuPreviewMode": "local-skeleton-role-menu-preview",
+AN_VANTARIS_IBMS-backend/src/console/module_role_visibility.py:251:    menu_preview = get_role_menu_preview(role_key, packages or []) or {}
+AN_VANTARIS_IBMS-backend/src/console/module_role_visibility.py:267:        "menuPreview": menu_preview.get("items", []),
+AN_VANTARIS_IBMS-backend/src/console/console_service.py:1:"""UConsole read-only platform operations service."""
+AN_VANTARIS_IBMS-backend/src/console/console_service.py:7:from src.console.module_readiness_registry import (
+AN_VANTARIS_IBMS-backend/src/console/console_service.py:13:from src.console.platform_readiness_score import calculate_platform_readiness_score
+AN_VANTARIS_IBMS-backend/src/console/console_service.py:17:    MODULE_ID = "uconsole"
+AN_VANTARIS_IBMS-backend/src/console/console_service.py:18:    MODULE_NAME = "UConsole / Platform Operations Dashboard"
+AN_VANTARIS_IBMS-backend/src/console/console_service.py:23:    def get_console_health(self) -> Dict[str, Any]:
+AN_VANTARIS_IBMS-backend/src/console/console_service.py:77:                "UConsole r2 foundation",
+AN_VANTARIS_IBMS-backend/src/console/console_service.py:109:            "menuReady": bool(reports.get("route")),
+AN_VANTARIS_IBMS-backend/src/console/console_service.py:152:            elif module_id == "uconsole":
+AN_VANTARIS_IBMS-backend/src/console/console_service.py:157:                boundary_note = "No runtime integration is performed from UConsole."
+AN_VANTARIS_IBMS-backend/src/console/console_service.py:171:                    boundary_note = "No runtime integration is performed from UConsole."
+AN_VANTARIS_IBMS-backend/src/console/module_package_service.py:1:"""UConsole module package center service (read-only local skeleton)."""
+AN_VANTARIS_IBMS-backend/src/console/module_package_service.py:7:from src.console.module_package_registry import (
+AN_VANTARIS_IBMS-backend/src/console/module_package_service.py:10:    get_engineer_workspace_entries,
+AN_VANTARIS_IBMS-backend/src/console/module_package_service.py:17:from src.console.module_role_visibility import (
+AN_VANTARIS_IBMS-backend/src/console/module_package_service.py:19:    get_role_menu_preview,
+AN_VANTARIS_IBMS-backend/src/console/module_package_service.py:26:    MODULE_ID = "uconsole-package-center"
+AN_VANTARIS_IBMS-backend/src/console/module_package_service.py:27:    MODULE_NAME = "UConsole Module Package Center"
+AN_VANTARIS_IBMS-backend/src/console/module_package_service.py:81:            "engineerWorkspace": get_engineer_workspace_entries(),
+AN_VANTARIS_IBMS-backend/src/console/module_package_service.py:124:    def get_role_menu_preview(self, role: str) -> Optional[Dict[str, Any]]:
+AN_VANTARIS_IBMS-backend/src/console/module_package_service.py:126:        return get_role_menu_preview(role, packages)
+AN_VANTARIS_IBMS-backend/src/console/__init__.py:1:"""UConsole platform operations foundation package."""
+AN_VANTARIS_IBMS-backend/src/console/__init__.py:3:from src.console.console_service import ConsoleService
+AN_VANTARIS_IBMS-backend/src/console/platform_readiness_score.py:160:            "UConsole module readiness registry foundation is available.",
+AN_VANTARIS_IBMS-backend/src/console/platform_readiness_score.py:170:            "Continue UConsole navigation and module health hardening.",
+AN_VANTARIS_IBMS-backend/src/console/module_readiness_registry.py:1:"""UConsole module readiness registry (read-only foundation)."""
+AN_VANTARIS_IBMS-backend/src/console/module_readiness_registry.py:137:            dependencies=["uconsole", "platform-menu", "reports-api"],
+AN_VANTARIS_IBMS-backend/src/console/module_readiness_registry.py:145:            module_id="uconsole",
+AN_VANTARIS_IBMS-backend/src/console/module_readiness_registry.py:146:            module_name="UConsole / Platform Operations Dashboard",
+AN_VANTARIS_IBMS-backend/src/console/module_readiness_registry.py:149:            route="/console/operations",
+AN_VANTARIS_IBMS-backend/src/console/module_readiness_registry.py:165:                "backend": _health_item("foundation", "Backend", "Read-only console service and registry endpoints available.", 72),
+AN_VANTARIS_IBMS-backend/src/console/module_readiness_registry.py:167:                "audit": _health_item("limited", "Audit", "No dedicated console audit persistence in this stage.", 50),
+AN_VANTARIS_IBMS-backend/src/console/module_readiness_registry.py:178:            dependencies=["router", "menu", "console-api"],
+AN_VANTARIS_IBMS-backend/src/console/module_readiness_registry.py:180:                "Freeze UConsole foundation.",
+AN_VANTARIS_IBMS-backend/src/console/module_readiness_registry.py:225:            dependencies=["local-ucde-provider", "uconsole", "reports-reference-only"],
+AN_VANTARIS_IBMS-backend/src/console/module_readiness_registry.py:281:            dependencies=["local-uesg-provider", "uconsole"],
+AN_VANTARIS_IBMS-backend/src/console/module_readiness_registry.py:335:            dependencies=["local-umms-provider", "uconsole"],
+AN_VANTARIS_IBMS-backend/src/console/module_readiness_registry.py:384:            dependencies=["uconsole", "local-uedge-provider", "package-center"],
+AN_VANTARIS_IBMS-backend/src/console/module_readiness_registry.py:433:            dependencies=["local-assets-provider", "router", "menu", "console-registry"],
+AN_VANTARIS_IBMS-backend/src/console/module_readiness_registry.py:480:            boundary_notes=["Separate shared foundation boundary; no runtime call from UConsole."],
+AN_VANTARIS_IBMS-backend/src/console/module_readiness_registry.py:514:            boundary_notes=["Separate shared foundation boundary; no runtime call from UConsole."],
+AN_VANTARIS_IBMS-backend/src/console/module_package_registry.py:1:"""UConsole module package registry (read-only local skeleton)."""
+AN_VANTARIS_IBMS-backend/src/console/module_package_registry.py:124:        route="/console/operations",
+AN_VANTARIS_IBMS-backend/src/console/module_package_registry.py:226:                locked_reason="Engineer workspace not installed",
+AN_VANTARIS_IBMS-backend/src/console/module_package_registry.py:267:                locked_reason="Engineer workspace not installed",
+AN_VANTARIS_IBMS-backend/src/console/module_package_registry.py:308:                locked_reason="Engineer workspace not installed",
+AN_VANTARIS_IBMS-backend/src/console/module_package_registry.py:349:                locked_reason="Engineer workspace not installed",
+AN_VANTARIS_IBMS-backend/src/console/module_package_registry.py:390:                locked_reason="Engineer workspace not installed",
+AN_VANTARIS_IBMS-backend/src/console/module_package_registry.py:533:                route="/nexus-ai/workspace",
+AN_VANTARIS_IBMS-backend/src/console/module_package_registry.py:673:def get_engineer_workspace_entries() -> List[Dict[str, Any]]:
+AN_VANTARIS_IBMS-backend/src/console/module_package_registry.py:696:                    route="/console/operations",
+AN_VANTARIS_IBMS-backend/src/console/module_package_registry.py:711:                    route="/console/operations",
+AN_VANTARIS_IBMS-backend/src/console/module_content_dashboard.py:1:"""UConsole module content dashboard service (read-only local skeleton)."""
+AN_VANTARIS_IBMS-backend/src/console/module_content_dashboard.py:8:from src.console.console_service import ConsoleService
+AN_VANTARIS_IBMS-backend/src/console/module_content_dashboard.py:9:from src.console.module_package_registry import get_engineer_workspace_entries, list_module_packages
+AN_VANTARIS_IBMS-backend/src/console/module_content_dashboard.py:10:from src.console.module_package_service import ModulePackageService
+AN_VANTARIS_IBMS-backend/src/console/module_content_dashboard.py:11:from src.console.module_role_visibility import get_role_entry_view
+AN_VANTARIS_IBMS-backend/src/console/module_content_dashboard.py:91:    """Aggregates read-only module content summaries for UConsole."""
+AN_VANTARIS_IBMS-backend/src/console/module_content_dashboard.py:427:                "customerEntry": {"route": "/console/operations", "entryMode": "customer-application", "visible": True, "enabled": True},
+AN_VANTARIS_IBMS-backend/src/console/module_content_dashboard.py:428:                "engineerEntry": {"route": "/console/operations", "entryMode": "engineer-diagnostics", "visible": True, "enabled": False},
+AN_VANTARIS_IBMS-backend/src/console/module_content_dashboard.py:429:                "adminEntry": {"route": "/console/operations", "entryMode": "admin-package-center", "visible": True, "enabled": True},
+AN_VANTARIS_IBMS-backend/src/console/module_content_dashboard.py:471:                "adminEntry": {"route": "/console/operations", "entryMode": "admin-package-center", "visible": True, "enabled": True},
+AN_VANTARIS_IBMS-backend/src/console/module_content_dashboard.py:492:            for row in get_engineer_workspace_entries()
+AN_VANTARIS_IBMS-backend/src/console/module_content_dashboard.py:504:            "route": "/console/operations",
+AN_VANTARIS_IBMS-backend/src/console/module_content_dashboard.py:507:                "workspacePlaceholders": len(placeholders),
+AN_VANTARIS_IBMS-backend/src/console/module_content_dashboard.py:513:            "highlights": ["Engineer workspace placeholders are visible as context-only entries."],
+AN_VANTARIS_ONE/operations_console_handoff_gate/enums.py:6:CONTRACT_VERSION = "operations-console-handoff-gate.v1"
+AN_VANTARIS_ONE/operations_console_handoff_gate/models.py:200:def build_operations_console_handoff_gate(
+AN_VANTARIS_ONE/operations_console_handoff_gate/__init__.py:4:from .models import build_operations_console_handoff_gate
+AN_VANTARIS_ONE/operations_console_handoff_gate/__init__.py:6:__all__ = ["CONTRACT_VERSION", "build_operations_console_handoff_gate"]
+AN_VANTARIS_ONE/operations_console_handoff_gate/errors.py:6:    """Raised when an operations console handoff gate is invalid."""
+AN_VANTARIS_ONE/operations_console_handoff_gate/validation.py:9:def validate_operations_console_handoff_gate(gate: Mapping[str, Any]) -> None:
+AN_VANTARIS_ONE/U_MODULES_A2_READINESS_SUMMARY.md:29:| UConsole | draft-a1 | false |
+AN_VANTARIS_ONE/registries/umms-r7a-local-freeze.v1.json:77:    "Graphics HMI to locate Equipment",
+AN_VANTARIS_ONE/registries/prod-ga-foundation-package-readonly-api.v1.json:8:  "sourceRegistry": "AN_VANTARIS_ONE/registries/prod-ga-foundation-package-console-entry.v1.json",
+AN_VANTARIS_ONE/registries/prod-ga-foundation-package-readonly-api.v1.json:38:      "consoleVisible": true,
+AN_VANTARIS_ONE/registries/prod-ga-foundation-package-readonly-api.v1.json:53:      "consoleVisible": true,
+AN_VANTARIS_ONE/registries/prod-ga-foundation-package-readonly-api.v1.json:68:      "consoleVisible": true,
+AN_VANTARIS_ONE/registries/prod-ga-foundation-package-readonly-api.v1.json:83:      "consoleVisible": true,
+AN_VANTARIS_ONE/registries/airport-ga-stakeholder-review-package.v1.json:24:      "path": "/api/v1/one/airport/console/overview"
+AN_VANTARIS_ONE/registries/airport-ga-stakeholder-review-package.v1.json:28:      "path": "/api/v1/one/airport/console/systems-integration-health"
+AN_VANTARIS_ONE/registries/airport-ga-stakeholder-review-package.v1.json:32:      "path": "/api/v1/one/airport/console/assets-topology"
+AN_VANTARIS_ONE/registries/airport-ga-stakeholder-review-package.v1.json:36:      "path": "/api/v1/one/airport/console/alarms-events"
+AN_VANTARIS_ONE/registries/airport-ga-stakeholder-review-package.v1.json:40:      "path": "/api/v1/one/airport/console/fault-cases"
+AN_VANTARIS_ONE/registries/airport-ga-stakeholder-review-package.v1.json:44:      "path": "/api/v1/one/airport/console/maintenance-work-orders"
+AN_VANTARIS_ONE/registries/airport-ga-stakeholder-review-package.v1.json:48:      "path": "/api/v1/one/airport/console/evidence-investigation"
+AN_VANTARIS_ONE/registries/airport-ga-stakeholder-review-package.v1.json:52:      "path": "/api/v1/one/airport/console/reports"
+AN_VANTARIS_ONE/registries/airport-ga-stakeholder-review-package.v1.json:56:  "uconsoleEntry": "Airport GA Read-only",
+AN_VANTARIS_ONE/registries/airport-ga-stakeholder-review-package.v1.json:95:      "function": "Graphics HMI to locate equipment",
+AN_VANTARIS_ONE/registries/airport-poc-vertical-slice.v1.json:129:      "owningModule": "UConsole + Reports (projection-only)",
+AN_VANTARIS_ONE/registries/airport-poc-vertical-slice.v1.json:131:      "boundary": "Read-only projection — UConsole is not business SoR",
+AN_VANTARIS_ONE/registries/umms-r13a-local-freeze.v1.json:47:    "ONE_UMMS_R9_AIRPORT_HMI_LOCATOR_BINDING_READINESS_PASS",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:455:      "moduleId": "uconsole",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:456:      "displayName": "UConsole",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:459:      "semanticOwner": "UConsole",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:486:        "/api/v1/console",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:1:AN_VANTARIS_IBMS-backend/test/smoke/db_jwt_smoke.py:22:    "/api/system/menus",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:2:AN_VANTARIS_IBMS-backend/README.md:69:curl -H "Authorization: Bearer $(cat /tmp/ibms-local-smoke-token.txt)" http://127.0.0.1:5001/api/system/menus
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:3:AN_VANTARIS_IBMS-backend/README.md:89:System read APIs (`GET /api/system/menus`, `/permissions`, `/versions`) require a disposable local MySQL instance.
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:4:AN_VANTARIS_IBMS-backend/README.md:142:- GET `/api/system/menus`, `/api/system/permissions`, `/api/system/versions` returned 200 with valid dev JWT
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:5:AN_VANTARIS_IBMS-backend/scripts/seed_permissions.py:56:    "system:read": "Read system configuration and menus",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:6:AN_VANTARIS_IBMS-backend/scripts/seed_permissions.py:57:    "system:write": "Write system standard fields, methods, and menus",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:7:AN_VANTARIS_IBMS-backend/.idea/.gitignore:3:/workspace.xml
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:8:AN_VANTARIS_IBMS-backend/src/testMQTT/testws.html:176:            console.error('SSE 错误:', error);
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:9:AN_VANTARIS_IBMS-backend/src/testMQTT/testws.html:218:                console.error('命令发送失败:', error);
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:10:AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:12:LATEST_UMMS_PACKAGE_UCONSOLE_TAG = "umms-package-uconsole-stakeholder-entry-readiness-local-freeze-20260621"
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:11:AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:14:PACKAGE_ENTRY_REGISTRY = "AN_VANTARIS_ONE/registries/umms-package-uconsole-stakeholder-entry-readiness.v1.json"
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:12:AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:15:LOCAL_FREEZE_REGISTRY = "AN_VANTARIS_ONE/registries/umms-package-uconsole-stakeholder-entry-local-freeze.v1.json"
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:13:AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_integration_pilot.py:10:from src.api.system import menu_api
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:14:AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_integration_pilot.py:69:            with patch.object(menu_api, "db", fake_db):
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:16:AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/policies.py:16:            raise OutputPolicyError("output directory must remain outside Git workspace")
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:17:AN_VANTARIS_IBMS-backend/src/system/menu_models.py:1:# src/system/menu_models.py
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:18:AN_VANTARIS_IBMS-backend/src/system/menu_models.py:32:    __tablename__ = 'sys_menu'
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:19:AN_VANTARIS_IBMS-backend/src/system/menu_models.py:36:    menu_path = Column(String(200), nullable=False, unique=True, comment='菜单路径/唯一标识')
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:20:AN_VANTARIS_IBMS-backend/src/system/menu_models.py:37:    menu_title = Column(String(100), nullable=False, comment='菜单标题')
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:21:AN_VANTARIS_IBMS-backend/src/system/menu_models.py:38:    menu_icon = Column(String(50), nullable=True, comment='图标名称')
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:22:AN_VANTARIS_IBMS-backend/src/system/menu_models.py:39:    menu_type = Column(String(20), default='menu', comment='菜单类型: menu-可点击跳转, container-仅作为容器不可点击')
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:23:AN_VANTARIS_IBMS-backend/src/system/menu_models.py:56:    __tablename__ = 'sys_version_menu'
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:24:AN_VANTARIS_IBMS-backend/src/system/menu_models.py:60:    menu_id = Column(BigInteger, nullable=False, comment='菜单ID')
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:25:AN_VANTARIS_IBMS-backend/src/system/menu_models.py:61:    menu_path = Column(String(200), nullable=False, comment='菜单路径（冗余字段）')
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:26:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:1:# src/system/menu_dao.py
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:27:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:5:from src.system.menu_models import SysVersion, SysMenu, SysVersionMenu
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:28:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:56:        menu = SysMenu(**kwargs)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:29:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:57:        session.add(menu)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:30:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:59:        return menu
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:31:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:62:    def update(session: Session, menu: SysMenu, **kwargs) -> SysMenu:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:32:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:64:            if hasattr(menu, key) and value is not None:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:33:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:65:                setattr(menu, key, value)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:34:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:67:        return menu
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:35:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:70:    def delete(session: Session, menu: SysMenu):
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:36:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:71:        session.delete(menu)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:37:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:75:    def get_by_id(session: Session, menu_id: int) -> Optional[SysMenu]:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:38:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:76:        return session.query(SysMenu).filter(SysMenu.id == menu_id).first()
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:39:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:79:    def get_by_path(session: Session, menu_path: str) -> Optional[SysMenu]:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:40:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:80:        return session.query(SysMenu).filter(SysMenu.menu_path == menu_path).first()
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:41:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:95:    def set_visible(session: Session, version_code: str, menu_id: int, is_visible: bool,
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:42:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:98:            and_(SysVersionMenu.version_code == version_code, SysVersionMenu.menu_id == menu_id)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:43:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:108:        menu = session.query(SysMenu).filter(SysMenu.id == menu_id).first()
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:44:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:109:        if not menu:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:45:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:110:            raise ValueError(f"Menu {menu_id} not found")
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:46:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:114:            menu_id=menu_id,
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:47:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:115:            menu_path=menu.menu_path,
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:48:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:131:    def get_visible_menus(session: Session, version_code: str) -> List[SysMenu]:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:49:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:135:                SysMenu.id == SysVersionMenu.menu_id,
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:50:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:142:    def init_version_menus(session: Session, version_code: str) -> int:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:51:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:143:        all_menus = session.query(SysMenu).all()
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:52:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:145:        for menu in all_menus:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:53:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:147:                and_(SysVersionMenu.version_code == version_code, SysVersionMenu.menu_id == menu.id)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:54:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:152:                    menu_id=menu.id,
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:55:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:153:                    menu_path=menu.menu_path,
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:56:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:162:    def batch_update(session: Session, version_code: str, menus: List[Dict]) -> int:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:57:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:164:        for menu_config in menus:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:58:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:165:            menu_id = menu_config.get('menu_id')
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:59:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:166:            is_visible = menu_config.get('is_visible', True)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:60:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:167:            sort_order = menu_config.get('sort_order')
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:61:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:170:                and_(SysVersionMenu.version_code == version_code, SysVersionMenu.menu_id == menu_id)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:62:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:178:                menu = session.query(SysMenu).filter(SysMenu.id == menu_id).first()
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:63:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:179:                if menu:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:64:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:182:                        menu_id=menu_id,
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:65:AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:183:                        menu_path=menu.menu_path,
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:66:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:1:# src/system/menu_service.py
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:67:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:7:from src.system.menu_dao import VersionDAO, MenuDAO, VersionMenuDAO
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:68:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:8:from src.system.menu_models import SysVersion, SysMenu, SysVersionMenu
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:69:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:17:    def build_menu_tree(menus: List[SysMenu]) -> List[Dict]:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:70:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:20:            for menu in menus:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:71:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:21:                if menu.parent_id == parent_id:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:72:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:23:                        'index': menu.menu_path,
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:73:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:24:                        'title': menu.menu_title,
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:74:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:25:                        'icon': menu.menu_icon
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:75:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:27:                    children = build(menu.id)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:76:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:35:    def build_menu_tree_from_raw(menus: List) -> List[Dict]:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:77:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:38:            for menu in menus:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:78:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:39:                if menu[1] == parent_id:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:79:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:41:                        'index': menu[2],
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:80:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:42:                        'title': menu[3],
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:81:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:43:                        'icon': menu[4]
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:82:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:45:                    children = build_tree(menu[0])
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:83:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:53:    def get_version_menu_config(session: Session, version_code: str) -> List[Dict]:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:84:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:54:        menus = VersionMenuDAO.get_visible_menus(session, version_code)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:85:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:55:        return MenuService.build_menu_tree(menus)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:86:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:58:    def get_version_with_menus(session: Session, version_code: str) -> Optional[Dict]:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:87:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:63:        menus = VersionMenuDAO.get_by_version(session, version_code, only_visible=False)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:88:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:74:            'menus': [
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:89:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:76:                    'menu_id': vm.menu_id,
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:90:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:77:                    'menu_path': vm.menu_path,
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:91:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:81:                for vm in menus
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:92:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:86:    def copy_menu_config(session: Session, from_version: str, to_version: str) -> int:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:93:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:87:        source_menus = VersionMenuDAO.get_by_version(session, from_version, only_visible=False)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:94:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:89:        for vm in source_menus:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:95:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:90:            VersionMenuDAO.set_visible(session, to_version, vm.menu_id, vm.is_visible == 1, vm.sort_order)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:96:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:96:    def get_menu_tree(session: Session) -> List[Dict]:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:97:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:97:        menus = MenuDAO.get_all(session)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:98:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:99:        menu_dict = {}
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:99:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:100:        for menu in menus:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:100:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:101:            menu_dict[menu.id] = {
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:101:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:102:                'id': menu.id,
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:102:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:103:                'parent_id': menu.parent_id,
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:103:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:104:                'menu_path': menu.menu_path,
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:104:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:105:                'menu_title': menu.menu_title,
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:105:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:106:                'menu_icon': menu.menu_icon,
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:106:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:107:                'menu_type': menu.menu_type,
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:107:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:108:                'has_children': menu.has_children == 1,
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:108:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:109:                'redirect_path': menu.redirect_path,
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:109:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:110:                'sort_order': menu.sort_order,
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:110:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:111:                'is_visible': menu.is_visible == 1,
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:111:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:116:        for menu in menus:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:112:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:117:            if menu.parent_id == 0:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:113:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:118:                roots.append(menu_dict[menu.id])
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:114:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:120:                if menu.parent_id in menu_dict:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:115:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:121:                    menu_dict[menu.parent_id]['children'].append(menu_dict[menu.id])
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:116:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:125:    def get_active_version_menu_config(session: Session) -> Optional[Dict]:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:117:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:135:        menus = session.execute(
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:118:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:137:                 SELECT m.id, m.parent_id, m.menu_path, m.menu_title, m.menu_icon,
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:119:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:138:                        m.menu_type, m.redirect_path, COALESCE(vm.sort_order, m.sort_order) as sort_order
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:120:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:139:                 FROM sys_menu m
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:121:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:140:                 JOIN sys_version_menu vm ON m.id = vm.menu_id AND vm.version_code = :version_code
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:122:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:147:        config = MenuService.build_menu_tree_from_raw(menus)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:123:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:151:            'menu_config': config
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:124:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:171:        menus = session.execute(
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:125:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:173:                 SELECT m.id, m.parent_id, m.menu_path, m.menu_title, m.menu_icon,
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:126:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:174:                        m.menu_type, m.redirect_path, COALESCE(vm.sort_order, m.sort_order) as sort_order
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:127:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:175:                 FROM sys_menu m
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:128:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:176:                 JOIN sys_version_menu vm ON m.id = vm.menu_id AND vm.version_code = :version_code
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:129:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:183:        config = MenuService.build_menu_tree_from_raw(menus)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:130:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:195:            'menu_config': config
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:131:AN_VANTARIS_IBMS-backend/src/common/utils/local_smoke.py:1:"""Local DB smoke helpers for read-only system routes (menus, permissions, versions).
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:132:AN_VANTARIS_IBMS-backend/src/common/utils/local_smoke.py:18:        "menu_path": "/smoke/dashboard",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:133:AN_VANTARIS_IBMS-backend/src/common/utils/local_smoke.py:19:        "menu_title": "Smoke Dashboard",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:134:AN_VANTARIS_IBMS-backend/src/common/utils/local_smoke.py:20:        "menu_icon": "dashboard",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:135:AN_VANTARIS_IBMS-backend/src/common/utils/local_smoke.py:21:        "menu_type": "menu",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:136:AN_VANTARIS_IBMS-backend/src/common/utils/local_smoke.py:100:def local_smoke_menus_response():
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:137:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:183:                    related_module_ids=["reports", "uconsole", "ucde"],
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:138:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:234:                    reference_id="evref-uconsole-score-foundation",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:139:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:235:                    evidence_id="uconsole-score-foundation",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:140:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:274:            "evidenceId": "uconsole-readiness-registry",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:141:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:276:            "evidenceName": "UConsole Registry Foundation Snapshot",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:142:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:280:            "sourceModuleId": "uconsole",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:143:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:281:            "sourceRecordId": "uconsole-readiness-registry",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:144:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:288:                    reference_id="src-uconsole-registry",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:145:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:289:                    source_module_id="uconsole",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:146:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:290:                    source_record_id="uconsole-readiness-registry",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:147:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:298:                    reference_id="evref-uconsole-score-foundation",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:148:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:299:                    evidence_id="uconsole-score-foundation",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:149:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:308:                    source_module_id="uconsole",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:150:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:316:                    related_module_ids=["uconsole", "reports", "ucde"],
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:151:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:320:                path_id="trace-uconsole-readiness-registry",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:152:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:321:                source_module_id="uconsole",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:153:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:322:                source_record_id="uconsole-readiness-registry",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:154:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:323:                evidence_id="uconsole-readiness-registry",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:155:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:324:                source_reference_id="src-uconsole-registry",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:156:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:325:                evidence_reference_id="evref-uconsole-score-foundation",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:157:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:326:                verification_reference_id="verify-uconsole-readiness-registry",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:158:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:328:            "tags": ["uconsole", "registry", "foundation"],
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:159:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:335:            "evidenceId": "uconsole-score-foundation",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:160:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:341:            "sourceModuleId": "uconsole",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:161:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:349:                    reference_id="src-uconsole-score",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:162:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:350:                    source_module_id="uconsole",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:163:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:359:                    reference_id="evref-uconsole-readiness-registry",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:164:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:360:                    evidence_id="uconsole-readiness-registry",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:165:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:369:                    source_module_id="uconsole",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:166:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:377:                    related_module_ids=["uconsole", "ucde"],
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:167:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:381:                path_id="trace-uconsole-score-foundation",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:168:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:382:                source_module_id="uconsole",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:169:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:384:                evidence_id="uconsole-score-foundation",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:170:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:385:                source_reference_id="src-uconsole-score",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:171:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:386:                evidence_reference_id="evref-uconsole-readiness-registry",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:172:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:387:                verification_reference_id="verify-uconsole-score-foundation",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:173:AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:389:            "tags": ["uconsole", "score", "foundation"],
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:174:AN_VANTARIS_IBMS-backend/src/api/prod_ga/foundation_packages_provider.py:3:This provider reads the frozen R2 console-entry registry and exposes normalized
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:175:AN_VANTARIS_IBMS-backend/src/api/prod_ga/foundation_packages_provider.py:6:write to databases, or mutate package/source workspaces.
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:176:AN_VANTARIS_IBMS-backend/src/api/prod_ga/foundation_packages_provider.py:16:R2_REGISTRY = "AN_VANTARIS_ONE/registries/prod-ga-foundation-package-console-entry.v1.json"
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:177:AN_VANTARIS_IBMS-backend/src/api/prod_ga/foundation_packages_provider.py:90:        "consoleVisible": bool(package["consoleVisible"]),
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:178:AN_VANTARIS_IBMS-backend/src/api/__init__.py:9:from .system import system_api, menu_api
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:179:AN_VANTARIS_IBMS-backend/src/api/__init__.py:12:from .console import console_api
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:180:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:1:# src/api/system/menu_api.py
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:181:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:5:from src.system.menu_service import MenuService
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:182:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:12:    local_smoke_menus_response,
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:183:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:164:@api_bp.route('/system/menu/config/<version_code>', methods=['GET'])
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:184:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:166:def get_menu_config(version_code):
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:185:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:169:        result = service.get_version_menu_config(db.session, version_code)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:186:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:175:@api_bp.route('/system/menu/active', methods=['GET'])
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:187:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:177:def get_active_version_menu_config():
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:188:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:180:        result = service.get_active_version_menu_config(db.session)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:189:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:204:@api_bp.route('/system/menus', methods=['GET'])
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:190:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:206:def get_menu_tree():
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:191:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:208:        return local_smoke_menus_response()
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:192:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:212:        tree = service.get_menu_tree(db.session)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:193:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:218:@api_bp.route('/system/menus-add', methods=['POST'])
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:194:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:220:def create_menu():
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:195:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:222:    if not data.get('menu_path') or not data.get('menu_title'):
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:196:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:223:        return Result.error('MISSING_FIELDS', 'menu_path and menu_title are required', 400)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:197:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:227:            text("SELECT id FROM sys_menu WHERE menu_path = :path"),
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:198:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:228:            {"path": data['menu_path']}
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:199:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:231:            return Result.error('DUPLICATE', f"Menu path {data['menu_path']} already exists", 409)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:200:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:234:                INSERT INTO sys_menu (parent_id, menu_path, menu_title, menu_icon, menu_type, has_children, redirect_path, sort_order, is_visible)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:201:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:235:                VALUES (:parent_id, :menu_path, :menu_title, :menu_icon, :menu_type, :has_children, :redirect_path, :sort_order, :is_visible)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:202:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:239:                "menu_path": data['menu_path'],
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:203:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:240:                "menu_title": data['menu_title'],
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:204:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:241:                "menu_icon": data.get('menu_icon'),
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:205:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:242:                "menu_type": data.get('menu_type', 'menu'),
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:206:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:251:            text("SELECT id FROM sys_menu WHERE menu_path = :path"),
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:207:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:252:            {"path": data['menu_path']}
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:208:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:260:@api_bp.route('/system/menus-update/<int:menu_id>', methods=['PUT'])
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:209:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:262:def update_menu(menu_id):
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:210:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:267:            text("SELECT id FROM sys_menu WHERE id = :id"),
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:211:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:268:            {"id": menu_id}
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:212:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:271:            return Result.error('NOT_FOUND', f'Menu {menu_id} not found', 404)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:213:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:273:        params = {"id": menu_id}
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:214:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:277:        if 'menu_title' in data:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:215:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:278:            update_fields.append("menu_title = :menu_title")
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:216:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:279:            params["menu_title"] = data['menu_title']
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:217:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:280:        if 'menu_icon' in data:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:218:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:281:            update_fields.append("menu_icon = :menu_icon")
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:219:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:282:            params["menu_icon"] = data['menu_icon']
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:220:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:283:        if 'menu_type' in data:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:221:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:284:            update_fields.append("menu_type = :menu_type")
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:222:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:285:            params["menu_type"] = data['menu_type']
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:223:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:299:            query = f"UPDATE sys_menu SET {', '.join(update_fields)} WHERE id = :id"
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:224:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:308:@api_bp.route('/system/menus-delete/<int:menu_id>', methods=['DELETE'])
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:225:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:310:def delete_menu(menu_id):
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:226:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:314:            text("SELECT id FROM sys_menu WHERE id = :id"),
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:227:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:315:            {"id": menu_id}
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:228:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:318:            return Result.error('NOT_FOUND', f'Menu {menu_id} not found', 404)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:229:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:319:        db.session.execute(text("DELETE FROM sys_menu WHERE parent_id = :parent_id"), {"parent_id": menu_id})
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:230:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:320:        db.session.execute(text("DELETE FROM sys_menu WHERE id = :id"), {"id": menu_id})
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:231:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:330:@api_bp.route('/system/menus/batch-sort', methods=['POST'])
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:232:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:332:def batch_update_menu_sort():
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:233:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:334:    menus = data.get('menus', [])
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:234:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:338:    print(f"收到排序数据: {menus}")
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:235:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:339:    if not menus:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:236:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:340:        return Result.error('INVALID_REQUEST', 'menus is required', 400)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:237:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:344:        for menu in menus:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:238:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:345:            # 支持两种格式：menu_id 或 menu_path
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:239:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:346:            menu_id = menu.get('id')
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:240:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:347:            menu_path = menu.get('menu_path')
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:241:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:348:            sort_order = menu.get('sort_order')
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:242:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:350:            # 如果没有提供 id，通过 menu_path 查询
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:243:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:351:            if menu_id is None and menu_path is not None:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:244:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:353:                    text("SELECT id FROM sys_menu WHERE menu_path = :path"),
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:245:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:354:                    {"path": menu_path}
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:246:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:357:                    menu_id = result[0]
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:247:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:358:                    print(f"通过路径 {menu_path} 找到菜单 ID: {menu_id}")
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:248:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:360:            if menu_id is not None and sort_order is not None:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:249:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:362:                    text("UPDATE sys_menu SET sort_order = :sort_order WHERE id = :id"),
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:250:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:363:                    {"id": menu_id, "sort_order": sort_order}
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:251:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:366:                print(f"更新菜单 {menu_id} 排序为 {sort_order}")
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:252:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:375:@api_bp.route('/system/version-menus/<version_code>', methods=['GET'])
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:253:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:377:def get_version_menus(version_code):
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:254:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:380:        result = service.get_version_with_menus(db.session, version_code)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:255:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:388:@api_bp.route('/system/version-menus/<version_code>/batch', methods=['POST'])
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:256:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:390:def batch_update_version_menus(version_code):
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:257:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:392:    menus = data.get('menus', [])
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:258:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:393:    if not menus:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:259:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:394:        return Result.error('INVALID_REQUEST', 'menus is required', 400)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:260:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:404:        for menu_config in menus:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:261:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:405:            menu_path = menu_config.get('menu_path')
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:262:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:406:            is_visible = menu_config.get('is_visible', True)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:263:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:407:            sort_order = menu_config.get('sort_order')
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:264:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:408:            if menu_path:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:265:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:409:                menu = db.session.execute(
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:266:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:410:                    text("SELECT id FROM sys_menu WHERE menu_path = :path"),
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:267:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:411:                    {"path": menu_path}
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:268:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:413:                if menu:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:269:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:416:                        "menu_id": menu[0],
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:270:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:417:                        "menu_path": menu_path,
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:271:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:423:                            UPDATE sys_version_menu
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:272:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:425:                            WHERE version_code = :version_code AND menu_id = :menu_id
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:273:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:432:                                INSERT INTO sys_version_menu (version_code, menu_id, menu_path, is_visible, sort_order)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:274:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:433:                                VALUES (:version_code, :menu_id, :menu_path, :is_visible, :sort_order)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:275:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:447:@api_bp.route('/system/version-menus/<version_code>/incremental', methods=['POST'])
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:276:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:449:def incremental_update_version_menus(version_code):
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:277:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:486:                menu_query = text(f"""
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:278:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:487:                    SELECT menu_path, id 
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:279:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:488:                    FROM sys_menu 
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:280:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:489:                    WHERE menu_path IN ({placeholders})
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:281:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:491:                batch_result = db.session.execute(menu_query, params).fetchall()
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:282:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:499:            for menu_path in add_list:
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:283:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:500:                menu_id = path_to_id.get(menu_path)

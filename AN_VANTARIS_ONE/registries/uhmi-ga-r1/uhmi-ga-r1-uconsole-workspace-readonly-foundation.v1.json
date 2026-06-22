@@ -1,0 +1,51 @@
+{
+  "registryId": "uhmi-ga-r1-uconsole-workspace-readonly-foundation.v1",
+  "platform": "VANTARIS_ONE",
+  "capability": "UHMI",
+  "placement": "UConsole / UHMI Workspace",
+  "releaseScope": "READ_ONLY_FOUNDATION_FREEZE",
+  "sourceBranch": "sync/ufms-foundation-packages-20260622-104646",
+  "sourceHeadBeforeTask": "9a3d1722acc07991eed965f18c10e4341c8d45e1",
+  "definition": "UHMI = Unified Human-Machine Interface",
+  "decisions": {
+    "independentHmiServer": false,
+    "scadaReplacement": false,
+    "readOnly": true,
+    "directDeviceControl": false,
+    "directDbWrite": false,
+    "bypassCode": false,
+    "runtimeActivation": false
+  },
+  "menu": [
+    "HMI Overview",
+    "System HMI",
+    "Device HMI",
+    "Alarm & Event HMI",
+    "EDGE / LINK Diagnostics",
+    "Evidence & Reports"
+  ],
+  "dataFlow": "Device/System -> EDGE -> LINK -> CODE -> UConsole/UHMI",
+  "forbiddenDirectPaths": [
+    "UHMI -> Device",
+    "UHMI -> DB write",
+    "UHMI -> EDGE command",
+    "UHMI -> LINK command",
+    "UHMI -> NEXUS AI execution",
+    "UHMI -> bypass CODE"
+  ],
+  "futureControlledActionPath": {
+    "path": "UHMI -> CODE -> Policy Gate -> Approval -> Audit / UCDE -> LINK -> EDGE -> Device",
+    "status": "NOT_EXECUTED_IN_R1"
+  },
+  "futureGuardrails": [
+    "RBAC",
+    "approval workflow",
+    "policy safety",
+    "CODE boundary",
+    "UCDE evidence record",
+    "audit log",
+    "rollback plan",
+    "two-person approval"
+  ],
+  "passMarker": "UHMI_GA_R1_UCONSOLE_UHMI_WORKSPACE_READONLY_FOUNDATION_FREEZE_PASS"
+}

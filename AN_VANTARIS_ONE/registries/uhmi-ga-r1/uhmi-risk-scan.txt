@@ -1,0 +1,689 @@
+AN_VANTARIS_IBMS-backend/migrations/README.md:5:- No migration executed in this task
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/test_device_reconciliation_evidence_runner.py:20:        command = [
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/test_device_reconciliation_evidence_runner.py:35:            command.extend(extra)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/test_device_reconciliation_evidence_runner.py:36:        return subprocess.run(command, cwd=ROOT, capture_output=True, text=True, check=False)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/test_device_reconciliation_evidence_runner.py:57:            command = [
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/test_device_reconciliation_evidence_runner.py:71:            result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True, check=False)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:22:    execute_limited_read_validation,
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:30:OUTPUT_ROOT = Path("/tmp/one-p1-16m")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:86:    report_path = OUTPUT_ROOT / "setup" / f"{package_path.stem}-report.json"
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:132:    def _execute(
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:158:        return execute_limited_read_validation(request).serialize()
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:337:        report_path = OUTPUT_ROOT / "setup" / "review-source-report.json"
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:71:    def execute(self, value=None, run_id="run-1"):
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:78:        run = self.execute()
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:83:        run = self.execute(input_for(fields={"device-1": (field(),)}))
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:87:        self.assertEqual(self.execute(run_id="a").input_digest, self.execute(run_id="b").input_digest)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:93:        self.assertEqual(self.execute(run_id="a").result_digest, self.execute(run_id="b").result_digest)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:96:        comparison = self.service.compare_runs(self.execute(run_id="a"), self.execute(run_id="b"))
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:121:        run = self.execute(input_for(devices=(device(), device())))
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:201:        run = self.execute(input_for(devices=(device("a", device_code="SAME"), device("b", device_code="SAME"))))
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:219:            self.execute(input_for(devices=tuple(device(str(i)) for i in range(101))))
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:222:        run = self.execute(input_for(devices=(device("z"), device("a"))))
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:226:        run = self.execute(input_for(devices=(device("good"), {"id": "", "device_name": "Bad", "created_at": NOW})))
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:231:        left = self.execute()
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:232:        right = self.execute(input_for(version="legacy-device-v2"), run_id="right")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:236:        self.assertTrue(self.service.compare_runs(self.execute(run_id="a"), self.execute(run_id="b")).identical_except_run_id)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:239:        left = self.execute()
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:240:        right = self.execute(input_for(devices=(device(description="changed"),)), run_id="right")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:253:        run = self.execute(input_for(devices=(device(device_type=None),), ctx=context(default_device_type=None)))
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:257:        self.assertEqual(self.execute().cutover_decision, "NOT_READY_FOR_WRITE_CUTOVER")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:260:        self.assertEqual(self.execute(input_for(version="unapproved")).cutover_decision, "BLOCKED_BY_REVIEW")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:264:            self.execute().cutover_decision = "READY_FOR_WRITE_CUTOVER"
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:278:        run = self.execute(input_for(devices=({"id": "x", "device_name": "Bad", "private_key": "super-secret", "created_at": NOW},)))
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:282:        run = self.execute(input_for(devices=({"id": "x", "device_name": "Bad", "live_value": "raw-telemetry-secret", "created_at": NOW},)))
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/readiness/test_readiness_gate.py:64:        self.assertEqual(payload["decision"], "INPUT_REJECTED")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/airport_intake/test_formula_intake.py:63:        self.assertEqual(ctx.exception.code, "INPUT_REJECTED")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:44:from src.asset_graph.reconciliation.read_validation import ExecutionRequest, execute_limited_read_validation
+AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:54:OUTPUT_ROOT = Path("/tmp/one-p1-16n-tests")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:111:    report_path = OUTPUT_ROOT / "setup" / f"{package_path.stem}-report.json"
+AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:149:    def _execute(
+AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:177:        return execute_limited_read_validation(request).serialize()
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:65:def _command_base(**overrides: object) -> dict[str, object]:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:67:        "command_id": "cmd-001",
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:85:def _command(**overrides: object) -> CreateCanonicalDevice:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:88:    return CreateCanonicalDevice(**_command_base(**extra))
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:91:def _command_result(command: CreateCanonicalDevice, **overrides: object) -> PersistenceCommandResult:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:93:        "command_id": command.command_id,
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:94:        "idempotency_key_digest": command.idempotency_key_digest(),
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:96:        "canonical_global_id_digest": command.canonical_global_id_digest(),
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:214:    def test_command_requires_migration_execution_authority(self) -> None:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:216:            _command(requested_by_authority="INVALID")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:218:    def test_command_digest_deterministic(self) -> None:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:219:        one = _command()
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:220:        two = _command()
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:221:        self.assertEqual(one.command_digest(), two.command_digest())
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:223:    def test_command_does_not_expose_raw_idempotency_in_serialize(self) -> None:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:224:        payload = _command().serialize()
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:228:    def test_create_point_command_object_type(self) -> None:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:229:        command = CreateCanonicalPoint(
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:230:            **_command_base()
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:236:        self.assertEqual(command.object_type(), "Point")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:238:    def test_create_tag_command(self) -> None:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:239:        command = CreateCanonicalTag(
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:240:            **_command_base() | {"tag_namespace": "legacy.tags", "tag_value": "value-a"}
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:242:        self.assertEqual(command.command_type(), "CreateCanonicalTag")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:244:    def test_create_relationship_command(self) -> None:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:245:        command = CreateCanonicalRelationship(
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:246:            **_command_base()
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:253:        self.assertEqual(command.object_type(), "AssetRelationship")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:342:        command = _command()
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:343:        first = ledger.evaluate(command)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:344:        ledger.record(command, _command_result(command))
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:345:        second = ledger.evaluate(command)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:350:        command = _command()
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:351:        ledger.record(command, _command_result(command))
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:352:        other = _command(display_name="Different")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:396:    def test_batch_limit_commands(self) -> None:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:397:        commands = tuple(_command(command_id=f"cmd-{index}") for index in range(20001))
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:399:            validate_batch_limits(commands, batch_limits(self.contract))
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:404:            **_command_base()
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:415:        uow.stage(_command())
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:418:                **_command_base()
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:422:                    "command_id": "cmd-point-1",
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:431:        device = _command(command_id="cmd-device")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:433:            **_command_base()
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:437:                "command_id": "cmd-point",
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:441:        result = coordinator.execute_batch(
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:449:                commands=(device, point),
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:459:        result = coordinator.execute_batch(
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:467:                commands=(_command(),),
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:498:    def test_command_result_no_raw_idempotency_key(self) -> None:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:500:        result = coordinator.execute_batch(
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:508:                commands=(_command(),),
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:518:        for token in ("sqlalchemy", "db.session", "CREATE TABLE", "INSERT INTO", "prisma"):
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:536:    def test_update_device_command(self) -> None:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:537:        command = UpdateCanonicalDevice(**_command_base() | {"requested_operation": "Update", "expected_version": 1, "display_name": "Updated"})
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:538:        self.assertEqual(command.command_type(), "UpdateCanonicalDevice")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:542:        uow.stage(_command())
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:547:                **_command_base()
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:556:        result = coordinator.execute_batch(
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:559:                commands=(_command(),),
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:619:        payload = PersistenceCoordinatorInput(authorization=auth, commands=(_command(),), contract=self.contract)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:620:        one = coordinator.execute_batch(payload).serialize()
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:621:        two = AssetGraphPersistenceCoordinator(audit_port=InMemoryAuditProvider()).execute_batch(payload).serialize()
+AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/test_airport_reconciliation_profile.py:740:        self.assertEqual(gates[0]["gateId"], "G01_INPUT_EVIDENCE_INTEGRITY")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/test_airport_review_projection.py:78:OUTPUT_ARTIFACTS = (
+AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/test_airport_review_projection.py:311:            for name in OUTPUT_ARTIFACTS:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/test_airport_review_projection.py:432:            for name in OUTPUT_ARTIFACTS:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/test_airport_review_projection.py:664:        for name in OUTPUT_ARTIFACTS:
+AN_VANTARIS_IBMS-backend/README.md:110:**PostgreSQL database URI (POSTGRES-CONFIG-ABSTRACTION-1)**
+AN_VANTARIS_IBMS-backend/README.md:121:See `docs/architecture/IBMS_POSTGRES_CONFIG_ABSTRACTION_1.md`.
+AN_VANTARIS_IBMS-backend/README.md:123:**PostgreSQL local install (POSTGRES-LOCAL-INSTALL-1)**
+AN_VANTARIS_IBMS-backend/README.md:134:See `docs/architecture/IBMS_POSTGRES_LOCAL_INSTALL_1.md`. No IBMS DB/user created in install task.
+AN_VANTARIS_IBMS-backend/README.md:136:**PostgreSQL local smoke result (POSTGRES-LOCAL-SMOKE-EXEC-1)**
+AN_VANTARIS_IBMS-backend/README.md:145:- See `docs/architecture/IBMS_POSTGRES_LOCAL_SMOKE_EXEC_1.md` and `docs/architecture/IBMS_POSTGRES_LOCAL_SMOKE_RESULTS_1.md`
+AN_VANTARIS_IBMS-backend/README.md:147:**PostgreSQL driver (POSTGRES-DEPS-PREP-1)**
+AN_VANTARIS_IBMS-backend/README.md:160:- See `docs/architecture/IBMS_POSTGRES_DEPS_PREP_1.md`
+AN_VANTARIS_IBMS-backend/README.md:162:**PostgreSQL migration framework baseline (POSTGRES-MIGRATION-FRAMEWORK-RECOVERY-1)**
+AN_VANTARIS_IBMS-backend/README.md:168:- Import verification passed: `alembic`, `flask_migrate`
+AN_VANTARIS_IBMS-backend/README.md:171:  - `docs/architecture/IBMS_POSTGRES_MIGRATION_FRAMEWORK_1.md`
+AN_VANTARIS_IBMS-backend/README.md:172:  - `docs/security/IBMS_POSTGRES_MIGRATION_FRAMEWORK_1_RISK_REVIEW.md`
+AN_VANTARIS_IBMS-backend/README.md:173:  - `docs/architecture/IBMS_POSTGRES_MIGRATION_FRAMEWORK_RECOVERY_1.md`
+AN_VANTARIS_IBMS-backend/scripts/seed_permissions.py:48:    "iot:command": "Dispatch IoT device commands",
+AN_VANTARIS_IBMS-backend/scripts/seed_permissions.py:51:    "device:control": "Device control commands and reconnect",
+AN_VANTARIS_IBMS-backend/scripts/assign_root_permissions.py:41:    "iot:command",
+AN_VANTARIS_IBMS-backend/src/testMQTT/testws.html:190:                const response = await fetch(`http://localhost:5000/api/iot/device/code/${deviceCode}/command`, {
+AN_VANTARIS_IBMS-backend/src/testMQTT/testws.html:191:                    method: 'POST',
+AN_VANTARIS_IBMS-backend/src/testMQTT/rtsp_simulator.py:331:    def do_PUT(self):
+AN_VANTARIS_IBMS-backend/src/testMQTT/test_air_quality_receiver.py:24:TOPIC_COMMAND = f"building/air/{DEVICE_ID}/command"
+AN_VANTARIS_IBMS-backend/src/testMQTT/test_air_quality_receiver.py:82:            print_command_response(payload)
+AN_VANTARIS_IBMS-backend/src/testMQTT/test_air_quality_receiver.py:192:def print_command_response(data):
+AN_VANTARIS_IBMS-backend/src/testMQTT/test_air_quality_receiver.py:210:def test_command():
+AN_VANTARIS_IBMS-backend/src/testMQTT/test_air_quality_receiver.py:226:            command = {"command": "get_status"}
+AN_VANTARIS_IBMS-backend/src/testMQTT/test_air_quality_receiver.py:227:            print(f"\n发送命令: {command}")
+AN_VANTARIS_IBMS-backend/src/testMQTT/test_air_quality_receiver.py:228:            publish.single(TOPIC_COMMAND, json.dumps(command),
+AN_VANTARIS_IBMS-backend/src/testMQTT/test_air_quality_receiver.py:234:            command = {"command": "calibrate_sensor"}
+AN_VANTARIS_IBMS-backend/src/testMQTT/test_air_quality_receiver.py:235:            print(f"\n发送命令: {command}")
+AN_VANTARIS_IBMS-backend/src/testMQTT/test_air_quality_receiver.py:236:            publish.single(TOPIC_COMMAND, json.dumps(command),
+AN_VANTARIS_IBMS-backend/src/testMQTT/test_air_quality_receiver.py:243:            command = {"command": "set_report_interval", "value": int(interval)}
+AN_VANTARIS_IBMS-backend/src/testMQTT/test_air_quality_receiver.py:244:            print(f"\n发送命令: {command}")
+AN_VANTARIS_IBMS-backend/src/testMQTT/test_air_quality_receiver.py:245:            publish.single(TOPIC_COMMAND, json.dumps(command),
+AN_VANTARIS_IBMS-backend/src/testMQTT/test_air_quality_receiver.py:309:                test_command()
+AN_VANTARIS_IBMS-backend/src/testMQTT/air_quality_simulator.py:26:TOPIC_COMMAND = f"building/air/{DEVICE_ID}/command"
+AN_VANTARIS_IBMS-backend/src/testMQTT/air_quality_simulator.py:354:            command = json.loads(payload)
+AN_VANTARIS_IBMS-backend/src/testMQTT/air_quality_simulator.py:355:            cmd_type = command.get('command') or command.get('type')
+AN_VANTARIS_IBMS-backend/src/testMQTT/air_quality_simulator.py:380:                interval = command.get('value', 5)
+AN_VANTARIS_IBMS-backend/src/testMQTT/hvac_mqtt_simulator.py:23:TOPIC_COMMAND = f"building/hvac/{DEVICE_ID}/command"
+AN_VANTARIS_IBMS-backend/src/testMQTT/hvac_mqtt_simulator.py:130:        print(f"📡 Subscribed to command topic: {TOPIC_COMMAND}")
+AN_VANTARIS_IBMS-backend/src/testMQTT/hvac_mqtt_simulator.py:159:            command = json.loads(payload)
+AN_VANTARIS_IBMS-backend/src/testMQTT/hvac_mqtt_simulator.py:160:            cmd_type = command.get('command') or command.get('type')
+AN_VANTARIS_IBMS-backend/src/testMQTT/hvac_mqtt_simulator.py:163:                new_setpoint = command.get('value')
+AN_VANTARIS_IBMS-backend/src/testMQTT/hvac_mqtt_simulator.py:178:                new_pos = command.get('value')
+AN_VANTARIS_IBMS-backend/src/testMQTT/isup_simulator.py:207:    def _build_packet(self, command: int, device_serial: str, body: bytes = b'') -> bytes:
+AN_VANTARIS_IBMS-backend/src/testMQTT/isup_simulator.py:217:                struct.pack('>H', command) +
+AN_VANTARIS_IBMS-backend/src/testMQTT/isup_simulator.py:226:    def _send_packet(self, command: int, device_serial: str, body: bytes = b'') -> bool:
+AN_VANTARIS_IBMS-backend/src/testMQTT/isup_simulator.py:315:            command = struct.unpack('>H', data[6:8])[0]
+AN_VANTARIS_IBMS-backend/src/testMQTT/isup_simulator.py:329:            if command == 0x0008:  # 控制命令
+AN_VANTARIS_IBMS-backend/src/testMQTT/isup_simulator.py:331:            elif command == 0x8001:  # 注册响应
+AN_VANTARIS_IBMS-backend/src/testMQTT/isup_simulator.py:333:            elif command == 0x8003:  # 心跳响应
+AN_VANTARIS_IBMS-backend/src/testMQTT/isup_simulator.py:405:    def _send_command_response(self, command: str, result: str):
+AN_VANTARIS_IBMS-backend/src/testMQTT/isup_simulator.py:408:            "command": command,
+AN_VANTARIS_IBMS-backend/src/testMQTT/mock_isapi_camera.py:216:@app.route('/ISAPI/PTZCtrl/channels/<int:channel>/continuous', methods=['PUT'])
+AN_VANTARIS_IBMS-backend/src/testMQTT/mock_isapi_camera.py:308:@app.route('/ISAPI/System/reboot', methods=['PUT'])
+AN_VANTARIS_IBMS-backend/src/testMQTT/mock_isapi_camera.py:351:    print(f"   PUT  /ISAPI/PTZCtrl/channels/1/continuous")
+AN_VANTARIS_IBMS-backend/src/DID/models.py:74:    updated_at = Column(DateTime, server_default=text('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'))
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:145:# /system/init	POST	系统初始化（幂等）	否
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:146:# /entity	POST	创建下级实体并签发VC	是
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:147:# /vp/generate	POST	生成VP	是
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:148:# /vp/verify	POST	验证VP并提取信息	否
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:149:# /vc/reissue	POST	吊销并重新签发VC	是
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:150:# /vc/revoke	POST	撤销VC	是
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:151:# /vc/status	POST	VC状态检查	否
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:157:# /login	POST	登录（Challenge/VP）	否
+AN_VANTARIS_IBMS-backend/src/tests/did_signature.py:78:    f'''curl -X POST "http://localhost:5000/api/did/login" \\
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_integration_pilot.py:47:        session.execute.side_effect = [FakeResult(None), FakeResult(None), FakeResult((37,))]
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_integration_pilot.py:58:            method="POST",
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_integration_pilot.py:86:        self.assertEqual(record.route_id, "ROUTE-POST-C39FFBE9F5DC")
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:23:        "event_class": "CANONICAL_OBJECT_UPDATE",
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:35:        "route_id": "ROUTE-PATCH-ASSET",
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isapi_driver.py:149:            elif method == 'POST':
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isapi_driver.py:151:            elif method == 'PUT':
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isapi_driver.py:400:    def send_command(self, device_did: str, command: Dict[str, Any]) -> Dict[str, Any]:
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isapi_driver.py:402:        method = command.get('method')
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isapi_driver.py:403:        params = command.get('params', {})
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/rtsp_driver.py:174:    def send_command(self, device_did: str, command: Dict[str, Any]) -> Dict[str, Any]:
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/rtsp_driver.py:175:        method = command.get('method')
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/http_driver.py:29:        2. 主动上报模式：不需要 base_url，设备主动 POST 数据到 /ingest/http
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/http_driver.py:68:    def send_command(self, device_did: str, command: Dict[str, Any]) -> Dict[str, Any]:
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/http_driver.py:78:        endpoint = command.get('endpoint', '/command')
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/http_driver.py:79:        http_method = command.get('http_method', 'POST')
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/http_driver.py:80:        params = command.get('params', {})
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/http_driver.py:81:        headers = command.get('headers', {'Content-Type': 'application/json'})
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/http_driver.py:91:            elif http_method.upper() == 'PUT':
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/http_driver.py:93:            elif http_method.upper() == 'DELETE':
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/modbus_driver.py:17:    def send_command(self, device_did: str, command: dict) -> dict:
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/mqtt_driver.py:1:# src/Iot/drivers/mqtt_driver.py - 修改 send_command 方法
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/mqtt_driver.py:136:    # ========== 重点修改：send_command 方法 ==========
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/mqtt_driver.py:137:    def send_command(self, device_did: str, command: Dict[str, Any]) -> Dict[str, Any]:
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/mqtt_driver.py:148:        method = command.get('method')
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/mqtt_driver.py:149:        params = command.get('params', {})
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/mqtt_driver.py:184:        command_topic = method_mapping.raw_path
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/mqtt_driver.py:185:        command_topic = command_topic.replace('{device_id}', device_did)
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/mqtt_driver.py:186:        command_topic = command_topic.replace('{device_code}', device_code)
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/mqtt_driver.py:188:        # 如果 raw_path 是 "building/hvac/command" 且没有占位符，自动添加设备号
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/mqtt_driver.py:190:            if command_topic.endswith('/command'):
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/mqtt_driver.py:191:                base_path = command_topic.replace('/command', '')
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/mqtt_driver.py:192:                command_topic = f"{base_path}/{device_code}/command"
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/mqtt_driver.py:194:                command_topic = f"{command_topic}/{device_code}"
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/mqtt_driver.py:202:            payload_data = {'command': 'set_setpoint', 'value': params.get('value')}
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/mqtt_driver.py:204:            payload_data = {'command': 'set_damper', 'value': params.get('value')}
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/mqtt_driver.py:206:            payload_data = {'command': 'get_status'}
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/mqtt_driver.py:212:        print(f"[MQTT] 下发命令: method={method}, topic={command_topic}, payload={payload}")
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/mqtt_driver.py:214:        result = client.publish(command_topic, payload, qos=1)
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/mqtt_driver.py:219:            'topic': command_topic,
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/mqtt_driver.py:224:    # ========== send_command 方法结束 ==========
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isup_driver.py:126:    def send_command(self, device_did: str, command: Dict[str, Any]) -> Dict[str, Any]:
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isup_driver.py:142:        method = command.get('method', '')
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isup_driver.py:143:        params = command.get('params', {})
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isup_driver.py:417:            command = struct.unpack('>H', data[6:8])[0]
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isup_driver.py:433:            if command == 0x0005 and body_len > 0:
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isup_driver.py:434:                logger.info(f"[ISUP] 收到数据包: command=0x{command:04x}, body_len={body_len}")
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isup_driver.py:456:            command_map = {
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isup_driver.py:469:                'type': command_map.get(command, f'unknown_{command:04x}'),
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isup_driver.py:470:                'command': command,
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isup_driver.py:482:    def _build_packet(self, command: int, device_serial: str, body: bytes = b'', sequence: int = 0) -> bytes:
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isup_driver.py:490:                struct.pack('>H', command) +
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isup_driver.py:499:    def _build_command_packet(self, device_serial: str, method: str, params: Dict) -> bytes:
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isup_driver.py:503:        command_body = json.dumps({
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isup_driver.py:515:    def _send_response(self, client: socket.socket, command: int, device_serial: str, status: int):
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isup_driver.py:613:    def _handle_command_response(self, device_did: str, payload: Dict):
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isup_driver.py:615:        command = payload.get('command', 'unknown')
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isup_driver.py:619:            'type': 'command_response',
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isup_driver.py:620:            'command': command,
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isup_driver.py:626:        logger.info(f"[ISUP] 命令响应: {device_did} -> {command} = {result}")
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/base_driver.py:35:    def send_command(self, device_did: str, command: Dict[str, Any]) -> Dict[str, Any]:
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/base_driver.py:39:        :param command: 命令内容（已转换为设备格式）
+AN_VANTARIS_IBMS-backend/src/Iot/command_converters/__init__.py:1:# src/Iot/command_converters/__init__.py
+AN_VANTARIS_IBMS-backend/src/Iot/command_converters/__init__.py:42:        command_topic = raw_path.replace('{device_id}', device_config.get('did', ''))
+AN_VANTARIS_IBMS-backend/src/Iot/command_converters/__init__.py:43:        command_topic = command_topic.replace('{device_code}', device_code)
+AN_VANTARIS_IBMS-backend/src/Iot/command_converters/__init__.py:47:            if command_topic.endswith('/command'):
+AN_VANTARIS_IBMS-backend/src/Iot/command_converters/__init__.py:48:                base_path = command_topic.replace('/command', '')
+AN_VANTARIS_IBMS-backend/src/Iot/command_converters/__init__.py:49:                command_topic = f"{base_path}/{device_code}/command"
+AN_VANTARIS_IBMS-backend/src/Iot/command_converters/__init__.py:51:                command_topic = f"{command_topic}/{device_code}"
+AN_VANTARIS_IBMS-backend/src/Iot/command_converters/__init__.py:55:            payload = {'command': 'set_setpoint', 'value': params.get('value')}
+AN_VANTARIS_IBMS-backend/src/Iot/command_converters/__init__.py:57:            payload = {'command': 'set_damper', 'value': params.get('value')}
+AN_VANTARIS_IBMS-backend/src/Iot/command_converters/__init__.py:59:            payload = {'command': 'get_status'}
+AN_VANTARIS_IBMS-backend/src/Iot/command_converters/__init__.py:64:            'topic': command_topic,
+AN_VANTARIS_IBMS-backend/src/Iot/command_converters/__init__.py:91:            'http_method': http_config.get('method', 'POST'),
+AN_VANTARIS_IBMS-backend/src/Iot/command_converters/__init__.py:114:def get_command_converter(protocol: str) -> CommandConverter:
+AN_VANTARIS_IBMS-backend/src/Iot/command_converters/__init__.py:129:    'get_command_converter',
+AN_VANTARIS_IBMS-backend/src/Iot/device_manager.py:297:    def send_command(self, device_did: str, command: Dict) -> Dict:
+AN_VANTARIS_IBMS-backend/src/Iot/device_manager.py:303:            return driver.send_command(device_did, command)
+AN_VANTARIS_IBMS-backend/src/Iot/dao.py:27:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/Iot/dao.py:59:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/Iot/dao.py:69:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/Iot/dao.py:77:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/Iot/dao.py:130:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/Iot/dao.py:180:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/Iot/dao.py:194:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/Iot/dao.py:326:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/Iot/dao.py:374:            db.session.commit()
+AN_VANTARIS_IBMS-backend/src/Iot/dao.py:391:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/Iot/dao.py:411:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/Iot/dao.py:459:            db.session.commit()
+AN_VANTARIS_IBMS-backend/src/Iot/dao.py:468:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/asset_graph/compatibility/models.py:19:    r"current.?value|live.?value|telemetry|command.?payload|raw.?config|vc.?json|public.?key)",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/runner.py:94:    r"command[_-]?payload|runtime[_-]?state|session)",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/excel/intake.py:210:        return False, "MISSING_OUTPUT"
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/migration_control/evaluator.py:48:    if control_input.readiness_decision in {"NOT_READY", "INPUT_REJECTED", "UNKNOWN"}:
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/pre_execution.py:151:            "OUTPUT_LOCATION_POLICY_GATE",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/__init__.py:2:from .executor import execute_limited_read_validation
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/__init__.py:17:    "execute_limited_read_validation",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/executor.py:72:    if readiness_assessment.get("decision") in {"NOT_READY", "INPUT_REJECTED"}:
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/executor.py:82:def execute_limited_read_validation(request: ExecutionRequest) -> ExecutionResult:
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/executor.py:111:                gate_code="OUTPUT_LOCATION_POLICY_GATE",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/engine.py:27:    r"command.?payload|runtime.?state|session.?state|vc.?json|public.?key)",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/readiness/assessor.py:25:        return "INPUT_REJECTED"
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/readiness/assessor.py:27:        return "INPUT_REJECTED"
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/intake.py:196:            "INPUT_REJECTED",
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/intake.py:201:            "INPUT_REJECTED",
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/intake.py:903:        return False, "MISSING_OUTPUT"
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/constants.py:111:        "INPUT_REJECTED",
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/constants.py:133:    ("COMMAND_PAYLOAD", r"(?i)(exec\s*\(|system\s*\(|subprocess|shell\s*command)"),
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:18:from .commands import (
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:44:    commands: Tuple[PersistenceCommand, ...]
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:72:    def execute_batch(
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:79:                "commandIds": [command.command_id for command in coordinator_input.commands],
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:80:                "tenantId": coordinator_input.commands[0].tenant_id if coordinator_input.commands else "",
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:85:                obligation="commandRejected",
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:87:                tenant_id=coordinator_input.commands[0].tenant_id if coordinator_input.commands else None,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:88:                site_id=coordinator_input.commands[0].site_id if coordinator_input.commands else None,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:94:                command_results=(),
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:100:        validate_batch_limits(coordinator_input.commands, limits)
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:103:        staged_commands: list[PersistenceCommand] = []
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:104:        for command in coordinator_input.commands:
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:109:                        command,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:118:                    command_results=tuple(replay_results),
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:125:                        command,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:134:            staged_commands.append(command)
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:136:        if not staged_commands:
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:140:                command_results=tuple(replay_results),
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:148:            tenant_id=staged_commands[0].tenant_id,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:149:            site_id=staged_commands[0].site_id,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:153:            for command in staged_commands:
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:154:                uow.stage(command)
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:167:                    tenant_id=staged_commands[0].tenant_id,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:168:                    site_id=staged_commands[0].site_id,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:173:                    command,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:179:                for command in staged_commands
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:184:                command_results=tuple(rolled_back),
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:195:                    tenant_id=staged_commands[0].tenant_id,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:196:                    site_id=staged_commands[0].site_id,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:210:                command_results=tuple(
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:214:                            command,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:220:                        for command in staged_commands
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:229:        for index, command in enumerate(staged_commands):
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:230:            commit_row = commit_payload["commandResults"][index]
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:232:                command,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:247:            command_results=tuple(replay_results + staged_results),
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:253:    def _command_result(
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:255:        command: PersistenceCommand,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:266:            command_id=command.command_id,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:267:            idempotency_key_digest=command.idempotency_key_digest(),
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:268:            object_type=command.object_type(),
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:269:            canonical_global_id_digest=command.canonical_global_id_digest(),
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:280:    def _release_idempotency(self, commands: Sequence[PersistenceCommand]) -> int:
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:282:        for command in commands:
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:304:                    command_id=None,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/audit.py:34:    command_id: Optional[str]
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/audit.py:47:    "commandAccepted": "ASSET_GRAPH_PERSISTENCE_COMMAND_ACCEPTED",
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/audit.py:48:    "commandRejected": "ASSET_GRAPH_PERSISTENCE_COMMAND_REJECTED",
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/audit.py:65:            "commandId": context.command_id,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/audit.py:81:        target_type="PERSISTENCE_COMMAND" if context.command_id else None,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/audit.py:82:        target_id=context.command_id,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/audit.py:128:            command_id=None,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/audit.py:136:            command_id=None,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/audit.py:144:            command_id=None,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/audit.py:163:            command_id=None,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/results.py:41:    command_id: str
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/results.py:60:            "commandId": self.command_id,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/results.py:81:    command_results: Tuple[PersistenceCommandResult, ...]
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/results.py:95:            "commandResults": [item.serialize() for item in self.command_results],
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/results.py:105:    command_results: Tuple[PersistenceCommandResult, ...]
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/results.py:122:            "commandResults": [item.serialize() for item in self.command_results],
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/idempotency.py:1:"""Deterministic idempotency semantics for persistence commands."""
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/idempotency.py:8:from .commands import PersistenceCommand
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/idempotency.py:29:    def evaluate(self, command: PersistenceCommand, *, canonical_content_digest: Optional[str] = None) -> IdempotencyEvaluation:
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/idempotency.py:30:        key_digest = command.idempotency_key_digest()
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/idempotency.py:31:        command_digest = command.command_digest()
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/idempotency.py:35:        previous_command_digest, previous_result_digest = existing
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/idempotency.py:36:        if previous_command_digest != command_digest:
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/idempotency.py:48:    def record(self, command: PersistenceCommand, result: PersistenceCommandResult) -> None:
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/idempotency.py:50:            command.command_digest(),
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/idempotency.py:54:    def release(self, command: PersistenceCommand) -> None:
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/idempotency.py:57:    def mark_failed(self, command: PersistenceCommand) -> None:
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/idempotency.py:58:        key_digest = command.idempotency_key_digest()
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/batch.py:7:from .commands import CreateCanonicalDevice, CreateCanonicalPoint, CreateCanonicalRelationship, CreateCanonicalTag, PersistenceCommand
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/batch.py:11:def validate_batch_limits(commands: Sequence[PersistenceCommand], limits: Mapping[str, int]) -> None:
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/batch.py:12:    if len(commands) > limits["maximumCommandsPerBatch"]:
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/batch.py:13:        raise PersistenceBatchLimitError("command batch exceeds maximumCommandsPerBatch")
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/batch.py:14:    device_count = sum(1 for command in commands if isinstance(command, CreateCanonicalDevice))
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/batch.py:17:    tag_count = sum(1 for command in commands if isinstance(command, CreateCanonicalTag))
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/batch.py:20:    relationship_count = sum(1 for command in commands if isinstance(command, CreateCanonicalRelationship))
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/batch.py:24:    for command in commands:
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/batch.py:25:        if isinstance(command, CreateCanonicalPoint):
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/batch.py:26:            points_by_device[command.device_global_id] += 1
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/constants.py:47:UPDATE_OUTCOMES = frozenset(
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/constants.py:49:        "UPDATED",
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/constants.py:80:        "commandAccepted",
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/constants.py:81:        "commandRejected",
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/__init__.py:4:from .commands import (
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/providers.py:9:from .commands import PersistenceCommand
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/providers.py:50:    def stage_create(self, command: PersistenceCommand) -> StagedWriteResult: ...
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/providers.py:53:    def stage_update(self, command: PersistenceCommand) -> StagedWriteResult: ...
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/providers.py:67:    def stage_create(self, command: PersistenceCommand) -> StagedWriteResult: ...
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/providers.py:70:    def stage_update(self, command: PersistenceCommand) -> StagedWriteResult: ...
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/providers.py:84:    def stage_create(self, command: PersistenceCommand) -> StagedWriteResult: ...
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/providers.py:95:    def stage_relationship_create(self, command: PersistenceCommand) -> StagedWriteResult: ...
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/providers.py:100:    def stage(self, command: PersistenceCommand) -> StagedWriteResult: ...
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/conflicts.py:63:    "IDEMPOTENCY_CONFLICT": "Idempotency key reused with a different command digest.",
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/identity.py:8:from .constants import UPDATE_OUTCOMES
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/identity.py:46:    return "UPDATED"
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/identity.py:74:    if outcome not in UPDATE_OUTCOMES:
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/commands.py:1:"""Immutable persistence write commands."""
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/commands.py:21:    command_id: str
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/commands.py:39:    def command_digest(self) -> str:
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/commands.py:50:            "commandId": self.command_id,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/commands.py:63:            "commandType": self.command_type(),
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/commands.py:66:    def command_type(self) -> str:
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/commands.py:74:        payload["commandType"] = self.command_type()
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/commands.py:76:        payload["commandDigest"] = self.command_digest()
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/commands.py:80:    def _base_from_mapping(cls, value: Mapping[str, Any], *, command_type: str, object_type: str) -> dict[str, Any]:
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/commands.py:82:            "command_id": _require_text(value["commandId"], "commandId"),
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/commands.py:103:    def command_type(self) -> str:
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/commands.py:120:    def command_type(self) -> str:
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/commands.py:137:    def command_type(self) -> str:
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/commands.py:154:    def command_type(self) -> str:
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/commands.py:171:    def command_type(self) -> str:
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/commands.py:190:    def command_type(self) -> str:
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/unit_of_work.py:8:from .commands import (
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/unit_of_work.py:36:    def stage(self, command: PersistenceCommand) -> StagedWriteResult:
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/unit_of_work.py:39:        if command.tenant_id != self.tenant_id or command.site_id != self.site_id:
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/unit_of_work.py:40:            raise PersistenceUnitOfWorkError("command scope mismatch")
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/unit_of_work.py:43:        if isinstance(command, (CreateCanonicalDevice, UpdateCanonicalDevice)):
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/unit_of_work.py:47:            object_type=command.object_type(),
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/unit_of_work.py:48:            canonical_global_id_digest=command.canonical_global_id_digest(),
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/unit_of_work.py:59:                errors.append("device must be staged before dependent point or relationship commands")
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/unit_of_work.py:61:            if isinstance(command, (UpdateCanonicalDevice, UpdateCanonicalPoint)):
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/unit_of_work.py:65:                    expected_version=command.expected_version,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/unit_of_work.py:68:                    errors.append(f"version conflict for command {command.command_id}")
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/unit_of_work.py:70:                    errors.append(f"not found for command {command.command_id}")
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/unit_of_work.py:83:            key = command.canonical_global_id_digest()
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/unit_of_work.py:86:            new_version = previous_version + 1 if isinstance(command, (UpdateCanonicalDevice, UpdateCanonicalPoint)) else 1
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/unit_of_work.py:87:            revision = sha256_digest({"transactionId": self.transaction_id, "commandId": command.command_id})
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/unit_of_work.py:95:                    "commandId": command.command_id,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/unit_of_work.py:96:                    "objectType": command.object_type(),
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/unit_of_work.py:106:            "commandResults": results,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/unit_of_work.py:119:    def _validate_order(self, command: PersistenceCommand) -> None:
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_reconciliation/mapper.py:43:        return False, "MISSING_OUTPUT"
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_reconciliation/constants.py:69:    "G01_INPUT_EVIDENCE_INTEGRITY",
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_reconciliation/gates.py:46:    add("G01_INPUT_EVIDENCE_INTEGRITY", "PASS", "All upstream artifact authorities and digests verified")
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_classification/mapper.py:32:        return False, "MISSING_OUTPUT"
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_spatial/mapper.py:42:        return False, "MISSING_OUTPUT"
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_review_projection/mapper.py:43:        return False, "MISSING_OUTPUT"
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_review_projection/constants.py:46:    "G01_INPUT_EVIDENCE_INTEGRITY",
+AN_VANTARIS_IBMS-backend/src/system/menu_models.py:25:    updated_at = Column(DateTime, server_default=text('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+AN_VANTARIS_IBMS-backend/src/system/menu_models.py:46:    updated_at = Column(DateTime, server_default=text('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+AN_VANTARIS_IBMS-backend/src/system/menu_models.py:65:    updated_at = Column(DateTime, server_default=text('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:126:        result = session.execute(
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:135:        menus = session.execute(
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:156:        target = session.execute(
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:164:        session.execute(text("UPDATE sys_version SET is_default = 0"))
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:165:        session.execute(
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:166:            text("UPDATE sys_version SET is_default = 1 WHERE version_code = :code"),
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:171:        menus = session.execute(
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:185:        version_info = session.execute(
+AN_VANTARIS_IBMS-backend/src/scripts/migrate_csv_data.py:2:文件路径: scripts/migrate_csv_data.py
+AN_VANTARIS_IBMS-backend/src/scripts/migrate_csv_data.py:31:def migrate_data():
+AN_VANTARIS_IBMS-backend/src/scripts/migrate_csv_data.py:150:        migrate_data()
+AN_VANTARIS_IBMS-backend/src/governance/audit/pilot.py:117:    """Audit exactly POST /api/system/versions after a successful mutation."""
+AN_VANTARIS_IBMS-backend/src/governance/audit/pilot.py:138:            route_id="ROUTE-POST-C39FFBE9F5DC",
+AN_VANTARIS_IBMS-backend/src/governance/audit/constants.py:46:    "CANONICAL_OBJECT_UPDATE": (True, True, AuditFailurePolicy.FAIL_OPERATION_WITH_AUDIT_ERROR),
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:50:@api_bp.route('/did/system/init', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:76:@api_bp.route('/did/entity', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:135:@api_bp.route('/did/vp/generate', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:176:@api_bp.route('/did/vp/verify', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:205:@api_bp.route('/did/vc/reissue', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:260:@api_bp.route('/did/vc/revoke', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:279:@api_bp.route('/did/vc/status', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:435:@api_bp.route('/did/login', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/prod_ga/foundation_packages_provider.py:5:local filesystem reads only; it does not start runtimes, execute validators,
+AN_VANTARIS_IBMS-backend/src/api/data_modeling/modeling_api.py:49:@api_bp.route('/modeling/<device_code>/train', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/data_modeling/modeling_api.py:62:@api_bp.route('/modeling/<device_code>/predict', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/data_modeling/modeling_api.py:75:@api_bp.route('/modeling/<device_code>/predict_future', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/data_modeling/modeling_api.py:109:@api_bp.route('/modeling/<device_code>/<method>', methods=['POST', 'GET'])
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:27:@api_bp.route('/iot/device/register', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:161:                        "raw_path": "building/hvac/command",
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:218:@api_bp.route('/iot/device/did/<string:device_did>', methods=['PUT'])
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:253:@api_bp.route('/iot/device/did/<string:device_did>', methods=['PATCH'])
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:258:    部分更新设备信息（PATCH方式，只更新传入的字段）
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:286:@api_bp.route('/iot/device/did/<string:device_did>', methods=['DELETE'])
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:306:@api_bp.route('/iot/device/did/<string:device_did>/status', methods=['PUT'])
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:339:@api_bp.route('/iot/device/did/<string:device_did>/field-mappings', methods=['PUT'])
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:374:@api_bp.route('/iot/device/did/<string:device_did>/method-mappings', methods=['PUT'])
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:386:                "raw_path": "building/hvac/command",
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:594:@api_bp.route('/iot/device/<string:device_did>/command', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:596:@require_any_permission(['iot:command', 'device:control'])
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:597:def send_device_command(device_did: str):
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:607:    log_sensitive_api("iot.device.command", device_did=device_did, category="iot")
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:617:        result = device_manager.send_command(device_did, data)
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:628:@api_bp.route('/iot/device/code/<string:device_code>/command', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:630:@require_any_permission(['iot:command', 'device:control'])
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:631:def send_command_by_code(device_code: str):
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:633:    log_sensitive_api("iot.device.command", device_code=device_code, category="iot")
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:646:        result = device_manager.send_command(device.did, data)
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:723:                    "raw_path": "building/hvac/command",
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:762:@api_bp.route('/iot/standard-fields', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:814:@api_bp.route('/iot/standard-fields/<string:field_code>', methods=['PUT'])
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:868:@api_bp.route('/iot/standard-fields/<string:field_code>', methods=['DELETE'])
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:894:@api_bp.route('/iot/standard-methods', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:950:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:966:@api_bp.route('/iot/standard-methods/<string:method_code>', methods=['PUT'])
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:1004:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:1020:@api_bp.route('/iot/standard-methods/<string:method_code>', methods=['DELETE'])
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:1043:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:1049:@api_bp.route('/iot/ingest/http', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:1055:    设备通过 POST 请求发送数据到此端点
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:1116:@api_bp.route('/iot/device/<string:device_code>/reconnect', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/iot/sse_api.py:9:curl -X POST "http://localhost:5000/api/iot/device/HVAC_SIM_001/test-sse-push"
+AN_VANTARIS_IBMS-backend/src/api/iot/sse_api.py:181:@api_bp.route('/iot/device/<string:device_code>/test-sse-push', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:32:        result = db.session.execute(text("SELECT * FROM sys_version ORDER BY sort_order"))
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:49:        row = db.session.execute(text("SELECT * FROM sys_version WHERE is_default = 1 LIMIT 1")).fetchone()
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:61:@api_bp.route('/system/versions', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:70:        check = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:76:        db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:78:                INSERT INTO sys_version (version_code, version_name, description, icon, sort_order, is_active, is_default)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:91:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:102:@api_bp.route('/system/versions/<version_code>', methods=['PUT'])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:108:        check = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:135:            query = f"UPDATE sys_version SET {', '.join(update_fields)} WHERE version_code = :version_code"
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:136:            db.session.execute(text(query), params)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:137:            db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:144:@api_bp.route('/system/versions/<version_code>', methods=['DELETE'])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:149:        check = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:155:        db.session.execute(text("DELETE FROM sys_version WHERE version_code = :code"), {"code": version_code})
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:156:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:188:@api_bp.route('/system/versions/switch/<version_code>', methods=['PUT'])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:196:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:218:@api_bp.route('/system/menus-add', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:226:        existing = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:232:        db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:234:                INSERT INTO sys_menu (parent_id, menu_path, menu_title, menu_icon, menu_type, has_children, redirect_path, sort_order, is_visible)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:249:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:250:        new_id = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:260:@api_bp.route('/system/menus-update/<int:menu_id>', methods=['PUT'])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:266:        check = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:299:            query = f"UPDATE sys_menu SET {', '.join(update_fields)} WHERE id = :id"
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:300:            db.session.execute(text(query), params)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:301:            db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:308:@api_bp.route('/system/menus-delete/<int:menu_id>', methods=['DELETE'])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:313:        check = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:319:        db.session.execute(text("DELETE FROM sys_menu WHERE parent_id = :parent_id"), {"parent_id": menu_id})
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:320:        db.session.execute(text("DELETE FROM sys_menu WHERE id = :id"), {"id": menu_id})
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:321:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:330:@api_bp.route('/system/menus/batch-sort', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:352:                result = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:361:                db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:362:                    text("UPDATE sys_menu SET sort_order = :sort_order WHERE id = :id"),
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:367:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:388:@api_bp.route('/system/version-menus/<version_code>/batch', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:397:        version = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:409:                menu = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:421:                    updated = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:423:                            UPDATE sys_version_menu
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:430:                        db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:432:                                INSERT INTO sys_version_menu (version_code, menu_id, menu_path, is_visible, sort_order)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:438:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:447:@api_bp.route('/system/version-menus/<version_code>/incremental', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:466:        version_check = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:491:                batch_result = db.session.execute(menu_query, params).fetchall()
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:508:                    updated = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:510:                            UPDATE sys_version_menu
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:517:                        db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:519:                                INSERT INTO sys_version_menu (version_code, menu_id, menu_path, is_visible)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:540:                        UPDATE sys_version_menu 
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:545:                    result = db.session.execute(update_query, params)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:548:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:567:@api_bp.route('/system/version-menus/<version_code>/diff', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:588:        version = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:604:            menu = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:616:                updated = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:618:                        UPDATE sys_version_menu
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:625:                    db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:627:                            INSERT INTO sys_version_menu (version_code, menu_id, menu_path, is_visible)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:634:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:673:        versions_result = db.session.execute(versions_query).fetchall()
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:679:        version_menu_rows = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:733:        menu_result = db.session.execute(menu_query).fetchall()
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:13:@api_bp.route('/system/entity-types', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:30:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:47:@api_bp.route('/system/entity-types/<type_id>', methods=['PUT'])
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:55:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:74:@api_bp.route('/system/entity-types/<type_id>', methods=['DELETE'])
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:81:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:149:@api_bp.route('/system/permissions', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:164:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:180:@api_bp.route('/system/permissions/<perm_id>', methods=['PUT'])
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:188:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:206:@api_bp.route('/system/permissions/<perm_id>', methods=['DELETE'])
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:213:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:264:@api_bp.route('/system/create-standard-fields', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:276:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:299:@api_bp.route('/system/update-standard-fields/<field_id>', methods=['PUT'])
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:307:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:332:@api_bp.route('/system/delete-standard-fields/<field_id>', methods=['DELETE'])
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:339:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:400:@api_bp.route('/system/create-standard-methods', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:411:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:433:@api_bp.route('/system/update-standard-methods/<method_id>', methods=['PUT'])
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:441:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:465:@api_bp.route('/system/delete-standard-methods/<method_id>', methods=['DELETE'])
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:472:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/reports/reports_api.py:41:@api_bp.route("/v1/reports/query", methods=["POST"])
+AN_VANTARIS_IBMS-backend/src/api/reports/reports_api.py:50:@api_bp.route("/v1/reports/export/manifest", methods=["POST"])
+AN_VANTARIS_ONE/registries/umms-r7a-local-freeze.v1.json:77:    "Graphics HMI to locate Equipment",
+AN_VANTARIS_ONE/registries/umms-r7a-local-freeze.v1.json:141:    "commandsExecuted": false,
+AN_VANTARIS_ONE/registries/asset-graph-read-migration-readiness-policy.v1.json:8:    "INPUT_REJECTED",
+AN_VANTARIS_ONE/registries/airport-ga-stakeholder-review-package.v1.json:95:      "function": "Graphics HMI to locate equipment",
+AN_VANTARIS_ONE/registries/guard-contract.v1.json:410:      "policyId": "UPDATE",
+AN_VANTARIS_ONE/registries/guard-contract.v1.json:423:      "policyId": "DELETE",
+AN_VANTARIS_ONE/registries/guard-contract.v1.json:573:        "routeId": "ROUTE-POST-FBB45557ACEE",
+AN_VANTARIS_ONE/registries/umms-r13a-local-freeze.v1.json:47:    "ONE_UMMS_R9_AIRPORT_HMI_LOCATOR_BINDING_READINESS_PASS",
+AN_VANTARIS_ONE/registries/umms-r13a-local-freeze.v1.json:102:    "commandsExecuted": false,
+AN_VANTARIS_ONE/registries/umms-r13a-local-freeze.v1.json:103:    "commandsForFutureUseOnly": [
+AN_VANTARIS_ONE/registries/package-registry.v1.json:432:        "work:execute",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:679:        "inspection:execute",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:927:        "report:execute",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:976:        "analytics:execute"
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:117:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:135:        menus = session.execute(
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:124:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:171:        menus = session.execute(
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:193:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:218:@api_bp.route('/system/menus-add', methods=['POST'])
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:200:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:234:                INSERT INTO sys_menu (parent_id, menu_path, menu_title, menu_icon, menu_type, has_children, redirect_path, sort_order, is_visible)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:208:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:260:@api_bp.route('/system/menus-update/<int:menu_id>', methods=['PUT'])
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:223:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:299:            query = f"UPDATE sys_menu SET {', '.join(update_fields)} WHERE id = :id"
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:224:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:308:@api_bp.route('/system/menus-delete/<int:menu_id>', methods=['DELETE'])
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:229:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:319:        db.session.execute(text("DELETE FROM sys_menu WHERE parent_id = :parent_id"), {"parent_id": menu_id})
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:230:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:320:        db.session.execute(text("DELETE FROM sys_menu WHERE id = :id"), {"id": menu_id})
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:231:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:330:@api_bp.route('/system/menus/batch-sort', methods=['POST'])
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:249:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:362:                    text("UPDATE sys_menu SET sort_order = :sort_order WHERE id = :id"),
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:255:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:388:@api_bp.route('/system/version-menus/<version_code>/batch', methods=['POST'])
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:265:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:409:                menu = db.session.execute(
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:271:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:423:                            UPDATE sys_version_menu
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:273:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:432:                                INSERT INTO sys_version_menu (version_code, menu_id, menu_path, is_visible, sort_order)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:275:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:447:@api_bp.route('/system/version-menus/<version_code>/incremental', methods=['POST'])
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:281:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:491:                batch_result = db.session.execute(menu_query, params).fetchall()
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:287:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:510:                            UPDATE sys_version_menu
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:289:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:519:                                INSERT INTO sys_version_menu (version_code, menu_id, menu_path, is_visible)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:291:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:540:                        UPDATE sys_version_menu 
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:294:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:567:@api_bp.route('/system/version-menus/<version_code>/diff', methods=['POST'])
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:300:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:604:            menu = db.session.execute(
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:306:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:618:                        UPDATE sys_version_menu
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:308:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:627:                            INSERT INTO sys_version_menu (version_code, menu_id, menu_path, is_visible)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:311:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:679:        version_menu_rows = db.session.execute(
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:324:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:733:        menu_result = db.session.execute(menu_query).fetchall()
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:495:AN_VANTARIS_ONE/registries/umms-r7a-local-freeze.v1.json:77:    "Graphics HMI to locate Equipment",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:510:AN_VANTARIS_ONE/registries/airport-ga-stakeholder-review-package.v1.json:95:      "function": "Graphics HMI to locate equipment",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:513:AN_VANTARIS_ONE/registries/umms-r13a-local-freeze.v1.json:47:    "ONE_UMMS_R9_AIRPORT_HMI_LOCATOR_BINDING_READINESS_PASS",
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:634:AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:117:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:135:        menus = session.execute(
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:641:AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:124:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:171:        menus = session.execute(
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:710:AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:193:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:218:@api_bp.route('/system/menus-add', methods=['POST'])
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:717:AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:200:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:234:                INSERT INTO sys_menu (parent_id, menu_path, menu_title, menu_icon, menu_type, has_children, redirect_path, sort_order, is_visible)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:725:AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:208:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:260:@api_bp.route('/system/menus-update/<int:menu_id>', methods=['PUT'])
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:740:AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:223:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:299:            query = f"UPDATE sys_menu SET {', '.join(update_fields)} WHERE id = :id"
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:741:AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:224:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:308:@api_bp.route('/system/menus-delete/<int:menu_id>', methods=['DELETE'])
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:746:AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:229:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:319:        db.session.execute(text("DELETE FROM sys_menu WHERE parent_id = :parent_id"), {"parent_id": menu_id})
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:747:AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:230:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:320:        db.session.execute(text("DELETE FROM sys_menu WHERE id = :id"), {"id": menu_id})
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:748:AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:231:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:330:@api_bp.route('/system/menus/batch-sort', methods=['POST'])
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:766:AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:249:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:362:                    text("UPDATE sys_menu SET sort_order = :sort_order WHERE id = :id"),
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:772:AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:255:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:388:@api_bp.route('/system/version-menus/<version_code>/batch', methods=['POST'])
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:782:AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:265:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:409:                menu = db.session.execute(
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:788:AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:271:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:423:                            UPDATE sys_version_menu
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:790:AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:273:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:432:                                INSERT INTO sys_version_menu (version_code, menu_id, menu_path, is_visible, sort_order)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:792:AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:275:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:447:@api_bp.route('/system/version-menus/<version_code>/incremental', methods=['POST'])
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:798:AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-route-menu-references.txt:281:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:491:                batch_result = db.session.execute(menu_query, params).fetchall()
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-evidence-files.txt:454:./AN_VANTARIS_ONE/packages/AN_VANTARIS_Contracts/evidence/CONTRACTS_C2_05_AIRPORT_ASSET_LOCATION_HMI_LOCATOR_SCHEMA.md
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-evidence-files.txt:482:./ONE_AIRPORT_GA_R9_GRAPHICS_HMI_EQUIPMENT_LOCATOR_READINESS_REPORT.md
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-evidence-files.txt:488:./ONE_UMMS_R9_AIRPORT_HMI_LOCATOR_BINDING_READINESS_REPORT.md
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-uconsole-evidence-files.txt:505:./docs/governance/IBMS_CORE_LICENSE_PATCH_MENU_POLICY.md
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:1:AN_VANTARIS_IBMS-backend/migrations/README.md:5:- No migration executed in this task
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:2:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/test_device_reconciliation_evidence_runner.py:20:        command = [
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:3:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/test_device_reconciliation_evidence_runner.py:35:            command.extend(extra)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:4:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/test_device_reconciliation_evidence_runner.py:36:        return subprocess.run(command, cwd=ROOT, capture_output=True, text=True, check=False)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:5:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/test_device_reconciliation_evidence_runner.py:57:            command = [
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:6:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/test_device_reconciliation_evidence_runner.py:71:            result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True, check=False)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:7:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:22:    execute_limited_read_validation,
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:8:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:30:OUTPUT_ROOT = Path("/tmp/one-p1-16m")
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:9:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:86:    report_path = OUTPUT_ROOT / "setup" / f"{package_path.stem}-report.json"
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:11:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:132:    def _execute(
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:12:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:158:        return execute_limited_read_validation(request).serialize()
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:31:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:337:        report_path = OUTPUT_ROOT / "setup" / "review-source-report.json"
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:49:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:71:    def execute(self, value=None, run_id="run-1"):
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:50:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:78:        run = self.execute()
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:51:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:83:        run = self.execute(input_for(fields={"device-1": (field(),)}))
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:52:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:87:        self.assertEqual(self.execute(run_id="a").input_digest, self.execute(run_id="b").input_digest)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:53:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:93:        self.assertEqual(self.execute(run_id="a").result_digest, self.execute(run_id="b").result_digest)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:54:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:96:        comparison = self.service.compare_runs(self.execute(run_id="a"), self.execute(run_id="b"))
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:55:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:121:        run = self.execute(input_for(devices=(device(), device())))
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:56:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:201:        run = self.execute(input_for(devices=(device("a", device_code="SAME"), device("b", device_code="SAME"))))
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:57:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:219:            self.execute(input_for(devices=tuple(device(str(i)) for i in range(101))))
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:58:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:222:        run = self.execute(input_for(devices=(device("z"), device("a"))))
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:59:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:226:        run = self.execute(input_for(devices=(device("good"), {"id": "", "device_name": "Bad", "created_at": NOW})))
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:60:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:231:        left = self.execute()
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:61:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:232:        right = self.execute(input_for(version="legacy-device-v2"), run_id="right")
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:62:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:236:        self.assertTrue(self.service.compare_runs(self.execute(run_id="a"), self.execute(run_id="b")).identical_except_run_id)
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:63:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:239:        left = self.execute()
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:64:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:240:        right = self.execute(input_for(devices=(device(description="changed"),)), run_id="right")
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:65:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:253:        run = self.execute(input_for(devices=(device(device_type=None),), ctx=context(default_device_type=None)))
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:66:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:257:        self.assertEqual(self.execute().cutover_decision, "NOT_READY_FOR_WRITE_CUTOVER")
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:67:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:260:        self.assertEqual(self.execute(input_for(version="unapproved")).cutover_decision, "BLOCKED_BY_REVIEW")
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:68:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:264:            self.execute().cutover_decision = "READY_FOR_WRITE_CUTOVER"
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:69:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:278:        run = self.execute(input_for(devices=({"id": "x", "device_name": "Bad", "private_key": "super-secret", "created_at": NOW},)))
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:70:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:282:        run = self.execute(input_for(devices=({"id": "x", "device_name": "Bad", "live_value": "raw-telemetry-secret", "created_at": NOW},)))
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:71:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/readiness/test_readiness_gate.py:64:        self.assertEqual(payload["decision"], "INPUT_REJECTED")
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:72:AN_VANTARIS_IBMS-backend/tests/asset_graph/airport_intake/test_formula_intake.py:63:        self.assertEqual(ctx.exception.code, "INPUT_REJECTED")
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:73:AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:44:from src.asset_graph.reconciliation.read_validation import ExecutionRequest, execute_limited_read_validation
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:74:AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:54:OUTPUT_ROOT = Path("/tmp/one-p1-16n-tests")
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:75:AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:111:    report_path = OUTPUT_ROOT / "setup" / f"{package_path.stem}-report.json"
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:77:AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:149:    def _execute(
+AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-risk-scan.txt:78:AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:177:        return execute_limited_read_validation(request).serialize()
