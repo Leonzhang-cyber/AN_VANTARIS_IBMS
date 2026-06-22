@@ -1,0 +1,996 @@
+./ONE_UMMS_R12A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:1:# ONE UMMS-R12A Local Freeze + Optional Tag Plan Report
+./ONE_UMMS_R12A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:14:- `ONE_UMMS_R12A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md`
+./ONE_UMMS_R12A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:16:- `ONE_UMMS_R12A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md`
+./ONE_UMMS_R12A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:21:UMMS-R12A freezes the UMMS-R12 read-only frontend/UConsole entry layer. It documents and validates that `/one/umms/overview` remains a read-only stakeholder-review surface over the five UMMS-R11 GET endpoints.
+./ONE_UMMS_R12A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:44:The regression chain from UMMS-R2 through UMMS-R12 is verified through frozen PASS markers in the R12A validator, and the R12 validator is rerun after the R12A commit when the working tree is clean.
+./ONE_UMMS_R12A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:50:- UMMS-R12 UI exists.
+./ONE_UMMS_R12A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:51:- UMMS-R12 API usage remains GET-only.
+./ONE_UMMS_R12A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:52:- No POST / PUT / PATCH / DELETE UMMS endpoints are used.
+./ONE_UMMS_R12A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:55:- R2–R12 chain PASS markers remain intact.
+./ONE_UMMS_R12A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:66:`ONE_UMMS_R12A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS`
+./ONE_UMMS_R12A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:73:- No frontend expansion beyond the read-only UMMS card/page.
+./ONE_UMMS_R12A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:74:- No POST / PUT / PATCH / DELETE UMMS client method added.
+./ONE_UMMS_R12A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:87:UMMS-R13 planning stage only.
+./ONE_AIRPORT_A2_01_GENERIC_SOURCE_SYSTEM_REGISTRY_FOUNDATION_REPORT.md:47:`ONE_AIRPORT_A2_01_GENERIC_SOURCE_SYSTEM_REGISTRY_FOUNDATION_PASS`
+./ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_REPORT.md:1:# ONE-AIRPORT-GA-R8 Engineer Commissioning Diagnostics Readiness Report
+./ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_REPORT.md:7:- GA-R7 dependency: `ONE_AIRPORT_GA_R7_EXISTING_SYSTEM_ONBOARDING_MAPPING_READINESS_PASS`
+./ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_REPORT.md:8:- Branch state before GA-R8: `main...origin/main [ahead 2]`
+./ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_REPORT.md:14:- `ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_REPORT.md`
+./ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_REPORT.md:19:GA-R8 adds a VANTARIS ONE-side, read-only Airport engineer commissioning diagnostics readiness projection. It defines future diagnostic domains, EDGE/LINK diagnostic requirements, source-system diagnostic requirements, mapping checks, payload and normalization preview requirements, delivery diagnostics, support bundle requirements, and remote engineer review checklist requirements.
+./ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_REPORT.md:21:GA-R8 does not run diagnostics, execute commands, connect to devices, call EDGE/LINK runtime, generate support bundles, or enable activation.
+./ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_REPORT.md:31:EDGE diagnostics execution belongs to shared AN_VANTARIS_EDGE and is not implemented in GA-R8.
+./ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_REPORT.md:37:LINK diagnostics execution belongs to shared AN_VANTARIS_LINK and is not implemented in GA-R8.
+./ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_REPORT.md:41:GA-R8 defines future source-system diagnostic fields for system identity, connector identity, integration method, connectivity, credential status, last seen/sample timestamps, data freshness, mapping status, normalization status, risk flags, and required engineer action.
+./ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_REPORT.md:45:GA-R8 defines future checks for tag mapping, duplicate tags, tag conflicts, missing asset/location references, unit normalization, timezone normalization, quality flags, severity mapping, alarm mapping, fault candidate mapping, work-order trigger mapping, and HMI locator mapping.
+./ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_REPORT.md:49:Only preview requirements are defined in GA-R8. No runtime payload collection is added.
+./ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_REPORT.md:59:Support bundle generation/execution is not implemented in GA-R8.
+./ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_REPORT.md:65:GA-R8 defines future checklist items for deployment mode, site/project binding, hardware key, EDGE package integrity, LINK package integrity, connector matrix, source system profiles, mapping draft, tag risks, asset/location risks, sample payload preview, normalization preview, delivery/ack, retry/DLQ, audit/evidence chain, support bundle readiness, runtime activation disabled, production activation disabled, and customer approval before activation.
+./ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_REPORT.md:69:GA-R8 maps diagnostics readiness to work orders, asset registry, preventive maintenance, spare parts, vendor/contract management, graphics HMI equipment location, existing-system onboarding, engineer commissioning diagnostics, remote overseas deployment, and distributed independent installation.
+./ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_REPORT.md:97:- `grep -R "ONE_AIRPORT_GA_R7_EXISTING_SYSTEM_ONBOARDING_MAPPING_READINESS_PASS" . --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=.venv --exclude-dir=venv`
+./ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_REPORT.md:114:- GA-R8 engineer commissioning diagnostics readiness validator: expected PASS
+./ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_REPORT.md:115:- GA-R7 existing-system onboarding mapping readiness regression: expected PASS
+./ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_REPORT.md:116:- GA-R6 LINK integration readiness projection regression: expected PASS
+./ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_REPORT.md:117:- GA-R5A local release freeze regression: expected PASS
+./ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_REPORT.md:118:- GA-R5 stakeholder package regression: expected PASS
+./ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_REPORT.md:119:- GA-R4 UConsole binding regression: expected PASS
+./ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_REPORT.md:120:- GA-R3 frontend read-only page regression: expected PASS
+./ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_REPORT.md:121:- GA-R2 API smoke/contract regression: expected PASS
+./ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_REPORT.md:122:- GA-R1 API route regression: expected PASS
+./ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_REPORT.md:128:## PASS marker
+./ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_REPORT.md:130:`ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_PASS`
+./ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_REPORT.md:150:1. Airport GA-R9 Graphics HMI Equipment Locator Readiness
+./ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_REPORT.md:151:2. Airport GA-R10 Distributed / Remote Deployment Readiness Package
+./ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_REPORT.md:152:3. UMMS-R2 Work Order / Asset / PM domain alignment
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX_REPORT.md:1:# ONE-PROD-GA-R10 Final International GA Readiness Matrix Report
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX_REPORT.md:5:- `ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md`
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX_REPORT.md:7:- `ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX_REPORT.md`
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX_REPORT.md:12:Evidence discovery reviewed module-named files, PASS markers, package counts, and prior Production GA reports. The raw discovery output includes legacy dependency/cache noise from local development folders, so the R10 decision uses authoritative repository artifacts: R6/R7/R8/R9 PASS markers, R1-R5 Production GA reports, package registries, route enforcement, boundary baseline, UMMS/Airport/UCDE/UConsole reports, and package counts.
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX_REPORT.md:14:Historical R7 validator note: the standalone R7 validator validates its artifacts but has a pre-R7 HEAD guard expecting the R6 baseline. At current post-R9 HEAD it reports the guard mismatch while still showing R7 artifact/package checks as PASS. R10 therefore verifies R7 through PASS markers and artifacts directly.
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX_REPORT.md:25:- GA-ready for declared package scope: EDGE, LINK, DB, Contracts, Offline Export Package.
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX_REPORT.md:26:- Freeze / read-only capability complete: UMMS, UESG, UCDE, UConsole, Reports & Analytics.
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX_REPORT.md:28:- Incomplete / not confirmed: UDOC and any module lacking final GA-specific evidence.
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX_REPORT.md:33:- Foundation package GA: PASS
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX_REPORT.md:37:- Full international GA across all modules: NOT YET
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX_REPORT.md:53:- R7 artifact/PASS marker: verified by R10 validator; standalone R7 validator retains historical pre-R7 HEAD guard
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX_REPORT.md:57:PASS marker: `ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX_PASS`
+./ONE_AIRPORT_A7_02_READ_ONLY_API_RESPONSE_CONTRACT_AND_VALIDATION_GATE_REPORT.md:67:`READ_ONLY_API_RESPONSE_CONTRACT_AND_VALIDATION_GATE_COMPLETE`
+./ONE_AIRPORT_A7_02_READ_ONLY_API_RESPONSE_CONTRACT_AND_VALIDATION_GATE_REPORT.md:73:## PASS marker
+./ONE_AIRPORT_A7_02_READ_ONLY_API_RESPONSE_CONTRACT_AND_VALIDATION_GATE_REPORT.md:75:`ONE_AIRPORT_A7_02_READ_ONLY_API_RESPONSE_CONTRACT_AND_VALIDATION_GATE_PASS`
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION.md:1:# ONE UMMS-R14 Productization Consolidation
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION.md:5:UMMS-R14 consolidates the completed UMMS R2 → R13A read-only platform into a product architecture boundary and packaging model.
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION.md:18:UMMS product boundary:
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION.md:20:- UMMS is a read-only operations intelligence layer.
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION.md:21:- UMMS provides maintenance, asset, vendor/SLA, inventory, evidence/compliance, stakeholder review, UI summary, and observability views from committed architecture/readiness artifacts.
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION.md:22:- UMMS has no runtime authority.
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION.md:23:- UMMS has no work order lifecycle execution authority.
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION.md:24:- UMMS has no PM execution authority.
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION.md:25:- UMMS has no inventory transaction authority.
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION.md:26:- UMMS has no vendor dispatch, contract execution, or SLA enforcement authority.
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION.md:27:- UMMS has no evidence closure execution authority.
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION.md:28:- UMMS has no HMI/equipment control authority.
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION.md:35:- UCDE / Evidence Center provide evidence context and investigation/evidence relationships according to the existing ownership model.
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION.md:37:UMMS consumes context and exposes read-only productized intelligence. It does not execute external systems, write canonical records, or become a system-of-record for generic lifecycle authority.
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION.md:43:| Core Read-only Domain Layer | UMMS-R2 through UMMS-R10A | Defines the read-only product domain surface across work, PM, inventory, vendor/SLA, evidence, HMI locator, and stakeholder review readiness. | None |
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION.md:44:| R11 API Layer | UMMS-R11 / R11A | Defines five GET-only read model endpoints for UMMS package entry, stakeholder review, readiness summary, customer core functions, and safety posture. | None |
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION.md:45:| R12 UI Layer | UMMS-R12 / R12A | Defines the read-only UConsole entry `/one/umms/overview`. | None |
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION.md:46:| R13 Observability Layer | UMMS-R13 | Defines read-only metrics aggregation over committed UMMS artifacts. | None |
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION.md:47:| R13A Freeze Layer | UMMS-R13A | Freezes the R13 observability/read-only metrics layer. | None |
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION.md:51:| Product Domain | UMMS Product Capability | Read-only Product View |
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION.md:57:| Evidence & Compliance View | UCDE evidence closure alignment, evidence requirements, audit/evidence dependency view. | Read-only evidence and compliance view; no evidence upload, closure execution, audit write, handoff generation, or report execution. |
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION.md:64:UFMS  <->  UMMS  <->  EDGE
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION.md:72:- UFMS → UMMS: UFMS intelligence and system-of-record context may be represented as read-only product intelligence.
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION.md:73:- UMMS → UFMS: UMMS may define future adapter requirements but has no live UFMS execution authority in R14.
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION.md:74:- EDGE → UMMS: EDGE readiness, field execution boundaries, device/connector context, and HMI/locator dependencies may be represented as read-only context.
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION.md:75:- UMMS → EDGE: no field execution, no connector execution, no gateway runtime, no device/point command.
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION.md:76:- LINK → UMMS: LINK source-system readiness, onboarding, mapping, and integration context may be represented as read-only context.
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION.md:77:- UMMS → LINK: no live integration call, no source-system runtime operation, no adapter execution.
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION.md:122:UMMS remains a strictly read-only system.
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION.md:124:UMMS-R14 does not provide:
+./ONE_DESIGN_R1_FULL_PRODUCT_DESIGN_BLUEPRINT_REPORT.md:7:- `VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md`
+./ONE_DESIGN_R1_FULL_PRODUCT_DESIGN_BLUEPRINT_REPORT.md:9:- `VANTARIS_ONE_UI_UCONSOLE_INFORMATION_ARCHITECTURE_R1.md`
+./ONE_DESIGN_R1_FULL_PRODUCT_DESIGN_BLUEPRINT_REPORT.md:11:- `VANTARIS_ONE_SECURITY_GOVERNANCE_AND_POLICY_DESIGN_R1.md`
+./ONE_DESIGN_R1_FULL_PRODUCT_DESIGN_BLUEPRINT_REPORT.md:29:The matrix covers UCode/CODE, UMMS, UFMS, UESG, UCDE, UDOC, Automated Rules & Policy, ONE Orchestrator, UConsole, Reports & Analytics, Governance & Security, NEXUS AI, EDGE, LINK, DB, Contracts, Customer Delivery / Installer, and Offline Export. EDGE/LINK/DB/Contracts/Offline Export are GA-ready only for declared foundation/package scope. Customer Delivery / Installer is scaffold PASS. Other modules require final capability freeze and GA evidence before full international GA.
+./ONE_DESIGN_R1_FULL_PRODUCT_DESIGN_BLUEPRINT_REPORT.md:31:## GA Gap Summary
+./ONE_DESIGN_R1_FULL_PRODUCT_DESIGN_BLUEPRINT_REPORT.md:33:- Foundation package GA: PASS
+./ONE_DESIGN_R1_FULL_PRODUCT_DESIGN_BLUEPRINT_REPORT.md:37:- Full international GA across all modules: NOT YET
+./ONE_DESIGN_R1_FULL_PRODUCT_DESIGN_BLUEPRINT_REPORT.md:39:The current state is strong foundation, not full customer activated GA. Remaining work is organized through module freeze, UConsole unified entry, customer delivery activation planning, runtime activation pilot, and final international GA.
+./ONE_DESIGN_R1_FULL_PRODUCT_DESIGN_BLUEPRINT_REPORT.md:55:- `PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-boundaries.py`: PASS with existing non-blocking legacy warnings and `ONE_BOUNDARY_BASELINE_PASS` emitted.
+./ONE_DESIGN_R1_FULL_PRODUCT_DESIGN_BLUEPRINT_REPORT.md:57:The validation set checks all created files, registry JSON, required modules, package counts, R9/R10 markers, UI architecture, data/event flow, security/governance, GA roadmap, forbidden filename scan, execution-safety claims, route enforcement, and boundary baseline.
+./ONE_DESIGN_R1_FULL_PRODUCT_DESIGN_BLUEPRINT_REPORT.md:59:PASS marker: `ONE_DESIGN_R1_FULL_PRODUCT_DESIGN_BLUEPRINT_PASS`
+./ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_REPORT.md:1:# ONE-UMMS-R3 Manual Work Order Read-only Queue / Draft Model Report
+./ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_REPORT.md:15:- `ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_REPORT.md`
+./ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_REPORT.md:20:UMMS-R3 extends UMMS-R2 into a read-only manual work order queue and draft model. It defines future draft fields, queue readiness, validation, assignment readiness, evidence readiness, source mappings, customer-function alignment, and shared foundation dependencies.
+./ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_REPORT.md:22:UMMS-R3 does not create, save, submit, approve, assign, update, close, or convert work orders. It does not write DB state or execute workflow.
+./ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_REPORT.md:38:UMMS-R3 defines manual operator, manual engineer, fault case, alarm, event, PM task, asset inspection, HMI locator, future vendor request, and future customer request source types. All source types are read-only and non-executing in R3.
+./ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_REPORT.md:46:Assignment readiness defines future assignment group, role, skill, discipline, site access, shift window, duration, SLA, escalation, vendor support, customer approval, and readiness status. No assignment execution is implemented in UMMS-R3.
+./ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_REPORT.md:50:Evidence readiness aligns future UCDE evidence references, source evidence, fault/asset/location/HMI locator evidence, before/after/closure/review evidence, audit trail, and readiness status. No evidence upload or closure execution is implemented.
+./ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_REPORT.md:52:## Airport-to-UMMS queue mapping summary
+./ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_REPORT.md:54:Airport fault cases, alarms/events, maintenance work orders, assets/topology, evidence investigation, HMI locator readiness, and reports are mapped into generic UMMS queue/draft readiness concepts without Airport-specific UMMS core logic.
+./ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_REPORT.md:58:UMMS-R3 aligns manual work order queue and draft readiness to work order management, asset registry, PM scheduler, future spare parts/inventory, future vendor/contract, Graphics HMI locator, existing-system onboarding, engineer diagnostics, remote overseas deployment, and distributed independent installation.
+./ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_REPORT.md:60:## Shared EDGE/LINK/UCDE dependency map
+./ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_REPORT.md:66:UCDE dependencies include EvidenceRecord, WorkOrderEvidence, draft review evidence, closure evidence, audit trail, handoff package, and report evidence.
+./ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_REPORT.md:68:## Future UMMS roadmap
+./ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_REPORT.md:70:1. UMMS-R4 Work Order Lifecycle State Model + Validation Gate
+./ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_REPORT.md:71:2. UMMS-R5 Preventive Maintenance Schedule Readiness
+./ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_REPORT.md:72:3. UMMS-R6 Spare Parts / Inventory Readiness
+./ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_REPORT.md:73:4. UMMS-R7 Vendor / Contract / SLA Readiness
+./ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_REPORT.md:74:5. UMMS-R8 UMMS + UCDE Evidence Closure Alignment
+./ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_REPORT.md:75:6. UMMS-R9 UMMS + Airport HMI Locator Binding Readiness
+./ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_REPORT.md:76:7. UMMS-R10 UMMS Stakeholder Review Package
+./ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_REPORT.md:102:- `grep -R "ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS" . --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=.venv --exclude-dir=venv`
+./ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_REPORT.md:119:- UMMS-R3 validator: expected PASS
+./ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_REPORT.md:120:- UMMS-R2A / UMMS-R2 regressions: expected PASS
+./ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_REPORT.md:121:- GA-R10A through GA-R6 regressions: expected PASS
+./ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_REPORT.md:127:## PASS marker
+./ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_REPORT.md:129:`ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_PASS`
+./ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_REPORT.md:144:1. UMMS-R3A Local Freeze + Optional Tag Plan
+./ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_REPORT.md:145:2. UMMS-R4 Work Order Lifecycle State Model + Validation Gate
+./ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_REPORT.md:146:3. UMMS-R5 Preventive Maintenance Schedule Readiness
+./ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_REPORT.md:147:4. UCDE-R4 Evidence Chain Alignment
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:1:# ONE-UMMS-R2A Local Freeze and Optional Tag Plan
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:5:VANTARIS ONE UMMS-R2 Work Order / Asset / PM Domain Alignment is complete and locally frozen.
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:20:UMMS remains a generic VANTARIS ONE module, not Airport-specific logic.
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:36:## UMMS-R2 Commit Reference
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:40:- PASS marker: `ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_PASS`
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:44:1. UMMS generic domain alignment
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:52:9. Airport-to-UMMS mapping
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:54:11. Shared EDGE/LINK/UCDE dependency map
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:55:12. Future UMMS roadmap
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:59:1. UMMS is a generic cross-industry maintenance management module.
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:60:2. Airport is the source industry use case, not the UMMS core identity.
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:65:7. UCDE evidence references are captured for future closure / audit / report alignment.
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:69:| Customer function | Current UMMS-R2 status | Future owner | Related Airport readiness projection | Related EDGE/LINK/UCDE dependency | Future phase |
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:71:| Work Order Management, auto + manual | aligned as WorkOrder / WorkOrderTrigger | UMMS / LINK | Airport GA-R6 / GA-R10A | LINK work-order trigger, UCDE closure evidence | UMMS-R3 |
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:72:| Asset Registry, full lifecycle tracking | aligned as Asset / AssetLifecycleRecord | Assets / UMMS | Airport GA-R7 / GA-R9 | EDGE asset/location mapping, UCDE lifecycle evidence | Assets-R4 |
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:73:| Preventive Maintenance Scheduler | aligned as PreventiveMaintenanceSchedule / Task | UMMS | Airport GA-R10A | EDGE runtime/event inputs future, UCDE PM evidence | UMMS-R5 |
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:74:| Spare Parts / Inventory Management | captured as future SparePartRequirement / InventoryReservation | UMMS | Airport GA-R10A | UCDE parts evidence | UMMS-R6 |
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:75:| Vendor / Contract Management | captured as future VendorReference / ContractReference / ServiceLevelReference | UMMS | Airport GA-R10A | UCDE contract evidence | UMMS-R7 |
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:76:| Graphics HMI to locate Equipment | aligned as HmiLocatorReference | UMMS / Assets | Airport GA-R9 | EDGE HMI locator data, LINK HMI references, UCDE locator evidence | UMMS-R9 |
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:77:| Existing system onboarding | aligned as source-trigger and asset mapping dependency | EDGE / LINK / UMMS | Airport GA-R7 | EDGE connector matrix, LINK source health, UCDE mapping evidence | EDGE/LINK Phase 1 |
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:78:| Engineer commissioning diagnostics | aligned as MaintenanceChecklist / EvidenceReference dependency | EDGE / LINK / UCDE | Airport GA-R8 | EDGE diagnostics, LINK delivery, UCDE diagnostic evidence | UMMS-R8 |
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:79:| Remote overseas deployment | aligned as deployment readiness dependency | EDGE / LINK / Governance | Airport GA-R10 | EDGE offline readiness, LINK topology, UCDE handoff package | Deployment readiness |
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:80:| Distributed independent installation | aligned as distributed deployment dependency | EDGE / LINK / Governance | Airport GA-R10 | EDGE offline readiness, LINK support bundle, UCDE handoff package | Deployment readiness |
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:111:| `ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_PASS` | PASS |
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:112:| `ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS` | PASS |
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:113:| `ONE_AIRPORT_GA_R10_DISTRIBUTED_REMOTE_DEPLOYMENT_READINESS_PASS` | PASS |
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:114:| `ONE_AIRPORT_GA_R9_GRAPHICS_HMI_EQUIPMENT_LOCATOR_READINESS_PASS` | PASS |
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:115:| `ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_PASS` | PASS |
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:116:| `ONE_AIRPORT_GA_R7_EXISTING_SYSTEM_ONBOARDING_MAPPING_READINESS_PASS` | PASS |
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:117:| `ONE_AIRPORT_GA_R6_LINK_INTEGRATION_READINESS_PROJECTION_PASS` | PASS |
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:118:| `ONE_PACKAGE_ROUTE_ENFORCEMENT_PASS` | PASS |
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:119:| `ONE_BOUNDARY_BASELINE_PASS` | PASS |
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:126:No new P0 boundary issue was introduced by UMMS-R2A.
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:139:git tag -a umms-r2-work-asset-pm-domain-alignment-local-freeze-20260621 -m "VANTARIS ONE UMMS-R2 Work Order Asset PM domain alignment local freeze"
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:149:After UMMS-R2A freeze, next development can enter:
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:151:UMMS-R3 Manual Work Order Read-only Queue / Draft Model
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:153:UMMS-R3 must remain read-only / projection-backed first, with no real work order creation, DB write, workflow execution, production activation, or runtime activation.
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:1:# VANTARIS ONE Airport GA-R5 Stakeholder Review Package
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:5:VANTARIS ONE Airport International GA-ready read-only industry solution package is ready for stakeholder review.
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:18:- GA-ready RC tag: `airport-international-ga-ready-readonly-rc-20260620`
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:19:- GA-R1 commit: `c78fb35190c76027115b4bb92fc8322bf07b73c7`
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:20:- GA-R2 commit: `d4218fe3711344369420ea30e57217998d968f2b`
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:21:- GA-R3 commit: `f1056fe0b34019dc0660783bab687cae0332e5ee`
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:22:- GA-R4 commit: `82667d1`
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:28:| Backend | GET | `/api/v1/one/airport/console/overview` | GA-R1 validated read-only route |
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:29:| Backend | GET | `/api/v1/one/airport/console/systems-integration-health` | GA-R1 validated read-only route |
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:30:| Backend | GET | `/api/v1/one/airport/console/assets-topology` | GA-R1 validated read-only route |
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:31:| Backend | GET | `/api/v1/one/airport/console/alarms-events` | GA-R1 validated read-only route |
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:32:| Backend | GET | `/api/v1/one/airport/console/fault-cases` | GA-R1 validated read-only route |
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:33:| Backend | GET | `/api/v1/one/airport/console/maintenance-work-orders` | GA-R1 validated read-only route |
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:34:| Backend | GET | `/api/v1/one/airport/console/evidence-investigation` | GA-R1 validated read-only route |
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:35:| Backend | GET | `/api/v1/one/airport/console/reports` | GA-R1 validated read-only route |
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:36:| Frontend | read-only page | `/one/airport/overview` | GA-R3 validated frontend route |
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:37:| UConsole | package entry | `Airport GA Read-only` | GA-R4 validated package binding |
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:57:| Airport overview | Read-only airport operations overview page | One-screen orientation for the International GA-ready package |
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:64:| Reports | Read-only report projection | Summarizes GA package readiness and review posture |
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:65:| UConsole package entry | `Airport GA Read-only` package entry | Gives stakeholders a discoverable industry solution entry point |
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:70:| Customer core function | Current GA-R5 status | Future owner |
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:72:| Work Order Management, auto + manual | read-only projection; production lifecycle not implemented in GA-R5 | UMMS / ONE Work Management alignment |
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:73:| Asset Registry, full lifecycle tracking | readiness view; canonical lifecycle write is not implemented in GA-R5 | VANTARIS ONE Airport with ONE Asset Graph / Layer 3 |
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:74:| Preventive Maintenance Scheduler | future UMMS; schedule execution not implemented in GA-R5 | UMMS |
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:75:| Spare Parts / Inventory Management | future UMMS; inventory transactions not implemented in GA-R5 | UMMS |
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:76:| Vendor / Contract Management | future UMMS; contract lifecycle execution not implemented in GA-R5 | UMMS |
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:77:| Graphics HMI to locate equipment | readiness view; HMI runtime control not implemented in GA-R5 | VANTARIS ONE Airport / UCDE |
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:78:| Existing system onboarding | readiness view; connector onboarding execution not implemented in GA-R5 | EDGE / LINK shared foundation |
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:79:| Engineer commissioning diagnostics | readiness view; diagnostics execution not implemented in GA-R5 | EDGE / LINK shared foundation |
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:85:The following are future shared foundation requirements only. They are not implemented in VANTARIS ONE Airport GA-R5.
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:118:1. GA-R6 LINK Integration Readiness Projection
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:119:2. GA-R7 Existing System Onboarding + Mapping Readiness
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:120:3. GA-R8 Engineer Commissioning Diagnostics Console
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:121:4. GA-R9 Graphics HMI Equipment Locator Readiness
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:122:5. GA-R10 Distributed / Remote Deployment Readiness Package
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:123:6. UMMS-R2 Work Order / Asset / PM domain alignment
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:124:7. UCDE-R4 Evidence chain alignment
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:128:- `ONE_AIRPORT_GA_R1_READONLY_API_ROUTE_IMPLEMENTATION_PASS`
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:129:- `ONE_AIRPORT_GA_R2_READONLY_API_LOCAL_SMOKE_AND_CONTRACT_REGRESSION_PASS`
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:130:- `ONE_AIRPORT_GA_R3_READONLY_FRONTEND_ROUTE_PAGE_IMPLEMENTATION_PASS`
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:131:- `ONE_AIRPORT_GA_R4_UCONSOLE_AIRPORT_READONLY_PAGE_BINDING_PASS`
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:133:GA-R5 package marker:
+./ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE.md:135:`ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE_PASS`
+./ONE_AIRPORT_A2_04_EDGE_LINK_EVIDENCE_ADAPTER_CONTRACT_REPORT.md:28:Expected marker: `ONE_AIRPORT_A2_04_EDGE_LINK_EVIDENCE_ADAPTER_CONTRACT_PASS`
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:1:# ONE UMMS Package / UConsole Stakeholder Entry Local Freeze + Optional Tag Plan
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:5:VANTARIS ONE UMMS Package / UConsole Stakeholder Entry Readiness is complete and locally frozen.
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:12:This is not UMMS runtime.
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:24:UMMS remains a generic VANTARIS ONE module.
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:25:Airport remains an industry projection / use case, not UMMS core identity.
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:64:PASS marker:
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:65:`ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_READINESS_PASS`
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:71:1. UMMS package registry metadata
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:72:2. UMMS UConsole stakeholder entry readiness metadata
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:73:3. UMMS stakeholder review package reference
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:74:4. UMMS-R2 through UMMS-R10 readiness chain reference
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:82:1. UMMS is visible as a VANTARIS ONE package entry.
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:84:3. Stakeholder entry references UMMS-R10 stakeholder review package.
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:96:| Work Order Management, auto + manual | stakeholder_review_ready | UMMS-R2/R3/R4/R5/R8/R9/R10 | false | true | ONE Work Management with UMMS maintenance extensions | Runtime work-order implementation requires future approval |
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:97:| Asset Registry, full lifecycle tracking | stakeholder_review_ready | UMMS-R2/R5/R6/R7/R8/R9/R10 | false | true | ONE Asset Graph / Layer 3 | Canonical Asset Graph implementation remains separate |
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:98:| Preventive Maintenance Scheduler | stakeholder_review_ready | UMMS-R2/R5/R6/R8/R9/R10 | false | true | UMMS PM implementation phase | PM runtime and automatic generation remain future |
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:99:| Spare Parts / Inventory Management | stakeholder_review_ready | UMMS-R2/R6/R7/R8/R9/R10 | false | true | UMMS inventory implementation phase | Stock mutation and procurement execution remain future |
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:100:| Vendor / Contract Management | stakeholder_review_ready | UMMS-R2/R7/R8/R9/R10 | false | true | UMMS vendor/contract/SLA implementation phase | Vendor transactions, contract execution, and SLA enforcement remain future |
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:101:| Graphics HMI to locate Equipment | stakeholder_review_ready | UMMS-R9/R10 | false | true | Asset Graph + HMI projection consumer + UMMS | Rendering, drawing upload, and device interaction remain future |
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:102:| Existing system onboarding | dependency_ready_for_review | UMMS-R3/R4/R9/R10 | false | true | EDGE/LINK shared foundation | Real connector execution remains future |
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:103:| Engineer commissioning diagnostics | dependency_ready_for_review | UMMS-R4/R8/R9/R10 | false | true | EDGE diagnostics + UCDE evidence | Real diagnostics execution remains future |
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:104:| Remote overseas deployment | handoff_ready_for_review | UMMS-R8/R9/R10 | false | true | Deployment/release governance with UCDE | Deployment execution remains future |
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:105:| Distributed independent installation | handoff_ready_for_review | UMMS-R8/R9/R10 | false | true | Deployment/release governance with shared foundations | Runtime activation and distributed installation execution remain future |
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:136:| ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_READINESS_PASS | PASS |
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:137:| ONE_UMMS_R10A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS | PASS |
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:138:| ONE_UMMS_R10_STAKEHOLDER_REVIEW_PACKAGE_PASS | PASS |
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:139:| ONE_UMMS_R9A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS | PASS |
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:140:| ONE_UMMS_R9_AIRPORT_HMI_LOCATOR_BINDING_READINESS_PASS | PASS |
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:141:| ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS | PASS |
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:142:| ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_PASS | PASS |
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:143:| ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS | PASS |
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:144:| ONE_UMMS_R7_VENDOR_CONTRACT_SLA_READINESS_PASS | PASS |
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:145:| ONE_UMMS_R6A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS | PASS |
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:146:| ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_PASS | PASS |
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:147:| ONE_UMMS_R5A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS | PASS |
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:148:| ONE_UMMS_R5_PREVENTIVE_MAINTENANCE_SCHEDULE_READINESS_PASS | PASS |
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:149:| ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS | PASS |
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:150:| ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_PASS | PASS |
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:151:| ONE_UMMS_R3A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS | PASS |
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:152:| ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_PASS | PASS |
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:153:| ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS | PASS |
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:154:| ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_PASS | PASS |
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:155:| ONE_PACKAGE_ROUTE_ENFORCEMENT_PASS | PASS |
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:156:| ONE_BOUNDARY_BASELINE_PASS | PASS |
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:176:git tag -a umms-package-uconsole-stakeholder-entry-readiness-local-freeze-20260621 -m "VANTARIS ONE UMMS package UConsole stakeholder entry readiness local freeze"
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:188:Create UMMS Package / UConsole Stakeholder Entry local tag + push archive.
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:192:- UMMS read-only API implementation, future
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:193:- UMMS read-only frontend implementation, future
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:194:- UMMS package runtime implementation, future only after explicit approval
+./ONE_AIRPORT_GA_01_ALIGN_AIRPORT_RELEASE_TERMINOLOGY_WITH_INTERNATIONAL_GA_REPORT.md:1:# ONE-AIRPORT-GA-01 Align Airport Release Terminology with International GA
+./ONE_AIRPORT_GA_01_ALIGN_AIRPORT_RELEASE_TERMINOLOGY_WITH_INTERNATIONAL_GA_REPORT.md:19:- `ONE_AIRPORT_GA_01_ALIGN_AIRPORT_RELEASE_TERMINOLOGY_WITH_INTERNATIONAL_GA_REPORT.md`
+./ONE_AIRPORT_GA_01_ALIGN_AIRPORT_RELEASE_TERMINOLOGY_WITH_INTERNATIONAL_GA_REPORT.md:23:- Active release-gate terminology is International GA readiness.
+./ONE_AIRPORT_GA_01_ALIGN_AIRPORT_RELEASE_TERMINOLOGY_WITH_INTERNATIONAL_GA_REPORT.md:25:- The release remains an International GA-ready read-only foundation.
+./ONE_AIRPORT_GA_01_ALIGN_AIRPORT_RELEASE_TERMINOLOGY_WITH_INTERNATIONAL_GA_REPORT.md:29:## D. International GA release gate summary
+./ONE_AIRPORT_GA_01_ALIGN_AIRPORT_RELEASE_TERMINOLOGY_WITH_INTERNATIONAL_GA_REPORT.md:32:- Implementation status: `AIRPORT_INTERNATIONAL_GA_RELEASE_TERMINOLOGY_ALIGNMENT_COMPLETE`
+./ONE_AIRPORT_GA_01_ALIGN_AIRPORT_RELEASE_TERMINOLOGY_WITH_INTERNATIONAL_GA_REPORT.md:33:- Readiness outcome: `AIRPORT_INTERNATIONAL_GA_READINESS_CANDIDATE_PASS`
+./ONE_AIRPORT_GA_01_ALIGN_AIRPORT_RELEASE_TERMINOLOGY_WITH_INTERNATIONAL_GA_REPORT.md:42:- Decision state: `INTERNATIONAL_GA_READINESS_PASS`
+./ONE_AIRPORT_GA_01_ALIGN_AIRPORT_RELEASE_TERMINOLOGY_WITH_INTERNATIONAL_GA_REPORT.md:43:- International GA readiness allowed: true
+./ONE_AIRPORT_GA_01_ALIGN_AIRPORT_RELEASE_TERMINOLOGY_WITH_INTERNATIONAL_GA_REPORT.md:59:- UMMS writes: 0
+./ONE_AIRPORT_GA_01_ALIGN_AIRPORT_RELEASE_TERMINOLOGY_WITH_INTERNATIONAL_GA_REPORT.md:66:- Focused GA-01 tests verify active GA projection/registry names, release decision, unchanged A9 factual counts, zero writes, disabled API/frontend/runtime/production surfaces, identifier safety, and validator acceptance.
+./ONE_AIRPORT_GA_01_ALIGN_AIRPORT_RELEASE_TERMINOLOGY_WITH_INTERNATIONAL_GA_REPORT.md:67:- GA-01 validator verifies deterministic byte-identical generation and active GA terminology.
+./ONE_AIRPORT_GA_01_ALIGN_AIRPORT_RELEASE_TERMINOLOGY_WITH_INTERNATIONAL_GA_REPORT.md:72:- The active/current canonical artifact, registry, package, validator, runner, report, and PASS marker use GA-01 International GA terminology.
+./ONE_AIRPORT_GA_01_ALIGN_AIRPORT_RELEASE_TERMINOLOGY_WITH_INTERNATIONAL_GA_REPORT.md:141:## K. PASS marker
+./ONE_AIRPORT_GA_01_ALIGN_AIRPORT_RELEASE_TERMINOLOGY_WITH_INTERNATIONAL_GA_REPORT.md:143:`ONE_AIRPORT_GA_01_ALIGN_AIRPORT_RELEASE_TERMINOLOGY_WITH_INTERNATIONAL_GA_PASS`
+./ONE_UMMS_R3A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:1:# ONE-UMMS-R3A Local Freeze and Optional Tag Plan Report
+./ONE_UMMS_R3A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:9:- `ONE_UMMS_R3A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md`
+./ONE_UMMS_R3A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:11:- `ONE_UMMS_R3A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md`
+./ONE_UMMS_R3A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:22:- UMMS-R3A freeze document
+./ONE_UMMS_R3A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:23:- UMMS-R3A optional freeze registry
+./ONE_UMMS_R3A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:24:- UMMS-R3A freeze report
+./ONE_UMMS_R3A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:25:- UMMS-R3A validation script
+./ONE_UMMS_R3A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:26:- UMMS-R3 validator post-freeze scope guard refinement
+./ONE_UMMS_R3A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:27:- GA-R10 through GA-R6 validator frozen-marker regression helper refinement
+./ONE_UMMS_R3A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:33:- `rg "ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_PASS" -g '!node_modules' -g '!.git' -g '!.venv' -g '!venv'`
+./ONE_UMMS_R3A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:52:- UMMS-R3A freeze validator: PASS
+./ONE_UMMS_R3A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:53:- UMMS-R3 validator: PASS
+./ONE_UMMS_R3A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:54:- UMMS-R2A validator: PASS
+./ONE_UMMS_R3A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:55:- UMMS-R2 validator: PASS
+./ONE_UMMS_R3A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:56:- GA-R10A validator: PASS
+./ONE_UMMS_R3A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:57:- GA-R10 through GA-R6 validators: PASS
+./ONE_UMMS_R3A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:63:## PASS marker
+./ONE_UMMS_R3A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:65:`ONE_UMMS_R3A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS`
+./ONE_UMMS_R3A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:71:No new P0 boundary issue was introduced by UMMS-R3A.
+./ONE_UMMS_R3A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:101:UMMS-R4 Work Order Lifecycle State Model + Validation Gate.
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:1:# ONE-UMMS-R8 UCDE Evidence Closure Alignment Report
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:22:- `ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md`
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:27:UMMS-R8 defines UMMS + UCDE Evidence Closure Alignment as a read-only projection. UMMS remains a generic cross-industry maintenance management module; Airport remains the first industry use case and not UMMS core identity.
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:31:The projection defines future closure readiness fields for work orders, fault cases, assets, HMI locator references, PM tasks, inventory requirements, vendor/contract/SLA references, UCDE review, audit trail, handoff package, and reporting readiness. `activationAllowed` remains false.
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:39:Future lifecycle states from candidate through closed/cancelled/rejected/expired are mapped to evidence requirements and UCDE dependencies. No state transition execution is enabled.
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:43:PM evidence readiness includes checklist, measurement, photo, document, completion, review, and UCDE references only. No PM evidence upload or PM completion execution is implemented.
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:47:Inventory evidence readiness includes reservation, issue, return, stock count, procurement suggestion, parts-used, and UCDE references only. No inventory evidence execution, stock mutation, or procurement execution is implemented.
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:53:## UCDE EvidenceRecord dependency summary
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:55:UMMS-R8 defines expected future UCDE EvidenceRecord fields and dependency requirements only. No UCDE EvidenceRecord write is implemented.
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:59:Audit trail dependency fields are documented for future chain-of-custody traceability. No audit trail write is implemented in UMMS-R8.
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:67:UMMS-R8 defines future closure gates for evidence completeness, closure evidence, verification evidence, asset/location/HMI evidence, PM evidence, inventory evidence, vendor/contract/SLA evidence, UCDE EvidenceRecord, audit trail, handoff package readiness, report evidence, redaction, and local path leakage.
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:71:Airport fault cases, alarms/events, maintenance work orders, evidence investigation, assets/topology, HMI locator readiness, PM readiness, inventory readiness, vendor/contract/SLA readiness, and reports are mapped to read-only UMMS + UCDE evidence closure targets.
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:75:UMMS-R8 covers Work Order Management, Asset Registry, Preventive Maintenance Scheduler, Spare Parts / Inventory Management, Vendor / Contract Management, Graphics HMI Equipment Locator, Existing System Onboarding, Engineer Commissioning Diagnostics, Remote Overseas Deployment, and Distributed Independent Installation as readiness-only evidence alignment.
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:77:## Shared EDGE/LINK/UCDE dependency map
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:81:- UCDE dependencies: EvidenceRecord, WorkOrderEvidence, PmEvidence, InventoryEvidence, VendorContractEvidence, SlaEvidence, ClosureEvidence, VerificationEvidence, AuditTrail, HandoffPackage, ReportEvidence.
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:83:## Future UMMS roadmap
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:85:- UMMS-R8A Local Freeze + Optional Tag Plan
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:86:- UMMS-R9 UMMS + Airport HMI Locator Binding Readiness
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:87:- UMMS-R10 UMMS Stakeholder Review Package
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:120:- `grep -R "ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS" . --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=.venv --exclude-dir=venv`
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:141:- UMMS-R8 validator: PASS
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:142:- UMMS-R7A validator: PASS
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:143:- UMMS-R7 validator: PASS
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:144:- UMMS-R6A validator: PASS
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:145:- UMMS-R6 validator: PASS
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:146:- UMMS-R5A validator: PASS
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:147:- UMMS-R5 validator: PASS
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:148:- UMMS-R4A validator: PASS
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:149:- UMMS-R4 validator: PASS
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:150:- UMMS-R3A validator: PASS
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:151:- UMMS-R3 validator: PASS
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:152:- UMMS-R2A validator: PASS
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:153:- UMMS-R2 validator: PASS
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:159:## PASS marker
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:161:`ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_PASS`
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:165:- UMMS-R8 is projection-only.
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:166:- UCDE EvidenceRecord writes are not implemented.
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:172:- UMMS-R8A Local Freeze + Optional Tag Plan
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:173:- UMMS-R9 UMMS + Airport HMI Locator Binding Readiness
+./ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_REPORT.md:174:- UMMS-R10 UMMS Stakeholder Review Package
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md:1:# VANTARIS ONE Final International GA Readiness Matrix
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md:3:PASS marker: `ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX_PASS`
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md:14:- GA-ready: validated, frozen, packaged, indexed, archived, no blocking gaps for its declared scope.
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md:17:- Incomplete: insufficient repository evidence for final GA.
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md:22:| Module | Declared Scope | Current Status | Evidence | Package/API/UI State | Blocking Gaps | GA Decision |
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md:24:| UCore / UCode / CODE Layer | Platform foundation, shared operational context, module binding, code layer | Partial platform foundation | Boundary/package validators, CODE/UCore references, architecture docs | Foundation/source evidence present | Dedicated final CODE/UCore GA freeze not found in current branch | Not final GA |
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md:25:| UMMS | Read-only maintenance operations intelligence, work-order/asset/PM alignment, stakeholder package | Freeze / Read-only complete | UMMS R2-R14 reports and PASS markers in repo | API/UI/read-only package evidence present | Full production workflow execution and final module GA consolidated freeze not confirmed | Not final GA; module-specific GA freeze required |
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md:26:| UFMS | External/system-of-record context and fault intelligence source | Mature external/system package context | UFMS audit/report lineage and packaged foundation context | Integrated references present | Live UFMS runtime/source activation not performed in this branch; integrated VANTARIS ONE GA not fully activated | Not final GA in current branch |
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md:27:| UESG | ESG module readiness/freeze evidence | Freeze / Read-only complete | UESG backend providers/API evidence and module reports | Source/API evidence present | Final UESG module GA consolidated freeze not confirmed | Not final GA |
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md:28:| UCDE | Evidence/investigation read-only capability | Freeze / Read-only complete | UCDE backend provider/API evidence, evidence projection reports, boundary findings | Read-only evidence capability evidence present | Final UCDE GA audit pending unless completed later | Not final GA |
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md:29:| UDOC | Document module | Incomplete / not confirmed | Limited repository evidence found for final UDOC GA | No confirmed final GA package/API/UI state | Insufficient evidence | Not final GA |
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md:30:| Automated Rules & Policy | Policy/rules foundation and validation controls | Partial / foundation | Policy guard, route enforcement, boundary validation, rule references | Validation/control evidence present | Final automated rules runtime/package GA not confirmed | Not final GA |
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md:31:| ONE Orchestrator | Cross-module orchestration and decision routing concept | Partial / scaffold | Orchestrator references and NEXUS AI branch-context reports | Concept/scaffold evidence present | Current branch integrated orchestrator GA not confirmed | Not final GA |
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md:32:| UConsole | Console entry and stakeholder package visibility | Freeze / Read-only complete | Airport/UMMS/UConsole reports, package entry reports, read-only card work | UI/read-only entry evidence present | Final all-module menu consistency GA not yet confirmed | Not final GA |
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md:33:| Reports & Analytics | Read-only reporting and analytics capability | Freeze / Read-only complete | Reports backend files, reports service/provider, reports audit and read-only package reports | Source/reporting evidence present | Final Reports & Analytics consolidated GA freeze not confirmed | Not final GA |
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md:34:| Governance & Security | Trust, boundary, permission, audit and security controls | Strong foundation / partial GA | Boundary baseline, package route enforcement, security docs, audit/idempotency declarations | Validation/security evidence present | Final governance module GA freeze not fully confirmed | Not final GA |
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md:35:| NEXUS AI | AI decision/control-plane engines | Stage complete in prior branch context where present; current branch integration not confirmed | NEXUS AI R1-R6 references may exist in branch history/context | Decision-only engine evidence is not packaged as current branch GA foundation | Current branch integration GA not confirmed | Not final GA |
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md:36:| EDGE | Packaged foundation/runtime artifact | GA-ready for packaged foundation/runtime artifact in ONE scope; runtime not activated | R6/R7/R8/R9 PASS markers, EDGE count 248, runtime/source indicators | Packaged artifact complete | Runtime activation not executed | GA-ready for package scope; activation not executed |
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md:37:| LINK | Packaged foundation integration artifact | GA-ready as packaged foundation artifact; runtime not activated | R1-R9 package counts and PASS markers, LINK count 153 | Packaged artifact complete | Runtime activation not executed | GA-ready for package scope; activation not executed |
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md:38:| DB | Packaged foundation DB artifact | Packaged foundation DB artifact; migration not executed | R1-R9 package counts and PASS markers, DB count 14 | Packaged artifact complete | DB migration not executed | GA-ready for package scope; migration not executed |
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md:39:| Contracts | Shared contract artifact | GA-ready as shared contract artifact | R1-R9 package counts and PASS markers, Contracts count 174, boundary allowlist | Packaged contract artifact complete | Runtime consumers still need activation-specific verification | GA-ready for contract package scope |
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md:41:| Offline Export Package | Final export package and restore/checksum metadata | Backup/export package complete | R8 report, tarball checksum, export metadata, PASS marker | Export package complete | Customer-side restore not executed | PASS for offline export scope |
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md:47:| Architecture readiness | 82 / 100 | Strong platform architecture evidence, but several module-specific final GA freezes remain. |
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md:51:| Module GA readiness | 55 / 100 | Multiple modules are frozen/read-only, but not all have final module GA consolidation. |
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md:53:| International GA readiness | 70 / 100 | Foundation/customer-delivery chain is strong; full international GA across all modules is not yet complete. |
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md:57:- Foundation package GA: PASS
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md:61:- Full international GA across all modules: NOT YET
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md:65:- UCDE-GA-R1 Final Capability Audit + Consolidated Freeze
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md:66:- UConsole-GA-R1 Full Module Entry & Menu Consistency Freeze
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md:67:- UMMS-GA-R1 Final Module Consolidated Freeze
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md:68:- UESG-GA-R1 Final Module Consolidated Freeze
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md:69:- Reports-GA-R1 Final Reports & Analytics Freeze
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md:70:- Governance-Security-GA-R1 Final Governance & Security Freeze
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md:71:- NEXUSAI-GA-R1 Current Branch Integration Freeze
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md:72:- ONE-PROD-GA-R11 Final Customer Activation Plan
+./ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX.md:83:`ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX_PASS`
+./ONE_PROD_GA_R3_FOUNDATION_PACKAGE_READONLY_API_HEALTH_REPORT.md:1:# ONE-PROD-GA-R3 Foundation Package Read-only API + Health Report
+./ONE_PROD_GA_R3_FOUNDATION_PACKAGE_READONLY_API_HEALTH_REPORT.md:8:- Source task: ONE-PROD-GA-R2 console entry
+./ONE_PROD_GA_R3_FOUNDATION_PACKAGE_READONLY_API_HEALTH_REPORT.md:13:R3 adds a registry-backed, GET-only Production GA API surface for the synced foundation packages. The API reads the frozen R2 console-entry registry and returns package status and health projections for:
+./ONE_PROD_GA_R3_FOUNDATION_PACKAGE_READONLY_API_HEALTH_REPORT.md:35:No `POST`, `PUT`, `PATCH`, or `DELETE` Production GA foundation package endpoints were added.
+./ONE_PROD_GA_R3_FOUNDATION_PACKAGE_READONLY_API_HEALTH_REPORT.md:75:- `ONE_PROD_GA_R3_FOUNDATION_PACKAGE_READONLY_API_HEALTH_REPORT.md`
+./ONE_PROD_GA_R3_FOUNDATION_PACKAGE_READONLY_API_HEALTH_REPORT.md:102:- R2 PASS marker exists.
+./ONE_PROD_GA_R3_FOUNDATION_PACKAGE_READONLY_API_HEALTH_REPORT.md:106:- No mutating Production GA foundation package endpoints were added.
+./ONE_PROD_GA_R3_FOUNDATION_PACKAGE_READONLY_API_HEALTH_REPORT.md:118:`ONE_PROD_GA_R3_FOUNDATION_PACKAGE_READONLY_API_HEALTH_PASS`
+./ONE_AIRPORT_A3_04_WORKORDER_INTENT_CANDIDATE_PROJECTION_REPORT.md:41:## PASS marker
+./ONE_AIRPORT_A3_04_WORKORDER_INTENT_CANDIDATE_PROJECTION_REPORT.md:43:ONE_AIRPORT_A3_04_WORKORDER_INTENT_CANDIDATE_PROJECTION_PASS
+./ONE_AIRPORT_A5_02_AIRPORT_CONSOLE_PACKAGE_READINESS_AND_HANDOFF_GATE_REPORT.md:62:- `G04_API_READINESS_CONTRACT_CANDIDATE`
+./ONE_AIRPORT_A5_02_AIRPORT_CONSOLE_PACKAGE_READINESS_AND_HANDOFF_GATE_REPORT.md:63:- `G05_FRONTEND_READINESS_CONTRACT_CANDIDATE`
+./ONE_AIRPORT_A5_02_AIRPORT_CONSOLE_PACKAGE_READINESS_AND_HANDOFF_GATE_REPORT.md:65:- `G07_A3_DEPENDENCY_RELEASE_GATE`
+./ONE_AIRPORT_A5_02_AIRPORT_CONSOLE_PACKAGE_READINESS_AND_HANDOFF_GATE_REPORT.md:66:- `G08_A4_DEPENDENCY_RELEASE_GATE`
+./ONE_AIRPORT_A5_02_AIRPORT_CONSOLE_PACKAGE_READINESS_AND_HANDOFF_GATE_REPORT.md:67:- `G09_PACKAGE_READINESS_GATE`
+./ONE_AIRPORT_A5_02_AIRPORT_CONSOLE_PACKAGE_READINESS_AND_HANDOFF_GATE_REPORT.md:81:`AIRPORT_CONSOLE_PACKAGE_HANDOFF_GATE_COMPLETE`
+./ONE_AIRPORT_A5_02_AIRPORT_CONSOLE_PACKAGE_READINESS_AND_HANDOFF_GATE_REPORT.md:87:## PASS marker
+./ONE_AIRPORT_A5_02_AIRPORT_CONSOLE_PACKAGE_READINESS_AND_HANDOFF_GATE_REPORT.md:89:`ONE_AIRPORT_A5_02_AIRPORT_CONSOLE_PACKAGE_READINESS_AND_HANDOFF_GATE_PASS`
+./ONE_AIRPORT_A2_03_GENERIC_INTEGRATION_HEALTH_READ_MODEL_REPORT.md:35:Expected marker: `ONE_AIRPORT_A2_03_GENERIC_INTEGRATION_HEALTH_READ_MODEL_PASS`
+./ONE_AIRPORT_A3_07_A3_READINESS_AGGREGATION_AND_RELEASE_GATE_REPORT.md:26:- `ONE_AIRPORT_A3_07_A3_READINESS_AGGREGATION_AND_RELEASE_GATE_REPORT.md`
+./ONE_AIRPORT_A3_07_A3_READINESS_AGGREGATION_AND_RELEASE_GATE_REPORT.md:57:2. `G02_A3_PASS_MARKER_COMPLETENESS`
+./ONE_AIRPORT_A3_07_A3_READINESS_AGGREGATION_AND_RELEASE_GATE_REPORT.md:71:- Decision state: `RELEASE_GATE_PASS`
+./ONE_AIRPORT_A3_07_A3_READINESS_AGGREGATION_AND_RELEASE_GATE_REPORT.md:90:- UMMS writes: 0
+./ONE_AIRPORT_A3_07_A3_READINESS_AGGREGATION_AND_RELEASE_GATE_REPORT.md:152:## K. PASS marker
+./ONE_AIRPORT_A3_07_A3_READINESS_AGGREGATION_AND_RELEASE_GATE_REPORT.md:154:`ONE_AIRPORT_A3_07_A3_READINESS_AGGREGATION_AND_RELEASE_GATE_PASS`
+./ONE_PROD_GA_R2_FOUNDATION_PACKAGE_CONSOLE_ENTRY_REPORT.md:1:# ONE PROD GA R2 — Foundation Package Console Entry
+./ONE_PROD_GA_R2_FOUNDATION_PACKAGE_CONSOLE_ENTRY_REPORT.md:5:This task adds production GA read-only Console/package visibility metadata for the synced VANTARIS ONE foundation packages.
+./ONE_PROD_GA_R2_FOUNDATION_PACKAGE_CONSOLE_ENTRY_REPORT.md:40:- R1 PASS marker exists.
+./ONE_PROD_GA_R2_FOUNDATION_PACKAGE_CONSOLE_ENTRY_REPORT.md:55:- R1 PASS marker: present.
+./ONE_PROD_GA_R2_FOUNDATION_PACKAGE_CONSOLE_ENTRY_REPORT.md:59:- Package route enforcement: `ONE_PACKAGE_ROUTE_ENFORCEMENT_PASS`.
+./ONE_PROD_GA_R2_FOUNDATION_PACKAGE_CONSOLE_ENTRY_REPORT.md:60:- Boundary baseline: `ONE_BOUNDARY_BASELINE_PASS` with existing non-blocking legacy warnings only.
+./ONE_PROD_GA_R2_FOUNDATION_PACKAGE_CONSOLE_ENTRY_REPORT.md:64:The boundary validator rule `A4-BND-005` now recognizes the explicit production GA packaged Contracts schema location `AN_VANTARIS_ONE/packages/AN_VANTARIS_Contracts/schemas/**/*.schema.json` as read-only packaged Contracts content while preserving the existing root `contracts/` allowance. This does not allow arbitrary package schema paths. The R2 console-entry files do not introduce backend, frontend, runtime, DB execution, EDGE, LINK, UFMS, or UMMS behavior changes.
+./ONE_PROD_GA_R2_FOUNDATION_PACKAGE_CONSOLE_ENTRY_REPORT.md:82:`ONE_PROD_GA_R2_FOUNDATION_PACKAGE_CONSOLE_ENTRY_PASS`
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:1:# VANTARIS ONE GA Gap And Roadmap R1
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:3:## Current GA Status By Module
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:5:| Module | Current status | GA status |
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:7:| UCode / CODE Layer | Freeze required | Not full GA yet |
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:8:| UMMS | Freeze/read-only capability complete; final module GA freeze required | Not full GA yet |
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:9:| UFMS | Foundation/projection evidence present; final full-product GA evidence required | Not full GA yet |
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:10:| UESG | Freeze/read-only capability complete; final module GA freeze required | Not full GA yet |
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:11:| UCDE | Freeze/read-only capability complete; final capability audit required | Not full GA yet |
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:12:| UDOC | Incomplete/not confirmed by final GA-specific evidence | Not full GA yet |
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:13:| Automated Rules & Policy | Freeze required before GA | Not full GA yet |
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:14:| ONE Orchestrator | Scaffold/current branch integration not confirmed | Not full GA yet |
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:15:| UConsole | Freeze/read-only capability complete; unified entry consistency required | Not full GA yet |
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:16:| Reports & Analytics | Freeze/read-only capability complete; final analytics freeze required | Not full GA yet |
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:17:| Governance & Security | Route/boundary evidence present; final governance freeze required | Not full GA yet |
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:18:| NEXUS AI | Not activated; current branch integration freeze required | Not full GA yet |
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:19:| EDGE | GA-ready for declared package scope | Foundation GA scope PASS |
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:20:| LINK | GA-ready for declared package scope | Foundation GA scope PASS |
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:21:| DB | GA-ready for declared package scope; no default migration | Foundation GA scope PASS |
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:22:| Contracts | GA-ready for declared package scope | Foundation GA scope PASS |
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:24:| Offline Export | Offline export package PASS | Foundation GA scope PASS |
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:28:- P0 blocker: customer production activation not executed; full international GA across all modules not yet; DB migration and runtime activation approvals not established for a real customer deployment.
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:29:- P1 required before GA: final freeze for UCDE, UConsole, UMMS, UESG, Reports, Governance/Security, NEXUS AI, UCode, UDOC, and ONE Orchestrator; acceptance evidence package; package entitlement/enablement state; route and boundary validation.
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:30:- P2 post-GA hardening: HA/DR playbooks, performance baselines, operational runbooks, training packs, extended IEC62443 evidence, additional industry projection packs.
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:34:- UCDE-GA-R1 Final Capability Audit + Consolidated Freeze
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:35:- UCONSOLE-GA-R1 Full Module Entry & Menu Consistency Freeze
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:36:- UMMS-GA-R1 Final Module Consolidated Freeze
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:37:- UESG-GA-R1 Final Module Consolidated Freeze
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:38:- REPORTS-GA-R1 Final Reports & Analytics Freeze
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:39:- GOVERNANCE-SECURITY-GA-R1 Final Governance & Security Freeze
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:40:- NEXUSAI-GA-R1 Current Branch Integration Freeze
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:41:- UCODE-GA-R1 CODE Layer Final API/Execution Boundary Freeze
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:42:- UDOC-GA-R1 Document & Evidence Package Skeleton
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:43:- ONE-ORCH-GA-R1 Orchestrator Read-only Workflow Freeze
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:44:- ONE-PROD-GA-R11 Customer Activation Plan
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:46:## Realistic GA Path
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:48:- Phase A: module freeze for UCDE, UConsole, UMMS, UESG, Reports, Governance/Security, NEXUS AI, UCode, UDOC, and ONE Orchestrator.
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:52:- Phase E: international GA after module freezes, pilot evidence, operational runbooks, and governance/security acceptance are complete.
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:56:The current state is a strong foundation, not full customer activated GA.
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:58:- Foundation package GA: PASS
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:62:- Full international GA across all modules: NOT YET
+./VANTARIS_ONE_GA_GAP_AND_ROADMAP_R1.md:64:PASS marker: `ONE_DESIGN_R1_FULL_PRODUCT_DESIGN_BLUEPRINT_PASS`
+./ONE_UMMS_R13A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:1:# ONE UMMS-R13A Local Freeze + Optional Tag Plan Report
+./ONE_UMMS_R13A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:9:- Working tree before UMMS-R13A: clean
+./ONE_UMMS_R13A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:13:- `ONE_UMMS_R13A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md`
+./ONE_UMMS_R13A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:15:- `ONE_UMMS_R13A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md`
+./ONE_UMMS_R13A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:47:`ONE_UMMS_R13A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS`
+./ONE_UMMS_R13A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:63:UMMS-R14 planning stage, future only.
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_READINESS_REPORT.md:1:# ONE UMMS Package / UConsole Stakeholder Entry Readiness Report
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_READINESS_REPORT.md:14:- `ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_READINESS_REPORT.md`
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_READINESS_REPORT.md:19:UMMS is represented as a VANTARIS ONE package entry with package id `umms`, display name `UMMS`, package category `operations_maintenance`, and status `stakeholder_review_ready`.
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_READINESS_REPORT.md:33:- `ONE_UMMS_R10_STAKEHOLDER_REVIEW_PACKAGE.md`
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_READINESS_REPORT.md:34:- `ONE_UMMS_R10_STAKEHOLDER_REVIEW_PACKAGE_REPORT.md`
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_READINESS_REPORT.md:38:## UMMS readiness chain reference
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_READINESS_REPORT.md:40:The registry references UMMS-R2 through UMMS-R10, including each frozen stage, pass marker, and available tag reference.
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_READINESS_REPORT.md:84:- `rg "ONE_UMMS_R10A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS" -g '!node_modules' -g '!.git' -g '!.venv' -g '!venv'`
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_READINESS_REPORT.md:110:- UMMS package / UConsole stakeholder entry readiness validator: PASS
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_READINESS_REPORT.md:111:- UMMS-R10A through UMMS-R2 validators: PASS
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_READINESS_REPORT.md:116:## PASS marker
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_READINESS_REPORT.md:118:`ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_READINESS_PASS`
+./ONE_UMMS_PACKAGE_UCONSOLE_STAKEHOLDER_ENTRY_READINESS_REPORT.md:142:UMMS Package / UConsole Stakeholder Entry Local Freeze + Optional Tag Plan.
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:1:# ONE-AIRPORT-GA-R10A Readiness Projection Chain Freeze and Optional Tag Plan
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:5:VANTARIS ONE Airport GA-R6 through GA-R10 readiness projection chain is complete and locally frozen.
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:34:| Order | Task | Commit | Commit message | PASS marker |
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:36:| 1 | GA-R6 LINK Integration Readiness Projection | `dbf88514cb48b2994dd69276065d0b3316f08474` | `docs(one): add airport link integration readiness projection` | `ONE_AIRPORT_GA_R6_LINK_INTEGRATION_READINESS_PROJECTION_PASS` |
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:37:| 2 | GA-R7 Existing System Onboarding + Mapping Readiness | `7b7bd04ddfe27eeceecd572a78d532c77fc4a857` | `docs(one): add airport existing system onboarding readiness` | `ONE_AIRPORT_GA_R7_EXISTING_SYSTEM_ONBOARDING_MAPPING_READINESS_PASS` |
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:38:| 3 | GA-R8 Engineer Commissioning Diagnostics Readiness | `30ba3536e45feb9c7030c1625f4338688f386308` | `docs(one): add airport engineer commissioning readiness` | `ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_PASS` |
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:39:| 4 | GA-R9 Graphics HMI Equipment Locator Readiness | `a18818644fa1fefa644753fd4cd31c10e3fcde0a` | `docs(one): add airport graphics hmi locator readiness` | `ONE_AIRPORT_GA_R9_GRAPHICS_HMI_EQUIPMENT_LOCATOR_READINESS_PASS` |
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:40:| 5 | GA-R10 Distributed / Remote Deployment Readiness Package | `51b23317441726151110ff544869c3e56fd3f91f` | `docs(one): add airport remote deployment readiness` | `ONE_AIRPORT_GA_R10_DISTRIBUTED_REMOTE_DEPLOYMENT_READINESS_PASS` |
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:44:1. GA-R6 LINK Integration Readiness Projection
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:45:2. GA-R7 Existing System Onboarding + Mapping Readiness
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:46:3. GA-R8 Engineer Commissioning Diagnostics Readiness
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:47:4. GA-R9 Graphics HMI Equipment Locator Readiness
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:48:5. GA-R10 Distributed / Remote Deployment Readiness Package
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:52:- GA-R6: LINK integration readiness, source-system health requirements, delivery readiness, audit/evidence chain, work-order trigger, asset/location references, and shared EDGE/LINK interface gaps.
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:53:- GA-R7: Existing system onboarding, integration method catalog, mapping readiness, tag mapping requirements, onboarding review packet, and customer core function mapping impact.
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:54:- GA-R8: Engineer commissioning diagnostics, EDGE/LINK diagnostic requirements, source-system diagnostics, mapping diagnostics, payload/normalization preview, delivery diagnostics, support bundle requirements, and remote engineer checklist.
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:55:- GA-R9: Graphics HMI equipment locator readiness, asset/location/drawing/HMI symbol references, locator chains, HMI locator use cases, and future rendering dependency model.
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:56:- GA-R10: Distributed and remote deployment readiness, deployment mode catalog, distributed topology, offline install package requirements, deployment package status, hardware key/site binding, support bundle, precheck/healthcheck, upgrade/rollback, and future activation gates.
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:60:| Customer function | GA-R6 | GA-R7 | GA-R8 | GA-R9 | GA-R10 | Future owner |
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:62:| Work Order Management, auto + manual | work-order trigger and delivery readiness | source-to-work mapping dependency | commissioning diagnostics dependency | work-order locator chain | staged activation and deployment readiness | VANTARIS ONE Airport / UMMS / LINK |
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:63:| Asset Registry, full lifecycle tracking | asset/location reference readiness | asset mapping readiness | asset/location diagnostics | asset/location/drawing/HMI references | asset/config/mapping deployment readiness | VANTARIS ONE Airport / UMMS / EDGE |
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:64:| Preventive Maintenance Scheduler | delivery and work-order references | mapping dependency | diagnostics readiness | PM task locator chain | scheduler package and rollback readiness | UMMS / LINK |
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:65:| Spare Parts / Inventory Management | asset/location references | mapping impact | diagnostics support | spare part to asset/location optional chain | inventory readiness package | UMMS / UCDE |
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:66:| Vendor / Contract Management | audit/evidence delivery references | onboarding review dependency | support bundle and diagnostics evidence | vendor/contract asset/location optional chain | customer-managed package and support bundle | UMMS / UCDE |
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:69:| Engineer commissioning diagnostics | audit/evidence readiness | onboarding review inputs | primary diagnostics readiness | locator readiness diagnostics dependency | remote engineer handoff and healthcheck | EDGE / LINK / UCDE |
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:75:Future EDGE requirements captured by GA-R6 through GA-R10:
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:90:Future LINK requirements captured by GA-R6 through GA-R10:
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:106:They are not implemented in VANTARIS ONE GA-R10A.
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:139:| `ONE_AIRPORT_GA_R6_LINK_INTEGRATION_READINESS_PROJECTION_PASS` | PASS |
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:140:| `ONE_AIRPORT_GA_R7_EXISTING_SYSTEM_ONBOARDING_MAPPING_READINESS_PASS` | PASS |
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:141:| `ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_PASS` | PASS |
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:142:| `ONE_AIRPORT_GA_R9_GRAPHICS_HMI_EQUIPMENT_LOCATOR_READINESS_PASS` | PASS |
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:143:| `ONE_AIRPORT_GA_R10_DISTRIBUTED_REMOTE_DEPLOYMENT_READINESS_PASS` | PASS |
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:144:| `ONE_PACKAGE_ROUTE_ENFORCEMENT_PASS` | PASS |
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:145:| `ONE_BOUNDARY_BASELINE_PASS` | PASS |
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:152:No new P0 boundary issue was introduced by GA-R6 through GA-R10A.
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:165:git tag -a airport-ga-readiness-projection-chain-local-freeze-20260621 -m "VANTARIS ONE Airport GA-R6 to GA-R10 readiness projection chain local freeze"
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:175:After GA-R10A freeze, next development can enter:
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:177:1. UMMS-R2 Work Order / Asset / PM domain alignment
+./ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN.md:180:VANTARIS ONE Airport GA-R10A itself does not modify EDGE/LINK/Contracts/UFMS.
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:1:# ONE-UMMS-R7A Local Freeze and Optional Tag Plan
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:5:VANTARIS ONE UMMS-R7 Vendor / Contract / SLA Readiness is complete and locally frozen.
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:27:UMMS remains a generic VANTARIS ONE module, not Airport-specific logic.
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:52:## UMMS-R7 Commit Reference
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:58:| PASS marker | ONE_UMMS_R7_VENDOR_CONTRACT_SLA_READINESS_PASS |
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:75:14. Shared EDGE/LINK/UCDE dependency map
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:76:15. Future UMMS roadmap
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:78:## UMMS-R7 Summary
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:80:1. UMMS remains a generic cross-industry maintenance management module.
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:81:2. Airport remains a source industry use case, not UMMS core identity.
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:86:7. EDGE/LINK/UCDE dependencies are captured as future shared foundation / evidence dependencies only.
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:90:| Customer function | Current UMMS-R7 status | Future owner | Related UMMS-R2/R3/R4/R5/R6 domain alignment | Related Airport readiness projection | Related EDGE/LINK/UCDE dependency | Future phase |
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:92:| Work Order Management, auto + manual | Vendor linkage readiness modeled only; no work-order vendor assignment | ONE Work Management with UMMS vendor extensions | R2 work ownership, R3 draft model, R4 lifecycle gates, R5 PM requirements, R6 spare part dependency | Airport maintenance work order readiness | LINK work-order trigger contract; UCDE vendor/evidence linkage | UMMS-R10 |
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:93:| Asset Registry, full lifecycle tracking | Vendor, warranty, and contract references remain read-only asset context | ONE Asset Graph / Layer 3 with UMMS consumer | R2 asset consumption, R3 asset references, R4 asset gates, R5 asset PM linkage, R6 asset spare part linkage | Airport Assets & Topology | EDGE asset/location mapping; LINK asset reference; UCDE contract evidence | UMMS-R9 |
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:94:| Preventive Maintenance Scheduler | PM / Vendor / Contract linkage modeled only; no PM vendor execution | UMMS PM readiness | R2 PM domain, R5 PM schedule readiness, R6 spare part readiness | Airport Preventive Maintenance readiness | EDGE condition signals future; LINK delivery readiness; UCDE PM contract evidence | UMMS-R8 |
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:95:| Spare Parts / Inventory Management | Spare Part / Vendor / Contract linkage modeled only; no inventory transaction | UMMS inventory readiness | R2 SparePart ownership, R4 gates, R5 PM dependencies, R6 inventory readiness | Airport inventory-related maintenance sources | EDGE tag mapping; LINK audit/evidence chain; UCDE procurement evidence | UMMS-R6/R7 |
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:96:| Vendor / Contract Management | Vendor registry, contract registry, warranty, SLA, response window, and gates frozen as readiness | UMMS vendor / contract / SLA readiness | R2 Vendor ownership, R4 validation gates, R5/R6 dependency links | Vendor support readiness | LINK audit/evidence chain; UCDE vendor/contract evidence workspace | UMMS-R7/R7A |
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:97:| Graphics HMI to locate Equipment | HMI locator can consume vendor/contract references as read-only context only | Asset Graph + UMMS consumer | R3/R4 locator readiness, R5 asset PM linkage, R6 inventory linkage | Airport HMI Locator Readiness | EDGE HMI locator data foundation; LINK asset/location reference | UMMS-R9 |
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:98:| Existing system onboarding | Source vendor / contract mapping captured only; no connector execution | EDGE/LINK shared foundations | R3 source model, R4 runtime input gates, R6 mapping readiness | Airport GA-R7 onboarding/mapping readiness | EDGE discovery mapping; LINK source-system health; UCDE audit trail | Shared foundation |
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:99:| Engineer commissioning diagnostics | Vendor / warranty / SLA evidence dependency captured only | EDGE diagnostics + UCDE evidence | R3 evidence readiness, R4 evidence gates, R6 item evidence | Airport GA-R8 diagnostics readiness | EDGE engineer diagnostics; LINK delivery status; UCDE issue/return evidence | Shared foundation |
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:100:| Remote overseas deployment | Distributed vendor support and SLA readiness only; no deployment execution | Deployment/release governance | R2/R3/R4/R5/R6 safety posture | Airport GA-R10 deployment readiness | LINK distributed topology; UCDE audit trail | Future deployment gate |
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:101:| Distributed independent installation | Independent installation support/contract readiness only; no runtime activation | Deployment/release governance | R2/R3/R4/R5/R6 safety posture | Airport GA-R10 distributed readiness | EDGE asset/location preview; LINK distributed topology; UCDE report evidence | Future deployment gate |
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:148:| ONE_UMMS_R7_VENDOR_CONTRACT_SLA_READINESS_PASS | PASS |
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:149:| ONE_UMMS_R6A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS | PASS |
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:150:| ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_PASS | PASS |
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:151:| ONE_UMMS_R5A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS | PASS |
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:152:| ONE_UMMS_R5_PREVENTIVE_MAINTENANCE_SCHEDULE_READINESS_PASS | PASS |
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:153:| ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS | PASS |
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:154:| ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_PASS | PASS |
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:155:| ONE_UMMS_R3A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS | PASS |
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:156:| ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_PASS | PASS |
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:157:| ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS | PASS |
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:158:| ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_PASS | PASS |
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:159:| ONE_PACKAGE_ROUTE_ENFORCEMENT_PASS | PASS |
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:160:| ONE_BOUNDARY_BASELINE_PASS | PASS |
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:168:No new P0 boundary issue was introduced by UMMS-R7A.
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:181:git tag -a umms-r7-vendor-contract-sla-readiness-local-freeze-20260621 -m "VANTARIS ONE UMMS-R7 Vendor Contract SLA readiness local freeze"
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:191:After UMMS-R7A freeze, next development can enter:
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:193:UMMS-R8 UMMS + UCDE Evidence Closure Alignment
+./ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:195:UMMS-R8 must remain read-only / projection-backed first, with no real evidence upload, no evidence closure execution, no work order closure, no DB write, no workflow execution, production activation, or runtime activation.
+./ONE_AIRPORT_A8_02_READ_ONLY_FRONTEND_PAGE_CONTRACT_AND_LOCAL_SMOKE_GATE_REPORT.md:64:`READ_ONLY_FRONTEND_PAGE_CONTRACT_AND_LOCAL_SMOKE_GATE_COMPLETE`
+./ONE_AIRPORT_A8_02_READ_ONLY_FRONTEND_PAGE_CONTRACT_AND_LOCAL_SMOKE_GATE_REPORT.md:70:## PASS marker
+./ONE_AIRPORT_A8_02_READ_ONLY_FRONTEND_PAGE_CONTRACT_AND_LOCAL_SMOKE_GATE_REPORT.md:72:`ONE_AIRPORT_A8_02_READ_ONLY_FRONTEND_PAGE_CONTRACT_AND_LOCAL_SMOKE_GATE_PASS`
+./VANTARIS_ONE_DATA_AND_EVENT_FLOW_DESIGN_R1.md:11:Device/source event -> EDGE read-only collector -> local buffer -> LINK canonical handoff -> CODE validation -> UFMS event/fault correlation -> Automated Rules & Policy -> operator review in UConsole -> optional UMMS work intent -> UCDE evidence.
+./VANTARIS_ONE_DATA_AND_EVENT_FLOW_DESIGN_R1.md:13:## Evidence/UCDE Flow
+./VANTARIS_ONE_DATA_AND_EVENT_FLOW_DESIGN_R1.md:15:Module action or package gate -> evidence envelope -> CODE validation -> UCDE read-only evidence chain -> Reports & Analytics -> UConsole evidence page -> customer/export package.
+./VANTARIS_ONE_DATA_AND_EVENT_FLOW_DESIGN_R1.md:21:## NEXUS AI Advisory Flow
+./VANTARIS_ONE_DATA_AND_EVENT_FLOW_DESIGN_R1.md:23:Approved context -> NEXUS AI model selection/risk scoring/triage -> recommendation record -> CODE policy validation -> UConsole advisory presentation -> human approval/workflow action. NEXUS AI does not execute control.
+./VANTARIS_ONE_DATA_AND_EVENT_FLOW_DESIGN_R1.md:42:| Sources   |    |      |    |      |    |      |    | UFMS UMMS UESG... |
+./VANTARIS_ONE_DATA_AND_EVENT_FLOW_DESIGN_R1.md:60:  -> UCDE evidence where required
+./VANTARIS_ONE_DATA_AND_EVENT_FLOW_DESIGN_R1.md:82:- NEXUS AI does not execute control.
+./VANTARIS_ONE_DATA_AND_EVENT_FLOW_DESIGN_R1.md:84:PASS marker: `ONE_DESIGN_R1_FULL_PRODUCT_DESIGN_BLUEPRINT_PASS`
+./ONE_PROD_GA_R9_FINAL_CUSTOMER_DELIVERY_EDITION_REPORT.md:1:# ONE-PROD-GA-R9 Final GA Customer Delivery Edition Report
+./ONE_PROD_GA_R9_FINAL_CUSTOMER_DELIVERY_EDITION_REPORT.md:14:- `deployment/prod-ga/customer-delivery/checklists/CUSTOMER_GA_ACTIVATION_CHECKLIST.md`
+./ONE_PROD_GA_R9_FINAL_CUSTOMER_DELIVERY_EDITION_REPORT.md:18:- `ONE_PROD_GA_R9_FINAL_CUSTOMER_DELIVERY_EDITION_REPORT.md`
+./ONE_PROD_GA_R9_FINAL_CUSTOMER_DELIVERY_EDITION_REPORT.md:29:- Tarball: `/Users/leon/Desktop/VANTARIS_FINAL_EXPORT/VANTARIS_ONE_PROD_GA_FOUNDATION_PACKAGES_R7_20260622.tar.gz`
+./ONE_PROD_GA_R9_FINAL_CUSTOMER_DELIVERY_EDITION_REPORT.md:48:- R7/R6/R8 PASS markers verified by R9 validator
+./ONE_PROD_GA_R9_FINAL_CUSTOMER_DELIVERY_EDITION_REPORT.md:62:PASS marker: `ONE_PROD_GA_R9_FINAL_CUSTOMER_DELIVERY_EDITION_PASS`
+./ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:1:# ONE-UMMS-R4A Local Freeze and Optional Tag Plan
+./ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:5:VANTARIS ONE UMMS-R4 Work Order Lifecycle State Model + Validation Gate is complete and locally frozen.
+./ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:21:UMMS remains a generic VANTARIS ONE module, not Airport-specific logic.
+./ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:43:## UMMS-R4 Commit Reference
+./ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:49:| PASS marker | ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_PASS |
+./ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:61:9. Shared EDGE/LINK/UCDE dependency map
+./ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:62:10. Future UMMS roadmap
+./ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:64:## UMMS-R4 Summary
+./ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:66:1. UMMS remains a generic cross-industry maintenance management module.
+./ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:67:2. Airport remains a source industry use case, not UMMS core identity.
+./ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:73:8. EDGE/LINK/UCDE dependencies are captured as future shared foundation / evidence dependencies only.
+./ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:77:| Customer function | Current UMMS-R4 status | Future owner | Related UMMS-R2/R3 domain alignment | Related Airport readiness projection | Related EDGE/LINK/UCDE dependency | Future phase |
+./ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:79:| Work Order Management, auto + manual | Lifecycle states and validation gates modeled only | ONE Work Management with UMMS extensions | R2 domain alignment and R3 draft/queue model | Fault/alarm/manual candidate readiness | LINK trigger contract; UCDE WorkOrderEvidence | UMMS-R5/R10 |
+./ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:80:| Asset Registry, full lifecycle tracking | Asset/location gates modeled only; no asset write | ONE Asset Graph / Layer 3 | R2 asset registry consumption; R3 assetRef/locationRef | Airport Assets & Topology | EDGE asset/location mapping; LINK asset/location reference | UMMS-R9 |
+./ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:81:| Preventive Maintenance Scheduler | PM linkage gate modeled only | UMMS PM readiness | R2 PM domain alignment; R3 pmLinkageStatus | Future PM-linked work inputs | EDGE condition signals for PM, future | UMMS-R5 |
+./ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:82:| Spare Parts / Inventory Management | Pending parts state and parts gate modeled only | UMMS inventory readiness | R2 SparePart ownership; R3 sparePartReadinessStatus | Airport maintenance work order references | UCDE WorkOrderEvidence; LINK delivery status | UMMS-R6 |
+./ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:83:| Vendor / Contract Management | Pending vendor state and vendor/contract gates modeled only | UMMS vendor / contract readiness | R2 Vendor/Contract ownership; R3 vendor readiness | Vendor support references | LINK audit/evidence chain; UCDE vendor evidence | UMMS-R7 |
+./ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:84:| Graphics HMI to locate Equipment | HMI locator gate modeled only | Asset Graph + UMMS consumer | R3 hmiLocatorRef readiness | Airport GA-R9 HMI locator readiness | EDGE HMI locator data; LINK symbol references | UMMS-R9 |
+./ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:85:| Existing system onboarding | Source-system dependency captured only | EDGE/LINK shared foundations | R3 source model | Airport GA-R7 onboarding/mapping readiness | EDGE tag mapping; LINK source health | Shared foundation |
+./ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:86:| Engineer commissioning diagnostics | Diagnostic evidence dependency captured only | EDGE diagnostics + UCDE evidence | R3 evidence readiness | Airport GA-R8 diagnostics readiness | EDGE diagnostics; UCDE handoff package | Shared foundation |
+./ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:87:| Remote overseas deployment | No deployment execution; safety/compliance gate only | Deployment/release governance | R2/R3 safety posture | Airport GA-R10 deployment readiness | LINK delivery status; UCDE audit trail | Future deployment gate |
+./ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:88:| Distributed independent installation | No install execution; audit readiness only | Deployment/release governance | R2/R3 safety posture | Airport GA-R10 distributed readiness | EDGE runtime signals, future; UCDE audit trail | Future deployment gate |
+./ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:124:| ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_PASS | PASS |
+./ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:125:| ONE_UMMS_R3A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS | PASS |
+./ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:126:| ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_PASS | PASS |
+./ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:127:| ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS | PASS |
+./ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:128:| ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_PASS | PASS |
+./ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:129:| ONE_PACKAGE_ROUTE_ENFORCEMENT_PASS | PASS |
+./ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:130:| ONE_BOUNDARY_BASELINE_PASS | PASS |
+./ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:138:No new P0 boundary issue was introduced by UMMS-R4A.
+./ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:151:git tag -a umms-r4-work-order-lifecycle-validation-gate-local-freeze-20260621 -m "VANTARIS ONE UMMS-R4 Work Order lifecycle validation gate local freeze"
+./ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:161:After UMMS-R4A freeze, next development can enter:
+./ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:163:UMMS-R5 Preventive Maintenance Schedule Readiness
+./ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:165:UMMS-R5 must remain read-only / projection-backed first, with no real PM schedule execution, no automatic work order generation, DB write, workflow execution, production activation, or runtime activation.
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN.md:1:# VANTARIS ONE Airport GA-R5A Local Release Freeze + Optional Tag Plan
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN.md:5:VANTARIS ONE Airport GA-R1 through GA-R5 local read-only stakeholder review chain is complete and locally frozen.
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN.md:27:- Previous pushed/tagged GA-ready RC tag: `airport-international-ga-ready-readonly-rc-20260620`
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN.md:31:| Step | Task | Commit | Commit message | PASS marker |
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN.md:33:| GA-R1 | Backend read-only API routes | `c78fb35190c76027115b4bb92fc8322bf07b73c7` | `feat(one): implement airport ga readonly api routes` | `ONE_AIRPORT_GA_R1_READONLY_API_ROUTE_IMPLEMENTATION_PASS` |
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN.md:34:| GA-R2 | API local smoke + contract regression | `d4218fe3711344369420ea30e57217998d968f2b` | `test(one): add airport ga readonly api smoke regression` | `ONE_AIRPORT_GA_R2_READONLY_API_LOCAL_SMOKE_AND_CONTRACT_REGRESSION_PASS` |
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN.md:35:| GA-R3 | Frontend read-only page | `f1056fe0b34019dc0660783bab687cae0332e5ee` | `feat(one): add airport ga readonly frontend page` | `ONE_AIRPORT_GA_R3_READONLY_FRONTEND_ROUTE_PAGE_IMPLEMENTATION_PASS` |
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN.md:36:| GA-R4 | UConsole Airport package binding | `82667d1` | `feat(one): bind airport ga readonly page in uconsole` | `ONE_AIRPORT_GA_R4_UCONSOLE_AIRPORT_READONLY_PAGE_BINDING_PASS` |
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN.md:37:| GA-R5 | Stakeholder review package | `a581d5e242f1f3e6fb6890f31f2ad562a079d125` | `docs(one): add airport ga stakeholder review package` | `ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE_PASS` |
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN.md:41:1. GA-R1 backend read-only API routes
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN.md:42:2. GA-R2 API local smoke + contract regression
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN.md:43:3. GA-R3 frontend read-only page
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN.md:44:4. GA-R4 UConsole Airport package binding
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN.md:45:5. GA-R5 stakeholder review package
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN.md:60:| UConsole | package entry | `Airport GA Read-only` |
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN.md:82:| `ONE_AIRPORT_GA_R1_READONLY_API_ROUTE_IMPLEMENTATION_PASS` | PASS |
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN.md:83:| `ONE_AIRPORT_GA_R2_READONLY_API_LOCAL_SMOKE_AND_CONTRACT_REGRESSION_PASS` | PASS |
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN.md:84:| `ONE_AIRPORT_GA_R3_READONLY_FRONTEND_ROUTE_PAGE_IMPLEMENTATION_PASS` | PASS |
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN.md:85:| `ONE_AIRPORT_GA_R4_UCONSOLE_AIRPORT_READONLY_PAGE_BINDING_PASS` | PASS |
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN.md:86:| `ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE_PASS` | PASS |
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN.md:87:| `ONE_PACKAGE_ROUTE_ENFORCEMENT_PASS` | PASS |
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN.md:88:| `ONE_BOUNDARY_BASELINE_PASS` | PASS |
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN.md:98:No new P0 boundary issue was introduced by GA-R1 through GA-R5A.
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN.md:111:git tag -a airport-ga-readonly-stakeholder-review-local-freeze-20260621 -m "VANTARIS ONE Airport GA read-only stakeholder review local freeze"
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN.md:123:After GA-R5A freeze, next development can enter:
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN.md:125:Airport GA-R6 LINK Integration Readiness Projection
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN.md:127:GA-R6 must still not modify EDGE/LINK source. It should only capture VANTARIS ONE-side readiness projections and future shared foundation interface requirements.
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN.md:129:## GA-R5A PASS Marker
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN.md:131:`ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS`
+./ONE_AIRPORT_GA_R3_READONLY_FRONTEND_ROUTE_PAGE_IMPLEMENTATION_REPORT.md:1:# ONE-AIRPORT-GA-R3 Read-Only Frontend Route / Page Implementation Report
+./ONE_AIRPORT_GA_R3_READONLY_FRONTEND_ROUTE_PAGE_IMPLEMENTATION_REPORT.md:5:GA-R3 adds the Airport GA read-only frontend page and route set for the eight GA-R1/GA-R2 validated GET endpoints.
+./ONE_AIRPORT_GA_R3_READONLY_FRONTEND_ROUTE_PAGE_IMPLEMENTATION_REPORT.md:7:PASS marker: `ONE_AIRPORT_GA_R3_READONLY_FRONTEND_ROUTE_PAGE_IMPLEMENTATION_PASS`
+./ONE_AIRPORT_GA_R3_READONLY_FRONTEND_ROUTE_PAGE_IMPLEMENTATION_REPORT.md:11:- Baseline before GA-R3: `d4218fe3711344369420ea30e57217998d968f2b`
+./ONE_AIRPORT_GA_R3_READONLY_FRONTEND_ROUTE_PAGE_IMPLEMENTATION_REPORT.md:14:- GA-R2 accepted marker: `ONE_AIRPORT_GA_R2_READONLY_API_LOCAL_SMOKE_AND_CONTRACT_REGRESSION_PASS`
+./ONE_AIRPORT_GA_R3_READONLY_FRONTEND_ROUTE_PAGE_IMPLEMENTATION_REPORT.md:32:Only the eight GA-R1/GA-R2 read-only GET routes are consumed:
+./ONE_AIRPORT_GA_R3_READONLY_FRONTEND_ROUTE_PAGE_IMPLEMENTATION_REPORT.md:63:Static fallback menu now exposes `Airport GA Read-Only` with eight child entries matching the A8 route candidates.
+./ONE_AIRPORT_GA_R3_READONLY_FRONTEND_ROUTE_PAGE_IMPLEMENTATION_REPORT.md:77:`ONE_AIRPORT_GA_R3_READONLY_FRONTEND_ROUTE_PAGE_IMPLEMENTATION_PASS`
+./ONE_AIRPORT_A2_02_SOURCE_SYSTEM_EVIDENCE_BINDING_AND_REVIEW_PROJECTION_REPORT.md:36:Expected marker: `ONE_AIRPORT_A2_02_SOURCE_SYSTEM_EVIDENCE_BINDING_AND_REVIEW_PROJECTION_PASS`
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:1:# ONE-UMMS-R2A Local Freeze and Optional Tag Plan Report
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:9:- `ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md`
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:11:- `ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md`
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:16:- UMMS-R2A freeze document
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:17:- UMMS-R2A optional freeze registry
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:18:- UMMS-R2A freeze report
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:19:- UMMS-R2A validation script
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:25:- `grep -R "ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_PASS" . --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=.venv --exclude-dir=venv`
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:40:- UMMS-R2A freeze validator: expected PASS
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:41:- UMMS-R2 validator: expected PASS
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:42:- GA-R10A validator: expected PASS
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:43:- GA-R10 through GA-R6 validators: expected PASS
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:49:## PASS marker
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:51:`ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS`
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:56:No new P0 boundary issue was introduced by UMMS-R2A.
+./ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:83:UMMS-R3 Manual Work Order Read-only Queue / Draft Model.
+./ONE_AIRPORT_GA_R1_READONLY_API_ROUTE_IMPLEMENTATION_REPORT.md:1:# ONE-AIRPORT-GA-R1 Read-Only API Route Implementation Report
+./ONE_AIRPORT_GA_R1_READONLY_API_ROUTE_IMPLEMENTATION_REPORT.md:5:GA-R1 implements the A7 frozen Airport read-only API routes as backend GET-only local projection readers.
+./ONE_AIRPORT_GA_R1_READONLY_API_ROUTE_IMPLEMENTATION_REPORT.md:7:PASS_MARKER: ONE_AIRPORT_GA_R1_READONLY_API_ROUTE_IMPLEMENTATION_PASS
+./ONE_AIRPORT_GA_R1_READONLY_API_ROUTE_IMPLEMENTATION_REPORT.md:46:`ONE_AIRPORT_GA_R1_READONLY_API_ROUTE_IMPLEMENTATION_PASS`
+./ONE_AIRPORT_GA_R1_READONLY_API_ROUTE_IMPLEMENTATION_REPORT.md:48:Backend route inventory metadata is regenerated from the existing deterministic builder so the committed inventory reflects the eight GA-R1 routes.
+./AN_VANTARIS_IBMS-frontend/package-lock.json:120:      "integrity": "sha512-uTII7OYF+/Mes/MrcIOYp5yOtSMLBWSIoLPpcgwipoiKbli6k322tcoFsxoIIxPDqW01SQGAgko4EzZi2BNv2w==",
+./AN_VANTARIS_IBMS-frontend/package-lock.json:181:      "integrity": "sha512-KzkdCd6Uxqnf6l3HOw1xfatAlUURA0g14cvBYFyJ5SaNOQbOUvBr9PKArcPcrNIeRsBdgcUzOGrhKveVpvOIGA==",
+./AN_VANTARIS_IBMS-frontend/package-lock.json:389:      "integrity": "sha512-OXXS3RKJgX2uLwM+gYyuH5omcH8fL1LJs96pZGgtetVCahON57+d4SJHzTgZiOjxgGkSnpXpOsWuPDGAKAigEg==",
+./AN_VANTARIS_IBMS-frontend/package-lock.json:1790:      "integrity": "sha512-H+ue8Zo4vJmV2nRjpx86P35lzwDT3nItnIsocgumgr0hHMQ+ZGq5vrERg9kJBo5AWGmxZDhzDo+WVIJqkB0cGA==",
+./AN_VANTARIS_IBMS-frontend/src/modules/uesg/UesgSustainability.vue:37:  moduleName: 'UESG Sustainability',
+./AN_VANTARIS_IBMS-frontend/src/modules/uesg/UesgSustainability.vue:220:    const message = error instanceof ApiError ? error.message : 'Failed to load UESG sustainability data.'
+./AN_VANTARIS_IBMS-frontend/src/modules/uesg/UesgSustainability.vue:274:      <h2>UESG Sustainability</h2>
+./AN_VANTARIS_IBMS-frontend/src/modules/uesg/UesgSustainability.vue:287:      title="UESG R2 category, calculation and trend views are local skeleton readiness views. Meter integration, carbon factor governance and certification reporting are not integrated."
+./AN_VANTARIS_IBMS-frontend/src/modules/umms/UmmsMaintenance.vue:26:  moduleName: 'UMMS Maintenance',
+./AN_VANTARIS_IBMS-frontend/src/modules/umms/UmmsMaintenance.vue:106:    workOrderCode: 'UMMS-FALLBACK-001',
+./AN_VANTARIS_IBMS-frontend/src/modules/umms/UmmsMaintenance.vue:191:    const message = error instanceof ApiError ? error.message : 'Failed to load UMMS maintenance data.'
+./AN_VANTARIS_IBMS-frontend/src/modules/umms/UmmsMaintenance.vue:231:        <h2>UMMS Maintenance</h2>
+./AN_VANTARIS_IBMS-frontend/src/modules/umms/UmmsMaintenance.vue:254:      title="UMMS R1 uses local skeleton work orders. Dispatch workflow, mobile integration, notification delivery, EDGE/LINK integration and DB persistence are not integrated."
+./AN_VANTARIS_IBMS-frontend/src/modules/umms/UmmsReadonlyOverview.vue:17:  'UCDE Evidence Closure Alignment',
+./AN_VANTARIS_IBMS-frontend/src/modules/umms/UmmsReadonlyOverview.vue:37:      readinessStage: 'UMMS-R12 fallback',
+./AN_VANTARIS_IBMS-frontend/src/modules/umms/UmmsReadonlyOverview.vue:57:const fallbackMessage = computed(() => overview.value?.fallbackMessage || 'UMMS readiness data unavailable, read-only fallback active.')
+./AN_VANTARIS_IBMS-frontend/src/modules/umms/UmmsReadonlyOverview.vue:78:        <p class="eyebrow">VANTARIS ONE / UMMS</p>
+./AN_VANTARIS_IBMS-frontend/src/modules/umms/UmmsReadonlyOverview.vue:79:        <h1>UMMS Stakeholder Review Card</h1>
+./AN_VANTARIS_IBMS-frontend/src/modules/umms/UmmsReadonlyOverview.vue:81:          Read-only UConsole entry consuming the UMMS-R11 GET-only endpoints. No write, approval,
+./AN_VANTARIS_IBMS-frontend/src/modules/umms/UmmsReadonlyOverview.vue:104:          <span>UMMS package readiness</span>
+./AN_VANTARIS_IBMS-frontend/src/modules/umms/UmmsReadonlyOverview.vue:110:        <el-descriptions-item label="Package name">{{ packageEntry?.packageDisplayName || 'UMMS' }}</el-descriptions-item>
+./AN_VANTARIS_IBMS-frontend/src/modules/umms/UmmsReadonlyOverview.vue:121:          {{ packageEntry?.stakeholderReviewPackage || 'ONE_UMMS_R10_STAKEHOLDER_REVIEW_PACKAGE.md' }}
+./AN_VANTARIS_IBMS-frontend/src/modules/umms/UmmsReadonlyOverview.vue:183:      <p>UMMS read-only frontend freeze / archive</p>
+./AN_VANTARIS_IBMS-frontend/src/modules/ucde/EvidenceCenter.vue:30:  moduleName: 'UCDE Evidence Center',
+./AN_VANTARIS_IBMS-frontend/src/modules/ucde/EvidenceCenter.vue:79:    evidenceName: 'UCDE Fallback Readiness Entry',
+./AN_VANTARIS_IBMS-frontend/src/modules/ucde/EvidenceCenter.vue:194:    apiError.value = normalizeError(error, 'UCDE API unavailable. Showing local fallback evidence list.')
+./AN_VANTARIS_IBMS-frontend/src/modules/ucde/EvidenceCenter.vue:284:          <h1>UCDE Evidence Center</h1>
+./AN_VANTARIS_IBMS-frontend/src/modules/ucde/EvidenceCenter.vue:303:      title="UCDE R2 uses hash-only local evidence for traceability readiness. It is not a certification proof."
+./AN_VANTARIS_IBMS-frontend/src/modules/airport/AirportGaReadonlyConsole.vue:167:        <h1>Airport GA Read-Only Operations Console</h1>
+./AN_VANTARIS_IBMS-frontend/src/modules/airport/AirportGaReadonlyConsole.vue:169:          Projection-backed view consuming the eight GA-R1 validated GET endpoints. No actions, writes,
+./AN_VANTARIS_IBMS-frontend/src/modules/airport/AirportGaReadonlyConsole.vue:206:      title="GA-R3 guardrail: this page is read-only and has no POST, PUT, PATCH, DELETE, approval, DB write, or device-control path."
+./AN_VANTARIS_IBMS-frontend/src/modules/console/PlatformOperationsDashboard.vue:107:    'No UCDE runtime integration.',
+./AN_VANTARIS_IBMS-frontend/src/modules/console/PlatformOperationsDashboard.vue:158:    securityPosture: { score: 0, weight: 0.25, basis: 'permission mode, certified flags, RBAC/SIEM/UCDE integration status' },
+./AN_VANTARIS_IBMS-frontend/src/modules/console/PlatformOperationsDashboard.vue:652:        basis: 'permission mode, certified flags, RBAC/SIEM/UCDE integration status',
+./AN_VANTARIS_IBMS-frontend/src/services/menu/static-menu.ts:77:    label: 'UCDE',
+./AN_VANTARIS_IBMS-frontend/src/services/menu/static-menu.ts:91:    label: 'UESG',
+./AN_VANTARIS_IBMS-frontend/src/services/menu/static-menu.ts:105:    label: 'UMMS',
+./AN_VANTARIS_IBMS-frontend/src/services/menu/static-menu.ts:139:    label: 'Airport GA Read-Only',
+./AN_VANTARIS_IBMS-frontend/src/services/api/ucde.ts:226:    moduleName: String(data.moduleName ?? 'UCDE Evidence Center'),
+./AN_VANTARIS_IBMS-frontend/src/services/api/airportGaReadonly.ts:10:  | 'EVIDENCE_INVESTIGATION'
+./AN_VANTARIS_IBMS-frontend/src/services/api/airportGaReadonly.ts:11:  | 'REPORTS'
+./AN_VANTARIS_IBMS-frontend/src/services/api/airportGaReadonly.ts:94:    key: 'EVIDENCE_INVESTIGATION',
+./AN_VANTARIS_IBMS-frontend/src/services/api/airportGaReadonly.ts:100:    key: 'REPORTS',
+./AN_VANTARIS_IBMS-frontend/src/services/api/umms.ts:248:    moduleName: String(data.moduleName ?? 'UMMS Maintenance'),
+./AN_VANTARIS_IBMS-frontend/src/services/api/umms.ts:447:    module: String(data.module ?? 'UMMS'),
+./AN_VANTARIS_IBMS-frontend/src/services/api/umms.ts:451:    packageDisplayName: String(data.packageDisplayName ?? 'UMMS'),
+./AN_VANTARIS_IBMS-frontend/src/services/api/umms.ts:455:    stakeholderReviewPackage: String(data.stakeholderReviewPackage ?? 'ONE_UMMS_R10_STAKEHOLDER_REVIEW_PACKAGE.md'),
+./AN_VANTARIS_IBMS-frontend/src/services/api/umms.ts:516:    knownLimitations: ['UMMS readiness data unavailable, read-only fallback active.'],
+./AN_VANTARIS_IBMS-frontend/src/services/api/umms.ts:517:    recommendedNextSteps: ['UMMS read-only frontend freeze / archive'],
+./AN_VANTARIS_IBMS-frontend/src/services/api/umms.ts:533:      'UCDE Evidence Closure Alignment',
+./AN_VANTARIS_IBMS-frontend/src/services/api/umms.ts:541:      readinessStage: 'UMMS-R12 fallback',
+./AN_VANTARIS_IBMS-frontend/src/services/api/umms.ts:543:      futureOwner: 'UMMS future implementation phase',
+./AN_VANTARIS_IBMS-frontend/src/services/api/umms.ts:655:      fallbackMessage: 'UMMS readiness data unavailable, read-only fallback active.',
+./AN_VANTARIS_IBMS-frontend/src/services/api/uesg.ts:385:    moduleName: String(data.moduleName ?? 'UESG Sustainability'),
+./AN_VANTARIS_IBMS-frontend/src/router/routes.ts:119:    meta: { requiresAuth: true, title: 'UCDE Evidence Center', layout: true },
+./AN_VANTARIS_IBMS-frontend/src/router/routes.ts:131:    meta: { requiresAuth: true, title: 'UESG Sustainability', layout: true },
+./AN_VANTARIS_IBMS-frontend/src/router/routes.ts:137:    meta: { requiresAuth: true, title: 'UMMS Maintenance', layout: true },
+./AN_VANTARIS_IBMS-frontend/src/router/routes.ts:143:    meta: { requiresAuth: true, title: 'UMMS Read-only Overview', layout: true },
+./ONE_PROD_GA_R6_FULL_EDGE_RUNTIME_RESYNC_GATE_REPORT.md:1:# ONE-PROD-GA-R6 Full EDGE Runtime Resync Gate Report
+./ONE_PROD_GA_R6_FULL_EDGE_RUNTIME_RESYNC_GATE_REPORT.md:80:`ONE_PROD_GA_R6_FULL_EDGE_RUNTIME_RESYNC_GATE_PASS`
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION_REPORT.md:1:# ONE UMMS-R14 Productization Consolidation Report
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION_REPORT.md:13:The UMMS read-only platform chain from R2 through R13A is complete and represented by frozen PASS markers. R14 depends on the R13A local-freeze marker:
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION_REPORT.md:15:- `ONE_UMMS_R13A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS`
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION_REPORT.md:19:UMMS-R14 defines the product boundary and productization architecture:
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION_REPORT.md:21:- UMMS is the read-only operations intelligence layer.
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION_REPORT.md:25:- UMMS has no runtime authority.
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION_REPORT.md:26:- UMMS product modules are layered as Core Read-only Domain, R11 API, R12 UI, R13 Observability, and R13A Freeze.
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION_REPORT.md:32:- `ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION.md`
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION_REPORT.md:34:- `ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION_REPORT.md`
+./ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION_REPORT.md:64:`ONE_UMMS_R14_PRODUCTIZATION_CONSOLIDATION_PASS`
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:1:# ONE-AIRPORT-GA-R5A Local Release Freeze + Optional Tag Plan Report
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:5:- Baseline HEAD before GA-R5A: `a581d5e242f1f3e6fb6890f31f2ad562a079d125`
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:6:- Branch state before GA-R5A: `main...origin/main [ahead 5]`
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:7:- Working tree before GA-R5A: clean
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:11:- `ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN.md`
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:12:- `ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md`
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:18:- GA-R5A local release freeze markdown
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:19:- GA-R5A validation/report markdown
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:20:- Optional GA-R5A freeze registry JSON
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:21:- GA-R5A validator
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:27:- `grep -R "ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE_PASS" . --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=.venv --exclude-dir=venv`
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:42:- GA-R5A local release freeze validator: expected PASS
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:43:- GA-R5 stakeholder package regression: expected PASS
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:44:- GA-R4 UConsole binding regression: expected PASS
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:45:- GA-R3 frontend read-only page regression: expected PASS
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:46:- GA-R2 API smoke/contract regression: expected PASS
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:47:- GA-R1 API route regression: expected PASS
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:52:## PASS marker
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:54:`ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS`
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:58:Existing boundary warnings remain non-blocking and unchanged in posture. GA-R5A does not create, modify, or resolve those warnings.
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:80:Airport GA-R6 LINK Integration Readiness Projection.
+./ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:82:GA-R6 should remain a VANTARIS ONE-side readiness projection and future shared foundation interface requirement capture. It must not modify EDGE/LINK source.
+./ONE_AIRPORT_A7_03_READ_ONLY_API_MOCK_ROUTE_CONTRACT_AND_LOCAL_SMOKE_GATE_REPORT.md:65:`READ_ONLY_API_MOCK_ROUTE_CONTRACT_AND_LOCAL_SMOKE_GATE_COMPLETE`
+./ONE_AIRPORT_A7_03_READ_ONLY_API_MOCK_ROUTE_CONTRACT_AND_LOCAL_SMOKE_GATE_REPORT.md:71:## PASS marker
+./ONE_AIRPORT_A7_03_READ_ONLY_API_MOCK_ROUTE_CONTRACT_AND_LOCAL_SMOKE_GATE_REPORT.md:73:`ONE_AIRPORT_A7_03_READ_ONLY_API_MOCK_ROUTE_CONTRACT_AND_LOCAL_SMOKE_GATE_PASS`
+./ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_REPORT.md:1:# ONE-UMMS-R2 Work Order / Asset / PM Domain Alignment Report
+./ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_REPORT.md:14:- `ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_REPORT.md`
+./ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_REPORT.md:19:UMMS-R2 extracts Airport maintenance requirements into a generic VANTARIS ONE UMMS domain alignment model. UMMS remains a cross-industry maintenance management module. Airport remains an industry solution package and industry projection.
+./ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_REPORT.md:21:UMMS-R2 is read-only and projection-backed. It does not create work orders, execute PM schedules, write asset lifecycle state, reserve inventory, execute vendor/contract workflows, call EDGE/LINK runtime, or enable production/runtime activation.
+./ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_REPORT.md:23:## Generic UMMS domain object summary
+./ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_REPORT.md:25:The projection defines generic UMMS domain objects for fault cases, work orders, work-order triggers, assignments, status, evidence, assets, asset lifecycle records, asset location references, maintenance plans, PM schedules/tasks, checklists, future spare parts/inventory, future vendor/contract/SLA references, HMI locator references, and evidence references.
+./ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_REPORT.md:31:UMMS-R2 defines the domain alignment only. No work order creation or execution is implemented in UMMS-R2.
+./ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_REPORT.md:39:LINK provides future trigger data including fault candidate, alarm/event, asset/location, severity, priority suggestion, source-system context, occurrence data, recommended action, evidence, and HMI locator references. UMMS owns work order lifecycle. UMMS-R2 does not consume live LINK runtime.
+./ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_REPORT.md:45:UMMS-R2 does not write canonical Asset Graph. This is read-only domain alignment only.
+./ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_REPORT.md:55:UMMS-R2 defines PM alignment only. No PM schedule execution or automatic work order generation is implemented in UMMS-R2.
+./ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_REPORT.md:57:## Airport-to-UMMS mapping summary
+./ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_REPORT.md:59:Airport Fault Cases map to UMMS FaultCase. Airport Maintenance Work Orders map to UMMS WorkOrder. Airport Assets & Topology map to UMMS Asset and AssetLocationReference. Airport Alarms & Events map to UMMS WorkOrderTrigger and FaultCase input. Airport Evidence Investigation maps to UMMS WorkOrderEvidence and UCDE EvidenceReference. Airport Reports map to maintenance report inputs. Airport HMI Locator Readiness maps to UMMS HmiLocatorReference. Airport Deployment Readiness maps to a future UMMS activation dependency.
+./ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_REPORT.md:63:UMMS-R2 aligns work order management, asset registry lifecycle tracking, PM scheduling, spare parts/inventory, vendor/contract management, Graphics HMI locator context, existing-system onboarding, engineer commissioning diagnostics, remote overseas deployment, and distributed independent installation to generic UMMS domains and future shared foundation dependencies.
+./ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_REPORT.md:65:## Shared EDGE/LINK/UCDE dependency map
+./ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_REPORT.md:71:UCDE dependencies are EvidenceRecord, WorkOrderEvidence, closure evidence, review evidence, audit trail, handoff package, and report evidence.
+./ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_REPORT.md:73:## Future UMMS roadmap
+./ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_REPORT.md:75:1. UMMS-R3 Manual Work Order Read-only Queue / Draft Model
+./ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_REPORT.md:76:2. UMMS-R4 Work Order Lifecycle State Model + Validation Gate
+./ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_REPORT.md:77:3. UMMS-R5 Preventive Maintenance Schedule Readiness
+./ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_REPORT.md:78:4. UMMS-R6 Spare Parts / Inventory Readiness
+./ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_REPORT.md:79:5. UMMS-R7 Vendor / Contract / SLA Readiness
+./ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_REPORT.md:80:6. UMMS-R8 UMMS + UCDE Evidence Closure Alignment
+./ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_REPORT.md:81:7. UMMS-R9 UMMS + Airport HMI Locator Binding Readiness
+./ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_REPORT.md:82:8. UMMS-R10 UMMS Stakeholder Review Package
+./ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_REPORT.md:106:- `grep -R "ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS" . --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=.venv --exclude-dir=venv`
+./ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_REPORT.md:121:- UMMS-R2 validator: expected PASS
+./ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_REPORT.md:122:- GA-R10A through GA-R6 regression checks: expected PASS
+./ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_REPORT.md:128:## PASS marker
+./ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_REPORT.md:130:`ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_PASS`
+./ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_REPORT.md:147:1. UMMS-R3 Manual Work Order Read-only Queue / Draft Model
+./ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_REPORT.md:148:2. UMMS-R4 Work Order Lifecycle State Model + Validation Gate
+./ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_REPORT.md:149:3. UMMS-R5 Preventive Maintenance Schedule Readiness
+./ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_REPORT.md:150:4. UCDE-R4 Evidence Chain Alignment
+./ONE_UMMS_R10A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:1:# ONE-UMMS-R10A Local Freeze and Optional Tag Plan Report
+./ONE_UMMS_R10A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:9:- `ONE_UMMS_R10A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md`
+./ONE_UMMS_R10A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:11:- `ONE_UMMS_R10A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md`
+./ONE_UMMS_R10A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:16:- UMMS-R10A freeze document
+./ONE_UMMS_R10A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:17:- UMMS-R10A optional freeze registry
+./ONE_UMMS_R10A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:18:- UMMS-R10A freeze report
+./ONE_UMMS_R10A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:19:- UMMS-R10A validation script
+./ONE_UMMS_R10A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:25:- `rg "ONE_UMMS_R10_STAKEHOLDER_REVIEW_PACKAGE_PASS" -g '!node_modules' -g '!.git' -g '!.venv' -g '!venv'`
+./ONE_UMMS_R10A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:50:- UMMS-R10A freeze validator: PASS
+./ONE_UMMS_R10A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:51:- UMMS-R10 validator: PASS
+./ONE_UMMS_R10A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:52:- UMMS-R9A through UMMS-R2 validators: PASS
+./ONE_UMMS_R10A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:57:## PASS marker
+./ONE_UMMS_R10A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:59:`ONE_UMMS_R10A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS`
+./ONE_UMMS_R10A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:65:No new P0 boundary issue was introduced by UMMS-R10A.
+./ONE_UMMS_R10A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md:82:Create UMMS-R10A local tag + push archive, then begin UConsole UMMS package entry readiness or UMMS read-only API implementation depending on project priority.
+./ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_REPORT.md:1:# ONE-UMMS-R4 Work Order Lifecycle State Model + Validation Gate Report
+./ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_REPORT.md:17:- `ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_REPORT.md`
+./ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_REPORT.md:22:UMMS-R4 defines a generic Work Order lifecycle state model and validation gate projection. It extends the UMMS-R3 manual queue / draft model, but remains read-only, projection-backed, and non-executing.
+./ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_REPORT.md:24:UMMS remains a generic cross-industry VANTARIS ONE maintenance module. Airport is the first industry use case only; Airport-specific logic is not part of UMMS core identity.
+./ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_REPORT.md:34:UMMS-R4 defines future transition groups from candidate/draft intake through assignment, progress, blocked states, resolution, verification, closure, cancellation, rejection, and expiry. Every transition has `executionAllowedInR4: false`.
+./ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_REPORT.md:38:Validation gates include draft completeness, asset reference, location reference, assignment readiness, SLA readiness, evidence readiness, HMI locator readiness, PM linkage, spare parts readiness, vendor/contract readiness, safety/compliance, UCDE evidence, duplicate work order, conflicting open work order, and closure evidence.
+./ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_REPORT.md:46:Evidence gates align to future UCDE / Evidence Center dependencies, including fault, asset, location, HMI locator, assignment, before-work, after-work, parts, vendor, customer communication, resolution, verification, closure, and audit trail evidence. No evidence upload or closure execution is added.
+./ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_REPORT.md:54:Airport fault cases, alarms/events, maintenance work order references, evidence investigation, assets/topology, HMI locator readiness, and reports are mapped to UMMS lifecycle targets as read-only projections only.
+./ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_REPORT.md:58:UMMS-R4 covers Work Order Management, Asset Registry, Preventive Maintenance Scheduler, Spare Parts / Inventory, Vendor / Contract, Graphics HMI locator, existing system onboarding, engineer commissioning diagnostics, remote overseas deployment, and distributed independent installation as projection-only lifecycle and validation readiness.
+./ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_REPORT.md:60:## Shared EDGE/LINK/UCDE dependency map
+./ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_REPORT.md:64:- UCDE dependencies: EvidenceRecord; WorkOrderEvidence; Draft review evidence; State transition evidence; Closure evidence; Verification evidence; Audit trail; Handoff package; Report evidence.
+./ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_REPORT.md:66:## Future UMMS roadmap
+./ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_REPORT.md:68:- UMMS-R4A Local Freeze + Optional Tag Plan
+./ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_REPORT.md:69:- UMMS-R5 Preventive Maintenance Schedule Readiness
+./ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_REPORT.md:70:- UMMS-R6 Spare Parts / Inventory Readiness
+./ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_REPORT.md:71:- UMMS-R7 Vendor / Contract / SLA Readiness
+./ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_REPORT.md:72:- UMMS-R8 UMMS + UCDE Evidence Closure Alignment
+./ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_REPORT.md:73:- UMMS-R9 UMMS + Airport HMI Locator Binding Readiness
+./ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_REPORT.md:74:- UMMS-R10 UMMS Stakeholder Review Package
+./ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_REPORT.md:104:- UMMS-R4 validator: PASS
+./ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_REPORT.md:105:- UMMS-R3A validator: PASS
+./ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_REPORT.md:106:- UMMS-R3 validator: PASS
+./ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_REPORT.md:107:- UMMS-R2A validator: PASS
+./ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_REPORT.md:108:- UMMS-R2 validator: PASS
+./ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_REPORT.md:114:## PASS marker
+./ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_REPORT.md:116:`ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_PASS`
+./ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_REPORT.md:120:- UMMS-R4 is not real lifecycle execution.
+./ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_REPORT.md:123:- UCDE, EDGE, and LINK dependencies are captured as future dependencies only.
+./ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_REPORT.md:127:- UMMS-R4A Local Freeze + Optional Tag Plan
+./ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_REPORT.md:128:- UMMS-R5 Preventive Maintenance Schedule Readiness
+./ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_REPORT.md:129:- UMMS-R6 Spare Parts / Inventory Readiness
+./ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_REPORT.md:130:- UMMS-R7 Vendor / Contract / SLA Readiness
+./ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_REPORT.md:131:- UMMS-R8 UMMS + UCDE Evidence Closure Alignment
+./ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_REPORT.md:132:- UMMS-R9 UMMS + Airport HMI Locator Binding Readiness
+./ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_REPORT.md:133:- UMMS-R10 UMMS Stakeholder Review Package
+./contracts/contract-manifest.json:53:    "governance": "GOVERNANCE.md",
+./contracts/ERROR_CODES.md:11:| `SECURITY_PAYLOAD_HASH_MISMATCH` | security | Payload hash verification failed. | security |
+./contracts/ERROR_CODES.md:12:| `SECURITY_REPLAY_DETECTED` | security | Replay attack detected by idempotency/replay controls. | security |
+./contracts/SECURITY_BOUNDARY.md:33:| Record findings only; remediation tracked under **IBMS-SECURITY-A0** | ✅ |
+./contracts/SECURITY_BOUNDARY.md:140:| **IBMS-SECURITY-A0** | P0 findings remediation plan |
+./contracts/PERMISSION_MATRIX_A2.md:55:| IoT | `/api/iot/device/{device_code}/stream`, `/latest` | GET | **Unprotected** | Pending auth decision | Pending SECURITY-A11 |
+./contracts/PERMISSION_MATRIX_A2.md:61:| DID | `/api/did/me` | GET | JWT only (pre-A10) | `did:read` | Pending SECURITY-A10B |
+./contracts/PERMISSION_MATRIX_A2.md:89:2. **SECURITY-A6B** — modeling route permissions (`modeling:read`, `modeling:train`, `modeling:predict`)
+./contracts/PERMISSION_MATRIX_A2.md:90:3. **SECURITY-A7B** — IoT write/command/ingest permissions
+./contracts/PERMISSION_MATRIX_A2.md:91:4. **SECURITY-A10B** — DID high-risk permissions (`did:issue`, `did:revoke`, `did:manage`)
+./contracts/PROTECTED_API_BOUNDARY_A1.md:155:- `contracts/SECURITY_BOUNDARY.md` — security contract baseline
+./contracts/PROTECTED_API_BOUNDARY_A1.md:156:- `docs/security/IBMS_SECURITY_A6_MODELING_API_PROTECTION.md`
+./contracts/PROTECTED_API_BOUNDARY_A1.md:157:- `docs/security/IBMS_SECURITY_A7_IOT_API_PROTECTION.md`
+./contracts/PROTECTED_API_BOUNDARY_A1.md:158:- `docs/security/IBMS_SECURITY_A8B_SSE_TEST_ENDPOINT_GUARD.md`
+./contracts/PROTECTED_API_BOUNDARY_A1.md:159:- `docs/security/IBMS_SECURITY_A9_AUDIT_TRACEID_BOUNDARY.md`
+./contracts/PROTECTED_API_BOUNDARY_A1.md:160:- `docs/security/IBMS_SECURITY_A10_DID_API_PROTECTION.md`
+./contracts/API_NAMESPACE_POLICY.md:25:- old API removal requires GA owner approval
+./contracts/openapi/ibms-protected-api-v1.openapi.yaml:7:    Sources: SECURITY-A6, A7, A8B, A10, CONTRACTS-A1, CORE-A0.
+./contracts/openapi/ibms-protected-api-v1.openapi.yaml:901:        Revoke an issued verifiable credential. JWT required (SECURITY-A10, commit 898f99c).
+./contracts/openapi/ibms-protected-api-v1.openapi.yaml:2463:      description: Optional correlation id for audit (SECURITY-A9)
+./contracts/README.md:17:- `GOVERNANCE.md`
+./contracts/registry/contract-namespaces.v1.json:465:      "owner": "UMMS",
+./contracts/registry/contract-namespaces.v1.json:510:      "owner": "UESG",
+./contracts/registry/contract-namespaces.v1.json:514:        "ESGAnomaly"
+./contracts/registry/canonical-objects.v1.json:364:      "currentImplementation": "LEGACY_OR_SKELETON",
+./contracts/registry/canonical-objects.v1.json:400:      "currentImplementation": "LEGACY_OR_SKELETON",
+./contracts/registry/canonical-objects.v1.json:436:      "currentImplementation": "LEGACY_OR_SKELETON",
+./contracts/registry/canonical-objects.v1.json:1300:      "currentImplementation": "LEGACY_OR_SKELETON",
+./contracts/registry/canonical-objects.v1.json:1415:      "semanticOwner": "UMMS",
+./contracts/registry/canonical-objects.v1.json:1416:      "systemOfRecord": "UMMS",
+./contracts/registry/canonical-objects.v1.json:1418:      "eventProvider": "UMMS",
+./contracts/registry/canonical-objects.v1.json:1451:      "semanticOwner": "UMMS",
+./contracts/registry/canonical-objects.v1.json:1452:      "systemOfRecord": "UMMS",
+./contracts/registry/canonical-objects.v1.json:1454:      "eventProvider": "UMMS",
+./contracts/registry/canonical-objects.v1.json:1487:      "semanticOwner": "UMMS",
+./contracts/registry/canonical-objects.v1.json:1488:      "systemOfRecord": "UMMS",
+./contracts/registry/canonical-objects.v1.json:1490:      "eventProvider": "UMMS",
+./contracts/registry/canonical-objects.v1.json:1523:      "semanticOwner": "UMMS",
+./contracts/registry/canonical-objects.v1.json:1524:      "systemOfRecord": "UMMS",
+./contracts/registry/canonical-objects.v1.json:1526:      "eventProvider": "UMMS",
+./contracts/registry/canonical-objects.v1.json:1559:      "semanticOwner": "UMMS",
+./contracts/registry/canonical-objects.v1.json:1560:      "systemOfRecord": "UMMS",
+./contracts/registry/canonical-objects.v1.json:1562:      "eventProvider": "UMMS",
+./contracts/registry/canonical-objects.v1.json:1595:      "semanticOwner": "UMMS",
+./contracts/registry/canonical-objects.v1.json:1596:      "systemOfRecord": "UMMS",
+./contracts/registry/canonical-objects.v1.json:1598:      "eventProvider": "UMMS",
+./contracts/registry/canonical-objects.v1.json:1631:      "semanticOwner": "UMMS",
+./contracts/registry/canonical-objects.v1.json:1632:      "systemOfRecord": "UMMS",
+./contracts/registry/canonical-objects.v1.json:1634:      "eventProvider": "UMMS",
+./contracts/registry/canonical-objects.v1.json:1667:      "semanticOwner": "UESG",
+./contracts/registry/canonical-objects.v1.json:1668:      "systemOfRecord": "UESG",
+./contracts/registry/canonical-objects.v1.json:1670:      "eventProvider": "UESG",
+./contracts/registry/canonical-objects.v1.json:1703:      "semanticOwner": "UESG",
+./contracts/registry/canonical-objects.v1.json:1704:      "systemOfRecord": "UESG",
+./contracts/registry/canonical-objects.v1.json:1706:      "eventProvider": "UESG",
+./contracts/registry/canonical-objects.v1.json:1737:      "objectName": "ESGAnomaly",
+./contracts/registry/canonical-objects.v1.json:1739:      "semanticOwner": "UESG",
+./contracts/registry/canonical-objects.v1.json:1740:      "systemOfRecord": "UESG",
+./contracts/registry/canonical-objects.v1.json:1742:      "eventProvider": "UESG",
+./contracts/registry/canonical-objects.v1.json:1948:      "currentImplementation": "LEGACY_OR_SKELETON",
+./contracts/registry/canonical-objects.v1.json:2128:      "currentImplementation": "LEGACY_OR_SKELETON",
+./contracts/registry/canonical-objects.v1.json:2164:      "currentImplementation": "LEGACY_OR_SKELETON",
+./contracts/registry/canonical-objects.v1.json:2200:      "currentImplementation": "LEGACY_OR_SKELETON",
+./contracts/registry/canonical-objects.v1.json:2236:      "currentImplementation": "LEGACY_OR_SKELETON",
+./contracts/registry/canonical-objects.v1.json:2344:      "currentImplementation": "LEGACY_OR_SKELETON",
+./contracts/registry/canonical-objects.v1.json:2380:      "currentImplementation": "LEGACY_OR_SKELETON",
+./contracts/VERSIONING_POLICY.md:11:- transition suffix allowed before GA
+./ONE_AIRPORT_A3_05_EVIDENCE_LINKAGE_AND_INVESTIGATION_PROJECTION_REPORT.md:11:EVIDENCE_INVESTIGATION_PROJECTION_COMPLETE
+./ONE_AIRPORT_A3_05_EVIDENCE_LINKAGE_AND_INVESTIGATION_PROJECTION_REPORT.md:15:EVIDENCE_INVESTIGATION_LINKAGE_COMPLETE_WITH_PENDING_REVIEWS
+./ONE_AIRPORT_A3_05_EVIDENCE_LINKAGE_AND_INVESTIGATION_PROJECTION_REPORT.md:43:## PASS marker
+./ONE_AIRPORT_A3_05_EVIDENCE_LINKAGE_AND_INVESTIGATION_PROJECTION_REPORT.md:45:ONE_AIRPORT_A3_05_EVIDENCE_LINKAGE_AND_INVESTIGATION_PROJECTION_PASS
+./VANTARIS_ONE_CUSTOMER_DELIVERY_AND_DEPLOYMENT_DESIGN_R1.md:78:PASS marker: `ONE_DESIGN_R1_FULL_PRODUCT_DESIGN_BLUEPRINT_PASS`
+./ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_REPORT.md:1:# ONE-UMMS-R6 Spare Parts / Inventory Readiness Report
+./ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_REPORT.md:20:- `ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_REPORT.md`
+./ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_REPORT.md:25:UMMS-R6 defines generic spare parts and inventory readiness for VANTARIS ONE UMMS. It is read-only and projection-backed. UMMS remains a cross-industry maintenance management module; Airport remains the first industry use case, not UMMS core identity.
+./ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_REPORT.md:53:UMMS-R6 models future minimum stock, reorder point, reservation, issue, return, stock count, expiry, substitution, vendor lead-time, and critical spares policies. Every policy has `executionAllowedInR6` set to false.
+./ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_REPORT.md:65:Asset spare part linkage defines future asset, system, discipline, location, HMI locator, recommended/critical/PM/work-order spare part references, vendor, contract, warranty, evidence, and lifecycle context. UMMS-R6 does not write canonical Asset Graph.
+./ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_REPORT.md:69:Airport sources are mapped read-only into UMMS inventory readiness: assets/topology to asset-to-spare-part linkage, maintenance work orders to work order requirements, PM readiness to PM requirements, fault cases to critical spare risk context, evidence investigation to inventory evidence, HMI locator readiness to asset/location inventory context, and reports to inventory readiness reporting.
+./ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_REPORT.md:73:UMMS-R6 covers all customer core functions as readiness only: work order management, asset registry, preventive maintenance scheduler, spare parts/inventory management, vendor/contract management, graphics HMI equipment location, existing system onboarding, engineer commissioning diagnostics, remote overseas deployment, and distributed independent installation.
+./ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_REPORT.md:75:## Shared EDGE/LINK/UCDE dependency map
+./ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_REPORT.md:81:UCDE dependencies are listed only: spare part catalog evidence, inventory item evidence, reservation evidence, issue/return evidence, procurement suggestion evidence, work order spare part evidence, PM spare part evidence, audit trail, and report evidence.
+./ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_REPORT.md:83:## Future UMMS roadmap
+./ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_REPORT.md:85:1. UMMS-R6A Local Freeze + Optional Tag Plan
+./ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_REPORT.md:86:2. UMMS-R7 Vendor / Contract / SLA Readiness
+./ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_REPORT.md:87:3. UMMS-R8 UMMS + UCDE Evidence Closure Alignment
+./ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_REPORT.md:88:4. UMMS-R9 UMMS + Airport HMI Locator Binding Readiness
+./ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_REPORT.md:89:5. UMMS-R10 UMMS Stakeholder Review Package
+./ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_REPORT.md:115:- `rg "ONE_UMMS_R5A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS" -g '!node_modules' -g '!.git' -g '!.venv' -g '!venv'`
+./ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_REPORT.md:132:- UMMS-R6 validator: PASS
+./ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_REPORT.md:133:- UMMS-R5A validator: PASS
+./ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_REPORT.md:134:- UMMS-R5 validator: PASS
+./ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_REPORT.md:135:- UMMS-R4A validator: PASS
+./ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_REPORT.md:136:- UMMS-R4 validator: PASS
+./ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_REPORT.md:137:- UMMS-R3A validator: PASS
+./ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_REPORT.md:138:- UMMS-R3 validator: PASS
+./ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_REPORT.md:139:- UMMS-R2A validator: PASS
+./ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_REPORT.md:140:- UMMS-R2 validator: PASS
+./ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_REPORT.md:146:## PASS marker
+./ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_REPORT.md:148:`ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_PASS`
+./ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_REPORT.md:152:UMMS-R6 is readiness-only. It does not create or update spare parts, mutate quantities, reserve stock, issue stock, return stock, create procurement requests, create purchase orders, write database records, run workflows, or activate production/runtime behavior.
+./ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_REPORT.md:156:1. UMMS-R6A Local Freeze + Optional Tag Plan
+./ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_REPORT.md:157:2. UMMS-R7 Vendor / Contract / SLA Readiness
+./ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_REPORT.md:158:3. UMMS-R8 UMMS + UCDE Evidence Closure Alignment
+./ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_REPORT.md:159:4. UMMS-R9 UMMS + Airport HMI Locator Binding Readiness
+./ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_REPORT.md:160:5. UMMS-R10 UMMS Stakeholder Review Package
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:1:# ONE-UMMS-R8A Local Freeze and Optional Tag Plan
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:5:VANTARIS ONE UMMS-R8 UMMS + UCDE Evidence Closure Alignment is complete and locally frozen.
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:23:UMMS remains a generic VANTARIS ONE module, not Airport-specific logic.
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:49:## UMMS-R8 Commit Reference
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:55:| PASS marker | ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_PASS |
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:59:1. UMMS evidence closure readiness model
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:65:7. UCDE EvidenceRecord dependency model
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:71:13. Shared EDGE/LINK/UCDE dependency map
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:72:14. Future UMMS roadmap
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:74:## UMMS-R8 Summary
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:76:1. UMMS remains a generic cross-industry maintenance management module.
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:77:2. Airport remains a source industry use case, not UMMS core identity.
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:78:3. UCDE evidence closure alignment is defined as read-only projection.
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:81:6. EDGE/LINK/UCDE dependencies are captured as future shared foundation / evidence dependencies only.
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:85:| Customer function | Current UMMS-R8 status | Future owner | Related UMMS-R2/R3/R4/R5/R6/R7 domain alignment | Related Airport readiness projection | Related EDGE/LINK/UCDE dependency | Future phase |
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:87:| Work Order Management, auto + manual | Closure and verification evidence readiness modeled only; no closure/state transition | ONE Work Management with UMMS evidence extensions | R2 work ownership, R3 draft model, R4 lifecycle gates, R5 PM requirements, R6 parts, R7 vendor/SLA | Airport maintenance work orders | LINK work-order trigger evidence; UCDE WorkOrderEvidence and ClosureEvidence | UMMS-R10 |
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:88:| Asset Registry, full lifecycle tracking | Asset/location evidence dependencies modeled only; no Asset Graph write | ONE Asset Graph / Layer 3 with UCDE evidence integrity | R2 asset consumption, R3 references, R4 gates, R5 PM linkage, R6 spare parts, R7 warranty/SLA context | Airport Assets & Topology | EDGE asset/location mapping; LINK asset/location reference; UCDE EvidenceRecord | UMMS-R9 |
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:89:| Preventive Maintenance Scheduler | PM evidence alignment modeled only; no PM evidence upload or completion | UMMS PM readiness + UCDE evidence | R2 PM domain, R5 PM schedule readiness, R6 inventory readiness, R7 vendor/contract readiness | Airport PM Readiness | EDGE condition evidence future; LINK delivery evidence; UCDE PmEvidence | UMMS-R8 |
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:90:| Spare Parts / Inventory Management | Inventory evidence alignment modeled only; no stock mutation or procurement | UMMS inventory readiness + UCDE evidence | R2 SparePart ownership, R6 inventory readiness, R7 vendor/contract linkage | Airport Inventory Readiness | EDGE tag mapping; LINK audit/evidence chain; UCDE InventoryEvidence | UMMS-R8 |
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:91:| Vendor / Contract Management | Vendor/contract/SLA evidence alignment modeled only; no execution | UMMS vendor/contract/SLA + UCDE evidence | R2 Vendor ownership, R4 gates, R7 vendor/contract/SLA readiness | Airport Vendor / Contract / SLA Readiness | LINK audit/evidence chain; UCDE VendorContractEvidence and SlaEvidence | UMMS-R8 |
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:92:| Graphics HMI to locate Equipment | HMI locator evidence dependency modeled only | Asset Graph + UMMS consumer + UCDE evidence | R3/R4 locator readiness, R5 asset PM linkage, R7 support context | Airport HMI Locator Readiness | EDGE HMI locator foundation; LINK asset/location reference; UCDE EvidenceRecord | UMMS-R9 |
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:93:| Existing system onboarding | Source-system evidence dependency captured only; no connector execution | EDGE/LINK shared foundations + UCDE evidence | R3 source model, R4 runtime input gates, R6/R7 mapping readiness | Airport GA-R7 onboarding/mapping readiness | EDGE tag mapping; LINK source-system health evidence; UCDE AuditTrail | Shared foundation |
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:94:| Engineer commissioning diagnostics | Diagnostics evidence dependency captured only | EDGE diagnostics + UCDE evidence | R3 evidence readiness, R4 evidence gates, R8 evidence closure dependency | Airport GA-R8 diagnostics readiness | EDGE engineer diagnostics evidence; LINK delivery status; UCDE EvidenceRecord | Shared foundation |
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:95:| Remote overseas deployment | Remote handoff evidence readiness only; no deployment execution | Deployment/release governance + UCDE handoff | R2/R3/R4/R5/R6/R7 safety posture | Airport GA-R10 deployment readiness | LINK remote support bundle reference; UCDE HandoffPackage | Future deployment gate |
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:96:| Distributed independent installation | Distributed report/handoff evidence readiness only; no runtime activation | Deployment/release governance + UCDE reports | R2/R3/R4/R5/R6/R7 safety posture | Airport GA-R10 distributed readiness | EDGE support bundle evidence future; LINK remote support bundle; UCDE ReportEvidence | Future deployment gate |
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:142:| ONE_UMMS_R8_UCDE_EVIDENCE_CLOSURE_ALIGNMENT_PASS | PASS |
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:143:| ONE_UMMS_R7A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS | PASS |
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:144:| ONE_UMMS_R7_VENDOR_CONTRACT_SLA_READINESS_PASS | PASS |
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:145:| ONE_UMMS_R6A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS | PASS |
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:146:| ONE_UMMS_R6_SPARE_PARTS_INVENTORY_READINESS_PASS | PASS |
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:147:| ONE_UMMS_R5A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS | PASS |
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:148:| ONE_UMMS_R5_PREVENTIVE_MAINTENANCE_SCHEDULE_READINESS_PASS | PASS |
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:149:| ONE_UMMS_R4A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS | PASS |
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:150:| ONE_UMMS_R4_WORK_ORDER_LIFECYCLE_STATE_VALIDATION_GATE_PASS | PASS |
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:151:| ONE_UMMS_R3A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS | PASS |
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:152:| ONE_UMMS_R3_MANUAL_WORK_ORDER_READONLY_QUEUE_DRAFT_MODEL_PASS | PASS |
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:153:| ONE_UMMS_R2A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS | PASS |
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:154:| ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_PASS | PASS |
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:155:| ONE_PACKAGE_ROUTE_ENFORCEMENT_PASS | PASS |
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:156:| ONE_BOUNDARY_BASELINE_PASS | PASS |
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:164:No new P0 boundary issue was introduced by UMMS-R8A.
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:177:git tag -a umms-r8-ucde-evidence-closure-alignment-local-freeze-20260621 -m "VANTARIS ONE UMMS-R8 UCDE evidence closure alignment local freeze"
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:187:After UMMS-R8A freeze, next development can enter:
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:189:UMMS-R9 UMMS + Airport HMI Locator Binding Readiness
+./ONE_UMMS_R8A_LOCAL_FREEZE_AND_OPTIONAL_TAG_PLAN.md:191:UMMS-R9 must remain read-only / projection-backed first, with no real HMI runtime, no drawing upload, no device connection, no DB write, no workflow execution, production activation, or runtime activation.
+./ONE_PROD_GA_R8_FINAL_EXPORT_PACKAGE_BUILDER_REPORT.md:1:# ONE-PROD-GA-R8 Final Export Package Builder Report
+./ONE_PROD_GA_R8_FINAL_EXPORT_PACKAGE_BUILDER_REPORT.md:5:`/Users/leon/Desktop/VANTARIS_FINAL_EXPORT/VANTARIS_ONE_PROD_GA_FOUNDATION_PACKAGES_R7_20260622`
+./ONE_PROD_GA_R8_FINAL_EXPORT_PACKAGE_BUILDER_REPORT.md:9:`/Users/leon/Desktop/VANTARIS_FINAL_EXPORT/VANTARIS_ONE_PROD_GA_FOUNDATION_PACKAGES_R7_20260622.tar.gz`
+./ONE_PROD_GA_R8_FINAL_EXPORT_PACKAGE_BUILDER_REPORT.md:13:`/Users/leon/Desktop/VANTARIS_FINAL_EXPORT/VANTARIS_ONE_PROD_GA_FOUNDATION_PACKAGES_R7_20260622.tar.gz.sha256`
+./ONE_PROD_GA_R8_FINAL_EXPORT_PACKAGE_BUILDER_REPORT.md:86:`ONE_PROD_GA_R8_FINAL_EXPORT_PACKAGE_BUILDER_PASS`
+./VANTARIS_ONE_SECURITY_GOVERNANCE_AND_POLICY_DESIGN_R1.md:18:- Evidence chain: UCDE-backed validation and acceptance trail.
+./VANTARIS_ONE_SECURITY_GOVERNANCE_AND_POLICY_DESIGN_R1.md:42:NEXUS AI is advisory/control-plane context. It may triage, recommend, score risk, and select models under policy, but it performs no autonomous execution and no device control.
+./VANTARIS_ONE_SECURITY_GOVERNANCE_AND_POLICY_DESIGN_R1.md:46:Activation requires customer approval, engineering approval, security/governance approval, backup confirmation, rollback owner, deployment window, and acceptance evidence. Current R10 state: full customer production activation NOT EXECUTED and full international GA across all modules NOT YET.
+./VANTARIS_ONE_SECURITY_GOVERNANCE_AND_POLICY_DESIGN_R1.md:48:PASS marker: `ONE_DESIGN_R1_FULL_PRODUCT_DESIGN_BLUEPRINT_PASS`
+./ONE_AIRPORT_A3_01_CANONICAL_ALARM_EVENT_INTAKE_FOUNDATION_REPORT.md:50:## PASS marker
+./ONE_AIRPORT_A3_01_CANONICAL_ALARM_EVENT_INTAKE_FOUNDATION_REPORT.md:52:ONE_AIRPORT_A3_01_CANONICAL_ALARM_EVENT_INTAKE_FOUNDATION_PASS
+./ONE_AIRPORT_A9_01_AIRPORT_READ_ONLY_POC_RELEASE_AGGREGATION_AND_FINAL_GATE_REPORT.md:18:- `ONE_AIRPORT_A9_01_AIRPORT_READ_ONLY_POC_RELEASE_AGGREGATION_AND_FINAL_GATE_REPORT.md`
+./ONE_AIRPORT_A9_01_AIRPORT_READ_ONLY_POC_RELEASE_AGGREGATION_AND_FINAL_GATE_REPORT.md:23:- Implementation status: `AIRPORT_READ_ONLY_POC_RELEASE_AGGREGATION_AND_FINAL_GATE_COMPLETE`.
+./ONE_AIRPORT_A9_01_AIRPORT_READ_ONLY_POC_RELEASE_AGGREGATION_AND_FINAL_GATE_REPORT.md:24:- Readiness outcome: `AIRPORT_READ_ONLY_POC_RELEASE_CANDIDATE_PASS`.

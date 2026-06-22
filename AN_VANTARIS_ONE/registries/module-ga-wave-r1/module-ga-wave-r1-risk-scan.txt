@@ -1,0 +1,1000 @@
+AN_VANTARIS_IBMS-backend/migrations/README.md:5:- No migration executed in this task
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:22:    execute_limited_read_validation,
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:30:OUTPUT_ROOT = Path("/tmp/one-p1-16m")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:86:    report_path = OUTPUT_ROOT / "setup" / f"{package_path.stem}-report.json"
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:120:        self._case_dir = OUTPUT_ROOT / self.id().split(".")[-1]
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:132:    def _execute(
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:158:        return execute_limited_read_validation(request).serialize()
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:163:        result = self._execute(plan, self.clean_assessment, self.clean_scope, self.clean_package)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:174:        result = self._execute(plan, self.clean_assessment, scope, self.clean_package)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:183:        result = self._execute(self.clean_plan, self.clean_assessment, self.clean_scope, self.clean_package)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:187:        result = self._execute(
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:197:        result = self._execute(
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:207:        result = self._execute(
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:217:        result = self._execute(
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:227:        result = self._execute(self.clean_plan, self.clean_assessment, self.clean_scope, self.clean_package)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:236:        result = self._execute(self.clean_plan, self.clean_assessment, self.clean_scope, self.clean_package)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:242:        result = self._execute(plan, assessment, scope, self.clean_package)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:272:        result = self._execute(
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:282:        result = self._execute(self.clean_plan, self.clean_assessment, self.clean_scope, self.clean_package)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:290:        result = self._execute(plan, self.clean_assessment, scope, self.clean_package)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:298:        result = self._execute(plan, self.clean_assessment, scope, self.clean_package)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:306:        result = self._execute(self.clean_plan, self.clean_assessment, self.clean_scope, bad)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:312:        result = self._execute(plan, self.clean_assessment, self.clean_scope, self.clean_package)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:318:        result = self._execute(plan, self.clean_assessment, self.clean_scope, self.clean_package)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:323:        result = self._execute(self.clean_plan, self.clean_assessment, self.clean_scope, self.clean_package)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:337:        report_path = OUTPUT_ROOT / "setup" / "review-source-report.json"
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:358:        result = self._execute(plan, assessment, scope, REVIEW_PACKAGE, run_id="LIMITED-READ-VALIDATION-REVIEW-001")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:365:        result = self._execute(plan, self.clean_assessment, self.clean_scope, self.clean_package)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:371:        one = self._execute(
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:378:        two = self._execute(
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:397:        self._execute(
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:413:        self._execute(self.clean_plan, self.clean_assessment, self.clean_scope, self.clean_package)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:419:        self._execute(
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:448:        self._execute(
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:462:        result = self._execute(self.clean_plan, self.clean_assessment, self.clean_scope, self.clean_package)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:469:        result = self._execute(self.clean_plan, self.clean_assessment, self.clean_scope, self.clean_package)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:475:        self._execute(
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:495:            result = self._execute(plan, self.clean_assessment, self.clean_scope, self.clean_package)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:499:        result = self._execute(self.clean_plan, self.clean_assessment, self.clean_scope, self.clean_package)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:503:        result = self._execute(self.clean_plan, self.clean_assessment, self.clean_scope, self.clean_package)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:507:        result = self._execute(self.clean_plan, self.clean_assessment, self.clean_scope, self.clean_package)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:515:        result = self._execute(plan, self.clean_assessment, scope, self.clean_package)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:521:        result = self._execute(plan, self.clean_assessment, self.clean_scope, self.clean_package)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:71:    def execute(self, value=None, run_id="run-1"):
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:78:        run = self.execute()
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:83:        run = self.execute(input_for(fields={"device-1": (field(),)}))
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:87:        self.assertEqual(self.execute(run_id="a").input_digest, self.execute(run_id="b").input_digest)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:93:        self.assertEqual(self.execute(run_id="a").result_digest, self.execute(run_id="b").result_digest)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:96:        comparison = self.service.compare_runs(self.execute(run_id="a"), self.execute(run_id="b"))
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:121:        run = self.execute(input_for(devices=(device(), device())))
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:201:        run = self.execute(input_for(devices=(device("a", device_code="SAME"), device("b", device_code="SAME"))))
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:219:            self.execute(input_for(devices=tuple(device(str(i)) for i in range(101))))
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:222:        run = self.execute(input_for(devices=(device("z"), device("a"))))
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:226:        run = self.execute(input_for(devices=(device("good"), {"id": "", "device_name": "Bad", "created_at": NOW})))
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:231:        left = self.execute()
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:232:        right = self.execute(input_for(version="legacy-device-v2"), run_id="right")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:236:        self.assertTrue(self.service.compare_runs(self.execute(run_id="a"), self.execute(run_id="b")).identical_except_run_id)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:239:        left = self.execute()
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:240:        right = self.execute(input_for(devices=(device(description="changed"),)), run_id="right")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:253:        run = self.execute(input_for(devices=(device(device_type=None),), ctx=context(default_device_type=None)))
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:257:        self.assertEqual(self.execute().cutover_decision, "NOT_READY_FOR_WRITE_CUTOVER")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:260:        self.assertEqual(self.execute(input_for(version="unapproved")).cutover_decision, "BLOCKED_BY_REVIEW")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:264:            self.execute().cutover_decision = "READY_FOR_WRITE_CUTOVER"
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:278:        run = self.execute(input_for(devices=({"id": "x", "device_name": "Bad", "private_key": "super-secret", "created_at": NOW},)))
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:282:        run = self.execute(input_for(devices=({"id": "x", "device_name": "Bad", "live_value": "raw-telemetry-secret", "created_at": NOW},)))
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/readiness/test_readiness_gate.py:64:        self.assertEqual(payload["decision"], "INPUT_REJECTED")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/airport_intake/test_formula_intake.py:63:        self.assertEqual(ctx.exception.code, "INPUT_REJECTED")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:44:from src.asset_graph.reconciliation.read_validation import ExecutionRequest, execute_limited_read_validation
+AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:54:OUTPUT_ROOT = Path("/tmp/one-p1-16n-tests")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:111:    report_path = OUTPUT_ROOT / "setup" / f"{package_path.stem}-report.json"
+AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:144:        self._case_dir = OUTPUT_ROOT / self.id().split(".")[-1]
+AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:149:    def _execute(
+AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:177:        return execute_limited_read_validation(request).serialize()
+AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:181:        result = self._execute(
+AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:230:        result = self._execute(
+AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:653:        result = self._execute(
+AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:665:        result = self._execute(
+AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:685:        result = self._execute(
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:441:        result = coordinator.execute_batch(
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:459:        result = coordinator.execute_batch(
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:500:        result = coordinator.execute_batch(
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:518:        for token in ("sqlalchemy", "db.session", "CREATE TABLE", "INSERT INTO", "prisma"):
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:556:        result = coordinator.execute_batch(
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:620:        one = coordinator.execute_batch(payload).serialize()
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:621:        two = AssetGraphPersistenceCoordinator(audit_port=InMemoryAuditProvider()).execute_batch(payload).serialize()
+AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/test_airport_reconciliation_profile.py:740:        self.assertEqual(gates[0]["gateId"], "G01_INPUT_EVIDENCE_INTEGRITY")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/test_airport_review_projection.py:78:OUTPUT_ARTIFACTS = (
+AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/test_airport_review_projection.py:311:            for name in OUTPUT_ARTIFACTS:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/test_airport_review_projection.py:432:            for name in OUTPUT_ARTIFACTS:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/test_airport_review_projection.py:664:        for name in OUTPUT_ARTIFACTS:
+AN_VANTARIS_IBMS-backend/README.md:110:**PostgreSQL database URI (POSTGRES-CONFIG-ABSTRACTION-1)**
+AN_VANTARIS_IBMS-backend/README.md:121:See `docs/architecture/IBMS_POSTGRES_CONFIG_ABSTRACTION_1.md`.
+AN_VANTARIS_IBMS-backend/README.md:123:**PostgreSQL local install (POSTGRES-LOCAL-INSTALL-1)**
+AN_VANTARIS_IBMS-backend/README.md:134:See `docs/architecture/IBMS_POSTGRES_LOCAL_INSTALL_1.md`. No IBMS DB/user created in install task.
+AN_VANTARIS_IBMS-backend/README.md:136:**PostgreSQL local smoke result (POSTGRES-LOCAL-SMOKE-EXEC-1)**
+AN_VANTARIS_IBMS-backend/README.md:145:- See `docs/architecture/IBMS_POSTGRES_LOCAL_SMOKE_EXEC_1.md` and `docs/architecture/IBMS_POSTGRES_LOCAL_SMOKE_RESULTS_1.md`
+AN_VANTARIS_IBMS-backend/README.md:147:**PostgreSQL driver (POSTGRES-DEPS-PREP-1)**
+AN_VANTARIS_IBMS-backend/README.md:160:- See `docs/architecture/IBMS_POSTGRES_DEPS_PREP_1.md`
+AN_VANTARIS_IBMS-backend/README.md:162:**PostgreSQL migration framework baseline (POSTGRES-MIGRATION-FRAMEWORK-RECOVERY-1)**
+AN_VANTARIS_IBMS-backend/README.md:168:- Import verification passed: `alembic`, `flask_migrate`
+AN_VANTARIS_IBMS-backend/README.md:171:  - `docs/architecture/IBMS_POSTGRES_MIGRATION_FRAMEWORK_1.md`
+AN_VANTARIS_IBMS-backend/README.md:172:  - `docs/security/IBMS_POSTGRES_MIGRATION_FRAMEWORK_1_RISK_REVIEW.md`
+AN_VANTARIS_IBMS-backend/README.md:173:  - `docs/architecture/IBMS_POSTGRES_MIGRATION_FRAMEWORK_RECOVERY_1.md`
+AN_VANTARIS_IBMS-backend/src/testMQTT/testws.html:191:                    method: 'POST',
+AN_VANTARIS_IBMS-backend/src/testMQTT/rtsp_simulator.py:331:    def do_PUT(self):
+AN_VANTARIS_IBMS-backend/src/testMQTT/mock_isapi_camera.py:216:@app.route('/ISAPI/PTZCtrl/channels/<int:channel>/continuous', methods=['PUT'])
+AN_VANTARIS_IBMS-backend/src/testMQTT/mock_isapi_camera.py:308:@app.route('/ISAPI/System/reboot', methods=['PUT'])
+AN_VANTARIS_IBMS-backend/src/testMQTT/mock_isapi_camera.py:351:    print(f"   PUT  /ISAPI/PTZCtrl/channels/1/continuous")
+AN_VANTARIS_IBMS-backend/src/DID/models.py:74:    updated_at = Column(DateTime, server_default=text('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'))
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:145:# /system/init	POST	系统初始化（幂等）	否
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:146:# /entity	POST	创建下级实体并签发VC	是
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:147:# /vp/generate	POST	生成VP	是
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:148:# /vp/verify	POST	验证VP并提取信息	否
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:149:# /vc/reissue	POST	吊销并重新签发VC	是
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:150:# /vc/revoke	POST	撤销VC	是
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:151:# /vc/status	POST	VC状态检查	否
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:157:# /login	POST	登录（Challenge/VP）	否
+AN_VANTARIS_IBMS-backend/src/tests/did_signature.py:78:    f'''curl -X POST "http://localhost:5000/api/did/login" \\
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_integration_pilot.py:47:        session.execute.side_effect = [FakeResult(None), FakeResult(None), FakeResult((37,))]
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_integration_pilot.py:58:            method="POST",
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_integration_pilot.py:86:        self.assertEqual(record.route_id, "ROUTE-POST-C39FFBE9F5DC")
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:23:        "event_class": "CANONICAL_OBJECT_UPDATE",
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:35:        "route_id": "ROUTE-PATCH-ASSET",
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isapi_driver.py:149:            elif method == 'POST':
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isapi_driver.py:151:            elif method == 'PUT':
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isapi_driver.py:394:        return self._request(device_did, 'PUT', endpoint, xml_body)
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/http_driver.py:29:        2. 主动上报模式：不需要 base_url，设备主动 POST 数据到 /ingest/http
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/http_driver.py:79:        http_method = command.get('http_method', 'POST')
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/http_driver.py:91:            elif http_method.upper() == 'PUT':
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/http_driver.py:93:            elif http_method.upper() == 'DELETE':
+AN_VANTARIS_IBMS-backend/src/Iot/command_converters/__init__.py:91:            'http_method': http_config.get('method', 'POST'),
+AN_VANTARIS_IBMS-backend/src/Iot/dao.py:27:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/Iot/dao.py:59:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/Iot/dao.py:69:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/Iot/dao.py:77:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/Iot/dao.py:130:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/Iot/dao.py:180:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/Iot/dao.py:194:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/Iot/dao.py:326:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/Iot/dao.py:374:            db.session.commit()
+AN_VANTARIS_IBMS-backend/src/Iot/dao.py:391:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/Iot/dao.py:411:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/Iot/dao.py:459:            db.session.commit()
+AN_VANTARIS_IBMS-backend/src/Iot/dao.py:468:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/excel/intake.py:210:        return False, "MISSING_OUTPUT"
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/migration_control/evaluator.py:48:    if control_input.readiness_decision in {"NOT_READY", "INPUT_REJECTED", "UNKNOWN"}:
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/pre_execution.py:151:            "OUTPUT_LOCATION_POLICY_GATE",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/__init__.py:2:from .executor import execute_limited_read_validation
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/__init__.py:17:    "execute_limited_read_validation",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/executor.py:72:    if readiness_assessment.get("decision") in {"NOT_READY", "INPUT_REJECTED"}:
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/executor.py:82:def execute_limited_read_validation(request: ExecutionRequest) -> ExecutionResult:
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/executor.py:111:                gate_code="OUTPUT_LOCATION_POLICY_GATE",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/readiness/assessor.py:25:        return "INPUT_REJECTED"
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/readiness/assessor.py:27:        return "INPUT_REJECTED"
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/intake.py:196:            "INPUT_REJECTED",
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/intake.py:201:            "INPUT_REJECTED",
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/intake.py:903:        return False, "MISSING_OUTPUT"
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/constants.py:111:        "INPUT_REJECTED",
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:72:    def execute_batch(
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/constants.py:47:UPDATE_OUTCOMES = frozenset(
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/constants.py:49:        "UPDATED",
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/identity.py:8:from .constants import UPDATE_OUTCOMES
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/identity.py:46:    return "UPDATED"
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/identity.py:74:    if outcome not in UPDATE_OUTCOMES:
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_reconciliation/mapper.py:43:        return False, "MISSING_OUTPUT"
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_reconciliation/constants.py:69:    "G01_INPUT_EVIDENCE_INTEGRITY",
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_reconciliation/gates.py:46:    add("G01_INPUT_EVIDENCE_INTEGRITY", "PASS", "All upstream artifact authorities and digests verified")
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_classification/mapper.py:32:        return False, "MISSING_OUTPUT"
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_spatial/mapper.py:42:        return False, "MISSING_OUTPUT"
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_review_projection/mapper.py:43:        return False, "MISSING_OUTPUT"
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_review_projection/constants.py:46:    "G01_INPUT_EVIDENCE_INTEGRITY",
+AN_VANTARIS_IBMS-backend/src/system/menu_models.py:25:    updated_at = Column(DateTime, server_default=text('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+AN_VANTARIS_IBMS-backend/src/system/menu_models.py:46:    updated_at = Column(DateTime, server_default=text('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+AN_VANTARIS_IBMS-backend/src/system/menu_models.py:65:    updated_at = Column(DateTime, server_default=text('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:126:        result = session.execute(
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:135:        menus = session.execute(
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:156:        target = session.execute(
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:164:        session.execute(text("UPDATE sys_version SET is_default = 0"))
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:165:        session.execute(
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:166:            text("UPDATE sys_version SET is_default = 1 WHERE version_code = :code"),
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:171:        menus = session.execute(
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:185:        version_info = session.execute(
+AN_VANTARIS_IBMS-backend/src/scripts/migrate_csv_data.py:2:文件路径: scripts/migrate_csv_data.py
+AN_VANTARIS_IBMS-backend/src/scripts/migrate_csv_data.py:31:def migrate_data():
+AN_VANTARIS_IBMS-backend/src/scripts/migrate_csv_data.py:150:        migrate_data()
+AN_VANTARIS_IBMS-backend/src/governance/audit/pilot.py:117:    """Audit exactly POST /api/system/versions after a successful mutation."""
+AN_VANTARIS_IBMS-backend/src/governance/audit/pilot.py:138:            route_id="ROUTE-POST-C39FFBE9F5DC",
+AN_VANTARIS_IBMS-backend/src/governance/audit/constants.py:46:    "CANONICAL_OBJECT_UPDATE": (True, True, AuditFailurePolicy.FAIL_OPERATION_WITH_AUDIT_ERROR),
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:50:@api_bp.route('/did/system/init', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:76:@api_bp.route('/did/entity', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:135:@api_bp.route('/did/vp/generate', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:176:@api_bp.route('/did/vp/verify', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:205:@api_bp.route('/did/vc/reissue', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:260:@api_bp.route('/did/vc/revoke', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:279:@api_bp.route('/did/vc/status', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:435:@api_bp.route('/did/login', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/prod_ga/foundation_packages_provider.py:5:local filesystem reads only; it does not start runtimes, execute validators,
+AN_VANTARIS_IBMS-backend/src/api/data_modeling/modeling_api.py:49:@api_bp.route('/modeling/<device_code>/train', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/data_modeling/modeling_api.py:62:@api_bp.route('/modeling/<device_code>/predict', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/data_modeling/modeling_api.py:75:@api_bp.route('/modeling/<device_code>/predict_future', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/data_modeling/modeling_api.py:109:@api_bp.route('/modeling/<device_code>/<method>', methods=['POST', 'GET'])
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:27:@api_bp.route('/iot/device/register', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:218:@api_bp.route('/iot/device/did/<string:device_did>', methods=['PUT'])
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:253:@api_bp.route('/iot/device/did/<string:device_did>', methods=['PATCH'])
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:258:    部分更新设备信息（PATCH方式，只更新传入的字段）
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:286:@api_bp.route('/iot/device/did/<string:device_did>', methods=['DELETE'])
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:306:@api_bp.route('/iot/device/did/<string:device_did>/status', methods=['PUT'])
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:339:@api_bp.route('/iot/device/did/<string:device_did>/field-mappings', methods=['PUT'])
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:374:@api_bp.route('/iot/device/did/<string:device_did>/method-mappings', methods=['PUT'])
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:594:@api_bp.route('/iot/device/<string:device_did>/command', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:628:@api_bp.route('/iot/device/code/<string:device_code>/command', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:762:@api_bp.route('/iot/standard-fields', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:814:@api_bp.route('/iot/standard-fields/<string:field_code>', methods=['PUT'])
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:868:@api_bp.route('/iot/standard-fields/<string:field_code>', methods=['DELETE'])
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:894:@api_bp.route('/iot/standard-methods', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:950:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:966:@api_bp.route('/iot/standard-methods/<string:method_code>', methods=['PUT'])
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:1004:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:1020:@api_bp.route('/iot/standard-methods/<string:method_code>', methods=['DELETE'])
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:1043:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:1049:@api_bp.route('/iot/ingest/http', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:1055:    设备通过 POST 请求发送数据到此端点
+AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:1116:@api_bp.route('/iot/device/<string:device_code>/reconnect', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/iot/sse_api.py:9:curl -X POST "http://localhost:5000/api/iot/device/HVAC_SIM_001/test-sse-push"
+AN_VANTARIS_IBMS-backend/src/api/iot/sse_api.py:181:@api_bp.route('/iot/device/<string:device_code>/test-sse-push', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:32:        result = db.session.execute(text("SELECT * FROM sys_version ORDER BY sort_order"))
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:49:        row = db.session.execute(text("SELECT * FROM sys_version WHERE is_default = 1 LIMIT 1")).fetchone()
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:61:@api_bp.route('/system/versions', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:70:        check = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:76:        db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:78:                INSERT INTO sys_version (version_code, version_name, description, icon, sort_order, is_active, is_default)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:91:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:102:@api_bp.route('/system/versions/<version_code>', methods=['PUT'])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:108:        check = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:135:            query = f"UPDATE sys_version SET {', '.join(update_fields)} WHERE version_code = :version_code"
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:136:            db.session.execute(text(query), params)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:137:            db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:144:@api_bp.route('/system/versions/<version_code>', methods=['DELETE'])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:149:        check = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:155:        db.session.execute(text("DELETE FROM sys_version WHERE version_code = :code"), {"code": version_code})
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:156:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:188:@api_bp.route('/system/versions/switch/<version_code>', methods=['PUT'])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:196:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:218:@api_bp.route('/system/menus-add', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:226:        existing = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:232:        db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:234:                INSERT INTO sys_menu (parent_id, menu_path, menu_title, menu_icon, menu_type, has_children, redirect_path, sort_order, is_visible)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:249:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:250:        new_id = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:260:@api_bp.route('/system/menus-update/<int:menu_id>', methods=['PUT'])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:266:        check = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:299:            query = f"UPDATE sys_menu SET {', '.join(update_fields)} WHERE id = :id"
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:300:            db.session.execute(text(query), params)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:301:            db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:308:@api_bp.route('/system/menus-delete/<int:menu_id>', methods=['DELETE'])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:313:        check = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:319:        db.session.execute(text("DELETE FROM sys_menu WHERE parent_id = :parent_id"), {"parent_id": menu_id})
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:320:        db.session.execute(text("DELETE FROM sys_menu WHERE id = :id"), {"id": menu_id})
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:321:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:330:@api_bp.route('/system/menus/batch-sort', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:352:                result = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:361:                db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:362:                    text("UPDATE sys_menu SET sort_order = :sort_order WHERE id = :id"),
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:367:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:388:@api_bp.route('/system/version-menus/<version_code>/batch', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:397:        version = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:409:                menu = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:421:                    updated = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:423:                            UPDATE sys_version_menu
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:430:                        db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:432:                                INSERT INTO sys_version_menu (version_code, menu_id, menu_path, is_visible, sort_order)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:438:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:447:@api_bp.route('/system/version-menus/<version_code>/incremental', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:466:        version_check = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:491:                batch_result = db.session.execute(menu_query, params).fetchall()
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:508:                    updated = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:510:                            UPDATE sys_version_menu
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:517:                        db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:519:                                INSERT INTO sys_version_menu (version_code, menu_id, menu_path, is_visible)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:540:                        UPDATE sys_version_menu 
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:545:                    result = db.session.execute(update_query, params)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:548:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:567:@api_bp.route('/system/version-menus/<version_code>/diff', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:588:        version = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:604:            menu = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:616:                updated = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:618:                        UPDATE sys_version_menu
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:625:                    db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:627:                            INSERT INTO sys_version_menu (version_code, menu_id, menu_path, is_visible)
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:634:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:673:        versions_result = db.session.execute(versions_query).fetchall()
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:679:        version_menu_rows = db.session.execute(
+AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:733:        menu_result = db.session.execute(menu_query).fetchall()
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:13:@api_bp.route('/system/entity-types', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:30:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:47:@api_bp.route('/system/entity-types/<type_id>', methods=['PUT'])
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:55:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:74:@api_bp.route('/system/entity-types/<type_id>', methods=['DELETE'])
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:81:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:149:@api_bp.route('/system/permissions', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:164:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:180:@api_bp.route('/system/permissions/<perm_id>', methods=['PUT'])
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:188:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:206:@api_bp.route('/system/permissions/<perm_id>', methods=['DELETE'])
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:213:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:264:@api_bp.route('/system/create-standard-fields', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:276:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:299:@api_bp.route('/system/update-standard-fields/<field_id>', methods=['PUT'])
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:307:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:332:@api_bp.route('/system/delete-standard-fields/<field_id>', methods=['DELETE'])
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:339:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:400:@api_bp.route('/system/create-standard-methods', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:411:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:433:@api_bp.route('/system/update-standard-methods/<method_id>', methods=['PUT'])
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:441:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:465:@api_bp.route('/system/delete-standard-methods/<method_id>', methods=['DELETE'])
+AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:472:        db.session.commit()
+AN_VANTARIS_IBMS-backend/src/api/reports/reports_api.py:41:@api_bp.route("/v1/reports/query", methods=["POST"])
+AN_VANTARIS_IBMS-backend/src/api/reports/reports_api.py:50:@api_bp.route("/v1/reports/export/manifest", methods=["POST"])
+AN_VANTARIS_ONE/registries/asset-graph-read-migration-readiness-policy.v1.json:8:    "INPUT_REJECTED",
+AN_VANTARIS_ONE/registries/guard-contract.v1.json:410:      "policyId": "UPDATE",
+AN_VANTARIS_ONE/registries/guard-contract.v1.json:423:      "policyId": "DELETE",
+AN_VANTARIS_ONE/registries/guard-contract.v1.json:573:        "routeId": "ROUTE-POST-FBB45557ACEE",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:432:        "work:execute",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:679:        "inspection:execute",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:927:        "report:execute",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:976:        "analytics:execute"
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:1737:      "evidenceSummary": "POST,GET /api/modeling/<device_code>/<method>",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:1799:      "evidenceSummary": "POST /api/modeling/<device_code>/predict",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:1830:      "evidenceSummary": "POST /api/modeling/<device_code>/predict_future",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:1861:      "evidenceSummary": "POST /api/modeling/<device_code>/train",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:2078:      "evidenceSummary": "POST /api/did/entity",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:2140:      "evidenceSummary": "POST /api/did/login",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:2295:      "evidenceSummary": "POST /api/did/system/init",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:2326:      "evidenceSummary": "POST /api/did/vc/reissue",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:2357:      "evidenceSummary": "POST /api/did/vc/revoke",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:2388:      "evidenceSummary": "POST /api/did/vc/status",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:2450:      "evidenceSummary": "POST /api/did/vp/generate",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:2481:      "evidenceSummary": "POST /api/did/vp/verify",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:2574:      "evidenceSummary": "POST /api/iot/device/<string:device_code>/reconnect",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:2636:      "evidenceSummary": "POST /api/iot/device/<string:device_did>/command",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:2698:      "evidenceSummary": "POST /api/iot/device/code/<string:device_code>/command",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:2729:      "evidenceSummary": "DELETE /api/iot/device/did/<string:device_did> | GET /api/iot/device/did/<string:device_did> | PATCH /api/iot/device/did/<string:device_did> | PUT /api/iot/device/did/<string:device_did>",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:2763:      "evidenceSummary": "PUT /api/iot/device/did/<string:device_did>/field-mappings",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:2794:      "evidenceSummary": "PUT /api/iot/device/did/<string:device_did>/method-mappings",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:2825:      "evidenceSummary": "PUT /api/iot/device/did/<string:device_did>/status",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:2887:      "evidenceSummary": "POST /api/iot/device/register",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:2918:      "evidenceSummary": "POST /api/iot/ingest/http",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:2949:      "evidenceSummary": "GET /api/iot/standard-fields | POST /api/iot/standard-fields",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:2981:      "evidenceSummary": "DELETE /api/iot/standard-fields/<string:field_code> | GET /api/iot/standard-fields/<string:field_code> | PUT /api/iot/standard-fields/<string:field_code>",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:3014:      "evidenceSummary": "GET /api/iot/standard-methods | POST /api/iot/standard-methods",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:3046:      "evidenceSummary": "DELETE /api/iot/standard-methods/<string:method_code> | GET /api/iot/standard-methods/<string:method_code> | PUT /api/iot/standard-methods/<string:method_code>",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:3142:      "evidenceSummary": "POST /api/iot/device/<string:device_code>/test-sse-push",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:3297:      "evidenceSummary": "POST /api/system/menus-add",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:3328:      "evidenceSummary": "DELETE /api/system/menus-delete/<int:menu_id>",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:3359:      "evidenceSummary": "PUT /api/system/menus-update/<int:menu_id>",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:3390:      "evidenceSummary": "POST /api/system/menus/batch-sort",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:3483:      "evidenceSummary": "POST /api/system/version-menus/<version_code>/batch",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:3514:      "evidenceSummary": "POST /api/system/version-menus/<version_code>/diff",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:3545:      "evidenceSummary": "POST /api/system/version-menus/<version_code>/incremental",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:3576:      "evidenceSummary": "GET /api/system/versions | POST /api/system/versions",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:3608:      "evidenceSummary": "DELETE /api/system/versions/<version_code> | PUT /api/system/versions/<version_code>",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:3671:      "evidenceSummary": "PUT /api/system/versions/switch/<version_code>",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:3702:      "evidenceSummary": "POST /api/system/create-standard-fields",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:3733:      "evidenceSummary": "POST /api/system/create-standard-methods",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:3764:      "evidenceSummary": "DELETE /api/system/delete-standard-fields/<field_id>",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:3795:      "evidenceSummary": "DELETE /api/system/delete-standard-methods/<method_id>",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:3826:      "evidenceSummary": "GET /api/system/entity-types | POST /api/system/entity-types",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:3858:      "evidenceSummary": "DELETE /api/system/entity-types/<type_id> | GET /api/system/entity-types/<type_id> | PUT /api/system/entity-types/<type_id>",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:4046:      "evidenceSummary": "GET /api/system/permissions | POST /api/system/permissions",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:4078:      "evidenceSummary": "DELETE /api/system/permissions/<perm_id> | GET /api/system/permissions/<perm_id> | PUT /api/system/permissions/<perm_id>",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:4111:      "evidenceSummary": "PUT /api/system/update-standard-fields/<field_id>",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:4142:      "evidenceSummary": "PUT /api/system/update-standard-methods/<method_id>",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:258:      "routeId": "ROUTE-PUT-4AA9DCEC4A0D",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:267:        "PUT"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:458:      "routeId": "ROUTE-PUT-C47F5703EC87",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:467:        "PUT"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:648:      "routeId": "ROUTE-POST-46E1DF1495F9",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:657:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:729:      "routeId": "ROUTE-POST-FBB45557ACEE",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:738:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:918:      "routeId": "ROUTE-POST-7E380E2C5D9E",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:927:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:963:      "routeId": "ROUTE-POST-5E0D4436A8E3",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:972:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:1007:      "routeId": "ROUTE-POST-C83D6D0E1661",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:1016:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:1051:      "routeId": "ROUTE-POST-B8F0F230EA09",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:1060:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:1125:      "routeId": "ROUTE-POST-86E6BBC22849",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:1134:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:1169:      "routeId": "ROUTE-POST-606B5218A941",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:1178:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:1319:      "routeId": "ROUTE-POST-CB116CAC22A3",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:1328:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:1474:      "routeId": "ROUTE-POST-FE14A95830E6",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:1483:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:1513:      "routeId": "ROUTE-POST-6AB524C2C59C",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:1522:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:1595:      "routeId": "ROUTE-POST-C64CA148C31A",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:1604:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:1640:      "routeId": "ROUTE-DELETE-ECEF97BAE75E",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:1649:        "DELETE"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:1721:      "routeId": "ROUTE-PATCH-733846BDE3D6",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:1730:        "PATCH"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:1765:      "routeId": "ROUTE-PUT-CF852D538D02",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:1774:        "PUT"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:1809:      "routeId": "ROUTE-PUT-545838C395F9",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:1818:        "PUT"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:1853:      "routeId": "ROUTE-PUT-8534F2E18EA8",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:1862:        "PUT"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:1897:      "routeId": "ROUTE-PUT-3765FD467C5C",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:1906:        "PUT"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:1978:      "routeId": "ROUTE-POST-9412C2480650",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:1987:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2022:      "routeId": "ROUTE-POST-AB5EAE45BD7A",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2031:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2105:      "routeId": "ROUTE-POST-882645C6D054",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2114:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2150:      "routeId": "ROUTE-DELETE-EB63D908C453",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2159:        "DELETE"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2234:      "routeId": "ROUTE-PUT-AFCEE7155691",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2243:        "PUT"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2318:      "routeId": "ROUTE-POST-C1E70D66F843",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2327:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2363:      "routeId": "ROUTE-DELETE-0A255BBA81A4",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2372:        "DELETE"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2447:      "routeId": "ROUTE-PUT-6CF00DE47255",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2456:        "PUT"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2492:      "routeId": "ROUTE-GET-POST-7474DF3A5EBE",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2502:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2582:      "routeId": "ROUTE-POST-941F086D9152",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2591:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2626:      "routeId": "ROUTE-POST-025BC91E270D",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2635:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2670:      "routeId": "ROUTE-POST-C80597B46DE0",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2679:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2802:      "routeId": "ROUTE-POST-4DF87E19E07C",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2811:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2841:      "routeId": "ROUTE-POST-890743EB4A04",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2850:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2880:      "routeId": "ROUTE-DELETE-6BAD313CBC29",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2889:        "DELETE"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2919:      "routeId": "ROUTE-DELETE-1C1BF1530326",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2928:        "DELETE"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2997:      "routeId": "ROUTE-POST-F26674CAD742",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:3006:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:3036:      "routeId": "ROUTE-DELETE-BC7AD2D5C7BE",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:3045:        "DELETE"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:3114:      "routeId": "ROUTE-PUT-7165EE7B8744",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:3123:        "PUT"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:3504:      "routeId": "ROUTE-POST-B392D4F2B4F0",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:3513:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:3543:      "routeId": "ROUTE-DELETE-8A5B51A5959A",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:3552:        "DELETE"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:3582:      "routeId": "ROUTE-PUT-F1FC5E5A2287",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:3591:        "PUT"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:3621:      "routeId": "ROUTE-POST-C502B05AFF15",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:3630:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:3699:      "routeId": "ROUTE-POST-C224D4EB1102",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:3708:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:3738:      "routeId": "ROUTE-DELETE-74BEE725E4E5",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:3747:        "DELETE"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:3816:      "routeId": "ROUTE-PUT-E1FF8D187B4D",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:3825:        "PUT"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:3894:      "routeId": "ROUTE-PUT-DADB0D2560FD",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:3903:        "PUT"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:3933:      "routeId": "ROUTE-PUT-33E2FBF9C7D6",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:3942:        "PUT"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:4011:      "routeId": "ROUTE-POST-66E81981F748",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:4020:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:4050:      "routeId": "ROUTE-POST-533B7E0F470E",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:4059:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:4089:      "routeId": "ROUTE-POST-DC3F129BF460",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:4098:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:4167:      "routeId": "ROUTE-POST-C39FFBE9F5DC",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:4176:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:4206:      "routeId": "ROUTE-DELETE-234383D4A015",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:4215:        "DELETE"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:4245:      "routeId": "ROUTE-PUT-7287C5AE6C06",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:4254:        "PUT"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:4323:      "routeId": "ROUTE-PUT-AEEAAA90E269",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:4332:        "PUT"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:6154:      "routeId": "ROUTE-POST-817A0DC5CEDE",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:6163:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:6228:      "routeId": "ROUTE-POST-DB42FCFB820C",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:6237:        "POST"
+AN_VANTARIS_ONE/registries/idempotency-contract.v1.json:9:    "Intake, command and externally retried POST operations normally require idempotency.",
+AN_VANTARIS_ONE/registries/idempotency-contract.v1.json:95:      "operationClass": "OPTIONAL_UPDATE_WITH_VERSION",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:71:      "DELETE": 9,
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:79:      "UPDATE": 30
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:84:      "routeId": "ROUTE-DELETE-0A255BBA81A4",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:88:        "DELETE"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:93:      "operationPolicy": "DELETE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:124:      "routeId": "ROUTE-DELETE-1C1BF1530326",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:128:        "DELETE"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:133:      "operationPolicy": "DELETE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:163:      "routeId": "ROUTE-DELETE-234383D4A015",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:167:        "DELETE"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:172:      "operationPolicy": "DELETE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:202:      "routeId": "ROUTE-DELETE-6BAD313CBC29",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:206:        "DELETE"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:211:      "operationPolicy": "DELETE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:241:      "routeId": "ROUTE-DELETE-74BEE725E4E5",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:245:        "DELETE"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:250:      "operationPolicy": "DELETE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:280:      "routeId": "ROUTE-DELETE-8A5B51A5959A",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:284:        "DELETE"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:289:      "operationPolicy": "DELETE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:319:      "routeId": "ROUTE-DELETE-BC7AD2D5C7BE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:323:        "DELETE"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:328:      "operationPolicy": "DELETE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:358:      "routeId": "ROUTE-DELETE-EB63D908C453",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:362:        "DELETE"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:367:      "operationPolicy": "DELETE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:398:      "routeId": "ROUTE-DELETE-ECEF97BAE75E",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:402:        "DELETE"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:407:      "operationPolicy": "DELETE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5269:      "routeId": "ROUTE-GET-POST-7474DF3A5EBE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5274:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5279:      "operationPolicy": "UPDATE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5348:      "routeId": "ROUTE-PATCH-733846BDE3D6",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5352:        "PATCH"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5357:      "operationPolicy": "UPDATE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5387:      "routeId": "ROUTE-POST-025BC91E270D",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5391:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5396:      "operationPolicy": "UPDATE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5426:      "routeId": "ROUTE-POST-46E1DF1495F9",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5430:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5465:      "routeId": "ROUTE-POST-4DF87E19E07C",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5469:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5474:      "operationPolicy": "UPDATE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5504:      "routeId": "ROUTE-POST-533B7E0F470E",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5508:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5513:      "operationPolicy": "UPDATE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5543:      "routeId": "ROUTE-POST-5E0D4436A8E3",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5547:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5582:      "routeId": "ROUTE-POST-606B5218A941",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5586:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5591:      "operationPolicy": "UPDATE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5621:      "routeId": "ROUTE-POST-66E81981F748",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5625:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5630:      "operationPolicy": "UPDATE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5660:      "routeId": "ROUTE-POST-6AB524C2C59C",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5664:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5699:      "routeId": "ROUTE-POST-7E380E2C5D9E",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5703:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5708:      "operationPolicy": "UPDATE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5738:      "routeId": "ROUTE-POST-817A0DC5CEDE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5742:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5777:      "routeId": "ROUTE-POST-86E6BBC22849",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5781:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5786:      "operationPolicy": "UPDATE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5816:      "routeId": "ROUTE-POST-882645C6D054",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5820:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5825:      "operationPolicy": "UPDATE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5856:      "routeId": "ROUTE-POST-890743EB4A04",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5860:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5865:      "operationPolicy": "UPDATE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5895:      "routeId": "ROUTE-POST-9412C2480650",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5899:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5934:      "routeId": "ROUTE-POST-941F086D9152",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5938:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5943:      "operationPolicy": "UPDATE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5973:      "routeId": "ROUTE-POST-AB5EAE45BD7A",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5977:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6014:      "routeId": "ROUTE-POST-B392D4F2B4F0",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6018:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6053:      "routeId": "ROUTE-POST-B8F0F230EA09",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6057:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6062:      "operationPolicy": "UPDATE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6092:      "routeId": "ROUTE-POST-C1E70D66F843",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6096:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6101:      "operationPolicy": "UPDATE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6132:      "routeId": "ROUTE-POST-C224D4EB1102",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6136:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6141:      "operationPolicy": "UPDATE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6171:      "routeId": "ROUTE-POST-C39FFBE9F5DC",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6175:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6210:      "routeId": "ROUTE-POST-C502B05AFF15",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6214:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6219:      "operationPolicy": "UPDATE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6249:      "routeId": "ROUTE-POST-C64CA148C31A",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6253:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6288:      "routeId": "ROUTE-POST-C80597B46DE0",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6292:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6327:      "routeId": "ROUTE-POST-C83D6D0E1661",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6331:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6366:      "routeId": "ROUTE-POST-CB116CAC22A3",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6370:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6405:      "routeId": "ROUTE-POST-DB42FCFB820C",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6409:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6414:      "operationPolicy": "UPDATE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6417:        "report:execute"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6444:      "routeId": "ROUTE-POST-DC3F129BF460",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6448:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6453:      "operationPolicy": "UPDATE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6483:      "routeId": "ROUTE-POST-F26674CAD742",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6487:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6522:      "routeId": "ROUTE-POST-FBB45557ACEE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6526:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6559:      "routeId": "ROUTE-POST-FE14A95830E6",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6563:        "POST"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6598:      "routeId": "ROUTE-PUT-33E2FBF9C7D6",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6602:        "PUT"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6607:      "operationPolicy": "UPDATE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6637:      "routeId": "ROUTE-PUT-3765FD467C5C",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6641:        "PUT"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6646:      "operationPolicy": "UPDATE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6676:      "routeId": "ROUTE-PUT-4AA9DCEC4A0D",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6680:        "PUT"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6715:      "routeId": "ROUTE-PUT-545838C395F9",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6719:        "PUT"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6724:      "operationPolicy": "UPDATE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6754:      "routeId": "ROUTE-PUT-6CF00DE47255",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6758:        "PUT"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6763:      "operationPolicy": "UPDATE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6794:      "routeId": "ROUTE-PUT-7165EE7B8744",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6798:        "PUT"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6803:      "operationPolicy": "UPDATE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6833:      "routeId": "ROUTE-PUT-7287C5AE6C06",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6837:        "PUT"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6842:      "operationPolicy": "UPDATE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6872:      "routeId": "ROUTE-PUT-8534F2E18EA8",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6876:        "PUT"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6881:      "operationPolicy": "UPDATE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6911:      "routeId": "ROUTE-PUT-AEEAAA90E269",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6915:        "PUT"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6950:      "routeId": "ROUTE-PUT-AFCEE7155691",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6954:        "PUT"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6959:      "operationPolicy": "UPDATE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6990:      "routeId": "ROUTE-PUT-C47F5703EC87",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6994:        "PUT"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:7029:      "routeId": "ROUTE-PUT-CF852D538D02",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:7033:        "PUT"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:7038:      "operationPolicy": "UPDATE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:7068:      "routeId": "ROUTE-PUT-DADB0D2560FD",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:7072:        "PUT"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:7077:      "operationPolicy": "UPDATE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:7107:      "routeId": "ROUTE-PUT-E1FF8D187B4D",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:7111:        "PUT"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:7116:      "operationPolicy": "UPDATE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:7146:      "routeId": "ROUTE-PUT-F1FC5E5A2287",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:7150:        "PUT"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:7155:      "operationPolicy": "UPDATE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:7187:      "routeId": "ROUTE-DELETE-0A255BBA81A4",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:7205:      "routeId": "ROUTE-DELETE-0A255BBA81A4",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:7223:      "routeId": "ROUTE-DELETE-1C1BF1530326",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:7241:      "routeId": "ROUTE-DELETE-6BAD313CBC29",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:7259:      "routeId": "ROUTE-DELETE-BC7AD2D5C7BE",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:7277:      "routeId": "ROUTE-DELETE-EB63D908C453",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:7295:      "routeId": "ROUTE-DELETE-EB63D908C453",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:8105:      "routeId": "ROUTE-POST-4DF87E19E07C",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:8123:      "routeId": "ROUTE-POST-882645C6D054",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:8141:      "routeId": "ROUTE-POST-882645C6D054",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:8159:      "routeId": "ROUTE-POST-890743EB4A04",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:8177:      "routeId": "ROUTE-POST-AB5EAE45BD7A",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:8195:      "routeId": "ROUTE-POST-C1E70D66F843",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:8213:      "routeId": "ROUTE-POST-C1E70D66F843",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:8231:      "routeId": "ROUTE-POST-F26674CAD742",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:8249:      "routeId": "ROUTE-PUT-33E2FBF9C7D6",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:8267:      "routeId": "ROUTE-PUT-4AA9DCEC4A0D",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:8285:      "routeId": "ROUTE-PUT-6CF00DE47255",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:8303:      "routeId": "ROUTE-PUT-6CF00DE47255",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:8321:      "routeId": "ROUTE-PUT-7165EE7B8744",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:8339:      "routeId": "ROUTE-PUT-AFCEE7155691",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:8357:      "routeId": "ROUTE-PUT-AFCEE7155691",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:8375:      "routeId": "ROUTE-PUT-C47F5703EC87",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:8393:      "routeId": "ROUTE-PUT-DADB0D2560FD",
+AN_VANTARIS_ONE/registries/prod-ga-final-international-ga-readiness-matrix.v1.json:121:      "blockingGaps": "Runtime activation not executed."
+AN_VANTARIS_ONE/registries/prod-ga-final-international-ga-readiness-matrix.v1.json:129:      "blockingGaps": "Runtime activation not executed."
+AN_VANTARIS_ONE/registries/prod-ga-final-international-ga-readiness-matrix.v1.json:137:      "blockingGaps": "DB migration not executed."
+AN_VANTARIS_ONE/registries/prod-ga-final-international-ga-readiness-matrix.v1.json:153:      "blockingGaps": "Production install/activation not executed."
+AN_VANTARIS_ONE/registries/prod-ga-final-international-ga-readiness-matrix.v1.json:161:      "blockingGaps": "Customer-side restore not executed."
+AN_VANTARIS_ONE/registries/airport-ga-r5a-local-release-freeze.v1.json:115:    "executed": false
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1583:        "ROUTE-POST-FBB45557ACEE"
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2055:        "ROUTE-POST-FBB45557ACEE"
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2156:        "ROUTE-POST-FBB45557ACEE"
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2216:        "ROUTE-POST-FBB45557ACEE"
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:3659:      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:3675:      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:3691:      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:3707:      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:3723:      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:3739:      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:3755:      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:3771:      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:3787:      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:3803:      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:3819:      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:3835:      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:3851:      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:3867:      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:3883:      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:3899:      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:3915:      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:3931:      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:3947:      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:3963:      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:3979:      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:3995:      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:4011:      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:4027:      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:1:AN_VANTARIS_IBMS-backend/migrations/README.md:5:- No migration executed in this task
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:2:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:22:    execute_limited_read_validation,
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:3:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:30:OUTPUT_ROOT = Path("/tmp/one-p1-16m")
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:4:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:86:    report_path = OUTPUT_ROOT / "setup" / f"{package_path.stem}-report.json"
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:5:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:120:        self._case_dir = OUTPUT_ROOT / self.id().split(".")[-1]
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:6:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:132:    def _execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:7:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:158:        return execute_limited_read_validation(request).serialize()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:8:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:163:        result = self._execute(plan, self.clean_assessment, self.clean_scope, self.clean_package)
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:9:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:174:        result = self._execute(plan, self.clean_assessment, scope, self.clean_package)
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:10:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:183:        result = self._execute(self.clean_plan, self.clean_assessment, self.clean_scope, self.clean_package)
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:11:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:187:        result = self._execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:12:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:197:        result = self._execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:13:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:207:        result = self._execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:14:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:217:        result = self._execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:15:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:227:        result = self._execute(self.clean_plan, self.clean_assessment, self.clean_scope, self.clean_package)
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:16:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:236:        result = self._execute(self.clean_plan, self.clean_assessment, self.clean_scope, self.clean_package)
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:17:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:242:        result = self._execute(plan, assessment, scope, self.clean_package)
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:18:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:272:        result = self._execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:19:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:282:        result = self._execute(self.clean_plan, self.clean_assessment, self.clean_scope, self.clean_package)
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:20:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:290:        result = self._execute(plan, self.clean_assessment, scope, self.clean_package)
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:21:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:298:        result = self._execute(plan, self.clean_assessment, scope, self.clean_package)
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:22:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:306:        result = self._execute(self.clean_plan, self.clean_assessment, self.clean_scope, bad)
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:23:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:312:        result = self._execute(plan, self.clean_assessment, self.clean_scope, self.clean_package)
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:24:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:318:        result = self._execute(plan, self.clean_assessment, self.clean_scope, self.clean_package)
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:25:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:323:        result = self._execute(self.clean_plan, self.clean_assessment, self.clean_scope, self.clean_package)
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:26:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:337:        report_path = OUTPUT_ROOT / "setup" / "review-source-report.json"
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:27:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:358:        result = self._execute(plan, assessment, scope, REVIEW_PACKAGE, run_id="LIMITED-READ-VALIDATION-REVIEW-001")
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:28:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:365:        result = self._execute(plan, self.clean_assessment, self.clean_scope, self.clean_package)
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:29:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:371:        one = self._execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:30:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:378:        two = self._execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:31:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:397:        self._execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:32:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:413:        self._execute(self.clean_plan, self.clean_assessment, self.clean_scope, self.clean_package)
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:33:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:419:        self._execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:34:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:448:        self._execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:35:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:462:        result = self._execute(self.clean_plan, self.clean_assessment, self.clean_scope, self.clean_package)
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:36:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:469:        result = self._execute(self.clean_plan, self.clean_assessment, self.clean_scope, self.clean_package)
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:37:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:475:        self._execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:38:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:495:            result = self._execute(plan, self.clean_assessment, self.clean_scope, self.clean_package)
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:39:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:499:        result = self._execute(self.clean_plan, self.clean_assessment, self.clean_scope, self.clean_package)
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:40:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:503:        result = self._execute(self.clean_plan, self.clean_assessment, self.clean_scope, self.clean_package)
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:41:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:507:        result = self._execute(self.clean_plan, self.clean_assessment, self.clean_scope, self.clean_package)
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:42:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:515:        result = self._execute(plan, self.clean_assessment, scope, self.clean_package)
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:43:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:521:        result = self._execute(plan, self.clean_assessment, self.clean_scope, self.clean_package)
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:44:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:71:    def execute(self, value=None, run_id="run-1"):
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:45:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:78:        run = self.execute()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:46:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:83:        run = self.execute(input_for(fields={"device-1": (field(),)}))
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:47:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:87:        self.assertEqual(self.execute(run_id="a").input_digest, self.execute(run_id="b").input_digest)
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:48:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:93:        self.assertEqual(self.execute(run_id="a").result_digest, self.execute(run_id="b").result_digest)
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:49:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:96:        comparison = self.service.compare_runs(self.execute(run_id="a"), self.execute(run_id="b"))
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:50:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:121:        run = self.execute(input_for(devices=(device(), device())))
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:51:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:201:        run = self.execute(input_for(devices=(device("a", device_code="SAME"), device("b", device_code="SAME"))))
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:52:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:219:            self.execute(input_for(devices=tuple(device(str(i)) for i in range(101))))
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:53:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:222:        run = self.execute(input_for(devices=(device("z"), device("a"))))
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:54:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:226:        run = self.execute(input_for(devices=(device("good"), {"id": "", "device_name": "Bad", "created_at": NOW})))
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:55:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:231:        left = self.execute()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:56:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:232:        right = self.execute(input_for(version="legacy-device-v2"), run_id="right")
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:57:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:236:        self.assertTrue(self.service.compare_runs(self.execute(run_id="a"), self.execute(run_id="b")).identical_except_run_id)
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:58:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:239:        left = self.execute()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:59:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:240:        right = self.execute(input_for(devices=(device(description="changed"),)), run_id="right")
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:60:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:253:        run = self.execute(input_for(devices=(device(device_type=None),), ctx=context(default_device_type=None)))
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:61:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:257:        self.assertEqual(self.execute().cutover_decision, "NOT_READY_FOR_WRITE_CUTOVER")
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:62:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:260:        self.assertEqual(self.execute(input_for(version="unapproved")).cutover_decision, "BLOCKED_BY_REVIEW")
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:63:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:264:            self.execute().cutover_decision = "READY_FOR_WRITE_CUTOVER"
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:64:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:278:        run = self.execute(input_for(devices=({"id": "x", "device_name": "Bad", "private_key": "super-secret", "created_at": NOW},)))
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:65:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:282:        run = self.execute(input_for(devices=({"id": "x", "device_name": "Bad", "live_value": "raw-telemetry-secret", "created_at": NOW},)))
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:66:AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/readiness/test_readiness_gate.py:64:        self.assertEqual(payload["decision"], "INPUT_REJECTED")
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:67:AN_VANTARIS_IBMS-backend/tests/asset_graph/airport_intake/test_formula_intake.py:63:        self.assertEqual(ctx.exception.code, "INPUT_REJECTED")
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:68:AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:44:from src.asset_graph.reconciliation.read_validation import ExecutionRequest, execute_limited_read_validation
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:69:AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:54:OUTPUT_ROOT = Path("/tmp/one-p1-16n-tests")
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:70:AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:111:    report_path = OUTPUT_ROOT / "setup" / f"{package_path.stem}-report.json"
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:71:AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:144:        self._case_dir = OUTPUT_ROOT / self.id().split(".")[-1]
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:72:AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:149:    def _execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:73:AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:177:        return execute_limited_read_validation(request).serialize()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:74:AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:181:        result = self._execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:75:AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:230:        result = self._execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:76:AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:653:        result = self._execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:77:AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:665:        result = self._execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:78:AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:685:        result = self._execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:79:AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:441:        result = coordinator.execute_batch(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:80:AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:459:        result = coordinator.execute_batch(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:81:AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:500:        result = coordinator.execute_batch(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:82:AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:518:        for token in ("sqlalchemy", "db.session", "CREATE TABLE", "INSERT INTO", "prisma"):
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:83:AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:556:        result = coordinator.execute_batch(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:84:AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:620:        one = coordinator.execute_batch(payload).serialize()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:85:AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:621:        two = AssetGraphPersistenceCoordinator(audit_port=InMemoryAuditProvider()).execute_batch(payload).serialize()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:86:AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/test_airport_reconciliation_profile.py:740:        self.assertEqual(gates[0]["gateId"], "G01_INPUT_EVIDENCE_INTEGRITY")
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:87:AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/test_airport_review_projection.py:78:OUTPUT_ARTIFACTS = (
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:88:AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/test_airport_review_projection.py:311:            for name in OUTPUT_ARTIFACTS:
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:89:AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/test_airport_review_projection.py:432:            for name in OUTPUT_ARTIFACTS:
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:90:AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/test_airport_review_projection.py:664:        for name in OUTPUT_ARTIFACTS:
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:91:AN_VANTARIS_IBMS-backend/README.md:110:**PostgreSQL database URI (POSTGRES-CONFIG-ABSTRACTION-1)**
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:92:AN_VANTARIS_IBMS-backend/README.md:121:See `docs/architecture/IBMS_POSTGRES_CONFIG_ABSTRACTION_1.md`.
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:93:AN_VANTARIS_IBMS-backend/README.md:123:**PostgreSQL local install (POSTGRES-LOCAL-INSTALL-1)**
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:94:AN_VANTARIS_IBMS-backend/README.md:134:See `docs/architecture/IBMS_POSTGRES_LOCAL_INSTALL_1.md`. No IBMS DB/user created in install task.
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:95:AN_VANTARIS_IBMS-backend/README.md:136:**PostgreSQL local smoke result (POSTGRES-LOCAL-SMOKE-EXEC-1)**
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:96:AN_VANTARIS_IBMS-backend/README.md:145:- See `docs/architecture/IBMS_POSTGRES_LOCAL_SMOKE_EXEC_1.md` and `docs/architecture/IBMS_POSTGRES_LOCAL_SMOKE_RESULTS_1.md`
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:97:AN_VANTARIS_IBMS-backend/README.md:147:**PostgreSQL driver (POSTGRES-DEPS-PREP-1)**
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:98:AN_VANTARIS_IBMS-backend/README.md:160:- See `docs/architecture/IBMS_POSTGRES_DEPS_PREP_1.md`
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:99:AN_VANTARIS_IBMS-backend/README.md:162:**PostgreSQL migration framework baseline (POSTGRES-MIGRATION-FRAMEWORK-RECOVERY-1)**
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:100:AN_VANTARIS_IBMS-backend/README.md:168:- Import verification passed: `alembic`, `flask_migrate`
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:101:AN_VANTARIS_IBMS-backend/README.md:171:  - `docs/architecture/IBMS_POSTGRES_MIGRATION_FRAMEWORK_1.md`
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:102:AN_VANTARIS_IBMS-backend/README.md:172:  - `docs/security/IBMS_POSTGRES_MIGRATION_FRAMEWORK_1_RISK_REVIEW.md`
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:103:AN_VANTARIS_IBMS-backend/README.md:173:  - `docs/architecture/IBMS_POSTGRES_MIGRATION_FRAMEWORK_RECOVERY_1.md`
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:104:AN_VANTARIS_IBMS-backend/src/testMQTT/testws.html:191:                    method: 'POST',
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:105:AN_VANTARIS_IBMS-backend/src/testMQTT/rtsp_simulator.py:331:    def do_PUT(self):
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:106:AN_VANTARIS_IBMS-backend/src/testMQTT/mock_isapi_camera.py:216:@app.route('/ISAPI/PTZCtrl/channels/<int:channel>/continuous', methods=['PUT'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:107:AN_VANTARIS_IBMS-backend/src/testMQTT/mock_isapi_camera.py:308:@app.route('/ISAPI/System/reboot', methods=['PUT'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:108:AN_VANTARIS_IBMS-backend/src/testMQTT/mock_isapi_camera.py:351:    print(f"   PUT  /ISAPI/PTZCtrl/channels/1/continuous")
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:109:AN_VANTARIS_IBMS-backend/src/DID/models.py:74:    updated_at = Column(DateTime, server_default=text('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'))
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:110:AN_VANTARIS_IBMS-backend/src/DID/__init__.py:145:# /system/init	POST	系统初始化（幂等）	否
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:111:AN_VANTARIS_IBMS-backend/src/DID/__init__.py:146:# /entity	POST	创建下级实体并签发VC	是
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:112:AN_VANTARIS_IBMS-backend/src/DID/__init__.py:147:# /vp/generate	POST	生成VP	是
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:113:AN_VANTARIS_IBMS-backend/src/DID/__init__.py:148:# /vp/verify	POST	验证VP并提取信息	否
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:114:AN_VANTARIS_IBMS-backend/src/DID/__init__.py:149:# /vc/reissue	POST	吊销并重新签发VC	是
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:115:AN_VANTARIS_IBMS-backend/src/DID/__init__.py:150:# /vc/revoke	POST	撤销VC	是
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:116:AN_VANTARIS_IBMS-backend/src/DID/__init__.py:151:# /vc/status	POST	VC状态检查	否
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:117:AN_VANTARIS_IBMS-backend/src/DID/__init__.py:157:# /login	POST	登录（Challenge/VP）	否
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:118:AN_VANTARIS_IBMS-backend/src/tests/did_signature.py:78:    f'''curl -X POST "http://localhost:5000/api/did/login" \\
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:119:AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_integration_pilot.py:47:        session.execute.side_effect = [FakeResult(None), FakeResult(None), FakeResult((37,))]
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:120:AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_integration_pilot.py:58:            method="POST",
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:121:AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_integration_pilot.py:86:        self.assertEqual(record.route_id, "ROUTE-POST-C39FFBE9F5DC")
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:122:AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:23:        "event_class": "CANONICAL_OBJECT_UPDATE",
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:123:AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:35:        "route_id": "ROUTE-PATCH-ASSET",
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:124:AN_VANTARIS_IBMS-backend/src/Iot/drivers/isapi_driver.py:149:            elif method == 'POST':
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:125:AN_VANTARIS_IBMS-backend/src/Iot/drivers/isapi_driver.py:151:            elif method == 'PUT':
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:126:AN_VANTARIS_IBMS-backend/src/Iot/drivers/isapi_driver.py:394:        return self._request(device_did, 'PUT', endpoint, xml_body)
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:127:AN_VANTARIS_IBMS-backend/src/Iot/drivers/http_driver.py:29:        2. 主动上报模式：不需要 base_url，设备主动 POST 数据到 /ingest/http
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:128:AN_VANTARIS_IBMS-backend/src/Iot/drivers/http_driver.py:79:        http_method = command.get('http_method', 'POST')
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:129:AN_VANTARIS_IBMS-backend/src/Iot/drivers/http_driver.py:91:            elif http_method.upper() == 'PUT':
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:130:AN_VANTARIS_IBMS-backend/src/Iot/drivers/http_driver.py:93:            elif http_method.upper() == 'DELETE':
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:131:AN_VANTARIS_IBMS-backend/src/Iot/command_converters/__init__.py:91:            'http_method': http_config.get('method', 'POST'),
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:132:AN_VANTARIS_IBMS-backend/src/Iot/dao.py:27:        db.session.commit()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:133:AN_VANTARIS_IBMS-backend/src/Iot/dao.py:59:        db.session.commit()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:134:AN_VANTARIS_IBMS-backend/src/Iot/dao.py:69:        db.session.commit()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:135:AN_VANTARIS_IBMS-backend/src/Iot/dao.py:77:        db.session.commit()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:136:AN_VANTARIS_IBMS-backend/src/Iot/dao.py:130:        db.session.commit()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:137:AN_VANTARIS_IBMS-backend/src/Iot/dao.py:180:        db.session.commit()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:138:AN_VANTARIS_IBMS-backend/src/Iot/dao.py:194:        db.session.commit()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:139:AN_VANTARIS_IBMS-backend/src/Iot/dao.py:326:        db.session.commit()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:140:AN_VANTARIS_IBMS-backend/src/Iot/dao.py:374:            db.session.commit()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:141:AN_VANTARIS_IBMS-backend/src/Iot/dao.py:391:        db.session.commit()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:142:AN_VANTARIS_IBMS-backend/src/Iot/dao.py:411:        db.session.commit()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:143:AN_VANTARIS_IBMS-backend/src/Iot/dao.py:459:            db.session.commit()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:144:AN_VANTARIS_IBMS-backend/src/Iot/dao.py:468:        db.session.commit()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:145:AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/excel/intake.py:210:        return False, "MISSING_OUTPUT"
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:146:AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/migration_control/evaluator.py:48:    if control_input.readiness_decision in {"NOT_READY", "INPUT_REJECTED", "UNKNOWN"}:
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:147:AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/pre_execution.py:151:            "OUTPUT_LOCATION_POLICY_GATE",
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:148:AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/__init__.py:2:from .executor import execute_limited_read_validation
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:149:AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/__init__.py:17:    "execute_limited_read_validation",
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:150:AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/executor.py:72:    if readiness_assessment.get("decision") in {"NOT_READY", "INPUT_REJECTED"}:
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:151:AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/executor.py:82:def execute_limited_read_validation(request: ExecutionRequest) -> ExecutionResult:
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:152:AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/executor.py:111:                gate_code="OUTPUT_LOCATION_POLICY_GATE",
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:153:AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/readiness/assessor.py:25:        return "INPUT_REJECTED"
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:154:AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/readiness/assessor.py:27:        return "INPUT_REJECTED"
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:155:AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/intake.py:196:            "INPUT_REJECTED",
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:156:AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/intake.py:201:            "INPUT_REJECTED",
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:157:AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/intake.py:903:        return False, "MISSING_OUTPUT"
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:158:AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/constants.py:111:        "INPUT_REJECTED",
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:159:AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:72:    def execute_batch(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:160:AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/constants.py:47:UPDATE_OUTCOMES = frozenset(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:161:AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/constants.py:49:        "UPDATED",
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:162:AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/identity.py:8:from .constants import UPDATE_OUTCOMES
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:163:AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/identity.py:46:    return "UPDATED"
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:164:AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/identity.py:74:    if outcome not in UPDATE_OUTCOMES:
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:165:AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_reconciliation/mapper.py:43:        return False, "MISSING_OUTPUT"
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:166:AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_reconciliation/constants.py:69:    "G01_INPUT_EVIDENCE_INTEGRITY",
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:167:AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_reconciliation/gates.py:46:    add("G01_INPUT_EVIDENCE_INTEGRITY", "PASS", "All upstream artifact authorities and digests verified")
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:168:AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_classification/mapper.py:32:        return False, "MISSING_OUTPUT"
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:169:AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_spatial/mapper.py:42:        return False, "MISSING_OUTPUT"
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:170:AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_review_projection/mapper.py:43:        return False, "MISSING_OUTPUT"
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:171:AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_review_projection/constants.py:46:    "G01_INPUT_EVIDENCE_INTEGRITY",
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:172:AN_VANTARIS_IBMS-backend/src/system/menu_models.py:25:    updated_at = Column(DateTime, server_default=text('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:173:AN_VANTARIS_IBMS-backend/src/system/menu_models.py:46:    updated_at = Column(DateTime, server_default=text('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:174:AN_VANTARIS_IBMS-backend/src/system/menu_models.py:65:    updated_at = Column(DateTime, server_default=text('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:175:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:126:        result = session.execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:176:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:135:        menus = session.execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:177:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:156:        target = session.execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:178:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:164:        session.execute(text("UPDATE sys_version SET is_default = 0"))
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:179:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:165:        session.execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:180:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:166:            text("UPDATE sys_version SET is_default = 1 WHERE version_code = :code"),
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:181:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:171:        menus = session.execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:182:AN_VANTARIS_IBMS-backend/src/system/menu_service.py:185:        version_info = session.execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:183:AN_VANTARIS_IBMS-backend/src/scripts/migrate_csv_data.py:2:文件路径: scripts/migrate_csv_data.py
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:184:AN_VANTARIS_IBMS-backend/src/scripts/migrate_csv_data.py:31:def migrate_data():
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:185:AN_VANTARIS_IBMS-backend/src/scripts/migrate_csv_data.py:150:        migrate_data()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:186:AN_VANTARIS_IBMS-backend/src/governance/audit/pilot.py:117:    """Audit exactly POST /api/system/versions after a successful mutation."""
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:187:AN_VANTARIS_IBMS-backend/src/governance/audit/pilot.py:138:            route_id="ROUTE-POST-C39FFBE9F5DC",
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:188:AN_VANTARIS_IBMS-backend/src/governance/audit/constants.py:46:    "CANONICAL_OBJECT_UPDATE": (True, True, AuditFailurePolicy.FAIL_OPERATION_WITH_AUDIT_ERROR),
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:189:AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:50:@api_bp.route('/did/system/init', methods=['POST'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:190:AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:76:@api_bp.route('/did/entity', methods=['POST'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:191:AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:135:@api_bp.route('/did/vp/generate', methods=['POST'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:192:AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:176:@api_bp.route('/did/vp/verify', methods=['POST'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:193:AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:205:@api_bp.route('/did/vc/reissue', methods=['POST'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:194:AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:260:@api_bp.route('/did/vc/revoke', methods=['POST'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:195:AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:279:@api_bp.route('/did/vc/status', methods=['POST'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:196:AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:435:@api_bp.route('/did/login', methods=['POST'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:197:AN_VANTARIS_IBMS-backend/src/api/prod_ga/foundation_packages_provider.py:5:local filesystem reads only; it does not start runtimes, execute validators,
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:198:AN_VANTARIS_IBMS-backend/src/api/data_modeling/modeling_api.py:49:@api_bp.route('/modeling/<device_code>/train', methods=['POST'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:199:AN_VANTARIS_IBMS-backend/src/api/data_modeling/modeling_api.py:62:@api_bp.route('/modeling/<device_code>/predict', methods=['POST'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:200:AN_VANTARIS_IBMS-backend/src/api/data_modeling/modeling_api.py:75:@api_bp.route('/modeling/<device_code>/predict_future', methods=['POST'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:201:AN_VANTARIS_IBMS-backend/src/api/data_modeling/modeling_api.py:109:@api_bp.route('/modeling/<device_code>/<method>', methods=['POST', 'GET'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:202:AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:27:@api_bp.route('/iot/device/register', methods=['POST'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:203:AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:218:@api_bp.route('/iot/device/did/<string:device_did>', methods=['PUT'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:204:AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:253:@api_bp.route('/iot/device/did/<string:device_did>', methods=['PATCH'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:205:AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:258:    部分更新设备信息（PATCH方式，只更新传入的字段）
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:206:AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:286:@api_bp.route('/iot/device/did/<string:device_did>', methods=['DELETE'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:207:AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:306:@api_bp.route('/iot/device/did/<string:device_did>/status', methods=['PUT'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:208:AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:339:@api_bp.route('/iot/device/did/<string:device_did>/field-mappings', methods=['PUT'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:209:AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:374:@api_bp.route('/iot/device/did/<string:device_did>/method-mappings', methods=['PUT'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:210:AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:594:@api_bp.route('/iot/device/<string:device_did>/command', methods=['POST'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:211:AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:628:@api_bp.route('/iot/device/code/<string:device_code>/command', methods=['POST'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:212:AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:762:@api_bp.route('/iot/standard-fields', methods=['POST'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:213:AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:814:@api_bp.route('/iot/standard-fields/<string:field_code>', methods=['PUT'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:214:AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:868:@api_bp.route('/iot/standard-fields/<string:field_code>', methods=['DELETE'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:215:AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:894:@api_bp.route('/iot/standard-methods', methods=['POST'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:216:AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:950:        db.session.commit()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:217:AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:966:@api_bp.route('/iot/standard-methods/<string:method_code>', methods=['PUT'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:218:AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:1004:        db.session.commit()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:219:AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:1020:@api_bp.route('/iot/standard-methods/<string:method_code>', methods=['DELETE'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:220:AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:1043:        db.session.commit()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:221:AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:1049:@api_bp.route('/iot/ingest/http', methods=['POST'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:222:AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:1055:    设备通过 POST 请求发送数据到此端点
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:223:AN_VANTARIS_IBMS-backend/src/api/iot/iot_api.py:1116:@api_bp.route('/iot/device/<string:device_code>/reconnect', methods=['POST'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:224:AN_VANTARIS_IBMS-backend/src/api/iot/sse_api.py:9:curl -X POST "http://localhost:5000/api/iot/device/HVAC_SIM_001/test-sse-push"
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:225:AN_VANTARIS_IBMS-backend/src/api/iot/sse_api.py:181:@api_bp.route('/iot/device/<string:device_code>/test-sse-push', methods=['POST'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:226:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:32:        result = db.session.execute(text("SELECT * FROM sys_version ORDER BY sort_order"))
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:227:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:49:        row = db.session.execute(text("SELECT * FROM sys_version WHERE is_default = 1 LIMIT 1")).fetchone()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:228:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:61:@api_bp.route('/system/versions', methods=['POST'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:229:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:70:        check = db.session.execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:230:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:76:        db.session.execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:231:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:78:                INSERT INTO sys_version (version_code, version_name, description, icon, sort_order, is_active, is_default)
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:232:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:91:        db.session.commit()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:233:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:102:@api_bp.route('/system/versions/<version_code>', methods=['PUT'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:234:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:108:        check = db.session.execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:235:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:135:            query = f"UPDATE sys_version SET {', '.join(update_fields)} WHERE version_code = :version_code"
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:236:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:136:            db.session.execute(text(query), params)
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:237:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:137:            db.session.commit()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:238:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:144:@api_bp.route('/system/versions/<version_code>', methods=['DELETE'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:239:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:149:        check = db.session.execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:240:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:155:        db.session.execute(text("DELETE FROM sys_version WHERE version_code = :code"), {"code": version_code})
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:241:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:156:        db.session.commit()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:242:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:188:@api_bp.route('/system/versions/switch/<version_code>', methods=['PUT'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:243:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:196:        db.session.commit()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:244:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:218:@api_bp.route('/system/menus-add', methods=['POST'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:245:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:226:        existing = db.session.execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:246:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:232:        db.session.execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:247:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:234:                INSERT INTO sys_menu (parent_id, menu_path, menu_title, menu_icon, menu_type, has_children, redirect_path, sort_order, is_visible)
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:248:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:249:        db.session.commit()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:249:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:250:        new_id = db.session.execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:250:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:260:@api_bp.route('/system/menus-update/<int:menu_id>', methods=['PUT'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:251:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:266:        check = db.session.execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:252:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:299:            query = f"UPDATE sys_menu SET {', '.join(update_fields)} WHERE id = :id"
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:253:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:300:            db.session.execute(text(query), params)
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:254:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:301:            db.session.commit()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:255:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:308:@api_bp.route('/system/menus-delete/<int:menu_id>', methods=['DELETE'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:256:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:313:        check = db.session.execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:257:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:319:        db.session.execute(text("DELETE FROM sys_menu WHERE parent_id = :parent_id"), {"parent_id": menu_id})
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:258:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:320:        db.session.execute(text("DELETE FROM sys_menu WHERE id = :id"), {"id": menu_id})
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:259:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:321:        db.session.commit()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:260:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:330:@api_bp.route('/system/menus/batch-sort', methods=['POST'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:261:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:352:                result = db.session.execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:262:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:361:                db.session.execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:263:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:362:                    text("UPDATE sys_menu SET sort_order = :sort_order WHERE id = :id"),
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:264:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:367:        db.session.commit()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:265:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:388:@api_bp.route('/system/version-menus/<version_code>/batch', methods=['POST'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:266:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:397:        version = db.session.execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:267:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:409:                menu = db.session.execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:268:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:421:                    updated = db.session.execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:269:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:423:                            UPDATE sys_version_menu
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:270:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:430:                        db.session.execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:271:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:432:                                INSERT INTO sys_version_menu (version_code, menu_id, menu_path, is_visible, sort_order)
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:272:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:438:        db.session.commit()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:273:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:447:@api_bp.route('/system/version-menus/<version_code>/incremental', methods=['POST'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:274:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:466:        version_check = db.session.execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:275:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:491:                batch_result = db.session.execute(menu_query, params).fetchall()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:276:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:508:                    updated = db.session.execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:277:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:510:                            UPDATE sys_version_menu
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:278:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:517:                        db.session.execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:279:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:519:                                INSERT INTO sys_version_menu (version_code, menu_id, menu_path, is_visible)
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:280:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:540:                        UPDATE sys_version_menu 
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:281:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:545:                    result = db.session.execute(update_query, params)
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:282:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:548:        db.session.commit()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:283:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:567:@api_bp.route('/system/version-menus/<version_code>/diff', methods=['POST'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:284:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:588:        version = db.session.execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:285:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:604:            menu = db.session.execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:286:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:616:                updated = db.session.execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:287:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:618:                        UPDATE sys_version_menu
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:288:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:625:                    db.session.execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:289:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:627:                            INSERT INTO sys_version_menu (version_code, menu_id, menu_path, is_visible)
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:290:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:634:        db.session.commit()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:291:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:673:        versions_result = db.session.execute(versions_query).fetchall()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:292:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:679:        version_menu_rows = db.session.execute(
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:293:AN_VANTARIS_IBMS-backend/src/api/system/menu_api.py:733:        menu_result = db.session.execute(menu_query).fetchall()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:294:AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:13:@api_bp.route('/system/entity-types', methods=['POST'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:295:AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:30:        db.session.commit()
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:296:AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:47:@api_bp.route('/system/entity-types/<type_id>', methods=['PUT'])
+AN_VANTARIS_ONE/registries/module-ga-wave-r1/module-ga-wave-r1-risk-scan.txt:297:AN_VANTARIS_IBMS-backend/src/api/system/system_api.py:55:        db.session.commit()

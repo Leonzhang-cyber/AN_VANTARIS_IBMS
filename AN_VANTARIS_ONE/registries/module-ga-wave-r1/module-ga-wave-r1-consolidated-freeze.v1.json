@@ -1,0 +1,127 @@
+{
+  "registryId": "module-ga-wave-r1-consolidated-freeze.v1",
+  "platform": "VANTARIS_ONE",
+  "releaseScope": "MODULE_GA_WAVE_R1",
+  "sourceBranch": "sync/ufms-foundation-packages-20260622-104646",
+  "sourceHeadBeforeTask": "70b95413c42f7bd19a239c6fca258194181e4080",
+  "modules": [
+    {
+      "moduleId": "UCDE",
+      "moduleName": "UCDE",
+      "maturityClassification": "Freeze / read-only capability complete",
+      "gaDecision": "Not full runtime GA; module readiness freeze PASS for current branch evidence.",
+      "evidenceSummary": "Current branch shows UCDE API/service references and evidence contracts. The audited evidence supports read-only evidence capability and contract/boundary readiness, not final runtime write execution.",
+      "blockingGaps": [
+        "Final UCDE runtime/API write execution not proven.",
+        "Customer production activation evidence not present.",
+        "End-to-end evidence-chain acceptance package still needed."
+      ],
+      "nextTask": "UCDE-GA-R2 Runtime API and Evidence Chain Acceptance Gate",
+      "passMarker": "UCDE_GA_R1_FINAL_CAPABILITY_AUDIT_AND_CONSOLIDATED_FREEZE_PASS"
+    },
+    {
+      "moduleId": "UCONSOLE",
+      "moduleName": "UConsole",
+      "maturityClassification": "Freeze / read-only capability complete",
+      "gaDecision": "Not full UConsole GA; menu/module entry freeze PASS with remaining all-module consistency gaps.",
+      "evidenceSummary": "Current branch shows module entries and read-only package surfaces. L1/L2 evidence exists through static menu/router structures; full L3 in-page consistency across all future modules remains a gap.",
+      "blockingGaps": [
+        "All module entries and entitlement states are not fully proven for production.",
+        "L3 in-page rule needs final all-module UI audit.",
+        "Customer activation and runtime-control gates remain unexecuted."
+      ],
+      "nextTask": "UCONSOLE-GA-R2 Entitlement State and L1-L2-L3 Production Menu Gate",
+      "passMarker": "UCONSOLE_GA_R1_FULL_MODULE_ENTRY_AND_MENU_CONSISTENCY_FREEZE_PASS"
+    },
+    {
+      "moduleId": "UMMS",
+      "moduleName": "UMMS",
+      "maturityClassification": "Freeze / read-only capability complete",
+      "gaDecision": "Module consolidated freeze PASS; not full customer production GA.",
+      "evidenceSummary": "Current branch has UMMS provider/API/UI evidence and many read-only readiness/freeze markers. It does not prove full production workflow execution or customer activation.",
+      "blockingGaps": [
+        "Production work-order lifecycle execution not proven.",
+        "Customer activation evidence not present.",
+        "Final cross-industry UMMS runtime acceptance remains open."
+      ],
+      "nextTask": "UMMS-GA-R2 Production Workflow Execution Acceptance Gate",
+      "passMarker": "UMMS_GA_R1_FINAL_MODULE_CONSOLIDATED_FREEZE_PASS"
+    },
+    {
+      "moduleId": "UESG",
+      "moduleName": "UESG",
+      "maturityClassification": "Freeze / read-only capability complete",
+      "gaDecision": "Module readiness freeze PASS; not full runtime GA.",
+      "evidenceSummary": "Current branch has UESG source/API/UI evidence and skeleton readiness views. Meter integration, carbon-factor governance, certification reporting, and final customer runtime are not proven.",
+      "blockingGaps": [
+        "Final UESG API/runtime/customer delivery not complete.",
+        "Meter integration and certification reporting governance not proven.",
+        "Customer activation evidence not present."
+      ],
+      "nextTask": "UESG-GA-R2 Meter Integration and Compliance Evidence Acceptance Gate",
+      "passMarker": "UESG_GA_R1_FINAL_MODULE_CONSOLIDATED_FREEZE_PASS"
+    },
+    {
+      "moduleId": "REPORTS_ANALYTICS",
+      "moduleName": "Reports & Analytics",
+      "maturityClassification": "Freeze / read-only capability complete",
+      "gaDecision": "Reports readiness freeze PASS; not final integrated analytics GA.",
+      "evidenceSummary": "Current branch contains reports backend, frontend, governance, and read-only projection evidence. Final integrated analytics package and production execution are not proven.",
+      "blockingGaps": [
+        "Final integrated analytics package evidence not present.",
+        "Export scheduling and production report execution not proven.",
+        "Customer activation and report governance acceptance not complete."
+      ],
+      "nextTask": "REPORTS-GA-R2 Integrated Analytics Package and Export Governance Gate",
+      "passMarker": "REPORTS_GA_R1_FINAL_REPORTS_AND_ANALYTICS_FREEZE_PASS"
+    },
+    {
+      "moduleId": "GOVERNANCE_SECURITY",
+      "moduleName": "Governance & Security",
+      "maturityClassification": "Freeze / read-only capability complete",
+      "gaDecision": "Governance foundation freeze PASS; customer production security hardening not executed.",
+      "evidenceSummary": "Route enforcement and boundary baseline validators pass. Existing boundary baseline still emits non-blocking legacy warnings, so customer production security hardening is not declared complete.",
+      "blockingGaps": [
+        "Boundary baseline has existing non-blocking legacy warnings.",
+        "Production customer security hardening and activation approval evidence not executed.",
+        "IEC62443 posture is evidence-building, not certification."
+      ],
+      "nextTask": "GOVERNANCE-SECURITY-GA-R2 Customer Production Hardening and Approval Evidence Gate",
+      "passMarker": "GOVERNANCE_SECURITY_GA_R1_FINAL_GOVERNANCE_AND_SECURITY_FREEZE_PASS"
+    },
+    {
+      "moduleId": "NEXUS_AI",
+      "moduleName": "NEXUS AI",
+      "maturityClassification": "Not integrated in current branch",
+      "gaDecision": "Not GA-ready in current branch; integration freeze pending.",
+      "evidenceSummary": "Current branch contains contracts and references, but full NEXUS AI R1-R6 engine artifacts are not confirmed as integrated here. NEXUS AI engine stage complete in prior branch context; current branch integration freeze pending.",
+      "blockingGaps": [
+        "NEXUS AI engine artifacts not confirmed integrated in current branch.",
+        "No current-branch runtime acceptance evidence.",
+        "No autonomous execution approval, and no device-control path is allowed."
+      ],
+      "nextTask": "NEXUSAI-GA-R2 Current Branch Engine Integration and Advisory API Acceptance Gate",
+      "passMarker": "NEXUSAI_GA_R1_CURRENT_BRANCH_INTEGRATION_FREEZE_PASS"
+    }
+  ],
+  "packageCounts": {
+    "EDGE": 248,
+    "LINK": 153,
+    "DB": 14,
+    "Contracts": 174
+  },
+  "finalDecision": {
+    "moduleWaveFreeze": "PASS",
+    "fullInternationalGAAcrossAllModules": "NOT_YET",
+    "customerProductionActivation": "NOT_EXECUTED"
+  },
+  "safety": {
+    "noInstall": true,
+    "noRollback": true,
+    "noDbMigration": true,
+    "noRuntimeActivation": true,
+    "noPush": true,
+    "noTag": true
+  },
+  "passMarker": "ONE_MODULE_GA_WAVE_R1_CONSOLIDATED_FREEZE_PASS"
+}

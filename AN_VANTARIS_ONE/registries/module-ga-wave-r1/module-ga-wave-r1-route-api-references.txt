@@ -1,0 +1,1000 @@
+AN_VANTARIS_IBMS-backend/test/smoke/db_jwt_smoke.py:2:"""IBMS local DB + JWT smoke checks for system read routes.
+AN_VANTARIS_IBMS-backend/test/smoke/db_jwt_smoke.py:22:    "/api/system/menus",
+AN_VANTARIS_IBMS-backend/test/smoke/db_jwt_smoke.py:23:    "/api/system/permissions",
+AN_VANTARIS_IBMS-backend/test/smoke/db_jwt_smoke.py:24:    "/api/system/versions",
+AN_VANTARIS_IBMS-backend/test/smoke/db_jwt_smoke.py:35:        from src.api import api_bp
+AN_VANTARIS_IBMS-backend/test/smoke/db_jwt_smoke.py:43:        app.register_blueprint(api_bp)
+AN_VANTARIS_IBMS-backend/test/smoke/db_jwt_smoke.py:68:        # Treat as auth rejection (guard invoked before route handler / DB layer).
+AN_VANTARIS_IBMS-backend/config/local-smoke.env.example:6:# Return stable fixture data for read-only system smoke routes (JWT still required).
+AN_VANTARIS_IBMS-backend/tests/asset_graph/compatibility/test_legacy_device_read_facade.py:271:    def test_no_public_api(self):
+AN_VANTARIS_IBMS-backend/tests/asset_graph/compatibility/test_legacy_device_read_facade.py:274:        self.assertNotIn("Blueprint", text)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/compatibility/test_legacy_device_read_facade.py:275:        self.assertNotIn("@api_bp.route", text)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/test_device_reconciliation_evidence_runner.py:305:    def test_prohibited_value_never_appears_in_errors_or_report(self):
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/test_device_reconciliation_evidence_runner.py:319:    def test_prohibited_value_never_appears_in_report_payload(self):
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/test_device_reconciliation_evidence_runner.py:444:    def test_no_public_api_added(self):
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/test_device_reconciliation_evidence_runner.py:446:        self.assertNotIn("@api_bp.route", text)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/test_device_reconciliation_evidence_runner.py:447:        self.assertNotIn("Blueprint", text)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/test_excel_intake.py:234:            report_output=Path(self.tempdir.name) / "report.json",
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/test_excel_intake.py:246:            report_output=Path(self.tempdir.name) / "report2.json",
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/test_excel_intake.py:267:        run_excel_evidence_intake(root=ROOT, input_path=self.workbook_path, json_output=out1, report_output=Path(self.tempdir.name) / "r1.json", run_id="DET-001")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/test_excel_intake.py:268:        run_excel_evidence_intake(root=ROOT, input_path=self.workbook_path, json_output=out2, report_output=Path(self.tempdir.name) / "r2.json", run_id="DET-001")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/test_excel_intake.py:272:    def test_deterministic_reconciliation_report(self) -> None:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/test_excel_intake.py:276:        run_excel_evidence_intake(root=ROOT, input_path=self.workbook_path, json_output=package, report_output=r1, run_id="DET-002")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/test_excel_intake.py:277:        run_excel_evidence_intake(root=ROOT, input_path=self.workbook_path, json_output=package, report_output=r2, run_id="DET-002")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/test_excel_intake.py:292:    def test_no_public_api(self) -> None:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/test_excel_intake.py:294:        self.assertNotIn("@api_bp.route", text)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/test_excel_intake.py:298:        report = Path(self.tempdir.name) / "report-wc.json"
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/test_excel_intake.py:303:            report_output=report,
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/test_excel_intake.py:307:        payload = json.loads(report.read_text(encoding="utf-8"))
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/test_excel_intake.py:313:        run_excel_evidence_intake(root=ROOT, input_path=self.workbook_path, json_output=out, report_output=Path(self.tempdir.name) / "r.json", run_id="AT-001")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/test_excel_intake.py:327:        out_report = Path(self.tempdir.name) / "cli-report.json"
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/test_excel_intake.py:333:                "--report-output", str(out_report),
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/test_excel_intake.py:345:    def test_blockers_visible_in_report(self) -> None:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/test_excel_intake.py:346:        report = Path(self.tempdir.name) / "blocker-report.json"
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/test_excel_intake.py:351:            report_output=report,
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/test_excel_intake.py:354:        payload = json.loads(report.read_text(encoding="utf-8"))
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/test_excel_intake.py:358:    def test_reviews_visible_in_report(self) -> None:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/test_excel_intake.py:359:        report = Path(self.tempdir.name) / "review-report.json"
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/test_excel_intake.py:364:            report_output=report,
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/test_excel_intake.py:367:        payload = json.loads(report.read_text(encoding="utf-8"))
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/fixtures.py:161:        [5, "CREDENTIAL_FIELD", "StandardFields", "api_key", "SYNTHETIC_PASSWORD_SHOULD_BE_REJECTED", "field credential rejection test"],
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/migration_control/test_migration_control.py:21:CLEAN = READINESS_FIXTURES / "clean-synthetic-evidence-report.json"
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/migration_control/test_migration_control.py:22:REAL = READINESS_FIXTURES / "real-sanitized-evidence-report.json"
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/migration_control/test_migration_control.py:23:BLOCKER_RICH = Path("/tmp/one-p1-16h/run-1-report.json")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/migration_control/test_migration_control.py:182:            self.skipTest("blocker-rich synthetic report unavailable")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:30:OUTPUT_ROOT = Path("/tmp/one-p1-16m")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:86:    report_path = OUTPUT_ROOT / "setup" / f"{package_path.stem}-report.json"
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:87:    report_path.parent.mkdir(parents=True, exist_ok=True)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:88:    report = run_device_reconciliation_evidence(
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:91:        output_path=report_path,
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:95:    assessment = assess_readiness(report, policy, determinism_confirmed=True).serialize()
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:99:        evidence=report,
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:120:        self._case_dir = OUTPUT_ROOT / self.id().split(".")[-1]
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:337:        report_path = OUTPUT_ROOT / "setup" / "review-source-report.json"
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:338:        report_path.parent.mkdir(parents=True, exist_ok=True)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:339:        report = run_device_reconciliation_evidence(
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:342:            output_path=report_path,
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:346:        assessment = assess_readiness(report, policy, determinism_confirmed=True).serialize()
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:351:            evidence=report,
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:388:            "reconciliation-report.json",
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:432:        for token in ("sqlalchemy", "db.session", "create_app(", "@api_bp.route"):
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:441:    def test_no_api_routes_in_module(self) -> None:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:444:        self.assertNotIn("@api_bp.route", text)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:484:            "reconciliation-report.json",
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:69:        self.service = DeviceProjectionReconciliationService()
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:72:        return self.service.reconcile_batch(run_id, value or input_for())
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:75:        return self.service.reconcile_record("run", source or device(), ctx or context(), fields, version)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:96:        comparison = self.service.compare_runs(self.execute(run_id="a"), self.execute(run_id="b"))
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:126:        service = DeviceProjectionReconciliationService(ConstantIdFacade())
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:127:        run = service.reconcile_batch("run", input_for(devices=(device("a"), device("b"))))
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:150:        self.assertEqual(self.service.facade.project_device(device(status=0), context()).canonical_device.lifecycle_status, "ACTIVE")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:156:        self.assertEqual(self.service.facade.project_device(device(status=2), context()).canonical_device.operational_status, "DEGRADED")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:233:        self.assertTrue(self.service.compare_runs(left, right).mapping_version_changed)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:236:        self.assertTrue(self.service.compare_runs(self.execute(run_id="a"), self.execute(run_id="b")).identical_except_run_id)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:241:        self.assertEqual(self.service.compare_runs(left, right).projection_digests_changed, ("device-1",))
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:286:    def test_no_public_api_or_edge_runtime_dependency(self):
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:289:        for term in ("blueprint", "@api_bp.route", "src.uedge", "src.iot", "src.link", "src.ufms"):
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_device_projection_reconciliation.py:293:        self.assertIsInstance(self.service.facade, LegacyDeviceReadCompatibilityFacade)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_relationship_reporting.py:1:"""Tests for relationship evidence reporting clarity."""
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_relationship_reporting.py:35:    def _multi_site_report(self, run_id: str = "REL-METRICS-001") -> dict:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_relationship_reporting.py:44:            report = Path(directory) / "report.json"
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_relationship_reporting.py:50:                    "--report-output", str(report),
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_relationship_reporting.py:56:            return json.loads(report.read_text(encoding="utf-8"))
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_relationship_reporting.py:59:        report = self._multi_site_report()
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_relationship_reporting.py:60:        metrics = report["relationshipMetrics"]
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_relationship_reporting.py:71:        report = self._multi_site_report()
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_relationship_reporting.py:72:        metrics = report["relationshipMetrics"]
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_relationship_reporting.py:80:        report = self._multi_site_report()
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_relationship_reporting.py:81:        metrics = report["relationshipMetrics"]
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_relationship_reporting.py:89:        report = self._multi_site_report()
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_relationship_reporting.py:90:        metrics = report["relationshipMetrics"]
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_relationship_reporting.py:98:    def test_duplicate_has_point_pairs_reported_separately(self) -> None:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_relationship_reporting.py:99:        report = self._multi_site_report()
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_relationship_reporting.py:100:        metrics = report["relationshipMetrics"]
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_relationship_reporting.py:106:        report = self._multi_site_report()
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_relationship_reporting.py:107:        text = json.dumps(report["relationshipMetrics"])
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_relationship_reporting.py:112:        report = self._multi_site_report()
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_relationship_reporting.py:113:        summary = report["projectionSummary"]
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_relationship_reporting.py:118:            report["relationshipResults"]["relationshipResultCount"],
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_relationship_reporting.py:121:        self.assertIn("pass", report["relationshipResults"])
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_relationship_reporting.py:122:        self.assertIn("review", report["relationshipResults"])
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_relationship_reporting.py:126:            report = _run_evidence(SAMPLE, Path(directory) / "legacy.json", "REL-LEGACY-001")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_relationship_reporting.py:127:        metrics = report["relationshipMetrics"]
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_relationship_reporting.py:130:        self.assertEqual(report["projectionSummary"]["projectedRelationshipCount"], metrics["relationshipResultCount"])
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_relationship_reporting.py:133:        report1 = self._multi_site_report("REL-DET-001")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_relationship_reporting.py:134:        report2 = self._multi_site_report("REL-DET-001")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_relationship_reporting.py:135:        self.assertEqual(report1["relationshipMetrics"], report2["relationshipMetrics"])
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/readiness/test_readiness_semantics.py:19:CLEAN = FIXTURES / "clean-synthetic-evidence-report.json"
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/readiness/test_readiness_semantics.py:20:MULTI_SITE = Path("/tmp/one-p1-16h/run-1-report.json")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/readiness/test_readiness_semantics.py:129:            self.skipTest("multi-site synthetic report unavailable")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/readiness/test_readiness_semantics.py:149:            self.skipTest("multi-site synthetic report unavailable")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/readiness/test_readiness_semantics.py:158:            self.skipTest("multi-site synthetic report unavailable")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/readiness/test_readiness_semantics.py:168:            self.skipTest("multi-site synthetic report unavailable")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/readiness/test_readiness_semantics.py:186:            self.skipTest("multi-site synthetic report unavailable")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/readiness/test_readiness_gate.py:15:CLEAN = FIXTURES / "clean-synthetic-evidence-report.json"
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/readiness/test_readiness_gate.py:16:REAL = FIXTURES / "real-sanitized-evidence-report.json"
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/readiness/test_readiness_gate.py:17:MULTI_SITE = Path("/tmp/one-p1-16h/run-1-report.json")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/readiness/test_readiness_gate.py:64:        self.assertEqual(payload["decision"], "INPUT_REJECTED")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/readiness/test_readiness_gate.py:179:            self.skipTest("multi-site synthetic report unavailable")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/readiness/test_readiness_gate.py:186:            self.skipTest("multi-site synthetic report unavailable")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/readiness/test_readiness_gate.py:194:            self.skipTest("multi-site synthetic report unavailable")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_site_context.py:167:        report = self._run_package(package)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_site_context.py:168:        self.assertEqual(report["projectionSummary"]["projectedDeviceCount"], 1)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_site_context.py:178:        report = self._run_package(package)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_site_context.py:179:        self.assertEqual(report["projectionSummary"]["projectedDeviceCount"], 1)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_site_context.py:189:        report = self._run_package(package)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_site_context.py:190:        self.assertEqual(report["projectionSummary"]["projectedDeviceCount"], 0)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_site_context.py:191:        self.assertIn("SITE_SCOPE_MISMATCH", report["blockers"])
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_site_context.py:196:        report = self._run_package(package)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_site_context.py:197:        self.assertTrue(any("TENANT" in item for item in report["blockers"]))
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_site_context.py:227:        report = self._run_package(_base_package(), run_id="LEGACY-001")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_site_context.py:228:        self.assertEqual(report["scopeMetrics"]["scopeMode"], SINGLE_SITE_STRICT)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_site_context.py:229:        self.assertEqual(report["projectionSummary"]["projectedDeviceCount"], 1)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_site_context.py:243:        report = self._run_package(package)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_site_context.py:244:        metrics = report["scopeMetrics"]
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_site_context.py:251:    def test_deterministic_report_output(self) -> None:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_site_context.py:303:            report_path = Path(directory) / "report.json"
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_site_context.py:305:            report = run_device_reconciliation_evidence(
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_site_context.py:308:                output_path=report_path,
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_site_context.py:311:        self.assertIn("SITE_SCOPE_MISMATCH", report["blockers"])
+AN_VANTARIS_IBMS-backend/tests/asset_graph/airport_intake/test_formula_intake.py:63:        self.assertEqual(ctx.exception.code, "INPUT_REJECTED")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/airport_intake/test_formula_intake.py:122:    def test_day_not_umms_schedule_in_intake(self) -> None:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/airport_intake/test_formula_intake.py:166:    def test_no_db_provider_api_changes(self) -> None:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/airport_intake/test_airport_intake.py:43:FORBIDDEN_IMPORTS = ("sqlalchemy", "flask", "src.ufms", "src.umms", "src.Iot")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/airport_intake/test_airport_intake.py:137:    def test_sheet_zone_inconsistency_reported(self) -> None:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/airport_intake/test_airport_intake.py:242:    def test_ambiguous_day_reported(self) -> None:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/airport_intake/test_airport_intake.py:307:    def test_aggregate_report_excludes_identifiers(self) -> None:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/airport_intake/test_airport_intake.py:335:    def test_no_ufms_umms_runtime_imports(self) -> None:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/airport_intake/test_airport_intake.py:338:        self.assertNotIn("src.umms", text)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:54:OUTPUT_ROOT = Path("/tmp/one-p1-16n-tests")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:111:    report_path = OUTPUT_ROOT / "setup" / f"{package_path.stem}-report.json"
+AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:112:    report_path.parent.mkdir(parents=True, exist_ok=True)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:113:    report = run_device_reconciliation_evidence(
+AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:116:        output_path=report_path,
+AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:120:    assessment = assess_readiness(report, policy, determinism_confirmed=True).serialize()
+AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:124:        evidence=report,
+AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:144:        self._case_dir = OUTPUT_ROOT / self.id().split(".")[-1]
+AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:530:    def test_no_public_api_routes_in_read_model(self) -> None:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:533:        self.assertNotIn("@api_bp.route", text)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:534:        self.assertNotIn("Blueprint(", text)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:713:                {"artifacts": [{"relativePath": "reconciliation-report.json", "sha256": "x"}]},
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:54:from src.governance.audit.in_memory import InMemoryAuditProvider
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:58:CLEAN = READINESS_FIXTURES / "clean-synthetic-evidence-report.json"
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:59:REAL = READINESS_FIXTURES / "real-sanitized-evidence-report.json"
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:521:    def test_no_public_api_routes(self) -> None:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:524:        self.assertNotIn("@api_bp.route", text)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/test_airport_reconciliation_profile.py:740:        self.assertEqual(gates[0]["gateId"], "G01_INPUT_EVIDENCE_INTEGRITY")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/test_airport_reconciliation_profile.py:888:    def test_no_public_api_in_module(self) -> None:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/test_airport_review_projection.py:78:OUTPUT_ARTIFACTS = (
+AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/test_airport_review_projection.py:199:    def test_no_public_api_routes(self) -> None:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/test_airport_review_projection.py:202:        self.assertNotIn("@app.route", text)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/test_airport_review_projection.py:311:            for name in OUTPUT_ARTIFACTS:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/test_airport_review_projection.py:432:            for name in OUTPUT_ARTIFACTS:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/test_airport_review_projection.py:664:        for name in OUTPUT_ARTIFACTS:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/test_airport_spatial_profile.py:332:    def test_no_public_api_routes(self) -> None:
+AN_VANTARIS_IBMS-backend/README.md:33:If pip reports invalid requirements (UTF-16 encoding in `requirements.txt`), convert at install time without editing the repo file:
+AN_VANTARIS_IBMS-backend/README.md:69:curl -H "Authorization: Bearer $(cat /tmp/ibms-local-smoke-token.txt)" http://127.0.0.1:5001/api/system/menus
+AN_VANTARIS_IBMS-backend/README.md:81:brew services start mysql
+AN_VANTARIS_IBMS-backend/README.md:89:System read APIs (`GET /api/system/menus`, `/permissions`, `/versions`) require a disposable local MySQL instance.
+AN_VANTARIS_IBMS-backend/README.md:106:5. Run GET-only JWT smoke — see `docs/architecture/IBMS_DB_LOCAL_SMOKE_EXEC_A.md`.
+AN_VANTARIS_IBMS-backend/README.md:110:**PostgreSQL database URI (POSTGRES-CONFIG-ABSTRACTION-1)**
+AN_VANTARIS_IBMS-backend/README.md:121:See `docs/architecture/IBMS_POSTGRES_CONFIG_ABSTRACTION_1.md`.
+AN_VANTARIS_IBMS-backend/README.md:123:**PostgreSQL local install (POSTGRES-LOCAL-INSTALL-1)**
+AN_VANTARIS_IBMS-backend/README.md:129:brew services start postgresql@16
+AN_VANTARIS_IBMS-backend/README.md:134:See `docs/architecture/IBMS_POSTGRES_LOCAL_INSTALL_1.md`. No IBMS DB/user created in install task.
+AN_VANTARIS_IBMS-backend/README.md:136:**PostgreSQL local smoke result (POSTGRES-LOCAL-SMOKE-EXEC-1)**
+AN_VANTARIS_IBMS-backend/README.md:142:- GET `/api/system/menus`, `/api/system/permissions`, `/api/system/versions` returned 200 with valid dev JWT
+AN_VANTARIS_IBMS-backend/README.md:145:- See `docs/architecture/IBMS_POSTGRES_LOCAL_SMOKE_EXEC_1.md` and `docs/architecture/IBMS_POSTGRES_LOCAL_SMOKE_RESULTS_1.md`
+AN_VANTARIS_IBMS-backend/README.md:147:**PostgreSQL driver (POSTGRES-DEPS-PREP-1)**
+AN_VANTARIS_IBMS-backend/README.md:160:- See `docs/architecture/IBMS_POSTGRES_DEPS_PREP_1.md`
+AN_VANTARIS_IBMS-backend/README.md:162:**PostgreSQL migration framework baseline (POSTGRES-MIGRATION-FRAMEWORK-RECOVERY-1)**
+AN_VANTARIS_IBMS-backend/README.md:171:  - `docs/architecture/IBMS_POSTGRES_MIGRATION_FRAMEWORK_1.md`
+AN_VANTARIS_IBMS-backend/README.md:172:  - `docs/security/IBMS_POSTGRES_MIGRATION_FRAMEWORK_1_RISK_REVIEW.md`
+AN_VANTARIS_IBMS-backend/README.md:173:  - `docs/architecture/IBMS_POSTGRES_MIGRATION_FRAMEWORK_RECOVERY_1.md`
+AN_VANTARIS_IBMS-backend/scripts/seed_permissions.py:56:    "system:read": "Read system configuration and menus",
+AN_VANTARIS_IBMS-backend/scripts/seed_permissions.py:57:    "system:write": "Write system standard fields, methods, and menus",
+AN_VANTARIS_IBMS-backend/.idea/imbs-sysytem-backend.iml:6:      <sourceFolder url="file://$MODULE_DIR$/src/api" isTestSource="false" />
+AN_VANTARIS_IBMS-backend/src/testMQTT/testws.html:134:        const es = new EventSource(`http://localhost:5000/api/iot/device/${deviceCode}/stream`);
+AN_VANTARIS_IBMS-backend/src/testMQTT/testws.html:190:                const response = await fetch(`http://localhost:5000/api/iot/device/code/${deviceCode}/command`, {
+AN_VANTARIS_IBMS-backend/src/testMQTT/testws.html:191:                    method: 'POST',
+AN_VANTARIS_IBMS-backend/src/testMQTT/testws.html:228:                const response = await fetch(`http://localhost:5000/api/iot/device/code/${deviceCode}`);
+AN_VANTARIS_IBMS-backend/src/testMQTT/rtsp_simulator.py:55:RTP_TARGET_PORT = 5060
+AN_VANTARIS_IBMS-backend/src/testMQTT/rtsp_simulator.py:56:RTP_TARGET_ADDR = ('127.0.0.1', RTP_TARGET_PORT)
+AN_VANTARIS_IBMS-backend/src/testMQTT/rtsp_simulator.py:214:        print(f"[RTP] SETUP 请求，使用目标端口: {RTP_TARGET_PORT}")
+AN_VANTARIS_IBMS-backend/src/testMQTT/rtsp_simulator.py:217:            'Transport': f'RTP/AVP;unicast;client_port={RTP_TARGET_PORT}-{RTP_TARGET_PORT+1};server_port={RTP_TARGET_PORT+2}-{RTP_TARGET_PORT+3}',
+AN_VANTARIS_IBMS-backend/src/testMQTT/rtsp_simulator.py:252:            print(f"[RTP] 发送目标: {RTP_TARGET_ADDR[0]}:{RTP_TARGET_ADDR[1]}")
+AN_VANTARIS_IBMS-backend/src/testMQTT/rtsp_simulator.py:270:        print(f"[RTP] 直接发送到: {RTP_TARGET_ADDR[0]}:{RTP_TARGET_ADDR[1]}")
+AN_VANTARIS_IBMS-backend/src/testMQTT/rtsp_simulator.py:279:                client_addr = RTP_TARGET_ADDR
+AN_VANTARIS_IBMS-backend/src/testMQTT/rtsp_simulator.py:318:    def do_GET(self):
+AN_VANTARIS_IBMS-backend/src/testMQTT/rtsp_simulator.py:331:    def do_PUT(self):
+AN_VANTARIS_IBMS-backend/src/testMQTT/rtsp_simulator.py:346:        <DeviceCap version="2.0" xmlns="http://www.isapi.org/ver20/XMLSchema">
+AN_VANTARIS_IBMS-backend/src/testMQTT/rtsp_simulator.py:358:        <DeviceInfo version="2.0" xmlns="http://www.isapi.org/ver20/XMLSchema">
+AN_VANTARIS_IBMS-backend/src/testMQTT/rtsp_simulator.py:369:        <ChannelList version="2.0" xmlns="http://www.isapi.org/ver20/XMLSchema">
+AN_VANTARIS_IBMS-backend/src/testMQTT/rtsp_simulator.py:389:            "rtp_target_port": RTP_TARGET_PORT
+AN_VANTARIS_IBMS-backend/src/testMQTT/rtsp_simulator.py:398:def run_isapi_server(port: int = 80):
+AN_VANTARIS_IBMS-backend/src/testMQTT/rtsp_simulator.py:416:        print(f"[RTSP] RTP 目标端口: {RTP_TARGET_PORT}")
+AN_VANTARIS_IBMS-backend/src/testMQTT/rtsp_simulator.py:434:    print(f"RTP发送端口: {RTP_TARGET_PORT}")
+AN_VANTARIS_IBMS-backend/src/testMQTT/rtsp_simulator.py:468:    isapi_server = run_isapi_server(80)
+AN_VANTARIS_IBMS-backend/src/testMQTT/http_device_simulator.py:19:INGEST_URL = f"{IMBS_HOST}/api/iot/ingest/http"
+AN_VANTARIS_IBMS-backend/src/testMQTT/test_air_quality_receiver.py:220:        print("3. set_report_interval - 设置上报间隔")
+AN_VANTARIS_IBMS-backend/src/testMQTT/test_air_quality_receiver.py:243:            command = {"command": "set_report_interval", "value": int(interval)}
+AN_VANTARIS_IBMS-backend/src/testMQTT/test_air_quality_receiver.py:272:        client = mqtt.Client(callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
+AN_VANTARIS_IBMS-backend/src/testMQTT/air_quality_simulator.py:379:            elif cmd_type == 'set_report_interval':
+AN_VANTARIS_IBMS-backend/src/testMQTT/air_quality_simulator.py:595:        client = mqtt.Client(client_id=MQTT_CLIENT_ID, callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
+AN_VANTARIS_IBMS-backend/src/testMQTT/hvac_mqtt_simulator.py:335:        client = mqtt.Client(client_id=MQTT_CLIENT_ID, callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
+AN_VANTARIS_IBMS-backend/src/testMQTT/isup_simulator.py:542:    def _start_alarm_report(self):
+AN_VANTARIS_IBMS-backend/src/testMQTT/isup_simulator.py:606:        self._start_alarm_report()
+AN_VANTARIS_IBMS-backend/src/testMQTT/mock_isapi_camera.py:116:        @mjpeg_app.route('/mjpeg')
+AN_VANTARIS_IBMS-backend/src/testMQTT/mock_isapi_camera.py:121:        @mjpeg_app.route('/')
+AN_VANTARIS_IBMS-backend/src/testMQTT/mock_isapi_camera.py:140:@app.route('/ISAPI/System/capabilities', methods=['GET'])
+AN_VANTARIS_IBMS-backend/src/testMQTT/mock_isapi_camera.py:144:    <DeviceCap version="2.0" xmlns="http://www.isapi.org/ver20/XMLSchema">
+AN_VANTARIS_IBMS-backend/src/testMQTT/mock_isapi_camera.py:157:@app.route('/ISAPI/System/deviceInfo', methods=['GET'])
+AN_VANTARIS_IBMS-backend/src/testMQTT/mock_isapi_camera.py:161:    <DeviceInfo version="2.0" xmlns="http://www.isapi.org/ver20/XMLSchema">
+AN_VANTARIS_IBMS-backend/src/testMQTT/mock_isapi_camera.py:175:@app.route('/ISAPI/ContentMgmt/InputProxy/channels/status', methods=['GET'])
+AN_VANTARIS_IBMS-backend/src/testMQTT/mock_isapi_camera.py:190:    <ChannelList version="2.0" xmlns="http://www.isapi.org/ver20/XMLSchema">
+AN_VANTARIS_IBMS-backend/src/testMQTT/mock_isapi_camera.py:196:@app.route('/ISAPI/Streaming/channels/<path:channel_id>', methods=['GET'])
+AN_VANTARIS_IBMS-backend/src/testMQTT/mock_isapi_camera.py:201:    <StreamingChannel version="2.0" xmlns="http://www.isapi.org/ver20/XMLSchema">
+AN_VANTARIS_IBMS-backend/src/testMQTT/mock_isapi_camera.py:216:@app.route('/ISAPI/PTZCtrl/channels/<int:channel>/continuous', methods=['PUT'])
+AN_VANTARIS_IBMS-backend/src/testMQTT/mock_isapi_camera.py:252:@app.route('/ISAPI/PTZCtrl/channels/<int:channel>/presets', methods=['GET'])
+AN_VANTARIS_IBMS-backend/src/testMQTT/mock_isapi_camera.py:256:    <PresetList version="2.0" xmlns="http://www.isapi.org/ver20/XMLSchema">
+AN_VANTARIS_IBMS-backend/src/testMQTT/mock_isapi_camera.py:273:@app.route('/ISAPI/Event/notification/alertStream', methods=['GET'])
+AN_VANTARIS_IBMS-backend/src/testMQTT/mock_isapi_camera.py:295:@app.route('/ISAPI/Image/channels/<int:channel>/current', methods=['GET'])
+AN_VANTARIS_IBMS-backend/src/testMQTT/mock_isapi_camera.py:299:    <Image version="2.0" xmlns="http://www.isapi.org/ver20/XMLSchema">
+AN_VANTARIS_IBMS-backend/src/testMQTT/mock_isapi_camera.py:308:@app.route('/ISAPI/System/reboot', methods=['PUT'])
+AN_VANTARIS_IBMS-backend/src/testMQTT/mock_isapi_camera.py:316:@app.route('/health', methods=['GET'])
+AN_VANTARIS_IBMS-backend/src/testMQTT/mock_isapi_camera.py:327:@app.route('/snapshot', methods=['GET'])
+AN_VANTARIS_IBMS-backend/src/testMQTT/mock_isapi_camera.py:349:    print(f"   GET  /ISAPI/System/capabilities")
+AN_VANTARIS_IBMS-backend/src/testMQTT/mock_isapi_camera.py:350:    print(f"   GET  /ISAPI/ContentMgmt/InputProxy/channels/status")
+AN_VANTARIS_IBMS-backend/src/testMQTT/mock_isapi_camera.py:351:    print(f"   PUT  /ISAPI/PTZCtrl/channels/1/continuous")
+AN_VANTARIS_IBMS-backend/src/testMQTT/mock_isapi_camera.py:352:    print(f"   GET  /ISAPI/Event/notification/alertStream")
+AN_VANTARIS_IBMS-backend/src/testMQTT/mock_isapi_camera.py:371:    require_simulator_enabled("mock_isapi_camera")
+AN_VANTARIS_IBMS-backend/src/uesg/uesg_provider.py:59:        "provider": "local-uesg-provider",
+AN_VANTARIS_IBMS-backend/src/uesg/uesg_provider.py:105:        "No certification reporting.",
+AN_VANTARIS_IBMS-backend/src/uesg/uesg_provider.py:121:            source_record_id="uesg-energy-electricity-monthly",
+AN_VANTARIS_IBMS-backend/src/uesg/uesg_provider.py:123:            metadata={"stage": "uesg-r1"},
+AN_VANTARIS_IBMS-backend/src/uesg/uesg_provider.py:139:            source_record_id="uesg-energy-chiller-electricity",
+AN_VANTARIS_IBMS-backend/src/uesg/uesg_provider.py:141:            metadata={"stage": "uesg-r1"},
+AN_VANTARIS_IBMS-backend/src/uesg/uesg_provider.py:157:            source_record_id="uesg-carbon-location-estimate",
+AN_VANTARIS_IBMS-backend/src/uesg/uesg_provider.py:159:            metadata={"stage": "uesg-r1"},
+AN_VANTARIS_IBMS-backend/src/uesg/uesg_provider.py:175:            source_record_id="uesg-water-consumption-monthly",
+AN_VANTARIS_IBMS-backend/src/uesg/uesg_provider.py:177:            metadata={"stage": "uesg-r1"},
+AN_VANTARIS_IBMS-backend/src/uesg/uesg_provider.py:193:            source_record_id="uesg-waste-general-monthly",
+AN_VANTARIS_IBMS-backend/src/uesg/uesg_provider.py:195:            metadata={"stage": "uesg-r1"},
+AN_VANTARIS_IBMS-backend/src/uesg/uesg_provider.py:211:            source_record_id="uesg-indoor-environment-score",
+AN_VANTARIS_IBMS-backend/src/uesg/uesg_provider.py:213:            metadata={"stage": "uesg-r1"},
+AN_VANTARIS_IBMS-backend/src/uesg/uesg_provider.py:290:        "reportReadyMetrics": 0,
+AN_VANTARIS_IBMS-backend/src/uesg/uesg_provider.py:394:                    "No certification reporting.",
+AN_VANTARIS_IBMS-backend/src/uesg/uesg_provider.py:560:            "No data quality governance workflow.",
+AN_VANTARIS_IBMS-backend/src/uesg/uesg_provider.py:587:def get_uesg_health() -> Dict[str, Any]:
+AN_VANTARIS_IBMS-backend/src/uesg/uesg_provider.py:591:        "provider": "local-uesg-provider",
+AN_VANTARIS_IBMS-backend/src/uesg/uesg_service.py:1:"""UESG sustainability service (read-only runtime skeleton)."""
+AN_VANTARIS_IBMS-backend/src/uesg/uesg_service.py:7:from src.uesg.uesg_provider import (
+AN_VANTARIS_IBMS-backend/src/uesg/uesg_service.py:17:    get_uesg_health,
+AN_VANTARIS_IBMS-backend/src/uesg/uesg_service.py:23:    MODULE_ID = "uesg"
+AN_VANTARIS_IBMS-backend/src/uesg/uesg_service.py:25:    PROVIDER = "local-uesg-provider"
+AN_VANTARIS_IBMS-backend/src/uesg/uesg_service.py:29:    def get_uesg_health(self) -> Dict[str, Any]:
+AN_VANTARIS_IBMS-backend/src/uesg/uesg_service.py:30:        health = get_uesg_health()
+AN_VANTARIS_IBMS-backend/src/uesg/uesg_service.py:66:            "Meter integration, carbon factor database, EDGE/LINK integration and certification reporting are not integrated.",
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:2:from .did_service import DIDService
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:27:# ├── did_service.py
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:54:# - did_service.py : 核心业务服务类
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:91:# did_service = DIDService(db.session, bc, contract)
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:94:# result = did_service.init_system_entity()
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:99:# entity_result = did_service.create_sub_entity_with_vc(
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:112:# challenge = did_service.generate_challenge()
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:113:# vp = did_service.create_vp_for_holder(
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:120:# valid, subject_info = did_service.verify_and_extract_vp(vp, challenge)
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:123:# subordinates = did_service.get_direct_subordinates(system_did)
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:126:# has_permission = did_service.check_permission(property_did, "device:control")
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:129:# did_service.revoke_vc(vc_id=property_vc["id"], revoked_by_did=system_did)
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:132:# new_result = did_service.revoke_and_reissue_vc(
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:142:# 所有API通过 /api/did 前缀访问：
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:145:# /system/init	POST	系统初始化（幂等）	否
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:146:# /entity	POST	创建下级实体并签发VC	是
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:147:# /vp/generate	POST	生成VP	是
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:148:# /vp/verify	POST	验证VP并提取信息	否
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:149:# /vc/reissue	POST	吊销并重新签发VC	是
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:150:# /vc/revoke	POST	撤销VC	是
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:151:# /vc/status	POST	VC状态检查	否
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:152:# /challenge	GET	获取挑战码	否
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:153:# /subordinates/direct	GET	查询直接下级	否
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:154:# /subordinates/tree	GET	查询下级树	否
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:155:# /subordinates/flat	GET	查询后代平铺列表	否
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:156:# /entity/<did>	GET	查询实体信息	否
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:157:# /login	POST	登录（Challenge/VP）	否
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:158:# /me	GET	获取当前用户信息	是
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:159:# /chain/entity-hash/<did>	GET	查询链上实体哈希	否
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:160:# /chain/vc-hash/<vc_id>	GET	查询链上VC哈希	否
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:161:# /chain/events	GET	获取合约事件	否
+AN_VANTARIS_IBMS-backend/src/DID/__init__.py:162:# /verify/entity/<did>	GET	核对实体信息与链上哈希	否
+AN_VANTARIS_IBMS-backend/src/DID/did_service.py:1:# src/DID/did_service.py
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:12:LATEST_UMMS_PACKAGE_UCONSOLE_TAG = "umms-package-uconsole-stakeholder-entry-readiness-local-freeze-20260621"
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:14:PACKAGE_ENTRY_REGISTRY = "AN_VANTARIS_ONE/registries/umms-package-uconsole-stakeholder-entry-readiness.v1.json"
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:15:LOCAL_FREEZE_REGISTRY = "AN_VANTARIS_ONE/registries/umms-package-uconsole-stakeholder-entry-local-freeze.v1.json"
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:16:STAKEHOLDER_REVIEW_REGISTRY = "AN_VANTARIS_ONE/registries/umms-stakeholder-review-package.v1.json"
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:55:def _readonly_api_guard() -> Dict[str, Any]:
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:81:    guarded.update(_readonly_api_guard())
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:111:    source_system: str = "local-umms-provider",
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:140:        "provider": "local-umms-provider",
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:152:        "metadata": {"stage": "umms-r1"},
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:189:            source_record_id="umms-r1-wo-001",
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:212:            source_record_id="umms-r1-wo-002",
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:218:            description="Corrective maintenance skeleton for reported pump vibration.",
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:235:            source_system="local-umms-provider",
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:236:            source_record_id="umms-r1-wo-003",
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:259:            source_record_id="umms-r1-wo-004",
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:282:            source_record_id="umms-r1-wo-005",
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:305:            source_record_id="umms-r1-wo-006",
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:466:def get_umms_health() -> Dict[str, Any]:
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:469:        "moduleId": "umms",
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:472:        "provider": "local-umms-provider",
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:488:def get_umms_package_entry_projection() -> Dict[str, Any]:
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:496:            "projection": "umms_package_entry",
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:497:            "packageId": package_entry.get("packageId", "umms"),
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:509:def get_umms_stakeholder_review_projection() -> Dict[str, Any]:
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:517:            "projection": "umms_stakeholder_review",
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:518:            "reviewPackageId": stakeholder_registry.get("reviewPackageId", "umms-stakeholder-review-package.v1"),
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:529:            "readinessChain": deepcopy(package_registry.get("ummsReadinessChainReference", [])),
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:541:def get_umms_readiness_summary_projection() -> Dict[str, Any]:
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:547:            "projection": "umms_readiness_summary",
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:548:            "readinessStages": deepcopy(registry.get("ummsReadinessChainReference", [])),
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:549:            "source": _source_descriptor("ummsReadinessChainReference", PACKAGE_ENTRY_REGISTRY),
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:554:def get_umms_customer_core_functions_projection() -> Dict[str, Any]:
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:571:            "projection": "umms_customer_core_functions",
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:579:def get_umms_safety_posture_projection() -> Dict[str, Any]:
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:582:    safety.update(_readonly_api_guard())
+AN_VANTARIS_IBMS-backend/src/umms/umms_provider.py:587:            "projection": "umms_safety_posture",
+AN_VANTARIS_IBMS-backend/src/umms/umms_service.py:1:"""UMMS maintenance service (read-only runtime skeleton)."""
+AN_VANTARIS_IBMS-backend/src/umms/umms_service.py:7:from src.umms.umms_provider import (
+AN_VANTARIS_IBMS-backend/src/umms/umms_service.py:10:    get_umms_health,
+AN_VANTARIS_IBMS-backend/src/umms/umms_service.py:11:    get_umms_customer_core_functions_projection,
+AN_VANTARIS_IBMS-backend/src/umms/umms_service.py:12:    get_umms_package_entry_projection,
+AN_VANTARIS_IBMS-backend/src/umms/umms_service.py:13:    get_umms_readiness_summary_projection,
+AN_VANTARIS_IBMS-backend/src/umms/umms_service.py:14:    get_umms_safety_posture_projection,
+AN_VANTARIS_IBMS-backend/src/umms/umms_service.py:15:    get_umms_stakeholder_review_projection,
+AN_VANTARIS_IBMS-backend/src/umms/umms_service.py:23:    MODULE_ID = "umms"
+AN_VANTARIS_IBMS-backend/src/umms/umms_service.py:25:    PROVIDER = "local-umms-provider"
+AN_VANTARIS_IBMS-backend/src/umms/umms_service.py:29:    def get_umms_health(self) -> Dict[str, Any]:
+AN_VANTARIS_IBMS-backend/src/umms/umms_service.py:30:        return get_umms_health()
+AN_VANTARIS_IBMS-backend/src/umms/umms_service.py:70:        return get_umms_package_entry_projection()
+AN_VANTARIS_IBMS-backend/src/umms/umms_service.py:73:        return get_umms_stakeholder_review_projection()
+AN_VANTARIS_IBMS-backend/src/umms/umms_service.py:76:        return get_umms_readiness_summary_projection()
+AN_VANTARIS_IBMS-backend/src/umms/umms_service.py:79:        return get_umms_customer_core_functions_projection()
+AN_VANTARIS_IBMS-backend/src/umms/umms_service.py:82:        return get_umms_safety_posture_projection()
+AN_VANTARIS_IBMS-backend/src/tests/did_signature.py:78:    f'''curl -X POST "http://localhost:5000/api/did/login" \\
+AN_VANTARIS_IBMS-backend/src/tests/test_modeling_api.py:2:文件路径: tests/test_modeling_api.py
+AN_VANTARIS_IBMS-backend/src/tests/test_modeling_api.py:17:        from src.api.data_modeling.modeling_api import modeling_bp
+AN_VANTARIS_IBMS-backend/src/tests/test_modeling_api.py:25:        response = self.client.get('/api/ai/device/test_did/config')
+AN_VANTARIS_IBMS-backend/src/tests/test_modeling_api.py:33:        response = self.client.put('/api/ai/device/test_did/config', json={
+AN_VANTARIS_IBMS-backend/src/tests/test_modeling_api.py:44:        response = self.client.get('/api/ai/device/test_did/fields')
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_integration_pilot.py:1:"""Focused route tests for the Governance Audit Integration Pilot."""
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_integration_pilot.py:10:from src.api.system import menu_api
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_integration_pilot.py:11:from src.governance.audit import (
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_integration_pilot.py:17:from src.governance.audit.pilot import install_pilot_audit_service
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_integration_pilot.py:57:            "/api/system/versions",
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_integration_pilot.py:58:            method="POST",
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_integration_pilot.py:68:            install_pilot_audit_service(AuditService(provider))
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_integration_pilot.py:69:            with patch.object(menu_api, "db", fake_db):
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_integration_pilot.py:70:                response, status = menu_api.create_version.__wrapped__()
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_integration_pilot.py:86:        self.assertEqual(record.route_id, "ROUTE-POST-C39FFBE9F5DC")
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_integration_pilot.py:144:    def test_no_reports_jsonl_write(self):
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:10:from src.governance.audit import (
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:28:        "service_identity_id": None,
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:35:        "route_id": "ROUTE-PATCH-ASSET",
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:102:        service = make_record(actor_type="SERVICE_IDENTITY", actor_id=None, service_identity_id=None)
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:103:        with self.assertRaisesRegex(AuditValidationError, "service_identity_id"):
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:104:            AuditService(InMemoryAuditProvider()).emit(service)
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:125:        self.service = AuditService(self.provider)
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:128:        result = self.service.emit(make_record())
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:134:        first = self.service.emit(make_record())
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:135:        second = self.service.emit(make_record())
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:141:        self.service.emit(make_record())
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:142:        result = self.service.emit(make_record(action="asset.retire"))
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:149:        self.service.emit(record)
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:150:        self.assertEqual(self.service.get_by_id(record.audit_id), record)
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:153:        self.service.emit(make_record(audit_id="a-1", tenant_id="tenant-1"))
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:154:        self.service.emit(make_record(audit_id="a-2", tenant_id="tenant-2"))
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:155:        result = self.service.query(AuditQuery(tenant_id="tenant-1"))
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:159:        self.service.emit(make_record(audit_id="a-1", site_id="site-1"))
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:160:        self.service.emit(make_record(audit_id="a-2", site_id="site-2"))
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:161:        result = self.service.query(AuditQuery(tenant_id="tenant-001", site_id="site-2"))
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:165:        self.service.emit(make_record(audit_id="a-1"))
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:166:        self.service.emit(make_record(
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:169:        result = self.service.query(AuditQuery(
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:175:        self.service.emit(make_record(audit_id="a-1", correlation_id="flow-1"))
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:176:        self.service.emit(make_record(audit_id="a-2", correlation_id="flow-2"))
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:177:        result = self.service.query(AuditQuery(
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:184:        self.service.emit(make_record(audit_id="b", occurred_at=time))
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:185:        self.service.emit(make_record(audit_id="a", occurred_at=time))
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:186:        self.service.emit(make_record(audit_id="c", occurred_at=time + timedelta(seconds=1)))
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:187:        result = self.service.query(AuditQuery(tenant_id="tenant-001"))
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:192:            self.service.emit(make_record(
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:196:        first = self.service.query(AuditQuery(tenant_id="tenant-001", limit=2))
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:199:        second = self.service.query(AuditQuery(
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:204:            self.service.query(AuditQuery(tenant_id="tenant-001", limit=101))
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:208:            self.service.query(AuditQuery())
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:210:            self.service.query(AuditQuery(platform_query=True)).records,
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:215:        service = AuditService(FailingProvider())
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:216:        result = service.emit(make_record())
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:224:            self.service.emit(make_record())
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:225:            self.service.query(AuditQuery(tenant_id="tenant-001"))
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:229:        self.service.emit(make_record())
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:231:        self.assertIsNone(self.service.get_by_id("audit-001"))
+AN_VANTARIS_IBMS-backend/src/tests/test_reports_api.py:7:from src.api import api_bp
+AN_VANTARIS_IBMS-backend/src/tests/test_reports_api.py:13:        app.register_blueprint(api_bp)
+AN_VANTARIS_IBMS-backend/src/tests/test_reports_api.py:17:        response = self.client.get("/api/v1/reports/health")
+AN_VANTARIS_IBMS-backend/src/tests/test_reports_api.py:23:        response = self.client.get("/api/v1/reports/catalog")
+AN_VANTARIS_IBMS-backend/src/tests/test_reports_api.py:29:        response = self.client.get("/api/v1/reports/catalog/incident-summary")
+AN_VANTARIS_IBMS-backend/src/tests/test_reports_api.py:32:        self.assertEqual(payload["data"]["reportId"], "incident-summary")
+AN_VANTARIS_IBMS-backend/src/tests/test_reports_api.py:36:            "/api/v1/reports/query",
+AN_VANTARIS_IBMS-backend/src/tests/test_reports_api.py:37:            json={"reportId": "event-trend", "limit": 5, "filters": {"moduleId": "source-reference"}},
+AN_VANTARIS_IBMS-backend/src/tests/test_reports_api.py:48:        self.assertEqual(payload["data"]["audit"]["auditEventType"], "report.query")
+AN_VANTARIS_IBMS-backend/src/tests/test_reports_api.py:56:    def test_query_invalid_report_id(self):
+AN_VANTARIS_IBMS-backend/src/tests/test_reports_api.py:57:        response = self.client.post("/api/v1/reports/query", json={"reportId": "unknown-report"})
+AN_VANTARIS_IBMS-backend/src/tests/test_reports_api.py:60:        self.assertEqual(payload["message"], "reportId not found")
+AN_VANTARIS_IBMS-backend/src/tests/test_reports_api.py:64:            "/api/v1/reports/export/manifest",
+AN_VANTARIS_IBMS-backend/src/tests/test_reports_api.py:66:                "reportId": "incident-summary",
+AN_VANTARIS_IBMS-backend/src/tests/test_reports_api.py:91:    def test_export_manifest_preview_invalid_report_id(self):
+AN_VANTARIS_IBMS-backend/src/tests/test_reports_api.py:93:            "/api/v1/reports/export/manifest",
+AN_VANTARIS_IBMS-backend/src/tests/test_reports_api.py:95:                "reportId": "unknown-report",
+AN_VANTARIS_IBMS-backend/src/tests/test_reports_api.py:105:            "/api/v1/reports/query",
+AN_VANTARIS_IBMS-backend/src/tests/test_reports_api.py:106:            json={"reportId": "incident-summary", "limit": 1, "filters": {"moduleId": "source-reference"}},
+AN_VANTARIS_IBMS-backend/src/tests/test_reports_api.py:108:        response = self.client.get("/api/v1/reports/audit?limit=20")
+AN_VANTARIS_IBMS-backend/src/tests/test_reports_api.py:116:        response = self.client.get("/api/v1/reports/audit/not-found")
+AN_VANTARIS_IBMS-backend/src/tests/test_reports_api.py:121:            "/api/v1/reports/query",
+AN_VANTARIS_IBMS-backend/src/tests/test_reports_api.py:122:            json={"reportId": "incident-summary", "limit": 1, "filters": {"moduleId": "source-reference"}},
+AN_VANTARIS_IBMS-backend/src/tests/test_reports_api.py:125:            "/api/v1/reports/query",
+AN_VANTARIS_IBMS-backend/src/tests/test_reports_api.py:126:            json={"reportId": "event-trend", "limit": 1, "filters": {"moduleId": "source-reference"}},
+AN_VANTARIS_IBMS-backend/src/tests/test_reports_api.py:128:        response = self.client.get("/api/v1/reports/audit/verify")
+AN_VANTARIS_IBMS-backend/src/tests/test_reports_api.py:137:        response = self.client.get("/api/v1/reports/audit/retention-policy")
+AN_VANTARIS_IBMS-backend/src/data_modeling/service.py:2:文件路径: src/data_modeling/service.py
+AN_VANTARIS_IBMS-backend/src/data_modeling/service.py:223:service = ModelingService()
+AN_VANTARIS_IBMS-backend/src/data_modeling/__init__.py:8:from src.data_modeling.service import ModelingService
+AN_VANTARIS_IBMS-backend/src/data_modeling/predictors/__init__.py:5:# 此文件为空，预测器通过 service.py 动态导入
+AN_VANTARIS_IBMS-backend/src/data_modeling/predictors/template_predictor.py:6:方法签名必须保持一致，否则 service 层无法正确调用
+AN_VANTARIS_IBMS-backend/src/data_modeling/predictors/hvac_sim_001.py:7:注意: 此模块不接收 device_code 参数，由 service 层根据设备号定位到此模块
+AN_VANTARIS_IBMS-backend/src/data_modeling/predictors/hvac_sim_001.py:246:    url = "https://archive-api.open-meteo.com/v1/archive"
+AN_VANTARIS_IBMS-backend/src/data_modeling/predictors/hvac_sim_001.py:276:    url = "https://api.open-meteo.com/v1/forecast"
+AN_VANTARIS_IBMS-backend/src/data_modeling/predictors/hvac_sim_001.py:523:# ==================== 主入口函数（供 service 调用） ====================
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isapi_driver.py:1:# src/Iot/drivers/isapi_driver.py
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isapi_driver.py:22:from src.api.iot.sse_api import push_to_device
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isapi_driver.py:29:        super().__init__("isapi")
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isapi_driver.py:147:            if method == 'GET':
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isapi_driver.py:149:            elif method == 'POST':
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isapi_driver.py:151:            elif method == 'PUT':
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isapi_driver.py:172:            result = self._request(device_did, 'GET', '/ISAPI/ContentMgmt/InputProxy/channels/status')
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isapi_driver.py:331:        return self._request(device_did, 'GET', '/ISAPI/System/capabilities')
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isapi_driver.py:335:        result = self._request(device_did, 'GET', '/ISAPI/ContentMgmt/InputProxy/channels/status')
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isapi_driver.py:388:        <PTZData version="2.0" xmlns="http://www.isapi.org/ver20/XMLSchema">
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isapi_driver.py:394:        return self._request(device_did, 'PUT', endpoint, xml_body)
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isapi_driver.py:398:        return self._request(device_did, 'GET', '/ISAPI/Event/notification/alertStream')
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/rtsp_driver.py:18:from src.api.iot.sse_api import push_to_device
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/http_driver.py:29:        2. 主动上报模式：不需要 base_url，设备主动 POST 数据到 /ingest/http
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/http_driver.py:79:        http_method = command.get('http_method', 'POST')
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/http_driver.py:89:            if http_method.upper() == 'GET':
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/http_driver.py:91:            elif http_method.upper() == 'PUT':
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/http_driver.py:93:            elif http_method.upper() == 'DELETE':
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/mqtt_driver.py:50:            client = mqtt.Client(client_id=client_id, callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isup_driver.py:314:                            self._handle_data_report(device_did, payload)
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isup_driver.py:324:                            self._handle_status_report(device_did, payload)
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isup_driver.py:526:    def _handle_data_report(self, device_did: str, payload: Dict):
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isup_driver.py:529:        logger.info(f"[ISUP] _handle_data_report: device_did={device_did}, payload_keys={list(payload.keys())}")
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isup_driver.py:540:            from src.api.iot.sse_api import push_to_device
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isup_driver.py:579:        from src.api.iot.sse_api import push_to_device
+AN_VANTARIS_IBMS-backend/src/Iot/drivers/isup_driver.py:600:    def _handle_status_report(self, device_did: str, payload: Dict):
+AN_VANTARIS_IBMS-backend/src/Iot/command_converters/__init__.py:90:            'endpoint': http_config.get('endpoint', f'/api/{method}'),
+AN_VANTARIS_IBMS-backend/src/Iot/command_converters/__init__.py:91:            'http_method': http_config.get('method', 'POST'),
+AN_VANTARIS_IBMS-backend/src/Iot/device_manager.py:12:from src.api.iot.sse_api import push_to_device
+AN_VANTARIS_IBMS-backend/src/Iot/services/field_service.py:1:# src/iot/services/field_service.py
+AN_VANTARIS_IBMS-backend/src/Iot/services/data_service.py:1:# src/Iot/services/data_service.py
+AN_VANTARIS_IBMS-backend/src/Iot/services/method_service.py:1:# src/iot/services/method_service.py
+AN_VANTARIS_IBMS-backend/src/Iot/services/device_service.py:1:# src/Iot/services/device_service.py
+AN_VANTARIS_IBMS-backend/src/asset_graph/compatibility/models.py:17:    r"(password|private.?key|secret|credential|token|api.?key|authorization|"
+AN_VANTARIS_IBMS-backend/src/asset_graph/compatibility/models.py:24:    r"api[_-]?key\s*[=:]|://[^/\s:]+:[^@\s]+@)",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/runner.py:24:from src.asset_graph.reconciliation.relationship_reporting import collect_relationship_metrics
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/runner.py:92:    r"(password|secret|token|bearer|api[_-]?key|private[_-]?key|credential|mqtt|opc|"
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/runner.py:99:    r"[a-z]+:\/\/[^\/\s:@]+:[^@\s]+@|password\s*[:=]|token\s*[:=]|api[_-]?key\s*[:=])",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/runner.py:440:def _cutover_decision(blockers: list[str], reviews: list[str], service_decision: str) -> str:
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/runner.py:455:    if service_decision == "READY_FOR_READ_MIGRATION":
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/runner.py:460:def _report_digest_material(report: Mapping[str, Any]) -> Mapping[str, Any]:
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/runner.py:461:    result = dict(report)
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/runner.py:504:    service = DeviceProjectionReconciliationService(facade=facade)
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/runner.py:505:    run = service.reconcile_batch(run_id=run_id, reconciliation_input=reconciliation_input)
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/runner.py:534:    report = {
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/runner.py:596:    report["resultDigest"] = sha256_digest(_report_digest_material(report))
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/runner.py:597:    output_path.write_text(json.dumps(report, indent=2, sort_keys=True, ensure_ascii=False) + "\n", encoding="utf-8")
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/runner.py:598:    if fail_on_blocker and report["blockers"]:
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/runner.py:600:    if fail_on_review and report["reviews"]:
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/runner.py:602:    return report
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/runner.py:605:def compare_evidence_reports(
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/excel/validator.py:24:    r"(password|secret|token|bearer|api[_-]?key|private[_-]?key|credential|telemetry|"
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/excel/intake.py:156:    report_output: Optional[Path] = None,
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/excel/intake.py:177:    report_path = report_output or json_output.with_name(json_output.stem + "-report.json")
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/excel/intake.py:178:    report = run_device_reconciliation_evidence(
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/excel/intake.py:181:        output_path=report_path,
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/excel/intake.py:186:    cutover = report.get("cutoverDecision", WRITE_CUTOVER_STATUS)
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/excel/intake.py:198:        "reconciliationReportPath": str(report_path),
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/excel/intake.py:199:        "reconciliationSummary": report.get("reconciliationSummary"),
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/excel/intake.py:200:        "projectionSummary": report.get("projectionSummary"),
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/excel/intake.py:201:        "blockers": report.get("blockers"),
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/excel/intake.py:202:        "reviews": report.get("reviews"),
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/excel/intake.py:204:        "resultDigest": report.get("resultDigest"),
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/excel/intake.py:210:        return False, "MISSING_OUTPUT"
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/__init__.py:7:    compare_evidence_reports,
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/__init__.py:22:    "compare_evidence_reports",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/migration_control/evaluator.py:48:    if control_input.readiness_decision in {"NOT_READY", "INPUT_REJECTED", "UNKNOWN"}:
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/relationship_reporting.py:1:"""Aggregate-only relationship evidence metrics for reconciliation reports."""
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/material.py:56:    service = DeviceProjectionReconciliationService(facade=LegacyDeviceReadCompatibilityFacade())
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/material.py:57:    run = service.reconcile_batch(run_id=run_id, reconciliation_input=reconciliation_input)
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/pre_execution.py:151:            "OUTPUT_LOCATION_POLICY_GATE",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/artifacts.py:25:    reconciliation_report: Mapping[str, Any],
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/artifacts.py:41:        "reconciliationStatus": reconciliation_report.get("status"),
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/artifacts.py:49:    reconciliation_report: Mapping[str, Any],
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/artifacts.py:56:        "reconciliation-report.json": reconciliation_report,
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/artifacts.py:61:            reconciliation_report=reconciliation_report,
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/executor.py:69:    reconciliation_report: Mapping[str, Any],
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/executor.py:72:    if readiness_assessment.get("decision") in {"NOT_READY", "INPUT_REJECTED"}:
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/executor.py:74:    if reconciliation_report.get("blockers"):
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/executor.py:77:    if review_count > 0 or reconciliation_report.get("reviews"):
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/executor.py:111:                gate_code="OUTPUT_LOCATION_POLICY_GATE",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/executor.py:133:    reconciliation_path = output_dir / "reconciliation-report.json"
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/executor.py:135:        reconciliation_report = run_device_reconciliation_evidence(
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/executor.py:153:    if reconciliation_report.get("resultDigest") != request.evidence_digest:
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/executor.py:159:                observed_value=str(reconciliation_report.get("resultDigest", "")),
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/executor.py:167:        reconciliation_report,
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/executor.py:172:    validation_outcome = _validation_outcome(reconciliation_report, readiness_assessment)
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/executor.py:201:        "projectionCounts": reconciliation_report.get("projectionSummary", {}),
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/executor.py:202:        "relationshipMetrics": reconciliation_report.get("relationshipMetrics", {}),
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/executor.py:238:        reconciliation_report=reconciliation_report,
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/engine.py:25:    r"(password|private.?key|secret|credential|token|api.?key|authorization|"
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/readiness/assessor.py:25:        return "INPUT_REJECTED"
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/readiness/assessor.py:27:        return "INPUT_REJECTED"
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/intake.py:196:            "INPUT_REJECTED",
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/intake.py:201:            "INPUT_REJECTED",
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/intake.py:903:        return False, "MISSING_OUTPUT"
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/constants.py:111:        "INPUT_REJECTED",
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/constants.py:127:    ("CREDENTIAL", r"(?i)(password|passwd|pwd\s*[:=]|api[_-]?key|secret[_-]?key|token\s*[:=])"),
+AN_VANTARIS_IBMS-backend/src/asset_graph/read_model/builder.py:195:    reconciliation = json.loads((output_dir / "reconciliation-report.json").read_text(encoding="utf-8"))
+AN_VANTARIS_IBMS-backend/src/asset_graph/read_model/activation.py:58:    reconciliation_path = output_dir / "reconciliation-report.json"
+AN_VANTARIS_IBMS-backend/src/asset_graph/read_model/activation.py:66:        raise ReadModelError("evidence digest mismatch against reconciliation report")
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:7:from src.governance.audit.models import AuditEmissionResult
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/audit.py:8:from src.governance.audit.models import AuditEmissionResult, AuditRecord
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/audit.py:76:        service_identity_id=CONTRACT_AUTHORITY,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/audit.py:83:        route_id=None,
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_reconciliation/mapper.py:43:        return False, "MISSING_OUTPUT"
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_reconciliation/constants.py:69:    "G01_INPUT_EVIDENCE_INTEGRITY",
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_reconciliation/gates.py:46:    add("G01_INPUT_EVIDENCE_INTEGRITY", "PASS", "All upstream artifact authorities and digests verified")
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_classification/mapper.py:32:        return False, "MISSING_OUTPUT"
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_spatial/mapper.py:42:        return False, "MISSING_OUTPUT"
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_review_projection/mapper.py:43:        return False, "MISSING_OUTPUT"
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_review_projection/constants.py:46:    "G01_INPUT_EVIDENCE_INTEGRITY",
+AN_VANTARIS_IBMS-backend/src/blockchain/__init__.py:21:from .mining_controller import MiningScheduler
+AN_VANTARIS_IBMS-backend/src/blockchain/account.py:12:    - 创建和解锁账户需要 Geth 节点启用 personal API，并在启动参数中添加 --http.api personal
+AN_VANTARIS_IBMS-backend/src/system/menu_models.py:1:# src/system/menu_models.py
+AN_VANTARIS_IBMS-backend/src/system/menu_models.py:32:    __tablename__ = 'sys_menu'
+AN_VANTARIS_IBMS-backend/src/system/menu_models.py:36:    menu_path = Column(String(200), nullable=False, unique=True, comment='菜单路径/唯一标识')
+AN_VANTARIS_IBMS-backend/src/system/menu_models.py:37:    menu_title = Column(String(100), nullable=False, comment='菜单标题')
+AN_VANTARIS_IBMS-backend/src/system/menu_models.py:38:    menu_icon = Column(String(50), nullable=True, comment='图标名称')
+AN_VANTARIS_IBMS-backend/src/system/menu_models.py:39:    menu_type = Column(String(20), default='menu', comment='菜单类型: menu-可点击跳转, container-仅作为容器不可点击')
+AN_VANTARIS_IBMS-backend/src/system/menu_models.py:56:    __tablename__ = 'sys_version_menu'
+AN_VANTARIS_IBMS-backend/src/system/menu_models.py:60:    menu_id = Column(BigInteger, nullable=False, comment='菜单ID')
+AN_VANTARIS_IBMS-backend/src/system/menu_models.py:61:    menu_path = Column(String(200), nullable=False, comment='菜单路径（冗余字段）')
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:1:# src/system/menu_dao.py
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:5:from src.system.menu_models import SysVersion, SysMenu, SysVersionMenu
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:56:        menu = SysMenu(**kwargs)
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:57:        session.add(menu)
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:59:        return menu
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:62:    def update(session: Session, menu: SysMenu, **kwargs) -> SysMenu:
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:64:            if hasattr(menu, key) and value is not None:
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:65:                setattr(menu, key, value)
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:67:        return menu
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:70:    def delete(session: Session, menu: SysMenu):
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:71:        session.delete(menu)
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:75:    def get_by_id(session: Session, menu_id: int) -> Optional[SysMenu]:
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:76:        return session.query(SysMenu).filter(SysMenu.id == menu_id).first()
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:79:    def get_by_path(session: Session, menu_path: str) -> Optional[SysMenu]:
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:80:        return session.query(SysMenu).filter(SysMenu.menu_path == menu_path).first()
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:95:    def set_visible(session: Session, version_code: str, menu_id: int, is_visible: bool,
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:98:            and_(SysVersionMenu.version_code == version_code, SysVersionMenu.menu_id == menu_id)
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:108:        menu = session.query(SysMenu).filter(SysMenu.id == menu_id).first()
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:109:        if not menu:
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:110:            raise ValueError(f"Menu {menu_id} not found")
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:114:            menu_id=menu_id,
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:115:            menu_path=menu.menu_path,
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:131:    def get_visible_menus(session: Session, version_code: str) -> List[SysMenu]:
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:135:                SysMenu.id == SysVersionMenu.menu_id,
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:142:    def init_version_menus(session: Session, version_code: str) -> int:
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:143:        all_menus = session.query(SysMenu).all()
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:145:        for menu in all_menus:
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:147:                and_(SysVersionMenu.version_code == version_code, SysVersionMenu.menu_id == menu.id)
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:152:                    menu_id=menu.id,
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:153:                    menu_path=menu.menu_path,
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:162:    def batch_update(session: Session, version_code: str, menus: List[Dict]) -> int:
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:164:        for menu_config in menus:
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:165:            menu_id = menu_config.get('menu_id')
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:166:            is_visible = menu_config.get('is_visible', True)
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:167:            sort_order = menu_config.get('sort_order')
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:170:                and_(SysVersionMenu.version_code == version_code, SysVersionMenu.menu_id == menu_id)
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:178:                menu = session.query(SysMenu).filter(SysMenu.id == menu_id).first()
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:179:                if menu:
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:182:                        menu_id=menu_id,
+AN_VANTARIS_IBMS-backend/src/system/menu_dao.py:183:                        menu_path=menu.menu_path,
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:1:# src/system/menu_service.py
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:7:from src.system.menu_dao import VersionDAO, MenuDAO, VersionMenuDAO
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:8:from src.system.menu_models import SysVersion, SysMenu, SysVersionMenu
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:17:    def build_menu_tree(menus: List[SysMenu]) -> List[Dict]:
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:20:            for menu in menus:
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:21:                if menu.parent_id == parent_id:
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:23:                        'index': menu.menu_path,
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:24:                        'title': menu.menu_title,
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:25:                        'icon': menu.menu_icon
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:27:                    children = build(menu.id)
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:35:    def build_menu_tree_from_raw(menus: List) -> List[Dict]:
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:38:            for menu in menus:
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:39:                if menu[1] == parent_id:
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:41:                        'index': menu[2],
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:42:                        'title': menu[3],
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:43:                        'icon': menu[4]
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:45:                    children = build_tree(menu[0])
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:53:    def get_version_menu_config(session: Session, version_code: str) -> List[Dict]:
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:54:        menus = VersionMenuDAO.get_visible_menus(session, version_code)
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:55:        return MenuService.build_menu_tree(menus)
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:58:    def get_version_with_menus(session: Session, version_code: str) -> Optional[Dict]:
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:63:        menus = VersionMenuDAO.get_by_version(session, version_code, only_visible=False)
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:74:            'menus': [
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:76:                    'menu_id': vm.menu_id,
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:77:                    'menu_path': vm.menu_path,
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:81:                for vm in menus
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:86:    def copy_menu_config(session: Session, from_version: str, to_version: str) -> int:
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:87:        source_menus = VersionMenuDAO.get_by_version(session, from_version, only_visible=False)
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:89:        for vm in source_menus:
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:90:            VersionMenuDAO.set_visible(session, to_version, vm.menu_id, vm.is_visible == 1, vm.sort_order)
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:96:    def get_menu_tree(session: Session) -> List[Dict]:
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:97:        menus = MenuDAO.get_all(session)
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:99:        menu_dict = {}
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:100:        for menu in menus:
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:101:            menu_dict[menu.id] = {
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:102:                'id': menu.id,
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:103:                'parent_id': menu.parent_id,
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:104:                'menu_path': menu.menu_path,
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:105:                'menu_title': menu.menu_title,
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:106:                'menu_icon': menu.menu_icon,
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:107:                'menu_type': menu.menu_type,
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:108:                'has_children': menu.has_children == 1,
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:109:                'redirect_path': menu.redirect_path,
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:110:                'sort_order': menu.sort_order,
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:111:                'is_visible': menu.is_visible == 1,
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:116:        for menu in menus:
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:117:            if menu.parent_id == 0:
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:118:                roots.append(menu_dict[menu.id])
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:120:                if menu.parent_id in menu_dict:
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:121:                    menu_dict[menu.parent_id]['children'].append(menu_dict[menu.id])
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:125:    def get_active_version_menu_config(session: Session) -> Optional[Dict]:
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:135:        menus = session.execute(
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:137:                 SELECT m.id, m.parent_id, m.menu_path, m.menu_title, m.menu_icon,
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:138:                        m.menu_type, m.redirect_path, COALESCE(vm.sort_order, m.sort_order) as sort_order
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:139:                 FROM sys_menu m
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:140:                 JOIN sys_version_menu vm ON m.id = vm.menu_id AND vm.version_code = :version_code
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:147:        config = MenuService.build_menu_tree_from_raw(menus)
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:151:            'menu_config': config
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:171:        menus = session.execute(
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:173:                 SELECT m.id, m.parent_id, m.menu_path, m.menu_title, m.menu_icon,
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:174:                        m.menu_type, m.redirect_path, COALESCE(vm.sort_order, m.sort_order) as sort_order
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:175:                 FROM sys_menu m
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:176:                 JOIN sys_version_menu vm ON m.id = vm.menu_id AND vm.version_code = :version_code
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:183:        config = MenuService.build_menu_tree_from_raw(menus)
+AN_VANTARIS_IBMS-backend/src/system/menu_service.py:195:            'menu_config': config
+AN_VANTARIS_IBMS-backend/src/common/utils/local_smoke.py:1:"""Local DB smoke helpers for read-only system routes (menus, permissions, versions).
+AN_VANTARIS_IBMS-backend/src/common/utils/local_smoke.py:18:        "menu_path": "/smoke/dashboard",
+AN_VANTARIS_IBMS-backend/src/common/utils/local_smoke.py:19:        "menu_title": "Smoke Dashboard",
+AN_VANTARIS_IBMS-backend/src/common/utils/local_smoke.py:20:        "menu_icon": "dashboard",
+AN_VANTARIS_IBMS-backend/src/common/utils/local_smoke.py:21:        "menu_type": "menu",
+AN_VANTARIS_IBMS-backend/src/common/utils/local_smoke.py:76:        "name or service not known",
+AN_VANTARIS_IBMS-backend/src/common/utils/local_smoke.py:100:def local_smoke_menus_response():
+AN_VANTARIS_IBMS-backend/src/common/utils/jwt_util.py:83:        g.api_perms = payload.get('api_perms', [])
+AN_VANTARIS_IBMS-backend/src/common/utils/jwt_util.py:95:def get_current_api_perms() -> list:
+AN_VANTARIS_IBMS-backend/src/common/utils/jwt_util.py:96:    return getattr(g, 'api_perms', [])
+AN_VANTARIS_IBMS-backend/src/common/utils/jwt_util.py:109:def get_current_api_perms() -> list:
+AN_VANTARIS_IBMS-backend/src/common/utils/jwt_util.py:110:    """获取当前用户的 api_permissions"""
+AN_VANTARIS_IBMS-backend/src/common/utils/jwt_util.py:111:    return getattr(g, 'api_perms', [])
+AN_VANTARIS_IBMS-backend/src/common/utils/jwt_util.py:114:def verify_api_permission(required_pattern: str, method: str = None) -> bool:
+AN_VANTARIS_IBMS-backend/src/common/utils/jwt_util.py:116:    检查当前用户的 api_perms 是否匹配某个具体的 API 模式。
+AN_VANTARIS_IBMS-backend/src/common/utils/jwt_util.py:118:    示例：required_pattern = "/api/devices/*", method = "GET"
+AN_VANTARIS_IBMS-backend/src/common/utils/jwt_util.py:119:         若用户拥有 "GET /api/devices/*" 或 "GET /api/devices/1" 等模式即可放行。
+AN_VANTARIS_IBMS-backend/src/common/utils/jwt_util.py:123:    api_perms = get_current_api_perms()
+AN_VANTARIS_IBMS-backend/src/common/utils/jwt_util.py:127:    for pattern in api_perms:
+AN_VANTARIS_IBMS-backend/src/common/utils/jwt_util.py:128:        # pattern 格式例如 "GET /api/devices/*"
+AN_VANTARIS_IBMS-backend/src/common/utils/audit_trace.py:20:def log_sensitive_api(
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:9:from src.ucde.evidence_integrity import build_evidence_hash, build_traceability_hash
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:127:        "provider": "local-ucde-provider",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:141:            "evidenceId": "reports-readiness-freeze",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:147:            "sourceModuleId": "reports",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:148:            "sourceRecordId": "reports-readiness-candidate",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:155:                    reference_id="src-reports-readiness",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:156:                    source_module_id="reports",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:157:                    source_record_id="reports-readiness-candidate",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:165:                    reference_id="evref-reports-audit-foundation",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:166:                    evidence_id="reports-audit-foundation",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:172:                    reference_id="audit-reports-query-foundation",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:173:                    audit_id="reports-audit-readiness-foundation",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:174:                    audit_event_type="report.query",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:175:                    source_module_id="reports",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:183:                    related_module_ids=["reports", "uconsole", "ucde"],
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:187:                path_id="trace-reports-readiness-freeze",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:188:                source_module_id="reports",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:189:                source_record_id="reports-readiness-candidate",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:190:                evidence_id="reports-readiness-freeze",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:191:                source_reference_id="src-reports-readiness",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:192:                evidence_reference_id="evref-reports-audit-foundation",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:193:                verification_reference_id="verify-reports-readiness-freeze",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:195:            "tags": ["reports", "readiness", "foundation"],
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:196:            "metadata": {"stage": "ucde-r2", "scope": "ibms-neutral"},
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:205:            "evidenceId": "reports-audit-foundation",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:211:            "sourceModuleId": "reports",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:212:            "sourceRecordId": "reports-audit-local-jsonl",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:219:                    reference_id="src-reports-audit",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:220:                    source_module_id="reports",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:221:                    source_record_id="reports-audit-local-jsonl",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:229:                    reference_id="evref-reports-readiness-freeze",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:230:                    evidence_id="reports-readiness-freeze",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:234:                    reference_id="evref-uconsole-score-foundation",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:235:                    evidence_id="uconsole-score-foundation",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:241:                    reference_id="audit-reports-export-manifest",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:242:                    audit_id="reports-export-manifest-foundation",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:243:                    audit_event_type="report.export_manifest",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:244:                    source_module_id="reports",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:252:                    related_module_ids=["reports", "ucde"],
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:256:                path_id="trace-reports-audit-foundation",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:257:                source_module_id="reports",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:258:                source_record_id="reports-audit-local-jsonl",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:259:                evidence_id="reports-audit-foundation",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:260:                source_reference_id="src-reports-audit",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:261:                evidence_reference_id="evref-reports-readiness-freeze",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:262:                verification_reference_id="verify-reports-audit-foundation",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:264:            "tags": ["reports", "audit", "hash-only"],
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:265:            "metadata": {"stage": "ucde-r2", "mode": "hash-only-local-evidence"},
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:274:            "evidenceId": "uconsole-readiness-registry",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:280:            "sourceModuleId": "uconsole",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:281:            "sourceRecordId": "uconsole-readiness-registry",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:288:                    reference_id="src-uconsole-registry",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:289:                    source_module_id="uconsole",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:290:                    source_record_id="uconsole-readiness-registry",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:298:                    reference_id="evref-uconsole-score-foundation",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:299:                    evidence_id="uconsole-score-foundation",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:308:                    source_module_id="uconsole",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:316:                    related_module_ids=["uconsole", "reports", "ucde"],
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:320:                path_id="trace-uconsole-readiness-registry",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:321:                source_module_id="uconsole",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:322:                source_record_id="uconsole-readiness-registry",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:323:                evidence_id="uconsole-readiness-registry",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:324:                source_reference_id="src-uconsole-registry",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:325:                evidence_reference_id="evref-uconsole-score-foundation",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:326:                verification_reference_id="verify-uconsole-readiness-registry",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:328:            "tags": ["uconsole", "registry", "foundation"],
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:329:            "metadata": {"stage": "ucde-r2", "readOnly": True},
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:335:            "evidenceId": "uconsole-score-foundation",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:341:            "sourceModuleId": "uconsole",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:349:                    reference_id="src-uconsole-score",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:350:                    source_module_id="uconsole",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:359:                    reference_id="evref-uconsole-readiness-registry",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:360:                    evidence_id="uconsole-readiness-registry",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:369:                    source_module_id="uconsole",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:377:                    related_module_ids=["uconsole", "ucde"],
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:381:                path_id="trace-uconsole-score-foundation",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:382:                source_module_id="uconsole",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:384:                evidence_id="uconsole-score-foundation",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:385:                source_reference_id="src-uconsole-score",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:386:                evidence_reference_id="evref-uconsole-readiness-registry",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:387:                verification_reference_id="verify-uconsole-score-foundation",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:389:            "tags": ["uconsole", "score", "foundation"],
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:390:            "metadata": {"stage": "ucde-r2", "scoreMode": "registry-derived"},
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_provider.py:608:        "provider": "local-ucde-provider",
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_service.py:1:"""UCDE evidence center service (read-only runtime skeleton)."""
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_service.py:7:from src.ucde.evidence_integrity import build_evidence_hash, build_traceability_hash
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_service.py:8:from src.ucde.evidence_provider import (
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_service.py:18:    MODULE_ID = "ucde"
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_service.py:21:    PROVIDER = "local-ucde-provider"
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_service.py:24:    def get_ucde_health(self) -> Dict[str, Any]:
+AN_VANTARIS_IBMS-backend/src/ucde/evidence_service.py:39:            "ucdeRuntimeIntegrated": False,
+AN_VANTARIS_IBMS-backend/src/scripts/migrate_csv_data.py:19:TARGET_CSV = os.path.join(BASE_DIR, 'data', 'csv', 'HVAC_SIM_001.csv')
+AN_VANTARIS_IBMS-backend/src/scripts/migrate_csv_data.py:23:print(f"TARGET_CSV = {TARGET_CSV}")
+AN_VANTARIS_IBMS-backend/src/scripts/migrate_csv_data.py:40:    target_dir = os.path.dirname(TARGET_CSV)
+AN_VANTARIS_IBMS-backend/src/scripts/migrate_csv_data.py:44:    print(f"📂 目标文件: {TARGET_CSV}")
+AN_VANTARIS_IBMS-backend/src/scripts/migrate_csv_data.py:58:    if os.path.exists(TARGET_CSV):
+AN_VANTARIS_IBMS-backend/src/scripts/migrate_csv_data.py:59:        with open(TARGET_CSV, 'r', encoding='utf-8') as f:
+AN_VANTARIS_IBMS-backend/src/scripts/migrate_csv_data.py:93:    if os.path.exists(TARGET_CSV):
+AN_VANTARIS_IBMS-backend/src/scripts/migrate_csv_data.py:95:        with open(TARGET_CSV, 'a', newline='', encoding='utf-8') as f:
+AN_VANTARIS_IBMS-backend/src/scripts/migrate_csv_data.py:104:        with open(TARGET_CSV, 'w', newline='', encoding='utf-8') as f:
+AN_VANTARIS_IBMS-backend/src/scripts/migrate_csv_data.py:114:    with open(TARGET_CSV, 'r', encoding='utf-8') as f:
+AN_VANTARIS_IBMS-backend/src/scripts/migrate_csv_data.py:123:    if not os.path.exists(TARGET_CSV):
+AN_VANTARIS_IBMS-backend/src/scripts/migrate_csv_data.py:124:        print(f"❌ 目标文件不存在: {TARGET_CSV}")
+AN_VANTARIS_IBMS-backend/src/scripts/migrate_csv_data.py:131:    with open(TARGET_CSV, 'r', encoding='utf-8') as f:
+AN_VANTARIS_IBMS-backend/src/governance/audit/pilot.py:17:from .service import AuditService
+AN_VANTARIS_IBMS-backend/src/governance/audit/pilot.py:19:PILOT_EXTENSION_KEY = "vantaris_governance_audit_pilot_service"
+AN_VANTARIS_IBMS-backend/src/governance/audit/pilot.py:32:    route_id: str
+AN_VANTARIS_IBMS-backend/src/governance/audit/pilot.py:57:def install_pilot_audit_service(service: AuditService) -> None:
+AN_VANTARIS_IBMS-backend/src/governance/audit/pilot.py:58:    """Inject an app-scoped service; tests receive isolated provider lifecycle."""
+AN_VANTARIS_IBMS-backend/src/governance/audit/pilot.py:59:    current_app.extensions[PILOT_EXTENSION_KEY] = service
+AN_VANTARIS_IBMS-backend/src/governance/audit/pilot.py:62:def get_pilot_audit_service() -> AuditService:
+AN_VANTARIS_IBMS-backend/src/governance/audit/pilot.py:63:    """Resolve the app-scoped pilot service without a module-global provider."""
+AN_VANTARIS_IBMS-backend/src/governance/audit/pilot.py:64:    service = current_app.extensions.get(PILOT_EXTENSION_KEY)
+AN_VANTARIS_IBMS-backend/src/governance/audit/pilot.py:65:    if service is None:
+AN_VANTARIS_IBMS-backend/src/governance/audit/pilot.py:66:        service = AuditService(InMemoryAuditProvider())
+AN_VANTARIS_IBMS-backend/src/governance/audit/pilot.py:67:        current_app.extensions[PILOT_EXTENSION_KEY] = service
+AN_VANTARIS_IBMS-backend/src/governance/audit/pilot.py:72:    return service
+AN_VANTARIS_IBMS-backend/src/governance/audit/pilot.py:89:        service_identity_id=None,
+AN_VANTARIS_IBMS-backend/src/governance/audit/pilot.py:96:        route_id=value.route_id,
+AN_VANTARIS_IBMS-backend/src/governance/audit/pilot.py:113:    return get_pilot_audit_service().emit(record)
+AN_VANTARIS_IBMS-backend/src/governance/audit/pilot.py:117:    """Audit exactly POST /api/system/versions after a successful mutation."""
+AN_VANTARIS_IBMS-backend/src/governance/audit/pilot.py:137:            target_id=str(data.get("version_code") or "TARGET_CONTEXT_UNAVAILABLE"),
+AN_VANTARIS_IBMS-backend/src/governance/audit/pilot.py:138:            route_id="ROUTE-POST-C39FFBE9F5DC",
+AN_VANTARIS_IBMS-backend/src/governance/audit/service.py:1:"""Thin audit application service; authorization remains outside this package."""
+AN_VANTARIS_IBMS-backend/src/governance/audit/models.py:21:    service_identity_id: Optional[str]
+AN_VANTARIS_IBMS-backend/src/governance/audit/models.py:28:    route_id: Optional[str]
+AN_VANTARIS_IBMS-backend/src/governance/audit/models.py:82:    service_identity_id: Optional[str] = None
+AN_VANTARIS_IBMS-backend/src/governance/audit/__init__.py:17:from .service import AuditService
+AN_VANTARIS_IBMS-backend/src/governance/audit/in_memory.py:83:            ("service_identity_id", query_spec.service_identity_id),
+AN_VANTARIS_IBMS-backend/src/governance/audit/validation.py:79:        _identifier("service_identity_id", record.service_identity_id, required=True)
+AN_VANTARIS_IBMS-backend/src/governance/audit/validation.py:81:        if not record.actor_id and not record.service_identity_id:
+AN_VANTARIS_IBMS-backend/src/governance/audit/validation.py:82:            raise AuditValidationError("SYSTEM actor requires actor_id or service_identity_id")
+AN_VANTARIS_IBMS-backend/src/governance/audit/validation.py:84:        if record.actor_id or record.service_identity_id:
+AN_VANTARIS_IBMS-backend/src/governance/audit/validation.py:90:        "actor_id", "service_identity_id", "subject_type", "subject_id",
+AN_VANTARIS_IBMS-backend/src/governance/audit/validation.py:91:        "target_type", "target_id", "route_id", "request_id", "trace_id",
+AN_VANTARIS_IBMS-backend/src/governance/audit/validation.py:122:        "tenant_id", "site_id", "actor_id", "service_identity_id", "action",
+AN_VANTARIS_IBMS-backend/src/api/uesg/uesg_api.py:7:from src.api import api_bp
+AN_VANTARIS_IBMS-backend/src/api/uesg/uesg_api.py:9:from src.uesg.uesg_service import UesgSustainabilityService
+AN_VANTARIS_IBMS-backend/src/api/uesg/uesg_api.py:12:_service = UesgSustainabilityService()
+AN_VANTARIS_IBMS-backend/src/api/uesg/uesg_api.py:15:@api_bp.route("/v1/uesg/health", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/uesg/uesg_api.py:16:def uesg_health():
+AN_VANTARIS_IBMS-backend/src/api/uesg/uesg_api.py:17:    return Result.success(data=_service.get_uesg_health())
+AN_VANTARIS_IBMS-backend/src/api/uesg/uesg_api.py:20:@api_bp.route("/v1/uesg/metrics/summary", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/uesg/uesg_api.py:21:def uesg_metrics_summary():
+AN_VANTARIS_IBMS-backend/src/api/uesg/uesg_api.py:22:    return Result.success(data=_service.get_metrics_summary())
+AN_VANTARIS_IBMS-backend/src/api/uesg/uesg_api.py:25:@api_bp.route("/v1/uesg/metrics/breakdown", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/uesg/uesg_api.py:26:def uesg_metrics_breakdown():
+AN_VANTARIS_IBMS-backend/src/api/uesg/uesg_api.py:27:    return Result.success(data=_service.get_metrics_breakdown())
+AN_VANTARIS_IBMS-backend/src/api/uesg/uesg_api.py:30:@api_bp.route("/v1/uesg/metrics/categories", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/uesg/uesg_api.py:31:def uesg_metrics_categories():
+AN_VANTARIS_IBMS-backend/src/api/uesg/uesg_api.py:32:    return Result.success(data=_service.get_category_details())
+AN_VANTARIS_IBMS-backend/src/api/uesg/uesg_api.py:35:@api_bp.route("/v1/uesg/associations", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/uesg/uesg_api.py:36:def uesg_associations():
+AN_VANTARIS_IBMS-backend/src/api/uesg/uesg_api.py:37:    return Result.success(data=_service.get_associations())
+AN_VANTARIS_IBMS-backend/src/api/uesg/uesg_api.py:40:@api_bp.route("/v1/uesg/associations/detail", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/uesg/uesg_api.py:41:def uesg_associations_detail():
+AN_VANTARIS_IBMS-backend/src/api/uesg/uesg_api.py:42:    return Result.success(data=_service.get_association_detail())
+AN_VANTARIS_IBMS-backend/src/api/uesg/uesg_api.py:45:@api_bp.route("/v1/uesg/data-quality", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/uesg/uesg_api.py:46:def uesg_data_quality():
+AN_VANTARIS_IBMS-backend/src/api/uesg/uesg_api.py:47:    return Result.success(data=_service.get_data_quality())
+AN_VANTARIS_IBMS-backend/src/api/uesg/uesg_api.py:50:@api_bp.route("/v1/uesg/trends", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/uesg/uesg_api.py:51:def uesg_trends():
+AN_VANTARIS_IBMS-backend/src/api/uesg/uesg_api.py:52:    return Result.success(data=_service.get_trends())
+AN_VANTARIS_IBMS-backend/src/api/uesg/uesg_api.py:55:@api_bp.route("/v1/uesg/metrics/<string:metric_id>", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/uesg/uesg_api.py:56:def uesg_metric_detail(metric_id: str):
+AN_VANTARIS_IBMS-backend/src/api/uesg/uesg_api.py:57:    data = _service.get_metric_detail(metric_id)
+AN_VANTARIS_IBMS-backend/src/api/uesg/uesg_api.py:63:@api_bp.route("/v1/uesg/metrics/<string:metric_id>/calculation", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/uesg/uesg_api.py:64:def uesg_metric_calculation(metric_id: str):
+AN_VANTARIS_IBMS-backend/src/api/uesg/uesg_api.py:65:    data = _service.get_metric_calculation(metric_id)
+AN_VANTARIS_IBMS-backend/src/api/uesg/uesg_api.py:71:@api_bp.route("/v1/uesg/metrics", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/uesg/uesg_api.py:72:def uesg_metrics():
+AN_VANTARIS_IBMS-backend/src/api/uesg/uesg_api.py:81:    return Result.success(data=_service.list_metrics(filters=filters))
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:1:# src/api/did/did_api.py
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:17:from src.api import api_bp
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:28:def get_did_service() -> DIDService:
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:50:@api_bp.route('/did/system/init', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:70:    service = get_did_service()
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:71:    result = service.init_system_entity()
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:76:@api_bp.route('/did/entity', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:116:    service = get_did_service()
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:118:        result = service.create_sub_entity_with_vc(
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:135:@api_bp.route('/did/vp/generate', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:161:    service = get_did_service()
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:163:        vp = service.create_vp_for_holder(
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:176:@api_bp.route('/did/vp/verify', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:199:    service = get_did_service()
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:200:    valid, subject_info = service.verify_and_extract_vp(data['vp'], data['challenge'])
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:205:@api_bp.route('/did/vc/reissue', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:241:    service = get_did_service()
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:243:        result = service.revoke_and_reissue_vc(
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:260:@api_bp.route('/did/vc/revoke', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:271:    service = get_did_service()
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:272:    success = service.revoke_vc(vc_id, revoked_by_did)
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:279:@api_bp.route('/did/vc/status', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:302:    service = get_did_service()
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:303:    status = service.check_vc_status(data['vc'])
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:308:@api_bp.route('/did/challenge', methods=['GET'])
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:323:    service = get_did_service()
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:324:    challenge = service.generate_challenge(length)
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:329:@api_bp.route('/did/subordinates/direct', methods=['GET'])
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:348:    service = get_did_service()
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:349:    subs = service.get_direct_subordinates(parent_did)
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:354:@api_bp.route('/did/subordinates/tree', methods=['GET'])
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:374:    service = get_did_service()
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:375:    tree = service.get_all_subordinates_tree(parent_did)
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:380:@api_bp.route('/did/subordinates/flat', methods=['GET'])
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:399:    service = get_did_service()
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:400:    descendants = service.get_all_descendants_flat(parent_did)
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:405:@api_bp.route('/did/entity/<string:did>', methods=['GET'])
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:427:    service = get_did_service()
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:428:    user = service.get_entity(did)
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:431:    return Result.success(data=service._build_full_entity_info(user))
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:435:@api_bp.route('/did/login', methods=['POST'])
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:438:    service = get_did_service()
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:442:        valid, subject_info = service.verify_and_extract_vp(data['vp'], data.get('challenge', ''))
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:446:            user = service.get_entity(did)
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:456:        user = service.get_entity(did)
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:459:        if service._verify_signature(data['challenge'], data['signature'], user.public_key):
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:470:@api_bp.route('/did/me', methods=['GET'])
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:477:    service = get_did_service()
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:478:    user = service.get_entity(current_did)
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:481:    return Result.success(data=service._build_full_entity_info(user))
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:485:@api_bp.route('/did/chain/entity-hash/<string:did>', methods=['GET'])
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:499:    service = get_did_service()
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:500:    if not service.contract:
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:504:        metadata_hash = service.contract.functions.getEntityHash(did).call()
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:510:@api_bp.route('/did/chain/vc-hash/<string:vc_id>', methods=['GET'])
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:524:    service = get_did_service()
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:525:    if not service.contract:
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:529:        vc_hash = service.contract.functions.getVCHash(vc_id).call()
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:568:@api_bp.route('/did/chain/events', methods=['GET'])
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:573:    service = get_did_service()
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:574:    if not service.bc or not service.contract:
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:582:            raw_events = service.bc.events.get_events(
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:583:                contract_addr=service.contract.address,
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:584:                abi=service.contract.abi,
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:596:                    ev_list = service.bc.events.get_events(
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:597:                        contract_addr=service.contract.address,
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:598:                        abi=service.contract.abi,
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:618:@api_bp.route('/did/verify/entity/<string:did>', methods=['GET'])
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:624:    service = get_did_service()
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:625:    user = service.get_entity(did)
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:648:    if not service.contract:
+AN_VANTARIS_IBMS-backend/src/api/did/did_api.py:652:        chain_hash = service.contract.functions.getEntityHash(did).call()
+AN_VANTARIS_IBMS-backend/src/api/umms/umms_api.py:7:from src.api import api_bp
+AN_VANTARIS_IBMS-backend/src/api/umms/umms_api.py:9:from src.umms.umms_service import UmmsMaintenanceService
+AN_VANTARIS_IBMS-backend/src/api/umms/umms_api.py:12:_service = UmmsMaintenanceService()
+AN_VANTARIS_IBMS-backend/src/api/umms/umms_api.py:15:@api_bp.route("/v1/umms/health", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/umms/umms_api.py:16:def umms_health():
+AN_VANTARIS_IBMS-backend/src/api/umms/umms_api.py:17:    return Result.success(data=_service.get_umms_health())
+AN_VANTARIS_IBMS-backend/src/api/umms/umms_api.py:20:@api_bp.route("/v1/umms/work-orders", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/umms/umms_api.py:21:def umms_work_orders():
+AN_VANTARIS_IBMS-backend/src/api/umms/umms_api.py:31:    return Result.success(data=_service.list_work_orders(filters=filters))
+AN_VANTARIS_IBMS-backend/src/api/umms/umms_api.py:34:@api_bp.route("/v1/umms/work-orders/summary", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/umms/umms_api.py:35:def umms_work_orders_summary():
+AN_VANTARIS_IBMS-backend/src/api/umms/umms_api.py:36:    return Result.success(data=_service.get_maintenance_summary())
+AN_VANTARIS_IBMS-backend/src/api/umms/umms_api.py:39:@api_bp.route("/v1/umms/work-orders/breakdown", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/umms/umms_api.py:40:def umms_work_orders_breakdown():
+AN_VANTARIS_IBMS-backend/src/api/umms/umms_api.py:41:    return Result.success(data=_service.get_work_order_breakdown())
+AN_VANTARIS_IBMS-backend/src/api/umms/umms_api.py:44:@api_bp.route("/v1/umms/associations", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/umms/umms_api.py:45:def umms_associations():
+AN_VANTARIS_IBMS-backend/src/api/umms/umms_api.py:46:    return Result.success(data=_service.get_maintenance_associations())
+AN_VANTARIS_IBMS-backend/src/api/umms/umms_api.py:49:@api_bp.route("/v1/umms/work-orders/<string:work_order_id>", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/umms/umms_api.py:50:def umms_work_order_detail(work_order_id: str):
+AN_VANTARIS_IBMS-backend/src/api/umms/umms_api.py:51:    data = _service.get_work_order_detail(work_order_id)
+AN_VANTARIS_IBMS-backend/src/api/umms/umms_api.py:57:@api_bp.route("/v1/one/umms/package-entry", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/umms/umms_api.py:58:def umms_one_package_entry():
+AN_VANTARIS_IBMS-backend/src/api/umms/umms_api.py:59:    return Result.success(data=_service.get_package_entry_projection())
+AN_VANTARIS_IBMS-backend/src/api/umms/umms_api.py:62:@api_bp.route("/v1/one/umms/stakeholder-review", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/umms/umms_api.py:63:def umms_one_stakeholder_review():
+AN_VANTARIS_IBMS-backend/src/api/umms/umms_api.py:64:    return Result.success(data=_service.get_stakeholder_review_projection())
+AN_VANTARIS_IBMS-backend/src/api/umms/umms_api.py:67:@api_bp.route("/v1/one/umms/readiness-summary", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/umms/umms_api.py:68:def umms_one_readiness_summary():
+AN_VANTARIS_IBMS-backend/src/api/umms/umms_api.py:69:    return Result.success(data=_service.get_readiness_summary_projection())
+AN_VANTARIS_IBMS-backend/src/api/umms/umms_api.py:72:@api_bp.route("/v1/one/umms/customer-core-functions", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/umms/umms_api.py:73:def umms_one_customer_core_functions():
+AN_VANTARIS_IBMS-backend/src/api/umms/umms_api.py:74:    return Result.success(data=_service.get_customer_core_functions_projection())
+AN_VANTARIS_IBMS-backend/src/api/umms/umms_api.py:77:@api_bp.route("/v1/one/umms/safety-posture", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/umms/umms_api.py:78:def umms_one_safety_posture():
+AN_VANTARIS_IBMS-backend/src/api/umms/umms_api.py:79:    return Result.success(data=_service.get_safety_posture_projection())
+AN_VANTARIS_IBMS-backend/src/api/prod_ga/foundation_packages_api.py:1:"""Production GA foundation package GET-only API routes."""
+AN_VANTARIS_IBMS-backend/src/api/prod_ga/foundation_packages_api.py:7:from src.api import api_bp
+AN_VANTARIS_IBMS-backend/src/api/prod_ga/foundation_packages_api.py:8:from src.api.prod_ga.foundation_packages_provider import (
+AN_VANTARIS_IBMS-backend/src/api/prod_ga/foundation_packages_api.py:15:@api_bp.route("/v1/one/prod-ga/foundation-packages", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/prod_ga/foundation_packages_api.py:20:@api_bp.route("/v1/one/prod-ga/foundation-packages/health", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/prod_ga/foundation_packages_api.py:25:@api_bp.route("/v1/one/prod-ga/foundation-packages/<string:package_id>", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/prod_ga/foundation_packages_provider.py:117:def _r2_report_contains(marker: str) -> bool:
+AN_VANTARIS_IBMS-backend/src/api/prod_ga/foundation_packages_provider.py:118:    report_path = repo_root() / R2_REPORT
+AN_VANTARIS_IBMS-backend/src/api/prod_ga/foundation_packages_provider.py:119:    if not report_path.is_file():
+AN_VANTARIS_IBMS-backend/src/api/prod_ga/foundation_packages_provider.py:121:    return marker in report_path.read_text(encoding="utf-8")
+AN_VANTARIS_IBMS-backend/src/api/prod_ga/foundation_packages_provider.py:139:    boundary_ok = _r2_report_contains("ONE_BOUNDARY_BASELINE_PASS")
+AN_VANTARIS_IBMS-backend/src/api/prod_ga/foundation_packages_provider.py:140:    route_ok = _r2_report_contains("ONE_PACKAGE_ROUTE_ENFORCEMENT_PASS")
+AN_VANTARIS_IBMS-backend/src/api/prod_ga/foundation_packages_provider.py:141:    overall_ok = all_packages_ready and forbidden_ok and boundary_ok and route_ok
