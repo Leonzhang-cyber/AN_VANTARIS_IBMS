@@ -1,0 +1,66 @@
+{
+  "manifestId": "prod-ga-final-customer-delivery-edition.v1",
+  "platform": "VANTARIS_ONE",
+  "editionScope": "CUSTOMER_DELIVERY",
+  "sourceBranch": "sync/ufms-foundation-packages-20260622-104646",
+  "sourceHead": "0da24aec9a8a2615f04918a5c350aee241a814fd",
+  "r8Export": {
+    "tarballPath": "/Users/leon/Desktop/VANTARIS_FINAL_EXPORT/VANTARIS_ONE_PROD_GA_FOUNDATION_PACKAGES_R7_20260622.tar.gz",
+    "sha256Path": "/Users/leon/Desktop/VANTARIS_FINAL_EXPORT/VANTARIS_ONE_PROD_GA_FOUNDATION_PACKAGES_R7_20260622.tar.gz.sha256",
+    "sha256": "35414bec7d7f34df82bc43cda9bd35f19f3b59b1eb38cff1ee4f0c038e8e8529"
+  },
+  "packages": [
+    {
+      "packageId": "edge",
+      "packageName": "AN_VANTARIS_EDGE",
+      "fileCount": 248,
+      "status": "READY"
+    },
+    {
+      "packageId": "link",
+      "packageName": "AN_VANTARIS_LINK",
+      "fileCount": 153,
+      "status": "READY"
+    },
+    {
+      "packageId": "db",
+      "packageName": "AN_VANTARIS_DB",
+      "fileCount": 14,
+      "status": "READY"
+    },
+    {
+      "packageId": "contracts",
+      "packageName": "AN_VANTARIS_Contracts",
+      "fileCount": 174,
+      "status": "READY"
+    }
+  ],
+  "deliveryCapabilities": {
+    "uiDeliveryEntry": true,
+    "engineerInstallerConsole": true,
+    "precheck": true,
+    "installDryRun": true,
+    "verify": true,
+    "rollbackDryRun": true,
+    "offlinePackageImport": true,
+    "acceptanceChecklist": true
+  },
+  "safetyDefaults": {
+    "dryRunDefault": true,
+    "runtimeActivationDefault": false,
+    "dbMigrationDefault": false,
+    "destructiveRollbackDefault": false,
+    "secretBundling": false
+  },
+  "executionStatus": {
+    "installExecuted": false,
+    "rollbackExecuted": false,
+    "dbMigrationExecuted": false,
+    "runtimeActivated": false,
+    "pushPerformed": false,
+    "tagCreated": false,
+    "mergePerformed": false,
+    "rebasePerformed": false
+  },
+  "passMarker": "ONE_PROD_GA_R9_FINAL_CUSTOMER_DELIVERY_EDITION_PASS"
+}
