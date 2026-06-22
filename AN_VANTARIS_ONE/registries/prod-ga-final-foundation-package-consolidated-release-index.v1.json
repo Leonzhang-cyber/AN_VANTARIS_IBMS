@@ -1,0 +1,122 @@
+{
+  "registryId": "prod-ga-final-foundation-package-consolidated-release-index.v1",
+  "platform": "VANTARIS_ONE",
+  "releaseScope": "FOUNDATION_PACKAGES",
+  "taskId": "ONE-PROD-GA-R7",
+  "branch": "sync/ufms-foundation-packages-20260622-104646",
+  "baselineCommit": "048ac1aa26d4d4f0290243f1138d001122e0874c",
+  "r1ToR5FreezeCommit": "0cd11b274d09188eec6b2aa2c8e41c7b568af6b1",
+  "r1ToR5FreezeTag": "one-prod-ga-foundation-packages-local-freeze-20260622",
+  "r6FreezeCommit": "048ac1aa26d4d4f0290243f1138d001122e0874c",
+  "r6FreezeTag": "one-prod-ga-r6-full-edge-runtime-refresh-freeze-20260622",
+  "packages": [
+    {
+      "packageId": "edge",
+      "packageName": "AN_VANTARIS_EDGE",
+      "path": "AN_VANTARIS_ONE/packages/AN_VANTARIS_EDGE",
+      "fileCount": 248,
+      "status": "refreshed_by_r6"
+    },
+    {
+      "packageId": "link",
+      "packageName": "AN_VANTARIS_LINK",
+      "path": "AN_VANTARIS_ONE/packages/AN_VANTARIS_LINK",
+      "fileCount": 153,
+      "status": "synced"
+    },
+    {
+      "packageId": "db",
+      "packageName": "AN_VANTARIS_DB",
+      "path": "AN_VANTARIS_ONE/packages/AN_VANTARIS_DB",
+      "fileCount": 14,
+      "status": "synced"
+    },
+    {
+      "packageId": "contracts",
+      "packageName": "AN_VANTARIS_Contracts",
+      "path": "AN_VANTARIS_ONE/packages/AN_VANTARIS_Contracts",
+      "fileCount": 174,
+      "status": "synced"
+    }
+  ],
+  "edgeRuntimeRefresh": {
+    "sourcePath": "/Users/leon/Desktop/EDGE_USB_FINAL_EXTRACT/EDGE_DELIVERY/edge",
+    "previousFileCount": 10,
+    "currentFileCount": 248,
+    "keyFolders": ["buffer", "config", "evidence", "manifests", "src"],
+    "runtimeIndicators": [
+      "src/runtime",
+      "src/product-runtime/edge",
+      "src/connectors",
+      "src/generated"
+    ],
+    "forbiddenScan": "PASS"
+  },
+  "validators": [
+    "ONE_PROD_GA_R1_FOUNDATION_PACKAGES_SYNC_GATE_PASS",
+    "ONE_PROD_GA_R2_FOUNDATION_PACKAGE_CONSOLE_ENTRY_PASS",
+    "ONE_PROD_GA_R3_FOUNDATION_PACKAGE_READONLY_API_HEALTH_PASS",
+    "ONE_PROD_GA_R4_OFFLINE_INSTALL_VERIFY_ROLLBACK_PACKAGE_PASS",
+    "ONE_PROD_GA_R5_FINAL_FOUNDATION_PACKAGE_FREEZE_PASS",
+    "ONE_PROD_GA_R6_FULL_EDGE_RUNTIME_RESYNC_GATE_PASS"
+  ],
+  "safety": {
+    "envFilesPresent": false,
+    "secretsPresent": false,
+    "nodeModulesPresent": false,
+    "distBuildPresent": false,
+    "runtimeDirectoryPresent": false,
+    "dbMigrationExecuted": false,
+    "installExecuted": false,
+    "rollbackExecuted": false,
+    "runtimeExecuted": false,
+    "edgeRuntimeActivated": false,
+    "ufmsSourceWorkspaceModified": false,
+    "mainMerged": false,
+    "rebased": false,
+    "pushPerformedByR7": false,
+    "tagCreatedByR7": false
+  },
+  "api": {
+    "registry": "AN_VANTARIS_ONE/registries/prod-ga-foundation-package-readonly-api.v1.json",
+    "getOnly": true,
+    "writeApi": false,
+    "runtimeActivationApi": false,
+    "endpoints": [
+      "GET /api/v1/one/prod-ga/foundation-packages",
+      "GET /api/v1/one/prod-ga/foundation-packages/health",
+      "GET /api/v1/one/prod-ga/foundation-packages/{packageId}"
+    ]
+  },
+  "offlinePackage": {
+    "path": "deployment/prod-ga/offline-package",
+    "manifest": "deployment/prod-ga/offline-package/manifest/prod-ga-foundation-package-manifest.v1.json",
+    "installScript": "deployment/prod-ga/offline-package/scripts/install-prod-ga-foundation.sh",
+    "verifyScript": "deployment/prod-ga/offline-package/scripts/verify-prod-ga-foundation.sh",
+    "rollbackScript": "deployment/prod-ga/offline-package/scripts/rollback-prod-ga-foundation.sh",
+    "dryRunDefault": true,
+    "executedByR7": false
+  },
+  "boundary": {
+    "packageRouteEnforcement": "ONE_PACKAGE_ROUTE_ENFORCEMENT_PASS",
+    "boundaryBaseline": "ONE_BOUNDARY_BASELINE_PASS",
+    "boundaryWarnings": "existing non-blocking warnings only"
+  },
+  "tagVerification": {
+    "r1ToR5LocalTagObject": "83eddfd2dcfe31b9235ed25241baef6b7b2e60bb",
+    "r6LocalTagObject": "c49a92f7eb62e53f9b39cbfce0fa4dc1dc1cb52a"
+  },
+  "limitations": [
+    "Foundation package release index only",
+    "Not customer production runtime activation",
+    "Not main merge",
+    "Not rebase",
+    "Not push",
+    "Not tag creation",
+    "Not installer execution",
+    "Not rollback execution",
+    "Not DB migration execution"
+  ],
+  "passMarker": "ONE_PROD_GA_R7_FINAL_FOUNDATION_PACKAGE_CONSOLIDATED_RELEASE_INDEX_PASS"
+}
+
