@@ -1,0 +1,122 @@
+{
+  "registryId": "prod-ga-foundation-package-readonly-api.v1",
+  "taskId": "ONE-PROD-GA-R3",
+  "name": "Production GA Foundation Package Read-only API and Health",
+  "version": "1.0.0",
+  "baselineCommit": "54b60fe6d5238dfaea2797a2de644ba54617d00e",
+  "branch": "sync/ufms-foundation-packages-20260622-104646",
+  "sourceRegistry": "AN_VANTARIS_ONE/registries/prod-ga-foundation-package-console-entry.v1.json",
+  "readOnly": true,
+  "sourceWorkspaceModified": false,
+  "endpoints": [
+    {
+      "method": "GET",
+      "path": "/api/v1/one/prod-ga/foundation-packages",
+      "handler": "prod_ga_foundation_packages",
+      "responseType": "foundation_package_list"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/one/prod-ga/foundation-packages/health",
+      "handler": "prod_ga_foundation_packages_health",
+      "responseType": "foundation_package_health"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/one/prod-ga/foundation-packages/{packageId}",
+      "handler": "prod_ga_foundation_package_detail",
+      "responseType": "foundation_package_detail",
+      "allowedPackageIds": ["edge", "link", "db", "contracts"]
+    }
+  ],
+  "packages": [
+    {
+      "packageId": "edge",
+      "packageName": "AN_VANTARIS_EDGE",
+      "packagePath": "AN_VANTARIS_ONE/packages/AN_VANTARIS_EDGE",
+      "fileCount": 10,
+      "consoleVisible": true,
+      "readOnly": true,
+      "runtimeEnabled": false,
+      "deploymentEnabled": false,
+      "installActionsEnabled": false,
+      "writeActionsEnabled": false,
+      "dbMigrationEnabled": false,
+      "sourceWorkspaceModified": false,
+      "status": "synced"
+    },
+    {
+      "packageId": "link",
+      "packageName": "AN_VANTARIS_LINK",
+      "packagePath": "AN_VANTARIS_ONE/packages/AN_VANTARIS_LINK",
+      "fileCount": 153,
+      "consoleVisible": true,
+      "readOnly": true,
+      "runtimeEnabled": false,
+      "deploymentEnabled": false,
+      "installActionsEnabled": false,
+      "writeActionsEnabled": false,
+      "dbMigrationEnabled": false,
+      "sourceWorkspaceModified": false,
+      "status": "synced"
+    },
+    {
+      "packageId": "db",
+      "packageName": "AN_VANTARIS_DB",
+      "packagePath": "AN_VANTARIS_ONE/packages/AN_VANTARIS_DB",
+      "fileCount": 14,
+      "consoleVisible": true,
+      "readOnly": true,
+      "runtimeEnabled": false,
+      "deploymentEnabled": false,
+      "installActionsEnabled": false,
+      "writeActionsEnabled": false,
+      "dbMigrationEnabled": false,
+      "sourceWorkspaceModified": false,
+      "status": "synced"
+    },
+    {
+      "packageId": "contracts",
+      "packageName": "AN_VANTARIS_Contracts",
+      "packagePath": "AN_VANTARIS_ONE/packages/AN_VANTARIS_Contracts",
+      "fileCount": 174,
+      "consoleVisible": true,
+      "readOnly": true,
+      "runtimeEnabled": false,
+      "deploymentEnabled": false,
+      "installActionsEnabled": false,
+      "writeActionsEnabled": false,
+      "dbMigrationEnabled": false,
+      "sourceWorkspaceModified": false,
+      "status": "synced"
+    }
+  ],
+  "healthResponseFields": [
+    "overallStatus",
+    "packageCount",
+    "packages",
+    "forbiddenScanStatus",
+    "boundaryStatus",
+    "routeEnforcementStatus",
+    "runtimeActivation",
+    "productionActivation",
+    "dbWrite",
+    "deploymentExecution"
+  ],
+  "safety": {
+    "runtimeActivation": false,
+    "productionActivation": false,
+    "runtimeEnabled": false,
+    "deploymentEnabled": false,
+    "installActionsEnabled": false,
+    "writeActionsEnabled": false,
+    "dbMigrationEnabled": false,
+    "dbWrite": false,
+    "deploymentExecution": false,
+    "ufmsSourceWorkspaceModified": false,
+    "pushPerformed": false,
+    "tagCreated": false
+  },
+  "passMarker": "ONE_PROD_GA_R3_FOUNDATION_PACKAGE_READONLY_API_HEALTH_PASS"
+}
+
