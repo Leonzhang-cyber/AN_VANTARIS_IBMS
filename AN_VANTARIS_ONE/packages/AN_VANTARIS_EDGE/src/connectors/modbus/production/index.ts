@@ -1,0 +1,55 @@
+export type {
+  ModbusProductionAdapterConfig,
+  ModbusProductionAdapterMode,
+  ModbusProductionByteOrder,
+  ModbusProductionDangerousKeyPolicy,
+  ModbusProductionDataType,
+  ModbusProductionDnsMode,
+  ModbusProductionErrorCode,
+  ModbusProductionFormulaPrefixPolicy,
+  ModbusProductionFunctionCode,
+  ModbusProductionNormalizedRecord,
+  ModbusProductionReadFailure,
+  ModbusProductionReadOnlyAdapter,
+  ModbusProductionReadRequest,
+  ModbusProductionReadResult,
+  ModbusProductionReadSuccess,
+  ModbusProductionResourceLimits,
+  ModbusProductionResolvedTarget,
+  ModbusProductionTargetResolver,
+  ModbusProductionTcpMode,
+  ModbusProductionWordOrder,
+} from './modbus-production-adapter.types.js';
+export {
+  MODBUS_PRODUCTION_COIL_MAX_QUANTITY,
+  MODBUS_PRODUCTION_DANGEROUS_KEYS,
+  MODBUS_PRODUCTION_FORMULA_PREFIXES,
+  MODBUS_PRODUCTION_LIMIT_CAPS,
+  MODBUS_PRODUCTION_METADATA_HOSTS,
+  MODBUS_PRODUCTION_READ_FUNCTION_CODES,
+  MODBUS_PRODUCTION_REGISTER_MAX_QUANTITY,
+  MODBUS_PRODUCTION_WRITE_FUNCTION_CODES,
+} from './modbus-production-adapter.types.js';
+export {
+  buildFoundationPolicyForProduction,
+  createTargetHash,
+  createTargetReferenceId,
+  isMetadataHost,
+  maxQuantityForFunctionCode,
+  validateAllResolvedIps,
+  validateProductionResourceLimits,
+  validateProductionTarget,
+  validateResolvedIpAddress,
+} from './modbus-production-target-policy.js';
+export {
+  decodeAndNormalizeResponse,
+  mapFoundationResponseError,
+  mapProductionDataType,
+  runFoundationRequestValidation,
+  validateFoundationResponse,
+  validateProductionAdapterConfig,
+} from './modbus-production-response-normalizer.js';
+export {
+  createModbusProductionReadOnlyAdapter,
+  modbusProductionReadOnlyAdapter,
+} from './modbus-production-readonly-adapter.js';

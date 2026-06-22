@@ -1,0 +1,35 @@
+{
+  "source": "synthetic-modbus-device",
+  "observedAt": "2026-06-18T00:00:00.000Z",
+  "unitId": 1,
+  "registers": [
+    {
+      "registerType": "holding",
+      "address": 40001,
+      "pointRef": "modbus.point.temperature.001",
+      "assetRef": "asset.synthetic.plc.001",
+      "value": 237,
+      "scale": 0.1,
+      "unit": "C",
+      "quality": "good",
+      "metadata": {
+        "deviceClass": "synthetic-plc",
+        "zone": "synthetic-zone-a"
+      }
+    },
+    {
+      "registerType": "input",
+      "address": 30001,
+      "pointRef": "modbus.point.pressure.001",
+      "assetRef": "asset.synthetic.plc.001",
+      "value": 1013,
+      "scale": 0.1,
+      "unit": "kPa",
+      "quality": "good",
+      "metadata": {
+        "deviceClass": "synthetic-plc",
+        "zone": "synthetic-zone-a"
+      }
+    }
+  ]
+}

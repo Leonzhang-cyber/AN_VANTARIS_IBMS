@@ -1,0 +1,21 @@
+connectorId: "connector-template-001"
+connectorType: "CONNECTOR_TYPE_PLACEHOLDER"
+protocol: "PROTOCOL_PLACEHOLDER"
+enabled: true
+gatewayId: "gateway-template-001"
+siteId: "site-template-001"
+sourceSystemId: "source-system-template-001"
+pollingMode: "interval"
+protocolConfig:
+  endpoint: "protocol://placeholder-endpoint"
+  intervalSeconds: 30
+mappingRef: "mapping/template/ref"
+bufferPolicy:
+  maxQueueDepth: 1000
+healthPolicy:
+  heartbeatSeconds: 30
+securityRef: "machine-identity-template"
+auditPolicy:
+  emitAuditEvents: true
+evidencePolicy:
+  evidenceTag: "connector-template"

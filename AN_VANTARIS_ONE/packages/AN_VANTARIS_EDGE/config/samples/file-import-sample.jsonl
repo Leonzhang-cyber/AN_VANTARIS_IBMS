@@ -1,0 +1,3 @@
+{"sourceRef":"synthetic-file-source-01","pointRef":"ahu-01.temp","value":22.3,"unit":"celsius","quality":"good","observedAt":"2026-06-18T09:00:00.000Z","assetRef":"ahu-01","metadata":{"synthetic":true,"batch":"sample-a"}}
+{"sourceRef":"synthetic-file-source-01","pointRef":"ahu-01.humidity","value":46.1,"unit":"percent","quality":"good","observedAt":"2026-06-18T09:00:05.000Z","assetRef":"ahu-01","metadata":{"synthetic":true,"batch":"sample-a"}}
+{"sourceRef":"synthetic-file-source-01","pointRef":"alarm.filter","value":"raised","unit":"state","quality":"uncertain","observedAt":"2026-06-18T09:00:10.000Z","assetRef":"ahu-01","sampleType":"alarm","message":"synthetic filter alarm","metadata":{"synthetic":true,"batch":"sample-a"}}

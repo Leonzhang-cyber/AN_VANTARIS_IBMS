@@ -1,0 +1,369 @@
+{
+  "connectors": [
+    {
+      "connectorId": "connector-snmp-example-01",
+      "name": "SNMP Read-only Example Connector",
+      "protocol": "snmp",
+      "enabled": true,
+      "siteId": "site-001",
+      "zoneId": "zone-a1",
+      "sourceSystemId": "source-snmp-001",
+      "endpointRef": "connector-endpoint-placeholder",
+      "mappingRef": "mapping-snmp-default",
+      "capabilityProfile": "snmp-readonly",
+      "pollIntervalSec": 30,
+      "timeoutMs": 5000,
+      "retryPolicy": {
+        "maxRetries": 3,
+        "backoffMs": 1000
+      },
+      "metadata": {
+        "notes": "synthetic fixture only, no udp network call",
+        "supportsWriteback": false,
+        "networkEnabled": false,
+        "host": "mock://synthetic-snmp-device",
+        "port": 161,
+        "version": "v2c",
+        "community": "synthetic-public-readonly",
+        "fixturePath": "config/samples/snmp-readonly-response.json",
+        "pollingIntervalMs": 30000,
+        "timeoutMs": 3000,
+        "retries": 1,
+        "observedAtField": "observedAt",
+        "oidMappings": [
+          {
+            "oid": "1.3.6.1.4.1.99999.1.1.1",
+            "pointRef": "snmp.point.cpu.load.001",
+            "assetRef": "asset.synthetic.gateway.001",
+            "unit": "%"
+          },
+          {
+            "oid": "1.3.6.1.4.1.99999.1.1.2",
+            "pointRef": "snmp.point.memory.utilization.001",
+            "assetRef": "asset.synthetic.gateway.001",
+            "unit": "%"
+          }
+        ]
+      }
+    },
+    {
+      "connectorId": "connector-modbus-example-01",
+      "name": "Modbus TCP Read-only Example Connector",
+      "protocol": "modbus",
+      "enabled": true,
+      "siteId": "site-001",
+      "zoneId": "zone-a2",
+      "sourceSystemId": "source-modbus-001",
+      "endpointRef": "connector-endpoint-placeholder",
+      "mappingRef": "mapping-modbus-default",
+      "capabilityProfile": "modbus-readonly",
+      "pollIntervalSec": 15,
+      "timeoutMs": 4000,
+      "retryPolicy": {
+        "maxRetries": 2,
+        "backoffMs": 800
+      },
+      "metadata": {
+        "notes": "synthetic fixture only, no tcp network call",
+        "supportsWriteback": false,
+        "networkEnabled": false,
+        "host": "mock://synthetic-modbus-device",
+        "port": 502,
+        "unitId": 1,
+        "fixturePath": "config/samples/modbus-tcp-readonly-response.json",
+        "pollingIntervalMs": 30000,
+        "timeoutMs": 3000,
+        "retries": 1,
+        "observedAtField": "observedAt",
+        "registerMappings": [
+          {
+            "registerType": "holding",
+            "address": 40001,
+            "quantity": 1,
+            "pointRef": "modbus.point.temperature.001",
+            "assetRef": "asset.synthetic.plc.001",
+            "unit": "C",
+            "scale": 0.1
+          },
+          {
+            "registerType": "input",
+            "address": 30001,
+            "quantity": 1,
+            "pointRef": "modbus.point.pressure.001",
+            "assetRef": "asset.synthetic.plc.001",
+            "unit": "kPa",
+            "scale": 0.1
+          }
+        ]
+      }
+    },
+    {
+      "connectorId": "connector-bacnet-example-01",
+      "name": "BACnet/IP Read-only Example Connector",
+      "protocol": "bacnet",
+      "enabled": true,
+      "siteId": "site-001",
+      "zoneId": "zone-a3",
+      "sourceSystemId": "source-bacnet-001",
+      "endpointRef": "connector-endpoint-placeholder",
+      "mappingRef": "mapping-bacnet-default",
+      "capabilityProfile": "bacnet-readonly",
+      "pollIntervalSec": 20,
+      "timeoutMs": 4500,
+      "retryPolicy": {
+        "maxRetries": 3,
+        "backoffMs": 900
+      },
+      "metadata": {
+        "notes": "synthetic fixture only, no udp network call",
+        "supportsWriteback": false,
+        "networkEnabled": false,
+        "protocol": "bacnet-ip-readonly",
+        "host": "mock://synthetic-bacnet-device",
+        "port": 47808,
+        "fixturePath": "config/samples/bacnet-ip-readonly-response.json",
+        "pollingIntervalMs": 30000,
+        "timeoutMs": 3000,
+        "retries": 1,
+        "pointMappings": [
+          {
+            "pointId": "bacnet.point.temperature.ai.001",
+            "objectType": "analogInput",
+            "objectInstance": 1,
+            "propertyIdentifier": "presentValue",
+            "assetRef": "asset.synthetic.ahu.001",
+            "engineeringUnit": "C"
+          },
+          {
+            "pointId": "bacnet.point.humidity.av.001",
+            "objectType": "analogValue",
+            "objectInstance": 2,
+            "propertyIdentifier": "presentValue",
+            "assetRef": "asset.synthetic.ahu.001",
+            "engineeringUnit": "%"
+          },
+          {
+            "pointId": "bacnet.point.fan.bi.001",
+            "objectType": "binaryInput",
+            "objectInstance": 3,
+            "propertyIdentifier": "presentValue",
+            "assetRef": "asset.synthetic.ahu.001",
+            "engineeringUnit": "state"
+          }
+        ]
+      }
+    },
+    {
+      "connectorId": "connector-opcua-example-01",
+      "name": "OPC UA Read-only Example Connector",
+      "protocol": "opcua",
+      "enabled": true,
+      "siteId": "site-001",
+      "zoneId": "zone-a4",
+      "sourceSystemId": "source-opcua-001",
+      "endpointRef": "connector-endpoint-placeholder",
+      "mappingRef": "mapping-opcua-default",
+      "capabilityProfile": "opcua-readonly",
+      "pollIntervalSec": 10,
+      "timeoutMs": 3500,
+      "retryPolicy": {
+        "maxRetries": 2,
+        "backoffMs": 700
+      },
+      "metadata": {
+        "notes": "synthetic fixture only, no opc ua network call",
+        "supportsWriteback": false,
+        "networkEnabled": false,
+        "protocol": "opc-ua-readonly",
+        "endpointUrl": "mock://synthetic-opc-ua-server",
+        "securityMode": "None",
+        "securityPolicy": "None",
+        "namespaceUri": "urn:synthetic:opcua:namespace",
+        "serverApplicationUri": "urn:synthetic:opcua:server",
+        "fixturePath": "config/samples/opc-ua-readonly-response.json",
+        "pollingIntervalMs": 30000,
+        "timeoutMs": 3000,
+        "retries": 1,
+        "nodeMappings": [
+          {
+            "pointId": "opcua.point.temperature.001",
+            "nodeId": "ns=2;s=Building.AHU01.Temperature",
+            "browseName": "AHU01.Temperature",
+            "displayName": "AHU01 Temperature",
+            "dataType": "Double",
+            "engineeringUnit": "C",
+            "assetRef": "asset.synthetic.ahu.001"
+          },
+          {
+            "pointId": "opcua.point.humidity.001",
+            "nodeId": "ns=2;i=1001",
+            "browseName": "AHU01.Humidity",
+            "displayName": "AHU01 Humidity",
+            "dataType": "Float",
+            "engineeringUnit": "%",
+            "assetRef": "asset.synthetic.ahu.001"
+          },
+          {
+            "pointId": "opcua.point.running.001",
+            "nodeId": "ns=2;s=Building.AHU01.Running",
+            "browseName": "AHU01.Running",
+            "displayName": "AHU01 Running",
+            "dataType": "Boolean",
+            "engineeringUnit": "state",
+            "assetRef": "asset.synthetic.ahu.001"
+          }
+        ]
+      }
+    },
+    {
+      "connectorId": "connector-opctcp-example-01",
+      "name": "OPC TCP IP Example Connector",
+      "protocol": "opc-tcp",
+      "enabled": true,
+      "siteId": "site-001",
+      "zoneId": "zone-a5",
+      "sourceSystemId": "source-opctcp-001",
+      "endpointRef": "connector-endpoint-placeholder",
+      "mappingRef": "mapping-opctcp-default",
+      "capabilityProfile": "opctcp-readonly",
+      "pollIntervalSec": 25,
+      "timeoutMs": 5500,
+      "retryPolicy": {
+        "maxRetries": 3,
+        "backoffMs": 1100
+      },
+      "metadata": {
+        "notes": "placeholder only, no real device"
+      }
+    },
+    {
+      "connectorId": "connector-file-import-example-01",
+      "name": "File Import Example Connector",
+      "protocol": "file",
+      "enabled": true,
+      "siteId": "site-001",
+      "zoneId": "zone-file",
+      "sourceSystemId": "source-file-001",
+      "endpointRef": "file-import-endpoint-placeholder",
+      "mappingRef": "mapping-file-import-default",
+      "capabilityProfile": "file-import-readonly",
+      "pollIntervalSec": 60,
+      "timeoutMs": 2000,
+      "retryPolicy": {
+        "maxRetries": 1,
+        "backoffMs": 500
+      },
+      "metadata": {
+        "notes": "synthetic sample only",
+        "supportsWriteback": false,
+        "samplePath": "config/samples/file-import-sample.jsonl",
+        "format": "jsonl",
+        "maxBytes": 1048576,
+        "maxJsonlLines": 5000,
+        "edgeRoot": "./AN_VANTARIS_EDGE"
+      }
+    },
+    {
+      "connectorId": "connector-http-polling-example-01",
+      "name": "HTTP Polling Example Connector",
+      "protocol": "http",
+      "enabled": true,
+      "siteId": "site-001",
+      "zoneId": "zone-http",
+      "sourceSystemId": "source-http-001",
+      "endpointRef": "http-polling-endpoint-placeholder",
+      "mappingRef": "mapping-http-default",
+      "capabilityProfile": "http-polling-readonly",
+      "pollIntervalSec": 30,
+      "timeoutMs": 3000,
+      "retryPolicy": {
+        "maxRetries": 2,
+        "backoffMs": 800
+      },
+      "metadata": {
+        "notes": "synthetic fixture only, no real network call",
+        "supportsWriteback": false,
+        "method": "GET",
+        "url": "mock://synthetic-http-system/points",
+        "headers": {},
+        "query": {
+          "mode": "synthetic"
+        },
+        "timeoutMs": 3000,
+        "intervalMs": 30000,
+        "networkEnabled": false,
+        "fixturePath": "config/samples/http-polling-response.json",
+        "observedAtField": "observedAt",
+        "recordsPath": "records",
+        "valueField": "value",
+        "pointRefField": "pointRef",
+        "assetRefField": "assetRef",
+        "qualityField": "quality",
+        "metadataField": "metadata"
+      }
+    },
+    {
+      "connectorId": "connector-simulator-example-01",
+      "name": "Simulator Runtime Example Connector",
+      "protocol": "simulator",
+      "enabled": true,
+      "siteId": "site-001",
+      "zoneId": "zone-sim",
+      "sourceSystemId": "source-simulator-001",
+      "endpointRef": "connector-endpoint-placeholder",
+      "mappingRef": "mapping-simulator-runtime",
+      "capabilityProfile": "simulator-readonly",
+      "pollIntervalSec": 5,
+      "timeoutMs": 2000,
+      "retryPolicy": {
+        "maxRetries": 1,
+        "backoffMs": 300
+      },
+      "metadata": {
+        "notes": "synthetic runtime fixture only"
+      }
+    },
+    {
+      "connectorId": "connector-disabled-example-01",
+      "name": "Disabled Example Connector",
+      "protocol": "simulator",
+      "enabled": false,
+      "siteId": "site-001",
+      "zoneId": "zone-disabled",
+      "sourceSystemId": "source-disabled-001",
+      "endpointRef": "connector-endpoint-placeholder",
+      "mappingRef": "mapping-simulator-default",
+      "capabilityProfile": "simulator-disabled",
+      "pollIntervalSec": 30,
+      "timeoutMs": 3000,
+      "retryPolicy": {
+        "maxRetries": 1,
+        "backoffMs": 500
+      },
+      "metadata": {
+        "notes": "disabled fixture for lifecycle validation"
+      }
+    },
+    {
+      "connectorId": "connector-invalid-example-01",
+      "name": "Invalid Example Connector",
+      "protocol": "unknown-protocol",
+      "enabled": true,
+      "siteId": "site-001",
+      "zoneId": "zone-invalid",
+      "sourceSystemId": "source-invalid-001",
+      "endpointRef": "connector-endpoint-placeholder",
+      "mappingRef": "",
+      "capabilityProfile": "invalid-profile",
+      "pollIntervalSec": 0,
+      "timeoutMs": -1,
+      "retryPolicy": {
+        "maxRetries": -1,
+        "backoffMs": -10
+      },
+      "metadata": {
+        "notes": "invalid fixture for quarantine validation"
+      }
+    }
+  ]
+}

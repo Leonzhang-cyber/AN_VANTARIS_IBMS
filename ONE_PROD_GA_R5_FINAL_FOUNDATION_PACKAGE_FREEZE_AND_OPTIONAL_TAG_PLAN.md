@@ -52,12 +52,12 @@ This is a final freeze and optional tag plan only. No installation, rollback, DB
 
 | Package | Path | File count | Status |
 | --- | --- | ---: | --- |
-| EDGE | `AN_VANTARIS_ONE/packages/AN_VANTARIS_EDGE` | 10 | synced |
+| EDGE | `AN_VANTARIS_ONE/packages/AN_VANTARIS_EDGE` | 248 | synced |
 | LINK | `AN_VANTARIS_ONE/packages/AN_VANTARIS_LINK` | 153 | synced |
 | DB | `AN_VANTARIS_ONE/packages/AN_VANTARIS_DB` | 14 | synced |
 | Contracts | `AN_VANTARIS_ONE/packages/AN_VANTARIS_Contracts` | 174 | synced |
 
-Known limitation: EDGE currently has 10 files unless the full EDGE package is later resynced.
+Known limitation resolved by R6: EDGE previously had 10 files; the full runtime resync raised the package count to 248 while preserving VANTARIS ONE boundary files.
 
 ## Forbidden Scan Result
 
@@ -122,4 +122,3 @@ Tag creation is not executed in R5. If explicitly instructed later, create an an
 ## PASS Marker
 
 `ONE_PROD_GA_R5_FINAL_FOUNDATION_PACKAGE_FREEZE_PASS`
-

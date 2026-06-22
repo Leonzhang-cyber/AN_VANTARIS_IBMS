@@ -1,0 +1,73 @@
+{
+  "connectorId": "connector-opcua-example-01",
+  "protocol": "opc-ua-readonly",
+  "networkEnabled": false,
+  "source": "synthetic-fixture",
+  "endpointUrl": "mock://synthetic-opc-ua-server",
+  "securityMode": "None",
+  "securityPolicy": "None",
+  "namespaceUri": "urn:synthetic:opcua:namespace",
+  "serverApplicationUri": "urn:synthetic:opcua:server",
+  "nodes": [
+    {
+      "pointId": "opcua.point.temperature.001",
+      "nodeId": "ns=2;s=Building.AHU01.Temperature",
+      "browseName": "AHU01.Temperature",
+      "displayName": "AHU01 Temperature",
+      "dataType": "Double",
+      "value": 24.8,
+      "statusCode": "Good",
+      "sourceTimestamp": "2026-06-19T00:00:00.000Z",
+      "serverTimestamp": "2026-06-19T00:00:00.100Z",
+      "engineeringUnit": "C"
+    },
+    {
+      "pointId": "opcua.point.humidity.001",
+      "nodeId": "ns=2;i=1001",
+      "browseName": "AHU01.Humidity",
+      "displayName": "AHU01 Humidity",
+      "dataType": "Float",
+      "value": 52.1,
+      "statusCode": "Good",
+      "sourceTimestamp": "2026-06-19T00:00:01.000Z",
+      "serverTimestamp": "2026-06-19T00:00:01.100Z",
+      "engineeringUnit": "%"
+    },
+    {
+      "pointId": "opcua.point.running.001",
+      "nodeId": "ns=2;s=Building.AHU01.Running",
+      "browseName": "AHU01.Running",
+      "displayName": "AHU01 Running",
+      "dataType": "Boolean",
+      "value": true,
+      "statusCode": "Good",
+      "sourceTimestamp": "2026-06-19T00:00:02.000Z",
+      "serverTimestamp": "2026-06-19T00:00:02.100Z",
+      "engineeringUnit": "state"
+    },
+    {
+      "pointId": "opcua.point.alarmCount.001",
+      "nodeId": "ns=2;i=1002",
+      "browseName": "AHU01.AlarmCount",
+      "displayName": "AHU01 Alarm Count",
+      "dataType": "Int32",
+      "value": 0,
+      "statusCode": "Good",
+      "sourceTimestamp": "2026-06-19T00:00:03.000Z",
+      "serverTimestamp": "2026-06-19T00:00:03.100Z",
+      "engineeringUnit": "count"
+    },
+    {
+      "pointId": "opcua.point.mode.001",
+      "nodeId": "ns=2;s=Building.AHU01.Mode",
+      "browseName": "AHU01.Mode",
+      "displayName": "AHU01 Mode",
+      "dataType": "String",
+      "value": "Auto",
+      "statusCode": "Good",
+      "sourceTimestamp": "2026-06-19T00:00:04.000Z",
+      "serverTimestamp": "2026-06-19T00:00:04.100Z",
+      "engineeringUnit": "mode"
+    }
+  ]
+}

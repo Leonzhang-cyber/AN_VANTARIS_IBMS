@@ -41,9 +41,9 @@
       "packageId": "edge",
       "packageName": "AN_VANTARIS_EDGE",
       "packagePath": "AN_VANTARIS_ONE/packages/AN_VANTARIS_EDGE",
-      "fileCount": 10,
+      "fileCount": 248,
       "status": "synced",
-      "knownLimitation": "EDGE currently has 10 files unless full EDGE package is later resynced."
+      "knownLimitation": "Resolved by ONE-PROD-GA-R6 full EDGE runtime resync; previous EDGE count was 10."
     },
     {
       "packageId": "link",
@@ -116,4 +116,3 @@
   },
   "passMarker": "ONE_PROD_GA_R5_FINAL_FOUNDATION_PACKAGE_FREEZE_PASS"
 }
-

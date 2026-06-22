@@ -1,0 +1,30 @@
+{
+  "source": "synthetic-http-system",
+  "observedAt": "2026-06-18T10:00:00.000Z",
+  "records": [
+    {
+      "sourceRef": "http-sample-source-001",
+      "pointRef": "http.point.temperature.001",
+      "assetRef": "asset.synthetic.ahu.001",
+      "value": 23.7,
+      "unit": "C",
+      "quality": "good",
+      "metadata": {
+        "floor": "L1",
+        "zone": "synthetic-zone-a"
+      }
+    },
+    {
+      "sourceRef": "http-sample-source-001",
+      "pointRef": "http.point.humidity.001",
+      "assetRef": "asset.synthetic.ahu.001",
+      "value": 48.2,
+      "unit": "percent",
+      "quality": "good",
+      "metadata": {
+        "floor": "L1",
+        "zone": "synthetic-zone-a"
+      }
+    }
+  ]
+}

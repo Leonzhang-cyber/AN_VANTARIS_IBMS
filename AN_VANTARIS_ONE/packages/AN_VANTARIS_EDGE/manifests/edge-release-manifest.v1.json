@@ -1,0 +1,30 @@
+{
+  "packageName": "AN_VANTARIS_EDGE",
+  "packageRole": "Unified EDGE Runtime",
+  "releaseTrack": "International GA Engineering Hardening",
+  "certificationClaim": "NOT_CERTIFIED",
+  "securityBaseline": "IEC62443_ALIGNED_BASELINE_V1",
+  "contractsAuthority": "AN_VANTARIS_Contracts",
+  "supportedDeploymentProfiles": [
+    "standalone-ufms",
+    "vantaris-one"
+  ],
+  "requiredArtifacts": [
+    "config template",
+    "deployment profile templates",
+    "connector profile template",
+    "systemd service template",
+    "install script",
+    "uninstall script",
+    "smoke script",
+    "validation script",
+    "evidence templates"
+  ],
+  "forbidden": [
+    "real secrets",
+    "DB credentials",
+    "private EDGE forks",
+    "human JWT for machine runtime",
+    "direct DB write"
+  ]
+}

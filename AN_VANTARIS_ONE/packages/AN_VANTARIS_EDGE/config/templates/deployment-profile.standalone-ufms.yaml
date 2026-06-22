@@ -1,0 +1,13 @@
+mode: standalone-ufms
+enabledModules:
+  - UFMS
+edgeRuntime: AN_VANTARIS_EDGE
+linkRuntime: AN_VANTARIS_LINK
+contractsAuthority: AN_VANTARIS_Contracts
+routeTarget: UFMS Code/API
+singleRuntimeRule:
+  noDuplicateEdgeLink: true
+  noDirectDbWrite: true
+notes:
+  - Standalone UFMS uses shared EDGE/LINK packages.
+  - No private runtime forks.

@@ -34,7 +34,7 @@
       "packageId": "edge",
       "packageName": "AN_VANTARIS_EDGE",
       "packagePath": "AN_VANTARIS_ONE/packages/AN_VANTARIS_EDGE",
-      "fileCount": 10,
+      "fileCount": 248,
       "consoleVisible": true,
       "readOnly": true,
       "runtimeEnabled": false,
@@ -119,4 +119,3 @@
   },
   "passMarker": "ONE_PROD_GA_R3_FOUNDATION_PACKAGE_READONLY_API_HEALTH_PASS"
 }
-

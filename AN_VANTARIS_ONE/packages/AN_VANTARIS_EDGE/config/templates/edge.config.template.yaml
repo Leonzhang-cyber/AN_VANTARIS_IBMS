@@ -1,0 +1,65 @@
+metadata:
+  templateVersion: v1
+  packageName: AN_VANTARIS_EDGE
+  note: "IEC 62443 aligned configuration template; certification-ready evidence baseline"
+
+deploymentProfile: standalone-ufms  # standalone-ufms | vantaris-one
+
+runtime:
+  mode: active
+  gracefulShutdownSeconds: 30
+  restartRecoveryEnabled: true
+
+machineIdentity:
+  machineId: "MACHINE_ID_PLACEHOLDER"
+  keyRef: "KEY_REF_PLACEHOLDER"
+  trustDomain: "TRUST_DOMAIN_PLACEHOLDER"
+
+linkTarget:
+  linkRuntime: AN_VANTARIS_LINK
+  handoffEndpoint: "https://link-gateway.example.local/edge/v1/handoff"
+
+buffer:
+  mode: store-and-forward
+  maxEntries: 10000
+  retentionHours: 72
+
+heartbeat:
+  intervalSeconds: 30
+  degradedAfterMisses: 3
+
+logging:
+  level: info
+  directory: "./logs"
+
+observability:
+  emitHealth: true
+  emitBufferMetrics: true
+  emitThroughputMetrics: true
+
+security:
+  signedHandoffRequired: true
+  replayProtection: true
+  idempotencyRequired: true
+  humanJwtAllowed: false
+
+connectors:
+  - connectorProfileRef: "./config/templates/connector-profile.template.yaml"
+
+licenseProfile:
+  profile: "LICENSE_PROFILE_PLACEHOLDER"
+
+moduleProfiles:
+  - UFMS
+
+audit:
+  enabled: true
+  evidenceRef: "./evidence/templates/EDGE_GA_EVIDENCE_INDEX_TEMPLATE.md"
+
+evidence:
+  baseline: "CERTIFICATION_READY_EVIDENCE_BASELINE"
+
+# Guardrails:
+# - No real secrets in config templates.
+# - No direct DB credentials.
+# - EDGE/LINK must not direct-write DB.

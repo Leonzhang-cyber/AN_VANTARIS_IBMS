@@ -13,7 +13,7 @@
       "packageId": "edge",
       "packageName": "AN_VANTARIS_EDGE",
       "packagePath": "AN_VANTARIS_ONE/packages/AN_VANTARIS_EDGE",
-      "fileCount": 10,
+      "fileCount": 248,
       "required": true
     },
     {
@@ -84,4 +84,3 @@
   },
   "passMarker": "ONE_PROD_GA_R4_OFFLINE_INSTALL_VERIFY_ROLLBACK_PACKAGE_PASS"
 }
-

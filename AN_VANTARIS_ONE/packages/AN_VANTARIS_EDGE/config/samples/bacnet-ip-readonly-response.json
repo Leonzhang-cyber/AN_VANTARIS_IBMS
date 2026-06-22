@@ -1,0 +1,64 @@
+{
+  "connectorId": "connector-bacnet-example-01",
+  "protocol": "bacnet-ip-readonly",
+  "networkEnabled": false,
+  "source": "synthetic-fixture",
+  "device": {
+    "deviceId": 51001,
+    "name": "Synthetic BACnet Device A",
+    "address": "mock://synthetic-bacnet-device",
+    "vendorName": "Synthetic Controls Vendor"
+  },
+  "points": [
+    {
+      "pointId": "bacnet.point.temperature.ai.001",
+      "objectType": "analogInput",
+      "objectInstance": 1,
+      "propertyIdentifier": "presentValue",
+      "value": 24.3,
+      "engineeringUnit": "C",
+      "status": "good",
+      "timestamp": "2026-06-19T00:00:00.000Z"
+    },
+    {
+      "pointId": "bacnet.point.humidity.av.001",
+      "objectType": "analogValue",
+      "objectInstance": 2,
+      "propertyIdentifier": "presentValue",
+      "value": 53.2,
+      "engineeringUnit": "%",
+      "status": "good",
+      "timestamp": "2026-06-19T00:00:02.000Z"
+    },
+    {
+      "pointId": "bacnet.point.fan.bi.001",
+      "objectType": "binaryInput",
+      "objectInstance": 3,
+      "propertyIdentifier": "presentValue",
+      "value": true,
+      "engineeringUnit": "state",
+      "status": "good",
+      "timestamp": "2026-06-19T00:00:03.000Z"
+    },
+    {
+      "pointId": "bacnet.point.alarm.bv.001",
+      "objectType": "binaryValue",
+      "objectInstance": 4,
+      "propertyIdentifier": "presentValue",
+      "value": false,
+      "engineeringUnit": "state",
+      "status": "good",
+      "timestamp": "2026-06-19T00:00:04.000Z"
+    },
+    {
+      "pointId": "bacnet.point.mode.msv.001",
+      "objectType": "multiStateValue",
+      "objectInstance": 5,
+      "propertyIdentifier": "presentValue",
+      "value": 2,
+      "engineeringUnit": "mode",
+      "status": "good",
+      "timestamp": "2026-06-19T00:00:05.000Z"
+    }
+  ]
+}

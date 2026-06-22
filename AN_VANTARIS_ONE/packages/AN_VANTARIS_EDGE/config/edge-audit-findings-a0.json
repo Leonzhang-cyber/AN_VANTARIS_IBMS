@@ -1,0 +1,356 @@
+{
+  "auditId": "UFMS-EDGE-CURRENT-CAPABILITY-AUDIT-A0",
+  "freezeTaskId": "UFMS-EDGE-C4-00A",
+  "repository": "/Volumes/Work/VANTARIS_UFMS_FULL",
+  "branch": "main",
+  "baselineCommit": "3c70692",
+  "classification": "AUDIT_SNAPSHOT",
+  "productionCertification": false,
+  "foundationCompletenessPercent": 92,
+  "productionRuntimeReadinessPercent": 41,
+  "connectorProductionReadinessPercent": 28,
+  "offlineDeploymentReadinessPercent": 63,
+  "securityReadinessPercent": 72,
+  "validationConfidencePercent": 88,
+  "overallConfidencePercent": 86,
+  "connectors": [
+    {
+      "productProtocol": "file-import",
+      "registryKey": "file",
+      "foundationStatus": "foundation-ready",
+      "syntheticFixtureOnly": true,
+      "realConnectivityEnabled": false,
+      "supportsWriteback": false,
+      "productionDependencyIncluded": false
+    },
+    {
+      "productProtocol": "http-polling",
+      "registryKey": "http",
+      "foundationStatus": "foundation-ready",
+      "syntheticFixtureOnly": true,
+      "realConnectivityEnabled": false,
+      "supportsWriteback": false,
+      "productionDependencyIncluded": false
+    },
+    {
+      "productProtocol": "snmp-readonly",
+      "registryKey": "snmp",
+      "foundationStatus": "foundation-ready",
+      "syntheticFixtureOnly": true,
+      "realConnectivityEnabled": false,
+      "supportsWriteback": false,
+      "productionDependencyIncluded": false
+    },
+    {
+      "productProtocol": "modbus-tcp-readonly",
+      "registryKey": "modbus",
+      "foundationStatus": "foundation-ready",
+      "syntheticFixtureOnly": true,
+      "realConnectivityEnabled": false,
+      "supportsWriteback": false,
+      "productionDependencyIncluded": false
+    },
+    {
+      "productProtocol": "bacnet-ip-readonly",
+      "registryKey": "bacnet",
+      "foundationStatus": "foundation-ready",
+      "syntheticFixtureOnly": true,
+      "realConnectivityEnabled": false,
+      "supportsWriteback": false,
+      "productionDependencyIncluded": false
+    },
+    {
+      "productProtocol": "opc-ua-readonly",
+      "registryKey": "opcua",
+      "foundationStatus": "foundation-ready",
+      "syntheticFixtureOnly": true,
+      "realConnectivityEnabled": false,
+      "supportsWriteback": false,
+      "productionDependencyIncluded": false
+    }
+  ],
+  "productionBlockers": [
+    {
+      "id": "PB-01",
+      "title": "No real connector connectivity",
+      "description": "All C3 connectors remain synthetic-only with network disabled.",
+      "risk": "CRITICAL"
+    },
+    {
+      "id": "PB-02",
+      "title": "No production protocol dependencies",
+      "description": "Protocol runtime does not include production transport/client dependencies.",
+      "risk": "HIGH"
+    },
+    {
+      "id": "PB-03",
+      "title": "No complete credential and certificate provider",
+      "description": "Credential and certificate lifecycle is not production-integrated.",
+      "risk": "CRITICAL"
+    },
+    {
+      "id": "PB-04",
+      "title": "Install/upgrade/rollback lifecycle not implemented",
+      "description": "Offline foundation exists but production lifecycle scaffold is pending.",
+      "risk": "CRITICAL"
+    },
+    {
+      "id": "PB-05",
+      "title": "Release checksum and signature chain incomplete",
+      "description": "End-to-end release integrity workflow is not complete.",
+      "risk": "HIGH"
+    },
+    {
+      "id": "PB-06",
+      "title": "SBOM and vulnerability workflow incomplete",
+      "description": "Inventory and vulnerability governance process is not finalized.",
+      "risk": "HIGH"
+    },
+    {
+      "id": "PB-07",
+      "title": "Runtime management remains CLI/local-state oriented",
+      "description": "Operational management is local-first and lacks production remote control.",
+      "risk": "MEDIUM"
+    },
+    {
+      "id": "PB-08",
+      "title": "Durable recovery hardening needed",
+      "description": "Crash/restart/resource-edge durability requires production hardening.",
+      "risk": "HIGH"
+    },
+    {
+      "id": "PB-09",
+      "title": "Resource and corruption protection hardening needed",
+      "description": "Disk-full/corruption and partial-write handling needs stronger production controls.",
+      "risk": "HIGH"
+    },
+    {
+      "id": "PB-10",
+      "title": "Production observability and remote management incomplete",
+      "description": "Current diagnostics are strong locally but not yet complete for fleet operations.",
+      "risk": "HIGH"
+    }
+  ],
+  "nextDevelopmentSequence": [
+    {
+      "order": 1,
+      "code": "C4-01",
+      "title": "Offline Install / Upgrade / Rollback Scaffold",
+      "purpose": "Define lifecycle scaffolding without enabling production connectivity.",
+      "prerequisites": [
+        "C4-00 foundation complete",
+        "C4-00A audit freeze approved"
+      ],
+      "allowedScope": [
+        "AN_VANTARIS_EDGE deployment lifecycle scripts",
+        "Documentation and evidence templates"
+      ],
+      "prohibitedScope": [
+        "Real protocol enablement",
+        "Connector runtime behavior changes"
+      ],
+      "completionEvidence": [
+        "Lifecycle scaffold report",
+        "Validation smoke evidence"
+      ],
+      "productionRiskAddressed": [
+        "Install governance gap",
+        "Rollback governance gap"
+      ]
+    },
+    {
+      "order": 2,
+      "code": "C4-02",
+      "title": "Release Manifest / Checksum / Signature Foundation",
+      "purpose": "Freeze release integrity process for offline distribution.",
+      "prerequisites": [
+        "C4-01 completed"
+      ],
+      "allowedScope": [
+        "Manifest/checksum/signature metadata",
+        "Validation scripts"
+      ],
+      "prohibitedScope": [
+        "Runtime connector logic changes"
+      ],
+      "completionEvidence": [
+        "Release integrity evidence report"
+      ],
+      "productionRiskAddressed": [
+        "Release tampering risk"
+      ]
+    },
+    {
+      "order": 3,
+      "code": "C4-03",
+      "title": "SBOM / Dependency Inventory Foundation",
+      "purpose": "Establish dependency inventory governance baseline.",
+      "prerequisites": [
+        "C4-02 completed"
+      ],
+      "allowedScope": [
+        "SBOM metadata",
+        "Dependency inventory validation"
+      ],
+      "prohibitedScope": [
+        "Dependency upgrades for feature scope"
+      ],
+      "completionEvidence": [
+        "SBOM baseline evidence"
+      ],
+      "productionRiskAddressed": [
+        "Unknown dependency and vulnerability risk"
+      ]
+    },
+    {
+      "order": 4,
+      "code": "C4-04",
+      "title": "Runtime User / Permission / Filesystem Hardening",
+      "purpose": "Harden runtime execution context and filesystem boundaries.",
+      "prerequisites": [
+        "C4-03 completed"
+      ],
+      "allowedScope": [
+        "Runtime hardening policy and scripts"
+      ],
+      "prohibitedScope": [
+        "Real protocol connectivity"
+      ],
+      "completionEvidence": [
+        "Hardening checklist evidence"
+      ],
+      "productionRiskAddressed": [
+        "Privilege and filesystem misuse risk"
+      ]
+    },
+    {
+      "order": 5,
+      "code": "C4-05",
+      "title": "Service Lifecycle and Recovery Foundation",
+      "purpose": "Strengthen restart/crash recovery and lifecycle governance.",
+      "prerequisites": [
+        "C4-04 completed"
+      ],
+      "allowedScope": [
+        "Recovery validation and service lifecycle controls"
+      ],
+      "prohibitedScope": [
+        "Changing C3 connector semantics"
+      ],
+      "completionEvidence": [
+        "Recovery stress evidence"
+      ],
+      "productionRiskAddressed": [
+        "Unbounded failure and restart risk"
+      ]
+    },
+    {
+      "order": 6,
+      "code": "C4-06",
+      "title": "Validation Performance Hardening",
+      "purpose": "Reduce validation latency and avoid scan amplification.",
+      "prerequisites": [
+        "C4-05 completed"
+      ],
+      "allowedScope": [
+        "Validation script performance hardening"
+      ],
+      "prohibitedScope": [
+        "Feature scope changes"
+      ],
+      "completionEvidence": [
+        "Performance benchmark evidence"
+      ],
+      "productionRiskAddressed": [
+        "Slow validation and CI bottleneck risk"
+      ]
+    },
+    {
+      "order": 7,
+      "code": "C5-00",
+      "title": "Real Connector Enablement Gate",
+      "purpose": "Define mandatory security and governance gate before any real connector enablement.",
+      "prerequisites": [
+        "C4-06 completed",
+        "Security and credential governance approved"
+      ],
+      "allowedScope": [
+        "Gate policy, checklists, and controls"
+      ],
+      "prohibitedScope": [
+        "Any real SNMP/Modbus/BACnet/OPC UA enablement before gate pass"
+      ],
+      "completionEvidence": [
+        "Gate readiness report"
+      ],
+      "productionRiskAddressed": [
+        "Unsafe production protocol activation risk"
+      ]
+    },
+    {
+      "order": 8,
+      "code": "C5-01",
+      "title": "File Import Production Enablement",
+      "purpose": "Enable controlled production file import under C5-00 gate.",
+      "prerequisites": [
+        "C5-00 gate pass"
+      ],
+      "allowedScope": [
+        "File import production controls"
+      ],
+      "prohibitedScope": [
+        "Industrial protocol activation"
+      ],
+      "completionEvidence": [
+        "File import production readiness evidence"
+      ],
+      "productionRiskAddressed": [
+        "Unsafe ingest path risk"
+      ]
+    },
+    {
+      "order": 9,
+      "code": "C5-02",
+      "title": "HTTP Polling Production Enablement",
+      "purpose": "Enable controlled production HTTP polling under C5-00 gate.",
+      "prerequisites": [
+        "C5-00 gate pass",
+        "C5-01 completed"
+      ],
+      "allowedScope": [
+        "HTTP polling production controls"
+      ],
+      "prohibitedScope": [
+        "Industrial protocol activation before dedicated gates"
+      ],
+      "completionEvidence": [
+        "HTTP polling production readiness evidence"
+      ],
+      "productionRiskAddressed": [
+        "Uncontrolled outbound integration risk"
+      ]
+    },
+    {
+      "order": 10,
+      "code": "C6",
+      "title": "Durable Buffer / Retry / Recovery",
+      "purpose": "Promote local durability foundations to production-grade reliability controls.",
+      "prerequisites": [
+        "C5-02 completed"
+      ],
+      "allowedScope": [
+        "Durability, retry, recovery hardening"
+      ],
+      "prohibitedScope": [
+        "Cross-package ownership expansion beyond EDGE boundary"
+      ],
+      "completionEvidence": [
+        "Durability and recovery production evidence"
+      ],
+      "productionRiskAddressed": [
+        "Data loss and recovery inconsistency risk"
+      ]
+    }
+  ],
+  "readinessKey": "UFMS_EDGE_C4_00A_AUDIT_FINDINGS_FREEZE_PASS"
+}

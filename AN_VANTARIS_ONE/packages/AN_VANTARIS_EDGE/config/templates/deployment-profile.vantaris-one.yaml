@@ -1,0 +1,18 @@
+mode: vantaris-one
+enabledModules:
+  - UFMS
+  - MMS
+  - ESG
+  - DCIM
+  - AI_VIDEO
+  - DIGITAL_TWIN
+edgeRuntime: AN_VANTARIS_EDGE
+linkRuntime: AN_VANTARIS_LINK
+contractsAuthority: AN_VANTARIS_Contracts
+routeTarget: VANTARIS ONE Code/API
+singleRuntimeRule:
+  ufmsInsidePlatformNoExtraEdgeLink: true
+  noDirectDbWrite: true
+notes:
+  - VANTARIS ONE uses the same shared EDGE/LINK packages.
+  - No private runtime forks.
