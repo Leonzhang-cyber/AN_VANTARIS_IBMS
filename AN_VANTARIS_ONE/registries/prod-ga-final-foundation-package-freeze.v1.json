@@ -1,0 +1,119 @@
+{
+  "registryId": "prod-ga-final-foundation-package-freeze.v1",
+  "taskId": "ONE-PROD-GA-R5",
+  "name": "Final Production GA Foundation Package Freeze",
+  "version": "1.0.0",
+  "baselineCommit": "ef732c1536c4b5d799163ebfb674a4a9070326aa",
+  "branch": "sync/ufms-foundation-packages-20260622-104646",
+  "freezeDocument": "ONE_PROD_GA_R5_FINAL_FOUNDATION_PACKAGE_FREEZE_AND_OPTIONAL_TAG_PLAN.md",
+  "freezeReport": "ONE_PROD_GA_R5_FINAL_FOUNDATION_PACKAGE_FREEZE_AND_OPTIONAL_TAG_PLAN_REPORT.md",
+  "chain": [
+    {
+      "stage": "R1",
+      "name": "Foundation Packages Sync Gate",
+      "report": "ONE_PROD_GA_R1_FOUNDATION_PACKAGES_SYNC_GATE_REPORT.md",
+      "passMarker": "ONE_PROD_GA_R1_FOUNDATION_PACKAGES_SYNC_GATE_PASS"
+    },
+    {
+      "stage": "R2",
+      "name": "Production GA Console Entry",
+      "registry": "AN_VANTARIS_ONE/registries/prod-ga-foundation-package-console-entry.v1.json",
+      "report": "ONE_PROD_GA_R2_FOUNDATION_PACKAGE_CONSOLE_ENTRY_REPORT.md",
+      "passMarker": "ONE_PROD_GA_R2_FOUNDATION_PACKAGE_CONSOLE_ENTRY_PASS"
+    },
+    {
+      "stage": "R3",
+      "name": "Production GA Read-only API + Health",
+      "registry": "AN_VANTARIS_ONE/registries/prod-ga-foundation-package-readonly-api.v1.json",
+      "report": "ONE_PROD_GA_R3_FOUNDATION_PACKAGE_READONLY_API_HEALTH_REPORT.md",
+      "passMarker": "ONE_PROD_GA_R3_FOUNDATION_PACKAGE_READONLY_API_HEALTH_PASS"
+    },
+    {
+      "stage": "R4",
+      "name": "Offline Install Verify Rollback Package",
+      "manifest": "deployment/prod-ga/offline-package/manifest/prod-ga-foundation-package-manifest.v1.json",
+      "report": "ONE_PROD_GA_R4_OFFLINE_INSTALL_VERIFY_ROLLBACK_PACKAGE_REPORT.md",
+      "passMarker": "ONE_PROD_GA_R4_OFFLINE_INSTALL_VERIFY_ROLLBACK_PACKAGE_PASS"
+    }
+  ],
+  "packages": [
+    {
+      "packageId": "edge",
+      "packageName": "AN_VANTARIS_EDGE",
+      "packagePath": "AN_VANTARIS_ONE/packages/AN_VANTARIS_EDGE",
+      "fileCount": 10,
+      "status": "synced",
+      "knownLimitation": "EDGE currently has 10 files unless full EDGE package is later resynced."
+    },
+    {
+      "packageId": "link",
+      "packageName": "AN_VANTARIS_LINK",
+      "packagePath": "AN_VANTARIS_ONE/packages/AN_VANTARIS_LINK",
+      "fileCount": 153,
+      "status": "synced"
+    },
+    {
+      "packageId": "db",
+      "packageName": "AN_VANTARIS_DB",
+      "packagePath": "AN_VANTARIS_ONE/packages/AN_VANTARIS_DB",
+      "fileCount": 14,
+      "status": "synced"
+    },
+    {
+      "packageId": "contracts",
+      "packageName": "AN_VANTARIS_Contracts",
+      "packagePath": "AN_VANTARIS_ONE/packages/AN_VANTARIS_Contracts",
+      "fileCount": 174,
+      "status": "synced"
+    }
+  ],
+  "forbiddenScan": {
+    "status": "PASS",
+    "matches": []
+  },
+  "readOnlyApi": {
+    "registry": "AN_VANTARIS_ONE/registries/prod-ga-foundation-package-readonly-api.v1.json",
+    "endpoints": [
+      "GET /api/v1/one/prod-ga/foundation-packages",
+      "GET /api/v1/one/prod-ga/foundation-packages/health",
+      "GET /api/v1/one/prod-ga/foundation-packages/{packageId}"
+    ],
+    "mutatingMethodsAdded": false
+  },
+  "offlinePackage": {
+    "path": "deployment/prod-ga/offline-package",
+    "manifest": "deployment/prod-ga/offline-package/manifest/prod-ga-foundation-package-manifest.v1.json",
+    "scripts": {
+      "install": "deployment/prod-ga/offline-package/scripts/install-prod-ga-foundation.sh",
+      "verify": "deployment/prod-ga/offline-package/scripts/verify-prod-ga-foundation.sh",
+      "rollback": "deployment/prod-ga/offline-package/scripts/rollback-prod-ga-foundation.sh"
+    },
+    "installDryRunDefault": true,
+    "rollbackDryRunDefault": true
+  },
+  "validation": {
+    "packageRouteEnforcement": "ONE_PACKAGE_ROUTE_ENFORCEMENT_PASS",
+    "boundaryBaseline": "ONE_BOUNDARY_BASELINE_PASS",
+    "boundaryWarnings": "existing non-blocking legacy warnings only"
+  },
+  "optionalTagPlan": {
+    "tagName": "one-prod-ga-foundation-packages-local-freeze-20260622",
+    "tagCreated": false,
+    "pushPerformed": false
+  },
+  "safety": {
+    "installExecuted": false,
+    "rollbackExecuted": false,
+    "dbMigrationExecuted": false,
+    "runtimeActivation": false,
+    "edgeStarted": false,
+    "linkStarted": false,
+    "dbWrite": false,
+    "deploymentExecution": false,
+    "ufmsSourceWorkspaceModified": false,
+    "pushPerformed": false,
+    "tagCreated": false
+  },
+  "passMarker": "ONE_PROD_GA_R5_FINAL_FOUNDATION_PACKAGE_FREEZE_PASS"
+}
+
