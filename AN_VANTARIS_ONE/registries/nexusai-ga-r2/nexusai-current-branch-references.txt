@@ -1,0 +1,650 @@
+AN_VANTARIS_IBMS-backend/test/smoke/db_jwt_smoke.py:126:        print(f"\nSMOKE FAIL: {failures} assertion(s)")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/compatibility/test_legacy_device_read_facade.py:106:        for status, expected in ((0, "UNAVAILABLE"), (1, "AVAILABLE"), (2, "DEGRADED")):
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/test_excel_intake.py:136:               "DeviceName": "", "DeviceType": "CONTROLLER", "OperationalStatus": "AVAILABLE"}
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/fixtures.py:59:            "ACTIVE", "AVAILABLE", f"SYN-{idx + 1:03d}",
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/fixtures.py:64:        ("SYNTH-DEV-REV-PARENT", "UNRESOLVED_PARENT", "AVAILABLE", "ACTIVE", '{"parentSourceId":"SYNTH-PARENT-UNRESOLVED"}'),
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/fixtures.py:65:        ("SYNTH-DEV-REV-STAT", "UNKNOWN_OPERATIONAL", "AVAILABLE", "UNKNOWN", '{"zoneCode":"ZONE-REV-03"}'),
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/fixtures.py:66:        ("SYNTH-DEV-REV-UNIT", "MISSING_UNIT", "AVAILABLE", "ACTIVE", '{"zoneCode":"ZONE-REV-04"}'),
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/fixtures.py:67:        ("SYNTH-DEV-REV-JSON", "AMBIGUOUS_JSON", "AVAILABLE", "ACTIVE", '{"zoneCode":"ZONE-REV-05"}'),
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/fixtures.py:68:        ("SYNTH-DEV-REV-ACCESS", "REVIEW_ACCESS", "AVAILABLE", "ACTIVE", '{"zoneCode":"ZONE-REV-06"}'),
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/fixtures.py:80:         "SYNTH-SN-DUP-A", "ACTIVE", "AVAILABLE", "SYN-BLK-DUP-A", '{"zoneCode":"ZONE-BLK-01"}', TS, TS, "blocker", "", "duplicate"],
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/fixtures.py:83:         "SYNTH-SN-DUP-B", "ACTIVE", "AVAILABLE", "SYN-BLK-DUP-B", '{"zoneCode":"ZONE-BLK-02"}', TS, TS, "blocker", "", "duplicate"],
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/fixtures.py:86:         "SYNTH-SN-NOSRC", "ACTIVE", "AVAILABLE", "SYN-BLK-NOSRC", '{"zoneCode":"ZONE-BLK-03"}', TS, TS, "blocker", "", "missing-source-id"],
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/fixtures.py:89:         "SYNTH-SN-TEN", "ACTIVE", "AVAILABLE", "SYN-BLK-TENANT", '{"zoneCode":"ZONE-BLK-04"}', TS, TS, "blocker", "", "tenant"],
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/fixtures.py:92:         "SYNTH-SN-SITE", "ACTIVE", "AVAILABLE", "SYN-BLK-SITE", '{"zoneCode":"ZONE-BLK-05"}', TS, TS, "blocker", "", "site"],
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/evidence/excel/fixtures.py:95:         "SYNTH-SN-TAG", "ACTIVE", "AVAILABLE", "SYN-TAG-COLLISION", '{"zoneCode":"ZONE-BLK-06"}', TS, TS, "blocker", "", "tag-collision"],
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/migration_control/test_migration_control.py:48:        "retentionPolicy": "RETAIN_AGGREGATE_REPORTS_30_DAYS",
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/migration_control/test_migration_control.py:143:        self.assertIn("WAITING_FOR_APPROVAL", self.contract["allowedExecutionStates"])
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/migration_control/test_migration_control.py:172:        self.assertEqual(plan["executionState"], "WAITING_FOR_EVIDENCE")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/migration_control/test_migration_control.py:189:        self.assertEqual(plan["executionState"], "WAITING_FOR_APPROVAL")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/migration_control/test_migration_control.py:344:        self.assertEqual(plan["executionState"], "WAITING_FOR_APPROVAL")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/fixtures/clean-source-package.json:30:      "operationalStatus": "AVAILABLE",
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/fixtures/review-source-package.json:25:      "operationalStatus": "AVAILABLE",
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:55:        "retentionPolicy": "RETAIN_AGGREGATE_REPORTS_30_DAYS",
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:162:        plan["executionState"] = "WAITING_FOR_APPROVAL"
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:176:        codes = {item["gateCode"] for item in result["preExecutionGateResults"] if item["status"] == "FAIL"}
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/read_validation/test_read_validation_executor.py:492:        for state in ("DRAFT", "WAITING_FOR_APPROVAL", "EXECUTION_BLOCKED", "ROLLED_BACK"):
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/readiness/test_readiness_semantics.py:133:        self.assertEqual(gate["status"], "FAIL")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/readiness/test_readiness_semantics.py:163:        self.assertEqual(gate["status"], "FAIL")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/reconciliation/test_site_context.py:41:        "operationalStatus": "AVAILABLE",
+AN_VANTARIS_IBMS-backend/tests/asset_graph/airport_intake/test_formula_intake.py:46:            airport_context_id="AIRPORT-CONTEXT-REQUIRED",
+AN_VANTARIS_IBMS-backend/tests/asset_graph/airport_intake/test_formula_intake.py:155:            airport_context_id="AIRPORT-CONTEXT-REQUIRED",
+AN_VANTARIS_IBMS-backend/tests/asset_graph/airport_intake/test_airport_intake.py:21:    MAINTENANCE_EXTENSION_COLUMNS,
+AN_VANTARIS_IBMS-backend/tests/asset_graph/airport_intake/test_airport_intake.py:22:    PLACEHOLDER_AIRPORT,
+AN_VANTARIS_IBMS-backend/tests/asset_graph/airport_intake/test_airport_intake.py:57:            "airport_context_id": PLACEHOLDER_AIRPORT,
+AN_VANTARIS_IBMS-backend/tests/asset_graph/airport_intake/test_airport_intake.py:59:            "run_id": "AIRPORT-ASSET-INTAKE-TEST",
+AN_VANTARIS_IBMS-backend/tests/asset_graph/airport_intake/test_airport_intake.py:114:        for column in MAINTENANCE_EXTENSION_COLUMNS:
+AN_VANTARIS_IBMS-backend/tests/asset_graph/airport_intake/test_airport_intake.py:291:                airport_context_id=PLACEHOLDER_AIRPORT,
+AN_VANTARIS_IBMS-backend/tests/asset_graph/airport_intake/test_airport_intake.py:407:            "--airport-context-id", PLACEHOLDER_AIRPORT,
+AN_VANTARIS_IBMS-backend/tests/asset_graph/airport_intake/test_airport_intake.py:413:        self.assertIn("ONE_AIRPORT_ASSET_EXCEL_INTAKE_RUN_PASS", proc.stdout)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:80:        "retentionPolicy": "RETAIN_AGGREGATE_REPORTS_30_DAYS",
+AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:211:        self.assertEqual(REJECTED_STATES, frozenset({"EXECUTION_BLOCKED", "VALIDATION_FAILED", "ROLLED_BACK"}))
+AN_VANTARIS_IBMS-backend/tests/asset_graph/read_model/test_ephemeral_read_model.py:244:            "executionState": "VALIDATION_FAILED",
+AN_VANTARIS_IBMS-backend/tests/asset_graph/test_asset_graph_foundation.py:37:        operational_status=OperationalStatus.AVAILABLE.value,
+AN_VANTARIS_IBMS-backend/tests/asset_graph/test_asset_graph_foundation.py:124:            operational_status=OperationalStatus.MAINTENANCE.value,
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:12:    AUTHORIZATION_WAITING_PERSISTENCE_APPROVAL,
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:13:    AUTHORIZATION_WAITING_READINESS,
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:14:    AUTHORIZATION_WAITING_REAL_EVIDENCE,
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:263:        self.assertEqual(result.decision, AUTHORIZATION_WAITING_REAL_EVIDENCE)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:272:        self.assertEqual(result.decision, AUTHORIZATION_WAITING_READINESS)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:281:        self.assertEqual(result.decision, AUTHORIZATION_WAITING_PERSISTENCE_APPROVAL)
+AN_VANTARIS_IBMS-backend/tests/asset_graph/persistence_contract/test_persistence_contract.py:472:        self.assertEqual(result.status, "FAILED")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/test_airport_reconciliation_profile.py:471:        self.assertEqual(AUTHORITY, "ONE-AIRPORT-A1-04")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/test_airport_reconciliation_profile.py:715:        self.assertEqual(status, "DUPLICATE_GROUP_MAINTENANCE_CONFLICT")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/test_airport_spatial_profile.py:16:from src.asset_graph.industry_profiles.airport_spatial.constants import GENERIC_TO_AIRPORT, PROFILE_ID
+AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/test_airport_spatial_profile.py:244:        self.assertEqual(GENERIC_TO_AIRPORT["Airport"]["genericTarget"], "Site")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/test_airport_spatial_profile.py:248:        self.assertEqual(GENERIC_TO_AIRPORT["Terminal"]["genericTarget"], "Facility")
+AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/test_airport_spatial_profile.py:382:        self.assertTrue(any(r["genericRelationshipSemantic"] == "CONTAINS" for r in payload["relationshipCandidates"]))
+AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/fixtures.py:10:AUTHORITY = "ONE-AIRPORT-A1-01"
+AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/fixtures.py:49:        "airport": ["AIRPORT-CONTEXT-REQUIRED"],
+AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/fixtures.py:81:        "airport_context_id": "AIRPORT-CONTEXT-REQUIRED",
+AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/fixtures.py:122:        "authority": "ONE-AIRPORT-A1-02",
+AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/fixtures.py:213:        "authority": "ONE-AIRPORT-A1-03",
+AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/fixtures.py:238:        "authority": "ONE-AIRPORT-A1-03A",
+AN_VANTARIS_IBMS-backend/tests/asset_graph/industry_profiles/fixtures.py:248:        "authority": "ONE-AIRPORT-A1-03",
+AN_VANTARIS_IBMS-backend/src/testMQTT/test_air_quality_receiver.py:5:用于测试 AIR_QUALITY_001 设备的数据接收和字段映射
+AN_VANTARIS_IBMS-backend/src/testMQTT/test_air_quality_receiver.py:21:DEVICE_ID = "AIR_QUALITY_001"
+AN_VANTARIS_IBMS-backend/src/testMQTT/air_quality_simulator.py:23:DEVICE_ID = "AIR_QUALITY_001"
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:218:        self.assertEqual(result.failure_policy, "FAIL_OPERATION_WITH_AUDIT_ERROR")
+AN_VANTARIS_IBMS-backend/src/tests/governance/audit/test_audit_provider.py:219:        self.assertEqual(result.error_code, "AUDIT_PROVIDER_FAILURE")
+AN_VANTARIS_IBMS-backend/src/data_modeling/__init__.py:3:Data Modeling Module - AIoT预测模块
+AN_VANTARIS_IBMS-backend/src/asset_graph/compatibility/facade.py:44:        0: OperationalStatus.UNAVAILABLE.value,
+AN_VANTARIS_IBMS-backend/src/asset_graph/compatibility/facade.py:45:        1: OperationalStatus.AVAILABLE.value,
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/runner.py:200:        "UNAVAILABLE": 0,
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/runner.py:201:        "AVAILABLE": 1,
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/excel/intake.py:59:            "operationalStatus": "AVAILABLE",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/evidence/excel/intake.py:80:            "operationalStatus": "AVAILABLE",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/migration_control/gates.py:63:            status="PASS" if readiness_ok else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/migration_control/gates.py:70:            status="PASS" if classification_gate_ok else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/migration_control/gates.py:77:            status="PASS" if control_input.evidence_digest else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/migration_control/gates.py:86:            else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/migration_control/gates.py:96:            else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/migration_control/gates.py:103:            status="PASS" if control_input.deterministic_verification_confirmed else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/migration_control/gates.py:112:            else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/migration_control/gates.py:133:            else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/migration_control/gates.py:146:            else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/migration_control/gates.py:156:            else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/migration_control/gates.py:168:            status="PASS" if _approval_roles_present(active, requirements) else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/migration_control/gates.py:175:            status="PASS" if _approval_scope_matches(active, scope_digest, control_input) else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/migration_control/gates.py:182:            status="PASS" if _approval_not_expired(active, control_input.evaluation_instant) else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/migration_control/gates.py:192:            else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/migration_control/gates.py:202:            else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/migration_control/gates.py:213:            else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/migration_control/gates.py:231:            else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/migration_control/evaluator.py:30:    if any(gate.gate_code == "APPROVAL_PRESENT_GATE" and gate.status == "FAIL" for gate in approval_results):
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/migration_control/evaluator.py:47:        return "WAITING_FOR_EVIDENCE"
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/migration_control/evaluator.py:55:        return "WAITING_FOR_READINESS"
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/migration_control/evaluator.py:59:        return "WAITING_FOR_APPROVAL"
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/pre_execution.py:62:            status="PASS" if plan.get("planName") and plan.get("planVersion") == "1.0.0" else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/pre_execution.py:68:            status="PASS" if plan.get("executionState") == ACCEPTED_PLAN_STATE else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/pre_execution.py:74:            status="PASS" if plan.get("approvalStatus") == "APPROVED" else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/pre_execution.py:80:            status="PASS" if _approval_type_compatible(classification) else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/pre_execution.py:86:            status="PASS" if str(scope.get("approvalExpiry", "")) > evaluation_instant else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/pre_execution.py:92:            status="PASS" if scope.get("scopeDigest") == scope_digest else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/pre_execution.py:100:            else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/pre_execution.py:108:            else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/pre_execution.py:116:            else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/pre_execution.py:122:            status="PASS" if scope.get("tenantScope") else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/pre_execution.py:128:            status="PASS" if scope.get("siteScope") else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/pre_execution.py:134:            status="PASS" if scope.get("sourceSystemScope") else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/pre_execution.py:140:            status="PASS" if len(str(scope.get("rollbackPolicy", "")).strip()) >= 8 else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/pre_execution.py:146:            status="PASS" if len(str(scope.get("retentionPolicy", "")).strip()) >= 8 else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/pre_execution.py:152:            status="PASS" if scope.get("outputLocationPolicy") == "OFFLINE_AGGREGATE_EXPORT_ONLY" else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/pre_execution.py:158:            status="PASS" if not FORBIDDEN_OPERATIONS.intersection(allowed_ops) else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/pre_execution.py:167:            else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/pre_execution.py:196:            status="PASS" if tenant.get("tenantId") == scope.get("tenantScope") else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/pre_execution.py:202:            status="PASS" if site.get("siteId") == scope.get("siteScope") else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/pre_execution.py:210:            else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/pre_execution.py:219:            else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/pre_execution.py:225:            status="PASS" if package.get("mappingVersion") == scope.get("mappingVersion") else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/models.py:19:    "VALIDATION_FAILED",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/models.py:25:    "WAITING_FOR_EVIDENCE",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/models.py:26:    "WAITING_FOR_READINESS",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/models.py:27:    "WAITING_FOR_APPROVAL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/models.py:29:    "VALIDATION_FAILED",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/executor.py:73:        return "VALIDATION_FAILED"
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/executor.py:75:        return "VALIDATION_FAILED"
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/executor.py:112:                status="FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/executor.py:145:                status="FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/executor.py:157:                status="FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/read_validation/executor.py:173:    final_state = validation_outcome if validation_outcome != "EXECUTION_BLOCKED" else "VALIDATION_FAILED"
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/readiness/assessor.py:24:    if any(gate.gate_code == "EVIDENCE_FORMAT_GATE" and gate.status == "FAIL" for gate in gate_results):
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/readiness/assessor.py:26:    if any(gate.gate_code == "PRIVACY_GATE" and gate.status == "FAIL" for gate in gate_results):
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/readiness/assessor.py:29:    if any(gate.gate_code in hard_blocker_codes and gate.status == "FAIL" and gate.blocking for gate in gate_results):
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/readiness/assessor.py:35:    review_or_fail = [gate for gate in gate_results if gate.status in {"FAIL", "REVIEW"} and not gate.blocking]
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/readiness/assessor.py:36:    blocking_fail = [gate for gate in gate_results if gate.status == "FAIL" and gate.blocking]
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/readiness/assessor.py:57:        if gate.status in {"FAIL", "REVIEW"}:
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/readiness/assessor.py:80:        1 for gate in gate_results if gate.blocking and gate.status == "FAIL"
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/readiness/assessor.py:83:    failed_gate_count = sum(1 for gate in gate_results if gate.status == "FAIL")
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/readiness/gates.py:58:            status="PASS" if snapshot.prohibited_field_count == 0 and snapshot.privacy_status == "PASS" else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/readiness/gates.py:66:            status="PASS" if structure_ok else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/readiness/gates.py:74:            status="PASS" if determinism_confirmed and snapshot.evidence_digest else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/readiness/gates.py:82:            status="PASS" if snapshot.mapping_version in supported_mapping else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/readiness/gates.py:90:            status="PASS" if snapshot.required_coverage_min_percent >= coverage["requiredFieldCoverageMinimumPercent"] else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/readiness/gates.py:98:            status="PASS" if snapshot.safe_coverage_min_percent >= coverage["safeSourceFieldCoverageMinimumPercent"] else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/readiness/gates.py:106:            status="FAIL" if snapshot.source_identity_collision or snapshot.missing_stable_source_id else "PASS",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/readiness/gates.py:114:            status="FAIL" if snapshot.global_id_collision else "PASS",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/readiness/gates.py:122:            status="FAIL" if snapshot.tenant_scope_blocker else "PASS",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/readiness/gates.py:130:            status="FAIL" if snapshot.site_scope_blocker else "PASS",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/readiness/gates.py:138:            status="FAIL" if snapshot.point_parent_blocker else "PASS",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/readiness/gates.py:146:            status="PASS" if snapshot.has_point_parity_valid else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/readiness/gates.py:154:            status="PASS" if snapshot.orphan_relationship_count <= relationships["orphanRelationshipCountMaximum"] else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/readiness/gates.py:165:                else "FAIL"
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/readiness/gates.py:180:                else "FAIL"
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/readiness/gates.py:208:            status="PASS" if snapshot.classification != "UNKNOWN" else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/reconciliation/readiness/gates.py:216:            status="PASS" if snapshot.cutover_decision != "READY_FOR_WRITE_CUTOVER" else "FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/formula_constants.py:4:FORMULA_PROFILE_AUTHORITY = "ONE-AIRPORT-A1-01F"
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/intake.py:19:    MAINTENANCE_EXTENSION_COLUMNS,
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/intake.py:20:    PLACEHOLDER_AIRPORT,
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/intake.py:68:        return "MAINTENANCE_DAY_SEMANTIC_AMBIGUITY"
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/intake.py:70:        return "MAINTENANCE_DAY_SEMANTIC_AMBIGUITY"
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/intake.py:270:                if header not in ASSET_MASTER_COLUMNS + MAINTENANCE_EXTENSION_COLUMNS
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/intake.py:408:            maintenance_fields = _non_empty_fields(record, MAINTENANCE_EXTENSION_COLUMNS)
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/intake.py:500:            and airport_context_id != PLACEHOLDER_AIRPORT
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/intake.py:504:            readiness = "READY_FOR_AIRPORT_ASSET_RECONCILIATION"
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/intake.py:587:    elif airport_context_id == PLACEHOLDER_AIRPORT or terminal_context_id == PLACEHOLDER_TERMINAL:
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/intake.py:665:                airport_context_id == PLACEHOLDER_AIRPORT or terminal_context_id == PLACEHOLDER_TERMINAL
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/intake.py:723:            {"relationshipType": "CONTAINS", "fromType": "Terminal", "fromId": terminal_context_id, "toType": "Building", "toId": building}
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/intake.py:728:                {"relationshipType": "CONTAINS", "fromType": "Building", "fromId": building, "toType": "Level", "toId": level}
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/intake.py:733:                {"relationshipType": "CONTAINS", "fromType": "Level", "fromId": level, "toType": "Zone", "toId": zone}
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/intake.py:738:                {"relationshipType": "CONTAINS", "fromType": "Zone", "fromId": zone, "toType": "DistributionArea", "toId": da}
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/intake.py:743:                {"relationshipType": "CONTAINS", "fromType": "DistributionArea", "fromId": da, "toType": "Location", "toId": location}
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/intake.py:746:        {"relationshipType": "CONTAINS", "fromType": "Airport", "fromId": airport_context_id, "toType": "Terminal", "toId": terminal_context_id}
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/constants.py:4:AUTHORITY = "ONE-AIRPORT-A1-01"
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/constants.py:26:MAINTENANCE_EXTENSION_COLUMNS = (
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/constants.py:38:ALL_KNOWN_COLUMNS = ASSET_MASTER_COLUMNS + MAINTENANCE_EXTENSION_COLUMNS
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/constants.py:63:OPTIONAL_MAINTENANCE_COLUMNS = MAINTENANCE_EXTENSION_COLUMNS
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/constants.py:114:        "READY_FOR_AIRPORT_ASSET_RECONCILIATION",
+AN_VANTARIS_IBMS-backend/src/asset_graph/airport_intake/constants.py:136:PLACEHOLDER_AIRPORT = "AIRPORT-CONTEXT-REQUIRED"
+AN_VANTARIS_IBMS-backend/src/asset_graph/read_model/activation.py:12:REJECTED_STATES = frozenset({"EXECUTION_BLOCKED", "VALIDATION_FAILED", "ROLLED_BACK"})
+AN_VANTARIS_IBMS-backend/src/asset_graph/constants.py:15:    AVAILABLE = "AVAILABLE"
+AN_VANTARIS_IBMS-backend/src/asset_graph/constants.py:17:    UNAVAILABLE = "UNAVAILABLE"
+AN_VANTARIS_IBMS-backend/src/asset_graph/constants.py:18:    MAINTENANCE = "MAINTENANCE"
+AN_VANTARIS_IBMS-backend/src/asset_graph/constants.py:36:    CONTAINS = "CONTAINS"
+AN_VANTARIS_IBMS-backend/src/asset_graph/constants.py:52:    VALIDATION_FAILED = "VALIDATION_FAILED"
+AN_VANTARIS_IBMS-backend/src/asset_graph/constants.py:53:    PROVIDER_UNAVAILABLE = "PROVIDER_UNAVAILABLE"
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:209:                status="FAILED",
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:338:            provider_status="FAILED",
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/coordinator.py:340:            error_code="AUDIT_UNAVAILABLE",
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/audit.py:20:    return "FAILURE"
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/audit.py:55:    "providerUnavailable": "ASSET_GRAPH_PERSISTENCE_PROVIDER_UNAVAILABLE",
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/audit.py:106:    failure_policy: str = "FAIL_CLOSED",
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/audit.py:166:            outcome="FAIL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/constants.py:15:AUTHORIZATION_WAITING_REAL_EVIDENCE = "WAITING_FOR_REAL_EVIDENCE"
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/constants.py:16:AUTHORIZATION_WAITING_READINESS = "WAITING_FOR_READINESS"
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/constants.py:17:AUTHORIZATION_WAITING_PERSISTENCE_APPROVAL = "WAITING_FOR_PERSISTENCE_APPROVAL"
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/constants.py:54:        "VALIDATION_FAILED",
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/constants.py:73:        "FAILED",
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/__init__.py:17:    AUTHORIZATION_WAITING_PERSISTENCE_APPROVAL,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/__init__.py:18:    AUTHORIZATION_WAITING_READINESS,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/__init__.py:19:    AUTHORIZATION_WAITING_REAL_EVIDENCE,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/__init__.py:64:    "AUTHORIZATION_WAITING_PERSISTENCE_APPROVAL",
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/__init__.py:65:    "AUTHORIZATION_WAITING_READINESS",
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/__init__.py:66:    "AUTHORIZATION_WAITING_REAL_EVIDENCE",
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/providers.py:159:        health_status="UNAVAILABLE",
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/authorization.py:11:    AUTHORIZATION_WAITING_PERSISTENCE_APPROVAL,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/authorization.py:12:    AUTHORIZATION_WAITING_READINESS,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/authorization.py:13:    AUTHORIZATION_WAITING_REAL_EVIDENCE,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/authorization.py:83:            AUTHORIZATION_WAITING_REAL_EVIDENCE,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/authorization.py:91:            AUTHORIZATION_WAITING_READINESS,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/authorization.py:101:            conflict_code="VALIDATION_FAILED",
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/authorization.py:115:            AUTHORIZATION_WAITING_PERSISTENCE_APPROVAL,
+AN_VANTARIS_IBMS-backend/src/asset_graph/persistence_contract/authorization.py:125:            conflict_code="PROVIDER_UNAVAILABLE",
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_reconciliation/decisions.py:89:        return "DUPLICATE_GROUP_MAINTENANCE_CONFLICT", ["DUPLICATE_MAINTENANCE_DIVERGENCE"]
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_reconciliation/constants.py:4:AUTHORITY = "ONE-AIRPORT-A1-04"
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_reconciliation/constants.py:10:INTAKE_AUTHORITY = "ONE-AIRPORT-A1-01"
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_reconciliation/constants.py:11:SPATIAL_AUTHORITY = "ONE-AIRPORT-A1-02"
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_reconciliation/constants.py:12:CLASSIFICATION_AUTHORITY = "ONE-AIRPORT-A1-03"
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_reconciliation/constants.py:13:COVERAGE_AUTHORITY = "ONE-AIRPORT-A1-03A"
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_reconciliation/constants.py:16:    {"INTAKE_COMPLETE_WITH_REVIEWS", "READY_FOR_AIRPORT_ASSET_RECONCILIATION"}
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_reconciliation/constants.py:19:    {"SPATIAL_MAPPING_COMPLETE_WITH_REVIEWS", "READY_FOR_AIRPORT_ASSET_RECONCILIATION"}
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_reconciliation/constants.py:22:    {"CLASSIFICATION_COMPLETE_WITH_REVIEWS", "READY_FOR_AIRPORT_ASSET_RECONCILIATION"}
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_classification/system_classifier.py:39:        return "AIRPORT_PROFILE_APPROVED"
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_classification/coverage_metrics.py:9:AUTHORITY = "ONE-AIRPORT-A1-03A"
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_classification/mapper.py:262:        readiness = "READY_FOR_AIRPORT_ASSET_RECONCILIATION"
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_classification/constants.py:4:AUTHORITY = "ONE-AIRPORT-A1-03"
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_classification/constants.py:10:COMPATIBLE_INTAKE_AUTHORITY = "ONE-AIRPORT-A1-01"
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_classification/constants.py:16:        "READY_FOR_AIRPORT_ASSET_RECONCILIATION",
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_classification/constants.py:20:COMPATIBLE_SPATIAL_AUTHORITY = "ONE-AIRPORT-A1-02"
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_classification/constants.py:24:        "READY_FOR_AIRPORT_ASSET_RECONCILIATION",
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_classification/constants.py:40:        "READY_FOR_AIRPORT_ASSET_RECONCILIATION",
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_spatial/mapper.py:22:    GENERIC_TO_AIRPORT,
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_spatial/mapper.py:58:        generic_semantic = "CONTAINS"
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_spatial/mapper.py:109:            generic_target=GENERIC_TO_AIRPORT["Building"]["genericTarget"],
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_spatial/mapper.py:127:            generic_target=GENERIC_TO_AIRPORT["Level"]["genericTarget"],
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_spatial/mapper.py:143:            generic_target=GENERIC_TO_AIRPORT["AirportZone"]["genericTarget"],
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_spatial/mapper.py:159:            generic_target=GENERIC_TO_AIRPORT["DistributionArea"]["genericTarget"],
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_spatial/mapper.py:251:            generic_semantic="CONTAINS",
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_spatial/mapper.py:260:            profile_semantic="AirportContext CONTAINS Terminal",
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_spatial/mapper.py:261:            generic_semantic="CONTAINS",
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_spatial/mapper.py:275:                    generic_semantic="CONTAINS",
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_spatial/mapper.py:350:        readiness = "READY_FOR_AIRPORT_ASSET_RECONCILIATION"
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_spatial/mapper.py:391:        "genericToAirportMapping": GENERIC_TO_AIRPORT,
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_spatial/constants.py:4:AUTHORITY = "ONE-AIRPORT-A1-02"
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_spatial/constants.py:10:COMPATIBLE_INTAKE_AUTHORITY = "ONE-AIRPORT-A1-01"
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_spatial/constants.py:16:        "READY_FOR_AIRPORT_ASSET_RECONCILIATION",
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_spatial/constants.py:36:PLACEHOLDER_AIRPORT = "AIRPORT-CONTEXT-REQUIRED"
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_spatial/constants.py:39:GENERIC_TO_AIRPORT = {
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_spatial/constants.py:50:GENERIC_RELATIONSHIP_SEMANTICS = frozenset({"CONTAINS", "LOCATED_IN", "ASSIGNED_TO", "BELONGS_TO"})
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_spatial/constants.py:61:        "READY_FOR_AIRPORT_ASSET_RECONCILIATION",
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_spatial/context.py:16:    PLACEHOLDER_AIRPORT,
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_spatial/context.py:146:            self.airport_context_id == PLACEHOLDER_AIRPORT
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_spatial/candidates.py:87:        review.append("AIRPORT_CONTEXT_PLACEHOLDER")
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_review_projection/constants.py:4:AUTHORITY = "ONE-AIRPORT-A1-05"
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_review_projection/constants.py:10:RECONCILIATION_AUTHORITY = "ONE-AIRPORT-A1-04"
+AN_VANTARIS_IBMS-backend/src/asset_graph/industry_profiles/airport_review_projection/projection.py:99:        "reviewCauseId": sha256_digest({"reviewCauseType": "CONTEXT", "scope": "AIRPORT_TERMINAL"}),
+AN_VANTARIS_IBMS-backend/src/blockchain/config.py:18:_DEV_CHAIN_ID = 9527  # local dev chain id when IBMS_BLOCKCHAIN_CHAIN_ID is unset
+AN_VANTARIS_IBMS-backend/src/blockchain/config.py:23:    rpc_env = os.getenv("IBMS_BLOCKCHAIN_RPC_URL")
+AN_VANTARIS_IBMS-backend/src/blockchain/config.py:32:    value = os.getenv("IBMS_BLOCKCHAIN_CHAIN_ID")
+AN_VANTARIS_IBMS-backend/src/blockchain/config.py:35:    return _DEV_CHAIN_ID
+AN_VANTARIS_IBMS-backend/src/blockchain/config.py:39:    value = os.getenv("IBMS_BLOCKCHAIN_CONTRACT_ADDRESS")
+AN_VANTARIS_IBMS-backend/src/blockchain/config.py:48:#   - 默认指向本地开发节点；生产环境必须通过 IBMS_BLOCKCHAIN_RPC_URL 配置
+AN_VANTARIS_IBMS-backend/src/blockchain/config.py:61:CHAIN_ID: int = _env_chain_id()
+AN_VANTARIS_IBMS-backend/src/blockchain/client.py:21:from .config import NODE_URLS, CHAIN_ID
+AN_VANTARIS_IBMS-backend/src/blockchain/client.py:100:        该值从配置文件 config.CHAIN_ID 中读取，用于构造交易时防止跨链重放攻击。
+AN_VANTARIS_IBMS-backend/src/blockchain/client.py:105:        return CHAIN_ID
+AN_VANTARIS_IBMS-backend/src/common/utils/local_smoke.py:11:DB_UNAVAILABLE_MESSAGE = "Database unavailable during local smoke"
+AN_VANTARIS_IBMS-backend/src/common/utils/local_smoke.py:12:DB_UNAVAILABLE_CODE = "DB_UNAVAILABLE"
+AN_VANTARIS_IBMS-backend/src/common/utils/local_smoke.py:87:                "code": DB_UNAVAILABLE_CODE,
+AN_VANTARIS_IBMS-backend/src/common/utils/local_smoke.py:88:                "message": DB_UNAVAILABLE_MESSAGE,
+AN_VANTARIS_IBMS-backend/src/common/utils/local_smoke.py:97:    return Result.error(code=500, message=DB_UNAVAILABLE_MESSAGE)
+AN_VANTARIS_IBMS-backend/src/common/models/response.py:42:    DID_RESOLVE_FAILED = 41002
+AN_VANTARIS_IBMS-backend/src/common/models/response.py:44:    VP_VERIFY_FAILED = 41004
+AN_VANTARIS_IBMS-backend/src/governance/audit/pilot.py:129:            actor_id=getattr(g, "current_did", None) or "ACTOR_CONTEXT_UNAVAILABLE",
+AN_VANTARIS_IBMS-backend/src/governance/audit/pilot.py:133:                or "TENANT_CONTEXT_UNAVAILABLE"
+AN_VANTARIS_IBMS-backend/src/governance/audit/pilot.py:137:            target_id=str(data.get("version_code") or "TARGET_CONTEXT_UNAVAILABLE"),
+AN_VANTARIS_IBMS-backend/src/governance/audit/service.py:25:                provider_status="AUDIT_PROVIDER_UNAVAILABLE",
+AN_VANTARIS_IBMS-backend/src/governance/audit/service.py:27:                error_code="AUDIT_PROVIDER_FAILURE",
+AN_VANTARIS_IBMS-backend/src/governance/audit/constants.py:17:    FAILURE = "FAILURE"
+AN_VANTARIS_IBMS-backend/src/governance/audit/constants.py:22:    FAIL_CLOSED = "FAIL_CLOSED"
+AN_VANTARIS_IBMS-backend/src/governance/audit/constants.py:23:    FAIL_OPERATION_WITH_AUDIT_ERROR = "FAIL_OPERATION_WITH_AUDIT_ERROR"
+AN_VANTARIS_IBMS-backend/src/governance/audit/constants.py:39:    "AUTHENTICATION": (False, False, AuditFailurePolicy.FAIL_CLOSED),
+AN_VANTARIS_IBMS-backend/src/governance/audit/constants.py:40:    "AUTHORIZATION_DECISION": (True, False, AuditFailurePolicy.FAIL_CLOSED),
+AN_VANTARIS_IBMS-backend/src/governance/audit/constants.py:41:    "SECURITY_ADMINISTRATION": (True, False, AuditFailurePolicy.FAIL_CLOSED),
+AN_VANTARIS_IBMS-backend/src/governance/audit/constants.py:42:    "PACKAGE_LIFECYCLE": (True, False, AuditFailurePolicy.FAIL_CLOSED),
+AN_VANTARIS_IBMS-backend/src/governance/audit/constants.py:43:    "ENTITLEMENT_LIFECYCLE": (True, False, AuditFailurePolicy.FAIL_CLOSED),
+AN_VANTARIS_IBMS-backend/src/governance/audit/constants.py:44:    "CONFIGURATION_CHANGE": (True, False, AuditFailurePolicy.FAIL_OPERATION_WITH_AUDIT_ERROR),
+AN_VANTARIS_IBMS-backend/src/governance/audit/constants.py:45:    "CANONICAL_OBJECT_CREATE": (True, True, AuditFailurePolicy.FAIL_OPERATION_WITH_AUDIT_ERROR),
+AN_VANTARIS_IBMS-backend/src/governance/audit/constants.py:46:    "CANONICAL_OBJECT_UPDATE": (True, True, AuditFailurePolicy.FAIL_OPERATION_WITH_AUDIT_ERROR),
+AN_VANTARIS_IBMS-backend/src/governance/audit/constants.py:47:    "CANONICAL_OBJECT_RETIRE": (True, True, AuditFailurePolicy.FAIL_OPERATION_WITH_AUDIT_ERROR),
+AN_VANTARIS_IBMS-backend/src/governance/audit/constants.py:48:    "BUSINESS_STATE_TRANSITION": (True, True, AuditFailurePolicy.FAIL_OPERATION_WITH_AUDIT_ERROR),
+AN_VANTARIS_IBMS-backend/src/governance/audit/constants.py:49:    "WORK_LIFECYCLE": (True, True, AuditFailurePolicy.FAIL_OPERATION_WITH_AUDIT_ERROR),
+AN_VANTARIS_IBMS-backend/src/governance/audit/constants.py:50:    "MAINTENANCE_LIFECYCLE": (True, True, AuditFailurePolicy.FAIL_OPERATION_WITH_AUDIT_ERROR),
+AN_VANTARIS_IBMS-backend/src/governance/audit/constants.py:51:    "FAULT_ACTION": (True, True, AuditFailurePolicy.FAIL_OPERATION_WITH_AUDIT_ERROR),
+AN_VANTARIS_IBMS-backend/src/governance/audit/constants.py:52:    "EVIDENCE_ACTION": (True, True, AuditFailurePolicy.FAIL_OPERATION_WITH_AUDIT_ERROR),
+AN_VANTARIS_IBMS-backend/src/governance/audit/constants.py:54:    "EXPORT": (True, False, AuditFailurePolicy.FAIL_CLOSED),
+AN_VANTARIS_IBMS-backend/src/governance/audit/constants.py:55:    "CONTROL_OPERATION": (True, True, AuditFailurePolicy.FAIL_OPERATION_WITH_AUDIT_ERROR),
+AN_VANTARIS_IBMS-backend/src/governance/audit/constants.py:56:    "INTEGRATION_OPERATION": (True, True, AuditFailurePolicy.FAIL_OPERATION_WITH_AUDIT_ERROR),
+AN_VANTARIS_IBMS-backend/src/governance/audit/constants.py:57:    "AI_REQUEST": (True, False, AuditFailurePolicy.BEST_EFFORT_NON_SENSITIVE_READ),
+AN_VANTARIS_IBMS-backend/src/governance/audit/constants.py:58:    "AI_REVIEW": (True, False, AuditFailurePolicy.FAIL_OPERATION_WITH_AUDIT_ERROR),
+AN_VANTARIS_IBMS-backend/src/governance/audit/constants.py:59:    "MODEL_LIFECYCLE": (True, False, AuditFailurePolicy.FAIL_OPERATION_WITH_AUDIT_ERROR),
+AN_VANTARIS_IBMS-backend/src/governance/audit/constants.py:61:    "SYSTEM_HEALTH_CONTROL": (True, False, AuditFailurePolicy.FAIL_OPERATION_WITH_AUDIT_ERROR),
+AN_VANTARIS_IBMS-backend/src/api/prod_ga/foundation_packages_provider.py:146:        "forbiddenScanStatus": "PASS" if forbidden_ok else "FAIL",
+AN_VANTARIS_IBMS-backend/src/api/airport_ga_readonly/airport_ga_readonly_api.py:196:    return _handle("AIRPORT_OVERVIEW")
+AN_VANTARIS_IBMS-backend/src/api/airport_ga_readonly/airport_ga_readonly_api.py:221:    return _handle("MAINTENANCE_WORK_ORDERS")
+AN_VANTARIS_IBMS-backend/src/assets/assets_provider.py:89:            asset_code="SITE-MAIN",
+AN_VANTARIS_IBMS-backend/src/assets/assets_provider.py:115:            asset_code="BLDG-MAIN",
+AN_VANTARIS_IBMS-backend/src/console/module_readiness_registry.py:517:            module_id="nexus-ai",
+AN_VANTARIS_IBMS-backend/src/console/module_readiness_registry.py:518:            module_name="NEXUS-AI",
+AN_VANTARIS_IBMS-backend/src/console/module_package_registry.py:514:            package_id="PKG-NEXUS-AI",
+AN_VANTARIS_IBMS-backend/src/console/module_package_registry.py:515:            package_code="PKG-NEXUS-AI",
+AN_VANTARIS_IBMS-backend/src/console/module_package_registry.py:516:            package_name="NEXUS-AI Package Placeholder",
+AN_VANTARIS_IBMS-backend/src/console/module_package_registry.py:517:            module_id="nexus-ai",
+AN_VANTARIS_IBMS-backend/src/console/module_package_registry.py:518:            module_name="NEXUS-AI",
+AN_VANTARIS_IBMS-backend/src/console/module_package_registry.py:533:                route="/nexus-ai/workspace",
+AN_VANTARIS_IBMS-backend/src/console/module_package_registry.py:534:                label="NEXUS-AI Workspace",
+AN_VANTARIS_IBMS-backend/src/console/module_package_registry.py:539:                route="/nexus-ai/debug",
+AN_VANTARIS_IBMS-backend/src/console/module_package_registry.py:540:                label="NEXUS-AI Debug",
+AN_VANTARIS_IBMS-backend/src/console/module_package_registry.py:547:            limitations=["NEXUS-AI package is placeholder-only in this stage."],
+AN_VANTARIS_IBMS-backend/src/console/module_package_registry.py:548:            next_actions=["Keep NEXUS-AI as locked placeholder until future roadmap gate."],
+AN_VANTARIS_IBMS-backend/src/console/module_content_dashboard.py:456:            "nexusAiLocked": bool(locked.get("nexus-ai", False)),
+AN_VANTARIS_IBMS-backend/src/console/module_content_dashboard.py:483:                "UFMS/UEDGE/LINK/NEXUS-AI remain locked placeholders.",
+AN_VANTARIS_ONE/VERSIONING.md:23:- AN_VANTARIS_NexusAI: 0.0.0-skeleton
+AN_VANTARIS_ONE/operations_console_handoff_gate/enums.py:26:    FAIL = "FAIL"
+AN_VANTARIS_ONE/operations_console_handoff_gate/aggregation.py:15:            status="PASS" if actual == expected else "FAIL",
+AN_VANTARIS_ONE/operations_console_handoff_gate/validation.py:48:        raise OperationsConsoleHandoffGateError("BLOCKING_GATE_FAILED", "all blocking gates must pass")
+AN_VANTARIS_ONE/U_MODULES_A2_READINESS_SUMMARY.md:32:| Nexus AI Consumer | future (future/pending) | false |
+AN_VANTARIS_ONE/workorder_intent_candidate/enums.py:19:    CORRECTIVE_MAINTENANCE = "CORRECTIVE_MAINTENANCE"
+AN_VANTARIS_ONE/api_frontend_implementation_gate/enums.py:12:    FAIL = "FAIL"
+AN_VANTARIS_ONE/api_frontend_implementation_gate/models.py:54:        "status": "PASS" if int(expected_count) == int(actual_count) else "FAIL",
+AN_VANTARIS_ONE/api_frontend_implementation_gate/models.py:67:        "status": "PASS" if expected_value == actual_value else "FAIL",
+AN_VANTARIS_ONE/integration_health/evaluation.py:134:            finding_type="RUNTIME_EVIDENCE_UNAVAILABLE",
+AN_VANTARIS_ONE/integration_health/evaluation.py:136:            reason_code="RUNTIME_EVIDENCE_UNAVAILABLE",
+AN_VANTARIS_ONE/integration_health/evaluation.py:160:        "projectionAuthority": "ONE-AIRPORT-A2-03",
+AN_VANTARIS_ONE/integration_health/evaluation.py:195:            reason_codes=["RUNTIME_EVIDENCE_UNAVAILABLE"],
+AN_VANTARIS_ONE/read_only_api_release_gate/enums.py:12:    FAIL = "FAIL"
+AN_VANTARIS_ONE/read_only_api_release_gate/models.py:50:    ) else "FAIL"
+AN_VANTARIS_ONE/read_only_api_release_gate/models.py:82:    status = "PASS" if response_contract_linked and auth_policy_linked and local_smoke_defined and not network_call_required and not localhost_call_required and not production_route_enabled else "FAIL"
+AN_VANTARIS_ONE/read_only_api_release_gate/models.py:107:        "status": "PASS" if expected_value == actual_value else "FAIL",
+AN_VANTARIS_ONE/registries/umms-r7a-local-freeze.v1.json:25:    "ONE_UMMS_R5_PREVENTIVE_MAINTENANCE_SCHEDULE_READINESS_PASS",
+AN_VANTARIS_ONE/registries/umms-r7a-local-freeze.v1.json:31:    "ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_PASS",
+AN_VANTARIS_ONE/registries/umms-r7a-local-freeze.v1.json:126:    "ONE_UMMS_R5_PREVENTIVE_MAINTENANCE_SCHEDULE_READINESS_PASS": "PASS",
+AN_VANTARIS_ONE/registries/umms-r7a-local-freeze.v1.json:132:    "ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_PASS": "PASS",
+AN_VANTARIS_ONE/registries/airport-ga-stakeholder-review-package.v1.json:2:  "authority": "ONE-AIRPORT-GA-R5",
+AN_VANTARIS_ONE/registries/airport-ga-stakeholder-review-package.v1.json:135:    "ONE_AIRPORT_GA_R1_READONLY_API_ROUTE_IMPLEMENTATION_PASS",
+AN_VANTARIS_ONE/registries/airport-ga-stakeholder-review-package.v1.json:136:    "ONE_AIRPORT_GA_R2_READONLY_API_LOCAL_SMOKE_AND_CONTRACT_REGRESSION_PASS",
+AN_VANTARIS_ONE/registries/airport-ga-stakeholder-review-package.v1.json:137:    "ONE_AIRPORT_GA_R3_READONLY_FRONTEND_ROUTE_PAGE_IMPLEMENTATION_PASS",
+AN_VANTARIS_ONE/registries/airport-ga-stakeholder-review-package.v1.json:138:    "ONE_AIRPORT_GA_R4_UCONSOLE_AIRPORT_READONLY_PAGE_BINDING_PASS",
+AN_VANTARIS_ONE/registries/airport-ga-stakeholder-review-package.v1.json:139:    "ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE_PASS"
+AN_VANTARIS_ONE/registries/airport-existing-system-onboarding-mapping-readiness-registry.v1.json:2:  "authority": "ONE-AIRPORT-GA-R7",
+AN_VANTARIS_ONE/registries/airport-existing-system-onboarding-mapping-readiness-registry.v1.json:5:  "report": "ONE_AIRPORT_GA_R7_EXISTING_SYSTEM_ONBOARDING_MAPPING_READINESS_REPORT.md",
+AN_VANTARIS_ONE/registries/airport-existing-system-onboarding-mapping-readiness-registry.v1.json:6:  "validationMarker": "ONE_AIRPORT_GA_R7_EXISTING_SYSTEM_ONBOARDING_MAPPING_READINESS_PASS",
+AN_VANTARIS_ONE/registries/airport-read-only-poc-release-gate.v1.json:7:  "authority": "ONE-AIRPORT-A9-01",
+AN_VANTARIS_ONE/registries/airport-read-only-poc-release-gate.v1.json:16:  "implementationStatus": "AIRPORT_READ_ONLY_POC_RELEASE_AGGREGATION_AND_FINAL_GATE_COMPLETE",
+AN_VANTARIS_ONE/registries/airport-read-only-poc-release-gate.v1.json:21:  "readinessOutcome": "AIRPORT_READ_ONLY_POC_RELEASE_CANDIDATE_PASS",
+AN_VANTARIS_ONE/registries/guard-contract.v1.json:48:      "siteClaimBehavior": "CLAIM_OR_RESOURCE_DERIVATION_BY_SCOPE",
+AN_VANTARIS_ONE/registries/guard-contract.v1.json:64:      "siteClaimBehavior": "CLAIM_OR_RESOURCE_DERIVATION_BY_SCOPE",
+AN_VANTARIS_ONE/registries/guard-contract.v1.json:81:      "siteClaimBehavior": "CLAIM_OR_RESOURCE_DERIVATION_BY_SCOPE",
+AN_VANTARIS_ONE/registries/guard-contract.v1.json:130:      "failureResponse": "POLICY_UNAVAILABLE",
+AN_VANTARIS_ONE/registries/guard-contract.v1.json:147:      "failurePolicy": "FAIL_CLOSED"
+AN_VANTARIS_ONE/registries/guard-contract.v1.json:157:      "failurePolicy": "FAIL_CLOSED"
+AN_VANTARIS_ONE/registries/guard-contract.v1.json:167:      "failurePolicy": "FAIL_CLOSED"
+AN_VANTARIS_ONE/registries/guard-contract.v1.json:177:      "failurePolicy": "FAIL_CLOSED"
+AN_VANTARIS_ONE/registries/guard-contract.v1.json:187:      "failurePolicy": "FAIL_CLOSED"
+AN_VANTARIS_ONE/registries/guard-contract.v1.json:197:      "failurePolicy": "FAIL_CLOSED"
+AN_VANTARIS_ONE/registries/guard-contract.v1.json:207:      "failurePolicy": "FAIL_CLOSED"
+AN_VANTARIS_ONE/registries/guard-contract.v1.json:217:      "failurePolicy": "FAIL_CLOSED"
+AN_VANTARIS_ONE/registries/guard-contract.v1.json:227:      "failurePolicy": "FAIL_CLOSED"
+AN_VANTARIS_ONE/registries/guard-contract.v1.json:237:      "failurePolicy": "FAIL_CLOSED"
+AN_VANTARIS_ONE/registries/guard-contract.v1.json:247:      "failurePolicy": "FAIL_CLOSED"
+AN_VANTARIS_ONE/registries/guard-contract.v1.json:255:      "denialCode": "POLICY_UNAVAILABLE",
+AN_VANTARIS_ONE/registries/guard-contract.v1.json:257:      "failurePolicy": "FAIL_CLOSED_EXCEPT_NARROW_LIVENESS"
+AN_VANTARIS_ONE/registries/guard-contract.v1.json:551:      "PACKAGE_ENTITLEMENT_DETAILS",
+AN_VANTARIS_ONE/registries/guard-contract.v1.json:552:      "DETAILED_RUNTIME_TOPOLOGY",
+AN_VANTARIS_ONE/registries/guard-contract.v1.json:553:      "DETAILED_DIAGNOSTICS",
+AN_VANTARIS_ONE/registries/guard-contract.v1.json:557:      "FAULT_DETAILS",
+AN_VANTARIS_ONE/registries/guard-contract.v1.json:559:      "ASSET_DETAILS"
+AN_VANTARIS_ONE/registries/guard-contract.v1.json:567:        "sensitiveFieldPolicy": "MINIMIZE_RESPONSE; NO_TENANT_SITE_IDENTITY_LIST_SECRET_OR_INTERNAL_POLICY_DETAIL",
+AN_VANTARIS_ONE/registries/guard-contract.v1.json:577:        "sensitiveFieldPolicy": "MINIMIZE_RESPONSE; NO_TENANT_SITE_IDENTITY_LIST_SECRET_OR_INTERNAL_POLICY_DETAIL",
+AN_VANTARIS_ONE/registries/guard-contract.v1.json:741:      "code": "POLICY_UNAVAILABLE",
+AN_VANTARIS_ONE/registries/guard-contract.v1.json:760:    "failurePolicy": "FAIL_CLOSED_FOR_REQUIRED_BUSINESS_ACTIONS",
+AN_VANTARIS_ONE/registries/guard-contract.v1.json:761:    "sensitiveDetailPolicy": "NO_SECRET_OR_INTERNAL_POLICY_DETAIL_IN_CLIENT_RESPONSE"
+AN_VANTARIS_ONE/registries/guard-contract.v1.json:780:    "legacyRule": "CLASSIFY_TARGET_POLICY_WITHOUT_CLAIMING_CURRENT_ENFORCEMENT",
+AN_VANTARIS_ONE/registries/guard-contract.v1.json:789:    "defaultFailurePolicy": "FAIL_CLOSED",
+AN_VANTARIS_ONE/registries/airport-poc-vertical-slice.v1.json:4:  "authority": "ONE-AIRPORT-A0",
+AN_VANTARIS_ONE/registries/airport-poc-vertical-slice.v1.json:150:      "resolution": "UMMS must reference canonical WorkOrder IDs only; implement /api/v1/work in AIRPORT-A5"
+AN_VANTARIS_ONE/registries/umms-r13a-local-freeze.v1.json:33:    "ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_PASS",
+AN_VANTARIS_ONE/registries/umms-r13a-local-freeze.v1.json:39:    "ONE_UMMS_R5_PREVENTIVE_MAINTENANCE_SCHEDULE_READINESS_PASS",
+AN_VANTARIS_ONE/registries/umms-r13a-local-freeze.v1.json:47:    "ONE_UMMS_R9_AIRPORT_HMI_LOCATOR_BINDING_READINESS_PASS",
+AN_VANTARIS_ONE/registries/airport-asset-reconciliation-profile.v1.json:4:  "authority": "ONE-AIRPORT-A1-04",
+AN_VANTARIS_ONE/registries/airport-asset-reconciliation-profile.v1.json:12:  "compatibleIntakeAuthority": "ONE-AIRPORT-A1-01",
+AN_VANTARIS_ONE/registries/airport-asset-reconciliation-profile.v1.json:13:  "compatibleSpatialAuthority": "ONE-AIRPORT-A1-02",
+AN_VANTARIS_ONE/registries/airport-asset-reconciliation-profile.v1.json:14:  "compatibleClassificationAuthority": "ONE-AIRPORT-A1-03",
+AN_VANTARIS_ONE/registries/airport-asset-reconciliation-profile.v1.json:15:  "compatibleCoverageAuthority": "ONE-AIRPORT-A1-03A",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:11:    "DOMAIN_OPTIONAL",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:13:    "AI_OPTIONAL",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:650:      "packageClass": "DOMAIN_OPTIONAL",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:703:      "packageClass": "DOMAIN_OPTIONAL",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:752:      "packageClass": "DOMAIN_OPTIONAL",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:800:      "packageClass": "DOMAIN_OPTIONAL",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:997:      "moduleId": "orchestrator",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:1046:      "packageId": "PKG-AI-MODEL-HUB",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:1048:      "displayName": "AI Model Hub",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:1049:      "packageClass": "AI_OPTIONAL",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:1051:      "semanticOwner": "AI Model Hub",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:1056:      "healthSource": "/api/v1/health/packages/PKG-AI-MODEL-HUB",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:1080:      "healthEndpoint": "/api/v1/health/packages/PKG-AI-MODEL-HUB",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:1095:      "packageId": "PKG-NEXUS-AI",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:1096:      "moduleId": "nexus-ai",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:1097:      "displayName": "Nexus AI",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:1098:      "packageClass": "AI_OPTIONAL",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:1100:      "semanticOwner": "Nexus AI",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:1105:      "healthSource": "/api/v1/health/packages/PKG-NEXUS-AI",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:1109:        "PKG-AI-MODEL-HUB",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:1130:      "healthEndpoint": "/api/v1/health/packages/PKG-NEXUS-AI",
+AN_VANTARIS_ONE/registries/umms-work-order-asset-pm-domain-alignment-registry.v1.json:6:  "report": "ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_REPORT.md",
+AN_VANTARIS_ONE/registries/umms-work-order-asset-pm-domain-alignment-registry.v1.json:7:  "validationMarker": "ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_PASS",
+AN_VANTARIS_ONE/registries/airport-ga-r10a-readiness-projection-chain-freeze.v1.json:11:      "passMarker": "ONE_AIRPORT_GA_R6_LINK_INTEGRATION_READINESS_PROJECTION_PASS"
+AN_VANTARIS_ONE/registries/airport-ga-r10a-readiness-projection-chain-freeze.v1.json:17:      "passMarker": "ONE_AIRPORT_GA_R7_EXISTING_SYSTEM_ONBOARDING_MAPPING_READINESS_PASS"
+AN_VANTARIS_ONE/registries/airport-ga-r10a-readiness-projection-chain-freeze.v1.json:23:      "passMarker": "ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_PASS"
+AN_VANTARIS_ONE/registries/airport-ga-r10a-readiness-projection-chain-freeze.v1.json:29:      "passMarker": "ONE_AIRPORT_GA_R9_GRAPHICS_HMI_EQUIPMENT_LOCATOR_READINESS_PASS"
+AN_VANTARIS_ONE/registries/airport-ga-r10a-readiness-projection-chain-freeze.v1.json:35:      "passMarker": "ONE_AIRPORT_GA_R10_DISTRIBUTED_REMOTE_DEPLOYMENT_READINESS_PASS"
+AN_VANTARIS_ONE/registries/airport-ga-r10a-readiness-projection-chain-freeze.v1.json:39:    "ONE_AIRPORT_GA_R6_LINK_INTEGRATION_READINESS_PROJECTION_PASS",
+AN_VANTARIS_ONE/registries/airport-ga-r10a-readiness-projection-chain-freeze.v1.json:40:    "ONE_AIRPORT_GA_R7_EXISTING_SYSTEM_ONBOARDING_MAPPING_READINESS_PASS",
+AN_VANTARIS_ONE/registries/airport-ga-r10a-readiness-projection-chain-freeze.v1.json:41:    "ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_PASS",
+AN_VANTARIS_ONE/registries/airport-ga-r10a-readiness-projection-chain-freeze.v1.json:42:    "ONE_AIRPORT_GA_R9_GRAPHICS_HMI_EQUIPMENT_LOCATOR_READINESS_PASS",
+AN_VANTARIS_ONE/registries/airport-ga-r10a-readiness-projection-chain-freeze.v1.json:43:    "ONE_AIRPORT_GA_R10_DISTRIBUTED_REMOTE_DEPLOYMENT_READINESS_PASS",
+AN_VANTARIS_ONE/registries/airport-ga-r10a-readiness-projection-chain-freeze.v1.json:44:    "ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS"
+AN_VANTARIS_ONE/registries/airport-ga-r10a-readiness-projection-chain-freeze.v1.json:120:    "ONE_AIRPORT_GA_R6_LINK_INTEGRATION_READINESS_PROJECTION_PASS": "PASS",
+AN_VANTARIS_ONE/registries/airport-ga-r10a-readiness-projection-chain-freeze.v1.json:121:    "ONE_AIRPORT_GA_R7_EXISTING_SYSTEM_ONBOARDING_MAPPING_READINESS_PASS": "PASS",
+AN_VANTARIS_ONE/registries/airport-ga-r10a-readiness-projection-chain-freeze.v1.json:122:    "ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_PASS": "PASS",
+AN_VANTARIS_ONE/registries/airport-ga-r10a-readiness-projection-chain-freeze.v1.json:123:    "ONE_AIRPORT_GA_R9_GRAPHICS_HMI_EQUIPMENT_LOCATOR_READINESS_PASS": "PASS",
+AN_VANTARIS_ONE/registries/airport-ga-r10a-readiness-projection-chain-freeze.v1.json:124:    "ONE_AIRPORT_GA_R10_DISTRIBUTED_REMOTE_DEPLOYMENT_READINESS_PASS": "PASS",
+AN_VANTARIS_ONE/registries/legacy-table-owner-map.v1.json:14:    "unresolvedPolicy": "RETAIN_EXPLICITLY"
+AN_VANTARIS_ONE/registries/legacy-table-owner-map.v1.json:34:      "Nexus AI": 1,
+AN_VANTARIS_ONE/registries/legacy-table-owner-map.v1.json:48:      "Nexus AI / AI Model Hub": 1,
+AN_VANTARIS_ONE/registries/legacy-table-owner-map.v1.json:108:        "TARGET_PROVIDER_AVAILABLE",
+AN_VANTARIS_ONE/registries/legacy-table-owner-map.v1.json:154:        "TARGET_PROVIDER_AVAILABLE",
+AN_VANTARIS_ONE/registries/legacy-table-owner-map.v1.json:197:        "TARGET_PROVIDER_AVAILABLE",
+AN_VANTARIS_ONE/registries/legacy-table-owner-map.v1.json:240:        "TARGET_PROVIDER_AVAILABLE",
+AN_VANTARIS_ONE/registries/legacy-table-owner-map.v1.json:285:        "TARGET_PROVIDER_AVAILABLE",
+AN_VANTARIS_ONE/registries/legacy-table-owner-map.v1.json:326:        "TARGET_PROVIDER_AVAILABLE",
+AN_VANTARIS_ONE/registries/legacy-table-owner-map.v1.json:344:      "currentModule": "Nexus AI",
+AN_VANTARIS_ONE/registries/legacy-table-owner-map.v1.json:345:      "currentPackage": "PKG-NEXUS-AI",
+AN_VANTARIS_ONE/registries/legacy-table-owner-map.v1.json:347:        "AITrace",
+AN_VANTARIS_ONE/registries/legacy-table-owner-map.v1.json:352:        "AITrace",
+AN_VANTARIS_ONE/registries/legacy-table-owner-map.v1.json:355:      "canonicalOwner": "Nexus AI / AI Model Hub",
+AN_VANTARIS_ONE/registries/legacy-table-owner-map.v1.json:356:      "targetSystemOfRecord": "Nexus AI request trace and AI Model Hub model metadata",
+AN_VANTARIS_ONE/registries/legacy-table-owner-map.v1.json:357:      "targetPackage": "PKG-NEXUS-AI",
+AN_VANTARIS_ONE/registries/legacy-table-owner-map.v1.json:369:        "TARGET_PROVIDER_AVAILABLE",
+AN_VANTARIS_ONE/registries/legacy-table-owner-map.v1.json:409:        "TARGET_PROVIDER_AVAILABLE",
+AN_VANTARIS_ONE/registries/legacy-table-owner-map.v1.json:453:        "TARGET_PROVIDER_AVAILABLE",
+AN_VANTARIS_ONE/registries/legacy-table-owner-map.v1.json:497:        "TARGET_PROVIDER_AVAILABLE",
+AN_VANTARIS_ONE/registries/legacy-table-owner-map.v1.json:543:        "TARGET_PROVIDER_AVAILABLE",
+AN_VANTARIS_ONE/registries/legacy-table-owner-map.v1.json:589:        "TARGET_PROVIDER_AVAILABLE",
+AN_VANTARIS_ONE/registries/legacy-table-owner-map.v1.json:632:        "TARGET_PROVIDER_AVAILABLE",
+AN_VANTARIS_ONE/registries/legacy-table-owner-map.v1.json:676:        "TARGET_PROVIDER_AVAILABLE",
+AN_VANTARIS_ONE/registries/legacy-table-owner-map.v1.json:720:        "TARGET_PROVIDER_AVAILABLE",
+AN_VANTARIS_ONE/registries/legacy-table-owner-map.v1.json:764:        "TARGET_PROVIDER_AVAILABLE",
+AN_VANTARIS_ONE/registries/legacy-table-owner-map.v1.json:814:        "TARGET_PROVIDER_AVAILABLE",
+AN_VANTARIS_ONE/registries/legacy-table-owner-map.v1.json:858:        "TARGET_PROVIDER_AVAILABLE",
+AN_VANTARIS_ONE/registries/legacy-table-owner-map.v1.json:900:        "TARGET_PROVIDER_AVAILABLE",
+AN_VANTARIS_ONE/registries/legacy-table-owner-map.v1.json:946:        "TARGET_PROVIDER_AVAILABLE",
+AN_VANTARIS_ONE/registries/legacy-table-owner-map.v1.json:988:        "TARGET_PROVIDER_AVAILABLE",
+AN_VANTARIS_ONE/registries/airport-spatial-profile.v1.json:4:  "authority": "ONE-AIRPORT-A1-02",
+AN_VANTARIS_ONE/registries/airport-spatial-profile.v1.json:37:    "CONTAINS",
+AN_VANTARIS_ONE/registries/airport-spatial-profile.v1.json:44:    "ONE-AIRPORT-A1-01"
+AN_VANTARIS_ONE/registries/airport-spatial-profile.v1.json:54:    "READY_FOR_AIRPORT_ASSET_RECONCILIATION"
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:1738:      "owningModule": "Nexus AI",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:1739:      "affectedPackage": "PKG-NEXUS-AI",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:1740:      "canonicalOwner": "Nexus AI",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:1769:      "owningModule": "AI Model Hub",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:1770:      "affectedPackage": "PKG-AI-MODEL-HUB",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:1771:      "canonicalOwner": "AI Model Hub",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:1800:      "owningModule": "Nexus AI",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:1801:      "affectedPackage": "PKG-NEXUS-AI",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:1802:      "canonicalOwner": "Nexus AI",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:1831:      "owningModule": "Nexus AI",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:1832:      "affectedPackage": "PKG-NEXUS-AI",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:1833:      "canonicalOwner": "Nexus AI",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:1862:      "owningModule": "Nexus AI",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:1863:      "affectedPackage": "PKG-NEXUS-AI",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:1864:      "canonicalOwner": "Nexus AI",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:1893:      "owningModule": "Nexus AI",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:1894:      "affectedPackage": "PKG-NEXUS-AI",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:1895:      "canonicalOwner": "Nexus AI",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:1924:      "owningModule": "Nexus AI",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:1925:      "affectedPackage": "PKG-NEXUS-AI",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:1926:      "canonicalOwner": "Nexus AI",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:10075:      "evidenceSummary": "PKG-NEXUS-AI -> /intelligence/assistant",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:10076:      "owningModule": "Nexus AI",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:10077:      "affectedPackage": "PKG-NEXUS-AI",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:10137:      "evidenceSummary": "PKG-AI-MODEL-HUB -> /intelligence/models",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:10138:      "owningModule": "AI Model Hub",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:10139:      "affectedPackage": "PKG-AI-MODEL-HUB",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:10479:      "owningModule": "Nexus AI",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:10480:      "affectedPackage": "PKG-NEXUS-AI",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:10510:      "owningModule": "Nexus AI",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:10511:      "affectedPackage": "PKG-NEXUS-AI",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:10541:      "owningModule": "Nexus AI",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:10542:      "affectedPackage": "PKG-NEXUS-AI",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:10572:      "owningModule": "Nexus AI",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:10573:      "affectedPackage": "PKG-NEXUS-AI",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:12246:      "owningModule": "Nexus AI",
+AN_VANTARIS_ONE/registries/boundary-remediation-register.v1.json:12247:      "affectedPackage": "PKG-NEXUS-AI",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:38:      "AI Model Hub": 1,
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:45:      "Nexus AI": 6,
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:56:      "PKG-AI-MODEL-HUB": 1,
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:62:      "PKG-NEXUS-AI": 6,
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2505:      "owningModule": "Nexus AI",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2506:      "packageId": "PKG-NEXUS-AI",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2550:      "owningModule": "AI Model Hub",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2551:      "packageId": "PKG-AI-MODEL-HUB",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2594:      "owningModule": "Nexus AI",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2595:      "packageId": "PKG-NEXUS-AI",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2638:      "owningModule": "Nexus AI",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2639:      "packageId": "PKG-NEXUS-AI",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2682:      "owningModule": "Nexus AI",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2683:      "packageId": "PKG-NEXUS-AI",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2726:      "owningModule": "Nexus AI",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2727:      "packageId": "PKG-NEXUS-AI",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2770:      "owningModule": "Nexus AI",
+AN_VANTARIS_ONE/registries/backend-route-inventory.v1.json:2771:      "packageId": "PKG-NEXUS-AI",
+AN_VANTARIS_ONE/registries/evidence-adapter-contract.v1.json:5:  "authority": "ONE-AIRPORT-A2-04",
+AN_VANTARIS_ONE/registries/umms-r5a-local-freeze.v1.json:15:    "passMarker": "ONE_UMMS_R5_PREVENTIVE_MAINTENANCE_SCHEDULE_READINESS_PASS"
+AN_VANTARIS_ONE/registries/umms-r5a-local-freeze.v1.json:18:    "ONE_UMMS_R5_PREVENTIVE_MAINTENANCE_SCHEDULE_READINESS_PASS",
+AN_VANTARIS_ONE/registries/umms-r5a-local-freeze.v1.json:25:    "ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_PASS",
+AN_VANTARIS_ONE/registries/umms-r5a-local-freeze.v1.json:103:    "ONE_UMMS_R5_PREVENTIVE_MAINTENANCE_SCHEDULE_READINESS_PASS": "PASS",
+AN_VANTARIS_ONE/registries/umms-r5a-local-freeze.v1.json:109:    "ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_PASS": "PASS",
+AN_VANTARIS_ONE/registries/source-system-registry.v1.json:4:  "authority": "ONE-AIRPORT-A2-01",
+AN_VANTARIS_ONE/registries/source-system-registry.v1.json:85:    "MAINTENANCE_MANAGEMENT",
+AN_VANTARIS_ONE/registries/api-namespace-registry.v1.json:849:      "owningModule": "AI Model Hub",
+AN_VANTARIS_ONE/registries/api-namespace-registry.v1.json:850:      "packageId": "PKG-AI-MODEL-HUB",
+AN_VANTARIS_ONE/registries/api-namespace-registry.v1.json:881:      "owningModule": "Nexus AI",
+AN_VANTARIS_ONE/registries/api-namespace-registry.v1.json:882:      "packageId": "PKG-NEXUS-AI",
+AN_VANTARIS_ONE/registries/idempotency-contract.v1.json:148:      "conflictResponse": "POLICY_UNAVAILABLE",
+AN_VANTARIS_ONE/registries/idempotency-contract.v1.json:188:    "completedFailure": "RETURN_STABLE_FAILURE_UNLESS_KEY_REUSE_EXPLICITLY_ALLOWED",
+AN_VANTARIS_ONE/registries/idempotency-contract.v1.json:210:    "detailsExposure": "NO_INTERNAL_STORAGE_OR_FINGERPRINT_DETAIL"
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:34:      "AI Model Hub": 1,
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:41:      "Nexus AI": 6,
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:52:      "PKG-AI-MODEL-HUB": 1,
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:58:      "PKG-NEXUS-AI": 6,
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:483:      "owningModule": "Nexus AI",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:484:      "packageId": "PKG-NEXUS-AI",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:1268:      "owningModule": "AI Model Hub",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:1269:      "packageId": "PKG-AI-MODEL-HUB",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:1502:      "owningModule": "Nexus AI",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:1503:      "packageId": "PKG-NEXUS-AI",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5277:      "owningModule": "Nexus AI",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5278:      "packageId": "PKG-NEXUS-AI",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5394:      "owningModule": "Nexus AI",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5395:      "packageId": "PKG-NEXUS-AI",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5941:      "owningModule": "Nexus AI",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:5942:      "packageId": "PKG-NEXUS-AI",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6295:      "owningModule": "Nexus AI",
+AN_VANTARIS_ONE/registries/backend-route-policy.v1.json:6296:      "packageId": "PKG-NEXUS-AI",
+AN_VANTARIS_ONE/registries/prod-ga-final-international-ga-readiness-matrix.v1.json:80:      "evidenceSummary": "Orchestrator references and NEXUS AI context.",
+AN_VANTARIS_ONE/registries/prod-ga-final-international-ga-readiness-matrix.v1.json:81:      "blockingGaps": "Current branch integrated orchestrator GA not confirmed."
+AN_VANTARIS_ONE/registries/prod-ga-final-international-ga-readiness-matrix.v1.json:108:      "moduleId": "NEXUS_AI",
+AN_VANTARIS_ONE/registries/prod-ga-final-international-ga-readiness-matrix.v1.json:109:      "moduleName": "NEXUS AI",
+AN_VANTARIS_ONE/registries/prod-ga-final-international-ga-readiness-matrix.v1.json:112:      "evidenceSummary": "NEXUS AI R1-R6 context exists, but current branch package integration is not confirmed.",
+AN_VANTARIS_ONE/registries/prod-ga-final-international-ga-readiness-matrix.v1.json:189:    "NEXUSAI-GA-R1 Current Branch Integration Freeze",
+AN_VANTARIS_ONE/registries/uconsole-alarm-event-operations-projection.v1.json:4:  "authority": "ONE-AIRPORT-A3-06",
+AN_VANTARIS_ONE/registries/airport-ga-r5a-local-release-freeze.v1.json:11:      "passMarker": "ONE_AIRPORT_GA_R1_READONLY_API_ROUTE_IMPLEMENTATION_PASS"
+AN_VANTARIS_ONE/registries/airport-ga-r5a-local-release-freeze.v1.json:17:      "passMarker": "ONE_AIRPORT_GA_R2_READONLY_API_LOCAL_SMOKE_AND_CONTRACT_REGRESSION_PASS"
+AN_VANTARIS_ONE/registries/airport-ga-r5a-local-release-freeze.v1.json:23:      "passMarker": "ONE_AIRPORT_GA_R3_READONLY_FRONTEND_ROUTE_PAGE_IMPLEMENTATION_PASS"
+AN_VANTARIS_ONE/registries/airport-ga-r5a-local-release-freeze.v1.json:29:      "passMarker": "ONE_AIRPORT_GA_R4_UCONSOLE_AIRPORT_READONLY_PAGE_BINDING_PASS"
+AN_VANTARIS_ONE/registries/airport-ga-r5a-local-release-freeze.v1.json:35:      "passMarker": "ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE_PASS"
+AN_VANTARIS_ONE/registries/airport-ga-r5a-local-release-freeze.v1.json:39:    "ONE_AIRPORT_GA_R1_READONLY_API_ROUTE_IMPLEMENTATION_PASS",
+AN_VANTARIS_ONE/registries/airport-ga-r5a-local-release-freeze.v1.json:40:    "ONE_AIRPORT_GA_R2_READONLY_API_LOCAL_SMOKE_AND_CONTRACT_REGRESSION_PASS",
+AN_VANTARIS_ONE/registries/airport-ga-r5a-local-release-freeze.v1.json:41:    "ONE_AIRPORT_GA_R3_READONLY_FRONTEND_ROUTE_PAGE_IMPLEMENTATION_PASS",
+AN_VANTARIS_ONE/registries/airport-ga-r5a-local-release-freeze.v1.json:42:    "ONE_AIRPORT_GA_R4_UCONSOLE_AIRPORT_READONLY_PAGE_BINDING_PASS",
+AN_VANTARIS_ONE/registries/airport-ga-r5a-local-release-freeze.v1.json:43:    "ONE_AIRPORT_GA_R5_STAKEHOLDER_REVIEW_PACKAGE_PASS",
+AN_VANTARIS_ONE/registries/airport-ga-r5a-local-release-freeze.v1.json:44:    "ONE_AIRPORT_GA_R5A_LOCAL_RELEASE_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS"
+AN_VANTARIS_ONE/registries/airport-distributed-remote-deployment-readiness-registry.v1.json:3:  "authority": "ONE-AIRPORT-GA-R10",
+AN_VANTARIS_ONE/registries/airport-distributed-remote-deployment-readiness-registry.v1.json:6:  "report": "ONE_AIRPORT_GA_R10_DISTRIBUTED_REMOTE_DEPLOYMENT_READINESS_REPORT.md",
+AN_VANTARIS_ONE/registries/airport-distributed-remote-deployment-readiness-registry.v1.json:7:  "validationMarker": "ONE_AIRPORT_GA_R10_DISTRIBUTED_REMOTE_DEPLOYMENT_READINESS_PASS",
+AN_VANTARIS_ONE/registries/airport-distributed-remote-deployment-readiness-registry.v1.json:10:  "gaR9Dependency": "ONE_AIRPORT_GA_R9_GRAPHICS_HMI_EQUIPMENT_LOCATOR_READINESS_PASS",
+AN_VANTARIS_ONE/registries/umms-spare-parts-inventory-readiness-registry.v1.json:18:    "ummsR5": "ONE_UMMS_R5_PREVENTIVE_MAINTENANCE_SCHEDULE_READINESS_PASS",
+AN_VANTARIS_ONE/registries/airport-graphics-hmi-equipment-locator-readiness-registry.v1.json:3:  "authority": "ONE-AIRPORT-GA-R9",
+AN_VANTARIS_ONE/registries/airport-graphics-hmi-equipment-locator-readiness-registry.v1.json:6:  "report": "ONE_AIRPORT_GA_R9_GRAPHICS_HMI_EQUIPMENT_LOCATOR_READINESS_REPORT.md",
+AN_VANTARIS_ONE/registries/airport-graphics-hmi-equipment-locator-readiness-registry.v1.json:7:  "validationMarker": "ONE_AIRPORT_GA_R9_GRAPHICS_HMI_EQUIPMENT_LOCATOR_READINESS_PASS",
+AN_VANTARIS_ONE/registries/airport-graphics-hmi-equipment-locator-readiness-registry.v1.json:10:  "gaR8Dependency": "ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_PASS",
+AN_VANTARIS_ONE/registries/umms-preventive-maintenance-schedule-readiness-registry.v1.json:6:  "report": "ONE_UMMS_R5_PREVENTIVE_MAINTENANCE_SCHEDULE_READINESS_REPORT.md",
+AN_VANTARIS_ONE/registries/umms-preventive-maintenance-schedule-readiness-registry.v1.json:7:  "validationMarker": "ONE_UMMS_R5_PREVENTIVE_MAINTENANCE_SCHEDULE_READINESS_PASS",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:87:      "failureCode": "POLICY_UNAVAILABLE"
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:138:      "diagnosticsBehavior": "AUTHORIZED_DIAGNOSTICS_REMAIN_AVAILABLE",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:146:      "healthState": "UNAVAILABLE",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:148:      "directUrlBehavior": "STATUS_PAGE_WHEN_UNAVAILABLE",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:204:      "directUrlBehavior": "STATUS_PAGE_WHEN_UNAVAILABLE",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:218:      "directUrlBehavior": "STATUS_PAGE_WHEN_UNAVAILABLE",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:360:        "UNAVAILABLE",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:662:        "UNAVAILABLE",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:704:        "UNAVAILABLE",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1201:        "UNAVAILABLE",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1277:        "UNAVAILABLE",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1305:      "packageId": "PKG-NEXUS-AI",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1306:      "owningModule": "Nexus AI",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1485:      "packageId": "PKG-NEXUS-AI",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1486:      "owningModule": "Nexus AI",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1812:        "UNAVAILABLE",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1984:      "packageId": "PKG-AI-MODEL-HUB",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1985:      "owningModule": "AI Model Hub",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2287:      "packageId": "PKG-AI-MODEL-HUB",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2288:      "packageClass": "AI_OPTIONAL",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2299:      "lockPageRoute": "/packages/PKG-AI-MODEL-HUB/lock",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2300:      "statusRoute": "/packages/PKG-AI-MODEL-HUB/status",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2591:      "packageId": "PKG-NEXUS-AI",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2592:      "packageClass": "AI_OPTIONAL",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2605:      "lockPageRoute": "/packages/PKG-NEXUS-AI/lock",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2606:      "statusRoute": "/packages/PKG-NEXUS-AI/status",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2674:      "packageClass": "DOMAIN_OPTIONAL",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2777:      "packageClass": "DOMAIN_OPTIONAL",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2803:      "packageClass": "DOMAIN_OPTIONAL",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2857:      "packageClass": "DOMAIN_OPTIONAL",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2960:        "DETAILED_SYSTEM_TOPOLOGY",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2961:        "DETAILED_CONNECTOR_CONFIGURATION",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2963:        "DETAILED_VULNERABILITIES",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2988:        "DETAILED_SYSTEM_TOPOLOGY",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2989:        "DETAILED_CONNECTOR_CONFIGURATION",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2991:        "DETAILED_VULNERABILITIES",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:3016:        "DETAILED_SYSTEM_TOPOLOGY",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:3017:        "DETAILED_CONNECTOR_CONFIGURATION",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:3019:        "DETAILED_VULNERABILITIES",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:3044:        "DETAILED_SYSTEM_TOPOLOGY",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:3045:        "DETAILED_CONNECTOR_CONFIGURATION",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:3047:        "DETAILED_VULNERABILITIES",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:3072:        "DETAILED_SYSTEM_TOPOLOGY",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:3073:        "DETAILED_CONNECTOR_CONFIGURATION",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:3075:        "DETAILED_VULNERABILITIES",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:3199:      "packageId": "PKG-NEXUS-AI",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:3625:      "owningModule": "Nexus AI",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:3932:      "owningModule": "Nexus AI",
+AN_VANTARIS_ONE/registries/international-ga-release-candidate-package.v1.json:4:  "authority": "ONE-AIRPORT-GA-02",
+AN_VANTARIS_ONE/registries/api-frontend-readiness-contract.v1.json:6:  "authority": "ONE-AIRPORT-A6-01",
+AN_VANTARIS_ONE/registries/uconsole-operator-review-queue-projection.v1.json:5:  "authority": "ONE-AIRPORT-A4-02",
+AN_VANTARIS_ONE/registries/read-only-api-implementation-release-gate.v1.json:6:  "authority": "ONE-AIRPORT-A7-04",
+AN_VANTARIS_ONE/registries/umms-r3a-local-freeze.v1.json:19:    "ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_PASS",
+AN_VANTARIS_ONE/registries/umms-r3a-local-freeze.v1.json:20:    "ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS",
+AN_VANTARIS_ONE/registries/umms-r3a-local-freeze.v1.json:21:    "ONE_AIRPORT_GA_R10_DISTRIBUTED_REMOTE_DEPLOYMENT_READINESS_PASS",
+AN_VANTARIS_ONE/registries/umms-r3a-local-freeze.v1.json:22:    "ONE_AIRPORT_GA_R9_GRAPHICS_HMI_EQUIPMENT_LOCATOR_READINESS_PASS",
+AN_VANTARIS_ONE/registries/umms-r3a-local-freeze.v1.json:23:    "ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_PASS",
+AN_VANTARIS_ONE/registries/umms-r3a-local-freeze.v1.json:24:    "ONE_AIRPORT_GA_R7_EXISTING_SYSTEM_ONBOARDING_MAPPING_READINESS_PASS",
+AN_VANTARIS_ONE/registries/umms-r3a-local-freeze.v1.json:25:    "ONE_AIRPORT_GA_R6_LINK_INTEGRATION_READINESS_PROJECTION_PASS"
+AN_VANTARIS_ONE/registries/umms-r3a-local-freeze.v1.json:98:    "ONE_UMMS_R2_WORK_ORDER_ASSET_PM_DOMAIN_ALIGNMENT_PASS": "PASS",
+AN_VANTARIS_ONE/registries/umms-r3a-local-freeze.v1.json:99:    "ONE_AIRPORT_GA_R10A_READINESS_PROJECTION_CHAIN_FREEZE_AND_OPTIONAL_TAG_PLAN_PASS": "PASS",
+AN_VANTARIS_ONE/registries/umms-r3a-local-freeze.v1.json:100:    "ONE_AIRPORT_GA_R10_DISTRIBUTED_REMOTE_DEPLOYMENT_READINESS_PASS": "PASS",
+AN_VANTARIS_ONE/registries/umms-r3a-local-freeze.v1.json:101:    "ONE_AIRPORT_GA_R9_GRAPHICS_HMI_EQUIPMENT_LOCATOR_READINESS_PASS": "PASS",
+AN_VANTARIS_ONE/registries/umms-r3a-local-freeze.v1.json:102:    "ONE_AIRPORT_GA_R8_ENGINEER_COMMISSIONING_DIAGNOSTICS_READINESS_PASS": "PASS",
+AN_VANTARIS_ONE/registries/umms-r3a-local-freeze.v1.json:103:    "ONE_AIRPORT_GA_R7_EXISTING_SYSTEM_ONBOARDING_MAPPING_READINESS_PASS": "PASS",
+AN_VANTARIS_ONE/registries/umms-r3a-local-freeze.v1.json:104:    "ONE_AIRPORT_GA_R6_LINK_INTEGRATION_READINESS_PROJECTION_PASS": "PASS",

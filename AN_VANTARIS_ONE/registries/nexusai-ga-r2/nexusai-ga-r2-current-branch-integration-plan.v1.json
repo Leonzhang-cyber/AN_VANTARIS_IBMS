@@ -1,0 +1,80 @@
+{
+  "registryId": "nexusai-ga-r2-current-branch-integration-plan.v1",
+  "platform": "VANTARIS_ONE",
+  "capability": "NEXUS_AI",
+  "releaseScope": "CURRENT_BRANCH_INTEGRATION_PLAN",
+  "sourceBranch": "sync/ufms-foundation-packages-20260622-104646",
+  "sourceHeadBeforeTask": "86cfa68ae887d1eabf0e556797e762b8ee26a174",
+  "priorBranchContext": [
+    "nexus-ai-orchestrator-r1",
+    "nexus-ai-orchestrator-r2",
+    "nexus-ai-orchestrator-r3",
+    "nexus-ai-orchestrator-r4",
+    "nexus-ai-orchestrator-r5-r6"
+  ],
+  "currentBranchStatus": {
+    "moduleWaveAuditFreeze": "PASS",
+    "codeIntegration": "NOT_EXECUTED",
+    "productionActivation": "NOT_EXECUTED"
+  },
+  "integrationPhases": [
+    "Phase 0: branch inventory and diff audit",
+    "Phase 1: read-only package import plan",
+    "Phase 2: contract/schema alignment",
+    "Phase 3: read-only API skeleton",
+    "Phase 4: UConsole advisory entry",
+    "Phase 5: UCDE evidence context adapter",
+    "Phase 6: policy safety gate",
+    "Phase 7: validation and freeze"
+  ],
+  "requiredFutureTasks": [
+    "NEXUSAI-GA-R3 Branch Diff Audit",
+    "NEXUSAI-GA-R4 Read-only Package Import",
+    "NEXUSAI-GA-R5 Contract Alignment",
+    "NEXUSAI-GA-R6 Read-only Advisory API",
+    "NEXUSAI-GA-R7 UConsole Advisory Entry",
+    "NEXUSAI-GA-R8 UCDE Evidence Context Adapter",
+    "NEXUSAI-GA-R9 Safety/Policy Validation Freeze"
+  ],
+  "allowedActions": [
+    "Create documentation",
+    "Create registry",
+    "Create integration plan",
+    "Create validator",
+    "Read current-branch evidence",
+    "Inventory prior branch names without checkout or merge"
+  ],
+  "forbiddenActions": [
+    "Do not merge any branch",
+    "Do not checkout or cherry-pick NEXUS AI code",
+    "Do not copy from another branch",
+    "Do not modify production runtime source code",
+    "Do not modify EDGE/LINK/DB/Contracts packages",
+    "Do not run install scripts",
+    "Do not run rollback scripts",
+    "Do not run DB migration",
+    "Do not start services",
+    "Do not activate runtime",
+    "Do not create secrets",
+    "Do not call external AI APIs",
+    "Do not push",
+    "Do not tag"
+  ],
+  "dependencies": [
+    "UConsole",
+    "CODE",
+    "UCDE",
+    "UMMS",
+    "UFMS",
+    "ONE Orchestrator",
+    "Governance & Security"
+  ],
+  "safety": {
+    "noDbWrite": true,
+    "noDeviceControl": true,
+    "noRuntimeActivation": true,
+    "noSecrets": true,
+    "noExternalApiCalls": true
+  },
+  "passMarker": "NEXUSAI_GA_R2_CURRENT_BRANCH_INTEGRATION_PLAN_PASS"
+}

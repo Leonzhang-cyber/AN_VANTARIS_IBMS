@@ -1,0 +1,17 @@
+=== local branches ===
+  main
+  main-2.invalid-backup
+  nexus-ai-orchestrator-r1
+  nexus-ai-orchestrator-r2
+  nexus-ai-orchestrator-r3
+  nexus-ai-orchestrator-r4
+  nexus-ai-orchestrator-r5-r6
+  remotes/origin/main
+=== tags ===
+airport-ga-readiness-projection-chain-local-freeze-20260621
+airport-ga-readonly-stakeholder-review-local-freeze-20260621
+airport-international-ga-ready-readonly-rc-20260620
+umms-r2-work-asset-pm-domain-alignment-local-freeze-20260621
+umms-r5-preventive-maintenance-schedule-readiness-local-freeze-20260621
+umms-r9-airport-hmi-locator-binding-readiness-local-freeze-20260621
+=== recent commits mentioning nexus/ai/orchestrator ===
