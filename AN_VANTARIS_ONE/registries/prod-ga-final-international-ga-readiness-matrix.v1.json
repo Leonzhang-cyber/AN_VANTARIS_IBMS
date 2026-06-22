@@ -1,0 +1,193 @@
+{
+  "registryId": "prod-ga-final-international-ga-readiness-matrix.v1",
+  "platform": "VANTARIS_ONE",
+  "releaseScope": "FINAL_INTERNATIONAL_GA_READINESS_MATRIX",
+  "sourceBranch": "sync/ufms-foundation-packages-20260622-104646",
+  "sourceHeadBeforeTask": "4bdd3c2f735981bd0a7ea100323b50cd13007d5f",
+  "foundationPackageState": {
+    "edgeFileCount": 248,
+    "linkFileCount": 153,
+    "dbFileCount": 14,
+    "contractsFileCount": 174,
+    "status": "PASS"
+  },
+  "r9CustomerDeliveryState": {
+    "scaffold": "PASS",
+    "productionActivation": "NOT_EXECUTED"
+  },
+  "moduleMatrix": [
+    {
+      "moduleId": "UCORE_UCODE",
+      "moduleName": "UCore / UCode / CODE Layer",
+      "status": "PARTIAL_PLATFORM_FOUNDATION",
+      "gaDecision": "NOT_FINAL_GA",
+      "evidenceSummary": "Boundary/package validators, CODE/UCore references, architecture evidence.",
+      "blockingGaps": "Dedicated final CODE/UCore GA freeze not found in current branch."
+    },
+    {
+      "moduleId": "UMMS",
+      "moduleName": "UMMS",
+      "status": "FREEZE_READONLY_COMPLETE",
+      "gaDecision": "MODULE_GA_FREEZE_REQUIRED",
+      "evidenceSummary": "UMMS R2-R14 reports and PASS markers present.",
+      "blockingGaps": "Production workflow execution and final module GA consolidated freeze not confirmed."
+    },
+    {
+      "moduleId": "UFMS",
+      "moduleName": "UFMS",
+      "status": "MATURE_EXTERNAL_CONTEXT",
+      "gaDecision": "INTEGRATED_GA_NOT_ACTIVATED",
+      "evidenceSummary": "UFMS audit/report lineage and packaged foundation context.",
+      "blockingGaps": "Live UFMS runtime/source activation not performed in this branch."
+    },
+    {
+      "moduleId": "UESG",
+      "moduleName": "UESG",
+      "status": "FREEZE_READONLY_COMPLETE",
+      "gaDecision": "MODULE_GA_FREEZE_REQUIRED",
+      "evidenceSummary": "UESG backend providers/API evidence and module references.",
+      "blockingGaps": "Final UESG module GA consolidated freeze not confirmed."
+    },
+    {
+      "moduleId": "UCDE",
+      "moduleName": "UCDE",
+      "status": "FREEZE_READONLY_COMPLETE",
+      "gaDecision": "MODULE_GA_AUDIT_PENDING",
+      "evidenceSummary": "UCDE provider/API evidence and evidence projection reports.",
+      "blockingGaps": "Final UCDE GA audit pending unless completed later."
+    },
+    {
+      "moduleId": "UDOC",
+      "moduleName": "UDOC",
+      "status": "INCOMPLETE_NOT_CONFIRMED",
+      "gaDecision": "NOT_FINAL_GA",
+      "evidenceSummary": "Limited repository evidence found for final UDOC GA.",
+      "blockingGaps": "Insufficient evidence for final GA."
+    },
+    {
+      "moduleId": "AUTOMATED_RULES_POLICY",
+      "moduleName": "Automated Rules & Policy",
+      "status": "PARTIAL_FOUNDATION",
+      "gaDecision": "NOT_FINAL_GA",
+      "evidenceSummary": "Policy guard, route enforcement, boundary validation, rule references.",
+      "blockingGaps": "Final automated rules runtime/package GA not confirmed."
+    },
+    {
+      "moduleId": "ONE_ORCHESTRATOR",
+      "moduleName": "ONE Orchestrator",
+      "status": "PARTIAL_SCAFFOLD",
+      "gaDecision": "NOT_FINAL_GA",
+      "evidenceSummary": "Orchestrator references and NEXUS AI context.",
+      "blockingGaps": "Current branch integrated orchestrator GA not confirmed."
+    },
+    {
+      "moduleId": "UCONSOLE",
+      "moduleName": "UConsole",
+      "status": "FREEZE_READONLY_COMPLETE",
+      "gaDecision": "MENU_CONSISTENCY_GA_PENDING",
+      "evidenceSummary": "Airport/UMMS/UConsole reports and package entry reports.",
+      "blockingGaps": "Final all-module menu consistency GA not confirmed."
+    },
+    {
+      "moduleId": "REPORTS_ANALYTICS",
+      "moduleName": "Reports & Analytics",
+      "status": "FREEZE_READONLY_COMPLETE",
+      "gaDecision": "MODULE_GA_FREEZE_REQUIRED",
+      "evidenceSummary": "Reports backend files, services, providers, and reports evidence.",
+      "blockingGaps": "Final Reports & Analytics consolidated GA freeze not confirmed."
+    },
+    {
+      "moduleId": "GOVERNANCE_SECURITY",
+      "moduleName": "Governance & Security",
+      "status": "STRONG_FOUNDATION",
+      "gaDecision": "MODULE_GA_FREEZE_REQUIRED",
+      "evidenceSummary": "Boundary baseline, package route enforcement, security docs, audit/idempotency declarations.",
+      "blockingGaps": "Final governance module GA freeze not fully confirmed."
+    },
+    {
+      "moduleId": "NEXUS_AI",
+      "moduleName": "NEXUS AI",
+      "status": "PRIOR_BRANCH_STAGE_COMPLETE_CONTEXT",
+      "gaDecision": "CURRENT_BRANCH_INTEGRATION_GA_PENDING",
+      "evidenceSummary": "NEXUS AI R1-R6 context exists, but current branch package integration is not confirmed.",
+      "blockingGaps": "Current branch integration GA not confirmed."
+    },
+    {
+      "moduleId": "EDGE",
+      "moduleName": "EDGE",
+      "status": "GA_READY_PACKAGE_SCOPE",
+      "gaDecision": "PASS_FOR_PACKAGE_SCOPE_RUNTIME_NOT_ACTIVATED",
+      "evidenceSummary": "R6/R7/R8/R9 PASS markers, EDGE count 248, runtime/source indicators.",
+      "blockingGaps": "Runtime activation not executed."
+    },
+    {
+      "moduleId": "LINK",
+      "moduleName": "LINK",
+      "status": "GA_READY_PACKAGE_SCOPE",
+      "gaDecision": "PASS_FOR_PACKAGE_SCOPE_RUNTIME_NOT_ACTIVATED",
+      "evidenceSummary": "R1-R9 package counts and PASS markers, LINK count 153.",
+      "blockingGaps": "Runtime activation not executed."
+    },
+    {
+      "moduleId": "DB",
+      "moduleName": "DB",
+      "status": "GA_READY_PACKAGE_SCOPE",
+      "gaDecision": "PASS_FOR_PACKAGE_SCOPE_MIGRATION_NOT_EXECUTED",
+      "evidenceSummary": "R1-R9 package counts and PASS markers, DB count 14.",
+      "blockingGaps": "DB migration not executed."
+    },
+    {
+      "moduleId": "CONTRACTS",
+      "moduleName": "Contracts",
+      "status": "GA_READY_PACKAGE_SCOPE",
+      "gaDecision": "PASS_FOR_CONTRACT_PACKAGE_SCOPE",
+      "evidenceSummary": "R1-R9 package counts and PASS markers, Contracts count 174.",
+      "blockingGaps": "Runtime consumers still need activation-specific verification."
+    },
+    {
+      "moduleId": "CUSTOMER_DELIVERY",
+      "moduleName": "Customer Delivery / Installer",
+      "status": "SCAFFOLD_COMPLETE",
+      "gaDecision": "SCAFFOLD_PASS_ACTIVATION_NOT_EXECUTED",
+      "evidenceSummary": "R9 report, manifest, registry, dry-run scripts, UI/checklists.",
+      "blockingGaps": "Production install/activation not executed."
+    },
+    {
+      "moduleId": "OFFLINE_EXPORT",
+      "moduleName": "Offline Export Package",
+      "status": "EXPORT_PACKAGE_COMPLETE",
+      "gaDecision": "PASS_FOR_OFFLINE_EXPORT_SCOPE",
+      "evidenceSummary": "R8 report, tarball checksum, export metadata, PASS marker.",
+      "blockingGaps": "Customer-side restore not executed."
+    }
+  ],
+  "finalDecision": {
+    "foundationPackageGA": "PASS",
+    "offlineExportPackage": "PASS",
+    "customerDeliveryScaffold": "PASS",
+    "fullCustomerProductionActivation": "NOT_EXECUTED",
+    "fullInternationalGAAcrossAllModules": "NOT_YET"
+  },
+  "safety": {
+    "installExecuted": false,
+    "rollbackExecuted": false,
+    "dbMigrationExecuted": false,
+    "runtimeActionExecuted": false,
+    "productionActivationExecuted": false,
+    "pushPerformed": false,
+    "tagCreated": false,
+    "mergePerformed": false,
+    "rebasePerformed": false
+  },
+  "recommendedNextMilestones": [
+    "UCDE-GA-R1 Final Capability Audit + Consolidated Freeze",
+    "UConsole-GA-R1 Full Module Entry & Menu Consistency Freeze",
+    "UMMS-GA-R1 Final Module Consolidated Freeze",
+    "UESG-GA-R1 Final Module Consolidated Freeze",
+    "Reports-GA-R1 Final Reports & Analytics Freeze",
+    "Governance-Security-GA-R1 Final Governance & Security Freeze",
+    "NEXUSAI-GA-R1 Current Branch Integration Freeze",
+    "ONE-PROD-GA-R11 Final Customer Activation Plan"
+  ],
+  "passMarker": "ONE_PROD_GA_R10_FINAL_INTERNATIONAL_GA_READINESS_MATRIX_PASS"
+}
