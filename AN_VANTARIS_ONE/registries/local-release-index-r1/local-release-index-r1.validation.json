@@ -1,0 +1,42 @@
+{
+  "scope": "LOCAL_RELEASE_INDEX_R1",
+  "validatorName": "validate-local-release-index-r1-customer-demo-increment.py",
+  "passMarker": "ONE_LOCAL_RELEASE_INDEX_R1_CUSTOMER_DEMO_INCREMENT_PASS",
+  "requiredFiles": [
+    "AN_VANTARIS_ONE/LOCAL_RELEASE_INDEX_R1.md",
+    "AN_VANTARIS_ONE/registries/local-release-index-r1/local-release-index-r1.registry.json",
+    "AN_VANTARIS_ONE/registries/local-release-index-r1/local-release-index-r1.evidence.json",
+    "AN_VANTARIS_ONE/registries/local-release-index-r1/local-release-index-r1.validation.json",
+    "scripts/validation/validate-local-release-index-r1-customer-demo-increment.py"
+  ],
+  "requiredMarkers": [
+    "ONE_ASSET_CONTEXT_GA_R1_UNIFIED_LINKAGE_PASS",
+    "ONE_CODE_GA_R1_POLICY_GATE_PREVIEW_PASS",
+    "ONE_NEXUSAI_GA_R3_BRANCH_DIFF_AUDIT_PASS",
+    "ONE_SERVER_PRECHECK_R1_DUAL_SERVER_READONLY_AUDIT_PASS"
+  ],
+  "requiredGuardrails": [
+    "read-only",
+    "no push",
+    "no SSH",
+    "no deployment",
+    "no DB write",
+    "no runtime",
+    "no EDGE/LINK command",
+    "no device control",
+    "no production activation"
+  ],
+  "requiredCommitHashes": [
+    "70fef5f1e2b27df0d5ce2fbdbf21cc4920b0e84d",
+    "d2e1b6b72adb454338f0c1db6f39752ff19976c6",
+    "7253e72ba8e3d7fd6c77d64dca26a2cfac69d21e",
+    "6438d6b18bab4d343dc1a255b8b2d201b6422587"
+  ],
+  "requiredTags": [
+    "asset-context-ga-r1-unified-linkage-local-freeze-20260623",
+    "code-ga-r1-policy-gate-preview-local-freeze-20260623",
+    "nexusai-ga-r3-branch-diff-audit-local-freeze-20260623",
+    "server-precheck-r1-dual-server-readonly-audit-local-freeze-20260623"
+  ]
+}
+
