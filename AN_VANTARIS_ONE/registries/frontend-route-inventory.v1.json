@@ -67,22 +67,22 @@
       }
     },
     "menus": {
-      "totalMenuEntries": 48,
-      "staticFallbackEntries": 48,
+      "totalMenuEntries": 56,
+      "staticFallbackEntries": 56,
       "entriesWithRoleMetadata": 0,
       "entriesWithPermissionMetadata": 0,
-      "entriesWithPackageMetadata": 48,
+      "entriesWithPackageMetadata": 56,
       "l1Entries": 13,
-      "l2Entries": 35,
+      "l2Entries": 43,
       "l3EntriesIncorrectlyInLeftNavigation": 0,
-      "entriesRequiringMigration": 48,
+      "entriesRequiringMigration": 56,
       "entriesByPackage": {
         "PKG-ASSET-GRAPH": 3,
         "PKG-EDGE": 3,
         "PKG-EVIDENCE-CENTER": 2,
         "PKG-GOVERNANCE-SECURITY": 3,
         "PKG-NEXUS-AI": 1,
-        "PKG-REPORTS": 1,
+        "PKG-REPORTS": 9,
         "PKG-UCONSOLE": 19,
         "PKG-UCORE": 4,
         "PKG-UESG": 2,
@@ -1644,6 +1644,32 @@
       ]
     },
     {
+      "menuEntryId": "MENU-074E7E9677F7",
+      "sourcePath": "AN_VANTARIS_IBMS-frontend/src/services/menu/static-menu.ts",
+      "line": 287,
+      "label": "Evidence Reports",
+      "l1": "",
+      "l2": "Evidence Reports",
+      "targetL3Workspace": "",
+      "routePath": "/reports",
+      "packageId": "PKG-REPORTS",
+      "owningModule": "Reports",
+      "currentRoleVisibility": [],
+      "currentPermissionMetadata": "",
+      "currentEntitlementMetadata": "NOT_DECLARED",
+      "currentEnabledMetadata": "NOT_DECLARED",
+      "currentHealthMetadata": "NOT_DECLARED",
+      "staticFallback": true,
+      "currentVisibilityClass": "STATIC_ALWAYS_PRESENT",
+      "targetVisibilityClass": "VISIBLE_WHEN_AUTHORIZED",
+      "legacyStatus": "LEGACY_COMPATIBILITY_REQUIRED",
+      "scannerConfidence": "HIGH",
+      "notes": [
+        "Static fallback menu depth L2.",
+        "L3 is represented as workspace content, not a left-navigation level."
+      ]
+    },
+    {
       "menuEntryId": "MENU-134101A24AF8",
       "sourcePath": "AN_VANTARIS_IBMS-frontend/src/services/menu/static-menu.ts",
       "line": 12,
@@ -1732,6 +1758,32 @@
       "routePath": "/one/airport/evidence-investigation",
       "packageId": "PKG-UCONSOLE",
       "owningModule": "UConsole",
+      "currentRoleVisibility": [],
+      "currentPermissionMetadata": "",
+      "currentEntitlementMetadata": "NOT_DECLARED",
+      "currentEnabledMetadata": "NOT_DECLARED",
+      "currentHealthMetadata": "NOT_DECLARED",
+      "staticFallback": true,
+      "currentVisibilityClass": "STATIC_ALWAYS_PRESENT",
+      "targetVisibilityClass": "VISIBLE_WHEN_AUTHORIZED",
+      "legacyStatus": "LEGACY_COMPATIBILITY_REQUIRED",
+      "scannerConfidence": "HIGH",
+      "notes": [
+        "Static fallback menu depth L2.",
+        "L3 is represented as workspace content, not a left-navigation level."
+      ]
+    },
+    {
+      "menuEntryId": "MENU-1A4531862994",
+      "sourcePath": "AN_VANTARIS_IBMS-frontend/src/services/menu/static-menu.ts",
+      "line": 290,
+      "label": "Foundation Reports",
+      "l1": "",
+      "l2": "Foundation Reports",
+      "targetL3Workspace": "",
+      "routePath": "/reports",
+      "packageId": "PKG-REPORTS",
+      "owningModule": "Reports",
       "currentRoleVisibility": [],
       "currentPermissionMetadata": "",
       "currentEntitlementMetadata": "NOT_DECLARED",
@@ -2060,6 +2112,32 @@
       ]
     },
     {
+      "menuEntryId": "MENU-5FE149CB231C",
+      "sourcePath": "AN_VANTARIS_IBMS-frontend/src/services/menu/static-menu.ts",
+      "line": 285,
+      "label": "Export Center",
+      "l1": "",
+      "l2": "Export Center",
+      "targetL3Workspace": "",
+      "routePath": "/reports",
+      "packageId": "PKG-REPORTS",
+      "owningModule": "Reports",
+      "currentRoleVisibility": [],
+      "currentPermissionMetadata": "",
+      "currentEntitlementMetadata": "NOT_DECLARED",
+      "currentEnabledMetadata": "NOT_DECLARED",
+      "currentHealthMetadata": "NOT_DECLARED",
+      "staticFallback": true,
+      "currentVisibilityClass": "STATIC_ALWAYS_PRESENT",
+      "targetVisibilityClass": "VISIBLE_WHEN_AUTHORIZED",
+      "legacyStatus": "LEGACY_COMPATIBILITY_REQUIRED",
+      "scannerConfidence": "HIGH",
+      "notes": [
+        "Static fallback menu depth L2.",
+        "L3 is represented as workspace content, not a left-navigation level."
+      ]
+    },
+    {
       "menuEntryId": "MENU-75F4FADB13B4",
       "sourcePath": "AN_VANTARIS_IBMS-frontend/src/services/menu/static-menu.ts",
       "line": 53,
@@ -2190,6 +2268,32 @@
       ]
     },
     {
+      "menuEntryId": "MENU-9A1AC2E51E17",
+      "sourcePath": "AN_VANTARIS_IBMS-frontend/src/services/menu/static-menu.ts",
+      "line": 283,
+      "label": "Report Library",
+      "l1": "",
+      "l2": "Report Library",
+      "targetL3Workspace": "",
+      "routePath": "/reports",
+      "packageId": "PKG-REPORTS",
+      "owningModule": "Reports",
+      "currentRoleVisibility": [],
+      "currentPermissionMetadata": "",
+      "currentEntitlementMetadata": "NOT_DECLARED",
+      "currentEnabledMetadata": "NOT_DECLARED",
+      "currentHealthMetadata": "NOT_DECLARED",
+      "staticFallback": true,
+      "currentVisibilityClass": "STATIC_ALWAYS_PRESENT",
+      "targetVisibilityClass": "VISIBLE_WHEN_AUTHORIZED",
+      "legacyStatus": "LEGACY_COMPATIBILITY_REQUIRED",
+      "scannerConfidence": "HIGH",
+      "notes": [
+        "Static fallback menu depth L2.",
+        "L3 is represented as workspace content, not a left-navigation level."
+      ]
+    },
+    {
       "menuEntryId": "MENU-9BE53F871DDC",
       "sourcePath": "AN_VANTARIS_IBMS-frontend/src/services/menu/static-menu.ts",
       "line": 44,
@@ -2294,6 +2398,32 @@
       ]
     },
     {
+      "menuEntryId": "MENU-A5D2004FD4D8",
+      "sourcePath": "AN_VANTARIS_IBMS-frontend/src/services/menu/static-menu.ts",
+      "line": 284,
+      "label": "Customer Report Pack",
+      "l1": "",
+      "l2": "Customer Report Pack",
+      "targetL3Workspace": "",
+      "routePath": "/reports",
+      "packageId": "PKG-REPORTS",
+      "owningModule": "Reports",
+      "currentRoleVisibility": [],
+      "currentPermissionMetadata": "",
+      "currentEntitlementMetadata": "NOT_DECLARED",
+      "currentEnabledMetadata": "NOT_DECLARED",
+      "currentHealthMetadata": "NOT_DECLARED",
+      "staticFallback": true,
+      "currentVisibilityClass": "STATIC_ALWAYS_PRESENT",
+      "targetVisibilityClass": "VISIBLE_WHEN_AUTHORIZED",
+      "legacyStatus": "LEGACY_COMPATIBILITY_REQUIRED",
+      "scannerConfidence": "HIGH",
+      "notes": [
+        "Static fallback menu depth L2.",
+        "L3 is represented as workspace content, not a left-navigation level."
+      ]
+    },
+    {
       "menuEntryId": "MENU-A5D8A0954021",
       "sourcePath": "AN_VANTARIS_IBMS-frontend/src/services/menu/static-menu.ts",
       "line": 169,
@@ -2342,32 +2472,6 @@
       "scannerConfidence": "HIGH",
       "notes": [
         "Static fallback menu depth L2.",
-        "L3 is represented as workspace content, not a left-navigation level."
-      ]
-    },
-    {
-      "menuEntryId": "MENU-AE26D0EDC32C",
-      "sourcePath": "AN_VANTARIS_IBMS-frontend/src/services/menu/static-menu.ts",
-      "line": 277,
-      "label": "Reports",
-      "l1": "Reports",
-      "l2": "",
-      "targetL3Workspace": "",
-      "routePath": "/reports",
-      "packageId": "PKG-REPORTS",
-      "owningModule": "Reports",
-      "currentRoleVisibility": [],
-      "currentPermissionMetadata": "",
-      "currentEntitlementMetadata": "NOT_DECLARED",
-      "currentEnabledMetadata": "NOT_DECLARED",
-      "currentHealthMetadata": "NOT_DECLARED",
-      "staticFallback": true,
-      "currentVisibilityClass": "STATIC_ALWAYS_PRESENT",
-      "targetVisibilityClass": "VISIBLE_WHEN_AUTHORIZED",
-      "legacyStatus": "LEGACY_COMPATIBILITY_REQUIRED",
-      "scannerConfidence": "HIGH",
-      "notes": [
-        "Static fallback menu depth L1.",
         "L3 is represented as workspace content, not a left-navigation level."
       ]
     },
@@ -2528,6 +2632,32 @@
       ]
     },
     {
+      "menuEntryId": "MENU-B9F73DEEC833",
+      "sourcePath": "AN_VANTARIS_IBMS-frontend/src/services/menu/static-menu.ts",
+      "line": 289,
+      "label": "Delivery Reports",
+      "l1": "",
+      "l2": "Delivery Reports",
+      "targetL3Workspace": "",
+      "routePath": "/reports",
+      "packageId": "PKG-REPORTS",
+      "owningModule": "Reports",
+      "currentRoleVisibility": [],
+      "currentPermissionMetadata": "",
+      "currentEntitlementMetadata": "NOT_DECLARED",
+      "currentEnabledMetadata": "NOT_DECLARED",
+      "currentHealthMetadata": "NOT_DECLARED",
+      "staticFallback": true,
+      "currentVisibilityClass": "STATIC_ALWAYS_PRESENT",
+      "targetVisibilityClass": "VISIBLE_WHEN_AUTHORIZED",
+      "legacyStatus": "LEGACY_COMPATIBILITY_REQUIRED",
+      "scannerConfidence": "HIGH",
+      "notes": [
+        "Static fallback menu depth L2.",
+        "L3 is represented as workspace content, not a left-navigation level."
+      ]
+    },
+    {
       "menuEntryId": "MENU-BAD52C28616B",
       "sourcePath": "AN_VANTARIS_IBMS-frontend/src/services/menu/static-menu.ts",
       "line": 145,
@@ -2550,6 +2680,58 @@
       "scannerConfidence": "HIGH",
       "notes": [
         "Static fallback menu depth L1.",
+        "L3 is represented as workspace content, not a left-navigation level."
+      ]
+    },
+    {
+      "menuEntryId": "MENU-BB8DD8FFB4AB",
+      "sourcePath": "AN_VANTARIS_IBMS-frontend/src/services/menu/static-menu.ts",
+      "line": 288,
+      "label": "Maintenance Reports",
+      "l1": "",
+      "l2": "Maintenance Reports",
+      "targetL3Workspace": "",
+      "routePath": "/reports",
+      "packageId": "PKG-REPORTS",
+      "owningModule": "Reports",
+      "currentRoleVisibility": [],
+      "currentPermissionMetadata": "",
+      "currentEntitlementMetadata": "NOT_DECLARED",
+      "currentEnabledMetadata": "NOT_DECLARED",
+      "currentHealthMetadata": "NOT_DECLARED",
+      "staticFallback": true,
+      "currentVisibilityClass": "STATIC_ALWAYS_PRESENT",
+      "targetVisibilityClass": "VISIBLE_WHEN_AUTHORIZED",
+      "legacyStatus": "LEGACY_COMPATIBILITY_REQUIRED",
+      "scannerConfidence": "HIGH",
+      "notes": [
+        "Static fallback menu depth L2.",
+        "L3 is represented as workspace content, not a left-navigation level."
+      ]
+    },
+    {
+      "menuEntryId": "MENU-BD04FED67C42",
+      "sourcePath": "AN_VANTARIS_IBMS-frontend/src/services/menu/static-menu.ts",
+      "line": 286,
+      "label": "Audit Reports",
+      "l1": "",
+      "l2": "Audit Reports",
+      "targetL3Workspace": "",
+      "routePath": "/reports",
+      "packageId": "PKG-REPORTS",
+      "owningModule": "Reports",
+      "currentRoleVisibility": [],
+      "currentPermissionMetadata": "",
+      "currentEntitlementMetadata": "NOT_DECLARED",
+      "currentEnabledMetadata": "NOT_DECLARED",
+      "currentHealthMetadata": "NOT_DECLARED",
+      "staticFallback": true,
+      "currentVisibilityClass": "STATIC_ALWAYS_PRESENT",
+      "targetVisibilityClass": "VISIBLE_WHEN_AUTHORIZED",
+      "legacyStatus": "LEGACY_COMPATIBILITY_REQUIRED",
+      "scannerConfidence": "HIGH",
+      "notes": [
+        "Static fallback menu depth L2.",
         "L3 is represented as workspace content, not a left-navigation level."
       ]
     },
@@ -2706,6 +2888,32 @@
       "scannerConfidence": "HIGH",
       "notes": [
         "Static fallback menu depth L2.",
+        "L3 is represented as workspace content, not a left-navigation level."
+      ]
+    },
+    {
+      "menuEntryId": "MENU-C9F98156EC9E",
+      "sourcePath": "AN_VANTARIS_IBMS-frontend/src/services/menu/static-menu.ts",
+      "line": 277,
+      "label": "Analytics & Reports",
+      "l1": "Analytics & Reports",
+      "l2": "",
+      "targetL3Workspace": "",
+      "routePath": "/reports",
+      "packageId": "PKG-REPORTS",
+      "owningModule": "Reports",
+      "currentRoleVisibility": [],
+      "currentPermissionMetadata": "",
+      "currentEntitlementMetadata": "NOT_DECLARED",
+      "currentEnabledMetadata": "NOT_DECLARED",
+      "currentHealthMetadata": "NOT_DECLARED",
+      "staticFallback": true,
+      "currentVisibilityClass": "STATIC_ALWAYS_PRESENT",
+      "targetVisibilityClass": "VISIBLE_WHEN_AUTHORIZED",
+      "legacyStatus": "LEGACY_COMPATIBILITY_REQUIRED",
+      "scannerConfidence": "HIGH",
+      "notes": [
+        "Static fallback menu depth L1.",
         "L3 is represented as workspace content, not a left-navigation level."
       ]
     },

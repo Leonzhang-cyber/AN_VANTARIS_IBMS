@@ -1,0 +1,2 @@
+Read-only linkage: UHMI, UCDE, UMMS, Customer Delivery, Foundation Diagnostics, UConsole, Reports & Analytics, Governance & Security.
+Future export path: Reports -> CODE -> Policy Gate -> Approval -> Audit/UCDE -> Export Artifact.

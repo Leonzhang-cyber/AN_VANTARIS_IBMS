@@ -1,0 +1,2 @@
+Export Center Preview supports PDF Preview, Excel Preview, CSV Preview, and Evidence Bundle Preview.
+No Real Export Execution. No PDF Generation. No Excel Generation. No ZIP Generation.

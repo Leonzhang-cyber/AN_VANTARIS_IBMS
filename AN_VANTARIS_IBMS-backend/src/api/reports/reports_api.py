@@ -99,3 +99,78 @@ def reports_audit_detail(audit_id: str):
         return Result.error(code=error[0], message=error[1])
     return Result.success(data=result)
 
+
+def _reports_ga_r13_result(section: str):
+    return Result.success(data=_service.get_ga_r13_section(section))
+
+
+@api_bp.route("/one/reports/customer-demo-pack", methods=["GET"])
+@api_bp.route("/v1/one/reports/customer-demo-pack", methods=["GET"])
+def reports_ga_r13_customer_demo_pack():
+    return Result.success(data=_service.get_ga_r13_workspace())
+
+
+@api_bp.route("/one/reports/export-center", methods=["GET"])
+@api_bp.route("/v1/one/reports/export-center", methods=["GET"])
+def reports_ga_r13_export_center():
+    return _reports_ga_r13_result("export-center")
+
+
+@api_bp.route("/one/reports/report-library", methods=["GET"])
+@api_bp.route("/v1/one/reports/report-library", methods=["GET"])
+def reports_ga_r13_report_library():
+    return _reports_ga_r13_result("report-library")
+
+
+@api_bp.route("/one/reports/umms-maintenance", methods=["GET"])
+@api_bp.route("/v1/one/reports/umms-maintenance", methods=["GET"])
+def reports_ga_r13_umms_maintenance():
+    return _reports_ga_r13_result("umms-maintenance")
+
+
+@api_bp.route("/one/reports/uhmi-system-status", methods=["GET"])
+@api_bp.route("/v1/one/reports/uhmi-system-status", methods=["GET"])
+def reports_ga_r13_uhmi_system_status():
+    return _reports_ga_r13_result("uhmi-system-status")
+
+
+@api_bp.route("/one/reports/ucde-evidence", methods=["GET"])
+@api_bp.route("/v1/one/reports/ucde-evidence", methods=["GET"])
+def reports_ga_r13_ucde_evidence():
+    return _reports_ga_r13_result("ucde-evidence")
+
+
+@api_bp.route("/one/reports/customer-delivery-handoff", methods=["GET"])
+@api_bp.route("/v1/one/reports/customer-delivery-handoff", methods=["GET"])
+def reports_ga_r13_customer_delivery_handoff():
+    return _reports_ga_r13_result("customer-delivery-handoff")
+
+
+@api_bp.route("/one/reports/foundation-diagnostics", methods=["GET"])
+@api_bp.route("/v1/one/reports/foundation-diagnostics", methods=["GET"])
+def reports_ga_r13_foundation_diagnostics():
+    return _reports_ga_r13_result("foundation-diagnostics")
+
+
+@api_bp.route("/one/reports/package-readiness", methods=["GET"])
+@api_bp.route("/v1/one/reports/package-readiness", methods=["GET"])
+def reports_ga_r13_package_readiness():
+    return _reports_ga_r13_result("package-readiness")
+
+
+@api_bp.route("/one/reports/audit-compliance", methods=["GET"])
+@api_bp.route("/v1/one/reports/audit-compliance", methods=["GET"])
+def reports_ga_r13_audit_compliance():
+    return _reports_ga_r13_result("audit-compliance")
+
+
+@api_bp.route("/one/reports/export-queue-preview", methods=["GET"])
+@api_bp.route("/v1/one/reports/export-queue-preview", methods=["GET"])
+def reports_ga_r13_export_queue_preview():
+    return _reports_ga_r13_result("export-queue-preview")
+
+
+@api_bp.route("/one/reports/guardrails", methods=["GET"])
+@api_bp.route("/v1/one/reports/guardrails", methods=["GET"])
+def reports_ga_r13_guardrails():
+    return _reports_ga_r13_result("guardrails")

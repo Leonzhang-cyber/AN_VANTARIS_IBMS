@@ -1,0 +1,10 @@
+No Real Export Execution
+No PDF Generation
+No Excel Generation
+No ZIP Generation
+No DB Write
+No Evidence Write
+No Runtime Activation
+No EDGE Command Execution
+No LINK Command Execution
+No Production Activation

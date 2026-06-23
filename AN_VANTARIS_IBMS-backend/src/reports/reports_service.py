@@ -21,7 +21,7 @@ from src.reports.reports_integrity import (
     build_query_hash,
 )
 from src.reports.reports_permissions import evaluate_report_permission
-from src.reports.reports_provider import get_mock_rows
+from src.reports.reports_provider import get_mock_rows, reports_ga_r13_section, reports_ga_r13_workspace
 
 
 class ReportsService:
@@ -323,3 +323,8 @@ class ReportsService:
         policy["permission"] = permission
         return policy
 
+    def get_ga_r13_workspace(self) -> Dict[str, Any]:
+        return reports_ga_r13_workspace()
+
+    def get_ga_r13_section(self, section: str) -> Dict[str, Any]:
+        return reports_ga_r13_section(section)

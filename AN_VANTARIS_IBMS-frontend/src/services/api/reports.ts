@@ -226,12 +226,90 @@ export interface ReportAuditRetentionPolicy {
   permission?: ReportPermissionStatus
 }
 
+export interface ReportsGaR13Workspace {
+  scope: string
+  mode: string
+  readinessLevel: string
+  visualStyle: string
+  customerDemoReportPack: boolean
+  exportCenterPreview: boolean
+  exportExecuted: boolean
+  reportGenerated: boolean
+  pdfGenerated: boolean
+  excelGenerated: boolean
+  zipGenerated: boolean
+  dbWrite: boolean
+  evidenceWrite: boolean
+  runtimeActivation: boolean
+  edgeCommandExecution: boolean
+  linkCommandExecution: boolean
+  productionActivation: boolean
+  appNonDbTarget: string
+  dbOnlyTarget: string
+  futureExportPath: string
+  reportSummaryCards: Array<{ label: string; value: string | number; status: string }>
+  reportLibrary: Array<Record<string, unknown>>
+  exportCenter: Record<string, unknown>
+  moduleLinkage: string[]
+  customerReportPack: string[]
+  engineerReportPack: string[]
+  adminReportPack: string[]
+  guardrails: string[]
+}
+
 function asRecord(value: unknown): Record<string, unknown> {
   return typeof value === 'object' && value !== null ? (value as Record<string, unknown>) : {}
 }
 
 function asStringArray(value: unknown): string[] {
   return Array.isArray(value) ? value.map((item) => String(item)) : []
+}
+
+function asRecordArray(value: unknown): Record<string, unknown>[] {
+  return Array.isArray(value) ? value.filter((item) => typeof item === 'object' && item !== null).map((item) => item as Record<string, unknown>) : []
+}
+
+function unwrap<T>(body: unknown): T {
+  if (typeof body === 'object' && body !== null && 'data' in body) return (body as { data: T }).data
+  return body as T
+}
+
+function normalizeReportsGaR13(raw: unknown): ReportsGaR13Workspace {
+  const data = asRecord(raw)
+  return {
+    scope: String(data.scope ?? 'REPORTS_GA_R13'),
+    mode: String(data.mode ?? 'read_only'),
+    readinessLevel: String(data.readinessLevel ?? 'CUSTOMER_DEMO_REPORT_PACK'),
+    visualStyle: String(data.visualStyle ?? 'VANTARIS_LIGHT_OPERATIONS_CONSOLE'),
+    customerDemoReportPack: data.customerDemoReportPack !== undefined ? Boolean(data.customerDemoReportPack) : true,
+    exportCenterPreview: data.exportCenterPreview !== undefined ? Boolean(data.exportCenterPreview) : true,
+    exportExecuted: Boolean(data.exportExecuted),
+    reportGenerated: Boolean(data.reportGenerated),
+    pdfGenerated: Boolean(data.pdfGenerated),
+    excelGenerated: Boolean(data.excelGenerated),
+    zipGenerated: Boolean(data.zipGenerated),
+    dbWrite: Boolean(data.dbWrite),
+    evidenceWrite: Boolean(data.evidenceWrite),
+    runtimeActivation: Boolean(data.runtimeActivation),
+    edgeCommandExecution: Boolean(data.edgeCommandExecution),
+    linkCommandExecution: Boolean(data.linkCommandExecution),
+    productionActivation: Boolean(data.productionActivation),
+    appNonDbTarget: String(data.appNonDbTarget ?? '192.168.60.21'),
+    dbOnlyTarget: String(data.dbOnlyTarget ?? '192.168.60.22'),
+    futureExportPath: String(data.futureExportPath ?? ''),
+    reportSummaryCards: asRecordArray(data.reportSummaryCards).map((item) => ({
+      label: String(item.label ?? ''),
+      value: typeof item.value === 'number' ? item.value : String(item.value ?? ''),
+      status: String(item.status ?? ''),
+    })),
+    reportLibrary: asRecordArray(data.reportLibrary),
+    exportCenter: asRecord(data.exportCenter),
+    moduleLinkage: asStringArray(data.moduleLinkage),
+    customerReportPack: asStringArray(data.customerReportPack),
+    engineerReportPack: asStringArray(data.engineerReportPack),
+    adminReportPack: asStringArray(data.adminReportPack),
+    guardrails: asStringArray(data.guardrails),
+  }
 }
 
 function normalizePermission(raw: unknown, fallbackAction: string, fallbackReportId = '*'): ReportPermissionStatus {
@@ -586,3 +664,7 @@ export async function getReportsAuditRetentionPolicy(): Promise<ReportAuditReten
   }
 }
 
+export async function getReportsGaR13Workspace(): Promise<ReportsGaR13Workspace> {
+  const { data } = await request.get('/v1/one/reports/customer-demo-pack')
+  return normalizeReportsGaR13(unwrap<unknown>(data))
+}

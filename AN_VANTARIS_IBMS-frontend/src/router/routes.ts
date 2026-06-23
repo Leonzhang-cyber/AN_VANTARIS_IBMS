@@ -118,7 +118,7 @@ export const routes: RouteRecordRaw[] = [
     path: '/reports',
     name: 'reports',
     component: ReportsView,
-    meta: { requiresAuth: true, title: 'Reports', layout: true },
+    meta: { requiresAuth: true, title: 'Reports & Analytics', layout: true },
   },
   {
     path: '/ucde/evidence',

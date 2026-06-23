@@ -274,5 +274,20 @@ export const fallbackMenuItems: AppMenuItem[] = [
       },
     ],
   },
-  { id: 'reports', label: 'Reports', path: '/reports', source: 'static' },
+  {
+    id: 'analytics-reports',
+    label: 'Analytics & Reports',
+    path: '/reports',
+    source: 'static',
+    children: [
+      { id: 'reports-library', label: 'Report Library', path: '/reports', source: 'static' },
+      { id: 'reports-customer-pack', label: 'Customer Report Pack', path: '/reports', source: 'static' },
+      { id: 'reports-export-center', label: 'Export Center', path: '/reports', source: 'static' },
+      { id: 'reports-audit', label: 'Audit Reports', path: '/reports', source: 'static' },
+      { id: 'reports-evidence', label: 'Evidence Reports', path: '/reports', source: 'static' },
+      { id: 'reports-maintenance', label: 'Maintenance Reports', path: '/reports', source: 'static' },
+      { id: 'reports-delivery', label: 'Delivery Reports', path: '/reports', source: 'static' },
+      { id: 'reports-foundation', label: 'Foundation Reports', path: '/reports', source: 'static' },
+    ],
+  },
 ]
