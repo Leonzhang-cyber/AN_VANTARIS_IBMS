@@ -11,6 +11,7 @@ import PlatformOperationsDashboard from '@/modules/console/PlatformOperationsDas
 import ReportsView from '@/modules/reports/ReportsView.vue'
 import EvidenceCenter from '@/modules/ucde/EvidenceCenter.vue'
 import AssetsTopology from '@/modules/assets/AssetsTopology.vue'
+import AssetContext from '@/modules/assets/AssetContext.vue'
 import UesgSustainability from '@/modules/uesg/UesgSustainability.vue'
 import UmmsMaintenance from '@/modules/umms/UmmsMaintenance.vue'
 import UmmsReadonlyOverview from '@/modules/umms/UmmsReadonlyOverview.vue'
@@ -131,6 +132,12 @@ export const routes: RouteRecordRaw[] = [
     name: 'assets-topology',
     component: AssetsTopology,
     meta: { requiresAuth: true, title: 'Assets & Topology', layout: true },
+  },
+  {
+    path: '/one/assets/context',
+    name: 'asset-context',
+    component: AssetContext,
+    meta: { requiresAuth: true, title: 'Asset Context', layout: true },
   },
   {
     path: '/uesg/sustainability',

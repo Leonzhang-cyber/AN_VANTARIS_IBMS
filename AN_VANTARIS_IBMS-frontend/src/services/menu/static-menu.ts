@@ -112,6 +112,12 @@ export const fallbackMenuItems: AppMenuItem[] = [
         path: '/assets/topology',
         source: 'static',
       },
+      {
+        id: 'asset-context',
+        label: 'Asset Context',
+        path: '/one/assets/context',
+        source: 'static',
+      },
     ],
   },
   {

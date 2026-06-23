@@ -21,4 +21,5 @@ from .uhmi import uhmi_api
 from .customer_delivery import customer_delivery_api
 from .engineer_installer import engineer_installer_api
 from .foundation_diagnostics import foundation_diagnostics_api
+from .asset_context import asset_context_api
 from .iot.sse_api import *

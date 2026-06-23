@@ -1,0 +1,38 @@
+{
+  "scope": "ASSET_CONTEXT_GA_R1",
+  "passMarker": "ONE_ASSET_CONTEXT_GA_R1_UNIFIED_LINKAGE_PASS",
+  "createdFiles": [
+    "AN_VANTARIS_IBMS-backend/src/asset_context/__init__.py",
+    "AN_VANTARIS_IBMS-backend/src/asset_context/asset_context_provider.py",
+    "AN_VANTARIS_IBMS-backend/src/asset_context/asset_context_service.py",
+    "AN_VANTARIS_IBMS-backend/src/api/asset_context/__init__.py",
+    "AN_VANTARIS_IBMS-backend/src/api/asset_context/asset_context_api.py",
+    "AN_VANTARIS_IBMS-frontend/src/services/api/assetContext.ts",
+    "AN_VANTARIS_IBMS-frontend/src/modules/assets/AssetContext.vue",
+    "AN_VANTARIS_ONE/ASSET_CONTEXT_GA_R1.md",
+    "scripts/validation/validate-asset-context-ga-r1-unified-linkage.py"
+  ],
+  "modifiedFiles": [
+    "AN_VANTARIS_IBMS-backend/src/api/__init__.py",
+    "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
+    "AN_VANTARIS_IBMS-frontend/src/services/menu/static-menu.ts"
+  ],
+  "evidencePosture": {
+    "readOnly": true,
+    "runtimeEnabled": false,
+    "dbWriteEnabled": false,
+    "assetGraphWriteEnabled": false,
+    "edgeCommandExecution": false,
+    "linkCommandExecution": false,
+    "deviceControlEnabled": false,
+    "productionActivation": false,
+    "distBuildCommitted": false,
+    "envOrSecretChanged": false
+  },
+  "notes": [
+    "Provider failures are represented as integrationStatus unavailable with limitations.",
+    "No Asset Graph canonical write or persistence contract is modified.",
+    "No commit is created for this task until user confirmation."
+  ]
+}
+

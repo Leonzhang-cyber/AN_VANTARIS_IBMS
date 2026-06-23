@@ -1,0 +1,16 @@
+{
+  "scope": "ASSET_CONTEXT_GA_R1",
+  "validator": "scripts/validation/validate-asset-context-ga-r1-unified-linkage.py",
+  "passMarker": "ONE_ASSET_CONTEXT_GA_R1_UNIFIED_LINKAGE_PASS",
+  "status": "PASS",
+  "buildResult": "npm run build PASS with existing Rolldown annotation and chunk-size warnings only",
+  "requiredChecks": [
+    "backend files exist",
+    "frontend files exist",
+    "API route strings exist",
+    "read-only guardrails exist",
+    "POST/PUT/PATCH/DELETE absent from asset_context API",
+    "write/runtime/control forbidden tokens absent from asset_context code",
+    "registry/evidence/doc files exist"
+  ]
+}
