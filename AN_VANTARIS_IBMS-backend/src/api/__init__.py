@@ -26,4 +26,5 @@ from .code_policy import code_policy_api
 from .nexus_ai import nexus_ai_api
 from .server_precheck import server_precheck_api
 from .server_access_plan import server_access_plan_api
+from .server_observation_plan import server_observation_plan_api
 from .iot.sse_api import *

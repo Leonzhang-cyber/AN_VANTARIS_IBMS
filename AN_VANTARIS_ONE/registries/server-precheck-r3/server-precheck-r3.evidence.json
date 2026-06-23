@@ -1,0 +1,32 @@
+{
+  "scope": "SERVER_PRECHECK_R3",
+  "passMarker": "ONE_SERVER_PRECHECK_R3_ACTUAL_READONLY_OBSERVATION_PLAN_PASS",
+  "evidenceStatus": "PLANNED_NOT_CAPTURED",
+  "planName": "actual approved read-only server observation plan",
+  "planningMode": "planned-only",
+  "executionStatus": "not executed in R3",
+  "approvalStatus": "separate approval required",
+  "actualObservationExecuted": false,
+  "evidencePackage": [
+    "approval record",
+    "transcript file",
+    "APP server identity output",
+    "APP server resource output",
+    "APP server listener output",
+    "APP package/runtime version output",
+    "DB server identity output",
+    "DB server PostgreSQL package/status output",
+    "blocker list",
+    "stop condition log",
+    "final R3 observation decision"
+  ],
+  "ucdeEvidenceWrite": false,
+  "reportsExport": false,
+  "evidenceStorage": "planned local folder, not created in R3",
+  "limitations": [
+    "No SSH was executed.",
+    "No deployment or install was executed.",
+    "No DB connection, migration, or write was executed.",
+    "No runtime healthcheck was executed."
+  ]
+}

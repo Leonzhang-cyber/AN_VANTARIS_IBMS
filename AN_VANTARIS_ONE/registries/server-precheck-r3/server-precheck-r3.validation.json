@@ -1,0 +1,25 @@
+{
+  "scope": "SERVER_PRECHECK_R3",
+  "validatorName": "validate-server-precheck-r3-actual-readonly-observation-plan.py",
+  "passMarker": "ONE_SERVER_PRECHECK_R3_ACTUAL_READONLY_OBSERVATION_PLAN_PASS",
+  "status": "PASS",
+  "requiredFiles": [
+    "AN_VANTARIS_ONE/SERVER_PRECHECK_R3.md",
+    "AN_VANTARIS_ONE/registries/server-precheck-r3/server-precheck-r3.registry.json",
+    "AN_VANTARIS_ONE/registries/server-precheck-r3/server-precheck-r3.evidence.json",
+    "AN_VANTARIS_ONE/registries/server-precheck-r3/server-precheck-r3.validation.json",
+    "scripts/validation/validate-server-precheck-r3-actual-readonly-observation-plan.py"
+  ],
+  "requiredPhrases": [
+    "actual approved read-only server observation plan",
+    "execution sequence",
+    "app server observation",
+    "db server observation",
+    "evidence package",
+    "stop conditions",
+    "approval checklist",
+    "planned-only",
+    "not executed in R3",
+    "separate approval required"
+  ]
+}

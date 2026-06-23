@@ -10,6 +10,7 @@ import PermissionListView from '@/modules/system/PermissionListView.vue'
 import PlatformOperationsDashboard from '@/modules/console/PlatformOperationsDashboard.vue'
 import ServerPrecheckAudit from '@/modules/server/ServerPrecheckAudit.vue'
 import ServerAccessWindowPlan from '@/modules/server/ServerAccessWindowPlan.vue'
+import ServerObservationPlan from '@/modules/server/ServerObservationPlan.vue'
 import CodePolicyGate from '@/modules/code/CodePolicyGate.vue'
 import NexusBranchAudit from '@/modules/nexus/NexusBranchAudit.vue'
 import ReportsView from '@/modules/reports/ReportsView.vue'
@@ -124,6 +125,12 @@ export const routes: RouteRecordRaw[] = [
     name: 'server-access-window-plan',
     component: ServerAccessWindowPlan,
     meta: { requiresAuth: true, title: 'Server Access Window Plan', layout: true },
+  },
+  {
+    path: '/one/server/observation-plan',
+    name: 'server-observation-plan',
+    component: ServerObservationPlan,
+    meta: { requiresAuth: true, title: 'Server Observation Plan', layout: true },
   },
   {
     path: '/one/code/policy-gate',
