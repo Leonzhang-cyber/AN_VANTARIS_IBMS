@@ -1,0 +1,17 @@
+UCDE-GA-R5 Release Decision
+PASS marker: UCDE_GA_R5_EVIDENCE_CENTER_RELEASE_INDEX_DECISION_PASS
+
+Decision Type: UCDE Customer Preview Release Decision.
+Decision: GO.
+Decision Scope: READ_ONLY_EVIDENCE_CENTER_CUSTOMER_PREVIEW.
+Production GA Decision: NOT_YET.
+Production Activation: NOT_EXECUTED.
+Evidence DB: NOT_CREATED.
+Evidence Write: NOT_EXECUTED.
+DB Migration/Write: NOT_EXECUTED.
+Runtime Control Activation: NOT_EXECUTED.
+Device Control: NOT_EXECUTED.
+EDGE/LINK Command Execution: NOT_EXECUTED.
+Auth/Login/JWT/RBAC Mutation: NOT_EXECUTED.
+Runnable Production Package: NOT_GENERATED.
+Dist/Build Artifact Commit: NOT_COMMITTED.

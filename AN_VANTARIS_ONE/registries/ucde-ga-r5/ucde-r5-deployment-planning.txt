@@ -1,0 +1,15 @@
+UCDE-GA-R5 Deployment Planning
+PASS marker: UCDE_GA_R5_EVIDENCE_CENTER_RELEASE_INDEX_DECISION_PASS
+
+This is planning only.
+APP/non-DB software target: 192.168.60.21.
+DB-only target: 192.168.60.22.
+UCDE / UHMI / UConsole preview service target would be 192.168.60.21 in future deployment.
+PostgreSQL / DB target would be 192.168.60.22 in future deployment.
+No deployment executed.
+No SSH executed.
+No installation executed.
+No DB migration executed.
+No DB write executed.
+No production activation executed.
+Future production deployment requires separate approved task.

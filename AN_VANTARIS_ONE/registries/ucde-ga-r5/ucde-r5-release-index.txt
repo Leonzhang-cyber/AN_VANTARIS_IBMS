@@ -1,0 +1,12 @@
+UCDE-GA-R5 Evidence Center Release Index
+PASS marker: UCDE_GA_R5_EVIDENCE_CENTER_RELEASE_INDEX_DECISION_PASS
+
+Baseline: UCDE-GA-R4 at a8e71123f33c22da6e94c658c625f34db50625d4.
+Decision Scope: READ_ONLY_EVIDENCE_CENTER_CUSTOMER_PREVIEW.
+Evidence Center Customer Preview: PASS.
+UHMI Evidence Linkage: PASS.
+Production GA: NOT_YET.
+Production Activation: NOT_EXECUTED.
+Evidence DB: NOT_CREATED.
+Evidence Write: NOT_EXECUTED.
+No deployment executed. No SSH executed. No DB migration executed.

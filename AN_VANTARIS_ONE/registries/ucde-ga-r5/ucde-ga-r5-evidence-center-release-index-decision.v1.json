@@ -1,0 +1,122 @@
+{
+  "scope": "UCDE_GA_R5",
+  "taskId": "UCDE-GA-R5",
+  "status": "frozen_local_customer_preview_decision",
+  "mode": "read_only",
+  "visualStyle": "VANTARIS_LIGHT_OPERATIONS_CONSOLE",
+  "baseline": "UCDE-GA-R4",
+  "evidenceCenterReleaseIndex": true,
+  "customerPreviewReadinessMatrix": true,
+  "releaseDecision": "GO",
+  "releaseDecisionScope": "READ_ONLY_EVIDENCE_CENTER_CUSTOMER_PREVIEW",
+  "productionGaDecision": "NOT_YET",
+  "productionActivation": "NOT_EXECUTED",
+  "evidenceDb": "NOT_CREATED",
+  "evidenceWrite": "NOT_EXECUTED",
+  "deploymentPlanning": {
+    "appNonDbTarget": "192.168.60.21",
+    "dbOnlyTarget": "192.168.60.22",
+    "deploymentExecuted": false,
+    "sshExecuted": false,
+    "dbMigrationExecuted": false,
+    "productionActivationExecuted": false
+  },
+  "relatedUcdeReleaseChain": [
+    {
+      "stage": "UCDE-GA-R4",
+      "commit": "a8e71123f33c22da6e94c658c625f34db50625d4",
+      "tag": "ucde-ga-r4-evidence-center-customer-preview-freeze-20260622",
+      "scope": "Evidence Center Customer Preview + UHMI Evidence Linkage",
+      "status": "PASS",
+      "passMarker": "UCDE_GA_R4_EVIDENCE_CENTER_CUSTOMER_PREVIEW_PASS"
+    }
+  ],
+  "relatedUhmiReleaseChain": [
+    {"stage": "UHMI-GA-R1", "commit": "003f4f710cfd76130ff79275c8190ec6bbe7edc9", "tag": "uhmi-ga-r1-uconsole-readonly-workspace-freeze-20260622", "scope": "Read-only UConsole Workspace Foundation", "status": "PASS", "passMarker": "UHMI_GA_R1_UCONSOLE_UHMI_WORKSPACE_READONLY_FOUNDATION_FREEZE_PASS"},
+    {"stage": "UHMI-GA-R2A", "commit": "6d682fdd351e3ad51b27ce91f2dbf92c74da3323", "tag": "uhmi-ga-r2a-full-uconsole-menu-ui-api-skeleton-freeze-20260622", "scope": "Full UConsole Menu IA + UI/API Skeleton", "status": "PASS", "passMarker": "UHMI_GA_R2A_FULL_UCONSOLE_MENU_IA_UI_API_SKELETON_PASS"},
+    {"stage": "UHMI-GA-R2B", "commit": "3678150d55f2459def6fc7b423496acb62143ac4", "tag": "uhmi-ga-r2b-workspace-panels-system-context-freeze-20260622", "scope": "Workspace Panels + System Context Panels", "status": "PASS", "passMarker": "UHMI_GA_R2B_WORKSPACE_PANELS_SYSTEM_CONTEXT_PASS"},
+    {"stage": "UHMI-GA-R2C", "commit": "0262d90efffbb4993215d44c35f7c4d26f6d762f", "tag": "uhmi-ga-r2c-role-based-workspace-views-freeze-20260622", "scope": "Role-based Workspace Views", "status": "PASS", "passMarker": "UHMI_GA_R2C_ROLE_BASED_WORKSPACE_VIEWS_PASS"},
+    {"stage": "UHMI-GA-R2D", "commit": "e6c94cefcc7aee336d4702bc377a554a549454eb", "tag": "uhmi-ga-r2d-light-console-style-freeze-20260622", "scope": "Workspace Visual Polish + Light Console Style Freeze", "status": "PASS", "passMarker": "UHMI_GA_R2D_WORKSPACE_VISUAL_POLISH_LIGHT_CONSOLE_STYLE_PASS"},
+    {"stage": "UHMI-GA-R2E", "commit": "6bd6bbaa0e23eee6676e170d2493d093084216a5", "tag": "uhmi-ga-r2e-api-frontend-integration-audit-freeze-20260622", "scope": "Workspace API Consolidation + Frontend Integration Audit", "status": "PASS", "passMarker": "UHMI_GA_R2E_WORKSPACE_API_CONSOLIDATION_FRONTEND_INTEGRATION_AUDIT_PASS"},
+    {"stage": "UHMI-GA-R2F", "commit": "b9e74f09394dee25d3a3b09da729f034431d3cf2", "tag": "uhmi-ga-r2f-final-readonly-workspace-release-index-freeze-20260622", "scope": "Final Read-only Workspace Release Index + Evidence Pack", "status": "PASS", "passMarker": "UHMI_GA_R2F_FINAL_READONLY_WORKSPACE_RELEASE_INDEX_PASS"},
+    {"stage": "UHMI-GA-R3", "commit": "1181339555067af75cc492cc12cf83fb433bc1a7", "tag": "uhmi-ga-r3-customer-preview-package-freeze-20260622", "scope": "Customer Preview Package / Demo-Ready Read-only Workspace", "status": "PASS", "passMarker": "UHMI_GA_R3_CUSTOMER_PREVIEW_PACKAGE_PASS"},
+    {"stage": "UHMI-GA-R4", "commit": "138cb73906ef1026e34461bf1eb0583bb3878d9e", "tag": "uhmi-ga-r4-customer-preview-export-handoff-freeze-20260622", "scope": "Customer Preview Export Package / Offline Demo Hand-off", "status": "PASS", "passMarker": "UHMI_GA_R4_CUSTOMER_PREVIEW_EXPORT_PACKAGE_PASS"},
+    {"stage": "UHMI-GA-R5", "commit": "561106f2c91a4fd6a706843c4f5b34f27671f285", "tag": "uhmi-ga-r5-customer-preview-readiness-decision-freeze-20260622", "scope": "Final Customer Preview Readiness Matrix + Release Decision", "status": "PASS", "passMarker": "UHMI_GA_R5_FINAL_CUSTOMER_PREVIEW_READINESS_DECISION_PASS"},
+    {"stage": "UHMI-GA-R6", "commit": "867b3d09a2cfc826dc2e1558b1dd3afb23dc77a8", "tag": "uhmi-ga-r6-customer-preview-final-archive-freeze-20260622", "scope": "Customer Preview Final Archive / Branch Closure Summary", "status": "PASS", "passMarker": "UHMI_GA_R6_CUSTOMER_PREVIEW_FINAL_ARCHIVE_PASS"}
+  ],
+  "readinessMatrix": {
+    "UCDE Evidence Center Customer Preview": "PASS",
+    "UHMI Evidence Linkage": "PASS",
+    "Customer-readable evidence catalog": "PASS",
+    "Engineer trace context": "PASS",
+    "Read-only safety": "PASS",
+    "Deployment planning note": "RECORDED_NOT_EXECUTED",
+    "Production activation": "NOT_EXECUTED",
+    "Production GA readiness": "NOT_YET",
+    "UCDE Customer Preview Release Decision": "GO"
+  },
+  "signoffPack": {
+    "file": "UCDE_GA_R5_CUSTOMER_PREVIEW_SIGNOFF_PACK.md",
+    "customerPreviewOnly": true,
+    "productionApproval": false
+  },
+  "riskLimitationExclusionMatrix": {
+    "file": "UCDE_GA_R5_RISK_LIMITATION_EXCLUSION_MATRIX.md",
+    "existingBoundaryLegacyWarnings": "NON_BLOCKING_FOR_CUSTOMER_PREVIEW",
+    "frontendBuildWarningsFromUhmiR2eR2d": "NON_BLOCKING",
+    "ucdeBackendReadOnlyStaticSkeleton": "INTENTIONAL",
+    "evidenceDbNotCreated": "INTENTIONAL",
+    "serverPlanningRecordedOnly": "INTENTIONAL"
+  },
+  "evidenceLinks": [
+    "AN_VANTARIS_ONE/registries/ucde-ga-r5/ucde-r5-release-index.txt",
+    "AN_VANTARIS_ONE/registries/ucde-ga-r5/ucde-r5-readiness-matrix.txt",
+    "AN_VANTARIS_ONE/registries/ucde-ga-r5/ucde-r5-release-decision.txt",
+    "AN_VANTARIS_ONE/registries/ucde-ga-r5/ucde-r5-risk-exclusion-evidence.txt",
+    "AN_VANTARIS_ONE/registries/ucde-ga-r5/ucde-r5-deployment-planning.txt",
+    "AN_VANTARIS_ONE/registries/ucde-ga-r5/ucde-r5-validator-results.txt"
+  ],
+  "validatorChain": [
+    "validate-ucde-ga-r5-evidence-center-release-index-decision.py",
+    "validate-ucde-ga-r4-evidence-center-customer-preview.py",
+    "validate-uhmi-ga-r6-customer-preview-final-archive.py",
+    "validate-uhmi-ga-r5-final-customer-preview-readiness-decision.py",
+    "validate-uhmi-ga-r4-customer-preview-export-package.py",
+    "validate-uhmi-ga-r3-customer-preview-package.py",
+    "validate-uhmi-ga-r2f-final-readonly-workspace-release-index.py",
+    "validate-uhmi-ga-r2e-workspace-api-consolidation-frontend-integration-audit.py",
+    "validate-uhmi-ga-r2d-workspace-visual-polish-light-console-style.py",
+    "validate-uhmi-ga-r2c-role-based-workspace-views.py",
+    "validate-uhmi-ga-r2b-workspace-panels-system-context.py",
+    "validate-uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.py",
+    "validate-uhmi-ga-r1-uconsole-workspace-readonly-foundation.py",
+    "validate-one-design-r1-full-product-design-blueprint.py",
+    "validate-one-module-ga-wave-r1-consolidated-freeze.py",
+    "validate-one-package-route-enforcement.py",
+    "validate-one-boundaries.py"
+  ],
+  "forbiddenActions": {
+    "evidenceDbCreation": false,
+    "evidenceWrite": "NOT_EXECUTED",
+    "install": false,
+    "rollback": false,
+    "dbMigration": "NOT_EXECUTED",
+    "dbWrite": "NOT_EXECUTED",
+    "runtimeActivation": "NOT_EXECUTED",
+    "deviceControl": "NOT_EXECUTED",
+    "edgeCommandExecution": "NOT_EXECUTED",
+    "linkCommandExecution": "NOT_EXECUTED",
+    "authMutation": false,
+    "loginMutation": false,
+    "jwtMutation": false,
+    "rbacMutation": false,
+    "packageStateMutation": false,
+    "productionActivation": "NOT_EXECUTED",
+    "runnablePackageGeneration": false,
+    "distBuildCommit": false,
+    "secretsExport": false,
+    "sshExecution": false
+  },
+  "futureControlPath": "UHMI -> CODE -> Policy Gate -> Approval -> Audit / UCDE -> LINK -> EDGE -> Device",
+  "validationPassMarker": "UCDE_GA_R5_EVIDENCE_CENTER_RELEASE_INDEX_DECISION_PASS"
+}
