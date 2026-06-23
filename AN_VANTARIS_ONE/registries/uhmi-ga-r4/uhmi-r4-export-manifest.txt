@@ -1,0 +1,33 @@
+UHMI-GA-R4 Customer Preview Export Package manifest
+
+Export package type:
+MANIFEST_EVIDENCE_RUNBOOK_ONLY
+
+Included:
+UHMI_GA_R4_CUSTOMER_PREVIEW_EXPORT_PACKAGE_INDEX.md
+UHMI_GA_R4_OFFLINE_DEMO_HANDOFF_GUIDE.md
+UHMI_GA_R4_ENGINEER_DEMO_RUNBOOK.md
+UHMI_GA_R4_CUSTOMER_DEMO_ACCEPTANCE_HANDOVER.md
+UHMI_GA_R4_EXPORT_SCOPE_AND_EXCLUSION_MATRIX.md
+UHMI_GA_R4_REPORT.md
+AN_VANTARIS_ONE/registries/uhmi-ga-r4/uhmi-ga-r4-customer-preview-export-package.v1.json
+AN_VANTARIS_ONE/registries/uhmi-ga-r4/uhmi-r4-export-manifest.txt
+AN_VANTARIS_ONE/registries/uhmi-ga-r4/uhmi-r4-release-chain.txt
+AN_VANTARIS_ONE/registries/uhmi-ga-r4/uhmi-r4-handoff-files.txt
+AN_VANTARIS_ONE/registries/uhmi-ga-r4/uhmi-r4-validator-results.txt
+AN_VANTARIS_ONE/registries/uhmi-ga-r4/uhmi-r4-exclusion-evidence.txt
+scripts/validation/validate-uhmi-ga-r4-customer-preview-export-package.py
+
+Excluded:
+Runnable production package
+dist/build artifacts
+.env/secrets
+runtime data
+device credentials
+DB migrations
+EDGE/LINK commands
+install/rollback scripts
+production activation
+
+PASS marker:
+UHMI_GA_R4_CUSTOMER_PREVIEW_EXPORT_PACKAGE_PASS

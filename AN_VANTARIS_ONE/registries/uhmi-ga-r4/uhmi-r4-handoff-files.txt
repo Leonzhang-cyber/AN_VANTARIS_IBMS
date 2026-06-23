@@ -1,0 +1,26 @@
+UHMI-GA-R4 handoff files
+
+Docs:
+UHMI_GA_R4_CUSTOMER_PREVIEW_EXPORT_PACKAGE_INDEX.md
+UHMI_GA_R4_OFFLINE_DEMO_HANDOFF_GUIDE.md
+UHMI_GA_R4_ENGINEER_DEMO_RUNBOOK.md
+UHMI_GA_R4_CUSTOMER_DEMO_ACCEPTANCE_HANDOVER.md
+UHMI_GA_R4_EXPORT_SCOPE_AND_EXCLUSION_MATRIX.md
+UHMI_GA_R4_REPORT.md
+
+Registry:
+AN_VANTARIS_ONE/registries/uhmi-ga-r4/uhmi-ga-r4-customer-preview-export-package.v1.json
+
+Evidence:
+AN_VANTARIS_ONE/registries/uhmi-ga-r4/uhmi-r4-export-manifest.txt
+AN_VANTARIS_ONE/registries/uhmi-ga-r4/uhmi-r4-release-chain.txt
+AN_VANTARIS_ONE/registries/uhmi-ga-r4/uhmi-r4-handoff-files.txt
+AN_VANTARIS_ONE/registries/uhmi-ga-r4/uhmi-r4-validator-results.txt
+AN_VANTARIS_ONE/registries/uhmi-ga-r4/uhmi-r4-exclusion-evidence.txt
+
+Validator:
+scripts/validation/validate-uhmi-ga-r4-customer-preview-export-package.py
+
+No runnable production package generated.
+No dist/build committed.
+No .env/secrets committed.

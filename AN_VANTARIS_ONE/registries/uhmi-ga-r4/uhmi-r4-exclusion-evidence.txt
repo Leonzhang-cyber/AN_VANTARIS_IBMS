@@ -1,0 +1,34 @@
+UHMI-GA-R4 exclusion evidence
+
+EXCLUDED / NOT_EXECUTED:
+Runnable production package
+Production install package
+Production deployment package
+dist/build artifacts
+.env/secrets
+runtime data
+device credentials
+DB migrations
+DB writes
+EDGE commands
+LINK commands
+install scripts
+rollback scripts
+production activation
+auth mutation
+login mutation
+JWT mutation
+RBAC mutation
+package state mutation
+tar.gz archive
+zip archive
+
+No runnable production package generated.
+No dist/build committed.
+No .env/secrets committed.
+No Direct Device Control.
+No Runtime Activation.
+No DB Write.
+No EDGE Command Execution.
+No LINK Command Execution.
+No auth / login / JWT / RBAC mutation.

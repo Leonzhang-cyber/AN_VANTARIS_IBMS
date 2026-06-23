@@ -1,0 +1,16 @@
+UHMI-GA-R4 release chain evidence
+
+UHMI-GA-R1 | 003f4f710cfd76130ff79275c8190ec6bbe7edc9 | uhmi-ga-r1-uconsole-readonly-workspace-freeze-20260622 | Read-only UConsole Workspace Foundation | PASS
+UHMI-GA-R2A | 6d682fdd351e3ad51b27ce91f2dbf92c74da3323 | uhmi-ga-r2a-full-uconsole-menu-ui-api-skeleton-freeze-20260622 | Full UConsole Menu IA + UI/API Skeleton | PASS
+UHMI-GA-R2B | 3678150d55f2459def6fc7b423496acb62143ac4 | uhmi-ga-r2b-workspace-panels-system-context-freeze-20260622 | Workspace Panels + System Context Panels | PASS
+UHMI-GA-R2C | 0262d90efffbb4993215d44c35f7c4d26f6d762f | uhmi-ga-r2c-role-based-workspace-views-freeze-20260622 | Role-based Workspace Views | PASS
+UHMI-GA-R2D | e6c94cefcc7aee336d4702bc377a554a549454eb | uhmi-ga-r2d-light-console-style-freeze-20260622 | Workspace Visual Polish + Light Console Style Freeze | PASS
+UHMI-GA-R2E | 6bd6bbaa0e23eee6676e170d2493d093084216a5 | uhmi-ga-r2e-api-frontend-integration-audit-freeze-20260622 | Workspace API Consolidation + Frontend Integration Audit | PASS
+UHMI-GA-R2F | b9e74f09394dee25d3a3b09da729f034431d3cf2 | uhmi-ga-r2f-final-readonly-workspace-release-index-freeze-20260622 | Final Read-only Workspace Release Index + Evidence Pack | PASS
+UHMI-GA-R3 | 1181339555067af75cc492cc12cf83fb433bc1a7 | uhmi-ga-r3-customer-preview-package-freeze-20260622 | Customer Preview Package / Demo-Ready Read-only Workspace | PASS
+
+R4 baseline HEAD:
+1181339555067af75cc492cc12cf83fb433bc1a7
+
+R4 PASS marker:
+UHMI_GA_R4_CUSTOMER_PREVIEW_EXPORT_PACKAGE_PASS
