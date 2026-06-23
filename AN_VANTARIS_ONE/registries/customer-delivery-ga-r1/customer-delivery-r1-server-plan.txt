@@ -1,0 +1,8 @@
+CUSTOMER-DELIVERY-GA-R1 Server Plan
+PASS marker: CUSTOMER_DELIVERY_GA_R1_ENGINEER_INSTALLER_CONSOLE_READONLY_PREVIEW_PASS
+
+APP / non-DB target: 192.168.60.21.
+DB-only target: 192.168.60.22.
+No SSH. No Install. No deployment executed.
+No DB Migration. No DB Write. No Runtime Activation.
+No Direct Device Control. No EDGE Command Execution. No LINK Command Execution.

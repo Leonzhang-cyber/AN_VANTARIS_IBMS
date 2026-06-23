@@ -1,0 +1,6 @@
+CUSTOMER-DELIVERY-GA-R1 Package Readiness
+PASS marker: CUSTOMER_DELIVERY_GA_R1_ENGINEER_INSTALLER_CONSOLE_READONLY_PREVIEW_PASS
+
+Packages: UConsole, UHMI, UCDE, Customer Delivery, EDGE Foundation, VANTARIS Link, DB Foundation, Contracts, Reports, Governance & Security.
+All entries are customerVisible, engineerVisible, and readOnly.
+No server scan. No real diagnostics executed. No runtime calls.

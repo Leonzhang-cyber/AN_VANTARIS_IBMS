@@ -1,0 +1,20 @@
+CUSTOMER-DELIVERY-GA-R1 Acceptance Checklist
+PASS marker: CUSTOMER_DELIVERY_GA_R1_ENGINEER_INSTALLER_CONSOLE_READONLY_PREVIEW_PASS
+
+PASS: Customer Delivery Preview visible.
+PASS: Engineer Installer Console visible.
+PASS: APP server plan visible: 192.168.60.21.
+PASS: DB server plan visible: 192.168.60.22.
+PASS: Offline package preview visible.
+PASS: Precheck checklist visible.
+PASS: Installation plan visible.
+PASS: Verification plan visible.
+PASS: Rollback plan visible.
+PASS: Acceptance checklist visible.
+PASS: Package readiness visible.
+PASS: No SSH.
+PASS: No Install.
+PASS: No Rollback.
+PASS: No DB Migration.
+PASS: No Runtime Activation.
+PASS: No Production Activation.

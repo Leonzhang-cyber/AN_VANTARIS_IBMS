@@ -18,4 +18,6 @@ from .uedge import uedge_api
 from .airport_ga_readonly import airport_ga_readonly_api
 from .prod_ga import foundation_packages_api
 from .uhmi import uhmi_api
+from .customer_delivery import customer_delivery_api
+from .engineer_installer import engineer_installer_api
 from .iot.sse_api import *

@@ -1,0 +1,10 @@
+CUSTOMER-DELIVERY-GA-R1 Offline Handoff
+PASS marker: CUSTOMER_DELIVERY_GA_R1_ENGINEER_INSTALLER_CONSOLE_READONLY_PREVIEW_PASS
+
+Offline Package Preview: read-only.
+Precheck Checklist: read-only.
+Installation Plan: read-only.
+Verification Plan: read-only.
+Rollback Plan: read-only.
+Acceptance Checklist: read-only.
+No Install. No Rollback. No DB Migration. No Production Activation.
