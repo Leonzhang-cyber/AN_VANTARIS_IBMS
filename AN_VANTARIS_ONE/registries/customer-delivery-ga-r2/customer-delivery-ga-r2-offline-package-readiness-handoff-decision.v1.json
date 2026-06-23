@@ -1,0 +1,102 @@
+{
+  "scope": "CUSTOMER_DELIVERY_GA_R2",
+  "taskId": "CUSTOMER-DELIVERY-GA-R2",
+  "status": "frozen_local_handoff_decision",
+  "mode": "read_only",
+  "visualStyle": "VANTARIS_LIGHT_OPERATIONS_CONSOLE",
+  "baseline": "CUSTOMER-DELIVERY-GA-R1",
+  "offlinePackageReadinessMatrix": true,
+  "customerHandoffDecision": "GO",
+  "handoffDecisionScope": "READ_ONLY_OFFLINE_PACKAGE_HANDOFF_PREVIEW",
+  "productionDeployment": "NOT_EXECUTED",
+  "serverPlanning": {
+    "appNonDbTarget": "192.168.60.21",
+    "dbOnlyTarget": "192.168.60.22",
+    "sshExecuted": false,
+    "deploymentExecuted": false,
+    "installExecuted": false,
+    "rollbackExecuted": false,
+    "dbMigrationExecuted": false,
+    "dbWrite": false,
+    "productionActivationExecuted": false
+  },
+  "readinessMatrix": [
+    {"itemId": "uconsole", "itemName": "UConsole", "category": "application", "readinessStatus": "READY_FOR_READ_ONLY_HANDOFF", "customerVisible": true, "engineerVisible": true, "targetServer": "192.168.60.21", "includedInHandoff": true, "excludedFromExecution": true, "guardrailStatus": "READ_ONLY_NO_INSTALL_NO_DEPLOY_NO_RUNTIME", "readOnly": true},
+    {"itemId": "uhmi", "itemName": "UHMI", "category": "workspace", "readinessStatus": "READY_FOR_READ_ONLY_HANDOFF", "customerVisible": true, "engineerVisible": true, "targetServer": "192.168.60.21", "includedInHandoff": true, "excludedFromExecution": true, "guardrailStatus": "READ_ONLY_NO_INSTALL_NO_DEPLOY_NO_RUNTIME", "readOnly": true},
+    {"itemId": "ucde", "itemName": "UCDE", "category": "evidence-center", "readinessStatus": "READY_FOR_READ_ONLY_HANDOFF", "customerVisible": true, "engineerVisible": true, "targetServer": "192.168.60.21", "includedInHandoff": true, "excludedFromExecution": true, "guardrailStatus": "READ_ONLY_NO_INSTALL_NO_DEPLOY_NO_RUNTIME", "readOnly": true},
+    {"itemId": "customer-delivery", "itemName": "Customer Delivery", "category": "handoff-preview", "readinessStatus": "READY_FOR_READ_ONLY_HANDOFF", "customerVisible": true, "engineerVisible": true, "targetServer": "192.168.60.21", "includedInHandoff": true, "excludedFromExecution": true, "guardrailStatus": "READ_ONLY_NO_INSTALL_NO_DEPLOY_NO_RUNTIME", "readOnly": true},
+    {"itemId": "engineer-installer-console", "itemName": "Engineer Installer Console", "category": "engineer-preview", "readinessStatus": "READY_FOR_READ_ONLY_HANDOFF", "customerVisible": true, "engineerVisible": true, "targetServer": "192.168.60.21", "includedInHandoff": true, "excludedFromExecution": true, "guardrailStatus": "READ_ONLY_NO_INSTALL_NO_DEPLOY_NO_RUNTIME", "readOnly": true},
+    {"itemId": "edge-foundation", "itemName": "EDGE Foundation", "category": "shared-foundation-reference", "readinessStatus": "READY_FOR_READ_ONLY_HANDOFF", "customerVisible": true, "engineerVisible": true, "targetServer": "192.168.60.21", "includedInHandoff": true, "excludedFromExecution": true, "guardrailStatus": "READ_ONLY_NO_INSTALL_NO_DEPLOY_NO_RUNTIME", "readOnly": true},
+    {"itemId": "vantaris-link", "itemName": "VANTARIS Link", "category": "shared-foundation-reference", "readinessStatus": "READY_FOR_READ_ONLY_HANDOFF", "customerVisible": true, "engineerVisible": true, "targetServer": "192.168.60.21", "includedInHandoff": true, "excludedFromExecution": true, "guardrailStatus": "READ_ONLY_NO_INSTALL_NO_DEPLOY_NO_RUNTIME", "readOnly": true},
+    {"itemId": "db-foundation", "itemName": "DB Foundation", "category": "db-planning-reference", "readinessStatus": "READY_FOR_READ_ONLY_HANDOFF", "customerVisible": true, "engineerVisible": true, "targetServer": "192.168.60.22", "includedInHandoff": true, "excludedFromExecution": true, "guardrailStatus": "READ_ONLY_NO_INSTALL_NO_DEPLOY_NO_RUNTIME", "readOnly": true},
+    {"itemId": "contracts", "itemName": "Contracts", "category": "shared-contract-reference", "readinessStatus": "READY_FOR_READ_ONLY_HANDOFF", "customerVisible": true, "engineerVisible": true, "targetServer": "192.168.60.21", "includedInHandoff": true, "excludedFromExecution": true, "guardrailStatus": "READ_ONLY_NO_INSTALL_NO_DEPLOY_NO_RUNTIME", "readOnly": true},
+    {"itemId": "reports", "itemName": "Reports", "category": "report-evidence-reference", "readinessStatus": "READY_FOR_READ_ONLY_HANDOFF", "customerVisible": true, "engineerVisible": true, "targetServer": "192.168.60.21", "includedInHandoff": true, "excludedFromExecution": true, "guardrailStatus": "READ_ONLY_NO_INSTALL_NO_DEPLOY_NO_RUNTIME", "readOnly": true},
+    {"itemId": "governance-security", "itemName": "Governance & Security", "category": "guardrail-reference", "readinessStatus": "READY_FOR_READ_ONLY_HANDOFF", "customerVisible": true, "engineerVisible": true, "targetServer": "192.168.60.21", "includedInHandoff": true, "excludedFromExecution": true, "guardrailStatus": "READ_ONLY_NO_INSTALL_NO_DEPLOY_NO_RUNTIME", "readOnly": true},
+    {"itemId": "offline-package-manifest", "itemName": "Offline Package Manifest", "category": "handoff-evidence", "readinessStatus": "READY_FOR_READ_ONLY_HANDOFF", "customerVisible": true, "engineerVisible": true, "targetServer": "192.168.60.21", "includedInHandoff": true, "excludedFromExecution": true, "guardrailStatus": "READ_ONLY_NO_INSTALL_NO_DEPLOY_NO_RUNTIME", "readOnly": true},
+    {"itemId": "customer-acceptance-checklist", "itemName": "Customer Acceptance Checklist", "category": "handoff-evidence", "readinessStatus": "READY_FOR_READ_ONLY_HANDOFF", "customerVisible": true, "engineerVisible": true, "targetServer": "192.168.60.21", "includedInHandoff": true, "excludedFromExecution": true, "guardrailStatus": "READ_ONLY_NO_INSTALL_NO_DEPLOY_NO_RUNTIME", "readOnly": true},
+    {"itemId": "engineer-runbook", "itemName": "Engineer Runbook", "category": "handoff-evidence", "readinessStatus": "READY_FOR_READ_ONLY_HANDOFF", "customerVisible": true, "engineerVisible": true, "targetServer": "192.168.60.21", "includedInHandoff": true, "excludedFromExecution": true, "guardrailStatus": "READ_ONLY_NO_INSTALL_NO_DEPLOY_NO_RUNTIME", "readOnly": true},
+    {"itemId": "server-plan", "itemName": "Server Plan", "category": "deployment-planning", "readinessStatus": "READY_FOR_READ_ONLY_HANDOFF", "customerVisible": true, "engineerVisible": true, "targetServer": "192.168.60.21", "includedInHandoff": true, "excludedFromExecution": true, "guardrailStatus": "READ_ONLY_NO_INSTALL_NO_DEPLOY_NO_RUNTIME", "readOnly": true}
+  ],
+  "exportScope": {
+    "included": ["docs", "registry", "evidence txt", "read-only API skeleton references", "customer handoff checklist", "engineer runbook", "server planning note", "package readiness matrix"],
+    "referenced": ["frontend source references", "backend source references", "UHMI archive", "UCDE archive", "Customer Delivery R1 archive"],
+    "excluded": ["dist/build artifacts", ".env/secrets", "runtime data", "device credentials", "DB migrations", "live DB connection", "EDGE/LINK commands", "install/uninstall/rollback execution", "production activation", "runnable package generation"]
+  },
+  "exclusionMatrix": {
+    "productionDeployment": "NOT_EXECUTED",
+    "installUninstallRollback": "NOT_EXECUTED",
+    "sshServerConnection": "NOT_EXECUTED",
+    "dbMigrationWrite": "NOT_EXECUTED",
+    "runtimeActivation": "NOT_EXECUTED"
+  },
+  "engineerReadinessChecklist": "CUSTOMER_DELIVERY_GA_R2_ENGINEER_READINESS_CHECKLIST.md",
+  "customerHandoffSignoffPack": "CUSTOMER_DELIVERY_GA_R2_CUSTOMER_HANDOFF_SIGNOFF_PACK.md",
+  "relatedCustomerDeliveryR1": {
+    "stage": "CUSTOMER-DELIVERY-GA-R1",
+    "commit": "15d576c2ba8760ce568fdba762c639c98f26c933",
+    "tag": "customer-delivery-ga-r1-engineer-installer-readonly-preview-freeze-20260622"
+  },
+  "relatedUhmiArchive": {
+    "stage": "UHMI-GA-R6",
+    "commit": "867b3d09a2cfc826dc2e1558b1dd3afb23dc77a8",
+    "tag": "uhmi-ga-r6-customer-preview-final-archive-freeze-20260622"
+  },
+  "relatedUcdeArchive": {
+    "stage": "UCDE-GA-R6",
+    "commit": "442657ac60a267d827fa02c8494e445529345e92",
+    "tag": "ucde-ga-r6-evidence-center-final-archive-freeze-20260622"
+  },
+  "validatorChain": [
+    "validate-customer-delivery-ga-r2-offline-package-readiness-handoff-decision.py",
+    "validate-customer-delivery-ga-r1-engineer-installer-console-readonly-preview.py",
+    "validate-ucde-ga-r6-evidence-center-final-archive.py",
+    "validate-uhmi-ga-r6-customer-preview-final-archive.py",
+    "validate-one-package-route-enforcement.py",
+    "validate-one-boundaries.py"
+  ],
+  "guardrails": ["No SSH", "No Install", "No Rollback", "No DB Migration", "No DB Write", "No Runtime Activation", "No Direct Device Control", "No EDGE Command Execution", "No LINK Command Execution", "No auth / login / JWT / RBAC mutation", "No Production Activation", "No runnable production package", "No dist/build committed"],
+  "forbiddenActions": {
+    "sshExecution": false,
+    "deploymentToAppServer": false,
+    "deploymentToDbServer": false,
+    "install": "NOT_EXECUTED",
+    "uninstall": "NOT_EXECUTED",
+    "rollback": "NOT_EXECUTED",
+    "dbMigration": "NOT_EXECUTED",
+    "dbWrite": false,
+    "runtimeActivation": false,
+    "deviceControl": false,
+    "edgeCommandExecution": false,
+    "linkCommandExecution": false,
+    "authMutation": false,
+    "loginMutation": false,
+    "jwtMutation": false,
+    "rbacMutation": false,
+    "packageStateMutation": false,
+    "productionActivation": "NOT_EXECUTED",
+    "runnablePackageGeneration": false,
+    "distBuildCommit": false,
+    "secretsExport": false
+  },
+  "validationPassMarker": "CUSTOMER_DELIVERY_GA_R2_OFFLINE_PACKAGE_READINESS_HANDOFF_DECISION_PASS"
+}

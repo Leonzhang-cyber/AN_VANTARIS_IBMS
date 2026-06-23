@@ -1,0 +1,6 @@
+CUSTOMER-DELIVERY-GA-R2 Offline Package Readiness Matrix
+PASS marker: CUSTOMER_DELIVERY_GA_R2_OFFLINE_PACKAGE_READINESS_HANDOFF_DECISION_PASS
+
+Items: UConsole, UHMI, UCDE, Customer Delivery, Engineer Installer Console, EDGE Foundation, VANTARIS Link, DB Foundation, Contracts, Reports, Governance & Security, Offline Package Manifest, Customer Acceptance Checklist, Engineer Runbook, Server Plan.
+Decision Scope: READ_ONLY_OFFLINE_PACKAGE_HANDOFF_PREVIEW.
+No SSH. No Install. No Rollback. No DB Migration. No DB Write.

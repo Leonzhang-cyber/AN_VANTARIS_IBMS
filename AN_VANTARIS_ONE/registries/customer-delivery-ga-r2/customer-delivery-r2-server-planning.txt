@@ -1,0 +1,11 @@
+CUSTOMER-DELIVERY-GA-R2 Server Planning
+PASS marker: CUSTOMER_DELIVERY_GA_R2_OFFLINE_PACKAGE_READINESS_HANDOFF_DECISION_PASS
+
+APP/non-DB software target: 192.168.60.21.
+DB-only target: 192.168.60.22.
+No SSH executed.
+No installation executed.
+No DB migration executed.
+No DB write executed.
+No production activation executed.
+Future production deployment requires separate approved task.

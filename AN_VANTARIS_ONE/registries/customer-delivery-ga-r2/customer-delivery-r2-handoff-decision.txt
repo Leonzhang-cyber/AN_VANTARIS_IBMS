@@ -1,0 +1,12 @@
+CUSTOMER-DELIVERY-GA-R2 Customer Handoff Decision
+PASS marker: CUSTOMER_DELIVERY_GA_R2_OFFLINE_PACKAGE_READINESS_HANDOFF_DECISION_PASS
+
+Decision Type: Customer Handoff Decision.
+Decision: GO.
+Decision Scope: READ_ONLY_OFFLINE_PACKAGE_HANDOFF_PREVIEW.
+Production Deployment: NOT_EXECUTED.
+Install/Uninstall/Rollback: NOT_EXECUTED.
+DB Migration/Write: NOT_EXECUTED.
+SSH/Server Connection: NOT_EXECUTED.
+Runnable Production Package: NOT_GENERATED.
+Dist/Build Artifact Commit: NOT_COMMITTED.

@@ -1,0 +1,6 @@
+CUSTOMER-DELIVERY-GA-R2 Export Scope
+PASS marker: CUSTOMER_DELIVERY_GA_R2_OFFLINE_PACKAGE_READINESS_HANDOFF_DECISION_PASS
+
+INCLUDED: docs, registry, evidence txt, read-only API skeleton references, customer handoff checklist, engineer runbook, server planning note, package readiness matrix.
+REFERENCED: frontend source references, backend source references, UHMI archive, UCDE archive, Customer Delivery R1 archive.
+EXCLUDED: dist/build artifacts, .env/secrets, runtime data, device credentials, DB migrations, live DB connection, EDGE/LINK commands, install/uninstall/rollback execution, production activation, runnable package generation.

@@ -1,0 +1,17 @@
+CUSTOMER-DELIVERY-GA-R2 Validator Results Evidence
+PASS marker: CUSTOMER_DELIVERY_GA_R2_OFFLINE_PACKAGE_READINESS_HANDOFF_DECISION_PASS
+
+Expected validators:
+- validate-customer-delivery-ga-r2-offline-package-readiness-handoff-decision.py
+- validate-customer-delivery-ga-r1-engineer-installer-console-readonly-preview.py
+- validate-ucde-ga-r6-evidence-center-final-archive.py
+- validate-ucde-ga-r5-evidence-center-release-index-decision.py
+- validate-ucde-ga-r4-evidence-center-customer-preview.py
+- validate-uhmi-ga-r6-customer-preview-final-archive.py
+- validate-one-design-r1-full-product-design-blueprint.py
+- validate-one-module-ga-wave-r1-consolidated-freeze.py
+- validate-one-prod-ga-r9-final-customer-delivery-edition.py
+- validate-one-package-route-enforcement.py
+- validate-one-boundaries.py
+
+Customer Delivery R2 did not execute a new frontend build because it did not change frontend functionality; existing UHMI R2E/R2D build evidence remains referenced.
