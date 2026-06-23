@@ -11,6 +11,7 @@ from src.uhmi.uhmi_provider import (
     get_evidence,
     get_guardrails,
     get_health,
+    get_integration_audit,
     get_menu_ia,
     get_panels,
     get_role_views,
@@ -97,3 +98,8 @@ def uhmi_r2c_role_views():
 @api_bp.route("/one/uconsole/uhmi/role-visibility", methods=["GET"])
 def uhmi_r2c_role_visibility():
     return jsonify(get_role_visibility())
+
+
+@api_bp.route("/one/uconsole/uhmi/integration-audit", methods=["GET"])
+def uhmi_r2e_integration_audit():
+    return jsonify(get_integration_audit())

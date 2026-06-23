@@ -201,6 +201,53 @@ export interface UhmiWorkspacePayload {
   roleContexts: UhmiRoleContexts
 }
 
+export interface UhmiIntegrationAuditPayload {
+  scope: 'UHMI_GA_R2E'
+  mode: 'read_only'
+  visualStyle: 'VANTARIS_LIGHT_OPERATIONS_CONSOLE'
+  workspace: string
+  apiVersion: string
+  readOnly: boolean
+  apiConsolidation: boolean
+  frontendIntegrationAudit: boolean
+  routeMenuPackageAlignment: boolean
+  staticDataConsistency: boolean
+  readOnlySafetyVerified: boolean
+  previousStages: string[]
+  apiEndpoints: string[]
+  commonResponseFields: string[]
+  safety: {
+    controlEnabled: boolean
+    runtimeActivation: boolean
+    deviceWrite: boolean
+    dbWrite: boolean
+    edgeCommandExecution: boolean
+    linkCommandExecution: boolean
+    realRbacMutation: boolean
+    permissionWrite: boolean
+    packageStateMutation: boolean
+    installExecution: boolean
+    rollbackExecution: boolean
+  }
+  safetyFields: {
+    controlEnabled: boolean
+    runtimeActivation: boolean
+    deviceWrite: boolean
+    dbWrite: boolean
+    edgeCommandExecution: boolean
+    linkCommandExecution: boolean
+    realRbacMutation: boolean
+    permissionWrite: boolean
+    packageStateMutation: boolean
+    installExecution: boolean
+    rollbackExecution: boolean
+  }
+  guardrails: UhmiGuardrail[]
+  futureControlPath: string
+  generatedAt: string
+  staticSnapshotAt: string
+}
+
 export const uhmiSections: UhmiMenuItem[] = [
   { key: 'HMI_OVERVIEW', label: 'HMI Overview', route: '/one/uhmi/overview' },
   { key: 'SYSTEM_HMI', label: 'System HMI', route: '/one/uhmi/system' },
@@ -227,5 +274,10 @@ export async function getUhmiSection(sectionKey: UhmiSectionKey): Promise<UhmiSe
 
 export async function getUhmiWorkspace(): Promise<UhmiWorkspacePayload> {
   const response = await request.get<UhmiWorkspacePayload>('/one/uconsole/uhmi/workspace')
+  return response.data
+}
+
+export async function getUhmiIntegrationAudit(): Promise<UhmiIntegrationAuditPayload> {
+  const response = await request.get<UhmiIntegrationAuditPayload>('/one/uconsole/uhmi/integration-audit')
   return response.data
 }

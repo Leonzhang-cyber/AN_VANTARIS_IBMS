@@ -32,9 +32,11 @@ FORBIDDEN_DIRECT_PATHS = [
 R2B_SCOPE = "UHMI_GA_R2B"
 R2C_SCOPE = "UHMI_GA_R2C"
 R2D_SCOPE = "UHMI_GA_R2D"
+R2E_SCOPE = "UHMI_GA_R2E"
 R2B_MODE = "read_only"
 R2B_VISUAL_STYLE = "VANTARIS_LIGHT_OPERATIONS_CONSOLE"
 FUTURE_CONTROL_PATH = "UHMI -> CODE -> Policy Gate -> Approval -> Audit / UCDE -> LINK -> EDGE -> Device"
+API_VERSION = "uhmi-workspace-readonly.v1"
 STYLE_TOKENS = [
     "light app shell",
     "white rounded cards",
@@ -432,6 +434,8 @@ def _guardrails() -> dict[str, Any]:
         "scope": R2B_SCOPE,
         "mode": R2B_MODE,
         "visualStyle": R2B_VISUAL_STYLE,
+        "workspace": "UConsole / UHMI Workspace",
+        "apiVersion": API_VERSION,
         "controlEnabled": False,
         "readOnly": True,
         "runtimeActivation": False,
@@ -451,6 +455,7 @@ def _guardrails() -> dict[str, Any]:
         "installOrRollback": False,
         "futureControlledActionExecuted": False,
         "futureControlPath": FUTURE_CONTROL_PATH,
+        "staticSnapshotAt": "STATIC_ARCHITECTURE_BASELINE",
     }
 
 
@@ -653,6 +658,70 @@ def get_role_visibility() -> dict[str, Any]:
         "disabledActions": DISABLED_ACTIONS,
     }
     data.update(_role_guardrails())
+    return data
+
+
+def get_integration_audit() -> dict[str, Any]:
+    safety = {
+        "controlEnabled": False,
+        "runtimeActivation": False,
+        "deviceWrite": False,
+        "dbWrite": False,
+        "edgeCommandExecution": False,
+        "linkCommandExecution": False,
+        "realRbacMutation": False,
+        "permissionWrite": False,
+        "packageStateMutation": False,
+        "installExecution": False,
+        "rollbackExecution": False,
+    }
+    data: dict[str, Any] = {
+        "scope": R2E_SCOPE,
+        "mode": R2B_MODE,
+        "visualStyle": R2B_VISUAL_STYLE,
+        "workspace": "UConsole / UHMI Workspace",
+        "apiVersion": API_VERSION,
+        "readOnly": True,
+        "apiConsolidation": True,
+        "frontendIntegrationAudit": True,
+        "routeMenuPackageAlignment": True,
+        "staticDataConsistency": True,
+        "readOnlySafetyVerified": True,
+        "previousStages": ["UHMI-GA-R2A", "UHMI-GA-R2B", "UHMI-GA-R2C", "UHMI-GA-R2D"],
+        "apiEndpoints": [
+            "GET /api/one/uconsole/uhmi/workspace",
+            "GET /api/one/uconsole/uhmi/status",
+            "GET /api/one/uconsole/uhmi/panels",
+            "GET /api/one/uconsole/uhmi/systems",
+            "GET /api/one/uconsole/uhmi/devices",
+            "GET /api/one/uconsole/uhmi/events",
+            "GET /api/one/uconsole/uhmi/evidence",
+            "GET /api/one/uconsole/uhmi/guardrails",
+            "GET /api/one/uconsole/uhmi/roles",
+            "GET /api/one/uconsole/uhmi/role-views",
+            "GET /api/one/uconsole/uhmi/role-visibility",
+            "GET /api/one/uconsole/uhmi/integration-audit",
+        ],
+        "commonResponseFields": [
+            "scope",
+            "mode",
+            "visualStyle",
+            "workspace",
+            "apiVersion",
+            "readOnly",
+            "safety",
+            "guardrails",
+            "futureControlPath",
+            "generatedAt",
+            "staticSnapshotAt",
+        ],
+        "safety": safety,
+        "safetyFields": safety,
+        "guardrails": get_guardrails()["guardrails"],
+        "futureControlPath": FUTURE_CONTROL_PATH,
+        "generatedAt": "STATIC_ARCHITECTURE_BASELINE",
+        "staticSnapshotAt": "STATIC_ARCHITECTURE_BASELINE",
+    }
     return data
 
 

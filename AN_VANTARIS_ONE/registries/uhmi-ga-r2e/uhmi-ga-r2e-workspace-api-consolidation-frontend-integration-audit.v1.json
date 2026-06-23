@@ -1,0 +1,103 @@
+{
+  "scope": "UHMI_GA_R2E",
+  "taskId": "UHMI-GA-R2E",
+  "status": "frozen_local_api_frontend_audit",
+  "mode": "read_only",
+  "platform": "VANTARIS_ONE",
+  "capability": "UHMI",
+  "workspace": "UConsole / UHMI Workspace",
+  "placement": "UConsole / UHMI Workspace",
+  "releaseScope": "API_CONSOLIDATION_FRONTEND_INTEGRATION_AUDIT",
+  "visualStyle": "VANTARIS_LIGHT_OPERATIONS_CONSOLE",
+  "apiVersion": "uhmi-workspace-readonly.v1",
+  "apiConsolidation": true,
+  "frontendIntegrationAudit": true,
+  "routeMenuPackageAlignment": true,
+  "staticDataConsistency": true,
+  "readOnlySafetyVerified": true,
+  "previousStages": [
+    "UHMI-GA-R2A",
+    "UHMI-GA-R2B",
+    "UHMI-GA-R2C",
+    "UHMI-GA-R2D"
+  ],
+  "apiEndpoints": [
+    "GET /api/one/uconsole/uhmi/workspace",
+    "GET /api/one/uconsole/uhmi/status",
+    "GET /api/one/uconsole/uhmi/panels",
+    "GET /api/one/uconsole/uhmi/systems",
+    "GET /api/one/uconsole/uhmi/devices",
+    "GET /api/one/uconsole/uhmi/events",
+    "GET /api/one/uconsole/uhmi/evidence",
+    "GET /api/one/uconsole/uhmi/guardrails",
+    "GET /api/one/uconsole/uhmi/roles",
+    "GET /api/one/uconsole/uhmi/role-views",
+    "GET /api/one/uconsole/uhmi/role-visibility",
+    "GET /api/one/uconsole/uhmi/integration-audit"
+  ],
+  "commonResponseFields": [
+    "scope",
+    "mode",
+    "visualStyle",
+    "workspace",
+    "apiVersion",
+    "readOnly",
+    "safety",
+    "guardrails",
+    "futureControlPath",
+    "generatedAt",
+    "staticSnapshotAt"
+  ],
+  "safetyFields": {
+    "controlEnabled": false,
+    "runtimeActivation": false,
+    "deviceWrite": false,
+    "dbWrite": false,
+    "edgeCommandExecution": false,
+    "linkCommandExecution": false,
+    "realRbacMutation": false,
+    "permissionWrite": false,
+    "packageStateMutation": false,
+    "installExecution": false,
+    "rollbackExecution": false
+  },
+  "frontendMappings": {
+    "serviceFile": "AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts",
+    "type": "UhmiIntegrationAuditPayload",
+    "function": "getUhmiIntegrationAudit",
+    "method": "GET",
+    "path": "/one/uconsole/uhmi/integration-audit",
+    "fallbackPolicy": "read-only static payload only"
+  },
+  "routeMenuPackageReferences": [
+    "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
+    "AN_VANTARIS_IBMS-frontend/src/services/menu/static-menu.ts",
+    "AN_VANTARIS_ONE/registries/package-registry.v1.json",
+    "AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json",
+    "AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json",
+    "AN_VANTARIS_ONE/registries/api-namespace-registry.v1.json"
+  ],
+  "guardrails": [
+    "Read-only Mode",
+    "No Direct Device Control",
+    "No Runtime Activation",
+    "No DB Write",
+    "No EDGE Command Execution",
+    "No LINK Command Execution",
+    "No Real RBAC Mutation",
+    "No Package State Mutation",
+    "No Install Execution",
+    "No Rollback Execution"
+  ],
+  "forbiddenDirectPaths": [
+    "UHMI -> Device",
+    "UHMI -> DB write",
+    "UHMI -> EDGE command",
+    "UHMI -> LINK command",
+    "UHMI -> NEXUS AI execution",
+    "UHMI -> bypass CODE"
+  ],
+  "futureControlPath": "UHMI -> CODE -> Policy Gate -> Approval -> Audit / UCDE -> LINK -> EDGE -> Device",
+  "futureControlPathStatus": "NOT_EXECUTED_IN_R2E",
+  "validationPassMarker": "UHMI_GA_R2E_WORKSPACE_API_CONSOLIDATION_FRONTEND_INTEGRATION_AUDIT_PASS"
+}
