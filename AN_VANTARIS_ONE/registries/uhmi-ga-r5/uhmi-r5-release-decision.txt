@@ -1,0 +1,19 @@
+UHMI-GA-R5 release decision evidence
+
+Decision Type: Customer Preview Release Decision
+Decision: GO
+Decision Scope: READ_ONLY_CUSTOMER_PREVIEW_OFFLINE_DEMO_HANDOFF
+Production GA Decision: NOT_YET
+Production GA: NOT YET
+Production Activation: NOT_EXECUTED
+Runtime Control Activation: NOT_EXECUTED
+Device Control: NOT_EXECUTED
+DB Migration/Write: NOT_EXECUTED
+EDGE/LINK Command Execution: NOT_EXECUTED
+Auth/Login/JWT/RBAC Mutation: NOT_EXECUTED
+Runnable Production Package: NOT_GENERATED
+Dist/Build Artifact Commit: NOT_COMMITTED
+
+GO is customer preview only. It is not production GA and not production activation.
+
+UHMI_GA_R5_FINAL_CUSTOMER_PREVIEW_READINESS_DECISION_PASS
