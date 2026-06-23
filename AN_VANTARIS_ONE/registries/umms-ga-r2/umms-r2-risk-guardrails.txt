@@ -1,0 +1,17 @@
+UMMS-GA-R2 risk guardrails
+
+- No Work Order Write
+- No Task Write
+- No DB Write
+- No Runtime Activation
+- No Direct Device Control
+- No EDGE Command Execution
+- No LINK Command Execution
+- No Auth/RBAC Mutation
+- No Production Activation
+
+192.168.60.21 is recorded only as future APP/non-DB planning.
+192.168.60.22 is recorded only as future DB-only planning.
+
+No SSH. No deployment. No DB migration. No DB write. No production activation.
+No runnable package generation. No dist/build commit.

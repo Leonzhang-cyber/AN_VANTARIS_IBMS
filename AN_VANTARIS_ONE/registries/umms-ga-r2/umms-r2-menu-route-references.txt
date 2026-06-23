@@ -1,0 +1,49 @@
+UMMS-GA-R2 menu and route references
+
+L1: Work Management
+L2:
+- UMMS Overview
+- Work Orders
+- Maintenance Tasks
+- Maintenance Plans
+- Engineer Dispatch
+- Customer Acceptance
+- Evidence Linkage
+- Reports
+
+L3 tabs stay inside the UMMS Production-grade Maintenance Workspace page:
+- Overview
+- Work Orders
+- Task Board
+- Maintenance Plans
+- Engineer Dispatch
+- Asset Context
+- Event Context
+- Evidence Linkage
+- Reports
+- Customer Acceptance
+- Role Views
+- Guardrails
+
+Frontend route: /one/umms/workspace
+Frontend files:
+- AN_VANTARIS_IBMS-frontend/src/router/routes.ts
+- AN_VANTARIS_IBMS-frontend/src/services/menu/static-menu.ts
+- AN_VANTARIS_IBMS-frontend/src/modules/umms/UmmsMaintenance.vue
+
+API endpoints:
+- /api/one/umms/workspace
+- /api/one/umms/overview
+- /api/one/umms/work-orders
+- /api/one/umms/tasks
+- /api/one/umms/maintenance-plans
+- /api/one/umms/preventive-maintenance
+- /api/one/umms/corrective-maintenance
+- /api/one/umms/engineer-dispatch
+- /api/one/umms/asset-context
+- /api/one/umms/event-context
+- /api/one/umms/evidence-linkage
+- /api/one/umms/report-linkage
+- /api/one/umms/customer-acceptance
+- /api/one/umms/role-views
+- /api/one/umms/guardrails

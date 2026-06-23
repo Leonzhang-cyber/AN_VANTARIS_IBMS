@@ -1,0 +1,18 @@
+UMMS-GA-R2 workspace data catalog
+
+Scope: UMMS_GA_R2
+Mode: read_only
+Readiness: PRODUCTION_GRADE_CUSTOMER_DEMO
+Visual style: VANTARIS_LIGHT_OPERATIONS_CONSOLE
+
+Core datasets:
+- Maintenance Overview: Open Work Orders, Pending Tasks, Critical Maintenance, Preventive Plans, Engineer Dispatch, Evidence Linked, Customer Acceptance, Report Ready.
+- Work Order Management: workOrderId, title, description, maintenanceType, assetName, systemName, location, priority, status, assignedRole, assignedEngineer, dueDate, sourceEvent, linkedUhmiPanel, linkedUcdeEvidence, linkedReport, customerVisible, engineerVisible, readOnly.
+- Maintenance Task Board: taskId, taskName, workOrderId, engineer, role, status, checklistStatus, evidenceRequired, linkedAsset, linkedEvent, readOnly.
+- Preventive Maintenance Plan: planId, planName, systemName, assetGroup, frequency, nextDueDate, complianceStatus, linkedTasks, readOnly.
+- Corrective Maintenance Flow: flowId, triggerEvent, linkedAsset, diagnosticStep, workOrderPreview, evidenceRequirement, approvalBoundary, readOnly.
+- Engineer Dispatch: engineerId, engineerName, assignedTasks, availability, siteZone, role, shift, readOnly.
+- Asset Maintenance Context: assetId, assetName, systemName, category, location, zone, linkedEvents, linkedWorkOrders, linkedMaintenancePlans, linkedEvidence, linkedReports, readOnly.
+- Event / Fault Context: eventId, severity, sourceSystem, linkedAsset, linkedWorkOrder, linkedTask, evidenceLinked, status, readOnly.
+
+No Work Order Write. No Task Write. No DB Write. No Runtime Activation. No Direct Device Control.

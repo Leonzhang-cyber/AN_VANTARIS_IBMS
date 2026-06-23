@@ -1,468 +1,416 @@
 <script setup lang="ts">
-import { computed, onMounted, reactive, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { ApiError } from '@/services/api/errors'
-import {
-  getMaintenanceAssociations,
-  getMaintenanceSummary,
-  getUmmsHealth,
-  getWorkOrderBreakdown,
-  getWorkOrderDetail,
-  getWorkOrders,
-  type MaintenanceAssociationModel,
-  type MaintenanceSummary,
-  type UmmsHealth,
-  type WorkOrderBreakdown,
-  type WorkOrderRecord,
-} from '@/services/api/umms'
+import { getUmmsGaR2Workspace, type UmmsGaR2Workspace } from '@/services/api/umms'
+
+const tabs = [
+  'Overview',
+  'Work Orders',
+  'Task Board',
+  'Maintenance Plans',
+  'Engineer Dispatch',
+  'Asset Context',
+  'Event Context',
+  'Evidence Linkage',
+  'Reports',
+  'Customer Acceptance',
+  'Role Views',
+  'Guardrails',
+]
 
 const loading = ref(false)
 const apiError = ref('')
-const showDetailDrawer = ref(false)
-const selectedWorkOrder = ref<WorkOrderRecord | null>(null)
+const activeTab = ref('Overview')
+const workspace = ref<UmmsGaR2Workspace | null>(null)
 
-const health = ref<UmmsHealth>({
-  status: 'unknown',
-  moduleId: 'umms',
-  moduleName: 'UMMS Maintenance',
-  runtimeMode: 'skeleton',
-  provider: 'local-umms-provider',
-  sourceSemantics: 'ibms-neutral',
-  readOnly: true,
-  controlActionsEnabled: false,
-  dispatchEnabled: false,
-  mobileIntegrated: false,
-  notificationIntegrated: false,
-  assetRuntimeIntegrated: false,
-  edgeRuntimeIntegrated: false,
-  linkRuntimeIntegrated: false,
-  dbPersistenceIntegrated: false,
-  certified: false,
-  iec62443Certified: false,
+const statusBadges = computed(() => {
+  const data = workspace.value
+  if (!data) return []
+  return [
+    'Production Demo Ready',
+    'Read-only Mode',
+    'Not POC',
+    data.capability,
+    data.visualStyle,
+  ]
 })
 
-const summary = ref<MaintenanceSummary>({
-  totalWorkOrders: 0,
-  preventiveCount: 0,
-  correctiveCount: 0,
-  inspectionCount: 0,
-  safetyCount: 0,
-  routineCount: 0,
-  draftCount: 0,
-  openCount: 0,
-  plannedCount: 0,
-  scheduledCount: 0,
-  inReviewCount: 0,
-  highPriorityCount: 0,
-  mockWorkOrders: 0,
-  runtimeLinkedWorkOrders: 0,
-  dispatchedWorkOrders: 0,
-  mobileLinkedWorkOrders: 0,
-  notificationLinkedWorkOrders: 0,
-  certifiedWorkOrders: 0,
-  workOrderTypes: [],
-  workOrderCategories: [],
-  limitations: [],
-  certified: false,
-  iec62443Certified: false,
-})
-
-const breakdown = ref<WorkOrderBreakdown>({
-  breakdownMode: 'local-skeleton-breakdown',
-  byType: [],
-  byStatus: [],
-  byPriority: [],
-  byCategory: [],
-  runtimeLinked: false,
-  certified: false,
-  iec62443Certified: false,
-})
-
-const associations = ref<MaintenanceAssociationModel>({
-  associationMode: 'local-skeleton-association',
-  siteAssociations: [],
-  systemAssociations: [],
-  assetAssociations: [],
-  runtimeLinked: false,
-  assetRuntimeIntegrated: false,
-  notes: '',
-  certified: false,
-  iec62443Certified: false,
-})
-
-const workOrders = ref<WorkOrderRecord[]>([])
-const filters = reactive({
-  workOrderType: '',
-  workOrderCategory: '',
-  workOrderStatus: '',
-  priority: '',
-  siteId: '',
-  systemId: '',
-  assetId: '',
-})
-
-const fallbackWorkOrders: WorkOrderRecord[] = [
-  {
-    workOrderId: 'wo-fallback-001',
-    workOrderCode: 'UMMS-FALLBACK-001',
-    title: 'Fallback Maintenance Work Order',
-    description: 'Fallback local skeleton entry when API is unavailable.',
-    workOrderType: 'preventive',
-    workOrderCategory: 'hvac',
-    workOrderStatus: 'planned',
-    priority: 'medium',
-    lifecycleStage: 'planning',
-    siteId: 'site-main',
-    siteName: 'Main Site',
-    systemId: 'system-mechanical',
-    systemName: 'Mechanical System',
-    assetId: 'device-fallback',
-    assetName: 'Fallback Asset',
-    requestedBy: 'local-fallback',
-    assignedTeam: 'maintenance-team',
-    assignedTechnician: 'tech-placeholder',
-    plannedStart: '',
-    plannedEnd: '',
-    createdAt: '',
-    updatedAt: '',
-    sourceSystem: 'local-umms-provider',
-    sourceRecordId: 'fallback-wo',
-    provider: 'local-umms-provider',
-    runtimeMode: 'skeleton',
-    sourceSemantics: 'ibms-neutral',
-    mockData: true,
-    readOnly: true,
-    dispatchEnabled: false,
-    mobileIntegrated: false,
-    notificationIntegrated: false,
-    assetRuntimeIntegrated: false,
-    edgeRuntimeIntegrated: false,
-    linkRuntimeIntegrated: false,
-    tags: ['fallback'],
-    metadata: {},
-    limitations: ['Fallback record only.'],
-    certified: false,
-    iec62443Certified: false,
-  },
-]
-
-const fallbackBreakdown: WorkOrderBreakdown = {
-  breakdownMode: 'local-skeleton-breakdown',
-  byType: [{ key: 'preventive', count: 1 }],
-  byStatus: [{ key: 'planned', count: 1 }],
-  byPriority: [{ key: 'medium', count: 1 }],
-  byCategory: [{ key: 'hvac', count: 1 }],
-  runtimeLinked: false,
-  certified: false,
-  iec62443Certified: false,
-}
-
-const fallbackAssociations: MaintenanceAssociationModel = {
-  associationMode: 'local-skeleton-association',
-  siteAssociations: [{ siteId: 'site-main', siteName: 'Main Site', workOrderIds: ['wo-fallback-001'], runtimeLinked: false }],
-  systemAssociations: [],
-  assetAssociations: [],
-  runtimeLinked: false,
-  assetRuntimeIntegrated: false,
-  notes: 'Fallback local skeleton associations.',
-  certified: false,
-  iec62443Certified: false,
-}
-
-const workOrderTypeOptions = computed(() => summary.value.workOrderTypes)
-const workOrderCategoryOptions = computed(() => summary.value.workOrderCategories)
-
-async function loadAll() {
+async function loadWorkspace() {
   loading.value = true
   apiError.value = ''
   try {
-    const [healthData, listData, summaryData, breakdownData, associationsData] = await Promise.all([
-      getUmmsHealth(),
-      getWorkOrders(filters),
-      getMaintenanceSummary(),
-      getWorkOrderBreakdown(),
-      getMaintenanceAssociations(),
-    ])
-    health.value = healthData
-    workOrders.value = listData.workOrders
-    summary.value = summaryData
-    breakdown.value = breakdownData
-    associations.value = associationsData
+    workspace.value = await getUmmsGaR2Workspace()
   } catch (error) {
-    const message = error instanceof ApiError ? error.message : 'Failed to load UMMS maintenance data.'
-    apiError.value = message
-    workOrders.value = fallbackWorkOrders
-    breakdown.value = fallbackBreakdown
-    associations.value = fallbackAssociations
+    apiError.value = error instanceof ApiError ? error.message : 'UMMS workspace data unavailable.'
   } finally {
     loading.value = false
   }
 }
 
-function resetFilters() {
-  filters.workOrderType = ''
-  filters.workOrderCategory = ''
-  filters.workOrderStatus = ''
-  filters.priority = ''
-  filters.siteId = ''
-  filters.systemId = ''
-  filters.assetId = ''
-  void loadAll()
-}
-
-async function openDetail(row: WorkOrderRecord) {
-  selectedWorkOrder.value = row
-  showDetailDrawer.value = true
-  try {
-    selectedWorkOrder.value = await getWorkOrderDetail(row.workOrderId)
-  } catch {
-    // retain row fallback
-  }
-}
-
 onMounted(() => {
-  void loadAll()
+  void loadWorkspace()
 })
 </script>
 
 <template>
-  <section class="umms-page">
-    <div class="hero-row">
+  <section class="umms-r2-page" v-loading="loading">
+    <header class="workspace-head">
       <div>
-        <h2>UMMS Maintenance</h2>
-        <p>Read-only maintenance workspace for VANTARIS ONE.</p>
+        <p class="eyebrow">Work Management / Maintenance capability</p>
+        <h1>UMMS Production-grade Maintenance Workspace</h1>
+        <p class="summary">
+          Read-only customer demo readiness for work orders, task dispatch, maintenance plans, evidence, reports, and role views.
+        </p>
       </div>
-      <div class="hero-tags">
-        <el-tag type="info">runtimeMode: {{ health.runtimeMode }}</el-tag>
-        <el-tag type="warning">provider: {{ health.provider }}</el-tag>
-        <el-tag type="info">sourceSemantics: {{ health.sourceSemantics }}</el-tag>
-        <el-tag type="success">readOnly: {{ health.readOnly }}</el-tag>
-        <el-tag type="info">dispatchEnabled: {{ health.dispatchEnabled }}</el-tag>
-        <el-tag type="info">mobileIntegrated: {{ health.mobileIntegrated }}</el-tag>
-        <el-tag type="info">notificationIntegrated: {{ health.notificationIntegrated }}</el-tag>
-        <el-tag type="info">assetRuntimeIntegrated: {{ health.assetRuntimeIntegrated }}</el-tag>
-        <el-tag type="info">edgeRuntimeIntegrated: {{ health.edgeRuntimeIntegrated }}</el-tag>
-        <el-tag type="info">linkRuntimeIntegrated: {{ health.linkRuntimeIntegrated }}</el-tag>
-        <el-tag type="info">certified: {{ health.certified }}</el-tag>
-        <el-tag type="info">iec62443Certified: {{ health.iec62443Certified }}</el-tag>
+      <div class="badge-stack">
+        <el-tag v-for="badge in statusBadges" :key="badge" effect="light" round>{{ badge }}</el-tag>
       </div>
-    </div>
-
-    <el-alert
-      type="info"
-      show-icon
-      :closable="false"
-      title="UMMS R1 uses local skeleton work orders. Dispatch workflow, mobile integration, notification delivery, EDGE/LINK integration and DB persistence are not integrated."
-      class="block-space"
-    />
+    </header>
 
     <el-alert
       v-if="apiError"
+      class="section-gap"
       type="warning"
       show-icon
       :closable="false"
-      :title="`API fallback active: ${apiError}`"
-      class="block-space"
+      :title="apiError"
     />
 
-    <el-card class="block-space">
-      <template #header>Summary Cards</template>
-      <el-descriptions :column="4" border>
-        <el-descriptions-item label="totalWorkOrders">{{ summary.totalWorkOrders }}</el-descriptions-item>
-        <el-descriptions-item label="preventiveCount">{{ summary.preventiveCount }}</el-descriptions-item>
-        <el-descriptions-item label="correctiveCount">{{ summary.correctiveCount }}</el-descriptions-item>
-        <el-descriptions-item label="inspectionCount">{{ summary.inspectionCount }}</el-descriptions-item>
-        <el-descriptions-item label="safetyCount">{{ summary.safetyCount }}</el-descriptions-item>
-        <el-descriptions-item label="routineCount">{{ summary.routineCount }}</el-descriptions-item>
-        <el-descriptions-item label="openCount">{{ summary.openCount }}</el-descriptions-item>
-        <el-descriptions-item label="plannedCount">{{ summary.plannedCount }}</el-descriptions-item>
-        <el-descriptions-item label="highPriorityCount">{{ summary.highPriorityCount }}</el-descriptions-item>
-        <el-descriptions-item label="runtimeLinkedWorkOrders">{{ summary.runtimeLinkedWorkOrders }}</el-descriptions-item>
-        <el-descriptions-item label="dispatchedWorkOrders">{{ summary.dispatchedWorkOrders }}</el-descriptions-item>
-      </el-descriptions>
-    </el-card>
+    <template v-if="workspace">
+      <section class="overview-grid section-gap">
+        <article v-for="card in workspace.overviewCards" :key="card.label" class="metric-card">
+          <span>{{ card.label }}</span>
+          <strong>{{ card.value }}</strong>
+          <em>{{ card.status }}</em>
+        </article>
+      </section>
 
-    <el-card class="block-space">
-      <template #header>Filters</template>
-      <el-form :inline="true" label-width="140px">
-        <el-form-item label="workOrderType">
-          <el-select v-model="filters.workOrderType" clearable placeholder="All">
-            <el-option v-for="item in workOrderTypeOptions" :key="item" :label="item" :value="item" />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="workOrderCategory">
-          <el-select v-model="filters.workOrderCategory" clearable placeholder="All">
-            <el-option v-for="item in workOrderCategoryOptions" :key="item" :label="item" :value="item" />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="workOrderStatus">
-          <el-input v-model="filters.workOrderStatus" clearable placeholder="e.g. planned" />
-        </el-form-item>
-        <el-form-item label="priority">
-          <el-input v-model="filters.priority" clearable placeholder="e.g. high" />
-        </el-form-item>
-        <el-form-item label="siteId">
-          <el-input v-model="filters.siteId" clearable placeholder="e.g. site-main" />
-        </el-form-item>
-        <el-form-item label="systemId">
-          <el-input v-model="filters.systemId" clearable placeholder="e.g. system-mechanical" />
-        </el-form-item>
-        <el-form-item label="assetId">
-          <el-input v-model="filters.assetId" clearable placeholder="e.g. device-chiller-01" />
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="loadAll">Apply</el-button>
-          <el-button @click="resetFilters">Reset</el-button>
-        </el-form-item>
-      </el-form>
-    </el-card>
+      <section class="section-gap context-strip">
+        <div>
+          <span>Future controlled action path</span>
+          <strong>{{ workspace.futureExecutionPath }}</strong>
+        </div>
+        <div>
+          <span>Server planning</span>
+          <strong>{{ workspace.appNonDbTarget }} app / {{ workspace.dbOnlyTarget }} DB-only</strong>
+        </div>
+      </section>
 
-    <el-card class="block-space">
-      <template #header>Work Orders</template>
-      <el-table :data="workOrders" v-loading="loading" stripe>
-        <el-table-column prop="workOrderId" label="workOrderId" min-width="220" />
-        <el-table-column prop="title" label="title" min-width="220" />
-        <el-table-column prop="workOrderType" label="workOrderType" min-width="130" />
-        <el-table-column prop="workOrderCategory" label="workOrderCategory" min-width="150" />
-        <el-table-column prop="workOrderStatus" label="workOrderStatus" min-width="140" />
-        <el-table-column prop="priority" label="priority" min-width="100" />
-        <el-table-column prop="siteName" label="siteName" min-width="150" />
-        <el-table-column prop="systemName" label="systemName" min-width="170" />
-        <el-table-column prop="assetName" label="assetName" min-width="170" />
-        <el-table-column prop="assignedTeam" label="assignedTeam" min-width="150" />
-        <el-table-column prop="assignedTechnician" label="assignedTechnician" min-width="170" />
-        <el-table-column prop="plannedStart" label="plannedStart" min-width="180" />
-        <el-table-column prop="plannedEnd" label="plannedEnd" min-width="180" />
-        <el-table-column label="actions" min-width="130" fixed="right">
-          <template #default="{ row }">
-            <el-button link type="primary" @click="openDetail(row)">View Detail</el-button>
+      <el-tabs v-model="activeTab" type="card" class="section-gap workspace-tabs">
+        <el-tab-pane v-for="tab in tabs" :key="tab" :label="tab" :name="tab">
+          <template v-if="tab === 'Overview'">
+            <div class="section-title">Maintenance Overview</div>
+            <el-descriptions :column="3" border>
+              <el-descriptions-item label="scope">{{ workspace.scope }}</el-descriptions-item>
+              <el-descriptions-item label="mode">{{ workspace.mode }}</el-descriptions-item>
+              <el-descriptions-item label="readiness">{{ workspace.readinessLevel }}</el-descriptions-item>
+              <el-descriptions-item label="productionDemoReady">{{ workspace.productionDemoReady }}</el-descriptions-item>
+              <el-descriptions-item label="poc">{{ workspace.poc }}</el-descriptions-item>
+              <el-descriptions-item label="temporaryDemo">{{ workspace.temporaryDemo }}</el-descriptions-item>
+            </el-descriptions>
           </template>
-        </el-table-column>
-      </el-table>
-    </el-card>
 
-    <el-card class="block-space">
-      <template #header>Breakdown</template>
-      <el-descriptions :column="2" border>
-        <el-descriptions-item label="breakdownMode">{{ breakdown.breakdownMode }}</el-descriptions-item>
-        <el-descriptions-item label="runtimeLinked">{{ breakdown.runtimeLinked }}</el-descriptions-item>
-      </el-descriptions>
-      <el-row :gutter="12" class="block-space">
-        <el-col :span="12">
-          <h4>byType</h4>
-          <el-table :data="breakdown.byType" size="small" stripe>
-            <el-table-column prop="key" label="key" />
-            <el-table-column prop="count" label="count" />
-          </el-table>
-        </el-col>
-        <el-col :span="12">
-          <h4>byStatus</h4>
-          <el-table :data="breakdown.byStatus" size="small" stripe>
-            <el-table-column prop="key" label="key" />
-            <el-table-column prop="count" label="count" />
-          </el-table>
-        </el-col>
-      </el-row>
-      <el-row :gutter="12" class="block-space">
-        <el-col :span="12">
-          <h4>byPriority</h4>
-          <el-table :data="breakdown.byPriority" size="small" stripe>
-            <el-table-column prop="key" label="key" />
-            <el-table-column prop="count" label="count" />
-          </el-table>
-        </el-col>
-        <el-col :span="12">
-          <h4>byCategory</h4>
-          <el-table :data="breakdown.byCategory" size="small" stripe>
-            <el-table-column prop="key" label="key" />
-            <el-table-column prop="count" label="count" />
-          </el-table>
-        </el-col>
-      </el-row>
-    </el-card>
+          <template v-else-if="tab === 'Work Orders'">
+            <div class="section-title">Work Order Management</div>
+            <el-table :data="workspace.workOrders" stripe border>
+              <el-table-column prop="workOrderId" label="Work Order" min-width="160" />
+              <el-table-column prop="title" label="Title" min-width="240" />
+              <el-table-column prop="maintenanceType" label="Type" min-width="150" />
+              <el-table-column prop="status" label="Status" min-width="150" />
+              <el-table-column prop="priority" label="Priority" min-width="120" />
+              <el-table-column prop="assignedEngineer" label="Engineer" min-width="160" />
+              <el-table-column prop="linkedUcdeEvidence" label="UCDE Evidence" min-width="170" />
+              <el-table-column prop="linkedUhmiPanel" label="UHMI Linkage" min-width="220" />
+              <el-table-column prop="readOnly" label="Read-only" min-width="120" />
+            </el-table>
+          </template>
 
-    <el-card class="block-space">
-      <template #header>Associations</template>
-      <el-descriptions :column="2" border>
-        <el-descriptions-item label="associationMode">{{ associations.associationMode }}</el-descriptions-item>
-        <el-descriptions-item label="assetRuntimeIntegrated">{{ associations.assetRuntimeIntegrated }}</el-descriptions-item>
-      </el-descriptions>
-      <el-text class="block-space">{{ associations.notes }}</el-text>
-      <el-row :gutter="12" class="block-space">
-        <el-col :span="8">
-          <h4>siteAssociations</h4>
-          <el-table :data="associations.siteAssociations" size="small" stripe>
-            <el-table-column prop="siteId" label="siteId" />
-            <el-table-column prop="siteName" label="siteName" />
-          </el-table>
-        </el-col>
-        <el-col :span="8">
-          <h4>systemAssociations</h4>
-          <el-table :data="associations.systemAssociations" size="small" stripe>
-            <el-table-column prop="systemId" label="systemId" />
-            <el-table-column prop="systemName" label="systemName" />
-          </el-table>
-        </el-col>
-        <el-col :span="8">
-          <h4>assetAssociations</h4>
-          <el-table :data="associations.assetAssociations" size="small" stripe>
-            <el-table-column prop="assetId" label="assetId" />
-            <el-table-column prop="assetName" label="assetName" />
-          </el-table>
-        </el-col>
-      </el-row>
-    </el-card>
+          <template v-else-if="tab === 'Task Board'">
+            <div class="section-title">Maintenance Task Board</div>
+            <el-table :data="workspace.maintenanceTasks" stripe border>
+              <el-table-column prop="taskId" label="Task" min-width="160" />
+              <el-table-column prop="taskName" label="Task Name" min-width="240" />
+              <el-table-column prop="workOrderId" label="Work Order" min-width="160" />
+              <el-table-column prop="engineer" label="Engineer" min-width="150" />
+              <el-table-column prop="role" label="Role" min-width="120" />
+              <el-table-column prop="checklistStatus" label="Checklist" min-width="170" />
+              <el-table-column prop="evidenceRequired" label="Evidence Required" min-width="220" />
+              <el-table-column prop="readOnly" label="Read-only" min-width="120" />
+            </el-table>
+          </template>
 
-    <el-drawer v-model="showDetailDrawer" title="Work Order Detail" size="50%">
-      <el-empty v-if="!selectedWorkOrder" description="No work order selected." />
-      <template v-else>
-        <el-descriptions :column="1" border>
-          <el-descriptions-item label="overview">
-            {{ selectedWorkOrder.workOrderCode }} | {{ selectedWorkOrder.title }} | {{ selectedWorkOrder.workOrderStatus }}
-          </el-descriptions-item>
-          <el-descriptions-item label="site/system/asset association">
-            {{ selectedWorkOrder.siteName }} / {{ selectedWorkOrder.systemName }} / {{ selectedWorkOrder.assetName }}
-          </el-descriptions-item>
-          <el-descriptions-item label="assignedTeam / assignedTechnician">
-            {{ selectedWorkOrder.assignedTeam }} / {{ selectedWorkOrder.assignedTechnician }}
-          </el-descriptions-item>
-          <el-descriptions-item label="lifecycleStage">{{ selectedWorkOrder.lifecycleStage }}</el-descriptions-item>
-          <el-descriptions-item label="metadata">{{ selectedWorkOrder.metadata }}</el-descriptions-item>
-          <el-descriptions-item label="limitations">
-            {{ selectedWorkOrder.limitations.join(' | ') }}
-          </el-descriptions-item>
-          <el-descriptions-item label="dispatchEnabled">{{ selectedWorkOrder.dispatchEnabled }}</el-descriptions-item>
-          <el-descriptions-item label="mobileIntegrated">{{ selectedWorkOrder.mobileIntegrated }}</el-descriptions-item>
-          <el-descriptions-item label="notificationIntegrated">{{ selectedWorkOrder.notificationIntegrated }}</el-descriptions-item>
-          <el-descriptions-item label="certified">{{ selectedWorkOrder.certified }}</el-descriptions-item>
-          <el-descriptions-item label="iec62443Certified">{{ selectedWorkOrder.iec62443Certified }}</el-descriptions-item>
-        </el-descriptions>
-      </template>
-    </el-drawer>
+          <template v-else-if="tab === 'Maintenance Plans'">
+            <div class="section-title">Preventive Maintenance Plan</div>
+            <el-table :data="workspace.preventiveMaintenancePlans" stripe border>
+              <el-table-column prop="planId" label="Plan" min-width="150" />
+              <el-table-column prop="planName" label="Plan Name" min-width="230" />
+              <el-table-column prop="systemName" label="System" min-width="190" />
+              <el-table-column prop="assetGroup" label="Asset Group" min-width="160" />
+              <el-table-column prop="frequency" label="Frequency" min-width="130" />
+              <el-table-column prop="nextDueDate" label="Next Due" min-width="140" />
+              <el-table-column prop="complianceStatus" label="Compliance" min-width="150" />
+            </el-table>
+            <div class="section-title inner-title">Corrective Maintenance Flow</div>
+            <el-table :data="workspace.correctiveMaintenanceFlow" stripe border>
+              <el-table-column prop="flowId" label="Flow" min-width="150" />
+              <el-table-column prop="triggerEvent" label="Trigger Event" min-width="160" />
+              <el-table-column prop="linkedAsset" label="Asset" min-width="170" />
+              <el-table-column prop="diagnosticStep" label="Diagnostic Step" min-width="260" />
+              <el-table-column prop="approvalBoundary" label="Approval Boundary" min-width="260" />
+            </el-table>
+          </template>
+
+          <template v-else-if="tab === 'Engineer Dispatch'">
+            <div class="section-title">Engineer Dispatch</div>
+            <el-table :data="workspace.engineerDispatch" stripe border>
+              <el-table-column prop="engineerId" label="Engineer ID" min-width="140" />
+              <el-table-column prop="engineerName" label="Engineer" min-width="170" />
+              <el-table-column prop="availability" label="Availability" min-width="140" />
+              <el-table-column prop="siteZone" label="Site Zone" min-width="160" />
+              <el-table-column prop="role" label="Role" min-width="130" />
+              <el-table-column prop="shift" label="Shift" min-width="120" />
+              <el-table-column prop="readOnly" label="Read-only" min-width="120" />
+            </el-table>
+          </template>
+
+          <template v-else-if="tab === 'Asset Context'">
+            <div class="section-title">Asset Maintenance Context</div>
+            <el-table :data="workspace.assetContext" stripe border>
+              <el-table-column prop="assetId" label="Asset ID" min-width="160" />
+              <el-table-column prop="assetName" label="Asset" min-width="190" />
+              <el-table-column prop="systemName" label="System" min-width="190" />
+              <el-table-column prop="category" label="Category" min-width="130" />
+              <el-table-column prop="location" label="Location" min-width="190" />
+              <el-table-column prop="zone" label="Zone" min-width="100" />
+              <el-table-column prop="readOnly" label="Read-only" min-width="120" />
+            </el-table>
+          </template>
+
+          <template v-else-if="tab === 'Event Context'">
+            <div class="section-title">Event / Fault Context</div>
+            <el-table :data="workspace.eventContext" stripe border>
+              <el-table-column prop="eventId" label="Event" min-width="150" />
+              <el-table-column prop="severity" label="Severity" min-width="120" />
+              <el-table-column prop="sourceSystem" label="Source" min-width="180" />
+              <el-table-column prop="linkedAsset" label="Asset" min-width="190" />
+              <el-table-column prop="linkedWorkOrder" label="Work Order" min-width="170" />
+              <el-table-column prop="evidenceLinked" label="Evidence" min-width="150" />
+              <el-table-column prop="status" label="Status" min-width="150" />
+            </el-table>
+          </template>
+
+          <template v-else-if="tab === 'Evidence Linkage'">
+            <div class="section-title">UCDE Evidence Linkage</div>
+            <el-table :data="workspace.evidenceLinkage" stripe border>
+              <el-table-column prop="linkage" label="Linkage" min-width="220" />
+              <el-table-column prop="coverage" label="Coverage" min-width="320" />
+              <el-table-column prop="readOnly" label="Read-only" min-width="120" />
+            </el-table>
+            <p class="linkage-note">UHMI Linkage remains read-only through panel context and evidence snapshots.</p>
+          </template>
+
+          <template v-else-if="tab === 'Reports'">
+            <div class="section-title">Reports Linkage</div>
+            <el-table :data="workspace.reportLinkage" stripe border>
+              <el-table-column prop="report" label="Report" min-width="260" />
+              <el-table-column prop="status" label="Status" min-width="140" />
+              <el-table-column prop="readOnly" label="Read-only" min-width="120" />
+            </el-table>
+          </template>
+
+          <template v-else-if="tab === 'Customer Acceptance'">
+            <div class="section-title">Customer Acceptance View</div>
+            <el-descriptions :column="2" border>
+              <el-descriptions-item label="Decision">{{ workspace.customerAcceptance.decision }}</el-descriptions-item>
+              <el-descriptions-item label="Maintenance overview">{{ workspace.customerAcceptance.maintenanceOverview }}</el-descriptions-item>
+              <el-descriptions-item label="Evidence summary">{{ workspace.customerAcceptance.evidenceSummary }}</el-descriptions-item>
+              <el-descriptions-item label="Report snapshot">{{ workspace.customerAcceptance.reportSnapshot }}</el-descriptions-item>
+            </el-descriptions>
+          </template>
+
+          <template v-else-if="tab === 'Role Views'">
+            <div class="section-title">Role-based Views</div>
+            <div class="role-grid">
+              <article v-for="(items, role) in workspace.roleViews" :key="role" class="role-card">
+                <h3>{{ role }}</h3>
+                <ul>
+                  <li v-for="item in items" :key="item">{{ item }}</li>
+                </ul>
+              </article>
+            </div>
+          </template>
+
+          <template v-else>
+            <div class="section-title">Guardrails</div>
+            <div class="guardrail-grid">
+              <el-tag v-for="item in workspace.guardrails" :key="item" type="info" effect="light" round>{{ item }}</el-tag>
+            </div>
+            <el-descriptions class="inner-title" :column="3" border>
+              <el-descriptions-item label="No Work Order Write">{{ workspace.workOrderWrite }}</el-descriptions-item>
+              <el-descriptions-item label="No DB Write">{{ workspace.dbWrite }}</el-descriptions-item>
+              <el-descriptions-item label="No Runtime Activation">{{ workspace.runtimeActivation }}</el-descriptions-item>
+              <el-descriptions-item label="No Direct Device Control">{{ workspace.deviceControl }}</el-descriptions-item>
+              <el-descriptions-item label="No EDGE Command Execution">{{ workspace.edgeCommandExecution }}</el-descriptions-item>
+              <el-descriptions-item label="No LINK Command Execution">{{ workspace.linkCommandExecution }}</el-descriptions-item>
+            </el-descriptions>
+          </template>
+        </el-tab-pane>
+      </el-tabs>
+    </template>
   </section>
 </template>
 
 <style scoped>
-.umms-page {
-  padding: 16px;
+.umms-r2-page {
+  min-height: 100%;
+  padding: 20px;
+  background: #f4fbf8;
+  color: #203331;
 }
 
-.hero-row {
+.workspace-head {
   display: flex;
-  align-items: flex-start;
   justify-content: space-between;
+  gap: 20px;
+  padding: 20px;
+  border: 1px solid #d6ebe5;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 12px 28px rgb(34 82 73 / 8%);
+}
+
+.workspace-head h1 {
+  margin: 4px 0 8px;
+  font-size: 28px;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.eyebrow,
+.summary,
+.context-strip span,
+.metric-card span {
+  margin: 0;
+  color: #647b76;
+}
+
+.eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.summary {
+  max-width: 760px;
+}
+
+.badge-stack,
+.guardrail-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.section-gap {
+  margin-top: 16px;
+}
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 12px;
 }
 
-.hero-tags {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-  justify-content: flex-end;
+.metric-card,
+.role-card,
+.context-strip,
+.workspace-tabs {
+  border: 1px solid #d6ebe5;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 10px 24px rgb(34 82 73 / 7%);
 }
 
-.block-space {
-  margin-top: 12px;
+.metric-card {
+  padding: 14px;
+}
+
+.metric-card strong {
+  display: block;
+  margin: 8px 0 4px;
+  color: #007f73;
+  font-size: 26px;
+  line-height: 1;
+}
+
+.metric-card em {
+  color: #26796f;
+  font-style: normal;
+}
+
+.context-strip {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
+  gap: 14px;
+  padding: 14px;
+}
+
+.context-strip strong {
+  display: block;
+  margin-top: 4px;
+}
+
+.workspace-tabs {
+  padding: 14px;
+}
+
+.section-title {
+  margin: 0 0 12px;
+  color: #123f3a;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.inner-title {
+  margin-top: 16px;
+}
+
+.linkage-note {
+  margin: 12px 0 0;
+  color: #41625d;
+}
+
+.role-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.role-card {
+  padding: 14px;
+}
+
+.role-card h3 {
+  margin: 0 0 8px;
+  color: #007f73;
+}
+
+.role-card ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+@media (max-width: 780px) {
+  .workspace-head,
+  .context-strip {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+  }
+
+  .badge-stack {
+    justify-content: flex-start;
+  }
 }
 </style>
-

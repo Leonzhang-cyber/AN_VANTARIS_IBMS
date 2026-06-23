@@ -269,6 +269,46 @@
       ]
     },
     {
+      "frontendRouteId": "FROUTE-06606D706B29",
+      "routePath": "/one/umms/workspace",
+      "packageId": "PKG-UMMS",
+      "owningModule": "UMMS",
+      "targetAccessClass": "BUSINESS_ROUTE",
+      "authenticationRequired": true,
+      "requiredPermissions": [
+        "maintenance:read"
+      ],
+      "entitlementRequired": true,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "tenantScopeRequired": true,
+      "siteScopeRequired": true,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "VISIBLE_WHEN_AUTHORIZED",
+      "lockPagePolicy": "GOVERNED_PACKAGE_LOCK_PAGE",
+      "diagnosticFallback": "AUTHORIZED_STATUS_OR_DIAGNOSTICS",
+      "backendApiPolicyReferences": [
+        "/api/v1/mms",
+        "/api/v1/work"
+      ],
+      "auditPolicy": "AUDIT_DENIALS_AND_SENSITIVE_ACTIONS",
+      "compatibilityStage": "CURRENT_TARGET",
+      "implementationStatus": "MULTIPLE_CONTROLS_REQUIRED",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "UMMS-GA-R2",
+      "reviewReason": [],
+      "notes": [
+        "Target metadata only; frontend and backend runtime enforcement are not implemented by UMMS-GA-R2.",
+        "UMMS production-grade maintenance workspace remains read-only and uses GET endpoints only.",
+        "Missing controls: PERMISSION_METADATA, PACKAGE_METADATA, DIRECT_URL_ENFORCEMENT, BACKEND_POLICY_DEPENDENCY"
+      ]
+    },
+    {
       "frontendRouteId": "FROUTE-0DBBB900287A",
       "routePath": "/reports",
       "packageId": "PKG-REPORTS",
@@ -2718,7 +2758,7 @@
       "lockPageRoute": "/packages/PKG-EDGE/lock",
       "statusRoute": "/packages/PKG-EDGE/status",
       "diagnosticRoutes": [
-        "FROUTE-74571E87F28B"
+        "/uedge/diagnostics"
       ],
       "adminRoutes": [],
       "defaultMenuBehavior": "VISIBLE_WHEN_AUTHORIZED_OR_GOVERNED_LOCK",
@@ -2769,7 +2809,6 @@
       "healthRequiredForWrites": true,
       "frontendRoutes": [
         "/did",
-        "/login",
         "/system/audit-logs",
         "/system/permissions"
       ],
@@ -2783,8 +2822,8 @@
       "statusRoute": "/packages/PKG-GOVERNANCE-SECURITY/status",
       "diagnosticRoutes": [],
       "adminRoutes": [
-        "FROUTE-A77240D62B73",
-        "FROUTE-BBEE7F90DDB4"
+        "/system/audit-logs",
+        "/system/permissions"
       ],
       "defaultMenuBehavior": "VISIBLE_WHEN_AUTHORIZED_OR_GOVERNED_LOCK",
       "defaultDirectUrlBehavior": "ENFORCE_SAME_PACKAGE_POLICY_AS_MENU",
@@ -2965,12 +3004,8 @@
       "compatibilityRequired": false,
       "healthRequiredForWrites": true,
       "frontendRoutes": [
-        "/",
-        "/403",
-        "/:pathMatch(.*)*",
         "/console/operations",
         "/dashboard",
-        "/forbidden",
         "/one/airport/alarms-events",
         "/one/airport/assets-topology",
         "/one/airport/evidence-investigation",
@@ -3026,9 +3061,9 @@
       "statusRoute": "/packages/PKG-UCORE/status",
       "diagnosticRoutes": [],
       "adminRoutes": [
-        "FROUTE-88546A365FF2",
-        "FROUTE-A2842138F079",
-        "FROUTE-A926AD8DB3CF"
+        "/system",
+        "/system/notification-settings",
+        "/system/settings"
       ],
       "defaultMenuBehavior": "VISIBLE_WHEN_AUTHORIZED_OR_GOVERNED_LOCK",
       "defaultDirectUrlBehavior": "ENFORCE_SAME_PACKAGE_POLICY_AS_MENU",
@@ -3130,6 +3165,7 @@
       "healthRequiredForWrites": true,
       "frontendRoutes": [
         "/one/umms/overview",
+        "/one/umms/workspace",
         "/umms/maintenance"
       ],
       "backendNamespaces": [
@@ -3168,7 +3204,7 @@
       "statusRoute": "/packages/PKG-UNIFIED-DATA-MODEL/status",
       "diagnosticRoutes": [],
       "adminRoutes": [
-        "FROUTE-A89E66839FAA"
+        "/system/integration-settings"
       ],
       "defaultMenuBehavior": "VISIBLE_WHEN_AUTHORIZED_OR_GOVERNED_LOCK",
       "defaultDirectUrlBehavior": "ENFORCE_SAME_PACKAGE_POLICY_AS_MENU",
@@ -4010,22 +4046,6 @@
       "priority": "P0"
     },
     {
-      "reviewId": "PKG-ROUTE-REVIEW-0024",
-      "routeOrMenuId": "MENU-1A4AFDED4268",
-      "reviewType": "STATIC_MENU_FALLBACK",
-      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
-      "currentEvidence": {
-        "routePath": "/umms/maintenance",
-        "staticFallback": true,
-        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
-      },
-      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
-      "owningModule": "UMMS",
-      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
-      "blockingTask": "ONE-A5-P0-07",
-      "priority": "P0"
-    },
-    {
       "reviewId": "PKG-ROUTE-REVIEW-0025",
       "routeOrMenuId": "MENU-6FB2B2EFCCE9",
       "reviewType": "STATIC_MENU_FALLBACK",
@@ -4069,38 +4089,6 @@
       },
       "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
       "owningModule": "UConsole",
-      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
-      "blockingTask": "ONE-A5-P0-07",
-      "priority": "P0"
-    },
-    {
-      "reviewId": "PKG-ROUTE-REVIEW-0028",
-      "routeOrMenuId": "MENU-A3E1F451FEA8",
-      "reviewType": "STATIC_MENU_FALLBACK",
-      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
-      "currentEvidence": {
-        "routePath": "/umms/maintenance",
-        "staticFallback": true,
-        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
-      },
-      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
-      "owningModule": "UMMS",
-      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
-      "blockingTask": "ONE-A5-P0-07",
-      "priority": "P0"
-    },
-    {
-      "reviewId": "PKG-ROUTE-REVIEW-0029",
-      "routeOrMenuId": "MENU-BC4B1E83BFD5",
-      "reviewType": "STATIC_MENU_FALLBACK",
-      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
-      "currentEvidence": {
-        "routePath": "/uedge/diagnostics",
-        "staticFallback": true,
-        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
-      },
-      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
-      "owningModule": "AN_VANTARIS_EDGE",
       "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
       "blockingTask": "ONE-A5-P0-07",
       "priority": "P0"
@@ -4250,22 +4238,6 @@
       "priority": "P0"
     },
     {
-      "reviewId": "PKG-ROUTE-REVIEW-0039",
-      "routeOrMenuId": "MENU-67362E206C5A",
-      "reviewType": "STATIC_MENU_FALLBACK",
-      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
-      "currentEvidence": {
-        "routePath": "/uedge/setup",
-        "staticFallback": true,
-        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
-      },
-      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
-      "owningModule": "AN_VANTARIS_EDGE",
-      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
-      "blockingTask": "ONE-A5-P0-07",
-      "priority": "P0"
-    },
-    {
       "reviewId": "PKG-ROUTE-REVIEW-0040",
       "routeOrMenuId": "MENU-D3825D4FF507",
       "reviewType": "STATIC_MENU_FALLBACK",
@@ -4280,34 +4252,18 @@
       "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
       "blockingTask": "ONE-A5-P0-07",
       "priority": "P0"
-    },
-    {
-      "reviewId": "PKG-ROUTE-REVIEW-0042",
-      "routeOrMenuId": "MENU-BEA6C7A1CB65",
-      "reviewType": "STATIC_MENU_FALLBACK",
-      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
-      "currentEvidence": {
-        "routePath": "/uedge/setup",
-        "staticFallback": true,
-        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
-      },
-      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
-      "owningModule": "AN_VANTARIS_EDGE",
-      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
-      "blockingTask": "ONE-A5-P0-07",
-      "priority": "P0"
     }
   ],
   "summary": {
     "packagePolicyCount": 23,
     "backendNamespacePolicyCount": 29,
-    "frontendRoutePolicyCount": 38,
+    "frontendRoutePolicyCount": 39,
     "lockPagePolicyCount": 5,
     "diagnosticPolicyCount": 5,
     "compatibilityMappingCount": 12,
-    "reviewQueueCount": 41,
+    "reviewQueueCount": 36,
     "currentlyCompliantRoutes": 5,
     "metadataOnlyRoutes": 0,
-    "runtimeEnforcementRequiredRoutes": 33
+    "runtimeEnforcementRequiredRoutes": 34
   }
 }

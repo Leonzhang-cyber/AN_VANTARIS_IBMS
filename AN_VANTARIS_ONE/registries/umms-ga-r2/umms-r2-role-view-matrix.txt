@@ -1,0 +1,31 @@
+UMMS-GA-R2 role view matrix
+
+Customer:
+- Maintenance overview
+- Customer acceptance
+- Evidence summary
+- Report snapshot
+- No internal diagnostics detail
+
+Engineer:
+- Work orders
+- Task board
+- Dispatch
+- Asset context
+- Event context
+- Evidence requirements
+- Package/server planning context
+
+Admin:
+- Role matrix preview
+- Menu visibility preview
+- Package readiness preview
+- Guardrails
+- No real permission mutation
+
+Operator:
+- Live maintenance status
+- Active events
+- Work order overview
+- Shift handover
+- Guardrails

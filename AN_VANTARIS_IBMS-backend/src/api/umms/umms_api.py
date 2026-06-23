@@ -77,3 +77,97 @@ def umms_one_customer_core_functions():
 @api_bp.route("/v1/one/umms/safety-posture", methods=["GET"])
 def umms_one_safety_posture():
     return Result.success(data=_service.get_safety_posture_projection())
+
+
+def _umms_ga_r2_response(section: str):
+    return Result.success(data=_service.get_ga_r2_section(section))
+
+
+@api_bp.route("/one/umms/workspace", methods=["GET"])
+@api_bp.route("/v1/one/umms/workspace", methods=["GET"])
+def umms_ga_r2_workspace():
+    return Result.success(data=_service.get_ga_r2_workspace())
+
+
+@api_bp.route("/one/umms/overview", methods=["GET"])
+@api_bp.route("/v1/one/umms/overview", methods=["GET"])
+def umms_ga_r2_overview():
+    return _umms_ga_r2_response("overview")
+
+
+@api_bp.route("/one/umms/work-orders", methods=["GET"])
+@api_bp.route("/v1/one/umms/work-orders", methods=["GET"])
+def umms_ga_r2_work_orders():
+    return _umms_ga_r2_response("work-orders")
+
+
+@api_bp.route("/one/umms/tasks", methods=["GET"])
+@api_bp.route("/v1/one/umms/tasks", methods=["GET"])
+def umms_ga_r2_tasks():
+    return _umms_ga_r2_response("tasks")
+
+
+@api_bp.route("/one/umms/maintenance-plans", methods=["GET"])
+@api_bp.route("/v1/one/umms/maintenance-plans", methods=["GET"])
+def umms_ga_r2_maintenance_plans():
+    return _umms_ga_r2_response("maintenance-plans")
+
+
+@api_bp.route("/one/umms/preventive-maintenance", methods=["GET"])
+@api_bp.route("/v1/one/umms/preventive-maintenance", methods=["GET"])
+def umms_ga_r2_preventive_maintenance():
+    return _umms_ga_r2_response("preventive-maintenance")
+
+
+@api_bp.route("/one/umms/corrective-maintenance", methods=["GET"])
+@api_bp.route("/v1/one/umms/corrective-maintenance", methods=["GET"])
+def umms_ga_r2_corrective_maintenance():
+    return _umms_ga_r2_response("corrective-maintenance")
+
+
+@api_bp.route("/one/umms/engineer-dispatch", methods=["GET"])
+@api_bp.route("/v1/one/umms/engineer-dispatch", methods=["GET"])
+def umms_ga_r2_engineer_dispatch():
+    return _umms_ga_r2_response("engineer-dispatch")
+
+
+@api_bp.route("/one/umms/asset-context", methods=["GET"])
+@api_bp.route("/v1/one/umms/asset-context", methods=["GET"])
+def umms_ga_r2_asset_context():
+    return _umms_ga_r2_response("asset-context")
+
+
+@api_bp.route("/one/umms/event-context", methods=["GET"])
+@api_bp.route("/v1/one/umms/event-context", methods=["GET"])
+def umms_ga_r2_event_context():
+    return _umms_ga_r2_response("event-context")
+
+
+@api_bp.route("/one/umms/evidence-linkage", methods=["GET"])
+@api_bp.route("/v1/one/umms/evidence-linkage", methods=["GET"])
+def umms_ga_r2_evidence_linkage():
+    return _umms_ga_r2_response("evidence-linkage")
+
+
+@api_bp.route("/one/umms/report-linkage", methods=["GET"])
+@api_bp.route("/v1/one/umms/report-linkage", methods=["GET"])
+def umms_ga_r2_report_linkage():
+    return _umms_ga_r2_response("report-linkage")
+
+
+@api_bp.route("/one/umms/customer-acceptance", methods=["GET"])
+@api_bp.route("/v1/one/umms/customer-acceptance", methods=["GET"])
+def umms_ga_r2_customer_acceptance():
+    return _umms_ga_r2_response("customer-acceptance")
+
+
+@api_bp.route("/one/umms/role-views", methods=["GET"])
+@api_bp.route("/v1/one/umms/role-views", methods=["GET"])
+def umms_ga_r2_role_views():
+    return _umms_ga_r2_response("role-views")
+
+
+@api_bp.route("/one/umms/guardrails", methods=["GET"])
+@api_bp.route("/v1/one/umms/guardrails", methods=["GET"])
+def umms_ga_r2_guardrails():
+    return _umms_ga_r2_response("guardrails")

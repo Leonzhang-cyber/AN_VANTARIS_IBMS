@@ -8,6 +8,8 @@ from src.umms.umms_provider import (
     get_maintenance_associations,
     get_maintenance_summary,
     get_umms_health,
+    get_umms_ga_r2_section,
+    get_umms_ga_r2_workspace,
     get_umms_customer_core_functions_projection,
     get_umms_package_entry_projection,
     get_umms_readiness_summary_projection,
@@ -80,3 +82,9 @@ class UmmsMaintenanceService:
 
     def get_safety_posture_projection(self) -> Dict[str, Any]:
         return get_umms_safety_posture_projection()
+
+    def get_ga_r2_workspace(self) -> Dict[str, Any]:
+        return get_umms_ga_r2_workspace()
+
+    def get_ga_r2_section(self, section: str) -> Dict[str, Any]:
+        return get_umms_ga_r2_section(section)

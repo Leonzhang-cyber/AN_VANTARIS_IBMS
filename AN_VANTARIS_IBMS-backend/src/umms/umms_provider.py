@@ -589,3 +589,467 @@ def get_umms_safety_posture_projection() -> Dict[str, Any]:
             "source": _source_descriptor("safetyPosture", PACKAGE_ENTRY_REGISTRY),
         }
     )
+
+
+UMMS_GA_R2_SCOPE = "UMMS_GA_R2"
+UMMS_GA_R2_READINESS = "PRODUCTION_GRADE_CUSTOMER_DEMO"
+UMMS_GA_R2_STYLE = "VANTARIS_LIGHT_OPERATIONS_CONSOLE"
+UMMS_GA_R2_FUTURE_EXECUTION_PATH = (
+    "UMMS / UHMI -> CODE -> Policy Gate -> Approval -> Audit / UCDE -> LINK -> EDGE -> Device"
+)
+
+
+def _umms_ga_r2_common() -> Dict[str, Any]:
+    return {
+        "scope": UMMS_GA_R2_SCOPE,
+        "mode": "read_only",
+        "readinessLevel": UMMS_GA_R2_READINESS,
+        "visualStyle": UMMS_GA_R2_STYLE,
+        "productionDemoReady": True,
+        "poc": False,
+        "mock": False,
+        "temporaryDemo": False,
+        "appNonDbTarget": "192.168.60.21",
+        "dbOnlyTarget": "192.168.60.22",
+        "deploymentExecuted": False,
+        "sshExecuted": False,
+        "dbMigrationExecuted": False,
+        "dbWrite": False,
+        "workOrderWrite": False,
+        "taskWrite": False,
+        "approvalWrite": False,
+        "runtimeActivation": False,
+        "deviceControl": False,
+        "edgeCommandExecution": False,
+        "linkCommandExecution": False,
+        "productionActivation": False,
+        "futureExecutionPath": UMMS_GA_R2_FUTURE_EXECUTION_PATH,
+    }
+
+
+def _r2(item: Dict[str, Any]) -> Dict[str, Any]:
+    payload = deepcopy(item)
+    payload.setdefault("readOnly", True)
+    return payload
+
+
+def get_umms_ga_r2_workspace() -> Dict[str, Any]:
+    work_orders = [
+        _r2(
+            {
+                "workOrderId": "UMMS-R2-WO-1001",
+                "title": "Cooling Plant Preventive Readiness",
+                "description": "Customer-visible preventive maintenance package for the central cooling plant.",
+                "maintenanceType": "Preventive",
+                "assetName": "Chiller Plant Loop A",
+                "systemName": "Mechanical Operations",
+                "location": "Campus North Plant",
+                "priority": "High",
+                "status": "Scheduled",
+                "assignedRole": "Engineer",
+                "assignedEngineer": "Avery Chen",
+                "dueDate": "2026-07-08",
+                "sourceEvent": "EVT-HVAC-2041",
+                "linkedUhmiPanel": "UHMI System HMI / Cooling",
+                "linkedUcdeEvidence": "UCDE-EVD-9001",
+                "linkedReport": "RPT-UMMS-1001",
+                "customerVisible": True,
+                "engineerVisible": True,
+            }
+        ),
+        _r2(
+            {
+                "workOrderId": "UMMS-R2-WO-1002",
+                "title": "Pump Vibration Corrective Review",
+                "description": "Corrective maintenance review linked to a vibration event and asset context.",
+                "maintenanceType": "Corrective",
+                "assetName": "Transfer Pump P-17",
+                "systemName": "Water Distribution",
+                "location": "Utility Corridor B2",
+                "priority": "Critical",
+                "status": "Open",
+                "assignedRole": "Operator",
+                "assignedEngineer": "Mina Patel",
+                "dueDate": "2026-07-03",
+                "sourceEvent": "EVT-PUMP-1188",
+                "linkedUhmiPanel": "UHMI Device HMI / Pump P-17",
+                "linkedUcdeEvidence": "UCDE-EVD-9002",
+                "linkedReport": "RPT-UMMS-1002",
+                "customerVisible": True,
+                "engineerVisible": True,
+            }
+        ),
+        _r2(
+            {
+                "workOrderId": "UMMS-R2-WO-1003",
+                "title": "Life Safety Panel Inspection",
+                "description": "Inspection checklist preview for panel condition, event trace, and evidence readiness.",
+                "maintenanceType": "Inspection",
+                "assetName": "Fire Panel FACP-03",
+                "systemName": "Life Safety",
+                "location": "Level 4 East",
+                "priority": "Medium",
+                "status": "In Review",
+                "assignedRole": "Supervisor/Admin",
+                "assignedEngineer": "Jordan Lee",
+                "dueDate": "2026-07-10",
+                "sourceEvent": "EVT-FIRE-0403",
+                "linkedUhmiPanel": "UHMI Alarm & Event HMI",
+                "linkedUcdeEvidence": "UCDE-EVD-9003",
+                "linkedReport": "RPT-UMMS-1003",
+                "customerVisible": False,
+                "engineerVisible": True,
+            }
+        ),
+        _r2(
+            {
+                "workOrderId": "UMMS-R2-WO-1004",
+                "title": "Customer Acceptance Maintenance Walkthrough",
+                "description": "Acceptance preview linking work order status, reports, and evidence trace.",
+                "maintenanceType": "Customer Acceptance",
+                "assetName": "Integrated Operations Area",
+                "systemName": "Customer Delivery",
+                "location": "Operations Console",
+                "priority": "High",
+                "status": "Pending Evidence",
+                "assignedRole": "Customer",
+                "assignedEngineer": "Leah Martin",
+                "dueDate": "2026-07-12",
+                "sourceEvent": "EVT-ACCEPT-7001",
+                "linkedUhmiPanel": "UHMI Evidence & Reports",
+                "linkedUcdeEvidence": "UCDE-EVD-9004",
+                "linkedReport": "RPT-UMMS-1004",
+                "customerVisible": True,
+                "engineerVisible": True,
+            }
+        ),
+        _r2(
+            {
+                "workOrderId": "UMMS-R2-WO-1005",
+                "title": "Closed Preview Evidence Bundle",
+                "description": "Closed preview record used for customer report readiness and evidence trace review.",
+                "maintenanceType": "Preventive",
+                "assetName": "Air Handling Unit AHU-22",
+                "systemName": "Building Environment",
+                "location": "Level 2 Mechanical Room",
+                "priority": "Low",
+                "status": "Closed Preview",
+                "assignedRole": "Engineer",
+                "assignedEngineer": "Nora Wilson",
+                "dueDate": "2026-07-01",
+                "sourceEvent": "EVT-AHU-2201",
+                "linkedUhmiPanel": "UHMI System HMI / Environment",
+                "linkedUcdeEvidence": "UCDE-EVD-9005",
+                "linkedReport": "RPT-UMMS-1005",
+                "customerVisible": True,
+                "engineerVisible": True,
+            }
+        ),
+    ]
+    tasks = [
+        _r2(
+            {
+                "taskId": "UMMS-R2-TASK-2001",
+                "taskName": "Review preventive checklist",
+                "workOrderId": "UMMS-R2-WO-1001",
+                "engineer": "Avery Chen",
+                "role": "Engineer",
+                "status": "Scheduled",
+                "checklistStatus": "Complete Preview",
+                "evidenceRequired": "UCDE checklist attachment",
+                "linkedAsset": "Chiller Plant Loop A",
+                "linkedEvent": "EVT-HVAC-2041",
+            }
+        ),
+        _r2(
+            {
+                "taskId": "UMMS-R2-TASK-2002",
+                "taskName": "Confirm vibration diagnostic trace",
+                "workOrderId": "UMMS-R2-WO-1002",
+                "engineer": "Mina Patel",
+                "role": "Operator",
+                "status": "Open",
+                "checklistStatus": "Evidence Required",
+                "evidenceRequired": "Trend snapshot and event detail",
+                "linkedAsset": "Transfer Pump P-17",
+                "linkedEvent": "EVT-PUMP-1188",
+            }
+        ),
+        _r2(
+            {
+                "taskId": "UMMS-R2-TASK-2003",
+                "taskName": "Validate customer acceptance pack",
+                "workOrderId": "UMMS-R2-WO-1004",
+                "engineer": "Leah Martin",
+                "role": "Customer",
+                "status": "Pending Evidence",
+                "checklistStatus": "Customer Review",
+                "evidenceRequired": "Acceptance signoff packet preview",
+                "linkedAsset": "Integrated Operations Area",
+                "linkedEvent": "EVT-ACCEPT-7001",
+            }
+        ),
+    ]
+    plans = [
+        _r2(
+            {
+                "planId": "UMMS-R2-PM-3001",
+                "planName": "Monthly Cooling Plant Assurance",
+                "systemName": "Mechanical Operations",
+                "assetGroup": "Cooling Plant",
+                "frequency": "Monthly",
+                "nextDueDate": "2026-07-08",
+                "complianceStatus": "On Track",
+                "linkedTasks": ["UMMS-R2-TASK-2001"],
+            }
+        ),
+        _r2(
+            {
+                "planId": "UMMS-R2-PM-3002",
+                "planName": "Quarterly Life Safety Inspection",
+                "systemName": "Life Safety",
+                "assetGroup": "Fire Panels",
+                "frequency": "Quarterly",
+                "nextDueDate": "2026-07-10",
+                "complianceStatus": "In Review",
+                "linkedTasks": ["UMMS-R2-TASK-2003"],
+            }
+        ),
+    ]
+    corrective_flow = [
+        _r2(
+            {
+                "flowId": "UMMS-R2-CORR-4001",
+                "triggerEvent": "EVT-PUMP-1188",
+                "linkedAsset": "Transfer Pump P-17",
+                "diagnosticStep": "Read vibration event and UHMI panel context.",
+                "workOrderPreview": "UMMS-R2-WO-1002",
+                "evidenceRequirement": "UCDE trend snapshot plus report trace.",
+                "approvalBoundary": "Future action path only; no execution in R2.",
+            }
+        )
+    ]
+    dispatch = [
+        _r2(
+            {
+                "engineerId": "ENG-01",
+                "engineerName": "Avery Chen",
+                "assignedTasks": ["UMMS-R2-TASK-2001"],
+                "availability": "Available",
+                "siteZone": "North Plant",
+                "role": "Engineer",
+                "shift": "Day",
+            }
+        ),
+        _r2(
+            {
+                "engineerId": "ENG-02",
+                "engineerName": "Mina Patel",
+                "assignedTasks": ["UMMS-R2-TASK-2002"],
+                "availability": "Assigned",
+                "siteZone": "Utility Corridor",
+                "role": "Operator",
+                "shift": "Swing",
+            }
+        ),
+    ]
+    asset_context = [
+        _r2(
+            {
+                "assetId": "ASSET-PUMP-P17",
+                "assetName": "Transfer Pump P-17",
+                "systemName": "Water Distribution",
+                "category": "Pump",
+                "location": "Utility Corridor B2",
+                "zone": "B2",
+                "linkedEvents": ["EVT-PUMP-1188"],
+                "linkedWorkOrders": ["UMMS-R2-WO-1002"],
+                "linkedMaintenancePlans": [],
+                "linkedEvidence": ["UCDE-EVD-9002"],
+                "linkedReports": ["RPT-UMMS-1002"],
+            }
+        ),
+        _r2(
+            {
+                "assetId": "ASSET-CHILLER-A",
+                "assetName": "Chiller Plant Loop A",
+                "systemName": "Mechanical Operations",
+                "category": "Cooling",
+                "location": "Campus North Plant",
+                "zone": "North",
+                "linkedEvents": ["EVT-HVAC-2041"],
+                "linkedWorkOrders": ["UMMS-R2-WO-1001"],
+                "linkedMaintenancePlans": ["UMMS-R2-PM-3001"],
+                "linkedEvidence": ["UCDE-EVD-9001"],
+                "linkedReports": ["RPT-UMMS-1001"],
+            }
+        ),
+    ]
+    event_context = [
+        _r2(
+            {
+                "eventId": "EVT-PUMP-1188",
+                "severity": "High",
+                "sourceSystem": "Event Management",
+                "linkedAsset": "Transfer Pump P-17",
+                "linkedWorkOrder": "UMMS-R2-WO-1002",
+                "linkedTask": "UMMS-R2-TASK-2002",
+                "evidenceLinked": "UCDE-EVD-9002",
+                "status": "Active Review",
+            }
+        ),
+        _r2(
+            {
+                "eventId": "EVT-HVAC-2041",
+                "severity": "Medium",
+                "sourceSystem": "UHMI System HMI",
+                "linkedAsset": "Chiller Plant Loop A",
+                "linkedWorkOrder": "UMMS-R2-WO-1001",
+                "linkedTask": "UMMS-R2-TASK-2001",
+                "evidenceLinked": "UCDE-EVD-9001",
+                "status": "Scheduled",
+            }
+        ),
+    ]
+    guardrails = [
+        "No Work Order Write",
+        "No Task Write",
+        "No DB Write",
+        "No Runtime Activation",
+        "No Direct Device Control",
+        "No EDGE Command Execution",
+        "No LINK Command Execution",
+        "No Auth/RBAC Mutation",
+        "No Production Activation",
+    ]
+    return {
+        **_umms_ga_r2_common(),
+        "workspaceTitle": "UMMS Production-grade Maintenance Workspace",
+        "capability": "Work Management / Maintenance capability",
+        "overviewCards": [
+            {"label": "Open Work Orders", "value": 2, "status": "Read-only"},
+            {"label": "Pending Tasks", "value": 2, "status": "Evidence Review"},
+            {"label": "Critical Maintenance", "value": 1, "status": "Attention"},
+            {"label": "Preventive Plans", "value": 2, "status": "On Track"},
+            {"label": "Engineer Dispatch", "value": 2, "status": "Preview"},
+            {"label": "Evidence Linked", "value": 5, "status": "UCDE Linked"},
+            {"label": "Customer Acceptance", "value": 1, "status": "Review"},
+            {"label": "Report Ready", "value": 6, "status": "Ready"},
+        ],
+        "workOrders": work_orders,
+        "maintenanceTasks": tasks,
+        "preventiveMaintenancePlans": plans,
+        "correctiveMaintenanceFlow": corrective_flow,
+        "engineerDispatch": dispatch,
+        "assetContext": asset_context,
+        "eventContext": event_context,
+        "evidenceLinkage": [
+            _r2({"linkage": "UCDE Evidence Center", "coverage": "Asset Evidence, Event Evidence, Acceptance Evidence"}),
+            _r2({"linkage": "UHMI Evidence Context", "coverage": "HMI panel context and event snapshots"}),
+            _r2({"linkage": "Work Order Evidence", "coverage": "Work order summary evidence"}),
+            _r2({"linkage": "Task Evidence", "coverage": "Task checklist and validation evidence"}),
+            _r2({"linkage": "Validator Evidence", "coverage": "Validator Evidence"}),
+            _r2({"linkage": "Release Evidence", "coverage": "Release Evidence"}),
+        ],
+        "reportLinkage": [
+            _r2({"report": "UMMS Maintenance Report", "status": "Ready"}),
+            _r2({"report": "Work Order Summary Report", "status": "Ready"}),
+            _r2({"report": "Engineer Dispatch Report", "status": "Ready"}),
+            _r2({"report": "Customer Acceptance Report", "status": "Ready"}),
+            _r2({"report": "Evidence Trace Report", "status": "Ready"}),
+            _r2({"report": "Package Readiness Report", "status": "Ready"}),
+        ],
+        "customerAcceptance": _r2(
+            {
+                "decision": "Customer preview ready",
+                "maintenanceOverview": True,
+                "customerAcceptance": True,
+                "evidenceSummary": True,
+                "reportSnapshot": True,
+                "internalDiagnosticsDetail": False,
+            }
+        ),
+        "roleViews": {
+            "Customer": [
+                "Maintenance overview",
+                "Customer acceptance",
+                "Evidence summary",
+                "Report snapshot",
+                "No internal diagnostics detail",
+            ],
+            "Engineer": [
+                "Work orders",
+                "Task board",
+                "Dispatch",
+                "Asset context",
+                "Event context",
+                "Evidence requirements",
+                "Package/server planning context",
+            ],
+            "Admin": [
+                "Role matrix preview",
+                "Menu visibility preview",
+                "Package readiness preview",
+                "Guardrails",
+                "No real permission mutation",
+            ],
+            "Operator": [
+                "Live maintenance status",
+                "Active events",
+                "Work order overview",
+                "Shift handover",
+                "Guardrails",
+            ],
+        },
+        "guardrails": guardrails,
+        "menu": {
+            "l1": "Work Management",
+            "l2": [
+                "UMMS Overview",
+                "Work Orders",
+                "Maintenance Tasks",
+                "Maintenance Plans",
+                "Engineer Dispatch",
+                "Customer Acceptance",
+                "Evidence Linkage",
+                "Reports",
+            ],
+            "l3Tabs": [
+                "Overview",
+                "Work Orders",
+                "Task Board",
+                "Maintenance Plans",
+                "Engineer Dispatch",
+                "Asset Context",
+                "Event Context",
+                "Evidence Linkage",
+                "Reports",
+                "Customer Acceptance",
+                "Role Views",
+                "Guardrails",
+            ],
+        },
+    }
+
+
+def get_umms_ga_r2_section(section: str) -> Dict[str, Any]:
+    workspace = get_umms_ga_r2_workspace()
+    section_map = {
+        "workspace": workspace,
+        "overview": {"overviewCards": workspace["overviewCards"], "guardrails": workspace["guardrails"]},
+        "work-orders": {"workOrders": workspace["workOrders"]},
+        "tasks": {"maintenanceTasks": workspace["maintenanceTasks"]},
+        "maintenance-plans": {"preventiveMaintenancePlans": workspace["preventiveMaintenancePlans"]},
+        "preventive-maintenance": {"preventiveMaintenancePlans": workspace["preventiveMaintenancePlans"]},
+        "corrective-maintenance": {"correctiveMaintenanceFlow": workspace["correctiveMaintenanceFlow"]},
+        "engineer-dispatch": {"engineerDispatch": workspace["engineerDispatch"]},
+        "asset-context": {"assetContext": workspace["assetContext"]},
+        "event-context": {"eventContext": workspace["eventContext"]},
+        "evidence-linkage": {"evidenceLinkage": workspace["evidenceLinkage"]},
+        "report-linkage": {"reportLinkage": workspace["reportLinkage"]},
+        "customer-acceptance": {"customerAcceptance": workspace["customerAcceptance"]},
+        "role-views": {"roleViews": workspace["roleViews"]},
+        "guardrails": {"guardrails": workspace["guardrails"]},
+    }
+    data = section_map.get(section, {})
+    return {**_umms_ga_r2_common(), **deepcopy(data)}

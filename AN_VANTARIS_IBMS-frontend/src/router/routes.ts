@@ -135,7 +135,13 @@ export const routes: RouteRecordRaw[] = [
     path: '/umms/maintenance',
     name: 'umms-maintenance',
     component: UmmsMaintenance,
-    meta: { requiresAuth: true, title: 'UMMS Maintenance', layout: true },
+    meta: { requiresAuth: true, title: 'UMMS Production-grade Maintenance Workspace', layout: true },
+  },
+  {
+    path: '/one/umms/workspace',
+    name: 'umms-production-grade-maintenance-workspace',
+    component: UmmsMaintenance,
+    meta: { requiresAuth: true, title: 'UMMS Production-grade Maintenance Workspace', layout: true },
   },
   {
     path: '/one/umms/overview',

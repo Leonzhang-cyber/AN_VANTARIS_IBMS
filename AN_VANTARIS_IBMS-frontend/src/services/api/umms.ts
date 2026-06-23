@@ -219,6 +219,148 @@ export interface UmmsReadonlyOverview {
   fallbackMessage: string
 }
 
+export interface UmmsGaR2OverviewCard {
+  label: string
+  value: number
+  status: string
+}
+
+export interface UmmsGaR2WorkOrder {
+  workOrderId: string
+  title: string
+  description: string
+  maintenanceType: string
+  assetName: string
+  systemName: string
+  location: string
+  priority: string
+  status: string
+  assignedRole: string
+  assignedEngineer: string
+  dueDate: string
+  sourceEvent: string
+  linkedUhmiPanel: string
+  linkedUcdeEvidence: string
+  linkedReport: string
+  customerVisible: boolean
+  engineerVisible: boolean
+  readOnly: boolean
+}
+
+export interface UmmsGaR2Task {
+  taskId: string
+  taskName: string
+  workOrderId: string
+  engineer: string
+  role: string
+  status: string
+  checklistStatus: string
+  evidenceRequired: string
+  linkedAsset: string
+  linkedEvent: string
+  readOnly: boolean
+}
+
+export interface UmmsGaR2Plan {
+  planId: string
+  planName: string
+  systemName: string
+  assetGroup: string
+  frequency: string
+  nextDueDate: string
+  complianceStatus: string
+  linkedTasks: string[]
+  readOnly: boolean
+}
+
+export interface UmmsGaR2Dispatch {
+  engineerId: string
+  engineerName: string
+  assignedTasks: string[]
+  availability: string
+  siteZone: string
+  role: string
+  shift: string
+  readOnly: boolean
+}
+
+export interface UmmsGaR2AssetContext {
+  assetId: string
+  assetName: string
+  systemName: string
+  category: string
+  location: string
+  zone: string
+  linkedEvents: string[]
+  linkedWorkOrders: string[]
+  linkedMaintenancePlans: string[]
+  linkedEvidence: string[]
+  linkedReports: string[]
+  readOnly: boolean
+}
+
+export interface UmmsGaR2EventContext {
+  eventId: string
+  severity: string
+  sourceSystem: string
+  linkedAsset: string
+  linkedWorkOrder: string
+  linkedTask: string
+  evidenceLinked: string
+  status: string
+  readOnly: boolean
+}
+
+export interface UmmsGaR2Linkage {
+  linkage?: string
+  report?: string
+  coverage?: string
+  status?: string
+  readOnly: boolean
+}
+
+export interface UmmsGaR2Workspace {
+  scope: string
+  mode: string
+  readinessLevel: string
+  visualStyle: string
+  productionDemoReady: boolean
+  poc: boolean
+  mock: boolean
+  temporaryDemo: boolean
+  appNonDbTarget: string
+  dbOnlyTarget: string
+  deploymentExecuted: boolean
+  sshExecuted: boolean
+  dbMigrationExecuted: boolean
+  dbWrite: boolean
+  workOrderWrite: boolean
+  taskWrite: boolean
+  approvalWrite: boolean
+  runtimeActivation: boolean
+  deviceControl: boolean
+  edgeCommandExecution: boolean
+  linkCommandExecution: boolean
+  productionActivation: boolean
+  futureExecutionPath: string
+  workspaceTitle: string
+  capability: string
+  overviewCards: UmmsGaR2OverviewCard[]
+  workOrders: UmmsGaR2WorkOrder[]
+  maintenanceTasks: UmmsGaR2Task[]
+  preventiveMaintenancePlans: UmmsGaR2Plan[]
+  correctiveMaintenanceFlow: Array<Record<string, unknown>>
+  engineerDispatch: UmmsGaR2Dispatch[]
+  assetContext: UmmsGaR2AssetContext[]
+  eventContext: UmmsGaR2EventContext[]
+  evidenceLinkage: UmmsGaR2Linkage[]
+  reportLinkage: UmmsGaR2Linkage[]
+  customerAcceptance: Record<string, unknown>
+  roleViews: Record<string, string[]>
+  guardrails: string[]
+  menu: { l1: string; l2: string[]; l3Tabs: string[] }
+}
+
 function asRecord(value: unknown): Record<string, unknown> {
   return typeof value === 'object' && value !== null ? (value as Record<string, unknown>) : {}
 }
@@ -571,6 +713,142 @@ function fallbackSafetyPosture(): UmmsSafetyPosture {
   })
 }
 
+function normalizeGaR2Workspace(raw: unknown): UmmsGaR2Workspace {
+  const data = asRecord(raw)
+  const menu = asRecord(data.menu)
+  return {
+    scope: String(data.scope ?? 'UMMS_GA_R2'),
+    mode: String(data.mode ?? 'read_only'),
+    readinessLevel: String(data.readinessLevel ?? 'PRODUCTION_GRADE_CUSTOMER_DEMO'),
+    visualStyle: String(data.visualStyle ?? 'VANTARIS_LIGHT_OPERATIONS_CONSOLE'),
+    productionDemoReady: data.productionDemoReady !== undefined ? Boolean(data.productionDemoReady) : true,
+    poc: Boolean(data.poc),
+    mock: Boolean(data.mock),
+    temporaryDemo: Boolean(data.temporaryDemo),
+    appNonDbTarget: String(data.appNonDbTarget ?? '192.168.60.21'),
+    dbOnlyTarget: String(data.dbOnlyTarget ?? '192.168.60.22'),
+    deploymentExecuted: Boolean(data.deploymentExecuted),
+    sshExecuted: Boolean(data.sshExecuted),
+    dbMigrationExecuted: Boolean(data.dbMigrationExecuted),
+    dbWrite: Boolean(data.dbWrite),
+    workOrderWrite: Boolean(data.workOrderWrite),
+    taskWrite: Boolean(data.taskWrite),
+    approvalWrite: Boolean(data.approvalWrite),
+    runtimeActivation: Boolean(data.runtimeActivation),
+    deviceControl: Boolean(data.deviceControl),
+    edgeCommandExecution: Boolean(data.edgeCommandExecution),
+    linkCommandExecution: Boolean(data.linkCommandExecution),
+    productionActivation: Boolean(data.productionActivation),
+    futureExecutionPath: String(data.futureExecutionPath ?? ''),
+    workspaceTitle: String(data.workspaceTitle ?? 'UMMS Production-grade Maintenance Workspace'),
+    capability: String(data.capability ?? 'Work Management / Maintenance capability'),
+    overviewCards: asRecordArray(data.overviewCards).map((item) => ({
+      label: String(item.label ?? ''),
+      value: Number(item.value ?? 0),
+      status: String(item.status ?? ''),
+    })),
+    workOrders: asRecordArray(data.workOrders).map((item) => ({
+      workOrderId: String(item.workOrderId ?? ''),
+      title: String(item.title ?? ''),
+      description: String(item.description ?? ''),
+      maintenanceType: String(item.maintenanceType ?? ''),
+      assetName: String(item.assetName ?? ''),
+      systemName: String(item.systemName ?? ''),
+      location: String(item.location ?? ''),
+      priority: String(item.priority ?? ''),
+      status: String(item.status ?? ''),
+      assignedRole: String(item.assignedRole ?? ''),
+      assignedEngineer: String(item.assignedEngineer ?? ''),
+      dueDate: String(item.dueDate ?? ''),
+      sourceEvent: String(item.sourceEvent ?? ''),
+      linkedUhmiPanel: String(item.linkedUhmiPanel ?? ''),
+      linkedUcdeEvidence: String(item.linkedUcdeEvidence ?? ''),
+      linkedReport: String(item.linkedReport ?? ''),
+      customerVisible: Boolean(item.customerVisible),
+      engineerVisible: Boolean(item.engineerVisible),
+      readOnly: item.readOnly !== undefined ? Boolean(item.readOnly) : true,
+    })),
+    maintenanceTasks: asRecordArray(data.maintenanceTasks).map((item) => ({
+      taskId: String(item.taskId ?? ''),
+      taskName: String(item.taskName ?? ''),
+      workOrderId: String(item.workOrderId ?? ''),
+      engineer: String(item.engineer ?? ''),
+      role: String(item.role ?? ''),
+      status: String(item.status ?? ''),
+      checklistStatus: String(item.checklistStatus ?? ''),
+      evidenceRequired: String(item.evidenceRequired ?? ''),
+      linkedAsset: String(item.linkedAsset ?? ''),
+      linkedEvent: String(item.linkedEvent ?? ''),
+      readOnly: item.readOnly !== undefined ? Boolean(item.readOnly) : true,
+    })),
+    preventiveMaintenancePlans: asRecordArray(data.preventiveMaintenancePlans).map((item) => ({
+      planId: String(item.planId ?? ''),
+      planName: String(item.planName ?? ''),
+      systemName: String(item.systemName ?? ''),
+      assetGroup: String(item.assetGroup ?? ''),
+      frequency: String(item.frequency ?? ''),
+      nextDueDate: String(item.nextDueDate ?? ''),
+      complianceStatus: String(item.complianceStatus ?? ''),
+      linkedTasks: asStringArray(item.linkedTasks),
+      readOnly: item.readOnly !== undefined ? Boolean(item.readOnly) : true,
+    })),
+    correctiveMaintenanceFlow: asRecordArray(data.correctiveMaintenanceFlow),
+    engineerDispatch: asRecordArray(data.engineerDispatch).map((item) => ({
+      engineerId: String(item.engineerId ?? ''),
+      engineerName: String(item.engineerName ?? ''),
+      assignedTasks: asStringArray(item.assignedTasks),
+      availability: String(item.availability ?? ''),
+      siteZone: String(item.siteZone ?? ''),
+      role: String(item.role ?? ''),
+      shift: String(item.shift ?? ''),
+      readOnly: item.readOnly !== undefined ? Boolean(item.readOnly) : true,
+    })),
+    assetContext: asRecordArray(data.assetContext).map((item) => ({
+      assetId: String(item.assetId ?? ''),
+      assetName: String(item.assetName ?? ''),
+      systemName: String(item.systemName ?? ''),
+      category: String(item.category ?? ''),
+      location: String(item.location ?? ''),
+      zone: String(item.zone ?? ''),
+      linkedEvents: asStringArray(item.linkedEvents),
+      linkedWorkOrders: asStringArray(item.linkedWorkOrders),
+      linkedMaintenancePlans: asStringArray(item.linkedMaintenancePlans),
+      linkedEvidence: asStringArray(item.linkedEvidence),
+      linkedReports: asStringArray(item.linkedReports),
+      readOnly: item.readOnly !== undefined ? Boolean(item.readOnly) : true,
+    })),
+    eventContext: asRecordArray(data.eventContext).map((item) => ({
+      eventId: String(item.eventId ?? ''),
+      severity: String(item.severity ?? ''),
+      sourceSystem: String(item.sourceSystem ?? ''),
+      linkedAsset: String(item.linkedAsset ?? ''),
+      linkedWorkOrder: String(item.linkedWorkOrder ?? ''),
+      linkedTask: String(item.linkedTask ?? ''),
+      evidenceLinked: String(item.evidenceLinked ?? ''),
+      status: String(item.status ?? ''),
+      readOnly: item.readOnly !== undefined ? Boolean(item.readOnly) : true,
+    })),
+    evidenceLinkage: asRecordArray(data.evidenceLinkage).map((item) => ({
+      linkage: String(item.linkage ?? ''),
+      coverage: String(item.coverage ?? ''),
+      readOnly: item.readOnly !== undefined ? Boolean(item.readOnly) : true,
+    })),
+    reportLinkage: asRecordArray(data.reportLinkage).map((item) => ({
+      report: String(item.report ?? ''),
+      status: String(item.status ?? ''),
+      readOnly: item.readOnly !== undefined ? Boolean(item.readOnly) : true,
+    })),
+    customerAcceptance: asRecord(data.customerAcceptance),
+    roleViews: Object.fromEntries(Object.entries(asRecord(data.roleViews)).map(([key, value]) => [key, asStringArray(value)])),
+    guardrails: asStringArray(data.guardrails),
+    menu: {
+      l1: String(menu.l1 ?? 'Work Management'),
+      l2: asStringArray(menu.l2),
+      l3Tabs: asStringArray(menu.l3Tabs),
+    },
+  }
+}
+
 export async function getUmmsHealth(): Promise<UmmsHealth> {
   const { data } = await request.get('/v1/umms/health')
   return normalizeHealth(unwrapData<unknown>(data))
@@ -655,4 +933,9 @@ export async function getUmmsReadonlyOverview(): Promise<UmmsReadonlyOverview> {
       fallbackMessage: 'UMMS readiness data unavailable, read-only fallback active.',
     }
   }
+}
+
+export async function getUmmsGaR2Workspace(): Promise<UmmsGaR2Workspace> {
+  const { data } = await request.get('/v1/one/umms/workspace')
+  return normalizeGaR2Workspace(unwrapData<unknown>(data))
 }

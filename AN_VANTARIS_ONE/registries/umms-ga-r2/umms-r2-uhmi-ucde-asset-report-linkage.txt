@@ -1,0 +1,29 @@
+UMMS-GA-R2 read-only linkage evidence
+
+UMMS links to UHMI / UCDE / Assets / Events / Reports for customer demo readiness only.
+
+UHMI Linkage:
+- linkedUhmiPanel fields reference UHMI System HMI, Device HMI, Alarm & Event HMI, and Evidence & Reports.
+- No UHMI command path is executed.
+
+UCDE Evidence Linkage:
+- UCDE Evidence Center
+- UHMI Evidence Context
+- Work Order Evidence
+- Task Evidence
+- Asset Evidence
+- Event Evidence
+- Acceptance Evidence
+- Validator Evidence
+- Release Evidence
+
+Report Linkage:
+- UMMS Maintenance Report
+- Work Order Summary Report
+- Engineer Dispatch Report
+- Customer Acceptance Report
+- Evidence Trace Report
+- Package Readiness Report
+
+Future execution path is recorded only:
+UMMS / UHMI -> CODE -> Policy Gate -> Approval -> Audit / UCDE -> LINK -> EDGE -> Device
