@@ -1,0 +1,26 @@
+{
+  "scope": "SERVER_PRECHECK_R2",
+  "passMarker": "ONE_SERVER_PRECHECK_R2_READONLY_ACCESS_WINDOW_PLAN_PASS",
+  "docs": ["AN_VANTARIS_ONE/SERVER_PRECHECK_R2.md"],
+  "registry": "AN_VANTARIS_ONE/registries/server-precheck-r2/server-precheck-r2.registry.json",
+  "validator": "scripts/validation/validate-server-precheck-r2-readonly-access-window-plan.py",
+  "buildStatus": "frontend build may pass with existing warnings only",
+  "forbiddenActionsNotExecuted": {
+    "readOnly": true,
+    "sshExecuted": false,
+    "deploymentExecuted": false,
+    "installExecuted": false,
+    "dbConnectionExecuted": false,
+    "dbMigrationExecuted": false,
+    "dbWriteEnabled": false,
+    "healthcheckRuntimeExecuted": false,
+    "nginxSetupExecuted": false,
+    "pm2SetupExecuted": false,
+    "systemdSetupExecuted": false,
+    "edgeCommandExecution": false,
+    "linkCommandExecution": false,
+    "deviceControlEnabled": false,
+    "productionActivation": false
+  }
+}
+

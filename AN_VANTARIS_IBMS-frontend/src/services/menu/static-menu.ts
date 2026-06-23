@@ -63,6 +63,12 @@ export const fallbackMenuItems: AppMenuItem[] = [
         source: 'static',
       },
       {
+        id: 'server-access-window-plan',
+        label: 'Server Access Window Plan',
+        path: '/one/server/access-window-plan',
+        source: 'static',
+      },
+      {
         id: 'code-policy-gate',
         label: 'CODE Policy Gate',
         path: '/one/code/policy-gate',
