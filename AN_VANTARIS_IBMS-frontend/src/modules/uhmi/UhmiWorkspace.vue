@@ -24,6 +24,7 @@ const section = ref<UhmiSectionPayload | null>(null)
 const workspace = ref<UhmiWorkspacePayload | null>(null)
 const loadError = ref('')
 const activeSectionKey = ref<UhmiSectionKey>('HMI_OVERVIEW')
+const activeRole = ref<'Customer' | 'Engineer' | 'Admin' | 'Operator'>('Customer')
 
 const fallbackSummaryCards = [
   { label: 'Systems Monitored', value: 6, tone: 'teal' },
@@ -69,6 +70,16 @@ const futureControlPath = computed(() =>
   workspace.value?.futureControlPath
   ?? 'UHMI -> CODE -> Policy Gate -> Approval -> Audit / UCDE -> LINK -> EDGE -> Device',
 )
+const roleViews = computed(() => workspace.value?.roleViews ?? [])
+const activeRoleView = computed(() =>
+  roleViews.value.find((role) => role.roleName === activeRole.value) ?? roleViews.value[0],
+)
+const roleVisibilityMatrix = computed(() => workspace.value?.roleVisibilityMatrix ?? [])
+const disabledActions = computed(() =>
+  workspace.value?.disabledActions
+  ?? ['Device Control', 'Runtime Activation', 'DB Write', 'EDGE Command', 'LINK Command', 'RBAC Mutation', 'Package State Mutation', 'Install/Rollback'],
+)
+const roleContextRows = computed(() => workspace.value?.roleContexts?.[activeRole.value] ?? [])
 
 function syncActiveFromRoute(): void {
   const matched = uhmiSections.find((item) => item.route === route.path)
@@ -318,6 +329,102 @@ onMounted(() => {
       </div>
       <el-button type="primary" disabled class="block-space">Future-only / Requires Policy Approval</el-button>
     </el-card>
+
+    <el-card shadow="never" class="block-space">
+      <template #header>
+        <div class="card-header">
+          <span>Role-based Workspace Views</span>
+          <div class="status-stack">
+            <el-tag type="success">Read-only role context</el-tag>
+            <el-tag type="success">No Real RBAC Mutation</el-tag>
+            <el-tag type="success">No Permission Write</el-tag>
+            <el-tag type="success">No Direct Device Control</el-tag>
+          </div>
+        </div>
+      </template>
+
+      <el-tabs v-model="activeRole" type="card">
+        <el-tab-pane label="Customer" name="Customer" />
+        <el-tab-pane label="Engineer" name="Engineer" />
+        <el-tab-pane label="Admin" name="Admin" />
+        <el-tab-pane label="Operator" name="Operator" />
+      </el-tabs>
+
+      <div v-if="activeRoleView" class="role-card">
+        <div>
+          <p class="eyebrow">{{ activeRoleView.roleId }}</p>
+          <h2>{{ activeRoleView.roleName }}</h2>
+          <p>{{ activeRoleView.purpose }}</p>
+        </div>
+        <el-tag type="success">{{ activeRoleView.readOnly ? 'readOnly = true' : 'review' }}</el-tag>
+      </div>
+
+      <el-row :gutter="12" class="block-space">
+        <el-col :span="12">
+          <el-card shadow="never" class="nested-panel">
+            <template #header>Visible Panels</template>
+            <el-tag v-for="item in activeRoleView?.visiblePanels || []" :key="item" class="tag-gap" type="success">
+              {{ item }}
+            </el-tag>
+          </el-card>
+        </el-col>
+        <el-col :span="12">
+          <el-card shadow="never" class="nested-panel">
+            <template #header>Hidden Panels / Guardrails</template>
+            <el-tag v-for="item in activeRoleView?.hiddenPanels || []" :key="item" class="tag-gap" type="info">
+              {{ item }}
+            </el-tag>
+            <el-tag v-for="item in activeRoleView?.guardrails || []" :key="item" class="tag-gap" type="success">
+              {{ item }}
+            </el-tag>
+          </el-card>
+        </el-col>
+      </el-row>
+    </el-card>
+
+    <el-card shadow="never" class="block-space">
+      <template #header>Role Visibility Matrix</template>
+      <el-table :data="roleVisibilityMatrix" border>
+        <el-table-column prop="workspaceArea" label="Workspace Area" min-width="190" />
+        <el-table-column prop="Customer" label="Customer" width="120" />
+        <el-table-column prop="Engineer" label="Engineer" width="120" />
+        <el-table-column prop="Admin" label="Admin" width="120" />
+        <el-table-column prop="Operator" label="Operator" width="120" />
+        <el-table-column prop="notes" label="Notes" min-width="260" />
+      </el-table>
+    </el-card>
+
+    <el-card shadow="never" class="block-space">
+      <template #header>Disabled Actions</template>
+      <div class="guardrail-grid">
+        <div v-for="item in disabledActions" :key="item" class="guardrail-pill">
+          <span>{{ item }}</span>
+          <el-tag type="success">Disabled</el-tag>
+        </div>
+      </div>
+      <el-alert
+        type="success"
+        show-icon
+        :closable="false"
+        title="No Runtime Activation, No DB Write, No RBAC Mutation, No Package State Mutation, No EDGE Command Execution, and No LINK Command Execution are exposed."
+        class="block-space"
+      />
+    </el-card>
+
+    <el-card shadow="never" class="block-space">
+      <template #header>{{ activeRole }} Context</template>
+      <el-table :data="roleContextRows" border>
+        <el-table-column prop="name" label="Context" min-width="220" />
+        <el-table-column prop="status" label="Status" min-width="180" />
+        <el-table-column prop="readOnly" label="readOnly" width="120" />
+      </el-table>
+      <div class="role-context-labels">
+        <span>Customer Context: Delivery Status / Acceptance Checklist / Evidence Records / Reports Snapshot</span>
+        <span>Engineer Context: Package Diagnostics / API Health / EDGE / LINK Health / DB Readiness / Offline Verification</span>
+        <span>Admin Context: Menu Visibility / Package Visibility / Role Matrix / Locked Modules / Entitlement Snapshot</span>
+        <span>Operator Context: Live Operations / Active Events / Device Status / Shift Handover / Event Context</span>
+      </div>
+    </el-card>
   </section>
 </template>
 
@@ -429,11 +536,32 @@ onMounted(() => {
 }
 
 .system-card,
-.mimic-card {
+.mimic-card,
+.role-card,
+.nested-panel {
   border: 1px solid #e2e8f0;
   border-radius: 6px;
   background: #fff;
   padding: 14px;
+}
+
+.role-card {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.role-card h2 {
+  margin: 0;
+}
+
+.role-card p {
+  color: #475569;
+}
+
+.tag-gap {
+  margin: 0 8px 8px 0;
 }
 
 .system-card__title,
@@ -496,6 +624,14 @@ onMounted(() => {
   background: #f8fafc;
   border: 1px solid #dbe4ea;
   color: #334155;
+  font-size: 13px;
+}
+
+.role-context-labels {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+  color: #475569;
   font-size: 13px;
 }
 </style>

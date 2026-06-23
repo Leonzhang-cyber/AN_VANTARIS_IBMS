@@ -13,6 +13,9 @@ from src.uhmi.uhmi_provider import (
     get_health,
     get_menu_ia,
     get_panels,
+    get_role_views,
+    get_role_visibility,
+    get_roles,
     get_section,
     get_status,
     get_systems,
@@ -79,3 +82,18 @@ def uhmi_r2b_evidence():
 @api_bp.route("/one/uconsole/uhmi/guardrails", methods=["GET"])
 def uhmi_r2b_guardrails():
     return jsonify(get_guardrails())
+
+
+@api_bp.route("/one/uconsole/uhmi/roles", methods=["GET"])
+def uhmi_r2c_roles():
+    return jsonify(get_roles())
+
+
+@api_bp.route("/one/uconsole/uhmi/role-views", methods=["GET"])
+def uhmi_r2c_role_views():
+    return jsonify(get_role_views())
+
+
+@api_bp.route("/one/uconsole/uhmi/role-visibility", methods=["GET"])
+def uhmi_r2c_role_visibility():
+    return jsonify(get_role_visibility())

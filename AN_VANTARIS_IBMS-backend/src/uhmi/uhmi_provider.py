@@ -30,6 +30,7 @@ FORBIDDEN_DIRECT_PATHS = [
 ]
 
 R2B_SCOPE = "UHMI_GA_R2B"
+R2C_SCOPE = "UHMI_GA_R2C"
 R2B_MODE = "read_only"
 R2B_VISUAL_STYLE = "VANTARIS_LIGHT_OPERATIONS_CONSOLE"
 FUTURE_CONTROL_PATH = "UHMI -> CODE -> Policy Gate -> Approval -> Audit / UCDE -> LINK -> EDGE -> Device"
@@ -274,6 +275,138 @@ EVIDENCE_CONTEXTS: list[dict[str, Any]] = [
     },
 ]
 
+ROLES = ["Customer", "Engineer", "Admin", "Operator"]
+ROLE_VIEWS: list[dict[str, Any]] = [
+    {
+        "roleId": "customer",
+        "roleName": "Customer",
+        "purpose": "Customer acceptance, delivery review, and business-readable operations status.",
+        "visiblePanels": [
+            "Delivery Status",
+            "Acceptance Checklist",
+            "System Health Summary",
+            "Read-only UHMI Panels",
+            "Evidence Records",
+            "Reports Snapshot",
+        ],
+        "hiddenPanels": ["Package Diagnostics", "API Health", "Menu Management", "Locked Modules"],
+        "disabledActions": ["Device Control", "Runtime Activation", "DB Write", "EDGE Command", "LINK Command"],
+        "guardrails": ["Read-only Mode", "No Direct Device Control", "No Permission Write"],
+        "readOnly": True,
+    },
+    {
+        "roleId": "engineer",
+        "roleName": "Engineer",
+        "purpose": "Engineer installation review, inspection, diagnostics, troubleshooting, and delivery verification.",
+        "visiblePanels": [
+            "Package Diagnostics",
+            "API Health",
+            "EDGE / LINK Health",
+            "DB Readiness",
+            "Offline Verification",
+            "System Context Panels",
+            "Device Context Table",
+            "Guardrails",
+        ],
+        "hiddenPanels": ["Menu Management", "Entitlement Snapshot"],
+        "disabledActions": ["Install/Rollback", "DB Write", "EDGE Command", "LINK Command", "Device Control"],
+        "guardrails": ["Read-only Mode", "No EDGE Command Execution", "No LINK Command Execution"],
+        "readOnly": True,
+    },
+    {
+        "roleId": "admin",
+        "roleName": "Admin",
+        "purpose": "Administrator read-only review of menu visibility, package status, and role context matrix.",
+        "visiblePanels": [
+            "Menu Visibility Matrix",
+            "Package Visibility",
+            "Role Matrix",
+            "Workspace Availability",
+            "Locked Modules",
+            "Entitlement Snapshot",
+            "Guardrail Policy Summary",
+        ],
+        "hiddenPanels": ["Device Control", "Runtime Activation"],
+        "disabledActions": ["RBAC Mutation", "Permission Write", "Package Enable/Disable", "Install/Rollback"],
+        "guardrails": ["No Real RBAC Mutation", "No Permission Write", "No Package State Mutation"],
+        "readOnly": True,
+    },
+    {
+        "roleId": "operator",
+        "roleName": "Operator",
+        "purpose": "Daily operations status, event awareness, device status, and shift handover context.",
+        "visiblePanels": [
+            "Live Operations Summary",
+            "Active Events",
+            "Device Status",
+            "System Panels",
+            "Event Context",
+            "Shift Handover Snapshot",
+            "Guardrails",
+        ],
+        "hiddenPanels": ["Package Diagnostics", "Menu Management", "DB Readiness"],
+        "disabledActions": ["Device Control", "Runtime Activation", "DB Write", "EDGE Command", "LINK Command"],
+        "guardrails": ["Read-only Mode", "No Direct Device Control", "Future Control Path"],
+        "readOnly": True,
+    },
+]
+
+ROLE_VISIBILITY_MATRIX: list[dict[str, Any]] = [
+    {"workspaceArea": "UHMI Overview", "Customer": "visible", "Engineer": "visible", "Admin": "visible", "Operator": "visible", "notes": "Business-safe summary for all roles."},
+    {"workspaceArea": "System Panels", "Customer": "summary", "Engineer": "visible", "Admin": "visible", "Operator": "visible", "notes": "Read-only context only."},
+    {"workspaceArea": "Device Panels", "Customer": "summary", "Engineer": "visible", "Admin": "visible", "Operator": "visible", "notes": "No direct control."},
+    {"workspaceArea": "Mimic Panels", "Customer": "summary", "Engineer": "visible", "Admin": "visible", "Operator": "visible", "notes": "Read-only preview only."},
+    {"workspaceArea": "Status View", "Customer": "visible", "Engineer": "visible", "Admin": "visible", "Operator": "visible", "notes": "Static role context."},
+    {"workspaceArea": "Event Context", "Customer": "summary", "Engineer": "visible", "Admin": "visible", "Operator": "visible", "notes": "No acknowledge action."},
+    {"workspaceArea": "Evidence Context", "Customer": "visible", "Engineer": "visible", "Admin": "visible", "Operator": "summary", "notes": "View-only evidence references."},
+    {"workspaceArea": "Delivery Status", "Customer": "visible", "Engineer": "visible", "Admin": "summary", "Operator": "hidden", "notes": "Acceptance and delivery context."},
+    {"workspaceArea": "Package Diagnostics", "Customer": "hidden", "Engineer": "visible", "Admin": "summary", "Operator": "hidden", "notes": "No install or rollback."},
+    {"workspaceArea": "Menu Management", "Customer": "hidden", "Engineer": "hidden", "Admin": "visible", "Operator": "hidden", "notes": "Read-only matrix; no permission write."},
+    {"workspaceArea": "Guardrails", "Customer": "visible", "Engineer": "visible", "Admin": "visible", "Operator": "visible", "notes": "Always visible."},
+    {"workspaceArea": "Future Control Path", "Customer": "summary", "Engineer": "visible", "Admin": "visible", "Operator": "summary", "notes": "Future-only; requires policy approval."},
+]
+
+DISABLED_ACTIONS = [
+    "Device Control",
+    "Runtime Activation",
+    "DB Write",
+    "EDGE Command",
+    "LINK Command",
+    "RBAC Mutation",
+    "Package State Mutation",
+    "Install/Rollback",
+]
+
+ROLE_CONTEXTS: dict[str, list[dict[str, Any]]] = {
+    "Customer": [
+        {"name": "Delivery Status", "status": "ready_for_review", "readOnly": True},
+        {"name": "Acceptance Checklist", "status": "available", "readOnly": True},
+        {"name": "Evidence Records", "status": "linked", "readOnly": True},
+        {"name": "Reports Snapshot", "status": "available", "readOnly": True},
+    ],
+    "Engineer": [
+        {"name": "Package Diagnostics", "status": "visible", "readOnly": True},
+        {"name": "API Health", "status": "visible", "readOnly": True},
+        {"name": "EDGE / LINK Health", "status": "visible", "readOnly": True},
+        {"name": "DB Readiness", "status": "visible", "readOnly": True},
+        {"name": "Offline Verification", "status": "available", "readOnly": True},
+    ],
+    "Admin": [
+        {"name": "Menu Visibility", "status": "visible", "readOnly": True},
+        {"name": "Package Visibility", "status": "visible", "readOnly": True},
+        {"name": "Role Matrix", "status": "visible", "readOnly": True},
+        {"name": "Locked Modules", "status": "visible", "readOnly": True},
+        {"name": "Entitlement Snapshot", "status": "visible", "readOnly": True},
+    ],
+    "Operator": [
+        {"name": "Live Operations", "status": "visible", "readOnly": True},
+        {"name": "Active Events", "status": "visible", "readOnly": True},
+        {"name": "Device Status", "status": "visible", "readOnly": True},
+        {"name": "Shift Handover", "status": "available", "readOnly": True},
+        {"name": "Event Context", "status": "visible", "readOnly": True},
+    ],
+}
+
 
 def _now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
@@ -304,6 +437,23 @@ def _guardrails() -> dict[str, Any]:
         "futureControlledActionExecuted": False,
         "futureControlPath": FUTURE_CONTROL_PATH,
     }
+
+
+def _role_guardrails() -> dict[str, Any]:
+    data = _guardrails()
+    data.update(
+        {
+            "scope": R2C_SCOPE,
+            "roleContextOnly": True,
+            "realRbacMutation": False,
+            "permissionWrite": False,
+            "packageStateMutation": False,
+            "installExecution": False,
+            "rollbackExecution": False,
+            "roles": ROLES,
+        }
+    )
+    return data
 
 
 def _section(key: str, label: str, route: str, purpose: str, rows: list[dict[str, Any]]) -> dict[str, Any]:
@@ -384,8 +534,12 @@ def get_workspace() -> dict[str, Any]:
         "eventContexts": EVENT_CONTEXTS,
         "evidenceContexts": EVIDENCE_CONTEXTS,
         "guardrails": get_guardrails()["guardrails"],
+        "roleViews": ROLE_VIEWS,
+        "roleVisibilityMatrix": ROLE_VISIBILITY_MATRIX,
+        "disabledActions": DISABLED_ACTIONS,
+        "roleContexts": ROLE_CONTEXTS,
     }
-    data.update(_guardrails())
+    data.update(_role_guardrails())
     return data
 
 
@@ -452,6 +606,35 @@ def get_guardrails() -> dict[str, Any]:
         "futureControlStatus": "Future-only / Requires Policy Approval",
     }
     data.update(_guardrails())
+    return data
+
+
+def get_roles() -> dict[str, Any]:
+    data: dict[str, Any] = {
+        "roles": ROLES,
+        "roleViews": ROLE_VIEWS,
+        "roleContextOnly": True,
+    }
+    data.update(_role_guardrails())
+    return data
+
+
+def get_role_views() -> dict[str, Any]:
+    data: dict[str, Any] = {
+        "roleViews": ROLE_VIEWS,
+        "roleContexts": ROLE_CONTEXTS,
+        "disabledActions": DISABLED_ACTIONS,
+    }
+    data.update(_role_guardrails())
+    return data
+
+
+def get_role_visibility() -> dict[str, Any]:
+    data: dict[str, Any] = {
+        "roleVisibilityMatrix": ROLE_VISIBILITY_MATRIX,
+        "disabledActions": DISABLED_ACTIONS,
+    }
+    data.update(_role_guardrails())
     return data
 
 

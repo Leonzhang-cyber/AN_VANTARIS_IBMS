@@ -1,0 +1,67 @@
+{
+  "scope": "UHMI_GA_R2C",
+  "taskId": "UHMI-GA-R2C",
+  "status": "frozen_local_skeleton",
+  "mode": "read_only",
+  "visualStyle": "VANTARIS_LIGHT_OPERATIONS_CONSOLE",
+  "baseline": "UHMI-GA-R2B",
+  "roles": [
+    "Customer",
+    "Engineer",
+    "Admin",
+    "Operator"
+  ],
+  "roleViews": [
+    "Customer View",
+    "Engineer View",
+    "Admin View",
+    "Operator View"
+  ],
+  "roleVisibilityMatrix": [
+    "UHMI Overview",
+    "System Panels",
+    "Device Panels",
+    "Mimic Panels",
+    "Status View",
+    "Event Context",
+    "Evidence Context",
+    "Delivery Status",
+    "Package Diagnostics",
+    "Menu Management",
+    "Guardrails",
+    "Future Control Path"
+  ],
+  "disabledActions": [
+    "Device Control",
+    "Runtime Activation",
+    "DB Write",
+    "EDGE Command",
+    "LINK Command",
+    "RBAC Mutation",
+    "Package State Mutation",
+    "Install/Rollback"
+  ],
+  "apiEndpoints": [
+    "GET /api/one/uconsole/uhmi/roles",
+    "GET /api/one/uconsole/uhmi/role-views",
+    "GET /api/one/uconsole/uhmi/role-visibility",
+    "GET /api/one/uconsole/uhmi/workspace"
+  ],
+  "guardrails": {
+    "roleContextOnly": true,
+    "realRbacMutation": false,
+    "permissionWrite": false,
+    "packageStateMutation": false,
+    "controlEnabled": false,
+    "runtimeActivation": false,
+    "deviceWrite": false,
+    "dbWrite": false,
+    "edgeCommandExecution": false,
+    "linkCommandExecution": false,
+    "installExecution": false,
+    "rollbackExecution": false
+  },
+  "futureControlPath": "UHMI -> CODE -> Policy Gate -> Approval -> Audit / UCDE -> LINK -> EDGE -> Device",
+  "validationPassMarker": "UHMI_GA_R2C_ROLE_BASED_WORKSPACE_VIEWS_PASS"
+}
+

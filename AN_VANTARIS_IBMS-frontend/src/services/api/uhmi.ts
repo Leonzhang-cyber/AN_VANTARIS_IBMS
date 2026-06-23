@@ -142,6 +142,28 @@ export interface UhmiGuardrail {
   active: boolean
 }
 
+export interface UhmiRoleView {
+  roleId: string
+  roleName: 'Customer' | 'Engineer' | 'Admin' | 'Operator'
+  purpose: string
+  visiblePanels: string[]
+  hiddenPanels: string[]
+  disabledActions: string[]
+  guardrails: string[]
+  readOnly: boolean
+}
+
+export interface UhmiRoleVisibilityRow {
+  workspaceArea: string
+  Customer: string
+  Engineer: string
+  Admin: string
+  Operator: string
+  notes: string
+}
+
+export type UhmiRoleContexts = Record<string, Array<{ name: string; status: string; readOnly: boolean }>>
+
 export interface UhmiWorkspacePayload {
   scope: 'UHMI_GA_R2B'
   mode: 'read_only'
@@ -163,6 +185,17 @@ export interface UhmiWorkspacePayload {
   eventContexts: UhmiEventContext[]
   evidenceContexts: UhmiEvidenceContext[]
   guardrails: UhmiGuardrail[]
+  roles: string[]
+  roleContextOnly: boolean
+  realRbacMutation: boolean
+  permissionWrite: boolean
+  packageStateMutation: boolean
+  installExecution: boolean
+  rollbackExecution: boolean
+  roleViews: UhmiRoleView[]
+  roleVisibilityMatrix: UhmiRoleVisibilityRow[]
+  disabledActions: string[]
+  roleContexts: UhmiRoleContexts
 }
 
 export const uhmiSections: UhmiMenuItem[] = [
