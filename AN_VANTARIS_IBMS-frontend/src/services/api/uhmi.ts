@@ -165,9 +165,12 @@ export interface UhmiRoleVisibilityRow {
 export type UhmiRoleContexts = Record<string, Array<{ name: string; status: string; readOnly: boolean }>>
 
 export interface UhmiWorkspacePayload {
-  scope: 'UHMI_GA_R2B'
+  scope: 'UHMI_GA_R2B' | 'UHMI_GA_R2C' | 'UHMI_GA_R2D'
   mode: 'read_only'
   visualStyle: 'VANTARIS_LIGHT_OPERATIONS_CONSOLE'
+  visualPolishFreeze?: boolean
+  lightConsoleStyleFreeze?: boolean
+  styleTokens?: string[]
   workspaceName: string
   baseline: string
   controlEnabled: boolean

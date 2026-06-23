@@ -1,0 +1,80 @@
+{
+  "scope": "UHMI_GA_R2D",
+  "taskId": "UHMI-GA-R2D",
+  "status": "frozen_local_visual_skeleton",
+  "mode": "read_only",
+  "visualStyle": "VANTARIS_LIGHT_OPERATIONS_CONSOLE",
+  "baseline": "UHMI-GA-R2C",
+  "visualPolishFreeze": true,
+  "lightConsoleStyleFreeze": true,
+  "styleTokens": [
+    "light app shell",
+    "white rounded cards",
+    "soft shadow",
+    "pale mint background",
+    "teal primary accent",
+    "green-teal action color",
+    "pill tabs",
+    "light sidebar alignment",
+    "pastel icon blocks",
+    "soft status badges",
+    "clean table layout",
+    "compact enterprise operations density"
+  ],
+  "styledComponents": [
+    "UHMI Workspace Header",
+    "Overview Metric Cards",
+    "L3 Pill Tabs",
+    "System Context Cards",
+    "Device Context Table",
+    "Mimic Panel Preview Cards",
+    "Event Context Cards",
+    "Evidence Context Cards",
+    "Role Selector",
+    "Role Visibility Matrix",
+    "Disabled Actions Panel",
+    "Guardrails Panel",
+    "Future Control Path Panel"
+  ],
+  "preservedReadOnlyBoundaries": {
+    "controlEnabled": false,
+    "runtimeActivation": false,
+    "deviceWrite": false,
+    "dbWrite": false,
+    "edgeCommandExecution": false,
+    "linkCommandExecution": false,
+    "realRbacMutation": false,
+    "permissionWrite": false,
+    "packageStateMutation": false
+  },
+  "forbiddenVisualPatterns": [
+    "UFMS deep blue theme",
+    "深蓝色主题",
+    "dark SCADA dashboard",
+    "SCADA replacement",
+    "HMI Server",
+    "industrial dark control room",
+    "high-saturation dark console"
+  ],
+  "apiEndpoints": [
+    "GET /api/one/uconsole/uhmi/workspace",
+    "GET /api/one/uconsole/uhmi/status",
+    "GET /api/one/uconsole/uhmi/panels",
+    "GET /api/one/uconsole/uhmi/roles",
+    "GET /api/one/uconsole/uhmi/role-views",
+    "GET /api/one/uconsole/uhmi/role-visibility"
+  ],
+  "guardrails": [
+    "Read-only Mode",
+    "No Direct Device Control",
+    "No Runtime Activation",
+    "No DB Write",
+    "No EDGE Command Execution",
+    "No LINK Command Execution",
+    "No RBAC Mutation",
+    "No Package State Mutation"
+  ],
+  "futureControlPath": "UHMI -> CODE -> Policy Gate -> Approval -> Audit / UCDE -> LINK -> EDGE -> Device",
+  "validationPassMarker": "UHMI_GA_R2D_WORKSPACE_VISUAL_POLISH_LIGHT_CONSOLE_STYLE_PASS"
+}
+

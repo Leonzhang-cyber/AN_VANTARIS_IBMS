@@ -80,6 +80,10 @@ const disabledActions = computed(() =>
   ?? ['Device Control', 'Runtime Activation', 'DB Write', 'EDGE Command', 'LINK Command', 'RBAC Mutation', 'Package State Mutation', 'Install/Rollback'],
 )
 const roleContextRows = computed(() => workspace.value?.roleContexts?.[activeRole.value] ?? [])
+const styleTokens = computed(() =>
+  workspace.value?.styleTokens
+  ?? ['light app shell', 'white rounded cards', 'soft shadow', 'pale mint background', 'teal primary accent', 'pill tabs', 'pastel icon blocks', 'soft status badges', 'clean table layout'],
+)
 
 function syncActiveFromRoute(): void {
   const matched = uhmiSections.find((item) => item.route === route.path)
@@ -134,11 +138,12 @@ onMounted(() => {
 </script>
 
 <template>
-  <section class="uhmi-page">
-    <header class="uhmi-hero">
+  <section class="uhmi-page light-app-shell pale-mint-background clean-table-layout">
+    <header class="uhmi-hero white-rounded-card soft-shadow teal-accent-card">
       <div>
         <p class="eyebrow">VANTARIS ONE / UConsole</p>
         <h1>UHMI Workspace</h1>
+        <p class="style-chip">VANTARIS_LIGHT_OPERATIONS_CONSOLE</p>
         <p class="hero-copy">
           Unified Human-Machine Interface read-only workspace for cross-industry operations context.
           Device/System data flows through EDGE, LINK, and CODE before reaching UConsole/UHMI.
@@ -148,9 +153,15 @@ onMounted(() => {
         <el-tag type="success">GET only</el-tag>
         <el-tag type="success">Read-only Mode</el-tag>
         <el-tag type="success">No Direct Device Control</el-tag>
+        <el-tag type="info">No Runtime Activation</el-tag>
+        <el-tag type="info">No DB Write</el-tag>
         <el-tag type="info">UConsole workspace</el-tag>
       </div>
     </header>
+
+    <div class="style-token-row">
+      <span v-for="token in styleTokens" :key="token" class="style-token">{{ token }}</span>
+    </div>
 
     <el-alert
       v-if="loadError"
@@ -163,17 +174,18 @@ onMounted(() => {
 
     <el-row :gutter="16" class="block-space">
       <el-col v-for="card in summaryCards" :key="card.label" :span="4">
-        <el-card shadow="never" class="metric-card">
+        <el-card shadow="never" class="metric-card white-rounded-card soft-shadow pastel-icon-blocks soft-status-badges">
           <div class="metric-card__icon" :class="`metric-card__icon--${card.tone}`">{{ card.label.slice(0, 1) }}</div>
           <div>
             <div class="metric-value">{{ card.value }}</div>
             <div class="metric-label">{{ card.label }}</div>
           </div>
+          <el-tag size="small" type="success" class="metric-card__badge">read-only</el-tag>
         </el-card>
       </el-col>
     </el-row>
 
-    <el-card v-loading="loading" shadow="never" class="block-space">
+    <el-card v-loading="loading" shadow="never" class="block-space white-rounded-card soft-shadow">
       <template #header>
         <div class="card-header">
           <span>UHMI workspace sections</span>
@@ -181,7 +193,7 @@ onMounted(() => {
         </div>
       </template>
 
-      <el-tabs :model-value="activeSectionKey" @tab-change="(name: unknown) => selectSection(name as UhmiSectionKey)">
+      <el-tabs class="pill-tabs l3-pill-tabs" :model-value="activeSectionKey" @tab-change="(name: unknown) => selectSection(name as UhmiSectionKey)">
         <el-tab-pane
           v-for="item in uhmiSections"
           :key="item.key"
@@ -206,9 +218,9 @@ onMounted(() => {
       </el-descriptions>
     </el-card>
 
-    <el-card shadow="never" class="block-space">
+    <el-card shadow="never" class="block-space white-rounded-card soft-shadow table-shell">
       <template #header>Read-only projection rows</template>
-      <el-table :data="section?.rows || []" border>
+      <el-table class="operations-table" :data="section?.rows || []" border>
         <el-table-column prop="name" label="Name" min-width="220" />
         <el-table-column prop="state" label="State" min-width="150" />
         <el-table-column prop="source" label="Source" min-width="220" />
@@ -216,7 +228,7 @@ onMounted(() => {
       </el-table>
     </el-card>
 
-    <el-card shadow="never" class="block-space">
+    <el-card shadow="never" class="block-space white-rounded-card soft-shadow">
       <template #header>
         <div class="card-header">
           <span>System Context</span>
@@ -224,7 +236,7 @@ onMounted(() => {
         </div>
       </template>
       <div class="system-grid">
-        <div v-for="item in systemContexts" :key="item.systemId" class="system-card">
+        <div v-for="item in systemContexts" :key="item.systemId" class="system-card white-rounded-card soft-shadow">
           <div class="system-card__title">
             <span>{{ item.systemName }}</span>
             <el-tag type="success">{{ item.healthStatus }}</el-tag>
@@ -236,13 +248,14 @@ onMounted(() => {
             <span>{{ item.panelCount }} panels</span>
             <span>{{ item.evidenceCount }} evidence</span>
           </div>
+          <el-tag size="small" type="success" class="block-space">read-only</el-tag>
         </div>
       </div>
     </el-card>
 
-    <el-card shadow="never" class="block-space">
+    <el-card shadow="never" class="block-space white-rounded-card soft-shadow table-shell">
       <template #header>Device Context</template>
-      <el-table :data="deviceContexts" border>
+      <el-table class="operations-table" :data="deviceContexts" border>
         <el-table-column prop="deviceId" label="deviceId" min-width="180" />
         <el-table-column prop="deviceName" label="deviceName" min-width="180" />
         <el-table-column prop="systemName" label="systemName" min-width="170" />
@@ -255,24 +268,26 @@ onMounted(() => {
       </el-table>
     </el-card>
 
-    <el-card shadow="never" class="block-space">
+    <el-card shadow="never" class="block-space white-rounded-card soft-shadow">
       <template #header>Mimic Panel Preview</template>
       <div class="mimic-grid">
-        <div v-for="item in mimicPanels" :key="item.panelId" class="mimic-card">
+        <div v-for="item in mimicPanels" :key="item.panelId" class="mimic-card white-rounded-card soft-shadow">
           <div class="mimic-card__bar"></div>
           <h3>{{ item.panelName }}</h3>
           <p>{{ item.systemName }}</p>
           <div class="mimic-card__footer">
             <el-tag type="info">{{ item.previewType }}</el-tag>
+            <el-tag type="success">{{ item.readOnly ? 'readOnly' : 'review' }}</el-tag>
             <el-tag type="success">{{ item.controlsDisabled ? 'controls disabled' : 'review' }}</el-tag>
           </div>
+          <el-button type="primary" disabled class="block-space">future-only disabled control placeholder</el-button>
         </div>
       </div>
     </el-card>
 
-    <el-card shadow="never" class="block-space">
+    <el-card shadow="never" class="block-space white-rounded-card soft-shadow table-shell">
       <template #header>Event Context</template>
-      <el-table :data="eventContexts" border>
+      <el-table class="operations-table" :data="eventContexts" border>
         <el-table-column prop="eventId" label="eventId" min-width="150" />
         <el-table-column prop="severity" label="severity" width="120" />
         <el-table-column prop="title" label="title" min-width="220" />
@@ -284,9 +299,9 @@ onMounted(() => {
       </el-table>
     </el-card>
 
-    <el-card shadow="never" class="block-space">
+    <el-card shadow="never" class="block-space white-rounded-card soft-shadow table-shell">
       <template #header>Evidence Context</template>
-      <el-table :data="evidenceContexts" border>
+      <el-table class="operations-table" :data="evidenceContexts" border>
         <el-table-column prop="evidenceId" label="evidenceId" min-width="150" />
         <el-table-column prop="type" label="type" min-width="150" />
         <el-table-column prop="linkedObject" label="linkedObject" min-width="190" />
@@ -297,7 +312,7 @@ onMounted(() => {
       </el-table>
     </el-card>
 
-    <el-card shadow="never" class="block-space">
+    <el-card shadow="never" class="block-space white-rounded-card soft-shadow">
       <template #header>Guardrails</template>
       <div class="guardrail-grid">
         <div v-for="item in r2bGuardrails" :key="item.label" class="guardrail-pill">
@@ -322,7 +337,7 @@ onMounted(() => {
       />
     </el-card>
 
-    <el-card shadow="never" class="block-space">
+    <el-card shadow="never" class="block-space white-rounded-card soft-shadow">
       <template #header>Future Control Path</template>
       <div class="future-path">
         <span v-for="step in futureControlPath.split(' -> ')" :key="step">{{ step }}</span>
@@ -330,7 +345,7 @@ onMounted(() => {
       <el-button type="primary" disabled class="block-space">Future-only / Requires Policy Approval</el-button>
     </el-card>
 
-    <el-card shadow="never" class="block-space">
+    <el-card shadow="never" class="block-space white-rounded-card soft-shadow">
       <template #header>
         <div class="card-header">
           <span>Role-based Workspace Views</span>
@@ -343,7 +358,7 @@ onMounted(() => {
         </div>
       </template>
 
-      <el-tabs v-model="activeRole" type="card">
+      <el-tabs v-model="activeRole" class="pill-tabs role-selector" type="card">
         <el-tab-pane label="Customer" name="Customer" />
         <el-tab-pane label="Engineer" name="Engineer" />
         <el-tab-pane label="Admin" name="Admin" />
@@ -382,9 +397,9 @@ onMounted(() => {
       </el-row>
     </el-card>
 
-    <el-card shadow="never" class="block-space">
+    <el-card shadow="never" class="block-space white-rounded-card soft-shadow table-shell">
       <template #header>Role Visibility Matrix</template>
-      <el-table :data="roleVisibilityMatrix" border>
+      <el-table class="operations-table" :data="roleVisibilityMatrix" border>
         <el-table-column prop="workspaceArea" label="Workspace Area" min-width="190" />
         <el-table-column prop="Customer" label="Customer" width="120" />
         <el-table-column prop="Engineer" label="Engineer" width="120" />
@@ -394,7 +409,7 @@ onMounted(() => {
       </el-table>
     </el-card>
 
-    <el-card shadow="never" class="block-space">
+    <el-card shadow="never" class="block-space white-rounded-card soft-shadow">
       <template #header>Disabled Actions</template>
       <div class="guardrail-grid">
         <div v-for="item in disabledActions" :key="item" class="guardrail-pill">
@@ -411,9 +426,9 @@ onMounted(() => {
       />
     </el-card>
 
-    <el-card shadow="never" class="block-space">
+    <el-card shadow="never" class="block-space white-rounded-card soft-shadow table-shell">
       <template #header>{{ activeRole }} Context</template>
-      <el-table :data="roleContextRows" border>
+      <el-table class="operations-table" :data="roleContextRows" border>
         <el-table-column prop="name" label="Context" min-width="220" />
         <el-table-column prop="status" label="Status" min-width="180" />
         <el-table-column prop="readOnly" label="readOnly" width="120" />
@@ -431,6 +446,37 @@ onMounted(() => {
 <style scoped>
 .uhmi-page {
   padding: 24px;
+  min-height: 100%;
+  background:
+    radial-gradient(circle at top left, rgba(204, 251, 241, 0.55), transparent 32%),
+    linear-gradient(180deg, #f8fafc 0%, #f1f5f4 100%);
+}
+
+.light-app-shell {
+  color: #1f2937;
+}
+
+.pale-mint-background {
+  background-color: #f4fbf8;
+}
+
+.white-rounded-card {
+  border: 1px solid #dbe8e3;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.96);
+}
+
+.soft-shadow {
+  box-shadow: 0 12px 30px rgba(15, 118, 110, 0.08);
+}
+
+.teal-accent-card {
+  border-left: 4px solid #14b8a6;
+}
+
+.clean-table-layout {
+  --uhmi-table-border: #e2e8f0;
+  --uhmi-table-header: #f8fafc;
 }
 
 .uhmi-hero,
@@ -442,12 +488,44 @@ onMounted(() => {
   align-items: flex-start;
 }
 
+.uhmi-hero {
+  padding: 20px;
+}
+
 .eyebrow {
   margin: 0 0 8px;
   color: #64748b;
   font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
+}
+
+.style-chip {
+  display: inline-flex;
+  margin: 10px 0 0;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #ecfeff;
+  color: #0f766e;
+  border: 1px solid #99f6e4;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.style-token-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.style-token {
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid #dbe8e3;
+  background: #ffffff;
+  color: #475569;
+  font-size: 12px;
 }
 
 .uhmi-hero h1,
@@ -486,12 +564,28 @@ onMounted(() => {
 
 .metric-card {
   min-height: 92px;
+  position: relative;
+  overflow: hidden;
 }
 
 .metric-card :deep(.el-card__body) {
   display: flex;
   gap: 12px;
   align-items: center;
+}
+
+.metric-card__badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.pastel-icon-blocks {
+  background: linear-gradient(180deg, #ffffff, #fbfefd);
+}
+
+.soft-status-badges :deep(.el-tag) {
+  border-radius: 999px;
 }
 
 .metric-card__icon {
@@ -527,6 +621,37 @@ onMounted(() => {
   background: #d1fae5;
 }
 
+.pill-tabs :deep(.el-tabs__header) {
+  margin-bottom: 14px;
+}
+
+.pill-tabs :deep(.el-tabs__nav) {
+  border: 0;
+  gap: 8px;
+}
+
+.pill-tabs :deep(.el-tabs__item) {
+  border: 1px solid #dbe8e3;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #475569;
+  height: 34px;
+  line-height: 34px;
+  margin-right: 8px;
+}
+
+.pill-tabs :deep(.el-tabs__item.is-active) {
+  background: #ccfbf1;
+  color: #0f766e;
+  border-color: #5eead4;
+  font-weight: 700;
+}
+
+.l3-pill-tabs,
+.role-selector {
+  --el-color-primary: #0f766e;
+}
+
 .system-grid,
 .mimic-grid,
 .guardrail-grid {
@@ -539,9 +664,6 @@ onMounted(() => {
 .mimic-card,
 .role-card,
 .nested-panel {
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
-  background: #fff;
   padding: 14px;
 }
 
@@ -599,6 +721,26 @@ onMounted(() => {
   border: 1px solid #ccfbf1;
 }
 
+.table-shell :deep(.el-card__body) {
+  padding-top: 12px;
+}
+
+.operations-table {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--uhmi-table-border);
+}
+
+.operations-table :deep(th.el-table__cell) {
+  background: var(--uhmi-table-header);
+  color: #334155;
+  font-weight: 700;
+}
+
+.operations-table :deep(td.el-table__cell) {
+  padding: 10px 0;
+}
+
 .guardrail-pill {
   display: flex;
   min-height: 48px;
@@ -607,7 +749,7 @@ onMounted(() => {
   gap: 12px;
   padding: 10px 12px;
   border: 1px solid #e2e8f0;
-  border-radius: 6px;
+  border-radius: 10px;
   background: #fff;
 }
 

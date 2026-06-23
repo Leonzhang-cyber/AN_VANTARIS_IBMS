@@ -31,9 +31,24 @@ FORBIDDEN_DIRECT_PATHS = [
 
 R2B_SCOPE = "UHMI_GA_R2B"
 R2C_SCOPE = "UHMI_GA_R2C"
+R2D_SCOPE = "UHMI_GA_R2D"
 R2B_MODE = "read_only"
 R2B_VISUAL_STYLE = "VANTARIS_LIGHT_OPERATIONS_CONSOLE"
 FUTURE_CONTROL_PATH = "UHMI -> CODE -> Policy Gate -> Approval -> Audit / UCDE -> LINK -> EDGE -> Device"
+STYLE_TOKENS = [
+    "light app shell",
+    "white rounded cards",
+    "soft shadow",
+    "pale mint background",
+    "teal primary accent",
+    "green-teal action color",
+    "pill tabs",
+    "light sidebar alignment",
+    "pastel icon blocks",
+    "soft status badges",
+    "clean table layout",
+    "compact enterprise operations density",
+]
 R2B_PANELS = [
     "Overview",
     "System Panels",
@@ -443,7 +458,7 @@ def _role_guardrails() -> dict[str, Any]:
     data = _guardrails()
     data.update(
         {
-            "scope": R2C_SCOPE,
+            "scope": R2D_SCOPE,
             "roleContextOnly": True,
             "realRbacMutation": False,
             "permissionWrite": False,
@@ -451,6 +466,9 @@ def _role_guardrails() -> dict[str, Any]:
             "installExecution": False,
             "rollbackExecution": False,
             "roles": ROLES,
+            "visualPolishFreeze": True,
+            "lightConsoleStyleFreeze": True,
+            "styleTokens": STYLE_TOKENS,
         }
     )
     return data
