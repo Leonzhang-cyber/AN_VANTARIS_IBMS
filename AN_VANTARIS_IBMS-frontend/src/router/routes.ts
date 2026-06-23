@@ -8,6 +8,7 @@ import IntegrationSettingsView from '@/modules/system/IntegrationSettingsView.vu
 import NotificationSettingsView from '@/modules/system/NotificationSettingsView.vue'
 import PermissionListView from '@/modules/system/PermissionListView.vue'
 import PlatformOperationsDashboard from '@/modules/console/PlatformOperationsDashboard.vue'
+import ServerPrecheckAudit from '@/modules/server/ServerPrecheckAudit.vue'
 import CodePolicyGate from '@/modules/code/CodePolicyGate.vue'
 import NexusBranchAudit from '@/modules/nexus/NexusBranchAudit.vue'
 import ReportsView from '@/modules/reports/ReportsView.vue'
@@ -110,6 +111,12 @@ export const routes: RouteRecordRaw[] = [
     name: 'console-operations',
     component: PlatformOperationsDashboard,
     meta: { requiresAuth: true, title: 'Platform Operations', layout: true },
+  },
+  {
+    path: '/one/server/precheck',
+    name: 'server-precheck-audit',
+    component: ServerPrecheckAudit,
+    meta: { requiresAuth: true, title: 'Server Precheck', layout: true },
   },
   {
     path: '/one/code/policy-gate',

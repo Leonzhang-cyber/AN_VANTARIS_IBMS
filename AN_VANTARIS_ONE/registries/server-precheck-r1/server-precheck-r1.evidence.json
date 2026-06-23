@@ -1,0 +1,46 @@
+{
+  "scope": "SERVER_PRECHECK_R1",
+  "passMarker": "ONE_SERVER_PRECHECK_R1_DUAL_SERVER_READONLY_AUDIT_PASS",
+  "createdFiles": [
+    "AN_VANTARIS_IBMS-backend/src/server_precheck/__init__.py",
+    "AN_VANTARIS_IBMS-backend/src/server_precheck/server_precheck_provider.py",
+    "AN_VANTARIS_IBMS-backend/src/server_precheck/server_precheck_service.py",
+    "AN_VANTARIS_IBMS-backend/src/api/server_precheck/__init__.py",
+    "AN_VANTARIS_IBMS-backend/src/api/server_precheck/server_precheck_api.py",
+    "AN_VANTARIS_IBMS-frontend/src/services/api/serverPrecheck.ts",
+    "AN_VANTARIS_IBMS-frontend/src/modules/server/ServerPrecheckAudit.vue",
+    "AN_VANTARIS_ONE/SERVER_PRECHECK_R1.md",
+    "scripts/validation/validate-server-precheck-r1-dual-server-readonly-audit.py"
+  ],
+  "modifiedFiles": [
+    "AN_VANTARIS_IBMS-backend/src/api/__init__.py",
+    "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
+    "AN_VANTARIS_IBMS-frontend/src/services/menu/static-menu.ts"
+  ],
+  "auditMode": "read-only-dual-server-precheck-preview",
+  "evidencePosture": {
+    "readOnly": true,
+    "sshExecuted": false,
+    "deploymentExecuted": false,
+    "installExecuted": false,
+    "dbConnectionExecuted": false,
+    "dbMigrationExecuted": false,
+    "dbWriteEnabled": false,
+    "healthcheckRuntimeExecuted": false,
+    "nginxSetupExecuted": false,
+    "pm2SetupExecuted": false,
+    "systemdSetupExecuted": false,
+    "edgeCommandExecution": false,
+    "linkCommandExecution": false,
+    "deviceControlEnabled": false,
+    "productionActivation": false,
+    "distBuildCommitted": false,
+    "envOrSecretChanged": false
+  },
+  "notes": [
+    "SERVER-PRECHECK-R1 uses static local planning data only.",
+    "No SSH, network probe, DB connection, subprocess, shell command, installation, deployment, or runtime healthcheck is used by the provider.",
+    "No commit is created for this task until user confirmation."
+  ]
+}
+

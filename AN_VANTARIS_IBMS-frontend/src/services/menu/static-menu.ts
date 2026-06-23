@@ -57,6 +57,12 @@ export const fallbackMenuItems: AppMenuItem[] = [
         source: 'static',
       },
       {
+        id: 'server-precheck-audit',
+        label: 'Server Precheck',
+        path: '/one/server/precheck',
+        source: 'static',
+      },
+      {
         id: 'code-policy-gate',
         label: 'CODE Policy Gate',
         path: '/one/code/policy-gate',

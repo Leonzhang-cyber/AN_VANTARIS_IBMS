@@ -24,4 +24,5 @@ from .foundation_diagnostics import foundation_diagnostics_api
 from .asset_context import asset_context_api
 from .code_policy import code_policy_api
 from .nexus_ai import nexus_ai_api
+from .server_precheck import server_precheck_api
 from .iot.sse_api import *

@@ -1,0 +1,17 @@
+{
+  "scope": "SERVER_PRECHECK_R1",
+  "validator": "scripts/validation/validate-server-precheck-r1-dual-server-readonly-audit.py",
+  "passMarker": "ONE_SERVER_PRECHECK_R1_DUAL_SERVER_READONLY_AUDIT_PASS",
+  "status": "PASS",
+  "buildResult": "npm run build PASS with existing Rolldown annotation and chunk-size warnings only",
+  "requiredChecks": [
+    "backend files exist",
+    "frontend files exist",
+    "API route strings exist",
+    "route and menu strings exist",
+    "docs/registry/evidence/validation JSON parse",
+    "read-only flags exist",
+    "POST/PUT/PATCH/DELETE absent from server_precheck API",
+    "network, DB, SSH, deployment, install, runtime, and service setup executable tokens absent from server_precheck code"
+  ]
+}
