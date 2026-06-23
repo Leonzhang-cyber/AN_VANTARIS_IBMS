@@ -1,0 +1,14 @@
+UCDE-GA-R6 Validator Results Evidence
+PASS marker: UCDE_GA_R6_EVIDENCE_CENTER_FINAL_ARCHIVE_PASS
+
+Expected validators:
+- validate-ucde-ga-r6-evidence-center-final-archive.py
+- validate-ucde-ga-r5-evidence-center-release-index-decision.py
+- validate-ucde-ga-r4-evidence-center-customer-preview.py
+- validate-uhmi-ga-r6-customer-preview-final-archive.py
+- validate-one-design-r1-full-product-design-blueprint.py
+- validate-one-module-ga-wave-r1-consolidated-freeze.py
+- validate-one-package-route-enforcement.py
+- validate-one-boundaries.py
+
+UCDE R6 did not execute a new frontend build because it did not change frontend functionality; existing UHMI R2E/R2D build evidence remains referenced.

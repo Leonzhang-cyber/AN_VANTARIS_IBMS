@@ -1,0 +1,13 @@
+UCDE-GA-R6 Next Phase Recommendation
+PASS marker: UCDE_GA_R6_EVIDENCE_CENTER_FINAL_ARCHIVE_PASS
+
+Recommended only, not executed:
+1. UCDE-GA-R7 Customer Preview Screenshot Pack / Evidence Demo Script.
+2. UCDE-GA-R8 Customer UAT Evidence Feedback Template.
+3. UCDE-GA-R9 Production Evidence DB Design Draft.
+4. UCDE-GA-R10 Evidence Write Policy Gate Design.
+5. CODE-GA-R1 Read-only Execution Boundary + Policy Gate Skeleton.
+6. Customer Delivery / Engineer Installer Console Read-only Preview.
+
+Any future deployment to 192.168.60.21 / 192.168.60.22 requires a separate approved task.
+Any evidence write, production audit, or control chain must go through CODE -> Policy -> Approval -> Audit/UCDE -> LINK -> EDGE -> Device.

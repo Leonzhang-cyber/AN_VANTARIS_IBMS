@@ -1,0 +1,11 @@
+UCDE-GA-R6 Final Release Chain
+PASS marker: UCDE_GA_R6_EVIDENCE_CENTER_FINAL_ARCHIVE_PASS
+
+UCDE-GA-R4: a8e71123f33c22da6e94c658c625f34db50625d4 / ucde-ga-r4-evidence-center-customer-preview-freeze-20260622 / PASS.
+UCDE-GA-R5: 735d999de3ec158ae9f087d65a1f7d33403ff559 / ucde-ga-r5-evidence-center-release-decision-freeze-20260622 / PASS.
+UCDE-GA-R6: local final archive / READY_FOR_ARCHIVE.
+UHMI R1-R6 linkage: PASS.
+Customer preview decision: GO.
+Production GA: NOT_YET.
+Evidence DB: NOT_CREATED.
+Evidence Write: NOT_EXECUTED.

@@ -1,0 +1,14 @@
+UCDE-GA-R6 Final Evidence Index
+PASS marker: UCDE_GA_R6_EVIDENCE_CENTER_FINAL_ARCHIVE_PASS
+
+Docs: UCDE R4, R5, and R6 final archive documents.
+Registries: ucde-ga-r4, ucde-ga-r5, ucde-ga-r6.
+Validators: validate-ucde-ga-r4, validate-ucde-ga-r5, validate-ucde-ga-r6.
+Evidence txt files: UCDE R4, R5, and R6 evidence files.
+Backend source references: UCDE read-only provider/service/API skeleton.
+UHMI reference links: UHMI R1-R6 release chain and evidence linkage.
+Build evidence reference: UHMI R2E/R2D build PASS.
+Boundary baseline status: PASS with existing non-blocking legacy warnings.
+192.168.60.21 recorded as APP/non-DB target.
+192.168.60.22 recorded as DB-only target.
+No deployment executed.
