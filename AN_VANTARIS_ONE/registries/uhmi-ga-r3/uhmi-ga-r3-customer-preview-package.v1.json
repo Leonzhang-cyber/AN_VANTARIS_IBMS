@@ -1,0 +1,163 @@
+{
+  "scope": "UHMI_GA_R3",
+  "taskId": "UHMI-GA-R3",
+  "status": "frozen_local_customer_preview",
+  "mode": "read_only",
+  "visualStyle": "VANTARIS_LIGHT_OPERATIONS_CONSOLE",
+  "baseline": "UHMI-GA-R2F",
+  "baselineHead": "b9e74f09394dee25d3a3b09da729f034431d3cf2",
+  "customerPreviewPackage": true,
+  "demoReadyReadOnlyWorkspace": true,
+  "productionActivation": "NOT_EXECUTED",
+  "releaseChain": [
+    {
+      "stage": "UHMI-GA-R1",
+      "commit": "003f4f710cfd76130ff79275c8190ec6bbe7edc9",
+      "tag": "uhmi-ga-r1-uconsole-readonly-workspace-freeze-20260622",
+      "scope": "Read-only UConsole Workspace Foundation",
+      "status": "PASS",
+      "passMarker": "UHMI_GA_R1_UCONSOLE_UHMI_WORKSPACE_READONLY_FOUNDATION_FREEZE_PASS"
+    },
+    {
+      "stage": "UHMI-GA-R2A",
+      "commit": "6d682fdd351e3ad51b27ce91f2dbf92c74da3323",
+      "tag": "uhmi-ga-r2a-full-uconsole-menu-ui-api-skeleton-freeze-20260622",
+      "scope": "Full UConsole Menu IA + UI/API Skeleton",
+      "status": "PASS",
+      "passMarker": "UHMI_GA_R2A_FULL_UCONSOLE_MENU_IA_UI_API_SKELETON_PASS"
+    },
+    {
+      "stage": "UHMI-GA-R2B",
+      "commit": "3678150d55f2459def6fc7b423496acb62143ac4",
+      "tag": "uhmi-ga-r2b-workspace-panels-system-context-freeze-20260622",
+      "scope": "Workspace Panels + System Context Panels",
+      "status": "PASS",
+      "passMarker": "UHMI_GA_R2B_WORKSPACE_PANELS_SYSTEM_CONTEXT_PASS"
+    },
+    {
+      "stage": "UHMI-GA-R2C",
+      "commit": "0262d90efffbb4993215d44c35f7c4d26f6d762f",
+      "tag": "uhmi-ga-r2c-role-based-workspace-views-freeze-20260622",
+      "scope": "Role-based Workspace Views",
+      "status": "PASS",
+      "passMarker": "UHMI_GA_R2C_ROLE_BASED_WORKSPACE_VIEWS_PASS"
+    },
+    {
+      "stage": "UHMI-GA-R2D",
+      "commit": "e6c94cefcc7aee336d4702bc377a554a549454eb",
+      "tag": "uhmi-ga-r2d-light-console-style-freeze-20260622",
+      "scope": "Workspace Visual Polish + Light Console Style Freeze",
+      "status": "PASS",
+      "passMarker": "UHMI_GA_R2D_WORKSPACE_VISUAL_POLISH_LIGHT_CONSOLE_STYLE_PASS"
+    },
+    {
+      "stage": "UHMI-GA-R2E",
+      "commit": "6bd6bbaa0e23eee6676e170d2493d093084216a5",
+      "tag": "uhmi-ga-r2e-api-frontend-integration-audit-freeze-20260622",
+      "scope": "Workspace API Consolidation + Frontend Integration Audit",
+      "status": "PASS",
+      "passMarker": "UHMI_GA_R2E_WORKSPACE_API_CONSOLIDATION_FRONTEND_INTEGRATION_AUDIT_PASS"
+    },
+    {
+      "stage": "UHMI-GA-R2F",
+      "commit": "b9e74f09394dee25d3a3b09da729f034431d3cf2",
+      "tag": "uhmi-ga-r2f-final-readonly-workspace-release-index-freeze-20260622",
+      "scope": "Final Read-only Workspace Release Index + Evidence Pack",
+      "status": "PASS",
+      "passMarker": "UHMI_GA_R2F_FINAL_READONLY_WORKSPACE_RELEASE_INDEX_PASS"
+    }
+  ],
+  "demoFlow": [
+    "Open UConsole",
+    "Open UHMI Workspace",
+    "Show VANTARIS_LIGHT_OPERATIONS_CONSOLE visual style",
+    "Show Overview metric cards",
+    "Show System Context Panels",
+    "Show Device Context Table",
+    "Show Mimic Panel Preview",
+    "Show Event Context",
+    "Show Evidence Context",
+    "Show Role-based views",
+    "Show Customer view",
+    "Show Engineer view",
+    "Show Admin view",
+    "Show Operator view",
+    "Show Disabled Actions",
+    "Show Guardrails",
+    "Show Future Control Path",
+    "Show R2F Evidence Pack / Release Index"
+  ],
+  "roleDemoViews": [
+    "Customer",
+    "Engineer",
+    "Admin",
+    "Operator"
+  ],
+  "acceptanceChecklist": [
+    "UHMI opens from UConsole",
+    "UHMI Workspace L1 high-frequency entry is visible",
+    "Light Console style matches VANTARIS / UFMS existing style",
+    "Overview metrics visible",
+    "System panels visible",
+    "Device status table visible",
+    "Mimic preview visible",
+    "Event context visible",
+    "Evidence context visible",
+    "Role-based views visible",
+    "Customer / Engineer / Admin / Operator contexts visible",
+    "Disabled actions visible",
+    "Future control path visible",
+    "No direct device control",
+    "No runtime activation",
+    "No DB write",
+    "No EDGE/LINK command",
+    "No auth/RBAC mutation",
+    "Evidence pack available",
+    "Customer production activation not executed"
+  ],
+  "engineerChecklist": [
+    "Local branch/HEAD verification",
+    "R3 validator execution",
+    "R2F validator execution",
+    "R2E/R2D/R2C/R2B/R2A/R1 validator execution",
+    "package route enforcement",
+    "boundary baseline",
+    "frontend build optional",
+    "no dist/build committed",
+    "no .env/secrets committed",
+    "no runtime activation",
+    "no DB migration",
+    "no EDGE/LINK command",
+    "no production activation"
+  ],
+  "evidenceLinks": [
+    "UHMI_GA_R2F_FINAL_READONLY_WORKSPACE_RELEASE_INDEX.md",
+    "UHMI_GA_R2F_EVIDENCE_PACK.md",
+    "UHMI_GA_R3_CUSTOMER_PREVIEW_PACKAGE_GUIDE.md",
+    "UHMI_GA_R3_DEMO_READY_WORKSPACE_FLOW.md",
+    "UHMI_GA_R3_CUSTOMER_PREVIEW_ACCEPTANCE_CHECKLIST.md",
+    "UHMI_GA_R3_ENGINEER_DEMO_CHECKLIST.md",
+    "AN_VANTARIS_ONE/registries/uhmi-ga-r3/uhmi-r3-release-chain.txt",
+    "AN_VANTARIS_ONE/registries/uhmi-ga-r3/uhmi-r3-demo-flow.txt",
+    "AN_VANTARIS_ONE/registries/uhmi-ga-r3/uhmi-r3-preview-checklist.txt",
+    "AN_VANTARIS_ONE/registries/uhmi-ga-r3/uhmi-r3-validator-results.txt"
+  ],
+  "forbiddenActions": {
+    "install": "NOT_EXECUTED",
+    "rollback": "NOT_EXECUTED",
+    "dbMigration": "NOT_EXECUTED",
+    "dbWrite": "NOT_EXECUTED",
+    "runtimeActivation": "NOT_EXECUTED",
+    "deviceControl": "NOT_EXECUTED",
+    "edgeCommandExecution": "NOT_EXECUTED",
+    "linkCommandExecution": "NOT_EXECUTED",
+    "authMutation": "NOT_EXECUTED",
+    "loginMutation": "NOT_EXECUTED",
+    "jwtMutation": "NOT_EXECUTED",
+    "rbacMutation": "NOT_EXECUTED",
+    "packageStateMutation": "NOT_EXECUTED",
+    "productionActivation": "NOT_EXECUTED"
+  },
+  "futureControlPath": "UHMI -> CODE -> Policy Gate -> Approval -> Audit / UCDE -> LINK -> EDGE -> Device",
+  "validationPassMarker": "UHMI_GA_R3_CUSTOMER_PREVIEW_PACKAGE_PASS"
+}

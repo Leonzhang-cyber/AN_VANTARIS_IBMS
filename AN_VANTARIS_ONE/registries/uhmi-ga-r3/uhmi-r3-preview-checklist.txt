@@ -1,0 +1,25 @@
+UHMI-GA-R3 customer preview checklist evidence
+
+PASS - UHMI opens from UConsole.
+PASS - UHMI Workspace L1 high-frequency entry is visible.
+PASS - Light Console style matches VANTARIS / UFMS existing style.
+PASS - Overview metrics visible.
+PASS - System panels visible.
+PASS - Device status table visible.
+PASS - Mimic preview visible.
+PASS - Event context visible.
+PASS - Evidence context visible.
+PASS - Role-based views visible.
+PASS - Customer / Engineer / Admin / Operator contexts visible.
+PASS - Disabled actions visible.
+PASS - Future control path visible.
+PASS - No Direct Device Control.
+PASS - No Runtime Activation.
+PASS - No DB Write.
+PASS - No EDGE Command Execution.
+PASS - No LINK Command Execution.
+PASS - No auth / login / JWT / RBAC mutation.
+PASS - Evidence pack available.
+PASS - Customer production activation not executed.
+
+UHMI_GA_R3_CUSTOMER_PREVIEW_PACKAGE_PASS

@@ -1,0 +1,28 @@
+UHMI-GA-R3 demo flow evidence
+
+1. Open UConsole - read-only / view-only / demo-only.
+2. Open UHMI Workspace - read-only / view-only / demo-only.
+3. Show VANTARIS_LIGHT_OPERATIONS_CONSOLE visual style - read-only / view-only / demo-only.
+4. Show Overview metric cards - read-only / view-only / demo-only.
+5. Show System Context Panels - read-only / view-only / demo-only.
+6. Show Device Context Table - read-only / view-only / demo-only.
+7. Show Mimic Panel Preview - read-only / view-only / demo-only.
+8. Show Event Context - read-only / view-only / demo-only.
+9. Show Evidence Context - read-only / view-only / demo-only.
+10. Show Role-based views - read-only / view-only / demo-only.
+11. Show Customer view - read-only / view-only / demo-only.
+12. Show Engineer view - read-only / view-only / demo-only.
+13. Show Admin view - read-only / view-only / demo-only.
+14. Show Operator view - read-only / view-only / demo-only.
+15. Show Disabled Actions - read-only / view-only / demo-only.
+16. Show Guardrails - read-only / view-only / demo-only.
+17. Show Future Control Path - read-only / view-only / demo-only.
+18. Show R2F Evidence Pack / Release Index - read-only / view-only / demo-only.
+
+Production Activation Not Executed.
+No Direct Device Control.
+No Runtime Activation.
+No DB Write.
+No EDGE Command Execution.
+No LINK Command Execution.
+No auth / login / JWT / RBAC mutation.
