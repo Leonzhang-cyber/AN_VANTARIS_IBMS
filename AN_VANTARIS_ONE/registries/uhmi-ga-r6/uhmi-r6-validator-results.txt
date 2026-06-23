@@ -1,0 +1,27 @@
+UHMI-GA-R6 validator results evidence
+
+Required validators:
+python3 scripts/validation/validate-uhmi-ga-r6-customer-preview-final-archive.py: PASS
+python3 scripts/validation/validate-uhmi-ga-r5-final-customer-preview-readiness-decision.py: PASS
+python3 scripts/validation/validate-uhmi-ga-r4-customer-preview-export-package.py: PASS
+python3 scripts/validation/validate-uhmi-ga-r3-customer-preview-package.py: PASS
+python3 scripts/validation/validate-uhmi-ga-r2f-final-readonly-workspace-release-index.py: PASS
+python3 scripts/validation/validate-uhmi-ga-r2e-workspace-api-consolidation-frontend-integration-audit.py: PASS
+python3 scripts/validation/validate-uhmi-ga-r2d-workspace-visual-polish-light-console-style.py: PASS
+python3 scripts/validation/validate-uhmi-ga-r2c-role-based-workspace-views.py: PASS
+python3 scripts/validation/validate-uhmi-ga-r2b-workspace-panels-system-context.py: PASS
+python3 scripts/validation/validate-uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.py: PASS
+python3 scripts/validation/validate-uhmi-ga-r1-uconsole-workspace-readonly-foundation.py: PASS
+python3 scripts/validation/validate-one-design-r1-full-product-design-blueprint.py: PASS
+python3 scripts/validation/validate-one-module-ga-wave-r1-consolidated-freeze.py: PASS
+python3 scripts/validation/validate-one-package-route-enforcement.py: PASS
+PYTHONPATH=AN_VANTARIS_ONE python3 scripts/validation/validate-one-boundaries.py: PASS with existing non-blocking legacy warnings
+
+Expected PASS marker:
+UHMI_GA_R6_CUSTOMER_PREVIEW_FINAL_ARCHIVE_PASS
+
+Boundary warning classification:
+Existing non-blocking legacy warnings only.
+
+Frontend build evidence:
+R6 did not execute a new frontend build because it did not change frontend functionality; R2E/R2D build evidence remains referenced.

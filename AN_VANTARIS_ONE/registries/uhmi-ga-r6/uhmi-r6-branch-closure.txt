@@ -1,0 +1,16 @@
+UHMI-GA-R6 branch closure evidence
+
+Branch: sync/ufms-foundation-packages-20260622-104646
+Baseline HEAD: 561106f2c91a4fd6a706843c4f5b34f27671f285
+Branch Closure: READY_FOR_ARCHIVE
+Customer Preview Release Decision: GO
+Production GA: NOT_YET
+Production Activation: NOT_EXECUTED
+Runtime / Control Activation: NOT_EXECUTED
+
+No production action executed.
+No push executed by R6.
+No tag executed by R6.
+Merge-to-main recommendation: NOT NOW unless explicitly approved.
+
+UHMI_GA_R6_CUSTOMER_PREVIEW_FINAL_ARCHIVE_PASS

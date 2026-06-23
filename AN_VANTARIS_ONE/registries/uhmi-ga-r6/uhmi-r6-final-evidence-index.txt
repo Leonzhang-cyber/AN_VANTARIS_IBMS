@@ -1,0 +1,14 @@
+UHMI-GA-R6 final evidence index
+
+Docs generated from R1-R5: referenced by R6 final evidence index.
+Registries generated from R2A-R5: referenced by R6 registry.
+Validators generated from R1-R5: referenced by R6 validator chain.
+Evidence txt files: R2F, R3, R4, R5, and R6 evidence references.
+Frontend source references: UHMI Workspace, routes, menu, and API service.
+Backend source references: UHMI API and provider.
+Route/menu/package registry references: package route enforcement and ONE registries.
+Build evidence reference: R2E/R2D build PASS.
+Boundary baseline status: PASS.
+Existing non-blocking legacy warnings: documented.
+
+UHMI_GA_R6_CUSTOMER_PREVIEW_FINAL_ARCHIVE_PASS
