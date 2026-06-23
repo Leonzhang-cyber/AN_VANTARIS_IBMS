@@ -8,6 +8,7 @@ import IntegrationSettingsView from '@/modules/system/IntegrationSettingsView.vu
 import NotificationSettingsView from '@/modules/system/NotificationSettingsView.vue'
 import PermissionListView from '@/modules/system/PermissionListView.vue'
 import PlatformOperationsDashboard from '@/modules/console/PlatformOperationsDashboard.vue'
+import CodePolicyGate from '@/modules/code/CodePolicyGate.vue'
 import ReportsView from '@/modules/reports/ReportsView.vue'
 import EvidenceCenter from '@/modules/ucde/EvidenceCenter.vue'
 import AssetsTopology from '@/modules/assets/AssetsTopology.vue'
@@ -108,6 +109,12 @@ export const routes: RouteRecordRaw[] = [
     name: 'console-operations',
     component: PlatformOperationsDashboard,
     meta: { requiresAuth: true, title: 'Platform Operations', layout: true },
+  },
+  {
+    path: '/one/code/policy-gate',
+    name: 'code-policy-gate',
+    component: CodePolicyGate,
+    meta: { requiresAuth: true, title: 'CODE Policy Gate', layout: true },
   },
   {
     path: '/console/foundation-diagnostics/workspace',

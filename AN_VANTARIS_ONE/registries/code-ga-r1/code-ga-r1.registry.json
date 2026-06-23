@@ -1,0 +1,68 @@
+{
+  "registryName": "VANTARIS ONE CODE GA R1 Policy Gate Preview Registry",
+  "registryVersion": "1.0.0",
+  "scope": "CODE_GA_R1",
+  "moduleId": "code-policy",
+  "capability": "Read-only Policy Gate + Execution Boundary Preview",
+  "visualStyle": "VANTARIS_LIGHT_OPERATIONS_CONSOLE",
+  "releaseScope": "READ_ONLY_POLICY_GATE_EXECUTION_BOUNDARY_PREVIEW",
+  "passMarker": "ONE_CODE_GA_R1_POLICY_GATE_PREVIEW_PASS",
+  "apiNamespace": "/api/v1/one/code-policy",
+  "uiRoute": "/one/code/policy-gate",
+  "graphMode": "local-readonly-code-policy-projection",
+  "readOnly": true,
+  "runtimeEnabled": false,
+  "approvalExecutionEnabled": false,
+  "policyMutationEnabled": false,
+  "workflowExecutionEnabled": false,
+  "commandExecutionEnabled": false,
+  "dbWriteEnabled": false,
+  "edgeCommandExecution": false,
+  "linkCommandExecution": false,
+  "deviceControlEnabled": false,
+  "productionActivation": false,
+  "dbMigration": false,
+  "authMutation": false,
+  "oneAdapterIntroduced": false,
+  "sshExecuted": false,
+  "deploymentExecuted": false,
+  "installExecuted": false,
+  "requiredPath": "UHMI / UMMS / Asset Context -> CODE Policy Gate -> Approval Boundary -> Audit / UCDE Evidence -> LINK -> EDGE -> Device",
+  "directPathsBlocked": [
+    "UHMI -> Device",
+    "UMMS -> Device",
+    "Asset Context -> Device",
+    "UHMI -> EDGE",
+    "UHMI -> LINK",
+    "UMMS -> EDGE",
+    "UMMS -> LINK",
+    "Asset Context -> DB write",
+    "Reports -> Export execution"
+  ],
+  "apiRoutes": [
+    "GET /api/v1/one/code-policy/health",
+    "GET /api/v1/one/code-policy/summary",
+    "GET /api/v1/one/code-policy/policy-gates",
+    "GET /api/v1/one/code-policy/execution-boundary",
+    "GET /api/v1/one/code-policy/approval-boundary",
+    "GET /api/v1/one/code-policy/evidence-linkage",
+    "GET /api/v1/one/code-policy/control-path",
+    "GET /api/v1/one/code-policy/guardrails"
+  ],
+  "sourceReferences": [
+    "AN_VANTARIS_ONE/operator_review_policy_guard/",
+    "AN_VANTARIS_ONE/operator_review_decision/",
+    "AN_VANTARIS_ONE/packages/AN_VANTARIS_Code/BOUNDARY.md"
+  ],
+  "guardrails": [
+    "No direct device control",
+    "No EDGE/LINK command",
+    "No DB write",
+    "No approval execution",
+    "No runtime activation",
+    "No production activation",
+    "No bypass CODE",
+    "No auth/RBAC mutation"
+  ]
+}
+

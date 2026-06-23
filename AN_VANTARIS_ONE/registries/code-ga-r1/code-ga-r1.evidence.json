@@ -1,0 +1,41 @@
+{
+  "scope": "CODE_GA_R1",
+  "passMarker": "ONE_CODE_GA_R1_POLICY_GATE_PREVIEW_PASS",
+  "createdFiles": [
+    "AN_VANTARIS_IBMS-backend/src/code_policy/__init__.py",
+    "AN_VANTARIS_IBMS-backend/src/code_policy/code_policy_provider.py",
+    "AN_VANTARIS_IBMS-backend/src/code_policy/code_policy_service.py",
+    "AN_VANTARIS_IBMS-backend/src/api/code_policy/__init__.py",
+    "AN_VANTARIS_IBMS-backend/src/api/code_policy/code_policy_api.py",
+    "AN_VANTARIS_IBMS-frontend/src/services/api/codePolicy.ts",
+    "AN_VANTARIS_IBMS-frontend/src/modules/code/CodePolicyGate.vue",
+    "AN_VANTARIS_ONE/CODE_GA_R1.md",
+    "scripts/validation/validate-code-ga-r1-policy-gate-preview.py"
+  ],
+  "modifiedFiles": [
+    "AN_VANTARIS_IBMS-backend/src/api/__init__.py",
+    "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
+    "AN_VANTARIS_IBMS-frontend/src/services/menu/static-menu.ts"
+  ],
+  "evidencePosture": {
+    "readOnly": true,
+    "runtimeEnabled": false,
+    "approvalExecutionEnabled": false,
+    "policyMutationEnabled": false,
+    "workflowExecutionEnabled": false,
+    "commandExecutionEnabled": false,
+    "dbWriteEnabled": false,
+    "edgeCommandExecution": false,
+    "linkCommandExecution": false,
+    "deviceControlEnabled": false,
+    "productionActivation": false,
+    "distBuildCommitted": false,
+    "envOrSecretChanged": false
+  },
+  "notes": [
+    "CODE-GA-R1 reads local reference paths only.",
+    "Provider reference failures are represented as integrationStatus unavailable with limitations.",
+    "No commit is created for this task until user confirmation."
+  ]
+}
+

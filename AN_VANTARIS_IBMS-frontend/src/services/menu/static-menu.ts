@@ -57,6 +57,12 @@ export const fallbackMenuItems: AppMenuItem[] = [
         source: 'static',
       },
       {
+        id: 'code-policy-gate',
+        label: 'CODE Policy Gate',
+        path: '/one/code/policy-gate',
+        source: 'static',
+      },
+      {
         id: 'uconsole-uhmi-workspace',
         label: 'UHMI Workspace',
         path: '/one/uhmi/overview',
