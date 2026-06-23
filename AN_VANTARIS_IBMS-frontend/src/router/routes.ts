@@ -9,6 +9,7 @@ import NotificationSettingsView from '@/modules/system/NotificationSettingsView.
 import PermissionListView from '@/modules/system/PermissionListView.vue'
 import PlatformOperationsDashboard from '@/modules/console/PlatformOperationsDashboard.vue'
 import CodePolicyGate from '@/modules/code/CodePolicyGate.vue'
+import NexusBranchAudit from '@/modules/nexus/NexusBranchAudit.vue'
 import ReportsView from '@/modules/reports/ReportsView.vue'
 import EvidenceCenter from '@/modules/ucde/EvidenceCenter.vue'
 import AssetsTopology from '@/modules/assets/AssetsTopology.vue'
@@ -115,6 +116,12 @@ export const routes: RouteRecordRaw[] = [
     name: 'code-policy-gate',
     component: CodePolicyGate,
     meta: { requiresAuth: true, title: 'CODE Policy Gate', layout: true },
+  },
+  {
+    path: '/one/nexus-ai/branch-audit',
+    name: 'nexus-ai-branch-audit',
+    component: NexusBranchAudit,
+    meta: { requiresAuth: true, title: 'NexusAI Branch Audit', layout: true },
   },
   {
     path: '/console/foundation-diagnostics/workspace',

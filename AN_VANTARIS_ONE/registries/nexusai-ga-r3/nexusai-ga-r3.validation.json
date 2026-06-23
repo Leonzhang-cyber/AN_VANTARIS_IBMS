@@ -1,0 +1,17 @@
+{
+  "scope": "NEXUSAI_GA_R3",
+  "validator": "scripts/validation/validate-nexusai-ga-r3-branch-diff-audit.py",
+  "passMarker": "ONE_NEXUSAI_GA_R3_BRANCH_DIFF_AUDIT_PASS",
+  "status": "PASS",
+  "buildResult": "npm run build PASS with existing Rolldown annotation and chunk-size warnings only",
+  "requiredChecks": [
+    "backend files exist",
+    "frontend files exist",
+    "API route strings exist",
+    "route and menu strings exist",
+    "docs/registry/evidence/validation JSON parse",
+    "read-only flags exist",
+    "POST/PUT/PATCH/DELETE absent from nexus_ai API",
+    "subprocess, shell, model API, write/runtime/control forbidden executable tokens absent from nexus_ai code"
+  ]
+}

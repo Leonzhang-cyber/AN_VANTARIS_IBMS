@@ -63,6 +63,12 @@ export const fallbackMenuItems: AppMenuItem[] = [
         source: 'static',
       },
       {
+        id: 'nexus-ai-branch-audit',
+        label: 'NexusAI Branch Audit',
+        path: '/one/nexus-ai/branch-audit',
+        source: 'static',
+      },
+      {
         id: 'uconsole-uhmi-workspace',
         label: 'UHMI Workspace',
         path: '/one/uhmi/overview',

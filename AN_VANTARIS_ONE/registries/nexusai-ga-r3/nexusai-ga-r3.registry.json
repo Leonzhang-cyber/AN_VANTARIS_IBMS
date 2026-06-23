@@ -1,0 +1,68 @@
+{
+  "registryName": "VANTARIS ONE NexusAI GA R3 Branch Diff Audit Registry",
+  "registryVersion": "1.0.0",
+  "scope": "NEXUSAI_GA_R3",
+  "moduleId": "nexus-ai-branch-audit",
+  "capability": "Read-only Branch Diff Audit",
+  "visualStyle": "VANTARIS_LIGHT_OPERATIONS_CONSOLE",
+  "releaseScope": "READ_ONLY_BRANCH_DIFF_AUDIT",
+  "passMarker": "ONE_NEXUSAI_GA_R3_BRANCH_DIFF_AUDIT_PASS",
+  "apiNamespace": "/api/v1/one/nexus-ai",
+  "uiRoute": "/one/nexus-ai/branch-audit",
+  "branch": "sync/ufms-foundation-packages-20260622-104646",
+  "baselineRemoteHead": "0ddf2a4c06fb5d50201b9b3936b85f4457c9c6c4",
+  "assetContextCommit": "70fef5f1e2b27df0d5ce2fbdbf21cc4920b0e84d",
+  "codePolicyCommit": "d2e1b6b72adb454338f0c1db6f39752ff19976c6",
+  "latestRemoteTag": "reports-ga-r13-customer-demo-report-pack-export-center-freeze-20260622",
+  "localTags": [
+    "asset-context-ga-r1-unified-linkage-local-freeze-20260623",
+    "code-ga-r1-policy-gate-preview-local-freeze-20260623"
+  ],
+  "readOnly": true,
+  "aiRuntimeEnabled": false,
+  "modelApiCallEnabled": false,
+  "autoFixEnabled": false,
+  "codeMutationEnabled": false,
+  "workflowExecutionEnabled": false,
+  "dbWriteEnabled": false,
+  "edgeCommandExecution": false,
+  "linkCommandExecution": false,
+  "deviceControlEnabled": false,
+  "productionActivation": false,
+  "pushExecuted": false,
+  "deploymentExecuted": false,
+  "installExecuted": false,
+  "remoteAligned": false,
+  "productionGaStatus": "NOT_YET",
+  "apiRoutes": [
+    "GET /api/v1/one/nexus-ai/health",
+    "GET /api/v1/one/nexus-ai/branch-audit/summary",
+    "GET /api/v1/one/nexus-ai/branch-audit/commits",
+    "GET /api/v1/one/nexus-ai/branch-audit/modules",
+    "GET /api/v1/one/nexus-ai/branch-audit/risks",
+    "GET /api/v1/one/nexus-ai/branch-audit/evidence-linkage",
+    "GET /api/v1/one/nexus-ai/branch-audit/customer-demo-impact",
+    "GET /api/v1/one/nexus-ai/branch-audit/guardrails"
+  ],
+  "sourceReferences": [
+    "AN_VANTARIS_ONE/ASSET_CONTEXT_GA_R1.md",
+    "AN_VANTARIS_ONE/CODE_GA_R1.md",
+    "AN_VANTARIS_ONE/registries/asset-context-ga-r1/",
+    "AN_VANTARIS_ONE/registries/code-ga-r1/",
+    "AN_VANTARIS_ONE/registries/nexusai-ga-r2/",
+    "AN_VANTARIS_ONE/packages/AN_VANTARIS_NexusAI/BOUNDARY.md",
+    "AN_VANTARIS_ONE/packages/AN_VANTARIS_Contracts/openapi/code-to-nexusai.v1.yaml"
+  ],
+  "guardrails": [
+    "No AI runtime",
+    "No model API call",
+    "No auto-fix",
+    "No code mutation",
+    "No DB write",
+    "No deployment",
+    "No EDGE/LINK command",
+    "No device control",
+    "No production activation"
+  ]
+}
+

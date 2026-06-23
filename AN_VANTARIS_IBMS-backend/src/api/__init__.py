@@ -23,4 +23,5 @@ from .engineer_installer import engineer_installer_api
 from .foundation_diagnostics import foundation_diagnostics_api
 from .asset_context import asset_context_api
 from .code_policy import code_policy_api
+from .nexus_ai import nexus_ai_api
 from .iot.sse_api import *

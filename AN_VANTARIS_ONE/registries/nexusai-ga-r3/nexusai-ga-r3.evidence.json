@@ -1,0 +1,42 @@
+{
+  "scope": "NEXUSAI_GA_R3",
+  "passMarker": "ONE_NEXUSAI_GA_R3_BRANCH_DIFF_AUDIT_PASS",
+  "createdFiles": [
+    "AN_VANTARIS_IBMS-backend/src/nexus_ai/__init__.py",
+    "AN_VANTARIS_IBMS-backend/src/nexus_ai/nexus_branch_audit_provider.py",
+    "AN_VANTARIS_IBMS-backend/src/nexus_ai/nexus_branch_audit_service.py",
+    "AN_VANTARIS_IBMS-backend/src/api/nexus_ai/__init__.py",
+    "AN_VANTARIS_IBMS-backend/src/api/nexus_ai/nexus_ai_api.py",
+    "AN_VANTARIS_IBMS-frontend/src/services/api/nexusAi.ts",
+    "AN_VANTARIS_IBMS-frontend/src/modules/nexus/NexusBranchAudit.vue",
+    "AN_VANTARIS_ONE/NEXUSAI_GA_R3.md",
+    "scripts/validation/validate-nexusai-ga-r3-branch-diff-audit.py"
+  ],
+  "modifiedFiles": [
+    "AN_VANTARIS_IBMS-backend/src/api/__init__.py",
+    "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
+    "AN_VANTARIS_IBMS-frontend/src/services/menu/static-menu.ts"
+  ],
+  "auditMode": "read-only-branch-diff-preview",
+  "evidencePosture": {
+    "readOnly": true,
+    "aiRuntimeEnabled": false,
+    "modelApiCallEnabled": false,
+    "autoFixEnabled": false,
+    "codeMutationEnabled": false,
+    "workflowExecutionEnabled": false,
+    "dbWriteEnabled": false,
+    "edgeCommandExecution": false,
+    "linkCommandExecution": false,
+    "deviceControlEnabled": false,
+    "productionActivation": false,
+    "distBuildCommitted": false,
+    "envOrSecretChanged": false
+  },
+  "notes": [
+    "NEXUSAI-GA-R3 uses local static branch audit data only.",
+    "No git command, subprocess, shell command, AI runtime, or model API call is used by the provider.",
+    "No commit is created for this task until user confirmation."
+  ]
+}
+
