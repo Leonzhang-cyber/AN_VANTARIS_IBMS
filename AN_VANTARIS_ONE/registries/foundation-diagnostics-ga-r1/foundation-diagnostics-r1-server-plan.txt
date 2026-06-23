@@ -1,0 +1,4 @@
+Foundation Diagnostics GA R1 server plan
+APP / non-DB target: 192.168.60.21
+DB-only target: 192.168.60.22
+No SSH. No Deployment. No Install. No DB Connection. No DB Migration. No DB Write.

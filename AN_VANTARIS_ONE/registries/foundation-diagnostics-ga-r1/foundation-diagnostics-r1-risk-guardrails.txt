@@ -1,0 +1,13 @@
+No SSH
+No Deployment
+No Install
+No Uninstall
+No Rollback
+No DB Connection
+No DB Migration
+No DB Write
+No EDGE Command Execution
+No LINK Command Execution
+No Device Control
+No Runtime Activation
+No Production Activation

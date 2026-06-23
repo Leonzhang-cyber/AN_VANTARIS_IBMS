@@ -62,6 +62,42 @@ export const fallbackMenuItems: AppMenuItem[] = [
         path: '/one/uhmi/overview',
         source: 'static',
       },
+      {
+        id: 'uconsole-engineer-workspace-foundation-diagnostics',
+        label: 'Foundation Diagnostics',
+        path: '/console/foundation-diagnostics/workspace',
+        source: 'static',
+      },
+      {
+        id: 'uconsole-engineer-workspace-package-readiness',
+        label: 'Package Readiness',
+        path: '/console/foundation-diagnostics/workspace',
+        source: 'static',
+      },
+      {
+        id: 'uconsole-engineer-workspace-server-plan',
+        label: 'Server Plan',
+        path: '/console/foundation-diagnostics/workspace',
+        source: 'static',
+      },
+      {
+        id: 'uconsole-engineer-workspace-edge-link-db',
+        label: 'EDGE / LINK / DB Diagnostics',
+        path: '/console/foundation-diagnostics/workspace',
+        source: 'static',
+      },
+      {
+        id: 'uconsole-engineer-workspace-offline-verification',
+        label: 'Offline Verification',
+        path: '/console/foundation-diagnostics/workspace',
+        source: 'static',
+      },
+      {
+        id: 'uconsole-engineer-workspace-rollback-readiness',
+        label: 'Rollback Readiness',
+        path: '/console/foundation-diagnostics/workspace',
+        source: 'static',
+      },
     ],
   },
   {

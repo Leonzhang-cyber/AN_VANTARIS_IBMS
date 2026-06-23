@@ -20,6 +20,7 @@ import SystemOverviewView from '@/modules/system/SystemOverviewView.vue'
 import SystemSettingsView from '@/modules/system/SystemSettingsView.vue'
 import AirportGaReadonlyConsole from '@/modules/airport/AirportGaReadonlyConsole.vue'
 import UhmiWorkspace from '@/modules/uhmi/UhmiWorkspace.vue'
+import FoundationDiagnosticsWorkspace from '@/modules/foundation-diagnostics/FoundationDiagnosticsWorkspace.vue'
 
 declare module 'vue-router' {
   interface RouteMeta {
@@ -106,6 +107,12 @@ export const routes: RouteRecordRaw[] = [
     name: 'console-operations',
     component: PlatformOperationsDashboard,
     meta: { requiresAuth: true, title: 'Platform Operations', layout: true },
+  },
+  {
+    path: '/console/foundation-diagnostics/workspace',
+    name: 'foundation-diagnostics-workspace',
+    component: FoundationDiagnosticsWorkspace,
+    meta: { requiresAuth: true, title: 'Foundation Diagnostics Workspace', layout: true },
   },
   {
     path: '/reports',

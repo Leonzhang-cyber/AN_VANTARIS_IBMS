@@ -724,6 +724,47 @@
       ]
     },
     {
+      "frontendRouteId": "FROUTE-70BC2F7FAEC4",
+      "routePath": "/console/foundation-diagnostics/workspace",
+      "packageId": "PKG-UCONSOLE",
+      "owningModule": "UConsole",
+      "targetAccessClass": "DIAGNOSTIC_ROUTE",
+      "authenticationRequired": true,
+      "requiredPermissions": [
+        "platform:read"
+      ],
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "tenantScopeRequired": true,
+      "siteScopeRequired": true,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "VISIBLE_WHEN_AUTHORIZED",
+      "lockPagePolicy": "GOVERNED_PACKAGE_LOCK_PAGE",
+      "diagnosticFallback": "AUTHORIZED_STATUS_OR_DIAGNOSTICS",
+      "backendApiPolicyReferences": [
+        "/api/v1/console",
+        "/api/v1/packages",
+        "/api/v1/health"
+      ],
+      "auditPolicy": "AUDIT_DENIALS_AND_SENSITIVE_ACTIONS",
+      "compatibilityStage": "CURRENT_TARGET",
+      "implementationStatus": "MULTIPLE_CONTROLS_REQUIRED",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "FOUNDATION-DIAGNOSTICS-GA-R1",
+      "reviewReason": [],
+      "notes": [
+        "Target metadata only; frontend and backend runtime enforcement are not implemented by FOUNDATION-DIAGNOSTICS-GA-R1.",
+        "Foundation Diagnostics workspace remains read-only and uses GET endpoints only.",
+        "Missing controls: PERMISSION_METADATA, PACKAGE_METADATA, DIRECT_URL_ENFORCEMENT, BACKEND_POLICY_DEPENDENCY"
+      ]
+    },
+    {
       "frontendRouteId": "FROUTE-732E195CD604",
       "routePath": "/",
       "packageId": "PKG-UCONSOLE",
@@ -3004,6 +3045,7 @@
       "compatibilityRequired": false,
       "healthRequiredForWrites": true,
       "frontendRoutes": [
+        "/console/foundation-diagnostics/workspace",
         "/console/operations",
         "/dashboard",
         "/one/airport/alarms-events",
@@ -3029,7 +3071,9 @@
       ],
       "lockPageRoute": "/packages/PKG-UCONSOLE/lock",
       "statusRoute": "/packages/PKG-UCONSOLE/status",
-      "diagnosticRoutes": [],
+      "diagnosticRoutes": [
+        "/console/foundation-diagnostics/workspace"
+      ],
       "adminRoutes": [],
       "defaultMenuBehavior": "VISIBLE_WHEN_AUTHORIZED_OR_GOVERNED_LOCK",
       "defaultDirectUrlBehavior": "ENFORCE_SAME_PACKAGE_POLICY_AS_MENU",
@@ -3998,22 +4042,6 @@
       "priority": "P0"
     },
     {
-      "reviewId": "PKG-ROUTE-REVIEW-0021",
-      "routeOrMenuId": "MENU-093B96B8B8ED",
-      "reviewType": "STATIC_MENU_FALLBACK",
-      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
-      "currentEvidence": {
-        "routePath": "/assets/topology",
-        "staticFallback": true,
-        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
-      },
-      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
-      "owningModule": "ONE Asset Graph",
-      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
-      "blockingTask": "ONE-A5-P0-07",
-      "priority": "P0"
-    },
-    {
       "reviewId": "PKG-ROUTE-REVIEW-0022",
       "routeOrMenuId": "MENU-2E3D271F6082",
       "reviewType": "STATIC_MENU_FALLBACK",
@@ -4041,38 +4069,6 @@
       },
       "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
       "owningModule": "UCore",
-      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
-      "blockingTask": "ONE-A5-P0-07",
-      "priority": "P0"
-    },
-    {
-      "reviewId": "PKG-ROUTE-REVIEW-0025",
-      "routeOrMenuId": "MENU-6FB2B2EFCCE9",
-      "reviewType": "STATIC_MENU_FALLBACK",
-      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
-      "currentEvidence": {
-        "routePath": "/ucde/evidence",
-        "staticFallback": true,
-        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
-      },
-      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
-      "owningModule": "Evidence Center",
-      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
-      "blockingTask": "ONE-A5-P0-07",
-      "priority": "P0"
-    },
-    {
-      "reviewId": "PKG-ROUTE-REVIEW-0026",
-      "routeOrMenuId": "MENU-1546058B22CA",
-      "reviewType": "STATIC_MENU_FALLBACK",
-      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
-      "currentEvidence": {
-        "routePath": "/assets/topology",
-        "staticFallback": true,
-        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
-      },
-      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
-      "owningModule": "ONE Asset Graph",
       "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
       "blockingTask": "ONE-A5-P0-07",
       "priority": "P0"
@@ -4126,22 +4122,6 @@
       "priority": "P0"
     },
     {
-      "reviewId": "PKG-ROUTE-REVIEW-0032",
-      "routeOrMenuId": "MENU-181BE732596C",
-      "reviewType": "STATIC_MENU_FALLBACK",
-      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
-      "currentEvidence": {
-        "routePath": "/uesg/sustainability",
-        "staticFallback": true,
-        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
-      },
-      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
-      "owningModule": "UESG",
-      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
-      "blockingTask": "ONE-A5-P0-07",
-      "priority": "P0"
-    },
-    {
       "reviewId": "PKG-ROUTE-REVIEW-0033",
       "routeOrMenuId": "MENU-AF4B041BE3AA",
       "reviewType": "STATIC_MENU_FALLBACK",
@@ -4153,22 +4133,6 @@
       },
       "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
       "owningModule": "Governance & Security",
-      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
-      "blockingTask": "ONE-A5-P0-07",
-      "priority": "P0"
-    },
-    {
-      "reviewId": "PKG-ROUTE-REVIEW-0034",
-      "routeOrMenuId": "MENU-F13770274A9D",
-      "reviewType": "STATIC_MENU_FALLBACK",
-      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
-      "currentEvidence": {
-        "routePath": "/uesg/sustainability",
-        "staticFallback": true,
-        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
-      },
-      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
-      "owningModule": "UESG",
       "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
       "blockingTask": "ONE-A5-P0-07",
       "priority": "P0"
@@ -4236,34 +4200,18 @@
       "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
       "blockingTask": "ONE-A5-P0-07",
       "priority": "P0"
-    },
-    {
-      "reviewId": "PKG-ROUTE-REVIEW-0040",
-      "routeOrMenuId": "MENU-D3825D4FF507",
-      "reviewType": "STATIC_MENU_FALLBACK",
-      "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
-      "currentEvidence": {
-        "routePath": "/ucde/evidence",
-        "staticFallback": true,
-        "currentVisibilityClass": "STATIC_ALWAYS_PRESENT"
-      },
-      "proposedSafeDefault": "APPLY_THE_SAME_TARGET_POLICY_INPUTS_AS_DYNAMIC_MENU_AND_DIRECT_URL",
-      "owningModule": "Evidence Center",
-      "requiredDecision": "Implement shared package-policy evaluation for fallback and dynamic menu sources.",
-      "blockingTask": "ONE-A5-P0-07",
-      "priority": "P0"
     }
   ],
   "summary": {
     "packagePolicyCount": 23,
     "backendNamespacePolicyCount": 29,
-    "frontendRoutePolicyCount": 39,
+    "frontendRoutePolicyCount": 40,
     "lockPagePolicyCount": 5,
     "diagnosticPolicyCount": 5,
     "compatibilityMappingCount": 12,
-    "reviewQueueCount": 36,
+    "reviewQueueCount": 30,
     "currentlyCompliantRoutes": 5,
     "metadataOnlyRoutes": 0,
-    "runtimeEnforcementRequiredRoutes": 34
+    "runtimeEnforcementRequiredRoutes": 35
   }
 }

@@ -1,0 +1,2 @@
+EDGE / LINK / DB / Contracts are shared foundation packages. VANTARIS ONE consumes references and exposes a read-only diagnostics view only.
+No EDGE Command Execution. No LINK Command Execution. No DB Connection. No DB Migration. No runtime execution.

@@ -1,0 +1,2 @@
+Package readiness preview: EDGE Foundation, VANTARIS Link, DB Foundation, Contracts, UConsole, UHMI, UCDE, UMMS, Customer Delivery, Reports, Governance & Security.
+InstallActionState: NOT_EXECUTED. DiagnosticState: PREVIEW_ONLY. RollbackState: NOT_EXECUTED.

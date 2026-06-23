@@ -20,4 +20,5 @@ from .prod_ga import foundation_packages_api
 from .uhmi import uhmi_api
 from .customer_delivery import customer_delivery_api
 from .engineer_installer import engineer_installer_api
+from .foundation_diagnostics import foundation_diagnostics_api
 from .iot.sse_api import *

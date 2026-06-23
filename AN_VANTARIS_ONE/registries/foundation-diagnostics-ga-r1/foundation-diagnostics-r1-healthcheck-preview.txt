@@ -1,0 +1,2 @@
+Healthcheck Preview is table-only and read-only. ExecutionState is NOT_EXECUTED for every preview row.
+Package Integrity Preview is reference-only. Rollback Readiness is preview-only.
