@@ -1,0 +1,16 @@
+UCDE-GA-R4 Evidence Center Customer Preview
+PASS marker: UCDE_GA_R4_EVIDENCE_CENTER_CUSTOMER_PREVIEW_PASS
+
+Customer-readable Evidence Catalog:
+- UHMI_WORKSPACE_EVIDENCE: UHMI read-only workspace evidence.
+- SYSTEM_CONTEXT_EVIDENCE: System Context Panels evidence.
+- DEVICE_CONTEXT_EVIDENCE: Device Context Table evidence.
+- EVENT_CONTEXT_EVIDENCE: Event Context evidence.
+- CUSTOMER_PREVIEW_EVIDENCE: Customer preview package evidence.
+- RELEASE_INDEX_EVIDENCE: Final release chain index evidence.
+- VALIDATOR_RESULT_EVIDENCE: Validator result evidence.
+- ACCEPTANCE_CHECKLIST_EVIDENCE: Acceptance checklist evidence.
+- OFFLINE_DEMO_HANDOFF_EVIDENCE: Offline Demo Hand-off evidence.
+- RELEASE_DECISION_EVIDENCE: Final Release Decision evidence.
+
+No Evidence Write. No DB Write. No Runtime Activation. No Direct Device Control.

@@ -1,0 +1,9 @@
+UCDE-GA-R4 UHMI Evidence Linkage
+PASS marker: UCDE_GA_R4_EVIDENCE_CENTER_CUSTOMER_PREVIEW_PASS
+
+UHMI Evidence Context -> UCDE Evidence Center.
+Linked workspace: UConsole / UHMI Workspace.
+Linked areas: UHMI Overview, System Context Panels, Device Context Table, Mimic Panel Preview, Event Context, Evidence Context, Role-based Views, Guardrails, Future Control Path, Customer Preview Package, Offline Demo Hand-off, Final Release Decision.
+
+Future controlled action path: UHMI -> CODE -> Policy Gate -> Approval -> Audit / UCDE -> LINK -> EDGE -> Device.
+NOT EXECUTED in R4.

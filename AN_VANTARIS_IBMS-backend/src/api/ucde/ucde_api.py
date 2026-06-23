@@ -56,3 +56,37 @@ def ucde_evidence_list():
     }
     return Result.success(data=_service.list_evidence(filters=filters))
 
+
+@api_bp.route("/one/ucde/evidence-center", methods=["GET"])
+def ucde_r4_evidence_center():
+    return Result.success(data=_service.get_r4_evidence_center())
+
+
+@api_bp.route("/one/ucde/evidence-catalog", methods=["GET"])
+def ucde_r4_evidence_catalog():
+    return Result.success(data=_service.get_r4_evidence_catalog())
+
+
+@api_bp.route("/one/ucde/evidence-records", methods=["GET"])
+def ucde_r4_evidence_records():
+    return Result.success(data=_service.get_r4_evidence_records())
+
+
+@api_bp.route("/one/ucde/evidence-links", methods=["GET"])
+def ucde_r4_evidence_links():
+    return Result.success(data=_service.get_r4_evidence_links())
+
+
+@api_bp.route("/one/ucde/uhmi-linkage", methods=["GET"])
+def ucde_r4_uhmi_linkage():
+    return Result.success(data=_service.get_r4_uhmi_linkage())
+
+
+@api_bp.route("/one/ucde/customer-preview", methods=["GET"])
+def ucde_r4_customer_preview():
+    return Result.success(data=_service.get_r4_customer_preview())
+
+
+@api_bp.route("/one/ucde/guardrails", methods=["GET"])
+def ucde_r4_guardrails():
+    return Result.success(data=_service.get_r4_guardrails())

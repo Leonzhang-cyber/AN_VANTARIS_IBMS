@@ -1,0 +1,23 @@
+UCDE-GA-R4 Risk Guardrails
+PASS marker: UCDE_GA_R4_EVIDENCE_CENTER_CUSTOMER_PREVIEW_PASS
+
+Forbidden actions:
+- evidenceWrite: false
+- dbWrite: false
+- dbMigration: false
+- runtimeActivation: false
+- deviceControl: false
+- edgeCommandExecution: false
+- linkCommandExecution: false
+- authMutation: false
+- loginMutation: false
+- jwtMutation: false
+- rbacMutation: false
+- packageStateMutation: false
+- productionActivation: false
+- runnablePackageGeneration: false
+- distBuildCommit: false
+- secretsExport: false
+
+No Evidence Write. No DB Write. No Runtime Activation. No Direct Device Control.
+No EDGE Command Execution. No LINK Command Execution. No auth / login / JWT / RBAC mutation.

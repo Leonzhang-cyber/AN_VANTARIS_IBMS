@@ -1,0 +1,17 @@
+UCDE-GA-R4 Customer Preview Acceptance Checklist
+PASS marker: UCDE_GA_R4_EVIDENCE_CENTER_CUSTOMER_PREVIEW_PASS
+
+PASS: Evidence Center Customer Preview visible.
+PASS: UHMI Evidence Linkage visible.
+PASS: Customer-readable Evidence Catalog visible.
+PASS: Engineer Trace Context visible.
+PASS: Release evidence visible.
+PASS: Validator evidence visible.
+PASS: Acceptance checklist evidence visible.
+PASS: No Evidence Write.
+PASS: No DB Write.
+PASS: No Runtime Activation.
+PASS: No Direct Device Control.
+PASS: No EDGE Command Execution.
+PASS: No LINK Command Execution.
+PASS: No auth / login / JWT / RBAC mutation.

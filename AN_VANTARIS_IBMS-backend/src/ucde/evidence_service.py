@@ -10,6 +10,10 @@ from src.ucde.evidence_provider import (
     get_evidence_health,
     get_evidence_relationships,
     get_evidence_summary,
+    get_ucde_ga_r4_catalog,
+    get_ucde_ga_r4_customer_preview,
+    get_ucde_ga_r4_guardrails,
+    get_ucde_ga_r4_uhmi_linkage,
     list_evidence,
 )
 
@@ -135,3 +139,35 @@ class UcdeEvidenceService:
         health["controlActionsEnabled"] = False
         return health
 
+    def get_r4_evidence_center(self) -> Dict[str, Any]:
+        return get_ucde_ga_r4_customer_preview()
+
+    def get_r4_evidence_catalog(self) -> Dict[str, Any]:
+        return get_ucde_ga_r4_catalog()
+
+    def get_r4_evidence_records(self) -> Dict[str, Any]:
+        catalog = get_ucde_ga_r4_catalog()
+        return {
+            "scope": catalog["scope"],
+            "mode": catalog["mode"],
+            "visualStyle": catalog["visualStyle"],
+            "evidenceRecords": catalog["evidenceRecords"],
+            "evidenceWrite": False,
+            "dbWrite": False,
+            "runtimeActivation": False,
+            "deviceControl": False,
+            "edgeCommandExecution": False,
+            "linkCommandExecution": False,
+        }
+
+    def get_r4_evidence_links(self) -> Dict[str, Any]:
+        return get_ucde_ga_r4_uhmi_linkage()
+
+    def get_r4_uhmi_linkage(self) -> Dict[str, Any]:
+        return get_ucde_ga_r4_uhmi_linkage()
+
+    def get_r4_customer_preview(self) -> Dict[str, Any]:
+        return get_ucde_ga_r4_customer_preview()
+
+    def get_r4_guardrails(self) -> Dict[str, Any]:
+        return get_ucde_ga_r4_guardrails()

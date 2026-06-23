@@ -8,6 +8,140 @@ from typing import Any, Dict, List, Optional
 
 from src.ucde.evidence_integrity import build_evidence_hash, build_traceability_hash
 
+UCDE_GA_R4_SCOPE = "UCDE_GA_R4"
+UCDE_GA_R4_MODE = "read_only"
+UCDE_GA_R4_VISUAL_STYLE = "VANTARIS_LIGHT_OPERATIONS_CONSOLE"
+UCDE_GA_R4_FUTURE_CONTROL_PATH = (
+    "UHMI -> CODE -> Policy Gate -> Approval -> Audit / UCDE -> LINK -> EDGE -> Device"
+)
+
+UCDE_GA_R4_FLAGS = {
+    "evidenceCenterCustomerPreview": True,
+    "uhmiEvidenceLinkage": True,
+    "customerReadableEvidence": True,
+    "engineerTraceContext": True,
+    "evidenceWrite": False,
+    "dbWrite": False,
+    "runtimeActivation": False,
+    "deviceControl": False,
+    "edgeCommandExecution": False,
+    "linkCommandExecution": False,
+    "authMutation": False,
+    "rbacMutation": False,
+    "productionActivation": False,
+}
+
+UCDE_GA_R4_EVIDENCE_TYPES = [
+    "UHMI_WORKSPACE_EVIDENCE",
+    "SYSTEM_CONTEXT_EVIDENCE",
+    "DEVICE_CONTEXT_EVIDENCE",
+    "EVENT_CONTEXT_EVIDENCE",
+    "CUSTOMER_PREVIEW_EVIDENCE",
+    "RELEASE_INDEX_EVIDENCE",
+    "VALIDATOR_RESULT_EVIDENCE",
+    "ACCEPTANCE_CHECKLIST_EVIDENCE",
+    "OFFLINE_DEMO_HANDOFF_EVIDENCE",
+    "RELEASE_DECISION_EVIDENCE",
+]
+
+UCDE_GA_R4_UHMI_AREAS = [
+    "UHMI Overview",
+    "System Context Panels",
+    "Device Context Table",
+    "Mimic Panel Preview",
+    "Event Context",
+    "Evidence Context",
+    "Role-based Views",
+    "Guardrails",
+    "Future Control Path",
+    "Customer Preview Package",
+    "Offline Demo Hand-off",
+    "Final Release Decision",
+]
+
+
+def _ucde_ga_r4_record(
+    evidence_id: str,
+    evidence_type: str,
+    title: str,
+    source_module: str,
+    linked_workspace: str,
+    linked_object_type: str,
+    linked_object_id: str,
+    linked_uhmi_panel: str,
+    linked_report: str,
+    linked_delivery_item: str,
+) -> Dict[str, Any]:
+    return {
+        "evidenceId": evidence_id,
+        "evidenceType": evidence_type,
+        "title": title,
+        "sourceModule": source_module,
+        "linkedWorkspace": linked_workspace,
+        "linkedObjectType": linked_object_type,
+        "linkedObjectId": linked_object_id,
+        "customerVisible": True,
+        "engineerVisible": True,
+        "integrityStatus": "STATIC_FIXTURE_VERIFIED",
+        "timestamp": "2026-06-23T00:00:00Z",
+        "readOnly": True,
+        "linkedUhmiPanel": linked_uhmi_panel,
+        "linkedReport": linked_report,
+        "linkedDeliveryItem": linked_delivery_item,
+        "guardrailStatus": "READ_ONLY_NO_WRITE_NO_RUNTIME_NO_DEVICE_CONTROL",
+    }
+
+
+UCDE_GA_R4_EVIDENCE_RECORDS = [
+    _ucde_ga_r4_record(
+        "ucde-r4-uhmi-workspace-evidence",
+        "UHMI_WORKSPACE_EVIDENCE",
+        "UHMI read-only workspace evidence",
+        "uhmi",
+        "UConsole / UHMI Workspace",
+        "workspace",
+        "UHMI-GA-R6",
+        "UHMI Overview",
+        "UHMI_GA_R6_REPORT.md",
+        "UHMI_GA_R6_CUSTOMER_PREVIEW_FINAL_ARCHIVE_SUMMARY.md",
+    ),
+    _ucde_ga_r4_record(
+        "ucde-r4-customer-preview-evidence",
+        "CUSTOMER_PREVIEW_EVIDENCE",
+        "Customer preview package evidence",
+        "uhmi",
+        "UConsole / UHMI Workspace",
+        "delivery-item",
+        "UHMI-GA-R3-R6",
+        "Customer Preview Package",
+        "UHMI_GA_R3_REPORT.md",
+        "UHMI_GA_R4_CUSTOMER_PREVIEW_EXPORT_HANDOFF.md",
+    ),
+    _ucde_ga_r4_record(
+        "ucde-r4-validator-result-evidence",
+        "VALIDATOR_RESULT_EVIDENCE",
+        "Validator evidence for UHMI and UCDE preview chain",
+        "validation",
+        "UCDE Evidence Center",
+        "validator",
+        "validate-ucde-ga-r4-evidence-center-customer-preview.py",
+        "Evidence Context",
+        "UCDE_GA_R4_REPORT.md",
+        "ucde-r4-validator-results.txt",
+    ),
+    _ucde_ga_r4_record(
+        "ucde-r4-release-decision-evidence",
+        "RELEASE_DECISION_EVIDENCE",
+        "Final customer preview release decision evidence",
+        "uhmi",
+        "UConsole / UHMI Workspace",
+        "release-decision",
+        "UHMI-GA-R5",
+        "Final Release Decision",
+        "UHMI_GA_R5_REPORT.md",
+        "UHMI_GA_R5_CUSTOMER_PREVIEW_RELEASE_DECISION.md",
+    ),
+]
 
 def _now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
@@ -615,3 +749,60 @@ def get_evidence_health() -> Dict[str, Any]:
         "iec62443Certified": False,
     }
 
+
+def get_ucde_ga_r4_customer_preview() -> Dict[str, Any]:
+    return {
+        "scope": UCDE_GA_R4_SCOPE,
+        "mode": UCDE_GA_R4_MODE,
+        "visualStyle": UCDE_GA_R4_VISUAL_STYLE,
+        **UCDE_GA_R4_FLAGS,
+        "futureControlPath": UCDE_GA_R4_FUTURE_CONTROL_PATH,
+        "futureControlPathStatus": "NOT_EXECUTED",
+        "evidenceRecords": deepcopy(UCDE_GA_R4_EVIDENCE_RECORDS),
+    }
+
+
+def get_ucde_ga_r4_catalog() -> Dict[str, Any]:
+    return {
+        "scope": UCDE_GA_R4_SCOPE,
+        "mode": UCDE_GA_R4_MODE,
+        "visualStyle": UCDE_GA_R4_VISUAL_STYLE,
+        **UCDE_GA_R4_FLAGS,
+        "evidenceTypes": list(UCDE_GA_R4_EVIDENCE_TYPES),
+        "evidenceRecords": deepcopy(UCDE_GA_R4_EVIDENCE_RECORDS),
+        "futureControlPath": UCDE_GA_R4_FUTURE_CONTROL_PATH,
+    }
+
+
+def get_ucde_ga_r4_uhmi_linkage() -> Dict[str, Any]:
+    return {
+        "scope": UCDE_GA_R4_SCOPE,
+        "mode": UCDE_GA_R4_MODE,
+        "visualStyle": UCDE_GA_R4_VISUAL_STYLE,
+        **UCDE_GA_R4_FLAGS,
+        "linkedWorkspace": "UConsole / UHMI Workspace",
+        "linkedAreas": list(UCDE_GA_R4_UHMI_AREAS),
+        "evidenceRecords": deepcopy(UCDE_GA_R4_EVIDENCE_RECORDS),
+        "futureControlPath": UCDE_GA_R4_FUTURE_CONTROL_PATH,
+        "futureControlPathStatus": "NOT_EXECUTED",
+    }
+
+
+def get_ucde_ga_r4_guardrails() -> Dict[str, Any]:
+    return {
+        "scope": UCDE_GA_R4_SCOPE,
+        "mode": UCDE_GA_R4_MODE,
+        "visualStyle": UCDE_GA_R4_VISUAL_STYLE,
+        **UCDE_GA_R4_FLAGS,
+        "guardrails": [
+            "No Evidence Write",
+            "No DB Write",
+            "No Runtime Activation",
+            "No Direct Device Control",
+            "No EDGE Command Execution",
+            "No LINK Command Execution",
+            "No auth / login / JWT / RBAC mutation",
+        ],
+        "futureControlPath": UCDE_GA_R4_FUTURE_CONTROL_PATH,
+        "futureControlPathStatus": "NOT_EXECUTED",
+    }
