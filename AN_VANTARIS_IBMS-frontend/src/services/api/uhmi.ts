@@ -76,6 +76,95 @@ export interface UhmiHealthPayload {
   controlActionsEnabled: boolean
 }
 
+export interface UhmiSummaryCard {
+  label: string
+  value: number
+  tone: string
+}
+
+export interface UhmiSystemContext {
+  systemId: string
+  systemName: string
+  category: string
+  healthStatus: string
+  visibleDevices: number
+  activeEvents: number
+  panelCount: number
+  evidenceCount: number
+  readOnly: boolean
+}
+
+export interface UhmiDeviceContext {
+  deviceId: string
+  deviceName: string
+  systemName: string
+  location: string
+  status: string
+  lastSeen: string
+  eventCount: number
+  panelAvailable: boolean
+  controlState: string
+}
+
+export interface UhmiMimicPanel {
+  panelId: string
+  panelName: string
+  systemName: string
+  previewType: string
+  status: string
+  readOnly: boolean
+  controlsDisabled: boolean
+}
+
+export interface UhmiEventContext {
+  eventId: string
+  severity: string
+  title: string
+  sourceSystem: string
+  linkedDevice: string
+  timestamp: string
+  status: string
+  evidenceLinked: boolean
+}
+
+export interface UhmiEvidenceContext {
+  evidenceId: string
+  type: string
+  linkedObject: string
+  source: string
+  timestamp: string
+  integrityStatus: string
+  viewOnly: boolean
+}
+
+export interface UhmiGuardrail {
+  label: string
+  active: boolean
+}
+
+export interface UhmiWorkspacePayload {
+  scope: 'UHMI_GA_R2B'
+  mode: 'read_only'
+  visualStyle: 'VANTARIS_LIGHT_OPERATIONS_CONSOLE'
+  workspaceName: string
+  baseline: string
+  controlEnabled: boolean
+  runtimeActivation: boolean
+  deviceWrite: boolean
+  dbWrite: boolean
+  edgeCommandExecution: boolean
+  linkCommandExecution: boolean
+  futureControlPath: string
+  panels: string[]
+  summaryCards: UhmiSummaryCard[]
+  systemContexts: UhmiSystemContext[]
+  deviceContexts: UhmiDeviceContext[]
+  mimicPanels: UhmiMimicPanel[]
+  eventContexts: UhmiEventContext[]
+  evidenceContexts: UhmiEvidenceContext[]
+  guardrails: UhmiGuardrail[]
+}
+
 export const uhmiSections: UhmiMenuItem[] = [
   { key: 'HMI_OVERVIEW', label: 'HMI Overview', route: '/one/uhmi/overview' },
   { key: 'SYSTEM_HMI', label: 'System HMI', route: '/one/uhmi/system' },
@@ -100,3 +189,7 @@ export async function getUhmiSection(sectionKey: UhmiSectionKey): Promise<UhmiSe
   return response.data
 }
 
+export async function getUhmiWorkspace(): Promise<UhmiWorkspacePayload> {
+  const response = await request.get<UhmiWorkspacePayload>('/one/uconsole/uhmi/workspace')
+  return response.data
+}

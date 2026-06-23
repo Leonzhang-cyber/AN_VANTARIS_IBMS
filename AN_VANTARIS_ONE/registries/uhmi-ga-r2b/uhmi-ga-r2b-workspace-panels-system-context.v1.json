@@ -1,0 +1,80 @@
+{
+  "scope": "UHMI_GA_R2B",
+  "taskId": "UHMI-GA-R2B",
+  "status": "frozen_local_skeleton",
+  "mode": "read_only",
+  "visualStyle": "VANTARIS_LIGHT_OPERATIONS_CONSOLE",
+  "baseline": "UHMI-GA-R2A",
+  "panels": [
+    "Overview",
+    "System Panels",
+    "Device Panels",
+    "Mimic Panels",
+    "Status View",
+    "Event Context",
+    "Evidence Context",
+    "Guardrails",
+    "Future Control Path"
+  ],
+  "systemContexts": [
+    "Building Systems",
+    "Facility Systems",
+    "Security Systems",
+    "Energy Systems",
+    "Data Center Systems",
+    "Utility Systems"
+  ],
+  "deviceContexts": [
+    "deviceId",
+    "deviceName",
+    "systemName",
+    "location",
+    "status",
+    "lastSeen",
+    "eventCount",
+    "panelAvailable",
+    "controlState"
+  ],
+  "eventContexts": [
+    "eventId",
+    "severity",
+    "title",
+    "sourceSystem",
+    "linkedDevice",
+    "timestamp",
+    "status",
+    "evidenceLinked"
+  ],
+  "evidenceContexts": [
+    "evidenceId",
+    "type",
+    "linkedObject",
+    "source",
+    "timestamp",
+    "integrityStatus",
+    "viewOnly"
+  ],
+  "apiEndpoints": [
+    "GET /api/one/uconsole/uhmi/workspace",
+    "GET /api/one/uconsole/uhmi/status",
+    "GET /api/one/uconsole/uhmi/panels",
+    "GET /api/one/uconsole/uhmi/systems",
+    "GET /api/one/uconsole/uhmi/devices",
+    "GET /api/one/uconsole/uhmi/events",
+    "GET /api/one/uconsole/uhmi/evidence",
+    "GET /api/one/uconsole/uhmi/guardrails"
+  ],
+  "guardrails": {
+    "controlEnabled": false,
+    "runtimeActivation": false,
+    "deviceWrite": false,
+    "dbWrite": false,
+    "edgeCommandExecution": false,
+    "linkCommandExecution": false,
+    "readOnlyMode": true,
+    "noDirectDeviceControl": true
+  },
+  "futureControlPath": "UHMI -> CODE -> Policy Gate -> Approval -> Audit / UCDE -> LINK -> EDGE -> Device",
+  "validationPassMarker": "UHMI_GA_R2B_WORKSPACE_PANELS_SYSTEM_CONTEXT_PASS"
+}
+

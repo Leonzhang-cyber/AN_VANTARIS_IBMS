@@ -5,11 +5,13 @@ import {
   getUhmiHealth,
   getUhmiMenuIa,
   getUhmiSection,
+  getUhmiWorkspace,
   uhmiSections,
   type UhmiHealthPayload,
   type UhmiMenuIaPayload,
   type UhmiSectionKey,
   type UhmiSectionPayload,
+  type UhmiWorkspacePayload,
 } from '@/services/api/uhmi'
 
 const route = useRoute()
@@ -19,8 +21,28 @@ const loading = ref(false)
 const health = ref<UhmiHealthPayload | null>(null)
 const menuIa = ref<UhmiMenuIaPayload | null>(null)
 const section = ref<UhmiSectionPayload | null>(null)
+const workspace = ref<UhmiWorkspacePayload | null>(null)
 const loadError = ref('')
 const activeSectionKey = ref<UhmiSectionKey>('HMI_OVERVIEW')
+
+const fallbackSummaryCards = [
+  { label: 'Systems Monitored', value: 6, tone: 'teal' },
+  { label: 'Devices Visible', value: 180, tone: 'mint' },
+  { label: 'Active Events', value: 21, tone: 'amber' },
+  { label: 'Panels Available', value: 9, tone: 'blue' },
+  { label: 'Evidence Records', value: 81, tone: 'violet' },
+  { label: 'Guardrails Active', value: 8, tone: 'green' },
+]
+
+const fallbackR2bGuardrails = [
+  { label: 'Read-only Mode', active: true },
+  { label: 'No Direct Device Control', active: true },
+  { label: 'No Runtime Activation', active: true },
+  { label: 'No DB Write', active: true },
+  { label: 'No EDGE Command Execution', active: true },
+  { label: 'No LINK Command Execution', active: true },
+  { label: 'Future Control Path', active: true },
+]
 
 const activeMenuItem = computed(() =>
   uhmiSections.find((item) => item.key === activeSectionKey.value) ?? uhmiSections[0],
@@ -36,6 +58,17 @@ const guardrailRows = computed(() => [
 ])
 
 const allGuardrailsPass = computed(() => guardrailRows.value.every((item) => item.value))
+const summaryCards = computed(() => workspace.value?.summaryCards ?? fallbackSummaryCards)
+const systemContexts = computed(() => workspace.value?.systemContexts ?? [])
+const deviceContexts = computed(() => workspace.value?.deviceContexts ?? [])
+const mimicPanels = computed(() => workspace.value?.mimicPanels ?? [])
+const eventContexts = computed(() => workspace.value?.eventContexts ?? [])
+const evidenceContexts = computed(() => workspace.value?.evidenceContexts ?? [])
+const r2bGuardrails = computed(() => workspace.value?.guardrails ?? fallbackR2bGuardrails)
+const futureControlPath = computed(() =>
+  workspace.value?.futureControlPath
+  ?? 'UHMI -> CODE -> Policy Gate -> Approval -> Audit / UCDE -> LINK -> EDGE -> Device',
+)
 
 function syncActiveFromRoute(): void {
   const matched = uhmiSections.find((item) => item.route === route.path)
@@ -59,12 +92,14 @@ async function loadWorkspace(): Promise<void> {
   loading.value = true
   loadError.value = ''
   try {
-    const [healthPayload, menuPayload] = await Promise.all([
+    const [healthPayload, menuPayload, workspacePayload] = await Promise.all([
       getUhmiHealth(),
       getUhmiMenuIa(),
+      getUhmiWorkspace(),
     ])
     health.value = healthPayload
     menuIa.value = menuPayload
+    workspace.value = workspacePayload
     await loadSection()
   } catch (error) {
     loadError.value = error instanceof Error ? error.message : 'UHMI read-only API unavailable.'
@@ -100,7 +135,8 @@ onMounted(() => {
       </div>
       <div class="status-stack">
         <el-tag type="success">GET only</el-tag>
-        <el-tag type="success">Read-only</el-tag>
+        <el-tag type="success">Read-only Mode</el-tag>
+        <el-tag type="success">No Direct Device Control</el-tag>
         <el-tag type="info">UConsole workspace</el-tag>
       </div>
     </header>
@@ -115,28 +151,13 @@ onMounted(() => {
     />
 
     <el-row :gutter="16" class="block-space">
-      <el-col :span="6">
-        <el-card shadow="never">
-          <div class="metric-value">{{ health?.status || 'PASS' }}</div>
-          <div class="metric-label">Workspace status</div>
-        </el-card>
-      </el-col>
-      <el-col :span="6">
-        <el-card shadow="never">
-          <div class="metric-value">{{ menuIa?.menuItems.length || uhmiSections.length }}</div>
-          <div class="metric-label">L3 page views</div>
-        </el-card>
-      </el-col>
-      <el-col :span="6">
-        <el-card shadow="never">
-          <div class="metric-value">{{ allGuardrailsPass ? 'PASS' : 'REVIEW' }}</div>
-          <div class="metric-label">Boundary guardrails</div>
-        </el-card>
-      </el-col>
-      <el-col :span="6">
-        <el-card shadow="never">
-          <div class="metric-value">0</div>
-          <div class="metric-label">Runtime actions</div>
+      <el-col v-for="card in summaryCards" :key="card.label" :span="4">
+        <el-card shadow="never" class="metric-card">
+          <div class="metric-card__icon" :class="`metric-card__icon--${card.tone}`">{{ card.label.slice(0, 1) }}</div>
+          <div>
+            <div class="metric-value">{{ card.value }}</div>
+            <div class="metric-label">{{ card.label }}</div>
+          </div>
         </el-card>
       </el-col>
     </el-row>
@@ -185,7 +206,94 @@ onMounted(() => {
     </el-card>
 
     <el-card shadow="never" class="block-space">
-      <template #header>Boundary guardrails</template>
+      <template #header>
+        <div class="card-header">
+          <span>System Context</span>
+          <el-tag type="success">read-only</el-tag>
+        </div>
+      </template>
+      <div class="system-grid">
+        <div v-for="item in systemContexts" :key="item.systemId" class="system-card">
+          <div class="system-card__title">
+            <span>{{ item.systemName }}</span>
+            <el-tag type="success">{{ item.healthStatus }}</el-tag>
+          </div>
+          <div class="system-card__meta">{{ item.systemId }} / {{ item.category }}</div>
+          <div class="system-card__metrics">
+            <span>{{ item.visibleDevices }} devices</span>
+            <span>{{ item.activeEvents }} events</span>
+            <span>{{ item.panelCount }} panels</span>
+            <span>{{ item.evidenceCount }} evidence</span>
+          </div>
+        </div>
+      </div>
+    </el-card>
+
+    <el-card shadow="never" class="block-space">
+      <template #header>Device Context</template>
+      <el-table :data="deviceContexts" border>
+        <el-table-column prop="deviceId" label="deviceId" min-width="180" />
+        <el-table-column prop="deviceName" label="deviceName" min-width="180" />
+        <el-table-column prop="systemName" label="systemName" min-width="170" />
+        <el-table-column prop="location" label="location" min-width="180" />
+        <el-table-column prop="status" label="status" width="120" />
+        <el-table-column prop="lastSeen" label="lastSeen" min-width="180" />
+        <el-table-column prop="eventCount" label="eventCount" width="120" />
+        <el-table-column prop="panelAvailable" label="panelAvailable" width="150" />
+        <el-table-column prop="controlState" label="controlState" min-width="170" />
+      </el-table>
+    </el-card>
+
+    <el-card shadow="never" class="block-space">
+      <template #header>Mimic Panel Preview</template>
+      <div class="mimic-grid">
+        <div v-for="item in mimicPanels" :key="item.panelId" class="mimic-card">
+          <div class="mimic-card__bar"></div>
+          <h3>{{ item.panelName }}</h3>
+          <p>{{ item.systemName }}</p>
+          <div class="mimic-card__footer">
+            <el-tag type="info">{{ item.previewType }}</el-tag>
+            <el-tag type="success">{{ item.controlsDisabled ? 'controls disabled' : 'review' }}</el-tag>
+          </div>
+        </div>
+      </div>
+    </el-card>
+
+    <el-card shadow="never" class="block-space">
+      <template #header>Event Context</template>
+      <el-table :data="eventContexts" border>
+        <el-table-column prop="eventId" label="eventId" min-width="150" />
+        <el-table-column prop="severity" label="severity" width="120" />
+        <el-table-column prop="title" label="title" min-width="220" />
+        <el-table-column prop="sourceSystem" label="sourceSystem" min-width="170" />
+        <el-table-column prop="linkedDevice" label="linkedDevice" min-width="180" />
+        <el-table-column prop="timestamp" label="timestamp" min-width="180" />
+        <el-table-column prop="status" label="status" width="130" />
+        <el-table-column prop="evidenceLinked" label="evidenceLinked" width="150" />
+      </el-table>
+    </el-card>
+
+    <el-card shadow="never" class="block-space">
+      <template #header>Evidence Context</template>
+      <el-table :data="evidenceContexts" border>
+        <el-table-column prop="evidenceId" label="evidenceId" min-width="150" />
+        <el-table-column prop="type" label="type" min-width="150" />
+        <el-table-column prop="linkedObject" label="linkedObject" min-width="190" />
+        <el-table-column prop="source" label="source" min-width="180" />
+        <el-table-column prop="timestamp" label="timestamp" min-width="180" />
+        <el-table-column prop="integrityStatus" label="integrityStatus" min-width="150" />
+        <el-table-column prop="viewOnly" label="viewOnly" width="120" />
+      </el-table>
+    </el-card>
+
+    <el-card shadow="never" class="block-space">
+      <template #header>Guardrails</template>
+      <div class="guardrail-grid">
+        <div v-for="item in r2bGuardrails" :key="item.label" class="guardrail-pill">
+          <span>{{ item.label }}</span>
+          <el-tag :type="item.active ? 'success' : 'danger'">{{ item.active ? 'PASS' : 'REVIEW' }}</el-tag>
+        </div>
+      </div>
       <el-row :gutter="12">
         <el-col v-for="item in guardrailRows" :key="item.label" :span="8">
           <div class="guardrail-pill">
@@ -201,6 +309,14 @@ onMounted(() => {
         title="No direct device control, direct DB write, EDGE command, LINK command, NEXUS AI execution, bypass CODE, runtime activation, or future controlled action execution is exposed."
         class="block-space"
       />
+    </el-card>
+
+    <el-card shadow="never" class="block-space">
+      <template #header>Future Control Path</template>
+      <div class="future-path">
+        <span v-for="step in futureControlPath.split(' -> ')" :key="step">{{ step }}</span>
+      </div>
+      <el-button type="primary" disabled class="block-space">Future-only / Requires Policy Approval</el-button>
     </el-card>
   </section>
 </template>
@@ -261,6 +377,100 @@ onMounted(() => {
   font-size: 13px;
 }
 
+.metric-card {
+  min-height: 92px;
+}
+
+.metric-card :deep(.el-card__body) {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.metric-card__icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  color: #0f766e;
+  background: #ccfbf1;
+}
+
+.metric-card__icon--amber {
+  color: #92400e;
+  background: #fef3c7;
+}
+
+.metric-card__icon--blue {
+  color: #1d4ed8;
+  background: #dbeafe;
+}
+
+.metric-card__icon--violet {
+  color: #6d28d9;
+  background: #ede9fe;
+}
+
+.metric-card__icon--green,
+.metric-card__icon--mint,
+.metric-card__icon--teal {
+  color: #047857;
+  background: #d1fae5;
+}
+
+.system-grid,
+.mimic-grid,
+.guardrail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+}
+
+.system-card,
+.mimic-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: #fff;
+  padding: 14px;
+}
+
+.system-card__title,
+.mimic-card__footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+}
+
+.system-card__title {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.system-card__meta,
+.mimic-card p {
+  margin: 8px 0;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.system-card__metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  color: #334155;
+  font-size: 13px;
+}
+
+.mimic-card__bar {
+  height: 56px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #ecfeff, #f0fdf4);
+  border: 1px solid #ccfbf1;
+}
+
 .guardrail-pill {
   display: flex;
   min-height: 48px;
@@ -272,5 +482,20 @@ onMounted(() => {
   border-radius: 6px;
   background: #fff;
 }
-</style>
 
+.future-path {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.future-path span {
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: #f8fafc;
+  border: 1px solid #dbe4ea;
+  color: #334155;
+  font-size: 13px;
+}
+</style>
