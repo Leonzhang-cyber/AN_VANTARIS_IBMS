@@ -1,0 +1,137 @@
+{
+  "scope": "UHMI_GA_R2F",
+  "taskId": "UHMI-GA-R2F",
+  "status": "frozen_local_release_index",
+  "mode": "read_only",
+  "visualStyle": "VANTARIS_LIGHT_OPERATIONS_CONSOLE",
+  "baseline": "UHMI-GA-R2E",
+  "baselineHead": "6bd6bbaa0e23eee6676e170d2493d093084216a5",
+  "productionActivation": "NOT_EXECUTED",
+  "releaseChain": [
+    {
+      "stage": "UHMI-GA-R1",
+      "commit": "003f4f710cfd76130ff79275c8190ec6bbe7edc9",
+      "tag": "uhmi-ga-r1-uconsole-readonly-workspace-freeze-20260622",
+      "scope": "Read-only UConsole Workspace Foundation",
+      "status": "PASS",
+      "passMarker": "UHMI_GA_R1_UCONSOLE_UHMI_WORKSPACE_READONLY_FOUNDATION_FREEZE_PASS"
+    },
+    {
+      "stage": "UHMI-GA-R2A",
+      "commit": "6d682fdd351e3ad51b27ce91f2dbf92c74da3323",
+      "tag": "uhmi-ga-r2a-full-uconsole-menu-ui-api-skeleton-freeze-20260622",
+      "scope": "Full UConsole Menu IA + UI/API Skeleton",
+      "status": "PASS",
+      "passMarker": "UHMI_GA_R2A_FULL_UCONSOLE_MENU_IA_UI_API_SKELETON_PASS"
+    },
+    {
+      "stage": "UHMI-GA-R2B",
+      "commit": "3678150d55f2459def6fc7b423496acb62143ac4",
+      "tag": "uhmi-ga-r2b-workspace-panels-system-context-freeze-20260622",
+      "scope": "Workspace Panels + System Context Panels",
+      "status": "PASS",
+      "passMarker": "UHMI_GA_R2B_WORKSPACE_PANELS_SYSTEM_CONTEXT_PASS"
+    },
+    {
+      "stage": "UHMI-GA-R2C",
+      "commit": "0262d90efffbb4993215d44c35f7c4d26f6d762f",
+      "tag": "uhmi-ga-r2c-role-based-workspace-views-freeze-20260622",
+      "scope": "Role-based Workspace Views",
+      "status": "PASS",
+      "passMarker": "UHMI_GA_R2C_ROLE_BASED_WORKSPACE_VIEWS_PASS"
+    },
+    {
+      "stage": "UHMI-GA-R2D",
+      "commit": "e6c94cefcc7aee336d4702bc377a554a549454eb",
+      "tag": "uhmi-ga-r2d-light-console-style-freeze-20260622",
+      "scope": "Workspace Visual Polish + Light Console Style Freeze",
+      "status": "PASS",
+      "passMarker": "UHMI_GA_R2D_WORKSPACE_VISUAL_POLISH_LIGHT_CONSOLE_STYLE_PASS"
+    },
+    {
+      "stage": "UHMI-GA-R2E",
+      "commit": "6bd6bbaa0e23eee6676e170d2493d093084216a5",
+      "tag": "uhmi-ga-r2e-api-frontend-integration-audit-freeze-20260622",
+      "scope": "Workspace API Consolidation + Frontend Integration Audit",
+      "status": "PASS",
+      "passMarker": "UHMI_GA_R2E_WORKSPACE_API_CONSOLIDATION_FRONTEND_INTEGRATION_AUDIT_PASS"
+    }
+  ],
+  "releaseIndex": {
+    "document": "UHMI_GA_R2F_FINAL_READONLY_WORKSPACE_RELEASE_INDEX.md",
+    "status": "PASS"
+  },
+  "evidencePack": {
+    "document": "UHMI_GA_R2F_EVIDENCE_PACK.md",
+    "status": "PASS",
+    "files": [
+      "AN_VANTARIS_ONE/registries/uhmi-ga-r2f/uhmi-r2f-release-files.txt",
+      "AN_VANTARIS_ONE/registries/uhmi-ga-r2f/uhmi-r2f-validator-results.txt",
+      "AN_VANTARIS_ONE/registries/uhmi-ga-r2f/uhmi-r2f-tag-commit-chain.txt"
+    ]
+  },
+  "readinessMatrix": {
+    "document": "UHMI_GA_R2F_FINAL_READINESS_MATRIX.md",
+    "status": "PASS"
+  },
+  "validators": [
+    "scripts/validation/validate-uhmi-ga-r2f-final-readonly-workspace-release-index.py",
+    "scripts/validation/validate-uhmi-ga-r2e-workspace-api-consolidation-frontend-integration-audit.py",
+    "scripts/validation/validate-uhmi-ga-r2d-workspace-visual-polish-light-console-style.py",
+    "scripts/validation/validate-uhmi-ga-r2c-role-based-workspace-views.py",
+    "scripts/validation/validate-uhmi-ga-r2b-workspace-panels-system-context.py",
+    "scripts/validation/validate-uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.py",
+    "scripts/validation/validate-uhmi-ga-r1-uconsole-workspace-readonly-foundation.py",
+    "scripts/validation/validate-one-design-r1-full-product-design-blueprint.py",
+    "scripts/validation/validate-one-module-ga-wave-r1-consolidated-freeze.py",
+    "scripts/validation/validate-one-package-route-enforcement.py",
+    "scripts/validation/validate-one-boundaries.py"
+  ],
+  "registries": [
+    "AN_VANTARIS_ONE/registries/uhmi-ga-r1/uhmi-ga-r1-uconsole-workspace-readonly-foundation.v1.json",
+    "AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.v1.json",
+    "AN_VANTARIS_ONE/registries/uhmi-ga-r2b/uhmi-ga-r2b-workspace-panels-system-context.v1.json",
+    "AN_VANTARIS_ONE/registries/uhmi-ga-r2c/uhmi-ga-r2c-role-based-workspace-views.v1.json",
+    "AN_VANTARIS_ONE/registries/uhmi-ga-r2d/uhmi-ga-r2d-workspace-visual-polish-light-console-style.v1.json",
+    "AN_VANTARIS_ONE/registries/uhmi-ga-r2e/uhmi-ga-r2e-workspace-api-consolidation-frontend-integration-audit.v1.json",
+    "AN_VANTARIS_ONE/registries/uhmi-ga-r2f/uhmi-ga-r2f-final-readonly-workspace-release-index.v1.json"
+  ],
+  "frontendFiles": [
+    "AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue",
+    "AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts",
+    "AN_VANTARIS_IBMS-frontend/src/services/api/index.ts",
+    "AN_VANTARIS_IBMS-frontend/src/router/routes.ts",
+    "AN_VANTARIS_IBMS-frontend/src/services/menu/static-menu.ts"
+  ],
+  "backendFiles": [
+    "AN_VANTARIS_IBMS-backend/src/api/uhmi/uhmi_api.py",
+    "AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py"
+  ],
+  "guardrails": [
+    "Read-only Mode",
+    "No Direct Device Control",
+    "No Runtime Activation",
+    "No DB Write",
+    "No EDGE Command Execution",
+    "No LINK Command Execution",
+    "No auth / login / JWT / RBAC mutation",
+    "No Production Activation"
+  ],
+  "forbiddenActions": {
+    "install": "NOT_EXECUTED",
+    "rollback": "NOT_EXECUTED",
+    "dbMigration": "NOT_EXECUTED",
+    "dbWrite": "NOT_EXECUTED",
+    "runtimeActivation": "NOT_EXECUTED",
+    "deviceControl": "NOT_EXECUTED",
+    "edgeCommandExecution": "NOT_EXECUTED",
+    "linkCommandExecution": "NOT_EXECUTED",
+    "authMutation": "NOT_EXECUTED",
+    "jwtMutation": "NOT_EXECUTED",
+    "rbacMutation": "NOT_EXECUTED",
+    "packageStateMutation": "NOT_EXECUTED",
+    "productionActivation": "NOT_EXECUTED"
+  },
+  "futureControlPath": "UHMI -> CODE -> Policy Gate -> Approval -> Audit / UCDE -> LINK -> EDGE -> Device",
+  "validationPassMarker": "UHMI_GA_R2F_FINAL_READONLY_WORKSPACE_RELEASE_INDEX_PASS"
+}

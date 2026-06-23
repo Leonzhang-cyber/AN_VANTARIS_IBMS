@@ -1,0 +1,31 @@
+UHMI-GA-R2F release files
+
+Docs:
+UHMI_GA_R2F_FINAL_READONLY_WORKSPACE_RELEASE_INDEX.md
+UHMI_GA_R2F_EVIDENCE_PACK.md
+UHMI_GA_R2F_FINAL_READINESS_MATRIX.md
+UHMI_GA_R2F_REPORT.md
+
+Registry:
+AN_VANTARIS_ONE/registries/uhmi-ga-r2f/uhmi-ga-r2f-final-readonly-workspace-release-index.v1.json
+
+Evidence:
+AN_VANTARIS_ONE/registries/uhmi-ga-r2f/uhmi-r2f-release-files.txt
+AN_VANTARIS_ONE/registries/uhmi-ga-r2f/uhmi-r2f-validator-results.txt
+AN_VANTARIS_ONE/registries/uhmi-ga-r2f/uhmi-r2f-tag-commit-chain.txt
+
+Validator:
+scripts/validation/validate-uhmi-ga-r2f-final-readonly-workspace-release-index.py
+
+Referenced frontend files:
+AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue
+AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts
+AN_VANTARIS_IBMS-frontend/src/router/routes.ts
+AN_VANTARIS_IBMS-frontend/src/services/menu/static-menu.ts
+
+Referenced backend files:
+AN_VANTARIS_IBMS-backend/src/api/uhmi/uhmi_api.py
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py
+
+PASS marker:
+UHMI_GA_R2F_FINAL_READONLY_WORKSPACE_RELEASE_INDEX_PASS
