@@ -56,6 +56,12 @@ export const fallbackMenuItems: AppMenuItem[] = [
         path: '/console/operations',
         source: 'static',
       },
+      {
+        id: 'uconsole-uhmi-workspace',
+        label: 'UHMI Workspace',
+        path: '/one/uhmi/overview',
+        source: 'static',
+      },
     ],
   },
   {

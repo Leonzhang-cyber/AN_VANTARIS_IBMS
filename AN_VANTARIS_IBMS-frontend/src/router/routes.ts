@@ -19,6 +19,7 @@ import UedgeDiagnostics from '@/modules/uedge/UedgeDiagnostics.vue'
 import SystemOverviewView from '@/modules/system/SystemOverviewView.vue'
 import SystemSettingsView from '@/modules/system/SystemSettingsView.vue'
 import AirportGaReadonlyConsole from '@/modules/airport/AirportGaReadonlyConsole.vue'
+import UhmiWorkspace from '@/modules/uhmi/UhmiWorkspace.vue'
 
 declare module 'vue-router' {
   interface RouteMeta {
@@ -201,6 +202,42 @@ export const routes: RouteRecordRaw[] = [
     name: 'airport-ga-readonly-reports',
     component: AirportGaReadonlyConsole,
     meta: { requiresAuth: true, title: 'Airport Reports', layout: true },
+  },
+  {
+    path: '/one/uhmi/overview',
+    name: 'uhmi-overview',
+    component: UhmiWorkspace,
+    meta: { requiresAuth: true, permissions: ['platform:read'], title: 'UHMI Overview', layout: true },
+  },
+  {
+    path: '/one/uhmi/system',
+    name: 'uhmi-system',
+    component: UhmiWorkspace,
+    meta: { requiresAuth: true, permissions: ['platform:read'], title: 'System HMI', layout: true },
+  },
+  {
+    path: '/one/uhmi/device',
+    name: 'uhmi-device',
+    component: UhmiWorkspace,
+    meta: { requiresAuth: true, permissions: ['platform:read'], title: 'Device HMI', layout: true },
+  },
+  {
+    path: '/one/uhmi/alarms-events',
+    name: 'uhmi-alarms-events',
+    component: UhmiWorkspace,
+    meta: { requiresAuth: true, permissions: ['platform:read'], title: 'Alarm & Event HMI', layout: true },
+  },
+  {
+    path: '/one/uhmi/edge-link-diagnostics',
+    name: 'uhmi-edge-link-diagnostics',
+    component: UhmiWorkspace,
+    meta: { requiresAuth: true, permissions: ['platform:read'], title: 'EDGE / LINK Diagnostics', layout: true },
+  },
+  {
+    path: '/one/uhmi/evidence-reports',
+    name: 'uhmi-evidence-reports',
+    component: UhmiWorkspace,
+    meta: { requiresAuth: true, permissions: ['platform:read'], title: 'Evidence & Reports', layout: true },
   },
   {
     path: '/403',

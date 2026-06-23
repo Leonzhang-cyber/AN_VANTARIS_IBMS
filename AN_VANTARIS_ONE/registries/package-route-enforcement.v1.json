@@ -607,6 +607,45 @@
       ]
     },
     {
+      "frontendRouteId": "FROUTE-5D4825802426",
+      "routePath": "/one/uhmi/device",
+      "packageId": "PKG-UCONSOLE",
+      "owningModule": "UConsole",
+      "targetAccessClass": "BUSINESS_ROUTE",
+      "authenticationRequired": true,
+      "requiredPermissions": [
+        "platform:read"
+      ],
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "tenantScopeRequired": true,
+      "siteScopeRequired": true,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "VISIBLE_WHEN_AUTHORIZED",
+      "lockPagePolicy": "STATUS_PAGE_WHEN_UNAVAILABLE",
+      "diagnosticFallback": "AUTHENTICATED_STATUS",
+      "backendApiPolicyReferences": [
+        "/api/v1/one/uhmi"
+      ],
+      "auditPolicy": "SENSITIVE_READS_ONLY_NO_WRITES_OR_CONTROLS",
+      "compatibilityStage": "CURRENT_TARGET",
+      "implementationStatus": "MULTIPLE_CONTROLS_REQUIRED",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "UHMI-GA-R2A",
+      "reviewReason": "UHMI workspace route added as UConsole-owned read-only L3 page content.",
+      "notes": [
+        "Runtime package enforcement is not implemented in the router yet.",
+        "Missing controls: package metadata, entitlement metadata, enablement metadata, health metadata, direct URL package guard.",
+        "UHMI remains inside UConsole / UHMI Workspace and is not a standalone HMI server."
+      ]
+    },
+    {
       "frontendRouteId": "FROUTE-618A7E8141AF",
       "routePath": "/uesg/sustainability",
       "packageId": "PKG-UESG",
@@ -920,6 +959,45 @@
       ]
     },
     {
+      "frontendRouteId": "FROUTE-9B37C13EDBC2",
+      "routePath": "/one/uhmi/edge-link-diagnostics",
+      "packageId": "PKG-UCONSOLE",
+      "owningModule": "UConsole",
+      "targetAccessClass": "BUSINESS_ROUTE",
+      "authenticationRequired": true,
+      "requiredPermissions": [
+        "platform:read"
+      ],
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "tenantScopeRequired": true,
+      "siteScopeRequired": true,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "VISIBLE_WHEN_AUTHORIZED",
+      "lockPagePolicy": "STATUS_PAGE_WHEN_UNAVAILABLE",
+      "diagnosticFallback": "AUTHENTICATED_STATUS",
+      "backendApiPolicyReferences": [
+        "/api/v1/one/uhmi"
+      ],
+      "auditPolicy": "SENSITIVE_READS_ONLY_NO_WRITES_OR_CONTROLS",
+      "compatibilityStage": "CURRENT_TARGET",
+      "implementationStatus": "MULTIPLE_CONTROLS_REQUIRED",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "UHMI-GA-R2A",
+      "reviewReason": "UHMI workspace route added as UConsole-owned read-only L3 page content.",
+      "notes": [
+        "Runtime package enforcement is not implemented in the router yet.",
+        "Missing controls: package metadata, entitlement metadata, enablement metadata, health metadata, direct URL package guard.",
+        "UHMI remains inside UConsole / UHMI Workspace and is not a standalone HMI server."
+      ]
+    },
+    {
       "frontendRouteId": "FROUTE-9C2DD14BDEC4",
       "routePath": "/one/airport/overview",
       "packageId": "PKG-UCONSOLE",
@@ -953,6 +1031,45 @@
       "notes": [
         "Target metadata only; frontend and backend runtime enforcement are not implemented by ONE-A5-P0-06.",
         "Missing controls: PERMISSION_METADATA, PACKAGE_METADATA, DIRECT_URL_ENFORCEMENT"
+      ]
+    },
+    {
+      "frontendRouteId": "FROUTE-A0610240CDEC",
+      "routePath": "/one/uhmi/system",
+      "packageId": "PKG-UCONSOLE",
+      "owningModule": "UConsole",
+      "targetAccessClass": "BUSINESS_ROUTE",
+      "authenticationRequired": true,
+      "requiredPermissions": [
+        "platform:read"
+      ],
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "tenantScopeRequired": true,
+      "siteScopeRequired": true,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "VISIBLE_WHEN_AUTHORIZED",
+      "lockPagePolicy": "STATUS_PAGE_WHEN_UNAVAILABLE",
+      "diagnosticFallback": "AUTHENTICATED_STATUS",
+      "backendApiPolicyReferences": [
+        "/api/v1/one/uhmi"
+      ],
+      "auditPolicy": "SENSITIVE_READS_ONLY_NO_WRITES_OR_CONTROLS",
+      "compatibilityStage": "CURRENT_TARGET",
+      "implementationStatus": "MULTIPLE_CONTROLS_REQUIRED",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "UHMI-GA-R2A",
+      "reviewReason": "UHMI workspace route added as UConsole-owned read-only L3 page content.",
+      "notes": [
+        "Runtime package enforcement is not implemented in the router yet.",
+        "Missing controls: package metadata, entitlement metadata, enablement metadata, health metadata, direct URL package guard.",
+        "UHMI remains inside UConsole / UHMI Workspace and is not a standalone HMI server."
       ]
     },
     {
@@ -1224,6 +1341,45 @@
       ]
     },
     {
+      "frontendRouteId": "FROUTE-CA478AA9D69B",
+      "routePath": "/one/uhmi/overview",
+      "packageId": "PKG-UCONSOLE",
+      "owningModule": "UConsole",
+      "targetAccessClass": "BUSINESS_ROUTE",
+      "authenticationRequired": true,
+      "requiredPermissions": [
+        "platform:read"
+      ],
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "tenantScopeRequired": true,
+      "siteScopeRequired": true,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "VISIBLE_WHEN_AUTHORIZED",
+      "lockPagePolicy": "STATUS_PAGE_WHEN_UNAVAILABLE",
+      "diagnosticFallback": "AUTHENTICATED_STATUS",
+      "backendApiPolicyReferences": [
+        "/api/v1/one/uhmi"
+      ],
+      "auditPolicy": "SENSITIVE_READS_ONLY_NO_WRITES_OR_CONTROLS",
+      "compatibilityStage": "CURRENT_TARGET",
+      "implementationStatus": "MULTIPLE_CONTROLS_REQUIRED",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "UHMI-GA-R2A",
+      "reviewReason": "UHMI workspace route added as UConsole-owned read-only L3 page content.",
+      "notes": [
+        "Runtime package enforcement is not implemented in the router yet.",
+        "Missing controls: package metadata, entitlement metadata, enablement metadata, health metadata, direct URL package guard.",
+        "UHMI remains inside UConsole / UHMI Workspace and is not a standalone HMI server."
+      ]
+    },
+    {
       "frontendRouteId": "FROUTE-CABB05B4BD06",
       "routePath": "/one/airport/alarms-events",
       "packageId": "PKG-UCONSOLE",
@@ -1339,6 +1495,45 @@
       ]
     },
     {
+      "frontendRouteId": "FROUTE-E8248AE362A1",
+      "routePath": "/one/uhmi/evidence-reports",
+      "packageId": "PKG-UCONSOLE",
+      "owningModule": "UConsole",
+      "targetAccessClass": "BUSINESS_ROUTE",
+      "authenticationRequired": true,
+      "requiredPermissions": [
+        "platform:read"
+      ],
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "tenantScopeRequired": true,
+      "siteScopeRequired": true,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "VISIBLE_WHEN_AUTHORIZED",
+      "lockPagePolicy": "STATUS_PAGE_WHEN_UNAVAILABLE",
+      "diagnosticFallback": "AUTHENTICATED_STATUS",
+      "backendApiPolicyReferences": [
+        "/api/v1/one/uhmi"
+      ],
+      "auditPolicy": "SENSITIVE_READS_ONLY_NO_WRITES_OR_CONTROLS",
+      "compatibilityStage": "CURRENT_TARGET",
+      "implementationStatus": "MULTIPLE_CONTROLS_REQUIRED",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "UHMI-GA-R2A",
+      "reviewReason": "UHMI workspace route added as UConsole-owned read-only L3 page content.",
+      "notes": [
+        "Runtime package enforcement is not implemented in the router yet.",
+        "Missing controls: package metadata, entitlement metadata, enablement metadata, health metadata, direct URL package guard.",
+        "UHMI remains inside UConsole / UHMI Workspace and is not a standalone HMI server."
+      ]
+    },
+    {
       "frontendRouteId": "FROUTE-EAADA1903894",
       "routePath": "/one/airport/reports",
       "packageId": "PKG-UCONSOLE",
@@ -1372,6 +1567,45 @@
       "notes": [
         "Target metadata only; frontend and backend runtime enforcement are not implemented by ONE-A5-P0-06.",
         "Missing controls: PERMISSION_METADATA, PACKAGE_METADATA, DIRECT_URL_ENFORCEMENT"
+      ]
+    },
+    {
+      "frontendRouteId": "FROUTE-EEFA54AE7530",
+      "routePath": "/one/uhmi/alarms-events",
+      "packageId": "PKG-UCONSOLE",
+      "owningModule": "UConsole",
+      "targetAccessClass": "BUSINESS_ROUTE",
+      "authenticationRequired": true,
+      "requiredPermissions": [
+        "platform:read"
+      ],
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "tenantScopeRequired": true,
+      "siteScopeRequired": true,
+      "directUrlPolicy": "ALLOW_WHEN_AUTHORIZED",
+      "menuPolicy": "VISIBLE_WHEN_AUTHORIZED",
+      "lockPagePolicy": "STATUS_PAGE_WHEN_UNAVAILABLE",
+      "diagnosticFallback": "AUTHENTICATED_STATUS",
+      "backendApiPolicyReferences": [
+        "/api/v1/one/uhmi"
+      ],
+      "auditPolicy": "SENSITIVE_READS_ONLY_NO_WRITES_OR_CONTROLS",
+      "compatibilityStage": "CURRENT_TARGET",
+      "implementationStatus": "MULTIPLE_CONTROLS_REQUIRED",
+      "remediationWorkstream": "WS-P0-PACKAGE-ENFORCEMENT",
+      "proposedImplementationTask": "UHMI-GA-R2A",
+      "reviewReason": "UHMI workspace route added as UConsole-owned read-only L3 page content.",
+      "notes": [
+        "Runtime package enforcement is not implemented in the router yet.",
+        "Missing controls: package metadata, entitlement metadata, enablement metadata, health metadata, direct URL package guard.",
+        "UHMI remains inside UConsole / UHMI Workspace and is not a standalone HMI server."
       ]
     },
     {
@@ -2004,6 +2238,32 @@
       "backendGuardRequired": true,
       "serviceIdentityAllowed": false,
       "currentRuntimeState": "TARGET_NAMESPACE",
+      "implementationStatus": "RUNTIME_ENFORCEMENT_REQUIRED"
+    },
+    {
+      "namespace": "/api/v1/one/uhmi",
+      "packageId": "PKG-UCONSOLE",
+      "owningModule": "UConsole",
+      "businessApi": true,
+      "entitlementRequired": false,
+      "installedRequired": true,
+      "enabledRequired": true,
+      "compatibleRequired": false,
+      "allowedHealthStates": [
+        "HEALTHY",
+        "DEGRADED"
+      ],
+      "diagnosticOnlyOperations": [],
+      "publicOperations": [],
+      "denialCodes": [
+        "PACKAGE_NOT_INSTALLED",
+        "PACKAGE_DISABLED",
+        "PACKAGE_UNAVAILABLE"
+      ],
+      "auditRequired": false,
+      "backendGuardRequired": true,
+      "serviceIdentityAllowed": false,
+      "currentRuntimeState": "READ_ONLY_SKELETON_PRESENT_RUNTIME_PACKAGE_GUARD_NOT_IMPLEMENTED",
       "implementationStatus": "RUNTIME_ENFORCEMENT_REQUIRED"
     },
     {
@@ -2718,11 +2978,18 @@
         "/one/airport/maintenance-work-orders",
         "/one/airport/overview",
         "/one/airport/reports",
-        "/one/airport/systems-integration-health"
+        "/one/airport/systems-integration-health",
+        "/one/uhmi/alarms-events",
+        "/one/uhmi/device",
+        "/one/uhmi/edge-link-diagnostics",
+        "/one/uhmi/evidence-reports",
+        "/one/uhmi/overview",
+        "/one/uhmi/system"
       ],
       "backendNamespaces": [
         "/api/v1/console",
         "/api/v1/health",
+        "/api/v1/one/uhmi",
         "/api/v1/platform"
       ],
       "lockPageRoute": "/packages/PKG-UCONSOLE/lock",
@@ -3696,7 +3963,7 @@
     },
     {
       "reviewId": "PKG-ROUTE-REVIEW-0021",
-      "routeOrMenuId": "MENU-2BD7722AE31A",
+      "routeOrMenuId": "MENU-093B96B8B8ED",
       "reviewType": "STATIC_MENU_FALLBACK",
       "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
       "currentEvidence": {
@@ -3744,7 +4011,7 @@
     },
     {
       "reviewId": "PKG-ROUTE-REVIEW-0024",
-      "routeOrMenuId": "MENU-431BAEF84DFC",
+      "routeOrMenuId": "MENU-1A4AFDED4268",
       "reviewType": "STATIC_MENU_FALLBACK",
       "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
       "currentEvidence": {
@@ -3760,7 +4027,7 @@
     },
     {
       "reviewId": "PKG-ROUTE-REVIEW-0025",
-      "routeOrMenuId": "MENU-66373E798387",
+      "routeOrMenuId": "MENU-6FB2B2EFCCE9",
       "reviewType": "STATIC_MENU_FALLBACK",
       "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
       "currentEvidence": {
@@ -3776,7 +4043,7 @@
     },
     {
       "reviewId": "PKG-ROUTE-REVIEW-0026",
-      "routeOrMenuId": "MENU-7174FE72B4F2",
+      "routeOrMenuId": "MENU-1546058B22CA",
       "reviewType": "STATIC_MENU_FALLBACK",
       "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
       "currentEvidence": {
@@ -3808,7 +4075,7 @@
     },
     {
       "reviewId": "PKG-ROUTE-REVIEW-0028",
-      "routeOrMenuId": "MENU-8109CEFD2767",
+      "routeOrMenuId": "MENU-A3E1F451FEA8",
       "reviewType": "STATIC_MENU_FALLBACK",
       "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
       "currentEvidence": {
@@ -3824,7 +4091,7 @@
     },
     {
       "reviewId": "PKG-ROUTE-REVIEW-0029",
-      "routeOrMenuId": "MENU-834D6259541B",
+      "routeOrMenuId": "MENU-BC4B1E83BFD5",
       "reviewType": "STATIC_MENU_FALLBACK",
       "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
       "currentEvidence": {
@@ -3872,7 +4139,7 @@
     },
     {
       "reviewId": "PKG-ROUTE-REVIEW-0032",
-      "routeOrMenuId": "MENU-AB6C6A4069BE",
+      "routeOrMenuId": "MENU-181BE732596C",
       "reviewType": "STATIC_MENU_FALLBACK",
       "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
       "currentEvidence": {
@@ -3904,7 +4171,7 @@
     },
     {
       "reviewId": "PKG-ROUTE-REVIEW-0034",
-      "routeOrMenuId": "MENU-AF8164732552",
+      "routeOrMenuId": "MENU-F13770274A9D",
       "reviewType": "STATIC_MENU_FALLBACK",
       "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
       "currentEvidence": {
@@ -3984,7 +4251,7 @@
     },
     {
       "reviewId": "PKG-ROUTE-REVIEW-0039",
-      "routeOrMenuId": "MENU-D60A6159BE0C",
+      "routeOrMenuId": "MENU-67362E206C5A",
       "reviewType": "STATIC_MENU_FALLBACK",
       "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
       "currentEvidence": {
@@ -4000,7 +4267,7 @@
     },
     {
       "reviewId": "PKG-ROUTE-REVIEW-0040",
-      "routeOrMenuId": "MENU-ECF82A069A6D",
+      "routeOrMenuId": "MENU-D3825D4FF507",
       "reviewType": "STATIC_MENU_FALLBACK",
       "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
       "currentEvidence": {
@@ -4016,7 +4283,7 @@
     },
     {
       "reviewId": "PKG-ROUTE-REVIEW-0042",
-      "routeOrMenuId": "MENU-F5A4820A5C0B",
+      "routeOrMenuId": "MENU-BEA6C7A1CB65",
       "reviewType": "STATIC_MENU_FALLBACK",
       "reason": "Static fallback menu has no current role, permission, entitlement, enabled or health metadata.",
       "currentEvidence": {
@@ -4033,14 +4300,14 @@
   ],
   "summary": {
     "packagePolicyCount": 23,
-    "backendNamespacePolicyCount": 28,
-    "frontendRoutePolicyCount": 32,
+    "backendNamespacePolicyCount": 29,
+    "frontendRoutePolicyCount": 38,
     "lockPagePolicyCount": 5,
     "diagnosticPolicyCount": 5,
     "compatibilityMappingCount": 12,
     "reviewQueueCount": 41,
     "currentlyCompliantRoutes": 5,
     "metadataOnlyRoutes": 0,
-    "runtimeEnforcementRequiredRoutes": 27
+    "runtimeEnforcementRequiredRoutes": 33
   }
 }

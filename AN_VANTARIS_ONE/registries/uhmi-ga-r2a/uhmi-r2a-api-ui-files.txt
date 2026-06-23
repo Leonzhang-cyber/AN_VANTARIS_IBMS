@@ -1,0 +1,11 @@
+UHMI-GA-R2A API/UI files
+AN_VANTARIS_IBMS-backend/src/uhmi/__init__.py
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py
+AN_VANTARIS_IBMS-backend/src/api/uhmi/__init__.py
+AN_VANTARIS_IBMS-backend/src/api/uhmi/uhmi_api.py
+AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue
+AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts
+AN_VANTARIS_IBMS-frontend/src/router/routes.ts
+AN_VANTARIS_IBMS-frontend/src/services/menu/static-menu.ts
+AN_VANTARIS_IBMS-frontend/src/services/api/index.ts
+scripts/validation/build-one-frontend-route-inventory.py

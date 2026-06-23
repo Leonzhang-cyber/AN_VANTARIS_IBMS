@@ -653,6 +653,35 @@
       "readinessGate": "CONTRACT_AND_AUTHORIZATION_VALIDATED"
     },
     {
+      "namespace": "/api/v1/one/uhmi",
+      "owningModule": "UConsole",
+      "packageId": "PKG-UCONSOLE",
+      "contractNamespaces": [
+        "vantaris.health.v1",
+        "vantaris.package.v1"
+      ],
+      "operationClasses": [
+        "READ"
+      ],
+      "authenticationRequired": true,
+      "permissionPrefix": "platform",
+      "tenantScoped": true,
+      "siteScoped": true,
+      "auditPolicy": "SENSITIVE_READS_ONLY_NO_WRITES_OR_CONTROLS",
+      "idempotencyPolicy": "NOT_APPLICABLE_GET_ONLY",
+      "retryOwner": "CALLER_FOR_SAFE_READS",
+      "timeoutClass": "BOUNDED_READ_ONLY",
+      "cachePolicy": "TENANT_SCOPED_READ_ONLY_VERSION_AWARE",
+      "legacyMappings": [],
+      "prohibitedDependencies": [
+        "direct-cross-module-database-access",
+        "runtime-internal-imports",
+        "direct-device-control"
+      ],
+      "currentState": "TARGET_NAMESPACE",
+      "readinessGate": "READ_ONLY_UI_API_SKELETON_VALIDATED"
+    },
+    {
       "namespace": "/api/v1/security",
       "owningModule": "Governance & Security",
       "packageId": "PKG-GOVERNANCE-SECURITY",

@@ -17,4 +17,5 @@ from .umms import umms_api
 from .uedge import uedge_api
 from .airport_ga_readonly import airport_ga_readonly_api
 from .prod_ga import foundation_packages_api
+from .uhmi import uhmi_api
 from .iot.sse_api import *

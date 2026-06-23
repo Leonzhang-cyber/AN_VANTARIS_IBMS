@@ -474,17 +474,24 @@
       ],
       "runtimeDependencies": [],
       "routes": [
-        "/overview/platform",
-        "/admin/platform"
+        "/admin/platform",
+        "/one/uhmi/alarms-events",
+        "/one/uhmi/device",
+        "/one/uhmi/edge-link-diagnostics",
+        "/one/uhmi/evidence-reports",
+        "/one/uhmi/overview",
+        "/one/uhmi/system",
+        "/overview/platform"
       ],
       "permissions": [
         "platform:read",
         "platform:admin"
       ],
       "publicApiNamespaces": [
-        "/api/v1/platform",
         "/api/v1/console",
-        "/api/v1/health"
+        "/api/v1/health",
+        "/api/v1/one/uhmi",
+        "/api/v1/platform"
       ],
       "healthEndpoint": "/api/v1/health/packages/PKG-UCONSOLE",
       "upgradeOrder": 10,

@@ -1,0 +1,475 @@
+UHMI-GA-R2A risk scan
+UHMI_GA_R2A_REPORT.md:1:# UHMI-GA-R2A Report
+UHMI_GA_R2A_REPORT.md:3:PASS marker: `UHMI_GA_R2A_FULL_UCONSOLE_MENU_IA_UI_API_SKELETON_PASS`
+UHMI_GA_R2A_REPORT.md:7:- `UHMI_GA_R2A_FULL_UCONSOLE_MENU_IA_UI_API_SKELETON.md`
+UHMI_GA_R2A_REPORT.md:8:- `UHMI_GA_R2A_UCONSOLE_MENU_INFORMATION_ARCHITECTURE.md`
+UHMI_GA_R2A_REPORT.md:9:- `UHMI_GA_R2A_UI_API_SKELETON_BOUNDARY_SPEC.md`
+UHMI_GA_R2A_REPORT.md:10:- `UHMI_GA_R2A_REPORT.md`
+UHMI_GA_R2A_REPORT.md:11:- `AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.v1.json`
+UHMI_GA_R2A_REPORT.md:12:- `AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt`
+UHMI_GA_R2A_REPORT.md:13:- `AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-api-ui-files.txt`
+UHMI_GA_R2A_REPORT.md:14:- `AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-risk-scan.txt`
+UHMI_GA_R2A_REPORT.md:15:- `AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py`
+UHMI_GA_R2A_REPORT.md:16:- `AN_VANTARIS_IBMS-backend/src/api/uhmi/uhmi_api.py`
+UHMI_GA_R2A_REPORT.md:17:- `AN_VANTARIS_IBMS-backend/src/api/uhmi/__init__.py`
+UHMI_GA_R2A_REPORT.md:18:- `AN_VANTARIS_IBMS-backend/src/uhmi/__init__.py`
+UHMI_GA_R2A_REPORT.md:19:- `AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue`
+UHMI_GA_R2A_REPORT.md:20:- `AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts`
+UHMI_GA_R2A_REPORT.md:21:- `scripts/validation/validate-uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.py`
+UHMI_GA_R2A_REPORT.md:25:UHMI = Unified Human-Machine Interface. UHMI is under UConsole / UHMI Workspace. UHMI is not an independent HMI server and not a SCADA replacement. VANTARIS ONE is cross-industry and not airport-only.
+UHMI_GA_R2A_REPORT.md:27:R2A adds a read-only UHMI Workspace UI/API skeleton. The UConsole sidebar remains L1/L2 only, while UHMI L3 workspace views are inside the page.
+UHMI_GA_R2A_REPORT.md:33:- `python3 scripts/validation/validate-uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.py`: pending.
+UHMI_GA_R2A_REPORT.md:34:- `python3 scripts/validation/validate-uhmi-ga-r1-uconsole-workspace-readonly-foundation.py`: pending.
+UHMI_GA_R2A_REPORT.md:45:`UHMI_GA_R2A_FULL_UCONSOLE_MENU_IA_UI_API_SKELETON_PASS`
+UHMI_GA_R2A_FULL_UCONSOLE_MENU_IA_UI_API_SKELETON.md:1:# UHMI-GA-R2A Full UConsole Menu IA + UHMI Workspace UI/API Skeleton
+UHMI_GA_R2A_FULL_UCONSOLE_MENU_IA_UI_API_SKELETON.md:3:PASS marker: `UHMI_GA_R2A_FULL_UCONSOLE_MENU_IA_UI_API_SKELETON_PASS`
+UHMI_GA_R2A_FULL_UCONSOLE_MENU_IA_UI_API_SKELETON.md:7:UHMI = Unified Human-Machine Interface. UHMI is under UConsole / UHMI Workspace. UHMI is not an independent HMI server and not a SCADA replacement.
+UHMI_GA_R2A_FULL_UCONSOLE_MENU_IA_UI_API_SKELETON.md:9:VANTARIS ONE is cross-industry and not airport-only. UHMI-GA-R2A implements a read-only UConsole menu IA plus UI/API skeleton for the UHMI Workspace.
+UHMI_GA_R2A_FULL_UCONSOLE_MENU_IA_UI_API_SKELETON.md:11:R2A does not activate runtime behavior. It does not install packages, roll back packages, run database migration, write databases, execute device control, execute EDGE commands, execute LINK commands, execute NEXUS AI, or bypass CODE.
+UHMI_GA_R2A_FULL_UCONSOLE_MENU_IA_UI_API_SKELETON.md:15:- Backend provider: `AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py`
+UHMI_GA_R2A_FULL_UCONSOLE_MENU_IA_UI_API_SKELETON.md:16:- Backend GET-only routes: `AN_VANTARIS_IBMS-backend/src/api/uhmi/uhmi_api.py`
+UHMI_GA_R2A_FULL_UCONSOLE_MENU_IA_UI_API_SKELETON.md:17:- Frontend API service: `AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts`
+UHMI_GA_R2A_FULL_UCONSOLE_MENU_IA_UI_API_SKELETON.md:18:- Frontend workspace page: `AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue`
+UHMI_GA_R2A_FULL_UCONSOLE_MENU_IA_UI_API_SKELETON.md:19:- Frontend routes: `/one/uhmi/overview`, `/one/uhmi/system`, `/one/uhmi/device`, `/one/uhmi/alarms-events`, `/one/uhmi/edge-link-diagnostics`, `/one/uhmi/evidence-reports`
+UHMI_GA_R2A_FULL_UCONSOLE_MENU_IA_UI_API_SKELETON.md:26:- L2: UHMI Workspace
+UHMI_GA_R2A_FULL_UCONSOLE_MENU_IA_UI_API_SKELETON.md:28:L3 is inside the UHMI Workspace page:
+UHMI_GA_R2A_FULL_UCONSOLE_MENU_IA_UI_API_SKELETON.md:32:- Device HMI
+UHMI_GA_R2A_FULL_UCONSOLE_MENU_IA_UI_API_SKELETON.md:43:`Device/System -> EDGE -> LINK -> CODE -> UConsole/UHMI`
+UHMI_GA_R2A_FULL_UCONSOLE_MENU_IA_UI_API_SKELETON.md:47:- UHMI -> Device
+UHMI_GA_R2A_FULL_UCONSOLE_MENU_IA_UI_API_SKELETON.md:48:- UHMI -> DB write
+UHMI_GA_R2A_FULL_UCONSOLE_MENU_IA_UI_API_SKELETON.md:49:- UHMI -> EDGE command
+UHMI_GA_R2A_FULL_UCONSOLE_MENU_IA_UI_API_SKELETON.md:50:- UHMI -> LINK command
+UHMI_GA_R2A_FULL_UCONSOLE_MENU_IA_UI_API_SKELETON.md:51:- UHMI -> NEXUS AI execution
+UHMI_GA_R2A_FULL_UCONSOLE_MENU_IA_UI_API_SKELETON.md:52:- UHMI -> bypass CODE
+UHMI_GA_R2A_FULL_UCONSOLE_MENU_IA_UI_API_SKELETON.md:56:`UHMI -> CODE -> Policy Gate -> Approval -> Audit / UCDE -> LINK -> EDGE -> Device`
+UHMI_GA_R2A_FULL_UCONSOLE_MENU_IA_UI_API_SKELETON.md:62:`UHMI_GA_R2A_FULL_UCONSOLE_MENU_IA_UI_API_SKELETON_PASS`
+UHMI_GA_R2A_UCONSOLE_MENU_INFORMATION_ARCHITECTURE.md:1:# UHMI-GA-R2A UConsole Menu Information Architecture
+UHMI_GA_R2A_UCONSOLE_MENU_INFORMATION_ARCHITECTURE.md:3:PASS marker: `UHMI_GA_R2A_FULL_UCONSOLE_MENU_IA_UI_API_SKELETON_PASS`
+UHMI_GA_R2A_UCONSOLE_MENU_INFORMATION_ARCHITECTURE.md:5:UHMI = Unified Human-Machine Interface. UHMI is under UConsole / UHMI Workspace. It is not an independent HMI server and not a SCADA replacement.
+UHMI_GA_R2A_UCONSOLE_MENU_INFORMATION_ARCHITECTURE.md:12:- L2: UHMI Workspace
+UHMI_GA_R2A_UCONSOLE_MENU_INFORMATION_ARCHITECTURE.md:14:The sidebar must not expose UHMI L3 items directly. L3 views render inside the UHMI Workspace page through tabs and matching direct routes.
+UHMI_GA_R2A_UCONSOLE_MENU_INFORMATION_ARCHITECTURE.md:16:## UHMI Workspace L3 Views
+UHMI_GA_R2A_UCONSOLE_MENU_INFORMATION_ARCHITECTURE.md:20:- Device HMI
+UHMI_GA_R2A_UCONSOLE_MENU_INFORMATION_ARCHITECTURE.md:27:- `/one/uhmi/overview`
+UHMI_GA_R2A_UCONSOLE_MENU_INFORMATION_ARCHITECTURE.md:28:- `/one/uhmi/system`
+UHMI_GA_R2A_UCONSOLE_MENU_INFORMATION_ARCHITECTURE.md:29:- `/one/uhmi/device`
+UHMI_GA_R2A_UCONSOLE_MENU_INFORMATION_ARCHITECTURE.md:30:- `/one/uhmi/alarms-events`
+UHMI_GA_R2A_UCONSOLE_MENU_INFORMATION_ARCHITECTURE.md:31:- `/one/uhmi/edge-link-diagnostics`
+UHMI_GA_R2A_UCONSOLE_MENU_INFORMATION_ARCHITECTURE.md:32:- `/one/uhmi/evidence-reports`
+UHMI_GA_R2A_UCONSOLE_MENU_INFORMATION_ARCHITECTURE.md:38:`UHMI_GA_R2A_FULL_UCONSOLE_MENU_IA_UI_API_SKELETON_PASS`
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-api-ui-files.txt:1:UHMI-GA-R2A API/UI files
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-api-ui-files.txt:2:AN_VANTARIS_IBMS-backend/src/uhmi/__init__.py
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-api-ui-files.txt:3:AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-api-ui-files.txt:4:AN_VANTARIS_IBMS-backend/src/api/uhmi/__init__.py
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-api-ui-files.txt:5:AN_VANTARIS_IBMS-backend/src/api/uhmi/uhmi_api.py
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-api-ui-files.txt:6:AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-api-ui-files.txt:7:AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts
+AN_VANTARIS_IBMS-frontend/src/services/menu/static-menu.ts:60:        id: 'uconsole-uhmi-workspace',
+AN_VANTARIS_IBMS-frontend/src/services/menu/static-menu.ts:61:        label: 'UHMI Workspace',
+AN_VANTARIS_IBMS-frontend/src/services/menu/static-menu.ts:62:        path: '/one/uhmi/overview',
+AN_VANTARIS_ONE/registries/package-registry.v1.json:478:        "/one/uhmi/alarms-events",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:479:        "/one/uhmi/device",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:480:        "/one/uhmi/edge-link-diagnostics",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:481:        "/one/uhmi/evidence-reports",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:482:        "/one/uhmi/overview",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:483:        "/one/uhmi/system",
+AN_VANTARIS_ONE/registries/package-registry.v1.json:493:        "/api/v1/one/uhmi",
+AN_VANTARIS_ONE/registries/api-namespace-registry.v1.json:631:      "namespace": "/api/v1/one/uhmi",
+AN_VANTARIS_IBMS-backend/src/api/uhmi/__init__.py:1:"""UHMI API routes."""
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:1:UHMI-GA-R2A route/menu references
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:4:AN_VANTARIS_ONE/registries/api-namespace-registry.v1.json:631:      "namespace": "/api/v1/one/uhmi",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:13:AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:470:      "symbol": "uhmi-device",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:14:AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:471:      "routePath": "/one/uhmi/device",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:15:AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:472:      "routeName": "uhmi-device",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:17:AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:494:        "/api/v1/one/uhmi"
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:20:AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:813:      "symbol": "uhmi-edge-link-diagnostics",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:21:AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:814:      "routePath": "/one/uhmi/edge-link-diagnostics",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:22:AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:815:      "routeName": "uhmi-edge-link-diagnostics",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:24:AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:837:        "/api/v1/one/uhmi"
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:26:AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:889:      "symbol": "uhmi-system",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:27:AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:890:      "routePath": "/one/uhmi/system",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:28:AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:891:      "routeName": "uhmi-system",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:30:AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:913:        "/api/v1/one/uhmi"
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:33:AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:1201:      "symbol": "uhmi-overview",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:34:AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:1202:      "routePath": "/one/uhmi/overview",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:35:AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:1203:      "routeName": "uhmi-overview",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:37:AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:1225:        "/api/v1/one/uhmi"
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:40:AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:1350:      "symbol": "uhmi-evidence-reports",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:41:AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:1351:      "routePath": "/one/uhmi/evidence-reports",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:42:AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:1352:      "routeName": "uhmi-evidence-reports",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:44:AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:1374:        "/api/v1/one/uhmi"
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:46:AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:1426:      "symbol": "uhmi-alarms-events",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:47:AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:1427:      "routePath": "/one/uhmi/alarms-events",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:48:AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:1428:      "routeName": "uhmi-alarms-events",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:50:AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:1450:        "/api/v1/one/uhmi"
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:63:AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:2117:      "label": "UHMI Workspace",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:64:AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:2119:      "l2": "UHMI Workspace",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:65:AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:2121:      "routePath": "/one/uhmi/overview",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:78:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:611:      "routePath": "/one/uhmi/device",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:80:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:634:        "/api/v1/one/uhmi"
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:81:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:640:      "proposedImplementationTask": "UHMI-GA-R2A",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:82:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:641:      "reviewReason": "UHMI workspace route added as UConsole-owned read-only L3 page content.",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:83:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:645:        "UHMI remains inside UConsole / UHMI Workspace and is not a standalone HMI server."
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:86:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:963:      "routePath": "/one/uhmi/edge-link-diagnostics",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:88:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:986:        "/api/v1/one/uhmi"
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:89:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:992:      "proposedImplementationTask": "UHMI-GA-R2A",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:90:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:993:      "reviewReason": "UHMI workspace route added as UConsole-owned read-only L3 page content.",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:91:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:997:        "UHMI remains inside UConsole / UHMI Workspace and is not a standalone HMI server."
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:93:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1038:      "routePath": "/one/uhmi/system",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:95:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1061:        "/api/v1/one/uhmi"
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:96:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1067:      "proposedImplementationTask": "UHMI-GA-R2A",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:97:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1068:      "reviewReason": "UHMI workspace route added as UConsole-owned read-only L3 page content.",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:98:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1072:        "UHMI remains inside UConsole / UHMI Workspace and is not a standalone HMI server."
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:101:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1345:      "routePath": "/one/uhmi/overview",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:103:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1368:        "/api/v1/one/uhmi"
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:104:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1374:      "proposedImplementationTask": "UHMI-GA-R2A",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:105:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1375:      "reviewReason": "UHMI workspace route added as UConsole-owned read-only L3 page content.",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:106:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1379:        "UHMI remains inside UConsole / UHMI Workspace and is not a standalone HMI server."
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:109:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1499:      "routePath": "/one/uhmi/evidence-reports",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:111:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1522:        "/api/v1/one/uhmi"
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:112:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1528:      "proposedImplementationTask": "UHMI-GA-R2A",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:113:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1529:      "reviewReason": "UHMI workspace route added as UConsole-owned read-only L3 page content.",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:114:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1533:        "UHMI remains inside UConsole / UHMI Workspace and is not a standalone HMI server."
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:116:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1574:      "routePath": "/one/uhmi/alarms-events",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:118:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1597:        "/api/v1/one/uhmi"
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:119:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1603:      "proposedImplementationTask": "UHMI-GA-R2A",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:120:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1604:      "reviewReason": "UHMI workspace route added as UConsole-owned read-only L3 page content.",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:121:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1608:        "UHMI remains inside UConsole / UHMI Workspace and is not a standalone HMI server."
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:125:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2244:      "namespace": "/api/v1/one/uhmi",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:128:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2982:        "/one/uhmi/alarms-events",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:129:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2983:        "/one/uhmi/device",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:130:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2984:        "/one/uhmi/edge-link-diagnostics",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:131:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2985:        "/one/uhmi/evidence-reports",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:132:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2986:        "/one/uhmi/overview",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:133:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2987:        "/one/uhmi/system"
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:134:AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2992:        "/api/v1/one/uhmi",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:143:AN_VANTARIS_ONE/registries/package-registry.v1.json:478:        "/one/uhmi/alarms-events",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:144:AN_VANTARIS_ONE/registries/package-registry.v1.json:479:        "/one/uhmi/device",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:145:AN_VANTARIS_ONE/registries/package-registry.v1.json:480:        "/one/uhmi/edge-link-diagnostics",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:146:AN_VANTARIS_ONE/registries/package-registry.v1.json:481:        "/one/uhmi/evidence-reports",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:147:AN_VANTARIS_ONE/registries/package-registry.v1.json:482:        "/one/uhmi/overview",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:148:AN_VANTARIS_ONE/registries/package-registry.v1.json:483:        "/one/uhmi/system",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:149:AN_VANTARIS_ONE/registries/package-registry.v1.json:493:        "/api/v1/one/uhmi",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:150:AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:1:"""UHMI UConsole workspace read-only provider.
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:151:AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:3:The provider exposes local projection data for the UHMI workspace UI/API
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:152:AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:15:    {"key": "HMI_OVERVIEW", "label": "HMI Overview", "route": "/one/uhmi/overview"},
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:153:AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:16:    {"key": "SYSTEM_HMI", "label": "System HMI", "route": "/one/uhmi/system"},
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:154:AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:17:    {"key": "DEVICE_HMI", "label": "Device HMI", "route": "/one/uhmi/device"},
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:155:AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:18:    {"key": "ALARM_EVENT_HMI", "label": "Alarm & Event HMI", "route": "/one/uhmi/alarms-events"},
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:156:AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:19:    {"key": "EDGE_LINK_DIAGNOSTICS", "label": "EDGE / LINK Diagnostics", "route": "/one/uhmi/edge-link-diagnostics"},
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:157:AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:20:    {"key": "EVIDENCE_REPORTS", "label": "Evidence & Reports", "route": "/one/uhmi/evidence-reports"},
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:158:AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:24:    "UHMI -> Device",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:159:AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:25:    "UHMI -> DB write",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:160:AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:26:    "UHMI -> EDGE command",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:161:AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:27:    "UHMI -> LINK command",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:162:AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:28:    "UHMI -> NEXUS AI execution",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:163:AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:29:    "UHMI -> bypass CODE",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:164:AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:58:        "capability": "UHMI",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:165:AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:59:        "definition": "UHMI = Unified Human-Machine Interface",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:166:AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:60:        "placement": "UConsole / UHMI Workspace",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:167:AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:67:        "dataFlow": "Device/System -> EDGE -> LINK -> CODE -> UConsole/UHMI",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:168:AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:68:        "futureControlledActionPath": "UHMI -> CODE -> Policy Gate -> Approval -> Audit / UCDE -> LINK -> EDGE -> Device",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:169:AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:82:        "capability": "UHMI",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:170:AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:83:        "placement": "UConsole / UHMI Workspace",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:171:AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:84:        "l1": "UConsole",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:172:AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:85:        "l2": "UHMI Workspace",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:173:AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:86:        "l3Policy": "L3 workspace views render inside the UHMI page, not the sidebar.",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:174:AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:97:        "moduleId": "uhmi",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:175:AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:99:        "placement": "UConsole / UHMI Workspace",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:176:AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:123:            {"name": "Boundary posture", "state": "Read-only", "source": "UHMI guardrail", "actionEnabled": False},
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:177:AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:127:            {"name": "Subsystem grouping", "state": "Visible", "source": "UConsole workspace", "actionEnabled": False},
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:178:AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:133:            {"name": "Command surface", "state": "Disabled", "source": "UHMI guardrail", "actionEnabled": False},
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:179:AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:138:            {"name": "Acknowledge action", "state": "Disabled", "source": "UHMI guardrail", "actionEnabled": False},
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:180:AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:143:            {"name": "Connector command", "state": "Disabled", "source": "UHMI guardrail", "actionEnabled": False},
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:181:AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:148:            {"name": "Evidence closure", "state": "Disabled", "source": "UHMI guardrail", "actionEnabled": False},
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:182:AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:152:        "HMI_OVERVIEW": "Overview of UHMI read-only operating posture.",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:183:AN_VANTARIS_IBMS-backend/src/api/uhmi/uhmi_api.py:1:"""UHMI UConsole workspace GET-only API skeleton."""
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:184:AN_VANTARIS_IBMS-backend/src/api/uhmi/uhmi_api.py:8:from src.uhmi.uhmi_provider import get_health, get_menu_ia, get_section, list_sections
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:185:AN_VANTARIS_IBMS-backend/src/api/uhmi/uhmi_api.py:11:@api_bp.route("/v1/one/uhmi/health", methods=["GET"])
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:186:AN_VANTARIS_IBMS-backend/src/api/uhmi/uhmi_api.py:12:def uhmi_health():
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:187:AN_VANTARIS_IBMS-backend/src/api/uhmi/uhmi_api.py:16:@api_bp.route("/v1/one/uhmi/menu", methods=["GET"])
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:188:AN_VANTARIS_IBMS-backend/src/api/uhmi/uhmi_api.py:17:def uhmi_menu():
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:189:AN_VANTARIS_IBMS-backend/src/api/uhmi/uhmi_api.py:21:@api_bp.route("/v1/one/uhmi/sections", methods=["GET"])
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:190:AN_VANTARIS_IBMS-backend/src/api/uhmi/uhmi_api.py:22:def uhmi_sections():
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:191:AN_VANTARIS_IBMS-backend/src/api/uhmi/uhmi_api.py:26:@api_bp.route("/v1/one/uhmi/sections/<string:section_key>", methods=["GET"])
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:192:AN_VANTARIS_IBMS-backend/src/api/uhmi/uhmi_api.py:27:def uhmi_section_detail(section_key: str):
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:194:AN_VANTARIS_IBMS-frontend/src/services/menu/static-menu.ts:60:        id: 'uconsole-uhmi-workspace',
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:195:AN_VANTARIS_IBMS-frontend/src/services/menu/static-menu.ts:61:        label: 'UHMI Workspace',
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:196:AN_VANTARIS_IBMS-frontend/src/services/menu/static-menu.ts:62:        path: '/one/uhmi/overview',
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:197:AN_VANTARIS_IBMS-frontend/src/router/routes.ts:22:import UhmiWorkspace from '@/modules/uhmi/UhmiWorkspace.vue'
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:198:AN_VANTARIS_IBMS-frontend/src/router/routes.ts:207:    path: '/one/uhmi/overview',
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:199:AN_VANTARIS_IBMS-frontend/src/router/routes.ts:208:    name: 'uhmi-overview',
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:200:AN_VANTARIS_IBMS-frontend/src/router/routes.ts:210:    meta: { requiresAuth: true, permissions: ['platform:read'], title: 'UHMI Overview', layout: true },
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:201:AN_VANTARIS_IBMS-frontend/src/router/routes.ts:213:    path: '/one/uhmi/system',
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:202:AN_VANTARIS_IBMS-frontend/src/router/routes.ts:214:    name: 'uhmi-system',
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:203:AN_VANTARIS_IBMS-frontend/src/router/routes.ts:219:    path: '/one/uhmi/device',
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:204:AN_VANTARIS_IBMS-frontend/src/router/routes.ts:220:    name: 'uhmi-device',
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:205:AN_VANTARIS_IBMS-frontend/src/router/routes.ts:225:    path: '/one/uhmi/alarms-events',
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:206:AN_VANTARIS_IBMS-frontend/src/router/routes.ts:226:    name: 'uhmi-alarms-events',
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:207:AN_VANTARIS_IBMS-frontend/src/router/routes.ts:231:    path: '/one/uhmi/edge-link-diagnostics',
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:208:AN_VANTARIS_IBMS-frontend/src/router/routes.ts:232:    name: 'uhmi-edge-link-diagnostics',
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:209:AN_VANTARIS_IBMS-frontend/src/router/routes.ts:237:    path: '/one/uhmi/evidence-reports',
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:210:AN_VANTARIS_IBMS-frontend/src/router/routes.ts:238:    name: 'uhmi-evidence-reports',
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:211:AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:19:  capability: 'UHMI'
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:212:AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:21:  placement: 'UConsole / UHMI Workspace'
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:213:AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:51:  capability: 'UHMI'
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:214:AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:52:  placement: 'UConsole / UHMI Workspace'
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:215:AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:68:  placement: 'UConsole / UHMI Workspace'
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:216:AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:79:export const uhmiSections: UhmiMenuItem[] = [
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:217:AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:80:  { key: 'HMI_OVERVIEW', label: 'HMI Overview', route: '/one/uhmi/overview' },
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:218:AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:81:  { key: 'SYSTEM_HMI', label: 'System HMI', route: '/one/uhmi/system' },
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:219:AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:82:  { key: 'DEVICE_HMI', label: 'Device HMI', route: '/one/uhmi/device' },
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:220:AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:83:  { key: 'ALARM_EVENT_HMI', label: 'Alarm & Event HMI', route: '/one/uhmi/alarms-events' },
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:221:AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:84:  { key: 'EDGE_LINK_DIAGNOSTICS', label: 'EDGE / LINK Diagnostics', route: '/one/uhmi/edge-link-diagnostics' },
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:222:AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:85:  { key: 'EVIDENCE_REPORTS', label: 'Evidence & Reports', route: '/one/uhmi/evidence-reports' },
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:223:AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:89:  const response = await request.get<UhmiHealthPayload>('/v1/one/uhmi/health')
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:224:AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:94:  const response = await request.get<UhmiMenuIaPayload>('/v1/one/uhmi/menu')
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:225:AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:99:  const response = await request.get<UhmiSectionPayload>(`/v1/one/uhmi/sections/${sectionKey}`)
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:226:AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:8:  uhmiSections,
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:227:AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:13:} from '@/services/api/uhmi'
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:228:AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:26:  uhmiSections.find((item) => item.key === activeSectionKey.value) ?? uhmiSections[0],
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:229:AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:41:  const matched = uhmiSections.find((item) => item.route === route.path)
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:230:AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:46:  const item = uhmiSections.find((entry) => entry.key === key)
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:231:AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:70:    loadError.value = error instanceof Error ? error.message : 'UHMI read-only API unavailable.'
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:232:AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:91:  <section class="uhmi-page">
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:233:AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:92:    <header class="uhmi-hero">
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:234:AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:94:        <p class="eyebrow">VANTARIS ONE / UConsole</p>
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:235:AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:95:        <h1>UHMI Workspace</h1>
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:236:AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:98:          Device/System data flows through EDGE, LINK, and CODE before reaching UConsole/UHMI.
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:237:AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:104:        <el-tag type="info">UConsole workspace</el-tag>
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:238:AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:126:          <div class="metric-value">{{ menuIa?.menuItems.length || uhmiSections.length }}</div>
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:239:AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:147:          <span>UHMI workspace sections</span>
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:240:AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:154:          v-for="item in uhmiSections"
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:241:AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:170:        <el-descriptions-item label="Placement">{{ section?.placement || 'UConsole / UHMI Workspace' }}</el-descriptions-item>
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:242:AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:209:.uhmi-page {
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:243:AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:213:.uhmi-hero,
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-r2a-route-menu-references.txt:244:AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:230:.uhmi-hero h1,
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:611:      "routePath": "/one/uhmi/device",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:634:        "/api/v1/one/uhmi"
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:640:      "proposedImplementationTask": "UHMI-GA-R2A",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:641:      "reviewReason": "UHMI workspace route added as UConsole-owned read-only L3 page content.",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:645:        "UHMI remains inside UConsole / UHMI Workspace and is not a standalone HMI server."
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:963:      "routePath": "/one/uhmi/edge-link-diagnostics",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:986:        "/api/v1/one/uhmi"
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:992:      "proposedImplementationTask": "UHMI-GA-R2A",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:993:      "reviewReason": "UHMI workspace route added as UConsole-owned read-only L3 page content.",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:997:        "UHMI remains inside UConsole / UHMI Workspace and is not a standalone HMI server."
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1038:      "routePath": "/one/uhmi/system",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1061:        "/api/v1/one/uhmi"
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1067:      "proposedImplementationTask": "UHMI-GA-R2A",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1068:      "reviewReason": "UHMI workspace route added as UConsole-owned read-only L3 page content.",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1072:        "UHMI remains inside UConsole / UHMI Workspace and is not a standalone HMI server."
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1345:      "routePath": "/one/uhmi/overview",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1368:        "/api/v1/one/uhmi"
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1374:      "proposedImplementationTask": "UHMI-GA-R2A",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1375:      "reviewReason": "UHMI workspace route added as UConsole-owned read-only L3 page content.",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1379:        "UHMI remains inside UConsole / UHMI Workspace and is not a standalone HMI server."
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1499:      "routePath": "/one/uhmi/evidence-reports",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1522:        "/api/v1/one/uhmi"
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1528:      "proposedImplementationTask": "UHMI-GA-R2A",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1529:      "reviewReason": "UHMI workspace route added as UConsole-owned read-only L3 page content.",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1533:        "UHMI remains inside UConsole / UHMI Workspace and is not a standalone HMI server."
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1574:      "routePath": "/one/uhmi/alarms-events",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1597:        "/api/v1/one/uhmi"
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1603:      "proposedImplementationTask": "UHMI-GA-R2A",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1604:      "reviewReason": "UHMI workspace route added as UConsole-owned read-only L3 page content.",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:1608:        "UHMI remains inside UConsole / UHMI Workspace and is not a standalone HMI server."
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2244:      "namespace": "/api/v1/one/uhmi",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2982:        "/one/uhmi/alarms-events",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2983:        "/one/uhmi/device",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2984:        "/one/uhmi/edge-link-diagnostics",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2985:        "/one/uhmi/evidence-reports",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2986:        "/one/uhmi/overview",
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2987:        "/one/uhmi/system"
+AN_VANTARIS_ONE/registries/package-route-enforcement.v1.json:2992:        "/api/v1/one/uhmi",
+AN_VANTARIS_IBMS-backend/src/uhmi/__init__.py:1:"""UHMI read-only workspace projections."""
+AN_VANTARIS_IBMS-backend/src/api/uhmi/uhmi_api.py:1:"""UHMI UConsole workspace GET-only API skeleton."""
+AN_VANTARIS_IBMS-backend/src/api/uhmi/uhmi_api.py:8:from src.uhmi.uhmi_provider import get_health, get_menu_ia, get_section, list_sections
+AN_VANTARIS_IBMS-backend/src/api/uhmi/uhmi_api.py:11:@api_bp.route("/v1/one/uhmi/health", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/uhmi/uhmi_api.py:12:def uhmi_health():
+AN_VANTARIS_IBMS-backend/src/api/uhmi/uhmi_api.py:16:@api_bp.route("/v1/one/uhmi/menu", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/uhmi/uhmi_api.py:17:def uhmi_menu():
+AN_VANTARIS_IBMS-backend/src/api/uhmi/uhmi_api.py:21:@api_bp.route("/v1/one/uhmi/sections", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/uhmi/uhmi_api.py:22:def uhmi_sections():
+AN_VANTARIS_IBMS-backend/src/api/uhmi/uhmi_api.py:26:@api_bp.route("/v1/one/uhmi/sections/<string:section_key>", methods=["GET"])
+AN_VANTARIS_IBMS-backend/src/api/uhmi/uhmi_api.py:27:def uhmi_section_detail(section_key: str):
+AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:470:      "symbol": "uhmi-device",
+AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:471:      "routePath": "/one/uhmi/device",
+AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:472:      "routeName": "uhmi-device",
+AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:494:        "/api/v1/one/uhmi"
+AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:813:      "symbol": "uhmi-edge-link-diagnostics",
+AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:814:      "routePath": "/one/uhmi/edge-link-diagnostics",
+AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:815:      "routeName": "uhmi-edge-link-diagnostics",
+AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:837:        "/api/v1/one/uhmi"
+AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:889:      "symbol": "uhmi-system",
+AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:890:      "routePath": "/one/uhmi/system",
+AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:891:      "routeName": "uhmi-system",
+AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:913:        "/api/v1/one/uhmi"
+AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:1201:      "symbol": "uhmi-overview",
+AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:1202:      "routePath": "/one/uhmi/overview",
+AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:1203:      "routeName": "uhmi-overview",
+AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:1225:        "/api/v1/one/uhmi"
+AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:1350:      "symbol": "uhmi-evidence-reports",
+AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:1351:      "routePath": "/one/uhmi/evidence-reports",
+AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:1352:      "routeName": "uhmi-evidence-reports",
+AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:1374:        "/api/v1/one/uhmi"
+AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:1426:      "symbol": "uhmi-alarms-events",
+AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:1427:      "routePath": "/one/uhmi/alarms-events",
+AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:1428:      "routeName": "uhmi-alarms-events",
+AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:1450:        "/api/v1/one/uhmi"
+AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:2117:      "label": "UHMI Workspace",
+AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:2119:      "l2": "UHMI Workspace",
+AN_VANTARIS_ONE/registries/frontend-route-inventory.v1.json:2121:      "routePath": "/one/uhmi/overview",
+AN_VANTARIS_IBMS-frontend/src/router/routes.ts:22:import UhmiWorkspace from '@/modules/uhmi/UhmiWorkspace.vue'
+AN_VANTARIS_IBMS-frontend/src/router/routes.ts:207:    path: '/one/uhmi/overview',
+AN_VANTARIS_IBMS-frontend/src/router/routes.ts:208:    name: 'uhmi-overview',
+AN_VANTARIS_IBMS-frontend/src/router/routes.ts:210:    meta: { requiresAuth: true, permissions: ['platform:read'], title: 'UHMI Overview', layout: true },
+AN_VANTARIS_IBMS-frontend/src/router/routes.ts:213:    path: '/one/uhmi/system',
+AN_VANTARIS_IBMS-frontend/src/router/routes.ts:214:    name: 'uhmi-system',
+AN_VANTARIS_IBMS-frontend/src/router/routes.ts:219:    path: '/one/uhmi/device',
+AN_VANTARIS_IBMS-frontend/src/router/routes.ts:220:    name: 'uhmi-device',
+AN_VANTARIS_IBMS-frontend/src/router/routes.ts:222:    meta: { requiresAuth: true, permissions: ['platform:read'], title: 'Device HMI', layout: true },
+AN_VANTARIS_IBMS-frontend/src/router/routes.ts:225:    path: '/one/uhmi/alarms-events',
+AN_VANTARIS_IBMS-frontend/src/router/routes.ts:226:    name: 'uhmi-alarms-events',
+AN_VANTARIS_IBMS-frontend/src/router/routes.ts:231:    path: '/one/uhmi/edge-link-diagnostics',
+AN_VANTARIS_IBMS-frontend/src/router/routes.ts:232:    name: 'uhmi-edge-link-diagnostics',
+AN_VANTARIS_IBMS-frontend/src/router/routes.ts:237:    path: '/one/uhmi/evidence-reports',
+AN_VANTARIS_IBMS-frontend/src/router/routes.ts:238:    name: 'uhmi-evidence-reports',
+UHMI_GA_R2A_UI_API_SKELETON_BOUNDARY_SPEC.md:1:# UHMI-GA-R2A UI/API Skeleton Boundary Spec
+UHMI_GA_R2A_UI_API_SKELETON_BOUNDARY_SPEC.md:3:PASS marker: `UHMI_GA_R2A_FULL_UCONSOLE_MENU_IA_UI_API_SKELETON_PASS`
+UHMI_GA_R2A_UI_API_SKELETON_BOUNDARY_SPEC.md:5:UHMI = Unified Human-Machine Interface. UHMI is under UConsole / UHMI Workspace. It is read-only, not an independent HMI server, and not a SCADA replacement.
+UHMI_GA_R2A_UI_API_SKELETON_BOUNDARY_SPEC.md:9:The UHMI API skeleton exposes GET-only routes:
+UHMI_GA_R2A_UI_API_SKELETON_BOUNDARY_SPEC.md:11:- `GET /api/v1/one/uhmi/health`
+UHMI_GA_R2A_UI_API_SKELETON_BOUNDARY_SPEC.md:12:- `GET /api/v1/one/uhmi/menu`
+UHMI_GA_R2A_UI_API_SKELETON_BOUNDARY_SPEC.md:13:- `GET /api/v1/one/uhmi/sections`
+UHMI_GA_R2A_UI_API_SKELETON_BOUNDARY_SPEC.md:14:- `GET /api/v1/one/uhmi/sections/<section_key>`
+UHMI_GA_R2A_UI_API_SKELETON_BOUNDARY_SPEC.md:20:`Device/System -> EDGE -> LINK -> CODE -> UConsole/UHMI`
+UHMI_GA_R2A_UI_API_SKELETON_BOUNDARY_SPEC.md:24:- UHMI -> Device
+UHMI_GA_R2A_UI_API_SKELETON_BOUNDARY_SPEC.md:25:- UHMI -> DB write
+UHMI_GA_R2A_UI_API_SKELETON_BOUNDARY_SPEC.md:26:- UHMI -> EDGE command
+UHMI_GA_R2A_UI_API_SKELETON_BOUNDARY_SPEC.md:27:- UHMI -> LINK command
+UHMI_GA_R2A_UI_API_SKELETON_BOUNDARY_SPEC.md:28:- UHMI -> NEXUS AI execution
+UHMI_GA_R2A_UI_API_SKELETON_BOUNDARY_SPEC.md:29:- UHMI -> bypass CODE
+UHMI_GA_R2A_UI_API_SKELETON_BOUNDARY_SPEC.md:33:`UHMI -> CODE -> Policy Gate -> Approval -> Audit / UCDE -> LINK -> EDGE -> Device`
+UHMI_GA_R2A_UI_API_SKELETON_BOUNDARY_SPEC.md:40:- No direct DB write
+UHMI_GA_R2A_UI_API_SKELETON_BOUNDARY_SPEC.md:41:- No bypass CODE
+UHMI_GA_R2A_UI_API_SKELETON_BOUNDARY_SPEC.md:47:`UHMI_GA_R2A_FULL_UCONSOLE_MENU_IA_UI_API_SKELETON_PASS`
+AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:19:  capability: 'UHMI'
+AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:21:  placement: 'UConsole / UHMI Workspace'
+AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:34:  runtimeActivation: boolean
+AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:35:  productionActivation: boolean
+AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:37:  directDeviceControl: boolean
+AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:43:  dbMigration: boolean
+AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:44:  installOrRollback: boolean
+AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:51:  capability: 'UHMI'
+AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:52:  placement: 'UConsole / UHMI Workspace'
+AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:59:  runtimeActivation: boolean
+AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:60:  productionActivation: boolean
+AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:68:  placement: 'UConsole / UHMI Workspace'
+AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:74:  runtimeActivation: boolean
+AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:75:  productionActivation: boolean
+AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:79:export const uhmiSections: UhmiMenuItem[] = [
+AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:80:  { key: 'HMI_OVERVIEW', label: 'HMI Overview', route: '/one/uhmi/overview' },
+AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:81:  { key: 'SYSTEM_HMI', label: 'System HMI', route: '/one/uhmi/system' },
+AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:82:  { key: 'DEVICE_HMI', label: 'Device HMI', route: '/one/uhmi/device' },
+AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:83:  { key: 'ALARM_EVENT_HMI', label: 'Alarm & Event HMI', route: '/one/uhmi/alarms-events' },
+AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:84:  { key: 'EDGE_LINK_DIAGNOSTICS', label: 'EDGE / LINK Diagnostics', route: '/one/uhmi/edge-link-diagnostics' },
+AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:85:  { key: 'EVIDENCE_REPORTS', label: 'Evidence & Reports', route: '/one/uhmi/evidence-reports' },
+AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:89:  const response = await request.get<UhmiHealthPayload>('/v1/one/uhmi/health')
+AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:94:  const response = await request.get<UhmiMenuIaPayload>('/v1/one/uhmi/menu')
+AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts:99:  const response = await request.get<UhmiSectionPayload>(`/v1/one/uhmi/sections/${sectionKey}`)
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.v1.json:3:  "capability": "UHMI",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.v1.json:4:  "definition": "UHMI = Unified Human-Machine Interface",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.v1.json:5:  "placement": "UConsole / UHMI Workspace",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.v1.json:6:  "release": "UHMI-GA-R2A",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.v1.json:13:  "runtimeActivation": false,
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.v1.json:14:  "productionActivation": false,
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.v1.json:15:  "directDeviceControl": false,
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.v1.json:18:  "dbMigration": false,
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.v1.json:19:  "installOrRollback": false,
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.v1.json:22:    "l2": "UHMI Workspace",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.v1.json:26:      {"key": "HMI_OVERVIEW", "label": "HMI Overview", "route": "/one/uhmi/overview"},
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.v1.json:27:      {"key": "SYSTEM_HMI", "label": "System HMI", "route": "/one/uhmi/system"},
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.v1.json:28:      {"key": "DEVICE_HMI", "label": "Device HMI", "route": "/one/uhmi/device"},
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.v1.json:29:      {"key": "ALARM_EVENT_HMI", "label": "Alarm & Event HMI", "route": "/one/uhmi/alarms-events"},
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.v1.json:30:      {"key": "EDGE_LINK_DIAGNOSTICS", "label": "EDGE / LINK Diagnostics", "route": "/one/uhmi/edge-link-diagnostics"},
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.v1.json:31:      {"key": "EVIDENCE_REPORTS", "label": "Evidence & Reports", "route": "/one/uhmi/evidence-reports"}
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.v1.json:37:      "/api/v1/one/uhmi/health",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.v1.json:38:      "/api/v1/one/uhmi/menu",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.v1.json:39:      "/api/v1/one/uhmi/sections",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.v1.json:40:      "/api/v1/one/uhmi/sections/<section_key>"
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.v1.json:43:  "dataFlow": "Device/System -> EDGE -> LINK -> CODE -> UConsole/UHMI",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.v1.json:45:    "UHMI -> Device",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.v1.json:46:    "UHMI -> DB write",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.v1.json:47:    "UHMI -> EDGE command",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.v1.json:48:    "UHMI -> LINK command",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.v1.json:49:    "UHMI -> NEXUS AI execution",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.v1.json:50:    "UHMI -> bypass CODE"
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.v1.json:53:    "path": "UHMI -> CODE -> Policy Gate -> Approval -> Audit / UCDE -> LINK -> EDGE -> Device",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.v1.json:57:    "AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.v1.json:58:    "AN_VANTARIS_IBMS-backend/src/api/uhmi/uhmi_api.py",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.v1.json:59:    "AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue",
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.v1.json:60:    "AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts"
+AN_VANTARIS_ONE/registries/uhmi-ga-r2a/uhmi-ga-r2a-uconsole-menu-ia-ui-api-skeleton.v1.json:62:  "passMarker": "UHMI_GA_R2A_FULL_UCONSOLE_MENU_IA_UI_API_SKELETON_PASS"
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:1:"""UHMI UConsole workspace read-only provider.
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:3:The provider exposes local projection data for the UHMI workspace UI/API
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:5:activate runtime paths, or bypass CODE.
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:15:    {"key": "HMI_OVERVIEW", "label": "HMI Overview", "route": "/one/uhmi/overview"},
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:16:    {"key": "SYSTEM_HMI", "label": "System HMI", "route": "/one/uhmi/system"},
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:17:    {"key": "DEVICE_HMI", "label": "Device HMI", "route": "/one/uhmi/device"},
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:18:    {"key": "ALARM_EVENT_HMI", "label": "Alarm & Event HMI", "route": "/one/uhmi/alarms-events"},
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:19:    {"key": "EDGE_LINK_DIAGNOSTICS", "label": "EDGE / LINK Diagnostics", "route": "/one/uhmi/edge-link-diagnostics"},
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:20:    {"key": "EVIDENCE_REPORTS", "label": "Evidence & Reports", "route": "/one/uhmi/evidence-reports"},
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:24:    "UHMI -> Device",
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:25:    "UHMI -> DB write",
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:26:    "UHMI -> EDGE command",
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:27:    "UHMI -> LINK command",
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:28:    "UHMI -> NEXUS AI execution",
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:29:    "UHMI -> bypass CODE",
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:40:        "runtimeActivation": False,
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:41:        "productionActivation": False,
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:43:        "directDeviceControl": False,
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:49:        "dbMigration": False,
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:50:        "installOrRollback": False,
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:58:        "capability": "UHMI",
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:59:        "definition": "UHMI = Unified Human-Machine Interface",
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:60:        "placement": "UConsole / UHMI Workspace",
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:67:        "dataFlow": "Device/System -> EDGE -> LINK -> CODE -> UConsole/UHMI",
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:68:        "futureControlledActionPath": "UHMI -> CODE -> Policy Gate -> Approval -> Audit / UCDE -> LINK -> EDGE -> Device",
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:82:        "capability": "UHMI",
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:83:        "placement": "UConsole / UHMI Workspace",
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:85:        "l2": "UHMI Workspace",
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:86:        "l3Policy": "L3 workspace views render inside the UHMI page, not the sidebar.",
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:97:        "moduleId": "uhmi",
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:99:        "placement": "UConsole / UHMI Workspace",
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:123:            {"name": "Boundary posture", "state": "Read-only", "source": "UHMI guardrail", "actionEnabled": False},
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:131:            {"name": "Device summary card", "state": "Visible", "source": "CODE approved read model", "actionEnabled": False},
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:133:            {"name": "Command surface", "state": "Disabled", "source": "UHMI guardrail", "actionEnabled": False},
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:138:            {"name": "Acknowledge action", "state": "Disabled", "source": "UHMI guardrail", "actionEnabled": False},
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:143:            {"name": "Connector command", "state": "Disabled", "source": "UHMI guardrail", "actionEnabled": False},
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:148:            {"name": "Evidence closure", "state": "Disabled", "source": "UHMI guardrail", "actionEnabled": False},
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:152:        "HMI_OVERVIEW": "Overview of UHMI read-only operating posture.",
+AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py:154:        "DEVICE_HMI": "Device-level HMI context without device control.",
+AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:8:  uhmiSections,
+AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:13:} from '@/services/api/uhmi'
+AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:26:  uhmiSections.find((item) => item.key === activeSectionKey.value) ?? uhmiSections[0],
+AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:31:  { label: 'No direct device control', value: section.value?.directDeviceControl === false },
+AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:32:  { label: 'No direct DB write', value: section.value?.directDatabaseWrite === false },
+AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:33:  { label: 'No EDGE command', value: section.value?.edgeCommandEnabled === false },
+AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:34:  { label: 'No LINK command', value: section.value?.linkCommandEnabled === false },
+AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:35:  { label: 'No bypass CODE', value: section.value?.bypassCode === false },
+AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:41:  const matched = uhmiSections.find((item) => item.route === route.path)
+AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:46:  const item = uhmiSections.find((entry) => entry.key === key)
+AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:70:    loadError.value = error instanceof Error ? error.message : 'UHMI read-only API unavailable.'
+AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:91:  <section class="uhmi-page">
+AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:92:    <header class="uhmi-hero">
+AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:95:        <h1>UHMI Workspace</h1>
+AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:98:          Device/System data flows through EDGE, LINK, and CODE before reaching UConsole/UHMI.
+AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:126:          <div class="metric-value">{{ menuIa?.menuItems.length || uhmiSections.length }}</div>
+AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:147:          <span>UHMI workspace sections</span>
+AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:154:          v-for="item in uhmiSections"
+AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:170:        <el-descriptions-item label="Placement">{{ section?.placement || 'UConsole / UHMI Workspace' }}</el-descriptions-item>
+AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:201:        title="No direct device control, direct DB write, EDGE command, LINK command, NEXUS AI execution, bypass CODE, runtime activation, or future controlled action execution is exposed."
+AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:209:.uhmi-page {
+AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:213:.uhmi-hero,
+AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue:230:.uhmi-hero h1,

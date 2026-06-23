@@ -124,6 +124,7 @@ def package_for_route(path: str) -> tuple[str, str]:
         ("/one/umms", "PKG-UMMS", "UMMS"),
         ("/umms", "PKG-UMMS", "UMMS"),
         ("/uedge", "PKG-EDGE", "AN_VANTARIS_EDGE"),
+        ("/one/uhmi", "PKG-UCONSOLE", "UConsole"),
         ("/one/airport", "PKG-UCONSOLE", "UConsole"),
         ("/reports", "PKG-REPORTS", "Reports"),
         ("/dashboard", "PKG-UCONSOLE", "UConsole"),
@@ -155,7 +156,7 @@ def target_permissions(path: str) -> list[str]:
         return ["security:read"]
     if path.startswith("/modeling"):
         return ["ai:use"]
-    if path.startswith("/console") or path.startswith("/dashboard"):
+    if path.startswith("/console") or path.startswith("/dashboard") or path.startswith("/one/uhmi"):
         return ["platform:read"]
     if path.startswith("/ucde"):
         return ["evidence:read"]
@@ -192,6 +193,7 @@ def api_dependencies(path: str) -> list[str]:
         ("/one/umms", ["/api/v1/mms", "/api/v1/work"]),
         ("/umms", ["/api/v1/mms", "/api/v1/work"]),
         ("/uedge", ["/api/v1/edge", "/api/v1/health"]),
+        ("/one/uhmi", ["/api/v1/one/uhmi"]),
         ("/one/airport", []),
         ("/reports", ["/api/v1/reports"]),
         ("/dashboard", ["/api/v1/console"]),

@@ -1,0 +1,64 @@
+{
+  "platform": "VANTARIS_ONE",
+  "capability": "UHMI",
+  "definition": "UHMI = Unified Human-Machine Interface",
+  "placement": "UConsole / UHMI Workspace",
+  "release": "UHMI-GA-R2A",
+  "releaseScope": "READ_ONLY_UI_API_SKELETON",
+  "crossIndustry": true,
+  "airportOnly": false,
+  "standaloneHmiServer": false,
+  "scadaReplacement": false,
+  "readOnly": true,
+  "runtimeActivation": false,
+  "productionActivation": false,
+  "directDeviceControl": false,
+  "directDatabaseWrite": false,
+  "bypassCode": false,
+  "dbMigration": false,
+  "installOrRollback": false,
+  "menuIa": {
+    "l1": "UConsole",
+    "l2": "UHMI Workspace",
+    "l3Policy": "Sidebar only L1/L2; L3 inside page.",
+    "productionLabelPolicy": "Production UI must not use Mock/Demo/Pilot/Coming soon labels.",
+    "items": [
+      {"key": "HMI_OVERVIEW", "label": "HMI Overview", "route": "/one/uhmi/overview"},
+      {"key": "SYSTEM_HMI", "label": "System HMI", "route": "/one/uhmi/system"},
+      {"key": "DEVICE_HMI", "label": "Device HMI", "route": "/one/uhmi/device"},
+      {"key": "ALARM_EVENT_HMI", "label": "Alarm & Event HMI", "route": "/one/uhmi/alarms-events"},
+      {"key": "EDGE_LINK_DIAGNOSTICS", "label": "EDGE / LINK Diagnostics", "route": "/one/uhmi/edge-link-diagnostics"},
+      {"key": "EVIDENCE_REPORTS", "label": "Evidence & Reports", "route": "/one/uhmi/evidence-reports"}
+    ]
+  },
+  "api": {
+    "methodPolicy": "GET_ONLY",
+    "routes": [
+      "/api/v1/one/uhmi/health",
+      "/api/v1/one/uhmi/menu",
+      "/api/v1/one/uhmi/sections",
+      "/api/v1/one/uhmi/sections/<section_key>"
+    ]
+  },
+  "dataFlow": "Device/System -> EDGE -> LINK -> CODE -> UConsole/UHMI",
+  "forbiddenDirectPaths": [
+    "UHMI -> Device",
+    "UHMI -> DB write",
+    "UHMI -> EDGE command",
+    "UHMI -> LINK command",
+    "UHMI -> NEXUS AI execution",
+    "UHMI -> bypass CODE"
+  ],
+  "futureControlledActionPath": {
+    "path": "UHMI -> CODE -> Policy Gate -> Approval -> Audit / UCDE -> LINK -> EDGE -> Device",
+    "status": "NOT EXECUTED in R2A"
+  },
+  "sourceFiles": [
+    "AN_VANTARIS_IBMS-backend/src/uhmi/uhmi_provider.py",
+    "AN_VANTARIS_IBMS-backend/src/api/uhmi/uhmi_api.py",
+    "AN_VANTARIS_IBMS-frontend/src/modules/uhmi/UhmiWorkspace.vue",
+    "AN_VANTARIS_IBMS-frontend/src/services/api/uhmi.ts"
+  ],
+  "passMarker": "UHMI_GA_R2A_FULL_UCONSOLE_MENU_IA_UI_API_SKELETON_PASS"
+}
+
