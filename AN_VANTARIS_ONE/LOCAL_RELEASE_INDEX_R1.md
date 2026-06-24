@@ -341,3 +341,35 @@ SERVER-PRECHECK-R10F records final verification only. It defines a deployment re
 
 Final conclusion:
 SERVER-PRECHECK-R10 Deployment Readiness Gate: COMPLETE
+
+## SERVER-PRECHECK-R11F Final Verification / Release Index Update
+
+PASS marker: ONE_SERVER_PRECHECK_R11_DB_SERVER_DEPLOYMENT_PREPARATION_PACK_PASS
+
+- Source task: SERVER-PRECHECK-R11 DB Server Deployment Preparation Pack
+- Source PASS marker: ONE_SERVER_PRECHECK_R11_DB_SERVER_DEPLOYMENT_PREPARATION_PACK_PASS
+- Source baseline: c4da56e docs(one): add server precheck r10 deployment readiness gate
+- Remote branch: sync/ufms-foundation-packages-20260622-104646
+- R11 final local freeze recommendation: ready after local commit
+
+Verification:
+- SERVER-PRECHECK-R11 validator PASS
+- PostgreSQL direction confirmed
+- R10 relationship recorded
+- Release index updated
+- No SSH execution
+- No DB server connection
+- No DB deployment
+- No DB migration/backup/restore/seed
+- No DB user/privilege mutation
+- No server mutation
+- No DB/auth/runtime mutation
+- No frontend/backend/routes mutation
+- No production credential public storage
+- Downstream R12/R13/R14 gates recommended
+
+Boundary:
+SERVER-PRECHECK-R11F records final verification only. It defines a DB server deployment preparation pack and does not add SSH execution, SSH automation, SSH connection commands, executable shell scripts, DB server connection, PostgreSQL command execution, deployment, install, DB migration, DB backup execution, DB restore execution, DB seed execution, DB user creation, DB privilege mutation, APP server mutation, DB server mutation, auth mutation, runtime mutation, frontend, backend, routes, production config mutation, production credential public storage, or actual DB deployment execution by this packet.
+
+Final conclusion:
+SERVER-PRECHECK-R11 DB Server Deployment Preparation Pack: COMPLETE

@@ -1,0 +1,39 @@
+{
+  "taskId": "SERVER-PRECHECK-R11F",
+  "sourceTaskId": "SERVER-PRECHECK-R11",
+  "status": "PASS",
+  "passMarker": "ONE_SERVER_PRECHECK_R11_DB_SERVER_DEPLOYMENT_PREPARATION_PACK_PASS",
+  "sourcePassMarker": "ONE_SERVER_PRECHECK_R11_DB_SERVER_DEPLOYMENT_PREPARATION_PACK_PASS",
+  "sourceBaseline": {
+    "shortHash": "c4da56e",
+    "message": "docs(one): add server precheck r10 deployment readiness gate"
+  },
+  "postgresqlDirectionConfirmed": true,
+  "boundaries": {
+    "sshExecutionAllowed": false,
+    "dbServerConnectionAllowed": false,
+    "postgresCommandExecutionAllowed": false,
+    "dbDeploymentAllowed": false,
+    "dbMigrationAllowed": false,
+    "dbBackupExecutionAllowed": false,
+    "dbRestoreExecutionAllowed": false,
+    "dbSeedExecutionAllowed": false,
+    "dbUserCreationAllowed": false,
+    "dbPrivilegeMutationAllowed": false,
+    "serverMutationAllowed": false,
+    "authMutationAllowed": false,
+    "runtimeMutationAllowed": false,
+    "frontendChanged": false,
+    "backendChanged": false,
+    "routesChanged": false,
+    "productionCredentialPublicStorageAllowed": false
+  },
+  "verification": {
+    "serverPrecheckR11ValidatorPass": true,
+    "r10RelationshipRecorded": true,
+    "releaseIndexUpdated": true,
+    "downstreamR12R13R14Recommended": true,
+    "finalLocalFreezeRecommended": true
+  },
+  "conclusion": "SERVER-PRECHECK-R11 DB Server Deployment Preparation Pack: COMPLETE"
+}

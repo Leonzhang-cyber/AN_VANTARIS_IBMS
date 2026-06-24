@@ -1,0 +1,102 @@
+{
+  "packId": "server-precheck-r11-db-server-deployment-preparation-pack",
+  "stage": "SERVER-PRECHECK-R11",
+  "deploymentReadinessGateReference": "SERVER-PRECHECK-R10",
+  "approvalReference": "SERVER-PRECHECK-R7",
+  "actualObservationEvidenceReference": "SERVER-PRECHECK-R9",
+  "passMarker": "ONE_SERVER_PRECHECK_R11_DB_SERVER_DEPLOYMENT_PREPARATION_PACK_PASS",
+  "dbDeploymentPerformedByThisPacket": false,
+  "sshExecutedByThisPacket": false,
+  "dbServerConnectionPerformed": false,
+  "postgresCommandExecuted": false,
+  "dbMigrationPerformed": false,
+  "dbBackupPerformed": false,
+  "dbRestorePerformed": false,
+  "dbSeedPerformed": false,
+  "dbUserCreated": false,
+  "dbPrivilegeMutationPerformed": false,
+  "serverMutationPerformed": false,
+  "authMutationPerformed": false,
+  "runtimeMutationPerformed": false,
+  "frontendBackendMutationPerformed": false,
+  "productionConfigMutationPerformed": false,
+  "postgresqlDirectionConfirmed": true,
+  "targetDbServer": {
+    "serverReference": "",
+    "environmentName": "",
+    "networkZoneReference": "",
+    "dbEngine": "PostgreSQL",
+    "dbEngineVersionReference": "",
+    "deploymentPathReference": "",
+    "accessBoundaryReference": ""
+  },
+  "migrationPreparation": {
+    "schemaSourceReviewed": false,
+    "migrationInventoryReviewed": false,
+    "migrationOrderReviewed": false,
+    "migrationDryRunRequired": true,
+    "migrationExecutionAllowedByThisPacket": false,
+    "migrationRollbackConsidered": false,
+    "migrationOperatorApprovalRequired": true,
+    "migrationEvidenceReference": "",
+    "readinessStatus": "HOLD"
+  },
+  "backupPreparation": {
+    "backupRequiredBeforeMigration": true,
+    "backupPlanReviewed": false,
+    "backupLocationReference": "",
+    "backupRetentionReviewed": false,
+    "backupOperatorAssigned": false,
+    "backupEvidenceRecordRequired": true,
+    "backupVerificationRequired": true,
+    "backupExecutionAllowedByThisPacket": false,
+    "readinessStatus": "HOLD"
+  },
+  "rollbackPreparation": {
+    "rollbackPlanRequired": true,
+    "rollbackPlanReviewed": false,
+    "restoreProcedureReviewed": false,
+    "rollbackDecisionOwnerIdentified": false,
+    "rollbackEvidenceRequired": true,
+    "restoreExecutionAllowedByThisPacket": false,
+    "readinessStatus": "HOLD"
+  },
+  "seedPreparation": {
+    "seedRequired": false,
+    "seedInventoryReviewed": false,
+    "seedDataSensitivityReviewed": false,
+    "seedExecutionApprovalRequired": true,
+    "seedRollbackConsidered": false,
+    "seedExecutionAllowedByThisPacket": false,
+    "readinessStatus": "HOLD"
+  },
+  "appDbConnectionPreparation": {
+    "appToDbConnectionPlanReviewed": false,
+    "databaseUrlStoredInPublicPacket": false,
+    "restrictedCredentialReferenceOnly": true,
+    "networkConnectivityPlanReviewed": false,
+    "leastPrivilegePlanReviewed": false,
+    "connectionEvidenceReference": "",
+    "readinessStatus": "HOLD"
+  },
+  "secretHandling": {
+    "productionDbPasswordStoredInPublicPacket": false,
+    "databaseUrlStoredInPublicPacket": false,
+    "credentialRotationPlanReviewed": false,
+    "restrictedSecretReferenceOnly": true,
+    "publicReleaseIndexIncludesRawSecretsOrProductionEnv": false,
+    "readinessStatus": "HOLD"
+  },
+  "reviewer": {
+    "name": "",
+    "role": "",
+    "reviewStatus": "PENDING"
+  },
+  "approver": {
+    "name": "",
+    "role": "",
+    "approvalStatus": "HOLD"
+  },
+  "preparationDecision": "HOLD",
+  "notes": ""
+}
