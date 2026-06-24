@@ -1,0 +1,20 @@
+{
+  "taskId": "SERVER-PRECHECK-R7",
+  "validationType": "human-approval-window-lock-validation",
+  "status": "PASS",
+  "passMarker": "ONE_SERVER_PRECHECK_R7_HUMAN_APPROVAL_RECORD_AND_OBSERVATION_WINDOW_LOCK_PASS",
+  "requiredChecks": [
+    "required_files_exist",
+    "pass_marker_exists",
+    "registry_boundaries_are_false",
+    "approval_status_model_exists",
+    "default_status_is_hold",
+    "required_approval_fields_exist",
+    "human_approval_required",
+    "window_lock_required",
+    "source_markers_exist",
+    "no_ssh_execution_or_automation",
+    "no_frontend_backend_routes",
+    "no_db_auth_runtime_mutation"
+  ]
+}

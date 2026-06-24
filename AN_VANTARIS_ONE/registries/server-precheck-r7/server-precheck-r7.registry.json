@@ -1,0 +1,70 @@
+{
+  "taskId": "SERVER-PRECHECK-R7",
+  "title": "Human Approval Record and Observation Window Lock",
+  "mode": "approval-record-and-window-lock-only",
+  "status": "PASS",
+  "passMarker": "ONE_SERVER_PRECHECK_R7_HUMAN_APPROVAL_RECORD_AND_OBSERVATION_WINDOW_LOCK_PASS",
+  "sourceTasks": [
+    "SERVER-PRECHECK-R4",
+    "SERVER-PRECHECK-R4F",
+    "SERVER-PRECHECK-R5",
+    "SERVER-PRECHECK-R5F",
+    "SERVER-PRECHECK-R6",
+    "SERVER-PRECHECK-R6F"
+  ],
+  "sourcePassMarkers": [
+    "ONE_SERVER_PRECHECK_R4_READONLY_SSH_EXECUTION_APPROVAL_PACKET_PASS",
+    "ONE_SERVER_PRECHECK_R4F_FINAL_VERIFICATION_AND_RELEASE_INDEX_UPDATE_PASS",
+    "ONE_SERVER_PRECHECK_R5_ACTUAL_READONLY_OBSERVATION_ENTRY_GATE_PASS",
+    "ONE_SERVER_PRECHECK_R5F_FINAL_VERIFICATION_AND_RELEASE_INDEX_UPDATE_PASS",
+    "ONE_SERVER_PRECHECK_R6_MANUAL_READONLY_OBSERVATION_SCRIPT_PACK_PASS",
+    "ONE_SERVER_PRECHECK_R6F_FINAL_VERIFICATION_AND_RELEASE_INDEX_UPDATE_PASS"
+  ],
+  "approvalStatusAllowed": [
+    "HOLD",
+    "GO",
+    "NO-GO"
+  ],
+  "defaultApprovalStatus": "HOLD",
+  "requiredApprovalFields": [
+    "approvalStatus",
+    "approverName",
+    "approverRole",
+    "operatorName",
+    "operatorRole",
+    "observationWindowStart",
+    "observationWindowEnd",
+    "timezone",
+    "targetServerIdentity",
+    "targetServerRole",
+    "approvedServices",
+    "approvedPaths",
+    "approvedNonSecretFiles",
+    "approvedEvidenceLocation",
+    "redactionPolicy",
+    "stopConditions",
+    "noGoConditions",
+    "approvalRecordedAt"
+  ],
+  "boundaries": {
+    "sshExecutionAllowed": false,
+    "sshAutomationAllowed": false,
+    "sshConnectionCommandIncluded": false,
+    "executableScriptAllowed": false,
+    "observationCommandPackChanged": false,
+    "deploymentAllowed": false,
+    "installAllowed": false,
+    "dbMutationAllowed": false,
+    "authMutationAllowed": false,
+    "secretsMutationAllowed": false,
+    "runtimeActionAllowed": false,
+    "frontendChanged": false,
+    "backendChanged": false,
+    "routesChanged": false,
+    "menuGaR1Changed": false,
+    "menuGaR2Changed": false
+  },
+  "windowLockRequiredBeforeObservation": true,
+  "humanApprovalRequiredBeforeObservation": true,
+  "nextTaskIfApproved": "SERVER-PRECHECK-R8 Manual Observation Evidence Packet"
+}

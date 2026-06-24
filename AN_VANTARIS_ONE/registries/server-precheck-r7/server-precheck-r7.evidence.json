@@ -1,0 +1,28 @@
+{
+  "taskId": "SERVER-PRECHECK-R7",
+  "evidenceType": "approval-record-window-lock-evidence",
+  "status": "PASS",
+  "passMarker": "ONE_SERVER_PRECHECK_R7_HUMAN_APPROVAL_RECORD_AND_OBSERVATION_WINDOW_LOCK_PASS",
+  "evidenceChecklist": {
+    "approvalRecordModelCreated": true,
+    "observationWindowLockModelCreated": true,
+    "defaultStatusIsHold": true,
+    "humanApprovalRequired": true,
+    "noAutomaticExecutionAuthorized": true,
+    "noSshExecutionAdded": true,
+    "noSshAutomationAdded": true,
+    "noSshConnectionCommandAdded": true,
+    "noExecutableScriptAdded": true,
+    "noDeployInstallDbAuthRuntimeMutation": true,
+    "noFrontendBackendRoutesAdded": true,
+    "r6SourceEvidenceReferenced": true
+  },
+  "recordedSourceEvidence": {
+    "r6Commit": "a4a9bba docs(one): add server precheck r6 manual observation pack",
+    "r6RemoteHead": "a4a9bbab3ad0c39be74c31c771bf950873962120",
+    "r6FreezeTag": "server-precheck-r6-manual-readonly-observation-pack-local-freeze-20260624",
+    "r6FinalVerificationCommit": "ae595d3 docs(one): close server precheck r6 final verification",
+    "r6FinalVerificationRemoteHead": "ae595d398f7d316ccd809205aea37898657a89ba",
+    "r6FinalVerificationTag": "server-precheck-r6-final-verification-release-index-freeze-20260624"
+  }
+}
