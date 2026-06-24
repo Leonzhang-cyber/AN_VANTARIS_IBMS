@@ -1,0 +1,30 @@
+{
+  "taskId": "SERVER-PRECHECK-R8",
+  "validationType": "manual-observation-evidence-packet-validation",
+  "status": "PASS",
+  "passMarker": "ONE_SERVER_PRECHECK_R8_MANUAL_OBSERVATION_EVIDENCE_PACKET_PASS",
+  "requiredChecks": [
+    "r8_documents_exist",
+    "r8_registry_json_exists",
+    "r8_evidence_json_exists",
+    "r8_validation_json_exists",
+    "stage_is_SERVER_PRECHECK_R8",
+    "approvalReference_is_SERVER_PRECHECK_R7",
+    "observationWindowReference_is_SERVER_PRECHECK_R7",
+    "commandsReviewedOnly_is_true",
+    "sshExecutedByThisPacket_is_false",
+    "serverMutationPerformed_is_false",
+    "dbMutationPerformed_is_false",
+    "authMutationPerformed_is_false",
+    "runtimeMutationPerformed_is_false",
+    "rawEvidenceAllowed_is_false",
+    "redactedEvidenceRequired_is_true",
+    "evidenceItems_exists",
+    "redactionChecklist_exists",
+    "reviewStatus_model_valid",
+    "closureDecision_model_valid",
+    "pass_marker_exists",
+    "source_markers_exist",
+    "no_executable_server_operation_steps"
+  ]
+}

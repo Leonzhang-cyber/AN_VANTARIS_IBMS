@@ -256,3 +256,30 @@ Verification:
 
 Boundary:
 SERVER-PRECHECK-R7F records final verification only. It does not add SSH execution, SSH automation, SSH connection commands, executable shell scripts, deployment, install, DB, auth, secrets, credentials, frontend, backend, routes, MENU-GA-R1, MENU-GA-R2, SERVER-PRECHECK-R4 mutation, SERVER-PRECHECK-R5 mutation, SERVER-PRECHECK-R6 mutation, R6 command pack mutation, or runtime behavior.
+
+## SERVER-PRECHECK-R8F Final Verification / Release Index Update
+
+PASS marker: ONE_SERVER_PRECHECK_R8_MANUAL_OBSERVATION_EVIDENCE_PACKET_PASS
+
+- Source task: SERVER-PRECHECK-R8 Manual Observation Evidence Packet
+- Source PASS marker: ONE_SERVER_PRECHECK_R8_MANUAL_OBSERVATION_EVIDENCE_PACKET_PASS
+- Source baseline: 2b300dd docs(one): close server precheck r7 final verification
+- Remote branch: sync/ufms-foundation-packages-20260622-104646
+- R8 final local freeze recommendation: ready after local commit
+
+Verification:
+- SERVER-PRECHECK-R8 validator PASS
+- R7F relationship recorded
+- Release index updated
+- No SSH execution
+- No server mutation
+- No DB/auth/runtime mutation
+- No frontend/backend/routes mutation
+- No production config mutation
+- No actual observation execution
+
+Boundary:
+SERVER-PRECHECK-R8F records final verification only. It defines a manual observation evidence packet for post-observation evidence handling and does not add SSH execution, SSH automation, SSH connection commands, executable shell scripts, deployment, install, APP server mutation, DB server mutation, DB migration, auth mutation, runtime mutation, frontend, backend, routes, production config mutation, raw public evidence archive, or actual observation execution.
+
+Final conclusion:
+SERVER-PRECHECK-R8 Manual Observation Evidence Packet: COMPLETE

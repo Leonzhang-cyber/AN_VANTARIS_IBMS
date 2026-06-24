@@ -1,0 +1,36 @@
+{
+  "taskId": "SERVER-PRECHECK-R8F",
+  "sourceTaskId": "SERVER-PRECHECK-R8",
+  "status": "PASS",
+  "passMarker": "ONE_SERVER_PRECHECK_R8_MANUAL_OBSERVATION_EVIDENCE_PACKET_PASS",
+  "sourcePassMarker": "ONE_SERVER_PRECHECK_R8_MANUAL_OBSERVATION_EVIDENCE_PACKET_PASS",
+  "sourceBaseline": {
+    "shortHash": "2b300dd",
+    "message": "docs(one): close server precheck r7 final verification"
+  },
+  "boundaries": {
+    "sshExecutionAllowed": false,
+    "sshAutomationAllowed": false,
+    "sshConnectionCommandIncluded": false,
+    "executableScriptAllowed": false,
+    "deploymentAllowed": false,
+    "installAllowed": false,
+    "appServerMutationAllowed": false,
+    "dbServerMutationAllowed": false,
+    "dbMigrationAllowed": false,
+    "authMutationAllowed": false,
+    "runtimeMutationAllowed": false,
+    "frontendChanged": false,
+    "backendChanged": false,
+    "routesChanged": false,
+    "productionConfigMutationAllowed": false,
+    "actualObservationExecutionAllowed": false
+  },
+  "verification": {
+    "serverPrecheckR8ValidatorPass": true,
+    "r7fRelationshipRecorded": true,
+    "releaseIndexUpdated": true,
+    "finalLocalFreezeRecommended": true
+  },
+  "conclusion": "SERVER-PRECHECK-R8 Manual Observation Evidence Packet: COMPLETE"
+}
