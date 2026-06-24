@@ -133,3 +133,29 @@ MENU-GA-R1 International GA L1/L2/L3 Menu Architecture Reconciliation is complet
 - Server Precheck R1-R4 is reconciled under Engineer Workspace as metadata only.
 - No SERVER-PRECHECK-R4 execution continuation was included.
 - No SSH execution, deployment, install, DB migration/write, auth/JWT/RBAC, secrets, or EDGE/LINK runtime action was included.
+
+## MENU-GA-R2F Final Verification / Release Index Update
+
+PASS marker: ONE_MENU_GA_R2F_FINAL_VERIFICATION_AND_RELEASE_INDEX_UPDATE_PASS
+
+- Source task: MENU-GA-R2 Route Coverage and Sidebar/L3 Behavior Audit
+- Source PASS marker: ONE_MENU_GA_R2_ROUTE_COVERAGE_SIDEBAR_L3_BEHAVIOR_AUDIT_PASS
+- MENU-GA-R2 commit: 5139f36 test(one): add menu ga r2 route coverage audit
+- Remote branch: sync/ufms-foundation-packages-20260622-104646
+- Remote HEAD: 5139f368354915fc5fb70b9059ed236e4aec16d8
+- Freeze tag: menu-ga-r2-route-coverage-sidebar-l3-behavior-audit-local-freeze-20260624
+- Tag object: 15819a5f6328cb75f1efb10b68f8de1c02b59887
+- Tag target: 5139f368354915fc5fb70b9059ed236e4aec16d8
+
+Verification:
+- MENU-GA-R2 validator PASS
+- Frontend build PASS
+- Route coverage audit PASS
+- Sidebar/L3 behavior audit PASS
+- Duplicate id/path/name audit PASS
+- Forbidden R4 / SSH route residue clean
+- Remote branch verified
+- Remote tag verified
+
+Boundary:
+MENU-GA-R2F records final verification and does not modify menu implementation, routes, frontend, backend, SERVER-PRECHECK-R4, SSH, deployment, DB, auth, secrets, credentials, or runtime behavior.

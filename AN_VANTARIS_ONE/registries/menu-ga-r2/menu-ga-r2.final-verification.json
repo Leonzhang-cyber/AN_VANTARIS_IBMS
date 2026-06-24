@@ -1,0 +1,49 @@
+{
+  "taskId": "MENU-GA-R2F",
+  "sourceTaskId": "MENU-GA-R2",
+  "status": "PASS",
+  "passMarker": "ONE_MENU_GA_R2F_FINAL_VERIFICATION_AND_RELEASE_INDEX_UPDATE_PASS",
+  "sourcePassMarker": "ONE_MENU_GA_R2_ROUTE_COVERAGE_SIDEBAR_L3_BEHAVIOR_AUDIT_PASS",
+  "commit": {
+    "shortHash": "5139f36",
+    "message": "test(one): add menu ga r2 route coverage audit",
+    "fullHash": "5139f368354915fc5fb70b9059ed236e4aec16d8"
+  },
+  "remote": {
+    "branch": "sync/ufms-foundation-packages-20260622-104646",
+    "head": "5139f368354915fc5fb70b9059ed236e4aec16d8"
+  },
+  "tag": {
+    "name": "menu-ga-r2-route-coverage-sidebar-l3-behavior-audit-local-freeze-20260624",
+    "tagObject": "15819a5f6328cb75f1efb10b68f8de1c02b59887",
+    "target": "5139f368354915fc5fb70b9059ed236e4aec16d8"
+  },
+  "boundaries": {
+    "frontendChanged": false,
+    "backendChanged": false,
+    "routesChanged": false,
+    "staticMenuChanged": false,
+    "appLayoutChanged": false,
+    "typesChanged": false,
+    "menuGaR1Changed": false,
+    "serverPrecheckR4Changed": false,
+    "sshExecutionAllowed": false,
+    "deploymentAllowed": false,
+    "installAllowed": false,
+    "dbMutationAllowed": false,
+    "authMutationAllowed": false,
+    "secretsMutationAllowed": false,
+    "runtimeActionAllowed": false
+  },
+  "verification": {
+    "menuGaR2ValidatorPass": true,
+    "frontendBuildPass": true,
+    "routeCoverageAuditPass": true,
+    "sidebarL3BehaviorAuditPass": true,
+    "duplicateAuditPass": true,
+    "forbiddenResidueClean": true,
+    "remoteBranchVerified": true,
+    "remoteTagVerified": true,
+    "releaseIndexUpdated": true
+  }
+}
