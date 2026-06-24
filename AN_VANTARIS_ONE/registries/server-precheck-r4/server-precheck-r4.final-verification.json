@@ -1,0 +1,41 @@
+{
+  "taskId": "SERVER-PRECHECK-R4F",
+  "sourceTaskId": "SERVER-PRECHECK-R4",
+  "status": "PASS",
+  "passMarker": "ONE_SERVER_PRECHECK_R4F_FINAL_VERIFICATION_AND_RELEASE_INDEX_UPDATE_PASS",
+  "sourcePassMarker": "ONE_SERVER_PRECHECK_R4_READONLY_SSH_EXECUTION_APPROVAL_PACKET_PASS",
+  "commit": {
+    "shortHash": "d159c2c",
+    "message": "docs(one): add server precheck r4 ssh approval packet",
+    "fullHash": "d159c2c9c66b0c400766b49f3085c058e69284d6"
+  },
+  "remote": {
+    "branch": "sync/ufms-foundation-packages-20260622-104646",
+    "head": "d159c2c9c66b0c400766b49f3085c058e69284d6"
+  },
+  "tag": {
+    "name": "server-precheck-r4-readonly-ssh-approval-packet-local-freeze-20260624",
+    "tagObject": "7d7e95fef21acce293b0bcd2c6cd7fdf2de112db",
+    "target": "d159c2c9c66b0c400766b49f3085c058e69284d6"
+  },
+  "boundaries": {
+    "sshExecutionAllowed": false,
+    "deploymentAllowed": false,
+    "installAllowed": false,
+    "dbMutationAllowed": false,
+    "authMutationAllowed": false,
+    "secretsMutationAllowed": false,
+    "runtimeActionAllowed": false,
+    "frontendChanged": false,
+    "backendChanged": false,
+    "routesChanged": false,
+    "menuGaR1Changed": false,
+    "menuGaR2Changed": false
+  },
+  "verification": {
+    "serverPrecheckR4ValidatorPass": true,
+    "remoteBranchVerified": true,
+    "remoteTagVerified": true,
+    "releaseIndexUpdated": true
+  }
+}

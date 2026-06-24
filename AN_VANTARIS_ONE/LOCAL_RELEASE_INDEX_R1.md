@@ -159,3 +159,25 @@ Verification:
 
 Boundary:
 MENU-GA-R2F records final verification and does not modify menu implementation, routes, frontend, backend, SERVER-PRECHECK-R4, SSH, deployment, DB, auth, secrets, credentials, or runtime behavior.
+
+## SERVER-PRECHECK-R4F Final Verification / Release Index Update
+
+PASS marker: ONE_SERVER_PRECHECK_R4F_FINAL_VERIFICATION_AND_RELEASE_INDEX_UPDATE_PASS
+
+- Source task: SERVER-PRECHECK-R4 Read-only SSH Execution Approval Packet
+- Source PASS marker: ONE_SERVER_PRECHECK_R4_READONLY_SSH_EXECUTION_APPROVAL_PACKET_PASS
+- SERVER-PRECHECK-R4 commit: d159c2c docs(one): add server precheck r4 ssh approval packet
+- Remote branch: sync/ufms-foundation-packages-20260622-104646
+- Remote HEAD: d159c2c9c66b0c400766b49f3085c058e69284d6
+- Freeze tag: server-precheck-r4-readonly-ssh-approval-packet-local-freeze-20260624
+- Tag object: 7d7e95fef21acce293b0bcd2c6cd7fdf2de112db
+- Tag target: d159c2c9c66b0c400766b49f3085c058e69284d6
+
+Verification:
+- SERVER-PRECHECK-R4 validator PASS
+- Remote branch verified
+- Remote tag verified
+- Release index updated
+
+Boundary:
+SERVER-PRECHECK-R4F records final verification and does not add SSH execution, deployment, install, DB, auth, secrets, credentials, frontend, backend, route, MENU-GA-R1, MENU-GA-R2, or runtime behavior.
