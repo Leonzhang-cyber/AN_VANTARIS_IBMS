@@ -1,0 +1,25 @@
+{
+  "taskId": "SERVER-PRECHECK-R5",
+  "evidenceType": "entry-gate-evidence",
+  "status": "PASS",
+  "passMarker": "ONE_SERVER_PRECHECK_R5_ACTUAL_READONLY_OBSERVATION_ENTRY_GATE_PASS",
+  "evidenceChecklist": {
+    "r4ApprovalPacketExists": true,
+    "r4FinalVerificationExists": true,
+    "r4ValidatorPassRequired": true,
+    "humanApprovalNotAssumed": true,
+    "manualReadOnlyObservationOnly": true,
+    "noSshExecutionAdded": true,
+    "noSshAutomationAdded": true,
+    "noDeployInstallDbAuthRuntimeMutation": true,
+    "noFrontendBackendRoutesAdded": true
+  },
+  "recordedSourceEvidence": {
+    "r4Commit": "d159c2c docs(one): add server precheck r4 ssh approval packet",
+    "r4RemoteHead": "d159c2c9c66b0c400766b49f3085c058e69284d6",
+    "r4FreezeTag": "server-precheck-r4-readonly-ssh-approval-packet-local-freeze-20260624",
+    "r4FinalVerificationCommit": "4f4e7a5 docs(one): close server precheck r4 final verification",
+    "r4FinalVerificationRemoteHead": "4f4e7a5d466ddc72848c582c45382b24c5321201",
+    "r4FinalVerificationTag": "server-precheck-r4-final-verification-release-index-freeze-20260624"
+  }
+}

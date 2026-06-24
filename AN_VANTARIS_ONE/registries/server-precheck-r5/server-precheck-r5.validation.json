@@ -1,0 +1,19 @@
+{
+  "taskId": "SERVER-PRECHECK-R5",
+  "validationType": "entry-gate-validation",
+  "status": "PASS",
+  "passMarker": "ONE_SERVER_PRECHECK_R5_ACTUAL_READONLY_OBSERVATION_ENTRY_GATE_PASS",
+  "requiredChecks": [
+    "required_files_exist",
+    "pass_marker_exists",
+    "registry_boundaries_are_false",
+    "human_approval_required",
+    "decision_states_exist",
+    "default_state_is_hold",
+    "stop_conditions_exist",
+    "r4_and_r4f_source_markers_exist",
+    "no_ssh_execution_or_automation",
+    "no_frontend_backend_routes",
+    "no_db_auth_runtime_mutation"
+  ]
+}
