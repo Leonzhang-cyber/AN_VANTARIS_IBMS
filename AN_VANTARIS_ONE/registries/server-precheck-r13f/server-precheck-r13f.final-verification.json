@@ -1,0 +1,22 @@
+{
+  "finalVerificationId": "server-precheck-r13f-console-ga-runtime-verification-final-review-final-verification",
+  "stage": "SERVER-PRECHECK-R13F",
+  "status": "COMPLETE",
+  "passMarker": "ONE_SERVER_PRECHECK_R13F_CONSOLE_GA_RUNTIME_VERIFICATION_FINAL_REVIEW_PASS",
+  "r13HoldClosureStatus": "COMPLETE",
+  "runtimeVerificationFinalDecision": "GO",
+  "r14fDependencyStatus": {
+    "requiredBeforeR14fGo": true,
+    "r13fCompleted": true,
+    "r14CanBeReevaluatedAfterR13f": true
+  },
+  "boundaryConfirmation": {
+    "sshExecution": false,
+    "appDbServerConnection": false,
+    "deploymentInstall": false,
+    "buildNpmNodeExecution": false,
+    "frontendBackendRoutesMenuMutation": false,
+    "serverMutation": false
+  },
+  "finalConclusion": "SERVER-PRECHECK-R13F Console GA Runtime Verification Final Review: COMPLETE"
+}

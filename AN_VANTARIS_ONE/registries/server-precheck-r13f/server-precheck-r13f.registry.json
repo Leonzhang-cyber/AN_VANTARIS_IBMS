@@ -1,0 +1,61 @@
+{
+  "taskId": "SERVER-PRECHECK-R13F",
+  "name": "Console GA Runtime Verification Final Review",
+  "platform": "VANTARIS_ONE",
+  "stage": "SERVER-PRECHECK-R13F",
+  "status": "COMPLETE",
+  "scope": "docs_registry_evidence_validation_only",
+  "passMarker": "ONE_SERVER_PRECHECK_R13F_CONSOLE_GA_RUNTIME_VERIFICATION_FINAL_REVIEW_PASS",
+  "references": {
+    "menuArchitectureBaseline": "MENU-GA-R1/R2",
+    "consoleRuntimeVerification": "SERVER-PRECHECK-R13",
+    "deploymentExecutionApproval": "SERVER-PRECHECK-R14"
+  },
+  "allowedFinalDecisions": [
+    "HOLD",
+    "GO",
+    "NO-GO"
+  ],
+  "allowedReviewStatuses": [
+    "PENDING",
+    "ACCEPTED",
+    "REJECTED"
+  ],
+  "allowedApprovalStatuses": [
+    "HOLD",
+    "GO",
+    "NO-GO"
+  ],
+  "boundaries": {
+    "sshExecution": false,
+    "sshAutomation": false,
+    "sshConnectionCommand": false,
+    "executableShellScript": false,
+    "appServerConnection": false,
+    "dbServerConnection": false,
+    "serverCommandExecution": false,
+    "deployment": false,
+    "install": false,
+    "runtimeInstallation": false,
+    "buildExecution": false,
+    "npmExecution": false,
+    "nodeExecution": false,
+    "backendExecution": false,
+    "frontendExecution": false,
+    "nginxExecution": false,
+    "pm2Execution": false,
+    "productionHealthcheckExecution": false,
+    "productionSmokeTestExecution": false,
+    "appToDbLiveConnectionTest": false,
+    "serverMutation": false,
+    "dbMutation": false,
+    "authMutation": false,
+    "runtimeMutation": false,
+    "frontendMutation": false,
+    "backendMutation": false,
+    "routeMutation": false,
+    "menuImplementationMutation": false,
+    "productionConfigMutation": false,
+    "productionCredentialPublicStorage": false
+  }
+}

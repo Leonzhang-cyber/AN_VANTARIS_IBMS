@@ -1,0 +1,115 @@
+{
+  "finalReviewId": "server-precheck-r13f-console-ga-runtime-verification-final-review",
+  "stage": "SERVER-PRECHECK-R13F",
+  "consoleRuntimeVerificationReference": "SERVER-PRECHECK-R13",
+  "menuArchitectureBaselineReference": "MENU-GA-R1/R2",
+  "deploymentExecutionApprovalReference": "SERVER-PRECHECK-R14",
+  "passMarker": "ONE_SERVER_PRECHECK_R13F_CONSOLE_GA_RUNTIME_VERIFICATION_FINAL_REVIEW_PASS",
+  "r14fDependency": {
+    "requiredBeforeR14fGo": true,
+    "r13Completed": true,
+    "r13fCompleted": true,
+    "r13DecisionBeforeFinalReview": "HOLD",
+    "r14CanBeReevaluatedAfterR13f": true
+  },
+  "runtimeVerificationPerformedByThisPacket": false,
+  "productionServerAccessPerformed": false,
+  "sshExecutedByThisPacket": false,
+  "appServerConnectionPerformed": false,
+  "dbServerConnectionPerformed": false,
+  "buildPerformed": false,
+  "npmNodeCommandExecuted": false,
+  "frontendBackendMutationPerformed": false,
+  "routeMutationPerformed": false,
+  "menuImplementationMutationPerformed": false,
+  "serverMutationPerformed": false,
+  "productionConfigMutationPerformed": false,
+  "sidebarCollapseExpandFinalReview": {
+    "collapseControlPresent": true,
+    "collapseExpandBehaviorReviewed": true,
+    "l1L2VisibilityRulesPreserved": true,
+    "l3RemainsOutsideSidebarAfterCollapseExpand": true,
+    "status": "PASS"
+  },
+  "routePageAvailabilityFinalReview": {
+    "routeCoverageAuditReference": "MENU-GA-R2",
+    "allVisibleRoutesHavePageOrGaCompliantPlaceholder": true,
+    "duplicateRouteAuditPassed": true,
+    "duplicateMenuAuditPassed": true,
+    "noVisibleRouteBrokenPageStateRecorded": true,
+    "status": "PASS"
+  },
+  "internationalBrandMenuFinalReview": {
+    "brandNamingReviewed": true,
+    "brandPlacementReviewed": true,
+    "businessDomainMenuGroupingPreserved": true,
+    "vantarisOneBrandCovered": true,
+    "vantarisConsoleCovered": true,
+    "vantarisLinkCovered": true,
+    "vantarisEdgeCovered": true,
+    "vantarisCodeCovered": true,
+    "vantarisDbCovered": true,
+    "vantarisNexusAiCovered": true,
+    "status": "PASS"
+  },
+  "ibmsUpgradedMenuFinalReview": {
+    "coverageReviewed": true,
+    "domainMappingReviewed": true,
+    "flatL1DumpAvoided": true,
+    "operationsCovered": true,
+    "sitesSpacesCovered": true,
+    "systemsDevicesCovered": true,
+    "alarmsEventsCovered": true,
+    "faultManagementCovered": true,
+    "maintenanceCovered": true,
+    "energySustainabilityCovered": true,
+    "facilityServicesCovered": true,
+    "dataCenterOperationsCovered": true,
+    "decisionEvidenceCovered": true,
+    "commandCenterCovered": true,
+    "intelligenceCovered": true,
+    "aiVideoAnalyticsCovered": true,
+    "digitalTwinCovered": true,
+    "reportsCovered": true,
+    "trustIdentityCovered": true,
+    "administrationCovered": true,
+    "status": "PASS"
+  },
+  "roleBasedVisibilityFinalReview": {
+    "customerRoleReviewed": true,
+    "engineerRoleReviewed": true,
+    "adminRoleReviewed": true,
+    "roleBoundaryViolationsDetected": false,
+    "restrictedDeploymentContentExposedToCustomer": false,
+    "restrictedEvidenceContentExposedToCustomer": false,
+    "status": "PASS"
+  },
+  "forbiddenLanguageFinalReview": {
+    "mockDetectedInGaVisibleText": false,
+    "demoDetectedInGaVisibleText": false,
+    "pilotDetectedInGaVisibleText": false,
+    "comingSoonDetectedInGaVisibleText": false,
+    "status": "PASS"
+  },
+  "restrictedEvidenceHandlingFinalReview": {
+    "productionScreenshotsStoredInPublicPacket": false,
+    "customerHostnamesStoredInPublicPacket": false,
+    "privateIpStoredInPublicPacket": false,
+    "usernamesStoredInPublicPacket": false,
+    "emailsStoredInPublicPacket": false,
+    "restrictedEvidenceReferenceOnly": true,
+    "status": "PASS"
+  },
+  "reviewer": {
+    "name": "R13F Final Review Model",
+    "role": "Console GA Runtime Verification Reviewer",
+    "reviewStatus": "ACCEPTED"
+  },
+  "approver": {
+    "name": "R13F Approval Model",
+    "role": "Console GA Runtime Verification Approver",
+    "approvalStatus": "GO"
+  },
+  "runtimeVerificationFinalDecision": "GO",
+  "notes": "R13 HOLD closure is complete for the final review model. R14F can reevaluate deploymentExecutionApprovalDecision, but R13F does not authorize deployment or runtime action."
+}

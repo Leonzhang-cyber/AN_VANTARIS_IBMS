@@ -1,0 +1,24 @@
+{
+  "validationId": "server-precheck-r13f-console-ga-runtime-verification-final-review-validation",
+  "stage": "SERVER-PRECHECK-R13F",
+  "status": "PASS",
+  "validator": "scripts/validation/validate-server-precheck-r13f-console-ga-runtime-verification-final-review.py",
+  "passMarker": "ONE_SERVER_PRECHECK_R13F_CONSOLE_GA_RUNTIME_VERIFICATION_FINAL_REVIEW_PASS",
+  "checks": {
+    "requiredFilesExist": true,
+    "jsonParses": true,
+    "referencesCorrect": true,
+    "r14fDependencyCorrect": true,
+    "executionAndMutationFlagsFalse": true,
+    "sidebarCollapseExpandFinalReviewPass": true,
+    "routePageAvailabilityFinalReviewPass": true,
+    "internationalBrandMenuFinalReviewPass": true,
+    "ibmsUpgradedMenuFinalReviewPass": true,
+    "roleBasedVisibilityFinalReviewPass": true,
+    "forbiddenLanguageFinalReviewPass": true,
+    "restrictedEvidenceHandlingFinalReviewPass": true,
+    "runtimeVerificationFinalDecisionAllowed": true,
+    "passMarkerPresent": true,
+    "noExecutableServerOrRuntimeOperationSteps": true
+  }
+}
