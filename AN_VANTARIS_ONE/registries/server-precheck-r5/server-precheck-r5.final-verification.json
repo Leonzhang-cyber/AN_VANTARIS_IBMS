@@ -1,0 +1,45 @@
+{
+  "taskId": "SERVER-PRECHECK-R5F",
+  "sourceTaskId": "SERVER-PRECHECK-R5",
+  "status": "PASS",
+  "passMarker": "ONE_SERVER_PRECHECK_R5F_FINAL_VERIFICATION_AND_RELEASE_INDEX_UPDATE_PASS",
+  "sourcePassMarker": "ONE_SERVER_PRECHECK_R5_ACTUAL_READONLY_OBSERVATION_ENTRY_GATE_PASS",
+  "commit": {
+    "shortHash": "58db2b6",
+    "message": "docs(one): add server precheck r5 observation entry gate",
+    "fullHash": "58db2b68614b72f5ac7ae01c24f14f788fd509fb"
+  },
+  "remote": {
+    "branch": "sync/ufms-foundation-packages-20260622-104646",
+    "head": "58db2b68614b72f5ac7ae01c24f14f788fd509fb"
+  },
+  "tag": {
+    "name": "server-precheck-r5-actual-readonly-observation-entry-gate-local-freeze-20260624",
+    "tagObject": "05caf5e15289a7823ac0581c1124c166d1bb52bc",
+    "target": "58db2b68614b72f5ac7ae01c24f14f788fd509fb"
+  },
+  "boundaries": {
+    "sshExecutionAllowed": false,
+    "sshAutomationAllowed": false,
+    "deploymentAllowed": false,
+    "installAllowed": false,
+    "dbMutationAllowed": false,
+    "authMutationAllowed": false,
+    "secretsMutationAllowed": false,
+    "runtimeActionAllowed": false,
+    "frontendChanged": false,
+    "backendChanged": false,
+    "routesChanged": false,
+    "menuGaR1Changed": false,
+    "menuGaR2Changed": false,
+    "serverPrecheckR4Changed": false
+  },
+  "verification": {
+    "serverPrecheckR5ValidatorPass": true,
+    "serverPrecheckR4ValidatorPass": true,
+    "remoteBranchVerified": true,
+    "remoteTagVerified": true,
+    "releaseIndexUpdated": true
+  },
+  "nextTaskIfApproved": "SERVER-PRECHECK-R6 Manual Read-only Observation Script Pack"
+}

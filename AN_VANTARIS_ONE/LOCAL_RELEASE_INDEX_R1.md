@@ -181,3 +181,29 @@ Verification:
 
 Boundary:
 SERVER-PRECHECK-R4F records final verification and does not add SSH execution, deployment, install, DB, auth, secrets, credentials, frontend, backend, route, MENU-GA-R1, MENU-GA-R2, or runtime behavior.
+
+## SERVER-PRECHECK-R5F Final Verification / Release Index Update
+
+PASS marker: ONE_SERVER_PRECHECK_R5F_FINAL_VERIFICATION_AND_RELEASE_INDEX_UPDATE_PASS
+
+- Source task: SERVER-PRECHECK-R5 Actual Read-only Observation Entry Gate
+- Source PASS marker: ONE_SERVER_PRECHECK_R5_ACTUAL_READONLY_OBSERVATION_ENTRY_GATE_PASS
+- SERVER-PRECHECK-R5 commit: 58db2b6 docs(one): add server precheck r5 observation entry gate
+- Remote branch: sync/ufms-foundation-packages-20260622-104646
+- Remote HEAD: 58db2b68614b72f5ac7ae01c24f14f788fd509fb
+- Freeze tag: server-precheck-r5-actual-readonly-observation-entry-gate-local-freeze-20260624
+- Tag object: 05caf5e15289a7823ac0581c1124c166d1bb52bc
+- Tag target: 58db2b68614b72f5ac7ae01c24f14f788fd509fb
+
+Verification:
+- SERVER-PRECHECK-R5 validator PASS
+- SERVER-PRECHECK-R4 validator PASS
+- Remote branch verified
+- Remote tag verified
+- Release index updated
+
+Boundary:
+SERVER-PRECHECK-R5F records final verification only. It does not add SSH execution, SSH automation, deployment, install, DB, auth, secrets, credentials, frontend, backend, routes, MENU-GA-R1, MENU-GA-R2, SERVER-PRECHECK-R4 mutation, or runtime behavior.
+
+Next task if approved:
+SERVER-PRECHECK-R6 Manual Read-only Observation Script Pack
