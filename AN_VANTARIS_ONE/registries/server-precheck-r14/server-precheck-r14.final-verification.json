@@ -1,0 +1,39 @@
+{
+  "taskId": "SERVER-PRECHECK-R14F",
+  "sourceTaskId": "SERVER-PRECHECK-R14",
+  "status": "PASS",
+  "passMarker": "ONE_SERVER_PRECHECK_R14_APP_DB_DEPLOYMENT_EXECUTION_APPROVAL_GATE_PASS",
+  "sourcePassMarker": "ONE_SERVER_PRECHECK_R14_APP_DB_DEPLOYMENT_EXECUTION_APPROVAL_GATE_PASS",
+  "sourceBaseline": {
+    "shortHash": "ac325b9",
+    "message": "docs(one): add server precheck r12 app deployment preparation pack"
+  },
+  "r13DependencyStatus": {
+    "required": true,
+    "completed": false,
+    "deploymentExecutionApprovalDecision": "HOLD"
+  },
+  "boundaries": {
+    "sshExecutionAllowed": false,
+    "appDbServerConnectionAllowed": false,
+    "deploymentInstallAllowed": false,
+    "runtimeInstallationAllowed": false,
+    "backendFrontendNginxPm2DbCommandExecutionAllowed": false,
+    "buildRestartReloadAllowed": false,
+    "dbMigrationBackupRestoreSeedUserPrivilegeMutationAllowed": false,
+    "appToDbLiveConnectionTestAllowed": false,
+    "healthcheckSmokeExecutionAllowed": false,
+    "serverMutationAllowed": false,
+    "authRuntimeMutationAllowed": false,
+    "frontendBackendRoutesMutationAllowed": false,
+    "productionCredentialPublicStorageAllowed": false
+  },
+  "verification": {
+    "serverPrecheckR14ValidatorPass": true,
+    "r12RelationshipRecorded": true,
+    "r13DependencyRecorded": true,
+    "releaseIndexUpdated": true,
+    "finalLocalFreezeRecommended": true
+  },
+  "conclusion": "SERVER-PRECHECK-R14 APP/DB Deployment Execution Approval Gate: COMPLETE"
+}
