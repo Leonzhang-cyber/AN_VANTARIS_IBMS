@@ -1,0 +1,32 @@
+{
+  "taskId": "SERVER-PRECHECK-R4",
+  "scope": "SERVER_PRECHECK_R4",
+  "passMarker": "ONE_SERVER_PRECHECK_R4_READONLY_SSH_EXECUTION_APPROVAL_PACKET_PASS",
+  "evidenceStatus": "APPROVAL_PACKET_ONLY",
+  "readOnly": true,
+  "sshExecuted": false,
+  "deploymentExecuted": false,
+  "installExecuted": false,
+  "dbMutationExecuted": false,
+  "authMutationExecuted": false,
+  "runtimeActionExecuted": false,
+  "approvalRequiredBeforeAnySsh": true,
+  "evidenceChecklist": [
+    "approval record",
+    "command whitelist version",
+    "forbidden command blacklist version",
+    "future approved observation transcript",
+    "timestamped command output",
+    "stop-condition log",
+    "final observation decision"
+  ],
+  "redactionPolicy": [
+    "redact passwords",
+    "redact tokens",
+    "redact private keys",
+    "redact certificates",
+    "redact credential strings",
+    "redact secret-like values"
+  ],
+  "noOpStatement": "R4 does not execute SSH, deploy, install, write DB state, mutate auth, invoke runtime, or control devices."
+}

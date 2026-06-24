@@ -1,0 +1,17 @@
+{
+  "taskId": "SERVER-PRECHECK-R4",
+  "scope": "SERVER_PRECHECK_R4",
+  "validatorName": "validate-server-precheck-r4-readonly-ssh-execution-approval-packet.py",
+  "passMarker": "ONE_SERVER_PRECHECK_R4_READONLY_SSH_EXECUTION_APPROVAL_PACKET_PASS",
+  "status": "PASS",
+  "requiredAssertions": [
+    "required R4 files exist",
+    "boundary flags are false for execution and mutation",
+    "human approval is required before any SSH",
+    "command whitelist is read-only",
+    "command blacklist contains dangerous commands",
+    "no executable SSH implementation exists",
+    "no POST/PUT/PATCH/DELETE endpoint exists in R4 scope",
+    "MENU-GA-R1 files are not part of R4 scope"
+  ]
+}
