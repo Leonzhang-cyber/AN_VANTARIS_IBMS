@@ -1,0 +1,20 @@
+{
+  "taskId": "MENU-GA-R2",
+  "sourceTaskId": "MENU-GA-R1",
+  "scope": "MENU_GA_R2",
+  "validatorName": "validate-menu-ga-r2-route-coverage-sidebar-l3-behavior.py",
+  "passMarker": "ONE_MENU_GA_R2_ROUTE_COVERAGE_SIDEBAR_L3_BEHAVIOR_AUDIT_PASS",
+  "status": "PASS",
+  "requiredAssertions": [
+    "required MENU-GA-R2 docs and JSON exist",
+    "registry flags are correct",
+    "fallbackMenuItems and l3Items metadata exist",
+    "AppMenuL3Item typing exists",
+    "Sidebar collapse and activeL3Items exist in AppLayout",
+    "L3 is not rendered inside Sidebar children",
+    "Dashboard L1 exists and Home L1 is absent",
+    "menu and route duplicates are rejected except documented path reuse",
+    "all menu paths are covered by routes",
+    "forbidden R4 / SSH route residue is absent"
+  ]
+}

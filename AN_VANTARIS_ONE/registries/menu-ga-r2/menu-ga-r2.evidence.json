@@ -1,0 +1,26 @@
+{
+  "taskId": "MENU-GA-R2",
+  "sourceTaskId": "MENU-GA-R1",
+  "scope": "MENU_GA_R2",
+  "passMarker": "ONE_MENU_GA_R2_ROUTE_COVERAGE_SIDEBAR_L3_BEHAVIOR_AUDIT_PASS",
+  "mode": "audit-only",
+  "evidenceStatus": "STATIC_SOURCE_AUDIT",
+  "frontendMutationExecuted": false,
+  "backendMutationExecuted": false,
+  "routeMutationExecuted": false,
+  "menuMutationExecuted": false,
+  "sshExecuted": false,
+  "deploymentExecuted": false,
+  "installExecuted": false,
+  "dbTouched": false,
+  "authTouched": false,
+  "runtimeTouched": false,
+  "evidenceItems": [
+    "static menu source inspected read-only",
+    "types source inspected read-only",
+    "AppLayout source inspected read-only",
+    "routes source inspected read-only",
+    "MENU-GA-R2 docs and registry parse",
+    "forbidden R4 / SSH route residue check"
+  ]
+}
