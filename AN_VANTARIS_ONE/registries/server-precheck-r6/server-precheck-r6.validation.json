@@ -1,0 +1,17 @@
+{
+  "taskId": "SERVER-PRECHECK-R6",
+  "scope": "SERVER_PRECHECK_R6",
+  "validatorName": "validate-server-precheck-r6-manual-readonly-observation-script-pack.py",
+  "passMarker": "ONE_SERVER_PRECHECK_R6_MANUAL_READONLY_OBSERVATION_SCRIPT_PACK_PASS",
+  "status": "PASS",
+  "requiredAssertions": [
+    "required R6 files exist",
+    "PASS marker exists in doc, command pack, registry, evidence, and validation",
+    "boundaries are false",
+    "manualApprovalRequiredBeforeUse is true",
+    "command pack is Markdown and not executable script",
+    "no forbidden executable commands appear in executable command blocks",
+    "no credential assignments exist",
+    "R4/R4F/R5/R5F source markers exist"
+  ]
+}

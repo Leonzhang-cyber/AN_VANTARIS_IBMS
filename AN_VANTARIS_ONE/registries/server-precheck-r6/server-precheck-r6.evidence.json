@@ -1,0 +1,26 @@
+{
+  "taskId": "SERVER-PRECHECK-R6",
+  "scope": "SERVER_PRECHECK_R6",
+  "passMarker": "ONE_SERVER_PRECHECK_R6_MANUAL_READONLY_OBSERVATION_SCRIPT_PACK_PASS",
+  "evidenceStatus": "MANUAL_READONLY_COMMAND_PACK_ONLY",
+  "readOnly": true,
+  "manualApprovalRequiredBeforeUse": true,
+  "sshExecuted": false,
+  "deploymentExecuted": false,
+  "installExecuted": false,
+  "dbTouched": false,
+  "authTouched": false,
+  "runtimeTouched": false,
+  "secretsTouched": false,
+  "frontendCreated": false,
+  "backendCreated": false,
+  "routesCreated": false,
+  "evidenceFiles": [
+    "AN_VANTARIS_ONE/SERVER_PRECHECK_R6.md",
+    "AN_VANTARIS_ONE/SERVER_PRECHECK_R6_MANUAL_READONLY_COMMAND_PACK.md",
+    "AN_VANTARIS_ONE/registries/server-precheck-r6/server-precheck-r6.registry.json",
+    "AN_VANTARIS_ONE/registries/server-precheck-r6/server-precheck-r6.evidence.json",
+    "AN_VANTARIS_ONE/registries/server-precheck-r6/server-precheck-r6.validation.json",
+    "scripts/validation/validate-server-precheck-r6-manual-readonly-observation-script-pack.py"
+  ]
+}
