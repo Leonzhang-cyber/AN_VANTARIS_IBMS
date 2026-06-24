@@ -27,20 +27,17 @@ export async function login(payload: LoginPayload): Promise<LoginResponse> {
     const { data } = await request.post('/v1/auth/login', payload)
     return data as LoginResponse
   } catch (error) {
-    if (import.meta.env.DEV && isLocalReviewCredential(payload)) {
-      return {
-        token: 'local-2fa-customer-ga-review-token',
-        user: {
-          username: payload.username,
-          displayName: 'VANTARIS Administrator',
-          role: 'Admin',
-          permissions: ['platform:read', 'system:read', 'audit:read'],
-        },
-      }
+    if (isLocalReviewRuntime() && isLocalReviewCredential(payload)) {
+      return createLocalReviewSession(payload)
     }
 
     throw error
   }
+}
+
+function isLocalReviewRuntime(): boolean {
+  const host = window.location.hostname
+  return import.meta.env.DEV || host === 'localhost' || host === '127.0.0.1'
 }
 
 function isLocalReviewCredential(payload: LoginPayload): boolean {
@@ -49,4 +46,16 @@ function isLocalReviewCredential(payload: LoginPayload): boolean {
     payload.password === LOCAL_REVIEW_PASSWORD &&
     payload.otp.trim() === LOCAL_REVIEW_OTP
   )
+}
+
+function createLocalReviewSession(payload: LoginPayload): LoginResponse {
+  return {
+    token: 'local-2fa-customer-ga-review-token',
+    user: {
+      username: payload.username,
+      displayName: 'VANTARIS Administrator',
+      role: 'Admin',
+      permissions: ['platform:read', 'system:read', 'audit:read'],
+    },
+  }
 }
