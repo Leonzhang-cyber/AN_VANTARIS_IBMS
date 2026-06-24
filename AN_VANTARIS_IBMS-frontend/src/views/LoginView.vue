@@ -2,16 +2,16 @@
 import { reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ApiError } from '@/services/api/errors'
-import * as didApi from '@/services/api/did'
+import * as authApi from '@/services/api/auth'
 import { extractAccessToken, persistLoginSession } from '@/services/auth/session'
 
 const router = useRouter()
 const route = useRoute()
 
 const form = reactive({
-  did: '',
-  challenge: '',
-  signature: '',
+  username: '',
+  password: '',
+  otp: '',
 })
 
 const loading = ref(false)
@@ -23,17 +23,17 @@ async function onSubmit(): Promise<void> {
 
   try {
     const payload = {
-      did: form.did.trim(),
-      challenge: form.challenge.trim(),
-      signature: form.signature.trim(),
+      username: form.username.trim(),
+      password: form.password,
+      otp: form.otp.trim(),
     }
 
-    if (!payload.did || !payload.challenge || !payload.signature) {
-      errorMessage.value = 'DID, challenge, and signature are required.'
+    if (!payload.username || !payload.password || !payload.otp) {
+      errorMessage.value = 'Username, password, and 2FA code are required.'
       return
     }
 
-    const response = await didApi.login(payload)
+    const response = await authApi.login(payload)
     const token = extractAccessToken(response)
 
     if (!token) {
@@ -41,7 +41,14 @@ async function onSubmit(): Promise<void> {
       return
     }
 
-    persistLoginSession(token, { did: payload.did })
+    persistLoginSession(token, {
+      username: response.user?.username ?? payload.username,
+      displayName: response.user?.displayName ?? payload.username,
+      role: response.user?.role ?? 'Admin',
+      permissions: response.user?.permissions ?? [],
+      authMode: 'password_2fa',
+    })
+
     const redirect = typeof route.query.redirect === 'string' ? route.query.redirect : '/dashboard'
     await router.push(redirect)
   } catch (error) {
@@ -59,23 +66,46 @@ async function onSubmit(): Promise<void> {
 <template>
   <div class="login-page">
     <div class="login-card">
-      <h1>VANTARIS IBMS</h1>
-      <p class="login-subtitle">DID challenge login</p>
+      <div class="brand-block">
+        <p class="brand-eyebrow">VANTARIS ONE</p>
+        <h1>Secure Operations Login</h1>
+        <p class="login-subtitle">Username, password, and 2FA verification</p>
+      </div>
 
       <form class="login-form" @submit.prevent="onSubmit">
         <label>
-          DID
-          <input v-model="form.did" type="text" name="did" autocomplete="username" required />
+          Username
+          <input
+            v-model="form.username"
+            type="text"
+            name="username"
+            autocomplete="username"
+            required
+          />
         </label>
 
         <label>
-          Challenge
-          <input v-model="form.challenge" type="text" name="challenge" autocomplete="off" required />
+          Password
+          <input
+            v-model="form.password"
+            type="password"
+            name="password"
+            autocomplete="current-password"
+            required
+          />
         </label>
 
         <label>
-          Signature
-          <input v-model="form.signature" type="text" name="signature" autocomplete="off" required />
+          2FA Code
+          <input
+            v-model="form.otp"
+            type="text"
+            name="otp"
+            inputmode="numeric"
+            autocomplete="one-time-code"
+            maxlength="6"
+            required
+          />
         </label>
 
         <p v-if="errorMessage" class="login-error" role="alert">
@@ -86,6 +116,11 @@ async function onSubmit(): Promise<void> {
           {{ loading ? 'Signing in…' : 'Sign in' }}
         </button>
       </form>
+
+      <div class="login-note">
+        <strong>Review account</strong>
+        <span>admin / Admin@2026 / 260624</span>
+      </div>
     </div>
   </div>
 </template>
@@ -97,27 +132,44 @@ async function onSubmit(): Promise<void> {
   align-items: center;
   justify-content: center;
   padding: 1.5rem;
-  background: #eef2f7;
+  background:
+    radial-gradient(circle at top left, rgba(15, 118, 110, 0.14), transparent 28rem),
+    linear-gradient(135deg, #f5fbf8 0%, #eef5ff 54%, #f8fafc 100%);
 }
 
 .login-card {
   width: 100%;
-  max-width: 420px;
+  max-width: 460px;
   padding: 2rem;
   background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 8px 24px rgb(15 23 42 / 8%);
+  border: 1px solid #dbe7e4;
+  border-radius: 18px;
+  box-shadow: 0 20px 48px rgb(15 23 42 / 12%);
+}
+
+.brand-block {
+  margin-bottom: 1.5rem;
+}
+
+.brand-eyebrow {
+  margin: 0 0 0.45rem;
+  color: #0f766e;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .login-card h1 {
-  margin: 0 0 0.25rem;
-  font-size: 1.5rem;
+  margin: 0 0 0.45rem;
+  color: #0f172a;
+  font-size: 1.65rem;
 }
 
 .login-subtitle {
-  margin: 0 0 1.5rem;
+  margin: 0;
   color: #64748b;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
 }
 
 .login-form {
@@ -130,15 +182,23 @@ async function onSubmit(): Promise<void> {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
+  color: #334155;
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .login-form input {
-  padding: 0.55rem 0.65rem;
+  padding: 0.7rem 0.75rem;
   border: 1px solid #cbd5e1;
-  border-radius: 6px;
-  font-size: 0.95rem;
+  border-radius: 10px;
+  color: #0f172a;
+  font-size: 0.98rem;
+  outline: none;
+}
+
+.login-form input:focus {
+  border-color: #0f766e;
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.12);
 }
 
 .login-error {
@@ -149,17 +209,34 @@ async function onSubmit(): Promise<void> {
 
 .login-submit {
   margin-top: 0.25rem;
-  padding: 0.65rem 1rem;
+  padding: 0.78rem 1rem;
   border: none;
-  border-radius: 6px;
-  background: #0f172a;
+  border-radius: 10px;
+  background: #0f766e;
   color: #fff;
-  font-weight: 600;
+  font-weight: 800;
   cursor: pointer;
 }
 
 .login-submit:disabled {
   opacity: 0.65;
   cursor: not-allowed;
+}
+
+.login-note {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.2rem;
+  padding: 0.8rem;
+  border: 1px solid #dbe7e4;
+  border-radius: 12px;
+  background: #f8fbfa;
+  color: #475569;
+  font-size: 0.82rem;
+}
+
+.login-note strong {
+  color: #0f766e;
 }
 </style>
