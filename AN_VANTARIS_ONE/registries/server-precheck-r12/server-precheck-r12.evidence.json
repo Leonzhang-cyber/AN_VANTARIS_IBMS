@@ -1,0 +1,149 @@
+{
+  "packId": "server-precheck-r12-app-server-deployment-preparation-pack",
+  "stage": "SERVER-PRECHECK-R12",
+  "deploymentReadinessGateReference": "SERVER-PRECHECK-R10",
+  "dbDeploymentPreparationReference": "SERVER-PRECHECK-R11",
+  "approvalReference": "SERVER-PRECHECK-R7",
+  "actualObservationEvidenceReference": "SERVER-PRECHECK-R9",
+  "passMarker": "ONE_SERVER_PRECHECK_R12_APP_SERVER_DEPLOYMENT_PREPARATION_PACK_PASS",
+  "appDeploymentPerformedByThisPacket": false,
+  "sshExecutedByThisPacket": false,
+  "appServerConnectionPerformed": false,
+  "appServerCommandExecuted": false,
+  "backendCommandExecuted": false,
+  "frontendCommandExecuted": false,
+  "nginxCommandExecuted": false,
+  "pm2CommandExecuted": false,
+  "gunicornCommandExecuted": false,
+  "flaskCommandExecuted": false,
+  "nodeNpmCommandExecuted": false,
+  "buildPerformed": false,
+  "installPerformed": false,
+  "restartPerformed": false,
+  "dbServerConnectionPerformed": false,
+  "dbMigrationPerformed": false,
+  "dbBackupPerformed": false,
+  "dbRestorePerformed": false,
+  "dbSeedPerformed": false,
+  "appToDbLiveConnectionTestPerformed": false,
+  "serverMutationPerformed": false,
+  "authMutationPerformed": false,
+  "runtimeMutationPerformed": false,
+  "frontendBackendMutationPerformed": false,
+  "routeMutationPerformed": false,
+  "productionConfigMutationPerformed": false,
+  "targetAppServer": {
+    "serverReference": "",
+    "environmentName": "",
+    "networkZoneReference": "",
+    "deploymentPathReference": "",
+    "runtimeUserReference": "",
+    "accessBoundaryReference": ""
+  },
+  "backendPreparation": {
+    "backendSourceReviewed": false,
+    "backendEntryPointReviewed": false,
+    "dependencyInventoryReviewed": false,
+    "runtimeVersionPlanReviewed": false,
+    "serviceStartPlanReviewed": false,
+    "serviceHealthEndpointReviewed": false,
+    "logPathPlanReviewed": false,
+    "runtimeUserPermissionPlanReviewed": false,
+    "readinessStatus": "HOLD"
+  },
+  "frontendPreparation": {
+    "frontendSourceReviewed": false,
+    "staticBuildPlanReviewed": false,
+    "buildExecutionAllowedByThisPacket": false,
+    "distArtifactPlanReviewed": false,
+    "routeFallbackPlanReviewed": false,
+    "assetPathPlanReviewed": false,
+    "deploymentArtifactSourceReviewed": false,
+    "readinessStatus": "HOLD"
+  },
+  "nginxPreparation": {
+    "nginxStaticServingPlanReviewed": false,
+    "reverseProxyPlanReviewed": false,
+    "routeFallbackPlanReviewed": false,
+    "tlsPlanReviewed": false,
+    "nginxConfigMutationAllowedByThisPacket": false,
+    "nginxConfigRestrictedEvidenceReference": "",
+    "staticAssetPathMappingReviewed": false,
+    "readinessStatus": "HOLD"
+  },
+  "processManagerPreparation": {
+    "processManagerType": "PM2 | systemd | supervisor | manual | other",
+    "processManagerPlanReviewed": false,
+    "restartPolicyReviewed": false,
+    "logRotationPlanReviewed": false,
+    "crashRecoveryPlanReviewed": false,
+    "processOwnershipRuntimeUserPlanReviewed": false,
+    "processCommandExecutionAllowedByThisPacket": false,
+    "readinessStatus": "HOLD"
+  },
+  "runtimeEnvironmentPreparation": {
+    "environmentVariableInventoryReviewed": false,
+    "productionEnvStoredInPublicPacket": false,
+    "restrictedEnvReferenceOnly": true,
+    "runtimePermissionPlanReviewed": false,
+    "portPlanReviewed": false,
+    "diskCapacityReviewed": false,
+    "readinessStatus": "HOLD"
+  },
+  "appDbConnectionPreparation": {
+    "dependsOnR11": true,
+    "databaseUrlStoredInPublicPacket": false,
+    "restrictedCredentialReferenceOnly": true,
+    "appToDbConnectionPlanReviewed": false,
+    "liveConnectionTestAllowedByThisPacket": false,
+    "leastPrivilegeDependencyReviewed": false,
+    "readinessStatus": "HOLD"
+  },
+  "healthcheckSmokePreparation": {
+    "healthcheckPlanReviewed": false,
+    "smokeTestPlanReviewed": false,
+    "expectedHealthEndpointReference": "",
+    "appStaticRouteVerificationPlanReviewed": false,
+    "backendApiReadinessPlanReviewed": false,
+    "logVerificationPlanReviewed": false,
+    "failureRollbackConditionReviewed": false,
+    "healthcheckExecutionAllowedByThisPacket": false,
+    "smokeExecutionAllowedByThisPacket": false,
+    "readinessStatus": "HOLD"
+  },
+  "rollbackPreparation": {
+    "rollbackPlanRequired": true,
+    "rollbackPlanReviewed": false,
+    "previousArtifactRetentionReviewed": false,
+    "rollbackExecutionAllowedByThisPacket": false,
+    "readinessStatus": "HOLD"
+  },
+  "consoleGaVerificationDependency": {
+    "required": true,
+    "plannedStage": "SERVER-PRECHECK-R13",
+    "runtimeVerificationCompleted": false,
+    "menuArchitectureBaselineReference": "MENU-GA-R1/R2",
+    "readinessStatus": "HOLD"
+  },
+  "secretHandling": {
+    "productionAppSecretStoredInPublicPacket": false,
+    "productionEnvStoredInPublicPacket": false,
+    "databaseUrlStoredInPublicPacket": false,
+    "jwtSecretStoredInPublicPacket": false,
+    "apiKeyStoredInPublicPacket": false,
+    "restrictedSecretReferenceOnly": true,
+    "readinessStatus": "HOLD"
+  },
+  "reviewer": {
+    "name": "",
+    "role": "",
+    "reviewStatus": "PENDING"
+  },
+  "approver": {
+    "name": "",
+    "role": "",
+    "approvalStatus": "HOLD"
+  },
+  "preparationDecision": "HOLD",
+  "notes": ""
+}

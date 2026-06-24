@@ -1,0 +1,47 @@
+{
+  "taskId": "SERVER-PRECHECK-R12F",
+  "sourceTaskId": "SERVER-PRECHECK-R12",
+  "status": "PASS",
+  "passMarker": "ONE_SERVER_PRECHECK_R12_APP_SERVER_DEPLOYMENT_PREPARATION_PACK_PASS",
+  "sourcePassMarker": "ONE_SERVER_PRECHECK_R12_APP_SERVER_DEPLOYMENT_PREPARATION_PACK_PASS",
+  "sourceBaseline": {
+    "shortHash": "7f415cb",
+    "message": "docs(one): add server precheck r11 db deployment preparation pack"
+  },
+  "boundaries": {
+    "sshExecutionAllowed": false,
+    "appServerConnectionAllowed": false,
+    "appDeploymentAllowed": false,
+    "backendCommandExecutionAllowed": false,
+    "frontendCommandExecutionAllowed": false,
+    "nginxCommandExecutionAllowed": false,
+    "pm2CommandExecutionAllowed": false,
+    "gunicornCommandExecutionAllowed": false,
+    "flaskCommandExecutionAllowed": false,
+    "nodeNpmCommandExecutionAllowed": false,
+    "buildExecutionAllowed": false,
+    "installAllowed": false,
+    "restartAllowed": false,
+    "dbServerConnectionAllowed": false,
+    "dbMigrationAllowed": false,
+    "dbBackupExecutionAllowed": false,
+    "dbRestoreExecutionAllowed": false,
+    "dbSeedExecutionAllowed": false,
+    "appToDbLiveConnectionTestAllowed": false,
+    "serverMutationAllowed": false,
+    "authMutationAllowed": false,
+    "runtimeMutationAllowed": false,
+    "frontendChanged": false,
+    "backendChanged": false,
+    "routesChanged": false,
+    "productionCredentialPublicStorageAllowed": false
+  },
+  "verification": {
+    "serverPrecheckR12ValidatorPass": true,
+    "r11RelationshipRecorded": true,
+    "releaseIndexUpdated": true,
+    "downstreamR13R14Recommended": true,
+    "finalLocalFreezeRecommended": true
+  },
+  "conclusion": "SERVER-PRECHECK-R12 APP Server Deployment Preparation Pack: COMPLETE"
+}
