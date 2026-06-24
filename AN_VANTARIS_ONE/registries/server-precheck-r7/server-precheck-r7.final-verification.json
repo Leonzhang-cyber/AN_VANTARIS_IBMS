@@ -1,0 +1,51 @@
+{
+  "taskId": "SERVER-PRECHECK-R7F",
+  "sourceTaskId": "SERVER-PRECHECK-R7",
+  "status": "PASS",
+  "passMarker": "ONE_SERVER_PRECHECK_R7F_FINAL_VERIFICATION_AND_RELEASE_INDEX_UPDATE_PASS",
+  "sourcePassMarker": "ONE_SERVER_PRECHECK_R7_HUMAN_APPROVAL_RECORD_AND_OBSERVATION_WINDOW_LOCK_PASS",
+  "commit": {
+    "shortHash": "6f8e455",
+    "message": "docs(one): add server precheck r7 approval window lock",
+    "fullHash": "6f8e4558f873a9a5c76e79032b135825bf4fd1f3"
+  },
+  "remote": {
+    "branch": "sync/ufms-foundation-packages-20260622-104646",
+    "head": "6f8e4558f873a9a5c76e79032b135825bf4fd1f3"
+  },
+  "tag": {
+    "name": "server-precheck-r7-approval-window-lock-local-freeze-20260624",
+    "tagObject": "483c68941a7c554b9f061903cc471ab2965885af",
+    "target": "6f8e4558f873a9a5c76e79032b135825bf4fd1f3"
+  },
+  "boundaries": {
+    "sshExecutionAllowed": false,
+    "sshAutomationAllowed": false,
+    "sshConnectionCommandIncluded": false,
+    "executableScriptAllowed": false,
+    "deploymentAllowed": false,
+    "installAllowed": false,
+    "dbMutationAllowed": false,
+    "authMutationAllowed": false,
+    "secretsMutationAllowed": false,
+    "runtimeActionAllowed": false,
+    "frontendChanged": false,
+    "backendChanged": false,
+    "routesChanged": false,
+    "menuGaR1Changed": false,
+    "menuGaR2Changed": false,
+    "serverPrecheckR4Changed": false,
+    "serverPrecheckR5Changed": false,
+    "serverPrecheckR6Changed": false,
+    "r6CommandPackChanged": false
+  },
+  "verification": {
+    "serverPrecheckR7ValidatorPass": true,
+    "serverPrecheckR6ValidatorPass": true,
+    "serverPrecheckR5ValidatorPass": true,
+    "serverPrecheckR4ValidatorPass": true,
+    "remoteBranchVerified": true,
+    "remoteTagVerified": true,
+    "releaseIndexUpdated": true
+  }
+}

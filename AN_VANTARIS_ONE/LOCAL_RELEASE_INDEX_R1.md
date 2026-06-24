@@ -231,3 +231,28 @@ Verification:
 
 Boundary:
 SERVER-PRECHECK-R6F records final verification only. It does not add SSH execution, SSH automation, SSH connection commands, executable shell scripts, deployment, install, DB, auth, secrets, credentials, frontend, backend, routes, MENU-GA-R1, MENU-GA-R2, SERVER-PRECHECK-R4 mutation, SERVER-PRECHECK-R5 mutation, or runtime behavior.
+
+## SERVER-PRECHECK-R7F Final Verification / Release Index Update
+
+PASS marker: ONE_SERVER_PRECHECK_R7F_FINAL_VERIFICATION_AND_RELEASE_INDEX_UPDATE_PASS
+
+- Source task: SERVER-PRECHECK-R7 Human Approval Record and Observation Window Lock
+- Source PASS marker: ONE_SERVER_PRECHECK_R7_HUMAN_APPROVAL_RECORD_AND_OBSERVATION_WINDOW_LOCK_PASS
+- SERVER-PRECHECK-R7 commit: 6f8e455 docs(one): add server precheck r7 approval window lock
+- Remote branch: sync/ufms-foundation-packages-20260622-104646
+- Remote HEAD: 6f8e4558f873a9a5c76e79032b135825bf4fd1f3
+- Freeze tag: server-precheck-r7-approval-window-lock-local-freeze-20260624
+- Tag object: 483c68941a7c554b9f061903cc471ab2965885af
+- Tag target: 6f8e4558f873a9a5c76e79032b135825bf4fd1f3
+
+Verification:
+- SERVER-PRECHECK-R7 validator PASS
+- SERVER-PRECHECK-R6 validator PASS
+- SERVER-PRECHECK-R5 validator PASS
+- SERVER-PRECHECK-R4 validator PASS
+- Remote branch verified
+- Remote tag verified
+- Release index updated
+
+Boundary:
+SERVER-PRECHECK-R7F records final verification only. It does not add SSH execution, SSH automation, SSH connection commands, executable shell scripts, deployment, install, DB, auth, secrets, credentials, frontend, backend, routes, MENU-GA-R1, MENU-GA-R2, SERVER-PRECHECK-R4 mutation, SERVER-PRECHECK-R5 mutation, SERVER-PRECHECK-R6 mutation, R6 command pack mutation, or runtime behavior.
