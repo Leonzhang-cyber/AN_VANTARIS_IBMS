@@ -720,3 +720,53 @@ SERVER-DEPLOY-R3 records runtime installation manual execution approval only. It
 
 Final conclusion:
 SERVER-DEPLOY-R3 Runtime Installation Manual Execution Approval: COMPLETE
+
+## SERVER-DEPLOY-R4 Final Verification / Release Index Update
+
+PASS marker: ONE_SERVER_DEPLOY_R4_RUNTIME_INSTALLATION_MANUAL_EXECUTION_RECORD_PASS
+
+- Source task: SERVER-DEPLOY-R4 Runtime Installation Manual Execution Record
+- Source PASS marker: ONE_SERVER_DEPLOY_R4_RUNTIME_INSTALLATION_MANUAL_EXECUTION_RECORD_PASS
+- Source baseline: e641c39 docs(one): add server deploy r3 manual execution approval
+- Remote branch: sync/ufms-foundation-packages-20260622-104646
+- SERVER-DEPLOY-R4 final local freeze recommendation: ready after local commit
+
+R3 dependency:
+- R3 dependency status: GO
+- runtimeInstallationManualApprovalDecision: GO
+
+Manual execution record:
+- Manual execution record only: true
+- External execution evidence recorded in this packet: false
+- Execution session record model: HOLD
+- APP runtime installation result record: HOLD
+- DB runtime installation result record: HOLD
+- PostgreSQL direction confirmation: PASS
+- Runtime presence evidence format: HOLD
+- Backup checkpoint evidence format: HOLD
+- Rollback checkpoint evidence format: HOLD
+- Stop condition outcome record: PASS
+- Restricted secret handling: PASS
+- runtimeInstallationExecutionRecordDecision: HOLD
+- Downstream recommendation: SERVER-DEPLOY-R5 Runtime Installation Evidence Review and Gate
+
+Verification:
+- SERVER-DEPLOY-R4 validator PASS
+- No SSH execution by this packet
+- No real SSH target stored
+- No APP/DB server connection by this packet
+- No deployment/install by this packet
+- No runtime installation by this packet
+- No backend/frontend/Nginx/PM2/DB command execution by this packet
+- No build/restart/reload by this packet
+- No DB migration/backup/restore/seed/user/privilege mutation by this packet
+- No APP-to-DB live connection test by this packet
+- No healthcheck/smoke execution by this packet
+- No frontend/backend/routes/menu mutation by this packet
+- No server mutation by this packet
+
+Boundary:
+SERVER-DEPLOY-R4 records a runtime installation manual execution result model only. It does not add SSH execution, SSH automation, SSH connection commands with real targets, automatic server connection, APP server connection, DB server connection, real server IP / hostname / username / password public storage, production environment file public storage, OS package installation, runtime installation, PostgreSQL installation, Nginx installation, Node/npm installation, Python/pip installation, PM2 installation, deployment, build execution, install execution, restart/reload execution, DB migration, DB backup execution, DB restore execution, DB seed execution, DB user creation, DB privilege mutation, APP-to-DB live connection testing, healthcheck execution, smoke test execution, server mutation, DB/auth/runtime mutation, frontend/backend/routes/menu mutation, production config mutation, or actual runtime installation by this packet.
+
+Final conclusion:
+SERVER-DEPLOY-R4 Runtime Installation Manual Execution Record: COMPLETE

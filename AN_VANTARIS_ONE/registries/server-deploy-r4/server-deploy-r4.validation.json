@@ -1,0 +1,27 @@
+{
+  "validationId": "server-deploy-r4-runtime-installation-manual-execution-record-validation",
+  "stage": "SERVER-DEPLOY-R4",
+  "status": "PASS",
+  "validator": "scripts/validation/validate-server-deploy-r4-runtime-installation-manual-execution-record.py",
+  "passMarker": "ONE_SERVER_DEPLOY_R4_RUNTIME_INSTALLATION_MANUAL_EXECUTION_RECORD_PASS",
+  "checks": {
+    "requiredFilesExist": true,
+    "jsonParses": true,
+    "referencesCorrect": true,
+    "dependencyDecisionsGo": true,
+    "manualExecutionRecordOnly": true,
+    "executionByThisPacketFlagsFalse": true,
+    "executionSessionModelPresent": true,
+    "appRuntimeInstallationResultModelPresent": true,
+    "dbRuntimeInstallationResultModelPresent": true,
+    "runtimePresenceEvidenceRulesPass": true,
+    "backupCheckpointEvidenceRulesPass": true,
+    "rollbackCheckpointEvidenceRulesPass": true,
+    "stopConditionOutcomePass": true,
+    "secretHandlingPass": true,
+    "postExecutionEvidenceReviewRulesPass": true,
+    "runtimeInstallationExecutionRecordDecisionAllowed": true,
+    "passMarkerPresent": true,
+    "noRealTargetExecutableOperationSteps": true
+  }
+}

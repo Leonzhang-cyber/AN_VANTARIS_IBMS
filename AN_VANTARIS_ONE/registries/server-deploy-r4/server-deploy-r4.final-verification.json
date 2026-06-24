@@ -1,0 +1,25 @@
+{
+  "finalVerificationId": "server-deploy-r4-runtime-installation-manual-execution-record-final-verification",
+  "stage": "SERVER-DEPLOY-R4",
+  "status": "COMPLETE",
+  "passMarker": "ONE_SERVER_DEPLOY_R4_RUNTIME_INSTALLATION_MANUAL_EXECUTION_RECORD_PASS",
+  "r3DependencyStatus": "GO",
+  "manualExecutionRecordOnly": true,
+  "runtimeInstallationExecutionRecordDecision": "HOLD",
+  "nextStageRecommendation": "SERVER-DEPLOY-R5 Runtime Installation Evidence Review and Gate",
+  "boundaryConfirmation": {
+    "sshExecutionByThisPacket": false,
+    "realSshTargetStored": false,
+    "appDbServerConnectionByThisPacket": false,
+    "deploymentInstallByThisPacket": false,
+    "runtimeInstallationByThisPacket": false,
+    "backendFrontendNginxPm2DbCommandExecutionByThisPacket": false,
+    "buildRestartReloadByThisPacket": false,
+    "dbMigrationBackupRestoreSeedUserPrivilegeMutationByThisPacket": false,
+    "appToDbLiveConnectionTestByThisPacket": false,
+    "healthcheckSmokeExecutionByThisPacket": false,
+    "frontendBackendRoutesMenuMutationByThisPacket": false,
+    "serverMutationByThisPacket": false
+  },
+  "finalConclusion": "SERVER-DEPLOY-R4 Runtime Installation Manual Execution Record: COMPLETE"
+}
