@@ -1,0 +1,56 @@
+{
+  "scope": "MENU_GA_R1_FINAL_VERIFICATION",
+  "moduleId": "international-ga-menu-architecture-final-verification",
+  "passMarker": "ONE_MENU_GA_R1_FINAL_VERIFICATION_AND_RELEASE_INDEX_UPDATE_PASS",
+  "status": "COMPLETED_AND_FROZEN",
+  "readOnly": true,
+  "documentationAndRegistryOnly": true,
+  "frontendImplementationModified": false,
+  "backendModified": false,
+  "routesModified": false,
+  "serverPrecheckR4Continued": false,
+  "sshExecuted": false,
+  "deploymentExecuted": false,
+  "installExecuted": false,
+  "dbConnectionExecuted": false,
+  "dbMigrationExecuted": false,
+  "dbWriteExecuted": false,
+  "authJwtRbacModified": false,
+  "secretsModified": false,
+  "edgeLinkRuntimeActionExecuted": false,
+  "docsBaselineCommit": {
+    "shortHash": "7b22d6b",
+    "title": "docs(one): add menu ga r1 international architecture baseline"
+  },
+  "frontendAlignmentCommit": {
+    "shortHash": "098e099",
+    "fullHash": "098e0999bb2f304f5c6c6efa079672e1aa88ffa3",
+    "title": "feat(one): align frontend menu with menu ga r1 baseline"
+  },
+  "remote": {
+    "branch": "sync/ufms-foundation-packages-20260622-104646",
+    "head": "098e0999bb2f304f5c6c6efa079672e1aa88ffa3"
+  },
+  "freezeTag": {
+    "name": "menu-ga-r1-international-menu-architecture-local-freeze-20260624",
+    "tagObject": "ea5b02417e1bde8d5e33cb6b3c20a2983d6024f1",
+    "target": "098e0999bb2f304f5c6c6efa079672e1aa88ffa3"
+  },
+  "verificationEvidence": {
+    "menuGaR1Validator": "PASS",
+    "frontendBuild": "PASS",
+    "forbiddenR4SshRouteResidue": "clean",
+    "workingTreeBeforePush": "clean",
+    "branchPush": "success",
+    "freezeTagPush": "success"
+  },
+  "architectureAssertions": {
+    "dashboardNamingBaselineFrozen": true,
+    "l1L2RemainInLeftSidebar": true,
+    "l3ContentAreaMetadataOnly": true,
+    "l3RenderedAsSidebarNodes": false,
+    "sidebarCollapseExpandImplemented": true,
+    "serverPrecheckR1R4ReconciledUnderEngineerWorkspaceAsMetadataOnly": true,
+    "serverPrecheckR4ExecutionContinuationIncluded": false
+  }
+}
