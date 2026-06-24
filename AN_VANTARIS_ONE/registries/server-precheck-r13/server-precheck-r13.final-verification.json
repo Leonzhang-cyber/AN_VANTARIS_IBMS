@@ -1,0 +1,24 @@
+{
+  "taskId": "SERVER-PRECHECK-R13F",
+  "sourceTaskId": "SERVER-PRECHECK-R13",
+  "status": "PASS",
+  "passMarker": "ONE_SERVER_PRECHECK_R13_CONSOLE_INTERNATIONAL_GA_MENU_RUNTIME_VERIFICATION_PASS",
+  "sourcePassMarker": "ONE_SERVER_PRECHECK_R13_CONSOLE_INTERNATIONAL_GA_MENU_RUNTIME_VERIFICATION_PASS",
+  "sourceBaseline": {
+    "shortHash": "54aa6ce",
+    "message": "docs(one): add server precheck r14 deployment execution approval gate"
+  },
+  "r14DependencyClosure": {
+    "requiredByR14": true,
+    "r13Completed": true,
+    "r14CanBeReevaluatedAfterR13": true,
+    "r14DecisionBeforeR13": "HOLD"
+  },
+  "runtimeVerificationDecision": "HOLD",
+  "verification": {
+    "serverPrecheckR13ValidatorPass": true,
+    "releaseIndexUpdated": true,
+    "finalLocalFreezeRecommended": true
+  },
+  "conclusion": "SERVER-PRECHECK-R13 Console International GA Menu Runtime Verification: COMPLETE"
+}

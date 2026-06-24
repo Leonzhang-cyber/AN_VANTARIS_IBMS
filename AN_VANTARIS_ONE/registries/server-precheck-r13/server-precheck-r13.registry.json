@@ -1,0 +1,64 @@
+{
+  "taskId": "SERVER-PRECHECK-R13",
+  "title": "Console International GA Menu Runtime Verification",
+  "mode": "console-international-ga-menu-runtime-verification-only",
+  "status": "PASS",
+  "passMarker": "ONE_SERVER_PRECHECK_R13_CONSOLE_INTERNATIONAL_GA_MENU_RUNTIME_VERIFICATION_PASS",
+  "menuArchitectureBaselineReference": "MENU-GA-R1/R2",
+  "deploymentReadinessGateReference": "SERVER-PRECHECK-R10",
+  "dbDeploymentPreparationReference": "SERVER-PRECHECK-R11",
+  "appDeploymentPreparationReference": "SERVER-PRECHECK-R12",
+  "deploymentExecutionApprovalReference": "SERVER-PRECHECK-R14",
+  "r14DependencyClosure": {
+    "requiredByR14": true,
+    "r13Completed": true,
+    "r14CanBeReevaluatedAfterR13": true,
+    "r14DecisionBeforeR13": "HOLD"
+  },
+  "allowedRuntimeVerificationDecisions": [
+    "HOLD",
+    "GO",
+    "NO-GO"
+  ],
+  "allowedReviewStatuses": [
+    "PENDING",
+    "ACCEPTED",
+    "REJECTED"
+  ],
+  "allowedApprovalStatuses": [
+    "HOLD",
+    "GO",
+    "NO-GO"
+  ],
+  "boundaries": {
+    "sshExecutionAllowed": false,
+    "sshAutomationAllowed": false,
+    "sshConnectionCommandIncluded": false,
+    "executableScriptAllowed": false,
+    "appServerConnectionAllowed": false,
+    "dbServerConnectionAllowed": false,
+    "serverCommandExecutionAllowed": false,
+    "deploymentAllowed": false,
+    "installAllowed": false,
+    "runtimeInstallationAllowed": false,
+    "buildExecutionAllowed": false,
+    "npmExecutionAllowed": false,
+    "nodeExecutionAllowed": false,
+    "backendExecutionAllowed": false,
+    "frontendExecutionAllowed": false,
+    "nginxExecutionAllowed": false,
+    "pm2ExecutionAllowed": false,
+    "productionHealthcheckExecutionAllowed": false,
+    "productionSmokeTestExecutionAllowed": false,
+    "appToDbLiveConnectionTestAllowed": false,
+    "serverMutationAllowed": false,
+    "dbMutationAllowed": false,
+    "authMutationAllowed": false,
+    "runtimeMutationAllowed": false,
+    "frontendChanged": false,
+    "backendChanged": false,
+    "routesChanged": false,
+    "productionConfigMutationAllowed": false,
+    "productionCredentialPublicStorageAllowed": false
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "taskId": "SERVER-PRECHECK-R13",
+  "validationType": "console-international-ga-menu-runtime-verification-validation",
+  "status": "PASS",
+  "passMarker": "ONE_SERVER_PRECHECK_R13_CONSOLE_INTERNATIONAL_GA_MENU_RUNTIME_VERIFICATION_PASS",
+  "requiredChecks": [
+    "r13_documents_exist",
+    "r13_registry_json_exists",
+    "r13_evidence_json_exists",
+    "r13_validation_json_exists",
+    "r13_final_verification_json_exists",
+    "stage_is_SERVER_PRECHECK_R13",
+    "menuArchitectureBaselineReference_is_MENU_GA_R1_R2",
+    "references_r10_r11_r12_r14",
+    "r14DependencyClosure_r13Completed_is_true",
+    "execution_and_mutation_flags_are_false",
+    "dashboard_naming_pass",
+    "sidebar_l1_l2_pass",
+    "l3_content_area_pass",
+    "forbidden_language_flags_false",
+    "restricted_evidence_flags_valid",
+    "runtimeVerificationDecision_model_valid",
+    "pass_marker_exists",
+    "no_executable_operation_steps"
+  ]
+}

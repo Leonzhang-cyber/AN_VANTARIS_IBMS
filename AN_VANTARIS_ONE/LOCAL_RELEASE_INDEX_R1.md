@@ -446,3 +446,39 @@ SERVER-PRECHECK-R14F records final verification only. It defines an APP/DB deplo
 
 Final conclusion:
 SERVER-PRECHECK-R14 APP/DB Deployment Execution Approval Gate: COMPLETE
+
+## SERVER-PRECHECK-R13F Final Verification / Release Index Update
+
+PASS marker: ONE_SERVER_PRECHECK_R13_CONSOLE_INTERNATIONAL_GA_MENU_RUNTIME_VERIFICATION_PASS
+
+- Source task: SERVER-PRECHECK-R13 Console International GA Menu Runtime Verification
+- Source PASS marker: ONE_SERVER_PRECHECK_R13_CONSOLE_INTERNATIONAL_GA_MENU_RUNTIME_VERIFICATION_PASS
+- Source baseline: 54aa6ce docs(one): add server precheck r14 deployment execution approval gate
+- Remote branch: sync/ufms-foundation-packages-20260622-104646
+- R13 final local freeze recommendation: ready after local commit
+
+Verification:
+- SERVER-PRECHECK-R13 validator PASS
+- Dashboard naming confirmation: Dashboard primary L1, Home not primary L1
+- L1/L2 Sidebar confirmation: PASS model
+- L3 content-area confirmation: PASS model
+- Sidebar collapse/expand verification model: HOLD until live runtime evidence
+- Route/page availability verification model: HOLD until live runtime evidence
+- International brand menu verification model: HOLD until reviewed
+- IBMS upgraded menu verification model: HOLD until reviewed
+- Role-based visibility verification model: HOLD until reviewed
+- Forbidden language verification: PASS model
+- Restricted runtime evidence handling: PASS
+- R14 dependency closure: r13Completed true
+- No SSH execution
+- No APP/DB server connection
+- No deployment/install
+- No build/npm/node execution
+- No frontend/backend/routes mutation
+- No server mutation
+
+Boundary:
+SERVER-PRECHECK-R13F records final verification only. It defines a Console International GA menu runtime verification model and does not add SSH execution, SSH automation, SSH connection commands, executable shell scripts, APP server connection, DB server connection, server command execution, deployment, install, runtime installation, build execution, npm execution, Node execution, backend execution, frontend execution, Nginx execution, PM2 execution, production healthcheck execution, production smoke test execution, APP-to-DB live connection testing, server mutation, DB mutation, auth mutation, runtime mutation, frontend mutation, backend mutation, route mutation, production config mutation, or production credential public storage.
+
+Final conclusion:
+SERVER-PRECHECK-R13 Console International GA Menu Runtime Verification: COMPLETE

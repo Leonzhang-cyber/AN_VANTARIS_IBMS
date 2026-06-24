@@ -1,0 +1,121 @@
+{
+  "verificationId": "server-precheck-r13-console-international-ga-menu-runtime-verification",
+  "stage": "SERVER-PRECHECK-R13",
+  "menuArchitectureBaselineReference": "MENU-GA-R1/R2",
+  "deploymentReadinessGateReference": "SERVER-PRECHECK-R10",
+  "dbDeploymentPreparationReference": "SERVER-PRECHECK-R11",
+  "appDeploymentPreparationReference": "SERVER-PRECHECK-R12",
+  "deploymentExecutionApprovalReference": "SERVER-PRECHECK-R14",
+  "passMarker": "ONE_SERVER_PRECHECK_R13_CONSOLE_INTERNATIONAL_GA_MENU_RUNTIME_VERIFICATION_PASS",
+  "r14DependencyClosure": {
+    "requiredByR14": true,
+    "r13Completed": true,
+    "r14CanBeReevaluatedAfterR13": true,
+    "r14DecisionBeforeR13": "HOLD"
+  },
+  "runtimeVerificationPerformedByThisPacket": false,
+  "productionServerAccessPerformed": false,
+  "sshExecutedByThisPacket": false,
+  "appServerConnectionPerformed": false,
+  "dbServerConnectionPerformed": false,
+  "buildPerformed": false,
+  "npmNodeCommandExecuted": false,
+  "frontendBackendMutationPerformed": false,
+  "routeMutationPerformed": false,
+  "serverMutationPerformed": false,
+  "productionConfigMutationPerformed": false,
+  "dashboardNaming": {
+    "dashboardUsedAsPrimaryL1": true,
+    "homeUsedAsPrimaryL1": false,
+    "status": "PASS"
+  },
+  "sidebarL1L2": {
+    "l1DisplayedInSidebar": true,
+    "l2DisplayedInSidebar": true,
+    "l3ExcludedFromSidebar": true,
+    "status": "PASS"
+  },
+  "l3ContentAreaNavigation": {
+    "l3DisplayedInContentAreaTop": true,
+    "l3SharesSamePageLayout": true,
+    "l3NotRenderedAsSidebarItems": true,
+    "status": "PASS"
+  },
+  "sidebarCollapseExpand": {
+    "collapseControlRequired": true,
+    "collapseExpandBehaviorVerified": false,
+    "status": "HOLD"
+  },
+  "routePageAvailability": {
+    "routeCoverageAuditReference": "MENU-GA-R2",
+    "allVisibleRoutesHavePageOrGaCompliantPlaceholder": false,
+    "duplicateRouteAuditPassed": true,
+    "duplicateMenuAuditPassed": true,
+    "status": "HOLD"
+  },
+  "internationalBrandMenu": {
+    "brandNamingReviewed": false,
+    "vantarisOneBrandPresent": false,
+    "vantarisConsolePresent": false,
+    "vantarisLinkPresent": false,
+    "vantarisEdgePresent": false,
+    "vantarisCodePresent": false,
+    "vantarisDbPresent": false,
+    "vantarisNexusAiPresent": false,
+    "status": "HOLD"
+  },
+  "ibmsUpgradedMenu": {
+    "operationsReviewed": false,
+    "sitesSpacesReviewed": false,
+    "systemsDevicesReviewed": false,
+    "alarmsEventsReviewed": false,
+    "faultManagementReviewed": false,
+    "maintenanceReviewed": false,
+    "energySustainabilityReviewed": false,
+    "facilityServicesReviewed": false,
+    "dataCenterOperationsReviewed": false,
+    "decisionEvidenceReviewed": false,
+    "commandCenterReviewed": false,
+    "intelligenceReviewed": false,
+    "aiVideoAnalyticsReviewed": false,
+    "digitalTwinReviewed": false,
+    "reportsReviewed": false,
+    "trustIdentityReviewed": false,
+    "administrationReviewed": false,
+    "status": "HOLD"
+  },
+  "roleBasedVisibility": {
+    "customerRoleReviewed": false,
+    "engineerRoleReviewed": false,
+    "adminRoleReviewed": false,
+    "roleBoundaryViolationsDetected": false,
+    "status": "HOLD"
+  },
+  "forbiddenLanguageScan": {
+    "mockDetected": false,
+    "demoDetected": false,
+    "pilotDetected": false,
+    "comingSoonDetected": false,
+    "status": "PASS"
+  },
+  "restrictedEvidenceHandling": {
+    "productionScreenshotsStoredInPublicPacket": false,
+    "customerHostnamesStoredInPublicPacket": false,
+    "privateIpStoredInPublicPacket": false,
+    "usernamesStoredInPublicPacket": false,
+    "restrictedEvidenceReferenceOnly": true,
+    "status": "PASS"
+  },
+  "reviewer": {
+    "name": "",
+    "role": "",
+    "reviewStatus": "PENDING"
+  },
+  "approver": {
+    "name": "",
+    "role": "",
+    "approvalStatus": "HOLD"
+  },
+  "runtimeVerificationDecision": "HOLD",
+  "notes": ""
+}
