@@ -1,0 +1,22 @@
+{
+  "validationId": "server-deploy-r5-runtime-installation-evidence-review-and-gate-validation",
+  "stage": "SERVER-DEPLOY-R5",
+  "status": "PASS",
+  "validator": "scripts/validation/validate-server-deploy-r5-runtime-installation-evidence-review-and-gate.py",
+  "passMarker": "ONE_SERVER_DEPLOY_R5_RUNTIME_INSTALLATION_EVIDENCE_REVIEW_AND_GATE_PASS",
+  "checks": {
+    "requiredFilesExist": true,
+    "jsonParses": true,
+    "referencesCorrect": true,
+    "dependencyDecisionsCorrect": true,
+    "evidenceReviewOnly": true,
+    "executionByThisPacketFlagsFalse": true,
+    "r4HoldClosureReviewHold": true,
+    "evidenceGapsRemainHold": true,
+    "stopConditionReviewPass": true,
+    "redactionRestrictedEvidenceReviewPass": true,
+    "runtimeInstallationEvidenceGateDecisionAllowed": true,
+    "passMarkerPresent": true,
+    "noRealTargetExecutableOperationSteps": true
+  }
+}

@@ -770,3 +770,54 @@ SERVER-DEPLOY-R4 records a runtime installation manual execution result model on
 
 Final conclusion:
 SERVER-DEPLOY-R4 Runtime Installation Manual Execution Record: COMPLETE
+
+## SERVER-DEPLOY-R5 Final Verification / Release Index Update
+
+PASS marker: ONE_SERVER_DEPLOY_R5_RUNTIME_INSTALLATION_EVIDENCE_REVIEW_AND_GATE_PASS
+
+- Source task: SERVER-DEPLOY-R5 Runtime Installation Evidence Review and Gate
+- Source PASS marker: ONE_SERVER_DEPLOY_R5_RUNTIME_INSTALLATION_EVIDENCE_REVIEW_AND_GATE_PASS
+- Source baseline: 7d79cff docs(one): add server deploy r4 runtime execution record
+- Remote branch: sync/ufms-foundation-packages-20260622-104646
+- SERVER-DEPLOY-R5 final local freeze recommendation: ready after local commit
+
+R4 dependency:
+- R4 dependency status: COMPLETE
+- R4 decision before review: HOLD
+- R4 HOLD closure status: HOLD
+
+Evidence review:
+- Evidence review only: true
+- Execution session evidence review: HOLD
+- APP runtime evidence review: HOLD
+- DB runtime evidence review: HOLD
+- PostgreSQL direction confirmation: PASS
+- Runtime presence evidence review: HOLD
+- Backup checkpoint evidence review: HOLD
+- Rollback checkpoint evidence review: HOLD
+- Stop condition review: PASS
+- Operator / reviewer / approver review: HOLD
+- Redaction and restricted evidence review: PASS
+- runtimeInstallationEvidenceGateDecision: HOLD
+- Downstream recommendation: SERVER-DEPLOY-R6 DB Deployment Preparation Execution Gate
+
+Verification:
+- SERVER-DEPLOY-R5 validator PASS
+- No SSH execution by this packet
+- No real SSH target stored
+- No APP/DB server connection by this packet
+- No deployment/install by this packet
+- No runtime installation by this packet
+- No backend/frontend/Nginx/PM2/DB command execution by this packet
+- No build/restart/reload by this packet
+- No DB migration/backup/restore/seed/user/privilege mutation by this packet
+- No APP-to-DB live connection test by this packet
+- No healthcheck/smoke execution by this packet
+- No frontend/backend/routes/menu mutation by this packet
+- No server mutation by this packet
+
+Boundary:
+SERVER-DEPLOY-R5 records a runtime installation evidence review gate only. It does not add SSH execution, SSH automation, SSH connection commands with real targets, automatic server connection, APP server connection, DB server connection, real server IP / hostname / username / password public storage, production environment file public storage, OS package installation, runtime installation, PostgreSQL installation, Nginx installation, Node/npm installation, Python/pip installation, PM2 installation, deployment, build execution, install execution, restart/reload execution, DB migration, DB backup execution, DB restore execution, DB seed execution, DB user creation, DB privilege mutation, APP-to-DB live connection testing, healthcheck execution, smoke test execution, server mutation, DB/auth/runtime mutation, frontend/backend/routes/menu mutation, production config mutation, or actual runtime installation by this packet.
+
+Final conclusion:
+SERVER-DEPLOY-R5 Runtime Installation Evidence Review and Gate: COMPLETE
