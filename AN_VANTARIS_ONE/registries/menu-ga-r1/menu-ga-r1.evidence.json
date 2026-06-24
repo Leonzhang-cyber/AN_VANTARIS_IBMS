@@ -1,0 +1,23 @@
+{
+  "scope": "MENU_GA_R1",
+  "passMarker": "ONE_MENU_GA_R1_INTERNATIONAL_L1_L2_L3_MENU_ARCHITECTURE_PASS",
+  "evidenceStatus": "STATIC_MENU_ARCHITECTURE_BASELINE",
+  "readOnly": true,
+  "runtimeExecuted": false,
+  "deploymentExecuted": false,
+  "sshExecuted": false,
+  "dbMigrationExecuted": false,
+  "menuModel": "L1_L2_LEFT_SIDEBAR_L3_CONTENT_TOP",
+  "evidenceFiles": [
+    "AN_VANTARIS_ONE/MENU_GA_R1.md",
+    "AN_VANTARIS_ONE/registries/menu-ga-r1/menu-ga-r1.registry.json",
+    "AN_VANTARIS_IBMS-frontend/src/services/menu/static-menu.ts",
+    "AN_VANTARIS_IBMS-frontend/src/components/AppLayout.vue",
+    "AN_VANTARIS_IBMS-frontend/src/services/menu/types.ts"
+  ],
+  "frontendEvidence": {
+    "sidebarLevels": ["L1", "L2"],
+    "l3Placement": "content area top",
+    "collapseStorage": "localStorage"
+  }
+}

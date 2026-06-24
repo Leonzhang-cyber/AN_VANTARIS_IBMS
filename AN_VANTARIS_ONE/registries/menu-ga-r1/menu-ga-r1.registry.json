@@ -1,0 +1,315 @@
+{
+  "scope": "MENU_GA_R1",
+  "moduleId": "international-ga-menu-architecture",
+  "passMarker": "ONE_MENU_GA_R1_INTERNATIONAL_L1_L2_L3_MENU_ARCHITECTURE_PASS",
+  "readOnly": true,
+  "runtimeExecuted": false,
+  "dbMigrationExecuted": false,
+  "deploymentExecuted": false,
+  "sshExecuted": false,
+  "menuModel": "L1_L2_LEFT_SIDEBAR_L3_CONTENT_TOP",
+  "homeRenamedToDashboard": true,
+  "sidebarCollapseRequired": true,
+  "l3InContentAreaOnly": true,
+  "leftSidebarLevels": ["L1", "L2"],
+  "contentAreaLevels": ["L3"],
+  "internationalGaBenchmarkVendors": [
+    "Schneider Electric EcoStruxure",
+    "Siemens Desigo CC",
+    "Honeywell EBI",
+    "Johnson Controls OpenBlue"
+  ],
+  "legacyIbmsMenuMapped": true,
+  "scenarioCoverage": ["UMMS", "UFMS", "UESG", "Airport", "Data Center"],
+  "existingIbmsMapping": [
+    {
+      "existingModule": "Server Precheck R1/R2/R3/R4",
+      "primaryMapping": "Engineer Workspace > Server Precheck",
+      "l3Items": ["R1 Environment Audit", "R2 Access Window", "R3 Observation Plan", "R4 SSH Approval Packet"]
+    },
+    {
+      "existingModule": "Foundation Diagnostics",
+      "primaryMapping": "Engineer Workspace > Foundation Diagnostics"
+    },
+    {
+      "existingModule": "Customer Delivery",
+      "primaryMapping": "Engineer Workspace > Customer Delivery"
+    },
+    {
+      "existingModule": "Local Release Index",
+      "primaryMapping": "Engineer Workspace > Release Management"
+    },
+    {
+      "existingModule": "CODE Policy Gate",
+      "primaryMapping": "Intelligence > AI Governance",
+      "secondaryMapping": "Engineer Workspace > Release Management"
+    },
+    {
+      "existingModule": "NexusAI Branch Audit",
+      "primaryMapping": "Intelligence > NexusAI",
+      "secondaryMapping": "Intelligence > AI Governance"
+    },
+    {
+      "existingModule": "Reports / Export Center",
+      "primaryMapping": "Reports & Compliance > Report Center",
+      "secondaryMapping": "Reports & Compliance > Export Center"
+    },
+    {
+      "existingModule": "Asset Context",
+      "primaryMapping": "Systems & Assets > Asset Registry",
+      "secondaryMapping": "Systems & Assets > Asset Graph"
+    }
+  ],
+  "menuDomains": [
+    {
+      "l1Id": "dashboard",
+      "label": "Dashboard",
+      "icon": "D",
+      "customerFacing": true,
+      "engineerFacing": true,
+      "l2Items": [
+        {"l2Id": "dashboard-executive", "label": "Executive Dashboard", "path": "/dashboard", "implementedStatus": "mapped", "l3Items": ["Portfolio Overview", "Site Health", "Critical Alarms", "Open Faults", "Open Work Orders", "Energy Exceptions", "ESG Snapshot", "Service Risk", "Customer Demo View"]},
+        {"l2Id": "dashboard-operations", "label": "Operations Dashboard", "path": "/dashboard", "implementedStatus": "mapped", "l3Items": ["Today's Operations", "Live Situation", "Risk Summary", "System Availability", "Fault Impact", "Maintenance Status", "Energy Status", "Compliance Status"]},
+        {"l2Id": "dashboard-my", "label": "My Dashboard", "path": "/dashboard", "implementedStatus": "planned", "l3Items": ["My Tasks", "My Alarms", "My Work Orders", "My Approvals", "My Reports", "My Evidence", "Recent Activity"]},
+        {"l2Id": "dashboard-scenario", "label": "Scenario Dashboard", "path": "/dashboard", "implementedStatus": "mapped", "l3Items": ["UMMS Overview", "UFMS Overview", "UESG Overview", "Airport Scenario", "Data Center Scenario", "Customer Demo Scenario"]}
+      ]
+    },
+    {
+      "l1Id": "operations-command",
+      "label": "Operations Command",
+      "icon": "O",
+      "customerFacing": true,
+      "engineerFacing": true,
+      "l2Items": [
+        {"l2Id": "operations-command-center", "label": "Command Center", "path": "/console/operations", "implementedStatus": "mapped", "l3Items": ["Live Situation", "Site Map", "Alarm Heatmap", "Fault Heatmap", "Critical Assets", "Active Incidents", "Operator Notes", "Shift Handover"]},
+        {"l2Id": "operations-console", "label": "Operations Console", "path": "/console/operations", "implementedStatus": "implemented", "mappedExistingModule": "PlatformOperationsDashboard", "l3Items": ["Operations Board", "Event Stream", "Active Tasks", "Escalations", "Service Impact", "Evidence Timeline", "Decision Log"]},
+        {"l2Id": "incident-management", "label": "Incident Management", "path": "/console/operations", "implementedStatus": "planned", "l3Items": ["Active Incidents", "Incident Details", "Related Alarms", "Related Faults", "Impacted Assets", "Response Actions", "Communications", "Closure Evidence"]},
+        {"l2Id": "shift-management", "label": "Shift Management", "path": "/console/operations", "implementedStatus": "planned", "l3Items": ["Shift Dashboard", "Handover Notes", "Open Items", "Critical Watchlist", "Operator Assignments", "Shift Evidence"]}
+      ]
+    },
+    {
+      "l1Id": "sites-spaces",
+      "label": "Sites & Spaces",
+      "icon": "S",
+      "customerFacing": true,
+      "engineerFacing": true,
+      "l2Items": [
+        {"l2Id": "site-portfolio", "label": "Site Portfolio", "path": "/assets/topology", "implementedStatus": "mapped", "l3Items": ["Portfolio List", "Site Health", "Site Risk", "Site Energy", "Site Compliance", "Site Reports"]},
+        {"l2Id": "buildings", "label": "Buildings", "path": "/assets/topology", "implementedStatus": "planned", "l3Items": ["Building List", "Building Overview", "Building Systems", "Building Alarms", "Building Faults", "Building Energy", "Building Evidence"]},
+        {"l2Id": "floors-zones", "label": "Floors & Zones", "path": "/assets/topology", "implementedStatus": "planned", "l3Items": ["Floor Plan", "Zone List", "Zone Conditions", "Zone Assets", "Zone Alarms", "Zone Energy", "Occupancy View"]},
+        {"l2Id": "rooms-areas", "label": "Rooms & Areas", "path": "/assets/topology", "implementedStatus": "planned", "l3Items": ["Room List", "Room Conditions", "Room Equipment", "Room Events", "Room Comfort", "Room Maintenance"]},
+        {"l2Id": "space-mapping", "label": "Space Mapping", "path": "/assets/topology", "implementedStatus": "mapped", "l3Items": ["Asset-to-Space Mapping", "System-to-Space Mapping", "Tag-to-Space Mapping", "Floor Plan Binding", "Mapping Gaps", "Mapping Evidence"]}
+      ]
+    },
+    {
+      "l1Id": "systems-assets",
+      "label": "Systems & Assets",
+      "icon": "A",
+      "customerFacing": true,
+      "engineerFacing": true,
+      "l2Items": [
+        {"l2Id": "system-registry", "label": "System Registry", "path": "/assets/topology", "implementedStatus": "mapped", "l3Items": ["System List", "System Topology", "System Health", "System Alarms", "System Faults", "System Evidence", "System Reports"]},
+        {"l2Id": "asset-registry", "label": "Asset Registry", "path": "/one/assets/context", "implementedStatus": "implemented", "mappedExistingModule": "AssetContext", "l3Items": ["Asset List", "Asset Detail", "Asset Context", "Asset Relationships", "Asset Health", "Asset History", "Asset Evidence"]},
+        {"l2Id": "equipment", "label": "Equipment", "path": "/assets/topology", "implementedStatus": "mapped", "l3Items": ["Equipment List", "Equipment Detail", "Runtime Status", "Maintenance History", "Fault History", "Spare / Vendor Info", "Evidence"]},
+        {"l2Id": "points-tags", "label": "Points & Tags", "path": "/assets/topology", "implementedStatus": "planned", "l3Items": ["Point List", "Tag Mapping", "Live Values", "Point Quality", "Point Trends", "Mapping Gaps", "Import / Export"]},
+        {"l2Id": "controllers-gateways", "label": "Controllers & Gateways", "path": "/uedge/diagnostics", "implementedStatus": "mapped", "l3Items": ["Controller List", "Gateway List", "Connectivity Status", "Protocol Status", "Edge Gateway Mapping", "Link Gateway Mapping", "Diagnostics"]},
+        {"l2Id": "asset-graph", "label": "Asset Graph", "path": "/one/assets/context", "implementedStatus": "implemented", "mappedExistingModule": "AssetContext", "l3Items": ["Relationship Graph", "Dependency View", "Impact Path", "Upstream / Downstream", "Asset Context Projection", "Evidence Links", "Data Quality"]}
+      ]
+    },
+    {
+      "l1Id": "alarms-events",
+      "label": "Alarms & Events",
+      "icon": "E",
+      "customerFacing": true,
+      "engineerFacing": true,
+      "l2Items": [
+        {"l2Id": "alarm-console", "label": "Alarm Console", "path": "/one/airport/alarms-events", "implementedStatus": "mapped", "l3Items": ["Active Alarms", "Critical Alarms", "Acknowledgement", "Shelving", "Suppression", "Escalation", "Operator Notes"]},
+        {"l2Id": "event-timeline", "label": "Event Timeline", "path": "/one/airport/alarms-events", "implementedStatus": "mapped", "l3Items": ["Event Stream", "Event Filters", "Event Detail", "Related Assets", "Related Faults", "Related Work Orders", "Evidence Timeline"]},
+        {"l2Id": "alarm-rules", "label": "Alarm Rules", "path": "/one/airport/alarms-events", "implementedStatus": "planned", "l3Items": ["Priority Rules", "Escalation Rules", "Notification Rules", "Suppression Rules", "Routing Rules", "Rule Evidence", "Rule Audit"]},
+        {"l2Id": "alarm-analytics", "label": "Alarm Analytics", "path": "/one/airport/alarms-events", "implementedStatus": "planned", "l3Items": ["Alarm Volume", "Alarm Flood", "Repeated Alarms", "Nuisance Alarms", "Top Assets", "Top Systems", "SLA Impact"]},
+        {"l2Id": "event-evidence", "label": "Event Evidence", "path": "/ucde/evidence", "implementedStatus": "mapped", "l3Items": ["Evidence Chain", "UCDE Trace", "Operator Actions", "Export Package", "Audit Trail"]}
+      ]
+    },
+    {
+      "l1Id": "ufms",
+      "label": "UFMS - Fault Management",
+      "icon": "F",
+      "customerFacing": true,
+      "engineerFacing": true,
+      "l2Items": [
+        {"l2Id": "fault-console", "label": "Fault Console", "path": "/one/airport/fault-cases", "implementedStatus": "mapped", "l3Items": ["Active Faults", "Critical Faults", "Fault Detail", "Correlation", "Root Cause Analysis", "Recommended Actions", "Fault Evidence"]},
+        {"l2Id": "detection-correlation", "label": "Detection & Correlation", "path": "/one/airport/fault-cases", "implementedStatus": "planned", "l3Items": ["Detection Rules", "Correlation Rules", "Event Clustering", "Related Alarms", "Related Assets", "Confidence Score", "Rule Evidence"]},
+        {"l2Id": "diagnostics", "label": "Diagnostics", "path": "/console/foundation-diagnostics/workspace", "implementedStatus": "mapped", "l3Items": ["Diagnostic Queue", "System Diagnostics", "Asset Diagnostics", "OT / Network Diagnostics", "Hardware Diagnostics", "Diagnostic Evidence", "Diagnostic History"]},
+        {"l2Id": "remediation", "label": "Remediation", "path": "/one/airport/fault-cases", "implementedStatus": "planned", "l3Items": ["Recommended Actions", "Manual Actions", "Work Order Creation", "Escalation", "SLA Tracking", "Closure Notes", "Closure Evidence"]},
+        {"l2Id": "fault-analytics", "label": "Fault Analytics", "path": "/one/airport/fault-cases", "implementedStatus": "planned", "l3Items": ["Fault Trends", "Top Fault Types", "Repeat Faults", "MTTR", "Downtime Impact", "Reliability Score", "Improvement Actions"]},
+        {"l2Id": "ufms-configuration", "label": "UFMS Configuration", "path": "/one/airport/fault-cases", "implementedStatus": "planned", "l3Items": ["Fault Categories", "Severity Model", "Correlation Model", "Escalation Matrix", "Notification Policy", "Evidence Policy", "Integration Mapping"]}
+      ]
+    },
+    {
+      "l1Id": "umms",
+      "label": "UMMS - Maintenance Management",
+      "icon": "M",
+      "customerFacing": true,
+      "engineerFacing": true,
+      "l2Items": [
+        {"l2Id": "work-orders", "label": "Work Orders", "path": "/one/umms/workspace", "implementedStatus": "implemented", "mappedExistingModule": "UmmsMaintenance", "l3Items": ["Open Work Orders", "Assigned Work Orders", "Emergency Work Orders", "Preventive Work Orders", "Corrective Work Orders", "Work Order Detail", "Closure Evidence"]},
+        {"l2Id": "preventive-maintenance", "label": "Preventive Maintenance", "path": "/one/umms/workspace", "implementedStatus": "mapped", "l3Items": ["PM Calendar", "PM Templates", "PM Schedule", "PM Checklist", "PM Completion", "PM Evidence", "PM Reports"]},
+        {"l2Id": "corrective-maintenance", "label": "Corrective Maintenance", "path": "/one/umms/workspace", "implementedStatus": "mapped", "l3Items": ["Fault-linked Work Orders", "Manual Work Orders", "Technician Assignment", "Action Tracking", "Parts / Vendor Notes", "Closure Review", "History"]},
+        {"l2Id": "sla-escalation", "label": "SLA & Escalation", "path": "/one/umms/workspace", "implementedStatus": "planned", "l3Items": ["SLA Dashboard", "Breach Risk", "Escalation Queue", "Supervisor Review", "Customer Impact", "SLA Evidence"]},
+        {"l2Id": "maintenance-analytics", "label": "Maintenance Analytics", "path": "/one/umms/workspace", "implementedStatus": "planned", "l3Items": ["MTTR", "MTBF", "Repeated Failures", "Technician Load", "Asset Reliability", "Maintenance Cost View", "Improvement Plan"]},
+        {"l2Id": "maintenance-configuration", "label": "Maintenance Configuration", "path": "/one/umms/workspace", "implementedStatus": "planned", "l3Items": ["Work Order Types", "Priority Matrix", "Assignment Rules", "Checklist Templates", "SLA Rules", "Vendor / Team Setup"]}
+      ]
+    },
+    {
+      "l1Id": "uesg",
+      "label": "UESG - Energy & Sustainability",
+      "icon": "G",
+      "customerFacing": true,
+      "engineerFacing": true,
+      "l2Items": [
+        {"l2Id": "energy-dashboard", "label": "Energy Dashboard", "path": "/uesg/sustainability", "implementedStatus": "implemented", "mappedExistingModule": "UesgSustainability", "l3Items": ["Consumption Overview", "Demand / Peak", "Energy Intensity", "Meter Health", "Energy Exceptions", "Energy Forecast", "Energy Reports"]},
+        {"l2Id": "metering", "label": "Metering", "path": "/uesg/sustainability", "implementedStatus": "planned", "l3Items": ["Meter List", "Meter Mapping", "Meter Readings", "Meter Quality", "Meter Trends", "Meter Faults", "Import / Export"]},
+        {"l2Id": "energy-faults", "label": "Energy Faults", "path": "/uesg/sustainability", "implementedStatus": "planned", "l3Items": ["High Consumption", "Unoccupied Consumption", "Weekend Consumption", "Peak Demand", "Meter Offline", "Meter Flatline", "Energy Fault Evidence"]},
+        {"l2Id": "sustainability", "label": "Sustainability", "path": "/uesg/sustainability", "implementedStatus": "implemented", "mappedExistingModule": "UesgSustainability", "l3Items": ["Carbon Overview", "ESG Metrics", "Green Mark Support", "Utility Baseline", "Reduction Initiatives", "Sustainability Evidence", "ESG Reports"]},
+        {"l2Id": "optimization", "label": "Optimization", "path": "/uesg/sustainability", "implementedStatus": "planned", "l3Items": ["Energy Opportunities", "Setpoint Review", "Schedule Review", "Equipment Efficiency", "Anomaly Detection", "Savings Estimate", "Action Plan"]},
+        {"l2Id": "compliance", "label": "Compliance", "path": "/uesg/sustainability", "implementedStatus": "mapped", "l3Items": ["Energy Compliance", "ESG Compliance", "Audit Evidence", "Report Export", "Submission Package", "Historical Records"]}
+      ]
+    },
+    {
+      "l1Id": "reports-compliance",
+      "label": "Reports & Compliance",
+      "icon": "R",
+      "customerFacing": true,
+      "engineerFacing": true,
+      "l2Items": [
+        {"l2Id": "report-center", "label": "Report Center", "path": "/reports", "implementedStatus": "implemented", "mappedExistingModule": "ReportsView", "l3Items": ["Operations Reports", "Alarm Reports", "Fault Reports", "Maintenance Reports", "Energy Reports", "Compliance Reports", "Customer Demo Reports"]},
+        {"l2Id": "export-center", "label": "Export Center", "path": "/reports", "implementedStatus": "implemented", "mappedExistingModule": "ReportsView", "l3Items": ["PDF Export", "Excel Export", "Evidence Bundle", "Customer Handoff Package", "Scheduled Exports", "Export History", "Export Audit"]},
+        {"l2Id": "compliance-center", "label": "Compliance Center", "path": "/reports", "implementedStatus": "mapped", "l3Items": ["IEC 62443 Evidence", "ESG Evidence", "Green Mark Evidence", "Customer Acceptance", "Audit Checklist", "Compliance Gap", "Compliance Reports"]},
+        {"l2Id": "evidence-library", "label": "Evidence Library", "path": "/ucde/evidence", "implementedStatus": "mapped", "l3Items": ["UCDE Evidence", "Decision Evidence", "Fault Evidence", "Maintenance Evidence", "Server Precheck Evidence", "Customer Delivery Evidence", "Evidence Export"]}
+      ]
+    },
+    {
+      "l1Id": "decision-evidence",
+      "label": "Decision & Evidence",
+      "icon": "V",
+      "customerFacing": true,
+      "engineerFacing": true,
+      "l2Items": [
+        {"l2Id": "decision-log", "label": "Decision Log", "path": "/ucde/evidence", "implementedStatus": "mapped", "l3Items": ["Active Decisions", "Decision Detail", "Decision Owner", "Decision Evidence", "Approval Chain", "Export"]},
+        {"l2Id": "ucde", "label": "UCDE", "path": "/ucde/evidence", "implementedStatus": "implemented", "mappedExistingModule": "EvidenceCenter", "l3Items": ["Evidence Chain", "Evidence Detail", "Evidence Hash", "Evidence Source", "Evidence Validation", "Evidence Export", "Evidence Audit"]},
+        {"l2Id": "approval-center", "label": "Approval Center", "path": "/ucde/evidence", "implementedStatus": "planned", "l3Items": ["Pending Approvals", "Approved Items", "Rejected Items", "Approval Evidence", "Approval Matrix", "Approval History"]},
+        {"l2Id": "audit-trail", "label": "Audit Trail", "path": "/system/audit-logs", "implementedStatus": "implemented", "mappedExistingModule": "AuditLogsView", "l3Items": ["User Actions", "System Actions", "Configuration Changes", "Evidence Changes", "Export History", "Audit Reports"]}
+      ]
+    },
+    {
+      "l1Id": "intelligence",
+      "label": "Intelligence",
+      "icon": "I",
+      "customerFacing": true,
+      "engineerFacing": true,
+      "l2Items": [
+        {"l2Id": "nexusai", "label": "NexusAI", "path": "/one/nexus-ai/branch-audit", "implementedStatus": "implemented", "mappedExistingModule": "NexusBranchAudit", "l3Items": ["Insight Overview", "Fault Insights", "Energy Insights", "Maintenance Insights", "Risk Insights", "Branch Audit", "AI Evidence"]},
+        {"l2Id": "recommendations", "label": "Recommendations", "path": "/one/nexus-ai/branch-audit", "implementedStatus": "innovation", "l3Items": ["Recommended Actions", "Prioritized Risks", "Operational Suggestions", "Maintenance Suggestions", "Energy Suggestions", "Decision Support", "Confidence Evidence"]},
+        {"l2Id": "forecasting", "label": "Forecasting", "path": "/one/nexus-ai/branch-audit", "implementedStatus": "innovation", "l3Items": ["Fault Forecast", "Energy Forecast", "Maintenance Forecast", "Risk Forecast", "Capacity Forecast", "Model Evidence"]},
+        {"l2Id": "ai-governance", "label": "AI Governance", "path": "/one/code/policy-gate", "implementedStatus": "implemented", "mappedExistingModule": "CodePolicyGate", "l3Items": ["AI Policy Gate", "CODE Policy Gate", "Model Usage", "Human Approval", "AI Audit", "AI Limitations"]}
+      ]
+    },
+    {
+      "l1Id": "digital-twin-graphics",
+      "label": "Digital Twin & Graphics",
+      "icon": "T",
+      "customerFacing": true,
+      "engineerFacing": true,
+      "l2Items": [
+        {"l2Id": "graphics", "label": "Graphics", "path": "/one/airport/assets-topology", "implementedStatus": "planned", "l3Items": ["Graphic Library", "System Graphics", "Equipment Graphics", "Alarm Overlay", "Trend Overlay", "Graphic Evidence"]},
+        {"l2Id": "floor-plan", "label": "Floor Plan", "path": "/one/airport/assets-topology", "implementedStatus": "mapped", "l3Items": ["Site Plan", "Building Plan", "Floor Plan", "Zone Overlay", "Asset Overlay", "Alarm Overlay", "Energy Overlay"]},
+        {"l2Id": "digital-twin", "label": "Digital Twin", "path": "/one/airport/assets-topology", "implementedStatus": "planned", "l3Items": ["Twin Overview", "Asset Twin", "System Twin", "Space Twin", "Fault Impact Path", "Scenario View", "Twin Evidence"]},
+        {"l2Id": "topology", "label": "Topology", "path": "/assets/topology", "implementedStatus": "implemented", "mappedExistingModule": "AssetsTopology", "l3Items": ["System Topology", "Network Topology", "Asset Dependency", "Edge / Link Topology", "Data Flow", "Impact Analysis"]}
+      ]
+    },
+    {
+      "l1Id": "security-life-safety",
+      "label": "Security & Life Safety",
+      "icon": "L",
+      "customerFacing": true,
+      "engineerFacing": true,
+      "l2Items": [
+        {"l2Id": "access-control", "label": "Access Control", "path": "/one/airport/overview", "implementedStatus": "planned", "l3Items": ["Access Events", "Door Status", "Access Alarms", "Access Exceptions", "Access Evidence", "Access Reports"]},
+        {"l2Id": "video-events", "label": "Video Events", "path": "/one/airport/overview", "implementedStatus": "planned", "l3Items": ["CCTV Events", "AI Video Events", "Camera Health", "Video-linked Alarms", "Video Evidence", "Event Review"]},
+        {"l2Id": "fire-life-safety", "label": "Fire & Life Safety", "path": "/one/airport/overview", "implementedStatus": "planned", "l3Items": ["Fire Alarms", "Fire System Status", "Life Safety Events", "Emergency Response", "Fire Evidence", "Compliance Reports"]},
+        {"l2Id": "security-incidents", "label": "Security Incidents", "path": "/one/airport/overview", "implementedStatus": "planned", "l3Items": ["Active Security Incidents", "Incident Detail", "Related Access Events", "Related Video Events", "Response Actions", "Closure Evidence"]}
+      ]
+    },
+    {
+      "l1Id": "data-center-operations",
+      "label": "Data Center Operations",
+      "icon": "C",
+      "customerFacing": true,
+      "engineerFacing": true,
+      "l2Items": [
+        {"l2Id": "idc-overview", "label": "IDC Overview", "path": "/one/airport/overview", "implementedStatus": "planned", "l3Items": ["Data Hall Health", "Power Chain", "Cooling Chain", "Environmental Status", "Capacity Risk", "Critical Alarms", "IDC Reports"]},
+        {"l2Id": "power", "label": "Power", "path": "/one/airport/overview", "implementedStatus": "planned", "l3Items": ["UPS", "PDU", "Switchgear", "Generator", "Power Metering", "Power Alarms", "Power Trends"]},
+        {"l2Id": "cooling", "label": "Cooling", "path": "/one/airport/overview", "implementedStatus": "planned", "l3Items": ["CRAH / CRAC", "Chiller", "Pump", "Temperature Map", "Humidity Map", "Cooling Alarms", "Cooling Efficiency"]},
+        {"l2Id": "capacity", "label": "Capacity", "path": "/one/airport/overview", "implementedStatus": "planned", "l3Items": ["Rack Capacity", "Power Capacity", "Cooling Capacity", "Space Capacity", "Capacity Forecast", "Capacity Reports"]},
+        {"l2Id": "idc-faults", "label": "IDC Faults", "path": "/one/airport/fault-cases", "implementedStatus": "planned", "l3Items": ["Active IDC Faults", "Impacted Racks", "Impacted Systems", "RCA", "Recommended Actions", "Evidence"]}
+      ]
+    },
+    {
+      "l1Id": "integration-foundation",
+      "label": "Integration Foundation",
+      "icon": "N",
+      "customerFacing": false,
+      "engineerFacing": true,
+      "l2Items": [
+        {"l2Id": "connectors", "label": "Connectors", "path": "/uedge/setup", "implementedStatus": "mapped", "l3Items": ["Connector Registry", "Protocol Mapping", "OPC UA", "BACnet", "Modbus", "API Connectors", "Connector Evidence"]},
+        {"l2Id": "edge", "label": "EDGE", "path": "/uedge/diagnostics", "implementedStatus": "implemented", "mappedExistingModule": "UedgeDiagnostics", "l3Items": ["Edge Gateway List", "Edge Health", "Edge Buffer", "Edge Diagnostics", "Edge Package Readiness", "Edge Evidence"]},
+        {"l2Id": "link", "label": "LINK", "path": "/uedge/diagnostics", "implementedStatus": "mapped", "l3Items": ["Link Gateway List", "Link Queue", "Link Delivery", "Link DLQ", "Link Diagnostics", "Link Evidence"]},
+        {"l2Id": "contracts", "label": "Contracts", "path": "/console/foundation-diagnostics/workspace", "implementedStatus": "mapped", "l3Items": ["API Contracts", "DTO Schemas", "Handoff Envelope", "Versioning", "Contract Evidence", "Integration Checklist"]},
+        {"l2Id": "data-quality", "label": "Data Quality", "path": "/assets/topology", "implementedStatus": "planned", "l3Items": ["Tag Quality", "Mapping Quality", "Missing Data", "Duplicate Data", "Stale Data", "Quality Evidence", "Correction Plan"]}
+      ]
+    },
+    {
+      "l1Id": "engineer-workspace",
+      "label": "Engineer Workspace",
+      "icon": "W",
+      "customerFacing": false,
+      "engineerFacing": true,
+      "l2Items": [
+        {"l2Id": "deployment-readiness", "label": "Deployment Readiness", "path": "/console/foundation-diagnostics/workspace", "implementedStatus": "mapped", "l3Items": ["Server Precheck Audit", "Access Window Plan", "Observation Plan", "SSH Approval Packet", "R5 Entry Gate", "Deployment Blockers", "Evidence Package"]},
+        {"l2Id": "foundation-diagnostics", "label": "Foundation Diagnostics", "path": "/console/foundation-diagnostics/workspace", "implementedStatus": "implemented", "mappedExistingModule": "FoundationDiagnosticsWorkspace", "l3Items": ["Platform Diagnostics", "Package Diagnostics", "EDGE / LINK / DB Diagnostics", "Contract Diagnostics", "Healthcheck Preview", "Risk Guardrails", "Diagnostics Evidence"]},
+        {"l2Id": "customer-delivery", "label": "Customer Delivery", "path": "/console/foundation-diagnostics/workspace", "implementedStatus": "mapped", "l3Items": ["Package Readiness", "Offline Handoff", "Acceptance Checklist", "Customer Demo Pack", "Installer Console", "Handoff Decision", "Delivery Evidence"]},
+        {"l2Id": "release-management", "label": "Release Management", "path": "/console/foundation-diagnostics/workspace", "implementedStatus": "mapped", "l3Items": ["Local Release Index", "Release Chain", "Commit / Tag Registry", "Validator Markers", "Freeze Evidence", "Release Gaps", "Release Notes"]},
+        {"l2Id": "package-management", "label": "Package Management", "path": "/console/operations", "implementedStatus": "mapped", "l3Items": ["Installed Packages", "Entitled Packages", "Enabled Packages", "Visible Packages", "Locked Packages", "Package Health", "Package Evidence"]},
+        {"l2Id": "server-precheck", "label": "Server Precheck", "path": "/one/server/precheck", "implementedStatus": "implemented", "mappedExistingModule": "ServerPrecheck R1-R4", "l3Items": ["R1 Environment Audit", "R2 Access Window", "R3 Observation Plan", "R4 SSH Approval Packet", "R5 Actual Read-only Observation", "Stop Conditions", "Server Evidence"]}
+      ]
+    },
+    {
+      "l1Id": "administration",
+      "label": "Administration",
+      "icon": "X",
+      "customerFacing": false,
+      "engineerFacing": true,
+      "l2Items": [
+        {"l2Id": "users-roles", "label": "Users & Roles", "path": "/system/permissions", "implementedStatus": "implemented", "mappedExistingModule": "PermissionListView", "l3Items": ["Users", "Roles", "Permissions", "Teams", "Role Mapping", "Access Review", "User Audit"]},
+        {"l2Id": "system-settings", "label": "System Settings", "path": "/system/settings", "implementedStatus": "implemented", "mappedExistingModule": "SystemSettingsView", "l3Items": ["Site Settings", "System Settings", "Notification Settings", "Evidence Settings", "Report Settings", "Feature Flags", "Configuration Audit"]},
+        {"l2Id": "license-edition", "label": "License & Edition", "path": "/system", "implementedStatus": "planned", "l3Items": ["Edition", "Licensed Modules", "Package Entitlement", "Usage Limits", "Expiry / Renewal", "License Evidence"]},
+        {"l2Id": "audit-security", "label": "Audit & Security", "path": "/system/audit-logs", "implementedStatus": "implemented", "mappedExistingModule": "AuditLogsView", "l3Items": ["Login Audit", "Action Audit", "Configuration Audit", "API Audit", "Export Audit", "Security Policy", "Compliance Evidence"]},
+        {"l2Id": "backup-recovery", "label": "Backup & Recovery", "path": "/system", "implementedStatus": "planned", "l3Items": ["Backup Plan", "Restore Plan", "Recovery Evidence", "Rollback Plan", "DR Readiness", "Recovery Reports"]}
+      ]
+    },
+    {
+      "l1Id": "scenario-modules",
+      "label": "Scenario Modules",
+      "icon": "Q",
+      "customerFacing": true,
+      "engineerFacing": true,
+      "l2Items": [
+        {"l2Id": "umms-scenario", "label": "UMMS Scenario", "path": "/one/umms/workspace", "implementedStatus": "mapped", "l3Items": ["Maintenance Overview", "Work Order Flow", "PM Flow", "Fault-linked Maintenance", "SLA Flow", "Technician View", "Maintenance Reports"]},
+        {"l2Id": "ufms-scenario", "label": "UFMS Scenario", "path": "/one/airport/fault-cases", "implementedStatus": "mapped", "l3Items": ["Fault Overview", "Alarm-to-Fault Flow", "Correlation Flow", "RCA Flow", "Remediation Flow", "Fault Evidence", "Fault Reports"]},
+        {"l2Id": "uesg-scenario", "label": "UESG Scenario", "path": "/uesg/sustainability", "implementedStatus": "mapped", "l3Items": ["Energy Overview", "Meter-to-ESG Flow", "Energy Fault Flow", "Carbon Flow", "Green Mark Evidence", "ESG Reports", "Optimization Actions"]},
+        {"l2Id": "airport-scenario", "label": "Airport Scenario", "path": "/one/airport/overview", "implementedStatus": "mapped", "l3Items": ["Airport Operations", "System Integration", "Asset Context", "Fault & Maintenance Flow", "Energy & ESG Flow", "Customer Demo Reports", "Acceptance Evidence"]},
+        {"l2Id": "data-center-scenario", "label": "Data Center Scenario", "path": "/one/airport/overview", "implementedStatus": "mapped", "l3Items": ["IDC Operations", "Power Chain", "Cooling Chain", "Capacity Chain", "IDC Fault Flow", "IDC Maintenance Flow", "IDC Evidence"]}
+      ]
+    }
+  ]
+}

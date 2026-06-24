@@ -1,0 +1,14 @@
+{
+  "scope": "MENU_GA_R1",
+  "validatorName": "validate-menu-ga-r1-international-l1-l2-l3-menu-architecture.py",
+  "passMarker": "ONE_MENU_GA_R1_INTERNATIONAL_L1_L2_L3_MENU_ARCHITECTURE_PASS",
+  "status": "PASS",
+  "requiredAssertions": [
+    "Dashboard replaces Home as current L1 label",
+    "Sidebar renders L1 and L2 only",
+    "L3 is content-area only",
+    "Sidebar collapse is required",
+    "Server Precheck R1-R4 maps to Engineer Workspace",
+    "UMMS, UFMS, UESG, Airport, and Data Center scenarios are covered"
+  ]
+}
