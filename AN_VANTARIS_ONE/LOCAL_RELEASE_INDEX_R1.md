@@ -668,3 +668,55 @@ SERVER-DEPLOY-R2 records a runtime installation execution packet and manual comm
 
 Final conclusion:
 SERVER-DEPLOY-R2 Runtime Installation Execution Packet: COMPLETE
+
+## SERVER-DEPLOY-R3 Final Verification / Release Index Update
+
+PASS marker: ONE_SERVER_DEPLOY_R3_RUNTIME_INSTALLATION_MANUAL_EXECUTION_APPROVAL_PASS
+
+- Source task: SERVER-DEPLOY-R3 Runtime Installation Manual Execution Approval
+- Source PASS marker: ONE_SERVER_DEPLOY_R3_RUNTIME_INSTALLATION_MANUAL_EXECUTION_APPROVAL_PASS
+- Source baseline: 94ba028 docs(one): add server deploy r2 runtime installation packet
+- Remote branch: sync/ufms-foundation-packages-20260622-104646
+- SERVER-DEPLOY-R3 final local freeze recommendation: ready after local commit
+
+R2 dependency:
+- R2 dependency status: GO
+- runtimeInstallationExecutionPacketDecision: GO
+
+Manual execution approval:
+- Manual execution approval only: true
+- Automatic execution allowed: false
+- Execution window requirements: PASS
+- Operator assignment requirements: PASS
+- APP runtime manual approval: PASS
+- DB runtime manual approval: PASS
+- PostgreSQL direction confirmation: PASS
+- Offline/no-Docker approval: PASS
+- Pre-install backup checkpoint: PASS
+- Rollback checkpoint: PASS
+- Stop conditions: PASS
+- Post-install evidence requirements: PASS
+- Restricted secret handling: PASS
+- runtimeInstallationManualApprovalDecision: GO
+- Downstream recommendation: SERVER-DEPLOY-R4 Runtime Installation Manual Execution Record
+
+Verification:
+- SERVER-DEPLOY-R3 validator PASS
+- No SSH execution
+- No real SSH target stored
+- No APP/DB server connection
+- No deployment/install
+- No runtime installation
+- No backend/frontend/Nginx/PM2/DB command execution
+- No build/restart/reload
+- No DB migration/backup/restore/seed/user/privilege mutation
+- No APP-to-DB live connection test
+- No healthcheck/smoke execution
+- No frontend/backend/routes/menu mutation
+- No server mutation
+
+Boundary:
+SERVER-DEPLOY-R3 records runtime installation manual execution approval only. It does not add SSH execution, SSH automation, SSH connection commands with real targets, automatic server connection, APP server connection, DB server connection, real server IP / hostname / username / password public storage, OS package installation, runtime installation, PostgreSQL installation, Nginx installation, Node/npm installation, Python/pip installation, PM2 installation, deployment, build execution, install execution, restart/reload execution, DB migration, DB backup execution, DB restore execution, DB seed execution, DB user creation, DB privilege mutation, APP-to-DB live connection testing, healthcheck execution, smoke test execution, server mutation, DB/auth/runtime mutation, frontend/backend/routes/menu mutation, production config mutation, production credential public storage, or actual runtime installation by this packet.
+
+Final conclusion:
+SERVER-DEPLOY-R3 Runtime Installation Manual Execution Approval: COMPLETE

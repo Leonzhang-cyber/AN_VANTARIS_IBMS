@@ -1,0 +1,32 @@
+{
+  "validationId": "server-deploy-r3-runtime-installation-manual-execution-approval-validation",
+  "stage": "SERVER-DEPLOY-R3",
+  "status": "PASS",
+  "validator": "scripts/validation/validate-server-deploy-r3-runtime-installation-manual-execution-approval.py",
+  "passMarker": "ONE_SERVER_DEPLOY_R3_RUNTIME_INSTALLATION_MANUAL_EXECUTION_APPROVAL_PASS",
+  "checks": {
+    "requiredFilesExist": true,
+    "jsonParses": true,
+    "runtimeInstallationPlanReferenceCorrect": true,
+    "runtimeInstallationExecutionPacketReferenceCorrect": true,
+    "precheckFinalApprovalReferenceCorrect": true,
+    "r1DecisionGo": true,
+    "r2DecisionGo": true,
+    "manualExecutionApprovalOnly": true,
+    "automaticExecutionAllowedFalse": true,
+    "executionAndMutationFlagsFalse": true,
+    "executionWindowPass": true,
+    "operatorAssignmentPass": true,
+    "appRuntimeManualApprovalPass": true,
+    "dbRuntimeManualApprovalPass": true,
+    "offlineNoDockerManualApprovalPass": true,
+    "backupCheckpointApprovalPass": true,
+    "rollbackCheckpointApprovalPass": true,
+    "stopConditionApprovalPass": true,
+    "postInstallEvidenceApprovalPass": true,
+    "secretHandlingPass": true,
+    "runtimeInstallationManualApprovalDecisionAllowed": true,
+    "passMarkerPresent": true,
+    "noRealTargetExecutableOperationSteps": true
+  }
+}
