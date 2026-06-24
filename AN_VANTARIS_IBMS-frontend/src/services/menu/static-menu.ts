@@ -110,12 +110,12 @@ const domains: MenuDomainInput[] = [
     path: '/one/umms/workspace',
     icon: 'M',
     children: [
-      { id: 'work-orders', label: 'Work Orders', path: '/one/umms/workspace', status: 'implemented', l3: ['Open Work Orders', 'Assigned Work Orders', 'Emergency Work Orders', 'Preventive Work Orders', 'Corrective Work Orders', 'Work Order Detail', 'Closure Evidence'], mappedExistingModule: 'UmmsMaintenance' },
-      { id: 'preventive-maintenance', label: 'Preventive Maintenance', path: '/one/umms/workspace', status: 'mapped', l3: ['PM Calendar', 'PM Templates', 'PM Schedule', 'PM Checklist', 'PM Completion', 'PM Evidence', 'PM Reports'] },
-      { id: 'corrective-maintenance', label: 'Corrective Maintenance', path: '/one/umms/workspace', status: 'mapped', l3: ['Fault-linked Work Orders', 'Manual Work Orders', 'Technician Assignment', 'Action Tracking', 'Parts / Vendor Notes', 'Closure Review', 'History'] },
-      { id: 'sla-escalation', label: 'SLA & Escalation', path: '/one/umms/workspace', status: 'planned', l3: ['SLA Dashboard', 'Breach Risk', 'Escalation Queue', 'Supervisor Review', 'Customer Impact', 'SLA Evidence'] },
-      { id: 'maintenance-analytics', label: 'Maintenance Analytics', path: '/one/umms/workspace', status: 'planned', l3: ['MTTR', 'MTBF', 'Repeated Failures', 'Technician Load', 'Asset Reliability', 'Maintenance Cost View', 'Improvement Plan'] },
-      { id: 'maintenance-configuration', label: 'Maintenance Configuration', path: '/one/umms/workspace', status: 'planned', l3: ['Work Order Types', 'Priority Matrix', 'Assignment Rules', 'Checklist Templates', 'SLA Rules', 'Vendor / Team Setup'] },
+      { id: 'work-orders', label: 'Work Orders', path: '/one/umms/workspace', status: 'implemented', l3: ['Open Work Orders', 'Assigned Work Orders', 'Emergency Work Orders', 'Fault-linked Work Orders', 'Preventive Work Orders', 'Corrective Work Orders', 'Work Order Detail', 'Closure Evidence'], mappedExistingModule: 'UmmsMaintenance' },
+      { id: 'preventive-maintenance', label: 'Preventive Maintenance', path: '/one/umms/workspace', status: 'implemented', l3: ['PM Calendar', 'PM Templates', 'PM Schedule', 'PM Checklist', 'PM Completion', 'PM Evidence', 'PM Reports'], mappedExistingModule: 'UmmsMaintenance' },
+      { id: 'corrective-maintenance', label: 'Corrective Maintenance', path: '/one/umms/workspace', status: 'implemented', l3: ['Fault-linked Work Orders', 'Manual Work Orders', 'Technician Assignment', 'Action Tracking', 'Parts / Vendor Notes', 'Closure Review', 'History'], mappedExistingModule: 'UmmsMaintenance' },
+      { id: 'sla-escalation', label: 'SLA & Escalation', path: '/one/umms/workspace', status: 'implemented', l3: ['SLA Dashboard', 'Breach Risk', 'Escalation Queue', 'Supervisor Review', 'Customer Impact', 'SLA Evidence', 'Aging Buckets'], mappedExistingModule: 'UmmsMaintenance' },
+      { id: 'maintenance-analytics', label: 'Maintenance Analytics', path: '/one/umms/workspace', status: 'implemented', l3: ['MTTR', 'MTBF', 'Repeated Failures', 'Technician Load', 'Asset Reliability', 'Predictive Risk', 'Improvement Plan'], mappedExistingModule: 'UmmsMaintenance' },
+      { id: 'maintenance-configuration', label: 'Maintenance Configuration', path: '/one/umms/workspace', status: 'implemented', l3: ['Work Order Types', 'Priority Matrix', 'Assignment Rules', 'Checklist Templates', 'SLA Rules', 'Vendor / Team Setup', 'Evidence Rules'], mappedExistingModule: 'UmmsMaintenance' },
     ],
   },
   {
