@@ -1,0 +1,24 @@
+{
+  "taskId": "SERVER-DEPLOY-R6",
+  "stage": "SERVER-DEPLOY-R6",
+  "validator": "scripts/validation/validate-server-deploy-r6-db-deployment-preparation-execution-gate.py",
+  "passMarker": "ONE_SERVER_DEPLOY_R6_DB_DEPLOYMENT_PREPARATION_EXECUTION_GATE_PASS",
+  "validationStatus": "PASS",
+  "checks": [
+    "R6 documents exist",
+    "R6 registry JSON parses",
+    "R6 evidence JSON parses",
+    "R6 validation JSON parses",
+    "R6 final verification JSON parses",
+    "R6 source references are present",
+    "R5F runtimeInstallationEvidenceFinalDecision is GO",
+    "PostgreSQL runtime evidence dependency is accepted",
+    "DB preparation gate is documentation only",
+    "Execution, connection, command, credential, mutation, and production-config flags are false",
+    "Restricted DB credential handling is reference-only",
+    "DB deployment preparation gate decision is HOLD",
+    "Source PASS markers exist",
+    "No real target or credential patterns are stored",
+    "No executable server or DB operation steps are stored"
+  ]
+}

@@ -868,3 +868,56 @@ SERVER-DEPLOY-R5F records runtime installation evidence closure final review onl
 
 Final conclusion:
 SERVER-DEPLOY-R5F Runtime Installation Evidence Closure Final Review: COMPLETE
+
+## SERVER-DEPLOY-R6 Final Verification / Release Index Update
+
+PASS marker: ONE_SERVER_DEPLOY_R6_DB_DEPLOYMENT_PREPARATION_EXECUTION_GATE_PASS
+
+- Source task: SERVER-DEPLOY-R6 DB Deployment Preparation Execution Gate
+- Source PASS marker: ONE_SERVER_DEPLOY_R6_DB_DEPLOYMENT_PREPARATION_EXECUTION_GATE_PASS
+- Source baseline: 13e73c6 docs(one): close server deploy r5f runtime evidence review
+- Remote branch: sync/ufms-foundation-packages-20260622-104646
+- SERVER-DEPLOY-R6 final local freeze recommendation: ready after local commit
+
+R5F dependency:
+- R5F dependency status: GO
+- runtimeInstallationEvidenceFinalDecision: GO
+- PostgreSQL runtime evidence status: ACCEPTED
+- DB tooling evidence status: ACCEPTED
+- Backup tooling evidence status: ACCEPTED
+- Restore tooling evidence status: ACCEPTED
+
+DB deployment preparation gate:
+- DB deployment preparation gate only: true
+- DB migration execution readiness: HOLD
+- Pre-migration backup checkpoint readiness: HOLD
+- Rollback / restore readiness: HOLD
+- Seed readiness: HOLD
+- DB user / privilege boundary readiness: HOLD
+- APP-to-DB connection plan review: HOLD
+- Restricted DB credential handling: PASS
+- Stop condition review: HOLD
+- Operator / reviewer / approver assignment: HOLD
+- dbDeploymentPreparationExecutionGateDecision: HOLD
+- Downstream recommendation: SERVER-DEPLOY-R7 DB Deployment Manual Execution Approval
+
+Verification:
+- SERVER-DEPLOY-R6 validator PASS
+- No SSH execution by this packet
+- No real DB target stored
+- No APP/DB server connection by this packet
+- No DB deployment by this packet
+- No PostgreSQL command execution by this packet
+- No psql execution by this packet
+- No DB migration/backup/restore/seed/user/privilege mutation by this packet
+- No APP-to-DB live connection test by this packet
+- No healthcheck/smoke execution by this packet
+- No frontend/backend/routes/menu mutation by this packet
+- No server mutation by this packet
+- No production config mutation by this packet
+
+Boundary:
+SERVER-DEPLOY-R6 records a DB deployment preparation execution gate only. It does not add SSH execution, SSH automation, SSH connection commands with real targets, automatic server connection, APP server connection, DB server connection, real server IP / hostname / username / password public storage, production .env public storage, PostgreSQL command execution, psql execution, DB deployment, DB migration, DB backup execution, DB restore execution, DB seed execution, DB user creation, DB privilege mutation, DATABASE_URL public storage, APP-to-DB live connection testing, healthcheck execution, smoke test execution, server mutation, DB/auth/runtime mutation, frontend/backend/routes/menu mutation, production config mutation, or actual DB deployment execution by this packet.
+
+Final conclusion:
+SERVER-DEPLOY-R6 DB Deployment Preparation Execution Gate: COMPLETE

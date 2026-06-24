@@ -1,0 +1,142 @@
+{
+  "gateId": "server-deploy-r6-db-deployment-preparation-execution-gate",
+  "stage": "SERVER-DEPLOY-R6",
+  "precheckFinalApprovalReference": "SERVER-PRECHECK-R14F",
+  "runtimeInstallationPlanReference": "SERVER-DEPLOY-R1",
+  "runtimeInstallationExecutionPacketReference": "SERVER-DEPLOY-R2",
+  "runtimeInstallationManualApprovalReference": "SERVER-DEPLOY-R3",
+  "runtimeInstallationManualExecutionRecordReference": "SERVER-DEPLOY-R4",
+  "runtimeInstallationEvidenceGateReference": "SERVER-DEPLOY-R5",
+  "runtimeInstallationEvidenceClosureReference": "SERVER-DEPLOY-R5F",
+  "runtimeInstallationEvidenceFinalDecision": "GO",
+  "passMarker": "ONE_SERVER_DEPLOY_R6_DB_DEPLOYMENT_PREPARATION_EXECUTION_GATE_PASS",
+  "dbDeploymentPreparationGateOnly": true,
+  "dbDeploymentExecutionAllowedByThisPacket": false,
+  "sshExecutedByThisPacket": false,
+  "sshConnectionCommandStored": false,
+  "realServerTargetStoredInPublicPacket": false,
+  "serverCredentialStoredInPublicPacket": false,
+  "dbServerConnectionPerformedByThisPacket": false,
+  "appServerConnectionPerformedByThisPacket": false,
+  "postgresCommandExecutedByThisPacket": false,
+  "psqlExecutedByThisPacket": false,
+  "dbDeploymentPerformedByThisPacket": false,
+  "dbMigrationPerformedByThisPacket": false,
+  "dbBackupPerformedByThisPacket": false,
+  "dbRestorePerformedByThisPacket": false,
+  "dbSeedPerformedByThisPacket": false,
+  "dbUserCreatedByThisPacket": false,
+  "dbPrivilegeMutationPerformedByThisPacket": false,
+  "appToDbLiveConnectionTestPerformedByThisPacket": false,
+  "healthcheckPerformedByThisPacket": false,
+  "smokeTestPerformedByThisPacket": false,
+  "serverMutationPerformedByThisPacket": false,
+  "dbMutationPerformedByThisPacket": false,
+  "authMutationPerformedByThisPacket": false,
+  "runtimeMutationPerformedByThisPacket": false,
+  "frontendBackendMutationPerformedByThisPacket": false,
+  "routeMutationPerformedByThisPacket": false,
+  "menuImplementationMutationPerformedByThisPacket": false,
+  "productionConfigMutationPerformedByThisPacket": false,
+  "postgresRuntimeDependency": {
+    "postgresqlDirectionConfirmed": true,
+    "postgresRuntimeEvidenceReference": "SERVER-DEPLOY-R5F",
+    "postgresRuntimeEvidenceAccepted": true,
+    "dbToolingEvidenceAccepted": true,
+    "backupToolingEvidenceAccepted": true,
+    "restoreToolingEvidenceAccepted": true,
+    "readinessStatus": "PASS"
+  },
+  "dbMigrationExecutionReadiness": {
+    "migrationInventoryReviewed": false,
+    "migrationOrderReviewed": false,
+    "migrationRollbackImpactReviewed": false,
+    "migrationOperatorAssigned": false,
+    "migrationExecutionAllowedByThisPacket": false,
+    "migrationCommandsStoredAsTemplatesOnly": true,
+    "realDbTargetRedacted": true,
+    "readinessStatus": "HOLD"
+  },
+  "preMigrationBackupCheckpoint": {
+    "backupRequiredBeforeMigration": true,
+    "backupCheckpointDefined": false,
+    "backupOperatorAssigned": false,
+    "backupEvidenceRequiredAfterExecution": true,
+    "backupExecutionAllowedByThisPacket": false,
+    "readinessStatus": "HOLD"
+  },
+  "rollbackRestoreReadiness": {
+    "rollbackPlanRequired": true,
+    "rollbackPlanReviewed": false,
+    "restoreProcedureReviewed": false,
+    "rollbackOwnerAssigned": false,
+    "restoreExecutionAllowedByThisPacket": false,
+    "readinessStatus": "HOLD"
+  },
+  "seedReadiness": {
+    "seedRequired": false,
+    "seedInventoryReviewed": false,
+    "seedSensitivityReviewed": false,
+    "seedOperatorAssigned": false,
+    "seedExecutionAllowedByThisPacket": false,
+    "readinessStatus": "HOLD"
+  },
+  "dbUserPrivilegeBoundary": {
+    "dbUserCreationExcludedFromThisPacket": true,
+    "dbPrivilegeMutationExcludedFromThisPacket": true,
+    "leastPrivilegePlanReviewed": false,
+    "productionSuperuserCredentialStoredInPublicPacket": false,
+    "readinessStatus": "HOLD"
+  },
+  "appDbConnectionPlanReview": {
+    "appToDbConnectionPlanReviewed": false,
+    "liveConnectionTestAllowedByThisPacket": false,
+    "databaseUrlStoredInPublicPacket": false,
+    "restrictedCredentialReferenceOnly": true,
+    "readinessStatus": "HOLD"
+  },
+  "secretHandling": {
+    "productionSecretStoredInPublicPacket": false,
+    "productionEnvStoredInPublicPacket": false,
+    "databaseUrlStoredInPublicPacket": false,
+    "dbPasswordStoredInPublicPacket": false,
+    "serverCredentialStoredInPublicPacket": false,
+    "realDbTargetStoredInPublicPacket": false,
+    "restrictedSecretReferenceOnly": true,
+    "readinessStatus": "PASS"
+  },
+  "stopConditions": {
+    "stopConditionsRequired": true,
+    "stopOnWrongDbTarget": true,
+    "stopOnBackupCheckpointMissing": true,
+    "stopOnMigrationOrderMismatch": true,
+    "stopOnSecretLeakage": true,
+    "stopOnUnexpectedDbMutation": true,
+    "stopOnUnauthorizedPrivilegeEscalation": true,
+    "stopOnMissingRollbackOwner": true,
+    "stopConditionsReviewed": false,
+    "readinessStatus": "HOLD"
+  },
+  "operatorReviewerApprover": {
+    "dbOperatorAssigned": false,
+    "migrationOperatorAssigned": false,
+    "backupOperatorAssigned": false,
+    "rollbackOwnerAssigned": false,
+    "evidenceReviewerAssigned": false,
+    "humanApproverAssigned": false,
+    "readinessStatus": "HOLD"
+  },
+  "nextStageRecommendation": "SERVER-DEPLOY-R7 DB Deployment Manual Execution Approval",
+  "reviewer": {
+    "name": "",
+    "role": "",
+    "reviewStatus": "PENDING"
+  },
+  "approver": {
+    "name": "",
+    "role": "",
+    "approvalStatus": "HOLD"
+  },
+  "dbDeploymentPreparationExecutionGateDecision": "HOLD",
+  "notes": "R6 records DB deployment preparation readiness only. It does not execute DB deployment or mutate DB/server/runtime/application state."
+}
