@@ -1,0 +1,23 @@
+{
+  "finalVerificationId": "server-deploy-r1-base-runtime-installation-plan-final-verification",
+  "stage": "SERVER-DEPLOY-R1",
+  "status": "COMPLETE",
+  "passMarker": "ONE_SERVER_DEPLOY_R1_BASE_RUNTIME_INSTALLATION_PLAN_PASS",
+  "r14fDependencyStatus": "GO",
+  "runtimeInstallationPlanDecision": "GO",
+  "nextStageRecommendation": "SERVER-DEPLOY-R2 Runtime Installation Execution Packet",
+  "boundaryConfirmation": {
+    "sshExecution": false,
+    "appDbServerConnection": false,
+    "deploymentInstall": false,
+    "runtimeInstallation": false,
+    "backendFrontendNginxPm2DbCommandExecution": false,
+    "buildRestartReload": false,
+    "dbMigrationBackupRestoreSeedUserPrivilegeMutation": false,
+    "appToDbLiveConnectionTest": false,
+    "healthcheckSmokeExecution": false,
+    "frontendBackendRoutesMenuMutation": false,
+    "serverMutation": false
+  },
+  "finalConclusion": "SERVER-DEPLOY-R1 Base Runtime Installation Plan: COMPLETE"
+}

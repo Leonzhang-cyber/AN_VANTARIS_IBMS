@@ -1,0 +1,133 @@
+{
+  "planId": "server-deploy-r1-base-runtime-installation-plan",
+  "stage": "SERVER-DEPLOY-R1",
+  "precheckFinalApprovalReference": "SERVER-PRECHECK-R14F",
+  "deploymentExecutionFinalApprovalDecision": "GO",
+  "passMarker": "ONE_SERVER_DEPLOY_R1_BASE_RUNTIME_INSTALLATION_PLAN_PASS",
+  "baseRuntimeInstallationPerformedByThisPacket": false,
+  "sshExecutedByThisPacket": false,
+  "appServerConnectionPerformed": false,
+  "dbServerConnectionPerformed": false,
+  "osPackageInstallationPerformed": false,
+  "runtimeInstallationPerformed": false,
+  "postgresInstallationPerformed": false,
+  "nginxInstallationPerformed": false,
+  "nodeNpmInstallationPerformed": false,
+  "pythonPipInstallationPerformed": false,
+  "pm2InstallationPerformed": false,
+  "buildPerformed": false,
+  "installPerformed": false,
+  "restartReloadPerformed": false,
+  "dbMigrationPerformed": false,
+  "dbBackupPerformed": false,
+  "dbRestorePerformed": false,
+  "dbSeedPerformed": false,
+  "dbUserCreated": false,
+  "dbPrivilegeMutationPerformed": false,
+  "appToDbLiveConnectionTestPerformed": false,
+  "healthcheckPerformed": false,
+  "smokeTestPerformed": false,
+  "serverMutationPerformed": false,
+  "authMutationPerformed": false,
+  "runtimeMutationPerformed": false,
+  "frontendBackendMutationPerformed": false,
+  "routeMutationPerformed": false,
+  "menuImplementationMutationPerformed": false,
+  "productionConfigMutationPerformed": false,
+  "targetServers": {
+    "appServer": {
+      "serverReference": "RESTRICTED_APP_SERVER_REFERENCE",
+      "environmentName": "RESTRICTED_ENVIRONMENT_REFERENCE",
+      "networkZoneReference": "RESTRICTED_NETWORK_ZONE_REFERENCE",
+      "osFamily": "RESTRICTED_OS_FAMILY_REFERENCE",
+      "osVersionReference": "RESTRICTED_OS_VERSION_REFERENCE",
+      "cpuMemoryDiskReviewed": true,
+      "installationUserReference": "RESTRICTED_INSTALLATION_USER_REFERENCE",
+      "installationWindowReference": "RESTRICTED_INSTALLATION_WINDOW_REFERENCE",
+      "readinessStatus": "PASS"
+    },
+    "dbServer": {
+      "serverReference": "RESTRICTED_DB_SERVER_REFERENCE",
+      "environmentName": "RESTRICTED_ENVIRONMENT_REFERENCE",
+      "networkZoneReference": "RESTRICTED_NETWORK_ZONE_REFERENCE",
+      "osFamily": "RESTRICTED_OS_FAMILY_REFERENCE",
+      "osVersionReference": "RESTRICTED_OS_VERSION_REFERENCE",
+      "cpuMemoryDiskReviewed": true,
+      "installationUserReference": "RESTRICTED_INSTALLATION_USER_REFERENCE",
+      "installationWindowReference": "RESTRICTED_INSTALLATION_WINDOW_REFERENCE",
+      "readinessStatus": "PASS"
+    }
+  },
+  "appRuntimePlan": {
+    "pythonRuntimeRequired": true,
+    "nodeRuntimeRequired": true,
+    "pm2Required": true,
+    "nginxRequired": true,
+    "packageManagerReviewed": true,
+    "runtimeVersionPlanReviewed": true,
+    "installationSourceReviewed": true,
+    "offlineBundleRequired": true,
+    "installationExecutionAllowedByThisPacket": false,
+    "readinessStatus": "PASS"
+  },
+  "dbRuntimePlan": {
+    "postgresqlRequired": true,
+    "postgresqlDirectionConfirmed": true,
+    "databaseUserPlanReviewed": true,
+    "databasePrivilegePlanReviewed": true,
+    "backupToolingPlanReviewed": true,
+    "restoreToolingPlanReviewed": true,
+    "installationSourceReviewed": true,
+    "offlineBundleRequired": true,
+    "installationExecutionAllowedByThisPacket": false,
+    "readinessStatus": "PASS"
+  },
+  "offlineNoDockerPlan": {
+    "offlineModePossible": true,
+    "dockerRequired": false,
+    "noDockerPathReviewed": true,
+    "offlinePackageInventoryRequired": true,
+    "offlineBundleIntegrityCheckRequired": true,
+    "readinessStatus": "PASS"
+  },
+  "backupRollbackStopConditions": {
+    "preInstallationBackupRequired": true,
+    "backupExecutionAllowedByThisPacket": false,
+    "rollbackPlanRequired": true,
+    "rollbackExecutionAllowedByThisPacket": false,
+    "stopConditionsRequired": true,
+    "stopConditionsReviewed": true,
+    "postInstallationVerificationPlanned": true,
+    "readinessStatus": "PASS"
+  },
+  "secretHandling": {
+    "productionSecretStoredInPublicPacket": false,
+    "productionEnvStoredInPublicPacket": false,
+    "databaseUrlStoredInPublicPacket": false,
+    "serverCredentialStoredInPublicPacket": false,
+    "restrictedSecretReferenceOnly": true,
+    "readinessStatus": "PASS"
+  },
+  "operatorApproval": {
+    "installationOperatorAssigned": true,
+    "dbOperatorAssigned": true,
+    "appOperatorAssigned": true,
+    "rollbackOwnerAssigned": true,
+    "approvalWindowDefined": true,
+    "humanApproverAssigned": true,
+    "readinessStatus": "PASS"
+  },
+  "nextStageRecommendation": "SERVER-DEPLOY-R2 Runtime Installation Execution Packet",
+  "reviewer": {
+    "name": "SERVER-DEPLOY-R1 Plan Review Model",
+    "role": "Base Runtime Installation Plan Reviewer",
+    "reviewStatus": "ACCEPTED"
+  },
+  "approver": {
+    "name": "SERVER-DEPLOY-R1 Approval Model",
+    "role": "Base Runtime Installation Plan Approver",
+    "approvalStatus": "GO"
+  },
+  "runtimeInstallationPlanDecision": "GO",
+  "notes": "Plan is complete for R2 handoff. This packet performs no SSH, connection, installation, deployment, migration, healthcheck, smoke test, or mutation."
+}

@@ -575,3 +575,47 @@ SERVER-PRECHECK-R14F records deployment execution approval final verification on
 
 Final conclusion:
 SERVER-PRECHECK-R14F Deployment Execution Approval Final Verification: COMPLETE
+
+## SERVER-DEPLOY-R1 Final Verification / Release Index Update
+
+PASS marker: ONE_SERVER_DEPLOY_R1_BASE_RUNTIME_INSTALLATION_PLAN_PASS
+
+- Source task: SERVER-DEPLOY-R1 Base Runtime Installation Plan
+- Source PASS marker: ONE_SERVER_DEPLOY_R1_BASE_RUNTIME_INSTALLATION_PLAN_PASS
+- Source baseline: d6b2ca2 docs(one): close server precheck r14f deployment approval review
+- Remote branch: sync/ufms-foundation-packages-20260622-104646
+- SERVER-DEPLOY-R1 final local freeze recommendation: ready after local commit
+
+R14F dependency:
+- R14F dependency status: GO
+- deploymentExecutionFinalApprovalDecision: GO
+
+Runtime installation plan:
+- APP Server runtime plan: PASS
+- DB Server runtime plan: PASS
+- PostgreSQL direction confirmation: PASS
+- Offline/no-Docker path confirmation: PASS
+- Backup/rollback/stop condition planning: PASS
+- Restricted secret handling: PASS
+- runtimeInstallationPlanDecision: GO
+- Downstream recommendation: SERVER-DEPLOY-R2 Runtime Installation Execution Packet
+
+Verification:
+- SERVER-DEPLOY-R1 validator PASS
+- No SSH execution
+- No APP/DB server connection
+- No deployment/install
+- No runtime installation
+- No backend/frontend/Nginx/PM2/DB command execution
+- No build/restart/reload
+- No DB migration/backup/restore/seed/user/privilege mutation
+- No APP-to-DB live connection test
+- No healthcheck/smoke execution
+- No frontend/backend/routes/menu mutation
+- No server mutation
+
+Boundary:
+SERVER-DEPLOY-R1 records a base runtime installation plan only. It does not add SSH execution, SSH automation, SSH connection commands, executable shell scripts, APP server connection, DB server connection, OS package installation, runtime installation, PostgreSQL installation, Nginx installation, Node/npm installation, Python/pip installation, PM2 installation, deployment, build execution, install execution, restart/reload execution, DB migration, DB backup execution, DB restore execution, DB seed execution, DB user creation, DB privilege mutation, APP-to-DB live connection testing, healthcheck execution, smoke test execution, server mutation, DB/auth/runtime mutation, frontend mutation, backend mutation, route mutation, menu implementation mutation, production config mutation, production credential public storage, or actual runtime installation by this packet.
+
+Final conclusion:
+SERVER-DEPLOY-R1 Base Runtime Installation Plan: COMPLETE

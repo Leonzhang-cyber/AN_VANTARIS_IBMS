@@ -1,0 +1,23 @@
+{
+  "validationId": "server-deploy-r1-base-runtime-installation-plan-validation",
+  "stage": "SERVER-DEPLOY-R1",
+  "status": "PASS",
+  "validator": "scripts/validation/validate-server-deploy-r1-base-runtime-installation-plan.py",
+  "passMarker": "ONE_SERVER_DEPLOY_R1_BASE_RUNTIME_INSTALLATION_PLAN_PASS",
+  "checks": {
+    "requiredFilesExist": true,
+    "jsonParses": true,
+    "precheckFinalApprovalReferenceCorrect": true,
+    "r14fFinalDecisionGo": true,
+    "executionAndMutationFlagsFalse": true,
+    "targetServersReviewed": true,
+    "appRuntimePlanPass": true,
+    "dbRuntimePlanPass": true,
+    "offlineNoDockerPlanPass": true,
+    "backupRollbackStopConditionsPass": true,
+    "secretHandlingPass": true,
+    "runtimeInstallationPlanDecisionAllowed": true,
+    "passMarkerPresent": true,
+    "noExecutableServerRuntimeAppDbOperationSteps": true
+  }
+}
