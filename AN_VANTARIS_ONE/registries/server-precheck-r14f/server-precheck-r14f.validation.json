@@ -1,0 +1,25 @@
+{
+  "validationId": "server-precheck-r14f-deployment-execution-approval-final-verification-validation",
+  "stage": "SERVER-PRECHECK-R14F",
+  "status": "PASS",
+  "validator": "scripts/validation/validate-server-precheck-r14f-deployment-execution-approval-final-verification.py",
+  "passMarker": "ONE_SERVER_PRECHECK_R14F_DEPLOYMENT_EXECUTION_APPROVAL_FINAL_VERIFICATION_PASS",
+  "checks": {
+    "requiredFilesExist": true,
+    "jsonParses": true,
+    "referencesCorrect": true,
+    "r14PreviousDecisionHold": true,
+    "r13fRuntimeVerificationFinalDecisionGo": true,
+    "executionAndMutationFlagsFalse": true,
+    "evidenceChainFinalReviewPass": true,
+    "dbFinalApprovalReviewPass": true,
+    "appFinalApprovalReviewPass": true,
+    "baseRuntimeInstallationFinalReviewPass": true,
+    "backupRollbackStopConditionFinalReviewPass": true,
+    "secretHandlingFinalReviewPass": true,
+    "humanApprovalFinalReviewPass": true,
+    "deploymentExecutionFinalApprovalDecisionAllowed": true,
+    "passMarkerPresent": true,
+    "noExecutableServerRuntimeAppDbOperationSteps": true
+  }
+}

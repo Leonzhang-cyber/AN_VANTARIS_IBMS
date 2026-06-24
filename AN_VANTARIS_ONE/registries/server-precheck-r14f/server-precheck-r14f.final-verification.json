@@ -1,0 +1,23 @@
+{
+  "finalVerificationId": "server-precheck-r14f-deployment-execution-approval-final-verification-final-verification",
+  "stage": "SERVER-PRECHECK-R14F",
+  "status": "COMPLETE",
+  "passMarker": "ONE_SERVER_PRECHECK_R14F_DEPLOYMENT_EXECUTION_APPROVAL_FINAL_VERIFICATION_PASS",
+  "r13fDependencyStatus": "GO",
+  "r14HoldReevaluationStatus": "COMPLETE",
+  "deploymentExecutionFinalApprovalDecision": "GO",
+  "boundaryConfirmation": {
+    "sshExecution": false,
+    "appDbServerConnection": false,
+    "deploymentInstall": false,
+    "runtimeInstallation": false,
+    "backendFrontendNginxPm2DbCommandExecution": false,
+    "buildRestartReload": false,
+    "dbMigrationBackupRestoreSeedUserPrivilegeMutation": false,
+    "appToDbLiveConnectionTest": false,
+    "healthcheckSmokeExecution": false,
+    "frontendBackendRoutesMenuMutation": false,
+    "serverMutation": false
+  },
+  "finalConclusion": "SERVER-PRECHECK-R14F Deployment Execution Approval Final Verification: COMPLETE"
+}
