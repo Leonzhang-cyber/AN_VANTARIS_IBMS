@@ -283,3 +283,31 @@ SERVER-PRECHECK-R8F records final verification only. It defines a manual observa
 
 Final conclusion:
 SERVER-PRECHECK-R8 Manual Observation Evidence Packet: COMPLETE
+
+## SERVER-PRECHECK-R9F Final Verification / Release Index Update
+
+PASS marker: ONE_SERVER_PRECHECK_R9_ACTUAL_READONLY_OBSERVATION_EVIDENCE_RECORD_PASS
+
+- Source task: SERVER-PRECHECK-R9 Actual Read-only Observation Evidence Record
+- Source PASS marker: ONE_SERVER_PRECHECK_R9_ACTUAL_READONLY_OBSERVATION_EVIDENCE_RECORD_PASS
+- Source baseline: 0f969b4 docs(one): add server precheck r8 observation evidence packet
+- Remote branch: sync/ufms-foundation-packages-20260622-104646
+- R9 final local freeze recommendation: ready after local commit
+
+Verification:
+- SERVER-PRECHECK-R9 validator PASS
+- R8 relationship recorded
+- Release index updated
+- No SSH execution
+- No server mutation
+- No DB/auth/runtime mutation
+- No frontend/backend/routes mutation
+- No deploy/install
+- No production config mutation
+- No actual observation execution by this packet
+
+Boundary:
+SERVER-PRECHECK-R9F records final verification only. It defines an actual read-only observation evidence record for separately approved human observation results and does not add SSH execution, SSH automation, SSH connection commands, executable shell scripts, deployment, install, APP server mutation, DB server mutation, DB migration, auth mutation, runtime mutation, frontend, backend, routes, production config mutation, raw public evidence archive, actual command text storage by default, or actual observation execution by this packet.
+
+Final conclusion:
+SERVER-PRECHECK-R9 Actual Read-only Observation Evidence Record: COMPLETE

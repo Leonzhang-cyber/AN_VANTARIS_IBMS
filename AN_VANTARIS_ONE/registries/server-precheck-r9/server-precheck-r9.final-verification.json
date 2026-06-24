@@ -1,0 +1,36 @@
+{
+  "taskId": "SERVER-PRECHECK-R9F",
+  "sourceTaskId": "SERVER-PRECHECK-R9",
+  "status": "PASS",
+  "passMarker": "ONE_SERVER_PRECHECK_R9_ACTUAL_READONLY_OBSERVATION_EVIDENCE_RECORD_PASS",
+  "sourcePassMarker": "ONE_SERVER_PRECHECK_R9_ACTUAL_READONLY_OBSERVATION_EVIDENCE_RECORD_PASS",
+  "sourceBaseline": {
+    "shortHash": "0f969b4",
+    "message": "docs(one): add server precheck r8 observation evidence packet"
+  },
+  "boundaries": {
+    "sshExecutionAllowed": false,
+    "sshAutomationAllowed": false,
+    "sshConnectionCommandIncluded": false,
+    "executableScriptAllowed": false,
+    "deploymentAllowed": false,
+    "installAllowed": false,
+    "appServerMutationAllowed": false,
+    "dbServerMutationAllowed": false,
+    "dbMigrationAllowed": false,
+    "authMutationAllowed": false,
+    "runtimeMutationAllowed": false,
+    "frontendChanged": false,
+    "backendChanged": false,
+    "routesChanged": false,
+    "productionConfigMutationAllowed": false,
+    "actualObservationExecutionByThisPacketAllowed": false
+  },
+  "verification": {
+    "serverPrecheckR9ValidatorPass": true,
+    "r8RelationshipRecorded": true,
+    "releaseIndexUpdated": true,
+    "finalLocalFreezeRecommended": true
+  },
+  "conclusion": "SERVER-PRECHECK-R9 Actual Read-only Observation Evidence Record: COMPLETE"
+}
