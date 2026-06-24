@@ -1,0 +1,48 @@
+{
+  "taskId": "SERVER-PRECHECK-R6F",
+  "sourceTaskId": "SERVER-PRECHECK-R6",
+  "status": "PASS",
+  "passMarker": "ONE_SERVER_PRECHECK_R6F_FINAL_VERIFICATION_AND_RELEASE_INDEX_UPDATE_PASS",
+  "sourcePassMarker": "ONE_SERVER_PRECHECK_R6_MANUAL_READONLY_OBSERVATION_SCRIPT_PACK_PASS",
+  "commit": {
+    "shortHash": "a4a9bba",
+    "message": "docs(one): add server precheck r6 manual observation pack",
+    "fullHash": "a4a9bbab3ad0c39be74c31c771bf950873962120"
+  },
+  "remote": {
+    "branch": "sync/ufms-foundation-packages-20260622-104646",
+    "head": "a4a9bbab3ad0c39be74c31c771bf950873962120"
+  },
+  "tag": {
+    "name": "server-precheck-r6-manual-readonly-observation-pack-local-freeze-20260624",
+    "tagObject": "787d6def3b134c69139ce45626b517031ded0e7e",
+    "target": "a4a9bbab3ad0c39be74c31c771bf950873962120"
+  },
+  "boundaries": {
+    "sshExecutionAllowed": false,
+    "sshAutomationAllowed": false,
+    "sshConnectionCommandIncluded": false,
+    "executableScriptAllowed": false,
+    "deploymentAllowed": false,
+    "installAllowed": false,
+    "dbMutationAllowed": false,
+    "authMutationAllowed": false,
+    "secretsMutationAllowed": false,
+    "runtimeActionAllowed": false,
+    "frontendChanged": false,
+    "backendChanged": false,
+    "routesChanged": false,
+    "menuGaR1Changed": false,
+    "menuGaR2Changed": false,
+    "serverPrecheckR4Changed": false,
+    "serverPrecheckR5Changed": false
+  },
+  "verification": {
+    "serverPrecheckR6ValidatorPass": true,
+    "serverPrecheckR5ValidatorPass": true,
+    "serverPrecheckR4ValidatorPass": true,
+    "remoteBranchVerified": true,
+    "remoteTagVerified": true,
+    "releaseIndexUpdated": true
+  }
+}

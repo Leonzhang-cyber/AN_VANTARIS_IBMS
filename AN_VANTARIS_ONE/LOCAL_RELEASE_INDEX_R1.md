@@ -207,3 +207,27 @@ SERVER-PRECHECK-R5F records final verification only. It does not add SSH executi
 
 Next task if approved:
 SERVER-PRECHECK-R6 Manual Read-only Observation Script Pack
+
+## SERVER-PRECHECK-R6F Final Verification / Release Index Update
+
+PASS marker: ONE_SERVER_PRECHECK_R6F_FINAL_VERIFICATION_AND_RELEASE_INDEX_UPDATE_PASS
+
+- Source task: SERVER-PRECHECK-R6 Manual Read-only Observation Script Pack
+- Source PASS marker: ONE_SERVER_PRECHECK_R6_MANUAL_READONLY_OBSERVATION_SCRIPT_PACK_PASS
+- SERVER-PRECHECK-R6 commit: a4a9bba docs(one): add server precheck r6 manual observation pack
+- Remote branch: sync/ufms-foundation-packages-20260622-104646
+- Remote HEAD: a4a9bbab3ad0c39be74c31c771bf950873962120
+- Freeze tag: server-precheck-r6-manual-readonly-observation-pack-local-freeze-20260624
+- Tag object: 787d6def3b134c69139ce45626b517031ded0e7e
+- Tag target: a4a9bbab3ad0c39be74c31c771bf950873962120
+
+Verification:
+- SERVER-PRECHECK-R6 validator PASS
+- SERVER-PRECHECK-R5 validator PASS
+- SERVER-PRECHECK-R4 validator PASS
+- Remote branch verified
+- Remote tag verified
+- Release index updated
+
+Boundary:
+SERVER-PRECHECK-R6F records final verification only. It does not add SSH execution, SSH automation, SSH connection commands, executable shell scripts, deployment, install, DB, auth, secrets, credentials, frontend, backend, routes, MENU-GA-R1, MENU-GA-R2, SERVER-PRECHECK-R4 mutation, SERVER-PRECHECK-R5 mutation, or runtime behavior.
