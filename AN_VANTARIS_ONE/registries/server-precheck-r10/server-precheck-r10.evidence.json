@@ -1,0 +1,82 @@
+{
+  "gateId": "server-precheck-r10-deployment-readiness-gate",
+  "stage": "SERVER-PRECHECK-R10",
+  "approvalReference": "SERVER-PRECHECK-R7",
+  "manualEvidencePacketReference": "SERVER-PRECHECK-R8",
+  "actualObservationEvidenceReference": "SERVER-PRECHECK-R9",
+  "passMarker": "ONE_SERVER_PRECHECK_R10_DEPLOYMENT_READINESS_GATE_PASS",
+  "deploymentPerformedByThisPacket": false,
+  "sshExecutedByThisPacket": false,
+  "serverMutationPerformed": false,
+  "dbMutationPerformed": false,
+  "dbMigrationPerformed": false,
+  "dbBackupPerformed": false,
+  "dbRestorePerformed": false,
+  "authMutationPerformed": false,
+  "runtimeMutationPerformed": false,
+  "frontendBackendMutationPerformed": false,
+  "installPerformed": false,
+  "evidenceChainStatus": "PENDING",
+  "appServerReadiness": {
+    "targetServerReference": "",
+    "runtimePrerequisitesReviewed": false,
+    "environmentVariablesReviewed": false,
+    "nginxPrerequisitesReviewed": false,
+    "pm2PrerequisitesReviewed": false,
+    "diskCapacityReviewed": false,
+    "portPlanReviewed": false,
+    "logPathPlanReviewed": false,
+    "pythonNodeRuntimeAssumptionsDocumented": false,
+    "permissionBoundaryReviewed": false,
+    "deploymentPackageSourceReviewed": false,
+    "readinessStatus": "HOLD"
+  },
+  "dbServerReadiness": {
+    "targetServerReference": "",
+    "postgresPrerequisitesReviewed": false,
+    "databaseUserPlanReviewed": false,
+    "schemaMigrationPlanReviewed": false,
+    "seedPlanReviewed": false,
+    "backupPlanReviewed": false,
+    "rollbackPlanReviewed": false,
+    "diskCapacityReviewed": false,
+    "accessBoundaryReviewed": false,
+    "appToDbConnectionPlanReviewed": false,
+    "readinessStatus": "HOLD"
+  },
+  "backupRollbackReadiness": {
+    "backupRequiredBeforeDeployment": true,
+    "backupExecutionAllowedByThisPacket": false,
+    "rollbackPlanRequired": true,
+    "rollbackExecutionAllowedByThisPacket": false,
+    "backupEvidenceReference": "",
+    "rollbackEvidenceReference": "",
+    "readinessStatus": "HOLD"
+  },
+  "secretHandlingReadiness": {
+    "secretsStoredInPublicPacket": false,
+    "productionEnvStoredInPublicPacket": false,
+    "credentialRotationRequired": false,
+    "restrictedSecretReferenceOnly": true,
+    "readinessStatus": "HOLD"
+  },
+  "consoleGaVerificationDependency": {
+    "required": true,
+    "plannedStage": "SERVER-PRECHECK-R13",
+    "runtimeVerificationCompleted": false,
+    "menuArchitectureBaselineReference": "MENU-GA-R1/R2",
+    "readinessStatus": "HOLD"
+  },
+  "reviewer": {
+    "name": "",
+    "role": "",
+    "reviewStatus": "PENDING"
+  },
+  "approver": {
+    "name": "",
+    "role": "",
+    "approvalStatus": "HOLD"
+  },
+  "gateDecision": "HOLD",
+  "notes": ""
+}
