@@ -1,39 +1,72 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, reactive, ref } from 'vue'
 import { ApiError } from '@/services/api/errors'
-import { getUmmsGaR2Workspace, type UmmsGaR2Workspace } from '@/services/api/umms'
+import { getUmmsGaR2Workspace, type UmmsGaR2Workspace, type UmmsGaR2WorkOrder } from '@/services/api/umms'
 
 const tabs = [
   'Overview',
   'Work Orders',
-  'Task Board',
-  'Maintenance Plans',
-  'Engineer Dispatch',
-  'Asset Context',
-  'Event Context',
-  'Evidence Linkage',
+  'Preventive',
+  'Predictive',
+  'Assignments',
+  'SLA & Aging',
+  'Evidence',
   'Reports',
-  'Customer Acceptance',
-  'Role Views',
-  'Guardrails',
 ]
 
 const loading = ref(false)
 const apiError = ref('')
 const activeTab = ref('Overview')
 const workspace = ref<UmmsGaR2Workspace | null>(null)
+const reportToast = ref('')
 
-const statusBadges = computed(() => {
-  const data = workspace.value
-  if (!data) return []
-  return [
-    'Production Demo Ready',
-    'Read-only Mode',
-    'Not POC',
-    data.capability,
-    data.visualStyle,
-  ]
+const filters = reactive({
+  status: '',
+  priority: '',
+  system: '',
+  engineer: '',
+  slaRisk: '',
 })
+
+const statusOptions = computed(() => uniqueValues('status'))
+const priorityOptions = computed(() => uniqueValues('priority'))
+const systemOptions = computed(() => uniqueValues('systemName'))
+const engineerOptions = computed(() => uniqueValues('assignedEngineer'))
+const slaRiskOptions = computed(() => uniqueValues('slaRisk'))
+
+const filteredWorkOrders = computed(() => {
+  const rows = workspace.value?.workOrders ?? []
+  return rows.filter((row) => {
+    return (!filters.status || row.status === filters.status)
+      && (!filters.priority || row.priority === filters.priority)
+      && (!filters.system || row.systemName === filters.system)
+      && (!filters.engineer || row.assignedEngineer === filters.engineer)
+      && (!filters.slaRisk || row.slaRisk === filters.slaRisk)
+  })
+})
+
+const assignmentRows = computed(() => workspace.value?.engineerDispatch ?? [])
+const preventiveRows = computed(() => workspace.value?.preventiveMaintenancePlans ?? [])
+const predictiveRows = computed(() => workspace.value?.predictiveMaintenance ?? [])
+const evidenceRows = computed(() => workspace.value?.evidenceTimeline ?? [])
+const reportRows = computed(() => workspace.value?.reportLinkage ?? [])
+
+function uniqueValues(field: keyof UmmsGaR2WorkOrder): string[] {
+  const rows = workspace.value?.workOrders ?? []
+  return [...new Set(rows.map((row) => String(row[field] ?? '')).filter(Boolean))].sort()
+}
+
+function tagType(value: string): 'success' | 'warning' | 'danger' | 'info' | 'primary' {
+  const normalized = value.toLowerCase()
+  if (normalized.includes('critical') || normalized.includes('overdue') || normalized.includes('at risk')) return 'danger'
+  if (normalized.includes('high') || normalized.includes('due today') || normalized.includes('watch')) return 'warning'
+  if (normalized.includes('closed') || normalized.includes('normal') || normalized.includes('on track')) return 'success'
+  return 'info'
+}
+
+function openReport(report: string) {
+  reportToast.value = `${report} view prepared for read-only review.`
+}
 
 async function loadWorkspace() {
   loading.value = true
@@ -53,17 +86,18 @@ onMounted(() => {
 </script>
 
 <template>
-  <section class="umms-r2-page" v-loading="loading">
+  <section class="umms-page" v-loading="loading">
     <header class="workspace-head">
       <div>
-        <p class="eyebrow">Work Management / Maintenance capability</p>
-        <h1>UMMS Production-grade Maintenance Workspace</h1>
+        <p class="eyebrow">Work Management / Maintenance</p>
+        <h1>{{ workspace?.workspaceTitle || 'UMMS Maintenance Workspace' }}</h1>
         <p class="summary">
-          Read-only customer demo readiness for work orders, task dispatch, maintenance plans, evidence, reports, and role views.
+          Customer-facing maintenance command workspace for work orders, asset context, SLA risk, assignments, evidence, and reporting.
         </p>
       </div>
-      <div class="badge-stack">
-        <el-tag v-for="badge in statusBadges" :key="badge" effect="light" round>{{ badge }}</el-tag>
+      <div class="head-badges">
+        <el-tag type="success" effect="light">Read-only</el-tag>
+        <el-tag type="info" effect="light">{{ workspace?.capability || 'Maintenance operations' }}</el-tag>
       </div>
     </header>
 
@@ -77,7 +111,7 @@ onMounted(() => {
     />
 
     <template v-if="workspace">
-      <section class="overview-grid section-gap">
+      <section class="summary-grid section-gap">
         <article v-for="card in workspace.overviewCards" :key="card.label" class="metric-card">
           <span>{{ card.label }}</span>
           <strong>{{ card.value }}</strong>
@@ -85,174 +119,224 @@ onMounted(() => {
         </article>
       </section>
 
-      <section class="section-gap context-strip">
+      <section class="metadata-strip section-gap">
         <div>
-          <span>Future controlled action path</span>
-          <strong>{{ workspace.futureExecutionPath }}</strong>
+          <span>L1 / L2</span>
+          <strong>{{ workspace.menu.l1 }} / {{ workspace.menu.l2.join(', ') }}</strong>
         </div>
         <div>
-          <span>Server planning</span>
-          <strong>{{ workspace.appNonDbTarget }} app / {{ workspace.dbOnlyTarget }} DB-only</strong>
+          <span>L3 content tabs</span>
+          <strong>{{ tabs.join(' · ') }}</strong>
         </div>
       </section>
 
       <el-tabs v-model="activeTab" type="card" class="section-gap workspace-tabs">
         <el-tab-pane v-for="tab in tabs" :key="tab" :label="tab" :name="tab">
           <template v-if="tab === 'Overview'">
-            <div class="section-title">Maintenance Overview</div>
-            <el-descriptions :column="3" border>
-              <el-descriptions-item label="scope">{{ workspace.scope }}</el-descriptions-item>
-              <el-descriptions-item label="mode">{{ workspace.mode }}</el-descriptions-item>
-              <el-descriptions-item label="readiness">{{ workspace.readinessLevel }}</el-descriptions-item>
-              <el-descriptions-item label="productionDemoReady">{{ workspace.productionDemoReady }}</el-descriptions-item>
-              <el-descriptions-item label="poc">{{ workspace.poc }}</el-descriptions-item>
-              <el-descriptions-item label="temporaryDemo">{{ workspace.temporaryDemo }}</el-descriptions-item>
-            </el-descriptions>
+            <div class="two-column">
+              <section class="panel">
+                <h2>Work Order Status</h2>
+                <div v-for="item in workspace.statusDistribution" :key="item.key" class="bar-row">
+                  <span>{{ item.key }}</span>
+                  <strong>{{ item.count }}</strong>
+                </div>
+              </section>
+              <section class="panel">
+                <h2>Priority Distribution</h2>
+                <div v-for="item in workspace.priorityDistribution" :key="item.key" class="bar-row">
+                  <span>{{ item.key }}</span>
+                  <el-tag :type="tagType(item.key)">{{ item.count }}</el-tag>
+                </div>
+              </section>
+            </div>
+
+            <div class="two-column section-gap">
+              <section class="panel">
+                <h2>SLA Risk List</h2>
+                <div v-for="item in workspace.slaRiskList" :key="item.workOrderId" class="risk-row">
+                  <div>
+                    <strong>{{ item.workOrderId }}</strong>
+                    <span>{{ item.title }}</span>
+                  </div>
+                  <el-tag :type="tagType(item.risk)">{{ item.risk }}</el-tag>
+                </div>
+              </section>
+              <section class="panel">
+                <h2>Fault-to-WorkOrder Conversion</h2>
+                <el-descriptions :column="2" border>
+                  <el-descriptions-item label="Detected faults">{{ workspace.faultToWorkOrderConversion.detectedFaults }}</el-descriptions-item>
+                  <el-descriptions-item label="Converted work orders">{{ workspace.faultToWorkOrderConversion.convertedWorkOrders }}</el-descriptions-item>
+                  <el-descriptions-item label="Conversion rate">{{ workspace.faultToWorkOrderConversion.conversionRate }}</el-descriptions-item>
+                  <el-descriptions-item label="Top source">{{ workspace.faultToWorkOrderConversion.topSource }}</el-descriptions-item>
+                </el-descriptions>
+              </section>
+            </div>
+
+            <section class="panel section-gap">
+              <h2>Top Affected Systems</h2>
+              <el-table :data="workspace.topAffectedSystems" stripe border>
+                <el-table-column prop="systemName" label="System" min-width="160" />
+                <el-table-column prop="openWorkOrders" label="Open Work Orders" min-width="160" />
+                <el-table-column prop="criticality" label="Criticality" min-width="140" />
+                <el-table-column prop="topAsset" label="Top Asset" min-width="220" />
+              </el-table>
+            </section>
+
+            <section class="panel section-gap">
+              <h2>Latest Maintenance Activities</h2>
+              <div v-for="item in workspace.latestActivities" :key="`${item.time}-${item.workOrderId}`" class="timeline-row">
+                <span>{{ item.time }}</span>
+                <strong>{{ item.actor }}</strong>
+                <p>{{ item.action }} · {{ item.workOrderId }} · {{ item.evidenceRef }}</p>
+              </div>
+            </section>
           </template>
 
           <template v-else-if="tab === 'Work Orders'">
-            <div class="section-title">Work Order Management</div>
-            <el-table :data="workspace.workOrders" stripe border>
-              <el-table-column prop="workOrderId" label="Work Order" min-width="160" />
-              <el-table-column prop="title" label="Title" min-width="240" />
-              <el-table-column prop="maintenanceType" label="Type" min-width="150" />
-              <el-table-column prop="status" label="Status" min-width="150" />
-              <el-table-column prop="priority" label="Priority" min-width="120" />
-              <el-table-column prop="assignedEngineer" label="Engineer" min-width="160" />
-              <el-table-column prop="linkedUcdeEvidence" label="UCDE Evidence" min-width="170" />
-              <el-table-column prop="linkedUhmiPanel" label="UHMI Linkage" min-width="220" />
-              <el-table-column prop="readOnly" label="Read-only" min-width="120" />
-            </el-table>
-          </template>
-
-          <template v-else-if="tab === 'Task Board'">
-            <div class="section-title">Maintenance Task Board</div>
-            <el-table :data="workspace.maintenanceTasks" stripe border>
-              <el-table-column prop="taskId" label="Task" min-width="160" />
-              <el-table-column prop="taskName" label="Task Name" min-width="240" />
-              <el-table-column prop="workOrderId" label="Work Order" min-width="160" />
-              <el-table-column prop="engineer" label="Engineer" min-width="150" />
-              <el-table-column prop="role" label="Role" min-width="120" />
-              <el-table-column prop="checklistStatus" label="Checklist" min-width="170" />
-              <el-table-column prop="evidenceRequired" label="Evidence Required" min-width="220" />
-              <el-table-column prop="readOnly" label="Read-only" min-width="120" />
-            </el-table>
-          </template>
-
-          <template v-else-if="tab === 'Maintenance Plans'">
-            <div class="section-title">Preventive Maintenance Plan</div>
-            <el-table :data="workspace.preventiveMaintenancePlans" stripe border>
-              <el-table-column prop="planId" label="Plan" min-width="150" />
-              <el-table-column prop="planName" label="Plan Name" min-width="230" />
-              <el-table-column prop="systemName" label="System" min-width="190" />
-              <el-table-column prop="assetGroup" label="Asset Group" min-width="160" />
-              <el-table-column prop="frequency" label="Frequency" min-width="130" />
-              <el-table-column prop="nextDueDate" label="Next Due" min-width="140" />
-              <el-table-column prop="complianceStatus" label="Compliance" min-width="150" />
-            </el-table>
-            <div class="section-title inner-title">Corrective Maintenance Flow</div>
-            <el-table :data="workspace.correctiveMaintenanceFlow" stripe border>
-              <el-table-column prop="flowId" label="Flow" min-width="150" />
-              <el-table-column prop="triggerEvent" label="Trigger Event" min-width="160" />
-              <el-table-column prop="linkedAsset" label="Asset" min-width="170" />
-              <el-table-column prop="diagnosticStep" label="Diagnostic Step" min-width="260" />
-              <el-table-column prop="approvalBoundary" label="Approval Boundary" min-width="260" />
-            </el-table>
-          </template>
-
-          <template v-else-if="tab === 'Engineer Dispatch'">
-            <div class="section-title">Engineer Dispatch</div>
-            <el-table :data="workspace.engineerDispatch" stripe border>
-              <el-table-column prop="engineerId" label="Engineer ID" min-width="140" />
-              <el-table-column prop="engineerName" label="Engineer" min-width="170" />
-              <el-table-column prop="availability" label="Availability" min-width="140" />
-              <el-table-column prop="siteZone" label="Site Zone" min-width="160" />
-              <el-table-column prop="role" label="Role" min-width="130" />
-              <el-table-column prop="shift" label="Shift" min-width="120" />
-              <el-table-column prop="readOnly" label="Read-only" min-width="120" />
-            </el-table>
-          </template>
-
-          <template v-else-if="tab === 'Asset Context'">
-            <div class="section-title">Asset Maintenance Context</div>
-            <el-table :data="workspace.assetContext" stripe border>
-              <el-table-column prop="assetId" label="Asset ID" min-width="160" />
+            <section class="filter-strip">
+              <el-select v-model="filters.status" clearable placeholder="Status">
+                <el-option v-for="item in statusOptions" :key="item" :label="item" :value="item" />
+              </el-select>
+              <el-select v-model="filters.priority" clearable placeholder="Priority">
+                <el-option v-for="item in priorityOptions" :key="item" :label="item" :value="item" />
+              </el-select>
+              <el-select v-model="filters.system" clearable placeholder="System">
+                <el-option v-for="item in systemOptions" :key="item" :label="item" :value="item" />
+              </el-select>
+              <el-select v-model="filters.engineer" clearable placeholder="Assigned Engineer">
+                <el-option v-for="item in engineerOptions" :key="item" :label="item" :value="item" />
+              </el-select>
+              <el-select v-model="filters.slaRisk" clearable placeholder="SLA Risk">
+                <el-option v-for="item in slaRiskOptions" :key="item" :label="item" :value="item" />
+              </el-select>
+            </section>
+            <el-table :data="filteredWorkOrders" stripe border class="section-gap">
+              <el-table-column prop="workOrderId" label="WO ID" min-width="150" fixed />
+              <el-table-column prop="title" label="Title" min-width="280" />
+              <el-table-column prop="sourceFault" label="Source Fault / Alarm" min-width="220" />
               <el-table-column prop="assetName" label="Asset" min-width="190" />
-              <el-table-column prop="systemName" label="System" min-width="190" />
-              <el-table-column prop="category" label="Category" min-width="130" />
-              <el-table-column prop="location" label="Location" min-width="190" />
-              <el-table-column prop="zone" label="Zone" min-width="100" />
-              <el-table-column prop="readOnly" label="Read-only" min-width="120" />
-            </el-table>
-          </template>
-
-          <template v-else-if="tab === 'Event Context'">
-            <div class="section-title">Event / Fault Context</div>
-            <el-table :data="workspace.eventContext" stripe border>
-              <el-table-column prop="eventId" label="Event" min-width="150" />
-              <el-table-column prop="severity" label="Severity" min-width="120" />
-              <el-table-column prop="sourceSystem" label="Source" min-width="180" />
-              <el-table-column prop="linkedAsset" label="Asset" min-width="190" />
-              <el-table-column prop="linkedWorkOrder" label="Work Order" min-width="170" />
-              <el-table-column prop="evidenceLinked" label="Evidence" min-width="150" />
-              <el-table-column prop="status" label="Status" min-width="150" />
-            </el-table>
-          </template>
-
-          <template v-else-if="tab === 'Evidence Linkage'">
-            <div class="section-title">UCDE Evidence Linkage</div>
-            <el-table :data="workspace.evidenceLinkage" stripe border>
-              <el-table-column prop="linkage" label="Linkage" min-width="220" />
-              <el-table-column prop="coverage" label="Coverage" min-width="320" />
-              <el-table-column prop="readOnly" label="Read-only" min-width="120" />
-            </el-table>
-            <p class="linkage-note">UHMI Linkage remains read-only through panel context and evidence snapshots.</p>
-          </template>
-
-          <template v-else-if="tab === 'Reports'">
-            <div class="section-title">Reports Linkage</div>
-            <el-table :data="workspace.reportLinkage" stripe border>
-              <el-table-column prop="report" label="Report" min-width="260" />
+              <el-table-column prop="systemName" label="System" min-width="150" />
+              <el-table-column prop="location" label="Location" min-width="240" />
+              <el-table-column label="Priority" min-width="120">
+                <template #default="{ row }"><el-tag :type="tagType(row.priority)">{{ row.priority }}</el-tag></template>
+              </el-table-column>
               <el-table-column prop="status" label="Status" min-width="140" />
-              <el-table-column prop="readOnly" label="Read-only" min-width="120" />
+              <el-table-column prop="slaDue" label="SLA Due" min-width="170" />
+              <el-table-column prop="assignedEngineer" label="Assigned Engineer" min-width="170" />
+              <el-table-column prop="createdTime" label="Created Time" min-width="170" />
+              <el-table-column prop="evidenceCount" label="Evidence Count" min-width="140" />
             </el-table>
           </template>
 
-          <template v-else-if="tab === 'Customer Acceptance'">
-            <div class="section-title">Customer Acceptance View</div>
-            <el-descriptions :column="2" border>
-              <el-descriptions-item label="Decision">{{ workspace.customerAcceptance.decision }}</el-descriptions-item>
-              <el-descriptions-item label="Maintenance overview">{{ workspace.customerAcceptance.maintenanceOverview }}</el-descriptions-item>
-              <el-descriptions-item label="Evidence summary">{{ workspace.customerAcceptance.evidenceSummary }}</el-descriptions-item>
-              <el-descriptions-item label="Report snapshot">{{ workspace.customerAcceptance.reportSnapshot }}</el-descriptions-item>
-            </el-descriptions>
+          <template v-else-if="tab === 'Preventive'">
+            <el-table :data="preventiveRows" stripe border>
+              <el-table-column prop="planId" label="Plan" min-width="160" />
+              <el-table-column prop="planName" label="Scheduled PM Task" min-width="260" />
+              <el-table-column prop="frequency" label="Frequency" min-width="130" />
+              <el-table-column prop="nextDueDate" label="Next Due Date" min-width="160" />
+              <el-table-column prop="assetGroup" label="Asset / System" min-width="220" />
+              <el-table-column prop="systemName" label="System" min-width="170" />
+              <el-table-column prop="complianceStatus" label="Compliance Status" min-width="170" />
+              <el-table-column prop="checklistReadiness" label="Checklist Readiness" min-width="190" />
+            </el-table>
           </template>
 
-          <template v-else-if="tab === 'Role Views'">
-            <div class="section-title">Role-based Views</div>
-            <div class="role-grid">
-              <article v-for="(items, role) in workspace.roleViews" :key="role" class="role-card">
-                <h3>{{ role }}</h3>
-                <ul>
-                  <li v-for="item in items" :key="item">{{ item }}</li>
-                </ul>
-              </article>
+          <template v-else-if="tab === 'Predictive'">
+            <el-table :data="predictiveRows" stripe border>
+              <el-table-column prop="predictionId" label="Prediction" min-width="160" />
+              <el-table-column prop="assetName" label="Asset" min-width="210" />
+              <el-table-column prop="systemName" label="System" min-width="160" />
+              <el-table-column prop="location" label="Location" min-width="220" />
+              <el-table-column prop="failureRisk" label="Predicted Failure Risk" min-width="190" />
+              <el-table-column prop="healthScore" label="Asset Health Score" min-width="170" />
+              <el-table-column prop="trendSummary" label="Trend / Anomaly Summary" min-width="260" />
+              <el-table-column prop="recommendedAction" label="Recommended Action" min-width="260" />
+              <el-table-column prop="confidence" label="Confidence" min-width="130" />
+              <el-table-column prop="severity" label="Severity" min-width="120" />
+            </el-table>
+          </template>
+
+          <template v-else-if="tab === 'Assignments'">
+            <el-table :data="assignmentRows" stripe border>
+              <el-table-column prop="engineerName" label="Engineer" min-width="180" />
+              <el-table-column prop="activeWorkOrders" label="Assigned Work Orders" min-width="190" />
+              <el-table-column prop="skill" label="Skill / Discipline" min-width="220" />
+              <el-table-column prop="availability" label="Shift Availability" min-width="180" />
+              <el-table-column prop="siteZone" label="Zone" min-width="180" />
+              <el-table-column prop="shift" label="Shift" min-width="140" />
+              <el-table-column prop="escalationOwner" label="Escalation Owner" min-width="190" />
+            </el-table>
+          </template>
+
+          <template v-else-if="tab === 'SLA & Aging'">
+            <div class="two-column">
+              <section class="panel">
+                <h2>Aging Buckets</h2>
+                <div v-for="item in workspace.slaAging.agingBuckets" :key="item.key" class="bar-row">
+                  <span>{{ item.key }}</span>
+                  <strong>{{ item.count }}</strong>
+                </div>
+              </section>
+              <section class="panel">
+                <h2>MTTR / Response</h2>
+                <div class="large-metric">{{ workspace.slaAging.mttrHours }}h</div>
+                <p>Average MTTR</p>
+                <div class="large-metric small">{{ workspace.slaAging.averageResponseMinutes }}m</div>
+                <p>Average response time</p>
+              </section>
             </div>
+            <section class="panel section-gap">
+              <h2>Due Soon / Overdue</h2>
+              <el-table :data="[...workspace.slaAging.dueSoon, ...workspace.slaAging.overdue]" stripe border>
+                <el-table-column prop="workOrderId" label="Work Order" min-width="150" />
+                <el-table-column prop="title" label="Title" min-width="280" />
+                <el-table-column prop="priority" label="Priority" min-width="120" />
+                <el-table-column prop="slaDue" label="SLA Due" min-width="170" />
+                <el-table-column prop="owner" label="Owner" min-width="170" />
+                <el-table-column prop="risk" label="Risk" min-width="140" />
+              </el-table>
+            </section>
+          </template>
+
+          <template v-else-if="tab === 'Evidence'">
+            <section class="panel">
+              <h2>Work Order Evidence Timeline</h2>
+              <div v-for="item in evidenceRows" :key="`${item.time}-${item.workOrderId}`" class="evidence-row">
+                <div>
+                  <strong>{{ item.time }} · {{ item.workOrderId }}</strong>
+                  <p>Fault source: {{ item.faultSource }}</p>
+                  <p>Operator action: {{ item.operatorAction }}</p>
+                  <p>Engineer update: {{ item.engineerUpdate }}</p>
+                </div>
+                <div>
+                  <el-tag type="info">{{ item.attachmentReference }}</el-tag>
+                  <el-tag type="success">{{ item.approvalClosureRecord }}</el-tag>
+                </div>
+              </div>
+            </section>
           </template>
 
           <template v-else>
-            <div class="section-title">Guardrails</div>
-            <div class="guardrail-grid">
-              <el-tag v-for="item in workspace.guardrails" :key="item" type="info" effect="light" round>{{ item }}</el-tag>
-            </div>
-            <el-descriptions class="inner-title" :column="3" border>
-              <el-descriptions-item label="No Work Order Write">{{ workspace.workOrderWrite }}</el-descriptions-item>
-              <el-descriptions-item label="No DB Write">{{ workspace.dbWrite }}</el-descriptions-item>
-              <el-descriptions-item label="No Runtime Activation">{{ workspace.runtimeActivation }}</el-descriptions-item>
-              <el-descriptions-item label="No Direct Device Control">{{ workspace.deviceControl }}</el-descriptions-item>
-              <el-descriptions-item label="No EDGE Command Execution">{{ workspace.edgeCommandExecution }}</el-descriptions-item>
-              <el-descriptions-item label="No LINK Command Execution">{{ workspace.linkCommandExecution }}</el-descriptions-item>
-            </el-descriptions>
+            <el-alert
+              v-if="reportToast"
+              type="success"
+              :closable="false"
+              show-icon
+              :title="reportToast"
+              class="report-alert"
+            />
+            <el-table :data="reportRows" stripe border>
+              <el-table-column prop="report" label="Report" min-width="260" />
+              <el-table-column prop="coverage" label="Coverage" min-width="320" />
+              <el-table-column prop="status" label="Status" min-width="150" />
+              <el-table-column label="Entry" min-width="180">
+                <template #default="{ row }">
+                  <el-button type="primary" size="small" @click="openReport(row.report)">
+                    {{ row.actionLabel }}
+                  </el-button>
+                </template>
+              </el-table-column>
+            </el-table>
           </template>
         </el-tab-pane>
       </el-tabs>
@@ -261,11 +345,11 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.umms-r2-page {
+.umms-page {
   min-height: 100%;
   padding: 20px;
-  background: #f4fbf8;
-  color: #203331;
+  background: #f5f8f7;
+  color: #1e2d2b;
 }
 
 .workspace-head {
@@ -273,10 +357,10 @@ onMounted(() => {
   justify-content: space-between;
   gap: 20px;
   padding: 20px;
-  border: 1px solid #d6ebe5;
+  border: 1px solid #dbe6e2;
   border-radius: 8px;
   background: #ffffff;
-  box-shadow: 0 12px 28px rgb(34 82 73 / 8%);
+  box-shadow: 0 10px 24px rgb(38 65 58 / 8%);
 }
 
 .workspace-head h1 {
@@ -288,10 +372,10 @@ onMounted(() => {
 
 .eyebrow,
 .summary,
-.context-strip span,
+.metadata-strip span,
 .metric-card span {
   margin: 0;
-  color: #647b76;
+  color: #60736f;
 }
 
 .eyebrow {
@@ -301,11 +385,10 @@ onMounted(() => {
 }
 
 .summary {
-  max-width: 760px;
+  max-width: 780px;
 }
 
-.badge-stack,
-.guardrail-grid {
+.head-badges {
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
@@ -317,20 +400,20 @@ onMounted(() => {
   margin-top: 16px;
 }
 
-.overview-grid {
+.summary-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 12px;
 }
 
 .metric-card,
-.role-card,
-.context-strip,
-.workspace-tabs {
-  border: 1px solid #d6ebe5;
+.metadata-strip,
+.workspace-tabs,
+.panel {
+  border: 1px solid #dbe6e2;
   border-radius: 8px;
   background: #ffffff;
-  box-shadow: 0 10px 24px rgb(34 82 73 / 7%);
+  box-shadow: 0 8px 20px rgb(38 65 58 / 6%);
 }
 
 .metric-card {
@@ -340,24 +423,24 @@ onMounted(() => {
 .metric-card strong {
   display: block;
   margin: 8px 0 4px;
-  color: #007f73;
+  color: #087467;
   font-size: 26px;
   line-height: 1;
 }
 
 .metric-card em {
-  color: #26796f;
+  color: #28746a;
   font-style: normal;
 }
 
-.context-strip {
+.metadata-strip {
   display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
+  grid-template-columns: minmax(240px, 1fr) minmax(0, 2fr);
   gap: 14px;
   padding: 14px;
 }
 
-.context-strip strong {
+.metadata-strip strong {
   display: block;
   margin-top: 4px;
 }
@@ -366,50 +449,88 @@ onMounted(() => {
   padding: 14px;
 }
 
-.section-title {
-  margin: 0 0 12px;
-  color: #123f3a;
-  font-size: 18px;
-  font-weight: 700;
-}
-
-.inner-title {
-  margin-top: 16px;
-}
-
-.linkage-note {
-  margin: 12px 0 0;
-  color: #41625d;
-}
-
-.role-grid {
+.two-column {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
 }
 
-.role-card {
+.panel {
   padding: 14px;
 }
 
-.role-card h3 {
-  margin: 0 0 8px;
-  color: #007f73;
+.panel h2 {
+  margin: 0 0 12px;
+  color: #193f3a;
+  font-size: 17px;
+  font-weight: 700;
 }
 
-.role-card ul {
-  margin: 0;
-  padding-left: 18px;
+.bar-row,
+.risk-row,
+.timeline-row,
+.evidence-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-top: 1px solid #edf2f0;
 }
 
-@media (max-width: 780px) {
+.bar-row:first-of-type,
+.risk-row:first-of-type,
+.timeline-row:first-of-type,
+.evidence-row:first-of-type {
+  border-top: 0;
+}
+
+.risk-row span,
+.timeline-row p,
+.evidence-row p {
+  display: block;
+  margin: 4px 0 0;
+  color: #60736f;
+}
+
+.filter-strip {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(150px, 1fr));
+  gap: 10px;
+}
+
+.large-metric {
+  color: #087467;
+  font-size: 34px;
+  font-weight: 800;
+}
+
+.large-metric.small {
+  margin-top: 12px;
+  font-size: 26px;
+}
+
+.evidence-row > div:last-child {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-content: flex-start;
+  gap: 8px;
+}
+
+.report-alert {
+  margin-bottom: 12px;
+}
+
+@media (max-width: 900px) {
   .workspace-head,
-  .context-strip {
+  .metadata-strip,
+  .two-column,
+  .filter-strip {
     grid-template-columns: 1fr;
     flex-direction: column;
   }
 
-  .badge-stack {
+  .head-badges {
     justify-content: flex-start;
   }
 }

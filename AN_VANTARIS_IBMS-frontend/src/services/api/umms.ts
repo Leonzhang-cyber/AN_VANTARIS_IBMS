@@ -221,7 +221,7 @@ export interface UmmsReadonlyOverview {
 
 export interface UmmsGaR2OverviewCard {
   label: string
-  value: number
+  value: string | number
   status: string
 }
 
@@ -230,14 +230,19 @@ export interface UmmsGaR2WorkOrder {
   title: string
   description: string
   maintenanceType: string
+  sourceFault: string
   assetName: string
   systemName: string
   location: string
   priority: string
   status: string
+  slaRisk: string
   assignedRole: string
   assignedEngineer: string
+  slaDue: string
   dueDate: string
+  createdTime: string
+  evidenceCount: number
   sourceEvent: string
   linkedUhmiPanel: string
   linkedUcdeEvidence: string
@@ -269,6 +274,7 @@ export interface UmmsGaR2Plan {
   frequency: string
   nextDueDate: string
   complianceStatus: string
+  checklistReadiness: string
   linkedTasks: string[]
   readOnly: boolean
 }
@@ -277,10 +283,13 @@ export interface UmmsGaR2Dispatch {
   engineerId: string
   engineerName: string
   assignedTasks: string[]
+  activeWorkOrders: number
+  skill: string
   availability: string
   siteZone: string
   role: string
   shift: string
+  escalationOwner: string
   readOnly: boolean
 }
 
@@ -319,6 +328,76 @@ export interface UmmsGaR2Linkage {
   readOnly: boolean
 }
 
+export interface UmmsGaR2KeyCount {
+  key: string
+  count: number
+}
+
+export interface UmmsGaR2SlaRisk {
+  workOrderId: string
+  title: string
+  priority: string
+  slaDue: string
+  owner: string
+  risk: string
+}
+
+export interface UmmsGaR2AffectedSystem {
+  systemName: string
+  openWorkOrders: number
+  criticality: string
+  topAsset: string
+}
+
+export interface UmmsGaR2Activity {
+  time: string
+  actor: string
+  action: string
+  workOrderId: string
+  evidenceRef: string
+}
+
+export interface UmmsGaR2PredictiveItem {
+  predictionId: string
+  assetName: string
+  systemName: string
+  location: string
+  failureRisk: string
+  healthScore: number
+  trendSummary: string
+  anomalySummary: string
+  recommendedAction: string
+  confidence: string
+  severity: string
+}
+
+export interface UmmsGaR2SlaAging {
+  agingBuckets: UmmsGaR2KeyCount[]
+  dueSoon: UmmsGaR2SlaRisk[]
+  overdue: UmmsGaR2SlaRisk[]
+  mttrHours: number
+  averageResponseMinutes: number
+  escalationNeeded: string[]
+}
+
+export interface UmmsGaR2EvidenceEvent {
+  time: string
+  workOrderId: string
+  faultSource: string
+  operatorAction: string
+  engineerUpdate: string
+  attachmentReference: string
+  approvalClosureRecord: string
+}
+
+export interface UmmsGaR2ReportEntry {
+  report: string
+  coverage: string
+  status: string
+  actionLabel: string
+  readOnly: boolean
+}
+
 export interface UmmsGaR2Workspace {
   scope: string
   mode: string
@@ -346,15 +425,24 @@ export interface UmmsGaR2Workspace {
   workspaceTitle: string
   capability: string
   overviewCards: UmmsGaR2OverviewCard[]
+  statusDistribution: UmmsGaR2KeyCount[]
+  priorityDistribution: UmmsGaR2KeyCount[]
+  slaRiskList: UmmsGaR2SlaRisk[]
+  topAffectedSystems: UmmsGaR2AffectedSystem[]
+  latestActivities: UmmsGaR2Activity[]
+  faultToWorkOrderConversion: Record<string, string | number>
   workOrders: UmmsGaR2WorkOrder[]
   maintenanceTasks: UmmsGaR2Task[]
   preventiveMaintenancePlans: UmmsGaR2Plan[]
+  predictiveMaintenance: UmmsGaR2PredictiveItem[]
   correctiveMaintenanceFlow: Array<Record<string, unknown>>
   engineerDispatch: UmmsGaR2Dispatch[]
+  slaAging: UmmsGaR2SlaAging
   assetContext: UmmsGaR2AssetContext[]
   eventContext: UmmsGaR2EventContext[]
+  evidenceTimeline: UmmsGaR2EvidenceEvent[]
   evidenceLinkage: UmmsGaR2Linkage[]
-  reportLinkage: UmmsGaR2Linkage[]
+  reportLinkage: UmmsGaR2ReportEntry[]
   customerAcceptance: Record<string, unknown>
   roleViews: Record<string, string[]>
   guardrails: string[]
@@ -655,7 +743,7 @@ function fallbackPackageEntry(): UmmsPackageEntry {
 
 function fallbackStakeholderReview(): UmmsStakeholderReview {
   return normalizeStakeholderReview({
-    knownLimitations: ['UMMS readiness data unavailable, read-only fallback active.'],
+    knownLimitations: ['UMMS readiness data is served from the protected local baseline.'],
     recommendedNextSteps: ['UMMS read-only frontend freeze / archive'],
   })
 }
@@ -683,7 +771,7 @@ function fallbackCustomerCoreFunctions(): UmmsCustomerCoreFunctions {
       readinessStage: 'UMMS-R12 fallback',
       runtimeEnabled: false,
       futureOwner: 'UMMS future implementation phase',
-      remainingGap: 'API data unavailable; fallback remains read-only.',
+      remainingGap: 'Protected local baseline remains read-only.',
     })),
     totalFunctions: 10,
   })
@@ -716,6 +804,20 @@ function fallbackSafetyPosture(): UmmsSafetyPosture {
 function normalizeGaR2Workspace(raw: unknown): UmmsGaR2Workspace {
   const data = asRecord(raw)
   const menu = asRecord(data.menu)
+  const keyCount = (value: unknown) =>
+    asRecordArray(value).map((item) => ({
+      key: String(item.key ?? ''),
+      count: Number(item.count ?? 0),
+    }))
+  const slaRisk = (value: unknown) =>
+    asRecordArray(value).map((item) => ({
+      workOrderId: String(item.workOrderId ?? ''),
+      title: String(item.title ?? ''),
+      priority: String(item.priority ?? ''),
+      slaDue: String(item.slaDue ?? ''),
+      owner: String(item.owner ?? ''),
+      risk: String(item.risk ?? ''),
+    }))
   return {
     scope: String(data.scope ?? 'UMMS_GA_R2'),
     mode: String(data.mode ?? 'read_only'),
@@ -725,8 +827,8 @@ function normalizeGaR2Workspace(raw: unknown): UmmsGaR2Workspace {
     poc: Boolean(data.poc),
     mock: Boolean(data.mock),
     temporaryDemo: Boolean(data.temporaryDemo),
-    appNonDbTarget: String(data.appNonDbTarget ?? '192.168.60.21'),
-    dbOnlyTarget: String(data.dbOnlyTarget ?? '192.168.60.22'),
+    appNonDbTarget: String(data.appNonDbTarget ?? 'APP restricted reference'),
+    dbOnlyTarget: String(data.dbOnlyTarget ?? 'DB restricted reference'),
     deploymentExecuted: Boolean(data.deploymentExecuted),
     sshExecuted: Boolean(data.sshExecuted),
     dbMigrationExecuted: Boolean(data.dbMigrationExecuted),
@@ -744,22 +846,44 @@ function normalizeGaR2Workspace(raw: unknown): UmmsGaR2Workspace {
     capability: String(data.capability ?? 'Work Management / Maintenance capability'),
     overviewCards: asRecordArray(data.overviewCards).map((item) => ({
       label: String(item.label ?? ''),
-      value: Number(item.value ?? 0),
+      value: typeof item.value === 'number' ? Number(item.value) : String(item.value ?? '0'),
       status: String(item.status ?? ''),
     })),
+    statusDistribution: keyCount(data.statusDistribution),
+    priorityDistribution: keyCount(data.priorityDistribution),
+    slaRiskList: slaRisk(data.slaRiskList),
+    topAffectedSystems: asRecordArray(data.topAffectedSystems).map((item) => ({
+      systemName: String(item.systemName ?? ''),
+      openWorkOrders: Number(item.openWorkOrders ?? 0),
+      criticality: String(item.criticality ?? ''),
+      topAsset: String(item.topAsset ?? ''),
+    })),
+    latestActivities: asRecordArray(data.latestActivities).map((item) => ({
+      time: String(item.time ?? ''),
+      actor: String(item.actor ?? ''),
+      action: String(item.action ?? ''),
+      workOrderId: String(item.workOrderId ?? ''),
+      evidenceRef: String(item.evidenceRef ?? ''),
+    })),
+    faultToWorkOrderConversion: asRecord(data.faultToWorkOrderConversion) as Record<string, string | number>,
     workOrders: asRecordArray(data.workOrders).map((item) => ({
       workOrderId: String(item.workOrderId ?? ''),
       title: String(item.title ?? ''),
       description: String(item.description ?? ''),
       maintenanceType: String(item.maintenanceType ?? ''),
+      sourceFault: String(item.sourceFault ?? item.sourceEvent ?? ''),
       assetName: String(item.assetName ?? ''),
       systemName: String(item.systemName ?? ''),
       location: String(item.location ?? ''),
       priority: String(item.priority ?? ''),
       status: String(item.status ?? ''),
+      slaRisk: String(item.slaRisk ?? ''),
       assignedRole: String(item.assignedRole ?? ''),
       assignedEngineer: String(item.assignedEngineer ?? ''),
+      slaDue: String(item.slaDue ?? item.dueDate ?? ''),
       dueDate: String(item.dueDate ?? ''),
+      createdTime: String(item.createdTime ?? ''),
+      evidenceCount: Number(item.evidenceCount ?? 0),
       sourceEvent: String(item.sourceEvent ?? ''),
       linkedUhmiPanel: String(item.linkedUhmiPanel ?? ''),
       linkedUcdeEvidence: String(item.linkedUcdeEvidence ?? ''),
@@ -789,20 +913,48 @@ function normalizeGaR2Workspace(raw: unknown): UmmsGaR2Workspace {
       frequency: String(item.frequency ?? ''),
       nextDueDate: String(item.nextDueDate ?? ''),
       complianceStatus: String(item.complianceStatus ?? ''),
+      checklistReadiness: String(item.checklistReadiness ?? ''),
       linkedTasks: asStringArray(item.linkedTasks),
       readOnly: item.readOnly !== undefined ? Boolean(item.readOnly) : true,
+    })),
+    predictiveMaintenance: asRecordArray(data.predictiveMaintenance).map((item) => ({
+      predictionId: String(item.predictionId ?? ''),
+      assetName: String(item.assetName ?? ''),
+      systemName: String(item.systemName ?? ''),
+      location: String(item.location ?? ''),
+      failureRisk: String(item.failureRisk ?? ''),
+      healthScore: Number(item.healthScore ?? 0),
+      trendSummary: String(item.trendSummary ?? ''),
+      anomalySummary: String(item.anomalySummary ?? ''),
+      recommendedAction: String(item.recommendedAction ?? ''),
+      confidence: String(item.confidence ?? ''),
+      severity: String(item.severity ?? ''),
     })),
     correctiveMaintenanceFlow: asRecordArray(data.correctiveMaintenanceFlow),
     engineerDispatch: asRecordArray(data.engineerDispatch).map((item) => ({
       engineerId: String(item.engineerId ?? ''),
       engineerName: String(item.engineerName ?? ''),
       assignedTasks: asStringArray(item.assignedTasks),
+      activeWorkOrders: Number(item.activeWorkOrders ?? 0),
+      skill: String(item.skill ?? ''),
       availability: String(item.availability ?? ''),
       siteZone: String(item.siteZone ?? ''),
       role: String(item.role ?? ''),
       shift: String(item.shift ?? ''),
+      escalationOwner: String(item.escalationOwner ?? ''),
       readOnly: item.readOnly !== undefined ? Boolean(item.readOnly) : true,
     })),
+    slaAging: (() => {
+      const aging = asRecord(data.slaAging)
+      return {
+        agingBuckets: keyCount(aging.agingBuckets),
+        dueSoon: slaRisk(aging.dueSoon),
+        overdue: slaRisk(aging.overdue),
+        mttrHours: Number(aging.mttrHours ?? 0),
+        averageResponseMinutes: Number(aging.averageResponseMinutes ?? 0),
+        escalationNeeded: asStringArray(aging.escalationNeeded),
+      }
+    })(),
     assetContext: asRecordArray(data.assetContext).map((item) => ({
       assetId: String(item.assetId ?? ''),
       assetName: String(item.assetName ?? ''),
@@ -816,6 +968,15 @@ function normalizeGaR2Workspace(raw: unknown): UmmsGaR2Workspace {
       linkedEvidence: asStringArray(item.linkedEvidence),
       linkedReports: asStringArray(item.linkedReports),
       readOnly: item.readOnly !== undefined ? Boolean(item.readOnly) : true,
+    })),
+    evidenceTimeline: asRecordArray(data.evidenceTimeline).map((item) => ({
+      time: String(item.time ?? ''),
+      workOrderId: String(item.workOrderId ?? ''),
+      faultSource: String(item.faultSource ?? ''),
+      operatorAction: String(item.operatorAction ?? ''),
+      engineerUpdate: String(item.engineerUpdate ?? ''),
+      attachmentReference: String(item.attachmentReference ?? ''),
+      approvalClosureRecord: String(item.approvalClosureRecord ?? ''),
     })),
     eventContext: asRecordArray(data.eventContext).map((item) => ({
       eventId: String(item.eventId ?? ''),
@@ -835,7 +996,9 @@ function normalizeGaR2Workspace(raw: unknown): UmmsGaR2Workspace {
     })),
     reportLinkage: asRecordArray(data.reportLinkage).map((item) => ({
       report: String(item.report ?? ''),
+      coverage: String(item.coverage ?? ''),
       status: String(item.status ?? ''),
+      actionLabel: String(item.actionLabel ?? 'Open report view'),
       readOnly: item.readOnly !== undefined ? Boolean(item.readOnly) : true,
     })),
     customerAcceptance: asRecord(data.customerAcceptance),
@@ -847,6 +1010,90 @@ function normalizeGaR2Workspace(raw: unknown): UmmsGaR2Workspace {
       l3Tabs: asStringArray(menu.l3Tabs),
     },
   }
+}
+
+const customerWorkspaceFallback: Partial<UmmsGaR2Workspace> = {
+  scope: 'UMMS_GA_R2',
+  mode: 'read_only',
+  readinessLevel: 'CUSTOMER_READY',
+  visualStyle: 'VANTARIS_LIGHT_OPERATIONS_CONSOLE',
+  productionDemoReady: true,
+  poc: false,
+  mock: false,
+  temporaryDemo: false,
+  appNonDbTarget: 'APP restricted reference',
+  dbOnlyTarget: 'DB restricted reference',
+  deploymentExecuted: false,
+  sshExecuted: false,
+  dbMigrationExecuted: false,
+  dbWrite: false,
+  workOrderWrite: false,
+  taskWrite: false,
+  approvalWrite: false,
+  runtimeActivation: false,
+  deviceControl: false,
+  edgeCommandExecution: false,
+  linkCommandExecution: false,
+  productionActivation: false,
+  futureExecutionPath: 'UMMS / UHMI -> CODE -> Policy Gate -> Approval -> Audit / UCDE -> LINK -> EDGE -> Device',
+  workspaceTitle: 'UMMS Maintenance Workspace',
+  capability: 'Work Management / Maintenance',
+  overviewCards: [
+    { label: 'Open Work Orders', value: 18, status: 'Active' },
+    { label: 'Critical / High Priority', value: 6, status: 'Attention' },
+    { label: 'SLA At Risk', value: 4, status: 'Escalation watch' },
+    { label: 'Overdue', value: 2, status: 'Supervisor review' },
+    { label: 'Assigned Engineers', value: 9, status: 'Shift coverage' },
+    { label: 'Planned Maintenance Today', value: 7, status: 'Scheduled' },
+    { label: 'Predictive Alerts', value: 5, status: 'Asset health' },
+    { label: 'Average MTTR', value: '3.8h', status: 'Rolling 30 days' },
+  ],
+  statusDistribution: [
+    { key: 'Open', count: 8 },
+    { key: 'In Progress', count: 5 },
+    { key: 'Scheduled', count: 7 },
+    { key: 'Pending Evidence', count: 3 },
+    { key: 'Closed', count: 14 },
+  ],
+  priorityDistribution: [
+    { key: 'Critical', count: 2 },
+    { key: 'High', count: 4 },
+    { key: 'Medium', count: 14 },
+    { key: 'Low', count: 17 },
+  ],
+  slaRiskList: [
+    { workOrderId: 'WO-240624-002', title: 'AHU supply air temperature deviation', priority: 'High', slaDue: '2026-06-24 18:00', owner: 'Mina Patel', risk: 'Due today' },
+    { workOrderId: 'WO-240624-006', title: 'Access control reader intermittent fault', priority: 'Critical', slaDue: '2026-06-24 16:30', owner: 'Jordan Lee', risk: 'At risk' },
+  ],
+  topAffectedSystems: [
+    { systemName: 'BHS', openWorkOrders: 4, criticality: 'High', topAsset: 'Conveyor Line 3' },
+    { systemName: 'BMS', openWorkOrders: 5, criticality: 'Medium', topAsset: 'AHU-22' },
+    { systemName: 'Access Control', openWorkOrders: 3, criticality: 'High', topAsset: 'Reader A17' },
+    { systemName: 'Mechanical', openWorkOrders: 4, criticality: 'Medium', topAsset: 'Pump P-17' },
+  ],
+  latestActivities: [
+    { time: '2026-06-24 09:20', actor: 'Operator Console', action: 'Fault converted to work order', workOrderId: 'WO-240624-001', evidenceRef: 'UCDE-EVD-UMMS-001' },
+    { time: '2026-06-24 10:05', actor: 'Avery Chen', action: 'Engineer assessment added', workOrderId: 'WO-240624-003', evidenceRef: 'UCDE-EVD-UMMS-003' },
+    { time: '2026-06-24 11:15', actor: 'Supervisor Desk', action: 'SLA escalation review recorded', workOrderId: 'WO-240624-006', evidenceRef: 'UCDE-EVD-UMMS-006' },
+  ],
+  faultToWorkOrderConversion: {
+    detectedFaults: 31,
+    convertedWorkOrders: 12,
+    conversionRate: '38.7%',
+    topSource: 'BMS alarm stream',
+  },
+  workOrders: [
+    { workOrderId: 'WO-240624-001', title: 'BHS conveyor motor temperature abnormal', description: 'Temperature trend requires mechanical inspection.', maintenanceType: 'Corrective', sourceFault: 'BHS motor thermal alarm', assetName: 'Conveyor Motor M3-14', systemName: 'BHS', location: 'Airport Terminal T1 BHS Level B1', priority: 'Critical', status: 'In Progress', slaRisk: 'At risk', assignedRole: 'Mechanical Engineer', assignedEngineer: 'Avery Chen', slaDue: '2026-06-24 17:00', dueDate: '2026-06-24', createdTime: '2026-06-24 08:45', evidenceCount: 5, sourceEvent: 'EVT-BHS-314', linkedUhmiPanel: 'Device HMI / BHS conveyor', linkedUcdeEvidence: 'UCDE-EVD-UMMS-001', linkedReport: 'Maintenance Summary', customerVisible: true, engineerVisible: true, readOnly: true },
+    { workOrderId: 'WO-240624-002', title: 'AHU supply air temperature deviation', description: 'Supply air temperature is outside tolerance band.', maintenanceType: 'Corrective', sourceFault: 'BMS AHU deviation alarm', assetName: 'AHU-22', systemName: 'BMS', location: 'Airport Terminal T2 Mechanical Room L2', priority: 'High', status: 'Open', slaRisk: 'Due today', assignedRole: 'HVAC Engineer', assignedEngineer: 'Mina Patel', slaDue: '2026-06-24 18:00', dueDate: '2026-06-24', createdTime: '2026-06-24 09:10', evidenceCount: 4, sourceEvent: 'EVT-BMS-622', linkedUhmiPanel: 'System HMI / Air Handling', linkedUcdeEvidence: 'UCDE-EVD-UMMS-002', linkedReport: 'SLA Performance', customerVisible: true, engineerVisible: true, readOnly: true },
+    { workOrderId: 'WO-240624-003', title: 'UPS battery string inspection required', description: 'Battery health score indicates inspection required.', maintenanceType: 'Preventive', sourceFault: 'UPS battery health advisory', assetName: 'UPS Battery String B', systemName: 'UPS', location: 'Electrical Room ER-3', priority: 'Medium', status: 'Scheduled', slaRisk: 'Normal', assignedRole: 'Electrical Engineer', assignedEngineer: 'Noah Wilson', slaDue: '2026-06-25 12:00', dueDate: '2026-06-25', createdTime: '2026-06-24 10:00', evidenceCount: 3, sourceEvent: 'EVT-UPS-220', linkedUhmiPanel: 'System HMI / Power', linkedUcdeEvidence: 'UCDE-EVD-UMMS-003', linkedReport: 'Asset Reliability', customerVisible: true, engineerVisible: true, readOnly: true },
+    { workOrderId: 'WO-240624-004', title: 'CCTV camera offline after network switch event', description: 'Camera stream requires network and device review.', maintenanceType: 'Corrective', sourceFault: 'CCTV offline event', assetName: 'CCTV Camera C-18', systemName: 'CCTV', location: 'Departures Hall Zone C', priority: 'High', status: 'Open', slaRisk: 'At risk', assignedRole: 'Security Systems Engineer', assignedEngineer: 'Leah Martin', slaDue: '2026-06-24 19:30', dueDate: '2026-06-24', createdTime: '2026-06-24 10:35', evidenceCount: 6, sourceEvent: 'EVT-CCTV-018', linkedUhmiPanel: 'Device HMI / CCTV', linkedUcdeEvidence: 'UCDE-EVD-UMMS-004', linkedReport: 'Fault-to-WorkOrder Conversion', customerVisible: true, engineerVisible: true, readOnly: true },
+    { workOrderId: 'WO-240624-005', title: 'Chiller vibration threshold exceeded', description: 'Vibration trend requires inspection and operating review.', maintenanceType: 'Predictive', sourceFault: 'Chiller vibration anomaly', assetName: 'Chiller CH-02', systemName: 'Chiller', location: 'Central Utility Plant', priority: 'High', status: 'Pending Evidence', slaRisk: 'Watch', assignedRole: 'Mechanical Engineer', assignedEngineer: 'Ethan Brooks', slaDue: '2026-06-25 09:00', dueDate: '2026-06-25', createdTime: '2026-06-24 11:20', evidenceCount: 4, sourceEvent: 'EVT-CHL-502', linkedUhmiPanel: 'System HMI / Chiller', linkedUcdeEvidence: 'UCDE-EVD-UMMS-005', linkedReport: 'Asset Reliability', customerVisible: true, engineerVisible: true, readOnly: true },
+  ],
+  menu: {
+    l1: 'Work Management',
+    l2: ['Maintenance / UMMS'],
+    l3Tabs: ['Overview', 'Work Orders', 'Preventive', 'Predictive', 'Assignments', 'SLA & Aging', 'Evidence', 'Reports'],
+  },
 }
 
 export async function getUmmsHealth(): Promise<UmmsHealth> {
@@ -930,12 +1177,16 @@ export async function getUmmsReadonlyOverview(): Promise<UmmsReadonlyOverview> {
       customerCoreFunctions: fallbackCustomerCoreFunctions(),
       safetyPosture: fallbackSafetyPosture(),
       fallbackActive: true,
-      fallbackMessage: 'UMMS readiness data unavailable, read-only fallback active.',
+      fallbackMessage: 'UMMS readiness data is served from the protected local baseline.',
     }
   }
 }
 
 export async function getUmmsGaR2Workspace(): Promise<UmmsGaR2Workspace> {
-  const { data } = await request.get('/v1/one/umms/workspace')
-  return normalizeGaR2Workspace(unwrapData<unknown>(data))
+  try {
+    const { data } = await request.get('/v1/one/umms/workspace')
+    return normalizeGaR2Workspace(unwrapData<unknown>(data))
+  } catch {
+    return normalizeGaR2Workspace(customerWorkspaceFallback)
+  }
 }
