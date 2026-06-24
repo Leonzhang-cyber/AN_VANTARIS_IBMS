@@ -1,0 +1,53 @@
+{
+  "taskId": "SERVER-DEPLOY-R2",
+  "name": "Runtime Installation Execution Packet",
+  "platform": "VANTARIS_ONE",
+  "stage": "SERVER-DEPLOY-R2",
+  "status": "COMPLETE",
+  "scope": "docs_registry_evidence_validation_manual_command_review_only",
+  "passMarker": "ONE_SERVER_DEPLOY_R2_RUNTIME_INSTALLATION_EXECUTION_PACKET_PASS",
+  "references": {
+    "runtimeInstallationPlan": "SERVER-DEPLOY-R1",
+    "precheckFinalApproval": "SERVER-PRECHECK-R14F"
+  },
+  "allowedPacketDecisions": [
+    "HOLD",
+    "GO",
+    "NO-GO"
+  ],
+  "manualCommandReviewOnly": true,
+  "automaticExecutionAllowed": false,
+  "boundaries": {
+    "sshExecution": false,
+    "sshAutomation": false,
+    "sshConnectionCommandWithRealTarget": false,
+    "automaticServerConnection": false,
+    "appServerConnection": false,
+    "dbServerConnection": false,
+    "osPackageInstallation": false,
+    "runtimeInstallation": false,
+    "postgresInstallation": false,
+    "nginxInstallation": false,
+    "nodeNpmInstallation": false,
+    "pythonPipInstallation": false,
+    "pm2Installation": false,
+    "deployment": false,
+    "buildExecution": false,
+    "installExecution": false,
+    "restartReloadExecution": false,
+    "dbMigration": false,
+    "dbBackupExecution": false,
+    "dbRestoreExecution": false,
+    "dbSeedExecution": false,
+    "dbUserCreation": false,
+    "dbPrivilegeMutation": false,
+    "appToDbLiveConnectionTest": false,
+    "healthcheckExecution": false,
+    "smokeTestExecution": false,
+    "serverMutation": false,
+    "dbAuthRuntimeMutation": false,
+    "frontendBackendRoutesMenuMutation": false,
+    "productionConfigMutation": false,
+    "productionCredentialPublicStorage": false
+  }
+}

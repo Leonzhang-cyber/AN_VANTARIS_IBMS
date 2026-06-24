@@ -619,3 +619,52 @@ SERVER-DEPLOY-R1 records a base runtime installation plan only. It does not add 
 
 Final conclusion:
 SERVER-DEPLOY-R1 Base Runtime Installation Plan: COMPLETE
+
+## SERVER-DEPLOY-R2 Final Verification / Release Index Update
+
+PASS marker: ONE_SERVER_DEPLOY_R2_RUNTIME_INSTALLATION_EXECUTION_PACKET_PASS
+
+- Source task: SERVER-DEPLOY-R2 Runtime Installation Execution Packet
+- Source PASS marker: ONE_SERVER_DEPLOY_R2_RUNTIME_INSTALLATION_EXECUTION_PACKET_PASS
+- Source baseline: b12b784 docs(one): add server deploy r1 runtime installation plan
+- Remote branch: sync/ufms-foundation-packages-20260622-104646
+- SERVER-DEPLOY-R2 final local freeze recommendation: ready after local commit
+
+R1 dependency:
+- R1 dependency status: GO
+- runtimeInstallationPlanDecision: GO
+
+Runtime installation execution packet:
+- Manual command review only: true
+- Automatic execution allowed: false
+- APP runtime execution sequence: PASS
+- DB runtime execution sequence: PASS
+- PostgreSQL direction confirmation: PASS
+- Offline/no-Docker execution path: PASS
+- Pre-install backup checkpoint: PASS
+- Rollback checkpoint: PASS
+- Stop conditions: PASS
+- Post-install evidence format: PASS
+- Restricted secret handling: PASS
+- runtimeInstallationExecutionPacketDecision: GO
+- Downstream recommendation: SERVER-DEPLOY-R3 Runtime Installation Manual Execution Approval
+
+Verification:
+- SERVER-DEPLOY-R2 validator PASS
+- No SSH execution
+- No APP/DB server connection
+- No deployment/install
+- No runtime installation
+- No backend/frontend/Nginx/PM2/DB command execution
+- No build/restart/reload
+- No DB migration/backup/restore/seed/user/privilege mutation
+- No APP-to-DB live connection test
+- No healthcheck/smoke execution
+- No frontend/backend/routes/menu mutation
+- No server mutation
+
+Boundary:
+SERVER-DEPLOY-R2 records a runtime installation execution packet and manual command review pack only. It does not add SSH execution, SSH automation, SSH connection commands with real targets, automatic server connection, APP server connection, DB server connection, OS package installation, runtime installation, PostgreSQL installation, Nginx installation, Node/npm installation, Python/pip installation, PM2 installation, deployment, build execution, install execution, restart/reload execution, DB migration, DB backup execution, DB restore execution, DB seed execution, DB user creation, DB privilege mutation, APP-to-DB live connection testing, healthcheck execution, smoke test execution, server mutation, DB/auth/runtime mutation, frontend/backend/routes/menu mutation, production config mutation, production credential public storage, or actual runtime installation by this packet.
+
+Final conclusion:
+SERVER-DEPLOY-R2 Runtime Installation Execution Packet: COMPLETE

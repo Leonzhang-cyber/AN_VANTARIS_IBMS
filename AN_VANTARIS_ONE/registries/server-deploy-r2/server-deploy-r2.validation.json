@@ -1,0 +1,28 @@
+{
+  "validationId": "server-deploy-r2-runtime-installation-execution-packet-validation",
+  "stage": "SERVER-DEPLOY-R2",
+  "status": "PASS",
+  "validator": "scripts/validation/validate-server-deploy-r2-runtime-installation-execution-packet.py",
+  "passMarker": "ONE_SERVER_DEPLOY_R2_RUNTIME_INSTALLATION_EXECUTION_PACKET_PASS",
+  "checks": {
+    "requiredFilesExist": true,
+    "jsonParses": true,
+    "runtimeInstallationPlanReferenceCorrect": true,
+    "precheckFinalApprovalReferenceCorrect": true,
+    "r1DecisionGo": true,
+    "manualCommandReviewOnly": true,
+    "automaticExecutionAllowedFalse": true,
+    "executionAndMutationFlagsFalse": true,
+    "appRuntimeExecutionSequencePass": true,
+    "dbRuntimeExecutionSequencePass": true,
+    "offlineNoDockerExecutionPathPass": true,
+    "preInstallBackupCheckpointPass": true,
+    "rollbackCheckpointPass": true,
+    "stopConditionsPass": true,
+    "postInstallEvidenceFormatPass": true,
+    "secretHandlingPass": true,
+    "runtimeInstallationExecutionPacketDecisionAllowed": true,
+    "passMarkerPresent": true,
+    "noRealTargetExecutableOperationSteps": true
+  }
+}
