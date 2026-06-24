@@ -821,3 +821,50 @@ SERVER-DEPLOY-R5 records a runtime installation evidence review gate only. It do
 
 Final conclusion:
 SERVER-DEPLOY-R5 Runtime Installation Evidence Review and Gate: COMPLETE
+
+## SERVER-DEPLOY-R5F Final Verification / Release Index Update
+
+PASS marker: ONE_SERVER_DEPLOY_R5F_RUNTIME_INSTALLATION_EVIDENCE_CLOSURE_FINAL_REVIEW_PASS
+
+- Source task: SERVER-DEPLOY-R5F Runtime Installation Evidence Closure Final Review
+- Source PASS marker: ONE_SERVER_DEPLOY_R5F_RUNTIME_INSTALLATION_EVIDENCE_CLOSURE_FINAL_REVIEW_PASS
+- Source baseline: cab4599 docs(one): add server deploy r5 runtime evidence gate
+- Remote branch: sync/ufms-foundation-packages-20260622-104646
+- SERVER-DEPLOY-R5F final local freeze recommendation: ready after local commit
+
+R4/R5 HOLD closure:
+- R4 decision before final review: HOLD
+- R5 decision before final review: HOLD
+- R4/R5 HOLD closure status: COMPLETE
+
+Evidence final review:
+- Evidence closure only: true
+- Runtime evidence final review: PASS
+- APP runtime final result: PASS
+- DB runtime final result: PASS
+- PostgreSQL direction confirmation: PASS
+- Redaction and restricted evidence final review: PASS
+- Stop condition final review: PASS
+- runtimeInstallationEvidenceFinalDecision: GO
+- Downstream recommendation: SERVER-DEPLOY-R6 DB Deployment Preparation Execution Gate
+
+Verification:
+- SERVER-DEPLOY-R5F validator PASS
+- No SSH execution by this packet
+- No real SSH target stored
+- No APP/DB server connection by this packet
+- No deployment/install by this packet
+- No runtime installation by this packet
+- No backend/frontend/Nginx/PM2/DB command execution by this packet
+- No build/restart/reload by this packet
+- No DB migration/backup/restore/seed/user/privilege mutation by this packet
+- No APP-to-DB live connection test by this packet
+- No healthcheck/smoke execution by this packet
+- No frontend/backend/routes/menu mutation by this packet
+- No server mutation by this packet
+
+Boundary:
+SERVER-DEPLOY-R5F records runtime installation evidence closure final review only. It does not add SSH execution, SSH automation, SSH connection commands with real targets, automatic server connection, APP server connection, DB server connection, real server IP / hostname / username / password public storage, production environment file public storage, OS package installation, runtime installation, PostgreSQL installation, Nginx installation, Node/npm installation, Python/pip installation, PM2 installation, deployment, build execution, install execution, restart/reload execution, DB migration, DB backup execution, DB restore execution, DB seed execution, DB user creation, DB privilege mutation, APP-to-DB live connection testing, healthcheck execution, smoke test execution, server mutation, DB/auth/runtime mutation, frontend/backend/routes/menu mutation, production config mutation, or actual runtime installation by this packet.
+
+Final conclusion:
+SERVER-DEPLOY-R5F Runtime Installation Evidence Closure Final Review: COMPLETE

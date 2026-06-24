@@ -1,0 +1,26 @@
+{
+  "validationId": "server-deploy-r5f-runtime-installation-evidence-closure-final-review-validation",
+  "stage": "SERVER-DEPLOY-R5F",
+  "status": "PASS",
+  "validator": "scripts/validation/validate-server-deploy-r5f-runtime-installation-evidence-closure-final-review.py",
+  "passMarker": "ONE_SERVER_DEPLOY_R5F_RUNTIME_INSTALLATION_EVIDENCE_CLOSURE_FINAL_REVIEW_PASS",
+  "checks": {
+    "requiredFilesExist": true,
+    "jsonParses": true,
+    "referencesCorrect": true,
+    "preReviewDecisionsHold": true,
+    "evidenceClosureOnly": true,
+    "executionByThisPacketFlagsFalse": true,
+    "r4HoldClosureFinalReviewPass": true,
+    "runtimeEvidenceFinalReviewPass": true,
+    "appRuntimeFinalResultPass": true,
+    "dbRuntimeFinalResultPass": true,
+    "redactionRestrictedEvidenceFinalReviewPass": true,
+    "stopConditionFinalReviewPass": true,
+    "reviewerAccepted": true,
+    "approverGo": true,
+    "runtimeInstallationEvidenceFinalDecisionGo": true,
+    "passMarkerPresent": true,
+    "noRealTargetExecutableOperationSteps": true
+  }
+}
