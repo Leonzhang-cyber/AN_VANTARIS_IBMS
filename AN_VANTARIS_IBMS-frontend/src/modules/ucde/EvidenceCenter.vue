@@ -511,6 +511,38 @@ onMounted(() => {
           <em>{{ metric.note }}</em>
         </article>
       </div>
+      <el-row :gutter="12" class="block-space">
+        <el-col :xs="24" :md="8">
+          <el-card shadow="never">
+            <template #header>Evidence Pain Points</template>
+            <ul class="inline-list">
+              <li>{{ activeCustomerSection.title }} must prove the business conclusion, not only list files.</li>
+              <li>Closure risk increases when source object, owner action, or signature is missing.</li>
+              <li>Report export is weak if evidence is not tied to asset, fault, work order, or decision context.</li>
+            </ul>
+          </el-card>
+        </el-col>
+        <el-col :xs="24" :md="8">
+          <el-card shadow="never">
+            <template #header>Recommended Actions</template>
+            <ul class="inline-list">
+              <li>Verify source evidence before accepting decision or closure evidence.</li>
+              <li>Attach missing signature, attachment, or related object before export.</li>
+              <li>Escalate incomplete evidence when it blocks customer handoff or audit readiness.</li>
+            </ul>
+          </el-card>
+        </el-col>
+        <el-col :xs="24" :md="8">
+          <el-card shadow="never">
+            <template #header>Customer Value</template>
+            <ul class="inline-list">
+              <li>Evidence chain supports defensible closure and report export.</li>
+              <li>Verification readiness reduces dispute during customer acceptance.</li>
+              <li>Audit trail shows who acted, why, and what proof supports the action.</li>
+            </ul>
+          </el-card>
+        </el-col>
+      </el-row>
       <el-table :data="activeCustomerSection.rows" stripe border class="customer-section-table">
         <el-table-column prop="item" label="Action" min-width="240" />
         <el-table-column prop="focus" label="Focus Area" min-width="260" />

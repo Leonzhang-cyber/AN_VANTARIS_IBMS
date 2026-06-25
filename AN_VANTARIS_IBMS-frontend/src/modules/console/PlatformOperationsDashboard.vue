@@ -1333,6 +1333,38 @@ onMounted(() => {
           <em>{{ metric.note }}</em>
         </article>
       </div>
+      <el-row :gutter="12" class="block-space">
+        <el-col :xs="24" :md="8">
+          <el-card shadow="never">
+            <template #header>Operational Pain Points</template>
+            <ul class="inline-list">
+              <li>{{ activeCustomerSection.title }} needs owner clarity across operator, supervisor, and service teams.</li>
+              <li>Service impact must be separated from raw event volume before escalation.</li>
+              <li>Decision evidence is required when incidents affect customer-facing operations.</li>
+            </ul>
+          </el-card>
+        </el-col>
+        <el-col :xs="24" :md="8">
+          <el-card shadow="never">
+            <template #header>Recommended Actions</template>
+            <ul class="inline-list">
+              <li>Confirm affected service and accountable owner before handover.</li>
+              <li>Escalate items with unresolved service impact or repeated operator action.</li>
+              <li>Attach event timeline and decision log evidence before closure.</li>
+            </ul>
+          </el-card>
+        </el-col>
+        <el-col :xs="24" :md="8">
+          <el-card shadow="never">
+            <template #header>Evidence / Handoff</template>
+            <ul class="inline-list">
+              <li>Evidence timeline supports supervisor review and customer reporting.</li>
+              <li>Decision log should capture owner, action, rationale, and outcome.</li>
+              <li>Export readiness depends on impact summary and closure note quality.</li>
+            </ul>
+          </el-card>
+        </el-col>
+      </el-row>
       <el-table :data="activeCustomerSection.rows" stripe border class="customer-section-table">
         <el-table-column prop="item" label="Action" min-width="240" />
         <el-table-column prop="focus" label="Focus Area" min-width="260" />

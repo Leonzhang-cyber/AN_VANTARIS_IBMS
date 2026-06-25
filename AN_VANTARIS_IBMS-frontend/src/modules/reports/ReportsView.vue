@@ -306,6 +306,39 @@ onMounted(() => {
         </article>
       </section>
 
+      <el-row :gutter="12" class="section-gap">
+        <el-col :xs="24" :md="8">
+          <el-card shadow="never">
+            <template #header>Report Pain Points</template>
+            <ul class="guardrail-list">
+              <li>{{ activeCustomerSection.title }} must serve a meeting, audit, handoff, or operational review.</li>
+              <li>Data completeness and evidence coverage determine whether export is customer-ready.</li>
+              <li>Report value drops when exceptions are listed without owner, action, and closure status.</li>
+            </ul>
+          </el-card>
+        </el-col>
+        <el-col :xs="24" :md="8">
+          <el-card shadow="never">
+            <template #header>Recommended Actions</template>
+            <ul class="guardrail-list">
+              <li>Validate evidence bundle coverage before PDF or Excel export.</li>
+              <li>Highlight missing data, unresolved risk, and owner action in the report summary.</li>
+              <li>Prepare customer handoff package only after acceptance evidence is complete.</li>
+            </ul>
+          </el-card>
+        </el-col>
+        <el-col :xs="24" :md="8">
+          <el-card shadow="never">
+            <template #header>Export Readiness</template>
+            <ul class="guardrail-list">
+              <li>Customer exports should include evidence references and audit trail.</li>
+              <li>Compliance reports need control mapping and exception rationale.</li>
+              <li>Handoff packages need acceptance checklist and closure evidence.</li>
+            </ul>
+          </el-card>
+        </el-col>
+      </el-row>
+
       <el-table :data="activeCustomerSection.rows" stripe border class="section-gap">
         <el-table-column prop="item" label="Action" min-width="240" />
         <el-table-column prop="focus" label="Focus Area" min-width="260" />

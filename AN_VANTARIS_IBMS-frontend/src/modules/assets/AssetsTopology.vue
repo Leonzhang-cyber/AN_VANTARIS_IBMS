@@ -782,6 +782,38 @@ onMounted(() => {
           <em>{{ metric.note }}</em>
         </article>
       </div>
+      <el-row :gutter="12" class="block-space">
+        <el-col :xs="24" :md="8">
+          <el-card shadow="never">
+            <template #header>Topology Pain Points</template>
+            <ul class="inline-list">
+              <li>{{ activeCustomerSection.title }} must show location, system ownership, and impacted service together.</li>
+              <li>Missing point/tag or space mapping can hide the real affected asset.</li>
+              <li>Repeated faults need asset history and relationship context before action.</li>
+            </ul>
+          </el-card>
+        </el-col>
+        <el-col :xs="24" :md="8">
+          <el-card shadow="never">
+            <template #header>Recommended Actions</template>
+            <ul class="inline-list">
+              <li>Validate asset-to-space and system-to-asset mapping before customer report export.</li>
+              <li>Prioritize assets with high dependency impact or poor data quality.</li>
+              <li>Link alarms, faults, work orders, and evidence to the selected topology node.</li>
+            </ul>
+          </el-card>
+        </el-col>
+        <el-col :xs="24" :md="8">
+          <el-card shadow="never">
+            <template #header>Evidence / Reports</template>
+            <ul class="inline-list">
+              <li>Relationship evidence supports impact-path explanation.</li>
+              <li>Mapping evidence identifies gaps before operational handoff.</li>
+              <li>Asset context can feed maintenance, fault, and customer delivery reports.</li>
+            </ul>
+          </el-card>
+        </el-col>
+      </el-row>
       <el-table :data="activeCustomerSection.rows" stripe border class="customer-section-table">
         <el-table-column prop="item" label="Action" min-width="240" />
         <el-table-column prop="focus" label="Focus Area" min-width="260" />

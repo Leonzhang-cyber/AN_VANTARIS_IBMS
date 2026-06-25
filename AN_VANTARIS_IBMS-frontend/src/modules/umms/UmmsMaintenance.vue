@@ -13,6 +13,24 @@ type CustomerSection = {
   rows: Array<{ item: string; focus: string; status: string }>
 }
 
+type DeepSectionConfig = {
+  insight: string
+  riskLevel: string
+  affectedService: string
+  recommendedOwner: string
+  painPoints: string[]
+  recommendations: string[]
+  decisionRows: Array<{
+    item: string
+    assetOrSystem: string
+    owner: string
+    priority: string
+    riskOrSla: string
+    nextAction: string
+  }>
+  evidence: Array<{ label: string; status: string; note: string }>
+}
+
 const route = useRoute()
 const customerUnavailableMessage = 'Live service is temporarily unavailable. Showing the latest available operational view.'
 
@@ -378,6 +396,194 @@ const customerSections: Record<string, CustomerSection> = {
 
 const fallbackCustomerSection = customerSections['open-work-orders']
 
+const defaultDeepSection: DeepSectionConfig = {
+  insight: 'Maintenance workload is being reviewed by asset criticality, service exposure, field readiness, and evidence completeness.',
+  riskLevel: 'Medium',
+  affectedService: 'Customer facility operations',
+  recommendedOwner: 'Maintenance Supervisor',
+  painPoints: [
+    'Open items can look similar unless fault source, asset criticality, and evidence gaps are reviewed together.',
+    'Access windows and permit readiness can delay technically simple work orders.',
+    'Closure quality depends on linking engineer notes, before/after records, and supervisor acceptance.',
+  ],
+  recommendations: [
+    'Prioritize items that combine high service impact with short SLA remaining.',
+    'Attach source fault evidence before closure review.',
+    'Use supervisor review when repeated faults or access constraints could affect customer operations.',
+  ],
+  decisionRows: [
+    { item: 'Maintenance triage', assetOrSystem: 'Critical facility assets', owner: 'Maintenance Supervisor', priority: 'High', riskOrSla: 'SLA watch', nextAction: 'Confirm owner, access window, and evidence readiness' },
+    { item: 'Evidence readiness check', assetOrSystem: 'Work order closure records', owner: 'UCDE Owner', priority: 'Medium', riskOrSla: 'Closure risk', nextAction: 'Verify before/after notes and report linkage' },
+    { item: 'Customer handoff review', assetOrSystem: 'Maintenance report package', owner: 'Service Manager', priority: 'Medium', riskOrSla: 'Handoff quality', nextAction: 'Prepare customer-readable action summary' },
+  ],
+  evidence: [
+    { label: 'Work order evidence', status: 'Review required', note: 'Engineer update, photos or checklist must support closure.' },
+    { label: 'Customer report linkage', status: 'Available', note: 'Selected items can be exported into the maintenance report pack.' },
+    { label: 'Supervisor acceptance', status: 'Guarded', note: 'High-impact or repeated faults require supervisor review before closure.' },
+  ],
+}
+
+const ummsDeepSections: Record<string, DeepSectionConfig> = {
+  'open-work-orders': {
+    insight: 'Priority is driven by passenger-facing service impact, repeated source faults, SLA remaining, and whether closure evidence is already attached.',
+    riskLevel: 'High',
+    affectedService: 'Terminal comfort, baggage support, and tenant-facing service continuity',
+    recommendedOwner: 'Duty Maintenance Supervisor',
+    painPoints: [
+      'Several high-priority work orders share source alarms with the same AHU and lift subsystems, so duplicate dispatch can hide the real asset issue.',
+      'SLA breach risk is mainly caused by access window limits and missing fault evidence, not only technician availability.',
+      'Closure cannot be trusted if engineer notes are not linked to the originating alarm, asset history, and before/after evidence.',
+    ],
+    recommendations: [
+      'Merge duplicate work orders raised from the same source fault before dispatching a second team.',
+      'Escalate short-SLA items that affect terminal comfort or passenger movement to the duty supervisor.',
+      'Attach alarm snapshot, field note, and asset history evidence before moving any item to closure review.',
+    ],
+    decisionRows: [
+      { item: 'AHU repeated high-temperature call', assetOrSystem: 'AHU-T2-04 / HVAC', owner: 'HVAC Team A', priority: 'Critical', riskOrSla: '2h remaining', nextAction: 'Dispatch with filter history and trend evidence attached' },
+      { item: 'Lift landing door intermittent fault', assetOrSystem: 'Lift-L3-02 / Vertical Transport', owner: 'Vendor Lift Response', priority: 'High', riskOrSla: 'Passenger service risk', nextAction: 'Open vendor ticket and assign supervisor watch' },
+      { item: 'Baggage belt motor overload', assetOrSystem: 'BHS-Belt-17 / Baggage Handling', owner: 'BHS Duty Engineer', priority: 'High', riskOrSla: 'Peak departure risk', nextAction: 'Verify overload reset history before closure' },
+    ],
+    evidence: [
+      { label: 'Fault source evidence', status: 'Partial', note: 'Alarm snapshots exist for HVAC and BHS; lift vendor evidence is still pending.' },
+      { label: 'Closure evidence', status: 'At risk', note: 'Two high-priority WOs need before/after photos and checklist signoff.' },
+      { label: 'Customer report export', status: 'Ready after review', note: 'Open queue can feed daily maintenance exception report once evidence gaps are closed.' },
+    ],
+  },
+  'emergency-work-orders': {
+    insight: 'Emergency work orders must separate safety isolation, passenger/service exposure, immediate containment, and recovery target.',
+    riskLevel: 'Critical',
+    affectedService: 'Passenger safety, life-safety response, and critical building services',
+    recommendedOwner: 'Duty Manager + Safety Supervisor',
+    painPoints: [
+      'Emergency priority is not enough; the team must know whether isolation is required before field access.',
+      'Passenger-facing disruption can escalate faster than the asset repair itself when lift, fire, or baggage paths are affected.',
+      'Recovery targets often fail when supervisor escalation and access control are not confirmed at dispatch time.',
+    ],
+    recommendations: [
+      'Confirm safety isolation and access permit before technician arrival.',
+      'Escalate passenger-impacting emergency work orders to Duty Manager immediately.',
+      'Record containment action and recovery target in evidence before status downgrade.',
+    ],
+    decisionRows: [
+      { item: 'Fire damper actuator fault', assetOrSystem: 'FLS-DMP-T1 / Life Safety', owner: 'Life Safety Team', priority: 'Critical', riskOrSla: 'Immediate isolation review', nextAction: 'Verify fire panel status and open supervisor bridge' },
+      { item: 'Main chilled water pump trip', assetOrSystem: 'CHWP-01 / Cooling Plant', owner: 'HVAC Duty Lead', priority: 'Critical', riskOrSla: 'Terminal comfort loss', nextAction: 'Start standby pump and capture recovery evidence' },
+      { item: 'Baggage screening lane outage', assetOrSystem: 'BHS-SCR-03 / Baggage Security', owner: 'BHS + Security', priority: 'Critical', riskOrSla: 'Departure queue risk', nextAction: 'Route passengers to alternate lane and log handoff' },
+    ],
+    evidence: [
+      { label: 'Safety evidence', status: 'Required', note: 'Isolation state and supervisor acknowledgement must be attached.' },
+      { label: 'Recovery evidence', status: 'In progress', note: 'Recovery target must include time, owner, and customer-facing service note.' },
+      { label: 'Customer handoff', status: 'Required', note: 'Emergency closure needs customer-readable incident summary.' },
+    ],
+  },
+  'fault-linked-work-orders': {
+    insight: 'Fault-linked work orders need correlation across source alarm, repeated fault count, asset history, and suspected root cause before closure.',
+    riskLevel: 'High',
+    affectedService: 'Fault response quality and repeat maintenance reduction',
+    recommendedOwner: 'Reliability Engineer',
+    painPoints: [
+      'Repeated alarms can create separate work orders while the real issue is one degrading asset or bad point mapping.',
+      'Technicians may fix symptoms without checking asset history and related faults.',
+      'Closure evidence is weak when the original alarm, correlated assets, and repair action are not linked.',
+    ],
+    recommendations: [
+      'Group work orders by source alarm and correlated asset before dispatch.',
+      'Review repeated fault count and asset age before selecting corrective action.',
+      'Require source alarm evidence and repair evidence before closure approval.',
+    ],
+    decisionRows: [
+      { item: 'Temperature sensor drift creates AHU calls', assetOrSystem: 'AHU-T2-04 / Sensor loop', owner: 'BMS Engineer', priority: 'High', riskOrSla: 'Repeat count 6', nextAction: 'Calibrate sensor and link trend evidence' },
+      { item: 'Escalator vibration alarm repeats', assetOrSystem: 'ESC-T1-07 / Passenger movement', owner: 'Vendor Escalator Team', priority: 'High', riskOrSla: 'Repeat count 4', nextAction: 'Check bearing history and vendor inspection record' },
+      { item: 'Pump differential pressure alarm', assetOrSystem: 'CHW-P-02 / Cooling plant', owner: 'HVAC Reliability', priority: 'Medium', riskOrSla: 'Trend worsening', nextAction: 'Compare with PM records and filter maintenance history' },
+    ],
+    evidence: [
+      { label: 'Alarm-to-WO trace', status: 'Ready', note: 'Source alarm and work order linkage can support RCA.' },
+      { label: 'Asset history', status: 'Review required', note: 'Repeated items need maintenance history before closure.' },
+      { label: 'RCA report linkage', status: 'Available', note: 'Fault-linked records can feed reliability improvement report.' },
+    ],
+  },
+  'pm-calendar': {
+    insight: 'PM priority is shaped by critical system coverage, skipped PM, access windows, resource conflicts, and compliance exposure.',
+    riskLevel: 'Medium',
+    affectedService: 'Planned maintenance compliance and service continuity',
+    recommendedOwner: 'PM Planner',
+    painPoints: [
+      'Skipped PM on critical systems can become emergency maintenance during peak operating hours.',
+      'Access windows for airside, baggage, and tenant areas compete with technician availability.',
+      'Checklist gaps make completed PM hard to defend during audit or customer review.',
+    ],
+    recommendations: [
+      'Move critical PM into low-traffic access windows and lock owner assignment early.',
+      'Escalate overdue PM affecting life-safety, cooling, or baggage systems.',
+      'Confirm checklist readiness and vendor dependency before scheduled work.',
+    ],
+    decisionRows: [
+      { item: 'Weekly AHU filter PM', assetOrSystem: 'Terminal 2 HVAC', owner: 'HVAC PM Team', priority: 'High', riskOrSla: 'Due today', nextAction: 'Schedule after passenger peak and attach checklist' },
+      { item: 'Baggage conveyor inspection', assetOrSystem: 'BHS Line 3', owner: 'BHS Planner', priority: 'High', riskOrSla: 'Overdue 1 day', nextAction: 'Book access window with operations control' },
+      { item: 'Generator load-test readiness', assetOrSystem: 'Emergency Power', owner: 'Electrical Team', priority: 'Medium', riskOrSla: 'Compliance watch', nextAction: 'Confirm vendor standby and test record template' },
+    ],
+    evidence: [
+      { label: 'PM checklist', status: 'Required', note: 'Checklist must be ready before planned work starts.' },
+      { label: 'Access window evidence', status: 'Partial', note: 'BHS and electrical PM require confirmed access window.' },
+      { label: 'Compliance report', status: 'Ready after completion', note: 'PM completion can feed monthly compliance report.' },
+    ],
+  },
+  'breach-risk': {
+    insight: 'Breach risk is driven by access delay, missing owner escalation, customer-facing impact, and incomplete mitigation evidence.',
+    riskLevel: 'High',
+    affectedService: 'SLA commitments and customer trust',
+    recommendedOwner: 'SLA Manager',
+    painPoints: [
+      'Aging timers do not explain breach cause unless owner, access delay, and mitigation action are visible together.',
+      'Customer-impacting work can remain with a field engineer when it needs supervisor intervention.',
+      'SLA mitigation is hard to prove without evidence of interim service restoration.',
+    ],
+    recommendations: [
+      'Escalate all high-impact items with less than four hours remaining.',
+      'Record access-delay reason and interim mitigation before SLA breach.',
+      'Assign customer communication owner for passenger or tenant-facing service risk.',
+    ],
+    decisionRows: [
+      { item: 'Cooling complaint at premium lounge', assetOrSystem: 'FCU-Lounge-05 / HVAC', owner: 'HVAC Supervisor', priority: 'High', riskOrSla: '1.5h remaining', nextAction: 'Escalate and provide temporary cooling mitigation' },
+      { item: 'Baggage belt intermittent stop', assetOrSystem: 'BHS-Belt-17', owner: 'BHS Duty Lead', priority: 'Critical', riskOrSla: 'Breach likely', nextAction: 'Add second engineer and notify operations control' },
+      { item: 'Access-controlled electrical room fault', assetOrSystem: 'LV Panel T3', owner: 'Electrical + Security', priority: 'High', riskOrSla: 'Access delay', nextAction: 'Confirm permit and record delay evidence' },
+    ],
+    evidence: [
+      { label: 'Breach rationale', status: 'Required', note: 'Cause of delay and mitigation action must be captured.' },
+      { label: 'Customer communication', status: 'Review required', note: 'Passenger or tenant-facing risk needs service note.' },
+      { label: 'SLA report export', status: 'Ready', note: 'Breach-risk rows feed SLA exception report.' },
+    ],
+  },
+  'repeated-failures': {
+    insight: 'Repeated failures point to asset aging, bad point mapping, PM gaps, or vendor response quality; they need long-term corrective action, not just another work order.',
+    riskLevel: 'High',
+    affectedService: 'Reliability, maintenance cost, and recurring customer disruption',
+    recommendedOwner: 'Reliability Manager',
+    painPoints: [
+      'Repeat faults increase MTTR and technician load while masking underlying asset degradation.',
+      'Some repeated failures are caused by point quality or false alarms rather than physical failure.',
+      'Vendor response can close the immediate call without reducing recurrence risk.',
+    ],
+    recommendations: [
+      'Create reliability improvement action for assets with more than three repeats in the review window.',
+      'Compare MTTR, MTBF, PM history, and source point quality before approving closure.',
+      'Use vendor escalation when recurrence continues after corrective maintenance.',
+    ],
+    decisionRows: [
+      { item: 'Escalator handrail speed mismatch', assetOrSystem: 'ESC-T1-07', owner: 'Reliability + Vendor', priority: 'High', riskOrSla: 'MTBF falling', nextAction: 'Open long-term vendor corrective action' },
+      { item: 'AHU temperature high repeat', assetOrSystem: 'AHU-T2-04', owner: 'HVAC Reliability', priority: 'High', riskOrSla: 'Repeat count 6', nextAction: 'Check coil fouling and sensor drift together' },
+      { item: 'Baggage belt overload repeat', assetOrSystem: 'BHS-Belt-17', owner: 'BHS Reliability', priority: 'Medium', riskOrSla: 'MTTR rising', nextAction: 'Review motor current trend and PM intervals' },
+    ],
+    evidence: [
+      { label: 'Reliability evidence', status: 'Review required', note: 'MTTR, MTBF, source alarm, and work order history must be linked.' },
+      { label: 'Improvement report', status: 'Available', note: 'Repeated failure items can feed reliability action report.' },
+      { label: 'Customer value', status: 'High', note: 'Reducing recurrence lowers disruption and maintenance effort.' },
+    ],
+  },
+}
+
+const activeDeepSection = computed(() => ummsDeepSections[normalizeL3Id(route.query.l3, 'open-work-orders')] ?? defaultDeepSection)
+
 function normalizeL3Id(value: unknown, defaultKey: string): string {
   const raw = typeof value === 'string' && value ? value : defaultKey
   const normalized = raw.replace(/-\d+$/, '')
@@ -476,6 +682,25 @@ watch(activeCustomerSection, (section) => {
     />
 
     <template v-if="workspace">
+      <section class="deep-summary section-gap">
+        <div>
+          <span>Operational Insight</span>
+          <strong>{{ activeDeepSection.insight }}</strong>
+        </div>
+        <div>
+          <span>Risk Level</span>
+          <el-tag :type="tagType(activeDeepSection.riskLevel)">{{ activeDeepSection.riskLevel }}</el-tag>
+        </div>
+        <div>
+          <span>Affected Service</span>
+          <strong>{{ activeDeepSection.affectedService }}</strong>
+        </div>
+        <div>
+          <span>Recommended Owner</span>
+          <strong>{{ activeDeepSection.recommendedOwner }}</strong>
+        </div>
+      </section>
+
       <section class="summary-grid section-gap">
         <article v-for="metric in activeCustomerSection.metrics" :key="metric.label" class="metric-card">
           <span>{{ metric.label }}</span>
@@ -484,11 +709,37 @@ watch(activeCustomerSection, (section) => {
         </article>
       </section>
 
-      <el-table :data="activeCustomerSection.rows" stripe border class="section-gap">
-        <el-table-column prop="item" label="Action" min-width="240" />
-        <el-table-column prop="focus" label="Focus Area" min-width="260" />
-        <el-table-column prop="status" label="Status" min-width="140" />
+      <div class="deep-grid section-gap">
+        <section class="panel">
+          <h2>Operational Pain Points</h2>
+          <ul class="deep-list">
+            <li v-for="item in activeDeepSection.painPoints" :key="item">{{ item }}</li>
+          </ul>
+        </section>
+        <section class="panel">
+          <h2>Recommended Actions</h2>
+          <ul class="deep-list">
+            <li v-for="item in activeDeepSection.recommendations" :key="item">{{ item }}</li>
+          </ul>
+        </section>
+      </div>
+
+      <el-table :data="activeDeepSection.decisionRows" stripe border class="section-gap">
+        <el-table-column prop="item" label="Item" min-width="230" />
+        <el-table-column prop="assetOrSystem" label="Asset / System" min-width="220" />
+        <el-table-column prop="owner" label="Owner / Team" min-width="180" />
+        <el-table-column prop="priority" label="Priority" min-width="130" />
+        <el-table-column prop="riskOrSla" label="SLA / Risk" min-width="160" />
+        <el-table-column prop="nextAction" label="Next Action" min-width="300" />
       </el-table>
+
+      <section class="evidence-grid section-gap">
+        <article v-for="item in activeDeepSection.evidence" :key="item.label" class="evidence-card">
+          <span>{{ item.label }}</span>
+          <el-tag :type="tagType(item.status)">{{ item.status }}</el-tag>
+          <p>{{ item.note }}</p>
+        </article>
+      </section>
 
       <section class="summary-grid section-gap">
         <article v-for="card in workspace.overviewCards" :key="card.label" class="metric-card">
@@ -785,6 +1036,70 @@ watch(activeCustomerSection, (section) => {
   gap: 12px;
 }
 
+.deep-summary {
+  display: grid;
+  grid-template-columns: minmax(260px, 2fr) minmax(130px, 0.7fr) minmax(220px, 1.2fr) minmax(180px, 1fr);
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid #cfe2dc;
+  border-left: 4px solid #247668;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 10px 24px rgb(38 65 58 / 8%);
+}
+
+.deep-summary span,
+.evidence-card span {
+  display: block;
+  margin-bottom: 6px;
+  color: #60736f;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.deep-summary strong {
+  display: block;
+  color: #163b35;
+  line-height: 1.35;
+}
+
+.deep-grid,
+.evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.evidence-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.deep-list {
+  margin: 0;
+  padding-left: 18px;
+  color: #29433f;
+  line-height: 1.55;
+}
+
+.deep-list li + li {
+  margin-top: 8px;
+}
+
+.evidence-card {
+  padding: 14px;
+  border: 1px solid #dbe6e2;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgb(38 65 58 / 6%);
+}
+
+.evidence-card p {
+  margin: 10px 0 0;
+  color: #29433f;
+  line-height: 1.45;
+}
+
 .metric-card,
 .metadata-strip,
 .workspace-tabs,
@@ -904,6 +1219,9 @@ watch(activeCustomerSection, (section) => {
   .workspace-head,
   .metadata-strip,
   .two-column,
+  .deep-summary,
+  .deep-grid,
+  .evidence-grid,
   .filter-strip {
     grid-template-columns: 1fr;
     flex-direction: column;

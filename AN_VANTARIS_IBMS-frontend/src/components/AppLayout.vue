@@ -87,6 +87,17 @@ const activeL3Content = computed(() => {
     item: activeL3Item.value,
   })
 })
+const pageHandledL3Paths = new Set([
+  '/dashboard',
+  '/console/operations',
+  '/assets/topology',
+  '/ucde/evidence',
+  '/reports',
+  '/uesg/sustainability',
+  '/one/umms/workspace',
+  '/umms/maintenance',
+])
+const shouldShowL3FallbackPanel = computed(() => Boolean(activeL3Content.value && !pageHandledL3Paths.has(route.path)))
 
 async function loadDynamicMenu(): Promise<void> {
   menuLoading.value = true
@@ -277,7 +288,7 @@ onMounted(() => {
             </el-tag>
           </section>
 
-          <section v-if="activeL3Content" class="app-layout__l3-panel" aria-label="Selected L3 section content">
+          <section v-if="shouldShowL3FallbackPanel && activeL3Content" class="app-layout__l3-panel" aria-label="Selected L3 section content">
             <div class="app-layout__l3-panel-head">
               <div>
                 <span class="app-layout__l3-kicker">Selected section</span>

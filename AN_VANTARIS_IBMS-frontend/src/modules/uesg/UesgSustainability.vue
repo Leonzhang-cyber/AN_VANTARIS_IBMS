@@ -567,6 +567,38 @@ onMounted(() => {
           <em>{{ metric.note }}</em>
         </article>
       </div>
+      <el-row :gutter="12" class="block-space">
+        <el-col :xs="24" :md="8">
+          <el-card shadow="never">
+            <template #header>Energy Pain Points</template>
+            <ul class="inline-list">
+              <li>{{ activeCustomerSection.title }} must connect anomaly, equipment behavior, occupancy, and meter quality.</li>
+              <li>Peak demand and weekend consumption can be caused by schedule drift or failed setpoints.</li>
+              <li>Compliance evidence is weak when savings estimates lack meter and operational context.</li>
+            </ul>
+          </el-card>
+        </el-col>
+        <el-col :xs="24" :md="8">
+          <el-card shadow="never">
+            <template #header>Recommended Actions</template>
+            <ul class="inline-list">
+              <li>Compare consumption anomalies against HVAC schedule, occupancy, and equipment state.</li>
+              <li>Prioritize actions with measurable savings and low comfort risk.</li>
+              <li>Attach meter quality and calculation evidence before ESG or Green Mark reporting.</li>
+            </ul>
+          </el-card>
+        </el-col>
+        <el-col :xs="24" :md="8">
+          <el-card shadow="never">
+            <template #header>Evidence / Reports</template>
+            <ul class="inline-list">
+              <li>Meter evidence supports carbon and savings claims.</li>
+              <li>Reduction initiatives should map to owner, action, expected saving, and verification status.</li>
+              <li>Export package should explain anomaly cause and customer value.</li>
+            </ul>
+          </el-card>
+        </el-col>
+      </el-row>
       <el-table :data="activeCustomerSection.rows" stripe border class="customer-section-table">
         <el-table-column prop="item" label="Action" min-width="240" />
         <el-table-column prop="focus" label="Focus Area" min-width="260" />
