@@ -63,7 +63,7 @@ const placeholderChannels: NotificationChannelRow[] = [
         <div class="page-header">
           <div>
             <h1>Notification Settings</h1>
-            <p>Prepare outbound notification channel settings for IBMS operations.</p>
+            <p>Prepare outbound notification channel settings for ONE operations.</p>
           </div>
         </div>
       </template>

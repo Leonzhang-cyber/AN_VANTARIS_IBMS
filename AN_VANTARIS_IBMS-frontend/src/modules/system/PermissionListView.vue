@@ -151,7 +151,7 @@ onMounted(() => {
         <div class="page-header">
           <div>
             <h1>Permission Management</h1>
-            <p>Manage backend permission codes used by protected IBMS APIs.</p>
+            <p>Manage backend permission codes used by protected ONE APIs.</p>
           </div>
           <el-button type="primary" @click="openCreateDialog">Create permission</el-button>
         </div>

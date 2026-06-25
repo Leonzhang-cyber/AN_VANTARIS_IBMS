@@ -20,7 +20,7 @@ const modules: SystemModuleCard[] = [
   {
     id: 'permissions',
     title: 'Permission Management',
-    description: 'View and manage backend permission codes used by protected IBMS APIs.',
+    description: 'View and manage backend permission codes used by protected ONE APIs.',
     path: '/system/permissions',
     status: 'available',
     permission: 'system:read',

@@ -45,8 +45,8 @@ const placeholderIntegrations: IntegrationRow[] = [
   },
   {
     id: 'local-external-ibms',
-    integration: 'External IBMS',
-    description: 'Federation with external IBMS instances',
+    integration: 'External ONE',
+    description: 'Federation with external ONE instances',
     enabled: false,
     status: 'Not configured',
     source: 'Local placeholder / API pending',
@@ -63,7 +63,7 @@ const placeholderIntegrations: IntegrationRow[] = [
         <div class="page-header">
           <div>
             <h1>Integration Settings</h1>
-            <p>Prepare external integration configuration for IBMS operations.</p>
+            <p>Prepare external integration configuration for ONE operations.</p>
           </div>
         </div>
       </template>
@@ -84,7 +84,7 @@ const placeholderIntegrations: IntegrationRow[] = [
             <el-option label="MQTT" value="mqtt" />
             <el-option label="Webhook" value="webhook" />
             <el-option label="Email Gateway" value="email-gateway" />
-            <el-option label="External IBMS" value="external-ibms" />
+            <el-option label="External ONE" value="external-ibms" />
           </el-select>
         </el-form-item>
       </el-form>

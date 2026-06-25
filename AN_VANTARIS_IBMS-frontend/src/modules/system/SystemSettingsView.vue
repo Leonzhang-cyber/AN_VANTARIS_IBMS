@@ -8,7 +8,7 @@ import { resolveBaseUrl } from '@/services/api/request'
 const menuMode = ref<'dynamic' | 'fallback' | 'checking'>('checking')
 
 const settingsForm = reactive({
-  applicationName: readEnvString('VITE_IBMS_APP_NAME', 'VANTARIS ONE'),
+  applicationName: readEnvString('VITE_ONE_APP_NAME', readEnvString('VITE_IBMS_APP_NAME', 'VANTARIS ONE')),
   apiBaseUrl: resolveBaseUrl(),
   debugEnabled: readDebugFlag(),
   menuMode: 'checking',
@@ -31,7 +31,7 @@ function readEnvString(key: string, fallback: string): string {
 }
 
 function readDebugFlag(): boolean {
-  const value = import.meta.env.VITE_IBMS_ENABLE_DEBUG
+  const value = (import.meta.env.VITE_ONE_ENABLE_DEBUG ?? import.meta.env.VITE_IBMS_ENABLE_DEBUG)
   if (typeof value === 'string') {
     return value.trim().toLowerCase() === 'true'
   }
@@ -67,7 +67,7 @@ onMounted(() => {
         <div class="page-header">
           <div>
             <h1>System Settings</h1>
-            <p>Review and prepare configurable system options for IBMS operations.</p>
+            <p>Review and prepare configurable system options for ONE operations.</p>
           </div>
         </div>
       </template>

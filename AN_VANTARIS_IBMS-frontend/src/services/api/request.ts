@@ -16,7 +16,7 @@ export function setForbiddenHandler(handler: AuthErrorHandler | null): void {
 }
 
 export function resolveBaseUrl(): string {
-  const envUrl = import.meta.env.VITE_IBMS_API_BASE_URL
+  const envUrl = import.meta.env.VITE_ONE_API_BASE_URL ?? import.meta.env.VITE_IBMS_API_BASE_URL
   if (typeof envUrl === 'string' && envUrl.trim()) {
     return envUrl.trim().replace(/\/$/, '')
   }
