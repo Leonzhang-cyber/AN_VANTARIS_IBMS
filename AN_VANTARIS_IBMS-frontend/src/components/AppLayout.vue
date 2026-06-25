@@ -13,33 +13,31 @@ const SIDEBAR_COLLAPSED_KEY = 'vantaris.menu.sidebarCollapsed'
 
 const menuItems = ref<AppMenuItem[]>([...fallbackMenuItems])
 const menuLoading = ref(true)
-const menuLoadError = ref(false)
 const sidebarCollapsed = ref(false)
 const liveMode = ref(true)
 const refreshInterval = ref('30s')
 
 const activePath = computed(() => route.path)
+
+const activeL1 = computed(() => {
+  for (const l1 of menuItems.value) {
+    if (l1.path === route.path || (l1.children ?? []).some((child) => child.path === route.path)) {
+      return l1
+    }
+  }
+  return undefined
+})
+
 const activeL2 = computed(() => {
   for (const l1 of menuItems.value) {
-    const children = l1.children ?? []
-    const exact = children.find((child) => child.path === route.path)
+    const exact = (l1.children ?? []).find((child) => child.path === route.path)
     if (exact) {
       return exact
     }
   }
   return undefined
 })
-const activeL1 = computed(() => {
-  for (const l1 of menuItems.value) {
-    if (l1.path === route.path) {
-      return l1
-    }
-    if ((l1.children ?? []).some((child) => child.path === route.path)) {
-      return l1
-    }
-  }
-  return undefined
-})
+
 const activeL3Items = computed(() => activeL2.value?.l3Items ?? [])
 const sidebarWidth = computed(() => (sidebarCollapsed.value ? '76px' : '286px'))
 const pageTitle = computed(() => activeL2.value?.label ?? activeL1.value?.label ?? String(route.meta.title ?? 'Operations Console'))
@@ -47,7 +45,6 @@ const pageSubtitle = computed(() => 'AI-Powered Operations Intelligence for Unif
 
 async function loadDynamicMenu(): Promise<void> {
   menuLoading.value = true
-  menuLoadError.value = false
 
   try {
     const response = await menuApi.getMenus()
@@ -59,10 +56,8 @@ async function loadDynamicMenu(): Promise<void> {
     }
 
     menuItems.value = [...fallbackMenuItems]
-    menuLoadError.value = true
   } catch {
     menuItems.value = [...fallbackMenuItems]
-    menuLoadError.value = true
   } finally {
     menuLoading.value = false
   }
@@ -104,7 +99,7 @@ onMounted(() => {
       v-loading="menuLoading"
     >
       <div class="app-layout__brand-panel">
-        <div class="app-layout__brand-mark">◈</div>
+        <div class="app-layout__brand-mark">◇</div>
         <div v-if="!sidebarCollapsed" class="app-layout__brand-copy">
           <strong>VANTARIS™</strong>
           <span>AI Operations Platform</span>
@@ -120,45 +115,43 @@ onMounted(() => {
         </el-button>
       </div>
 
-      <p v-if="menuLoadError && !sidebarCollapsed" class="menu-fallback-note">
-        Local menu active
-      </p>
-
-      <el-menu
-        :default-active="activePath"
-        class="app-layout__menu"
-        :collapse="sidebarCollapsed"
-        @select="onMenuSelect"
-      >
-        <template v-for="item in menuItems" :key="item.id">
-          <el-sub-menu v-if="item.children?.length" :index="item.id">
-            <template #title>
-              <span class="app-layout__menu-icon" :title="item.label">{{ item.icon ?? item.label.slice(0, 1) }}</span>
+      <div class="app-layout__menu-scroll">
+        <el-menu
+          :default-active="activePath"
+          class="app-layout__menu"
+          :collapse="sidebarCollapsed"
+          @select="onMenuSelect"
+        >
+          <template v-for="item in menuItems" :key="item.id">
+            <el-sub-menu v-if="item.children?.length" :index="item.id">
+              <template #title>
+                <span class="app-layout__menu-icon" :title="item.label">{{ item.icon ?? item.label.slice(0, 1) }}</span>
+                <span>{{ item.label }}</span>
+              </template>
+              <el-menu-item
+                v-for="child in item.children"
+                :key="child.id"
+                :index="child.path"
+                :title="child.label"
+              >
+                <span class="app-layout__menu-icon">{{ child.label.slice(0, 1) }}</span>
+                <span>{{ child.label }}</span>
+              </el-menu-item>
+            </el-sub-menu>
+            <el-menu-item v-else :index="item.path" :title="item.label">
+              <span class="app-layout__menu-icon">{{ item.icon ?? item.label.slice(0, 1) }}</span>
               <span>{{ item.label }}</span>
-            </template>
-            <el-menu-item
-              v-for="child in item.children"
-              :key="child.id"
-              :index="child.path"
-              :title="child.label"
-            >
-              <span class="app-layout__menu-icon">{{ child.label.slice(0, 1) }}</span>
-              <span>{{ child.label }}</span>
             </el-menu-item>
-          </el-sub-menu>
-          <el-menu-item v-else :index="item.path" :title="item.label">
-            <span class="app-layout__menu-icon">{{ item.icon ?? item.label.slice(0, 1) }}</span>
-            <span>{{ item.label }}</span>
-          </el-menu-item>
-        </template>
-      </el-menu>
+          </template>
+        </el-menu>
+      </div>
     </el-aside>
 
     <el-container class="app-layout__workspace">
       <el-header class="app-layout__header">
         <div class="app-layout__title-block">
-          <p>{{ pageSubtitle }}</p>
           <h1>{{ pageTitle }}</h1>
+          <p>{{ pageSubtitle }}</p>
         </div>
 
         <div class="app-layout__toolbar">
@@ -186,18 +179,20 @@ onMounted(() => {
       </el-header>
 
       <el-main class="app-layout__main">
-        <section v-if="activeL3Items.length" class="app-layout__l3-row" aria-label="L3 content navigation">
-          <el-tag
-            v-for="item in activeL3Items"
-            :key="item.id"
-            class="app-layout__l3-tab"
-            :type="item.status === 'implemented' || item.status === 'mapped' ? 'success' : 'info'"
-            effect="plain"
-          >
-            {{ item.label }}
-          </el-tag>
-        </section>
-        <router-view />
+        <div class="app-layout__content-scroll">
+          <section v-if="activeL3Items.length" class="app-layout__l3-row" aria-label="L3 content navigation">
+            <el-tag
+              v-for="item in activeL3Items"
+              :key="item.id"
+              class="app-layout__l3-tab"
+              :type="item.status === 'implemented' || item.status === 'mapped' ? 'success' : 'info'"
+              effect="plain"
+            >
+              {{ item.label }}
+            </el-tag>
+          </section>
+          <router-view />
+        </div>
       </el-main>
     </el-container>
   </el-container>
@@ -205,13 +200,17 @@ onMounted(() => {
 
 <style scoped>
 .app-layout {
+  height: 100vh;
   min-height: 100vh;
+  overflow: hidden;
   background: #eaf2f6;
-  color: #101828;
+  color: #0f172a;
 }
 
 .app-layout__workspace {
   min-width: 0;
+  height: 100vh;
+  overflow: hidden;
   background: #eaf2f6;
 }
 
@@ -226,20 +225,20 @@ onMounted(() => {
   border-bottom: 1px solid #d5e2ea;
 }
 
-.app-layout__title-block p {
-  margin: 0 0 4px;
-  color: #64748b;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-}
-
 .app-layout__title-block h1 {
-  margin: 0;
+  margin: 0 0 4px;
   color: #0f172a;
   font-size: 25px;
-  font-weight: 850;
-  line-height: 1.15;
+  font-weight: 750;
+  line-height: 1.12;
+}
+
+.app-layout__title-block p {
+  margin: 0;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.035em;
 }
 
 .app-layout__toolbar {
@@ -255,7 +254,7 @@ onMounted(() => {
   border-color: #cbd9e3;
   border-radius: 9px;
   color: #1f2937;
-  font-weight: 800;
+  font-weight: 700;
   background: #ffffff;
 }
 
@@ -270,6 +269,8 @@ onMounted(() => {
 }
 
 .app-layout__aside {
+  height: 100vh;
+  overflow: hidden;
   background: #ffffff;
   border-right: 1px solid #d7e3ec;
   box-shadow: 10px 0 24px rgba(15, 23, 42, 0.04);
@@ -281,6 +282,7 @@ onMounted(() => {
 }
 
 .app-layout__brand-panel {
+  height: 86px;
   min-height: 86px;
   display: flex;
   align-items: center;
@@ -300,8 +302,8 @@ onMounted(() => {
   border-radius: 12px;
   color: #08796d;
   background: #e9fbf7;
-  font-size: 18px;
-  font-weight: 900;
+  font-size: 17px;
+  font-weight: 750;
 }
 
 .app-layout__brand-copy {
@@ -313,7 +315,7 @@ onMounted(() => {
   display: block;
   color: #0f172a;
   font-size: 18px;
-  font-weight: 900;
+  font-weight: 800;
   letter-spacing: 0.03em;
 }
 
@@ -321,7 +323,7 @@ onMounted(() => {
   display: block;
   color: #64748b;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 650;
 }
 
 .app-layout__collapse-button {
@@ -332,7 +334,26 @@ onMounted(() => {
   color: #0f766e;
   background: #fff;
   font-size: 20px;
-  font-weight: 900;
+  font-weight: 700;
+}
+
+.app-layout__menu-scroll {
+  height: calc(100vh - 86px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 18px;
+}
+
+.app-layout__menu-scroll::-webkit-scrollbar,
+.app-layout__content-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.app-layout__menu-scroll::-webkit-scrollbar-thumb,
+.app-layout__content-scroll::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: #c7d6df;
 }
 
 .app-layout__menu {
@@ -348,7 +369,7 @@ onMounted(() => {
   border-radius: 10px;
   color: #475569;
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 650;
 }
 
 .app-layout__menu :deep(.el-sub-menu__title:hover),
@@ -374,7 +395,7 @@ onMounted(() => {
   background: #edf7f5;
   color: #0f766e;
   font-size: 0.72rem;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .app-layout__aside--collapsed .app-layout__menu-icon {
@@ -382,9 +403,17 @@ onMounted(() => {
 }
 
 .app-layout__main {
-  min-height: calc(100vh - 86px);
-  padding: 18px 24px 28px;
+  height: calc(100vh - 86px);
+  overflow: hidden;
+  padding: 0;
   background: #eaf2f6;
+}
+
+.app-layout__content-scroll {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 18px 24px 28px;
 }
 
 .app-layout__l3-row {
@@ -401,17 +430,6 @@ onMounted(() => {
 
 .app-layout__l3-tab {
   border-radius: 999px;
-  font-weight: 800;
-}
-
-.menu-fallback-note {
-  margin: 10px 18px 0;
-  padding: 8px 10px;
-  border: 1px solid #d7e3ec;
-  border-radius: 10px;
-  background: #f8fbfa;
-  font-size: 12px;
-  color: #64748b;
-  font-weight: 700;
+  font-weight: 650;
 }
 </style>
