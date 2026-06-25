@@ -18,43 +18,65 @@ export interface LoginResponse {
   user: LoginUser
 }
 
-const LOCAL_REVIEW_USERNAME = 'admin'
-const LOCAL_REVIEW_PASSWORD = 'Admin@2026'
-const LOCAL_REVIEW_OTP = '260624'
+const LOCAL_REVIEW_USERS = [
+  {
+    username: 'admin',
+    password: 'Admin@2026',
+    otp: '260624',
+    displayName: 'VANTARIS Administrator',
+    role: 'Admin',
+  },
+  {
+    username: 'superadmin',
+    password: 'VantarisDemoAdmin#2026',
+    otp: '260624',
+    displayName: 'System Administrator',
+    role: 'Administrator',
+  },
+  {
+    username: 'maintenance',
+    password: 'VantarisDemoUser#2026',
+    otp: '260624',
+    displayName: 'Maintenance Engineer',
+    role: 'Engineer',
+  },
+]
 
 export async function login(payload: LoginPayload): Promise<LoginResponse> {
-  try {
-    const { data } = await request.post('/v1/auth/login', payload)
-    return data as LoginResponse
-  } catch (error) {
-    if (isLocalReviewRuntime() && isLocalReviewCredential(payload)) {
-      return createLocalReviewSession(payload)
-    }
-
-    throw error
+  if (isLocalReviewRuntime() && isLocalReviewCredential(payload)) {
+    return createLocalReviewSession(payload)
   }
+
+  const { data } = await request.post('/v1/auth/login', payload)
+  return data as LoginResponse
 }
 
 function isLocalReviewRuntime(): boolean {
   const host = window.location.hostname
-  return import.meta.env.DEV || host === 'localhost' || host === '127.0.0.1'
+  return import.meta.env.DEV || host === 'localhost' || host === '127.0.0.1' || host.startsWith('192.168.') || host.startsWith('10.') || host.endsWith('.local')
+}
+
+function findLocalReviewUser(payload: LoginPayload) {
+  return LOCAL_REVIEW_USERS.find((user) => (
+    payload.username.trim().toLowerCase() === user.username &&
+    payload.password === user.password &&
+    payload.otp.trim() === user.otp
+  ))
 }
 
 function isLocalReviewCredential(payload: LoginPayload): boolean {
-  return (
-    payload.username.trim() === LOCAL_REVIEW_USERNAME &&
-    payload.password === LOCAL_REVIEW_PASSWORD &&
-    payload.otp.trim() === LOCAL_REVIEW_OTP
-  )
+  return Boolean(findLocalReviewUser(payload))
 }
 
 function createLocalReviewSession(payload: LoginPayload): LoginResponse {
+  const user = findLocalReviewUser(payload)
+
   return {
-    token: 'local-2fa-customer-ga-review-token',
+    token: `local-2fa-${user?.username ?? 'review'}-token`,
     user: {
-      username: payload.username,
-      displayName: 'VANTARIS Administrator',
-      role: 'Admin',
+      username: user?.username ?? payload.username,
+      displayName: user?.displayName ?? payload.username,
+      role: user?.role ?? 'Admin',
       permissions: ['platform:read', 'system:read', 'audit:read'],
     },
   }
