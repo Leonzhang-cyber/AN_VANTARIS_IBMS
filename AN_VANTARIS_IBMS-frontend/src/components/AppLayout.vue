@@ -52,25 +52,6 @@ const activeL2 = computed(() => {
 const activeL3Items = computed(() => activeL2.value?.l3Items ?? [])
 const activeMenuIndex = computed(() => activeL2.value?.id ?? activePath.value)
 const activeL3Label = computed(() => activeL3Items.value.find((item) => item.id === activeL3Id.value)?.label ?? activeL3Items.value[0]?.label ?? '')
-const selectedL3Item = computed(() => {
-  if (!activeL3Items.value.length) {
-    return undefined
-  }
-
-  if (activeL3Id.value) {
-    return activeL3Items.value.find((item) => item.id === activeL3Id.value) ?? activeL3Items.value[0]
-  }
-
-  return activeL3Items.value[0]
-})
-const selectedL3Status = computed(() => selectedL3Item.value?.status ?? 'mapped')
-const selectedL3ContextTitle = computed(() => selectedL3Item.value?.label ?? activeL2.value?.label ?? pageTitle.value)
-const selectedL3ContextSubtitle = computed(() => {
-  const l2 = activeL2.value?.label ?? pageTitle.value
-  const status = selectedL3Status.value
-  const module = selectedL3Item.value?.mappedExistingModule ?? 'current workspace'
-  return `${l2} · ${status} · ${module}`
-})
 const sidebarWidth = computed(() => (sidebarCollapsed.value ? '76px' : '286px'))
 const pageTitle = computed(() => activeL2.value?.label ?? activeL1.value?.label ?? String(route.meta.title ?? 'Operations Console'))
 const pageSubtitle = computed(() => 'AI-Powered Operations Intelligence for Unified Building & Facility Systems')
@@ -255,27 +236,12 @@ onMounted(() => {
               v-for="item in activeL3Items"
               :key="item.id"
               class="app-layout__l3-tab"
-              :class="{ 'app-layout__l3-tab--active': selectedL3Item?.id === item.id }"
+              :class="{ 'app-layout__l3-tab--active': activeL3Id === item.id }"
               :type="item.status === 'implemented' || item.status === 'mapped' ? 'success' : 'info'"
               effect="plain"
               @click="onL3Select(item.id)"
             >
               {{ item.label }}
-            </el-tag>
-          </section>
-
-          <section v-if="selectedL3Item" class="app-layout__l3-context" aria-label="Selected L3 workspace context">
-            <div>
-              <p>Current workspace section</p>
-              <h2>{{ selectedL3ContextTitle }}</h2>
-              <span>{{ selectedL3ContextSubtitle }}</span>
-            </div>
-            <el-tag
-              class="app-layout__l3-context-status"
-              :type="selectedL3Status === 'implemented' || selectedL3Status === 'mapped' ? 'success' : 'info'"
-              effect="plain"
-            >
-              {{ selectedL3Status }}
             </el-tag>
           </section>
 
@@ -528,46 +494,4 @@ onMounted(() => {
   color: #08796d !important;
 }
 
-.app-layout__l3-context {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-  margin: -4px 0 16px;
-  padding: 14px 18px;
-  border: 1px solid #d7e3ec;
-  border-left: 4px solid #0f766e;
-  border-radius: 14px;
-  background:
-    linear-gradient(180deg, #ffffff 0%, #f8fbfd 100%);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.9),
-    0 8px 18px rgba(15, 23, 42, 0.06);
-}
-
-.app-layout__l3-context p {
-  margin: 0 0 4px;
-  color: #0f766e;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.app-layout__l3-context h2 {
-  margin: 0 0 4px;
-  color: #0f172a;
-  font-size: 18px;
-  font-weight: 700;
-}
-
-.app-layout__l3-context span {
-  color: #64748b;
-  font-size: 13px;
-}
-
-.app-layout__l3-context-status {
-  min-width: 96px;
-  justify-content: center;
-}
 </style>
