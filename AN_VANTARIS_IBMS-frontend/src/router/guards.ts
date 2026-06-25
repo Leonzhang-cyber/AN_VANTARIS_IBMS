@@ -40,7 +40,7 @@ function handleAuthGuard(
 export function registerNavigationGuards(router: Router): void {
   router.beforeEach((to, _from, next) => {
     if (to.meta.title && typeof document !== 'undefined') {
-      document.title = `${String(to.meta.title)} — VANTARIS IBMS`
+      document.title = `${String(to.meta.title)} — VANTARIS ONE`
     }
     handleAuthGuard(to, next)
   })

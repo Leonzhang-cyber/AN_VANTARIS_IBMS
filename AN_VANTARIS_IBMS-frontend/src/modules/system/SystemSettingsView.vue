@@ -8,7 +8,7 @@ import { resolveBaseUrl } from '@/services/api/request'
 const menuMode = ref<'dynamic' | 'fallback' | 'checking'>('checking')
 
 const settingsForm = reactive({
-  applicationName: readEnvString('VITE_IBMS_APP_NAME', 'VANTARIS IBMS'),
+  applicationName: readEnvString('VITE_IBMS_APP_NAME', 'VANTARIS ONE'),
   apiBaseUrl: resolveBaseUrl(),
   debugEnabled: readDebugFlag(),
   menuMode: 'checking',
