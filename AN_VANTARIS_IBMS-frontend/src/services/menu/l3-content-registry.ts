@@ -142,6 +142,11 @@ export function resolveL3ContentConfig(context: L3ContentContext): L3ContentConf
 }
 
 export function resolveL3RouteContentConfig(menuId: unknown, l3Id: unknown): L3ContentConfig | undefined {
+  const context = resolveL3RouteContentContext(menuId, l3Id)
+  return context ? resolveL3ContentConfig(context) : undefined
+}
+
+export function resolveL3RouteContentContext(menuId: unknown, l3Id: unknown): L3ContentContext | undefined {
   if (typeof menuId !== 'string' || !menuId) {
     return undefined
   }
@@ -163,13 +168,13 @@ export function resolveL3RouteContentConfig(menuId: unknown, l3Id: unknown): L3C
       return undefined
     }
 
-    return resolveL3ContentConfig({
+    return {
       l1Label: l1.label,
       l2Id: l2.id,
       l2Label: l2.label,
       path: l2.path,
       item,
-    })
+    }
   }
 
   return undefined
