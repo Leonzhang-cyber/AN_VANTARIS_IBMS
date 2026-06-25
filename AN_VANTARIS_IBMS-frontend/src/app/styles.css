@@ -4,32 +4,114 @@
   box-sizing: border-box;
 }
 
+:root {
+  --vantaris-bg: #eaf2f6;
+  --vantaris-card: #ffffff;
+  --vantaris-border: #d7e3ec;
+  --vantaris-border-soft: #e5eef4;
+  --vantaris-text: #0f172a;
+  --vantaris-muted: #64748b;
+  --vantaris-teal: #0f766e;
+  --vantaris-teal-dark: #08796d;
+  --vantaris-teal-soft: #e4f4f1;
+  --vantaris-blue: #2563eb;
+  --vantaris-red: #dc2626;
+  --vantaris-orange: #ea580c;
+  --vantaris-amber: #b7791f;
+  --vantaris-green: #16a34a;
+  --vantaris-purple: #7c3aed;
+  --vantaris-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
   min-height: 100%;
   font-family:
+    Inter,
+    ui-sans-serif,
     system-ui,
     -apple-system,
     'Segoe UI',
     Roboto,
     sans-serif;
   line-height: 1.5;
-  color: #1a1a1a;
-  background: #f5f6f8;
+  color: var(--vantaris-text);
+  background: var(--vantaris-bg);
+}
+
+body {
+  overflow-x: hidden;
 }
 
 #app {
   min-height: 100vh;
 }
 
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.vantaris-card,
+.el-card {
+  border-color: var(--vantaris-border) !important;
+  border-radius: 14px !important;
+  box-shadow: var(--vantaris-shadow) !important;
+}
+
+.el-table {
+  border-radius: 12px;
+  overflow: hidden;
+  color: var(--vantaris-text);
+}
+
+.el-table th.el-table__cell {
+  background: #f7fafc !important;
+  color: var(--vantaris-muted);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.el-table td.el-table__cell {
+  color: #334155;
+}
+
+.el-button {
+  font-weight: 800;
+}
+
+.el-tag {
+  font-weight: 800;
+}
+
+.el-input__wrapper,
+.el-select__wrapper {
+  border-radius: 10px !important;
+  box-shadow: 0 0 0 1px var(--vantaris-border) inset !important;
+}
+
+.placeholder-page {
+  min-height: calc(100vh - 120px);
+  padding: 28px;
+  border: 1px solid var(--vantaris-border);
+  border-radius: 16px;
+  background: var(--vantaris-card);
+  box-shadow: var(--vantaris-shadow);
+}
+
 .placeholder-page h1 {
   margin: 0 0 0.5rem;
+  color: var(--vantaris-text);
   font-size: 1.5rem;
 }
 
 .placeholder-page p {
   margin: 0;
-  color: #475569;
+  color: var(--vantaris-muted);
 }
