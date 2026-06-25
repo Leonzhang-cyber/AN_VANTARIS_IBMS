@@ -8,6 +8,7 @@ database access, approval execution, or external system connections.
 from __future__ import annotations
 
 import json
+import os
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -20,6 +21,7 @@ from src.common.models.response import Result
 
 RELEASE_CANDIDATE = "airport-international-ga-ready-readonly-rc-20260620"
 SKELETON_PATH = "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-read-only-api-skeleton.v1.json"
+ONE_ARTIFACT_PREFIX = "AN_VANTARIS_ONE/"
 FORBIDDEN_IDENTIFIER_KEYS = {"customerAssetIdentifier", "assetId", "deviceId"}
 ROOT_KEY_COMPATIBILITY_ALIASES = {
     "operationsRows": "candidates",
@@ -43,8 +45,15 @@ def _repo_root() -> Path:
     raise RuntimeError("VANTARIS ONE repository root not found")
 
 
+def _resolve_artifact_path(relative_path: str) -> Path:
+    artifact_root = os.getenv("VANTARIS_ONE_ARTIFACT_ROOT")
+    if artifact_root is not None and artifact_root.strip() and relative_path.startswith(ONE_ARTIFACT_PREFIX):
+        return Path(artifact_root.strip()) / relative_path[len(ONE_ARTIFACT_PREFIX) :]
+    return _repo_root() / relative_path
+
+
 def _load_json(relative_path: str) -> dict[str, Any]:
-    path = _repo_root() / relative_path
+    path = _resolve_artifact_path(relative_path)
     if not path.is_file():
         raise FileNotFoundError(relative_path)
     with path.open("r", encoding="utf-8") as handle:
