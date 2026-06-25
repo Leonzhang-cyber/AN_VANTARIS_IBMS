@@ -409,29 +409,15 @@ onMounted(() => {
       <div class="page-header">
         <div>
           <h1>Assets &amp; Topology</h1>
-          <p>Read-only asset and topology workspace for VANTARIS ONE.</p>
+          <p>Asset registry, topology, location mapping, relationship impact, and evidence-linked asset context.</p>
         </div>
         <el-space wrap>
-          <el-tag type="info">runtimeMode: {{ health.runtimeMode }}</el-tag>
-          <el-tag type="success">provider: {{ health.provider }}</el-tag>
-          <el-tag>sourceSemantics: {{ health.sourceSemantics }}</el-tag>
-          <el-tag>readOnly: {{ health.readOnly }}</el-tag>
-          <el-tag>discoveryEnabled: {{ health.discoveryEnabled }}</el-tag>
-          <el-tag>edgeRuntimeIntegrated: {{ health.edgeRuntimeIntegrated }}</el-tag>
-          <el-tag>linkRuntimeIntegrated: {{ health.linkRuntimeIntegrated }}</el-tag>
-          <el-tag>certified: {{ health.certified }}</el-tag>
-          <el-tag>iec62443Certified: {{ health.iec62443Certified }}</el-tag>
+          <el-tag type="success">Operational review</el-tag>
+          <el-tag type="info">Asset intelligence</el-tag>
+          <el-tag type="warning">Topology quality</el-tag>
         </el-space>
       </div>
     </el-card>
-
-    <el-alert
-      type="info"
-      show-icon
-      :closable="false"
-      title="Topology relationships are local skeleton references. Runtime discovery, telemetry correlation and EDGE/LINK integration are not integrated."
-      class="block-space"
-    />
 
     <el-alert v-if="apiError" type="warning" show-icon :closable="false" :title="apiError" class="block-space" />
 

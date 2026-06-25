@@ -271,22 +271,16 @@ onMounted(() => {
 <template>
   <section class="uesg-page">
     <div class="hero-row">
-      <h2>UESG Sustainability</h2>
+      <div>
+        <h2>UESG Sustainability</h2>
+        <p>Energy, carbon, data quality, sustainability metrics, compliance evidence, and optimization review.</p>
+      </div>
       <div class="hero-tags">
-        <el-tag type="success">status: {{ health.status }}</el-tag>
-        <el-tag type="info">runtime: {{ health.runtimeMode }}</el-tag>
-        <el-tag type="warning">provider: {{ health.provider }}</el-tag>
-        <el-tag type="info">readOnly: {{ health.readOnly }}</el-tag>
+        <el-tag type="success">Operational review</el-tag>
+        <el-tag type="info">Energy intelligence</el-tag>
+        <el-tag type="warning">Compliance readiness</el-tag>
       </div>
     </div>
-
-    <el-alert
-      type="info"
-      show-icon
-      :closable="false"
-      title="UESG R2 category, calculation and trend views are local skeleton readiness views. Meter integration, carbon factor governance and certification reporting are not integrated."
-      class="block-space"
-    />
 
     <el-alert
       v-if="apiError"

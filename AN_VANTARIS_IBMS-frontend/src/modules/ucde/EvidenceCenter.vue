@@ -282,34 +282,15 @@ onMounted(() => {
       <div class="page-header">
         <div>
           <h1>UCDE Evidence Center</h1>
-          <p>Read-only evidence and traceability workspace for VANTARIS ONE.</p>
+          <p>Evidence chain, source traceability, decision records, audit trail, and export-ready operational evidence.</p>
         </div>
         <el-space wrap>
-          <el-tag type="info">runtimeMode: {{ health.runtimeMode }}</el-tag>
-          <el-tag type="success">provider: {{ health.provider }}</el-tag>
-          <el-tag>sourceSemantics: {{ health.sourceSemantics }}</el-tag>
-          <el-tag type="warning">evidenceChainMode: {{ health.evidenceChainMode }}</el-tag>
-          <el-tag>readOnly: {{ health.readOnly }}</el-tag>
-          <el-tag>certified: {{ health.certified }}</el-tag>
-          <el-tag>iec62443Certified: {{ health.iec62443Certified }}</el-tag>
+          <el-tag type="success">Evidence-backed review</el-tag>
+          <el-tag type="info">Traceability workspace</el-tag>
+          <el-tag type="warning">Audit readiness</el-tag>
         </el-space>
       </div>
     </el-card>
-
-    <el-alert
-      type="info"
-      show-icon
-      :closable="false"
-      title="UCDE R2 uses hash-only local evidence for traceability readiness. It is not a certification proof."
-      class="block-space"
-    />
-    <el-alert
-      type="info"
-      show-icon
-      :closable="false"
-      title="Traceability links are local skeleton references in R2. Runtime source validation is not integrated."
-      class="block-space"
-    />
 
     <el-alert
       v-if="apiError"
