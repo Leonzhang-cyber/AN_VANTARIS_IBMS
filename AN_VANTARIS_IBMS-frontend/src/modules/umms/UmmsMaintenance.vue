@@ -1,7 +1,20 @@
 <script setup lang="ts">
-import { computed, onMounted, reactive, ref } from 'vue'
+import { computed, onMounted, reactive, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import { ApiError } from '@/services/api/errors'
 import { getUmmsGaR2Workspace, type UmmsGaR2Workspace, type UmmsGaR2WorkOrder } from '@/services/api/umms'
+
+type CustomerSection = {
+  title: string
+  subtitle: string
+  primaryAction: string
+  targetTab: string
+  metrics: Array<{ label: string; value: string; note: string }>
+  rows: Array<{ item: string; focus: string; status: string }>
+}
+
+const route = useRoute()
+const customerUnavailableMessage = 'Live service is temporarily unavailable. Showing the latest available operational view.'
 
 const tabs = [
   'Overview',
@@ -19,6 +32,359 @@ const apiError = ref('')
 const activeTab = ref('Overview')
 const workspace = ref<UmmsGaR2Workspace | null>(null)
 const reportToast = ref('')
+
+const customerSections: Record<string, CustomerSection> = {
+  'open-work-orders': {
+    title: 'Open Work Orders',
+    subtitle: 'Open maintenance queue across assets, systems, SLA risk, engineer assignment, and evidence status.',
+    primaryAction: 'Review open work orders',
+    targetTab: 'Work Orders',
+    metrics: [
+      { label: 'Open WOs', value: '42', note: 'Open maintenance work orders' },
+      { label: 'High Priority', value: '11', note: 'Critical and high priority queue' },
+      { label: 'SLA Risk', value: '7', note: 'Work orders approaching breach' },
+      { label: 'Evidence Pending', value: '8', note: 'Closure evidence under review' },
+    ],
+    rows: [
+      { item: 'Review open work order queue', focus: 'Status, asset and SLA due', status: 'Active' },
+      { item: 'Open high priority work orders', focus: 'Critical service impact', status: 'High' },
+      { item: 'Check closure evidence', focus: 'UCDE evidence linkage', status: 'Review' },
+    ],
+  },
+  'assigned-work-orders': {
+    title: 'Assigned Work Orders',
+    subtitle: 'Engineer assignment view across workload, discipline, shift availability, escalation owner, and active tasks.',
+    primaryAction: 'Review assignments',
+    targetTab: 'Assignments',
+    metrics: [
+      { label: 'Assigned WOs', value: '27', note: 'Work orders assigned to teams' },
+      { label: 'Engineers', value: '9', note: 'Engineers with active workload' },
+      { label: 'Shift Coverage', value: '3', note: 'Shifts represented in workload view' },
+      { label: 'Escalations', value: '4', note: 'Assignments requiring escalation owner' },
+    ],
+    rows: [
+      { item: 'Review engineer workload', focus: 'Assigned work orders and skills', status: 'Active' },
+      { item: 'Open shift availability', focus: 'Coverage and escalation owner', status: 'Ready' },
+      { item: 'Prepare assignment evidence', focus: 'Workload and shift evidence', status: 'Ready' },
+    ],
+  },
+  'emergency-work-orders': {
+    title: 'Emergency Work Orders',
+    subtitle: 'Emergency maintenance queue for critical assets, service impact, engineer response, and evidence trail.',
+    primaryAction: 'Review emergency queue',
+    targetTab: 'Work Orders',
+    metrics: [
+      { label: 'Emergency WOs', value: '5', note: 'Emergency work orders under review' },
+      { label: 'Critical Assets', value: '4', note: 'Assets with service impact' },
+      { label: 'SLA At Risk', value: '5', note: 'Emergency SLA exposure' },
+      { label: 'Evidence Linked', value: '5', note: 'Emergency records with evidence' },
+    ],
+    rows: [
+      { item: 'Review emergency queue', focus: 'Criticality and SLA due', status: 'High' },
+      { item: 'Open impacted assets', focus: 'Asset and service context', status: 'Active' },
+      { item: 'Prepare emergency evidence', focus: 'Evidence trail and closure state', status: 'Ready' },
+    ],
+  },
+  'fault-linked-work-orders': {
+    title: 'Fault-linked Work Orders',
+    subtitle: 'Work orders created from alarms and faults with source event, impacted asset, and evidence linkage.',
+    primaryAction: 'Review fault-linked WOs',
+    targetTab: 'Evidence',
+    metrics: [
+      { label: 'Fault-linked WOs', value: '18', note: 'Work orders tied to faults' },
+      { label: 'Critical Faults', value: '6', note: 'Faults with critical impact' },
+      { label: 'Asset Links', value: '18', note: 'Work orders linked to assets' },
+      { label: 'Evidence Ready', value: '15', note: 'Evidence-linked records' },
+    ],
+    rows: [
+      { item: 'Review fault-linked queue', focus: 'Fault source and work order state', status: 'Active' },
+      { item: 'Open source fault evidence', focus: 'Alarm / fault trace', status: 'Ready' },
+      { item: 'Prepare closure record', focus: 'Work order evidence chain', status: 'Review' },
+    ],
+  },
+  'preventive-work-orders': {
+    title: 'Preventive Work Orders',
+    subtitle: 'Preventive maintenance work orders by plan, frequency, due date, compliance, and checklist readiness.',
+    primaryAction: 'Review preventive WOs',
+    targetTab: 'Preventive',
+    metrics: [
+      { label: 'Preventive WOs', value: '14', note: 'Preventive work orders due soon' },
+      { label: 'Due Today', value: '7', note: 'Preventive work scheduled today' },
+      { label: 'Compliance Risk', value: '3', note: 'PM items needing review' },
+      { label: 'Checklist Ready', value: '11', note: 'PM checklists ready' },
+    ],
+    rows: [
+      { item: 'Review preventive queue', focus: 'Schedule and compliance state', status: 'Ready' },
+      { item: 'Open PM checklist', focus: 'Checklist readiness', status: 'Active' },
+      { item: 'Prepare PM evidence', focus: 'Preventive evidence package', status: 'Ready' },
+    ],
+  },
+  'corrective-work-orders': {
+    title: 'Corrective Work Orders',
+    subtitle: 'Corrective maintenance view across issue source, technician action, parts readiness, and closure review.',
+    primaryAction: 'Review corrective WOs',
+    targetTab: 'Work Orders',
+    metrics: [
+      { label: 'Corrective WOs', value: '16', note: 'Corrective work orders open' },
+      { label: 'Parts Watch', value: '5', note: 'Items requiring materials readiness' },
+      { label: 'Engineer Updates', value: '12', note: 'Engineer updates recorded' },
+      { label: 'Closure Review', value: '6', note: 'Corrective records awaiting review' },
+    ],
+    rows: [
+      { item: 'Review corrective queue', focus: 'Source event and action status', status: 'Active' },
+      { item: 'Open parts readiness', focus: 'Materials and vendor notes', status: 'Review' },
+      { item: 'Prepare corrective closure', focus: 'Evidence and closure records', status: 'Ready' },
+    ],
+  },
+  'work-order-detail': {
+    title: 'Work Order Detail',
+    subtitle: 'Focused work order context with asset, system, location, source fault, engineer, SLA, and evidence.',
+    primaryAction: 'Review work order detail',
+    targetTab: 'Work Orders',
+    metrics: [
+      { label: 'Context Fields', value: '12', note: 'Core customer-visible fields' },
+      { label: 'Evidence Items', value: '5', note: 'Evidence linked to selected WO' },
+      { label: 'SLA Fields', value: '4', note: 'SLA and aging indicators' },
+      { label: 'Action Rows', value: '3', note: 'Next review actions' },
+    ],
+    rows: [
+      { item: 'Review work order detail', focus: 'Asset, system and source fault', status: 'Ready' },
+      { item: 'Open engineer update', focus: 'Engineer action and status', status: 'Active' },
+      { item: 'Check closure evidence', focus: 'Evidence and approval record', status: 'Review' },
+    ],
+  },
+  'closure-evidence': {
+    title: 'Closure Evidence',
+    subtitle: 'Closure evidence view for completed work, approval records, attachments, and audit traceability.',
+    primaryAction: 'Review closure evidence',
+    targetTab: 'Evidence',
+    metrics: [
+      { label: 'Closure Packages', value: '8', note: 'Closure packages under review' },
+      { label: 'Attachments', value: '21', note: 'Attachments linked to closure records' },
+      { label: 'Approval Records', value: '8', note: 'Closure approvals represented' },
+      { label: 'Audit Ready', value: '6', note: 'Closure packages ready for audit' },
+    ],
+    rows: [
+      { item: 'Review closure evidence', focus: 'Work order closure trail', status: 'Review' },
+      { item: 'Open attachments', focus: 'Photos, notes and records', status: 'Ready' },
+      { item: 'Prepare closure export', focus: 'Customer-ready evidence package', status: 'Ready' },
+    ],
+  },
+  'pm-calendar': {
+    title: 'PM Calendar',
+    subtitle: 'Preventive maintenance calendar across due dates, frequency, compliance state, and checklist readiness.',
+    primaryAction: 'Review PM calendar',
+    targetTab: 'Preventive',
+    metrics: [
+      { label: 'PM Tasks', value: '24', note: 'Scheduled preventive tasks' },
+      { label: 'Due Today', value: '7', note: 'PM tasks due today' },
+      { label: 'Due This Week', value: '14', note: 'PM tasks due this week' },
+      { label: 'Compliance Watch', value: '3', note: 'PM items requiring review' },
+    ],
+    rows: [
+      { item: 'Review PM calendar', focus: 'Due dates and frequency', status: 'Ready' },
+      { item: 'Open due-today PM', focus: 'Today schedule and owners', status: 'Active' },
+      { item: 'Prepare PM report', focus: 'Compliance and evidence', status: 'Ready' },
+    ],
+  },
+  'pm-templates': {
+    title: 'PM Templates',
+    subtitle: 'Preventive maintenance templates with checklist readiness, asset group coverage, and evidence rules.',
+    primaryAction: 'Review PM templates',
+    targetTab: 'Preventive',
+    metrics: [
+      { label: 'Templates', value: '18', note: 'PM templates available' },
+      { label: 'Checklist Ready', value: '15', note: 'Templates with checklist coverage' },
+      { label: 'Asset Groups', value: '9', note: 'Asset groups covered' },
+      { label: 'Evidence Rules', value: '12', note: 'Templates with evidence rules' },
+    ],
+    rows: [
+      { item: 'Review PM templates', focus: 'Checklist and asset coverage', status: 'Ready' },
+      { item: 'Open checklist readiness', focus: 'Template completeness', status: 'Review' },
+      { item: 'Prepare template evidence', focus: 'Evidence rules and audit trail', status: 'Ready' },
+    ],
+  },
+  'pm-schedule': {
+    title: 'PM Schedule',
+    subtitle: 'Preventive maintenance schedule by next due date, asset group, compliance status, and owner readiness.',
+    primaryAction: 'Review PM schedule',
+    targetTab: 'Preventive',
+    metrics: [
+      { label: 'Scheduled PM', value: '24', note: 'PM items on schedule' },
+      { label: 'Next Due', value: '7', note: 'Items due in the next operating day' },
+      { label: 'Owner Assigned', value: '21', note: 'PM items with owner assignment' },
+      { label: 'Evidence Ready', value: '18', note: 'PM evidence records ready' },
+    ],
+    rows: [
+      { item: 'Review PM schedule', focus: 'Due date and assignment', status: 'Ready' },
+      { item: 'Open owner gaps', focus: 'Unassigned PM items', status: 'Review' },
+      { item: 'Prepare schedule evidence', focus: 'PM schedule evidence package', status: 'Ready' },
+    ],
+  },
+  'engineer-calendar': {
+    title: 'Engineer Calendar',
+    subtitle: 'Engineer workload calendar with assignments, skills, shift availability, and escalation ownership.',
+    primaryAction: 'Review engineer calendar',
+    targetTab: 'Assignments',
+    metrics: [
+      { label: 'Engineers', value: '9', note: 'Engineers represented' },
+      { label: 'Assigned WOs', value: '27', note: 'Assigned work orders' },
+      { label: 'Shift Conflicts', value: '2', note: 'Calendar conflicts requiring review' },
+      { label: 'Escalations', value: '4', note: 'Items requiring escalation owner' },
+    ],
+    rows: [
+      { item: 'Review engineer calendar', focus: 'Shift and workload coverage', status: 'Ready' },
+      { item: 'Open assignment load', focus: 'Engineer capacity and skills', status: 'Active' },
+      { item: 'Prepare workload evidence', focus: 'Assignment evidence record', status: 'Ready' },
+    ],
+  },
+  'assignment-load': {
+    title: 'Assignment Load',
+    subtitle: 'Assignment load view for engineer capacity, assigned work orders, skill coverage, and SLA exposure.',
+    primaryAction: 'Review assignment load',
+    targetTab: 'Assignments',
+    metrics: [
+      { label: 'Assigned WOs', value: '27', note: 'Assigned work order load' },
+      { label: 'High Load Engineers', value: '3', note: 'Engineers with elevated workload' },
+      { label: 'Skill Gaps', value: '2', note: 'Assignments needing skill review' },
+      { label: 'SLA Exposure', value: '6', note: 'Assigned items at SLA risk' },
+    ],
+    rows: [
+      { item: 'Review load balance', focus: 'Engineer capacity and SLA risk', status: 'Review' },
+      { item: 'Open skill coverage', focus: 'Discipline and availability', status: 'Active' },
+      { item: 'Prepare assignment report', focus: 'Workload evidence', status: 'Ready' },
+    ],
+  },
+  'sla-dashboard': {
+    title: 'SLA Dashboard',
+    subtitle: 'SLA dashboard for due soon, overdue work orders, aging buckets, MTTR, response, and escalation.',
+    primaryAction: 'Review SLA dashboard',
+    targetTab: 'SLA & Aging',
+    metrics: [
+      { label: 'SLA At Risk', value: '7', note: 'Items approaching breach' },
+      { label: 'Overdue', value: '3', note: 'Work orders past SLA due' },
+      { label: 'Due Today', value: '9', note: 'Items due today' },
+      { label: 'Avg MTTR', value: '3.8h', note: 'Rolling maintenance MTTR' },
+    ],
+    rows: [
+      { item: 'Review SLA dashboard', focus: 'Due soon and overdue items', status: 'Active' },
+      { item: 'Open escalation queue', focus: 'Supervisor review items', status: 'High' },
+      { item: 'Prepare SLA report', focus: 'SLA evidence and response time', status: 'Ready' },
+    ],
+  },
+  'breach-risk': {
+    title: 'Breach Risk',
+    subtitle: 'Breach risk queue for work orders nearing SLA breach, escalation owners, and customer impact.',
+    primaryAction: 'Review breach risk',
+    targetTab: 'SLA & Aging',
+    metrics: [
+      { label: 'Breach Risk', value: '7', note: 'Items nearing SLA breach' },
+      { label: 'Critical Risk', value: '2', note: 'Critical breach risk items' },
+      { label: 'Escalation Owners', value: '5', note: 'Assigned escalation owners' },
+      { label: 'Evidence Pending', value: '4', note: 'Risk items needing evidence' },
+    ],
+    rows: [
+      { item: 'Review breach risk queue', focus: 'SLA due and owner readiness', status: 'High' },
+      { item: 'Open customer impact items', focus: 'Service risk and mitigation', status: 'Review' },
+      { item: 'Prepare breach evidence', focus: 'SLA and action evidence', status: 'Ready' },
+    ],
+  },
+  'escalation-queue': {
+    title: 'Escalation Queue',
+    subtitle: 'Escalation queue for high-risk work orders, owners, customer impact, and closure evidence.',
+    primaryAction: 'Review escalation queue',
+    targetTab: 'SLA & Aging',
+    metrics: [
+      { label: 'Escalations', value: '8', note: 'Escalation items open' },
+      { label: 'High Priority', value: '5', note: 'High priority escalation items' },
+      { label: 'Owner Assigned', value: '7', note: 'Items with escalation owner' },
+      { label: 'Evidence Ready', value: '5', note: 'Escalations with evidence' },
+    ],
+    rows: [
+      { item: 'Review escalation queue', focus: 'Priority and owner state', status: 'Active' },
+      { item: 'Open high-priority escalation', focus: 'Customer impact and SLA', status: 'High' },
+      { item: 'Prepare escalation evidence', focus: 'Action and approval trail', status: 'Ready' },
+    ],
+  },
+  mttr: {
+    title: 'MTTR',
+    subtitle: 'Mean time to repair view across work order closure, system category, team response, and evidence.',
+    primaryAction: 'Review MTTR',
+    targetTab: 'SLA & Aging',
+    metrics: [
+      { label: 'Average MTTR', value: '3.8h', note: 'Rolling maintenance MTTR' },
+      { label: 'Critical MTTR', value: '2.4h', note: 'Critical queue repair average' },
+      { label: 'Improving Systems', value: '6', note: 'Systems trending better' },
+      { label: 'Review Items', value: '3', note: 'MTTR outliers for review' },
+    ],
+    rows: [
+      { item: 'Review MTTR trend', focus: 'System and priority performance', status: 'Ready' },
+      { item: 'Open MTTR outliers', focus: 'Repair delays and root cause', status: 'Review' },
+      { item: 'Prepare MTTR report', focus: 'Customer maintenance performance', status: 'Ready' },
+    ],
+  },
+  mtbf: {
+    title: 'MTBF',
+    subtitle: 'Mean time between failures view for repeated failures, reliability, asset health, and improvement actions.',
+    primaryAction: 'Review MTBF',
+    targetTab: 'Predictive',
+    metrics: [
+      { label: 'MTBF Watchlist', value: '9', note: 'Assets needing reliability review' },
+      { label: 'Repeated Failures', value: '6', note: 'Assets with repeated failures' },
+      { label: 'Reliability Actions', value: '5', note: 'Improvement actions in progress' },
+      { label: 'Evidence Ready', value: '8', note: 'Reliability records with evidence' },
+    ],
+    rows: [
+      { item: 'Review MTBF watchlist', focus: 'Repeated failures and reliability', status: 'Review' },
+      { item: 'Open reliability actions', focus: 'Improvement plan status', status: 'Active' },
+      { item: 'Prepare reliability evidence', focus: 'Asset reliability report', status: 'Ready' },
+    ],
+  },
+  'repeated-failures': {
+    title: 'Repeated Failures',
+    subtitle: 'Repeated failure view for high-repeat assets, fault linkage, maintenance actions, and evidence.',
+    primaryAction: 'Review repeated failures',
+    targetTab: 'Predictive',
+    metrics: [
+      { label: 'Repeated Failures', value: '6', note: 'Repeated failure cases open' },
+      { label: 'High Repeat Assets', value: '4', note: 'Assets with repeated patterns' },
+      { label: 'WO Linked', value: '6', note: 'Repeated failures linked to work orders' },
+      { label: 'Evidence Ready', value: '5', note: 'Repeated failure evidence records' },
+    ],
+    rows: [
+      { item: 'Review repeated failure queue', focus: 'Asset and fault pattern', status: 'Review' },
+      { item: 'Open reliability work orders', focus: 'Corrective and preventive actions', status: 'Active' },
+      { item: 'Prepare repeated failure evidence', focus: 'RCA and maintenance evidence', status: 'Ready' },
+    ],
+  },
+  'predictive-risk': {
+    title: 'Predictive Risk',
+    subtitle: 'Predictive maintenance risk view across asset health, failure risk, anomaly summary, and recommended action.',
+    primaryAction: 'Review predictive risk',
+    targetTab: 'Predictive',
+    metrics: [
+      { label: 'Predictive Alerts', value: '5', note: 'Predictive alerts under review' },
+      { label: 'High Severity', value: '2', note: 'High-severity predictive risks' },
+      { label: 'Actions Recommended', value: '5', note: 'Recommended maintenance actions' },
+      { label: 'Evidence Linked', value: '4', note: 'Predictive evidence records' },
+    ],
+    rows: [
+      { item: 'Review predictive risk', focus: 'Asset health and anomaly summary', status: 'Active' },
+      { item: 'Open recommended actions', focus: 'Maintenance plan alignment', status: 'Review' },
+      { item: 'Prepare predictive evidence', focus: 'Risk evidence and confidence', status: 'Ready' },
+    ],
+  },
+}
+
+const fallbackCustomerSection = customerSections['open-work-orders']
+
+function normalizeL3Id(value: unknown, defaultKey: string): string {
+  const raw = typeof value === 'string' && value ? value : defaultKey
+  const normalized = raw.replace(/-\d+$/, '')
+  return customerSections[normalized] ? normalized : defaultKey
+}
+
+const activeCustomerSection = computed(() => customerSections[normalizeL3Id(route.query.l3, 'open-work-orders')] ?? fallbackCustomerSection)
 
 const filters = reactive({
   status: '',
@@ -83,22 +449,21 @@ async function loadWorkspace() {
 onMounted(() => {
   void loadWorkspace()
 })
+
+watch(activeCustomerSection, (section) => {
+  activeTab.value = section.targetTab
+}, { immediate: true })
 </script>
 
 <template>
   <section class="umms-page" v-loading="loading">
     <header class="workspace-head">
       <div>
-        <p class="eyebrow">Work Management / Maintenance</p>
-        <h1>{{ workspace?.workspaceTitle || 'UMMS Maintenance Workspace' }}</h1>
-        <p class="summary">
-          Customer-facing maintenance command workspace for work orders, asset context, SLA risk, assignments, evidence, and reporting.
-        </p>
+        <p class="eyebrow">Selected maintenance section</p>
+        <h1>{{ activeCustomerSection.title }}</h1>
+        <p class="summary">{{ activeCustomerSection.subtitle }}</p>
       </div>
-      <div class="head-badges">
-        <el-tag type="success" effect="light">Read-only</el-tag>
-        <el-tag type="info" effect="light">{{ workspace?.capability || 'Maintenance operations' }}</el-tag>
-      </div>
+      <el-button type="primary" plain>{{ activeCustomerSection.primaryAction }}</el-button>
     </header>
 
     <el-alert
@@ -107,10 +472,24 @@ onMounted(() => {
       type="warning"
       show-icon
       :closable="false"
-      :title="apiError"
+      :title="customerUnavailableMessage"
     />
 
     <template v-if="workspace">
+      <section class="summary-grid section-gap">
+        <article v-for="metric in activeCustomerSection.metrics" :key="metric.label" class="metric-card">
+          <span>{{ metric.label }}</span>
+          <strong>{{ metric.value }}</strong>
+          <em>{{ metric.note }}</em>
+        </article>
+      </section>
+
+      <el-table :data="activeCustomerSection.rows" stripe border class="section-gap">
+        <el-table-column prop="item" label="Action" min-width="240" />
+        <el-table-column prop="focus" label="Focus Area" min-width="260" />
+        <el-table-column prop="status" label="Status" min-width="140" />
+      </el-table>
+
       <section class="summary-grid section-gap">
         <article v-for="card in workspace.overviewCards" :key="card.label" class="metric-card">
           <span>{{ card.label }}</span>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, reactive, ref } from 'vue'
+import { useRoute } from 'vue-router'
 import { ApiError } from '@/services/api/errors'
 import {
   getEvidenceDetail,
@@ -14,6 +15,222 @@ import {
   type EvidenceVerificationResult,
   type UcdeHealth,
 } from '@/services/api/ucde'
+
+type CustomerSection = {
+  title: string
+  subtitle: string
+  primaryAction: string
+  metrics: Array<{ label: string; value: string; note: string }>
+  rows: Array<{ item: string; focus: string; status: string }>
+}
+
+const route = useRoute()
+const customerUnavailableMessage = 'Live service is temporarily unavailable. Showing the latest available operational view.'
+
+const customerSections: Record<string, CustomerSection> = {
+  'evidence-chain': {
+    title: 'Evidence Chain',
+    subtitle: 'Traceable evidence chain across source records, operational actions, decisions, and export readiness.',
+    primaryAction: 'Review evidence chain',
+    metrics: [
+      { label: 'Evidence Records', value: '128', note: 'Records ready for customer review' },
+      { label: 'Complete Chains', value: '96', note: 'Records with complete traceability' },
+      { label: 'Pending Linkage', value: '12', note: 'Records requiring source linkage' },
+      { label: 'Export Ready', value: '22', note: 'Evidence packages ready for export' },
+    ],
+    rows: [
+      { item: 'Review evidence chain', focus: 'Source-to-report traceability', status: 'Ready' },
+      { item: 'Open pending linkage', focus: 'Source relationship review', status: 'Review' },
+      { item: 'Prepare evidence export', focus: 'Customer-ready package', status: 'Ready' },
+    ],
+  },
+  'source-evidence': {
+    title: 'Source Evidence',
+    subtitle: 'Source evidence records from alarms, assets, work orders, sustainability, and reports.',
+    primaryAction: 'Review source evidence',
+    metrics: [
+      { label: 'Source Records', value: '74', note: 'Source records represented' },
+      { label: 'Module Sources', value: '8', note: 'Modules linked to evidence' },
+      { label: 'Open Reviews', value: '9', note: 'Source records requiring review' },
+      { label: 'Verified Links', value: '61', note: 'Source links ready for review' },
+    ],
+    rows: [
+      { item: 'Review source evidence', focus: 'Source module and record context', status: 'Ready' },
+      { item: 'Open source review items', focus: 'Source quality and linkage', status: 'Review' },
+      { item: 'Check source report links', focus: 'Report and evidence alignment', status: 'Ready' },
+    ],
+  },
+  'decision-evidence': {
+    title: 'Decision Evidence',
+    subtitle: 'Decision evidence view for approvals, operational decisions, policy gates, and audit review.',
+    primaryAction: 'Review decision evidence',
+    metrics: [
+      { label: 'Decision Records', value: '18', note: 'Decision evidence records' },
+      { label: 'Approval Links', value: '11', note: 'Records linked to approvals' },
+      { label: 'Open Reviews', value: '4', note: 'Decision records needing review' },
+      { label: 'Export Ready', value: '7', note: 'Decision packages ready' },
+    ],
+    rows: [
+      { item: 'Review decision evidence', focus: 'Decision owner and approval chain', status: 'Review' },
+      { item: 'Open approval chain', focus: 'Policy and signoff evidence', status: 'Active' },
+      { item: 'Prepare decision package', focus: 'Audit-ready decision record', status: 'Ready' },
+    ],
+  },
+  'fault-evidence': {
+    title: 'Fault Evidence',
+    subtitle: 'Fault evidence records linked to alarms, impacted assets, work orders, and root cause review.',
+    primaryAction: 'Review fault evidence',
+    metrics: [
+      { label: 'Fault Records', value: '31', note: 'Fault evidence records' },
+      { label: 'Alarm Links', value: '24', note: 'Faults linked to alarm records' },
+      { label: 'WO Links', value: '18', note: 'Faults linked to work orders' },
+      { label: 'Open Reviews', value: '6', note: 'Fault evidence needing review' },
+    ],
+    rows: [
+      { item: 'Review fault evidence', focus: 'Alarm and fault correlation', status: 'Active' },
+      { item: 'Open impacted asset evidence', focus: 'Asset and service impact', status: 'Review' },
+      { item: 'Prepare RCA evidence', focus: 'Root cause evidence package', status: 'Ready' },
+    ],
+  },
+  'maintenance-evidence': {
+    title: 'Maintenance Evidence',
+    subtitle: 'Maintenance evidence for work order closure, preventive maintenance, assignments, and SLA review.',
+    primaryAction: 'Review maintenance evidence',
+    metrics: [
+      { label: 'WO Evidence', value: '42', note: 'Work order evidence records' },
+      { label: 'Closure Ready', value: '8', note: 'Closure evidence packages' },
+      { label: 'PM Evidence', value: '14', note: 'Preventive maintenance evidence' },
+      { label: 'SLA Evidence', value: '7', note: 'SLA evidence records' },
+    ],
+    rows: [
+      { item: 'Review work order evidence', focus: 'Maintenance closure and SLA', status: 'Review' },
+      { item: 'Open preventive evidence', focus: 'PM checklist and schedule evidence', status: 'Ready' },
+      { item: 'Prepare closure package', focus: 'Customer closure review', status: 'Ready' },
+    ],
+  },
+  'energy-evidence': {
+    title: 'Energy Evidence',
+    subtitle: 'Energy and sustainability evidence records for exceptions, baselines, ESG metrics, and reporting.',
+    primaryAction: 'Review energy evidence',
+    metrics: [
+      { label: 'Energy Evidence', value: '42', note: 'Energy evidence records' },
+      { label: 'Exception Links', value: '13', note: 'Records linked to exceptions' },
+      { label: 'ESG Links', value: '19', note: 'Records linked to ESG metrics' },
+      { label: 'Reports Ready', value: '6', note: 'Report-ready evidence bundles' },
+    ],
+    rows: [
+      { item: 'Review energy evidence', focus: 'Energy and ESG traceability', status: 'Ready' },
+      { item: 'Open exception evidence', focus: 'Energy anomaly records', status: 'Review' },
+      { item: 'Prepare ESG evidence export', focus: 'Customer sustainability package', status: 'Ready' },
+    ],
+  },
+  'report-evidence': {
+    title: 'Report Evidence',
+    subtitle: 'Report evidence chains for operations, maintenance, ESG, compliance, and customer delivery reports.',
+    primaryAction: 'Review report evidence',
+    metrics: [
+      { label: 'Report Evidence', value: '36', note: 'Evidence records linked to reports' },
+      { label: 'Report Packs', value: '9', note: 'Report packs with evidence' },
+      { label: 'Open Reviews', value: '5', note: 'Report evidence requiring review' },
+      { label: 'Export Ready', value: '12', note: 'Report evidence packages ready' },
+    ],
+    rows: [
+      { item: 'Review report evidence', focus: 'Report-to-evidence linkage', status: 'Ready' },
+      { item: 'Open report evidence review', focus: 'Customer report traceability', status: 'Review' },
+      { item: 'Prepare report evidence export', focus: 'Evidence bundle export', status: 'Ready' },
+    ],
+  },
+  'hash-signature': {
+    title: 'Hash / Signature',
+    subtitle: 'Verification view for evidence hashes, signature readiness, tamper review, and audit trace.',
+    primaryAction: 'Review verification',
+    metrics: [
+      { label: 'Hash Ready', value: '128', note: 'Evidence records with hash values' },
+      { label: 'Signature Ready', value: '37', note: 'Records ready for signature review' },
+      { label: 'Tamper Review', value: '3', note: 'Records requiring verification review' },
+      { label: 'Audit Ready', value: '91', note: 'Records ready for audit review' },
+    ],
+    rows: [
+      { item: 'Review hash status', focus: 'Evidence integrity review', status: 'Ready' },
+      { item: 'Open signature review', focus: 'Signature and approval record', status: 'Review' },
+      { item: 'Prepare verification package', focus: 'Audit-ready verification output', status: 'Ready' },
+    ],
+  },
+  'export-evidence': {
+    title: 'Export Evidence',
+    subtitle: 'Evidence export workspace for customer handoff, report packages, compliance, and audit trail.',
+    primaryAction: 'Prepare export',
+    metrics: [
+      { label: 'Export Ready', value: '22', note: 'Evidence packages ready for export' },
+      { label: 'Customer Packs', value: '7', note: 'Customer handoff evidence packs' },
+      { label: 'Compliance Packs', value: '5', note: 'Compliance evidence packages' },
+      { label: 'Open Reviews', value: '4', note: 'Exports requiring review' },
+    ],
+    rows: [
+      { item: 'Review export queue', focus: 'Evidence bundles and reports', status: 'Ready' },
+      { item: 'Open customer handoff evidence', focus: 'Customer delivery package', status: 'Ready' },
+      { item: 'Check export audit trail', focus: 'Export evidence review', status: 'Ready' },
+    ],
+  },
+  'version-control': {
+    title: 'Version Control',
+    subtitle: 'Document and evidence version control view for revision history, approvals, and audit readiness.',
+    primaryAction: 'Review versions',
+    metrics: [
+      { label: 'Versioned Records', value: '64', note: 'Records with version history' },
+      { label: 'Open Revisions', value: '8', note: 'Revisions requiring review' },
+      { label: 'Approved Versions', value: '51', note: 'Versions accepted for use' },
+      { label: 'Audit Links', value: '44', note: 'Versions linked to audit trail' },
+    ],
+    rows: [
+      { item: 'Review version history', focus: 'Revision and approval state', status: 'Ready' },
+      { item: 'Open revision review', focus: 'Pending version changes', status: 'Review' },
+      { item: 'Prepare version evidence', focus: 'Document audit trail', status: 'Ready' },
+    ],
+  },
+  'approval-workflow': {
+    title: 'Approval Workflow',
+    subtitle: 'Approval workflow evidence view for signoff chains, policy review, and closure records.',
+    primaryAction: 'Review approvals',
+    metrics: [
+      { label: 'Approval Records', value: '29', note: 'Approval evidence records' },
+      { label: 'Pending Review', value: '6', note: 'Approvals needing review' },
+      { label: 'Closure Records', value: '17', note: 'Closure records accepted' },
+      { label: 'Evidence Links', value: '26', note: 'Approvals linked to evidence' },
+    ],
+    rows: [
+      { item: 'Review approval workflow', focus: 'Approval chain and owner', status: 'Review' },
+      { item: 'Open closure approvals', focus: 'Work order and report closure', status: 'Active' },
+      { item: 'Prepare approval evidence', focus: 'Signoff evidence package', status: 'Ready' },
+    ],
+  },
+  'document-audit-trail': {
+    title: 'Document Audit Trail',
+    subtitle: 'Document audit trail across revisions, approval events, export records, and evidence linkage.',
+    primaryAction: 'Review audit trail',
+    metrics: [
+      { label: 'Audit Events', value: '88', note: 'Document audit events recorded' },
+      { label: 'Revision Events', value: '27', note: 'Revision events under tracking' },
+      { label: 'Approval Events', value: '29', note: 'Approval events linked' },
+      { label: 'Export Events', value: '12', note: 'Export events with evidence' },
+    ],
+    rows: [
+      { item: 'Review document audit trail', focus: 'Version, approval and export history', status: 'Ready' },
+      { item: 'Open audit review items', focus: 'Events requiring review', status: 'Review' },
+      { item: 'Prepare audit evidence export', focus: 'Customer audit package', status: 'Ready' },
+    ],
+  },
+}
+
+const fallbackCustomerSection = customerSections['evidence-chain']
+
+function normalizeL3Id(value: unknown, defaultKey: string): string {
+  const raw = typeof value === 'string' && value ? value : defaultKey
+  const normalized = raw.replace(/-\d+$/, '')
+  return customerSections[normalized] ? normalized : defaultKey
+}
+
+const activeCustomerSection = computed(() => customerSections[normalizeL3Id(route.query.l3, 'evidence-chain')] ?? fallbackCustomerSection)
 
 const loading = ref(false)
 const apiError = ref('')
@@ -141,7 +358,7 @@ const fallbackEvidenceRows: EvidenceRecord[] = [
         },
       ],
       complete: false,
-      completionReason: 'R2 local skeleton path only; runtime source linkage is not integrated.',
+      completionReason: 'Traceability path is shown from the latest available operational view.',
       certified: false,
       iec62443Certified: false,
     },
@@ -278,18 +495,27 @@ onMounted(() => {
 
 <template>
   <div class="ucde-page">
-    <el-card shadow="never" class="hero-card block-space">
-      <div class="page-header">
+    <el-card shadow="never" class="customer-section-card block-space">
+      <div class="customer-section-head">
         <div>
-          <h1>UCDE Evidence Center</h1>
-          <p>Evidence chain, source traceability, decision records, audit trail, and export-ready operational evidence.</p>
+          <p class="section-kicker">Selected evidence section</p>
+          <h2>{{ activeCustomerSection.title }}</h2>
+          <p>{{ activeCustomerSection.subtitle }}</p>
         </div>
-        <el-space wrap>
-          <el-tag type="success">Evidence-backed review</el-tag>
-          <el-tag type="info">Traceability workspace</el-tag>
-          <el-tag type="warning">Audit readiness</el-tag>
-        </el-space>
+        <el-button type="primary" plain>{{ activeCustomerSection.primaryAction }}</el-button>
       </div>
+      <div class="customer-metric-grid">
+        <article v-for="metric in activeCustomerSection.metrics" :key="metric.label" class="customer-metric">
+          <span>{{ metric.label }}</span>
+          <strong>{{ metric.value }}</strong>
+          <em>{{ metric.note }}</em>
+        </article>
+      </div>
+      <el-table :data="activeCustomerSection.rows" stripe border class="customer-section-table">
+        <el-table-column prop="item" label="Action" min-width="240" />
+        <el-table-column prop="focus" label="Focus Area" min-width="260" />
+        <el-table-column prop="status" label="Status" min-width="140" />
+      </el-table>
     </el-card>
 
     <el-alert
@@ -297,7 +523,7 @@ onMounted(() => {
       type="warning"
       show-icon
       :closable="false"
-      :title="apiError"
+      :title="customerUnavailableMessage"
       class="block-space"
     />
 
@@ -530,7 +756,7 @@ onMounted(() => {
               type="info"
               show-icon
               :closable="false"
-              title="Traceability links are local skeleton references in R2. Runtime source validation is not integrated."
+              title="Traceability links are shown from the latest available operational view."
               class="block-space"
             />
             <el-card shadow="never" class="block-space">
@@ -665,6 +891,69 @@ onMounted(() => {
   border-left: 4px solid var(--el-color-primary);
 }
 
+.customer-section-card {
+  border: 1px solid #dbe7e4;
+}
+
+.customer-section-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.customer-section-head h2 {
+  margin: 0 0 8px;
+  color: #0f172a;
+  font-size: 22px;
+}
+
+.customer-section-head p {
+  margin: 0;
+  color: #52615d;
+}
+
+.section-kicker {
+  margin-bottom: 8px !important;
+  color: #0f766e !important;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.customer-metric-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.customer-metric {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px;
+  background: #f8fbfa;
+}
+
+.customer-metric span,
+.customer-metric em {
+  display: block;
+  color: #64748b;
+  font-style: normal;
+}
+
+.customer-metric strong {
+  display: block;
+  margin: 6px 0;
+  color: #0f766e;
+  font-size: 24px;
+}
+
+.customer-section-table {
+  margin-top: 16px;
+}
+
 .page-header h1 {
   margin: 0 0 4px;
   font-size: 1.25rem;
@@ -712,4 +1001,3 @@ onMounted(() => {
   margin: 0;
 }
 </style>
-

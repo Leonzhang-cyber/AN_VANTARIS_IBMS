@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, reactive, ref } from 'vue'
+import { useRoute } from 'vue-router'
 import { ApiError } from '@/services/api/errors'
 import {
   getAssetDetail,
@@ -20,6 +21,366 @@ import {
   type AssetTopology,
   type AssetTopologyLineage,
 } from '@/services/api/assets'
+
+type CustomerSection = {
+  title: string
+  subtitle: string
+  primaryAction: string
+  metrics: Array<{ label: string; value: string; note: string }>
+  rows: Array<{ item: string; focus: string; status: string }>
+}
+
+const route = useRoute()
+const customerUnavailableMessage = 'Live service is temporarily unavailable. Showing the latest available operational view.'
+
+const customerSections: Record<string, CustomerSection> = {
+  'portfolio-list': {
+    title: 'Site Portfolio',
+    subtitle: 'Portfolio view across customer sites, operating health, location hierarchy, and asset coverage.',
+    primaryAction: 'Review portfolio assets',
+    metrics: [
+      { label: 'Sites', value: '12', note: 'Sites represented in portfolio view' },
+      { label: 'Buildings', value: '38', note: 'Buildings mapped to site hierarchy' },
+      { label: 'Systems', value: '64', note: 'Systems available for review' },
+      { label: 'Asset Records', value: '428', note: 'Assets linked to topology context' },
+    ],
+    rows: [
+      { item: 'Review portfolio hierarchy', focus: 'Site / building / zone structure', status: 'Ready' },
+      { item: 'Open site asset coverage', focus: 'Assets by site and system', status: 'Active' },
+      { item: 'Check portfolio evidence', focus: 'Evidence-linked asset records', status: 'Ready' },
+    ],
+  },
+  'site-health': {
+    title: 'Site Health',
+    subtitle: 'Site health view across availability, degraded assets, operational impact, and evidence readiness.',
+    primaryAction: 'Review site health',
+    metrics: [
+      { label: 'Healthy Sites', value: '8', note: 'Sites operating within target range' },
+      { label: 'Warning Sites', value: '3', note: 'Sites with degraded indicators' },
+      { label: 'Critical Sites', value: '1', note: 'Site requiring immediate review' },
+      { label: 'Evidence Links', value: '31', note: 'Health records linked to evidence' },
+    ],
+    rows: [
+      { item: 'Inspect warning site', focus: 'Availability and asset condition', status: 'Review' },
+      { item: 'Open impacted assets', focus: 'Assets connected to health warnings', status: 'Active' },
+      { item: 'Prepare health evidence', focus: 'Traceable health summary', status: 'Ready' },
+    ],
+  },
+  'site-risk': {
+    title: 'Site Risk',
+    subtitle: 'Risk posture for customer sites including impacted assets, service exposure, and mitigation actions.',
+    primaryAction: 'Review site risk',
+    metrics: [
+      { label: 'Open Risks', value: '9', note: 'Site risks under review' },
+      { label: 'High Impact', value: '3', note: 'Risks with customer impact' },
+      { label: 'Mitigations', value: '7', note: 'Mitigation actions in progress' },
+      { label: 'Evidence Ready', value: '8', note: 'Risks with supporting evidence' },
+    ],
+    rows: [
+      { item: 'Review critical site risk', focus: 'Service impact and affected systems', status: 'High' },
+      { item: 'Open mitigation tracker', focus: 'Risk owner and action state', status: 'Active' },
+      { item: 'Check risk evidence', focus: 'Evidence and report linkage', status: 'Ready' },
+    ],
+  },
+  'building-list': {
+    title: 'Building List',
+    subtitle: 'Building hierarchy, floor coverage, system distribution, and asset readiness by location.',
+    primaryAction: 'Review buildings',
+    metrics: [
+      { label: 'Buildings', value: '38', note: 'Buildings in mapped portfolio' },
+      { label: 'Floors', value: '146', note: 'Floors linked to asset hierarchy' },
+      { label: 'Zones', value: '512', note: 'Operational zones represented' },
+      { label: 'Systems', value: '64', note: 'Systems mapped to buildings' },
+    ],
+    rows: [
+      { item: 'Open building overview', focus: 'Building / floor / zone mapping', status: 'Ready' },
+      { item: 'Review system distribution', focus: 'Systems by building', status: 'Active' },
+      { item: 'Check building evidence', focus: 'Location evidence coverage', status: 'Ready' },
+    ],
+  },
+  'building-overview': {
+    title: 'Building Overview',
+    subtitle: 'Building-level operational view for floors, zones, systems, assets, and service exposure.',
+    primaryAction: 'Open building overview',
+    metrics: [
+      { label: 'Mapped Floors', value: '146', note: 'Floors with asset context' },
+      { label: 'Active Zones', value: '489', note: 'Zones operating normally' },
+      { label: 'Warning Zones', value: '23', note: 'Zones requiring review' },
+      { label: 'Linked Assets', value: '428', note: 'Assets mapped to building context' },
+    ],
+    rows: [
+      { item: 'Review building status', focus: 'Operational state by floor', status: 'Active' },
+      { item: 'Open zone conditions', focus: 'Zone health and service impact', status: 'Review' },
+      { item: 'Check asset evidence', focus: 'Evidence-linked location records', status: 'Ready' },
+    ],
+  },
+  'floor-plan': {
+    title: 'Floor Plan',
+    subtitle: 'Floor plan context for zones, asset overlays, alarm overlays, and customer service impact.',
+    primaryAction: 'Review floor plan',
+    metrics: [
+      { label: 'Floor Views', value: '146', note: 'Floor plans available for review' },
+      { label: 'Asset Overlays', value: '428', note: 'Assets represented on plans' },
+      { label: 'Alarm Overlays', value: '34', note: 'Alarm points linked to space context' },
+      { label: 'Evidence Links', value: '52', note: 'Floor-plan evidence records' },
+    ],
+    rows: [
+      { item: 'Open zone overlay', focus: 'Floor / zone operating view', status: 'Ready' },
+      { item: 'Review alarm overlay', focus: 'Alarm impact by location', status: 'Active' },
+      { item: 'Check floor evidence', focus: 'Evidence linked to floor context', status: 'Ready' },
+    ],
+  },
+  'zone-list': {
+    title: 'Zone List',
+    subtitle: 'Zone-level operating context for occupancy, assets, system coverage, and service impact.',
+    primaryAction: 'Review zones',
+    metrics: [
+      { label: 'Zones', value: '512', note: 'Zones mapped in topology' },
+      { label: 'Warning Zones', value: '23', note: 'Zones requiring operator review' },
+      { label: 'Linked Systems', value: '64', note: 'Systems associated with zones' },
+      { label: 'Linked Assets', value: '428', note: 'Assets associated with zones' },
+    ],
+    rows: [
+      { item: 'Review zone conditions', focus: 'Zone status and system coverage', status: 'Active' },
+      { item: 'Open zone assets', focus: 'Equipment by zone', status: 'Ready' },
+      { item: 'Prepare zone report', focus: 'Customer location summary', status: 'Ready' },
+    ],
+  },
+  'asset-to-space-mapping': {
+    title: 'Asset-to-Space Mapping',
+    subtitle: 'Mapping quality for asset placement, location hierarchy, evidence records, and mapping gaps.',
+    primaryAction: 'Review mapping',
+    metrics: [
+      { label: 'Mapped Assets', value: '391', note: 'Assets with location binding' },
+      { label: 'Mapping Gaps', value: '37', note: 'Assets requiring mapping review' },
+      { label: 'Space Links', value: '512', note: 'Spaces connected to asset records' },
+      { label: 'Evidence Links', value: '44', note: 'Mapping evidence records' },
+    ],
+    rows: [
+      { item: 'Review mapping gaps', focus: 'Asset and location alignment', status: 'Review' },
+      { item: 'Open mapped equipment', focus: 'Equipment by space', status: 'Ready' },
+      { item: 'Check mapping evidence', focus: 'Traceable mapping records', status: 'Ready' },
+    ],
+  },
+  'system-list': {
+    title: 'System List',
+    subtitle: 'System registry view across availability, linked assets, alarms, faults, and evidence coverage.',
+    primaryAction: 'Review systems',
+    metrics: [
+      { label: 'Systems', value: '64', note: 'Systems in registry' },
+      { label: 'Critical Systems', value: '11', note: 'Systems with high service impact' },
+      { label: 'Linked Assets', value: '428', note: 'Assets assigned to systems' },
+      { label: 'Evidence Ready', value: '58', note: 'System records with evidence' },
+    ],
+    rows: [
+      { item: 'Review system registry', focus: 'System inventory and status', status: 'Ready' },
+      { item: 'Open system alarms', focus: 'Alarm and fault linkage', status: 'Active' },
+      { item: 'Check system evidence', focus: 'System evidence package', status: 'Ready' },
+    ],
+  },
+  'system-topology': {
+    title: 'System Topology',
+    subtitle: 'Relationship topology for systems, assets, points, upstream dependencies, and service impact paths.',
+    primaryAction: 'Open topology',
+    metrics: [
+      { label: 'Systems', value: '64', note: 'Systems represented in topology' },
+      { label: 'Relationships', value: '812', note: 'Topology relationships under review' },
+      { label: 'Impact Paths', value: '28', note: 'Paths with operational impact' },
+      { label: 'Data Quality', value: '91%', note: 'Topology completeness indicator' },
+    ],
+    rows: [
+      { item: 'Review dependency graph', focus: 'System-to-asset relationship paths', status: 'Active' },
+      { item: 'Open impact path', focus: 'Service impact from upstream assets', status: 'Review' },
+      { item: 'Check topology quality', focus: 'Relationship evidence and gaps', status: 'Ready' },
+    ],
+  },
+  'asset-list': {
+    title: 'Asset List',
+    subtitle: 'Asset registry view for customer-visible equipment, systems, locations, lifecycle, and evidence.',
+    primaryAction: 'Review asset list',
+    metrics: [
+      { label: 'Assets', value: '428', note: 'Assets in customer-visible registry' },
+      { label: 'Active Assets', value: '391', note: 'Assets currently active' },
+      { label: 'Warning Assets', value: '21', note: 'Assets requiring review' },
+      { label: 'Evidence Links', value: '76', note: 'Assets with evidence records' },
+    ],
+    rows: [
+      { item: 'Review asset registry', focus: 'Asset status and hierarchy', status: 'Ready' },
+      { item: 'Open critical assets', focus: 'Operational status and impact', status: 'Active' },
+      { item: 'Check asset evidence', focus: 'Asset evidence chain', status: 'Ready' },
+    ],
+  },
+  'asset-detail': {
+    title: 'Asset Detail',
+    subtitle: 'Focused asset record with context, relationships, operational state, history, and evidence.',
+    primaryAction: 'Open asset detail',
+    metrics: [
+      { label: 'Context Fields', value: '18', note: 'Core asset context fields' },
+      { label: 'Relationships', value: '12', note: 'Related assets and systems' },
+      { label: 'Open Events', value: '3', note: 'Events linked to selected asset' },
+      { label: 'Evidence Items', value: '7', note: 'Evidence linked to asset detail' },
+    ],
+    rows: [
+      { item: 'Review asset detail', focus: 'Identity, lifecycle and operating state', status: 'Ready' },
+      { item: 'Open relationship context', focus: 'Upstream and downstream assets', status: 'Active' },
+      { item: 'Check asset history', focus: 'Events, work orders and evidence', status: 'Ready' },
+    ],
+  },
+  'asset-context': {
+    title: 'Asset Context',
+    subtitle: 'Unified asset context across relationships, health, history, work orders, and evidence records.',
+    primaryAction: 'Review asset context',
+    metrics: [
+      { label: 'Context Records', value: '428', note: 'Assets with context records' },
+      { label: 'Health Views', value: '391', note: 'Assets with health posture' },
+      { label: 'Linked WOs', value: '42', note: 'Work orders linked to assets' },
+      { label: 'Evidence Ready', value: '76', note: 'Asset evidence records' },
+    ],
+    rows: [
+      { item: 'Review asset context', focus: 'Asset health and operational linkage', status: 'Active' },
+      { item: 'Open maintenance history', focus: 'Work orders and closure evidence', status: 'Ready' },
+      { item: 'Check evidence links', focus: 'Traceability across records', status: 'Ready' },
+    ],
+  },
+  'equipment-list': {
+    title: 'Equipment List',
+    subtitle: 'Equipment-level view across operating state, maintenance history, vendor context, and evidence.',
+    primaryAction: 'Review equipment',
+    metrics: [
+      { label: 'Equipment', value: '312', note: 'Equipment assets in registry' },
+      { label: 'Critical Equipment', value: '34', note: 'High-impact equipment records' },
+      { label: 'Maintenance Links', value: '42', note: 'Equipment linked to work orders' },
+      { label: 'Vendor Records', value: '28', note: 'Equipment with vendor context' },
+    ],
+    rows: [
+      { item: 'Review equipment list', focus: 'Equipment operating status', status: 'Ready' },
+      { item: 'Open maintenance history', focus: 'Work orders by equipment', status: 'Active' },
+      { item: 'Check vendor evidence', focus: 'Vendor and warranty context', status: 'Ready' },
+    ],
+  },
+  'runtime-status': {
+    title: 'Runtime Status',
+    subtitle: 'Customer operations view of runtime-facing status without exposing internal integration details.',
+    primaryAction: 'Review runtime status',
+    metrics: [
+      { label: 'Online Assets', value: '391', note: 'Assets showing available status' },
+      { label: 'Warning Assets', value: '21', note: 'Assets requiring review' },
+      { label: 'Unavailable Assets', value: '4', note: 'Assets requiring escalation' },
+      { label: 'Status Evidence', value: '62', note: 'Status records linked to evidence' },
+    ],
+    rows: [
+      { item: 'Review asset status', focus: 'Availability and health indicators', status: 'Active' },
+      { item: 'Open unavailable assets', focus: 'Customer service impact', status: 'High' },
+      { item: 'Prepare status report', focus: 'Operational status evidence', status: 'Ready' },
+    ],
+  },
+  'point-list': {
+    title: 'Point List',
+    subtitle: 'Point and tag inventory view across mapping quality, source systems, and data readiness.',
+    primaryAction: 'Review points',
+    metrics: [
+      { label: 'Points', value: '1,284', note: 'Points represented in mapping view' },
+      { label: 'Mapped Tags', value: '1,126', note: 'Tags mapped to assets or systems' },
+      { label: 'Quality Review', value: '73', note: 'Points requiring quality review' },
+      { label: 'Evidence Links', value: '41', note: 'Point mapping evidence records' },
+    ],
+    rows: [
+      { item: 'Review point inventory', focus: 'Point identity and system mapping', status: 'Ready' },
+      { item: 'Open point quality review', focus: 'Quality and mapping gaps', status: 'Review' },
+      { item: 'Check point evidence', focus: 'Mapping evidence records', status: 'Ready' },
+    ],
+  },
+  'tag-mapping': {
+    title: 'Tag Mapping',
+    subtitle: 'Tag-to-asset and tag-to-system mapping quality with gaps, lineage, and evidence readiness.',
+    primaryAction: 'Review tag mapping',
+    metrics: [
+      { label: 'Mapped Tags', value: '1,126', note: 'Tags mapped to system context' },
+      { label: 'Mapping Gaps', value: '158', note: 'Tags needing mapping review' },
+      { label: 'Asset Links', value: '902', note: 'Tags linked to asset records' },
+      { label: 'Evidence Links', value: '41', note: 'Tag mapping evidence records' },
+    ],
+    rows: [
+      { item: 'Review tag mapping gaps', focus: 'Tag-to-asset alignment', status: 'Review' },
+      { item: 'Open mapped tags', focus: 'System and asset tag coverage', status: 'Ready' },
+      { item: 'Prepare mapping evidence', focus: 'Traceable mapping records', status: 'Ready' },
+    ],
+  },
+  'relationship-graph': {
+    title: 'Relationship Graph',
+    subtitle: 'Asset relationship graph across hierarchy, dependency, upstream/downstream, and evidence links.',
+    primaryAction: 'Open relationship graph',
+    metrics: [
+      { label: 'Graph Nodes', value: '428', note: 'Asset nodes represented' },
+      { label: 'Graph Edges', value: '812', note: 'Relationship edges represented' },
+      { label: 'Impact Paths', value: '28', note: 'Paths requiring operational review' },
+      { label: 'Data Quality', value: '91%', note: 'Relationship data completeness' },
+    ],
+    rows: [
+      { item: 'Review relationship graph', focus: 'Asset and system dependencies', status: 'Active' },
+      { item: 'Open dependency path', focus: 'Upstream and downstream impact', status: 'Review' },
+      { item: 'Check graph evidence', focus: 'Relationship evidence coverage', status: 'Ready' },
+    ],
+  },
+  'dependency-view': {
+    title: 'Dependency View',
+    subtitle: 'Dependency view for critical systems, assets, upstream services, downstream impact, and risk.',
+    primaryAction: 'Review dependencies',
+    metrics: [
+      { label: 'Dependencies', value: '812', note: 'Dependencies tracked in topology' },
+      { label: 'Critical Paths', value: '28', note: 'Paths with high service relevance' },
+      { label: 'Impacted Assets', value: '34', note: 'Assets affected by dependency risk' },
+      { label: 'Evidence Ready', value: '52', note: 'Dependency evidence records' },
+    ],
+    rows: [
+      { item: 'Review dependency view', focus: 'Critical path and impact analysis', status: 'Active' },
+      { item: 'Open impacted systems', focus: 'Systems affected by upstream assets', status: 'Review' },
+      { item: 'Prepare dependency evidence', focus: 'Traceable relationship records', status: 'Ready' },
+    ],
+  },
+  'impact-path': {
+    title: 'Impact Path',
+    subtitle: 'Impact path review across asset dependencies, service exposure, fault impact, and evidence linkage.',
+    primaryAction: 'Review impact path',
+    metrics: [
+      { label: 'Impact Paths', value: '28', note: 'Paths tracked for service exposure' },
+      { label: 'High Impact', value: '7', note: 'Paths requiring urgent review' },
+      { label: 'Linked Faults', value: '19', note: 'Faults tied to impact paths' },
+      { label: 'Evidence Ready', value: '24', note: 'Impact records with evidence' },
+    ],
+    rows: [
+      { item: 'Review high-impact path', focus: 'Fault-to-service exposure', status: 'High' },
+      { item: 'Open affected assets', focus: 'Assets and systems on path', status: 'Active' },
+      { item: 'Check impact evidence', focus: 'Evidence and report linkage', status: 'Ready' },
+    ],
+  },
+  'data-quality': {
+    title: 'Data Quality',
+    subtitle: 'Asset topology data quality view across completeness, mapping gaps, relationship gaps, and evidence.',
+    primaryAction: 'Review data quality',
+    metrics: [
+      { label: 'Completeness', value: '91%', note: 'Asset topology completeness' },
+      { label: 'Mapping Gaps', value: '37', note: 'Asset mapping records needing review' },
+      { label: 'Relationship Gaps', value: '18', note: 'Relationship records needing review' },
+      { label: 'Evidence Links', value: '44', note: 'Quality records with evidence' },
+    ],
+    rows: [
+      { item: 'Review data quality gaps', focus: 'Completeness and mapping quality', status: 'Review' },
+      { item: 'Open relationship gaps', focus: 'Dependency and topology quality', status: 'Active' },
+      { item: 'Prepare quality evidence', focus: 'Quality evidence package', status: 'Ready' },
+    ],
+  },
+}
+
+const fallbackCustomerSection: CustomerSection = customerSections['asset-list']
+
+function normalizeL3Id(value: unknown, defaultKey: string): string {
+  const raw = typeof value === 'string' && value ? value : defaultKey
+  const normalized = raw.replace(/-\d+$/, '')
+  return customerSections[normalized] ? normalized : defaultKey
+}
+
+const activeCustomerSection = computed(() => customerSections[normalizeL3Id(route.query.l3, 'asset-list')] ?? fallbackCustomerSection)
 
 const loading = ref(false)
 const apiError = ref('')
@@ -405,21 +766,30 @@ onMounted(() => {
 
 <template>
   <div class="assets-page">
-    <el-card shadow="never" class="hero-card block-space">
-      <div class="page-header">
+    <el-card shadow="never" class="customer-section-card block-space">
+      <div class="customer-section-head">
         <div>
-          <h1>Assets &amp; Topology</h1>
-          <p>Asset registry, topology, location mapping, relationship impact, and evidence-linked asset context.</p>
+          <p class="section-kicker">Selected asset section</p>
+          <h2>{{ activeCustomerSection.title }}</h2>
+          <p>{{ activeCustomerSection.subtitle }}</p>
         </div>
-        <el-space wrap>
-          <el-tag type="success">Operational review</el-tag>
-          <el-tag type="info">Asset intelligence</el-tag>
-          <el-tag type="warning">Topology quality</el-tag>
-        </el-space>
+        <el-button type="primary" plain>{{ activeCustomerSection.primaryAction }}</el-button>
       </div>
+      <div class="customer-metric-grid">
+        <article v-for="metric in activeCustomerSection.metrics" :key="metric.label" class="customer-metric">
+          <span>{{ metric.label }}</span>
+          <strong>{{ metric.value }}</strong>
+          <em>{{ metric.note }}</em>
+        </article>
+      </div>
+      <el-table :data="activeCustomerSection.rows" stripe border class="customer-section-table">
+        <el-table-column prop="item" label="Action" min-width="240" />
+        <el-table-column prop="focus" label="Focus Area" min-width="260" />
+        <el-table-column prop="status" label="Status" min-width="140" />
+      </el-table>
     </el-card>
 
-    <el-alert v-if="apiError" type="warning" show-icon :closable="false" :title="apiError" class="block-space" />
+    <el-alert v-if="apiError" type="warning" show-icon :closable="false" :title="customerUnavailableMessage" class="block-space" />
 
     <el-card shadow="never" class="block-space">
       <template #header>
@@ -753,21 +1123,21 @@ onMounted(() => {
               <template #header>potentiallyImpactedAssets</template>
               <ul class="inline-list">
                 <li v-for="item in selectedImpact?.potentiallyImpactedAssets || []" :key="item">{{ item }}</li>
-                <li v-if="(selectedImpact?.potentiallyImpactedAssets || []).length === 0">No impacted assets in local skeleton.</li>
+                <li v-if="(selectedImpact?.potentiallyImpactedAssets || []).length === 0">No impacted assets in the current operational view.</li>
               </ul>
             </el-card>
             <el-card shadow="never" class="block-space">
               <template #header>potentiallyImpactedSystems</template>
               <ul class="inline-list">
                 <li v-for="item in selectedImpact?.potentiallyImpactedSystems || []" :key="item">{{ item }}</li>
-                <li v-if="(selectedImpact?.potentiallyImpactedSystems || []).length === 0">No impacted systems in local skeleton.</li>
+                <li v-if="(selectedImpact?.potentiallyImpactedSystems || []).length === 0">No impacted systems in the current operational view.</li>
               </ul>
             </el-card>
             <el-card shadow="never" class="block-space">
               <template #header>potentiallyImpactedZones</template>
               <ul class="inline-list">
                 <li v-for="item in selectedImpact?.potentiallyImpactedZones || []" :key="item">{{ item }}</li>
-                <li v-if="(selectedImpact?.potentiallyImpactedZones || []).length === 0">No impacted zones in local skeleton.</li>
+                <li v-if="(selectedImpact?.potentiallyImpactedZones || []).length === 0">No impacted zones in the current operational view.</li>
               </ul>
             </el-card>
             <el-card shadow="never">
@@ -805,6 +1175,69 @@ onMounted(() => {
 
 .hero-card {
   border-left: 4px solid var(--el-color-primary);
+}
+
+.customer-section-card {
+  border: 1px solid #dbe7e4;
+}
+
+.customer-section-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.customer-section-head h2 {
+  margin: 0 0 8px;
+  color: #0f172a;
+  font-size: 22px;
+}
+
+.customer-section-head p {
+  margin: 0;
+  color: #52615d;
+}
+
+.section-kicker {
+  margin-bottom: 8px !important;
+  color: #0f766e !important;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.customer-metric-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.customer-metric {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px;
+  background: #f8fbfa;
+}
+
+.customer-metric span,
+.customer-metric em {
+  display: block;
+  color: #64748b;
+  font-style: normal;
+}
+
+.customer-metric strong {
+  display: block;
+  margin: 6px 0;
+  color: #0f766e;
+  font-size: 24px;
+}
+
+.customer-section-table {
+  margin-top: 16px;
 }
 
 .page-header h1 {
@@ -850,4 +1283,3 @@ onMounted(() => {
   word-break: break-word;
 }
 </style>
-

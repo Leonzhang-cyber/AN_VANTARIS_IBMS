@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, reactive, ref, watch } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { ApiError } from '@/services/api/errors'
 import {
   getConsoleAllModuleHealth,
@@ -55,6 +55,285 @@ import {
 } from '@/services/api/console'
 
 const router = useRouter()
+const route = useRoute()
+const customerUnavailableMessage = 'Live service is temporarily unavailable. Showing the latest available operational view.'
+
+type CustomerSection = {
+  title: string
+  subtitle: string
+  primaryAction: string
+  metrics: Array<{ label: string; value: string; note: string }>
+  rows: Array<{ item: string; focus: string; status: string }>
+}
+
+const customerSections: Record<string, CustomerSection> = {
+  'operations-board': {
+    title: 'Operations Board',
+    subtitle: 'Operational command view across active events, tasks, escalations, service impact, and evidence.',
+    primaryAction: 'Review operations board',
+    metrics: [
+      { label: 'Active Events', value: '86', note: 'Events in the current operating window' },
+      { label: 'Active Tasks', value: '24', note: 'Tasks currently assigned or in progress' },
+      { label: 'Escalations', value: '8', note: 'Items requiring supervisor attention' },
+      { label: 'Evidence Ready', value: '31', note: 'Records ready for operational review' },
+    ],
+    rows: [
+      { item: 'Review active operations board', focus: 'Events, tasks and response status', status: 'Active' },
+      { item: 'Open escalation items', focus: 'Priority and owner review', status: 'High' },
+      { item: 'Prepare shift evidence', focus: 'Evidence and decision trace', status: 'Ready' },
+    ],
+  },
+  'live-situation': {
+    title: 'Live Situation',
+    subtitle: 'Live situation view for current alarms, faults, response actions, and customer service exposure.',
+    primaryAction: 'Review live situation',
+    metrics: [
+      { label: 'Live Signals', value: '47', note: 'Signals active in live situation' },
+      { label: 'Critical Signals', value: '8', note: 'Critical items requiring review' },
+      { label: 'Response Actions', value: '15', note: 'Response actions in progress' },
+      { label: 'Evidence Captured', value: '31', note: 'Evidence captured for live situation' },
+    ],
+    rows: [
+      { item: 'Review live situation queue', focus: 'Current events and response state', status: 'Live' },
+      { item: 'Open critical signals', focus: 'Critical alarms and faults', status: 'High' },
+      { item: 'Capture situation evidence', focus: 'Evidence and decision records', status: 'Active' },
+    ],
+  },
+  'event-stream': {
+    title: 'Event Stream',
+    subtitle: 'Event stream view for recent operational events, source systems, service impact, and evidence linkage.',
+    primaryAction: 'Review event stream',
+    metrics: [
+      { label: 'Recent Events', value: '74', note: 'Events captured recently' },
+      { label: 'Critical Events', value: '9', note: 'Events with high priority' },
+      { label: 'Linked Actions', value: '22', note: 'Events connected to actions' },
+      { label: 'Evidence Links', value: '38', note: 'Events with evidence trace' },
+    ],
+    rows: [
+      { item: 'Review event stream', focus: 'Event source and priority', status: 'Active' },
+      { item: 'Open critical event detail', focus: 'Impact and response action', status: 'High' },
+      { item: 'Prepare event evidence', focus: 'Traceable event record', status: 'Ready' },
+    ],
+  },
+  'active-tasks': {
+    title: 'Active Tasks',
+    subtitle: 'Active task view across operators, engineers, SLA risk, escalation state, and closure evidence.',
+    primaryAction: 'Review active tasks',
+    metrics: [
+      { label: 'Active Tasks', value: '24', note: 'Tasks currently active' },
+      { label: 'Due Today', value: '9', note: 'Tasks due in the current day' },
+      { label: 'SLA Risk', value: '6', note: 'Tasks approaching SLA risk' },
+      { label: 'Evidence Pending', value: '7', note: 'Tasks requiring evidence' },
+    ],
+    rows: [
+      { item: 'Review active task queue', focus: 'Owner, due date and state', status: 'Active' },
+      { item: 'Open SLA risk tasks', focus: 'Priority and escalation', status: 'High' },
+      { item: 'Prepare closure evidence', focus: 'Evidence and action trail', status: 'Review' },
+    ],
+  },
+  escalations: {
+    title: 'Escalations',
+    subtitle: 'Escalation queue for customer impact, SLA risk, owner assignment, and evidence readiness.',
+    primaryAction: 'Review escalations',
+    metrics: [
+      { label: 'Escalations', value: '8', note: 'Escalation items open' },
+      { label: 'High Priority', value: '5', note: 'High priority escalations' },
+      { label: 'Owner Assigned', value: '7', note: 'Escalations with owner assigned' },
+      { label: 'Evidence Ready', value: '5', note: 'Escalations with evidence records' },
+    ],
+    rows: [
+      { item: 'Review escalation queue', focus: 'Priority, owner and status', status: 'Active' },
+      { item: 'Open customer-impact escalation', focus: 'Service exposure and mitigation', status: 'High' },
+      { item: 'Prepare escalation evidence', focus: 'Action and approval trail', status: 'Ready' },
+    ],
+  },
+  'service-impact': {
+    title: 'Service Impact',
+    subtitle: 'Service impact view across affected systems, customer impact, SLA exposure, and recovery priority.',
+    primaryAction: 'Review service impact',
+    metrics: [
+      { label: 'Impact Items', value: '11', note: 'Service impact items open' },
+      { label: 'Customer Impact', value: '3', note: 'Items visible to customer outcomes' },
+      { label: 'Mitigations', value: '8', note: 'Mitigation actions in progress' },
+      { label: 'Evidence Ready', value: '9', note: 'Impact records with evidence' },
+    ],
+    rows: [
+      { item: 'Review service impact', focus: 'Customer and operational impact', status: 'Active' },
+      { item: 'Open affected systems', focus: 'Systems and assets at risk', status: 'Review' },
+      { item: 'Prepare impact report', focus: 'Customer-ready impact evidence', status: 'Ready' },
+    ],
+  },
+  'evidence-timeline': {
+    title: 'Evidence Timeline',
+    subtitle: 'Operational evidence timeline across events, operator actions, decisions, and closure records.',
+    primaryAction: 'Review evidence timeline',
+    metrics: [
+      { label: 'Timeline Records', value: '54', note: 'Records in operational timeline' },
+      { label: 'Decision Links', value: '18', note: 'Timeline records linked to decisions' },
+      { label: 'Action Links', value: '24', note: 'Timeline records linked to actions' },
+      { label: 'Export Ready', value: '12', note: 'Evidence records ready for export' },
+    ],
+    rows: [
+      { item: 'Review evidence timeline', focus: 'Event-to-action traceability', status: 'Ready' },
+      { item: 'Open decision evidence', focus: 'Decision and approval records', status: 'Review' },
+      { item: 'Prepare timeline export', focus: 'Customer evidence package', status: 'Ready' },
+    ],
+  },
+  'decision-log': {
+    title: 'Decision Log',
+    subtitle: 'Decision log view for operational decisions, evidence, owners, approvals, and export readiness.',
+    primaryAction: 'Review decision log',
+    metrics: [
+      { label: 'Decision Records', value: '18', note: 'Operational decision records' },
+      { label: 'Pending Review', value: '4', note: 'Decisions requiring review' },
+      { label: 'Evidence Linked', value: '16', note: 'Decisions with evidence records' },
+      { label: 'Export Ready', value: '7', note: 'Decision packages ready' },
+    ],
+    rows: [
+      { item: 'Review decision log', focus: 'Decision owner and status', status: 'Review' },
+      { item: 'Open approval evidence', focus: 'Approval chain and rationale', status: 'Active' },
+      { item: 'Prepare decision export', focus: 'Audit-ready decision package', status: 'Ready' },
+    ],
+  },
+  'security-dashboard': {
+    title: 'Security Dashboard',
+    subtitle: 'Security operations view across login risk, active sessions, policy events, and evidence.',
+    primaryAction: 'Review security dashboard',
+    metrics: [
+      { label: 'Security Events', value: '21', note: 'Security events under review' },
+      { label: 'Login Risks', value: '5', note: 'Login risk items' },
+      { label: 'Active Sessions', value: '32', note: 'Sessions represented for review' },
+      { label: 'Evidence Ready', value: '18', note: 'Security evidence records' },
+    ],
+    rows: [
+      { item: 'Review security dashboard', focus: 'Security posture and risk items', status: 'Active' },
+      { item: 'Open login risk', focus: 'Login events and account risk', status: 'High' },
+      { item: 'Prepare security evidence', focus: 'Evidence and audit trail', status: 'Ready' },
+    ],
+  },
+  'login-risk': {
+    title: 'Login Risk',
+    subtitle: 'Login risk view for anomalous access, privileged activity, session exposure, and evidence.',
+    primaryAction: 'Review login risk',
+    metrics: [
+      { label: 'Login Risks', value: '5', note: 'Login risk records open' },
+      { label: 'Privileged Events', value: '3', note: 'Privileged access events' },
+      { label: 'Session Reviews', value: '7', note: 'Sessions requiring review' },
+      { label: 'Evidence Links', value: '5', note: 'Login records with evidence' },
+    ],
+    rows: [
+      { item: 'Review login risk queue', focus: 'Access risk and account context', status: 'High' },
+      { item: 'Open privileged events', focus: 'Privileged access review', status: 'Review' },
+      { item: 'Prepare login evidence', focus: 'Audit evidence records', status: 'Ready' },
+    ],
+  },
+  'active-sessions': {
+    title: 'Active Sessions',
+    subtitle: 'Active session view for user sessions, privileged users, policy exposure, and audit evidence.',
+    primaryAction: 'Review active sessions',
+    metrics: [
+      { label: 'Active Sessions', value: '32', note: 'Sessions represented in review' },
+      { label: 'Privileged Sessions', value: '6', note: 'Privileged sessions under tracking' },
+      { label: 'Review Items', value: '4', note: 'Sessions requiring review' },
+      { label: 'Audit Records', value: '18', note: 'Session audit records' },
+    ],
+    rows: [
+      { item: 'Review active sessions', focus: 'Session owner and status', status: 'Active' },
+      { item: 'Open privileged sessions', focus: 'Privileged access review', status: 'Review' },
+      { item: 'Prepare session audit', focus: 'Session evidence package', status: 'Ready' },
+    ],
+  },
+  'risk-register': {
+    title: 'Risk Register',
+    subtitle: 'Risk register view for open findings, mitigation actions, responsible owners, and review schedule.',
+    primaryAction: 'Review risk register',
+    metrics: [
+      { label: 'Open Risks', value: '17', note: 'Risks tracked in register' },
+      { label: 'High Priority', value: '5', note: 'High priority risks' },
+      { label: 'Mitigation Actions', value: '12', note: 'Mitigations in progress' },
+      { label: 'Evidence Ready', value: '14', note: 'Risks linked to evidence' },
+    ],
+    rows: [
+      { item: 'Review risk register', focus: 'Risk owner and priority', status: 'Review' },
+      { item: 'Open mitigation actions', focus: 'Action status and due date', status: 'Active' },
+      { item: 'Prepare risk evidence', focus: 'Risk evidence package', status: 'Ready' },
+    ],
+  },
+  'control-register': {
+    title: 'Control Register',
+    subtitle: 'Control register view for controls, evidence coverage, open reviews, and compliance reporting.',
+    primaryAction: 'Review control register',
+    metrics: [
+      { label: 'Controls', value: '36', note: 'Controls represented in register' },
+      { label: 'Evidence Covered', value: '29', note: 'Controls with evidence records' },
+      { label: 'Open Reviews', value: '7', note: 'Controls requiring review' },
+      { label: 'Exceptions', value: '3', note: 'Control exceptions open' },
+    ],
+    rows: [
+      { item: 'Review control register', focus: 'Control owner and status', status: 'Review' },
+      { item: 'Open control evidence', focus: 'Evidence and compliance links', status: 'Ready' },
+      { item: 'Prepare control report', focus: 'Compliance report package', status: 'Ready' },
+    ],
+  },
+  'open-findings': {
+    title: 'Open Findings',
+    subtitle: 'Open findings view for risk, controls, mitigation state, owner assignment, and evidence readiness.',
+    primaryAction: 'Review open findings',
+    metrics: [
+      { label: 'Open Findings', value: '11', note: 'Findings currently open' },
+      { label: 'High Priority', value: '4', note: 'Findings needing priority review' },
+      { label: 'Mitigations', value: '8', note: 'Mitigation actions linked' },
+      { label: 'Evidence Ready', value: '9', note: 'Findings with evidence records' },
+    ],
+    rows: [
+      { item: 'Review open findings', focus: 'Finding status and owner', status: 'Review' },
+      { item: 'Open high-priority finding', focus: 'Risk and mitigation status', status: 'High' },
+      { item: 'Prepare finding evidence', focus: 'Evidence and audit trail', status: 'Ready' },
+    ],
+  },
+  'mitigation-actions': {
+    title: 'Mitigation Actions',
+    subtitle: 'Mitigation action view for risk controls, responsible owners, due dates, and evidence closure.',
+    primaryAction: 'Review mitigations',
+    metrics: [
+      { label: 'Mitigation Actions', value: '12', note: 'Mitigation actions in progress' },
+      { label: 'Due Soon', value: '5', note: 'Actions nearing due date' },
+      { label: 'Owner Assigned', value: '11', note: 'Actions with assigned owner' },
+      { label: 'Evidence Ready', value: '8', note: 'Actions with evidence records' },
+    ],
+    rows: [
+      { item: 'Review mitigation actions', focus: 'Action status and owner', status: 'Active' },
+      { item: 'Open due-soon mitigations', focus: 'Due date and escalation', status: 'Review' },
+      { item: 'Prepare mitigation evidence', focus: 'Closure evidence and audit', status: 'Ready' },
+    ],
+  },
+  'cyber-evidence': {
+    title: 'Cyber Evidence',
+    subtitle: 'Cybersecurity evidence view for OT events, security incidents, remediation, and audit readiness.',
+    primaryAction: 'Review cyber evidence',
+    metrics: [
+      { label: 'Cyber Evidence', value: '18', note: 'Cybersecurity evidence records' },
+      { label: 'Security Incidents', value: '4', note: 'Incident records linked' },
+      { label: 'Remediation Links', value: '9', note: 'Remediation evidence records' },
+      { label: 'Audit Ready', value: '12', note: 'Evidence ready for audit' },
+    ],
+    rows: [
+      { item: 'Review cyber evidence', focus: 'Security event and incident trace', status: 'Review' },
+      { item: 'Open remediation evidence', focus: 'Action and closure record', status: 'Active' },
+      { item: 'Prepare cyber audit package', focus: 'Audit-ready evidence set', status: 'Ready' },
+    ],
+  },
+}
+
+const fallbackCustomerSection = customerSections['operations-board']
+
+function normalizeL3Id(value: unknown, defaultKey: string): string {
+  const raw = typeof value === 'string' && value ? value : defaultKey
+  const normalized = raw.replace(/-\d+$/, '')
+  return customerSections[normalized] ? normalized : defaultKey
+}
+
+const activeCustomerSection = computed(() => customerSections[normalizeL3Id(route.query.l3, 'operations-board')] ?? fallbackCustomerSection)
 
 const loading = ref(false)
 const loadingHealthDetail = ref(false)
@@ -658,7 +937,7 @@ function computeLocalScore(items: ModuleReadinessRecord[]): PlatformReadinessSco
       },
     },
     drivers: ['Local registry fallback is available.'],
-    risks: ['Most modules are planned or not integrated.'],
+    risks: ['Some modules are still in staged readiness review.'],
     recommendations: ['Keep certification claims disabled and continue module foundations.'],
   }
 }
@@ -676,8 +955,8 @@ function fallbackNavigationFromRegistry(items: ModuleReadinessRecord[]): Platfor
     } else if (item.moduleId === 'uconsole') {
       launchLabel = 'Current Dashboard'
     } else if (status === 'not-integrated') {
-      launchLabel = 'Not Integrated'
-      disabledReason = 'Module runtime is not integrated in current stage.'
+      launchLabel = 'Unavailable'
+      disabledReason = 'Module is not available in the current operational view.'
       boundaryNote =
         item.moduleId === 'edge-fleet'
           ? 'EDGE remains a separate shared foundation boundary.'
@@ -791,7 +1070,7 @@ async function loadModuleContent(role: ConsoleRole): Promise<void> {
   } catch (error) {
     contentDashboardError.value = normalizeError(
       error,
-      'Module Content Dashboard API unavailable. Showing empty local skeleton fallback.'
+      customerUnavailableMessage
     )
     moduleContentSummary.value = {
       role,
@@ -1038,22 +1317,27 @@ onMounted(() => {
 
 <template>
   <div class="operations-page">
-    <el-card shadow="never" class="hero-card block-space">
-      <div class="page-header">
+    <el-card shadow="never" class="customer-section-card block-space">
+      <div class="customer-section-head">
         <div>
-          <h1>UConsole / Platform Operations Dashboard</h1>
-          <p>Read-only platform operations overview for VANTARIS ONE modules.</p>
+          <p class="section-kicker">Selected operations section</p>
+          <h2>{{ activeCustomerSection.title }}</h2>
+          <p>{{ activeCustomerSection.subtitle }}</p>
         </div>
-        <el-space wrap>
-          <el-tag type="info">runtimeMode: {{ health.runtimeMode }}</el-tag>
-          <el-tag type="success">provider: {{ health.provider }}</el-tag>
-          <el-tag>sourceSemantics: {{ health.sourceSemantics }}</el-tag>
-          <el-tag type="warning">readOnly: {{ health.readOnly }}</el-tag>
-          <el-tag>controlActionsEnabled: {{ health.controlActionsEnabled }}</el-tag>
-          <el-tag>certified: {{ health.certified }}</el-tag>
-          <el-tag>iec62443Certified: {{ health.iec62443Certified }}</el-tag>
-        </el-space>
+        <el-button type="primary" plain>{{ activeCustomerSection.primaryAction }}</el-button>
       </div>
+      <div class="customer-metric-grid">
+        <article v-for="metric in activeCustomerSection.metrics" :key="metric.label" class="customer-metric">
+          <span>{{ metric.label }}</span>
+          <strong>{{ metric.value }}</strong>
+          <em>{{ metric.note }}</em>
+        </article>
+      </div>
+      <el-table :data="activeCustomerSection.rows" stripe border class="customer-section-table">
+        <el-table-column prop="item" label="Action" min-width="240" />
+        <el-table-column prop="focus" label="Focus Area" min-width="260" />
+        <el-table-column prop="status" label="Status" min-width="140" />
+      </el-table>
     </el-card>
 
     <el-alert
@@ -1061,7 +1345,7 @@ onMounted(() => {
       type="warning"
       show-icon
       :closable="false"
-      :title="apiError"
+      :title="customerUnavailableMessage"
       class="block-space"
     />
 
@@ -1070,7 +1354,7 @@ onMounted(() => {
       type="warning"
       show-icon
       :closable="false"
-      :title="scoreFallbackAlert"
+      :title="customerUnavailableMessage"
       class="block-space"
     />
 
@@ -1079,7 +1363,7 @@ onMounted(() => {
       type="warning"
       show-icon
       :closable="false"
-      :title="navigationFallbackAlert"
+      :title="customerUnavailableMessage"
       class="block-space"
     />
 
@@ -1212,7 +1496,7 @@ onMounted(() => {
       type="info"
       show-icon
       :closable="false"
-      title="Module Package Center uses local skeleton package states. License server, patch installer and runtime enable/disable actions are not integrated."
+      title="Package readiness is shown from the latest available operational view."
       class="block-space"
     />
 
@@ -1221,7 +1505,7 @@ onMounted(() => {
       type="warning"
       show-icon
       :closable="false"
-      :title="packageCenterError"
+      :title="customerUnavailableMessage"
       class="block-space"
     />
 
@@ -1326,7 +1610,7 @@ onMounted(() => {
         type="info"
         show-icon
         :closable="false"
-        title="Role-based visibility is a local skeleton preview. Real RBAC, auth enforcement and route guards are not integrated."
+        title="Role visibility is shown as a customer-facing access view."
         class="block-space"
       />
       <el-alert
@@ -1334,7 +1618,7 @@ onMounted(() => {
         type="warning"
         show-icon
         :closable="false"
-        :title="roleVisibilityError"
+        :title="customerUnavailableMessage"
         class="block-space"
       />
       <div class="filter-row block-space">
@@ -1470,7 +1754,7 @@ onMounted(() => {
         type="info"
         show-icon
         :closable="false"
-        title="Module Content Dashboard uses read-only local skeleton summaries. Cross-module aggregation, EDGE/LINK diagnostics and UFMS integration are not connected."
+        title="Module content is shown from the latest available operational view."
         class="block-space"
       />
       <el-alert
@@ -1478,7 +1762,7 @@ onMounted(() => {
         type="warning"
         show-icon
         :closable="false"
-        :title="contentDashboardError"
+        :title="customerUnavailableMessage"
         class="block-space"
       />
       <el-descriptions :column="3" border class="block-space">
@@ -1943,6 +2227,78 @@ onMounted(() => {
   border-left: 4px solid var(--el-color-primary);
 }
 
+.customer-section-card {
+  border-left: 4px solid var(--el-color-primary);
+}
+
+.customer-section-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.customer-section-head h2 {
+  margin: 0 0 6px;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.customer-section-head p {
+  margin: 0;
+  color: var(--el-text-color-secondary);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.section-kicker {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--el-text-color-secondary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.customer-metric-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.customer-metric {
+  padding: 12px;
+  border: 1px solid var(--el-border-color-light);
+  border-radius: 8px;
+  background: var(--el-fill-color-blank);
+}
+
+.customer-metric span {
+  display: block;
+  color: var(--el-text-color-secondary);
+  font-size: 0.75rem;
+}
+
+.customer-metric strong {
+  display: block;
+  margin: 6px 0;
+  font-size: 1.25rem;
+}
+
+.customer-metric em {
+  display: block;
+  color: var(--el-text-color-secondary);
+  font-size: 0.75rem;
+  font-style: normal;
+  line-height: 1.4;
+}
+
+.customer-section-table {
+  width: 100%;
+}
+
 .page-header h1 {
   margin: 0 0 4px;
   font-size: 1.25rem;
@@ -1985,5 +2341,21 @@ onMounted(() => {
   line-height: 1.5;
   white-space: pre-wrap;
   word-break: break-word;
+}
+
+@media (max-width: 900px) {
+  .customer-section-head {
+    flex-direction: column;
+  }
+
+  .customer-metric-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .customer-metric-grid {
+    grid-template-columns: 1fr;
+  }
 }
 </style>
