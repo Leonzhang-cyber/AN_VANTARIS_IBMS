@@ -18,6 +18,8 @@ const liveMode = ref(true)
 const refreshInterval = ref('30s')
 
 const activePath = computed(() => route.path)
+const activeMenuId = computed(() => (typeof route.query.menu === 'string' ? route.query.menu : ''))
+const activeL3Id = computed(() => (typeof route.query.l3 === 'string' ? route.query.l3 : ''))
 
 const activeL1 = computed(() => {
   for (const l1 of menuItems.value) {
@@ -29,6 +31,15 @@ const activeL1 = computed(() => {
 })
 
 const activeL2 = computed(() => {
+  if (activeMenuId.value) {
+    for (const l1 of menuItems.value) {
+      const byId = (l1.children ?? []).find((child) => child.id === activeMenuId.value)
+      if (byId) {
+        return byId
+      }
+    }
+  }
+
   for (const l1 of menuItems.value) {
     const exact = (l1.children ?? []).find((child) => child.path === route.path)
     if (exact) {
@@ -39,6 +50,8 @@ const activeL2 = computed(() => {
 })
 
 const activeL3Items = computed(() => activeL2.value?.l3Items ?? [])
+const activeMenuIndex = computed(() => activeL2.value?.id ?? activePath.value)
+const activeL3Label = computed(() => activeL3Items.value.find((item) => item.id === activeL3Id.value)?.label ?? activeL3Items.value[0]?.label ?? '')
 const sidebarWidth = computed(() => (sidebarCollapsed.value ? '76px' : '286px'))
 const pageTitle = computed(() => activeL2.value?.label ?? activeL1.value?.label ?? String(route.meta.title ?? 'Operations Console'))
 const pageSubtitle = computed(() => 'AI-Powered Operations Intelligence for Unified Building & Facility Systems')
@@ -63,11 +76,49 @@ async function loadDynamicMenu(): Promise<void> {
   }
 }
 
+function findMenuEntry(id: string): AppMenuItem | undefined {
+  for (const l1 of menuItems.value) {
+    if (l1.id === id) {
+      return l1
+    }
+
+    const child = (l1.children ?? []).find((item) => item.id === id)
+    if (child) {
+      return child
+    }
+  }
+
+  return undefined
+}
+
 function onMenuSelect(index: string): void {
   if (!index || index === '#') {
     return
   }
+
+  const selected = findMenuEntry(index)
+  if (selected?.path) {
+    router.push({
+      path: selected.path,
+      query: {
+        menu: selected.id,
+      },
+    })
+    return
+  }
+
   router.push(index)
+}
+
+function onL3Select(id: string): void {
+  router.push({
+    path: route.path,
+    query: {
+      ...route.query,
+      menu: activeL2.value?.id,
+      l3: id,
+    },
+  })
 }
 
 function onLogout(): void {
@@ -117,7 +168,7 @@ onMounted(() => {
 
       <div class="app-layout__menu-scroll">
         <el-menu
-          :default-active="activePath"
+          :default-active="activeMenuIndex"
           class="app-layout__menu"
           :collapse="sidebarCollapsed"
           @select="onMenuSelect"
@@ -131,14 +182,14 @@ onMounted(() => {
               <el-menu-item
                 v-for="child in item.children"
                 :key="child.id"
-                :index="child.path"
+                :index="child.id"
                 :title="child.label"
               >
                 <span class="app-layout__menu-icon">{{ child.label.slice(0, 1) }}</span>
                 <span>{{ child.label }}</span>
               </el-menu-item>
             </el-sub-menu>
-            <el-menu-item v-else :index="item.path" :title="item.label">
+            <el-menu-item v-else :index="item.id" :title="item.label">
               <span class="app-layout__menu-icon">{{ item.icon ?? item.label.slice(0, 1) }}</span>
               <span>{{ item.label }}</span>
             </el-menu-item>
@@ -185,13 +236,16 @@ onMounted(() => {
               v-for="item in activeL3Items"
               :key="item.id"
               class="app-layout__l3-tab"
+              :class="{ 'app-layout__l3-tab--active': activeL3Id === item.id }"
               :type="item.status === 'implemented' || item.status === 'mapped' ? 'success' : 'info'"
               effect="plain"
+              @click="onL3Select(item.id)"
             >
               {{ item.label }}
             </el-tag>
+            <span v-if="activeL3Label" class="app-layout__l3-current">Current: {{ activeL3Label }}</span>
           </section>
-          <router-view />
+          <router-view :key="route.fullPath" />
         </div>
       </el-main>
     </el-container>
@@ -369,7 +423,7 @@ onMounted(() => {
   border-radius: 10px;
   color: #475569;
   font-size: 14px;
-  font-weight: 650;
+  font-weight: 500;
 }
 
 .app-layout__menu :deep(.el-sub-menu__title:hover),
@@ -430,6 +484,22 @@ onMounted(() => {
 
 .app-layout__l3-tab {
   border-radius: 999px;
-  font-weight: 650;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.app-layout__l3-tab--active {
+  border-color: #0f766e !important;
+  background: #e4f4f1 !important;
+  color: #08796d !important;
+}
+
+.app-layout__l3-current {
+  display: inline-flex;
+  align-items: center;
+  margin-left: auto;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 600;
 }
 </style>
