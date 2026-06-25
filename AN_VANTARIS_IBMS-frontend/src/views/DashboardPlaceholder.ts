@@ -574,7 +574,16 @@ function card(children: VNodeChild[], extra: Record<string, string> = {}) {
 }
 
 function normalizeL3(value: unknown): string {
-  return typeof value === 'string' && value ? value : 'my-tasks'
+  if (typeof value !== 'string' || !value) {
+    return 'my-tasks'
+  }
+
+  if (sections[value]) {
+    return value
+  }
+
+  const menuGeneratedId = value.replace(/-\d+$/, '')
+  return sections[menuGeneratedId] ? menuGeneratedId : value
 }
 
 export default defineComponent({
