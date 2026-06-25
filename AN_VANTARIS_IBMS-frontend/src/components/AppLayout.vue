@@ -51,10 +51,55 @@ const activeL2 = computed(() => {
 
 const activeL3Items = computed(() => activeL2.value?.l3Items ?? [])
 const activeMenuIndex = computed(() => activeL2.value?.id ?? activePath.value)
-const activeL3Label = computed(() => activeL3Items.value.find((item) => item.id === activeL3Id.value)?.label ?? activeL3Items.value[0]?.label ?? '')
+const normalizedActiveL3Id = computed(() => activeL3Id.value.replace(/-\d+$/, ''))
+const activeL3Item = computed(() => {
+  const exact = activeL3Items.value.find((item) => item.id === activeL3Id.value)
+  if (exact) {
+    return exact
+  }
+
+  const normalized = activeL3Items.value.find((item) => item.id.replace(/-\d+$/, '') === normalizedActiveL3Id.value)
+  return normalized ?? activeL3Items.value[0]
+})
+const activeL3Label = computed(() => activeL3Item.value?.label ?? '')
 const sidebarWidth = computed(() => (sidebarCollapsed.value ? '76px' : '286px'))
 const pageTitle = computed(() => activeL2.value?.label ?? activeL1.value?.label ?? String(route.meta.title ?? 'Operations Console'))
 const pageSubtitle = computed(() => 'AI-Powered Operations Intelligence for Unified Building & Facility Systems')
+const internallyHandledL3Paths = new Set([
+  '/dashboard',
+  '/console/operations',
+  '/assets/topology',
+  '/uesg/sustainability',
+  '/ucde/evidence',
+  '/reports',
+  '/one/umms/workspace',
+  '/umms/maintenance',
+])
+const shouldShowShellL3Panel = computed(() => Boolean(activeL3Item.value && !internallyHandledL3Paths.has(route.path)))
+const l3StatusLabel = computed(() => (activeL3Item.value?.status ?? 'mapped').replace(/-/g, ' '))
+const l3PanelMetrics = computed(() => [
+  { label: 'Selected Section', value: activeL3Label.value || 'Overview', note: activeL2.value?.label ?? 'Current workspace' },
+  { label: 'Workspace', value: activeL2.value?.label ?? pageTitle.value, note: activeL1.value?.label ?? 'VANTARIS ONE' },
+  { label: 'Route', value: route.path, note: 'Content route remains unchanged' },
+  { label: 'Status', value: l3StatusLabel.value, note: 'Menu baseline state' },
+])
+const l3PanelRows = computed(() => [
+  {
+    item: `Review ${activeL3Label.value || activeL2.value?.label || 'current section'}`,
+    focus: activeL2.value?.label ?? 'Current workspace',
+    status: 'Selected',
+  },
+  {
+    item: 'Open section evidence',
+    focus: activeL3Item.value?.mappedExistingModule ?? String(route.meta.title ?? 'Current module'),
+    status: 'Available',
+  },
+  {
+    item: 'Maintain read-only boundary',
+    focus: 'No route, backend, runtime, DB, auth, EDGE, LINK, or device action is executed',
+    status: 'Guarded',
+  },
+])
 
 async function loadDynamicMenu(): Promise<void> {
   menuLoading.value = true
@@ -236,13 +281,41 @@ onMounted(() => {
               v-for="item in activeL3Items"
               :key="item.id"
               class="app-layout__l3-tab"
-              :class="{ 'app-layout__l3-tab--active': activeL3Id === item.id }"
+              :class="{ 'app-layout__l3-tab--active': activeL3Item?.id === item.id }"
               :type="item.status === 'implemented' || item.status === 'mapped' ? 'success' : 'info'"
               effect="plain"
               @click="onL3Select(item.id)"
             >
               {{ item.label }}
             </el-tag>
+          </section>
+
+          <section v-if="shouldShowShellL3Panel" class="app-layout__l3-panel" aria-label="Selected L3 section content">
+            <div class="app-layout__l3-panel-head">
+              <div>
+                <span class="app-layout__l3-kicker">Selected section</span>
+                <h2>{{ activeL3Label }}</h2>
+                <p>
+                  {{ activeL3Label }} content context for {{ activeL2?.label ?? pageTitle }}. The page remains in
+                  read-only navigation mode while the selected L3 section changes the content focus.
+                </p>
+              </div>
+              <el-button type="primary" plain>{{ activeL3Label }}</el-button>
+            </div>
+
+            <div class="app-layout__l3-metrics">
+              <article v-for="metric in l3PanelMetrics" :key="metric.label" class="app-layout__l3-metric">
+                <span>{{ metric.label }}</span>
+                <strong>{{ metric.value }}</strong>
+                <em>{{ metric.note }}</em>
+              </article>
+            </div>
+
+            <el-table :data="l3PanelRows" stripe border class="app-layout__l3-table">
+              <el-table-column prop="item" label="Action" min-width="240" />
+              <el-table-column prop="focus" label="Focus Area" min-width="280" />
+              <el-table-column prop="status" label="Status" min-width="140" />
+            </el-table>
           </section>
 
           <router-view :key="route.fullPath" />
@@ -494,4 +567,96 @@ onMounted(() => {
   color: #08796d !important;
 }
 
+.app-layout__l3-panel {
+  margin-bottom: 16px;
+  padding: 16px;
+  border: 1px solid rgba(36, 118, 104, 0.18);
+  border-left: 4px solid #247668;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 14px 32px rgba(24, 57, 48, 0.08);
+}
+
+.app-layout__l3-panel-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.app-layout__l3-kicker {
+  display: block;
+  color: #5f7873;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.app-layout__l3-panel h2 {
+  margin: 4px 0 6px;
+  color: #162724;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.app-layout__l3-panel p {
+  margin: 0;
+  max-width: 780px;
+  color: #5f7873;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.app-layout__l3-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.app-layout__l3-metric {
+  padding: 12px;
+  border: 1px solid #d9ebe7;
+  border-radius: 8px;
+  background: #f8fcfb;
+}
+
+.app-layout__l3-metric span,
+.app-layout__l3-metric em {
+  display: block;
+  color: #607a75;
+  font-size: 12px;
+  font-style: normal;
+  line-height: 1.4;
+}
+
+.app-layout__l3-metric strong {
+  display: block;
+  margin: 6px 0;
+  color: #162724;
+  font-size: 18px;
+  line-height: 1.2;
+  word-break: break-word;
+}
+
+.app-layout__l3-table {
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .app-layout__l3-panel-head {
+    flex-direction: column;
+  }
+
+  .app-layout__l3-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .app-layout__l3-metrics {
+    grid-template-columns: 1fr;
+  }
+}
 </style>
