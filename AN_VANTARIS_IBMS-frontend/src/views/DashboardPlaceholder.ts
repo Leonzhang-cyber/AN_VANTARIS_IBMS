@@ -1,5 +1,6 @@
 import { computed, defineComponent, h, type VNodeChild } from 'vue'
 import { useRoute } from 'vue-router'
+import { resolveL3RouteContentConfig } from '@/services/menu/l3-content-registry'
 
 type MetricCard = {
   label: string
@@ -583,14 +584,36 @@ function normalizeL3(value: unknown): string {
   }
 
   const menuGeneratedId = value.replace(/-\d+$/, '')
-  return sections[menuGeneratedId] ? menuGeneratedId : value
+  return menuGeneratedId
 }
 
 export default defineComponent({
   name: 'DashboardPlaceholder',
   setup() {
     const route = useRoute()
-    const activeSection = computed(() => sections[normalizeL3(route.query.l3)] ?? fallbackSection)
+    const registrySection = computed<SectionConfig | undefined>(() => {
+      const config = resolveL3RouteContentConfig(route.query.menu, route.query.l3)
+      return config
+        ? {
+            title: config.title,
+            subtitle: config.subtitle,
+            primaryRoute: '/dashboard',
+            primaryAction: config.primaryAction,
+            metrics: config.metrics.map((metric, index) => ({
+              ...metric,
+              tone: ['#0f766e', '#2563eb', '#7c3aed', '#b45309'][index % 4],
+            })),
+            actions: config.rows.map((row) => ({
+              title: row.item,
+              owner: row.focus,
+              status: row.status,
+              priority: row.status === 'Selected' ? 'High' : 'Medium',
+              route: '/dashboard',
+            })),
+          }
+        : undefined
+    })
+    const activeSection = computed(() => sections[normalizeL3(route.query.l3)] ?? registrySection.value ?? fallbackSection)
 
     return () => h('section', {
       style: {

@@ -2,6 +2,7 @@
 import { computed, onMounted, reactive, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { ApiError } from '@/services/api/errors'
+import { resolveL3RouteContentConfig } from '@/services/menu/l3-content-registry'
 import {
   getAssetDetail,
   getAssetImpact,
@@ -377,10 +378,17 @@ const fallbackCustomerSection: CustomerSection = customerSections['asset-list']
 function normalizeL3Id(value: unknown, defaultKey: string): string {
   const raw = typeof value === 'string' && value ? value : defaultKey
   const normalized = raw.replace(/-\d+$/, '')
-  return customerSections[normalized] ? normalized : defaultKey
+  return normalized
 }
 
-const activeCustomerSection = computed(() => customerSections[normalizeL3Id(route.query.l3, 'asset-list')] ?? fallbackCustomerSection)
+const registryCustomerSection = computed<CustomerSection | undefined>(() => {
+  const config = resolveL3RouteContentConfig(route.query.menu, route.query.l3)
+  return config ? { ...config } : undefined
+})
+
+const activeCustomerSection = computed(
+  () => customerSections[normalizeL3Id(route.query.l3, 'asset-list')] ?? registryCustomerSection.value ?? fallbackCustomerSection,
+)
 
 const loading = ref(false)
 const apiError = ref('')

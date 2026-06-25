@@ -141,10 +141,12 @@ function onMenuSelect(index: string): void {
 
   const selected = findMenuEntry(index)
   if (selected?.path) {
+    const defaultL3 = selected.l3Items?.[0]?.id
     router.push({
       path: selected.path,
       query: {
         menu: selected.id,
+        ...(defaultL3 ? { l3: defaultL3 } : {}),
       },
     })
     return

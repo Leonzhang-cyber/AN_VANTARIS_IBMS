@@ -3,6 +3,7 @@ import { computed, onMounted, reactive, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { ApiError } from '@/services/api/errors'
 import { getUmmsGaR2Workspace, type UmmsGaR2Workspace, type UmmsGaR2WorkOrder } from '@/services/api/umms'
+import { resolveL3RouteContentConfig } from '@/services/menu/l3-content-registry'
 
 type CustomerSection = {
   title: string
@@ -587,10 +588,17 @@ const activeDeepSection = computed(() => ummsDeepSections[normalizeL3Id(route.qu
 function normalizeL3Id(value: unknown, defaultKey: string): string {
   const raw = typeof value === 'string' && value ? value : defaultKey
   const normalized = raw.replace(/-\d+$/, '')
-  return customerSections[normalized] ? normalized : defaultKey
+  return normalized
 }
 
-const activeCustomerSection = computed(() => customerSections[normalizeL3Id(route.query.l3, 'open-work-orders')] ?? fallbackCustomerSection)
+const registryCustomerSection = computed<CustomerSection | undefined>(() => {
+  const config = resolveL3RouteContentConfig(route.query.menu, route.query.l3)
+  return config ? { ...config, targetTab: 'Overview' } : undefined
+})
+
+const activeCustomerSection = computed(
+  () => customerSections[normalizeL3Id(route.query.l3, 'open-work-orders')] ?? registryCustomerSection.value ?? fallbackCustomerSection,
+)
 
 const filters = reactive({
   status: '',

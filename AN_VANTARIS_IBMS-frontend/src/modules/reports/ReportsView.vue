@@ -2,6 +2,7 @@
 import { computed, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { getReportsGaR13Workspace, type ReportsGaR13Workspace } from '@/services/api/reports'
+import { resolveL3RouteContentConfig } from '@/services/menu/l3-content-registry'
 
 type CustomerSection = {
   title: string
@@ -246,10 +247,17 @@ const fallbackCustomerSection = customerSections['operations-reports']
 function normalizeL3Id(value: unknown, defaultKey: string): string {
   const raw = typeof value === 'string' && value ? value : defaultKey
   const normalized = raw.replace(/-\d+$/, '')
-  return customerSections[normalized] ? normalized : defaultKey
+  return normalized
 }
 
-const activeCustomerSection = computed(() => customerSections[normalizeL3Id(route.query.l3, 'operations-reports')] ?? fallbackCustomerSection)
+const registryCustomerSection = computed<CustomerSection | undefined>(() => {
+  const config = resolveL3RouteContentConfig(route.query.menu, route.query.l3)
+  return config ? { ...config } : undefined
+})
+
+const activeCustomerSection = computed(
+  () => customerSections[normalizeL3Id(route.query.l3, 'operations-reports')] ?? registryCustomerSection.value ?? fallbackCustomerSection,
+)
 
 const tabs = ['Overview', 'Report Library', 'Customer Report Pack', 'Engineer Report Pack', 'Admin Report Pack', 'UMMS Reports', 'UHMI Reports', 'UCDE Evidence Reports', 'Customer Delivery Reports', 'Foundation Diagnostics Reports', 'Export Center', 'Guardrails']
 const activeTab = ref('Overview')

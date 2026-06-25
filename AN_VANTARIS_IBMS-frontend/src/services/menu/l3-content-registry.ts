@@ -1,4 +1,5 @@
 import type { AppMenuL3Item } from './types'
+import { fallbackMenuItems } from './static-menu'
 
 export interface L3ContentContext {
   l1Label: string
@@ -138,4 +139,38 @@ export function resolveL3ContentConfig(context: L3ContentContext): L3ContentConf
       { item: `Prepare ${section} handoff`, focus: profile.ownerFocus, status: 'Guarded' },
     ],
   }
+}
+
+export function resolveL3RouteContentConfig(menuId: unknown, l3Id: unknown): L3ContentConfig | undefined {
+  if (typeof menuId !== 'string' || !menuId) {
+    return undefined
+  }
+
+  const selectedL3Id = typeof l3Id === 'string' ? l3Id : ''
+  const normalizedSelectedL3Id = selectedL3Id.replace(/-\d+$/, '')
+
+  for (const l1 of fallbackMenuItems) {
+    const l2 = (l1.children ?? []).find((child) => child.id === menuId)
+    if (!l2) {
+      continue
+    }
+
+    const l3Items = l2.l3Items ?? []
+    const exact = l3Items.find((item) => item.id === selectedL3Id)
+    const normalized = l3Items.find((item) => item.id.replace(/-\d+$/, '') === normalizedSelectedL3Id)
+    const item = exact ?? normalized ?? l3Items[0]
+    if (!item) {
+      return undefined
+    }
+
+    return resolveL3ContentConfig({
+      l1Label: l1.label,
+      l2Id: l2.id,
+      l2Label: l2.label,
+      path: l2.path,
+      item,
+    })
+  }
+
+  return undefined
 }

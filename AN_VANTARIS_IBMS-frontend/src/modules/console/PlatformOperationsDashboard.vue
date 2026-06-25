@@ -2,6 +2,7 @@
 import { computed, onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ApiError } from '@/services/api/errors'
+import { resolveL3RouteContentConfig } from '@/services/menu/l3-content-registry'
 import {
   getConsoleAllModuleHealth,
   getConsoleHealth,
@@ -330,10 +331,17 @@ const fallbackCustomerSection = customerSections['operations-board']
 function normalizeL3Id(value: unknown, defaultKey: string): string {
   const raw = typeof value === 'string' && value ? value : defaultKey
   const normalized = raw.replace(/-\d+$/, '')
-  return customerSections[normalized] ? normalized : defaultKey
+  return normalized
 }
 
-const activeCustomerSection = computed(() => customerSections[normalizeL3Id(route.query.l3, 'operations-board')] ?? fallbackCustomerSection)
+const registryCustomerSection = computed<CustomerSection | undefined>(() => {
+  const config = resolveL3RouteContentConfig(route.query.menu, route.query.l3)
+  return config ? { ...config } : undefined
+})
+
+const activeCustomerSection = computed(
+  () => customerSections[normalizeL3Id(route.query.l3, 'operations-board')] ?? registryCustomerSection.value ?? fallbackCustomerSection,
+)
 
 const loading = ref(false)
 const loadingHealthDetail = ref(false)
