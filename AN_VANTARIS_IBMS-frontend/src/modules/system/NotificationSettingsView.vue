@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import RouteL3ContentPanel from '@/components/RouteL3ContentPanel.vue'
+
 interface NotificationChannelRow {
   id: string
   channel: string
@@ -54,6 +56,8 @@ const placeholderChannels: NotificationChannelRow[] = [
 
 <template>
   <div class="notification-settings-page">
+    <RouteL3ContentPanel />
+
     <el-card shadow="never">
       <template #header>
         <div class="page-header">

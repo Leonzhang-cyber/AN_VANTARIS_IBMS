@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import RouteL3ContentPanel from '@/components/RouteL3ContentPanel.vue'
 import { ApiError } from '@/services/api/errors'
 import {
   getUedgeHealth,
@@ -110,6 +111,8 @@ onMounted(() => {
 
 <template>
   <section class="uedge-page">
+    <RouteL3ContentPanel />
+
     <div class="hero-row">
       <div>
         <h2>UEDGE Customer Setup</h2>
@@ -235,4 +238,3 @@ onMounted(() => {
   margin-top: 12px;
 }
 </style>
-

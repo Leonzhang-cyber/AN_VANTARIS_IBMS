@@ -1,5 +1,7 @@
 <template>
   <main class="server-precheck">
+    <RouteL3ContentPanel />
+
     <section class="hero">
       <div>
         <p class="eyebrow">VANTARIS ONE</p>
@@ -205,6 +207,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
+import RouteL3ContentPanel from '@/components/RouteL3ContentPanel.vue'
 import {
   getServerPrecheckAppServer,
   getServerPrecheckBlockers,
@@ -499,4 +502,3 @@ li {
   }
 }
 </style>
-

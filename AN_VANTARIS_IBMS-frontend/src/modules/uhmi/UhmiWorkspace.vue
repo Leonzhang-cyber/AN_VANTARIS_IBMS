@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import RouteL3ContentPanel from '@/components/RouteL3ContentPanel.vue'
 import {
   getUhmiHealth,
   getUhmiMenuIa,
@@ -139,6 +140,8 @@ onMounted(() => {
 
 <template>
   <section class="uhmi-page light-app-shell pale-mint-background clean-table-layout">
+    <RouteL3ContentPanel />
+
     <header class="uhmi-hero white-rounded-card soft-shadow teal-accent-card">
       <div>
         <p class="eyebrow">VANTARIS ONE / UConsole</p>

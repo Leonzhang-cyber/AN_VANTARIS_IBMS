@@ -1,5 +1,7 @@
 <template>
   <main class="access-plan">
+    <RouteL3ContentPanel />
+
     <section class="hero">
       <div>
         <p class="eyebrow">VANTARIS ONE</p>
@@ -85,6 +87,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
+import RouteL3ContentPanel from '@/components/RouteL3ContentPanel.vue'
 import { getAccessWindow, getApprovalBoundary, getEvidenceCapture, getR3Readiness, getReadonlyCommands, getServerAccessSummary, getStopConditions, listStrings, type ServerAccessSummary } from '@/services/api/serverAccessPlan'
 
 const summary = ref<ServerAccessSummary>({ appServerIp: '192.168.60.21', dbServerIp: '192.168.60.22', accessWindowStatus: 'PLANNING_ONLY', approvalsRequired: 0, allowedCommandCount: 0, forbiddenActionCount: 0, evidenceCaptureItems: 0, stopConditionCount: 0, readyForR3: false, readyForSSH: false, readyForDeployment: false, productionGaStatus: 'NOT_YET' })

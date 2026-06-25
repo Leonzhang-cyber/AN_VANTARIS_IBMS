@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import RouteL3ContentPanel from '@/components/RouteL3ContentPanel.vue'
+
 interface IntegrationRow {
   id: string
   integration: string
@@ -54,6 +56,8 @@ const placeholderIntegrations: IntegrationRow[] = [
 
 <template>
   <div class="integration-settings-page">
+    <RouteL3ContentPanel />
+
     <el-card shadow="never">
       <template #header>
         <div class="page-header">

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
+import RouteL3ContentPanel from '@/components/RouteL3ContentPanel.vue'
 import {
   getUmmsReadonlyOverview,
   type UmmsReadonlyOverview,
@@ -73,6 +74,8 @@ onMounted(() => {
 
 <template>
   <section class="umms-readonly-page">
+    <RouteL3ContentPanel />
+
     <header class="hero">
       <div>
         <p class="eyebrow">VANTARIS ONE / UMMS</p>
@@ -247,4 +250,3 @@ onMounted(() => {
   align-items: center;
 }
 </style>
-

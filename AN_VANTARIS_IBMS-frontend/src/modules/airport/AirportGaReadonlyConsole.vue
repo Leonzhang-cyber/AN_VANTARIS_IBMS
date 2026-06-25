@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import RouteL3ContentPanel from '@/components/RouteL3ContentPanel.vue'
 import {
   airportGaReadonlyEndpoints,
   getAirportGaReadonlySections,
@@ -161,6 +162,8 @@ onMounted(() => {
 
 <template>
   <section class="airport-page">
+    <RouteL3ContentPanel />
+
     <header class="airport-page__hero">
       <div>
         <p class="eyebrow">VANTARIS ONE Airport Solution Package</p>

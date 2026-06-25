@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
+import RouteL3ContentPanel from '@/components/RouteL3ContentPanel.vue'
 
 type ModuleStatus = 'available' | 'pending'
 
@@ -79,6 +80,8 @@ function openModule(module: SystemModuleCard): void {
 
 <template>
   <div class="system-overview-page">
+    <RouteL3ContentPanel />
+
     <el-card shadow="never">
       <template #header>
         <div class="page-header">

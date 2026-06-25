@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, reactive, ref } from 'vue'
+import RouteL3ContentPanel from '@/components/RouteL3ContentPanel.vue'
 import * as menuApi from '@/services/api/menu'
 import { normalizeBackendMenu } from '@/services/menu/menu-normalizer'
 import { resolveBaseUrl } from '@/services/api/request'
@@ -59,6 +60,8 @@ onMounted(() => {
 
 <template>
   <div class="settings-page">
+    <RouteL3ContentPanel />
+
     <el-card shadow="never">
       <template #header>
         <div class="page-header">

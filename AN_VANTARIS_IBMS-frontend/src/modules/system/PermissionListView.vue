@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
+import RouteL3ContentPanel from '@/components/RouteL3ContentPanel.vue'
 import { ApiError } from '@/services/api/errors'
 import {
   createSystemPermission,
@@ -143,6 +144,8 @@ onMounted(() => {
 
 <template>
   <div class="permission-page">
+    <RouteL3ContentPanel />
+
     <el-card shadow="never">
       <template #header>
         <div class="page-header">

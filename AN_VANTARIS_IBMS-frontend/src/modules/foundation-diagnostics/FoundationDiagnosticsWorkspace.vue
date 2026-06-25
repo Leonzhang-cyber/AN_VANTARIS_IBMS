@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
+import RouteL3ContentPanel from '@/components/RouteL3ContentPanel.vue'
 import { getFoundationDiagnosticsWorkspace, type FoundationDiagnosticsWorkspace } from '@/services/api/foundationDiagnostics'
 
 const tabs = ['Overview', 'Server Plan', 'Package Readiness', 'EDGE', 'LINK', 'DB Foundation', 'Contracts', 'Healthcheck Preview', 'Package Integrity', 'Rollback Readiness', 'Guardrails']
@@ -29,6 +30,8 @@ onMounted(() => {
 
 <template>
   <section class="foundation-page" v-loading="loading">
+    <RouteL3ContentPanel />
+
     <header class="workspace-head">
       <div>
         <p class="eyebrow">UConsole / Engineer Workspace</p>

@@ -1,5 +1,7 @@
 <template>
   <main class="observation-plan">
+    <RouteL3ContentPanel />
+
     <section class="hero">
       <div>
         <p class="eyebrow">VANTARIS ONE</p>
@@ -87,6 +89,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
+import RouteL3ContentPanel from '@/components/RouteL3ContentPanel.vue'
 import { getAppServerObservation, getApprovalChecklist, getDbServerObservation, getExecutionSequence, getObservationEvidencePackage, getObservationGuardrails, getObservationStopConditions, getServerObservationSummary, listRecords, listStrings, type ServerObservationSummary } from '@/services/api/serverObservationPlan'
 
 const summary = ref<ServerObservationSummary>({ appServerIp: '192.168.60.21', dbServerIp: '192.168.60.22', observationStatus: 'PLANNING_ONLY', executionSequenceCount: 0, appObservationCommandCount: 0, dbObservationCommandCount: 0, evidencePackageItemCount: 0, stopConditionCount: 0, approvalChecklistCount: 0, readyForActualSSH: false, readyForDeployment: false, productionGaStatus: 'NOT_YET' })

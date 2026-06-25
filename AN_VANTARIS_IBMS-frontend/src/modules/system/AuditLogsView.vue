@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
+import RouteL3ContentPanel from '@/components/RouteL3ContentPanel.vue'
 
 interface AuditLogPlaceholderRow {
   id: string
@@ -52,6 +53,8 @@ function severityTagType(value: string): 'info' | 'warning' | 'danger' {
 
 <template>
   <div class="audit-logs-page">
+    <RouteL3ContentPanel />
+
     <el-card shadow="never">
       <template #header>
         <div class="page-header">
