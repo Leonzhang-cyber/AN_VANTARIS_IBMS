@@ -13,8 +13,13 @@ export interface L3ContentConfig {
   title: string
   subtitle: string
   primaryAction: string
+  selectedLabel?: string
+  sectionEyebrow?: string
+  l3Tabs?: Array<{ key: string; label: string; active: boolean }>
+  connectedWorkspaces?: string[]
+  relatedWorkspaces?: string[]
   metrics: Array<{ label: string; value: string; note: string }>
-  rows: Array<{ item: string; focus: string; status: string }>
+  rows: Array<{ item: string; focus: string; status: string; owner?: string; priority?: string; open?: string }>
   dashboardWorkbench?: DashboardWorkbenchConfig
 }
 
@@ -35,6 +40,7 @@ export interface DashboardWorkbenchConfig {
   evidenceValue: string
   tabs: string[]
   actions: string[]
+  connectedWorkspaces: string[]
   signalCards: Array<{ label: string; value: string; note: string; severity: 'good' | 'watch' | 'risk'; icon: string }>
   visualType: DashboardVisualType
   contextRows: Array<{ label: string; value: string; note: string }>
@@ -44,6 +50,13 @@ export interface DashboardWorkbenchConfig {
   heatmap: Array<{ label: string; value: number; tone: 'good' | 'watch' | 'risk' }>
   readinessLayers: Array<{ layer: string; health: string; risk: string; dataState: string; owner: string; nextAction: string; evidence: string; governanceNote: string }>
   acceptanceFooter: Array<{ label: string; value: string }>
+}
+
+interface WorkspaceOverviewSectionConfig {
+  displayLabel: string
+  title: string
+  subtitle: string
+  primaryAction: string
 }
 
 type DashboardVisualType =
@@ -88,15 +101,15 @@ interface DashboardWorkbenchProfile {
 const DASHBOARD_WORKBENCH_PROFILES: Record<string, DashboardWorkbenchProfile> = {
   'workspace-overview': {
     persona: 'Role-based workspace',
-    subject: 'cross-role operating workspace',
-    commandFocus: 'aligning assigned risks, actions, evidence, and governance readiness across the active user workspace',
-    signalLabel: 'Workspace health',
+    subject: 'role-based priority entry',
+    commandFocus: 'showing who the user is, what to inspect first, which actions need attention, what evidence is missing, which workspaces connect to the role, and whether the user is allowed to proceed',
+    signalLabel: 'Workspace Health',
     signalValue: '92%',
-    riskLabel: 'Assigned risk',
+    riskLabel: 'Assigned Actions',
     riskValue: '7',
-    evidenceLabel: 'Evidence ready',
-    evidenceValue: '18',
-    metricLabels: ['Role signal', 'Active actions', 'Evidence packs', 'Readiness gate'],
+    evidenceLabel: 'Evidence Readiness',
+    evidenceValue: '18 / 21',
+    metricLabels: ['Workspace Health', 'Assigned Actions', 'Evidence Readiness', 'Readiness Gate'],
     dimensions: [
       { dimension: 'Detect', title: 'Role risk signal', detail: 'Open risk signals filtered by role, site, and responsibility.', state: 'Live' },
       { dimension: 'Diagnose', title: 'Workspace context', detail: 'Related sites, systems, tasks, and evidence are grouped for review.', state: 'Mapped' },
@@ -463,6 +476,76 @@ const DASHBOARD_CONTENT_TABS = [
   '7-layer Readiness',
 ]
 
+const WORKSPACE_OVERVIEW_TABS = ['Priority Signal', 'Role Context', 'Action Queue', 'Readiness Gate', 'Evidence Pack', 'Governance Audit']
+
+const WORKSPACE_OVERVIEW_CONNECTED_WORKSPACES = [
+  'Work Management',
+  'Assets & Locations',
+  'Faults & Events',
+  'Reports & Documents',
+  'Energy & Sustainability',
+  'Governance & Security',
+]
+
+const WORKSPACE_OVERVIEW_SECTIONS: Record<string, WorkspaceOverviewSectionConfig> = {
+  'Workspace Risk Signal': {
+    displayLabel: 'Priority Signal',
+    title: 'Role Priority Signal',
+    subtitle: "Prioritizes today's workspace by service risk, assigned actions, evidence gaps, and governance readiness.",
+    primaryAction: 'Open Priority Workbench',
+  },
+  'Role Workspace Context': {
+    displayLabel: 'Role Context',
+    title: 'Role Context',
+    subtitle: "Shows the user's operating scope, access boundary, assigned workspaces, and role-specific priorities.",
+    primaryAction: 'Open Recommended Workspace',
+  },
+  'Assigned Workspace Actions': {
+    displayLabel: 'Action Queue',
+    title: 'Action Queue',
+    subtitle: 'Orders assigned actions by customer impact, SLA exposure, and operational urgency.',
+    primaryAction: 'Open Action Queue',
+  },
+  'Workspace Health Readiness': {
+    displayLabel: 'Readiness Gate',
+    title: 'Readiness Gate',
+    subtitle: 'Validates whether the workspace is ready for operational use, customer review, and controlled handoff.',
+    primaryAction: 'Open Recommended Workspace',
+  },
+  'Workspace Evidence Pack': {
+    displayLabel: 'Evidence Pack',
+    title: 'Evidence Pack',
+    subtitle: 'Collects workspace evidence for supervisor review, customer acceptance, export, and audit traceability.',
+    primaryAction: 'Export Evidence Pack',
+  },
+  'Workspace Governance Audit': {
+    displayLabel: 'Governance Audit',
+    title: 'Governance Audit',
+    subtitle: 'Confirms owner, permission, approval, SLA, audit, export, and review controls for this workspace.',
+    primaryAction: 'Open Governance Audit',
+  },
+}
+
+function workspaceOverviewDisplayTabs(activeSection: string): Array<{ key: string; label: string; active: boolean }> {
+  return Object.entries(WORKSPACE_OVERVIEW_SECTIONS).map(([key, section]) => ({
+    key,
+    label: section.displayLabel,
+    active: key === activeSection,
+  }))
+}
+
+function dashboardDisplayTabs(context: L3ContentContext, section: string): Array<{ key: string; label: string; active: boolean }> {
+  if (context.l2Id === 'workspace-overview') {
+    return workspaceOverviewDisplayTabs(section)
+  }
+
+  return DASHBOARD_CONTENT_TABS.map((label) => ({
+    key: label,
+    label,
+    active: label === section,
+  }))
+}
+
 const DASHBOARD_VISUAL_TYPES: Record<string, DashboardVisualType> = {
   'workspace-overview': 'workspace-priority-board',
   'dashboard-executive': 'executive-risk-board',
@@ -476,7 +559,7 @@ const DASHBOARD_VISUAL_TYPES: Record<string, DashboardVisualType> = {
 }
 
 const DASHBOARD_ACTIONS: Record<string, string[]> = {
-  'workspace-overview': ['Open recommended workspace', 'Continue last task', 'Export workspace summary', 'Open pending approvals'],
+  'workspace-overview': ['Open Priority Workbench', 'Open Recommended Workspace', 'Open Action Queue', 'Export Evidence Pack', 'Open Governance Audit'],
   'dashboard-executive': ['Approve escalation', 'Request evidence', 'Open service risk', 'Export executive pack'],
   'dashboard-operations': ['Open command center', 'Create work order', 'Escalate', 'Open dispatch queue'],
   'portfolio-operations': ['Compare sites', 'Open site detail', 'Export portfolio report', 'Prepare executive portfolio pack'],
@@ -489,16 +572,17 @@ const DASHBOARD_ACTIONS: Record<string, string[]> = {
 
 const DASHBOARD_CONTEXT_ROWS: Record<string, Array<{ label: string; value: string; note: string }>> = {
   'workspace-overview': [
-    { label: 'Affected Space', value: 'Portfolio workspace', note: 'Role workspace routing' },
-    { label: 'Affected Zone', value: 'North service group', note: 'Workspace Alerts' },
-    { label: 'Affected System', value: 'Operations queue', note: 'Assigned Workspaces' },
-    { label: 'Affected Asset', value: 'AHU-B2-14', note: 'Recommended Workspaces' },
+    { label: 'Assigned Site', value: 'Singapore Portfolio Site A', note: 'Role Workspace View' },
+    { label: 'Assigned Space', value: 'Level 3 public zone', note: 'Assigned Workspaces' },
+    { label: 'Assigned System', value: 'Airside HVAC system', note: 'Workspace Health' },
+    { label: 'Assigned Asset', value: 'AHU-B2-14', note: 'Recommended Workspaces' },
     { label: 'Related Point', value: 'TEMP_SUPPLY_AHU_B2_14', note: 'Role Access Status' },
     { label: 'Related Tag', value: 'comfort.priority.watch', note: 'Pending Approvals' },
     { label: 'Source System', value: 'VANTARIS ONE Workspace Registry', note: 'Recent Actions' },
     { label: 'Related Work Order', value: 'WO-24891', note: 'Missing Evidence' },
     { label: 'Evidence Object', value: 'EV-WS-0921', note: 'Workspace Summary' },
     { label: 'Export Object', value: 'EXP-WS-SUMMARY', note: 'Customer Acceptance ready' },
+    { label: 'Latest Evidence Update', value: '2026-06-26 09:40', note: 'Evidence Pack freshness' },
     { label: 'Partner System', value: 'Partner CMMS feed', note: 'Telemetry inherited from IBMS' },
   ],
   'dashboard-executive': [
@@ -613,9 +697,14 @@ function dashboardSignalCards(l2Id: string, profile: DashboardWorkbenchProfile):
 
   const specific: Record<string, DashboardWorkbenchConfig['signalCards']> = {
     'workspace-overview': [
-      { label: 'Assigned Actions', value: '24', note: 'Role Priority and Due Today', severity: 'watch', icon: 'role' },
-      { label: 'Missing Evidence', value: '5', note: 'Role Access Status guard', severity: 'risk', icon: 'gap' },
-      { label: 'Pending Approvals', value: '7', note: 'approval queue', severity: 'watch', icon: 'approval' },
+      { label: 'Workspace Health', value: '92%', note: 'Role scope ready', severity: 'good', icon: 'health' },
+      { label: 'Assigned Actions', value: '7', note: '3 due today', severity: 'watch', icon: 'action' },
+      { label: 'Evidence Readiness', value: '18 / 21', note: '3 missing', severity: 'watch', icon: 'evidence' },
+      { label: 'Readiness Gate', value: 'Mapped', note: 'Access and workflow aligned', severity: 'good', icon: 'gate' },
+      { label: 'Pending Approvals', value: '4', note: 'Supervisor review required', severity: 'watch', icon: 'approval' },
+      { label: 'Role Access Status', value: 'Allowed', note: 'Permission guard passed', severity: 'good', icon: 'access' },
+      { label: 'SLA Due Soon', value: '3', note: 'Operations Engineer attention', severity: 'risk', icon: 'sla' },
+      { label: 'Closure Evidence Missing', value: '2', note: 'Maintenance Engineer follow-up', severity: 'watch', icon: 'closure' },
     ],
     'dashboard-executive': [
       { label: 'Customer Impact', value: '9', note: 'Customer-facing Risk', severity: 'risk', icon: 'customer' },
@@ -663,6 +752,17 @@ function dashboardSignalCards(l2Id: string, profile: DashboardWorkbenchProfile):
 }
 
 function dashboardProductionPanels(section: string, profile: DashboardWorkbenchProfile): DashboardWorkbenchConfig['productionPanels'] {
+  if (section in WORKSPACE_OVERVIEW_SECTIONS) {
+    return [
+      { dimension: 'Pain Point', signal: 'Role-based starting point', detail: 'Users entering a cross-industry operations platform need a clear role-based starting point instead of searching across many L1 domains.', owner: profile.persona },
+      { dimension: 'Decision Signal', signal: 'Workspace Health / Assigned Actions / Evidence Readiness', detail: 'Workspace health, assigned actions, due items, evidence gaps, and readiness gate status show what requires attention first.', owner: 'Executive / Supervisor' },
+      { dimension: 'Operational Context', signal: 'Assigned Site / Space / System / Asset', detail: 'Role, accessible workspace, assigned site, affected space, related system, asset, point/tag, work order, and evidence object.', owner: 'Operations Engineer' },
+      { dimension: 'Action', signal: 'Priority action path', detail: 'Open recommended workspace, review priority actions, prepare evidence handoff, validate readiness gate, or open governance audit.', owner: 'Operations Engineer' },
+      { dimension: 'Evidence', signal: 'Evidence Pack / Export Object', detail: 'Workspace activity record, evidence pack, export object, latest evidence update, and handoff package.', owner: 'Customer / Delivery lead' },
+      { dimension: 'Governance', signal: 'Permission and approval boundary', detail: 'Owner role, permission guard, SLA rule, approval rule, audit event, export permission, and review cycle.', owner: 'Architect / Governance owner' },
+    ]
+  }
+
   return [
     { dimension: 'Pain Point', signal: `${section} operating pressure`, detail: `The page reveals where ${profile.subject} creates customer, operations, or delivery friction.`, owner: profile.persona },
     { dimension: 'Decision Signal', signal: profile.signalLabel, detail: `${profile.signalValue} is treated as the first risk decision layer for the selected Dashboard workspace.`, owner: 'Executive / Supervisor' },
@@ -686,6 +786,23 @@ function dashboardReadinessLayers(profile: DashboardWorkbenchProfile): Dashboard
 }
 
 function dashboardAcceptanceFooter(l2Id: string, section: string, profile: DashboardWorkbenchProfile): DashboardWorkbenchConfig['acceptanceFooter'] {
+  if (l2Id === 'workspace-overview') {
+    return [
+      { label: 'customerAcceptanceUse', value: 'This workspace can be used for daily supervisor review, customer evidence review, role-based handoff, acceptance readiness verification, and audit-backed export.' },
+      { label: 'evidenceObject', value: 'Evidence Object EV-WS-0921 for workspace activity, assigned actions, missing evidence, and latest evidence update' },
+      { label: 'exportObject', value: 'Export Object EXP-WS-SUMMARY for customer-facing workspace summary and evidence pack' },
+      { label: 'auditEvent', value: 'Audit Event captured for role access, approval boundary, evidence export, and handoff review' },
+      { label: 'ownerRole', value: 'Role-based workspace owner: Customer, Operations Engineer, Maintenance Engineer, Executive / Supervisor, Architect, Sales / Presales' },
+      { label: 'permissionGuard', value: 'Allowed to proceed when role scope, access boundary, and export permission are aligned' },
+      { label: 'slaRule', value: 'SLA due soon and customer-facing service risk are visible before action' },
+      { label: 'approvalRule', value: 'Supervisor approval required for escalation, governance audit, and acceptance export' },
+      { label: 'reviewCycle', value: 'Daily supervisor review / customer evidence review / weekly readiness verification' },
+      { label: 'relatedWorkspaces', value: 'Work Management, Assets & Locations, Faults & Events, Reports & Documents, Energy & Sustainability, Governance & Security' },
+      { label: 'dataState', value: 'Data State: live role scope with read-only IBMS inherited site, system, asset, point, tag, work order, and evidence context' },
+      { label: 'workspaceState', value: 'Workspace State: GA role-based priority entry, ready for handoff and customer acceptance review' },
+    ]
+  }
+
   return [
     { label: 'customerAcceptanceUse', value: `${section} supports Customer Acceptance review, accountability, export, and escalation.` },
     { label: 'evidenceObject', value: `Evidence Object for ${profile.subject}` },
@@ -708,11 +825,13 @@ function buildDashboardWorkbench(
   profile: DashboardWorkbenchProfile,
   status: string,
 ): DashboardWorkbenchConfig {
+  const workspaceSection = context.l2Id === 'workspace-overview' ? WORKSPACE_OVERVIEW_SECTIONS[section] : undefined
+
   return {
     breadcrumb: `DASHBOARD / ${context.l2Label.toUpperCase()}`,
     intent: 'Cross-industry operational health overview, first risk decision layer, service impact, SLA pressure, partner health, evidence readiness, and commercial value entry.',
     owner: profile.persona,
-    nextStep: (DASHBOARD_ACTIONS[context.l2Id] ?? ['Open command center'])[0],
+    nextStep: workspaceSection?.primaryAction ?? (DASHBOARD_ACTIONS[context.l2Id] ?? ['Open command center'])[0],
     workspaceState: status,
     dataState: context.l2Id === 'partner-system-status' ? 'Data State: partner freshness watch' : 'Data State: live read-only operating signal',
     persona: profile.persona,
@@ -723,8 +842,11 @@ function buildDashboardWorkbench(
     riskValue: profile.riskValue,
     evidenceLabel: profile.evidenceLabel,
     evidenceValue: profile.evidenceValue,
-    tabs: DASHBOARD_CONTENT_TABS,
+    tabs: context.l2Id === 'workspace-overview' ? WORKSPACE_OVERVIEW_TABS : DASHBOARD_CONTENT_TABS,
     actions: DASHBOARD_ACTIONS[context.l2Id] ?? ['Open command center', 'Export evidence pack'],
+    connectedWorkspaces: context.l2Id === 'workspace-overview'
+      ? WORKSPACE_OVERVIEW_CONNECTED_WORKSPACES
+      : ['Command Center', 'Work Management', 'Integration & Partner Hub', 'Reports & Documents', 'Governance & Security'],
     signalCards: dashboardSignalCards(context.l2Id, profile),
     visualType: DASHBOARD_VISUAL_TYPES[context.l2Id] ?? 'safe-fallback-board',
     contextRows: DASHBOARD_CONTEXT_ROWS[context.l2Id] ?? DASHBOARD_CONTEXT_ROWS['workspace-overview'],
@@ -751,25 +873,52 @@ export function resolveL3ContentConfig(context: L3ContentContext): L3ContentConf
   const profile = profileFor(context.l2Id, context.l2Label, context.l1Label)
   const dashboardProfile = dashboardProfileFor(context.l2Id)
   const section = context.item.label
+  const workspaceSection = context.l2Id === 'workspace-overview' ? WORKSPACE_OVERVIEW_SECTIONS[section] : undefined
+  const displaySection = workspaceSection?.displayLabel ?? section
   const mappedModule = context.item.mappedExistingModule ?? context.l2Label
   const status = context.item.status?.replace(/-/g, ' ') ?? 'mapped'
 
   if (context.l1Label === 'Dashboard' && dashboardProfile) {
     return {
-      title: `${context.l2Label} / ${section}`,
-      subtitle: `${section} is a Dashboard workbench section for ${dashboardProfile.subject}. It focuses on ${dashboardProfile.commandFocus}.`,
-      primaryAction: `Open ${section} workbench`,
-      metrics: [
-        { label: dashboardProfile.metricLabels[0], value: dashboardProfile.signalValue, note: dashboardProfile.signalLabel },
-        { label: dashboardProfile.metricLabels[1], value: dashboardProfile.riskValue, note: dashboardProfile.riskLabel },
-        { label: dashboardProfile.metricLabels[2], value: dashboardProfile.evidenceValue, note: dashboardProfile.evidenceLabel },
-        { label: dashboardProfile.metricLabels[3], value: status, note: dashboardProfile.persona },
-      ],
-      rows: [
-        { item: `${section} signal review`, focus: dashboardProfile.commandFocus, status: 'Live' },
-        { item: `${section} action alignment`, focus: dashboardProfile.dimensions[2]?.detail ?? profile.operatingFocus, status: 'Ready' },
-        { item: `${section} evidence handoff`, focus: dashboardProfile.dimensions[4]?.detail ?? profile.evidenceFocus, status: 'Guarded' },
-      ],
+      title: workspaceSection?.title ?? `${context.l2Label} / ${displaySection}`,
+      subtitle: workspaceSection?.subtitle ?? `${displaySection} is a Dashboard workbench section for ${dashboardProfile.subject}. It focuses on ${dashboardProfile.commandFocus}.`,
+      primaryAction: workspaceSection?.primaryAction ?? `Open ${displaySection} workbench`,
+      selectedLabel: displaySection,
+      sectionEyebrow: context.l2Id === 'workspace-overview' ? 'ROLE PRIORITY ENTRY' : 'DASHBOARD DECISION WORKSPACE',
+      l3Tabs: dashboardDisplayTabs(context, section),
+      connectedWorkspaces: context.l2Id === 'workspace-overview'
+        ? WORKSPACE_OVERVIEW_CONNECTED_WORKSPACES
+        : ['Command Center', 'Work Management', 'Integration & Partner Hub', 'Reports & Documents', 'Governance & Security'],
+      relatedWorkspaces: context.l2Id === 'workspace-overview'
+        ? WORKSPACE_OVERVIEW_CONNECTED_WORKSPACES
+        : ['Command Center', 'Work Management', 'Integration & Partner Hub', 'Reports & Documents', 'Governance & Security'],
+      metrics: context.l2Id === 'workspace-overview'
+        ? [
+            { label: 'Workspace Health', value: '92%', note: 'Role scope ready' },
+            { label: 'Assigned Actions', value: '7', note: '3 due today' },
+            { label: 'Evidence Readiness', value: '18 / 21', note: '3 missing' },
+            { label: 'Readiness Gate', value: 'Mapped', note: 'Access and workflow aligned' },
+          ]
+        : [
+            { label: dashboardProfile.metricLabels[0], value: dashboardProfile.signalValue, note: dashboardProfile.signalLabel },
+            { label: dashboardProfile.metricLabels[1], value: dashboardProfile.riskValue, note: dashboardProfile.riskLabel },
+            { label: dashboardProfile.metricLabels[2], value: dashboardProfile.evidenceValue, note: dashboardProfile.evidenceLabel },
+            { label: dashboardProfile.metricLabels[3], value: status, note: dashboardProfile.persona },
+          ],
+      rows: context.l2Id === 'workspace-overview'
+        ? [
+            { item: 'Review top assigned service risks', focus: 'Service status, customer impact, SLA due soon, and priority signal', status: 'Open', owner: 'Operations Engineer', priority: 'High', open: 'Open Priority Workbench' },
+            { item: 'Confirm action queue ownership', focus: 'Assigned actions, due today, escalation owner, and recommended workspace', status: 'Ready', owner: 'Executive / Supervisor', priority: 'High', open: 'Open Action Queue' },
+            { item: 'Prepare evidence handoff package', focus: 'Evidence readiness, missing evidence, customer-facing export, and acceptance package', status: 'Guarded', owner: 'Customer Success Manager', priority: 'Medium', open: 'Export Evidence Pack' },
+            { item: 'Validate readiness gate', focus: 'Role access status, workflow alignment, permission guard, and 7-layer readiness', status: 'Mapped', owner: 'Architect', priority: 'Medium', open: 'Open Recommended Workspace' },
+            { item: 'Open recommended workspace', focus: 'Work Management, Assets & Locations, Faults & Events, Reports & Documents, Energy & Sustainability, Governance & Security', status: 'Allowed', owner: 'Role-based user', priority: 'Normal', open: 'Open Recommended Workspace' },
+            { item: 'Review access and approval boundary', focus: 'Owner role, approval rule, SLA rule, audit event, export permission, and review cycle', status: 'Review', owner: 'Governance owner', priority: 'High', open: 'Open Governance Audit' },
+          ]
+        : [
+            { item: `${displaySection} signal review`, focus: dashboardProfile.commandFocus, status: 'Live' },
+            { item: `${displaySection} action alignment`, focus: dashboardProfile.dimensions[2]?.detail ?? profile.operatingFocus, status: 'Ready' },
+            { item: `${displaySection} evidence handoff`, focus: dashboardProfile.dimensions[4]?.detail ?? profile.evidenceFocus, status: 'Guarded' },
+          ],
       dashboardWorkbench: {
         ...buildDashboardWorkbench(context, section, dashboardProfile, status),
       },

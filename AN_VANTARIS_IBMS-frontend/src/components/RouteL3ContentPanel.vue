@@ -9,6 +9,32 @@ const route = useRoute()
 const context = computed(() => resolveL3RouteContentContext(route.query.menu, route.query.l3))
 const content = computed(() => (context.value ? resolveL3ContentConfig(context.value) : undefined))
 const dashboardWorkbench = computed(() => content.value?.dashboardWorkbench)
+const defaultRelatedWorkspaces = ['Command Center', 'Work Management', 'Integration & Partner Hub', 'Reports & Documents', 'Governance & Security']
+const sectionKicker = computed(() => {
+  if (content.value?.sectionEyebrow) {
+    return content.value.sectionEyebrow
+  }
+  if (context.value?.l2Id === 'workspace-overview') {
+    return 'ROLE PRIORITY ENTRY'
+  }
+  return dashboardWorkbench.value ? 'DASHBOARD DECISION WORKSPACE' : 'Workspace content'
+})
+const dashboardTabs = computed(() => {
+  if (content.value?.l3Tabs?.length) {
+    return content.value.l3Tabs
+  }
+
+  return (dashboardWorkbench.value?.tabs ?? []).map((label) => ({
+    key: label,
+    label,
+    active: false,
+  }))
+})
+const connectedWorkspaces = computed(() =>
+  content.value?.connectedWorkspaces
+  ?? content.value?.relatedWorkspaces
+  ?? defaultRelatedWorkspaces,
+)
 const signature = computed(() => `${context.value?.l1Label ?? ''} ${context.value?.l2Id ?? ''} ${context.value?.l2Label ?? ''} ${context.value?.item.label ?? ''}`.toLowerCase())
 
 function score(seed: string, index: number, min = 18, span = 74): number {
@@ -75,7 +101,7 @@ const matrixRows = computed(() => ['Policy', 'Owner', 'Approval', 'Audit'].map((
   <section v-if="content" class="route-l3-panel" aria-label="Menu section content">
     <div class="route-l3-panel__head">
       <div>
-        <span class="route-l3-panel__kicker">{{ dashboardWorkbench?.breadcrumb ?? 'Workspace content' }}</span>
+        <span class="route-l3-panel__kicker">{{ sectionKicker }}</span>
         <h2>{{ content.title }}</h2>
         <p>{{ content.subtitle }}</p>
       </div>
@@ -119,11 +145,18 @@ const matrixRows = computed(() => ['Policy', 'Owner', 'Approval', 'Audit'].map((
 
     <div v-if="dashboardWorkbench" class="route-l3-panel__dashboard-workbench">
       <div class="route-l3-panel__dashboard-tabs" aria-label="Dashboard L3 workspace tabs">
-        <span v-for="tab in dashboardWorkbench.tabs" :key="tab">{{ tab }}</span>
+        <span v-for="tab in dashboardTabs" :key="tab.key" :class="{ 'route-l3-panel__dashboard-tab--active': tab.active }">{{ tab.label }}</span>
       </div>
 
       <div class="route-l3-panel__action-bar" aria-label="Dashboard primary action bar">
         <el-button v-for="action in dashboardWorkbench.actions" :key="action" type="primary" plain>{{ action }}</el-button>
+      </div>
+
+      <div v-if="connectedWorkspaces.length" class="route-l3-panel__connected-workspaces" aria-label="Connected Workspaces">
+        <span>Connected Workspaces</span>
+        <div>
+          <strong v-for="workspace in connectedWorkspaces" :key="workspace">{{ workspace }}</strong>
+        </div>
       </div>
 
       <div class="route-l3-panel__dashboard-main">
@@ -313,7 +346,15 @@ const matrixRows = computed(() => ['Policy', 'Owner', 'Approval', 'Audit'].map((
       </div>
     </div>
 
-    <el-table :data="content.rows" stripe border class="route-l3-panel__table">
+    <el-table v-if="dashboardWorkbench" :data="content.rows" stripe border class="route-l3-panel__table">
+      <el-table-column prop="item" label="Action" min-width="240" />
+      <el-table-column prop="owner" label="Owner" min-width="180" />
+      <el-table-column prop="status" label="Status" min-width="130" />
+      <el-table-column prop="priority" label="Priority" min-width="130" />
+      <el-table-column prop="open" label="Open" min-width="220" />
+    </el-table>
+
+    <el-table v-else :data="content.rows" stripe border class="route-l3-panel__table">
       <el-table-column prop="item" label="Action" min-width="240" />
       <el-table-column prop="focus" label="Focus Area" min-width="280" />
       <el-table-column prop="status" label="Status" min-width="140" />
@@ -472,11 +513,48 @@ const matrixRows = computed(() => ['Policy', 'Owner', 'Approval', 'Audit'].map((
   font-weight: 800;
 }
 
+.route-l3-panel__dashboard-tabs .route-l3-panel__dashboard-tab--active {
+  border-color: #0f766e;
+  background: #e8f5f1;
+  color: #10201d;
+}
+
 .route-l3-panel__action-bar {
   padding: 10px;
   border: 1px solid #dfe9e5;
   border-radius: 12px;
   background: #ffffff;
+}
+
+.route-l3-panel__connected-workspaces {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid #dfe9e5;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.route-l3-panel__connected-workspaces > span {
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.route-l3-panel__connected-workspaces > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.route-l3-panel__connected-workspaces strong {
+  padding: 8px 10px;
+  border: 1px solid #cfe0dc;
+  border-radius: 10px;
+  background: #f8fbfa;
+  color: #10201d;
+  font-size: 12px;
 }
 
 .route-l3-panel__dashboard-main {
