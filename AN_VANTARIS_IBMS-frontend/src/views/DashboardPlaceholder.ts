@@ -24,7 +24,18 @@ type SectionConfig = {
   actions: ActionRow[]
   primaryRoute: string
   primaryAction: string
+  sectionEyebrow?: string
+  connectedWorkspaces?: Array<{ label: string; route: string }>
 }
+
+const defaultConnectedWorkspaces = [
+  { label: 'Work Management', route: '/one/umms/workspace' },
+  { label: 'Assets & Locations', route: '/assets/topology' },
+  { label: 'Faults & Events', route: '/one/airport/alarms-events' },
+  { label: 'Reports & Documents', route: '/reports' },
+  { label: 'Governance & Security', route: '/system/audit-logs' },
+  { label: 'Integration & Partner Hub', route: '/uedge/setup' },
+]
 
 const defaultMetrics: MetricCard[] = [
   { label: 'Open Work Orders', value: '42', note: 'Active maintenance queue across critical systems', tone: '#0f766e' },
@@ -378,7 +389,7 @@ const sections: Record<string, SectionConfig> = {
     title: 'My Approvals',
     subtitle: 'Approvals for work order closure, reports, evidence bundles, and operational decisions.',
     primaryRoute: '/ucde/evidence',
-    primaryAction: 'Open Evidence Center',
+    primaryAction: 'Open Evidence Review',
     metrics: [
       { label: 'Pending Approval', value: '11', note: 'Items waiting for approval', tone: '#b45309' },
       { label: 'High Priority', value: '3', note: 'High priority approval items', tone: '#dc2626' },
@@ -599,6 +610,11 @@ export default defineComponent({
             subtitle: config.subtitle,
             primaryRoute: '/dashboard',
             primaryAction: config.primaryAction,
+            sectionEyebrow: config.sectionEyebrow,
+            connectedWorkspaces: (config.connectedWorkspaces ?? config.relatedWorkspaces)?.map((label) => ({
+              label,
+              route: routeForConnectedWorkspace(label),
+            })),
             metrics: config.metrics.map((metric, index) => ({
               ...metric,
               tone: ['#0f766e', '#2563eb', '#7c3aed', '#b45309'][index % 4],
@@ -635,7 +651,7 @@ export default defineComponent({
         card([
           h('div', { style: sectionHeaderStyle }, [
             h('div', [
-              h('p', { style: eyebrowStyle }, 'Selected dashboard section'),
+              h('p', { style: eyebrowStyle }, activeSection.value.sectionEyebrow ?? 'DASHBOARD DECISION WORKSPACE'),
               h('h2', { style: headingStyle }, activeSection.value.title),
               h('p', { style: subtitleStyle }, activeSection.value.subtitle),
             ]),
@@ -668,18 +684,29 @@ export default defineComponent({
         card([
           h('p', { style: eyebrowStyle }, 'Operational routes'),
           h('h2', { style: headingStyle }, 'Connected workspaces'),
-          h('div', { style: { display: 'grid', gap: '10px' } }, [
-            routeButton('UMMS Maintenance', '/one/umms/workspace'),
-            routeButton('Assets & Topology', '/assets/topology'),
-            routeButton('Evidence Center', '/ucde/evidence'),
-            routeButton('Reports Center', '/reports'),
-            routeButton('UESG Sustainability', '/uesg/sustainability'),
-          ]),
+          h('div', { style: { display: 'grid', gap: '10px' } },
+            (activeSection.value.connectedWorkspaces ?? defaultConnectedWorkspaces).map((workspace) => routeButton(workspace.label, workspace.route)),
+          ),
         ]),
       ]),
     ])
   },
 })
+
+function routeForConnectedWorkspace(label: string): string {
+  const routes: Record<string, string> = {
+    'Work Management': '/one/umms/workspace',
+    'Assets & Locations': '/assets/topology',
+    'Faults & Events': '/one/airport/alarms-events',
+    'Reports & Documents': '/reports',
+    'Governance & Security': '/system/audit-logs',
+    'Integration & Partner Hub': '/uedge/setup',
+    'Industry Solutions': '/dashboard',
+    'Data & Intelligence': '/one/assets/context',
+  }
+
+  return routes[label] ?? '/dashboard'
+}
 
 function routeButton(label: string, route: string) {
   return h('button', {

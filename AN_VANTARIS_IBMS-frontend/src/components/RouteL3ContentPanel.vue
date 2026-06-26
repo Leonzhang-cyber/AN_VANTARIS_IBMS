@@ -9,7 +9,7 @@ const route = useRoute()
 const context = computed(() => resolveL3RouteContentContext(route.query.menu, route.query.l3))
 const content = computed(() => (context.value ? resolveL3ContentConfig(context.value) : undefined))
 const dashboardWorkbench = computed(() => content.value?.dashboardWorkbench)
-const defaultRelatedWorkspaces = ['Command Center', 'Work Management', 'Integration & Partner Hub', 'Reports & Documents', 'Governance & Security']
+const defaultRelatedWorkspaces = ['Work Management', 'Assets & Locations', 'Faults & Events', 'Reports & Documents', 'Governance & Security', 'Integration & Partner Hub']
 const sectionKicker = computed(() => {
   if (content.value?.sectionEyebrow) {
     return content.value.sectionEyebrow

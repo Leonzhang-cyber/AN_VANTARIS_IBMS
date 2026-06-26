@@ -59,6 +59,24 @@ interface WorkspaceOverviewSectionConfig {
   primaryAction: string
 }
 
+const DASHBOARD_DEFAULT_CONNECTED_WORKSPACES = [
+  'Work Management',
+  'Assets & Locations',
+  'Faults & Events',
+  'Reports & Documents',
+  'Governance & Security',
+  'Integration & Partner Hub',
+]
+
+const INDUSTRY_VIEW_CONNECTED_WORKSPACES = [
+  'Industry Solutions',
+  'Integration & Partner Hub',
+  'Assets & Locations',
+  'Reports & Documents',
+  'Governance & Security',
+  'Data & Intelligence',
+]
+
 type DashboardVisualType =
   | 'workspace-priority-board'
   | 'executive-risk-board'
@@ -225,8 +243,8 @@ const DASHBOARD_WORKBENCH_PROFILES: Record<string, DashboardWorkbenchProfile> = 
   },
   'industry-view': {
     persona: 'Solution architect',
-    subject: 'industry scenario dashboard',
-    commandFocus: 'validating industry scenario fit, KPI readiness, risk model alignment, and evidence coverage',
+    subject: 'active industry profile summary',
+    commandFocus: 'validating the active industry profile, KPI coverage, scenario risk model, connector readiness, and evidence pack without replacing the full Industry Solutions workspace',
     signalLabel: 'Scenario fit',
     signalValue: '89%',
     riskLabel: 'Model gaps',
@@ -235,10 +253,10 @@ const DASHBOARD_WORKBENCH_PROFILES: Record<string, DashboardWorkbenchProfile> = 
     evidenceValue: '9',
     metricLabels: ['Industry signal', 'Scenario actions', 'Risk model', 'Readiness pack'],
     dimensions: [
-      { dimension: 'Detect', title: 'Scenario risk signal', detail: 'Industry-specific operating risks are separated from generic platform risk.', state: 'Live' },
-      { dimension: 'Diagnose', title: 'Industry context', detail: 'Scenario, KPI, SLA, connector, and report assumptions are visible.', state: 'Mapped' },
-      { dimension: 'Decide', title: 'Industry KPI actions', detail: 'KPI gaps are turned into configuration and evidence actions.', state: 'Ready' },
-      { dimension: 'Dispatch', title: 'Package governance', detail: 'Scenario package owners and approval requirements are visible.', state: 'Guarded' },
+      { dimension: 'Detect', title: 'Profile risk signal', detail: 'The active industry profile highlights scenario risks without acting as the full Industry Solutions page.', state: 'Live' },
+      { dimension: 'Diagnose', title: 'Profile context', detail: 'Scenario, KPI, SLA, connector, and report assumptions are summarized for decision review.', state: 'Mapped' },
+      { dimension: 'Decide', title: 'KPI readiness actions', detail: 'KPI gaps are surfaced as review entries before users open the full industry package.', state: 'Ready' },
+      { dimension: 'Dispatch', title: 'Profile governance', detail: 'Scenario profile owners and approval requirements are visible.', state: 'Guarded' },
       { dimension: 'Document', title: 'Industry evidence pack', detail: 'Industry evidence is ready for sales, architecture, and customer review.', state: 'Ready' },
       { dimension: 'Deliver', title: 'Scenario readiness', detail: 'Readiness quality confirms whether the industry view is GA-presentable.', state: 'Watch' },
     ],
@@ -813,7 +831,7 @@ function dashboardAcceptanceFooter(l2Id: string, section: string, profile: Dashb
     { label: 'slaRule', value: 'SLA Rule visible where customer or service pressure exists' },
     { label: 'approvalRule', value: 'Approval Rule required for escalation, export, or acceptance package release' },
     { label: 'reviewCycle', value: 'Daily operations review / weekly customer governance review' },
-    { label: 'relatedWorkspaces', value: 'Command Center, Work Management, Integration Health, Reports & Documents, Governance & Security' },
+    { label: 'relatedWorkspaces', value: DASHBOARD_DEFAULT_CONNECTED_WORKSPACES.join(', ') },
     { label: 'dataState', value: 'Data State: live, mapped, or watch depending on signal freshness' },
     { label: 'workspaceState', value: 'Workspace State: GA read-only console content, no route or API change' },
   ]
@@ -846,7 +864,9 @@ function buildDashboardWorkbench(
     actions: DASHBOARD_ACTIONS[context.l2Id] ?? ['Open command center', 'Export evidence pack'],
     connectedWorkspaces: context.l2Id === 'workspace-overview'
       ? WORKSPACE_OVERVIEW_CONNECTED_WORKSPACES
-      : ['Command Center', 'Work Management', 'Integration & Partner Hub', 'Reports & Documents', 'Governance & Security'],
+      : context.l2Id === 'industry-view'
+        ? INDUSTRY_VIEW_CONNECTED_WORKSPACES
+        : DASHBOARD_DEFAULT_CONNECTED_WORKSPACES,
     signalCards: dashboardSignalCards(context.l2Id, profile),
     visualType: DASHBOARD_VISUAL_TYPES[context.l2Id] ?? 'safe-fallback-board',
     contextRows: DASHBOARD_CONTEXT_ROWS[context.l2Id] ?? DASHBOARD_CONTEXT_ROWS['workspace-overview'],
@@ -875,23 +895,30 @@ export function resolveL3ContentConfig(context: L3ContentContext): L3ContentConf
   const section = context.item.label
   const workspaceSection = context.l2Id === 'workspace-overview' ? WORKSPACE_OVERVIEW_SECTIONS[section] : undefined
   const displaySection = workspaceSection?.displayLabel ?? section
+  const isIndustryView = context.l2Id === 'industry-view'
   const mappedModule = context.item.mappedExistingModule ?? context.l2Label
   const status = context.item.status?.replace(/-/g, ' ') ?? 'mapped'
 
   if (context.l1Label === 'Dashboard' && dashboardProfile) {
     return {
-      title: workspaceSection?.title ?? `${context.l2Label} / ${displaySection}`,
-      subtitle: workspaceSection?.subtitle ?? `${displaySection} is a Dashboard workbench section for ${dashboardProfile.subject}. It focuses on ${dashboardProfile.commandFocus}.`,
-      primaryAction: workspaceSection?.primaryAction ?? `Open ${displaySection} workbench`,
-      selectedLabel: displaySection,
-      sectionEyebrow: context.l2Id === 'workspace-overview' ? 'ROLE PRIORITY ENTRY' : 'DASHBOARD DECISION WORKSPACE',
+      title: isIndustryView ? 'Active Industry Profile' : workspaceSection?.title ?? `${context.l2Label} / ${displaySection}`,
+      subtitle: isIndustryView
+        ? 'Validates the active industry profile, KPI coverage, scenario risk model, connector readiness, and evidence pack for the selected operating scenario.'
+        : workspaceSection?.subtitle ?? `${displaySection} is a Dashboard workbench section for ${dashboardProfile.subject}. It focuses on ${dashboardProfile.commandFocus}.`,
+      primaryAction: isIndustryView ? 'Review Active Industry Profile' : workspaceSection?.primaryAction ?? `Open ${displaySection} workbench`,
+      selectedLabel: isIndustryView ? 'Active Industry Profile' : displaySection,
+      sectionEyebrow: context.l2Id === 'workspace-overview' ? 'ROLE PRIORITY ENTRY' : isIndustryView ? 'INDUSTRY DECISION CONTEXT' : 'DASHBOARD DECISION WORKSPACE',
       l3Tabs: dashboardDisplayTabs(context, section),
       connectedWorkspaces: context.l2Id === 'workspace-overview'
         ? WORKSPACE_OVERVIEW_CONNECTED_WORKSPACES
-        : ['Command Center', 'Work Management', 'Integration & Partner Hub', 'Reports & Documents', 'Governance & Security'],
+        : isIndustryView
+          ? INDUSTRY_VIEW_CONNECTED_WORKSPACES
+          : DASHBOARD_DEFAULT_CONNECTED_WORKSPACES,
       relatedWorkspaces: context.l2Id === 'workspace-overview'
         ? WORKSPACE_OVERVIEW_CONNECTED_WORKSPACES
-        : ['Command Center', 'Work Management', 'Integration & Partner Hub', 'Reports & Documents', 'Governance & Security'],
+        : isIndustryView
+          ? INDUSTRY_VIEW_CONNECTED_WORKSPACES
+          : DASHBOARD_DEFAULT_CONNECTED_WORKSPACES,
       metrics: context.l2Id === 'workspace-overview'
         ? [
             { label: 'Workspace Health', value: '92%', note: 'Role scope ready' },
