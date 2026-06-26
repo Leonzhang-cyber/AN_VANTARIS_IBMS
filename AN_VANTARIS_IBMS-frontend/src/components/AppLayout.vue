@@ -251,25 +251,41 @@ onMounted(() => {
           :collapse="sidebarCollapsed"
           @select="onMenuSelect"
         >
-          <template v-for="item in menuItems" :key="item.id">
-            <el-sub-menu v-if="item.children?.length" :index="item.id">
+          <template v-for="(item, index) in menuItems" :key="item.id">
+            <el-sub-menu
+              v-if="item.children?.length"
+              :index="item.id"
+              :class="[
+                'app-layout__l1-submenu',
+                `app-layout__l1-submenu--group-${Math.floor(index / 4) + 1}`,
+              ]"
+            >
               <template #title>
-                <span class="app-layout__menu-icon" :title="item.label">{{ item.icon ?? item.label.slice(0, 1) }}</span>
-                <span>{{ item.label }}</span>
+                <span class="app-layout__menu-icon app-layout__menu-icon--l1" :title="item.label">{{ item.icon ?? item.label.slice(0, 1) }}</span>
+                <span class="app-layout__menu-label app-layout__menu-label--l1" :title="item.label">{{ item.label }}</span>
               </template>
               <el-menu-item
                 v-for="child in item.children"
                 :key="child.id"
                 :index="child.id"
                 :title="child.label"
+                class="app-layout__l2-menu-item"
               >
-                <span class="app-layout__menu-icon">{{ child.label.slice(0, 1) }}</span>
-                <span>{{ child.label }}</span>
+                <span class="app-layout__menu-icon app-layout__menu-icon--l2" :title="child.label">{{ child.label.slice(0, 1) }}</span>
+                <span class="app-layout__menu-label app-layout__menu-label--l2" :title="child.label">{{ child.label }}</span>
               </el-menu-item>
             </el-sub-menu>
-            <el-menu-item v-else :index="item.id" :title="item.label">
-              <span class="app-layout__menu-icon">{{ item.icon ?? item.label.slice(0, 1) }}</span>
-              <span>{{ item.label }}</span>
+            <el-menu-item
+              v-else
+              :index="item.id"
+              :title="item.label"
+              :class="[
+                'app-layout__l1-menu-item',
+                `app-layout__l1-menu-item--group-${Math.floor(index / 4) + 1}`,
+              ]"
+            >
+              <span class="app-layout__menu-icon app-layout__menu-icon--l1">{{ item.icon ?? item.label.slice(0, 1) }}</span>
+              <span class="app-layout__menu-label app-layout__menu-label--l1" :title="item.label">{{ item.label }}</span>
             </el-menu-item>
           </template>
         </el-menu>
@@ -515,7 +531,7 @@ onMounted(() => {
 
 .app-layout__menu {
   border-right: none;
-  padding: 12px;
+  padding: 12px 10px 18px;
   background: transparent;
 }
 
@@ -527,6 +543,8 @@ onMounted(() => {
   color: #475569;
   font-size: 14px;
   font-weight: 500;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .app-layout__menu :deep(.el-sub-menu__title:hover),
@@ -538,6 +556,112 @@ onMounted(() => {
 .app-layout__menu :deep(.el-menu-item.is-active) {
   background: #e4f4f1;
   color: #08796d;
+}
+
+.app-layout__l1-submenu,
+.app-layout__l1-menu-item {
+  --menu-group-accent: #0f766e;
+  --menu-group-soft: #e9fbf7;
+  --menu-group-border: #b8e4dc;
+}
+
+.app-layout__l1-submenu--group-2,
+.app-layout__l1-menu-item--group-2 {
+  --menu-group-accent: #2563eb;
+  --menu-group-soft: #eef5ff;
+  --menu-group-border: #c7d8ff;
+}
+
+.app-layout__l1-submenu--group-3,
+.app-layout__l1-menu-item--group-3 {
+  --menu-group-accent: #7c3aed;
+  --menu-group-soft: #f4efff;
+  --menu-group-border: #d7c8ff;
+}
+
+.app-layout__l1-submenu:nth-of-type(4n + 5),
+.app-layout__l1-menu-item:nth-of-type(4n + 5) {
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid #e2ecf2;
+}
+
+.app-layout__menu :deep(.app-layout__l1-submenu > .el-sub-menu__title),
+.app-layout__menu :deep(.app-layout__l1-menu-item) {
+  position: relative;
+  height: 48px;
+  margin: 7px 2px;
+  border: 1px solid var(--menu-group-border);
+  border-left: 4px solid var(--menu-group-accent);
+  border-radius: 12px;
+  background: linear-gradient(180deg, #ffffff 0%, var(--menu-group-soft) 100%);
+  color: #172033;
+  font-size: 14px;
+  font-weight: 800;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+}
+
+.app-layout__menu :deep(.app-layout__l1-submenu > .el-sub-menu__title:hover),
+.app-layout__menu :deep(.app-layout__l1-menu-item:hover) {
+  border-color: var(--menu-group-border);
+  color: var(--menu-group-accent);
+  background: linear-gradient(180deg, #ffffff 0%, var(--menu-group-soft) 100%);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.10);
+}
+
+.app-layout__menu :deep(.app-layout__l1-submenu.is-opened > .el-sub-menu__title) {
+  color: var(--menu-group-accent);
+}
+
+.app-layout__menu :deep(.el-sub-menu .el-menu) {
+  padding: 2px 0 8px 0;
+  background: transparent;
+}
+
+.app-layout__menu :deep(.app-layout__l2-menu-item) {
+  height: 38px;
+  margin: 3px 2px 3px 18px;
+  padding-left: 14px !important;
+  border: 1px solid transparent;
+  border-left: 2px solid #d7e3ec;
+  border-radius: 9px;
+  background: transparent;
+  color: #5b6b7f;
+  font-size: 13px;
+  font-weight: 650;
+  box-shadow: none;
+}
+
+.app-layout__menu :deep(.app-layout__l2-menu-item:hover) {
+  border-color: #d9e7ee;
+  border-left-color: var(--menu-group-accent);
+  background: #f7fbfd;
+  color: #233247;
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.05);
+}
+
+.app-layout__menu :deep(.app-layout__l2-menu-item.is-active) {
+  border-color: rgba(15, 118, 110, 0.26);
+  border-left-color: var(--menu-group-accent);
+  background: #f0faf7;
+  color: #0f766e;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
+}
+
+.app-layout__menu-label {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-layout__menu-label--l1 {
+  letter-spacing: 0;
+}
+
+.app-layout__menu-label--l2 {
+  letter-spacing: 0;
 }
 
 .app-layout__menu-icon {
@@ -555,8 +679,41 @@ onMounted(() => {
   font-weight: 700;
 }
 
+.app-layout__menu-icon--l1 {
+  width: 1.55rem;
+  min-width: 1.55rem;
+  height: 1.55rem;
+  border-color: var(--menu-group-border);
+  background: var(--menu-group-soft);
+  color: var(--menu-group-accent);
+  font-size: 0.76rem;
+  font-weight: 850;
+}
+
+.app-layout__menu-icon--l2 {
+  width: 1.1rem;
+  min-width: 1.1rem;
+  height: 1.1rem;
+  margin-left: 2px;
+  margin-right: 0.48rem;
+  border-radius: 6px;
+  background: #eef5f7;
+  color: #607080;
+  font-size: 0.62rem;
+  font-weight: 750;
+}
+
 .app-layout__aside--collapsed .app-layout__menu-icon {
   margin-right: 0;
+}
+
+.app-layout__aside--collapsed .app-layout__menu-label {
+  display: none;
+}
+
+.app-layout__aside--collapsed .app-layout__menu :deep(.app-layout__l2-menu-item) {
+  margin-left: 2px;
+  padding-left: 20px !important;
 }
 
 .app-layout__main {

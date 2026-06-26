@@ -255,6 +255,29 @@ textarea {
   font-weight: 500;
 }
 
+.app-layout .app-layout__l1-submenu > .el-sub-menu__title,
+.app-layout .app-layout__l1-menu-item {
+  min-width: 0;
+  font-weight: 800;
+}
+
+.app-layout .app-layout__l2-menu-item {
+  min-width: 0;
+  font-weight: 650;
+}
+
+.app-layout .app-layout__menu-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-layout .app-layout__l1-submenu > .el-sub-menu__title .el-sub-menu__icon-arrow {
+  color: currentColor;
+  font-size: 13px;
+}
+
 /* menu icon chip */
 .app-layout__menu-icon {
   border: 1px solid #cfe3de !important;
@@ -306,4 +329,3 @@ textarea {
   background: linear-gradient(180deg, #f5f8fb 0%, #eef4f8 100%) !important;
 }
 /* === VANTARIS depth enhancement end === */
-
