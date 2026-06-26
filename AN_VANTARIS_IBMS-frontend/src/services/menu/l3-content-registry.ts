@@ -904,7 +904,7 @@ export function resolveL3ContentConfig(context: L3ContentContext): L3ContentConf
       title: isIndustryView ? 'Active Industry Profile' : workspaceSection?.title ?? `${context.l2Label} / ${displaySection}`,
       subtitle: isIndustryView
         ? 'Validates the active industry profile, KPI coverage, scenario risk model, connector readiness, and evidence pack for the selected operating scenario.'
-        : workspaceSection?.subtitle ?? `${displaySection} is a Dashboard workbench section for ${dashboardProfile.subject}. It focuses on ${dashboardProfile.commandFocus}.`,
+        : workspaceSection?.subtitle ?? `${displaySection} provides a decision-ready view for ${dashboardProfile.subject}, linking risk signals, operational context, recommended action, evidence readiness, and governance controls.`,
       primaryAction: isIndustryView ? 'Review Active Industry Profile' : workspaceSection?.primaryAction ?? `Open ${displaySection} workbench`,
       selectedLabel: isIndustryView ? 'Active Industry Profile' : displaySection,
       sectionEyebrow: context.l2Id === 'workspace-overview' ? 'ROLE PRIORITY ENTRY' : isIndustryView ? 'INDUSTRY DECISION CONTEXT' : 'DASHBOARD DECISION WORKSPACE',
