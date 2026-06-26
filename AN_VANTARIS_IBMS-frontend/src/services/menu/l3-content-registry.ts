@@ -15,7 +15,51 @@ export interface L3ContentConfig {
   primaryAction: string
   metrics: Array<{ label: string; value: string; note: string }>
   rows: Array<{ item: string; focus: string; status: string }>
+  dashboardWorkbench?: DashboardWorkbenchConfig
 }
+
+export interface DashboardWorkbenchConfig {
+  breadcrumb: string
+  intent: string
+  owner: string
+  nextStep: string
+  workspaceState: string
+  dataState: string
+  persona: string
+  commandFocus: string
+  signalLabel: string
+  signalValue: string
+  riskLabel: string
+  riskValue: string
+  evidenceLabel: string
+  evidenceValue: string
+  tabs: string[]
+  actions: string[]
+  signalCards: Array<{ label: string; value: string; note: string; severity: 'good' | 'watch' | 'risk'; icon: string }>
+  visualType: DashboardVisualType
+  contextRows: Array<{ label: string; value: string; note: string }>
+  productionPanels: Array<{ dimension: DashboardProductionDimension; signal: string; detail: string; owner: string }>
+  lanes: Array<{ dimension: string; title: string; detail: string; state: string }>
+  focusCards: Array<{ title: string; value: string; detail: string; tone: 'good' | 'watch' | 'risk' }>
+  heatmap: Array<{ label: string; value: number; tone: 'good' | 'watch' | 'risk' }>
+  readinessLayers: Array<{ layer: string; health: string; risk: string; dataState: string; owner: string; nextAction: string; evidence: string; governanceNote: string }>
+  acceptanceFooter: Array<{ label: string; value: string }>
+}
+
+type DashboardVisualType =
+  | 'workspace-priority-board'
+  | 'executive-risk-board'
+  | 'live-operations-board'
+  | 'portfolio-scorecard'
+  | 'industry-profile-map'
+  | 'value-realization-scorecard'
+  | 'service-risk-board'
+  | 'partner-health-map'
+  | 'readiness-checklist-board'
+  | 'seven-layer-readiness-board'
+  | 'safe-fallback-board'
+
+type DashboardProductionDimension = 'Pain Point' | 'Decision Signal' | 'Operational Context' | 'Action' | 'Evidence' | 'Governance'
 
 interface L2ContentProfile {
   domain: string
@@ -23,6 +67,304 @@ interface L2ContentProfile {
   operatingFocus: string
   evidenceFocus: string
   ownerFocus: string
+}
+
+interface DashboardWorkbenchProfile {
+  persona: string
+  subject: string
+  commandFocus: string
+  signalLabel: string
+  signalValue: string
+  riskLabel: string
+  riskValue: string
+  evidenceLabel: string
+  evidenceValue: string
+  metricLabels: [string, string, string, string]
+  dimensions: Array<{ dimension: string; title: string; detail: string; state: string }>
+  focusCards: Array<{ title: string; value: string; detail: string; tone: 'good' | 'watch' | 'risk' }>
+  heatmap: Array<{ label: string; value: number; tone: 'good' | 'watch' | 'risk' }>
+}
+
+const DASHBOARD_WORKBENCH_PROFILES: Record<string, DashboardWorkbenchProfile> = {
+  'workspace-overview': {
+    persona: 'Role-based workspace',
+    subject: 'cross-role operating workspace',
+    commandFocus: 'aligning assigned risks, actions, evidence, and governance readiness across the active user workspace',
+    signalLabel: 'Workspace health',
+    signalValue: '92%',
+    riskLabel: 'Assigned risk',
+    riskValue: '7',
+    evidenceLabel: 'Evidence ready',
+    evidenceValue: '18',
+    metricLabels: ['Role signal', 'Active actions', 'Evidence packs', 'Readiness gate'],
+    dimensions: [
+      { dimension: 'Detect', title: 'Role risk signal', detail: 'Open risk signals filtered by role, site, and responsibility.', state: 'Live' },
+      { dimension: 'Diagnose', title: 'Workspace context', detail: 'Related sites, systems, tasks, and evidence are grouped for review.', state: 'Mapped' },
+      { dimension: 'Decide', title: 'Priority actions', detail: 'Assigned actions are ordered by customer impact and operating urgency.', state: 'Ready' },
+      { dimension: 'Dispatch', title: 'Owner handoff', detail: 'Action owners and next review windows are visible before escalation.', state: 'Guarded' },
+      { dimension: 'Document', title: 'Evidence pack', detail: 'Evidence links are prepared for supervisor and customer review.', state: 'Ready' },
+      { dimension: 'Deliver', title: 'Readiness quality', detail: 'Workspace readiness is tracked before handoff or reporting.', state: 'Watch' },
+    ],
+    focusCards: [
+      { title: 'Role queue', value: '24', detail: 'assigned items grouped by operator, engineer, supervisor, and customer view', tone: 'watch' },
+      { title: 'Open handoffs', value: '6', detail: 'handoffs needing evidence or owner confirmation', tone: 'risk' },
+      { title: 'Ready sections', value: '11', detail: 'sections ready for review without route or API changes', tone: 'good' },
+    ],
+    heatmap: [
+      { label: 'Operations', value: 82, tone: 'good' },
+      { label: 'Maintenance', value: 68, tone: 'watch' },
+      { label: 'Evidence', value: 76, tone: 'good' },
+      { label: 'Governance', value: 61, tone: 'watch' },
+    ],
+  },
+  'dashboard-executive': {
+    persona: 'Executive / supervisor',
+    subject: 'executive portfolio control view',
+    commandFocus: 'summarizing portfolio performance, customer exposure, critical actions, and evidence readiness for leadership review',
+    signalLabel: 'Portfolio posture',
+    signalValue: '88%',
+    riskLabel: 'Critical exposure',
+    riskValue: '5',
+    evidenceLabel: 'Board packs',
+    evidenceValue: '12',
+    metricLabels: ['Portfolio signal', 'Critical actions', 'Customer impact', 'Executive pack'],
+    dimensions: [
+      { dimension: 'Detect', title: 'Executive risk signal', detail: 'Portfolio risks are ranked by service impact, SLA exposure, and customer visibility.', state: 'Live' },
+      { dimension: 'Diagnose', title: 'Performance context', detail: 'Site, service, energy, and maintenance trends are consolidated for leadership review.', state: 'Mapped' },
+      { dimension: 'Decide', title: 'Critical service actions', detail: 'High-impact actions are separated from routine operational noise.', state: 'Ready' },
+      { dimension: 'Dispatch', title: 'Owner accountability', detail: 'Accountable owners and executive escalation paths are visible.', state: 'Guarded' },
+      { dimension: 'Document', title: 'Executive evidence pack', detail: 'Evidence summaries are shaped for board, customer, and governance review.', state: 'Ready' },
+      { dimension: 'Deliver', title: 'Portfolio readiness', detail: 'Readiness quality shows whether the portfolio can be reported externally.', state: 'Watch' },
+    ],
+    focusCards: [
+      { title: 'Sites at risk', value: '3', detail: 'portfolio sites with service, compliance, or energy exposure', tone: 'risk' },
+      { title: 'Customer-visible items', value: '9', detail: 'items requiring customer-ready language and evidence', tone: 'watch' },
+      { title: 'Ready briefings', value: '4', detail: 'executive packs ready for supervisor review', tone: 'good' },
+    ],
+    heatmap: [
+      { label: 'Service', value: 73, tone: 'watch' },
+      { label: 'Customer', value: 64, tone: 'watch' },
+      { label: 'Energy', value: 81, tone: 'good' },
+      { label: 'Compliance', value: 58, tone: 'risk' },
+    ],
+  },
+  'dashboard-operations': {
+    persona: 'Operations manager',
+    subject: 'daily operations snapshot',
+    commandFocus: 'coordinating live situation awareness, recovery actions, availability governance, and daily evidence',
+    signalLabel: 'Live availability',
+    signalValue: '96%',
+    riskLabel: 'Action queue',
+    riskValue: '14',
+    evidenceLabel: 'Timeline links',
+    evidenceValue: '31',
+    metricLabels: ['Live signal', 'Recovery actions', 'Availability guard', 'Daily evidence'],
+    dimensions: [
+      { dimension: 'Detect', title: 'Operations risk signal', detail: 'Live risks are separated by alarm, fault, maintenance, and energy source.', state: 'Live' },
+      { dimension: 'Diagnose', title: 'Situation context', detail: 'Affected services, assets, and active work are shown together.', state: 'Mapped' },
+      { dimension: 'Decide', title: 'Recovery actions', detail: 'Recovery candidates are ranked by operational impact and urgency.', state: 'Ready' },
+      { dimension: 'Dispatch', title: 'Shift execution', detail: 'Operator and engineer handoffs are visible for shift execution.', state: 'Active' },
+      { dimension: 'Document', title: 'Evidence timeline', detail: 'Daily operating evidence is linked to incidents, tasks, and reports.', state: 'Ready' },
+      { dimension: 'Deliver', title: 'Daily readiness', detail: 'Readiness quality confirms the shift can close or escalate cleanly.', state: 'Watch' },
+    ],
+    focusCards: [
+      { title: 'Live events', value: '42', detail: 'events grouped into actionable operating signals', tone: 'watch' },
+      { title: 'Recovery candidates', value: '8', detail: 'items ready for supervisor review or dispatch', tone: 'risk' },
+      { title: 'Stable systems', value: '91%', detail: 'systems without active service degradation', tone: 'good' },
+    ],
+    heatmap: [
+      { label: 'Availability', value: 91, tone: 'good' },
+      { label: 'Faults', value: 57, tone: 'risk' },
+      { label: 'Workload', value: 70, tone: 'watch' },
+      { label: 'Evidence', value: 84, tone: 'good' },
+    ],
+  },
+  'portfolio-operations': {
+    persona: 'Portfolio operator',
+    subject: 'multi-site portfolio operations',
+    commandFocus: 'comparing cross-site risk, SLA exposure, partner performance, and evidence readiness',
+    signalLabel: 'Portfolio health',
+    signalValue: '84%',
+    riskLabel: 'SLA exposure',
+    riskValue: '6',
+    evidenceLabel: 'Site packs',
+    evidenceValue: '21',
+    metricLabels: ['Cross-site signal', 'SLA exposure', 'Partner risk', 'Readiness pack'],
+    dimensions: [
+      { dimension: 'Detect', title: 'Portfolio risk signal', detail: 'Cross-site risks are ranked by operating exposure and service effect.', state: 'Live' },
+      { dimension: 'Diagnose', title: 'Site context map', detail: 'Sites, partners, systems, and service tiers are compared in one view.', state: 'Mapped' },
+      { dimension: 'Decide', title: 'SLA exposure actions', detail: 'Actions focus on sites with breach, partner, or customer exposure.', state: 'Ready' },
+      { dimension: 'Dispatch', title: 'Partner governance', detail: 'Partner owner and support windows are visible before escalation.', state: 'Guarded' },
+      { dimension: 'Document', title: 'Portfolio evidence pack', detail: 'Site evidence is grouped for customer and executive reporting.', state: 'Ready' },
+      { dimension: 'Deliver', title: 'Portfolio quality gate', detail: 'Readiness quality shows whether all sites are reportable.', state: 'Watch' },
+    ],
+    focusCards: [
+      { title: 'Sites monitored', value: '18', detail: 'active sites in the portfolio operating window', tone: 'good' },
+      { title: 'Partner exposure', value: '4', detail: 'partner-owned systems requiring governance review', tone: 'watch' },
+      { title: 'Readiness gaps', value: '5', detail: 'site packs missing evidence or owner sign-off', tone: 'risk' },
+    ],
+    heatmap: [
+      { label: 'North', value: 83, tone: 'good' },
+      { label: 'South', value: 62, tone: 'watch' },
+      { label: 'East', value: 55, tone: 'risk' },
+      { label: 'West', value: 74, tone: 'watch' },
+    ],
+  },
+  'industry-view': {
+    persona: 'Solution architect',
+    subject: 'industry scenario dashboard',
+    commandFocus: 'validating industry scenario fit, KPI readiness, risk model alignment, and evidence coverage',
+    signalLabel: 'Scenario fit',
+    signalValue: '89%',
+    riskLabel: 'Model gaps',
+    riskValue: '3',
+    evidenceLabel: 'Scenario packs',
+    evidenceValue: '9',
+    metricLabels: ['Industry signal', 'Scenario actions', 'Risk model', 'Readiness pack'],
+    dimensions: [
+      { dimension: 'Detect', title: 'Scenario risk signal', detail: 'Industry-specific operating risks are separated from generic platform risk.', state: 'Live' },
+      { dimension: 'Diagnose', title: 'Industry context', detail: 'Scenario, KPI, SLA, connector, and report assumptions are visible.', state: 'Mapped' },
+      { dimension: 'Decide', title: 'Industry KPI actions', detail: 'KPI gaps are turned into configuration and evidence actions.', state: 'Ready' },
+      { dimension: 'Dispatch', title: 'Package governance', detail: 'Scenario package owners and approval requirements are visible.', state: 'Guarded' },
+      { dimension: 'Document', title: 'Industry evidence pack', detail: 'Industry evidence is ready for sales, architecture, and customer review.', state: 'Ready' },
+      { dimension: 'Deliver', title: 'Scenario readiness', detail: 'Readiness quality confirms whether the industry view is GA-presentable.', state: 'Watch' },
+    ],
+    focusCards: [
+      { title: 'Active packages', value: '7', detail: 'industry packages available for current customer context', tone: 'good' },
+      { title: 'KPI gaps', value: '3', detail: 'KPIs requiring configuration or evidence alignment', tone: 'watch' },
+      { title: 'Connector fit', value: '92%', detail: 'industry connector coverage for selected scenario', tone: 'good' },
+    ],
+    heatmap: [
+      { label: 'Building', value: 88, tone: 'good' },
+      { label: 'Airport', value: 76, tone: 'good' },
+      { label: 'Data Center', value: 69, tone: 'watch' },
+      { label: 'Industrial', value: 61, tone: 'watch' },
+    ],
+  },
+  'customer-success': {
+    persona: 'Customer success manager',
+    subject: 'customer delivery success',
+    commandFocus: 'tracking customer health, acceptance workflow, open risks, milestone evidence, and success readiness',
+    signalLabel: 'Customer health',
+    signalValue: '86%',
+    riskLabel: 'Open risks',
+    riskValue: '8',
+    evidenceLabel: 'Acceptance packs',
+    evidenceValue: '15',
+    metricLabels: ['Health signal', 'Acceptance action', 'Risk governance', 'Success pack'],
+    dimensions: [
+      { dimension: 'Detect', title: 'Customer health signal', detail: 'Customer-visible risk is separated from internal operational backlog.', state: 'Live' },
+      { dimension: 'Diagnose', title: 'Milestone context', detail: 'Delivery milestones, acceptance criteria, and evidence needs are aligned.', state: 'Mapped' },
+      { dimension: 'Decide', title: 'Acceptance actions', detail: 'Actions focus on handoff blockers and customer success criteria.', state: 'Ready' },
+      { dimension: 'Dispatch', title: 'Customer governance', detail: 'Owners, approvals, and customer touchpoints are ready for review.', state: 'Guarded' },
+      { dimension: 'Document', title: 'Customer evidence pack', detail: 'Evidence is shaped for customer handoff and sign-off.', state: 'Ready' },
+      { dimension: 'Deliver', title: 'Success readiness', detail: 'Readiness quality confirms whether customer preview can proceed.', state: 'Watch' },
+    ],
+    focusCards: [
+      { title: 'Milestones ready', value: '10', detail: 'milestones with sufficient acceptance evidence', tone: 'good' },
+      { title: 'Customer blockers', value: '4', detail: 'open blockers requiring owner or evidence closure', tone: 'risk' },
+      { title: 'Handoff quality', value: '82%', detail: 'handoff completeness across delivery artifacts', tone: 'watch' },
+    ],
+    heatmap: [
+      { label: 'Acceptance', value: 80, tone: 'good' },
+      { label: 'Evidence', value: 72, tone: 'watch' },
+      { label: 'Open risk', value: 54, tone: 'risk' },
+      { label: 'Success', value: 86, tone: 'good' },
+    ],
+  },
+  'service-risk': {
+    persona: 'Service owner',
+    subject: 'service risk management',
+    commandFocus: 'prioritizing customer impact, SLA mitigation, risk ownership, service evidence, and recovery readiness',
+    signalLabel: 'Service posture',
+    signalValue: '79%',
+    riskLabel: 'High risk',
+    riskValue: '6',
+    evidenceLabel: 'Risk evidence',
+    evidenceValue: '17',
+    metricLabels: ['Service signal', 'Mitigation action', 'Risk owner', 'Recovery gate'],
+    dimensions: [
+      { dimension: 'Detect', title: 'Service risk signal', detail: 'Service risk is ranked by customer impact, SLA exposure, and recovery urgency.', state: 'Live' },
+      { dimension: 'Diagnose', title: 'Impact context', detail: 'Customer, asset, system, and partner relationships are visible together.', state: 'Mapped' },
+      { dimension: 'Decide', title: 'Mitigation actions', detail: 'Mitigation actions are grouped by effect and time-to-recover.', state: 'Ready' },
+      { dimension: 'Dispatch', title: 'Risk ownership', detail: 'Risk owners and escalation policies are visible before action.', state: 'Guarded' },
+      { dimension: 'Document', title: 'Service evidence', detail: 'Service risk evidence is prepared for audit and customer explanation.', state: 'Ready' },
+      { dimension: 'Deliver', title: 'Recovery readiness', detail: 'Readiness quality confirms if risk can be closed or escalated.', state: 'Watch' },
+    ],
+    focusCards: [
+      { title: 'SLA risks', value: '6', detail: 'service risks with measurable SLA exposure', tone: 'risk' },
+      { title: 'Mitigation ready', value: '11', detail: 'actions ready for owner review or dispatch', tone: 'good' },
+      { title: 'Evidence gaps', value: '3', detail: 'risks missing customer-ready evidence', tone: 'watch' },
+    ],
+    heatmap: [
+      { label: 'SLA', value: 49, tone: 'risk' },
+      { label: 'Customer', value: 66, tone: 'watch' },
+      { label: 'Owner', value: 77, tone: 'good' },
+      { label: 'Recovery', value: 71, tone: 'watch' },
+    ],
+  },
+  'partner-system-status': {
+    persona: 'Integration manager',
+    subject: 'partner system status',
+    commandFocus: 'monitoring connected systems, data freshness, partner SLA governance, integration evidence, and readiness quality',
+    signalLabel: 'Partner health',
+    signalValue: '91%',
+    riskLabel: 'Freshness issues',
+    riskValue: '5',
+    evidenceLabel: 'Partner packs',
+    evidenceValue: '13',
+    metricLabels: ['Partner signal', 'Freshness action', 'SLA governance', 'Integration pack'],
+    dimensions: [
+      { dimension: 'Detect', title: 'Partner system signal', detail: 'Partner risks are surfaced by connectivity, data freshness, and SLA exposure.', state: 'Live' },
+      { dimension: 'Diagnose', title: 'Connected context', detail: 'Systems, connectors, owners, and data contracts are mapped together.', state: 'Mapped' },
+      { dimension: 'Decide', title: 'Freshness actions', detail: 'Actions focus on stale data, queue delay, and failed handoff.', state: 'Ready' },
+      { dimension: 'Dispatch', title: 'Partner governance', detail: 'Partner owners, access policies, and SLA review paths are visible.', state: 'Guarded' },
+      { dimension: 'Document', title: 'Partner evidence pack', detail: 'Integration evidence is prepared for partner and customer review.', state: 'Ready' },
+      { dimension: 'Deliver', title: 'Integration readiness', detail: 'Readiness quality confirms whether partner data can support operations.', state: 'Watch' },
+    ],
+    focusCards: [
+      { title: 'Connected systems', value: '26', detail: 'active partner and source systems under observation', tone: 'good' },
+      { title: 'Data delays', value: '5', detail: 'systems with freshness or queue delay exposure', tone: 'watch' },
+      { title: 'SLA exceptions', value: '2', detail: 'partner status items requiring governance escalation', tone: 'risk' },
+    ],
+    heatmap: [
+      { label: 'Freshness', value: 74, tone: 'watch' },
+      { label: 'Connectivity', value: 91, tone: 'good' },
+      { label: 'SLA', value: 65, tone: 'watch' },
+      { label: 'Evidence', value: 83, tone: 'good' },
+    ],
+  },
+  'delivery-readiness': {
+    persona: 'Delivery lead',
+    subject: 'release and delivery readiness',
+    commandFocus: 'checking release risk, package context, handoff workflow, deployment governance, delivery evidence, and readiness gates',
+    signalLabel: 'Release readiness',
+    signalValue: '87%',
+    riskLabel: 'Gate issues',
+    riskValue: '4',
+    evidenceLabel: 'Delivery packs',
+    evidenceValue: '10',
+    metricLabels: ['Release signal', 'Handoff action', 'Gate governance', 'Delivery pack'],
+    dimensions: [
+      { dimension: 'Detect', title: 'Release risk signal', detail: 'Release blockers are ranked by customer impact and package readiness.', state: 'Live' },
+      { dimension: 'Diagnose', title: 'Package context', detail: 'Build, evidence, handoff, and acceptance context are visible together.', state: 'Mapped' },
+      { dimension: 'Decide', title: 'Handoff actions', detail: 'Handoff actions focus on readiness gaps and approval requirements.', state: 'Ready' },
+      { dimension: 'Dispatch', title: 'Deployment governance', detail: 'Approval status and execution boundaries are visible before release.', state: 'Guarded' },
+      { dimension: 'Document', title: 'Delivery evidence', detail: 'Delivery evidence is packaged for customer and supervisor review.', state: 'Ready' },
+      { dimension: 'Deliver', title: 'Readiness gate', detail: 'Readiness quality confirms whether delivery can proceed.', state: 'Watch' },
+    ],
+    focusCards: [
+      { title: 'Ready packages', value: '8', detail: 'packages with evidence and handoff criteria satisfied', tone: 'good' },
+      { title: 'Approval gaps', value: '4', detail: 'items requiring governance or delivery owner review', tone: 'risk' },
+      { title: 'Customer handoffs', value: '6', detail: 'handoffs ready for preview or acceptance planning', tone: 'watch' },
+    ],
+    heatmap: [
+      { label: 'Package', value: 87, tone: 'good' },
+      { label: 'Approval', value: 59, tone: 'risk' },
+      { label: 'Evidence', value: 81, tone: 'good' },
+      { label: 'Handoff', value: 73, tone: 'watch' },
+    ],
+  },
 }
 
 const L2_CONTENT_PROFILES: Record<string, L2ContentProfile> = {
@@ -107,6 +449,294 @@ const L2_CONTENT_PROFILES: Record<string, L2ContentProfile> = {
   'engineer-tools': { domain: 'Administration', subject: 'engineer tools', operatingFocus: 'deployment readiness, diagnostics, offline handoff, installer console, package management, server precheck, and evidence', evidenceFocus: 'diagnostics evidence', ownerFocus: 'engineer tools review' },
 }
 
+function dashboardProfileFor(l2Id: string): DashboardWorkbenchProfile | undefined {
+  return DASHBOARD_WORKBENCH_PROFILES[l2Id]
+}
+
+const DASHBOARD_CONTENT_TABS = [
+  'Enterprise Overview',
+  'Operations Overview',
+  'Service Impact View',
+  'Spatial Risk View',
+  'Partner Health View',
+  'Delivery Readiness',
+  '7-layer Readiness',
+]
+
+const DASHBOARD_VISUAL_TYPES: Record<string, DashboardVisualType> = {
+  'workspace-overview': 'workspace-priority-board',
+  'dashboard-executive': 'executive-risk-board',
+  'dashboard-operations': 'live-operations-board',
+  'portfolio-operations': 'portfolio-scorecard',
+  'industry-view': 'industry-profile-map',
+  'customer-success': 'value-realization-scorecard',
+  'service-risk': 'service-risk-board',
+  'partner-system-status': 'partner-health-map',
+  'delivery-readiness': 'readiness-checklist-board',
+}
+
+const DASHBOARD_ACTIONS: Record<string, string[]> = {
+  'workspace-overview': ['Open recommended workspace', 'Continue last task', 'Export workspace summary', 'Open pending approvals'],
+  'dashboard-executive': ['Approve escalation', 'Request evidence', 'Open service risk', 'Export executive pack'],
+  'dashboard-operations': ['Open command center', 'Create work order', 'Escalate', 'Open dispatch queue'],
+  'portfolio-operations': ['Compare sites', 'Open site detail', 'Export portfolio report', 'Prepare executive portfolio pack'],
+  'industry-view': ['Open industry solution', 'Review profile readiness', 'Export industry evidence', 'Open required connectors'],
+  'customer-success': ['Export value report', 'Prepare renewal pack', 'Open delivery center', 'Export executive value pack'],
+  'service-risk': ['Open command center', 'Mitigate risk', 'Export risk evidence', 'Open asset 360'],
+  'partner-system-status': ['Open integration health', 'Run connectivity check', 'Escalate partner', 'Export partner evidence'],
+  'delivery-readiness': ['Open handover package', 'Export evidence bundle', 'Request rework', 'Prepare acceptance'],
+}
+
+const DASHBOARD_CONTEXT_ROWS: Record<string, Array<{ label: string; value: string; note: string }>> = {
+  'workspace-overview': [
+    { label: 'Affected Space', value: 'Portfolio workspace', note: 'Role workspace routing' },
+    { label: 'Affected Zone', value: 'North service group', note: 'Workspace Alerts' },
+    { label: 'Affected System', value: 'Operations queue', note: 'Assigned Workspaces' },
+    { label: 'Affected Asset', value: 'AHU-B2-14', note: 'Recommended Workspaces' },
+    { label: 'Related Point', value: 'TEMP_SUPPLY_AHU_B2_14', note: 'Role Access Status' },
+    { label: 'Related Tag', value: 'comfort.priority.watch', note: 'Pending Approvals' },
+    { label: 'Source System', value: 'VANTARIS ONE Workspace Registry', note: 'Recent Actions' },
+    { label: 'Related Work Order', value: 'WO-24891', note: 'Missing Evidence' },
+    { label: 'Evidence Object', value: 'EV-WS-0921', note: 'Workspace Summary' },
+    { label: 'Export Object', value: 'EXP-WS-SUMMARY', note: 'Customer Acceptance ready' },
+    { label: 'Partner System', value: 'Partner CMMS feed', note: 'Telemetry inherited from IBMS' },
+  ],
+  'dashboard-executive': [
+    { label: 'Affected Space', value: 'Executive portfolio', note: 'Customer-facing Risk' },
+    { label: 'Affected Zone', value: 'East campus zone', note: 'SLA Exposure' },
+    { label: 'Affected System', value: 'Chilled water plant', note: 'Business Continuity Risk' },
+    { label: 'Affected Asset', value: 'CHWP-03', note: 'Decision Required' },
+    { label: 'Related Point', value: 'CHWP03_STATUS', note: 'Critical Risk' },
+    { label: 'Related Tag', value: 'sla.customer.visible', note: 'Customer Impact' },
+    { label: 'Source System', value: 'Executive Decision Log', note: 'Portfolio Health' },
+    { label: 'Related Event', value: 'EVT-77102', note: 'Latest Evidence Update' },
+    { label: 'Evidence Object', value: 'EV-EXEC-4408', note: 'Executive Evidence Pack' },
+    { label: 'Export Object', value: 'EXP-EXEC-PACK', note: 'Customer Acceptance ready' },
+    { label: 'Partner System', value: 'Customer reporting portal', note: 'Executive pack destination' },
+  ],
+  'dashboard-operations': [
+    { label: 'Affected Space', value: 'Level 3 public zone', note: 'Live Situation' },
+    { label: 'Affected Zone', value: 'Retail atrium', note: 'Operational Load' },
+    { label: 'Affected System', value: 'BMS airside network', note: 'System Availability' },
+    { label: 'Affected Asset', value: 'VAV-L3-27', note: 'Fault Impact' },
+    { label: 'Related Point', value: 'VAV27_DAMPER_POS', note: 'Telemetry Delayed' },
+    { label: 'Related Tag', value: 'ops.dispatch.required', note: 'Field Team Capacity' },
+    { label: 'Source System', value: 'Alarm and fault intake', note: 'Live Events' },
+    { label: 'Related Fault', value: 'FLT-10433', note: 'Unassigned Faults' },
+    { label: 'Related Work Order', value: 'WO-25018', note: 'Open Dispatches' },
+    { label: 'Evidence Object', value: 'EV-OPS-1184', note: 'Operations Evidence Timeline' },
+    { label: 'Export Object', value: 'EXP-DAILY-OPS', note: 'Daily readiness report' },
+  ],
+  'portfolio-operations': [
+    { label: 'Affected Space', value: 'Multi-site portfolio', note: 'Portfolio Health' },
+    { label: 'Affected Zone', value: 'South region', note: 'Worst Performing Site' },
+    { label: 'Affected System', value: 'Common HVAC fault group', note: 'Cross-site Common Faults' },
+    { label: 'Affected Asset', value: 'AHU fleet group', note: 'Energy Benchmark' },
+    { label: 'Related Point', value: 'AHU_SUPPLY_TEMP_AVG', note: 'Site Benchmark' },
+    { label: 'Related Tag', value: 'portfolio.sla.exposure', note: 'Highest SLA Exposure' },
+    { label: 'Source System', value: 'Portfolio Operations Registry', note: 'Cross-site Risk' },
+    { label: 'Evidence Object', value: 'EV-PORT-2217', note: 'Portfolio Evidence' },
+    { label: 'Export Object', value: 'EXP-PORTFOLIO-PACK', note: 'Executive Portfolio Pack' },
+    { label: 'Partner System', value: 'Regional service partner', note: 'Partner Exposure' },
+  ],
+  'industry-view': [
+    { label: 'Affected Space', value: 'Industry solution workspace', note: 'Current Industry Profile' },
+    { label: 'Affected Zone', value: 'Commercial Building package', note: 'Supported industry examples' },
+    { label: 'Affected System', value: 'Required connector set', note: 'Industry Connector Status' },
+    { label: 'Affected Asset', value: 'Package template asset', note: 'Industry KPI Coverage' },
+    { label: 'Related Point', value: 'industry.kpi.coverage', note: 'Industry Risk Model' },
+    { label: 'Related Tag', value: 'industry.profile.active', note: 'Active Industry Profile' },
+    { label: 'Source System', value: 'Industry Package Manager', note: 'Enabled Industry Package' },
+    { label: 'Evidence Object', value: 'EV-IND-3201', note: 'Industry Evidence Readiness' },
+    { label: 'Export Object', value: 'EXP-INDUSTRY-EVIDENCE', note: 'Industry Evidence Pack' },
+    { label: 'Partner System', value: 'Connector marketplace', note: 'Required Connectors' },
+  ],
+  'customer-success': [
+    { label: 'Affected Space', value: 'Customer delivery workspace', note: 'Customer Health' },
+    { label: 'Affected Zone', value: 'Acceptance phase', note: 'Delivery Milestones' },
+    { label: 'Affected System', value: 'Value realization tracker', note: 'Downtime Avoided' },
+    { label: 'Affected Asset', value: 'Customer value pack', note: 'Energy Savings' },
+    { label: 'Related Point', value: 'roi.energy.saving', note: 'SLA Improvement' },
+    { label: 'Related Tag', value: 'renewal.readiness.watch', note: 'Renewal Readiness' },
+    { label: 'Source System', value: 'Customer Success Registry', note: 'Acceptance Flow' },
+    { label: 'Evidence Object', value: 'EV-CUST-7780', note: 'Customer Evidence' },
+    { label: 'Export Object', value: 'EXP-VALUE-PACK', note: 'Executive Value Pack' },
+    { label: 'Partner System', value: 'Customer portal', note: 'Expansion Opportunity' },
+  ],
+  'service-risk': [
+    { label: 'Affected Space', value: 'Tenant comfort zone', note: 'Affected Space' },
+    { label: 'Affected Zone', value: 'Tower B level 12', note: 'Affected Zone' },
+    { label: 'Affected System', value: 'Airside HVAC system', note: 'Affected System' },
+    { label: 'Affected Asset', value: 'AHU-B12-02', note: 'Affected Asset' },
+    { label: 'Related Point', value: 'AHU_B12_SUPPLY_TEMP', note: 'Related Point / Tag' },
+    { label: 'Related Tag', value: 'service.customer.impact', note: 'Customer Impact' },
+    { label: 'Source System', value: 'Service Risk Board', note: 'Service Risk Board' },
+    { label: 'Related Fault', value: 'FLT-11821', note: 'Related Fault' },
+    { label: 'Related Work Order', value: 'WO-25844', note: 'Open Work Order' },
+    { label: 'Evidence Object', value: 'EV-RISK-8820', note: 'Risk Evidence' },
+    { label: 'Export Object', value: 'EXP-RISK-EVIDENCE', note: 'Latest Evidence' },
+  ],
+  'partner-system-status': [
+    { label: 'Affected Space', value: 'Integration operations', note: 'Connected Systems' },
+    { label: 'Affected Zone', value: 'Partner data lane', note: 'Oldest Data Source' },
+    { label: 'Affected System', value: 'API event exchange', note: 'API Failure Rate' },
+    { label: 'Affected Asset', value: 'Connector-OPCUA-07', note: 'Failed Connector' },
+    { label: 'Related Point', value: 'api.failure.rate', note: 'Data Freshness' },
+    { label: 'Related Tag', value: 'credential.expiry.risk', note: 'Credential Expiry Risk' },
+    { label: 'Source System', value: 'Data Contract Registry', note: 'Data Contract Status' },
+    { label: 'Evidence Object', value: 'EV-PARTNER-6004', note: 'Integration Evidence' },
+    { label: 'Export Object', value: 'EXP-PARTNER-EVIDENCE', note: 'Partner Evidence' },
+    { label: 'Partner System', value: 'Partner CMMS API', note: 'Partner Owner / Technical Owner' },
+  ],
+  'delivery-readiness': [
+    { label: 'Affected Space', value: 'Customer handover workspace', note: 'Readiness Summary' },
+    { label: 'Affected Zone', value: 'Acceptance package', note: 'Handoff Checklist' },
+    { label: 'Affected System', value: 'Release evidence chain', note: 'Package Status' },
+    { label: 'Affected Asset', value: 'Deployment evidence pack', note: 'Deployment Evidence' },
+    { label: 'Related Point', value: 'readiness.evidence.coverage', note: 'Missing Evidence' },
+    { label: 'Related Tag', value: 'signoff.pending', note: 'Pending Sign-off' },
+    { label: 'Source System', value: 'Delivery Readiness Gate', note: 'Release Risk' },
+    { label: 'Evidence Object', value: 'EV-DELIVERY-5019', note: 'Delivery Evidence' },
+    { label: 'Export Object', value: 'EXP-ACCEPTANCE-PACK', note: 'Export Package Status' },
+    { label: 'Partner System', value: 'Customer acceptance portal', note: 'Customer Acceptance Owner' },
+  ],
+}
+
+function dashboardSignalCards(l2Id: string, profile: DashboardWorkbenchProfile): DashboardWorkbenchConfig['signalCards'] {
+  const common: DashboardWorkbenchConfig['signalCards'] = [
+    { label: 'Critical Alerts', value: profile.riskValue, note: profile.riskLabel, severity: profile.riskValue === '2' || profile.riskValue === '3' ? 'watch' : 'risk', icon: 'alert' },
+    { label: 'SLA Risk', value: l2Id === 'service-risk' ? 'High' : 'Watch', note: 'SLA pressure entry', severity: l2Id === 'service-risk' ? 'risk' : 'watch', icon: 'sla' },
+    { label: 'Open Work Orders', value: l2Id === 'dashboard-operations' ? '18' : '9', note: 'Work pressure entry', severity: 'watch', icon: 'work' },
+    { label: 'Evidence Readiness', value: profile.signalValue, note: profile.evidenceLabel, severity: 'good', icon: 'evidence' },
+    { label: 'Average Asset Health', value: l2Id === 'service-risk' ? '71%' : '86%', note: 'IBMS site/system/asset/point/tag inheritance', severity: l2Id === 'service-risk' ? 'watch' : 'good', icon: 'asset' },
+  ]
+
+  const specific: Record<string, DashboardWorkbenchConfig['signalCards']> = {
+    'workspace-overview': [
+      { label: 'Assigned Actions', value: '24', note: 'Role Priority and Due Today', severity: 'watch', icon: 'role' },
+      { label: 'Missing Evidence', value: '5', note: 'Role Access Status guard', severity: 'risk', icon: 'gap' },
+      { label: 'Pending Approvals', value: '7', note: 'approval queue', severity: 'watch', icon: 'approval' },
+    ],
+    'dashboard-executive': [
+      { label: 'Customer Impact', value: '9', note: 'Customer-facing Risk', severity: 'risk', icon: 'customer' },
+      { label: 'Decision Required', value: '5', note: 'Executive Decision Log', severity: 'risk', icon: 'decision' },
+      { label: 'Portfolio Health', value: '88%', note: 'Business Continuity Risk', severity: 'good', icon: 'portfolio' },
+    ],
+    'dashboard-operations': [
+      { label: 'Live Events', value: '42', note: 'Current risk', severity: 'watch', icon: 'event' },
+      { label: 'Unassigned Faults', value: '8', note: 'Recommended action required', severity: 'risk', icon: 'fault' },
+      { label: 'Telemetry Delayed', value: '6', note: 'Data state pressure', severity: 'watch', icon: 'telemetry' },
+    ],
+    'portfolio-operations': [
+      { label: 'Cross-site Risk', value: '11', note: 'Worst Performing Site', severity: 'watch', icon: 'site' },
+      { label: 'Energy Benchmark', value: '82%', note: 'Best Performing Site comparison', severity: 'good', icon: 'energy' },
+      { label: 'Expansion Opportunity', value: '4', note: 'Sales / Presales signal', severity: 'good', icon: 'value' },
+    ],
+    'industry-view': [
+      { label: 'Active Industry Profile', value: '7', note: 'Commercial Building / Airport / Data Center ready', severity: 'good', icon: 'industry' },
+      { label: 'Industry KPI Coverage', value: '89%', note: 'Industry Risk Model coverage', severity: 'good', icon: 'kpi' },
+      { label: 'Industry Connector Status', value: 'Watch', note: 'Required Connectors', severity: 'watch', icon: 'connector' },
+    ],
+    'customer-success': [
+      { label: 'Value Realization', value: '$420k', note: 'Commercial value / ROI', severity: 'good', icon: 'value' },
+      { label: 'Renewal Readiness', value: '82%', note: 'Renewal and expansion workspace', severity: 'good', icon: 'renewal' },
+      { label: 'Acceptance Flow', value: 'Watch', note: 'Evidence Completeness', severity: 'watch', icon: 'acceptance' },
+    ],
+    'service-risk': [
+      { label: 'Impacted Services', value: '6', note: 'Who or what is impacted', severity: 'risk', icon: 'service' },
+      { label: 'Mitigation Status', value: 'Active', note: 'Mitigation Owner assigned', severity: 'watch', icon: 'mitigation' },
+      { label: 'Risk Evidence', value: '17', note: 'Latest Evidence', severity: 'good', icon: 'risk' },
+    ],
+    'partner-system-status': [
+      { label: 'Connected Systems', value: '26', note: 'Partner and integration health', severity: 'good', icon: 'partner' },
+      { label: 'Data Freshness', value: '74%', note: 'Oldest Data Source', severity: 'watch', icon: 'freshness' },
+      { label: 'API Failure Rate', value: '1.8%', note: 'Connector Health', severity: 'watch', icon: 'api' },
+    ],
+    'delivery-readiness': [
+      { label: 'Package Status', value: '87%', note: 'Readiness Summary', severity: 'good', icon: 'package' },
+      { label: 'Sign-off Status', value: 'Pending', note: 'Customer Acceptance Owner', severity: 'watch', icon: 'signoff' },
+      { label: 'Release Risk', value: '4', note: 'Open Handover Risks', severity: 'risk', icon: 'release' },
+    ],
+  }
+
+  return [...(specific[l2Id] ?? []), ...common].slice(0, 8)
+}
+
+function dashboardProductionPanels(section: string, profile: DashboardWorkbenchProfile): DashboardWorkbenchConfig['productionPanels'] {
+  return [
+    { dimension: 'Pain Point', signal: `${section} operating pressure`, detail: `The page reveals where ${profile.subject} creates customer, operations, or delivery friction.`, owner: profile.persona },
+    { dimension: 'Decision Signal', signal: profile.signalLabel, detail: `${profile.signalValue} is treated as the first risk decision layer for the selected Dashboard workspace.`, owner: 'Executive / Supervisor' },
+    { dimension: 'Operational Context', signal: 'IBMS inheritance context', detail: 'Affected Space, Affected Zone, Affected System, Affected Asset, Related Point, Related Tag, Source System, Related Fault, Related Event, and Related Work Order are preserved.', owner: 'Operations Engineer' },
+    { dimension: 'Action', signal: 'Next action path', detail: 'Actions route the user toward command, work, integration, evidence, governance, or acceptance workspaces without creating new routes.', owner: 'Operations Engineer' },
+    { dimension: 'Evidence', signal: 'Evidence Object / Export Object', detail: 'Evidence-driven delivery remains visible for report export, customer review, accountability, and acceptance.', owner: 'Customer / Delivery lead' },
+    { dimension: 'Governance', signal: 'Permission and SLA guard', detail: 'Owner role, permission guard, SLA rule, approval rule, review cycle, audit event, and workspace state are explicit.', owner: 'Architect / Governance owner' },
+  ]
+}
+
+function dashboardReadinessLayers(profile: DashboardWorkbenchProfile): DashboardWorkbenchConfig['readinessLayers'] {
+  return [
+    { layer: 'Layer 1 Experience / Console', health: profile.signalValue, risk: profile.riskLabel, dataState: 'Live console', owner: 'Customer / Operations Engineer', nextAction: 'Review active workspace', evidence: 'Console Evidence Object', governanceNote: 'Role visibility and workspace state checked' },
+    { layer: 'Layer 2 Application Domain', health: '84%', risk: 'Domain gap watch', dataState: 'Mapped domain', owner: 'Product owner', nextAction: 'Confirm domain coverage', evidence: 'Application Domain Evidence', governanceNote: 'Domain ownership recorded' },
+    { layer: 'Layer 3 Workflow & Evidence', health: '81%', risk: 'Evidence gap watch', dataState: 'Evidence linked', owner: 'Delivery lead', nextAction: 'Prepare evidence pack', evidence: 'Workflow Evidence Object', governanceNote: 'Audit Event required for export' },
+    { layer: 'Layer 4 Intelligence & Semantic', health: '78%', risk: 'Semantic alignment watch', dataState: 'Semantic model mapped', owner: 'Architect', nextAction: 'Review model coverage', evidence: 'Semantic Evidence Object', governanceNote: 'AI Operations Platform governance applies' },
+    { layer: 'Layer 5 Integration / Partner', health: '74%', risk: 'Partner data freshness', dataState: 'Partner feed watch', owner: 'Developer / Integration Engineer', nextAction: 'Check connector health', evidence: 'Integration Evidence Object', governanceNote: 'Partner SLA and credential review required' },
+    { layer: 'Layer 6 Edge / Runtime', health: '86%', risk: 'Runtime observation only', dataState: 'Read-only telemetry', owner: 'Operations Engineer', nextAction: 'Validate EDGE / LINK signal', evidence: 'Runtime Evidence Object', governanceNote: 'No direct runtime action from Dashboard' },
+    { layer: 'Layer 7 Governance / Deployment', health: '82%', risk: 'Approval readiness watch', dataState: 'Governance record ready', owner: 'Executive / Supervisor', nextAction: 'Review approval gate', evidence: 'Deployment Governance Evidence', governanceNote: 'Approval Rule and review cycle enforced' },
+  ]
+}
+
+function dashboardAcceptanceFooter(l2Id: string, section: string, profile: DashboardWorkbenchProfile): DashboardWorkbenchConfig['acceptanceFooter'] {
+  return [
+    { label: 'customerAcceptanceUse', value: `${section} supports Customer Acceptance review, accountability, export, and escalation.` },
+    { label: 'evidenceObject', value: `Evidence Object for ${profile.subject}` },
+    { label: 'exportObject', value: `Export Object for ${section}` },
+    { label: 'auditEvent', value: `Audit Event captured for ${l2Id}` },
+    { label: 'ownerRole', value: profile.persona },
+    { label: 'permissionGuard', value: 'Dashboard read-only role and workspace permission guard' },
+    { label: 'slaRule', value: 'SLA Rule visible where customer or service pressure exists' },
+    { label: 'approvalRule', value: 'Approval Rule required for escalation, export, or acceptance package release' },
+    { label: 'reviewCycle', value: 'Daily operations review / weekly customer governance review' },
+    { label: 'relatedWorkspaces', value: 'Command Center, Work Management, Integration Health, Reports & Documents, Governance & Security' },
+    { label: 'dataState', value: 'Data State: live, mapped, or watch depending on signal freshness' },
+    { label: 'workspaceState', value: 'Workspace State: GA read-only console content, no route or API change' },
+  ]
+}
+
+function buildDashboardWorkbench(
+  context: L3ContentContext,
+  section: string,
+  profile: DashboardWorkbenchProfile,
+  status: string,
+): DashboardWorkbenchConfig {
+  return {
+    breadcrumb: `DASHBOARD / ${context.l2Label.toUpperCase()}`,
+    intent: 'Cross-industry operational health overview, first risk decision layer, service impact, SLA pressure, partner health, evidence readiness, and commercial value entry.',
+    owner: profile.persona,
+    nextStep: (DASHBOARD_ACTIONS[context.l2Id] ?? ['Open command center'])[0],
+    workspaceState: status,
+    dataState: context.l2Id === 'partner-system-status' ? 'Data State: partner freshness watch' : 'Data State: live read-only operating signal',
+    persona: profile.persona,
+    commandFocus: profile.commandFocus,
+    signalLabel: profile.signalLabel,
+    signalValue: profile.signalValue,
+    riskLabel: profile.riskLabel,
+    riskValue: profile.riskValue,
+    evidenceLabel: profile.evidenceLabel,
+    evidenceValue: profile.evidenceValue,
+    tabs: DASHBOARD_CONTENT_TABS,
+    actions: DASHBOARD_ACTIONS[context.l2Id] ?? ['Open command center', 'Export evidence pack'],
+    signalCards: dashboardSignalCards(context.l2Id, profile),
+    visualType: DASHBOARD_VISUAL_TYPES[context.l2Id] ?? 'safe-fallback-board',
+    contextRows: DASHBOARD_CONTEXT_ROWS[context.l2Id] ?? DASHBOARD_CONTEXT_ROWS['workspace-overview'],
+    productionPanels: dashboardProductionPanels(section, profile),
+    lanes: profile.dimensions,
+    focusCards: profile.focusCards,
+    heatmap: profile.heatmap,
+    readinessLayers: dashboardReadinessLayers(profile),
+    acceptanceFooter: dashboardAcceptanceFooter(context.l2Id, section, profile),
+  }
+}
+
 function profileFor(l2Id: string, l2Label: string, l1Label: string): L2ContentProfile {
   return L2_CONTENT_PROFILES[l2Id] ?? {
     domain: l1Label,
@@ -119,9 +749,32 @@ function profileFor(l2Id: string, l2Label: string, l1Label: string): L2ContentPr
 
 export function resolveL3ContentConfig(context: L3ContentContext): L3ContentConfig {
   const profile = profileFor(context.l2Id, context.l2Label, context.l1Label)
+  const dashboardProfile = dashboardProfileFor(context.l2Id)
   const section = context.item.label
   const mappedModule = context.item.mappedExistingModule ?? context.l2Label
   const status = context.item.status?.replace(/-/g, ' ') ?? 'mapped'
+
+  if (context.l1Label === 'Dashboard' && dashboardProfile) {
+    return {
+      title: `${context.l2Label} / ${section}`,
+      subtitle: `${section} is a Dashboard workbench section for ${dashboardProfile.subject}. It focuses on ${dashboardProfile.commandFocus}.`,
+      primaryAction: `Open ${section} workbench`,
+      metrics: [
+        { label: dashboardProfile.metricLabels[0], value: dashboardProfile.signalValue, note: dashboardProfile.signalLabel },
+        { label: dashboardProfile.metricLabels[1], value: dashboardProfile.riskValue, note: dashboardProfile.riskLabel },
+        { label: dashboardProfile.metricLabels[2], value: dashboardProfile.evidenceValue, note: dashboardProfile.evidenceLabel },
+        { label: dashboardProfile.metricLabels[3], value: status, note: dashboardProfile.persona },
+      ],
+      rows: [
+        { item: `${section} signal review`, focus: dashboardProfile.commandFocus, status: 'Live' },
+        { item: `${section} action alignment`, focus: dashboardProfile.dimensions[2]?.detail ?? profile.operatingFocus, status: 'Ready' },
+        { item: `${section} evidence handoff`, focus: dashboardProfile.dimensions[4]?.detail ?? profile.evidenceFocus, status: 'Guarded' },
+      ],
+      dashboardWorkbench: {
+        ...buildDashboardWorkbench(context, section, dashboardProfile, status),
+      },
+    }
+  }
 
   return {
     title: `${context.l2Label} / ${section}`,

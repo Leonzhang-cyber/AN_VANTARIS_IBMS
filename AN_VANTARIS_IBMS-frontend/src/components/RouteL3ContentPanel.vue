@@ -8,6 +8,7 @@ type VisualMode = 'trend' | 'topology' | 'timeline' | 'workQueue' | 'evidence' |
 const route = useRoute()
 const context = computed(() => resolveL3RouteContentContext(route.query.menu, route.query.l3))
 const content = computed(() => (context.value ? resolveL3ContentConfig(context.value) : undefined))
+const dashboardWorkbench = computed(() => content.value?.dashboardWorkbench)
 const signature = computed(() => `${context.value?.l1Label ?? ''} ${context.value?.l2Id ?? ''} ${context.value?.l2Label ?? ''} ${context.value?.item.label ?? ''}`.toLowerCase())
 
 function score(seed: string, index: number, min = 18, span = 74): number {
@@ -71,14 +72,41 @@ const matrixRows = computed(() => ['Policy', 'Owner', 'Approval', 'Audit'].map((
 </script>
 
 <template>
-  <section v-if="content" class="route-l3-panel" aria-label="Selected menu section content">
+  <section v-if="content" class="route-l3-panel" aria-label="Menu section content">
     <div class="route-l3-panel__head">
       <div>
-        <span class="route-l3-panel__kicker">Selected section</span>
+        <span class="route-l3-panel__kicker">{{ dashboardWorkbench?.breadcrumb ?? 'Workspace content' }}</span>
         <h2>{{ content.title }}</h2>
         <p>{{ content.subtitle }}</p>
       </div>
       <el-button type="primary" plain>{{ content.primaryAction }}</el-button>
+    </div>
+
+    <div v-if="dashboardWorkbench" class="route-l3-panel__decision-strip">
+      <article>
+        <span>Intent</span>
+        <strong>{{ dashboardWorkbench.intent }}</strong>
+      </article>
+      <article>
+        <span>Risk signal</span>
+        <strong>{{ dashboardWorkbench.riskLabel }} / {{ dashboardWorkbench.riskValue }}</strong>
+      </article>
+      <article>
+        <span>Owner</span>
+        <strong>{{ dashboardWorkbench.owner }}</strong>
+      </article>
+      <article>
+        <span>Next step</span>
+        <strong>{{ dashboardWorkbench.nextStep }}</strong>
+      </article>
+      <article>
+        <span>Workspace state</span>
+        <strong>{{ dashboardWorkbench.workspaceState }}</strong>
+      </article>
+      <article>
+        <span>Data state</span>
+        <strong>{{ dashboardWorkbench.dataState }}</strong>
+      </article>
     </div>
 
     <div class="route-l3-panel__metrics">
@@ -89,11 +117,130 @@ const matrixRows = computed(() => ['Policy', 'Owner', 'Approval', 'Audit'].map((
       </article>
     </div>
 
-    <div class="route-l3-panel__visual" :class="`route-l3-panel__visual--${visualMode}`">
+    <div v-if="dashboardWorkbench" class="route-l3-panel__dashboard-workbench">
+      <div class="route-l3-panel__dashboard-tabs" aria-label="Dashboard L3 workspace tabs">
+        <span v-for="tab in dashboardWorkbench.tabs" :key="tab">{{ tab }}</span>
+      </div>
+
+      <div class="route-l3-panel__action-bar" aria-label="Dashboard primary action bar">
+        <el-button v-for="action in dashboardWorkbench.actions" :key="action" type="primary" plain>{{ action }}</el-button>
+      </div>
+
+      <div class="route-l3-panel__dashboard-main">
+        <div class="route-l3-panel__dashboard-command">
+          <span>Dashboard Command View</span>
+          <strong>{{ dashboardWorkbench.persona }}</strong>
+          <p>{{ dashboardWorkbench.commandFocus }}</p>
+        </div>
+
+        <div class="route-l3-panel__dashboard-signals">
+          <article>
+            <span>{{ dashboardWorkbench.signalLabel }}</span>
+            <strong>{{ dashboardWorkbench.signalValue }}</strong>
+          </article>
+          <article>
+            <span>{{ dashboardWorkbench.riskLabel }}</span>
+            <strong>{{ dashboardWorkbench.riskValue }}</strong>
+          </article>
+          <article>
+            <span>{{ dashboardWorkbench.evidenceLabel }}</span>
+            <strong>{{ dashboardWorkbench.evidenceValue }}</strong>
+          </article>
+        </div>
+      </div>
+
+      <div class="route-l3-panel__signal-grid">
+        <article v-for="card in dashboardWorkbench.signalCards" :key="card.label" :class="`route-l3-panel__signal--${card.severity}`">
+          <span>{{ card.icon }}</span>
+          <strong>{{ card.value }}</strong>
+          <em>{{ card.label }}</em>
+          <p>{{ card.note }}</p>
+        </article>
+      </div>
+
+      <div class="route-l3-panel__visual-context">
+        <div class="route-l3-panel__primary-board" :class="`route-l3-panel__primary-board--${dashboardWorkbench.visualType}`">
+          <div class="route-l3-panel__board-head">
+            <span>Primary Visual</span>
+            <strong>{{ dashboardWorkbench.visualType }}</strong>
+          </div>
+
+          <div class="route-l3-panel__dashboard-cards">
+            <article
+              v-for="card in dashboardWorkbench.focusCards"
+              :key="card.title"
+              :class="`route-l3-panel__dashboard-card--${card.tone}`"
+            >
+              <span>{{ card.title }}</span>
+              <strong>{{ card.value }}</strong>
+              <em>{{ card.detail }}</em>
+            </article>
+          </div>
+
+          <div class="route-l3-panel__dashboard-heatmap">
+            <strong>Risk / Readiness Map</strong>
+            <article v-for="cell in dashboardWorkbench.heatmap" :key="cell.label" :class="`route-l3-panel__heat--${cell.tone}`">
+              <span>{{ cell.label }}</span>
+              <i :style="{ width: `${cell.value}%` }"></i>
+              <em>{{ cell.value }}%</em>
+            </article>
+          </div>
+        </div>
+
+        <div class="route-l3-panel__context-panel">
+          <div class="route-l3-panel__board-head">
+            <span>Context Panel</span>
+            <strong>IBMS inheritance and operating object chain</strong>
+          </div>
+          <article v-for="row in dashboardWorkbench.contextRows" :key="`${row.label}-${row.value}`">
+            <span>{{ row.label }}</span>
+            <strong>{{ row.value }}</strong>
+            <em>{{ row.note }}</em>
+          </article>
+        </div>
+      </div>
+
+      <div class="route-l3-panel__six-d-model">
+        <article v-for="panel in dashboardWorkbench.productionPanels" :key="panel.dimension">
+          <span>{{ panel.dimension }}</span>
+          <strong>{{ panel.signal }}</strong>
+          <p>{{ panel.detail }}</p>
+          <em>{{ panel.owner }}</em>
+        </article>
+      </div>
+
+      <div class="route-l3-panel__workflow-path">
+        <article v-for="lane in dashboardWorkbench.lanes" :key="lane.dimension">
+          <span>{{ lane.dimension }}</span>
+          <strong>{{ lane.title }}</strong>
+          <p>{{ lane.detail }}</p>
+          <em>{{ lane.state }}</em>
+        </article>
+      </div>
+
+      <div class="route-l3-panel__readiness">
+        <article v-for="layer in dashboardWorkbench.readinessLayers" :key="layer.layer">
+          <span>{{ layer.layer }}</span>
+          <strong>{{ layer.health }}</strong>
+          <p>{{ layer.risk }} / {{ layer.dataState }}</p>
+          <em>{{ layer.owner }} / {{ layer.nextAction }}</em>
+          <small>{{ layer.evidence }} / {{ layer.governanceNote }}</small>
+        </article>
+      </div>
+
+      <div class="route-l3-panel__acceptance-footer">
+        <article v-for="row in dashboardWorkbench.acceptanceFooter" :key="row.label">
+          <span>{{ row.label }}</span>
+          <strong>{{ row.value }}</strong>
+        </article>
+      </div>
+    </div>
+
+    <div v-else class="route-l3-panel__visual" :class="`route-l3-panel__visual--${visualMode}`">
       <div v-if="visualMode === 'trend'" class="route-l3-panel__chart">
         <div class="route-l3-panel__chart-head">
           <strong>Operational Trend</strong>
-          <span>Selected L3 signal over the review window</span>
+          <span>Operating signal over the review window</span>
         </div>
         <svg viewBox="0 0 300 130" role="img" aria-label="L3 trend chart">
           <line x1="18" y1="116" x2="286" y2="116" />
@@ -129,7 +276,7 @@ const matrixRows = computed(() => ['Policy', 'Owner', 'Approval', 'Audit'].map((
           </div>
         </div>
         <div class="route-l3-panel__flow">
-          <strong>{{ visualMode === 'hmi' ? 'HMI Read-only Flow' : 'Relationship Map' }}</strong>
+          <strong>{{ visualMode === 'hmi' ? 'HMI Read-only Flow' : 'Operational Link Map' }}</strong>
           <span v-for="row in content.rows" :key="row.item">{{ row.item }}</span>
         </div>
       </div>
@@ -250,6 +397,406 @@ const matrixRows = computed(() => ['Policy', 'Owner', 'Approval', 'Audit'].map((
   border: 1px solid #dfe9e5;
   border-radius: 12px;
   background: #f8fbfa;
+}
+
+.route-l3-panel__decision-strip {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.route-l3-panel__decision-strip article,
+.route-l3-panel__signal-grid article,
+.route-l3-panel__context-panel article,
+.route-l3-panel__six-d-model article,
+.route-l3-panel__workflow-path article,
+.route-l3-panel__readiness article,
+.route-l3-panel__acceptance-footer article {
+  min-width: 0;
+  border: 1px solid #dfe9e5;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.route-l3-panel__decision-strip article {
+  display: grid;
+  gap: 6px;
+  min-height: 96px;
+  padding: 12px;
+}
+
+.route-l3-panel__decision-strip span,
+.route-l3-panel__signal-grid span,
+.route-l3-panel__context-panel span,
+.route-l3-panel__six-d-model span,
+.route-l3-panel__workflow-path span,
+.route-l3-panel__readiness span,
+.route-l3-panel__acceptance-footer span {
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.route-l3-panel__decision-strip strong {
+  color: #10201d;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.route-l3-panel__dashboard-workbench {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding: 16px;
+  border: 1px solid #dfe9e5;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #f8fbfa 0%, #ffffff 100%);
+}
+
+.route-l3-panel__dashboard-tabs,
+.route-l3-panel__action-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.route-l3-panel__dashboard-tabs span {
+  padding: 7px 10px;
+  border: 1px solid #cfe0dc;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #0f766e;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.route-l3-panel__action-bar {
+  padding: 10px;
+  border: 1px solid #dfe9e5;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.route-l3-panel__dashboard-main {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) minmax(320px, 0.9fr);
+  gap: 14px;
+}
+
+.route-l3-panel__dashboard-command,
+.route-l3-panel__dashboard-signals article,
+.route-l3-panel__six-d article,
+.route-l3-panel__dashboard-cards article,
+.route-l3-panel__dashboard-heatmap {
+  border: 1px solid #dfe9e5;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.06);
+}
+
+.route-l3-panel__dashboard-command {
+  padding: 16px;
+}
+
+.route-l3-panel__dashboard-command span,
+.route-l3-panel__dashboard-signals span,
+.route-l3-panel__six-d span,
+.route-l3-panel__dashboard-cards span,
+.route-l3-panel__dashboard-heatmap span {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.route-l3-panel__dashboard-command strong {
+  display: block;
+  margin-top: 8px;
+  color: #10201d;
+  font-size: 24px;
+}
+
+.route-l3-panel__dashboard-command p,
+.route-l3-panel__six-d p {
+  margin: 8px 0 0;
+  color: #52615d;
+  line-height: 1.5;
+}
+
+.route-l3-panel__dashboard-signals {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.route-l3-panel__dashboard-signals article,
+.route-l3-panel__dashboard-cards article {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  padding: 14px;
+}
+
+.route-l3-panel__dashboard-signals strong {
+  color: #0f766e;
+  font-size: 28px;
+}
+
+.route-l3-panel__signal-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.route-l3-panel__signal-grid article {
+  display: grid;
+  gap: 6px;
+  padding: 12px;
+}
+
+.route-l3-panel__signal-grid strong {
+  color: #10201d;
+  font-size: 24px;
+}
+
+.route-l3-panel__signal-grid em,
+.route-l3-panel__context-panel em,
+.route-l3-panel__six-d-model em,
+.route-l3-panel__workflow-path em,
+.route-l3-panel__readiness em,
+.route-l3-panel__acceptance-footer strong {
+  color: #52615d;
+  font-size: 12px;
+  font-style: normal;
+  line-height: 1.4;
+}
+
+.route-l3-panel__signal-grid p,
+.route-l3-panel__context-panel p,
+.route-l3-panel__six-d-model p,
+.route-l3-panel__workflow-path p,
+.route-l3-panel__readiness p {
+  margin: 0;
+  color: #52615d;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.route-l3-panel__signal--good {
+  border-color: #b9e2d7;
+}
+
+.route-l3-panel__signal--watch {
+  border-color: #f6d88f;
+}
+
+.route-l3-panel__signal--risk {
+  border-color: #fecaca;
+}
+
+.route-l3-panel__visual-context {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+  gap: 14px;
+}
+
+.route-l3-panel__primary-board,
+.route-l3-panel__context-panel {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid #dfe9e5;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.06);
+}
+
+.route-l3-panel__board-head {
+  display: grid;
+  gap: 5px;
+}
+
+.route-l3-panel__board-head span {
+  color: #0f766e;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.route-l3-panel__board-head strong {
+  color: #10201d;
+  font-size: 18px;
+}
+
+.route-l3-panel__context-panel article {
+  display: grid;
+  gap: 5px;
+  padding: 10px;
+}
+
+.route-l3-panel__context-panel strong {
+  color: #10201d;
+  font-size: 14px;
+}
+
+.route-l3-panel__six-d-model,
+.route-l3-panel__workflow-path {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.route-l3-panel__six-d-model article,
+.route-l3-panel__workflow-path article {
+  position: relative;
+  min-height: 184px;
+  padding: 14px;
+  overflow: hidden;
+}
+
+.route-l3-panel__six-d-model article::before,
+.route-l3-panel__workflow-path article::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: #0f766e;
+}
+
+.route-l3-panel__six-d-model strong,
+.route-l3-panel__workflow-path strong {
+  display: block;
+  margin-top: 8px;
+  color: #10201d;
+  font-size: 15px;
+}
+
+.route-l3-panel__six-d-model em,
+.route-l3-panel__workflow-path em {
+  position: absolute;
+  left: 14px;
+  bottom: 12px;
+  color: #0f766e;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 800;
+}
+
+.route-l3-panel__readiness {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.route-l3-panel__readiness article {
+  display: grid;
+  gap: 6px;
+  min-height: 210px;
+  padding: 12px;
+}
+
+.route-l3-panel__readiness strong {
+  color: #0f766e;
+  font-size: 22px;
+}
+
+.route-l3-panel__readiness small {
+  color: #64748b;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.route-l3-panel__acceptance-footer {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.route-l3-panel__acceptance-footer article {
+  display: grid;
+  gap: 6px;
+  min-height: 82px;
+  padding: 10px;
+}
+
+.route-l3-panel__dashboard-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.72fr);
+  gap: 14px;
+}
+
+.route-l3-panel__dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.route-l3-panel__dashboard-cards strong {
+  color: #10201d;
+  font-size: 26px;
+}
+
+.route-l3-panel__dashboard-cards em {
+  color: #52615d;
+  font-size: 12px;
+  font-style: normal;
+  line-height: 1.4;
+}
+
+.route-l3-panel__dashboard-card--good {
+  border-color: #b9e2d7;
+}
+
+.route-l3-panel__dashboard-card--watch {
+  border-color: #f6d88f;
+}
+
+.route-l3-panel__dashboard-card--risk {
+  border-color: #fecaca;
+}
+
+.route-l3-panel__dashboard-heatmap {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+}
+
+.route-l3-panel__dashboard-heatmap > strong {
+  color: #10201d;
+}
+
+.route-l3-panel__dashboard-heatmap article {
+  display: grid;
+  grid-template-columns: 86px 1fr 44px;
+  align-items: center;
+  gap: 10px;
+}
+
+.route-l3-panel__dashboard-heatmap i {
+  display: block;
+  height: 10px;
+  border-radius: 999px;
+}
+
+.route-l3-panel__dashboard-heatmap em {
+  color: #52615d;
+  font-size: 12px;
+  font-style: normal;
+  text-align: right;
+}
+
+.route-l3-panel__heat--good i {
+  background: #0f766e;
+}
+
+.route-l3-panel__heat--watch i {
+  background: #d97706;
+}
+
+.route-l3-panel__heat--risk i {
+  background: #dc2626;
 }
 
 .route-l3-panel__chart {
@@ -466,11 +1013,23 @@ const matrixRows = computed(() => ['Policy', 'Owner', 'Approval', 'Audit'].map((
   }
 
   .route-l3-panel__metrics,
+  .route-l3-panel__decision-strip,
   .route-l3-panel__queue,
   .route-l3-panel__timeline,
   .route-l3-panel__matrix,
-  .route-l3-panel__report-pack {
+  .route-l3-panel__report-pack,
+  .route-l3-panel__dashboard-main,
+  .route-l3-panel__dashboard-grid,
+  .route-l3-panel__signal-grid,
+  .route-l3-panel__visual-context,
+  .route-l3-panel__acceptance-footer {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .route-l3-panel__six-d-model,
+  .route-l3-panel__workflow-path,
+  .route-l3-panel__readiness {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .route-l3-panel__chart,
@@ -481,10 +1040,21 @@ const matrixRows = computed(() => ['Policy', 'Owner', 'Approval', 'Audit'].map((
 
 @media (max-width: 720px) {
   .route-l3-panel__metrics,
+  .route-l3-panel__decision-strip,
   .route-l3-panel__queue,
   .route-l3-panel__timeline,
   .route-l3-panel__matrix,
-  .route-l3-panel__report-pack {
+  .route-l3-panel__report-pack,
+  .route-l3-panel__dashboard-main,
+  .route-l3-panel__dashboard-signals,
+  .route-l3-panel__signal-grid,
+  .route-l3-panel__six-d-model,
+  .route-l3-panel__workflow-path,
+  .route-l3-panel__readiness,
+  .route-l3-panel__dashboard-grid,
+  .route-l3-panel__dashboard-cards,
+  .route-l3-panel__visual-context,
+  .route-l3-panel__acceptance-footer {
     grid-template-columns: 1fr;
   }
 }
