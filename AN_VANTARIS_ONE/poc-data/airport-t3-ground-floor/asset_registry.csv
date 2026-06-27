@@ -1,0 +1,27 @@
+asset_id,space_id,asset_name,asset_type,system_domain,criticality,maintainable,vendor,lifecycle_status,notes
+AST-T3-GF-BHS-SRV-001,SP-T3-GF-004,BHS Application Server,Server,BHS,critical,yes,TBD,active,Core BHS application server
+AST-T3-GF-HBS-SRV-001,SP-T3-GF-005,HBS Server,Server,HBS,critical,yes,TBD,active,Hold baggage screening server
+AST-T3-GF-HBS-CTRL-001,SP-T3-GF-006,HBS Operator Workstation,Workstation,HBS,critical,yes,TBD,active,HBS control workstation
+AST-T3-GF-BHS-CCTV-001,SP-T3-GF-007,BHS CCTV Recorder,NVR,CCTV,critical,yes,TBD,active,BHS CCTV recording asset
+AST-T3-GF-SEC-CTRL-001,SP-T3-GF-008,Security Control Workstation,Workstation,Security,critical,yes,TBD,active,Security control workstation
+AST-T3-GF-AOC-001,SP-T3-GF-009,AOC Operations Console,Operator Console,Operations,critical,yes,TBD,active,Airport operations console
+AST-T3-GF-FCC-001,SP-T3-GF-010,Fire Command Panel,Fire Alarm Panel,Fire Life Safety,critical,yes,TBD,active,Fire command centre panel
+AST-T3-GF-RCC-001,SP-T3-GF-011,RCC Emergency Console,Emergency Console,Emergency Response,critical,yes,TBD,active,Rescue coordination console
+AST-T3-GF-MDF-SW-001,SP-T3-GF-012,Core Network Switch,Network Switch,ICT,critical,yes,TBD,active,MDF core switch
+AST-T3-GF-COMMS-RACK-001,SP-T3-GF-013,Comms Rack,Network Rack,ICT,critical,yes,TBD,active,Comms room rack
+AST-T3-GF-UPS-001,SP-T3-GF-014,UPS System,UPS,Electrical / UPS,critical,yes,TBD,active,UPS supporting critical systems
+AST-T3-GF-AHU-001,SP-T3-GF-015,AHU Unit,Air Handling Unit,ACMV,high,yes,TBD,active,AHU for airport area
+AST-T3-GF-TX-001,SP-T3-GF-016,Transformer,Transformer,Electrical,critical,yes,TBD,active,TX room transformer
+AST-T3-GF-LT-001,SP-T3-GF-017,LT Switchboard,Switchboard,Electrical,critical,yes,TBD,active,Low tension switchboard
+AST-T3-GF-HT-001,SP-T3-GF-018,HT Switchgear,Switchgear,Electrical,critical,yes,TBD,active,High tension switchgear
+AST-T3-GF-PA-001,SP-T3-GF-019,PA Controller,Public Address Controller,PA,high,yes,TBD,active,Public address controller
+AST-T3-GF-PBX-001,SP-T3-GF-020,IP PBX System,Telephony System,IP PBX,high,yes,TBD,active,IP PBX operator system
+AST-T3-GF-VIP-CAM-001,SP-T3-GF-021,VIP Lounge CCTV Camera,CCTV Camera,CCTV,high,yes,TBD,active,VIP lounge camera
+AST-T3-GF-VIP-ACS-001,SP-T3-GF-021,VIP Lounge Access Door,Access Controlled Door,Access Control,high,yes,TBD,active,VIP lounge access control
+AST-T3-GF-VVIP-CAM-001,SP-T3-GF-024,VVIP Hall CCTV Camera,CCTV Camera,CCTV,critical,yes,TBD,active,VVIP hall camera
+AST-T3-GF-BAG-REC-001,SP-T3-GF-025,Baggage Reconciliation Workstation,Workstation,BHS,critical,yes,TBD,active,Baggage reconciliation workstation
+AST-T3-GF-BAG-BD-001,SP-T3-GF-026,Baggage Breakdown Conveyor,Conveyor,BHS,high,yes,TBD,active,Baggage breakdown conveyor
+AST-T3-GF-BAG-MU-001,SP-T3-GF-027,Baggage Makeup Conveyor,Conveyor,BHS,high,yes,TBD,active,Baggage makeup conveyor
+AST-T3-GF-LOSTFOUND-001,SP-T3-GF-028,Lost and Found Service Counter,Service Counter,Baggage Services,medium,yes,TBD,active,Lost and found service point
+AST-T3-GF-EAST-GATE-001,SP-T3-GF-030,East Remote Gate Display,FIDS Display,Passenger Operations,high,yes,TBD,active,Remote gate display
+AST-T3-GF-WEST-GATE-001,SP-T3-GF-031,West Remote Gate Display,FIDS Display,Passenger Operations,high,yes,TBD,active,Remote gate display

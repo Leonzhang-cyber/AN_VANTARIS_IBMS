@@ -1,0 +1,24 @@
+tag_id,tag_name,source_system,protocol,asset_id,space_id,telemetry_type,alarm_enabled,priority,notes
+TAG-T3-GF-BHS-SRV-001,BHS_SERVER_STATUS,BHS,OPC/API,AST-T3-GF-BHS-SRV-001,SP-T3-GF-004,status,yes,critical,BHS server status
+TAG-T3-GF-BHS-SRV-002,BHS_SERVER_ALARM,BHS,OPC/API,AST-T3-GF-BHS-SRV-001,SP-T3-GF-004,alarm,yes,critical,BHS server alarm
+TAG-T3-GF-HBS-SRV-001,HBS_SERVER_STATUS,HBS,OPC/API,AST-T3-GF-HBS-SRV-001,SP-T3-GF-005,status,yes,critical,HBS server status
+TAG-T3-GF-HBS-SRV-002,HBS_SCREENING_ALARM,HBS,OPC/API,AST-T3-GF-HBS-SRV-001,SP-T3-GF-005,alarm,yes,critical,HBS screening alarm
+TAG-T3-GF-BHS-CCTV-001,BHS_CCTV_RECORDER_STATUS,CCTV,SNMP/API,AST-T3-GF-BHS-CCTV-001,SP-T3-GF-007,status,yes,critical,BHS CCTV recorder status
+TAG-T3-GF-SEC-CTRL-001,SECURITY_CONTROL_CONSOLE_STATUS,Security,API,AST-T3-GF-SEC-CTRL-001,SP-T3-GF-008,status,yes,critical,Security control console status
+TAG-T3-GF-FCC-001,FIRE_COMMAND_PANEL_ALARM,Fire Alarm,Modbus/API,AST-T3-GF-FCC-001,SP-T3-GF-010,alarm,yes,critical,Fire command panel alarm
+TAG-T3-GF-MDF-001,CORE_SWITCH_UPLINK_STATUS,Network,SNMP,AST-T3-GF-MDF-SW-001,SP-T3-GF-012,status,yes,critical,Core switch uplink status
+TAG-T3-GF-UPS-001,UPS_ON_BATTERY,UPS,SNMP/Modbus,AST-T3-GF-UPS-001,SP-T3-GF-014,alarm,yes,critical,UPS on battery alarm
+TAG-T3-GF-UPS-002,UPS_BATTERY_HEALTH,UPS,SNMP/Modbus,AST-T3-GF-UPS-001,SP-T3-GF-014,health,yes,high,UPS battery health
+TAG-T3-GF-AHU-001,AHU_RUN_STATUS,BMS,BACnet/Modbus,AST-T3-GF-AHU-001,SP-T3-GF-015,status,yes,high,AHU running status
+TAG-T3-GF-AHU-002,AHU_FAULT_ALARM,BMS,BACnet/Modbus,AST-T3-GF-AHU-001,SP-T3-GF-015,alarm,yes,high,AHU fault alarm
+TAG-T3-GF-LT-001,LT_SWITCHBOARD_TRIP,Electrical,Modbus,AST-T3-GF-LT-001,SP-T3-GF-017,alarm,yes,critical,LT switchboard trip
+TAG-T3-GF-HT-001,HT_SWITCHGEAR_TRIP,Electrical,Modbus,AST-T3-GF-HT-001,SP-T3-GF-018,alarm,yes,critical,HT switchgear trip
+TAG-T3-GF-PA-001,PA_CONTROLLER_FAULT,PA,API/SNMP,AST-T3-GF-PA-001,SP-T3-GF-019,alarm,yes,high,PA controller fault
+TAG-T3-GF-PBX-001,IP_PBX_SYSTEM_STATUS,IP PBX,SNMP/API,AST-T3-GF-PBX-001,SP-T3-GF-020,status,yes,high,IP PBX system status
+TAG-T3-GF-VIP-CAM-001,VIP_CAMERA_OFFLINE,CCTV,SNMP/API,AST-T3-GF-VIP-CAM-001,SP-T3-GF-021,alarm,yes,high,VIP camera offline
+TAG-T3-GF-VIP-ACS-001,VIP_ACCESS_DOOR_FORCED,Access Control,API,AST-T3-GF-VIP-ACS-001,SP-T3-GF-021,alarm,yes,high,VIP access door forced alarm
+TAG-T3-GF-VVIP-CAM-001,VVIP_CAMERA_OFFLINE,CCTV,SNMP/API,AST-T3-GF-VVIP-CAM-001,SP-T3-GF-024,alarm,yes,critical,VVIP camera offline
+TAG-T3-GF-BAG-BD-001,BAG_BREAKDOWN_CONVEYOR_FAULT,BHS,OPC/API,AST-T3-GF-BAG-BD-001,SP-T3-GF-026,alarm,yes,high,Baggage breakdown conveyor fault
+TAG-T3-GF-BAG-MU-001,BAG_MAKEUP_CONVEYOR_FAULT,BHS,OPC/API,AST-T3-GF-BAG-MU-001,SP-T3-GF-027,alarm,yes,high,Baggage makeup conveyor fault
+TAG-T3-GF-EAST-GATE-001,EAST_REMOTE_GATE_DISPLAY_OFFLINE,FIDS,SNMP/API,AST-T3-GF-EAST-GATE-001,SP-T3-GF-030,alarm,yes,high,East remote gate display offline
+TAG-T3-GF-WEST-GATE-001,WEST_REMOTE_GATE_DISPLAY_OFFLINE,FIDS,SNMP/API,AST-T3-GF-WEST-GATE-001,SP-T3-GF-031,alarm,yes,high,West remote gate display offline

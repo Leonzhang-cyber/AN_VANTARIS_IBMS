@@ -1,0 +1,8 @@
+zone_id,map_id,zone_name,area_type,operational_role,criticality,notes
+T3-GF-Z02,T3-GF-HMI-001,Zone-2,Passenger / Baggage Area,Arrival baggage and passenger movement,high,Visible as Zone-2 on HMI map
+T3-GF-Z03,T3-GF-HMI-001,Zone-3,Passenger / Baggage Area,Arrival baggage hall operations,high,Visible as Zone-3 on HMI map
+T3-GF-Z04,T3-GF-HMI-001,Zone-4,Public / Meeters-Greeters Area,Arrival passenger receiving and public movement,medium,Visible as Zone-4 on HMI map
+T3-GF-Z05,T3-GF-HMI-001,Zone-5,Passenger / Baggage Area,Arrival baggage hall operations,high,Visible as Zone-5 on HMI map
+T3-GF-Z06,T3-GF-HMI-001,Zone-6,Public / Meeters-Greeters Area,Arrival passenger receiving and public movement,medium,Visible as Zone-6 on HMI map
+T3-GF-VIP,T3-GF-HMI-001,VIP / VVIP Area,VIP / Restricted Area,VIP arrival and landside service,high,VIP/VVIP reception/drop-off/pick-up areas
+T3-GF-BOH,T3-GF-HMI-001,Back of House,Back of House Area,Airport operations and engineering support,critical,Includes control rooms and technical rooms

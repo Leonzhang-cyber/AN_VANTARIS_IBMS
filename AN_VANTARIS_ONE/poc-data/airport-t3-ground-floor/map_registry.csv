@@ -1,0 +1,2 @@
+map_id,site,terminal,floor,map_name,source_file,drawing_type,scale,status,notes
+T3-GF-HMI-001,Airport,Terminal 3,Ground Floor,T3 Ground Floor HMI Map,W2-TE3-ARC-GROUND FLOOR LAYOUT PLAN Model.pdf,Architectural / HMI Base Map,1:200 / 1:400,active,Customer provided ground floor layout used for POC data and asset map

@@ -1,0 +1,6 @@
+work_order_id,event_id,priority,status,asset_id,space_id,assigned_team,sla_minutes,work_title,route_hint,evidence_required
+WO-T3-GF-0001,EVT-T3-GF-0001,P1,assigned,AST-T3-GF-BHS-SRV-001,SP-T3-GF-004,BHS Engineer,30,Investigate BHS Server Alarm,Back of House -> BHS Server Room,Server health screenshot; action log; closure photo
+WO-T3-GF-0002,EVT-T3-GF-0002,P2,assigned,AST-T3-GF-AHU-001,SP-T3-GF-015,ACMV Technician,60,Inspect AHU Fault,Back of House -> AHU Room,BMS trend; panel photo; fault reset record
+WO-T3-GF-0003,EVT-T3-GF-0003,P1,assigned,AST-T3-GF-UPS-001,SP-T3-GF-014,Electrical Engineer,30,Verify UPS On Battery Condition,Back of House -> UPS Room,UPS runtime; battery status; incoming power status
+WO-T3-GF-0004,EVT-T3-GF-0004,P2,assigned,AST-T3-GF-VIP-ACS-001,SP-T3-GF-021,Security Technician,45,Check VIP Access Door Forced Alarm,VIP Area -> VIP Arrival Reception Lounge,ACS event log; door status photo; security confirmation
+WO-T3-GF-0005,EVT-T3-GF-0005,P2,assigned,AST-T3-GF-BAG-BD-001,SP-T3-GF-026,BHS Maintenance,45,Inspect Baggage Breakdown Conveyor,Arrival Baggage Hall -> Baggage Breakdown Area,Conveyor status; motor panel photo; test run evidence

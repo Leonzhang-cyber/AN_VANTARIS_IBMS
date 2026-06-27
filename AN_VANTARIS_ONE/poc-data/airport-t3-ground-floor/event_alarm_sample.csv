@@ -1,0 +1,6 @@
+event_id,timestamp,severity,status,tag_id,asset_id,space_id,zone_id,event_title,operational_impact,recommended_action
+EVT-T3-GF-0001,2026-06-27T09:15:00+08:00,critical,open,TAG-T3-GF-BHS-SRV-002,AST-T3-GF-BHS-SRV-001,SP-T3-GF-004,T3-GF-BOH,BHS Server Alarm,Potential baggage handling disruption at arrival baggage hall,Dispatch BHS engineer and verify server health
+EVT-T3-GF-0002,2026-06-27T09:22:00+08:00,high,open,TAG-T3-GF-AHU-002,AST-T3-GF-AHU-001,SP-T3-GF-015,T3-GF-BOH,AHU Fault Alarm,Possible comfort impact to adjacent passenger and BOH areas,Dispatch ACMV technician and inspect AHU
+EVT-T3-GF-0003,2026-06-27T09:31:00+08:00,critical,acknowledged,TAG-T3-GF-UPS-001,AST-T3-GF-UPS-001,SP-T3-GF-014,T3-GF-BOH,UPS On Battery,Critical backup power condition affecting ICT/BHS rooms,Check incoming power and UPS runtime
+EVT-T3-GF-0004,2026-06-27T09:45:00+08:00,high,open,TAG-T3-GF-VIP-ACS-001,AST-T3-GF-VIP-ACS-001,SP-T3-GF-021,T3-GF-VIP,VIP Access Door Forced,Security risk at VIP reception area,Dispatch security and verify access event
+EVT-T3-GF-0005,2026-06-27T10:05:00+08:00,high,open,TAG-T3-GF-BAG-BD-001,AST-T3-GF-BAG-BD-001,SP-T3-GF-026,T3-GF-Z03,Baggage Breakdown Conveyor Fault,Potential baggage flow delay,Dispatch BHS maintenance and prepare manual handling contingency

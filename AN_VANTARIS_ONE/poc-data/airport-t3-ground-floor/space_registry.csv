@@ -1,0 +1,32 @@
+space_id,map_id,zone_id,space_code,space_name,area_type,function_type,system_domain,criticality,access_type,airside_landside,notes
+SP-T3-GF-001,T3-GF-HMI-001,T3-GF-Z03,,Arrival Baggage Hall,Passenger Area,Baggage Claim,BHS,high,public,mixed,Main passenger baggage claim hall
+SP-T3-GF-002,T3-GF-HMI-001,T3-GF-Z05,,Arrival Baggage Hall,Passenger Area,Baggage Claim,BHS,high,public,mixed,Second visible arrival baggage hall area
+SP-T3-GF-003,T3-GF-HMI-001,T3-GF-Z04,,Meeters-Greeters Hall,Public Area,Passenger Receiving,Public Operations,medium,public,landside,Public arrival receiving area
+SP-T3-GF-004,T3-GF-HMI-001,T3-GF-BOH,,BHS Server Room,Back of House,Baggage System Server Room,BHS,critical,restricted,landside,Core BHS server room
+SP-T3-GF-005,T3-GF-HMI-001,T3-GF-BOH,,HBS Server Room,Back of House,Hold Baggage Screening Server Room,HBS,critical,restricted,landside,HBS server room
+SP-T3-GF-006,T3-GF-HMI-001,T3-GF-BOH,,HBS Control Room,Back of House,Baggage Screening Control,HBS,critical,restricted,landside,HBS control room
+SP-T3-GF-007,T3-GF-HMI-001,T3-GF-BOH,,BHS CCTV Room,Back of House,Baggage CCTV Control,CCTV,critical,restricted,landside,BHS CCTV monitoring room
+SP-T3-GF-008,T3-GF-HMI-001,T3-GF-BOH,,Security Control Room,Back of House,Security Control,Security,critical,restricted,landside,Airport security control room
+SP-T3-GF-009,T3-GF-HMI-001,T3-GF-BOH,,Airport Operations Centre,Back of House,Airport Operations Command,Operations,critical,restricted,landside,Airport operations centre
+SP-T3-GF-010,T3-GF-HMI-001,T3-GF-BOH,,Fire Command Centre,Back of House,Fire Command,Fire Life Safety,critical,restricted,landside,Fire command centre
+SP-T3-GF-011,T3-GF-HMI-001,T3-GF-BOH,,Rescue Co-ordination Centre RCC,Back of House,Rescue Coordination,Emergency Response,critical,restricted,landside,RCC room
+SP-T3-GF-012,T3-GF-HMI-001,T3-GF-BOH,,MDF Room,Back of House,Main Distribution Frame,ICT,critical,restricted,landside,MDF room
+SP-T3-GF-013,T3-GF-HMI-001,T3-GF-BOH,,Comms Room,Back of House,Communication Room,ICT,critical,restricted,landside,Comms room
+SP-T3-GF-014,T3-GF-HMI-001,T3-GF-BOH,,UPS Room,Back of House,Power Backup,Electrical / UPS,critical,restricted,landside,UPS room
+SP-T3-GF-015,T3-GF-HMI-001,T3-GF-BOH,,AHU Room,ACMV Room,Air Handling Unit Room,ACMV,high,restricted,landside,AHU room
+SP-T3-GF-016,T3-GF-HMI-001,T3-GF-BOH,,TX Room,Electrical Room,Transformer Room,Electrical,critical,restricted,landside,TX room
+SP-T3-GF-017,T3-GF-HMI-001,T3-GF-BOH,,LT Room,Electrical Room,Low Tension Room,Electrical,critical,restricted,landside,LT room
+SP-T3-GF-018,T3-GF-HMI-001,T3-GF-BOH,,HT Room,Electrical Room,High Tension Room,Electrical,critical,restricted,landside,HT room
+SP-T3-GF-019,T3-GF-HMI-001,T3-GF-BOH,,PA Room,Back of House,Public Address Room,PA,high,restricted,landside,PA room
+SP-T3-GF-020,T3-GF-HMI-001,T3-GF-BOH,,IP PBX Operator Room,Back of House,Telephony Operator Room,IP PBX,high,restricted,landside,IP PBX operator room
+SP-T3-GF-021,T3-GF-HMI-001,T3-GF-VIP,,VIP Arrival Reception Lounge,VIP Area,VIP Arrival Service,VIP Operations,high,restricted,landside,VIP arrival reception lounge
+SP-T3-GF-022,T3-GF-HMI-001,T3-GF-VIP,,VIP Landside Drop-off,VIP Area,VIP Landside Service,VIP Operations,high,restricted,landside,VIP landside drop-off
+SP-T3-GF-023,T3-GF-HMI-001,T3-GF-VIP,,VIP Landside Pick-up,VIP Area,VIP Landside Service,VIP Operations,high,restricted,landside,VIP landside pick-up
+SP-T3-GF-024,T3-GF-HMI-001,T3-GF-VIP,,VVIP Reception Hall,VVIP Area,VVIP Arrival Service,VVIP Operations,critical,restricted,landside,VVIP reception hall
+SP-T3-GF-025,T3-GF-HMI-001,T3-GF-Z03,,Baggage Reconciliation Room,Back of House,Baggage Reconciliation,BHS,critical,restricted,mixed,Baggage reconciliation room
+SP-T3-GF-026,T3-GF-HMI-001,T3-GF-Z03,,Baggage Breakdown,Back of House,Baggage Breakdown,BHS,high,restricted,mixed,Baggage breakdown area
+SP-T3-GF-027,T3-GF-HMI-001,T3-GF-Z03,,Baggage Makeup,Back of House,Baggage Makeup,BHS,high,restricted,mixed,Baggage makeup area
+SP-T3-GF-028,T3-GF-HMI-001,T3-GF-Z05,,Lost & Found,Passenger Service,Baggage Service,Baggage Services,medium,staff,landside,Lost and found counter/office
+SP-T3-GF-029,T3-GF-HMI-001,T3-GF-Z05,,Baggage Services,Passenger Service,Baggage Service,Baggage Services,medium,staff,landside,Baggage services office
+SP-T3-GF-030,T3-GF-HMI-001,T3-GF-Z06,,East Remote Departure Gate Lounge,Passenger Area,Remote Departure Gate,Passenger Operations,high,public,airside,East remote departure gate lounge
+SP-T3-GF-031,T3-GF-HMI-001,T3-GF-Z02,,West Remote Departure Gate Lounge,Passenger Area,Remote Departure Gate,Passenger Operations,high,public,airside,West remote departure gate lounge
