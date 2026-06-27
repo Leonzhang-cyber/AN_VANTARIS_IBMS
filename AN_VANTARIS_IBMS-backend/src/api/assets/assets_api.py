@@ -9,6 +9,7 @@ from flask import request
 from src.api import api_bp
 from src.api.asset_import_ga.asset_overlay_service import AssetOverlayService
 from src.api.asset_import_ga.asset_import_service import AssetImportService, UploadFile
+from src.api.asset_import_ga.evidence_audit_overlay_service import EvidenceAuditOverlayService
 from src.api.asset_import_ga.fault_work_order_overlay_service import FaultWorkOrderOverlayService
 from src.assets.assets_service import AssetsTopologyService
 from src.common.models.response import Result
@@ -18,6 +19,7 @@ _service = AssetsTopologyService()
 _asset_import_service = AssetImportService()
 _asset_overlay_service = AssetOverlayService()
 _fault_work_order_overlay_service = FaultWorkOrderOverlayService()
+_evidence_audit_overlay_service = EvidenceAuditOverlayService(_fault_work_order_overlay_service)
 
 
 @api_bp.route("/v1/assets/health", methods=["GET"])
@@ -167,3 +169,28 @@ def decision_lens_overlay(map_id: str):
             work_order_id=request.args.get("work_order_id", ""),
         )
     )
+
+
+@api_bp.route("/v1/assets/hmi-maps/<string:map_id>/evidence-overlay", methods=["GET"])
+def evidence_overlay_assets(map_id: str):
+    return Result.success(data=_evidence_audit_overlay_service.evidence_overlay(map_id))
+
+
+@api_bp.route("/v1/assets/hmi-maps/<string:map_id>/work-order-evidence", methods=["GET"])
+def work_order_evidence_overlay(map_id: str):
+    return Result.success(data=_evidence_audit_overlay_service.work_order_evidence(map_id))
+
+
+@api_bp.route("/v1/assets/hmi-maps/<string:map_id>/closure-readiness", methods=["GET"])
+def closure_readiness_overlay(map_id: str):
+    return Result.success(data=_evidence_audit_overlay_service.closure_readiness(map_id))
+
+
+@api_bp.route("/v1/assets/hmi-maps/<string:map_id>/import-audit-summary", methods=["GET"])
+def import_audit_summary_overlay(map_id: str):
+    return Result.success(data=_evidence_audit_overlay_service.import_audit_summary(map_id))
+
+
+@api_bp.route("/v1/assets/hmi-maps/<string:map_id>/export-evidence-center", methods=["GET"])
+def export_evidence_center_overlay(map_id: str):
+    return Result.success(data=_evidence_audit_overlay_service.export_evidence_center(map_id))
