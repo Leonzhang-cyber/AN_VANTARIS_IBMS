@@ -9,6 +9,7 @@ from flask import request
 from src.api import api_bp
 from src.api.asset_import_ga.asset_overlay_service import AssetOverlayService
 from src.api.asset_import_ga.asset_import_service import AssetImportService, UploadFile
+from src.api.asset_import_ga.fault_work_order_overlay_service import FaultWorkOrderOverlayService
 from src.assets.assets_service import AssetsTopologyService
 from src.common.models.response import Result
 
@@ -16,6 +17,7 @@ from src.common.models.response import Result
 _service = AssetsTopologyService()
 _asset_import_service = AssetImportService()
 _asset_overlay_service = AssetOverlayService()
+_fault_work_order_overlay_service = FaultWorkOrderOverlayService()
 
 
 @api_bp.route("/v1/assets/health", methods=["GET"])
@@ -139,3 +141,29 @@ def asset_overlay_assets(map_id: str):
 @api_bp.route("/v1/assets/hmi-maps/<string:map_id>/system-overlay", methods=["GET"])
 def asset_overlay_systems(map_id: str):
     return Result.success(data=_asset_overlay_service.system_overlay(map_id))
+
+
+@api_bp.route("/v1/assets/hmi-maps/<string:map_id>/fault-overlay", methods=["GET"])
+def fault_overlay_assets(map_id: str):
+    return Result.success(data=_fault_work_order_overlay_service.fault_overlay(map_id))
+
+
+@api_bp.route("/v1/assets/hmi-maps/<string:map_id>/work-order-overlay", methods=["GET"])
+def work_order_overlay_assets(map_id: str):
+    return Result.success(data=_fault_work_order_overlay_service.work_order_overlay(map_id))
+
+
+@api_bp.route("/v1/assets/hmi-maps/<string:map_id>/technician-navigation", methods=["GET"])
+def technician_navigation_overlay(map_id: str):
+    return Result.success(data=_fault_work_order_overlay_service.technician_navigation(map_id))
+
+
+@api_bp.route("/v1/assets/hmi-maps/<string:map_id>/decision-lens", methods=["GET"])
+def decision_lens_overlay(map_id: str):
+    return Result.success(
+        data=_fault_work_order_overlay_service.decision_lens(
+            map_id,
+            event_id=request.args.get("event_id", ""),
+            work_order_id=request.args.get("work_order_id", ""),
+        )
+    )
