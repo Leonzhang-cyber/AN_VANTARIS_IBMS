@@ -1,6 +1,12 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
+import {
+  AIRPORT_HMI_MAP_ID,
+  type AirportHmiMapContent,
+  type AirportHmiMapPayload,
+  getAirportHmiMapContent,
+} from '@/services/api/airportHmiMap'
 import { resolveL3ContentConfig, resolveL3RouteContentContext } from '@/services/menu/l3-content-registry'
 
 type VisualMode = 'trend' | 'topology' | 'timeline' | 'workQueue' | 'evidence' | 'security' | 'hmi' | 'reportPack'
@@ -9,6 +15,7 @@ const route = useRoute()
 const context = computed(() => resolveL3RouteContentContext(route.query.menu, route.query.l3))
 const content = computed(() => (context.value ? resolveL3ContentConfig(context.value) : undefined))
 const dashboardWorkbench = computed(() => content.value?.dashboardWorkbench)
+const isAirportHmiMap = computed(() => context.value?.l1Label === 'Assets & Locations' && context.value?.l2Id === 'floor-plan-hmi')
 const defaultRelatedWorkspaces = ['Work Management', 'Assets & Locations', 'Faults & Events', 'Reports & Documents', 'Governance & Security', 'Integration & Partner Hub']
 const sectionKicker = computed(() => {
   if (content.value?.sectionEyebrow) {
@@ -95,6 +102,119 @@ const matrixRows = computed(() => ['Policy', 'Owner', 'Approval', 'Audit'].map((
   state: ['Configured', 'Mapped', 'Review', 'Guarded'][index],
   value: score(signature.value, index + 23, 35, 58),
 })))
+
+const airportHmiMapContent = ref<AirportHmiMapContent>()
+const airportHmiMapLoading = ref(false)
+const airportHmiMapError = ref('')
+const airportLayerSelections = ref([
+  'Zone Layer',
+  'Location Layer',
+  'Asset Layer',
+  'Point / Tag Layer',
+  'Fault Layer',
+  'Work Order Layer',
+  'Evidence Layer',
+])
+const airportFilters = ref({
+  terminal: 'Terminal 3',
+  floor: 'Ground Floor',
+  zone: 'All zones',
+  system: 'All systems',
+  deviceType: 'All device types',
+  dataQualityStatus: 'pending_review',
+  importBatch: 'Latest quality gate',
+})
+
+async function loadAirportHmiMapContent() {
+  airportHmiMapLoading.value = true
+  airportHmiMapError.value = ''
+  try {
+    airportHmiMapContent.value = await getAirportHmiMapContent(AIRPORT_HMI_MAP_ID)
+  } catch {
+    airportHmiMapError.value = 'readonly production fallback; backend endpoint unavailable; no runtime activation'
+  } finally {
+    airportHmiMapLoading.value = false
+  }
+}
+
+watch(
+  isAirportHmiMap,
+  (active) => {
+    if (active && !airportHmiMapContent.value && !airportHmiMapLoading.value) {
+      void loadAirportHmiMapContent()
+    }
+  },
+  { immediate: true },
+)
+
+function payloadRows(payload?: AirportHmiMapPayload, limit = 6): Array<Record<string, unknown>> {
+  return Array.isArray(payload?.data) ? payload.data.slice(0, limit) : []
+}
+
+function summaryValue(payload: AirportHmiMapPayload | undefined, key: string, fallback: string | number | boolean = '0') {
+  const value = payload?.summary?.[key]
+  return value === undefined || value === null || value === '' ? fallback : value
+}
+
+function fieldValue(row: Record<string, unknown> | undefined, key: string, fallback = 'Pending review') {
+  const value = row?.[key]
+  return value === undefined || value === null || value === '' ? fallback : String(value)
+}
+
+const airportData = computed(() => airportHmiMapContent.value)
+const airportImportAudit = computed(() => airportData.value?.importAuditSummary)
+const airportClosure = computed(() => airportData.value?.closureReadiness)
+const airportAssetOverlay = computed(() => airportData.value?.assetOverlay)
+const airportDecisionLens = computed(() => airportData.value?.decisionLens)
+const airportReadiness = computed(() =>
+  airportImportAudit.value?.asset_import_readiness
+  ?? airportAssetOverlay.value?.asset_import_readiness
+  ?? 'HOLD_BLOCKED',
+)
+const airportOverlayStatus = computed(() =>
+  airportAssetOverlay.value?.asset_overlay_status
+  ?? airportImportAudit.value?.asset_overlay_status
+  ?? 'blocked_by_data_quality',
+)
+const airportClosureStatus = computed(() =>
+  airportClosure.value?.closure_status
+  ?? airportImportAudit.value?.closure_status
+  ?? 'not_ready_due_to_asset_quality_blockers',
+)
+const airportSourceState = computed(() =>
+  airportHmiMapError.value
+  || airportData.value?.sourceState
+  || 'readonly production fallback; backend endpoint unavailable; no runtime activation',
+)
+const airportDecisionSignals = computed(() => [
+  { label: 'Asset Import Readiness', value: airportReadiness.value },
+  { label: 'Overlay Status', value: airportOverlayStatus.value },
+  { label: 'Formal Registry Write', value: String(airportAssetOverlay.value?.formal_asset_registry_write ?? false) },
+  { label: 'Evidence Closure', value: airportClosureStatus.value },
+])
+const airportPanelCards = computed(() => [
+  { title: 'Zone Summary', value: summaryValue(airportData.value?.zoneSummary, 'zone_count'), note: `${summaryValue(airportData.value?.zoneSummary, 'asset_records_seen', 5187)} records seen` },
+  { title: 'Location Summary', value: summaryValue(airportData.value?.locationSummary, 'location_count'), note: `${summaryValue(airportData.value?.locationSummary, 'pending_review_locations', 0)} pending review` },
+  { title: 'Asset Overlay Summary', value: summaryValue(airportData.value?.assetOverlay, 'overlay_markers'), note: 'Readonly projection' },
+  { title: 'System Overlay Summary', value: summaryValue(airportData.value?.systemOverlay, 'system_count'), note: 'System-to-asset map' },
+  { title: 'Fault Overlay', value: summaryValue(airportData.value?.faultOverlay, 'fault_count'), note: 'Blocked by asset data quality' },
+  { title: 'Work Order Route', value: summaryValue(airportData.value?.workOrderOverlay, 'work_order_count'), note: 'Route hint only' },
+  { title: 'Evidence Readiness', value: summaryValue(airportData.value?.evidenceOverlay, 'evidence_items_required'), note: 'Pending closure evidence' },
+  { title: 'Import Audit Summary', value: summaryValue(airportData.value?.importAuditSummary, 'blocker_count', 2), note: 'Critical blockers' },
+])
+const airportZoneRows = computed(() => payloadRows(airportData.value?.zoneSummary, 6))
+const airportLocationRows = computed(() => payloadRows(airportData.value?.locationSummary, 6))
+const airportSystemRows = computed(() => payloadRows(airportData.value?.systemOverlay, 6))
+const airportFaultRows = computed(() => payloadRows(airportData.value?.faultOverlay, 5))
+const airportWorkOrderRows = computed(() => payloadRows(airportData.value?.workOrderOverlay, 5))
+const airportEvidenceRows = computed(() => payloadRows(airportData.value?.evidenceOverlay, 5))
+const airportSelectedContext = computed(() =>
+  airportFaultRows.value[0]
+  ?? airportWorkOrderRows.value[0]
+  ?? airportLocationRows.value[0],
+)
+const airportOperationalContext = computed(() => airportDecisionLens.value?.operational_context ?? {})
+const airportEvidenceContext = computed(() => airportDecisionLens.value?.evidence_context ?? {})
 </script>
 
 <template>
@@ -143,7 +263,198 @@ const matrixRows = computed(() => ['Policy', 'Owner', 'Approval', 'Audit'].map((
       </article>
     </div>
 
-    <div v-if="dashboardWorkbench" class="route-l3-panel__dashboard-workbench">
+    <div v-if="isAirportHmiMap" class="route-l3-panel__airport-hmi" v-loading="airportHmiMapLoading">
+      <div class="route-l3-panel__dashboard-tabs" aria-label="Floor Plan / HMI Map L3 workspace tabs">
+        <span v-for="tab in dashboardTabs" :key="tab.key" :class="{ 'route-l3-panel__dashboard-tab--active': tab.active }">{{ tab.label }}</span>
+      </div>
+
+      <div class="route-l3-panel__airport-signals" aria-label="Airport HMI decision signals">
+        <article v-for="signal in airportDecisionSignals" :key="signal.label">
+          <span>{{ signal.label }}</span>
+          <strong>{{ signal.value }}</strong>
+        </article>
+      </div>
+
+      <div class="route-l3-panel__airport-alert" role="status">
+        <strong>Asset import is currently HOLD_BLOCKED.</strong>
+        <span>Asset overlay remains readonly until critical data quality blockers are resolved.</span>
+        <em>Confirm Import is disabled.</em>
+        <small>{{ airportSourceState }}</small>
+      </div>
+
+      <div class="route-l3-panel__airport-filters" aria-label="Airport HMI filters">
+        <label>
+          <span>Terminal</span>
+          <el-select v-model="airportFilters.terminal" size="small">
+            <el-option label="Terminal 3" value="Terminal 3" />
+          </el-select>
+        </label>
+        <label>
+          <span>Floor</span>
+          <el-select v-model="airportFilters.floor" size="small">
+            <el-option label="Ground Floor" value="Ground Floor" />
+          </el-select>
+        </label>
+        <label>
+          <span>Zone</span>
+          <el-select v-model="airportFilters.zone" size="small">
+            <el-option label="All zones" value="All zones" />
+            <el-option v-for="row in airportZoneRows" :key="fieldValue(row, 'zone')" :label="fieldValue(row, 'zone')" :value="fieldValue(row, 'zone')" />
+          </el-select>
+        </label>
+        <label>
+          <span>System</span>
+          <el-select v-model="airportFilters.system" size="small">
+            <el-option label="All systems" value="All systems" />
+            <el-option v-for="row in airportSystemRows" :key="fieldValue(row, 'system')" :label="fieldValue(row, 'system')" :value="fieldValue(row, 'system')" />
+          </el-select>
+        </label>
+        <label>
+          <span>Device Type</span>
+          <el-select v-model="airportFilters.deviceType" size="small">
+            <el-option label="All device types" value="All device types" />
+            <el-option label="Pending customer-approved map conversion" value="Pending customer-approved map conversion" />
+          </el-select>
+        </label>
+        <label>
+          <span>Data Quality Status</span>
+          <el-select v-model="airportFilters.dataQualityStatus" size="small">
+            <el-option label="pending_review" value="pending_review" />
+            <el-option label="pending_asset_import_clearance" value="pending_asset_import_clearance" />
+          </el-select>
+        </label>
+        <label>
+          <span>Import Batch</span>
+          <el-select v-model="airportFilters.importBatch" size="small">
+            <el-option label="Latest quality gate" value="Latest quality gate" />
+          </el-select>
+        </label>
+      </div>
+
+      <div class="route-l3-panel__airport-workspace">
+        <div class="route-l3-panel__map-shell">
+          <div class="route-l3-panel__map-head">
+            <div>
+              <span>Terminal 3 / Ground Floor</span>
+              <strong>Registered base layer</strong>
+            </div>
+            <el-tag type="warning" effect="plain">Pending customer-approved map conversion</el-tag>
+          </div>
+          <div class="route-l3-panel__map-body">
+            <strong>Map base layer registered; vector/CAD tile binding pending customer-approved map conversion.</strong>
+            <span>Readonly projection</span>
+          </div>
+          <div class="route-l3-panel__layer-controls" aria-label="Airport HMI layer controls">
+            <el-checkbox-group v-model="airportLayerSelections">
+              <el-checkbox label="Zone Layer" />
+              <el-checkbox label="Location Layer" />
+              <el-checkbox label="Asset Layer" />
+              <el-checkbox label="Point / Tag Layer" />
+              <el-checkbox label="Fault Layer" />
+              <el-checkbox label="Work Order Layer" />
+              <el-checkbox label="Evidence Layer" />
+            </el-checkbox-group>
+          </div>
+        </div>
+
+        <aside class="route-l3-panel__decision-lens" aria-label="Right-side Decision Lens">
+          <span>Decision Lens</span>
+          <strong>Selected location / fault / work order</strong>
+          <dl>
+            <div>
+              <dt>Selected context</dt>
+              <dd>{{ fieldValue(airportSelectedContext, 'location', fieldValue(airportSelectedContext, 'event_id', fieldValue(airportSelectedContext, 'work_order_id'))) }}</dd>
+            </div>
+            <div>
+              <dt>Operational impact</dt>
+              <dd>{{ fieldValue(airportOperationalContext, 'impact', 'Readonly projection blocked by asset data quality') }}</dd>
+            </div>
+            <div>
+              <dt>Recommended action</dt>
+              <dd>{{ fieldValue(airportOperationalContext, 'recommended_action', 'Resolve critical asset import blockers before formal registry write') }}</dd>
+            </div>
+            <div>
+              <dt>Related system</dt>
+              <dd>{{ fieldValue(airportOperationalContext, 'related_system', fieldValue(airportSelectedContext, 'system')) }}</dd>
+            </div>
+            <div>
+              <dt>Evidence required</dt>
+              <dd>{{ fieldValue(airportEvidenceContext, 'status', 'pending_closure_evidence') }}</dd>
+            </div>
+            <div>
+              <dt>Closure status</dt>
+              <dd>{{ airportClosureStatus }}</dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+
+      <div class="route-l3-panel__airport-cards" aria-label="Airport HMI main panels">
+        <article v-for="panel in airportPanelCards" :key="panel.title">
+          <span>{{ panel.title }}</span>
+          <strong>{{ panel.value }}</strong>
+          <em>{{ panel.note }}</em>
+        </article>
+      </div>
+
+      <div class="route-l3-panel__airport-tables">
+        <article>
+          <strong>Zone Summary</strong>
+          <el-table :data="airportZoneRows" size="small" stripe>
+            <el-table-column prop="zone" label="Zone" min-width="90" />
+            <el-table-column prop="level" label="Level" min-width="110" />
+            <el-table-column prop="asset_record_count" label="Records" min-width="100" />
+            <el-table-column prop="data_quality_status" label="Quality" min-width="160" />
+          </el-table>
+        </article>
+        <article>
+          <strong>Location Summary</strong>
+          <el-table :data="airportLocationRows" size="small" stripe>
+            <el-table-column prop="location" label="Location" min-width="180" />
+            <el-table-column prop="zone" label="Zone" min-width="120" />
+            <el-table-column prop="asset_record_count" label="Records" min-width="100" />
+            <el-table-column prop="map_binding_status" label="Binding" min-width="170" />
+          </el-table>
+        </article>
+        <article>
+          <strong>System Overlay Summary</strong>
+          <el-table :data="airportSystemRows" size="small" stripe>
+            <el-table-column prop="system" label="System" min-width="110" />
+            <el-table-column prop="asset_record_count" label="Records" min-width="100" />
+            <el-table-column prop="data_quality_status" label="Quality" min-width="160" />
+          </el-table>
+        </article>
+        <article>
+          <strong>Fault Overlay</strong>
+          <el-table :data="airportFaultRows" size="small" stripe>
+            <el-table-column prop="event_id" label="Event" min-width="140" />
+            <el-table-column prop="severity" label="Severity" min-width="100" />
+            <el-table-column prop="location" label="Location" min-width="180" />
+            <el-table-column prop="data_quality_status" label="Quality" min-width="180" />
+          </el-table>
+        </article>
+        <article>
+          <strong>Work Order Route</strong>
+          <el-table :data="airportWorkOrderRows" size="small" stripe>
+            <el-table-column prop="work_order_id" label="Work Order" min-width="150" />
+            <el-table-column prop="priority" label="Priority" min-width="90" />
+            <el-table-column prop="assigned_team" label="Team" min-width="160" />
+            <el-table-column prop="route_status" label="Route" min-width="140" />
+          </el-table>
+        </article>
+        <article>
+          <strong>Evidence Readiness</strong>
+          <el-table :data="airportEvidenceRows" size="small" stripe>
+            <el-table-column prop="evidence_id" label="Evidence" min-width="170" />
+            <el-table-column prop="evidence_type" label="Type" min-width="130" />
+            <el-table-column prop="status" label="Status" min-width="170" />
+            <el-table-column prop="audit_ready" label="Audit Ready" min-width="120" />
+          </el-table>
+        </article>
+      </div>
+    </div>
+
+    <div v-else-if="dashboardWorkbench" class="route-l3-panel__dashboard-workbench">
       <div class="route-l3-panel__dashboard-tabs" aria-label="Dashboard L3 workspace tabs">
         <span v-for="tab in dashboardTabs" :key="tab.key" :class="{ 'route-l3-panel__dashboard-tab--active': tab.active }">{{ tab.label }}</span>
       </div>
@@ -346,7 +657,7 @@ const matrixRows = computed(() => ['Policy', 'Owner', 'Approval', 'Audit'].map((
       </div>
     </div>
 
-    <el-table v-if="dashboardWorkbench" :data="content.rows" stripe border class="route-l3-panel__table">
+    <el-table v-if="!isAirportHmiMap && dashboardWorkbench" :data="content.rows" stripe border class="route-l3-panel__table">
       <el-table-column prop="item" label="Action" min-width="240" />
       <el-table-column prop="owner" label="Owner" min-width="180" />
       <el-table-column prop="status" label="Status" min-width="130" />
@@ -354,7 +665,7 @@ const matrixRows = computed(() => ['Policy', 'Owner', 'Approval', 'Audit'].map((
       <el-table-column prop="open" label="Open" min-width="220" />
     </el-table>
 
-    <el-table v-else :data="content.rows" stripe border class="route-l3-panel__table">
+    <el-table v-else-if="!isAirportHmiMap" :data="content.rows" stripe border class="route-l3-panel__table">
       <el-table-column prop="item" label="Action" min-width="240" />
       <el-table-column prop="focus" label="Focus Area" min-width="280" />
       <el-table-column prop="status" label="Status" min-width="140" />
@@ -1085,6 +1396,243 @@ const matrixRows = computed(() => ['Policy', 'Owner', 'Approval', 'Audit'].map((
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.route-l3-panel__airport-hmi {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.route-l3-panel__airport-signals,
+.route-l3-panel__airport-cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.route-l3-panel__airport-signals article,
+.route-l3-panel__airport-cards article,
+.route-l3-panel__decision-lens,
+.route-l3-panel__airport-tables article,
+.route-l3-panel__map-shell {
+  min-width: 0;
+  border: 1px solid #dfe9e5;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.route-l3-panel__airport-signals article,
+.route-l3-panel__airport-cards article {
+  display: grid;
+  gap: 6px;
+  padding: 12px;
+}
+
+.route-l3-panel__airport-signals span,
+.route-l3-panel__airport-cards span,
+.route-l3-panel__decision-lens > span,
+.route-l3-panel__map-head span,
+.route-l3-panel__airport-filters span {
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.route-l3-panel__airport-signals strong,
+.route-l3-panel__airport-cards strong {
+  color: #10201d;
+  font-size: 18px;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.route-l3-panel__airport-cards strong {
+  color: #0f766e;
+  font-size: 24px;
+}
+
+.route-l3-panel__airport-cards em {
+  color: #52615d;
+  font-size: 12px;
+  font-style: normal;
+  line-height: 1.4;
+}
+
+.route-l3-panel__airport-alert {
+  display: grid;
+  gap: 6px;
+  padding: 14px;
+  border: 1px solid #f6d88f;
+  border-radius: 10px;
+  background: #fffbeb;
+  color: #713f12;
+}
+
+.route-l3-panel__airport-alert strong,
+.route-l3-panel__airport-alert span,
+.route-l3-panel__airport-alert em,
+.route-l3-panel__airport-alert small {
+  line-height: 1.4;
+}
+
+.route-l3-panel__airport-alert em {
+  font-style: normal;
+  font-weight: 800;
+}
+
+.route-l3-panel__airport-alert small {
+  color: #8a5a17;
+}
+
+.route-l3-panel__airport-filters {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(120px, 1fr));
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid #dfe9e5;
+  border-radius: 10px;
+  background: #f8fbfa;
+}
+
+.route-l3-panel__airport-filters label {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.route-l3-panel__airport-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.36fr);
+  gap: 14px;
+}
+
+.route-l3-panel__map-shell {
+  display: grid;
+  gap: 14px;
+  padding: 14px;
+  background:
+    linear-gradient(90deg, rgba(15, 118, 110, 0.08) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(15, 118, 110, 0.08) 1px, transparent 1px),
+    #ffffff;
+  background-size: 32px 32px;
+}
+
+.route-l3-panel__map-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.route-l3-panel__map-head div {
+  display: grid;
+  gap: 6px;
+}
+
+.route-l3-panel__map-head strong {
+  color: #10201d;
+  font-size: 20px;
+}
+
+.route-l3-panel__map-body {
+  display: grid;
+  place-items: center;
+  min-height: 260px;
+  padding: 24px;
+  border: 1px dashed #9ccac1;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.78);
+  text-align: center;
+}
+
+.route-l3-panel__map-body strong {
+  max-width: 680px;
+  color: #10201d;
+  font-size: 18px;
+  line-height: 1.45;
+}
+
+.route-l3-panel__map-body span {
+  margin-top: 8px;
+  color: #0f766e;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.route-l3-panel__layer-controls {
+  padding: 10px;
+  border: 1px solid #dfe9e5;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.route-l3-panel__layer-controls :deep(.el-checkbox-group) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+}
+
+.route-l3-panel__decision-lens {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  padding: 14px;
+}
+
+.route-l3-panel__decision-lens > strong {
+  color: #10201d;
+  font-size: 18px;
+}
+
+.route-l3-panel__decision-lens dl {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+}
+
+.route-l3-panel__decision-lens div {
+  display: grid;
+  gap: 4px;
+  padding: 10px;
+  border: 1px solid #e2ece8;
+  border-radius: 8px;
+  background: #f8fbfa;
+}
+
+.route-l3-panel__decision-lens dt {
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.route-l3-panel__decision-lens dd {
+  margin: 0;
+  color: #10201d;
+  font-size: 13px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.route-l3-panel__airport-tables {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.route-l3-panel__airport-tables article {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+  overflow: hidden;
+}
+
+.route-l3-panel__airport-tables article > strong {
+  color: #10201d;
+  font-size: 15px;
+}
+
 @media (max-width: 1100px) {
   .route-l3-panel__head {
     flex-direction: column;
@@ -1100,8 +1648,19 @@ const matrixRows = computed(() => ['Policy', 'Owner', 'Approval', 'Audit'].map((
   .route-l3-panel__dashboard-grid,
   .route-l3-panel__signal-grid,
   .route-l3-panel__visual-context,
-  .route-l3-panel__acceptance-footer {
+  .route-l3-panel__acceptance-footer,
+  .route-l3-panel__airport-signals,
+  .route-l3-panel__airport-cards,
+  .route-l3-panel__airport-tables {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .route-l3-panel__airport-filters {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .route-l3-panel__airport-workspace {
+    grid-template-columns: 1fr;
   }
 
   .route-l3-panel__six-d-model,
@@ -1132,7 +1691,11 @@ const matrixRows = computed(() => ['Policy', 'Owner', 'Approval', 'Audit'].map((
   .route-l3-panel__dashboard-grid,
   .route-l3-panel__dashboard-cards,
   .route-l3-panel__visual-context,
-  .route-l3-panel__acceptance-footer {
+  .route-l3-panel__acceptance-footer,
+  .route-l3-panel__airport-signals,
+  .route-l3-panel__airport-cards,
+  .route-l3-panel__airport-filters,
+  .route-l3-panel__airport-tables {
     grid-template-columns: 1fr;
   }
 }

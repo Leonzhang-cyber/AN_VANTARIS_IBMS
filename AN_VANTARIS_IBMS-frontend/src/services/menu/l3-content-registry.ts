@@ -899,6 +899,54 @@ export function resolveL3ContentConfig(context: L3ContentContext): L3ContentConf
   const mappedModule = context.item.mappedExistingModule ?? context.l2Label
   const status = context.item.status?.replace(/-/g, ' ') ?? 'mapped'
 
+  if (context.l1Label === 'Assets & Locations' && context.l2Id === 'floor-plan-hmi') {
+    return {
+      title: 'Airport Operational HMI Map',
+      subtitle: 'Map-based view of zones, spaces, assets, tags, faults, work orders and evidence for Terminal 3 operations.',
+      primaryAction: 'Review readonly projection',
+      selectedLabel: section,
+      sectionEyebrow: 'Registered base layer',
+      l3Tabs: [
+        'Equipment Location Risk',
+        'Site / Building Context',
+        'Zone Overlay Review',
+        'Asset Alarm Linkage',
+        'Overlay Evidence Review',
+        'HMI Map Readiness Gate',
+        'Floor Plan Equipment Location',
+        'HMI Equipment Locator',
+        'Zone-to-Asset Mapping',
+        'System-to-Asset Map',
+        'Point / Tag Overlay',
+        'Fault Location Overlay',
+        'Work Order Location Route',
+        'Technician Navigation Context',
+      ].map((label) => ({
+        key: label,
+        label,
+        active: label === context.item.label,
+      })),
+      connectedWorkspaces: ['Assets & Locations', 'Faults & Events', 'Work Management', 'Reports & Documents', 'Governance & Security'],
+      relatedWorkspaces: ['Assets & Locations', 'Faults & Events', 'Work Management', 'Reports & Documents', 'Governance & Security'],
+      metrics: [
+        { label: 'Asset Import Readiness', value: 'HOLD_BLOCKED', note: 'Blocked by asset data quality' },
+        { label: 'Overlay Status', value: 'blocked_by_data_quality', note: 'Readonly projection' },
+        { label: 'Formal Registry Write', value: 'false', note: 'No runtime activation' },
+        { label: 'Evidence Closure', value: 'not_ready_due_to_asset_quality_blockers', note: 'Evidence readiness' },
+      ],
+      rows: [
+        { item: 'Zone Summary', focus: 'Zone-level asset grouping for Terminal 3 Ground Floor', status: 'Readonly projection' },
+        { item: 'Location Summary', focus: 'Location-level grouping pending customer-approved map conversion', status: 'Pending review' },
+        { item: 'Asset Overlay Summary', focus: 'Production-safe asset record projection without formal registry write', status: 'Blocked by asset data quality' },
+        { item: 'System Overlay Summary', focus: 'System-to-asset grouping across PA, ACS, CCTV, TEL, IPTV, RAS, and MCS', status: 'Readonly projection' },
+        { item: 'Fault Overlay', focus: 'Fault location projection linked to controlled sample events', status: 'Pending asset import clearance' },
+        { item: 'Work Order Route', focus: 'Route hints for assigned work orders without formal work order write', status: 'Route hint only' },
+        { item: 'Evidence Readiness', focus: 'Closure evidence requirements and audit readiness', status: 'Evidence readiness' },
+        { item: 'Import Audit Summary', focus: 'Asset import quality gate summary and confirm disabled state', status: 'HOLD_BLOCKED' },
+      ],
+    }
+  }
+
   if (context.l1Label === 'Dashboard' && dashboardProfile) {
     return {
       title: isIndustryView ? 'Active Industry Profile' : workspaceSection?.title ?? `${context.l2Label} / ${displaySection}`,
