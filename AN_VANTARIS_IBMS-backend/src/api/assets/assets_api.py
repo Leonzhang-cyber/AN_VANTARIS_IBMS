@@ -2,14 +2,18 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 from flask import request
 
 from src.api import api_bp
+from src.api.asset_import_ga.asset_import_service import AssetImportService, UploadFile
 from src.assets.assets_service import AssetsTopologyService
 from src.common.models.response import Result
 
 
 _service = AssetsTopologyService()
+_asset_import_service = AssetImportService()
 
 
 @api_bp.route("/v1/assets/health", methods=["GET"])
@@ -71,3 +75,45 @@ def assets_list():
     }
     return Result.success(data=_service.list_assets(filters=filters))
 
+
+@api_bp.route("/v1/assets/import/preview", methods=["POST"])
+def asset_import_preview():
+    files = request.files.getlist("file")
+    uploads = []
+    for file in files:
+        filename = Path(file.filename or "").name
+        if filename:
+            uploads.append(UploadFile(source_file_name=filename, payload=file.read()))
+    try:
+        return Result.success(data=_asset_import_service.preview_upload(uploads))
+    except ValueError as exc:
+        return Result.error(code=400, message=str(exc))
+
+
+@api_bp.route("/v1/assets/import/batches", methods=["GET"])
+def asset_import_batches():
+    return Result.success(data=_asset_import_service.list_batches())
+
+
+@api_bp.route("/v1/assets/import/batches/<string:batch_id>/report", methods=["GET"])
+def asset_import_batch_report(batch_id: str):
+    report = _asset_import_service.get_report(batch_id)
+    if report is None:
+        return Result.error(code=404, message="batch not found")
+    return Result.success(data=report)
+
+
+@api_bp.route("/v1/assets/import/batches/<string:batch_id>/confirm", methods=["POST"])
+def asset_import_batch_confirm(batch_id: str):
+    data, status_code, message = _asset_import_service.confirm(batch_id, request.get_json(silent=True) or {})
+    if data is None:
+        return Result.error(code=status_code, message=message)
+    return Result.success(data=data)
+
+
+@api_bp.route("/v1/assets/import/batches/<string:batch_id>/audit", methods=["GET"])
+def asset_import_batch_audit(batch_id: str):
+    audit = _asset_import_service.audit(batch_id)
+    if audit is None:
+        return Result.error(code=404, message="batch not found")
+    return Result.success(data=audit)
