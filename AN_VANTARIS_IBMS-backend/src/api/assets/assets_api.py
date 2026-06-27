@@ -7,6 +7,7 @@ from pathlib import Path
 from flask import request
 
 from src.api import api_bp
+from src.api.asset_import_ga.asset_overlay_service import AssetOverlayService
 from src.api.asset_import_ga.asset_import_service import AssetImportService, UploadFile
 from src.assets.assets_service import AssetsTopologyService
 from src.common.models.response import Result
@@ -14,6 +15,7 @@ from src.common.models.response import Result
 
 _service = AssetsTopologyService()
 _asset_import_service = AssetImportService()
+_asset_overlay_service = AssetOverlayService()
 
 
 @api_bp.route("/v1/assets/health", methods=["GET"])
@@ -117,3 +119,23 @@ def asset_import_batch_audit(batch_id: str):
     if audit is None:
         return Result.error(code=404, message="batch not found")
     return Result.success(data=audit)
+
+
+@api_bp.route("/v1/assets/hmi-maps/<string:map_id>/zone-summary", methods=["GET"])
+def asset_overlay_zone_summary(map_id: str):
+    return Result.success(data=_asset_overlay_service.zone_summary(map_id))
+
+
+@api_bp.route("/v1/assets/hmi-maps/<string:map_id>/location-summary", methods=["GET"])
+def asset_overlay_location_summary(map_id: str):
+    return Result.success(data=_asset_overlay_service.location_summary(map_id))
+
+
+@api_bp.route("/v1/assets/hmi-maps/<string:map_id>/asset-overlay", methods=["GET"])
+def asset_overlay_assets(map_id: str):
+    return Result.success(data=_asset_overlay_service.asset_overlay(map_id))
+
+
+@api_bp.route("/v1/assets/hmi-maps/<string:map_id>/system-overlay", methods=["GET"])
+def asset_overlay_systems(map_id: str):
+    return Result.success(data=_asset_overlay_service.system_overlay(map_id))
