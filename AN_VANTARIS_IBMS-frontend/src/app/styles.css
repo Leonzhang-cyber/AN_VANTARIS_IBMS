@@ -329,3 +329,141 @@ textarea {
   background: linear-gradient(180deg, #f5f8fb 0%, #eef4f8 100%) !important;
 }
 /* === VANTARIS depth enhancement end === */
+
+/* === ONE L3 STICKY WORKSPACE NAVIGATION START === */
+:root {
+  --one-l3-sticky-offset: 0px;
+  --one-l3-sticky-safe-space: 64px;
+}
+
+/* Shared L3 sticky dock. Keep L3 in content area, not sidebar. */
+.l3-sticky-surface,
+.one-l3-sticky-surface,
+.route-l3-tabs,
+.route-l3-nav,
+.route-l3-tabbar,
+.page-l3-tabs,
+.page-l3-nav,
+.page-level-action-bar-3d,
+[class*="l3"][class*="tabs"],
+[class*="L3"][class*="tabs"],
+[class*="l3"][class*="nav"],
+[class*="L3"][class*="nav"] {
+  position: sticky;
+  top: var(--one-l3-sticky-offset, 0px);
+  z-index: 18;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 5px 8px;
+  margin-bottom: 12px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  background:
+    linear-gradient(180deg, rgba(248, 250, 252, 0.98) 0%, rgba(241, 245, 249, 0.96) 100%);
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  border-bottom: 2px solid rgba(15, 118, 110, 0.34);
+  border-radius: 16px;
+  box-shadow: 0 5px 12px rgba(15, 23, 42, 0.055);
+  backdrop-filter: blur(10px);
+  scrollbar-width: thin;
+}
+
+/* Workspace label */
+.l3-sticky-surface::before,
+.one-l3-sticky-surface::before,
+.route-l3-tabs::before,
+.route-l3-nav::before,
+.route-l3-tabbar::before,
+.page-l3-tabs::before,
+.page-l3-nav::before,
+.page-level-action-bar-3d::before,
+[class*="l3"][class*="tabs"]::before,
+[class*="L3"][class*="tabs"]::before,
+[class*="l3"][class*="nav"]::before,
+[class*="L3"][class*="nav"]::before {
+  content: 'WORKSPACE';
+  color: #718096;
+  flex: 0 0 auto;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  margin: 0 4px 0 2px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* L3 tabs: inactive pill */
+.one-l3-tab,
+.l3-tab,
+.route-l3-tab,
+.page-l3-tab,
+[class*="l3"][class*="tab"] > button,
+[class*="L3"][class*="tab"] > button,
+[class*="l3"][class*="tabs"] button,
+[class*="L3"][class*="tabs"] button,
+[class*="l3"][class*="nav"] button,
+[class*="L3"][class*="nav"] button {
+  flex: 0 0 auto;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 999px;
+  color: #475569;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+/* L3 active tab: deep navy */
+.one-l3-tab--active,
+.l3-tab--active,
+.route-l3-tab--active,
+.page-l3-tab--active,
+.one-l3-tab.active,
+.l3-tab.active,
+.route-l3-tab.active,
+.page-l3-tab.active,
+[class*="l3"][class*="tab"].active,
+[class*="L3"][class*="tab"].active,
+[class*="l3"][class*="tabs"] button.active,
+[class*="L3"][class*="tabs"] button.active,
+[class*="l3"][class*="nav"] button.active,
+[class*="L3"][class*="nav"] button.active,
+[class*="l3"][class*="tabs"] button[aria-selected="true"],
+[class*="L3"][class*="tabs"] button[aria-selected="true"],
+[class*="l3"][class*="nav"] button[aria-selected="true"],
+[class*="L3"][class*="nav"] button[aria-selected="true"] {
+  background: #0f172a;
+  border-color: #0f172a;
+  color: #ffffff;
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.16);
+}
+
+/* Prevent anchor/section scroll from hiding under sticky L3 dock */
+[data-l3-section],
+.l3-content-section,
+.route-l3-content,
+.page-l3-content,
+[class*="l3"][class*="content"],
+[class*="L3"][class*="content"] {
+  scroll-margin-top: var(--one-l3-sticky-safe-space, 64px);
+}
+
+@media (max-width: 860px) {
+  .l3-sticky-surface,
+  .one-l3-sticky-surface,
+  .route-l3-tabs,
+  .route-l3-nav,
+  .route-l3-tabbar,
+  .page-l3-tabs,
+  .page-l3-nav,
+  .page-level-action-bar-3d,
+  [class*="l3"][class*="tabs"],
+  [class*="L3"][class*="tabs"],
+  [class*="l3"][class*="nav"],
+  [class*="L3"][class*="nav"] {
+    border-radius: 14px;
+    padding: 5px 6px;
+  }
+}
+/* === ONE L3 STICKY WORKSPACE NAVIGATION END === */
