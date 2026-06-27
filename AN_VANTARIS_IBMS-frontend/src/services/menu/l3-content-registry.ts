@@ -20,7 +20,21 @@ export interface L3ContentConfig {
   relatedWorkspaces?: string[]
   metrics: Array<{ label: string; value: string; note: string }>
   rows: Array<{ item: string; focus: string; status: string; owner?: string; priority?: string; open?: string }>
+  visualWorkspaceMode?: boolean
+  visualOnlyMode?: boolean
+  elvTopology?: ElvTopologyConfig
   dashboardWorkbench?: DashboardWorkbenchConfig
+}
+
+export interface ElvTopologyConfig {
+  commandSummary: string
+  statusChips: string[]
+  signals: Array<{ label: string; value: string; status: 'ready' | 'watch' | 'degraded' | 'mapped'; note: string }>
+  nodes: Array<{ system: string; badge: string; protocol: string; health: 'ready' | 'watch' | 'degraded' | 'mapped'; freshness: string; owner: string; evidence: string; x: number; y: number }>
+  protocolLegend: Array<{ protocol: string; status: 'Ready' | 'Watch' | 'Degraded' | 'Mapped' }>
+  context: Array<{ label: string; value: string; status: string }>
+  flow: string[]
+  acceptance: string
 }
 
 export interface DashboardWorkbenchConfig {
@@ -889,6 +903,49 @@ function profileFor(l2Id: string, l2Label: string, l1Label: string): L2ContentPr
   }
 }
 
+function industryConnectorsElvTopology(): ElvTopologyConfig {
+  return {
+    commandSummary: '8 ELV systems connected · 5 protocols mapped · 2 data freshness warnings · evidence ready',
+    statusChips: ['LIVE', '8 Systems', '5 Protocols', '2 Warnings', 'Evidence 82%', 'Owner Mapped'],
+    signals: [
+      { label: 'Connected Systems', value: '8', status: 'ready', note: 'ELV systems mapped to the integration hub' },
+      { label: 'Protocol Coverage', value: '5 mapped', status: 'mapped', note: 'OPC UA, SNMP, Modbus, BACnet, API mapped; OPC TCP/IP degraded' },
+      { label: 'Connector Health', value: '91%', status: 'watch', note: 'Radio and IPTV connectors under watch' },
+      { label: 'Data Freshness', value: '14 min', status: 'watch', note: 'Oldest source approaching freshness guard' },
+      { label: 'Partner SLA Exposure', value: '2', status: 'degraded', note: 'Partner-owned lanes need follow-up' },
+      { label: 'Evidence Readiness', value: '18 / 20', status: 'ready', note: 'Integration evidence nearly complete' },
+    ],
+    nodes: [
+      { system: 'CCTV', badge: 'CTV', protocol: 'SNMP', health: 'ready', freshness: '2 min', owner: 'Security Systems Partner', evidence: 'Ready', x: 15, y: 18 },
+      { system: 'Access Control', badge: 'ACS', protocol: 'OPC UA', health: 'watch', freshness: '11 min', owner: 'Access Control Vendor', evidence: 'Mapped', x: 50, y: 10 },
+      { system: 'Public Address', badge: 'PA', protocol: 'BACnet', health: 'ready', freshness: '4 min', owner: 'ELV Contractor', evidence: 'Ready', x: 84, y: 22 },
+      { system: 'Radio', badge: 'RAD', protocol: 'OPC TCP/IP', health: 'degraded', freshness: '18 min', owner: 'Radio Partner', evidence: 'Watch', x: 86, y: 68 },
+      { system: 'IPTV', badge: 'IPTV', protocol: 'API', health: 'watch', freshness: '15 min', owner: 'Media Systems Partner', evidence: 'Watch', x: 56, y: 86 },
+      { system: 'Clock System', badge: 'CLK', protocol: 'SNMP', health: 'ready', freshness: '3 min', owner: 'ELV Contractor', evidence: 'Ready', x: 18, y: 74 },
+      { system: 'IPBX', badge: 'IPBX', protocol: 'Modbus', health: 'mapped', freshness: '7 min', owner: 'Telecom Partner', evidence: 'Mapped', x: 10, y: 46 },
+      { system: 'Toll / Parking', badge: 'TOLL', protocol: 'API', health: 'watch', freshness: '12 min', owner: 'Parking Vendor', evidence: 'Mapped', x: 91, y: 45 },
+    ],
+    protocolLegend: [
+      { protocol: 'OPC UA', status: 'Ready' },
+      { protocol: 'SNMP', status: 'Ready' },
+      { protocol: 'Modbus', status: 'Mapped' },
+      { protocol: 'BACnet', status: 'Ready' },
+      { protocol: 'OPC TCP/IP', status: 'Degraded' },
+      { protocol: 'API', status: 'Watch' },
+    ],
+    context: [
+      { label: 'Most delayed system', value: 'Radio', status: '18 min freshness delay' },
+      { label: 'Failed connector', value: 'IPTV API lane', status: 'retry queue active' },
+      { label: 'Partner owner', value: 'ELV Integration Partner', status: 'SLA review required' },
+      { label: 'Data contract status', value: 'ELV source schema v1', status: 'mapped' },
+      { label: 'Credential expiry risk', value: 'Access Control API key', status: 'expires in 12 days' },
+      { label: 'Integration evidence', value: 'EV-INT-ELV-042', status: 'export ready' },
+    ],
+    flow: ['Register Source', 'Bind Protocol', 'Validate Data', 'Map Asset', 'Monitor Health', 'Export Evidence'],
+    acceptance: 'This page supports customer review of connected ELV systems, protocol readiness, data freshness, partner responsibility and integration evidence.',
+  }
+}
+
 export function resolveL3ContentConfig(context: L3ContentContext): L3ContentConfig {
   const profile = profileFor(context.l2Id, context.l2Label, context.l1Label)
   const dashboardProfile = dashboardProfileFor(context.l2Id)
@@ -949,6 +1006,30 @@ export function resolveL3ContentConfig(context: L3ContentContext): L3ContentConf
       dashboardWorkbench: {
         ...buildDashboardWorkbench(context, section, dashboardProfile, status),
       },
+    }
+  }
+
+  if (context.l2Id === 'industry-connectors') {
+    const elvTopology = industryConnectorsElvTopology()
+
+    return {
+      title: 'ELV Source System Topology',
+      subtitle: elvTopology.commandSummary,
+      primaryAction: 'View Connector Readiness',
+      sectionEyebrow: 'Integration visual workbench',
+      metrics: elvTopology.signals.slice(0, 4).map((signal) => ({
+        label: signal.label,
+        value: signal.value,
+        note: signal.note,
+      })),
+      rows: elvTopology.flow.map((step, index) => ({
+        item: step,
+        focus: index < 2 ? 'Source registration and protocol binding' : index < 4 ? 'Data validation and asset mapping' : 'Health monitoring and evidence export',
+        status: index === elvTopology.flow.length - 1 ? 'Evidence-ready' : 'Mapped',
+      })),
+      visualWorkspaceMode: true,
+      visualOnlyMode: true,
+      elvTopology,
     }
   }
 
