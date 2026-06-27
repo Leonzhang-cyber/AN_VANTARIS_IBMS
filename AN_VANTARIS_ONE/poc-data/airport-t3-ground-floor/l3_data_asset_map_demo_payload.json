@@ -1,0 +1,582 @@
+{
+  "dataset": {
+    "id": "airport-t3-ground-floor-poc-v1",
+    "name": "Airport T3 Ground Floor Data & Asset Map POC",
+    "source": "W2-TE3-ARC-GROUND FLOOR LAYOUT PLAN Model.pdf",
+    "status": "validated",
+    "scope": "Terminal 3 Ground Floor"
+  },
+  "summary": {
+    "maps": 1,
+    "zones": 7,
+    "spaces": 31,
+    "critical_spaces": 16,
+    "high_spaces": 12,
+    "assets": 26,
+    "point_tags": 23,
+    "events": 5,
+    "work_orders": 5
+  },
+  "decision_signals": [
+    {
+      "label": "Critical Spaces",
+      "value": 16,
+      "meaning": "Spaces requiring immediate operational attention when alarms occur"
+    },
+    {
+      "label": "Mapped Assets",
+      "value": 26,
+      "meaning": "Maintainable assets linked to airport spaces"
+    },
+    {
+      "label": "Live Tags",
+      "value": 23,
+      "meaning": "Source-system points bound to assets and spaces"
+    },
+    {
+      "label": "Open POC Events",
+      "value": 4,
+      "meaning": "Active sample alarms used for POC workflow"
+    }
+  ],
+  "zone_overview": [
+    {
+      "zone_id": "T3-GF-Z02",
+      "zone_name": "Zone-2",
+      "area_type": "Passenger / Baggage Area",
+      "operational_role": "Arrival baggage and passenger movement",
+      "criticality": "high",
+      "space_count": 1,
+      "asset_count": 1
+    },
+    {
+      "zone_id": "T3-GF-Z03",
+      "zone_name": "Zone-3",
+      "area_type": "Passenger / Baggage Area",
+      "operational_role": "Arrival baggage hall operations",
+      "criticality": "high",
+      "space_count": 4,
+      "asset_count": 3
+    },
+    {
+      "zone_id": "T3-GF-Z04",
+      "zone_name": "Zone-4",
+      "area_type": "Public / Meeters-Greeters Area",
+      "operational_role": "Arrival passenger receiving and public movement",
+      "criticality": "medium",
+      "space_count": 1,
+      "asset_count": 0
+    },
+    {
+      "zone_id": "T3-GF-Z05",
+      "zone_name": "Zone-5",
+      "area_type": "Passenger / Baggage Area",
+      "operational_role": "Arrival baggage hall operations",
+      "criticality": "high",
+      "space_count": 3,
+      "asset_count": 1
+    },
+    {
+      "zone_id": "T3-GF-Z06",
+      "zone_name": "Zone-6",
+      "area_type": "Public / Meeters-Greeters Area",
+      "operational_role": "Arrival passenger receiving and public movement",
+      "criticality": "medium",
+      "space_count": 1,
+      "asset_count": 1
+    },
+    {
+      "zone_id": "T3-GF-VIP",
+      "zone_name": "VIP / VVIP Area",
+      "area_type": "VIP / Restricted Area",
+      "operational_role": "VIP arrival and landside service",
+      "criticality": "high",
+      "space_count": 4,
+      "asset_count": 3
+    },
+    {
+      "zone_id": "T3-GF-BOH",
+      "zone_name": "Back of House",
+      "area_type": "Back of House Area",
+      "operational_role": "Airport operations and engineering support",
+      "criticality": "critical",
+      "space_count": 17,
+      "asset_count": 17
+    }
+  ],
+  "critical_space_map": [
+    {
+      "space_id": "SP-T3-GF-001",
+      "space_name": "Arrival Baggage Hall",
+      "zone": "Zone-3",
+      "area_type": "Passenger Area",
+      "system_domain": "BHS",
+      "criticality": "high",
+      "asset_count": 0,
+      "event_count": 0
+    },
+    {
+      "space_id": "SP-T3-GF-002",
+      "space_name": "Arrival Baggage Hall",
+      "zone": "Zone-5",
+      "area_type": "Passenger Area",
+      "system_domain": "BHS",
+      "criticality": "high",
+      "asset_count": 0,
+      "event_count": 0
+    },
+    {
+      "space_id": "SP-T3-GF-004",
+      "space_name": "BHS Server Room",
+      "zone": "Back of House",
+      "area_type": "Back of House",
+      "system_domain": "BHS",
+      "criticality": "critical",
+      "asset_count": 1,
+      "event_count": 1
+    },
+    {
+      "space_id": "SP-T3-GF-005",
+      "space_name": "HBS Server Room",
+      "zone": "Back of House",
+      "area_type": "Back of House",
+      "system_domain": "HBS",
+      "criticality": "critical",
+      "asset_count": 1,
+      "event_count": 0
+    },
+    {
+      "space_id": "SP-T3-GF-006",
+      "space_name": "HBS Control Room",
+      "zone": "Back of House",
+      "area_type": "Back of House",
+      "system_domain": "HBS",
+      "criticality": "critical",
+      "asset_count": 1,
+      "event_count": 0
+    },
+    {
+      "space_id": "SP-T3-GF-007",
+      "space_name": "BHS CCTV Room",
+      "zone": "Back of House",
+      "area_type": "Back of House",
+      "system_domain": "CCTV",
+      "criticality": "critical",
+      "asset_count": 1,
+      "event_count": 0
+    },
+    {
+      "space_id": "SP-T3-GF-008",
+      "space_name": "Security Control Room",
+      "zone": "Back of House",
+      "area_type": "Back of House",
+      "system_domain": "Security",
+      "criticality": "critical",
+      "asset_count": 1,
+      "event_count": 0
+    },
+    {
+      "space_id": "SP-T3-GF-009",
+      "space_name": "Airport Operations Centre",
+      "zone": "Back of House",
+      "area_type": "Back of House",
+      "system_domain": "Operations",
+      "criticality": "critical",
+      "asset_count": 1,
+      "event_count": 0
+    },
+    {
+      "space_id": "SP-T3-GF-010",
+      "space_name": "Fire Command Centre",
+      "zone": "Back of House",
+      "area_type": "Back of House",
+      "system_domain": "Fire Life Safety",
+      "criticality": "critical",
+      "asset_count": 1,
+      "event_count": 0
+    },
+    {
+      "space_id": "SP-T3-GF-011",
+      "space_name": "Rescue Co-ordination Centre RCC",
+      "zone": "Back of House",
+      "area_type": "Back of House",
+      "system_domain": "Emergency Response",
+      "criticality": "critical",
+      "asset_count": 1,
+      "event_count": 0
+    },
+    {
+      "space_id": "SP-T3-GF-012",
+      "space_name": "MDF Room",
+      "zone": "Back of House",
+      "area_type": "Back of House",
+      "system_domain": "ICT",
+      "criticality": "critical",
+      "asset_count": 1,
+      "event_count": 0
+    },
+    {
+      "space_id": "SP-T3-GF-013",
+      "space_name": "Comms Room",
+      "zone": "Back of House",
+      "area_type": "Back of House",
+      "system_domain": "ICT",
+      "criticality": "critical",
+      "asset_count": 1,
+      "event_count": 0
+    },
+    {
+      "space_id": "SP-T3-GF-014",
+      "space_name": "UPS Room",
+      "zone": "Back of House",
+      "area_type": "Back of House",
+      "system_domain": "Electrical / UPS",
+      "criticality": "critical",
+      "asset_count": 1,
+      "event_count": 1
+    },
+    {
+      "space_id": "SP-T3-GF-015",
+      "space_name": "AHU Room",
+      "zone": "Back of House",
+      "area_type": "ACMV Room",
+      "system_domain": "ACMV",
+      "criticality": "high",
+      "asset_count": 1,
+      "event_count": 1
+    },
+    {
+      "space_id": "SP-T3-GF-016",
+      "space_name": "TX Room",
+      "zone": "Back of House",
+      "area_type": "Electrical Room",
+      "system_domain": "Electrical",
+      "criticality": "critical",
+      "asset_count": 1,
+      "event_count": 0
+    },
+    {
+      "space_id": "SP-T3-GF-017",
+      "space_name": "LT Room",
+      "zone": "Back of House",
+      "area_type": "Electrical Room",
+      "system_domain": "Electrical",
+      "criticality": "critical",
+      "asset_count": 1,
+      "event_count": 0
+    },
+    {
+      "space_id": "SP-T3-GF-018",
+      "space_name": "HT Room",
+      "zone": "Back of House",
+      "area_type": "Electrical Room",
+      "system_domain": "Electrical",
+      "criticality": "critical",
+      "asset_count": 1,
+      "event_count": 0
+    },
+    {
+      "space_id": "SP-T3-GF-019",
+      "space_name": "PA Room",
+      "zone": "Back of House",
+      "area_type": "Back of House",
+      "system_domain": "PA",
+      "criticality": "high",
+      "asset_count": 1,
+      "event_count": 0
+    },
+    {
+      "space_id": "SP-T3-GF-020",
+      "space_name": "IP PBX Operator Room",
+      "zone": "Back of House",
+      "area_type": "Back of House",
+      "system_domain": "IP PBX",
+      "criticality": "high",
+      "asset_count": 1,
+      "event_count": 0
+    },
+    {
+      "space_id": "SP-T3-GF-021",
+      "space_name": "VIP Arrival Reception Lounge",
+      "zone": "VIP / VVIP Area",
+      "area_type": "VIP Area",
+      "system_domain": "VIP Operations",
+      "criticality": "high",
+      "asset_count": 2,
+      "event_count": 1
+    },
+    {
+      "space_id": "SP-T3-GF-022",
+      "space_name": "VIP Landside Drop-off",
+      "zone": "VIP / VVIP Area",
+      "area_type": "VIP Area",
+      "system_domain": "VIP Operations",
+      "criticality": "high",
+      "asset_count": 0,
+      "event_count": 0
+    },
+    {
+      "space_id": "SP-T3-GF-023",
+      "space_name": "VIP Landside Pick-up",
+      "zone": "VIP / VVIP Area",
+      "area_type": "VIP Area",
+      "system_domain": "VIP Operations",
+      "criticality": "high",
+      "asset_count": 0,
+      "event_count": 0
+    },
+    {
+      "space_id": "SP-T3-GF-024",
+      "space_name": "VVIP Reception Hall",
+      "zone": "VIP / VVIP Area",
+      "area_type": "VVIP Area",
+      "system_domain": "VVIP Operations",
+      "criticality": "critical",
+      "asset_count": 1,
+      "event_count": 0
+    },
+    {
+      "space_id": "SP-T3-GF-025",
+      "space_name": "Baggage Reconciliation Room",
+      "zone": "Zone-3",
+      "area_type": "Back of House",
+      "system_domain": "BHS",
+      "criticality": "critical",
+      "asset_count": 1,
+      "event_count": 0
+    },
+    {
+      "space_id": "SP-T3-GF-026",
+      "space_name": "Baggage Breakdown",
+      "zone": "Zone-3",
+      "area_type": "Back of House",
+      "system_domain": "BHS",
+      "criticality": "high",
+      "asset_count": 1,
+      "event_count": 1
+    },
+    {
+      "space_id": "SP-T3-GF-027",
+      "space_name": "Baggage Makeup",
+      "zone": "Zone-3",
+      "area_type": "Back of House",
+      "system_domain": "BHS",
+      "criticality": "high",
+      "asset_count": 1,
+      "event_count": 0
+    },
+    {
+      "space_id": "SP-T3-GF-030",
+      "space_name": "East Remote Departure Gate Lounge",
+      "zone": "Zone-6",
+      "area_type": "Passenger Area",
+      "system_domain": "Passenger Operations",
+      "criticality": "high",
+      "asset_count": 1,
+      "event_count": 0
+    },
+    {
+      "space_id": "SP-T3-GF-031",
+      "space_name": "West Remote Departure Gate Lounge",
+      "zone": "Zone-2",
+      "area_type": "Passenger Area",
+      "system_domain": "Passenger Operations",
+      "criticality": "high",
+      "asset_count": 1,
+      "event_count": 0
+    }
+  ],
+  "system_domain_summary": [
+    {
+      "system_domain": "BHS",
+      "asset_count": 4
+    },
+    {
+      "system_domain": "CCTV",
+      "asset_count": 3
+    },
+    {
+      "system_domain": "Electrical",
+      "asset_count": 3
+    },
+    {
+      "system_domain": "HBS",
+      "asset_count": 2
+    },
+    {
+      "system_domain": "ICT",
+      "asset_count": 2
+    },
+    {
+      "system_domain": "Passenger Operations",
+      "asset_count": 2
+    },
+    {
+      "system_domain": "Security",
+      "asset_count": 1
+    },
+    {
+      "system_domain": "Operations",
+      "asset_count": 1
+    },
+    {
+      "system_domain": "Fire Life Safety",
+      "asset_count": 1
+    },
+    {
+      "system_domain": "Emergency Response",
+      "asset_count": 1
+    },
+    {
+      "system_domain": "Electrical / UPS",
+      "asset_count": 1
+    },
+    {
+      "system_domain": "ACMV",
+      "asset_count": 1
+    },
+    {
+      "system_domain": "PA",
+      "asset_count": 1
+    },
+    {
+      "system_domain": "IP PBX",
+      "asset_count": 1
+    },
+    {
+      "system_domain": "Access Control",
+      "asset_count": 1
+    },
+    {
+      "system_domain": "Baggage Services",
+      "asset_count": 1
+    }
+  ],
+  "sample_event_workflows": [
+    {
+      "event_id": "EVT-T3-GF-0001",
+      "event_title": "BHS Server Alarm",
+      "severity": "critical",
+      "status": "open",
+      "space": "BHS Server Room",
+      "asset": "BHS Application Server",
+      "operational_impact": "Potential baggage handling disruption at arrival baggage hall",
+      "recommended_action": "Dispatch BHS engineer and verify server health",
+      "work_orders": [
+        {
+          "work_order_id": "WO-T3-GF-0001",
+          "event_id": "EVT-T3-GF-0001",
+          "priority": "P1",
+          "status": "assigned",
+          "asset_id": "AST-T3-GF-BHS-SRV-001",
+          "space_id": "SP-T3-GF-004",
+          "assigned_team": "BHS Engineer",
+          "sla_minutes": "30",
+          "work_title": "Investigate BHS Server Alarm",
+          "route_hint": "Back of House -> BHS Server Room",
+          "evidence_required": "Server health screenshot; action log; closure photo"
+        }
+      ]
+    },
+    {
+      "event_id": "EVT-T3-GF-0002",
+      "event_title": "AHU Fault Alarm",
+      "severity": "high",
+      "status": "open",
+      "space": "AHU Room",
+      "asset": "AHU Unit",
+      "operational_impact": "Possible comfort impact to adjacent passenger and BOH areas",
+      "recommended_action": "Dispatch ACMV technician and inspect AHU",
+      "work_orders": [
+        {
+          "work_order_id": "WO-T3-GF-0002",
+          "event_id": "EVT-T3-GF-0002",
+          "priority": "P2",
+          "status": "assigned",
+          "asset_id": "AST-T3-GF-AHU-001",
+          "space_id": "SP-T3-GF-015",
+          "assigned_team": "ACMV Technician",
+          "sla_minutes": "60",
+          "work_title": "Inspect AHU Fault",
+          "route_hint": "Back of House -> AHU Room",
+          "evidence_required": "BMS trend; panel photo; fault reset record"
+        }
+      ]
+    },
+    {
+      "event_id": "EVT-T3-GF-0003",
+      "event_title": "UPS On Battery",
+      "severity": "critical",
+      "status": "acknowledged",
+      "space": "UPS Room",
+      "asset": "UPS System",
+      "operational_impact": "Critical backup power condition affecting ICT/BHS rooms",
+      "recommended_action": "Check incoming power and UPS runtime",
+      "work_orders": [
+        {
+          "work_order_id": "WO-T3-GF-0003",
+          "event_id": "EVT-T3-GF-0003",
+          "priority": "P1",
+          "status": "assigned",
+          "asset_id": "AST-T3-GF-UPS-001",
+          "space_id": "SP-T3-GF-014",
+          "assigned_team": "Electrical Engineer",
+          "sla_minutes": "30",
+          "work_title": "Verify UPS On Battery Condition",
+          "route_hint": "Back of House -> UPS Room",
+          "evidence_required": "UPS runtime; battery status; incoming power status"
+        }
+      ]
+    },
+    {
+      "event_id": "EVT-T3-GF-0004",
+      "event_title": "VIP Access Door Forced",
+      "severity": "high",
+      "status": "open",
+      "space": "VIP Arrival Reception Lounge",
+      "asset": "VIP Lounge Access Door",
+      "operational_impact": "Security risk at VIP reception area",
+      "recommended_action": "Dispatch security and verify access event",
+      "work_orders": [
+        {
+          "work_order_id": "WO-T3-GF-0004",
+          "event_id": "EVT-T3-GF-0004",
+          "priority": "P2",
+          "status": "assigned",
+          "asset_id": "AST-T3-GF-VIP-ACS-001",
+          "space_id": "SP-T3-GF-021",
+          "assigned_team": "Security Technician",
+          "sla_minutes": "45",
+          "work_title": "Check VIP Access Door Forced Alarm",
+          "route_hint": "VIP Area -> VIP Arrival Reception Lounge",
+          "evidence_required": "ACS event log; door status photo; security confirmation"
+        }
+      ]
+    },
+    {
+      "event_id": "EVT-T3-GF-0005",
+      "event_title": "Baggage Breakdown Conveyor Fault",
+      "severity": "high",
+      "status": "open",
+      "space": "Baggage Breakdown",
+      "asset": "Baggage Breakdown Conveyor",
+      "operational_impact": "Potential baggage flow delay",
+      "recommended_action": "Dispatch BHS maintenance and prepare manual handling contingency",
+      "work_orders": [
+        {
+          "work_order_id": "WO-T3-GF-0005",
+          "event_id": "EVT-T3-GF-0005",
+          "priority": "P2",
+          "status": "assigned",
+          "asset_id": "AST-T3-GF-BAG-BD-001",
+          "space_id": "SP-T3-GF-026",
+          "assigned_team": "BHS Maintenance",
+          "sla_minutes": "45",
+          "work_title": "Inspect Baggage Breakdown Conveyor",
+          "route_hint": "Arrival Baggage Hall -> Baggage Breakdown Area",
+          "evidence_required": "Conveyor status; motor panel photo; test run evidence"
+        }
+      ]
+    }
+  ]
+}
