@@ -27,6 +27,8 @@ EXPECTED_ENDPOINTS = {
     "EVIDENCE_INVESTIGATION": "/api/v1/one/airport/console/evidence-investigation",
     "REPORTS": "/api/v1/one/airport/console/reports",
 }
+DATA_ASSET_MAP_PATH = "/api/v1/one/airport/console/data-asset-map"
+ALL_EXPECTED_PATHS = set(EXPECTED_ENDPOINTS.values()) | {DATA_ASSET_MAP_PATH}
 EXPECTED_PAYLOAD_KEYS = {
     "platform",
     "industryProjection",
@@ -136,17 +138,55 @@ class AirportGaReadOnlyApiTest(unittest.TestCase):
                 self.assertIn("facets", payload)
                 self.assertIn("pagination", payload)
 
+    def test_data_asset_map_returns_readonly_projection_payload(self) -> None:
+        response = self.client.get(DATA_ASSET_MAP_PATH)
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.is_json)
+        body = response.get_json()
+        self.assertEqual(body["code"], 200)
+        payload = body["data"]
+        self.assertEqual(set(payload), EXPECTED_PAYLOAD_KEYS)
+        self.assertEqual(payload["platform"], "VANTARIS ONE")
+        self.assertEqual(payload["industryProjection"], "airport")
+        self.assertEqual(payload["endpointKey"], "DATA_ASSET_MAP")
+        self.assertEqual(payload["route"], DATA_ASSET_MAP_PATH)
+        self.assertEqual(payload["method"], "GET")
+        self.assertTrue(payload["readOnly"])
+        self.assertFalse(payload["productionActivation"])
+        self.assertFalse(payload["runtimeActivation"])
+        self.assertFalse(payload["databaseAccess"])
+        self.assertFalse(payload["dbWrite"])
+        self.assertFalse(payload["approvalExecution"])
+        self.assertFalse(payload["customerIdentifierLeakage"])
+        self.assertEqual(payload["source"]["type"], "local_projection_artifact")
+        self.assertEqual(payload["source"]["path"], self.module.DATA_ASSET_MAP_PATH)
+        self.assertEqual(payload["source"]["authority"], "ONE_AIRPORT_DATA_ASSET_MAP_GA_R2A")
+        self.assertNotIn("/Users/", json.dumps(payload["source"], sort_keys=True))
+        self.assertEqual(payload["summary"]["maps"], 1)
+        self.assertEqual(payload["summary"]["zones"], 7)
+        self.assertEqual(payload["summary"]["spaces"], 31)
+        self.assertEqual(payload["summary"]["assets"], 26)
+        self.assertEqual(payload["summary"]["point_tags"], 23)
+        self.assertEqual(payload["data"]["dataset"]["id"], "airport-t3-ground-floor-poc-v1")
+        self.assertIn("zone_overview", payload["data"])
+        self.assertIn("critical_space_map", payload["data"])
+        self.assertIn("sample_event_workflows", payload["data"])
+        serialized = json.dumps(body, sort_keys=True)
+        self.assertIn('"asset_id"', serialized)
+        self.assertIn('"space_id"', serialized)
+        self.assertIn('"event_id"', serialized)
+        self.assertIn('"work_order_id"', serialized)
+
     def test_non_get_methods_are_not_implemented(self) -> None:
-        for path in EXPECTED_ENDPOINTS.values():
+        for path in ALL_EXPECTED_PATHS:
             with self.subTest(path=path):
                 for method in ("post", "put", "patch", "delete"):
                     response = getattr(self.client, method)(path)
                     self.assertEqual(response.status_code, 405)
 
     def test_routes_are_get_only_in_flask_rule_table(self) -> None:
-        frozen_paths = set(EXPECTED_ENDPOINTS.values())
-        route_rules = [rule for rule in self.app.url_map.iter_rules() if rule.rule in frozen_paths]
-        self.assertEqual(len(route_rules), 8)
+        route_rules = [rule for rule in self.app.url_map.iter_rules() if rule.rule in ALL_EXPECTED_PATHS]
+        self.assertEqual(len(route_rules), 9)
         for rule in route_rules:
             declared_methods = set(rule.methods or set()) - {"HEAD", "OPTIONS"}
             self.assertEqual(declared_methods, {"GET"})
@@ -171,7 +211,7 @@ class AirportGaReadOnlyApiTest(unittest.TestCase):
 
     def test_no_customer_identifier_leakage(self) -> None:
         serialized_responses = []
-        for path in EXPECTED_ENDPOINTS.values():
+        for path in ALL_EXPECTED_PATHS:
             body = self.client.get(path).get_json()
             serialized_responses.append(json.dumps(body, sort_keys=True))
         serialized = "\n".join(serialized_responses)

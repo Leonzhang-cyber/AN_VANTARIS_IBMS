@@ -21,6 +21,7 @@ from src.common.models.response import Result
 
 RELEASE_CANDIDATE = "airport-international-ga-ready-readonly-rc-20260620"
 SKELETON_PATH = "AN_VANTARIS_ONE/industry_profiles/airport/projections/airport-read-only-api-skeleton.v1.json"
+DATA_ASSET_MAP_PATH = "AN_VANTARIS_ONE/poc-data/airport-t3-ground-floor/l3_data_asset_map_demo_payload.json"
 ONE_ARTIFACT_PREFIX = "AN_VANTARIS_ONE/"
 FORBIDDEN_IDENTIFIER_KEYS = {"customerAssetIdentifier", "assetId", "deviceId"}
 ROOT_KEY_COMPATIBILITY_ALIASES = {
@@ -155,6 +156,39 @@ def _read_endpoint_payload(endpoint_key: str) -> dict[str, Any]:
     }
 
 
+def _read_data_asset_map_payload() -> dict[str, Any]:
+    route_path = "/api/v1/one/airport/console/data-asset-map"
+    artifact = _load_json(DATA_ASSET_MAP_PATH)
+    data = _sanitize(artifact)
+    summary = _sanitize(artifact.get("summary", {}))
+    return {
+        "platform": "VANTARIS ONE",
+        "industryProjection": "airport",
+        "releaseCandidate": RELEASE_CANDIDATE,
+        "endpointKey": "DATA_ASSET_MAP",
+        "route": route_path,
+        "method": "GET",
+        "readOnly": True,
+        "productionActivation": False,
+        "runtimeActivation": False,
+        "databaseAccess": False,
+        "dbWrite": False,
+        "approvalExecution": False,
+        "customerIdentifierLeakage": False,
+        "source": {
+            "type": "local_projection_artifact",
+            "path": DATA_ASSET_MAP_PATH,
+            "rootKey": "$",
+            "authority": "ONE_AIRPORT_DATA_ASSET_MAP_GA_R2A",
+        },
+        "summary": summary,
+        "data": data,
+        "filters": [],
+        "facets": [],
+        "pagination": _default_page(data),
+    }
+
+
 def _success(endpoint_key: str):
     return Result.success(data=_read_endpoint_payload(endpoint_key))
 
@@ -213,6 +247,11 @@ def airport_ga_readonly_systems_integration_health():
 @api_bp.route("/v1/one/airport/console/assets-topology", methods=["GET"])
 def airport_ga_readonly_assets_topology():
     return _handle("ASSETS_TOPOLOGY")
+
+
+@api_bp.route("/v1/one/airport/console/data-asset-map", methods=["GET"])
+def airport_ga_readonly_data_asset_map():
+    return Result.success(data=_read_data_asset_map_payload())
 
 
 @api_bp.route("/v1/one/airport/console/alarms-events", methods=["GET"])
