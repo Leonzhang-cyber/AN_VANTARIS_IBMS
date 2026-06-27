@@ -1,0 +1,1746 @@
+{
+  "report_id": "ONE_ASSET_IMPORT_GA_R1_QUALITY_REPORT",
+  "generated_at": "2026-06-27T12:31:59.478658+00:00",
+  "source_file_profiles": [
+    {
+      "file_name": "Asset Database Zonewise_Basement_SH_030626.xlsx",
+      "file_hash_sha256": "d20f788a82f6fa8382e90079d64a6c12d8b67cc9b2073906977677c06ab7dfa3",
+      "records": 470
+    },
+    {
+      "file_name": "Asset Database Zonewise_Ground Floor_SH_220626.xlsx",
+      "file_hash_sha256": "980fad9d423deeec4a017c421d1870e1b0208340b917d47e1cf7215b6ac2b322",
+      "records": 4717
+    }
+  ],
+  "summary": {
+    "total_records": 5187,
+    "source_files": [
+      "Asset Database Zonewise_Basement_SH_030626.xlsx",
+      "Asset Database Zonewise_Ground Floor_SH_220626.xlsx"
+    ],
+    "sheet_count": 8,
+    "level_count": 4,
+    "zone_count": 8,
+    "system_count": 7,
+    "device_type_count": 78,
+    "location_count": 406,
+    "blocker_count": 2,
+    "major_count": 1,
+    "warning_count": 7,
+    "info_count": 0,
+    "readiness": "HOLD_BLOCKED"
+  },
+  "alert": {
+    "title": "Asset Import Quality Check",
+    "message": "Customer asset workbook has been parsed and validated. Review the quality report before import.",
+    "readiness": "HOLD_BLOCKED",
+    "confirm_enabled": false,
+    "requires_review": true,
+    "requires_second_confirmation": true,
+    "action_labels": [
+      "Cancel Import",
+      "Download Quality Report",
+      "Review Issues",
+      "Confirm Import"
+    ]
+  },
+  "system_summary": [
+    [
+      "PA",
+      2553
+    ],
+    [
+      "ACS",
+      989
+    ],
+    [
+      "CCTV",
+      878
+    ],
+    [
+      "TEL",
+      614
+    ],
+    [
+      "RAS",
+      68
+    ],
+    [
+      "IPTV",
+      63
+    ],
+    [
+      "MCS",
+      22
+    ]
+  ],
+  "level_summary": [
+    [
+      "GRD",
+      4731
+    ],
+    [
+      "BAS",
+      447
+    ],
+    [
+      "1ST",
+      5
+    ],
+    [
+      "2ND",
+      4
+    ]
+  ],
+  "zone_summary": [
+    [
+      "Z5",
+      1016
+    ],
+    [
+      "Z3",
+      980
+    ],
+    [
+      "Z2",
+      971
+    ],
+    [
+      "Z8",
+      574
+    ],
+    [
+      "Z7",
+      572
+    ],
+    [
+      "Z1",
+      476
+    ],
+    [
+      "Z4",
+      331
+    ],
+    [
+      "Z6",
+      267
+    ]
+  ],
+  "device_type_summary": [
+    [
+      "Ceiling Speaker",
+      1941
+    ],
+    [
+      "Fixed Camera",
+      702
+    ],
+    [
+      "IP Telephone",
+      581
+    ],
+    [
+      "Electro Magnetic Lock",
+      327
+    ],
+    [
+      "Horn Speaker",
+      213
+    ],
+    [
+      "Intelligent Controller",
+      197
+    ],
+    [
+      "Emergency Break Glass",
+      189
+    ],
+    [
+      "Box Speaker",
+      141
+    ],
+    [
+      "IN Card Reader",
+      123
+    ],
+    [
+      "PTZ Camera",
+      107
+    ],
+    [
+      "Amplifier",
+      70
+    ],
+    [
+      "Push Button",
+      55
+    ],
+    [
+      "OUT Card Reader",
+      52
+    ],
+    [
+      "Radio Antenna",
+      49
+    ],
+    [
+      "Projection Speaker",
+      49
+    ],
+    [
+      "Line Array Speaker",
+      44
+    ],
+    [
+      "Noise Sensor",
+      36
+    ],
+    [
+      "Workstation",
+      33
+    ],
+    [
+      "CCTV Decoder",
+      22
+    ],
+    [
+      "STB+TV",
+      19
+    ],
+    [
+      "Turnstile",
+      18
+    ],
+    [
+      "Key Switch",
+      16
+    ],
+    [
+      "NVR",
+      13
+    ],
+    [
+      "Standby Amplifier",
+      12
+    ],
+    [
+      "Omneo Interface",
+      11
+    ],
+    [
+      "Network Controller",
+      11
+    ],
+    [
+      "2-Way Splitter",
+      10
+    ],
+    [
+      "Standard Call Station",
+      10
+    ],
+    [
+      "SINGLE SIDED SLAVE CLOCK",
+      9
+    ],
+    [
+      "Media Converter",
+      8
+    ],
+    [
+      "FRS Server",
+      8
+    ],
+    [
+      "8-Way Splitter",
+      8
+    ],
+    [
+      "Maestro Server",
+      7
+    ],
+    [
+      "3-Way Splitter",
+      6
+    ],
+    [
+      "Basic Call Station",
+      6
+    ],
+    [
+      "FO Receiver",
+      6
+    ],
+    [
+      "DOUBLE SIDED SLAVE CLOCK",
+      4
+    ],
+    [
+      "ISDN GATEWAY",
+      4
+    ],
+    [
+      "Server",
+      4
+    ],
+    [
+      "4-Way Splitter",
+      4
+    ],
+    [
+      "10 db Directional Coupler",
+      3
+    ],
+    [
+      "Master Call Station",
+      3
+    ],
+    [
+      "PC Call Station",
+      3
+    ],
+    [
+      "ANALOG GATEWAY",
+      3
+    ],
+    [
+      "Processing Module",
+      3
+    ],
+    [
+      "Edge Switch",
+      3
+    ],
+    [
+      "OUTLET",
+      2
+    ],
+    [
+      "DTS 4160 SERVER",
+      2
+    ],
+    [
+      "Network Programmable Relay",
+      2
+    ],
+    [
+      "NEC SV9500 IP PABX Server",
+      2
+    ],
+    [
+      "Alarm Indicator Unit",
+      2
+    ],
+    [
+      "OPERATOR CONSOLE SERVER",
+      2
+    ],
+    [
+      "CALL ACCOUNTING SERVER",
+      2
+    ],
+    [
+      "VOICEMAIL SERVER",
+      2
+    ],
+    [
+      "CONFERENCE GATEWAY",
+      2
+    ],
+    [
+      "SIP GATEWAY",
+      2
+    ],
+    [
+      "FAX SERVER",
+      2
+    ],
+    [
+      "Dimetra Server",
+      2
+    ],
+    [
+      "6 db Directional Coupler",
+      1
+    ],
+    [
+      "Tetra Micro Repeater",
+      1
+    ],
+    [
+      "Cisco CBS350-16T-E-2G Switch",
+      1
+    ],
+    [
+      "KVM Switch",
+      1
+    ],
+    [
+      "DVD Player",
+      1
+    ],
+    [
+      "HDMI Modulator",
+      1
+    ],
+    [
+      "Mounting Kit",
+      1
+    ],
+    [
+      "Processing Module Power Supply Unit",
+      1
+    ],
+    [
+      "Fiber Optic Patch Panel",
+      1
+    ],
+    [
+      "Radio Base Station",
+      1
+    ],
+    [
+      "10 dB High Directional Coupler",
+      1
+    ],
+    [
+      "3-Way High Power Splitter",
+      1
+    ],
+    [
+      "Application Server Primary",
+      1
+    ],
+    [
+      "Application Server Standby",
+      1
+    ],
+    [
+      "Database Server Primary",
+      1
+    ],
+    [
+      "Database Server Standby",
+      1
+    ],
+    [
+      "Printer",
+      1
+    ],
+    [
+      "Audio Expander",
+      1
+    ],
+    [
+      "FM Tuner",
+      1
+    ],
+    [
+      "Disk Media Player",
+      1
+    ]
+  ],
+  "location_summary": [
+    [
+      "BAGGAGE CLAIM HALL",
+      348
+    ],
+    [
+      "BHS AREA",
+      274
+    ],
+    [
+      "BAGGAGE CLAIM AREA",
+      230
+    ],
+    [
+      "OFFICE",
+      193
+    ],
+    [
+      "WEST REMOTE DEPARTURE GATE LOUNGE",
+      125
+    ],
+    [
+      "DA ROOM",
+      117
+    ],
+    [
+      "ARRIVAL KERBSIDE",
+      109
+    ],
+    [
+      "MEETERS GREETERS HALL",
+      106
+    ],
+    [
+      "AIRPORT OPERATION CENTER",
+      105
+    ],
+    [
+      "EAST REMOTE DEPARTURE GATE LOUNGE",
+      103
+    ],
+    [
+      "COMMS EQUIPMENT ROOM - 1",
+      88
+    ],
+    [
+      "SECURITY CONTROL ROOM",
+      85
+    ],
+    [
+      "VIP KERBSIDE",
+      79
+    ],
+    [
+      "BAGGAGE BREAKDOWN",
+      77
+    ],
+    [
+      "BAGGAGE MAKEUP",
+      75
+    ],
+    [
+      "DUTY FREE",
+      68
+    ],
+    [
+      "EAST REMOTE DEPT GATE LOUNGE",
+      64
+    ],
+    [
+      "OFFICE 92",
+      59
+    ],
+    [
+      "OFFICE 88",
+      57
+    ],
+    [
+      "MEETERS AND GREETERS HALL",
+      54
+    ],
+    [
+      "UPS ROOM",
+      50
+    ],
+    [
+      "CUSTOMS OFFICE",
+      49
+    ],
+    [
+      "STAFF ENTRY",
+      49
+    ],
+    [
+      "LT ROOM",
+      46
+    ],
+    [
+      "BAGGAGE MARKUP",
+      45
+    ],
+    [
+      "OFFICE 56",
+      44
+    ],
+    [
+      "TOURIST SERVICE COUNTERS",
+      43
+    ],
+    [
+      "REMOTE ARRIVAL LOUNGE",
+      42
+    ],
+    [
+      "CUSTOMS",
+      40
+    ],
+    [
+      "REMOTE ARRIVALS LOUNGE",
+      40
+    ],
+    [
+      "BAGGAGE MAKEUP AREA",
+      37
+    ],
+    [
+      "MEETERS-GREETERS HALL",
+      36
+    ],
+    [
+      "CUSTOM AREA",
+      36
+    ],
+    [
+      "BASEMENT SERVICE ROAD",
+      35
+    ],
+    [
+      "STAFF ENTRY & EXIT",
+      33
+    ],
+    [
+      "WEST REMOTE DEPARTURE GATE",
+      32
+    ],
+    [
+      "TX ROOM",
+      31
+    ],
+    [
+      "M (PAX)",
+      31
+    ],
+    [
+      "",
+      31
+    ],
+    [
+      "SECURITY CHECK AREA",
+      30
+    ],
+    [
+      "HT ROOM",
+      28
+    ],
+    [
+      "STAFF EXIT",
+      28
+    ],
+    [
+      "F (PAX)",
+      26
+    ],
+    [
+      "ENTOURAGE/VIP DEPARTURE LOUNGE",
+      26
+    ],
+    [
+      "VVIP AREA",
+      24
+    ],
+    [
+      "COMMS EQUIPMENT ROOM - 2",
+      24
+    ],
+    [
+      "COOLING TOWER MCC",
+      24
+    ],
+    [
+      "SECURITY CHECK",
+      23
+    ],
+    [
+      "BASEMET SERVICE ROAD",
+      23
+    ],
+    [
+      "BAGGAGE RECONCILIATION ROOM",
+      23
+    ],
+    [
+      "BAG STORE",
+      23
+    ],
+    [
+      "VIP ARRIVAL RECEPTION LOUNGE",
+      22
+    ],
+    [
+      "ARRIVAL ROAD",
+      22
+    ],
+    [
+      "COMMUNICATION ENGINEERING OFFICE ROOM",
+      22
+    ],
+    [
+      "LOST AND FOUND SERVICES",
+      22
+    ],
+    [
+      "VIP CHECK-IN",
+      21
+    ],
+    [
+      "CORRIDOR",
+      21
+    ],
+    [
+      "HOLD BAGGAGE SCREENING CONTROL ROOM",
+      20
+    ],
+    [
+      "BHS CONTROL & BHS CCTV RM",
+      20
+    ],
+    [
+      "STORE",
+      19
+    ],
+    [
+      "UTILITY ROOM",
+      19
+    ],
+    [
+      "EXIT PASSAGEWAY",
+      18
+    ],
+    [
+      "RESCUE COORDINATION CENTRE",
+      18
+    ],
+    [
+      "C RM",
+      17
+    ],
+    [
+      "AHU ROOM",
+      16
+    ],
+    [
+      "EARLY BAGGAGE STORAGE",
+      16
+    ],
+    [
+      "VIP RECEPTION HALL",
+      16
+    ],
+    [
+      "VIP ARRIVAL DROP-OFF",
+      16
+    ],
+    [
+      "MEETERS & GREETERS HALL",
+      16
+    ],
+    [
+      "TRANSFORMER ROOM",
+      15
+    ],
+    [
+      "LC ROOM",
+      15
+    ],
+    [
+      "AIRSIDE DISPOSAL LOBBY",
+      15
+    ],
+    [
+      "VIP BAG ROOM",
+      15
+    ],
+    [
+      "MONEY CHANGER",
+      15
+    ],
+    [
+      "LANDSIDE DISPOSAL LOBBY",
+      14
+    ],
+    [
+      "HALLWAY",
+      14
+    ],
+    [
+      "EAST WALK",
+      14
+    ],
+    [
+      "ARRIVAL IMMIGRATION",
+      13
+    ],
+    [
+      "BAGGAGE SCREENING ROOM",
+      13
+    ],
+    [
+      "AVSEC DEPLOYMENT OFFICE",
+      13
+    ],
+    [
+      "WEST WALK WAY",
+      13
+    ],
+    [
+      "AIRPORT PASS OFFICE",
+      13
+    ],
+    [
+      "AIRPORT PASS PROCESS OFFICE",
+      13
+    ],
+    [
+      "WATER TANKS & PUMPS ROOM",
+      12
+    ],
+    [
+      "FIRE TANKS & PUMPS ROOM",
+      12
+    ],
+    [
+      "STC-E5",
+      12
+    ],
+    [
+      "LT/ CHILLER PLANT MCC",
+      12
+    ],
+    [
+      "PUMPS, CHILLS PLANT AND CHILLERS",
+      12
+    ],
+    [
+      "BHS SWITCH BOARD ROOM",
+      12
+    ],
+    [
+      "LOST & FOUND BAGGAGE SERVICES",
+      12
+    ],
+    [
+      "HT CABLE ROOM",
+      12
+    ],
+    [
+      "FIRE COMMAND CENTER",
+      12
+    ],
+    [
+      "UPS ROOM FUTURE",
+      12
+    ],
+    [
+      "BHS CONTROL AND BHS CCTV ROOM",
+      12
+    ],
+    [
+      "EXIT PASSAGE WAY",
+      11
+    ],
+    [
+      "LEFT BAG OFFICE/ STORE",
+      11
+    ],
+    [
+      "PUBLIC ENTRY",
+      11
+    ],
+    [
+      "INV",
+      10
+    ],
+    [
+      "MINISTER/HIGH OFFICIAL LOUNGE",
+      10
+    ],
+    [
+      "ARRIVAL FORECOURT",
+      10
+    ]
+  ],
+  "issues": [
+    {
+      "severity": "MAJOR",
+      "category": "required_field",
+      "message": "Missing required field: Location",
+      "count": 31,
+      "sample": [
+        {
+          "source_file": "Asset Database Zonewise_Ground Floor_SH_220626.xlsx",
+          "sheet": "Zone-1",
+          "row": 278,
+          "SL": "277",
+          "Device ID": "TE3-PAS-GRD-DA11-NOS-001",
+          "Building": "TE3",
+          "Level": "GRD",
+          "Zone": "Z1",
+          "System": "PA",
+          "Location": "",
+          "Device Type": "Noise Sensor"
+        },
+        {
+          "source_file": "Asset Database Zonewise_Ground Floor_SH_220626.xlsx",
+          "sheet": "Zone-1",
+          "row": 279,
+          "SL": "278",
+          "Device ID": "TE3-PAS-GRD-DA11-NOS-002",
+          "Building": "TE3",
+          "Level": "GRD",
+          "Zone": "Z1",
+          "System": "PA",
+          "Location": "",
+          "Device Type": "Noise Sensor"
+        },
+        {
+          "source_file": "Asset Database Zonewise_Ground Floor_SH_220626.xlsx",
+          "sheet": "Zone-2",
+          "row": 665,
+          "SL": "664",
+          "Device ID": "TE3-PAS-GRD-DA22-NOS-001",
+          "Building": "TE3",
+          "Level": "GRD",
+          "Zone": "Z2",
+          "System": "PA",
+          "Location": "",
+          "Device Type": "Noise Sensor"
+        },
+        {
+          "source_file": "Asset Database Zonewise_Ground Floor_SH_220626.xlsx",
+          "sheet": "Zone-2",
+          "row": 666,
+          "SL": "665",
+          "Device ID": "TE3-PAS-GRD-DA22-NOS-002",
+          "Building": "TE3",
+          "Level": "GRD",
+          "Zone": "Z2",
+          "System": "PA",
+          "Location": "",
+          "Device Type": "Noise Sensor"
+        },
+        {
+          "source_file": "Asset Database Zonewise_Ground Floor_SH_220626.xlsx",
+          "sheet": "Zone-2",
+          "row": 667,
+          "SL": "666",
+          "Device ID": "TE3-PAS-GRD-DA22-NOS-003",
+          "Building": "TE3",
+          "Level": "GRD",
+          "Zone": "Z2",
+          "System": "PA",
+          "Location": "",
+          "Device Type": "Noise Sensor"
+        },
+        {
+          "source_file": "Asset Database Zonewise_Ground Floor_SH_220626.xlsx",
+          "sheet": "Zone-2",
+          "row": 668,
+          "SL": "667",
+          "Device ID": "TE3-PAS-GRD-DA22-NOS-005",
+          "Building": "TE3",
+          "Level": "GRD",
+          "Zone": "Z2",
+          "System": "PA",
+          "Location": "",
+          "Device Type": "Noise Sensor"
+        },
+        {
+          "source_file": "Asset Database Zonewise_Ground Floor_SH_220626.xlsx",
+          "sheet": "Zone-2",
+          "row": 669,
+          "SL": "668",
+          "Device ID": "TE3-PAS-GRD-DA22-NOS-006",
+          "Building": "TE3",
+          "Level": "GRD",
+          "Zone": "Z2",
+          "System": "PA",
+          "Location": "",
+          "Device Type": "Noise Sensor"
+        },
+        {
+          "source_file": "Asset Database Zonewise_Ground Floor_SH_220626.xlsx",
+          "sheet": "Zone-2",
+          "row": 670,
+          "SL": "669",
+          "Device ID": "TE3-PAS-GRD-DA22-NOS-007",
+          "Building": "TE3",
+          "Level": "GRD",
+          "Zone": "Z2",
+          "System": "PA",
+          "Location": "",
+          "Device Type": "Noise Sensor"
+        },
+        {
+          "source_file": "Asset Database Zonewise_Ground Floor_SH_220626.xlsx",
+          "sheet": "Zone-3",
+          "row": 909,
+          "SL": "908",
+          "Device ID": "TE3-PAS-GRD-DA21-NOS-001",
+          "Building": "TE3",
+          "Level": "GRD",
+          "Zone": "Z3",
+          "System": "PA",
+          "Location": "",
+          "Device Type": "Noise Sensor"
+        },
+        {
+          "source_file": "Asset Database Zonewise_Ground Floor_SH_220626.xlsx",
+          "sheet": "Zone-3",
+          "row": 910,
+          "SL": "909",
+          "Device ID": "TE3-PAS-GRD-DA21-NOS-002",
+          "Building": "TE3",
+          "Level": "GRD",
+          "Zone": "Z3",
+          "System": "PA",
+          "Location": "",
+          "Device Type": "Noise Sensor"
+        }
+      ]
+    },
+    {
+      "severity": "BLOCKER",
+      "category": "duplicate_device_id",
+      "message": "Duplicate Device ID detected",
+      "count": 40,
+      "sample": [
+        {
+          "Device ID": "TE3-PAS-BAS-DA21-HSP-032",
+          "source_file": "Asset Database Zonewise_Basement_SH_030626.xlsx",
+          "sheet": "Zone-1",
+          "row": 145,
+          "System": "PA",
+          "Location": "BASEMENT SERVICE ROAD",
+          "Device Type": "Horn Speaker"
+        },
+        {
+          "Device ID": "TE3-PAS-BAS-DA21-HSP-032",
+          "source_file": "Asset Database Zonewise_Basement_SH_030626.xlsx",
+          "sheet": "Zone-2",
+          "row": 138,
+          "System": "PA",
+          "Location": "BASEMET SERVICE ROAD",
+          "Device Type": "Horn Speaker"
+        },
+        {
+          "Device ID": "TE3-PAS-BAS-DA31-HSP-030",
+          "source_file": "Asset Database Zonewise_Basement_SH_030626.xlsx",
+          "sheet": "Zone-1",
+          "row": 161,
+          "System": "PA",
+          "Location": "BASEMENT SERVICE ROAD",
+          "Device Type": "Horn Speaker"
+        },
+        {
+          "Device ID": "TE3-PAS-BAS-DA31-HSP-030",
+          "source_file": "Asset Database Zonewise_Basement_SH_030626.xlsx",
+          "sheet": "Zone-2",
+          "row": 234,
+          "System": "PA",
+          "Location": "BASEMET SERVICE ROAD",
+          "Device Type": "Horn Speaker"
+        },
+        {
+          "Device ID": "TE3-PAS-BAS-DA31-HSP-031",
+          "source_file": "Asset Database Zonewise_Basement_SH_030626.xlsx",
+          "sheet": "Zone-1",
+          "row": 162,
+          "System": "PA",
+          "Location": "BASEMENT SERVICE ROAD",
+          "Device Type": "Horn Speaker"
+        },
+        {
+          "Device ID": "TE3-PAS-BAS-DA31-HSP-031",
+          "source_file": "Asset Database Zonewise_Basement_SH_030626.xlsx",
+          "sheet": "Zone-2",
+          "row": 235,
+          "System": "PA",
+          "Location": "BASEMET SERVICE ROAD",
+          "Device Type": "Horn Speaker"
+        },
+        {
+          "Device ID": "TE3-PAS-BAS-DA31-HSP-032",
+          "source_file": "Asset Database Zonewise_Basement_SH_030626.xlsx",
+          "sheet": "Zone-1",
+          "row": 163,
+          "System": "PA",
+          "Location": "BASEMENT SERVICE ROAD",
+          "Device Type": "Horn Speaker"
+        },
+        {
+          "Device ID": "TE3-PAS-BAS-DA31-HSP-032",
+          "source_file": "Asset Database Zonewise_Basement_SH_030626.xlsx",
+          "sheet": "Zone-2",
+          "row": 236,
+          "System": "PA",
+          "Location": "BASEMET SERVICE ROAD",
+          "Device Type": "Horn Speaker"
+        },
+        {
+          "Device ID": "TE3-PAS-GRD-DA21-BSP-024",
+          "source_file": "Asset Database Zonewise_Basement_SH_030626.xlsx",
+          "sheet": "Zone-1",
+          "row": 164,
+          "System": "PA",
+          "Location": "STC-E14",
+          "Device Type": "Box Speaker"
+        },
+        {
+          "Device ID": "TE3-PAS-GRD-DA21-BSP-024",
+          "source_file": "Asset Database Zonewise_Ground Floor_SH_220626.xlsx",
+          "sheet": "Zone-2",
+          "row": 326,
+          "System": "PA",
+          "Location": "STC-E11",
+          "Device Type": "Box Speaker"
+        },
+        {
+          "Device ID": "TE3-PAS-GRD-DA21-BSP-025",
+          "source_file": "Asset Database Zonewise_Basement_SH_030626.xlsx",
+          "sheet": "Zone-1",
+          "row": 165,
+          "System": "PA",
+          "Location": "STC-E14",
+          "Device Type": "Box Speaker"
+        },
+        {
+          "Device ID": "TE3-PAS-GRD-DA21-BSP-025",
+          "source_file": "Asset Database Zonewise_Ground Floor_SH_220626.xlsx",
+          "sheet": "Zone-3",
+          "row": 462,
+          "System": "PA",
+          "Location": "BAGGAGE BREAKDOWN",
+          "Device Type": "Box Speaker"
+        },
+        {
+          "Device ID": "TE3-PAS-GRD-DA21-BSP-026",
+          "source_file": "Asset Database Zonewise_Basement_SH_030626.xlsx",
+          "sheet": "Zone-1",
+          "row": 166,
+          "System": "PA",
+          "Location": "STC-E5",
+          "Device Type": "Box Speaker"
+        },
+        {
+          "Device ID": "TE3-PAS-GRD-DA21-BSP-026",
+          "source_file": "Asset Database Zonewise_Ground Floor_SH_220626.xlsx",
+          "sheet": "Zone-3",
+          "row": 463,
+          "System": "PA",
+          "Location": "BAGGAGE BREAKDOWN",
+          "Device Type": "Box Speaker"
+        },
+        {
+          "Device ID": "TE3-PAS-GRD-DA21-BSP-027",
+          "source_file": "Asset Database Zonewise_Basement_SH_030626.xlsx",
+          "sheet": "Zone-1",
+          "row": 167,
+          "System": "PA",
+          "Location": "STC-E3",
+          "Device Type": "Box Speaker"
+        },
+        {
+          "Device ID": "TE3-PAS-GRD-DA21-BSP-027",
+          "source_file": "Asset Database Zonewise_Ground Floor_SH_220626.xlsx",
+          "sheet": "Zone-3",
+          "row": 464,
+          "System": "PA",
+          "Location": "BAGGAGE BREAKDOWN",
+          "Device Type": "Box Speaker"
+        },
+        {
+          "Device ID": "TE3-PAS-GRD-DA21-PSP-001",
+          "source_file": "Asset Database Zonewise_Basement_SH_030626.xlsx",
+          "sheet": "Zone-1",
+          "row": 169,
+          "System": "PA",
+          "Location": "STC-E3",
+          "Device Type": "Projection Speaker"
+        },
+        {
+          "Device ID": "TE3-PAS-GRD-DA21-PSP-001",
+          "source_file": "Asset Database Zonewise_Ground Floor_SH_220626.xlsx",
+          "sheet": "Zone-3",
+          "row": 914,
+          "System": "PA",
+          "Location": "GENERAL AREA",
+          "Device Type": "Projection Speaker"
+        },
+        {
+          "Device ID": "TE3-PAS-GRD-DA21-PSP-002",
+          "source_file": "Asset Database Zonewise_Basement_SH_030626.xlsx",
+          "sheet": "Zone-1",
+          "row": 170,
+          "System": "PA",
+          "Location": "STC-E3",
+          "Device Type": "Projection Speaker"
+        },
+        {
+          "Device ID": "TE3-PAS-GRD-DA21-PSP-002",
+          "source_file": "Asset Database Zonewise_Ground Floor_SH_220626.xlsx",
+          "sheet": "Zone-3",
+          "row": 915,
+          "System": "PA",
+          "Location": "GENERAL AREA",
+          "Device Type": "Projection Speaker"
+        }
+      ]
+    },
+    {
+      "severity": "BLOCKER",
+      "category": "duplicate_conflict",
+      "message": "Duplicate Device ID has conflicting attributes",
+      "count": 38,
+      "sample": [
+        {
+          "Device ID": "TE3-PAS-BAS-DA21-HSP-032",
+          "conflicts": {
+            "Location": [
+              "BASEMENT SERVICE ROAD",
+              "BASEMET SERVICE ROAD"
+            ],
+            "Zone": [
+              "Z1",
+              "Z2"
+            ]
+          }
+        },
+        {
+          "Device ID": "TE3-PAS-BAS-DA31-HSP-030",
+          "conflicts": {
+            "Location": [
+              "BASEMENT SERVICE ROAD",
+              "BASEMET SERVICE ROAD"
+            ],
+            "Zone": [
+              "Z1",
+              "Z2"
+            ]
+          }
+        },
+        {
+          "Device ID": "TE3-PAS-BAS-DA31-HSP-031",
+          "conflicts": {
+            "Location": [
+              "BASEMENT SERVICE ROAD",
+              "BASEMET SERVICE ROAD"
+            ],
+            "Zone": [
+              "Z1",
+              "Z2"
+            ]
+          }
+        },
+        {
+          "Device ID": "TE3-PAS-BAS-DA31-HSP-032",
+          "conflicts": {
+            "Location": [
+              "BASEMENT SERVICE ROAD",
+              "BASEMET SERVICE ROAD"
+            ],
+            "Zone": [
+              "Z1",
+              "Z2"
+            ]
+          }
+        },
+        {
+          "Device ID": "TE3-PAS-GRD-DA21-BSP-024",
+          "conflicts": {
+            "Location": [
+              "STC-E11",
+              "STC-E14"
+            ],
+            "Zone": [
+              "Z1",
+              "Z2"
+            ]
+          }
+        },
+        {
+          "Device ID": "TE3-PAS-GRD-DA21-BSP-025",
+          "conflicts": {
+            "Location": [
+              "BAGGAGE BREAKDOWN",
+              "STC-E14"
+            ],
+            "Zone": [
+              "Z1",
+              "Z3"
+            ]
+          }
+        },
+        {
+          "Device ID": "TE3-PAS-GRD-DA21-BSP-026",
+          "conflicts": {
+            "Location": [
+              "BAGGAGE BREAKDOWN",
+              "STC-E5"
+            ],
+            "Zone": [
+              "Z1",
+              "Z3"
+            ]
+          }
+        },
+        {
+          "Device ID": "TE3-PAS-GRD-DA21-BSP-027",
+          "conflicts": {
+            "Location": [
+              "BAGGAGE BREAKDOWN",
+              "STC-E3"
+            ],
+            "Zone": [
+              "Z1",
+              "Z3"
+            ]
+          }
+        },
+        {
+          "Device ID": "TE3-PAS-GRD-DA21-PSP-001",
+          "conflicts": {
+            "Location": [
+              "GENERAL AREA",
+              "STC-E3"
+            ],
+            "Zone": [
+              "Z1",
+              "Z3"
+            ]
+          }
+        },
+        {
+          "Device ID": "TE3-PAS-GRD-DA21-PSP-002",
+          "conflicts": {
+            "Location": [
+              "GENERAL AREA",
+              "STC-E3"
+            ],
+            "Zone": [
+              "Z1",
+              "Z3"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "severity": "WARNING",
+      "category": "maintenance_field",
+      "message": "Missing maintenance field: Last Done",
+      "count": 5187,
+      "sample": [
+        {
+          "source_file": "Asset Database Zonewise_Basement_SH_030626.xlsx",
+          "sheet": "Zone-1",
+          "row": 2,
+          "SL": "1",
+          "Device ID": "TE3-CCT-BAS-DA21-FCT-001",
+          "Building": "TE3",
+          "Level": "BAS",
+          "Zone": "Z1",
+          "System": "CCTV",
+          "Location": "FIRE EXIT CORRIDOR",
+          "Device Type": "Fixed Camera"
+        },
+        {
+          "source_file": "Asset Database Zonewise_Basement_SH_030626.xlsx",
+          "sheet": "Zone-1",
+          "row": 3,
+          "SL": "2",
+          "Device ID": "TE3-CCT-BAS-DA21-FCT-002",
+          "Building": "TE3",
+          "Level": "BAS",
+          "Zone": "Z1",
+          "System": "CCTV",
+          "Location": "BASEMENT STC E-14",
+          "Device Type": "Fixed Camera"
+        },
+        {
+          "source_file": "Asset Database Zonewise_Basement_SH_030626.xlsx",
+          "sheet": "Zone-1",
+          "row": 4,
+          "SL": "3",
+          "Device ID": "TE3-CCT-BAS-DA21-FCT-003",
+          "Building": "TE3",
+          "Level": "BAS",
+          "Zone": "Z1",
+          "System": "CCTV",
+          "Location": "BASEMENT SERVICE ROAD",
+          "Device Type": "Fixed Camera"
+        },
+        {
+          "source_file": "Asset Database Zonewise_Basement_SH_030626.xlsx",
+          "sheet": "Zone-1",
+          "row": 5,
+          "SL": "4",
+          "Device ID": "TE3-CCT-BAS-DA21-FCT-004",
+          "Building": "TE3",
+          "Level": "BAS",
+          "Zone": "Z1",
+          "System": "CCTV",
+          "Location": "BASEMENT SERVICE ROAD",
+          "Device Type": "Fixed Camera"
+        },
+        {
+          "source_file": "Asset Database Zonewise_Basement_SH_030626.xlsx",
+          "sheet": "Zone-1",
+          "row": 6,
+          "SL": "5",
+          "Device ID": "TE3-CCT-BAS-DA21-PCT-005",
+          "Building": "TE3",
+          "Level": "BAS",
+          "Zone": "Z1",
+          "System": "CCTV",
+          "Location": "BASEMENT SERVICE ROAD",
+          "Device Type": "PTZ Camera"
+        }
+      ]
+    },
+    {
+      "severity": "WARNING",
+      "category": "maintenance_field",
+      "message": "Missing maintenance field: Due Date",
+      "count": 5187,
+      "sample": [
+        {
+          "source_file": "Asset Database Zonewise_Basement_SH_030626.xlsx",
+          "sheet": "Zone-1",
+          "row": 2,
+          "SL": "1",
+          "Device ID": "TE3-CCT-BAS-DA21-FCT-001",
+          "Building": "TE3",
+          "Level": "BAS",
+          "Zone": "Z1",
+          "System": "CCTV",
+          "Location": "FIRE EXIT CORRIDOR",
+          "Device Type": "Fixed Camera"
+        },
+        {
+          "source_file": "Asset Database Zonewise_Basement_SH_030626.xlsx",
+          "sheet": "Zone-1",
+          "row": 3,
+          "SL": "2",
+          "Device ID": "TE3-CCT-BAS-DA21-FCT-002",
+          "Building": "TE3",
+          "Level": "BAS",
+          "Zone": "Z1",
+          "System": "CCTV",
+          "Location": "BASEMENT STC E-14",
+          "Device Type": "Fixed Camera"
+        },
+        {
+          "source_file": "Asset Database Zonewise_Basement_SH_030626.xlsx",
+          "sheet": "Zone-1",
+          "row": 4,
+          "SL": "3",
+          "Device ID": "TE3-CCT-BAS-DA21-FCT-003",
+          "Building": "TE3",
+          "Level": "BAS",
+          "Zone": "Z1",
+          "System": "CCTV",
+          "Location": "BASEMENT SERVICE ROAD",
+          "Device Type": "Fixed Camera"
+        },
+        {
+          "source_file": "Asset Database Zonewise_Basement_SH_030626.xlsx",
+          "sheet": "Zone-1",
+          "row": 5,
+          "SL": "4",
+          "Device ID": "TE3-CCT-BAS-DA21-FCT-004",
+          "Building": "TE3",
+          "Level": "BAS",
+          "Zone": "Z1",
+          "System": "CCTV",
+          "Location": "BASEMENT SERVICE ROAD",
+          "Device Type": "Fixed Camera"
+        },
+        {
+          "source_file": "Asset Database Zonewise_Basement_SH_030626.xlsx",
+          "sheet": "Zone-1",
+          "row": 6,
+          "SL": "5",
+          "Device ID": "TE3-CCT-BAS-DA21-PCT-005",
+          "Building": "TE3",
+          "Level": "BAS",
+          "Zone": "Z1",
+          "System": "CCTV",
+          "Location": "BASEMENT SERVICE ROAD",
+          "Device Type": "PTZ Camera"
+        }
+      ]
+    },
+    {
+      "severity": "WARNING",
+      "category": "maintenance_field",
+      "message": "Missing maintenance field: Status",
+      "count": 5187,
+      "sample": [
+        {
+          "source_file": "Asset Database Zonewise_Basement_SH_030626.xlsx",
+          "sheet": "Zone-1",
+          "row": 2,
+          "SL": "1",
+          "Device ID": "TE3-CCT-BAS-DA21-FCT-001",
+          "Building": "TE3",
+          "Level": "BAS",
+          "Zone": "Z1",
+          "System": "CCTV",
+          "Location": "FIRE EXIT CORRIDOR",
+          "Device Type": "Fixed Camera"
+        },
+        {
+          "source_file": "Asset Database Zonewise_Basement_SH_030626.xlsx",
+          "sheet": "Zone-1",
+          "row": 3,
+          "SL": "2",
+          "Device ID": "TE3-CCT-BAS-DA21-FCT-002",
+          "Building": "TE3",
+          "Level": "BAS",
+          "Zone": "Z1",
+          "System": "CCTV",
+          "Location": "BASEMENT STC E-14",
+          "Device Type": "Fixed Camera"
+        },
+        {
+          "source_file": "Asset Database Zonewise_Basement_SH_030626.xlsx",
+          "sheet": "Zone-1",
+          "row": 4,
+          "SL": "3",
+          "Device ID": "TE3-CCT-BAS-DA21-FCT-003",
+          "Building": "TE3",
+          "Level": "BAS",
+          "Zone": "Z1",
+          "System": "CCTV",
+          "Location": "BASEMENT SERVICE ROAD",
+          "Device Type": "Fixed Camera"
+        },
+        {
+          "source_file": "Asset Database Zonewise_Basement_SH_030626.xlsx",
+          "sheet": "Zone-1",
+          "row": 5,
+          "SL": "4",
+          "Device ID": "TE3-CCT-BAS-DA21-FCT-004",
+          "Building": "TE3",
+          "Level": "BAS",
+          "Zone": "Z1",
+          "System": "CCTV",
+          "Location": "BASEMENT SERVICE ROAD",
+          "Device Type": "Fixed Camera"
+        },
+        {
+          "source_file": "Asset Database Zonewise_Basement_SH_030626.xlsx",
+          "sheet": "Zone-1",
+          "row": 6,
+          "SL": "5",
+          "Device ID": "TE3-CCT-BAS-DA21-PCT-005",
+          "Building": "TE3",
+          "Level": "BAS",
+          "Zone": "Z1",
+          "System": "CCTV",
+          "Location": "BASEMENT SERVICE ROAD",
+          "Device Type": "PTZ Camera"
+        }
+      ]
+    },
+    {
+      "severity": "WARNING",
+      "category": "maintenance_field",
+      "message": "Missing maintenance field: Overdue",
+      "count": 5187,
+      "sample": [
+        {
+          "source_file": "Asset Database Zonewise_Basement_SH_030626.xlsx",
+          "sheet": "Zone-1",
+          "row": 2,
+          "SL": "1",
+          "Device ID": "TE3-CCT-BAS-DA21-FCT-001",
+          "Building": "TE3",
+          "Level": "BAS",
+          "Zone": "Z1",
+          "System": "CCTV",
+          "Location": "FIRE EXIT CORRIDOR",
+          "Device Type": "Fixed Camera"
+        },
+        {
+          "source_file": "Asset Database Zonewise_Basement_SH_030626.xlsx",
+          "sheet": "Zone-1",
+          "row": 3,
+          "SL": "2",
+          "Device ID": "TE3-CCT-BAS-DA21-FCT-002",
+          "Building": "TE3",
+          "Level": "BAS",
+          "Zone": "Z1",
+          "System": "CCTV",
+          "Location": "BASEMENT STC E-14",
+          "Device Type": "Fixed Camera"
+        },
+        {
+          "source_file": "Asset Database Zonewise_Basement_SH_030626.xlsx",
+          "sheet": "Zone-1",
+          "row": 4,
+          "SL": "3",
+          "Device ID": "TE3-CCT-BAS-DA21-FCT-003",
+          "Building": "TE3",
+          "Level": "BAS",
+          "Zone": "Z1",
+          "System": "CCTV",
+          "Location": "BASEMENT SERVICE ROAD",
+          "Device Type": "Fixed Camera"
+        },
+        {
+          "source_file": "Asset Database Zonewise_Basement_SH_030626.xlsx",
+          "sheet": "Zone-1",
+          "row": 5,
+          "SL": "4",
+          "Device ID": "TE3-CCT-BAS-DA21-FCT-004",
+          "Building": "TE3",
+          "Level": "BAS",
+          "Zone": "Z1",
+          "System": "CCTV",
+          "Location": "BASEMENT SERVICE ROAD",
+          "Device Type": "Fixed Camera"
+        },
+        {
+          "source_file": "Asset Database Zonewise_Basement_SH_030626.xlsx",
+          "sheet": "Zone-1",
+          "row": 6,
+          "SL": "5",
+          "Device ID": "TE3-CCT-BAS-DA21-PCT-005",
+          "Building": "TE3",
+          "Level": "BAS",
+          "Zone": "Z1",
+          "System": "CCTV",
+          "Location": "BASEMENT SERVICE ROAD",
+          "Device Type": "PTZ Camera"
+        }
+      ]
+    },
+    {
+      "severity": "WARNING",
+      "category": "optional_field",
+      "message": "Empty optional field: Area",
+      "count": 5187,
+      "sample": []
+    },
+    {
+      "severity": "WARNING",
+      "category": "optional_field",
+      "message": "Empty optional field: Remarks",
+      "count": 5187,
+      "sample": []
+    },
+    {
+      "severity": "WARNING",
+      "category": "location_normalization",
+      "message": "Location naming normalization suggestions detected",
+      "count": 32,
+      "sample": [
+        {
+          "location": "BAGGAGE MARKUP",
+          "suggested": "BAGGAGE MAKEUP"
+        },
+        {
+          "location": "BAGGAGE RECON RM",
+          "suggested": "BAGGAGE RECON ROOM"
+        },
+        {
+          "location": "BAGGAGE RECONCILIATION RM",
+          "suggested": "BAGGAGE RECONCILIATION ROOM"
+        },
+        {
+          "location": "BAGGAGE SCREENING RM",
+          "suggested": "BAGGAGE SCREENING ROOM"
+        },
+        {
+          "location": "BASEMET SERVICE ROAD",
+          "suggested": "BASEMENT SERVICE ROAD"
+        },
+        {
+          "location": "BHS CONTROL & BHS CCTV RM",
+          "suggested": "BHS CONTROL AND BHS CCTV ROOM"
+        },
+        {
+          "location": "BHS CONTROL & BHS CCTV ROOM",
+          "suggested": "BHS CONTROL AND BHS CCTV ROOM"
+        },
+        {
+          "location": "BHS MAINTENANCE RM",
+          "suggested": "BHS MAINTENANCE ROOM"
+        },
+        {
+          "location": "C RM",
+          "suggested": "C ROOM"
+        },
+        {
+          "location": "COMMS & SECURITY EQPT STORAGE ROOM",
+          "suggested": "COMMS AND SECURITY EQPT STORAGE ROOM"
+        },
+        {
+          "location": "EAST REMOTE DEPT GATE LOUNGE",
+          "suggested": "EAST REMOTE DEPARTURE GATE LOUNGE"
+        },
+        {
+          "location": "EAST REMOTE DEPT GATE LOUNGE DOOR",
+          "suggested": "EAST REMOTE DEPARTURE GATE LOUNGE DOOR"
+        },
+        {
+          "location": "EQPT RM",
+          "suggested": "EQPT ROOM"
+        },
+        {
+          "location": "F&B",
+          "suggested": "FANDB"
+        },
+        {
+          "location": "FAN RM",
+          "suggested": "FAN ROOM"
+        },
+        {
+          "location": "FIRE TANK & PUMPS ROOM",
+          "suggested": "FIRE TANK AND PUMPS ROOM"
+        },
+        {
+          "location": "FIRE TANK & PUMPS ROOM DOOR",
+          "suggested": "FIRE TANK AND PUMPS ROOM DOOR"
+        },
+        {
+          "location": "FIRE TANKS & PUMPS ROOM",
+          "suggested": "FIRE TANKS AND PUMPS ROOM"
+        },
+        {
+          "location": "FIRE TANKS AND PUMPS RM",
+          "suggested": "FIRE TANKS AND PUMPS ROOM"
+        },
+        {
+          "location": "LANDSIDE WASTE DISPOSAL RM",
+          "suggested": "LANDSIDE WASTE DISPOSAL ROOM"
+        },
+        {
+          "location": "LOST & FOUND BAGGAGE SERVICES",
+          "suggested": "LOST AND FOUND BAGGAGE SERVICES"
+        },
+        {
+          "location": "MEETERS & GREETERS HALL",
+          "suggested": "MEETERS AND GREETERS HALL"
+        },
+        {
+          "location": "MEETERS-GREETERS HALL",
+          "suggested": "MEETERS GREETERS HALL"
+        },
+        {
+          "location": "P RM",
+          "suggested": "P ROOM"
+        },
+        {
+          "location": "PLB EQUIPMENT RM",
+          "suggested": "PLB EQUIPMENT ROOM"
+        },
+        {
+          "location": "PRAYER RM",
+          "suggested": "PRAYER ROOM"
+        },
+        {
+          "location": "PUMPS, CHILLER PLANT & CHILLERS",
+          "suggested": "PUMPS, CHILLER PLANT AND CHILLERS"
+        },
+        {
+          "location": "STAFF ENTRY & EXIT",
+          "suggested": "STAFF ENTRY AND EXIT"
+        },
+        {
+          "location": "STAFF ENTRY & EXIT CORRIDOR",
+          "suggested": "STAFF ENTRY AND EXIT CORRIDOR"
+        },
+        {
+          "location": "WATER TANK & PUMPS ROOM DOOR",
+          "suggested": "WATER TANK AND PUMPS ROOM DOOR"
+        }
+      ]
+    }
+  ]
+}
