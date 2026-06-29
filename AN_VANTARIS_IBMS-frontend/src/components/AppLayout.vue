@@ -20,6 +20,17 @@ const refreshInterval = ref('30s')
 
 const activePath = computed(() => route.path)
 const activeMenuId = computed(() => (typeof route.query.menu === 'string' ? route.query.menu : ''))
+
+const selectL3Item = (l3Id: string) => {
+  router.replace({
+    path: route.path,
+    query: {
+      ...route.query,
+      l3: l3Id,
+    },
+  })
+}
+
 const activeL3Id = computed(() => (typeof route.query.l3 === 'string' ? route.query.l3 : ''))
 
 const activeL1 = computed(() => {
@@ -322,18 +333,23 @@ onMounted(() => {
 
       <main class="app-layout__main">
         <div class="app-layout__content-scroll">
-          <section v-if="activeL3Items.length" class="app-layout__l3-row" aria-label="L3 content navigation">
-            <el-tag
+          <section
+            v-if="activeL3Items.length"
+            class="app-layout__l3-row one-l3-sticky-surface"
+            aria-label="L3 content navigation"
+          >
+            <button
               v-for="item in activeL3Items"
               :key="item.id"
-              class="app-layout__l3-tab"
-              :class="{ 'app-layout__l3-tab--active': activeL3Item?.id === item.id }"
-              :type="item.status === 'implemented' || item.status === 'mapped' ? 'success' : 'info'"
-              effect="plain"
-              @click="onL3Select(item.id)"
+              type="button"
+              class="app-layout__l3-tab one-l3-tab"
+              :class="{
+                'app-layout__l3-tab--active one-l3-tab--active': activeL3Item?.id === item.id,
+              }"
+              @click="selectL3Item(item.id)"
             >
               {{ item.label }}
-            </el-tag>
+            </button>
           </section>
 
           <section v-if="shouldShowL3FallbackPanel && activeL3Content" class="app-layout__l3-panel" aria-label="Selected L3 section content">

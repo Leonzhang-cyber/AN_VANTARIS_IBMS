@@ -383,7 +383,7 @@ textarea {
 [class*="L3"][class*="tabs"]::before,
 [class*="l3"][class*="nav"]::before,
 [class*="L3"][class*="nav"]::before {
-  content: 'WORKSPACE';
+  content: none;
   color: #718096;
   flex: 0 0 auto;
   font-size: 9px;
