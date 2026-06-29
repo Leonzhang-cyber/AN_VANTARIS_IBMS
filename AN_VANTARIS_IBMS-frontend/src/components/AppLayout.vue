@@ -749,18 +749,20 @@ onMounted(() => {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 16px;
-  padding: 12px 14px;
+  margin-bottom: 14px;
+  padding: 10px 12px;
   border: 1px solid #d7e3ec;
   border-radius: 12px;
   background: #ffffff;
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.04);
 }
 
 .app-layout__l3-tab {
   border-radius: 999px;
   font-weight: 600;
   cursor: pointer;
+  min-height: 36px;
+  padding: 6px 12px;
 }
 
 .app-layout__l3-tab--active {
