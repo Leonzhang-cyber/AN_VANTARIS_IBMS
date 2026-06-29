@@ -18,24 +18,26 @@ export interface LoginResponse {
   user: LoginUser
 }
 
+// Local review credentials are only accepted in local / DEV review runtimes.
+// They are not used by the production API login flow.
 const LOCAL_REVIEW_USERS = [
   {
     username: 'admin',
-    password: 'Admin@2026',
+    password: 'VantarisLocalReview#2026',
     otp: '260624',
     displayName: 'VANTARIS Administrator',
     role: 'Admin',
   },
   {
     username: 'superadmin',
-    password: 'VantarisDemoAdmin#2026',
+    password: 'VantarisLocalAdmin#2026',
     otp: '260624',
     displayName: 'System Administrator',
     role: 'Administrator',
   },
   {
     username: 'maintenance',
-    password: 'VantarisDemoUser#2026',
+    password: 'VantarisLocalEngineer#2026',
     otp: '260624',
     displayName: 'Maintenance Engineer',
     role: 'Engineer',
