@@ -80,7 +80,7 @@ const readonlyBase: AirportHmiMapPayload = {
   formal_work_order_closure: false,
   confirm_enabled: false,
   closure_status: 'not_ready_due_to_asset_quality_blockers',
-  data_source_status: 'readonly production fallback; backend endpoint unavailable; no runtime activation',
+  data_source_status: 'Readonly airport map data is currently unavailable.',
 }
 
 function unwrap(body: Envelope | AirportHmiMapPayload): AirportHmiMapPayload {
@@ -98,7 +98,7 @@ function unwrap(body: Envelope | AirportHmiMapPayload): AirportHmiMapPayload {
   return body as AirportHmiMapPayload
 }
 
-function fallbackPayload(partial: AirportHmiMapPayload = {}): AirportHmiMapPayload {
+function unavailablePayload(partial: AirportHmiMapPayload = {}): AirportHmiMapPayload {
   return {
     ...readonlyBase,
     ...partial,
@@ -109,12 +109,12 @@ function fallbackPayload(partial: AirportHmiMapPayload = {}): AirportHmiMapPaylo
   }
 }
 
-async function getPayload(path: string, fallback: AirportHmiMapPayload): Promise<AirportHmiMapPayload> {
+async function getPayload(path: string, unavailable: AirportHmiMapPayload): Promise<AirportHmiMapPayload> {
   try {
     const response = await request.get<Envelope | AirportHmiMapPayload>(path)
     return unwrap(response.data)
   } catch {
-    return fallbackPayload(fallback)
+    return unavailablePayload(unavailable)
   }
 }
 
@@ -206,7 +206,7 @@ export async function getAirportHmiMapContent(mapId = AIRPORT_HMI_MAP_ID): Promi
     importAuditSummary,
     exportEvidenceCenter,
   ]
-  const fallbackActive = payloads.some((payload) => String(payload.data_source_status ?? '').includes('backend endpoint unavailable'))
+  const unavailableActive = payloads.some((payload) => String(payload.data_source_status ?? '').includes('currently unavailable'))
 
   return {
     map,
@@ -223,6 +223,6 @@ export async function getAirportHmiMapContent(mapId = AIRPORT_HMI_MAP_ID): Promi
     closureReadiness,
     importAuditSummary,
     exportEvidenceCenter,
-    sourceState: fallbackActive ? 'readonly production fallback; backend endpoint unavailable; no runtime activation' : 'backend readonly api',
+    sourceState: unavailableActive ? 'Readonly airport map data is currently unavailable.' : 'Backend readonly API',
   }
 }

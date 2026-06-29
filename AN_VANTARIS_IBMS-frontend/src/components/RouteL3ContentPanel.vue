@@ -12,7 +12,12 @@ import { resolveL3ContentConfig, resolveL3RouteContentContext } from '@/services
 type VisualMode = 'trend' | 'topology' | 'timeline' | 'workQueue' | 'evidence' | 'security' | 'hmi' | 'reportPack'
 
 const route = useRoute()
-const context = computed(() => resolveL3RouteContentContext(route.query.menu, route.query.l3))
+const context = computed(() => {
+  if (route.path === '/one/airport/assets-topology' && !route.query.menu) {
+    return resolveL3RouteContentContext('floor-plan-hmi', route.query.l3)
+  }
+  return resolveL3RouteContentContext(route.query.menu, route.query.l3)
+})
 const content = computed(() => (context.value ? resolveL3ContentConfig(context.value) : undefined))
 const dashboardWorkbench = computed(() => content.value?.dashboardWorkbench)
 const isAirportHmiMap = computed(() => context.value?.l1Label === 'Assets & Locations' && context.value?.l2Id === 'floor-plan-hmi')
@@ -131,7 +136,7 @@ async function loadAirportHmiMapContent() {
   try {
     airportHmiMapContent.value = await getAirportHmiMapContent(AIRPORT_HMI_MAP_ID)
   } catch {
-    airportHmiMapError.value = 'readonly production fallback; backend endpoint unavailable; no runtime activation'
+    airportHmiMapError.value = 'Readonly airport map data is currently unavailable.'
   } finally {
     airportHmiMapLoading.value = false
   }
@@ -151,14 +156,39 @@ function payloadRows(payload?: AirportHmiMapPayload, limit = 6): Array<Record<st
   return Array.isArray(payload?.data) ? payload.data.slice(0, limit) : []
 }
 
-function summaryValue(payload: AirportHmiMapPayload | undefined, key: string, fallback: string | number | boolean = '0') {
+function summaryValue(payload: AirportHmiMapPayload | undefined, key: string, defaultValue: string | number | boolean = '0') {
   const value = payload?.summary?.[key]
-  return value === undefined || value === null || value === '' ? fallback : value
+  return value === undefined || value === null || value === '' ? defaultValue : value
 }
 
-function fieldValue(row: Record<string, unknown> | undefined, key: string, fallback = 'Pending review') {
+function fieldValue(row: Record<string, unknown> | undefined, key: string, defaultValue = 'Pending review') {
   const value = row?.[key]
-  return value === undefined || value === null || value === '' ? fallback : String(value)
+  return value === undefined || value === null || value === '' ? defaultValue : String(value)
+}
+
+function firstField(row: Record<string, unknown> | undefined, keys: string[], defaultValue = 'Pending review') {
+  for (const key of keys) {
+    const value = row?.[key]
+    if (value !== undefined && value !== null && value !== '') {
+      return String(value)
+    }
+  }
+  return defaultValue
+}
+
+function displayStatus(value: unknown, defaultValue = 'Pending review') {
+  const raw = String(value ?? defaultValue)
+  const labels: Record<string, string> = {
+    blocked_by_data_quality: 'Blocked by asset data quality',
+    pending_review: 'Pending review',
+    pending_asset_import_clearance: 'Pending asset import clearance',
+    not_ready_due_to_asset_quality_blockers: 'Not ready due to asset quality blockers',
+    readonly_projection: 'Readonly projection',
+    route_hint_only: 'Readonly route available',
+    pending_closure_evidence: 'Pending closure evidence',
+    blocked_by_asset_quality: 'Blocked by asset quality',
+  }
+  return labels[raw] ?? raw.replace(/_/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase())
 }
 
 const airportData = computed(() => airportHmiMapContent.value)
@@ -184,13 +214,15 @@ const airportClosureStatus = computed(() =>
 const airportSourceState = computed(() =>
   airportHmiMapError.value
   || airportData.value?.sourceState
-  || 'readonly production fallback; backend endpoint unavailable; no runtime activation',
+  || 'Readonly airport map data is currently unavailable.',
 )
 const airportDecisionSignals = computed(() => [
   { label: 'Asset Import Readiness', value: airportReadiness.value },
-  { label: 'Overlay Status', value: airportOverlayStatus.value },
-  { label: 'Formal Registry Write', value: String(airportAssetOverlay.value?.formal_asset_registry_write ?? false) },
-  { label: 'Evidence Closure', value: airportClosureStatus.value },
+  { label: 'Map Registration', value: 'T3 Ground Floor registered' },
+  { label: 'Asset Overlay', value: displayStatus(airportOverlayStatus.value) },
+  { label: 'Fault Location Overlay', value: 'Readonly projection active' },
+  { label: 'Work Order Route', value: 'Available as readonly route' },
+  { label: 'Evidence Closure', value: displayStatus(airportClosureStatus.value) },
 ])
 const airportPanelCards = computed(() => [
   { title: 'Zone Summary', value: summaryValue(airportData.value?.zoneSummary, 'zone_count'), note: `${summaryValue(airportData.value?.zoneSummary, 'asset_records_seen', 5187)} records seen` },
@@ -208,6 +240,9 @@ const airportSystemRows = computed(() => payloadRows(airportData.value?.systemOv
 const airportFaultRows = computed(() => payloadRows(airportData.value?.faultOverlay, 5))
 const airportWorkOrderRows = computed(() => payloadRows(airportData.value?.workOrderOverlay, 5))
 const airportEvidenceRows = computed(() => payloadRows(airportData.value?.evidenceOverlay, 5))
+const airportNavigationRows = computed(() => payloadRows(airportData.value?.technicianNavigation, 6))
+const airportWorkOrderEvidenceRows = computed(() => payloadRows(airportData.value?.workOrderEvidence, 5))
+const airportClosureGateRows = computed(() => payloadRows({ data: airportData.value?.closureReadiness?.gates }, 6))
 const airportSelectedContext = computed(() =>
   airportFaultRows.value[0]
   ?? airportWorkOrderRows.value[0]
@@ -215,6 +250,45 @@ const airportSelectedContext = computed(() =>
 )
 const airportOperationalContext = computed(() => airportDecisionLens.value?.operational_context ?? {})
 const airportEvidenceContext = computed(() => airportDecisionLens.value?.evidence_context ?? {})
+const airportFieldQuestionCards = computed(() => {
+  const selected = airportSelectedContext.value
+  const workOrder = airportWorkOrderRows.value[0]
+  const fault = airportFaultRows.value[0]
+  const evidence = airportEvidenceRows.value[0]
+  const navigation = airportNavigationRows.value[0]
+  return [
+    { question: 'Where is the asset?', answer: firstField(selected, ['location', 'space', 'zone'], 'Terminal 3 / Ground Floor') },
+    { question: 'What system is affected?', answer: firstField(selected, ['system', 'system_name'], firstField(airportOperationalContext.value, ['related_system'])) },
+    { question: 'What fault / alarm / source event is linked?', answer: firstField(fault, ['event_id', 'source_event', 'alarm_id', 'fault_id']) },
+    { question: 'Which work order is linked?', answer: firstField(workOrder, ['work_order_id', 'workOrderId']) },
+    { question: 'How should the technician navigate?', answer: firstField(navigation, ['navigation_instruction', 'instruction', 'route_instruction', 'route_status'], 'Use readonly route after asset quality clearance') },
+    { question: 'What evidence is missing?', answer: firstField(evidence, ['missing_evidence', 'evidence_type', 'status'], displayStatus(firstField(airportEvidenceContext.value, ['status']))) },
+  ]
+})
+const airportLayerReadiness = computed(() => [
+  { layer: 'Zone Overlay', state: `${summaryValue(airportData.value?.zoneSummary, 'zone_count')} zones`, note: displayStatus(summaryValue(airportData.value?.zoneSummary, 'data_quality_status', 'pending_review')) },
+  { layer: 'Location Summary', state: `${summaryValue(airportData.value?.locationSummary, 'location_count')} locations`, note: displayStatus(summaryValue(airportData.value?.locationSummary, 'map_binding_status', 'pending_review')) },
+  { layer: 'Asset Overlay', state: displayStatus(airportOverlayStatus.value), note: `${summaryValue(airportData.value?.assetOverlay, 'overlay_markers')} markers` },
+  { layer: 'System Overlay', state: `${summaryValue(airportData.value?.systemOverlay, 'system_count')} systems`, note: 'System-to-asset overlay' },
+  { layer: 'Fault Location Overlay', state: 'Readonly projection', note: `${summaryValue(airportData.value?.faultOverlay, 'fault_count')} linked events` },
+  { layer: 'Work Order Location Route', state: 'Readonly route available', note: `${summaryValue(airportData.value?.workOrderOverlay, 'work_order_count')} work orders` },
+  { layer: 'Technician Navigation', state: 'Route instructions available', note: `${airportNavigationRows.value.length} navigation rows` },
+  { layer: 'Evidence Overlay', state: displayStatus(summaryValue(airportData.value?.evidenceOverlay, 'status', 'pending_closure_evidence')), note: `${summaryValue(airportData.value?.evidenceOverlay, 'evidence_items_required')} items required` },
+])
+const airportMmsFlow = [
+  'Fault Location Overlay',
+  'Work Order Location Route',
+  'Technician Navigation',
+  'Closure Evidence',
+  'Customer Sign-off',
+]
+const airportEvidencePanels = computed(() => [
+  { label: 'Evidence Overlay', value: summaryValue(airportData.value?.evidenceOverlay, 'evidence_items_required'), detail: displayStatus(summaryValue(airportData.value?.evidenceOverlay, 'status', 'pending_closure_evidence')) },
+  { label: 'Work Order Evidence', value: summaryValue(airportData.value?.workOrderEvidence, 'evidence_required_count'), detail: `${summaryValue(airportData.value?.workOrderEvidence, 'work_order_count')} work orders` },
+  { label: 'Closure Readiness', value: summaryValue(airportData.value?.closureReadiness, 'ready_to_close'), detail: displayStatus(airportClosureStatus.value) },
+  { label: 'Import Audit Summary', value: summaryValue(airportData.value?.importAuditSummary, 'blocker_count', 2), detail: 'Asset Import Quality Gate' },
+  { label: 'Export Evidence Center', value: airportData.value?.exportEvidenceCenter.export_ready ? 'Ready' : 'Blocked', detail: displayStatus(airportData.value?.exportEvidenceCenter.export_status ?? 'blocked_by_asset_quality') },
+])
 </script>
 
 <template>
@@ -264,6 +338,15 @@ const airportEvidenceContext = computed(() => airportDecisionLens.value?.evidenc
     </div>
 
     <div v-if="isAirportHmiMap" class="route-l3-panel__airport-hmi" v-loading="airportHmiMapLoading">
+      <div class="route-l3-panel__airport-production-head">
+        <div>
+          <span>Assets & Locations / Field Operations</span>
+          <strong>Floor Plan / HMI Map Operations</strong>
+          <p>Field operations view for map readiness, asset location, system overlay, fault location, work order route, technician navigation and closure evidence.</p>
+        </div>
+        <el-tag type="warning" effect="plain">Asset Import Quality Gate: HOLD_BLOCKED</el-tag>
+      </div>
+
       <div class="route-l3-panel__dashboard-tabs" aria-label="Floor Plan / HMI Map L3 workspace tabs">
         <span v-for="tab in dashboardTabs" :key="tab.key" :class="{ 'route-l3-panel__dashboard-tab--active': tab.active }">{{ tab.label }}</span>
       </div>
@@ -278,8 +361,15 @@ const airportEvidenceContext = computed(() => airportDecisionLens.value?.evidenc
       <div class="route-l3-panel__airport-alert" role="status">
         <strong>Asset import is currently HOLD_BLOCKED.</strong>
         <span>Asset overlay remains readonly until critical data quality blockers are resolved.</span>
-        <em>Confirm Import is disabled.</em>
+        <em>Formal write disabled.</em>
         <small>{{ airportSourceState }}</small>
+      </div>
+
+      <div class="route-l3-panel__airport-question-grid" aria-label="Field operations questions">
+        <article v-for="card in airportFieldQuestionCards" :key="card.question">
+          <span>{{ card.question }}</span>
+          <strong>{{ card.answer }}</strong>
+        </article>
       </div>
 
       <div class="route-l3-panel__airport-filters" aria-label="Airport HMI filters">
@@ -299,14 +389,14 @@ const airportEvidenceContext = computed(() => airportDecisionLens.value?.evidenc
           <span>Zone</span>
           <el-select v-model="airportFilters.zone" size="small">
             <el-option label="All zones" value="All zones" />
-            <el-option v-for="row in airportZoneRows" :key="fieldValue(row, 'zone')" :label="fieldValue(row, 'zone')" :value="fieldValue(row, 'zone')" />
+            <el-option v-for="row in airportZoneRows" :key="fieldValue(row, 'zone')" :value="fieldValue(row, 'zone')">{{ fieldValue(row, 'zone') }}</el-option>
           </el-select>
         </label>
         <label>
           <span>System</span>
           <el-select v-model="airportFilters.system" size="small">
             <el-option label="All systems" value="All systems" />
-            <el-option v-for="row in airportSystemRows" :key="fieldValue(row, 'system')" :label="fieldValue(row, 'system')" :value="fieldValue(row, 'system')" />
+            <el-option v-for="row in airportSystemRows" :key="fieldValue(row, 'system')" :value="fieldValue(row, 'system')">{{ fieldValue(row, 'system') }}</el-option>
           </el-select>
         </label>
         <label>
@@ -319,8 +409,8 @@ const airportEvidenceContext = computed(() => airportDecisionLens.value?.evidenc
         <label>
           <span>Data Quality Status</span>
           <el-select v-model="airportFilters.dataQualityStatus" size="small">
-            <el-option label="pending_review" value="pending_review" />
-            <el-option label="pending_asset_import_clearance" value="pending_asset_import_clearance" />
+            <el-option label="Pending review" value="pending_review" />
+            <el-option label="Pending asset import clearance" value="pending_asset_import_clearance" />
           </el-select>
         </label>
         <label>
@@ -389,6 +479,21 @@ const airportEvidenceContext = computed(() => airportDecisionLens.value?.evidenc
         </aside>
       </div>
 
+      <div class="route-l3-panel__layer-readiness" aria-label="Layer and map readiness">
+        <article v-for="layer in airportLayerReadiness" :key="layer.layer">
+          <span>{{ layer.layer }}</span>
+          <strong>{{ layer.state }}</strong>
+          <em>{{ layer.note }}</em>
+        </article>
+      </div>
+
+      <div class="route-l3-panel__mms-flow" aria-label="Work Management linkage">
+        <span>Work Management / MMS Control Center</span>
+        <div>
+          <strong v-for="step in airportMmsFlow" :key="step">{{ step }}</strong>
+        </div>
+      </div>
+
       <div class="route-l3-panel__airport-cards" aria-label="Airport HMI main panels">
         <article v-for="panel in airportPanelCards" :key="panel.title">
           <span>{{ panel.title }}</span>
@@ -404,7 +509,9 @@ const airportEvidenceContext = computed(() => airportDecisionLens.value?.evidenc
             <el-table-column prop="zone" label="Zone" min-width="90" />
             <el-table-column prop="level" label="Level" min-width="110" />
             <el-table-column prop="asset_record_count" label="Records" min-width="100" />
-            <el-table-column prop="data_quality_status" label="Quality" min-width="160" />
+            <el-table-column label="Quality" min-width="160">
+              <template #default="{ row }">{{ displayStatus(row.data_quality_status) }}</template>
+            </el-table-column>
           </el-table>
         </article>
         <article>
@@ -413,7 +520,9 @@ const airportEvidenceContext = computed(() => airportDecisionLens.value?.evidenc
             <el-table-column prop="location" label="Location" min-width="180" />
             <el-table-column prop="zone" label="Zone" min-width="120" />
             <el-table-column prop="asset_record_count" label="Records" min-width="100" />
-            <el-table-column prop="map_binding_status" label="Binding" min-width="170" />
+            <el-table-column label="Binding" min-width="170">
+              <template #default="{ row }">{{ displayStatus(row.map_binding_status) }}</template>
+            </el-table-column>
           </el-table>
         </article>
         <article>
@@ -421,7 +530,9 @@ const airportEvidenceContext = computed(() => airportDecisionLens.value?.evidenc
           <el-table :data="airportSystemRows" size="small" stripe>
             <el-table-column prop="system" label="System" min-width="110" />
             <el-table-column prop="asset_record_count" label="Records" min-width="100" />
-            <el-table-column prop="data_quality_status" label="Quality" min-width="160" />
+            <el-table-column label="Quality" min-width="160">
+              <template #default="{ row }">{{ displayStatus(row.data_quality_status) }}</template>
+            </el-table-column>
           </el-table>
         </article>
         <article>
@@ -430,7 +541,9 @@ const airportEvidenceContext = computed(() => airportDecisionLens.value?.evidenc
             <el-table-column prop="event_id" label="Event" min-width="140" />
             <el-table-column prop="severity" label="Severity" min-width="100" />
             <el-table-column prop="location" label="Location" min-width="180" />
-            <el-table-column prop="data_quality_status" label="Quality" min-width="180" />
+            <el-table-column label="Quality" min-width="180">
+              <template #default="{ row }">{{ displayStatus(row.data_quality_status) }}</template>
+            </el-table-column>
           </el-table>
         </article>
         <article>
@@ -439,7 +552,32 @@ const airportEvidenceContext = computed(() => airportDecisionLens.value?.evidenc
             <el-table-column prop="work_order_id" label="Work Order" min-width="150" />
             <el-table-column prop="priority" label="Priority" min-width="90" />
             <el-table-column prop="assigned_team" label="Team" min-width="160" />
-            <el-table-column prop="route_status" label="Route" min-width="140" />
+            <el-table-column label="Route" min-width="140">
+              <template #default="{ row }">{{ displayStatus(row.route_status) }}</template>
+            </el-table-column>
+          </el-table>
+        </article>
+        <article>
+          <strong>Technician Navigation</strong>
+          <el-table :data="airportNavigationRows" size="small" stripe>
+            <el-table-column label="Route / Step" min-width="150">
+              <template #default="{ row }">{{ firstField(row, ['route', 'step', 'route_step', 'navigation_step']) }}</template>
+            </el-table-column>
+            <el-table-column label="Zone / Space" min-width="170">
+              <template #default="{ row }">{{ firstField(row, ['zone', 'space', 'location']) }}</template>
+            </el-table-column>
+            <el-table-column label="Asset" min-width="170">
+              <template #default="{ row }">{{ firstField(row, ['asset', 'asset_name', 'asset_id']) }}</template>
+            </el-table-column>
+            <el-table-column label="Work Order" min-width="150">
+              <template #default="{ row }">{{ firstField(row, ['work_order_id', 'workOrderId']) }}</template>
+            </el-table-column>
+            <el-table-column label="Navigation Instruction" min-width="240">
+              <template #default="{ row }">{{ firstField(row, ['navigation_instruction', 'instruction', 'route_instruction', 'route_status']) }}</template>
+            </el-table-column>
+            <el-table-column label="Evidence Requirement" min-width="190">
+              <template #default="{ row }">{{ displayStatus(firstField(row, ['evidence_requirement', 'evidence_required', 'evidence_status'])) }}</template>
+            </el-table-column>
           </el-table>
         </article>
         <article>
@@ -447,9 +585,43 @@ const airportEvidenceContext = computed(() => airportDecisionLens.value?.evidenc
           <el-table :data="airportEvidenceRows" size="small" stripe>
             <el-table-column prop="evidence_id" label="Evidence" min-width="170" />
             <el-table-column prop="evidence_type" label="Type" min-width="130" />
-            <el-table-column prop="status" label="Status" min-width="170" />
+            <el-table-column label="Status" min-width="170">
+              <template #default="{ row }">{{ displayStatus(row.status) }}</template>
+            </el-table-column>
             <el-table-column prop="audit_ready" label="Audit Ready" min-width="120" />
           </el-table>
+        </article>
+        <article>
+          <strong>Work Order Evidence</strong>
+          <el-table :data="airportWorkOrderEvidenceRows" size="small" stripe>
+            <el-table-column label="Work Order" min-width="150">
+              <template #default="{ row }">{{ firstField(row, ['work_order_id', 'workOrderId']) }}</template>
+            </el-table-column>
+            <el-table-column label="Evidence" min-width="170">
+              <template #default="{ row }">{{ firstField(row, ['evidence_id', 'evidence_ref', 'ucde_evidence']) }}</template>
+            </el-table-column>
+            <el-table-column label="Requirement" min-width="190">
+              <template #default="{ row }">{{ displayStatus(firstField(row, ['evidence_requirement', 'status'])) }}</template>
+            </el-table-column>
+          </el-table>
+        </article>
+        <article>
+          <strong>Closure Readiness</strong>
+          <el-table :data="airportClosureGateRows" size="small" stripe>
+            <el-table-column prop="gate" label="Gate" min-width="180" />
+            <el-table-column label="Status" min-width="130">
+              <template #default="{ row }">{{ displayStatus(row.status) }}</template>
+            </el-table-column>
+            <el-table-column prop="reason" label="Reason" min-width="260" />
+          </el-table>
+        </article>
+      </div>
+
+      <div class="route-l3-panel__evidence-export" aria-label="Evidence closure and export center">
+        <article v-for="panel in airportEvidencePanels" :key="panel.label">
+          <span>{{ panel.label }}</span>
+          <strong>{{ panel.value }}</strong>
+          <em>{{ panel.detail }}</em>
         </article>
       </div>
     </div>
@@ -1402,18 +1574,63 @@ const airportEvidenceContext = computed(() => airportDecisionLens.value?.evidenc
   margin-bottom: 16px;
 }
 
-.route-l3-panel__airport-signals,
-.route-l3-panel__airport-cards {
+.route-l3-panel__airport-production-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid #cfe4dd;
+  border-radius: 10px;
+  background: #f8fbfa;
+}
+
+.route-l3-panel__airport-production-head div {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.route-l3-panel__airport-production-head span,
+.route-l3-panel__mms-flow > span {
+  color: #0f766e;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.route-l3-panel__airport-production-head strong {
+  color: #10201d;
+  font-size: 24px;
+  line-height: 1.2;
+}
+
+.route-l3-panel__airport-production-head p {
+  max-width: 820px;
+  margin: 0;
+  color: #52615d;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.route-l3-panel__airport-signals,
+.route-l3-panel__airport-cards,
+.route-l3-panel__airport-question-grid,
+.route-l3-panel__layer-readiness,
+.route-l3-panel__evidence-export {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
 }
 
 .route-l3-panel__airport-signals article,
 .route-l3-panel__airport-cards article,
+.route-l3-panel__airport-question-grid article,
+.route-l3-panel__layer-readiness article,
+.route-l3-panel__evidence-export article,
 .route-l3-panel__decision-lens,
 .route-l3-panel__airport-tables article,
-.route-l3-panel__map-shell {
+.route-l3-panel__map-shell,
+.route-l3-panel__mms-flow {
   min-width: 0;
   border: 1px solid #dfe9e5;
   border-radius: 10px;
@@ -1421,7 +1638,10 @@ const airportEvidenceContext = computed(() => airportDecisionLens.value?.evidenc
 }
 
 .route-l3-panel__airport-signals article,
-.route-l3-panel__airport-cards article {
+.route-l3-panel__airport-cards article,
+.route-l3-panel__airport-question-grid article,
+.route-l3-panel__layer-readiness article,
+.route-l3-panel__evidence-export article {
   display: grid;
   gap: 6px;
   padding: 12px;
@@ -1429,6 +1649,9 @@ const airportEvidenceContext = computed(() => airportDecisionLens.value?.evidenc
 
 .route-l3-panel__airport-signals span,
 .route-l3-panel__airport-cards span,
+.route-l3-panel__airport-question-grid span,
+.route-l3-panel__layer-readiness span,
+.route-l3-panel__evidence-export span,
 .route-l3-panel__decision-lens > span,
 .route-l3-panel__map-head span,
 .route-l3-panel__airport-filters span {
@@ -1439,7 +1662,10 @@ const airportEvidenceContext = computed(() => airportDecisionLens.value?.evidenc
 }
 
 .route-l3-panel__airport-signals strong,
-.route-l3-panel__airport-cards strong {
+.route-l3-panel__airport-cards strong,
+.route-l3-panel__airport-question-grid strong,
+.route-l3-panel__layer-readiness strong,
+.route-l3-panel__evidence-export strong {
   color: #10201d;
   font-size: 18px;
   line-height: 1.3;
@@ -1451,7 +1677,9 @@ const airportEvidenceContext = computed(() => airportDecisionLens.value?.evidenc
   font-size: 24px;
 }
 
-.route-l3-panel__airport-cards em {
+.route-l3-panel__airport-cards em,
+.route-l3-panel__layer-readiness em,
+.route-l3-panel__evidence-export em {
   color: #52615d;
   font-size: 12px;
   font-style: normal;
@@ -1482,6 +1710,35 @@ const airportEvidenceContext = computed(() => airportDecisionLens.value?.evidenc
 
 .route-l3-panel__airport-alert small {
   color: #8a5a17;
+}
+
+.route-l3-panel__mms-flow {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  background: #f8fbfa;
+}
+
+.route-l3-panel__mms-flow div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.route-l3-panel__mms-flow strong {
+  position: relative;
+  padding: 8px 12px;
+  border: 1px solid #cfe4dd;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #10201d;
+  font-size: 12px;
+}
+
+.route-l3-panel__mms-flow strong:not(:last-child)::after {
+  content: '->';
+  margin-left: 10px;
+  color: #0f766e;
 }
 
 .route-l3-panel__airport-filters {
@@ -1651,8 +1908,15 @@ const airportEvidenceContext = computed(() => airportDecisionLens.value?.evidenc
   .route-l3-panel__acceptance-footer,
   .route-l3-panel__airport-signals,
   .route-l3-panel__airport-cards,
+  .route-l3-panel__airport-question-grid,
+  .route-l3-panel__layer-readiness,
+  .route-l3-panel__evidence-export,
   .route-l3-panel__airport-tables {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .route-l3-panel__airport-production-head {
+    flex-direction: column;
   }
 
   .route-l3-panel__airport-filters {
@@ -1694,6 +1958,9 @@ const airportEvidenceContext = computed(() => airportDecisionLens.value?.evidenc
   .route-l3-panel__acceptance-footer,
   .route-l3-panel__airport-signals,
   .route-l3-panel__airport-cards,
+  .route-l3-panel__airport-question-grid,
+  .route-l3-panel__layer-readiness,
+  .route-l3-panel__evidence-export,
   .route-l3-panel__airport-filters,
   .route-l3-panel__airport-tables {
     grid-template-columns: 1fr;

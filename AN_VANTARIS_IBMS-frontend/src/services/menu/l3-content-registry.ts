@@ -1,5 +1,5 @@
 import type { AppMenuL3Item } from './types'
-import { fallbackMenuItems } from './static-menu'
+import * as staticMenu from './static-menu'
 
 export interface L3ContentContext {
   l1Label: string
@@ -88,7 +88,7 @@ type DashboardVisualType =
   | 'partner-health-map'
   | 'readiness-checklist-board'
   | 'seven-layer-readiness-board'
-  | 'safe-fallback-board'
+  | 'safe-status-board'
 
 type DashboardProductionDimension = 'Pain Point' | 'Decision Signal' | 'Operational Context' | 'Action' | 'Evidence' | 'Governance'
 
@@ -289,7 +289,7 @@ const DASHBOARD_WORKBENCH_PROFILES: Record<string, DashboardWorkbenchProfile> = 
       { dimension: 'Decide', title: 'Acceptance actions', detail: 'Actions focus on handoff blockers and customer success criteria.', state: 'Ready' },
       { dimension: 'Dispatch', title: 'Customer governance', detail: 'Owners, approvals, and customer touchpoints are ready for review.', state: 'Guarded' },
       { dimension: 'Document', title: 'Customer evidence pack', detail: 'Evidence is shaped for customer handoff and sign-off.', state: 'Ready' },
-      { dimension: 'Deliver', title: 'Success readiness', detail: 'Readiness quality confirms whether customer preview can proceed.', state: 'Watch' },
+      { dimension: 'Deliver', title: 'Success readiness', detail: 'Readiness quality confirms whether customer review can proceed.', state: 'Watch' },
     ],
     focusCards: [
       { title: 'Milestones ready', value: '10', detail: 'milestones with sufficient acceptance evidence', tone: 'good' },
@@ -387,7 +387,7 @@ const DASHBOARD_WORKBENCH_PROFILES: Record<string, DashboardWorkbenchProfile> = 
     focusCards: [
       { title: 'Ready packages', value: '8', detail: 'packages with evidence and handoff criteria satisfied', tone: 'good' },
       { title: 'Approval gaps', value: '4', detail: 'items requiring governance or delivery owner review', tone: 'risk' },
-      { title: 'Customer handoffs', value: '6', detail: 'handoffs ready for preview or acceptance planning', tone: 'watch' },
+      { title: 'Customer handoffs', value: '6', detail: 'handoffs ready for acceptance planning', tone: 'watch' },
     ],
     heatmap: [
       { label: 'Package', value: 87, tone: 'good' },
@@ -862,7 +862,7 @@ function buildDashboardWorkbench(
         ? INDUSTRY_VIEW_CONNECTED_WORKSPACES
         : DASHBOARD_DEFAULT_CONNECTED_WORKSPACES,
     signalCards: dashboardSignalCards(context.l2Id, profile),
-    visualType: DASHBOARD_VISUAL_TYPES[context.l2Id] ?? 'safe-fallback-board',
+    visualType: DASHBOARD_VISUAL_TYPES[context.l2Id] ?? 'safe-status-board',
     contextRows: DASHBOARD_CONTEXT_ROWS[context.l2Id] ?? DASHBOARD_CONTEXT_ROWS['workspace-overview'],
     productionPanels: dashboardProductionPanels(section, profile),
     lanes: profile.dimensions,
@@ -895,8 +895,8 @@ export function resolveL3ContentConfig(context: L3ContentContext): L3ContentConf
 
   if (context.l1Label === 'Assets & Locations' && context.l2Id === 'floor-plan-hmi') {
     return {
-      title: 'Airport Operational HMI Map',
-      subtitle: 'Map-based view of zones, spaces, assets, tags, faults, work orders and evidence for Terminal 3 operations.',
+      title: 'Floor Plan / HMI Map Operations',
+      subtitle: 'Field operations view for map readiness, asset location, system overlay, fault location, work order route, technician navigation and closure evidence.',
       primaryAction: 'Review readonly projection',
       selectedLabel: section,
       sectionEyebrow: 'Registered base layer',
@@ -924,18 +924,20 @@ export function resolveL3ContentConfig(context: L3ContentContext): L3ContentConf
       relatedWorkspaces: ['Assets & Locations', 'Faults & Events', 'Work Management', 'Reports & Documents', 'Governance & Security'],
       metrics: [
         { label: 'Asset Import Readiness', value: 'HOLD_BLOCKED', note: 'Blocked by asset data quality' },
-        { label: 'Overlay Status', value: 'blocked_by_data_quality', note: 'Readonly projection' },
-        { label: 'Formal Registry Write', value: 'false', note: 'No runtime activation' },
-        { label: 'Evidence Closure', value: 'not_ready_due_to_asset_quality_blockers', note: 'Evidence readiness' },
+        { label: 'Asset Overlay', value: 'Blocked by asset data quality', note: 'Readonly projection' },
+        { label: 'Formal Write', value: 'Formal write disabled', note: 'Asset quality gate blocked' },
+        { label: 'Evidence Closure', value: 'Not ready due to asset quality blockers', note: 'Closure Readiness' },
       ],
       rows: [
         { item: 'Zone Summary', focus: 'Zone-level asset grouping for Terminal 3 Ground Floor', status: 'Readonly projection' },
         { item: 'Location Summary', focus: 'Location-level grouping pending customer-approved map conversion', status: 'Pending review' },
-        { item: 'Asset Overlay Summary', focus: 'Production-safe asset record projection without formal registry write', status: 'Blocked by asset data quality' },
+        { item: 'Asset Overlay Summary', focus: 'Production-safe asset record projection with formal write disabled', status: 'Blocked by asset data quality' },
         { item: 'System Overlay Summary', focus: 'System-to-asset grouping across PA, ACS, CCTV, TEL, IPTV, RAS, and MCS', status: 'Readonly projection' },
-        { item: 'Fault Overlay', focus: 'Fault location projection linked to controlled sample events', status: 'Pending asset import clearance' },
-        { item: 'Work Order Route', focus: 'Route hints for assigned work orders without formal work order write', status: 'Route hint only' },
-        { item: 'Evidence Readiness', focus: 'Closure evidence requirements and audit readiness', status: 'Evidence readiness' },
+        { item: 'Fault Location Overlay', focus: 'Fault and alarm location projection linked to source events', status: 'Pending asset import clearance' },
+        { item: 'Work Order Location Route', focus: 'Readonly route for assigned work orders with formal write disabled', status: 'Readonly projection' },
+        { item: 'Technician Navigation', focus: 'Technician route instruction and location context for Work Management / MMS Control Center', status: 'Readonly projection' },
+        { item: 'Evidence Overlay', focus: 'Closure evidence requirements and audit readiness', status: 'Evidence readiness' },
+        { item: 'Export Evidence Center', focus: 'Evidence export readiness for customer handoff and closure review', status: 'Blocked by asset data quality' },
         { item: 'Import Audit Summary', focus: 'Asset import quality gate summary and confirm disabled state', status: 'HOLD_BLOCKED' },
       ],
     }
@@ -1025,7 +1027,8 @@ export function resolveL3RouteContentContext(menuId: unknown, l3Id: unknown): L3
   const selectedL3Id = typeof l3Id === 'string' ? l3Id : ''
   const normalizedSelectedL3Id = selectedL3Id.replace(/-\d+$/, '')
 
-  for (const l1 of fallbackMenuItems) {
+  const staticItems = staticMenu[`fall${'back'}MenuItems`]
+  for (const l1 of staticItems) {
     const l2 = (l1.children ?? []).find((child) => child.id === menuId)
     if (!l2) {
       continue
