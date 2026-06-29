@@ -700,7 +700,7 @@ const DASHBOARD_CONTEXT_ROWS: Record<string, Array<{ label: string; value: strin
 
 function dashboardSignalCards(l2Id: string, profile: DashboardWorkbenchProfile): DashboardWorkbenchConfig['signalCards'] {
   const common: DashboardWorkbenchConfig['signalCards'] = [
-    { label: 'Critical Alerts', value: profile.riskValue, note: profile.riskLabel, severity: profile.riskValue === '2' || profile.riskValue === '3' ? 'watch' : 'risk', icon: 'alert' },
+    { label: 'Critical Alarms', value: profile.riskValue, note: profile.riskLabel, severity: profile.riskValue === '2' || profile.riskValue === '3' ? 'watch' : 'risk', icon: 'alarm' },
     { label: 'SLA Risk', value: l2Id === 'service-risk' ? 'High' : 'Watch', note: 'SLA pressure entry', severity: l2Id === 'service-risk' ? 'risk' : 'watch', icon: 'sla' },
     { label: 'Open Work Orders', value: l2Id === 'dashboard-operations' ? '18' : '9', note: 'Work pressure entry', severity: 'watch', icon: 'work' },
     { label: 'Evidence Readiness', value: profile.signalValue, note: profile.evidenceLabel, severity: 'good', icon: 'evidence' },
