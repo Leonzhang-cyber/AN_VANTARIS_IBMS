@@ -42,7 +42,10 @@ const tabs = [
   'Predictive',
   'Assignments',
   'SLA & Aging',
+  'Execution',
+  'Parts / Vendor',
   'Evidence',
+  'Closure',
   'Reports',
 ]
 
@@ -274,6 +277,23 @@ const customerSections: Record<string, CustomerSection> = {
       { item: 'Prepare assignment report', focus: 'Workload evidence', status: 'Ready' },
     ],
   },
+  'assignment-dispatch': {
+    title: 'Assignment & Dispatch',
+    subtitle: 'Dispatch readiness across assigned work orders, technician availability, SLA exposure, and escalation ownership.',
+    primaryAction: 'Review dispatch readiness',
+    targetTab: 'Assignments',
+    metrics: [
+      { label: 'Assigned WOs', value: '27', note: 'Work orders assigned to teams' },
+      { label: 'Dispatch Watch', value: '6', note: 'Items with SLA or access exposure' },
+      { label: 'Escalation Owners', value: '4', note: 'Escalation owners represented' },
+      { label: 'Shift Coverage', value: '3', note: 'Shifts represented in workload view' },
+    ],
+    rows: [
+      { item: 'Review assignment and dispatch', focus: 'Owner, shift, discipline, and SLA exposure', status: 'Active' },
+      { item: 'Confirm escalation owner', focus: 'Supervisor or duty owner for high-risk work', status: 'Review' },
+      { item: 'Prepare dispatch evidence', focus: 'Assignment and workload evidence', status: 'Ready' },
+    ],
+  },
   'sla-dashboard': {
     title: 'SLA Dashboard',
     subtitle: 'SLA dashboard for due soon, overdue work orders, aging buckets, MTTR, response, and escalation.',
@@ -393,9 +413,105 @@ const customerSections: Record<string, CustomerSection> = {
       { item: 'Prepare predictive evidence', focus: 'Risk evidence and confidence', status: 'Ready' },
     ],
   },
+  'parts-vendor-notes': {
+    title: 'Parts / Vendor Notes',
+    subtitle: 'Parts, vendor, warranty, contract, and evidence coordination for corrective and SLA-sensitive work orders.',
+    primaryAction: 'Review parts and vendor coordination',
+    targetTab: 'Parts / Vendor',
+    metrics: [
+      { label: 'Parts Watch', value: '5', note: 'Corrective items requiring materials readiness' },
+      { label: 'Vendor Exposure', value: '4', note: 'Items with vendor coordination' },
+      { label: 'Warranty Review', value: '3', note: 'Warranty or contract context required' },
+      { label: 'Vendor Evidence', value: '5', note: 'Vendor records needing evidence review' },
+    ],
+    rows: [
+      { item: 'Review parts readiness', focus: 'Spare parts, requested material, and reserved items', status: 'Review' },
+      { item: 'Check vendor responsibility', focus: 'Vendor, warranty, contract, and SLA commitment', status: 'Review' },
+      { item: 'Prepare vendor evidence', focus: 'Vendor response and closure evidence', status: 'Ready' },
+    ],
+  },
+  'technician-assignment': {
+    title: 'Technician Assignment',
+    subtitle: 'Technician execution view across task status, checklist readiness, linked asset, linked event, and required evidence.',
+    primaryAction: 'Review technician execution',
+    targetTab: 'Execution',
+    metrics: [
+      { label: 'Execution Tasks', value: '0', note: 'Rendered when task data is available' },
+      { label: 'Checklist Status', value: 'Review', note: 'Checklist readiness by maintenance task' },
+      { label: 'Evidence Required', value: 'Yes', note: 'Evidence field is tracked per task' },
+      { label: 'Linked Events', value: 'Active', note: 'Tasks can retain source event context' },
+    ],
+    rows: [
+      { item: 'Review technician execution', focus: 'Task, owner, status, checklist, and evidence', status: 'Review' },
+      { item: 'Confirm linked asset and event', focus: 'Asset and source event context', status: 'Ready' },
+      { item: 'Prepare execution evidence', focus: 'Technician notes and checklist evidence', status: 'Ready' },
+    ],
+  },
+  'action-tracking': {
+    title: 'Action Tracking',
+    subtitle: 'Tracks corrective action progress across technician execution, evidence readiness, owner review, and closure state.',
+    primaryAction: 'Review action tracking',
+    targetTab: 'Execution',
+    metrics: [
+      { label: 'Active Actions', value: '12', note: 'Engineer updates recorded' },
+      { label: 'Checklist Watch', value: '3', note: 'Tasks needing checklist review' },
+      { label: 'Evidence Pending', value: '8', note: 'Actions awaiting closure evidence' },
+      { label: 'Closure Review', value: '6', note: 'Actions awaiting supervisor review' },
+    ],
+    rows: [
+      { item: 'Review action progress', focus: 'Technician status, checklist, and evidence', status: 'Active' },
+      { item: 'Check action blockers', focus: 'SLA, parts, vendor, and access constraints', status: 'Review' },
+      { item: 'Prepare closure review', focus: 'Evidence chain and supervisor acceptance', status: 'Ready' },
+    ],
+  },
+  'closure-review': {
+    title: 'Closure Review',
+    subtitle: 'Closure readiness across technician notes, before / after evidence, parts, vendor evidence, supervisor review, and customer sign-off.',
+    primaryAction: 'Review closure readiness',
+    targetTab: 'Closure',
+    metrics: [
+      { label: 'Closure Evidence', value: '8', note: 'Closure packages under review' },
+      { label: 'Supervisor Review', value: '6', note: 'Records awaiting supervisor review' },
+      { label: 'Customer Sign-off', value: 'Gated', note: 'Gated by closure evidence readiness' },
+      { label: 'Report Linkage', value: 'Ready', note: 'Linked report field is retained per work order' },
+    ],
+    rows: [
+      { item: 'Review closure evidence', focus: 'Technician notes, before / after records, and attachments', status: 'Review' },
+      { item: 'Confirm supervisor review', focus: 'High-impact and repeated faults need owner acceptance', status: 'Guarded' },
+      { item: 'Gate customer sign-off', focus: 'Customer sign-off is gated by closure evidence readiness', status: 'Review' },
+    ],
+  },
+  'customer-sign-off': {
+    title: 'Customer Sign-off',
+    subtitle: 'Customer sign-off status is reviewed after closure evidence, supervisor review, vendor evidence, and report linkage are ready.',
+    primaryAction: 'Review customer sign-off',
+    targetTab: 'Closure',
+    metrics: [
+      { label: 'Sign-off Pending', value: 'Review', note: 'Gated by closure evidence readiness' },
+      { label: 'Evidence Chain', value: 'Required', note: 'Fault, technician, parts, and vendor evidence' },
+      { label: 'Supervisor Review', value: 'Required', note: 'Owner acceptance before customer sign-off' },
+      { label: 'Customer Report', value: 'Linked', note: 'Linked report field retained where available' },
+    ],
+    rows: [
+      { item: 'Review customer sign-off gate', focus: 'Closure evidence readiness and supervisor review', status: 'Review' },
+      { item: 'Check evidence chain', focus: 'Fault source, technician notes, parts, vendor, and report linkage', status: 'Review' },
+      { item: 'Prepare customer-ready closure', focus: 'Customer-readable closure summary and sign-off gate', status: 'Guarded' },
+    ],
+  },
 }
 
-const fallbackCustomerSection = customerSections['open-work-orders']
+const defaultCustomerSection = customerSections['open-work-orders']
+
+const workflowSteps = [
+  { label: 'Alarm / Fault Intake', note: 'Source Event' },
+  { label: 'Asset & Location Context', note: 'Asset Quality Gate' },
+  { label: 'Work Order Created', note: 'Fault-linked Work Order' },
+  { label: 'Assignment & Dispatch', note: 'Owner and Shift' },
+  { label: 'SLA Monitoring', note: 'Escalation Watch' },
+  { label: 'Technician Execution', note: 'Checklist and Notes' },
+  { label: 'Parts / Vendor', note: 'Contract and Evidence' },
+  { label: 'Evidence & Sign-off', note: 'Closure Evidence' },
+]
 
 const defaultDeepSection: DeepSectionConfig = {
   insight: 'Maintenance workload is being reviewed by asset criticality, service exposure, field readiness, and evidence completeness.',
@@ -597,7 +713,7 @@ const registryCustomerSection = computed<CustomerSection | undefined>(() => {
 })
 
 const activeCustomerSection = computed(
-  () => customerSections[normalizeL3Id(route.query.l3, 'open-work-orders')] ?? registryCustomerSection.value ?? fallbackCustomerSection,
+  () => customerSections[normalizeL3Id(route.query.l3, 'open-work-orders')] ?? registryCustomerSection.value ?? defaultCustomerSection,
 )
 
 const filters = reactive({
@@ -628,8 +744,58 @@ const filteredWorkOrders = computed(() => {
 const assignmentRows = computed(() => workspace.value?.engineerDispatch ?? [])
 const preventiveRows = computed(() => workspace.value?.preventiveMaintenancePlans ?? [])
 const predictiveRows = computed(() => workspace.value?.predictiveMaintenance ?? [])
+const executionRows = computed(() => workspace.value?.maintenanceTasks ?? [])
+const assetContextRows = computed(() => workspace.value?.assetContext ?? [])
+const eventContextRows = computed(() => workspace.value?.eventContext ?? [])
 const evidenceRows = computed(() => workspace.value?.evidenceTimeline ?? [])
+const evidenceLinkageRows = computed(() => workspace.value?.evidenceLinkage ?? [])
 const reportRows = computed(() => workspace.value?.reportLinkage ?? [])
+const guardrailRows = computed(() => workspace.value?.guardrails ?? [])
+const hmiContextRows = computed(() => (filteredWorkOrders.value.length ? filteredWorkOrders.value : workspace.value?.workOrders ?? []).slice(0, 6))
+const partsVendorRows = computed(() =>
+  (workspace.value?.correctiveMaintenanceFlow ?? []).map((row, index) => ({
+    step: valueFromRecord(row, ['step', 'stage', 'item', 'action', 'name'], `Coordination item ${index + 1}`),
+    owner: valueFromRecord(row, ['owner', 'team', 'vendor', 'assignedOwner'], 'Maintenance owner'),
+    status: valueFromRecord(row, ['status', 'state', 'readiness'], 'Review'),
+    evidence: valueFromRecord(row, ['evidence', 'evidenceStatus', 'vendorEvidence', 'notes'], 'Evidence review required'),
+  })),
+)
+const customerAcceptanceRows = computed(() =>
+  Object.entries(workspace.value?.customerAcceptance ?? {}).map(([key, value]) => ({
+    label: labelFromKey(key),
+    value: displayValue(value),
+  })),
+)
+const closureReadinessRows = computed(() => [
+  { label: 'Fault source evidence', status: evidenceRows.value.some((row) => row.faultSource) ? 'Available' : 'Review required', note: 'Source alarm, fault, or event evidence should support closure.' },
+  { label: 'Technician notes', status: evidenceRows.value.some((row) => row.engineerUpdate) || executionRows.value.length > 0 ? 'Available' : 'Review required', note: 'Technician execution notes and checklist status are reviewed before closure.' },
+  { label: 'Before / after evidence', status: evidenceRows.value.some((row) => row.attachmentReference) ? 'Available' : 'Review required', note: 'Attachment references should support field completion.' },
+  { label: 'Parts used', status: partsVendorRows.value.length > 0 ? 'Review' : 'Gated', note: 'Parts usage is reviewed from corrective coordination data when available.' },
+  { label: 'Vendor evidence', status: partsVendorRows.value.some((row) => /vendor/i.test(`${row.owner} ${row.evidence}`)) ? 'Review' : 'Gated', note: 'Vendor response evidence is required where vendor responsibility applies.' },
+  { label: 'Supervisor review', status: workspace.value?.workOrders.some((row) => /pending evidence|at risk|watch/i.test(`${row.status} ${row.slaRisk}`)) ? 'Review required' : 'Ready', note: 'High-impact or repeated fault records require owner review.' },
+  { label: 'Customer Sign-off', status: customerAcceptanceRows.value.length > 0 ? 'Review' : 'Gated', note: 'Customer sign-off is gated by closure evidence readiness.' },
+])
+const controlBoundaryRows = computed(() => [
+  { label: 'Readonly projection active', value: String(workspace.value?.mode === 'read_only' || workspace.value?.workOrders.some((row) => row.readOnly) || false) },
+  { label: 'Formal write disabled', value: String(!(workspace.value?.workOrderWrite || workspace.value?.taskWrite || workspace.value?.approvalWrite)) },
+  { label: 'No runtime activation from Work Management', value: String(!(workspace.value?.runtimeActivation || workspace.value?.deviceControl || workspace.value?.edgeCommandExecution || workspace.value?.linkCommandExecution)) },
+  { label: 'Asset quality gate may block formal overlay', value: 'blocked_by_data_quality' },
+])
+const decisionSignals = computed(() => {
+  const rows = workspace.value?.workOrders ?? []
+  const highPriority = rows.filter((row) => /critical|high/i.test(row.priority)).length
+  const slaAtRisk = rows.filter((row) => /at risk|overdue|due today|watch/i.test(row.slaRisk)).length
+  const faultLinked = rows.filter((row) => row.sourceFault || row.sourceEvent).length
+  const closureMissing = rows.filter((row) => row.evidenceCount <= 0 || /pending evidence|review/i.test(row.status)).length
+  return [
+    { label: 'Open Work Orders', value: String(rows.filter((row) => !/closed/i.test(row.status)).length), note: 'Active maintenance queue' },
+    { label: 'Emergency / High Priority', value: String(highPriority), note: 'Critical and high priority work' },
+    { label: 'SLA At Risk', value: String(slaAtRisk), note: 'SLA exposure requiring review' },
+    { label: 'Fault-linked Work Orders', value: String(faultLinked), note: 'Source event or alarm/fault linked' },
+    { label: 'Closure Evidence Missing', value: String(closureMissing), note: 'Closure evidence requiring review' },
+    { label: 'Customer Sign-off Pending', value: customerAcceptanceRows.value.length > 0 ? String(customerAcceptanceRows.value.length) : 'Gated', note: 'Gated by closure evidence readiness' },
+  ]
+})
 
 function uniqueValues(field: keyof UmmsGaR2WorkOrder): string[] {
   const rows = workspace.value?.workOrders ?? []
@@ -642,6 +808,28 @@ function tagType(value: string): 'success' | 'warning' | 'danger' | 'info' | 'pr
   if (normalized.includes('high') || normalized.includes('due today') || normalized.includes('watch')) return 'warning'
   if (normalized.includes('closed') || normalized.includes('normal') || normalized.includes('on track')) return 'success'
   return 'info'
+}
+
+function displayValue(value: unknown): string {
+  if (Array.isArray(value)) return value.map((item) => displayValue(item)).join(', ')
+  if (typeof value === 'object' && value !== null) return Object.entries(value).map(([key, item]) => `${labelFromKey(key)}: ${displayValue(item)}`).join(' / ')
+  if (value === undefined || value === null || value === '') return 'Review required'
+  return String(value)
+}
+
+function valueFromRecord(row: Record<string, unknown>, keys: string[], defaultValue: string): string {
+  for (const key of keys) {
+    const value = row[key]
+    if (value !== undefined && value !== null && value !== '') return displayValue(value)
+  }
+  return defaultValue
+}
+
+function labelFromKey(key: string): string {
+  return key
+    .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+    .replace(/[_-]+/g, ' ')
+    .replace(/\b\w/g, (char) => char.toUpperCase())
 }
 
 function openReport(report: string) {
@@ -673,9 +861,16 @@ watch(activeCustomerSection, (section) => {
   <section class="umms-page" v-loading="loading">
     <header class="workspace-head">
       <div>
-        <p class="eyebrow">Selected maintenance section</p>
-        <h1>{{ activeCustomerSection.title }}</h1>
-        <p class="summary">{{ activeCustomerSection.subtitle }}</p>
+        <p class="eyebrow">Work Management / MMS</p>
+        <h1>Work Management / MMS Control Center</h1>
+        <p class="summary">
+          Maintenance execution across fault-linked work orders, preventive maintenance, assignment, SLA exposure,
+          parts, vendor coordination and closure evidence.
+        </p>
+        <div class="selected-section">
+          <span>Selected section</span>
+          <strong>{{ activeCustomerSection.title }}</strong>
+        </div>
       </div>
       <el-button type="primary" plain>{{ activeCustomerSection.primaryAction }}</el-button>
     </header>
@@ -690,6 +885,34 @@ watch(activeCustomerSection, (section) => {
     />
 
     <template v-if="workspace">
+      <section class="workflow-strip section-gap" aria-label="Workflow Readiness">
+        <article v-for="(step, index) in workflowSteps" :key="step.label">
+          <span>{{ index + 1 }}</span>
+          <strong>{{ step.label }}</strong>
+          <em>{{ step.note }}</em>
+        </article>
+      </section>
+
+      <section class="decision-grid section-gap" aria-label="Decision Signal row">
+        <article v-for="signal in decisionSignals" :key="signal.label" class="decision-card">
+          <span>{{ signal.label }}</span>
+          <strong>{{ signal.value }}</strong>
+          <em>{{ signal.note }}</em>
+        </article>
+      </section>
+
+      <section class="control-boundary section-gap">
+        <div>
+          <span>Control boundary</span>
+          <strong>Readonly projection active</strong>
+          <p>Formal write disabled. No runtime activation from Work Management. Asset quality gate may block formal overlay.</p>
+        </div>
+        <article v-for="item in controlBoundaryRows" :key="item.label">
+          <span>{{ item.label }}</span>
+          <strong>{{ item.value }}</strong>
+        </article>
+      </section>
+
       <section class="deep-summary section-gap">
         <div>
           <span>Operational Insight</span>
@@ -768,6 +991,30 @@ watch(activeCustomerSection, (section) => {
         </div>
       </section>
 
+      <section class="panel section-gap">
+        <div class="section-headline">
+          <div>
+            <p class="eyebrow">HMI / Asset / Fault Context</p>
+            <h2>Fault-linked Work Order Context</h2>
+          </div>
+          <el-tag type="info">asset quality gate</el-tag>
+        </div>
+        <el-table :data="hmiContextRows" stripe border>
+          <el-table-column prop="workOrderId" label="Work Order" min-width="150" fixed />
+          <el-table-column prop="sourceEvent" label="Source Event" min-width="150" />
+          <el-table-column prop="sourceFault" label="Source Alarm / Fault" min-width="230" />
+          <el-table-column prop="linkedUhmiPanel" label="HMI Panel" min-width="230" />
+          <el-table-column prop="assetName" label="Asset" min-width="190" />
+          <el-table-column prop="systemName" label="System" min-width="150" />
+          <el-table-column prop="location" label="Location" min-width="240" />
+          <el-table-column prop="linkedUcdeEvidence" label="UCDE Evidence" min-width="190" />
+          <el-table-column prop="linkedReport" label="Linked Report" min-width="190" />
+          <el-table-column label="readOnly" min-width="120">
+            <template #default="{ row }">{{ row.readOnly }}</template>
+          </el-table-column>
+        </el-table>
+      </section>
+
       <el-tabs v-model="activeTab" type="card" class="section-gap workspace-tabs">
         <el-tab-pane v-for="tab in tabs" :key="tab" :label="tab" :name="tab">
           <template v-if="tab === 'Overview'">
@@ -800,7 +1047,7 @@ watch(activeCustomerSection, (section) => {
                 </div>
               </section>
               <section class="panel">
-                <h2>Fault-to-WorkOrder Conversion</h2>
+                <h2>Fault-to-Work Order Conversion</h2>
                 <el-descriptions :column="2" border>
                   <el-descriptions-item label="Detected faults">{{ workspace.faultToWorkOrderConversion.detectedFaults }}</el-descriptions-item>
                   <el-descriptions-item label="Converted work orders">{{ workspace.faultToWorkOrderConversion.convertedWorkOrders }}</el-descriptions-item>
@@ -851,7 +1098,9 @@ watch(activeCustomerSection, (section) => {
             <el-table :data="filteredWorkOrders" stripe border class="section-gap">
               <el-table-column prop="workOrderId" label="WO ID" min-width="150" fixed />
               <el-table-column prop="title" label="Title" min-width="280" />
-              <el-table-column prop="sourceFault" label="Source Fault / Alarm" min-width="220" />
+              <el-table-column prop="maintenanceType" label="Type" min-width="140" />
+              <el-table-column prop="sourceEvent" label="Source Event" min-width="150" />
+              <el-table-column prop="sourceFault" label="Source Alarm / Fault" min-width="220" />
               <el-table-column prop="assetName" label="Asset" min-width="190" />
               <el-table-column prop="systemName" label="System" min-width="150" />
               <el-table-column prop="location" label="Location" min-width="240" />
@@ -863,6 +1112,12 @@ watch(activeCustomerSection, (section) => {
               <el-table-column prop="assignedEngineer" label="Assigned Engineer" min-width="170" />
               <el-table-column prop="createdTime" label="Created Time" min-width="170" />
               <el-table-column prop="evidenceCount" label="Evidence Count" min-width="140" />
+              <el-table-column prop="linkedUhmiPanel" label="HMI Panel" min-width="230" />
+              <el-table-column prop="linkedUcdeEvidence" label="UCDE Evidence" min-width="190" />
+              <el-table-column prop="linkedReport" label="Linked Report" min-width="190" />
+              <el-table-column label="readOnly" min-width="120">
+                <template #default="{ row }">{{ row.readOnly }}</template>
+              </el-table-column>
             </el-table>
           </template>
 
@@ -936,6 +1191,78 @@ watch(activeCustomerSection, (section) => {
             </section>
           </template>
 
+          <template v-else-if="tab === 'Execution'">
+            <section class="panel">
+              <div class="section-headline">
+                <div>
+                  <p class="eyebrow">Technician Execution</p>
+                  <h2>Maintenance Task Execution</h2>
+                </div>
+                <el-tag type="info">readonly projection</el-tag>
+              </div>
+              <el-table :data="executionRows" stripe border>
+                <el-table-column prop="taskId" label="Task" min-width="150" />
+                <el-table-column prop="taskName" label="Checklist Item" min-width="260" />
+                <el-table-column prop="workOrderId" label="Work Order" min-width="150" />
+                <el-table-column prop="engineer" label="Assigned Engineer / Technician" min-width="220" />
+                <el-table-column prop="role" label="Role" min-width="180" />
+                <el-table-column prop="status" label="Status" min-width="150" />
+                <el-table-column prop="checklistStatus" label="Checklist Status" min-width="180" />
+                <el-table-column prop="evidenceRequired" label="Evidence" min-width="180" />
+                <el-table-column prop="linkedAsset" label="Linked Asset" min-width="200" />
+                <el-table-column prop="linkedEvent" label="Linked Event" min-width="180" />
+              </el-table>
+            </section>
+
+            <section class="panel section-gap">
+              <h2>Event and Asset Execution Context</h2>
+              <div class="two-column">
+                <el-table :data="eventContextRows" stripe border>
+                  <el-table-column prop="eventId" label="Event" min-width="150" />
+                  <el-table-column prop="severity" label="Severity" min-width="120" />
+                  <el-table-column prop="sourceSystem" label="Source System" min-width="170" />
+                  <el-table-column prop="linkedAsset" label="Linked Asset" min-width="190" />
+                  <el-table-column prop="linkedWorkOrder" label="Linked Work Order" min-width="190" />
+                  <el-table-column prop="evidenceLinked" label="Evidence" min-width="170" />
+                  <el-table-column prop="status" label="Status" min-width="130" />
+                </el-table>
+                <el-table :data="assetContextRows" stripe border>
+                  <el-table-column prop="assetName" label="Asset" min-width="190" />
+                  <el-table-column prop="systemName" label="System" min-width="150" />
+                  <el-table-column prop="category" label="Category" min-width="150" />
+                  <el-table-column prop="location" label="Location" min-width="220" />
+                  <el-table-column prop="zone" label="Zone" min-width="150" />
+                </el-table>
+              </div>
+            </section>
+          </template>
+
+          <template v-else-if="tab === 'Parts / Vendor'">
+            <section class="panel">
+              <div class="section-headline">
+                <div>
+                  <p class="eyebrow">Parts / Vendor</p>
+                  <h2>Parts / Vendor Coordination</h2>
+                </div>
+                <el-tag type="warning">formal write disabled</el-tag>
+              </div>
+              <el-alert
+                v-if="partsVendorRows.length === 0"
+                type="info"
+                :closable="false"
+                show-icon
+                title="Parts / Vendor coordination is gated by corrective work order and closure evidence readiness."
+                class="report-alert"
+              />
+              <el-table :data="partsVendorRows" stripe border>
+                <el-table-column prop="step" label="Parts / Vendor Notes" min-width="260" />
+                <el-table-column prop="owner" label="Vendor / Owner" min-width="210" />
+                <el-table-column prop="status" label="Status" min-width="160" />
+                <el-table-column prop="evidence" label="Vendor Evidence" min-width="300" />
+              </el-table>
+            </section>
+          </template>
+
           <template v-else-if="tab === 'Evidence'">
             <section class="panel">
               <h2>Work Order Evidence Timeline</h2>
@@ -951,6 +1278,55 @@ watch(activeCustomerSection, (section) => {
                   <el-tag type="success">{{ item.approvalClosureRecord }}</el-tag>
                 </div>
               </div>
+            </section>
+            <section class="panel section-gap">
+              <h2>Evidence Linkage</h2>
+              <el-table :data="evidenceLinkageRows" stripe border>
+                <el-table-column prop="linkage" label="Evidence Linkage" min-width="260" />
+                <el-table-column prop="coverage" label="Coverage" min-width="280" />
+                <el-table-column label="readOnly" min-width="120">
+                  <template #default="{ row }">{{ row.readOnly }}</template>
+                </el-table-column>
+              </el-table>
+            </section>
+          </template>
+
+          <template v-else-if="tab === 'Closure'">
+            <section class="closure-grid">
+              <article v-for="item in closureReadinessRows" :key="item.label" class="evidence-card">
+                <span>{{ item.label }}</span>
+                <el-tag :type="tagType(item.status)">{{ item.status }}</el-tag>
+                <p>{{ item.note }}</p>
+              </article>
+            </section>
+
+            <section class="panel section-gap">
+              <div class="section-headline">
+                <div>
+                  <p class="eyebrow">Customer Sign-off</p>
+                  <h2>Customer Acceptance Gate</h2>
+                </div>
+                <el-tag type="warning">evidence gated</el-tag>
+              </div>
+              <el-alert
+                v-if="customerAcceptanceRows.length === 0"
+                type="info"
+                :closable="false"
+                show-icon
+                title="Customer sign-off is gated by closure evidence readiness."
+                class="report-alert"
+              />
+              <el-table :data="customerAcceptanceRows" stripe border>
+                <el-table-column prop="label" label="Customer Sign-off Field" min-width="240" />
+                <el-table-column prop="value" label="Status / Value" min-width="360" />
+              </el-table>
+            </section>
+
+            <section v-if="guardrailRows.length" class="panel section-gap">
+              <h2>Operational Guardrails</h2>
+              <ul class="deep-list">
+                <li v-for="item in guardrailRows" :key="item">{{ item }}</li>
+              </ul>
             </section>
           </template>
 
@@ -1026,6 +1402,25 @@ watch(activeCustomerSection, (section) => {
   max-width: 780px;
 }
 
+.selected-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.selected-section span {
+  color: #60736f;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.selected-section strong {
+  color: #0f766e;
+}
+
 .head-badges {
   display: flex;
   flex-wrap: wrap;
@@ -1042,6 +1437,109 @@ watch(activeCustomerSection, (section) => {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 12px;
+}
+
+.workflow-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+  gap: 8px;
+}
+
+.workflow-strip article {
+  position: relative;
+  min-height: 92px;
+  padding: 12px;
+  border: 1px solid #dbe6e2;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgb(38 65 58 / 6%);
+}
+
+.workflow-strip span {
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: #e2f2ee;
+  color: #0f766e;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.workflow-strip strong {
+  display: block;
+  margin-top: 8px;
+  color: #163b35;
+  line-height: 1.25;
+}
+
+.workflow-strip em {
+  display: block;
+  margin-top: 6px;
+  color: #60736f;
+  font-size: 12px;
+  font-style: normal;
+}
+
+.decision-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 12px;
+}
+
+.decision-card {
+  padding: 14px;
+  border: 1px solid #dbe6e2;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgb(38 65 58 / 6%);
+}
+
+.decision-card span,
+.control-boundary span {
+  display: block;
+  color: #60736f;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.decision-card strong {
+  display: block;
+  margin: 8px 0 4px;
+  color: #087467;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.decision-card em {
+  color: #28746a;
+  font-style: normal;
+}
+
+.control-boundary {
+  display: grid;
+  grid-template-columns: minmax(280px, 1.8fr) repeat(4, minmax(140px, 1fr));
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid #cfe2dc;
+  border-left: 4px solid #0f766e;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgb(38 65 58 / 6%);
+}
+
+.control-boundary strong {
+  display: block;
+  margin-top: 6px;
+  color: #163b35;
+}
+
+.control-boundary p {
+  margin: 8px 0 0;
+  color: #60736f;
 }
 
 .deep-summary {
@@ -1081,6 +1579,12 @@ watch(activeCustomerSection, (section) => {
 
 .evidence-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.closure-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 12px;
 }
 
 .deep-list {
@@ -1168,6 +1672,18 @@ watch(activeCustomerSection, (section) => {
   font-weight: 700;
 }
 
+.section-headline {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.section-headline h2 {
+  margin-bottom: 0;
+}
+
 .bar-row,
 .risk-row,
 .timeline-row,
@@ -1230,6 +1746,8 @@ watch(activeCustomerSection, (section) => {
   .deep-summary,
   .deep-grid,
   .evidence-grid,
+  .closure-grid,
+  .control-boundary,
   .filter-strip {
     grid-template-columns: 1fr;
     flex-direction: column;
