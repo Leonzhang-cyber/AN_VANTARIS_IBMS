@@ -494,7 +494,7 @@ const DASHBOARD_CONTENT_TABS = [
   '7-layer Readiness',
 ]
 
-const WORKSPACE_OVERVIEW_TABS = ['Risk Signal', 'Role Context', 'Action Queue', 'Health Readiness', 'Evidence & Governance']
+const WORKSPACE_OVERVIEW_TABS = ['Risk', 'Role Context', 'Action Queue', 'Health Readiness', 'Evidence & Governance']
 
 const WORKSPACE_OVERVIEW_CONNECTED_WORKSPACES = [
   'Work Management',
@@ -506,9 +506,9 @@ const WORKSPACE_OVERVIEW_CONNECTED_WORKSPACES = [
 ]
 
 const WORKSPACE_OVERVIEW_SECTIONS: Record<string, WorkspaceOverviewSectionConfig> = {
-  'Risk Signal': {
-    displayLabel: 'Risk Signal',
-    title: 'Risk Signal',
+  Risk: {
+    displayLabel: 'Risk',
+    title: 'Risk',
     subtitle: "Prioritizes today's workspace by service risk, assigned actions, evidence gaps, and governance readiness.",
     primaryAction: 'Open Priority Workbench',
   },
