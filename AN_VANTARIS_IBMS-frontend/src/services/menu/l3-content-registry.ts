@@ -494,7 +494,7 @@ const DASHBOARD_CONTENT_TABS = [
   '7-layer Readiness',
 ]
 
-const WORKSPACE_OVERVIEW_TABS = ['Priority Signal', 'Role Context', 'Action Queue', 'Readiness Gate', 'Evidence Pack', 'Governance Audit']
+const WORKSPACE_OVERVIEW_TABS = ['Risk Signal', 'Role Context', 'Action Queue', 'Health Readiness', 'Evidence & Governance']
 
 const WORKSPACE_OVERVIEW_CONNECTED_WORKSPACES = [
   'Work Management',
@@ -506,41 +506,35 @@ const WORKSPACE_OVERVIEW_CONNECTED_WORKSPACES = [
 ]
 
 const WORKSPACE_OVERVIEW_SECTIONS: Record<string, WorkspaceOverviewSectionConfig> = {
-  'Workspace Risk Signal': {
-    displayLabel: 'Priority Signal',
-    title: 'Role Priority Signal',
+  'Risk Signal': {
+    displayLabel: 'Risk Signal',
+    title: 'Risk Signal',
     subtitle: "Prioritizes today's workspace by service risk, assigned actions, evidence gaps, and governance readiness.",
     primaryAction: 'Open Priority Workbench',
   },
-  'Role Workspace Context': {
+  'Role Context': {
     displayLabel: 'Role Context',
     title: 'Role Context',
     subtitle: "Shows the user's operating scope, access boundary, assigned workspaces, and role-specific priorities.",
     primaryAction: 'Open Recommended Workspace',
   },
-  'Assigned Workspace Actions': {
+  'Action Queue': {
     displayLabel: 'Action Queue',
     title: 'Action Queue',
     subtitle: 'Orders assigned actions by customer impact, SLA exposure, and operational urgency.',
     primaryAction: 'Open Action Queue',
   },
-  'Workspace Health Readiness': {
-    displayLabel: 'Readiness Gate',
-    title: 'Readiness Gate',
+  'Health Readiness': {
+    displayLabel: 'Health Readiness',
+    title: 'Health Readiness',
     subtitle: 'Validates whether the workspace is ready for operational use, customer review, and controlled handoff.',
     primaryAction: 'Open Recommended Workspace',
   },
-  'Workspace Evidence Pack': {
-    displayLabel: 'Evidence Pack',
-    title: 'Evidence Pack',
-    subtitle: 'Collects workspace evidence for supervisor review, customer acceptance, export, and audit traceability.',
-    primaryAction: 'Export Evidence Pack',
-  },
-  'Workspace Governance Audit': {
-    displayLabel: 'Governance Audit',
-    title: 'Governance Audit',
-    subtitle: 'Confirms owner, permission, approval, SLA, audit, export, and review controls for this workspace.',
-    primaryAction: 'Open Governance Audit',
+  'Evidence & Governance': {
+    displayLabel: 'Evidence & Governance',
+    title: 'Evidence & Governance',
+    subtitle: 'Collects workspace evidence and confirms owner, permission, approval, SLA, audit, export, and review controls for customer acceptance.',
+    primaryAction: 'Review Evidence & Governance',
   },
 }
 
@@ -577,7 +571,7 @@ const DASHBOARD_VISUAL_TYPES: Record<string, DashboardVisualType> = {
 }
 
 const DASHBOARD_ACTIONS: Record<string, string[]> = {
-  'workspace-overview': ['Open Priority Workbench', 'Open Recommended Workspace', 'Open Action Queue', 'Export Evidence Pack', 'Open Governance Audit'],
+  'workspace-overview': ['Open Priority Workbench', 'Open Recommended Workspace', 'Open Action Queue', 'Review Evidence & Governance'],
   'dashboard-executive': ['Approve escalation', 'Request evidence', 'Open service risk', 'Export executive pack'],
   'dashboard-operations': ['Open command center', 'Create work order', 'Escalate', 'Open dispatch queue'],
   'portfolio-operations': ['Compare sites', 'Open site detail', 'Export portfolio report', 'Prepare executive portfolio pack'],

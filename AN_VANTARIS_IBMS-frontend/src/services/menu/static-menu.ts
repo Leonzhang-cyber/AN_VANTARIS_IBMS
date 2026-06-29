@@ -32,7 +32,7 @@ const domains: MenuDomainInput[] = [
     path: '/dashboard',
     icon: 'D',
     children: [
-      { id: 'workspace-overview', label: 'Workspace Overview', path: '/dashboard', status: 'mapped', l3: ['Workspace Risk Signal', 'Role Workspace Context', 'Assigned Workspace Actions', 'Workspace Health Readiness', 'Workspace Evidence Pack', 'Workspace Governance Audit'] },
+      { id: 'workspace-overview', label: 'Workspace Overview', path: '/dashboard', status: 'mapped', l3: ['Risk Signal', 'Role Context', 'Action Queue', 'Health Readiness', 'Evidence & Governance'] },
       { id: 'dashboard-executive', label: 'Executive Control View', path: '/dashboard', status: 'mapped', l3: ['Executive Risk Signal', 'Portfolio Performance Context', 'Critical Service Actions', 'Customer Impact Governance', 'Executive Evidence Pack', 'Portfolio Readiness Quality'] },
       { id: 'dashboard-operations', label: 'Operations Snapshot', path: '/dashboard', status: 'mapped', l3: ['Operations Risk Signal', 'Live Situation Context', 'Service Recovery Actions', 'Availability Governance', 'Operations Evidence Timeline', 'Daily Readiness Quality'] },
       { id: 'portfolio-operations', label: 'Portfolio Operations', path: '/dashboard', status: 'mapped', l3: ['Portfolio Risk Signal', 'Cross-site Context Map', 'SLA Exposure Actions', 'Partner Exposure Governance', 'Portfolio Evidence Pack', 'Portfolio Readiness Quality'] },
