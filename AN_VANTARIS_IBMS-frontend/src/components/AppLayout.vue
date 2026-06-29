@@ -745,24 +745,30 @@ onMounted(() => {
   padding: 18px 24px 28px;
 }
 
+.app-layout__content-scroll:has(.app-layout__l3-row) {
+  padding-top: 12px;
+}
+
 .app-layout__l3-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 14px;
-  padding: 10px 12px;
+  gap: 6px;
+  margin-bottom: 8px;
+  padding: 6px 10px;
   border: 1px solid #d7e3ec;
-  border-radius: 12px;
+  border-radius: 10px;
   background: #ffffff;
-  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.04);
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.035);
 }
 
 .app-layout__l3-tab {
   border-radius: 999px;
   font-weight: 600;
   cursor: pointer;
-  min-height: 36px;
-  padding: 6px 12px;
+  min-height: 32px;
+  height: 32px;
+  padding: 4px 12px;
+  line-height: 1.1;
 }
 
 .app-layout__l3-tab--active {
