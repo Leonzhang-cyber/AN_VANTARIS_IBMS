@@ -375,7 +375,7 @@ onMounted(() => {
               <el-descriptions-item label="scope">{{ workspace.scope }}</el-descriptions-item>
               <el-descriptions-item label="mode">{{ workspace.mode }}</el-descriptions-item>
               <el-descriptions-item label="readiness">{{ workspace.readinessLevel }}</el-descriptions-item>
-              <el-descriptions-item label="Customer Demo Report Pack">{{ workspace.customerDemoReportPack }}</el-descriptions-item>
+              <el-descriptions-item label="Customer Report Pack">{{ workspace.customerReportPackReady }}</el-descriptions-item>
               <el-descriptions-item label="Export Center Preview">{{ workspace.exportCenterPreview }}</el-descriptions-item>
               <el-descriptions-item label="Reports & Analytics">{{ workspace.visualStyle }}</el-descriptions-item>
             </el-descriptions>

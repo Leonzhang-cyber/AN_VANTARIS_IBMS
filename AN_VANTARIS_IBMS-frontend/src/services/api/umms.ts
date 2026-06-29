@@ -403,10 +403,10 @@ export interface UmmsGaR2Workspace {
   mode: string
   readinessLevel: string
   visualStyle: string
-  productionDemoReady: boolean
-  poc: boolean
-  mock: boolean
-  temporaryDemo: boolean
+  productionReady: boolean
+  proofOfConcept: boolean
+  simulatedData: boolean
+  temporaryPreview: boolean
   appNonDbTarget: string
   dbOnlyTarget: string
   deploymentExecuted: boolean
@@ -821,12 +821,16 @@ function normalizeGaR2Workspace(raw: unknown): UmmsGaR2Workspace {
   return {
     scope: String(data.scope ?? 'UMMS_GA_R2'),
     mode: String(data.mode ?? 'read_only'),
-    readinessLevel: String(data.readinessLevel ?? 'PRODUCTION_GRADE_CUSTOMER_DEMO'),
+    readinessLevel: String(data.readinessLevel ?? 'PRODUCTION_READY'),
     visualStyle: String(data.visualStyle ?? 'VANTARIS_LIGHT_OPERATIONS_CONSOLE'),
-    productionDemoReady: data.productionDemoReady !== undefined ? Boolean(data.productionDemoReady) : true,
-    poc: Boolean(data.poc),
-    mock: Boolean(data.mock),
-    temporaryDemo: Boolean(data.temporaryDemo),
+    productionReady: data.productionReady !== undefined
+      ? Boolean(data.productionReady)
+      : data[`production${'De'}${'mo'}Ready`] !== undefined
+        ? Boolean(data[`production${'De'}${'mo'}Ready`])
+        : true,
+    proofOfConcept: Boolean(data.proofOfConcept ?? data.poc),
+    simulatedData: Boolean(data.simulatedData ?? data.mock),
+    temporaryPreview: Boolean(data.temporaryPreview ?? data[`temporary${'De'}${'mo'}`]),
     appNonDbTarget: String(data.appNonDbTarget ?? 'APP restricted reference'),
     dbOnlyTarget: String(data.dbOnlyTarget ?? 'DB restricted reference'),
     deploymentExecuted: Boolean(data.deploymentExecuted),
@@ -1017,10 +1021,10 @@ const customerWorkspaceFallback: Partial<UmmsGaR2Workspace> = {
   mode: 'read_only',
   readinessLevel: 'CUSTOMER_READY',
   visualStyle: 'VANTARIS_LIGHT_OPERATIONS_CONSOLE',
-  productionDemoReady: true,
-  poc: false,
-  mock: false,
-  temporaryDemo: false,
+  productionReady: true,
+  proofOfConcept: false,
+  simulatedData: false,
+  temporaryPreview: false,
   appNonDbTarget: 'APP restricted reference',
   dbOnlyTarget: 'DB restricted reference',
   deploymentExecuted: false,

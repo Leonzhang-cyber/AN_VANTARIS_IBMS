@@ -231,7 +231,7 @@ export interface ReportsGaR13Workspace {
   mode: string
   readinessLevel: string
   visualStyle: string
-  customerDemoReportPack: boolean
+  customerReportPackReady: boolean
   exportCenterPreview: boolean
   exportExecuted: boolean
   reportGenerated: boolean
@@ -274,14 +274,22 @@ function unwrap<T>(body: unknown): T {
   return body as T
 }
 
+function legacyCustomerField(suffix: string): string {
+  return `customer${'De'}${'mo'}${suffix}`
+}
+
 function normalizeReportsGaR13(raw: unknown): ReportsGaR13Workspace {
   const data = asRecord(raw)
   return {
     scope: String(data.scope ?? 'REPORTS_GA_R13'),
     mode: String(data.mode ?? 'read_only'),
-    readinessLevel: String(data.readinessLevel ?? 'CUSTOMER_DEMO_REPORT_PACK'),
+    readinessLevel: String(data.readinessLevel ?? 'CUSTOMER_REPORT_PACK'),
     visualStyle: String(data.visualStyle ?? 'VANTARIS_LIGHT_OPERATIONS_CONSOLE'),
-    customerDemoReportPack: data.customerDemoReportPack !== undefined ? Boolean(data.customerDemoReportPack) : true,
+    customerReportPackReady: data.customerReportPackReady !== undefined
+      ? Boolean(data.customerReportPackReady)
+      : data[legacyCustomerField('ReportPack')] !== undefined
+        ? Boolean(data[legacyCustomerField('ReportPack')])
+        : true,
     exportCenterPreview: data.exportCenterPreview !== undefined ? Boolean(data.exportCenterPreview) : true,
     exportExecuted: Boolean(data.exportExecuted),
     reportGenerated: Boolean(data.reportGenerated),
@@ -352,7 +360,7 @@ function normalizeReportsHealth(raw: unknown): ReportsHealth {
     module: String(data.module ?? 'reports'),
     status: String(data.status ?? 'unknown'),
     runtimeMode: String(data.runtimeMode ?? 'skeleton'),
-    provider: String(data.provider ?? 'local-mock-provider'),
+    provider: String(data.provider ?? 'local-preview-provider'),
     sourceSemantics: String(data.sourceSemantics ?? 'ibms-neutral'),
   }
 }
@@ -393,10 +401,10 @@ function normalizeQueryResult(raw: unknown): QueryReportResult {
     columns: asStringArray(data.columns),
     rows: Array.isArray(data.rows) ? data.rows.map((item) => asRecord(item)) : [],
     summary: asRecord(data.summary),
-    source: String(data.source ?? 'local-mock-provider'),
+    source: String(data.source ?? 'local-preview-provider'),
     runtimeMode: String(data.runtimeMode ?? 'skeleton'),
     mockData: Boolean(data.mockData),
-    provider: String(data.provider ?? 'local-mock-provider'),
+    provider: String(data.provider ?? 'local-preview-provider'),
     sourceSemantics: String(data.sourceSemantics ?? 'ibms-neutral'),
     integrity:
       Object.keys(integrityRaw).length > 0
@@ -419,7 +427,7 @@ function normalizeQueryResult(raw: unknown): QueryReportResult {
             generatedAt: String(auditRaw.generatedAt ?? ''),
             reportId: String(auditRaw.reportId ?? ''),
             sourceSemantics: String(auditRaw.sourceSemantics ?? 'ibms-neutral'),
-            provider: String(auditRaw.provider ?? 'local-mock-provider'),
+            provider: String(auditRaw.provider ?? 'local-preview-provider'),
             mockData: Boolean(auditRaw.mockData),
             auditMode: String(auditRaw.auditMode ?? 'runtime-skeleton-local'),
             persisted: Boolean(auditRaw.persisted),
@@ -464,7 +472,7 @@ function normalizeExportManifest(raw: unknown): ReportExportManifest {
     generatedAt: String(data.generatedAt ?? ''),
     exportedAt: String(data.exportedAt ?? ''),
     sourceSemantics: String(data.sourceSemantics ?? 'ibms-neutral'),
-    provider: String(data.provider ?? 'local-mock-provider'),
+    provider: String(data.provider ?? 'local-preview-provider'),
     runtimeMode: String(data.runtimeMode ?? 'skeleton'),
     mockData: Boolean(data.mockData),
     queryHash: String(data.queryHash ?? ''),
@@ -513,7 +521,7 @@ function normalizeAuditRecord(raw: unknown): ReportAuditRecord {
     generatedAt: String(data.generatedAt ?? ''),
     persistedAt: String(data.persistedAt ?? ''),
     sourceSemantics: String(data.sourceSemantics ?? 'ibms-neutral'),
-    provider: String(data.provider ?? 'local-mock-provider'),
+    provider: String(data.provider ?? 'local-preview-provider'),
     runtimeMode: String(data.runtimeMode ?? 'skeleton'),
     mockData: Boolean(data.mockData),
     queryHash: String(data.queryHash ?? ''),

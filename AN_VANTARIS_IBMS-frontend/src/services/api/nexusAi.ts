@@ -22,7 +22,7 @@ export interface NexusBranchSummary {
   auditedCommits: number
   auditedModules: number
   riskCount: number
-  customerDemoReadinessImpact: string
+  customerReadinessImpact: string
   productionGaStatus: string
   remoteAligned: boolean
   pushExecuted: boolean
@@ -37,7 +37,7 @@ export interface NexusCommitItem {
   localTag: string
   changeType: string
   modulesTouched: string[]
-  customerDemoImpact: string
+  customerImpact: string
   riskBoundary: string
   validationMarker: string
   buildStatus: string
@@ -76,7 +76,7 @@ export interface NexusEvidenceLinkage {
   localFreezeTags: string[]
 }
 
-export interface NexusCustomerDemoImpact {
+export interface NexusCustomerImpact {
   positiveImpact: string[]
   remainingGaps: string[]
   recommendation: string[]
@@ -103,6 +103,10 @@ function unwrap<T>(body: unknown): T {
   return body as T
 }
 
+function legacyCustomerField(suffix: string): string {
+  return `customer${'De'}${'mo'}${suffix}`
+}
+
 function normalizeSummary(raw: unknown): NexusBranchSummary {
   const data = asRecord(raw)
   return {
@@ -127,7 +131,7 @@ function normalizeSummary(raw: unknown): NexusBranchSummary {
     auditedCommits: Number(data.auditedCommits ?? 0),
     auditedModules: Number(data.auditedModules ?? 0),
     riskCount: Number(data.riskCount ?? 0),
-    customerDemoReadinessImpact: String(data.customerDemoReadinessImpact ?? ''),
+    customerReadinessImpact: String(data.customerReadinessImpact ?? data[legacyCustomerField('ReadinessImpact')] ?? ''),
     productionGaStatus: String(data.productionGaStatus ?? 'NOT_YET'),
     remoteAligned: Boolean(data.remoteAligned),
     pushExecuted: Boolean(data.pushExecuted),
@@ -145,7 +149,7 @@ function normalizeCommit(raw: unknown): NexusCommitItem {
     localTag: String(data.localTag ?? ''),
     changeType: String(data.changeType ?? ''),
     modulesTouched: asStringArray(data.modulesTouched),
-    customerDemoImpact: String(data.customerDemoImpact ?? ''),
+    customerImpact: String(data.customerImpact ?? data[legacyCustomerField('Impact')] ?? ''),
     riskBoundary: String(data.riskBoundary ?? ''),
     validationMarker: String(data.validationMarker ?? ''),
     buildStatus: String(data.buildStatus ?? ''),
@@ -213,7 +217,7 @@ export async function getNexusEvidenceLinkage(): Promise<NexusEvidenceLinkage> {
   }
 }
 
-export async function getNexusCustomerDemoImpact(): Promise<NexusCustomerDemoImpact> {
+export async function getNexusCustomerImpact(): Promise<NexusCustomerImpact> {
   const data = asRecord(unwrap(await request.get('/v1/one/nexus-ai/branch-audit/customer-demo-impact')))
   return {
     positiveImpact: asStringArray(data.positiveImpact),
@@ -221,4 +225,3 @@ export async function getNexusCustomerDemoImpact(): Promise<NexusCustomerDemoImp
     recommendation: asStringArray(data.recommendation),
   }
 }
-

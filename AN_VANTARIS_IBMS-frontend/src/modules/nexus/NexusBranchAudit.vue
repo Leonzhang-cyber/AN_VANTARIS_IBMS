@@ -36,7 +36,7 @@
         <article v-for="commit in commits" :key="commit.commitHash">
           <strong>{{ commit.shortHash }} / {{ commit.title }}</strong>
           <span>{{ commit.remoteStatus }} / {{ commit.changeType }}</span>
-          <p>{{ commit.customerDemoImpact }}</p>
+          <p>{{ commit.customerImpact }}</p>
           <small>{{ commit.validationMarker }}</small>
         </article>
       </div>
@@ -131,8 +131,8 @@
       <article>
         <div class="section-head">
           <div>
-            <p class="eyebrow">Customer demo impact panel</p>
-            <h2>{{ summary.customerDemoReadinessImpact }}</h2>
+            <p class="eyebrow">Customer impact panel</p>
+            <h2>{{ summary.customerReadinessImpact }}</h2>
           </div>
         </div>
         <h3>Positive impact</h3>
@@ -191,11 +191,11 @@ import {
   getNexusBranchModules,
   getNexusBranchRisks,
   getNexusBranchSummary,
-  getNexusCustomerDemoImpact,
+  getNexusCustomerImpact,
   getNexusEvidenceLinkage,
   type NexusBranchSummary,
   type NexusCommitItem,
-  type NexusCustomerDemoImpact,
+  type NexusCustomerImpact,
   type NexusEvidenceLinkage,
   type NexusModuleItem,
   type NexusRiskItem,
@@ -223,7 +223,7 @@ const emptySummary: NexusBranchSummary = {
   auditedCommits: 0,
   auditedModules: 0,
   riskCount: 0,
-  customerDemoReadinessImpact: '',
+  customerReadinessImpact: '',
   productionGaStatus: 'NOT_YET',
   remoteAligned: false,
   pushExecuted: false,
@@ -236,7 +236,7 @@ const commits = ref<NexusCommitItem[]>([])
 const modules = ref<NexusModuleItem[]>([])
 const risks = ref<NexusRiskItem[]>([])
 const evidence = ref<NexusEvidenceLinkage>({ auditMode: 'read-only-branch-diff-preview', ucdeEvidenceReferences: [], reportsReferences: [], registryReferences: [], validationMarkers: [], localFreezeTags: [] })
-const customerImpact = ref<NexusCustomerDemoImpact>({ positiveImpact: [], remainingGaps: [], recommendation: [] })
+const customerImpact = ref<NexusCustomerImpact>({ positiveImpact: [], remainingGaps: [], recommendation: [] })
 
 const summaryCards = computed(() => [
   { label: 'Audited Commits', value: summary.value.auditedCommits },
@@ -254,7 +254,7 @@ onMounted(async () => {
     getNexusBranchModules(),
     getNexusBranchRisks(),
     getNexusEvidenceLinkage(),
-    getNexusCustomerDemoImpact(),
+    getNexusCustomerImpact(),
   ])
   summary.value = summaryData
   commits.value = commitData
