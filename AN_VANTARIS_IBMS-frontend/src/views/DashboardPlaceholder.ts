@@ -29,19 +29,39 @@ type SectionConfig = {
 }
 
 const defaultConnectedWorkspaces = [
+  { label: 'Command Center', route: '/console/operations' },
   { label: 'Work Management', route: '/one/umms/workspace' },
   { label: 'Assets & Locations', route: '/assets/topology' },
   { label: 'Faults & Events', route: '/one/airport/alarms-events' },
+  { label: 'Data & Intelligence', route: '/one/assets/context' },
   { label: 'Reports & Documents', route: '/reports' },
-  { label: 'Governance & Security', route: '/system/audit-logs' },
+  { label: 'Governance & Security', route: '/console/operations' },
   { label: 'Integration & Partner Hub', route: '/uedge/setup' },
+  { label: 'Industry Solutions', route: '/dashboard' },
+  { label: 'Administration', route: '/system' },
 ]
 
 const defaultMetrics: MetricCard[] = [
-  { label: 'Open Work Orders', value: '42', note: 'Active maintenance queue across critical systems', tone: '#0f766e' },
-  { label: 'Critical Assets', value: '18', note: 'High impact assets requiring operational review', tone: '#b45309' },
-  { label: 'SLA At Risk', value: '7', note: 'Items requiring supervisor attention before breach', tone: '#dc2626' },
-  { label: 'Evidence Ready', value: '128', note: 'Traceable records ready for review or export', tone: '#2563eb' },
+  { label: 'Asset Import Readiness', value: 'HOLD_BLOCKED', note: 'Confirm Import: Disabled', tone: '#dc2626' },
+  { label: 'Total Asset Records', value: '5,187', note: 'Registered import batch under readonly projection', tone: '#0f766e' },
+  { label: 'BLOCKER', value: '2', note: 'blocked_by_data_quality records prevent formal write', tone: '#b91c1c' },
+  { label: 'MAJOR', value: '1', note: 'Asset quality issue requires owner review', tone: '#b45309' },
+  { label: 'WARNING', value: '7', note: 'Warnings remain before evidence closure', tone: '#2563eb' },
+]
+
+const dashboardReadinessRows = [
+  { label: 'Airport Map Readiness', value: 'Registered / Pending CAD conversion' },
+  { label: 'Fault / Work Order Flow', value: 'Readonly projection active' },
+  { label: 'Evidence Closure', value: 'Not ready due to asset quality blockers' },
+  { label: 'T3 Ground Floor map registered', value: 'Registered floor-plan source retained for conversion' },
+  { label: 'Asset overlay blocked by data quality', value: 'blocked_by_data_quality' },
+  { label: 'Formal write disabled', value: 'No runtime activation' },
+]
+
+const dashboardDecisionLens = [
+  { title: 'Import Gate', detail: 'HOLD_BLOCKED remains active until BLOCKER records are corrected and reviewed.' },
+  { title: 'Map Overlay', detail: 'T3 Ground Floor map is registered, with asset overlay blocked by data quality.' },
+  { title: 'Runtime Posture', detail: 'Readonly projection active; backend endpoint unavailable for formal write execution.' },
 ]
 
 const sections: Record<string, SectionConfig> = {
@@ -558,15 +578,19 @@ const sections: Record<string, SectionConfig> = {
 }
 
 const fallbackSection: SectionConfig = {
-  title: 'Dashboard Overview',
-  subtitle: 'Unified operational overview across operations, maintenance, assets, evidence, reports, energy, and customer delivery.',
-  primaryRoute: '/one/umms/workspace',
-  primaryAction: 'Open UMMS',
+  title: 'VANTARIS ONE Operations Dashboard',
+  subtitle: 'Production operations dashboard for asset import readiness, airport map registration, readonly fault and work order projection, and evidence closure gating.',
+  primaryRoute: '/one/assets/context',
+  primaryAction: 'Open Asset Context',
+  sectionEyebrow: 'OPERATIONS READINESS',
+  connectedWorkspaces: defaultConnectedWorkspaces,
   metrics: defaultMetrics,
   actions: [
-    { title: 'Review operations dashboard', owner: 'Operator', status: 'Open', priority: 'Medium', route: '/console/operations' },
-    { title: 'Open customer report center', owner: 'Reports', status: 'Ready', priority: 'Medium', route: '/reports' },
-    { title: 'Check evidence readiness', owner: 'UCDE', status: 'Ready', priority: 'Medium', route: '/ucde/evidence' },
+    { title: 'Resolve asset import blockers', owner: 'Asset Data Owner', status: 'HOLD_BLOCKED', priority: 'BLOCKER', route: '/one/assets/context' },
+    { title: 'Review T3 Ground Floor map registration', owner: 'Airport Operations', status: 'Registered', priority: 'MAJOR', route: '/one/airport/assets-topology' },
+    { title: 'Hold confirm import control', owner: 'Governance', status: 'Confirm Import: Disabled', priority: 'BLOCKER', route: '/system/audit-logs' },
+    { title: 'Verify readonly fault and work order projection', owner: 'Maintenance Lead', status: 'Readonly projection active', priority: 'WARNING', route: '/one/umms/workspace' },
+    { title: 'Prepare evidence closure review', owner: 'Evidence Owner', status: 'Not ready', priority: 'WARNING', route: '/ucde/evidence' },
   ],
 }
 
@@ -583,6 +607,42 @@ function openRoute(path: string): void {
 
 function card(children: VNodeChild[], extra: Record<string, string> = {}) {
   return h('article', { style: { ...panelStyle, padding: '18px', ...extra } }, children)
+}
+
+function keyValueRows(rows: Array<{ label: string; value: string }>) {
+  return h('div', { style: { display: 'grid', gap: '10px' } }, rows.map((row) => h('div', {
+    style: {
+      display: 'grid',
+      gridTemplateColumns: 'minmax(180px, .75fr) minmax(0, 1fr)',
+      gap: '12px',
+      padding: '12px',
+      border: '1px solid #dbe7e4',
+      borderRadius: '10px',
+      background: '#f8fbfa',
+      alignItems: 'center',
+    },
+  }, [
+    h('span', { style: { color: '#64748b', fontSize: '12px', fontWeight: '800' } }, row.label),
+    h('strong', { style: { color: '#0f172a', fontSize: '13px' } }, row.value),
+  ])))
+}
+
+function decisionLensPanel() {
+  return card([
+    h('p', { style: eyebrowStyle }, 'Decision Lens'),
+    h('h2', { style: headingStyle }, 'Decision Lens'),
+    h('div', { style: { display: 'grid', gap: '12px' } }, dashboardDecisionLens.map((item) => h('div', {
+      style: {
+        borderLeft: '4px solid #dc2626',
+        padding: '10px 12px',
+        background: '#fff7ed',
+        borderRadius: '8px',
+      },
+    }, [
+      h('strong', { style: { display: 'block', marginBottom: '4px', color: '#0f172a' } }, item.title),
+      h('p', { style: { margin: 0, color: '#52615d', fontSize: '13px', lineHeight: '1.5' } }, item.detail),
+    ]))),
+  ])
 }
 
 function normalizeL3(value: unknown): string {
@@ -629,7 +689,14 @@ export default defineComponent({
           }
         : undefined
     })
-    const activeSection = computed(() => sections[normalizeL3(route.query.l3)] ?? registrySection.value ?? fallbackSection)
+    const activeSection = computed(() => {
+      if (route.path === '/dashboard' && !route.query.l3 && !route.query.menu) {
+        return fallbackSection
+      }
+
+      return sections[normalizeL3(route.query.l3)] ?? registrySection.value ?? fallbackSection
+    })
+    const isOperationsDashboard = computed(() => activeSection.value.title === fallbackSection.title)
 
     return () => h('section', {
       style: {
@@ -657,6 +724,7 @@ export default defineComponent({
             ]),
             h('button', { type: 'button', onClick: () => openRoute(activeSection.value.primaryRoute), style: actionButtonStyle }, activeSection.value.primaryAction),
           ]),
+          h('h3', { style: { ...headingStyle, fontSize: '16px', marginBottom: '10px' } }, 'Action Queue'),
           h('div', { style: { overflowX: 'auto' } }, [
             h('table', { style: { width: '100%', borderCollapse: 'collapse', minWidth: '760px' } }, [
               h('thead', [
@@ -683,26 +751,39 @@ export default defineComponent({
 
         card([
           h('p', { style: eyebrowStyle }, 'Operational routes'),
-          h('h2', { style: headingStyle }, 'Connected workspaces'),
+          h('h2', { style: headingStyle }, 'Connected Workspaces'),
           h('div', { style: { display: 'grid', gap: '10px' } },
             (activeSection.value.connectedWorkspaces ?? defaultConnectedWorkspaces).map((workspace) => routeButton(workspace.label, workspace.route)),
           ),
         ]),
       ]),
+
+      ...(isOperationsDashboard.value ? [
+        h('section', { style: { display: 'grid', gridTemplateColumns: '1fr .95fr', gap: '16px' } }, [
+          card([
+            h('p', { style: eyebrowStyle }, 'Readiness Gate'),
+            h('h2', { style: headingStyle }, 'Asset Import and Airport Map Readiness'),
+            keyValueRows(dashboardReadinessRows),
+          ]),
+          decisionLensPanel(),
+        ]),
+      ] : []),
     ])
   },
 })
 
 function routeForConnectedWorkspace(label: string): string {
   const routes: Record<string, string> = {
+    'Command Center': '/console/operations',
     'Work Management': '/one/umms/workspace',
     'Assets & Locations': '/assets/topology',
     'Faults & Events': '/one/airport/alarms-events',
     'Reports & Documents': '/reports',
-    'Governance & Security': '/system/audit-logs',
+    'Governance & Security': '/console/operations',
     'Integration & Partner Hub': '/uedge/setup',
     'Industry Solutions': '/dashboard',
     'Data & Intelligence': '/one/assets/context',
+    Administration: '/system',
   }
 
   return routes[label] ?? '/dashboard'
