@@ -88,7 +88,6 @@ const activeL3Content = computed(() => {
   })
 })
 const pageHandledL3Paths = new Set([
-  '/dashboard',
   '/iot',
   '/did',
   '/modeling',
@@ -110,14 +109,12 @@ const pageHandledL3Paths = new Set([
   '/ucde/evidence',
   '/reports',
   '/uesg/sustainability',
-  '/one/umms/workspace',
   '/one/umms/overview',
   '/umms/maintenance',
   '/uedge/setup',
   '/uedge/diagnostics',
   '/one/airport/overview',
   '/one/airport/systems-integration-health',
-  '/one/airport/assets-topology',
   '/one/airport/alarms-events',
   '/one/airport/fault-cases',
   '/one/airport/maintenance-work-orders',
@@ -220,11 +217,11 @@ onMounted(() => {
 </script>
 
 <template>
-  <el-container class="app-layout">
-    <el-aside
-      :width="sidebarWidth"
+  <div class="app-layout">
+    <aside
       class="app-layout__aside"
       :class="{ 'app-layout__aside--collapsed': sidebarCollapsed }"
+      :style="{ width: sidebarWidth }"
       v-loading="menuLoading"
     >
       <div class="app-layout__brand-panel">
@@ -290,10 +287,10 @@ onMounted(() => {
           </template>
         </el-menu>
       </div>
-    </el-aside>
+    </aside>
 
-    <el-container class="app-layout__workspace">
-      <el-header class="app-layout__header">
+    <div class="app-layout__workspace">
+      <header class="app-layout__header">
         <div class="app-layout__title-block">
           <h1>{{ pageTitle }}</h1>
           <p>{{ pageSubtitle }}</p>
@@ -321,9 +318,9 @@ onMounted(() => {
             </template>
           </el-dropdown>
         </div>
-      </el-header>
+      </header>
 
-      <el-main class="app-layout__main">
+      <main class="app-layout__main">
         <div class="app-layout__content-scroll">
           <section v-if="activeL3Items.length" class="app-layout__l3-row" aria-label="L3 content navigation">
             <el-tag
@@ -366,13 +363,15 @@ onMounted(() => {
 
           <router-view :key="route.fullPath" />
         </div>
-      </el-main>
-    </el-container>
-  </el-container>
+      </main>
+    </div>
+  </div>
 </template>
 
 <style scoped>
 .app-layout {
+  display: flex;
+  width: 100%;
   height: 100vh;
   min-height: 100vh;
   overflow: hidden;
@@ -845,5 +844,29 @@ onMounted(() => {
   .app-layout__l3-metrics {
     grid-template-columns: 1fr;
   }
+}
+</style>
+
+<style scoped>
+/* R4A layout recovery override after replacing Element Plus layout containers with native containers. */
+.app-layout__workspace {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  background: transparent;
+}
+
+.app-layout__main {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  background: transparent;
+  padding: 0;
+}
+
+.app-layout__content-scroll {
+  min-height: 0;
+  flex: 1;
 }
 </style>
