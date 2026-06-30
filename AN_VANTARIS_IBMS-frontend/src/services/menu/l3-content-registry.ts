@@ -510,31 +510,31 @@ const WORKSPACE_OVERVIEW_SECTIONS: Record<string, WorkspaceOverviewSectionConfig
     displayLabel: 'Risk',
     title: 'Risk',
     subtitle: "Prioritizes today's workspace by service risk, assigned actions, evidence gaps, and governance readiness.",
-    primaryAction: 'Open Priority Workbench',
+    primaryAction: 'Open Workbench',
   },
   'Role Context': {
     displayLabel: 'Role Context',
     title: 'Role Context',
     subtitle: "Shows the user's operating scope, access boundary, assigned workspaces, and role-specific priorities.",
-    primaryAction: 'Open Recommended Workspace',
+    primaryAction: 'Open Workspace',
   },
   'Action Queue': {
     displayLabel: 'Action Queue',
     title: 'Action Queue',
     subtitle: 'Orders assigned actions by customer impact, SLA exposure, and operational urgency.',
-    primaryAction: 'Open Action Queue',
+    primaryAction: 'Open Queue',
   },
   'Health Readiness': {
     displayLabel: 'Health Readiness',
     title: 'Health Readiness',
     subtitle: 'Validates whether the workspace is ready for operational use, customer review, and controlled handoff.',
-    primaryAction: 'Open Recommended Workspace',
+    primaryAction: 'Review Readiness',
   },
   'Evidence & Governance': {
     displayLabel: 'Evidence & Governance',
     title: 'Evidence & Governance',
     subtitle: 'Collects workspace evidence and confirms owner, permission, approval, SLA, audit, export, and review controls for customer acceptance.',
-    primaryAction: 'Review Evidence & Governance',
+    primaryAction: 'Review Evidence',
   },
 }
 
@@ -556,6 +556,147 @@ function dashboardDisplayTabs(context: L3ContentContext, section: string): Array
     label,
     active: label === section,
   }))
+}
+
+function contextEyebrowFor(context: L3ContentContext): string {
+  if (context.l1Label === 'Dashboard') {
+    return 'DECISION VIEW'
+  }
+
+  if (context.l1Label === 'Command Center') {
+    return 'DECISION VIEW'
+  }
+  if (context.l1Label === 'Assets & Locations') {
+    return context.l2Id === 'floor-plan-hmi' ? 'LOCATION CONTEXT' : 'ASSET CONTEXT'
+  }
+  if (context.l1Label === 'Work Management') {
+    return 'WORK ORDER CONTEXT'
+  }
+  if (context.l1Label === 'Faults & Events') {
+    return 'FAULT & EVENT CONTEXT'
+  }
+  if (context.l1Label === 'Reports & Documents') {
+    return /evidence|handover|export|document/i.test(context.l2Label) ? 'EVIDENCE CONTEXT' : 'REPORTING CONTEXT'
+  }
+  if (context.l1Label === 'Governance & Security') {
+    return /security|cyber/i.test(context.l2Label) ? 'SECURITY CONTEXT' : 'GOVERNANCE CONTEXT'
+  }
+  if (context.l1Label === 'Integration & Partner Hub') {
+    return 'INTEGRATION CONTEXT'
+  }
+  if (context.l1Label === 'Administration') {
+    return 'ADMINISTRATION CONTEXT'
+  }
+
+  return 'OPERATIONS CONTEXT'
+}
+
+function compactSectionLabel(context: L3ContentContext, section: string): string {
+  const workspaceSection = context.l2Id === 'workspace-overview' ? WORKSPACE_OVERVIEW_SECTIONS[section] : undefined
+  const displaySection = workspaceSection?.displayLabel ?? section
+
+  if (context.l1Label === 'Dashboard') {
+    return displaySection
+      .replace(/^Executive\s+/i, '')
+      .replace(/^Operations\s+/i, '')
+      .replace(/^Portfolio\s+/i, '')
+      .replace(/^Customer\s+/i, 'Customer ')
+      .replace(/ Context$/i, ' Context')
+      .trim()
+  }
+
+  if (displaySection.toLowerCase() === context.l2Label.toLowerCase()) {
+    return 'Overview'
+  }
+
+  return displaySection
+}
+
+function sectionTitleFor(context: L3ContentContext, section: string): string {
+  return `${context.l2Label} · ${compactSectionLabel(context, section)}`
+}
+
+function dashboardSubtitleFor(sectionLabel: string, profile: DashboardWorkbenchProfile, workspaceSection?: WorkspaceOverviewSectionConfig): string {
+  if (workspaceSection) {
+    return workspaceSection.subtitle
+  }
+
+  const lowerSection = sectionLabel.toLowerCase()
+  if (lowerSection.includes('risk')) {
+    return `Prioritizes ${profile.subject} by service impact, owner action, evidence readiness, and governance exposure.`
+  }
+  if (lowerSection.includes('situation') || lowerSection.includes('context')) {
+    return `Shows live operating context, affected assets, service pressure, and response ownership.`
+  }
+  if (lowerSection.includes('action') || lowerSection.includes('recovery')) {
+    return `Tracks recovery actions, assigned owners, SLA pressure, and next operational handoff.`
+  }
+  if (lowerSection.includes('evidence')) {
+    return `Links evidence, export objects, owner review, and customer-ready governance records.`
+  }
+  if (lowerSection.includes('readiness')) {
+    return `Confirms readiness gaps, approval needs, evidence coverage, and handoff quality.`
+  }
+
+  return `Highlights ${profile.subject} signals, operating context, recommended action, evidence readiness, and governance controls.`
+}
+
+function sectionSubtitleFor(context: L3ContentContext, sectionLabel: string, profile: L2ContentProfile): string {
+  const lowerSection = sectionLabel.toLowerCase()
+  if (lowerSection.includes('risk') || lowerSection.includes('priority') || lowerSection.includes('exposure')) {
+    return `Prioritizes ${profile.subject} by impact, urgency, owner action, and evidence readiness.`
+  }
+  if (lowerSection.includes('map') || lowerSection.includes('location') || lowerSection.includes('zone')) {
+    return `Shows location context, linked assets, operational status, and field review needs.`
+  }
+  if (lowerSection.includes('work order') || lowerSection.includes('assignment') || lowerSection.includes('dispatch')) {
+    return `Tracks work order ownership, SLA pressure, dispatch state, and closure evidence.`
+  }
+  if (lowerSection.includes('alarm') || lowerSection.includes('event') || lowerSection.includes('fault')) {
+    return `Reviews event priority, related assets, operator action, and evidence timeline.`
+  }
+  if (lowerSection.includes('evidence') || lowerSection.includes('export') || lowerSection.includes('report')) {
+    return `Links evidence, report objects, owner review, and customer-ready export controls.`
+  }
+  if (lowerSection.includes('readiness') || lowerSection.includes('gate')) {
+    return `Confirms readiness gaps, approval needs, evidence coverage, and handoff quality.`
+  }
+
+  return `Shows ${profile.subject} status, operational context, owner action, evidence readiness, and handoff controls.`
+}
+
+function primaryActionFor(context: L3ContentContext, sectionLabel: string, workspaceSection?: WorkspaceOverviewSectionConfig): string {
+  if (workspaceSection) {
+    return workspaceSection.primaryAction
+  }
+
+  const lowerSection = sectionLabel.toLowerCase()
+  if (lowerSection.includes('risk')) {
+    return 'Review Risk'
+  }
+  if (lowerSection.includes('queue') || lowerSection.includes('alarm') || lowerSection.includes('event') || lowerSection.includes('fault')) {
+    return 'Open Queue'
+  }
+  if (lowerSection.includes('evidence')) {
+    return 'Review Evidence'
+  }
+  if (lowerSection.includes('export') || lowerSection.includes('report')) {
+    return 'Export Pack'
+  }
+  if (lowerSection.includes('closure')) {
+    return 'Review Closure'
+  }
+  if (lowerSection.includes('map') || lowerSection.includes('location') || lowerSection.includes('route')) {
+    return lowerSection.includes('route') ? 'Open Route' : 'Review Map'
+  }
+  if (lowerSection.includes('readiness') || lowerSection.includes('gate')) {
+    return 'Review Readiness'
+  }
+  if (context.l1Label === 'Dashboard' || context.l1Label === 'Command Center') {
+    return 'Open Workbench'
+  }
+
+  return 'Review Section'
 }
 
 const DASHBOARD_VISUAL_TYPES: Record<string, DashboardVisualType> = {
@@ -895,11 +1036,11 @@ export function resolveL3ContentConfig(context: L3ContentContext): L3ContentConf
 
   if (context.l1Label === 'Assets & Locations' && context.l2Id === 'floor-plan-hmi') {
     return {
-      title: 'Floor Plan / HMI Map Operations',
-      subtitle: 'Field operations view for map readiness, asset location, system overlay, fault location, work order route, technician navigation and closure evidence.',
-      primaryAction: 'Review readonly projection',
+      title: sectionTitleFor(context, section),
+      subtitle: sectionSubtitleFor(context, compactSectionLabel(context, section), profile),
+      primaryAction: primaryActionFor(context, compactSectionLabel(context, section)),
       selectedLabel: section,
-      sectionEyebrow: 'Registered base layer',
+      sectionEyebrow: contextEyebrowFor(context),
       l3Tabs: [
         'Equipment Location Risk',
         'Site / Building Context',
@@ -944,14 +1085,15 @@ export function resolveL3ContentConfig(context: L3ContentContext): L3ContentConf
   }
 
   if (context.l1Label === 'Dashboard' && dashboardProfile) {
+    const compactSection = compactSectionLabel(context, section)
     return {
-      title: isIndustryView ? 'Active Industry Profile' : workspaceSection?.title ?? `${context.l2Label} / ${displaySection}`,
+      title: sectionTitleFor(context, section),
       subtitle: isIndustryView
-        ? 'Validates the active industry profile, KPI coverage, scenario risk model, connector readiness, and evidence pack for the selected operating scenario.'
-        : workspaceSection?.subtitle ?? `${displaySection} provides a decision-ready view for ${dashboardProfile.subject}, linking risk signals, operational context, recommended action, evidence readiness, and governance controls.`,
-      primaryAction: isIndustryView ? 'Review Active Industry Profile' : workspaceSection?.primaryAction ?? `Open ${displaySection} workbench`,
-      selectedLabel: isIndustryView ? 'Active Industry Profile' : displaySection,
-      sectionEyebrow: context.l2Id === 'workspace-overview' ? 'ROLE PRIORITY ENTRY' : isIndustryView ? 'INDUSTRY DECISION CONTEXT' : 'DASHBOARD DECISION WORKSPACE',
+        ? 'Validates KPI coverage, scenario risk, connector readiness, and evidence pack quality for the active industry profile.'
+        : dashboardSubtitleFor(compactSection, dashboardProfile, workspaceSection),
+      primaryAction: isIndustryView ? 'Review Readiness' : primaryActionFor(context, compactSection, workspaceSection),
+      selectedLabel: isIndustryView ? compactSection : displaySection,
+      sectionEyebrow: contextEyebrowFor(context),
       l3Tabs: dashboardDisplayTabs(context, section),
       connectedWorkspaces: context.l2Id === 'workspace-overview'
         ? WORKSPACE_OVERVIEW_CONNECTED_WORKSPACES
@@ -997,9 +1139,10 @@ export function resolveL3ContentConfig(context: L3ContentContext): L3ContentConf
   }
 
   return {
-    title: `${context.l2Label} / ${section}`,
-    subtitle: `${section} is the selected ${profile.subject} section under ${profile.domain}. It focuses on ${profile.operatingFocus}.`,
-    primaryAction: `Review ${section}`,
+    title: sectionTitleFor(context, section),
+    subtitle: sectionSubtitleFor(context, compactSectionLabel(context, section), profile),
+    primaryAction: primaryActionFor(context, compactSectionLabel(context, section)),
+    sectionEyebrow: contextEyebrowFor(context),
     metrics: [
       { label: 'Section', value: section, note: profile.subject },
       { label: 'Workspace', value: context.l2Label, note: profile.domain },

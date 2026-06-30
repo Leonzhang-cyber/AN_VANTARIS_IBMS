@@ -99,12 +99,13 @@ const emit = defineEmits<{
   flex: 0 0 auto;
   margin-left: auto;
   width: auto;
-  min-height: 38px;
+  min-height: var(--one-control-lg, 40px);
   padding: 8px 20px;
-  border: 1px solid #0f766e !important;
-  border-color: #0f766e !important;
-  background: #ffffff !important;
-  color: #0f766e !important;
+  border: 1px solid var(--one-color-teal, #0f766e) !important;
+  border-color: var(--one-color-teal, #0f766e) !important;
+  border-radius: var(--one-radius-md, 10px) !important;
+  background: var(--one-color-card, #ffffff) !important;
+  color: var(--one-color-teal, #0f766e) !important;
   font-weight: 700;
   box-shadow: none !important;
   white-space: nowrap;
@@ -113,22 +114,22 @@ const emit = defineEmits<{
 .l3-summary-card :deep(.l3-summary-card__cta.el-button),
 .l3-summary-card :deep(.l3-summary-card__cta.el-button.el-button--primary),
 .l3-summary-card :deep(.l3-summary-card__cta.el-button.el-button--primary.is-plain) {
-  --el-button-text-color: #0f766e;
-  --el-button-bg-color: #ffffff;
-  --el-button-border-color: #0f766e;
-  --el-button-hover-text-color: #0f766e;
-  --el-button-hover-bg-color: #f0fdfa;
-  --el-button-hover-border-color: #0f766e;
-  --el-button-active-text-color: #0f766e;
-  --el-button-active-bg-color: #ecfdf5;
-  --el-button-active-border-color: #0f766e;
-  border-color: #0f766e !important;
-  background: #ffffff !important;
-  color: #0f766e !important;
+  --el-button-text-color: var(--one-color-teal, #0f766e);
+  --el-button-bg-color: var(--one-color-card, #ffffff);
+  --el-button-border-color: var(--one-color-teal, #0f766e);
+  --el-button-hover-text-color: var(--one-color-teal, #0f766e);
+  --el-button-hover-bg-color: var(--one-color-teal-soft, #f0fdfa);
+  --el-button-hover-border-color: var(--one-color-teal, #0f766e);
+  --el-button-active-text-color: var(--one-color-teal, #0f766e);
+  --el-button-active-bg-color: var(--one-color-teal-active, #e7f6f4);
+  --el-button-active-border-color: var(--one-color-teal, #0f766e);
+  border-color: var(--one-color-teal, #0f766e) !important;
+  background: var(--one-color-card, #ffffff) !important;
+  color: var(--one-color-teal, #0f766e) !important;
 }
 
 .l3-summary-card :deep(.l3-summary-card__cta.el-button span) {
-  color: #0f766e !important;
+  color: var(--one-color-teal, #0f766e) !important;
 }
 
 .l3-summary-card__cta:hover,
@@ -137,14 +138,14 @@ const emit = defineEmits<{
 .l3-summary-card :deep(.l3-summary-card__cta.el-button:focus),
 .l3-summary-card :deep(.l3-summary-card__cta.el-button.el-button--primary.is-plain:hover),
 .l3-summary-card :deep(.l3-summary-card__cta.el-button.el-button--primary.is-plain:focus) {
-  border-color: #0f766e !important;
-  background: #f0fdfa !important;
-  color: #0f766e !important;
+  border-color: var(--one-color-teal, #0f766e) !important;
+  background: var(--one-color-teal-soft, #f0fdfa) !important;
+  color: var(--one-color-teal, #0f766e) !important;
 }
 
 .l3-summary-card :deep(.l3-summary-card__cta.el-button:hover span),
 .l3-summary-card :deep(.l3-summary-card__cta.el-button:focus span) {
-  color: #0f766e !important;
+  color: var(--one-color-teal, #0f766e) !important;
 }
 
 .l3-summary-card__body {

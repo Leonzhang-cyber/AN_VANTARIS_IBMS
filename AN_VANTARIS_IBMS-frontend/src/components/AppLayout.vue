@@ -37,7 +37,6 @@ import { normalizeBackendMenu } from '@/services/menu/menu-normalizer'
 import * as staticMenu from '@/services/menu/static-menu'
 import type { AppMenuItem } from '@/services/menu/types'
 import { logoutLocal } from '@/services/auth/session'
-import L3SummaryCard from '@/components/L3SummaryCard.vue'
 
 const router = useRouter()
 const route = useRoute()
@@ -59,6 +58,21 @@ const selectL3Item = (l3Id: string) => {
     query: {
       ...route.query,
       l3: l3Id,
+    },
+  })
+}
+
+const openActiveL3Action = () => {
+  if (!activeL2.value || !activeL3Item.value) {
+    return
+  }
+
+  router.push({
+    path: activeL2.value.path,
+    query: {
+      ...route.query,
+      menu: activeL2.value.id,
+      l3: activeL3Item.value.id,
     },
   })
 }
@@ -130,6 +144,7 @@ const activeL3Content = computed(() => {
     item: activeL3Item.value,
   })
 })
+const activeL3PrimaryAction = computed(() => activeL3Content.value?.primaryAction ?? '')
 
 const menuIconById: Record<string, Component> = {
   dashboard: Grid,
@@ -195,49 +210,6 @@ function resolveMenuIcon(item: AppMenuItem): Component {
 
   return Grid
 }
-const pageHandledL3Paths = new Set([
-  '/dashboard',
-  '/iot',
-  '/did',
-  '/modeling',
-  '/system',
-  '/system/settings',
-  '/system/permissions',
-  '/system/audit-logs',
-  '/system/notification-settings',
-  '/system/integration-settings',
-  '/console/operations',
-  '/console/foundation-diagnostics/workspace',
-  '/one/server/precheck',
-  '/one/server/access-window-plan',
-  '/one/server/observation-plan',
-  '/one/code/policy-gate',
-  '/one/nexus-ai/branch-audit',
-  '/assets/topology',
-  '/one/assets/context',
-  '/ucde/evidence',
-  '/reports',
-  '/uesg/sustainability',
-  '/one/umms/overview',
-  '/umms/maintenance',
-  '/uedge/setup',
-  '/uedge/diagnostics',
-  '/one/airport/overview',
-  '/one/airport/systems-integration-health',
-  '/one/airport/alarms-events',
-  '/one/airport/fault-cases',
-  '/one/airport/maintenance-work-orders',
-  '/one/airport/evidence-investigation',
-  '/one/airport/reports',
-  '/one/uhmi/overview',
-  '/one/uhmi/system',
-  '/one/uhmi/device',
-  '/one/uhmi/alarms-events',
-  '/one/uhmi/edge-link-diagnostics',
-  '/one/uhmi/evidence-reports',
-])
-const shouldShowL3FallbackPanel = computed(() => Boolean(activeL3Content.value && !pageHandledL3Paths.has(route.path)))
-
 async function loadDynamicMenu(): Promise<void> {
   menuLoading.value = true
 
@@ -442,43 +414,31 @@ onMounted(() => {
             class="app-layout__l3-row one-l3-sticky-surface"
             aria-label="L3 content navigation"
           >
-            <button
-              v-for="item in activeL3Items"
-              :key="item.id"
-              type="button"
-              class="app-layout__l3-tab one-l3-tab"
-              :class="{
-                'app-layout__l3-tab--active one-l3-tab--active': activeL3Item?.id === item.id,
-              }"
-              @click="selectL3Item(item.id)"
-            >
-              {{ item.label }}
-            </button>
-          </section>
-
-          <L3SummaryCard
-            v-if="shouldShowL3FallbackPanel && activeL3Content"
-            class="app-layout__l3-panel"
-            aria-label="Selected L3 section content"
-            kicker="Selected section"
-            :title="activeL3Content.title"
-            :description="activeL3Content.subtitle"
-            :primary-action="activeL3Content.primaryAction"
-          >
-            <div class="app-layout__l3-metrics">
-              <article v-for="metric in activeL3Content.metrics" :key="metric.label" class="app-layout__l3-metric">
-                <span>{{ metric.label }}</span>
-                <strong>{{ metric.value }}</strong>
-                <em>{{ metric.note }}</em>
-              </article>
+            <div class="app-layout__l3-tabs" role="list">
+              <button
+                v-for="item in activeL3Items"
+                :key="item.id"
+                type="button"
+                class="app-layout__l3-tab one-l3-tab"
+                :class="{
+                  'app-layout__l3-tab--active one-l3-tab--active': activeL3Item?.id === item.id,
+                }"
+                @click="selectL3Item(item.id)"
+              >
+                {{ item.label }}
+              </button>
             </div>
 
-            <el-table :data="activeL3Content.rows" stripe border class="app-layout__l3-table">
-              <el-table-column prop="item" label="Action" min-width="240" />
-              <el-table-column prop="focus" label="Focus Area" min-width="280" />
-              <el-table-column prop="status" label="Status" min-width="140" />
-            </el-table>
-          </L3SummaryCard>
+            <button
+              v-if="activeL3PrimaryAction"
+              type="button"
+              class="app-layout__l3-action"
+              :aria-label="activeL3PrimaryAction"
+              @click="openActiveL3Action"
+            >
+              {{ activeL3PrimaryAction }}
+            </button>
+          </section>
 
           <router-view :key="route.fullPath" />
         </div>
@@ -947,81 +907,82 @@ onMounted(() => {
 
 .app-layout__l3-row {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
   gap: 6px;
   margin-bottom: 6px;
   padding: 5px 0;
-  border: 1px solid #d7e3ec;
-  border-radius: 10px;
-  background: #ffffff;
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+  border: 1px solid var(--one-color-border, #d7e3ec);
+  border-radius: var(--one-radius-md, 10px);
+  background: var(--one-color-card, #ffffff);
+  box-shadow: var(--one-shadow-soft, 0 2px 8px rgba(15, 23, 42, 0.03));
+}
+
+.app-layout__l3-tabs {
+  display: flex;
+  flex: 1 1 420px;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-width: 0;
 }
 
 .app-layout__l3-tab {
-  border-radius: 999px;
+  border-radius: var(--one-radius-pill, 999px);
   font-weight: 600;
   cursor: pointer;
-  min-height: 32px;
-  height: 32px;
+  min-height: var(--one-control-sm, 32px);
+  height: var(--one-control-sm, 32px);
   padding: 4px 12px;
   line-height: 1.1;
 }
 
 .app-layout__l3-tab--active {
-  border-color: #0f766e !important;
-  background: #e4f4f1 !important;
-  color: #08796d !important;
+  border-color: var(--one-color-navy, #0f172a) !important;
+  background: var(--one-color-navy, #0f172a) !important;
+  color: #ffffff !important;
 }
 
-.app-layout__l3-panel {
-  margin-bottom: 14px;
+.app-layout__l3-action {
+  flex: 0 0 auto;
+  margin-left: auto;
+  min-height: var(--one-control-md, 36px);
+  height: var(--one-control-md, 36px);
+  width: auto;
+  max-width: 100%;
+  padding: 6px 16px;
+  border: 1px solid var(--one-color-teal, #0f766e);
+  border-radius: var(--one-radius-md, 10px);
+  background: var(--one-color-card, #ffffff);
+  color: var(--one-color-teal, #0f766e);
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.1;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: none;
 }
 
-.app-layout__l3-metrics {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 12px;
-  margin-bottom: 16px;
-}
-
-.app-layout__l3-metric {
-  padding: 12px;
-  border: 1px solid #d9ebe7;
-  border-radius: 8px;
-  background: #f8fcfb;
-}
-
-.app-layout__l3-metric span,
-.app-layout__l3-metric em {
-  display: block;
-  color: #607a75;
-  font-size: 12px;
-  font-style: normal;
-  line-height: 1.4;
-}
-
-.app-layout__l3-metric strong {
-  display: block;
-  margin: 6px 0;
-  color: #162724;
-  font-size: 18px;
-  line-height: 1.2;
-  word-break: break-word;
-}
-
-.app-layout__l3-table {
-  width: 100%;
+.app-layout__l3-action:hover,
+.app-layout__l3-action:focus {
+  border-color: var(--one-color-teal, #0f766e);
+  background: var(--one-color-teal-soft, #f0fdfa);
+  color: var(--one-color-teal, #0f766e);
+  outline: none;
 }
 
 @media (max-width: 900px) {
-  .app-layout__l3-metrics {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .app-layout__l3-action {
+    margin-left: 0;
   }
 }
 
 @media (max-width: 560px) {
-  .app-layout__l3-metrics {
-    grid-template-columns: 1fr;
+  .app-layout__l3-tabs {
+    flex-basis: 100%;
+  }
+
+  .app-layout__l3-action {
+    width: auto;
   }
 }
 </style>

@@ -8,7 +8,6 @@ import {
   getAirportHmiMapContent,
 } from '@/services/api/airportHmiMap'
 import { resolveL3ContentConfig, resolveL3RouteContentContext } from '@/services/menu/l3-content-registry'
-import L3SummaryCard from '@/components/L3SummaryCard.vue'
 
 type VisualMode = 'trend' | 'topology' | 'timeline' | 'workQueue' | 'evidence' | 'security' | 'hmi' | 'reportPack'
 
@@ -23,15 +22,6 @@ const content = computed(() => (context.value ? resolveL3ContentConfig(context.v
 const dashboardWorkbench = computed(() => content.value?.dashboardWorkbench)
 const isAirportHmiMap = computed(() => context.value?.l1Label === 'Assets & Locations' && context.value?.l2Id === 'floor-plan-hmi')
 const defaultRelatedWorkspaces = ['Work Management', 'Assets & Locations', 'Faults & Events', 'Reports & Documents', 'Governance & Security', 'Integration & Partner Hub']
-const sectionKicker = computed(() => {
-  if (content.value?.sectionEyebrow) {
-    return content.value.sectionEyebrow
-  }
-  if (context.value?.l2Id === 'workspace-overview') {
-    return 'ROLE PRIORITY ENTRY'
-  }
-  return dashboardWorkbench.value ? 'DASHBOARD DECISION WORKSPACE' : 'Workspace content'
-})
 const dashboardTabs = computed(() => {
   if (content.value?.l3Tabs?.length) {
     return content.value.l3Tabs
@@ -298,13 +288,6 @@ const airportEvidencePanels = computed(() => [
     class="route-l3-panel"
     aria-label="Menu section content"
   >
-    <L3SummaryCard
-      :kicker="sectionKicker"
-      :title="content.title"
-      :description="content.subtitle"
-      :primary-action="content.primaryAction"
-    />
-
     <div class="route-l3-panel__body">
     <div v-if="dashboardWorkbench" class="route-l3-panel__decision-strip">
       <article>
@@ -852,7 +835,11 @@ const airportEvidencePanels = computed(() => [
 
 <style scoped>
 .route-l3-panel {
+  width: 100%;
+  max-width: none;
   margin-bottom: 18px;
+  margin-left: 0;
+  margin-right: 0;
   padding: 0;
   border: none !important;
   border-radius: 0;
@@ -861,7 +848,13 @@ const airportEvidencePanels = computed(() => [
 }
 
 .route-l3-panel__body {
+  width: 100%;
+  max-width: none;
   margin-top: 4px;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
   border: none !important;
   border-radius: 0;
   background: transparent !important;
@@ -878,8 +871,8 @@ const airportEvidencePanels = computed(() => [
 .route-l3-panel__metric {
   min-width: 0;
   padding: 14px;
-  border: 1px solid #e2ece8;
-  border-radius: 10px;
+  border: 1px solid var(--one-color-border-soft, #e2ece8);
+  border-radius: var(--one-radius-lg, 14px);
   background: #f8fbfa;
 }
 
@@ -901,8 +894,8 @@ const airportEvidencePanels = computed(() => [
 .route-l3-panel__visual {
   margin-bottom: 16px;
   padding: 16px;
-  border: 1px solid #dfe9e5;
-  border-radius: 12px;
+  border: 1px solid var(--one-color-border, #dfe9e5);
+  border-radius: var(--one-radius-xl, 16px);
   background: #f8fbfa;
 }
 
@@ -921,9 +914,9 @@ const airportEvidencePanels = computed(() => [
 .route-l3-panel__readiness article,
 .route-l3-panel__acceptance-footer article {
   min-width: 0;
-  border: 1px solid #dfe9e5;
-  border-radius: 10px;
-  background: #ffffff;
+  border: 1px solid var(--one-color-border, #dfe9e5);
+  border-radius: var(--one-radius-lg, 14px);
+  background: var(--one-color-card, #ffffff);
 }
 
 .route-l3-panel__decision-strip article {
@@ -957,8 +950,8 @@ const airportEvidencePanels = computed(() => [
   gap: 16px;
   margin-bottom: 16px;
   padding: 16px;
-  border: 1px solid #dfe9e5;
-  border-radius: 12px;
+  border: 1px solid var(--one-color-border, #dfe9e5);
+  border-radius: var(--one-radius-xl, 16px);
   background: linear-gradient(180deg, #f8fbfa 0%, #ffffff 100%);
 }
 
@@ -972,7 +965,7 @@ const airportEvidencePanels = computed(() => [
 .route-l3-panel__dashboard-tabs span {
   padding: 7px 10px;
   border: 1px solid #cfe0dc;
-  border-radius: 999px;
+  border-radius: var(--one-radius-pill, 999px);
   background: #ffffff;
   color: #0f766e;
   font-size: 12px;
@@ -980,25 +973,25 @@ const airportEvidencePanels = computed(() => [
 }
 
 .route-l3-panel__dashboard-tabs .route-l3-panel__dashboard-tab--active {
-  border-color: #0f766e;
-  background: #e8f5f1;
-  color: #10201d;
+  border-color: var(--one-color-navy, #0f172a);
+  background: var(--one-color-navy, #0f172a);
+  color: #ffffff;
 }
 
 .route-l3-panel__action-bar {
   padding: 10px;
-  border: 1px solid #dfe9e5;
-  border-radius: 12px;
-  background: #ffffff;
+  border: 1px solid var(--one-color-border, #dfe9e5);
+  border-radius: var(--one-radius-md, 10px);
+  background: var(--one-color-card, #ffffff);
 }
 
 .route-l3-panel__connected-workspaces {
   display: grid;
   gap: 10px;
   padding: 12px;
-  border: 1px solid #dfe9e5;
-  border-radius: 12px;
-  background: #ffffff;
+  border: 1px solid var(--one-color-border, #dfe9e5);
+  border-radius: var(--one-radius-xl, 16px);
+  background: var(--one-color-card, #ffffff);
 }
 
 .route-l3-panel__connected-workspaces > span {
@@ -1017,7 +1010,7 @@ const airportEvidencePanels = computed(() => [
 .route-l3-panel__connected-workspaces strong {
   padding: 8px 10px;
   border: 1px solid #cfe0dc;
-  border-radius: 10px;
+  border-radius: var(--one-radius-md, 10px);
   background: #f8fbfa;
   color: #10201d;
   font-size: 12px;
@@ -1034,10 +1027,10 @@ const airportEvidencePanels = computed(() => [
 .route-l3-panel__six-d article,
 .route-l3-panel__dashboard-cards article,
 .route-l3-panel__dashboard-heatmap {
-  border: 1px solid #dfe9e5;
-  border-radius: 12px;
-  background: #ffffff;
-  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.06);
+  border: 1px solid var(--one-color-border, #dfe9e5);
+  border-radius: var(--one-radius-lg, 14px);
+  background: var(--one-color-card, #ffffff);
+  box-shadow: var(--one-shadow-card, 0 8px 18px rgba(15, 23, 42, 0.035));
 }
 
 .route-l3-panel__dashboard-command {
@@ -1563,8 +1556,8 @@ const airportEvidencePanels = computed(() => [
   justify-content: space-between;
   gap: 14px;
   padding: 16px;
-  border: 1px solid #cfe4dd;
-  border-radius: 10px;
+  border: 1px solid var(--one-color-border, #cfe4dd);
+  border-radius: var(--one-radius-xl, 16px);
   background: #f8fbfa;
 }
 
@@ -1615,9 +1608,9 @@ const airportEvidencePanels = computed(() => [
 .route-l3-panel__map-shell,
 .route-l3-panel__mms-flow {
   min-width: 0;
-  border: 1px solid #dfe9e5;
-  border-radius: 10px;
-  background: #ffffff;
+  border: 1px solid var(--one-color-border, #dfe9e5);
+  border-radius: var(--one-radius-lg, 14px);
+  background: var(--one-color-card, #ffffff);
 }
 
 .route-l3-panel__airport-signals article,
@@ -1674,7 +1667,7 @@ const airportEvidencePanels = computed(() => [
   gap: 6px;
   padding: 14px;
   border: 1px solid #f6d88f;
-  border-radius: 10px;
+  border-radius: var(--one-radius-md, 10px);
   background: #fffbeb;
   color: #713f12;
 }

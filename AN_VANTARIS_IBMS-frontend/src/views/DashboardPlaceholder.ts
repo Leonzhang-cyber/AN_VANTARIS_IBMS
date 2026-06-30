@@ -595,10 +595,10 @@ const defaultSection: SectionConfig = {
 }
 
 const panelStyle = {
-  background: '#ffffff',
-  border: '1px solid #d7e3ec',
-  borderRadius: '16px',
-  boxShadow: '0 8px 18px rgba(15, 23, 42, 0.035)',
+  background: 'var(--one-color-card, #ffffff)',
+  border: '1px solid var(--one-color-border, #d7e3ec)',
+  borderRadius: 'var(--one-radius-lg, 14px)',
+  boxShadow: 'var(--one-shadow-card, 0 8px 18px rgba(15, 23, 42, 0.035))',
 }
 
 function openRoute(path: string): void {
@@ -716,17 +716,6 @@ export default defineComponent({
 
       h('section', { style: { display: 'grid', gap: '16px', marginBottom: '16px' } }, [
         card([
-          h('div', { style: sectionHeaderStyle }, [
-            h('div', { style: { minWidth: '0', maxWidth: '820px' } }, [
-              h('p', { style: eyebrowStyle }, activeSection.value.sectionEyebrow ?? 'DASHBOARD DECISION WORKSPACE'),
-              h('h2', { style: headingStyle }, activeSection.value.title),
-              h('p', { style: subtitleStyle }, activeSection.value.subtitle),
-            ]),
-            h('button', { type: 'button', onClick: () => openRoute(activeSection.value.primaryRoute), style: actionButtonStyle }, activeSection.value.primaryAction),
-          ]),
-        ], summaryPanelStyle),
-
-        card([
           h('h3', { style: { ...headingStyle, fontSize: '16px', marginBottom: '10px' } }, 'Action Queue'),
           h('div', { style: { overflowX: 'auto' } }, [
             h('table', { style: { width: '100%', borderCollapse: 'collapse', minWidth: '760px' } }, [
@@ -823,31 +812,6 @@ const headingStyle = {
   fontSize: '22px',
 }
 
-const subtitleStyle = {
-  margin: 0,
-  color: '#52615d',
-  lineHeight: '1.6',
-  fontSize: '13px',
-  maxWidth: '760px',
-}
-
-const sectionHeaderStyle = {
-  display: 'flex',
-  justifyContent: 'space-between',
-  gap: '32px',
-  alignItems: 'flex-start',
-  flexWrap: 'wrap',
-  marginBottom: '16px',
-}
-
-const summaryPanelStyle = {
-  padding: '8px 0 14px',
-  border: 'none',
-  borderRadius: '0',
-  background: 'transparent',
-  boxShadow: 'none',
-}
-
 const thStyle = {
   textAlign: 'left',
   padding: '12px',
@@ -864,26 +828,11 @@ const tdStyle = {
   fontSize: '13px',
 }
 
-const actionButtonStyle = {
-  flex: '0 0 auto',
-  marginLeft: 'auto',
-  border: '1px solid #0f766e',
-  background: '#ffffff',
-  color: '#0f766e',
-  borderRadius: '10px',
-  padding: '8px 20px',
-  cursor: 'pointer',
-  fontWeight: '700',
-  whiteSpace: 'nowrap',
-  minHeight: '38px',
-  boxShadow: 'none',
-}
-
 const smallButtonStyle = {
   border: '1px solid #2563eb33',
   background: '#eff6ff',
   color: '#2563eb',
-  borderRadius: '999px',
+  borderRadius: 'var(--one-radius-md, 10px)',
   padding: '6px 10px',
   cursor: 'pointer',
   fontWeight: '800',
