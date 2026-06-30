@@ -1,0 +1,155 @@
+{
+  "schemaVersion": "1.0",
+  "device": "BHE BRTL32",
+  "system": "Radio System",
+  "statusLegend": [
+    "required",
+    "pending",
+    "customerToConfirm",
+    "vendorToProvide"
+  ],
+  "deviceIdentity": [
+    {
+      "item": "Confirm exact device model and variant.",
+      "status": "vendorToProvide"
+    },
+    {
+      "item": "Provide firmware version and supported interface options.",
+      "status": "vendorToProvide"
+    },
+    {
+      "item": "Confirm serial number format and device role in the airport radio system.",
+      "status": "customerToConfirm"
+    }
+  ],
+  "snmpAccess": [
+    {
+      "item": "Confirm supported SNMP versions.",
+      "status": "vendorToProvide"
+    },
+    {
+      "item": "Provide SNMP communication details including IP addressing, UDP ports, timeout, retry, and trap destination setup.",
+      "status": "vendorToProvide"
+    },
+    {
+      "item": "Confirm SNMPv2c community or SNMPv3 credential requirements.",
+      "status": "customerToConfirm"
+    },
+    {
+      "item": "Provide SNMP enable procedure for the device or converter-exposed endpoint.",
+      "status": "vendorToProvide"
+    },
+    {
+      "item": "Confirm RS232-to-TCP/IP converter model and whether SNMP is exposed natively or through conversion.",
+      "status": "customerToConfirm"
+    }
+  ],
+  "mibOidTrapDefinition": [
+    {
+      "item": "Provide official MIB file.",
+      "status": "vendorToProvide"
+    },
+    {
+      "item": "Provide full OID list with data types, units, access mode, and polling guidance.",
+      "status": "vendorToProvide"
+    },
+    {
+      "item": "Provide trap definition, trap OIDs, varbind structure, and sample trap payloads.",
+      "status": "vendorToProvide"
+    },
+    {
+      "item": "Confirm whether polling, traps, or both are required for operational integration.",
+      "status": "customerToConfirm"
+    }
+  ],
+  "radioOperationalParameters": [
+    {
+      "item": "Provide RF parameter list available through SNMP.",
+      "status": "vendorToProvide"
+    },
+    {
+      "item": "Provide input RSSI OID or trap source, value range, units, and thresholds.",
+      "status": "vendorToProvide"
+    },
+    {
+      "item": "Provide output power OID or trap source, value range, units, and thresholds.",
+      "status": "vendorToProvide"
+    },
+    {
+      "item": "Provide channel, frequency, link status, and device health OIDs if available.",
+      "status": "vendorToProvide"
+    }
+  ],
+  "alarmMapping": [
+    {
+      "item": "Provide complete alarm mapping table.",
+      "status": "vendorToProvide"
+    },
+    {
+      "item": "For each alarm, provide alarm code, source OID/trap, label, severity, active condition, and clear condition.",
+      "status": "vendorToProvide"
+    },
+    {
+      "item": "Confirm alarm mapping for RF degradation, input RSSI, output power, link failure, hardware fault, and communication fault.",
+      "status": "vendorToProvide"
+    }
+  ],
+  "acknowledgementAndClear": [
+    {
+      "item": "Confirm whether alarms auto-clear or require manual acknowledgement.",
+      "status": "vendorToProvide"
+    },
+    {
+      "item": "Confirm whether acknowledgement status is exposed through SNMP.",
+      "status": "vendorToProvide"
+    },
+    {
+      "item": "Provide clear alarm behavior and sample clear values or trap payloads.",
+      "status": "vendorToProvide"
+    }
+  ],
+  "integrationTesting": [
+    {
+      "item": "Provide active alarm polling sample.",
+      "status": "vendorToProvide"
+    },
+    {
+      "item": "Provide clear alarm polling sample.",
+      "status": "vendorToProvide"
+    },
+    {
+      "item": "Provide nominal RF operating sample.",
+      "status": "vendorToProvide"
+    },
+    {
+      "item": "Provide degraded RF operating sample.",
+      "status": "vendorToProvide"
+    },
+    {
+      "item": "Provide trap samples for active and cleared alarm states.",
+      "status": "vendorToProvide"
+    }
+  ],
+  "oneMapping": [
+    {
+      "item": "Map BHE BRTL32 device to ONE asset and airport location hierarchy.",
+      "status": "customerToConfirm"
+    },
+    {
+      "item": "Map SNMP alarms and RF metrics to ONE Alarm Console and LINK normalized events.",
+      "status": "pending"
+    },
+    {
+      "item": "Map confirmed radio faults to Work Management recommendations.",
+      "status": "pending"
+    },
+    {
+      "item": "Map raw SNMP evidence to Evidence / Reports export fields.",
+      "status": "pending"
+    }
+  ],
+  "notes": [
+    "No BHE OIDs, alarm codes, traps, or MIB entries are included because they were not supplied.",
+    "Checklist is intended for vendor/customer evidence collection before implementation."
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "1.0",
+  "device": "DTS 4160 grandmaster",
+  "vendor": "Mobatime/DTS",
+  "system": "Clock System / Time Synchronization / Master Clock",
+  "oid": "1.3.6.1.4.1.13842.4.4160.1.8",
+  "rawActiveSample": "00408080.00000000",
+  "rawClearSample": "00000000.00000000",
+  "alarmMappings": [
+    {
+      "alarmName": "GNSS Sync Lost",
+      "bitIndex": null,
+      "confidence": "sample-confirmed",
+      "confirmationStatus": "mib-confirmation-required",
+      "notes": "Decoded alarm label is confirmed by the supplied active sample context. Bit index is not assigned until MIB/customer bit order is verified."
+    },
+    {
+      "alarmName": "No valid Time Source",
+      "bitIndex": null,
+      "confidence": "sample-confirmed",
+      "confirmationStatus": "mib-confirmation-required",
+      "notes": "Decoded alarm label is confirmed by the supplied active sample context. Bit index is not assigned until MIB/customer bit order is verified."
+    },
+    {
+      "alarmName": "No DTS Link",
+      "bitIndex": null,
+      "confidence": "sample-confirmed",
+      "confirmationStatus": "mib-confirmation-required",
+      "notes": "Decoded alarm label is confirmed by the supplied active sample context. DTS link naming and exact bit mapping require customer/vendor confirmation."
+    }
+  ],
+  "notes": [
+    "Only known confirmed decoded alarms are included.",
+    "Do not use this R1 mapping as a complete DTS 4160 alarm table.",
+    "Bit indexes are intentionally null because the prompt does not provide a verified MIB bit-order mapping.",
+    "Full production decoder requires vendor MIB, OID definition, byte order, bit order, and additional sample values."
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.0",
+  "device": "DTS 4160 grandmaster",
+  "vendor": "Mobatime/DTS",
+  "system": "Clock System / Time Synchronization / Master Clock",
+  "oid": "1.3.6.1.4.1.13842.4.4160.1.8",
+  "fixtures": [
+    {
+      "fixtureId": "dts4160-active-sample-r1",
+      "description": "Customer-provided active alarm sample for DTS 4160 alarm mask.",
+      "rawValue": "00408080.00000000",
+      "expectedAlarmState": "ACTIVE",
+      "expectedDecodedAlarms": [
+        "GNSS Sync Lost",
+        "No valid Time Source",
+        "No DTS Link"
+      ]
+    },
+    {
+      "fixtureId": "dts4160-clear-sample-r1",
+      "description": "Customer-provided clear alarm sample for DTS 4160 alarm mask.",
+      "rawValue": "00000000.00000000",
+      "expectedAlarmState": "CLEARED",
+      "expectedDecodedAlarms": []
+    }
+  ],
+  "notes": [
+    "Fixtures are derived from supplied sample values only.",
+    "Additional samples are required to verify full alarm bit mapping."
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "1.0",
+  "decoderVersion": "dts4160-alarm-decoder-r1",
+  "events": [
+    {
+      "eventId": "dts4160-active-sample-normalized-r1",
+      "sourceSystem": "DTS4160",
+      "protocol": "SNMP",
+      "oid": "1.3.6.1.4.1.13842.4.4160.1.8",
+      "rawValue": "00408080.00000000",
+      "assetType": "Time Synchronization Device / Grandmaster Clock",
+      "system": "ELV / Master Clock / Time Synchronization",
+      "alarmState": "ACTIVE",
+      "decodedAlarms": [
+        "GNSS Sync Lost",
+        "No valid Time Source",
+        "No DTS Link"
+      ],
+      "severitySuggestion": "HIGH",
+      "faultCandidate": {
+        "isCandidate": true,
+        "category": "Time synchronization degradation",
+        "reason": "Active DTS 4160 sample indicates loss of GNSS synchronization, no valid time source, and no DTS link."
+      },
+      "workOrderRecommendation": {
+        "recommended": true,
+        "summary": "Investigate DTS 4160 grandmaster time source, GNSS synchronization, and DTS link condition.",
+        "prioritySuggestion": "High"
+      },
+      "hmiMapLinkage": {
+        "enabledWhenAssetConfirmed": true,
+        "assetId": null,
+        "locationId": null,
+        "notes": "Site, room, rack, and asset identifiers require customer confirmation."
+      },
+      "evidence": {
+        "rawOid": "1.3.6.1.4.1.13842.4.4160.1.8",
+        "rawValue": "00408080.00000000",
+        "decoderVersion": "dts4160-alarm-decoder-r1",
+        "sourceDocumentReference": "Derived from customer-provided DTS 4160 alarm OID and sample context; raw customer documents are not included."
+      },
+      "downstream": {
+        "alarmConsole": true,
+        "eventTimeline": true,
+        "faultOperations": true,
+        "workManagement": true,
+        "evidenceCenter": true,
+        "reportExport": true
+      }
+    },
+    {
+      "eventId": "dts4160-clear-sample-normalized-r1",
+      "sourceSystem": "DTS4160",
+      "protocol": "SNMP",
+      "oid": "1.3.6.1.4.1.13842.4.4160.1.8",
+      "rawValue": "00000000.00000000",
+      "assetType": "Time Synchronization Device / Grandmaster Clock",
+      "system": "ELV / Master Clock / Time Synchronization",
+      "alarmState": "CLEARED",
+      "decodedAlarms": [],
+      "severitySuggestion": "NORMAL",
+      "faultCandidate": {
+        "isCandidate": false,
+        "category": "Time synchronization normal",
+        "reason": "Clear sample indicates no active decoded alarms."
+      },
+      "workOrderRecommendation": {
+        "recommended": false,
+        "summary": "No work order recommended from the clear sample alone.",
+        "prioritySuggestion": "None"
+      },
+      "hmiMapLinkage": {
+        "enabledWhenAssetConfirmed": true,
+        "assetId": null,
+        "locationId": null,
+        "notes": "Site, room, rack, and asset identifiers require customer confirmation."
+      },
+      "evidence": {
+        "rawOid": "1.3.6.1.4.1.13842.4.4160.1.8",
+        "rawValue": "00000000.00000000",
+        "decoderVersion": "dts4160-alarm-decoder-r1",
+        "sourceDocumentReference": "Derived from customer-provided DTS 4160 alarm OID and sample context; raw customer documents are not included."
+      },
+      "downstream": {
+        "alarmConsole": true,
+        "eventTimeline": true,
+        "faultOperations": true,
+        "workManagement": true,
+        "evidenceCenter": true,
+        "reportExport": true
+      }
+    }
+  ],
+  "notes": [
+    "Normalized events are sample fixtures, not complete production mappings.",
+    "Asset and location linkage require customer confirmation before operational use."
+  ]
+}
