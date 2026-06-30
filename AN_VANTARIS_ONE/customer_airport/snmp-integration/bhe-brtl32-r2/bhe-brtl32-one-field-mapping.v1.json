@@ -1,0 +1,411 @@
+{
+  "metadata": {
+    "schemaVersion": "1.0",
+    "package": "BHE BRTL32 SNMP Mapping R2",
+    "device": "BHE BRTL32",
+    "system": "Radio System",
+    "purpose": "Template for mapping vendor-provided BHE BRTL32 SNMP fields into VANTARIS ONE.",
+    "oidPolicy": "Do not invent OIDs. Populate oid only after BHE/customer provides authoritative MIB/OID/trap data.",
+    "statusValues": [
+      "pendingVendor",
+      "pendingCustomer",
+      "required",
+      "optional",
+      "notConfirmed"
+    ]
+  },
+  "deviceIdentity": [
+    {
+      "oneField": "device.manufacturer",
+      "vendorField": "Manufacturer / vendor",
+      "oid": null,
+      "dataType": "string",
+      "unit": null,
+      "required": true,
+      "status": "pendingVendor",
+      "notes": "Confirm BHE manufacturer/vendor details."
+    },
+    {
+      "oneField": "device.model",
+      "vendorField": "Exact model",
+      "oid": null,
+      "dataType": "string",
+      "unit": null,
+      "required": true,
+      "status": "required",
+      "notes": "Expected model is BRTL32; variant remains to be confirmed."
+    },
+    {
+      "oneField": "device.firmwareVersion",
+      "vendorField": "Firmware version",
+      "oid": null,
+      "dataType": "string",
+      "unit": null,
+      "required": true,
+      "status": "pendingVendor",
+      "notes": "Required for MIB/OID compatibility."
+    },
+    {
+      "oneField": "device.serialNumber",
+      "vendorField": "Serial number",
+      "oid": null,
+      "dataType": "string",
+      "unit": null,
+      "required": true,
+      "status": "pendingVendor",
+      "notes": "Required for evidence and asset correlation."
+    },
+    {
+      "oneField": "device.hostname",
+      "vendorField": "Hostname / device name",
+      "oid": null,
+      "dataType": "string",
+      "unit": null,
+      "required": false,
+      "status": "pendingCustomer",
+      "notes": "May be assigned by site network team."
+    }
+  ],
+  "snmpAccess": [
+    {
+      "oneField": "snmp.versionSupported",
+      "vendorField": "SNMP v1/v2c/v3 support",
+      "oid": null,
+      "dataType": "enum",
+      "unit": null,
+      "required": true,
+      "status": "pendingVendor",
+      "notes": "Do not claim SNMPv3 support until confirmed."
+    },
+    {
+      "oneField": "snmp.pollingPort",
+      "vendorField": "Polling port",
+      "oid": null,
+      "dataType": "integer",
+      "unit": "UDP port",
+      "required": true,
+      "status": "required",
+      "notes": "Normally UDP 161; confirm actual configuration."
+    },
+    {
+      "oneField": "snmp.trapPort",
+      "vendorField": "Trap destination port",
+      "oid": null,
+      "dataType": "integer",
+      "unit": "UDP port",
+      "required": false,
+      "status": "notConfirmed",
+      "notes": "Normally UDP 162 if traps are supported."
+    },
+    {
+      "oneField": "snmp.exposureMode",
+      "vendorField": "Native SNMP or converter/gateway exposed SNMP",
+      "oid": null,
+      "dataType": "enum",
+      "unit": null,
+      "required": true,
+      "status": "pendingVendor",
+      "notes": "RS232-to-TCP/IP converter requirement is known; SNMP exposure behavior is not confirmed."
+    }
+  ],
+  "assetMapping": [
+    {
+      "oneField": "asset.assetId",
+      "vendorField": "Customer asset ID",
+      "oid": null,
+      "dataType": "string",
+      "unit": null,
+      "required": true,
+      "status": "pendingCustomer",
+      "notes": "Required for Work Management / MMS."
+    },
+    {
+      "oneField": "asset.locationPath",
+      "vendorField": "Site / building / floor / room / rack / panel",
+      "oid": null,
+      "dataType": "string",
+      "unit": null,
+      "required": true,
+      "status": "pendingCustomer",
+      "notes": "Required for HMI Map linkage."
+    },
+    {
+      "oneField": "asset.ipAddress",
+      "vendorField": "IP address after RS232-to-TCP/IP conversion if applicable",
+      "oid": null,
+      "dataType": "string",
+      "unit": null,
+      "required": true,
+      "status": "pendingCustomer",
+      "notes": "Required for EDGE SNMP Connector endpoint configuration."
+    }
+  ],
+  "telemetryMapping": [
+    {
+      "oneField": "telemetry.inputRssi",
+      "vendorField": "Input RSSI",
+      "oid": null,
+      "dataType": "number",
+      "unit": "dBm",
+      "required": true,
+      "status": "pendingVendor",
+      "notes": "OID, scale, normal range, and alarm threshold required."
+    },
+    {
+      "oneField": "telemetry.outputPower",
+      "vendorField": "Output power",
+      "oid": null,
+      "dataType": "number",
+      "unit": "W",
+      "required": true,
+      "status": "pendingVendor",
+      "notes": "OID, scale, normal range, and alarm threshold required."
+    },
+    {
+      "oneField": "telemetry.forwardPower",
+      "vendorField": "Forward power",
+      "oid": null,
+      "dataType": "number",
+      "unit": "W",
+      "required": false,
+      "status": "optional",
+      "notes": "Include if available from BHE SNMP data."
+    },
+    {
+      "oneField": "telemetry.reflectedPower",
+      "vendorField": "Reflected power",
+      "oid": null,
+      "dataType": "number",
+      "unit": "W",
+      "required": false,
+      "status": "optional",
+      "notes": "Include if available from BHE SNMP data."
+    },
+    {
+      "oneField": "telemetry.vswr",
+      "vendorField": "VSWR",
+      "oid": null,
+      "dataType": "number",
+      "unit": "ratio",
+      "required": false,
+      "status": "optional",
+      "notes": "Include if available from BHE SNMP data."
+    },
+    {
+      "oneField": "telemetry.temperature",
+      "vendorField": "Temperature",
+      "oid": null,
+      "dataType": "number",
+      "unit": "C",
+      "required": false,
+      "status": "optional",
+      "notes": "Include if available from BHE SNMP data."
+    }
+  ],
+  "alarmMapping": [
+    {
+      "oneField": "alarm.name",
+      "vendorField": "Alarm name",
+      "oid": null,
+      "dataType": "string",
+      "unit": null,
+      "required": true,
+      "status": "pendingVendor",
+      "notes": "Complete alarm labels required from vendor alarm mapping."
+    },
+    {
+      "oneField": "alarm.code",
+      "vendorField": "Alarm code",
+      "oid": null,
+      "dataType": "string",
+      "unit": null,
+      "required": true,
+      "status": "pendingVendor",
+      "notes": "Do not invent alarm codes."
+    },
+    {
+      "oneField": "alarm.sourceOid",
+      "vendorField": "OID / trap OID",
+      "oid": null,
+      "dataType": "oid",
+      "unit": null,
+      "required": true,
+      "status": "pendingVendor",
+      "notes": "Polling OID, trap OID, or both required."
+    },
+    {
+      "oneField": "alarm.severity",
+      "vendorField": "Severity",
+      "oid": null,
+      "dataType": "enum",
+      "unit": null,
+      "required": true,
+      "status": "pendingVendor",
+      "notes": "Vendor severity or agreed ONE severity mapping required."
+    },
+    {
+      "oneField": "alarm.activeValue",
+      "vendorField": "Active value",
+      "oid": null,
+      "dataType": "string",
+      "unit": null,
+      "required": true,
+      "status": "pendingVendor",
+      "notes": "Required for active alarm detection."
+    },
+    {
+      "oneField": "alarm.clearValue",
+      "vendorField": "Clear value",
+      "oid": null,
+      "dataType": "string",
+      "unit": null,
+      "required": true,
+      "status": "pendingVendor",
+      "notes": "Required for clear alarm detection."
+    }
+  ],
+  "eventMapping": [
+    {
+      "oneField": "event.normalizedEnvelope",
+      "vendorField": "Trap payload or polled OID response",
+      "oid": null,
+      "dataType": "object",
+      "unit": null,
+      "required": true,
+      "status": "pendingVendor",
+      "notes": "Requires vendor sample payloads before implementation."
+    },
+    {
+      "oneField": "event.timestamp",
+      "vendorField": "Device or gateway timestamp",
+      "oid": null,
+      "dataType": "datetime",
+      "unit": null,
+      "required": false,
+      "status": "notConfirmed",
+      "notes": "Confirm whether traps include source timestamp."
+    }
+  ],
+  "faultMapping": [
+    {
+      "oneField": "fault.category",
+      "vendorField": "Fault category",
+      "oid": null,
+      "dataType": "enum",
+      "unit": null,
+      "required": true,
+      "status": "pendingVendor",
+      "notes": "Expected categories may include RF, power, hardware, communication, and environment, but vendor mapping is required."
+    }
+  ],
+  "workOrderMapping": [
+    {
+      "oneField": "workOrder.recommendedAction",
+      "vendorField": "Recommended action",
+      "oid": null,
+      "dataType": "string",
+      "unit": null,
+      "required": true,
+      "status": "pendingVendor",
+      "notes": "Required to route MMS response recommendations."
+    },
+    {
+      "oneField": "workOrder.implication",
+      "vendorField": "Work order implication",
+      "oid": null,
+      "dataType": "boolean",
+      "unit": null,
+      "required": true,
+      "status": "pendingVendor",
+      "notes": "Confirm which alarms should create or recommend work orders."
+    }
+  ],
+  "hmiMapMapping": [
+    {
+      "oneField": "hmi.locationLinkage",
+      "vendorField": "Physical location and asset ID",
+      "oid": null,
+      "dataType": "object",
+      "unit": null,
+      "required": true,
+      "status": "pendingCustomer",
+      "notes": "Required to display radio state on HMI Map."
+    }
+  ],
+  "evidenceMapping": [
+    {
+      "oneField": "evidence.rawOid",
+      "vendorField": "OID / trap OID",
+      "oid": null,
+      "dataType": "oid",
+      "unit": null,
+      "required": true,
+      "status": "pendingVendor",
+      "notes": "Stored with every normalized event."
+    },
+    {
+      "oneField": "evidence.rawValue",
+      "vendorField": "Raw SNMP value or trap varbind",
+      "oid": null,
+      "dataType": "string",
+      "unit": null,
+      "required": true,
+      "status": "pendingVendor",
+      "notes": "Stored with every normalized event."
+    },
+    {
+      "oneField": "evidence.decoderVersion",
+      "vendorField": "ONE decoder version",
+      "oid": null,
+      "dataType": "string",
+      "unit": null,
+      "required": true,
+      "status": "required",
+      "notes": "Assigned by VANTARIS ONE when decoder is implemented."
+    }
+  ],
+  "reportMapping": [
+    {
+      "oneField": "report.integrationEvidence",
+      "vendorField": "SNMP samples, MIB reference, mapping reference",
+      "oid": null,
+      "dataType": "object",
+      "unit": null,
+      "required": true,
+      "status": "pendingVendor",
+      "notes": "Supports audit and customer reporting."
+    }
+  ],
+  "openQuestions": [
+    {
+      "oneField": "question.snmpNativeOrGateway",
+      "vendorField": "Native SNMP or RS232-to-TCP/IP converter behavior",
+      "oid": null,
+      "dataType": "question",
+      "unit": null,
+      "required": true,
+      "status": "pendingVendor",
+      "notes": "Confirm protocol actually exposed to ONE."
+    },
+    {
+      "oneField": "question.trapSupport",
+      "vendorField": "Trap support",
+      "oid": null,
+      "dataType": "question",
+      "unit": null,
+      "required": true,
+      "status": "pendingVendor",
+      "notes": "Confirm whether traps are supported or polling only."
+    },
+    {
+      "oneField": "question.acknowledgement",
+      "vendorField": "Alarm acknowledgement through SNMP",
+      "oid": null,
+      "dataType": "question",
+      "unit": null,
+      "required": false,
+      "status": "notConfirmed",
+      "notes": "Read-only monitoring is sufficient unless acknowledgement is confirmed."
+    }
+  ]
+}

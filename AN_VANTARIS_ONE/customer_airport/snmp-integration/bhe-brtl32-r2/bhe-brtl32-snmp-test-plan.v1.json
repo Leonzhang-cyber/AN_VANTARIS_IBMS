@@ -1,0 +1,162 @@
+{
+  "metadata": {
+    "schemaVersion": "1.0",
+    "package": "BHE BRTL32 SNMP Test Plan R2",
+    "device": "BHE BRTL32",
+    "system": "Radio System",
+    "purpose": "Structured test plan for validating BHE BRTL32 SNMP readiness and ONE normalization after vendor/customer data is received.",
+    "statusValues": [
+      "pendingVendor",
+      "pendingCustomer",
+      "required",
+      "optional",
+      "notConfirmed"
+    ]
+  },
+  "tests": [
+    {
+      "testId": "BHE-SNMP-R2-001",
+      "objective": "Confirm supported SNMP version and preferred security mode.",
+      "prerequisite": "Vendor provides SNMP version support statement and access procedure.",
+      "input": "Vendor SNMP configuration guide and site security requirements.",
+      "expectedResult": "Supported SNMP version and read-only monitoring mode are documented without assuming SNMPv3 unless confirmed.",
+      "evidenceToCapture": "Vendor document reference, configuration screenshot if available, approved security mode.",
+      "status": "pendingVendor"
+    },
+    {
+      "testId": "BHE-SNMP-R2-002",
+      "objective": "Confirm UDP 161 polling reachability.",
+      "prerequisite": "Device or converter endpoint IP address and SNMP credentials are available.",
+      "input": "SNMP polling request to configured endpoint on UDP 161 or confirmed alternate port.",
+      "expectedResult": "Endpoint responds to read-only polling.",
+      "evidenceToCapture": "Timestamped polling command, response sample, source/destination IPs.",
+      "status": "pendingCustomer"
+    },
+    {
+      "testId": "BHE-SNMP-R2-003",
+      "objective": "Confirm UDP 162 trap receiver configuration.",
+      "prerequisite": "Trap support is confirmed and trap destination is configured.",
+      "input": "Configured trap receiver endpoint and vendor trap generation procedure.",
+      "expectedResult": "Trap receiver obtains BHE trap packets on UDP 162 or confirmed alternate port.",
+      "evidenceToCapture": "Trap receiver log, packet capture, trap source IP, trap OID.",
+      "status": "notConfirmed"
+    },
+    {
+      "testId": "BHE-SNMP-R2-004",
+      "objective": "Run snmpwalk against the BHE endpoint.",
+      "prerequisite": "MIB/OID scope and SNMP access are available.",
+      "input": "Read-only snmpwalk using confirmed SNMP version and credentials.",
+      "expectedResult": "Accessible OIDs are captured without write operations.",
+      "evidenceToCapture": "Sanitized snmpwalk output, command parameters excluding secrets, timestamp.",
+      "status": "pendingVendor"
+    },
+    {
+      "testId": "BHE-SNMP-R2-005",
+      "objective": "Poll identity OIDs.",
+      "prerequisite": "Vendor provides identity OIDs for model, serial number, firmware, and device name.",
+      "input": "SNMP get requests for identity OIDs.",
+      "expectedResult": "Identity fields match expected BRTL32 device and site inventory.",
+      "evidenceToCapture": "OID responses, mapped ONE identity fields, asset correlation notes.",
+      "status": "pendingVendor"
+    },
+    {
+      "testId": "BHE-SNMP-R2-006",
+      "objective": "Poll input RSSI.",
+      "prerequisite": "Vendor provides RSSI OID, unit, scale, and normal/alarm thresholds.",
+      "input": "SNMP get request for input RSSI.",
+      "expectedResult": "RSSI value is decoded into expected unit and range.",
+      "evidenceToCapture": "Raw OID response, decoded value, unit, threshold comparison.",
+      "status": "pendingVendor"
+    },
+    {
+      "testId": "BHE-SNMP-R2-007",
+      "objective": "Poll output power.",
+      "prerequisite": "Vendor provides output power OID, unit, scale, and normal/alarm thresholds.",
+      "input": "SNMP get request for output power.",
+      "expectedResult": "Output power value is decoded into expected unit and range.",
+      "evidenceToCapture": "Raw OID response, decoded value, unit, threshold comparison.",
+      "status": "pendingVendor"
+    },
+    {
+      "testId": "BHE-SNMP-R2-008",
+      "objective": "Trigger sample alarm.",
+      "prerequisite": "Vendor provides safe test alarm procedure.",
+      "input": "Approved test alarm action performed under site control.",
+      "expectedResult": "BHE endpoint exposes active alarm by polling, trap, or both.",
+      "evidenceToCapture": "Test procedure record, active alarm OID/trap sample, operator observation.",
+      "status": "pendingVendor"
+    },
+    {
+      "testId": "BHE-SNMP-R2-009",
+      "objective": "Receive active trap.",
+      "prerequisite": "Trap support and active alarm test are confirmed.",
+      "input": "Active alarm generated while trap receiver is running.",
+      "expectedResult": "Active trap is received with sufficient payload to identify alarm and severity.",
+      "evidenceToCapture": "Trap packet sample, varbind list, source IP, decoded alarm label.",
+      "status": "notConfirmed"
+    },
+    {
+      "testId": "BHE-SNMP-R2-010",
+      "objective": "Receive clear trap.",
+      "prerequisite": "Trap clear behavior is confirmed.",
+      "input": "Clear the test alarm while trap receiver is running.",
+      "expectedResult": "Clear trap is received or clear state is confirmed through polling if traps are not supported.",
+      "evidenceToCapture": "Clear trap packet or polling clear sample, timestamp, active-to-clear correlation.",
+      "status": "notConfirmed"
+    },
+    {
+      "testId": "BHE-SNMP-R2-011",
+      "objective": "Verify alarm severity mapping.",
+      "prerequisite": "Vendor provides alarm severity mapping.",
+      "input": "Active alarm sample and vendor severity field or table.",
+      "expectedResult": "ONE severity is mapped from vendor severity or agreed mapping table.",
+      "evidenceToCapture": "Vendor severity value, ONE severity, mapping rule reference.",
+      "status": "pendingVendor"
+    },
+    {
+      "testId": "BHE-SNMP-R2-012",
+      "objective": "Verify alarm acknowledgement if supported.",
+      "prerequisite": "Vendor confirms acknowledgement support and command behavior.",
+      "input": "Approved acknowledgement test using vendor procedure.",
+      "expectedResult": "Acknowledgement state changes as documented, or read-only monitoring proceeds without acknowledgement.",
+      "evidenceToCapture": "Acknowledgement OID or vendor tool screenshot, before/after state, access mode.",
+      "status": "notConfirmed"
+    },
+    {
+      "testId": "BHE-SNMP-R2-013",
+      "objective": "Verify communication loss behavior.",
+      "prerequisite": "Site-approved test window and endpoint details are available.",
+      "input": "Controlled endpoint disconnect or firewall block under site supervision.",
+      "expectedResult": "ONE detects communication loss and records evidence without confusing it with a BHE equipment alarm.",
+      "evidenceToCapture": "Polling timeout evidence, event timestamp, restore timestamp, ONE normalized event sample.",
+      "status": "pendingCustomer"
+    },
+    {
+      "testId": "BHE-SNMP-R2-014",
+      "objective": "Verify converter behavior.",
+      "prerequisite": "RS232-to-TCP/IP converter model and protocol exposure are confirmed.",
+      "input": "Polling/trap or TCP socket test through converter according to vendor guidance.",
+      "expectedResult": "Converter behavior and exposed protocol are documented for EDGE integration.",
+      "evidenceToCapture": "Converter model, configuration screenshot, protocol test result, endpoint details.",
+      "status": "pendingCustomer"
+    },
+    {
+      "testId": "BHE-SNMP-R2-015",
+      "objective": "Verify ONE normalized event envelope.",
+      "prerequisite": "At least one active or clear alarm sample is available.",
+      "input": "Raw BHE SNMP polling response or trap sample.",
+      "expectedResult": "LINK normalization produces source system, protocol, raw OID, raw value, alarm state, asset mapping, severity, and evidence fields.",
+      "evidenceToCapture": "Raw SNMP sample, normalized JSON event, decoder version, mapping reference.",
+      "status": "pendingVendor"
+    },
+    {
+      "testId": "BHE-SNMP-R2-016",
+      "objective": "Verify evidence export fields.",
+      "prerequisite": "ONE normalized event envelope is available.",
+      "input": "Normalized BHE event routed to Evidence / Reports.",
+      "expectedResult": "Evidence export includes raw OID/trap, raw value, source endpoint, decoder version, mapping reference, and asset/location linkage.",
+      "evidenceToCapture": "Evidence export sample and report output sample.",
+      "status": "pendingVendor"
+    }
+  ]
+}
