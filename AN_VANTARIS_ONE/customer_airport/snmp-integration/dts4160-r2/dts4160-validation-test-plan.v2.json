@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "2.0",
+  "testPlanId": "dts4160-snmp-decoder-validation-test-plan-r2",
+  "sourceSystem": "DTS4160",
+  "protocol": "SNMP",
+  "oid": "1.3.6.1.4.1.13842.4.4160.1.8",
+  "scope": "Docs and JSON validation only. No runtime decoder implementation.",
+  "tests": [
+    {
+      "testId": "DTS4160-R2-T001",
+      "objective": "Validate known active sample interpretation.",
+      "input": {
+        "rawValue": "00408080.00000000"
+      },
+      "expectedResult": {
+        "alarmState": "ACTIVE",
+        "decodedAlarms": [
+          "GNSS Sync Lost",
+          "No valid Time Source",
+          "No DTS Link"
+        ],
+        "severitySuggestion": "HIGH"
+      },
+      "evidenceToCapture": [
+        "rawOid",
+        "rawValue",
+        "decoderContractVersion",
+        "verificationStatus"
+      ],
+      "status": "required"
+    },
+    {
+      "testId": "DTS4160-R2-T002",
+      "objective": "Validate known clear sample interpretation.",
+      "input": {
+        "rawValue": "00000000.00000000"
+      },
+      "expectedResult": {
+        "alarmState": "CLEARED",
+        "decodedAlarms": [],
+        "severitySuggestion": "NORMAL"
+      },
+      "evidenceToCapture": [
+        "rawOid",
+        "rawValue",
+        "decoderContractVersion",
+        "verificationStatus"
+      ],
+      "status": "required"
+    },
+    {
+      "testId": "DTS4160-R2-T003",
+      "objective": "Prevent invented labels for unknown non-zero masks.",
+      "input": {
+        "rawValue": "00000001.00000000"
+      },
+      "expectedResult": {
+        "alarmState": "UNVALIDATED_NONZERO_SAMPLE",
+        "decodedAlarms": [],
+        "severitySuggestion": "UNVALIDATED"
+      },
+      "evidenceToCapture": [
+        "rawOid",
+        "rawValue",
+        "guardrailStatus",
+        "mibConfirmationRequired"
+      ],
+      "status": "guardrail"
+    },
+    {
+      "testId": "DTS4160-R2-T004",
+      "objective": "Reject malformed mask value.",
+      "input": {
+        "rawValue": "invalid-mask"
+      },
+      "expectedResult": {
+        "alarmState": "INVALID_SAMPLE_FORMAT",
+        "decodedAlarms": [],
+        "severitySuggestion": "INVALID"
+      },
+      "evidenceToCapture": [
+        "rawOid",
+        "rawValue",
+        "formatValidationStatus"
+      ],
+      "status": "guardrail"
+    },
+    {
+      "testId": "DTS4160-R2-T005",
+      "objective": "Verify expected normalized event envelope for known samples.",
+      "input": {
+        "fixtures": [
+          "dts4160-r2-known-active",
+          "dts4160-r2-known-clear"
+        ]
+      },
+      "expectedResult": {
+        "requiredFieldsPresent": [
+          "sourceSystem",
+          "sourceVendor",
+          "sourceProtocol",
+          "sourceOid",
+          "rawValue",
+          "alarmState",
+          "decodedAlarms",
+          "evidenceFields",
+          "downstream"
+        ],
+        "productionValidationClaim": false
+      },
+      "evidenceToCapture": [
+        "normalizedEventJson",
+        "schemaVersion",
+        "decoderContractVersion"
+      ],
+      "status": "required"
+    }
+  ],
+  "nonGoals": [
+    "Runtime decoder implementation",
+    "Live SNMP polling",
+    "Trap listener validation",
+    "MIB parsing",
+    "Production alarm certification"
+  ]
+}

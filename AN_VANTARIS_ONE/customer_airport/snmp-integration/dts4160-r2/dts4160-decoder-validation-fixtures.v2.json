@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "2.0",
+  "fixtureSetId": "dts4160-snmp-decoder-validation-fixtures-r2",
+  "sourceSystem": "DTS4160",
+  "vendor": "Mobatime/DTS",
+  "device": "DTS 4160 grandmaster",
+  "protocol": "SNMP",
+  "oid": "1.3.6.1.4.1.13842.4.4160.1.8",
+  "fixtureBoundary": "Controlled validation fixtures derived from R1 sample evidence. Not live customer readings.",
+  "fixtures": [
+    {
+      "fixtureId": "dts4160-r2-known-active",
+      "derivedFromR1FixtureId": "dts4160-active-sample-r1",
+      "synthetic": false,
+      "sampleControlled": true,
+      "rawValue": "00408080.00000000",
+      "expectedAlarmState": "ACTIVE",
+      "expectedDecodedAlarms": [
+        "GNSS Sync Lost",
+        "No valid Time Source",
+        "No DTS Link"
+      ],
+      "expectedSeveritySuggestion": "HIGH",
+      "expectedFaultCandidate": true,
+      "verificationStatus": "sample-confirmed",
+      "evidenceNotes": "Known active sample from R1 derived evidence. Bit indexes remain unverified."
+    },
+    {
+      "fixtureId": "dts4160-r2-known-clear",
+      "derivedFromR1FixtureId": "dts4160-clear-sample-r1",
+      "synthetic": false,
+      "sampleControlled": true,
+      "rawValue": "00000000.00000000",
+      "expectedAlarmState": "CLEARED",
+      "expectedDecodedAlarms": [],
+      "expectedSeveritySuggestion": "NORMAL",
+      "expectedFaultCandidate": false,
+      "verificationStatus": "sample-confirmed",
+      "evidenceNotes": "Known clear sample from R1 derived evidence."
+    },
+    {
+      "fixtureId": "dts4160-r2-unknown-nonzero-guardrail",
+      "derivedFromR1FixtureId": null,
+      "synthetic": true,
+      "sampleControlled": true,
+      "rawValue": "00000001.00000000",
+      "expectedAlarmState": "UNVALIDATED_NONZERO_SAMPLE",
+      "expectedDecodedAlarms": [],
+      "expectedSeveritySuggestion": "UNVALIDATED",
+      "expectedFaultCandidate": false,
+      "verificationStatus": "guardrail-mib-confirmation-required",
+      "evidenceNotes": "Synthetic guardrail fixture. Non-zero values other than the known active sample must not produce invented alarm labels."
+    },
+    {
+      "fixtureId": "dts4160-r2-malformed-format-guardrail",
+      "derivedFromR1FixtureId": null,
+      "synthetic": true,
+      "sampleControlled": true,
+      "rawValue": "invalid-mask",
+      "expectedAlarmState": "INVALID_SAMPLE_FORMAT",
+      "expectedDecodedAlarms": [],
+      "expectedSeveritySuggestion": "INVALID",
+      "expectedFaultCandidate": false,
+      "verificationStatus": "guardrail-invalid-format",
+      "evidenceNotes": "Synthetic guardrail fixture for invalid mask presentation."
+    }
+  ],
+  "notes": [
+    "Only the R1 active and clear samples are sample-confirmed.",
+    "Unknown non-zero and malformed fixtures are validation guardrails, not customer evidence.",
+    "Do not implement bit-level decoding until MIB confirmation is available."
+  ]
+}

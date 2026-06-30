@@ -1,0 +1,156 @@
+{
+  "schemaVersion": "2.0",
+  "eventSetId": "dts4160-expected-normalized-events-r2",
+  "decoderContractVersion": "dts4160-snmp-decoder-validation-r2",
+  "eventBoundary": "Expected normalized event examples for controlled validation only. Not production validation.",
+  "events": [
+    {
+      "eventId": "dts4160-r2-known-active-normalized",
+      "sourceSystem": "DTS4160",
+      "sourceVendor": "Mobatime/DTS",
+      "sourceProtocol": "SNMP",
+      "sourceOid": "1.3.6.1.4.1.13842.4.4160.1.8",
+      "rawValue": "00408080.00000000",
+      "assetType": "Time Synchronization Device / Grandmaster Clock",
+      "assetName": "DTS 4160 grandmaster",
+      "system": "ELV / Master Clock / Time Synchronization",
+      "siteContext": "customer_airport",
+      "locationContext": "pending customer asset/location confirmation",
+      "alarmState": "ACTIVE",
+      "decodedAlarms": [
+        "GNSS Sync Lost",
+        "No valid Time Source",
+        "No DTS Link"
+      ],
+      "severitySuggestion": "HIGH",
+      "eventType": "time_synchronization_degradation",
+      "title": "DTS 4160 Time Synchronization Alarm Sample Active",
+      "description": "Known DTS 4160 active sample indicates GNSS sync lost, no valid time source, and no DTS link according to R1 derived evidence.",
+      "operationalImpact": "Potential time synchronization degradation affecting systems that depend on the master clock. This is a sample-confirmed validation event, not a live production outage claim.",
+      "recommendedAction": "Investigate grandmaster time source, GNSS synchronization, and DTS link condition; confirm live state and site asset location before dispatch.",
+      "faultCandidate": {
+        "isCandidate": true,
+        "category": "Time synchronization degradation",
+        "reason": "Known active sample decodes to three sample-confirmed time synchronization alarms."
+      },
+      "workOrderRecommendation": {
+        "recommended": true,
+        "prioritySuggestion": "High",
+        "summary": "Review DTS 4160 synchronization health if this state is observed on a live system."
+      },
+      "evidenceFields": {
+        "rawOid": "1.3.6.1.4.1.13842.4.4160.1.8",
+        "rawValue": "00408080.00000000",
+        "decoderContractVersion": "dts4160-snmp-decoder-validation-r2",
+        "sourceDocumentReference": "Derived from R1 DTS4160 SNMP evidence pack; raw customer documents are not included.",
+        "verificationStatus": "sample-confirmed",
+        "productionValidationClaim": false
+      },
+      "downstream": {
+        "alarmConsole": true,
+        "eventTimeline": true,
+        "faultOperations": true,
+        "workManagement": true,
+        "hmiMap": "pending asset/location confirmation",
+        "evidenceCenter": true,
+        "reportExport": true
+      }
+    },
+    {
+      "eventId": "dts4160-r2-known-clear-normalized",
+      "sourceSystem": "DTS4160",
+      "sourceVendor": "Mobatime/DTS",
+      "sourceProtocol": "SNMP",
+      "sourceOid": "1.3.6.1.4.1.13842.4.4160.1.8",
+      "rawValue": "00000000.00000000",
+      "assetType": "Time Synchronization Device / Grandmaster Clock",
+      "assetName": "DTS 4160 grandmaster",
+      "system": "ELV / Master Clock / Time Synchronization",
+      "siteContext": "customer_airport",
+      "locationContext": "pending customer asset/location confirmation",
+      "alarmState": "CLEARED",
+      "decodedAlarms": [],
+      "severitySuggestion": "NORMAL",
+      "eventType": "time_synchronization_alarm_clear_sample",
+      "title": "DTS 4160 Alarm Mask Clear Sample",
+      "description": "Known DTS 4160 clear sample indicates no active decoded alarms according to R1 derived evidence.",
+      "operationalImpact": "No active DTS 4160 alarm indicated by this sample.",
+      "recommendedAction": "No work order recommendation from the clear sample alone.",
+      "faultCandidate": {
+        "isCandidate": false,
+        "category": "Time synchronization normal",
+        "reason": "Known clear sample has no decoded alarms."
+      },
+      "workOrderRecommendation": {
+        "recommended": false,
+        "prioritySuggestion": "None",
+        "summary": "No work order recommendation from this clear sample alone."
+      },
+      "evidenceFields": {
+        "rawOid": "1.3.6.1.4.1.13842.4.4160.1.8",
+        "rawValue": "00000000.00000000",
+        "decoderContractVersion": "dts4160-snmp-decoder-validation-r2",
+        "sourceDocumentReference": "Derived from R1 DTS4160 SNMP evidence pack; raw customer documents are not included.",
+        "verificationStatus": "sample-confirmed",
+        "productionValidationClaim": false
+      },
+      "downstream": {
+        "alarmConsole": true,
+        "eventTimeline": true,
+        "faultOperations": true,
+        "workManagement": true,
+        "hmiMap": "pending asset/location confirmation",
+        "evidenceCenter": true,
+        "reportExport": true
+      }
+    },
+    {
+      "eventId": "dts4160-r2-unknown-nonzero-guardrail-normalized",
+      "sourceSystem": "DTS4160",
+      "sourceVendor": "Mobatime/DTS",
+      "sourceProtocol": "SNMP",
+      "sourceOid": "1.3.6.1.4.1.13842.4.4160.1.8",
+      "rawValue": "00000001.00000000",
+      "assetType": "Time Synchronization Device / Grandmaster Clock",
+      "assetName": "DTS 4160 grandmaster",
+      "system": "ELV / Master Clock / Time Synchronization",
+      "siteContext": "customer_airport",
+      "locationContext": "pending customer asset/location confirmation",
+      "alarmState": "UNVALIDATED_NONZERO_SAMPLE",
+      "decodedAlarms": [],
+      "severitySuggestion": "UNVALIDATED",
+      "eventType": "dts4160_unvalidated_nonzero_alarm_mask",
+      "title": "DTS 4160 Unvalidated Non-Zero Alarm Mask",
+      "description": "Synthetic guardrail event. A non-zero sample other than the known active sample must not produce invented decoded alarm labels.",
+      "operationalImpact": "Unvalidated sample; production impact cannot be inferred without MIB confirmation.",
+      "recommendedAction": "Capture vendor MIB, bit order, byte order, and customer samples before expanding decoder behavior.",
+      "faultCandidate": {
+        "isCandidate": false,
+        "category": "Decoder validation guardrail",
+        "reason": "Alarm labels are not inferred for unvalidated non-zero values."
+      },
+      "workOrderRecommendation": {
+        "recommended": false,
+        "prioritySuggestion": "None",
+        "summary": "Do not create work order from unvalidated synthetic guardrail sample."
+      },
+      "evidenceFields": {
+        "rawOid": "1.3.6.1.4.1.13842.4.4160.1.8",
+        "rawValue": "00000001.00000000",
+        "decoderContractVersion": "dts4160-snmp-decoder-validation-r2",
+        "sourceDocumentReference": "Synthetic R2 guardrail fixture; not customer evidence.",
+        "verificationStatus": "guardrail-mib-confirmation-required",
+        "productionValidationClaim": false
+      },
+      "downstream": {
+        "alarmConsole": false,
+        "eventTimeline": true,
+        "faultOperations": false,
+        "workManagement": false,
+        "hmiMap": false,
+        "evidenceCenter": true,
+        "reportExport": true
+      }
+    }
+  ]
+}

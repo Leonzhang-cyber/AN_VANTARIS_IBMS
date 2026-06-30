@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "2.0",
+  "contractId": "dts4160-snmp-decoder-validation-r2",
+  "contractType": "controlled-validation-contract",
+  "sourceSystem": "DTS4160",
+  "vendor": "Mobatime/DTS",
+  "device": "DTS 4160 grandmaster",
+  "industryProjection": "customer_airport",
+  "protocol": "SNMP",
+  "system": "Clock System / Time Synchronization / Master Clock",
+  "oid": "1.3.6.1.4.1.13842.4.4160.1.8",
+  "decoderContractVersion": "dts4160-snmp-decoder-validation-r2",
+  "implementationStatus": "documentation_and_json_only",
+  "productionValidationClaim": false,
+  "rawCustomerArtifactIncluded": false,
+  "knownSamples": {
+    "active": {
+      "rawValue": "00408080.00000000",
+      "expectedAlarmState": "ACTIVE",
+      "expectedDecodedAlarms": [
+        "GNSS Sync Lost",
+        "No valid Time Source",
+        "No DTS Link"
+      ],
+      "verificationStatus": "sample-confirmed"
+    },
+    "clear": {
+      "rawValue": "00000000.00000000",
+      "expectedAlarmState": "CLEARED",
+      "expectedDecodedAlarms": [],
+      "verificationStatus": "sample-confirmed"
+    }
+  },
+  "alarmMappingPolicy": {
+    "allowOnlySampleConfirmedLabels": true,
+    "inventBitIndexes": false,
+    "inventAdditionalAlarmLabels": false,
+    "bitIndexStatus": "mib-confirmation-required",
+    "byteOrderStatus": "mib-confirmation-required",
+    "bitOrderStatus": "mib-confirmation-required"
+  },
+  "sampleConfirmedAlarmLabels": [
+    {
+      "alarmName": "GNSS Sync Lost",
+      "bitIndex": null,
+      "confidence": "sample-confirmed",
+      "confirmationStatus": "mib-confirmation-required"
+    },
+    {
+      "alarmName": "No valid Time Source",
+      "bitIndex": null,
+      "confidence": "sample-confirmed",
+      "confirmationStatus": "mib-confirmation-required"
+    },
+    {
+      "alarmName": "No DTS Link",
+      "bitIndex": null,
+      "confidence": "sample-confirmed",
+      "confirmationStatus": "mib-confirmation-required",
+      "notes": "Optical vs LAN naming requires customer/vendor confirmation."
+    }
+  ],
+  "validationRules": [
+    {
+      "ruleId": "DTS4160-R2-001",
+      "name": "Known active sample",
+      "inputRawValue": "00408080.00000000",
+      "expectedAlarmState": "ACTIVE",
+      "expectedDecodedAlarms": [
+        "GNSS Sync Lost",
+        "No valid Time Source",
+        "No DTS Link"
+      ],
+      "status": "required"
+    },
+    {
+      "ruleId": "DTS4160-R2-002",
+      "name": "Known clear sample",
+      "inputRawValue": "00000000.00000000",
+      "expectedAlarmState": "CLEARED",
+      "expectedDecodedAlarms": [],
+      "status": "required"
+    },
+    {
+      "ruleId": "DTS4160-R2-003",
+      "name": "Unknown non-zero sample",
+      "inputRawValue": "non-zero value other than known active sample",
+      "expectedAlarmState": "UNVALIDATED_NONZERO_SAMPLE",
+      "expectedDecodedAlarms": [],
+      "status": "guardrail",
+      "notes": "Do not infer decoded labels for non-zero values until MIB mapping is verified."
+    },
+    {
+      "ruleId": "DTS4160-R2-004",
+      "name": "Malformed sample",
+      "inputRawValue": "value not matching expected 8-byte mask presentation",
+      "expectedAlarmState": "INVALID_SAMPLE_FORMAT",
+      "expectedDecodedAlarms": [],
+      "status": "guardrail"
+    }
+  ],
+  "requiredEvidenceFields": [
+    "rawOid",
+    "rawValue",
+    "decoderContractVersion",
+    "sourceDocumentReference",
+    "verificationStatus",
+    "productionValidationClaim"
+  ],
+  "pendingConfirmation": [
+    "Vendor MIB",
+    "Full DTS 4160 alarm table",
+    "Exact bit order",
+    "Exact byte order",
+    "Trap behavior",
+    "SNMP version and security mode",
+    "Polling interval",
+    "Site asset ID",
+    "Physical location and HMI map linkage"
+  ]
+}
