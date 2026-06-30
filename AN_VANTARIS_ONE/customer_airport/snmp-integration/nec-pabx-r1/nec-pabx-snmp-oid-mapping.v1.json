@@ -1,0 +1,167 @@
+{
+  "schemaVersion": "1.0",
+  "sourceSystem": "NEC PABX",
+  "industryProjection": "customer_airport",
+  "protocol": "SNMP",
+  "vendor": "NEC",
+  "systemType": "PABX / Telephony",
+  "mappingStatus": "derived_from_customer_material",
+  "oidMappings": [
+    {
+      "key": "alarmLampStatus",
+      "label": "Alarm Lamp Status and Lamp Clear",
+      "oid": "1.3.6.1.4.1.119.2.3.76.2.1.1.0",
+      "group": "alarm",
+      "valueType": "integer",
+      "valueSemantics": {
+        "0": "lamp off / clear status",
+        "1": "lamp lighting"
+      },
+      "severityHint": "INFO_TO_WARNING",
+      "oneEventType": "pabx_alarm_lamp_status",
+      "oneAssetContext": "PABX / Telephony",
+      "evidenceUse": "Baseline alarm lamp state and clear evidence.",
+      "verificationStatus": "exactOidFromSource_materialSemanticsPartial",
+      "notes": "Task source names this as Lamp Status and Lamp Clear. Exact production interpretation should be verified against the NEC MIB."
+    },
+    {
+      "key": "majorAlarmLamp",
+      "label": "Major Alarm Lamp",
+      "oid": "1.3.6.1.4.1.119.2.3.76.2.1.2.0",
+      "group": "alarm",
+      "valueType": "integer",
+      "valueSemantics": {
+        "0": "lamp off",
+        "1": "lamp lighting"
+      },
+      "severityHint": "CRITICAL",
+      "oneEventType": "pabx_major_alarm_lamp",
+      "oneAssetContext": "PABX / Telephony",
+      "evidenceUse": "Detects major PABX alarm lamp condition for Alarm Console and fault candidate evidence.",
+      "verificationStatus": "exactOidFromSource_valueSemanticsKnown",
+      "notes": "Does not by itself prove a production outage; indicates major alarm lamp state."
+    },
+    {
+      "key": "minorAlarmLamp",
+      "label": "Minor Alarm Lamp",
+      "oid": "1.3.6.1.4.1.119.2.3.76.2.1.3.0",
+      "group": "alarm",
+      "valueType": "integer",
+      "valueSemantics": {
+        "0": "lamp off",
+        "1": "lamp lighting"
+      },
+      "severityHint": "WARNING",
+      "oneEventType": "pabx_minor_alarm_lamp",
+      "oneAssetContext": "PABX / Telephony",
+      "evidenceUse": "Detects minor PABX alarm lamp condition for operational triage.",
+      "verificationStatus": "exactOidFromSource_valueSemanticsKnown",
+      "notes": "Severity should be confirmed with customer alarm policy."
+    },
+    {
+      "key": "supervisorAlarmLamp",
+      "label": "Supervisor Alarm Lamp",
+      "oid": "1.3.6.1.4.1.119.2.3.76.2.1.4.0",
+      "group": "alarm",
+      "valueType": "integer",
+      "valueSemantics": {
+        "0": "Not available",
+        "1": "Supervisor lamp off",
+        "2": "Supervisor lamp lighting"
+      },
+      "severityHint": "WARNING",
+      "oneEventType": "pabx_supervisor_alarm_lamp",
+      "oneAssetContext": "PABX / Telephony",
+      "evidenceUse": "Detects supervisor alarm lamp availability and active state.",
+      "verificationStatus": "exactOidFromSource_valueSemanticsKnown",
+      "notes": "Value 0 should be treated as not available rather than clear."
+    },
+    {
+      "key": "failureMessage",
+      "label": "Failure Message",
+      "oid": "1.3.6.1.4.1.119.2.3.76.2.2.1.0",
+      "group": "systemMessage",
+      "valueType": "string",
+      "valueSemantics": {
+        "maxLength": "255 characters",
+        "delivery": "sent as a trap to SNMP Manager"
+      },
+      "severityHint": "DERIVED_FROM_MESSAGE",
+      "oneEventType": "pabx_failure_message",
+      "oneAssetContext": "PABX / Telephony",
+      "evidenceUse": "Preserves NEC failure message text as raw evidence for Alarm Console and reports.",
+      "verificationStatus": "exactOidFromSource_trapPayloadPending",
+      "notes": "Exact trap payload format and severity derivation require verification."
+    },
+    {
+      "key": "systemMessageTrap",
+      "label": "System Message Trap",
+      "oid": null,
+      "group": "systemMessage / sysMessage",
+      "valueType": "trap",
+      "valueSemantics": null,
+      "severityHint": "DERIVED_FROM_TRAP",
+      "oneEventType": "pabx_system_message_trap",
+      "oneAssetContext": "PABX / Telephony",
+      "evidenceUse": "Captures NEC PABX system messages delivered to the SNMP Manager.",
+      "verificationStatus": "pendingExactOidConfirmation",
+      "notes": "Group-level coverage only. Do not implement until exact trap OID and varbind format are verified."
+    },
+    {
+      "key": "cpuUsage",
+      "label": "CPU Usage",
+      "oid": null,
+      "group": "cpu",
+      "valueType": "numeric",
+      "valueSemantics": null,
+      "severityHint": "WARNING",
+      "oneEventType": "pabx_cpu_usage",
+      "oneAssetContext": "PABX / Telephony",
+      "evidenceUse": "Candidate monitoring for PABX processing load and early warning.",
+      "verificationStatus": "groupLevelCoverage_pendingExactOidConfirmation",
+      "notes": "NEC private MIB includes cpu group, but exact child OID is not provided in the task source."
+    },
+    {
+      "key": "traffic",
+      "label": "Traffic",
+      "oid": null,
+      "group": "traffic",
+      "valueType": "numeric_or_counter",
+      "valueSemantics": null,
+      "severityHint": "INFO_TO_WARNING",
+      "oneEventType": "pabx_traffic_metric",
+      "oneAssetContext": "PABX / Telephony",
+      "evidenceUse": "Candidate monitoring for PABX traffic load once exact OIDs are verified.",
+      "verificationStatus": "groupLevelCoverage_pendingExactOidConfirmation",
+      "notes": "Group-level only."
+    },
+    {
+      "key": "circuitCardPortStatus",
+      "label": "Circuit Card / Port Status",
+      "oid": null,
+      "group": "port",
+      "valueType": "enum_or_table",
+      "valueSemantics": null,
+      "severityHint": "WARNING",
+      "oneEventType": "pabx_port_status",
+      "oneAssetContext": "PABX / Telephony / Circuit Card / Port",
+      "evidenceUse": "Candidate monitoring for circuit card or port degradation affecting telephony service.",
+      "verificationStatus": "groupLevelCoverage_pendingExactOidConfirmation",
+      "notes": "NEC private MIB includes port group, but exact child OID/table structure is not provided."
+    },
+    {
+      "key": "terminalRegistrationInfo",
+      "label": "Terminal / Registration Info",
+      "oid": null,
+      "group": "terminal / registrationInfo",
+      "valueType": "enum_or_table",
+      "valueSemantics": null,
+      "severityHint": "INFO_TO_WARNING",
+      "oneEventType": "pabx_terminal_registration",
+      "oneAssetContext": "PABX / Telephony / Terminal",
+      "evidenceUse": "Candidate monitoring for terminal registration visibility once exact OIDs are verified.",
+      "verificationStatus": "groupLevelCoverage_pendingExactOidConfirmation",
+      "notes": "NEC private MIB includes terminal and registrationInfo groups, but exact child OIDs are not provided."
+    }
+  ]
+}

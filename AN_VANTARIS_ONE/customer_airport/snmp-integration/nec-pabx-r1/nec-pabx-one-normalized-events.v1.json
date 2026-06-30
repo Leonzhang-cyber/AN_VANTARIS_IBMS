@@ -1,0 +1,223 @@
+{
+  "schemaVersion": "1.0",
+  "sourceSystem": "NEC PABX",
+  "industryProjection": "customer_airport",
+  "eventBoundary": "Examples derived from synthetic fixtures. These are not live customer production events.",
+  "events": [
+    {
+      "eventKey": "pabx_major_alarm_lamp_active",
+      "sourceSystem": "NEC PABX",
+      "sourceVendor": "NEC",
+      "sourceProtocol": "SNMP",
+      "sourceOid": "1.3.6.1.4.1.119.2.3.76.2.1.2.0",
+      "assetType": "PABX / Telephony",
+      "assetName": "NEC PABX",
+      "siteContext": "customer_airport",
+      "zoneContext": "pending customer location mapping",
+      "severity": "CRITICAL",
+      "status": "ACTIVE",
+      "eventType": "pabx_major_alarm_lamp",
+      "title": "NEC PABX Major Alarm Lamp Lighting",
+      "description": "Synthetic example where NEC PABX major alarm lamp value is 1, indicating lamp lighting.",
+      "operationalImpact": "Potential service impact to airport telephony or operations coordination. Actual impact must be confirmed against site alarm policy and live system state.",
+      "recommendedAction": "Review NEC PABX alarm details, confirm telephony service health, and dispatch qualified maintenance if the major alarm remains active.",
+      "evidenceFields": {
+        "rawOid": "1.3.6.1.4.1.119.2.3.76.2.1.2.0",
+        "rawValue": "1",
+        "valueMeaning": "lamp lighting",
+        "fixtureId": "nec-pabx-major-alarm-lighting-r1"
+      },
+      "workOrderCandidate": true,
+      "correlationHints": [
+        "Correlate with failure message trap text.",
+        "Correlate with communication-loss events to distinguish PABX alarm from SNMP reachability issue.",
+        "Correlate with airport telephony service reports if available."
+      ],
+      "verificationStatus": "synthetic_exactOidFromSource_valueSemanticsKnown"
+    },
+    {
+      "eventKey": "pabx_major_alarm_lamp_clear",
+      "sourceSystem": "NEC PABX",
+      "sourceVendor": "NEC",
+      "sourceProtocol": "SNMP",
+      "sourceOid": "1.3.6.1.4.1.119.2.3.76.2.1.2.0",
+      "assetType": "PABX / Telephony",
+      "assetName": "NEC PABX",
+      "siteContext": "customer_airport",
+      "zoneContext": "pending customer location mapping",
+      "severity": "NORMAL",
+      "status": "CLEARED",
+      "eventType": "pabx_major_alarm_lamp",
+      "title": "NEC PABX Major Alarm Lamp Off",
+      "description": "Synthetic example where NEC PABX major alarm lamp value is 0, indicating lamp off.",
+      "operationalImpact": "No major alarm lamp condition indicated by this sample.",
+      "recommendedAction": "No work order recommendation from this clear sample alone.",
+      "evidenceFields": {
+        "rawOid": "1.3.6.1.4.1.119.2.3.76.2.1.2.0",
+        "rawValue": "0",
+        "valueMeaning": "lamp off",
+        "fixtureId": "nec-pabx-major-alarm-off-r1"
+      },
+      "workOrderCandidate": false,
+      "correlationHints": [
+        "Use as clear evidence after an active major alarm sample.",
+        "Confirm actual clear behavior with live polling/trap evidence."
+      ],
+      "verificationStatus": "synthetic_exactOidFromSource_valueSemanticsKnown"
+    },
+    {
+      "eventKey": "pabx_minor_alarm_lamp_active",
+      "sourceSystem": "NEC PABX",
+      "sourceVendor": "NEC",
+      "sourceProtocol": "SNMP",
+      "sourceOid": "1.3.6.1.4.1.119.2.3.76.2.1.3.0",
+      "assetType": "PABX / Telephony",
+      "assetName": "NEC PABX",
+      "siteContext": "customer_airport",
+      "zoneContext": "pending customer location mapping",
+      "severity": "WARNING",
+      "status": "ACTIVE",
+      "eventType": "pabx_minor_alarm_lamp",
+      "title": "NEC PABX Minor Alarm Lamp Lighting",
+      "description": "Synthetic example where NEC PABX minor alarm lamp value is 1, indicating lamp lighting.",
+      "operationalImpact": "Possible degraded telephony condition requiring operational review. This is not a proven outage claim.",
+      "recommendedAction": "Review NEC PABX alarm details and monitor for escalation, repeated alarms, or related failure messages.",
+      "evidenceFields": {
+        "rawOid": "1.3.6.1.4.1.119.2.3.76.2.1.3.0",
+        "rawValue": "1",
+        "valueMeaning": "lamp lighting",
+        "fixtureId": "nec-pabx-minor-alarm-lighting-r1"
+      },
+      "workOrderCandidate": true,
+      "correlationHints": [
+        "Correlate with failure message trap text.",
+        "Correlate with major alarm lamp state.",
+        "Correlate with customer telephony service indicators if available."
+      ],
+      "verificationStatus": "synthetic_exactOidFromSource_valueSemanticsKnown"
+    },
+    {
+      "eventKey": "pabx_supervisor_alarm_lamp_active",
+      "sourceSystem": "NEC PABX",
+      "sourceVendor": "NEC",
+      "sourceProtocol": "SNMP",
+      "sourceOid": "1.3.6.1.4.1.119.2.3.76.2.1.4.0",
+      "assetType": "PABX / Telephony",
+      "assetName": "NEC PABX",
+      "siteContext": "customer_airport",
+      "zoneContext": "pending customer location mapping",
+      "severity": "WARNING",
+      "status": "ACTIVE",
+      "eventType": "pabx_supervisor_alarm_lamp",
+      "title": "NEC PABX Supervisor Alarm Lamp Lighting",
+      "description": "Synthetic example where NEC PABX supervisor alarm lamp value is 2, indicating supervisor lamp lighting.",
+      "operationalImpact": "Potential supervision-related telephony alarm requiring operator review.",
+      "recommendedAction": "Confirm supervisor alarm details in NEC PABX management tools and review related failure messages.",
+      "evidenceFields": {
+        "rawOid": "1.3.6.1.4.1.119.2.3.76.2.1.4.0",
+        "rawValue": "2",
+        "valueMeaning": "Supervisor lamp lighting",
+        "fixtureId": "nec-pabx-supervisor-lamp-lighting-r1"
+      },
+      "workOrderCandidate": true,
+      "correlationHints": [
+        "Treat value 0 as not available rather than clear.",
+        "Correlate with major/minor alarm lamps and failure messages."
+      ],
+      "verificationStatus": "synthetic_exactOidFromSource_valueSemanticsKnown"
+    },
+    {
+      "eventKey": "pabx_failure_message_received",
+      "sourceSystem": "NEC PABX",
+      "sourceVendor": "NEC",
+      "sourceProtocol": "SNMP",
+      "sourceOid": "1.3.6.1.4.1.119.2.3.76.2.2.1.0",
+      "assetType": "PABX / Telephony",
+      "assetName": "NEC PABX",
+      "siteContext": "customer_airport",
+      "zoneContext": "pending customer location mapping",
+      "severity": "WARNING",
+      "status": "ACTIVE",
+      "eventType": "pabx_failure_message",
+      "title": "NEC PABX Failure Message Trap Received",
+      "description": "Synthetic example where NEC PABX failure message text is captured as SNMP evidence.",
+      "operationalImpact": "May indicate a telephony fault or operational issue depending on message content. Production severity must be derived from confirmed message semantics.",
+      "recommendedAction": "Review failure message content, correlate with lamp states, and confirm customer operational impact before escalation.",
+      "evidenceFields": {
+        "rawOid": "1.3.6.1.4.1.119.2.3.76.2.2.1.0",
+        "rawValue": "SYNTHETIC FAILURE MESSAGE: PABX alarm message received",
+        "valueMeaning": "Failure message text up to 255 characters",
+        "fixtureId": "nec-pabx-failure-message-trap-r1"
+      },
+      "workOrderCandidate": true,
+      "correlationHints": [
+        "Correlate with major/minor/supervisor lamp states.",
+        "Correlate repeated message text into a single fault candidate.",
+        "Use raw message as Evidence Center content."
+      ],
+      "verificationStatus": "synthetic_exactOidFromSource_trapPayloadPending"
+    },
+    {
+      "eventKey": "pabx_cpu_usage_warning_candidate",
+      "sourceSystem": "NEC PABX",
+      "sourceVendor": "NEC",
+      "sourceProtocol": "SNMP",
+      "sourceOid": null,
+      "assetType": "PABX / Telephony",
+      "assetName": "NEC PABX",
+      "siteContext": "customer_airport",
+      "zoneContext": "pending customer location mapping",
+      "severity": "WARNING",
+      "status": "CANDIDATE",
+      "eventType": "pabx_cpu_usage",
+      "title": "NEC PABX CPU Usage Warning Candidate",
+      "description": "Synthetic group-level candidate for CPU usage monitoring. Exact NEC cpu child OID is pending verification.",
+      "operationalImpact": "Possible early warning for PABX processing load. No production condition is claimed.",
+      "recommendedAction": "Verify exact CPU OID, unit, threshold, and live sample before enabling alarm behavior.",
+      "evidenceFields": {
+        "rawOid": null,
+        "rawValue": "85",
+        "valueMeaning": "Synthetic CPU usage warning candidate",
+        "fixtureId": "nec-pabx-cpu-usage-warning-candidate-r1",
+        "pendingExactOid": true
+      },
+      "workOrderCandidate": false,
+      "correlationHints": [
+        "Correlate only after exact OID and threshold are verified.",
+        "Compare with traffic and alarm lamp states once available."
+      ],
+      "verificationStatus": "synthetic_groupLevelCoverage_pendingExactOidConfirmation"
+    },
+    {
+      "eventKey": "pabx_port_status_warning_candidate",
+      "sourceSystem": "NEC PABX",
+      "sourceVendor": "NEC",
+      "sourceProtocol": "SNMP",
+      "sourceOid": null,
+      "assetType": "PABX / Telephony / Circuit Card / Port",
+      "assetName": "NEC PABX Port",
+      "siteContext": "customer_airport",
+      "zoneContext": "pending customer location mapping",
+      "severity": "WARNING",
+      "status": "CANDIDATE",
+      "eventType": "pabx_port_status",
+      "title": "NEC PABX Port Status Warning Candidate",
+      "description": "Synthetic group-level candidate for circuit card or port status monitoring. Exact NEC port child OID/table structure is pending verification.",
+      "operationalImpact": "Potential telephony service degradation if a circuit card or port is affected. No production condition is claimed.",
+      "recommendedAction": "Verify exact port status table, enum semantics, affected port identity, and site service mapping before enabling alarm behavior.",
+      "evidenceFields": {
+        "rawOid": null,
+        "rawValue": "warning",
+        "valueMeaning": "Synthetic port status warning candidate",
+        "fixtureId": "nec-pabx-port-status-warning-candidate-r1",
+        "pendingExactOid": true
+      },
+      "workOrderCandidate": false,
+      "correlationHints": [
+        "Correlate with terminal registration data once exact OIDs are verified.",
+        "Correlate with customer service impact reports and failure message traps."
+      ],
+      "verificationStatus": "synthetic_groupLevelCoverage_pendingExactOidConfirmation"
+    }
+  ]
+}
