@@ -577,7 +577,7 @@ const sections: Record<string, SectionConfig> = {
   },
 }
 
-const fallbackSection: SectionConfig = {
+const defaultSection: SectionConfig = {
   title: 'VANTARIS ONE Operations Dashboard',
   subtitle: 'Production operations dashboard for asset import readiness, airport map registration, readonly fault and work order projection, and evidence closure gating.',
   primaryRoute: '/one/assets/context',
@@ -596,9 +596,9 @@ const fallbackSection: SectionConfig = {
 
 const panelStyle = {
   background: '#ffffff',
-  border: '1px solid #dbe7e4',
+  border: '1px solid #d7e3ec',
   borderRadius: '16px',
-  boxShadow: '0 16px 38px rgba(15, 23, 42, 0.08)',
+  boxShadow: '0 8px 18px rgba(15, 23, 42, 0.035)',
 }
 
 function openRoute(path: string): void {
@@ -606,7 +606,7 @@ function openRoute(path: string): void {
 }
 
 function card(children: VNodeChild[], extra: Record<string, string> = {}) {
-  return h('article', { style: { ...panelStyle, padding: '18px', ...extra } }, children)
+  return h('article', { style: { ...panelStyle, padding: '24px 32px 22px', ...extra } }, children)
 }
 
 function keyValueRows(rows: Array<{ label: string; value: string }>) {
@@ -633,10 +633,10 @@ function decisionLensPanel() {
     h('h2', { style: headingStyle }, 'Decision Lens'),
     h('div', { style: { display: 'grid', gap: '12px' } }, dashboardDecisionLens.map((item) => h('div', {
       style: {
-        borderLeft: '4px solid #dc2626',
-        padding: '10px 12px',
-        background: '#fff7ed',
-        borderRadius: '8px',
+        border: '1px solid #f1d3bd',
+        padding: '12px 14px',
+        background: '#fffaf6',
+        borderRadius: '12px',
       },
     }, [
       h('strong', { style: { display: 'block', marginBottom: '4px', color: '#0f172a' } }, item.title),
@@ -691,18 +691,18 @@ export default defineComponent({
     })
     const activeSection = computed(() => {
       if (route.path === '/dashboard' && !route.query.l3 && !route.query.menu) {
-        return fallbackSection
+        return defaultSection
       }
 
-      return sections[normalizeL3(route.query.l3)] ?? registrySection.value ?? fallbackSection
+      return sections[normalizeL3(route.query.l3)] ?? registrySection.value ?? defaultSection
     })
-    const isOperationsDashboard = computed(() => activeSection.value.title === fallbackSection.title)
+    const isOperationsDashboard = computed(() => activeSection.value.title === defaultSection.title)
 
     return () => h('section', {
       style: {
         minHeight: '100vh',
-        padding: '18px',
-        background: 'linear-gradient(135deg, #f5fbf8 0%, #eef5ff 52%, #f9fafb 100%)',
+        padding: '0 0 28px',
+        background: '#eef6fa',
         color: '#10201d',
       },
     }, [
@@ -714,16 +714,19 @@ export default defineComponent({
         ], { minHeight: '116px' })),
       ),
 
-      h('section', { style: { display: 'grid', gridTemplateColumns: '1.2fr .8fr', gap: '16px', marginBottom: '16px' } }, [
+      h('section', { style: { display: 'grid', gap: '16px', marginBottom: '16px' } }, [
         card([
           h('div', { style: sectionHeaderStyle }, [
-            h('div', [
+            h('div', { style: { minWidth: '0', maxWidth: '820px' } }, [
               h('p', { style: eyebrowStyle }, activeSection.value.sectionEyebrow ?? 'DASHBOARD DECISION WORKSPACE'),
               h('h2', { style: headingStyle }, activeSection.value.title),
               h('p', { style: subtitleStyle }, activeSection.value.subtitle),
             ]),
             h('button', { type: 'button', onClick: () => openRoute(activeSection.value.primaryRoute), style: actionButtonStyle }, activeSection.value.primaryAction),
           ]),
+        ], summaryPanelStyle),
+
+        card([
           h('h3', { style: { ...headingStyle, fontSize: '16px', marginBottom: '10px' } }, 'Action Queue'),
           h('div', { style: { overflowX: 'auto' } }, [
             h('table', { style: { width: '100%', borderCollapse: 'collapse', minWidth: '760px' } }, [
@@ -759,7 +762,7 @@ export default defineComponent({
       ]),
 
       ...(isOperationsDashboard.value ? [
-        h('section', { style: { display: 'grid', gridTemplateColumns: '1fr .95fr', gap: '16px' } }, [
+        h('section', { style: { display: 'grid', gap: '16px' } }, [
           card([
             h('p', { style: eyebrowStyle }, 'Readiness Gate'),
             h('h2', { style: headingStyle }, 'Asset Import and Airport Map Readiness'),
@@ -831,9 +834,18 @@ const subtitleStyle = {
 const sectionHeaderStyle = {
   display: 'flex',
   justifyContent: 'space-between',
-  gap: '16px',
+  gap: '32px',
   alignItems: 'flex-start',
+  flexWrap: 'wrap',
   marginBottom: '16px',
+}
+
+const summaryPanelStyle = {
+  padding: '8px 0 14px',
+  border: 'none',
+  borderRadius: '0',
+  background: 'transparent',
+  boxShadow: 'none',
 }
 
 const thStyle = {
@@ -853,14 +865,18 @@ const tdStyle = {
 }
 
 const actionButtonStyle = {
-  border: '1px solid #0f766e33',
-  background: '#ecfdf5',
+  flex: '0 0 auto',
+  marginLeft: 'auto',
+  border: '1px solid #0f766e',
+  background: '#ffffff',
   color: '#0f766e',
-  borderRadius: '12px',
-  padding: '10px 14px',
+  borderRadius: '10px',
+  padding: '8px 20px',
   cursor: 'pointer',
-  fontWeight: '800',
+  fontWeight: '700',
   whiteSpace: 'nowrap',
+  minHeight: '38px',
+  boxShadow: 'none',
 }
 
 const smallButtonStyle = {

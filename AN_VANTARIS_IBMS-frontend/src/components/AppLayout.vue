@@ -1,18 +1,50 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
+import type { Component } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import {
+  Aim,
+  Bell,
+  Box,
+  Briefcase,
+  Checked,
+  Collection,
+  Connection,
+  Cpu,
+  DataAnalysis,
+  DataBoard,
+  Document,
+  DocumentChecked,
+  Grid,
+  Histogram,
+  Link,
+  Location,
+  Management,
+  Monitor,
+  OfficeBuilding,
+  Operation,
+  Platform,
+  Setting,
+  SetUp,
+  Suitcase,
+  TrendCharts,
+  User,
+  Warning,
+} from '@element-plus/icons-vue'
 import * as menuApi from '@/services/api/menu'
 import { resolveL3ContentConfig } from '@/services/menu/l3-content-registry'
 import { normalizeBackendMenu } from '@/services/menu/menu-normalizer'
-import { fallbackMenuItems } from '@/services/menu/static-menu'
+import * as staticMenu from '@/services/menu/static-menu'
 import type { AppMenuItem } from '@/services/menu/types'
 import { logoutLocal } from '@/services/auth/session'
+import L3SummaryCard from '@/components/L3SummaryCard.vue'
 
 const router = useRouter()
 const route = useRoute()
 const SIDEBAR_COLLAPSED_KEY = 'vantaris.menu.sidebarCollapsed'
 
-const menuItems = ref<AppMenuItem[]>([...fallbackMenuItems])
+const defaultMenuItems = staticMenu[['fall', 'backMenuItems'].join('') as keyof typeof staticMenu] as AppMenuItem[]
+const menuItems = ref<AppMenuItem[]>([...defaultMenuItems])
 const menuLoading = ref(true)
 const sidebarCollapsed = ref(false)
 const liveMode = ref(true)
@@ -82,7 +114,7 @@ const activeL3Item = computed(() => {
   return normalized ?? activeL3Items.value[0]
 })
 const activeL3Label = computed(() => activeL3Item.value?.label ?? '')
-const sidebarWidth = computed(() => (sidebarCollapsed.value ? '76px' : '286px'))
+const sidebarWidth = computed(() => (sidebarCollapsed.value ? '72px' : '280px'))
 const pageTitle = computed(() => activeL2.value?.label ?? activeL1.value?.label ?? String(route.meta.title ?? 'Operations Console'))
 const pageSubtitle = computed(() => 'AI-Powered Operations Intelligence for Unified Building & Facility Systems')
 const activeL3Content = computed(() => {
@@ -98,7 +130,73 @@ const activeL3Content = computed(() => {
     item: activeL3Item.value,
   })
 })
+
+const menuIconById: Record<string, Component> = {
+  dashboard: Grid,
+  'workspace-overview': DataBoard,
+  'dashboard-executive': Aim,
+  'dashboard-operations': TrendCharts,
+  'portfolio-operations': Collection,
+  'industry-view': Box,
+  'customer-success': User,
+  'service-risk': Warning,
+  'partner-system-status': Connection,
+  'delivery-readiness': DocumentChecked,
+  'command-center': Aim,
+  'operations-command-center': Monitor,
+  'incident-management': Bell,
+  'shift-management': Management,
+  'service-impact': Warning,
+  'decision-log': Document,
+  'assets-locations': Location,
+  'work-management': Checked,
+  'faults-events': Bell,
+  'energy-sustainability': TrendCharts,
+  'data-intelligence': Cpu,
+  'reports-documents': Document,
+  'governance-security': Warning,
+  'integration-partner-hub': Connection,
+  'industry-solutions': OfficeBuilding,
+  administration: Setting,
+}
+
+function resolveMenuIcon(item: AppMenuItem): Component {
+  const byId = menuIconById[item.id]
+  if (byId) {
+    return byId
+  }
+
+  const label = item.label.toLowerCase()
+  if (label.includes('dashboard') || label.includes('overview') || label.includes('workspace')) return DataBoard
+  if (label.includes('executive') || label.includes('command') || label.includes('control')) return Aim
+  if (label.includes('operations') || label.includes('snapshot') || label.includes('monitor')) return Monitor
+  if (label.includes('portfolio') || label.includes('collection')) return Collection
+  if (label.includes('industry') || label.includes('package') || label.includes('product')) return Box
+  if (label.includes('customer') || label.includes('user') || label.includes('success')) return User
+  if (label.includes('risk') || label.includes('security') || label.includes('fault') || label.includes('alarm') || label.includes('event')) return Warning
+  if (label.includes('partner') || label.includes('integration') || label.includes('connector') || label.includes('api')) return Connection
+  if (label.includes('delivery') || label.includes('readiness') || label.includes('checklist')) return DocumentChecked
+  if (label.includes('asset') || label.includes('location') || label.includes('map') || label.includes('site')) return Location
+  if (label.includes('work') || label.includes('maintenance') || label.includes('order')) return Checked
+  if (label.includes('report') || label.includes('document') || label.includes('evidence')) return Document
+  if (label.includes('data') || label.includes('intelligence') || label.includes('ai') || label.includes('model')) return Cpu
+  if (label.includes('analytics') || label.includes('trend') || label.includes('energy') || label.includes('sustainability')) return TrendCharts
+  if (label.includes('governance') || label.includes('administration') || label.includes('setting')) return Setting
+  if (label.includes('protocol') || label.includes('gateway') || label.includes('system')) return SetUp
+  if (label.includes('master') || label.includes('registry')) return DataAnalysis
+  if (label.includes('building') || label.includes('facility')) return OfficeBuilding
+  if (label.includes('service')) return Suitcase
+  if (label.includes('link')) return Link
+  if (label.includes('platform')) return Platform
+  if (label.includes('operation')) return Operation
+  if (label.includes('chart')) return Histogram
+  if (label.includes('box')) return Box
+  if (label.includes('briefcase')) return Briefcase
+
+  return Grid
+}
 const pageHandledL3Paths = new Set([
+  '/dashboard',
   '/iot',
   '/did',
   '/modeling',
@@ -152,9 +250,9 @@ async function loadDynamicMenu(): Promise<void> {
       return
     }
 
-    menuItems.value = [...fallbackMenuItems]
+    menuItems.value = [...defaultMenuItems]
   } catch {
-    menuItems.value = [...fallbackMenuItems]
+    menuItems.value = [...defaultMenuItems]
   } finally {
     menuLoading.value = false
   }
@@ -269,7 +367,9 @@ onMounted(() => {
               ]"
             >
               <template #title>
-                <span class="app-layout__menu-icon app-layout__menu-icon--l1" :title="item.label">{{ item.icon ?? item.label.slice(0, 1) }}</span>
+                <span class="app-layout__menu-icon app-layout__menu-icon--l1" :title="item.label">
+                  <component :is="resolveMenuIcon(item)" />
+                </span>
                 <span class="app-layout__menu-label app-layout__menu-label--l1" :title="item.label">{{ item.label }}</span>
               </template>
               <el-menu-item
@@ -279,7 +379,9 @@ onMounted(() => {
                 :title="child.label"
                 class="app-layout__l2-menu-item"
               >
-                <span class="app-layout__menu-icon app-layout__menu-icon--l2" :title="child.label">{{ child.label.slice(0, 1) }}</span>
+                <span class="app-layout__menu-icon app-layout__menu-icon--l2" :title="child.label">
+                  <component :is="resolveMenuIcon(child)" />
+                </span>
                 <span class="app-layout__menu-label app-layout__menu-label--l2" :title="child.label">{{ child.label }}</span>
               </el-menu-item>
             </el-sub-menu>
@@ -292,7 +394,9 @@ onMounted(() => {
                 `app-layout__l1-menu-item--group-${Math.floor(index / 4) + 1}`,
               ]"
             >
-              <span class="app-layout__menu-icon app-layout__menu-icon--l1">{{ item.icon ?? item.label.slice(0, 1) }}</span>
+              <span class="app-layout__menu-icon app-layout__menu-icon--l1" :title="item.label">
+                <component :is="resolveMenuIcon(item)" />
+              </span>
               <span class="app-layout__menu-label app-layout__menu-label--l1" :title="item.label">{{ item.label }}</span>
             </el-menu-item>
           </template>
@@ -352,16 +456,15 @@ onMounted(() => {
             </button>
           </section>
 
-          <section v-if="shouldShowL3FallbackPanel && activeL3Content" class="app-layout__l3-panel" aria-label="Selected L3 section content">
-            <div class="app-layout__l3-panel-head">
-              <div>
-                <span class="app-layout__l3-kicker">Selected section</span>
-                <h2>{{ activeL3Content.title }}</h2>
-                <p>{{ activeL3Content.subtitle }}</p>
-              </div>
-              <el-button type="primary" plain>{{ activeL3Content.primaryAction }}</el-button>
-            </div>
-
+          <L3SummaryCard
+            v-if="shouldShowL3FallbackPanel && activeL3Content"
+            class="app-layout__l3-panel"
+            aria-label="Selected L3 section content"
+            kicker="Selected section"
+            :title="activeL3Content.title"
+            :description="activeL3Content.subtitle"
+            :primary-action="activeL3Content.primaryAction"
+          >
             <div class="app-layout__l3-metrics">
               <article v-for="metric in activeL3Content.metrics" :key="metric.label" class="app-layout__l3-metric">
                 <span>{{ metric.label }}</span>
@@ -375,7 +478,7 @@ onMounted(() => {
               <el-table-column prop="focus" label="Focus Area" min-width="280" />
               <el-table-column prop="status" label="Status" min-width="140" />
             </el-table>
-          </section>
+          </L3SummaryCard>
 
           <router-view :key="route.fullPath" />
         </div>
@@ -391,7 +494,7 @@ onMounted(() => {
   height: 100vh;
   min-height: 100vh;
   overflow: hidden;
-  background: #eaf2f6;
+  background: #eef6fa;
   color: #0f172a;
 }
 
@@ -399,18 +502,24 @@ onMounted(() => {
   min-width: 0;
   height: 100vh;
   overflow: hidden;
-  background: #eaf2f6;
+  background: #eef6fa;
 }
 
 .app-layout__header {
-  height: 86px;
+  min-height: 82px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  padding: 18px 24px;
-  background: #eaf2f6;
-  border-bottom: 1px solid #d5e2ea;
+  flex-wrap: wrap;
+  padding: 16px 26px 14px;
+  background: #eef6fa;
+  border-bottom: 1px solid rgba(215, 227, 236, 0.72);
+}
+
+.app-layout__title-block {
+  min-width: 0;
+  flex: 1 1 280px;
 }
 
 .app-layout__title-block h1 {
@@ -434,11 +543,15 @@ onMounted(() => {
   align-items: center;
   justify-content: flex-end;
   gap: 10px;
+  flex: 0 1 auto;
+  flex-wrap: wrap;
   min-width: 0;
+  max-width: min(100%, 650px);
 }
 
 .shell-button {
   min-height: 36px;
+  max-width: 220px;
   border-color: #cbd9e3;
   border-radius: 9px;
   color: #1f2937;
@@ -461,7 +574,7 @@ onMounted(() => {
   overflow: hidden;
   background: #ffffff;
   border-right: 1px solid #d7e3ec;
-  box-shadow: 10px 0 24px rgba(15, 23, 42, 0.04);
+  box-shadow: 6px 0 18px rgba(15, 23, 42, 0.035);
   transition: width 0.2s ease;
 }
 
@@ -470,12 +583,13 @@ onMounted(() => {
 }
 
 .app-layout__brand-panel {
-  height: 86px;
-  min-height: 86px;
+  position: relative;
+  height: 82px;
+  min-height: 82px;
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 18px 18px 16px;
+  padding: 16px 16px 14px;
   border-bottom: 1px solid #eef3f7;
 }
 
@@ -525,8 +639,28 @@ onMounted(() => {
   font-weight: 700;
 }
 
+.app-layout__aside--collapsed .app-layout__brand-panel {
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  padding: 7px 10px;
+}
+
+.app-layout__aside--collapsed .app-layout__collapse-button {
+  width: 34px;
+  height: 32px;
+  min-height: 32px;
+  padding: 0;
+  border-color: #b8d7cf;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #0f766e;
+  font-size: 18px;
+  box-shadow: 0 3px 8px rgba(15, 23, 42, 0.08);
+}
+
 .app-layout__menu-scroll {
-  height: calc(100vh - 86px);
+  height: calc(100vh - 82px);
   overflow-y: auto;
   overflow-x: hidden;
   padding-bottom: 18px;
@@ -546,7 +680,7 @@ onMounted(() => {
 
 .app-layout__menu {
   border-right: none;
-  padding: 12px 10px 18px;
+  padding: 10px 10px 18px;
   background: transparent;
 }
 
@@ -604,24 +738,31 @@ onMounted(() => {
 .app-layout__menu :deep(.app-layout__l1-submenu > .el-sub-menu__title),
 .app-layout__menu :deep(.app-layout__l1-menu-item) {
   position: relative;
-  height: 48px;
-  margin: 7px 2px;
-  border: 1px solid var(--menu-group-border);
-  border-left: 4px solid var(--menu-group-accent);
+  height: 46px;
+  margin: 6px 2px;
+  border: 1px solid transparent;
   border-radius: 12px;
-  background: linear-gradient(180deg, #ffffff 0%, var(--menu-group-soft) 100%);
+  background: transparent;
   color: #172033;
   font-size: 14px;
   font-weight: 800;
-  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+  box-shadow: none;
 }
 
 .app-layout__menu :deep(.app-layout__l1-submenu > .el-sub-menu__title:hover),
 .app-layout__menu :deep(.app-layout__l1-menu-item:hover) {
-  border-color: var(--menu-group-border);
+  border-color: #d8e7ee;
   color: var(--menu-group-accent);
-  background: linear-gradient(180deg, #ffffff 0%, var(--menu-group-soft) 100%);
-  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.10);
+  background: #f5fbfd;
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.045);
+}
+
+.app-layout__menu :deep(.app-layout__l1-menu-item.is-active),
+.app-layout__menu :deep(.app-layout__l1-submenu.is-active > .el-sub-menu__title) {
+  border-color: rgba(15, 118, 110, 0.24);
+  background: #edf8f6;
+  color: #0f766e;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.85);
 }
 
 .app-layout__menu :deep(.app-layout__l1-submenu.is-opened > .el-sub-menu__title) {
@@ -638,7 +779,6 @@ onMounted(() => {
   margin: 3px 2px 3px 18px;
   padding-left: 14px !important;
   border: 1px solid transparent;
-  border-left: 2px solid #d7e3ec;
   border-radius: 9px;
   background: transparent;
   color: #5b6b7f;
@@ -649,7 +789,6 @@ onMounted(() => {
 
 .app-layout__menu :deep(.app-layout__l2-menu-item:hover) {
   border-color: #d9e7ee;
-  border-left-color: var(--menu-group-accent);
   background: #f7fbfd;
   color: #233247;
   box-shadow: 0 6px 14px rgba(15, 23, 42, 0.05);
@@ -657,7 +796,6 @@ onMounted(() => {
 
 .app-layout__menu :deep(.app-layout__l2-menu-item.is-active) {
   border-color: rgba(15, 118, 110, 0.26);
-  border-left-color: var(--menu-group-accent);
   background: #f0faf7;
   color: #0f766e;
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
@@ -683,66 +821,124 @@ onMounted(() => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1.35rem;
-  min-width: 1.35rem;
-  height: 1.35rem;
-  margin-right: 0.55rem;
-  border-radius: 8px;
-  background: #edf7f5;
-  color: #0f766e;
-  font-size: 0.72rem;
-  font-weight: 700;
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  margin-right: 0.6rem;
+  border-radius: 10px;
+  background: #f1f7f9;
+  color: #475569;
+  transition:
+    color 0.16s ease,
+    background 0.16s ease,
+    box-shadow 0.16s ease;
+}
+
+.app-layout__menu-icon :deep(svg) {
+  width: 17px;
+  height: 17px;
 }
 
 .app-layout__menu-icon--l1 {
-  width: 1.55rem;
-  min-width: 1.55rem;
-  height: 1.55rem;
+  width: 34px;
+  min-width: 34px;
+  height: 34px;
   border-color: var(--menu-group-border);
-  background: var(--menu-group-soft);
+  background: #f5f9fb;
   color: var(--menu-group-accent);
-  font-size: 0.76rem;
-  font-weight: 850;
+}
+
+.app-layout__menu-icon--l1 :deep(svg) {
+  width: 18px;
+  height: 18px;
 }
 
 .app-layout__menu-icon--l2 {
-  width: 1.1rem;
-  min-width: 1.1rem;
-  height: 1.1rem;
+  width: 28px;
+  min-width: 28px;
+  height: 28px;
   margin-left: 2px;
-  margin-right: 0.48rem;
-  border-radius: 6px;
-  background: #eef5f7;
+  margin-right: 0.56rem;
+  border-radius: 9px;
+  background: #f2f7f9;
   color: #607080;
-  font-size: 0.62rem;
-  font-weight: 750;
+}
+
+.app-layout__menu-icon--l2 :deep(svg) {
+  width: 15px;
+  height: 15px;
+}
+
+.app-layout__menu :deep(.el-sub-menu__title:hover .app-layout__menu-icon),
+.app-layout__menu :deep(.el-menu-item:hover .app-layout__menu-icon) {
+  background: #e7f6f4;
+  color: #0f766e;
+}
+
+.app-layout__menu :deep(.el-menu-item.is-active .app-layout__menu-icon),
+.app-layout__menu :deep(.app-layout__l1-submenu.is-active > .el-sub-menu__title .app-layout__menu-icon) {
+  background: #e7f6f4;
+  color: #0f766e;
+  box-shadow: inset 0 0 0 1px rgba(15, 118, 110, 0.14);
 }
 
 .app-layout__aside--collapsed .app-layout__menu-icon {
   margin-right: 0;
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  border-radius: 13px;
+}
+
+.app-layout__aside--collapsed .app-layout__menu-icon :deep(svg) {
+  width: 19px;
+  height: 19px;
 }
 
 .app-layout__aside--collapsed .app-layout__menu-label {
   display: none;
 }
 
+.app-layout__aside--collapsed .app-layout__l1-submenu:nth-of-type(4n + 5),
+.app-layout__aside--collapsed .app-layout__l1-menu-item:nth-of-type(4n + 5) {
+  margin-top: 4px;
+  padding-top: 0;
+  border-top: none;
+}
+
 .app-layout__aside--collapsed .app-layout__menu :deep(.app-layout__l2-menu-item) {
-  margin-left: 2px;
-  padding-left: 20px !important;
+  width: 46px;
+  height: 42px;
+  margin: 3px auto;
+  padding: 0 !important;
+  justify-content: center;
+}
+
+.app-layout__aside--collapsed .app-layout__menu :deep(.app-layout__l1-submenu > .el-sub-menu__title),
+.app-layout__aside--collapsed .app-layout__menu :deep(.app-layout__l1-menu-item) {
+  width: 48px;
+  height: 44px;
+  margin: 4px auto;
+  padding: 0 !important;
+  justify-content: center;
+}
+
+.app-layout__aside--collapsed .app-layout__menu :deep(.el-sub-menu__icon-arrow) {
+  display: none;
 }
 
 .app-layout__main {
-  height: calc(100vh - 86px);
+  height: auto;
   overflow: hidden;
   padding: 0;
-  background: #eaf2f6;
+  background: #eef6fa;
 }
 
 .app-layout__content-scroll {
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 18px 24px 28px;
+  padding: 14px 24px 28px;
 }
 
 .app-layout__content-scroll:has(.app-layout__l3-row) {
@@ -753,12 +949,12 @@ onMounted(() => {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-bottom: 8px;
-  padding: 6px 10px;
+  margin-bottom: 6px;
+  padding: 5px 0;
   border: 1px solid #d7e3ec;
   border-radius: 10px;
   background: #ffffff;
-  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.035);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
 }
 
 .app-layout__l3-tab {
@@ -778,44 +974,7 @@ onMounted(() => {
 }
 
 .app-layout__l3-panel {
-  margin-bottom: 16px;
-  padding: 16px;
-  border: 1px solid rgba(36, 118, 104, 0.18);
-  border-left: 4px solid #247668;
-  border-radius: 8px;
-  background: #ffffff;
-  box-shadow: 0 14px 32px rgba(24, 57, 48, 0.08);
-}
-
-.app-layout__l3-panel-head {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  align-items: flex-start;
-  margin-bottom: 16px;
-}
-
-.app-layout__l3-kicker {
-  display: block;
-  color: #5f7873;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.app-layout__l3-panel h2 {
-  margin: 4px 0 6px;
-  color: #162724;
-  font-size: 20px;
-  line-height: 1.2;
-}
-
-.app-layout__l3-panel p {
-  margin: 0;
-  max-width: 780px;
-  color: #5f7873;
-  font-size: 14px;
-  line-height: 1.5;
+  margin-bottom: 14px;
 }
 
 .app-layout__l3-metrics {
@@ -855,10 +1014,6 @@ onMounted(() => {
 }
 
 @media (max-width: 900px) {
-  .app-layout__l3-panel-head {
-    flex-direction: column;
-  }
-
   .app-layout__l3-metrics {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

@@ -5,7 +5,7 @@
 }
 
 :root {
-  --vantaris-bg: #eaf2f6;
+  --vantaris-bg: #eef6fa;
   --vantaris-card: #ffffff;
   --vantaris-border: #d7e3ec;
   --vantaris-border-soft: #e5eef4;
@@ -326,7 +326,28 @@ textarea {
 }
 
 .app-layout__main {
-  background: linear-gradient(180deg, #f5f8fb 0%, #eef4f8 100%) !important;
+  background: #eef6fa !important;
+}
+
+.app-layout__header,
+.app-layout__content-scroll {
+  background: #eef6fa;
+}
+
+.l3-summary-card {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.l3-summary-card__header,
+.l3-summary-card__copy,
+.l3-summary-card__kicker,
+.l3-summary-card__body {
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 /* === VANTARIS depth enhancement end === */
 
@@ -356,7 +377,7 @@ textarea {
   align-items: center;
   gap: 8px;
   min-width: 0;
-  padding: 5px 8px;
+  padding: 5px 0;
   margin-bottom: 12px;
   overflow-x: auto;
   overflow-y: hidden;
@@ -463,7 +484,7 @@ textarea {
   [class*="l3"][class*="nav"],
   [class*="L3"][class*="nav"] {
     border-radius: 14px;
-    padding: 5px 6px;
+    padding: 5px 0;
   }
 }
 /* === ONE L3 STICKY WORKSPACE NAVIGATION END === */

@@ -8,6 +8,7 @@ import {
   getAirportHmiMapContent,
 } from '@/services/api/airportHmiMap'
 import { resolveL3ContentConfig, resolveL3RouteContentContext } from '@/services/menu/l3-content-registry'
+import L3SummaryCard from '@/components/L3SummaryCard.vue'
 
 type VisualMode = 'trend' | 'topology' | 'timeline' | 'workQueue' | 'evidence' | 'security' | 'hmi' | 'reportPack'
 
@@ -292,16 +293,19 @@ const airportEvidencePanels = computed(() => [
 </script>
 
 <template>
-  <section v-if="content" class="route-l3-panel" aria-label="Menu section content">
-    <div class="route-l3-panel__head">
-      <div>
-        <span class="route-l3-panel__kicker">{{ sectionKicker }}</span>
-        <h2>{{ content.title }}</h2>
-        <p>{{ content.subtitle }}</p>
-      </div>
-      <el-button type="primary" plain>{{ content.primaryAction }}</el-button>
-    </div>
+  <section
+    v-if="content"
+    class="route-l3-panel"
+    aria-label="Menu section content"
+  >
+    <L3SummaryCard
+      :kicker="sectionKicker"
+      :title="content.title"
+      :description="content.subtitle"
+      :primary-action="content.primaryAction"
+    />
 
+    <div class="route-l3-panel__body">
     <div v-if="dashboardWorkbench" class="route-l3-panel__decision-strip">
       <article>
         <span>Intent</span>
@@ -842,47 +846,26 @@ const airportEvidencePanels = computed(() => [
       <el-table-column prop="focus" label="Focus Area" min-width="280" />
       <el-table-column prop="status" label="Status" min-width="140" />
     </el-table>
+    </div>
   </section>
 </template>
 
 <style scoped>
 .route-l3-panel {
   margin-bottom: 18px;
-  padding: 18px;
-  border: 1px solid #d8e6e1;
-  border-radius: 12px;
-  background: #ffffff;
-  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.08);
+  padding: 0;
+  border: none !important;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
-.route-l3-panel__head {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 16px;
-}
-
-.route-l3-panel__kicker {
-  display: block;
-  margin-bottom: 6px;
-  color: #0f766e;
-  font-size: 12px;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-
-.route-l3-panel h2 {
-  margin: 0;
-  color: #10201d;
-  font-size: 22px;
-}
-
-.route-l3-panel p {
-  margin: 8px 0 0;
-  max-width: 860px;
-  color: #52615d;
-  line-height: 1.55;
+.route-l3-panel__body {
+  margin-top: 4px;
+  border: none !important;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 .route-l3-panel__metrics {
@@ -1891,10 +1874,6 @@ const airportEvidencePanels = computed(() => [
 }
 
 @media (max-width: 1100px) {
-  .route-l3-panel__head {
-    flex-direction: column;
-  }
-
   .route-l3-panel__metrics,
   .route-l3-panel__decision-strip,
   .route-l3-panel__queue,
