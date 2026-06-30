@@ -460,19 +460,21 @@ onMounted(() => {
 
 .app-layout__workspace {
   min-width: 0;
+  flex: 1 1 auto;
+  width: 0;
   height: 100vh;
   overflow: hidden;
   background: #eef6fa;
 }
 
 .app-layout__header {
-  min-height: 82px;
+  min-height: 76px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  flex-wrap: wrap;
-  padding: 16px 26px 14px;
+  flex-wrap: nowrap;
+  padding: 14px 24px 12px;
   background: #eef6fa;
   border-bottom: 1px solid rgba(215, 227, 236, 0.72);
 }
@@ -504,19 +506,25 @@ onMounted(() => {
   justify-content: flex-end;
   gap: 10px;
   flex: 0 1 auto;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   min-width: 0;
-  max-width: min(100%, 650px);
+  max-width: min(100%, 700px);
+  overflow: hidden;
 }
 
 .shell-button {
+  flex: 0 1 auto;
   min-height: 36px;
   max-width: 220px;
+  min-width: 0;
   border-color: #cbd9e3;
   border-radius: 9px;
   color: #1f2937;
   font-weight: 700;
   background: #ffffff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .shell-button--live {
@@ -908,7 +916,7 @@ onMounted(() => {
 .app-layout__l3-row {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 6px;
   margin-bottom: 6px;
   padding: 5px 0;
@@ -921,9 +929,21 @@ onMounted(() => {
 .app-layout__l3-tabs {
   display: flex;
   flex: 1 1 420px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 6px;
   min-width: 0;
+  max-width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+  position: static !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  scrollbar-width: thin;
 }
 
 .app-layout__l3-tab {
@@ -971,6 +991,18 @@ onMounted(() => {
 }
 
 @media (max-width: 900px) {
+  .app-layout__header {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .app-layout__toolbar {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    overflow: visible;
+  }
+
   .app-layout__l3-action {
     margin-left: 0;
   }

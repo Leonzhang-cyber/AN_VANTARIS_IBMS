@@ -554,6 +554,53 @@ textarea {
   padding-right: 0 !important;
 }
 
+.app-layout__content-scroll > :is(
+  .airport-page,
+  .umms-readonly-page,
+  .asset-context,
+  .uesg-page
+) {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+
+.app-layout__content-scroll > :is(
+  .airport-page,
+  .umms-readonly-page,
+  .asset-context,
+  .uesg-page
+) > .route-l3-panel {
+  margin-bottom: 0 !important;
+}
+
+.app-layout__content-scroll > .airport-page > .airport-page__hero,
+.app-layout__content-scroll > .umms-readonly-page > .hero,
+.app-layout__content-scroll > .asset-context > .hero {
+  display: none !important;
+}
+
+.app-layout__content-scroll > .uesg-page .customer-section-head {
+  display: none !important;
+}
+
+.app-layout__content-scroll > .uesg-page .customer-section-card {
+  padding: 12px !important;
+  border-color: var(--one-color-border, #d7e3ec) !important;
+  border-radius: var(--one-radius-lg, 14px) !important;
+  box-shadow: var(--one-shadow-card, 0 8px 18px rgba(15, 23, 42, 0.035)) !important;
+}
+
+.app-layout__content-scroll > .uesg-page .customer-metric-grid {
+  margin-top: 0 !important;
+}
+
+.app-layout__content-scroll > .airport-page .metric-row,
+.app-layout__content-scroll > .umms-readonly-page .block-space:first-of-type,
+.app-layout__content-scroll > .asset-context .cards {
+  margin-top: 0 !important;
+}
+
 @media (max-width: 860px) {
   .l3-sticky-surface,
   .one-l3-sticky-surface,
