@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "2.0",
+  "eventSetId": "bhe-brtl32-r3-expected-normalized-events",
+  "sourceSystem": "BHE_BRTL32_RADIO_SYSTEM",
+  "sourceProtocol": "SNMP",
+  "deviceFamily": "BRTL32",
+  "mib": "BRTL36.mib",
+  "eventBoundary": "Controlled examples only. Not production decoder output and not live SNMP validation.",
+  "routesTo": [
+    "ONE Alarm Console",
+    "Fault Operations",
+    "Work Management / MMS",
+    "Evidence / Reports"
+  ],
+  "events": [
+    { "eventKey": "BHE_BRTL32_DOWNLINK_LOW_POWER", "alarmSource": "CenterAlarmMom", "bitIndex": 9, "alarmLabel": "Downlink Low Power", "severityPolicy": "provisional", "requiresLiveValidation": true },
+    { "eventKey": "BHE_BRTL32_UPLINK_VSWR", "alarmSource": "CenterAlarmMom", "bitIndex": 20, "alarmLabel": "Uplink VSWR", "severityPolicy": "provisional", "requiresLiveValidation": true },
+    { "eventKey": "BHE_BRTL32_DOWNLINK_VSWR", "alarmSource": "CenterAlarmMom", "bitIndex": 21, "alarmLabel": "Downlink VSWR", "severityPolicy": "provisional", "requiresLiveValidation": true },
+    { "eventKey": "BHE_BRTL32_FAN_ERROR", "alarmSource": "CenterAlarmMom", "bitIndex": 7, "alarmLabel": "Fan Error", "severityPolicy": "provisional", "requiresLiveValidation": true },
+    { "eventKey": "BHE_BRTL32_SUPPLY_VOLTAGE_A_FAULT", "alarmSource": "CenterAlarmMom", "bitIndex": 5, "alarmLabel": "Supply Voltage A", "severityPolicy": "provisional", "requiresLiveValidation": true },
+    { "eventKey": "BHE_BRTL32_UPLINK_TEMPERATURE", "alarmSource": "CenterAlarmMom", "bitIndex": 22, "alarmLabel": "Uplink Temperature", "severityPolicy": "provisional", "requiresLiveValidation": true },
+    { "eventKey": "BHE_BRTL32_DOWNLINK_TEMPERATURE", "alarmSource": "CenterAlarmMom", "bitIndex": 23, "alarmLabel": "Downlink Temperature", "severityPolicy": "provisional", "requiresLiveValidation": true },
+    { "eventKey": "BHE_BRTL32_SYNTHESIZER_UNLOCKED", "alarmSource": "CenterAlarmMom", "bitIndex": 24, "alarmLabel": "Uplink Synthesizer Unlocked", "severityPolicy": "provisional", "requiresLiveValidation": true },
+    { "eventKey": "BHE_BRTL32_EXTERNAL_ALARM_1", "alarmSource": "CenterAlarmMom", "bitIndex": 0, "alarmLabel": "External Alarm 1", "severityPolicy": "provisional", "requiresLiveValidation": true },
+    { "eventKey": "BHE_BRTL32_MODEM_FAULT", "alarmSource": "CenterAlarmMom", "bitIndex": 8, "alarmLabel": "Modem", "severityPolicy": "provisional", "requiresLiveValidation": true }
+  ],
+  "eventEnvelopeTemplate": {
+    "sourceSystem": "BHE_BRTL32_RADIO_SYSTEM",
+    "sourceProtocol": "SNMP",
+    "deviceFamily": "BRTL32",
+    "mib": "BRTL36.mib",
+    "mibSupportCaveat": "Not all MIB parameters may be supported by BRTL32.",
+    "connectionMode": "pending-site-validation",
+    "rawOid": null,
+    "rawValue": "pending-live-sample",
+    "severityPolicy": "provisional",
+    "requiresLiveValidation": true,
+    "productionDecoder": false,
+    "routesTo": [
+      "ONE Alarm Console",
+      "Fault Operations",
+      "Work Management / MMS",
+      "Evidence / Reports"
+    ]
+  }
+}

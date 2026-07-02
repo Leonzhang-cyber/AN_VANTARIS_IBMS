@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "2.0",
+  "testPlanId": "bhe-brtl32-site-validation-test-plan-r3",
+  "sourceSystem": "BHE_BRTL32_RADIO_SYSTEM",
+  "deviceFamily": "BRTL32",
+  "mib": "BRTL36.mib",
+  "scope": "Site validation plan only. No live validation has been performed in R3.",
+  "tests": [
+    {
+      "testId": "BHE-R3-T001",
+      "objective": "SNMP get normal AlarmMom value.",
+      "prerequisite": "Connection mode, bridge/gateway path, SNMP access, and BRTL36.mib symbol tree confirmed.",
+      "input": "SNMP GET for CenterAlarmMom and SDR AlarmMom objects under normal device condition.",
+      "expectedResult": "Normal value captured with no unexpected active bits.",
+      "evidenceToCapture": "Connection mode, raw OID, raw value, decoded bits, timestamp.",
+      "status": "pending-site-validation"
+    },
+    {
+      "testId": "BHE-R3-T002",
+      "objective": "SNMP get active AlarmMom value.",
+      "prerequisite": "Safe vendor/customer test alarm procedure approved.",
+      "input": "SNMP GET while a controlled alarm is active.",
+      "expectedResult": "Expected AlarmMom bit is set and matches vendor/customer observation.",
+      "evidenceToCapture": "Raw OID, raw active value, expected bit, vendor tool screenshot if available.",
+      "status": "pending-site-validation"
+    },
+    {
+      "testId": "BHE-R3-T003",
+      "objective": "Trap on alarm change.",
+      "prerequisite": "Trap receiver path and bheBRTL36Trap behavior configured.",
+      "input": "Controlled alarm transition from clear to active.",
+      "expectedResult": "Trap received with bheBRTL36Trap fields sufficient for normalization.",
+      "evidenceToCapture": "Trap packet, varbinds, trap timestamp, source endpoint.",
+      "status": "pending-site-validation"
+    },
+    {
+      "testId": "BHE-R3-T004",
+      "objective": "Heartbeat trap.",
+      "prerequisite": "Heartbeat trap support confirmed.",
+      "input": "Observe configured trap receiver during heartbeat interval.",
+      "expectedResult": "Heartbeat trap received or vendor confirms unsupported behavior.",
+      "evidenceToCapture": "Trap sample or vendor unsupported confirmation.",
+      "status": "pending-site-validation"
+    },
+    {
+      "testId": "BHE-R3-T005",
+      "objective": "Clear event.",
+      "prerequisite": "Controlled active alarm from T002/T003.",
+      "input": "Clear controlled alarm.",
+      "expectedResult": "Polling and/or trap evidence shows transition to clear.",
+      "evidenceToCapture": "Raw clear value, clear trap if supported, active-to-clear correlation.",
+      "status": "pending-site-validation"
+    },
+    {
+      "testId": "BHE-R3-T006",
+      "objective": "Gateway/serial bridge failure.",
+      "prerequisite": "Approved test window and bridge/gateway path confirmed.",
+      "input": "Controlled bridge/gateway disconnect or service stop.",
+      "expectedResult": "EDGE distinguishes gateway failure from BRTL32 equipment alarm.",
+      "evidenceToCapture": "Timeout evidence, bridge logs, restore evidence.",
+      "status": "pending-site-validation"
+    },
+    {
+      "testId": "BHE-R3-T007",
+      "objective": "Wrong community/security rejection.",
+      "prerequisite": "SNMP version/security mode confirmed.",
+      "input": "SNMP request with intentionally incorrect community/security details under approved test conditions.",
+      "expectedResult": "Request is rejected without data leakage.",
+      "evidenceToCapture": "Rejection response/timeout, device/gateway log if available.",
+      "status": "pending-site-validation"
+    },
+    {
+      "testId": "BHE-R3-T008",
+      "objective": "Unsupported OID returns No Such Object.",
+      "prerequisite": "Known unsupported BRTL36.mib object selected safely.",
+      "input": "SNMP GET for unsupported candidate OID.",
+      "expectedResult": "No Such Object or equivalent unsupported response is captured.",
+      "evidenceToCapture": "Raw request/response and selected MIB symbol.",
+      "status": "pending-site-validation"
+    },
+    {
+      "testId": "BHE-R3-T009",
+      "objective": "RF metric polling sample.",
+      "prerequisite": "RF metric symbols and numeric OIDs confirmed.",
+      "input": "SNMP GET for forward power, reflected power, return loss, RSSI, or power manager status.",
+      "expectedResult": "Metric value, unit, scale, and timestamp are captured.",
+      "evidenceToCapture": "Raw OID, raw value, decoded value, unit, scale.",
+      "status": "pending-site-validation"
+    },
+    {
+      "testId": "BHE-R3-T010",
+      "objective": "Asset identity mapping using serial number / identifier.",
+      "prerequisite": "Serial number and identifier symbols confirmed.",
+      "input": "SNMP GET for bheBRTL36SerialNumber and bheBRTL36Iden.",
+      "expectedResult": "Device identity maps to customer asset ID and location.",
+      "evidenceToCapture": "Serial number, identifier, customer asset ID, site/location mapping.",
+      "status": "pending-site-validation"
+    }
+  ]
+}

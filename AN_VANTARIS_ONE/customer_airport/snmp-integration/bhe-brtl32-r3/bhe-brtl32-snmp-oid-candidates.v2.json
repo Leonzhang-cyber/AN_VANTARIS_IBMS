@@ -1,0 +1,145 @@
+{
+  "schemaVersion": "2.0",
+  "package": "BHE BRTL32 SNMP Vendor Response R3",
+  "sourceSystem": "BHE_BRTL32_RADIO_SYSTEM",
+  "deviceFamily": "BRTL32",
+  "mib": "BRTL36.mib",
+  "mibApplicability": {
+    "device": "BRTL32",
+    "mibFamily": "BRTLxx / BRTMxx series / BRTS28",
+    "notAllParametersMayBeSupportedByBrtl32": true
+  },
+  "oidPolicy": "Numeric OIDs are not invented in R3. Populate after MIB tree extraction and live SNMP validation.",
+  "candidateObjects": [
+    {
+      "key": "centerAlarmMom",
+      "mibSymbol": "CenterAlarmMom",
+      "oid": null,
+      "oidStatus": "pending-mib-tree-extraction",
+      "category": "alarm_bitmap",
+      "priority": "primary",
+      "description": "Center/system AlarmMom bitmap.",
+      "requiresLiveValidation": true
+    },
+    {
+      "key": "sdrUlAlarmMom",
+      "mibSymbol": "bheBRTL36SdrUlAlarmMom",
+      "oid": null,
+      "oidStatus": "pending-mib-tree-extraction",
+      "category": "alarm_bitmap",
+      "priority": "primary",
+      "description": "Uplink SDR AlarmMom bitmap.",
+      "requiresLiveValidation": true
+    },
+    {
+      "key": "sdrDlAlarmMom",
+      "mibSymbol": "bheBRTL36SdrDlAlarmMom",
+      "oid": null,
+      "oidStatus": "pending-mib-tree-extraction",
+      "category": "alarm_bitmap",
+      "priority": "primary",
+      "description": "Downlink SDR AlarmMom bitmap including channel/band low-power candidates.",
+      "requiresLiveValidation": true
+    },
+    {
+      "key": "serialNumber",
+      "mibSymbol": "bheBRTL36SerialNumber",
+      "oid": null,
+      "oidStatus": "pending-mib-tree-extraction",
+      "category": "identity",
+      "priority": "primary",
+      "description": "Candidate device serial number for asset identity mapping.",
+      "requiresLiveValidation": true
+    },
+    {
+      "key": "identifier",
+      "mibSymbol": "bheBRTL36Iden",
+      "oid": null,
+      "oidStatus": "pending-mib-tree-extraction",
+      "category": "identity",
+      "priority": "primary",
+      "description": "Candidate device identifier for asset identity mapping.",
+      "requiresLiveValidation": true
+    },
+    {
+      "key": "forwardPower",
+      "mibSymbol": "forwardPower",
+      "oid": null,
+      "oidStatus": "pending-mib-tree-extraction",
+      "category": "rf_metric",
+      "priority": "candidate",
+      "description": "Candidate forward power metric.",
+      "requiresLiveValidation": true
+    },
+    {
+      "key": "reflectedPower",
+      "mibSymbol": "reflectedPower",
+      "oid": null,
+      "oidStatus": "pending-mib-tree-extraction",
+      "category": "rf_metric",
+      "priority": "candidate",
+      "description": "Candidate reflected power metric.",
+      "requiresLiveValidation": true
+    },
+    {
+      "key": "returnLoss",
+      "mibSymbol": "returnLoss",
+      "oid": null,
+      "oidStatus": "pending-mib-tree-extraction",
+      "category": "rf_metric",
+      "priority": "candidate",
+      "description": "Candidate return loss metric.",
+      "requiresLiveValidation": true
+    },
+    {
+      "key": "rssi",
+      "mibSymbol": "RSSI",
+      "oid": null,
+      "oidStatus": "pending-mib-tree-extraction",
+      "category": "rf_metric",
+      "priority": "candidate",
+      "description": "Candidate received signal strength metric.",
+      "requiresLiveValidation": true
+    },
+    {
+      "key": "powerManagerStatus",
+      "mibSymbol": "powerManagerStatus",
+      "oid": null,
+      "oidStatus": "pending-mib-tree-extraction",
+      "category": "status_metric",
+      "priority": "candidate",
+      "description": "Candidate power manager status metric.",
+      "requiresLiveValidation": true
+    },
+    {
+      "key": "sdrUlAlarmTrapMask",
+      "mibSymbol": "bheBRTL36SdrUlAlarmTrapMask",
+      "oid": null,
+      "oidStatus": "pending-mib-tree-extraction",
+      "category": "trap_mask",
+      "priority": "candidate",
+      "description": "Candidate uplink SDR alarm trap mask.",
+      "requiresLiveValidation": true
+    },
+    {
+      "key": "sdrDlAlarmTrapMask",
+      "mibSymbol": "bheBRTL36SdrDlAlarmTrapMask",
+      "oid": null,
+      "oidStatus": "pending-mib-tree-extraction",
+      "category": "trap_mask",
+      "priority": "candidate",
+      "description": "Candidate downlink SDR alarm trap mask.",
+      "requiresLiveValidation": true
+    },
+    {
+      "key": "externalAlarms",
+      "mibSymbol": "bheTrapExternalAlarms",
+      "oid": null,
+      "oidStatus": "pending-mib-tree-extraction",
+      "category": "dry_contact_mask",
+      "priority": "candidate",
+      "description": "Candidate dry contact / external alarm mask evidence.",
+      "requiresLiveValidation": true
+    }
+  ]
+}

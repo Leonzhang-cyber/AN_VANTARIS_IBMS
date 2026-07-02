@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "2.0",
+  "contractId": "bhe-brtl32-snmp-decoder-contract-r3",
+  "contractType": "controlled-decoder-contract",
+  "implementationStatus": "documentation_and_json_only",
+  "productionDecoder": false,
+  "liveSnmpValidation": false,
+  "connectsRealDevice": false,
+  "modifiesRuntime": false,
+  "sourceSystem": "BHE_BRTL32_RADIO_SYSTEM",
+  "sourceProtocol": "SNMP",
+  "deviceFamily": "BRTL32",
+  "mib": "BRTL36.mib",
+  "mibApplicability": "Not all MIB parameters may be supported by BRTL32.",
+  "connectionModePolicy": {
+    "directEthernetSnmpAssumptionAllowed": false,
+    "requiresSiteConnectionModeConfirmation": true,
+    "candidateModes": [
+      "EDGE_SNMP_MANAGER_TO_UDP161_BRIDGE_TO_RS232_TO_BRTL32",
+      "BRTL32_BUILT_IN_MODEM_TCP_CLIENT_TO_NMS_SERVER_FRAMED_SNMP_INTAKE",
+      "CUSTOMER_VENDOR_NMS_OR_SERIAL_OVER_IP_GATEWAY_TO_EDGE_ADAPTER"
+    ]
+  },
+  "primaryAlarmSources": [
+    "CenterAlarmMom",
+    "SdrUlAlarmMom",
+    "SdrDlAlarmMom"
+  ],
+  "trapObject": {
+    "name": "bheBRTL36Trap",
+    "type": "NOTIFICATION-TYPE",
+    "requiresLiveValidation": true,
+    "includedFields": [
+      "bheTrapDeviceStatus",
+      "bheTrapIdentifier",
+      "bheTrapMask",
+      "bheTrapAlarmValue",
+      "bheTrapMasterType",
+      "bheBRTL36SerialNumber",
+      "bheBRTL36Iden",
+      "bheBRTL36SdrUlAlarmMom",
+      "bheBRTL36SdrDlAlarmMom",
+      "bheBRTL36SdrUlAlarmTrapMask",
+      "bheBRTL36SdrDlAlarmTrapMask",
+      "bheTrapExternalAlarms",
+      "bheTrapComment",
+      "bheTrapNumericId"
+    ]
+  },
+  "decoderRules": [
+    {
+      "ruleId": "BHE-BRTL32-R3-001",
+      "alarmSource": "CenterAlarmMom",
+      "behavior": "Decode set bits using controlled CenterAlarmMom bit mapping.",
+      "requiresLiveValidation": true
+    },
+    {
+      "ruleId": "BHE-BRTL32-R3-002",
+      "alarmSource": "SdrUlAlarmMom",
+      "behavior": "Decode set bits using controlled uplink SDR AlarmMom bit mapping.",
+      "requiresLiveValidation": true
+    },
+    {
+      "ruleId": "BHE-BRTL32-R3-003",
+      "alarmSource": "SdrDlAlarmMom",
+      "behavior": "Do not expand downlink channel/band low-power bits until MIB extraction and live validation confirm formatting.",
+      "requiresLiveValidation": true
+    },
+    {
+      "ruleId": "BHE-BRTL32-R3-004",
+      "alarmSource": "bheBRTL36Trap",
+      "behavior": "Normalize trap fields only after active, heartbeat, and clear trap samples are captured.",
+      "requiresLiveValidation": true
+    }
+  ],
+  "requiredEvidenceFields": [
+    "sourceSystem",
+    "sourceProtocol",
+    "deviceFamily",
+    "mib",
+    "connectionMode",
+    "mibSymbol",
+    "rawOid",
+    "rawValue",
+    "alarmSource",
+    "bitIndex",
+    "alarmLabel",
+    "severityPolicy",
+    "requiresLiveValidation"
+  ],
+  "forbiddenClaims": [
+    "production_decoder",
+    "live_snmp_validation_complete",
+    "direct_ethernet_snmp_confirmed_without_site_validation",
+    "all_brtl36_mib_parameters_supported_by_brtl32"
+  ]
+}

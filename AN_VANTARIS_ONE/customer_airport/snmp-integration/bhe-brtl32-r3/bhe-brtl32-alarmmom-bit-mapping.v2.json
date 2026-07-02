@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "2.0",
+  "sourceSystem": "BHE_BRTL32_RADIO_SYSTEM",
+  "deviceFamily": "BRTL32",
+  "mib": "BRTL36.mib",
+  "mappingStatus": "vendor-package-derived-live-validation-required",
+  "alarmMomMappings": [
+    {
+      "alarmSource": "CenterAlarmMom",
+      "bitWidth": 32,
+      "mappingConfidence": "vendor-response-derived",
+      "requiresLiveValidation": true,
+      "bits": [
+        { "bitIndex": 0, "alarmLabel": "External Alarm 1", "reserved": false },
+        { "bitIndex": 1, "alarmLabel": "External Alarm 2", "reserved": false },
+        { "bitIndex": 2, "alarmLabel": "External Alarm 3", "reserved": false },
+        { "bitIndex": 3, "alarmLabel": "External Alarm 4", "reserved": false },
+        { "bitIndex": 4, "alarmLabel": "Tamper", "reserved": false },
+        { "bitIndex": 5, "alarmLabel": "Supply Voltage A", "reserved": false },
+        { "bitIndex": 6, "alarmLabel": "Center Supply Current", "reserved": false },
+        { "bitIndex": 7, "alarmLabel": "Fan Error", "reserved": false },
+        { "bitIndex": 8, "alarmLabel": "Modem", "reserved": false },
+        { "bitIndex": 9, "alarmLabel": "Downlink Low Power", "reserved": false },
+        { "bitIndex": 10, "alarmLabel": "Uplink Supply Voltage", "reserved": false },
+        { "bitIndex": 11, "alarmLabel": "Downlink Supply Voltage", "reserved": false },
+        { "bitIndex": 12, "alarmLabel": "Uplink SAW Current", "reserved": false },
+        { "bitIndex": 13, "alarmLabel": "Downlink SAW Current", "reserved": false },
+        { "bitIndex": 14, "alarmLabel": "Uplink PAM Current", "reserved": false },
+        { "bitIndex": 15, "alarmLabel": "Downlink PAM Current", "reserved": false },
+        { "bitIndex": 16, "alarmLabel": "Uplink Overdrive over 30 min", "reserved": false },
+        { "bitIndex": 17, "alarmLabel": "Downlink Overdrive over 30 min", "reserved": false },
+        { "bitIndex": 18, "alarmLabel": "Reserved always 0", "reserved": true },
+        { "bitIndex": 19, "alarmLabel": "Downlink Overpower", "reserved": false },
+        { "bitIndex": 20, "alarmLabel": "Uplink VSWR", "reserved": false },
+        { "bitIndex": 21, "alarmLabel": "Downlink VSWR", "reserved": false },
+        { "bitIndex": 22, "alarmLabel": "Uplink Temperature", "reserved": false },
+        { "bitIndex": 23, "alarmLabel": "Downlink Temperature", "reserved": false },
+        { "bitIndex": 24, "alarmLabel": "Uplink Synthesizer Unlocked", "reserved": false },
+        { "bitIndex": 25, "alarmLabel": "Downlink Synthesizer Unlocked", "reserved": false },
+        { "bitIndex": 26, "alarmLabel": "Uplink Overdrive Level", "reserved": false },
+        { "bitIndex": 27, "alarmLabel": "Downlink Overdrive Level", "reserved": false },
+        { "bitIndex": 28, "alarmLabel": "Low Battery Voltage", "reserved": false },
+        { "bitIndex": 29, "alarmLabel": "Low Main Supply Voltage", "reserved": false },
+        { "bitIndex": 30, "alarmLabel": "Reserved", "reserved": true },
+        { "bitIndex": 31, "alarmLabel": "Supply Voltage B", "reserved": false }
+      ]
+    },
+    {
+      "alarmSource": "SdrUlAlarmMom",
+      "bitWidth": 13,
+      "mappingConfidence": "vendor-response-derived",
+      "requiresLiveValidation": true,
+      "bits": [
+        { "bitIndex": 0, "alarmLabel": "Current", "reserved": false },
+        { "bitIndex": 1, "alarmLabel": "Temperature", "reserved": false },
+        { "bitIndex": 2, "alarmLabel": "Overdrive", "reserved": false },
+        { "bitIndex": 3, "alarmLabel": "FPGA Error", "reserved": false },
+        { "bitIndexRange": "4-12", "alarmLabel": "Reserved", "reserved": true }
+      ]
+    },
+    {
+      "alarmSource": "SdrDlAlarmMom",
+      "mappingConfidence": "vendor-mib-derived-formatting-unclear",
+      "requiresLiveValidation": true,
+      "notes": "Includes channel low power bits and band low power bits according to BRTL36.mib. Exact bit formatting must be verified from MIB tree extraction and live samples.",
+      "bits": [
+        {
+          "bitIndex": null,
+          "bitIndexRange": "vendor-mib-channel-low-power-bits",
+          "alarmLabel": "Downlink Channel Low Power",
+          "reserved": false,
+          "requiresLiveValidation": true
+        },
+        {
+          "bitIndex": null,
+          "bitIndexRange": "vendor-mib-band-low-power-bits",
+          "alarmLabel": "Downlink Band Low Power",
+          "reserved": false,
+          "requiresLiveValidation": true
+        }
+      ]
+    }
+  ]
+}
