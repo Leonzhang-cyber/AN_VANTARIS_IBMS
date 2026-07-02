@@ -1,0 +1,218 @@
+{
+  "schemaVersion": "1.0",
+  "testCaseMatrixId": "one-airport-snmp-test-cases-r1",
+  "scope": "Unified SNMP site validation test cases for DTS4160, BHE BRTL32, and NEC PABX.",
+  "testCases": [
+    {
+      "testId": "DTS-SNMP-R1-001",
+      "system": "DTS4160",
+      "name": "DTS alarm OID normal polling",
+      "oidOrTrapName": "1.3.6.1.4.1.13842.4.4160.1.8",
+      "objective": "Capture normal/clear alarm mask sample.",
+      "expectedSample": "00000000.00000000",
+      "expectedOneEvent": "DTS4160_ALARM_MASK_CLEARED",
+      "expectedRoute": ["ONE Alarm Console", "Evidence / Reports"],
+      "evidenceRequired": ["snmpget output", "timestamp", "device identity"],
+      "status": "pendingSiteValidation"
+    },
+    {
+      "testId": "DTS-SNMP-R1-002",
+      "system": "DTS4160",
+      "name": "DTS alarm OID active polling",
+      "oidOrTrapName": "1.3.6.1.4.1.13842.4.4160.1.8",
+      "objective": "Capture active alarm mask sample and confirm controlled labels.",
+      "expectedSample": "00408080.00000000",
+      "expectedDecodedLabels": ["GNSS Sync Lost", "No valid Time Source", "No DTS Link"],
+      "expectedOneEvent": "DTS4160_TIME_SYNC_ALARM_ACTIVE",
+      "expectedRoute": ["ONE Alarm Console", "Fault Operations", "Work Management / MMS", "Evidence / Reports"],
+      "evidenceRequired": ["snmpget output", "vendor/customer observation", "timestamp"],
+      "status": "pendingSiteValidation"
+    },
+    {
+      "testId": "DTS-SNMP-R1-003",
+      "system": "DTS4160",
+      "name": "DTS alarm clear validation",
+      "oidOrTrapName": "1.3.6.1.4.1.13842.4.4160.1.8",
+      "objective": "Confirm active-to-clear stability.",
+      "expectedOneEvent": "DTS4160_ALARM_CLEAR",
+      "expectedRoute": ["ONE Alarm Console", "Evidence / Reports"],
+      "evidenceRequired": ["active sample", "clear sample", "correlation timestamp"],
+      "status": "pendingSiteValidation"
+    },
+    {
+      "testId": "DTS-SNMP-R1-004",
+      "system": "DTS4160",
+      "name": "DTS communication loss",
+      "objective": "Confirm communication loss handling is separate from DTS equipment alarm.",
+      "expectedOneEvent": "DTS4160_SNMP_COMMUNICATION_LOSS",
+      "expectedRoute": ["ONE Alarm Console", "Fault Operations", "Evidence / Reports"],
+      "evidenceRequired": ["timeout evidence", "restore evidence"],
+      "status": "pendingSiteValidation"
+    },
+    {
+      "testId": "DTS-SNMP-R1-005",
+      "system": "DTS4160",
+      "name": "DTS bit order validation",
+      "objective": "Confirm bit order, byte order, and per-bit vendor mapping.",
+      "expectedOneEvent": "DTS4160_BIT_MAPPING_VALIDATED",
+      "expectedRoute": ["Evidence / Reports"],
+      "evidenceRequired": ["vendor bit table", "sample proving known bit labels"],
+      "status": "pendingVendor"
+    },
+    {
+      "testId": "BHE-SNMP-R1-001",
+      "system": "BHE_BRTL32",
+      "name": "BHE gateway availability",
+      "objective": "Confirm actual access mode and bridge/gateway reachability.",
+      "expectedOneEvent": "BHE_BRTL32_GATEWAY_AVAILABLE",
+      "expectedRoute": ["Evidence / Reports"],
+      "evidenceRequired": ["deployment mode", "gateway IP", "bridge log"],
+      "status": "pendingSiteValidation"
+    },
+    {
+      "testId": "BHE-SNMP-R1-002",
+      "system": "BHE_BRTL32",
+      "name": "BHE AlarmMom normal polling",
+      "objective": "Capture CenterAlarmMom/Sdr AlarmMom normal values.",
+      "expectedOneEvent": "BHE_BRTL32_ALARMMOM_NORMAL",
+      "expectedRoute": ["ONE Alarm Console", "Evidence / Reports"],
+      "evidenceRequired": ["snmpget output", "mib symbol", "raw value"],
+      "status": "pendingSiteValidation"
+    },
+    {
+      "testId": "BHE-SNMP-R1-003",
+      "system": "BHE_BRTL32",
+      "name": "BHE AlarmMom active polling",
+      "objective": "Capture active AlarmMom bit sample.",
+      "expectedOneEvent": "BHE_BRTL32_ALARMMOM_ACTIVE",
+      "expectedRoute": ["ONE Alarm Console", "Fault Operations", "Work Management / MMS", "Evidence / Reports"],
+      "evidenceRequired": ["active raw value", "expected bit", "vendor/customer observation"],
+      "status": "pendingSiteValidation"
+    },
+    {
+      "testId": "BHE-SNMP-R1-004",
+      "system": "BHE_BRTL32",
+      "name": "BHE AlarmMom clear validation",
+      "objective": "Capture clear value after active AlarmMom condition.",
+      "expectedOneEvent": "BHE_BRTL32_ALARMMOM_CLEAR",
+      "expectedRoute": ["ONE Alarm Console", "Evidence / Reports"],
+      "evidenceRequired": ["active sample", "clear sample", "correlation timestamp"],
+      "status": "pendingSiteValidation"
+    },
+    {
+      "testId": "BHE-SNMP-R1-005",
+      "system": "BHE_BRTL32",
+      "name": "BHE trap payload capture",
+      "oidOrTrapName": "bheBRTL36Trap",
+      "objective": "Capture active, clear, and heartbeat trap payloads.",
+      "expectedOneEvent": "BHE_BRTL32_TRAP_CAPTURED",
+      "expectedRoute": ["ONE Alarm Console", "Evidence / Reports"],
+      "evidenceRequired": ["trap packet", "varbind table", "source endpoint"],
+      "status": "pendingSiteValidation"
+    },
+    {
+      "testId": "BHE-SNMP-R1-006",
+      "system": "BHE_BRTL32",
+      "name": "BHE RF metric polling",
+      "objective": "Capture forward power, reflected power, return loss, and RSSI sample format.",
+      "expectedOneEvent": "BHE_BRTL32_RF_METRIC_SAMPLE",
+      "expectedRoute": ["Evidence / Reports"],
+      "evidenceRequired": ["raw value", "unit", "scale", "normal range"],
+      "status": "pendingSiteValidation"
+    },
+    {
+      "testId": "BHE-SNMP-R1-007",
+      "system": "BHE_BRTL32",
+      "name": "BHE unsupported OID behavior",
+      "objective": "Confirm unsupported BRTL36.mib objects return No Such Object or equivalent.",
+      "expectedOneEvent": "BHE_BRTL32_UNSUPPORTED_OID_CONFIRMED",
+      "expectedRoute": ["Evidence / Reports"],
+      "evidenceRequired": ["unsupported OID request", "raw response"],
+      "status": "pendingSiteValidation"
+    },
+    {
+      "testId": "BHE-SNMP-R1-008",
+      "system": "BHE_BRTL32",
+      "name": "BHE gateway failure",
+      "objective": "Confirm gateway failure is distinct from radio equipment alarm.",
+      "expectedOneEvent": "BHE_BRTL32_GATEWAY_FAILURE",
+      "expectedRoute": ["ONE Alarm Console", "Fault Operations", "Evidence / Reports"],
+      "evidenceRequired": ["bridge failure evidence", "restore evidence"],
+      "status": "pendingSiteValidation"
+    },
+    {
+      "testId": "NEC-SNMP-R1-001",
+      "system": "NEC_PABX",
+      "name": "NEC Major Alarm Lamp polling",
+      "oidOrTrapName": "1.3.6.1.4.1.119.2.3.76.2.1.2.0",
+      "objective": "Validate major alarm lamp off/lighting semantics.",
+      "expectedOneEvent": "NEC_PABX_MAJOR_ALARM_LAMP",
+      "expectedRoute": ["ONE Alarm Console", "Fault Operations", "Evidence / Reports"],
+      "evidenceRequired": ["normal sample", "active sample"],
+      "status": "pendingSiteValidation"
+    },
+    {
+      "testId": "NEC-SNMP-R1-002",
+      "system": "NEC_PABX",
+      "name": "NEC Minor Alarm Lamp polling",
+      "oidOrTrapName": "1.3.6.1.4.1.119.2.3.76.2.1.3.0",
+      "objective": "Validate minor alarm lamp off/lighting semantics.",
+      "expectedOneEvent": "NEC_PABX_MINOR_ALARM_LAMP",
+      "expectedRoute": ["ONE Alarm Console", "Evidence / Reports"],
+      "evidenceRequired": ["normal sample", "active sample"],
+      "status": "pendingSiteValidation"
+    },
+    {
+      "testId": "NEC-SNMP-R1-003",
+      "system": "NEC_PABX",
+      "name": "NEC Supervisor Alarm Lamp polling",
+      "oidOrTrapName": "1.3.6.1.4.1.119.2.3.76.2.1.4.0",
+      "objective": "Validate supervisor values 0/1/2.",
+      "expectedOneEvent": "NEC_PABX_SUPERVISOR_ALARM_LAMP",
+      "expectedRoute": ["ONE Alarm Console", "Evidence / Reports"],
+      "evidenceRequired": ["not available/off/lighting samples"],
+      "status": "pendingSiteValidation"
+    },
+    {
+      "testId": "NEC-SNMP-R1-004",
+      "system": "NEC_PABX",
+      "name": "NEC Failure Message trap",
+      "oidOrTrapName": "1.3.6.1.4.1.119.2.3.76.2.2.1.0",
+      "objective": "Capture Failure Message trap payload and message text.",
+      "expectedOneEvent": "NEC_PABX_FAILURE_MESSAGE",
+      "expectedRoute": ["ONE Alarm Console", "Fault Operations", "Evidence / Reports"],
+      "evidenceRequired": ["trap payload", "message text", "severity decision"],
+      "status": "pendingSiteValidation"
+    },
+    {
+      "testId": "NEC-SNMP-R1-005",
+      "system": "NEC_PABX",
+      "name": "NEC alarm clear validation",
+      "objective": "Confirm active-to-clear lifecycle for alarm lamps.",
+      "expectedOneEvent": "NEC_PABX_ALARM_CLEAR",
+      "expectedRoute": ["ONE Alarm Console", "Evidence / Reports"],
+      "evidenceRequired": ["active sample", "clear sample", "latching behavior"],
+      "status": "pendingSiteValidation"
+    },
+    {
+      "testId": "NEC-SNMP-R1-006",
+      "system": "NEC_PABX",
+      "name": "NEC exact child OID discovery",
+      "objective": "Confirm exact child OIDs for CPU, traffic, port, terminal, sysMessage, and registrationInfo.",
+      "expectedOneEvent": "NEC_PABX_CHILD_OID_DISCOVERY",
+      "expectedRoute": ["Evidence / Reports"],
+      "evidenceRequired": ["MIB table", "snmpwalk output"],
+      "status": "pendingVendor"
+    },
+    {
+      "testId": "NEC-SNMP-R1-007",
+      "system": "NEC_PABX",
+      "name": "NEC severity mapping validation",
+      "objective": "Confirm severity mapping for major/minor/supervisor/failure message events.",
+      "expectedOneEvent": "NEC_PABX_SEVERITY_MAPPING_VALIDATED",
+      "expectedRoute": ["ONE Alarm Console", "Fault Operations", "Work Management / MMS", "Evidence / Reports"],
+      "evidenceRequired": ["vendor severity table", "customer policy sign-off"],
+      "status": "pendingCustomerVendor"
+    }
+  ]
+}

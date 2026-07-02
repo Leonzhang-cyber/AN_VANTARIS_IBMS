@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "1.0",
+  "checklistId": "one-airport-snmp-site-validation-r1",
+  "scope": "Unified site validation checklist for DTS4160, BHE BRTL32, and NEC PABX SNMP lines.",
+  "runtimeModification": false,
+  "sections": {
+    "networkReadiness": [
+      { "item": "Confirm device or gateway IP address for each SNMP line.", "systems": ["DTS4160", "BHE_BRTL32", "NEC_PABX"], "status": "pendingCustomer", "blockingLevel": "BLOCKER" },
+      { "item": "Confirm source IP allow-list and firewall paths.", "systems": ["DTS4160", "BHE_BRTL32", "NEC_PABX"], "status": "pendingCustomer", "blockingLevel": "BLOCKER" },
+      { "item": "Confirm trap receiver IP and UDP port if traps are supported.", "systems": ["DTS4160", "BHE_BRTL32", "NEC_PABX"], "status": "pendingCustomer", "blockingLevel": "HIGH" }
+    ],
+    "snmpSecurity": [
+      { "item": "Confirm SNMP version per system.", "systems": ["DTS4160", "BHE_BRTL32", "NEC_PABX"], "status": "pendingVendor", "blockingLevel": "BLOCKER" },
+      { "item": "Confirm community or SNMPv3 credential ownership and handling.", "systems": ["DTS4160", "BHE_BRTL32", "NEC_PABX"], "status": "pendingCustomer", "blockingLevel": "BLOCKER" },
+      { "item": "Validate wrong community/security rejection behavior.", "systems": ["BHE_BRTL32", "DTS4160", "NEC_PABX"], "status": "pendingSiteValidation", "blockingLevel": "HIGH" }
+    ],
+    "deviceIdentity": [
+      { "item": "Map device serial number or identifier to customer asset ID.", "systems": ["DTS4160", "BHE_BRTL32", "NEC_PABX"], "status": "pendingCustomer", "blockingLevel": "BLOCKER" },
+      { "item": "Confirm site, zone, room, rack, panel, or equipment location.", "systems": ["DTS4160", "BHE_BRTL32", "NEC_PABX"], "status": "pendingCustomer", "blockingLevel": "BLOCKER" }
+    ],
+    "oidValidation": [
+      { "item": "Validate DTS alarm OID normal, active, and clear polling.", "systems": ["DTS4160"], "status": "pendingSiteValidation", "blockingLevel": "BLOCKER" },
+      { "item": "Validate BHE AlarmMom normal, active, and clear polling.", "systems": ["BHE_BRTL32"], "status": "pendingSiteValidation", "blockingLevel": "BLOCKER" },
+      { "item": "Validate NEC major/minor/supervisor lamp polling.", "systems": ["NEC_PABX"], "status": "pendingSiteValidation", "blockingLevel": "BLOCKER" },
+      { "item": "Discover exact NEC child OIDs for CPU, traffic, port, terminal, sysMessage, and registrationInfo.", "systems": ["NEC_PABX"], "status": "pendingVendor", "blockingLevel": "BLOCKER" }
+    ],
+    "trapValidation": [
+      { "item": "Capture BHE bheBRTL36Trap active, clear, and heartbeat samples.", "systems": ["BHE_BRTL32"], "status": "pendingSiteValidation", "blockingLevel": "HIGH" },
+      { "item": "Capture NEC Failure Message trap sample.", "systems": ["NEC_PABX"], "status": "pendingSiteValidation", "blockingLevel": "HIGH" },
+      { "item": "Confirm whether DTS alarm changes emit traps.", "systems": ["DTS4160"], "status": "pendingVendor", "blockingLevel": "MEDIUM" }
+    ],
+    "alarmLifecycle": [
+      { "item": "Capture active alarm sample for each system under approved test procedure.", "systems": ["DTS4160", "BHE_BRTL32", "NEC_PABX"], "status": "pendingSiteValidation", "blockingLevel": "BLOCKER" },
+      { "item": "Confirm latching and acknowledgement behavior where applicable.", "systems": ["DTS4160", "BHE_BRTL32", "NEC_PABX"], "status": "pendingVendor", "blockingLevel": "HIGH" }
+    ],
+    "clearLifecycle": [
+      { "item": "Capture clear sample after active condition.", "systems": ["DTS4160", "BHE_BRTL32", "NEC_PABX"], "status": "pendingSiteValidation", "blockingLevel": "BLOCKER" },
+      { "item": "Confirm active-to-clear correlation fields or timestamps.", "systems": ["DTS4160", "BHE_BRTL32", "NEC_PABX"], "status": "pendingSiteValidation", "blockingLevel": "HIGH" }
+    ],
+    "gatewayValidation": [
+      { "item": "Confirm BHE access mode and bridge/gateway owner.", "systems": ["BHE_BRTL32"], "status": "pendingCustomer", "blockingLevel": "BLOCKER" },
+      { "item": "Test BHE gateway/serial bridge failure behavior.", "systems": ["BHE_BRTL32"], "status": "pendingSiteValidation", "blockingLevel": "HIGH" }
+    ],
+    "oneMapping": [
+      { "item": "Confirm expected ONE event key and route for each validated alarm.", "systems": ["DTS4160", "BHE_BRTL32", "NEC_PABX"], "status": "pendingOneTeam", "blockingLevel": "HIGH" },
+      { "item": "Confirm severity policy and work order implication.", "systems": ["DTS4160", "BHE_BRTL32", "NEC_PABX"], "status": "pendingCustomer", "blockingLevel": "HIGH" }
+    ],
+    "evidenceCapture": [
+      { "item": "Capture raw OID/trap name, raw value, decoded meaning, timestamp, and test operator.", "systems": ["DTS4160", "BHE_BRTL32", "NEC_PABX"], "status": "required", "blockingLevel": "BLOCKER" },
+      { "item": "Redact credentials before committing derived evidence.", "systems": ["DTS4160", "BHE_BRTL32", "NEC_PABX"], "status": "required", "blockingLevel": "BLOCKER" }
+    ],
+    "remainingBlockers": [
+      { "item": "No production decoder until live samples and vendor/customer sign-off are complete.", "systems": ["DTS4160", "BHE_BRTL32", "NEC_PABX"], "status": "required", "blockingLevel": "BLOCKER" }
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+# ONE Airport SNMP Vendor Data Request Matrix R1
+
+| System | Vendor | Required Item | Why Needed | Blocking Level | Current Status | Required Format | Owner | Due Before | Notes |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Clock System | Mobatime / DTS | DTS4160 bit order and byte order | Required to decode alarm mask safely. | BLOCKER | Pending verification | MIB excerpt / vendor table | DTS vendor | Decoder R3 | Applies to OID `1.3.6.1.4.1.13842.4.4160.1.8`. |
+| Clock System | Mobatime / DTS | Full per-bit alarm mapping | Required to decode beyond three sample-confirmed labels. | BLOCKER | Pending verification | Alarm mapping table | DTS vendor | Decoder R3 | Include active/clear semantics. |
+| Clock System | Mobatime / DTS | Polling vs trap behavior | Required for EDGE connector mode. | HIGH | Pending verification | Technical note + samples | DTS vendor / customer IT | Site validation | Include trap payload if supported. |
+| Clock System | Customer IT/OT | Device IP and SNMP security | Required for access. | BLOCKER | Pending customer | Network sheet | Customer IT/OT | Site validation | Include source IP allow-list. |
+| Radio System | BHE | Supported BRTL32 `BRTL36.mib` subset | Required because not all MIB parameters may be supported. | BLOCKER | Partially available | MIB support matrix | BHE vendor | Site validation | Include unsupported OID behavior. |
+| Radio System | BHE | Numeric OIDs for AlarmMom objects | Required for polling and decoder contract. | BLOCKER | Pending extraction/validation | OID list | BHE vendor | Site validation | CenterAlarmMom, SdrUlAlarmMom, SdrDlAlarmMom. |
+| Radio System | BHE | `bheBRTL36Trap` samples | Required for trap normalization. | HIGH | Pending live sample | Packet capture / varbind table | BHE vendor | Site validation | Include active, clear, heartbeat. |
+| Radio System | BHE / Customer | Actual access mode and gateway owner | Required because direct Ethernet SNMP cannot be assumed. | BLOCKER | Pending site confirmation | Deployment diagram | BHE vendor / customer IT | Site validation | Bridge, serial-over-IP, modem TCP, or NMS relay. |
+| Radio System | BHE | RF metric units and scaling | Required for forward power, reflected power, return loss, RSSI. | HIGH | Pending live sample | OID table + sample values | BHE vendor | Site validation | Include units, scales, normal ranges. |
+| Radio System | Customer / BHE | Serial number and identifier mapping | Required for ONE asset mapping. | HIGH | Pending site confirmation | Asset mapping table | Customer / BHE | Site validation | Include site/zone/location. |
+| Telephony System | NEC | Exact child OIDs for CPU, traffic, port, terminal, sysMessage, registrationInfo | Required to move from group-level coverage to exact mapping. | BLOCKER | Pending vendor | MIB/OID table | NEC vendor | NEC R2 | Include table structure and enum meanings. |
+| Telephony System | NEC | Failure Message trap payload examples | Required for trap parsing. | HIGH | Pending vendor | Trap samples / varbind table | NEC vendor | Site validation | Failure Message max 255 characters. |
+| Telephony System | NEC | Severity mapping | Required for ONE Alarm Console and Work Management policy. | HIGH | Pending vendor/customer | Severity table | NEC vendor / customer ops | Site validation | Include major/minor/supervisor semantics. |
+| Telephony System | Customer IT/OT | NEC PABX SNMP version and access details | Required for polling and trap receiver configuration. | BLOCKER | Pending customer | Network/security sheet | Customer IT/OT | Site validation | Include community/SNMPv3 details. |
+| All | Customer / Integration Partner | Asset, site, zone, location mapping | Required for HMI Map, Work Management, and Reports. | BLOCKER | Pending customer | Asset/location register | Customer / Vector | Site validation | Must map each device or gateway endpoint. |
+| All | ONE / EDGE / LINK | Normalized event acceptance fields | Required for implementation handoff. | MEDIUM | Pending implementation decision | JSON envelope spec | ONE team | Before runtime work | No runtime modification in R1. |

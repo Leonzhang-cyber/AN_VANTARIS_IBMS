@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "matrixId": "one-airport-snmp-customer-question-matrix-r1",
+  "groups": [
+    {
+      "group": "Customer project / IT / OT network team",
+      "questions": [
+        { "question": "What are the device or gateway IP addresses, VLANs, and routing paths?", "systems": ["DTS4160", "BHE_BRTL32", "NEC_PABX"], "blockingLevel": "BLOCKER", "owner": "Customer IT/OT" },
+        { "question": "Which SNMP versions and security modes are approved at site?", "systems": ["DTS4160", "BHE_BRTL32", "NEC_PABX"], "blockingLevel": "BLOCKER", "owner": "Customer IT/OT" },
+        { "question": "What are the customer asset IDs, site, zone, and location mappings?", "systems": ["DTS4160", "BHE_BRTL32", "NEC_PABX"], "blockingLevel": "BLOCKER", "owner": "Customer project team" }
+      ]
+    },
+    {
+      "group": "DTS / Mobatime vendor",
+      "questions": [
+        { "question": "What is the exact bit order and byte order for the DTS4160 alarm OID?", "systems": ["DTS4160"], "blockingLevel": "BLOCKER", "owner": "DTS / Mobatime vendor" },
+        { "question": "Provide the full per-bit vendor mapping and polling/trap behavior.", "systems": ["DTS4160"], "blockingLevel": "BLOCKER", "owner": "DTS / Mobatime vendor" }
+      ]
+    },
+    {
+      "group": "BHE vendor",
+      "questions": [
+        { "question": "Which actual access mode will be used for BRTL32?", "systems": ["BHE_BRTL32"], "blockingLevel": "BLOCKER", "owner": "BHE vendor" },
+        { "question": "Which BRTL36.mib objects are supported by BRTL32?", "systems": ["BHE_BRTL32"], "blockingLevel": "BLOCKER", "owner": "BHE vendor" },
+        { "question": "Provide trap samples and RF metric units/scales.", "systems": ["BHE_BRTL32"], "blockingLevel": "HIGH", "owner": "BHE vendor" }
+      ]
+    },
+    {
+      "group": "NEC vendor",
+      "questions": [
+        { "question": "Provide exact child OIDs for CPU, traffic, port, terminal, sysMessage, and registrationInfo.", "systems": ["NEC_PABX"], "blockingLevel": "BLOCKER", "owner": "NEC vendor" },
+        { "question": "Provide Failure Message trap payload examples and severity mapping.", "systems": ["NEC_PABX"], "blockingLevel": "HIGH", "owner": "NEC vendor" }
+      ]
+    },
+    {
+      "group": "Vector / integration partner",
+      "questions": [
+        { "question": "Will Vector provide any SNMP bridge, relay, NMS, or serial-over-IP gateway?", "systems": ["BHE_BRTL32"], "blockingLevel": "HIGH", "owner": "Vector / integration partner" },
+        { "question": "Who captures packet evidence and maintains OID-to-asset mapping?", "systems": ["DTS4160", "BHE_BRTL32", "NEC_PABX"], "blockingLevel": "HIGH", "owner": "Vector / integration partner" }
+      ]
+    },
+    {
+      "group": "ONE / EDGE / LINK implementation team",
+      "questions": [
+        { "question": "Which EDGE connector mode is planned for each system?", "systems": ["DTS4160", "BHE_BRTL32", "NEC_PABX"], "blockingLevel": "HIGH", "owner": "ONE / EDGE / LINK team" },
+        { "question": "What normalized event envelope fields are mandatory for site acceptance?", "systems": ["DTS4160", "BHE_BRTL32", "NEC_PABX"], "blockingLevel": "MEDIUM", "owner": "ONE / EDGE / LINK team" }
+      ]
+    }
+  ]
+}
